@@ -27,7 +27,6 @@
 {{/inline}}
 {{#*inline "htmBodyStartPageLayout"}}		<!-- inline "htmBodyStartPageLayout" -->
 		<div class="w3-bar ">
-			<a href="/">smart-city-view</a>
 			<div class="w3-bar-item w3-padding-16 w3-right ">
 {{#if userKey}}
 				<a href="/user/{{ userKey }}" class="w3-mobile w3-padding w3-text-teal "><i class="fad fa-house-user w3-text-teal "></i> {{userName}}</a>
@@ -35,7 +34,6 @@
 {{else}}
 				<a href="/user" class="w3-mobile w3-padding w3-text-teal "><i class="fad fa-house-user w3-text-teal "></i> Login</a>
 {{/if}}
-				<a href="{{siteBaseUrl}}/resource" class="w3-mobile w3-padding w3-text-blue "><i class="fad fa-file w3-text-blue "></i> Resources</a>
 				<a href="{{siteBaseUrl}}/" class="w3-mobile w3-padding w3-text-indigo "><i class="fad fa-home w3-text-indigo "></i> smart-city-view</a>
 			</div>
 		</div>

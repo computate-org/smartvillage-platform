@@ -72,7 +72,6 @@ public class PageLayout extends PageLayoutGen<Object> {
 	 */
 	protected void _params(Wrap<JsonObject> w) {
 		w.o(Optional.ofNullable(serviceRequest).map(r -> r.getParams()).orElse(new JsonObject()));
-		w.o(serviceRequest.getParams());
 	}
 
 	protected void _userKey(Wrap<Long> w) {

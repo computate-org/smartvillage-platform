@@ -1,0 +1,75 @@
+SITE_NAME: "smart-city-view"
+
+LANGUAGE_NAME: "enUS"
+SITE_PATH_enUS: "/home/ctate/.local/src/smart-city-view"
+DOMAIN_NAME: "example.com"
+DOMAIN_PACKAGE_NAME: "org.computate.smartcityview.enus"
+SUFFIX_SRC_MAIN_JAVA: "/src/main/java"
+SUFFIX_SRC_GEN_JAVA: "/src/gen/java"
+RELATIVE_PATHS_TO_WATCH: "src/main/java/org/computate/smartcityview/enus"
+
+SITE_HOST_NAME: "localhost"
+SITE_BASE_URL: "http://localhost:14080"
+SITE_PORT: 14080
+SITE_ZONE: "America/New_York"
+SITE_LOCALE: "en-US"
+STATIC_BASE_URL: "http://localhost:14080/static"
+STATIC_PATH: "/home/ctate/.local/src/smart-city-view-static"
+TEMPLATE_PATH: "/home/ctate/.local/src/smart-city-view/src/main/resources/templates"
+API_CONTACT_EMAIL: ""
+FONTAWESOME_KIT: ""
+
+JDBC_HOST: "localhost"
+JDBC_PORT: 5432
+JDBC_DATABASE: "smart-city-view"
+JDBC_USERNAME: "smart-city-view"
+
+AUTH_HOST_NAME: "sso.computate.org"
+AUTH_PORT: 443
+AUTH_SSL: true
+AUTH_SSL_REQUIRED: all
+AUTH_REALM: "RH-IMPACT"
+AUTH_RESOURCE: "rh-impact"
+AUTH_SECRET: "0518f65a-f86d-42e8-ad65-00f46920443d"
+AUTH_URL: "https://sso.computate.org/auth"
+AUTH_TOKEN_URI: "/auth/realms/RH-IMPACT/protocol/openid-connect/token"
+
+SOLR_URL: "http://localhost:8983/solr/smart-city-view"
+SOLR_HOST_NAME: localhost
+SOLR_PORT: 8983
+SOLR_COLLECTION: "smart-city-view"
+SOLR_URL_COMPUTATE: "http://localhost:8983/solr/computate"
+
+EMAIL_HOST: 
+EMAIL_PORT: 465
+EMAIL_SSL: True
+EMAIL_AUTH: True
+EMAIL_USERNAME: 
+EMAIL_PASSWORD: 
+EMAIL_FROM: 
+EMAIL_ADMIN: 
+
+# Enable the code generation service for the project
+ENABLE_CODE_GENERATION_SERVICE: true
+# Set the sessionId of the user session creating an object in the database. 
+ENABLE_SESSION_ID: true
+# Enable an object in the database to be deleted. 
+ENABLE_DELETED: true
+# Enable an object in the database to be archived. 
+ENABLE_ARCHIVED: true
+# Enable an admin role. 
+ENABLE_ROLE_ADMIN: true
+# Enable an OpenID Connect Authentication. 
+ENABLE_OPENID_CONNECT: true
+# Write API code into the project. 
+WRITE_API: true
+# Write code comments into generated code. 
+WRITE_COMMENTS: true
+
+# The Auth roles required to be an admin in the site. 
+AUTH_ROLES_ADMIN: ['SiteAdmin']
+
+# Enable data import in the site. 
+ENABLE_IMPORT_DATA: true
+
+ENABLE_IMPORT_DATA_CurrikiResource: true

@@ -731,7 +731,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 			handlebars.registerHelpers(DateHelpers.class);
 
 			router.get("/").handler(a -> {
-				a.reroute("/template/enUS/home-page");
+				a.reroute("/template/enUS/HomePage");
 			});
  
 			router.get("/api").handler(ctx -> {

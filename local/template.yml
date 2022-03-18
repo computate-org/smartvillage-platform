@@ -1,0 +1,76 @@
+---
+SITE_NAME: "{{ SITE_NAME }}"
+
+LANGUAGE_NAME: "{{ LANGUAGE_NAME }}"
+SITE_PATH_enUS: "{{ SITE_SRC }}"
+SITE_HOST_NAME: "{{ SITE_HOST_NAME }}"
+SITE_PORT: {{ SITE_PORT }}
+SITE_BASE_URL: "{{ SITE_BASE_URL }}"
+SITE_ZONE: "{{ SITE_ZONE }}"
+SITE_LOCALE: "{{ SITE_LOCALE }}"
+DOMAIN_NAME: "{{ DOMAIN_NAME }}"
+DOMAIN_PACKAGE_NAME: "{{ SITE_JAVA_PACKAGE }}"
+SUFFIX_SRC_MAIN_JAVA: "{{ SUFFIX_SRC_MAIN_JAVA }}"
+SUFFIX_SRC_GEN_JAVA: "{{ SUFFIX_SRC_GEN_JAVA }}"
+RELATIVE_PATHS_TO_WATCH: "{{ RELATIVE_PATHS_TO_WATCH }}"
+STATIC_BASE_URL: "{{ STATIC_BASE_URL }}"
+STATIC_PATH: "{{ STATIC_PATH }}"
+TEMPLATE_PATH: "{{ TEMPLATE_PATH }}"
+FONTAWESOME_KIT: "{{ FONTAWESOME_KIT }}"
+
+JDBC_HOST: "{{ JDBC_HOST }}"
+JDBC_PORT: {{ JDBC_PORT }}
+JDBC_DATABASE: "{{ JDBC_DATABASE }}"
+JDBC_USERNAME: "{{ JDBC_USERNAME }}"
+JDBC_PASSWORD: "{{ JDBC_PASSWORD }}"
+
+AUTH_HOST_NAME: "{{ AUTH_HOST_NAME }}"
+AUTH_PORT: {{ AUTH_PORT }}
+AUTH_SSL: {{ AUTH_SSL | lower }}
+AUTH_SSL_REQUIRED: {{ AUTH_SSL_REQUIRED }}
+AUTH_REALM: "{{ AUTH_REALM }}"
+AUTH_RESOURCE: "{{ AUTH_RESOURCE }}"
+AUTH_SECRET: "{{ AUTH_SECRET }}"
+AUTH_URL: "{{ AUTH_URL }}"
+AUTH_TOKEN_URI: "{{ AUTH_TOKEN_URI }}"
+
+SOLR_URL: "{{ SOLR_URL }}"
+SOLR_HOST_NAME: localhost
+SOLR_PORT: 8983
+SOLR_COLLECTION: "smart-city-view"
+SOLR_URL_COMPUTATE: "{{ SOLR_URL_COMPUTATE }}"
+
+API_TITLE: "{{ SITE_NAME }}"
+API_CONTACT_EMAIL: "{{ EMAIL_FROM }}"
+
+EMAIL_HOST: {{ EMAIL_HOST }}
+EMAIL_PORT: {{ EMAIL_PORT }}
+EMAIL_SSL: {{ EMAIL_SSL }}
+EMAIL_AUTH: {{ EMAIL_AUTH }}
+EMAIL_USERNAME: {{ EMAIL_USERNAME }}
+EMAIL_PASSWORD: {{ EMAIL_PASSWORD }}
+EMAIL_FROM: {{ EMAIL_FROM }}
+EMAIL_ADMIN: {{ EMAIL_ADMIN }}
+
+# Enable the code generation service for the project
+ENABLE_CODE_GENERATION_SERVICE: true
+# Set the sessionId of the user session creating an object in the database. 
+ENABLE_SESSION_ID: true
+# Enable an object in the database to be deleted. 
+ENABLE_DELETED: true
+# Enable an object in the database to be archived. 
+ENABLE_ARCHIVED: true
+# Enable an admin role. 
+ENABLE_ROLE_ADMIN: true
+# Enable an OpenID Connect Authentication. 
+ENABLE_OPENID_CONNECT: true
+# Write API code into the project. 
+WRITE_API: true
+# Write code comments into generated code. 
+WRITE_COMMENTS: true
+
+# The Auth roles required to be an admin in the site. 
+AUTH_ROLES_ADMIN: {{ AUTH_ROLES_ADMIN }}
+
+# Enable data import in the site. 
+ENABLE_IMPORT_DATA: {{ ENABLE_IMPORT_DATA | lower }}

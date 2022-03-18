@@ -1,0 +1,103 @@
+GITHUB_ORG: computate-org
+PROJECT_NAME: smart-city-view
+PROJECT_LANG: enUS
+PROJECT_ZONE: "America/New_York"
+PROJECT_LOCALE: "en-US"
+PROJECT_SRC: "{{ lookup('env', 'HOME') }}/.local/src/{{ PROJECT_NAME }}"
+PROJECT_POM_GROUP_ID: org.computate
+PROJECT_POM_ARTIFACT_ID_ROOT: "{{ PROJECT_NAME }}"
+PROJECT_POM_VERSION_PREFIX: "1.0.0"
+PROJECT_POM_VERSION_SUFFIX: "-SNAPSHOT"
+PROJECT_POM_VERSION: "{{ PROJECT_POM_VERSION_PREFIX }}{{ PROJECT_POM_VERSION_SUFFIX }}"
+PROJECT_JAVA_PACKAGE: "{{ PROJECT_POM_GROUP_ID }}.smartcityview.enus"
+PROJECT_PORT: 14080
+CLUSTER_PORT: "{{ PROJECT_PORT | regex_replace('(...)', '\\1') }}81"
+JDBC_DATABASE: "{{ PROJECT_NAME }}"
+JDBC_USERNAME: "{{ PROJECT_NAME }}"
+SOLR_COLLECTION: "{{ PROJECT_NAME }}"
+ENABLE_SESSION_ID: true
+ENABLE_DELETED: true
+ENABLE_ARCHIVED: true
+ENABLE_ROLE_ADMIN: true
+ENABLE_OPENID_CONNECT: true
+ENABLE_CODE_GENERATION_SERVICE: true
+WRITE_API: true
+WRITE_COMMENTS: true
+PROJECTS: 
+
+  - GITHUB_ORG: "{{ GITHUB_ORG }}"
+    PROJECT_NAME: "{{ PROJECT_NAME }}"
+    PROJECT_SRC: "{{ PROJECT_SRC }}"
+    PROJECT_JAVA_PACKAGE: "{{ PROJECT_JAVA_PACKAGE }}"
+    PROJECT_FILES: 
+      - path: "{{ PROJECT_SRC }}/pom.xml"
+        template: java/pom.xml
+      - path: "{{ PROJECT_SRC }}/install.yml"
+        template: ansible/install.yml
+      - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/package-info.java"
+        template: java/package-info.java
+      - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_ConfigKeys | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_ConfigKeys }}.java"
+        template: config/ConfigKeys.java
+      - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_SiteRequest | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_SiteRequest }}.java"
+        template: request/SiteRequestEnUS.java
+      - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_PageLayout | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_PageLayout }}.java"
+        template: page/PageLayout.java
+      - path: "{{ PROJECT_SRC }}/src/main/resources/templates/{{ PROJECT_LANG }}/{{ CLASS_SIMPLE_NAME_PageLayout }}.hbs"
+        template: page/{{ CLASS_SIMPLE_NAME_PageLayout }}.hbs
+      - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_HomePage | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_HomePage }}.java"
+        template: page/HomePage.java
+      - path: "{{ PROJECT_SRC }}/src/main/resources/templates/{{ PROJECT_LANG }}/{{ CLASS_SIMPLE_NAME_HomePage }}.hbs"
+        template: page/{{ CLASS_SIMPLE_NAME_HomePage }}.hbs
+      - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_MainVerticle | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_MainVerticle }}.java"
+        template: vertx/MainVerticle.java
+      - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_WorkerVerticle | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_WorkerVerticle }}.java"
+        template: vertx/WorkerVerticle.java
+      - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_BaseModel | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_BaseModel }}.java"
+        template: base/BaseModel.java
+      - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_SiteUser | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_SiteUser }}.java"
+        template: user/SiteUser.java
+      - path: "{{ PROJECT_SRC }}/src/main/resources/application.yml"
+        template: java/application.yml
+      - path: "{{ PROJECT_SRC }}/src/main/resources/log4j.properties"
+        template: log4j/log4j.properties
+      - path: "{{ PROJECT_SRC }}/src/main/resources/log4j.xml"
+        template: log4j/log4j.xml
+      - path: "{{ PROJECT_SRC }}/local/defaults.yml"
+        template: local/defaults.yml
+      - path: "{{ PROJECT_SRC }}/local/template.yml"
+        template: local/template.yml
+      - path: "{{ PROJECT_SRC }}/CONTRIBUTING"
+        template: license/CONTRIBUTING
+      - path: "{{ PROJECT_SRC }}/DCO"
+        template: license/DCO
+      - path: "{{ PROJECT_SRC }}/LICENSE"
+        template: license/LICENSE
+      - path: "{{ PROJECT_SRC }}-static/js/jQuery-Autocomplete/jquery.autocomplete.js"
+        template: js/jQuery-Autocomplete/jquery.autocomplete.js
+      - path: "{{ PROJECT_SRC }}-static/js/jQuery-Autocomplete/license.txt"
+        template: js/jQuery-Autocomplete/license.txt
+      - path: "{{ PROJECT_SRC }}-static/js/jquery-1.12.4.min.js"
+        template: js/jquery-1.12.4.min.js
+      - path: "{{ PROJECT_SRC }}-static/js/jquery-ui.js"
+        template: js/jquery-ui.js
+      - path: "{{ PROJECT_SRC }}-static/js/moment.js"
+        template: js/moment.js
+      - path: "{{ PROJECT_SRC }}-static/js/plotly-2.9.0.min.js"
+        template: js/plotly-2.9.0.min.js
+      - path: "{{ PROJECT_SRC }}-static/js/site-enUS.js"
+        template: js/site-enUS.js
+      - path: "{{ PROJECT_SRC }}-static/js/sockjs.js"
+        template: js/sockjs.js
+      - path: "{{ PROJECT_SRC }}-static/js/sockjs-map.json"
+        template: js/sockjs-map.json
+      - path: "{{ PROJECT_SRC }}-static/js/vertx-eventbus.js"
+        template: js/vertx-eventbus.js
+      - path: "{{ PROJECT_SRC }}-static/css/jquery-ui.css"
+        template: css/jquery-ui.css
+      - path: "{{ PROJECT_SRC }}-static/css/site-{{ PROJECT_LANG }}.css"
+        template: css/site.css
+      - path: "{{ PROJECT_SRC }}-static/css/w3.css"
+        template: css/w3.css
+      - path: "{{ PROJECT_SRC }}-static/svg/openshift.svg"
+        template: svg/openshift.svg
+
