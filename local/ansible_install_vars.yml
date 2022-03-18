@@ -100,4 +100,8 @@ PROJECTS:
         template: css/w3.css
       - path: "{{ PROJECT_SRC }}-static/svg/openshift.svg"
         template: svg/openshift.svg
+      - path: "{{ PROJECT_SRC }}/.gitignore"
+        template: config/gitignore
+      - path: "{{ PROJECT_SRC }}-static/.gitignore"
+        template: config/gitignore
 
