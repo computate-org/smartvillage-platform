@@ -1,0 +1,39 @@
+---
+- name: Install the smart-city-view source code and watch service on the target. 
+  hosts: localhost
+  vars: 
+    GITHUB_ORG: "computate-org"
+    SITE_NAME: "smart-city-view"
+    SITE_REPO: "git@github.com:{{ GITHUB_ORG }}/{{ SITE_NAME }}.git"
+    SITE_SRC: "{{ playbook_dir }}"
+    SITE_JAVA_PACKAGE: "org.computate.smartcityview.enus"
+    RELATIVE_PATHS_TO_WATCH: "src/main/java/org/computate/smartcityview/enus"
+    SITE_CONFIG:
+      sqlTables: true
+      enableUserKey: true
+      enableSessionId: true
+      enableDeleted: true
+      enableArchived: true
+  tasks: 
+
+    - include_role:
+        name: computate.computate_postgres
+      when: FILTER_POSTGRES is defined and FILTER_POSTGRES == 'true' or (FILTER_ZOOKEEPER is not defined and FILTER_SOLR is not defined and FILTER_PROJECT is not defined)
+
+    - include_role:
+        name: computate.computate_zookeeper
+      when: FILTER_ZOOKEEPER is defined and FILTER_ZOOKEEPER == 'true' or (FILTER_POSTGRES is not defined and FILTER_SOLR is not defined and FILTER_PROJECT is not defined)
+
+    - include_role:
+        name: computate.computate_solr
+      when: FILTER_SOLR is defined and FILTER_SOLR == 'true' or (FILTER_POSTGRES is not defined and FILTER_ZOOKEEPER is not defined and FILTER_PROJECT is not defined)
+
+    - include_role:
+        name: computate.computate_project
+      vars: 
+        SITE_SERVICES: 
+          - SITE_NAME: "{{ SITE_NAME }}"
+            SITE_SRC: "{{ SITE_SRC }}"
+            SITE_JAVA_PACKAGE: "{{ SITE_JAVA_PACKAGE }}"
+            RELATIVE_PATHS_TO_WATCH: "{{ RELATIVE_PATHS_TO_WATCH }}"
+      when: FILTER_PROJECT is defined and FILTER_PROJECT == 'true' or (FILTER_POSTGRES is not defined and FILTER_ZOOKEEPER is not defined and FILTER_SOLR is not defined)
