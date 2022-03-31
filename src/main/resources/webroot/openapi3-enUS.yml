@@ -30,6 +30,729 @@ paths:
               schema:
                 type: string
 
+  /api/iot-node:
+    get:
+      operationId: searchIotNode
+      x-vertx-event-bus: smart-city-view-enUS-IotNode
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - IOT Node
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+        - in: query
+          name: q
+          description: ''
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: fl
+          description: ''
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sort
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: start
+          description: ''
+          required: false
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
+        - in: query
+          name: rows
+          description: ''
+          required: false
+          schema:
+            type: integer
+            default: 10
+            minimum: 0
+        - in: query
+          name: var
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
+        - in: query
+          name: facet
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+              type: boolean
+        - in: query
+          name: facet.range.start
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.end
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.gap
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.pivot
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.field
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: >+
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/SearchIotNodeResponse'
+    patch:
+      operationId: patchIotNode
+      x-vertx-event-bus: smart-city-view-enUS-IotNode
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - IOT Node
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+        - in: query
+          name: q
+          description: ''
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: fl
+          description: ''
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sort
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: start
+          description: ''
+          required: false
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
+        - in: query
+          name: rows
+          description: ''
+          required: false
+          schema:
+            type: integer
+            default: 10
+            minimum: 0
+        - in: query
+          name: var
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
+        - in: query
+          name: facet
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+              type: boolean
+        - in: query
+          name: facet.range.start
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.end
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.gap
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.pivot
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.field
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      requestBody:
+        description: >+
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PATCHIotNodeRequest'
+      responses:
+        '200':
+          description: >+
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/PATCHIotNodeResponse'
+    post:
+      operationId: postIotNode
+      x-vertx-event-bus: smart-city-view-enUS-IotNode
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - IOT Node
+      requestBody:
+        description: >+
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POSTIotNodeRequest'
+      responses:
+        '200':
+          description: >+
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/POSTIotNodeResponse'
+  /api/iot-node/import:
+    put:
+      operationId: putimportIotNode
+      x-vertx-event-bus: smart-city-view-enUS-IotNode
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - IOT Node
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+        - in: query
+          name: q
+          description: ''
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: fl
+          description: ''
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sort
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: start
+          description: ''
+          required: false
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
+        - in: query
+          name: rows
+          description: ''
+          required: false
+          schema:
+            type: integer
+            default: 10
+            minimum: 0
+        - in: query
+          name: var
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
+        - in: query
+          name: facet
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+              type: boolean
+        - in: query
+          name: facet.range.start
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.end
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.gap
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.pivot
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.field
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      requestBody:
+        description: >+
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PUTImportIotNodeRequest'
+      responses:
+        '200':
+          description: >+
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/PUTImportIotNodeResponse'
+  /iot-node:
+    get:
+      operationId: searchpageIotNode
+      x-vertx-event-bus: smart-city-view-enUS-IotNode
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - IOT Node
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+        - in: query
+          name: q
+          description: ''
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: fl
+          description: ''
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sort
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: start
+          description: ''
+          required: false
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
+        - in: query
+          name: rows
+          description: ''
+          required: false
+          schema:
+            type: integer
+            default: 10
+            minimum: 0
+        - in: query
+          name: var
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
+        - in: query
+          name: facet
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+              type: boolean
+        - in: query
+          name: facet.range.start
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.end
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.gap
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.pivot
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.field
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: >+
+          content:
+            text/html; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/SearchPageIotNodeResponse'
+  /iot-node/{id}:
+    get:
+      operationId: searchpageIotNodeId
+      x-vertx-event-bus: smart-city-view-enUS-IotNode
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - IOT Node
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+        - name: id
+          in: path
+          description: >+
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: q
+          description: ''
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: fl
+          description: ''
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sort
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: start
+          description: ''
+          required: false
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
+        - in: query
+          name: rows
+          description: ''
+          required: false
+          schema:
+            type: integer
+            default: 10
+            minimum: 0
+        - in: query
+          name: var
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
+        - in: query
+          name: facet
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+              type: boolean
+        - in: query
+          name: facet.range.start
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.end
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.gap
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.pivot
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.field
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: >+
+          content:
+            text/html; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/SearchPageIotNodeResponse'
   /api/user:
     get:
       operationId: searchSiteUser
@@ -762,6 +1485,46 @@ components:
       type: openIdConnect
       openIdConnectUrl: https://sso.computate.org/auth/realms/RH-IMPACT/.well-known/openid-configuration
   requestBodies:
+    SearchIotNodeResponse:
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/SearchIotNodeResponse'
+    PATCHIotNodeRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PATCHIotNodeRequest'
+    PATCHIotNodeResponse:
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/PATCHIotNodeResponse'
+    POSTIotNodeRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/POSTIotNodeRequest'
+    POSTIotNodeResponse:
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/POSTIotNodeResponse'
+    PUTImportIotNodeRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PUTImportIotNodeRequest'
+    PUTImportIotNodeResponse:
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/PUTImportIotNodeResponse'
+    SearchPageIotNodeResponse:
+      content:
+        text/html; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/SearchPageIotNodeResponse'
     SearchSiteUserResponse:
       content:
         application/json; charset=utf-8:
@@ -803,6 +1566,135 @@ components:
           schema:
             $ref: '#/components/schemas/SearchPageSiteUserResponse'
   schemas:
+    SearchIotNodeResponse:
+      allOf:
+        - type: array
+          items:
+            type: object
+            properties:
+              nodeName:
+                type: string
+              nodeType:
+                type: string
+              nodeId:
+                type: string
+              location:
+                type: string
+    PATCHIotNodeRequest:
+      allOf:
+        - type: object
+          properties:
+            setNodeName:
+              type: string
+              nullable: true
+            removeNodeName:
+              type: string
+            removeAllNodeName:
+              type: string
+            setNodeType:
+              type: string
+              nullable: true
+            removeNodeType:
+              type: string
+            removeAllNodeType:
+              type: string
+            setNodeId:
+              type: string
+              nullable: true
+            removeNodeId:
+              type: string
+            removeAllNodeId:
+              type: string
+            setLocation:
+              type: string
+              nullable: true
+            removeLocation:
+              type: string
+            removeAllLocation:
+              type: string
+    PATCHIotNodeResponse:
+      allOf:
+        - type: object
+          properties:
+            setNodeName:
+              type: string
+              nullable: true
+            removeNodeName:
+              type: string
+            removeAllNodeName:
+              type: string
+            setNodeType:
+              type: string
+              nullable: true
+            removeNodeType:
+              type: string
+            removeAllNodeType:
+              type: string
+            setNodeId:
+              type: string
+              nullable: true
+            removeNodeId:
+              type: string
+            removeAllNodeId:
+              type: string
+            setLocation:
+              type: string
+              nullable: true
+            removeLocation:
+              type: string
+            removeAllLocation:
+              type: string
+    POSTIotNodeRequest:
+      allOf:
+        - type: object
+          properties:
+            nodeName:
+              type: string
+            nodeType:
+              type: string
+            nodeId:
+              type: string
+            location:
+              type: string
+    POSTIotNodeResponse:
+      allOf:
+        - type: object
+          properties:
+            nodeName:
+              type: string
+            nodeType:
+              type: string
+            nodeId:
+              type: string
+            location:
+              type: string
+    PUTImportIotNodeRequest:
+      allOf:
+        - type: object
+          properties:
+            nodeName:
+              type: string
+            nodeType:
+              type: string
+            nodeId:
+              type: string
+            location:
+              type: string
+    PUTImportIotNodeResponse:
+      allOf:
+        - type: object
+          properties:
+            nodeName:
+              type: string
+            nodeType:
+              type: string
+            nodeId:
+              type: string
+            location:
+              type: string
+    SearchPageIotNodeResponse:
+      allOf:
+        - type: string
     SearchSiteUserResponse:
       allOf:
         - type: array

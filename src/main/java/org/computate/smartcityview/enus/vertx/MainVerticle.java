@@ -8,25 +8,21 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
 import org.apache.camel.CamelContext;
-import org.apache.camel.Exchange;
-import org.apache.camel.LoggingLevel;
-import org.apache.camel.builder.ExpressionBuilder;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.vertx.VertxComponent;
 import org.apache.camel.impl.DefaultCamelContext;
-import org.apache.camel.model.dataformat.JsonLibrary;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.computate.smartcityview.enus.config.ConfigKeys;
+import org.computate.smartcityview.enus.model.iotnode.IotNodeEnUSGenApiService;
+import org.computate.smartcityview.enus.model.user.SiteUserEnUSGenApiService;
+import org.computate.smartcityview.enus.page.HomePage;
+import org.computate.smartcityview.enus.request.SiteRequestEnUS;
 import org.computate.vertx.handlebars.AuthHelpers;
 import org.computate.vertx.handlebars.DateHelpers;
 import org.computate.vertx.handlebars.SiteHelpers;
 import org.computate.vertx.openapi.OpenApi3Generator;
 import org.computate.vertx.verticle.EmailVerticle;
-import org.computate.smartcityview.enus.config.ConfigKeys;
-import org.computate.smartcityview.enus.page.PageLayout;
-import org.computate.smartcityview.enus.page.HomePage;
-import org.computate.smartcityview.enus.request.SiteRequestEnUS;
-import org.computate.smartcityview.enus.model.user.SiteUserEnUSGenApiService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -44,7 +40,6 @@ import io.vertx.core.Promise;
 import io.vertx.core.Vertx;
 import io.vertx.core.VertxOptions;
 import io.vertx.core.WorkerExecutor;
-import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.eventbus.EventBusOptions;
 import io.vertx.core.http.Cookie;
 import io.vertx.core.http.HttpHeaders;
@@ -501,8 +496,9 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 						}
 					});
 				} else {
-					LOG.error(configureOpenApiError, a.cause());
-					promise.fail(a.cause());
+					Exception ex = new RuntimeException("OpenID Connect Discovery failed");
+					LOG.error(configureOpenApiError, ex);
+					promise.fail(ex);
 				}
 			});
 		} catch (Exception ex) {
@@ -696,6 +692,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 			templateEngine = HandlebarsTemplateEngine.create(vertx);
 
 			SiteUserEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
+			IotNodeEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
 
 			LOG.info(configureApiComplete);
 			promise.complete();

@@ -38,16 +38,26 @@ TODO: Define the groupId and artifactId for ActiveLearningStudio-API.
 		<vertx-maven-plugin.version>1.0.18</vertx-maven-plugin.version>
 		<build-helper-maven-plugin.version>3.0.0</build-helper-maven-plugin.version>
 		<exec-maven-plugin.version>1.5.0</exec-maven-plugin.version>
-		<vertx.version>4.2.3</vertx.version>
-		<quarkus-plugin.version>2.2.2.Final</quarkus-plugin.version>
-		<quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
-		<quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-		<quarkus.platform.version>2.2.2.Final</quarkus.platform.version>
+		<vertx.version>4.1.8.redhat-00003</vertx.version>
 		<apache-curator.version>4.3.0</apache-curator.version>
 		<computate.version>4.1.8.6</computate.version>
 		<camel.version>3.14.1</camel.version>
 	</properties>
 
+
+	<repositories>
+		<repository>
+			<id>redhat-ga</id>
+			<name>Red Hat GA</name>
+			<url>https://maven.repository.redhat.com/ga/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
 
 	<!-- 
 	TODO: Define the managed dependencies for maven. 
@@ -59,14 +69,6 @@ TODO: Define the groupId and artifactId for ActiveLearningStudio-API.
 				<groupId>io.vertx</groupId>
 				<artifactId>vertx-dependencies</artifactId>
 				<version>${vertx.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-
-			<dependency>
-				<groupId>${quarkus.platform.group-id}</groupId>
-				<artifactId>${quarkus.platform.artifact-id}</artifactId>
-				<version>${quarkus.platform.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -128,59 +130,6 @@ TODO: Define the groupId and artifactId for ActiveLearningStudio-API.
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-text</artifactId>
 			<version>1.8</version>
-		</dependency>
-
-		<!-- ####### -->
-		<!-- Quarkus -->
-		<!-- ####### -->
-
-		<dependency>
-			<groupId>io.quarkus</groupId>
-			<artifactId>quarkus-resteasy-reactive-jackson</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>io.quarkus</groupId>
-			<artifactId>quarkus-vertx</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>org.jboss.slf4j</groupId>
-					<artifactId>slf4j-jboss-logmanager</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>io.smallrye.reactive</groupId>
-			<artifactId>smallrye-mutiny-vertx-web-client</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>io.quarkus</groupId>
-			<artifactId>quarkus-arc</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>io.quarkus</groupId>
-			<artifactId>quarkus-junit5</artifactId>
-			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>org.jboss.slf4j</groupId>
-					<artifactId>slf4j-jboss-logmanager</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>io.rest-assured</groupId>
-			<artifactId>rest-assured</artifactId>
-			<scope>test</scope>
-		</dependency>
-
-		<!-- Extra -->
-		<dependency>
-			<groupId>io.quarkus</groupId>
-			<artifactId>quarkus-reactive-pg-client</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>io.smallrye.reactive</groupId>
-			<artifactId>smallrye-mutiny-vertx-web</artifactId>
 		</dependency>
 
 		<!-- ########## -->

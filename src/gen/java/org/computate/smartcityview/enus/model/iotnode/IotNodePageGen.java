@@ -1,4 +1,4 @@
-package org.computate.smartcityview.enus.model.base;
+package org.computate.smartcityview.enus.model.iotnode;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Arrays;
@@ -13,6 +13,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import org.computate.vertx.api.ApiRequest;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import org.computate.smartcityview.enus.model.iotnode.IotNodeGenPage;
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.computate.smartcityview.enus.model.base.BaseModel;
@@ -32,32 +33,31 @@ import org.computate.search.wrap.Wrap;
 import org.apache.commons.lang3.math.NumberUtils;
 import java.util.Optional;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import org.computate.smartcityview.enus.model.base.BaseModelGenPage;
 import org.computate.search.serialize.ComputateZonedDateTimeSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 /**	
- * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstClasse_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartcityview.enus.model.base.BaseModelPage&fq=classeEtendGen_indexed_boolean:true">Find the class  in Solr. </a>
+ * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstClasse_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartcityview.enus.model.iotnode.IotNodePage&fq=classeEtendGen_indexed_boolean:true">Find the class  in Solr. </a>
  * <br>
  **/
-public abstract class BaseModelPageGen<DEV> extends BaseModelGenPage {
-	protected static final Logger LOG = LoggerFactory.getLogger(BaseModelPage.class);
+public abstract class IotNodePageGen<DEV> extends IotNodeGenPage {
+	protected static final Logger LOG = LoggerFactory.getLogger(IotNodePage.class);
 
 	//////////////
 	// initDeep //
 	//////////////
 
-	public Future<Void> promiseDeepBaseModelPage(SiteRequestEnUS siteRequest_) {
+	public Future<Void> promiseDeepIotNodePage(SiteRequestEnUS siteRequest_) {
 		setSiteRequest_(siteRequest_);
-		return promiseDeepBaseModelPage();
+		return promiseDeepIotNodePage();
 	}
 
-	public Future<Void> promiseDeepBaseModelPage() {
+	public Future<Void> promiseDeepIotNodePage() {
 		Promise<Void> promise = Promise.promise();
 		Promise<Void> promise2 = Promise.promise();
-		promiseBaseModelPage(promise2);
+		promiseIotNodePage(promise2);
 		promise2.future().onSuccess(a -> {
-			super.promiseDeepBaseModelGenPage(siteRequest_).onSuccess(b -> {
+			super.promiseDeepIotNodeGenPage(siteRequest_).onSuccess(b -> {
 				promise.complete();
 			}).onFailure(ex -> {
 				promise.fail(ex);
@@ -68,7 +68,7 @@ public abstract class BaseModelPageGen<DEV> extends BaseModelGenPage {
 		return promise.future();
 	}
 
-	public Future<Void> promiseBaseModelPage(Promise<Void> promise) {
+	public Future<Void> promiseIotNodePage(Promise<Void> promise) {
 		Future.future(a -> a.complete()).compose(a -> {
 			Promise<Void> promise2 = Promise.promise();
 			try {
@@ -86,19 +86,19 @@ public abstract class BaseModelPageGen<DEV> extends BaseModelGenPage {
 	}
 
 	@Override public Future<Void> promiseDeepForClass(SiteRequestEnUS siteRequest_) {
-		return promiseDeepBaseModelPage(siteRequest_);
+		return promiseDeepIotNodePage(siteRequest_);
 	}
 
 	/////////////////
 	// siteRequest //
 	/////////////////
 
-	public void siteRequestBaseModelPage(SiteRequestEnUS siteRequest_) {
-			super.siteRequestBaseModelGenPage(siteRequest_);
+	public void siteRequestIotNodePage(SiteRequestEnUS siteRequest_) {
+			super.siteRequestIotNodeGenPage(siteRequest_);
 	}
 
 	public void siteRequestForClass(SiteRequestEnUS siteRequest_) {
-		siteRequestBaseModelPage(siteRequest_);
+		siteRequestIotNodePage(siteRequest_);
 	}
 
 	/////////////
@@ -110,7 +110,7 @@ public abstract class BaseModelPageGen<DEV> extends BaseModelGenPage {
 		Object o = null;
 		for(String v : vars) {
 			if(o == null)
-				o = obtainBaseModelPage(v);
+				o = obtainIotNodePage(v);
 			else if(o instanceof BaseModel) {
 				BaseModel baseModel = (BaseModel)o;
 				o = baseModel.obtainForClass(v);
@@ -122,11 +122,11 @@ public abstract class BaseModelPageGen<DEV> extends BaseModelGenPage {
 		}
 		return o;
 	}
-	public Object obtainBaseModelPage(String var) {
-		BaseModelPage oBaseModelPage = (BaseModelPage)this;
+	public Object obtainIotNodePage(String var) {
+		IotNodePage oIotNodePage = (IotNodePage)this;
 		switch(var) {
 			default:
-				return super.obtainBaseModelGenPage(var);
+				return super.obtainIotNodeGenPage(var);
 		}
 	}
 
@@ -139,7 +139,7 @@ public abstract class BaseModelPageGen<DEV> extends BaseModelGenPage {
 		Object o = null;
 		for(String v : vars) {
 			if(o == null)
-				o = relateBaseModelPage(v, val);
+				o = relateIotNodePage(v, val);
 			else if(o instanceof BaseModel) {
 				BaseModel baseModel = (BaseModel)o;
 				o = baseModel.relateForClass(v, val);
@@ -147,11 +147,11 @@ public abstract class BaseModelPageGen<DEV> extends BaseModelGenPage {
 		}
 		return o != null;
 	}
-	public Object relateBaseModelPage(String var, Object val) {
-		BaseModelPage oBaseModelPage = (BaseModelPage)this;
+	public Object relateIotNodePage(String var, Object val) {
+		IotNodePage oIotNodePage = (IotNodePage)this;
 		switch(var) {
 			default:
-				return super.relateBaseModelGenPage(var, val);
+				return super.relateIotNodeGenPage(var, val);
 		}
 	}
 
@@ -160,12 +160,12 @@ public abstract class BaseModelPageGen<DEV> extends BaseModelGenPage {
 	///////////////
 
 	public static Object staticSetForClass(String entityVar, SiteRequestEnUS siteRequest_, String o) {
-		return staticSetBaseModelPage(entityVar,  siteRequest_, o);
+		return staticSetIotNodePage(entityVar,  siteRequest_, o);
 	}
-	public static Object staticSetBaseModelPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
+	public static Object staticSetIotNodePage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
 			default:
-				return BaseModelGenPage.staticSetBaseModelGenPage(entityVar,  siteRequest_, o);
+				return IotNodeGenPage.staticSetIotNodeGenPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -174,12 +174,12 @@ public abstract class BaseModelPageGen<DEV> extends BaseModelGenPage {
 	////////////////
 
 	public static Object staticSearchForClass(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
-		return staticSearchBaseModelPage(entityVar,  siteRequest_, o);
+		return staticSearchIotNodePage(entityVar,  siteRequest_, o);
 	}
-	public static Object staticSearchBaseModelPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
+	public static Object staticSearchIotNodePage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
 			default:
-				return BaseModelGenPage.staticSearchBaseModelGenPage(entityVar,  siteRequest_, o);
+				return IotNodeGenPage.staticSearchIotNodeGenPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -188,12 +188,12 @@ public abstract class BaseModelPageGen<DEV> extends BaseModelGenPage {
 	///////////////////
 
 	public static String staticSearchStrForClass(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
-		return staticSearchStrBaseModelPage(entityVar,  siteRequest_, o);
+		return staticSearchStrIotNodePage(entityVar,  siteRequest_, o);
 	}
-	public static String staticSearchStrBaseModelPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
+	public static String staticSearchStrIotNodePage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
 			default:
-				return BaseModelGenPage.staticSearchStrBaseModelGenPage(entityVar,  siteRequest_, o);
+				return IotNodeGenPage.staticSearchStrIotNodeGenPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -202,12 +202,12 @@ public abstract class BaseModelPageGen<DEV> extends BaseModelGenPage {
 	//////////////////
 
 	public static String staticSearchFqForClass(String entityVar, SiteRequestEnUS siteRequest_, String o) {
-		return staticSearchFqBaseModelPage(entityVar,  siteRequest_, o);
+		return staticSearchFqIotNodePage(entityVar,  siteRequest_, o);
 	}
-	public static String staticSearchFqBaseModelPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
+	public static String staticSearchFqIotNodePage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
 			default:
-				return BaseModelGenPage.staticSearchFqBaseModelGenPage(entityVar,  siteRequest_, o);
+				return IotNodeGenPage.staticSearchFqIotNodeGenPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -224,12 +224,12 @@ public abstract class BaseModelPageGen<DEV> extends BaseModelGenPage {
 
 
 	public static String displayNameForClass(String var) {
-		return BaseModelPage.displayNameBaseModelPage(var);
+		return IotNodePage.displayNameIotNodePage(var);
 	}
-	public static String displayNameBaseModelPage(String var) {
+	public static String displayNameIotNodePage(String var) {
 		switch(var) {
 		default:
-			return BaseModelGenPage.displayNameBaseModelGenPage(var);
+			return IotNodeGenPage.displayNameIotNodeGenPage(var);
 		}
 	}
 }

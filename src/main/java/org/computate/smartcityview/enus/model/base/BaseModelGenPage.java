@@ -1,5 +1,6 @@
 package org.computate.smartcityview.enus.model.base;
 
+import org.computate.smartcityview.enus.model.base.BaseModel;
 import org.computate.smartcityview.enus.request.SiteRequestEnUS;
 import java.lang.Long;
 import java.lang.String;
@@ -36,6 +37,10 @@ import org.apache.commons.collections.CollectionUtils;
 import java.util.Objects;
 import io.vertx.core.Promise;
 import org.computate.smartcityview.enus.config.ConfigKeys;
+import org.computate.search.response.solr.SolrResponse;
+import java.util.HashMap;
+import org.computate.search.tool.TimeTool;
+import java.time.ZoneId;
 
 
 /**
@@ -50,11 +55,36 @@ public class BaseModelGenPage extends BaseModelGenPageGen<PageLayout> {
 	protected void _searchListBaseModel_(Wrap<SearchList<BaseModel>> w) {
 	}
 
+	protected void _pageResponse(Wrap<String> w) {
+		if(searchListBaseModel_ != null)
+			w.o(JsonObject.mapFrom(searchListBaseModel_.getQueryResponse()).toString());
+	}
+
+	protected void _defaultPivotVars(List<String> l) {
+		Optional.ofNullable(searchListBaseModel_.getFacetPivots()).orElse(Arrays.asList()).forEach(facetPivot -> {
+			String facetPivot2 = facetPivot;
+			if(StringUtils.contains(facetPivot2, "}"))
+				facetPivot2 = StringUtils.substringAfterLast(facetPivot2, "}");
+			String[] parts = facetPivot2.split(",");
+			for(String part : parts) {
+				if(StringUtils.isNotBlank(part)) {
+					String var = StringUtils.substringBefore(part, "_");
+					if(StringUtils.isNotBlank(var))
+						l.add(var);
+				}
+			}
+		});
+	}
+
 	/**
 	 * {@inheritDoc}
 	 **/
 	protected void _listBaseModel(JsonArray l) {
 		Optional.ofNullable(searchListBaseModel_).map(o -> o.getList()).orElse(Arrays.asList()).stream().map(o -> JsonObject.mapFrom(o)).forEach(o -> l.add(o));
+	}
+
+	protected void _facetCounts(Wrap<SolrResponse.FacetCounts> w) {
+		w.o(searchListBaseModel_.getQueryResponse().getFacetCounts());
 	}
 
 	protected void _baseModelCount(Wrap<Integer> w) {
@@ -144,6 +174,58 @@ public class BaseModelGenPage extends BaseModelGenPageGen<PageLayout> {
 	}
 
 	@Override
+	protected void _varsQ(JsonObject vars) {
+		BaseModel.varsQForClass().forEach(var -> {
+			JsonObject json = new JsonObject();
+			json.put("var", var);
+			json.put("displayName", Optional.ofNullable(BaseModel.displayNameBaseModel(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
+			json.put("classSimpleName", Optional.ofNullable(BaseModel.classSimpleNameBaseModel(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
+			json.put("val", Optional.ofNullable(searchListBaseModel_.getRequest().getQuery()).filter(fq -> fq.startsWith(BaseModel.varIndexedBaseModel(var) + ":")).map(s -> StringUtils.substringAfter(s, ":")).orElse(null));
+			vars.put(var, json);
+		});
+	}
+
+	@Override
+	protected void _varsFq(JsonObject vars) {
+		Map<String, SolrResponse.FacetField> facetFields = Optional.ofNullable(facetCounts).map(c -> c.getFacetFields()).map(f -> f.getFacets()).orElse(new HashMap<String,SolrResponse.FacetField>());
+		BaseModel.varsFqForClass().forEach(var -> {
+			String varIndexed = BaseModel.varIndexedBaseModel(var);
+			JsonObject json = new JsonObject();
+			json.put("var", var);
+			json.put("displayName", Optional.ofNullable(BaseModel.displayNameBaseModel(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
+			json.put("classSimpleName", Optional.ofNullable(BaseModel.classSimpleNameBaseModel(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
+			json.put("val", searchListBaseModel_.getRequest().getFilterQueries().stream().filter(fq -> fq.startsWith(BaseModel.varIndexedBaseModel(var) + ":")).findFirst().map(s -> StringUtils.substringAfter(s, ":")).orElse(null));
+			Optional.ofNullable(facetFields.get(varIndexed)).ifPresent(facetField -> {
+				JsonObject facetJson = new JsonObject();
+				JsonObject counts = new JsonObject();
+				facetJson.put("var", var);
+				facetField.getCounts().forEach((val, count) -> {
+					counts.put(val, count);
+				});
+				facetJson.put("counts", counts);
+				json.put("facetField", facetJson);
+			});
+			if(defaultPivotVars.contains(var)) {
+				json.put("pivot", true);
+			}
+			vars.put(var, json);
+		});
+	}
+
+	@Override
+	protected void _varsRange(JsonObject vars) {
+		BaseModel.varsRangeForClass().forEach(var -> {
+			String varIndexed = BaseModel.varIndexedBaseModel(var);
+			JsonObject json = new JsonObject();
+			json.put("var", var);
+			json.put("displayName", Optional.ofNullable(BaseModel.displayNameBaseModel(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
+			json.put("classSimpleName", Optional.ofNullable(BaseModel.classSimpleNameBaseModel(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
+			json.put("val", searchListBaseModel_.getRequest().getFilterQueries().stream().filter(fq -> fq.startsWith(BaseModel.varIndexedBaseModel(var) + ":")).findFirst().map(s -> StringUtils.substringAfter(s, ":")).orElse(null));
+			vars.put(var, json);
+		});
+	}
+
+	@Override
 	protected void _query(JsonObject query) {
 		ServiceRequest serviceRequest = siteRequest_.getServiceRequest();
 		JsonObject params = serviceRequest.getParams();
@@ -184,20 +266,21 @@ public class BaseModelGenPage extends BaseModelGenPageGen<PageLayout> {
 		Long rows2 = rows1 / 2;
 		Long rows3 = rows1 * 2;
 		start2 = start2 < 0 ? 0 : start2;
-		JsonArray fqs = new JsonArray();
+		JsonObject fqs = new JsonObject();
 		for(String fq : Optional.ofNullable(searchListBaseModel_).map(l -> l.getFilterQueries()).orElse(Arrays.asList())) {
 			if(!StringUtils.contains(fq, "(")) {
 				String fq1 = StringUtils.substringBefore(fq, "_");
 				String fq2 = StringUtils.substringAfter(fq, ":");
 				if(!StringUtils.startsWithAny(fq, "classCanonicalNames_", "archived_", "deleted_", "sessionId", "userKeys"))
-					fqs.add(new JsonObject().put("var", fq1).put("val", fq2));
+					fqs.put(fq1, new JsonObject().put("var", fq1).put("val", fq2).put("displayName", BaseModel.displayNameForClass(fq1)));
 				}
 			}
 		query.put("fq", fqs);
 
 		JsonArray sorts = new JsonArray();
 		for(String sort : Optional.ofNullable(searchListBaseModel_).map(l -> l.getSorts()).orElse(Arrays.asList())) {
-			sorts.add(new JsonObject().put("var", StringUtils.substringBefore(sort, "_")).put("order", StringUtils.substringAfter(sort, " ")));
+			String sort1 = StringUtils.substringBefore(sort, "_");
+			sorts.add(new JsonObject().put("var", sort1).put("order", StringUtils.substringAfter(sort, " ")).put("displayName", BaseModel.displayNameForClass(sort1)));
 		}
 		query.put("sort", sorts);
 	}

@@ -6,10 +6,11 @@
 		<script src="{{ FONTAWESOME_KIT }}"></script>
 {{/if}}
 		<script src="{{staticBaseUrl}}/js/site-enUS.js"></script>
-		<script src="{{staticBaseUrl}}/js/moment.min.js"></script>
-		<script src="{{staticBaseUrl}}/js/jqDatePicker.js"></script>
+		<script src="{{staticBaseUrl}}/js/moment.js"></script>
 		<script src="{{staticBaseUrl}}/js/sockjs.js"></script>
 		<script src="{{staticBaseUrl}}/js/vertx-eventbus.js"></script>
+		<script src="{{staticBaseUrl}}/js/plotly-2.9.0.min.js"></script>
+		<script src="{{staticBaseUrl}}/js/d3.min.js"></script>
 {{/inline}}
 {{#*inline "htmScriptPageLayout"}}		<!-- inline "htmScriptPageLayout" -->
 {{/inline}}
@@ -25,18 +26,34 @@
 {{#*inline "htmTitlePageLayout"}}		<!-- inline "htmTitlePageLayout" -->
 		<title>smart-city-view</title>
 {{/inline}}
-{{#*inline "htmBodyStartPageLayout"}}		<!-- inline "htmBodyStartPageLayout" -->
+{{#*inline "htmBodyMenuPageLayout"}}
 		<div class="w3-bar ">
-			<div class="w3-bar-item w3-padding-16 w3-right ">
+			<div class="w3-bar w3-hide-small ">
+				<a class="w3-bar-item w3-button w3-button w3-text-teal " href="{{ SITE_BASE_URL }}"><i class="fad fa-house w3-text-teal "></i> Smart City View</a>
+{{> "htmMenuItems"}}
+			</div>
+			<div class="w3-bar w3-hide-medium w3-hide-large ">
+				<a class="w3-bar-item w3-button w3-button w3-text-teal " href="{{ SITE_BASE_URL }}"><i class="fad fa-house w3-text-teal "></i> Smart City View</a>
+				<div class="w3-dropdown-hover ">
+					<button class="w3-button w3-text-black "><i class="fad fa-bars w3-text-black "></i> Menu</button>
+					<div class="w3-dropdown-content w3-bar-block w3-card-4 ">
+{{> "htmMenuItems"}}
+					</div>
+				</div>
+			</div>
+		</div>
+{{/inline}}
+{{#*inline "htmMenuItems"}}
 {{#if userKey}}
 				<a href="/user/{{ userKey }}" class="w3-mobile w3-padding w3-text-teal "><i class="fad fa-house-user w3-text-teal "></i> {{userName}}</a>
 				<a href="{{ logoutUrl }}" class="w3-mobile w3-padding w3-text-teal "><i class="fad fa-house-user w3-text-teal "></i> Logout</a>
 {{else}}
 				<a href="/user" class="w3-mobile w3-padding w3-text-teal "><i class="fad fa-house-user w3-text-teal "></i> Login</a>
 {{/if}}
+				<a href="{{siteBaseUrl}}/iot-node" class="w3-mobile w3-padding w3-text-indigo "><i class="fad fa-home w3-text-indigo "></i> IOT Nodes</a>
 				<a href="{{siteBaseUrl}}/" class="w3-mobile w3-padding w3-text-indigo "><i class="fad fa-home w3-text-indigo "></i> smart-city-view</a>
-			</div>
-		</div>
+{{/inline}}
+{{#*inline "htmBodyStartPageLayout"}}		<!-- inline "htmBodyStartPageLayout" -->
 {{/inline}}
 {{#*inline "htmBodyEndPageLayout"}}		<!-- inline "htmBodyEndPageLayout" -->
 {{/inline}}

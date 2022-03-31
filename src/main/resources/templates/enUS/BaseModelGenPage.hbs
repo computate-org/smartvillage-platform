@@ -26,11 +26,140 @@
 				if(pk != null) {
 				}
 				websocketBaseModel(websocketBaseModelInner);
+				window.varsFq = JSON.parse('{{{toJsonObjectStringInApostrophes varsFq}}}');
+				pageGraph();
 			});
 		</script>
 {{/inline}}
 {{#*inline "htmUrlBaseModel"}}{{pageUri}}?q={{query.q}}&amp;rows={{#if rows}}{{rows}}{{else}}{{pagination.rows}}{{/if}}&amp;rows={{#if start}}{{start}}{{else}}{{pagination.start}}{{/if}}{{#each query.fq}}{{#eq fq this}}{{else}}&fq={{fq}}:{{val}}{{/eq}}{{/each}}{{#each query.sort}}{{#eq sort this}}{{else}}&sort={{var}} {{order}}{{/eq}}{{/each}}{{/inline}}
 {{#*inline "htmHeadBaseModelPage"}}{{> "htmTitleBaseModelPage"}}{{> "htmMetaBaseModelPage"}}{{> "htmStyleBaseModelPage"}}{{> "htmScriptsBaseModelPage"}}{{> "htmScriptBaseModelPage"}}{{/inline}}
+{{#*inline "htmBodySearchBaseModelPage"}}		<!-- #*inline "htmBodySearchBaseModelPage" -->
+	<div>
+{{#each varsQ}}
+		<div class="w3-padding ">
+			<label for="fqBaseModel_{{ @key }}">{{ displayName }}<sup class="w3-tiny "> ({{ classSimpleName }})</sup></label>
+			<input id="fqBaseModel_{{ @key }}" placeholder="{{ displayName }}" class="w3-input " onkeyup="qChange(this); " data-var="{{ var }}" autocomplete="off="/>
+			<div class="pageSearchVal w3-tiny "></div>
+		</div>
+{{/each}}
+	</div>
+{{/inline}}
+{{#*inline "htmBodyFiltersBaseModelPage"}}		<!-- #*inline "htmBodyFiltersBaseModelPage" -->
+	<div>
+{{#each varsFq }}
+		<div class="w3-padding ">
+			<label for="fqBaseModel_{{ @key }}">{{ displayName }}<sup class="w3-tiny "> ({{ classSimpleName }})</sup></label>
+			<div class="w3-cell-row ">
+				<div class="w3-cell w3-cell-top ">
+					<button id="buttonFacetBaseModel_{{ @key }}" class="w3-button " onclick="facetFieldChange(this); " title="see values " data-var="{{ var }}" data-clear="{{#if facetField }}true{{else}}false{{/if}}"><i class="fas fa-list "></i></button>
+				</div>
+				<div class="w3-cell w3-cell-top ">
+					<input id="fqBaseModel_{{ @key }}" placeholder="{{ displayName }}" class="w3-input " onkeyup="fqChange(this); " data-var="{{ var }}" autocomplete="off=" value="{{ val }}"/>
+				</div>
+			</div>
+		</div>
+		<div class="w3-padding w3-tiny ">
+			<div class="pageSearchVal " id="pageSearchVal-fqBaseModel_{{ @key }}">{{#if val }}fq={{ var }}:{{encodeURIComponent val }}{{/if}}</div>
+			<div class="pageSearchVal " id="pageSearchVal-buttonFacetBaseModel_{{ @key }}">{{#if facetField.var }}facet.field={{ facetField.var }}{{/if}}</div>
+		</div>
+		<ol class="pageFacetField " id="pageFacetFieldBaseModel_{{ @key }}">
+{{#each facetField.counts }}
+			<li class="">{{ @key }}: {{ this }}</li>
+{{/each}}
+		</ol>
+{{/each}}
+	</div>
+{{/inline}}
+{{#*inline "htmBodyRangeBaseModelPage"}}		<!-- #*inline "htmBodyRangeBaseModelPage" -->
+	<table class="w3-padding ">
+		<tr>			<td class="w3-padding w3-tiny " colspan="2">
+				<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeGap-BaseModel">{{#if defaultRangeGap }}facet.range.gap={{encodeURIComponent defaultRangeGap }}{{/if}}</div>
+				<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeStart-BaseModel">{{#if defaultRangeStart }}facet.range.start={{encodeURIComponent defaultRangeStart }}{{/if}}</div>
+				<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeEnd-BaseModel">{{#if defaultRangeEnd }}facet.range.end={{encodeURIComponent defaultRangeEnd }}{{/if}}</div>
+				<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeVar-BaseModel">{{#if defaultRangeVar }}facet.range={!tag=r1}{{encodeURIComponent defaultRangeVar }}{{/if}}</div>
+			</td>
+		</tr>
+	</table>
+	<table class="w3-padding ">
+		<tr class="">
+			<td class="">
+			<span>Range Gap</span>
+			</td>
+			<td class="">
+				<select
+ name="facet.range.gap" id="pageFacetRangeGap-BaseModel" onchange="facetRangeChange(this, 'BaseModel'); ">
+					<option value="+1YEAR"{{#eq defaultRangeGap '+1YEAR'}} selected="selected"{{else}}{{/eq}}>Year</option>
+					<option value="+1MONTH"{{#eq defaultRangeGap '+1MONTH'}} selected="selected"{{else}}{{/eq}}>Month</option>
+					<option value="+1WEEK"{{#eq defaultRangeGap '+1WEEK'}} selected="selected"{{else}}{{/eq}}>Week</option>
+					<option value="+1DAY"{{#eq defaultRangeGap '+1DAY'}} selected="selected"{{else}}{{#if defaultRangeGap}}{{else}} selected="selected"{{/if}}{{/eq}}>Day</option>
+					<option value="+1HOUR"{{#eq defaultRangeGap '+1HOUR'}} selected="selected"{{else}}{{/eq}}>Hour</option>
+					<option value="+1MINUTE"{{#eq defaultRangeGap '+1MINUTE'}} selected="selected"{{else}}{{/eq}}>Minute</option>
+					<option value="+1SECOND"{{#eq defaultRangeGap '+1SECOND'}} selected="selected"{{else}}{{/eq}}>Second</option>
+				</select>
+			</td>
+		</tr>
+		<tr class="">
+			<td class="" colspan="2">
+				<span>Range Start</span>
+			</td>
+		</tr>
+		<tr class="">
+			<td class="" colspan="2">
+			<span><input type="datetime-local" name="facetRangeStart" id="pageFacetRangeStart-BaseModel" value="{{formatZonedDateTime defaultRangeStart "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeChange(this, 'BaseModel'); "/></span>
+			</td>
+		</tr>
+		<tr class="">
+			<td class="" colspan="2">
+				<span>Range End</span>
+			</td>
+		</tr>
+		<tr class="">
+			<td class="" colspan="2"
+			<span><input type="datetime-local" name="facetRangeEnd" id="pageFacetRangeEnd-BaseModel" value="{{formatZonedDateTime defaultRangeEnd "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeChange(this, 'BaseModel'); "/></span>
+			</td>
+		</tr>
+	</table>
+	<table class="w3-padding ">
+{{#each varsRange }}
+		<tr class="">
+			<td class="">
+				<span><input type="radio" name="pageFacetRange" class="pageFacetRange " id="pageFacetRangeBaseModel_{{ @key }}" value="{{ var }}"{{#eq defaultRangeVar var }} checked="checked"{{/eq}} onclick="facetRangeChange(this, 'BaseModel'); "/></span>
+			</td>
+			<td class="">
+			<label for="pageFacetRangeBaseModel_{{ @key }}">{{ displayName }}</label>
+			</td>
+		</tr>
+{{/each}}
+	</table>
+{{#*inline "htmBodyPivotBaseModelPage"}}		<!-- #*inline "htmBodyPivotBaseModelPage" -->
+		<div class="w3-padding w3-tiny pageSearchVal " id="pageSearchVal-pivotBaseModel">
+{{#if defaultPivotVars }}
+			<div class="pageSearchVal " id="pageSearchVal-pivotBaseModel">facet.pivot={{#each defaultPivotVars }}{{#if @index }},{{/if}}{{ this }}{{/each}}</div>
+{{/if}}
+		</div>
+		<div style="display: none; " class="w3-padding w3-tiny " id="pageSearchVal-hiddenBaseModel">
+{{#each defaultPivotVars }}
+			<div class="pageSearchVal pageSearchVal-hiddenBaseModel " id="pageSearchVal-hiddenBaseModel_{{ this }}">{{ this }}</div>
+{{/each}}
+		</div>
+	<table class="w3-table ">
+{{#each varsFq }}
+		<tr class="">
+			<td class="">
+				<span><input type="checkbox" name="pageFacetPivot" class="pageFacetPivot " id="pageFacetPivotBaseModel_{{ @key }}" value="{{ var }}"{{#if pivot }} checked="checked"{{/if}} onclick="facetPivotChange(this, 'BaseModel'); "/></span>
+			</td>
+			<td class="w3-cell ">
+			<label for="pageFacetPivotBaseModel_{{ @key }}">{{ displayName }}</label>
+			</td>
+		</tr>
+{{/each}}
+	</table>
+{{/inline}}
+{{/inline}}
+{{#*inline "htmBodyMenuBaseModelPage"}}		<!-- #*inline "htmBodyMenuBaseModelPage" -->
+{{> "htmBodyMenuPageLayout"}}{{/inline}}
+{{#*inline "htmBodyGraphBaseModelPage"}}		<!-- #*inline "htmBodyGraphBaseModelPage" -->
+<div id="htmBodyGraphPageLayout" class="htmBodyGraph "></div>{{/inline}}
 {{#*inline "htmBodyCount0BaseModelPage"}}		<!-- #*inline "htmBodyCount0BaseModelPage" -->
 		<h1>
 			<a href="{{pageUri}}" class="w3-bar-item w3-btn w3-center w3-block w3- w3-hover-">
@@ -43,7 +172,7 @@
 		<h2>
 			<span class="w3-bar-item w3-padding w3-center w3-block w3-">
 				{{#if contextIconCssClasses}}
-					<i class="{{ contextIconCssClasses }} + " site-menu-icon "></i>
+					<i class="{{ contextIconCssClasses }}  site-menu-icon "></i>
 				{{/if}}
 				<span class=""></span>
 			</span>
@@ -63,13 +192,12 @@
 				<span class="">{{baseModel_.objectTitle}}</span>
 			</span>
 		</h2>
-{{#block "htmForm"}}{{/block}}
 {{/inline}}
 {{#*inline "htmBodyCount1BaseModelPage"}}		<!-- #*inline "htmBodyCount1BaseModelPage" -->
 		<h1>
 			<a href="{{pageUri}}" class="w3-bar-item w3-btn w3-center w3-block w3- w3-hover-">
 	{{#if contextIconCssClasses}}
-				<i class="{{ contextIconCssClasses }} + " site-menu-icon "></i>
+				<i class="{{ contextIconCssClasses }} site-menu-icon "></i>
 	{{/if}}
 				<span class=""></span>
 			</a>
@@ -107,7 +235,7 @@
 		<h1>
 			<a href="{{pageUri}}" class="w3-bar-item w3-btn w3-center w3-block w3- w3-hover-">
 	{{#if contextIconCssClasses}}
-				<i class="{{ contextIconCssClasses }} + " site-menu-icon "></i>
+				<i class="{{ contextIconCssClasses }} site-menu-icon "></i>
 	{{/if}}
 				<span class=""></span>
 			</a>
@@ -143,14 +271,18 @@
 {{> "table1BaseModelPage"}}
 		</div>
 {{/inline}}
-{{#*inline "htmFormBaseModelPage"}}	{{#if pk}}
+{{#*inline "htmFormBaseModelPage"}}
 		<!-- #*inline "htmForm" -->
-		<form action="" id="BaseModelForm" style="display: inline-block; width: 100%; " onsubmit="event.preventDefault(); return false; ">
+		<form action="" id="BaseModelForm" class="pageForm " style="" onsubmit="event.preventDefault(); return false; ">
+{{#if pk}}
 			<input name="pk" class="valuePk" type="hidden" value="{{pk}}"/>
+{{/if}}
 			<input name="focusId" type="hidden"/>
+			<input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{{toJsonObjectStringInApostrophes pageResponse }}}' type="hidden"/>
 		</form>
+{{#if pk}}
 {{#block "htmForm_searchpageBaseModel"}}{{/block}}
-	{{/if}}
+{{/if}}
 {{/inline}}
 {{#*inline "htmBodyStartBaseModelPage"}}
 {{> "htmBodyStartPageLayout"}}
@@ -160,6 +292,47 @@
 {{/inline}}
 {{#*inline "htmBodyBaseModelPage"}}
 {{#block "htmBodyStart"}}{{/block}}
+	<div class="w3-sidebar w3-bar-block " style="min-width: 300px; ">		<div class="">			<span title="Search" class="w3-button w3-xlarge w3- " onclick="$('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').toggle(); "><i class="fad fa-magnifying-glass "></i></span>
+			<span title="Filters" class="w3-button w3-xlarge w3- " onclick="$('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleFilters').toggle(); "><i class="fad fa-filters "></i></span>
+			<span title="Range" class="w3-button w3-xlarge w3- " onclick="$('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleRange').toggle(); "><i class="fad fa-calendar-range "></i></span>
+			<span title="Range" class="w3-button w3-xlarge w3- " onclick="$('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').toggle(); "><i class="fad fa-table-pivot "></i></span>
+		</div>
+<div  class="siteSidebarToggle siteSidebarToggleSearch" style="display: none; ">
+	<div class="w3-bar w3- ">
+		<span class="w3-bar-item w3-padding ">Search</span>
+	</div>
+	<div class="w3-bar-block ">
+{{#block "htmBodySearch"}}{{/block}}
+	</div>
+</div>
+<div  class="siteSidebarToggle siteSidebarToggleFilters" style="display: none; ">
+	<div class="w3-bar w3- ">
+		<span class="w3-bar-item w3-padding ">Filters</span>
+	</div>
+	<div class="w3-bar-block ">
+{{#block "htmBodyFilters"}}{{/block}}
+	</div>
+</div>
+<div  class="siteSidebarToggle siteSidebarToggleRange" style="display: none; ">
+	<div class="w3-bar w3- ">
+		<span class="w3-bar-item w3-padding ">Range</span>
+	</div>
+	<div class="w3-bar-block ">
+{{#block "htmBodyRange"}}{{/block}}
+	</div>
+</div>
+<div  class="siteSidebarToggle siteSidebarTogglePivot" style="display: none; ">
+	<div class="w3-bar w3- ">
+		<span class="w3-bar-item w3-padding ">Pivot</span>
+	</div>
+	<div class="w3-bar-block ">
+{{#block "htmBodyPivot"}}{{/block}}
+	</div>
+</div>
+	</div>
+<div class="pageContent w3-content ">
+{{#block "htmBodyMenu"}}{{/block}}
+{{#block "htmBodyGraph"}}{{/block}}
 	{{#eq baseModelCount int0}}
 {{#block "htmBodyCount0"}}{{/block}}
 	{{else}}
@@ -173,8 +346,10 @@
 {{#block "htmBodyAll"}}{{/block}}
 		{{/eq}}
 	{{/eq}}
+{{#block "htmForm"}}{{/block}}
 {{#block "htmForms"}}{{/block}}
 {{#block "htmBodyEnd"}}{{/block}}
+</div>
 {{/inline}}
 {{#*inline "table1BaseModelPage"}}
 		<table class="w3-table w3-bordered w3-striped w3-border w3-hoverable ">
@@ -362,6 +537,7 @@
 {{#*inline "inputInheritPk"}}
 														<input
 															type="text"
+															title="An optional inherited primary key from a legacy system for this object in the database"
 															id="{{classApiMethodMethod}}_inheritPk"
 	{{#eq "Page" classApiMethodMethod}}
 																class="setInheritPk classBaseModel inputBaseModel{{pk}}InheritPk w3-input w3-border "
@@ -407,7 +583,7 @@
 
 {{#*inline "inputCreated"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varBaseModel{{pk}}Created " title="{{formatZonedDateTime baseModel_.created 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' requestLocaleId requestZoneId}}">{{formatZonedDateTime baseModel_.created 'EEE MMM d yyyy h:mm a zz' requestLocaleId requestZoneId}}</span>
+														<span class="varBaseModel{{pk}}Created " title="{{formatZonedDateTime baseModel_.created 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime baseModel_.created 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -436,7 +612,7 @@
 
 {{#*inline "inputModified"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varBaseModel{{pk}}Modified " title="{{formatZonedDateTime baseModel_.modified 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' requestLocaleId requestZoneId}}">{{formatZonedDateTime baseModel_.modified 'EEE MMM d yyyy h:mm a zz' requestLocaleId requestZoneId}}</span>
+														<span class="varBaseModel{{pk}}Modified " title="{{formatZonedDateTime baseModel_.modified 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime baseModel_.modified 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
 	{{/eq}}
 {{/inline}}
 

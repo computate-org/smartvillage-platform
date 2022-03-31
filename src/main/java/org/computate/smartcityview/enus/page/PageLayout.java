@@ -45,12 +45,24 @@ public class PageLayout extends PageLayoutGen<Object> {
 		w.o(siteRequest_.getConfig().getString(ConfigKeys.STATIC_BASE_URL));
 	}
 
-	protected void _authUrl(Wrap<String> w) {
+	protected void _STATIC_BASE_URL(Wrap<String> w) {
+		w.o(siteRequest_.getConfig().getString(ConfigKeys.STATIC_BASE_URL));
+	}
+
+	protected void _SITE_BASE_URL(Wrap<String> w) {
+		w.o(siteRequest_.getConfig().getString(ConfigKeys.SITE_BASE_URL));
+	}
+
+	protected void _SITE_AUTH_URL(Wrap<String> w) {
 		w.o(siteRequest_.getConfig().getString(ConfigKeys.AUTH_URL));
 	}
 
-	protected void _authRealm(Wrap<String> w) {
+	protected void _SITE_AUTH_REALM(Wrap<String> w) {
 		w.o(siteRequest_.getConfig().getString(ConfigKeys.AUTH_REALM));
+	}
+
+	protected void _FONTAWESOME_KIT(Wrap<String> w) {
+		w.o(siteRequest_.getConfig().getString(ConfigKeys.FONTAWESOME_KIT));
 	}
 
 	/**
@@ -143,6 +155,15 @@ public class PageLayout extends PageLayoutGen<Object> {
 	}
 
 	protected void _pagination(JsonObject pagination) {
+	}
+
+	protected void _varsQ(JsonObject vars) {
+	}
+
+	protected void _varsFq(JsonObject vars) {
+	}
+
+	protected void _varsRange(JsonObject vars) {
 	}
 
 	protected void _query(JsonObject query) {

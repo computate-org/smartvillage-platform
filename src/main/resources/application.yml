@@ -62,3 +62,7 @@ ENABLE_IMPORT_DATA: true
 
 # The Auth roles required to be an admin in the site. 
 AUTH_ROLES_ADMIN: ['SiteAdmin']
+# The Auth roles required to add and modify IotNode records. 
+AUTH_ROLES_REQUIRED_IotNode: ['SiteAdmin']
+# The Auth roles required to add and modify SiteUser records. 
+AUTH_ROLES_REQUIRED_SiteUser: ['SiteAdmin']

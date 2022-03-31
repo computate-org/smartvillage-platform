@@ -27,6 +27,7 @@ import org.computate.search.serialize.ComputateZonedDateTimeDeserializer;
 import java.util.Objects;
 import org.computate.search.serialize.ComputateLocalDateSerializer;
 import io.vertx.core.json.JsonArray;
+import java.util.List;
 import org.computate.search.wrap.Wrap;
 import io.vertx.core.AbstractVerticle;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -59,8 +60,22 @@ CREATE TABLE SiteUser(
 	, seeArchived boolean
 	, seeDeleted boolean
 	);
+CREATE TABLE IotNode(
+	pk bigserial primary key
+	, inheritPk text
+	, created timestamp with time zone
+	, archived boolean
+	, deleted boolean
+	, sessionId text
+	, userKey bigint
+	, nodeName text
+	, nodeType text
+	, nodeId text
+	, location point
+	);
 
 DROP TABLE SiteUser CASCADE;
+DROP TABLE IotNode CASCADE;
 */
 
 	protected static final Logger LOG = LoggerFactory.getLogger(MainVerticle.class);

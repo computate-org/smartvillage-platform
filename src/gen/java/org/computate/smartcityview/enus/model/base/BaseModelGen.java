@@ -1653,25 +1653,25 @@ public abstract class BaseModelGen<DEV> extends Object {
 	}
 
 	/////////////
-	// define //
+	// persist //
 	/////////////
 
-	public boolean defineForClass(String var, Object val) {
+	public boolean persistForClass(String var, Object val) {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		if(val != null) {
 			for(String v : vars) {
 				if(o == null)
-					o = defineBaseModel(v, val);
+					o = persistBaseModel(v, val);
 				else if(o instanceof BaseModel) {
 					BaseModel oBaseModel = (BaseModel)o;
-					o = oBaseModel.defineForClass(v, val);
+					o = oBaseModel.persistForClass(v, val);
 				}
 			}
 		}
 		return o != null;
 	}
-	public Object defineBaseModel(String var, Object val) {
+	public Object persistBaseModel(String var, Object val) {
 		switch(var.toLowerCase()) {
 			case "inheritpk":
 				if(val instanceof String)
@@ -2013,6 +2013,42 @@ public abstract class BaseModelGen<DEV> extends Object {
 	public static final String VAR_pageUrlApi = "pageUrlApi";
 	public static final String VAR_id = "id";
 
+	public static List<String> varsQForClass() {
+		return BaseModel.varsQBaseModel(new ArrayList<String>());
+	}
+	public static List<String> varsQBaseModel(List<String> vars) {
+		vars.add(VAR_objectSuggest);
+		vars.add(VAR_objectText);
+		return vars;
+	}
+
+	public static List<String> varsFqForClass() {
+		return BaseModel.varsFqBaseModel(new ArrayList<String>());
+	}
+	public static List<String> varsFqBaseModel(List<String> vars) {
+		vars.add(VAR_pk);
+		vars.add(VAR_inheritPk);
+		vars.add(VAR_created);
+		vars.add(VAR_modified);
+		vars.add(VAR_objectTitle);
+		vars.add(VAR_objectId);
+		vars.add(VAR_pageUrlId);
+		vars.add(VAR_pageUrlPk);
+		vars.add(VAR_pageUrlApi);
+		vars.add(VAR_id);
+		return vars;
+	}
+
+	public static List<String> varsRangeForClass() {
+		return BaseModel.varsRangeBaseModel(new ArrayList<String>());
+	}
+	public static List<String> varsRangeBaseModel(List<String> vars) {
+		vars.add(VAR_pk);
+		vars.add(VAR_created);
+		vars.add(VAR_modified);
+		return vars;
+	}
+
 	public static final String DISPLAY_NAME_siteRequest_ = "";
 	public static final String DISPLAY_NAME_pk = "primary key";
 	public static final String DISPLAY_NAME_inheritPk = "";
@@ -2087,6 +2123,183 @@ public abstract class BaseModelGen<DEV> extends Object {
 			return DISPLAY_NAME_id;
 		default:
 			return null;
+		}
+	}
+
+	public static String descriptionBaseModel(String var) {
+		switch(var) {
+		case VAR_siteRequest_:
+			return "The current request object";
+		case VAR_pk:
+			return "The primary key of this object in the database";
+		case VAR_inheritPk:
+			return "An optional inherited primary key from a legacy system for this object in the database";
+		case VAR_modified:
+			return "A modified timestamp for this record in the database";
+		case VAR_archived:
+			return "For archiving this record";
+		case VAR_deleted:
+			return "For deleting this record";
+		case VAR_classCanonicalName:
+			return "the canonical name of this Java class";
+		case VAR_classSimpleName:
+			return "The simple name of this Java class";
+		case VAR_classCanonicalNames:
+			return "All the inherited canonical names of this Java class";
+		case VAR_sessionId:
+			return "The session ID of the user that created this object";
+		case VAR_userKey:
+			return "The primary key of the user that created this record";
+		case VAR_saves:
+			return "A list of fields that are saved for this record in the database";
+		case VAR_objectTitle:
+			return "The title of this object";
+		case VAR_objectId:
+			return "A URL friendly unique ID for this object";
+		case VAR_objectNameVar:
+			return "The var that identifies this type of object in the API";
+		case VAR_objectSuggest:
+			return "The indexed field in the search engine for this record while using autosuggest";
+		case VAR_objectText:
+			return "The full text search field in the search engine for this record while using autosuggest";
+		case VAR_pageUrlId:
+			return "The link by name for this object in the UI";
+		case VAR_pageUrlPk:
+			return "The link by primary key for this object in the UI";
+		case VAR_pageUrlApi:
+			return "The link to this object in the API";
+		case VAR_id:
+			return "The unique key for this record in the search engine";
+			default:
+				return null;
+		}
+	}
+
+	public static String classSimpleNameBaseModel(String var) {
+		switch(var) {
+		case VAR_siteRequest_:
+			return "SiteRequestEnUS";
+		case VAR_pk:
+			return "Long";
+		case VAR_inheritPk:
+			return "String";
+		case VAR_created:
+			return "ZonedDateTime";
+		case VAR_modified:
+			return "ZonedDateTime";
+		case VAR_archived:
+			return "Boolean";
+		case VAR_deleted:
+			return "Boolean";
+		case VAR_classCanonicalName:
+			return "String";
+		case VAR_classSimpleName:
+			return "String";
+		case VAR_classCanonicalNames:
+			return "List";
+		case VAR_sessionId:
+			return "String";
+		case VAR_userKey:
+			return "Long";
+		case VAR_saves:
+			return "List";
+		case VAR_objectTitle:
+			return "String";
+		case VAR_objectId:
+			return "String";
+		case VAR_objectNameVar:
+			return "String";
+		case VAR_objectSuggest:
+			return "String";
+		case VAR_objectText:
+			return "String";
+		case VAR_pageUrlId:
+			return "String";
+		case VAR_pageUrlPk:
+			return "String";
+		case VAR_pageUrlApi:
+			return "String";
+		case VAR_id:
+			return "String";
+			default:
+				return null;
+		}
+	}
+
+	public static Integer htmlColumnBaseModel(String var) {
+		switch(var) {
+		case VAR_created:
+			return 2;
+		case VAR_objectTitle:
+			return 2;
+			default:
+				return null;
+		}
+	}
+
+	public static Integer htmlRowBaseModel(String var) {
+		switch(var) {
+		case VAR_pk:
+			return 1;
+		case VAR_created:
+			return 1;
+		case VAR_modified:
+			return 1;
+		case VAR_archived:
+			return 2;
+		case VAR_deleted:
+			return 2;
+		case VAR_objectId:
+			return 1;
+			default:
+				return null;
+		}
+	}
+
+	public static Integer htmlCellBaseModel(String var) {
+		switch(var) {
+		case VAR_pk:
+			return 1;
+		case VAR_created:
+			return 2;
+		case VAR_modified:
+			return 3;
+		case VAR_archived:
+			return 1;
+		case VAR_deleted:
+			return 2;
+		case VAR_objectId:
+			return 4;
+			default:
+				return null;
+		}
+	}
+
+	public static Integer lengthMinBaseModel(String var) {
+		switch(var) {
+			default:
+				return null;
+		}
+	}
+
+	public static Integer lengthMaxBaseModel(String var) {
+		switch(var) {
+			default:
+				return null;
+		}
+	}
+
+	public static Integer maxBaseModel(String var) {
+		switch(var) {
+			default:
+				return null;
+		}
+	}
+
+	public static Integer minBaseModel(String var) {
+		switch(var) {
+			default:
+				return null;
 		}
 	}
 }

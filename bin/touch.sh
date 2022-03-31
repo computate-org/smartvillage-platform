@@ -13,6 +13,7 @@ touch /home/ctate/.local/src/smart-city-view/src/main/java/org/computate/smartci
 touch /home/ctate/.local/src/smart-city-view/src/main/java/org/computate/smartcityview/enus/vertx/WorkerVerticle.java
 touch /home/ctate/.local/src/smart-city-view/src/main/java/org/computate/smartcityview/enus/model/base/BaseModel.java
 touch /home/ctate/.local/src/smart-city-view/src/main/java/org/computate/smartcityview/enus/model/user/SiteUser.java
+touch /home/ctate/.local/src/smart-city-view/src/main/java/org/computate/smartcityview/enus/model/iotnode/IotNode.java
 touch /home/ctate/.local/src/smart-city-view/src/main/resources/application.yml
 touch /home/ctate/.local/src/smart-city-view/src/main/resources/log4j.properties
 touch /home/ctate/.local/src/smart-city-view/src/main/resources/log4j.xml

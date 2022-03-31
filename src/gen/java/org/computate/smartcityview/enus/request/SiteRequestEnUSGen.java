@@ -22,6 +22,7 @@ import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.vertx.core.json.JsonObject;
 import java.lang.String;
+import org.computate.smartcityview.enus.model.base.BaseModel;
 import java.math.RoundingMode;
 import org.slf4j.Logger;
 import java.math.MathContext;
@@ -1342,6 +1343,10 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 		for(String v : vars) {
 			if(o == null)
 				o = obtainSiteRequestEnUS(v);
+			else if(o instanceof BaseModel) {
+				BaseModel baseModel = (BaseModel)o;
+				o = baseModel.obtainForClass(v);
+			}
 			else if(o instanceof Map) {
 				Map<?, ?> map = (Map<?, ?>)o;
 				o = map.get(v);
@@ -1421,6 +1426,10 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 		for(String v : vars) {
 			if(o == null)
 				o = relateSiteRequestEnUS(v, val);
+			else if(o instanceof BaseModel) {
+				BaseModel baseModel = (BaseModel)o;
+				o = baseModel.relateForClass(v, val);
+			}
 		}
 		return o != null;
 	}

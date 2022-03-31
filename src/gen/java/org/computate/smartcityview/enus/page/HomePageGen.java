@@ -28,6 +28,7 @@ import org.computate.search.serialize.ComputateZonedDateTimeDeserializer;
 import java.util.Objects;
 import org.computate.search.serialize.ComputateLocalDateSerializer;
 import io.vertx.core.json.JsonArray;
+import java.util.List;
 import org.computate.search.wrap.Wrap;
 import org.apache.commons.lang3.math.NumberUtils;
 import java.util.Optional;
@@ -46,27 +47,65 @@ public abstract class HomePageGen<DEV> extends PageLayout {
 	// initDeep //
 	//////////////
 
-	public HomePage initDeepHomePage(SiteRequestEnUS siteRequest_) {
-		initDeepHomePage();
-		return (HomePage)this;
+	public Future<Void> promiseDeepHomePage(SiteRequestEnUS siteRequest_) {
+		setSiteRequest_(siteRequest_);
+		return promiseDeepHomePage();
 	}
 
-	public void initDeepHomePage() {
-		initHomePage();
+	public Future<Void> promiseDeepHomePage() {
+		Promise<Void> promise = Promise.promise();
+		Promise<Void> promise2 = Promise.promise();
+		promiseHomePage(promise2);
+		promise2.future().onSuccess(a -> {
+			super.promiseDeepPageLayout(siteRequest_).onSuccess(b -> {
+				promise.complete();
+			}).onFailure(ex -> {
+				promise.fail(ex);
+			});
+		}).onFailure(ex -> {
+			promise.fail(ex);
+		});
+		return promise.future();
 	}
 
-	public void initHomePage() {
+	public Future<Void> promiseHomePage(Promise<Void> promise) {
+		Future.future(a -> a.complete()).compose(a -> {
+			Promise<Void> promise2 = Promise.promise();
+			try {
+				promise2.complete();
+			} catch(Exception ex) {
+				promise2.fail(ex);
+			}
+			return promise2.future();
+		}).onSuccess(a -> {
+			promise.complete();
+		}).onFailure(ex -> {
+			promise.fail(ex);
+		});
+		return promise.future();
 	}
 
-	public void initDeepForClass(SiteRequestEnUS siteRequest_) {
-		initDeepHomePage(siteRequest_);
+	@Override public Future<Void> promiseDeepForClass(SiteRequestEnUS siteRequest_) {
+		return promiseDeepHomePage(siteRequest_);
+	}
+
+	/////////////////
+	// siteRequest //
+	/////////////////
+
+	public void siteRequestHomePage(SiteRequestEnUS siteRequest_) {
+			super.siteRequestPageLayout(siteRequest_);
+	}
+
+	public void siteRequestForClass(SiteRequestEnUS siteRequest_) {
+		siteRequestHomePage(siteRequest_);
 	}
 
 	/////////////
 	// obtain //
 	/////////////
 
-	public Object obtainForClass(String var) {
+	@Override public Object obtainForClass(String var) {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
@@ -87,7 +126,7 @@ public abstract class HomePageGen<DEV> extends PageLayout {
 		HomePage oHomePage = (HomePage)this;
 		switch(var) {
 			default:
-				return null;
+				return super.obtainPageLayout(var);
 		}
 	}
 
@@ -95,7 +134,7 @@ public abstract class HomePageGen<DEV> extends PageLayout {
 	// relate //
 	///////////////
 
-	public boolean relateForClass(String var, Object val) {
+	@Override public boolean relateForClass(String var, Object val) {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
@@ -112,7 +151,7 @@ public abstract class HomePageGen<DEV> extends PageLayout {
 		HomePage oHomePage = (HomePage)this;
 		switch(var) {
 			default:
-				return null;
+				return super.relatePageLayout(var, val);
 		}
 	}
 
@@ -126,7 +165,7 @@ public abstract class HomePageGen<DEV> extends PageLayout {
 	public static Object staticSetHomePage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
 			default:
-				return null;
+				return PageLayout.staticSetPageLayout(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -140,7 +179,7 @@ public abstract class HomePageGen<DEV> extends PageLayout {
 	public static Object staticSearchHomePage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
 			default:
-				return null;
+				return PageLayout.staticSearchPageLayout(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -154,7 +193,7 @@ public abstract class HomePageGen<DEV> extends PageLayout {
 	public static String staticSearchStrHomePage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
 			default:
-				return null;
+				return PageLayout.staticSearchStrPageLayout(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -168,7 +207,7 @@ public abstract class HomePageGen<DEV> extends PageLayout {
 	public static String staticSearchFqHomePage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
 			default:
-				return null;
+				return PageLayout.staticSearchFqPageLayout(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -178,6 +217,7 @@ public abstract class HomePageGen<DEV> extends PageLayout {
 
 	@Override public String toString() {
 		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
 		return sb.toString();
 	}
 
@@ -189,7 +229,7 @@ public abstract class HomePageGen<DEV> extends PageLayout {
 	public static String displayNameHomePage(String var) {
 		switch(var) {
 		default:
-			return null;
+			return PageLayout.displayNamePageLayout(var);
 		}
 	}
 }

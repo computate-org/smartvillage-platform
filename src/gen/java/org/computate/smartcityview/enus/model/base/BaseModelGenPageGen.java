@@ -3,6 +3,7 @@ package org.computate.smartcityview.enus.model.base;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Arrays;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import org.computate.search.response.solr.SolrResponse.FacetCounts;
 import org.slf4j.LoggerFactory;
 import org.computate.smartcityview.enus.request.SiteRequestEnUS;
 import org.computate.smartcityview.enus.config.ConfigKeys;
@@ -31,6 +32,7 @@ import java.util.Objects;
 import org.computate.search.serialize.ComputateLocalDateSerializer;
 import org.computate.vertx.search.list.SearchList;
 import io.vertx.core.json.JsonArray;
+import java.util.List;
 import org.computate.search.wrap.Wrap;
 import org.apache.commons.lang3.math.NumberUtils;
 import java.util.Optional;
@@ -83,6 +85,121 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 		return (BaseModelGenPage)this;
 	}
 
+	//////////////////
+	// pageResponse //
+	//////////////////
+
+	/**	 The entity pageResponse
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String pageResponse;
+
+	/**	<br> The entity pageResponse
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartcityview.enus.model.base.BaseModelGenPage&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_enUS_indexed_string:pageResponse">Find the entity pageResponse in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _pageResponse(Wrap<String> w);
+
+	public String getPageResponse() {
+		return pageResponse;
+	}
+	public void setPageResponse(String o) {
+		this.pageResponse = BaseModelGenPage.staticSetPageResponse(siteRequest_, o);
+	}
+	public static String staticSetPageResponse(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected BaseModelGenPage pageResponseInit() {
+		Wrap<String> pageResponseWrap = new Wrap<String>().var("pageResponse");
+		if(pageResponse == null) {
+			_pageResponse(pageResponseWrap);
+			setPageResponse(pageResponseWrap.o);
+		}
+		return (BaseModelGenPage)this;
+	}
+
+	public static String staticSearchPageResponse(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrPageResponse(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqPageResponse(SiteRequestEnUS siteRequest_, String o) {
+		return BaseModelGenPage.staticSearchStrPageResponse(siteRequest_, BaseModelGenPage.staticSearchPageResponse(siteRequest_, BaseModelGenPage.staticSetPageResponse(siteRequest_, o)));
+	}
+
+	//////////////////////
+	// defaultPivotVars //
+	//////////////////////
+
+	/**	 The entity defaultPivotVars
+	 *	 It is constructed before being initialized with the constructor by default. 
+	 */
+	@JsonProperty
+	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
+	@JsonInclude(Include.NON_NULL)
+	protected List<String> defaultPivotVars = new ArrayList<String>();
+
+	/**	<br> The entity defaultPivotVars
+	 *  It is constructed before being initialized with the constructor by default. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartcityview.enus.model.base.BaseModelGenPage&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_enUS_indexed_string:defaultPivotVars">Find the entity defaultPivotVars in Solr</a>
+	 * <br>
+	 * @param l is the entity already constructed. 
+	 **/
+	protected abstract void _defaultPivotVars(List<String> l);
+
+	public List<String> getDefaultPivotVars() {
+		return defaultPivotVars;
+	}
+
+	public void setDefaultPivotVars(List<String> defaultPivotVars) {
+		this.defaultPivotVars = defaultPivotVars;
+	}
+	public static String staticSetDefaultPivotVars(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	public BaseModelGenPage addDefaultPivotVars(String...objets) {
+		for(String o : objets) {
+			addDefaultPivotVars(o);
+		}
+		return (BaseModelGenPage)this;
+	}
+	public BaseModelGenPage addDefaultPivotVars(String o) {
+		if(o != null)
+			this.defaultPivotVars.add(o);
+		return (BaseModelGenPage)this;
+	}
+	@JsonIgnore
+	public void setDefaultPivotVars(JsonArray objets) {
+		defaultPivotVars.clear();
+		for(int i = 0; i < objets.size(); i++) {
+			String o = objets.getString(i);
+			addDefaultPivotVars(o);
+		}
+	}
+	protected BaseModelGenPage defaultPivotVarsInit() {
+		_defaultPivotVars(defaultPivotVars);
+		return (BaseModelGenPage)this;
+	}
+
+	public static String staticSearchDefaultPivotVars(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrDefaultPivotVars(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqDefaultPivotVars(SiteRequestEnUS siteRequest_, String o) {
+		return BaseModelGenPage.staticSearchStrDefaultPivotVars(siteRequest_, BaseModelGenPage.staticSearchDefaultPivotVars(siteRequest_, BaseModelGenPage.staticSetDefaultPivotVars(siteRequest_, o)));
+	}
+
 	///////////////////
 	// listBaseModel //
 	///////////////////
@@ -113,6 +230,44 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 	}
 	protected BaseModelGenPage listBaseModelInit() {
 		_listBaseModel(listBaseModel);
+		return (BaseModelGenPage)this;
+	}
+
+	/////////////////
+	// facetCounts //
+	/////////////////
+
+	/**	 The entity facetCounts
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected FacetCounts facetCounts;
+
+	/**	<br> The entity facetCounts
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartcityview.enus.model.base.BaseModelGenPage&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_enUS_indexed_string:facetCounts">Find the entity facetCounts in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _facetCounts(Wrap<FacetCounts> w);
+
+	public FacetCounts getFacetCounts() {
+		return facetCounts;
+	}
+
+	public void setFacetCounts(FacetCounts facetCounts) {
+		this.facetCounts = facetCounts;
+	}
+	public static FacetCounts staticSetFacetCounts(SiteRequestEnUS siteRequest_, String o) {
+		return null;
+	}
+	protected BaseModelGenPage facetCountsInit() {
+		Wrap<FacetCounts> facetCountsWrap = new Wrap<FacetCounts>().var("facetCounts");
+		if(facetCounts == null) {
+			_facetCounts(facetCountsWrap);
+			setFacetCounts(facetCountsWrap.o);
+		}
 		return (BaseModelGenPage)this;
 	}
 
@@ -241,7 +396,10 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 			Promise<Void> promise2 = Promise.promise();
 			try {
 				searchListBaseModel_Init();
+				pageResponseInit();
+				defaultPivotVarsInit();
 				listBaseModelInit();
+				facetCountsInit();
 				baseModelCountInit();
 				baseModel_Init();
 				promise2.complete();
@@ -299,8 +457,14 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 		switch(var) {
 			case "searchListBaseModel_":
 				return oBaseModelGenPage.searchListBaseModel_;
+			case "pageResponse":
+				return oBaseModelGenPage.pageResponse;
+			case "defaultPivotVars":
+				return oBaseModelGenPage.defaultPivotVars;
 			case "listBaseModel":
 				return oBaseModelGenPage.listBaseModel;
+			case "facetCounts":
+				return oBaseModelGenPage.facetCounts;
 			case "baseModelCount":
 				return oBaseModelGenPage.baseModelCount;
 			case "baseModel_":
@@ -344,6 +508,10 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 	}
 	public static Object staticSetBaseModelGenPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "pageResponse":
+			return BaseModelGenPage.staticSetPageResponse(siteRequest_, o);
+		case "defaultPivotVars":
+			return BaseModelGenPage.staticSetDefaultPivotVars(siteRequest_, o);
 		case "baseModelCount":
 			return BaseModelGenPage.staticSetBaseModelCount(siteRequest_, o);
 			default:
@@ -360,6 +528,10 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 	}
 	public static Object staticSearchBaseModelGenPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "pageResponse":
+			return BaseModelGenPage.staticSearchPageResponse(siteRequest_, (String)o);
+		case "defaultPivotVars":
+			return BaseModelGenPage.staticSearchDefaultPivotVars(siteRequest_, (String)o);
 		case "baseModelCount":
 			return BaseModelGenPage.staticSearchBaseModelCount(siteRequest_, (Integer)o);
 			default:
@@ -376,6 +548,10 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 	}
 	public static String staticSearchStrBaseModelGenPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "pageResponse":
+			return BaseModelGenPage.staticSearchStrPageResponse(siteRequest_, (String)o);
+		case "defaultPivotVars":
+			return BaseModelGenPage.staticSearchStrDefaultPivotVars(siteRequest_, (String)o);
 		case "baseModelCount":
 			return BaseModelGenPage.staticSearchStrBaseModelCount(siteRequest_, (Integer)o);
 			default:
@@ -392,6 +568,10 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 	}
 	public static String staticSearchFqBaseModelGenPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "pageResponse":
+			return BaseModelGenPage.staticSearchFqPageResponse(siteRequest_, o);
+		case "defaultPivotVars":
+			return BaseModelGenPage.staticSearchFqDefaultPivotVars(siteRequest_, o);
 		case "baseModelCount":
 			return BaseModelGenPage.staticSearchFqBaseModelCount(siteRequest_, o);
 			default:
@@ -410,12 +590,18 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 	}
 
 	public static final String VAR_searchListBaseModel_ = "searchListBaseModel_";
+	public static final String VAR_pageResponse = "pageResponse";
+	public static final String VAR_defaultPivotVars = "defaultPivotVars";
 	public static final String VAR_listBaseModel = "listBaseModel";
+	public static final String VAR_facetCounts = "facetCounts";
 	public static final String VAR_baseModelCount = "baseModelCount";
 	public static final String VAR_baseModel_ = "baseModel_";
 
 	public static final String DISPLAY_NAME_searchListBaseModel_ = "";
+	public static final String DISPLAY_NAME_pageResponse = "";
+	public static final String DISPLAY_NAME_defaultPivotVars = "";
 	public static final String DISPLAY_NAME_listBaseModel = "";
+	public static final String DISPLAY_NAME_facetCounts = "";
 	public static final String DISPLAY_NAME_baseModelCount = "";
 	public static final String DISPLAY_NAME_baseModel_ = "";
 
@@ -426,8 +612,14 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 		switch(var) {
 		case VAR_searchListBaseModel_:
 			return DISPLAY_NAME_searchListBaseModel_;
+		case VAR_pageResponse:
+			return DISPLAY_NAME_pageResponse;
+		case VAR_defaultPivotVars:
+			return DISPLAY_NAME_defaultPivotVars;
 		case VAR_listBaseModel:
 			return DISPLAY_NAME_listBaseModel;
+		case VAR_facetCounts:
+			return DISPLAY_NAME_facetCounts;
 		case VAR_baseModelCount:
 			return DISPLAY_NAME_baseModelCount;
 		case VAR_baseModel_:

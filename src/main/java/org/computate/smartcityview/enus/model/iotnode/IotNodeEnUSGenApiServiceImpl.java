@@ -1,4 +1,4 @@
-package org.computate.smartcityview.enus.model.user;
+package org.computate.smartcityview.enus.model.iotnode;
 
 import org.computate.smartcityview.enus.request.SiteRequestEnUS;
 import org.computate.smartcityview.enus.model.user.SiteUser;
@@ -91,36 +91,55 @@ import org.computate.vertx.search.list.SearchList;
 /**
  * Translate: false
  **/
-public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements SiteUserEnUSGenApiService {
+public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements IotNodeEnUSGenApiService {
 
-	protected static final Logger LOG = LoggerFactory.getLogger(SiteUserEnUSGenApiServiceImpl.class);
+	protected static final Logger LOG = LoggerFactory.getLogger(IotNodeEnUSGenApiServiceImpl.class);
 
-	public SiteUserEnUSGenApiServiceImpl(EventBus eventBus, JsonObject config, WorkerExecutor workerExecutor, PgPool pgPool, WebClient webClient, OAuth2Auth oauth2AuthenticationProvider, AuthorizationProvider authorizationProvider, HandlebarsTemplateEngine templateEngine) {
+	public IotNodeEnUSGenApiServiceImpl(EventBus eventBus, JsonObject config, WorkerExecutor workerExecutor, PgPool pgPool, WebClient webClient, OAuth2Auth oauth2AuthenticationProvider, AuthorizationProvider authorizationProvider, HandlebarsTemplateEngine templateEngine) {
 		super(eventBus, config, workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine);
 	}
 
 	// Search //
 
 	@Override
-	public void searchSiteUser(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
+	public void searchIotNode(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smart-city-view-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 			try {
-				{
-					searchSiteUserList(siteRequest, false, true, false).onSuccess(listSiteUser -> {
-						response200SearchSiteUser(listSiteUser).onSuccess(response -> {
+
+				List<String> roles = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_REQUIRED + "_IotNode")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
+				List<String> roleReads = Arrays.asList("");
+				if(
+						!CollectionUtils.containsAny(siteRequest.getUserResourceRoles(), roles)
+						&& !CollectionUtils.containsAny(siteRequest.getUserRealmRoles(), roles)
+						&& !CollectionUtils.containsAny(siteRequest.getUserResourceRoles(), roleReads)
+						&& !CollectionUtils.containsAny(siteRequest.getUserRealmRoles(), roleReads)
+						) {
+					eventHandler.handle(Future.succeededFuture(
+						new ServiceResponse(401, "UNAUTHORIZED", 
+							Buffer.buffer().appendString(
+								new JsonObject()
+									.put("errorCode", "401")
+									.put("errorMessage", "roles required: " + String.join(", ", roles))
+									.encodePrettily()
+								), MultiMap.caseInsensitiveMultiMap()
+						)
+					));
+				} else {
+					searchIotNodeList(siteRequest, false, true, false).onSuccess(listIotNode -> {
+						response200SearchIotNode(listIotNode).onSuccess(response -> {
 							eventHandler.handle(Future.succeededFuture(response));
-							LOG.debug(String.format("searchSiteUser succeeded. "));
+							LOG.debug(String.format("searchIotNode succeeded. "));
 						}).onFailure(ex -> {
-							LOG.error(String.format("searchSiteUser failed. "), ex);
+							LOG.error(String.format("searchIotNode failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
 					}).onFailure(ex -> {
-						LOG.error(String.format("searchSiteUser failed. "), ex);
+						LOG.error(String.format("searchIotNode failed. "), ex);
 						error(siteRequest, eventHandler, ex);
 					});
 				}
 			} catch(Exception ex) {
-				LOG.error(String.format("searchSiteUser failed. "), ex);
+				LOG.error(String.format("searchIotNode failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		}).onFailure(ex -> {
@@ -128,31 +147,31 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 				try {
 					eventHandler.handle(Future.succeededFuture(new ServiceResponse(302, "Found", null, MultiMap.caseInsensitiveMultiMap().add(HttpHeaders.LOCATION, "/logout?redirect_uri=" + URLEncoder.encode(serviceRequest.getExtra().getString("uri"), "UTF-8")))));
 				} catch(Exception ex2) {
-					LOG.error(String.format("searchSiteUser failed. ", ex2));
+					LOG.error(String.format("searchIotNode failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
 			} else {
-				LOG.error(String.format("searchSiteUser failed. "), ex);
+				LOG.error(String.format("searchIotNode failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		});
 	}
 
 
-	public Future<ServiceResponse> response200SearchSiteUser(SearchList<SiteUser> listSiteUser) {
+	public Future<ServiceResponse> response200SearchIotNode(SearchList<IotNode> listIotNode) {
 		Promise<ServiceResponse> promise = Promise.promise();
 		try {
-			SiteRequestEnUS siteRequest = listSiteUser.getSiteRequest_(SiteRequestEnUS.class);
-			SolrResponse responseSearch = listSiteUser.getQueryResponse();
-			List<SolrResponse.Doc> solrDocuments = listSiteUser.getQueryResponse().getResponse().getDocs();
+			SiteRequestEnUS siteRequest = listIotNode.getSiteRequest_(SiteRequestEnUS.class);
+			SolrResponse responseSearch = listIotNode.getQueryResponse();
+			List<SolrResponse.Doc> solrDocuments = listIotNode.getQueryResponse().getResponse().getDocs();
 			Long searchInMillis = Long.valueOf(responseSearch.getResponseHeader().getqTime());
-			Long startNum = listSiteUser.getRequest().getStart();
+			Long startNum = listIotNode.getRequest().getStart();
 			Long foundNum = responseSearch.getResponse().getNumFound();
 			Integer returnedNum = responseSearch.getResponse().getDocs().size();
 			String searchTime = String.format("%d.%03d sec", TimeUnit.MILLISECONDS.toSeconds(searchInMillis), TimeUnit.MILLISECONDS.toMillis(searchInMillis) - TimeUnit.SECONDS.toMillis(TimeUnit.MILLISECONDS.toSeconds(searchInMillis)));
 			String nextCursorMark = responseSearch.getNextCursorMark();
 			String exceptionSearch = Optional.ofNullable(responseSearch.getError()).map(error -> error.getMsg()).orElse(null);
-			List<String> fls = listSiteUser.getRequest().getFields();
+			List<String> fls = listIotNode.getRequest().getFields();
 
 			JsonObject json = new JsonObject();
 			json.put("startNum", startNum);
@@ -165,14 +184,14 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 				json.put("nextCursorMark", nextCursorMark);
 			}
 			JsonArray l = new JsonArray();
-			listSiteUser.getList().stream().forEach(o -> {
+			listIotNode.getList().stream().forEach(o -> {
 				JsonObject json2 = JsonObject.mapFrom(o);
 				if(fls.size() > 0) {
 					Set<String> fieldNames = new HashSet<String>();
 					for(String fieldName : json2.fieldNames()) {
-						String v = SiteUser.varIndexedSiteUser(fieldName);
+						String v = IotNode.varIndexedIotNode(fieldName);
 						if(v != null)
-							fieldNames.add(SiteUser.varIndexedSiteUser(fieldName));
+							fieldNames.add(IotNode.varIndexedIotNode(fieldName));
 					}
 					if(fls.size() == 1 && fls.stream().findFirst().orElse(null).equals("saves_docvalues_strings")) {
 						fieldNames.removeAll(Optional.ofNullable(json2.getJsonArray("saves_docvalues_strings")).orElse(new JsonArray()).stream().map(s -> s.toString()).collect(Collectors.toList()));
@@ -234,7 +253,7 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 					}
 					JsonArray pivotArray = new JsonArray();
 					facetPivotJson.put(StringUtils.join(entityVars, ","), pivotArray);
-					responsePivotSearchSiteUser(pivot.getPivotList(), pivotArray);
+					responsePivotSearchIotNode(pivot.getPivotList(), pivotArray);
 				}
 			}
 			if(exceptionSearch != null) {
@@ -242,12 +261,12 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 			}
 			promise.complete(ServiceResponse.completedWithJson(Buffer.buffer(Optional.ofNullable(json).orElse(new JsonObject()).encodePrettily())));
 		} catch(Exception ex) {
-			LOG.error(String.format("response200SearchSiteUser failed. "), ex);
+			LOG.error(String.format("response200SearchIotNode failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
 	}
-	public void responsePivotSearchSiteUser(List<SolrResponse.Pivot> pivots, JsonArray pivotArray) {
+	public void responsePivotSearchIotNode(List<SolrResponse.Pivot> pivots, JsonArray pivotArray) {
 		for(SolrResponse.Pivot pivotField : pivots) {
 			String entityIndexed = pivotField.getField();
 			String entityVar = StringUtils.substringBefore(entityIndexed, "_docvalues_");
@@ -275,7 +294,7 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 			if(pivotFields2 != null) {
 				JsonArray pivotArray2 = new JsonArray();
 				pivotJson.put("pivot", pivotArray2);
-				responsePivotSearchSiteUser(pivotFields2, pivotArray2);
+				responsePivotSearchIotNode(pivotFields2, pivotArray2);
 			}
 		}
 	}
@@ -283,16 +302,32 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 	// PATCH //
 
 	@Override
-	public void patchSiteUser(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
-		LOG.debug(String.format("patchSiteUser started. "));
+	public void patchIotNode(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
+		LOG.debug(String.format("patchIotNode started. "));
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smart-city-view-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 			try {
 				siteRequest.setJsonObject(body);
-				{
-					searchSiteUserList(siteRequest, false, true, true).onSuccess(listSiteUser -> {
+
+				List<String> roles = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_REQUIRED + "_IotNode")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
+				if(
+						!CollectionUtils.containsAny(siteRequest.getUserResourceRoles(), roles)
+						&& !CollectionUtils.containsAny(siteRequest.getUserRealmRoles(), roles)
+						) {
+					eventHandler.handle(Future.succeededFuture(
+						new ServiceResponse(401, "UNAUTHORIZED", 
+							Buffer.buffer().appendString(
+								new JsonObject()
+									.put("errorCode", "401")
+									.put("errorMessage", "roles required: " + String.join(", ", roles))
+									.encodePrettily()
+								), MultiMap.caseInsensitiveMultiMap()
+						)
+					));
+				} else {
+					searchIotNodeList(siteRequest, false, true, true).onSuccess(listIotNode -> {
 						try {
 							List<String> roles2 = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_ADMIN)).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
-							if(listSiteUser.getQueryResponse().getResponse().getNumFound() > 1
+							if(listIotNode.getQueryResponse().getResponse().getNumFound() > 1
 									&& !CollectionUtils.containsAny(siteRequest.getUserResourceRoles(), roles2)
 									&& !CollectionUtils.containsAny(siteRequest.getUserRealmRoles(), roles2)
 									) {
@@ -302,40 +337,40 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							} else {
 
 								ApiRequest apiRequest = new ApiRequest();
-								apiRequest.setRows(listSiteUser.getRequest().getRows());
-								apiRequest.setNumFound(listSiteUser.getQueryResponse().getResponse().getNumFound());
+								apiRequest.setRows(listIotNode.getRequest().getRows());
+								apiRequest.setNumFound(listIotNode.getQueryResponse().getResponse().getNumFound());
 								apiRequest.setNumPATCH(0L);
 								apiRequest.initDeepApiRequest(siteRequest);
 								siteRequest.setApiRequest_(apiRequest);
 								if(apiRequest.getNumFound() == 1L)
-									apiRequest.setOriginal(listSiteUser.first());
-								apiRequest.setPk(Optional.ofNullable(listSiteUser.first()).map(o2 -> o2.getPk()).orElse(null));
-								eventBus.publish("websocketSiteUser", JsonObject.mapFrom(apiRequest).toString());
+									apiRequest.setOriginal(listIotNode.first());
+								apiRequest.setPk(Optional.ofNullable(listIotNode.first()).map(o2 -> o2.getPk()).orElse(null));
+								eventBus.publish("websocketIotNode", JsonObject.mapFrom(apiRequest).toString());
 
-								listPATCHSiteUser(apiRequest, listSiteUser).onSuccess(e -> {
-									response200PATCHSiteUser(siteRequest).onSuccess(response -> {
-										LOG.debug(String.format("patchSiteUser succeeded. "));
+								listPATCHIotNode(apiRequest, listIotNode).onSuccess(e -> {
+									response200PATCHIotNode(siteRequest).onSuccess(response -> {
+										LOG.debug(String.format("patchIotNode succeeded. "));
 										eventHandler.handle(Future.succeededFuture(response));
 									}).onFailure(ex -> {
-										LOG.error(String.format("patchSiteUser failed. "), ex);
+										LOG.error(String.format("patchIotNode failed. "), ex);
 										error(siteRequest, eventHandler, ex);
 									});
 								}).onFailure(ex -> {
-									LOG.error(String.format("patchSiteUser failed. "), ex);
+									LOG.error(String.format("patchIotNode failed. "), ex);
 									error(siteRequest, eventHandler, ex);
 								});
 							}
 						} catch(Exception ex) {
-							LOG.error(String.format("patchSiteUser failed. "), ex);
+							LOG.error(String.format("patchIotNode failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						}
 					}).onFailure(ex -> {
-						LOG.error(String.format("patchSiteUser failed. "), ex);
+						LOG.error(String.format("patchIotNode failed. "), ex);
 						error(siteRequest, eventHandler, ex);
 					});
 				}
 			} catch(Exception ex) {
-				LOG.error(String.format("patchSiteUser failed. "), ex);
+				LOG.error(String.format("patchIotNode failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		}).onFailure(ex -> {
@@ -343,73 +378,73 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 				try {
 					eventHandler.handle(Future.succeededFuture(new ServiceResponse(302, "Found", null, MultiMap.caseInsensitiveMultiMap().add(HttpHeaders.LOCATION, "/logout?redirect_uri=" + URLEncoder.encode(serviceRequest.getExtra().getString("uri"), "UTF-8")))));
 				} catch(Exception ex2) {
-					LOG.error(String.format("patchSiteUser failed. ", ex2));
+					LOG.error(String.format("patchIotNode failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
 			} else {
-				LOG.error(String.format("patchSiteUser failed. "), ex);
+				LOG.error(String.format("patchIotNode failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		});
 	}
 
 
-	public Future<Void> listPATCHSiteUser(ApiRequest apiRequest, SearchList<SiteUser> listSiteUser) {
+	public Future<Void> listPATCHIotNode(ApiRequest apiRequest, SearchList<IotNode> listIotNode) {
 		Promise<Void> promise = Promise.promise();
 		List<Future> futures = new ArrayList<>();
-		SiteRequestEnUS siteRequest = listSiteUser.getSiteRequest_(SiteRequestEnUS.class);
-		listSiteUser.getList().forEach(o -> {
+		SiteRequestEnUS siteRequest = listIotNode.getSiteRequest_(SiteRequestEnUS.class);
+		listIotNode.getList().forEach(o -> {
 			SiteRequestEnUS siteRequest2 = generateSiteRequest(siteRequest.getUser(), siteRequest.getServiceRequest(), siteRequest.getJsonObject(), SiteRequestEnUS.class);
 			o.setSiteRequest_(siteRequest2);
 			siteRequest2.setApiRequest_(siteRequest.getApiRequest_());
 			futures.add(Future.future(promise1 -> {
-				patchSiteUserFuture(o, false).onSuccess(a -> {
+				patchIotNodeFuture(o, false).onSuccess(a -> {
 					promise1.complete();
 				}).onFailure(ex -> {
-					LOG.error(String.format("listPATCHSiteUser failed. "), ex);
+					LOG.error(String.format("listPATCHIotNode failed. "), ex);
 					promise1.fail(ex);
 				});
 			}));
 		});
 		CompositeFuture.all(futures).onSuccess( a -> {
 			if(apiRequest != null) {
-				apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listSiteUser.getQueryResponse().getResponse().getDocs().size());
+				apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listIotNode.getQueryResponse().getResponse().getDocs().size());
 				if(apiRequest.getNumFound() == 1L)
-					listSiteUser.first().apiRequestSiteUser();
-				eventBus.publish("websocketSiteUser", JsonObject.mapFrom(apiRequest).toString());
+					listIotNode.first().apiRequestIotNode();
+				eventBus.publish("websocketIotNode", JsonObject.mapFrom(apiRequest).toString());
 			}
-			listSiteUser.next().onSuccess(next -> {
+			listIotNode.next().onSuccess(next -> {
 				if(next) {
-					listPATCHSiteUser(apiRequest, listSiteUser).onSuccess(b -> {
+					listPATCHIotNode(apiRequest, listIotNode).onSuccess(b -> {
 						promise.complete();
 					}).onFailure(ex -> {
-						LOG.error(String.format("listPATCHSiteUser failed. "), ex);
+						LOG.error(String.format("listPATCHIotNode failed. "), ex);
 						promise.fail(ex);
 					});
 				} else {
 					promise.complete();
 				}
 			}).onFailure(ex -> {
-				LOG.error(String.format("listPATCHSiteUser failed. "), ex);
+				LOG.error(String.format("listPATCHIotNode failed. "), ex);
 				promise.fail(ex);
 			});
 		}).onFailure(ex -> {
-			LOG.error(String.format("listPATCHSiteUser failed. "), ex);
+			LOG.error(String.format("listPATCHIotNode failed. "), ex);
 			promise.fail(ex);
 		});
 		return promise.future();
 	}
 
 	@Override
-	public void patchSiteUserFuture(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
+	public void patchIotNodeFuture(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smart-city-view-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 			try {
 				siteRequest.setJsonObject(body);
 				serviceRequest.getParams().getJsonObject("query").put("rows", 1);
-				searchSiteUserList(siteRequest, false, true, true).onSuccess(listSiteUser -> {
+				searchIotNodeList(siteRequest, false, true, true).onSuccess(listIotNode -> {
 					try {
-						SiteUser o = listSiteUser.first();
-						if(o != null && listSiteUser.getQueryResponse().getResponse().getNumFound() == 1) {
+						IotNode o = listIotNode.first();
+						if(o != null && listIotNode.getQueryResponse().getResponse().getNumFound() == 1) {
 							ApiRequest apiRequest = new ApiRequest();
 							apiRequest.setRows(1L);
 							apiRequest.setNumFound(1L);
@@ -421,9 +456,9 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							}
 							if(apiRequest.getNumFound() == 1L)
 								apiRequest.setOriginal(o);
-							apiRequest.setPk(Optional.ofNullable(listSiteUser.first()).map(o2 -> o2.getPk()).orElse(null));
-							eventBus.publish("websocketSiteUser", JsonObject.mapFrom(apiRequest).toString());
-							patchSiteUserFuture(o, false).onSuccess(a -> {
+							apiRequest.setPk(Optional.ofNullable(listIotNode.first()).map(o2 -> o2.getPk()).orElse(null));
+							eventBus.publish("websocketIotNode", JsonObject.mapFrom(apiRequest).toString());
+							patchIotNodeFuture(o, false).onSuccess(a -> {
 								eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(new JsonObject().encodePrettily()))));
 							}).onFailure(ex -> {
 								eventHandler.handle(Future.failedFuture(ex));
@@ -432,37 +467,37 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(new JsonObject().encodePrettily()))));
 						}
 					} catch(Exception ex) {
-						LOG.error(String.format("patchSiteUser failed. "), ex);
+						LOG.error(String.format("patchIotNode failed. "), ex);
 						error(siteRequest, eventHandler, ex);
 					}
 				}).onFailure(ex -> {
-					LOG.error(String.format("patchSiteUser failed. "), ex);
+					LOG.error(String.format("patchIotNode failed. "), ex);
 					error(siteRequest, eventHandler, ex);
 				});
 			} catch(Exception ex) {
-				LOG.error(String.format("patchSiteUser failed. "), ex);
+				LOG.error(String.format("patchIotNode failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		}).onFailure(ex -> {
-			LOG.error(String.format("patchSiteUser failed. "), ex);
+			LOG.error(String.format("patchIotNode failed. "), ex);
 			error(null, eventHandler, ex);
 		});
 	}
 
-	public Future<SiteUser> patchSiteUserFuture(SiteUser o, Boolean inheritPk) {
+	public Future<IotNode> patchIotNodeFuture(IotNode o, Boolean inheritPk) {
 		SiteRequestEnUS siteRequest = o.getSiteRequest_();
-		Promise<SiteUser> promise = Promise.promise();
+		Promise<IotNode> promise = Promise.promise();
 
 		try {
 			ApiRequest apiRequest = siteRequest.getApiRequest_();
 			pgPool.withTransaction(sqlConnection -> {
-				Promise<SiteUser> promise1 = Promise.promise();
+				Promise<IotNode> promise1 = Promise.promise();
 				siteRequest.setSqlConnection(sqlConnection);
-				sqlPATCHSiteUser(o, inheritPk).onSuccess(siteUser -> {
-					persistSiteUser(siteUser).onSuccess(c -> {
-						relateSiteUser(siteUser).onSuccess(d -> {
-							indexSiteUser(siteUser).onSuccess(e -> {
-								promise1.complete(siteUser);
+				sqlPATCHIotNode(o, inheritPk).onSuccess(iotNode -> {
+					persistIotNode(iotNode).onSuccess(c -> {
+						relateIotNode(iotNode).onSuccess(d -> {
+							indexIotNode(iotNode).onSuccess(e -> {
+								promise1.complete(iotNode);
 							}).onFailure(ex -> {
 								promise1.fail(ex);
 							});
@@ -481,28 +516,28 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 			}).onFailure(ex -> {
 				siteRequest.setSqlConnection(null);
 				promise.fail(ex);
-			}).compose(siteUser -> {
-				Promise<SiteUser> promise2 = Promise.promise();
-				refreshSiteUser(siteUser).onSuccess(a -> {
-					promise2.complete(siteUser);
+			}).compose(iotNode -> {
+				Promise<IotNode> promise2 = Promise.promise();
+				refreshIotNode(iotNode).onSuccess(a -> {
+					promise2.complete(iotNode);
 				}).onFailure(ex -> {
 					promise2.fail(ex);
 				});
 				return promise2.future();
-			}).onSuccess(siteUser -> {
-				promise.complete(siteUser);
+			}).onSuccess(iotNode -> {
+				promise.complete(iotNode);
 			}).onFailure(ex -> {
 				promise.fail(ex);
 			});
 		} catch(Exception ex) {
-			LOG.error(String.format("patchSiteUserFuture failed. "), ex);
+			LOG.error(String.format("patchIotNodeFuture failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
 	}
 
-	public Future<SiteUser> sqlPATCHSiteUser(SiteUser o, Boolean inheritPk) {
-		Promise<SiteUser> promise = Promise.promise();
+	public Future<IotNode> sqlPATCHIotNode(IotNode o, Boolean inheritPk) {
+		Promise<IotNode> promise = Promise.promise();
 		try {
 			SiteRequestEnUS siteRequest = o.getSiteRequest_();
 			ApiRequest apiRequest = siteRequest.getApiRequest_();
@@ -510,87 +545,23 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 			List<String> classes = Optional.ofNullable(apiRequest).map(r -> r.getClasses()).orElse(new ArrayList<>());
 			SqlConnection sqlConnection = siteRequest.getSqlConnection();
 			Integer num = 1;
-			StringBuilder bSql = new StringBuilder("UPDATE SiteUser SET ");
+			StringBuilder bSql = new StringBuilder("UPDATE IotNode SET ");
 			List<Object> bParams = new ArrayList<Object>();
 			Long pk = o.getPk();
 			JsonObject jsonObject = siteRequest.getJsonObject();
 			Set<String> methodNames = jsonObject.fieldNames();
-			SiteUser o2 = new SiteUser();
+			IotNode o2 = new IotNode();
 			o2.setSiteRequest_(siteRequest);
 			List<Future> futures1 = new ArrayList<>();
 			List<Future> futures2 = new ArrayList<>();
 
 			for(String entityVar : methodNames) {
 				switch(entityVar) {
-					case "setUserId":
-							o2.setUserId(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SiteUser.VAR_userId + "=$" + num);
-							num++;
-							bParams.add(o2.sqlUserId());
-						break;
-					case "setUserName":
-							o2.setUserName(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SiteUser.VAR_userName + "=$" + num);
-							num++;
-							bParams.add(o2.sqlUserName());
-						break;
-					case "setUserEmail":
-							o2.setUserEmail(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SiteUser.VAR_userEmail + "=$" + num);
-							num++;
-							bParams.add(o2.sqlUserEmail());
-						break;
-					case "setUserFirstName":
-							o2.setUserFirstName(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SiteUser.VAR_userFirstName + "=$" + num);
-							num++;
-							bParams.add(o2.sqlUserFirstName());
-						break;
-					case "setUserLastName":
-							o2.setUserLastName(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SiteUser.VAR_userLastName + "=$" + num);
-							num++;
-							bParams.add(o2.sqlUserLastName());
-						break;
-					case "setUserFullName":
-							o2.setUserFullName(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SiteUser.VAR_userFullName + "=$" + num);
-							num++;
-							bParams.add(o2.sqlUserFullName());
-						break;
-					case "setSeeArchived":
-							o2.setSeeArchived(jsonObject.getBoolean(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SiteUser.VAR_seeArchived + "=$" + num);
-							num++;
-							bParams.add(o2.sqlSeeArchived());
-						break;
-					case "setSeeDeleted":
-							o2.setSeeDeleted(jsonObject.getBoolean(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SiteUser.VAR_seeDeleted + "=$" + num);
-							num++;
-							bParams.add(o2.sqlSeeDeleted());
-						break;
 					case "setInheritPk":
 							o2.setInheritPk(jsonObject.getString(entityVar));
 							if(bParams.size() > 0)
 								bSql.append(", ");
-							bSql.append(SiteUser.VAR_inheritPk + "=$" + num);
+							bSql.append(IotNode.VAR_inheritPk + "=$" + num);
 							num++;
 							bParams.add(o2.sqlInheritPk());
 						break;
@@ -598,7 +569,7 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							o2.setArchived(jsonObject.getBoolean(entityVar));
 							if(bParams.size() > 0)
 								bSql.append(", ");
-							bSql.append(SiteUser.VAR_archived + "=$" + num);
+							bSql.append(IotNode.VAR_archived + "=$" + num);
 							num++;
 							bParams.add(o2.sqlArchived());
 						break;
@@ -606,9 +577,41 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							o2.setDeleted(jsonObject.getBoolean(entityVar));
 							if(bParams.size() > 0)
 								bSql.append(", ");
-							bSql.append(SiteUser.VAR_deleted + "=$" + num);
+							bSql.append(IotNode.VAR_deleted + "=$" + num);
 							num++;
 							bParams.add(o2.sqlDeleted());
+						break;
+					case "setNodeName":
+							o2.setNodeName(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(IotNode.VAR_nodeName + "=$" + num);
+							num++;
+							bParams.add(o2.sqlNodeName());
+						break;
+					case "setNodeType":
+							o2.setNodeType(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(IotNode.VAR_nodeType + "=$" + num);
+							num++;
+							bParams.add(o2.sqlNodeType());
+						break;
+					case "setNodeId":
+							o2.setNodeId(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(IotNode.VAR_nodeId + "=$" + num);
+							num++;
+							bParams.add(o2.sqlNodeId());
+						break;
+					case "setLocation":
+							o2.setLocation(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(IotNode.VAR_location + "=$" + num);
+							num++;
+							bParams.add(o2.sqlLocation());
 						break;
 				}
 			}
@@ -622,40 +625,40 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							).onSuccess(b -> {
 						a.handle(Future.succeededFuture());
 					}).onFailure(ex -> {
-						RuntimeException ex2 = new RuntimeException("value SiteUser failed", ex);
-						LOG.error(String.format("relateSiteUser failed. "), ex2);
+						RuntimeException ex2 = new RuntimeException("value IotNode failed", ex);
+						LOG.error(String.format("relateIotNode failed. "), ex2);
 						a.handle(Future.failedFuture(ex2));
 					});
 				}));
 			}
 			CompositeFuture.all(futures1).onSuccess(a -> {
 				CompositeFuture.all(futures2).onSuccess(b -> {
-					SiteUser o3 = new SiteUser();
+					IotNode o3 = new IotNode();
 					o3.setSiteRequest_(o.getSiteRequest_());
 					o3.setPk(pk);
 					promise.complete(o3);
 				}).onFailure(ex -> {
-					LOG.error(String.format("sqlPATCHSiteUser failed. "), ex);
+					LOG.error(String.format("sqlPATCHIotNode failed. "), ex);
 					promise.fail(ex);
 				});
 			}).onFailure(ex -> {
-				LOG.error(String.format("sqlPATCHSiteUser failed. "), ex);
+				LOG.error(String.format("sqlPATCHIotNode failed. "), ex);
 				promise.fail(ex);
 			});
 		} catch(Exception ex) {
-			LOG.error(String.format("sqlPATCHSiteUser failed. "), ex);
+			LOG.error(String.format("sqlPATCHIotNode failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
 	}
 
-	public Future<ServiceResponse> response200PATCHSiteUser(SiteRequestEnUS siteRequest) {
+	public Future<ServiceResponse> response200PATCHIotNode(SiteRequestEnUS siteRequest) {
 		Promise<ServiceResponse> promise = Promise.promise();
 		try {
 			JsonObject json = new JsonObject();
 			promise.complete(ServiceResponse.completedWithJson(Buffer.buffer(Optional.ofNullable(json).orElse(new JsonObject()).encodePrettily())));
 		} catch(Exception ex) {
-			LOG.error(String.format("response200PATCHSiteUser failed. "), ex);
+			LOG.error(String.format("response200PATCHIotNode failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
@@ -664,19 +667,35 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 	// POST //
 
 	@Override
-	public void postSiteUser(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
-		LOG.debug(String.format("postSiteUser started. "));
+	public void postIotNode(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
+		LOG.debug(String.format("postIotNode started. "));
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smart-city-view-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 			try {
 				siteRequest.setJsonObject(body);
-				{
+
+				List<String> roles = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_REQUIRED + "_IotNode")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
+				if(
+						!CollectionUtils.containsAny(siteRequest.getUserResourceRoles(), roles)
+						&& !CollectionUtils.containsAny(siteRequest.getUserRealmRoles(), roles)
+						) {
+					eventHandler.handle(Future.succeededFuture(
+						new ServiceResponse(401, "UNAUTHORIZED", 
+							Buffer.buffer().appendString(
+								new JsonObject()
+									.put("errorCode", "401")
+									.put("errorMessage", "roles required: " + String.join(", ", roles))
+									.encodePrettily()
+								), MultiMap.caseInsensitiveMultiMap()
+						)
+					));
+				} else {
 					ApiRequest apiRequest = new ApiRequest();
 					apiRequest.setRows(1L);
 					apiRequest.setNumFound(1L);
 					apiRequest.setNumPATCH(0L);
 					apiRequest.initDeepApiRequest(siteRequest);
 					siteRequest.setApiRequest_(apiRequest);
-					eventBus.publish("websocketSiteUser", JsonObject.mapFrom(apiRequest).toString());
+					eventBus.publish("websocketIotNode", JsonObject.mapFrom(apiRequest).toString());
 					JsonObject params = new JsonObject();
 					params.put("body", siteRequest.getJsonObject());
 					params.put("path", new JsonObject());
@@ -695,19 +714,19 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 					params.put("query", query);
 					JsonObject context = new JsonObject().put("params", params).put("user", siteRequest.getUserPrincipal());
 					JsonObject json = new JsonObject().put("context", context);
-					eventBus.request("smart-city-view-enUS-SiteUser", json, new DeliveryOptions().addHeader("action", "postSiteUserFuture")).onSuccess(a -> {
+					eventBus.request("smart-city-view-enUS-IotNode", json, new DeliveryOptions().addHeader("action", "postIotNodeFuture")).onSuccess(a -> {
 						JsonObject responseMessage = (JsonObject)a.body();
 						JsonObject responseBody = new JsonObject(Buffer.buffer(JsonUtil.BASE64_DECODER.decode(responseMessage.getString("payload"))));
 						apiRequest.setPk(Long.parseLong(responseBody.getString("pk")));
 						eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(responseBody.encodePrettily()))));
-						LOG.debug(String.format("postSiteUser succeeded. "));
+						LOG.debug(String.format("postIotNode succeeded. "));
 					}).onFailure(ex -> {
-						LOG.error(String.format("postSiteUser failed. "), ex);
+						LOG.error(String.format("postIotNode failed. "), ex);
 						error(siteRequest, eventHandler, ex);
 					});
 				}
 			} catch(Exception ex) {
-				LOG.error(String.format("postSiteUser failed. "), ex);
+				LOG.error(String.format("postIotNode failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		}).onFailure(ex -> {
@@ -715,11 +734,11 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 				try {
 					eventHandler.handle(Future.succeededFuture(new ServiceResponse(302, "Found", null, MultiMap.caseInsensitiveMultiMap().add(HttpHeaders.LOCATION, "/logout?redirect_uri=" + URLEncoder.encode(serviceRequest.getExtra().getString("uri"), "UTF-8")))));
 				} catch(Exception ex2) {
-					LOG.error(String.format("postSiteUser failed. ", ex2));
+					LOG.error(String.format("postIotNode failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
 			} else {
-				LOG.error(String.format("postSiteUser failed. "), ex);
+				LOG.error(String.format("postIotNode failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		});
@@ -727,7 +746,7 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 
 
 	@Override
-	public void postSiteUserFuture(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
+	public void postIotNodeFuture(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smart-city-view-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 			ApiRequest apiRequest = new ApiRequest();
 			apiRequest.setRows(1L);
@@ -738,7 +757,7 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 			if(Optional.ofNullable(serviceRequest.getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getJsonArray("var")).orElse(new JsonArray()).stream().filter(s -> "refresh:false".equals(s)).count() > 0L) {
 				siteRequest.getRequestVars().put( "refresh", "false" );
 			}
-			postSiteUserFuture(siteRequest, false).onSuccess(o -> {
+			postIotNodeFuture(siteRequest, false).onSuccess(o -> {
 				eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(JsonObject.mapFrom(o).encodePrettily()))));
 			}).onFailure(ex -> {
 				eventHandler.handle(Future.failedFuture(ex));
@@ -748,29 +767,29 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 				try {
 					eventHandler.handle(Future.succeededFuture(new ServiceResponse(302, "Found", null, MultiMap.caseInsensitiveMultiMap().add(HttpHeaders.LOCATION, "/logout?redirect_uri=" + URLEncoder.encode(serviceRequest.getExtra().getString("uri"), "UTF-8")))));
 				} catch(Exception ex2) {
-					LOG.error(String.format("postSiteUser failed. ", ex2));
+					LOG.error(String.format("postIotNode failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
 			} else {
-				LOG.error(String.format("postSiteUser failed. "), ex);
+				LOG.error(String.format("postIotNode failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		});
 	}
 
-	public Future<SiteUser> postSiteUserFuture(SiteRequestEnUS siteRequest, Boolean inheritPk) {
-		Promise<SiteUser> promise = Promise.promise();
+	public Future<IotNode> postIotNodeFuture(SiteRequestEnUS siteRequest, Boolean inheritPk) {
+		Promise<IotNode> promise = Promise.promise();
 
 		try {
 			pgPool.withTransaction(sqlConnection -> {
-				Promise<SiteUser> promise1 = Promise.promise();
+				Promise<IotNode> promise1 = Promise.promise();
 				siteRequest.setSqlConnection(sqlConnection);
-				createSiteUser(siteRequest).onSuccess(siteUser -> {
-					sqlPOSTSiteUser(siteUser, inheritPk).onSuccess(b -> {
-						persistSiteUser(siteUser).onSuccess(c -> {
-							relateSiteUser(siteUser).onSuccess(d -> {
-								indexSiteUser(siteUser).onSuccess(e -> {
-									promise1.complete(siteUser);
+				createIotNode(siteRequest).onSuccess(iotNode -> {
+					sqlPOSTIotNode(iotNode, inheritPk).onSuccess(b -> {
+						persistIotNode(iotNode).onSuccess(c -> {
+							relateIotNode(iotNode).onSuccess(d -> {
+								indexIotNode(iotNode).onSuccess(e -> {
+									promise1.complete(iotNode);
 								}).onFailure(ex -> {
 									promise1.fail(ex);
 								});
@@ -792,38 +811,38 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 			}).onFailure(ex -> {
 				siteRequest.setSqlConnection(null);
 				promise.fail(ex);
-			}).compose(siteUser -> {
-				Promise<SiteUser> promise2 = Promise.promise();
-				refreshSiteUser(siteUser).onSuccess(a -> {
+			}).compose(iotNode -> {
+				Promise<IotNode> promise2 = Promise.promise();
+				refreshIotNode(iotNode).onSuccess(a -> {
 					try {
 						ApiRequest apiRequest = siteRequest.getApiRequest_();
 						if(apiRequest != null) {
 							apiRequest.setNumPATCH(apiRequest.getNumPATCH() + 1);
-							siteUser.apiRequestSiteUser();
-							eventBus.publish("websocketSiteUser", JsonObject.mapFrom(apiRequest).toString());
+							iotNode.apiRequestIotNode();
+							eventBus.publish("websocketIotNode", JsonObject.mapFrom(apiRequest).toString());
 						}
-						promise2.complete(siteUser);
+						promise2.complete(iotNode);
 					} catch(Exception ex) {
-						LOG.error(String.format("postSiteUserFuture failed. "), ex);
+						LOG.error(String.format("postIotNodeFuture failed. "), ex);
 						promise.fail(ex);
 					}
 				}).onFailure(ex -> {
 					promise2.fail(ex);
 				});
 				return promise2.future();
-			}).onSuccess(siteUser -> {
-				promise.complete(siteUser);
+			}).onSuccess(iotNode -> {
+				promise.complete(iotNode);
 			}).onFailure(ex -> {
 				promise.fail(ex);
 			});
 		} catch(Exception ex) {
-			LOG.error(String.format("postSiteUserFuture failed. "), ex);
+			LOG.error(String.format("postIotNodeFuture failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
 	}
 
-	public Future<Void> sqlPOSTSiteUser(SiteUser o, Boolean inheritPk) {
+	public Future<Void> sqlPOSTIotNode(IotNode o, Boolean inheritPk) {
 		Promise<Void> promise = Promise.promise();
 		try {
 			SiteRequestEnUS siteRequest = o.getSiteRequest_();
@@ -832,11 +851,11 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 			List<String> classes = Optional.ofNullable(apiRequest).map(r -> r.getClasses()).orElse(new ArrayList<>());
 			SqlConnection sqlConnection = siteRequest.getSqlConnection();
 			Integer num = 1;
-			StringBuilder bSql = new StringBuilder("UPDATE SiteUser SET ");
+			StringBuilder bSql = new StringBuilder("UPDATE IotNode SET ");
 			List<Object> bParams = new ArrayList<Object>();
 			Long pk = o.getPk();
 			JsonObject jsonObject = siteRequest.getJsonObject();
-			SiteUser o2 = new SiteUser();
+			IotNode o2 = new IotNode();
 			o2.setSiteRequest_(siteRequest);
 			List<Future> futures1 = new ArrayList<>();
 			List<Future> futures2 = new ArrayList<>();
@@ -857,144 +876,100 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 				num++;
 				bParams.add(siteRequest.getUserKey());
 			}
-			if(siteRequest.getUserId() != null) {
-				if(bParams.size() > 0) {
-					bSql.append(", ");
-				}
-				bSql.append("userId=$" + num);
-				num++;
-				bParams.add(siteRequest.getUserId());
-			}
 
 			if(jsonObject != null) {
 				Set<String> entityVars = jsonObject.fieldNames();
 				for(String entityVar : entityVars) {
 					switch(entityVar) {
-					case SiteUser.VAR_userId:
-						o2.setUserId(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(SiteUser.VAR_userId + "=$" + num);
-						num++;
-						bParams.add(o2.sqlUserId());
-						break;
-					case SiteUser.VAR_userName:
-						o2.setUserName(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(SiteUser.VAR_userName + "=$" + num);
-						num++;
-						bParams.add(o2.sqlUserName());
-						break;
-					case SiteUser.VAR_userEmail:
-						o2.setUserEmail(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(SiteUser.VAR_userEmail + "=$" + num);
-						num++;
-						bParams.add(o2.sqlUserEmail());
-						break;
-					case SiteUser.VAR_userFirstName:
-						o2.setUserFirstName(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(SiteUser.VAR_userFirstName + "=$" + num);
-						num++;
-						bParams.add(o2.sqlUserFirstName());
-						break;
-					case SiteUser.VAR_userLastName:
-						o2.setUserLastName(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(SiteUser.VAR_userLastName + "=$" + num);
-						num++;
-						bParams.add(o2.sqlUserLastName());
-						break;
-					case SiteUser.VAR_userFullName:
-						o2.setUserFullName(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(SiteUser.VAR_userFullName + "=$" + num);
-						num++;
-						bParams.add(o2.sqlUserFullName());
-						break;
-					case SiteUser.VAR_seeArchived:
-						o2.setSeeArchived(jsonObject.getBoolean(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(SiteUser.VAR_seeArchived + "=$" + num);
-						num++;
-						bParams.add(o2.sqlSeeArchived());
-						break;
-					case SiteUser.VAR_seeDeleted:
-						o2.setSeeDeleted(jsonObject.getBoolean(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(SiteUser.VAR_seeDeleted + "=$" + num);
-						num++;
-						bParams.add(o2.sqlSeeDeleted());
-						break;
-					case SiteUser.VAR_inheritPk:
+					case IotNode.VAR_inheritPk:
 						o2.setInheritPk(jsonObject.getString(entityVar));
 						if(bParams.size() > 0) {
 							bSql.append(", ");
 						}
-						bSql.append(SiteUser.VAR_inheritPk + "=$" + num);
+						bSql.append(IotNode.VAR_inheritPk + "=$" + num);
 						num++;
 						bParams.add(o2.sqlInheritPk());
 						break;
-					case SiteUser.VAR_created:
+					case IotNode.VAR_created:
 						o2.setCreated(jsonObject.getString(entityVar));
 						if(bParams.size() > 0) {
 							bSql.append(", ");
 						}
-						bSql.append(SiteUser.VAR_created + "=$" + num);
+						bSql.append(IotNode.VAR_created + "=$" + num);
 						num++;
 						bParams.add(o2.sqlCreated());
 						break;
-					case SiteUser.VAR_archived:
+					case IotNode.VAR_archived:
 						o2.setArchived(jsonObject.getBoolean(entityVar));
 						if(bParams.size() > 0) {
 							bSql.append(", ");
 						}
-						bSql.append(SiteUser.VAR_archived + "=$" + num);
+						bSql.append(IotNode.VAR_archived + "=$" + num);
 						num++;
 						bParams.add(o2.sqlArchived());
 						break;
-					case SiteUser.VAR_deleted:
+					case IotNode.VAR_deleted:
 						o2.setDeleted(jsonObject.getBoolean(entityVar));
 						if(bParams.size() > 0) {
 							bSql.append(", ");
 						}
-						bSql.append(SiteUser.VAR_deleted + "=$" + num);
+						bSql.append(IotNode.VAR_deleted + "=$" + num);
 						num++;
 						bParams.add(o2.sqlDeleted());
 						break;
-					case SiteUser.VAR_sessionId:
+					case IotNode.VAR_sessionId:
 						o2.setSessionId(jsonObject.getString(entityVar));
 						if(bParams.size() > 0) {
 							bSql.append(", ");
 						}
-						bSql.append(SiteUser.VAR_sessionId + "=$" + num);
+						bSql.append(IotNode.VAR_sessionId + "=$" + num);
 						num++;
 						bParams.add(o2.sqlSessionId());
 						break;
-					case SiteUser.VAR_userKey:
+					case IotNode.VAR_userKey:
 						o2.setUserKey(jsonObject.getString(entityVar));
 						if(bParams.size() > 0) {
 							bSql.append(", ");
 						}
-						bSql.append(SiteUser.VAR_userKey + "=$" + num);
+						bSql.append(IotNode.VAR_userKey + "=$" + num);
 						num++;
 						bParams.add(o2.sqlUserKey());
+						break;
+					case IotNode.VAR_nodeName:
+						o2.setNodeName(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(IotNode.VAR_nodeName + "=$" + num);
+						num++;
+						bParams.add(o2.sqlNodeName());
+						break;
+					case IotNode.VAR_nodeType:
+						o2.setNodeType(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(IotNode.VAR_nodeType + "=$" + num);
+						num++;
+						bParams.add(o2.sqlNodeType());
+						break;
+					case IotNode.VAR_nodeId:
+						o2.setNodeId(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(IotNode.VAR_nodeId + "=$" + num);
+						num++;
+						bParams.add(o2.sqlNodeId());
+						break;
+					case IotNode.VAR_location:
+						o2.setLocation(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(IotNode.VAR_location + "=$" + num);
+						num++;
+						bParams.add(o2.sqlLocation());
 						break;
 					}
 				}
@@ -1009,8 +984,8 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							).onSuccess(b -> {
 						a.handle(Future.succeededFuture());
 					}).onFailure(ex -> {
-						RuntimeException ex2 = new RuntimeException("value SiteUser failed", ex);
-						LOG.error(String.format("relateSiteUser failed. "), ex2);
+						RuntimeException ex2 = new RuntimeException("value IotNode failed", ex);
+						LOG.error(String.format("relateIotNode failed. "), ex2);
 						a.handle(Future.failedFuture(ex2));
 					});
 				}));
@@ -1019,28 +994,28 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 				CompositeFuture.all(futures2).onSuccess(b -> {
 					promise.complete();
 				}).onFailure(ex -> {
-					LOG.error(String.format("sqlPOSTSiteUser failed. "), ex);
+					LOG.error(String.format("sqlPOSTIotNode failed. "), ex);
 					promise.fail(ex);
 				});
 			}).onFailure(ex -> {
-				LOG.error(String.format("sqlPOSTSiteUser failed. "), ex);
+				LOG.error(String.format("sqlPOSTIotNode failed. "), ex);
 				promise.fail(ex);
 			});
 		} catch(Exception ex) {
-			LOG.error(String.format("sqlPOSTSiteUser failed. "), ex);
+			LOG.error(String.format("sqlPOSTIotNode failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
 	}
 
-	public Future<ServiceResponse> response200POSTSiteUser(SiteUser o) {
+	public Future<ServiceResponse> response200POSTIotNode(IotNode o) {
 		Promise<ServiceResponse> promise = Promise.promise();
 		try {
 			SiteRequestEnUS siteRequest = o.getSiteRequest_();
 			JsonObject json = JsonObject.mapFrom(o);
 			promise.complete(ServiceResponse.completedWithJson(Buffer.buffer(Optional.ofNullable(json).orElse(new JsonObject()).encodePrettily())));
 		} catch(Exception ex) {
-			LOG.error(String.format("response200POSTSiteUser failed. "), ex);
+			LOG.error(String.format("response200POSTIotNode failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
@@ -1049,12 +1024,28 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 	// PUTImport //
 
 	@Override
-	public void putimportSiteUser(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
-		LOG.debug(String.format("putimportSiteUser started. "));
+	public void putimportIotNode(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
+		LOG.debug(String.format("putimportIotNode started. "));
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smart-city-view-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 			try {
 				siteRequest.setJsonObject(body);
-				{
+
+				List<String> roles = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_REQUIRED + "_IotNode")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
+				if(
+						!CollectionUtils.containsAny(siteRequest.getUserResourceRoles(), roles)
+						&& !CollectionUtils.containsAny(siteRequest.getUserRealmRoles(), roles)
+						) {
+					eventHandler.handle(Future.succeededFuture(
+						new ServiceResponse(401, "UNAUTHORIZED", 
+							Buffer.buffer().appendString(
+								new JsonObject()
+									.put("errorCode", "401")
+									.put("errorMessage", "roles required: " + String.join(", ", roles))
+									.encodePrettily()
+								), MultiMap.caseInsensitiveMultiMap()
+						)
+					));
+				} else {
 					try {
 						ApiRequest apiRequest = new ApiRequest();
 						JsonArray jsonArray = Optional.ofNullable(siteRequest.getJsonObject()).map(o -> o.getJsonArray("list")).orElse(new JsonArray());
@@ -1063,31 +1054,31 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 						apiRequest.setNumPATCH(0L);
 						apiRequest.initDeepApiRequest(siteRequest);
 						siteRequest.setApiRequest_(apiRequest);
-						eventBus.publish("websocketSiteUser", JsonObject.mapFrom(apiRequest).toString());
-						varsSiteUser(siteRequest).onSuccess(d -> {
-							listPUTImportSiteUser(apiRequest, siteRequest).onSuccess(e -> {
-								response200PUTImportSiteUser(siteRequest).onSuccess(response -> {
-									LOG.debug(String.format("putimportSiteUser succeeded. "));
+						eventBus.publish("websocketIotNode", JsonObject.mapFrom(apiRequest).toString());
+						varsIotNode(siteRequest).onSuccess(d -> {
+							listPUTImportIotNode(apiRequest, siteRequest).onSuccess(e -> {
+								response200PUTImportIotNode(siteRequest).onSuccess(response -> {
+									LOG.debug(String.format("putimportIotNode succeeded. "));
 									eventHandler.handle(Future.succeededFuture(response));
 								}).onFailure(ex -> {
-									LOG.error(String.format("putimportSiteUser failed. "), ex);
+									LOG.error(String.format("putimportIotNode failed. "), ex);
 									error(siteRequest, eventHandler, ex);
 								});
 							}).onFailure(ex -> {
-								LOG.error(String.format("putimportSiteUser failed. "), ex);
+								LOG.error(String.format("putimportIotNode failed. "), ex);
 								error(siteRequest, eventHandler, ex);
 							});
 						}).onFailure(ex -> {
-							LOG.error(String.format("putimportSiteUser failed. "), ex);
+							LOG.error(String.format("putimportIotNode failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
 					} catch(Exception ex) {
-						LOG.error(String.format("putimportSiteUser failed. "), ex);
+						LOG.error(String.format("putimportIotNode failed. "), ex);
 						error(siteRequest, eventHandler, ex);
 					}
 				}
 			} catch(Exception ex) {
-				LOG.error(String.format("putimportSiteUser failed. "), ex);
+				LOG.error(String.format("putimportIotNode failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		}).onFailure(ex -> {
@@ -1095,18 +1086,18 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 				try {
 					eventHandler.handle(Future.succeededFuture(new ServiceResponse(302, "Found", null, MultiMap.caseInsensitiveMultiMap().add(HttpHeaders.LOCATION, "/logout?redirect_uri=" + URLEncoder.encode(serviceRequest.getExtra().getString("uri"), "UTF-8")))));
 				} catch(Exception ex2) {
-					LOG.error(String.format("putimportSiteUser failed. ", ex2));
+					LOG.error(String.format("putimportIotNode failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
 			} else {
-				LOG.error(String.format("putimportSiteUser failed. "), ex);
+				LOG.error(String.format("putimportIotNode failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		});
 	}
 
 
-	public Future<Void> listPUTImportSiteUser(ApiRequest apiRequest, SiteRequestEnUS siteRequest) {
+	public Future<Void> listPUTImportIotNode(ApiRequest apiRequest, SiteRequestEnUS siteRequest) {
 		Promise<Void> promise = Promise.promise();
 		List<Future> futures = new ArrayList<>();
 		JsonArray jsonArray = Optional.ofNullable(siteRequest.getJsonObject()).map(o -> o.getJsonArray("list")).orElse(new JsonArray());
@@ -1131,10 +1122,10 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 					params.put("query", query);
 					JsonObject context = new JsonObject().put("params", params).put("user", siteRequest.getUserPrincipal());
 					JsonObject json = new JsonObject().put("context", context);
-					eventBus.request("smart-city-view-enUS-SiteUser", json, new DeliveryOptions().addHeader("action", "putimportSiteUserFuture")).onSuccess(a -> {
+					eventBus.request("smart-city-view-enUS-IotNode", json, new DeliveryOptions().addHeader("action", "putimportIotNodeFuture")).onSuccess(a -> {
 						promise1.complete();
 					}).onFailure(ex -> {
-						LOG.error(String.format("listPUTImportSiteUser failed. "), ex);
+						LOG.error(String.format("listPUTImportIotNode failed. "), ex);
 						promise1.fail(ex);
 					});
 				}));
@@ -1143,18 +1134,18 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 				apiRequest.setNumPATCH(apiRequest.getNumPATCH() + 1);
 				promise.complete();
 			}).onFailure(ex -> {
-				LOG.error(String.format("listPUTImportSiteUser failed. "), ex);
+				LOG.error(String.format("listPUTImportIotNode failed. "), ex);
 				promise.fail(ex);
 			});
 		} catch(Exception ex) {
-			LOG.error(String.format("listPUTImportSiteUser failed. "), ex);
+			LOG.error(String.format("listPUTImportIotNode failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
 	}
 
 	@Override
-	public void putimportSiteUserFuture(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
+	public void putimportIotNodeFuture(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smart-city-view-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 			try {
 				ApiRequest apiRequest = new ApiRequest();
@@ -1168,18 +1159,18 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 					siteRequest.getRequestVars().put( "refresh", "false" );
 				}
 
-				SearchList<SiteUser> searchList = new SearchList<SiteUser>();
+				SearchList<IotNode> searchList = new SearchList<IotNode>();
 				searchList.setStore(true);
 				searchList.q("*:*");
-				searchList.setC(SiteUser.class);
+				searchList.setC(IotNode.class);
 				searchList.fq("deleted_docvalues_boolean:false");
 				searchList.fq("archived_docvalues_boolean:false");
 				searchList.fq("inheritPk_docvalues_string:" + SearchTool.escapeQueryChars(body.getString("pk")));
 				searchList.promiseDeepForClass(siteRequest).onSuccess(a -> {
 					try {
 						if(searchList.size() >= 1) {
-							SiteUser o = searchList.getList().stream().findFirst().orElse(null);
-							SiteUser o2 = new SiteUser();
+							IotNode o = searchList.getList().stream().findFirst().orElse(null);
+							IotNode o2 = new IotNode();
 							JsonObject body2 = new JsonObject();
 							for(String f : body.fieldNames()) {
 								Object bodyVal = body.getValue(f);
@@ -1220,35 +1211,35 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							}
 							if(body2.size() > 0) {
 								siteRequest.setJsonObject(body2);
-								patchSiteUserFuture(o, true).onSuccess(b -> {
-									LOG.info("Import SiteUser {} succeeded, modified SiteUser. ", body.getValue("pk"));
+								patchIotNodeFuture(o, true).onSuccess(b -> {
+									LOG.info("Import IotNode {} succeeded, modified IotNode. ", body.getValue("pk"));
 									eventHandler.handle(Future.succeededFuture());
 								}).onFailure(ex -> {
-									LOG.error(String.format("putimportSiteUserFuture failed. "), ex);
+									LOG.error(String.format("putimportIotNodeFuture failed. "), ex);
 									eventHandler.handle(Future.failedFuture(ex));
 								});
 							} else {
 								eventHandler.handle(Future.succeededFuture());
 							}
 						} else {
-							postSiteUserFuture(siteRequest, true).onSuccess(b -> {
-								LOG.info("Import SiteUser {} succeeded, created new SiteUser. ", body.getValue("pk"));
+							postIotNodeFuture(siteRequest, true).onSuccess(b -> {
+								LOG.info("Import IotNode {} succeeded, created new IotNode. ", body.getValue("pk"));
 								eventHandler.handle(Future.succeededFuture());
 							}).onFailure(ex -> {
-								LOG.error(String.format("putimportSiteUserFuture failed. "), ex);
+								LOG.error(String.format("putimportIotNodeFuture failed. "), ex);
 								eventHandler.handle(Future.failedFuture(ex));
 							});
 						}
 					} catch(Exception ex) {
-						LOG.error(String.format("putimportSiteUserFuture failed. "), ex);
+						LOG.error(String.format("putimportIotNodeFuture failed. "), ex);
 						eventHandler.handle(Future.failedFuture(ex));
 					}
 				}).onFailure(ex -> {
-					LOG.error(String.format("putimportSiteUserFuture failed. "), ex);
+					LOG.error(String.format("putimportIotNodeFuture failed. "), ex);
 					eventHandler.handle(Future.failedFuture(ex));
 				});
 			} catch(Exception ex) {
-				LOG.error(String.format("putimportSiteUserFuture failed. "), ex);
+				LOG.error(String.format("putimportIotNodeFuture failed. "), ex);
 				eventHandler.handle(Future.failedFuture(ex));
 			}
 		}).onFailure(ex -> {
@@ -1256,23 +1247,23 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 				try {
 					eventHandler.handle(Future.succeededFuture(new ServiceResponse(302, "Found", null, MultiMap.caseInsensitiveMultiMap().add(HttpHeaders.LOCATION, "/logout?redirect_uri=" + URLEncoder.encode(serviceRequest.getExtra().getString("uri"), "UTF-8")))));
 				} catch(Exception ex2) {
-					LOG.error(String.format("putimportSiteUser failed. ", ex2));
+					LOG.error(String.format("putimportIotNode failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
 			} else {
-				LOG.error(String.format("putimportSiteUser failed. "), ex);
+				LOG.error(String.format("putimportIotNode failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		});
 	}
 
-	public Future<ServiceResponse> response200PUTImportSiteUser(SiteRequestEnUS siteRequest) {
+	public Future<ServiceResponse> response200PUTImportIotNode(SiteRequestEnUS siteRequest) {
 		Promise<ServiceResponse> promise = Promise.promise();
 		try {
 			JsonObject json = new JsonObject();
 			promise.complete(ServiceResponse.completedWithJson(Buffer.buffer(Optional.ofNullable(json).orElse(new JsonObject()).encodePrettily())));
 		} catch(Exception ex) {
-			LOG.error(String.format("response200PUTImportSiteUser failed. "), ex);
+			LOG.error(String.format("response200PUTImportIotNode failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
@@ -1281,30 +1272,49 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 	// SearchPage //
 
 	@Override
-	public void searchpageSiteUserId(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
-		searchpageSiteUser(serviceRequest, eventHandler);
+	public void searchpageIotNodeId(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
+		searchpageIotNode(serviceRequest, eventHandler);
 	}
 
 	@Override
-	public void searchpageSiteUser(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
+	public void searchpageIotNode(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smart-city-view-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 			try {
-				{
-					searchSiteUserList(siteRequest, false, true, false).onSuccess(listSiteUser -> {
-						response200SearchPageSiteUser(listSiteUser).onSuccess(response -> {
+
+				List<String> roles = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_REQUIRED + "_IotNode")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
+				List<String> roleReads = Arrays.asList("");
+				if(
+						!CollectionUtils.containsAny(siteRequest.getUserResourceRoles(), roles)
+						&& !CollectionUtils.containsAny(siteRequest.getUserRealmRoles(), roles)
+						&& !CollectionUtils.containsAny(siteRequest.getUserResourceRoles(), roleReads)
+						&& !CollectionUtils.containsAny(siteRequest.getUserRealmRoles(), roleReads)
+						) {
+					eventHandler.handle(Future.succeededFuture(
+						new ServiceResponse(401, "UNAUTHORIZED", 
+							Buffer.buffer().appendString(
+								new JsonObject()
+									.put("errorCode", "401")
+									.put("errorMessage", "roles required: " + String.join(", ", roles))
+									.encodePrettily()
+								), MultiMap.caseInsensitiveMultiMap()
+						)
+					));
+				} else {
+					searchIotNodeList(siteRequest, false, true, false).onSuccess(listIotNode -> {
+						response200SearchPageIotNode(listIotNode).onSuccess(response -> {
 							eventHandler.handle(Future.succeededFuture(response));
-							LOG.debug(String.format("searchpageSiteUser succeeded. "));
+							LOG.debug(String.format("searchpageIotNode succeeded. "));
 						}).onFailure(ex -> {
-							LOG.error(String.format("searchpageSiteUser failed. "), ex);
+							LOG.error(String.format("searchpageIotNode failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
 					}).onFailure(ex -> {
-						LOG.error(String.format("searchpageSiteUser failed. "), ex);
+						LOG.error(String.format("searchpageIotNode failed. "), ex);
 						error(siteRequest, eventHandler, ex);
 					});
 				}
 			} catch(Exception ex) {
-				LOG.error(String.format("searchpageSiteUser failed. "), ex);
+				LOG.error(String.format("searchpageIotNode failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		}).onFailure(ex -> {
@@ -1312,38 +1322,38 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 				try {
 					eventHandler.handle(Future.succeededFuture(new ServiceResponse(302, "Found", null, MultiMap.caseInsensitiveMultiMap().add(HttpHeaders.LOCATION, "/logout?redirect_uri=" + URLEncoder.encode(serviceRequest.getExtra().getString("uri"), "UTF-8")))));
 				} catch(Exception ex2) {
-					LOG.error(String.format("searchpageSiteUser failed. ", ex2));
+					LOG.error(String.format("searchpageIotNode failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
 			} else {
-				LOG.error(String.format("searchpageSiteUser failed. "), ex);
+				LOG.error(String.format("searchpageIotNode failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		});
 	}
 
 
-	public void searchpageSiteUserPageInit(SiteUserPage page, SearchList<SiteUser> listSiteUser) {
+	public void searchpageIotNodePageInit(IotNodePage page, SearchList<IotNode> listIotNode) {
 	}
 
-	public String templateSearchPageSiteUser() {
-		return Optional.ofNullable(config.getString(ConfigKeys.TEMPLATE_PATH)).orElse("templates") + "/enUS/SiteUserPage";
+	public String templateSearchPageIotNode() {
+		return Optional.ofNullable(config.getString(ConfigKeys.TEMPLATE_PATH)).orElse("templates") + "/enUS/IotNodePage";
 	}
-	public Future<ServiceResponse> response200SearchPageSiteUser(SearchList<SiteUser> listSiteUser) {
+	public Future<ServiceResponse> response200SearchPageIotNode(SearchList<IotNode> listIotNode) {
 		Promise<ServiceResponse> promise = Promise.promise();
 		try {
-			SiteRequestEnUS siteRequest = listSiteUser.getSiteRequest_(SiteRequestEnUS.class);
-			SiteUserPage page = new SiteUserPage();
+			SiteRequestEnUS siteRequest = listIotNode.getSiteRequest_(SiteRequestEnUS.class);
+			IotNodePage page = new IotNodePage();
 			MultiMap requestHeaders = MultiMap.caseInsensitiveMultiMap();
 			siteRequest.setRequestHeaders(requestHeaders);
 
-			if(listSiteUser.size() == 1)
-				siteRequest.setRequestPk(listSiteUser.get(0).getPk());
-			page.setSearchListSiteUser_(listSiteUser);
+			if(listIotNode.size() == 1)
+				siteRequest.setRequestPk(listIotNode.get(0).getPk());
+			page.setSearchListIotNode_(listIotNode);
 			page.setSiteRequest_(siteRequest);
-			page.promiseDeepSiteUserPage(siteRequest).onSuccess(a -> {
+			page.promiseDeepIotNodePage(siteRequest).onSuccess(a -> {
 				JsonObject json = JsonObject.mapFrom(page);
-				templateEngine.render(json, templateSearchPageSiteUser()).onSuccess(buffer -> {
+				templateEngine.render(json, templateSearchPageIotNode()).onSuccess(buffer -> {
 					promise.complete(new ServiceResponse(200, "OK", buffer, requestHeaders));
 				}).onFailure(ex -> {
 					promise.fail(ex);
@@ -1352,7 +1362,7 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 				promise.fail(ex);
 			});
 		} catch(Exception ex) {
-			LOG.error(String.format("response200SearchPageSiteUser failed. "), ex);
+			LOG.error(String.format("response200SearchPageIotNode failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
@@ -1360,78 +1370,78 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 
 	// General //
 
-	public Future<SiteUser> createSiteUser(SiteRequestEnUS siteRequest) {
-		Promise<SiteUser> promise = Promise.promise();
+	public Future<IotNode> createIotNode(SiteRequestEnUS siteRequest) {
+		Promise<IotNode> promise = Promise.promise();
 		try {
 			SqlConnection sqlConnection = siteRequest.getSqlConnection();
 			String userId = siteRequest.getUserId();
 			Long userKey = siteRequest.getUserKey();
 			ZonedDateTime created = Optional.ofNullable(siteRequest.getJsonObject()).map(j -> j.getString("created")).map(s -> ZonedDateTime.parse(s, DateTimeFormatter.ISO_DATE_TIME.withZone(ZoneId.of(config.getString(ConfigKeys.SITE_ZONE))))).orElse(ZonedDateTime.now(ZoneId.of(config.getString(ConfigKeys.SITE_ZONE))));
 
-			sqlConnection.preparedQuery("INSERT INTO SiteUser(created, userKey) VALUES($1, $2) RETURNING pk")
+			sqlConnection.preparedQuery("INSERT INTO IotNode(created, userKey) VALUES($1, $2) RETURNING pk")
 					.collecting(Collectors.toList())
 					.execute(Tuple.of(created.toOffsetDateTime(), userKey)).onSuccess(result -> {
 				Row createLine = result.value().stream().findFirst().orElseGet(() -> null);
 				Long pk = createLine.getLong(0);
-				SiteUser o = new SiteUser();
+				IotNode o = new IotNode();
 				o.setPk(pk);
 				o.setSiteRequest_(siteRequest);
 				promise.complete(o);
 			}).onFailure(ex -> {
 				RuntimeException ex2 = new RuntimeException(ex);
-				LOG.error("createSiteUser failed. ", ex2);
+				LOG.error("createIotNode failed. ", ex2);
 				promise.fail(ex2);
 			});
 		} catch(Exception ex) {
-			LOG.error(String.format("createSiteUser failed. "), ex);
+			LOG.error(String.format("createIotNode failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
 	}
 
-	public void searchSiteUserQ(SearchList<SiteUser> searchList, String entityVar, String valueIndexed, String varIndexed) {
+	public void searchIotNodeQ(SearchList<IotNode> searchList, String entityVar, String valueIndexed, String varIndexed) {
 		searchList.q(varIndexed + ":" + ("*".equals(valueIndexed) ? valueIndexed : SearchTool.escapeQueryChars(valueIndexed)));
 		if(!"*".equals(entityVar)) {
 		}
 	}
 
-	public String searchSiteUserFq(SearchList<SiteUser> searchList, String entityVar, String valueIndexed, String varIndexed) {
+	public String searchIotNodeFq(SearchList<IotNode> searchList, String entityVar, String valueIndexed, String varIndexed) {
 		if(varIndexed == null)
 			throw new RuntimeException(String.format("\"%s\" is not an indexed entity. ", entityVar));
 		if(StringUtils.startsWith(valueIndexed, "[")) {
 			String[] fqs = StringUtils.substringBefore(StringUtils.substringAfter(valueIndexed, "["), "]").split(" TO ");
 			if(fqs.length != 2)
 				throw new RuntimeException(String.format("\"%s\" invalid range query. ", valueIndexed));
-			String fq1 = fqs[0].equals("*") ? fqs[0] : SiteUser.staticSearchFqForClass(entityVar, searchList.getSiteRequest_(SiteRequestEnUS.class), fqs[0]);
-			String fq2 = fqs[1].equals("*") ? fqs[1] : SiteUser.staticSearchFqForClass(entityVar, searchList.getSiteRequest_(SiteRequestEnUS.class), fqs[1]);
+			String fq1 = fqs[0].equals("*") ? fqs[0] : IotNode.staticSearchFqForClass(entityVar, searchList.getSiteRequest_(SiteRequestEnUS.class), fqs[0]);
+			String fq2 = fqs[1].equals("*") ? fqs[1] : IotNode.staticSearchFqForClass(entityVar, searchList.getSiteRequest_(SiteRequestEnUS.class), fqs[1]);
 			 return varIndexed + ":[" + fq1 + " TO " + fq2 + "]";
 		} else {
-			return varIndexed + ":" + SearchTool.escapeQueryChars(SiteUser.staticSearchFqForClass(entityVar, searchList.getSiteRequest_(SiteRequestEnUS.class), valueIndexed)).replace("\\", "\\\\");
+			return varIndexed + ":" + SearchTool.escapeQueryChars(IotNode.staticSearchFqForClass(entityVar, searchList.getSiteRequest_(SiteRequestEnUS.class), valueIndexed)).replace("\\", "\\\\");
 		}
 	}
 
-	public void searchSiteUserSort(SearchList<SiteUser> searchList, String entityVar, String valueIndexed, String varIndexed) {
+	public void searchIotNodeSort(SearchList<IotNode> searchList, String entityVar, String valueIndexed, String varIndexed) {
 		if(varIndexed == null)
 			throw new RuntimeException(String.format("\"%s\" is not an indexed entity. ", entityVar));
 		searchList.sort(varIndexed, valueIndexed);
 	}
 
-	public void searchSiteUserRows(SearchList<SiteUser> searchList, Long valueRows) {
+	public void searchIotNodeRows(SearchList<IotNode> searchList, Long valueRows) {
 			searchList.rows(valueRows != null ? valueRows : 10L);
 	}
 
-	public void searchSiteUserStart(SearchList<SiteUser> searchList, Long valueStart) {
+	public void searchIotNodeStart(SearchList<IotNode> searchList, Long valueStart) {
 		searchList.start(valueStart);
 	}
 
-	public void searchSiteUserVar(SearchList<SiteUser> searchList, String var, String value) {
+	public void searchIotNodeVar(SearchList<IotNode> searchList, String var, String value) {
 		searchList.getSiteRequest_(SiteRequestEnUS.class).getRequestVars().put(var, value);
 	}
 
-	public void searchSiteUserUri(SearchList<SiteUser> searchList) {
+	public void searchIotNodeUri(SearchList<IotNode> searchList) {
 	}
 
-	public Future<ServiceResponse> varsSiteUser(SiteRequestEnUS siteRequest) {
+	public Future<ServiceResponse> varsIotNode(SiteRequestEnUS siteRequest) {
 		Promise<ServiceResponse> promise = Promise.promise();
 		try {
 			ServiceRequest serviceRequest = siteRequest.getServiceRequest();
@@ -1449,33 +1459,33 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 						siteRequest.getRequestVars().put(entityVar, valueIndexed);
 					}
 				} catch(Exception ex) {
-					LOG.error(String.format("searchSiteUser failed. "), ex);
+					LOG.error(String.format("searchIotNode failed. "), ex);
 					promise.fail(ex);
 				}
 			});
 			promise.complete();
 		} catch(Exception ex) {
-			LOG.error(String.format("searchSiteUser failed. "), ex);
+			LOG.error(String.format("searchIotNode failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
 	}
 
-	public Future<SearchList<SiteUser>> searchSiteUserList(SiteRequestEnUS siteRequest, Boolean populate, Boolean store, Boolean modify) {
-		Promise<SearchList<SiteUser>> promise = Promise.promise();
+	public Future<SearchList<IotNode>> searchIotNodeList(SiteRequestEnUS siteRequest, Boolean populate, Boolean store, Boolean modify) {
+		Promise<SearchList<IotNode>> promise = Promise.promise();
 		try {
 			ServiceRequest serviceRequest = siteRequest.getServiceRequest();
 			String entityListStr = siteRequest.getServiceRequest().getParams().getJsonObject("query").getString("fl");
 			String[] entityList = entityListStr == null ? null : entityListStr.split(",\\s*");
-			SearchList<SiteUser> searchList = new SearchList<SiteUser>();
+			SearchList<IotNode> searchList = new SearchList<IotNode>();
 			searchList.setPopulate(populate);
 			searchList.setStore(store);
 			searchList.q("*:*");
-			searchList.setC(SiteUser.class);
+			searchList.setC(IotNode.class);
 			searchList.setSiteRequest_(siteRequest);
 			if(entityList != null) {
 				for(String v : entityList) {
-					searchList.fl(SiteUser.varIndexedSiteUser(v));
+					searchList.fl(IotNode.varIndexedIotNode(v));
 				}
 			}
 
@@ -1484,18 +1494,6 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 				searchList.fq("(pk_docvalues_long:" + SearchTool.escapeQueryChars(id) + " OR objectId_docvalues_string:" + SearchTool.escapeQueryChars(id) + ")");
 			} else if(id != null) {
 				searchList.fq("objectId_docvalues_string:" + SearchTool.escapeQueryChars(id));
-			}
-
-			List<String> roles = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_REQUIRED + "_SiteUser")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
-			List<String> roleReads = Arrays.asList("");
-			if(
-					!CollectionUtils.containsAny(siteRequest.getUserResourceRoles(), roles)
-					&& !CollectionUtils.containsAny(siteRequest.getUserRealmRoles(), roles)
-					&& (modify || !CollectionUtils.containsAny(siteRequest.getUserResourceRoles(), roleReads))
-					&& (modify || !CollectionUtils.containsAny(siteRequest.getUserRealmRoles(), roleReads))
-					) {
-				searchList.fq("sessionId_docvalues_string:" + SearchTool.escapeQueryChars(Optional.ofNullable(siteRequest.getSessionId()).orElse("-----")) + " OR " + "sessionId_docvalues_string:" + SearchTool.escapeQueryChars(Optional.ofNullable(siteRequest.getSessionIdBefore()).orElse("-----"))
-						+ " OR userKeys_docvalues_longs:" + Optional.ofNullable(siteRequest.getUserKey()).orElse(0L));
 			}
 
 			serviceRequest.getParams().getJsonObject("query").forEach(paramRequest -> {
@@ -1520,7 +1518,7 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							String[] varsIndexed = new String[entityVars.length];
 							for(Integer i = 0; i < entityVars.length; i++) {
 								entityVar = entityVars[i];
-								varsIndexed[i] = SiteUser.varIndexedSiteUser(entityVar);
+								varsIndexed[i] = IotNode.varIndexedIotNode(entityVar);
 							}
 							searchList.facetPivot((solrLocalParams == null ? "" : solrLocalParams) + StringUtils.join(varsIndexed, ","));
 						}
@@ -1535,8 +1533,8 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 										while(foundQ) {
 											entityVar = mQ.group(1).trim();
 											valueIndexed = mQ.group(2).trim();
-											varIndexed = SiteUser.varIndexedSiteUser(entityVar);
-											String entityQ = searchSiteUserFq(searchList, entityVar, valueIndexed, varIndexed);
+											varIndexed = IotNode.varIndexedIotNode(entityVar);
+											String entityQ = searchIotNodeFq(searchList, entityVar, valueIndexed, varIndexed);
 											mQ.appendReplacement(sb, entityQ);
 											foundQ = mQ.find();
 										}
@@ -1552,8 +1550,8 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 										while(foundFq) {
 											entityVar = mFq.group(1).trim();
 											valueIndexed = mFq.group(2).trim();
-											varIndexed = SiteUser.varIndexedSiteUser(entityVar);
-											String entityFq = searchSiteUserFq(searchList, entityVar, valueIndexed, varIndexed);
+											varIndexed = IotNode.varIndexedIotNode(entityVar);
+											String entityFq = searchIotNodeFq(searchList, entityVar, valueIndexed, varIndexed);
 											mFq.appendReplacement(sb, entityFq);
 											foundFq = mFq.find();
 										}
@@ -1564,16 +1562,16 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 								case "sort":
 									entityVar = StringUtils.trim(StringUtils.substringBefore((String)paramObject, " "));
 									valueIndexed = StringUtils.trim(StringUtils.substringAfter((String)paramObject, " "));
-									varIndexed = SiteUser.varIndexedSiteUser(entityVar);
-									searchSiteUserSort(searchList, entityVar, valueIndexed, varIndexed);
+									varIndexed = IotNode.varIndexedIotNode(entityVar);
+									searchIotNodeSort(searchList, entityVar, valueIndexed, varIndexed);
 									break;
 								case "start":
 									valueStart = paramObject instanceof Long ? (Long)paramObject : Long.parseLong(paramObject.toString());
-									searchSiteUserStart(searchList, valueStart);
+									searchIotNodeStart(searchList, valueStart);
 									break;
 								case "rows":
 									valueRows = paramObject instanceof Long ? (Long)paramObject : Long.parseLong(paramObject.toString());
-									searchSiteUserRows(searchList, valueRows);
+									searchIotNodeRows(searchList, valueRows);
 									break;
 								case "facet":
 									searchList.facet((Boolean)paramObject);
@@ -1598,20 +1596,20 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 									if(foundFacetRange) {
 										String solrLocalParams = mFacetRange.group(1);
 										entityVar = mFacetRange.group(2).trim();
-										varIndexed = SiteUser.varIndexedSiteUser(entityVar);
+										varIndexed = IotNode.varIndexedIotNode(entityVar);
 										searchList.facetRange((solrLocalParams == null ? "" : solrLocalParams) + varIndexed);
 									}
 									break;
 								case "facet.field":
 									entityVar = (String)paramObject;
-									varIndexed = SiteUser.varIndexedSiteUser(entityVar);
+									varIndexed = IotNode.varIndexedIotNode(entityVar);
 									if(varIndexed != null)
 										searchList.facetField(varIndexed);
 									break;
 								case "var":
 									entityVar = StringUtils.trim(StringUtils.substringBefore((String)paramObject, ":"));
 									valueIndexed = URLDecoder.decode(StringUtils.trim(StringUtils.substringAfter((String)paramObject, ":")), "UTF-8");
-									searchSiteUserVar(searchList, entityVar, valueIndexed);
+									searchIotNodeVar(searchList, entityVar, valueIndexed);
 									break;
 								case "cursorMark":
 									valueCursorMark = (String)paramObject;
@@ -1619,7 +1617,7 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 									break;
 							}
 						}
-						searchSiteUserUri(searchList);
+						searchIotNodeUri(searchList);
 					}
 				} catch(Exception e) {
 					ExceptionUtils.rethrow(e);
@@ -1628,29 +1626,29 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 			if("*:*".equals(searchList.getQuery()) && searchList.getSorts().size() == 0) {
 				searchList.sort("created_docvalues_date", "desc");
 			}
-			searchSiteUser2(siteRequest, populate, store, modify, searchList);
+			searchIotNode2(siteRequest, populate, store, modify, searchList);
 			searchList.promiseDeepForClass(siteRequest).onSuccess(a -> {
 				promise.complete(searchList);
 			}).onFailure(ex -> {
-				LOG.error(String.format("searchSiteUser failed. "), ex);
+				LOG.error(String.format("searchIotNode failed. "), ex);
 				promise.fail(ex);
 			});
 		} catch(Exception ex) {
-			LOG.error(String.format("searchSiteUser failed. "), ex);
+			LOG.error(String.format("searchIotNode failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
 	}
-	public void searchSiteUser2(SiteRequestEnUS siteRequest, Boolean populate, Boolean store, Boolean modify, SearchList<SiteUser> searchList) {
+	public void searchIotNode2(SiteRequestEnUS siteRequest, Boolean populate, Boolean store, Boolean modify, SearchList<IotNode> searchList) {
 	}
 
-	public Future<Void> persistSiteUser(SiteUser o) {
+	public Future<Void> persistIotNode(IotNode o) {
 		Promise<Void> promise = Promise.promise();
 		try {
 			SiteRequestEnUS siteRequest = o.getSiteRequest_();
 			SqlConnection sqlConnection = siteRequest.getSqlConnection();
 			Long pk = o.getPk();
-			sqlConnection.preparedQuery("SELECT * FROM SiteUser WHERE pk=$1")
+			sqlConnection.preparedQuery("SELECT * FROM IotNode WHERE pk=$1")
 					.collecting(Collectors.toList())
 					.execute(Tuple.of(pk)
 					).onSuccess(result -> {
@@ -1663,35 +1661,35 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 								try {
 									o.persistForClass(columnName, columnValue);
 								} catch(Exception e) {
-									LOG.error(String.format("persistSiteUser failed. "), e);
+									LOG.error(String.format("persistIotNode failed. "), e);
 								}
 							}
 						}
 					}
 					promise.complete();
 				} catch(Exception ex) {
-					LOG.error(String.format("persistSiteUser failed. "), ex);
+					LOG.error(String.format("persistIotNode failed. "), ex);
 					promise.fail(ex);
 				}
 			}).onFailure(ex -> {
 				RuntimeException ex2 = new RuntimeException(ex);
-				LOG.error(String.format("persistSiteUser failed. "), ex2);
+				LOG.error(String.format("persistIotNode failed. "), ex2);
 				promise.fail(ex2);
 			});
 		} catch(Exception ex) {
-			LOG.error(String.format("persistSiteUser failed. "), ex);
+			LOG.error(String.format("persistIotNode failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
 	}
 
-	public Future<Void> relateSiteUser(SiteUser o) {
+	public Future<Void> relateIotNode(IotNode o) {
 		Promise<Void> promise = Promise.promise();
 			promise.complete();
 		return promise.future();
 	}
 
-	public Future<Void> indexSiteUser(SiteUser o) {
+	public Future<Void> indexIotNode(IotNode o) {
 		Promise<Void> promise = Promise.promise();
 		try {
 			SiteRequestEnUS siteRequest = o.getSiteRequest_();
@@ -1702,7 +1700,7 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 				json.put("add", add);
 				JsonObject doc = new JsonObject();
 				add.put("doc", doc);
-				o.indexSiteUser(doc);
+				o.indexIotNode(doc);
 				String solrHostName = siteRequest.getConfig().getString(ConfigKeys.SOLR_HOST_NAME);
 				Integer solrPort = siteRequest.getConfig().getInteger(ConfigKeys.SOLR_PORT);
 				String solrCollection = siteRequest.getConfig().getString(ConfigKeys.SOLR_COLLECTION);
@@ -1716,21 +1714,21 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 				webClient.post(solrPort, solrHostName, solrRequestUri).putHeader("Content-Type", "application/json").expect(ResponsePredicate.SC_OK).sendBuffer(json.toBuffer()).onSuccess(b -> {
 					promise.complete();
 				}).onFailure(ex -> {
-					LOG.error(String.format("indexSiteUser failed. "), new RuntimeException(ex));
+					LOG.error(String.format("indexIotNode failed. "), new RuntimeException(ex));
 					promise.fail(ex);
 				});
 			}).onFailure(ex -> {
-				LOG.error(String.format("indexSiteUser failed. "), ex);
+				LOG.error(String.format("indexIotNode failed. "), ex);
 				promise.fail(ex);
 			});
 		} catch(Exception ex) {
-			LOG.error(String.format("indexSiteUser failed. "), ex);
+			LOG.error(String.format("indexIotNode failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
 	}
 
-	public Future<Void> refreshSiteUser(SiteUser o) {
+	public Future<Void> refreshIotNode(IotNode o) {
 		Promise<Void> promise = Promise.promise();
 		SiteRequestEnUS siteRequest = o.getSiteRequest_();
 		try {
@@ -1746,12 +1744,46 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 					String classSimpleName2 = classes.get(i);
 				}
 
-				promise.complete();
+				CompositeFuture.all(futures).onSuccess(b -> {
+					JsonObject params = new JsonObject();
+					params.put("body", new JsonObject());
+					params.put("cookie", new JsonObject());
+					params.put("header", new JsonObject());
+					params.put("form", new JsonObject());
+					params.put("path", new JsonObject());
+					JsonObject query = new JsonObject();
+					Boolean softCommit = Optional.ofNullable(siteRequest.getServiceRequest().getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getBoolean("softCommit")).orElse(null);
+					Integer commitWithin = Optional.ofNullable(siteRequest.getServiceRequest().getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getInteger("commitWithin")).orElse(null);
+					if(softCommit == null && commitWithin == null)
+						softCommit = true;
+					if(softCommit != null)
+						query.put("softCommit", softCommit);
+					if(commitWithin != null)
+						query.put("commitWithin", commitWithin);
+					query.put("q", "*:*").put("fq", new JsonArray().add("pk:" + o.getPk()));
+					params.put("query", query);
+					JsonObject context = new JsonObject().put("params", params).put("user", siteRequest.getUserPrincipal());
+					JsonObject json = new JsonObject().put("context", context);
+					eventBus.request("smart-city-view-enUS-IotNode", json, new DeliveryOptions().addHeader("action", "patchIotNodeFuture")).onSuccess(c -> {
+						JsonObject responseMessage = (JsonObject)c.body();
+						Integer statusCode = responseMessage.getInteger("statusCode");
+						if(statusCode.equals(200))
+							promise.complete();
+						else
+							promise.fail(new RuntimeException(responseMessage.getString("statusMessage")));
+					}).onFailure(ex -> {
+						LOG.error("Refresh relations failed. ", ex);
+						promise.fail(ex);
+					});
+				}).onFailure(ex -> {
+					LOG.error("Refresh relations failed. ", ex);
+					promise.fail(ex);
+				});
 			} else {
 				promise.complete();
 			}
 		} catch(Exception ex) {
-			LOG.error(String.format("refreshSiteUser failed. "), ex);
+			LOG.error(String.format("refreshIotNode failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();

@@ -47,7 +47,7 @@ public class BaseModel extends BaseModelGen<Object> implements ComputateVertxBas
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * InheritPrimaryKey: true
-	 * Define: true
+	 * Persist: true
 	 * Description: An optional inherited primary key from a legacy system for this object in the database
 	 */
 	protected void _inheritPk(Wrap<String> w) {}
@@ -55,7 +55,7 @@ public class BaseModel extends BaseModelGen<Object> implements ComputateVertxBas
 	/**
 	 * {@inheritDoc}
 	 * DocValues: true
-	 * Define: true
+	 * Persist: true
 	 * Modify: false
 	 * VarCreated: true
 	 * HtmlRow: 1
@@ -84,7 +84,7 @@ public class BaseModel extends BaseModelGen<Object> implements ComputateVertxBas
 	/**
 	 * {@inheritDoc}
 	 * DocValues: true
-	 * Define: true
+	 * Persist: true
 	 * HtmlRow: 2
 	 * HtmlCell: 1
 	 * DisplayName.enUS: archived
@@ -97,7 +97,7 @@ public class BaseModel extends BaseModelGen<Object> implements ComputateVertxBas
 	/**
 	 * {@inheritDoc}
 	 * DocValues: true
-	 * Define: true
+	 * Persist: true
 	 * HtmlRow: 2
 	 * HtmlCell: 2
 	 * DisplayName.enUS: deleted
@@ -140,7 +140,7 @@ public class BaseModel extends BaseModelGen<Object> implements ComputateVertxBas
 	/**
 	 * {@inheritDoc}
 	 * DocValues: true
-	 * Define: true
+	 * Persist: true
 	 * Modify: false
 	 * Description: The session ID of the user that created this object
 	 */  
@@ -151,7 +151,7 @@ public class BaseModel extends BaseModelGen<Object> implements ComputateVertxBas
 	 * {@inheritDoc}
 	 * Var.enUS: userKey
 	 * DocValues: true
-	 * Define: true
+	 * Persist: true
 	 * Modify: false
 	 * Description: The primary key of the user that created this record
 	 */

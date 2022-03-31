@@ -1,4 +1,4 @@
-package org.computate.smartcityview.enus.model.user;
+package org.computate.smartcityview.enus.model.iotnode;
 
 import org.computate.smartcityview.enus.page.PageLayout;
 import org.computate.smartcityview.enus.model.base.BaseModelPage;
@@ -43,18 +43,18 @@ import java.time.ZoneId;
 /**
  * Translate: false
  **/
-public class SiteUserGenPage extends SiteUserGenPageGen<BaseModelPage> {
+public class IotNodeGenPage extends IotNodeGenPageGen<BaseModelPage> {
 
 	/**
 	 * {@inheritDoc}
 	 * Ignore: true
 	 **/
-	protected void _searchListSiteUser_(Wrap<SearchList<SiteUser>> w) {
+	protected void _searchListIotNode_(Wrap<SearchList<IotNode>> w) {
 	}
 
 	protected void _pageResponse(Wrap<String> w) {
-		if(searchListSiteUser_ != null)
-			w.o(JsonObject.mapFrom(searchListSiteUser_.getQueryResponse()).toString());
+		if(searchListIotNode_ != null)
+			w.o(JsonObject.mapFrom(searchListIotNode_.getQueryResponse()).toString());
 	}
 
 	protected void _defaultZoneId(Wrap<String> w) {
@@ -80,40 +80,40 @@ public class SiteUserGenPage extends SiteUserGenPageGen<BaseModelPage> {
 	}
 
 	protected void _defaultRangeGap(Wrap<String> w) {
-		w.o(Optional.ofNullable(searchListSiteUser_.getFacetRangeGap()).orElse("+1DAY"));
+		w.o(Optional.ofNullable(searchListIotNode_.getFacetRangeGap()).orElse("+1DAY"));
 	}
 
 	protected void _defaultRangeEnd(Wrap<ZonedDateTime> w) {
-		w.o(Optional.ofNullable(searchListSiteUser_.getFacetRangeEnd()).map(s -> TimeTool.parseZonedDateTime(defaultTimeZone, s)).orElse(ZonedDateTime.now(defaultTimeZone).toLocalDate().atStartOfDay(defaultTimeZone).plusDays(1)));
+		w.o(Optional.ofNullable(searchListIotNode_.getFacetRangeEnd()).map(s -> TimeTool.parseZonedDateTime(defaultTimeZone, s)).orElse(ZonedDateTime.now(defaultTimeZone).toLocalDate().atStartOfDay(defaultTimeZone).plusDays(1)));
 	}
 
 	protected void _defaultRangeStart(Wrap<ZonedDateTime> w) {
-		w.o(Optional.ofNullable(searchListSiteUser_.getFacetRangeStart()).map(s -> TimeTool.parseZonedDateTime(defaultTimeZone, s)).orElse(defaultRangeEnd.minusDays(7).toLocalDate().atStartOfDay(defaultTimeZone)));
+		w.o(Optional.ofNullable(searchListIotNode_.getFacetRangeStart()).map(s -> TimeTool.parseZonedDateTime(defaultTimeZone, s)).orElse(defaultRangeEnd.minusDays(7).toLocalDate().atStartOfDay(defaultTimeZone)));
 	}
 
 	protected void _defaultRangeVar(Wrap<String> w) {
-		w.o(Optional.ofNullable(searchListSiteUser_.getFacetRanges()).orElse(Arrays.asList()).stream().findFirst().map(v -> { if(v.contains("}")) return StringUtils.substringBefore(StringUtils.substringAfterLast(v, "}"), "_"); else return StringUtils.substringBefore(v, "_"); }).orElse("created"));
+		w.o(Optional.ofNullable(searchListIotNode_.getFacetRanges()).orElse(Arrays.asList()).stream().findFirst().map(v -> { if(v.contains("}")) return StringUtils.substringBefore(StringUtils.substringAfterLast(v, "}"), "_"); else return StringUtils.substringBefore(v, "_"); }).orElse("created"));
 	}
 
 	protected void _defaultFacetSort(Wrap<String> w) {
-		w.o(Optional.ofNullable(searchListSiteUser_.getFacetSort()).orElse("index"));
+		w.o(Optional.ofNullable(searchListIotNode_.getFacetSort()).orElse("index"));
 	}
 
 	protected void _defaultFacetLimit(Wrap<Integer> w) {
-		w.o(Optional.ofNullable(searchListSiteUser_.getFacetLimit()).orElse(1));
+		w.o(Optional.ofNullable(searchListIotNode_.getFacetLimit()).orElse(1));
 	}
 
 	protected void _defaultFacetMinCount(Wrap<Integer> w) {
-		w.o(Optional.ofNullable(searchListSiteUser_.getFacetMinCount()).orElse(1));
+		w.o(Optional.ofNullable(searchListIotNode_.getFacetMinCount()).orElse(1));
 	}
 
 	protected void _defaultPivotMinCount(Wrap<Integer> w) {
-		w.o(Optional.ofNullable(searchListSiteUser_.getFacetPivotMinCount()).orElse(0));
+		w.o(Optional.ofNullable(searchListIotNode_.getFacetPivotMinCount()).orElse(0));
 	}
 
 	@Override
 	protected void _defaultPivotVars(List<String> l) {
-		Optional.ofNullable(searchListSiteUser_.getFacetPivots()).orElse(Arrays.asList()).forEach(facetPivot -> {
+		Optional.ofNullable(searchListIotNode_.getFacetPivots()).orElse(Arrays.asList()).forEach(facetPivot -> {
 			String facetPivot2 = facetPivot;
 			if(StringUtils.contains(facetPivot2, "}"))
 				facetPivot2 = StringUtils.substringAfterLast(facetPivot2, "}");
@@ -131,26 +131,26 @@ public class SiteUserGenPage extends SiteUserGenPageGen<BaseModelPage> {
 	/**
 	 * {@inheritDoc}
 	 **/
-	protected void _listSiteUser(JsonArray l) {
-		Optional.ofNullable(searchListSiteUser_).map(o -> o.getList()).orElse(Arrays.asList()).stream().map(o -> JsonObject.mapFrom(o)).forEach(o -> l.add(o));
+	protected void _listIotNode(JsonArray l) {
+		Optional.ofNullable(searchListIotNode_).map(o -> o.getList()).orElse(Arrays.asList()).stream().map(o -> JsonObject.mapFrom(o)).forEach(o -> l.add(o));
 	}
 
 	protected void _facetCounts(Wrap<SolrResponse.FacetCounts> w) {
-		w.o(searchListSiteUser_.getQueryResponse().getFacetCounts());
+		w.o(searchListIotNode_.getQueryResponse().getFacetCounts());
 	}
 
-	protected void _siteUserCount(Wrap<Integer> w) {
-		w.o(searchListSiteUser_ == null ? 0 : searchListSiteUser_.size());
+	protected void _iotNodeCount(Wrap<Integer> w) {
+		w.o(searchListIotNode_ == null ? 0 : searchListIotNode_.size());
 	}
 
-	protected void _siteUser_(Wrap<SiteUser> w) {
-		if(siteUserCount == 1)
-			w.o(searchListSiteUser_.get(0));
+	protected void _iotNode_(Wrap<IotNode> w) {
+		if(iotNodeCount == 1)
+			w.o(searchListIotNode_.get(0));
 	}
 
 	protected void _pk(Wrap<Long> w) {
-		if(siteUserCount == 1)
-			w.o(siteUser_.getPk());
+		if(iotNodeCount == 1)
+			w.o(iotNode_.getPk());
 	}
 
 	@Override
@@ -160,24 +160,24 @@ public class SiteUserGenPage extends SiteUserGenPageGen<BaseModelPage> {
 
 	@Override
 	protected void _classSimpleName(Wrap<String> w) {
-		w.o("SiteUser");
+		w.o("IotNode");
 	}
 
 	@Override
 	protected void _pageTitle(Wrap<String> c) {
-		if(siteUser_ != null && siteUser_.getObjectTitle() != null)
-			c.o(siteUser_.getObjectTitle());
-		else if(siteUser_ != null)
-			c.o("site users");
-		else if(searchListSiteUser_ == null || siteUserCount == 0)
-			c.o("no site user found");
+		if(iotNode_ != null && iotNode_.getObjectTitle() != null)
+			c.o(iotNode_.getObjectTitle());
+		else if(iotNode_ != null)
+			c.o("IOT nodes");
+		else if(searchListIotNode_ == null || iotNodeCount == 0)
+			c.o("no IOT node found");
 		else
-			c.o("site users");
+			c.o("IOT nodes");
 	}
 
 	@Override
 	protected void _pageUri(Wrap<String> c) {
-		c.o("/api/user");
+		c.o("/api/iot-node");
 	}
 
 	@Override
@@ -189,15 +189,15 @@ public class SiteUserGenPage extends SiteUserGenPageGen<BaseModelPage> {
 
 	@Override
 	protected void _rolesRequired(List<String> l) {
-		l.addAll(Optional.ofNullable(siteRequest_.getConfig().getJsonArray(ConfigKeys.AUTH_ROLES_REQUIRED + "_SiteUser")).orElse(new JsonArray()).stream().map(o -> o.toString()).collect(Collectors.toList()));
+		l.addAll(Optional.ofNullable(siteRequest_.getConfig().getJsonArray(ConfigKeys.AUTH_ROLES_REQUIRED + "_IotNode")).orElse(new JsonArray()).stream().map(o -> o.toString()).collect(Collectors.toList()));
 	}
 
 	@Override
 	protected void _pagination(JsonObject pagination) {
 		JsonArray pages = new JsonArray();
-		Long start = searchListSiteUser_.getStart().longValue();
-		Long rows = searchListSiteUser_.getRows().longValue();
-		Long foundNum = searchListSiteUser_.getQueryResponse().getResponse().getNumFound().longValue();
+		Long start = searchListIotNode_.getStart().longValue();
+		Long rows = searchListIotNode_.getRows().longValue();
+		Long foundNum = searchListIotNode_.getQueryResponse().getResponse().getNumFound().longValue();
 		Long startNum = start + 1L;
 		Long endNum = start + rows;
 		Long floorMod = Math.floorMod(foundNum, rows);
@@ -239,12 +239,12 @@ public class SiteUserGenPage extends SiteUserGenPageGen<BaseModelPage> {
 
 	@Override
 	protected void _varsQ(JsonObject vars) {
-		SiteUser.varsQForClass().forEach(var -> {
+		IotNode.varsQForClass().forEach(var -> {
 			JsonObject json = new JsonObject();
 			json.put("var", var);
-			json.put("displayName", Optional.ofNullable(SiteUser.displayNameSiteUser(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
-			json.put("classSimpleName", Optional.ofNullable(SiteUser.classSimpleNameSiteUser(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
-			json.put("val", Optional.ofNullable(searchListSiteUser_.getRequest().getQuery()).filter(fq -> fq.startsWith(SiteUser.varIndexedSiteUser(var) + ":")).map(s -> StringUtils.substringAfter(s, ":")).orElse(null));
+			json.put("displayName", Optional.ofNullable(IotNode.displayNameIotNode(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
+			json.put("classSimpleName", Optional.ofNullable(IotNode.classSimpleNameIotNode(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
+			json.put("val", Optional.ofNullable(searchListIotNode_.getRequest().getQuery()).filter(fq -> fq.startsWith(IotNode.varIndexedIotNode(var) + ":")).map(s -> StringUtils.substringAfter(s, ":")).orElse(null));
 			vars.put(var, json);
 		});
 	}
@@ -252,13 +252,13 @@ public class SiteUserGenPage extends SiteUserGenPageGen<BaseModelPage> {
 	@Override
 	protected void _varsFq(JsonObject vars) {
 		Map<String, SolrResponse.FacetField> facetFields = Optional.ofNullable(facetCounts).map(c -> c.getFacetFields()).map(f -> f.getFacets()).orElse(new HashMap<String,SolrResponse.FacetField>());
-		SiteUser.varsFqForClass().forEach(var -> {
-			String varIndexed = SiteUser.varIndexedSiteUser(var);
+		IotNode.varsFqForClass().forEach(var -> {
+			String varIndexed = IotNode.varIndexedIotNode(var);
 			JsonObject json = new JsonObject();
 			json.put("var", var);
-			json.put("displayName", Optional.ofNullable(SiteUser.displayNameSiteUser(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
-			json.put("classSimpleName", Optional.ofNullable(SiteUser.classSimpleNameSiteUser(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
-			json.put("val", searchListSiteUser_.getRequest().getFilterQueries().stream().filter(fq -> fq.startsWith(SiteUser.varIndexedSiteUser(var) + ":")).findFirst().map(s -> StringUtils.substringAfter(s, ":")).orElse(null));
+			json.put("displayName", Optional.ofNullable(IotNode.displayNameIotNode(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
+			json.put("classSimpleName", Optional.ofNullable(IotNode.classSimpleNameIotNode(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
+			json.put("val", searchListIotNode_.getRequest().getFilterQueries().stream().filter(fq -> fq.startsWith(IotNode.varIndexedIotNode(var) + ":")).findFirst().map(s -> StringUtils.substringAfter(s, ":")).orElse(null));
 			Optional.ofNullable(facetFields.get(varIndexed)).ifPresent(facetField -> {
 				JsonObject facetJson = new JsonObject();
 				JsonObject counts = new JsonObject();
@@ -278,13 +278,13 @@ public class SiteUserGenPage extends SiteUserGenPageGen<BaseModelPage> {
 
 	@Override
 	protected void _varsRange(JsonObject vars) {
-		SiteUser.varsRangeForClass().forEach(var -> {
-			String varIndexed = SiteUser.varIndexedSiteUser(var);
+		IotNode.varsRangeForClass().forEach(var -> {
+			String varIndexed = IotNode.varIndexedIotNode(var);
 			JsonObject json = new JsonObject();
 			json.put("var", var);
-			json.put("displayName", Optional.ofNullable(SiteUser.displayNameSiteUser(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
-			json.put("classSimpleName", Optional.ofNullable(SiteUser.classSimpleNameSiteUser(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
-			json.put("val", searchListSiteUser_.getRequest().getFilterQueries().stream().filter(fq -> fq.startsWith(SiteUser.varIndexedSiteUser(var) + ":")).findFirst().map(s -> StringUtils.substringAfter(s, ":")).orElse(null));
+			json.put("displayName", Optional.ofNullable(IotNode.displayNameIotNode(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
+			json.put("classSimpleName", Optional.ofNullable(IotNode.classSimpleNameIotNode(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
+			json.put("val", searchListIotNode_.getRequest().getFilterQueries().stream().filter(fq -> fq.startsWith(IotNode.varIndexedIotNode(var) + ":")).findFirst().map(s -> StringUtils.substringAfter(s, ":")).orElse(null));
 			vars.put(var, json);
 		});
 	}
@@ -295,7 +295,7 @@ public class SiteUserGenPage extends SiteUserGenPageGen<BaseModelPage> {
 		JsonObject params = serviceRequest.getParams();
 
 		JsonObject queryParams = Optional.ofNullable(serviceRequest).map(ServiceRequest::getParams).map(or -> or.getJsonObject("query")).orElse(new JsonObject());
-		Long num = searchListSiteUser_.getQueryResponse().getResponse().getNumFound().longValue();
+		Long num = searchListIotNode_.getQueryResponse().getResponse().getNumFound().longValue();
 		String q = "*:*";
 		String q1 = "objectText";
 		String q2 = "";
@@ -323,28 +323,28 @@ public class SiteUserGenPage extends SiteUserGenPageGen<BaseModelPage> {
 		}
 		query.put("q", q);
 
-		Long rows1 = Optional.ofNullable(searchListSiteUser_).map(l -> l.getRows()).orElse(10L);
-		Long start1 = Optional.ofNullable(searchListSiteUser_).map(l -> l.getStart()).orElse(1L);
+		Long rows1 = Optional.ofNullable(searchListIotNode_).map(l -> l.getRows()).orElse(10L);
+		Long start1 = Optional.ofNullable(searchListIotNode_).map(l -> l.getStart()).orElse(1L);
 		Long start2 = start1 - rows1;
 		Long start3 = start1 + rows1;
 		Long rows2 = rows1 / 2;
 		Long rows3 = rows1 * 2;
 		start2 = start2 < 0 ? 0 : start2;
 		JsonObject fqs = new JsonObject();
-		for(String fq : Optional.ofNullable(searchListSiteUser_).map(l -> l.getFilterQueries()).orElse(Arrays.asList())) {
+		for(String fq : Optional.ofNullable(searchListIotNode_).map(l -> l.getFilterQueries()).orElse(Arrays.asList())) {
 			if(!StringUtils.contains(fq, "(")) {
 				String fq1 = StringUtils.substringBefore(fq, "_");
 				String fq2 = StringUtils.substringAfter(fq, ":");
 				if(!StringUtils.startsWithAny(fq, "classCanonicalNames_", "archived_", "deleted_", "sessionId", "userKeys"))
-					fqs.put(fq1, new JsonObject().put("var", fq1).put("val", fq2).put("displayName", SiteUser.displayNameForClass(fq1)));
+					fqs.put(fq1, new JsonObject().put("var", fq1).put("val", fq2).put("displayName", IotNode.displayNameForClass(fq1)));
 				}
 			}
 		query.put("fq", fqs);
 
 		JsonArray sorts = new JsonArray();
-		for(String sort : Optional.ofNullable(searchListSiteUser_).map(l -> l.getSorts()).orElse(Arrays.asList())) {
+		for(String sort : Optional.ofNullable(searchListIotNode_).map(l -> l.getSorts()).orElse(Arrays.asList())) {
 			String sort1 = StringUtils.substringBefore(sort, "_");
-			sorts.add(new JsonObject().put("var", sort1).put("order", StringUtils.substringAfter(sort, " ")).put("displayName", SiteUser.displayNameForClass(sort1)));
+			sorts.add(new JsonObject().put("var", sort1).put("order", StringUtils.substringAfter(sort, " ")).put("displayName", IotNode.displayNameForClass(sort1)));
 		}
 		query.put("sort", sorts);
 	}
@@ -356,16 +356,16 @@ public class SiteUserGenPage extends SiteUserGenPageGen<BaseModelPage> {
 
 	@Override
 	protected void _pageImageUri(Wrap<String> c) {
-			c.o("/png/api/user-999.png");
+			c.o("/png/api/iot-node-999.png");
 	}
 
 	@Override
 	protected void _contextIconGroup(Wrap<String> c) {
-			c.o("regular");
+			c.o("duotone");
 	}
 
 	@Override
 	protected void _contextIconName(Wrap<String> c) {
-			c.o("user-cog");
+			c.o("router");
 	}
 }

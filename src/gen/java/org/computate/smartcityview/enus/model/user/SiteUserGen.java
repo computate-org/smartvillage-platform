@@ -856,25 +856,25 @@ public abstract class SiteUserGen<DEV> extends BaseModel {
 	}
 
 	/////////////
-	// define //
+	// persist //
 	/////////////
 
-	@Override public boolean defineForClass(String var, Object val) {
+	@Override public boolean persistForClass(String var, Object val) {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		if(val != null) {
 			for(String v : vars) {
 				if(o == null)
-					o = defineSiteUser(v, val);
+					o = persistSiteUser(v, val);
 				else if(o instanceof BaseModel) {
 					BaseModel oBaseModel = (BaseModel)o;
-					o = oBaseModel.defineForClass(v, val);
+					o = oBaseModel.persistForClass(v, val);
 				}
 			}
 		}
 		return o != null;
 	}
-	public Object defineSiteUser(String var, Object val) {
+	public Object persistSiteUser(String var, Object val) {
 		switch(var.toLowerCase()) {
 			case "userid":
 				if(val instanceof String)
@@ -921,7 +921,7 @@ public abstract class SiteUserGen<DEV> extends BaseModel {
 				saves.add("seeDeleted");
 				return val;
 			default:
-				return super.defineBaseModel(var, val);
+				return super.persistBaseModel(var, val);
 		}
 	}
 
@@ -1101,6 +1101,39 @@ public abstract class SiteUserGen<DEV> extends BaseModel {
 	public static final String VAR_seeArchived = "seeArchived";
 	public static final String VAR_seeDeleted = "seeDeleted";
 
+	public static List<String> varsQForClass() {
+		return SiteUser.varsQSiteUser(new ArrayList<String>());
+	}
+	public static List<String> varsQSiteUser(List<String> vars) {
+		BaseModel.varsQBaseModel(vars);
+		return vars;
+	}
+
+	public static List<String> varsFqForClass() {
+		return SiteUser.varsFqSiteUser(new ArrayList<String>());
+	}
+	public static List<String> varsFqSiteUser(List<String> vars) {
+		vars.add(VAR_userKeys);
+		vars.add(VAR_userId);
+		vars.add(VAR_userName);
+		vars.add(VAR_userEmail);
+		vars.add(VAR_userFirstName);
+		vars.add(VAR_userLastName);
+		vars.add(VAR_userFullName);
+		vars.add(VAR_seeArchived);
+		vars.add(VAR_seeDeleted);
+		BaseModel.varsFqBaseModel(vars);
+		return vars;
+	}
+
+	public static List<String> varsRangeForClass() {
+		return SiteUser.varsRangeSiteUser(new ArrayList<String>());
+	}
+	public static List<String> varsRangeSiteUser(List<String> vars) {
+		BaseModel.varsRangeBaseModel(vars);
+		return vars;
+	}
+
 	public static final String DISPLAY_NAME_userKeys = "";
 	public static final String DISPLAY_NAME_userId = "";
 	public static final String DISPLAY_NAME_userName = "";
@@ -1136,6 +1169,95 @@ public abstract class SiteUserGen<DEV> extends BaseModel {
 			return DISPLAY_NAME_seeDeleted;
 		default:
 			return BaseModel.displayNameBaseModel(var);
+		}
+	}
+
+	public static String descriptionSiteUser(String var) {
+		switch(var) {
+			default:
+				return BaseModel.descriptionBaseModel(var);
+		}
+	}
+
+	public static String classSimpleNameSiteUser(String var) {
+		switch(var) {
+		case VAR_userKeys:
+			return "List";
+		case VAR_userId:
+			return "String";
+		case VAR_userName:
+			return "String";
+		case VAR_userEmail:
+			return "String";
+		case VAR_userFirstName:
+			return "String";
+		case VAR_userLastName:
+			return "String";
+		case VAR_userFullName:
+			return "String";
+		case VAR_seeArchived:
+			return "Boolean";
+		case VAR_seeDeleted:
+			return "Boolean";
+			default:
+				return BaseModel.classSimpleNameBaseModel(var);
+		}
+	}
+
+	public static Integer htmlColumnSiteUser(String var) {
+		switch(var) {
+			default:
+				return BaseModel.htmlColumnBaseModel(var);
+		}
+	}
+
+	public static Integer htmlRowSiteUser(String var) {
+		switch(var) {
+		case VAR_seeArchived:
+			return 3;
+		case VAR_seeDeleted:
+			return 3;
+			default:
+				return BaseModel.htmlRowBaseModel(var);
+		}
+	}
+
+	public static Integer htmlCellSiteUser(String var) {
+		switch(var) {
+		case VAR_seeArchived:
+			return 2;
+		case VAR_seeDeleted:
+			return 3;
+			default:
+				return BaseModel.htmlCellBaseModel(var);
+		}
+	}
+
+	public static Integer lengthMinSiteUser(String var) {
+		switch(var) {
+			default:
+				return BaseModel.lengthMinBaseModel(var);
+		}
+	}
+
+	public static Integer lengthMaxSiteUser(String var) {
+		switch(var) {
+			default:
+				return BaseModel.lengthMaxBaseModel(var);
+		}
+	}
+
+	public static Integer maxSiteUser(String var) {
+		switch(var) {
+			default:
+				return BaseModel.maxBaseModel(var);
+		}
+	}
+
+	public static Integer minSiteUser(String var) {
+		switch(var) {
+			default:
+				return BaseModel.minBaseModel(var);
 		}
 	}
 }
