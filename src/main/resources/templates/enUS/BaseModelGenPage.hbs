@@ -274,13 +274,13 @@
 {{#*inline "htmFormBaseModelPage"}}
 		<!-- #*inline "htmForm" -->
 		<form action="" id="BaseModelForm" class="pageForm " style="" onsubmit="event.preventDefault(); return false; ">
-{{#if pk}}
+{{#if id}}
 			<input name="pk" class="valuePk" type="hidden" value="{{pk}}"/>
 {{/if}}
 			<input name="focusId" type="hidden"/>
 			<input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{{toJsonObjectStringInApostrophes pageResponse }}}' type="hidden"/>
 		</form>
-{{#if pk}}
+{{#if id}}
 {{#block "htmForm_searchpageBaseModel"}}{{/block}}
 {{/if}}
 {{/inline}}

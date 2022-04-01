@@ -72,6 +72,7 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 	public static final String IotNode_Color = "blue";
 	public static final String IotNode_IconGroup = "duotone";
 	public static final String IotNode_IconName = "router";
+	public static final Integer IotNode_Rows = 100;
 
 	//////////////
 	// nodeName //
@@ -672,6 +673,7 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 		return sb.toString();
 	}
 
+	public static final String CLASS_SIMPLE_NAME = "IotNode";
 	public static final String VAR_nodeName = "nodeName";
 	public static final String VAR_nodeType = "nodeType";
 	public static final String VAR_nodeId = "nodeId";

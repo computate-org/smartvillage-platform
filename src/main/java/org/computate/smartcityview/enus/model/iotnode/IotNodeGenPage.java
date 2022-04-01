@@ -153,6 +153,11 @@ public class IotNodeGenPage extends IotNodeGenPageGen<BaseModelPage> {
 			w.o(iotNode_.getPk());
 	}
 
+	protected void _id(Wrap<String> w) {
+		if(iotNodeCount == 1)
+			w.o(iotNode_.getId());
+	}
+
 	@Override
 	protected void _promiseBefore(Promise<Void> promise) {
 		promise.complete();

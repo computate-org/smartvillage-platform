@@ -71,6 +71,11 @@ public abstract class WorkerVerticleGen<DEV> extends AbstractVerticle {
 	public static final String importDataClassFail1 = "Configuring the import of %s data failed. ";
 	public static final String importDataClassFail = importDataClassFail1;
 
+	public static final String importDataIotNodeComplete1 = "Importing %s data completed. ";
+	public static final String importDataIotNodeComplete = importDataIotNodeComplete1;
+	public static final String importDataIotNodeFail1 = "Importing %s data failed. ";
+	public static final String importDataIotNodeFail = importDataIotNodeFail1;
+
 	public static final String importDataSkip1 = "The data import is disabled. ";
 	public static final String importDataSkip = importDataSkip1;
 
@@ -234,8 +239,9 @@ public abstract class WorkerVerticleGen<DEV> extends AbstractVerticle {
 		return sb.toString();
 	}
 
-	public static final String[] WorkerVerticleVals = new String[] { configureDataConnectionError1, configureDataConnectionSuccess1, configureDataInitError1, configureDataInitSuccess1, configureSharedWorkerExecutorFail1, configureSharedWorkerExecutorComplete1, configureEmailComplete1, configureEmailFail1, importTimerScheduling1, importTimerSkip1, importDataClassComplete1, importDataClassFail1, importDataSkip1, refreshAllDataComplete1, refreshAllDataStarted1, refreshAllDataFail1, refreshAllDataSkip1, refreshDataComplete1, refreshDataStarted1, refreshDataSkip1, refreshDataFail1, refreshDataCounterResetFail1 };
+	public static final String[] WorkerVerticleVals = new String[] { configureDataConnectionError1, configureDataConnectionSuccess1, configureDataInitError1, configureDataInitSuccess1, configureSharedWorkerExecutorFail1, configureSharedWorkerExecutorComplete1, configureEmailComplete1, configureEmailFail1, importTimerScheduling1, importTimerSkip1, importDataClassComplete1, importDataClassFail1, importDataIotNodeComplete1, importDataIotNodeFail1, importDataSkip1, refreshAllDataComplete1, refreshAllDataStarted1, refreshAllDataFail1, refreshAllDataSkip1, refreshDataComplete1, refreshDataStarted1, refreshDataSkip1, refreshDataFail1, refreshDataCounterResetFail1 };
 
+	public static final String CLASS_SIMPLE_NAME = "WorkerVerticle";
 
 
 	public static String displayNameForClass(String var) {

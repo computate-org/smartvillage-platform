@@ -3,7 +3,6 @@ package org.computate.smartcityview.enus.vertx;
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -13,12 +12,12 @@ import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.StringUtils;
-import org.computate.search.serialize.ComputateZonedDateTimeSerializer;
 import org.computate.search.tool.TimeTool;
+import org.computate.smartcityview.enus.config.ConfigKeys;
+import org.computate.smartcityview.enus.model.iotnode.IotNode;
+import org.computate.smartcityview.enus.request.SiteRequestEnUS;
 import org.computate.vertx.api.ApiCounter;
 import org.computate.vertx.api.ApiRequest;
-import org.computate.smartcityview.enus.config.ConfigKeys;
-import org.computate.smartcityview.enus.request.SiteRequestEnUS;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,17 +29,16 @@ import io.vertx.core.WorkerExecutor;
 import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.ext.jdbc.JDBCClient;
+import io.vertx.ext.auth.authentication.TokenCredentials;
 import io.vertx.ext.mail.MailClient;
 import io.vertx.ext.mail.MailConfig;
 import io.vertx.ext.web.client.WebClient;
+import io.vertx.ext.web.client.predicate.ResponsePredicate;
 import io.vertx.pgclient.PgConnectOptions;
 import io.vertx.pgclient.PgPool;
-import io.vertx.sqlclient.Cursor;
 import io.vertx.sqlclient.PoolOptions;
 import io.vertx.sqlclient.Row;
 import io.vertx.sqlclient.RowStream;
-import io.vertx.sqlclient.SqlConnection;
 
 /**
  */
@@ -260,12 +258,102 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 		}
 	}
 
-	/**	
-	 * Import initial data
+	/**
+	 * Description: Import initial data
 	 * Val.Complete.enUS:Configuring the import of %s data completed. 
 	 * Val.Fail.enUS:Configuring the import of %s data failed. 
-	 **/
+	 */
 	private void importDataClass(String classSimpleName, ZonedDateTime startDateTime) {
+		if("IotNode".equals(classSimpleName)) {
+			importDataIotNode().onComplete(a -> {
+				String importPeriod = config().getString(String.format("%s_%s", ConfigKeys.IMPORT_DATA_PERIOD, classSimpleName));
+				if(importPeriod != null && startDateTime != null) {
+					Duration duration = TimeTool.parseNextDuration(importPeriod);
+					ZonedDateTime nextStartTime = startDateTime.plus(duration);
+					LOG.info(String.format(importTimerScheduling, classSimpleName, nextStartTime.format(TIME_FORMAT)));
+					Duration nextStartDuration = Duration.between(Instant.now(), nextStartTime);
+					vertx.setTimer(nextStartDuration.toMillis(), b -> {
+						importDataClass(classSimpleName, nextStartTime);
+					});
+				}
+			});
+		}
+	}
+
+	/**
+	 * Description: Import IOT Node data
+	 * Val.Complete.enUS:Importing %s data completed. 
+	 * Val.Fail.enUS:Importing %s data failed. 
+	 */
+	private Future<Void> importDataIotNode() {
+		Promise<Void> promise = Promise.promise();
+		webClient.post(config().getInteger(ConfigKeys.YGGIO_PORT), config().getString(ConfigKeys.YGGIO_HOST_NAME), config().getString(ConfigKeys.YGGIO_AUTH_LOCAL_URI))
+				.ssl(config().getBoolean(ConfigKeys.YGGIO_SSL))
+				.expect(ResponsePredicate.SC_OK)
+				.putHeader("Content-Type", "application/json")
+				.sendJsonObject(new JsonObject()
+						.put("username", config().getString(ConfigKeys.YGGIO_USERNAME))
+						.put("password", config().getString(ConfigKeys.YGGIO_PASSWORD))
+						)
+				.onSuccess(tokenResponse -> {
+			JsonObject token = tokenResponse.bodyAsJsonObject();
+			webClient.get(config().getInteger(ConfigKeys.YGGIO_PORT), config().getString(ConfigKeys.YGGIO_HOST_NAME), config().getString(String.format("%s_%s", ConfigKeys.YGGIO_API_RELATIVE_URI, "IotNode")))
+					.ssl(config().getBoolean(ConfigKeys.YGGIO_SSL))
+					.authentication(new TokenCredentials(token.getString("token")))
+					.expect(ResponsePredicate.SC_OK)
+					.send()
+					.onSuccess(response -> {
+				JsonArray data = response.bodyAsJsonArray();
+				List<Future> futures = new ArrayList<>();
+
+				data.stream().forEach(row -> {
+					JsonObject iotNode = (JsonObject)row;
+					String id = iotNode.getString("_id");
+					String name = iotNode.getString("name");
+					String nodeType = iotNode.getString("nodeType");
+					JsonArray latlng = iotNode.getJsonArray("latlng");
+
+					JsonObject body = new JsonObject()
+							.put(IotNode.VAR_saves, new JsonArray()
+									.add(IotNode.VAR_inheritPk)
+									.add(IotNode.VAR_nodeId)
+									.add(IotNode.VAR_nodeName)
+									.add(IotNode.VAR_nodeType)
+									.add(IotNode.VAR_location)
+									)
+							.put(IotNode.VAR_pk, id)
+							.put(IotNode.VAR_nodeId, id)
+							.put(IotNode.VAR_nodeName, name)
+							.put(IotNode.VAR_nodeType, nodeType)
+							;
+					if(latlng != null && latlng.size() == 2)
+						body.put(IotNode.VAR_location, String.format("%s,%s", latlng.getDouble(0), latlng.getDouble(1)));
+
+					JsonObject params = new JsonObject();
+					params.put("body", body);
+					params.put("path", new JsonObject());
+					params.put("cookie", new JsonObject());
+					params.put("query", new JsonObject().put("commitWithin", 10000).put("q", "*:*").put("var", new JsonArray().add("refresh:false")));
+					JsonObject context = new JsonObject().put("params", params);
+					JsonObject json = new JsonObject().put("context", context);
+					futures.add(vertx.eventBus().request(String.format("smart-city-view-enUS-%s", "IotNode"), json, new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", IotNode.CLASS_SIMPLE_NAME))));
+				});
+				CompositeFuture.all(futures).onSuccess(a -> {
+					LOG.info(String.format(importDataIotNodeComplete, IotNode.CLASS_SIMPLE_NAME));
+					promise.complete();
+				}).onFailure(ex -> {
+					LOG.error(String.format(importDataIotNodeFail, IotNode.CLASS_SIMPLE_NAME), ex);
+					promise.fail(ex);
+				});
+			}).onFailure(ex -> {
+				LOG.error(String.format(importDataIotNodeFail, IotNode.CLASS_SIMPLE_NAME), ex);
+				promise.fail(ex);
+			});
+		}).onFailure(ex -> {
+			LOG.error(String.format(importDataIotNodeFail, IotNode.CLASS_SIMPLE_NAME), ex);
+			promise.fail(ex);
+		});
+		return promise.future();
 	}
 
 	/**	
@@ -275,7 +363,7 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 	private Future<Void> importData() {
 		Promise<Void> promise = Promise.promise();
 		if(config().getBoolean(ConfigKeys.ENABLE_IMPORT_DATA)) {
-			importTimer("MODEL_CLASS");
+			importTimer("IotNode");
 			promise.complete();
 		}
 		else {

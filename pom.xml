@@ -40,7 +40,7 @@ TODO: Define the groupId and artifactId for ActiveLearningStudio-API.
 		<exec-maven-plugin.version>1.5.0</exec-maven-plugin.version>
 		<vertx.version>4.1.8.redhat-00003</vertx.version>
 		<apache-curator.version>4.3.0</apache-curator.version>
-		<computate.version>4.1.8.6</computate.version>
+		<computate.version>4.1.8.7</computate.version>
 		<camel.version>3.14.1</camel.version>
 	</properties>
 

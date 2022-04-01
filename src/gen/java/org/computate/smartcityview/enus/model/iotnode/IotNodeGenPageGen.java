@@ -1003,6 +1003,55 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 		return IotNodeGenPage.staticSearchStrPk(siteRequest_, IotNodeGenPage.staticSearchPk(siteRequest_, IotNodeGenPage.staticSetPk(siteRequest_, o)));
 	}
 
+	////////
+	// id //
+	////////
+
+	/**	 The entity id
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String id;
+
+	/**	<br> The entity id
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartcityview.enus.model.iotnode.IotNodeGenPage&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_enUS_indexed_string:id">Find the entity id in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _id(Wrap<String> w);
+
+	public String getId() {
+		return id;
+	}
+	public void setId(String o) {
+		this.id = IotNodeGenPage.staticSetId(siteRequest_, o);
+	}
+	public static String staticSetId(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected IotNodeGenPage idInit() {
+		Wrap<String> idWrap = new Wrap<String>().var("id");
+		if(id == null) {
+			_id(idWrap);
+			setId(idWrap.o);
+		}
+		return (IotNodeGenPage)this;
+	}
+
+	public static String staticSearchId(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrId(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqId(SiteRequestEnUS siteRequest_, String o) {
+		return IotNodeGenPage.staticSearchStrId(siteRequest_, IotNodeGenPage.staticSearchId(siteRequest_, IotNodeGenPage.staticSetId(siteRequest_, o)));
+	}
+
 	//////////////
 	// initDeep //
 	//////////////
@@ -1051,6 +1100,7 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 				iotNodeCountInit();
 				iotNode_Init();
 				pkInit();
+				idInit();
 				promise2.complete();
 			} catch(Exception ex) {
 				promise2.fail(ex);
@@ -1142,6 +1192,8 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 				return oIotNodeGenPage.iotNode_;
 			case "pk":
 				return oIotNodeGenPage.pk;
+			case "id":
+				return oIotNodeGenPage.id;
 			default:
 				return super.obtainBaseModelPage(var);
 		}
@@ -1207,6 +1259,8 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 			return IotNodeGenPage.staticSetIotNodeCount(siteRequest_, o);
 		case "pk":
 			return IotNodeGenPage.staticSetPk(siteRequest_, o);
+		case "id":
+			return IotNodeGenPage.staticSetId(siteRequest_, o);
 			default:
 				return BaseModelPage.staticSetBaseModelPage(entityVar,  siteRequest_, o);
 		}
@@ -1247,6 +1301,8 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 			return IotNodeGenPage.staticSearchIotNodeCount(siteRequest_, (Integer)o);
 		case "pk":
 			return IotNodeGenPage.staticSearchPk(siteRequest_, (Long)o);
+		case "id":
+			return IotNodeGenPage.staticSearchId(siteRequest_, (String)o);
 			default:
 				return BaseModelPage.staticSearchBaseModelPage(entityVar,  siteRequest_, o);
 		}
@@ -1287,6 +1343,8 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 			return IotNodeGenPage.staticSearchStrIotNodeCount(siteRequest_, (Integer)o);
 		case "pk":
 			return IotNodeGenPage.staticSearchStrPk(siteRequest_, (Long)o);
+		case "id":
+			return IotNodeGenPage.staticSearchStrId(siteRequest_, (String)o);
 			default:
 				return BaseModelPage.staticSearchStrBaseModelPage(entityVar,  siteRequest_, o);
 		}
@@ -1327,6 +1385,8 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 			return IotNodeGenPage.staticSearchFqIotNodeCount(siteRequest_, o);
 		case "pk":
 			return IotNodeGenPage.staticSearchFqPk(siteRequest_, o);
+		case "id":
+			return IotNodeGenPage.staticSearchFqId(siteRequest_, o);
 			default:
 				return BaseModelPage.staticSearchFqBaseModelPage(entityVar,  siteRequest_, o);
 		}
@@ -1342,6 +1402,7 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 		return sb.toString();
 	}
 
+	public static final String CLASS_SIMPLE_NAME = "IotNodeGenPage";
 	public static final String VAR_searchListIotNode_ = "searchListIotNode_";
 	public static final String VAR_pageResponse = "pageResponse";
 	public static final String VAR_defaultZoneId = "defaultZoneId";
@@ -1361,6 +1422,7 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 	public static final String VAR_iotNodeCount = "iotNodeCount";
 	public static final String VAR_iotNode_ = "iotNode_";
 	public static final String VAR_pk = "pk";
+	public static final String VAR_id = "id";
 
 	public static final String DISPLAY_NAME_searchListIotNode_ = "";
 	public static final String DISPLAY_NAME_pageResponse = "";
@@ -1381,6 +1443,7 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 	public static final String DISPLAY_NAME_iotNodeCount = "";
 	public static final String DISPLAY_NAME_iotNode_ = "";
 	public static final String DISPLAY_NAME_pk = "";
+	public static final String DISPLAY_NAME_id = "";
 
 	public static String displayNameForClass(String var) {
 		return IotNodeGenPage.displayNameIotNodeGenPage(var);
@@ -1425,6 +1488,8 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 			return DISPLAY_NAME_iotNode_;
 		case VAR_pk:
 			return DISPLAY_NAME_pk;
+		case VAR_id:
+			return DISPLAY_NAME_id;
 		default:
 			return BaseModelPage.displayNameBaseModelPage(var);
 		}

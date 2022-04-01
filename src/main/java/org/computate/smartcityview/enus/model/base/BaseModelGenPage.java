@@ -96,6 +96,11 @@ public class BaseModelGenPage extends BaseModelGenPageGen<PageLayout> {
 			w.o(searchListBaseModel_.get(0));
 	}
 
+	protected void _id(Wrap<String> w) {
+		if(baseModelCount == 1)
+			w.o(baseModel_.getId());
+	}
+
 	@Override
 	protected void _promiseBefore(Promise<Void> promise) {
 		promise.complete();

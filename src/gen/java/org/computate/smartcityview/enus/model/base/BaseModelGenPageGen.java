@@ -366,6 +366,55 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 		return (BaseModelGenPage)this;
 	}
 
+	////////
+	// id //
+	////////
+
+	/**	 The entity id
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String id;
+
+	/**	<br> The entity id
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartcityview.enus.model.base.BaseModelGenPage&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_enUS_indexed_string:id">Find the entity id in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _id(Wrap<String> w);
+
+	public String getId() {
+		return id;
+	}
+	public void setId(String o) {
+		this.id = BaseModelGenPage.staticSetId(siteRequest_, o);
+	}
+	public static String staticSetId(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected BaseModelGenPage idInit() {
+		Wrap<String> idWrap = new Wrap<String>().var("id");
+		if(id == null) {
+			_id(idWrap);
+			setId(idWrap.o);
+		}
+		return (BaseModelGenPage)this;
+	}
+
+	public static String staticSearchId(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrId(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqId(SiteRequestEnUS siteRequest_, String o) {
+		return BaseModelGenPage.staticSearchStrId(siteRequest_, BaseModelGenPage.staticSearchId(siteRequest_, BaseModelGenPage.staticSetId(siteRequest_, o)));
+	}
+
 	//////////////
 	// initDeep //
 	//////////////
@@ -402,6 +451,7 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 				facetCountsInit();
 				baseModelCountInit();
 				baseModel_Init();
+				idInit();
 				promise2.complete();
 			} catch(Exception ex) {
 				promise2.fail(ex);
@@ -469,6 +519,8 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 				return oBaseModelGenPage.baseModelCount;
 			case "baseModel_":
 				return oBaseModelGenPage.baseModel_;
+			case "id":
+				return oBaseModelGenPage.id;
 			default:
 				return super.obtainPageLayout(var);
 		}
@@ -514,6 +566,8 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 			return BaseModelGenPage.staticSetDefaultPivotVars(siteRequest_, o);
 		case "baseModelCount":
 			return BaseModelGenPage.staticSetBaseModelCount(siteRequest_, o);
+		case "id":
+			return BaseModelGenPage.staticSetId(siteRequest_, o);
 			default:
 				return PageLayout.staticSetPageLayout(entityVar,  siteRequest_, o);
 		}
@@ -534,6 +588,8 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 			return BaseModelGenPage.staticSearchDefaultPivotVars(siteRequest_, (String)o);
 		case "baseModelCount":
 			return BaseModelGenPage.staticSearchBaseModelCount(siteRequest_, (Integer)o);
+		case "id":
+			return BaseModelGenPage.staticSearchId(siteRequest_, (String)o);
 			default:
 				return PageLayout.staticSearchPageLayout(entityVar,  siteRequest_, o);
 		}
@@ -554,6 +610,8 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 			return BaseModelGenPage.staticSearchStrDefaultPivotVars(siteRequest_, (String)o);
 		case "baseModelCount":
 			return BaseModelGenPage.staticSearchStrBaseModelCount(siteRequest_, (Integer)o);
+		case "id":
+			return BaseModelGenPage.staticSearchStrId(siteRequest_, (String)o);
 			default:
 				return PageLayout.staticSearchStrPageLayout(entityVar,  siteRequest_, o);
 		}
@@ -574,6 +632,8 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 			return BaseModelGenPage.staticSearchFqDefaultPivotVars(siteRequest_, o);
 		case "baseModelCount":
 			return BaseModelGenPage.staticSearchFqBaseModelCount(siteRequest_, o);
+		case "id":
+			return BaseModelGenPage.staticSearchFqId(siteRequest_, o);
 			default:
 				return PageLayout.staticSearchFqPageLayout(entityVar,  siteRequest_, o);
 		}
@@ -596,6 +656,7 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 	public static final String VAR_facetCounts = "facetCounts";
 	public static final String VAR_baseModelCount = "baseModelCount";
 	public static final String VAR_baseModel_ = "baseModel_";
+	public static final String VAR_id = "id";
 
 	public static final String DISPLAY_NAME_searchListBaseModel_ = "";
 	public static final String DISPLAY_NAME_pageResponse = "";
@@ -604,6 +665,7 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 	public static final String DISPLAY_NAME_facetCounts = "";
 	public static final String DISPLAY_NAME_baseModelCount = "";
 	public static final String DISPLAY_NAME_baseModel_ = "";
+	public static final String DISPLAY_NAME_id = "";
 
 	public static String displayNameForClass(String var) {
 		return BaseModelGenPage.displayNameBaseModelGenPage(var);
@@ -624,6 +686,8 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 			return DISPLAY_NAME_baseModelCount;
 		case VAR_baseModel_:
 			return DISPLAY_NAME_baseModel_;
+		case VAR_id:
+			return DISPLAY_NAME_id;
 		default:
 			return PageLayout.displayNamePageLayout(var);
 		}

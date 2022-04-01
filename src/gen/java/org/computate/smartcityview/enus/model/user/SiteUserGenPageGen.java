@@ -1003,6 +1003,55 @@ public abstract class SiteUserGenPageGen<DEV> extends BaseModelPage {
 		return SiteUserGenPage.staticSearchStrPk(siteRequest_, SiteUserGenPage.staticSearchPk(siteRequest_, SiteUserGenPage.staticSetPk(siteRequest_, o)));
 	}
 
+	////////
+	// id //
+	////////
+
+	/**	 The entity id
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String id;
+
+	/**	<br> The entity id
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartcityview.enus.model.user.SiteUserGenPage&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_enUS_indexed_string:id">Find the entity id in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _id(Wrap<String> w);
+
+	public String getId() {
+		return id;
+	}
+	public void setId(String o) {
+		this.id = SiteUserGenPage.staticSetId(siteRequest_, o);
+	}
+	public static String staticSetId(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected SiteUserGenPage idInit() {
+		Wrap<String> idWrap = new Wrap<String>().var("id");
+		if(id == null) {
+			_id(idWrap);
+			setId(idWrap.o);
+		}
+		return (SiteUserGenPage)this;
+	}
+
+	public static String staticSearchId(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrId(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqId(SiteRequestEnUS siteRequest_, String o) {
+		return SiteUserGenPage.staticSearchStrId(siteRequest_, SiteUserGenPage.staticSearchId(siteRequest_, SiteUserGenPage.staticSetId(siteRequest_, o)));
+	}
+
 	//////////////
 	// initDeep //
 	//////////////
@@ -1051,6 +1100,7 @@ public abstract class SiteUserGenPageGen<DEV> extends BaseModelPage {
 				siteUserCountInit();
 				siteUser_Init();
 				pkInit();
+				idInit();
 				promise2.complete();
 			} catch(Exception ex) {
 				promise2.fail(ex);
@@ -1142,6 +1192,8 @@ public abstract class SiteUserGenPageGen<DEV> extends BaseModelPage {
 				return oSiteUserGenPage.siteUser_;
 			case "pk":
 				return oSiteUserGenPage.pk;
+			case "id":
+				return oSiteUserGenPage.id;
 			default:
 				return super.obtainBaseModelPage(var);
 		}
@@ -1207,6 +1259,8 @@ public abstract class SiteUserGenPageGen<DEV> extends BaseModelPage {
 			return SiteUserGenPage.staticSetSiteUserCount(siteRequest_, o);
 		case "pk":
 			return SiteUserGenPage.staticSetPk(siteRequest_, o);
+		case "id":
+			return SiteUserGenPage.staticSetId(siteRequest_, o);
 			default:
 				return BaseModelPage.staticSetBaseModelPage(entityVar,  siteRequest_, o);
 		}
@@ -1247,6 +1301,8 @@ public abstract class SiteUserGenPageGen<DEV> extends BaseModelPage {
 			return SiteUserGenPage.staticSearchSiteUserCount(siteRequest_, (Integer)o);
 		case "pk":
 			return SiteUserGenPage.staticSearchPk(siteRequest_, (Long)o);
+		case "id":
+			return SiteUserGenPage.staticSearchId(siteRequest_, (String)o);
 			default:
 				return BaseModelPage.staticSearchBaseModelPage(entityVar,  siteRequest_, o);
 		}
@@ -1287,6 +1343,8 @@ public abstract class SiteUserGenPageGen<DEV> extends BaseModelPage {
 			return SiteUserGenPage.staticSearchStrSiteUserCount(siteRequest_, (Integer)o);
 		case "pk":
 			return SiteUserGenPage.staticSearchStrPk(siteRequest_, (Long)o);
+		case "id":
+			return SiteUserGenPage.staticSearchStrId(siteRequest_, (String)o);
 			default:
 				return BaseModelPage.staticSearchStrBaseModelPage(entityVar,  siteRequest_, o);
 		}
@@ -1327,6 +1385,8 @@ public abstract class SiteUserGenPageGen<DEV> extends BaseModelPage {
 			return SiteUserGenPage.staticSearchFqSiteUserCount(siteRequest_, o);
 		case "pk":
 			return SiteUserGenPage.staticSearchFqPk(siteRequest_, o);
+		case "id":
+			return SiteUserGenPage.staticSearchFqId(siteRequest_, o);
 			default:
 				return BaseModelPage.staticSearchFqBaseModelPage(entityVar,  siteRequest_, o);
 		}
@@ -1361,6 +1421,7 @@ public abstract class SiteUserGenPageGen<DEV> extends BaseModelPage {
 	public static final String VAR_siteUserCount = "siteUserCount";
 	public static final String VAR_siteUser_ = "siteUser_";
 	public static final String VAR_pk = "pk";
+	public static final String VAR_id = "id";
 
 	public static final String DISPLAY_NAME_searchListSiteUser_ = "";
 	public static final String DISPLAY_NAME_pageResponse = "";
@@ -1381,6 +1442,7 @@ public abstract class SiteUserGenPageGen<DEV> extends BaseModelPage {
 	public static final String DISPLAY_NAME_siteUserCount = "";
 	public static final String DISPLAY_NAME_siteUser_ = "";
 	public static final String DISPLAY_NAME_pk = "";
+	public static final String DISPLAY_NAME_id = "";
 
 	public static String displayNameForClass(String var) {
 		return SiteUserGenPage.displayNameSiteUserGenPage(var);
@@ -1425,6 +1487,8 @@ public abstract class SiteUserGenPageGen<DEV> extends BaseModelPage {
 			return DISPLAY_NAME_siteUser_;
 		case VAR_pk:
 			return DISPLAY_NAME_pk;
+		case VAR_id:
+			return DISPLAY_NAME_id;
 		default:
 			return BaseModelPage.displayNameBaseModelPage(var);
 		}

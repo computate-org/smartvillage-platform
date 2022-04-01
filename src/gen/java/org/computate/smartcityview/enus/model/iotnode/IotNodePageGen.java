@@ -221,6 +221,7 @@ public abstract class IotNodePageGen<DEV> extends IotNodeGenPage {
 		return sb.toString();
 	}
 
+	public static final String CLASS_SIMPLE_NAME = "IotNodePage";
 
 
 	public static String displayNameForClass(String var) {

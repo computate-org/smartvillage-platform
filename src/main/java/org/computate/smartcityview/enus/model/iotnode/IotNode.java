@@ -34,6 +34,7 @@ import io.vertx.pgclient.data.Point;
  * IconGroup: duotone
  * IconName: router
  * NameVar.enUS: iot-node
+ * Rows: 100
  */
 public class IotNode extends IotNodeGen<BaseModel> {
 

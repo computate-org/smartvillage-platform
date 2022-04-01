@@ -153,6 +153,11 @@ public class SiteUserGenPage extends SiteUserGenPageGen<BaseModelPage> {
 			w.o(siteUser_.getPk());
 	}
 
+	protected void _id(Wrap<String> w) {
+		if(siteUserCount == 1)
+			w.o(siteUser_.getId());
+	}
+
 	@Override
 	protected void _promiseBefore(Promise<Void> promise) {
 		promise.complete();
