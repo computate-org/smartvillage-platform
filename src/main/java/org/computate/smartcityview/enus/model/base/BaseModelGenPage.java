@@ -195,6 +195,7 @@ public class BaseModelGenPage extends BaseModelGenPageGen<PageLayout> {
 		Map<String, SolrResponse.FacetField> facetFields = Optional.ofNullable(facetCounts).map(c -> c.getFacetFields()).map(f -> f.getFacets()).orElse(new HashMap<String,SolrResponse.FacetField>());
 		BaseModel.varsFqForClass().forEach(var -> {
 			String varIndexed = BaseModel.varIndexedBaseModel(var);
+			String varStored = BaseModel.varStoredBaseModel(var);
 			JsonObject json = new JsonObject();
 			json.put("var", var);
 			json.put("displayName", Optional.ofNullable(BaseModel.displayNameBaseModel(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));

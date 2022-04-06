@@ -182,7 +182,7 @@ public class IotNodeGenPage extends IotNodeGenPageGen<BaseModelPage> {
 
 	@Override
 	protected void _pageUri(Wrap<String> c) {
-		c.o("/api/iot-node");
+		c.o("/iot-node");
 	}
 
 	@Override
@@ -259,8 +259,11 @@ public class IotNodeGenPage extends IotNodeGenPageGen<BaseModelPage> {
 		Map<String, SolrResponse.FacetField> facetFields = Optional.ofNullable(facetCounts).map(c -> c.getFacetFields()).map(f -> f.getFacets()).orElse(new HashMap<String,SolrResponse.FacetField>());
 		IotNode.varsFqForClass().forEach(var -> {
 			String varIndexed = IotNode.varIndexedIotNode(var);
+			String varStored = IotNode.varStoredIotNode(var);
 			JsonObject json = new JsonObject();
 			json.put("var", var);
+			json.put("varStored", varStored);
+			json.put("varIndexed", varIndexed);
 			json.put("displayName", Optional.ofNullable(IotNode.displayNameIotNode(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
 			json.put("classSimpleName", Optional.ofNullable(IotNode.classSimpleNameIotNode(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
 			json.put("val", searchListIotNode_.getRequest().getFilterQueries().stream().filter(fq -> fq.startsWith(IotNode.varIndexedIotNode(var) + ":")).findFirst().map(s -> StringUtils.substringAfter(s, ":")).orElse(null));
@@ -361,7 +364,7 @@ public class IotNodeGenPage extends IotNodeGenPageGen<BaseModelPage> {
 
 	@Override
 	protected void _pageImageUri(Wrap<String> c) {
-			c.o("/png/api/iot-node-999.png");
+			c.o("/png/iot-node-999.png");
 	}
 
 	@Override

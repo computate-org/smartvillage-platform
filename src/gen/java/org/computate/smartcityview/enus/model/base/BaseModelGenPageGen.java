@@ -649,6 +649,7 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 		return sb.toString();
 	}
 
+	public static final String CLASS_SIMPLE_NAME = "BaseModelGenPage";
 	public static final String VAR_searchListBaseModel_ = "searchListBaseModel_";
 	public static final String VAR_pageResponse = "pageResponse";
 	public static final String VAR_defaultPivotVars = "defaultPivotVars";

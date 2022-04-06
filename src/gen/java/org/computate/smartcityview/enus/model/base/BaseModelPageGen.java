@@ -221,6 +221,7 @@ public abstract class BaseModelPageGen<DEV> extends BaseModelGenPage {
 		return sb.toString();
 	}
 
+	public static final String CLASS_SIMPLE_NAME = "BaseModelPage";
 
 
 	public static String displayNameForClass(String var) {

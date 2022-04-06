@@ -591,6 +591,21 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 
 	}
 
+	public static String varStoredIotNode(String entityVar) {
+		switch(entityVar) {
+			case "nodeName":
+				return "nodeName_docvalues_string";
+			case "nodeType":
+				return "nodeType_docvalues_string";
+			case "nodeId":
+				return "nodeId_docvalues_string";
+			case "location":
+				return "location_docvalues_location";
+			default:
+				return BaseModel.varStoredBaseModel(entityVar);
+		}
+	}
+
 	public static String varIndexedIotNode(String entityVar) {
 		switch(entityVar) {
 			case "nodeName":

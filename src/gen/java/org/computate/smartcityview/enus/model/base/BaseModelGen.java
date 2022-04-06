@@ -1804,6 +1804,49 @@ public abstract class BaseModelGen<DEV> extends Object {
 		}
 	}
 
+	public static String varStoredBaseModel(String entityVar) {
+		switch(entityVar) {
+			case "pk":
+				return "pk_docvalues_long";
+			case "inheritPk":
+				return "inheritPk_docvalues_string";
+			case "created":
+				return "created_docvalues_date";
+			case "modified":
+				return "modified_docvalues_date";
+			case "archived":
+				return "archived_docvalues_boolean";
+			case "deleted":
+				return "deleted_docvalues_boolean";
+			case "classCanonicalName":
+				return "classCanonicalName_docvalues_string";
+			case "classSimpleName":
+				return "classSimpleName_docvalues_string";
+			case "classCanonicalNames":
+				return "classCanonicalNames_docvalues_strings";
+			case "sessionId":
+				return "sessionId_docvalues_string";
+			case "userKey":
+				return "userKey_docvalues_long";
+			case "saves":
+				return "saves_docvalues_strings";
+			case "objectTitle":
+				return "objectTitle_docvalues_string";
+			case "objectId":
+				return "objectId_docvalues_string";
+			case "objectText":
+				return "objectText_docvalues_string";
+			case "pageUrlId":
+				return "pageUrlId_docvalues_string";
+			case "pageUrlPk":
+				return "pageUrlPk_docvalues_string";
+			case "pageUrlApi":
+				return "pageUrlApi_docvalues_string";
+			default:
+				return null;
+		}
+	}
+
 	public static String varIndexedBaseModel(String entityVar) {
 		switch(entityVar) {
 			case "pk":
@@ -1990,6 +2033,7 @@ public abstract class BaseModelGen<DEV> extends Object {
 		return sb.toString();
 	}
 
+	public static final String CLASS_SIMPLE_NAME = "BaseModel";
 	public static final String VAR_siteRequest_ = "siteRequest_";
 	public static final String VAR_pk = "pk";
 	public static final String VAR_inheritPk = "inheritPk";
