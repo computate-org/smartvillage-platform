@@ -1,61 +1,65 @@
 package org.computate.smartvillageview.enus.model.user;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.Arrays;
-import java.util.Date;
-import java.time.ZonedDateTime;
-import org.slf4j.LoggerFactory;
-import org.computate.search.serialize.ComputateLocalDateDeserializer;
-import org.computate.smartvillageview.enus.model.base.BaseModelPage;
-import org.apache.commons.lang3.StringUtils;
-import java.lang.Integer;
-import java.lang.Long;
-import java.util.Locale;
-import java.util.Map;
-import java.time.ZoneOffset;
-import java.math.RoundingMode;
-import java.math.MathContext;
-import org.computate.smartvillageview.enus.config.ConfigKeys;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import java.time.Instant;
-import io.vertx.core.Future;
-import org.computate.search.serialize.ComputateZonedDateTimeDeserializer;
-import java.time.ZoneId;
-import java.util.Objects;
-import org.computate.search.serialize.ComputateLocalDateSerializer;
-import org.computate.vertx.search.list.SearchList;
-import java.util.List;
-import java.time.OffsetDateTime;
-import org.computate.search.wrap.Wrap;
-import java.util.Optional;
-import org.computate.search.serialize.ComputateZonedDateTimeSerializer;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.smartvillageview.enus.model.base.BaseModel;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
-import org.computate.search.response.solr.SolrResponse.FacetCounts;
-import org.computate.smartvillageview.enus.model.user.SiteUser;
-import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.text.NumberFormat;
-import java.util.ArrayList;
 import org.computate.vertx.api.ApiRequest;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import org.computate.smartvillageview.enus.config.ConfigKeys;
+import java.util.Optional;
+import java.util.List;
+import org.apache.commons.lang3.StringUtils;
+import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.lang.String;
-import org.slf4j.Logger;
-import io.vertx.core.Promise;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import io.vertx.core.json.JsonArray;
-import java.time.temporal.ChronoUnit;
-import java.time.format.DateTimeFormatter;
-import org.apache.commons.lang3.math.NumberUtils;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import org.computate.search.serialize.ComputateLocalDateSerializer;
+import org.computate.search.serialize.ComputateLocalDateDeserializer;
+import org.computate.search.serialize.ComputateZonedDateTimeSerializer;
+import org.computate.search.serialize.ComputateZonedDateTimeDeserializer;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import java.math.MathContext;
+import org.apache.commons.lang3.math.NumberUtils;
+import java.text.NumberFormat;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.HashMap;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import java.math.RoundingMode;
+import java.util.Map;
+import org.computate.smartvillageview.enus.model.base.BaseModelPage;
+import org.computate.vertx.search.list.SearchList;
+import org.computate.smartvillageview.enus.model.user.SiteUser;
+import java.lang.String;
+import java.time.ZoneId;
+import java.util.Locale;
+import java.time.ZonedDateTime;
+import java.time.ZoneOffset;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
+import java.time.format.DateTimeFormatter;
+import java.time.Instant;
+import java.time.OffsetDateTime;
+import java.lang.Integer;
+import io.vertx.core.json.JsonArray;
+import org.computate.search.response.solr.SolrResponse.FacetCounts;
+import java.lang.Long;
+import org.computate.search.wrap.Wrap;
+import io.vertx.core.Promise;
+import io.vertx.core.Future;
 
 /**	
  * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstClasse_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.user.SiteUserGenPage">Find the class SiteUserGenPage in Solr. </a>
- * <br><br>Delete the class SiteUserGenPage in Solr. </a>
- * <br><pre>curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '<add><delete><query>fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.user.SiteUserGenPage</query></delete></add>'</pre>
+ * <br><br>Delete the class SiteUserGenPage in Solr. 
+ * <br><pre>curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.user.SiteUserGenPage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'</pre>
+ * <br>Delete  the package org.computate.smartvillageview.enus.model.user in Solr. 
+ * <br><pre>curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.model.user&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'</pre>
+ * <br>Delete  the project smart-village-view in Solr. 
+ * <br><pre>curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smart\-village\-view&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'</pre>
  * <br>
  **/
 public abstract class SiteUserGenPageGen<DEV> extends BaseModelPage {
