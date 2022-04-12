@@ -1,13 +1,13 @@
 ---
-- name: Install the smart-city-view source code and watch service on the target. 
+- name: Install the smart-village-view source code and watch service on the target. 
   hosts: localhost
   vars: 
     GITHUB_ORG: "computate-org"
-    SITE_NAME: "smart-city-view"
+    SITE_NAME: "smart-village-view"
     SITE_REPO: "git@github.com:{{ GITHUB_ORG }}/{{ SITE_NAME }}.git"
     SITE_SRC: "{{ playbook_dir }}"
-    SITE_JAVA_PACKAGE: "org.computate.smartcityview.enus"
-    RELATIVE_PATHS_TO_WATCH: "src/main/java/org/computate/smartcityview/enus"
+    SITE_JAVA_PACKAGE: "org.computate.smartvillageview.enus"
+    RELATIVE_PATHS_TO_WATCH: "src/main/java/org/computate/smartvillageview/enus"
     SITE_CONFIG:
       sqlTables: true
       enableUserKey: true

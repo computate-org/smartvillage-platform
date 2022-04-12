@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: "smart-city-view"
+  title: "smart-village-view"
   version: 3.0.0
 paths:
 
@@ -33,7 +33,7 @@ paths:
   /api/iot-node:
     get:
       operationId: searchIotNode
-      x-vertx-event-bus: smart-city-view-enUS-IotNode
+      x-vertx-event-bus: smart-village-view-enUS-IotNode
       security:
         - openIdConnect:
           - profile
@@ -168,7 +168,7 @@ paths:
                 $ref: '#/components/schemas/SearchIotNodeResponse'
     patch:
       operationId: patchIotNode
-      x-vertx-event-bus: smart-city-view-enUS-IotNode
+      x-vertx-event-bus: smart-village-view-enUS-IotNode
       security:
         - openIdConnect:
           - profile
@@ -310,7 +310,7 @@ paths:
                 $ref: '#/components/schemas/PATCHIotNodeResponse'
     post:
       operationId: postIotNode
-      x-vertx-event-bus: smart-city-view-enUS-IotNode
+      x-vertx-event-bus: smart-village-view-enUS-IotNode
       security:
         - openIdConnect:
           - profile
@@ -335,7 +335,7 @@ paths:
   /api/iot-node/import:
     put:
       operationId: putimportIotNode
-      x-vertx-event-bus: smart-city-view-enUS-IotNode
+      x-vertx-event-bus: smart-village-view-enUS-IotNode
       security:
         - openIdConnect:
           - profile
@@ -478,7 +478,7 @@ paths:
   /iot-node:
     get:
       operationId: searchpageIotNode
-      x-vertx-event-bus: smart-city-view-enUS-IotNode
+      x-vertx-event-bus: smart-village-view-enUS-IotNode
       security:
         - openIdConnect:
           - profile
@@ -614,7 +614,7 @@ paths:
   /iot-node/{id}:
     get:
       operationId: searchpageIotNodeId
-      x-vertx-event-bus: smart-city-view-enUS-IotNode
+      x-vertx-event-bus: smart-village-view-enUS-IotNode
       security:
         - openIdConnect:
           - profile
@@ -756,7 +756,7 @@ paths:
   /api/user:
     get:
       operationId: searchSiteUser
-      x-vertx-event-bus: smart-city-view-enUS-SiteUser
+      x-vertx-event-bus: smart-village-view-enUS-SiteUser
       security:
         - openIdConnect:
           - profile
@@ -891,7 +891,7 @@ paths:
                 $ref: '#/components/schemas/SearchSiteUserResponse'
     patch:
       operationId: patchSiteUser
-      x-vertx-event-bus: smart-city-view-enUS-SiteUser
+      x-vertx-event-bus: smart-village-view-enUS-SiteUser
       security:
         - openIdConnect:
           - profile
@@ -1033,7 +1033,7 @@ paths:
                 $ref: '#/components/schemas/PATCHSiteUserResponse'
     post:
       operationId: postSiteUser
-      x-vertx-event-bus: smart-city-view-enUS-SiteUser
+      x-vertx-event-bus: smart-village-view-enUS-SiteUser
       security:
         - openIdConnect:
           - profile
@@ -1058,7 +1058,7 @@ paths:
   /api/user/import:
     put:
       operationId: putimportSiteUser
-      x-vertx-event-bus: smart-city-view-enUS-SiteUser
+      x-vertx-event-bus: smart-village-view-enUS-SiteUser
       security:
         - openIdConnect:
           - profile
@@ -1201,7 +1201,7 @@ paths:
   /user:
     get:
       operationId: searchpageSiteUser
-      x-vertx-event-bus: smart-city-view-enUS-SiteUser
+      x-vertx-event-bus: smart-village-view-enUS-SiteUser
       security:
         - openIdConnect:
           - profile
@@ -1337,7 +1337,7 @@ paths:
   /user/{id}:
     get:
       operationId: searchpageSiteUserId
-      x-vertx-event-bus: smart-city-view-enUS-SiteUser
+      x-vertx-event-bus: smart-village-view-enUS-SiteUser
       security:
         - openIdConnect:
           - profile

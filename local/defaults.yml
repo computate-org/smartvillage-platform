@@ -1,12 +1,12 @@
-SITE_NAME: "smart-city-view"
+SITE_NAME: "smart-village-view"
 
 LANGUAGE_NAME: "enUS"
-SITE_PATH_enUS: "/home/ctate/.local/src/smart-city-view"
+SITE_PATH_enUS: "/home/ctate/.local/src/smart-village-view"
 DOMAIN_NAME: "example.com"
-DOMAIN_PACKAGE_NAME: "org.computate.smartcityview.enus"
+DOMAIN_PACKAGE_NAME: "org.computate.smartvillageview.enus"
 SUFFIX_SRC_MAIN_JAVA: "/src/main/java"
 SUFFIX_SRC_GEN_JAVA: "/src/gen/java"
-RELATIVE_PATHS_TO_WATCH: "src/main/java/org/computate/smartcityview/enus"
+RELATIVE_PATHS_TO_WATCH: "src/main/java/org/computate/smartvillageview/enus"
 
 SITE_HOST_NAME: "localhost"
 SITE_BASE_URL: "http://localhost:14080"
@@ -14,15 +14,15 @@ SITE_PORT: 14080
 SITE_ZONE: "America/New_York"
 SITE_LOCALE: "en-US"
 STATIC_BASE_URL: "http://localhost:14080/static"
-STATIC_PATH: "/home/ctate/.local/src/smart-city-view-static"
-TEMPLATE_PATH: "/home/ctate/.local/src/smart-city-view/src/main/resources/templates"
+STATIC_PATH: "/home/ctate/.local/src/smart-village-view-static"
+TEMPLATE_PATH: "/home/ctate/.local/src/smart-village-view/src/main/resources/templates"
 API_CONTACT_EMAIL: ""
 FONTAWESOME_KIT: ""
 
 JDBC_HOST: "localhost"
 JDBC_PORT: 5432
-JDBC_DATABASE: "smart-city-view"
-JDBC_USERNAME: "smart-city-view"
+JDBC_DATABASE: "smart-village-view"
+JDBC_USERNAME: "smart-village-view"
 
 AUTH_HOST_NAME: "sso.computate.org"
 AUTH_PORT: 443
@@ -34,10 +34,10 @@ AUTH_SECRET: "0518f65a-f86d-42e8-ad65-00f46920443d"
 AUTH_URL: "https://sso.computate.org/auth"
 AUTH_TOKEN_URI: "/auth/realms/RH-IMPACT/protocol/openid-connect/token"
 
-SOLR_URL: "http://localhost:8983/solr/smart-city-view"
+SOLR_URL: "http://localhost:8983/solr/smart-village-view"
 SOLR_HOST_NAME: localhost
 SOLR_PORT: 8983
-SOLR_COLLECTION: "smart-city-view"
+SOLR_COLLECTION: "smart-village-view"
 SOLR_URL_COMPUTATE: "http://localhost:8983/solr/computate"
 
 EMAIL_HOST: 

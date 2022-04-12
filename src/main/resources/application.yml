@@ -12,7 +12,7 @@ CLUSTER_HOST_NAME: localhost
 CLUSTER_PORT: 14081
 
 STATIC_BASE_URL: "http://localhost:14080/static"
-STATIC_PATH: "/usr/local/src/smart-city-view-static"
+STATIC_PATH: "/usr/local/src/smart-village-view-static"
 
 API_CONTACT_EMAIL: 
 API_COUNTER_PAUSE: 10
@@ -21,8 +21,8 @@ API_COUNTER_FETCH: 10
 
 JDBC_HOST: localhost
 JDBC_PORT: 5432
-JDBC_DATABASE: smart-city-view
-JDBC_USERNAME: smart-city-view
+JDBC_DATABASE: smart-village-view
+JDBC_USERNAME: smart-village-view
 JDBC_PASSWORD: 
 JDBC_MAX_POOL_SIZE: 10
 JDBC_MAX_WAIT_QUEUE_SIZE: 1000
@@ -39,10 +39,10 @@ AUTH_TOKEN_URI: /auth/realms/AUTH_REALM/protocol/openid-connect/token
 ZOOKEEPER_HOST_NAME: localhost
 ZOOKEEPER_PORT: 2181
 
-SOLR_URL: http://localhost:8983/solr/smart-city-view
+SOLR_URL: http://localhost:8983/solr/smart-village-view
 SOLR_HOST_NAME: localhost
 SOLR_PORT: 8983
-SOLR_COLLECTION: smart-city-view
+SOLR_COLLECTION: smart-village-view
 SOLR_COLLECTION_COMPUTATE: computate
 SOLR_WORKER_COMMIT_WITHIN_MILLIS: 10000
 
