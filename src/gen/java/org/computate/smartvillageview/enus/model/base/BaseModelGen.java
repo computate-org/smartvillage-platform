@@ -2115,8 +2115,8 @@ public abstract class BaseModelGen<DEV> extends Object {
 	public static final String DISPLAY_NAME_objectTitle = "";
 	public static final String DISPLAY_NAME_objectId = "ID";
 	public static final String DISPLAY_NAME_objectNameVar = "";
-	public static final String DISPLAY_NAME_objectSuggest = "";
-	public static final String DISPLAY_NAME_objectText = "";
+	public static final String DISPLAY_NAME_objectSuggest = "autosuggest";
+	public static final String DISPLAY_NAME_objectText = "text";
 	public static final String DISPLAY_NAME_pageUrlId = "";
 	public static final String DISPLAY_NAME_pageUrlPk = "";
 	public static final String DISPLAY_NAME_pageUrlApi = "";
@@ -2184,6 +2184,8 @@ public abstract class BaseModelGen<DEV> extends Object {
 			return "The primary key of this object in the database";
 		case VAR_inheritPk:
 			return "An optional inherited primary key from a legacy system for this object in the database";
+		case VAR_created:
+			return "A created timestamp for this record in the database";
 		case VAR_modified:
 			return "A modified timestamp for this record in the database";
 		case VAR_archived:

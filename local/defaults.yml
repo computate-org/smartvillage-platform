@@ -1,19 +1,24 @@
+GITHUB_ORG: "computate-org"
 SITE_NAME: "smart-village-view"
+SITE_SERVICES:
+  - SITE_NAME: "smart-village-view"
+    SITE_SRC: "/home/ctate/.local/src/smart-village-view"
 
 LANGUAGE_NAME: "enUS"
 SITE_PATH_enUS: "/home/ctate/.local/src/smart-village-view"
 DOMAIN_NAME: "example.com"
 DOMAIN_PACKAGE_NAME: "org.computate.smartvillageview.enus"
+SITE_JAVA_PACKAGE: "org.computate.smartvillageview.enus"
 SUFFIX_SRC_MAIN_JAVA: "/src/main/java"
 SUFFIX_SRC_GEN_JAVA: "/src/gen/java"
 RELATIVE_PATHS_TO_WATCH: "src/main/java/org/computate/smartvillageview/enus"
 
 SITE_HOST_NAME: "localhost"
-SITE_BASE_URL: "http://localhost:14080"
-SITE_PORT: 14080
+SITE_BASE_URL: "http://localhost:10580"
+SITE_PORT: 10580
 SITE_ZONE: "America/New_York"
 SITE_LOCALE: "en-US"
-STATIC_BASE_URL: "http://localhost:14080/static"
+STATIC_BASE_URL: "http://localhost:10580/static"
 STATIC_PATH: "/home/ctate/.local/src/smart-village-view-static"
 TEMPLATE_PATH: "/home/ctate/.local/src/smart-village-view/src/main/resources/templates"
 API_CONTACT_EMAIL: ""
@@ -71,5 +76,3 @@ AUTH_ROLES_ADMIN: ['SiteAdmin']
 
 # Enable data import in the site. 
 ENABLE_IMPORT_DATA: true
-
-ENABLE_IMPORT_DATA_CurrikiResource: true

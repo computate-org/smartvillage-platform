@@ -10,7 +10,7 @@ PROJECT_POM_VERSION_PREFIX: "1.0.0"
 PROJECT_POM_VERSION_SUFFIX: "-SNAPSHOT"
 PROJECT_POM_VERSION: "{{ PROJECT_POM_VERSION_PREFIX }}{{ PROJECT_POM_VERSION_SUFFIX }}"
 PROJECT_JAVA_PACKAGE: "{{ PROJECT_POM_GROUP_ID }}.smartvillageview.enus"
-PROJECT_PORT: 14080
+PROJECT_PORT: 10580
 CLUSTER_PORT: "{{ PROJECT_PORT | regex_replace('(...)', '\\1') }}81"
 JDBC_DATABASE: "{{ PROJECT_NAME }}"
 JDBC_USERNAME: "{{ PROJECT_NAME }}"
@@ -48,30 +48,32 @@ PROJECTS:
         template: page/HomePage.java
       - path: "{{ PROJECT_SRC }}/src/main/resources/templates/{{ PROJECT_LANG }}/{{ CLASS_SIMPLE_NAME_HomePage }}.hbs"
         template: page/{{ CLASS_SIMPLE_NAME_HomePage }}.hbs
-      - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_MainVerticle | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_MainVerticle }}.java"
-        template: vertx/MainVerticle.java
-      - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_WorkerVerticle | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_WorkerVerticle }}.java"
-        template: vertx/WorkerVerticle.java
+#      - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_MainVerticle | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_MainVerticle }}.java"
+#        template: vertx/MainVerticle.java
+#      - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_WorkerVerticle | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_WorkerVerticle }}.java"
+#        template: vertx/WorkerVerticle.java
       - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_BaseModel | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_BaseModel }}.java"
         template: base/BaseModel.java
       - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_SiteUser | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_SiteUser }}.java"
         template: user/SiteUser.java
-      - path: "{{ PROJECT_SRC }}/src/main/resources/application.yml"
-        template: java/application.yml
+#      - path: "{{ PROJECT_SRC }}/src/main/resources/application.yml"
+#        template: java/application.yml
       - path: "{{ PROJECT_SRC }}/src/main/resources/log4j.properties"
         template: log4j/log4j.properties
       - path: "{{ PROJECT_SRC }}/src/main/resources/log4j.xml"
         template: log4j/log4j.xml
-      - path: "{{ PROJECT_SRC }}/local/defaults.yml"
-        template: local/defaults.yml
-      - path: "{{ PROJECT_SRC }}/local/template.yml"
-        template: local/template.yml
+#      - path: "{{ PROJECT_SRC }}/local/defaults.yml"
+#        template: local/defaults.yml
+#      - path: "{{ PROJECT_SRC }}/local/template.yml"
+#        template: local/template.yml
       - path: "{{ PROJECT_SRC }}/CONTRIBUTING"
         template: license/CONTRIBUTING
       - path: "{{ PROJECT_SRC }}/DCO"
         template: license/DCO
       - path: "{{ PROJECT_SRC }}/LICENSE"
         template: license/LICENSE
+      - path: "{{ PROJECT_SRC }}/README.md"
+        template: local/README.md
       - path: "{{ PROJECT_SRC }}-static/js/jQuery-Autocomplete/jquery.autocomplete.js"
         template: js/jQuery-Autocomplete/jquery.autocomplete.js
       - path: "{{ PROJECT_SRC }}-static/js/jQuery-Autocomplete/license.txt"
@@ -104,4 +106,8 @@ PROJECTS:
         template: config/gitignore
       - path: "{{ PROJECT_SRC }}-static/.gitignore"
         template: config/gitignore
+      - path: "{{ PROJECT_SRC }}/bin/touch.sh"
+        template: "{{ PROJECT_SRC }}/local/template/config/touch.sh"
+      - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_ConfigKeys | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_ConfigKeys }}.java"
+        template: "{{ PROJECT_SRC }}/local/template/config/ConfigKeys.java"
 

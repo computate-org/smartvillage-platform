@@ -1206,6 +1206,24 @@ public abstract class SiteUserGen<DEV> extends BaseModel {
 
 	public static String descriptionSiteUser(String var) {
 		switch(var) {
+		case VAR_userKeys:
+			return "User keys that relate to this user";
+		case VAR_userId:
+			return "The unique user ID from the SSO server";
+		case VAR_userName:
+			return "The user's username";
+		case VAR_userEmail:
+			return "The user's email";
+		case VAR_userFirstName:
+			return "The user's first name";
+		case VAR_userLastName:
+			return "The user's last name";
+		case VAR_userFullName:
+			return "The user's full name";
+		case VAR_seeArchived:
+			return "A user field allowing a user to see archived records";
+		case VAR_seeDeleted:
+			return "A user field allowing a user to see deleted records";
 			default:
 				return BaseModel.descriptionBaseModel(var);
 		}

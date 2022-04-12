@@ -31,9 +31,9 @@ import org.slf4j.LoggerFactory;
 import java.math.RoundingMode;
 import java.util.Map;
 import java.lang.Object;
+import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.api.service.ServiceRequest;
 import java.lang.String;
-import io.vertx.core.json.JsonObject;
 import java.lang.Long;
 import java.lang.Integer;
 import java.lang.Void;
@@ -93,6 +93,82 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		return (PageLayout)this;
 	}
 
+	/////////////////
+	// requestVars //
+	/////////////////
+
+	/**	 The entity requestVars
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected Map<String, String> requestVars;
+
+	/**	<br> The entity requestVars
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.PageLayout&fq=entiteVar_enUS_indexed_string:requestVars">Find the entity requestVars in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _requestVars(Wrap<Map<String, String>> w);
+
+	public Map<String, String> getRequestVars() {
+		return requestVars;
+	}
+
+	public void setRequestVars(Map<String, String> requestVars) {
+		this.requestVars = requestVars;
+	}
+	public static Map<String, String> staticSetRequestVars(SiteRequestEnUS siteRequest_, String o) {
+		return null;
+	}
+	protected PageLayout requestVarsInit() {
+		Wrap<Map<String, String>> requestVarsWrap = new Wrap<Map<String, String>>().var("requestVars");
+		if(requestVars == null) {
+			_requestVars(requestVarsWrap);
+			setRequestVars(requestVarsWrap.o);
+		}
+		return (PageLayout)this;
+	}
+
+	////////////
+	// config //
+	////////////
+
+	/**	 The entity config
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonIgnore
+	@JsonInclude(Include.NON_NULL)
+	protected JsonObject config;
+
+	/**	<br> The entity config
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.PageLayout&fq=entiteVar_enUS_indexed_string:config">Find the entity config in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _config(Wrap<JsonObject> w);
+
+	public JsonObject getConfig() {
+		return config;
+	}
+
+	public void setConfig(JsonObject config) {
+		this.config = config;
+	}
+	public static JsonObject staticSetConfig(SiteRequestEnUS siteRequest_, String o) {
+		return null;
+	}
+	protected PageLayout configInit() {
+		Wrap<JsonObject> configWrap = new Wrap<JsonObject>().var("config");
+		if(config == null) {
+			_config(configWrap);
+			setConfig(configWrap.o);
+		}
+		return (PageLayout)this;
+	}
+
 	////////////////////
 	// serviceRequest //
 	////////////////////
@@ -129,104 +205,6 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			setServiceRequest(serviceRequestWrap.o);
 		}
 		return (PageLayout)this;
-	}
-
-	///////////////////
-	// requestZoneId //
-	///////////////////
-
-	/**	 The entity requestZoneId
-	 *	 is defined as null before being initialized. 
-	 */
-	@JsonProperty
-	@JsonInclude(Include.NON_NULL)
-	protected String requestZoneId;
-
-	/**	<br> The entity requestZoneId
-	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.PageLayout&fq=entiteVar_enUS_indexed_string:requestZoneId">Find the entity requestZoneId in Solr</a>
-	 * <br>
-	 * @param w is for wrapping a value to assign to this entity during initialization. 
-	 **/
-	protected abstract void _requestZoneId(Wrap<String> w);
-
-	public String getRequestZoneId() {
-		return requestZoneId;
-	}
-	public void setRequestZoneId(String o) {
-		this.requestZoneId = PageLayout.staticSetRequestZoneId(siteRequest_, o);
-	}
-	public static String staticSetRequestZoneId(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-	protected PageLayout requestZoneIdInit() {
-		Wrap<String> requestZoneIdWrap = new Wrap<String>().var("requestZoneId");
-		if(requestZoneId == null) {
-			_requestZoneId(requestZoneIdWrap);
-			setRequestZoneId(requestZoneIdWrap.o);
-		}
-		return (PageLayout)this;
-	}
-
-	public static String staticSearchRequestZoneId(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-
-	public static String staticSearchStrRequestZoneId(SiteRequestEnUS siteRequest_, String o) {
-		return o == null ? null : o.toString();
-	}
-
-	public static String staticSearchFqRequestZoneId(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrRequestZoneId(siteRequest_, PageLayout.staticSearchRequestZoneId(siteRequest_, PageLayout.staticSetRequestZoneId(siteRequest_, o)));
-	}
-
-	/////////////////////
-	// requestLocaleId //
-	/////////////////////
-
-	/**	 The entity requestLocaleId
-	 *	 is defined as null before being initialized. 
-	 */
-	@JsonProperty
-	@JsonInclude(Include.NON_NULL)
-	protected String requestLocaleId;
-
-	/**	<br> The entity requestLocaleId
-	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.PageLayout&fq=entiteVar_enUS_indexed_string:requestLocaleId">Find the entity requestLocaleId in Solr</a>
-	 * <br>
-	 * @param w is for wrapping a value to assign to this entity during initialization. 
-	 **/
-	protected abstract void _requestLocaleId(Wrap<String> w);
-
-	public String getRequestLocaleId() {
-		return requestLocaleId;
-	}
-	public void setRequestLocaleId(String o) {
-		this.requestLocaleId = PageLayout.staticSetRequestLocaleId(siteRequest_, o);
-	}
-	public static String staticSetRequestLocaleId(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-	protected PageLayout requestLocaleIdInit() {
-		Wrap<String> requestLocaleIdWrap = new Wrap<String>().var("requestLocaleId");
-		if(requestLocaleId == null) {
-			_requestLocaleId(requestLocaleIdWrap);
-			setRequestLocaleId(requestLocaleIdWrap.o);
-		}
-		return (PageLayout)this;
-	}
-
-	public static String staticSearchRequestLocaleId(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-
-	public static String staticSearchStrRequestLocaleId(SiteRequestEnUS siteRequest_, String o) {
-		return o == null ? null : o.toString();
-	}
-
-	public static String staticSearchFqRequestLocaleId(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrRequestLocaleId(siteRequest_, PageLayout.staticSearchRequestLocaleId(siteRequest_, PageLayout.staticSetRequestLocaleId(siteRequest_, o)));
 	}
 
 	///////////////////
@@ -1196,9 +1174,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	 *  is defined as null before being initialized. 
 	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.PageLayout&fq=entiteVar_enUS_indexed_string:classSimpleName">Find the entity classSimpleName in Solr</a>
 	 * <br>
-	 * @param c is for wrapping a value to assign to this entity during initialization. 
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected abstract void _classSimpleName(Wrap<String> c);
+	protected abstract void _classSimpleName(Wrap<String> w);
 
 	public String getClassSimpleName() {
 		return classSimpleName;
@@ -1245,9 +1223,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	 *  is defined as null before being initialized. 
 	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.PageLayout&fq=entiteVar_enUS_indexed_string:pageTitle">Find the entity pageTitle in Solr</a>
 	 * <br>
-	 * @param c is for wrapping a value to assign to this entity during initialization. 
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected abstract void _pageTitle(Wrap<String> c);
+	protected abstract void _pageTitle(Wrap<String> w);
 
 	public String getPageTitle() {
 		return pageTitle;
@@ -1699,9 +1677,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	 *  is defined as null before being initialized. 
 	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.PageLayout&fq=entiteVar_enUS_indexed_string:pageImageUri">Find the entity pageImageUri in Solr</a>
 	 * <br>
-	 * @param c is for wrapping a value to assign to this entity during initialization. 
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected abstract void _pageImageUri(Wrap<String> c);
+	protected abstract void _pageImageUri(Wrap<String> w);
 
 	public String getPageImageUri() {
 		return pageImageUri;
@@ -1748,9 +1726,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	 *  is defined as null before being initialized. 
 	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.PageLayout&fq=entiteVar_enUS_indexed_string:contextIconGroup">Find the entity contextIconGroup in Solr</a>
 	 * <br>
-	 * @param c is for wrapping a value to assign to this entity during initialization. 
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected abstract void _contextIconGroup(Wrap<String> c);
+	protected abstract void _contextIconGroup(Wrap<String> w);
 
 	public String getContextIconGroup() {
 		return contextIconGroup;
@@ -1797,9 +1775,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	 *  is defined as null before being initialized. 
 	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.PageLayout&fq=entiteVar_enUS_indexed_string:contextIconName">Find the entity contextIconName in Solr</a>
 	 * <br>
-	 * @param c is for wrapping a value to assign to this entity during initialization. 
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected abstract void _contextIconName(Wrap<String> c);
+	protected abstract void _contextIconName(Wrap<String> w);
 
 	public String getContextIconName() {
 		return contextIconName;
@@ -1829,6 +1807,55 @@ public abstract class PageLayoutGen<DEV> extends Object {
 
 	public static String staticSearchFqContextIconName(SiteRequestEnUS siteRequest_, String o) {
 		return PageLayout.staticSearchStrContextIconName(siteRequest_, PageLayout.staticSearchContextIconName(siteRequest_, PageLayout.staticSetContextIconName(siteRequest_, o)));
+	}
+
+	///////////////////////////
+	// contextIconCssClasses //
+	///////////////////////////
+
+	/**	 The entity contextIconCssClasses
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String contextIconCssClasses;
+
+	/**	<br> The entity contextIconCssClasses
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.PageLayout&fq=entiteVar_enUS_indexed_string:contextIconCssClasses">Find the entity contextIconCssClasses in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _contextIconCssClasses(Wrap<String> w);
+
+	public String getContextIconCssClasses() {
+		return contextIconCssClasses;
+	}
+	public void setContextIconCssClasses(String o) {
+		this.contextIconCssClasses = PageLayout.staticSetContextIconCssClasses(siteRequest_, o);
+	}
+	public static String staticSetContextIconCssClasses(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected PageLayout contextIconCssClassesInit() {
+		Wrap<String> contextIconCssClassesWrap = new Wrap<String>().var("contextIconCssClasses");
+		if(contextIconCssClasses == null) {
+			_contextIconCssClasses(contextIconCssClassesWrap);
+			setContextIconCssClasses(contextIconCssClassesWrap.o);
+		}
+		return (PageLayout)this;
+	}
+
+	public static String staticSearchContextIconCssClasses(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrContextIconCssClasses(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqContextIconCssClasses(SiteRequestEnUS siteRequest_, String o) {
+		return PageLayout.staticSearchStrContextIconCssClasses(siteRequest_, PageLayout.staticSearchContextIconCssClasses(siteRequest_, PageLayout.staticSetContextIconCssClasses(siteRequest_, o)));
 	}
 
 	/////////////////////
@@ -1906,9 +1933,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			Promise<Void> promise2 = Promise.promise();
 			try {
 				siteRequest_Init();
+				requestVarsInit();
+				configInit();
 				serviceRequestInit();
-				requestZoneIdInit();
-				requestLocaleIdInit();
 				staticBaseUrlInit();
 				STATIC_BASE_URLInit();
 				SITE_BASE_URLInit();
@@ -1972,6 +1999,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 				pageImageUriInit();
 				contextIconGroupInit();
 				contextIconNameInit();
+				contextIconCssClassesInit();
 				pageDescriptionInit();
 				promise2.complete();
 			} catch(Exception ex) {
@@ -2027,12 +2055,12 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		switch(var) {
 			case "siteRequest_":
 				return oPageLayout.siteRequest_;
+			case "requestVars":
+				return oPageLayout.requestVars;
+			case "config":
+				return oPageLayout.config;
 			case "serviceRequest":
 				return oPageLayout.serviceRequest;
-			case "requestZoneId":
-				return oPageLayout.requestZoneId;
-			case "requestLocaleId":
-				return oPageLayout.requestLocaleId;
 			case "staticBaseUrl":
 				return oPageLayout.staticBaseUrl;
 			case "STATIC_BASE_URL":
@@ -2099,6 +2127,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 				return oPageLayout.contextIconGroup;
 			case "contextIconName":
 				return oPageLayout.contextIconName;
+			case "contextIconCssClasses":
+				return oPageLayout.contextIconCssClasses;
 			case "pageDescription":
 				return oPageLayout.pageDescription;
 			default:
@@ -2140,10 +2170,6 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 	public static Object staticSetPageLayout(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
-		case "requestZoneId":
-			return PageLayout.staticSetRequestZoneId(siteRequest_, o);
-		case "requestLocaleId":
-			return PageLayout.staticSetRequestLocaleId(siteRequest_, o);
 		case "staticBaseUrl":
 			return PageLayout.staticSetStaticBaseUrl(siteRequest_, o);
 		case "STATIC_BASE_URL":
@@ -2194,6 +2220,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSetContextIconGroup(siteRequest_, o);
 		case "contextIconName":
 			return PageLayout.staticSetContextIconName(siteRequest_, o);
+		case "contextIconCssClasses":
+			return PageLayout.staticSetContextIconCssClasses(siteRequest_, o);
 		case "pageDescription":
 			return PageLayout.staticSetPageDescription(siteRequest_, o);
 			default:
@@ -2210,10 +2238,6 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 	public static Object staticSearchPageLayout(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
-		case "requestZoneId":
-			return PageLayout.staticSearchRequestZoneId(siteRequest_, (String)o);
-		case "requestLocaleId":
-			return PageLayout.staticSearchRequestLocaleId(siteRequest_, (String)o);
 		case "staticBaseUrl":
 			return PageLayout.staticSearchStaticBaseUrl(siteRequest_, (String)o);
 		case "STATIC_BASE_URL":
@@ -2264,6 +2288,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSearchContextIconGroup(siteRequest_, (String)o);
 		case "contextIconName":
 			return PageLayout.staticSearchContextIconName(siteRequest_, (String)o);
+		case "contextIconCssClasses":
+			return PageLayout.staticSearchContextIconCssClasses(siteRequest_, (String)o);
 		case "pageDescription":
 			return PageLayout.staticSearchPageDescription(siteRequest_, (String)o);
 			default:
@@ -2280,10 +2306,6 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 	public static String staticSearchStrPageLayout(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
-		case "requestZoneId":
-			return PageLayout.staticSearchStrRequestZoneId(siteRequest_, (String)o);
-		case "requestLocaleId":
-			return PageLayout.staticSearchStrRequestLocaleId(siteRequest_, (String)o);
 		case "staticBaseUrl":
 			return PageLayout.staticSearchStrStaticBaseUrl(siteRequest_, (String)o);
 		case "STATIC_BASE_URL":
@@ -2334,6 +2356,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSearchStrContextIconGroup(siteRequest_, (String)o);
 		case "contextIconName":
 			return PageLayout.staticSearchStrContextIconName(siteRequest_, (String)o);
+		case "contextIconCssClasses":
+			return PageLayout.staticSearchStrContextIconCssClasses(siteRequest_, (String)o);
 		case "pageDescription":
 			return PageLayout.staticSearchStrPageDescription(siteRequest_, (String)o);
 			default:
@@ -2350,10 +2374,6 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 	public static String staticSearchFqPageLayout(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
-		case "requestZoneId":
-			return PageLayout.staticSearchFqRequestZoneId(siteRequest_, o);
-		case "requestLocaleId":
-			return PageLayout.staticSearchFqRequestLocaleId(siteRequest_, o);
 		case "staticBaseUrl":
 			return PageLayout.staticSearchFqStaticBaseUrl(siteRequest_, o);
 		case "STATIC_BASE_URL":
@@ -2404,6 +2424,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSearchFqContextIconGroup(siteRequest_, o);
 		case "contextIconName":
 			return PageLayout.staticSearchFqContextIconName(siteRequest_, o);
+		case "contextIconCssClasses":
+			return PageLayout.staticSearchFqContextIconCssClasses(siteRequest_, o);
 		case "pageDescription":
 			return PageLayout.staticSearchFqPageDescription(siteRequest_, o);
 			default:
@@ -2422,9 +2444,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 
 	public static final String CLASS_SIMPLE_NAME = "PageLayout";
 	public static final String VAR_siteRequest_ = "siteRequest_";
+	public static final String VAR_requestVars = "requestVars";
+	public static final String VAR_config = "config";
 	public static final String VAR_serviceRequest = "serviceRequest";
-	public static final String VAR_requestZoneId = "requestZoneId";
-	public static final String VAR_requestLocaleId = "requestLocaleId";
 	public static final String VAR_staticBaseUrl = "staticBaseUrl";
 	public static final String VAR_STATIC_BASE_URL = "STATIC_BASE_URL";
 	public static final String VAR_SITE_BASE_URL = "SITE_BASE_URL";
@@ -2458,12 +2480,13 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	public static final String VAR_pageImageUri = "pageImageUri";
 	public static final String VAR_contextIconGroup = "contextIconGroup";
 	public static final String VAR_contextIconName = "contextIconName";
+	public static final String VAR_contextIconCssClasses = "contextIconCssClasses";
 	public static final String VAR_pageDescription = "pageDescription";
 
 	public static final String DISPLAY_NAME_siteRequest_ = "";
+	public static final String DISPLAY_NAME_requestVars = "";
+	public static final String DISPLAY_NAME_config = "";
 	public static final String DISPLAY_NAME_serviceRequest = "";
-	public static final String DISPLAY_NAME_requestZoneId = "";
-	public static final String DISPLAY_NAME_requestLocaleId = "";
 	public static final String DISPLAY_NAME_staticBaseUrl = "";
 	public static final String DISPLAY_NAME_STATIC_BASE_URL = "";
 	public static final String DISPLAY_NAME_SITE_BASE_URL = "";
@@ -2497,6 +2520,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	public static final String DISPLAY_NAME_pageImageUri = "";
 	public static final String DISPLAY_NAME_contextIconGroup = "";
 	public static final String DISPLAY_NAME_contextIconName = "";
+	public static final String DISPLAY_NAME_contextIconCssClasses = "";
 	public static final String DISPLAY_NAME_pageDescription = "";
 
 	public static String displayNameForClass(String var) {
@@ -2506,12 +2530,12 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		switch(var) {
 		case VAR_siteRequest_:
 			return DISPLAY_NAME_siteRequest_;
+		case VAR_requestVars:
+			return DISPLAY_NAME_requestVars;
+		case VAR_config:
+			return DISPLAY_NAME_config;
 		case VAR_serviceRequest:
 			return DISPLAY_NAME_serviceRequest;
-		case VAR_requestZoneId:
-			return DISPLAY_NAME_requestZoneId;
-		case VAR_requestLocaleId:
-			return DISPLAY_NAME_requestLocaleId;
 		case VAR_staticBaseUrl:
 			return DISPLAY_NAME_staticBaseUrl;
 		case VAR_STATIC_BASE_URL:
@@ -2578,6 +2602,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return DISPLAY_NAME_contextIconGroup;
 		case VAR_contextIconName:
 			return DISPLAY_NAME_contextIconName;
+		case VAR_contextIconCssClasses:
+			return DISPLAY_NAME_contextIconCssClasses;
 		case VAR_pageDescription:
 			return DISPLAY_NAME_pageDescription;
 		default:

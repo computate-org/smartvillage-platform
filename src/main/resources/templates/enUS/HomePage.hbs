@@ -17,7 +17,12 @@
 		});
 		//]]></script>
 {{/partial}}
-{{#partial "htmBody"}}{{>htmBodyPageLayout}}{{/partial}}
+{{#partial "htmBody"}}
+<div class="pageContent w3-content ">
+{{#block "htmBodyMenu"}}{{/block}}
+</div>
+{{>htmBodyPageLayout}}
+{{/partial}}
 {{#partial "htmBodyStart"}}{{> htmBodyStartPageLayout}}
 <!-- Header -->
 <header class="w3-display-container w3-content w3-wide w3-margin-top " style="max-width:1500px;" id="home">
@@ -29,4 +34,10 @@
 </header>
 {{/partial}}
 {{#partial "htmBodyEnd"}}{{> htmBodyEndPageLayout}}{{/partial}}
+{{#partial "htmBodySearch"}}{{> htmBodySearchPageLayout}}{{/partial}}
+{{#partial "htmBodyFilters"}}{{> htmBodyFiltersPageLayout}}{{/partial}}
+{{#partial "htmBodyRange"}}{{> htmBodyRangePageLayout}}{{/partial}}
+{{#partial "htmBodyPivot"}}{{> htmBodyPivotPageLayout}}{{/partial}}
+{{#partial "htmBodyMenu"}}{{> htmBodyMenuPageLayout}}{{/partial}}
+{{#partial "htmBodyGraph"}}{{> htmBodyGraphPageLayout}}{{/partial}}
 {{> PageLayout}}

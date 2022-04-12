@@ -363,6 +363,11 @@ public class SiteUserGenPage extends SiteUserGenPageGen<BaseModelPage> {
 	}
 
 	@Override
+	protected void _pageDescription(Wrap<String> c) {
+			c.o("A user record for each site user");
+	}
+
+	@Override
 	protected void _pageImageUri(Wrap<String> c) {
 			c.o("/png/user-999.png");
 	}

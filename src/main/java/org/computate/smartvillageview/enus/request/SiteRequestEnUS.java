@@ -8,8 +8,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.solr.client.solrj.SolrQuery;
-import org.apache.solr.common.SolrDocument;
 import org.computate.search.wrap.Wrap;
 import org.computate.vertx.api.ApiRequest;
 import org.computate.vertx.model.user.ComputateVertxSiteUser;
