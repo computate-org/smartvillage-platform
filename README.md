@@ -1,10 +1,11 @@
 
-# Setup smart-village-view development environment on MacOSX or Linux (Fedora, RHEL, CentOS)
+# Setup smart-village-view development environment on MacOSX or Linux (Fedora, RHEL, CentOS, Ubuntu)
 
 ## Install Ansible dependencies on Linux
 
 ```bash
 pkcon install -y git
+pkcon install -y python3
 pkcon install -y python3-pip
 pkcon install -y python3-virtualenv
 ```
@@ -23,7 +24,8 @@ pip3 install virtualenv
 virtualenv ~/python
 
 source ~/python/bin/activate
-echo "source ~/python/bin/activate" | tee -a ~/.bash_profile
+echo "source ~/python/bin/activate" | tee -a ~/.bashrc
+source ~/.bashrc
 ```
 
 ## Install the latest Ansible
@@ -31,42 +33,10 @@ echo "source ~/python/bin/activate" | tee -a ~/.bash_profile
 ```bash
 pip install setuptools_rust wheel
 pip install --upgrade pip
+pip install ansible
 ```
 
-## Install dependencies on Linux
-
-```bash
-pkcon install -y maven
-pkcon install -y gcc
-pkcon install -y make
-pkcon install -y git
-pkcon install -y bison
-pkcon install -y flex
-pkcon install -y readline-devel
-pkcon install -y zlib-devel
-pkcon install -y systemd-devel
-pkcon install -y libxml2-devel
-pkcon install -y libxslt-devel
-pkcon install -y openssl-devel
-pkcon install -y perl-core
-pkcon install -y libselinux-devel
-pkcon install -y container-selinux
-pkcon install -y java-1.8.0-openjdk
-pkcon install -y java-11-openjdk
-```
-
-## Install dependencies on MacOSX
-
-```bash
-brew install maven
-```
-
-# Setup Ansible
-
-## Install python3 application dependencies
-
-```bash
-pip3 install psycopg2-binary
+# Setup the project
 ```
 
 ## Setup the directory for the project and clone the git repository into it 
@@ -89,9 +59,9 @@ git clone git@github.com:computate-org/computate_project.git ~/.ansible/roles/co
 ## Run the Ansible Galaxy roles to install the complete project locally. 
 
 ```bash
-ansible-playbook ~/.ansible/roles/computate.computate_postgres/install.yml
-ansible-playbook ~/.ansible/roles/computate.computate_zookeeper/install.yml
-ansible-playbook ~/.ansible/roles/computate.computate_solr/install.yml
+ansible-playbook ~/.ansible/roles/computate.computate_postgres/install.yml -K
+ansible-playbook ~/.ansible/roles/computate.computate_zookeeper/install.yml -K
+ansible-playbook ~/.ansible/roles/computate.computate_solr/install.yml -K
 ansible-playbook ~/.ansible/roles/computate.computate_project/install.yml -e SITE_NAME=smart-village-view -e ENABLE_CODE_GENERATION_SERVICE=true
 ```
 
@@ -119,28 +89,59 @@ You can then run the project install automation again with the secrets in the va
 ansible-playbook ~/.ansible/roles/computate.computate_project/install.yml -e SITE_NAME=smart-village-view -e ENABLE_CODE_GENERATION_SERVICE=true -e @~/.local/src/smart-village-view/vault/$USER-local --vault-id @prompt
 ```
 
-# Configure Eclipse
+# Configure Red Hat CodeReady Studio
 
-## Install the Maven plugin for Eclipse
+You can download Red Hat Code Ready Studio here: 
 
-* In Eclipse, go to Help -> Eclipse Marketplace...
-* Install "Maven Integration for Eclipse"
+https://developers.redhat.com/products/codeready-studio/download
 
-## Import the smart-village-view project into Eclipse
+You will want to create a Red Hat account if you do not already have one. 
 
-* In Eclipse, go to File -> Import...
+After you download CodeReady Studio, create a directory for it and install it with this command: 
+
+```bash
+install -d ~/.local/opt/codereadystudio
+java -jar ~/Downloads/codereadystudio-*-installer-standalone.jar
+```
+
+You can use the default installation settings. I suggest to install CodeReady Studio in your in $HOME/.local/opt/codereadystudio
+
+When you run CodeReady Studio, I suggest you create your workspace here: ~/.local/src
+
+## Install these update sites: 
+
+In CodeReady Studio, go to Help -> Install New Software...
+
+Add these update sites and install these useful plugins: 
+
+### Vrapper Vim Plugin
+- http://vrapper.sourceforge.net/update-site/stable
+    - Choose the "Vrapper" plugin if you want to be able to edit code with Vim commands
+    - Vrapper keys to unbind in Window -> Preferences -> General -> Keys: 
+        - ctrl+d, ctrl+u, ctrl+r, shift+ctrl+v, alt+v
+    - Vrapper keys to set: 
+        - and search for "Vrapper" and set the keys to alt+v
+
+### DevStyle for dark theme
+
+- http://www.genuitec.com/updates/devstyle/ci/
+    - Choose "DevStyle Features" for themes
+
+## Import the smart-village-view project into CodeReady Studio
+
+* In CodeReady Studio, go to File -> Import...
 * Select Maven -> Existing Maven Projects
 * Click [ Next > ]
 * Browse to the directory: ~/.local/src/smart-village-view
 * Click [ Finish ]
 
-## Setup an Eclipse Debug/Run configuration to run and debug smart-village-view
+## Setup a CodeReady Studio Debug/Run configuration to run and debug smart-village-view
 
-* In Eclipse, go to File -> Debug Configurations...
+* In CodeReady Studio, go to File -> Debug Configurations...
 * Right click on Java Application -> New Configuration
 * Name: smart-village-view MainVerticle
 * Project: smart-village-view
-* Main class: org.smart-village-view.smart-village-view.enus.verticle.PhenomenalVerticle
+* Main class: org.computate.smartvillageview.enus.vertx.MainVerticle
 
 ### In the "Arguments" tab
 
@@ -154,13 +155,8 @@ Setup the following VM arguments to disable caching for easier web development:
 
 Setup the following variables to setup the Vert.x verticle. 
 
-* CLUSTER_PORT: 10991
 * CONFIG_PATH: ~/.local/src/smart-village-view/config/smart-village-view.yml
-* SITE_INSTANCES: 5
 * VERTXWEB_ENVIRONMENT: dev
-* WORKER_POOL_SIZE: 2
-* ZOOKEEPER_HOST_NAME: localhost
-* ZOOKEEPER_PORT: 2181
 
 Click [ Apply ] and [ Debug ] to debug the application. 
 

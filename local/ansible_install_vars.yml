@@ -30,8 +30,8 @@ PROJECTS:
     PROJECT_SRC: "{{ PROJECT_SRC }}"
     PROJECT_JAVA_PACKAGE: "{{ PROJECT_JAVA_PACKAGE }}"
     PROJECT_FILES: 
-      - path: "{{ PROJECT_SRC }}/pom.xml"
-        template: java/pom.xml
+#      - path: "{{ PROJECT_SRC }}/pom.xml"
+#        template: java/pom.xml
       - path: "{{ PROJECT_SRC }}/install.yml"
         template: ansible/install.yml
       - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/package-info.java"
