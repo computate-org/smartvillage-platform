@@ -43,7 +43,7 @@ pip install ansible
 
 ```bash
 install -d ~/.local/src/smart-village-view
-git clone git@github.com:team19hackathon2021/smart-village-view.git ~/.local/src/smart-village-view
+git clone git@github.com:computate-org/smart-village-view.git ~/.local/src/smart-village-view
 ```
 
 ## Setup the Ansible Galaxy roles for installing the complete project locally. 
@@ -195,7 +195,7 @@ ansible-vault edit ~/.local/src/smart-village-view-ansible/vaults/$USER-staging/
 
 The contents of the vault will contain the secrets needed to override any default values you want to change in the app defaults defined here.
 
-https://github.com/team19hackathon2021/smart-village-view/blob/main/openshift/defaults.yml
+https://github.com/computate-org/smart-village-view/blob/main/openshift/defaults.yml
 
 Here is an example of a vault that I have used to deploy the smart-village-view application. 
 You will want to update these values to reflect your OpenShift environment, like the REDHAT_OPENSHIFT_TOKEN which you will need to obtain after logging into OpenShift. 
