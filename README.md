@@ -19,8 +19,9 @@ pip3 install virtualenv
 
 ## Install the latest Python and setup a new Python virtualenv
 
+This step might be virtualenv-3 for you. 
+
 ```bash
-# This step might be virtualenv-3 for you. 
 virtualenv ~/python
 
 source ~/python/bin/activate
@@ -37,7 +38,6 @@ pip install ansible
 ```
 
 # Setup the project
-```
 
 ## Setup the directory for the project and clone the git repository into it 
 
@@ -248,4 +248,10 @@ ansible-playbook --vault-id @prompt -e @~/.local/src/smart-village-view-ansible/
 
 ```bash
 ansible-playbook -e @~/.local/src/smart-village-view/local/ansible_install_vars.yml ~/.local/src/computate-org/vertx_project.yml
+```
+
+# Load a new map traffic data into SUMO
+
+```bash
+env "SUMO_HOME=$HOME/.local/share/sumo" python ~/.local/share/sumo/tools/osmWebWizard.py
 ```
