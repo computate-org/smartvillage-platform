@@ -48,8 +48,8 @@ PROJECTS:
         template: page/HomePage.java
       - path: "{{ PROJECT_SRC }}/src/main/resources/templates/{{ PROJECT_LANG }}/{{ CLASS_SIMPLE_NAME_HomePage }}.hbs"
         template: page/{{ CLASS_SIMPLE_NAME_HomePage }}.hbs
-#      - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_MainVerticle | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_MainVerticle }}.java"
-#        template: vertx/MainVerticle.java
+      - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_MainVerticle | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_MainVerticle }}.java"
+        template: vertx/MainVerticle.java
 #      - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_WorkerVerticle | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_WorkerVerticle }}.java"
 #        template: vertx/WorkerVerticle.java
       - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_BaseModel | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_BaseModel }}.java"
@@ -111,3 +111,10 @@ PROJECTS:
       - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_ConfigKeys | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_ConfigKeys }}.java"
         template: "{{ PROJECT_SRC }}/local/template/config/ConfigKeys.java"
 
+README_END: |
+  
+  # Load a new map traffic data into SUMO
+  
+  ```bash
+  env "SUMO_HOME=$HOME/.local/share/sumo" python ~/.local/share/sumo/tools/osmWebWizard.py
+  ```
