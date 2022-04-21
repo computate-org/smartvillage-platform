@@ -30,8 +30,8 @@ PROJECTS:
     PROJECT_SRC: "{{ PROJECT_SRC }}"
     PROJECT_JAVA_PACKAGE: "{{ PROJECT_JAVA_PACKAGE }}"
     PROJECT_FILES: 
-#      - path: "{{ PROJECT_SRC }}/pom.xml"
-#        template: java/pom.xml
+      - path: "{{ PROJECT_SRC }}/pom.xml"
+        template: java/pom.xml
       - path: "{{ PROJECT_SRC }}/install.yml"
         template: ansible/install.yml
       - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/package-info.java"
@@ -50,14 +50,14 @@ PROJECTS:
         template: page/{{ CLASS_SIMPLE_NAME_HomePage }}.hbs
       - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_MainVerticle | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_MainVerticle }}.java"
         template: vertx/MainVerticle.java
-#      - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_WorkerVerticle | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_WorkerVerticle }}.java"
-#        template: vertx/WorkerVerticle.java
+      - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_WorkerVerticle | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_WorkerVerticle }}.java"
+        template: vertx/WorkerVerticle.java
       - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_BaseModel | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_BaseModel }}.java"
         template: base/BaseModel.java
       - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_SiteUser | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_SiteUser }}.java"
         template: user/SiteUser.java
-#      - path: "{{ PROJECT_SRC }}/src/main/resources/application.yml"
-#        template: java/application.yml
+      - path: "{{ PROJECT_SRC }}/src/main/resources/application.yml"
+        template: java/application.yml
       - path: "{{ PROJECT_SRC }}/src/main/resources/log4j.properties"
         template: log4j/log4j.properties
       - path: "{{ PROJECT_SRC }}/src/main/resources/log4j.xml"
@@ -108,8 +108,184 @@ PROJECTS:
         template: config/gitignore
       - path: "{{ PROJECT_SRC }}/bin/touch.sh"
         template: "{{ PROJECT_SRC }}/local/template/config/touch.sh"
-      - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_ConfigKeys | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_ConfigKeys }}.java"
-        template: "{{ PROJECT_SRC }}/local/template/config/ConfigKeys.java"
+
+CONFIG_KEYS: |2
+  
+  	/**
+  	 * 
+  	 **/
+  	public static final String YGGIO_HOST_NAME = "YGGIO_HOST_NAME";
+  
+  	/**
+  	 * 
+  	 **/
+  	public static final String YGGIO_PORT = "YGGIO_PORT";
+  
+  	/**
+  	 * 
+  	 **/
+  	public static final String YGGIO_SSL = "YGGIO_SSL";
+  
+  	/**
+  	 * 
+  	 **/
+  	public static final String YGGIO_API_RELATIVE_URI = "YGGIO_API_RELATIVE_URI";
+  
+  	/**
+  	 * 
+  	 **/
+  	public static final String YGGIO_AUTH_TOKEN_URI = "YGGIO_AUTH_TOKEN_URI";
+  
+  	/**
+  	 * 
+  	 **/
+  	public static final String YGGIO_AUTH_LOCAL_URI = "YGGIO_AUTH_LOCAL_URI";
+  
+  	/**
+  	 * 
+  	 **/
+  	public static final String YGGIO_AUTH_SCOPE = "YGGIO_AUTH_SCOPE";
+  
+  	/**
+  	 * 
+  	 **/
+  	public static final String YGGIO_AUTH_CLIENT_ID = "YGGIO_AUTH_CLIENT_ID";
+  
+  	/**
+  	 * 
+  	 **/
+  	public static final String YGGIO_USERNAME = "YGGIO_USERNAME";
+  
+  	/**
+  	 * 
+  	 **/
+  	public static final String YGGIO_PASSWORD = "YGGIO_PASSWORD";
+
+WORKER_IMPORTS: |
+  import java.time.LocalDateTime;
+  import io.vertx.ext.jdbc.JDBCClient;
+  import io.vertx.sqlclient.Cursor;
+  import io.vertx.sqlclient.SqlConnection;
+  import io.vertx.ext.web.client.predicate.ResponsePredicate;
+  import io.vertx.ext.auth.authentication.TokenCredentials;
+  import org.computate.smartvillageview.enus.model.iotnode.IotNode;
+
+WORKER_IMPORT_DATA: |2
+  
+  	/**
+  	 * Description: Import initial data
+  	 * Val.Complete.enUS:Configuring the import of %s data completed. 
+  	 * Val.Fail.enUS:Configuring the import of %s data failed. 
+  	 */
+  	private void importDataClass(String classSimpleName, ZonedDateTime startDateTime) {
+  		if("IotNode".equals(classSimpleName)) {
+  			importDataIotNode().onComplete(a -> {
+  				String importPeriod = config().getString(String.format("%s_%s", ConfigKeys.IMPORT_DATA_PERIOD, classSimpleName));
+  				if(importPeriod != null && startDateTime != null) {
+  					Duration duration = TimeTool.parseNextDuration(importPeriod);
+  					ZonedDateTime nextStartTime = startDateTime.plus(duration);
+  					LOG.info(String.format(importTimerScheduling, classSimpleName, nextStartTime.format(TIME_FORMAT)));
+  					Duration nextStartDuration = Duration.between(Instant.now(), nextStartTime);
+  					vertx.setTimer(nextStartDuration.toMillis(), b -> {
+  						importDataClass(classSimpleName, nextStartTime);
+  					});
+  				}
+  			});
+  		}
+  	}
+  
+  	/**
+  	 * Description: Import IOT Node data
+  	 * Val.Complete.enUS:Importing %s data completed. 
+  	 * Val.Fail.enUS:Importing %s data failed. 
+  	 */
+  	private Future<Void> importDataIotNode() {
+  		Promise<Void> promise = Promise.promise();
+  		webClient.post(config().getInteger(ConfigKeys.YGGIO_PORT), config().getString(ConfigKeys.YGGIO_HOST_NAME), config().getString(ConfigKeys.YGGIO_AUTH_LOCAL_URI))
+  				.ssl(config().getBoolean(ConfigKeys.YGGIO_SSL))
+  				.expect(ResponsePredicate.SC_OK)
+  				.putHeader("Content-Type", "application/json")
+  				.sendJsonObject(new JsonObject()
+  						.put("username", config().getString(ConfigKeys.YGGIO_USERNAME))
+  						.put("password", config().getString(ConfigKeys.YGGIO_PASSWORD))
+  						)
+  				.onSuccess(tokenResponse -> {
+  			JsonObject token = tokenResponse.bodyAsJsonObject();
+  			webClient.get(config().getInteger(ConfigKeys.YGGIO_PORT), config().getString(ConfigKeys.YGGIO_HOST_NAME), config().getString(String.format("%s_%s", ConfigKeys.YGGIO_API_RELATIVE_URI, "IotNode")))
+  					.ssl(config().getBoolean(ConfigKeys.YGGIO_SSL))
+  					.authentication(new TokenCredentials(token.getString("token")))
+  					.expect(ResponsePredicate.SC_OK)
+  					.send()
+  					.onSuccess(response -> {
+  				JsonArray data = response.bodyAsJsonArray();
+  				List<Future> futures = new ArrayList<>();
+  
+  				data.stream().forEach(row -> {
+  					JsonObject iotNode = (JsonObject)row;
+  					String id = iotNode.getString("_id");
+  					String name = iotNode.getString("name");
+  					String nodeType = iotNode.getString("nodeType");
+  					JsonArray latlng = iotNode.getJsonArray("latlng");
+  
+  					JsonObject body = new JsonObject()
+  							.put(IotNode.VAR_saves, new JsonArray()
+  									.add(IotNode.VAR_inheritPk)
+  									.add(IotNode.VAR_nodeId)
+  									.add(IotNode.VAR_nodeName)
+  									.add(IotNode.VAR_nodeType)
+  									.add(IotNode.VAR_location)
+  									)
+  							.put(IotNode.VAR_pk, id)
+  							.put(IotNode.VAR_nodeId, id)
+  							.put(IotNode.VAR_nodeName, name)
+  							.put(IotNode.VAR_nodeType, nodeType)
+  							;
+  					if(latlng != null && latlng.size() == 2)
+  						body.put(IotNode.VAR_location, String.format("%s,%s", latlng.getDouble(0), latlng.getDouble(1)));
+  
+  					JsonObject params = new JsonObject();
+  					params.put("body", body);
+  					params.put("path", new JsonObject());
+  					params.put("cookie", new JsonObject());
+  					params.put("query", new JsonObject().put("commitWithin", 10000).put("q", "*:*").put("var", new JsonArray().add("refresh:false")));
+  					JsonObject context = new JsonObject().put("params", params);
+  					JsonObject json = new JsonObject().put("context", context);
+  					futures.add(vertx.eventBus().request(String.format("smart-village-view-enUS-%s", "IotNode"), json, new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", IotNode.CLASS_SIMPLE_NAME))));
+  				});
+  				CompositeFuture.all(futures).onSuccess(a -> {
+  					LOG.info(String.format(importDataIotNodeComplete, IotNode.CLASS_SIMPLE_NAME));
+  					promise.complete();
+  				}).onFailure(ex -> {
+  					LOG.error(String.format(importDataIotNodeFail, IotNode.CLASS_SIMPLE_NAME), ex);
+  					promise.fail(ex);
+  				});
+  			}).onFailure(ex -> {
+  				LOG.error(String.format(importDataIotNodeFail, IotNode.CLASS_SIMPLE_NAME), ex);
+  				promise.fail(ex);
+  			});
+  		}).onFailure(ex -> {
+  			LOG.error(String.format(importDataIotNodeFail, IotNode.CLASS_SIMPLE_NAME), ex);
+  			promise.fail(ex);
+  		});
+  		return promise.future();
+  	}
+  
+  	/**	
+  	 * Import initial data
+  	 * Val.Skip.enUS:The data import is disabled. 
+  	 **/
+  	private Future<Void> importData() {
+  		Promise<Void> promise = Promise.promise();
+  		if(config().getBoolean(ConfigKeys.ENABLE_IMPORT_DATA)) {
+  			importTimer("IotNode");
+  			promise.complete();
+  		}
+  		else {
+  			LOG.info(importDataSkip);
+  			promise.complete();
+  		}
+  		return promise.future();
+  	}
 
 README_END: |
   

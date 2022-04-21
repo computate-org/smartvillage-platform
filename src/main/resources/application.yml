@@ -1,17 +1,17 @@
 ---
 
 SITE_HOST_NAME: localhost
-SITE_PORT: 14080
-SITE_BASE_URL: "http://localhost:14080"
+SITE_PORT: 12080
+SITE_BASE_URL: "http://localhost:12080"
 SITE_ZONE: America/New_York
 SITE_LOCALE: en-US
 SITE_INSTANCES: 5
 WORKER_POOL_SIZE: 2
 VERTX_WARNING_EXCEPTION_SECONDS: 10
 CLUSTER_HOST_NAME: localhost
-CLUSTER_PORT: 14081
+CLUSTER_PORT: 12081
 
-STATIC_BASE_URL: "http://localhost:14080/static"
+STATIC_BASE_URL: "http://localhost:12080/static"
 STATIC_PATH: "/usr/local/src/smart-village-view-static"
 
 API_CONTACT_EMAIL: 
@@ -63,7 +63,7 @@ ENABLE_IMPORT_DATA_IotNode: true
 
 # The Auth roles required to be an admin in the site. 
 AUTH_ROLES_ADMIN: ['SiteAdmin']
-# The Auth roles required to add and modify IotNode records. 
-AUTH_ROLES_REQUIRED_IotNode: ['SiteAdmin']
-# The Auth roles required to add and modify SiteUser records. 
+# The Auth roles required to add and modify site user records. 
 AUTH_ROLES_REQUIRED_SiteUser: ['SiteAdmin']
+# The Auth roles required to add and modify IOT node records. 
+AUTH_ROLES_REQUIRED_IotNode: ['SiteAdmin']
