@@ -108,6 +108,20 @@ PROJECTS:
         template: config/gitignore
       - path: "{{ PROJECT_SRC }}/bin/touch.sh"
         template: "{{ PROJECT_SRC }}/local/template/config/touch.sh"
+      - path: "{{ PROJECT_SRC }}/openshift/defaults.yml"
+        template: openshift/defaults.yml
+      - path: "{{ PROJECT_SRC }}/openshift/SITE_SERVICE_1.yml"
+        template: openshift/SITE_SERVICE_1.yml
+      - path: "{{ PROJECT_SRC }}/openshift/SITE_SECRET_1.yml"
+        template: openshift/SITE_SECRET_1.yml
+      - path: "{{ PROJECT_SRC }}/openshift/SITE_ROUTE_1.yml"
+        template: openshift/SITE_ROUTE_1.yml
+      - path: "{{ PROJECT_SRC }}/openshift/SITE_IMAGE_STREAM_1.yml"
+        template: openshift/SITE_IMAGE_STREAM_1.yml
+      - path: "{{ PROJECT_SRC }}/openshift/SITE_BUILD_CONFIG_1.yml"
+        template: openshift/SITE_BUILD_CONFIG_1.yml
+      - path: "{{ PROJECT_SRC }}/openshift/SITE_DEPLOYMENT_CONFIG_1.yml"
+        template: openshift/SITE_DEPLOYMENT_CONFIG_1.yml
 
 CONFIG_TEMPLATE: |2
   

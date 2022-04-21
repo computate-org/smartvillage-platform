@@ -188,9 +188,9 @@ It will have you create a password when you save the file for the first time, li
 
 ```bash
 install -d ~/.local/src/smart-village-view-ansible
-install -d ~/.local/src/smart-village-view-ansible/vaults/$USER-staging/vault
-ansible-vault create ~/.local/src/smart-village-view-ansible/vaults/$USER-staging/vault
-ansible-vault edit ~/.local/src/smart-village-view-ansible/vaults/$USER-staging/vault
+install -d ~/.local/src/smart-village-view-ansible/vault/$USER-staging/vault
+ansible-vault create ~/.local/src/smart-village-view-ansible/vault/$USER-staging/vault
+ansible-vault edit ~/.local/src/smart-village-view-ansible/vault/$USER-staging/vault
 ```
 
 The contents of the vault will contain the secrets needed to override any default values you want to change in the app defaults defined here.
@@ -235,13 +235,13 @@ AUTH_TOKEN_URI: "/auth/realms/RH-IMPACT/protocol/openid-connect/token"
 
 ```bash
 
-ansible-playbook --vault-id @prompt -e @~/.local/src/smart-village-view-ansible/vaults/$USER-staging/vault ~/.ansible/roles/computate.computate_postgres_openshift/install.yml
+ansible-playbook --vault-id @prompt -e @~/.local/src/smart-village-view-ansible/vault/$USER-staging/vault ~/.ansible/roles/computate.computate_postgres_openshift/install.yml
 
-ansible-playbook --vault-id @prompt -e @~/.local/src/smart-village-view-ansible/vaults/$USER-staging/vault ~/.ansible/roles/computate.computate_zookeeper_openshift/install.yml
+ansible-playbook --vault-id @prompt -e @~/.local/src/smart-village-view-ansible/vault/$USER-staging/vault ~/.ansible/roles/computate.computate_zookeeper_openshift/install.yml
 
-ansible-playbook --vault-id @prompt -e @~/.local/src/smart-village-view-ansible/vaults/$USER-staging/vault ~/.ansible/roles/computate.computate_solr_openshift/install.yml
+ansible-playbook --vault-id @prompt -e @~/.local/src/smart-village-view-ansible/vault/$USER-staging/vault ~/.ansible/roles/computate.computate_solr_openshift/install.yml
 
-ansible-playbook --vault-id @prompt -e @~/.local/src/smart-village-view-ansible/vaults/$USER-staging/vault ~/.ansible/roles/computate.computate_project_openshift/install.yml
+ansible-playbook --vault-id @prompt -e @~/.local/src/smart-village-view-ansible/vault/$USER-staging/vault ~/.ansible/roles/computate.computate_project_openshift/install.yml
 ```
 
 ## How the base classes for this project were created
