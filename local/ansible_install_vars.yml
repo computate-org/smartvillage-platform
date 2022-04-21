@@ -62,10 +62,10 @@ PROJECTS:
         template: log4j/log4j.properties
       - path: "{{ PROJECT_SRC }}/src/main/resources/log4j.xml"
         template: log4j/log4j.xml
-#      - path: "{{ PROJECT_SRC }}/local/defaults.yml"
-#        template: local/defaults.yml
-#      - path: "{{ PROJECT_SRC }}/local/template.yml"
-#        template: local/template.yml
+      - path: "{{ PROJECT_SRC }}/local/defaults.yml"
+        template: local/defaults.yml
+      - path: "{{ PROJECT_SRC }}/local/template.yml"
+        template: local/template.yml
       - path: "{{ PROJECT_SRC }}/CONTRIBUTING"
         template: license/CONTRIBUTING
       - path: "{{ PROJECT_SRC }}/DCO"
@@ -108,6 +108,16 @@ PROJECTS:
         template: config/gitignore
       - path: "{{ PROJECT_SRC }}/bin/touch.sh"
         template: "{{ PROJECT_SRC }}/local/template/config/touch.sh"
+
+CONFIG_TEMPLATE: |2
+  
+  YGGIO_HOST_NAME: "\{\{ YGGIO_HOST_NAME \}\}"
+  YGGIO_PORT: \{\{ YGGIO_PORT \}\}
+  YGGIO_SSL: \{\{ YGGIO_SSL | lower \}\}
+  YGGIO_USERNAME: "\{\{ YGGIO_USERNAME \}\}"
+  YGGIO_PASSWORD: "\{\{ YGGIO_PASSWORD \}\}"
+  YGGIO_API_RELATIVE_URI_IotNode: /api/iotnodes
+  YGGIO_AUTH_LOCAL_URI: /auth/local
 
 CONFIG_KEYS: |2
   

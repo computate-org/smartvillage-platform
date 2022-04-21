@@ -14,11 +14,11 @@ SUFFIX_SRC_GEN_JAVA: "/src/gen/java"
 RELATIVE_PATHS_TO_WATCH: "src/main/java/org/computate/smartvillageview/enus"
 
 SITE_HOST_NAME: "localhost"
-SITE_BASE_URL: "http://localhost:10580"
-SITE_PORT: 10580
+SITE_BASE_URL: "http://localhost:12080"
+SITE_PORT: 12080
 SITE_ZONE: "America/New_York"
 SITE_LOCALE: "en-US"
-STATIC_BASE_URL: "http://localhost:10580/static"
+STATIC_BASE_URL: "http://localhost:12080/static"
 STATIC_PATH: "/home/ctate/.local/src/smart-village-view-static"
 TEMPLATE_PATH: "/home/ctate/.local/src/smart-village-view/src/main/resources/templates"
 API_CONTACT_EMAIL: ""
