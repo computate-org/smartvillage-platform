@@ -501,7 +501,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 						}
 					});
 				} else {
-					Exception ex = new RuntimeException("OpenID Connect Discovery failed");
+					Exception ex = new RuntimeException("OpenID Connect Discovery failed", a.cause());
 					LOG.error(configureOpenApiError, ex);
 					promise.fail(ex);
 				}
