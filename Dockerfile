@@ -5,6 +5,6 @@ MAINTAINER Christopher Tate <computate@computate.org>
 COPY . .
 USER root
 RUN mvn clean install -DskipTests
-COPY --from=0 /home/jboss/target/*.jar /home/jboss/app.jar
-ENTRYPOINT [“java”,”-jar”,”app.jar”]
+RUN cp /home/jboss/target/*.jar /home/jboss/app.jar
+CMD java -jar app.jar run org.computate.smartvillageview.enus.vertx.MainVerticle
 

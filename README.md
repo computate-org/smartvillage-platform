@@ -255,3 +255,14 @@ ansible-playbook -e @~/.local/src/smart-village-view/local/ansible_install_vars.
 ```bash
 env "SUMO_HOME=$HOME/.local/share/sumo" python ~/.local/share/sumo/tools/osmWebWizard.py
 ```
+
+# Building the docker container
+
+```bash
+sudo yum install -y buildah podman
+cd ~/.local/src/smart-village-view
+sudo podman build -t computate/smart-village-view:latest .
+sudo podman login quay.io
+sudo podman push quay.io/computate/smart-village-view:latest
+```
+
