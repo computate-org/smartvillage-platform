@@ -106,7 +106,7 @@ SITE_LIMITS_MEMORY: "500Mi"
 SITE_LIMITS_CPU: "200m"
 # App memory requests. 
 SITE_REQUESTS_MEMORY: "200Mi"
-# App cpu limit. 
+# App cpu requests. 
 SITE_REQUESTS_CPU: "100m"
 # Whether to install the Build Config
 SITE_BUILD_CONFIG_1: true

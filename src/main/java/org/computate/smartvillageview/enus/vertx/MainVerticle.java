@@ -183,13 +183,11 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 			zkConfig.put("sessionTimeout", 500000);
 			zkConfig.put("connectTimeout", 3000);
 			zkConfig.put("rootPath", "eventphenomenon");
-			zkConfig.put("retry", new JsonObject() {
-				{
-					put("initialSleepTime", 100);
-					put("intervalTimes", 10000);
-					put("maxTimes", 5);
-				}
-			});
+			zkConfig.put("retry", new JsonObject()
+					.put("initialSleepTime", 100)
+					.put("intervalTimes", 10000)
+					.put("maxTimes", 5)
+			);
 			ClusterManager clusterManager = new ZookeeperClusterManager(zkConfig);
 
 			if(clusterHostName == null) {
