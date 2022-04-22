@@ -80,7 +80,7 @@ POSTGRES_STORAGE_CLASS_NAME: "{{ REDHAT_OPENSHIFT_STORAGE_CLASS_NAME }}"
 ###################
 
 # The Github Organization. 
-GITHUB_ORG_NAME: "{{ GITHUB_ORG_NAME | default('computate-org') }}"
+GITHUB_ORG_NAME: "computate-org"
 # The Github Repository name. 
 GITHUB_REPO_NAME: "{{ SITE_NAME }}"
 
@@ -103,7 +103,13 @@ SITE_STATIC_PATH:
 # App memory limit. 
 SITE_LIMITS_MEMORY: "500Mi"
 # App cpu limit. 
-SITE_LIMITS_CPU: "1m"
+SITE_LIMITS_CPU: "200m"
+# App memory requests. 
+SITE_REQUESTS_MEMORY: "200Mi"
+# App cpu limit. 
+SITE_REQUESTS_CPU: "100m"
+# Whether to install the Build Config
+SITE_BUILD_CONFIG_1: true
 
 #########################################
 # application US English defaults #
@@ -118,6 +124,7 @@ SITE_PORT_ENUS: "8080"
 # The base URL of the site.
 SITE_BASE_URL_ENUS: "https://{{ SITE_HOST_NAME_ENUS }}"
 # The Solr collection of the site.
+SOLR_COLLECTION: "{{ SITE_NAME }}"
 SITE_SOLR_COLLECTION_ENUS: "{{ SITE_NAME }}"
 # The timezone of the site.
 SITE_LOCALE: "en-US"
@@ -219,11 +226,11 @@ SITE_INSTANCES: 5
 WORKER_POOL_SIZE: 5
 
 # Enable data import in the site. 
-ENABLE_IMPORT_DATA: "{{ ENABLE_IMPORT_DATA | lower }}"
+ENABLE_IMPORT_DATA: true
 ENABLE_IMPORT_DATA_IotNode: true
 
 # The Auth roles required to be an admin in the site. 
-AUTH_ROLES_ADMIN: "{{ AUTH_ROLES_ADMIN }}"
+AUTH_ROLES_ADMIN: ['SiteAdmin']
 # The Auth roles required to add and modify site user records. 
 AUTH_ROLES_REQUIRED_SiteUser: ['SiteAdmin']
 # The Auth roles required to add and modify IOT node records. 
