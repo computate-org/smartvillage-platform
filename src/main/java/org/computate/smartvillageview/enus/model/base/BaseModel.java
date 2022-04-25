@@ -59,7 +59,7 @@ public class BaseModel extends BaseModelGen<Object> implements ComputateVertxBas
 	 * VarCreated: true
 	 * HtmlRow: 1
 	 * HtmlCell: 2
-	 * HtmlColumn: 2
+	 * HtmlColumn: 1
 	 * DisplayName.enUS: created
 	 * FormatHtm: MMM d, yyyy h:mm:ss a
 	 * Description: A created timestamp for this record in the database

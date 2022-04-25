@@ -60,6 +60,60 @@ public class BaseModelGenPage extends BaseModelGenPageGen<PageLayout> {
 			w.o(JsonObject.mapFrom(searchListBaseModel_.getQueryResponse()).toString());
 	}
 
+	protected void _defaultZoneId(Wrap<String> w) {
+		w.o(Optional.ofNullable(siteRequest_.getRequestVars().get(VAR_defaultZoneId)).orElse(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE)));
+	}
+
+	/**
+	 * Ignore: true
+	 **/
+	protected void _defaultTimeZone(Wrap<ZoneId> w) {
+		w.o(ZoneId.of(defaultZoneId));
+	}
+
+	protected void _defaultLocaleId(Wrap<String> w) {
+		w.o(Optional.ofNullable(siteRequest_.getRequestHeaders().get("Accept-Language")).map(acceptLanguage -> StringUtils.substringBefore(acceptLanguage, ",")).orElse(siteRequest_.getConfig().getString(ConfigKeys.SITE_LOCALE)));
+	}
+
+	/**
+	 * Ignore: true
+	 **/
+	protected void _defaultLocale(Wrap<Locale> w) {
+		w.o(Locale.forLanguageTag(defaultLocaleId));
+	}
+
+	protected void _defaultRangeGap(Wrap<String> w) {
+		w.o(Optional.ofNullable(searchListBaseModel_.getFacetRangeGap()).orElse("+1DAY"));
+	}
+
+	protected void _defaultRangeEnd(Wrap<ZonedDateTime> w) {
+		w.o(Optional.ofNullable(searchListBaseModel_.getFacetRangeEnd()).map(s -> TimeTool.parseZonedDateTime(defaultTimeZone, s)).orElse(ZonedDateTime.now(defaultTimeZone).toLocalDate().atStartOfDay(defaultTimeZone).plusDays(1)));
+	}
+
+	protected void _defaultRangeStart(Wrap<ZonedDateTime> w) {
+		w.o(Optional.ofNullable(searchListBaseModel_.getFacetRangeStart()).map(s -> TimeTool.parseZonedDateTime(defaultTimeZone, s)).orElse(defaultRangeEnd.minusDays(7).toLocalDate().atStartOfDay(defaultTimeZone)));
+	}
+
+	protected void _defaultRangeVar(Wrap<String> w) {
+		w.o(Optional.ofNullable(searchListBaseModel_.getFacetRanges()).orElse(Arrays.asList()).stream().findFirst().map(v -> { if(v.contains("}")) return StringUtils.substringBefore(StringUtils.substringAfterLast(v, "}"), "_"); else return StringUtils.substringBefore(v, "_"); }).orElse("created"));
+	}
+
+	protected void _defaultFacetSort(Wrap<String> w) {
+		w.o(Optional.ofNullable(searchListBaseModel_.getFacetSort()).orElse("index"));
+	}
+
+	protected void _defaultFacetLimit(Wrap<Integer> w) {
+		w.o(Optional.ofNullable(searchListBaseModel_.getFacetLimit()).orElse(1));
+	}
+
+	protected void _defaultFacetMinCount(Wrap<Integer> w) {
+		w.o(Optional.ofNullable(searchListBaseModel_.getFacetMinCount()).orElse(1));
+	}
+
+	protected void _defaultPivotMinCount(Wrap<Integer> w) {
+		w.o(Optional.ofNullable(searchListBaseModel_.getFacetPivotMinCount()).orElse(0));
+	}
+
 	protected void _defaultPivotVars(List<String> l) {
 		Optional.ofNullable(searchListBaseModel_.getFacetPivots()).orElse(Arrays.asList()).forEach(facetPivot -> {
 			String facetPivot2 = facetPivot;

@@ -4,7 +4,7 @@
   vars: 
     GITHUB_ORG: "computate-org"
     SITE_NAME: "smart-village-view"
-    SITE_REPO: "git@github.com:{{ GITHUB_ORG }}/{{ SITE_NAME }}.git"
+    SITE_REPO: "git@github.com:computate-org/smart-village-view.git"
     SITE_SRC: "{{ playbook_dir }}"
     SITE_JAVA_PACKAGE: "org.computate.smartvillageview.enus"
     RELATIVE_PATHS_TO_WATCH: "src/main/java/org/computate/smartvillageview/enus"

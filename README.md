@@ -193,10 +193,6 @@ ansible-vault create ~/.local/src/smart-village-view-ansible/vault/$USER-staging
 ansible-vault edit ~/.local/src/smart-village-view-ansible/vault/$USER-staging/vault
 ```
 
-The contents of the vault will contain the secrets needed to override any default values you want to change in the app defaults defined here.
-
-https://github.com/computate-org/smart-village-view/blob/main/openshift/defaults.yml
-
 Here is an example of a vault that I have used to deploy the smart-village-view application. 
 You will want to update these values to reflect your OpenShift environment, like the REDHAT_OPENSHIFT_TOKEN which you will need to obtain after logging into OpenShift. 
 Or the REDHAT_OPENSHIFT_STORAGE_CLASS_NAME which might be different than gp2 for you. 
@@ -214,13 +210,13 @@ POSTGRES_DB_NAME: sampledb
 POSTGRES_DB_USER: computate
 POSTGRES_DB_PASSWORD: qVTaaa23aIkLmw
 POSTGRES_VOLUME_SIZE: 1Gi
-POSTGRES_STORAGE_CLASS_NAME: gp2
+POSTGRES_STORAGE_CLASS_NAME: "{{ REDHAT_OPENSHIFT_STORAGE_CLASS_NAME }}"
 
 ZOOKEEPER_VOLUME_SIZE: 1Gi
-ZOOKEEPER_STORAGE_CLASS_NAME: gp2
+ZOOKEEPER_STORAGE_CLASS_NAME: "{{ REDHAT_OPENSHIFT_STORAGE_CLASS_NAME }}"
 
 SOLR_VOLUME_SIZE: 2Gi
-SOLR_STORAGE_CLASS_NAME: gp2
+SOLR_STORAGE_CLASS_NAME: "{{ REDHAT_OPENSHIFT_STORAGE_CLASS_NAME }}"
 
 AUTH_REALM: TEAM19
 AUTH_RESOURCE: team19
@@ -235,13 +231,13 @@ AUTH_TOKEN_URI: "/auth/realms/RH-IMPACT/protocol/openid-connect/token"
 
 ```bash
 
-ansible-playbook --vault-id @prompt -e @~/.local/src/smart-village-view-ansible/vault/$USER-staging/vault ~/.ansible/roles/computate.computate_postgres_openshift/install.yml
+ansible-playbook --vault-id @prompt -e @~/.local/src/smart-village-view-ansible/vault/$USER-staging/vault ~/.ansible/roles/computate.computate_postgres_openshift/install.yml -e SITE_NAME=smart-village-view
 
-ansible-playbook --vault-id @prompt -e @~/.local/src/smart-village-view-ansible/vault/$USER-staging/vault ~/.ansible/roles/computate.computate_zookeeper_openshift/install.yml
+ansible-playbook --vault-id @prompt -e @~/.local/src/smart-village-view-ansible/vault/$USER-staging/vault ~/.ansible/roles/computate.computate_zookeeper_openshift/install.yml -e SITE_NAME=smart-village-view
 
-ansible-playbook --vault-id @prompt -e @~/.local/src/smart-village-view-ansible/vault/$USER-staging/vault ~/.ansible/roles/computate.computate_solr_openshift/install.yml
+ansible-playbook --vault-id @prompt -e @~/.local/src/smart-village-view-ansible/vault/$USER-staging/vault ~/.ansible/roles/computate.computate_solr_openshift/install.yml -e SITE_NAME=smart-village-view
 
-ansible-playbook --vault-id @prompt -e @~/.local/src/smart-village-view-ansible/vault/$USER-staging/vault ~/.ansible/roles/computate.computate_project_openshift/install.yml
+ansible-playbook --vault-id @prompt -e @~/.local/src/smart-village-view-ansible/vault/$USER-staging/vault ~/.ansible/roles/computate.computate_project_openshift/install.yml -e SITE_NAME=smart-village-view
 ```
 
 ## How the base classes for this project were created
@@ -255,14 +251,3 @@ ansible-playbook -e @~/.local/src/smart-village-view/local/ansible_install_vars.
 ```bash
 env "SUMO_HOME=$HOME/.local/share/sumo" python ~/.local/share/sumo/tools/osmWebWizard.py
 ```
-
-# Building the docker container
-
-```bash
-sudo yum install -y buildah podman
-cd ~/.local/src/smart-village-view
-sudo podman build -t computate/smart-village-view:latest .
-sudo podman login quay.io
-sudo podman push quay.io/computate/smart-village-view:latest
-```
-

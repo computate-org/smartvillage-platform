@@ -267,34 +267,36 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 		return promise.future();
 	}
 	public void responsePivotSearchIotNode(List<SolrResponse.Pivot> pivots, JsonArray pivotArray) {
-		for(SolrResponse.Pivot pivotField : pivots) {
-			String entityIndexed = pivotField.getField();
-			String entityVar = StringUtils.substringBefore(entityIndexed, "_docvalues_");
-			JsonObject pivotJson = new JsonObject();
-			pivotArray.add(pivotJson);
-			pivotJson.put("field", entityVar);
-			pivotJson.put("value", pivotField.getValue());
-			pivotJson.put("count", pivotField.getCount());
-			Collection<SolrResponse.PivotRange> pivotRanges = pivotField.getRanges().values();
-			List<SolrResponse.Pivot> pivotFields2 = pivotField.getPivotList();
-			if(pivotRanges != null) {
-				JsonObject rangeJson = new JsonObject();
-				pivotJson.put("ranges", rangeJson);
-				for(SolrResponse.PivotRange rangeFacet : pivotRanges) {
-					JsonObject rangeFacetJson = new JsonObject();
-					String rangeFacetVar = StringUtils.substringBefore(rangeFacet.getName(), "_docvalues_");
-					rangeJson.put(rangeFacetVar, rangeFacetJson);
-					JsonObject rangeFacetCountsObject = new JsonObject();
-					rangeFacetJson.put("counts", rangeFacetCountsObject);
-					rangeFacet.getCounts().forEach((value, count) -> {
-						rangeFacetCountsObject.put(value, count);
-					});
+		if(pivots != null) {
+			for(SolrResponse.Pivot pivotField : pivots) {
+				String entityIndexed = pivotField.getField();
+				String entityVar = StringUtils.substringBefore(entityIndexed, "_docvalues_");
+				JsonObject pivotJson = new JsonObject();
+				pivotArray.add(pivotJson);
+				pivotJson.put("field", entityVar);
+				pivotJson.put("value", pivotField.getValue());
+				pivotJson.put("count", pivotField.getCount());
+				Collection<SolrResponse.PivotRange> pivotRanges = pivotField.getRanges().values();
+				List<SolrResponse.Pivot> pivotFields2 = pivotField.getPivotList();
+				if(pivotRanges != null) {
+					JsonObject rangeJson = new JsonObject();
+					pivotJson.put("ranges", rangeJson);
+					for(SolrResponse.PivotRange rangeFacet : pivotRanges) {
+						JsonObject rangeFacetJson = new JsonObject();
+						String rangeFacetVar = StringUtils.substringBefore(rangeFacet.getName(), "_docvalues_");
+						rangeJson.put(rangeFacetVar, rangeFacetJson);
+						JsonObject rangeFacetCountsObject = new JsonObject();
+						rangeFacetJson.put("counts", rangeFacetCountsObject);
+						rangeFacet.getCounts().forEach((value, count) -> {
+							rangeFacetCountsObject.put(value, count);
+						});
+					}
 				}
-			}
-			if(pivotFields2 != null) {
-				JsonArray pivotArray2 = new JsonArray();
-				pivotJson.put("pivot", pivotArray2);
-				responsePivotSearchIotNode(pivotFields2, pivotArray2);
+				if(pivotFields2 != null) {
+					JsonArray pivotArray2 = new JsonArray();
+					pivotJson.put("pivot", pivotArray2);
+					responsePivotSearchIotNode(pivotFields2, pivotArray2);
+				}
 			}
 		}
 	}
@@ -1165,12 +1167,13 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 				searchList.setC(IotNode.class);
 				searchList.fq("deleted_docvalues_boolean:false");
 				searchList.fq("archived_docvalues_boolean:false");
-				searchList.fq("inheritPk_docvalues_string:" + SearchTool.escapeQueryChars(body.getString("pk")));
+				searchList.fq("inheritPk_docvalues_string:" + SearchTool.escapeQueryChars(body.getString(IotNode.VAR_pk)));
 				searchList.promiseDeepForClass(siteRequest).onSuccess(a -> {
 					try {
 						if(searchList.size() >= 1) {
 							IotNode o = searchList.getList().stream().findFirst().orElse(null);
 							IotNode o2 = new IotNode();
+							o2.setSiteRequest_(siteRequest);
 							JsonObject body2 = new JsonObject();
 							for(String f : body.fieldNames()) {
 								Object bodyVal = body.getValue(f);

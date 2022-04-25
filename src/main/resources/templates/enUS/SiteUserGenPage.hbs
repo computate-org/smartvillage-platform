@@ -114,7 +114,7 @@
 			</td>
 		</tr>
 		<tr class="">
-			<td class="" colspan="2"
+			<td class="" colspan="2">
 			<span><input type="datetime-local" name="facetRangeEnd" id="pageFacetRangeEnd-SiteUser" value="{{formatZonedDateTime defaultRangeEnd "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeChange(this, 'SiteUser'); "/></span>
 			</td>
 		</tr>
@@ -274,7 +274,7 @@
 {{#*inline "htmFormSiteUserPage"}}
 		<!-- #*inline "htmForm" -->
 		<form action="" id="SiteUserForm" class="pageForm " style="" onsubmit="event.preventDefault(); return false; ">
-{{#if id}}
+{{#if pk}}
 			<input name="pk" class="valuePk" type="hidden" value="{{pk}}"/>
 {{/if}}
 			<input name="focusId" type="hidden"/>
@@ -422,6 +422,50 @@
 			</div>
 		</div>
 {{/inline}}
+{{#*inline "htmBodySidebar"}}
+	<div class="w3-dropdown-hover w3-bar-block min-width-300px ">
+		<div class="min-width-300px ">
+			<span title="Search" class="w3-button w3-xlarge w3-gray " onclick="$('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').toggle(); "><i class="fad fa-magnifying-glass "></i></span>
+			<span title="Filters" class="w3-button w3-xlarge w3-gray " onclick="$('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleFilters').toggle(); "><i class="fad fa-filters "></i></span>
+			<span title="Range" class="w3-button w3-xlarge w3-gray " onclick="$('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleRange').toggle(); "><i class="fad fa-calendar-range "></i></span>
+			<span title="Pivot" class="w3-button w3-xlarge w3-gray " onclick="$('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').toggle(); "><i class="fad fa-table-pivot "></i></span>
+		</div>
+		<div class="w3-dropdown-content min-width-300px w3-white w3-border ">
+			<div  class="siteSidebarToggle siteSidebarToggleSearch" style="display: none; ">
+				<div class="w3-bar w3-gray ">
+					<span class="w3-bar-item w3-padding ">Search</span>
+				</div>
+				<div class="w3-bar-block ">
+{{#block "htmBodySearch"}}{{/block}}
+				</div>
+			</div>
+			<div  class="siteSidebarToggle siteSidebarToggleFilters" style="display: none; ">
+				<div class="w3-bar w3-gray ">
+					<span class="w3-bar-item w3-padding ">Filters</span>
+				</div>
+				<div class="w3-bar-block ">
+{{#block "htmBodyFilters"}}{{/block}}
+				</div>
+			</div>
+			<div  class="siteSidebarToggle siteSidebarToggleRange" style="display: none; ">
+				<div class="w3-bar w3-gray ">
+					<span class="w3-bar-item w3-padding ">Range</span>
+				</div>
+				<div class="w3-bar-block ">
+{{#block "htmBodyRange"}}{{/block}}
+				</div>
+			</div>
+			<div  class="siteSidebarToggle siteSidebarTogglePivot" style="display: none; ">
+				<div class="w3-bar w3-gray ">
+					<span class="w3-bar-item w3-padding ">Pivot</span>
+				</div>
+				<div class="w3-bar-block ">
+{{#block "htmBodyPivot"}}{{/block}}
+				</div>
+			</div>
+		</div>
+	</div>
+{{/inline}}
 {{#*inline "htmBodyStartSiteUserPage"}}
 {{> "htmBodyStartBaseModelPage"}}
 {{/inline}}
@@ -430,46 +474,15 @@
 {{/inline}}
 {{#*inline "htmBodySiteUserPage"}}
 {{#block "htmBodyStart"}}{{/block}}
-	<div class="w3-sidebar w3-bar-block " style="min-width: 300px; ">		<div class="">			<span title="Search" class="w3-button w3-xlarge w3-gray " onclick="$('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').toggle(); "><i class="fad fa-magnifying-glass "></i></span>
-			<span title="Filters" class="w3-button w3-xlarge w3-gray " onclick="$('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleFilters').toggle(); "><i class="fad fa-filters "></i></span>
-			<span title="Range" class="w3-button w3-xlarge w3-gray " onclick="$('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleRange').toggle(); "><i class="fad fa-calendar-range "></i></span>
-			<span title="Range" class="w3-button w3-xlarge w3-gray " onclick="$('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').toggle(); "><i class="fad fa-table-pivot "></i></span>
-		</div>
-<div  class="siteSidebarToggle siteSidebarToggleSearch" style="display: none; ">
-	<div class="w3-bar w3-gray ">
-		<span class="w3-bar-item w3-padding ">Search</span>
-	</div>
-	<div class="w3-bar-block ">
-{{#block "htmBodySearch"}}{{/block}}
-	</div>
-</div>
-<div  class="siteSidebarToggle siteSidebarToggleFilters" style="display: none; ">
-	<div class="w3-bar w3-gray ">
-		<span class="w3-bar-item w3-padding ">Filters</span>
-	</div>
-	<div class="w3-bar-block ">
-{{#block "htmBodyFilters"}}{{/block}}
-	</div>
-</div>
-<div  class="siteSidebarToggle siteSidebarToggleRange" style="display: none; ">
-	<div class="w3-bar w3-gray ">
-		<span class="w3-bar-item w3-padding ">Range</span>
-	</div>
-	<div class="w3-bar-block ">
-{{#block "htmBodyRange"}}{{/block}}
-	</div>
-</div>
-<div  class="siteSidebarToggle siteSidebarTogglePivot" style="display: none; ">
-	<div class="w3-bar w3-gray ">
-		<span class="w3-bar-item w3-padding ">Pivot</span>
-	</div>
-	<div class="w3-bar-block ">
-{{#block "htmBodyPivot"}}{{/block}}
-	</div>
-</div>
-	</div>
-<div class="pageContent w3-content ">
+		<div class="w3-bar ">
+			<div class="w3-bar-item ">
+{{#block "htmBodySidebar"}}{{/block}}
+			</div>
+			<div class="w3-bar-item ">
 {{#block "htmBodyMenu"}}{{/block}}
+			</div>
+		</div>
+	<div class="pageContent w3-content ">
 {{#block "htmBodyGraph"}}{{/block}}
 	{{#eq siteUserCount int0}}
 {{#block "htmBodyCount0"}}{{/block}}
@@ -487,58 +500,60 @@
 {{#block "htmForm"}}{{/block}}
 {{#block "htmForms"}}{{/block}}
 {{#block "htmBodyEnd"}}{{/block}}
-</div>
+	</div>
 {{/inline}}
 {{#*inline "table1SiteUserPage"}}
-		<table class="w3-table w3-bordered w3-striped w3-border w3-hoverable ">
-			{{> table2SiteUserPage}}
-		</table>
+		<div class="w3-responsive ">
+			<table class="w3-table w3-bordered w3-striped w3-border w3-hoverable ">
+{{> table2SiteUserPage}}
+			</table>
+		</div>
 {{/inline}}
 {{#*inline "table2SiteUserPage"}}
-		{{> "thead1SiteUserPage"}}
-		{{> "tbody1SiteUserPage"}}
-		{{> "tfoot1SiteUserPage"}}
-	{{/inline}}
+{{> "thead1SiteUserPage"}}
+{{> "tbody1SiteUserPage"}}
+{{> "tfoot1SiteUserPage"}}
+{{/inline}}
 {{#*inline "thead1SiteUserPage"}}
-		<thead class="w3-gray w3-hover-gray">
-			{{> thead2SiteUserPage}}
-		</thead>
-	{{/inline}}
+				<thead class="w3-gray w3-hover-gray">
+{{> thead2SiteUserPage}}
+				</thead>
+{{/inline}}
 {{#*inline "thead2SiteUserPage"}}
 			<tr>
-				<th>created</th>
-				<th></th>
+						<th>created</th>
+						<th></th>
 			</tr>
 {{/inline}}
 {{#*inline "tbody1SiteUserPage"}}
-		<tbody>
-			{{> tbody2SiteUserPage}}
-		</tbody>
+				<tbody>
+{{> tbody2SiteUserPage}}
+				</tbody>
 {{/inline}}
 {{#*inline "tbody2SiteUserPage"}}
 		{{#each listSiteUser}}
-			<tr>
-					<td>
-						<a href="{{pageUrlPk}}">
-							<span class="white-space-pre-wrap ">{{siteZonedDateTimeFormat created "MMM d, yyyy h:mm:ss a" siteLocale}}</span>
-						</a>
-					</td>
-					<td>
-						<a href="{{pageUrlPk}}">
-							<i class="far fa-user-cog "></i>
-							<span class="white-space-pre-wrap ">{{objectTitle}}</span>
-						</a>
-					</td>
-			</tr>
+					<tr>
+						<td>
+							<a href="{{pageUrlPk}}">
+								<span class="white-space-pre-wrap ">{{siteZonedDateTimeFormat created "MMM d, yyyy h:mm:ss a" siteLocale}}</span>
+							</a>
+						</td>
+						<td>
+							<a href="{{pageUrlPk}}">
+								<i class="far fa-user-cog "></i>
+								<span class="white-space-pre-wrap ">{{objectTitle}}</span>
+							</a>
+						</td>
+					</tr>
 		{{/each}}
 {{/inline}}
 {{#*inline "tfoot1SiteUserPage"}}
-		<tfoot class="w3-gray w3-hover-gray">
-			{{> tfoot2SiteUserPage}}
-		</tfoot>
+				<tfoot class="w3-gray w3-hover-gray">
+{{> tfoot2SiteUserPage}}
+				</tfoot>
 {{/inline}}
 {{#*inline "tfoot2SiteUserPage"}}
-		<tr>
+			<tr>
 			{{#if getColumnCreated}}
 				<td>
 				</td>
@@ -547,7 +562,7 @@
 				<td>
 				</td>
 			{{/if}}
-		</tr>
+			</tr>
 	{{/inline}}
 {{#*inline "htmFormsSiteUserPage"}}
 	{{#ifContainsAnyRoles roles rolesRequired}}

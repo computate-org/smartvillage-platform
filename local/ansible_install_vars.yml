@@ -1,5 +1,8 @@
+---
 GITHUB_ORG: computate-org
 PROJECT_NAME: smart-village-view
+PROJECT_REPO: "git@github.com:{{ GITHUB_ORG }}/{{ PROJECT_NAME }}.git"
+PROJECT_REPO_HTTPS: "{{ PROJECT_REPO_SSH | replace('git@github.com:', 'https://github.com/') }}"
 PROJECT_LANG: enUS
 PROJECT_ZONE: "America/New_York"
 PROJECT_LOCALE: "en-US"

@@ -114,7 +114,7 @@
 			</td>
 		</tr>
 		<tr class="">
-			<td class="" colspan="2"
+			<td class="" colspan="2">
 			<span><input type="datetime-local" name="facetRangeEnd" id="pageFacetRangeEnd-BaseModel" value="{{formatZonedDateTime defaultRangeEnd "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeChange(this, 'BaseModel'); "/></span>
 			</td>
 		</tr>
@@ -275,7 +275,7 @@
 		<!-- #*inline "htmForm" -->
 		<form action="" id="BaseModelForm" class="pageForm " style="" onsubmit="event.preventDefault(); return false; ">
 {{#if id}}
-			<input name="pk" class="valuePk" type="hidden" value="{{pk}}"/>
+			<input name="id" class="valueId" type="hidden" value="{{id}}"/>
 {{/if}}
 			<input name="focusId" type="hidden"/>
 			<input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{{toJsonObjectStringInApostrophes pageResponse }}}' type="hidden"/>
@@ -283,6 +283,50 @@
 {{#if id}}
 {{#block "htmForm_searchpageBaseModel"}}{{/block}}
 {{/if}}
+{{/inline}}
+{{#*inline "htmBodySidebar"}}
+	<div class="w3-dropdown-hover w3-bar-block min-width-300px ">
+		<div class="min-width-300px ">
+			<span title="Search" class="w3-button w3-xlarge w3- " onclick="$('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').toggle(); "><i class="fad fa-magnifying-glass "></i></span>
+			<span title="Filters" class="w3-button w3-xlarge w3- " onclick="$('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleFilters').toggle(); "><i class="fad fa-filters "></i></span>
+			<span title="Range" class="w3-button w3-xlarge w3- " onclick="$('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleRange').toggle(); "><i class="fad fa-calendar-range "></i></span>
+			<span title="Pivot" class="w3-button w3-xlarge w3- " onclick="$('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').toggle(); "><i class="fad fa-table-pivot "></i></span>
+		</div>
+		<div class="w3-dropdown-content min-width-300px w3-white w3-border ">
+			<div  class="siteSidebarToggle siteSidebarToggleSearch" style="display: none; ">
+				<div class="w3-bar w3- ">
+					<span class="w3-bar-item w3-padding ">Search</span>
+				</div>
+				<div class="w3-bar-block ">
+{{#block "htmBodySearch"}}{{/block}}
+				</div>
+			</div>
+			<div  class="siteSidebarToggle siteSidebarToggleFilters" style="display: none; ">
+				<div class="w3-bar w3- ">
+					<span class="w3-bar-item w3-padding ">Filters</span>
+				</div>
+				<div class="w3-bar-block ">
+{{#block "htmBodyFilters"}}{{/block}}
+				</div>
+			</div>
+			<div  class="siteSidebarToggle siteSidebarToggleRange" style="display: none; ">
+				<div class="w3-bar w3- ">
+					<span class="w3-bar-item w3-padding ">Range</span>
+				</div>
+				<div class="w3-bar-block ">
+{{#block "htmBodyRange"}}{{/block}}
+				</div>
+			</div>
+			<div  class="siteSidebarToggle siteSidebarTogglePivot" style="display: none; ">
+				<div class="w3-bar w3- ">
+					<span class="w3-bar-item w3-padding ">Pivot</span>
+				</div>
+				<div class="w3-bar-block ">
+{{#block "htmBodyPivot"}}{{/block}}
+				</div>
+			</div>
+		</div>
+	</div>
 {{/inline}}
 {{#*inline "htmBodyStartBaseModelPage"}}
 {{> "htmBodyStartPageLayout"}}
@@ -292,46 +336,15 @@
 {{/inline}}
 {{#*inline "htmBodyBaseModelPage"}}
 {{#block "htmBodyStart"}}{{/block}}
-	<div class="w3-sidebar w3-bar-block " style="min-width: 300px; ">		<div class="">			<span title="Search" class="w3-button w3-xlarge w3- " onclick="$('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').toggle(); "><i class="fad fa-magnifying-glass "></i></span>
-			<span title="Filters" class="w3-button w3-xlarge w3- " onclick="$('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleFilters').toggle(); "><i class="fad fa-filters "></i></span>
-			<span title="Range" class="w3-button w3-xlarge w3- " onclick="$('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleRange').toggle(); "><i class="fad fa-calendar-range "></i></span>
-			<span title="Range" class="w3-button w3-xlarge w3- " onclick="$('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').toggle(); "><i class="fad fa-table-pivot "></i></span>
-		</div>
-<div  class="siteSidebarToggle siteSidebarToggleSearch" style="display: none; ">
-	<div class="w3-bar w3- ">
-		<span class="w3-bar-item w3-padding ">Search</span>
-	</div>
-	<div class="w3-bar-block ">
-{{#block "htmBodySearch"}}{{/block}}
-	</div>
-</div>
-<div  class="siteSidebarToggle siteSidebarToggleFilters" style="display: none; ">
-	<div class="w3-bar w3- ">
-		<span class="w3-bar-item w3-padding ">Filters</span>
-	</div>
-	<div class="w3-bar-block ">
-{{#block "htmBodyFilters"}}{{/block}}
-	</div>
-</div>
-<div  class="siteSidebarToggle siteSidebarToggleRange" style="display: none; ">
-	<div class="w3-bar w3- ">
-		<span class="w3-bar-item w3-padding ">Range</span>
-	</div>
-	<div class="w3-bar-block ">
-{{#block "htmBodyRange"}}{{/block}}
-	</div>
-</div>
-<div  class="siteSidebarToggle siteSidebarTogglePivot" style="display: none; ">
-	<div class="w3-bar w3- ">
-		<span class="w3-bar-item w3-padding ">Pivot</span>
-	</div>
-	<div class="w3-bar-block ">
-{{#block "htmBodyPivot"}}{{/block}}
-	</div>
-</div>
-	</div>
-<div class="pageContent w3-content ">
+		<div class="w3-bar ">
+			<div class="w3-bar-item ">
+{{#block "htmBodySidebar"}}{{/block}}
+			</div>
+			<div class="w3-bar-item ">
 {{#block "htmBodyMenu"}}{{/block}}
+			</div>
+		</div>
+	<div class="pageContent w3-content ">
 {{#block "htmBodyGraph"}}{{/block}}
 	{{#eq baseModelCount int0}}
 {{#block "htmBodyCount0"}}{{/block}}
@@ -349,57 +362,59 @@
 {{#block "htmForm"}}{{/block}}
 {{#block "htmForms"}}{{/block}}
 {{#block "htmBodyEnd"}}{{/block}}
-</div>
+	</div>
 {{/inline}}
 {{#*inline "table1BaseModelPage"}}
-		<table class="w3-table w3-bordered w3-striped w3-border w3-hoverable ">
-			{{> table2BaseModelPage}}
-		</table>
+		<div class="w3-responsive ">
+			<table class="w3-table w3-bordered w3-striped w3-border w3-hoverable ">
+{{> table2BaseModelPage}}
+			</table>
+		</div>
 {{/inline}}
 {{#*inline "table2BaseModelPage"}}
-		{{> "thead1BaseModelPage"}}
-		{{> "tbody1BaseModelPage"}}
-		{{> "tfoot1BaseModelPage"}}
-	{{/inline}}
+{{> "thead1BaseModelPage"}}
+{{> "tbody1BaseModelPage"}}
+{{> "tfoot1BaseModelPage"}}
+{{/inline}}
 {{#*inline "thead1BaseModelPage"}}
-		<thead class="w3- w3-hover-">
-			{{> thead2BaseModelPage}}
-		</thead>
-	{{/inline}}
+				<thead class="w3- w3-hover-">
+{{> thead2BaseModelPage}}
+				</thead>
+{{/inline}}
 {{#*inline "thead2BaseModelPage"}}
 			<tr>
-				<th>created</th>
-				<th></th>
+						<th>created</th>
+						<th></th>
 			</tr>
 {{/inline}}
 {{#*inline "tbody1BaseModelPage"}}
-		<tbody>
-			{{> tbody2BaseModelPage}}
-		</tbody>
+				<tbody>
+{{> tbody2BaseModelPage}}
+				</tbody>
 {{/inline}}
 {{#*inline "tbody2BaseModelPage"}}
 		{{#each listBaseModel}}
-			<tr>
-					<td>
-						<a href="{{pageUrlPk}}">
-							<span class="white-space-pre-wrap ">{{siteZonedDateTimeFormat created "MMM d, yyyy h:mm:ss a" siteLocale}}</span>
-						</a>
-					</td>
-					<td>
-						<a href="{{pageUrlPk}}">
-							<span class="white-space-pre-wrap ">{{objectTitle}}</span>
-						</a>
-					</td>
-			</tr>
+					<tr>
+						<td>
+							<a href="{{pageUrlPk}}">
+								<span class="white-space-pre-wrap ">{{siteZonedDateTimeFormat created "MMM d, yyyy h:mm:ss a" siteLocale}}</span>
+							</a>
+						</td>
+						<td>
+							<a href="{{pageUrlPk}}">
+								<span class="white-space-pre-wrap ">{{objectTitle}}</span>
+							</a>
+						</td>
+					</tr>
 		{{/each}}
 {{/inline}}
 {{#*inline "tfoot1BaseModelPage"}}
-		<tfoot class="w3- w3-hover-">
-			{{> tfoot2BaseModelPage}}
-		</tfoot>
+				<tfoot class="w3- w3-hover-">
+{{> tfoot2BaseModelPage}}
+				</tfoot>
 {{/inline}}
 {{#*inline "tfoot2BaseModelPage"}}
-		<tr>
+			<tr>
 			{{#if getColumnCreated}}
 				<td>
 				</td>
@@ -408,7 +423,7 @@
 				<td>
 				</td>
 			{{/if}}
-		</tr>
+			</tr>
 	{{/inline}}
 {{#*inline "htmFormsBaseModelPage"}}
 	{{#ifContainsAnyRoles roles rolesRequired}}
@@ -416,7 +431,7 @@
 		<button
 			class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3- "
 			id="refreshBaseModelGenPage"
-			onclick="patch{{classSimpleName}}Vals( [ {name: 'fq', value: 'pk:{{pk}}' } ], {}, function() { addGlow($('#refreshBaseModelGenPage')); }, function() { addError($('#refreshBaseModelGenPage')); }); return false; ">
+			onclick="patch{{classSimpleName}}Vals( [ {name: 'fq', value: 'id:{{id}}' } ], {}, function() { addGlow($('#refreshBaseModelGenPage')); }, function() { addError($('#refreshBaseModelGenPage')); }); return false; ">
 			<i class="fas fa-sync-alt "></i>
 			refresh 
 		</button>
@@ -451,7 +466,7 @@
 					name="suggestBaseModel"
 					id="suggestBaseModel{{id}}"
 					autocomplete="off"
-					oninput="suggestBaseModelObjectSuggest( [ { 'name': 'q', 'value': 'objectSuggest:' + $(this).val() }, { 'name': 'rows', 'value': '10' }, { 'name': 'fl', 'value': 'classCanonicalName,pk,pageUrlPk,objectTitle' } ], $('#suggestListBaseModel{{id}}'), {{pk}}; "
+					oninput="suggestBaseModelObjectSuggest( [ { 'name': 'q', 'value': 'objectSuggest:' + $(this).val() }, { 'name': 'rows', 'value': '10' }, { 'name': 'fl', 'value': 'classCanonicalName,pk,pageUrlPk,objectTitle' } ], $('#suggestListBaseModel{{id}}'), {{id}}; "
 					onkeyup="if (event.keyCode === 13) { event.preventDefault(); window.location.href = 'null?q={{query1}}:' + encodeURIComponent(this.value) + '{{fqs}}{{sorts}}&amp;rows={{start2}}&amp;rows={{rows1}}"
 				{{#if listBaseModel}}
 					value="{{query2}}"
@@ -503,7 +518,7 @@
 
 {{#*inline "inputPk"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varBaseModel{{pk}}Pk ">{{baseModel_.pk}}</span>
+														<span class="varBaseModel{{id}}Pk ">{{baseModel_.pk}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -521,7 +536,7 @@
 																<button
 																		tabindex="-1"
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3- "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_inheritPk')); $('#{{classApiMethodMethod}}_inheritPk').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#BaseModelForm :input[name=pk]').val() }], 'setInheritPk', null, function() { addGlow($('#{{classApiMethodMethod}}_inheritPk')); }, function() { addError($('#{{classApiMethodMethod}}_inheritPk')); }); "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_inheritPk')); $('#{{classApiMethodMethod}}_inheritPk').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#BaseModelForm :input[name=id]').val() }], 'setInheritPk', null, function() { addGlow($('#{{classApiMethodMethod}}_inheritPk')); }, function() { addError($('#{{classApiMethodMethod}}_inheritPk')); }); "
 																		>
 																	<i class="far fa-eraser "></i>
 																</button>
@@ -540,20 +555,20 @@
 															title="An optional inherited primary key from a legacy system for this object in the database"
 															id="{{classApiMethodMethod}}_inheritPk"
 	{{#eq "Page" classApiMethodMethod}}
-																class="setInheritPk classBaseModel inputBaseModel{{pk}}InheritPk w3-input w3-border "
+																class="setInheritPk classBaseModel inputBaseModel{{id}}InheritPk w3-input w3-border "
 																name="setInheritPk"
 	{{else}}
 		{{#eq "PATCH" classApiMethodMethod}}
-																class="setInheritPk classBaseModel inputBaseModel{{pk}}InheritPk w3-input w3-border "
+																class="setInheritPk classBaseModel inputBaseModel{{id}}InheritPk w3-input w3-border "
 																name="setInheritPk"
 		{{else}}
-																class="valueInheritPk w3-input w3-border classBaseModel inputBaseModel{{pk}}InheritPk w3-input w3-border "
+																class="valueInheritPk w3-input w3-border classBaseModel inputBaseModel{{id}}InheritPk w3-input w3-border "
 																name="inheritPk"
 		{{/eq}}
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setInheritPk', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_inheritPk')); }, function() { addError($('#{{classApiMethodMethod}}_inheritPk')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setInheritPk', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_inheritPk')); }, function() { addError($('#{{classApiMethodMethod}}_inheritPk')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{baseModel_.inheritPk}}"
@@ -583,7 +598,7 @@
 
 {{#*inline "inputCreated"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varBaseModel{{pk}}Created " title="{{formatZonedDateTime baseModel_.created 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime baseModel_.created 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+														<span class="varBaseModel{{id}}Created " title="{{formatZonedDateTime baseModel_.created 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime baseModel_.created 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -612,7 +627,7 @@
 
 {{#*inline "inputModified"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varBaseModel{{pk}}Modified " title="{{formatZonedDateTime baseModel_.modified 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime baseModel_.modified 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+														<span class="varBaseModel{{id}}Modified " title="{{formatZonedDateTime baseModel_.modified 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime baseModel_.modified 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -646,19 +661,19 @@
 															id="{{classApiMethodMethod}}_archived"
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
-															class="classBaseModel inputBaseModel{{pk}}Archived w3-input w3-border "
+															class="classBaseModel inputBaseModel{{id}}Archived w3-input w3-border "
 															name="setArchived"
 	{{else}}
 		{{#eq 'Page' classApiMethodMethod}}
-																class="classBaseModel inputBaseModel{{pk}}Archived w3-input w3-border "
+																class="classBaseModel inputBaseModel{{id}}Archived w3-input w3-border "
 																name="setArchived"
 		{{else}}
-																class="setArchived valueArchived classBaseModel inputBaseModel{{pk}}Archived w3-input w3-border "
+																class="setArchived valueArchived classBaseModel inputBaseModel{{id}}Archived w3-input w3-border "
 																name="setArchived"
 		{{/eq}}
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
-															onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setArchived', $(this).prop('checked'), function() { addGlow($('#{{classApiMethodMethod}}_archived')); }, function() { addError($('#{{classApiMethodMethod}}_archived')); }); "
+															onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setArchived', $(this).prop('checked'), function() { addGlow($('#{{classApiMethodMethod}}_archived')); }, function() { addError($('#{{classApiMethodMethod}}_archived')); }); "
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
 		{{#if baseModel_.archived}}
@@ -705,19 +720,19 @@
 															id="{{classApiMethodMethod}}_deleted"
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
-															class="classBaseModel inputBaseModel{{pk}}Deleted w3-input w3-border "
+															class="classBaseModel inputBaseModel{{id}}Deleted w3-input w3-border "
 															name="setDeleted"
 	{{else}}
 		{{#eq 'Page' classApiMethodMethod}}
-																class="classBaseModel inputBaseModel{{pk}}Deleted w3-input w3-border "
+																class="classBaseModel inputBaseModel{{id}}Deleted w3-input w3-border "
 																name="setDeleted"
 		{{else}}
-																class="setDeleted valueDeleted classBaseModel inputBaseModel{{pk}}Deleted w3-input w3-border "
+																class="setDeleted valueDeleted classBaseModel inputBaseModel{{id}}Deleted w3-input w3-border "
 																name="setDeleted"
 		{{/eq}}
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
-															onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setDeleted', $(this).prop('checked'), function() { addGlow($('#{{classApiMethodMethod}}_deleted')); }, function() { addError($('#{{classApiMethodMethod}}_deleted')); }); "
+															onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setDeleted', $(this).prop('checked'), function() { addGlow($('#{{classApiMethodMethod}}_deleted')); }, function() { addError($('#{{classApiMethodMethod}}_deleted')); }); "
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
 		{{#if baseModel_.deleted}}
@@ -752,7 +767,7 @@
 
 {{#*inline "inputSessionId"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varBaseModel{{pk}}SessionId ">{{baseModel_.sessionId}}</span>
+														<span class="varBaseModel{{id}}SessionId ">{{baseModel_.sessionId}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -774,7 +789,7 @@
 
 {{#*inline "inputUserKey"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varBaseModel{{pk}}UserKey ">{{baseModel_.userKey}}</span>
+														<span class="varBaseModel{{id}}UserKey ">{{baseModel_.userKey}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -800,7 +815,7 @@
 
 {{#*inline "inputObjectTitle"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varBaseModel{{pk}}ObjectTitle ">{{baseModel_.objectTitle}}</span>
+														<span class="varBaseModel{{id}}ObjectTitle ">{{baseModel_.objectTitle}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -829,6 +844,6 @@
 
 {{#*inline "inputObjectId"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varBaseModel{{pk}}ObjectId ">{{baseModel_.objectId}}</span>
+														<span class="varBaseModel{{id}}ObjectId ">{{baseModel_.objectId}}</span>
 	{{/eq}}
 {{/inline}}
