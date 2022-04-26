@@ -793,6 +793,7 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 	/**	 The entity listIotNode
 	 *	 It is constructed before being initialized with the constructor by default. 
 	 */
+	@JsonProperty
 	@JsonInclude(Include.NON_NULL)
 	protected JsonArray listIotNode = new JsonArray();
 

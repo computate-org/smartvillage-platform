@@ -3,6 +3,8 @@ package org.computate.smartvillageview.enus.model.iotnode;
 import org.computate.search.wrap.Wrap;
 import org.computate.smartvillageview.enus.model.base.BaseModel;
 
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.vertx.pgclient.data.Point;
 
 /**
@@ -42,11 +44,23 @@ public class IotNode extends IotNodeGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
+	 * DisplayName: json
+	 * HtmlRow: 3
+	 * HtmlCell: 3
+	 */
+	protected void _json(Wrap<JsonObject> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
 	 * DisplayName: node name
 	 * HtmlRow: 3
 	 * HtmlCell: 1
 	 */
 	protected void _nodeName(Wrap<String> w) {
+		w.o(json.getString("name"));
 	}
 
 	/**
@@ -58,6 +72,7 @@ public class IotNode extends IotNodeGen<BaseModel> {
 	 * HtmlCell: 2
 	 */
 	protected void _nodeType(Wrap<String> w) {
+		w.o(json.getString("nodeType"));
 	}
 
 	/**
@@ -69,6 +84,7 @@ public class IotNode extends IotNodeGen<BaseModel> {
 	 * HtmlCell: 3
 	 */
 	protected void _nodeId(Wrap<String> w) {
+		w.o(json.getString("_id"));
 	}
 
 	/**
@@ -80,6 +96,10 @@ public class IotNode extends IotNodeGen<BaseModel> {
 	 * HtmlCell: 3
 	 */
 	protected void _location(Wrap<Point> w) {
+		JsonArray latlng = json.getJsonArray("latlng");
+		if(latlng != null && latlng.size() == 2) {
+			w.o(new Point(latlng.getDouble(0), latlng.getDouble(1)));
+		}
 	}
 
 	@Override

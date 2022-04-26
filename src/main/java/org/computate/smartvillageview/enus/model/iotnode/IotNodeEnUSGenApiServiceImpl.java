@@ -583,6 +583,14 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 							num++;
 							bParams.add(o2.sqlDeleted());
 						break;
+					case "setJson":
+							o2.setJson(jsonObject.getJsonObject(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(IotNode.VAR_json + "=$" + num);
+							num++;
+							bParams.add(o2.sqlJson());
+						break;
 					case "setNodeName":
 							o2.setNodeName(jsonObject.getString(entityVar));
 							if(bParams.size() > 0)
@@ -936,6 +944,15 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 						bSql.append(IotNode.VAR_userKey + "=$" + num);
 						num++;
 						bParams.add(o2.sqlUserKey());
+						break;
+					case IotNode.VAR_json:
+						o2.setJson(jsonObject.getJsonObject(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(IotNode.VAR_json + "=$" + num);
+						num++;
+						bParams.add(o2.sqlJson());
 						break;
 					case IotNode.VAR_nodeName:
 						o2.setNodeName(jsonObject.getString(entityVar));

@@ -79,6 +79,69 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 	public static final String IotNode_IconGroup = "duotone";
 	public static final String IotNode_IconName = "router";
 	public static final Integer IotNode_Rows = 100;
+	public static final String IotNodePage_enUS_Uri = "/iot-node";
+	public static final String IotNodePage_enUS_ImageUri = "/png/iot-node-999.png";
+
+	//////////
+	// json //
+	//////////
+
+	/**	 The entity json
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected JsonObject json;
+
+	/**	<br> The entity json
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.iotnode.IotNode&fq=entiteVar_enUS_indexed_string:json">Find the entity json in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _json(Wrap<JsonObject> w);
+
+	public JsonObject getJson() {
+		return json;
+	}
+
+	public void setJson(JsonObject json) {
+		this.json = json;
+	}
+	@JsonIgnore
+	public void setJson(String o) {
+		this.json = IotNode.staticSetJson(siteRequest_, o);
+	}
+	public static JsonObject staticSetJson(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonObject(o);
+		}
+		return null;
+	}
+	protected IotNode jsonInit() {
+		Wrap<JsonObject> jsonWrap = new Wrap<JsonObject>().var("json");
+		if(json == null) {
+			_json(jsonWrap);
+			setJson(jsonWrap.o);
+		}
+		return (IotNode)this;
+	}
+
+	public static JsonObject staticSearchJson(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o;
+	}
+
+	public static String staticSearchStrJson(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqJson(SiteRequestEnUS siteRequest_, String o) {
+		return IotNode.staticSearchStrJson(siteRequest_, IotNode.staticSearchJson(siteRequest_, IotNode.staticSetJson(siteRequest_, o)));
+	}
+
+	public JsonObject sqlJson() {
+		return json;
+	}
 
 	//////////////
 	// nodeName //
@@ -333,6 +396,7 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 		Future.future(a -> a.complete()).compose(a -> {
 			Promise<Void> promise2 = Promise.promise();
 			try {
+				jsonInit();
 				nodeNameInit();
 				nodeTypeInit();
 				nodeIdInit();
@@ -390,6 +454,8 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 	public Object obtainIotNode(String var) {
 		IotNode oIotNode = (IotNode)this;
 		switch(var) {
+			case "json":
+				return oIotNode.json;
 			case "nodeName":
 				return oIotNode.nodeName;
 			case "nodeType":
@@ -437,6 +503,8 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 	}
 	public static Object staticSetIotNode(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "json":
+			return IotNode.staticSetJson(siteRequest_, o);
 		case "nodeName":
 			return IotNode.staticSetNodeName(siteRequest_, o);
 		case "nodeType":
@@ -459,6 +527,8 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 	}
 	public static Object staticSearchIotNode(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "json":
+			return IotNode.staticSearchJson(siteRequest_, (JsonObject)o);
 		case "nodeName":
 			return IotNode.staticSearchNodeName(siteRequest_, (String)o);
 		case "nodeType":
@@ -481,6 +551,8 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 	}
 	public static String staticSearchStrIotNode(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "json":
+			return IotNode.staticSearchStrJson(siteRequest_, (JsonObject)o);
 		case "nodeName":
 			return IotNode.staticSearchStrNodeName(siteRequest_, (String)o);
 		case "nodeType":
@@ -503,6 +575,8 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 	}
 	public static String staticSearchFqIotNode(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "json":
+			return IotNode.staticSearchFqJson(siteRequest_, o);
 		case "nodeName":
 			return IotNode.staticSearchFqNodeName(siteRequest_, o);
 		case "nodeType":
@@ -537,6 +611,13 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 	}
 	public Object persistIotNode(String var, Object val) {
 		switch(var.toLowerCase()) {
+			case "json":
+				if(val instanceof String)
+					setJson((String)val);
+				else if(val instanceof JsonObject)
+					setJson((JsonObject)val);
+				saves.add("json");
+				return val;
 			case "nodename":
 				if(val instanceof String)
 					setNodeName((String)val);
@@ -581,6 +662,9 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 	}
 
 	public void indexIotNode(JsonObject doc) {
+		if(json != null) {
+			doc.put("json_docvalues_string", json.toString());
+		}
 		if(nodeName != null) {
 			doc.put("nodeName_docvalues_string", nodeName);
 		}
@@ -599,6 +683,8 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 
 	public static String varStoredIotNode(String entityVar) {
 		switch(entityVar) {
+			case "json":
+				return "json_docvalues_string";
 			case "nodeName":
 				return "nodeName_docvalues_string";
 			case "nodeType":
@@ -614,6 +700,8 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 
 	public static String varIndexedIotNode(String entityVar) {
 		switch(entityVar) {
+			case "json":
+				return "json_docvalues_string";
 			case "nodeName":
 				return "nodeName_docvalues_string";
 			case "nodeType":
@@ -651,6 +739,7 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 	public void storeIotNode(SolrResponse.Doc doc) {
 		IotNode oIotNode = (IotNode)this;
 
+		oIotNode.setJson(Optional.ofNullable(doc.get("json_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oIotNode.setNodeName(Optional.ofNullable(doc.get("nodeName_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oIotNode.setNodeType(Optional.ofNullable(doc.get("nodeType_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oIotNode.setNodeId(Optional.ofNullable(doc.get("nodeId_docvalues_string")).map(v -> v.toString()).orElse(null));
@@ -668,6 +757,8 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 		Object o = Optional.ofNullable(apiRequest).map(ApiRequest::getOriginal).orElse(null);
 		if(o != null && o instanceof IotNode) {
 			IotNode original = (IotNode)o;
+			if(!Objects.equals(json, original.getJson()))
+				apiRequest.addVars("json");
 			if(!Objects.equals(nodeName, original.getNodeName()))
 				apiRequest.addVars("nodeName");
 			if(!Objects.equals(nodeType, original.getNodeType()))
@@ -687,6 +778,7 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 	@Override public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(super.toString());
+		sb.append(Optional.ofNullable(json).map(v -> "json: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(nodeName).map(v -> "nodeName: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(nodeType).map(v -> "nodeType: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(nodeId).map(v -> "nodeId: \"" + v + "\"\n" ).orElse(""));
@@ -695,6 +787,7 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 	}
 
 	public static final String CLASS_SIMPLE_NAME = "IotNode";
+	public static final String VAR_json = "json";
 	public static final String VAR_nodeName = "nodeName";
 	public static final String VAR_nodeType = "nodeType";
 	public static final String VAR_nodeId = "nodeId";
@@ -712,6 +805,7 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 		return IotNode.varsFqIotNode(new ArrayList<String>());
 	}
 	public static List<String> varsFqIotNode(List<String> vars) {
+		vars.add(VAR_json);
 		vars.add(VAR_nodeName);
 		vars.add(VAR_nodeType);
 		vars.add(VAR_nodeId);
@@ -724,11 +818,13 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 		return IotNode.varsRangeIotNode(new ArrayList<String>());
 	}
 	public static List<String> varsRangeIotNode(List<String> vars) {
+		vars.add(VAR_json);
 		vars.add(VAR_location);
 		BaseModel.varsRangeBaseModel(vars);
 		return vars;
 	}
 
+	public static final String DISPLAY_NAME_json = "json";
 	public static final String DISPLAY_NAME_nodeName = "node name";
 	public static final String DISPLAY_NAME_nodeType = "node type";
 	public static final String DISPLAY_NAME_nodeId = "node ID";
@@ -739,6 +835,8 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 	}
 	public static String displayNameIotNode(String var) {
 		switch(var) {
+		case VAR_json:
+			return DISPLAY_NAME_json;
 		case VAR_nodeName:
 			return DISPLAY_NAME_nodeName;
 		case VAR_nodeType:
@@ -761,6 +859,8 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 
 	public static String classSimpleNameIotNode(String var) {
 		switch(var) {
+		case VAR_json:
+			return "JsonObject";
 		case VAR_nodeName:
 			return "String";
 		case VAR_nodeType:
@@ -783,6 +883,8 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 
 	public static Integer htmlRowIotNode(String var) {
 		switch(var) {
+		case VAR_json:
+			return 3;
 		case VAR_nodeName:
 			return 3;
 		case VAR_nodeType:
@@ -798,6 +900,8 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 
 	public static Integer htmlCellIotNode(String var) {
 		switch(var) {
+		case VAR_json:
+			return 3;
 		case VAR_nodeName:
 			return 1;
 		case VAR_nodeType:

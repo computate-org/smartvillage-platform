@@ -317,27 +317,17 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 				List<Future> futures = new ArrayList<>();
 
 				data.stream().forEach(row -> {
-					JsonObject iotNode = (JsonObject)row;
-					String id = iotNode.getString("_id");
-					String name = iotNode.getString("name");
-					String nodeType = iotNode.getString("nodeType");
-					JsonArray latlng = iotNode.getJsonArray("latlng");
+					JsonObject json = (JsonObject)row;
+					String id = json.getString("_id");
 
 					JsonObject body = new JsonObject()
 							.put(IotNode.VAR_saves, new JsonArray()
 									.add(IotNode.VAR_inheritPk)
-									.add(IotNode.VAR_nodeId)
-									.add(IotNode.VAR_nodeName)
-									.add(IotNode.VAR_nodeType)
-									.add(IotNode.VAR_location)
+									.add(IotNode.VAR_json)
 									)
+							.put(IotNode.VAR_json, json)
 							.put(IotNode.VAR_pk, id)
-							.put(IotNode.VAR_nodeId, id)
-							.put(IotNode.VAR_nodeName, name)
-							.put(IotNode.VAR_nodeType, nodeType)
 							;
-					if(latlng != null && latlng.size() == 2)
-						body.put(IotNode.VAR_location, String.format("%s,%s", latlng.getDouble(0), latlng.getDouble(1)));
 
 					JsonObject params = new JsonObject();
 					params.put("body", body);
@@ -345,8 +335,8 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 					params.put("cookie", new JsonObject());
 					params.put("query", new JsonObject().put("commitWithin", 10000).put("q", "*:*").put("var", new JsonArray().add("refresh:false")));
 					JsonObject context = new JsonObject().put("params", params);
-					JsonObject json = new JsonObject().put("context", context);
-					futures.add(vertx.eventBus().request(String.format("smart-village-view-enUS-%s", "IotNode"), json, new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", IotNode.CLASS_SIMPLE_NAME))));
+					JsonObject request = new JsonObject().put("context", context);
+					futures.add(vertx.eventBus().request(String.format("smart-village-view-enUS-%s", "IotNode"), request, new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", IotNode.CLASS_SIMPLE_NAME))));
 				});
 				CompositeFuture.all(futures).onSuccess(a -> {
 					LOG.info(String.format(importDataIotNodeComplete, IotNode.CLASS_SIMPLE_NAME));
