@@ -14,6 +14,7 @@ import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 
 /**
  * Indexed: true
+ * Model: true
  * Page: true
  * SuperPage: PageLayout
  * Keyword: classSimpleNameBaseModel

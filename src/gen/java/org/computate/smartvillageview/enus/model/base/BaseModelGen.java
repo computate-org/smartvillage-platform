@@ -2,6 +2,9 @@ package org.computate.smartvillageview.enus.model.base;
 
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.smartvillageview.enus.model.base.BaseModel;
+import io.vertx.core.json.JsonObject;
+import java.util.Date;
+import java.util.Set;
 import org.computate.vertx.api.ApiRequest;
 import org.computate.smartvillageview.enus.config.ConfigKeys;
 import java.util.Optional;
@@ -38,7 +41,6 @@ import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.Date;
 import java.time.format.DateTimeFormatter;
 import java.time.Instant;
 import java.util.Locale;
@@ -50,7 +52,6 @@ import io.vertx.core.Promise;
 import io.vertx.core.Future;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.computate.search.response.solr.SolrResponse;
-import io.vertx.core.json.JsonObject;
 
 /**	
  * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstClasse_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.base.BaseModel">Find the class BaseModel in Solr. </a>
@@ -65,6 +66,7 @@ import io.vertx.core.json.JsonObject;
 public abstract class BaseModelGen<DEV> extends Object {
 	protected static final Logger LOG = LoggerFactory.getLogger(BaseModel.class);
 
+	public static final String BaseModelPage_enUS_ImageUri = "/png-999.png";
 
 	//////////////////
 	// siteRequest_ //
@@ -1735,6 +1737,14 @@ public abstract class BaseModelGen<DEV> extends Object {
 		BaseModel oBaseModel = (BaseModel)this;
 		saves = doc.get("saves_docvalues_strings");
 		if(saves != null) {
+
+			if(saves.contains("objectSuggest")) {
+				String objectSuggest = (String)doc.get("objectSuggest_suggested");
+				oBaseModel.setObjectSuggest(objectSuggest);
+			}
+
+			String id = (String)doc.get("id");
+			oBaseModel.setId(id);
 		}
 	}
 
