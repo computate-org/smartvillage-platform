@@ -66,7 +66,7 @@ import org.computate.search.response.solr.SolrResponse;
 public abstract class BaseModelGen<DEV> extends Object {
 	protected static final Logger LOG = LoggerFactory.getLogger(BaseModel.class);
 
-	public static final String BaseModelPage_enUS_ImageUri = "/png-999.png";
+
 
 	//////////////////
 	// siteRequest_ //
@@ -2307,10 +2307,6 @@ public abstract class BaseModelGen<DEV> extends Object {
 			return 1;
 		case VAR_modified:
 			return 1;
-		case VAR_archived:
-			return 2;
-		case VAR_deleted:
-			return 2;
 		case VAR_objectId:
 			return 1;
 			default:
@@ -2326,10 +2322,6 @@ public abstract class BaseModelGen<DEV> extends Object {
 			return 2;
 		case VAR_modified:
 			return 3;
-		case VAR_archived:
-			return 1;
-		case VAR_deleted:
-			return 2;
 		case VAR_objectId:
 			return 4;
 			default:

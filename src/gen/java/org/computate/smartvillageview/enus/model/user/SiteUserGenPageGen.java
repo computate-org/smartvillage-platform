@@ -793,6 +793,7 @@ public abstract class SiteUserGenPageGen<DEV> extends BaseModelPage {
 	/**	 The entity listSiteUser
 	 *	 It is constructed before being initialized with the constructor by default. 
 	 */
+	@JsonProperty
 	@JsonInclude(Include.NON_NULL)
 	protected JsonArray listSiteUser = new JsonArray();
 

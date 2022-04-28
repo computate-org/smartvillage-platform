@@ -57,30 +57,41 @@ import org.computate.search.response.solr.SolrResponse;
 public abstract class IotNodeGen<DEV> extends BaseModel {
 	protected static final Logger LOG = LoggerFactory.getLogger(IotNode.class);
 
-	public static final String IotNode_AName = "an IOT node";
-	public static final String IotNode_This = "this ";
-	public static final String IotNode_ThisName = "this IOT node";
-	public static final String IotNode_A = "a ";
-	public static final String IotNode_TheName = "theIOT node";
-	public static final String IotNode_NameSingular = "IOT node";
-	public static final String IotNode_NamePlural = "IOT nodes";
-	public static final String IotNode_NameActual = "current IOT node";
-	public static final String IotNode_AllName = "all the IOT nodes";
-	public static final String IotNode_SearchAllNameBy = "search IOT nodes by ";
-	public static final String IotNode_Title = "IOT nodes";
-	public static final String IotNode_ThePluralName = "the IOT nodes";
-	public static final String IotNode_NoNameFound = "no IOT node found";
-	public static final String IotNode_NameVar = "iot-node";
-	public static final String IotNode_OfName = "of IOT node";
-	public static final String IotNode_ANameAdjective = "an IOT node";
-	public static final String IotNode_NameAdjectiveSingular = "IOT node";
-	public static final String IotNode_NameAdjectivePlural = "IOT nodes";
+	public static final String IotNode_AName_enUS = "an IOT node";
+	public static final String IotNode_This_enUS = "this ";
+	public static final String IotNode_ThisName_enUS = "this IOT node";
+	public static final String IotNode_A_enUS = "a ";
+	public static final String IotNode_TheName_enUS = "theIOT node";
+	public static final String IotNode_NameSingular_enUS = "IOT node";
+	public static final String IotNode_NamePlural_enUS = "IOT nodes";
+	public static final String IotNode_NameActual_enUS = "current IOT node";
+	public static final String IotNode_AllName_enUS = "all the IOT nodes";
+	public static final String IotNode_SearchAllNameBy_enUS = "search IOT nodes by ";
+	public static final String IotNode_Title_enUS = "IOT nodes";
+	public static final String IotNode_ThePluralName_enUS = "the IOT nodes";
+	public static final String IotNode_NoNameFound_enUS = "no IOT node found";
+	public static final String IotNode_NameVar_enUS = "iotNode";
+	public static final String IotNode_OfName_enUS = "of IOT node";
+	public static final String IotNode_ANameAdjective_enUS = "an IOT node";
+	public static final String IotNode_NameAdjectiveSingular_enUS = "IOT node";
+	public static final String IotNode_NameAdjectivePlural_enUS = "IOT nodes";
+	public static final String Search_enUS_Uri = "/api/iot-node";
+	public static final String Search_enUS_ImageUri = "/png/api/iot-node-999.png";
+	public static final String GET_enUS_Uri = "/api/iot-node/{id}";
+	public static final String GET_enUS_ImageUri = "/png/api/iot-node/{id}-999.png";
+	public static final String PATCH_enUS_Uri = "/api/iot-node";
+	public static final String PATCH_enUS_ImageUri = "/png/api/iot-node-999.png";
+	public static final String POST_enUS_Uri = "/api/iot-node";
+	public static final String POST_enUS_ImageUri = "/png/api/iot-node-999.png";
+	public static final String PUTImport_enUS_Uri = "/api/iot-node-import";
+	public static final String PUTImport_enUS_ImageUri = "/png/api/iot-node-import-999.png";
+	public static final String SearchPage_enUS_Uri = "/iot-node";
+	public static final String SearchPage_enUS_ImageUri = "/png/iot-node-999.png";
+
 	public static final String IotNode_Color = "blue";
 	public static final String IotNode_IconGroup = "duotone";
 	public static final String IotNode_IconName = "router";
 	public static final Integer IotNode_Rows = 100;
-	public static final String IotNodePage_enUS_Uri = "/iot-node";
-	public static final String IotNodePage_enUS_ImageUri = "/png/iot-node-999.png";
 
 	//////////
 	// json //
@@ -883,8 +894,6 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 
 	public static Integer htmlRowIotNode(String var) {
 		switch(var) {
-		case VAR_json:
-			return 3;
 		case VAR_nodeName:
 			return 3;
 		case VAR_nodeType:
@@ -892,7 +901,7 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 		case VAR_nodeId:
 			return 3;
 		case VAR_location:
-			return 3;
+			return 4;
 			default:
 				return BaseModel.htmlRowBaseModel(var);
 		}
@@ -900,8 +909,6 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 
 	public static Integer htmlCellIotNode(String var) {
 		switch(var) {
-		case VAR_json:
-			return 3;
 		case VAR_nodeName:
 			return 1;
 		case VAR_nodeType:
@@ -909,7 +916,7 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 		case VAR_nodeId:
 			return 3;
 		case VAR_location:
-			return 3;
+			return 1;
 			default:
 				return BaseModel.htmlCellBaseModel(var);
 		}

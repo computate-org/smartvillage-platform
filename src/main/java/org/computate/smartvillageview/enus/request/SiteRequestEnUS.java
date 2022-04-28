@@ -219,6 +219,13 @@ public class SiteRequestEnUS extends SiteRequestEnUSGen<Object> implements Compu
 	}
 
 	/**
+	 * Description: The request language. 
+	 */
+	protected void _lang(Wrap<String> w) {
+		w.o("enUS");
+	}
+
+	/**
 	 * Description: The primary key of object of the request
 	 */
 	protected void _requestPk(Wrap<Long> c) {

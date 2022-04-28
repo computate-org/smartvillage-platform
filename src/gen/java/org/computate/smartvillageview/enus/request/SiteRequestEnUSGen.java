@@ -65,6 +65,7 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 	/**	 The entity config
 	 *	 is defined as null before being initialized. 
 	 */
+	@JsonProperty
 	@JsonInclude(Include.NON_NULL)
 	protected JsonObject config;
 
@@ -83,7 +84,14 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 	public void setConfig(JsonObject config) {
 		this.config = config;
 	}
+	@JsonIgnore
+	public void setConfig(String o) {
+		this.config = SiteRequestEnUS.staticSetConfig(siteRequest_, o);
+	}
 	public static JsonObject staticSetConfig(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonObject(o);
+		}
 		return null;
 	}
 	protected SiteRequestEnUS configInit() {
@@ -93,6 +101,18 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 			setConfig(configWrap.o);
 		}
 		return (SiteRequestEnUS)this;
+	}
+
+	public static JsonObject staticSearchConfig(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o;
+	}
+
+	public static String staticSearchStrConfig(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqConfig(SiteRequestEnUS siteRequest_, String o) {
+		return SiteRequestEnUS.staticSearchStrConfig(siteRequest_, SiteRequestEnUS.staticSearchConfig(siteRequest_, SiteRequestEnUS.staticSetConfig(siteRequest_, o)));
 	}
 
 	//////////////////
@@ -216,6 +236,7 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 	/**	 The entity jsonObject
 	 *	 is defined as null before being initialized. 
 	 */
+	@JsonProperty
 	@JsonInclude(Include.NON_NULL)
 	protected JsonObject jsonObject;
 
@@ -234,7 +255,14 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 	public void setJsonObject(JsonObject jsonObject) {
 		this.jsonObject = jsonObject;
 	}
+	@JsonIgnore
+	public void setJsonObject(String o) {
+		this.jsonObject = SiteRequestEnUS.staticSetJsonObject(siteRequest_, o);
+	}
 	public static JsonObject staticSetJsonObject(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonObject(o);
+		}
 		return null;
 	}
 	protected SiteRequestEnUS jsonObjectInit() {
@@ -244,6 +272,18 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 			setJsonObject(jsonObjectWrap.o);
 		}
 		return (SiteRequestEnUS)this;
+	}
+
+	public static JsonObject staticSearchJsonObject(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o;
+	}
+
+	public static String staticSearchStrJsonObject(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqJsonObject(SiteRequestEnUS siteRequest_, String o) {
+		return SiteRequestEnUS.staticSearchStrJsonObject(siteRequest_, SiteRequestEnUS.staticSearchJsonObject(siteRequest_, SiteRequestEnUS.staticSetJsonObject(siteRequest_, o)));
 	}
 
 	////////////////////
@@ -329,6 +369,7 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 	/**	 The entity userPrincipal
 	 *	 is defined as null before being initialized. 
 	 */
+	@JsonProperty
 	@JsonInclude(Include.NON_NULL)
 	protected JsonObject userPrincipal;
 
@@ -347,7 +388,14 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 	public void setUserPrincipal(JsonObject userPrincipal) {
 		this.userPrincipal = userPrincipal;
 	}
+	@JsonIgnore
+	public void setUserPrincipal(String o) {
+		this.userPrincipal = SiteRequestEnUS.staticSetUserPrincipal(siteRequest_, o);
+	}
 	public static JsonObject staticSetUserPrincipal(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonObject(o);
+		}
 		return null;
 	}
 	protected SiteRequestEnUS userPrincipalInit() {
@@ -357,6 +405,18 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 			setUserPrincipal(userPrincipalWrap.o);
 		}
 		return (SiteRequestEnUS)this;
+	}
+
+	public static JsonObject staticSearchUserPrincipal(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o;
+	}
+
+	public static String staticSearchStrUserPrincipal(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqUserPrincipal(SiteRequestEnUS siteRequest_, String o) {
+		return SiteRequestEnUS.staticSearchStrUserPrincipal(siteRequest_, SiteRequestEnUS.staticSearchUserPrincipal(siteRequest_, SiteRequestEnUS.staticSetUserPrincipal(siteRequest_, o)));
 	}
 
 	////////////
@@ -881,6 +941,7 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 	/**	 The entity userResource
 	 *	 is defined as null before being initialized. 
 	 */
+	@JsonProperty
 	@JsonInclude(Include.NON_NULL)
 	protected JsonObject userResource;
 
@@ -899,7 +960,14 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 	public void setUserResource(JsonObject userResource) {
 		this.userResource = userResource;
 	}
+	@JsonIgnore
+	public void setUserResource(String o) {
+		this.userResource = SiteRequestEnUS.staticSetUserResource(siteRequest_, o);
+	}
 	public static JsonObject staticSetUserResource(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonObject(o);
+		}
 		return null;
 	}
 	protected SiteRequestEnUS userResourceInit() {
@@ -909,6 +977,18 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 			setUserResource(userResourceWrap.o);
 		}
 		return (SiteRequestEnUS)this;
+	}
+
+	public static JsonObject staticSearchUserResource(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o;
+	}
+
+	public static String staticSearchStrUserResource(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqUserResource(SiteRequestEnUS siteRequest_, String o) {
+		return SiteRequestEnUS.staticSearchStrUserResource(siteRequest_, SiteRequestEnUS.staticSearchUserResource(siteRequest_, SiteRequestEnUS.staticSetUserResource(siteRequest_, o)));
 	}
 
 	///////////////////////
@@ -1013,6 +1093,55 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 			setSiteUser_(siteUser_Wrap.o);
 		}
 		return (SiteRequestEnUS)this;
+	}
+
+	//////////
+	// lang //
+	//////////
+
+	/**	 The entity lang
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String lang;
+
+	/**	<br> The entity lang
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.request.SiteRequestEnUS&fq=entiteVar_enUS_indexed_string:lang">Find the entity lang in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _lang(Wrap<String> w);
+
+	public String getLang() {
+		return lang;
+	}
+	public void setLang(String o) {
+		this.lang = SiteRequestEnUS.staticSetLang(siteRequest_, o);
+	}
+	public static String staticSetLang(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected SiteRequestEnUS langInit() {
+		Wrap<String> langWrap = new Wrap<String>().var("lang");
+		if(lang == null) {
+			_lang(langWrap);
+			setLang(langWrap.o);
+		}
+		return (SiteRequestEnUS)this;
+	}
+
+	public static String staticSearchLang(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrLang(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqLang(SiteRequestEnUS siteRequest_, String o) {
+		return SiteRequestEnUS.staticSearchStrLang(siteRequest_, SiteRequestEnUS.staticSearchLang(siteRequest_, SiteRequestEnUS.staticSetLang(siteRequest_, o)));
 	}
 
 	///////////////
@@ -1316,6 +1445,7 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 				userResourceInit();
 				userResourceRolesInit();
 				siteUser_Init();
+				langInit();
 				requestPkInit();
 				requestUriInit();
 				requestMethodInit();
@@ -1405,6 +1535,8 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 				return oSiteRequestEnUS.userResourceRoles;
 			case "siteUser_":
 				return oSiteRequestEnUS.siteUser_;
+			case "lang":
+				return oSiteRequestEnUS.lang;
 			case "requestPk":
 				return oSiteRequestEnUS.requestPk;
 			case "requestUri":
@@ -1456,6 +1588,12 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 	}
 	public static Object staticSetSiteRequestEnUS(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "config":
+			return SiteRequestEnUS.staticSetConfig(siteRequest_, o);
+		case "jsonObject":
+			return SiteRequestEnUS.staticSetJsonObject(siteRequest_, o);
+		case "userPrincipal":
+			return SiteRequestEnUS.staticSetUserPrincipal(siteRequest_, o);
 		case "userId":
 			return SiteRequestEnUS.staticSetUserId(siteRequest_, o);
 		case "userKey":
@@ -1476,8 +1614,12 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 			return SiteRequestEnUS.staticSetUserEmail(siteRequest_, o);
 		case "userRealmRoles":
 			return SiteRequestEnUS.staticSetUserRealmRoles(siteRequest_, o);
+		case "userResource":
+			return SiteRequestEnUS.staticSetUserResource(siteRequest_, o);
 		case "userResourceRoles":
 			return SiteRequestEnUS.staticSetUserResourceRoles(siteRequest_, o);
+		case "lang":
+			return SiteRequestEnUS.staticSetLang(siteRequest_, o);
 		case "requestPk":
 			return SiteRequestEnUS.staticSetRequestPk(siteRequest_, o);
 		case "requestUri":
@@ -1498,6 +1640,12 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 	}
 	public static Object staticSearchSiteRequestEnUS(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "config":
+			return SiteRequestEnUS.staticSearchConfig(siteRequest_, (JsonObject)o);
+		case "jsonObject":
+			return SiteRequestEnUS.staticSearchJsonObject(siteRequest_, (JsonObject)o);
+		case "userPrincipal":
+			return SiteRequestEnUS.staticSearchUserPrincipal(siteRequest_, (JsonObject)o);
 		case "userId":
 			return SiteRequestEnUS.staticSearchUserId(siteRequest_, (String)o);
 		case "userKey":
@@ -1518,8 +1666,12 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 			return SiteRequestEnUS.staticSearchUserEmail(siteRequest_, (String)o);
 		case "userRealmRoles":
 			return SiteRequestEnUS.staticSearchUserRealmRoles(siteRequest_, (String)o);
+		case "userResource":
+			return SiteRequestEnUS.staticSearchUserResource(siteRequest_, (JsonObject)o);
 		case "userResourceRoles":
 			return SiteRequestEnUS.staticSearchUserResourceRoles(siteRequest_, (String)o);
+		case "lang":
+			return SiteRequestEnUS.staticSearchLang(siteRequest_, (String)o);
 		case "requestPk":
 			return SiteRequestEnUS.staticSearchRequestPk(siteRequest_, (Long)o);
 		case "requestUri":
@@ -1540,6 +1692,12 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 	}
 	public static String staticSearchStrSiteRequestEnUS(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "config":
+			return SiteRequestEnUS.staticSearchStrConfig(siteRequest_, (JsonObject)o);
+		case "jsonObject":
+			return SiteRequestEnUS.staticSearchStrJsonObject(siteRequest_, (JsonObject)o);
+		case "userPrincipal":
+			return SiteRequestEnUS.staticSearchStrUserPrincipal(siteRequest_, (JsonObject)o);
 		case "userId":
 			return SiteRequestEnUS.staticSearchStrUserId(siteRequest_, (String)o);
 		case "userKey":
@@ -1560,8 +1718,12 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 			return SiteRequestEnUS.staticSearchStrUserEmail(siteRequest_, (String)o);
 		case "userRealmRoles":
 			return SiteRequestEnUS.staticSearchStrUserRealmRoles(siteRequest_, (String)o);
+		case "userResource":
+			return SiteRequestEnUS.staticSearchStrUserResource(siteRequest_, (JsonObject)o);
 		case "userResourceRoles":
 			return SiteRequestEnUS.staticSearchStrUserResourceRoles(siteRequest_, (String)o);
+		case "lang":
+			return SiteRequestEnUS.staticSearchStrLang(siteRequest_, (String)o);
 		case "requestPk":
 			return SiteRequestEnUS.staticSearchStrRequestPk(siteRequest_, (Long)o);
 		case "requestUri":
@@ -1582,6 +1744,12 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 	}
 	public static String staticSearchFqSiteRequestEnUS(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "config":
+			return SiteRequestEnUS.staticSearchFqConfig(siteRequest_, o);
+		case "jsonObject":
+			return SiteRequestEnUS.staticSearchFqJsonObject(siteRequest_, o);
+		case "userPrincipal":
+			return SiteRequestEnUS.staticSearchFqUserPrincipal(siteRequest_, o);
 		case "userId":
 			return SiteRequestEnUS.staticSearchFqUserId(siteRequest_, o);
 		case "userKey":
@@ -1602,8 +1770,12 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 			return SiteRequestEnUS.staticSearchFqUserEmail(siteRequest_, o);
 		case "userRealmRoles":
 			return SiteRequestEnUS.staticSearchFqUserRealmRoles(siteRequest_, o);
+		case "userResource":
+			return SiteRequestEnUS.staticSearchFqUserResource(siteRequest_, o);
 		case "userResourceRoles":
 			return SiteRequestEnUS.staticSearchFqUserResourceRoles(siteRequest_, o);
+		case "lang":
+			return SiteRequestEnUS.staticSearchFqLang(siteRequest_, o);
 		case "requestPk":
 			return SiteRequestEnUS.staticSearchFqRequestPk(siteRequest_, o);
 		case "requestUri":
@@ -1646,6 +1818,7 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 	public static final String VAR_userResource = "userResource";
 	public static final String VAR_userResourceRoles = "userResourceRoles";
 	public static final String VAR_siteUser_ = "siteUser_";
+	public static final String VAR_lang = "lang";
 	public static final String VAR_requestPk = "requestPk";
 	public static final String VAR_requestUri = "requestUri";
 	public static final String VAR_requestMethod = "requestMethod";
@@ -1674,6 +1847,7 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 	public static final String DISPLAY_NAME_userResource = "";
 	public static final String DISPLAY_NAME_userResourceRoles = "";
 	public static final String DISPLAY_NAME_siteUser_ = "";
+	public static final String DISPLAY_NAME_lang = "";
 	public static final String DISPLAY_NAME_requestPk = "";
 	public static final String DISPLAY_NAME_requestUri = "";
 	public static final String DISPLAY_NAME_requestMethod = "";
@@ -1728,6 +1902,8 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 			return DISPLAY_NAME_userResourceRoles;
 		case VAR_siteUser_:
 			return DISPLAY_NAME_siteUser_;
+		case VAR_lang:
+			return DISPLAY_NAME_lang;
 		case VAR_requestPk:
 			return DISPLAY_NAME_requestPk;
 		case VAR_requestUri:

@@ -38,7 +38,7 @@
 {{#each varsQ}}
 		<div class="w3-padding ">
 			<label for="fqSiteUser_{{ @key }}">{{ displayName }}<sup class="w3-tiny "> ({{ classSimpleName }})</sup></label>
-			<input id="fqSiteUser_{{ @key }}" placeholder="{{ displayName }}" class="w3-input " onkeyup="qChange(this); " data-var="{{ var }}" autocomplete="off="/>
+			<input id="fqSiteUser_{{ @key }}" placeholder="{{ displayName }}" class="w3-input " {{#eq ../var 'objectSuggest' }}onkeyup{{else}}onchange{{/eq}}="qChange(this); " data-var="{{ var }}" autocomplete="off="/>
 			<div class="pageSearchVal w3-tiny "></div>
 		</div>
 {{/each}}
@@ -54,7 +54,7 @@
 					<button id="buttonFacetSiteUser_{{ @key }}" class="w3-button " onclick="facetFieldChange(this); " title="see values " data-var="{{ var }}" data-clear="{{#if facetField }}true{{else}}false{{/if}}"><i class="fas fa-list "></i></button>
 				</div>
 				<div class="w3-cell w3-cell-top ">
-					<input id="fqSiteUser_{{ @key }}" placeholder="{{ displayName }}" class="w3-input " onkeyup="fqChange(this); " data-var="{{ var }}" autocomplete="off=" value="{{ val }}"/>
+					<input id="fqSiteUser_{{ @key }}" placeholder="{{ displayName }}" class="w3-input " onchange="fqChange(this); " data-var="{{ var }}" autocomplete="off=" value="{{ val }}"/>
 				</div>
 			</div>
 		</div>
@@ -64,7 +64,7 @@
 		</div>
 		<ol class="pageFacetField " id="pageFacetFieldSiteUser_{{ @key }}">
 {{#each facetField.counts }}
-			<li class="">{{ @key }}: {{ this }}</li>
+			<li class="cursor-pointer " data-class="SiteUser" data-var="{{ ../var }}" data-val="{{ @key }}" onclick="fqReplace(this); ">{{ @key }}: {{ this }}</li>
 {{/each}}
 		</ol>
 {{/each}}

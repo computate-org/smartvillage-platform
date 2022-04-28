@@ -19,6 +19,7 @@ import io.vertx.pgclient.data.Point;
  * ApiUri.enUS: /api/iot-node
  * 
  * ApiMethod.enUS: Search
+ * ApiMethod: GET
  * ApiMethod: PATCH
  * ApiMethod: POST
  * ApiMethod: PUTImport
@@ -35,7 +36,7 @@ import io.vertx.pgclient.data.Point;
  * Color: blue
  * IconGroup: duotone
  * IconName: router
- * NameVar.enUS: iot-node
+ * NameVar.enUS: iotNode
  * Rows: 100
  */
 public class IotNode extends IotNodeGen<BaseModel> {
@@ -45,8 +46,6 @@ public class IotNode extends IotNodeGen<BaseModel> {
 	 * DocValues: true
 	 * Persist: true
 	 * DisplayName: json
-	 * HtmlRow: 3
-	 * HtmlCell: 3
 	 */
 	protected void _json(Wrap<JsonObject> w) {
 	}
@@ -92,8 +91,8 @@ public class IotNode extends IotNodeGen<BaseModel> {
 	 * DocValues: true
 	 * Persist: true
 	 * DisplayName: location
-	 * HtmlRow: 3
-	 * HtmlCell: 3
+	 * HtmlRow: 4
+	 * HtmlCell: 1
 	 */
 	protected void _location(Wrap<Point> w) {
 		JsonArray latlng = json.getJsonArray("latlng");

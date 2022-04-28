@@ -38,7 +38,7 @@
 {{#each varsQ}}
 		<div class="w3-padding ">
 			<label for="fqIotNode_{{ @key }}">{{ displayName }}<sup class="w3-tiny "> ({{ classSimpleName }})</sup></label>
-			<input id="fqIotNode_{{ @key }}" placeholder="{{ displayName }}" class="w3-input " onkeyup="qChange(this); " data-var="{{ var }}" autocomplete="off="/>
+			<input id="fqIotNode_{{ @key }}" placeholder="{{ displayName }}" class="w3-input " {{#eq ../var 'objectSuggest' }}onkeyup{{else}}onchange{{/eq}}="qChange(this); " data-var="{{ var }}" autocomplete="off="/>
 			<div class="pageSearchVal w3-tiny "></div>
 		</div>
 {{/each}}
@@ -54,7 +54,7 @@
 					<button id="buttonFacetIotNode_{{ @key }}" class="w3-button " onclick="facetFieldChange(this); " title="see values " data-var="{{ var }}" data-clear="{{#if facetField }}true{{else}}false{{/if}}"><i class="fas fa-list "></i></button>
 				</div>
 				<div class="w3-cell w3-cell-top ">
-					<input id="fqIotNode_{{ @key }}" placeholder="{{ displayName }}" class="w3-input " onkeyup="fqChange(this); " data-var="{{ var }}" autocomplete="off=" value="{{ val }}"/>
+					<input id="fqIotNode_{{ @key }}" placeholder="{{ displayName }}" class="w3-input " onchange="fqChange(this); " data-var="{{ var }}" autocomplete="off=" value="{{ val }}"/>
 				</div>
 			</div>
 		</div>
@@ -64,7 +64,7 @@
 		</div>
 		<ol class="pageFacetField " id="pageFacetFieldIotNode_{{ @key }}">
 {{#each facetField.counts }}
-			<li class="">{{ @key }}: {{ this }}</li>
+			<li class="cursor-pointer " data-class="IotNode" data-var="{{ ../var }}" data-val="{{ @key }}" onclick="fqReplace(this); ">{{ @key }}: {{ this }}</li>
 {{/each}}
 		</ol>
 {{/each}}
@@ -132,15 +132,15 @@
 {{/each}}
 	</table>
 {{#*inline "htmBodyPivotIotNodePage"}}		<!-- #*inline "htmBodyPivotIotNodePage" -->
+		<div style="display: none; " class="w3-padding w3-tiny " id="pageSearchVal-pivotIotNodeHidden">
+{{#each defaultPivotVars }}
+			<div class="pageSearchVal-pivotIotNodeHidden " id="pageSearchVal-pivotIotNodeHidden_{{ this }}">{{ this }}</div>
+{{/each}}
+		</div>
 		<div class="w3-padding w3-tiny " id="pageSearchVal-pivotIotNode">
 {{#if defaultPivotVars }}
-			<div class="pageSearchVal " id="pageSearchVal-pivotIotNode">facet.pivot={{#each defaultPivotVars }}{{#if @index }},{{/if}}{{ this }}{{/each}}</div>
+			<div class="pageSearchVal pageSearchVal-pivotIotNode " id="pageSearchVal-pivotIotNode_1">facet.pivot={{#each defaultPivotVars }}{{#if @index }},{{/if}}{{ this }}{{/each}}</div>
 {{/if}}
-		</div>
-		<div style="display: none; " class="w3-padding w3-tiny " id="pageSearchVal-hiddenIotNode">
-{{#each defaultPivotVars }}
-			<div class="pageSearchVal pageSearchVal-hiddenIotNode " id="pageSearchVal-hiddenIotNode_{{ this }}">{{ this }}</div>
-{{/each}}
 		</div>
 	<table class="w3-table ">
 {{#each varsFq }}
@@ -306,14 +306,11 @@
 {{> "htmCreated" classApiMethodMethod="PATCH"}}
 							</div>
 							<div class="w3-cell-row ">
-{{> "htmArchived" classApiMethodMethod="PATCH"}}
-{{> "htmDeleted" classApiMethodMethod="PATCH"}}
-							</div>
-							<div class="w3-cell-row ">
 {{> "htmNodeName" classApiMethodMethod="PATCH"}}
 {{> "htmNodeType" classApiMethodMethod="PATCH"}}
-{{> "htmJson" classApiMethodMethod="PATCH"}}
 {{> "htmNodeId" classApiMethodMethod="PATCH"}}
+							</div>
+							<div class="w3-cell-row ">
 {{> "htmLocation" classApiMethodMethod="PATCH"}}
 							</div>
 						<button
@@ -348,14 +345,11 @@
 {{> "htmCreated" classApiMethodMethod="POST"}}
 							</div>
 							<div class="w3-cell-row ">
-{{> "htmArchived" classApiMethodMethod="POST"}}
-{{> "htmDeleted" classApiMethodMethod="POST"}}
-							</div>
-							<div class="w3-cell-row ">
 {{> "htmNodeName" classApiMethodMethod="POST"}}
 {{> "htmNodeType" classApiMethodMethod="POST"}}
-{{> "htmJson" classApiMethodMethod="POST"}}
 {{> "htmNodeId" classApiMethodMethod="POST"}}
+							</div>
+							<div class="w3-cell-row ">
 {{> "htmLocation" classApiMethodMethod="POST"}}
 							</div>
 						</div>
@@ -415,14 +409,11 @@
 {{> "htmObjectId" classApiMethodMethod="Page"}}
 							</div>
 							<div class="w3-cell-row ">
-{{> "htmArchived" classApiMethodMethod="Page"}}
-{{> "htmDeleted" classApiMethodMethod="Page"}}
-							</div>
-							<div class="w3-cell-row ">
 {{> "htmNodeName" classApiMethodMethod="Page"}}
 {{> "htmNodeType" classApiMethodMethod="Page"}}
-{{> "htmJson" classApiMethodMethod="Page"}}
 {{> "htmNodeId" classApiMethodMethod="Page"}}
+							</div>
+							<div class="w3-cell-row ">
 {{> "htmLocation" classApiMethodMethod="Page"}}
 							</div>
 						</div>

@@ -74,14 +74,25 @@ CREATE TABLE IotNode(
 	, deleted boolean
 	, sessionId text
 	, userKey bigint
+	, json jsonb
 	, nodeName text
 	, nodeType text
 	, nodeId text
 	, location point
 	);
+CREATE TABLE BaseModel(
+	pk bigserial primary key
+	, inheritPk text
+	, created timestamp with time zone
+	, archived boolean
+	, deleted boolean
+	, sessionId text
+	, userKey bigint
+	);
 
 DROP TABLE SiteUser CASCADE;
 DROP TABLE IotNode CASCADE;
+DROP TABLE BaseModel CASCADE;
 */
 
 	protected static final Logger LOG = LoggerFactory.getLogger(MainVerticle.class);

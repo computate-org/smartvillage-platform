@@ -31,7 +31,7 @@
 		<postgresql.version>42.2.2.jre7</postgresql.version>
 		<junit.version>4.13.1</junit.version>
 		<vertx.version>4.1.8.redhat-00003</vertx.version>
-		<computate.version>4.1.8.7</computate.version>
+		<computate.version>4.1.8.8</computate.version>
 		<camel.version>3.14.1</camel.version>
 		<kie.version>7.65.0.Final</kie.version>
 		<drools.version>7.65.0.Final</drools.version>

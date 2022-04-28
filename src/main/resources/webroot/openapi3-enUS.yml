@@ -332,7 +332,7 @@ paths:
             application/json; charset=utf-8:
               schema:
                 $ref: '#/components/schemas/POSTIotNodeResponse'
-  /api/iot-node/import:
+  /api/iot-node-import:
     put:
       operationId: putimportIotNode
       x-vertx-event-bus: smart-village-view-enUS-IotNode
@@ -475,9 +475,9 @@ paths:
             application/json; charset=utf-8:
               schema:
                 $ref: '#/components/schemas/PUTImportIotNodeResponse'
-  /iot-node:
+  /api/iot-node/{id}:
     get:
-      operationId: searchpageIotNode
+      operationId: getIotNode
       x-vertx-event-bus: smart-village-view-enUS-IotNode
       security:
         - openIdConnect:
@@ -493,6 +493,45 @@ paths:
             type: string
         - name: sessionIdBefore
           in: cookie
+          schema:
+            type: string
+        - name: id
+          in: path
+          description: >+
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: >+
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/GETIotNodeResponse'
+  /iot-node/{id}:
+    get:
+      operationId: searchpageIotNodeId
+      x-vertx-event-bus: smart-village-view-enUS-IotNode
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - IOT Node
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+        - name: id
+          in: path
+          description: >+
+          required: true
           schema:
             type: string
         - in: query
@@ -611,9 +650,9 @@ paths:
             text/html; charset=utf-8:
               schema:
                 $ref: '#/components/schemas/SearchPageIotNodeResponse'
-  /iot-node/{id}:
+  /iot-node:
     get:
-      operationId: searchpageIotNodeId
+      operationId: searchpageIotNode
       x-vertx-event-bus: smart-village-view-enUS-IotNode
       security:
         - openIdConnect:
@@ -629,12 +668,6 @@ paths:
             type: string
         - name: sessionIdBefore
           in: cookie
-          schema:
-            type: string
-        - name: id
-          in: path
-          description: >+
-          required: true
           schema:
             type: string
         - in: query
@@ -1055,7 +1088,7 @@ paths:
             application/json; charset=utf-8:
               schema:
                 $ref: '#/components/schemas/POSTSiteUserResponse'
-  /api/user/import:
+  /api/user-import:
     put:
       operationId: putimportSiteUser
       x-vertx-event-bus: smart-village-view-enUS-SiteUser
@@ -1198,9 +1231,9 @@ paths:
             application/json; charset=utf-8:
               schema:
                 $ref: '#/components/schemas/PUTImportSiteUserResponse'
-  /user:
+  /user/{id}:
     get:
-      operationId: searchpageSiteUser
+      operationId: searchpageSiteUserId
       x-vertx-event-bus: smart-village-view-enUS-SiteUser
       security:
         - openIdConnect:
@@ -1216,6 +1249,12 @@ paths:
             type: string
         - name: sessionIdBefore
           in: cookie
+          schema:
+            type: string
+        - name: id
+          in: path
+          description: >+
+          required: true
           schema:
             type: string
         - in: query
@@ -1334,9 +1373,9 @@ paths:
             text/html; charset=utf-8:
               schema:
                 $ref: '#/components/schemas/SearchPageSiteUserResponse'
-  /user/{id}:
+  /user:
     get:
-      operationId: searchpageSiteUserId
+      operationId: searchpageSiteUser
       x-vertx-event-bus: smart-village-view-enUS-SiteUser
       security:
         - openIdConnect:
@@ -1352,12 +1391,6 @@ paths:
             type: string
         - name: sessionIdBefore
           in: cookie
-          schema:
-            type: string
-        - name: id
-          in: path
-          description: >+
-          required: true
           schema:
             type: string
         - in: query
@@ -1520,6 +1553,11 @@ components:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/PUTImportIotNodeResponse'
+    GETIotNodeResponse:
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/GETIotNodeResponse'
     SearchPageIotNodeResponse:
       content:
         text/html; charset=utf-8:
@@ -1572,6 +1610,8 @@ components:
           items:
             type: object
             properties:
+              json:
+                type: object
               nodeName:
                 type: string
               nodeType:
@@ -1584,6 +1624,13 @@ components:
       allOf:
         - type: object
           properties:
+            setJson:
+              type: object
+              nullable: true
+            removeJson:
+              type: object
+            removeAllJson:
+              type: object
             setNodeName:
               type: string
               nullable: true
@@ -1616,6 +1663,13 @@ components:
       allOf:
         - type: object
           properties:
+            setJson:
+              type: object
+              nullable: true
+            removeJson:
+              type: object
+            removeAllJson:
+              type: object
             setNodeName:
               type: string
               nullable: true
@@ -1648,6 +1702,8 @@ components:
       allOf:
         - type: object
           properties:
+            json:
+              type: object
             nodeName:
               type: string
             nodeType:
@@ -1660,6 +1716,8 @@ components:
       allOf:
         - type: object
           properties:
+            json:
+              type: object
             nodeName:
               type: string
             nodeType:
@@ -1672,6 +1730,8 @@ components:
       allOf:
         - type: object
           properties:
+            json:
+              type: object
             nodeName:
               type: string
             nodeType:
@@ -1684,6 +1744,22 @@ components:
       allOf:
         - type: object
           properties:
+            json:
+              type: object
+            nodeName:
+              type: string
+            nodeType:
+              type: string
+            nodeId:
+              type: string
+            location:
+              type: string
+    GETIotNodeResponse:
+      allOf:
+        - type: object
+          properties:
+            json:
+              type: object
             nodeName:
               type: string
             nodeType:

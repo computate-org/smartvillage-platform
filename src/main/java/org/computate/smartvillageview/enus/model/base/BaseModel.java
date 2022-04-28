@@ -35,6 +35,7 @@ public class BaseModel extends BaseModelGen<Object> implements ComputateVertxBas
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * PrimaryKey: true
+	 * UrlVar: pageUrlApi
 	 * Modify: false
 	 * HtmlRow: 1
 	 * HtmlCell: 1
@@ -85,8 +86,6 @@ public class BaseModel extends BaseModelGen<Object> implements ComputateVertxBas
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 2
-	 * HtmlCell: 1
 	 * DisplayName.enUS: archived
 	 * Description: For archiving this record
 	 */
@@ -98,8 +97,6 @@ public class BaseModel extends BaseModelGen<Object> implements ComputateVertxBas
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 2
-	 * HtmlCell: 2
 	 * DisplayName.enUS: deleted
 	 * Description: For deleting this record
 	 */
@@ -182,6 +179,7 @@ public class BaseModel extends BaseModelGen<Object> implements ComputateVertxBas
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * VarId: true
+	 * UrlVar: pageUrlId
 	 * HtmlRow: 1
 	 * HtmlCell: 4
 	 * DisplayName.enUS: ID
@@ -220,8 +218,7 @@ public class BaseModel extends BaseModelGen<Object> implements ComputateVertxBas
 			Class<?> cl = getClass();
 
 			try {
-				String o = toId(StringUtils.join(StringUtils.splitByCharacterTypeCamelCase((String)FieldUtils.getField(cl, cl.getSimpleName() + "_NameVar").get(this)), "-"));
-				w.o(o);
+				w.o(toId(StringUtils.join(StringUtils.splitByCharacterTypeCamelCase((String)FieldUtils.getField(cl, String.format("%s_NameVar_%s", cl.getSimpleName(), siteRequest_.getLang())).get(this)), "-")));
 			} catch (Exception e) {
 				ExceptionUtils.rethrow(e);
 			}
@@ -298,6 +295,7 @@ public class BaseModel extends BaseModelGen<Object> implements ComputateVertxBas
 	/**
 	 * {@inheritDoc}
 	 * DocValues: true
+	 * VarUrlApi: true
 	 * Description: The link to this object in the API
 	 */
 	protected void _pageUrlApi(Wrap<String> w) {

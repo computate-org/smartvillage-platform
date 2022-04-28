@@ -38,7 +38,7 @@
 {{#each varsQ}}
 		<div class="w3-padding ">
 			<label for="fqBaseModel_{{ @key }}">{{ displayName }}<sup class="w3-tiny "> ({{ classSimpleName }})</sup></label>
-			<input id="fqBaseModel_{{ @key }}" placeholder="{{ displayName }}" class="w3-input " onkeyup="qChange(this); " data-var="{{ var }}" autocomplete="off="/>
+			<input id="fqBaseModel_{{ @key }}" placeholder="{{ displayName }}" class="w3-input " {{#eq ../var 'objectSuggest' }}onkeyup{{else}}onchange{{/eq}}="qChange(this); " data-var="{{ var }}" autocomplete="off="/>
 			<div class="pageSearchVal w3-tiny "></div>
 		</div>
 {{/each}}
@@ -54,7 +54,7 @@
 					<button id="buttonFacetBaseModel_{{ @key }}" class="w3-button " onclick="facetFieldChange(this); " title="see values " data-var="{{ var }}" data-clear="{{#if facetField }}true{{else}}false{{/if}}"><i class="fas fa-list "></i></button>
 				</div>
 				<div class="w3-cell w3-cell-top ">
-					<input id="fqBaseModel_{{ @key }}" placeholder="{{ displayName }}" class="w3-input " onkeyup="fqChange(this); " data-var="{{ var }}" autocomplete="off=" value="{{ val }}"/>
+					<input id="fqBaseModel_{{ @key }}" placeholder="{{ displayName }}" class="w3-input " onchange="fqChange(this); " data-var="{{ var }}" autocomplete="off=" value="{{ val }}"/>
 				</div>
 			</div>
 		</div>
@@ -64,7 +64,7 @@
 		</div>
 		<ol class="pageFacetField " id="pageFacetFieldBaseModel_{{ @key }}">
 {{#each facetField.counts }}
-			<li class="">{{ @key }}: {{ this }}</li>
+			<li class="cursor-pointer " data-class="BaseModel" data-var="{{ ../var }}" data-val="{{ @key }}" onclick="fqReplace(this); ">{{ @key }}: {{ this }}</li>
 {{/each}}
 		</ol>
 {{/each}}
@@ -518,7 +518,7 @@
 
 {{#*inline "inputPk"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varBaseModel{{pk}}Pk ">{{baseModel_.pk}}</span>
+														<a href="{{ baseModel_.pageUrlApi }}" class="varBaseModel{{pk}}Pk ">{{baseModel_.pk}}</a>
 	{{/eq}}
 {{/inline}}
 
@@ -844,6 +844,6 @@
 
 {{#*inline "inputObjectId"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varBaseModel{{pk}}ObjectId ">{{baseModel_.objectId}}</span>
+														<a href="{{ baseModel_.pageUrlId }}" class="varBaseModel{{pk}}ObjectId ">{{baseModel_.objectId}}</a>
 	{{/eq}}
 {{/inline}}
