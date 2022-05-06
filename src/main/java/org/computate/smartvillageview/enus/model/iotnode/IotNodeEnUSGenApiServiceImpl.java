@@ -162,27 +162,8 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 		Promise<ServiceResponse> promise = Promise.promise();
 		try {
 			SiteRequestEnUS siteRequest = listIotNode.getSiteRequest_(SiteRequestEnUS.class);
-			SolrResponse responseSearch = listIotNode.getQueryResponse();
-			List<SolrResponse.Doc> solrDocuments = listIotNode.getQueryResponse().getResponse().getDocs();
-			Long searchInMillis = Long.valueOf(responseSearch.getResponseHeader().getqTime());
-			Long startNum = listIotNode.getRequest().getStart();
-			Long foundNum = responseSearch.getResponse().getNumFound();
-			Integer returnedNum = responseSearch.getResponse().getDocs().size();
-			String searchTime = String.format("%d.%03d sec", TimeUnit.MILLISECONDS.toSeconds(searchInMillis), TimeUnit.MILLISECONDS.toMillis(searchInMillis) - TimeUnit.SECONDS.toMillis(TimeUnit.MILLISECONDS.toSeconds(searchInMillis)));
-			String nextCursorMark = responseSearch.getNextCursorMark();
-			String exceptionSearch = Optional.ofNullable(responseSearch.getError()).map(error -> error.getMsg()).orElse(null);
 			List<String> fls = listIotNode.getRequest().getFields();
-
 			JsonObject json = new JsonObject();
-			json.put("startNum", startNum);
-			json.put("foundNum", foundNum);
-			json.put("returnedNum", returnedNum);
-			if(fls.size() == 1 && fls.stream().findFirst().orElse(null).equals("saves")) {
-				json.put("searchTime", searchTime);
-			}
-			if(nextCursorMark != null) {
-				json.put("nextCursorMark", nextCursorMark);
-			}
 			JsonArray l = new JsonArray();
 			listIotNode.getList().stream().forEach(o -> {
 				JsonObject json2 = JsonObject.mapFrom(o);
@@ -209,56 +190,7 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 				l.add(json2);
 			});
 			json.put("list", l);
-
-			SolrResponse.FacetFields facetFields = Optional.ofNullable(responseSearch.getFacetCounts()).map(f -> f.getFacetFields()).orElse(null);
-			if(facetFields != null) {
-				JsonObject facetFieldsJson = new JsonObject();
-				json.put("facet_fields", facetFieldsJson);
-				for(SolrResponse.FacetField facetField : facetFields.getFacets().values()) {
-					String facetFieldVar = StringUtils.substringBefore(facetField.getName(), "_docvalues_");
-					JsonObject facetFieldCounts = new JsonObject();
-					facetFieldsJson.put(facetFieldVar, facetFieldCounts);
-					facetField.getCounts().forEach((name, count) -> {
-						facetFieldCounts.put(name, count);
-					});
-				}
-			}
-
-			SolrResponse.FacetRanges facetRanges = Optional.ofNullable(responseSearch.getFacetCounts()).map(f -> f.getFacetRanges()).orElse(null);
-			if(facetRanges != null) {
-				JsonObject rangeJson = new JsonObject();
-				json.put("facet_ranges", rangeJson);
-				for(SolrResponse.FacetRange rangeFacet : facetRanges.getRanges().values()) {
-					JsonObject rangeFacetJson = new JsonObject();
-					String rangeFacetVar = StringUtils.substringBefore(rangeFacet.getName(), "_docvalues_");
-					rangeJson.put(rangeFacetVar, rangeFacetJson);
-					JsonObject rangeFacetCountsMap = new JsonObject();
-					rangeFacetJson.put("counts", rangeFacetCountsMap);
-					rangeFacet.getCounts().forEach((name, count) -> {
-						rangeFacetCountsMap.put(name, count);
-					});
-				}
-			}
-
-			SolrResponse.FacetPivot facetPivot = Optional.ofNullable(responseSearch.getFacetCounts()).map(f -> f.getFacetPivot()).orElse(null);
-			if(facetPivot != null) {
-				JsonObject facetPivotJson = new JsonObject();
-				json.put("facet_pivot", facetPivotJson);
-				for(SolrResponse.Pivot pivot : facetPivot.getPivotMap().values()) {
-					String[] varsIndexed = pivot.getName().trim().split(",");
-					String[] entityVars = new String[varsIndexed.length];
-					for(Integer i = 0; i < entityVars.length; i++) {
-						String entityIndexed = varsIndexed[i];
-						entityVars[i] = StringUtils.substringBefore(entityIndexed, "_docvalues_");
-					}
-					JsonArray pivotArray = new JsonArray();
-					facetPivotJson.put(StringUtils.join(entityVars, ","), pivotArray);
-					responsePivotSearchIotNode(pivot.getPivotList(), pivotArray);
-				}
-			}
-			if(exceptionSearch != null) {
-				json.put("exceptionSearch", exceptionSearch);
-			}
+			response200Search(listIotNode.getRequest(), listIotNode.getResponse(), json);
 			promise.complete(ServiceResponse.completedWithJson(Buffer.buffer(Optional.ofNullable(json).orElse(new JsonObject()).encodePrettily())));
 		} catch(Exception ex) {
 			LOG.error(String.format("response200SearchIotNode failed. "), ex);
@@ -401,7 +333,7 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 					searchIotNodeList(siteRequest, false, true, true).onSuccess(listIotNode -> {
 						try {
 							List<String> roles2 = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_ADMIN)).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
-							if(listIotNode.getQueryResponse().getResponse().getNumFound() > 1
+							if(listIotNode.getResponse().getResponse().getNumFound() > 1
 									&& !CollectionUtils.containsAny(siteRequest.getUserResourceRoles(), roles2)
 									&& !CollectionUtils.containsAny(siteRequest.getUserRealmRoles(), roles2)
 									) {
@@ -412,7 +344,7 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 
 								ApiRequest apiRequest = new ApiRequest();
 								apiRequest.setRows(listIotNode.getRequest().getRows());
-								apiRequest.setNumFound(listIotNode.getQueryResponse().getResponse().getNumFound());
+								apiRequest.setNumFound(listIotNode.getResponse().getResponse().getNumFound());
 								apiRequest.setNumPATCH(0L);
 								apiRequest.initDeepApiRequest(siteRequest);
 								siteRequest.setApiRequest_(apiRequest);
@@ -482,7 +414,7 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 		});
 		CompositeFuture.all(futures).onSuccess( a -> {
 			if(apiRequest != null) {
-				apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listIotNode.getQueryResponse().getResponse().getDocs().size());
+				apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listIotNode.getResponse().getResponse().getDocs().size());
 				if(apiRequest.getNumFound() == 1L)
 					listIotNode.first().apiRequestIotNode();
 				eventBus.publish("websocketIotNode", JsonObject.mapFrom(apiRequest).toString());
@@ -518,7 +450,7 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 				searchIotNodeList(siteRequest, false, true, true).onSuccess(listIotNode -> {
 					try {
 						IotNode o = listIotNode.first();
-						if(o != null && listIotNode.getQueryResponse().getResponse().getNumFound() == 1) {
+						if(o != null && listIotNode.getResponse().getResponse().getNumFound() == 1) {
 							ApiRequest apiRequest = new ApiRequest();
 							apiRequest.setRows(1L);
 							apiRequest.setNumFound(1L);
@@ -1664,6 +1596,15 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 								case "rows":
 									valueRows = paramObject instanceof Long ? (Long)paramObject : Long.parseLong(paramObject.toString());
 									searchIotNodeRows(searchList, valueRows);
+									break;
+								case "stats":
+									searchList.stats((Boolean)paramObject);
+									break;
+								case "stats.field":
+									entityVar = (String)paramObject;
+									varIndexed = IotNode.varIndexedIotNode(entityVar);
+									if(varIndexed != null)
+										searchList.statsField(varIndexed);
 									break;
 								case "facet":
 									searchList.facet((Boolean)paramObject);

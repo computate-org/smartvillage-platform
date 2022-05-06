@@ -36,33 +36,61 @@
 {{#*inline "htmBodySearchIotNodePage"}}		<!-- #*inline "htmBodySearchIotNodePage" -->
 	<div>
 {{#each varsQ}}
-		<div class="w3-padding ">
-			<label for="fqIotNode_{{ @key }}">{{ displayName }}<sup class="w3-tiny "> ({{ classSimpleName }})</sup></label>
-			<input id="fqIotNode_{{ @key }}" placeholder="{{ displayName }}" class="w3-input " {{#eq ../var 'objectSuggest' }}onkeyup{{else}}onchange{{/eq}}="qChange(this); " data-var="{{ var }}" autocomplete="off="/>
-			<div class="pageSearchVal w3-tiny "></div>
+		<div class="w3-cell-row ">
+			<div class="w3-cell w3-cell-top ">
+				<label for="qIotNode_{{ @key }}">{{ displayName }}<sup class="w3-tiny "> ({{ classSimpleName }})</sup></label>
+			</div>
+		</div>
+		<div class="w3-cell-row ">
+			<div class="w3-cell w3-cell-top ">
+				<input id="qIotNode_{{ @key }}" placeholder="{{ displayName }}" class="" {{#eq ../var 'objectSuggest' }}onkeyup{{else}}onchange{{/eq}}="qChange(this); " data-var="{{ var }}" autocomplete="off="/>
+				<div class="pageSearchVal w3-tiny "></div>
+			</div>
 		</div>
 {{/each}}
+		<div class="w3-cell-row ">
+			<div class="w3-cell w3-cell-top ">
+				<label for="qIotNode_Start">start<sup class="w3-tiny "> (Long)</sup></label>
+			</div>
+		</div>
+		<div class="w3-cell-row ">
+			<div class="w3-cell w3-cell-top ">
+				<input id="qIotNode_start" placeholder="{{ displayName }}" class="" onchange="paramChange(this); " data-var="start" autocomplete="off="/>
+				<div class="pageSearchVal w3-tiny "></div>
+			</div>
+		</div>
+		<div class="w3-cell-row ">
+			<div class="w3-cell w3-cell-top ">
+				<label for="qIotNode_Rows">rows<sup class="w3-tiny "> (Long)</sup></label>
+			</div>
+		</div>
+		<div class="w3-cell-row ">
+			<div class="w3-cell w3-cell-top ">
+				<input id="qIotNode_rows" placeholder="{{ displayName }}" class="" onchange="paramChange(this); " data-var="rows" autocomplete="off="/>
+				<div class="pageSearchVal w3-tiny "></div>
+			</div>
+		</div>
 	</div>
 {{/inline}}
 {{#*inline "htmBodyFiltersIotNodePage"}}		<!-- #*inline "htmBodyFiltersIotNodePage" -->
 	<div>
 {{#each varsFq }}
-		<div class="w3-padding ">
+		<div class="">
 			<label for="fqIotNode_{{ @key }}">{{ displayName }}<sup class="w3-tiny "> ({{ classSimpleName }})</sup></label>
 			<div class="w3-cell-row ">
 				<div class="w3-cell w3-cell-top ">
-					<button id="buttonFacetIotNode_{{ @key }}" class="w3-button " onclick="facetFieldChange(this); " title="see values " data-var="{{ var }}" data-clear="{{#if facetField }}true{{else}}false{{/if}}"><i class="fas fa-list "></i></button>
+					<button id="buttonFacetIotNode_{{ @key }}" class="" onclick="facetFieldChange(this); " title="see values " data-var="{{ var }}" data-clear="{{#if facetField }}true{{else}}false{{/if}}"><i class="fas fa-list "></i></button>
 				</div>
 				<div class="w3-cell w3-cell-top ">
-					<input id="fqIotNode_{{ @key }}" placeholder="{{ displayName }}" class="w3-input " onchange="fqChange(this); " data-var="{{ var }}" autocomplete="off=" value="{{ val }}"/>
+					<input id="fqIotNode_{{ @key }}" placeholder="{{ displayName }}" class="" onchange="fqChange(this); " data-var="{{ var }}" autocomplete="off=" value="{{ val }}"/>
 				</div>
 			</div>
 		</div>
-		<div class="w3-padding w3-tiny ">
+		<div class="w3-tiny ">
 			<div class="pageSearchVal " id="pageSearchVal-fqIotNode_{{ @key }}">{{#if val }}fq={{ var }}:{{encodeURIComponent val }}{{/if}}</div>
 			<div class="pageSearchVal " id="pageSearchVal-buttonFacetIotNode_{{ @key }}">{{#if facetField.var }}facet.field={{ facetField.var }}{{/if}}</div>
 		</div>
-		<ol class="pageFacetField " id="pageFacetFieldIotNode_{{ @key }}">
+		<ol class="pageFacetField w3-small " id="pageFacetFieldIotNode_{{ @key }}">
 {{#each facetField.counts }}
 			<li class="cursor-pointer " data-class="IotNode" data-var="{{ ../var }}" data-val="{{ @key }}" onclick="fqReplace(this); ">{{ @key }}: {{ this }}</li>
 {{/each}}
@@ -425,10 +453,10 @@
 {{#*inline "htmBodySidebar"}}
 	<div class="w3-dropdown-hover w3-bar-block min-width-300px ">
 		<div class="min-width-300px ">
-			<span title="Search" class="w3-button w3-xlarge w3-blue " onclick="$('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').toggle(); "><i class="fad fa-magnifying-glass "></i></span>
-			<span title="Filters" class="w3-button w3-xlarge w3-blue " onclick="$('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleFilters').toggle(); "><i class="fad fa-filters "></i></span>
-			<span title="Range" class="w3-button w3-xlarge w3-blue " onclick="$('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleRange').toggle(); "><i class="fad fa-calendar-range "></i></span>
-			<span title="Pivot" class="w3-button w3-xlarge w3-blue " onclick="$('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').toggle(); "><i class="fad fa-table-pivot "></i></span>
+			<span title="Search" class="siteSidebarToggle w3-xlarge w3-blue " onclick="$('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').toggle(); "><i class="fad fa-magnifying-glass "></i></span>
+			<span title="Filters" class="siteSidebarToggle w3-xlarge w3-blue " onclick="$('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleFilters').toggle(); "><i class="fad fa-filters "></i></span>
+			<span title="Range" class="siteSidebarToggle w3-xlarge w3-blue " onclick="$('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleRange').toggle(); "><i class="fad fa-calendar-range "></i></span>
+			<span title="Pivot" class="siteSidebarToggle w3-xlarge w3-blue " onclick="$('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').toggle(); "><i class="fad fa-table-pivot "></i></span>
 		</div>
 		<div class="w3-dropdown-content min-width-300px w3-white w3-border ">
 			<div  class="siteSidebarToggle siteSidebarToggleSearch" style="display: none; ">

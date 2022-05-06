@@ -46,6 +46,7 @@ import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.lang.Integer;
 import io.vertx.core.json.JsonArray;
+import org.computate.search.response.solr.SolrResponse.Stats;
 import org.computate.search.response.solr.SolrResponse.FacetCounts;
 import java.lang.Long;
 import org.computate.search.wrap.Wrap;
@@ -820,6 +821,44 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 		return (IotNodeGenPage)this;
 	}
 
+	///////////
+	// stats //
+	///////////
+
+	/**	 The entity stats
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected Stats stats;
+
+	/**	<br> The entity stats
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.iotnode.IotNodeGenPage&fq=entiteVar_enUS_indexed_string:stats">Find the entity stats in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _stats(Wrap<Stats> w);
+
+	public Stats getStats() {
+		return stats;
+	}
+
+	public void setStats(Stats stats) {
+		this.stats = stats;
+	}
+	public static Stats staticSetStats(SiteRequestEnUS siteRequest_, String o) {
+		return null;
+	}
+	protected IotNodeGenPage statsInit() {
+		Wrap<Stats> statsWrap = new Wrap<Stats>().var("stats");
+		if(stats == null) {
+			_stats(statsWrap);
+			setStats(statsWrap.o);
+		}
+		return (IotNodeGenPage)this;
+	}
+
 	/////////////////
 	// facetCounts //
 	/////////////////
@@ -1103,6 +1142,7 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 				defaultFacetMinCountInit();
 				defaultPivotMinCountInit();
 				listIotNodeInit();
+				statsInit();
 				facetCountsInit();
 				iotNodeCountInit();
 				iotNode_Init();
@@ -1191,6 +1231,8 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 				return oIotNodeGenPage.defaultPivotMinCount;
 			case "listIotNode":
 				return oIotNodeGenPage.listIotNode;
+			case "stats":
+				return oIotNodeGenPage.stats;
 			case "facetCounts":
 				return oIotNodeGenPage.facetCounts;
 			case "iotNodeCount":
@@ -1425,6 +1467,7 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 	public static final String VAR_defaultFacetMinCount = "defaultFacetMinCount";
 	public static final String VAR_defaultPivotMinCount = "defaultPivotMinCount";
 	public static final String VAR_listIotNode = "listIotNode";
+	public static final String VAR_stats = "stats";
 	public static final String VAR_facetCounts = "facetCounts";
 	public static final String VAR_iotNodeCount = "iotNodeCount";
 	public static final String VAR_iotNode_ = "iotNode_";
@@ -1446,6 +1489,7 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 	public static final String DISPLAY_NAME_defaultFacetMinCount = "";
 	public static final String DISPLAY_NAME_defaultPivotMinCount = "";
 	public static final String DISPLAY_NAME_listIotNode = "";
+	public static final String DISPLAY_NAME_stats = "";
 	public static final String DISPLAY_NAME_facetCounts = "";
 	public static final String DISPLAY_NAME_iotNodeCount = "";
 	public static final String DISPLAY_NAME_iotNode_ = "";
@@ -1487,6 +1531,8 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 			return DISPLAY_NAME_defaultPivotMinCount;
 		case VAR_listIotNode:
 			return DISPLAY_NAME_listIotNode;
+		case VAR_stats:
+			return DISPLAY_NAME_stats;
 		case VAR_facetCounts:
 			return DISPLAY_NAME_facetCounts;
 		case VAR_iotNodeCount:

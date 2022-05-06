@@ -66,6 +66,7 @@ import org.computate.search.response.solr.SolrResponse;
 public abstract class BaseModelGen<DEV> extends Object {
 	protected static final Logger LOG = LoggerFactory.getLogger(BaseModel.class);
 
+	public static final String BaseModel_Description_enUS = "A reusable base class for all database model classes";
 
 
 	//////////////////
@@ -2087,15 +2088,7 @@ public abstract class BaseModelGen<DEV> extends Object {
 	}
 	public static List<String> varsFqBaseModel(List<String> vars) {
 		vars.add(VAR_pk);
-		vars.add(VAR_inheritPk);
 		vars.add(VAR_created);
-		vars.add(VAR_modified);
-		vars.add(VAR_objectTitle);
-		vars.add(VAR_objectId);
-		vars.add(VAR_pageUrlId);
-		vars.add(VAR_pageUrlPk);
-		vars.add(VAR_pageUrlApi);
-		vars.add(VAR_id);
 		return vars;
 	}
 
@@ -2105,7 +2098,6 @@ public abstract class BaseModelGen<DEV> extends Object {
 	public static List<String> varsRangeBaseModel(List<String> vars) {
 		vars.add(VAR_pk);
 		vars.add(VAR_created);
-		vars.add(VAR_modified);
 		return vars;
 	}
 

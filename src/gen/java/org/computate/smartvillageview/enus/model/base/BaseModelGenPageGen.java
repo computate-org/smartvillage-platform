@@ -34,6 +34,7 @@ import org.computate.smartvillageview.enus.page.PageLayout;
 import org.computate.vertx.search.list.SearchList;
 import java.lang.String;
 import io.vertx.core.json.JsonArray;
+import org.computate.search.response.solr.SolrResponse.Stats;
 import org.computate.search.response.solr.SolrResponse.FacetCounts;
 import java.lang.Integer;
 import java.lang.Long;
@@ -238,6 +239,44 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 	}
 	protected BaseModelGenPage listBaseModelInit() {
 		_listBaseModel(listBaseModel);
+		return (BaseModelGenPage)this;
+	}
+
+	///////////
+	// stats //
+	///////////
+
+	/**	 The entity stats
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected Stats stats;
+
+	/**	<br> The entity stats
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.base.BaseModelGenPage&fq=entiteVar_enUS_indexed_string:stats">Find the entity stats in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _stats(Wrap<Stats> w);
+
+	public Stats getStats() {
+		return stats;
+	}
+
+	public void setStats(Stats stats) {
+		this.stats = stats;
+	}
+	public static Stats staticSetStats(SiteRequestEnUS siteRequest_, String o) {
+		return null;
+	}
+	protected BaseModelGenPage statsInit() {
+		Wrap<Stats> statsWrap = new Wrap<Stats>().var("stats");
+		if(stats == null) {
+			_stats(statsWrap);
+			setStats(statsWrap.o);
+		}
 		return (BaseModelGenPage)this;
 	}
 
@@ -513,6 +552,7 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 				pageResponseInit();
 				defaultPivotVarsInit();
 				listBaseModelInit();
+				statsInit();
 				facetCountsInit();
 				baseModelCountInit();
 				baseModel_Init();
@@ -579,6 +619,8 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 				return oBaseModelGenPage.defaultPivotVars;
 			case "listBaseModel":
 				return oBaseModelGenPage.listBaseModel;
+			case "stats":
+				return oBaseModelGenPage.stats;
 			case "facetCounts":
 				return oBaseModelGenPage.facetCounts;
 			case "baseModelCount":
@@ -730,6 +772,7 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 	public static final String VAR_pageResponse = "pageResponse";
 	public static final String VAR_defaultPivotVars = "defaultPivotVars";
 	public static final String VAR_listBaseModel = "listBaseModel";
+	public static final String VAR_stats = "stats";
 	public static final String VAR_facetCounts = "facetCounts";
 	public static final String VAR_baseModelCount = "baseModelCount";
 	public static final String VAR_baseModel_ = "baseModel_";
@@ -740,6 +783,7 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 	public static final String DISPLAY_NAME_pageResponse = "";
 	public static final String DISPLAY_NAME_defaultPivotVars = "";
 	public static final String DISPLAY_NAME_listBaseModel = "";
+	public static final String DISPLAY_NAME_stats = "";
 	public static final String DISPLAY_NAME_facetCounts = "";
 	public static final String DISPLAY_NAME_baseModelCount = "";
 	public static final String DISPLAY_NAME_baseModel_ = "";
@@ -759,6 +803,8 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 			return DISPLAY_NAME_defaultPivotVars;
 		case VAR_listBaseModel:
 			return DISPLAY_NAME_listBaseModel;
+		case VAR_stats:
+			return DISPLAY_NAME_stats;
 		case VAR_facetCounts:
 			return DISPLAY_NAME_facetCounts;
 		case VAR_baseModelCount:

@@ -56,6 +56,7 @@ import org.computate.search.response.solr.SolrResponse;
 public abstract class SiteUserGen<DEV> extends BaseModel {
 	protected static final Logger LOG = LoggerFactory.getLogger(SiteUser.class);
 
+	public static final String SiteUser_Description_enUS = "A user record for each site user";
 	public static final String SiteUser_AName_enUS = "a site user";
 	public static final String SiteUser_This_enUS = "this ";
 	public static final String SiteUser_ThisName_enUS = "this site user";
@@ -1156,15 +1157,6 @@ public abstract class SiteUserGen<DEV> extends BaseModel {
 		return SiteUser.varsFqSiteUser(new ArrayList<String>());
 	}
 	public static List<String> varsFqSiteUser(List<String> vars) {
-		vars.add(VAR_userKeys);
-		vars.add(VAR_userId);
-		vars.add(VAR_userName);
-		vars.add(VAR_userEmail);
-		vars.add(VAR_userFirstName);
-		vars.add(VAR_userLastName);
-		vars.add(VAR_userFullName);
-		vars.add(VAR_seeArchived);
-		vars.add(VAR_seeDeleted);
 		BaseModel.varsFqBaseModel(vars);
 		return vars;
 	}

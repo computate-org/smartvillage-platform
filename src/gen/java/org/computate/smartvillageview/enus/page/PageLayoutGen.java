@@ -157,7 +157,14 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	public void setConfig(JsonObject config) {
 		this.config = config;
 	}
+	@JsonIgnore
+	public void setConfig(String o) {
+		this.config = PageLayout.staticSetConfig(siteRequest_, o);
+	}
 	public static JsonObject staticSetConfig(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonObject(o);
+		}
 		return null;
 	}
 	protected PageLayout configInit() {
@@ -167,6 +174,18 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			setConfig(configWrap.o);
 		}
 		return (PageLayout)this;
+	}
+
+	public static JsonObject staticSearchConfig(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o;
+	}
+
+	public static String staticSearchStrConfig(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqConfig(SiteRequestEnUS siteRequest_, String o) {
+		return PageLayout.staticSearchStrConfig(siteRequest_, PageLayout.staticSearchConfig(siteRequest_, PageLayout.staticSetConfig(siteRequest_, o)));
 	}
 
 	////////////////////
@@ -606,6 +625,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	/**	 The entity params
 	 *	 is defined as null before being initialized. 
 	 */
+	@JsonProperty
 	@JsonInclude(Include.NON_NULL)
 	protected JsonObject params;
 
@@ -624,7 +644,14 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	public void setParams(JsonObject params) {
 		this.params = params;
 	}
+	@JsonIgnore
+	public void setParams(String o) {
+		this.params = PageLayout.staticSetParams(siteRequest_, o);
+	}
 	public static JsonObject staticSetParams(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonObject(o);
+		}
 		return null;
 	}
 	protected PageLayout paramsInit() {
@@ -634,6 +661,18 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			setParams(paramsWrap.o);
 		}
 		return (PageLayout)this;
+	}
+
+	public static JsonObject staticSearchParams(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o;
+	}
+
+	public static String staticSearchStrParams(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqParams(SiteRequestEnUS siteRequest_, String o) {
+		return PageLayout.staticSearchStrParams(siteRequest_, PageLayout.staticSearchParams(siteRequest_, PageLayout.staticSetParams(siteRequest_, o)));
 	}
 
 	/////////////
@@ -1462,6 +1501,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	/**	 The entity pagination
 	 *	 It is constructed before being initialized with the constructor by default. 
 	 */
+	@JsonProperty
 	@JsonInclude(Include.NON_NULL)
 	protected JsonObject pagination = new JsonObject();
 
@@ -1480,12 +1520,31 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	public void setPagination(JsonObject pagination) {
 		this.pagination = pagination;
 	}
+	@JsonIgnore
+	public void setPagination(String o) {
+		this.pagination = PageLayout.staticSetPagination(siteRequest_, o);
+	}
 	public static JsonObject staticSetPagination(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonObject(o);
+		}
 		return null;
 	}
 	protected PageLayout paginationInit() {
 		_pagination(pagination);
 		return (PageLayout)this;
+	}
+
+	public static JsonObject staticSearchPagination(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o;
+	}
+
+	public static String staticSearchStrPagination(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqPagination(SiteRequestEnUS siteRequest_, String o) {
+		return PageLayout.staticSearchStrPagination(siteRequest_, PageLayout.staticSearchPagination(siteRequest_, PageLayout.staticSetPagination(siteRequest_, o)));
 	}
 
 	///////////
@@ -1495,6 +1554,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	/**	 The entity varsQ
 	 *	 It is constructed before being initialized with the constructor by default. 
 	 */
+	@JsonProperty
 	@JsonInclude(Include.NON_NULL)
 	protected JsonObject varsQ = new JsonObject();
 
@@ -1513,12 +1573,31 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	public void setVarsQ(JsonObject varsQ) {
 		this.varsQ = varsQ;
 	}
+	@JsonIgnore
+	public void setVarsQ(String o) {
+		this.varsQ = PageLayout.staticSetVarsQ(siteRequest_, o);
+	}
 	public static JsonObject staticSetVarsQ(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonObject(o);
+		}
 		return null;
 	}
 	protected PageLayout varsQInit() {
 		_varsQ(varsQ);
 		return (PageLayout)this;
+	}
+
+	public static JsonObject staticSearchVarsQ(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o;
+	}
+
+	public static String staticSearchStrVarsQ(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqVarsQ(SiteRequestEnUS siteRequest_, String o) {
+		return PageLayout.staticSearchStrVarsQ(siteRequest_, PageLayout.staticSearchVarsQ(siteRequest_, PageLayout.staticSetVarsQ(siteRequest_, o)));
 	}
 
 	////////////
@@ -1528,6 +1607,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	/**	 The entity varsFq
 	 *	 It is constructed before being initialized with the constructor by default. 
 	 */
+	@JsonProperty
 	@JsonInclude(Include.NON_NULL)
 	protected JsonObject varsFq = new JsonObject();
 
@@ -1546,12 +1626,31 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	public void setVarsFq(JsonObject varsFq) {
 		this.varsFq = varsFq;
 	}
+	@JsonIgnore
+	public void setVarsFq(String o) {
+		this.varsFq = PageLayout.staticSetVarsFq(siteRequest_, o);
+	}
 	public static JsonObject staticSetVarsFq(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonObject(o);
+		}
 		return null;
 	}
 	protected PageLayout varsFqInit() {
 		_varsFq(varsFq);
 		return (PageLayout)this;
+	}
+
+	public static JsonObject staticSearchVarsFq(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o;
+	}
+
+	public static String staticSearchStrVarsFq(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqVarsFq(SiteRequestEnUS siteRequest_, String o) {
+		return PageLayout.staticSearchStrVarsFq(siteRequest_, PageLayout.staticSearchVarsFq(siteRequest_, PageLayout.staticSetVarsFq(siteRequest_, o)));
 	}
 
 	///////////////
@@ -1561,6 +1660,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	/**	 The entity varsRange
 	 *	 It is constructed before being initialized with the constructor by default. 
 	 */
+	@JsonProperty
 	@JsonInclude(Include.NON_NULL)
 	protected JsonObject varsRange = new JsonObject();
 
@@ -1579,12 +1679,31 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	public void setVarsRange(JsonObject varsRange) {
 		this.varsRange = varsRange;
 	}
+	@JsonIgnore
+	public void setVarsRange(String o) {
+		this.varsRange = PageLayout.staticSetVarsRange(siteRequest_, o);
+	}
 	public static JsonObject staticSetVarsRange(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonObject(o);
+		}
 		return null;
 	}
 	protected PageLayout varsRangeInit() {
 		_varsRange(varsRange);
 		return (PageLayout)this;
+	}
+
+	public static JsonObject staticSearchVarsRange(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o;
+	}
+
+	public static String staticSearchStrVarsRange(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqVarsRange(SiteRequestEnUS siteRequest_, String o) {
+		return PageLayout.staticSearchStrVarsRange(siteRequest_, PageLayout.staticSearchVarsRange(siteRequest_, PageLayout.staticSetVarsRange(siteRequest_, o)));
 	}
 
 	///////////
@@ -1594,6 +1713,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	/**	 The entity query
 	 *	 It is constructed before being initialized with the constructor by default. 
 	 */
+	@JsonProperty
 	@JsonInclude(Include.NON_NULL)
 	protected JsonObject query = new JsonObject();
 
@@ -1612,12 +1732,31 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	public void setQuery(JsonObject query) {
 		this.query = query;
 	}
+	@JsonIgnore
+	public void setQuery(String o) {
+		this.query = PageLayout.staticSetQuery(siteRequest_, o);
+	}
 	public static JsonObject staticSetQuery(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonObject(o);
+		}
 		return null;
 	}
 	protected PageLayout queryInit() {
 		_query(query);
 		return (PageLayout)this;
+	}
+
+	public static JsonObject staticSearchQuery(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o;
+	}
+
+	public static String staticSearchStrQuery(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqQuery(SiteRequestEnUS siteRequest_, String o) {
+		return PageLayout.staticSearchStrQuery(siteRequest_, PageLayout.staticSearchQuery(siteRequest_, PageLayout.staticSetQuery(siteRequest_, o)));
 	}
 
 	//////////////////
@@ -2170,6 +2309,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 	public static Object staticSetPageLayout(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "config":
+			return PageLayout.staticSetConfig(siteRequest_, o);
 		case "staticBaseUrl":
 			return PageLayout.staticSetStaticBaseUrl(siteRequest_, o);
 		case "STATIC_BASE_URL":
@@ -2186,6 +2327,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSetPageUri(siteRequest_, o);
 		case "pageMethod":
 			return PageLayout.staticSetPageMethod(siteRequest_, o);
+		case "params":
+			return PageLayout.staticSetParams(siteRequest_, o);
 		case "userKey":
 			return PageLayout.staticSetUserKey(siteRequest_, o);
 		case "userFullName":
@@ -2214,6 +2357,16 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSetRolesRequired(siteRequest_, o);
 		case "authRolesAdmin":
 			return PageLayout.staticSetAuthRolesAdmin(siteRequest_, o);
+		case "pagination":
+			return PageLayout.staticSetPagination(siteRequest_, o);
+		case "varsQ":
+			return PageLayout.staticSetVarsQ(siteRequest_, o);
+		case "varsFq":
+			return PageLayout.staticSetVarsFq(siteRequest_, o);
+		case "varsRange":
+			return PageLayout.staticSetVarsRange(siteRequest_, o);
+		case "query":
+			return PageLayout.staticSetQuery(siteRequest_, o);
 		case "pageImageUri":
 			return PageLayout.staticSetPageImageUri(siteRequest_, o);
 		case "contextIconGroup":
@@ -2238,6 +2391,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 	public static Object staticSearchPageLayout(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "config":
+			return PageLayout.staticSearchConfig(siteRequest_, (JsonObject)o);
 		case "staticBaseUrl":
 			return PageLayout.staticSearchStaticBaseUrl(siteRequest_, (String)o);
 		case "STATIC_BASE_URL":
@@ -2254,6 +2409,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSearchPageUri(siteRequest_, (String)o);
 		case "pageMethod":
 			return PageLayout.staticSearchPageMethod(siteRequest_, (String)o);
+		case "params":
+			return PageLayout.staticSearchParams(siteRequest_, (JsonObject)o);
 		case "userKey":
 			return PageLayout.staticSearchUserKey(siteRequest_, (Long)o);
 		case "userFullName":
@@ -2282,6 +2439,16 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSearchRolesRequired(siteRequest_, (String)o);
 		case "authRolesAdmin":
 			return PageLayout.staticSearchAuthRolesAdmin(siteRequest_, (String)o);
+		case "pagination":
+			return PageLayout.staticSearchPagination(siteRequest_, (JsonObject)o);
+		case "varsQ":
+			return PageLayout.staticSearchVarsQ(siteRequest_, (JsonObject)o);
+		case "varsFq":
+			return PageLayout.staticSearchVarsFq(siteRequest_, (JsonObject)o);
+		case "varsRange":
+			return PageLayout.staticSearchVarsRange(siteRequest_, (JsonObject)o);
+		case "query":
+			return PageLayout.staticSearchQuery(siteRequest_, (JsonObject)o);
 		case "pageImageUri":
 			return PageLayout.staticSearchPageImageUri(siteRequest_, (String)o);
 		case "contextIconGroup":
@@ -2306,6 +2473,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 	public static String staticSearchStrPageLayout(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "config":
+			return PageLayout.staticSearchStrConfig(siteRequest_, (JsonObject)o);
 		case "staticBaseUrl":
 			return PageLayout.staticSearchStrStaticBaseUrl(siteRequest_, (String)o);
 		case "STATIC_BASE_URL":
@@ -2322,6 +2491,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSearchStrPageUri(siteRequest_, (String)o);
 		case "pageMethod":
 			return PageLayout.staticSearchStrPageMethod(siteRequest_, (String)o);
+		case "params":
+			return PageLayout.staticSearchStrParams(siteRequest_, (JsonObject)o);
 		case "userKey":
 			return PageLayout.staticSearchStrUserKey(siteRequest_, (Long)o);
 		case "userFullName":
@@ -2350,6 +2521,16 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSearchStrRolesRequired(siteRequest_, (String)o);
 		case "authRolesAdmin":
 			return PageLayout.staticSearchStrAuthRolesAdmin(siteRequest_, (String)o);
+		case "pagination":
+			return PageLayout.staticSearchStrPagination(siteRequest_, (JsonObject)o);
+		case "varsQ":
+			return PageLayout.staticSearchStrVarsQ(siteRequest_, (JsonObject)o);
+		case "varsFq":
+			return PageLayout.staticSearchStrVarsFq(siteRequest_, (JsonObject)o);
+		case "varsRange":
+			return PageLayout.staticSearchStrVarsRange(siteRequest_, (JsonObject)o);
+		case "query":
+			return PageLayout.staticSearchStrQuery(siteRequest_, (JsonObject)o);
 		case "pageImageUri":
 			return PageLayout.staticSearchStrPageImageUri(siteRequest_, (String)o);
 		case "contextIconGroup":
@@ -2374,6 +2555,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 	public static String staticSearchFqPageLayout(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "config":
+			return PageLayout.staticSearchFqConfig(siteRequest_, o);
 		case "staticBaseUrl":
 			return PageLayout.staticSearchFqStaticBaseUrl(siteRequest_, o);
 		case "STATIC_BASE_URL":
@@ -2390,6 +2573,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSearchFqPageUri(siteRequest_, o);
 		case "pageMethod":
 			return PageLayout.staticSearchFqPageMethod(siteRequest_, o);
+		case "params":
+			return PageLayout.staticSearchFqParams(siteRequest_, o);
 		case "userKey":
 			return PageLayout.staticSearchFqUserKey(siteRequest_, o);
 		case "userFullName":
@@ -2418,6 +2603,16 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSearchFqRolesRequired(siteRequest_, o);
 		case "authRolesAdmin":
 			return PageLayout.staticSearchFqAuthRolesAdmin(siteRequest_, o);
+		case "pagination":
+			return PageLayout.staticSearchFqPagination(siteRequest_, o);
+		case "varsQ":
+			return PageLayout.staticSearchFqVarsQ(siteRequest_, o);
+		case "varsFq":
+			return PageLayout.staticSearchFqVarsFq(siteRequest_, o);
+		case "varsRange":
+			return PageLayout.staticSearchFqVarsRange(siteRequest_, o);
+		case "query":
+			return PageLayout.staticSearchFqQuery(siteRequest_, o);
 		case "pageImageUri":
 			return PageLayout.staticSearchFqPageImageUri(siteRequest_, o);
 		case "contextIconGroup":

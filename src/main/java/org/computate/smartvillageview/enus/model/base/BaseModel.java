@@ -41,6 +41,7 @@ public class BaseModel extends BaseModelGen<Object> implements ComputateVertxBas
 	 * HtmlCell: 1
 	 * DisplayName.enUS: primary key
 	 * Description: The primary key of this object in the database
+	 * Facet: true
 	 */
 	protected void _pk(Wrap<Long> w) {}
 
@@ -65,6 +66,7 @@ public class BaseModel extends BaseModelGen<Object> implements ComputateVertxBas
 	 * DisplayName.enUS: created
 	 * FormatHtm: MMM d, yyyy h:mm:ss a
 	 * Description: A created timestamp for this record in the database
+	 * Facet: true
 	 */
 	protected void _created(Wrap<ZonedDateTime> w) {}
 

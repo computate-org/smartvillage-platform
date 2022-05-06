@@ -54,7 +54,7 @@ public class IotNodeGenPage extends IotNodeGenPageGen<BaseModelPage> {
 
 	protected void _pageResponse(Wrap<String> w) {
 		if(searchListIotNode_ != null)
-			w.o(JsonObject.mapFrom(searchListIotNode_.getQueryResponse()).toString());
+			w.o(JsonObject.mapFrom(searchListIotNode_.getResponse()).toString());
 	}
 
 	protected void _defaultZoneId(Wrap<String> w) {
@@ -135,8 +135,12 @@ public class IotNodeGenPage extends IotNodeGenPageGen<BaseModelPage> {
 		Optional.ofNullable(searchListIotNode_).map(o -> o.getList()).orElse(Arrays.asList()).stream().map(o -> JsonObject.mapFrom(o)).forEach(o -> l.add(o));
 	}
 
+	protected void _stats(Wrap<SolrResponse.Stats> w) {
+		w.o(searchListIotNode_.getResponse().getStats());
+	}
+
 	protected void _facetCounts(Wrap<SolrResponse.FacetCounts> w) {
-		w.o(searchListIotNode_.getQueryResponse().getFacetCounts());
+		w.o(searchListIotNode_.getResponse().getFacetCounts());
 	}
 
 	protected void _iotNodeCount(Wrap<Integer> w) {
@@ -202,11 +206,11 @@ public class IotNodeGenPage extends IotNodeGenPageGen<BaseModelPage> {
 		JsonArray pages = new JsonArray();
 		Long start = searchListIotNode_.getStart().longValue();
 		Long rows = searchListIotNode_.getRows().longValue();
-		Long foundNum = searchListIotNode_.getQueryResponse().getResponse().getNumFound().longValue();
+		Long foundNum = searchListIotNode_.getResponse().getResponse().getNumFound().longValue();
 		Long startNum = start + 1L;
 		Long endNum = start + rows;
-		Long floorMod = Math.floorMod(foundNum, rows);
-		Long last = Math.floorDiv(foundNum, rows) - (floorMod.equals(0L) ? 1L : 0L) * rows;
+		Long floorMod = (rows == 0L ? 0L : Math.floorMod(foundNum, rows));
+		Long last = (rows == 0L ? 0L : Math.floorDiv(foundNum, rows) - (floorMod.equals(0L) ? 1L : 0L) * rows);
 		endNum = endNum < foundNum ? endNum : foundNum;
 		startNum = foundNum == 0L ? 0L : startNum;
 		Long paginationStart = start - 10L * rows;
@@ -267,6 +271,9 @@ public class IotNodeGenPage extends IotNodeGenPageGen<BaseModelPage> {
 			json.put("displayName", Optional.ofNullable(IotNode.displayNameIotNode(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
 			json.put("classSimpleName", Optional.ofNullable(IotNode.classSimpleNameIotNode(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
 			json.put("val", searchListIotNode_.getRequest().getFilterQueries().stream().filter(fq -> fq.startsWith(IotNode.varIndexedIotNode(var) + ":")).findFirst().map(s -> StringUtils.substringAfter(s, ":")).orElse(null));
+			Optional.ofNullable(stats).map(s -> s.get(varIndexed)).ifPresent(stat -> {
+				json.put("stats", JsonObject.mapFrom(stat));
+			});
 			Optional.ofNullable(facetFields.get(varIndexed)).ifPresent(facetField -> {
 				JsonObject facetJson = new JsonObject();
 				JsonObject counts = new JsonObject();
@@ -303,7 +310,7 @@ public class IotNodeGenPage extends IotNodeGenPageGen<BaseModelPage> {
 		JsonObject params = serviceRequest.getParams();
 
 		JsonObject queryParams = Optional.ofNullable(serviceRequest).map(ServiceRequest::getParams).map(or -> or.getJsonObject("query")).orElse(new JsonObject());
-		Long num = searchListIotNode_.getQueryResponse().getResponse().getNumFound().longValue();
+		Long num = searchListIotNode_.getResponse().getResponse().getNumFound().longValue();
 		String q = "*:*";
 		String q1 = "objectText";
 		String q2 = "";

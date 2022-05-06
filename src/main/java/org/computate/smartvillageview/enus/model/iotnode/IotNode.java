@@ -1,5 +1,6 @@
 package org.computate.smartvillageview.enus.model.iotnode;
 
+import org.apache.commons.lang3.math.NumberUtils;
 import org.computate.search.wrap.Wrap;
 import org.computate.smartvillageview.enus.model.base.BaseModel;
 
@@ -57,6 +58,7 @@ public class IotNode extends IotNodeGen<BaseModel> {
 	 * DisplayName: node name
 	 * HtmlRow: 3
 	 * HtmlCell: 1
+	 * Facet: true
 	 */
 	protected void _nodeName(Wrap<String> w) {
 		w.o(json.getString("name"));
@@ -69,6 +71,7 @@ public class IotNode extends IotNodeGen<BaseModel> {
 	 * DisplayName: node type
 	 * HtmlRow: 3
 	 * HtmlCell: 2
+	 * Facet: true
 	 */
 	protected void _nodeType(Wrap<String> w) {
 		w.o(json.getString("nodeType"));
@@ -81,6 +84,7 @@ public class IotNode extends IotNodeGen<BaseModel> {
 	 * DisplayName: node ID
 	 * HtmlRow: 3
 	 * HtmlCell: 3
+	 * Facet: true
 	 */
 	protected void _nodeId(Wrap<String> w) {
 		w.o(json.getString("_id"));
@@ -93,6 +97,7 @@ public class IotNode extends IotNodeGen<BaseModel> {
 	 * DisplayName: location
 	 * HtmlRow: 4
 	 * HtmlCell: 1
+	 * Facet: true
 	 */
 	protected void _location(Wrap<Point> w) {
 		JsonArray latlng = json.getJsonArray("latlng");
@@ -111,5 +116,29 @@ public class IotNode extends IotNodeGen<BaseModel> {
 	@Override
 	public String toString() {
 		return objectText;
+	}
+
+	public void indexJsonObject(JsonObject doc, String prefix, JsonObject json) {
+		json.forEach(entry -> {
+			String key = entry.getKey();
+			Object value = entry.getValue();
+			if(value instanceof JsonArray) {
+				if(value != null)
+					doc.put(String.format("%s_%s_docvalues_strings", prefix, key), value.toString());
+			} else if(value instanceof JsonObject) {
+				indexJsonObject(doc, String.format("%s_%s", prefix, key), (JsonObject)value);
+			} else if(value != null) {
+				if(NumberUtils.isCreatable(value.toString()))
+					doc.put(String.format("%s_%s_docvalues_double", prefix, key), value.toString());
+				else
+					doc.put(String.format("%s_%s_docvalues_string", prefix, key), value.toString());
+			}
+		});
+	}
+
+	@Override
+	public void indexIotNode(JsonObject doc) {
+		super.indexIotNode(doc);
+		indexJsonObject(doc, "json", json);
 	}
 }

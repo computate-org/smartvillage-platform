@@ -47,54 +47,6 @@ import io.vertx.core.json.JsonArray;
  * <br>
  **/
 public abstract class MainVerticleGen<DEV> extends AbstractVerticle {
-
-/*
-CREATE TABLE SiteUser(
-	pk bigserial primary key
-	, inheritPk text
-	, created timestamp with time zone
-	, archived boolean
-	, deleted boolean
-	, sessionId text
-	, userKey bigint
-	, userId text
-	, userName text
-	, userEmail text
-	, userFirstName text
-	, userLastName text
-	, userFullName text
-	, seeArchived boolean
-	, seeDeleted boolean
-	);
-CREATE TABLE IotNode(
-	pk bigserial primary key
-	, inheritPk text
-	, created timestamp with time zone
-	, archived boolean
-	, deleted boolean
-	, sessionId text
-	, userKey bigint
-	, json jsonb
-	, nodeName text
-	, nodeType text
-	, nodeId text
-	, location point
-	);
-CREATE TABLE BaseModel(
-	pk bigserial primary key
-	, inheritPk text
-	, created timestamp with time zone
-	, archived boolean
-	, deleted boolean
-	, sessionId text
-	, userKey bigint
-	);
-
-DROP TABLE SiteUser CASCADE;
-DROP TABLE IotNode CASCADE;
-DROP TABLE BaseModel CASCADE;
-*/
-
 	protected static final Logger LOG = LoggerFactory.getLogger(MainVerticle.class);
 	public static final String configureDataConnectionError1 = "Could not open the database client connection. ";
 	public static final String configureDataConnectionError = configureDataConnectionError1;

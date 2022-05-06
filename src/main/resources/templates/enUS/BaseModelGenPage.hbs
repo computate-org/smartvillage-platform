@@ -36,33 +36,61 @@
 {{#*inline "htmBodySearchBaseModelPage"}}		<!-- #*inline "htmBodySearchBaseModelPage" -->
 	<div>
 {{#each varsQ}}
-		<div class="w3-padding ">
-			<label for="fqBaseModel_{{ @key }}">{{ displayName }}<sup class="w3-tiny "> ({{ classSimpleName }})</sup></label>
-			<input id="fqBaseModel_{{ @key }}" placeholder="{{ displayName }}" class="w3-input " {{#eq ../var 'objectSuggest' }}onkeyup{{else}}onchange{{/eq}}="qChange(this); " data-var="{{ var }}" autocomplete="off="/>
-			<div class="pageSearchVal w3-tiny "></div>
+		<div class="w3-cell-row ">
+			<div class="w3-cell w3-cell-top ">
+				<label for="qBaseModel_{{ @key }}">{{ displayName }}<sup class="w3-tiny "> ({{ classSimpleName }})</sup></label>
+			</div>
+		</div>
+		<div class="w3-cell-row ">
+			<div class="w3-cell w3-cell-top ">
+				<input id="qBaseModel_{{ @key }}" placeholder="{{ displayName }}" class="" {{#eq ../var 'objectSuggest' }}onkeyup{{else}}onchange{{/eq}}="qChange(this); " data-var="{{ var }}" autocomplete="off="/>
+				<div class="pageSearchVal w3-tiny "></div>
+			</div>
 		</div>
 {{/each}}
+		<div class="w3-cell-row ">
+			<div class="w3-cell w3-cell-top ">
+				<label for="qBaseModel_Start">start<sup class="w3-tiny "> (Long)</sup></label>
+			</div>
+		</div>
+		<div class="w3-cell-row ">
+			<div class="w3-cell w3-cell-top ">
+				<input id="qBaseModel_start" placeholder="{{ displayName }}" class="" onchange="paramChange(this); " data-var="start" autocomplete="off="/>
+				<div class="pageSearchVal w3-tiny "></div>
+			</div>
+		</div>
+		<div class="w3-cell-row ">
+			<div class="w3-cell w3-cell-top ">
+				<label for="qBaseModel_Rows">rows<sup class="w3-tiny "> (Long)</sup></label>
+			</div>
+		</div>
+		<div class="w3-cell-row ">
+			<div class="w3-cell w3-cell-top ">
+				<input id="qBaseModel_rows" placeholder="{{ displayName }}" class="" onchange="paramChange(this); " data-var="rows" autocomplete="off="/>
+				<div class="pageSearchVal w3-tiny "></div>
+			</div>
+		</div>
 	</div>
 {{/inline}}
 {{#*inline "htmBodyFiltersBaseModelPage"}}		<!-- #*inline "htmBodyFiltersBaseModelPage" -->
 	<div>
 {{#each varsFq }}
-		<div class="w3-padding ">
+		<div class="">
 			<label for="fqBaseModel_{{ @key }}">{{ displayName }}<sup class="w3-tiny "> ({{ classSimpleName }})</sup></label>
 			<div class="w3-cell-row ">
 				<div class="w3-cell w3-cell-top ">
-					<button id="buttonFacetBaseModel_{{ @key }}" class="w3-button " onclick="facetFieldChange(this); " title="see values " data-var="{{ var }}" data-clear="{{#if facetField }}true{{else}}false{{/if}}"><i class="fas fa-list "></i></button>
+					<button id="buttonFacetBaseModel_{{ @key }}" class="" onclick="facetFieldChange(this); " title="see values " data-var="{{ var }}" data-clear="{{#if facetField }}true{{else}}false{{/if}}"><i class="fas fa-list "></i></button>
 				</div>
 				<div class="w3-cell w3-cell-top ">
-					<input id="fqBaseModel_{{ @key }}" placeholder="{{ displayName }}" class="w3-input " onchange="fqChange(this); " data-var="{{ var }}" autocomplete="off=" value="{{ val }}"/>
+					<input id="fqBaseModel_{{ @key }}" placeholder="{{ displayName }}" class="" onchange="fqChange(this); " data-var="{{ var }}" autocomplete="off=" value="{{ val }}"/>
 				</div>
 			</div>
 		</div>
-		<div class="w3-padding w3-tiny ">
+		<div class="w3-tiny ">
 			<div class="pageSearchVal " id="pageSearchVal-fqBaseModel_{{ @key }}">{{#if val }}fq={{ var }}:{{encodeURIComponent val }}{{/if}}</div>
 			<div class="pageSearchVal " id="pageSearchVal-buttonFacetBaseModel_{{ @key }}">{{#if facetField.var }}facet.field={{ facetField.var }}{{/if}}</div>
 		</div>
-		<ol class="pageFacetField " id="pageFacetFieldBaseModel_{{ @key }}">
+		<ol class="pageFacetField w3-small " id="pageFacetFieldBaseModel_{{ @key }}">
 {{#each facetField.counts }}
 			<li class="cursor-pointer " data-class="BaseModel" data-var="{{ ../var }}" data-val="{{ @key }}" onclick="fqReplace(this); ">{{ @key }}: {{ this }}</li>
 {{/each}}
@@ -132,15 +160,15 @@
 {{/each}}
 	</table>
 {{#*inline "htmBodyPivotBaseModelPage"}}		<!-- #*inline "htmBodyPivotBaseModelPage" -->
+		<div style="display: none; " class="w3-padding w3-tiny " id="pageSearchVal-pivotBaseModelHidden">
+{{#each defaultPivotVars }}
+			<div class="pageSearchVal-pivotBaseModelHidden " id="pageSearchVal-pivotBaseModelHidden_{{ this }}">{{ this }}</div>
+{{/each}}
+		</div>
 		<div class="w3-padding w3-tiny " id="pageSearchVal-pivotBaseModel">
 {{#if defaultPivotVars }}
-			<div class="pageSearchVal " id="pageSearchVal-pivotBaseModel">facet.pivot={{#each defaultPivotVars }}{{#if @index }},{{/if}}{{ this }}{{/each}}</div>
+			<div class="pageSearchVal pageSearchVal-pivotBaseModel " id="pageSearchVal-pivotBaseModel_1">facet.pivot={{#each defaultPivotVars }}{{#if @index }},{{/if}}{{ this }}{{/each}}</div>
 {{/if}}
-		</div>
-		<div style="display: none; " class="w3-padding w3-tiny " id="pageSearchVal-hiddenBaseModel">
-{{#each defaultPivotVars }}
-			<div class="pageSearchVal pageSearchVal-hiddenBaseModel " id="pageSearchVal-hiddenBaseModel_{{ this }}">{{ this }}</div>
-{{/each}}
 		</div>
 	<table class="w3-table ">
 {{#each varsFq }}
@@ -287,10 +315,10 @@
 {{#*inline "htmBodySidebar"}}
 	<div class="w3-dropdown-hover w3-bar-block min-width-300px ">
 		<div class="min-width-300px ">
-			<span title="Search" class="w3-button w3-xlarge w3- " onclick="$('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').toggle(); "><i class="fad fa-magnifying-glass "></i></span>
-			<span title="Filters" class="w3-button w3-xlarge w3- " onclick="$('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleFilters').toggle(); "><i class="fad fa-filters "></i></span>
-			<span title="Range" class="w3-button w3-xlarge w3- " onclick="$('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleRange').toggle(); "><i class="fad fa-calendar-range "></i></span>
-			<span title="Pivot" class="w3-button w3-xlarge w3- " onclick="$('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').toggle(); "><i class="fad fa-table-pivot "></i></span>
+			<span title="Search" class="siteSidebarToggle w3-xlarge w3- " onclick="$('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').toggle(); "><i class="fad fa-magnifying-glass "></i></span>
+			<span title="Filters" class="siteSidebarToggle w3-xlarge w3- " onclick="$('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleFilters').toggle(); "><i class="fad fa-filters "></i></span>
+			<span title="Range" class="siteSidebarToggle w3-xlarge w3- " onclick="$('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleRange').toggle(); "><i class="fad fa-calendar-range "></i></span>
+			<span title="Pivot" class="siteSidebarToggle w3-xlarge w3- " onclick="$('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').toggle(); "><i class="fad fa-table-pivot "></i></span>
 		</div>
 		<div class="w3-dropdown-content min-width-300px w3-white w3-border ">
 			<div  class="siteSidebarToggle siteSidebarToggleSearch" style="display: none; ">

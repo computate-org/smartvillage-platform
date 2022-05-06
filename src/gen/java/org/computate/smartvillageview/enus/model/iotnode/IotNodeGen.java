@@ -816,7 +816,6 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 		return IotNode.varsFqIotNode(new ArrayList<String>());
 	}
 	public static List<String> varsFqIotNode(List<String> vars) {
-		vars.add(VAR_json);
 		vars.add(VAR_nodeName);
 		vars.add(VAR_nodeType);
 		vars.add(VAR_nodeId);
@@ -829,7 +828,6 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 		return IotNode.varsRangeIotNode(new ArrayList<String>());
 	}
 	public static List<String> varsRangeIotNode(List<String> vars) {
-		vars.add(VAR_json);
 		vars.add(VAR_location);
 		BaseModel.varsRangeBaseModel(vars);
 		return vars;
