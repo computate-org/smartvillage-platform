@@ -1,0 +1,40 @@
+
+CREATE TABLE IF NOT EXISTS SiteUser();
+ALTER TABLE SiteUser ADD COLUMN IF NOT EXISTS userId text;
+ALTER TABLE SiteUser ADD COLUMN IF NOT EXISTS userName text;
+ALTER TABLE SiteUser ADD COLUMN IF NOT EXISTS userEmail text;
+ALTER TABLE SiteUser ADD COLUMN IF NOT EXISTS userFirstName text;
+ALTER TABLE SiteUser ADD COLUMN IF NOT EXISTS userLastName text;
+ALTER TABLE SiteUser ADD COLUMN IF NOT EXISTS userFullName text;
+ALTER TABLE SiteUser ADD COLUMN IF NOT EXISTS seeArchived boolean;
+ALTER TABLE SiteUser ADD COLUMN IF NOT EXISTS seeDeleted boolean;
+ALTER TABLE SiteUser ADD COLUMN IF NOT EXISTS pk bigserial primary key;
+ALTER TABLE SiteUser ADD COLUMN IF NOT EXISTS inheritPk text;
+ALTER TABLE SiteUser ADD COLUMN IF NOT EXISTS created timestamp with time zone;
+ALTER TABLE SiteUser ADD COLUMN IF NOT EXISTS archived boolean;
+ALTER TABLE SiteUser ADD COLUMN IF NOT EXISTS deleted boolean;
+ALTER TABLE SiteUser ADD COLUMN IF NOT EXISTS sessionId text;
+ALTER TABLE SiteUser ADD COLUMN IF NOT EXISTS userKey bigint;
+
+CREATE TABLE IF NOT EXISTS IotNode();
+ALTER TABLE IotNode ADD COLUMN IF NOT EXISTS json jsonb;
+ALTER TABLE IotNode ADD COLUMN IF NOT EXISTS nodeName text;
+ALTER TABLE IotNode ADD COLUMN IF NOT EXISTS nodeType text;
+ALTER TABLE IotNode ADD COLUMN IF NOT EXISTS nodeId text;
+ALTER TABLE IotNode ADD COLUMN IF NOT EXISTS location point;
+ALTER TABLE IotNode ADD COLUMN IF NOT EXISTS pk bigserial primary key;
+ALTER TABLE IotNode ADD COLUMN IF NOT EXISTS inheritPk text;
+ALTER TABLE IotNode ADD COLUMN IF NOT EXISTS created timestamp with time zone;
+ALTER TABLE IotNode ADD COLUMN IF NOT EXISTS archived boolean;
+ALTER TABLE IotNode ADD COLUMN IF NOT EXISTS deleted boolean;
+ALTER TABLE IotNode ADD COLUMN IF NOT EXISTS sessionId text;
+ALTER TABLE IotNode ADD COLUMN IF NOT EXISTS userKey bigint;
+
+CREATE TABLE IF NOT EXISTS BaseModel();
+ALTER TABLE BaseModel ADD COLUMN IF NOT EXISTS pk bigserial primary key;
+ALTER TABLE BaseModel ADD COLUMN IF NOT EXISTS inheritPk text;
+ALTER TABLE BaseModel ADD COLUMN IF NOT EXISTS created timestamp with time zone;
+ALTER TABLE BaseModel ADD COLUMN IF NOT EXISTS archived boolean;
+ALTER TABLE BaseModel ADD COLUMN IF NOT EXISTS deleted boolean;
+ALTER TABLE BaseModel ADD COLUMN IF NOT EXISTS sessionId text;
+ALTER TABLE BaseModel ADD COLUMN IF NOT EXISTS userKey bigint;

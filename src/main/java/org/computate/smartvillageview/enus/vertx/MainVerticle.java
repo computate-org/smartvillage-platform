@@ -8,26 +8,21 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
 import org.apache.camel.CamelContext;
-import org.apache.camel.Exchange;
-import org.apache.camel.LoggingLevel;
-import org.apache.camel.builder.ExpressionBuilder;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.vertx.VertxComponent;
 import org.apache.camel.impl.DefaultCamelContext;
-import org.apache.camel.model.dataformat.JsonLibrary;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.computate.smartvillageview.enus.config.ConfigKeys;
+import org.computate.smartvillageview.enus.model.iotnode.IotNodeEnUSGenApiService;
+import org.computate.smartvillageview.enus.model.user.SiteUserEnUSGenApiService;
+import org.computate.smartvillageview.enus.page.HomePage;
+import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.vertx.handlebars.AuthHelpers;
 import org.computate.vertx.handlebars.DateHelpers;
 import org.computate.vertx.handlebars.SiteHelpers;
 import org.computate.vertx.openapi.OpenApi3Generator;
 import org.computate.vertx.verticle.EmailVerticle;
-import org.computate.smartvillageview.enus.config.ConfigKeys;
-import org.computate.smartvillageview.enus.page.PageLayout;
-import org.computate.smartvillageview.enus.page.HomePage;
-import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
-import org.computate.smartvillageview.enus.model.user.SiteUserEnUSGenApiService;
-import org.computate.smartvillageview.enus.model.iotnode.IotNodeEnUSGenApiService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,7 +40,6 @@ import io.vertx.core.Promise;
 import io.vertx.core.Vertx;
 import io.vertx.core.VertxOptions;
 import io.vertx.core.WorkerExecutor;
-import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.eventbus.EventBusOptions;
 import io.vertx.core.http.Cookie;
 import io.vertx.core.http.HttpHeaders;
@@ -130,11 +124,33 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 		String configPath = System.getenv(ConfigKeys.CONFIG_PATH);
 		configureConfig(vertx).onSuccess(config -> {
 			try {
+				Future<Void> originalFuture = Future.future(a -> a.complete());
+				Future<Void> future = originalFuture;
+				WebClient webClient = WebClient.create(vertx);
 				Boolean runOpenApi3Generator = Optional.ofNullable(config.getBoolean(ConfigKeys.RUN_OPENAPI3_GENERATOR)).orElse(false);
-				if(runOpenApi3Generator)
-					runOpenApi3Generator(args, vertx, config);
-				else
-					run(config);
+				Boolean runSqlGenerator = Optional.ofNullable(config.getBoolean(ConfigKeys.RUN_SQL_GENERATOR)).orElse(false);
+				Boolean runArticleGenerator = Optional.ofNullable(config.getBoolean(ConfigKeys.RUN_ARTICLE_GENERATOR)).orElse(false);
+
+				if(runOpenApi3Generator || runSqlGenerator || runArticleGenerator) {
+					SiteRequestEnUS siteRequest = new SiteRequestEnUS();
+					siteRequest.setConfig(config);
+					siteRequest.setWebClient(webClient);
+					siteRequest.initDeepSiteRequestEnUS();
+					OpenApi3Generator api = new OpenApi3Generator();
+					api.setWebClient(webClient);
+					api.setConfig(config);
+					api.initDeepOpenApi3Generator(siteRequest);
+					if(runOpenApi3Generator)
+						future = future.compose(a -> api.writeOpenApi());
+					if(runSqlGenerator)
+						future = future.compose(a -> api.writeSql());
+					if(runArticleGenerator)
+						future = future.compose(a -> api.writeArticle());
+					future.compose(a -> vertx.close());
+				} else {
+					future = future.compose(a -> run(config));
+					future.compose(a -> vertx.close());
+				}
 			} catch(Exception ex) {
 				LOG.error(String.format("Error loading config: %s", configPath), ex);
 				vertx.close();
@@ -163,7 +179,9 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 			vertx.close();
 		});
 	}
-	public static void  run(JsonObject config) {
+
+	public static Future<Void> run(JsonObject config) {
+		Promise<Void> promise = Promise.promise();
 		Boolean enableZookeeperCluster = Optional.ofNullable(config.getBoolean(ConfigKeys.ENABLE_ZOOKEEPER_CLUSTER)).orElse(false);
 		VertxOptions vertxOptions = new VertxOptions();
 		EventBusOptions eventBusOptions = new EventBusOptions();
@@ -264,14 +282,17 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 		if(enableZookeeperCluster) {
 			Vertx.clusteredVertx(vertxOptions).onSuccess(vertx -> {
 				runner.accept(vertx);
+				promise.complete();
 			}).onFailure(ex -> {
 				LOG.error("Creating clustered Vertx failed. ", ex);
-				ExceptionUtils.rethrow(ex);
+				promise.fail(ex);
 			});
 		} else {
 			Vertx vertx = Vertx.vertx(vertxOptions);
 			runner.accept(vertx);
+			promise.complete();
 		}
+		return promise.future();
 	}
 
 	/**

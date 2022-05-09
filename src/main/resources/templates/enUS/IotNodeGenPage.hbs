@@ -33,156 +33,180 @@
 {{/inline}}
 {{#*inline "htmUrlIotNode"}}{{pageUri}}?q={{query.q}}&amp;rows={{#if rows}}{{rows}}{{else}}{{pagination.rows}}{{/if}}&amp;rows={{#if start}}{{start}}{{else}}{{pagination.start}}{{/if}}{{#each query.fq}}{{#eq fq this}}{{else}}&fq={{fq}}:{{val}}{{/eq}}{{/each}}{{#each query.sort}}{{#eq sort this}}{{else}}&sort={{var}} {{order}}{{/eq}}{{/each}}{{/inline}}
 {{#*inline "htmHeadIotNodePage"}}{{> "htmTitleIotNodePage"}}{{> "htmMetaIotNodePage"}}{{> "htmStyleIotNodePage"}}{{> "htmScriptsIotNodePage"}}{{> "htmScriptIotNodePage"}}{{/inline}}
-{{#*inline "htmBodySearchIotNodePage"}}		<!-- #*inline "htmBodySearchIotNodePage" -->
-	<div>
+{{#*inline "htmBodySearchIotNodePage"}}								<!-- #*inline "htmBodySearchIotNodePage" -->
+								<div>
 {{#each varsQ}}
-		<div class="w3-cell-row ">
-			<div class="w3-cell w3-cell-top ">
-				<label for="qIotNode_{{ @key }}">{{ displayName }}<sup class="w3-tiny "> ({{ classSimpleName }})</sup></label>
-			</div>
-		</div>
-		<div class="w3-cell-row ">
-			<div class="w3-cell w3-cell-top ">
-				<input id="qIotNode_{{ @key }}" placeholder="{{ displayName }}" class="" {{#eq ../var 'objectSuggest' }}onkeyup{{else}}onchange{{/eq}}="qChange(this); " data-var="{{ var }}" autocomplete="off="/>
-				<div class="pageSearchVal w3-tiny "></div>
-			</div>
-		</div>
+									<div class="w3-cell-row ">
+										<div class="w3-cell w3-cell-top ">
+											<label for="qIotNode_{{ @key }}">{{ displayName }}<sup class="w3-tiny "> ({{ classSimpleName }})</sup></label>
+										</div>
+									</div>
+									<div class="w3-cell-row ">
+										<div class="w3-cell w3-cell-top ">
+											<input id="qIotNode_{{ @key }}" placeholder="{{ displayName }}" class="" {{#eq ../var 'objectSuggest' }}onkeyup{{else}}onchange{{/eq}}="qChange(this); " data-var="{{ var }}" autocomplete="off="/>
+											<div class="pageSearchVal w3-tiny "></div>
+										</div>
+									</div>
 {{/each}}
-		<div class="w3-cell-row ">
-			<div class="w3-cell w3-cell-top ">
-				<label for="qIotNode_Start">start<sup class="w3-tiny "> (Long)</sup></label>
-			</div>
-		</div>
-		<div class="w3-cell-row ">
-			<div class="w3-cell w3-cell-top ">
-				<input id="qIotNode_start" placeholder="{{ displayName }}" class="" onchange="paramChange(this); " data-var="start" autocomplete="off="/>
-				<div class="pageSearchVal w3-tiny "></div>
-			</div>
-		</div>
-		<div class="w3-cell-row ">
-			<div class="w3-cell w3-cell-top ">
-				<label for="qIotNode_Rows">rows<sup class="w3-tiny "> (Long)</sup></label>
-			</div>
-		</div>
-		<div class="w3-cell-row ">
-			<div class="w3-cell w3-cell-top ">
-				<input id="qIotNode_rows" placeholder="{{ displayName }}" class="" onchange="paramChange(this); " data-var="rows" autocomplete="off="/>
-				<div class="pageSearchVal w3-tiny "></div>
-			</div>
-		</div>
-	</div>
+									<div class="w3-cell-row ">
+										<div class="w3-cell w3-cell-top ">
+											<label for="qIotNode_Start">start<sup class="w3-tiny "> (Long)</sup></label>
+										</div>
+									</div>
+									<div class="w3-cell-row ">
+										<div class="w3-cell w3-cell-top ">
+											<input id="qIotNode_start" placeholder="{{ displayName }}" class="" onchange="paramChange(this); " data-var="start" autocomplete="off="/>
+											<div class="pageSearchVal w3-tiny "></div>
+										</div>
+									</div>
+									<div class="w3-cell-row ">
+										<div class="w3-cell w3-cell-top ">
+											<label for="qIotNode_Rows">rows<sup class="w3-tiny "> (Long)</sup></label>
+										</div>
+									</div>
+									<div class="w3-cell-row ">
+										<div class="w3-cell w3-cell-top ">
+											<input id="qIotNode_rows" placeholder="{{ displayName }}" class="" onchange="paramChange(this); " data-var="rows" autocomplete="off="/>
+											<div class="pageSearchVal w3-tiny "></div>
+										</div>
+									</div>
+								</div>
 {{/inline}}
-{{#*inline "htmBodyFiltersIotNodePage"}}		<!-- #*inline "htmBodyFiltersIotNodePage" -->
-	<div>
+{{#*inline "htmBodyFiltersIotNodePage"}}								<!-- #*inline "htmBodyFiltersIotNodePage" -->
+								<div>
 {{#each varsFq }}
-		<div class="">
-			<label for="fqIotNode_{{ @key }}">{{ displayName }}<sup class="w3-tiny "> ({{ classSimpleName }})</sup></label>
-			<div class="w3-cell-row ">
-				<div class="w3-cell w3-cell-top ">
-					<button id="buttonFacetIotNode_{{ @key }}" class="" onclick="facetFieldChange(this); " title="see values " data-var="{{ var }}" data-clear="{{#if facetField }}true{{else}}false{{/if}}"><i class="fas fa-list "></i></button>
-				</div>
-				<div class="w3-cell w3-cell-top ">
-					<input id="fqIotNode_{{ @key }}" placeholder="{{ displayName }}" class="" onchange="fqChange(this); " data-var="{{ var }}" autocomplete="off=" value="{{ val }}"/>
-				</div>
-			</div>
-		</div>
-		<div class="w3-tiny ">
-			<div class="pageSearchVal " id="pageSearchVal-fqIotNode_{{ @key }}">{{#if val }}fq={{ var }}:{{encodeURIComponent val }}{{/if}}</div>
-			<div class="pageSearchVal " id="pageSearchVal-buttonFacetIotNode_{{ @key }}">{{#if facetField.var }}facet.field={{ facetField.var }}{{/if}}</div>
-		</div>
-		<ol class="pageFacetField w3-small " id="pageFacetFieldIotNode_{{ @key }}">
+									<div class="">
+										<label for="fqIotNode_{{ @key }}">{{ displayName }}<sup class="w3-tiny "> ({{ classSimpleName }})</sup></label>
+										<div class="w3-cell-row ">
+											<div class="w3-cell w3-cell-top ">
+												<button id="buttonFacetIotNode_{{ @key }}" class="" onclick="facetFieldChange(this); " title="see values " data-var="{{ var }}" data-clear="{{#if facetField }}true{{else}}false{{/if}}"><i class="fas fa-list "></i></button>
+											</div>
+											<div class="w3-cell w3-cell-top ">
+												<input id="fqIotNode_{{ @key }}" placeholder="{{ displayName }}" class="" onchange="fqChange(this); " data-var="{{ var }}" autocomplete="off=" value="{{ val }}"/>
+											</div>
+										</div>
+									</div>
+									<div class="w3-tiny ">
+										<div class="pageSearchVal " id="pageSearchVal-fqIotNode_{{ @key }}">{{#if val }}fq={{ var }}:{{encodeURIComponent val }}{{/if}}</div>
+										<div class="pageSearchVal " id="pageSearchVal-buttonFacetIotNode_{{ @key }}">{{#if facetField.var }}facet.field={{ facetField.var }}{{/if}}</div>
+										<ol class="pageFacetField w3-small " id="pageFacetFieldIotNode_{{ @key }}">
 {{#each facetField.counts }}
-			<li class="cursor-pointer " data-class="IotNode" data-var="{{ ../var }}" data-val="{{ @key }}" onclick="fqReplace(this); ">{{ @key }}: {{ this }}</li>
+											<li class="cursor-pointer " data-class="IotNode" data-var="{{ ../var }}" data-val="{{ @key }}" onclick="fqReplace(this); ">{{ @key }}: {{ this }}</li>
 {{/each}}
-		</ol>
+										</ol>
+									</div>
 {{/each}}
-	</div>
+								</div>
 {{/inline}}
-{{#*inline "htmBodyRangeIotNodePage"}}		<!-- #*inline "htmBodyRangeIotNodePage" -->
-	<table class="w3-padding ">
-		<tr>			<td class="w3-padding w3-tiny " colspan="2">
-				<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeGap-IotNode">{{#if defaultRangeGap }}facet.range.gap={{encodeURIComponent defaultRangeGap }}{{/if}}</div>
-				<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeStart-IotNode">{{#if defaultRangeStart }}facet.range.start={{encodeURIComponent defaultRangeStart }}{{/if}}</div>
-				<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeEnd-IotNode">{{#if defaultRangeEnd }}facet.range.end={{encodeURIComponent defaultRangeEnd }}{{/if}}</div>
-				<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeVar-IotNode">{{#if defaultRangeVar }}facet.range={!tag=r1}{{encodeURIComponent defaultRangeVar }}{{/if}}</div>
-			</td>
-		</tr>
-	</table>
-	<table class="w3-padding ">
-		<tr class="">
-			<td class="">
-			<span>Range Gap</span>
-			</td>
-			<td class="">
-				<select
- name="facet.range.gap" id="pageFacetRangeGap-IotNode" onchange="facetRangeChange(this, 'IotNode'); ">
-					<option value="+1YEAR"{{#eq defaultRangeGap '+1YEAR'}} selected="selected"{{else}}{{/eq}}>Year</option>
-					<option value="+1MONTH"{{#eq defaultRangeGap '+1MONTH'}} selected="selected"{{else}}{{/eq}}>Month</option>
-					<option value="+1WEEK"{{#eq defaultRangeGap '+1WEEK'}} selected="selected"{{else}}{{/eq}}>Week</option>
-					<option value="+1DAY"{{#eq defaultRangeGap '+1DAY'}} selected="selected"{{else}}{{#if defaultRangeGap}}{{else}} selected="selected"{{/if}}{{/eq}}>Day</option>
-					<option value="+1HOUR"{{#eq defaultRangeGap '+1HOUR'}} selected="selected"{{else}}{{/eq}}>Hour</option>
-					<option value="+1MINUTE"{{#eq defaultRangeGap '+1MINUTE'}} selected="selected"{{else}}{{/eq}}>Minute</option>
-					<option value="+1SECOND"{{#eq defaultRangeGap '+1SECOND'}} selected="selected"{{else}}{{/eq}}>Second</option>
-				</select>
-			</td>
-		</tr>
-		<tr class="">
-			<td class="" colspan="2">
-				<span>Range Start</span>
-			</td>
-		</tr>
-		<tr class="">
-			<td class="" colspan="2">
-			<span><input type="datetime-local" name="facetRangeStart" id="pageFacetRangeStart-IotNode" value="{{formatZonedDateTime defaultRangeStart "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeChange(this, 'IotNode'); "/></span>
-			</td>
-		</tr>
-		<tr class="">
-			<td class="" colspan="2">
-				<span>Range End</span>
-			</td>
-		</tr>
-		<tr class="">
-			<td class="" colspan="2">
-			<span><input type="datetime-local" name="facetRangeEnd" id="pageFacetRangeEnd-IotNode" value="{{formatZonedDateTime defaultRangeEnd "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeChange(this, 'IotNode'); "/></span>
-			</td>
-		</tr>
-	</table>
-	<table class="w3-padding ">
+{{#*inline "htmBodyRangeIotNodePage"}}								<!-- #*inline "htmBodyRangeIotNodePage" -->
+								<table class="w3-padding ">
+									<tr>
+										<td class="w3-padding w3-tiny " colspan="2">
+											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeGap-IotNode">{{#if defaultRangeGap }}facet.range.gap={{encodeURIComponent defaultRangeGap }}{{/if}}</div>
+											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeStart-IotNode">{{#if defaultRangeStart }}facet.range.start={{encodeURIComponent defaultRangeStart }}{{/if}}</div>
+											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeEnd-IotNode">{{#if defaultRangeEnd }}facet.range.end={{encodeURIComponent defaultRangeEnd }}{{/if}}</div>
+											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeVar-IotNode">{{#if defaultRangeVar }}facet.range={!tag=r1}{{encodeURIComponent defaultRangeVar }}{{/if}}</div>
+										</td>
+									</tr>
+								</table>
+								<table class="w3-padding ">
+									<tr class="">
+										<td class="">
+											<span>Range Gap</span>
+										</td>
+										<td class="">
+											<select name="facet.range.gap" id="pageFacetRangeGap-IotNode" onchange="facetRangeChange(this, 'IotNode'); ">
+												<option value="+1YEAR"{{#eq defaultRangeGap '+1YEAR'}} selected="selected"{{else}}{{/eq}}>Year</option>
+												<option value="+1MONTH"{{#eq defaultRangeGap '+1MONTH'}} selected="selected"{{else}}{{/eq}}>Month</option>
+												<option value="+1WEEK"{{#eq defaultRangeGap '+1WEEK'}} selected="selected"{{else}}{{/eq}}>Week</option>
+												<option value="+1DAY"{{#eq defaultRangeGap '+1DAY'}} selected="selected"{{else}}{{#if defaultRangeGap}}{{else}} selected="selected"{{/if}}{{/eq}}>Day</option>
+												<option value="+1HOUR"{{#eq defaultRangeGap '+1HOUR'}} selected="selected"{{else}}{{/eq}}>Hour</option>
+												<option value="+1MINUTE"{{#eq defaultRangeGap '+1MINUTE'}} selected="selected"{{else}}{{/eq}}>Minute</option>
+												<option value="+1SECOND"{{#eq defaultRangeGap '+1SECOND'}} selected="selected"{{else}}{{/eq}}>Second</option>
+											</select>
+										</td>
+									</tr>
+									<tr class="">
+										<td class="" colspan="2">
+											<span>Range Start</span>
+										</td>
+									</tr>
+									<tr class="">
+										<td class="" colspan="2">
+											<span><input type="datetime-local" name="facetRangeStart" id="pageFacetRangeStart-IotNode" value="{{formatZonedDateTime defaultRangeStart "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeChange(this, 'IotNode'); "/></span>
+										</td>
+									</tr>
+									<tr class="">
+										<td class="" colspan="2">
+											<span>Range End</span>
+										</td>
+									</tr>
+									<tr class="">
+										<td class="" colspan="2">
+											<span><input type="datetime-local" name="facetRangeEnd" id="pageFacetRangeEnd-IotNode" value="{{formatZonedDateTime defaultRangeEnd "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeChange(this, 'IotNode'); "/></span>
+										</td>
+									</tr>
+								</table>
+								<table class="w3-padding ">
 {{#each varsRange }}
-		<tr class="">
-			<td class="">
-				<span><input type="radio" name="pageFacetRange" class="pageFacetRange " id="pageFacetRangeIotNode_{{ @key }}" value="{{ var }}"{{#eq defaultRangeVar var }} checked="checked"{{/eq}} onclick="facetRangeChange(this, 'IotNode'); "/></span>
-			</td>
-			<td class="">
-			<label for="pageFacetRangeIotNode_{{ @key }}">{{ displayName }}</label>
-			</td>
-		</tr>
+									<tr class="">
+										<td class="">
+											<span><input type="radio" name="pageFacetRange" class="pageFacetRange " id="pageFacetRangeIotNode_{{ @key }}" value="{{ var }}"{{#eq defaultRangeVar var }} checked="checked"{{/eq}} onclick="facetRangeChange(this, 'IotNode'); "/></span>
+										</td>
+										<td class="">
+											<label for="pageFacetRangeIotNode_{{ @key }}">{{ displayName }}</label>
+										</td>
+									</tr>
 {{/each}}
-	</table>
-{{#*inline "htmBodyPivotIotNodePage"}}		<!-- #*inline "htmBodyPivotIotNodePage" -->
-		<div style="display: none; " class="w3-padding w3-tiny " id="pageSearchVal-pivotIotNodeHidden">
-{{#each defaultPivotVars }}
-			<div class="pageSearchVal-pivotIotNodeHidden " id="pageSearchVal-pivotIotNodeHidden_{{ this }}">{{ this }}</div>
-{{/each}}
-		</div>
-		<div class="w3-padding w3-tiny " id="pageSearchVal-pivotIotNode">
-{{#if defaultPivotVars }}
-			<div class="pageSearchVal pageSearchVal-pivotIotNode " id="pageSearchVal-pivotIotNode_1">facet.pivot={{#each defaultPivotVars }}{{#if @index }},{{/if}}{{ this }}{{/each}}</div>
-{{/if}}
-		</div>
-	<table class="w3-table ">
-{{#each varsFq }}
-		<tr class="">
-			<td class="">
-				<span><input type="checkbox" name="pageFacetPivot" class="pageFacetPivot " id="pageFacetPivotIotNode_{{ @key }}" value="{{ var }}"{{#if pivot }} checked="checked"{{/if}} onclick="facetPivotChange(this, 'IotNode'); "/></span>
-			</td>
-			<td class="w3-cell ">
-			<label for="pageFacetPivotIotNode_{{ @key }}">{{ displayName }}</label>
-			</td>
-		</tr>
-{{/each}}
-	</table>
+								</table>
 {{/inline}}
+{{#*inline "htmBodyPivotIotNodePage"}}								<!-- #*inline "htmBodyPivotIotNodePage" -->
+								<div style="display: none; " class="w3-padding w3-tiny " id="pageSearchVal-PivotIotNodeHidden">
+{{#each defaultPivotVars }}
+									<div class="pageSearchVal-PivotIotNodeHidden " id="pageSearchVal-PivotIotNodeHidden_{{ this }}">{{ this }}</div>
+{{/each}}
+								</div>
+								<div class="w3-padding w3-tiny " id="pageSearchVal-PivotIotNode">
+{{#if defaultPivotVars }}
+									<div class="pageSearchVal pageSearchVal-PivotIotNode " id="pageSearchVal-PivotIotNode_1">facet.pivot={{#each defaultPivotVars }}{{#if @index }},{{/if}}{{ this }}{{/each}}</div>
+{{/if}}
+								</div>
+								<table class="w3-table ">
+{{#each varsFq }}
+									<tr class="">
+										<td class="">
+											<span><input type="checkbox" name="pageFacetPivot" class="pageFacetPivot " id="pageFacetPivotIotNode_{{ @key }}" value="{{ var }}"{{#if pivot }} checked="checked"{{/if}} onclick="facetPivotChange(this, 'IotNode'); "/></span>
+										</td>
+										<td class="w3-cell ">
+											<label for="pageFacetPivotIotNode_{{ @key }}">{{ displayName }}</label>
+										</td>
+									</tr>
+{{/each}}
+								</table>
+{{/inline}}
+{{#*inline "htmBodyFieldListIotNodePage"}}								<!-- #*inline "htmBodyFieldListIotNodePage" -->
+								<div style="display: none; " class="w3-padding w3-tiny " id="pageSearchVal-FieldListIotNodeHidden">
+{{#each defaultFieldListVars }}
+									<div class="pageSearchVal-FieldListIotNodeHidden " id="pageSearchVal-FieldListIotNodeHidden_{{ this }}">{{ this }}</div>
+{{/each}}
+								</div>
+								<div class="w3-padding w3-tiny " id="pageSearchVal-FieldListIotNode">
+{{#if defaultFieldListVars }}
+									<div class="pageSearchVal pageSearchVal-FieldListIotNode " id="pageSearchVal-FieldListIotNode_1">fl={{#each defaultFieldListVars }}{{#if @index }},{{/if}}{{ this }}{{/each}}</div>
+{{/if}}
+								</div>
+								<table class="w3-table ">
+{{#each varsFq }}
+									<tr class="">
+										<td class="">
+											<span><input type="checkbox" name="pageFieldList" class="pageFieldList " id="pageFieldListIotNode_{{ @key }}" value="{{ var }}"{{#if fieldList }} checked="checked"{{/if}} onclick="facetFieldListChange(this, 'IotNode'); "/></span>
+										</td>
+										<td class="w3-cell ">
+											<label for="pageFieldListIotNode_{{ @key }}">{{ displayName }}</label>
+										</td>
+									</tr>
+{{/each}}
+								</table>
 {{/inline}}
 {{#*inline "htmBodyMenuIotNodePage"}}		<!-- #*inline "htmBodyMenuIotNodePage" -->
 {{> "htmBodyMenuBaseModelPage"}}{{/inline}}
@@ -450,49 +474,58 @@
 			</div>
 		</div>
 {{/inline}}
-{{#*inline "htmBodySidebar"}}
-	<div class="w3-dropdown-hover w3-bar-block min-width-300px ">
-		<div class="min-width-300px ">
-			<span title="Search" class="siteSidebarToggle w3-xlarge w3-blue " onclick="$('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').toggle(); "><i class="fad fa-magnifying-glass "></i></span>
-			<span title="Filters" class="siteSidebarToggle w3-xlarge w3-blue " onclick="$('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleFilters').toggle(); "><i class="fad fa-filters "></i></span>
-			<span title="Range" class="siteSidebarToggle w3-xlarge w3-blue " onclick="$('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleRange').toggle(); "><i class="fad fa-calendar-range "></i></span>
-			<span title="Pivot" class="siteSidebarToggle w3-xlarge w3-blue " onclick="$('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').toggle(); "><i class="fad fa-table-pivot "></i></span>
-		</div>
-		<div class="w3-dropdown-content min-width-300px w3-white w3-border ">
-			<div  class="siteSidebarToggle siteSidebarToggleSearch" style="display: none; ">
-				<div class="w3-bar w3-blue ">
-					<span class="w3-bar-item w3-padding ">Search</span>
-				</div>
-				<div class="w3-bar-block ">
+{{#*inline "htmBodySidebarIotNodePage"}}
+				<div class="w3-dropdown-hover w3-bar-block min-width-300px ">
+					<div class="min-width-300px w3-blue ">
+						<span title="Search" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').toggle(); "><i class="fad fa-magnifying-glass hover-box-shadow "></i></span>
+						<span title="Filters" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleFilters').toggle(); "><i class="fad fa-filters hover-box-shadow "></i></span>
+						<span title="Range" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleRange').toggle(); "><i class="fad fa-calendar-range hover-box-shadow "></i></span>
+						<span title="Pivot" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').toggle(); "><i class="fad fa-table-pivot hover-box-shadow "></i></span>
+						<span title="FieldList" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleFieldList').toggle(); "><i class="fad fa-list-ul hover-box-shadow "></i></span>
+					</div>
+					<div class="w3-dropdown-content min-width-300px w3-white w3-border w3-border-blue ">
+						<div class="siteSidebarToggle siteSidebarToggleSearch" style="display: none; ">
+							<div class="w3-bar w3-blue ">
+								<span class="w3-bar-item w3-padding ">Search</span>
+							</div>
+							<div class="w3-bar-block ">
 {{#block "htmBodySearch"}}{{/block}}
-				</div>
-			</div>
-			<div  class="siteSidebarToggle siteSidebarToggleFilters" style="display: none; ">
-				<div class="w3-bar w3-blue ">
-					<span class="w3-bar-item w3-padding ">Filters</span>
-				</div>
-				<div class="w3-bar-block ">
+							</div>
+						</div>
+						<div  class="siteSidebarToggle siteSidebarToggleFilters" style="display: none; ">
+							<div class="w3-bar w3-blue ">
+								<span class="w3-bar-item w3-padding ">Filters</span>
+							</div>
+							<div class="w3-bar-block ">
 {{#block "htmBodyFilters"}}{{/block}}
-				</div>
-			</div>
-			<div  class="siteSidebarToggle siteSidebarToggleRange" style="display: none; ">
-				<div class="w3-bar w3-blue ">
-					<span class="w3-bar-item w3-padding ">Range</span>
-				</div>
-				<div class="w3-bar-block ">
+							</div>
+						</div>
+						<div  class="siteSidebarToggle siteSidebarToggleRange" style="display: none; ">
+							<div class="w3-bar w3-blue ">
+								<span class="w3-bar-item w3-padding ">Range</span>
+							</div>
+							<div class="w3-bar-block ">
 {{#block "htmBodyRange"}}{{/block}}
-				</div>
-			</div>
-			<div  class="siteSidebarToggle siteSidebarTogglePivot" style="display: none; ">
-				<div class="w3-bar w3-blue ">
-					<span class="w3-bar-item w3-padding ">Pivot</span>
-				</div>
-				<div class="w3-bar-block ">
+							</div>
+						</div>
+						<div  class="siteSidebarToggle siteSidebarTogglePivot" style="display: none; ">
+							<div class="w3-bar w3-blue ">
+								<span class="w3-bar-item w3-padding ">Pivot</span>
+							</div>
+							<div class="w3-bar-block ">
 {{#block "htmBodyPivot"}}{{/block}}
+							</div>
+						</div>
+						<div  class="siteSidebarToggle siteSidebarToggleFieldList" style="display: none; ">
+							<div class="w3-bar w3-blue ">
+								<span class="w3-bar-item w3-padding ">Field List</span>
+							</div>
+							<div class="w3-bar-block ">
+{{#block "htmBodyFieldList"}}{{/block}}
+							</div>
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
-	</div>
 {{/inline}}
 {{#*inline "htmBodyStartIotNodePage"}}
 {{> "htmBodyStartBaseModelPage"}}

@@ -60,6 +60,22 @@ public class BaseModelGenPage extends BaseModelGenPageGen<PageLayout> {
 			w.o(JsonObject.mapFrom(searchListBaseModel_.getResponse()).toString());
 	}
 
+	protected void _defaultFieldListVars(List<String> l) {
+		Optional.ofNullable(searchListBaseModel_.getFields()).orElse(Arrays.asList()).forEach(varStored -> {
+			String varStored2 = varStored;
+			if(StringUtils.contains(varStored2, "}"))
+				varStored2 = StringUtils.substringAfterLast(varStored2, "}");
+			String[] parts = varStored2.split(",");
+			for(String part : parts) {
+				if(StringUtils.isNotBlank(part)) {
+					String var = StringUtils.substringBefore(part, "_");
+					if(StringUtils.isNotBlank(var))
+						l.add(var);
+				}
+			}
+		});
+	}
+
 	protected void _defaultPivotVars(List<String> l) {
 		Optional.ofNullable(searchListBaseModel_.getFacetPivots()).orElse(Arrays.asList()).forEach(facetPivot -> {
 			String facetPivot2 = facetPivot;
@@ -225,6 +241,9 @@ public class BaseModelGenPage extends BaseModelGenPageGen<PageLayout> {
 				facetJson.put("counts", counts);
 				json.put("facetField", facetJson);
 			});
+			if(defaultFieldListVars.contains(var)) {
+				json.put("fieldList", true);
+			}
 			if(defaultPivotVars.contains(var)) {
 				json.put("pivot", true);
 			}

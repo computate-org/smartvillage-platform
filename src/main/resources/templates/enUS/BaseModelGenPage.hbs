@@ -159,15 +159,16 @@
 		</tr>
 {{/each}}
 	</table>
+{{/inline}}
 {{#*inline "htmBodyPivotBaseModelPage"}}		<!-- #*inline "htmBodyPivotBaseModelPage" -->
-		<div style="display: none; " class="w3-padding w3-tiny " id="pageSearchVal-pivotBaseModelHidden">
+		<div style="display: none; " class="w3-padding w3-tiny " id="pageSearchVal-PivotBaseModelHidden">
 {{#each defaultPivotVars }}
-			<div class="pageSearchVal-pivotBaseModelHidden " id="pageSearchVal-pivotBaseModelHidden_{{ this }}">{{ this }}</div>
+			<div class="pageSearchVal-PivotBaseModelHidden " id="pageSearchVal-PivotBaseModelHidden_{{ this }}">{{ this }}</div>
 {{/each}}
 		</div>
-		<div class="w3-padding w3-tiny " id="pageSearchVal-pivotBaseModel">
+		<div class="w3-padding w3-tiny " id="pageSearchVal-PivotBaseModel">
 {{#if defaultPivotVars }}
-			<div class="pageSearchVal pageSearchVal-pivotBaseModel " id="pageSearchVal-pivotBaseModel_1">facet.pivot={{#each defaultPivotVars }}{{#if @index }},{{/if}}{{ this }}{{/each}}</div>
+			<div class="pageSearchVal pageSearchVal-PivotBaseModel " id="pageSearchVal-PivotBaseModel_1">facet.pivot={{#each defaultPivotVars }}{{#if @index }},{{/if}}{{ this }}{{/each}}</div>
 {{/if}}
 		</div>
 	<table class="w3-table ">
@@ -183,6 +184,29 @@
 {{/each}}
 	</table>
 {{/inline}}
+{{#*inline "htmBodyFieldListBaseModelPage"}}		<!-- #*inline "htmBodyFieldListBaseModelPage" -->
+		<div style="display: none; " class="w3-padding w3-tiny " id="pageSearchVal-FieldListBaseModelHidden">
+{{#each defaultFieldListVars }}
+			<div class="pageSearchVal-FieldListBaseModelHidden " id="pageSearchVal-FieldListBaseModelHidden_{{ this }}">{{ this }}</div>
+{{/each}}
+		</div>
+		<div class="w3-padding w3-tiny " id="pageSearchVal-FieldListBaseModel">
+{{#if defaultFieldListVars }}
+			<div class="pageSearchVal pageSearchVal-FieldListBaseModel " id="pageSearchVal-FieldListBaseModel_1">fl={{#each defaultFieldListVars }}{{#if @index }},{{/if}}{{ this }}{{/each}}</div>
+{{/if}}
+		</div>
+	<table class="w3-table ">
+{{#each varsFq }}
+		<tr class="">
+			<td class="">
+				<span><input type="checkbox" name="pageFieldList" class="pageFieldList " id="pageFieldListBaseModel_{{ @key }}" value="{{ var }}"{{#if fieldList }} checked="checked"{{/if}} onclick="facetFieldListChange(this, 'BaseModel'); "/></span>
+			</td>
+			<td class="w3-cell ">
+			<label for="pageFieldListBaseModel_{{ @key }}">{{ displayName }}</label>
+			</td>
+		</tr>
+{{/each}}
+	</table>
 {{/inline}}
 {{#*inline "htmBodyMenuBaseModelPage"}}		<!-- #*inline "htmBodyMenuBaseModelPage" -->
 {{> "htmBodyMenuPageLayout"}}{{/inline}}
@@ -312,15 +336,16 @@
 {{#block "htmForm_searchpageBaseModel"}}{{/block}}
 {{/if}}
 {{/inline}}
-{{#*inline "htmBodySidebar"}}
+{{#*inline "htmBodySidebarBaseModelPage"}}
 	<div class="w3-dropdown-hover w3-bar-block min-width-300px ">
-		<div class="min-width-300px ">
-			<span title="Search" class="siteSidebarToggle w3-xlarge w3- " onclick="$('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').toggle(); "><i class="fad fa-magnifying-glass "></i></span>
-			<span title="Filters" class="siteSidebarToggle w3-xlarge w3- " onclick="$('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleFilters').toggle(); "><i class="fad fa-filters "></i></span>
-			<span title="Range" class="siteSidebarToggle w3-xlarge w3- " onclick="$('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleRange').toggle(); "><i class="fad fa-calendar-range "></i></span>
-			<span title="Pivot" class="siteSidebarToggle w3-xlarge w3- " onclick="$('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').toggle(); "><i class="fad fa-table-pivot "></i></span>
+		<div class="min-width-300px w3- ">
+			<span title="Search" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').toggle(); "><i class="fad fa-magnifying-glass hover-box-shadow "></i></span>
+			<span title="Filters" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleFilters').toggle(); "><i class="fad fa-filters hover-box-shadow "></i></span>
+			<span title="Range" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleRange').toggle(); "><i class="fad fa-calendar-range hover-box-shadow "></i></span>
+			<span title="Pivot" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').toggle(); "><i class="fad fa-table-pivot hover-box-shadow "></i></span>
+			<span title="FieldList" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleFieldList').toggle(); "><i class="fad fa-list-ul hover-box-shadow "></i></span>
 		</div>
-		<div class="w3-dropdown-content min-width-300px w3-white w3-border ">
+		<div class="w3-dropdown-content min-width-300px w3-white w3-border w3-border- ">
 			<div  class="siteSidebarToggle siteSidebarToggleSearch" style="display: none; ">
 				<div class="w3-bar w3- ">
 					<span class="w3-bar-item w3-padding ">Search</span>
@@ -351,6 +376,16 @@
 				</div>
 				<div class="w3-bar-block ">
 {{#block "htmBodyPivot"}}{{/block}}
+				</div>
+			</div>
+		</div>
+	</div>
+			<div  class="siteSidebarToggle siteSidebarToggleFieldList" style="display: none; ">
+				<div class="w3-bar w3- ">
+					<span class="w3-bar-item w3-padding ">Field List</span>
+				</div>
+				<div class="w3-bar-block ">
+{{#block "htmBodyFieldList"}}{{/block}}
 				</div>
 			</div>
 		</div>
