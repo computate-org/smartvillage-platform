@@ -33,180 +33,204 @@
 {{/inline}}
 {{#*inline "htmUrlBaseModel"}}{{pageUri}}?q={{query.q}}&amp;rows={{#if rows}}{{rows}}{{else}}{{pagination.rows}}{{/if}}&amp;rows={{#if start}}{{start}}{{else}}{{pagination.start}}{{/if}}{{#each query.fq}}{{#eq fq this}}{{else}}&fq={{fq}}:{{val}}{{/eq}}{{/each}}{{#each query.sort}}{{#eq sort this}}{{else}}&sort={{var}} {{order}}{{/eq}}{{/each}}{{/inline}}
 {{#*inline "htmHeadBaseModelPage"}}{{> "htmTitleBaseModelPage"}}{{> "htmMetaBaseModelPage"}}{{> "htmStyleBaseModelPage"}}{{> "htmScriptsBaseModelPage"}}{{> "htmScriptBaseModelPage"}}{{/inline}}
-{{#*inline "htmBodySearchBaseModelPage"}}		<!-- #*inline "htmBodySearchBaseModelPage" -->
-	<div>
+{{#*inline "htmBodySearchBaseModelPage"}}								<!-- #*inline "htmBodySearchBaseModelPage" -->
+								<div>
 {{#each varsQ}}
-		<div class="w3-cell-row ">
-			<div class="w3-cell w3-cell-top ">
-				<label for="qBaseModel_{{ @key }}">{{ displayName }}<sup class="w3-tiny "> ({{ classSimpleName }})</sup></label>
-			</div>
-		</div>
-		<div class="w3-cell-row ">
-			<div class="w3-cell w3-cell-top ">
-				<input id="qBaseModel_{{ @key }}" placeholder="{{ displayName }}" class="" {{#eq ../var 'objectSuggest' }}onkeyup{{else}}onchange{{/eq}}="qChange(this); " data-var="{{ var }}" autocomplete="off="/>
-				<div class="pageSearchVal w3-tiny "></div>
-			</div>
-		</div>
+									<div class="w3-cell-row ">
+										<div class="w3-cell w3-cell-top ">
+											<label for="qBaseModel_{{ @key }}">{{ displayName }}<sup class="w3-tiny "> ({{ classSimpleName }})</sup></label>
+										</div>
+									</div>
+									<div class="w3-cell-row ">
+										<div class="w3-cell w3-cell-top ">
+											<input id="qBaseModel_{{ @key }}" placeholder="{{ displayName }}" class="" {{#eq ../var 'objectSuggest' }}onkeyup{{else}}onchange{{/eq}}="qChange(this); " data-var="{{ var }}" autocomplete="off="/>
+											<div class="pageSearchVal w3-tiny "></div>
+										</div>
+									</div>
 {{/each}}
-		<div class="w3-cell-row ">
-			<div class="w3-cell w3-cell-top ">
-				<label for="qBaseModel_Start">start<sup class="w3-tiny "> (Long)</sup></label>
-			</div>
-		</div>
-		<div class="w3-cell-row ">
-			<div class="w3-cell w3-cell-top ">
-				<input id="qBaseModel_start" placeholder="{{ displayName }}" class="" onchange="paramChange(this); " data-var="start" autocomplete="off="/>
-				<div class="pageSearchVal w3-tiny "></div>
-			</div>
-		</div>
-		<div class="w3-cell-row ">
-			<div class="w3-cell w3-cell-top ">
-				<label for="qBaseModel_Rows">rows<sup class="w3-tiny "> (Long)</sup></label>
-			</div>
-		</div>
-		<div class="w3-cell-row ">
-			<div class="w3-cell w3-cell-top ">
-				<input id="qBaseModel_rows" placeholder="{{ displayName }}" class="" onchange="paramChange(this); " data-var="rows" autocomplete="off="/>
-				<div class="pageSearchVal w3-tiny "></div>
-			</div>
-		</div>
-	</div>
+									<div class="w3-cell-row ">
+										<div class="w3-cell w3-cell-top ">
+											<label for="qBaseModel_Start">start<sup class="w3-tiny "> (Long)</sup></label>
+										</div>
+									</div>
+									<div class="w3-cell-row ">
+										<div class="w3-cell w3-cell-top ">
+											<input id="qBaseModel_start" placeholder="{{ displayName }}" class="" onchange="paramChange(this); " data-var="start" autocomplete="off="/>
+											<div class="pageSearchVal w3-tiny "></div>
+										</div>
+									</div>
+									<div class="w3-cell-row ">
+										<div class="w3-cell w3-cell-top ">
+											<label for="qBaseModel_Rows">rows<sup class="w3-tiny "> (Long)</sup></label>
+										</div>
+									</div>
+									<div class="w3-cell-row ">
+										<div class="w3-cell w3-cell-top ">
+											<input id="qBaseModel_rows" placeholder="{{ displayName }}" class="" onchange="paramChange(this); " data-var="rows" autocomplete="off="/>
+											<div class="pageSearchVal w3-tiny "></div>
+										</div>
+									</div>
+								</div>
 {{/inline}}
-{{#*inline "htmBodyFiltersBaseModelPage"}}		<!-- #*inline "htmBodyFiltersBaseModelPage" -->
-	<div>
+{{#*inline "htmBodyFiltersBaseModelPage"}}								<!-- #*inline "htmBodyFiltersBaseModelPage" -->
+								<div>
 {{#each varsFq }}
-		<div class="">
-			<label for="fqBaseModel_{{ @key }}">{{ displayName }}<sup class="w3-tiny "> ({{ classSimpleName }})</sup></label>
-			<div class="w3-cell-row ">
-				<div class="w3-cell w3-cell-top ">
-					<button id="buttonFacetBaseModel_{{ @key }}" class="" onclick="facetFieldChange(this); " title="see values " data-var="{{ var }}" data-clear="{{#if facetField }}true{{else}}false{{/if}}"><i class="fas fa-list "></i></button>
-				</div>
-				<div class="w3-cell w3-cell-top ">
-					<input id="fqBaseModel_{{ @key }}" placeholder="{{ displayName }}" class="" onchange="fqChange(this); " data-var="{{ var }}" autocomplete="off=" value="{{ val }}"/>
-				</div>
-			</div>
-		</div>
-		<div class="w3-tiny ">
-			<div class="pageSearchVal " id="pageSearchVal-fqBaseModel_{{ @key }}">{{#if val }}fq={{ var }}:{{encodeURIComponent val }}{{/if}}</div>
-			<div class="pageSearchVal " id="pageSearchVal-buttonFacetBaseModel_{{ @key }}">{{#if facetField.var }}facet.field={{ facetField.var }}{{/if}}</div>
-		</div>
-		<ol class="pageFacetField w3-small " id="pageFacetFieldBaseModel_{{ @key }}">
+									<div class="">
+										<label for="fqBaseModel_{{ @key }}">{{ displayName }}<sup class="w3-tiny "> ({{ classSimpleName }})</sup></label>
+										<div class="w3-cell-row ">
+											<div class="w3-cell w3-cell-top ">
+												<button id="buttonFacetBaseModel_{{ @key }}" class="" onclick="facetFieldChange(this); " title="see values " data-var="{{ var }}" data-clear="{{#if facetField }}true{{else}}false{{/if}}"><i class="fas fa-list "></i></button>
+											</div>
+											<div class="w3-cell w3-cell-top ">
+												<input id="fqBaseModel_{{ @key }}" placeholder="{{ displayName }}" class="" onchange="fqChange(this); " data-var="{{ var }}" autocomplete="off=" value="{{ val }}"/>
+											</div>
+										</div>
+									</div>
+									<div class="w3-tiny ">
+										<div class="pageSearchVal " id="pageSearchVal-fqBaseModel_{{ @key }}">{{#if val }}fq={{ var }}:{{encodeURIComponent val }}{{/if}}</div>
+										<div class="pageSearchVal " id="pageSearchVal-buttonFacetBaseModel_{{ @key }}">{{#if facetField.var }}facet.field={{ facetField.var }}{{/if}}</div>
+										<ol class="pageFacetField w3-small " id="pageFacetFieldBaseModel_{{ @key }}">
 {{#each facetField.counts }}
-			<li class="cursor-pointer " data-class="BaseModel" data-var="{{ ../var }}" data-val="{{ @key }}" onclick="fqReplace(this); ">{{ @key }}: {{ this }}</li>
+											<li class="cursor-pointer " data-class="BaseModel" data-var="{{ ../var }}" data-val="{{ @key }}" onclick="fqReplace(this); ">{{ @key }}: {{ this }}</li>
 {{/each}}
-		</ol>
+										</ol>
+									</div>
 {{/each}}
-	</div>
+								</div>
 {{/inline}}
-{{#*inline "htmBodyRangeBaseModelPage"}}		<!-- #*inline "htmBodyRangeBaseModelPage" -->
-	<table class="w3-padding ">
-		<tr>			<td class="w3-padding w3-tiny " colspan="2">
-				<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeGap-BaseModel">{{#if defaultRangeGap }}facet.range.gap={{encodeURIComponent defaultRangeGap }}{{/if}}</div>
-				<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeStart-BaseModel">{{#if defaultRangeStart }}facet.range.start={{encodeURIComponent defaultRangeStart }}{{/if}}</div>
-				<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeEnd-BaseModel">{{#if defaultRangeEnd }}facet.range.end={{encodeURIComponent defaultRangeEnd }}{{/if}}</div>
-				<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeVar-BaseModel">{{#if defaultRangeVar }}facet.range={!tag=r1}{{encodeURIComponent defaultRangeVar }}{{/if}}</div>
-			</td>
-		</tr>
-	</table>
-	<table class="w3-padding ">
-		<tr class="">
-			<td class="">
-			<span>Range Gap</span>
-			</td>
-			<td class="">
-				<select
- name="facet.range.gap" id="pageFacetRangeGap-BaseModel" onchange="facetRangeChange(this, 'BaseModel'); ">
-					<option value="+1YEAR"{{#eq defaultRangeGap '+1YEAR'}} selected="selected"{{else}}{{/eq}}>Year</option>
-					<option value="+1MONTH"{{#eq defaultRangeGap '+1MONTH'}} selected="selected"{{else}}{{/eq}}>Month</option>
-					<option value="+1WEEK"{{#eq defaultRangeGap '+1WEEK'}} selected="selected"{{else}}{{/eq}}>Week</option>
-					<option value="+1DAY"{{#eq defaultRangeGap '+1DAY'}} selected="selected"{{else}}{{#if defaultRangeGap}}{{else}} selected="selected"{{/if}}{{/eq}}>Day</option>
-					<option value="+1HOUR"{{#eq defaultRangeGap '+1HOUR'}} selected="selected"{{else}}{{/eq}}>Hour</option>
-					<option value="+1MINUTE"{{#eq defaultRangeGap '+1MINUTE'}} selected="selected"{{else}}{{/eq}}>Minute</option>
-					<option value="+1SECOND"{{#eq defaultRangeGap '+1SECOND'}} selected="selected"{{else}}{{/eq}}>Second</option>
-				</select>
-			</td>
-		</tr>
-		<tr class="">
-			<td class="" colspan="2">
-				<span>Range Start</span>
-			</td>
-		</tr>
-		<tr class="">
-			<td class="" colspan="2">
-			<span><input type="datetime-local" name="facetRangeStart" id="pageFacetRangeStart-BaseModel" value="{{formatZonedDateTime defaultRangeStart "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeChange(this, 'BaseModel'); "/></span>
-			</td>
-		</tr>
-		<tr class="">
-			<td class="" colspan="2">
-				<span>Range End</span>
-			</td>
-		</tr>
-		<tr class="">
-			<td class="" colspan="2">
-			<span><input type="datetime-local" name="facetRangeEnd" id="pageFacetRangeEnd-BaseModel" value="{{formatZonedDateTime defaultRangeEnd "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeChange(this, 'BaseModel'); "/></span>
-			</td>
-		</tr>
-	</table>
-	<table class="w3-padding ">
+{{#*inline "htmBodyRangeBaseModelPage"}}								<!-- #*inline "htmBodyRangeBaseModelPage" -->
+								<table class="w3-padding ">
+									<tr>
+										<td class="w3-padding w3-tiny " colspan="2">
+											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeGap-BaseModel">{{#if defaultRangeGap }}facet.range.gap={{encodeURIComponent defaultRangeGap }}{{/if}}</div>
+											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeStart-BaseModel">{{#if defaultRangeStart }}facet.range.start={{encodeURIComponent defaultRangeStart }}{{/if}}</div>
+											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeEnd-BaseModel">{{#if defaultRangeEnd }}facet.range.end={{encodeURIComponent defaultRangeEnd }}{{/if}}</div>
+											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeVar-BaseModel">{{#if defaultRangeVar }}facet.range={!tag=r1}{{encodeURIComponent defaultRangeVar }}{{/if}}</div>
+										</td>
+									</tr>
+								</table>
+								<table class="w3-padding ">
+									<tr class="">
+										<td class="">
+											<span>Range Gap</span>
+										</td>
+										<td class="">
+											<select name="facet.range.gap" id="pageFacetRangeGap-BaseModel" onchange="facetRangeChange(this, 'BaseModel'); ">
+												<option value="+1YEAR"{{#eq defaultRangeGap '+1YEAR'}} selected="selected"{{else}}{{/eq}}>Year</option>
+												<option value="+1MONTH"{{#eq defaultRangeGap '+1MONTH'}} selected="selected"{{else}}{{/eq}}>Month</option>
+												<option value="+1WEEK"{{#eq defaultRangeGap '+1WEEK'}} selected="selected"{{else}}{{/eq}}>Week</option>
+												<option value="+1DAY"{{#eq defaultRangeGap '+1DAY'}} selected="selected"{{else}}{{#if defaultRangeGap}}{{else}} selected="selected"{{/if}}{{/eq}}>Day</option>
+												<option value="+1HOUR"{{#eq defaultRangeGap '+1HOUR'}} selected="selected"{{else}}{{/eq}}>Hour</option>
+												<option value="+1MINUTE"{{#eq defaultRangeGap '+1MINUTE'}} selected="selected"{{else}}{{/eq}}>Minute</option>
+												<option value="+1SECOND"{{#eq defaultRangeGap '+1SECOND'}} selected="selected"{{else}}{{/eq}}>Second</option>
+											</select>
+										</td>
+									</tr>
+									<tr class="">
+										<td class="" colspan="2">
+											<span>Range Start</span>
+										</td>
+									</tr>
+									<tr class="">
+										<td class="" colspan="2">
+											<span><input type="datetime-local" name="facetRangeStart" id="pageFacetRangeStart-BaseModel" value="{{formatZonedDateTime defaultRangeStart "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeChange(this, 'BaseModel'); "/></span>
+										</td>
+									</tr>
+									<tr class="">
+										<td class="" colspan="2">
+											<span>Range End</span>
+										</td>
+									</tr>
+									<tr class="">
+										<td class="" colspan="2">
+											<span><input type="datetime-local" name="facetRangeEnd" id="pageFacetRangeEnd-BaseModel" value="{{formatZonedDateTime defaultRangeEnd "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeChange(this, 'BaseModel'); "/></span>
+										</td>
+									</tr>
+								</table>
+								<table class="w3-padding ">
 {{#each varsRange }}
-		<tr class="">
-			<td class="">
-				<span><input type="radio" name="pageFacetRange" class="pageFacetRange " id="pageFacetRangeBaseModel_{{ @key }}" value="{{ var }}"{{#eq defaultRangeVar var }} checked="checked"{{/eq}} onclick="facetRangeChange(this, 'BaseModel'); "/></span>
-			</td>
-			<td class="">
-			<label for="pageFacetRangeBaseModel_{{ @key }}">{{ displayName }}</label>
-			</td>
-		</tr>
+									<tr class="">
+										<td class="">
+											<span><input type="radio" name="pageFacetRange" class="pageFacetRange " id="pageFacetRangeBaseModel_{{ @key }}" value="{{ var }}"{{#eq defaultRangeVar var }} checked="checked"{{/eq}} onclick="facetRangeChange(this, 'BaseModel'); "/></span>
+										</td>
+										<td class="">
+											<label for="pageFacetRangeBaseModel_{{ @key }}">{{ displayName }}</label>
+										</td>
+									</tr>
 {{/each}}
-	</table>
+								</table>
 {{/inline}}
-{{#*inline "htmBodyPivotBaseModelPage"}}		<!-- #*inline "htmBodyPivotBaseModelPage" -->
-		<div style="display: none; " class="w3-padding w3-tiny " id="pageSearchVal-PivotBaseModelHidden">
+{{#*inline "htmBodyPivotBaseModelPage"}}								<!-- #*inline "htmBodyPivotBaseModelPage" -->
+								<div style="display: none; " class="w3-padding w3-tiny " id="pageSearchVal-PivotBaseModelHidden">
 {{#each defaultPivotVars }}
-			<div class="pageSearchVal-PivotBaseModelHidden " id="pageSearchVal-PivotBaseModelHidden_{{ this }}">{{ this }}</div>
+									<div class="pageSearchVal-PivotBaseModelHidden " id="pageSearchVal-PivotBaseModelHidden_{{ this }}">{{ this }}</div>
 {{/each}}
-		</div>
-		<div class="w3-padding w3-tiny " id="pageSearchVal-PivotBaseModel">
+								</div>
+								<div class="w3-padding w3-tiny " id="pageSearchVal-PivotBaseModel">
 {{#if defaultPivotVars }}
-			<div class="pageSearchVal pageSearchVal-PivotBaseModel " id="pageSearchVal-PivotBaseModel_1">facet.pivot={{#each defaultPivotVars }}{{#if @index }},{{/if}}{{ this }}{{/each}}</div>
+									<div class="pageSearchVal pageSearchVal-PivotBaseModel " id="pageSearchVal-PivotBaseModel_1">facet.pivot={{#each defaultPivotVars }}{{#if @index }},{{/if}}{{ this }}{{/each}}</div>
 {{/if}}
-		</div>
-	<table class="w3-table ">
+								</div>
+								<table class="w3-table ">
 {{#each varsFq }}
-		<tr class="">
-			<td class="">
-				<span><input type="checkbox" name="pageFacetPivot" class="pageFacetPivot " id="pageFacetPivotBaseModel_{{ @key }}" value="{{ var }}"{{#if pivot }} checked="checked"{{/if}} onclick="facetPivotChange(this, 'BaseModel'); "/></span>
-			</td>
-			<td class="w3-cell ">
-			<label for="pageFacetPivotBaseModel_{{ @key }}">{{ displayName }}</label>
-			</td>
-		</tr>
+									<tr class="">
+										<td class="">
+											<span><input type="checkbox" name="pageFacetPivot" class="pageFacetPivot " id="pageFacetPivotBaseModel_{{ @key }}" value="{{ var }}"{{#if pivot }} checked="checked"{{/if}} onclick="facetPivotChange(this, 'BaseModel'); "/></span>
+										</td>
+										<td class="w3-cell ">
+											<label for="pageFacetPivotBaseModel_{{ @key }}">{{ displayName }}</label>
+										</td>
+									</tr>
 {{/each}}
-	</table>
+								</table>
 {{/inline}}
-{{#*inline "htmBodyFieldListBaseModelPage"}}		<!-- #*inline "htmBodyFieldListBaseModelPage" -->
-		<div style="display: none; " class="w3-padding w3-tiny " id="pageSearchVal-FieldListBaseModelHidden">
+{{#*inline "htmBodyFieldListBaseModelPage"}}								<!-- #*inline "htmBodyFieldListBaseModelPage" -->
+								<div style="display: none; " class="w3-padding w3-tiny " id="pageSearchVal-FieldListBaseModelHidden">
 {{#each defaultFieldListVars }}
-			<div class="pageSearchVal-FieldListBaseModelHidden " id="pageSearchVal-FieldListBaseModelHidden_{{ this }}">{{ this }}</div>
+									<div class="pageSearchVal-FieldListBaseModelHidden " id="pageSearchVal-FieldListBaseModelHidden_{{ this }}">{{ this }}</div>
 {{/each}}
-		</div>
-		<div class="w3-padding w3-tiny " id="pageSearchVal-FieldListBaseModel">
+								</div>
+								<div class="w3-padding w3-tiny " id="pageSearchVal-FieldListBaseModel">
 {{#if defaultFieldListVars }}
-			<div class="pageSearchVal pageSearchVal-FieldListBaseModel " id="pageSearchVal-FieldListBaseModel_1">fl={{#each defaultFieldListVars }}{{#if @index }},{{/if}}{{ this }}{{/each}}</div>
+									<div class="pageSearchVal pageSearchVal-FieldListBaseModel " id="pageSearchVal-FieldListBaseModel_1">fl={{#each defaultFieldListVars }}{{#if @index }},{{/if}}{{ this }}{{/each}}</div>
 {{/if}}
-		</div>
-	<table class="w3-table ">
+								</div>
+								<table class="w3-table ">
 {{#each varsFq }}
-		<tr class="">
-			<td class="">
-				<span><input type="checkbox" name="pageFieldList" class="pageFieldList " id="pageFieldListBaseModel_{{ @key }}" value="{{ var }}"{{#if fieldList }} checked="checked"{{/if}} onclick="facetFieldListChange(this, 'BaseModel'); "/></span>
-			</td>
-			<td class="w3-cell ">
-			<label for="pageFieldListBaseModel_{{ @key }}">{{ displayName }}</label>
-			</td>
-		</tr>
+									<tr class="">
+										<td class="">
+											<span><input type="checkbox" name="pageFieldList" class="pageFieldList " id="pageFieldListBaseModel_{{ @key }}" value="{{ var }}"{{#if fieldList }} checked="checked"{{/if}} onclick="facetFieldListChange(this, 'BaseModel'); "/></span>
+										</td>
+										<td class="w3-cell ">
+											<label for="pageFieldListBaseModel_{{ @key }}">{{ displayName }}</label>
+										</td>
+									</tr>
 {{/each}}
-	</table>
+								</table>
+{{/inline}}
+{{#*inline "htmBodyStatsBaseModelPage"}}								<!-- #*inline "htmBodyStatsBaseModelPage" -->
+								<div style="display: none; " class="w3-padding w3-tiny " id="pageSearchVal-StatsBaseModelHidden">
+{{#each defaultStatsVars }}
+									<div class="pageSearchVal-StatsBaseModelHidden " id="pageSearchVal-StatsBaseModelHidden_{{ this }}">{{ this }}</div>
+{{/each}}
+								</div>
+								<div class="w3-padding w3-tiny " id="pageSearchVal-StatsBaseModel">
+{{#if defaultStatsVars }}
+									<div class="pageSearchVal pageSearchVal-StatsBaseModel " id="pageSearchVal-StatsBaseModel_1">fl={{#each defaultStatsVars }}{{#if @index }},{{/if}}{{ this }}{{/each}}</div>
+{{/if}}
+								</div>
+								<table class="w3-table ">
+{{#each varsFq }}
+									<tr class="">
+										<td class="">
+											<span><input type="checkbox" name="pageStats" class="pageStats " id="pageStatsBaseModel_{{ @key }}" value="{{ var }}"{{#if Stats }} checked="checked"{{/if}} onclick="facetStatsChange(this, 'BaseModel'); "/></span>
+										</td>
+										<td class="w3-cell ">
+											<label for="pageStatsBaseModel_{{ @key }}">{{ displayName }}</label>
+										</td>
+									</tr>
+{{/each}}
+								</table>
 {{/inline}}
 {{#*inline "htmBodyMenuBaseModelPage"}}		<!-- #*inline "htmBodyMenuBaseModelPage" -->
 {{> "htmBodyMenuPageLayout"}}{{/inline}}
@@ -337,59 +361,72 @@
 {{/if}}
 {{/inline}}
 {{#*inline "htmBodySidebarBaseModelPage"}}
-	<div class="w3-dropdown-hover w3-bar-block min-width-300px ">
-		<div class="min-width-300px w3- ">
-			<span title="Search" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').toggle(); "><i class="fad fa-magnifying-glass hover-box-shadow "></i></span>
-			<span title="Filters" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleFilters').toggle(); "><i class="fad fa-filters hover-box-shadow "></i></span>
-			<span title="Range" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleRange').toggle(); "><i class="fad fa-calendar-range hover-box-shadow "></i></span>
-			<span title="Pivot" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').toggle(); "><i class="fad fa-table-pivot hover-box-shadow "></i></span>
-			<span title="FieldList" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleFieldList').toggle(); "><i class="fad fa-list-ul hover-box-shadow "></i></span>
-		</div>
-		<div class="w3-dropdown-content min-width-300px w3-white w3-border w3-border- ">
-			<div  class="siteSidebarToggle siteSidebarToggleSearch" style="display: none; ">
-				<div class="w3-bar w3- ">
-					<span class="w3-bar-item w3-padding ">Search</span>
-				</div>
-				<div class="w3-bar-block ">
+				<div class="w3-dropdown-hover w3-bar-block min-width-300px ">
+					<div class="min-width-300px w3- ">
+						<span title="Search" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').toggle(); "><i class="fad fa-magnifying-glass hover-box-shadow "></i></span>
+						<span title="Filters" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleFilters').toggle(); "><i class="fad fa-filters hover-box-shadow "></i></span>
+						<span title="Range" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleRange').toggle(); "><i class="fad fa-calendar-range hover-box-shadow "></i></span>
+						<span title="Pivot" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').toggle(); "><i class="fad fa-table-pivot hover-box-shadow "></i></span>
+						<span title="FieldList" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleFieldList').toggle(); "><i class="fad fa-list-ul hover-box-shadow "></i></span>
+						<span title="Stats" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleFieldList').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleStats').toggle(); "><i class="fad fa-chart-candlestick hover-box-shadow "></i></span>
+					</div>
+					<div class="w3-dropdown-content min-width-300px w3-white w3-border w3-border- ">
+						<div class="siteSidebarToggle siteSidebarToggleSearch" style="display: none; ">
+							<div class="w3-bar w3- ">
+								<i class="fad fa-magnifying-glass "></i>
+								<span class="w3-bar-item w3-padding ">Search</span>
+							</div>
+							<div class="w3-bar-block ">
 {{#block "htmBodySearch"}}{{/block}}
-				</div>
-			</div>
-			<div  class="siteSidebarToggle siteSidebarToggleFilters" style="display: none; ">
-				<div class="w3-bar w3- ">
-					<span class="w3-bar-item w3-padding ">Filters</span>
-				</div>
-				<div class="w3-bar-block ">
+							</div>
+						</div>
+						<div  class="siteSidebarToggle siteSidebarToggleFilters" style="display: none; ">
+							<div class="w3-bar w3- ">
+								<i class="fad fa-filters "></i>
+								<span class="w3-bar-item w3-padding ">Filters</span>
+							</div>
+							<div class="w3-bar-block ">
 {{#block "htmBodyFilters"}}{{/block}}
-				</div>
-			</div>
-			<div  class="siteSidebarToggle siteSidebarToggleRange" style="display: none; ">
-				<div class="w3-bar w3- ">
-					<span class="w3-bar-item w3-padding ">Range</span>
-				</div>
-				<div class="w3-bar-block ">
+							</div>
+						</div>
+						<div  class="siteSidebarToggle siteSidebarToggleRange" style="display: none; ">
+							<div class="w3-bar w3- ">
+								<i class="fad fa-calendar-range "></i>
+								<span class="w3-bar-item w3-padding ">Range</span>
+							</div>
+							<div class="w3-bar-block ">
 {{#block "htmBodyRange"}}{{/block}}
-				</div>
-			</div>
-			<div  class="siteSidebarToggle siteSidebarTogglePivot" style="display: none; ">
-				<div class="w3-bar w3- ">
-					<span class="w3-bar-item w3-padding ">Pivot</span>
-				</div>
-				<div class="w3-bar-block ">
+							</div>
+						</div>
+						<div  class="siteSidebarToggle siteSidebarTogglePivot" style="display: none; ">
+							<div class="w3-bar w3- ">
+								<i class="fad fa-table-pivot "></i>
+								<span class="w3-bar-item w3-padding ">Pivot</span>
+							</div>
+							<div class="w3-bar-block ">
 {{#block "htmBodyPivot"}}{{/block}}
-				</div>
-			</div>
-		</div>
-	</div>
-			<div  class="siteSidebarToggle siteSidebarToggleFieldList" style="display: none; ">
-				<div class="w3-bar w3- ">
-					<span class="w3-bar-item w3-padding ">Field List</span>
-				</div>
-				<div class="w3-bar-block ">
+							</div>
+						</div>
+						<div  class="siteSidebarToggle siteSidebarToggleFieldList" style="display: none; ">
+							<div class="w3-bar w3- ">
+								<i class="fad fa-list-ul "></i>
+								<span class="w3-bar-item w3-padding ">Field List</span>
+							</div>
+							<div class="w3-bar-block ">
 {{#block "htmBodyFieldList"}}{{/block}}
+							</div>
+						</div>
+						<div  class="siteSidebarToggle siteSidebarToggleStats" style="display: none; ">
+							<div class="w3-bar w3- ">
+								<i class="fad fa-chart-candlestick "></i>
+								<span class="w3-bar-item w3-padding ">Stats</span>
+							</div>
+							<div class="w3-bar-block ">
+{{#block "htmBodyStats"}}{{/block}}
+							</div>
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
-	</div>
 {{/inline}}
 {{#*inline "htmBodyStartBaseModelPage"}}
 {{> "htmBodyStartPageLayout"}}

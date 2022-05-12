@@ -68,7 +68,23 @@ public class BaseModelGenPage extends BaseModelGenPageGen<PageLayout> {
 			String[] parts = varStored2.split(",");
 			for(String part : parts) {
 				if(StringUtils.isNotBlank(part)) {
-					String var = StringUtils.substringBefore(part, "_");
+					String var = BaseModel.searchVarBaseModel(part);
+					if(StringUtils.isNotBlank(var))
+						l.add(var);
+				}
+			}
+		});
+	}
+
+	protected void _defaultStatsVars(List<String> l) {
+		Optional.ofNullable(searchListBaseModel_.getStatsFields()).orElse(Arrays.asList()).forEach(varIndexed -> {
+			String varIndexed2 = varIndexed;
+			if(StringUtils.contains(varIndexed2, "}"))
+				varIndexed2 = StringUtils.substringAfterLast(varIndexed2, "}");
+			String[] parts = varIndexed2.split(",");
+			for(String part : parts) {
+				if(StringUtils.isNotBlank(part)) {
+					String var = BaseModel.searchVarBaseModel(part);
 					if(StringUtils.isNotBlank(var))
 						l.add(var);
 				}
@@ -84,7 +100,7 @@ public class BaseModelGenPage extends BaseModelGenPageGen<PageLayout> {
 			String[] parts = facetPivot2.split(",");
 			for(String part : parts) {
 				if(StringUtils.isNotBlank(part)) {
-					String var = StringUtils.substringBefore(part, "_");
+					String var = BaseModel.searchVarBaseModel(part);
 					if(StringUtils.isNotBlank(var))
 						l.add(var);
 				}
@@ -244,6 +260,9 @@ public class BaseModelGenPage extends BaseModelGenPageGen<PageLayout> {
 			if(defaultFieldListVars.contains(var)) {
 				json.put("fieldList", true);
 			}
+			if(defaultStatsVars.contains(var)) {
+				json.put("stats", stats.get(varIndexed));
+			}
 			if(defaultPivotVars.contains(var)) {
 				json.put("pivot", true);
 			}
@@ -308,7 +327,7 @@ public class BaseModelGenPage extends BaseModelGenPageGen<PageLayout> {
 		JsonObject fqs = new JsonObject();
 		for(String fq : Optional.ofNullable(searchListBaseModel_).map(l -> l.getFilterQueries()).orElse(Arrays.asList())) {
 			if(!StringUtils.contains(fq, "(")) {
-				String fq1 = StringUtils.substringBefore(fq, "_");
+				String fq1 = BaseModel.searchVarBaseModel(fq);
 				String fq2 = StringUtils.substringAfter(fq, ":");
 				if(!StringUtils.startsWithAny(fq, "classCanonicalNames_", "archived_", "deleted_", "sessionId", "userKeys"))
 					fqs.put(fq1, new JsonObject().put("var", fq1).put("val", fq2).put("displayName", BaseModel.displayNameForClass(fq1)));
@@ -318,7 +337,7 @@ public class BaseModelGenPage extends BaseModelGenPageGen<PageLayout> {
 
 		JsonArray sorts = new JsonArray();
 		for(String sort : Optional.ofNullable(searchListBaseModel_).map(l -> l.getSorts()).orElse(Arrays.asList())) {
-			String sort1 = StringUtils.substringBefore(sort, "_");
+			String sort1 = BaseModel.searchVarBaseModel(StringUtils.substringBefore(sort, " "));
 			sorts.add(new JsonObject().put("var", sort1).put("order", StringUtils.substringAfter(sort, " ")).put("displayName", BaseModel.displayNameForClass(sort1)));
 		}
 		query.put("sort", sorts);

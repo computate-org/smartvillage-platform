@@ -1,3 +1,4 @@
+---
 
 ######################
 # OpenShift defaults #
@@ -75,14 +76,18 @@ POSTGRES_DB_PASSWORD: "..."
 # The default storage class name for persistent volumes for PostgreSQL. 
 POSTGRES_STORAGE_CLASS_NAME: "{{ REDHAT_OPENSHIFT_STORAGE_CLASS_NAME }}"
 
-###################
-# Github defaults #
-###################
+################
+# Git defaults #
+################
 
 # The Github Organization. 
 GITHUB_ORG_NAME: "computate-org"
-# The Github Repository name. 
-GITHUB_REPO_NAME: "{{ SITE_NAME }}"
+# The Git Repository name. 
+SITE_REPO_NAME: "{{ SITE_NAME }}"
+# The Github Repo. 
+SITE_REPO: "git@github.com:computate-org/smart-village-view.git"
+# The Github Repo HTTPS. 
+SITE_REPO_HTTPS: "https://github.com/computate-org/smart-village-view.git"
 
 ###############################
 # application global defaults #
@@ -124,7 +129,6 @@ SITE_PORT_ENUS: "8080"
 # The base URL of the site.
 SITE_BASE_URL_ENUS: "https://{{ SITE_HOST_NAME_ENUS }}"
 # The Solr collection of the site.
-SOLR_COLLECTION: "{{ SITE_NAME }}"
 SITE_SOLR_COLLECTION_ENUS: "{{ SITE_NAME }}"
 # The timezone of the site.
 SITE_LOCALE: "en-US"
@@ -226,11 +230,11 @@ SITE_INSTANCES: 5
 WORKER_POOL_SIZE: 5
 
 # Enable data import in the site. 
-ENABLE_IMPORT_DATA: true
+ENABLE_IMPORT_DATA: "{{ ENABLE_IMPORT_DATA | lower }}"
 ENABLE_IMPORT_DATA_IotNode: true
 
 # The Auth roles required to be an admin in the site. 
-AUTH_ROLES_ADMIN: ['SiteAdmin']
+AUTH_ROLES_ADMIN: "{{ AUTH_ROLES_ADMIN }}"
 # The Auth roles required to add and modify site user records. 
 AUTH_ROLES_REQUIRED_SiteUser: ['SiteAdmin']
 # The Auth roles required to add and modify IOT node records. 

@@ -89,7 +89,7 @@
 									<div class="w3-tiny ">
 										<div class="pageSearchVal " id="pageSearchVal-fqIotNode_{{ @key }}">{{#if val }}fq={{ var }}:{{encodeURIComponent val }}{{/if}}</div>
 										<div class="pageSearchVal " id="pageSearchVal-buttonFacetIotNode_{{ @key }}">{{#if facetField.var }}facet.field={{ facetField.var }}{{/if}}</div>
-										<ol class="pageFacetField w3-small " id="pageFacetFieldIotNode_{{ @key }}">
+										<ol class="pageFacetField w3-small pageFacetFieldIotNode_{{ @key }} " id="pageFacetFieldIotNode_{{ @key }}">
 {{#each facetField.counts }}
 											<li class="cursor-pointer " data-class="IotNode" data-var="{{ ../var }}" data-val="{{ @key }}" onclick="fqReplace(this); ">{{ @key }}: {{ this }}</li>
 {{/each}}
@@ -205,6 +205,43 @@
 											<label for="pageFieldListIotNode_{{ @key }}">{{ displayName }}</label>
 										</td>
 									</tr>
+{{/each}}
+								</table>
+{{/inline}}
+{{#*inline "htmBodyStatsIotNodePage"}}								<!-- #*inline "htmBodyStatsIotNodePage" -->
+								<div style="display: none; " class="w3-padding w3-tiny " id="pageSearchVal-StatsIotNodeHidden">
+{{#each defaultStatsVars }}
+									<div class="pageSearchVal-StatsIotNodeHidden " id="pageSearchVal-StatsIotNodeHidden_{{ this }}">{{ this }}</div>
+{{/each}}
+								</div>
+								<div class="w3-padding w3-tiny " id="pageSearchVal-StatsIotNode">
+{{#if defaultStatsVars }}
+{{#each defaultStatsVars }}									<div class="pageSearchVal pageSearchVal-StatsIotNode_{{ this }} " id="pageSearchVal-StatsIotNode_{{ this }}">stats.field={{ this }}</div>
+{{/each}}{{/if}}
+								</div>
+								<table class="w3-table ">
+{{#each varsFq }}
+{{#if enableStats }}
+									<tr class="">
+										<td class="">
+											<span><input type="checkbox" name="pageStats" class="pageStats " id="pageStatsIotNode_{{ @key }}" value="{{ var }}"{{#if ./stats }} checked="checked"{{/if}} onclick="facetStatsChange(this, 'IotNode'); "/></span>
+										</td>
+										<td class="w3-cell ">
+											<div>
+												<label for="pageStatsIotNode_{{ @key }}">{{ displayName }}</label>
+											</div>
+											<div class="pageStatsField w3-small pageStatsFieldIotNode_{{ @key }} " id="pageStatsFieldIotNode_{{ @key }}">
+{{#if ./stats }}
+{{#each ./stats }}
+{{#eq @key 'name' }}{{else}}
+												<div data-class="IotNode" data-var="{{ ../var }}" data-val="{{ @key }}">{{ @key }}: {{ this }}</div>
+{{/eq}}
+{{/each}}
+{{/if}}
+											</div>
+										</td>
+									</tr>
+{{/if}}
 {{/each}}
 								</table>
 {{/inline}}
@@ -358,6 +395,10 @@
 {{> "htmCreated" classApiMethodMethod="PATCH"}}
 							</div>
 							<div class="w3-cell-row ">
+{{> "htmArchived" classApiMethodMethod="PATCH"}}
+{{> "htmDeleted" classApiMethodMethod="PATCH"}}
+							</div>
+							<div class="w3-cell-row ">
 {{> "htmNodeName" classApiMethodMethod="PATCH"}}
 {{> "htmNodeType" classApiMethodMethod="PATCH"}}
 {{> "htmNodeId" classApiMethodMethod="PATCH"}}
@@ -395,6 +436,10 @@
 						<div id="postIotNodeForm">
 							<div class="w3-cell-row ">
 {{> "htmCreated" classApiMethodMethod="POST"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmArchived" classApiMethodMethod="POST"}}
+{{> "htmDeleted" classApiMethodMethod="POST"}}
 							</div>
 							<div class="w3-cell-row ">
 {{> "htmNodeName" classApiMethodMethod="POST"}}
@@ -461,12 +506,67 @@
 {{> "htmObjectId" classApiMethodMethod="Page"}}
 							</div>
 							<div class="w3-cell-row ">
+{{> "htmArchived" classApiMethodMethod="Page"}}
+{{> "htmDeleted" classApiMethodMethod="Page"}}
+							</div>
+							<div class="w3-cell-row ">
 {{> "htmNodeName" classApiMethodMethod="Page"}}
 {{> "htmNodeType" classApiMethodMethod="Page"}}
 {{> "htmNodeId" classApiMethodMethod="Page"}}
 							</div>
 							<div class="w3-cell-row ">
 {{> "htmLocation" classApiMethodMethod="Page"}}
+{{> "htmJson_moisture" classApiMethodMethod="Page"}}
+{{> "htmJson_moisture0" classApiMethodMethod="Page"}}
+{{> "htmJson_moisture1" classApiMethodMethod="Page"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmJson_temperature" classApiMethodMethod="Page"}}
+{{> "htmJson_temperature0" classApiMethodMethod="Page"}}
+{{> "htmJson_temperatureAverage" classApiMethodMethod="Page"}}
+{{> "htmJson_badConditionsCounter" classApiMethodMethod="Page"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmJson_door" classApiMethodMethod="Page"}}
+{{> "htmJson_alarmDoor" classApiMethodMethod="Page"}}
+{{> "htmJson_flood" classApiMethodMethod="Page"}}
+{{> "htmJson_alarmFlood" classApiMethodMethod="Page"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmJson_lux2" classApiMethodMethod="Page"}}
+{{> "htmJson_illuminance" classApiMethodMethod="Page"}}
+{{> "htmJson_resistance0" classApiMethodMethod="Page"}}
+{{> "htmJson_resistance1" classApiMethodMethod="Page"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmJson_frequency" classApiMethodMethod="Page"}}
+{{> "htmJson_devEui" classApiMethodMethod="Page"}}
+{{> "htmJson_bandwidth" classApiMethodMethod="Page"}}
+{{> "htmJson_dataRate" classApiMethodMethod="Page"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmJson_frameCount" classApiMethodMethod="Page"}}
+{{> "htmJson_maxPayload" classApiMethodMethod="Page"}}
+{{> "htmJson_bitsPerSecond" classApiMethodMethod="Page"}}
+{{> "htmJson_batteryVoltage" classApiMethodMethod="Page"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmJson_spreadingFactor" classApiMethodMethod="Page"}}
+{{> "htmJson_dataRateAdaptive" classApiMethodMethod="Page"}}
+{{> "htmJson_swversion" classApiMethodMethod="Page"}}
+{{> "htmJson_batteryLevel" classApiMethodMethod="Page"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmJson_startUpCount" classApiMethodMethod="Page"}}
+{{> "htmJson_watchdogCount" classApiMethodMethod="Page"}}
+{{> "htmJson_historySequence" classApiMethodMethod="Page"}}
+{{> "htmJson_versionFirmware" classApiMethodMethod="Page"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmJson_stackTxFailRebootCount" classApiMethodMethod="Page"}}
+{{> "htmJson_historySequencePrevious" classApiMethodMethod="Page"}}
+{{> "htmJson_snr" classApiMethodMethod="Page"}}
+{{> "htmJson_rssi" classApiMethodMethod="Page"}}
 							</div>
 						</div>
 					</div>
@@ -477,16 +577,18 @@
 {{#*inline "htmBodySidebarIotNodePage"}}
 				<div class="w3-dropdown-hover w3-bar-block min-width-300px ">
 					<div class="min-width-300px w3-blue ">
-						<span title="Search" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').toggle(); "><i class="fad fa-magnifying-glass hover-box-shadow "></i></span>
-						<span title="Filters" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleFilters').toggle(); "><i class="fad fa-filters hover-box-shadow "></i></span>
-						<span title="Range" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleRange').toggle(); "><i class="fad fa-calendar-range hover-box-shadow "></i></span>
-						<span title="Pivot" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').toggle(); "><i class="fad fa-table-pivot hover-box-shadow "></i></span>
-						<span title="FieldList" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleFieldList').toggle(); "><i class="fad fa-list-ul hover-box-shadow "></i></span>
+						<span title="Search" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').toggle(); "><i class="fad fa-magnifying-glass hover-box-shadow "></i></span>
+						<span title="Filters" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleFilters').toggle(); "><i class="fad fa-filters hover-box-shadow "></i></span>
+						<span title="Range" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleRange').toggle(); "><i class="fad fa-calendar-range hover-box-shadow "></i></span>
+						<span title="Pivot" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').toggle(); "><i class="fad fa-table-pivot hover-box-shadow "></i></span>
+						<span title="FieldList" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleFieldList').toggle(); "><i class="fad fa-list-ul hover-box-shadow "></i></span>
+						<span title="Stats" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleFieldList').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleStats').toggle(); "><i class="fad fa-chart-candlestick hover-box-shadow "></i></span>
 					</div>
 					<div class="w3-dropdown-content min-width-300px w3-white w3-border w3-border-blue ">
 						<div class="siteSidebarToggle siteSidebarToggleSearch" style="display: none; ">
 							<div class="w3-bar w3-blue ">
-								<span class="w3-bar-item w3-padding ">Search</span>
+								<span class="w3-bar-item ">
+								<i class="fad fa-magnifying-glass "></i> Search</span>
 							</div>
 							<div class="w3-bar-block ">
 {{#block "htmBodySearch"}}{{/block}}
@@ -494,7 +596,8 @@
 						</div>
 						<div  class="siteSidebarToggle siteSidebarToggleFilters" style="display: none; ">
 							<div class="w3-bar w3-blue ">
-								<span class="w3-bar-item w3-padding ">Filters</span>
+								<span class="w3-bar-item ">
+								<i class="fad fa-filters "></i> Filters</span>
 							</div>
 							<div class="w3-bar-block ">
 {{#block "htmBodyFilters"}}{{/block}}
@@ -502,7 +605,8 @@
 						</div>
 						<div  class="siteSidebarToggle siteSidebarToggleRange" style="display: none; ">
 							<div class="w3-bar w3-blue ">
-								<span class="w3-bar-item w3-padding ">Range</span>
+								<span class="w3-bar-item ">
+								<i class="fad fa-calendar-range "></i> Range</span>
 							</div>
 							<div class="w3-bar-block ">
 {{#block "htmBodyRange"}}{{/block}}
@@ -510,7 +614,8 @@
 						</div>
 						<div  class="siteSidebarToggle siteSidebarTogglePivot" style="display: none; ">
 							<div class="w3-bar w3-blue ">
-								<span class="w3-bar-item w3-padding ">Pivot</span>
+								<span class="w3-bar-item ">
+								<i class="fad fa-table-pivot "></i> Pivot</span>
 							</div>
 							<div class="w3-bar-block ">
 {{#block "htmBodyPivot"}}{{/block}}
@@ -518,10 +623,20 @@
 						</div>
 						<div  class="siteSidebarToggle siteSidebarToggleFieldList" style="display: none; ">
 							<div class="w3-bar w3-blue ">
-								<span class="w3-bar-item w3-padding ">Field List</span>
+								<span class="w3-bar-item ">
+								<i class="fad fa-list-ul "></i> Field List</span>
 							</div>
 							<div class="w3-bar-block ">
 {{#block "htmBodyFieldList"}}{{/block}}
+							</div>
+						</div>
+						<div  class="siteSidebarToggle siteSidebarToggleStats" style="display: none; ">
+							<div class="w3-bar w3-blue ">
+								<span class="w3-bar-item ">
+								<i class="fad fa-chart-candlestick "></i> Stats</span>
+							</div>
+							<div class="w3-bar-block ">
+{{#block "htmBodyStats"}}{{/block}}
 							</div>
 						</div>
 					</div>
@@ -1025,4 +1140,1019 @@
 															<span class="varIotNode{{pk}}Location ">{{iotNode_.location}}</span>
 			{{/ifContainsKeys}}
 		{{/ifContainsAnyRoles}}
+{{/inline}}
+
+{{#*inline "htmJson_moisture"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									{{#eq 'Page' classApiMethodMethod}}
+										<div class="w3-padding ">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label>moisture</label>
+												</div>
+												<div class="w3-cell-row  ">
+													<div class="w3-cell ">
+														<div class="w3-rest ">
+															<span class="">
+																{{> "inputJson_moisture"}}
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+	{{/eq}}
+								</div>
+{{/inline}}
+
+{{#*inline "inputJson_moisture"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varIotNode{{pk}}Json_moisture ">{{iotNode_.json_moisture}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmJson_moisture0"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									{{#eq 'Page' classApiMethodMethod}}
+										<div class="w3-padding ">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label>moisture0</label>
+												</div>
+												<div class="w3-cell-row  ">
+													<div class="w3-cell ">
+														<div class="w3-rest ">
+															<span class="">
+																{{> "inputJson_moisture0"}}
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+	{{/eq}}
+								</div>
+{{/inline}}
+
+{{#*inline "inputJson_moisture0"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varIotNode{{pk}}Json_moisture0 ">{{iotNode_.json_moisture0}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmJson_moisture1"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									{{#eq 'Page' classApiMethodMethod}}
+										<div class="w3-padding ">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label>moisture1</label>
+												</div>
+												<div class="w3-cell-row  ">
+													<div class="w3-cell ">
+														<div class="w3-rest ">
+															<span class="">
+																{{> "inputJson_moisture1"}}
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+	{{/eq}}
+								</div>
+{{/inline}}
+
+{{#*inline "inputJson_moisture1"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varIotNode{{pk}}Json_moisture1 ">{{iotNode_.json_moisture1}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmJson_temperature"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									{{#eq 'Page' classApiMethodMethod}}
+										<div class="w3-padding ">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label>temperature</label>
+												</div>
+												<div class="w3-cell-row  ">
+													<div class="w3-cell ">
+														<div class="w3-rest ">
+															<span class="">
+																{{> "inputJson_temperature"}}
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+	{{/eq}}
+								</div>
+{{/inline}}
+
+{{#*inline "inputJson_temperature"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varIotNode{{pk}}Json_temperature ">{{iotNode_.json_temperature}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmJson_temperature0"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									{{#eq 'Page' classApiMethodMethod}}
+										<div class="w3-padding ">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label>temperature0</label>
+												</div>
+												<div class="w3-cell-row  ">
+													<div class="w3-cell ">
+														<div class="w3-rest ">
+															<span class="">
+																{{> "inputJson_temperature0"}}
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+	{{/eq}}
+								</div>
+{{/inline}}
+
+{{#*inline "inputJson_temperature0"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varIotNode{{pk}}Json_temperature0 ">{{iotNode_.json_temperature0}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmJson_temperatureAverage"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									{{#eq 'Page' classApiMethodMethod}}
+										<div class="w3-padding ">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label>average temperature</label>
+												</div>
+												<div class="w3-cell-row  ">
+													<div class="w3-cell ">
+														<div class="w3-rest ">
+															<span class="">
+																{{> "inputJson_temperatureAverage"}}
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+	{{/eq}}
+								</div>
+{{/inline}}
+
+{{#*inline "inputJson_temperatureAverage"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varIotNode{{pk}}Json_temperatureAverage ">{{iotNode_.json_temperatureAverage}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmJson_badConditionsCounter"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									{{#eq 'Page' classApiMethodMethod}}
+										<div class="w3-padding ">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label>bad conditions counter</label>
+												</div>
+												<div class="w3-cell-row  ">
+													<div class="w3-cell ">
+														<div class="w3-rest ">
+															<span class="">
+																{{> "inputJson_badConditionsCounter"}}
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+	{{/eq}}
+								</div>
+{{/inline}}
+
+{{#*inline "inputJson_badConditionsCounter"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varIotNode{{pk}}Json_badConditionsCounter ">{{iotNode_.json_badConditionsCounter}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmJson_door"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									{{#eq 'Page' classApiMethodMethod}}
+										<div class="w3-padding ">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label>door</label>
+												</div>
+												<div class="w3-cell-row  ">
+													<div class="w3-cell ">
+														<div class="w3-rest ">
+															<span class="">
+																{{> "inputJson_door"}}
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+	{{/eq}}
+								</div>
+{{/inline}}
+
+{{#*inline "inputJson_door"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varIotNode{{pk}}Json_door ">{{iotNode_.json_door}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmJson_alarmDoor"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									{{#eq 'Page' classApiMethodMethod}}
+										<div class="w3-padding ">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label>alarm door</label>
+												</div>
+												<div class="w3-cell-row  ">
+													<div class="w3-cell ">
+														<div class="w3-rest ">
+															<span class="">
+																{{> "inputJson_alarmDoor"}}
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+	{{/eq}}
+								</div>
+{{/inline}}
+
+{{#*inline "inputJson_alarmDoor"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varIotNode{{pk}}Json_alarmDoor ">{{iotNode_.json_alarmDoor}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmJson_flood"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									{{#eq 'Page' classApiMethodMethod}}
+										<div class="w3-padding ">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label>flood</label>
+												</div>
+												<div class="w3-cell-row  ">
+													<div class="w3-cell ">
+														<div class="w3-rest ">
+															<span class="">
+																{{> "inputJson_flood"}}
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+	{{/eq}}
+								</div>
+{{/inline}}
+
+{{#*inline "inputJson_flood"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varIotNode{{pk}}Json_flood ">{{iotNode_.json_flood}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmJson_alarmFlood"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									{{#eq 'Page' classApiMethodMethod}}
+										<div class="w3-padding ">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label>alarm flood</label>
+												</div>
+												<div class="w3-cell-row  ">
+													<div class="w3-cell ">
+														<div class="w3-rest ">
+															<span class="">
+																{{> "inputJson_alarmFlood"}}
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+	{{/eq}}
+								</div>
+{{/inline}}
+
+{{#*inline "inputJson_alarmFlood"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varIotNode{{pk}}Json_alarmFlood ">{{iotNode_.json_alarmFlood}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmJson_lux2"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									{{#eq 'Page' classApiMethodMethod}}
+										<div class="w3-padding ">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label>lux2</label>
+												</div>
+												<div class="w3-cell-row  ">
+													<div class="w3-cell ">
+														<div class="w3-rest ">
+															<span class="">
+																{{> "inputJson_lux2"}}
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+	{{/eq}}
+								</div>
+{{/inline}}
+
+{{#*inline "inputJson_lux2"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varIotNode{{pk}}Json_lux2 ">{{iotNode_.json_lux2}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmJson_illuminance"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									{{#eq 'Page' classApiMethodMethod}}
+										<div class="w3-padding ">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label>illuminance</label>
+												</div>
+												<div class="w3-cell-row  ">
+													<div class="w3-cell ">
+														<div class="w3-rest ">
+															<span class="">
+																{{> "inputJson_illuminance"}}
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+	{{/eq}}
+								</div>
+{{/inline}}
+
+{{#*inline "inputJson_illuminance"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varIotNode{{pk}}Json_illuminance ">{{iotNode_.json_illuminance}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmJson_resistance0"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									{{#eq 'Page' classApiMethodMethod}}
+										<div class="w3-padding ">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label>resistance0</label>
+												</div>
+												<div class="w3-cell-row  ">
+													<div class="w3-cell ">
+														<div class="w3-rest ">
+															<span class="">
+																{{> "inputJson_resistance0"}}
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+	{{/eq}}
+								</div>
+{{/inline}}
+
+{{#*inline "inputJson_resistance0"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varIotNode{{pk}}Json_resistance0 ">{{iotNode_.json_resistance0}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmJson_resistance1"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									{{#eq 'Page' classApiMethodMethod}}
+										<div class="w3-padding ">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label>resistance1</label>
+												</div>
+												<div class="w3-cell-row  ">
+													<div class="w3-cell ">
+														<div class="w3-rest ">
+															<span class="">
+																{{> "inputJson_resistance1"}}
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+	{{/eq}}
+								</div>
+{{/inline}}
+
+{{#*inline "inputJson_resistance1"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varIotNode{{pk}}Json_resistance1 ">{{iotNode_.json_resistance1}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmJson_frequency"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									{{#eq 'Page' classApiMethodMethod}}
+										<div class="w3-padding ">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label>frequency</label>
+												</div>
+												<div class="w3-cell-row  ">
+													<div class="w3-cell ">
+														<div class="w3-rest ">
+															<span class="">
+																{{> "inputJson_frequency"}}
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+	{{/eq}}
+								</div>
+{{/inline}}
+
+{{#*inline "inputJson_frequency"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varIotNode{{pk}}Json_frequency ">{{iotNode_.json_frequency}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmJson_devEui"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									{{#eq 'Page' classApiMethodMethod}}
+										<div class="w3-padding ">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label>extended unique identifier</label>
+												</div>
+												<div class="w3-cell-row  ">
+													<div class="w3-cell ">
+														<div class="w3-rest ">
+															<span class="">
+																{{> "inputJson_devEui"}}
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+	{{/eq}}
+								</div>
+{{/inline}}
+
+{{#*inline "inputJson_devEui"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varIotNode{{pk}}Json_devEui ">{{iotNode_.json_devEui}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmJson_bandwidth"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									{{#eq 'Page' classApiMethodMethod}}
+										<div class="w3-padding ">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label>bandwidth</label>
+												</div>
+												<div class="w3-cell-row  ">
+													<div class="w3-cell ">
+														<div class="w3-rest ">
+															<span class="">
+																{{> "inputJson_bandwidth"}}
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+	{{/eq}}
+								</div>
+{{/inline}}
+
+{{#*inline "inputJson_bandwidth"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varIotNode{{pk}}Json_bandwidth ">{{iotNode_.json_bandwidth}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmJson_dataRate"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									{{#eq 'Page' classApiMethodMethod}}
+										<div class="w3-padding ">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label>frequency</label>
+												</div>
+												<div class="w3-cell-row  ">
+													<div class="w3-cell ">
+														<div class="w3-rest ">
+															<span class="">
+																{{> "inputJson_dataRate"}}
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+	{{/eq}}
+								</div>
+{{/inline}}
+
+{{#*inline "inputJson_dataRate"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varIotNode{{pk}}Json_dataRate ">{{iotNode_.json_dataRate}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmJson_frameCount"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									{{#eq 'Page' classApiMethodMethod}}
+										<div class="w3-padding ">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label>frame count</label>
+												</div>
+												<div class="w3-cell-row  ">
+													<div class="w3-cell ">
+														<div class="w3-rest ">
+															<span class="">
+																{{> "inputJson_frameCount"}}
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+	{{/eq}}
+								</div>
+{{/inline}}
+
+{{#*inline "inputJson_frameCount"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varIotNode{{pk}}Json_frameCount ">{{iotNode_.json_frameCount}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmJson_maxPayload"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									{{#eq 'Page' classApiMethodMethod}}
+										<div class="w3-padding ">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label>max payload</label>
+												</div>
+												<div class="w3-cell-row  ">
+													<div class="w3-cell ">
+														<div class="w3-rest ">
+															<span class="">
+																{{> "inputJson_maxPayload"}}
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+	{{/eq}}
+								</div>
+{{/inline}}
+
+{{#*inline "inputJson_maxPayload"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varIotNode{{pk}}Json_maxPayload ">{{iotNode_.json_maxPayload}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmJson_bitsPerSecond"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									{{#eq 'Page' classApiMethodMethod}}
+										<div class="w3-padding ">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label>bits per second</label>
+												</div>
+												<div class="w3-cell-row  ">
+													<div class="w3-cell ">
+														<div class="w3-rest ">
+															<span class="">
+																{{> "inputJson_bitsPerSecond"}}
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+	{{/eq}}
+								</div>
+{{/inline}}
+
+{{#*inline "inputJson_bitsPerSecond"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varIotNode{{pk}}Json_bitsPerSecond ">{{iotNode_.json_bitsPerSecond}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmJson_batteryVoltage"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									{{#eq 'Page' classApiMethodMethod}}
+										<div class="w3-padding ">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label>battery voltage</label>
+												</div>
+												<div class="w3-cell-row  ">
+													<div class="w3-cell ">
+														<div class="w3-rest ">
+															<span class="">
+																{{> "inputJson_batteryVoltage"}}
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+	{{/eq}}
+								</div>
+{{/inline}}
+
+{{#*inline "inputJson_batteryVoltage"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varIotNode{{pk}}Json_batteryVoltage ">{{iotNode_.json_batteryVoltage}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmJson_spreadingFactor"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									{{#eq 'Page' classApiMethodMethod}}
+										<div class="w3-padding ">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label>spreading factor</label>
+												</div>
+												<div class="w3-cell-row  ">
+													<div class="w3-cell ">
+														<div class="w3-rest ">
+															<span class="">
+																{{> "inputJson_spreadingFactor"}}
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+	{{/eq}}
+								</div>
+{{/inline}}
+
+{{#*inline "inputJson_spreadingFactor"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varIotNode{{pk}}Json_spreadingFactor ">{{iotNode_.json_spreadingFactor}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmJson_dataRateAdaptive"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									{{#eq 'Page' classApiMethodMethod}}
+										<div class="w3-padding ">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label>adaptive data rate</label>
+												</div>
+												<div class="w3-cell-row  ">
+													<div class="w3-cell ">
+														<div class="w3-rest ">
+															<span class="">
+																{{> "inputJson_dataRateAdaptive"}}
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+	{{/eq}}
+								</div>
+{{/inline}}
+
+{{#*inline "inputJson_dataRateAdaptive"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varIotNode{{pk}}Json_dataRateAdaptive ">{{iotNode_.json_dataRateAdaptive}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmJson_swversion"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									{{#eq 'Page' classApiMethodMethod}}
+										<div class="w3-padding ">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label>swversion</label>
+												</div>
+												<div class="w3-cell-row  ">
+													<div class="w3-cell ">
+														<div class="w3-rest ">
+															<span class="">
+																{{> "inputJson_swversion"}}
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+	{{/eq}}
+								</div>
+{{/inline}}
+
+{{#*inline "inputJson_swversion"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varIotNode{{pk}}Json_swversion ">{{iotNode_.json_swversion}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmJson_batteryLevel"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									{{#eq 'Page' classApiMethodMethod}}
+										<div class="w3-padding ">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label>battery level</label>
+												</div>
+												<div class="w3-cell-row  ">
+													<div class="w3-cell ">
+														<div class="w3-rest ">
+															<span class="">
+																{{> "inputJson_batteryLevel"}}
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+	{{/eq}}
+								</div>
+{{/inline}}
+
+{{#*inline "inputJson_batteryLevel"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varIotNode{{pk}}Json_batteryLevel ">{{iotNode_.json_batteryLevel}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmJson_startUpCount"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									{{#eq 'Page' classApiMethodMethod}}
+										<div class="w3-padding ">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label>startup count</label>
+												</div>
+												<div class="w3-cell-row  ">
+													<div class="w3-cell ">
+														<div class="w3-rest ">
+															<span class="">
+																{{> "inputJson_startUpCount"}}
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+	{{/eq}}
+								</div>
+{{/inline}}
+
+{{#*inline "inputJson_startUpCount"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varIotNode{{pk}}Json_startUpCount ">{{iotNode_.json_startUpCount}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmJson_watchdogCount"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									{{#eq 'Page' classApiMethodMethod}}
+										<div class="w3-padding ">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label>watchdog count</label>
+												</div>
+												<div class="w3-cell-row  ">
+													<div class="w3-cell ">
+														<div class="w3-rest ">
+															<span class="">
+																{{> "inputJson_watchdogCount"}}
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+	{{/eq}}
+								</div>
+{{/inline}}
+
+{{#*inline "inputJson_watchdogCount"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varIotNode{{pk}}Json_watchdogCount ">{{iotNode_.json_watchdogCount}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmJson_historySequence"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									{{#eq 'Page' classApiMethodMethod}}
+										<div class="w3-padding ">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label>history sequence</label>
+												</div>
+												<div class="w3-cell-row  ">
+													<div class="w3-cell ">
+														<div class="w3-rest ">
+															<span class="">
+																{{> "inputJson_historySequence"}}
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+	{{/eq}}
+								</div>
+{{/inline}}
+
+{{#*inline "inputJson_historySequence"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varIotNode{{pk}}Json_historySequence ">{{iotNode_.json_historySequence}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmJson_versionFirmware"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									{{#eq 'Page' classApiMethodMethod}}
+										<div class="w3-padding ">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label>firmware version</label>
+												</div>
+												<div class="w3-cell-row  ">
+													<div class="w3-cell ">
+														<div class="w3-rest ">
+															<span class="">
+																{{> "inputJson_versionFirmware"}}
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+	{{/eq}}
+								</div>
+{{/inline}}
+
+{{#*inline "inputJson_versionFirmware"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varIotNode{{pk}}Json_versionFirmware ">{{iotNode_.json_versionFirmware}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmJson_stackTxFailRebootCount"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									{{#eq 'Page' classApiMethodMethod}}
+										<div class="w3-padding ">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label>stack tx fail reboot count</label>
+												</div>
+												<div class="w3-cell-row  ">
+													<div class="w3-cell ">
+														<div class="w3-rest ">
+															<span class="">
+																{{> "inputJson_stackTxFailRebootCount"}}
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+	{{/eq}}
+								</div>
+{{/inline}}
+
+{{#*inline "inputJson_stackTxFailRebootCount"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varIotNode{{pk}}Json_stackTxFailRebootCount ">{{iotNode_.json_stackTxFailRebootCount}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmJson_historySequencePrevious"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									{{#eq 'Page' classApiMethodMethod}}
+										<div class="w3-padding ">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label>history sequence previous</label>
+												</div>
+												<div class="w3-cell-row  ">
+													<div class="w3-cell ">
+														<div class="w3-rest ">
+															<span class="">
+																{{> "inputJson_historySequencePrevious"}}
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+	{{/eq}}
+								</div>
+{{/inline}}
+
+{{#*inline "inputJson_historySequencePrevious"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varIotNode{{pk}}Json_historySequencePrevious ">{{iotNode_.json_historySequencePrevious}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmJson_snr"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									{{#eq 'Page' classApiMethodMethod}}
+										<div class="w3-padding ">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label>signal-to-noise ratio</label>
+												</div>
+												<div class="w3-cell-row  ">
+													<div class="w3-cell ">
+														<div class="w3-rest ">
+															<span class="">
+																{{> "inputJson_snr"}}
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+	{{/eq}}
+								</div>
+{{/inline}}
+
+{{#*inline "inputJson_snr"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varIotNode{{pk}}Json_snr ">{{iotNode_.json_snr}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmJson_rssi"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									{{#eq 'Page' classApiMethodMethod}}
+										<div class="w3-padding ">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label>received signal strength indicator</label>
+												</div>
+												<div class="w3-cell-row  ">
+													<div class="w3-cell ">
+														<div class="w3-rest ">
+															<span class="">
+																{{> "inputJson_rssi"}}
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+	{{/eq}}
+								</div>
+{{/inline}}
+
+{{#*inline "inputJson_rssi"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varIotNode{{pk}}Json_rssi ">{{iotNode_.json_rssi}}</span>
+	{{/eq}}
 {{/inline}}

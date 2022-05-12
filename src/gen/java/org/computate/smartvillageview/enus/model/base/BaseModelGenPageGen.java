@@ -209,6 +209,72 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 	}
 
 	//////////////////////
+	// defaultStatsVars //
+	//////////////////////
+
+	/**	 The entity defaultStatsVars
+	 *	 It is constructed before being initialized with the constructor by default. 
+	 */
+	@JsonProperty
+	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
+	@JsonInclude(Include.NON_NULL)
+	protected List<String> defaultStatsVars = new ArrayList<String>();
+
+	/**	<br> The entity defaultStatsVars
+	 *  It is constructed before being initialized with the constructor by default. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.base.BaseModelGenPage&fq=entiteVar_enUS_indexed_string:defaultStatsVars">Find the entity defaultStatsVars in Solr</a>
+	 * <br>
+	 * @param l is the entity already constructed. 
+	 **/
+	protected abstract void _defaultStatsVars(List<String> l);
+
+	public List<String> getDefaultStatsVars() {
+		return defaultStatsVars;
+	}
+
+	public void setDefaultStatsVars(List<String> defaultStatsVars) {
+		this.defaultStatsVars = defaultStatsVars;
+	}
+	public static String staticSetDefaultStatsVars(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	public BaseModelGenPage addDefaultStatsVars(String...objets) {
+		for(String o : objets) {
+			addDefaultStatsVars(o);
+		}
+		return (BaseModelGenPage)this;
+	}
+	public BaseModelGenPage addDefaultStatsVars(String o) {
+		if(o != null)
+			this.defaultStatsVars.add(o);
+		return (BaseModelGenPage)this;
+	}
+	@JsonIgnore
+	public void setDefaultStatsVars(JsonArray objets) {
+		defaultStatsVars.clear();
+		for(int i = 0; i < objets.size(); i++) {
+			String o = objets.getString(i);
+			addDefaultStatsVars(o);
+		}
+	}
+	protected BaseModelGenPage defaultStatsVarsInit() {
+		_defaultStatsVars(defaultStatsVars);
+		return (BaseModelGenPage)this;
+	}
+
+	public static String staticSearchDefaultStatsVars(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrDefaultStatsVars(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqDefaultStatsVars(SiteRequestEnUS siteRequest_, String o) {
+		return BaseModelGenPage.staticSearchStrDefaultStatsVars(siteRequest_, BaseModelGenPage.staticSearchDefaultStatsVars(siteRequest_, BaseModelGenPage.staticSetDefaultStatsVars(siteRequest_, o)));
+	}
+
+	//////////////////////
 	// defaultPivotVars //
 	//////////////////////
 
@@ -617,6 +683,7 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 				searchListBaseModel_Init();
 				pageResponseInit();
 				defaultFieldListVarsInit();
+				defaultStatsVarsInit();
 				defaultPivotVarsInit();
 				listBaseModelInit();
 				statsInit();
@@ -684,6 +751,8 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 				return oBaseModelGenPage.pageResponse;
 			case "defaultFieldListVars":
 				return oBaseModelGenPage.defaultFieldListVars;
+			case "defaultStatsVars":
+				return oBaseModelGenPage.defaultStatsVars;
 			case "defaultPivotVars":
 				return oBaseModelGenPage.defaultPivotVars;
 			case "listBaseModel":
@@ -743,6 +812,8 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 			return BaseModelGenPage.staticSetPageResponse(siteRequest_, o);
 		case "defaultFieldListVars":
 			return BaseModelGenPage.staticSetDefaultFieldListVars(siteRequest_, o);
+		case "defaultStatsVars":
+			return BaseModelGenPage.staticSetDefaultStatsVars(siteRequest_, o);
 		case "defaultPivotVars":
 			return BaseModelGenPage.staticSetDefaultPivotVars(siteRequest_, o);
 		case "baseModelCount":
@@ -769,6 +840,8 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 			return BaseModelGenPage.staticSearchPageResponse(siteRequest_, (String)o);
 		case "defaultFieldListVars":
 			return BaseModelGenPage.staticSearchDefaultFieldListVars(siteRequest_, (String)o);
+		case "defaultStatsVars":
+			return BaseModelGenPage.staticSearchDefaultStatsVars(siteRequest_, (String)o);
 		case "defaultPivotVars":
 			return BaseModelGenPage.staticSearchDefaultPivotVars(siteRequest_, (String)o);
 		case "baseModelCount":
@@ -795,6 +868,8 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 			return BaseModelGenPage.staticSearchStrPageResponse(siteRequest_, (String)o);
 		case "defaultFieldListVars":
 			return BaseModelGenPage.staticSearchStrDefaultFieldListVars(siteRequest_, (String)o);
+		case "defaultStatsVars":
+			return BaseModelGenPage.staticSearchStrDefaultStatsVars(siteRequest_, (String)o);
 		case "defaultPivotVars":
 			return BaseModelGenPage.staticSearchStrDefaultPivotVars(siteRequest_, (String)o);
 		case "baseModelCount":
@@ -821,6 +896,8 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 			return BaseModelGenPage.staticSearchFqPageResponse(siteRequest_, o);
 		case "defaultFieldListVars":
 			return BaseModelGenPage.staticSearchFqDefaultFieldListVars(siteRequest_, o);
+		case "defaultStatsVars":
+			return BaseModelGenPage.staticSearchFqDefaultStatsVars(siteRequest_, o);
 		case "defaultPivotVars":
 			return BaseModelGenPage.staticSearchFqDefaultPivotVars(siteRequest_, o);
 		case "baseModelCount":
@@ -848,6 +925,7 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 	public static final String VAR_searchListBaseModel_ = "searchListBaseModel_";
 	public static final String VAR_pageResponse = "pageResponse";
 	public static final String VAR_defaultFieldListVars = "defaultFieldListVars";
+	public static final String VAR_defaultStatsVars = "defaultStatsVars";
 	public static final String VAR_defaultPivotVars = "defaultPivotVars";
 	public static final String VAR_listBaseModel = "listBaseModel";
 	public static final String VAR_stats = "stats";
@@ -860,6 +938,7 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 	public static final String DISPLAY_NAME_searchListBaseModel_ = "";
 	public static final String DISPLAY_NAME_pageResponse = "";
 	public static final String DISPLAY_NAME_defaultFieldListVars = "";
+	public static final String DISPLAY_NAME_defaultStatsVars = "";
 	public static final String DISPLAY_NAME_defaultPivotVars = "";
 	public static final String DISPLAY_NAME_listBaseModel = "";
 	public static final String DISPLAY_NAME_stats = "";
@@ -880,6 +959,8 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 			return DISPLAY_NAME_pageResponse;
 		case VAR_defaultFieldListVars:
 			return DISPLAY_NAME_defaultFieldListVars;
+		case VAR_defaultStatsVars:
+			return DISPLAY_NAME_defaultStatsVars;
 		case VAR_defaultPivotVars:
 			return DISPLAY_NAME_defaultPivotVars;
 		case VAR_listBaseModel:

@@ -288,6 +288,20 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 				}
 			});
 		}
+		if("SiteHtml".equals(classSimpleName)) {
+			importDataSiteHtml().onComplete(a -> {
+				String importPeriod = config().getString(String.format("%s_%s", ConfigKeys.IMPORT_DATA_PERIOD, classSimpleName));
+				if(importPeriod != null && startDateTime != null) {
+					Duration duration = TimeTool.parseNextDuration(importPeriod);
+					ZonedDateTime nextStartTime = startDateTime.plus(duration);
+					LOG.info(String.format(importTimerScheduling, classSimpleName, nextStartTime.format(TIME_FORMAT)));
+					Duration nextStartDuration = Duration.between(Instant.now(), nextStartTime);
+					vertx.setTimer(nextStartDuration.toMillis(), b -> {
+						importDataClass(classSimpleName, nextStartTime);
+					});
+				}
+			});
+		}
 	}
 
 	/**
@@ -296,6 +310,72 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 	 * Val.Fail.enUS:Importing %s data failed. 
 	 */
 	private Future<Void> importDataIotNode() {
+		Promise<Void> promise = Promise.promise();
+		webClient.post(config().getInteger(ConfigKeys.YGGIO_PORT), config().getString(ConfigKeys.YGGIO_HOST_NAME), config().getString(ConfigKeys.YGGIO_AUTH_LOCAL_URI))
+				.ssl(config().getBoolean(ConfigKeys.YGGIO_SSL))
+				.expect(ResponsePredicate.SC_OK)
+				.putHeader("Content-Type", "application/json")
+				.sendJsonObject(new JsonObject()
+						.put("username", config().getString(ConfigKeys.YGGIO_USERNAME))
+						.put("password", config().getString(ConfigKeys.YGGIO_PASSWORD))
+						)
+				.onSuccess(tokenResponse -> {
+			JsonObject token = tokenResponse.bodyAsJsonObject();
+			webClient.get(config().getInteger(ConfigKeys.YGGIO_PORT), config().getString(ConfigKeys.YGGIO_HOST_NAME), config().getString(String.format("%s_%s", ConfigKeys.YGGIO_API_RELATIVE_URI, "IotNode")))
+					.ssl(config().getBoolean(ConfigKeys.YGGIO_SSL))
+					.authentication(new TokenCredentials(token.getString("token")))
+					.expect(ResponsePredicate.SC_OK)
+					.send()
+					.onSuccess(response -> {
+				JsonArray data = response.bodyAsJsonArray();
+				List<Future> futures = new ArrayList<>();
+
+				data.stream().forEach(row -> {
+					JsonObject json = (JsonObject)row;
+					String id = json.getString("_id");
+
+					JsonObject body = new JsonObject()
+							.put(IotNode.VAR_saves, new JsonArray()
+									.add(IotNode.VAR_inheritPk)
+									.add(IotNode.VAR_json)
+									)
+							.put(IotNode.VAR_json, json)
+							.put(IotNode.VAR_pk, id)
+							;
+
+					JsonObject params = new JsonObject();
+					params.put("body", body);
+					params.put("path", new JsonObject());
+					params.put("cookie", new JsonObject());
+					params.put("query", new JsonObject().put("commitWithin", 10000).put("q", "*:*").put("var", new JsonArray().add("refresh:false")));
+					JsonObject context = new JsonObject().put("params", params);
+					JsonObject request = new JsonObject().put("context", context);
+					futures.add(vertx.eventBus().request(String.format("smart-village-view-enUS-%s", "IotNode"), request, new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", IotNode.CLASS_SIMPLE_NAME))));
+				});
+				CompositeFuture.all(futures).onSuccess(a -> {
+					LOG.info(String.format(importDataIotNodeComplete, IotNode.CLASS_SIMPLE_NAME));
+					promise.complete();
+				}).onFailure(ex -> {
+					LOG.error(String.format(importDataIotNodeFail, IotNode.CLASS_SIMPLE_NAME), ex);
+					promise.fail(ex);
+				});
+			}).onFailure(ex -> {
+				LOG.error(String.format(importDataIotNodeFail, IotNode.CLASS_SIMPLE_NAME), ex);
+				promise.fail(ex);
+			});
+		}).onFailure(ex -> {
+			LOG.error(String.format(importDataIotNodeFail, IotNode.CLASS_SIMPLE_NAME), ex);
+			promise.fail(ex);
+		});
+		return promise.future();
+	}
+
+	/**
+	 * Description: Import Site HTML data
+	 * Val.Complete.enUS:Importing %s data completed. 
+	 * Val.Fail.enUS:Importing %s data failed. 
+	 */
+	private Future<Void> importDataSiteHtml() {
 		Promise<Void> promise = Promise.promise();
 		webClient.post(config().getInteger(ConfigKeys.YGGIO_PORT), config().getString(ConfigKeys.YGGIO_HOST_NAME), config().getString(ConfigKeys.YGGIO_AUTH_LOCAL_URI))
 				.ssl(config().getBoolean(ConfigKeys.YGGIO_SSL))

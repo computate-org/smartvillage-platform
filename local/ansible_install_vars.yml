@@ -2,7 +2,7 @@
 GITHUB_ORG: computate-org
 PROJECT_NAME: smart-village-view
 PROJECT_REPO: "git@github.com:{{ GITHUB_ORG }}/{{ PROJECT_NAME }}.git"
-PROJECT_REPO_HTTPS: "{{ PROJECT_REPO_SSH | replace('git@github.com:', 'https://github.com/') }}"
+PROJECT_REPO_HTTPS: "{{ PROJECT_REPO | replace('git@github.com:', 'https://github.com/') }}"
 PROJECT_LANG: enUS
 PROJECT_ZONE: "America/New_York"
 PROJECT_LOCALE: "en-US"
@@ -33,6 +33,18 @@ PROJECTS:
     PROJECT_SRC: "{{ PROJECT_SRC }}"
     PROJECT_JAVA_PACKAGE: "{{ PROJECT_JAVA_PACKAGE }}"
     PROJECT_FILES: 
+#      - path: "{{ PROJECT_SRC }}/.project"
+#        template: eclipse/project.xml
+#      - path: "{{ PROJECT_SRC }}-static/.project"
+#        template: eclipse/project-static.xml
+#      - path: "{{ PROJECT_SRC }}-ansible/.project"
+#        template: eclipse/project-ansible.xml
+#      - path: "{{ PROJECT_SRC }}/.classpath"
+#        template: eclipse/classpath.xml
+#      - path: "{{ PROJECT_SRC | dirname }}/.metadata/.plugins/org.eclipse.debug.core/.launches/{{ PROJECT_NAME }}.launch"
+#        template: eclipse/launchMainVerticle.xml
+#      - path: "{{ PROJECT_SRC | dirname }}/.metadata/.plugins/org.eclipse.debug.core/.launches/{{ PROJECT_NAME }}-OpenApi3Generator.launch"
+#        template: eclipse/launchOpenApi3Generator.xml
       - path: "{{ PROJECT_SRC }}/pom.xml"
         template: java/pom.xml
       - path: "{{ PROJECT_SRC }}/install.yml"
@@ -100,7 +112,7 @@ PROJECTS:
       - path: "{{ PROJECT_SRC }}-static/css/jquery-ui.css"
         template: css/jquery-ui.css
       - path: "{{ PROJECT_SRC }}-static/css/site-{{ PROJECT_LANG }}.css"
-        template: css/site.css
+        template: css/site-enUS.css
       - path: "{{ PROJECT_SRC }}-static/css/w3.css"
         template: css/w3.css
       - path: "{{ PROJECT_SRC }}-static/svg/openshift.svg"
@@ -248,27 +260,17 @@ WORKER_IMPORT_DATA: |2
   				List<Future> futures = new ArrayList<>();
   
   				data.stream().forEach(row -> {
-  					JsonObject iotNode = (JsonObject)row;
-  					String id = iotNode.getString("_id");
-  					String name = iotNode.getString("name");
-  					String nodeType = iotNode.getString("nodeType");
-  					JsonArray latlng = iotNode.getJsonArray("latlng");
+  					JsonObject json = (JsonObject)row;
+  					String id = json.getString("_id");
   
   					JsonObject body = new JsonObject()
   							.put(IotNode.VAR_saves, new JsonArray()
   									.add(IotNode.VAR_inheritPk)
-  									.add(IotNode.VAR_nodeId)
-  									.add(IotNode.VAR_nodeName)
-  									.add(IotNode.VAR_nodeType)
-  									.add(IotNode.VAR_location)
+  									.add(IotNode.VAR_json)
   									)
+  							.put(IotNode.VAR_json, json)
   							.put(IotNode.VAR_pk, id)
-  							.put(IotNode.VAR_nodeId, id)
-  							.put(IotNode.VAR_nodeName, name)
-  							.put(IotNode.VAR_nodeType, nodeType)
   							;
-  					if(latlng != null && latlng.size() == 2)
-  						body.put(IotNode.VAR_location, String.format("%s,%s", latlng.getDouble(0), latlng.getDouble(1)));
   
   					JsonObject params = new JsonObject();
   					params.put("body", body);
@@ -276,8 +278,8 @@ WORKER_IMPORT_DATA: |2
   					params.put("cookie", new JsonObject());
   					params.put("query", new JsonObject().put("commitWithin", 10000).put("q", "*:*").put("var", new JsonArray().add("refresh:false")));
   					JsonObject context = new JsonObject().put("params", params);
-  					JsonObject json = new JsonObject().put("context", context);
-  					futures.add(vertx.eventBus().request(String.format("smart-village-view-enUS-%s", "IotNode"), json, new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", IotNode.CLASS_SIMPLE_NAME))));
+  					JsonObject request = new JsonObject().put("context", context);
+  					futures.add(vertx.eventBus().request(String.format("smart-village-view-enUS-%s", "IotNode"), request, new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", IotNode.CLASS_SIMPLE_NAME))));
   				});
   				CompositeFuture.all(futures).onSuccess(a -> {
   					LOG.info(String.format(importDataIotNodeComplete, IotNode.CLASS_SIMPLE_NAME));

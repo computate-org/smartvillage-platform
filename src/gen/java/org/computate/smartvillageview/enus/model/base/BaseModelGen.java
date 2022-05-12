@@ -1805,7 +1805,7 @@ public abstract class BaseModelGen<DEV> extends Object {
 		}
 		if(objectText != null) {
 			doc.put("objectText_text_enUS", objectText.toString());
-			doc.put("objectText_docvalues_string", objectText);
+			doc.put("objectText_indexed_string", objectText);
 		}
 		if(pageUrlId != null) {
 			doc.put("pageUrlId_docvalues_string", pageUrlId);
@@ -1851,8 +1851,6 @@ public abstract class BaseModelGen<DEV> extends Object {
 				return "objectTitle_docvalues_string";
 			case "objectId":
 				return "objectId_docvalues_string";
-			case "objectText":
-				return "objectText_docvalues_string";
 			case "pageUrlId":
 				return "pageUrlId_docvalues_string";
 			case "pageUrlPk":
@@ -1911,6 +1909,53 @@ public abstract class BaseModelGen<DEV> extends Object {
 		}
 	}
 
+	public static String searchVarBaseModel(String searchVar) {
+		switch(searchVar) {
+			case "pk_docvalues_long":
+				return "pk";
+			case "inheritPk_docvalues_string":
+				return "inheritPk";
+			case "created_docvalues_date":
+				return "created";
+			case "modified_docvalues_date":
+				return "modified";
+			case "archived_docvalues_boolean":
+				return "archived";
+			case "deleted_docvalues_boolean":
+				return "deleted";
+			case "classCanonicalName_docvalues_string":
+				return "classCanonicalName";
+			case "classSimpleName_docvalues_string":
+				return "classSimpleName";
+			case "classCanonicalNames_docvalues_strings":
+				return "classCanonicalNames";
+			case "sessionId_docvalues_string":
+				return "sessionId";
+			case "userKey_docvalues_long":
+				return "userKey";
+			case "saves_docvalues_strings":
+				return "saves";
+			case "objectTitle_docvalues_string":
+				return "objectTitle";
+			case "objectId_docvalues_string":
+				return "objectId";
+			case "objectSuggest_suggested":
+				return "objectSuggest";
+			case "objectText_text_enUS":
+				return "objectText";
+			case "pageUrlId_docvalues_string":
+				return "pageUrlId";
+			case "pageUrlPk_docvalues_string":
+				return "pageUrlPk";
+			case "pageUrlApi_docvalues_string":
+				return "pageUrlApi";
+			case "id":
+				return "id";
+			default:
+				return null;
+		}
+	}
+
 	public static String varSearchBaseModel(String entityVar) {
 		switch(entityVar) {
 			case "objectText":
@@ -1961,7 +2006,7 @@ public abstract class BaseModelGen<DEV> extends Object {
 		oBaseModel.setObjectId(Optional.ofNullable(doc.get("objectId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		String objectSuggest = (String)doc.get("objectSuggest_suggested");
 		oBaseModel.setObjectSuggest(objectSuggest);
-		oBaseModel.setObjectText(Optional.ofNullable(doc.get("objectText_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oBaseModel.setObjectText(Optional.ofNullable(doc.get("objectText_indexedstored_string")).map(v -> v.toString()).orElse(null));
 		oBaseModel.setPageUrlId(Optional.ofNullable(doc.get("pageUrlId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oBaseModel.setPageUrlPk(Optional.ofNullable(doc.get("pageUrlPk_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oBaseModel.setPageUrlApi(Optional.ofNullable(doc.get("pageUrlApi_docvalues_string")).map(v -> v.toString()).orElse(null));
@@ -2299,6 +2344,10 @@ public abstract class BaseModelGen<DEV> extends Object {
 			return 1;
 		case VAR_modified:
 			return 1;
+		case VAR_archived:
+			return 2;
+		case VAR_deleted:
+			return 2;
 		case VAR_objectId:
 			return 1;
 			default:
@@ -2314,6 +2363,10 @@ public abstract class BaseModelGen<DEV> extends Object {
 			return 2;
 		case VAR_modified:
 			return 3;
+		case VAR_archived:
+			return 1;
+		case VAR_deleted:
+			return 2;
 		case VAR_objectId:
 			return 4;
 			default:

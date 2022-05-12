@@ -29,12 +29,3 @@ ALTER TABLE IotNode ADD COLUMN IF NOT EXISTS archived boolean;
 ALTER TABLE IotNode ADD COLUMN IF NOT EXISTS deleted boolean;
 ALTER TABLE IotNode ADD COLUMN IF NOT EXISTS sessionId text;
 ALTER TABLE IotNode ADD COLUMN IF NOT EXISTS userKey bigint;
-
-CREATE TABLE IF NOT EXISTS BaseModel();
-ALTER TABLE BaseModel ADD COLUMN IF NOT EXISTS pk bigserial primary key;
-ALTER TABLE BaseModel ADD COLUMN IF NOT EXISTS inheritPk text;
-ALTER TABLE BaseModel ADD COLUMN IF NOT EXISTS created timestamp with time zone;
-ALTER TABLE BaseModel ADD COLUMN IF NOT EXISTS archived boolean;
-ALTER TABLE BaseModel ADD COLUMN IF NOT EXISTS deleted boolean;
-ALTER TABLE BaseModel ADD COLUMN IF NOT EXISTS sessionId text;
-ALTER TABLE BaseModel ADD COLUMN IF NOT EXISTS userKey bigint;

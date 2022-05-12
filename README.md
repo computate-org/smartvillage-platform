@@ -73,20 +73,20 @@ Here is an example of creating a vault directory and creating a new vault, it wi
 Be sure to not commit your vault to source control, it should be ignored by default in the .gitignore file that is created in the project. 
 
 ```bash
-install -d ~/.local/src/smart-village-view/vault
-ansible-vault create ~/.local/src/smart-village-view/vault/$USER-local
+install -d ~/.local/src/smart-village-view-ansible/vault
+ansible-vault create ~/.local/src/smart-village-view-ansible/vault/$USER-local
 ```
 
 You can edit the vault, it will ask for the password. 
 
 ```bash
-ansible-vault edit ~/.local/src/smart-village-view/vault/$USER-local
+ansible-vault edit ~/.local/src/smart-village-view-ansible/vault/$USER-local
 ```
 
 You can then run the project install automation again with the secrets in the vault, it will ask for the password. 
 
 ```bash
-ansible-playbook ~/.ansible/roles/computate.computate_project/install.yml -e SITE_NAME=smart-village-view -e ENABLE_CODE_GENERATION_SERVICE=true -e @~/.local/src/smart-village-view/vault/$USER-local --vault-id @prompt
+ansible-playbook ~/.ansible/roles/computate.computate_project/install.yml -e SITE_NAME=smart-village-view -e ENABLE_CODE_GENERATION_SERVICE=true -e @~/.local/src/smart-village-view-ansible/vault/$USER-local --vault-id @prompt
 ```
 
 # Configure Red Hat CodeReady Studio
@@ -135,11 +135,29 @@ Add these update sites and install these useful plugins:
 * Browse to the directory: ~/.local/src/smart-village-view
 * Click [ Finish ]
 
+## Setup a CodeReady Studio Debug/Run configuration to generate the OpenAPI 3 spec and the SQL create and drop scripts in smart-village-view
+
+* In CodeReady Studio, go to File -> Debug Configurations...
+* Right click on Java Application -> New Configuration
+* Name: smart-village-view-OpenAPIGenerator
+* Project: smart-village-view
+* Main class: org.computate.smartvillageview.enus.vertx.MainVerticle
+
+### In the Environment tab
+
+Setup the following variables to setup the Vert.x verticle. 
+
+* CONFIG_PATH: ~/.local/src/smart-village-view/config/smart-village-view.yml
+* RUN_OPENAPI3_GENERATOR: true
+* RUN_SQL_GENERATOR: true
+
+Click [ Apply ] and [ Debug ] to debug the generation of the OpenAPI Spec src/main/resources/webroot and the SQL create and drop scripts in src/main/resources/sql. 
+
 ## Setup a CodeReady Studio Debug/Run configuration to run and debug smart-village-view
 
 * In CodeReady Studio, go to File -> Debug Configurations...
 * Right click on Java Application -> New Configuration
-* Name: smart-village-view MainVerticle
+* Name: smart-village-view
 * Project: smart-village-view
 * Main class: org.computate.smartvillageview.enus.vertx.MainVerticle
 

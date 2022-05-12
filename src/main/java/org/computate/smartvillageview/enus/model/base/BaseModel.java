@@ -88,6 +88,8 @@ public class BaseModel extends BaseModelGen<Object> implements ComputateVertxBas
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
+	 * HtmlRow: 2
+	 * HtmlCell: 1
 	 * DisplayName.enUS: archived
 	 * Description: For archiving this record
 	 */
@@ -99,6 +101,8 @@ public class BaseModel extends BaseModelGen<Object> implements ComputateVertxBas
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
+	 * HtmlRow: 2
+	 * HtmlCell: 2
 	 * DisplayName.enUS: deleted
 	 * Description: For deleting this record
 	 */
@@ -249,7 +253,6 @@ public class BaseModel extends BaseModelGen<Object> implements ComputateVertxBas
 	/**
 	 * {@inheritDoc}
 	 * Text: true
-	 * DocValues: true
 	 * Description: The full text search field in the search engine for this record while using autosuggest
 	 * DisplayName: text
 	 */

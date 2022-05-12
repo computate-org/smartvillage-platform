@@ -2,7 +2,9 @@ package org.computate.smartvillageview.enus.page;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -24,11 +26,32 @@ import io.vertx.ext.web.api.service.ServiceRequest;
  **/
 public class PageLayout extends PageLayoutGen<Object> {
 
+	public static DateTimeFormatter FORMATDateTimeShort = DateTimeFormatter.ofPattern("MMM d yyyy h:mm a", Locale.US);
+
+	public static DateTimeFormatter FORMATDateShort = DateTimeFormatter.ofPattern("EEE MMM d yyyy", Locale.US);
+
+	public static DateTimeFormatter FORMATMonthYear = DateTimeFormatter.ofPattern("MMM yyyy", Locale.US);
+
+	public static DateTimeFormatter FORMATDateDisplay = DateTimeFormatter.ofPattern("EEEE MMMM d yyyy", Locale.US);
+
+	public static DateTimeFormatter FORMATDateTimeDisplay = DateTimeFormatter.ofPattern("EEEE MMMM d yyyy h:mm a:ss.SSS", Locale.US);
+
+	public static DateTimeFormatter FORMATZonedDateTimeDisplay = DateTimeFormatter.ofPattern("EEEE MMMM d yyyy H:mm:ss.SSS zz VV", Locale.US);
+
+	public static DateTimeFormatter FORMATTimeDisplay = DateTimeFormatter.ofPattern("h:mm a", Locale.US);
+
 	/**
 	 * Ignore: true
 	 * Description: The current request object
 	**/
 	protected void _siteRequest_(Wrap<SiteRequestEnUS> w) {
+	}
+
+	/**
+	 * Description: The current request language
+	 */
+	protected void _lang(Wrap<String> w) {
+		w.o(siteRequest_.getLang());
 	}
 
 	/**
@@ -242,6 +265,24 @@ public class PageLayout extends PageLayoutGen<Object> {
 	 * Description: The image URI for this page
 	 */
 	protected void _pageImageUri(Wrap<String> w) {
+	}
+
+	/**
+	 * Description: The image width
+	 */
+	protected void _pageImageWidth(Wrap<Integer> c) {
+	}
+
+	/**
+	 * Description: The image height
+	 */
+	protected void _pageImageHeight(Wrap<Integer> c) {
+	}
+
+	/**
+	 * Description: The video ID for this page
+	 */
+	protected void _pageVideoId(Wrap<String> c) {
 	}
 
 	/**

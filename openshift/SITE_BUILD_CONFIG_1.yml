@@ -17,7 +17,7 @@ spec:
   runPolicy: Serial
   source:
     git:
-      uri: 'https://github.com/{{ GITHUB_ORG_NAME }}/{{ GITHUB_REPO_NAME }}.git'
+      uri: '{{ SITE_REPO_HTTPS }}'
     type: Git
   strategy:
     sourceStrategy:

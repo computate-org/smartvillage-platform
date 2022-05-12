@@ -1045,6 +1045,31 @@ public abstract class SiteUserGen<DEV> extends BaseModel {
 		}
 	}
 
+	public static String searchVarSiteUser(String searchVar) {
+		switch(searchVar) {
+			case "userKeys_docvalues_longs":
+				return "userKeys";
+			case "userId_docvalues_string":
+				return "userId";
+			case "userName_docvalues_string":
+				return "userName";
+			case "userEmail_docvalues_string":
+				return "userEmail";
+			case "userFirstName_docvalues_string":
+				return "userFirstName";
+			case "userLastName_docvalues_string":
+				return "userLastName";
+			case "userFullName_docvalues_string":
+				return "userFullName";
+			case "seeArchived_docvalues_boolean":
+				return "seeArchived";
+			case "seeDeleted_docvalues_boolean":
+				return "seeDeleted";
+			default:
+				return BaseModel.searchVarBaseModel(searchVar);
+		}
+	}
+
 	public static String varSearchSiteUser(String entityVar) {
 		switch(entityVar) {
 			default:
