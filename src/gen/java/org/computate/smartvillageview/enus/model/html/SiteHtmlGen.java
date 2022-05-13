@@ -55,6 +55,42 @@ import io.vertx.core.json.JsonObject;
 public abstract class SiteHtmlGen<DEV> extends Object {
 	protected static final Logger LOG = LoggerFactory.getLogger(SiteHtml.class);
 
+	public static final String SiteHtml_Description_enUS = "An HTML part that is indexed in the search engine. ";
+	public static final String SiteHtml_AName_enUS = "an HTML";
+	public static final String SiteHtml_This_enUS = "this ";
+	public static final String SiteHtml_ThisName_enUS = "this HTML";
+	public static final String SiteHtml_A_enUS = "a ";
+	public static final String SiteHtml_TheName_enUS = "theHTML";
+	public static final String SiteHtml_NameSingular_enUS = "HTML";
+	public static final String SiteHtml_NamePlural_enUS = "HTMLs";
+	public static final String SiteHtml_NameActual_enUS = "current HTML";
+	public static final String SiteHtml_AllName_enUS = "all the HTMLs";
+	public static final String SiteHtml_SearchAllNameBy_enUS = "search HTMLs by ";
+	public static final String SiteHtml_Title_enUS = "HTMLs";
+	public static final String SiteHtml_ThePluralName_enUS = "the HTMLs";
+	public static final String SiteHtml_NoNameFound_enUS = "no HTML found";
+	public static final String SiteHtml_NameVar_enUS = "html";
+	public static final String SiteHtml_OfName_enUS = "of HTML";
+	public static final String SiteHtml_ANameAdjective_enUS = "an HTML";
+	public static final String SiteHtml_NameAdjectiveSingular_enUS = "HTML";
+	public static final String SiteHtml_NameAdjectivePlural_enUS = "HTMLs";
+	public static final String Search_enUS_Uri = "/api/html";
+	public static final String Search_enUS_ImageUri = "/png/api/html-999.png";
+	public static final String GET_enUS_Uri = "/api/html/{id}";
+	public static final String GET_enUS_ImageUri = "/png/api/html/{id}-999.png";
+	public static final String POST_enUS_Uri = "/api/html";
+	public static final String POST_enUS_ImageUri = "/png/api/html-999.png";
+	public static final String PATCH_enUS_Uri = "/api/html";
+	public static final String PATCH_enUS_ImageUri = "/png/api/html-999.png";
+	public static final String PUTImport_enUS_Uri = "/api/html-import";
+	public static final String PUTImport_enUS_ImageUri = "/png/api/html-import-999.png";
+	public static final String SearchPage_enUS_Uri = "/html";
+	public static final String SearchPage_enUS_ImageUri = "/png/html-999.png";
+
+	public static final String SiteHtml_Color = "2017-navy-peony";
+	public static final String SiteHtml_IconGroup = "duotone";
+	public static final String SiteHtml_IconName = "code";
+
 	//////////////////
 	// promiseBegin //
 	//////////////////
@@ -1290,6 +1326,117 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 			return DISPLAY_NAME_id;
 		default:
 			return null;
+		}
+	}
+
+	public static String descriptionSiteHtml(String var) {
+		switch(var) {
+		case VAR_promiseBegin:
+			return "An asynchronous method for searching for related problems to this message";
+		case VAR_siteRequest_:
+			return "The current request object";
+		case VAR_pk:
+			return "The primary key of this object";
+		case VAR_saves:
+			return "A list of fields that are saved for this record in the database";
+		case VAR_e:
+			return "The HTML element. ";
+		case VAR_htmlBefore:
+			return "The HTML that comes before the text. ";
+		case VAR_htmlAfter:
+			return "The HTML that comes after the text. ";
+		case VAR_classCanonicalName:
+			return "the canonical name of this Java class";
+		case VAR_classSimpleName:
+			return "The simple name of this Java class";
+		case VAR_classCanonicalNames:
+			return "All the inherited canonical names of this Java class";
+		case VAR_objectText:
+			return "The full text search field in the search engine for this record while using autosuggest";
+		case VAR_id:
+			return "The unique key for this record in the search engine";
+			default:
+				return null;
+		}
+	}
+
+	public static String classSimpleNameSiteHtml(String var) {
+		switch(var) {
+		case VAR_promiseBegin:
+			return "Void";
+		case VAR_siteRequest_:
+			return "SiteRequestEnUS";
+		case VAR_pk:
+			return "Long";
+		case VAR_saves:
+			return "List";
+		case VAR_e:
+			return "String";
+		case VAR_htmlBefore:
+			return "String";
+		case VAR_htmlAfter:
+			return "String";
+		case VAR_classCanonicalName:
+			return "String";
+		case VAR_classSimpleName:
+			return "String";
+		case VAR_classCanonicalNames:
+			return "List";
+		case VAR_objectText:
+			return "String";
+		case VAR_id:
+			return "String";
+			default:
+				return null;
+		}
+	}
+
+	public static Integer htmlColumnSiteHtml(String var) {
+		switch(var) {
+			default:
+				return null;
+		}
+	}
+
+	public static Integer htmlRowSiteHtml(String var) {
+		switch(var) {
+			default:
+				return null;
+		}
+	}
+
+	public static Integer htmlCellSiteHtml(String var) {
+		switch(var) {
+			default:
+				return null;
+		}
+	}
+
+	public static Integer lengthMinSiteHtml(String var) {
+		switch(var) {
+			default:
+				return null;
+		}
+	}
+
+	public static Integer lengthMaxSiteHtml(String var) {
+		switch(var) {
+			default:
+				return null;
+		}
+	}
+
+	public static Integer maxSiteHtml(String var) {
+		switch(var) {
+			default:
+				return null;
+		}
+	}
+
+	public static Integer minSiteHtml(String var) {
+		switch(var) {
+			default:
+				return null;
 		}
 	}
 }

@@ -1,4 +1,4 @@
-package org.computate.smartvillageview.enus.model.html;
+package org.computate.smartvillageview.enus.model.page;
 
 import io.vertx.ext.auth.authorization.AuthorizationProvider;
 import io.vertx.ext.auth.oauth2.OAuth2Auth;
@@ -12,9 +12,9 @@ import io.vertx.ext.web.templ.handlebars.HandlebarsTemplateEngine;
 /**
  * Translate: false
  **/
-public class SiteHtmlEnUSApiServiceImpl extends SiteHtmlEnUSGenApiServiceImpl {
+public class SitePageEnUSApiServiceImpl extends SitePageEnUSGenApiServiceImpl {
 
-	public SiteHtmlEnUSApiServiceImpl(EventBus eventBus, JsonObject config, WorkerExecutor workerExecutor, PgPool pgPool, WebClient webClient, OAuth2Auth oauth2AuthenticationProvider, AuthorizationProvider authorizationProvider, HandlebarsTemplateEngine templateEngine) {
+	public SitePageEnUSApiServiceImpl(EventBus eventBus, JsonObject config, WorkerExecutor workerExecutor, PgPool pgPool, WebClient webClient, OAuth2Auth oauth2AuthenticationProvider, AuthorizationProvider authorizationProvider, HandlebarsTemplateEngine templateEngine) {
 		super(eventBus, config, workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine);
 	}
 }

@@ -9,6 +9,8 @@ import io.vertx.core.Promise;
 
 /**
  * Api: true
+ * Page: true
+ * SuperPage.enUS: PageLayout
  * Indexed: true
  * 
  * ApiTag.enUS: HTML
@@ -21,11 +23,15 @@ import io.vertx.core.Promise;
  * ApiMethod: PUTImport
  * 
  * ApiMethod.enUS: SearchPage
+ * PageSearchPage.enUS: SiteHtmlPage
+ * PageSuperSearchPage.enUS: BaseModelPage
+ * ApiUriSearchPage.enUS: /html
  * 
  * AName.enUS: an HTML
  * Color: 2017-navy-peony
  * IconGroup: duotone
  * IconName: code
+ * NameVar: html
  * 
  * RoleAll: true
  * Description: An HTML part that is indexed in the search engine. 

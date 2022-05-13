@@ -1,18 +1,20 @@
 ---
-- uri: /en-US/kubernetes-components
-  h1: What Kubernetes components are used in the Smart Village project? 
-  h2: Both Kubernetes API objects and OpenShift API Objects
-  title: >-
-    What Kubernetes components are used in the Smart Village project? 
-    Both Kubernetes API objects and OpenShift API Objects
-- e: p
-  text: >-
-    Kubernetes components are unique parts of a website that is deployed to the cloud. 
-    There are components for storing secrets, 
-    and components for giving open network ports a name. 
-- e: p
-  text: >-
-    OpenShift supplies Kubernetes with extra powerful components for managing container images and their versions, 
-    automatic image builds based off of triggers, 
-    routes for assigning hostnames and site certificates, 
-    and deployment configurations for all of your applications. 
+uri: /en-US/kubernetes-components
+h1: What Kubernetes components are used in the Smart Village project? 
+h2: Both Kubernetes API objects and OpenShift API Objects
+created: "2022-05-12"
+title: >-
+  What Kubernetes components are used in the Smart Village project? 
+  Both Kubernetes API objects and OpenShift API Objects
+more:
+  - e: p
+    text: >-
+      Kubernetes components are unique parts of a website that is deployed to the cloud. 
+      There are components for storing secrets, 
+      and components for giving open network ports a name. 
+  - e: p
+    text: >-
+      OpenShift supplies Kubernetes with extra powerful components for managing container images and their versions, 
+      automatic image builds based off of triggers, 
+      routes for assigning hostnames and site certificates, 
+      and deployment configurations for all of your applications. 

@@ -1,9 +1,10 @@
 package org.computate.smartvillageview.enus.vertx;
 
+import java.io.File;
 import java.math.BigDecimal;
+import java.nio.file.Paths;
 import java.time.Duration;
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -13,15 +14,19 @@ import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.StringUtils;
-import org.computate.search.serialize.ComputateZonedDateTimeSerializer;
 import org.computate.search.tool.TimeTool;
+import org.computate.smartvillageview.enus.config.ConfigKeys;
+import org.computate.smartvillageview.enus.model.iotnode.IotNode;
+import org.computate.smartvillageview.enus.model.page.SitePage;
+import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.vertx.api.ApiCounter;
 import org.computate.vertx.api.ApiRequest;
-import org.computate.smartvillageview.enus.config.ConfigKeys;
-import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.io.PatternFilenameFilter;
+
+import io.vertx.config.yaml.YamlProcessor;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.CompositeFuture;
 import io.vertx.core.Future;
@@ -30,24 +35,16 @@ import io.vertx.core.WorkerExecutor;
 import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.ext.jdbc.JDBCClient;
+import io.vertx.ext.auth.authentication.TokenCredentials;
 import io.vertx.ext.mail.MailClient;
 import io.vertx.ext.mail.MailConfig;
 import io.vertx.ext.web.client.WebClient;
+import io.vertx.ext.web.client.predicate.ResponsePredicate;
 import io.vertx.pgclient.PgConnectOptions;
 import io.vertx.pgclient.PgPool;
-import io.vertx.sqlclient.Cursor;
 import io.vertx.sqlclient.PoolOptions;
 import io.vertx.sqlclient.Row;
 import io.vertx.sqlclient.RowStream;
-import io.vertx.sqlclient.SqlConnection;
-import java.time.LocalDateTime;
-import io.vertx.ext.jdbc.JDBCClient;
-import io.vertx.sqlclient.Cursor;
-import io.vertx.sqlclient.SqlConnection;
-import io.vertx.ext.web.client.predicate.ResponsePredicate;
-import io.vertx.ext.auth.authentication.TokenCredentials;
-import org.computate.smartvillageview.enus.model.iotnode.IotNode;
 
 
 /**
@@ -218,11 +215,33 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 		return promise.future();
 	}
 
+	/**	
+	 * Import initial data
+	 * Val.Skip.enUS:The data import is disabled. 
+	 **/
+	private Future<Void> importData() {
+		Promise<Void> promise = Promise.promise();
+		if(config().getBoolean(ConfigKeys.ENABLE_IMPORT_DATA)) {
+			importTimer("IotNode").onSuccess(a -> {
+				importTimer("SitePage").onSuccess(b -> {
+					promise.complete();
+				});
+			});
+		}
+		else {
+			LOG.info(importDataSkip);
+			promise.complete();
+		}
+		return promise.future();
+	}
+
 	/**
 	 * Val.Scheduling.enUS:Scheduling the %s import at %s
 	 * Val.Skip.enUS:Skip importing %s data. 
+	 * Val.Fail.enUS:Scheduling the import of %s data failed. 
 	 */
-	private void importTimer(String classSimpleName) {
+	private Future<Void> importTimer(String classSimpleName) {
+		Promise<Void> promise = Promise.promise();
 		if(config().getBoolean(String.format("%s_%s", ConfigKeys.ENABLE_IMPORT_DATA, classSimpleName), true)) {
 			// Load the import start time and period configuration. 
 			String importStartTime = config().getString(String.format("%s_%s", ConfigKeys.IMPORT_DATA_START_TIME, classSimpleName));
@@ -257,15 +276,23 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 			ZonedDateTime nextStartTime2 = nextStartTime;
 
 			if(importStartTime == null) {
-				importDataClass(classSimpleName, nextStartTime2);
+				importDataClass(classSimpleName, nextStartTime2).onSuccess(a -> {
+					promise.complete();
+				}).onFailure(ex -> {
+					LOG.error(String.format(importTimerFail, classSimpleName), ex);
+					promise.fail(ex);
+				});
 			} else {
 				vertx.setTimer(nextStartDuration.toMillis(), a -> {
 					importDataClass(classSimpleName, nextStartTime2);
 				});
+				promise.complete();
 			}
 		} else {
 			LOG.info(String.format(importTimerSkip, classSimpleName));
+			promise.complete();
 		}
+		return promise.future();
 	}
 
 	/**
@@ -273,7 +300,8 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 	 * Val.Complete.enUS:Configuring the import of %s data completed. 
 	 * Val.Fail.enUS:Configuring the import of %s data failed. 
 	 */
-	private void importDataClass(String classSimpleName, ZonedDateTime startDateTime) {
+	private Future<Void> importDataClass(String classSimpleName, ZonedDateTime startDateTime) {
+		Promise<Void> promise = Promise.promise();
 		if("IotNode".equals(classSimpleName)) {
 			importDataIotNode().onComplete(a -> {
 				String importPeriod = config().getString(String.format("%s_%s", ConfigKeys.IMPORT_DATA_PERIOD, classSimpleName));
@@ -285,11 +313,13 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 					vertx.setTimer(nextStartDuration.toMillis(), b -> {
 						importDataClass(classSimpleName, nextStartTime);
 					});
+					promise.complete();
+				} else {
+					promise.complete();
 				}
 			});
-		}
-		if("SiteHtml".equals(classSimpleName)) {
-			importDataSiteHtml().onComplete(a -> {
+		} else if("SitePage".equals(classSimpleName)) {
+			importDataSitePage().onComplete(a -> {
 				String importPeriod = config().getString(String.format("%s_%s", ConfigKeys.IMPORT_DATA_PERIOD, classSimpleName));
 				if(importPeriod != null && startDateTime != null) {
 					Duration duration = TimeTool.parseNextDuration(importPeriod);
@@ -299,9 +329,13 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 					vertx.setTimer(nextStartDuration.toMillis(), b -> {
 						importDataClass(classSimpleName, nextStartTime);
 					});
+					promise.complete();
+				} else {
+					promise.complete();
 				}
 			});
 		}
+		return promise.future();
 	}
 
 	/**
@@ -375,81 +409,76 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 	 * Val.Complete.enUS:Importing %s data completed. 
 	 * Val.Fail.enUS:Importing %s data failed. 
 	 */
-	private Future<Void> importDataSiteHtml() {
+	private Future<Void> importDataSitePage() {
 		Promise<Void> promise = Promise.promise();
-		webClient.post(config().getInteger(ConfigKeys.YGGIO_PORT), config().getString(ConfigKeys.YGGIO_HOST_NAME), config().getString(ConfigKeys.YGGIO_AUTH_LOCAL_URI))
-				.ssl(config().getBoolean(ConfigKeys.YGGIO_SSL))
-				.expect(ResponsePredicate.SC_OK)
-				.putHeader("Content-Type", "application/json")
-				.sendJsonObject(new JsonObject()
-						.put("username", config().getString(ConfigKeys.YGGIO_USERNAME))
-						.put("password", config().getString(ConfigKeys.YGGIO_PASSWORD))
-						)
-				.onSuccess(tokenResponse -> {
-			JsonObject token = tokenResponse.bodyAsJsonObject();
-			webClient.get(config().getInteger(ConfigKeys.YGGIO_PORT), config().getString(ConfigKeys.YGGIO_HOST_NAME), config().getString(String.format("%s_%s", ConfigKeys.YGGIO_API_RELATIVE_URI, "IotNode")))
-					.ssl(config().getBoolean(ConfigKeys.YGGIO_SSL))
-					.authentication(new TokenCredentials(token.getString("token")))
-					.expect(ResponsePredicate.SC_OK)
-					.send()
-					.onSuccess(response -> {
-				JsonArray data = response.bodyAsJsonArray();
-				List<Future> futures = new ArrayList<>();
+		File pageDir = new File(getClass().getClassLoader().getResource("page").getFile());
+		String[] fileNames = pageDir.list(new PatternFilenameFilter("^.*.yml$"));
+		List<Future> futures = new ArrayList<>();
+		YamlProcessor yamlProcessor = new YamlProcessor();
 
-				data.stream().forEach(row -> {
-					JsonObject json = (JsonObject)row;
-					String id = json.getString("_id");
-
-					JsonObject body = new JsonObject()
-							.put(IotNode.VAR_saves, new JsonArray()
-									.add(IotNode.VAR_inheritPk)
-									.add(IotNode.VAR_json)
-									)
-							.put(IotNode.VAR_json, json)
-							.put(IotNode.VAR_pk, id)
-							;
-
-					JsonObject params = new JsonObject();
-					params.put("body", body);
-					params.put("path", new JsonObject());
-					params.put("cookie", new JsonObject());
-					params.put("query", new JsonObject().put("commitWithin", 10000).put("q", "*:*").put("var", new JsonArray().add("refresh:false")));
-					JsonObject context = new JsonObject().put("params", params);
-					JsonObject request = new JsonObject().put("context", context);
-					futures.add(vertx.eventBus().request(String.format("smart-village-view-enUS-%s", "IotNode"), request, new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", IotNode.CLASS_SIMPLE_NAME))));
-				});
-				CompositeFuture.all(futures).onSuccess(a -> {
-					LOG.info(String.format(importDataIotNodeComplete, IotNode.CLASS_SIMPLE_NAME));
-					promise.complete();
-				}).onFailure(ex -> {
-					LOG.error(String.format(importDataIotNodeFail, IotNode.CLASS_SIMPLE_NAME), ex);
-					promise.fail(ex);
-				});
-			}).onFailure(ex -> {
-				LOG.error(String.format(importDataIotNodeFail, IotNode.CLASS_SIMPLE_NAME), ex);
-				promise.fail(ex);
-			});
+		for(String fileName : fileNames) {
+			futures.add(importSitePage(yamlProcessor, Paths.get(pageDir.getAbsolutePath(), fileName).toString()));
+		}
+		CompositeFuture.all(futures).onSuccess(a -> {
+			LOG.info(String.format(importDataSitePageComplete, SitePage.CLASS_SIMPLE_NAME));
+			promise.complete();
 		}).onFailure(ex -> {
-			LOG.error(String.format(importDataIotNodeFail, IotNode.CLASS_SIMPLE_NAME), ex);
+			LOG.error(String.format(importDataSitePageFail, SitePage.CLASS_SIMPLE_NAME), ex);
 			promise.fail(ex);
 		});
 		return promise.future();
 	}
 
-	/**	
-	 * Import initial data
-	 * Val.Skip.enUS:The data import is disabled. 
-	 **/
-	private Future<Void> importData() {
+	/**
+	 * Description: Import page
+	 * Val.Complete.enUS:Importing page %s completed. 
+	 * Val.Fail.enUS:Importing page %s failed. 
+	 */
+	private Future<Void> importSitePage(YamlProcessor yamlProcessor, String path) {
 		Promise<Void> promise = Promise.promise();
-		if(config().getBoolean(ConfigKeys.ENABLE_IMPORT_DATA)) {
-			importTimer("IotNode");
-			promise.complete();
-		}
-		else {
-			LOG.info(importDataSkip);
-			promise.complete();
-		}
+		vertx.fileSystem().readFile(path).onSuccess(buffer -> {
+			yamlProcessor.process(vertx, null, buffer).onSuccess(json -> {
+				String objectId = StringUtils.substringBeforeLast(StringUtils.substringAfterLast(path, "/"), ".");
+				JsonObject body = new JsonObject();
+				body.put(SitePage.VAR_saves, new JsonArray()
+						.add(SitePage.VAR_inheritPk)
+						.add(SitePage.VAR_created)
+						.add(SitePage.VAR_objectId)
+						.add(SitePage.VAR_objectTitle)
+						.add(SitePage.VAR_uri)
+						.add(SitePage.VAR_h1)
+						.add(SitePage.VAR_h2)
+						);
+				body.put(SitePage.VAR_id, objectId);
+				body.put(SitePage.VAR_objectId, objectId);
+				body.put(SitePage.VAR_objectTitle, json.getString("title"));
+				body.put(SitePage.VAR_created, json.getString("created"));
+				body.put(SitePage.VAR_uri, json.getString("uri"));
+				body.put(SitePage.VAR_h1, json.getString("h1"));
+				body.put(SitePage.VAR_h2, json.getString("h2"));
+
+				JsonObject params = new JsonObject();
+				params.put("body", body);
+				params.put("path", new JsonObject());
+				params.put("cookie", new JsonObject());
+				params.put("query", new JsonObject().put("commitWithin", 10000).put("q", "*:*").put("var", new JsonArray().add("refresh:false")));
+				JsonObject context = new JsonObject().put("params", params);
+				JsonObject request = new JsonObject().put("context", context);
+				vertx.eventBus().request(String.format("smart-village-view-enUS-%s", SitePage.CLASS_SIMPLE_NAME), request, new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", SitePage.CLASS_SIMPLE_NAME))).onSuccess(a -> {
+					LOG.info(String.format(importSitePageComplete, SitePage.CLASS_SIMPLE_NAME));
+					promise.complete();
+				}).onFailure(ex -> {
+					LOG.error(String.format(importSitePageFail, SitePage.CLASS_SIMPLE_NAME), ex);
+					promise.fail(ex);
+				});
+			}).onFailure(ex -> {
+				LOG.error(String.format(importSitePageFail, SitePage.CLASS_SIMPLE_NAME), ex);
+				promise.fail(ex);
+			});
+		}).onFailure(ex -> {
+			LOG.error(String.format(importSitePageFail, SitePage.CLASS_SIMPLE_NAME), ex);
+			promise.fail(ex);
+		});
 		return promise.future();
 	}
 
@@ -465,7 +494,7 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 			if(config().getBoolean(ConfigKeys.ENABLE_REFRESH_DATA, false)) {
 			LOG.info(refreshAllDataStarted);
 				refreshData("SiteUser").onSuccess(q -> {
-					refreshData("MODEL_CLASS").onSuccess(a -> {
+					refreshData("IotNode").onSuccess(a -> {
 						LOG.info(refreshAllDataComplete);
 						promise.complete();
 					}).onFailure(ex -> {
@@ -543,7 +572,7 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 												apiCounter.incrementQueueNum();
 												try {
 													vertx.eventBus().request(
-															String.format("eventphenomenon-enUS-%s", tableName)
+															String.format("smart-village-view-enUS-%s", tableName)
 															, new JsonObject().put(
 																	"context"
 																	, new JsonObject().put(
