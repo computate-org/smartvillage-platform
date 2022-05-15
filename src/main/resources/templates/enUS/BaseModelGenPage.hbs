@@ -89,7 +89,7 @@
 									<div class="w3-tiny ">
 										<div class="pageSearchVal " id="pageSearchVal-fqBaseModel_{{ @key }}">{{#if val }}fq={{ var }}:{{encodeURIComponent val }}{{/if}}</div>
 										<div class="pageSearchVal " id="pageSearchVal-buttonFacetBaseModel_{{ @key }}">{{#if facetField.var }}facet.field={{ facetField.var }}{{/if}}</div>
-										<ol class="pageFacetField w3-small " id="pageFacetFieldBaseModel_{{ @key }}">
+										<ol class="pageFacetField w3-small pageFacetFieldBaseModel_{{ @key }} " id="pageFacetFieldBaseModel_{{ @key }}">
 {{#each facetField.counts }}
 											<li class="cursor-pointer " data-class="BaseModel" data-var="{{ ../var }}" data-val="{{ @key }}" onclick="fqReplace(this); ">{{ @key }}: {{ this }}</li>
 {{/each}}
@@ -216,19 +216,32 @@
 								</div>
 								<div class="w3-padding w3-tiny " id="pageSearchVal-StatsBaseModel">
 {{#if defaultStatsVars }}
-									<div class="pageSearchVal pageSearchVal-StatsBaseModel " id="pageSearchVal-StatsBaseModel_1">fl={{#each defaultStatsVars }}{{#if @index }},{{/if}}{{ this }}{{/each}}</div>
-{{/if}}
+{{#each defaultStatsVars }}									<div class="pageSearchVal pageSearchVal-StatsBaseModel_{{ this }} " id="pageSearchVal-StatsBaseModel_{{ this }}">stats.field={{ this }}</div>
+{{/each}}{{/if}}
 								</div>
 								<table class="w3-table ">
 {{#each varsFq }}
+{{#if enableStats }}
 									<tr class="">
 										<td class="">
-											<span><input type="checkbox" name="pageStats" class="pageStats " id="pageStatsBaseModel_{{ @key }}" value="{{ var }}"{{#if Stats }} checked="checked"{{/if}} onclick="facetStatsChange(this, 'BaseModel'); "/></span>
+											<span><input type="checkbox" name="pageStats" class="pageStats " id="pageStatsBaseModel_{{ @key }}" value="{{ var }}"{{#if ./stats }} checked="checked"{{/if}} onclick="facetStatsChange(this, 'BaseModel'); "/></span>
 										</td>
 										<td class="w3-cell ">
-											<label for="pageStatsBaseModel_{{ @key }}">{{ displayName }}</label>
+											<div>
+												<label for="pageStatsBaseModel_{{ @key }}">{{ displayName }}</label>
+											</div>
+											<div class="pageStatsField w3-small pageStatsFieldBaseModel_{{ @key }} " id="pageStatsFieldBaseModel_{{ @key }}">
+{{#if ./stats }}
+{{#each ./stats }}
+{{#eq @key 'name' }}{{else}}
+												<div data-class="BaseModel" data-var="{{ ../var }}" data-val="{{ @key }}">{{ @key }}: {{ this }}</div>
+{{/eq}}
+{{/each}}
+{{/if}}
+											</div>
 										</td>
 									</tr>
+{{/if}}
 {{/each}}
 								</table>
 {{/inline}}
@@ -373,8 +386,8 @@
 					<div class="w3-dropdown-content min-width-300px w3-white w3-border w3-border- ">
 						<div class="siteSidebarToggle siteSidebarToggleSearch" style="display: none; ">
 							<div class="w3-bar w3- ">
-								<i class="fad fa-magnifying-glass "></i>
-								<span class="w3-bar-item w3-padding ">Search</span>
+								<span class="w3-bar-item ">
+								<i class="fad fa-magnifying-glass "></i> Search</span>
 							</div>
 							<div class="w3-bar-block ">
 {{#block "htmBodySearch"}}{{/block}}
@@ -382,8 +395,8 @@
 						</div>
 						<div  class="siteSidebarToggle siteSidebarToggleFilters" style="display: none; ">
 							<div class="w3-bar w3- ">
-								<i class="fad fa-filters "></i>
-								<span class="w3-bar-item w3-padding ">Filters</span>
+								<span class="w3-bar-item ">
+								<i class="fad fa-filters "></i> Filters</span>
 							</div>
 							<div class="w3-bar-block ">
 {{#block "htmBodyFilters"}}{{/block}}
@@ -391,8 +404,8 @@
 						</div>
 						<div  class="siteSidebarToggle siteSidebarToggleRange" style="display: none; ">
 							<div class="w3-bar w3- ">
-								<i class="fad fa-calendar-range "></i>
-								<span class="w3-bar-item w3-padding ">Range</span>
+								<span class="w3-bar-item ">
+								<i class="fad fa-calendar-range "></i> Range</span>
 							</div>
 							<div class="w3-bar-block ">
 {{#block "htmBodyRange"}}{{/block}}
@@ -400,8 +413,8 @@
 						</div>
 						<div  class="siteSidebarToggle siteSidebarTogglePivot" style="display: none; ">
 							<div class="w3-bar w3- ">
-								<i class="fad fa-table-pivot "></i>
-								<span class="w3-bar-item w3-padding ">Pivot</span>
+								<span class="w3-bar-item ">
+								<i class="fad fa-table-pivot "></i> Pivot</span>
 							</div>
 							<div class="w3-bar-block ">
 {{#block "htmBodyPivot"}}{{/block}}
@@ -409,8 +422,8 @@
 						</div>
 						<div  class="siteSidebarToggle siteSidebarToggleFieldList" style="display: none; ">
 							<div class="w3-bar w3- ">
-								<i class="fad fa-list-ul "></i>
-								<span class="w3-bar-item w3-padding ">Field List</span>
+								<span class="w3-bar-item ">
+								<i class="fad fa-list-ul "></i> Field List</span>
 							</div>
 							<div class="w3-bar-block ">
 {{#block "htmBodyFieldList"}}{{/block}}
@@ -418,8 +431,8 @@
 						</div>
 						<div  class="siteSidebarToggle siteSidebarToggleStats" style="display: none; ">
 							<div class="w3-bar w3- ">
-								<i class="fad fa-chart-candlestick "></i>
-								<span class="w3-bar-item w3-padding ">Stats</span>
+								<span class="w3-bar-item ">
+								<i class="fad fa-chart-candlestick "></i> Stats</span>
 							</div>
 							<div class="w3-bar-block ">
 {{#block "htmBodyStats"}}{{/block}}

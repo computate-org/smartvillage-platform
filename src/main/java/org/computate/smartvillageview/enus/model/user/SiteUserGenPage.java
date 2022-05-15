@@ -112,12 +112,12 @@ public class SiteUserGenPage extends SiteUserGenPageGen<BaseModelPage> {
 	}
 
 	@Override
-	protected void _defaultStatsVars(List<String> l) {
-		Optional.ofNullable(searchListSiteUser_.getStatsFields()).orElse(Arrays.asList()).forEach(varIndexed -> {
-			String varIndexed2 = varIndexed;
-			if(StringUtils.contains(varIndexed2, "}"))
-				varIndexed2 = StringUtils.substringAfterLast(varIndexed2, "}");
-			String[] parts = varIndexed2.split(",");
+	protected void _defaultFieldListVars(List<String> l) {
+		Optional.ofNullable(searchListSiteUser_.getFields()).orElse(Arrays.asList()).forEach(varStored -> {
+			String varStored2 = varStored;
+			if(StringUtils.contains(varStored2, "}"))
+				varStored2 = StringUtils.substringAfterLast(varStored2, "}");
+			String[] parts = varStored2.split(",");
 			for(String part : parts) {
 				if(StringUtils.isNotBlank(part)) {
 					String var = SiteUser.searchVarSiteUser(part);
@@ -129,12 +129,12 @@ public class SiteUserGenPage extends SiteUserGenPageGen<BaseModelPage> {
 	}
 
 	@Override
-	protected void _defaultFieldListVars(List<String> l) {
-		Optional.ofNullable(searchListSiteUser_.getFields()).orElse(Arrays.asList()).forEach(varStored -> {
-			String varStored2 = varStored;
-			if(StringUtils.contains(varStored2, "}"))
-				varStored2 = StringUtils.substringAfterLast(varStored2, "}");
-			String[] parts = varStored2.split(",");
+	protected void _defaultStatsVars(List<String> l) {
+		Optional.ofNullable(searchListSiteUser_.getStatsFields()).orElse(Arrays.asList()).forEach(varIndexed -> {
+			String varIndexed2 = varIndexed;
+			if(StringUtils.contains(varIndexed2, "}"))
+				varIndexed2 = StringUtils.substringAfterLast(varIndexed2, "}");
+			String[] parts = varIndexed2.split(",");
 			for(String part : parts) {
 				if(StringUtils.isNotBlank(part)) {
 					String var = SiteUser.searchVarSiteUser(part);
@@ -302,6 +302,7 @@ public class SiteUserGenPage extends SiteUserGenPageGen<BaseModelPage> {
 			json.put("var", var);
 			json.put("varStored", varStored);
 			json.put("varIndexed", varIndexed);
+					String type = StringUtils.substringAfterLast(varIndexed, "_");
 			json.put("displayName", Optional.ofNullable(SiteUser.displayNameSiteUser(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
 			json.put("classSimpleName", Optional.ofNullable(SiteUser.classSimpleNameSiteUser(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
 			json.put("val", searchListSiteUser_.getRequest().getFilterQueries().stream().filter(fq -> fq.startsWith(SiteUser.varIndexedSiteUser(var) + ":")).findFirst().map(s -> StringUtils.substringAfter(s, ":")).orElse(null));
@@ -318,11 +319,14 @@ public class SiteUserGenPage extends SiteUserGenPageGen<BaseModelPage> {
 				facetJson.put("counts", counts);
 				json.put("facetField", facetJson);
 			});
-			if(defaultStatsVars.contains(var)) {
-				json.put("stats", stats.get(varIndexed));
-			}
 			if(defaultFieldListVars.contains(var)) {
 				json.put("fieldList", true);
+			}
+			json.put("enableStats", !StringUtils.equalsAny(type, "boolean", "location"));
+			if(defaultStatsVars.contains(var)) {
+				SolrResponse.StatsField varStats = stats.get(varIndexed);
+				if(varStats != null)
+					json.put("stats", varStats);
 			}
 			if(defaultPivotVars.contains(var)) {
 				json.put("pivot", true);
@@ -388,7 +392,7 @@ public class SiteUserGenPage extends SiteUserGenPageGen<BaseModelPage> {
 		JsonObject fqs = new JsonObject();
 		for(String fq : Optional.ofNullable(searchListSiteUser_).map(l -> l.getFilterQueries()).orElse(Arrays.asList())) {
 			if(!StringUtils.contains(fq, "(")) {
-				String fq1 = SiteUser.searchVarSiteUser(fq);
+				String fq1 = SiteUser.searchVarSiteUser(StringUtils.substringBefore(fq, ":"));
 				String fq2 = StringUtils.substringAfter(fq, ":");
 				if(!StringUtils.startsWithAny(fq, "classCanonicalNames_", "archived_", "deleted_", "sessionId", "userKeys"))
 					fqs.put(fq1, new JsonObject().put("var", fq1).put("val", fq2).put("displayName", SiteUser.displayNameForClass(fq1)));

@@ -89,7 +89,7 @@
 									<div class="w3-tiny ">
 										<div class="pageSearchVal " id="pageSearchVal-fqSiteUser_{{ @key }}">{{#if val }}fq={{ var }}:{{encodeURIComponent val }}{{/if}}</div>
 										<div class="pageSearchVal " id="pageSearchVal-buttonFacetSiteUser_{{ @key }}">{{#if facetField.var }}facet.field={{ facetField.var }}{{/if}}</div>
-										<ol class="pageFacetField w3-small " id="pageFacetFieldSiteUser_{{ @key }}">
+										<ol class="pageFacetField w3-small pageFacetFieldSiteUser_{{ @key }} " id="pageFacetFieldSiteUser_{{ @key }}">
 {{#each facetField.counts }}
 											<li class="cursor-pointer " data-class="SiteUser" data-var="{{ ../var }}" data-val="{{ @key }}" onclick="fqReplace(this); ">{{ @key }}: {{ this }}</li>
 {{/each}}
@@ -205,6 +205,43 @@
 											<label for="pageFieldListSiteUser_{{ @key }}">{{ displayName }}</label>
 										</td>
 									</tr>
+{{/each}}
+								</table>
+{{/inline}}
+{{#*inline "htmBodyStatsSiteUserPage"}}								<!-- #*inline "htmBodyStatsSiteUserPage" -->
+								<div style="display: none; " class="w3-padding w3-tiny " id="pageSearchVal-StatsSiteUserHidden">
+{{#each defaultStatsVars }}
+									<div class="pageSearchVal-StatsSiteUserHidden " id="pageSearchVal-StatsSiteUserHidden_{{ this }}">{{ this }}</div>
+{{/each}}
+								</div>
+								<div class="w3-padding w3-tiny " id="pageSearchVal-StatsSiteUser">
+{{#if defaultStatsVars }}
+{{#each defaultStatsVars }}									<div class="pageSearchVal pageSearchVal-StatsSiteUser_{{ this }} " id="pageSearchVal-StatsSiteUser_{{ this }}">stats.field={{ this }}</div>
+{{/each}}{{/if}}
+								</div>
+								<table class="w3-table ">
+{{#each varsFq }}
+{{#if enableStats }}
+									<tr class="">
+										<td class="">
+											<span><input type="checkbox" name="pageStats" class="pageStats " id="pageStatsSiteUser_{{ @key }}" value="{{ var }}"{{#if ./stats }} checked="checked"{{/if}} onclick="facetStatsChange(this, 'SiteUser'); "/></span>
+										</td>
+										<td class="w3-cell ">
+											<div>
+												<label for="pageStatsSiteUser_{{ @key }}">{{ displayName }}</label>
+											</div>
+											<div class="pageStatsField w3-small pageStatsFieldSiteUser_{{ @key }} " id="pageStatsFieldSiteUser_{{ @key }}">
+{{#if ./stats }}
+{{#each ./stats }}
+{{#eq @key 'name' }}{{else}}
+												<div data-class="SiteUser" data-var="{{ ../var }}" data-val="{{ @key }}">{{ @key }}: {{ this }}</div>
+{{/eq}}
+{{/each}}
+{{/if}}
+											</div>
+										</td>
+									</tr>
+{{/if}}
 {{/each}}
 								</table>
 {{/inline}}
@@ -477,16 +514,18 @@
 {{#*inline "htmBodySidebarSiteUserPage"}}
 				<div class="w3-dropdown-hover w3-bar-block min-width-300px ">
 					<div class="min-width-300px w3-gray ">
-						<span title="Search" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').toggle(); "><i class="fad fa-magnifying-glass hover-box-shadow "></i></span>
-						<span title="Filters" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleFilters').toggle(); "><i class="fad fa-filters hover-box-shadow "></i></span>
-						<span title="Range" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleRange').toggle(); "><i class="fad fa-calendar-range hover-box-shadow "></i></span>
-						<span title="Pivot" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').toggle(); "><i class="fad fa-table-pivot hover-box-shadow "></i></span>
-						<span title="FieldList" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleFieldList').toggle(); "><i class="fad fa-list-ul hover-box-shadow "></i></span>
+						<span title="Search" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').toggle(); "><i class="fad fa-magnifying-glass hover-box-shadow "></i></span>
+						<span title="Filters" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleFilters').toggle(); "><i class="fad fa-filters hover-box-shadow "></i></span>
+						<span title="Range" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleRange').toggle(); "><i class="fad fa-calendar-range hover-box-shadow "></i></span>
+						<span title="Pivot" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').toggle(); "><i class="fad fa-table-pivot hover-box-shadow "></i></span>
+						<span title="FieldList" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleFieldList').toggle(); "><i class="fad fa-list-ul hover-box-shadow "></i></span>
+						<span title="Stats" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleFieldList').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleStats').toggle(); "><i class="fad fa-chart-candlestick hover-box-shadow "></i></span>
 					</div>
 					<div class="w3-dropdown-content min-width-300px w3-white w3-border w3-border-gray ">
 						<div class="siteSidebarToggle siteSidebarToggleSearch" style="display: none; ">
 							<div class="w3-bar w3-gray ">
-								<span class="w3-bar-item w3-padding ">Search</span>
+								<span class="w3-bar-item ">
+								<i class="fad fa-magnifying-glass "></i> Search</span>
 							</div>
 							<div class="w3-bar-block ">
 {{#block "htmBodySearch"}}{{/block}}
@@ -494,7 +533,8 @@
 						</div>
 						<div  class="siteSidebarToggle siteSidebarToggleFilters" style="display: none; ">
 							<div class="w3-bar w3-gray ">
-								<span class="w3-bar-item w3-padding ">Filters</span>
+								<span class="w3-bar-item ">
+								<i class="fad fa-filters "></i> Filters</span>
 							</div>
 							<div class="w3-bar-block ">
 {{#block "htmBodyFilters"}}{{/block}}
@@ -502,7 +542,8 @@
 						</div>
 						<div  class="siteSidebarToggle siteSidebarToggleRange" style="display: none; ">
 							<div class="w3-bar w3-gray ">
-								<span class="w3-bar-item w3-padding ">Range</span>
+								<span class="w3-bar-item ">
+								<i class="fad fa-calendar-range "></i> Range</span>
 							</div>
 							<div class="w3-bar-block ">
 {{#block "htmBodyRange"}}{{/block}}
@@ -510,7 +551,8 @@
 						</div>
 						<div  class="siteSidebarToggle siteSidebarTogglePivot" style="display: none; ">
 							<div class="w3-bar w3-gray ">
-								<span class="w3-bar-item w3-padding ">Pivot</span>
+								<span class="w3-bar-item ">
+								<i class="fad fa-table-pivot "></i> Pivot</span>
 							</div>
 							<div class="w3-bar-block ">
 {{#block "htmBodyPivot"}}{{/block}}
@@ -518,10 +560,20 @@
 						</div>
 						<div  class="siteSidebarToggle siteSidebarToggleFieldList" style="display: none; ">
 							<div class="w3-bar w3-gray ">
-								<span class="w3-bar-item w3-padding ">Field List</span>
+								<span class="w3-bar-item ">
+								<i class="fad fa-list-ul "></i> Field List</span>
 							</div>
 							<div class="w3-bar-block ">
 {{#block "htmBodyFieldList"}}{{/block}}
+							</div>
+						</div>
+						<div  class="siteSidebarToggle siteSidebarToggleStats" style="display: none; ">
+							<div class="w3-bar w3-gray ">
+								<span class="w3-bar-item ">
+								<i class="fad fa-chart-candlestick "></i> Stats</span>
+							</div>
+							<div class="w3-bar-block ">
+{{#block "htmBodyStats"}}{{/block}}
 							</div>
 						</div>
 					</div>

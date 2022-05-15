@@ -6,6 +6,9 @@ SITE_SERVICES:
     SITE_SRC: "/home/ctate/.local/src/smart-village-view"
 RELATIVE_PACKAGE_MainVerticle: "vertx"
 CLASS_SIMPLE_NAME_MainVerticle: "MainVerticle"
+RUN_OPENAPI3_GENERATOR: true
+RUN_SQL_GENERATOR: true
+RUN_ARTICLE_GENERATOR: false
 
 LANGUAGE_NAME: "enUS"
 SITE_PATH_enUS: "/home/ctate/.local/src/smart-village-view"

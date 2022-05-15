@@ -146,7 +146,7 @@ CONFIG_TEMPLATE: |2
   YGGIO_USERNAME: "\{\{ YGGIO_USERNAME \}\}"
   YGGIO_PASSWORD: "\{\{ YGGIO_PASSWORD \}\}"
   YGGIO_API_RELATIVE_URI_IotNode: /api/iotnodes
-  YGGIO_AUTH_LOCAL_URI: /auth/local
+  YGGIO_AUTH_LOCAL_URI: /api/auth/local
 
 CONFIG_KEYS: |2
   

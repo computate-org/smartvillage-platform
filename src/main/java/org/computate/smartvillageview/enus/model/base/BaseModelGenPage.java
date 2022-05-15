@@ -241,6 +241,7 @@ public class BaseModelGenPage extends BaseModelGenPageGen<PageLayout> {
 			json.put("var", var);
 			json.put("varStored", varStored);
 			json.put("varIndexed", varIndexed);
+					String type = StringUtils.substringAfterLast(varIndexed, "_");
 			json.put("displayName", Optional.ofNullable(BaseModel.displayNameBaseModel(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
 			json.put("classSimpleName", Optional.ofNullable(BaseModel.classSimpleNameBaseModel(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
 			json.put("val", searchListBaseModel_.getRequest().getFilterQueries().stream().filter(fq -> fq.startsWith(BaseModel.varIndexedBaseModel(var) + ":")).findFirst().map(s -> StringUtils.substringAfter(s, ":")).orElse(null));
@@ -260,8 +261,11 @@ public class BaseModelGenPage extends BaseModelGenPageGen<PageLayout> {
 			if(defaultFieldListVars.contains(var)) {
 				json.put("fieldList", true);
 			}
+			json.put("enableStats", !StringUtils.equalsAny(type, "boolean", "location"));
 			if(defaultStatsVars.contains(var)) {
-				json.put("stats", stats.get(varIndexed));
+				SolrResponse.StatsField varStats = stats.get(varIndexed);
+				if(varStats != null)
+					json.put("stats", varStats);
 			}
 			if(defaultPivotVars.contains(var)) {
 				json.put("pivot", true);
@@ -327,7 +331,7 @@ public class BaseModelGenPage extends BaseModelGenPageGen<PageLayout> {
 		JsonObject fqs = new JsonObject();
 		for(String fq : Optional.ofNullable(searchListBaseModel_).map(l -> l.getFilterQueries()).orElse(Arrays.asList())) {
 			if(!StringUtils.contains(fq, "(")) {
-				String fq1 = BaseModel.searchVarBaseModel(fq);
+				String fq1 = BaseModel.searchVarBaseModel(StringUtils.substringBefore(fq, ":"));
 				String fq2 = StringUtils.substringAfter(fq, ":");
 				if(!StringUtils.startsWithAny(fq, "classCanonicalNames_", "archived_", "deleted_", "sessionId", "userKeys"))
 					fqs.put(fq1, new JsonObject().put("var", fq1).put("val", fq2).put("displayName", BaseModel.displayNameForClass(fq1)));
