@@ -300,7 +300,7 @@ public class IotNode extends IotNodeGen<BaseModel> {
 	 * Facet: true
 	 */
 	protected void _json_frequency(Wrap<BigDecimal> w) {
-		w.o(Optional.ofNullable(json.getDouble("frequency")).map(d -> new BigDecimal(d)).orElse(null));
+		w.o(Optional.ofNullable(json.getValue("frequency")).map(v -> v instanceof Double ? (Double)v : Double.parseDouble(v.toString())).map(d -> new BigDecimal(d)).orElse(null));
 	}
 
 	/**
