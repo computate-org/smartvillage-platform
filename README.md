@@ -267,5 +267,10 @@ ansible-playbook -e @~/.local/src/smart-village-view/local/ansible_install_vars.
 # Load a new map traffic data into SUMO
 
 ```bash
-env "SUMO_HOME=$HOME/.local/share/sumo" python ~/.local/share/sumo/tools/osmWebWizard.py
+cd ~/.local/share/sumo/data
+env LD_LIBRARY_PATH=~/.local/lib "SUMO_HOME=$HOME/.local/share/sumo" python ~/.local/share/sumo/tools/osmWebWizard.py
+```
+
+```bash
+env LD_LIBRARY_PATH=~/.local/lib "SUMO_HOME=$HOME/.local/share/sumo" SUMO_HOME=~/.local/share/sumo sumo --fcd-output ~/.local/share/sumo/data/veberod/veberod-fcd.xml -c ~/.local/share/sumo/data/veberod/veberod.sumocfg --fcd-output.geo -b 10 -e 360 --step-length 0.1
 ```

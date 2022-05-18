@@ -13,10 +13,13 @@ import org.apache.camel.component.vertx.VertxComponent;
 import org.apache.camel.impl.DefaultCamelContext;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.computate.search.tool.SearchTool;
 import org.computate.smartvillageview.enus.config.ConfigKeys;
 import org.computate.smartvillageview.enus.model.html.SiteHtmlEnUSGenApiService;
 import org.computate.smartvillageview.enus.model.iotnode.IotNodeEnUSGenApiService;
+import org.computate.smartvillageview.enus.model.page.SitePage;
 import org.computate.smartvillageview.enus.model.page.SitePageEnUSGenApiService;
+import org.computate.smartvillageview.enus.model.page.dynamic.DynamicPage;
 import org.computate.smartvillageview.enus.model.user.SiteUserEnUSGenApiService;
 import org.computate.smartvillageview.enus.page.HomePage;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
@@ -24,6 +27,7 @@ import org.computate.vertx.handlebars.AuthHelpers;
 import org.computate.vertx.handlebars.DateHelpers;
 import org.computate.vertx.handlebars.SiteHelpers;
 import org.computate.vertx.openapi.OpenApi3Generator;
+import org.computate.vertx.search.list.SearchList;
 import org.computate.vertx.verticle.EmailVerticle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -499,7 +503,9 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 									}
 								});
 							});
-							routerBuilder.operation("callback").failureHandler(c -> {});
+							routerBuilder.operation("callback").failureHandler(ex -> {
+								LOG.error("Failed callback. ", ex);
+							});
 			
 							routerBuilder.operation("logout").handler(rc -> {
 								String redirectUri = rc.request().params().get("redirect_uri");
@@ -769,7 +775,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 				HomePage t = new HomePage();
 				SiteRequestEnUS siteRequest = new SiteRequestEnUS();
 				siteRequest.setConfig(config());
-				siteRequest.setRequestHeaders(ctx.response().headers());
+				siteRequest.setRequestHeaders(ctx.request().headers());
 				siteRequest.initDeepSiteRequestEnUS();
 				t.promiseDeepForClass(siteRequest).onSuccess(a -> {
 					JsonObject json = JsonObject.mapFrom(t);
@@ -782,12 +788,53 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 				});
 			});
 
-			router.get("/template/*").handler(templateHandler);
-			router.errorHandler(500,  ctx -> {
-				Throwable ex = ctx.failure();
-				LOG.error("Error occured. ", ex);
-				ctx.json(new JsonObject().put("error", new JsonObject().put("message", ex.getMessage())));
+			router.getWithRegex("(?<uri>\\/(?<lang>(?<lang1>[a-z][a-z])-(?<lang2>[a-z][a-z]))\\/.*)").handler(ctx -> {
+				String uri = ctx.pathParam("uri");
+				String lang = String.format("%s%s", ctx.pathParam("lang1"), ctx.pathParam("lang2").toUpperCase());
+
+				SiteRequestEnUS siteRequest = new SiteRequestEnUS();
+				siteRequest.setConfig(config());
+				siteRequest.setWebClient(webClient);
+				siteRequest.setRequestHeaders(ctx.request().headers());
+				siteRequest.initDeepSiteRequestEnUS();
+				SearchList<SitePage> l = new SearchList<>();
+				l.q("*:*");
+				l.setC(SitePage.class);
+				l.fq(String.format("%s_docvalues_string:%s", SitePage.VAR_uri, SearchTool.escapeQueryChars(uri)));
+				ctx.response().headers().add("Content-Type", "text/html");
+				l.promiseDeepForClass(siteRequest).onSuccess(a -> {
+					SitePage result = l.first();
+					try {
+						DynamicPage page = new DynamicPage();
+						page.promiseDeepForClass(siteRequest).onSuccess(b -> {
+							JsonObject json = JsonObject.mapFrom(page);
+							templateEngine.render(json, Optional.ofNullable(config().getString(ConfigKeys.TEMPLATE_PATH)).orElse("templates") + "/" + lang + "/DynamicPage").onSuccess(buffer -> {
+								ctx.response().end(buffer);
+							}).onFailure(ex -> {
+								LOG.error(String.format("Failed to render page %s", uri), ex);
+								ctx.fail(ex);
+							});
+						}).onFailure(ex -> {
+							LOG.error(String.format("Failed to render page %s", uri), ex);
+							ctx.fail(ex);
+						});
+					} catch (Exception ex) {
+						LOG.error(String.format("Failed to render page %s", uri), ex);
+						ctx.fail(ex);
+					}
+					
+				}).onFailure(ex -> {
+					LOG.error(String.format("Failed to render page %s", uri), ex);
+					ctx.fail(ex);
+				});
 			});
+
+//			router.get("/template/*").handler(templateHandler);
+//			router.errorHandler(500,  ctx -> {
+//				Throwable ex = ctx.failure();
+//				LOG.error("Error occured. ", ex);
+//				ctx.json(new JsonObject().put("error", new JsonObject().put("message", ex.getMessage())));
+//			});
 
 			StaticHandler staticHandler = StaticHandler.create().setCachingEnabled(false).setFilesReadOnly(false);
 			if(staticPath != null) {

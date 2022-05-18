@@ -1,12 +1,16 @@
 ---
-uri: /en-US/kubernetes-components
+uri: /en-us/kubernetes-components
 h1: What Kubernetes components are used in the Smart Village project? 
 h2: Both Kubernetes API objects and OpenShift API Objects
 created: "2022-05-12"
-title: >-
-  What Kubernetes components are used in the Smart Village project? 
-  Both Kubernetes API objects and OpenShift API Objects
-more:
+htmTitle:
+  - text: >-
+      What Kubernetes components are used in the Smart Village project? 
+      Both Kubernetes API objects and OpenShift API Objects
+htmBody:
+  - e: p
+    a:
+      id: p-kubernetes-components
   - e: p
     text: >-
       Kubernetes components are unique parts of a website that is deployed to the cloud. 

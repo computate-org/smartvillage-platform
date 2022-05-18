@@ -369,7 +369,7 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 
 		try {
 			createSiteHtml(siteRequest).onSuccess(siteHtml -> {
-				persistSiteHtml(siteHtml).onSuccess(c -> {
+				persistSiteHtml(siteHtml, false).onSuccess(c -> {
 					indexSiteHtml(siteHtml).onSuccess(e -> {
 						promise.complete(siteHtml);
 					}).onFailure(ex -> {
@@ -577,7 +577,7 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 			pgPool.withTransaction(sqlConnection -> {
 				Promise<SiteHtml> promise1 = Promise.promise();
 				siteRequest.setSqlConnection(sqlConnection);
-				persistSiteHtml(o).onSuccess(c -> {
+				persistSiteHtml(o, true).onSuccess(c -> {
 					indexSiteHtml(o).onSuccess(e -> {
 						promise1.complete(o);
 					}).onFailure(ex -> {
@@ -730,7 +730,7 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 				apiRequest.setNumPATCH(0L);
 				apiRequest.initDeepApiRequest(siteRequest);
 				siteRequest.setApiRequest_(apiRequest);
-				body.put("", body.getValue(""));
+				body.put("inheritPk", body.getValue(""));
 				if(Optional.ofNullable(serviceRequest.getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getJsonArray("var")).orElse(new JsonArray()).stream().filter(s -> "refresh:false".equals(s)).count() > 0L) {
 					siteRequest.getRequestVars().put( "refresh", "false" );
 				}
@@ -741,7 +741,7 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 				searchList.setC(SiteHtml.class);
 				searchList.fq("deleted_docvalues_boolean:false");
 				searchList.fq("archived_docvalues_boolean:false");
-				searchList.fq("null_docvalues_string:" + SearchTool.escapeQueryChars(body.getString(SiteHtml.VAR_id)));
+				searchList.fq("inheritPk_docvalues_string:" + SearchTool.escapeQueryChars(body.getString(SiteHtml.VAR_id)));
 				searchList.promiseDeepForClass(siteRequest).onSuccess(a -> {
 					try {
 						if(searchList.size() >= 1) {
@@ -1031,9 +1031,9 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 
 			String id = serviceRequest.getParams().getJsonObject("path").getString("id");
 			if(id != null && NumberUtils.isCreatable(id)) {
-				searchList.fq("(_docvalues_long:" + SearchTool.escapeQueryChars(id) + " OR _docvalues_string:" + SearchTool.escapeQueryChars(id) + ")");
+				searchList.fq("(_docvalues_long:" + SearchTool.escapeQueryChars(id) + " OR objectId_docvalues_string:" + SearchTool.escapeQueryChars(id) + ")");
 			} else if(id != null) {
-				searchList.fq("_docvalues_string:" + SearchTool.escapeQueryChars(id));
+				searchList.fq("objectId_docvalues_string:" + SearchTool.escapeQueryChars(id));
 			}
 
 			serviceRequest.getParams().getJsonObject("query").forEach(paramRequest -> {
@@ -1172,6 +1172,9 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 					ExceptionUtils.rethrow(e);
 				}
 			});
+			if("*:*".equals(searchList.getQuery()) && searchList.getSorts().size() == 0) {
+				searchList.sort("created_docvalues_date", "desc");
+			}
 			searchSiteHtml2(siteRequest, populate, store, modify, searchList);
 			searchList.promiseDeepForClass(siteRequest).onSuccess(a -> {
 				promise.complete(searchList);
@@ -1188,15 +1191,22 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 	public void searchSiteHtml2(SiteRequestEnUS siteRequest, Boolean populate, Boolean store, Boolean modify, SearchList<SiteHtml> searchList) {
 	}
 
-	public Future<Void> persistSiteHtml(SiteHtml o) {
+	public Future<Void> persistSiteHtml(SiteHtml o, Boolean patch) {
 		Promise<Void> promise = Promise.promise();
 		try {
 			SiteRequestEnUS siteRequest = o.getSiteRequest_();
 				try {
 					JsonObject jsonObject = siteRequest.getJsonObject();
 					jsonObject.forEach(definition -> {
-							String columnName = definition.getKey();
-							Object columnValue = definition.getValue();
+							String columnName;
+							Object columnValue;
+						if(patch && StringUtils.startsWith(definition.getKey(), "set")) {
+							columnName = StringUtils.uncapitalize(StringUtils.substringAfter(definition.getKey(), "set"));
+							columnValue = definition.getValue();
+						} else {
+							columnName = definition.getKey();
+							columnValue = definition.getValue();
+						}
 						if(!"".equals(columnName)) {
 							try {
 								o.persistForClass(columnName, columnValue);

@@ -1,8 +1,15 @@
 package org.computate.smartvillageview.enus.model.html;
 
+import java.text.Normalizer;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.apache.commons.lang3.reflect.FieldUtils;
 import org.computate.search.wrap.Wrap;
+import org.computate.smartvillageview.enus.config.ConfigKeys;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 
 import io.vertx.core.Promise;
@@ -58,10 +65,68 @@ public class SiteHtml extends SiteHtmlGen<Object> {
 	/**
 	 * {@inheritDoc}
 	 * DocValues: true
-	 * DisplayName.enUS: primary key
-	 * Description: The primary key of this object
+	 * InheritPrimaryKey: true
+	 * Persist: true
+	 * Description: An optional inherited primary key from a legacy system for this object in the database
 	 */
-	protected void _pk(Wrap<Long> w) {}
+	protected void _inheritPk(Wrap<String> w) {}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * Modify: false
+	 * VarCreated: true
+	 * HtmlRow: 1
+	 * HtmlCell: 2
+	 * HtmlColumn: 1
+	 * Facet: true
+	 * DisplayName.enUS: created
+	 * FormatHtm: MMM d, yyyy h:mm:ss a
+	 * Description: A created timestamp for this record in the database
+	 */
+	protected void _created(Wrap<ZonedDateTime> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Modify: false
+	 * VarModified: true
+	 * HtmlRow: 1
+	 * HtmlCell: 3
+	 * DisplayName.enUS: modified
+	 * Description: A modified timestamp for this record in the database
+	 */
+	protected void _modified(Wrap<ZonedDateTime> w) {
+		w.o(ZonedDateTime.now(ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * HtmlRow: 2
+	 * HtmlCell: 1
+	 * DisplayName.enUS: archived
+	 * Description: For archiving this record
+	 */
+	protected void _archived(Wrap<Boolean> w) {
+		w.o(false);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * HtmlRow: 2
+	 * HtmlCell: 2
+	 * DisplayName.enUS: deleted
+	 * Description: For deleting this record
+	 */
+	protected void _deleted(Wrap<Boolean> w) {
+		w.o(false);
+	}
 
 	/**
 	 * {@inheritDoc}
@@ -75,6 +140,45 @@ public class SiteHtml extends SiteHtmlGen<Object> {
 	/**
 	 * {@inheritDoc}
 	 * DocValues: true
+	 * Persist: true
+	 * HtmlRow: 3
+	 * HtmlCell: 1
+	 * HtmlColumn: 3
+	 * Facet: true
+	 * DisplayName: Page ID
+	 * Description: The ID for this page. 
+	 */
+	protected void _pageId(Wrap<String> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * HtmlRow: 3
+	 * HtmlCell: 2
+	 * HtmlColumn: 4
+	 * Facet: true
+	 * DisplayName: Sequence Number
+	 * Description: The sequence number for this page. 
+	 */
+	protected void _sequenceNum(Wrap<Long> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * DisplayName: HTML Group
+	 * Description: The HTML group. 
+	 */
+	protected void _htmlGroup(Wrap<String> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
 	 * DisplayName: HTML Element
 	 * Description: The HTML element. 
 	 */
@@ -83,7 +187,18 @@ public class SiteHtml extends SiteHtmlGen<Object> {
 
 	/**
 	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * DisplayName: HTML Element
+	 * Description: The HTML element. 
+	 */
+	protected void _a(List<String> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
 	 * Stored: true
+	 * Persist: true
 	 * DisplayName: HTML before
 	 * Description: The HTML that comes before the text. 
 	 */
@@ -93,6 +208,7 @@ public class SiteHtml extends SiteHtmlGen<Object> {
 	/**
 	 * {@inheritDoc}
 	 * Stored: true
+	 * Persist: true
 	 * DisplayName: HTML after
 	 * Description: The HTML that comes after the text. 
 	 */
@@ -129,11 +245,125 @@ public class SiteHtml extends SiteHtmlGen<Object> {
 
 	/**
 	 * {@inheritDoc}
+	 * DocValues: true
+	 * VarTitle: true
+	 * HtmlColumn: 2
+	 * Description: The title of this object
+	 */
+	protected void _objectTitle(Wrap<String> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * VarId: true
+	 * HtmlRow: 1
+	 * HtmlCell: 4
+	 * DisplayName.enUS: ID
+	 * Description: A URL friendly unique ID for this object
+	 */
+	protected void _objectId(Wrap<String> w) {
+	}
+
+	/**
+	 * Description: A helper method for generating a URL friendly unique ID for this object
+	 */
+	public String toId(String s) {
+		if(s != null) {
+			s = Normalizer.normalize(s, Normalizer.Form.NFD);
+			s = StringUtils.lowerCase(s);
+			s = StringUtils.trim(s);
+			s = StringUtils.replacePattern(s, "\\s{1,}", "-");
+			s = StringUtils.replacePattern(s, "[^\\w-]", "");
+			s = StringUtils.replacePattern(s, "-{2,}", "-");
+		}
+
+		return s;
+	}
+
+	/**
+	 * Description: The var that identifies this type of object in the API
+	 */
+	protected void _objectNameVar(Wrap<String> w) {
+		if(objectId != null) {
+			Class<?> cl = getClass();
+
+			try {
+				String o = toId(StringUtils.join(StringUtils.splitByCharacterTypeCamelCase((String)FieldUtils.getField(cl, cl.getSimpleName() + "_NameVar_enUS").get(this)), "-"));
+				w.o(o);
+			} catch (Exception e) {
+				ExceptionUtils.rethrow(e);
+			}
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * Suggested: true
+	 * Description: The indexed field in the search engine for this record while using autosuggest
+	 * DisplayName: autosuggest
+	 */
+	protected void _objectSuggest(Wrap<String> w) { 
+		StringBuilder b = new StringBuilder();
+		if(objectNameVar != null)
+			b.append(" ").append(objectNameVar);
+		if(objectId != null)
+			b.append(" ").append(objectId);
+		if(objectTitle != null)
+			b.append(" ").append(objectTitle);
+		w.o(b.toString());
+	}
+
+	/**
+	 * {@inheritDoc}
 	 * Text: true
+	 * DocValues: true
 	 * Description: The full text search field in the search engine for this record while using autosuggest
 	 * DisplayName: text
 	 */
 	protected void _objectText(Wrap<String> w) { 
+		StringBuilder b = new StringBuilder();
+		if(objectNameVar != null)
+			b.append(" ").append(objectNameVar);
+		if(objectId != null)
+			b.append(" ").append(objectId);
+		if(objectTitle != null)
+			b.append(" ").append(objectTitle);
+		w.o(b.toString());
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * VarUrlId: true
+	 * Description: The link by name for this object in the UI
+	 */
+	protected void _pageUrlId(Wrap<String> w) {
+		if(objectId != null) {
+			String o = siteRequest_.getConfig().getString(ConfigKeys.SITE_BASE_URL) + "/" + objectNameVar + "/" + objectId;
+			w.o(o);
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * VarUrlPk: true
+	 * Description: The link by primary key for this object in the UI
+	 */
+	protected void _pageUrlPk(Wrap<String> w) {
+		w.o(pageUrlId);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Description: The link to this object in the API
+	 */
+	protected void _pageUrlApi(Wrap<String> w) {
+		String o = siteRequest_.getConfig().getString(ConfigKeys.SITE_BASE_URL) + "/api/" + objectNameVar + "/" + objectId;
+		w.o(o);
 	}
 
 	/**
@@ -142,6 +372,6 @@ public class SiteHtml extends SiteHtmlGen<Object> {
 	 * Description: The unique key for this record in the search engine
 	 */
 	protected void _id(Wrap<String> w) {
-		w.o(String.format("%s_%s", getClass().getSimpleName(), pk));
+		w.o(String.format("%s_%s", pageId, sequenceNum));
 	}
 }

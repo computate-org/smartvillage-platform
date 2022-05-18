@@ -138,20 +138,65 @@ public abstract class SitePageGen<DEV> extends Object {
 		Promise<SearchList<Void>> promise2 = Promise.promise();
 		_promiseBefore(promise2);
 		promise2.future().onSuccess(o -> {
-			if(o != null && promiseBefore == null) {
-				o.promiseDeepForClass(siteRequest_).onSuccess(a -> {
-					setPromiseBefore(o);
-					promise.complete(o);
-				}).onFailure(ex -> {
-					promise.fail(ex);
-				});
-			} else {
-				promise.complete(o);
-			}
+			setPromiseBefore(o);
+			promise.complete(o);
 		}).onFailure(ex -> {
 			promise.fail(ex);
 		});
 		return promise.future();
+	}
+
+	////////////
+	// pageId //
+	////////////
+
+	/**	 The entity pageId
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String pageId;
+
+	/**	<br> The entity pageId
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.page.SitePage&fq=entiteVar_enUS_indexed_string:pageId">Find the entity pageId in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _pageId(Wrap<String> w);
+
+	public String getPageId() {
+		return pageId;
+	}
+	public void setPageId(String o) {
+		this.pageId = SitePage.staticSetPageId(siteRequest_, o);
+	}
+	public static String staticSetPageId(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected SitePage pageIdInit() {
+		Wrap<String> pageIdWrap = new Wrap<String>().var("pageId");
+		if(pageId == null) {
+			_pageId(pageIdWrap);
+			setPageId(pageIdWrap.o);
+		}
+		return (SitePage)this;
+	}
+
+	public static String staticSearchPageId(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrPageId(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqPageId(SiteRequestEnUS siteRequest_, String o) {
+		return SitePage.staticSearchStrPageId(siteRequest_, SitePage.staticSearchPageId(siteRequest_, SitePage.staticSetPageId(siteRequest_, o)));
+	}
+
+	public String sqlPageId() {
+		return pageId;
 	}
 
 	/////////
@@ -1500,6 +1545,7 @@ public abstract class SitePageGen<DEV> extends Object {
 		}).compose(a -> {
 			Promise<Void> promise2 = Promise.promise();
 			try {
+				pageIdInit();
 				uriInit();
 				h1Init();
 				h2Init();
@@ -1546,8 +1592,6 @@ public abstract class SitePageGen<DEV> extends Object {
 	/////////////////
 
 	public void siteRequestSitePage(SiteRequestEnUS siteRequest_) {
-		if(promiseBefore != null)
-			promiseBefore.setSiteRequest_(siteRequest_);
 	}
 
 	public void siteRequestForClass(SiteRequestEnUS siteRequest_) {
@@ -1580,6 +1624,8 @@ public abstract class SitePageGen<DEV> extends Object {
 		switch(var) {
 			case "promiseBefore":
 				return oSitePage.promiseBefore;
+			case "pageId":
+				return oSitePage.pageId;
 			case "uri":
 				return oSitePage.uri;
 			case "h1":
@@ -1667,6 +1713,8 @@ public abstract class SitePageGen<DEV> extends Object {
 	}
 	public static Object staticSetSitePage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "pageId":
+			return SitePage.staticSetPageId(siteRequest_, o);
 		case "uri":
 			return SitePage.staticSetUri(siteRequest_, o);
 		case "h1":
@@ -1727,6 +1775,8 @@ public abstract class SitePageGen<DEV> extends Object {
 	}
 	public static Object staticSearchSitePage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "pageId":
+			return SitePage.staticSearchPageId(siteRequest_, (String)o);
 		case "uri":
 			return SitePage.staticSearchUri(siteRequest_, (String)o);
 		case "h1":
@@ -1787,6 +1837,8 @@ public abstract class SitePageGen<DEV> extends Object {
 	}
 	public static String staticSearchStrSitePage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "pageId":
+			return SitePage.staticSearchStrPageId(siteRequest_, (String)o);
 		case "uri":
 			return SitePage.staticSearchStrUri(siteRequest_, (String)o);
 		case "h1":
@@ -1847,6 +1899,8 @@ public abstract class SitePageGen<DEV> extends Object {
 	}
 	public static String staticSearchFqSitePage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "pageId":
+			return SitePage.staticSearchFqPageId(siteRequest_, o);
 		case "uri":
 			return SitePage.staticSearchFqUri(siteRequest_, o);
 		case "h1":
@@ -1919,6 +1973,11 @@ public abstract class SitePageGen<DEV> extends Object {
 	}
 	public Object persistSitePage(String var, Object val) {
 		switch(var.toLowerCase()) {
+			case "pageid":
+				if(val instanceof String)
+					setPageId((String)val);
+				saves.add("pageId");
+				return val;
 			case "uri":
 				if(val instanceof String)
 					setUri((String)val);
@@ -1999,6 +2058,9 @@ public abstract class SitePageGen<DEV> extends Object {
 	}
 
 	public void indexSitePage(JsonObject doc) {
+		if(pageId != null) {
+			doc.put("pageId_docvalues_string", pageId);
+		}
 		if(uri != null) {
 			doc.put("uri_docvalues_string", uri);
 		}
@@ -2078,6 +2140,8 @@ public abstract class SitePageGen<DEV> extends Object {
 
 	public static String varStoredSitePage(String entityVar) {
 		switch(entityVar) {
+			case "pageId":
+				return "pageId_docvalues_string";
 			case "uri":
 				return "uri_docvalues_string";
 			case "h1":
@@ -2125,6 +2189,8 @@ public abstract class SitePageGen<DEV> extends Object {
 
 	public static String varIndexedSitePage(String entityVar) {
 		switch(entityVar) {
+			case "pageId":
+				return "pageId_docvalues_string";
 			case "uri":
 				return "uri_docvalues_string";
 			case "h1":
@@ -2176,6 +2242,8 @@ public abstract class SitePageGen<DEV> extends Object {
 
 	public static String searchVarSitePage(String searchVar) {
 		switch(searchVar) {
+			case "pageId_docvalues_string":
+				return "pageId";
 			case "uri_docvalues_string":
 				return "uri";
 			case "h1_docvalues_string":
@@ -2255,6 +2323,7 @@ public abstract class SitePageGen<DEV> extends Object {
 	public void storeSitePage(SolrResponse.Doc doc) {
 		SitePage oSitePage = (SitePage)this;
 
+		oSitePage.setPageId(Optional.ofNullable(doc.get("pageId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSitePage.setUri(Optional.ofNullable(doc.get("uri_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSitePage.setH1(Optional.ofNullable(doc.get("h1_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSitePage.setH2(Optional.ofNullable(doc.get("h2_docvalues_string")).map(v -> v.toString()).orElse(null));
@@ -2294,6 +2363,8 @@ public abstract class SitePageGen<DEV> extends Object {
 		Object o = Optional.ofNullable(apiRequest).map(ApiRequest::getOriginal).orElse(null);
 		if(o != null && o instanceof SitePage) {
 			SitePage original = (SitePage)o;
+			if(!Objects.equals(pageId, original.getPageId()))
+				apiRequest.addVars("pageId");
 			if(!Objects.equals(uri, original.getUri()))
 				apiRequest.addVars("uri");
 			if(!Objects.equals(h1, original.getH1()))
@@ -2347,6 +2418,7 @@ public abstract class SitePageGen<DEV> extends Object {
 
 	@Override public String toString() {
 		StringBuilder sb = new StringBuilder();
+		sb.append(Optional.ofNullable(pageId).map(v -> "pageId: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(uri).map(v -> "uri: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(h1).map(v -> "h1: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(h2).map(v -> "h2: \"" + v + "\"\n" ).orElse(""));
@@ -2374,6 +2446,7 @@ public abstract class SitePageGen<DEV> extends Object {
 
 	public static final String CLASS_SIMPLE_NAME = "SitePage";
 	public static final String VAR_promiseBefore = "promiseBefore";
+	public static final String VAR_pageId = "pageId";
 	public static final String VAR_uri = "uri";
 	public static final String VAR_h1 = "h1";
 	public static final String VAR_h2 = "h2";
@@ -2412,6 +2485,7 @@ public abstract class SitePageGen<DEV> extends Object {
 		return SitePage.varsFqSitePage(new ArrayList<String>());
 	}
 	public static List<String> varsFqSitePage(List<String> vars) {
+		vars.add(VAR_pageId);
 		vars.add(VAR_uri);
 		vars.add(VAR_h1);
 		vars.add(VAR_h2);
@@ -2428,6 +2502,7 @@ public abstract class SitePageGen<DEV> extends Object {
 	}
 
 	public static final String DISPLAY_NAME_promiseBefore = "";
+	public static final String DISPLAY_NAME_pageId = "Page ID";
 	public static final String DISPLAY_NAME_uri = "URI";
 	public static final String DISPLAY_NAME_h1 = "header 1";
 	public static final String DISPLAY_NAME_h2 = "header 2";
@@ -2460,6 +2535,8 @@ public abstract class SitePageGen<DEV> extends Object {
 		switch(var) {
 		case VAR_promiseBefore:
 			return DISPLAY_NAME_promiseBefore;
+		case VAR_pageId:
+			return DISPLAY_NAME_pageId;
 		case VAR_uri:
 			return DISPLAY_NAME_uri;
 		case VAR_h1:
@@ -2517,6 +2594,8 @@ public abstract class SitePageGen<DEV> extends Object {
 		switch(var) {
 		case VAR_promiseBefore:
 			return "An asynchronous method for searching for a computer related to this message";
+		case VAR_pageId:
+			return "The ID for this page. ";
 		case VAR_uri:
 			return "The relative URI for this page. ";
 		case VAR_h1:
@@ -2574,6 +2653,8 @@ public abstract class SitePageGen<DEV> extends Object {
 		switch(var) {
 		case VAR_promiseBefore:
 			return "SearchList";
+		case VAR_pageId:
+			return "String";
 		case VAR_uri:
 			return "String";
 		case VAR_h1:
@@ -2629,6 +2710,8 @@ public abstract class SitePageGen<DEV> extends Object {
 
 	public static Integer htmlColumnSitePage(String var) {
 		switch(var) {
+		case VAR_pageId:
+			return 3;
 		case VAR_uri:
 			return 3;
 		case VAR_h1:
@@ -2646,6 +2729,8 @@ public abstract class SitePageGen<DEV> extends Object {
 
 	public static Integer htmlRowSitePage(String var) {
 		switch(var) {
+		case VAR_pageId:
+			return 3;
 		case VAR_uri:
 			return 3;
 		case VAR_h1:
@@ -2669,6 +2754,8 @@ public abstract class SitePageGen<DEV> extends Object {
 
 	public static Integer htmlCellSitePage(String var) {
 		switch(var) {
+		case VAR_pageId:
+			return 1;
 		case VAR_uri:
 			return 1;
 		case VAR_h1:

@@ -14,8 +14,10 @@ import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.StringUtils;
+import org.computate.search.serialize.ComputateZonedDateTimeSerializer;
 import org.computate.search.tool.TimeTool;
 import org.computate.smartvillageview.enus.config.ConfigKeys;
+import org.computate.smartvillageview.enus.model.html.SiteHtml;
 import org.computate.smartvillageview.enus.model.iotnode.IotNode;
 import org.computate.smartvillageview.enus.model.page.SitePage;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
@@ -438,35 +440,52 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 		Promise<Void> promise = Promise.promise();
 		vertx.fileSystem().readFile(path).onSuccess(buffer -> {
 			yamlProcessor.process(vertx, null, buffer).onSuccess(json -> {
-				String objectId = StringUtils.substringBeforeLast(StringUtils.substringAfterLast(path, "/"), ".");
-				JsonObject body = new JsonObject();
-				body.put(SitePage.VAR_saves, new JsonArray()
-						.add(SitePage.VAR_inheritPk)
-						.add(SitePage.VAR_created)
-						.add(SitePage.VAR_objectId)
-						.add(SitePage.VAR_objectTitle)
-						.add(SitePage.VAR_uri)
-						.add(SitePage.VAR_h1)
-						.add(SitePage.VAR_h2)
-						);
-				body.put(SitePage.VAR_id, objectId);
-				body.put(SitePage.VAR_objectId, objectId);
-				body.put(SitePage.VAR_objectTitle, json.getString("title"));
-				body.put(SitePage.VAR_created, json.getString("created"));
-				body.put(SitePage.VAR_uri, json.getString("uri"));
-				body.put(SitePage.VAR_h1, json.getString("h1"));
-				body.put(SitePage.VAR_h2, json.getString("h2"));
+				String pageId = StringUtils.substringBeforeLast(StringUtils.substringAfterLast(path, "/"), ".");
+				JsonObject importBody = new JsonObject();
+				JsonArray importItems = new JsonArray();
+				List<Future> futures = new ArrayList<>();
+				for(String htmlGroup : json.fieldNames()) {
+					if(StringUtils.startsWith(htmlGroup, "htm")) {
+						JsonArray pageItems = json.getJsonArray(htmlGroup);
+						importSiteHtml(pageId, htmlGroup, pageItems, futures, 0L);
+					}
+				}
+				importBody.put("list", importItems);
 
-				JsonObject params = new JsonObject();
-				params.put("body", body);
-				params.put("path", new JsonObject());
-				params.put("cookie", new JsonObject());
-				params.put("query", new JsonObject().put("commitWithin", 10000).put("q", "*:*").put("var", new JsonArray().add("refresh:false")));
-				JsonObject context = new JsonObject().put("params", params);
-				JsonObject request = new JsonObject().put("context", context);
-				vertx.eventBus().request(String.format("smart-village-view-enUS-%s", SitePage.CLASS_SIMPLE_NAME), request, new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", SitePage.CLASS_SIMPLE_NAME))).onSuccess(a -> {
-					LOG.info(String.format(importSitePageComplete, SitePage.CLASS_SIMPLE_NAME));
-					promise.complete();
+				CompositeFuture.all(futures).onSuccess(a -> {
+					JsonObject pageBody = new JsonObject();
+					pageBody.put(SitePage.VAR_saves, new JsonArray()
+							.add(SitePage.VAR_inheritPk)
+							.add(SitePage.VAR_created)
+							.add(SitePage.VAR_objectId)
+							.add(SitePage.VAR_objectTitle)
+							.add(SitePage.VAR_uri)
+							.add(SitePage.VAR_h1)
+							.add(SitePage.VAR_h2)
+							);
+					pageBody.put(SitePage.VAR_id, pageId);
+					pageBody.put(SitePage.VAR_objectId, pageId);
+					pageBody.put(SitePage.VAR_pageId, pageId);
+					pageBody.put(SitePage.VAR_objectTitle, json.getString("title"));
+					pageBody.put(SitePage.VAR_created, json.getString("created"));
+					pageBody.put(SitePage.VAR_uri, json.getString("uri"));
+					pageBody.put(SitePage.VAR_h1, json.getString("h1"));
+					pageBody.put(SitePage.VAR_h2, json.getString("h2"));
+	
+					JsonObject pageParams = new JsonObject();
+					pageParams.put("body", pageBody);
+					pageParams.put("path", new JsonObject());
+					pageParams.put("cookie", new JsonObject());
+					pageParams.put("query", new JsonObject().put("commitWithin", 10000).put("q", "*:*").put("var", new JsonArray().add("refresh:false")));
+					JsonObject pageContext = new JsonObject().put("params", pageParams);
+					JsonObject pageRequest = new JsonObject().put("context", pageContext);
+					vertx.eventBus().request(String.format("smart-village-view-enUS-%s", SitePage.CLASS_SIMPLE_NAME), pageRequest, new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", SitePage.CLASS_SIMPLE_NAME))).onSuccess(b -> {
+						LOG.info(String.format(importSitePageComplete, SitePage.CLASS_SIMPLE_NAME));
+						promise.complete();
+					}).onFailure(ex -> {
+						LOG.error(String.format(importSitePageFail, SitePage.CLASS_SIMPLE_NAME), ex);
+						promise.fail(ex);
+					});
 				}).onFailure(ex -> {
 					LOG.error(String.format(importSitePageFail, SitePage.CLASS_SIMPLE_NAME), ex);
 					promise.fail(ex);
@@ -480,6 +499,38 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 			promise.fail(ex);
 		});
 		return promise.future();
+	}
+
+	private Long importSiteHtml(String pageId, String htmlGroup, JsonArray pageItems, List<Future> futures, Long sequenceNum) {
+		for(Integer i = 0; i < pageItems.size(); i++) {
+			sequenceNum++;
+			JsonObject pageItem = (JsonObject)pageItems.getValue(i);
+			JsonObject importItem = pageItem.copy();
+			importItem.put(SiteHtml.VAR_saves, new JsonArray()
+					.add(SiteHtml.VAR_e)
+					.add(SiteHtml.VAR_a)
+					.add(SiteHtml.VAR_htmlBefore)
+					.add(SiteHtml.VAR_htmlAfter)
+					.add(SiteHtml.VAR_sequenceNum)
+					.add(SiteHtml.VAR_htmlGroup)
+					.add(SiteHtml.VAR_pageId)
+					);
+			importItem.put(SiteHtml.VAR_created, ComputateZonedDateTimeSerializer.ZONED_DATE_TIME_FORMATTER.format(ZonedDateTime.now()));
+			importItem.put(SiteHtml.VAR_pageId, pageId);
+			importItem.put(SiteHtml.VAR_htmlGroup, htmlGroup);
+			importItem.put(SiteHtml.VAR_sequenceNum, sequenceNum);
+			importItem.put(SiteHtml.VAR_id, String.format("%s_%s", SiteHtml.CLASS_SIMPLE_NAME, sequenceNum));
+
+			JsonObject htmlParams = new JsonObject();
+			htmlParams.put("body", importItem);
+			htmlParams.put("path", new JsonObject());
+			htmlParams.put("cookie", new JsonObject());
+			htmlParams.put("query", new JsonObject().put("commitWithin", 10000).put("q", "*:*").put("var", new JsonArray().add("refresh:false")));
+			JsonObject htmlContext = new JsonObject().put("params", htmlParams);
+			JsonObject htmlRequest = new JsonObject().put("context", htmlContext);
+			futures.add(vertx.eventBus().request(String.format("smart-village-view-enUS-%s", SiteHtml.CLASS_SIMPLE_NAME), htmlRequest, new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", SiteHtml.CLASS_SIMPLE_NAME))));
+		}
+		return sequenceNum;
 	}
 
 	/**

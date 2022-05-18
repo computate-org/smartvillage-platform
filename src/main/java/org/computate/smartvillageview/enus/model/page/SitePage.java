@@ -65,6 +65,20 @@ public class SitePage extends SitePageGen<Object> {
 	 * HtmlCell: 1
 	 * HtmlColumn: 3
 	 * Facet: true
+	 * DisplayName: Page ID
+	 * Description: The ID for this page. 
+	 */
+	protected void _pageId(Wrap<String> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * HtmlRow: 3
+	 * HtmlCell: 1
+	 * HtmlColumn: 3
+	 * Facet: true
 	 * DisplayName: URI
 	 * Description: The relative URI for this page. 
 	 */

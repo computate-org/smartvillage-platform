@@ -91,7 +91,7 @@ public class SiteHtmlGenPage extends SiteHtmlGenPageGen<PageLayout> {
 	}
 
 	protected void _defaultRangeVar(Wrap<String> w) {
-		w.o(Optional.ofNullable(searchListSiteHtml_.getFacetRanges()).orElse(Arrays.asList()).stream().findFirst().map(v -> { if(v.contains("}")) return StringUtils.substringBefore(StringUtils.substringAfterLast(v, "}"), "_"); else return SiteHtml.searchVarSiteHtml(v); }).orElse(""));
+		w.o(Optional.ofNullable(searchListSiteHtml_.getFacetRanges()).orElse(Arrays.asList()).stream().findFirst().map(v -> { if(v.contains("}")) return StringUtils.substringBefore(StringUtils.substringAfterLast(v, "}"), "_"); else return SiteHtml.searchVarSiteHtml(v); }).orElse("created"));
 	}
 
 	protected void _defaultFacetSort(Wrap<String> w) {
@@ -199,7 +199,9 @@ public class SiteHtmlGenPage extends SiteHtmlGenPageGen<PageLayout> {
 
 	@Override
 	protected void _pageTitle(Wrap<String> c) {
-		if(siteHtml_ != null)
+		if(siteHtml_ != null && siteHtml_.getObjectTitle() != null)
+			c.o(siteHtml_.getObjectTitle());
+		else if(siteHtml_ != null)
 			c.o("HTMLs");
 		else if(searchListSiteHtml_ == null || siteHtmlCount == 0)
 			c.o("no HTML found");
