@@ -9,13 +9,16 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.Stack;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.StringUtils;
 import org.computate.search.serialize.ComputateZonedDateTimeSerializer;
 import org.computate.search.tool.TimeTool;
+import org.computate.search.tool.XmlTool;
 import org.computate.smartvillageview.enus.config.ConfigKeys;
 import org.computate.smartvillageview.enus.model.html.SiteHtml;
 import org.computate.smartvillageview.enus.model.iotnode.IotNode;
@@ -23,6 +26,7 @@ import org.computate.smartvillageview.enus.model.page.SitePage;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.vertx.api.ApiCounter;
 import org.computate.vertx.api.ApiRequest;
+import org.computate.vertx.config.ComputateVertxConfigKeys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,6 +38,7 @@ import io.vertx.core.CompositeFuture;
 import io.vertx.core.Future;
 import io.vertx.core.Promise;
 import io.vertx.core.WorkerExecutor;
+import io.vertx.core.buffer.Buffer;
 import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
@@ -438,16 +443,21 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 	 */
 	private Future<Void> importSitePage(YamlProcessor yamlProcessor, String path) {
 		Promise<Void> promise = Promise.promise();
+		ZonedDateTime now = ZonedDateTime.now(ZoneId.of(config().getString(ConfigKeys.SITE_ZONE)));
 		vertx.fileSystem().readFile(path).onSuccess(buffer -> {
 			yamlProcessor.process(vertx, null, buffer).onSuccess(json -> {
 				String pageId = StringUtils.substringBeforeLast(StringUtils.substringAfterLast(path, "/"), ".");
 				JsonObject importBody = new JsonObject();
 				JsonArray importItems = new JsonArray();
 				List<Future> futures = new ArrayList<>();
+				Stack<String> stack = new Stack<>();
+				stack.push("html");
+				stack.push("body");
+				Long sequenceNum = 0L;
 				for(String htmlGroup : json.fieldNames()) {
 					if(StringUtils.startsWith(htmlGroup, "htm")) {
 						JsonArray pageItems = json.getJsonArray(htmlGroup);
-						importSiteHtml(pageId, htmlGroup, pageItems, futures, 0L);
+						sequenceNum = importSiteHtml(stack, pageId, htmlGroup, pageItems, futures, sequenceNum);
 					}
 				}
 				importBody.put("list", importItems);
@@ -476,12 +486,31 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 					pageParams.put("body", pageBody);
 					pageParams.put("path", new JsonObject());
 					pageParams.put("cookie", new JsonObject());
-					pageParams.put("query", new JsonObject().put("commitWithin", 10000).put("q", "*:*").put("var", new JsonArray().add("refresh:false")));
+					pageParams.put("query", new JsonObject().put("commitWithin", 1000).put("q", "*:*").put("var", new JsonArray().add("refresh:false")));
 					JsonObject pageContext = new JsonObject().put("params", pageParams);
 					JsonObject pageRequest = new JsonObject().put("context", pageContext);
 					vertx.eventBus().request(String.format("smart-village-view-enUS-%s", SitePage.CLASS_SIMPLE_NAME), pageRequest, new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", SitePage.CLASS_SIMPLE_NAME))).onSuccess(b -> {
-						LOG.info(String.format(importSitePageComplete, SitePage.CLASS_SIMPLE_NAME));
-						promise.complete();
+						String solrHostName = config().getString(ComputateVertxConfigKeys.SOLR_HOST_NAME);
+						Integer solrPort = config().getInteger(ComputateVertxConfigKeys.SOLR_PORT);
+						String solrCollection = config().getString(ComputateVertxConfigKeys.SOLR_COLLECTION);
+						String solrRequestUri = String.format("/solr/%s/update%s", solrCollection, "?commitWithin=1000&overwrite=true&wt=json");
+						String deleteQuery = String.format("classSimpleName_docvalues_string:%s AND created_docvalues_date:[* TO %s]", SiteHtml.CLASS_SIMPLE_NAME, SiteHtml.staticSearchStrCreated(null, SiteHtml.staticSearchCreated(null, now)));
+						String deleteXml = String.format("<delete><query>%s</query></delete>", deleteQuery);
+						webClient.post(solrPort, solrHostName, solrRequestUri)
+								.putHeader("Content-Type", "text/xml")
+								.sendBuffer(Buffer.buffer().appendString(deleteXml))
+								.onSuccess(c -> {
+							try {
+								LOG.info(String.format(importSitePageComplete, SitePage.CLASS_SIMPLE_NAME));
+								promise.complete();
+							} catch(Exception ex) {
+								LOG.error(String.format("Could not read response from Solr: http://%s:%s%s", solrHostName, solrPort, solrRequestUri), ex);
+								promise.fail(ex);
+							}
+						}).onFailure(ex -> {
+							LOG.error(String.format("Search failed. "), new RuntimeException(ex));
+							promise.fail(ex);
+						});
 					}).onFailure(ex -> {
 						LOG.error(String.format(importSitePageFail, SitePage.CLASS_SIMPLE_NAME), ex);
 						promise.fail(ex);
@@ -501,34 +530,106 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 		return promise.future();
 	}
 
-	private Long importSiteHtml(String pageId, String htmlGroup, JsonArray pageItems, List<Future> futures, Long sequenceNum) {
+	private Long importSiteHtml(Stack<String> stack, String pageId, String htmlGroup, JsonArray pageItems, List<Future> futures, Long sequenceNum) {
+		Double sort = 0D;
 		for(Integer i = 0; i < pageItems.size(); i++) {
-			sequenceNum++;
 			JsonObject pageItem = (JsonObject)pageItems.getValue(i);
-			JsonObject importItem = pageItem.copy();
-			importItem.put(SiteHtml.VAR_saves, new JsonArray()
-					.add(SiteHtml.VAR_e)
-					.add(SiteHtml.VAR_a)
-					.add(SiteHtml.VAR_htmlBefore)
-					.add(SiteHtml.VAR_htmlAfter)
-					.add(SiteHtml.VAR_sequenceNum)
-					.add(SiteHtml.VAR_htmlGroup)
-					.add(SiteHtml.VAR_pageId)
-					);
-			importItem.put(SiteHtml.VAR_created, ComputateZonedDateTimeSerializer.ZONED_DATE_TIME_FORMATTER.format(ZonedDateTime.now()));
-			importItem.put(SiteHtml.VAR_pageId, pageId);
-			importItem.put(SiteHtml.VAR_htmlGroup, htmlGroup);
-			importItem.put(SiteHtml.VAR_sequenceNum, sequenceNum);
-			importItem.put(SiteHtml.VAR_id, String.format("%s_%s", SiteHtml.CLASS_SIMPLE_NAME, sequenceNum));
+			Object in = pageItem.getValue("in");
+			String e = pageItem.getString("e");
+			Boolean eNoWrapParent = false;
+			Boolean eNoWrap = false;
+			String tabs = "";
+			if(e != null) {
+				String localNameParent = stack.isEmpty() ? null : stack.peek();
+				eNoWrapParent = localNameParent == null || XmlTool.HTML_ELEMENTS_NO_WRAP.contains(localNameParent);
+				eNoWrap = localNameParent == null || XmlTool.HTML_ELEMENTS_NO_WRAP.contains(e);
+				tabs = String.join("", Collections.nCopies(stack.size(), "  "));
+				stack.push(e);
+			}
 
-			JsonObject htmlParams = new JsonObject();
-			htmlParams.put("body", importItem);
-			htmlParams.put("path", new JsonObject());
-			htmlParams.put("cookie", new JsonObject());
-			htmlParams.put("query", new JsonObject().put("commitWithin", 10000).put("q", "*:*").put("var", new JsonArray().add("refresh:false")));
-			JsonObject htmlContext = new JsonObject().put("params", htmlParams);
-			JsonObject htmlRequest = new JsonObject().put("context", htmlContext);
-			futures.add(vertx.eventBus().request(String.format("smart-village-view-enUS-%s", SiteHtml.CLASS_SIMPLE_NAME), htmlRequest, new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", SiteHtml.CLASS_SIMPLE_NAME))));
+			{
+				sequenceNum++;
+				JsonObject importItem = new JsonObject();
+				if(e != null)
+					importItem.put(SiteHtml.VAR_eBefore, e);
+				Optional.ofNullable(pageItem.getString(SiteHtml.VAR_text)).ifPresent(text -> importItem.put(SiteHtml.VAR_text, text));
+				if(!eNoWrapParent && !tabs.isEmpty()) {
+					importItem.put(SiteHtml.VAR_tabs, String.format("\n%s", tabs));
+				}
+				importItem.put(SiteHtml.VAR_saves, new JsonArray()
+						.add(SiteHtml.VAR_eBefore)
+						.add(SiteHtml.VAR_a)
+						.add(SiteHtml.VAR_htmlBefore)
+						.add(SiteHtml.VAR_sequenceNum)
+						.add(SiteHtml.VAR_htmlGroup)
+						.add(SiteHtml.VAR_pageId)
+						.add(SiteHtml.VAR_tabs)
+						);
+				importItem.put(SiteHtml.VAR_created, ComputateZonedDateTimeSerializer.ZONED_DATE_TIME_FORMATTER.format(ZonedDateTime.now()));
+				importItem.put(SiteHtml.VAR_pageId, pageId);
+				importItem.put(SiteHtml.VAR_htmlGroup, htmlGroup);
+				importItem.put(SiteHtml.VAR_sequenceNum, sequenceNum);
+				importItem.put(SiteHtml.VAR_id, String.format("%s_%s", SiteHtml.CLASS_SIMPLE_NAME, sequenceNum));
+				for(Integer j=1; j <= stack.size(); j++) {
+					importItem.put("sort" + j, stack.get(j - 1));
+				}
+	
+				JsonObject htmlParams = new JsonObject();
+				htmlParams.put("body", importItem);
+				htmlParams.put("path", new JsonObject());
+				htmlParams.put("cookie", new JsonObject());
+				htmlParams.put("query", new JsonObject().put("commitWithin", 1000).put("q", "*:*").put("var", new JsonArray().add("refresh:false")));
+				JsonObject htmlContext = new JsonObject().put("params", htmlParams);
+				JsonObject htmlRequest = new JsonObject().put("context", htmlContext);
+				futures.add(vertx.eventBus().request(String.format("smart-village-view-enUS-%s", SiteHtml.CLASS_SIMPLE_NAME), htmlRequest, new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", SiteHtml.CLASS_SIMPLE_NAME))));
+			}
+
+			if(in != null) {
+				if(in instanceof JsonObject) {
+					sequenceNum = importSiteHtml(stack, pageId, htmlGroup, new JsonArray().add(in), futures, sequenceNum);
+				} else if(in instanceof JsonArray) {
+					sequenceNum = importSiteHtml(stack, pageId, htmlGroup, (JsonArray)in, futures, sequenceNum);
+				}
+			}
+
+			if(e != null) {
+				sequenceNum++;
+				JsonObject importItem = new JsonObject();
+				importItem.put(SiteHtml.VAR_eAfter, e);
+				if(!eNoWrap)
+					importItem.put(SiteHtml.VAR_tabs, "\n");
+				if(!eNoWrap && !tabs.isEmpty())
+					importItem.put(SiteHtml.VAR_tabs, tabs);
+				importItem.put(SiteHtml.VAR_saves, new JsonArray()
+						.add(SiteHtml.VAR_eAfter)
+						.add(SiteHtml.VAR_htmlAfter)
+						.add(SiteHtml.VAR_sequenceNum)
+						.add(SiteHtml.VAR_htmlGroup)
+						.add(SiteHtml.VAR_pageId)
+						.add(SiteHtml.VAR_tabs)
+						);
+				importItem.put(SiteHtml.VAR_created, ComputateZonedDateTimeSerializer.ZONED_DATE_TIME_FORMATTER.format(ZonedDateTime.now()));
+				importItem.put(SiteHtml.VAR_pageId, pageId);
+				importItem.put(SiteHtml.VAR_htmlGroup, htmlGroup);
+				importItem.put(SiteHtml.VAR_sequenceNum, sequenceNum);
+				importItem.put(SiteHtml.VAR_id, String.format("%s_%s", SiteHtml.CLASS_SIMPLE_NAME, sequenceNum));
+				for(Integer j=1; j <= stack.size(); j++) {
+					importItem.put("sort" + j, stack.get(j - 1));
+				}
+	
+				JsonObject htmlParams = new JsonObject();
+				htmlParams.put("body", importItem);
+				htmlParams.put("path", new JsonObject());
+				htmlParams.put("cookie", new JsonObject());
+				htmlParams.put("query", new JsonObject().put("commitWithin", 1000).put("q", "*:*").put("var", new JsonArray().add("refresh:false")));
+				JsonObject htmlContext = new JsonObject().put("params", htmlParams);
+				JsonObject htmlRequest = new JsonObject().put("context", htmlContext);
+				futures.add(vertx.eventBus().request(String.format("smart-village-view-enUS-%s", SiteHtml.CLASS_SIMPLE_NAME), htmlRequest, new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", SiteHtml.CLASS_SIMPLE_NAME))));
+			}
+
+			if(e != null) {
+				stack.pop();
+			}
 		}
 		return sequenceNum;
 	}

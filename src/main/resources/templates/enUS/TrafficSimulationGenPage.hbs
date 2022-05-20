@@ -1,0 +1,1103 @@
+{{#*inline "htmTitleTrafficSimulationPage"}}		<!-- inline "htmTitleTrafficSimulationPage" -->
+		<title>{{#if searchListTrafficSimulation_}}{{#eq trafficSimulationCount int1}}{{#eq params.query.q "*:*"}}traffic simulation{{else}}traffic simulation{{/eq}}{{else}}no traffic simulation found{{/eq}}{{else}}traffic simulations{{/if}}</title>
+{{/inline}}
+{{#*inline "htmMetaTrafficSimulationPage"}}{{> "htmMetaBaseModelPage"}}{{/inline}}
+{{#*inline "htmStyleTrafficSimulationPage"}}{{> "htmStyleBaseModelPage"}}{{/inline}}
+{{#*inline "htmScriptsTrafficSimulationPage"}}{{> "htmScriptsBaseModelPage"}}		<!-- inline "htmScriptsTrafficSimulationPage" -->
+		<script src="{{staticBaseUrl}}/js/enUS/TrafficSimulationPage.js"></script>
+{{/inline}}
+{{#*inline "htmScriptTrafficSimulationPage"}}		<!-- inline "htmScriptTrafficSimulationPage" -->
+		<script>
+			$(document).ready(function() {
+				document.onkeydown = function(evt) {
+					evt = evt || window.event;
+					var isEscape = false;
+					if ('key' in evt) {
+						isEscape = (evt.key === 'Escape' || evt.key === 'Esc');
+					} else {
+						isEscape = (evt.keyCode === 27);
+					}
+					if (isEscape) {
+						$('.w3-modal:visible').hide();
+					}
+				};
+				window.eventBus = new EventBus('/eventbus');
+				var pk = {{#if pk}}{{pk}}{{else}}null{{/if}};
+				if(pk != null) {
+				}
+				websocketTrafficSimulation(websocketTrafficSimulationInner);
+				window.varsFq = JSON.parse('{{{toJsonObjectStringInApostrophes varsFq}}}');
+				pageGraph();
+			});
+		</script>
+{{/inline}}
+{{#*inline "htmUrlTrafficSimulation"}}{{pageUri}}?q={{query.q}}&amp;rows={{#if rows}}{{rows}}{{else}}{{pagination.rows}}{{/if}}&amp;rows={{#if start}}{{start}}{{else}}{{pagination.start}}{{/if}}{{#each query.fq}}{{#eq fq this}}{{else}}&fq={{fq}}:{{val}}{{/eq}}{{/each}}{{#each query.sort}}{{#eq sort this}}{{else}}&sort={{var}} {{order}}{{/eq}}{{/each}}{{/inline}}
+{{#*inline "htmHeadTrafficSimulationPage"}}{{> "htmTitleTrafficSimulationPage"}}{{> "htmMetaTrafficSimulationPage"}}{{> "htmStyleTrafficSimulationPage"}}{{> "htmScriptsTrafficSimulationPage"}}{{> "htmScriptTrafficSimulationPage"}}{{/inline}}
+{{#*inline "htmBodySearchTrafficSimulationPage"}}								<!-- #*inline "htmBodySearchTrafficSimulationPage" -->
+								<div>
+{{#each varsQ}}
+									<div class="w3-cell-row ">
+										<div class="w3-cell w3-cell-top ">
+											<label for="qTrafficSimulation_{{ @key }}">{{ displayName }}<sup class="w3-tiny "> ({{ classSimpleName }})</sup></label>
+										</div>
+									</div>
+									<div class="w3-cell-row ">
+										<div class="w3-cell w3-cell-top ">
+											<input id="qTrafficSimulation_{{ @key }}" placeholder="{{ displayName }}" class="" {{#eq ../var 'objectSuggest' }}onkeyup{{else}}onchange{{/eq}}="qChange(this); " data-var="{{ var }}" autocomplete="off="/>
+											<div class="pageSearchVal w3-tiny "></div>
+										</div>
+									</div>
+{{/each}}
+									<div class="w3-cell-row ">
+										<div class="w3-cell w3-cell-top ">
+											<label for="qTrafficSimulation_Start">start<sup class="w3-tiny "> (Long)</sup></label>
+										</div>
+									</div>
+									<div class="w3-cell-row ">
+										<div class="w3-cell w3-cell-top ">
+											<input id="qTrafficSimulation_start" placeholder="{{ displayName }}" class="" onchange="paramChange(this); " data-var="start" autocomplete="off="/>
+											<div class="pageSearchVal w3-tiny "></div>
+										</div>
+									</div>
+									<div class="w3-cell-row ">
+										<div class="w3-cell w3-cell-top ">
+											<label for="qTrafficSimulation_Rows">rows<sup class="w3-tiny "> (Long)</sup></label>
+										</div>
+									</div>
+									<div class="w3-cell-row ">
+										<div class="w3-cell w3-cell-top ">
+											<input id="qTrafficSimulation_rows" placeholder="{{ displayName }}" class="" onchange="paramChange(this); " data-var="rows" autocomplete="off="/>
+											<div class="pageSearchVal w3-tiny "></div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+{{#*inline "htmBodyFiltersTrafficSimulationPage"}}								<!-- #*inline "htmBodyFiltersTrafficSimulationPage" -->
+								<div>
+{{#each varsFq }}
+									<div class="">
+										<label for="fqTrafficSimulation_{{ @key }}">{{ displayName }}<sup class="w3-tiny "> ({{ classSimpleName }})</sup></label>
+										<div class="w3-cell-row ">
+											<div class="w3-cell w3-cell-top ">
+												<button id="buttonFacetTrafficSimulation_{{ @key }}" class="" onclick="facetFieldChange(this); " title="see values " data-var="{{ var }}" data-clear="{{#if facetField }}true{{else}}false{{/if}}"><i class="fas fa-list "></i></button>
+											</div>
+											<div class="w3-cell w3-cell-top ">
+												<input id="fqTrafficSimulation_{{ @key }}" placeholder="{{ displayName }}" class="" onchange="fqChange(this); " data-var="{{ var }}" autocomplete="off=" value="{{ val }}"/>
+											</div>
+										</div>
+									</div>
+									<div class="w3-tiny ">
+										<div class="pageSearchVal " id="pageSearchVal-fqTrafficSimulation_{{ @key }}">{{#if val }}fq={{ var }}:{{encodeURIComponent val }}{{/if}}</div>
+										<div class="pageSearchVal " id="pageSearchVal-buttonFacetTrafficSimulation_{{ @key }}">{{#if facetField.var }}facet.field={{ facetField.var }}{{/if}}</div>
+										<ol class="pageFacetField w3-small pageFacetFieldTrafficSimulation_{{ @key }} " id="pageFacetFieldTrafficSimulation_{{ @key }}">
+{{#each facetField.counts }}
+											<li class="cursor-pointer " data-class="TrafficSimulation" data-var="{{ ../var }}" data-val="{{ @key }}" onclick="fqReplace(this); ">{{ @key }}: {{ this }}</li>
+{{/each}}
+										</ol>
+									</div>
+{{/each}}
+								</div>
+{{/inline}}
+{{#*inline "htmBodyRangeTrafficSimulationPage"}}								<!-- #*inline "htmBodyRangeTrafficSimulationPage" -->
+								<table class="w3-padding ">
+									<tr>
+										<td class="w3-padding w3-tiny " colspan="2">
+											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeGap-TrafficSimulation">{{#if defaultRangeGap }}facet.range.gap={{encodeURIComponent defaultRangeGap }}{{/if}}</div>
+											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeStart-TrafficSimulation">{{#if defaultRangeStart }}facet.range.start={{encodeURIComponent defaultRangeStart }}{{/if}}</div>
+											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeEnd-TrafficSimulation">{{#if defaultRangeEnd }}facet.range.end={{encodeURIComponent defaultRangeEnd }}{{/if}}</div>
+											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeVar-TrafficSimulation">{{#if defaultRangeVar }}facet.range={!tag=r1}{{encodeURIComponent defaultRangeVar }}{{/if}}</div>
+										</td>
+									</tr>
+								</table>
+								<table class="w3-padding ">
+									<tr class="">
+										<td class="">
+											<span>Range Gap</span>
+										</td>
+										<td class="">
+											<select name="facet.range.gap" id="pageFacetRangeGap-TrafficSimulation" onchange="facetRangeChange(this, 'TrafficSimulation'); ">
+												<option value="+1YEAR"{{#eq defaultRangeGap '+1YEAR'}} selected="selected"{{else}}{{/eq}}>Year</option>
+												<option value="+1MONTH"{{#eq defaultRangeGap '+1MONTH'}} selected="selected"{{else}}{{/eq}}>Month</option>
+												<option value="+1WEEK"{{#eq defaultRangeGap '+1WEEK'}} selected="selected"{{else}}{{/eq}}>Week</option>
+												<option value="+1DAY"{{#eq defaultRangeGap '+1DAY'}} selected="selected"{{else}}{{#if defaultRangeGap}}{{else}} selected="selected"{{/if}}{{/eq}}>Day</option>
+												<option value="+1HOUR"{{#eq defaultRangeGap '+1HOUR'}} selected="selected"{{else}}{{/eq}}>Hour</option>
+												<option value="+1MINUTE"{{#eq defaultRangeGap '+1MINUTE'}} selected="selected"{{else}}{{/eq}}>Minute</option>
+												<option value="+1SECOND"{{#eq defaultRangeGap '+1SECOND'}} selected="selected"{{else}}{{/eq}}>Second</option>
+											</select>
+										</td>
+									</tr>
+									<tr class="">
+										<td class="" colspan="2">
+											<span>Range Start</span>
+										</td>
+									</tr>
+									<tr class="">
+										<td class="" colspan="2">
+											<span><input type="datetime-local" name="facetRangeStart" id="pageFacetRangeStart-TrafficSimulation" value="{{formatZonedDateTime defaultRangeStart "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeChange(this, 'TrafficSimulation'); "/></span>
+										</td>
+									</tr>
+									<tr class="">
+										<td class="" colspan="2">
+											<span>Range End</span>
+										</td>
+									</tr>
+									<tr class="">
+										<td class="" colspan="2">
+											<span><input type="datetime-local" name="facetRangeEnd" id="pageFacetRangeEnd-TrafficSimulation" value="{{formatZonedDateTime defaultRangeEnd "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeChange(this, 'TrafficSimulation'); "/></span>
+										</td>
+									</tr>
+								</table>
+								<table class="w3-padding ">
+{{#each varsRange }}
+									<tr class="">
+										<td class="">
+											<span><input type="radio" name="pageFacetRange" class="pageFacetRange " id="pageFacetRangeTrafficSimulation_{{ @key }}" value="{{ var }}"{{#eq defaultRangeVar var }} checked="checked"{{/eq}} onclick="facetRangeChange(this, 'TrafficSimulation'); "/></span>
+										</td>
+										<td class="">
+											<label for="pageFacetRangeTrafficSimulation_{{ @key }}">{{ displayName }}</label>
+										</td>
+									</tr>
+{{/each}}
+								</table>
+{{/inline}}
+{{#*inline "htmBodyPivotTrafficSimulationPage"}}								<!-- #*inline "htmBodyPivotTrafficSimulationPage" -->
+								<div style="display: none; " class="w3-padding w3-tiny " id="pageSearchVal-PivotTrafficSimulationHidden">
+{{#each defaultPivotVars }}
+									<div class="pageSearchVal-PivotTrafficSimulationHidden " id="pageSearchVal-PivotTrafficSimulationHidden_{{ this }}">{{ this }}</div>
+{{/each}}
+								</div>
+								<div class="w3-padding w3-tiny " id="pageSearchVal-PivotTrafficSimulation">
+{{#if defaultPivotVars }}
+									<div class="pageSearchVal pageSearchVal-PivotTrafficSimulation " id="pageSearchVal-PivotTrafficSimulation_1">facet.pivot={{#each defaultPivotVars }}{{#if @index }},{{/if}}{{ this }}{{/each}}</div>
+{{/if}}
+								</div>
+								<table class="w3-table ">
+{{#each varsFq }}
+									<tr class="">
+										<td class="">
+											<span><input type="checkbox" name="pageFacetPivot" class="pageFacetPivot " id="pageFacetPivotTrafficSimulation_{{ @key }}" value="{{ var }}"{{#if pivot }} checked="checked"{{/if}} onclick="facetPivotChange(this, 'TrafficSimulation'); "/></span>
+										</td>
+										<td class="w3-cell ">
+											<label for="pageFacetPivotTrafficSimulation_{{ @key }}">{{ displayName }}</label>
+										</td>
+									</tr>
+{{/each}}
+								</table>
+{{/inline}}
+{{#*inline "htmBodyFieldListTrafficSimulationPage"}}								<!-- #*inline "htmBodyFieldListTrafficSimulationPage" -->
+								<div style="display: none; " class="w3-padding w3-tiny " id="pageSearchVal-FieldListTrafficSimulationHidden">
+{{#each defaultFieldListVars }}
+									<div class="pageSearchVal-FieldListTrafficSimulationHidden " id="pageSearchVal-FieldListTrafficSimulationHidden_{{ this }}">{{ this }}</div>
+{{/each}}
+								</div>
+								<div class="w3-padding w3-tiny " id="pageSearchVal-FieldListTrafficSimulation">
+{{#if defaultFieldListVars }}
+									<div class="pageSearchVal pageSearchVal-FieldListTrafficSimulation " id="pageSearchVal-FieldListTrafficSimulation_1">fl={{#each defaultFieldListVars }}{{#if @index }},{{/if}}{{ this }}{{/each}}</div>
+{{/if}}
+								</div>
+								<table class="w3-table ">
+{{#each varsFq }}
+									<tr class="">
+										<td class="">
+											<span><input type="checkbox" name="pageFieldList" class="pageFieldList " id="pageFieldListTrafficSimulation_{{ @key }}" value="{{ var }}"{{#if fieldList }} checked="checked"{{/if}} onclick="facetFieldListChange(this, 'TrafficSimulation'); "/></span>
+										</td>
+										<td class="w3-cell ">
+											<label for="pageFieldListTrafficSimulation_{{ @key }}">{{ displayName }}</label>
+										</td>
+									</tr>
+{{/each}}
+								</table>
+{{/inline}}
+{{#*inline "htmBodyStatsTrafficSimulationPage"}}								<!-- #*inline "htmBodyStatsTrafficSimulationPage" -->
+								<div style="display: none; " class="w3-padding w3-tiny " id="pageSearchVal-StatsTrafficSimulationHidden">
+{{#each defaultStatsVars }}
+									<div class="pageSearchVal-StatsTrafficSimulationHidden " id="pageSearchVal-StatsTrafficSimulationHidden_{{ this }}">{{ this }}</div>
+{{/each}}
+								</div>
+								<div class="w3-padding w3-tiny " id="pageSearchVal-StatsTrafficSimulation">
+{{#if defaultStatsVars }}
+{{#each defaultStatsVars }}									<div class="pageSearchVal pageSearchVal-StatsTrafficSimulation_{{ this }} " id="pageSearchVal-StatsTrafficSimulation_{{ this }}">stats.field={{ this }}</div>
+{{/each}}{{/if}}
+								</div>
+								<table class="w3-table ">
+{{#each varsFq }}
+{{#if enableStats }}
+									<tr class="">
+										<td class="">
+											<span><input type="checkbox" name="pageStats" class="pageStats " id="pageStatsTrafficSimulation_{{ @key }}" value="{{ var }}"{{#if ./stats }} checked="checked"{{/if}} onclick="facetStatsChange(this, 'TrafficSimulation'); "/></span>
+										</td>
+										<td class="w3-cell ">
+											<div>
+												<label for="pageStatsTrafficSimulation_{{ @key }}">{{ displayName }}</label>
+											</div>
+											<div class="pageStatsField w3-small pageStatsFieldTrafficSimulation_{{ @key }} " id="pageStatsFieldTrafficSimulation_{{ @key }}">
+{{#if ./stats }}
+{{#each ./stats }}
+{{#eq @key 'name' }}{{else}}
+												<div data-class="TrafficSimulation" data-var="{{ ../var }}" data-val="{{ @key }}">{{ @key }}: {{ this }}</div>
+{{/eq}}
+{{/each}}
+{{/if}}
+											</div>
+										</td>
+									</tr>
+{{/if}}
+{{/each}}
+								</table>
+{{/inline}}
+{{#*inline "htmBodyMenuTrafficSimulationPage"}}		<!-- #*inline "htmBodyMenuTrafficSimulationPage" -->
+{{> "htmBodyMenuBaseModelPage"}}{{/inline}}
+{{#*inline "htmBodyGraphTrafficSimulationPage"}}		<!-- #*inline "htmBodyGraphTrafficSimulationPage" -->
+<div id="htmBodyGraphBaseModelPage" class="htmBodyGraph "></div>{{/inline}}
+{{#*inline "htmBodyCount0TrafficSimulationPage"}}		<!-- #*inline "htmBodyCount0TrafficSimulationPage" -->
+		<h1>
+			<a href="{{pageUri}}" class="w3-bar-item w3-btn w3-center w3-block w3-blue w3-hover-blue">
+				{{#if contextIconCssClasses}}
+					<i class="{{ contextIconCssClasses }} site-menu-icon "></i>
+				{{/if}}
+				<span class="">traffic simulations</span>
+			</a>
+		</h1>
+		<h2>
+			<span class="w3-bar-item w3-padding w3-center w3-block w3-blue">
+				{{#if contextIconCssClasses}}
+					<i class="{{ contextIconCssClasses }}  site-menu-icon "></i>
+				{{/if}}
+				<span class="">no traffic simulation found</span>
+			</span>
+		</h2>
+{{/inline}}
+{{#*inline "htmBodyCount1AllTrafficSimulationPage"}}		<!-- #*inline "htmBodyCount1AllTrafficSimulationPage" -->
+		<h1 class="w3-center ">
+			<a href="{{pageUri}}" class="w3-bar-item w3-btn w3-block w3-blue w3-hover-blue">
+			{{#if contextIconCssClasses}}
+				<i class="{{ contextIconCssClasses }} site-menu-icon "></i>
+			{{/if}}
+				<span class="">traffic simulation</span>
+			</a>
+		</h1>
+		<h2 class="w3-center ">
+			<span class="w3-bar-item w3-padding w3-center w3-block w3-blue">
+				<span class="">{{trafficSimulation_.objectTitle}}</span>
+			</span>
+		</h2>
+{{/inline}}
+{{#*inline "htmBodyCount1TrafficSimulationPage"}}		<!-- #*inline "htmBodyCount1TrafficSimulationPage" -->
+		<h1>
+			<a href="{{pageUri}}" class="w3-bar-item w3-btn w3-center w3-block w3-blue w3-hover-blue">
+	{{#if contextIconCssClasses}}
+				<i class="{{ contextIconCssClasses }} site-menu-icon "></i>
+	{{/if}}
+				<span class="">traffic simulations</span>
+			</a>
+		</h1>
+		<div>
+	{{#if pagination.pagePrevious}}
+			<a href="{{pageUri}}?start={{pagination.pagePrevious.start}}&amp;rows={{pagination.rows}}">
+				<i class="fas fa-arrow-square-left "></i>
+			</a>
+	{{else}}
+			<i class="fas fa-arrow-square-left w3-opacity "></i>
+	{{/if}}
+	{{#gte pagination.rowsPrevious pagination.1L}}
+			<a href="{{pageUri}}?start={{pagination.start}}&amp;rows={{ pagination.rowsPrevious }}">
+				<i class="fas fa-minus-square "></i>
+			</a>
+	{{else}}
+			<i class="fas fa-minus-square w3-opacity "></i>
+	{{/gte}}
+			<a href="{{pageUri}}?start={{pagination.start}}&amp;rows={{ pagination.rowsNext }}">
+				<i class="fas fa-plus-square "></i>
+			</a>
+	{{#if pagination.pageNext}}
+			<a href="{{pageUri}}?start={{pagination.pageNext.start}}&amp;rows={{pagination.rows}}">
+				<i class="fas fa-arrow-square-right "></i>
+			</a>
+	{{else}}
+			<i class="fas fa-arrow-square-right w3-opacity "></i>
+	{{/if}}
+			<span>{{ pagination.startNum }} - {{ pagination.endNum }} of {{ pagination.foundNum }}</span>
+		</div>
+{{> "table1TrafficSimulationPage"}}
+{{/inline}}
+{{#*inline "htmBodyAllTrafficSimulationPage"}}		<!-- #*inline "htmBodyAllTrafficSimulationPage" -->
+		<h1>
+			<a href="{{pageUri}}" class="w3-bar-item w3-btn w3-center w3-block w3-blue w3-hover-blue">
+	{{#if contextIconCssClasses}}
+				<i class="{{ contextIconCssClasses }} site-menu-icon "></i>
+	{{/if}}
+				<span class="">traffic simulations</span>
+			</a>
+		</h1>
+		<div class="">
+			<div>
+	{{#if pagination.pagePrevious}}
+				<a href="{{pageUri}}?start={{pagination.pagePrevious.start}}&amp;rows={{pagination.rows}}">
+					<i class="fas fa-arrow-square-left "></i>
+				</a>
+	{{else}}
+				<i class="fas fa-arrow-square-left w3-opacity "></i>
+	{{/if}}
+	{{#gte pagination.rowsPrevious pagination.1L}}
+				<a href="{{pageUri}}?start={{pagination.start}}&amp;rows={{ pagination.rowsPrevious }}">
+					<i class="fas fa-minus-square "></i>
+				</a>
+	{{else}}
+				<i class="fas fa-minus-square w3-opacity "></i>
+	{{/gte}}
+				<a href="{{pageUri}}?start={{pagination.start}}&amp;rows={{ pagination.rowsNext }}">
+					<i class="fas fa-plus-square "></i>
+				</a>
+	{{#if pagination.pageNext}}
+				<a href="{{pageUri}}?start={{pagination.pageNext.start}}&amp;rows={{pagination.rows}}">
+					<i class="fas fa-arrow-square-right "></i>
+				</a>
+	{{else}}
+				<i class="fas fa-arrow-square-right w3-opacity "></i>
+	{{/if}}
+				<span>{{ pagination.startNum }} - {{ pagination.endNum }} of {{ pagination.foundNum }}</span>
+			</div>
+{{> "table1TrafficSimulationPage"}}
+		</div>
+{{/inline}}
+{{#*inline "htmFormTrafficSimulationPage"}}
+		<!-- #*inline "htmForm" -->
+		<form action="" id="TrafficSimulationForm" class="pageForm " style="" onsubmit="event.preventDefault(); return false; ">
+{{#if pk}}
+			<input name="pk" class="valuePk" type="hidden" value="{{pk}}"/>
+{{/if}}
+			<input name="focusId" type="hidden"/>
+			<input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{{toJsonObjectStringInApostrophes pageResponse }}}' type="hidden"/>
+		</form>
+{{#if id}}
+{{#block "htmForm_searchpageTrafficSimulation"}}{{/block}}
+{{/if}}
+{{/inline}}
+{{#*inline "htmFormTrafficSimulationPage_patchTrafficSimulation"}}
+		<button
+			class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-blue "
+			onclick="$('#patchTrafficSimulationModal').show(); "
+			>
+			<i class="fas fa-edit "></i>
+			Modify traffic simulations
+		</button>
+		<div id="patchTrafficSimulationModal" class="w3-modal ">
+			<div class="w3-modal-content ">
+				<div class="w3-card-4 ">
+					<header class="w3-container w3-blue">
+	{{#eq "Page" classApiMethodMethod}}
+						<span class="w3-button w3-display-topright " onclick="$('#patchTrafficSimulationModal').hide(); ">×</span>
+	{{/eq}}
+						<h2 class="w3-padding ">Modify traffic simulations</h2>
+					</header>
+					<div class="" id="patchTrafficSimulationFormValues">
+							<div class="w3-cell-row ">
+{{> "htmCreated" classApiMethodMethod="PATCH"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmArchived" classApiMethodMethod="PATCH"}}
+{{> "htmDeleted" classApiMethodMethod="PATCH"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmSimulationName" classApiMethodMethod="PATCH"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmStartSeconds" classApiMethodMethod="PATCH"}}
+{{> "htmEndSeconds" classApiMethodMethod="PATCH"}}
+{{> "htmStepSeconds" classApiMethodMethod="PATCH"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmFcdOutputGeo" classApiMethodMethod="PATCH"}}
+							</div>
+						<button
+							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-blue "
+							onclick="patchTrafficSimulation(null, $('#patchTrafficSimulationFormValues')); "
+							>Modify traffic simulations</button>
+					</div>
+				</div>
+			</div>
+		</div>
+{{/inline}}
+{{#*inline "htmFormTrafficSimulationPage_postTrafficSimulation"}}
+		<button
+			class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-blue "
+			onclick="$('#postTrafficSimulationModal').show(); "
+			>
+			<i class="fas fa-file-plus "></i>
+			Create a traffic simulation
+		</button>
+		<div id="postTrafficSimulationModal" class="w3-modal ">
+			<div class="w3-modal-content ">
+				<div class="w3-card-4 ">
+					<header class="w3-container w3-blue">
+	{{#eq "Page" classApiMethodMethod}}
+						<span class="w3-button w3-display-topright " onclick="$('#postTrafficSimulationModal').hide(); ">×</span>
+	{{/eq}}
+						<h2 class="w3-padding ">Create a traffic simulation</h2>
+					</header>
+					<div class="" id="postTrafficSimulationFormValues">
+						<div id="postTrafficSimulationForm">
+							<div class="w3-cell-row ">
+{{> "htmCreated" classApiMethodMethod="POST"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmArchived" classApiMethodMethod="POST"}}
+{{> "htmDeleted" classApiMethodMethod="POST"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmSimulationName" classApiMethodMethod="POST"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmStartSeconds" classApiMethodMethod="POST"}}
+{{> "htmEndSeconds" classApiMethodMethod="POST"}}
+{{> "htmStepSeconds" classApiMethodMethod="POST"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmFcdOutputGeo" classApiMethodMethod="POST"}}
+							</div>
+						</div>
+						<button
+							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-blue "
+							onclick="postTrafficSimulation($('#postTrafficSimulationForm')); "
+							>Create a traffic simulation</button>
+					</div>
+				</div>
+			</div>
+		</div>
+{{/inline}}
+{{#*inline "htmFormTrafficSimulationPage_putimportTrafficSimulation"}}
+		<button
+			class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-blue "
+			onclick="$('#putimportTrafficSimulationModal').show(); "
+			>
+			<i class="fas fa-file-import "></i>
+			Import traffic simulations
+		</button>
+		<div id="putimportTrafficSimulationModal" class="w3-modal ">
+			<div class="w3-modal-content ">
+				<div class="w3-card-4 ">
+					<header class="w3-container w3-blue">
+	{{#eq "Page" classApiMethodMethod}}
+						<span class="w3-button w3-display-topright " onclick="$('#putimportTrafficSimulationModal').hide(); ">×</span>
+	{{/eq}}
+						<h2 class="w3-padding ">Import traffic simulations</h2>
+					</header>
+					<div class="" id="putimportTrafficSimulationFormValues">
+						<div class="w3-cell-row ">
+							<textarea
+								class="PUTImport_searchList w3-input w3-border "
+								style="height: 300px; "
+								placeholder="{ 'searchList': [ { 'pk': ... , 'saves': [ ... ] }, ... ] }"
+								></textarea>
+						</div>
+						<button
+							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-blue "
+							onclick="putimportTrafficSimulation($('#putimportTrafficSimulationFormValues')); "
+							>Import traffic simulations</button>
+					</div>
+				</div>
+			</div>
+		</div>
+{{/inline}}
+{{#*inline "htmFormTrafficSimulationPage_searchpageTrafficSimulation"}}
+		<div id="searchpageTrafficSimulationModal" class="">
+			<div class="">
+				<div class="w3-card-4 ">
+					<div class="" id="searchpageTrafficSimulationFormValues">
+						<div id="searchpageTrafficSimulationForm">
+							<div class="w3-cell-row ">
+{{> "htmPk" classApiMethodMethod="Page"}}
+{{> "htmCreated" classApiMethodMethod="Page"}}
+{{> "htmModified" classApiMethodMethod="Page"}}
+{{> "htmObjectId" classApiMethodMethod="Page"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmArchived" classApiMethodMethod="Page"}}
+{{> "htmDeleted" classApiMethodMethod="Page"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmSimulationName" classApiMethodMethod="Page"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmStartSeconds" classApiMethodMethod="Page"}}
+{{> "htmEndSeconds" classApiMethodMethod="Page"}}
+{{> "htmStepSeconds" classApiMethodMethod="Page"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmFcdOutputGeo" classApiMethodMethod="Page"}}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+{{/inline}}
+{{#*inline "htmBodySidebarTrafficSimulationPage"}}
+				<div class="w3-dropdown-hover w3-bar-block min-width-300px ">
+					<div class="min-width-300px w3-blue ">
+						<span title="Search" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').toggle(); "><i class="fad fa-magnifying-glass hover-box-shadow "></i></span>
+						<span title="Filters" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleFilters').toggle(); "><i class="fad fa-filters hover-box-shadow "></i></span>
+						<span title="Range" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleRange').toggle(); "><i class="fad fa-calendar-range hover-box-shadow "></i></span>
+						<span title="Pivot" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').toggle(); "><i class="fad fa-table-pivot hover-box-shadow "></i></span>
+						<span title="FieldList" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleFieldList').toggle(); "><i class="fad fa-list-ul hover-box-shadow "></i></span>
+						<span title="Stats" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleFieldList').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleStats').toggle(); "><i class="fad fa-chart-candlestick hover-box-shadow "></i></span>
+					</div>
+					<div class="w3-dropdown-content min-width-300px w3-white w3-border w3-border-blue ">
+						<div class="siteSidebarToggle siteSidebarToggleSearch" style="display: none; ">
+							<div class="w3-bar w3-blue ">
+								<span class="w3-bar-item ">
+								<i class="fad fa-magnifying-glass "></i> Search</span>
+							</div>
+							<div class="w3-bar-block ">
+{{#block "htmBodySearch"}}{{/block}}
+							</div>
+						</div>
+						<div  class="siteSidebarToggle siteSidebarToggleFilters" style="display: none; ">
+							<div class="w3-bar w3-blue ">
+								<span class="w3-bar-item ">
+								<i class="fad fa-filters "></i> Filters</span>
+							</div>
+							<div class="w3-bar-block ">
+{{#block "htmBodyFilters"}}{{/block}}
+							</div>
+						</div>
+						<div  class="siteSidebarToggle siteSidebarToggleRange" style="display: none; ">
+							<div class="w3-bar w3-blue ">
+								<span class="w3-bar-item ">
+								<i class="fad fa-calendar-range "></i> Range</span>
+							</div>
+							<div class="w3-bar-block ">
+{{#block "htmBodyRange"}}{{/block}}
+							</div>
+						</div>
+						<div  class="siteSidebarToggle siteSidebarTogglePivot" style="display: none; ">
+							<div class="w3-bar w3-blue ">
+								<span class="w3-bar-item ">
+								<i class="fad fa-table-pivot "></i> Pivot</span>
+							</div>
+							<div class="w3-bar-block ">
+{{#block "htmBodyPivot"}}{{/block}}
+							</div>
+						</div>
+						<div  class="siteSidebarToggle siteSidebarToggleFieldList" style="display: none; ">
+							<div class="w3-bar w3-blue ">
+								<span class="w3-bar-item ">
+								<i class="fad fa-list-ul "></i> Field List</span>
+							</div>
+							<div class="w3-bar-block ">
+{{#block "htmBodyFieldList"}}{{/block}}
+							</div>
+						</div>
+						<div  class="siteSidebarToggle siteSidebarToggleStats" style="display: none; ">
+							<div class="w3-bar w3-blue ">
+								<span class="w3-bar-item ">
+								<i class="fad fa-chart-candlestick "></i> Stats</span>
+							</div>
+							<div class="w3-bar-block ">
+{{#block "htmBodyStats"}}{{/block}}
+							</div>
+						</div>
+					</div>
+				</div>
+{{/inline}}
+{{#*inline "htmBodyStartTrafficSimulationPage"}}
+{{> "htmBodyStartBaseModelPage"}}
+{{/inline}}
+{{#*inline "htmBodyEndTrafficSimulationPage"}}
+{{> "htmBodyEndBaseModelPage"}}
+{{/inline}}
+{{#*inline "htmBodyTrafficSimulationPage"}}
+{{#block "htmBodyStart"}}{{/block}}
+		<div class="w3-bar ">
+			<div class="w3-bar-item ">
+{{#block "htmBodySidebar"}}{{/block}}
+			</div>
+			<div class="w3-bar-item ">
+{{#block "htmBodyMenu"}}{{/block}}
+			</div>
+		</div>
+	<div class="pageContent w3-content ">
+{{#block "htmBodyGraph"}}{{/block}}
+	{{#eq trafficSimulationCount int0}}
+{{#block "htmBodyCount0"}}{{/block}}
+	{{else}}
+		{{#eq trafficSimulationCount int1}}
+			{{#eq params.query.q "*:*"}}
+{{#block "htmBodyCount1All"}}{{/block}}
+			{{else}}
+{{#block "htmBodyCount1"}}{{/block}}
+			{{/eq}}
+		{{else}}
+{{#block "htmBodyAll"}}{{/block}}
+		{{/eq}}
+	{{/eq}}
+{{#block "htmForm"}}{{/block}}
+{{#block "htmForms"}}{{/block}}
+{{#block "htmBodyEnd"}}{{/block}}
+	</div>
+{{/inline}}
+{{#*inline "table1TrafficSimulationPage"}}
+		<div class="w3-responsive ">
+			<table class="w3-table w3-bordered w3-striped w3-border w3-hoverable ">
+{{> table2TrafficSimulationPage}}
+			</table>
+		</div>
+{{/inline}}
+{{#*inline "table2TrafficSimulationPage"}}
+{{> "thead1TrafficSimulationPage"}}
+{{> "tbody1TrafficSimulationPage"}}
+{{> "tfoot1TrafficSimulationPage"}}
+{{/inline}}
+{{#*inline "thead1TrafficSimulationPage"}}
+				<thead class="w3-blue w3-hover-blue">
+{{> thead2TrafficSimulationPage}}
+				</thead>
+{{/inline}}
+{{#*inline "thead2TrafficSimulationPage"}}
+			<tr>
+						<th>created</th>
+						<th></th>
+			</tr>
+{{/inline}}
+{{#*inline "tbody1TrafficSimulationPage"}}
+				<tbody>
+{{> tbody2TrafficSimulationPage}}
+				</tbody>
+{{/inline}}
+{{#*inline "tbody2TrafficSimulationPage"}}
+		{{#each listTrafficSimulation}}
+					<tr>
+						<td>
+							<a href="{{pageUrlPk}}">
+								<span class="white-space-pre-wrap ">{{siteZonedDateTimeFormat created "MMM d, yyyy h:mm:ss a" siteLocale}}</span>
+							</a>
+						</td>
+						<td>
+							<a href="{{pageUrlPk}}">
+								<i class="fad fa-traffic-light-stop "></i>
+								<span class="white-space-pre-wrap ">{{objectTitle}}</span>
+							</a>
+						</td>
+					</tr>
+		{{/each}}
+{{/inline}}
+{{#*inline "tfoot1TrafficSimulationPage"}}
+				<tfoot class="w3-blue w3-hover-blue">
+{{> tfoot2TrafficSimulationPage}}
+				</tfoot>
+{{/inline}}
+{{#*inline "tfoot2TrafficSimulationPage"}}
+			<tr>
+			{{#if getColumnCreated}}
+				<td>
+				</td>
+			{{/if}}
+			{{#if getColumnObjectTitle}}
+				<td>
+				</td>
+			{{/if}}
+			</tr>
+	{{/inline}}
+{{#*inline "htmFormsTrafficSimulationPage"}}
+	{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq trafficSimulationCount int1}}
+		<button
+			class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-blue "
+			id="refreshThisTrafficSimulationGenPage"
+			onclick="patch{{classSimpleName}}Vals( [ {name: 'fq', value: 'pk:{{pk}}' } ], {}, function() { addGlow($('#refreshThisTrafficSimulationGenPage')); }, function() { addError($('#refreshThisTrafficSimulationGenPage')); }); return false; ">
+			<i class="fas fa-sync-alt "></i>
+			refresh this traffic simulation
+		</button>
+		{{/eq}}
+	{{/ifContainsAnyRoles}}
+	{{#ifContainsAnyRoles roles authRolesAdmin}}
+{{#block "htmForm_patchTrafficSimulation"}}{{/block}}
+{{#block "htmForm_postTrafficSimulation"}}{{/block}}
+{{#block "htmForm_putimportTrafficSimulation"}}{{/block}}
+	{{/ifContainsAnyRoles}}
+{{#block "htmSuggested"}}{{/block}}
+{{/inline}}
+{{#*inline "htmSuggestedTrafficSimulationPage"}}
+			{{#ifContainsAnyRoles roles rolesRequired}}
+					<div class="">
+						<button id="refreshAllTrafficSimulationGenPage{{id}}" class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-blue "
+							onclick="patch{{classSimpleName}}Vals([], {}, function() { addGlow($('#refreshAllTrafficSimulationGenPage{{id}}')); }, function() { addError($('#refreshAllTrafficSimulationGenPage{{id}}')); }); "
+							>
+							<i class="fas fa-sync-alt "></i>
+							refresh all the traffic simulations
+						</button>
+					</div>
+			{{/ifContainsAnyRoles}}
+			<div class="w3-cell-row ">
+				<div class="w3-cell ">
+					<span>
+						search traffic simulations: 
+					</span>
+				</div>
+			</div>
+			<div class="w3-bar ">
+				<input
+					type="text"
+					class="suggestTrafficSimulation w3-input w3-border w3-bar-item "
+					name="suggestTrafficSimulation"
+					id="suggestTrafficSimulation{{id}}"
+					autocomplete="off"
+					oninput="suggestTrafficSimulationObjectSuggest( [ { 'name': 'q', 'value': 'objectSuggest:' + $(this).val() }, { 'name': 'rows', 'value': '10' }, { 'name': 'fl', 'value': 'classCanonicalName,pk,pageUrlPk,objectTitle' } ], $('#suggestListTrafficSimulation{{id}}'), {{pk}}; "
+					onkeyup="if (event.keyCode === 13) { event.preventDefault(); window.location.href = '/traffic-simulation?q={{query1}}:' + encodeURIComponent(this.value) + '{{fqs}}{{sorts}}&amp;rows={{start2}}&amp;rows={{rows1}}"
+				{{#if listTrafficSimulation}}
+					value="{{query2}}"
+				{{/if}}
+				/>
+				<button
+					class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
+					onclick="window.location.href = '/traffic-simulation?q=&quot;, query1, &quot;:' + encodeURIComponent(this.previousElementSibling.value) + '&quot;, fqs, sorts, &quot;&amp;rows=&quot;, start2, &quot;&amp;rows=&quot;, rows1, &quot;'; "
+					>
+					<i class="fas fa-search "></i>
+				</button>
+			<div>
+			<div class="w3-cell-row ">
+				<div class="w3-cell w3-left-align w3-cell-top ">
+					<ul class="w3-ul w3-hoverable " id="suggestListTrafficSimulation{{id}}">
+					</ul>
+				</div>
+			</div>
+			<div class="">
+				<a href="/traffic-simulation" class="">
+					<i class="fad fa-traffic-light-stop"></i>
+					see all the traffic simulations
+				</a>
+			</div>
+{{/inline}}
+{{> BaseModelPage baseModel_=trafficSimulation_}}
+
+{{#*inline "htmSimulationName"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficSimulationSimulationName">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label for="{{classApiMethodMethod}}_simulationName">simulation name</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputSimulationName"}}
+													</div>
+	{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_simulationName')); $('#{{classApiMethodMethod}}_simulationName').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setSimulationName', null, function() { addGlow($('#{{classApiMethodMethod}}_simulationName')); }, function() { addError($('#{{classApiMethodMethod}}_simulationName')); }); "
+																		>
+																	<i class="far fa-eraser "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/ifContainsAnyRoles}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputSimulationName"}}
+		{{#ifContainsAnyRoles roles rolesRequired}}
+														<input
+															type="text"
+															placeholder="simulation name"
+															id="{{classApiMethodMethod}}_simulationName"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setSimulationName classTrafficSimulation inputTrafficSimulation{{pk}}SimulationName w3-input w3-border "
+																name="setSimulationName"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setSimulationName classTrafficSimulation inputTrafficSimulation{{pk}}SimulationName w3-input w3-border "
+																name="setSimulationName"
+		{{else}}
+																class="valueSimulationName w3-input w3-border classTrafficSimulation inputTrafficSimulation{{pk}}SimulationName w3-input w3-border "
+																name="simulationName"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setSimulationName', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_simulationName')); }, function() { addError($('#{{classApiMethodMethod}}_simulationName')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficSimulation_.simulationName}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficSimulation{{pk}}SimulationName ">{{trafficSimulation_.simulationName}}</span>
+			{{/ifContainsKeys}}
+		{{/ifContainsAnyRoles}}
+{{/inline}}
+
+{{#*inline "htmStartSeconds"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficSimulationStartSeconds">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label for="{{classApiMethodMethod}}_startSeconds">start seconds</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputStartSeconds"}}
+													</div>
+	{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_startSeconds')); $('#{{classApiMethodMethod}}_startSeconds').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setStartSeconds', null, function() { addGlow($('#{{classApiMethodMethod}}_startSeconds')); }, function() { addError($('#{{classApiMethodMethod}}_startSeconds')); }); "
+																		>
+																	<i class="far fa-eraser "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/ifContainsAnyRoles}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputStartSeconds"}}
+		{{#ifContainsAnyRoles roles rolesRequired}}
+														<input
+															type="text"
+															placeholder="start seconds"
+															title="-b, --begin TIME Defines the begin time in seconds; The simulation starts at this time"
+															id="{{classApiMethodMethod}}_startSeconds"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setStartSeconds classTrafficSimulation inputTrafficSimulation{{pk}}StartSeconds w3-input w3-border "
+																name="setStartSeconds"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setStartSeconds classTrafficSimulation inputTrafficSimulation{{pk}}StartSeconds w3-input w3-border "
+																name="setStartSeconds"
+		{{else}}
+																class="valueStartSeconds w3-input w3-border classTrafficSimulation inputTrafficSimulation{{pk}}StartSeconds w3-input w3-border "
+																name="startSeconds"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setStartSeconds', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_startSeconds')); }, function() { addError($('#{{classApiMethodMethod}}_startSeconds')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficSimulation_.startSeconds}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficSimulation{{pk}}StartSeconds ">{{trafficSimulation_.startSeconds}}</span>
+			{{/ifContainsKeys}}
+		{{/ifContainsAnyRoles}}
+{{/inline}}
+
+{{#*inline "htmEndSeconds"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficSimulationEndSeconds">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label for="{{classApiMethodMethod}}_endSeconds">end seconds</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputEndSeconds"}}
+													</div>
+	{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_endSeconds')); $('#{{classApiMethodMethod}}_endSeconds').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setEndSeconds', null, function() { addGlow($('#{{classApiMethodMethod}}_endSeconds')); }, function() { addError($('#{{classApiMethodMethod}}_endSeconds')); }); "
+																		>
+																	<i class="far fa-eraser "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/ifContainsAnyRoles}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputEndSeconds"}}
+		{{#ifContainsAnyRoles roles rolesRequired}}
+														<input
+															type="text"
+															placeholder="end seconds"
+															title="-e, --end TIME Defines the end time in seconds; The simulation ends at this time"
+															id="{{classApiMethodMethod}}_endSeconds"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setEndSeconds classTrafficSimulation inputTrafficSimulation{{pk}}EndSeconds w3-input w3-border "
+																name="setEndSeconds"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setEndSeconds classTrafficSimulation inputTrafficSimulation{{pk}}EndSeconds w3-input w3-border "
+																name="setEndSeconds"
+		{{else}}
+																class="valueEndSeconds w3-input w3-border classTrafficSimulation inputTrafficSimulation{{pk}}EndSeconds w3-input w3-border "
+																name="endSeconds"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setEndSeconds', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_endSeconds')); }, function() { addError($('#{{classApiMethodMethod}}_endSeconds')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficSimulation_.endSeconds}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficSimulation{{pk}}EndSeconds ">{{trafficSimulation_.endSeconds}}</span>
+			{{/ifContainsKeys}}
+		{{/ifContainsAnyRoles}}
+{{/inline}}
+
+{{#*inline "htmStepSeconds"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficSimulationStepSeconds">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label for="{{classApiMethodMethod}}_stepSeconds">step seconds</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputStepSeconds"}}
+													</div>
+	{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_stepSeconds')); $('#{{classApiMethodMethod}}_stepSeconds').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setStepSeconds', null, function() { addGlow($('#{{classApiMethodMethod}}_stepSeconds')); }, function() { addError($('#{{classApiMethodMethod}}_stepSeconds')); }); "
+																		>
+																	<i class="far fa-eraser "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/ifContainsAnyRoles}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputStepSeconds"}}
+		{{#ifContainsAnyRoles roles rolesRequired}}
+														<input
+															type="text"
+															placeholder="step seconds"
+															title="--step-length TIME Defines the step duration in seconds"
+															id="{{classApiMethodMethod}}_stepSeconds"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setStepSeconds classTrafficSimulation inputTrafficSimulation{{pk}}StepSeconds w3-input w3-border "
+																name="setStepSeconds"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setStepSeconds classTrafficSimulation inputTrafficSimulation{{pk}}StepSeconds w3-input w3-border "
+																name="setStepSeconds"
+		{{else}}
+																class="valueStepSeconds w3-input w3-border classTrafficSimulation inputTrafficSimulation{{pk}}StepSeconds w3-input w3-border "
+																name="stepSeconds"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setStepSeconds', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_stepSeconds')); }, function() { addError($('#{{classApiMethodMethod}}_stepSeconds')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficSimulation_.stepSeconds}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficSimulation{{pk}}StepSeconds ">{{trafficSimulation_.stepSeconds}}</span>
+			{{/ifContainsKeys}}
+		{{/ifContainsAnyRoles}}
+{{/inline}}
+
+{{#*inline "htmFcdOutputGeo"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficSimulationFcdOutputGeo">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label for="{{classApiMethodMethod}}_fcdOutputGeo">floating car data output geo-coordinates</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputFcdOutputGeo"}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputFcdOutputGeo"}}
+		{{#ifContainsAnyRoles roles rolesRequired}}
+	{{#eq 'Page' classApiMethodMethod}}
+															<input
+																type="checkbox"
+																id="{{classApiMethodMethod}}_fcdOutputGeo"
+																value="true"
+	{{else}}
+														<select
+															id="{{classApiMethodMethod}}_fcdOutputGeo"
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+															class="classTrafficSimulation inputTrafficSimulation{{pk}}FcdOutputGeo w3-input w3-border "
+															name="setFcdOutputGeo"
+	{{else}}
+		{{#eq 'Page' classApiMethodMethod}}
+																class="classTrafficSimulation inputTrafficSimulation{{pk}}FcdOutputGeo w3-input w3-border "
+																name="setFcdOutputGeo"
+		{{else}}
+																class="setFcdOutputGeo valueFcdOutputGeo classTrafficSimulation inputTrafficSimulation{{pk}}FcdOutputGeo w3-input w3-border "
+																name="setFcdOutputGeo"
+		{{/eq}}
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+															onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setFcdOutputGeo', $(this).prop('checked'), function() { addGlow($('#{{classApiMethodMethod}}_fcdOutputGeo')); }, function() { addError($('#{{classApiMethodMethod}}_fcdOutputGeo')); }); "
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+		{{#if trafficSimulation_.fcdOutputGeo}}
+																checked="checked"
+		{{/if}}
+																/>
+	{{else}}
+															>
+															<option value="" selected="selected"></option>
+															<option value="true">true</option>
+															<option value="false">false</option>
+														</select>
+	{{/eq}}
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficSimulation{{pk}}FcdOutputGeo ">{{trafficSimulation_.fcdOutputGeo}}</span>
+			{{/ifContainsKeys}}
+		{{/ifContainsAnyRoles}}
+{{/inline}}

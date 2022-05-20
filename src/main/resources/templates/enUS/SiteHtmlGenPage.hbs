@@ -1174,24 +1174,24 @@
 
 {{/inline}}
 
-{{#*inline "htmE"}}
+{{#*inline "htmEBefore"}}
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}SiteHtmlE">
+										<div id="suggest{{classApiMethodMethod}}SiteHtmlEBefore">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-navy-peony">
-													<label for="{{classApiMethodMethod}}_e">HTML Element</label>
+													<label for="{{classApiMethodMethod}}_eBefore">HTML Element</label>
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputE"}}
+														{{> "inputEBefore"}}
 													</div>
 		{{#eq 'Page' classApiMethodMethod}}
 															<div class="w3-cell w3-left-align w3-cell-top ">
 																<button
 																		tabindex="-1"
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-navy-peony "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_e')); $('#{{classApiMethodMethod}}_e').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SiteHtmlForm :input[name=id]').val() }], 'setE', null, function() { addGlow($('#{{classApiMethodMethod}}_e')); }, function() { addError($('#{{classApiMethodMethod}}_e')); }); "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_eBefore')); $('#{{classApiMethodMethod}}_eBefore').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SiteHtmlForm :input[name=id]').val() }], 'setEBefore', null, function() { addGlow($('#{{classApiMethodMethod}}_eBefore')); }, function() { addError($('#{{classApiMethodMethod}}_eBefore')); }); "
 																		>
 																	<i class="far fa-eraser "></i>
 																</button>
@@ -1204,30 +1204,89 @@
 								</div>
 {{/inline}}
 
-{{#*inline "inputE"}}
+{{#*inline "inputEBefore"}}
 														<input
 															type="text"
 															placeholder="HTML Element"
 															title="The HTML element. "
-															id="{{classApiMethodMethod}}_e"
+															id="{{classApiMethodMethod}}_eBefore"
 	{{#eq "Page" classApiMethodMethod}}
-																class="setE classSiteHtml inputSiteHtml{{id}}E w3-input w3-border "
-																name="setE"
+																class="setEBefore classSiteHtml inputSiteHtml{{id}}EBefore w3-input w3-border "
+																name="setEBefore"
 	{{else}}
 		{{#eq "PATCH" classApiMethodMethod}}
-																class="setE classSiteHtml inputSiteHtml{{id}}E w3-input w3-border "
-																name="setE"
+																class="setEBefore classSiteHtml inputSiteHtml{{id}}EBefore w3-input w3-border "
+																name="setEBefore"
 		{{else}}
-																class="valueE w3-input w3-border classSiteHtml inputSiteHtml{{id}}E w3-input w3-border "
-																name="e"
+																class="valueEBefore w3-input w3-border classSiteHtml inputSiteHtml{{id}}EBefore w3-input w3-border "
+																name="eBefore"
 		{{/eq}}
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setE', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_e')); }, function() { addError($('#{{classApiMethodMethod}}_e')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setEBefore', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_eBefore')); }, function() { addError($('#{{classApiMethodMethod}}_eBefore')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
-															value="{{siteHtml_.e}}"
+															value="{{siteHtml_.eBefore}}"
+	{{/eq}}
+														/>
+
+{{/inline}}
+
+{{#*inline "htmEAfter"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SiteHtmlEAfter">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-navy-peony">
+													<label for="{{classApiMethodMethod}}_eAfter">HTML Element</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputEAfter"}}
+													</div>
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-navy-peony "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_eAfter')); $('#{{classApiMethodMethod}}_eAfter').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SiteHtmlForm :input[name=id]').val() }], 'setEAfter', null, function() { addGlow($('#{{classApiMethodMethod}}_eAfter')); }, function() { addError($('#{{classApiMethodMethod}}_eAfter')); }); "
+																		>
+																	<i class="far fa-eraser "></i>
+																</button>
+															</div>
+														{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputEAfter"}}
+														<input
+															type="text"
+															placeholder="HTML Element"
+															title="The HTML element. "
+															id="{{classApiMethodMethod}}_eAfter"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setEAfter classSiteHtml inputSiteHtml{{id}}EAfter w3-input w3-border "
+																name="setEAfter"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setEAfter classSiteHtml inputSiteHtml{{id}}EAfter w3-input w3-border "
+																name="setEAfter"
+		{{else}}
+																class="valueEAfter w3-input w3-border classSiteHtml inputSiteHtml{{id}}EAfter w3-input w3-border "
+																name="eAfter"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setEAfter', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_eAfter')); }, function() { addError($('#{{classApiMethodMethod}}_eAfter')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{siteHtml_.eAfter}}"
 	{{/eq}}
 														/>
 
@@ -1292,6 +1351,124 @@
 
 {{/inline}}
 
+{{#*inline "htmText"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SiteHtmlText">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-navy-peony">
+													<label for="{{classApiMethodMethod}}_text">Text</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputText"}}
+													</div>
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-navy-peony "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_text')); $('#{{classApiMethodMethod}}_text').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SiteHtmlForm :input[name=id]').val() }], 'setText', null, function() { addGlow($('#{{classApiMethodMethod}}_text')); }, function() { addError($('#{{classApiMethodMethod}}_text')); }); "
+																		>
+																	<i class="far fa-eraser "></i>
+																</button>
+															</div>
+														{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputText"}}
+														<input
+															type="text"
+															placeholder="Text"
+															title="The text. "
+															id="{{classApiMethodMethod}}_text"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setText classSiteHtml inputSiteHtml{{id}}Text w3-input w3-border "
+																name="setText"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setText classSiteHtml inputSiteHtml{{id}}Text w3-input w3-border "
+																name="setText"
+		{{else}}
+																class="valueText w3-input w3-border classSiteHtml inputSiteHtml{{id}}Text w3-input w3-border "
+																name="text"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setText', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_text')); }, function() { addError($('#{{classApiMethodMethod}}_text')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{siteHtml_.text}}"
+	{{/eq}}
+														/>
+
+{{/inline}}
+
+{{#*inline "htmTabs"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SiteHtmlTabs">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-navy-peony">
+													<label for="{{classApiMethodMethod}}_tabs">Tabs</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputTabs"}}
+													</div>
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-navy-peony "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_tabs')); $('#{{classApiMethodMethod}}_tabs').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SiteHtmlForm :input[name=id]').val() }], 'setTabs', null, function() { addGlow($('#{{classApiMethodMethod}}_tabs')); }, function() { addError($('#{{classApiMethodMethod}}_tabs')); }); "
+																		>
+																	<i class="far fa-eraser "></i>
+																</button>
+															</div>
+														{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputTabs"}}
+														<input
+															type="text"
+															placeholder="Tabs"
+															title="The tabs. "
+															id="{{classApiMethodMethod}}_tabs"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setTabs classSiteHtml inputSiteHtml{{id}}Tabs w3-input w3-border "
+																name="setTabs"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setTabs classSiteHtml inputSiteHtml{{id}}Tabs w3-input w3-border "
+																name="setTabs"
+		{{else}}
+																class="valueTabs w3-input w3-border classSiteHtml inputSiteHtml{{id}}Tabs w3-input w3-border "
+																name="tabs"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setTabs', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_tabs')); }, function() { addError($('#{{classApiMethodMethod}}_tabs')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{siteHtml_.tabs}}"
+	{{/eq}}
+														/>
+
+{{/inline}}
+
 {{#*inline "htmHtmlBefore"}}
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									<div class="w3-padding ">
@@ -1346,6 +1523,65 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{siteHtml_.htmlBefore}}"
+	{{/eq}}
+														/>
+
+{{/inline}}
+
+{{#*inline "htmHtmlMiddle"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SiteHtmlHtmlMiddle">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-navy-peony">
+													<label for="{{classApiMethodMethod}}_htmlMiddle">HTML middle</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputHtmlMiddle"}}
+													</div>
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-navy-peony "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_htmlMiddle')); $('#{{classApiMethodMethod}}_htmlMiddle').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SiteHtmlForm :input[name=id]').val() }], 'setHtmlMiddle', null, function() { addGlow($('#{{classApiMethodMethod}}_htmlMiddle')); }, function() { addError($('#{{classApiMethodMethod}}_htmlMiddle')); }); "
+																		>
+																	<i class="far fa-eraser "></i>
+																</button>
+															</div>
+														{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputHtmlMiddle"}}
+														<input
+															type="text"
+															placeholder="HTML middle"
+															title="The HTML that comes in the middle. "
+															id="{{classApiMethodMethod}}_htmlMiddle"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setHtmlMiddle classSiteHtml inputSiteHtml{{id}}HtmlMiddle w3-input w3-border "
+																name="setHtmlMiddle"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setHtmlMiddle classSiteHtml inputSiteHtml{{id}}HtmlMiddle w3-input w3-border "
+																name="setHtmlMiddle"
+		{{else}}
+																class="valueHtmlMiddle w3-input w3-border classSiteHtml inputSiteHtml{{id}}HtmlMiddle w3-input w3-border "
+																name="htmlMiddle"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setHtmlMiddle', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_htmlMiddle')); }, function() { addError($('#{{classApiMethodMethod}}_htmlMiddle')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{siteHtml_.htmlMiddle}}"
 	{{/eq}}
 														/>
 

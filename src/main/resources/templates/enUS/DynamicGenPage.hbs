@@ -1,0 +1,47 @@
+{{#*inline "htmTitleDynamicPage"}}		<!-- inline "htmTitleDynamicPage" -->
+		<title>{{#if searchListDynamic_}}{{#eq DynamicCount int1}}{{#eq params.query.q "*:*"}}IOT node{{else}}IOT node{{/eq}}{{else}}no IOT node found{{/eq}}{{else}}IOT nodes{{/if}}</title>
+{{/inline}}
+{{#*inline "htmMetaDynamicPage"}}{{> "htmMetaBaseModelPage"}}{{/inline}}
+{{#*inline "htmStyleDynamicPage"}}{{> "htmStyleBaseModelPage"}}{{/inline}}
+{{#*inline "htmScriptsDynamicPage"}}{{> "htmScriptsBaseModelPage"}}		<!-- inline "htmScriptsDynamicPage" -->
+		<script src="{{staticBaseUrl}}/js/enUS/DynamicPage.js"></script>
+{{/inline}}
+{{#*inline "htmScriptDynamicPage"}}		<!-- inline "htmScriptDynamicPage" -->
+		<script>
+			$(document).ready(function() {
+				document.onkeydown = function(evt) {
+					evt = evt || window.event;
+					var isEscape = false;
+					if ('key' in evt) {
+						isEscape = (evt.key === 'Escape' || evt.key === 'Esc');
+					} else {
+						isEscape = (evt.keyCode === 27);
+					}
+					if (isEscape) {
+						$('.w3-modal:visible').hide();
+					}
+				};
+				window.eventBus = new EventBus('/eventbus');
+				var pk = {{#if pk}}{{pk}}{{else}}null{{/if}};
+				if(pk != null) {
+				}
+				websocketDynamic(websocketDynamicInner);
+				window.varsFq = JSON.parse('{{{toJsonObjectStringInApostrophes varsFq}}}');
+				pageGraph();
+			});
+		</script>
+{{/inline}}
+{{#*inline "htmUrlDynamic"}}{{pageUri}}?q={{query.q}}&amp;rows={{#if rows}}{{rows}}{{else}}{{pagination.rows}}{{/if}}&amp;rows={{#if start}}{{start}}{{else}}{{pagination.start}}{{/if}}{{#each query.fq}}{{#eq fq this}}{{else}}&fq={{fq}}:{{val}}{{/eq}}{{/each}}{{#each query.sort}}{{#eq sort this}}{{else}}&sort={{var}} {{order}}{{/eq}}{{/each}}{{/inline}}
+{{#*inline "htmHeadDynamicPage"}}{{> "htmTitleDynamicPage"}}{{> "htmMetaDynamicPage"}}{{> "htmStyleDynamicPage"}}{{> "htmScriptsDynamicPage"}}{{> "htmScriptDynamicPage"}}{{/inline}}
+{{#*inline "htmBodyStartDynamicPage"}}
+{{> "htmBodyStartBaseModelPage"}}
+{{/inline}}
+{{#*inline "htmBodyEndDynamicPage"}}
+{{> "htmBodyEndBaseModelPage"}}
+{{/inline}}
+{{#*inline "htmBodyDynamicPage"}}
+{{#block "htmBodyStart"}}{{/block}}
+	<div class="pageContent w3-content ">
+{{#block "htmBodyEnd"}}{{/block}}
+	</div>
+{{/inline}}

@@ -68,3 +68,5 @@ AUTH_ROLES_ADMIN: ['SiteAdmin']
 AUTH_ROLES_REQUIRED_SiteUser: ['SiteAdmin']
 # The Auth roles required to add and modify IOT node records. 
 AUTH_ROLES_REQUIRED_IotNode: ['SiteAdmin']
+# The Auth roles required to add and modify traffic simulation records. 
+AUTH_ROLES_REQUIRED_TrafficSimulation: ['SiteAdmin']

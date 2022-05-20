@@ -8,11 +8,13 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
+import org.computate.search.tool.XmlTool;
 import org.computate.search.wrap.Wrap;
 import org.computate.smartvillageview.enus.config.ConfigKeys;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 
 import io.vertx.core.Promise;
+import io.vertx.core.json.JsonObject;
 
 /**
  * Api: true
@@ -182,7 +184,7 @@ public class SiteHtml extends SiteHtmlGen<Object> {
 	 * DisplayName: HTML Element
 	 * Description: The HTML element. 
 	 */
-	protected void _e(Wrap<String> w) {
+	protected void _eBefore(Wrap<String> w) {
 	}
 
 	/**
@@ -192,7 +194,35 @@ public class SiteHtml extends SiteHtmlGen<Object> {
 	 * DisplayName: HTML Element
 	 * Description: The HTML element. 
 	 */
-	protected void _a(List<String> w) {
+	protected void _eAfter(Wrap<String> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * Persist: true
+	 * DisplayName: HTML Element
+	 * Description: The HTML element. 
+	 */
+	protected void _a(Wrap<JsonObject> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * Persist: true
+	 * DisplayName: Text
+	 * Description: The text. 
+	 */
+	protected void _text(Wrap<String> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * Persist: true
+	 * DocValues: true
+	 * DisplayName: Tabs
+	 * Description: The tabs. 
+	 */
+	protected void _tabs(Wrap<String> w) {
 	}
 
 	/**
@@ -203,6 +233,37 @@ public class SiteHtml extends SiteHtmlGen<Object> {
 	 * Description: The HTML that comes before the text. 
 	 */
 	protected void _htmlBefore(Wrap<String> w) {
+		if(eBefore != null) {
+			StringBuilder b = new StringBuilder();
+			b.append("<").append(eBefore);
+			if(a != null) {
+				for(String attr : a.fieldNames()) {
+					String val = XmlTool.escapeInQuotes(a.getString(attr));
+					b.append(attr).append("=\"").append(val).append("\"");
+				}
+			}
+			if(XmlTool.HTML_ELEMENTS_CLOSED.contains(eBefore)) {
+				b.append("/>");
+			} else {
+				b.append(">");
+			}
+			w.o(b.toString());
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * Stored: true
+	 * Persist: true
+	 * DisplayName: HTML middle
+	 * Description: The HTML that comes in the middle. 
+	 */
+	protected void _htmlMiddle(Wrap<String> w) {
+		StringBuilder b = new StringBuilder();
+		if(text != null) {
+			b.append(XmlTool.escape(text));
+			w.o(b.toString());
+		}
 	}
 
 	/**
@@ -213,6 +274,11 @@ public class SiteHtml extends SiteHtmlGen<Object> {
 	 * Description: The HTML that comes after the text. 
 	 */
 	protected void _htmlAfter(Wrap<String> w) {
+		if(eAfter != null && !XmlTool.HTML_ELEMENTS_CLOSED.contains(eAfter)) {
+			StringBuilder b = new StringBuilder();
+			b.append("</").append(eAfter).append(">");
+			w.o(b.toString());
+		}
 	}
 
 	/**
@@ -323,14 +389,7 @@ public class SiteHtml extends SiteHtmlGen<Object> {
 	 * DisplayName: text
 	 */
 	protected void _objectText(Wrap<String> w) { 
-		StringBuilder b = new StringBuilder();
-		if(objectNameVar != null)
-			b.append(" ").append(objectNameVar);
-		if(objectId != null)
-			b.append(" ").append(objectId);
-		if(objectTitle != null)
-			b.append(" ").append(objectTitle);
-		w.o(b.toString());
+		w.o(text);
 	}
 
 	/**

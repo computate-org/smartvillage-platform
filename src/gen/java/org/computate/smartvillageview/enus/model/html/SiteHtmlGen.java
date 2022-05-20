@@ -47,12 +47,12 @@ import java.time.OffsetDateTime;
 import java.lang.Boolean;
 import io.vertx.core.json.JsonArray;
 import java.lang.Long;
+import io.vertx.core.json.JsonObject;
 import org.computate.search.wrap.Wrap;
 import io.vertx.core.Promise;
 import io.vertx.core.Future;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.computate.search.response.solr.SolrResponse;
-import io.vertx.core.json.JsonObject;
 
 /**	
  * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstClasse_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtml">Find the class SiteHtml in Solr. </a>
@@ -735,57 +735,110 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 		return htmlGroup;
 	}
 
-	///////
-	// e //
-	///////
+	/////////////
+	// eBefore //
+	/////////////
 
-	/**	 The entity e
+	/**	 The entity eBefore
 	 *	 is defined as null before being initialized. 
 	 */
 	@JsonProperty
 	@JsonInclude(Include.NON_NULL)
-	protected String e;
+	protected String eBefore;
 
-	/**	<br> The entity e
+	/**	<br> The entity eBefore
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtml&fq=entiteVar_enUS_indexed_string:e">Find the entity e in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtml&fq=entiteVar_enUS_indexed_string:eBefore">Find the entity eBefore in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected abstract void _e(Wrap<String> w);
+	protected abstract void _eBefore(Wrap<String> w);
 
-	public String getE() {
-		return e;
+	public String getEBefore() {
+		return eBefore;
 	}
-	public void setE(String o) {
-		this.e = SiteHtml.staticSetE(siteRequest_, o);
+	public void setEBefore(String o) {
+		this.eBefore = SiteHtml.staticSetEBefore(siteRequest_, o);
 	}
-	public static String staticSetE(SiteRequestEnUS siteRequest_, String o) {
+	public static String staticSetEBefore(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	protected SiteHtml eInit() {
-		Wrap<String> eWrap = new Wrap<String>().var("e");
-		if(e == null) {
-			_e(eWrap);
-			setE(eWrap.o);
+	protected SiteHtml eBeforeInit() {
+		Wrap<String> eBeforeWrap = new Wrap<String>().var("eBefore");
+		if(eBefore == null) {
+			_eBefore(eBeforeWrap);
+			setEBefore(eBeforeWrap.o);
 		}
 		return (SiteHtml)this;
 	}
 
-	public static String staticSearchE(SiteRequestEnUS siteRequest_, String o) {
+	public static String staticSearchEBefore(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
 
-	public static String staticSearchStrE(SiteRequestEnUS siteRequest_, String o) {
+	public static String staticSearchStrEBefore(SiteRequestEnUS siteRequest_, String o) {
 		return o == null ? null : o.toString();
 	}
 
-	public static String staticSearchFqE(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtml.staticSearchStrE(siteRequest_, SiteHtml.staticSearchE(siteRequest_, SiteHtml.staticSetE(siteRequest_, o)));
+	public static String staticSearchFqEBefore(SiteRequestEnUS siteRequest_, String o) {
+		return SiteHtml.staticSearchStrEBefore(siteRequest_, SiteHtml.staticSearchEBefore(siteRequest_, SiteHtml.staticSetEBefore(siteRequest_, o)));
 	}
 
-	public String sqlE() {
-		return e;
+	public String sqlEBefore() {
+		return eBefore;
+	}
+
+	////////////
+	// eAfter //
+	////////////
+
+	/**	 The entity eAfter
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String eAfter;
+
+	/**	<br> The entity eAfter
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtml&fq=entiteVar_enUS_indexed_string:eAfter">Find the entity eAfter in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _eAfter(Wrap<String> w);
+
+	public String getEAfter() {
+		return eAfter;
+	}
+	public void setEAfter(String o) {
+		this.eAfter = SiteHtml.staticSetEAfter(siteRequest_, o);
+	}
+	public static String staticSetEAfter(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected SiteHtml eAfterInit() {
+		Wrap<String> eAfterWrap = new Wrap<String>().var("eAfter");
+		if(eAfter == null) {
+			_eAfter(eAfterWrap);
+			setEAfter(eAfterWrap.o);
+		}
+		return (SiteHtml)this;
+	}
+
+	public static String staticSearchEAfter(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrEAfter(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqEAfter(SiteRequestEnUS siteRequest_, String o) {
+		return SiteHtml.staticSearchStrEAfter(siteRequest_, SiteHtml.staticSearchEAfter(siteRequest_, SiteHtml.staticSetEAfter(siteRequest_, o)));
+	}
+
+	public String sqlEAfter() {
+		return eAfter;
 	}
 
 	///////
@@ -793,60 +846,51 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	///////
 
 	/**	 The entity a
-	 *	 It is constructed before being initialized with the constructor by default. 
+	 *	 is defined as null before being initialized. 
 	 */
 	@JsonProperty
-	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
 	@JsonInclude(Include.NON_NULL)
-	protected List<String> a = new ArrayList<String>();
+	protected JsonObject a;
 
 	/**	<br> The entity a
-	 *  It is constructed before being initialized with the constructor by default. 
+	 *  is defined as null before being initialized. 
 	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtml&fq=entiteVar_enUS_indexed_string:a">Find the entity a in Solr</a>
 	 * <br>
-	 * @param w is the entity already constructed. 
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected abstract void _a(List<String> w);
+	protected abstract void _a(Wrap<JsonObject> w);
 
-	public List<String> getA() {
+	public JsonObject getA() {
 		return a;
 	}
 
-	public void setA(List<String> a) {
+	public void setA(JsonObject a) {
 		this.a = a;
 	}
-	public static String staticSetA(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-	public SiteHtml addA(String...objets) {
-		for(String o : objets) {
-			addA(o);
-		}
-		return (SiteHtml)this;
-	}
-	public SiteHtml addA(String o) {
-		if(o != null)
-			this.a.add(o);
-		return (SiteHtml)this;
-	}
 	@JsonIgnore
-	public void setA(JsonArray objets) {
-		a.clear();
-		for(int i = 0; i < objets.size(); i++) {
-			String o = objets.getString(i);
-			addA(o);
+	public void setA(String o) {
+		this.a = SiteHtml.staticSetA(siteRequest_, o);
+	}
+	public static JsonObject staticSetA(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonObject(o);
 		}
+		return null;
 	}
 	protected SiteHtml aInit() {
-		_a(a);
+		Wrap<JsonObject> aWrap = new Wrap<JsonObject>().var("a");
+		if(a == null) {
+			_a(aWrap);
+			setA(aWrap.o);
+		}
 		return (SiteHtml)this;
 	}
 
-	public static String staticSearchA(SiteRequestEnUS siteRequest_, String o) {
+	public static JsonObject staticSearchA(SiteRequestEnUS siteRequest_, JsonObject o) {
 		return o;
 	}
 
-	public static String staticSearchStrA(SiteRequestEnUS siteRequest_, String o) {
+	public static String staticSearchStrA(SiteRequestEnUS siteRequest_, JsonObject o) {
 		return o == null ? null : o.toString();
 	}
 
@@ -854,8 +898,114 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 		return SiteHtml.staticSearchStrA(siteRequest_, SiteHtml.staticSearchA(siteRequest_, SiteHtml.staticSetA(siteRequest_, o)));
 	}
 
-	public List<String> sqlA() {
+	public JsonObject sqlA() {
 		return a;
+	}
+
+	//////////
+	// text //
+	//////////
+
+	/**	 The entity text
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String text;
+
+	/**	<br> The entity text
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtml&fq=entiteVar_enUS_indexed_string:text">Find the entity text in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _text(Wrap<String> w);
+
+	public String getText() {
+		return text;
+	}
+	public void setText(String o) {
+		this.text = SiteHtml.staticSetText(siteRequest_, o);
+	}
+	public static String staticSetText(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected SiteHtml textInit() {
+		Wrap<String> textWrap = new Wrap<String>().var("text");
+		if(text == null) {
+			_text(textWrap);
+			setText(textWrap.o);
+		}
+		return (SiteHtml)this;
+	}
+
+	public static String staticSearchText(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrText(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqText(SiteRequestEnUS siteRequest_, String o) {
+		return SiteHtml.staticSearchStrText(siteRequest_, SiteHtml.staticSearchText(siteRequest_, SiteHtml.staticSetText(siteRequest_, o)));
+	}
+
+	public String sqlText() {
+		return text;
+	}
+
+	//////////
+	// tabs //
+	//////////
+
+	/**	 The entity tabs
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String tabs;
+
+	/**	<br> The entity tabs
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtml&fq=entiteVar_enUS_indexed_string:tabs">Find the entity tabs in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _tabs(Wrap<String> w);
+
+	public String getTabs() {
+		return tabs;
+	}
+	public void setTabs(String o) {
+		this.tabs = SiteHtml.staticSetTabs(siteRequest_, o);
+	}
+	public static String staticSetTabs(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected SiteHtml tabsInit() {
+		Wrap<String> tabsWrap = new Wrap<String>().var("tabs");
+		if(tabs == null) {
+			_tabs(tabsWrap);
+			setTabs(tabsWrap.o);
+		}
+		return (SiteHtml)this;
+	}
+
+	public static String staticSearchTabs(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrTabs(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqTabs(SiteRequestEnUS siteRequest_, String o) {
+		return SiteHtml.staticSearchStrTabs(siteRequest_, SiteHtml.staticSearchTabs(siteRequest_, SiteHtml.staticSetTabs(siteRequest_, o)));
+	}
+
+	public String sqlTabs() {
+		return tabs;
 	}
 
 	////////////////
@@ -909,6 +1059,59 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 
 	public String sqlHtmlBefore() {
 		return htmlBefore;
+	}
+
+	////////////////
+	// htmlMiddle //
+	////////////////
+
+	/**	 The entity htmlMiddle
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String htmlMiddle;
+
+	/**	<br> The entity htmlMiddle
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtml&fq=entiteVar_enUS_indexed_string:htmlMiddle">Find the entity htmlMiddle in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _htmlMiddle(Wrap<String> w);
+
+	public String getHtmlMiddle() {
+		return htmlMiddle;
+	}
+	public void setHtmlMiddle(String o) {
+		this.htmlMiddle = SiteHtml.staticSetHtmlMiddle(siteRequest_, o);
+	}
+	public static String staticSetHtmlMiddle(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected SiteHtml htmlMiddleInit() {
+		Wrap<String> htmlMiddleWrap = new Wrap<String>().var("htmlMiddle");
+		if(htmlMiddle == null) {
+			_htmlMiddle(htmlMiddleWrap);
+			setHtmlMiddle(htmlMiddleWrap.o);
+		}
+		return (SiteHtml)this;
+	}
+
+	public static String staticSearchHtmlMiddle(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrHtmlMiddle(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqHtmlMiddle(SiteRequestEnUS siteRequest_, String o) {
+		return SiteHtml.staticSearchStrHtmlMiddle(siteRequest_, SiteHtml.staticSearchHtmlMiddle(siteRequest_, SiteHtml.staticSetHtmlMiddle(siteRequest_, o)));
+	}
+
+	public String sqlHtmlMiddle() {
+		return htmlMiddle;
 	}
 
 	///////////////
@@ -1624,9 +1827,13 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 				pageIdInit();
 				sequenceNumInit();
 				htmlGroupInit();
-				eInit();
+				eBeforeInit();
+				eAfterInit();
 				aInit();
+				textInit();
+				tabsInit();
 				htmlBeforeInit();
+				htmlMiddleInit();
 				htmlAfterInit();
 				classCanonicalNameInit();
 				classSimpleNameInit();
@@ -1714,12 +1921,20 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 				return oSiteHtml.sequenceNum;
 			case "htmlGroup":
 				return oSiteHtml.htmlGroup;
-			case "e":
-				return oSiteHtml.e;
+			case "eBefore":
+				return oSiteHtml.eBefore;
+			case "eAfter":
+				return oSiteHtml.eAfter;
 			case "a":
 				return oSiteHtml.a;
+			case "text":
+				return oSiteHtml.text;
+			case "tabs":
+				return oSiteHtml.tabs;
 			case "htmlBefore":
 				return oSiteHtml.htmlBefore;
+			case "htmlMiddle":
+				return oSiteHtml.htmlMiddle;
 			case "htmlAfter":
 				return oSiteHtml.htmlAfter;
 			case "classCanonicalName":
@@ -1803,12 +2018,20 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 			return SiteHtml.staticSetSequenceNum(siteRequest_, o);
 		case "htmlGroup":
 			return SiteHtml.staticSetHtmlGroup(siteRequest_, o);
-		case "e":
-			return SiteHtml.staticSetE(siteRequest_, o);
+		case "eBefore":
+			return SiteHtml.staticSetEBefore(siteRequest_, o);
+		case "eAfter":
+			return SiteHtml.staticSetEAfter(siteRequest_, o);
 		case "a":
 			return SiteHtml.staticSetA(siteRequest_, o);
+		case "text":
+			return SiteHtml.staticSetText(siteRequest_, o);
+		case "tabs":
+			return SiteHtml.staticSetTabs(siteRequest_, o);
 		case "htmlBefore":
 			return SiteHtml.staticSetHtmlBefore(siteRequest_, o);
+		case "htmlMiddle":
+			return SiteHtml.staticSetHtmlMiddle(siteRequest_, o);
 		case "htmlAfter":
 			return SiteHtml.staticSetHtmlAfter(siteRequest_, o);
 		case "classCanonicalName":
@@ -1867,12 +2090,20 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 			return SiteHtml.staticSearchSequenceNum(siteRequest_, (Long)o);
 		case "htmlGroup":
 			return SiteHtml.staticSearchHtmlGroup(siteRequest_, (String)o);
-		case "e":
-			return SiteHtml.staticSearchE(siteRequest_, (String)o);
+		case "eBefore":
+			return SiteHtml.staticSearchEBefore(siteRequest_, (String)o);
+		case "eAfter":
+			return SiteHtml.staticSearchEAfter(siteRequest_, (String)o);
 		case "a":
-			return SiteHtml.staticSearchA(siteRequest_, (String)o);
+			return SiteHtml.staticSearchA(siteRequest_, (JsonObject)o);
+		case "text":
+			return SiteHtml.staticSearchText(siteRequest_, (String)o);
+		case "tabs":
+			return SiteHtml.staticSearchTabs(siteRequest_, (String)o);
 		case "htmlBefore":
 			return SiteHtml.staticSearchHtmlBefore(siteRequest_, (String)o);
+		case "htmlMiddle":
+			return SiteHtml.staticSearchHtmlMiddle(siteRequest_, (String)o);
 		case "htmlAfter":
 			return SiteHtml.staticSearchHtmlAfter(siteRequest_, (String)o);
 		case "classCanonicalName":
@@ -1931,12 +2162,20 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 			return SiteHtml.staticSearchStrSequenceNum(siteRequest_, (Long)o);
 		case "htmlGroup":
 			return SiteHtml.staticSearchStrHtmlGroup(siteRequest_, (String)o);
-		case "e":
-			return SiteHtml.staticSearchStrE(siteRequest_, (String)o);
+		case "eBefore":
+			return SiteHtml.staticSearchStrEBefore(siteRequest_, (String)o);
+		case "eAfter":
+			return SiteHtml.staticSearchStrEAfter(siteRequest_, (String)o);
 		case "a":
-			return SiteHtml.staticSearchStrA(siteRequest_, (String)o);
+			return SiteHtml.staticSearchStrA(siteRequest_, (JsonObject)o);
+		case "text":
+			return SiteHtml.staticSearchStrText(siteRequest_, (String)o);
+		case "tabs":
+			return SiteHtml.staticSearchStrTabs(siteRequest_, (String)o);
 		case "htmlBefore":
 			return SiteHtml.staticSearchStrHtmlBefore(siteRequest_, (String)o);
+		case "htmlMiddle":
+			return SiteHtml.staticSearchStrHtmlMiddle(siteRequest_, (String)o);
 		case "htmlAfter":
 			return SiteHtml.staticSearchStrHtmlAfter(siteRequest_, (String)o);
 		case "classCanonicalName":
@@ -1995,12 +2234,20 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 			return SiteHtml.staticSearchFqSequenceNum(siteRequest_, o);
 		case "htmlGroup":
 			return SiteHtml.staticSearchFqHtmlGroup(siteRequest_, o);
-		case "e":
-			return SiteHtml.staticSearchFqE(siteRequest_, o);
+		case "eBefore":
+			return SiteHtml.staticSearchFqEBefore(siteRequest_, o);
+		case "eAfter":
+			return SiteHtml.staticSearchFqEAfter(siteRequest_, o);
 		case "a":
 			return SiteHtml.staticSearchFqA(siteRequest_, o);
+		case "text":
+			return SiteHtml.staticSearchFqText(siteRequest_, o);
+		case "tabs":
+			return SiteHtml.staticSearchFqTabs(siteRequest_, o);
 		case "htmlBefore":
 			return SiteHtml.staticSearchFqHtmlBefore(siteRequest_, o);
+		case "htmlMiddle":
+			return SiteHtml.staticSearchFqHtmlMiddle(siteRequest_, o);
 		case "htmlAfter":
 			return SiteHtml.staticSearchFqHtmlAfter(siteRequest_, o);
 		case "classCanonicalName":
@@ -2098,21 +2345,42 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 					setHtmlGroup((String)val);
 				saves.add("htmlGroup");
 				return val;
-			case "e":
+			case "ebefore":
 				if(val instanceof String)
-					setE((String)val);
-				saves.add("e");
+					setEBefore((String)val);
+				saves.add("eBefore");
+				return val;
+			case "eafter":
+				if(val instanceof String)
+					setEAfter((String)val);
+				saves.add("eAfter");
 				return val;
 			case "a":
-				if(val instanceof List<?>)
-					((List<String>)val).stream().forEach(v -> addA(v));
-				if(!saves.contains("a"))
-					saves.add("a");
+				if(val instanceof String)
+					setA((String)val);
+				else if(val instanceof JsonObject)
+					setA((JsonObject)val);
+				saves.add("a");
+				return val;
+			case "text":
+				if(val instanceof String)
+					setText((String)val);
+				saves.add("text");
+				return val;
+			case "tabs":
+				if(val instanceof String)
+					setTabs((String)val);
+				saves.add("tabs");
 				return val;
 			case "htmlbefore":
 				if(val instanceof String)
 					setHtmlBefore((String)val);
 				saves.add("htmlBefore");
+				return val;
+			case "htmlmiddle":
+				if(val instanceof String)
+					setHtmlMiddle((String)val);
+				saves.add("htmlMiddle");
 				return val;
 			case "htmlafter":
 				if(val instanceof String)
@@ -2175,18 +2443,20 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 		if(htmlGroup != null) {
 			doc.put("htmlGroup_docvalues_string", htmlGroup);
 		}
-		if(e != null) {
-			doc.put("e_docvalues_string", e);
+		if(eBefore != null) {
+			doc.put("eBefore_docvalues_string", eBefore);
 		}
-		if(a != null) {
-			JsonArray l = new JsonArray();
-			doc.put("a_docvalues_strings", l);
-			for(String o : a) {
-				l.add(o);
-			}
+		if(eAfter != null) {
+			doc.put("eAfter_docvalues_string", eAfter);
+		}
+		if(tabs != null) {
+			doc.put("tabs_docvalues_string", tabs);
 		}
 		if(htmlBefore != null) {
 			doc.put("htmlBefore_stored_string", htmlBefore);
+		}
+		if(htmlMiddle != null) {
+			doc.put("htmlMiddle_stored_string", htmlMiddle);
 		}
 		if(htmlAfter != null) {
 			doc.put("htmlAfter_stored_string", htmlAfter);
@@ -2251,12 +2521,16 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 				return "sequenceNum_docvalues_long";
 			case "htmlGroup":
 				return "htmlGroup_docvalues_string";
-			case "e":
-				return "e_docvalues_string";
-			case "a":
-				return "a_docvalues_strings";
+			case "eBefore":
+				return "eBefore_docvalues_string";
+			case "eAfter":
+				return "eAfter_docvalues_string";
+			case "tabs":
+				return "tabs_docvalues_string";
 			case "htmlBefore":
 				return "htmlBefore_stored_string";
+			case "htmlMiddle":
+				return "htmlMiddle_stored_string";
 			case "htmlAfter":
 				return "htmlAfter_stored_string";
 			case "classCanonicalName":
@@ -2302,10 +2576,12 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 				return "sequenceNum_docvalues_long";
 			case "htmlGroup":
 				return "htmlGroup_docvalues_string";
-			case "e":
-				return "e_docvalues_string";
-			case "a":
-				return "a_docvalues_strings";
+			case "eBefore":
+				return "eBefore_docvalues_string";
+			case "eAfter":
+				return "eAfter_docvalues_string";
+			case "tabs":
+				return "tabs_docvalues_string";
 			case "classCanonicalName":
 				return "classCanonicalName_docvalues_string";
 			case "classSimpleName":
@@ -2353,12 +2629,16 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 				return "sequenceNum";
 			case "htmlGroup_docvalues_string":
 				return "htmlGroup";
-			case "e_docvalues_string":
-				return "e";
-			case "a_docvalues_strings":
-				return "a";
+			case "eBefore_docvalues_string":
+				return "eBefore";
+			case "eAfter_docvalues_string":
+				return "eAfter";
+			case "tabs_docvalues_string":
+				return "tabs";
 			case "htmlBefore_stored_string":
 				return "htmlBefore";
+			case "htmlMiddle_stored_string":
+				return "htmlMiddle";
 			case "htmlAfter_stored_string":
 				return "htmlAfter";
 			case "classCanonicalName_docvalues_string":
@@ -2429,11 +2709,11 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 		oSiteHtml.setPageId(Optional.ofNullable(doc.get("pageId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSiteHtml.setSequenceNum(Optional.ofNullable(doc.get("sequenceNum_docvalues_long")).map(v -> v.toString()).orElse(null));
 		oSiteHtml.setHtmlGroup(Optional.ofNullable(doc.get("htmlGroup_docvalues_string")).map(v -> v.toString()).orElse(null));
-		oSiteHtml.setE(Optional.ofNullable(doc.get("e_docvalues_string")).map(v -> v.toString()).orElse(null));
-		Optional.ofNullable((List<?>)doc.get("a_docvalues_strings")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
-			oSiteHtml.addA(v.toString());
-		});
+		oSiteHtml.setEBefore(Optional.ofNullable(doc.get("eBefore_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oSiteHtml.setEAfter(Optional.ofNullable(doc.get("eAfter_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oSiteHtml.setTabs(Optional.ofNullable(doc.get("tabs_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSiteHtml.setHtmlBefore(Optional.ofNullable(doc.get("htmlBefore_stored_string")).map(v -> v.toString()).orElse(null));
+		oSiteHtml.setHtmlMiddle(Optional.ofNullable(doc.get("htmlMiddle_stored_string")).map(v -> v.toString()).orElse(null));
 		oSiteHtml.setHtmlAfter(Optional.ofNullable(doc.get("htmlAfter_stored_string")).map(v -> v.toString()).orElse(null));
 		oSiteHtml.setClassCanonicalName(Optional.ofNullable(doc.get("classCanonicalName_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSiteHtml.setClassSimpleName(Optional.ofNullable(doc.get("classSimpleName_docvalues_string")).map(v -> v.toString()).orElse(null));
@@ -2479,12 +2759,20 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 				apiRequest.addVars("sequenceNum");
 			if(!Objects.equals(htmlGroup, original.getHtmlGroup()))
 				apiRequest.addVars("htmlGroup");
-			if(!Objects.equals(e, original.getE()))
-				apiRequest.addVars("e");
+			if(!Objects.equals(eBefore, original.getEBefore()))
+				apiRequest.addVars("eBefore");
+			if(!Objects.equals(eAfter, original.getEAfter()))
+				apiRequest.addVars("eAfter");
 			if(!Objects.equals(a, original.getA()))
 				apiRequest.addVars("a");
+			if(!Objects.equals(text, original.getText()))
+				apiRequest.addVars("text");
+			if(!Objects.equals(tabs, original.getTabs()))
+				apiRequest.addVars("tabs");
 			if(!Objects.equals(htmlBefore, original.getHtmlBefore()))
 				apiRequest.addVars("htmlBefore");
+			if(!Objects.equals(htmlMiddle, original.getHtmlMiddle()))
+				apiRequest.addVars("htmlMiddle");
 			if(!Objects.equals(htmlAfter, original.getHtmlAfter()))
 				apiRequest.addVars("htmlAfter");
 			if(!Objects.equals(classCanonicalName, original.getClassCanonicalName()))
@@ -2527,9 +2815,13 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 		sb.append(Optional.ofNullable(pageId).map(v -> "pageId: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(sequenceNum).map(v -> "sequenceNum: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(htmlGroup).map(v -> "htmlGroup: \"" + v + "\"\n" ).orElse(""));
-		sb.append(Optional.ofNullable(e).map(v -> "e: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(eBefore).map(v -> "eBefore: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(eAfter).map(v -> "eAfter: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(a).map(v -> "a: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(text).map(v -> "text: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(tabs).map(v -> "tabs: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(htmlBefore).map(v -> "htmlBefore: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(htmlMiddle).map(v -> "htmlMiddle: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(htmlAfter).map(v -> "htmlAfter: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(classCanonicalName).map(v -> "classCanonicalName: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(classSimpleName).map(v -> "classSimpleName: \"" + v + "\"\n" ).orElse(""));
@@ -2557,9 +2849,13 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	public static final String VAR_pageId = "pageId";
 	public static final String VAR_sequenceNum = "sequenceNum";
 	public static final String VAR_htmlGroup = "htmlGroup";
-	public static final String VAR_e = "e";
+	public static final String VAR_eBefore = "eBefore";
+	public static final String VAR_eAfter = "eAfter";
 	public static final String VAR_a = "a";
+	public static final String VAR_text = "text";
+	public static final String VAR_tabs = "tabs";
 	public static final String VAR_htmlBefore = "htmlBefore";
+	public static final String VAR_htmlMiddle = "htmlMiddle";
 	public static final String VAR_htmlAfter = "htmlAfter";
 	public static final String VAR_classCanonicalName = "classCanonicalName";
 	public static final String VAR_classSimpleName = "classSimpleName";
@@ -2613,9 +2909,13 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	public static final String DISPLAY_NAME_pageId = "Page ID";
 	public static final String DISPLAY_NAME_sequenceNum = "Sequence Number";
 	public static final String DISPLAY_NAME_htmlGroup = "HTML Group";
-	public static final String DISPLAY_NAME_e = "HTML Element";
+	public static final String DISPLAY_NAME_eBefore = "HTML Element";
+	public static final String DISPLAY_NAME_eAfter = "HTML Element";
 	public static final String DISPLAY_NAME_a = "HTML Element";
+	public static final String DISPLAY_NAME_text = "Text";
+	public static final String DISPLAY_NAME_tabs = "Tabs";
 	public static final String DISPLAY_NAME_htmlBefore = "HTML before";
+	public static final String DISPLAY_NAME_htmlMiddle = "HTML middle";
 	public static final String DISPLAY_NAME_htmlAfter = "HTML after";
 	public static final String DISPLAY_NAME_classCanonicalName = "";
 	public static final String DISPLAY_NAME_classSimpleName = "";
@@ -2657,12 +2957,20 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 			return DISPLAY_NAME_sequenceNum;
 		case VAR_htmlGroup:
 			return DISPLAY_NAME_htmlGroup;
-		case VAR_e:
-			return DISPLAY_NAME_e;
+		case VAR_eBefore:
+			return DISPLAY_NAME_eBefore;
+		case VAR_eAfter:
+			return DISPLAY_NAME_eAfter;
 		case VAR_a:
 			return DISPLAY_NAME_a;
+		case VAR_text:
+			return DISPLAY_NAME_text;
+		case VAR_tabs:
+			return DISPLAY_NAME_tabs;
 		case VAR_htmlBefore:
 			return DISPLAY_NAME_htmlBefore;
+		case VAR_htmlMiddle:
+			return DISPLAY_NAME_htmlMiddle;
 		case VAR_htmlAfter:
 			return DISPLAY_NAME_htmlAfter;
 		case VAR_classCanonicalName:
@@ -2718,12 +3026,20 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 			return "The sequence number for this page. ";
 		case VAR_htmlGroup:
 			return "The HTML group. ";
-		case VAR_e:
+		case VAR_eBefore:
+			return "The HTML element. ";
+		case VAR_eAfter:
 			return "The HTML element. ";
 		case VAR_a:
 			return "The HTML element. ";
+		case VAR_text:
+			return "The text. ";
+		case VAR_tabs:
+			return "The tabs. ";
 		case VAR_htmlBefore:
 			return "The HTML that comes before the text. ";
+		case VAR_htmlMiddle:
+			return "The HTML that comes in the middle. ";
 		case VAR_htmlAfter:
 			return "The HTML that comes after the text. ";
 		case VAR_classCanonicalName:
@@ -2779,11 +3095,19 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 			return "Long";
 		case VAR_htmlGroup:
 			return "String";
-		case VAR_e:
+		case VAR_eBefore:
+			return "String";
+		case VAR_eAfter:
 			return "String";
 		case VAR_a:
-			return "List";
+			return "JsonObject";
+		case VAR_text:
+			return "String";
+		case VAR_tabs:
+			return "String";
 		case VAR_htmlBefore:
+			return "String";
+		case VAR_htmlMiddle:
 			return "String";
 		case VAR_htmlAfter:
 			return "String";
