@@ -92,36 +92,36 @@ import org.computate.vertx.search.list.SearchList;
 /**
  * Translate: false
  **/
-public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements SiteHtmlEnUSGenApiService {
+public class SiteHtmEnUSGenApiServiceImpl extends BaseApiServiceImpl implements SiteHtmEnUSGenApiService {
 
-	protected static final Logger LOG = LoggerFactory.getLogger(SiteHtmlEnUSGenApiServiceImpl.class);
+	protected static final Logger LOG = LoggerFactory.getLogger(SiteHtmEnUSGenApiServiceImpl.class);
 
-	public SiteHtmlEnUSGenApiServiceImpl(EventBus eventBus, JsonObject config, WorkerExecutor workerExecutor, PgPool pgPool, WebClient webClient, OAuth2Auth oauth2AuthenticationProvider, AuthorizationProvider authorizationProvider, HandlebarsTemplateEngine templateEngine) {
+	public SiteHtmEnUSGenApiServiceImpl(EventBus eventBus, JsonObject config, WorkerExecutor workerExecutor, PgPool pgPool, WebClient webClient, OAuth2Auth oauth2AuthenticationProvider, AuthorizationProvider authorizationProvider, HandlebarsTemplateEngine templateEngine) {
 		super(eventBus, config, workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine);
 	}
 
 	// Search //
 
 	@Override
-	public void searchSiteHtml(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
+	public void searchSiteHtm(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smart-village-view-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 			try {
 				{
-					searchSiteHtmlList(siteRequest, false, true, false).onSuccess(listSiteHtml -> {
-						response200SearchSiteHtml(listSiteHtml).onSuccess(response -> {
+					searchSiteHtmList(siteRequest, false, true, false).onSuccess(listSiteHtm -> {
+						response200SearchSiteHtm(listSiteHtm).onSuccess(response -> {
 							eventHandler.handle(Future.succeededFuture(response));
-							LOG.debug(String.format("searchSiteHtml succeeded. "));
+							LOG.debug(String.format("searchSiteHtm succeeded. "));
 						}).onFailure(ex -> {
-							LOG.error(String.format("searchSiteHtml failed. "), ex);
+							LOG.error(String.format("searchSiteHtm failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
 					}).onFailure(ex -> {
-						LOG.error(String.format("searchSiteHtml failed. "), ex);
+						LOG.error(String.format("searchSiteHtm failed. "), ex);
 						error(siteRequest, eventHandler, ex);
 					});
 				}
 			} catch(Exception ex) {
-				LOG.error(String.format("searchSiteHtml failed. "), ex);
+				LOG.error(String.format("searchSiteHtm failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		}).onFailure(ex -> {
@@ -129,32 +129,32 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 				try {
 					eventHandler.handle(Future.succeededFuture(new ServiceResponse(302, "Found", null, MultiMap.caseInsensitiveMultiMap().add(HttpHeaders.LOCATION, "/logout?redirect_uri=" + URLEncoder.encode(serviceRequest.getExtra().getString("uri"), "UTF-8")))));
 				} catch(Exception ex2) {
-					LOG.error(String.format("searchSiteHtml failed. ", ex2));
+					LOG.error(String.format("searchSiteHtm failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
 			} else {
-				LOG.error(String.format("searchSiteHtml failed. "), ex);
+				LOG.error(String.format("searchSiteHtm failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		});
 	}
 
 
-	public Future<ServiceResponse> response200SearchSiteHtml(SearchList<SiteHtml> listSiteHtml) {
+	public Future<ServiceResponse> response200SearchSiteHtm(SearchList<SiteHtm> listSiteHtm) {
 		Promise<ServiceResponse> promise = Promise.promise();
 		try {
-			SiteRequestEnUS siteRequest = listSiteHtml.getSiteRequest_(SiteRequestEnUS.class);
-			List<String> fls = listSiteHtml.getRequest().getFields();
+			SiteRequestEnUS siteRequest = listSiteHtm.getSiteRequest_(SiteRequestEnUS.class);
+			List<String> fls = listSiteHtm.getRequest().getFields();
 			JsonObject json = new JsonObject();
 			JsonArray l = new JsonArray();
-			listSiteHtml.getList().stream().forEach(o -> {
+			listSiteHtm.getList().stream().forEach(o -> {
 				JsonObject json2 = JsonObject.mapFrom(o);
 				if(fls.size() > 0) {
 					Set<String> fieldNames = new HashSet<String>();
 					for(String fieldName : json2.fieldNames()) {
-						String v = SiteHtml.varIndexedSiteHtml(fieldName);
+						String v = SiteHtm.varIndexedSiteHtm(fieldName);
 						if(v != null)
-							fieldNames.add(SiteHtml.varIndexedSiteHtml(fieldName));
+							fieldNames.add(SiteHtm.varIndexedSiteHtm(fieldName));
 					}
 					if(fls.size() == 1 && fls.stream().findFirst().orElse(null).equals("saves_docvalues_strings")) {
 						fieldNames.removeAll(Optional.ofNullable(json2.getJsonArray("saves_docvalues_strings")).orElse(new JsonArray()).stream().map(s -> s.toString()).collect(Collectors.toList()));
@@ -172,15 +172,15 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 				l.add(json2);
 			});
 			json.put("list", l);
-			response200Search(listSiteHtml.getRequest(), listSiteHtml.getResponse(), json);
+			response200Search(listSiteHtm.getRequest(), listSiteHtm.getResponse(), json);
 			promise.complete(ServiceResponse.completedWithJson(Buffer.buffer(Optional.ofNullable(json).orElse(new JsonObject()).encodePrettily())));
 		} catch(Exception ex) {
-			LOG.error(String.format("response200SearchSiteHtml failed. "), ex);
+			LOG.error(String.format("response200SearchSiteHtm failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
 	}
-	public void responsePivotSearchSiteHtml(List<SolrResponse.Pivot> pivots, JsonArray pivotArray) {
+	public void responsePivotSearchSiteHtm(List<SolrResponse.Pivot> pivots, JsonArray pivotArray) {
 		if(pivots != null) {
 			for(SolrResponse.Pivot pivotField : pivots) {
 				String entityIndexed = pivotField.getField();
@@ -209,7 +209,7 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 				if(pivotFields2 != null) {
 					JsonArray pivotArray2 = new JsonArray();
 					pivotJson.put("pivot", pivotArray2);
-					responsePivotSearchSiteHtml(pivotFields2, pivotArray2);
+					responsePivotSearchSiteHtm(pivotFields2, pivotArray2);
 				}
 			}
 		}
@@ -218,25 +218,25 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 	// GET //
 
 	@Override
-	public void getSiteHtml(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
+	public void getSiteHtm(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smart-village-view-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 			try {
 				{
-					searchSiteHtmlList(siteRequest, false, true, false).onSuccess(listSiteHtml -> {
-						response200GETSiteHtml(listSiteHtml).onSuccess(response -> {
+					searchSiteHtmList(siteRequest, false, true, false).onSuccess(listSiteHtm -> {
+						response200GETSiteHtm(listSiteHtm).onSuccess(response -> {
 							eventHandler.handle(Future.succeededFuture(response));
-							LOG.debug(String.format("getSiteHtml succeeded. "));
+							LOG.debug(String.format("getSiteHtm succeeded. "));
 						}).onFailure(ex -> {
-							LOG.error(String.format("getSiteHtml failed. "), ex);
+							LOG.error(String.format("getSiteHtm failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
 					}).onFailure(ex -> {
-						LOG.error(String.format("getSiteHtml failed. "), ex);
+						LOG.error(String.format("getSiteHtm failed. "), ex);
 						error(siteRequest, eventHandler, ex);
 					});
 				}
 			} catch(Exception ex) {
-				LOG.error(String.format("getSiteHtml failed. "), ex);
+				LOG.error(String.format("getSiteHtm failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		}).onFailure(ex -> {
@@ -244,25 +244,25 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 				try {
 					eventHandler.handle(Future.succeededFuture(new ServiceResponse(302, "Found", null, MultiMap.caseInsensitiveMultiMap().add(HttpHeaders.LOCATION, "/logout?redirect_uri=" + URLEncoder.encode(serviceRequest.getExtra().getString("uri"), "UTF-8")))));
 				} catch(Exception ex2) {
-					LOG.error(String.format("getSiteHtml failed. ", ex2));
+					LOG.error(String.format("getSiteHtm failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
 			} else {
-				LOG.error(String.format("getSiteHtml failed. "), ex);
+				LOG.error(String.format("getSiteHtm failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		});
 	}
 
 
-	public Future<ServiceResponse> response200GETSiteHtml(SearchList<SiteHtml> listSiteHtml) {
+	public Future<ServiceResponse> response200GETSiteHtm(SearchList<SiteHtm> listSiteHtm) {
 		Promise<ServiceResponse> promise = Promise.promise();
 		try {
-			SiteRequestEnUS siteRequest = listSiteHtml.getSiteRequest_(SiteRequestEnUS.class);
-			JsonObject json = JsonObject.mapFrom(listSiteHtml.getList().stream().findFirst().orElse(null));
+			SiteRequestEnUS siteRequest = listSiteHtm.getSiteRequest_(SiteRequestEnUS.class);
+			JsonObject json = JsonObject.mapFrom(listSiteHtm.getList().stream().findFirst().orElse(null));
 			promise.complete(ServiceResponse.completedWithJson(Buffer.buffer(Optional.ofNullable(json).orElse(new JsonObject()).encodePrettily())));
 		} catch(Exception ex) {
-			LOG.error(String.format("response200GETSiteHtml failed. "), ex);
+			LOG.error(String.format("response200GETSiteHtm failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
@@ -271,8 +271,8 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 	// POST //
 
 	@Override
-	public void postSiteHtml(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
-		LOG.debug(String.format("postSiteHtml started. "));
+	public void postSiteHtm(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
+		LOG.debug(String.format("postSiteHtm started. "));
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smart-village-view-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 			try {
 				siteRequest.setJsonObject(body);
@@ -283,7 +283,7 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 					apiRequest.setNumPATCH(0L);
 					apiRequest.initDeepApiRequest(siteRequest);
 					siteRequest.setApiRequest_(apiRequest);
-					eventBus.publish("websocketSiteHtml", JsonObject.mapFrom(apiRequest).toString());
+					eventBus.publish("websocketSiteHtm", JsonObject.mapFrom(apiRequest).toString());
 					JsonObject params = new JsonObject();
 					params.put("body", siteRequest.getJsonObject());
 					params.put("path", new JsonObject());
@@ -302,18 +302,18 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 					params.put("query", query);
 					JsonObject context = new JsonObject().put("params", params).put("user", siteRequest.getUserPrincipal());
 					JsonObject json = new JsonObject().put("context", context);
-					eventBus.request("smart-village-view-enUS-SiteHtml", json, new DeliveryOptions().addHeader("action", "postSiteHtmlFuture")).onSuccess(a -> {
+					eventBus.request("smart-village-view-enUS-SiteHtm", json, new DeliveryOptions().addHeader("action", "postSiteHtmFuture")).onSuccess(a -> {
 						JsonObject responseMessage = (JsonObject)a.body();
 						JsonObject responseBody = new JsonObject(Buffer.buffer(JsonUtil.BASE64_DECODER.decode(responseMessage.getString("payload"))));
 						eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(responseBody.encodePrettily()))));
-						LOG.debug(String.format("postSiteHtml succeeded. "));
+						LOG.debug(String.format("postSiteHtm succeeded. "));
 					}).onFailure(ex -> {
-						LOG.error(String.format("postSiteHtml failed. "), ex);
+						LOG.error(String.format("postSiteHtm failed. "), ex);
 						error(siteRequest, eventHandler, ex);
 					});
 				}
 			} catch(Exception ex) {
-				LOG.error(String.format("postSiteHtml failed. "), ex);
+				LOG.error(String.format("postSiteHtm failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		}).onFailure(ex -> {
@@ -321,11 +321,11 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 				try {
 					eventHandler.handle(Future.succeededFuture(new ServiceResponse(302, "Found", null, MultiMap.caseInsensitiveMultiMap().add(HttpHeaders.LOCATION, "/logout?redirect_uri=" + URLEncoder.encode(serviceRequest.getExtra().getString("uri"), "UTF-8")))));
 				} catch(Exception ex2) {
-					LOG.error(String.format("postSiteHtml failed. ", ex2));
+					LOG.error(String.format("postSiteHtm failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
 			} else {
-				LOG.error(String.format("postSiteHtml failed. "), ex);
+				LOG.error(String.format("postSiteHtm failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		});
@@ -333,7 +333,7 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 
 
 	@Override
-	public void postSiteHtmlFuture(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
+	public void postSiteHtmFuture(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smart-village-view-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 			ApiRequest apiRequest = new ApiRequest();
 			apiRequest.setRows(1L);
@@ -344,7 +344,7 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 			if(Optional.ofNullable(serviceRequest.getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getJsonArray("var")).orElse(new JsonArray()).stream().filter(s -> "refresh:false".equals(s)).count() > 0L) {
 				siteRequest.getRequestVars().put( "refresh", "false" );
 			}
-			postSiteHtmlFuture(siteRequest, false).onSuccess(o -> {
+			postSiteHtmFuture(siteRequest, false).onSuccess(o -> {
 				eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(JsonObject.mapFrom(o).encodePrettily()))));
 			}).onFailure(ex -> {
 				eventHandler.handle(Future.failedFuture(ex));
@@ -354,24 +354,24 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 				try {
 					eventHandler.handle(Future.succeededFuture(new ServiceResponse(302, "Found", null, MultiMap.caseInsensitiveMultiMap().add(HttpHeaders.LOCATION, "/logout?redirect_uri=" + URLEncoder.encode(serviceRequest.getExtra().getString("uri"), "UTF-8")))));
 				} catch(Exception ex2) {
-					LOG.error(String.format("postSiteHtml failed. ", ex2));
+					LOG.error(String.format("postSiteHtm failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
 			} else {
-				LOG.error(String.format("postSiteHtml failed. "), ex);
+				LOG.error(String.format("postSiteHtm failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		});
 	}
 
-	public Future<SiteHtml> postSiteHtmlFuture(SiteRequestEnUS siteRequest, Boolean inheritPk) {
-		Promise<SiteHtml> promise = Promise.promise();
+	public Future<SiteHtm> postSiteHtmFuture(SiteRequestEnUS siteRequest, Boolean inheritPk) {
+		Promise<SiteHtm> promise = Promise.promise();
 
 		try {
-			createSiteHtml(siteRequest).onSuccess(siteHtml -> {
-				persistSiteHtml(siteHtml, false).onSuccess(c -> {
-					indexSiteHtml(siteHtml).onSuccess(e -> {
-						promise.complete(siteHtml);
+			createSiteHtm(siteRequest).onSuccess(siteHtm -> {
+				persistSiteHtm(siteHtm, false).onSuccess(c -> {
+					indexSiteHtm(siteHtm).onSuccess(e -> {
+						promise.complete(siteHtm);
 					}).onFailure(ex -> {
 						promise.fail(ex);
 					});
@@ -382,20 +382,20 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 				promise.fail(ex);
 			});
 		} catch(Exception ex) {
-			LOG.error(String.format("postSiteHtmlFuture failed. "), ex);
+			LOG.error(String.format("postSiteHtmFuture failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
 	}
 
-	public Future<ServiceResponse> response200POSTSiteHtml(SiteHtml o) {
+	public Future<ServiceResponse> response200POSTSiteHtm(SiteHtm o) {
 		Promise<ServiceResponse> promise = Promise.promise();
 		try {
 			SiteRequestEnUS siteRequest = o.getSiteRequest_();
 			JsonObject json = JsonObject.mapFrom(o);
 			promise.complete(ServiceResponse.completedWithJson(Buffer.buffer(Optional.ofNullable(json).orElse(new JsonObject()).encodePrettily())));
 		} catch(Exception ex) {
-			LOG.error(String.format("response200POSTSiteHtml failed. "), ex);
+			LOG.error(String.format("response200POSTSiteHtm failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
@@ -404,16 +404,16 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 	// PATCH //
 
 	@Override
-	public void patchSiteHtml(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
-		LOG.debug(String.format("patchSiteHtml started. "));
+	public void patchSiteHtm(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
+		LOG.debug(String.format("patchSiteHtm started. "));
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smart-village-view-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 			try {
 				siteRequest.setJsonObject(body);
 				{
-					searchSiteHtmlList(siteRequest, true, false, true).onSuccess(listSiteHtml -> {
+					searchSiteHtmList(siteRequest, true, false, true).onSuccess(listSiteHtm -> {
 						try {
 							List<String> roles2 = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_ADMIN)).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
-							if(listSiteHtml.getResponse().getResponse().getNumFound() > 1
+							if(listSiteHtm.getResponse().getResponse().getNumFound() > 1
 									&& !CollectionUtils.containsAny(siteRequest.getUserResourceRoles(), roles2)
 									&& !CollectionUtils.containsAny(siteRequest.getUserRealmRoles(), roles2)
 									) {
@@ -423,39 +423,39 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							} else {
 
 								ApiRequest apiRequest = new ApiRequest();
-								apiRequest.setRows(listSiteHtml.getRequest().getRows());
-								apiRequest.setNumFound(listSiteHtml.getResponse().getResponse().getNumFound());
+								apiRequest.setRows(listSiteHtm.getRequest().getRows());
+								apiRequest.setNumFound(listSiteHtm.getResponse().getResponse().getNumFound());
 								apiRequest.setNumPATCH(0L);
 								apiRequest.initDeepApiRequest(siteRequest);
 								siteRequest.setApiRequest_(apiRequest);
 								if(apiRequest.getNumFound() == 1L)
-									apiRequest.setOriginal(listSiteHtml.first());
-								eventBus.publish("websocketSiteHtml", JsonObject.mapFrom(apiRequest).toString());
+									apiRequest.setOriginal(listSiteHtm.first());
+								eventBus.publish("websocketSiteHtm", JsonObject.mapFrom(apiRequest).toString());
 
-								listPATCHSiteHtml(apiRequest, listSiteHtml).onSuccess(e -> {
-									response200PATCHSiteHtml(siteRequest).onSuccess(response -> {
-										LOG.debug(String.format("patchSiteHtml succeeded. "));
+								listPATCHSiteHtm(apiRequest, listSiteHtm).onSuccess(e -> {
+									response200PATCHSiteHtm(siteRequest).onSuccess(response -> {
+										LOG.debug(String.format("patchSiteHtm succeeded. "));
 										eventHandler.handle(Future.succeededFuture(response));
 									}).onFailure(ex -> {
-										LOG.error(String.format("patchSiteHtml failed. "), ex);
+										LOG.error(String.format("patchSiteHtm failed. "), ex);
 										error(siteRequest, eventHandler, ex);
 									});
 								}).onFailure(ex -> {
-									LOG.error(String.format("patchSiteHtml failed. "), ex);
+									LOG.error(String.format("patchSiteHtm failed. "), ex);
 									error(siteRequest, eventHandler, ex);
 								});
 							}
 						} catch(Exception ex) {
-							LOG.error(String.format("patchSiteHtml failed. "), ex);
+							LOG.error(String.format("patchSiteHtm failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						}
 					}).onFailure(ex -> {
-						LOG.error(String.format("patchSiteHtml failed. "), ex);
+						LOG.error(String.format("patchSiteHtm failed. "), ex);
 						error(siteRequest, eventHandler, ex);
 					});
 				}
 			} catch(Exception ex) {
-				LOG.error(String.format("patchSiteHtml failed. "), ex);
+				LOG.error(String.format("patchSiteHtm failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		}).onFailure(ex -> {
@@ -463,73 +463,73 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 				try {
 					eventHandler.handle(Future.succeededFuture(new ServiceResponse(302, "Found", null, MultiMap.caseInsensitiveMultiMap().add(HttpHeaders.LOCATION, "/logout?redirect_uri=" + URLEncoder.encode(serviceRequest.getExtra().getString("uri"), "UTF-8")))));
 				} catch(Exception ex2) {
-					LOG.error(String.format("patchSiteHtml failed. ", ex2));
+					LOG.error(String.format("patchSiteHtm failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
 			} else {
-				LOG.error(String.format("patchSiteHtml failed. "), ex);
+				LOG.error(String.format("patchSiteHtm failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		});
 	}
 
 
-	public Future<Void> listPATCHSiteHtml(ApiRequest apiRequest, SearchList<SiteHtml> listSiteHtml) {
+	public Future<Void> listPATCHSiteHtm(ApiRequest apiRequest, SearchList<SiteHtm> listSiteHtm) {
 		Promise<Void> promise = Promise.promise();
 		List<Future> futures = new ArrayList<>();
-		SiteRequestEnUS siteRequest = listSiteHtml.getSiteRequest_(SiteRequestEnUS.class);
-		listSiteHtml.getList().forEach(o -> {
+		SiteRequestEnUS siteRequest = listSiteHtm.getSiteRequest_(SiteRequestEnUS.class);
+		listSiteHtm.getList().forEach(o -> {
 			SiteRequestEnUS siteRequest2 = generateSiteRequest(siteRequest.getUser(), siteRequest.getServiceRequest(), siteRequest.getJsonObject(), SiteRequestEnUS.class);
 			o.setSiteRequest_(siteRequest2);
 			siteRequest2.setApiRequest_(siteRequest.getApiRequest_());
 			futures.add(Future.future(promise1 -> {
-				patchSiteHtmlFuture(o, false).onSuccess(a -> {
+				patchSiteHtmFuture(o, false).onSuccess(a -> {
 					promise1.complete();
 				}).onFailure(ex -> {
-					LOG.error(String.format("listPATCHSiteHtml failed. "), ex);
+					LOG.error(String.format("listPATCHSiteHtm failed. "), ex);
 					promise1.fail(ex);
 				});
 			}));
 		});
 		CompositeFuture.all(futures).onSuccess( a -> {
 			if(apiRequest != null) {
-				apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listSiteHtml.getResponse().getResponse().getDocs().size());
+				apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listSiteHtm.getResponse().getResponse().getDocs().size());
 				if(apiRequest.getNumFound() == 1L)
-					listSiteHtml.first().apiRequestSiteHtml();
-				eventBus.publish("websocketSiteHtml", JsonObject.mapFrom(apiRequest).toString());
+					listSiteHtm.first().apiRequestSiteHtm();
+				eventBus.publish("websocketSiteHtm", JsonObject.mapFrom(apiRequest).toString());
 			}
-			listSiteHtml.next().onSuccess(next -> {
+			listSiteHtm.next().onSuccess(next -> {
 				if(next) {
-					listPATCHSiteHtml(apiRequest, listSiteHtml).onSuccess(b -> {
+					listPATCHSiteHtm(apiRequest, listSiteHtm).onSuccess(b -> {
 						promise.complete();
 					}).onFailure(ex -> {
-						LOG.error(String.format("listPATCHSiteHtml failed. "), ex);
+						LOG.error(String.format("listPATCHSiteHtm failed. "), ex);
 						promise.fail(ex);
 					});
 				} else {
 					promise.complete();
 				}
 			}).onFailure(ex -> {
-				LOG.error(String.format("listPATCHSiteHtml failed. "), ex);
+				LOG.error(String.format("listPATCHSiteHtm failed. "), ex);
 				promise.fail(ex);
 			});
 		}).onFailure(ex -> {
-			LOG.error(String.format("listPATCHSiteHtml failed. "), ex);
+			LOG.error(String.format("listPATCHSiteHtm failed. "), ex);
 			promise.fail(ex);
 		});
 		return promise.future();
 	}
 
 	@Override
-	public void patchSiteHtmlFuture(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
+	public void patchSiteHtmFuture(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smart-village-view-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 			try {
 				siteRequest.setJsonObject(body);
 				serviceRequest.getParams().getJsonObject("query").put("rows", 1);
-				searchSiteHtmlList(siteRequest, false, true, true).onSuccess(listSiteHtml -> {
+				searchSiteHtmList(siteRequest, false, true, true).onSuccess(listSiteHtm -> {
 					try {
-						SiteHtml o = listSiteHtml.first();
-						if(o != null && listSiteHtml.getResponse().getResponse().getNumFound() == 1) {
+						SiteHtm o = listSiteHtm.first();
+						if(o != null && listSiteHtm.getResponse().getResponse().getNumFound() == 1) {
 							ApiRequest apiRequest = new ApiRequest();
 							apiRequest.setRows(1L);
 							apiRequest.setNumFound(1L);
@@ -541,8 +541,8 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							}
 							if(apiRequest.getNumFound() == 1L)
 								apiRequest.setOriginal(o);
-							eventBus.publish("websocketSiteHtml", JsonObject.mapFrom(apiRequest).toString());
-							patchSiteHtmlFuture(o, false).onSuccess(a -> {
+							eventBus.publish("websocketSiteHtm", JsonObject.mapFrom(apiRequest).toString());
+							patchSiteHtmFuture(o, false).onSuccess(a -> {
 								eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(new JsonObject().encodePrettily()))));
 							}).onFailure(ex -> {
 								eventHandler.handle(Future.failedFuture(ex));
@@ -551,34 +551,34 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(new JsonObject().encodePrettily()))));
 						}
 					} catch(Exception ex) {
-						LOG.error(String.format("patchSiteHtml failed. "), ex);
+						LOG.error(String.format("patchSiteHtm failed. "), ex);
 						error(siteRequest, eventHandler, ex);
 					}
 				}).onFailure(ex -> {
-					LOG.error(String.format("patchSiteHtml failed. "), ex);
+					LOG.error(String.format("patchSiteHtm failed. "), ex);
 					error(siteRequest, eventHandler, ex);
 				});
 			} catch(Exception ex) {
-				LOG.error(String.format("patchSiteHtml failed. "), ex);
+				LOG.error(String.format("patchSiteHtm failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		}).onFailure(ex -> {
-			LOG.error(String.format("patchSiteHtml failed. "), ex);
+			LOG.error(String.format("patchSiteHtm failed. "), ex);
 			error(null, eventHandler, ex);
 		});
 	}
 
-	public Future<SiteHtml> patchSiteHtmlFuture(SiteHtml o, Boolean inheritPk) {
+	public Future<SiteHtm> patchSiteHtmFuture(SiteHtm o, Boolean inheritPk) {
 		SiteRequestEnUS siteRequest = o.getSiteRequest_();
-		Promise<SiteHtml> promise = Promise.promise();
+		Promise<SiteHtm> promise = Promise.promise();
 
 		try {
 			ApiRequest apiRequest = siteRequest.getApiRequest_();
 			pgPool.withTransaction(sqlConnection -> {
-				Promise<SiteHtml> promise1 = Promise.promise();
+				Promise<SiteHtm> promise1 = Promise.promise();
 				siteRequest.setSqlConnection(sqlConnection);
-				persistSiteHtml(o, true).onSuccess(c -> {
-					indexSiteHtml(o).onSuccess(e -> {
+				persistSiteHtm(o, true).onSuccess(c -> {
+					indexSiteHtm(o).onSuccess(e -> {
 						promise1.complete(o);
 					}).onFailure(ex -> {
 						promise1.fail(ex);
@@ -595,19 +595,19 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 				promise.fail(ex);
 			});
 		} catch(Exception ex) {
-			LOG.error(String.format("patchSiteHtmlFuture failed. "), ex);
+			LOG.error(String.format("patchSiteHtmFuture failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
 	}
 
-	public Future<ServiceResponse> response200PATCHSiteHtml(SiteRequestEnUS siteRequest) {
+	public Future<ServiceResponse> response200PATCHSiteHtm(SiteRequestEnUS siteRequest) {
 		Promise<ServiceResponse> promise = Promise.promise();
 		try {
 			JsonObject json = new JsonObject();
 			promise.complete(ServiceResponse.completedWithJson(Buffer.buffer(Optional.ofNullable(json).orElse(new JsonObject()).encodePrettily())));
 		} catch(Exception ex) {
-			LOG.error(String.format("response200PATCHSiteHtml failed. "), ex);
+			LOG.error(String.format("response200PATCHSiteHtm failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
@@ -616,8 +616,8 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 	// PUTImport //
 
 	@Override
-	public void putimportSiteHtml(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
-		LOG.debug(String.format("putimportSiteHtml started. "));
+	public void putimportSiteHtm(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
+		LOG.debug(String.format("putimportSiteHtm started. "));
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smart-village-view-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 			try {
 				siteRequest.setJsonObject(body);
@@ -630,31 +630,31 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 						apiRequest.setNumPATCH(0L);
 						apiRequest.initDeepApiRequest(siteRequest);
 						siteRequest.setApiRequest_(apiRequest);
-						eventBus.publish("websocketSiteHtml", JsonObject.mapFrom(apiRequest).toString());
-						varsSiteHtml(siteRequest).onSuccess(d -> {
-							listPUTImportSiteHtml(apiRequest, siteRequest).onSuccess(e -> {
-								response200PUTImportSiteHtml(siteRequest).onSuccess(response -> {
-									LOG.debug(String.format("putimportSiteHtml succeeded. "));
+						eventBus.publish("websocketSiteHtm", JsonObject.mapFrom(apiRequest).toString());
+						varsSiteHtm(siteRequest).onSuccess(d -> {
+							listPUTImportSiteHtm(apiRequest, siteRequest).onSuccess(e -> {
+								response200PUTImportSiteHtm(siteRequest).onSuccess(response -> {
+									LOG.debug(String.format("putimportSiteHtm succeeded. "));
 									eventHandler.handle(Future.succeededFuture(response));
 								}).onFailure(ex -> {
-									LOG.error(String.format("putimportSiteHtml failed. "), ex);
+									LOG.error(String.format("putimportSiteHtm failed. "), ex);
 									error(siteRequest, eventHandler, ex);
 								});
 							}).onFailure(ex -> {
-								LOG.error(String.format("putimportSiteHtml failed. "), ex);
+								LOG.error(String.format("putimportSiteHtm failed. "), ex);
 								error(siteRequest, eventHandler, ex);
 							});
 						}).onFailure(ex -> {
-							LOG.error(String.format("putimportSiteHtml failed. "), ex);
+							LOG.error(String.format("putimportSiteHtm failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
 					} catch(Exception ex) {
-						LOG.error(String.format("putimportSiteHtml failed. "), ex);
+						LOG.error(String.format("putimportSiteHtm failed. "), ex);
 						error(siteRequest, eventHandler, ex);
 					}
 				}
 			} catch(Exception ex) {
-				LOG.error(String.format("putimportSiteHtml failed. "), ex);
+				LOG.error(String.format("putimportSiteHtm failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		}).onFailure(ex -> {
@@ -662,18 +662,18 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 				try {
 					eventHandler.handle(Future.succeededFuture(new ServiceResponse(302, "Found", null, MultiMap.caseInsensitiveMultiMap().add(HttpHeaders.LOCATION, "/logout?redirect_uri=" + URLEncoder.encode(serviceRequest.getExtra().getString("uri"), "UTF-8")))));
 				} catch(Exception ex2) {
-					LOG.error(String.format("putimportSiteHtml failed. ", ex2));
+					LOG.error(String.format("putimportSiteHtm failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
 			} else {
-				LOG.error(String.format("putimportSiteHtml failed. "), ex);
+				LOG.error(String.format("putimportSiteHtm failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		});
 	}
 
 
-	public Future<Void> listPUTImportSiteHtml(ApiRequest apiRequest, SiteRequestEnUS siteRequest) {
+	public Future<Void> listPUTImportSiteHtm(ApiRequest apiRequest, SiteRequestEnUS siteRequest) {
 		Promise<Void> promise = Promise.promise();
 		List<Future> futures = new ArrayList<>();
 		JsonArray jsonArray = Optional.ofNullable(siteRequest.getJsonObject()).map(o -> o.getJsonArray("list")).orElse(new JsonArray());
@@ -698,10 +698,10 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 					params.put("query", query);
 					JsonObject context = new JsonObject().put("params", params).put("user", siteRequest.getUserPrincipal());
 					JsonObject json = new JsonObject().put("context", context);
-					eventBus.request("smart-village-view-enUS-SiteHtml", json, new DeliveryOptions().addHeader("action", "putimportSiteHtmlFuture")).onSuccess(a -> {
+					eventBus.request("smart-village-view-enUS-SiteHtm", json, new DeliveryOptions().addHeader("action", "putimportSiteHtmFuture")).onSuccess(a -> {
 						promise1.complete();
 					}).onFailure(ex -> {
-						LOG.error(String.format("listPUTImportSiteHtml failed. "), ex);
+						LOG.error(String.format("listPUTImportSiteHtm failed. "), ex);
 						promise1.fail(ex);
 					});
 				}));
@@ -710,18 +710,18 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 				apiRequest.setNumPATCH(apiRequest.getNumPATCH() + 1);
 				promise.complete();
 			}).onFailure(ex -> {
-				LOG.error(String.format("listPUTImportSiteHtml failed. "), ex);
+				LOG.error(String.format("listPUTImportSiteHtm failed. "), ex);
 				promise.fail(ex);
 			});
 		} catch(Exception ex) {
-			LOG.error(String.format("listPUTImportSiteHtml failed. "), ex);
+			LOG.error(String.format("listPUTImportSiteHtm failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
 	}
 
 	@Override
-	public void putimportSiteHtmlFuture(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
+	public void putimportSiteHtmFuture(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smart-village-view-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 			try {
 				ApiRequest apiRequest = new ApiRequest();
@@ -735,18 +735,18 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 					siteRequest.getRequestVars().put( "refresh", "false" );
 				}
 
-				SearchList<SiteHtml> searchList = new SearchList<SiteHtml>();
+				SearchList<SiteHtm> searchList = new SearchList<SiteHtm>();
 				searchList.setStore(true);
 				searchList.q("*:*");
-				searchList.setC(SiteHtml.class);
+				searchList.setC(SiteHtm.class);
 				searchList.fq("deleted_docvalues_boolean:false");
 				searchList.fq("archived_docvalues_boolean:false");
-				searchList.fq("inheritPk_docvalues_string:" + SearchTool.escapeQueryChars(body.getString(SiteHtml.VAR_id)));
+				searchList.fq("inheritPk_docvalues_string:" + SearchTool.escapeQueryChars(body.getString(SiteHtm.VAR_id)));
 				searchList.promiseDeepForClass(siteRequest).onSuccess(a -> {
 					try {
 						if(searchList.size() >= 1) {
-							SiteHtml o = searchList.getList().stream().findFirst().orElse(null);
-							SiteHtml o2 = new SiteHtml();
+							SiteHtm o = searchList.getList().stream().findFirst().orElse(null);
+							SiteHtm o2 = new SiteHtm();
 							o2.setSiteRequest_(siteRequest);
 							JsonObject body2 = new JsonObject();
 							for(String f : body.fieldNames()) {
@@ -788,35 +788,35 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							}
 							if(body2.size() > 0) {
 								siteRequest.setJsonObject(body2);
-								patchSiteHtmlFuture(o2, true).onSuccess(b -> {
-									LOG.info("Import SiteHtml {} succeeded, modified SiteHtml. ", body.getValue("pk"));
+								patchSiteHtmFuture(o2, true).onSuccess(b -> {
+									LOG.info("Import SiteHtm {} succeeded, modified SiteHtm. ", body.getValue("pk"));
 									eventHandler.handle(Future.succeededFuture());
 								}).onFailure(ex -> {
-									LOG.error(String.format("putimportSiteHtmlFuture failed. "), ex);
+									LOG.error(String.format("putimportSiteHtmFuture failed. "), ex);
 									eventHandler.handle(Future.failedFuture(ex));
 								});
 							} else {
 								eventHandler.handle(Future.succeededFuture());
 							}
 						} else {
-							postSiteHtmlFuture(siteRequest, true).onSuccess(b -> {
-								LOG.info("Import SiteHtml {} succeeded, created new SiteHtml. ", body.getValue("pk"));
+							postSiteHtmFuture(siteRequest, true).onSuccess(b -> {
+								LOG.info("Import SiteHtm {} succeeded, created new SiteHtm. ", body.getValue("pk"));
 								eventHandler.handle(Future.succeededFuture());
 							}).onFailure(ex -> {
-								LOG.error(String.format("putimportSiteHtmlFuture failed. "), ex);
+								LOG.error(String.format("putimportSiteHtmFuture failed. "), ex);
 								eventHandler.handle(Future.failedFuture(ex));
 							});
 						}
 					} catch(Exception ex) {
-						LOG.error(String.format("putimportSiteHtmlFuture failed. "), ex);
+						LOG.error(String.format("putimportSiteHtmFuture failed. "), ex);
 						eventHandler.handle(Future.failedFuture(ex));
 					}
 				}).onFailure(ex -> {
-					LOG.error(String.format("putimportSiteHtmlFuture failed. "), ex);
+					LOG.error(String.format("putimportSiteHtmFuture failed. "), ex);
 					eventHandler.handle(Future.failedFuture(ex));
 				});
 			} catch(Exception ex) {
-				LOG.error(String.format("putimportSiteHtmlFuture failed. "), ex);
+				LOG.error(String.format("putimportSiteHtmFuture failed. "), ex);
 				eventHandler.handle(Future.failedFuture(ex));
 			}
 		}).onFailure(ex -> {
@@ -824,23 +824,23 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 				try {
 					eventHandler.handle(Future.succeededFuture(new ServiceResponse(302, "Found", null, MultiMap.caseInsensitiveMultiMap().add(HttpHeaders.LOCATION, "/logout?redirect_uri=" + URLEncoder.encode(serviceRequest.getExtra().getString("uri"), "UTF-8")))));
 				} catch(Exception ex2) {
-					LOG.error(String.format("putimportSiteHtml failed. ", ex2));
+					LOG.error(String.format("putimportSiteHtm failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
 			} else {
-				LOG.error(String.format("putimportSiteHtml failed. "), ex);
+				LOG.error(String.format("putimportSiteHtm failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		});
 	}
 
-	public Future<ServiceResponse> response200PUTImportSiteHtml(SiteRequestEnUS siteRequest) {
+	public Future<ServiceResponse> response200PUTImportSiteHtm(SiteRequestEnUS siteRequest) {
 		Promise<ServiceResponse> promise = Promise.promise();
 		try {
 			JsonObject json = new JsonObject();
 			promise.complete(ServiceResponse.completedWithJson(Buffer.buffer(Optional.ofNullable(json).orElse(new JsonObject()).encodePrettily())));
 		} catch(Exception ex) {
-			LOG.error(String.format("response200PUTImportSiteHtml failed. "), ex);
+			LOG.error(String.format("response200PUTImportSiteHtm failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
@@ -849,30 +849,30 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 	// SearchPage //
 
 	@Override
-	public void searchpageSiteHtmlId(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
-		searchpageSiteHtml(serviceRequest, eventHandler);
+	public void searchpageSiteHtmId(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
+		searchpageSiteHtm(serviceRequest, eventHandler);
 	}
 
 	@Override
-	public void searchpageSiteHtml(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
+	public void searchpageSiteHtm(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smart-village-view-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 			try {
 				{
-					searchSiteHtmlList(siteRequest, false, true, false).onSuccess(listSiteHtml -> {
-						response200SearchPageSiteHtml(listSiteHtml).onSuccess(response -> {
+					searchSiteHtmList(siteRequest, false, true, false).onSuccess(listSiteHtm -> {
+						response200SearchPageSiteHtm(listSiteHtm).onSuccess(response -> {
 							eventHandler.handle(Future.succeededFuture(response));
-							LOG.debug(String.format("searchpageSiteHtml succeeded. "));
+							LOG.debug(String.format("searchpageSiteHtm succeeded. "));
 						}).onFailure(ex -> {
-							LOG.error(String.format("searchpageSiteHtml failed. "), ex);
+							LOG.error(String.format("searchpageSiteHtm failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
 					}).onFailure(ex -> {
-						LOG.error(String.format("searchpageSiteHtml failed. "), ex);
+						LOG.error(String.format("searchpageSiteHtm failed. "), ex);
 						error(siteRequest, eventHandler, ex);
 					});
 				}
 			} catch(Exception ex) {
-				LOG.error(String.format("searchpageSiteHtml failed. "), ex);
+				LOG.error(String.format("searchpageSiteHtm failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		}).onFailure(ex -> {
@@ -880,36 +880,36 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 				try {
 					eventHandler.handle(Future.succeededFuture(new ServiceResponse(302, "Found", null, MultiMap.caseInsensitiveMultiMap().add(HttpHeaders.LOCATION, "/logout?redirect_uri=" + URLEncoder.encode(serviceRequest.getExtra().getString("uri"), "UTF-8")))));
 				} catch(Exception ex2) {
-					LOG.error(String.format("searchpageSiteHtml failed. ", ex2));
+					LOG.error(String.format("searchpageSiteHtm failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
 			} else {
-				LOG.error(String.format("searchpageSiteHtml failed. "), ex);
+				LOG.error(String.format("searchpageSiteHtm failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		});
 	}
 
 
-	public void searchpageSiteHtmlPageInit(SiteHtmlPage page, SearchList<SiteHtml> listSiteHtml) {
+	public void searchpageSiteHtmPageInit(SiteHtmPage page, SearchList<SiteHtm> listSiteHtm) {
 	}
 
-	public String templateSearchPageSiteHtml() {
-		return Optional.ofNullable(config.getString(ConfigKeys.TEMPLATE_PATH)).orElse("templates") + "/enUS/SiteHtmlPage";
+	public String templateSearchPageSiteHtm() {
+		return Optional.ofNullable(config.getString(ConfigKeys.TEMPLATE_PATH)).orElse("templates") + "/enUS/SiteHtmPage";
 	}
-	public Future<ServiceResponse> response200SearchPageSiteHtml(SearchList<SiteHtml> listSiteHtml) {
+	public Future<ServiceResponse> response200SearchPageSiteHtm(SearchList<SiteHtm> listSiteHtm) {
 		Promise<ServiceResponse> promise = Promise.promise();
 		try {
-			SiteRequestEnUS siteRequest = listSiteHtml.getSiteRequest_(SiteRequestEnUS.class);
-			SiteHtmlPage page = new SiteHtmlPage();
+			SiteRequestEnUS siteRequest = listSiteHtm.getSiteRequest_(SiteRequestEnUS.class);
+			SiteHtmPage page = new SiteHtmPage();
 			MultiMap requestHeaders = MultiMap.caseInsensitiveMultiMap();
 			siteRequest.setRequestHeaders(requestHeaders);
 
-			page.setSearchListSiteHtml_(listSiteHtml);
+			page.setSearchListSiteHtm_(listSiteHtm);
 			page.setSiteRequest_(siteRequest);
-			page.promiseDeepSiteHtmlPage(siteRequest).onSuccess(a -> {
+			page.promiseDeepSiteHtmPage(siteRequest).onSuccess(a -> {
 				JsonObject json = JsonObject.mapFrom(page);
-				templateEngine.render(json, templateSearchPageSiteHtml()).onSuccess(buffer -> {
+				templateEngine.render(json, templateSearchPageSiteHtm()).onSuccess(buffer -> {
 					promise.complete(new ServiceResponse(200, "OK", buffer, requestHeaders));
 				}).onFailure(ex -> {
 					promise.fail(ex);
@@ -918,7 +918,7 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 				promise.fail(ex);
 			});
 		} catch(Exception ex) {
-			LOG.error(String.format("response200SearchPageSiteHtml failed. "), ex);
+			LOG.error(String.format("response200SearchPageSiteHtm failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
@@ -926,62 +926,62 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 
 	// General //
 
-	public Future<SiteHtml> createSiteHtml(SiteRequestEnUS siteRequest) {
-		Promise<SiteHtml> promise = Promise.promise();
+	public Future<SiteHtm> createSiteHtm(SiteRequestEnUS siteRequest) {
+		Promise<SiteHtm> promise = Promise.promise();
 		try {
-			SiteHtml o = new SiteHtml();
+			SiteHtm o = new SiteHtm();
 			o.setSiteRequest_(siteRequest);
 			promise.complete(o);
 		} catch(Exception ex) {
-			LOG.error(String.format("createSiteHtml failed. "), ex);
+			LOG.error(String.format("createSiteHtm failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
 	}
 
-	public void searchSiteHtmlQ(SearchList<SiteHtml> searchList, String entityVar, String valueIndexed, String varIndexed) {
+	public void searchSiteHtmQ(SearchList<SiteHtm> searchList, String entityVar, String valueIndexed, String varIndexed) {
 		searchList.q(varIndexed + ":" + ("*".equals(valueIndexed) ? valueIndexed : SearchTool.escapeQueryChars(valueIndexed)));
 		if(!"*".equals(entityVar)) {
 		}
 	}
 
-	public String searchSiteHtmlFq(SearchList<SiteHtml> searchList, String entityVar, String valueIndexed, String varIndexed) {
+	public String searchSiteHtmFq(SearchList<SiteHtm> searchList, String entityVar, String valueIndexed, String varIndexed) {
 		if(varIndexed == null)
 			throw new RuntimeException(String.format("\"%s\" is not an indexed entity. ", entityVar));
 		if(StringUtils.startsWith(valueIndexed, "[")) {
 			String[] fqs = StringUtils.substringBefore(StringUtils.substringAfter(valueIndexed, "["), "]").split(" TO ");
 			if(fqs.length != 2)
 				throw new RuntimeException(String.format("\"%s\" invalid range query. ", valueIndexed));
-			String fq1 = fqs[0].equals("*") ? fqs[0] : SiteHtml.staticSearchFqForClass(entityVar, searchList.getSiteRequest_(SiteRequestEnUS.class), fqs[0]);
-			String fq2 = fqs[1].equals("*") ? fqs[1] : SiteHtml.staticSearchFqForClass(entityVar, searchList.getSiteRequest_(SiteRequestEnUS.class), fqs[1]);
+			String fq1 = fqs[0].equals("*") ? fqs[0] : SiteHtm.staticSearchFqForClass(entityVar, searchList.getSiteRequest_(SiteRequestEnUS.class), fqs[0]);
+			String fq2 = fqs[1].equals("*") ? fqs[1] : SiteHtm.staticSearchFqForClass(entityVar, searchList.getSiteRequest_(SiteRequestEnUS.class), fqs[1]);
 			 return varIndexed + ":[" + fq1 + " TO " + fq2 + "]";
 		} else {
-			return varIndexed + ":" + SearchTool.escapeQueryChars(SiteHtml.staticSearchFqForClass(entityVar, searchList.getSiteRequest_(SiteRequestEnUS.class), valueIndexed)).replace("\\", "\\\\");
+			return varIndexed + ":" + SearchTool.escapeQueryChars(SiteHtm.staticSearchFqForClass(entityVar, searchList.getSiteRequest_(SiteRequestEnUS.class), valueIndexed)).replace("\\", "\\\\");
 		}
 	}
 
-	public void searchSiteHtmlSort(SearchList<SiteHtml> searchList, String entityVar, String valueIndexed, String varIndexed) {
+	public void searchSiteHtmSort(SearchList<SiteHtm> searchList, String entityVar, String valueIndexed, String varIndexed) {
 		if(varIndexed == null)
 			throw new RuntimeException(String.format("\"%s\" is not an indexed entity. ", entityVar));
 		searchList.sort(varIndexed, valueIndexed);
 	}
 
-	public void searchSiteHtmlRows(SearchList<SiteHtml> searchList, Long valueRows) {
+	public void searchSiteHtmRows(SearchList<SiteHtm> searchList, Long valueRows) {
 			searchList.rows(valueRows != null ? valueRows : 10L);
 	}
 
-	public void searchSiteHtmlStart(SearchList<SiteHtml> searchList, Long valueStart) {
+	public void searchSiteHtmStart(SearchList<SiteHtm> searchList, Long valueStart) {
 		searchList.start(valueStart);
 	}
 
-	public void searchSiteHtmlVar(SearchList<SiteHtml> searchList, String var, String value) {
+	public void searchSiteHtmVar(SearchList<SiteHtm> searchList, String var, String value) {
 		searchList.getSiteRequest_(SiteRequestEnUS.class).getRequestVars().put(var, value);
 	}
 
-	public void searchSiteHtmlUri(SearchList<SiteHtml> searchList) {
+	public void searchSiteHtmUri(SearchList<SiteHtm> searchList) {
 	}
 
-	public Future<ServiceResponse> varsSiteHtml(SiteRequestEnUS siteRequest) {
+	public Future<ServiceResponse> varsSiteHtm(SiteRequestEnUS siteRequest) {
 		Promise<ServiceResponse> promise = Promise.promise();
 		try {
 			ServiceRequest serviceRequest = siteRequest.getServiceRequest();
@@ -999,33 +999,33 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 						siteRequest.getRequestVars().put(entityVar, valueIndexed);
 					}
 				} catch(Exception ex) {
-					LOG.error(String.format("searchSiteHtml failed. "), ex);
+					LOG.error(String.format("searchSiteHtm failed. "), ex);
 					promise.fail(ex);
 				}
 			});
 			promise.complete();
 		} catch(Exception ex) {
-			LOG.error(String.format("searchSiteHtml failed. "), ex);
+			LOG.error(String.format("searchSiteHtm failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
 	}
 
-	public Future<SearchList<SiteHtml>> searchSiteHtmlList(SiteRequestEnUS siteRequest, Boolean populate, Boolean store, Boolean modify) {
-		Promise<SearchList<SiteHtml>> promise = Promise.promise();
+	public Future<SearchList<SiteHtm>> searchSiteHtmList(SiteRequestEnUS siteRequest, Boolean populate, Boolean store, Boolean modify) {
+		Promise<SearchList<SiteHtm>> promise = Promise.promise();
 		try {
 			ServiceRequest serviceRequest = siteRequest.getServiceRequest();
 			String entityListStr = siteRequest.getServiceRequest().getParams().getJsonObject("query").getString("fl");
 			String[] entityList = entityListStr == null ? null : entityListStr.split(",\\s*");
-			SearchList<SiteHtml> searchList = new SearchList<SiteHtml>();
+			SearchList<SiteHtm> searchList = new SearchList<SiteHtm>();
 			searchList.setPopulate(populate);
 			searchList.setStore(store);
 			searchList.q("*:*");
-			searchList.setC(SiteHtml.class);
+			searchList.setC(SiteHtm.class);
 			searchList.setSiteRequest_(siteRequest);
 			if(entityList != null) {
 				for(String v : entityList) {
-					searchList.fl(SiteHtml.varIndexedSiteHtml(v));
+					searchList.fl(SiteHtm.varIndexedSiteHtm(v));
 				}
 			}
 
@@ -1058,7 +1058,7 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							String[] varsIndexed = new String[entityVars.length];
 							for(Integer i = 0; i < entityVars.length; i++) {
 								entityVar = entityVars[i];
-								varsIndexed[i] = SiteHtml.varIndexedSiteHtml(entityVar);
+								varsIndexed[i] = SiteHtm.varIndexedSiteHtm(entityVar);
 							}
 							searchList.facetPivot((solrLocalParams == null ? "" : solrLocalParams) + StringUtils.join(varsIndexed, ","));
 						}
@@ -1073,8 +1073,8 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 										while(foundQ) {
 											entityVar = mQ.group(1).trim();
 											valueIndexed = mQ.group(2).trim();
-											varIndexed = SiteHtml.varIndexedSiteHtml(entityVar);
-											String entityQ = searchSiteHtmlFq(searchList, entityVar, valueIndexed, varIndexed);
+											varIndexed = SiteHtm.varIndexedSiteHtm(entityVar);
+											String entityQ = searchSiteHtmFq(searchList, entityVar, valueIndexed, varIndexed);
 											mQ.appendReplacement(sb, entityQ);
 											foundQ = mQ.find();
 										}
@@ -1090,8 +1090,8 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 										while(foundFq) {
 											entityVar = mFq.group(1).trim();
 											valueIndexed = mFq.group(2).trim();
-											varIndexed = SiteHtml.varIndexedSiteHtml(entityVar);
-											String entityFq = searchSiteHtmlFq(searchList, entityVar, valueIndexed, varIndexed);
+											varIndexed = SiteHtm.varIndexedSiteHtm(entityVar);
+											String entityFq = searchSiteHtmFq(searchList, entityVar, valueIndexed, varIndexed);
 											mFq.appendReplacement(sb, entityFq);
 											foundFq = mFq.find();
 										}
@@ -1102,23 +1102,23 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 								case "sort":
 									entityVar = StringUtils.trim(StringUtils.substringBefore((String)paramObject, " "));
 									valueIndexed = StringUtils.trim(StringUtils.substringAfter((String)paramObject, " "));
-									varIndexed = SiteHtml.varIndexedSiteHtml(entityVar);
-									searchSiteHtmlSort(searchList, entityVar, valueIndexed, varIndexed);
+									varIndexed = SiteHtm.varIndexedSiteHtm(entityVar);
+									searchSiteHtmSort(searchList, entityVar, valueIndexed, varIndexed);
 									break;
 								case "start":
 									valueStart = paramObject instanceof Long ? (Long)paramObject : Long.parseLong(paramObject.toString());
-									searchSiteHtmlStart(searchList, valueStart);
+									searchSiteHtmStart(searchList, valueStart);
 									break;
 								case "rows":
 									valueRows = paramObject instanceof Long ? (Long)paramObject : Long.parseLong(paramObject.toString());
-									searchSiteHtmlRows(searchList, valueRows);
+									searchSiteHtmRows(searchList, valueRows);
 									break;
 								case "stats":
 									searchList.stats((Boolean)paramObject);
 									break;
 								case "stats.field":
 									entityVar = (String)paramObject;
-									varIndexed = SiteHtml.varIndexedSiteHtml(entityVar);
+									varIndexed = SiteHtm.varIndexedSiteHtm(entityVar);
 									if(varIndexed != null)
 										searchList.statsField(varIndexed);
 									break;
@@ -1145,20 +1145,20 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 									if(foundFacetRange) {
 										String solrLocalParams = mFacetRange.group(1);
 										entityVar = mFacetRange.group(2).trim();
-										varIndexed = SiteHtml.varIndexedSiteHtml(entityVar);
+										varIndexed = SiteHtm.varIndexedSiteHtm(entityVar);
 										searchList.facetRange((solrLocalParams == null ? "" : solrLocalParams) + varIndexed);
 									}
 									break;
 								case "facet.field":
 									entityVar = (String)paramObject;
-									varIndexed = SiteHtml.varIndexedSiteHtml(entityVar);
+									varIndexed = SiteHtm.varIndexedSiteHtm(entityVar);
 									if(varIndexed != null)
 										searchList.facetField(varIndexed);
 									break;
 								case "var":
 									entityVar = StringUtils.trim(StringUtils.substringBefore((String)paramObject, ":"));
 									valueIndexed = URLDecoder.decode(StringUtils.trim(StringUtils.substringAfter((String)paramObject, ":")), "UTF-8");
-									searchSiteHtmlVar(searchList, entityVar, valueIndexed);
+									searchSiteHtmVar(searchList, entityVar, valueIndexed);
 									break;
 								case "cursorMark":
 									valueCursorMark = (String)paramObject;
@@ -1166,7 +1166,7 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 									break;
 							}
 						}
-						searchSiteHtmlUri(searchList);
+						searchSiteHtmUri(searchList);
 					}
 				} catch(Exception e) {
 					ExceptionUtils.rethrow(e);
@@ -1175,23 +1175,23 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 			if("*:*".equals(searchList.getQuery()) && searchList.getSorts().size() == 0) {
 				searchList.sort("created_docvalues_date", "desc");
 			}
-			searchSiteHtml2(siteRequest, populate, store, modify, searchList);
+			searchSiteHtm2(siteRequest, populate, store, modify, searchList);
 			searchList.promiseDeepForClass(siteRequest).onSuccess(a -> {
 				promise.complete(searchList);
 			}).onFailure(ex -> {
-				LOG.error(String.format("searchSiteHtml failed. "), ex);
+				LOG.error(String.format("searchSiteHtm failed. "), ex);
 				promise.fail(ex);
 			});
 		} catch(Exception ex) {
-			LOG.error(String.format("searchSiteHtml failed. "), ex);
+			LOG.error(String.format("searchSiteHtm failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
 	}
-	public void searchSiteHtml2(SiteRequestEnUS siteRequest, Boolean populate, Boolean store, Boolean modify, SearchList<SiteHtml> searchList) {
+	public void searchSiteHtm2(SiteRequestEnUS siteRequest, Boolean populate, Boolean store, Boolean modify, SearchList<SiteHtm> searchList) {
 	}
 
-	public Future<Void> persistSiteHtml(SiteHtml o, Boolean patch) {
+	public Future<Void> persistSiteHtm(SiteHtm o, Boolean patch) {
 		Promise<Void> promise = Promise.promise();
 		try {
 			SiteRequestEnUS siteRequest = o.getSiteRequest_();
@@ -1211,23 +1211,23 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							try {
 								o.persistForClass(columnName, columnValue);
 							} catch(Exception e) {
-								LOG.error(String.format("persistSiteHtml failed. "), e);
+								LOG.error(String.format("persistSiteHtm failed. "), e);
 							}
 						}
 					});
 					promise.complete();
 				} catch(Exception ex) {
-					LOG.error(String.format("persistSiteHtml failed. "), ex);
+					LOG.error(String.format("persistSiteHtm failed. "), ex);
 					promise.fail(ex);
 				}
 		} catch(Exception ex) {
-			LOG.error(String.format("persistSiteHtml failed. "), ex);
+			LOG.error(String.format("persistSiteHtm failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
 	}
 
-	public Future<Void> indexSiteHtml(SiteHtml o) {
+	public Future<Void> indexSiteHtm(SiteHtm o) {
 		Promise<Void> promise = Promise.promise();
 		try {
 			SiteRequestEnUS siteRequest = o.getSiteRequest_();
@@ -1238,7 +1238,7 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 				json.put("add", add);
 				JsonObject doc = new JsonObject();
 				add.put("doc", doc);
-				o.indexSiteHtml(doc);
+				o.indexSiteHtm(doc);
 				String solrHostName = siteRequest.getConfig().getString(ConfigKeys.SOLR_HOST_NAME);
 				Integer solrPort = siteRequest.getConfig().getInteger(ConfigKeys.SOLR_PORT);
 				String solrCollection = siteRequest.getConfig().getString(ConfigKeys.SOLR_COLLECTION);
@@ -1252,15 +1252,15 @@ public class SiteHtmlEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 				webClient.post(solrPort, solrHostName, solrRequestUri).putHeader("Content-Type", "application/json").expect(ResponsePredicate.SC_OK).sendBuffer(json.toBuffer()).onSuccess(b -> {
 					promise.complete();
 				}).onFailure(ex -> {
-					LOG.error(String.format("indexSiteHtml failed. "), new RuntimeException(ex));
+					LOG.error(String.format("indexSiteHtm failed. "), new RuntimeException(ex));
 					promise.fail(ex);
 				});
 			}).onFailure(ex -> {
-				LOG.error(String.format("indexSiteHtml failed. "), ex);
+				LOG.error(String.format("indexSiteHtm failed. "), ex);
 				promise.fail(ex);
 			});
 		} catch(Exception ex) {
-			LOG.error(String.format("indexSiteHtml failed. "), ex);
+			LOG.error(String.format("indexSiteHtm failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();

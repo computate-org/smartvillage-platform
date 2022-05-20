@@ -15,7 +15,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.computate.search.tool.SearchTool;
 import org.computate.smartvillageview.enus.config.ConfigKeys;
-import org.computate.smartvillageview.enus.model.html.SiteHtmlEnUSGenApiService;
+import org.computate.smartvillageview.enus.model.html.SiteHtmEnUSGenApiService;
 import org.computate.smartvillageview.enus.model.iotnode.IotNodeEnUSGenApiService;
 import org.computate.smartvillageview.enus.model.page.SitePage;
 import org.computate.smartvillageview.enus.model.page.SitePageEnUSGenApiService;
@@ -730,7 +730,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 			IotNodeEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
 			TrafficSimulationEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
 			SitePageEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
-			SiteHtmlEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
+			SiteHtmEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
 
 			LOG.info(configureApiComplete);
 			promise.complete();
@@ -808,6 +808,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 					SitePage result = l.first();
 					try {
 						DynamicPage page = new DynamicPage();
+						page.setUri(uri);
 						page.promiseDeepForClass(siteRequest).onSuccess(b -> {
 							JsonObject json = JsonObject.mapFrom(page);
 							templateEngine.render(json, Optional.ofNullable(config().getString(ConfigKeys.TEMPLATE_PATH)).orElse("templates") + "/" + lang + "/DynamicPage").onSuccess(buffer -> {

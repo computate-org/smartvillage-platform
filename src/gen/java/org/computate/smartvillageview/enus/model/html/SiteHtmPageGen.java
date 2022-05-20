@@ -30,40 +30,40 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.math.RoundingMode;
 import java.util.Map;
-import org.computate.smartvillageview.enus.model.html.SiteHtmlGenPage;
+import org.computate.smartvillageview.enus.model.html.SiteHtmGenPage;
 import org.computate.search.wrap.Wrap;
 import io.vertx.core.Promise;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 
 /**	
- * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstClasse_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtmlPage">Find the class SiteHtmlPage in Solr. </a>
- * <br><br>Delete the class SiteHtmlPage in Solr. 
- * <br><pre>curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtmlPage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'</pre>
+ * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstClasse_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtmPage">Find the class SiteHtmPage in Solr. </a>
+ * <br><br>Delete the class SiteHtmPage in Solr. 
+ * <br><pre>curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtmPage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'</pre>
  * <br>Delete  the package org.computate.smartvillageview.enus.model.html in Solr. 
  * <br><pre>curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.model.html&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'</pre>
  * <br>Delete  the project smart-village-view in Solr. 
  * <br><pre>curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smart\-village\-view&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'</pre>
  * <br>
  **/
-public abstract class SiteHtmlPageGen<DEV> extends SiteHtmlGenPage {
-	protected static final Logger LOG = LoggerFactory.getLogger(SiteHtmlPage.class);
+public abstract class SiteHtmPageGen<DEV> extends SiteHtmGenPage {
+	protected static final Logger LOG = LoggerFactory.getLogger(SiteHtmPage.class);
 
 	//////////////
 	// initDeep //
 	//////////////
 
-	public Future<Void> promiseDeepSiteHtmlPage(SiteRequestEnUS siteRequest_) {
+	public Future<Void> promiseDeepSiteHtmPage(SiteRequestEnUS siteRequest_) {
 		setSiteRequest_(siteRequest_);
-		return promiseDeepSiteHtmlPage();
+		return promiseDeepSiteHtmPage();
 	}
 
-	public Future<Void> promiseDeepSiteHtmlPage() {
+	public Future<Void> promiseDeepSiteHtmPage() {
 		Promise<Void> promise = Promise.promise();
 		Promise<Void> promise2 = Promise.promise();
-		promiseSiteHtmlPage(promise2);
+		promiseSiteHtmPage(promise2);
 		promise2.future().onSuccess(a -> {
-			super.promiseDeepSiteHtmlGenPage(siteRequest_).onSuccess(b -> {
+			super.promiseDeepSiteHtmGenPage(siteRequest_).onSuccess(b -> {
 				promise.complete();
 			}).onFailure(ex -> {
 				promise.fail(ex);
@@ -74,7 +74,7 @@ public abstract class SiteHtmlPageGen<DEV> extends SiteHtmlGenPage {
 		return promise.future();
 	}
 
-	public Future<Void> promiseSiteHtmlPage(Promise<Void> promise) {
+	public Future<Void> promiseSiteHtmPage(Promise<Void> promise) {
 		Future.future(a -> a.complete()).compose(a -> {
 			Promise<Void> promise2 = Promise.promise();
 			try {
@@ -92,19 +92,19 @@ public abstract class SiteHtmlPageGen<DEV> extends SiteHtmlGenPage {
 	}
 
 	@Override public Future<Void> promiseDeepForClass(SiteRequestEnUS siteRequest_) {
-		return promiseDeepSiteHtmlPage(siteRequest_);
+		return promiseDeepSiteHtmPage(siteRequest_);
 	}
 
 	/////////////////
 	// siteRequest //
 	/////////////////
 
-	public void siteRequestSiteHtmlPage(SiteRequestEnUS siteRequest_) {
-			super.siteRequestSiteHtmlGenPage(siteRequest_);
+	public void siteRequestSiteHtmPage(SiteRequestEnUS siteRequest_) {
+			super.siteRequestSiteHtmGenPage(siteRequest_);
 	}
 
 	public void siteRequestForClass(SiteRequestEnUS siteRequest_) {
-		siteRequestSiteHtmlPage(siteRequest_);
+		siteRequestSiteHtmPage(siteRequest_);
 	}
 
 	/////////////
@@ -116,7 +116,7 @@ public abstract class SiteHtmlPageGen<DEV> extends SiteHtmlGenPage {
 		Object o = null;
 		for(String v : vars) {
 			if(o == null)
-				o = obtainSiteHtmlPage(v);
+				o = obtainSiteHtmPage(v);
 			else if(o instanceof BaseModel) {
 				BaseModel baseModel = (BaseModel)o;
 				o = baseModel.obtainForClass(v);
@@ -128,11 +128,11 @@ public abstract class SiteHtmlPageGen<DEV> extends SiteHtmlGenPage {
 		}
 		return o;
 	}
-	public Object obtainSiteHtmlPage(String var) {
-		SiteHtmlPage oSiteHtmlPage = (SiteHtmlPage)this;
+	public Object obtainSiteHtmPage(String var) {
+		SiteHtmPage oSiteHtmPage = (SiteHtmPage)this;
 		switch(var) {
 			default:
-				return super.obtainSiteHtmlGenPage(var);
+				return super.obtainSiteHtmGenPage(var);
 		}
 	}
 
@@ -145,7 +145,7 @@ public abstract class SiteHtmlPageGen<DEV> extends SiteHtmlGenPage {
 		Object o = null;
 		for(String v : vars) {
 			if(o == null)
-				o = relateSiteHtmlPage(v, val);
+				o = relateSiteHtmPage(v, val);
 			else if(o instanceof BaseModel) {
 				BaseModel baseModel = (BaseModel)o;
 				o = baseModel.relateForClass(v, val);
@@ -153,11 +153,11 @@ public abstract class SiteHtmlPageGen<DEV> extends SiteHtmlGenPage {
 		}
 		return o != null;
 	}
-	public Object relateSiteHtmlPage(String var, Object val) {
-		SiteHtmlPage oSiteHtmlPage = (SiteHtmlPage)this;
+	public Object relateSiteHtmPage(String var, Object val) {
+		SiteHtmPage oSiteHtmPage = (SiteHtmPage)this;
 		switch(var) {
 			default:
-				return super.relateSiteHtmlGenPage(var, val);
+				return super.relateSiteHtmGenPage(var, val);
 		}
 	}
 
@@ -166,12 +166,12 @@ public abstract class SiteHtmlPageGen<DEV> extends SiteHtmlGenPage {
 	///////////////
 
 	public static Object staticSetForClass(String entityVar, SiteRequestEnUS siteRequest_, String o) {
-		return staticSetSiteHtmlPage(entityVar,  siteRequest_, o);
+		return staticSetSiteHtmPage(entityVar,  siteRequest_, o);
 	}
-	public static Object staticSetSiteHtmlPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
+	public static Object staticSetSiteHtmPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
 			default:
-				return SiteHtmlGenPage.staticSetSiteHtmlGenPage(entityVar,  siteRequest_, o);
+				return SiteHtmGenPage.staticSetSiteHtmGenPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -180,12 +180,12 @@ public abstract class SiteHtmlPageGen<DEV> extends SiteHtmlGenPage {
 	////////////////
 
 	public static Object staticSearchForClass(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
-		return staticSearchSiteHtmlPage(entityVar,  siteRequest_, o);
+		return staticSearchSiteHtmPage(entityVar,  siteRequest_, o);
 	}
-	public static Object staticSearchSiteHtmlPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
+	public static Object staticSearchSiteHtmPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
 			default:
-				return SiteHtmlGenPage.staticSearchSiteHtmlGenPage(entityVar,  siteRequest_, o);
+				return SiteHtmGenPage.staticSearchSiteHtmGenPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -194,12 +194,12 @@ public abstract class SiteHtmlPageGen<DEV> extends SiteHtmlGenPage {
 	///////////////////
 
 	public static String staticSearchStrForClass(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
-		return staticSearchStrSiteHtmlPage(entityVar,  siteRequest_, o);
+		return staticSearchStrSiteHtmPage(entityVar,  siteRequest_, o);
 	}
-	public static String staticSearchStrSiteHtmlPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
+	public static String staticSearchStrSiteHtmPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
 			default:
-				return SiteHtmlGenPage.staticSearchStrSiteHtmlGenPage(entityVar,  siteRequest_, o);
+				return SiteHtmGenPage.staticSearchStrSiteHtmGenPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -208,12 +208,12 @@ public abstract class SiteHtmlPageGen<DEV> extends SiteHtmlGenPage {
 	//////////////////
 
 	public static String staticSearchFqForClass(String entityVar, SiteRequestEnUS siteRequest_, String o) {
-		return staticSearchFqSiteHtmlPage(entityVar,  siteRequest_, o);
+		return staticSearchFqSiteHtmPage(entityVar,  siteRequest_, o);
 	}
-	public static String staticSearchFqSiteHtmlPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
+	public static String staticSearchFqSiteHtmPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
 			default:
-				return SiteHtmlGenPage.staticSearchFqSiteHtmlGenPage(entityVar,  siteRequest_, o);
+				return SiteHtmGenPage.staticSearchFqSiteHtmGenPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -227,16 +227,16 @@ public abstract class SiteHtmlPageGen<DEV> extends SiteHtmlGenPage {
 		return sb.toString();
 	}
 
-	public static final String CLASS_SIMPLE_NAME = "SiteHtmlPage";
+	public static final String CLASS_SIMPLE_NAME = "SiteHtmPage";
 
 
 	public static String displayNameForClass(String var) {
-		return SiteHtmlPage.displayNameSiteHtmlPage(var);
+		return SiteHtmPage.displayNameSiteHtmPage(var);
 	}
-	public static String displayNameSiteHtmlPage(String var) {
+	public static String displayNameSiteHtmPage(String var) {
 		switch(var) {
 		default:
-			return SiteHtmlGenPage.displayNameSiteHtmlGenPage(var);
+			return SiteHtmGenPage.displayNameSiteHtmGenPage(var);
 		}
 	}
 }

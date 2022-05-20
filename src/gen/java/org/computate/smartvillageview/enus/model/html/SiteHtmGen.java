@@ -55,53 +55,53 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.computate.search.response.solr.SolrResponse;
 
 /**	
- * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstClasse_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtml">Find the class SiteHtml in Solr. </a>
- * <br><br>Delete the class SiteHtml in Solr. 
- * <br><pre>curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtml&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'</pre>
+ * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstClasse_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtm">Find the class SiteHtm in Solr. </a>
+ * <br><br>Delete the class SiteHtm in Solr. 
+ * <br><pre>curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtm&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'</pre>
  * <br>Delete  the package org.computate.smartvillageview.enus.model.html in Solr. 
  * <br><pre>curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.model.html&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'</pre>
  * <br>Delete  the project smart-village-view in Solr. 
  * <br><pre>curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smart\-village\-view&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'</pre>
  * <br>
  **/
-public abstract class SiteHtmlGen<DEV> extends Object {
-	protected static final Logger LOG = LoggerFactory.getLogger(SiteHtml.class);
+public abstract class SiteHtmGen<DEV> extends Object {
+	protected static final Logger LOG = LoggerFactory.getLogger(SiteHtm.class);
 
-	public static final String SiteHtml_Description_enUS = "An HTML part that is indexed in the search engine. ";
-	public static final String SiteHtml_AName_enUS = "an HTML";
-	public static final String SiteHtml_This_enUS = "this ";
-	public static final String SiteHtml_ThisName_enUS = "this HTML";
-	public static final String SiteHtml_A_enUS = "a ";
-	public static final String SiteHtml_TheName_enUS = "theHTML";
-	public static final String SiteHtml_NameSingular_enUS = "HTML";
-	public static final String SiteHtml_NamePlural_enUS = "HTMLs";
-	public static final String SiteHtml_NameActual_enUS = "current HTML";
-	public static final String SiteHtml_AllName_enUS = "all the HTMLs";
-	public static final String SiteHtml_SearchAllNameBy_enUS = "search HTMLs by ";
-	public static final String SiteHtml_Title_enUS = "HTMLs";
-	public static final String SiteHtml_ThePluralName_enUS = "the HTMLs";
-	public static final String SiteHtml_NoNameFound_enUS = "no HTML found";
-	public static final String SiteHtml_NameVar_enUS = "html";
-	public static final String SiteHtml_OfName_enUS = "of HTML";
-	public static final String SiteHtml_ANameAdjective_enUS = "an HTML";
-	public static final String SiteHtml_NameAdjectiveSingular_enUS = "HTML";
-	public static final String SiteHtml_NameAdjectivePlural_enUS = "HTMLs";
-	public static final String Search_enUS_Uri = "/api/html";
-	public static final String Search_enUS_ImageUri = "/png/api/html-999.png";
-	public static final String GET_enUS_Uri = "/api/html/{id}";
-	public static final String GET_enUS_ImageUri = "/png/api/html/{id}-999.png";
-	public static final String POST_enUS_Uri = "/api/html";
-	public static final String POST_enUS_ImageUri = "/png/api/html-999.png";
-	public static final String PATCH_enUS_Uri = "/api/html";
-	public static final String PATCH_enUS_ImageUri = "/png/api/html-999.png";
-	public static final String PUTImport_enUS_Uri = "/api/html-import";
-	public static final String PUTImport_enUS_ImageUri = "/png/api/html-import-999.png";
-	public static final String SearchPage_enUS_Uri = "/html";
-	public static final String SearchPage_enUS_ImageUri = "/png/html-999.png";
+	public static final String SiteHtm_Description_enUS = "An HTML part that is indexed in the search engine. ";
+	public static final String SiteHtm_AName_enUS = "an HTML";
+	public static final String SiteHtm_This_enUS = "this ";
+	public static final String SiteHtm_ThisName_enUS = "this HTML";
+	public static final String SiteHtm_A_enUS = "a ";
+	public static final String SiteHtm_TheName_enUS = "theHTML";
+	public static final String SiteHtm_NameSingular_enUS = "HTML";
+	public static final String SiteHtm_NamePlural_enUS = "HTMLs";
+	public static final String SiteHtm_NameActual_enUS = "current HTML";
+	public static final String SiteHtm_AllName_enUS = "all the HTMLs";
+	public static final String SiteHtm_SearchAllNameBy_enUS = "search HTMLs by ";
+	public static final String SiteHtm_Title_enUS = "HTMLs";
+	public static final String SiteHtm_ThePluralName_enUS = "the HTMLs";
+	public static final String SiteHtm_NoNameFound_enUS = "no HTML found";
+	public static final String SiteHtm_NameVar_enUS = "htm";
+	public static final String SiteHtm_OfName_enUS = "of HTML";
+	public static final String SiteHtm_ANameAdjective_enUS = "an HTML";
+	public static final String SiteHtm_NameAdjectiveSingular_enUS = "HTML";
+	public static final String SiteHtm_NameAdjectivePlural_enUS = "HTMLs";
+	public static final String Search_enUS_Uri = "/api/htm";
+	public static final String Search_enUS_ImageUri = "/png/api/htm-999.png";
+	public static final String GET_enUS_Uri = "/api/htm/{id}";
+	public static final String GET_enUS_ImageUri = "/png/api/htm/{id}-999.png";
+	public static final String POST_enUS_Uri = "/api/htm";
+	public static final String POST_enUS_ImageUri = "/png/api/htm-999.png";
+	public static final String PATCH_enUS_Uri = "/api/htm";
+	public static final String PATCH_enUS_ImageUri = "/png/api/htm-999.png";
+	public static final String PUTImport_enUS_Uri = "/api/htm-import";
+	public static final String PUTImport_enUS_ImageUri = "/png/api/htm-import-999.png";
+	public static final String SearchPage_enUS_Uri = "/htm";
+	public static final String SearchPage_enUS_ImageUri = "/png/htm-999.png";
 
-	public static final String SiteHtml_Color = "2017-navy-peony";
-	public static final String SiteHtml_IconGroup = "duotone";
-	public static final String SiteHtml_IconName = "code";
+	public static final String SiteHtm_Color = "2017-navy-peony";
+	public static final String SiteHtm_IconGroup = "duotone";
+	public static final String SiteHtm_IconName = "code";
 
 	//////////////////
 	// promiseBegin //
@@ -116,7 +116,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 
 	/**	<br> The entity promiseBegin
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtml&fq=entiteVar_enUS_indexed_string:promiseBegin">Find the entity promiseBegin in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtm&fq=entiteVar_enUS_indexed_string:promiseBegin">Find the entity promiseBegin in Solr</a>
 	 * <br>
 	 * @param promise is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -158,7 +158,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 
 	/**	<br> The entity siteRequest_
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtml&fq=entiteVar_enUS_indexed_string:siteRequest_">Find the entity siteRequest_ in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtm&fq=entiteVar_enUS_indexed_string:siteRequest_">Find the entity siteRequest_ in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -174,13 +174,13 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	public static SiteRequestEnUS staticSetSiteRequest_(SiteRequestEnUS siteRequest_, String o) {
 		return null;
 	}
-	protected SiteHtml siteRequest_Init() {
+	protected SiteHtm siteRequest_Init() {
 		Wrap<SiteRequestEnUS> siteRequest_Wrap = new Wrap<SiteRequestEnUS>().var("siteRequest_");
 		if(siteRequest_ == null) {
 			_siteRequest_(siteRequest_Wrap);
 			setSiteRequest_(siteRequest_Wrap.o);
 		}
-		return (SiteHtml)this;
+		return (SiteHtm)this;
 	}
 
 	///////////////
@@ -196,7 +196,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 
 	/**	<br> The entity inheritPk
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtml&fq=entiteVar_enUS_indexed_string:inheritPk">Find the entity inheritPk in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtm&fq=entiteVar_enUS_indexed_string:inheritPk">Find the entity inheritPk in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -206,18 +206,18 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 		return inheritPk;
 	}
 	public void setInheritPk(String o) {
-		this.inheritPk = SiteHtml.staticSetInheritPk(siteRequest_, o);
+		this.inheritPk = SiteHtm.staticSetInheritPk(siteRequest_, o);
 	}
 	public static String staticSetInheritPk(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	protected SiteHtml inheritPkInit() {
+	protected SiteHtm inheritPkInit() {
 		Wrap<String> inheritPkWrap = new Wrap<String>().var("inheritPk");
 		if(inheritPk == null) {
 			_inheritPk(inheritPkWrap);
 			setInheritPk(inheritPkWrap.o);
 		}
-		return (SiteHtml)this;
+		return (SiteHtm)this;
 	}
 
 	public static String staticSearchInheritPk(SiteRequestEnUS siteRequest_, String o) {
@@ -229,7 +229,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqInheritPk(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtml.staticSearchStrInheritPk(siteRequest_, SiteHtml.staticSearchInheritPk(siteRequest_, SiteHtml.staticSetInheritPk(siteRequest_, o)));
+		return SiteHtm.staticSearchStrInheritPk(siteRequest_, SiteHtm.staticSearchInheritPk(siteRequest_, SiteHtm.staticSetInheritPk(siteRequest_, o)));
 	}
 
 	public String sqlInheritPk() {
@@ -252,7 +252,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 
 	/**	<br> The entity created
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtml&fq=entiteVar_enUS_indexed_string:created">Find the entity created in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtm&fq=entiteVar_enUS_indexed_string:created">Find the entity created in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -272,7 +272,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	/** Example: 2011-12-03T10:15:30+01:00 **/
 	@JsonIgnore
 	public void setCreated(String o) {
-		this.created = SiteHtml.staticSetCreated(siteRequest_, o);
+		this.created = SiteHtm.staticSetCreated(siteRequest_, o);
 	}
 	public static ZonedDateTime staticSetCreated(SiteRequestEnUS siteRequest_, String o) {
 		if(StringUtils.endsWith(o, "]"))
@@ -288,13 +288,13 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	public void setCreated(Date o) {
 		this.created = o == null ? null : ZonedDateTime.ofInstant(o.toInstant(), ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
 	}
-	protected SiteHtml createdInit() {
+	protected SiteHtm createdInit() {
 		Wrap<ZonedDateTime> createdWrap = new Wrap<ZonedDateTime>().var("created");
 		if(created == null) {
 			_created(createdWrap);
 			setCreated(createdWrap.o);
 		}
-		return (SiteHtml)this;
+		return (SiteHtm)this;
 	}
 
 	public static Date staticSearchCreated(SiteRequestEnUS siteRequest_, ZonedDateTime o) {
@@ -306,7 +306,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqCreated(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtml.staticSearchStrCreated(siteRequest_, SiteHtml.staticSearchCreated(siteRequest_, SiteHtml.staticSetCreated(siteRequest_, o)));
+		return SiteHtm.staticSearchStrCreated(siteRequest_, SiteHtm.staticSearchCreated(siteRequest_, SiteHtm.staticSetCreated(siteRequest_, o)));
 	}
 
 	public OffsetDateTime sqlCreated() {
@@ -329,7 +329,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 
 	/**	<br> The entity modified
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtml&fq=entiteVar_enUS_indexed_string:modified">Find the entity modified in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtm&fq=entiteVar_enUS_indexed_string:modified">Find the entity modified in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -349,7 +349,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	/** Example: 2011-12-03T10:15:30+01:00 **/
 	@JsonIgnore
 	public void setModified(String o) {
-		this.modified = SiteHtml.staticSetModified(siteRequest_, o);
+		this.modified = SiteHtm.staticSetModified(siteRequest_, o);
 	}
 	public static ZonedDateTime staticSetModified(SiteRequestEnUS siteRequest_, String o) {
 		if(StringUtils.endsWith(o, "]"))
@@ -365,13 +365,13 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	public void setModified(Date o) {
 		this.modified = o == null ? null : ZonedDateTime.ofInstant(o.toInstant(), ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
 	}
-	protected SiteHtml modifiedInit() {
+	protected SiteHtm modifiedInit() {
 		Wrap<ZonedDateTime> modifiedWrap = new Wrap<ZonedDateTime>().var("modified");
 		if(modified == null) {
 			_modified(modifiedWrap);
 			setModified(modifiedWrap.o);
 		}
-		return (SiteHtml)this;
+		return (SiteHtm)this;
 	}
 
 	public static Date staticSearchModified(SiteRequestEnUS siteRequest_, ZonedDateTime o) {
@@ -383,7 +383,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqModified(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtml.staticSearchStrModified(siteRequest_, SiteHtml.staticSearchModified(siteRequest_, SiteHtml.staticSetModified(siteRequest_, o)));
+		return SiteHtm.staticSearchStrModified(siteRequest_, SiteHtm.staticSearchModified(siteRequest_, SiteHtm.staticSetModified(siteRequest_, o)));
 	}
 
 	//////////////
@@ -399,7 +399,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 
 	/**	<br> The entity archived
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtml&fq=entiteVar_enUS_indexed_string:archived">Find the entity archived in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtm&fq=entiteVar_enUS_indexed_string:archived">Find the entity archived in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -414,18 +414,18 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	}
 	@JsonIgnore
 	public void setArchived(String o) {
-		this.archived = SiteHtml.staticSetArchived(siteRequest_, o);
+		this.archived = SiteHtm.staticSetArchived(siteRequest_, o);
 	}
 	public static Boolean staticSetArchived(SiteRequestEnUS siteRequest_, String o) {
 		return Boolean.parseBoolean(o);
 	}
-	protected SiteHtml archivedInit() {
+	protected SiteHtm archivedInit() {
 		Wrap<Boolean> archivedWrap = new Wrap<Boolean>().var("archived");
 		if(archived == null) {
 			_archived(archivedWrap);
 			setArchived(archivedWrap.o);
 		}
-		return (SiteHtml)this;
+		return (SiteHtm)this;
 	}
 
 	public static Boolean staticSearchArchived(SiteRequestEnUS siteRequest_, Boolean o) {
@@ -437,7 +437,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqArchived(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtml.staticSearchStrArchived(siteRequest_, SiteHtml.staticSearchArchived(siteRequest_, SiteHtml.staticSetArchived(siteRequest_, o)));
+		return SiteHtm.staticSearchStrArchived(siteRequest_, SiteHtm.staticSearchArchived(siteRequest_, SiteHtm.staticSetArchived(siteRequest_, o)));
 	}
 
 	public Boolean sqlArchived() {
@@ -457,7 +457,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 
 	/**	<br> The entity deleted
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtml&fq=entiteVar_enUS_indexed_string:deleted">Find the entity deleted in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtm&fq=entiteVar_enUS_indexed_string:deleted">Find the entity deleted in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -472,18 +472,18 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	}
 	@JsonIgnore
 	public void setDeleted(String o) {
-		this.deleted = SiteHtml.staticSetDeleted(siteRequest_, o);
+		this.deleted = SiteHtm.staticSetDeleted(siteRequest_, o);
 	}
 	public static Boolean staticSetDeleted(SiteRequestEnUS siteRequest_, String o) {
 		return Boolean.parseBoolean(o);
 	}
-	protected SiteHtml deletedInit() {
+	protected SiteHtm deletedInit() {
 		Wrap<Boolean> deletedWrap = new Wrap<Boolean>().var("deleted");
 		if(deleted == null) {
 			_deleted(deletedWrap);
 			setDeleted(deletedWrap.o);
 		}
-		return (SiteHtml)this;
+		return (SiteHtm)this;
 	}
 
 	public static Boolean staticSearchDeleted(SiteRequestEnUS siteRequest_, Boolean o) {
@@ -495,7 +495,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqDeleted(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtml.staticSearchStrDeleted(siteRequest_, SiteHtml.staticSearchDeleted(siteRequest_, SiteHtml.staticSetDeleted(siteRequest_, o)));
+		return SiteHtm.staticSearchStrDeleted(siteRequest_, SiteHtm.staticSearchDeleted(siteRequest_, SiteHtm.staticSetDeleted(siteRequest_, o)));
 	}
 
 	public Boolean sqlDeleted() {
@@ -516,7 +516,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 
 	/**	<br> The entity saves
 	 *  It is constructed before being initialized with the constructor by default. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtml&fq=entiteVar_enUS_indexed_string:saves">Find the entity saves in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtm&fq=entiteVar_enUS_indexed_string:saves">Find the entity saves in Solr</a>
 	 * <br>
 	 * @param l is the entity already constructed. 
 	 **/
@@ -532,16 +532,16 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	public static String staticSetSaves(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	public SiteHtml addSaves(String...objets) {
+	public SiteHtm addSaves(String...objets) {
 		for(String o : objets) {
 			addSaves(o);
 		}
-		return (SiteHtml)this;
+		return (SiteHtm)this;
 	}
-	public SiteHtml addSaves(String o) {
+	public SiteHtm addSaves(String o) {
 		if(o != null)
 			this.saves.add(o);
-		return (SiteHtml)this;
+		return (SiteHtm)this;
 	}
 	@JsonIgnore
 	public void setSaves(JsonArray objets) {
@@ -551,9 +551,9 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 			addSaves(o);
 		}
 	}
-	protected SiteHtml savesInit() {
+	protected SiteHtm savesInit() {
 		_saves(saves);
-		return (SiteHtml)this;
+		return (SiteHtm)this;
 	}
 
 	public static String staticSearchSaves(SiteRequestEnUS siteRequest_, String o) {
@@ -565,7 +565,60 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqSaves(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtml.staticSearchStrSaves(siteRequest_, SiteHtml.staticSearchSaves(siteRequest_, SiteHtml.staticSetSaves(siteRequest_, o)));
+		return SiteHtm.staticSearchStrSaves(siteRequest_, SiteHtm.staticSearchSaves(siteRequest_, SiteHtm.staticSetSaves(siteRequest_, o)));
+	}
+
+	/////////
+	// uri //
+	/////////
+
+	/**	 The entity uri
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String uri;
+
+	/**	<br> The entity uri
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtm&fq=entiteVar_enUS_indexed_string:uri">Find the entity uri in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _uri(Wrap<String> w);
+
+	public String getUri() {
+		return uri;
+	}
+	public void setUri(String o) {
+		this.uri = SiteHtm.staticSetUri(siteRequest_, o);
+	}
+	public static String staticSetUri(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected SiteHtm uriInit() {
+		Wrap<String> uriWrap = new Wrap<String>().var("uri");
+		if(uri == null) {
+			_uri(uriWrap);
+			setUri(uriWrap.o);
+		}
+		return (SiteHtm)this;
+	}
+
+	public static String staticSearchUri(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrUri(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqUri(SiteRequestEnUS siteRequest_, String o) {
+		return SiteHtm.staticSearchStrUri(siteRequest_, SiteHtm.staticSearchUri(siteRequest_, SiteHtm.staticSetUri(siteRequest_, o)));
+	}
+
+	public String sqlUri() {
+		return uri;
 	}
 
 	////////////
@@ -581,7 +634,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 
 	/**	<br> The entity pageId
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtml&fq=entiteVar_enUS_indexed_string:pageId">Find the entity pageId in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtm&fq=entiteVar_enUS_indexed_string:pageId">Find the entity pageId in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -591,18 +644,18 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 		return pageId;
 	}
 	public void setPageId(String o) {
-		this.pageId = SiteHtml.staticSetPageId(siteRequest_, o);
+		this.pageId = SiteHtm.staticSetPageId(siteRequest_, o);
 	}
 	public static String staticSetPageId(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	protected SiteHtml pageIdInit() {
+	protected SiteHtm pageIdInit() {
 		Wrap<String> pageIdWrap = new Wrap<String>().var("pageId");
 		if(pageId == null) {
 			_pageId(pageIdWrap);
 			setPageId(pageIdWrap.o);
 		}
-		return (SiteHtml)this;
+		return (SiteHtm)this;
 	}
 
 	public static String staticSearchPageId(SiteRequestEnUS siteRequest_, String o) {
@@ -614,7 +667,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqPageId(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtml.staticSearchStrPageId(siteRequest_, SiteHtml.staticSearchPageId(siteRequest_, SiteHtml.staticSetPageId(siteRequest_, o)));
+		return SiteHtm.staticSearchStrPageId(siteRequest_, SiteHtm.staticSearchPageId(siteRequest_, SiteHtm.staticSetPageId(siteRequest_, o)));
 	}
 
 	public String sqlPageId() {
@@ -635,7 +688,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 
 	/**	<br> The entity sequenceNum
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtml&fq=entiteVar_enUS_indexed_string:sequenceNum">Find the entity sequenceNum in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtm&fq=entiteVar_enUS_indexed_string:sequenceNum">Find the entity sequenceNum in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -650,20 +703,20 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	}
 	@JsonIgnore
 	public void setSequenceNum(String o) {
-		this.sequenceNum = SiteHtml.staticSetSequenceNum(siteRequest_, o);
+		this.sequenceNum = SiteHtm.staticSetSequenceNum(siteRequest_, o);
 	}
 	public static Long staticSetSequenceNum(SiteRequestEnUS siteRequest_, String o) {
 		if(NumberUtils.isParsable(o))
 			return Long.parseLong(o);
 		return null;
 	}
-	protected SiteHtml sequenceNumInit() {
+	protected SiteHtm sequenceNumInit() {
 		Wrap<Long> sequenceNumWrap = new Wrap<Long>().var("sequenceNum");
 		if(sequenceNum == null) {
 			_sequenceNum(sequenceNumWrap);
 			setSequenceNum(sequenceNumWrap.o);
 		}
-		return (SiteHtml)this;
+		return (SiteHtm)this;
 	}
 
 	public static Long staticSearchSequenceNum(SiteRequestEnUS siteRequest_, Long o) {
@@ -675,64 +728,64 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqSequenceNum(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtml.staticSearchStrSequenceNum(siteRequest_, SiteHtml.staticSearchSequenceNum(siteRequest_, SiteHtml.staticSetSequenceNum(siteRequest_, o)));
+		return SiteHtm.staticSearchStrSequenceNum(siteRequest_, SiteHtm.staticSearchSequenceNum(siteRequest_, SiteHtm.staticSetSequenceNum(siteRequest_, o)));
 	}
 
 	public Long sqlSequenceNum() {
 		return sequenceNum;
 	}
 
-	///////////////
-	// htmlGroup //
-	///////////////
+	//////////////
+	// htmGroup //
+	//////////////
 
-	/**	 The entity htmlGroup
+	/**	 The entity htmGroup
 	 *	 is defined as null before being initialized. 
 	 */
 	@JsonProperty
 	@JsonInclude(Include.NON_NULL)
-	protected String htmlGroup;
+	protected String htmGroup;
 
-	/**	<br> The entity htmlGroup
+	/**	<br> The entity htmGroup
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtml&fq=entiteVar_enUS_indexed_string:htmlGroup">Find the entity htmlGroup in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtm&fq=entiteVar_enUS_indexed_string:htmGroup">Find the entity htmGroup in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected abstract void _htmlGroup(Wrap<String> w);
+	protected abstract void _htmGroup(Wrap<String> w);
 
-	public String getHtmlGroup() {
-		return htmlGroup;
+	public String getHtmGroup() {
+		return htmGroup;
 	}
-	public void setHtmlGroup(String o) {
-		this.htmlGroup = SiteHtml.staticSetHtmlGroup(siteRequest_, o);
+	public void setHtmGroup(String o) {
+		this.htmGroup = SiteHtm.staticSetHtmGroup(siteRequest_, o);
 	}
-	public static String staticSetHtmlGroup(SiteRequestEnUS siteRequest_, String o) {
+	public static String staticSetHtmGroup(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	protected SiteHtml htmlGroupInit() {
-		Wrap<String> htmlGroupWrap = new Wrap<String>().var("htmlGroup");
-		if(htmlGroup == null) {
-			_htmlGroup(htmlGroupWrap);
-			setHtmlGroup(htmlGroupWrap.o);
+	protected SiteHtm htmGroupInit() {
+		Wrap<String> htmGroupWrap = new Wrap<String>().var("htmGroup");
+		if(htmGroup == null) {
+			_htmGroup(htmGroupWrap);
+			setHtmGroup(htmGroupWrap.o);
 		}
-		return (SiteHtml)this;
+		return (SiteHtm)this;
 	}
 
-	public static String staticSearchHtmlGroup(SiteRequestEnUS siteRequest_, String o) {
+	public static String staticSearchHtmGroup(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
 
-	public static String staticSearchStrHtmlGroup(SiteRequestEnUS siteRequest_, String o) {
+	public static String staticSearchStrHtmGroup(SiteRequestEnUS siteRequest_, String o) {
 		return o == null ? null : o.toString();
 	}
 
-	public static String staticSearchFqHtmlGroup(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtml.staticSearchStrHtmlGroup(siteRequest_, SiteHtml.staticSearchHtmlGroup(siteRequest_, SiteHtml.staticSetHtmlGroup(siteRequest_, o)));
+	public static String staticSearchFqHtmGroup(SiteRequestEnUS siteRequest_, String o) {
+		return SiteHtm.staticSearchStrHtmGroup(siteRequest_, SiteHtm.staticSearchHtmGroup(siteRequest_, SiteHtm.staticSetHtmGroup(siteRequest_, o)));
 	}
 
-	public String sqlHtmlGroup() {
-		return htmlGroup;
+	public String sqlHtmGroup() {
+		return htmGroup;
 	}
 
 	/////////////
@@ -748,7 +801,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 
 	/**	<br> The entity eBefore
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtml&fq=entiteVar_enUS_indexed_string:eBefore">Find the entity eBefore in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtm&fq=entiteVar_enUS_indexed_string:eBefore">Find the entity eBefore in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -758,18 +811,18 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 		return eBefore;
 	}
 	public void setEBefore(String o) {
-		this.eBefore = SiteHtml.staticSetEBefore(siteRequest_, o);
+		this.eBefore = SiteHtm.staticSetEBefore(siteRequest_, o);
 	}
 	public static String staticSetEBefore(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	protected SiteHtml eBeforeInit() {
+	protected SiteHtm eBeforeInit() {
 		Wrap<String> eBeforeWrap = new Wrap<String>().var("eBefore");
 		if(eBefore == null) {
 			_eBefore(eBeforeWrap);
 			setEBefore(eBeforeWrap.o);
 		}
-		return (SiteHtml)this;
+		return (SiteHtm)this;
 	}
 
 	public static String staticSearchEBefore(SiteRequestEnUS siteRequest_, String o) {
@@ -781,7 +834,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqEBefore(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtml.staticSearchStrEBefore(siteRequest_, SiteHtml.staticSearchEBefore(siteRequest_, SiteHtml.staticSetEBefore(siteRequest_, o)));
+		return SiteHtm.staticSearchStrEBefore(siteRequest_, SiteHtm.staticSearchEBefore(siteRequest_, SiteHtm.staticSetEBefore(siteRequest_, o)));
 	}
 
 	public String sqlEBefore() {
@@ -801,7 +854,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 
 	/**	<br> The entity eAfter
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtml&fq=entiteVar_enUS_indexed_string:eAfter">Find the entity eAfter in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtm&fq=entiteVar_enUS_indexed_string:eAfter">Find the entity eAfter in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -811,18 +864,18 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 		return eAfter;
 	}
 	public void setEAfter(String o) {
-		this.eAfter = SiteHtml.staticSetEAfter(siteRequest_, o);
+		this.eAfter = SiteHtm.staticSetEAfter(siteRequest_, o);
 	}
 	public static String staticSetEAfter(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	protected SiteHtml eAfterInit() {
+	protected SiteHtm eAfterInit() {
 		Wrap<String> eAfterWrap = new Wrap<String>().var("eAfter");
 		if(eAfter == null) {
 			_eAfter(eAfterWrap);
 			setEAfter(eAfterWrap.o);
 		}
-		return (SiteHtml)this;
+		return (SiteHtm)this;
 	}
 
 	public static String staticSearchEAfter(SiteRequestEnUS siteRequest_, String o) {
@@ -834,7 +887,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqEAfter(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtml.staticSearchStrEAfter(siteRequest_, SiteHtml.staticSearchEAfter(siteRequest_, SiteHtml.staticSetEAfter(siteRequest_, o)));
+		return SiteHtm.staticSearchStrEAfter(siteRequest_, SiteHtm.staticSearchEAfter(siteRequest_, SiteHtm.staticSetEAfter(siteRequest_, o)));
 	}
 
 	public String sqlEAfter() {
@@ -854,7 +907,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 
 	/**	<br> The entity a
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtml&fq=entiteVar_enUS_indexed_string:a">Find the entity a in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtm&fq=entiteVar_enUS_indexed_string:a">Find the entity a in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -869,7 +922,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	}
 	@JsonIgnore
 	public void setA(String o) {
-		this.a = SiteHtml.staticSetA(siteRequest_, o);
+		this.a = SiteHtm.staticSetA(siteRequest_, o);
 	}
 	public static JsonObject staticSetA(SiteRequestEnUS siteRequest_, String o) {
 		if(o != null) {
@@ -877,13 +930,13 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 		}
 		return null;
 	}
-	protected SiteHtml aInit() {
+	protected SiteHtm aInit() {
 		Wrap<JsonObject> aWrap = new Wrap<JsonObject>().var("a");
 		if(a == null) {
 			_a(aWrap);
 			setA(aWrap.o);
 		}
-		return (SiteHtml)this;
+		return (SiteHtm)this;
 	}
 
 	public static JsonObject staticSearchA(SiteRequestEnUS siteRequest_, JsonObject o) {
@@ -895,7 +948,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqA(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtml.staticSearchStrA(siteRequest_, SiteHtml.staticSearchA(siteRequest_, SiteHtml.staticSetA(siteRequest_, o)));
+		return SiteHtm.staticSearchStrA(siteRequest_, SiteHtm.staticSearchA(siteRequest_, SiteHtm.staticSetA(siteRequest_, o)));
 	}
 
 	public JsonObject sqlA() {
@@ -915,7 +968,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 
 	/**	<br> The entity text
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtml&fq=entiteVar_enUS_indexed_string:text">Find the entity text in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtm&fq=entiteVar_enUS_indexed_string:text">Find the entity text in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -925,18 +978,18 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 		return text;
 	}
 	public void setText(String o) {
-		this.text = SiteHtml.staticSetText(siteRequest_, o);
+		this.text = SiteHtm.staticSetText(siteRequest_, o);
 	}
 	public static String staticSetText(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	protected SiteHtml textInit() {
+	protected SiteHtm textInit() {
 		Wrap<String> textWrap = new Wrap<String>().var("text");
 		if(text == null) {
 			_text(textWrap);
 			setText(textWrap.o);
 		}
-		return (SiteHtml)this;
+		return (SiteHtm)this;
 	}
 
 	public static String staticSearchText(SiteRequestEnUS siteRequest_, String o) {
@@ -948,7 +1001,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqText(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtml.staticSearchStrText(siteRequest_, SiteHtml.staticSearchText(siteRequest_, SiteHtml.staticSetText(siteRequest_, o)));
+		return SiteHtm.staticSearchStrText(siteRequest_, SiteHtm.staticSearchText(siteRequest_, SiteHtm.staticSetText(siteRequest_, o)));
 	}
 
 	public String sqlText() {
@@ -968,7 +1021,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 
 	/**	<br> The entity tabs
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtml&fq=entiteVar_enUS_indexed_string:tabs">Find the entity tabs in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtm&fq=entiteVar_enUS_indexed_string:tabs">Find the entity tabs in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -978,18 +1031,18 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 		return tabs;
 	}
 	public void setTabs(String o) {
-		this.tabs = SiteHtml.staticSetTabs(siteRequest_, o);
+		this.tabs = SiteHtm.staticSetTabs(siteRequest_, o);
 	}
 	public static String staticSetTabs(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	protected SiteHtml tabsInit() {
+	protected SiteHtm tabsInit() {
 		Wrap<String> tabsWrap = new Wrap<String>().var("tabs");
 		if(tabs == null) {
 			_tabs(tabsWrap);
 			setTabs(tabsWrap.o);
 		}
-		return (SiteHtml)this;
+		return (SiteHtm)this;
 	}
 
 	public static String staticSearchTabs(SiteRequestEnUS siteRequest_, String o) {
@@ -1001,170 +1054,170 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqTabs(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtml.staticSearchStrTabs(siteRequest_, SiteHtml.staticSearchTabs(siteRequest_, SiteHtml.staticSetTabs(siteRequest_, o)));
+		return SiteHtm.staticSearchStrTabs(siteRequest_, SiteHtm.staticSearchTabs(siteRequest_, SiteHtm.staticSetTabs(siteRequest_, o)));
 	}
 
 	public String sqlTabs() {
 		return tabs;
 	}
 
-	////////////////
-	// htmlBefore //
-	////////////////
+	///////////////
+	// htmBefore //
+	///////////////
 
-	/**	 The entity htmlBefore
+	/**	 The entity htmBefore
 	 *	 is defined as null before being initialized. 
 	 */
 	@JsonProperty
 	@JsonInclude(Include.NON_NULL)
-	protected String htmlBefore;
+	protected String htmBefore;
 
-	/**	<br> The entity htmlBefore
+	/**	<br> The entity htmBefore
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtml&fq=entiteVar_enUS_indexed_string:htmlBefore">Find the entity htmlBefore in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtm&fq=entiteVar_enUS_indexed_string:htmBefore">Find the entity htmBefore in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected abstract void _htmlBefore(Wrap<String> w);
+	protected abstract void _htmBefore(Wrap<String> w);
 
-	public String getHtmlBefore() {
-		return htmlBefore;
+	public String getHtmBefore() {
+		return htmBefore;
 	}
-	public void setHtmlBefore(String o) {
-		this.htmlBefore = SiteHtml.staticSetHtmlBefore(siteRequest_, o);
+	public void setHtmBefore(String o) {
+		this.htmBefore = SiteHtm.staticSetHtmBefore(siteRequest_, o);
 	}
-	public static String staticSetHtmlBefore(SiteRequestEnUS siteRequest_, String o) {
+	public static String staticSetHtmBefore(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	protected SiteHtml htmlBeforeInit() {
-		Wrap<String> htmlBeforeWrap = new Wrap<String>().var("htmlBefore");
-		if(htmlBefore == null) {
-			_htmlBefore(htmlBeforeWrap);
-			setHtmlBefore(htmlBeforeWrap.o);
+	protected SiteHtm htmBeforeInit() {
+		Wrap<String> htmBeforeWrap = new Wrap<String>().var("htmBefore");
+		if(htmBefore == null) {
+			_htmBefore(htmBeforeWrap);
+			setHtmBefore(htmBeforeWrap.o);
 		}
-		return (SiteHtml)this;
+		return (SiteHtm)this;
 	}
 
-	public static String staticSearchHtmlBefore(SiteRequestEnUS siteRequest_, String o) {
+	public static String staticSearchHtmBefore(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
 
-	public static String staticSearchStrHtmlBefore(SiteRequestEnUS siteRequest_, String o) {
+	public static String staticSearchStrHtmBefore(SiteRequestEnUS siteRequest_, String o) {
 		return o == null ? null : o.toString();
 	}
 
-	public static String staticSearchFqHtmlBefore(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtml.staticSearchStrHtmlBefore(siteRequest_, SiteHtml.staticSearchHtmlBefore(siteRequest_, SiteHtml.staticSetHtmlBefore(siteRequest_, o)));
+	public static String staticSearchFqHtmBefore(SiteRequestEnUS siteRequest_, String o) {
+		return SiteHtm.staticSearchStrHtmBefore(siteRequest_, SiteHtm.staticSearchHtmBefore(siteRequest_, SiteHtm.staticSetHtmBefore(siteRequest_, o)));
 	}
 
-	public String sqlHtmlBefore() {
-		return htmlBefore;
-	}
-
-	////////////////
-	// htmlMiddle //
-	////////////////
-
-	/**	 The entity htmlMiddle
-	 *	 is defined as null before being initialized. 
-	 */
-	@JsonProperty
-	@JsonInclude(Include.NON_NULL)
-	protected String htmlMiddle;
-
-	/**	<br> The entity htmlMiddle
-	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtml&fq=entiteVar_enUS_indexed_string:htmlMiddle">Find the entity htmlMiddle in Solr</a>
-	 * <br>
-	 * @param w is for wrapping a value to assign to this entity during initialization. 
-	 **/
-	protected abstract void _htmlMiddle(Wrap<String> w);
-
-	public String getHtmlMiddle() {
-		return htmlMiddle;
-	}
-	public void setHtmlMiddle(String o) {
-		this.htmlMiddle = SiteHtml.staticSetHtmlMiddle(siteRequest_, o);
-	}
-	public static String staticSetHtmlMiddle(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-	protected SiteHtml htmlMiddleInit() {
-		Wrap<String> htmlMiddleWrap = new Wrap<String>().var("htmlMiddle");
-		if(htmlMiddle == null) {
-			_htmlMiddle(htmlMiddleWrap);
-			setHtmlMiddle(htmlMiddleWrap.o);
-		}
-		return (SiteHtml)this;
-	}
-
-	public static String staticSearchHtmlMiddle(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-
-	public static String staticSearchStrHtmlMiddle(SiteRequestEnUS siteRequest_, String o) {
-		return o == null ? null : o.toString();
-	}
-
-	public static String staticSearchFqHtmlMiddle(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtml.staticSearchStrHtmlMiddle(siteRequest_, SiteHtml.staticSearchHtmlMiddle(siteRequest_, SiteHtml.staticSetHtmlMiddle(siteRequest_, o)));
-	}
-
-	public String sqlHtmlMiddle() {
-		return htmlMiddle;
+	public String sqlHtmBefore() {
+		return htmBefore;
 	}
 
 	///////////////
-	// htmlAfter //
+	// htmMiddle //
 	///////////////
 
-	/**	 The entity htmlAfter
+	/**	 The entity htmMiddle
 	 *	 is defined as null before being initialized. 
 	 */
 	@JsonProperty
 	@JsonInclude(Include.NON_NULL)
-	protected String htmlAfter;
+	protected String htmMiddle;
 
-	/**	<br> The entity htmlAfter
+	/**	<br> The entity htmMiddle
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtml&fq=entiteVar_enUS_indexed_string:htmlAfter">Find the entity htmlAfter in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtm&fq=entiteVar_enUS_indexed_string:htmMiddle">Find the entity htmMiddle in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected abstract void _htmlAfter(Wrap<String> w);
+	protected abstract void _htmMiddle(Wrap<String> w);
 
-	public String getHtmlAfter() {
-		return htmlAfter;
+	public String getHtmMiddle() {
+		return htmMiddle;
 	}
-	public void setHtmlAfter(String o) {
-		this.htmlAfter = SiteHtml.staticSetHtmlAfter(siteRequest_, o);
+	public void setHtmMiddle(String o) {
+		this.htmMiddle = SiteHtm.staticSetHtmMiddle(siteRequest_, o);
 	}
-	public static String staticSetHtmlAfter(SiteRequestEnUS siteRequest_, String o) {
+	public static String staticSetHtmMiddle(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	protected SiteHtml htmlAfterInit() {
-		Wrap<String> htmlAfterWrap = new Wrap<String>().var("htmlAfter");
-		if(htmlAfter == null) {
-			_htmlAfter(htmlAfterWrap);
-			setHtmlAfter(htmlAfterWrap.o);
+	protected SiteHtm htmMiddleInit() {
+		Wrap<String> htmMiddleWrap = new Wrap<String>().var("htmMiddle");
+		if(htmMiddle == null) {
+			_htmMiddle(htmMiddleWrap);
+			setHtmMiddle(htmMiddleWrap.o);
 		}
-		return (SiteHtml)this;
+		return (SiteHtm)this;
 	}
 
-	public static String staticSearchHtmlAfter(SiteRequestEnUS siteRequest_, String o) {
+	public static String staticSearchHtmMiddle(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
 
-	public static String staticSearchStrHtmlAfter(SiteRequestEnUS siteRequest_, String o) {
+	public static String staticSearchStrHtmMiddle(SiteRequestEnUS siteRequest_, String o) {
 		return o == null ? null : o.toString();
 	}
 
-	public static String staticSearchFqHtmlAfter(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtml.staticSearchStrHtmlAfter(siteRequest_, SiteHtml.staticSearchHtmlAfter(siteRequest_, SiteHtml.staticSetHtmlAfter(siteRequest_, o)));
+	public static String staticSearchFqHtmMiddle(SiteRequestEnUS siteRequest_, String o) {
+		return SiteHtm.staticSearchStrHtmMiddle(siteRequest_, SiteHtm.staticSearchHtmMiddle(siteRequest_, SiteHtm.staticSetHtmMiddle(siteRequest_, o)));
 	}
 
-	public String sqlHtmlAfter() {
-		return htmlAfter;
+	public String sqlHtmMiddle() {
+		return htmMiddle;
+	}
+
+	//////////////
+	// htmAfter //
+	//////////////
+
+	/**	 The entity htmAfter
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String htmAfter;
+
+	/**	<br> The entity htmAfter
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtm&fq=entiteVar_enUS_indexed_string:htmAfter">Find the entity htmAfter in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _htmAfter(Wrap<String> w);
+
+	public String getHtmAfter() {
+		return htmAfter;
+	}
+	public void setHtmAfter(String o) {
+		this.htmAfter = SiteHtm.staticSetHtmAfter(siteRequest_, o);
+	}
+	public static String staticSetHtmAfter(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected SiteHtm htmAfterInit() {
+		Wrap<String> htmAfterWrap = new Wrap<String>().var("htmAfter");
+		if(htmAfter == null) {
+			_htmAfter(htmAfterWrap);
+			setHtmAfter(htmAfterWrap.o);
+		}
+		return (SiteHtm)this;
+	}
+
+	public static String staticSearchHtmAfter(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrHtmAfter(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqHtmAfter(SiteRequestEnUS siteRequest_, String o) {
+		return SiteHtm.staticSearchStrHtmAfter(siteRequest_, SiteHtm.staticSearchHtmAfter(siteRequest_, SiteHtm.staticSetHtmAfter(siteRequest_, o)));
+	}
+
+	public String sqlHtmAfter() {
+		return htmAfter;
 	}
 
 	////////////////////////
@@ -1180,7 +1233,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 
 	/**	<br> The entity classCanonicalName
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtml&fq=entiteVar_enUS_indexed_string:classCanonicalName">Find the entity classCanonicalName in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtm&fq=entiteVar_enUS_indexed_string:classCanonicalName">Find the entity classCanonicalName in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -1190,18 +1243,18 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 		return classCanonicalName;
 	}
 	public void setClassCanonicalName(String o) {
-		this.classCanonicalName = SiteHtml.staticSetClassCanonicalName(siteRequest_, o);
+		this.classCanonicalName = SiteHtm.staticSetClassCanonicalName(siteRequest_, o);
 	}
 	public static String staticSetClassCanonicalName(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	protected SiteHtml classCanonicalNameInit() {
+	protected SiteHtm classCanonicalNameInit() {
 		Wrap<String> classCanonicalNameWrap = new Wrap<String>().var("classCanonicalName");
 		if(classCanonicalName == null) {
 			_classCanonicalName(classCanonicalNameWrap);
 			setClassCanonicalName(classCanonicalNameWrap.o);
 		}
-		return (SiteHtml)this;
+		return (SiteHtm)this;
 	}
 
 	public static String staticSearchClassCanonicalName(SiteRequestEnUS siteRequest_, String o) {
@@ -1213,7 +1266,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqClassCanonicalName(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtml.staticSearchStrClassCanonicalName(siteRequest_, SiteHtml.staticSearchClassCanonicalName(siteRequest_, SiteHtml.staticSetClassCanonicalName(siteRequest_, o)));
+		return SiteHtm.staticSearchStrClassCanonicalName(siteRequest_, SiteHtm.staticSearchClassCanonicalName(siteRequest_, SiteHtm.staticSetClassCanonicalName(siteRequest_, o)));
 	}
 
 	/////////////////////
@@ -1229,7 +1282,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 
 	/**	<br> The entity classSimpleName
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtml&fq=entiteVar_enUS_indexed_string:classSimpleName">Find the entity classSimpleName in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtm&fq=entiteVar_enUS_indexed_string:classSimpleName">Find the entity classSimpleName in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -1239,18 +1292,18 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 		return classSimpleName;
 	}
 	public void setClassSimpleName(String o) {
-		this.classSimpleName = SiteHtml.staticSetClassSimpleName(siteRequest_, o);
+		this.classSimpleName = SiteHtm.staticSetClassSimpleName(siteRequest_, o);
 	}
 	public static String staticSetClassSimpleName(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	protected SiteHtml classSimpleNameInit() {
+	protected SiteHtm classSimpleNameInit() {
 		Wrap<String> classSimpleNameWrap = new Wrap<String>().var("classSimpleName");
 		if(classSimpleName == null) {
 			_classSimpleName(classSimpleNameWrap);
 			setClassSimpleName(classSimpleNameWrap.o);
 		}
-		return (SiteHtml)this;
+		return (SiteHtm)this;
 	}
 
 	public static String staticSearchClassSimpleName(SiteRequestEnUS siteRequest_, String o) {
@@ -1262,7 +1315,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqClassSimpleName(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtml.staticSearchStrClassSimpleName(siteRequest_, SiteHtml.staticSearchClassSimpleName(siteRequest_, SiteHtml.staticSetClassSimpleName(siteRequest_, o)));
+		return SiteHtm.staticSearchStrClassSimpleName(siteRequest_, SiteHtm.staticSearchClassSimpleName(siteRequest_, SiteHtm.staticSetClassSimpleName(siteRequest_, o)));
 	}
 
 	/////////////////////////
@@ -1279,7 +1332,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 
 	/**	<br> The entity classCanonicalNames
 	 *  It is constructed before being initialized with the constructor by default. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtml&fq=entiteVar_enUS_indexed_string:classCanonicalNames">Find the entity classCanonicalNames in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtm&fq=entiteVar_enUS_indexed_string:classCanonicalNames">Find the entity classCanonicalNames in Solr</a>
 	 * <br>
 	 * @param l is the entity already constructed. 
 	 **/
@@ -1295,16 +1348,16 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	public static String staticSetClassCanonicalNames(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	public SiteHtml addClassCanonicalNames(String...objets) {
+	public SiteHtm addClassCanonicalNames(String...objets) {
 		for(String o : objets) {
 			addClassCanonicalNames(o);
 		}
-		return (SiteHtml)this;
+		return (SiteHtm)this;
 	}
-	public SiteHtml addClassCanonicalNames(String o) {
+	public SiteHtm addClassCanonicalNames(String o) {
 		if(o != null)
 			this.classCanonicalNames.add(o);
-		return (SiteHtml)this;
+		return (SiteHtm)this;
 	}
 	@JsonIgnore
 	public void setClassCanonicalNames(JsonArray objets) {
@@ -1314,9 +1367,9 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 			addClassCanonicalNames(o);
 		}
 	}
-	protected SiteHtml classCanonicalNamesInit() {
+	protected SiteHtm classCanonicalNamesInit() {
 		_classCanonicalNames(classCanonicalNames);
-		return (SiteHtml)this;
+		return (SiteHtm)this;
 	}
 
 	public static String staticSearchClassCanonicalNames(SiteRequestEnUS siteRequest_, String o) {
@@ -1328,7 +1381,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqClassCanonicalNames(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtml.staticSearchStrClassCanonicalNames(siteRequest_, SiteHtml.staticSearchClassCanonicalNames(siteRequest_, SiteHtml.staticSetClassCanonicalNames(siteRequest_, o)));
+		return SiteHtm.staticSearchStrClassCanonicalNames(siteRequest_, SiteHtm.staticSearchClassCanonicalNames(siteRequest_, SiteHtm.staticSetClassCanonicalNames(siteRequest_, o)));
 	}
 
 	/////////////////
@@ -1344,7 +1397,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 
 	/**	<br> The entity objectTitle
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtml&fq=entiteVar_enUS_indexed_string:objectTitle">Find the entity objectTitle in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtm&fq=entiteVar_enUS_indexed_string:objectTitle">Find the entity objectTitle in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -1354,18 +1407,18 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 		return objectTitle;
 	}
 	public void setObjectTitle(String o) {
-		this.objectTitle = SiteHtml.staticSetObjectTitle(siteRequest_, o);
+		this.objectTitle = SiteHtm.staticSetObjectTitle(siteRequest_, o);
 	}
 	public static String staticSetObjectTitle(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	protected SiteHtml objectTitleInit() {
+	protected SiteHtm objectTitleInit() {
 		Wrap<String> objectTitleWrap = new Wrap<String>().var("objectTitle");
 		if(objectTitle == null) {
 			_objectTitle(objectTitleWrap);
 			setObjectTitle(objectTitleWrap.o);
 		}
-		return (SiteHtml)this;
+		return (SiteHtm)this;
 	}
 
 	public static String staticSearchObjectTitle(SiteRequestEnUS siteRequest_, String o) {
@@ -1377,7 +1430,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqObjectTitle(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtml.staticSearchStrObjectTitle(siteRequest_, SiteHtml.staticSearchObjectTitle(siteRequest_, SiteHtml.staticSetObjectTitle(siteRequest_, o)));
+		return SiteHtm.staticSearchStrObjectTitle(siteRequest_, SiteHtm.staticSearchObjectTitle(siteRequest_, SiteHtm.staticSetObjectTitle(siteRequest_, o)));
 	}
 
 	//////////////
@@ -1393,7 +1446,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 
 	/**	<br> The entity objectId
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtml&fq=entiteVar_enUS_indexed_string:objectId">Find the entity objectId in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtm&fq=entiteVar_enUS_indexed_string:objectId">Find the entity objectId in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -1403,18 +1456,18 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 		return objectId;
 	}
 	public void setObjectId(String o) {
-		this.objectId = SiteHtml.staticSetObjectId(siteRequest_, o);
+		this.objectId = SiteHtm.staticSetObjectId(siteRequest_, o);
 	}
 	public static String staticSetObjectId(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	protected SiteHtml objectIdInit() {
+	protected SiteHtm objectIdInit() {
 		Wrap<String> objectIdWrap = new Wrap<String>().var("objectId");
 		if(objectId == null) {
 			_objectId(objectIdWrap);
 			setObjectId(objectIdWrap.o);
 		}
-		return (SiteHtml)this;
+		return (SiteHtm)this;
 	}
 
 	public static String staticSearchObjectId(SiteRequestEnUS siteRequest_, String o) {
@@ -1426,7 +1479,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqObjectId(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtml.staticSearchStrObjectId(siteRequest_, SiteHtml.staticSearchObjectId(siteRequest_, SiteHtml.staticSetObjectId(siteRequest_, o)));
+		return SiteHtm.staticSearchStrObjectId(siteRequest_, SiteHtm.staticSearchObjectId(siteRequest_, SiteHtm.staticSetObjectId(siteRequest_, o)));
 	}
 
 	public String sqlObjectId() {
@@ -1446,7 +1499,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 
 	/**	<br> The entity objectNameVar
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtml&fq=entiteVar_enUS_indexed_string:objectNameVar">Find the entity objectNameVar in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtm&fq=entiteVar_enUS_indexed_string:objectNameVar">Find the entity objectNameVar in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -1456,18 +1509,18 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 		return objectNameVar;
 	}
 	public void setObjectNameVar(String o) {
-		this.objectNameVar = SiteHtml.staticSetObjectNameVar(siteRequest_, o);
+		this.objectNameVar = SiteHtm.staticSetObjectNameVar(siteRequest_, o);
 	}
 	public static String staticSetObjectNameVar(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	protected SiteHtml objectNameVarInit() {
+	protected SiteHtm objectNameVarInit() {
 		Wrap<String> objectNameVarWrap = new Wrap<String>().var("objectNameVar");
 		if(objectNameVar == null) {
 			_objectNameVar(objectNameVarWrap);
 			setObjectNameVar(objectNameVarWrap.o);
 		}
-		return (SiteHtml)this;
+		return (SiteHtm)this;
 	}
 
 	public static String staticSearchObjectNameVar(SiteRequestEnUS siteRequest_, String o) {
@@ -1479,7 +1532,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqObjectNameVar(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtml.staticSearchStrObjectNameVar(siteRequest_, SiteHtml.staticSearchObjectNameVar(siteRequest_, SiteHtml.staticSetObjectNameVar(siteRequest_, o)));
+		return SiteHtm.staticSearchStrObjectNameVar(siteRequest_, SiteHtm.staticSearchObjectNameVar(siteRequest_, SiteHtm.staticSetObjectNameVar(siteRequest_, o)));
 	}
 
 	///////////////////
@@ -1495,7 +1548,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 
 	/**	<br> The entity objectSuggest
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtml&fq=entiteVar_enUS_indexed_string:objectSuggest">Find the entity objectSuggest in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtm&fq=entiteVar_enUS_indexed_string:objectSuggest">Find the entity objectSuggest in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -1505,18 +1558,18 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 		return objectSuggest;
 	}
 	public void setObjectSuggest(String o) {
-		this.objectSuggest = SiteHtml.staticSetObjectSuggest(siteRequest_, o);
+		this.objectSuggest = SiteHtm.staticSetObjectSuggest(siteRequest_, o);
 	}
 	public static String staticSetObjectSuggest(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	protected SiteHtml objectSuggestInit() {
+	protected SiteHtm objectSuggestInit() {
 		Wrap<String> objectSuggestWrap = new Wrap<String>().var("objectSuggest");
 		if(objectSuggest == null) {
 			_objectSuggest(objectSuggestWrap);
 			setObjectSuggest(objectSuggestWrap.o);
 		}
-		return (SiteHtml)this;
+		return (SiteHtm)this;
 	}
 
 	public static String staticSearchObjectSuggest(SiteRequestEnUS siteRequest_, String o) {
@@ -1528,7 +1581,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqObjectSuggest(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtml.staticSearchStrObjectSuggest(siteRequest_, SiteHtml.staticSearchObjectSuggest(siteRequest_, SiteHtml.staticSetObjectSuggest(siteRequest_, o)));
+		return SiteHtm.staticSearchStrObjectSuggest(siteRequest_, SiteHtm.staticSearchObjectSuggest(siteRequest_, SiteHtm.staticSetObjectSuggest(siteRequest_, o)));
 	}
 
 	////////////////
@@ -1544,7 +1597,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 
 	/**	<br> The entity objectText
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtml&fq=entiteVar_enUS_indexed_string:objectText">Find the entity objectText in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtm&fq=entiteVar_enUS_indexed_string:objectText">Find the entity objectText in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -1554,18 +1607,18 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 		return objectText;
 	}
 	public void setObjectText(String o) {
-		this.objectText = SiteHtml.staticSetObjectText(siteRequest_, o);
+		this.objectText = SiteHtm.staticSetObjectText(siteRequest_, o);
 	}
 	public static String staticSetObjectText(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	protected SiteHtml objectTextInit() {
+	protected SiteHtm objectTextInit() {
 		Wrap<String> objectTextWrap = new Wrap<String>().var("objectText");
 		if(objectText == null) {
 			_objectText(objectTextWrap);
 			setObjectText(objectTextWrap.o);
 		}
-		return (SiteHtml)this;
+		return (SiteHtm)this;
 	}
 
 	public static String staticSearchObjectText(SiteRequestEnUS siteRequest_, String o) {
@@ -1577,7 +1630,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqObjectText(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtml.staticSearchStrObjectText(siteRequest_, SiteHtml.staticSearchObjectText(siteRequest_, SiteHtml.staticSetObjectText(siteRequest_, o)));
+		return SiteHtm.staticSearchStrObjectText(siteRequest_, SiteHtm.staticSearchObjectText(siteRequest_, SiteHtm.staticSetObjectText(siteRequest_, o)));
 	}
 
 	///////////////
@@ -1593,7 +1646,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 
 	/**	<br> The entity pageUrlId
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtml&fq=entiteVar_enUS_indexed_string:pageUrlId">Find the entity pageUrlId in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtm&fq=entiteVar_enUS_indexed_string:pageUrlId">Find the entity pageUrlId in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -1603,18 +1656,18 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 		return pageUrlId;
 	}
 	public void setPageUrlId(String o) {
-		this.pageUrlId = SiteHtml.staticSetPageUrlId(siteRequest_, o);
+		this.pageUrlId = SiteHtm.staticSetPageUrlId(siteRequest_, o);
 	}
 	public static String staticSetPageUrlId(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	protected SiteHtml pageUrlIdInit() {
+	protected SiteHtm pageUrlIdInit() {
 		Wrap<String> pageUrlIdWrap = new Wrap<String>().var("pageUrlId");
 		if(pageUrlId == null) {
 			_pageUrlId(pageUrlIdWrap);
 			setPageUrlId(pageUrlIdWrap.o);
 		}
-		return (SiteHtml)this;
+		return (SiteHtm)this;
 	}
 
 	public static String staticSearchPageUrlId(SiteRequestEnUS siteRequest_, String o) {
@@ -1626,7 +1679,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqPageUrlId(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtml.staticSearchStrPageUrlId(siteRequest_, SiteHtml.staticSearchPageUrlId(siteRequest_, SiteHtml.staticSetPageUrlId(siteRequest_, o)));
+		return SiteHtm.staticSearchStrPageUrlId(siteRequest_, SiteHtm.staticSearchPageUrlId(siteRequest_, SiteHtm.staticSetPageUrlId(siteRequest_, o)));
 	}
 
 	///////////////
@@ -1642,7 +1695,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 
 	/**	<br> The entity pageUrlPk
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtml&fq=entiteVar_enUS_indexed_string:pageUrlPk">Find the entity pageUrlPk in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtm&fq=entiteVar_enUS_indexed_string:pageUrlPk">Find the entity pageUrlPk in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -1652,18 +1705,18 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 		return pageUrlPk;
 	}
 	public void setPageUrlPk(String o) {
-		this.pageUrlPk = SiteHtml.staticSetPageUrlPk(siteRequest_, o);
+		this.pageUrlPk = SiteHtm.staticSetPageUrlPk(siteRequest_, o);
 	}
 	public static String staticSetPageUrlPk(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	protected SiteHtml pageUrlPkInit() {
+	protected SiteHtm pageUrlPkInit() {
 		Wrap<String> pageUrlPkWrap = new Wrap<String>().var("pageUrlPk");
 		if(pageUrlPk == null) {
 			_pageUrlPk(pageUrlPkWrap);
 			setPageUrlPk(pageUrlPkWrap.o);
 		}
-		return (SiteHtml)this;
+		return (SiteHtm)this;
 	}
 
 	public static String staticSearchPageUrlPk(SiteRequestEnUS siteRequest_, String o) {
@@ -1675,7 +1728,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqPageUrlPk(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtml.staticSearchStrPageUrlPk(siteRequest_, SiteHtml.staticSearchPageUrlPk(siteRequest_, SiteHtml.staticSetPageUrlPk(siteRequest_, o)));
+		return SiteHtm.staticSearchStrPageUrlPk(siteRequest_, SiteHtm.staticSearchPageUrlPk(siteRequest_, SiteHtm.staticSetPageUrlPk(siteRequest_, o)));
 	}
 
 	////////////////
@@ -1691,7 +1744,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 
 	/**	<br> The entity pageUrlApi
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtml&fq=entiteVar_enUS_indexed_string:pageUrlApi">Find the entity pageUrlApi in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtm&fq=entiteVar_enUS_indexed_string:pageUrlApi">Find the entity pageUrlApi in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -1701,18 +1754,18 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 		return pageUrlApi;
 	}
 	public void setPageUrlApi(String o) {
-		this.pageUrlApi = SiteHtml.staticSetPageUrlApi(siteRequest_, o);
+		this.pageUrlApi = SiteHtm.staticSetPageUrlApi(siteRequest_, o);
 	}
 	public static String staticSetPageUrlApi(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	protected SiteHtml pageUrlApiInit() {
+	protected SiteHtm pageUrlApiInit() {
 		Wrap<String> pageUrlApiWrap = new Wrap<String>().var("pageUrlApi");
 		if(pageUrlApi == null) {
 			_pageUrlApi(pageUrlApiWrap);
 			setPageUrlApi(pageUrlApiWrap.o);
 		}
-		return (SiteHtml)this;
+		return (SiteHtm)this;
 	}
 
 	public static String staticSearchPageUrlApi(SiteRequestEnUS siteRequest_, String o) {
@@ -1724,7 +1777,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqPageUrlApi(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtml.staticSearchStrPageUrlApi(siteRequest_, SiteHtml.staticSearchPageUrlApi(siteRequest_, SiteHtml.staticSetPageUrlApi(siteRequest_, o)));
+		return SiteHtm.staticSearchStrPageUrlApi(siteRequest_, SiteHtm.staticSearchPageUrlApi(siteRequest_, SiteHtm.staticSetPageUrlApi(siteRequest_, o)));
 	}
 
 	////////
@@ -1740,7 +1793,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 
 	/**	<br> The entity id
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtml&fq=entiteVar_enUS_indexed_string:id">Find the entity id in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtm&fq=entiteVar_enUS_indexed_string:id">Find the entity id in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -1750,18 +1803,18 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 		return id;
 	}
 	public void setId(String o) {
-		this.id = SiteHtml.staticSetId(siteRequest_, o);
+		this.id = SiteHtm.staticSetId(siteRequest_, o);
 	}
 	public static String staticSetId(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	protected SiteHtml idInit() {
+	protected SiteHtm idInit() {
 		Wrap<String> idWrap = new Wrap<String>().var("id");
 		if(id == null) {
 			_id(idWrap);
 			setId(idWrap.o);
 		}
-		return (SiteHtml)this;
+		return (SiteHtm)this;
 	}
 
 	public static String staticSearchId(SiteRequestEnUS siteRequest_, String o) {
@@ -1773,22 +1826,22 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqId(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtml.staticSearchStrId(siteRequest_, SiteHtml.staticSearchId(siteRequest_, SiteHtml.staticSetId(siteRequest_, o)));
+		return SiteHtm.staticSearchStrId(siteRequest_, SiteHtm.staticSearchId(siteRequest_, SiteHtm.staticSetId(siteRequest_, o)));
 	}
 
 	//////////////
 	// initDeep //
 	//////////////
 
-	public Future<Void> promiseDeepSiteHtml(SiteRequestEnUS siteRequest_) {
+	public Future<Void> promiseDeepSiteHtm(SiteRequestEnUS siteRequest_) {
 		setSiteRequest_(siteRequest_);
-		return promiseDeepSiteHtml();
+		return promiseDeepSiteHtm();
 	}
 
-	public Future<Void> promiseDeepSiteHtml() {
+	public Future<Void> promiseDeepSiteHtm() {
 		Promise<Void> promise = Promise.promise();
 		Promise<Void> promise2 = Promise.promise();
-		promiseSiteHtml(promise2);
+		promiseSiteHtm(promise2);
 		promise2.future().onSuccess(a -> {
 			promise.complete();
 		}).onFailure(ex -> {
@@ -1797,7 +1850,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 		return promise.future();
 	}
 
-	public Future<Void> promiseSiteHtml(Promise<Void> promise) {
+	public Future<Void> promiseSiteHtm(Promise<Void> promise) {
 		Future.future(a -> a.complete()).compose(a -> {
 			Promise<Void> promise2 = Promise.promise();
 			try {
@@ -1824,17 +1877,18 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 				archivedInit();
 				deletedInit();
 				savesInit();
+				uriInit();
 				pageIdInit();
 				sequenceNumInit();
-				htmlGroupInit();
+				htmGroupInit();
 				eBeforeInit();
 				eAfterInit();
 				aInit();
 				textInit();
 				tabsInit();
-				htmlBeforeInit();
-				htmlMiddleInit();
-				htmlAfterInit();
+				htmBeforeInit();
+				htmMiddleInit();
+				htmAfterInit();
 				classCanonicalNameInit();
 				classSimpleNameInit();
 				classCanonicalNamesInit();
@@ -1861,18 +1915,18 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	}
 
 	public Future<Void> promiseDeepForClass(SiteRequestEnUS siteRequest_) {
-		return promiseDeepSiteHtml(siteRequest_);
+		return promiseDeepSiteHtm(siteRequest_);
 	}
 
 	/////////////////
 	// siteRequest //
 	/////////////////
 
-	public void siteRequestSiteHtml(SiteRequestEnUS siteRequest_) {
+	public void siteRequestSiteHtm(SiteRequestEnUS siteRequest_) {
 	}
 
 	public void siteRequestForClass(SiteRequestEnUS siteRequest_) {
-		siteRequestSiteHtml(siteRequest_);
+		siteRequestSiteHtm(siteRequest_);
 	}
 
 	/////////////
@@ -1884,7 +1938,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 		Object o = null;
 		for(String v : vars) {
 			if(o == null)
-				o = obtainSiteHtml(v);
+				o = obtainSiteHtm(v);
 			else if(o instanceof BaseModel) {
 				BaseModel baseModel = (BaseModel)o;
 				o = baseModel.obtainForClass(v);
@@ -1896,71 +1950,73 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 		}
 		return o;
 	}
-	public Object obtainSiteHtml(String var) {
-		SiteHtml oSiteHtml = (SiteHtml)this;
+	public Object obtainSiteHtm(String var) {
+		SiteHtm oSiteHtm = (SiteHtm)this;
 		switch(var) {
 			case "promiseBegin":
-				return oSiteHtml.promiseBegin;
+				return oSiteHtm.promiseBegin;
 			case "siteRequest_":
-				return oSiteHtml.siteRequest_;
+				return oSiteHtm.siteRequest_;
 			case "inheritPk":
-				return oSiteHtml.inheritPk;
+				return oSiteHtm.inheritPk;
 			case "created":
-				return oSiteHtml.created;
+				return oSiteHtm.created;
 			case "modified":
-				return oSiteHtml.modified;
+				return oSiteHtm.modified;
 			case "archived":
-				return oSiteHtml.archived;
+				return oSiteHtm.archived;
 			case "deleted":
-				return oSiteHtml.deleted;
+				return oSiteHtm.deleted;
 			case "saves":
-				return oSiteHtml.saves;
+				return oSiteHtm.saves;
+			case "uri":
+				return oSiteHtm.uri;
 			case "pageId":
-				return oSiteHtml.pageId;
+				return oSiteHtm.pageId;
 			case "sequenceNum":
-				return oSiteHtml.sequenceNum;
-			case "htmlGroup":
-				return oSiteHtml.htmlGroup;
+				return oSiteHtm.sequenceNum;
+			case "htmGroup":
+				return oSiteHtm.htmGroup;
 			case "eBefore":
-				return oSiteHtml.eBefore;
+				return oSiteHtm.eBefore;
 			case "eAfter":
-				return oSiteHtml.eAfter;
+				return oSiteHtm.eAfter;
 			case "a":
-				return oSiteHtml.a;
+				return oSiteHtm.a;
 			case "text":
-				return oSiteHtml.text;
+				return oSiteHtm.text;
 			case "tabs":
-				return oSiteHtml.tabs;
-			case "htmlBefore":
-				return oSiteHtml.htmlBefore;
-			case "htmlMiddle":
-				return oSiteHtml.htmlMiddle;
-			case "htmlAfter":
-				return oSiteHtml.htmlAfter;
+				return oSiteHtm.tabs;
+			case "htmBefore":
+				return oSiteHtm.htmBefore;
+			case "htmMiddle":
+				return oSiteHtm.htmMiddle;
+			case "htmAfter":
+				return oSiteHtm.htmAfter;
 			case "classCanonicalName":
-				return oSiteHtml.classCanonicalName;
+				return oSiteHtm.classCanonicalName;
 			case "classSimpleName":
-				return oSiteHtml.classSimpleName;
+				return oSiteHtm.classSimpleName;
 			case "classCanonicalNames":
-				return oSiteHtml.classCanonicalNames;
+				return oSiteHtm.classCanonicalNames;
 			case "objectTitle":
-				return oSiteHtml.objectTitle;
+				return oSiteHtm.objectTitle;
 			case "objectId":
-				return oSiteHtml.objectId;
+				return oSiteHtm.objectId;
 			case "objectNameVar":
-				return oSiteHtml.objectNameVar;
+				return oSiteHtm.objectNameVar;
 			case "objectSuggest":
-				return oSiteHtml.objectSuggest;
+				return oSiteHtm.objectSuggest;
 			case "objectText":
-				return oSiteHtml.objectText;
+				return oSiteHtm.objectText;
 			case "pageUrlId":
-				return oSiteHtml.pageUrlId;
+				return oSiteHtm.pageUrlId;
 			case "pageUrlPk":
-				return oSiteHtml.pageUrlPk;
+				return oSiteHtm.pageUrlPk;
 			case "pageUrlApi":
-				return oSiteHtml.pageUrlApi;
+				return oSiteHtm.pageUrlApi;
 			case "id":
-				return oSiteHtml.id;
+				return oSiteHtm.id;
 			default:
 				return null;
 		}
@@ -1975,7 +2031,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 		Object o = null;
 		for(String v : vars) {
 			if(o == null)
-				o = relateSiteHtml(v, val);
+				o = relateSiteHtm(v, val);
 			else if(o instanceof BaseModel) {
 				BaseModel baseModel = (BaseModel)o;
 				o = baseModel.relateForClass(v, val);
@@ -1983,8 +2039,8 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 		}
 		return o != null;
 	}
-	public Object relateSiteHtml(String var, Object val) {
-		SiteHtml oSiteHtml = (SiteHtml)this;
+	public Object relateSiteHtm(String var, Object val) {
+		SiteHtm oSiteHtm = (SiteHtm)this;
 		switch(var) {
 			default:
 				return null;
@@ -1996,68 +2052,70 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	///////////////
 
 	public static Object staticSetForClass(String entityVar, SiteRequestEnUS siteRequest_, String o) {
-		return staticSetSiteHtml(entityVar,  siteRequest_, o);
+		return staticSetSiteHtm(entityVar,  siteRequest_, o);
 	}
-	public static Object staticSetSiteHtml(String entityVar, SiteRequestEnUS siteRequest_, String o) {
+	public static Object staticSetSiteHtm(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
 		case "inheritPk":
-			return SiteHtml.staticSetInheritPk(siteRequest_, o);
+			return SiteHtm.staticSetInheritPk(siteRequest_, o);
 		case "created":
-			return SiteHtml.staticSetCreated(siteRequest_, o);
+			return SiteHtm.staticSetCreated(siteRequest_, o);
 		case "modified":
-			return SiteHtml.staticSetModified(siteRequest_, o);
+			return SiteHtm.staticSetModified(siteRequest_, o);
 		case "archived":
-			return SiteHtml.staticSetArchived(siteRequest_, o);
+			return SiteHtm.staticSetArchived(siteRequest_, o);
 		case "deleted":
-			return SiteHtml.staticSetDeleted(siteRequest_, o);
+			return SiteHtm.staticSetDeleted(siteRequest_, o);
 		case "saves":
-			return SiteHtml.staticSetSaves(siteRequest_, o);
+			return SiteHtm.staticSetSaves(siteRequest_, o);
+		case "uri":
+			return SiteHtm.staticSetUri(siteRequest_, o);
 		case "pageId":
-			return SiteHtml.staticSetPageId(siteRequest_, o);
+			return SiteHtm.staticSetPageId(siteRequest_, o);
 		case "sequenceNum":
-			return SiteHtml.staticSetSequenceNum(siteRequest_, o);
-		case "htmlGroup":
-			return SiteHtml.staticSetHtmlGroup(siteRequest_, o);
+			return SiteHtm.staticSetSequenceNum(siteRequest_, o);
+		case "htmGroup":
+			return SiteHtm.staticSetHtmGroup(siteRequest_, o);
 		case "eBefore":
-			return SiteHtml.staticSetEBefore(siteRequest_, o);
+			return SiteHtm.staticSetEBefore(siteRequest_, o);
 		case "eAfter":
-			return SiteHtml.staticSetEAfter(siteRequest_, o);
+			return SiteHtm.staticSetEAfter(siteRequest_, o);
 		case "a":
-			return SiteHtml.staticSetA(siteRequest_, o);
+			return SiteHtm.staticSetA(siteRequest_, o);
 		case "text":
-			return SiteHtml.staticSetText(siteRequest_, o);
+			return SiteHtm.staticSetText(siteRequest_, o);
 		case "tabs":
-			return SiteHtml.staticSetTabs(siteRequest_, o);
-		case "htmlBefore":
-			return SiteHtml.staticSetHtmlBefore(siteRequest_, o);
-		case "htmlMiddle":
-			return SiteHtml.staticSetHtmlMiddle(siteRequest_, o);
-		case "htmlAfter":
-			return SiteHtml.staticSetHtmlAfter(siteRequest_, o);
+			return SiteHtm.staticSetTabs(siteRequest_, o);
+		case "htmBefore":
+			return SiteHtm.staticSetHtmBefore(siteRequest_, o);
+		case "htmMiddle":
+			return SiteHtm.staticSetHtmMiddle(siteRequest_, o);
+		case "htmAfter":
+			return SiteHtm.staticSetHtmAfter(siteRequest_, o);
 		case "classCanonicalName":
-			return SiteHtml.staticSetClassCanonicalName(siteRequest_, o);
+			return SiteHtm.staticSetClassCanonicalName(siteRequest_, o);
 		case "classSimpleName":
-			return SiteHtml.staticSetClassSimpleName(siteRequest_, o);
+			return SiteHtm.staticSetClassSimpleName(siteRequest_, o);
 		case "classCanonicalNames":
-			return SiteHtml.staticSetClassCanonicalNames(siteRequest_, o);
+			return SiteHtm.staticSetClassCanonicalNames(siteRequest_, o);
 		case "objectTitle":
-			return SiteHtml.staticSetObjectTitle(siteRequest_, o);
+			return SiteHtm.staticSetObjectTitle(siteRequest_, o);
 		case "objectId":
-			return SiteHtml.staticSetObjectId(siteRequest_, o);
+			return SiteHtm.staticSetObjectId(siteRequest_, o);
 		case "objectNameVar":
-			return SiteHtml.staticSetObjectNameVar(siteRequest_, o);
+			return SiteHtm.staticSetObjectNameVar(siteRequest_, o);
 		case "objectSuggest":
-			return SiteHtml.staticSetObjectSuggest(siteRequest_, o);
+			return SiteHtm.staticSetObjectSuggest(siteRequest_, o);
 		case "objectText":
-			return SiteHtml.staticSetObjectText(siteRequest_, o);
+			return SiteHtm.staticSetObjectText(siteRequest_, o);
 		case "pageUrlId":
-			return SiteHtml.staticSetPageUrlId(siteRequest_, o);
+			return SiteHtm.staticSetPageUrlId(siteRequest_, o);
 		case "pageUrlPk":
-			return SiteHtml.staticSetPageUrlPk(siteRequest_, o);
+			return SiteHtm.staticSetPageUrlPk(siteRequest_, o);
 		case "pageUrlApi":
-			return SiteHtml.staticSetPageUrlApi(siteRequest_, o);
+			return SiteHtm.staticSetPageUrlApi(siteRequest_, o);
 		case "id":
-			return SiteHtml.staticSetId(siteRequest_, o);
+			return SiteHtm.staticSetId(siteRequest_, o);
 			default:
 				return null;
 		}
@@ -2068,68 +2126,70 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	////////////////
 
 	public static Object staticSearchForClass(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
-		return staticSearchSiteHtml(entityVar,  siteRequest_, o);
+		return staticSearchSiteHtm(entityVar,  siteRequest_, o);
 	}
-	public static Object staticSearchSiteHtml(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
+	public static Object staticSearchSiteHtm(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
 		case "inheritPk":
-			return SiteHtml.staticSearchInheritPk(siteRequest_, (String)o);
+			return SiteHtm.staticSearchInheritPk(siteRequest_, (String)o);
 		case "created":
-			return SiteHtml.staticSearchCreated(siteRequest_, (ZonedDateTime)o);
+			return SiteHtm.staticSearchCreated(siteRequest_, (ZonedDateTime)o);
 		case "modified":
-			return SiteHtml.staticSearchModified(siteRequest_, (ZonedDateTime)o);
+			return SiteHtm.staticSearchModified(siteRequest_, (ZonedDateTime)o);
 		case "archived":
-			return SiteHtml.staticSearchArchived(siteRequest_, (Boolean)o);
+			return SiteHtm.staticSearchArchived(siteRequest_, (Boolean)o);
 		case "deleted":
-			return SiteHtml.staticSearchDeleted(siteRequest_, (Boolean)o);
+			return SiteHtm.staticSearchDeleted(siteRequest_, (Boolean)o);
 		case "saves":
-			return SiteHtml.staticSearchSaves(siteRequest_, (String)o);
+			return SiteHtm.staticSearchSaves(siteRequest_, (String)o);
+		case "uri":
+			return SiteHtm.staticSearchUri(siteRequest_, (String)o);
 		case "pageId":
-			return SiteHtml.staticSearchPageId(siteRequest_, (String)o);
+			return SiteHtm.staticSearchPageId(siteRequest_, (String)o);
 		case "sequenceNum":
-			return SiteHtml.staticSearchSequenceNum(siteRequest_, (Long)o);
-		case "htmlGroup":
-			return SiteHtml.staticSearchHtmlGroup(siteRequest_, (String)o);
+			return SiteHtm.staticSearchSequenceNum(siteRequest_, (Long)o);
+		case "htmGroup":
+			return SiteHtm.staticSearchHtmGroup(siteRequest_, (String)o);
 		case "eBefore":
-			return SiteHtml.staticSearchEBefore(siteRequest_, (String)o);
+			return SiteHtm.staticSearchEBefore(siteRequest_, (String)o);
 		case "eAfter":
-			return SiteHtml.staticSearchEAfter(siteRequest_, (String)o);
+			return SiteHtm.staticSearchEAfter(siteRequest_, (String)o);
 		case "a":
-			return SiteHtml.staticSearchA(siteRequest_, (JsonObject)o);
+			return SiteHtm.staticSearchA(siteRequest_, (JsonObject)o);
 		case "text":
-			return SiteHtml.staticSearchText(siteRequest_, (String)o);
+			return SiteHtm.staticSearchText(siteRequest_, (String)o);
 		case "tabs":
-			return SiteHtml.staticSearchTabs(siteRequest_, (String)o);
-		case "htmlBefore":
-			return SiteHtml.staticSearchHtmlBefore(siteRequest_, (String)o);
-		case "htmlMiddle":
-			return SiteHtml.staticSearchHtmlMiddle(siteRequest_, (String)o);
-		case "htmlAfter":
-			return SiteHtml.staticSearchHtmlAfter(siteRequest_, (String)o);
+			return SiteHtm.staticSearchTabs(siteRequest_, (String)o);
+		case "htmBefore":
+			return SiteHtm.staticSearchHtmBefore(siteRequest_, (String)o);
+		case "htmMiddle":
+			return SiteHtm.staticSearchHtmMiddle(siteRequest_, (String)o);
+		case "htmAfter":
+			return SiteHtm.staticSearchHtmAfter(siteRequest_, (String)o);
 		case "classCanonicalName":
-			return SiteHtml.staticSearchClassCanonicalName(siteRequest_, (String)o);
+			return SiteHtm.staticSearchClassCanonicalName(siteRequest_, (String)o);
 		case "classSimpleName":
-			return SiteHtml.staticSearchClassSimpleName(siteRequest_, (String)o);
+			return SiteHtm.staticSearchClassSimpleName(siteRequest_, (String)o);
 		case "classCanonicalNames":
-			return SiteHtml.staticSearchClassCanonicalNames(siteRequest_, (String)o);
+			return SiteHtm.staticSearchClassCanonicalNames(siteRequest_, (String)o);
 		case "objectTitle":
-			return SiteHtml.staticSearchObjectTitle(siteRequest_, (String)o);
+			return SiteHtm.staticSearchObjectTitle(siteRequest_, (String)o);
 		case "objectId":
-			return SiteHtml.staticSearchObjectId(siteRequest_, (String)o);
+			return SiteHtm.staticSearchObjectId(siteRequest_, (String)o);
 		case "objectNameVar":
-			return SiteHtml.staticSearchObjectNameVar(siteRequest_, (String)o);
+			return SiteHtm.staticSearchObjectNameVar(siteRequest_, (String)o);
 		case "objectSuggest":
-			return SiteHtml.staticSearchObjectSuggest(siteRequest_, (String)o);
+			return SiteHtm.staticSearchObjectSuggest(siteRequest_, (String)o);
 		case "objectText":
-			return SiteHtml.staticSearchObjectText(siteRequest_, (String)o);
+			return SiteHtm.staticSearchObjectText(siteRequest_, (String)o);
 		case "pageUrlId":
-			return SiteHtml.staticSearchPageUrlId(siteRequest_, (String)o);
+			return SiteHtm.staticSearchPageUrlId(siteRequest_, (String)o);
 		case "pageUrlPk":
-			return SiteHtml.staticSearchPageUrlPk(siteRequest_, (String)o);
+			return SiteHtm.staticSearchPageUrlPk(siteRequest_, (String)o);
 		case "pageUrlApi":
-			return SiteHtml.staticSearchPageUrlApi(siteRequest_, (String)o);
+			return SiteHtm.staticSearchPageUrlApi(siteRequest_, (String)o);
 		case "id":
-			return SiteHtml.staticSearchId(siteRequest_, (String)o);
+			return SiteHtm.staticSearchId(siteRequest_, (String)o);
 			default:
 				return null;
 		}
@@ -2140,68 +2200,70 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	///////////////////
 
 	public static String staticSearchStrForClass(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
-		return staticSearchStrSiteHtml(entityVar,  siteRequest_, o);
+		return staticSearchStrSiteHtm(entityVar,  siteRequest_, o);
 	}
-	public static String staticSearchStrSiteHtml(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
+	public static String staticSearchStrSiteHtm(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
 		case "inheritPk":
-			return SiteHtml.staticSearchStrInheritPk(siteRequest_, (String)o);
+			return SiteHtm.staticSearchStrInheritPk(siteRequest_, (String)o);
 		case "created":
-			return SiteHtml.staticSearchStrCreated(siteRequest_, (Date)o);
+			return SiteHtm.staticSearchStrCreated(siteRequest_, (Date)o);
 		case "modified":
-			return SiteHtml.staticSearchStrModified(siteRequest_, (Date)o);
+			return SiteHtm.staticSearchStrModified(siteRequest_, (Date)o);
 		case "archived":
-			return SiteHtml.staticSearchStrArchived(siteRequest_, (Boolean)o);
+			return SiteHtm.staticSearchStrArchived(siteRequest_, (Boolean)o);
 		case "deleted":
-			return SiteHtml.staticSearchStrDeleted(siteRequest_, (Boolean)o);
+			return SiteHtm.staticSearchStrDeleted(siteRequest_, (Boolean)o);
 		case "saves":
-			return SiteHtml.staticSearchStrSaves(siteRequest_, (String)o);
+			return SiteHtm.staticSearchStrSaves(siteRequest_, (String)o);
+		case "uri":
+			return SiteHtm.staticSearchStrUri(siteRequest_, (String)o);
 		case "pageId":
-			return SiteHtml.staticSearchStrPageId(siteRequest_, (String)o);
+			return SiteHtm.staticSearchStrPageId(siteRequest_, (String)o);
 		case "sequenceNum":
-			return SiteHtml.staticSearchStrSequenceNum(siteRequest_, (Long)o);
-		case "htmlGroup":
-			return SiteHtml.staticSearchStrHtmlGroup(siteRequest_, (String)o);
+			return SiteHtm.staticSearchStrSequenceNum(siteRequest_, (Long)o);
+		case "htmGroup":
+			return SiteHtm.staticSearchStrHtmGroup(siteRequest_, (String)o);
 		case "eBefore":
-			return SiteHtml.staticSearchStrEBefore(siteRequest_, (String)o);
+			return SiteHtm.staticSearchStrEBefore(siteRequest_, (String)o);
 		case "eAfter":
-			return SiteHtml.staticSearchStrEAfter(siteRequest_, (String)o);
+			return SiteHtm.staticSearchStrEAfter(siteRequest_, (String)o);
 		case "a":
-			return SiteHtml.staticSearchStrA(siteRequest_, (JsonObject)o);
+			return SiteHtm.staticSearchStrA(siteRequest_, (JsonObject)o);
 		case "text":
-			return SiteHtml.staticSearchStrText(siteRequest_, (String)o);
+			return SiteHtm.staticSearchStrText(siteRequest_, (String)o);
 		case "tabs":
-			return SiteHtml.staticSearchStrTabs(siteRequest_, (String)o);
-		case "htmlBefore":
-			return SiteHtml.staticSearchStrHtmlBefore(siteRequest_, (String)o);
-		case "htmlMiddle":
-			return SiteHtml.staticSearchStrHtmlMiddle(siteRequest_, (String)o);
-		case "htmlAfter":
-			return SiteHtml.staticSearchStrHtmlAfter(siteRequest_, (String)o);
+			return SiteHtm.staticSearchStrTabs(siteRequest_, (String)o);
+		case "htmBefore":
+			return SiteHtm.staticSearchStrHtmBefore(siteRequest_, (String)o);
+		case "htmMiddle":
+			return SiteHtm.staticSearchStrHtmMiddle(siteRequest_, (String)o);
+		case "htmAfter":
+			return SiteHtm.staticSearchStrHtmAfter(siteRequest_, (String)o);
 		case "classCanonicalName":
-			return SiteHtml.staticSearchStrClassCanonicalName(siteRequest_, (String)o);
+			return SiteHtm.staticSearchStrClassCanonicalName(siteRequest_, (String)o);
 		case "classSimpleName":
-			return SiteHtml.staticSearchStrClassSimpleName(siteRequest_, (String)o);
+			return SiteHtm.staticSearchStrClassSimpleName(siteRequest_, (String)o);
 		case "classCanonicalNames":
-			return SiteHtml.staticSearchStrClassCanonicalNames(siteRequest_, (String)o);
+			return SiteHtm.staticSearchStrClassCanonicalNames(siteRequest_, (String)o);
 		case "objectTitle":
-			return SiteHtml.staticSearchStrObjectTitle(siteRequest_, (String)o);
+			return SiteHtm.staticSearchStrObjectTitle(siteRequest_, (String)o);
 		case "objectId":
-			return SiteHtml.staticSearchStrObjectId(siteRequest_, (String)o);
+			return SiteHtm.staticSearchStrObjectId(siteRequest_, (String)o);
 		case "objectNameVar":
-			return SiteHtml.staticSearchStrObjectNameVar(siteRequest_, (String)o);
+			return SiteHtm.staticSearchStrObjectNameVar(siteRequest_, (String)o);
 		case "objectSuggest":
-			return SiteHtml.staticSearchStrObjectSuggest(siteRequest_, (String)o);
+			return SiteHtm.staticSearchStrObjectSuggest(siteRequest_, (String)o);
 		case "objectText":
-			return SiteHtml.staticSearchStrObjectText(siteRequest_, (String)o);
+			return SiteHtm.staticSearchStrObjectText(siteRequest_, (String)o);
 		case "pageUrlId":
-			return SiteHtml.staticSearchStrPageUrlId(siteRequest_, (String)o);
+			return SiteHtm.staticSearchStrPageUrlId(siteRequest_, (String)o);
 		case "pageUrlPk":
-			return SiteHtml.staticSearchStrPageUrlPk(siteRequest_, (String)o);
+			return SiteHtm.staticSearchStrPageUrlPk(siteRequest_, (String)o);
 		case "pageUrlApi":
-			return SiteHtml.staticSearchStrPageUrlApi(siteRequest_, (String)o);
+			return SiteHtm.staticSearchStrPageUrlApi(siteRequest_, (String)o);
 		case "id":
-			return SiteHtml.staticSearchStrId(siteRequest_, (String)o);
+			return SiteHtm.staticSearchStrId(siteRequest_, (String)o);
 			default:
 				return null;
 		}
@@ -2212,68 +2274,70 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	//////////////////
 
 	public static String staticSearchFqForClass(String entityVar, SiteRequestEnUS siteRequest_, String o) {
-		return staticSearchFqSiteHtml(entityVar,  siteRequest_, o);
+		return staticSearchFqSiteHtm(entityVar,  siteRequest_, o);
 	}
-	public static String staticSearchFqSiteHtml(String entityVar, SiteRequestEnUS siteRequest_, String o) {
+	public static String staticSearchFqSiteHtm(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
 		case "inheritPk":
-			return SiteHtml.staticSearchFqInheritPk(siteRequest_, o);
+			return SiteHtm.staticSearchFqInheritPk(siteRequest_, o);
 		case "created":
-			return SiteHtml.staticSearchFqCreated(siteRequest_, o);
+			return SiteHtm.staticSearchFqCreated(siteRequest_, o);
 		case "modified":
-			return SiteHtml.staticSearchFqModified(siteRequest_, o);
+			return SiteHtm.staticSearchFqModified(siteRequest_, o);
 		case "archived":
-			return SiteHtml.staticSearchFqArchived(siteRequest_, o);
+			return SiteHtm.staticSearchFqArchived(siteRequest_, o);
 		case "deleted":
-			return SiteHtml.staticSearchFqDeleted(siteRequest_, o);
+			return SiteHtm.staticSearchFqDeleted(siteRequest_, o);
 		case "saves":
-			return SiteHtml.staticSearchFqSaves(siteRequest_, o);
+			return SiteHtm.staticSearchFqSaves(siteRequest_, o);
+		case "uri":
+			return SiteHtm.staticSearchFqUri(siteRequest_, o);
 		case "pageId":
-			return SiteHtml.staticSearchFqPageId(siteRequest_, o);
+			return SiteHtm.staticSearchFqPageId(siteRequest_, o);
 		case "sequenceNum":
-			return SiteHtml.staticSearchFqSequenceNum(siteRequest_, o);
-		case "htmlGroup":
-			return SiteHtml.staticSearchFqHtmlGroup(siteRequest_, o);
+			return SiteHtm.staticSearchFqSequenceNum(siteRequest_, o);
+		case "htmGroup":
+			return SiteHtm.staticSearchFqHtmGroup(siteRequest_, o);
 		case "eBefore":
-			return SiteHtml.staticSearchFqEBefore(siteRequest_, o);
+			return SiteHtm.staticSearchFqEBefore(siteRequest_, o);
 		case "eAfter":
-			return SiteHtml.staticSearchFqEAfter(siteRequest_, o);
+			return SiteHtm.staticSearchFqEAfter(siteRequest_, o);
 		case "a":
-			return SiteHtml.staticSearchFqA(siteRequest_, o);
+			return SiteHtm.staticSearchFqA(siteRequest_, o);
 		case "text":
-			return SiteHtml.staticSearchFqText(siteRequest_, o);
+			return SiteHtm.staticSearchFqText(siteRequest_, o);
 		case "tabs":
-			return SiteHtml.staticSearchFqTabs(siteRequest_, o);
-		case "htmlBefore":
-			return SiteHtml.staticSearchFqHtmlBefore(siteRequest_, o);
-		case "htmlMiddle":
-			return SiteHtml.staticSearchFqHtmlMiddle(siteRequest_, o);
-		case "htmlAfter":
-			return SiteHtml.staticSearchFqHtmlAfter(siteRequest_, o);
+			return SiteHtm.staticSearchFqTabs(siteRequest_, o);
+		case "htmBefore":
+			return SiteHtm.staticSearchFqHtmBefore(siteRequest_, o);
+		case "htmMiddle":
+			return SiteHtm.staticSearchFqHtmMiddle(siteRequest_, o);
+		case "htmAfter":
+			return SiteHtm.staticSearchFqHtmAfter(siteRequest_, o);
 		case "classCanonicalName":
-			return SiteHtml.staticSearchFqClassCanonicalName(siteRequest_, o);
+			return SiteHtm.staticSearchFqClassCanonicalName(siteRequest_, o);
 		case "classSimpleName":
-			return SiteHtml.staticSearchFqClassSimpleName(siteRequest_, o);
+			return SiteHtm.staticSearchFqClassSimpleName(siteRequest_, o);
 		case "classCanonicalNames":
-			return SiteHtml.staticSearchFqClassCanonicalNames(siteRequest_, o);
+			return SiteHtm.staticSearchFqClassCanonicalNames(siteRequest_, o);
 		case "objectTitle":
-			return SiteHtml.staticSearchFqObjectTitle(siteRequest_, o);
+			return SiteHtm.staticSearchFqObjectTitle(siteRequest_, o);
 		case "objectId":
-			return SiteHtml.staticSearchFqObjectId(siteRequest_, o);
+			return SiteHtm.staticSearchFqObjectId(siteRequest_, o);
 		case "objectNameVar":
-			return SiteHtml.staticSearchFqObjectNameVar(siteRequest_, o);
+			return SiteHtm.staticSearchFqObjectNameVar(siteRequest_, o);
 		case "objectSuggest":
-			return SiteHtml.staticSearchFqObjectSuggest(siteRequest_, o);
+			return SiteHtm.staticSearchFqObjectSuggest(siteRequest_, o);
 		case "objectText":
-			return SiteHtml.staticSearchFqObjectText(siteRequest_, o);
+			return SiteHtm.staticSearchFqObjectText(siteRequest_, o);
 		case "pageUrlId":
-			return SiteHtml.staticSearchFqPageUrlId(siteRequest_, o);
+			return SiteHtm.staticSearchFqPageUrlId(siteRequest_, o);
 		case "pageUrlPk":
-			return SiteHtml.staticSearchFqPageUrlPk(siteRequest_, o);
+			return SiteHtm.staticSearchFqPageUrlPk(siteRequest_, o);
 		case "pageUrlApi":
-			return SiteHtml.staticSearchFqPageUrlApi(siteRequest_, o);
+			return SiteHtm.staticSearchFqPageUrlApi(siteRequest_, o);
 		case "id":
-			return SiteHtml.staticSearchFqId(siteRequest_, o);
+			return SiteHtm.staticSearchFqId(siteRequest_, o);
 			default:
 				return null;
 		}
@@ -2289,7 +2353,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 		if(val != null) {
 			for(String v : vars) {
 				if(o == null)
-					o = persistSiteHtml(v, val);
+					o = persistSiteHtm(v, val);
 				else if(o instanceof BaseModel) {
 					BaseModel oBaseModel = (BaseModel)o;
 					o = oBaseModel.persistForClass(v, val);
@@ -2298,7 +2362,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 		}
 		return o != null;
 	}
-	public Object persistSiteHtml(String var, Object val) {
+	public Object persistSiteHtm(String var, Object val) {
 		switch(var.toLowerCase()) {
 			case "inheritpk":
 				if(val instanceof String)
@@ -2328,6 +2392,11 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 					setDeleted((String)val);
 				saves.add("deleted");
 				return val;
+			case "uri":
+				if(val instanceof String)
+					setUri((String)val);
+				saves.add("uri");
+				return val;
 			case "pageid":
 				if(val instanceof String)
 					setPageId((String)val);
@@ -2340,10 +2409,10 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 					setSequenceNum((String)val);
 				saves.add("sequenceNum");
 				return val;
-			case "htmlgroup":
+			case "htmgroup":
 				if(val instanceof String)
-					setHtmlGroup((String)val);
-				saves.add("htmlGroup");
+					setHtmGroup((String)val);
+				saves.add("htmGroup");
 				return val;
 			case "ebefore":
 				if(val instanceof String)
@@ -2372,20 +2441,20 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 					setTabs((String)val);
 				saves.add("tabs");
 				return val;
-			case "htmlbefore":
+			case "htmbefore":
 				if(val instanceof String)
-					setHtmlBefore((String)val);
-				saves.add("htmlBefore");
+					setHtmBefore((String)val);
+				saves.add("htmBefore");
 				return val;
-			case "htmlmiddle":
+			case "htmmiddle":
 				if(val instanceof String)
-					setHtmlMiddle((String)val);
-				saves.add("htmlMiddle");
+					setHtmMiddle((String)val);
+				saves.add("htmMiddle");
 				return val;
-			case "htmlafter":
+			case "htmafter":
 				if(val instanceof String)
-					setHtmlAfter((String)val);
-				saves.add("htmlAfter");
+					setHtmAfter((String)val);
+				saves.add("htmAfter");
 				return val;
 			case "objectid":
 				if(val instanceof String)
@@ -2402,16 +2471,16 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	/////////////
 
 	public void populateForClass(SolrResponse.Doc doc) {
-		populateSiteHtml(doc);
+		populateSiteHtm(doc);
 	}
-	public void populateSiteHtml(SolrResponse.Doc doc) {
-		SiteHtml oSiteHtml = (SiteHtml)this;
+	public void populateSiteHtm(SolrResponse.Doc doc) {
+		SiteHtm oSiteHtm = (SiteHtm)this;
 		saves = doc.get("saves_docvalues_strings");
 		if(saves != null) {
 		}
 	}
 
-	public void indexSiteHtml(JsonObject doc) {
+	public void indexSiteHtm(JsonObject doc) {
 		if(inheritPk != null) {
 			doc.put("inheritPk_docvalues_string", inheritPk);
 		}
@@ -2434,14 +2503,17 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 				l.add(o);
 			}
 		}
+		if(uri != null) {
+			doc.put("uri_docvalues_string", uri);
+		}
 		if(pageId != null) {
 			doc.put("pageId_docvalues_string", pageId);
 		}
 		if(sequenceNum != null) {
 			doc.put("sequenceNum_docvalues_long", sequenceNum);
 		}
-		if(htmlGroup != null) {
-			doc.put("htmlGroup_docvalues_string", htmlGroup);
+		if(htmGroup != null) {
+			doc.put("htmGroup_docvalues_string", htmGroup);
 		}
 		if(eBefore != null) {
 			doc.put("eBefore_docvalues_string", eBefore);
@@ -2452,14 +2524,14 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 		if(tabs != null) {
 			doc.put("tabs_docvalues_string", tabs);
 		}
-		if(htmlBefore != null) {
-			doc.put("htmlBefore_stored_string", htmlBefore);
+		if(htmBefore != null) {
+			doc.put("htmBefore_stored_string", htmBefore);
 		}
-		if(htmlMiddle != null) {
-			doc.put("htmlMiddle_stored_string", htmlMiddle);
+		if(htmMiddle != null) {
+			doc.put("htmMiddle_stored_string", htmMiddle);
 		}
-		if(htmlAfter != null) {
-			doc.put("htmlAfter_stored_string", htmlAfter);
+		if(htmAfter != null) {
+			doc.put("htmAfter_stored_string", htmAfter);
 		}
 		if(classCanonicalName != null) {
 			doc.put("classCanonicalName_docvalues_string", classCanonicalName);
@@ -2501,7 +2573,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 		}
 	}
 
-	public static String varStoredSiteHtml(String entityVar) {
+	public static String varStoredSiteHtm(String entityVar) {
 		switch(entityVar) {
 			case "inheritPk":
 				return "inheritPk_docvalues_string";
@@ -2515,24 +2587,26 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 				return "deleted_docvalues_boolean";
 			case "saves":
 				return "saves_docvalues_strings";
+			case "uri":
+				return "uri_docvalues_string";
 			case "pageId":
 				return "pageId_docvalues_string";
 			case "sequenceNum":
 				return "sequenceNum_docvalues_long";
-			case "htmlGroup":
-				return "htmlGroup_docvalues_string";
+			case "htmGroup":
+				return "htmGroup_docvalues_string";
 			case "eBefore":
 				return "eBefore_docvalues_string";
 			case "eAfter":
 				return "eAfter_docvalues_string";
 			case "tabs":
 				return "tabs_docvalues_string";
-			case "htmlBefore":
-				return "htmlBefore_stored_string";
-			case "htmlMiddle":
-				return "htmlMiddle_stored_string";
-			case "htmlAfter":
-				return "htmlAfter_stored_string";
+			case "htmBefore":
+				return "htmBefore_stored_string";
+			case "htmMiddle":
+				return "htmMiddle_stored_string";
+			case "htmAfter":
+				return "htmAfter_stored_string";
 			case "classCanonicalName":
 				return "classCanonicalName_docvalues_string";
 			case "classSimpleName":
@@ -2556,7 +2630,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 		}
 	}
 
-	public static String varIndexedSiteHtml(String entityVar) {
+	public static String varIndexedSiteHtm(String entityVar) {
 		switch(entityVar) {
 			case "inheritPk":
 				return "inheritPk_docvalues_string";
@@ -2570,12 +2644,14 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 				return "deleted_docvalues_boolean";
 			case "saves":
 				return "saves_docvalues_strings";
+			case "uri":
+				return "uri_docvalues_string";
 			case "pageId":
 				return "pageId_docvalues_string";
 			case "sequenceNum":
 				return "sequenceNum_docvalues_long";
-			case "htmlGroup":
-				return "htmlGroup_docvalues_string";
+			case "htmGroup":
+				return "htmGroup_docvalues_string";
 			case "eBefore":
 				return "eBefore_docvalues_string";
 			case "eAfter":
@@ -2609,7 +2685,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 		}
 	}
 
-	public static String searchVarSiteHtml(String searchVar) {
+	public static String searchVarSiteHtm(String searchVar) {
 		switch(searchVar) {
 			case "inheritPk_docvalues_string":
 				return "inheritPk";
@@ -2623,24 +2699,26 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 				return "deleted";
 			case "saves_docvalues_strings":
 				return "saves";
+			case "uri_docvalues_string":
+				return "uri";
 			case "pageId_docvalues_string":
 				return "pageId";
 			case "sequenceNum_docvalues_long":
 				return "sequenceNum";
-			case "htmlGroup_docvalues_string":
-				return "htmlGroup";
+			case "htmGroup_docvalues_string":
+				return "htmGroup";
 			case "eBefore_docvalues_string":
 				return "eBefore";
 			case "eAfter_docvalues_string":
 				return "eAfter";
 			case "tabs_docvalues_string":
 				return "tabs";
-			case "htmlBefore_stored_string":
-				return "htmlBefore";
-			case "htmlMiddle_stored_string":
-				return "htmlMiddle";
-			case "htmlAfter_stored_string":
-				return "htmlAfter";
+			case "htmBefore_stored_string":
+				return "htmBefore";
+			case "htmMiddle_stored_string":
+				return "htmMiddle";
+			case "htmAfter_stored_string":
+				return "htmAfter";
 			case "classCanonicalName_docvalues_string":
 				return "classCanonicalName";
 			case "classSimpleName_docvalues_string":
@@ -2668,7 +2746,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 		}
 	}
 
-	public static String varSearchSiteHtml(String entityVar) {
+	public static String varSearchSiteHtm(String entityVar) {
 		switch(entityVar) {
 			case "objectText":
 				return "objectText_text_enUS";
@@ -2679,7 +2757,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 		}
 	}
 
-	public static String varSuggestedSiteHtml(String entityVar) {
+	public static String varSuggestedSiteHtm(String entityVar) {
 		switch(entityVar) {
 			case "objectSuggest":
 				return "objectSuggest_suggested";
@@ -2693,54 +2771,55 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	/////////////
 
 	public void storeForClass(SolrResponse.Doc doc) {
-		storeSiteHtml(doc);
+		storeSiteHtm(doc);
 	}
-	public void storeSiteHtml(SolrResponse.Doc doc) {
-		SiteHtml oSiteHtml = (SiteHtml)this;
+	public void storeSiteHtm(SolrResponse.Doc doc) {
+		SiteHtm oSiteHtm = (SiteHtm)this;
 
-		oSiteHtml.setInheritPk(Optional.ofNullable(doc.get("inheritPk_docvalues_string")).map(v -> v.toString()).orElse(null));
-		oSiteHtml.setCreated(Optional.ofNullable(doc.get("created_docvalues_date")).map(v -> v.toString()).orElse(null));
-		oSiteHtml.setModified(Optional.ofNullable(doc.get("modified_docvalues_date")).map(v -> v.toString()).orElse(null));
-		oSiteHtml.setArchived(Optional.ofNullable(doc.get("archived_docvalues_boolean")).map(v -> v.toString()).orElse(null));
-		oSiteHtml.setDeleted(Optional.ofNullable(doc.get("deleted_docvalues_boolean")).map(v -> v.toString()).orElse(null));
+		oSiteHtm.setInheritPk(Optional.ofNullable(doc.get("inheritPk_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oSiteHtm.setCreated(Optional.ofNullable(doc.get("created_docvalues_date")).map(v -> v.toString()).orElse(null));
+		oSiteHtm.setModified(Optional.ofNullable(doc.get("modified_docvalues_date")).map(v -> v.toString()).orElse(null));
+		oSiteHtm.setArchived(Optional.ofNullable(doc.get("archived_docvalues_boolean")).map(v -> v.toString()).orElse(null));
+		oSiteHtm.setDeleted(Optional.ofNullable(doc.get("deleted_docvalues_boolean")).map(v -> v.toString()).orElse(null));
 		Optional.ofNullable((List<?>)doc.get("saves_docvalues_strings")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
-			oSiteHtml.addSaves(v.toString());
+			oSiteHtm.addSaves(v.toString());
 		});
-		oSiteHtml.setPageId(Optional.ofNullable(doc.get("pageId_docvalues_string")).map(v -> v.toString()).orElse(null));
-		oSiteHtml.setSequenceNum(Optional.ofNullable(doc.get("sequenceNum_docvalues_long")).map(v -> v.toString()).orElse(null));
-		oSiteHtml.setHtmlGroup(Optional.ofNullable(doc.get("htmlGroup_docvalues_string")).map(v -> v.toString()).orElse(null));
-		oSiteHtml.setEBefore(Optional.ofNullable(doc.get("eBefore_docvalues_string")).map(v -> v.toString()).orElse(null));
-		oSiteHtml.setEAfter(Optional.ofNullable(doc.get("eAfter_docvalues_string")).map(v -> v.toString()).orElse(null));
-		oSiteHtml.setTabs(Optional.ofNullable(doc.get("tabs_docvalues_string")).map(v -> v.toString()).orElse(null));
-		oSiteHtml.setHtmlBefore(Optional.ofNullable(doc.get("htmlBefore_stored_string")).map(v -> v.toString()).orElse(null));
-		oSiteHtml.setHtmlMiddle(Optional.ofNullable(doc.get("htmlMiddle_stored_string")).map(v -> v.toString()).orElse(null));
-		oSiteHtml.setHtmlAfter(Optional.ofNullable(doc.get("htmlAfter_stored_string")).map(v -> v.toString()).orElse(null));
-		oSiteHtml.setClassCanonicalName(Optional.ofNullable(doc.get("classCanonicalName_docvalues_string")).map(v -> v.toString()).orElse(null));
-		oSiteHtml.setClassSimpleName(Optional.ofNullable(doc.get("classSimpleName_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oSiteHtm.setUri(Optional.ofNullable(doc.get("uri_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oSiteHtm.setPageId(Optional.ofNullable(doc.get("pageId_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oSiteHtm.setSequenceNum(Optional.ofNullable(doc.get("sequenceNum_docvalues_long")).map(v -> v.toString()).orElse(null));
+		oSiteHtm.setHtmGroup(Optional.ofNullable(doc.get("htmGroup_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oSiteHtm.setEBefore(Optional.ofNullable(doc.get("eBefore_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oSiteHtm.setEAfter(Optional.ofNullable(doc.get("eAfter_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oSiteHtm.setTabs(Optional.ofNullable(doc.get("tabs_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oSiteHtm.setHtmBefore(Optional.ofNullable(doc.get("htmBefore_stored_string")).map(v -> v.toString()).orElse(null));
+		oSiteHtm.setHtmMiddle(Optional.ofNullable(doc.get("htmMiddle_stored_string")).map(v -> v.toString()).orElse(null));
+		oSiteHtm.setHtmAfter(Optional.ofNullable(doc.get("htmAfter_stored_string")).map(v -> v.toString()).orElse(null));
+		oSiteHtm.setClassCanonicalName(Optional.ofNullable(doc.get("classCanonicalName_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oSiteHtm.setClassSimpleName(Optional.ofNullable(doc.get("classSimpleName_docvalues_string")).map(v -> v.toString()).orElse(null));
 		Optional.ofNullable((List<?>)doc.get("classCanonicalNames_docvalues_strings")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
-			oSiteHtml.addClassCanonicalNames(v.toString());
+			oSiteHtm.addClassCanonicalNames(v.toString());
 		});
-		oSiteHtml.setObjectTitle(Optional.ofNullable(doc.get("objectTitle_docvalues_string")).map(v -> v.toString()).orElse(null));
-		oSiteHtml.setObjectId(Optional.ofNullable(doc.get("objectId_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oSiteHtm.setObjectTitle(Optional.ofNullable(doc.get("objectTitle_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oSiteHtm.setObjectId(Optional.ofNullable(doc.get("objectId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		String objectSuggest = (String)doc.get("objectSuggest_suggested");
-		oSiteHtml.setObjectSuggest(objectSuggest);
-		oSiteHtml.setObjectText(Optional.ofNullable(doc.get("objectText_docvalues_string")).map(v -> v.toString()).orElse(null));
-		oSiteHtml.setPageUrlId(Optional.ofNullable(doc.get("pageUrlId_docvalues_string")).map(v -> v.toString()).orElse(null));
-		oSiteHtml.setPageUrlPk(Optional.ofNullable(doc.get("pageUrlPk_docvalues_string")).map(v -> v.toString()).orElse(null));
-		oSiteHtml.setPageUrlApi(Optional.ofNullable(doc.get("pageUrlApi_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oSiteHtm.setObjectSuggest(objectSuggest);
+		oSiteHtm.setObjectText(Optional.ofNullable(doc.get("objectText_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oSiteHtm.setPageUrlId(Optional.ofNullable(doc.get("pageUrlId_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oSiteHtm.setPageUrlPk(Optional.ofNullable(doc.get("pageUrlPk_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oSiteHtm.setPageUrlApi(Optional.ofNullable(doc.get("pageUrlApi_docvalues_string")).map(v -> v.toString()).orElse(null));
 		String id = (String)doc.get("id");
-		oSiteHtml.setId(id);
+		oSiteHtm.setId(id);
 	}
 
 	//////////////////
 	// apiRequest //
 	//////////////////
 
-	public void apiRequestSiteHtml() {
+	public void apiRequestSiteHtm() {
 		ApiRequest apiRequest = Optional.ofNullable(siteRequest_).map(r -> r.getApiRequest_()).orElse(null);
 		Object o = Optional.ofNullable(apiRequest).map(ApiRequest::getOriginal).orElse(null);
-		if(o != null && o instanceof SiteHtml) {
-			SiteHtml original = (SiteHtml)o;
+		if(o != null && o instanceof SiteHtm) {
+			SiteHtm original = (SiteHtm)o;
 			if(!Objects.equals(inheritPk, original.getInheritPk()))
 				apiRequest.addVars("inheritPk");
 			if(!Objects.equals(created, original.getCreated()))
@@ -2753,12 +2832,14 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 				apiRequest.addVars("deleted");
 			if(!Objects.equals(saves, original.getSaves()))
 				apiRequest.addVars("saves");
+			if(!Objects.equals(uri, original.getUri()))
+				apiRequest.addVars("uri");
 			if(!Objects.equals(pageId, original.getPageId()))
 				apiRequest.addVars("pageId");
 			if(!Objects.equals(sequenceNum, original.getSequenceNum()))
 				apiRequest.addVars("sequenceNum");
-			if(!Objects.equals(htmlGroup, original.getHtmlGroup()))
-				apiRequest.addVars("htmlGroup");
+			if(!Objects.equals(htmGroup, original.getHtmGroup()))
+				apiRequest.addVars("htmGroup");
 			if(!Objects.equals(eBefore, original.getEBefore()))
 				apiRequest.addVars("eBefore");
 			if(!Objects.equals(eAfter, original.getEAfter()))
@@ -2769,12 +2850,12 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 				apiRequest.addVars("text");
 			if(!Objects.equals(tabs, original.getTabs()))
 				apiRequest.addVars("tabs");
-			if(!Objects.equals(htmlBefore, original.getHtmlBefore()))
-				apiRequest.addVars("htmlBefore");
-			if(!Objects.equals(htmlMiddle, original.getHtmlMiddle()))
-				apiRequest.addVars("htmlMiddle");
-			if(!Objects.equals(htmlAfter, original.getHtmlAfter()))
-				apiRequest.addVars("htmlAfter");
+			if(!Objects.equals(htmBefore, original.getHtmBefore()))
+				apiRequest.addVars("htmBefore");
+			if(!Objects.equals(htmMiddle, original.getHtmMiddle()))
+				apiRequest.addVars("htmMiddle");
+			if(!Objects.equals(htmAfter, original.getHtmAfter()))
+				apiRequest.addVars("htmAfter");
 			if(!Objects.equals(classCanonicalName, original.getClassCanonicalName()))
 				apiRequest.addVars("classCanonicalName");
 			if(!Objects.equals(classSimpleName, original.getClassSimpleName()))
@@ -2812,17 +2893,18 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 		sb.append(Optional.ofNullable(archived).map(v -> "archived: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(deleted).map(v -> "deleted: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(saves).map(v -> "saves: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(uri).map(v -> "uri: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(pageId).map(v -> "pageId: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(sequenceNum).map(v -> "sequenceNum: " + v + "\n").orElse(""));
-		sb.append(Optional.ofNullable(htmlGroup).map(v -> "htmlGroup: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(htmGroup).map(v -> "htmGroup: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(eBefore).map(v -> "eBefore: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(eAfter).map(v -> "eAfter: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(a).map(v -> "a: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(text).map(v -> "text: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(tabs).map(v -> "tabs: \"" + v + "\"\n" ).orElse(""));
-		sb.append(Optional.ofNullable(htmlBefore).map(v -> "htmlBefore: \"" + v + "\"\n" ).orElse(""));
-		sb.append(Optional.ofNullable(htmlMiddle).map(v -> "htmlMiddle: \"" + v + "\"\n" ).orElse(""));
-		sb.append(Optional.ofNullable(htmlAfter).map(v -> "htmlAfter: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(htmBefore).map(v -> "htmBefore: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(htmMiddle).map(v -> "htmMiddle: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(htmAfter).map(v -> "htmAfter: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(classCanonicalName).map(v -> "classCanonicalName: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(classSimpleName).map(v -> "classSimpleName: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(classCanonicalNames).map(v -> "classCanonicalNames: " + v + "\n").orElse(""));
@@ -2837,7 +2919,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 		return sb.toString();
 	}
 
-	public static final String CLASS_SIMPLE_NAME = "SiteHtml";
+	public static final String CLASS_SIMPLE_NAME = "SiteHtm";
 	public static final String VAR_promiseBegin = "promiseBegin";
 	public static final String VAR_siteRequest_ = "siteRequest_";
 	public static final String VAR_inheritPk = "inheritPk";
@@ -2846,17 +2928,18 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	public static final String VAR_archived = "archived";
 	public static final String VAR_deleted = "deleted";
 	public static final String VAR_saves = "saves";
+	public static final String VAR_uri = "uri";
 	public static final String VAR_pageId = "pageId";
 	public static final String VAR_sequenceNum = "sequenceNum";
-	public static final String VAR_htmlGroup = "htmlGroup";
+	public static final String VAR_htmGroup = "htmGroup";
 	public static final String VAR_eBefore = "eBefore";
 	public static final String VAR_eAfter = "eAfter";
 	public static final String VAR_a = "a";
 	public static final String VAR_text = "text";
 	public static final String VAR_tabs = "tabs";
-	public static final String VAR_htmlBefore = "htmlBefore";
-	public static final String VAR_htmlMiddle = "htmlMiddle";
-	public static final String VAR_htmlAfter = "htmlAfter";
+	public static final String VAR_htmBefore = "htmBefore";
+	public static final String VAR_htmMiddle = "htmMiddle";
+	public static final String VAR_htmAfter = "htmAfter";
 	public static final String VAR_classCanonicalName = "classCanonicalName";
 	public static final String VAR_classSimpleName = "classSimpleName";
 	public static final String VAR_classCanonicalNames = "classCanonicalNames";
@@ -2871,28 +2954,29 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	public static final String VAR_id = "id";
 
 	public static List<String> varsQForClass() {
-		return SiteHtml.varsQSiteHtml(new ArrayList<String>());
+		return SiteHtm.varsQSiteHtm(new ArrayList<String>());
 	}
-	public static List<String> varsQSiteHtml(List<String> vars) {
+	public static List<String> varsQSiteHtm(List<String> vars) {
 		vars.add(VAR_objectSuggest);
 		vars.add(VAR_objectText);
 		return vars;
 	}
 
 	public static List<String> varsFqForClass() {
-		return SiteHtml.varsFqSiteHtml(new ArrayList<String>());
+		return SiteHtm.varsFqSiteHtm(new ArrayList<String>());
 	}
-	public static List<String> varsFqSiteHtml(List<String> vars) {
+	public static List<String> varsFqSiteHtm(List<String> vars) {
 		vars.add(VAR_created);
+		vars.add(VAR_uri);
 		vars.add(VAR_pageId);
 		vars.add(VAR_sequenceNum);
 		return vars;
 	}
 
 	public static List<String> varsRangeForClass() {
-		return SiteHtml.varsRangeSiteHtml(new ArrayList<String>());
+		return SiteHtm.varsRangeSiteHtm(new ArrayList<String>());
 	}
-	public static List<String> varsRangeSiteHtml(List<String> vars) {
+	public static List<String> varsRangeSiteHtm(List<String> vars) {
 		vars.add(VAR_created);
 		vars.add(VAR_sequenceNum);
 		return vars;
@@ -2906,17 +2990,18 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	public static final String DISPLAY_NAME_archived = "archived";
 	public static final String DISPLAY_NAME_deleted = "deleted";
 	public static final String DISPLAY_NAME_saves = "";
+	public static final String DISPLAY_NAME_uri = "Page ID";
 	public static final String DISPLAY_NAME_pageId = "Page ID";
 	public static final String DISPLAY_NAME_sequenceNum = "Sequence Number";
-	public static final String DISPLAY_NAME_htmlGroup = "HTML Group";
+	public static final String DISPLAY_NAME_htmGroup = "HTML Group";
 	public static final String DISPLAY_NAME_eBefore = "HTML Element";
 	public static final String DISPLAY_NAME_eAfter = "HTML Element";
 	public static final String DISPLAY_NAME_a = "HTML Element";
 	public static final String DISPLAY_NAME_text = "Text";
 	public static final String DISPLAY_NAME_tabs = "Tabs";
-	public static final String DISPLAY_NAME_htmlBefore = "HTML before";
-	public static final String DISPLAY_NAME_htmlMiddle = "HTML middle";
-	public static final String DISPLAY_NAME_htmlAfter = "HTML after";
+	public static final String DISPLAY_NAME_htmBefore = "HTML before";
+	public static final String DISPLAY_NAME_htmMiddle = "HTML middle";
+	public static final String DISPLAY_NAME_htmAfter = "HTML after";
 	public static final String DISPLAY_NAME_classCanonicalName = "";
 	public static final String DISPLAY_NAME_classSimpleName = "";
 	public static final String DISPLAY_NAME_classCanonicalNames = "";
@@ -2931,9 +3016,9 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 	public static final String DISPLAY_NAME_id = "";
 
 	public static String displayNameForClass(String var) {
-		return SiteHtml.displayNameSiteHtml(var);
+		return SiteHtm.displayNameSiteHtm(var);
 	}
-	public static String displayNameSiteHtml(String var) {
+	public static String displayNameSiteHtm(String var) {
 		switch(var) {
 		case VAR_promiseBegin:
 			return DISPLAY_NAME_promiseBegin;
@@ -2951,12 +3036,14 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 			return DISPLAY_NAME_deleted;
 		case VAR_saves:
 			return DISPLAY_NAME_saves;
+		case VAR_uri:
+			return DISPLAY_NAME_uri;
 		case VAR_pageId:
 			return DISPLAY_NAME_pageId;
 		case VAR_sequenceNum:
 			return DISPLAY_NAME_sequenceNum;
-		case VAR_htmlGroup:
-			return DISPLAY_NAME_htmlGroup;
+		case VAR_htmGroup:
+			return DISPLAY_NAME_htmGroup;
 		case VAR_eBefore:
 			return DISPLAY_NAME_eBefore;
 		case VAR_eAfter:
@@ -2967,12 +3054,12 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 			return DISPLAY_NAME_text;
 		case VAR_tabs:
 			return DISPLAY_NAME_tabs;
-		case VAR_htmlBefore:
-			return DISPLAY_NAME_htmlBefore;
-		case VAR_htmlMiddle:
-			return DISPLAY_NAME_htmlMiddle;
-		case VAR_htmlAfter:
-			return DISPLAY_NAME_htmlAfter;
+		case VAR_htmBefore:
+			return DISPLAY_NAME_htmBefore;
+		case VAR_htmMiddle:
+			return DISPLAY_NAME_htmMiddle;
+		case VAR_htmAfter:
+			return DISPLAY_NAME_htmAfter;
 		case VAR_classCanonicalName:
 			return DISPLAY_NAME_classCanonicalName;
 		case VAR_classSimpleName:
@@ -3002,7 +3089,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 		}
 	}
 
-	public static String descriptionSiteHtml(String var) {
+	public static String descriptionSiteHtm(String var) {
 		switch(var) {
 		case VAR_promiseBegin:
 			return "An asynchronous method for searching for related problems to this message";
@@ -3020,11 +3107,13 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 			return "For deleting this record";
 		case VAR_saves:
 			return "A list of fields that are saved for this record in the database";
+		case VAR_uri:
+			return "The ID for this page. ";
 		case VAR_pageId:
 			return "The ID for this page. ";
 		case VAR_sequenceNum:
 			return "The sequence number for this page. ";
-		case VAR_htmlGroup:
+		case VAR_htmGroup:
 			return "The HTML group. ";
 		case VAR_eBefore:
 			return "The HTML element. ";
@@ -3036,11 +3125,11 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 			return "The text. ";
 		case VAR_tabs:
 			return "The tabs. ";
-		case VAR_htmlBefore:
+		case VAR_htmBefore:
 			return "The HTML that comes before the text. ";
-		case VAR_htmlMiddle:
+		case VAR_htmMiddle:
 			return "The HTML that comes in the middle. ";
-		case VAR_htmlAfter:
+		case VAR_htmAfter:
 			return "The HTML that comes after the text. ";
 		case VAR_classCanonicalName:
 			return "the canonical name of this Java class";
@@ -3071,7 +3160,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 		}
 	}
 
-	public static String classSimpleNameSiteHtml(String var) {
+	public static String classSimpleNameSiteHtm(String var) {
 		switch(var) {
 		case VAR_promiseBegin:
 			return "Void";
@@ -3089,11 +3178,13 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 			return "Boolean";
 		case VAR_saves:
 			return "List";
+		case VAR_uri:
+			return "String";
 		case VAR_pageId:
 			return "String";
 		case VAR_sequenceNum:
 			return "Long";
-		case VAR_htmlGroup:
+		case VAR_htmGroup:
 			return "String";
 		case VAR_eBefore:
 			return "String";
@@ -3105,11 +3196,11 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 			return "String";
 		case VAR_tabs:
 			return "String";
-		case VAR_htmlBefore:
+		case VAR_htmBefore:
 			return "String";
-		case VAR_htmlMiddle:
+		case VAR_htmMiddle:
 			return "String";
-		case VAR_htmlAfter:
+		case VAR_htmAfter:
 			return "String";
 		case VAR_classCanonicalName:
 			return "String";
@@ -3140,10 +3231,12 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 		}
 	}
 
-	public static Integer htmlColumnSiteHtml(String var) {
+	public static Integer htmlColumnSiteHtm(String var) {
 		switch(var) {
 		case VAR_created:
 			return 1;
+		case VAR_uri:
+			return 3;
 		case VAR_pageId:
 			return 3;
 		case VAR_sequenceNum:
@@ -3155,7 +3248,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 		}
 	}
 
-	public static Integer htmlRowSiteHtml(String var) {
+	public static Integer htmlRowSiteHtm(String var) {
 		switch(var) {
 		case VAR_created:
 			return 1;
@@ -3165,6 +3258,8 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 			return 2;
 		case VAR_deleted:
 			return 2;
+		case VAR_uri:
+			return 3;
 		case VAR_pageId:
 			return 3;
 		case VAR_sequenceNum:
@@ -3176,7 +3271,7 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 		}
 	}
 
-	public static Integer htmlCellSiteHtml(String var) {
+	public static Integer htmlCellSiteHtm(String var) {
 		switch(var) {
 		case VAR_created:
 			return 2;
@@ -3186,6 +3281,8 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 			return 1;
 		case VAR_deleted:
 			return 2;
+		case VAR_uri:
+			return 1;
 		case VAR_pageId:
 			return 1;
 		case VAR_sequenceNum:
@@ -3197,28 +3294,28 @@ public abstract class SiteHtmlGen<DEV> extends Object {
 		}
 	}
 
-	public static Integer lengthMinSiteHtml(String var) {
+	public static Integer lengthMinSiteHtm(String var) {
 		switch(var) {
 			default:
 				return null;
 		}
 	}
 
-	public static Integer lengthMaxSiteHtml(String var) {
+	public static Integer lengthMaxSiteHtm(String var) {
 		switch(var) {
 			default:
 				return null;
 		}
 	}
 
-	public static Integer maxSiteHtml(String var) {
+	public static Integer maxSiteHtm(String var) {
 		switch(var) {
 			default:
 				return null;
 		}
 	}
 
-	public static Integer minSiteHtml(String var) {
+	public static Integer minSiteHtm(String var) {
 		switch(var) {
 			default:
 				return null;

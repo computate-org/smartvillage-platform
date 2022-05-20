@@ -22,8 +22,8 @@ import io.vertx.core.json.JsonObject;
  * SuperPage.enUS: PageLayout
  * Indexed: true
  * 
- * ApiTag.enUS: HTML
- * ApiUri.enUS: /api/html
+ * ApiTag.enUS: HTM
+ * ApiUri.enUS: /api/htm
  * 
  * ApiMethod.enUS: Search
  * ApiMethod: GET
@@ -34,18 +34,18 @@ import io.vertx.core.json.JsonObject;
  * ApiMethod.enUS: SearchPage
  * PageSearchPage.enUS: SiteHtmlPage
  * PageSuperSearchPage.enUS: BaseModelPage
- * ApiUriSearchPage.enUS: /html
+ * ApiUriSearchPage.enUS: /htm
  * 
  * AName.enUS: an HTML
  * Color: 2017-navy-peony
  * IconGroup: duotone
  * IconName: code
- * NameVar: html
+ * NameVar: htm
  * 
  * RoleAll: true
  * Description: An HTML part that is indexed in the search engine. 
  */
-public class SiteHtml extends SiteHtmlGen<Object> {
+public class SiteHtm extends SiteHtmGen<Object> {
 
 	/**
 	 * {@inheritDoc}
@@ -150,6 +150,20 @@ public class SiteHtml extends SiteHtmlGen<Object> {
 	 * DisplayName: Page ID
 	 * Description: The ID for this page. 
 	 */
+	protected void _uri(Wrap<String> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * HtmlRow: 3
+	 * HtmlCell: 1
+	 * HtmlColumn: 3
+	 * Facet: true
+	 * DisplayName: Page ID
+	 * Description: The ID for this page. 
+	 */
 	protected void _pageId(Wrap<String> w) {
 	}
 
@@ -174,7 +188,7 @@ public class SiteHtml extends SiteHtmlGen<Object> {
 	 * DisplayName: HTML Group
 	 * Description: The HTML group. 
 	 */
-	protected void _htmlGroup(Wrap<String> w) {
+	protected void _htmGroup(Wrap<String> w) {
 	}
 
 	/**
@@ -232,7 +246,7 @@ public class SiteHtml extends SiteHtmlGen<Object> {
 	 * DisplayName: HTML before
 	 * Description: The HTML that comes before the text. 
 	 */
-	protected void _htmlBefore(Wrap<String> w) {
+	protected void _htmBefore(Wrap<String> w) {
 		if(eBefore != null) {
 			StringBuilder b = new StringBuilder();
 			b.append("<").append(eBefore);
@@ -258,7 +272,7 @@ public class SiteHtml extends SiteHtmlGen<Object> {
 	 * DisplayName: HTML middle
 	 * Description: The HTML that comes in the middle. 
 	 */
-	protected void _htmlMiddle(Wrap<String> w) {
+	protected void _htmMiddle(Wrap<String> w) {
 		StringBuilder b = new StringBuilder();
 		if(text != null) {
 			b.append(XmlTool.escape(text));
@@ -273,7 +287,7 @@ public class SiteHtml extends SiteHtmlGen<Object> {
 	 * DisplayName: HTML after
 	 * Description: The HTML that comes after the text. 
 	 */
-	protected void _htmlAfter(Wrap<String> w) {
+	protected void _htmAfter(Wrap<String> w) {
 		if(eAfter != null && !XmlTool.HTML_ELEMENTS_CLOSED.contains(eAfter)) {
 			StringBuilder b = new StringBuilder();
 			b.append("</").append(eAfter).append(">");

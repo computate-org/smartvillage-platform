@@ -30,17 +30,17 @@ paths:
               schema:
                 type: string
 
-  /api/html:
+  /api/htm:
     get:
-      operationId: searchSiteHtml
-      x-vertx-event-bus: smart-village-view-enUS-SiteHtml
+      operationId: searchSiteHtm
+      x-vertx-event-bus: smart-village-view-enUS-SiteHtm
       security:
         - openIdConnect:
           - profile
       description: >+
       summary: >+
       tags:
-        - HTML
+        - HTM
       parameters:
         - name: vertx-web.session
           in: cookie
@@ -208,41 +208,41 @@ paths:
           content:
             application/json; charset=utf-8:
               schema:
-                $ref: '#/components/schemas/SearchSiteHtmlResponse'
+                $ref: '#/components/schemas/SearchSiteHtmResponse'
     post:
-      operationId: postSiteHtml
-      x-vertx-event-bus: smart-village-view-enUS-SiteHtml
+      operationId: postSiteHtm
+      x-vertx-event-bus: smart-village-view-enUS-SiteHtm
       security:
         - openIdConnect:
           - profile
       description: >+
       summary: >+
       tags:
-        - HTML
+        - HTM
       requestBody:
         description: >+
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/POSTSiteHtmlRequest'
+              $ref: '#/components/schemas/POSTSiteHtmRequest'
       responses:
         '200':
           description: >+
           content:
             application/json; charset=utf-8:
               schema:
-                $ref: '#/components/schemas/POSTSiteHtmlResponse'
+                $ref: '#/components/schemas/POSTSiteHtmResponse'
     patch:
-      operationId: patchSiteHtml
-      x-vertx-event-bus: smart-village-view-enUS-SiteHtml
+      operationId: patchSiteHtm
+      x-vertx-event-bus: smart-village-view-enUS-SiteHtm
       security:
         - openIdConnect:
           - profile
       description: >+
       summary: >+
       tags:
-        - HTML
+        - HTM
       parameters:
         - name: vertx-web.session
           in: cookie
@@ -281,25 +281,25 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PATCHSiteHtmlRequest'
+              $ref: '#/components/schemas/PATCHSiteHtmRequest'
       responses:
         '200':
           description: >+
           content:
             application/json; charset=utf-8:
               schema:
-                $ref: '#/components/schemas/PATCHSiteHtmlResponse'
-  /api/html-import:
+                $ref: '#/components/schemas/PATCHSiteHtmResponse'
+  /api/htm-import:
     put:
-      operationId: putimportSiteHtml
-      x-vertx-event-bus: smart-village-view-enUS-SiteHtml
+      operationId: putimportSiteHtm
+      x-vertx-event-bus: smart-village-view-enUS-SiteHtm
       security:
         - openIdConnect:
           - profile
       description: >+
       summary: >+
       tags:
-        - HTML
+        - HTM
       parameters:
         - name: vertx-web.session
           in: cookie
@@ -315,25 +315,25 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PUTImportSiteHtmlRequest'
+              $ref: '#/components/schemas/PUTImportSiteHtmRequest'
       responses:
         '200':
           description: >+
           content:
             application/json; charset=utf-8:
               schema:
-                $ref: '#/components/schemas/PUTImportSiteHtmlResponse'
-  /api/html/{id}:
+                $ref: '#/components/schemas/PUTImportSiteHtmResponse'
+  /api/htm/{id}:
     get:
-      operationId: getSiteHtml
-      x-vertx-event-bus: smart-village-view-enUS-SiteHtml
+      operationId: getSiteHtm
+      x-vertx-event-bus: smart-village-view-enUS-SiteHtm
       security:
         - openIdConnect:
           - profile
       description: >+
       summary: >+
       tags:
-        - HTML
+        - HTM
       parameters:
         - name: vertx-web.session
           in: cookie
@@ -355,18 +355,18 @@ paths:
           content:
             application/json; charset=utf-8:
               schema:
-                $ref: '#/components/schemas/GETSiteHtmlResponse'
-  /html/{id}:
+                $ref: '#/components/schemas/GETSiteHtmResponse'
+  /htm/{id}:
     get:
-      operationId: searchpageSiteHtmlId
-      x-vertx-event-bus: smart-village-view-enUS-SiteHtml
+      operationId: searchpageSiteHtmId
+      x-vertx-event-bus: smart-village-view-enUS-SiteHtm
       security:
         - openIdConnect:
           - profile
       description: >+
       summary: >+
       tags:
-        - HTML
+        - HTM
       parameters:
         - name: vertx-web.session
           in: cookie
@@ -540,18 +540,18 @@ paths:
           content:
             text/html; charset=utf-8:
               schema:
-                $ref: '#/components/schemas/SearchPageSiteHtmlResponse'
-  /html:
+                $ref: '#/components/schemas/SearchPageSiteHtmResponse'
+  /htm:
     get:
-      operationId: searchpageSiteHtml
-      x-vertx-event-bus: smart-village-view-enUS-SiteHtml
+      operationId: searchpageSiteHtm
+      x-vertx-event-bus: smart-village-view-enUS-SiteHtm
       security:
         - openIdConnect:
           - profile
       description: >+
       summary: >+
       tags:
-        - HTML
+        - HTM
       parameters:
         - name: vertx-web.session
           in: cookie
@@ -719,7 +719,7 @@ paths:
           content:
             text/html; charset=utf-8:
               schema:
-                $ref: '#/components/schemas/SearchPageSiteHtmlResponse'
+                $ref: '#/components/schemas/SearchPageSiteHtmResponse'
   /api/iot-node:
     get:
       operationId: searchIotNode
@@ -3456,51 +3456,51 @@ components:
       type: openIdConnect
       openIdConnectUrl: https://sso.computate.org/auth/realms/RH-IMPACT/.well-known/openid-configuration
   requestBodies:
-    SearchSiteHtmlResponse:
+    SearchSiteHtmResponse:
       content:
         application/json; charset=utf-8:
           schema:
-            $ref: '#/components/schemas/SearchSiteHtmlResponse'
-    POSTSiteHtmlRequest:
+            $ref: '#/components/schemas/SearchSiteHtmResponse'
+    POSTSiteHtmRequest:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/POSTSiteHtmlRequest'
-    POSTSiteHtmlResponse:
+            $ref: '#/components/schemas/POSTSiteHtmRequest'
+    POSTSiteHtmResponse:
       content:
         application/json; charset=utf-8:
           schema:
-            $ref: '#/components/schemas/POSTSiteHtmlResponse'
-    PATCHSiteHtmlRequest:
+            $ref: '#/components/schemas/POSTSiteHtmResponse'
+    PATCHSiteHtmRequest:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/PATCHSiteHtmlRequest'
-    PATCHSiteHtmlResponse:
+            $ref: '#/components/schemas/PATCHSiteHtmRequest'
+    PATCHSiteHtmResponse:
       content:
         application/json; charset=utf-8:
           schema:
-            $ref: '#/components/schemas/PATCHSiteHtmlResponse'
-    PUTImportSiteHtmlRequest:
+            $ref: '#/components/schemas/PATCHSiteHtmResponse'
+    PUTImportSiteHtmRequest:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/PUTImportSiteHtmlRequest'
-    PUTImportSiteHtmlResponse:
+            $ref: '#/components/schemas/PUTImportSiteHtmRequest'
+    PUTImportSiteHtmResponse:
       content:
         application/json; charset=utf-8:
           schema:
-            $ref: '#/components/schemas/PUTImportSiteHtmlResponse'
-    GETSiteHtmlResponse:
+            $ref: '#/components/schemas/PUTImportSiteHtmResponse'
+    GETSiteHtmResponse:
       content:
         application/json; charset=utf-8:
           schema:
-            $ref: '#/components/schemas/GETSiteHtmlResponse'
-    SearchPageSiteHtmlResponse:
+            $ref: '#/components/schemas/GETSiteHtmResponse'
+    SearchPageSiteHtmResponse:
       content:
         text/html; charset=utf-8:
           schema:
-            $ref: '#/components/schemas/SearchPageSiteHtmlResponse'
+            $ref: '#/components/schemas/SearchPageSiteHtmResponse'
     SearchIotNodeResponse:
       content:
         application/json; charset=utf-8:
@@ -3677,7 +3677,7 @@ components:
           schema:
             $ref: '#/components/schemas/SearchPageSiteUserResponse'
   schemas:
-    SearchSiteHtmlResponse:
+    SearchSiteHtmResponse:
       allOf:
         - type: array
           items:
@@ -3699,43 +3699,29 @@ components:
                 type: array
                 items:
                   type: string
+              uri:
+                type: string
               pageId:
                 type: string
               sequenceNum:
                 type: string
-              htmlGroup:
+              htmGroup:
                 type: string
-              e:
+              eBefore:
+                type: string
+              eAfter:
                 type: string
               a:
                 type: object
               text:
                 type: string
-              sort1:
+              tabs:
                 type: string
-              sort2:
+              htmBefore:
                 type: string
-              sort3:
+              htmMiddle:
                 type: string
-              sort4:
-                type: string
-              sort5:
-                type: string
-              sort6:
-                type: string
-              sort7:
-                type: string
-              sort8:
-                type: string
-              sort9:
-                type: string
-              sort10:
-                type: string
-              htmlBefore:
-                type: string
-              htmlMiddle:
-                type: string
-              htmlAfter:
+              htmAfter:
                 type: string
               classCanonicalName:
                 type: string
@@ -3763,7 +3749,7 @@ components:
                 type: string
               id:
                 type: string
-    POSTSiteHtmlRequest:
+    POSTSiteHtmRequest:
       allOf:
         - type: object
           properties:
@@ -3783,43 +3769,29 @@ components:
               type: array
               items:
                 type: string
+            uri:
+              type: string
             pageId:
               type: string
             sequenceNum:
               type: string
-            htmlGroup:
+            htmGroup:
               type: string
-            e:
+            eBefore:
+              type: string
+            eAfter:
               type: string
             a:
               type: object
             text:
               type: string
-            sort1:
+            tabs:
               type: string
-            sort2:
+            htmBefore:
               type: string
-            sort3:
+            htmMiddle:
               type: string
-            sort4:
-              type: string
-            sort5:
-              type: string
-            sort6:
-              type: string
-            sort7:
-              type: string
-            sort8:
-              type: string
-            sort9:
-              type: string
-            sort10:
-              type: string
-            htmlBefore:
-              type: string
-            htmlMiddle:
-              type: string
-            htmlAfter:
+            htmAfter:
               type: string
             classCanonicalName:
               type: string
@@ -3847,7 +3819,7 @@ components:
               type: string
             id:
               type: string
-    POSTSiteHtmlResponse:
+    POSTSiteHtmResponse:
       allOf:
         - type: object
           properties:
@@ -3867,43 +3839,29 @@ components:
               type: array
               items:
                 type: string
+            uri:
+              type: string
             pageId:
               type: string
             sequenceNum:
               type: string
-            htmlGroup:
+            htmGroup:
               type: string
-            e:
+            eBefore:
+              type: string
+            eAfter:
               type: string
             a:
               type: object
             text:
               type: string
-            sort1:
+            tabs:
               type: string
-            sort2:
+            htmBefore:
               type: string
-            sort3:
+            htmMiddle:
               type: string
-            sort4:
-              type: string
-            sort5:
-              type: string
-            sort6:
-              type: string
-            sort7:
-              type: string
-            sort8:
-              type: string
-            sort9:
-              type: string
-            sort10:
-              type: string
-            htmlBefore:
-              type: string
-            htmlMiddle:
-              type: string
-            htmlAfter:
+            htmAfter:
               type: string
             classCanonicalName:
               type: string
@@ -3931,7 +3889,7 @@ components:
               type: string
             id:
               type: string
-    PATCHSiteHtmlRequest:
+    PATCHSiteHtmRequest:
       allOf:
         - type: object
           properties:
@@ -3993,6 +3951,13 @@ components:
               type: array
               items:
                 type: string
+            setUri:
+              type: string
+              nullable: true
+            removeUri:
+              type: string
+            removeAllUri:
+              type: string
             setPageId:
               type: string
               nullable: true
@@ -4007,19 +3972,26 @@ components:
               type: string
             removeAllSequenceNum:
               type: string
-            setHtmlGroup:
+            setHtmGroup:
               type: string
               nullable: true
-            removeHtmlGroup:
+            removeHtmGroup:
               type: string
-            removeAllHtmlGroup:
+            removeAllHtmGroup:
               type: string
-            setE:
+            setEBefore:
               type: string
               nullable: true
-            removeE:
+            removeEBefore:
               type: string
-            removeAllE:
+            removeAllEBefore:
+              type: string
+            setEAfter:
+              type: string
+              nullable: true
+            removeEAfter:
+              type: string
+            removeAllEAfter:
               type: string
             setA:
               type: object
@@ -4035,96 +4007,33 @@ components:
               type: string
             removeAllText:
               type: string
-            setSort1:
+            setTabs:
               type: string
               nullable: true
-            removeSort1:
+            removeTabs:
               type: string
-            removeAllSort1:
+            removeAllTabs:
               type: string
-            setSort2:
-              type: string
-              nullable: true
-            removeSort2:
-              type: string
-            removeAllSort2:
-              type: string
-            setSort3:
+            setHtmBefore:
               type: string
               nullable: true
-            removeSort3:
+            removeHtmBefore:
               type: string
-            removeAllSort3:
+            removeAllHtmBefore:
               type: string
-            setSort4:
-              type: string
-              nullable: true
-            removeSort4:
-              type: string
-            removeAllSort4:
-              type: string
-            setSort5:
+            setHtmMiddle:
               type: string
               nullable: true
-            removeSort5:
+            removeHtmMiddle:
               type: string
-            removeAllSort5:
+            removeAllHtmMiddle:
               type: string
-            setSort6:
-              type: string
-              nullable: true
-            removeSort6:
-              type: string
-            removeAllSort6:
-              type: string
-            setSort7:
+            setHtmAfter:
               type: string
               nullable: true
-            removeSort7:
+            removeHtmAfter:
               type: string
-            removeAllSort7:
-              type: string
-            setSort8:
-              type: string
-              nullable: true
-            removeSort8:
-              type: string
-            removeAllSort8:
-              type: string
-            setSort9:
-              type: string
-              nullable: true
-            removeSort9:
-              type: string
-            removeAllSort9:
-              type: string
-            setSort10:
-              type: string
-              nullable: true
-            removeSort10:
-              type: string
-            removeAllSort10:
-              type: string
-            setHtmlBefore:
-              type: string
-              nullable: true
-            removeHtmlBefore:
-              type: string
-            removeAllHtmlBefore:
-              type: string
-            setHtmlMiddle:
-              type: string
-              nullable: true
-            removeHtmlMiddle:
-              type: string
-            removeAllHtmlMiddle:
-              type: string
-            setHtmlAfter:
-              type: string
-              nullable: true
-            removeHtmlAfter:
-              type: string
-            removeAllHtmlAfter:
+            removeAllHtmAfter:
               type: string
             setClassCanonicalName:
               type: string
@@ -4220,7 +4129,7 @@ components:
               type: string
             removeAllId:
               type: string
-    PATCHSiteHtmlResponse:
+    PATCHSiteHtmResponse:
       allOf:
         - type: object
           properties:
@@ -4282,6 +4191,13 @@ components:
               type: array
               items:
                 type: string
+            setUri:
+              type: string
+              nullable: true
+            removeUri:
+              type: string
+            removeAllUri:
+              type: string
             setPageId:
               type: string
               nullable: true
@@ -4296,19 +4212,26 @@ components:
               type: string
             removeAllSequenceNum:
               type: string
-            setHtmlGroup:
+            setHtmGroup:
               type: string
               nullable: true
-            removeHtmlGroup:
+            removeHtmGroup:
               type: string
-            removeAllHtmlGroup:
+            removeAllHtmGroup:
               type: string
-            setE:
+            setEBefore:
               type: string
               nullable: true
-            removeE:
+            removeEBefore:
               type: string
-            removeAllE:
+            removeAllEBefore:
+              type: string
+            setEAfter:
+              type: string
+              nullable: true
+            removeEAfter:
+              type: string
+            removeAllEAfter:
               type: string
             setA:
               type: object
@@ -4324,96 +4247,33 @@ components:
               type: string
             removeAllText:
               type: string
-            setSort1:
+            setTabs:
               type: string
               nullable: true
-            removeSort1:
+            removeTabs:
               type: string
-            removeAllSort1:
+            removeAllTabs:
               type: string
-            setSort2:
-              type: string
-              nullable: true
-            removeSort2:
-              type: string
-            removeAllSort2:
-              type: string
-            setSort3:
+            setHtmBefore:
               type: string
               nullable: true
-            removeSort3:
+            removeHtmBefore:
               type: string
-            removeAllSort3:
+            removeAllHtmBefore:
               type: string
-            setSort4:
-              type: string
-              nullable: true
-            removeSort4:
-              type: string
-            removeAllSort4:
-              type: string
-            setSort5:
+            setHtmMiddle:
               type: string
               nullable: true
-            removeSort5:
+            removeHtmMiddle:
               type: string
-            removeAllSort5:
+            removeAllHtmMiddle:
               type: string
-            setSort6:
-              type: string
-              nullable: true
-            removeSort6:
-              type: string
-            removeAllSort6:
-              type: string
-            setSort7:
+            setHtmAfter:
               type: string
               nullable: true
-            removeSort7:
+            removeHtmAfter:
               type: string
-            removeAllSort7:
-              type: string
-            setSort8:
-              type: string
-              nullable: true
-            removeSort8:
-              type: string
-            removeAllSort8:
-              type: string
-            setSort9:
-              type: string
-              nullable: true
-            removeSort9:
-              type: string
-            removeAllSort9:
-              type: string
-            setSort10:
-              type: string
-              nullable: true
-            removeSort10:
-              type: string
-            removeAllSort10:
-              type: string
-            setHtmlBefore:
-              type: string
-              nullable: true
-            removeHtmlBefore:
-              type: string
-            removeAllHtmlBefore:
-              type: string
-            setHtmlMiddle:
-              type: string
-              nullable: true
-            removeHtmlMiddle:
-              type: string
-            removeAllHtmlMiddle:
-              type: string
-            setHtmlAfter:
-              type: string
-              nullable: true
-            removeHtmlAfter:
-              type: string
-            removeAllHtmlAfter:
+            removeAllHtmAfter:
               type: string
             setClassCanonicalName:
               type: string
@@ -4509,7 +4369,7 @@ components:
               type: string
             removeAllId:
               type: string
-    PUTImportSiteHtmlRequest:
+    PUTImportSiteHtmRequest:
       allOf:
         - type: object
           properties:
@@ -4529,43 +4389,29 @@ components:
               type: array
               items:
                 type: string
+            uri:
+              type: string
             pageId:
               type: string
             sequenceNum:
               type: string
-            htmlGroup:
+            htmGroup:
               type: string
-            e:
+            eBefore:
+              type: string
+            eAfter:
               type: string
             a:
               type: object
             text:
               type: string
-            sort1:
+            tabs:
               type: string
-            sort2:
+            htmBefore:
               type: string
-            sort3:
+            htmMiddle:
               type: string
-            sort4:
-              type: string
-            sort5:
-              type: string
-            sort6:
-              type: string
-            sort7:
-              type: string
-            sort8:
-              type: string
-            sort9:
-              type: string
-            sort10:
-              type: string
-            htmlBefore:
-              type: string
-            htmlMiddle:
-              type: string
-            htmlAfter:
+            htmAfter:
               type: string
             classCanonicalName:
               type: string
@@ -4593,7 +4439,7 @@ components:
               type: string
             id:
               type: string
-    PUTImportSiteHtmlResponse:
+    PUTImportSiteHtmResponse:
       allOf:
         - type: object
           properties:
@@ -4613,43 +4459,29 @@ components:
               type: array
               items:
                 type: string
+            uri:
+              type: string
             pageId:
               type: string
             sequenceNum:
               type: string
-            htmlGroup:
+            htmGroup:
               type: string
-            e:
+            eBefore:
+              type: string
+            eAfter:
               type: string
             a:
               type: object
             text:
               type: string
-            sort1:
+            tabs:
               type: string
-            sort2:
+            htmBefore:
               type: string
-            sort3:
+            htmMiddle:
               type: string
-            sort4:
-              type: string
-            sort5:
-              type: string
-            sort6:
-              type: string
-            sort7:
-              type: string
-            sort8:
-              type: string
-            sort9:
-              type: string
-            sort10:
-              type: string
-            htmlBefore:
-              type: string
-            htmlMiddle:
-              type: string
-            htmlAfter:
+            htmAfter:
               type: string
             classCanonicalName:
               type: string
@@ -4677,7 +4509,7 @@ components:
               type: string
             id:
               type: string
-    GETSiteHtmlResponse:
+    GETSiteHtmResponse:
       allOf:
         - type: object
           properties:
@@ -4697,43 +4529,29 @@ components:
               type: array
               items:
                 type: string
+            uri:
+              type: string
             pageId:
               type: string
             sequenceNum:
               type: string
-            htmlGroup:
+            htmGroup:
               type: string
-            e:
+            eBefore:
+              type: string
+            eAfter:
               type: string
             a:
               type: object
             text:
               type: string
-            sort1:
+            tabs:
               type: string
-            sort2:
+            htmBefore:
               type: string
-            sort3:
+            htmMiddle:
               type: string
-            sort4:
-              type: string
-            sort5:
-              type: string
-            sort6:
-              type: string
-            sort7:
-              type: string
-            sort8:
-              type: string
-            sort9:
-              type: string
-            sort10:
-              type: string
-            htmlBefore:
-              type: string
-            htmlMiddle:
-              type: string
-            htmlAfter:
+            htmAfter:
               type: string
             classCanonicalName:
               type: string
@@ -4761,7 +4579,7 @@ components:
               type: string
             id:
               type: string
-    SearchPageSiteHtmlResponse:
+    SearchPageSiteHtmResponse:
       allOf:
         - type: string
     SearchIotNodeResponse:

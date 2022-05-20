@@ -12,9 +12,9 @@ import io.vertx.ext.web.templ.handlebars.HandlebarsTemplateEngine;
 /**
  * Translate: false
  **/
-public class SiteHtmlEnUSApiServiceImpl extends SiteHtmlEnUSGenApiServiceImpl {
+public class SiteHtmEnUSApiServiceImpl extends SiteHtmEnUSGenApiServiceImpl {
 
-	public SiteHtmlEnUSApiServiceImpl(EventBus eventBus, JsonObject config, WorkerExecutor workerExecutor, PgPool pgPool, WebClient webClient, OAuth2Auth oauth2AuthenticationProvider, AuthorizationProvider authorizationProvider, HandlebarsTemplateEngine templateEngine) {
+	public SiteHtmEnUSApiServiceImpl(EventBus eventBus, JsonObject config, WorkerExecutor workerExecutor, PgPool pgPool, WebClient webClient, OAuth2Auth oauth2AuthenticationProvider, AuthorizationProvider authorizationProvider, HandlebarsTemplateEngine templateEngine) {
 		super(eventBus, config, workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine);
 	}
 }
