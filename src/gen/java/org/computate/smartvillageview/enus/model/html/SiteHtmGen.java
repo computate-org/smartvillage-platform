@@ -1061,6 +1061,64 @@ public abstract class SiteHtmGen<DEV> extends Object {
 		return tabs;
 	}
 
+	/////////////
+	// newLine //
+	/////////////
+
+	/**	 The entity newLine
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected Boolean newLine;
+
+	/**	<br> The entity newLine
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtm&fq=entiteVar_enUS_indexed_string:newLine">Find the entity newLine in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _newLine(Wrap<Boolean> w);
+
+	public Boolean getNewLine() {
+		return newLine;
+	}
+
+	public void setNewLine(Boolean newLine) {
+		this.newLine = newLine;
+	}
+	@JsonIgnore
+	public void setNewLine(String o) {
+		this.newLine = SiteHtm.staticSetNewLine(siteRequest_, o);
+	}
+	public static Boolean staticSetNewLine(SiteRequestEnUS siteRequest_, String o) {
+		return Boolean.parseBoolean(o);
+	}
+	protected SiteHtm newLineInit() {
+		Wrap<Boolean> newLineWrap = new Wrap<Boolean>().var("newLine");
+		if(newLine == null) {
+			_newLine(newLineWrap);
+			setNewLine(newLineWrap.o);
+		}
+		return (SiteHtm)this;
+	}
+
+	public static Boolean staticSearchNewLine(SiteRequestEnUS siteRequest_, Boolean o) {
+		return o;
+	}
+
+	public static String staticSearchStrNewLine(SiteRequestEnUS siteRequest_, Boolean o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqNewLine(SiteRequestEnUS siteRequest_, String o) {
+		return SiteHtm.staticSearchStrNewLine(siteRequest_, SiteHtm.staticSearchNewLine(siteRequest_, SiteHtm.staticSetNewLine(siteRequest_, o)));
+	}
+
+	public Boolean sqlNewLine() {
+		return newLine;
+	}
+
 	///////////////
 	// htmBefore //
 	///////////////
@@ -1886,6 +1944,7 @@ public abstract class SiteHtmGen<DEV> extends Object {
 				aInit();
 				textInit();
 				tabsInit();
+				newLineInit();
 				htmBeforeInit();
 				htmMiddleInit();
 				htmAfterInit();
@@ -1987,6 +2046,8 @@ public abstract class SiteHtmGen<DEV> extends Object {
 				return oSiteHtm.text;
 			case "tabs":
 				return oSiteHtm.tabs;
+			case "newLine":
+				return oSiteHtm.newLine;
 			case "htmBefore":
 				return oSiteHtm.htmBefore;
 			case "htmMiddle":
@@ -2086,6 +2147,8 @@ public abstract class SiteHtmGen<DEV> extends Object {
 			return SiteHtm.staticSetText(siteRequest_, o);
 		case "tabs":
 			return SiteHtm.staticSetTabs(siteRequest_, o);
+		case "newLine":
+			return SiteHtm.staticSetNewLine(siteRequest_, o);
 		case "htmBefore":
 			return SiteHtm.staticSetHtmBefore(siteRequest_, o);
 		case "htmMiddle":
@@ -2160,6 +2223,8 @@ public abstract class SiteHtmGen<DEV> extends Object {
 			return SiteHtm.staticSearchText(siteRequest_, (String)o);
 		case "tabs":
 			return SiteHtm.staticSearchTabs(siteRequest_, (String)o);
+		case "newLine":
+			return SiteHtm.staticSearchNewLine(siteRequest_, (Boolean)o);
 		case "htmBefore":
 			return SiteHtm.staticSearchHtmBefore(siteRequest_, (String)o);
 		case "htmMiddle":
@@ -2234,6 +2299,8 @@ public abstract class SiteHtmGen<DEV> extends Object {
 			return SiteHtm.staticSearchStrText(siteRequest_, (String)o);
 		case "tabs":
 			return SiteHtm.staticSearchStrTabs(siteRequest_, (String)o);
+		case "newLine":
+			return SiteHtm.staticSearchStrNewLine(siteRequest_, (Boolean)o);
 		case "htmBefore":
 			return SiteHtm.staticSearchStrHtmBefore(siteRequest_, (String)o);
 		case "htmMiddle":
@@ -2308,6 +2375,8 @@ public abstract class SiteHtmGen<DEV> extends Object {
 			return SiteHtm.staticSearchFqText(siteRequest_, o);
 		case "tabs":
 			return SiteHtm.staticSearchFqTabs(siteRequest_, o);
+		case "newLine":
+			return SiteHtm.staticSearchFqNewLine(siteRequest_, o);
 		case "htmBefore":
 			return SiteHtm.staticSearchFqHtmBefore(siteRequest_, o);
 		case "htmMiddle":
@@ -2441,6 +2510,13 @@ public abstract class SiteHtmGen<DEV> extends Object {
 					setTabs((String)val);
 				saves.add("tabs");
 				return val;
+			case "newline":
+				if(val instanceof Boolean)
+					setNewLine((Boolean)val);
+				else if(val instanceof String)
+					setNewLine((String)val);
+				saves.add("newLine");
+				return val;
 			case "htmbefore":
 				if(val instanceof String)
 					setHtmBefore((String)val);
@@ -2524,6 +2600,9 @@ public abstract class SiteHtmGen<DEV> extends Object {
 		if(tabs != null) {
 			doc.put("tabs_docvalues_string", tabs);
 		}
+		if(newLine != null) {
+			doc.put("newLine_docvalues_boolean", newLine);
+		}
 		if(htmBefore != null) {
 			doc.put("htmBefore_stored_string", htmBefore);
 		}
@@ -2601,6 +2680,8 @@ public abstract class SiteHtmGen<DEV> extends Object {
 				return "eAfter_docvalues_string";
 			case "tabs":
 				return "tabs_docvalues_string";
+			case "newLine":
+				return "newLine_docvalues_boolean";
 			case "htmBefore":
 				return "htmBefore_stored_string";
 			case "htmMiddle":
@@ -2658,6 +2739,8 @@ public abstract class SiteHtmGen<DEV> extends Object {
 				return "eAfter_docvalues_string";
 			case "tabs":
 				return "tabs_docvalues_string";
+			case "newLine":
+				return "newLine_docvalues_boolean";
 			case "classCanonicalName":
 				return "classCanonicalName_docvalues_string";
 			case "classSimpleName":
@@ -2713,6 +2796,8 @@ public abstract class SiteHtmGen<DEV> extends Object {
 				return "eAfter";
 			case "tabs_docvalues_string":
 				return "tabs";
+			case "newLine_docvalues_boolean":
+				return "newLine";
 			case "htmBefore_stored_string":
 				return "htmBefore";
 			case "htmMiddle_stored_string":
@@ -2791,6 +2876,7 @@ public abstract class SiteHtmGen<DEV> extends Object {
 		oSiteHtm.setEBefore(Optional.ofNullable(doc.get("eBefore_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSiteHtm.setEAfter(Optional.ofNullable(doc.get("eAfter_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSiteHtm.setTabs(Optional.ofNullable(doc.get("tabs_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oSiteHtm.setNewLine(Optional.ofNullable(doc.get("newLine_docvalues_boolean")).map(v -> v.toString()).orElse(null));
 		oSiteHtm.setHtmBefore(Optional.ofNullable(doc.get("htmBefore_stored_string")).map(v -> v.toString()).orElse(null));
 		oSiteHtm.setHtmMiddle(Optional.ofNullable(doc.get("htmMiddle_stored_string")).map(v -> v.toString()).orElse(null));
 		oSiteHtm.setHtmAfter(Optional.ofNullable(doc.get("htmAfter_stored_string")).map(v -> v.toString()).orElse(null));
@@ -2850,6 +2936,8 @@ public abstract class SiteHtmGen<DEV> extends Object {
 				apiRequest.addVars("text");
 			if(!Objects.equals(tabs, original.getTabs()))
 				apiRequest.addVars("tabs");
+			if(!Objects.equals(newLine, original.getNewLine()))
+				apiRequest.addVars("newLine");
 			if(!Objects.equals(htmBefore, original.getHtmBefore()))
 				apiRequest.addVars("htmBefore");
 			if(!Objects.equals(htmMiddle, original.getHtmMiddle()))
@@ -2902,6 +2990,7 @@ public abstract class SiteHtmGen<DEV> extends Object {
 		sb.append(Optional.ofNullable(a).map(v -> "a: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(text).map(v -> "text: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(tabs).map(v -> "tabs: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(newLine).map(v -> "newLine: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(htmBefore).map(v -> "htmBefore: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(htmMiddle).map(v -> "htmMiddle: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(htmAfter).map(v -> "htmAfter: \"" + v + "\"\n" ).orElse(""));
@@ -2937,6 +3026,7 @@ public abstract class SiteHtmGen<DEV> extends Object {
 	public static final String VAR_a = "a";
 	public static final String VAR_text = "text";
 	public static final String VAR_tabs = "tabs";
+	public static final String VAR_newLine = "newLine";
 	public static final String VAR_htmBefore = "htmBefore";
 	public static final String VAR_htmMiddle = "htmMiddle";
 	public static final String VAR_htmAfter = "htmAfter";
@@ -2999,6 +3089,7 @@ public abstract class SiteHtmGen<DEV> extends Object {
 	public static final String DISPLAY_NAME_a = "HTML Element";
 	public static final String DISPLAY_NAME_text = "Text";
 	public static final String DISPLAY_NAME_tabs = "Tabs";
+	public static final String DISPLAY_NAME_newLine = "Tabs";
 	public static final String DISPLAY_NAME_htmBefore = "HTML before";
 	public static final String DISPLAY_NAME_htmMiddle = "HTML middle";
 	public static final String DISPLAY_NAME_htmAfter = "HTML after";
@@ -3054,6 +3145,8 @@ public abstract class SiteHtmGen<DEV> extends Object {
 			return DISPLAY_NAME_text;
 		case VAR_tabs:
 			return DISPLAY_NAME_tabs;
+		case VAR_newLine:
+			return DISPLAY_NAME_newLine;
 		case VAR_htmBefore:
 			return DISPLAY_NAME_htmBefore;
 		case VAR_htmMiddle:
@@ -3124,6 +3217,8 @@ public abstract class SiteHtmGen<DEV> extends Object {
 		case VAR_text:
 			return "The text. ";
 		case VAR_tabs:
+			return "The tabs. ";
+		case VAR_newLine:
 			return "The tabs. ";
 		case VAR_htmBefore:
 			return "The HTML that comes before the text. ";
@@ -3196,6 +3291,8 @@ public abstract class SiteHtmGen<DEV> extends Object {
 			return "String";
 		case VAR_tabs:
 			return "String";
+		case VAR_newLine:
+			return "Boolean";
 		case VAR_htmBefore:
 			return "String";
 		case VAR_htmMiddle:

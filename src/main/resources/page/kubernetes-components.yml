@@ -8,6 +8,31 @@ htmTitle:
       What Kubernetes components are used in the Smart Village project? 
       Both Kubernetes API objects and OpenShift API Objects
 htmBody:
+  - e: h1
+    text: Kubernetes Components of the Smart Village Application
+  - e: ul
+    in:
+      - e: li
+        in:
+          - e: dt
+            text: Pod
+          - e: dd
+            text: A group of containers with shared storage and network resources running the same application. 
+      - e: li
+        in:
+          - e: dt
+            text: Service
+          - e: dd
+            text: A network service to load balance requests to pods. 
+      - e: li
+        in:
+          - e: dt
+            text: ReplicationController
+          - e: dd
+            text: Ensures that a specified number of pod replicas are running at any one time. 
+  - e: p
+    text: >-
+      The core Kubernetes components consist of a pod, 
   - e: h2
     text: Kubernetes Components
   - e: p
@@ -20,9 +45,13 @@ htmBody:
   - e: ul
     in:
       - e: li
-        text: Service
+        in:
+          e: span
+          text: Service
       - e: li
-        text: Secret
+        in:
+          e: span
+          text: Secret
   - e: h2
     text: OpenShift Components
   - e: p

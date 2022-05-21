@@ -36,12 +36,20 @@
 {{#*inline "htmBodyStartDynamicPage"}}
 {{> "htmBodyStartPageLayout"}}
 {{/inline}}
+{{#*inline "htmBodyMenuDynamicPage"}}		<!-- #*inline "htmBodyMenuDynamicPage" -->
+{{> "htmBodyMenuPageLayout"}}{{/inline}}
 {{#*inline "htmBodyEndDynamicPage"}}
 {{> "htmBodyEndPageLayout"}}
 {{/inline}}
 {{#*inline "htmBodyDynamicPage"}}
 {{#block "htmBodyStart"}}{{/block}}
+		<div class="w3-bar ">
+			<div class="w3-bar-item ">
+{{#block "htmBodyMenu"}}{{/block}}
+			</div>
+		</div>
 	<div class="pageContent w3-content ">
+{{#each htmBody}}{{#if htmBefore}}{{{htmBefore}}}{{/if}}{{#if htmMiddle}}{{{htmMiddle}}}{{/if}}{{#if htmAfter}}{{{htmAfter}}}{{/if}}{{/each}}
 {{#block "htmBodyEnd"}}{{/block}}
 	</div>
 {{/inline}}

@@ -45,6 +45,7 @@ public class DynamicPage extends DynamicPageGen<PageLayout> {
 		l.q("*:*");
 		l.setC(SiteHtm.class);
 		l.fq(String.format("uri_docvalues_string:%s", SearchTool.escapeQueryChars(uri)));
+		l.sortAsc("sequenceNum_docvalues_long");
 		l.setStore(true);
 		promise.complete(l);
 	}

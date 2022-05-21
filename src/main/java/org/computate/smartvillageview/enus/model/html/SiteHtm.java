@@ -241,6 +241,17 @@ public class SiteHtm extends SiteHtmGen<Object> {
 
 	/**
 	 * {@inheritDoc}
+	 * Persist: true
+	 * DocValues: true
+	 * DisplayName: Tabs
+	 * Description: The tabs. 
+	 */
+	protected void _newLine(Wrap<Boolean> w) {
+		w.o(false);
+	}
+
+	/**
+	 * {@inheritDoc}
 	 * Stored: true
 	 * Persist: true
 	 * DisplayName: HTML before
@@ -249,6 +260,8 @@ public class SiteHtm extends SiteHtmGen<Object> {
 	protected void _htmBefore(Wrap<String> w) {
 		if(eBefore != null) {
 			StringBuilder b = new StringBuilder();
+			if(tabs != null)
+				b.append(tabs);
 			b.append("<").append(eBefore);
 			if(a != null) {
 				for(String attr : a.fieldNames()) {
@@ -260,6 +273,9 @@ public class SiteHtm extends SiteHtmGen<Object> {
 				b.append("/>");
 			} else {
 				b.append(">");
+			}
+			if(newLine) {
+				b.append("\n");
 			}
 			w.o(b.toString());
 		}
@@ -290,7 +306,13 @@ public class SiteHtm extends SiteHtmGen<Object> {
 	protected void _htmAfter(Wrap<String> w) {
 		if(eAfter != null && !XmlTool.HTML_ELEMENTS_CLOSED.contains(eAfter)) {
 			StringBuilder b = new StringBuilder();
+			if(tabs != null) {
+				b.append(tabs);
+			}
 			b.append("</").append(eAfter).append(">");
+			if(newLine) {
+				b.append("\n");
+			}
 			w.o(b.toString());
 		}
 	}

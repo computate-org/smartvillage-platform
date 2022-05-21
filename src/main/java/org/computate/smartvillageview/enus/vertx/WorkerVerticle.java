@@ -555,7 +555,10 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 					importItem.put(SiteHtm.VAR_eBefore, e);
 				Optional.ofNullable(pageItem.getString(SiteHtm.VAR_text)).ifPresent(text -> importItem.put(SiteHtm.VAR_text, text));
 				if(!eNoWrapParent && !tabs.isEmpty()) {
-					importItem.put(SiteHtm.VAR_tabs, String.format("\n%s", tabs));
+					importItem.put(SiteHtm.VAR_tabs, tabs);
+				}
+				if(!eNoWrap) {
+					importItem.put(SiteHtm.VAR_newLine, true);
 				}
 				importItem.put(SiteHtm.VAR_saves, new JsonArray()
 						.add(SiteHtm.VAR_eBefore)
@@ -599,10 +602,12 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 				sequenceNum++;
 				JsonObject importItem = new JsonObject();
 				importItem.put(SiteHtm.VAR_eAfter, e);
-				if(!eNoWrap)
-					importItem.put(SiteHtm.VAR_tabs, "\n");
-				if(!eNoWrap && !tabs.isEmpty())
+				if(!eNoWrap && !tabs.isEmpty()) {
 					importItem.put(SiteHtm.VAR_tabs, tabs);
+				}
+				if(!eNoWrapParent) {
+					importItem.put(SiteHtm.VAR_newLine, true);
+				}
 				importItem.put(SiteHtm.VAR_saves, new JsonArray()
 						.add(SiteHtm.VAR_eAfter)
 						.add(SiteHtm.VAR_htmAfter)
@@ -610,11 +615,13 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 						.add(SiteHtm.VAR_htmGroup)
 						.add(SiteHtm.VAR_pageId)
 						.add(SiteHtm.VAR_tabs)
+						.add(SiteHtm.VAR_uri)
 						);
 				importItem.put(SiteHtm.VAR_created, ComputateZonedDateTimeSerializer.ZONED_DATE_TIME_FORMATTER.format(ZonedDateTime.now()));
 				importItem.put(SiteHtm.VAR_pageId, pageId);
 				importItem.put(SiteHtm.VAR_htmGroup, htmGroup);
 				importItem.put(SiteHtm.VAR_sequenceNum, sequenceNum);
+				importItem.put(SiteHtm.VAR_uri, uri);
 				importItem.put(SiteHtm.VAR_id, String.format("%s_%s", SiteHtm.CLASS_SIMPLE_NAME, sequenceNum));
 				for(Integer j=1; j <= stack.size(); j++) {
 					importItem.put("sort" + j, stack.get(j - 1));

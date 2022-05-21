@@ -1541,6 +1541,65 @@
 
 {{/inline}}
 
+{{#*inline "htmNewLine"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SiteHtmNewLine">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-navy-peony">
+													<label for="{{classApiMethodMethod}}_newLine">Tabs</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputNewLine"}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputNewLine"}}
+	{{#eq 'Page' classApiMethodMethod}}
+															<input
+																type="checkbox"
+																id="{{classApiMethodMethod}}_newLine"
+																value="true"
+	{{else}}
+														<select
+															id="{{classApiMethodMethod}}_newLine"
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+															class="classSiteHtm inputSiteHtm{{id}}NewLine w3-input w3-border "
+															name="setNewLine"
+	{{else}}
+		{{#eq 'Page' classApiMethodMethod}}
+																class="classSiteHtm inputSiteHtm{{id}}NewLine w3-input w3-border "
+																name="setNewLine"
+		{{else}}
+																class="setNewLine valueNewLine classSiteHtm inputSiteHtm{{id}}NewLine w3-input w3-border "
+																name="setNewLine"
+		{{/eq}}
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+															onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setNewLine', $(this).prop('checked'), function() { addGlow($('#{{classApiMethodMethod}}_newLine')); }, function() { addError($('#{{classApiMethodMethod}}_newLine')); }); "
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+		{{#if siteHtm_.newLine}}
+																checked="checked"
+		{{/if}}
+																/>
+	{{else}}
+															>
+															<option value="" selected="selected"></option>
+															<option value="true">true</option>
+															<option value="false">false</option>
+														</select>
+	{{/eq}}
+
+{{/inline}}
+
 {{#*inline "htmHtmBefore"}}
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									<div class="w3-padding ">
