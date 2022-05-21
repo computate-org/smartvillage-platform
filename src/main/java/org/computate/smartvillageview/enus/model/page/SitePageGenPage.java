@@ -202,11 +202,11 @@ public class SitePageGenPage extends SitePageGenPageGen<PageLayout> {
 		if(sitePage_ != null && sitePage_.getObjectTitle() != null)
 			c.o(sitePage_.getObjectTitle());
 		else if(sitePage_ != null)
-			c.o("pages");
+			c.o("articles");
 		else if(searchListSitePage_ == null || sitePageCount == 0)
-			c.o("no page found");
+			c.o("no article found");
 		else
-			c.o("pages");
+			c.o("articles");
 	}
 
 	@Override

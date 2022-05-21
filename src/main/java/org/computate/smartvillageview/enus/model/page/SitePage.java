@@ -37,7 +37,7 @@ import io.vertx.core.Promise;
  * PageSuperSearchPage.enUS: BaseModelPage
  * ApiUriSearchPage.enUS: /page
  * 
- * AName.enUS: a page
+ * AName.enUS: an article
  * Color: 2017-navy-peony
  * IconGroup: duotone
  * IconName: sensor-triangle-exclamation

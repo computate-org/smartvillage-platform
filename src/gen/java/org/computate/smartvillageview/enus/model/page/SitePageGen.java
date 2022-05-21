@@ -69,24 +69,24 @@ public abstract class SitePageGen<DEV> extends Object {
 	protected static final Logger LOG = LoggerFactory.getLogger(SitePage.class);
 
 	public static final String SitePage_Description_enUS = "A webpage in the site. ";
-	public static final String SitePage_AName_enUS = "a page";
+	public static final String SitePage_AName_enUS = "an article";
 	public static final String SitePage_This_enUS = "this ";
-	public static final String SitePage_ThisName_enUS = "this page";
+	public static final String SitePage_ThisName_enUS = "this article";
 	public static final String SitePage_A_enUS = "a ";
-	public static final String SitePage_TheName_enUS = "the page";
-	public static final String SitePage_NameSingular_enUS = "page";
-	public static final String SitePage_NamePlural_enUS = "pages";
-	public static final String SitePage_NameActual_enUS = "current page";
-	public static final String SitePage_AllName_enUS = "all the pages";
-	public static final String SitePage_SearchAllNameBy_enUS = "search pages by ";
-	public static final String SitePage_Title_enUS = "pages";
-	public static final String SitePage_ThePluralName_enUS = "the pages";
-	public static final String SitePage_NoNameFound_enUS = "no page found";
+	public static final String SitePage_TheName_enUS = "thearticle";
+	public static final String SitePage_NameSingular_enUS = "article";
+	public static final String SitePage_NamePlural_enUS = "articles";
+	public static final String SitePage_NameActual_enUS = "current article";
+	public static final String SitePage_AllName_enUS = "all the articles";
+	public static final String SitePage_SearchAllNameBy_enUS = "search articles by ";
+	public static final String SitePage_Title_enUS = "articles";
+	public static final String SitePage_ThePluralName_enUS = "the articles";
+	public static final String SitePage_NoNameFound_enUS = "no article found";
 	public static final String SitePage_NameVar_enUS = "page";
-	public static final String SitePage_OfName_enUS = "of page";
-	public static final String SitePage_ANameAdjective_enUS = "a page";
-	public static final String SitePage_NameAdjectiveSingular_enUS = "page";
-	public static final String SitePage_NameAdjectivePlural_enUS = "pages";
+	public static final String SitePage_OfName_enUS = "of article";
+	public static final String SitePage_ANameAdjective_enUS = "an article";
+	public static final String SitePage_NameAdjectiveSingular_enUS = "article";
+	public static final String SitePage_NameAdjectivePlural_enUS = "articles";
 	public static final String Search_enUS_Uri = "/api/page";
 	public static final String Search_enUS_ImageUri = "/png/api/page-999.png";
 	public static final String GET_enUS_Uri = "/api/page/{id}";
@@ -138,8 +138,16 @@ public abstract class SitePageGen<DEV> extends Object {
 		Promise<SearchList<Void>> promise2 = Promise.promise();
 		_promiseBefore(promise2);
 		promise2.future().onSuccess(o -> {
-			setPromiseBefore(o);
-			promise.complete(o);
+			if(o != null && promiseBefore == null) {
+				o.promiseDeepForClass(siteRequest_).onSuccess(a -> {
+					setPromiseBefore(o);
+					promise.complete(o);
+				}).onFailure(ex -> {
+					promise.fail(ex);
+				});
+			} else {
+				promise.complete(o);
+			}
 		}).onFailure(ex -> {
 			promise.fail(ex);
 		});
@@ -1592,6 +1600,8 @@ public abstract class SitePageGen<DEV> extends Object {
 	/////////////////
 
 	public void siteRequestSitePage(SiteRequestEnUS siteRequest_) {
+		if(promiseBefore != null)
+			promiseBefore.setSiteRequest_(siteRequest_);
 	}
 
 	public void siteRequestForClass(SiteRequestEnUS siteRequest_) {

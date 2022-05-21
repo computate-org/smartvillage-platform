@@ -369,7 +369,7 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 
 		try {
 			createSitePage(siteRequest).onSuccess(sitePage -> {
-				persistSitePage(sitePage).onSuccess(c -> {
+				persistSitePage(sitePage, false).onSuccess(c -> {
 					indexSitePage(sitePage).onSuccess(e -> {
 						promise.complete(sitePage);
 					}).onFailure(ex -> {
@@ -577,7 +577,7 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 			pgPool.withTransaction(sqlConnection -> {
 				Promise<SitePage> promise1 = Promise.promise();
 				siteRequest.setSqlConnection(sqlConnection);
-				persistSitePage(o).onSuccess(c -> {
+				persistSitePage(o, true).onSuccess(c -> {
 					indexSitePage(o).onSuccess(e -> {
 						promise1.complete(o);
 					}).onFailure(ex -> {
@@ -1191,15 +1191,22 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 	public void searchSitePage2(SiteRequestEnUS siteRequest, Boolean populate, Boolean store, Boolean modify, SearchList<SitePage> searchList) {
 	}
 
-	public Future<Void> persistSitePage(SitePage o) {
+	public Future<Void> persistSitePage(SitePage o, Boolean patch) {
 		Promise<Void> promise = Promise.promise();
 		try {
 			SiteRequestEnUS siteRequest = o.getSiteRequest_();
 				try {
 					JsonObject jsonObject = siteRequest.getJsonObject();
 					jsonObject.forEach(definition -> {
-							String columnName = definition.getKey();
-							Object columnValue = definition.getValue();
+							String columnName;
+							Object columnValue;
+						if(patch && StringUtils.startsWith(definition.getKey(), "set")) {
+							columnName = StringUtils.uncapitalize(StringUtils.substringAfter(definition.getKey(), "set"));
+							columnValue = definition.getValue();
+						} else {
+							columnName = definition.getKey();
+							columnValue = definition.getValue();
+						}
 						if(!"".equals(columnName)) {
 							try {
 								o.persistForClass(columnName, columnValue);

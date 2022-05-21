@@ -1,5 +1,5 @@
 {{#*inline "htmTitleSitePagePage"}}		<!-- inline "htmTitleSitePagePage" -->
-		<title>{{#if searchListSitePage_}}{{#eq sitePageCount int1}}{{#eq params.query.q "*:*"}}page{{else}}page{{/eq}}{{else}}no page found{{/eq}}{{else}}pages{{/if}}</title>
+		<title>{{#if searchListSitePage_}}{{#eq sitePageCount int1}}{{#eq params.query.q "*:*"}}article{{else}}article{{/eq}}{{else}}no article found{{/eq}}{{else}}articles{{/if}}</title>
 {{/inline}}
 {{#*inline "htmMetaSitePagePage"}}{{> "htmMetaPageLayout"}}{{/inline}}
 {{#*inline "htmStyleSitePagePage"}}{{> "htmStylePageLayout"}}{{/inline}}
@@ -255,7 +255,7 @@
 				{{#if contextIconCssClasses}}
 					<i class="{{ contextIconCssClasses }} site-menu-icon "></i>
 				{{/if}}
-				<span class="">pages</span>
+				<span class="">articles</span>
 			</a>
 		</h1>
 		<h2>
@@ -263,7 +263,7 @@
 				{{#if contextIconCssClasses}}
 					<i class="{{ contextIconCssClasses }}  site-menu-icon "></i>
 				{{/if}}
-				<span class="">no page found</span>
+				<span class="">no article found</span>
 			</span>
 		</h2>
 {{/inline}}
@@ -273,7 +273,7 @@
 			{{#if contextIconCssClasses}}
 				<i class="{{ contextIconCssClasses }} site-menu-icon "></i>
 			{{/if}}
-				<span class="">page</span>
+				<span class="">article</span>
 			</a>
 		</h1>
 		<h2 class="w3-center ">
@@ -288,7 +288,7 @@
 	{{#if contextIconCssClasses}}
 				<i class="{{ contextIconCssClasses }} site-menu-icon "></i>
 	{{/if}}
-				<span class="">pages</span>
+				<span class="">articles</span>
 			</a>
 		</h1>
 		<div>
@@ -326,7 +326,7 @@
 	{{#if contextIconCssClasses}}
 				<i class="{{ contextIconCssClasses }} site-menu-icon "></i>
 	{{/if}}
-				<span class="">pages</span>
+				<span class="">articles</span>
 			</a>
 		</h1>
 		<div class="">
@@ -379,7 +379,7 @@
 			onclick="$('#postSitePageModal').show(); "
 			>
 			<i class="fas fa-file-plus "></i>
-			Create a page
+			Create an article
 		</button>
 		<div id="postSitePageModal" class="w3-modal ">
 			<div class="w3-modal-content ">
@@ -388,7 +388,7 @@
 	{{#eq "Page" classApiMethodMethod}}
 						<span class="w3-button w3-display-topright " onclick="$('#postSitePageModal').hide(); ">×</span>
 	{{/eq}}
-						<h2 class="w3-padding ">Create a page</h2>
+						<h2 class="w3-padding ">Create an article</h2>
 					</header>
 					<div class="" id="postSitePageFormValues">
 						<div id="postSitePageForm">
@@ -410,7 +410,7 @@
 						<button
 							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-2017-navy-peony "
 							onclick="postSitePage($('#postSitePageForm')); "
-							>Create a page</button>
+							>Create an article</button>
 					</div>
 				</div>
 			</div>
@@ -422,7 +422,7 @@
 			onclick="$('#patchSitePageModal').show(); "
 			>
 			<i class="fas fa-edit "></i>
-			Modify pages
+			Modify articles
 		</button>
 		<div id="patchSitePageModal" class="w3-modal ">
 			<div class="w3-modal-content ">
@@ -431,7 +431,7 @@
 	{{#eq "Page" classApiMethodMethod}}
 						<span class="w3-button w3-display-topright " onclick="$('#patchSitePageModal').hide(); ">×</span>
 	{{/eq}}
-						<h2 class="w3-padding ">Modify pages</h2>
+						<h2 class="w3-padding ">Modify articles</h2>
 					</header>
 					<div class="" id="patchSitePageFormValues">
 							<div class="w3-cell-row ">
@@ -451,7 +451,7 @@
 						<button
 							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-2017-navy-peony "
 							onclick="patchSitePage(null, $('#patchSitePageFormValues')); "
-							>Modify pages</button>
+							>Modify articles</button>
 					</div>
 				</div>
 			</div>
@@ -463,7 +463,7 @@
 			onclick="$('#putimportSitePageModal').show(); "
 			>
 			<i class="fas fa-file-import "></i>
-			Import pages
+			Import articles
 		</button>
 		<div id="putimportSitePageModal" class="w3-modal ">
 			<div class="w3-modal-content ">
@@ -472,7 +472,7 @@
 	{{#eq "Page" classApiMethodMethod}}
 						<span class="w3-button w3-display-topright " onclick="$('#putimportSitePageModal').hide(); ">×</span>
 	{{/eq}}
-						<h2 class="w3-padding ">Import pages</h2>
+						<h2 class="w3-padding ">Import articles</h2>
 					</header>
 					<div class="" id="putimportSitePageFormValues">
 						<div class="w3-cell-row ">
@@ -485,7 +485,7 @@
 						<button
 							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-2017-navy-peony "
 							onclick="putimportSitePage($('#putimportSitePageFormValues')); "
-							>Import pages</button>
+							>Import articles</button>
 					</div>
 				</div>
 			</div>
@@ -732,7 +732,7 @@
 			id="refreshThisSitePageGenPage"
 			onclick="patch{{classSimpleName}}Vals( [ {name: 'fq', value: 'id:{{id}}' } ], {}, function() { addGlow($('#refreshThisSitePageGenPage')); }, function() { addError($('#refreshThisSitePageGenPage')); }); return false; ">
 			<i class="fas fa-sync-alt "></i>
-			refresh this page
+			refresh this article
 		</button>
 		{{/eq}}
 	{{/ifContainsAnyRoles}}
@@ -750,14 +750,14 @@
 							onclick="patch{{classSimpleName}}Vals([], {}, function() { addGlow($('#refreshAllSitePageGenPage{{id}}')); }, function() { addError($('#refreshAllSitePageGenPage{{id}}')); }); "
 							>
 							<i class="fas fa-sync-alt "></i>
-							refresh all the pages
+							refresh all the articles
 						</button>
 					</div>
 			{{/ifContainsAnyRoles}}
 			<div class="w3-cell-row ">
 				<div class="w3-cell ">
 					<span>
-						search pages: 
+						search articles: 
 					</span>
 				</div>
 			</div>
@@ -790,7 +790,7 @@
 			<div class="">
 				<a href="/page" class="">
 					<i class="fad fa-sensor-triangle-exclamation"></i>
-					see all the pages
+					see all the articles
 				</a>
 			</div>
 {{/inline}}
