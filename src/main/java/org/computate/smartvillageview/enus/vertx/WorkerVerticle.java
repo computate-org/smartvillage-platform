@@ -9,6 +9,7 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -556,7 +557,7 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 				JsonObject importItem = new JsonObject();
 				if(e != null)
 					importItem.put(SiteHtm.VAR_eBefore, e);
-				Optional.ofNullable(pageItem.getString(SiteHtm.VAR_text)).ifPresent(text -> importItem.put(SiteHtm.VAR_text, new JsonArray().add(text)));
+				Optional.ofNullable(pageItem.getString(SiteHtm.VAR_text)).ifPresent(text -> importItem.put(SiteHtm.VAR_text, new JsonArray().addAll(new JsonArray(Arrays.asList(text.split("\r?\n"))))));
 				if(!eNoWrapParent && !tabs.isEmpty()) {
 					importItem.put(SiteHtm.VAR_tabs, tabs);
 				}
