@@ -960,35 +960,52 @@ public abstract class SiteHtmGen<DEV> extends Object {
 	//////////
 
 	/**	 The entity text
-	 *	 is defined as null before being initialized. 
+	 *	 It is constructed before being initialized with the constructor by default. 
 	 */
 	@JsonProperty
+	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
 	@JsonInclude(Include.NON_NULL)
-	protected String text;
+	protected List<String> text = new ArrayList<String>();
 
 	/**	<br> The entity text
-	 *  is defined as null before being initialized. 
+	 *  It is constructed before being initialized with the constructor by default. 
 	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtm&fq=entiteVar_enUS_indexed_string:text">Find the entity text in Solr</a>
 	 * <br>
-	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 * @param w is the entity already constructed. 
 	 **/
-	protected abstract void _text(Wrap<String> w);
+	protected abstract void _text(List<String> w);
 
-	public String getText() {
+	public List<String> getText() {
 		return text;
 	}
-	public void setText(String o) {
-		this.text = SiteHtm.staticSetText(siteRequest_, o);
+
+	public void setText(List<String> text) {
+		this.text = text;
 	}
 	public static String staticSetText(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	protected SiteHtm textInit() {
-		Wrap<String> textWrap = new Wrap<String>().var("text");
-		if(text == null) {
-			_text(textWrap);
-			setText(textWrap.o);
+	public SiteHtm addText(String...objets) {
+		for(String o : objets) {
+			addText(o);
 		}
+		return (SiteHtm)this;
+	}
+	public SiteHtm addText(String o) {
+		if(o != null)
+			this.text.add(o);
+		return (SiteHtm)this;
+	}
+	@JsonIgnore
+	public void setText(JsonArray objets) {
+		text.clear();
+		for(int i = 0; i < objets.size(); i++) {
+			String o = objets.getString(i);
+			addText(o);
+		}
+	}
+	protected SiteHtm textInit() {
+		_text(text);
 		return (SiteHtm)this;
 	}
 
@@ -1004,7 +1021,7 @@ public abstract class SiteHtmGen<DEV> extends Object {
 		return SiteHtm.staticSearchStrText(siteRequest_, SiteHtm.staticSearchText(siteRequest_, SiteHtm.staticSetText(siteRequest_, o)));
 	}
 
-	public String sqlText() {
+	public List<String> sqlText() {
 		return text;
 	}
 
@@ -1170,59 +1187,6 @@ public abstract class SiteHtmGen<DEV> extends Object {
 
 	public String sqlHtmBefore() {
 		return htmBefore;
-	}
-
-	///////////////
-	// htmMiddle //
-	///////////////
-
-	/**	 The entity htmMiddle
-	 *	 is defined as null before being initialized. 
-	 */
-	@JsonProperty
-	@JsonInclude(Include.NON_NULL)
-	protected String htmMiddle;
-
-	/**	<br> The entity htmMiddle
-	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtm&fq=entiteVar_enUS_indexed_string:htmMiddle">Find the entity htmMiddle in Solr</a>
-	 * <br>
-	 * @param w is for wrapping a value to assign to this entity during initialization. 
-	 **/
-	protected abstract void _htmMiddle(Wrap<String> w);
-
-	public String getHtmMiddle() {
-		return htmMiddle;
-	}
-	public void setHtmMiddle(String o) {
-		this.htmMiddle = SiteHtm.staticSetHtmMiddle(siteRequest_, o);
-	}
-	public static String staticSetHtmMiddle(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-	protected SiteHtm htmMiddleInit() {
-		Wrap<String> htmMiddleWrap = new Wrap<String>().var("htmMiddle");
-		if(htmMiddle == null) {
-			_htmMiddle(htmMiddleWrap);
-			setHtmMiddle(htmMiddleWrap.o);
-		}
-		return (SiteHtm)this;
-	}
-
-	public static String staticSearchHtmMiddle(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-
-	public static String staticSearchStrHtmMiddle(SiteRequestEnUS siteRequest_, String o) {
-		return o == null ? null : o.toString();
-	}
-
-	public static String staticSearchFqHtmMiddle(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtm.staticSearchStrHtmMiddle(siteRequest_, SiteHtm.staticSearchHtmMiddle(siteRequest_, SiteHtm.staticSetHtmMiddle(siteRequest_, o)));
-	}
-
-	public String sqlHtmMiddle() {
-		return htmMiddle;
 	}
 
 	//////////////
@@ -1642,55 +1606,6 @@ public abstract class SiteHtmGen<DEV> extends Object {
 		return SiteHtm.staticSearchStrObjectSuggest(siteRequest_, SiteHtm.staticSearchObjectSuggest(siteRequest_, SiteHtm.staticSetObjectSuggest(siteRequest_, o)));
 	}
 
-	////////////////
-	// objectText //
-	////////////////
-
-	/**	 The entity objectText
-	 *	 is defined as null before being initialized. 
-	 */
-	@JsonProperty
-	@JsonInclude(Include.NON_NULL)
-	protected String objectText;
-
-	/**	<br> The entity objectText
-	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.html.SiteHtm&fq=entiteVar_enUS_indexed_string:objectText">Find the entity objectText in Solr</a>
-	 * <br>
-	 * @param w is for wrapping a value to assign to this entity during initialization. 
-	 **/
-	protected abstract void _objectText(Wrap<String> w);
-
-	public String getObjectText() {
-		return objectText;
-	}
-	public void setObjectText(String o) {
-		this.objectText = SiteHtm.staticSetObjectText(siteRequest_, o);
-	}
-	public static String staticSetObjectText(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-	protected SiteHtm objectTextInit() {
-		Wrap<String> objectTextWrap = new Wrap<String>().var("objectText");
-		if(objectText == null) {
-			_objectText(objectTextWrap);
-			setObjectText(objectTextWrap.o);
-		}
-		return (SiteHtm)this;
-	}
-
-	public static String staticSearchObjectText(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-
-	public static String staticSearchStrObjectText(SiteRequestEnUS siteRequest_, String o) {
-		return o == null ? null : o.toString();
-	}
-
-	public static String staticSearchFqObjectText(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtm.staticSearchStrObjectText(siteRequest_, SiteHtm.staticSearchObjectText(siteRequest_, SiteHtm.staticSetObjectText(siteRequest_, o)));
-	}
-
 	///////////////
 	// pageUrlId //
 	///////////////
@@ -1946,7 +1861,6 @@ public abstract class SiteHtmGen<DEV> extends Object {
 				tabsInit();
 				newLineInit();
 				htmBeforeInit();
-				htmMiddleInit();
 				htmAfterInit();
 				classCanonicalNameInit();
 				classSimpleNameInit();
@@ -1955,7 +1869,6 @@ public abstract class SiteHtmGen<DEV> extends Object {
 				objectIdInit();
 				objectNameVarInit();
 				objectSuggestInit();
-				objectTextInit();
 				pageUrlIdInit();
 				pageUrlPkInit();
 				pageUrlApiInit();
@@ -2050,8 +1963,6 @@ public abstract class SiteHtmGen<DEV> extends Object {
 				return oSiteHtm.newLine;
 			case "htmBefore":
 				return oSiteHtm.htmBefore;
-			case "htmMiddle":
-				return oSiteHtm.htmMiddle;
 			case "htmAfter":
 				return oSiteHtm.htmAfter;
 			case "classCanonicalName":
@@ -2068,8 +1979,6 @@ public abstract class SiteHtmGen<DEV> extends Object {
 				return oSiteHtm.objectNameVar;
 			case "objectSuggest":
 				return oSiteHtm.objectSuggest;
-			case "objectText":
-				return oSiteHtm.objectText;
 			case "pageUrlId":
 				return oSiteHtm.pageUrlId;
 			case "pageUrlPk":
@@ -2151,8 +2060,6 @@ public abstract class SiteHtmGen<DEV> extends Object {
 			return SiteHtm.staticSetNewLine(siteRequest_, o);
 		case "htmBefore":
 			return SiteHtm.staticSetHtmBefore(siteRequest_, o);
-		case "htmMiddle":
-			return SiteHtm.staticSetHtmMiddle(siteRequest_, o);
 		case "htmAfter":
 			return SiteHtm.staticSetHtmAfter(siteRequest_, o);
 		case "classCanonicalName":
@@ -2169,8 +2076,6 @@ public abstract class SiteHtmGen<DEV> extends Object {
 			return SiteHtm.staticSetObjectNameVar(siteRequest_, o);
 		case "objectSuggest":
 			return SiteHtm.staticSetObjectSuggest(siteRequest_, o);
-		case "objectText":
-			return SiteHtm.staticSetObjectText(siteRequest_, o);
 		case "pageUrlId":
 			return SiteHtm.staticSetPageUrlId(siteRequest_, o);
 		case "pageUrlPk":
@@ -2227,8 +2132,6 @@ public abstract class SiteHtmGen<DEV> extends Object {
 			return SiteHtm.staticSearchNewLine(siteRequest_, (Boolean)o);
 		case "htmBefore":
 			return SiteHtm.staticSearchHtmBefore(siteRequest_, (String)o);
-		case "htmMiddle":
-			return SiteHtm.staticSearchHtmMiddle(siteRequest_, (String)o);
 		case "htmAfter":
 			return SiteHtm.staticSearchHtmAfter(siteRequest_, (String)o);
 		case "classCanonicalName":
@@ -2245,8 +2148,6 @@ public abstract class SiteHtmGen<DEV> extends Object {
 			return SiteHtm.staticSearchObjectNameVar(siteRequest_, (String)o);
 		case "objectSuggest":
 			return SiteHtm.staticSearchObjectSuggest(siteRequest_, (String)o);
-		case "objectText":
-			return SiteHtm.staticSearchObjectText(siteRequest_, (String)o);
 		case "pageUrlId":
 			return SiteHtm.staticSearchPageUrlId(siteRequest_, (String)o);
 		case "pageUrlPk":
@@ -2303,8 +2204,6 @@ public abstract class SiteHtmGen<DEV> extends Object {
 			return SiteHtm.staticSearchStrNewLine(siteRequest_, (Boolean)o);
 		case "htmBefore":
 			return SiteHtm.staticSearchStrHtmBefore(siteRequest_, (String)o);
-		case "htmMiddle":
-			return SiteHtm.staticSearchStrHtmMiddle(siteRequest_, (String)o);
 		case "htmAfter":
 			return SiteHtm.staticSearchStrHtmAfter(siteRequest_, (String)o);
 		case "classCanonicalName":
@@ -2321,8 +2220,6 @@ public abstract class SiteHtmGen<DEV> extends Object {
 			return SiteHtm.staticSearchStrObjectNameVar(siteRequest_, (String)o);
 		case "objectSuggest":
 			return SiteHtm.staticSearchStrObjectSuggest(siteRequest_, (String)o);
-		case "objectText":
-			return SiteHtm.staticSearchStrObjectText(siteRequest_, (String)o);
 		case "pageUrlId":
 			return SiteHtm.staticSearchStrPageUrlId(siteRequest_, (String)o);
 		case "pageUrlPk":
@@ -2379,8 +2276,6 @@ public abstract class SiteHtmGen<DEV> extends Object {
 			return SiteHtm.staticSearchFqNewLine(siteRequest_, o);
 		case "htmBefore":
 			return SiteHtm.staticSearchFqHtmBefore(siteRequest_, o);
-		case "htmMiddle":
-			return SiteHtm.staticSearchFqHtmMiddle(siteRequest_, o);
 		case "htmAfter":
 			return SiteHtm.staticSearchFqHtmAfter(siteRequest_, o);
 		case "classCanonicalName":
@@ -2397,8 +2292,6 @@ public abstract class SiteHtmGen<DEV> extends Object {
 			return SiteHtm.staticSearchFqObjectNameVar(siteRequest_, o);
 		case "objectSuggest":
 			return SiteHtm.staticSearchFqObjectSuggest(siteRequest_, o);
-		case "objectText":
-			return SiteHtm.staticSearchFqObjectText(siteRequest_, o);
 		case "pageUrlId":
 			return SiteHtm.staticSearchFqPageUrlId(siteRequest_, o);
 		case "pageUrlPk":
@@ -2501,9 +2394,12 @@ public abstract class SiteHtmGen<DEV> extends Object {
 				saves.add("a");
 				return val;
 			case "text":
-				if(val instanceof String)
-					setText((String)val);
-				saves.add("text");
+				if(val instanceof List<?>)
+					((List<String>)val).stream().forEach(v -> addText(v));
+				else if(val instanceof JsonArray)
+					((JsonArray)val).stream().forEach(v -> addText(v.toString()));
+				if(!saves.contains("text"))
+					saves.add("text");
 				return val;
 			case "tabs":
 				if(val instanceof String)
@@ -2521,11 +2417,6 @@ public abstract class SiteHtmGen<DEV> extends Object {
 				if(val instanceof String)
 					setHtmBefore((String)val);
 				saves.add("htmBefore");
-				return val;
-			case "htmmiddle":
-				if(val instanceof String)
-					setHtmMiddle((String)val);
-				saves.add("htmMiddle");
 				return val;
 			case "htmafter":
 				if(val instanceof String)
@@ -2597,6 +2488,16 @@ public abstract class SiteHtmGen<DEV> extends Object {
 		if(eAfter != null) {
 			doc.put("eAfter_docvalues_string", eAfter);
 		}
+		if(a != null) {
+			doc.put("a_docvalues_string", a.toString());
+		}
+		if(text != null) {
+			JsonArray l = new JsonArray();
+			doc.put("text_text_enUS", l);
+			for(String o : text) {
+				l.add(o);
+			}
+		}
 		if(tabs != null) {
 			doc.put("tabs_docvalues_string", tabs);
 		}
@@ -2605,9 +2506,6 @@ public abstract class SiteHtmGen<DEV> extends Object {
 		}
 		if(htmBefore != null) {
 			doc.put("htmBefore_stored_string", htmBefore);
-		}
-		if(htmMiddle != null) {
-			doc.put("htmMiddle_stored_string", htmMiddle);
 		}
 		if(htmAfter != null) {
 			doc.put("htmAfter_stored_string", htmAfter);
@@ -2633,10 +2531,6 @@ public abstract class SiteHtmGen<DEV> extends Object {
 		}
 		if(objectSuggest != null) {
 			doc.put("objectSuggest_suggested", objectSuggest);
-		}
-		if(objectText != null) {
-			doc.put("objectText_text_enUS", objectText.toString());
-			doc.put("objectText_docvalues_string", objectText);
 		}
 		if(pageUrlId != null) {
 			doc.put("pageUrlId_docvalues_string", pageUrlId);
@@ -2678,14 +2572,14 @@ public abstract class SiteHtmGen<DEV> extends Object {
 				return "eBefore_docvalues_string";
 			case "eAfter":
 				return "eAfter_docvalues_string";
+			case "a":
+				return "a_docvalues_string";
 			case "tabs":
 				return "tabs_docvalues_string";
 			case "newLine":
 				return "newLine_docvalues_boolean";
 			case "htmBefore":
 				return "htmBefore_stored_string";
-			case "htmMiddle":
-				return "htmMiddle_stored_string";
 			case "htmAfter":
 				return "htmAfter_stored_string";
 			case "classCanonicalName":
@@ -2698,8 +2592,6 @@ public abstract class SiteHtmGen<DEV> extends Object {
 				return "objectTitle_docvalues_string";
 			case "objectId":
 				return "objectId_docvalues_string";
-			case "objectText":
-				return "objectText_docvalues_string";
 			case "pageUrlId":
 				return "pageUrlId_docvalues_string";
 			case "pageUrlPk":
@@ -2737,6 +2629,10 @@ public abstract class SiteHtmGen<DEV> extends Object {
 				return "eBefore_docvalues_string";
 			case "eAfter":
 				return "eAfter_docvalues_string";
+			case "a":
+				return "a_docvalues_string";
+			case "text":
+				return "text_text_enUS";
 			case "tabs":
 				return "tabs_docvalues_string";
 			case "newLine":
@@ -2753,8 +2649,6 @@ public abstract class SiteHtmGen<DEV> extends Object {
 				return "objectId_docvalues_string";
 			case "objectSuggest":
 				return "objectSuggest_suggested";
-			case "objectText":
-				return "objectText_text_enUS";
 			case "pageUrlId":
 				return "pageUrlId_docvalues_string";
 			case "pageUrlPk":
@@ -2794,14 +2688,16 @@ public abstract class SiteHtmGen<DEV> extends Object {
 				return "eBefore";
 			case "eAfter_docvalues_string":
 				return "eAfter";
+			case "a_docvalues_string":
+				return "a";
+			case "text_text_enUS":
+				return "text";
 			case "tabs_docvalues_string":
 				return "tabs";
 			case "newLine_docvalues_boolean":
 				return "newLine";
 			case "htmBefore_stored_string":
 				return "htmBefore";
-			case "htmMiddle_stored_string":
-				return "htmMiddle";
 			case "htmAfter_stored_string":
 				return "htmAfter";
 			case "classCanonicalName_docvalues_string":
@@ -2816,8 +2712,6 @@ public abstract class SiteHtmGen<DEV> extends Object {
 				return "objectId";
 			case "objectSuggest_suggested":
 				return "objectSuggest";
-			case "objectText_text_enUS":
-				return "objectText";
 			case "pageUrlId_docvalues_string":
 				return "pageUrlId";
 			case "pageUrlPk_docvalues_string":
@@ -2833,8 +2727,8 @@ public abstract class SiteHtmGen<DEV> extends Object {
 
 	public static String varSearchSiteHtm(String entityVar) {
 		switch(entityVar) {
-			case "objectText":
-				return "objectText_text_enUS";
+			case "text":
+				return "text_text_enUS";
 			case "objectSuggest":
 				return "objectSuggest_suggested";
 			default:
@@ -2875,10 +2769,13 @@ public abstract class SiteHtmGen<DEV> extends Object {
 		oSiteHtm.setHtmGroup(Optional.ofNullable(doc.get("htmGroup_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSiteHtm.setEBefore(Optional.ofNullable(doc.get("eBefore_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSiteHtm.setEAfter(Optional.ofNullable(doc.get("eAfter_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oSiteHtm.setA(Optional.ofNullable(doc.get("a_docvalues_string")).map(v -> v.toString()).orElse(null));
+		Optional.ofNullable((List<?>)doc.get("text_text_enUS")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
+			oSiteHtm.addText(v.toString());
+		});
 		oSiteHtm.setTabs(Optional.ofNullable(doc.get("tabs_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSiteHtm.setNewLine(Optional.ofNullable(doc.get("newLine_docvalues_boolean")).map(v -> v.toString()).orElse(null));
 		oSiteHtm.setHtmBefore(Optional.ofNullable(doc.get("htmBefore_stored_string")).map(v -> v.toString()).orElse(null));
-		oSiteHtm.setHtmMiddle(Optional.ofNullable(doc.get("htmMiddle_stored_string")).map(v -> v.toString()).orElse(null));
 		oSiteHtm.setHtmAfter(Optional.ofNullable(doc.get("htmAfter_stored_string")).map(v -> v.toString()).orElse(null));
 		oSiteHtm.setClassCanonicalName(Optional.ofNullable(doc.get("classCanonicalName_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSiteHtm.setClassSimpleName(Optional.ofNullable(doc.get("classSimpleName_docvalues_string")).map(v -> v.toString()).orElse(null));
@@ -2887,9 +2784,7 @@ public abstract class SiteHtmGen<DEV> extends Object {
 		});
 		oSiteHtm.setObjectTitle(Optional.ofNullable(doc.get("objectTitle_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSiteHtm.setObjectId(Optional.ofNullable(doc.get("objectId_docvalues_string")).map(v -> v.toString()).orElse(null));
-		String objectSuggest = (String)doc.get("objectSuggest_suggested");
-		oSiteHtm.setObjectSuggest(objectSuggest);
-		oSiteHtm.setObjectText(Optional.ofNullable(doc.get("objectText_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oSiteHtm.setObjectSuggest(Optional.ofNullable(doc.get("objectSuggest_suggested")).map(v -> v.toString()).orElse(null));
 		oSiteHtm.setPageUrlId(Optional.ofNullable(doc.get("pageUrlId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSiteHtm.setPageUrlPk(Optional.ofNullable(doc.get("pageUrlPk_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSiteHtm.setPageUrlApi(Optional.ofNullable(doc.get("pageUrlApi_docvalues_string")).map(v -> v.toString()).orElse(null));
@@ -2940,8 +2835,6 @@ public abstract class SiteHtmGen<DEV> extends Object {
 				apiRequest.addVars("newLine");
 			if(!Objects.equals(htmBefore, original.getHtmBefore()))
 				apiRequest.addVars("htmBefore");
-			if(!Objects.equals(htmMiddle, original.getHtmMiddle()))
-				apiRequest.addVars("htmMiddle");
 			if(!Objects.equals(htmAfter, original.getHtmAfter()))
 				apiRequest.addVars("htmAfter");
 			if(!Objects.equals(classCanonicalName, original.getClassCanonicalName()))
@@ -2956,8 +2849,6 @@ public abstract class SiteHtmGen<DEV> extends Object {
 				apiRequest.addVars("objectId");
 			if(!Objects.equals(objectSuggest, original.getObjectSuggest()))
 				apiRequest.addVars("objectSuggest");
-			if(!Objects.equals(objectText, original.getObjectText()))
-				apiRequest.addVars("objectText");
 			if(!Objects.equals(pageUrlId, original.getPageUrlId()))
 				apiRequest.addVars("pageUrlId");
 			if(!Objects.equals(pageUrlPk, original.getPageUrlPk()))
@@ -2988,11 +2879,10 @@ public abstract class SiteHtmGen<DEV> extends Object {
 		sb.append(Optional.ofNullable(eBefore).map(v -> "eBefore: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(eAfter).map(v -> "eAfter: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(a).map(v -> "a: " + v + "\n").orElse(""));
-		sb.append(Optional.ofNullable(text).map(v -> "text: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(text).map(v -> "text: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(tabs).map(v -> "tabs: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(newLine).map(v -> "newLine: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(htmBefore).map(v -> "htmBefore: \"" + v + "\"\n" ).orElse(""));
-		sb.append(Optional.ofNullable(htmMiddle).map(v -> "htmMiddle: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(htmAfter).map(v -> "htmAfter: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(classCanonicalName).map(v -> "classCanonicalName: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(classSimpleName).map(v -> "classSimpleName: \"" + v + "\"\n" ).orElse(""));
@@ -3000,7 +2890,6 @@ public abstract class SiteHtmGen<DEV> extends Object {
 		sb.append(Optional.ofNullable(objectTitle).map(v -> "objectTitle: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(objectId).map(v -> "objectId: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(objectSuggest).map(v -> "objectSuggest: \"" + v + "\"\n" ).orElse(""));
-		sb.append(Optional.ofNullable(objectText).map(v -> "objectText: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(pageUrlId).map(v -> "pageUrlId: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(pageUrlPk).map(v -> "pageUrlPk: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(pageUrlApi).map(v -> "pageUrlApi: \"" + v + "\"\n" ).orElse(""));
@@ -3028,7 +2917,6 @@ public abstract class SiteHtmGen<DEV> extends Object {
 	public static final String VAR_tabs = "tabs";
 	public static final String VAR_newLine = "newLine";
 	public static final String VAR_htmBefore = "htmBefore";
-	public static final String VAR_htmMiddle = "htmMiddle";
 	public static final String VAR_htmAfter = "htmAfter";
 	public static final String VAR_classCanonicalName = "classCanonicalName";
 	public static final String VAR_classSimpleName = "classSimpleName";
@@ -3037,7 +2925,6 @@ public abstract class SiteHtmGen<DEV> extends Object {
 	public static final String VAR_objectId = "objectId";
 	public static final String VAR_objectNameVar = "objectNameVar";
 	public static final String VAR_objectSuggest = "objectSuggest";
-	public static final String VAR_objectText = "objectText";
 	public static final String VAR_pageUrlId = "pageUrlId";
 	public static final String VAR_pageUrlPk = "pageUrlPk";
 	public static final String VAR_pageUrlApi = "pageUrlApi";
@@ -3047,8 +2934,8 @@ public abstract class SiteHtmGen<DEV> extends Object {
 		return SiteHtm.varsQSiteHtm(new ArrayList<String>());
 	}
 	public static List<String> varsQSiteHtm(List<String> vars) {
+		vars.add(VAR_text);
 		vars.add(VAR_objectSuggest);
-		vars.add(VAR_objectText);
 		return vars;
 	}
 
@@ -3091,7 +2978,6 @@ public abstract class SiteHtmGen<DEV> extends Object {
 	public static final String DISPLAY_NAME_tabs = "Tabs";
 	public static final String DISPLAY_NAME_newLine = "Tabs";
 	public static final String DISPLAY_NAME_htmBefore = "HTML before";
-	public static final String DISPLAY_NAME_htmMiddle = "HTML middle";
 	public static final String DISPLAY_NAME_htmAfter = "HTML after";
 	public static final String DISPLAY_NAME_classCanonicalName = "";
 	public static final String DISPLAY_NAME_classSimpleName = "";
@@ -3100,7 +2986,6 @@ public abstract class SiteHtmGen<DEV> extends Object {
 	public static final String DISPLAY_NAME_objectId = "ID";
 	public static final String DISPLAY_NAME_objectNameVar = "";
 	public static final String DISPLAY_NAME_objectSuggest = "autosuggest";
-	public static final String DISPLAY_NAME_objectText = "text";
 	public static final String DISPLAY_NAME_pageUrlId = "";
 	public static final String DISPLAY_NAME_pageUrlPk = "";
 	public static final String DISPLAY_NAME_pageUrlApi = "";
@@ -3149,8 +3034,6 @@ public abstract class SiteHtmGen<DEV> extends Object {
 			return DISPLAY_NAME_newLine;
 		case VAR_htmBefore:
 			return DISPLAY_NAME_htmBefore;
-		case VAR_htmMiddle:
-			return DISPLAY_NAME_htmMiddle;
 		case VAR_htmAfter:
 			return DISPLAY_NAME_htmAfter;
 		case VAR_classCanonicalName:
@@ -3167,8 +3050,6 @@ public abstract class SiteHtmGen<DEV> extends Object {
 			return DISPLAY_NAME_objectNameVar;
 		case VAR_objectSuggest:
 			return DISPLAY_NAME_objectSuggest;
-		case VAR_objectText:
-			return DISPLAY_NAME_objectText;
 		case VAR_pageUrlId:
 			return DISPLAY_NAME_pageUrlId;
 		case VAR_pageUrlPk:
@@ -3222,8 +3103,6 @@ public abstract class SiteHtmGen<DEV> extends Object {
 			return "The tabs. ";
 		case VAR_htmBefore:
 			return "The HTML that comes before the text. ";
-		case VAR_htmMiddle:
-			return "The HTML that comes in the middle. ";
 		case VAR_htmAfter:
 			return "The HTML that comes after the text. ";
 		case VAR_classCanonicalName:
@@ -3240,8 +3119,6 @@ public abstract class SiteHtmGen<DEV> extends Object {
 			return "The var that identifies this type of object in the API";
 		case VAR_objectSuggest:
 			return "The indexed field in the search engine for this record while using autosuggest";
-		case VAR_objectText:
-			return "The full text search field in the search engine for this record while using autosuggest";
 		case VAR_pageUrlId:
 			return "The link by name for this object in the UI";
 		case VAR_pageUrlPk:
@@ -3288,14 +3165,12 @@ public abstract class SiteHtmGen<DEV> extends Object {
 		case VAR_a:
 			return "JsonObject";
 		case VAR_text:
-			return "String";
+			return "List";
 		case VAR_tabs:
 			return "String";
 		case VAR_newLine:
 			return "Boolean";
 		case VAR_htmBefore:
-			return "String";
-		case VAR_htmMiddle:
 			return "String";
 		case VAR_htmAfter:
 			return "String";
@@ -3312,8 +3187,6 @@ public abstract class SiteHtmGen<DEV> extends Object {
 		case VAR_objectNameVar:
 			return "String";
 		case VAR_objectSuggest:
-			return "String";
-		case VAR_objectText:
 			return "String";
 		case VAR_pageUrlId:
 			return "String";

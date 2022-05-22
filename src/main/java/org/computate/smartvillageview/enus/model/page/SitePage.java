@@ -165,6 +165,20 @@ public class SitePage extends SitePageGen<Object> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
+	 * HtmlRow: 1
+	 * HtmlCell: 2
+	 * HtmlColumn: 1
+	 * Facet: true
+	 * DisplayName.enUS: author
+	 * Description: The author
+	 */
+	protected void _author(Wrap<String> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
 	 * HtmlRow: 2
 	 * HtmlCell: 1
 	 * DisplayName.enUS: archived
@@ -322,7 +336,6 @@ public class SitePage extends SitePageGen<Object> {
 	/**
 	 * {@inheritDoc}
 	 * Text: true
-	 * DocValues: true
 	 * Description: The full text search field in the search engine for this record while using autosuggest
 	 * DisplayName: text
 	 */

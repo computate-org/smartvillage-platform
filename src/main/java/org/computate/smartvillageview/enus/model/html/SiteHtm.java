@@ -214,6 +214,7 @@ public class SiteHtm extends SiteHtmGen<Object> {
 	/**
 	 * {@inheritDoc}
 	 * Persist: true
+	 * DocValues: true
 	 * DisplayName: HTML Element
 	 * Description: The HTML element. 
 	 */
@@ -222,11 +223,12 @@ public class SiteHtm extends SiteHtmGen<Object> {
 
 	/**
 	 * {@inheritDoc}
+	 * Text: true
 	 * Persist: true
 	 * DisplayName: Text
 	 * Description: The text. 
 	 */
-	protected void _text(Wrap<String> w) {
+	protected void _text(List<String> w) {
 	}
 
 	/**
@@ -266,7 +268,7 @@ public class SiteHtm extends SiteHtmGen<Object> {
 			if(a != null) {
 				for(String attr : a.fieldNames()) {
 					String val = XmlTool.escapeInQuotes(a.getString(attr));
-					b.append(attr).append("=\"").append(val).append("\"");
+					b.append(" ").append(attr).append("=\"").append(val).append("\"");
 				}
 			}
 			if(XmlTool.HTML_ELEMENTS_CLOSED.contains(eBefore)) {
@@ -277,21 +279,6 @@ public class SiteHtm extends SiteHtmGen<Object> {
 			if(newLine) {
 				b.append("\n");
 			}
-			w.o(b.toString());
-		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * Stored: true
-	 * Persist: true
-	 * DisplayName: HTML middle
-	 * Description: The HTML that comes in the middle. 
-	 */
-	protected void _htmMiddle(Wrap<String> w) {
-		StringBuilder b = new StringBuilder();
-		if(text != null) {
-			b.append(XmlTool.escape(text));
 			w.o(b.toString());
 		}
 	}
@@ -415,17 +402,6 @@ public class SiteHtm extends SiteHtmGen<Object> {
 		if(objectTitle != null)
 			b.append(" ").append(objectTitle);
 		w.o(b.toString());
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * Text: true
-	 * DocValues: true
-	 * Description: The full text search field in the search engine for this record while using autosuggest
-	 * DisplayName: text
-	 */
-	protected void _objectText(Wrap<String> w) { 
-		w.o(text);
 	}
 
 	/**

@@ -33,7 +33,9 @@ import org.computate.vertx.verticle.EmailVerticle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.github.jknack.handlebars.Context;
 import com.github.jknack.handlebars.Handlebars;
+import com.github.jknack.handlebars.Template;
 import com.github.jknack.handlebars.helper.ConditionalHelpers;
 import com.github.jknack.handlebars.helper.StringHelpers;
 
@@ -47,6 +49,7 @@ import io.vertx.core.Promise;
 import io.vertx.core.Vertx;
 import io.vertx.core.VertxOptions;
 import io.vertx.core.WorkerExecutor;
+import io.vertx.core.buffer.Buffer;
 import io.vertx.core.eventbus.EventBusOptions;
 import io.vertx.core.http.Cookie;
 import io.vertx.core.http.HttpHeaders;
@@ -803,16 +806,26 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 				l.q("*:*");
 				l.setC(SitePage.class);
 				l.fq(String.format("%s_docvalues_string:%s", SitePage.VAR_uri, SearchTool.escapeQueryChars(uri)));
+				l.setStore(true);
 				ctx.response().headers().add("Content-Type", "text/html");
 				l.promiseDeepForClass(siteRequest).onSuccess(a -> {
 					SitePage result = l.first();
 					try {
 						DynamicPage page = new DynamicPage();
+						page.setPage(JsonObject.mapFrom(result));
 						page.setUri(uri);
 						page.promiseDeepForClass(siteRequest).onSuccess(b -> {
 							JsonObject json = JsonObject.mapFrom(page);
 							templateEngine.render(json, Optional.ofNullable(config().getString(ConfigKeys.TEMPLATE_PATH)).orElse("templates") + "/" + lang + "/DynamicPage").onSuccess(buffer -> {
-								ctx.response().end(buffer);
+								try {
+									Template template = handlebars.compileInline(buffer.toString());
+									Context engineContext = Context.newBuilder(json.getMap()).resolver(templateEngine.getResolvers()).build();
+									Buffer buffer2 = Buffer.buffer(template.apply(engineContext));
+									ctx.response().end(buffer2);
+								} catch(Exception ex) {
+									LOG.error(String.format("Failed to render page %s", uri), ex);
+									ctx.fail(ex);
+								}
 							}).onFailure(ex -> {
 								LOG.error(String.format("Failed to render page %s", uri), ex);
 								ctx.fail(ex);

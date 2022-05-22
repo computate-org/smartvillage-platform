@@ -12,6 +12,7 @@ import org.computate.search.tool.SearchTool;
 import org.computate.search.wrap.Wrap;
 import org.computate.smartvillageview.enus.config.ConfigKeys;
 import org.computate.smartvillageview.enus.model.html.SiteHtm;
+import org.computate.smartvillageview.enus.model.page.SitePage;
 import org.computate.smartvillageview.enus.page.PageLayout;
 import org.computate.vertx.search.list.SearchList;
 
@@ -21,6 +22,12 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
 public class DynamicPage extends DynamicPageGen<PageLayout> {
+
+	/**
+	 * {@inheritDoc}
+	 **/
+	protected void _page(Wrap<JsonObject> w) {
+	}
 
 	/**
 	 * {@inheritDoc}

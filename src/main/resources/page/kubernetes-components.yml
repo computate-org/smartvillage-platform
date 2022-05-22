@@ -3,13 +3,22 @@ uri: /en-us/kubernetes-components
 h1: What Kubernetes components are used in the Smart Village project? 
 h2: Both Kubernetes API objects and OpenShift API Objects
 created: "2022-05-12"
+author: Christopher Tate
 htmTitle:
-  - text: >-
-      What Kubernetes components are used in the Smart Village project? 
-      Both Kubernetes API objects and OpenShift API Objects
+  - text: Kubernetes and OpenShift Components of the Smart Village Application
 htmBody:
   - e: h1
-    text: Kubernetes Components of the Smart Village Application
+    a:
+      class: w3-2017-shaded-spruce 
+    text: Kubernetes and OpenShift Components of the Smart Village Application
+  - e: div
+    a:
+      class: text-style-italic 
+    text: "Author: {{ page.author }}"
+  - e: div
+    a:
+      class: text-style-italic 
+    text: "Created: {{ page.created }}"
   - e: p
     text: >-
       Kubernetes is for developers who want to run their applications in the cloud, interact with them, and scale them in a well defined API (Application Programming Interface). 
@@ -17,13 +26,22 @@ htmBody:
       They define the individual components to define how to run the application and make it available on the web. 
       There are three main Kubernetes components that bring an application to life. 
   - e: h2
+    a:
+      class: w3-text-2017-shaded-spruce 
     text: Kubernetes Components
   - e: ul
     in:
       - e: li
         in:
           - e: dt
-            text: Pod
+            a:
+              class: w3-large w3-text-2017-shaded-spruce 
+            in:
+              - e: i
+                a:
+                  class: fa-duotone fa-peapod 
+              - e: span
+                text: Pod
           - e: dd
             text: >-
                A group of containers with shared storage and network resources running the same application. 
@@ -32,7 +50,14 @@ htmBody:
       - e: li
         in:
           - e: dt
-            text: Service
+            a:
+              class: w3-large w3-text-2017-shaded-spruce 
+            in:
+              - e: i
+                a:
+                  class: fa-duotone fa-network-wired 
+              - e: span
+                text: Service
           - e: dd
             text: >-
               An internal network service to load balance requests to pods. 
@@ -41,7 +66,14 @@ htmBody:
       - e: li
         in:
           - e: dt
-            text: ReplicationController
+            a:
+              class: w3-large w3-text-2017-shaded-spruce 
+            in:
+              - e: i
+                a:
+                  class: fa-duotone fa-clone 
+              - e: span
+                text: ReplicationController
           - e: dd
             text: >-
               Ensures that a specified number of pod replicas are running at any one time. 
@@ -50,7 +82,14 @@ htmBody:
       - e: li
         in:
           - e: dt
-            text: ConfigMap
+            a:
+              class: w3-large w3-text-2017-shaded-spruce 
+            in:
+              - e: i
+                a:
+                  class: fa-duotone fa-ballot 
+              - e: span
+                text: ConfigMap
           - e: dd
             text: >-
               Stores non-confidential data in key-value pairs. 
@@ -58,7 +97,14 @@ htmBody:
       - e: li
         in:
           - e: dt
-            text: Secret
+            a:
+              class: w3-large w3-text-2017-shaded-spruce 
+            in:
+              - e: i
+                a:
+                  class: fa-duotone fa-key-skeleton 
+              - e: span
+                text: Secret
           - e: dd
             text: >-
               A Secret is an object that contains a small amount of sensitive data such as a password, a token, or a key. 
@@ -70,7 +116,14 @@ htmBody:
       However, Kubernetes doesn't address everything related to running your application the way you want. 
       Red Hat OpenShift builds upon the core Kubernetes components to give application developers even more power to deploy their applications. 
   - e: h2
-    text: OpenShift Components
+    a:
+      class: w3-text-2017-shaded-spruce 
+    in:
+      - e: i
+        a:
+          class: fa-brands fa-redhat w3-text-red
+      - e: span
+        text: OpenShift Components
   - e: p
     text: >-
       OpenShift supplies Kubernetes with extra powerful components for managing container images and their versions, 
@@ -82,7 +135,14 @@ htmBody:
       - e: li
         in:
           - e: dt
-            text: DeploymentConfig
+            a:
+              class: w3-large w3-text-2017-shaded-spruce 
+            in:
+              - e: i
+                a:
+                  class: fa-duotone fa-cart-flatbed-boxes 
+              - e: span
+                text: DeploymentConfig
           - e: dd
             text: >-
               Describes the desired state of a particular component of the application as a pod template. 
@@ -92,12 +152,35 @@ htmBody:
       - e: li
         in:
           - e: dt
-            text: Route
+            a:
+              class: w3-large w3-text-2017-shaded-spruce 
+            in:
+              - e: i
+                a:
+                  class: fa-duotone fa-browser 
+              - e: span
+                text: Route
           - e: dd
             text: >-
               A route allows you to host your application at a public URL. 
               Routes have built-in powerful features for managing secure TLS certificates for your applications. 
               Adding this annotation to a Route will trigger the automatic creation and renewal of the route TLS certificate: kubernetes.io/tls-acme: 'true'
+      - e: li
+        in:
+          - e: dt
+            a:
+              class: w3-large w3-text-2017-shaded-spruce 
+            in:
+              - e: i
+                a:
+                  class: fa-duotone fa-conveyor-belt 
+              - e: span
+                text: ImageStream
+          - e: dd
+            text: >-
+              An image stream and its associated tags provide an abstraction for referencing container images from within OpenShift Container Platform. 
+              You can tag, rollback a tag, and quickly deal with images, without having to re-push. 
+              You can trigger builds and deployments when a new image is pushed to the registry. 
   - e: p
     text: >-
       These are some examples of some powerful features provided by OpenShift when comparing OpenShift DeploymentConfigs and Routes to Kubernetes Deployments and Ingress. 

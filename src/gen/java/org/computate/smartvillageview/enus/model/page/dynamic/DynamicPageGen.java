@@ -31,6 +31,7 @@ import org.slf4j.LoggerFactory;
 import java.math.RoundingMode;
 import java.util.Map;
 import org.computate.smartvillageview.enus.page.PageLayout;
+import io.vertx.core.json.JsonObject;
 import java.lang.String;
 import org.computate.vertx.search.list.SearchList;
 import org.computate.smartvillageview.enus.model.html.SiteHtm;
@@ -53,6 +54,63 @@ import io.vertx.core.Future;
  **/
 public abstract class DynamicPageGen<DEV> extends PageLayout {
 	protected static final Logger LOG = LoggerFactory.getLogger(DynamicPage.class);
+
+	//////////
+	// page //
+	//////////
+
+	/**	 The entity page
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected JsonObject page;
+
+	/**	<br> The entity page
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.page.dynamic.DynamicPage&fq=entiteVar_enUS_indexed_string:page">Find the entity page in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _page(Wrap<JsonObject> w);
+
+	public JsonObject getPage() {
+		return page;
+	}
+
+	public void setPage(JsonObject page) {
+		this.page = page;
+	}
+	@JsonIgnore
+	public void setPage(String o) {
+		this.page = DynamicPage.staticSetPage(siteRequest_, o);
+	}
+	public static JsonObject staticSetPage(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonObject(o);
+		}
+		return null;
+	}
+	protected DynamicPage pageInit() {
+		Wrap<JsonObject> pageWrap = new Wrap<JsonObject>().var("page");
+		if(page == null) {
+			_page(pageWrap);
+			setPage(pageWrap.o);
+		}
+		return (DynamicPage)this;
+	}
+
+	public static JsonObject staticSearchPage(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o;
+	}
+
+	public static String staticSearchStrPage(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqPage(SiteRequestEnUS siteRequest_, String o) {
+		return DynamicPage.staticSearchStrPage(siteRequest_, DynamicPage.staticSearchPage(siteRequest_, DynamicPage.staticSetPage(siteRequest_, o)));
+	}
 
 	/////////
 	// uri //
@@ -532,6 +590,7 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 		Future.future(a -> a.complete()).compose(a -> {
 			Promise<Void> promise2 = Promise.promise();
 			try {
+				pageInit();
 				uriInit();
 				pageIdInit();
 				promise2.complete();
@@ -612,6 +671,8 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 	public Object obtainDynamicPage(String var) {
 		DynamicPage oDynamicPage = (DynamicPage)this;
 		switch(var) {
+			case "page":
+				return oDynamicPage.page;
 			case "uri":
 				return oDynamicPage.uri;
 			case "pageId":
@@ -671,6 +732,8 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 	}
 	public static Object staticSetDynamicPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "page":
+			return DynamicPage.staticSetPage(siteRequest_, o);
 		case "uri":
 			return DynamicPage.staticSetUri(siteRequest_, o);
 		case "pageId":
@@ -695,6 +758,8 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 	}
 	public static Object staticSearchDynamicPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "page":
+			return DynamicPage.staticSearchPage(siteRequest_, (JsonObject)o);
 		case "uri":
 			return DynamicPage.staticSearchUri(siteRequest_, (String)o);
 		case "pageId":
@@ -719,6 +784,8 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 	}
 	public static String staticSearchStrDynamicPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "page":
+			return DynamicPage.staticSearchStrPage(siteRequest_, (JsonObject)o);
 		case "uri":
 			return DynamicPage.staticSearchStrUri(siteRequest_, (String)o);
 		case "pageId":
@@ -743,6 +810,8 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 	}
 	public static String staticSearchFqDynamicPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "page":
+			return DynamicPage.staticSearchFqPage(siteRequest_, o);
 		case "uri":
 			return DynamicPage.staticSearchFqUri(siteRequest_, o);
 		case "pageId":
@@ -771,6 +840,7 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 	public static final String[] DynamicPageVals = new String[] { htmListPromiseComplete1, htmListPromiseFail1, htmListLoopComplete1, htmListLoopFail1 };
 
 	public static final String CLASS_SIMPLE_NAME = "DynamicPage";
+	public static final String VAR_page = "page";
 	public static final String VAR_uri = "uri";
 	public static final String VAR_pageId = "pageId";
 	public static final String VAR_htmList = "htmList";
@@ -782,6 +852,7 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 	public static final String VAR_defaultLocaleId = "defaultLocaleId";
 	public static final String VAR_defaultLocale = "defaultLocale";
 
+	public static final String DISPLAY_NAME_page = "";
 	public static final String DISPLAY_NAME_uri = "";
 	public static final String DISPLAY_NAME_pageId = "";
 	public static final String DISPLAY_NAME_htmList = "";
@@ -798,6 +869,8 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 	}
 	public static String displayNameDynamicPage(String var) {
 		switch(var) {
+		case VAR_page:
+			return DISPLAY_NAME_page;
 		case VAR_uri:
 			return DISPLAY_NAME_uri;
 		case VAR_pageId:

@@ -342,7 +342,7 @@ public class SiteHtmGenPage extends SiteHtmGenPageGen<PageLayout> {
 		JsonObject queryParams = Optional.ofNullable(serviceRequest).map(ServiceRequest::getParams).map(or -> or.getJsonObject("query")).orElse(new JsonObject());
 		Long num = searchListSiteHtm_.getResponse().getResponse().getNumFound().longValue();
 		String q = "*:*";
-		String q1 = "objectText";
+		String q1 = "";
 		String q2 = "";
 		for(String paramName : queryParams.fieldNames()) {
 			String entityVar = null;

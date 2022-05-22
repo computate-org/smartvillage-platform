@@ -607,6 +607,59 @@ public abstract class SitePageGen<DEV> extends Object {
 		return SitePage.staticSearchStrModified(siteRequest_, SitePage.staticSearchModified(siteRequest_, SitePage.staticSetModified(siteRequest_, o)));
 	}
 
+	////////////
+	// author //
+	////////////
+
+	/**	 The entity author
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String author;
+
+	/**	<br> The entity author
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.page.SitePage&fq=entiteVar_enUS_indexed_string:author">Find the entity author in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _author(Wrap<String> w);
+
+	public String getAuthor() {
+		return author;
+	}
+	public void setAuthor(String o) {
+		this.author = SitePage.staticSetAuthor(siteRequest_, o);
+	}
+	public static String staticSetAuthor(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected SitePage authorInit() {
+		Wrap<String> authorWrap = new Wrap<String>().var("author");
+		if(author == null) {
+			_author(authorWrap);
+			setAuthor(authorWrap.o);
+		}
+		return (SitePage)this;
+	}
+
+	public static String staticSearchAuthor(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrAuthor(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqAuthor(SiteRequestEnUS siteRequest_, String o) {
+		return SitePage.staticSearchStrAuthor(siteRequest_, SitePage.staticSearchAuthor(siteRequest_, SitePage.staticSetAuthor(siteRequest_, o)));
+	}
+
+	public String sqlAuthor() {
+		return author;
+	}
+
 	//////////////
 	// archived //
 	//////////////
@@ -1561,6 +1614,7 @@ public abstract class SitePageGen<DEV> extends Object {
 				inheritPkInit();
 				createdInit();
 				modifiedInit();
+				authorInit();
 				archivedInit();
 				deletedInit();
 				classCanonicalNameInit();
@@ -1650,6 +1704,8 @@ public abstract class SitePageGen<DEV> extends Object {
 				return oSitePage.created;
 			case "modified":
 				return oSitePage.modified;
+			case "author":
+				return oSitePage.author;
 			case "archived":
 				return oSitePage.archived;
 			case "deleted":
@@ -1737,6 +1793,8 @@ public abstract class SitePageGen<DEV> extends Object {
 			return SitePage.staticSetCreated(siteRequest_, o);
 		case "modified":
 			return SitePage.staticSetModified(siteRequest_, o);
+		case "author":
+			return SitePage.staticSetAuthor(siteRequest_, o);
 		case "archived":
 			return SitePage.staticSetArchived(siteRequest_, o);
 		case "deleted":
@@ -1799,6 +1857,8 @@ public abstract class SitePageGen<DEV> extends Object {
 			return SitePage.staticSearchCreated(siteRequest_, (ZonedDateTime)o);
 		case "modified":
 			return SitePage.staticSearchModified(siteRequest_, (ZonedDateTime)o);
+		case "author":
+			return SitePage.staticSearchAuthor(siteRequest_, (String)o);
 		case "archived":
 			return SitePage.staticSearchArchived(siteRequest_, (Boolean)o);
 		case "deleted":
@@ -1861,6 +1921,8 @@ public abstract class SitePageGen<DEV> extends Object {
 			return SitePage.staticSearchStrCreated(siteRequest_, (Date)o);
 		case "modified":
 			return SitePage.staticSearchStrModified(siteRequest_, (Date)o);
+		case "author":
+			return SitePage.staticSearchStrAuthor(siteRequest_, (String)o);
 		case "archived":
 			return SitePage.staticSearchStrArchived(siteRequest_, (Boolean)o);
 		case "deleted":
@@ -1923,6 +1985,8 @@ public abstract class SitePageGen<DEV> extends Object {
 			return SitePage.staticSearchFqCreated(siteRequest_, o);
 		case "modified":
 			return SitePage.staticSearchFqModified(siteRequest_, o);
+		case "author":
+			return SitePage.staticSearchFqAuthor(siteRequest_, o);
 		case "archived":
 			return SitePage.staticSearchFqArchived(siteRequest_, o);
 		case "deleted":
@@ -2017,6 +2081,11 @@ public abstract class SitePageGen<DEV> extends Object {
 					setCreated(((OffsetDateTime)val).atZoneSameInstant(ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))));
 				saves.add("created");
 				return val;
+			case "author":
+				if(val instanceof String)
+					setAuthor((String)val);
+				saves.add("author");
+				return val;
 			case "archived":
 				if(val instanceof Boolean)
 					setArchived((Boolean)val);
@@ -2089,6 +2158,9 @@ public abstract class SitePageGen<DEV> extends Object {
 		if(modified != null) {
 			doc.put("modified_docvalues_date", DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(ZonedDateTime.ofInstant(modified.toInstant(), ZoneId.of("UTC"))));
 		}
+		if(author != null) {
+			doc.put("author_docvalues_string", author);
+		}
 		if(archived != null) {
 			doc.put("archived_docvalues_boolean", archived);
 		}
@@ -2132,7 +2204,7 @@ public abstract class SitePageGen<DEV> extends Object {
 		}
 		if(objectText != null) {
 			doc.put("objectText_text_enUS", objectText.toString());
-			doc.put("objectText_docvalues_string", objectText);
+			doc.put("objectText_indexed_string", objectText);
 		}
 		if(pageUrlId != null) {
 			doc.put("pageUrlId_docvalues_string", pageUrlId);
@@ -2164,6 +2236,8 @@ public abstract class SitePageGen<DEV> extends Object {
 				return "created_docvalues_date";
 			case "modified":
 				return "modified_docvalues_date";
+			case "author":
+				return "author_docvalues_string";
 			case "archived":
 				return "archived_docvalues_boolean";
 			case "deleted":
@@ -2184,8 +2258,6 @@ public abstract class SitePageGen<DEV> extends Object {
 				return "objectTitle_docvalues_string";
 			case "objectId":
 				return "objectId_docvalues_string";
-			case "objectText":
-				return "objectText_docvalues_string";
 			case "pageUrlId":
 				return "pageUrlId_docvalues_string";
 			case "pageUrlPk":
@@ -2213,6 +2285,8 @@ public abstract class SitePageGen<DEV> extends Object {
 				return "created_docvalues_date";
 			case "modified":
 				return "modified_docvalues_date";
+			case "author":
+				return "author_docvalues_string";
 			case "archived":
 				return "archived_docvalues_boolean";
 			case "deleted":
@@ -2266,6 +2340,8 @@ public abstract class SitePageGen<DEV> extends Object {
 				return "created";
 			case "modified_docvalues_date":
 				return "modified";
+			case "author_docvalues_string":
+				return "author";
 			case "archived_docvalues_boolean":
 				return "archived";
 			case "deleted_docvalues_boolean":
@@ -2340,6 +2416,7 @@ public abstract class SitePageGen<DEV> extends Object {
 		oSitePage.setInheritPk(Optional.ofNullable(doc.get("inheritPk_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSitePage.setCreated(Optional.ofNullable(doc.get("created_docvalues_date")).map(v -> v.toString()).orElse(null));
 		oSitePage.setModified(Optional.ofNullable(doc.get("modified_docvalues_date")).map(v -> v.toString()).orElse(null));
+		oSitePage.setAuthor(Optional.ofNullable(doc.get("author_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSitePage.setArchived(Optional.ofNullable(doc.get("archived_docvalues_boolean")).map(v -> v.toString()).orElse(null));
 		oSitePage.setDeleted(Optional.ofNullable(doc.get("deleted_docvalues_boolean")).map(v -> v.toString()).orElse(null));
 		oSitePage.setClassCanonicalName(Optional.ofNullable(doc.get("classCanonicalName_docvalues_string")).map(v -> v.toString()).orElse(null));
@@ -2356,7 +2433,7 @@ public abstract class SitePageGen<DEV> extends Object {
 		oSitePage.setObjectId(Optional.ofNullable(doc.get("objectId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		String objectSuggest = (String)doc.get("objectSuggest_suggested");
 		oSitePage.setObjectSuggest(objectSuggest);
-		oSitePage.setObjectText(Optional.ofNullable(doc.get("objectText_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oSitePage.setObjectText(Optional.ofNullable(doc.get("objectText_indexedstored_string")).map(v -> v.toString()).orElse(null));
 		oSitePage.setPageUrlId(Optional.ofNullable(doc.get("pageUrlId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSitePage.setPageUrlPk(Optional.ofNullable(doc.get("pageUrlPk_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSitePage.setPageUrlApi(Optional.ofNullable(doc.get("pageUrlApi_docvalues_string")).map(v -> v.toString()).orElse(null));
@@ -2387,6 +2464,8 @@ public abstract class SitePageGen<DEV> extends Object {
 				apiRequest.addVars("created");
 			if(!Objects.equals(modified, original.getModified()))
 				apiRequest.addVars("modified");
+			if(!Objects.equals(author, original.getAuthor()))
+				apiRequest.addVars("author");
 			if(!Objects.equals(archived, original.getArchived()))
 				apiRequest.addVars("archived");
 			if(!Objects.equals(deleted, original.getDeleted()))
@@ -2435,6 +2514,7 @@ public abstract class SitePageGen<DEV> extends Object {
 		sb.append(Optional.ofNullable(inheritPk).map(v -> "inheritPk: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(created).map(v -> "created: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(modified).map(v -> "modified: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(author).map(v -> "author: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(archived).map(v -> "archived: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(deleted).map(v -> "deleted: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(classCanonicalName).map(v -> "classCanonicalName: \"" + v + "\"\n" ).orElse(""));
@@ -2464,6 +2544,7 @@ public abstract class SitePageGen<DEV> extends Object {
 	public static final String VAR_inheritPk = "inheritPk";
 	public static final String VAR_created = "created";
 	public static final String VAR_modified = "modified";
+	public static final String VAR_author = "author";
 	public static final String VAR_archived = "archived";
 	public static final String VAR_deleted = "deleted";
 	public static final String VAR_classCanonicalName = "classCanonicalName";
@@ -2500,6 +2581,7 @@ public abstract class SitePageGen<DEV> extends Object {
 		vars.add(VAR_h1);
 		vars.add(VAR_h2);
 		vars.add(VAR_created);
+		vars.add(VAR_author);
 		return vars;
 	}
 
@@ -2520,6 +2602,7 @@ public abstract class SitePageGen<DEV> extends Object {
 	public static final String DISPLAY_NAME_inheritPk = "";
 	public static final String DISPLAY_NAME_created = "created";
 	public static final String DISPLAY_NAME_modified = "modified";
+	public static final String DISPLAY_NAME_author = "author";
 	public static final String DISPLAY_NAME_archived = "archived";
 	public static final String DISPLAY_NAME_deleted = "deleted";
 	public static final String DISPLAY_NAME_classCanonicalName = "";
@@ -2561,6 +2644,8 @@ public abstract class SitePageGen<DEV> extends Object {
 			return DISPLAY_NAME_created;
 		case VAR_modified:
 			return DISPLAY_NAME_modified;
+		case VAR_author:
+			return DISPLAY_NAME_author;
 		case VAR_archived:
 			return DISPLAY_NAME_archived;
 		case VAR_deleted:
@@ -2620,6 +2705,8 @@ public abstract class SitePageGen<DEV> extends Object {
 			return "A created timestamp for this record in the database";
 		case VAR_modified:
 			return "A modified timestamp for this record in the database";
+		case VAR_author:
+			return "The author";
 		case VAR_archived:
 			return "For archiving this record";
 		case VAR_deleted:
@@ -2679,6 +2766,8 @@ public abstract class SitePageGen<DEV> extends Object {
 			return "ZonedDateTime";
 		case VAR_modified:
 			return "ZonedDateTime";
+		case VAR_author:
+			return "String";
 		case VAR_archived:
 			return "Boolean";
 		case VAR_deleted:
@@ -2730,6 +2819,8 @@ public abstract class SitePageGen<DEV> extends Object {
 			return 5;
 		case VAR_created:
 			return 1;
+		case VAR_author:
+			return 1;
 		case VAR_objectTitle:
 			return 2;
 			default:
@@ -2750,6 +2841,8 @@ public abstract class SitePageGen<DEV> extends Object {
 		case VAR_created:
 			return 1;
 		case VAR_modified:
+			return 1;
+		case VAR_author:
 			return 1;
 		case VAR_archived:
 			return 2;
@@ -2776,6 +2869,8 @@ public abstract class SitePageGen<DEV> extends Object {
 			return 2;
 		case VAR_modified:
 			return 3;
+		case VAR_author:
+			return 2;
 		case VAR_archived:
 			return 1;
 		case VAR_deleted:

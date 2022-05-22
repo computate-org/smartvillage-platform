@@ -467,6 +467,7 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 					pageBody.put(SitePage.VAR_saves, new JsonArray()
 							.add(SitePage.VAR_inheritPk)
 							.add(SitePage.VAR_created)
+							.add(SitePage.VAR_author)
 							.add(SitePage.VAR_objectId)
 							.add(SitePage.VAR_objectTitle)
 							.add(SitePage.VAR_uri)
@@ -478,6 +479,7 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 					pageBody.put(SitePage.VAR_pageId, pageId);
 					pageBody.put(SitePage.VAR_objectTitle, json.getString("title"));
 					pageBody.put(SitePage.VAR_created, json.getString("created"));
+					pageBody.put(SitePage.VAR_author, json.getString("author"));
 					pageBody.put(SitePage.VAR_uri, json.getString("uri"));
 					pageBody.put(SitePage.VAR_h1, json.getString("h1"));
 					pageBody.put(SitePage.VAR_h2, json.getString("h2"));
@@ -534,9 +536,10 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 		Double sort = 0D;
 		for(Integer i = 0; i < pageItems.size(); i++) {
 			JsonObject pageItem = (JsonObject)pageItems.getValue(i);
+			String uri = json.getString(SiteHtm.VAR_uri);
 			Object in = pageItem.getValue("in");
 			String e = pageItem.getString("e");
-			String uri = json.getString(SitePage.VAR_uri);
+			JsonObject a = pageItem.getJsonObject(SiteHtm.VAR_a);
 			Boolean eNoWrapParent = false;
 			Boolean eNoWrap = false;
 			String tabs = "";
@@ -553,7 +556,7 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 				JsonObject importItem = new JsonObject();
 				if(e != null)
 					importItem.put(SiteHtm.VAR_eBefore, e);
-				Optional.ofNullable(pageItem.getString(SiteHtm.VAR_text)).ifPresent(text -> importItem.put(SiteHtm.VAR_text, text));
+				Optional.ofNullable(pageItem.getString(SiteHtm.VAR_text)).ifPresent(text -> importItem.put(SiteHtm.VAR_text, new JsonArray().add(text)));
 				if(!eNoWrapParent && !tabs.isEmpty()) {
 					importItem.put(SiteHtm.VAR_tabs, tabs);
 				}
@@ -569,12 +572,15 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 						.add(SiteHtm.VAR_pageId)
 						.add(SiteHtm.VAR_tabs)
 						.add(SiteHtm.VAR_uri)
+						.add(SiteHtm.VAR_text)
 						);
 				importItem.put(SiteHtm.VAR_created, ComputateZonedDateTimeSerializer.ZONED_DATE_TIME_FORMATTER.format(ZonedDateTime.now()));
 				importItem.put(SiteHtm.VAR_pageId, pageId);
 				importItem.put(SiteHtm.VAR_htmGroup, htmGroup);
 				importItem.put(SiteHtm.VAR_sequenceNum, sequenceNum);
 				importItem.put(SiteHtm.VAR_uri, uri);
+				if(a != null)
+					importItem.put(SiteHtm.VAR_a, a);
 				importItem.put(SiteHtm.VAR_id, String.format("%s_%s", SiteHtm.CLASS_SIMPLE_NAME, sequenceNum));
 				for(Integer j=1; j <= stack.size(); j++) {
 					importItem.put("sort" + j, stack.get(j - 1));
