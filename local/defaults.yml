@@ -1,6 +1,7 @@
 ---
 GITHUB_ORG: "computate-org"
 SITE_NAME: "smart-village-view"
+SITE_DISPLAY_NAME: "Smart Village Project"
 SITE_SERVICES:
   - SITE_NAME: "smart-village-view"
     SITE_SRC: "/home/ctate/.local/src/smart-village-view"
