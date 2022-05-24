@@ -200,24 +200,10 @@ spec:
             - name: WORKER_POOL_SIZE
               value: "{{ WORKER_POOL_SIZE }}"
 
-            - name: READ_BUFFER_SIZE
-              value: "{{ READ_BUFFER_SIZE }}"
-            - name: API_COUNTER_FETCH
-              value: "{{ API_COUNTER_FETCH }}"
-            - name: API_COUNTER_RESUME
-              value: "{{ API_COUNTER_RESUME }}"
-            - name: API_COUNTER_FETCH
-              value: "{{ API_COUNTER_FETCH }}"
             - name: ENABLE_IMPORT_DATA
               value: "{{ ENABLE_IMPORT_DATA }}"
             - name: ENABLE_IMPORT_DATA_IotNode
               value: '{{ ENABLE_IMPORT_DATA_IotNode | to_json }}'
-            - name: ENABLE_REFRESH_DATA
-              value: "{{ ENABLE_REFRESH_DATA }}"
-            - name: TIMER_DB_SOLR_SYNC_IN_SECONDS
-              value: "{{ TIMER_DB_SOLR_SYNC_IN_SECONDS }}"
-            - name: AUTH_ROLES_ADMIN
-              value: '{{ AUTH_ROLES_ADMIN | to_json }}'
             - name: AUTH_ROLES_REQUIRED_SiteUser
               value: '{{ AUTH_ROLES_REQUIRED_SiteUser | to_json }}'
             - name: AUTH_ROLES_REQUIRED_IotNode

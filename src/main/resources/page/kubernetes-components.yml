@@ -3,22 +3,30 @@ uri: /en-us/kubernetes-components
 h1: What Kubernetes components are used in the Smart Village project? 
 h2: Both Kubernetes API objects and OpenShift API Objects
 created: "2022-05-12"
-author: Christopher Tate
+author:
+  name: Christopher Tate
+  title: Red Hat Principal Software Consultant
 htmTitle:
   - text: Kubernetes and OpenShift Components of the Smart Village Application
 htmBody:
   - e: h1
     a:
-      class: w3-2017-shaded-spruce 
+      class: w3-text-2017-shaded-spruce w3-monospace 
     text: Kubernetes and OpenShift Components of the Smart Village Application
   - e: div
     a:
-      class: text-style-italic 
-    text: "Author: {{ page.author }}"
-  - e: div
-    a:
-      class: text-style-italic 
-    text: "Created: {{ page.created }}"
+      class: font-style-italic 
+    text: 'Created {{formatZonedDateTime created "EEE MMM d yyyy" "en-US" "America/Denver" }}'
+  - e: p
+    in:
+      - e: div
+        a:
+          class: font-weight-bold 
+        text: "By {{ author.name }}"
+      - e: div
+        a:
+          class: font-weight-bold font-style-italic
+        text: "{{ author.title }}"
   - e: p
     text: |-
       Kubernetes is for developers who want to run their applications in the cloud, interact with them, and scale them in a well defined API (Application Programming Interface). 
@@ -27,7 +35,7 @@ htmBody:
       There are three main Kubernetes components that bring an application to life. 
   - e: h2
     a:
-      class: w3-text-2017-shaded-spruce 
+      class: w3-text-2017-shaded-spruce w3-monospace 
     text: Kubernetes Components
   - e: ul
     in:

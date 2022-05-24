@@ -28,9 +28,17 @@ import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.vertx.api.ApiCounter;
 import org.computate.vertx.api.ApiRequest;
 import org.computate.vertx.config.ComputateVertxConfigKeys;
+import org.computate.vertx.handlebars.AuthHelpers;
+import org.computate.vertx.handlebars.DateHelpers;
+import org.computate.vertx.handlebars.SiteHelpers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.github.jknack.handlebars.Context;
+import com.github.jknack.handlebars.Handlebars;
+import com.github.jknack.handlebars.Template;
+import com.github.jknack.handlebars.helper.ConditionalHelpers;
+import com.github.jknack.handlebars.helper.StringHelpers;
 import com.google.common.io.PatternFilenameFilter;
 
 import io.vertx.config.yaml.YamlProcessor;
@@ -48,6 +56,7 @@ import io.vertx.ext.mail.MailClient;
 import io.vertx.ext.mail.MailConfig;
 import io.vertx.ext.web.client.WebClient;
 import io.vertx.ext.web.client.predicate.ResponsePredicate;
+import io.vertx.ext.web.templ.handlebars.HandlebarsTemplateEngine;
 import io.vertx.pgclient.PgConnectOptions;
 import io.vertx.pgclient.PgPool;
 import io.vertx.sqlclient.PoolOptions;
@@ -83,6 +92,10 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 
 	Integer commitWithin;
 
+	HandlebarsTemplateEngine templateEngine;
+
+	Handlebars handlebars;
+
 	/**	
 	 *	This is called by Vert.x when the verticle instance is deployed. 
 	 *	Initialize a new site context object for storing information about the entire site in English. 
@@ -95,12 +108,14 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 		try {
 			configureData().onSuccess(a -> 
 				configureWebClient().onSuccess(b -> 
-					configureSharedWorkerExecutor().onSuccess(c -> 
-						configureEmail().onSuccess(d -> 
-							importData().onSuccess(f -> 
-								refreshAllData().onSuccess(g -> {
-									startPromise.complete();
-								}).onFailure(ex -> startPromise.fail(ex))
+					configureHandlebars().onSuccess(c -> 
+						configureSharedWorkerExecutor().onSuccess(d -> 
+							configureEmail().onSuccess(e -> 
+								importData().onSuccess(f -> 
+									refreshAllData().onSuccess(g -> {
+										startPromise.complete();
+									}).onFailure(ex -> startPromise.fail(ex))
+								).onFailure(ex -> startPromise.fail(ex))
 							).onFailure(ex -> startPromise.fail(ex))
 						).onFailure(ex -> startPromise.fail(ex))
 					).onFailure(ex -> startPromise.fail(ex))
@@ -109,6 +124,31 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 		} catch (Exception ex) {
 			LOG.error("Couldn't start verticle. ", ex);
 		}
+	}
+
+	/**
+	 * Val.Fail.enUS:Handlebars was not configured properly. 
+	 * Val.Complete.enUS:Handlebars was configured properly. 
+	 */
+	private Future<Void> configureHandlebars() {
+		Promise<Void> promise = Promise.promise();
+		try {
+			templateEngine = HandlebarsTemplateEngine.create(vertx);
+			handlebars = (Handlebars)templateEngine.unwrap();
+
+			handlebars.registerHelpers(ConditionalHelpers.class);
+			handlebars.registerHelpers(StringHelpers.class);
+			handlebars.registerHelpers(AuthHelpers.class);
+			handlebars.registerHelpers(SiteHelpers.class);
+			handlebars.registerHelpers(DateHelpers.class);
+
+			LOG.info(configureHandlebarsComplete);
+			promise.complete();
+		} catch(Exception ex) {
+			LOG.error(configureHandlebarsFail, ex);
+			promise.fail(ex);
+		}
+		return promise.future();
 	}
 
 	/**	
@@ -447,81 +487,86 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 		ZonedDateTime now = ZonedDateTime.now(ZoneId.of(config().getString(ConfigKeys.SITE_ZONE)));
 		vertx.fileSystem().readFile(path).onSuccess(buffer -> {
 			yamlProcessor.process(vertx, null, buffer).onSuccess(json -> {
-				String pageId = StringUtils.substringBeforeLast(StringUtils.substringAfterLast(path, "/"), ".");
-				JsonObject importBody = new JsonObject();
-				JsonArray importItems = new JsonArray();
-				List<Future> futures = new ArrayList<>();
-				Stack<String> stack = new Stack<>();
-				stack.push("html");
-				stack.push("body");
-				Long sequenceNum = 0L;
-				for(String htmGroup : json.fieldNames()) {
-					if(StringUtils.startsWith(htmGroup, "htm")) {
-						JsonArray pageItems = json.getJsonArray(htmGroup);
-						sequenceNum = importSiteHtml(json, stack, pageId, htmGroup, pageItems, futures, sequenceNum);
+				try {
+					String pageId = StringUtils.substringBeforeLast(StringUtils.substringAfterLast(path, "/"), ".");
+					JsonObject importBody = new JsonObject();
+					JsonArray importItems = new JsonArray();
+					List<Future> futures = new ArrayList<>();
+					Stack<String> stack = new Stack<>();
+					stack.push("html");
+					stack.push("body");
+					Long sequenceNum = 0L;
+					for(String htmGroup : json.fieldNames()) {
+						if(StringUtils.startsWith(htmGroup, "htm")) {
+							JsonArray pageItems = json.getJsonArray(htmGroup);
+							sequenceNum = importSiteHtml(json, stack, pageId, htmGroup, pageItems, futures, sequenceNum);
+						}
 					}
-				}
-				importBody.put("list", importItems);
-
-				CompositeFuture.all(futures).onSuccess(a -> {
-					JsonObject pageBody = new JsonObject();
-					pageBody.put(SitePage.VAR_saves, new JsonArray()
-							.add(SitePage.VAR_inheritPk)
-							.add(SitePage.VAR_created)
-							.add(SitePage.VAR_author)
-							.add(SitePage.VAR_objectId)
-							.add(SitePage.VAR_objectTitle)
-							.add(SitePage.VAR_uri)
-							.add(SitePage.VAR_h1)
-							.add(SitePage.VAR_h2)
-							);
-					pageBody.put(SitePage.VAR_id, pageId);
-					pageBody.put(SitePage.VAR_objectId, pageId);
-					pageBody.put(SitePage.VAR_pageId, pageId);
-					pageBody.put(SitePage.VAR_objectTitle, json.getString("title"));
-					pageBody.put(SitePage.VAR_created, json.getString("created"));
-					pageBody.put(SitePage.VAR_author, json.getString("author"));
-					pageBody.put(SitePage.VAR_uri, json.getString("uri"));
-					pageBody.put(SitePage.VAR_h1, json.getString("h1"));
-					pageBody.put(SitePage.VAR_h2, json.getString("h2"));
+					importBody.put("list", importItems);
 	
-					JsonObject pageParams = new JsonObject();
-					pageParams.put("body", pageBody);
-					pageParams.put("path", new JsonObject());
-					pageParams.put("cookie", new JsonObject());
-					pageParams.put("query", new JsonObject().put("commitWithin", 1000).put("q", "*:*").put("var", new JsonArray().add("refresh:false")));
-					JsonObject pageContext = new JsonObject().put("params", pageParams);
-					JsonObject pageRequest = new JsonObject().put("context", pageContext);
-					vertx.eventBus().request(String.format("smart-village-view-enUS-%s", SitePage.CLASS_SIMPLE_NAME), pageRequest, new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", SitePage.CLASS_SIMPLE_NAME))).onSuccess(b -> {
-						String solrHostName = config().getString(ComputateVertxConfigKeys.SOLR_HOST_NAME);
-						Integer solrPort = config().getInteger(ComputateVertxConfigKeys.SOLR_PORT);
-						String solrCollection = config().getString(ComputateVertxConfigKeys.SOLR_COLLECTION);
-						String solrRequestUri = String.format("/solr/%s/update%s", solrCollection, "?commitWithin=1000&overwrite=true&wt=json");
-						String deleteQuery = String.format("classSimpleName_docvalues_string:%s AND created_docvalues_date:[* TO %s]", SiteHtm.CLASS_SIMPLE_NAME, SiteHtm.staticSearchStrCreated(null, SiteHtm.staticSearchCreated(null, now)));
-						String deleteXml = String.format("<delete><query>%s</query></delete>", deleteQuery);
-						webClient.post(solrPort, solrHostName, solrRequestUri)
-								.putHeader("Content-Type", "text/xml")
-								.sendBuffer(Buffer.buffer().appendString(deleteXml))
-								.onSuccess(c -> {
-							try {
-								LOG.info(String.format(importSitePageComplete, SitePage.CLASS_SIMPLE_NAME));
-								promise.complete();
-							} catch(Exception ex) {
-								LOG.error(String.format("Could not read response from Solr: http://%s:%s%s", solrHostName, solrPort, solrRequestUri), ex);
+					CompositeFuture.all(futures).onSuccess(a -> {
+						JsonObject pageBody = new JsonObject();
+						pageBody.put(SitePage.VAR_saves, new JsonArray()
+								.add(SitePage.VAR_inheritPk)
+								.add(SitePage.VAR_created)
+								.add(SitePage.VAR_author)
+								.add(SitePage.VAR_objectId)
+								.add(SitePage.VAR_objectTitle)
+								.add(SitePage.VAR_uri)
+								.add(SitePage.VAR_h1)
+								.add(SitePage.VAR_h2)
+								);
+						pageBody.put(SitePage.VAR_id, pageId);
+						pageBody.put(SitePage.VAR_objectId, pageId);
+						pageBody.put(SitePage.VAR_pageId, pageId);
+						pageBody.put(SitePage.VAR_objectTitle, json.getString("title"));
+						pageBody.put(SitePage.VAR_created, json.getString("created"));
+						pageBody.put(SitePage.VAR_author, json.getString("author"));
+						pageBody.put(SitePage.VAR_uri, json.getString("uri"));
+						pageBody.put(SitePage.VAR_h1, json.getString("h1"));
+						pageBody.put(SitePage.VAR_h2, json.getString("h2"));
+		
+						JsonObject pageParams = new JsonObject();
+						pageParams.put("body", pageBody);
+						pageParams.put("path", new JsonObject());
+						pageParams.put("cookie", new JsonObject());
+						pageParams.put("query", new JsonObject().put("commitWithin", 1000).put("q", "*:*").put("var", new JsonArray().add("refresh:false")));
+						JsonObject pageContext = new JsonObject().put("params", pageParams);
+						JsonObject pageRequest = new JsonObject().put("context", pageContext);
+						vertx.eventBus().request(String.format("smart-village-view-enUS-%s", SitePage.CLASS_SIMPLE_NAME), pageRequest, new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", SitePage.CLASS_SIMPLE_NAME))).onSuccess(b -> {
+							String solrHostName = config().getString(ComputateVertxConfigKeys.SOLR_HOST_NAME);
+							Integer solrPort = config().getInteger(ComputateVertxConfigKeys.SOLR_PORT);
+							String solrCollection = config().getString(ComputateVertxConfigKeys.SOLR_COLLECTION);
+							String solrRequestUri = String.format("/solr/%s/update%s", solrCollection, "?commitWithin=1000&overwrite=true&wt=json");
+							String deleteQuery = String.format("classSimpleName_docvalues_string:%s AND created_docvalues_date:[* TO %s]", SiteHtm.CLASS_SIMPLE_NAME, SiteHtm.staticSearchStrCreated(null, SiteHtm.staticSearchCreated(null, now)));
+							String deleteXml = String.format("<delete><query>%s</query></delete>", deleteQuery);
+							webClient.post(solrPort, solrHostName, solrRequestUri)
+									.putHeader("Content-Type", "text/xml")
+									.sendBuffer(Buffer.buffer().appendString(deleteXml))
+									.onSuccess(c -> {
+								try {
+									LOG.info(String.format(importSitePageComplete, SitePage.CLASS_SIMPLE_NAME));
+									promise.complete();
+								} catch(Exception ex) {
+									LOG.error(String.format("Could not read response from Solr: http://%s:%s%s", solrHostName, solrPort, solrRequestUri), ex);
+									promise.fail(ex);
+								}
+							}).onFailure(ex -> {
+								LOG.error(String.format("Search failed. "), new RuntimeException(ex));
 								promise.fail(ex);
-							}
+							});
 						}).onFailure(ex -> {
-							LOG.error(String.format("Search failed. "), new RuntimeException(ex));
+							LOG.error(String.format(importSitePageFail, SitePage.CLASS_SIMPLE_NAME), ex);
 							promise.fail(ex);
 						});
 					}).onFailure(ex -> {
 						LOG.error(String.format(importSitePageFail, SitePage.CLASS_SIMPLE_NAME), ex);
 						promise.fail(ex);
 					});
-				}).onFailure(ex -> {
+				} catch(Exception ex) {
 					LOG.error(String.format(importSitePageFail, SitePage.CLASS_SIMPLE_NAME), ex);
 					promise.fail(ex);
-				});
+				}
 			}).onFailure(ex -> {
 				LOG.error(String.format(importSitePageFail, SitePage.CLASS_SIMPLE_NAME), ex);
 				promise.fail(ex);
@@ -533,7 +578,7 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 		return promise.future();
 	}
 
-	private Long importSiteHtml(JsonObject json, Stack<String> stack, String pageId, String htmGroup, JsonArray pageItems, List<Future> futures, Long sequenceNum) {
+	private Long importSiteHtml(JsonObject json, Stack<String> stack, String pageId, String htmGroup, JsonArray pageItems, List<Future> futures, Long sequenceNum) throws Exception {
 		Double sort = 0D;
 		for(Integer i = 0; i < pageItems.size(); i++) {
 			JsonObject pageItem = (JsonObject)pageItems.getValue(i);
@@ -557,7 +602,14 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 				JsonObject importItem = new JsonObject();
 				if(e != null)
 					importItem.put(SiteHtm.VAR_eBefore, e);
-				Optional.ofNullable(pageItem.getString(SiteHtm.VAR_text)).ifPresent(text -> importItem.put(SiteHtm.VAR_text, new JsonArray().addAll(new JsonArray(Arrays.asList(text.split("\r?\n"))))));
+				String text = pageItem.getString(SiteHtm.VAR_text);
+				if(text != null) {
+					Template template = handlebars.compileInline(text);
+					Context engineContext = Context.newBuilder(json.getMap()).resolver(templateEngine.getResolvers()).build();
+					Buffer buffer = Buffer.buffer(template.apply(engineContext));
+					
+					importItem.put(SiteHtm.VAR_text, new JsonArray().addAll(new JsonArray(Arrays.asList(buffer.toString().split("\r?\n")))));
+				}
 				if(!eNoWrapParent && !tabs.isEmpty()) {
 					importItem.put(SiteHtm.VAR_tabs, tabs);
 				}

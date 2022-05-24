@@ -1,0 +1,78 @@
+---
+uri: /en-us/choose-your-operating-system
+h1: What is the best operating system to develop the Smart Village project? 
+h2: Red Hat Enterprise Linux is the best operating system for software development. 
+created: "2022-05-23"
+author:
+  name: Christopher Tate
+  title: Red Hat Principal Software Consultant
+htmTitle:
+  - text: What is the best operating system to develop the Smart Village project? Red Hat Enterprise Linux is the best operating system for software development. 
+os:
+  name: Red Hat Enterprise Linux 8
+  abbreviation: RHEL8
+htmBody:
+  - e: h1
+    a:
+      class: w3-text-2017-shaded-spruce w3-monospace 
+    text: Best operating system to develop the Smart Village project
+  - e: div
+    a:
+      class: font-style-italic 
+    text: 'Created {{formatZonedDateTime created "EEE MMM d yyyy" "en-US" "America/Denver" }}'
+  - e: p
+    in:
+      - e: div
+        a:
+          class: font-weight-bold 
+        text: "By {{ author.name }}"
+      - e: div
+        a:
+          class: font-weight-bold font-style-italic
+        text: "{{ author.title }}"
+  - e: p
+    text: |-
+      Are you wondering, how do I pick an operating system to develop my website? Between Windows, Mac and many versions of Linux, which one is the most stable, helpful and secure? 
+      Hello, my name is {{ author.name }}. 
+      I am a Red Hat {{ author.title }} and I love open source software. 
+      I will help you create your own successful websites, on your own computer, using open-source software. 
+      I've tried many operating systems over the years. 
+      After switching to linux a decade ago, I've tried many Linux distros. 
+      In terms of stability, usefulness and security, I will always choose {{ os.name }}, and I'll help you get started. 
+  - e: h2
+    a:
+      class: w3-text-2017-shaded-spruce w3-monospace 
+    text: Red Hat Developer Subscription
+  - e: p
+    text: |-
+      The Red Hat Developer Subscription for Individuals is a no-cost offering of the Red Hat Developer program and includes access to Red Hat Enterprise Linux among other Red Hat products. 
+      It is a program and an offering designed for individual developers, available through the Red Hat Developer program.
+  - e: h3
+    a:
+      class: w3-text-2017-shaded-spruce w3-monospace 
+    text: Be sure to review the Red Hat Developer Subscriptions for Individuals Agreement 
+  - e: p
+    text: |-
+      You will for sure want to read the fine print about the developer subscription to make sure you don't use it in a way that conflicts with the agreement. 
+      Here are some important terms to consider: 
+  - e: ol
+    in:
+      - e: li
+        text: |-
+          By accepting the Program Terms, you represent that you are acting on your own personal behalf and not as a representative or on behalf of an entity and will be using the Individual Developer Subscriptions solely as set forth in this document. 
+          Red Hat is relying on your representations as a condition of our providing you access.
+      - e: li
+        text: |-
+          Do not use the Red Hat Subscription Services for Individual Development Use and/or Individual Production Use on more than sixteen (16) Physical or Virtual Nodes
+      - e: li
+        text: |-
+          No Selling, distributing and/or rebranding the Red Hat Subscription Services (or any part thereof) contained in the Individual Developer Subscriptions.
+  - e: p
+    a:
+      class: w3-text-2017-shaded-spruce w3-monospace 
+    in:
+      e: a
+      a:
+        href: https://developers.redhat.com/articles/faqs-no-cost-red-hat-enterprise-linux
+        target: _new
+      text: https://developers.redhat.com/articles/faqs-no-cost-red-hat-enterprise-linux

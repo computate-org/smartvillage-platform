@@ -126,6 +126,8 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 
 	HandlebarsTemplateEngine templateEngine;
 
+	Handlebars handlebars;
+
 	/**	
 	 *	The main method for the Vert.x application that runs the Vert.x Runner class
 	 **/
@@ -320,10 +322,12 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 							configureSharedWorkerExecutor().onComplete(f -> 
 								configureWebsockets().onComplete(g -> 
 									configureEmail().onComplete(i -> 
-										configureApi().onComplete(j -> 
-											configureUi().onComplete(k -> 
-												configureCamel().onComplete(l -> 
-													startServer().onComplete(m -> startPromise.complete())
+										configureHandlebars().onComplete(j -> 
+											configureApi().onComplete(k -> 
+												configureUi().onComplete(l -> 
+													configureCamel().onComplete(m -> 
+														startServer().onComplete(n -> startPromise.complete())
+													).onFailure(ex -> startPromise.fail(ex))
 												).onFailure(ex -> startPromise.fail(ex))
 											).onFailure(ex -> startPromise.fail(ex))
 										).onFailure(ex -> startPromise.fail(ex))
@@ -721,14 +725,37 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 	}
 
 	/**
+	 * Val.Fail.enUS:Handlebars was not configured properly. 
+	 * Val.Complete.enUS:Handlebars was configured properly. 
+	 */
+	private Future<Void> configureHandlebars() {
+		Promise<Void> promise = Promise.promise();
+		try {
+			templateEngine = HandlebarsTemplateEngine.create(vertx);
+			handlebars = (Handlebars)templateEngine.unwrap();
+
+			handlebars.registerHelpers(ConditionalHelpers.class);
+			handlebars.registerHelpers(StringHelpers.class);
+			handlebars.registerHelpers(AuthHelpers.class);
+			handlebars.registerHelpers(SiteHelpers.class);
+			handlebars.registerHelpers(DateHelpers.class);
+
+			LOG.info(configureHandlebarsComplete);
+			promise.complete();
+		} catch(Exception ex) {
+			LOG.error(configureHandlebarsFail, ex);
+			promise.fail(ex);
+		}
+		return promise.future();
+	}
+
+	/**
 	 * Val.Fail.enUS:The API was not configured properly. 
 	 * Val.Complete.enUS:The API was configured properly. 
 	 */
 	private Future<Void> configureApi() {
 		Promise<Void> promise = Promise.promise();
 		try {
-			templateEngine = HandlebarsTemplateEngine.create(vertx);
-
 			SiteUserEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
 			IotNodeEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
 			TrafficSimulationEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
@@ -752,21 +779,6 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 		Promise<Void> promise = Promise.promise();
 		try {
 			String staticPath = config().getString(ConfigKeys.STATIC_PATH);
-			String staticBaseUrl = config().getString(ConfigKeys.STATIC_BASE_URL);
-			String siteBaseUrl = config().getString(ConfigKeys.SITE_BASE_URL);
-			String templatePath = config().getString(ConfigKeys.TEMPLATE_PATH);
-			Handlebars handlebars = (Handlebars)templateEngine.unwrap();
-			TemplateHandler templateHandler;
-			if(StringUtils.isBlank(templatePath))
-				templateHandler = TemplateHandler.create(templateEngine);
-			else
-				templateHandler = TemplateHandler.create(templateEngine, templatePath, "text/html");
-
-			handlebars.registerHelpers(ConditionalHelpers.class);
-			handlebars.registerHelpers(StringHelpers.class);
-			handlebars.registerHelpers(AuthHelpers.class);
-			handlebars.registerHelpers(SiteHelpers.class);
-			handlebars.registerHelpers(DateHelpers.class);
 
 			router.get("/").handler(a -> {
 				a.reroute("/template/enUS/HomePage");
@@ -818,10 +830,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 							JsonObject json = JsonObject.mapFrom(page);
 							templateEngine.render(json, Optional.ofNullable(config().getString(ConfigKeys.TEMPLATE_PATH)).orElse("templates") + "/" + lang + "/DynamicPage").onSuccess(buffer -> {
 								try {
-									Template template = handlebars.compileInline(buffer.toString());
-									Context engineContext = Context.newBuilder(json.getMap()).resolver(templateEngine.getResolvers()).build();
-									Buffer buffer2 = Buffer.buffer(template.apply(engineContext));
-									ctx.response().end(buffer2);
+									ctx.response().end(buffer);
 								} catch(Exception ex) {
 									LOG.error(String.format("Failed to render page %s", uri), ex);
 									ctx.fail(ex);

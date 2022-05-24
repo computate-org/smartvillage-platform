@@ -10,8 +10,6 @@ REDHAT_OPENSHIFT_HOST: https://api.rh-us-east-1.openshift.com
 REDHAT_OPENSHIFT_TOKEN: "..."
 # The OpenShift namespace where applications will be deployed.
 REDHAT_OPENSHIFT_NAMESPACE: "rh-impact"
-# The default storage class name for persistent volumes for the OpenShift cluster. 
-REDHAT_OPENSHIFT_STORAGE_CLASS_NAME: gp2
 
 ######################
 # Zookeeper defaults #
@@ -29,8 +27,6 @@ ZOOKEEPER_NAMESPACE: "{{ REDHAT_OPENSHIFT_NAMESPACE }}"
 ZOOKEEPER_VOLUME_SIZE: 1Gi
 # The default hostname for the Zookeeper cluster manager.
 ZOOKEEPER_HOST_NAME: "zookeeper.{{ ZOOKEEPER_NAMESPACE }}.svc"
-# The default storage class name for persistent volumes for Zookeeper. 
-ZOOKEEPER_STORAGE_CLASS_NAME: "{{ REDHAT_OPENSHIFT_STORAGE_CLASS_NAME }}"
 
 #################
 # Solr defaults #
@@ -48,8 +44,6 @@ SOLR_NAMESPACE: "{{ REDHAT_OPENSHIFT_NAMESPACE }}"
 SOLR_VOLUME_SIZE: 2Gi
 # The default hostname for the Solr search engine.
 SOLR_HOST_NAME: "solr.{{ SOLR_NAMESPACE }}.svc"
-# The default storage class name for persistent volumes for Solr. 
-SOLR_STORAGE_CLASS_NAME: "{{ REDHAT_OPENSHIFT_STORAGE_CLASS_NAME }}"
 
 #######################
 # PostgreSQL defaults #
@@ -73,8 +67,6 @@ POSTGRES_DB_USER: computate
 POSTGRES_DB_NAME: "{{ SITE_NAME }}"
 # The default PostgreSQL database password.
 POSTGRES_DB_PASSWORD: "..."
-# The default storage class name for persistent volumes for PostgreSQL. 
-POSTGRES_STORAGE_CLASS_NAME: "{{ REDHAT_OPENSHIFT_STORAGE_CLASS_NAME }}"
 
 ################
 # Git defaults #
@@ -129,7 +121,7 @@ SITE_PORT_ENUS: "8080"
 # The base URL of the site.
 SITE_BASE_URL_ENUS: "https://{{ SITE_HOST_NAME_ENUS }}"
 # The Solr collection of the site.
-SITE_SOLR_COLLECTION_ENUS: "{{ SITE_NAME }}"
+SOLR_COLLECTION: "{{ SITE_NAME }}"
 # The timezone of the site.
 SITE_LOCALE: "en-US"
 # The timezone of the site.
@@ -230,11 +222,11 @@ SITE_INSTANCES: 5
 WORKER_POOL_SIZE: 5
 
 # Enable data import in the site. 
-ENABLE_IMPORT_DATA: "{{ ENABLE_IMPORT_DATA | lower }}"
+ENABLE_IMPORT_DATA: true
 ENABLE_IMPORT_DATA_IotNode: true
 
 # The Auth roles required to be an admin in the site. 
-AUTH_ROLES_ADMIN: "{{ AUTH_ROLES_ADMIN }}"
+AUTH_ROLES_ADMIN: true
 # The Auth roles required to add and modify site user records. 
 AUTH_ROLES_REQUIRED_SiteUser: ['SiteAdmin']
 # The Auth roles required to add and modify IOT node records. 
