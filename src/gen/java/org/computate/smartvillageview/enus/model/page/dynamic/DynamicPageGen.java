@@ -639,8 +639,6 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 
 	public void siteRequestDynamicPage(SiteRequestEnUS siteRequest_) {
 			super.siteRequestPageLayout(siteRequest_);
-		if(htmList != null)
-			htmList.setSiteRequest_(siteRequest_);
 	}
 
 	public void siteRequestForClass(SiteRequestEnUS siteRequest_) {
