@@ -53,7 +53,7 @@ public class SitePage extends SitePageGen<Object> {
 	 * Ignore: true
 	 * Description: An asynchronous method for searching for a computer related to this message
 	 */
-	protected void _promiseBefore(Promise<SearchList<Void>> promise) {
+	protected void _promiseBefore(Promise<Void> promise) {
 		promise.complete();
 	}
 

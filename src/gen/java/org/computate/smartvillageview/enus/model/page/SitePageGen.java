@@ -31,7 +31,6 @@ import org.slf4j.LoggerFactory;
 import java.math.RoundingMode;
 import java.util.Map;
 import java.lang.Object;
-import org.computate.vertx.search.list.SearchList;
 import java.lang.Void;
 import java.lang.String;
 import java.time.ZonedDateTime;
@@ -113,7 +112,7 @@ public abstract class SitePageGen<DEV> extends Object {
 	 */
 	@JsonIgnore
 	@JsonInclude(Include.NON_NULL)
-	protected SearchList<Void> promiseBefore;
+	protected Void promiseBefore;
 
 	/**	<br> The entity promiseBefore
 	 *  is defined as null before being initialized. 
@@ -121,33 +120,25 @@ public abstract class SitePageGen<DEV> extends Object {
 	 * <br>
 	 * @param promise is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected abstract void _promiseBefore(Promise<SearchList<Void>> promise);
+	protected abstract void _promiseBefore(Promise<Void> promise);
 
-	public SearchList<Void> getPromiseBefore() {
+	public Void getPromiseBefore() {
 		return promiseBefore;
 	}
 
-	public void setPromiseBefore(SearchList<Void> promiseBefore) {
+	public void setPromiseBefore(Void promiseBefore) {
 		this.promiseBefore = promiseBefore;
 	}
-	public static SearchList<Void> staticSetPromiseBefore(SiteRequestEnUS siteRequest_, String o) {
+	public static Void staticSetPromiseBefore(SiteRequestEnUS siteRequest_, String o) {
 		return null;
 	}
-	protected Future<SearchList<Void>> promiseBeforePromise() {
-		Promise<SearchList<Void>> promise = Promise.promise();
-		Promise<SearchList<Void>> promise2 = Promise.promise();
+	protected Future<Void> promiseBeforePromise() {
+		Promise<Void> promise = Promise.promise();
+		Promise<Void> promise2 = Promise.promise();
 		_promiseBefore(promise2);
 		promise2.future().onSuccess(o -> {
-			if(o != null && promiseBefore == null) {
-				o.promiseDeepForClass(siteRequest_).onSuccess(a -> {
-					setPromiseBefore(o);
-					promise.complete(o);
-				}).onFailure(ex -> {
-					promise.fail(ex);
-				});
-			} else {
-				promise.complete(o);
-			}
+			setPromiseBefore(o);
+			promise.complete(o);
 		}).onFailure(ex -> {
 			promise.fail(ex);
 		});
@@ -1654,8 +1645,6 @@ public abstract class SitePageGen<DEV> extends Object {
 	/////////////////
 
 	public void siteRequestSitePage(SiteRequestEnUS siteRequest_) {
-		if(promiseBefore != null)
-			promiseBefore.setSiteRequest_(siteRequest_);
 	}
 
 	public void siteRequestForClass(SiteRequestEnUS siteRequest_) {
@@ -2204,7 +2193,6 @@ public abstract class SitePageGen<DEV> extends Object {
 		}
 		if(objectText != null) {
 			doc.put("objectText_text_enUS", objectText.toString());
-			doc.put("objectText_indexed_string", objectText);
 		}
 		if(pageUrlId != null) {
 			doc.put("pageUrlId_docvalues_string", pageUrlId);
@@ -2431,8 +2419,7 @@ public abstract class SitePageGen<DEV> extends Object {
 		});
 		oSitePage.setObjectTitle(Optional.ofNullable(doc.get("objectTitle_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSitePage.setObjectId(Optional.ofNullable(doc.get("objectId_docvalues_string")).map(v -> v.toString()).orElse(null));
-		String objectSuggest = (String)doc.get("objectSuggest_suggested");
-		oSitePage.setObjectSuggest(objectSuggest);
+		oSitePage.setObjectSuggest(Optional.ofNullable(doc.get("objectSuggest_suggested")).map(v -> v.toString()).orElse(null));
 		oSitePage.setObjectText(Optional.ofNullable(doc.get("objectText_indexedstored_string")).map(v -> v.toString()).orElse(null));
 		oSitePage.setPageUrlId(Optional.ofNullable(doc.get("pageUrlId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSitePage.setPageUrlPk(Optional.ofNullable(doc.get("pageUrlPk_docvalues_string")).map(v -> v.toString()).orElse(null));
@@ -2749,7 +2736,7 @@ public abstract class SitePageGen<DEV> extends Object {
 	public static String classSimpleNameSitePage(String var) {
 		switch(var) {
 		case VAR_promiseBefore:
-			return "SearchList";
+			return "Void";
 		case VAR_pageId:
 			return "String";
 		case VAR_uri:

@@ -1810,7 +1810,6 @@ public abstract class BaseModelGen<DEV> extends Object {
 		}
 		if(objectText != null) {
 			doc.put("objectText_text_enUS", objectText.toString());
-			doc.put("objectText_indexed_string", objectText);
 		}
 		if(pageUrlId != null) {
 			doc.put("pageUrlId_docvalues_string", pageUrlId);
@@ -2009,8 +2008,7 @@ public abstract class BaseModelGen<DEV> extends Object {
 		});
 		oBaseModel.setObjectTitle(Optional.ofNullable(doc.get("objectTitle_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oBaseModel.setObjectId(Optional.ofNullable(doc.get("objectId_docvalues_string")).map(v -> v.toString()).orElse(null));
-		String objectSuggest = (String)doc.get("objectSuggest_suggested");
-		oBaseModel.setObjectSuggest(objectSuggest);
+		oBaseModel.setObjectSuggest(Optional.ofNullable(doc.get("objectSuggest_suggested")).map(v -> v.toString()).orElse(null));
 		oBaseModel.setObjectText(Optional.ofNullable(doc.get("objectText_indexedstored_string")).map(v -> v.toString()).orElse(null));
 		oBaseModel.setPageUrlId(Optional.ofNullable(doc.get("pageUrlId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oBaseModel.setPageUrlPk(Optional.ofNullable(doc.get("pageUrlPk_docvalues_string")).map(v -> v.toString()).orElse(null));
