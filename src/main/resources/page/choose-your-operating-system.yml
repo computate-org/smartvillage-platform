@@ -3,13 +3,15 @@ uri: /en-us/choose-your-operating-system
 h1: What is the best operating system to develop the Smart Village project? 
 h2: Red Hat Enterprise Linux is the best operating system for software development. 
 created: "2022-05-23"
+courseNum: 1
+lessonNum: 1
 author:
   name: Christopher Tate
   title: Red Hat Principal Software Consultant
 htmTitle:
   - text: What is the best operating system to develop the Smart Village project? Red Hat Enterprise Linux is the best operating system for software development. 
 os:
-  name: Red Hat Enterprise Linux 8
+  name: Red Hat Enterprise Linux
   abbreviation: RHEL8
 htmBody:
   - e: h1
@@ -35,10 +37,18 @@ htmBody:
       Are you wondering, how do I pick an operating system to develop my website? Between Windows, Mac and many versions of Linux, which one is the most stable, helpful and secure? 
       Hello, my name is {{ author.name }}. 
       I am a Red Hat {{ author.title }} and I love open source software. 
-      I will help you create your own successful websites, on your own computer, using open-source software. 
       I've tried many operating systems over the years. 
       After switching to linux a decade ago, I've tried many Linux distros. 
-      In terms of stability, usefulness and security, I will always choose {{ os.name }}, and I'll help you get started. 
+      In terms of stability, usefulness and security, I will always choose {{ os.name }}, and I'll help you get started on {{ os.name }} too. 
+  - e: h2
+    a:
+      class: w3-text-2017-shaded-spruce w3-monospace 
+    text: Red Hat Enterprise Linux
+  - e: p
+    text: |-
+      Red Hat Enterprise Linux is the world’s leading enterprise Linux platform, certified on hundreds of clouds and with thousands of hardware and software vendors. 
+      It's the most stable, the most secure, the most powerful, and the most trusted operating system for software development available. 
+      Best of all, it's available for open source developers for free for individual use, following the terms of the Red Hat Developer Subscription described below. 
   - e: h2
     a:
       class: w3-text-2017-shaded-spruce w3-monospace 

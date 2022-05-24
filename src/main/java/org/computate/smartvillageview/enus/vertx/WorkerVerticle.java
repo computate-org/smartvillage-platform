@@ -509,6 +509,8 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 						pageBody.put(SitePage.VAR_saves, new JsonArray()
 								.add(SitePage.VAR_inheritPk)
 								.add(SitePage.VAR_created)
+								.add(SitePage.VAR_courseNum)
+								.add(SitePage.VAR_lessonNum)
 								.add(SitePage.VAR_author)
 								.add(SitePage.VAR_objectId)
 								.add(SitePage.VAR_objectTitle)
@@ -521,6 +523,8 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 						pageBody.put(SitePage.VAR_pageId, pageId);
 						pageBody.put(SitePage.VAR_objectTitle, json.getString("title"));
 						pageBody.put(SitePage.VAR_created, json.getString("created"));
+						pageBody.put(SitePage.VAR_courseNum, json.getInteger(SitePage.VAR_courseNum));
+						pageBody.put(SitePage.VAR_lessonNum, json.getInteger(SitePage.VAR_lessonNum));
 						pageBody.put(SitePage.VAR_author, json.getString("author"));
 						pageBody.put(SitePage.VAR_uri, json.getString("uri"));
 						pageBody.put(SitePage.VAR_h1, json.getString("h1"));

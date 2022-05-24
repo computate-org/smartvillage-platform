@@ -394,7 +394,6 @@
 						<div id="postSitePageForm">
 							<div class="w3-cell-row ">
 {{> "htmCreated" classApiMethodMethod="POST"}}
-{{> "htmAuthor" classApiMethodMethod="POST"}}
 {{> "htmObjectId" classApiMethodMethod="POST"}}
 							</div>
 							<div class="w3-cell-row ">
@@ -404,8 +403,7 @@
 							<div class="w3-cell-row ">
 {{> "htmPageId" classApiMethodMethod="POST"}}
 {{> "htmUri" classApiMethodMethod="POST"}}
-{{> "htmH1" classApiMethodMethod="POST"}}
-{{> "htmH2" classApiMethodMethod="POST"}}
+{{> "htmAuthor" classApiMethodMethod="POST"}}
 							</div>
 						</div>
 						<button
@@ -437,7 +435,6 @@
 					<div class="" id="patchSitePageFormValues">
 							<div class="w3-cell-row ">
 {{> "htmCreated" classApiMethodMethod="PATCH"}}
-{{> "htmAuthor" classApiMethodMethod="PATCH"}}
 {{> "htmObjectId" classApiMethodMethod="PATCH"}}
 							</div>
 							<div class="w3-cell-row ">
@@ -447,8 +444,7 @@
 							<div class="w3-cell-row ">
 {{> "htmPageId" classApiMethodMethod="PATCH"}}
 {{> "htmUri" classApiMethodMethod="PATCH"}}
-{{> "htmH1" classApiMethodMethod="PATCH"}}
-{{> "htmH2" classApiMethodMethod="PATCH"}}
+{{> "htmAuthor" classApiMethodMethod="PATCH"}}
 							</div>
 						<button
 							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-2017-navy-peony "
@@ -501,7 +497,6 @@
 						<div id="searchpageSitePageForm">
 							<div class="w3-cell-row ">
 {{> "htmCreated" classApiMethodMethod="Page"}}
-{{> "htmAuthor" classApiMethodMethod="Page"}}
 {{> "htmModified" classApiMethodMethod="Page"}}
 {{> "htmObjectId" classApiMethodMethod="Page"}}
 							</div>
@@ -512,8 +507,7 @@
 							<div class="w3-cell-row ">
 {{> "htmPageId" classApiMethodMethod="Page"}}
 {{> "htmUri" classApiMethodMethod="Page"}}
-{{> "htmH1" classApiMethodMethod="Page"}}
-{{> "htmH2" classApiMethodMethod="Page"}}
+{{> "htmAuthor" classApiMethodMethod="Page"}}
 							</div>
 						</div>
 					</div>
@@ -645,12 +639,8 @@
 {{#*inline "thead2SitePagePage"}}
 			<tr>
 						<th>created</th>
-						<th>author</th>
 						<th></th>
-						<th>Page ID</th>
 						<th>URI</th>
-						<th>header 1</th>
-						<th>header 2</th>
 			</tr>
 {{/inline}}
 {{#*inline "tbody1SitePagePage"}}
@@ -668,33 +658,13 @@
 						</td>
 						<td>
 							<a href="{{pageUrlPk}}">
-								<span class="white-space-pre-wrap ">{{author}}</span>
-							</a>
-						</td>
-						<td>
-							<a href="{{pageUrlPk}}">
 								<i class="fad fa-sensor-triangle-exclamation "></i>
 								<span class="white-space-pre-wrap ">{{objectTitle}}</span>
 							</a>
 						</td>
 						<td>
 							<a href="{{pageUrlPk}}">
-								<span class="white-space-pre-wrap ">{{pageId}}</span>
-							</a>
-						</td>
-						<td>
-							<a href="{{pageUrlPk}}">
 								<span class="white-space-pre-wrap ">{{uri}}</span>
-							</a>
-						</td>
-						<td>
-							<a href="{{pageUrlPk}}">
-								<span class="white-space-pre-wrap ">{{h1}}</span>
-							</a>
-						</td>
-						<td>
-							<a href="{{pageUrlPk}}">
-								<span class="white-space-pre-wrap ">{{h2}}</span>
 							</a>
 						</td>
 					</tr>
@@ -711,27 +681,11 @@
 				<td>
 				</td>
 			{{/if}}
-			{{#if getColumnAuthor}}
-				<td>
-				</td>
-			{{/if}}
 			{{#if getColumnObjectTitle}}
 				<td>
 				</td>
 			{{/if}}
-			{{#if getColumnPageId}}
-				<td>
-				</td>
-			{{/if}}
 			{{#if getColumnUri}}
-				<td>
-				</td>
-			{{/if}}
-			{{#if getColumnH1}}
-				<td>
-				</td>
-			{{/if}}
-			{{#if getColumnH2}}
 				<td>
 				</td>
 			{{/if}}
@@ -863,6 +817,124 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{sitePage_.pageId}}"
+	{{/eq}}
+														/>
+
+{{/inline}}
+
+{{#*inline "htmCourseNum"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SitePageCourseNum">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-navy-peony">
+													<label for="{{classApiMethodMethod}}_courseNum">Course Number</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputCourseNum"}}
+													</div>
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-navy-peony "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_courseNum')); $('#{{classApiMethodMethod}}_courseNum').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SitePageForm :input[name=id]').val() }], 'setCourseNum', null, function() { addGlow($('#{{classApiMethodMethod}}_courseNum')); }, function() { addError($('#{{classApiMethodMethod}}_courseNum')); }); "
+																		>
+																	<i class="far fa-eraser "></i>
+																</button>
+															</div>
+														{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputCourseNum"}}
+														<input
+															type="text"
+															placeholder="Course Number"
+															title="The course number for this page. "
+															id="{{classApiMethodMethod}}_courseNum"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setCourseNum classSitePage inputSitePage{{id}}CourseNum w3-input w3-border "
+																name="setCourseNum"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setCourseNum classSitePage inputSitePage{{id}}CourseNum w3-input w3-border "
+																name="setCourseNum"
+		{{else}}
+																class="valueCourseNum w3-input w3-border classSitePage inputSitePage{{id}}CourseNum w3-input w3-border "
+																name="courseNum"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setCourseNum', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_courseNum')); }, function() { addError($('#{{classApiMethodMethod}}_courseNum')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{sitePage_.courseNum}}"
+	{{/eq}}
+														/>
+
+{{/inline}}
+
+{{#*inline "htmLessonNum"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SitePageLessonNum">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-navy-peony">
+													<label for="{{classApiMethodMethod}}_lessonNum">Lesson Number</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputLessonNum"}}
+													</div>
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-navy-peony "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_lessonNum')); $('#{{classApiMethodMethod}}_lessonNum').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SitePageForm :input[name=id]').val() }], 'setLessonNum', null, function() { addGlow($('#{{classApiMethodMethod}}_lessonNum')); }, function() { addError($('#{{classApiMethodMethod}}_lessonNum')); }); "
+																		>
+																	<i class="far fa-eraser "></i>
+																</button>
+															</div>
+														{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputLessonNum"}}
+														<input
+															type="text"
+															placeholder="Lesson Number"
+															title="The lesson number for this page. "
+															id="{{classApiMethodMethod}}_lessonNum"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setLessonNum classSitePage inputSitePage{{id}}LessonNum w3-input w3-border "
+																name="setLessonNum"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setLessonNum classSitePage inputSitePage{{id}}LessonNum w3-input w3-border "
+																name="setLessonNum"
+		{{else}}
+																class="valueLessonNum w3-input w3-border classSitePage inputSitePage{{id}}LessonNum w3-input w3-border "
+																name="lessonNum"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setLessonNum', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_lessonNum')); }, function() { addError($('#{{classApiMethodMethod}}_lessonNum')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{sitePage_.lessonNum}}"
 	{{/eq}}
 														/>
 

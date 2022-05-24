@@ -43,6 +43,9 @@ import io.vertx.core.Promise;
  * IconName: sensor-triangle-exclamation
  * NameVar: page
  * 
+ * Sort.asc: courseNum
+ * Sort.asc: lessonNum
+ * 
  * RoleAll: true
  * Description: A webpage in the site. 
  */
@@ -63,7 +66,6 @@ public class SitePage extends SitePageGen<Object> {
 	 * Persist: true
 	 * HtmlRow: 3
 	 * HtmlCell: 1
-	 * HtmlColumn: 3
 	 * Facet: true
 	 * DisplayName: Page ID
 	 * Description: The ID for this page. 
@@ -75,9 +77,31 @@ public class SitePage extends SitePageGen<Object> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
+	 * Facet: true
+	 * DisplayName: Course Number
+	 * Description: The course number for this page. 
+	 */
+	protected void _courseNum(Wrap<Integer> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * Facet: true
+	 * DisplayName: Lesson Number
+	 * Description: The lesson number for this page. 
+	 */
+	protected void _lessonNum(Wrap<Integer> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
 	 * HtmlRow: 3
-	 * HtmlCell: 1
-	 * HtmlColumn: 3
+	 * HtmlCell: 2
+	 * HtmlColumn: 4
 	 * Facet: true
 	 * DisplayName: URI
 	 * Description: The relative URI for this page. 
@@ -89,10 +113,6 @@ public class SitePage extends SitePageGen<Object> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 3
-	 * HtmlCell: 2
-	 * HtmlColumn: 4
-	 * Facet: true
 	 * DisplayName: header 1
 	 * Description: The 1st header of this page. 
 	 */
@@ -103,10 +123,6 @@ public class SitePage extends SitePageGen<Object> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 3
-	 * HtmlCell: 3
-	 * HtmlColumn: 5
-	 * Facet: true
 	 * DisplayName: header 2
 	 * Description: The 2nd header of this page. 
 	 */
@@ -165,9 +181,8 @@ public class SitePage extends SitePageGen<Object> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 1
-	 * HtmlCell: 2
-	 * HtmlColumn: 1
+	 * HtmlRow: 3
+	 * HtmlCell: 3
 	 * Facet: true
 	 * DisplayName.enUS: author
 	 * Description: The author

@@ -34,6 +34,7 @@ import java.lang.Object;
 import org.computate.vertx.search.list.SearchList;
 import java.lang.Void;
 import java.lang.String;
+import java.lang.Integer;
 import java.time.ZonedDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
@@ -205,6 +206,128 @@ public abstract class SitePageGen<DEV> extends Object {
 
 	public String sqlPageId() {
 		return pageId;
+	}
+
+	///////////////
+	// courseNum //
+	///////////////
+
+	/**	 The entity courseNum
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected Integer courseNum;
+
+	/**	<br> The entity courseNum
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.page.SitePage&fq=entiteVar_enUS_indexed_string:courseNum">Find the entity courseNum in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _courseNum(Wrap<Integer> w);
+
+	public Integer getCourseNum() {
+		return courseNum;
+	}
+
+	public void setCourseNum(Integer courseNum) {
+		this.courseNum = courseNum;
+	}
+	@JsonIgnore
+	public void setCourseNum(String o) {
+		this.courseNum = SitePage.staticSetCourseNum(siteRequest_, o);
+	}
+	public static Integer staticSetCourseNum(SiteRequestEnUS siteRequest_, String o) {
+		if(NumberUtils.isParsable(o))
+			return Integer.parseInt(o);
+		return null;
+	}
+	protected SitePage courseNumInit() {
+		Wrap<Integer> courseNumWrap = new Wrap<Integer>().var("courseNum");
+		if(courseNum == null) {
+			_courseNum(courseNumWrap);
+			setCourseNum(courseNumWrap.o);
+		}
+		return (SitePage)this;
+	}
+
+	public static Integer staticSearchCourseNum(SiteRequestEnUS siteRequest_, Integer o) {
+		return o;
+	}
+
+	public static String staticSearchStrCourseNum(SiteRequestEnUS siteRequest_, Integer o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqCourseNum(SiteRequestEnUS siteRequest_, String o) {
+		return SitePage.staticSearchStrCourseNum(siteRequest_, SitePage.staticSearchCourseNum(siteRequest_, SitePage.staticSetCourseNum(siteRequest_, o)));
+	}
+
+	public Integer sqlCourseNum() {
+		return courseNum;
+	}
+
+	///////////////
+	// lessonNum //
+	///////////////
+
+	/**	 The entity lessonNum
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected Integer lessonNum;
+
+	/**	<br> The entity lessonNum
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.page.SitePage&fq=entiteVar_enUS_indexed_string:lessonNum">Find the entity lessonNum in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _lessonNum(Wrap<Integer> w);
+
+	public Integer getLessonNum() {
+		return lessonNum;
+	}
+
+	public void setLessonNum(Integer lessonNum) {
+		this.lessonNum = lessonNum;
+	}
+	@JsonIgnore
+	public void setLessonNum(String o) {
+		this.lessonNum = SitePage.staticSetLessonNum(siteRequest_, o);
+	}
+	public static Integer staticSetLessonNum(SiteRequestEnUS siteRequest_, String o) {
+		if(NumberUtils.isParsable(o))
+			return Integer.parseInt(o);
+		return null;
+	}
+	protected SitePage lessonNumInit() {
+		Wrap<Integer> lessonNumWrap = new Wrap<Integer>().var("lessonNum");
+		if(lessonNum == null) {
+			_lessonNum(lessonNumWrap);
+			setLessonNum(lessonNumWrap.o);
+		}
+		return (SitePage)this;
+	}
+
+	public static Integer staticSearchLessonNum(SiteRequestEnUS siteRequest_, Integer o) {
+		return o;
+	}
+
+	public static String staticSearchStrLessonNum(SiteRequestEnUS siteRequest_, Integer o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqLessonNum(SiteRequestEnUS siteRequest_, String o) {
+		return SitePage.staticSearchStrLessonNum(siteRequest_, SitePage.staticSearchLessonNum(siteRequest_, SitePage.staticSetLessonNum(siteRequest_, o)));
+	}
+
+	public Integer sqlLessonNum() {
+		return lessonNum;
 	}
 
 	/////////
@@ -498,9 +621,9 @@ public abstract class SitePageGen<DEV> extends Object {
 	public static ZonedDateTime staticSetCreated(SiteRequestEnUS siteRequest_, String o) {
 		if(StringUtils.endsWith(o, "]"))
 			return o == null ? null : ZonedDateTime.parse(o, ComputateZonedDateTimeSerializer.ZONED_DATE_TIME_FORMATTER);
-		if(StringUtils.endsWith(o, "Z"))
+		else if(StringUtils.endsWith(o, "Z"))
 			return o == null ? null : Instant.parse(o).atZone(ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
-		if(StringUtils.contains(o, "T"))
+		else if(StringUtils.contains(o, "T"))
 			return o == null ? null : ZonedDateTime.parse(o, DateTimeFormatter.ISO_DATE_TIME).truncatedTo(ChronoUnit.MILLIS);
 		else
 			return o == null ? null : LocalDate.parse(o, DateTimeFormatter.ISO_DATE).atStartOfDay(ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
@@ -575,9 +698,9 @@ public abstract class SitePageGen<DEV> extends Object {
 	public static ZonedDateTime staticSetModified(SiteRequestEnUS siteRequest_, String o) {
 		if(StringUtils.endsWith(o, "]"))
 			return o == null ? null : ZonedDateTime.parse(o, ComputateZonedDateTimeSerializer.ZONED_DATE_TIME_FORMATTER);
-		if(StringUtils.endsWith(o, "Z"))
+		else if(StringUtils.endsWith(o, "Z"))
 			return o == null ? null : Instant.parse(o).atZone(ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
-		if(StringUtils.contains(o, "T"))
+		else if(StringUtils.contains(o, "T"))
 			return o == null ? null : ZonedDateTime.parse(o, DateTimeFormatter.ISO_DATE_TIME).truncatedTo(ChronoUnit.MILLIS);
 		else
 			return o == null ? null : LocalDate.parse(o, DateTimeFormatter.ISO_DATE).atStartOfDay(ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
@@ -1607,6 +1730,8 @@ public abstract class SitePageGen<DEV> extends Object {
 			Promise<Void> promise2 = Promise.promise();
 			try {
 				pageIdInit();
+				courseNumInit();
+				lessonNumInit();
 				uriInit();
 				h1Init();
 				h2Init();
@@ -1690,6 +1815,10 @@ public abstract class SitePageGen<DEV> extends Object {
 				return oSitePage.promiseBefore;
 			case "pageId":
 				return oSitePage.pageId;
+			case "courseNum":
+				return oSitePage.courseNum;
+			case "lessonNum":
+				return oSitePage.lessonNum;
 			case "uri":
 				return oSitePage.uri;
 			case "h1":
@@ -1781,6 +1910,10 @@ public abstract class SitePageGen<DEV> extends Object {
 		switch(entityVar) {
 		case "pageId":
 			return SitePage.staticSetPageId(siteRequest_, o);
+		case "courseNum":
+			return SitePage.staticSetCourseNum(siteRequest_, o);
+		case "lessonNum":
+			return SitePage.staticSetLessonNum(siteRequest_, o);
 		case "uri":
 			return SitePage.staticSetUri(siteRequest_, o);
 		case "h1":
@@ -1845,6 +1978,10 @@ public abstract class SitePageGen<DEV> extends Object {
 		switch(entityVar) {
 		case "pageId":
 			return SitePage.staticSearchPageId(siteRequest_, (String)o);
+		case "courseNum":
+			return SitePage.staticSearchCourseNum(siteRequest_, (Integer)o);
+		case "lessonNum":
+			return SitePage.staticSearchLessonNum(siteRequest_, (Integer)o);
 		case "uri":
 			return SitePage.staticSearchUri(siteRequest_, (String)o);
 		case "h1":
@@ -1909,6 +2046,10 @@ public abstract class SitePageGen<DEV> extends Object {
 		switch(entityVar) {
 		case "pageId":
 			return SitePage.staticSearchStrPageId(siteRequest_, (String)o);
+		case "courseNum":
+			return SitePage.staticSearchStrCourseNum(siteRequest_, (Integer)o);
+		case "lessonNum":
+			return SitePage.staticSearchStrLessonNum(siteRequest_, (Integer)o);
 		case "uri":
 			return SitePage.staticSearchStrUri(siteRequest_, (String)o);
 		case "h1":
@@ -1973,6 +2114,10 @@ public abstract class SitePageGen<DEV> extends Object {
 		switch(entityVar) {
 		case "pageId":
 			return SitePage.staticSearchFqPageId(siteRequest_, o);
+		case "courseNum":
+			return SitePage.staticSearchFqCourseNum(siteRequest_, o);
+		case "lessonNum":
+			return SitePage.staticSearchFqLessonNum(siteRequest_, o);
 		case "uri":
 			return SitePage.staticSearchFqUri(siteRequest_, o);
 		case "h1":
@@ -2051,6 +2196,20 @@ public abstract class SitePageGen<DEV> extends Object {
 				if(val instanceof String)
 					setPageId((String)val);
 				saves.add("pageId");
+				return val;
+			case "coursenum":
+				if(val instanceof Integer)
+					setCourseNum((Integer)val);
+				else if(val instanceof String)
+					setCourseNum((String)val);
+				saves.add("courseNum");
+				return val;
+			case "lessonnum":
+				if(val instanceof Integer)
+					setLessonNum((Integer)val);
+				else if(val instanceof String)
+					setLessonNum((String)val);
+				saves.add("lessonNum");
 				return val;
 			case "uri":
 				if(val instanceof String)
@@ -2140,6 +2299,12 @@ public abstract class SitePageGen<DEV> extends Object {
 		if(pageId != null) {
 			doc.put("pageId_docvalues_string", pageId);
 		}
+		if(courseNum != null) {
+			doc.put("courseNum_docvalues_int", courseNum);
+		}
+		if(lessonNum != null) {
+			doc.put("lessonNum_docvalues_int", lessonNum);
+		}
 		if(uri != null) {
 			doc.put("uri_docvalues_string", uri);
 		}
@@ -2204,7 +2369,6 @@ public abstract class SitePageGen<DEV> extends Object {
 		}
 		if(objectText != null) {
 			doc.put("objectText_text_enUS", objectText.toString());
-			doc.put("objectText_indexed_string", objectText);
 		}
 		if(pageUrlId != null) {
 			doc.put("pageUrlId_docvalues_string", pageUrlId);
@@ -2224,6 +2388,10 @@ public abstract class SitePageGen<DEV> extends Object {
 		switch(entityVar) {
 			case "pageId":
 				return "pageId_docvalues_string";
+			case "courseNum":
+				return "courseNum_docvalues_int";
+			case "lessonNum":
+				return "lessonNum_docvalues_int";
 			case "uri":
 				return "uri_docvalues_string";
 			case "h1":
@@ -2273,6 +2441,10 @@ public abstract class SitePageGen<DEV> extends Object {
 		switch(entityVar) {
 			case "pageId":
 				return "pageId_docvalues_string";
+			case "courseNum":
+				return "courseNum_docvalues_int";
+			case "lessonNum":
+				return "lessonNum_docvalues_int";
 			case "uri":
 				return "uri_docvalues_string";
 			case "h1":
@@ -2328,6 +2500,10 @@ public abstract class SitePageGen<DEV> extends Object {
 		switch(searchVar) {
 			case "pageId_docvalues_string":
 				return "pageId";
+			case "courseNum_docvalues_int":
+				return "courseNum";
+			case "lessonNum_docvalues_int":
+				return "lessonNum";
 			case "uri_docvalues_string":
 				return "uri";
 			case "h1_docvalues_string":
@@ -2410,6 +2586,8 @@ public abstract class SitePageGen<DEV> extends Object {
 		SitePage oSitePage = (SitePage)this;
 
 		oSitePage.setPageId(Optional.ofNullable(doc.get("pageId_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oSitePage.setCourseNum(Optional.ofNullable(doc.get("courseNum_docvalues_int")).map(v -> v.toString()).orElse(null));
+		oSitePage.setLessonNum(Optional.ofNullable(doc.get("lessonNum_docvalues_int")).map(v -> v.toString()).orElse(null));
 		oSitePage.setUri(Optional.ofNullable(doc.get("uri_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSitePage.setH1(Optional.ofNullable(doc.get("h1_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSitePage.setH2(Optional.ofNullable(doc.get("h2_docvalues_string")).map(v -> v.toString()).orElse(null));
@@ -2431,8 +2609,7 @@ public abstract class SitePageGen<DEV> extends Object {
 		});
 		oSitePage.setObjectTitle(Optional.ofNullable(doc.get("objectTitle_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSitePage.setObjectId(Optional.ofNullable(doc.get("objectId_docvalues_string")).map(v -> v.toString()).orElse(null));
-		String objectSuggest = (String)doc.get("objectSuggest_suggested");
-		oSitePage.setObjectSuggest(objectSuggest);
+		oSitePage.setObjectSuggest(Optional.ofNullable(doc.get("objectSuggest_suggested")).map(v -> v.toString()).orElse(null));
 		oSitePage.setObjectText(Optional.ofNullable(doc.get("objectText_indexedstored_string")).map(v -> v.toString()).orElse(null));
 		oSitePage.setPageUrlId(Optional.ofNullable(doc.get("pageUrlId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSitePage.setPageUrlPk(Optional.ofNullable(doc.get("pageUrlPk_docvalues_string")).map(v -> v.toString()).orElse(null));
@@ -2452,6 +2629,10 @@ public abstract class SitePageGen<DEV> extends Object {
 			SitePage original = (SitePage)o;
 			if(!Objects.equals(pageId, original.getPageId()))
 				apiRequest.addVars("pageId");
+			if(!Objects.equals(courseNum, original.getCourseNum()))
+				apiRequest.addVars("courseNum");
+			if(!Objects.equals(lessonNum, original.getLessonNum()))
+				apiRequest.addVars("lessonNum");
 			if(!Objects.equals(uri, original.getUri()))
 				apiRequest.addVars("uri");
 			if(!Objects.equals(h1, original.getH1()))
@@ -2508,6 +2689,8 @@ public abstract class SitePageGen<DEV> extends Object {
 	@Override public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(Optional.ofNullable(pageId).map(v -> "pageId: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(courseNum).map(v -> "courseNum: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(lessonNum).map(v -> "lessonNum: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(uri).map(v -> "uri: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(h1).map(v -> "h1: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(h2).map(v -> "h2: \"" + v + "\"\n" ).orElse(""));
@@ -2537,6 +2720,8 @@ public abstract class SitePageGen<DEV> extends Object {
 	public static final String CLASS_SIMPLE_NAME = "SitePage";
 	public static final String VAR_promiseBefore = "promiseBefore";
 	public static final String VAR_pageId = "pageId";
+	public static final String VAR_courseNum = "courseNum";
+	public static final String VAR_lessonNum = "lessonNum";
 	public static final String VAR_uri = "uri";
 	public static final String VAR_h1 = "h1";
 	public static final String VAR_h2 = "h2";
@@ -2577,9 +2762,9 @@ public abstract class SitePageGen<DEV> extends Object {
 	}
 	public static List<String> varsFqSitePage(List<String> vars) {
 		vars.add(VAR_pageId);
+		vars.add(VAR_courseNum);
+		vars.add(VAR_lessonNum);
 		vars.add(VAR_uri);
-		vars.add(VAR_h1);
-		vars.add(VAR_h2);
 		vars.add(VAR_created);
 		vars.add(VAR_author);
 		return vars;
@@ -2589,12 +2774,16 @@ public abstract class SitePageGen<DEV> extends Object {
 		return SitePage.varsRangeSitePage(new ArrayList<String>());
 	}
 	public static List<String> varsRangeSitePage(List<String> vars) {
+		vars.add(VAR_courseNum);
+		vars.add(VAR_lessonNum);
 		vars.add(VAR_created);
 		return vars;
 	}
 
 	public static final String DISPLAY_NAME_promiseBefore = "";
 	public static final String DISPLAY_NAME_pageId = "Page ID";
+	public static final String DISPLAY_NAME_courseNum = "Course Number";
+	public static final String DISPLAY_NAME_lessonNum = "Lesson Number";
 	public static final String DISPLAY_NAME_uri = "URI";
 	public static final String DISPLAY_NAME_h1 = "header 1";
 	public static final String DISPLAY_NAME_h2 = "header 2";
@@ -2630,6 +2819,10 @@ public abstract class SitePageGen<DEV> extends Object {
 			return DISPLAY_NAME_promiseBefore;
 		case VAR_pageId:
 			return DISPLAY_NAME_pageId;
+		case VAR_courseNum:
+			return DISPLAY_NAME_courseNum;
+		case VAR_lessonNum:
+			return DISPLAY_NAME_lessonNum;
 		case VAR_uri:
 			return DISPLAY_NAME_uri;
 		case VAR_h1:
@@ -2691,6 +2884,10 @@ public abstract class SitePageGen<DEV> extends Object {
 			return "An asynchronous method for searching for a computer related to this message";
 		case VAR_pageId:
 			return "The ID for this page. ";
+		case VAR_courseNum:
+			return "The course number for this page. ";
+		case VAR_lessonNum:
+			return "The lesson number for this page. ";
 		case VAR_uri:
 			return "The relative URI for this page. ";
 		case VAR_h1:
@@ -2752,6 +2949,10 @@ public abstract class SitePageGen<DEV> extends Object {
 			return "SearchList";
 		case VAR_pageId:
 			return "String";
+		case VAR_courseNum:
+			return "Integer";
+		case VAR_lessonNum:
+			return "Integer";
 		case VAR_uri:
 			return "String";
 		case VAR_h1:
@@ -2809,17 +3010,9 @@ public abstract class SitePageGen<DEV> extends Object {
 
 	public static Integer htmlColumnSitePage(String var) {
 		switch(var) {
-		case VAR_pageId:
-			return 3;
 		case VAR_uri:
-			return 3;
-		case VAR_h1:
 			return 4;
-		case VAR_h2:
-			return 5;
 		case VAR_created:
-			return 1;
-		case VAR_author:
 			return 1;
 		case VAR_objectTitle:
 			return 2;
@@ -2834,16 +3027,12 @@ public abstract class SitePageGen<DEV> extends Object {
 			return 3;
 		case VAR_uri:
 			return 3;
-		case VAR_h1:
-			return 3;
-		case VAR_h2:
-			return 3;
 		case VAR_created:
 			return 1;
 		case VAR_modified:
 			return 1;
 		case VAR_author:
-			return 1;
+			return 3;
 		case VAR_archived:
 			return 2;
 		case VAR_deleted:
@@ -2860,17 +3049,13 @@ public abstract class SitePageGen<DEV> extends Object {
 		case VAR_pageId:
 			return 1;
 		case VAR_uri:
-			return 1;
-		case VAR_h1:
 			return 2;
-		case VAR_h2:
-			return 3;
 		case VAR_created:
 			return 2;
 		case VAR_modified:
 			return 3;
 		case VAR_author:
-			return 2;
+			return 3;
 		case VAR_archived:
 			return 1;
 		case VAR_deleted:

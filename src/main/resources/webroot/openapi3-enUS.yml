@@ -5673,6 +5673,10 @@ components:
             properties:
               pageId:
                 type: string
+              courseNum:
+                type: string
+              lessonNum:
+                type: string
               uri:
                 type: string
               h1:
@@ -5733,6 +5737,10 @@ components:
           properties:
             pageId:
               type: string
+            courseNum:
+              type: string
+            lessonNum:
+              type: string
             uri:
               type: string
             h1:
@@ -5792,6 +5800,10 @@ components:
         - type: object
           properties:
             pageId:
+              type: string
+            courseNum:
+              type: string
+            lessonNum:
               type: string
             uri:
               type: string
@@ -5857,6 +5869,20 @@ components:
             removePageId:
               type: string
             removeAllPageId:
+              type: string
+            setCourseNum:
+              type: string
+              nullable: true
+            removeCourseNum:
+              type: string
+            removeAllCourseNum:
+              type: string
+            setLessonNum:
+              type: string
+              nullable: true
+            removeLessonNum:
+              type: string
+            removeAllLessonNum:
               type: string
             setUri:
               type: string
@@ -6063,6 +6089,20 @@ components:
               type: string
             removeAllPageId:
               type: string
+            setCourseNum:
+              type: string
+              nullable: true
+            removeCourseNum:
+              type: string
+            removeAllCourseNum:
+              type: string
+            setLessonNum:
+              type: string
+              nullable: true
+            removeLessonNum:
+              type: string
+            removeAllLessonNum:
+              type: string
             setUri:
               type: string
               nullable: true
@@ -6263,6 +6303,10 @@ components:
           properties:
             pageId:
               type: string
+            courseNum:
+              type: string
+            lessonNum:
+              type: string
             uri:
               type: string
             h1:
@@ -6323,6 +6367,10 @@ components:
           properties:
             pageId:
               type: string
+            courseNum:
+              type: string
+            lessonNum:
+              type: string
             uri:
               type: string
             h1:
@@ -6382,6 +6430,10 @@ components:
         - type: object
           properties:
             pageId:
+              type: string
+            courseNum:
+              type: string
+            lessonNum:
               type: string
             uri:
               type: string
