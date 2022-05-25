@@ -501,80 +501,85 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 			yamlProcessor.process(vertx, null, buffer).onSuccess(json -> {
 				try {
 					String pageId = StringUtils.substringBeforeLast(StringUtils.substringAfterLast(path, "/"), ".");
-					JsonObject importBody = new JsonObject();
-					JsonArray importItems = new JsonArray();
-					List<Future> futures = new ArrayList<>();
-					Stack<String> stack = new Stack<>();
-					stack.push("html");
-					stack.push("body");
-					Long sequenceNum = 0L;
-					for(String htmGroup : json.fieldNames()) {
-						if(StringUtils.startsWith(htmGroup, "htm")) {
-							JsonArray pageItems = json.getJsonArray(htmGroup);
-							sequenceNum = importSiteHtml(json, stack, pageId, htmGroup, pageItems, futures, sequenceNum);
-						}
-					}
-					importBody.put("list", importItems);
-	
-					CompositeFuture.all(futures).onSuccess(a -> {
-						JsonObject pageBody = new JsonObject();
-						pageBody.put(SitePage.VAR_saves, new JsonArray()
-								.add(SitePage.VAR_inheritPk)
-								.add(SitePage.VAR_created)
-								.add(SitePage.VAR_courseNum)
-								.add(SitePage.VAR_lessonNum)
-								.add(SitePage.VAR_author)
-								.add(SitePage.VAR_objectId)
-								.add(SitePage.VAR_objectTitle)
-								.add(SitePage.VAR_uri)
-								.add(SitePage.VAR_h1)
-								.add(SitePage.VAR_h2)
-								);
-						pageBody.put(SitePage.VAR_id, pageId);
-						pageBody.put(SitePage.VAR_objectId, pageId);
-						pageBody.put(SitePage.VAR_pageId, pageId);
-						pageBody.put(SitePage.VAR_objectTitle, json.getString("title"));
-						pageBody.put(SitePage.VAR_created, json.getString("created"));
-						pageBody.put(SitePage.VAR_courseNum, json.getInteger(SitePage.VAR_courseNum));
-						pageBody.put(SitePage.VAR_lessonNum, json.getInteger(SitePage.VAR_lessonNum));
-						pageBody.put(SitePage.VAR_author, json.getString("author"));
-						pageBody.put(SitePage.VAR_uri, json.getString("uri"));
-						pageBody.put(SitePage.VAR_h1, json.getString("h1"));
-						pageBody.put(SitePage.VAR_h2, json.getString("h2"));
-		
-						JsonObject pageParams = new JsonObject();
-						pageParams.put("body", pageBody);
-						pageParams.put("path", new JsonObject());
-						pageParams.put("cookie", new JsonObject());
-						pageParams.put("query", new JsonObject().put("commitWithin", 1000).put("q", "*:*").put("var", new JsonArray().add("refresh:false")));
-						JsonObject pageContext = new JsonObject().put("params", pageParams);
-						JsonObject pageRequest = new JsonObject().put("context", pageContext);
-						vertx.eventBus().request(String.format("smart-village-view-enUS-%s", SitePage.CLASS_SIMPLE_NAME), pageRequest, new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", SitePage.CLASS_SIMPLE_NAME))).onSuccess(b -> {
-							String solrHostName = config().getString(ComputateVertxConfigKeys.SOLR_HOST_NAME);
-							Integer solrPort = config().getInteger(ComputateVertxConfigKeys.SOLR_PORT);
-							String solrCollection = config().getString(ComputateVertxConfigKeys.SOLR_COLLECTION);
-							String solrRequestUri = String.format("/solr/%s/update%s", solrCollection, "?commitWithin=1000&overwrite=true&wt=json");
-							String deleteQuery = String.format("classSimpleName_docvalues_string:%s AND created_docvalues_date:[* TO %s]", SiteHtm.CLASS_SIMPLE_NAME, SiteHtm.staticSearchStrCreated(null, SiteHtm.staticSearchCreated(null, now)));
-							String deleteXml = String.format("<delete><query>%s</query></delete>", deleteQuery);
-							webClient.post(solrPort, solrHostName, solrRequestUri)
-									.putHeader("Content-Type", "text/xml")
-									.sendBuffer(Buffer.buffer().appendString(deleteXml))
-									.onSuccess(c -> {
-								try {
-									LOG.info(String.format(importSitePageComplete, SitePage.CLASS_SIMPLE_NAME));
-									promise.complete();
-								} catch(Exception ex) {
-									LOG.error(String.format("Could not read response from Solr: http://%s:%s%s", solrHostName, solrPort, solrRequestUri), ex);
-									promise.fail(ex);
+					SiteRequestEnUS siteRequest = new SiteRequestEnUS();
+					siteRequest.setConfig(config());
+					siteRequest.initDeepSiteRequestEnUS(siteRequest);
+
+					SitePage page = new SitePage();
+					page.setSiteRequest_(siteRequest);
+					page.setId(pageId);
+					page.setObjectId(pageId);
+					page.setPageId(pageId);
+					page.setObjectTitle(json.getString("title"));
+					page.setCreated(json.getString("created"));
+					page.setCourseNum(json.getInteger(SitePage.VAR_courseNum));
+					page.setLessonNum(json.getInteger(SitePage.VAR_lessonNum));
+					page.setAuthor(json.getString("author"));
+					page.setUri(json.getString("uri"));
+					page.setH1(json.getString("h1"));
+					page.setH2(json.getString("h2"));
+					page.promiseDeepForClass(siteRequest).onSuccess(a -> {
+						try {
+							JsonObject importBody = new JsonObject();
+							JsonArray importItems = new JsonArray();
+							List<Future> futures = new ArrayList<>();
+							Stack<String> stack = new Stack<>();
+							JsonObject pageBody = JsonObject.mapFrom(page);
+							json.put("page", pageBody);
+			
+							stack.push("html");
+							stack.push("body");
+							Long sequenceNum = 0L;
+							for(String htmGroup : json.fieldNames()) {
+								if(StringUtils.startsWith(htmGroup, "htm")) {
+									JsonArray pageItems = json.getJsonArray(htmGroup);
+									sequenceNum = importSiteHtml(json, stack, pageId, htmGroup, pageItems, futures, sequenceNum);
 								}
+							}
+							importBody.put("list", importItems);
+			
+							CompositeFuture.all(futures).onSuccess(b -> {
+								JsonObject pageParams = new JsonObject();
+								pageParams.put("body", pageBody);
+								pageParams.put("path", new JsonObject());
+								pageParams.put("cookie", new JsonObject());
+								pageParams.put("query", new JsonObject().put("commitWithin", 1000).put("q", "*:*").put("var", new JsonArray().add("refresh:false")));
+								JsonObject pageContext = new JsonObject().put("params", pageParams);
+								JsonObject pageRequest = new JsonObject().put("context", pageContext);
+								vertx.eventBus().request(String.format("smart-village-view-enUS-%s", SitePage.CLASS_SIMPLE_NAME), pageRequest, new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", SitePage.CLASS_SIMPLE_NAME))).onSuccess(c -> {
+									String solrHostName = config().getString(ComputateVertxConfigKeys.SOLR_HOST_NAME);
+									Integer solrPort = config().getInteger(ComputateVertxConfigKeys.SOLR_PORT);
+									String solrCollection = config().getString(ComputateVertxConfigKeys.SOLR_COLLECTION);
+									String solrRequestUri = String.format("/solr/%s/update%s", solrCollection, "?commitWithin=1000&overwrite=true&wt=json");
+									String deleteQuery = String.format("classSimpleName_docvalues_string:%s AND created_docvalues_date:[* TO %s]", SiteHtm.CLASS_SIMPLE_NAME, SiteHtm.staticSearchStrCreated(null, SiteHtm.staticSearchCreated(null, now)));
+									String deleteXml = String.format("<delete><query>%s</query></delete>", deleteQuery);
+									webClient.post(solrPort, solrHostName, solrRequestUri)
+											.putHeader("Content-Type", "text/xml")
+											.sendBuffer(Buffer.buffer().appendString(deleteXml))
+											.onSuccess(d -> {
+										try {
+											LOG.info(String.format(importSitePageComplete, SitePage.CLASS_SIMPLE_NAME));
+											promise.complete();
+										} catch(Exception ex) {
+											LOG.error(String.format("Could not read response from Solr: http://%s:%s%s", solrHostName, solrPort, solrRequestUri), ex);
+											promise.fail(ex);
+										}
+									}).onFailure(ex -> {
+										LOG.error(String.format("Search failed. "), new RuntimeException(ex));
+										promise.fail(ex);
+									});
+								}).onFailure(ex -> {
+									LOG.error(String.format(importSitePageFail, SitePage.CLASS_SIMPLE_NAME), ex);
+									promise.fail(ex);
+								});
 							}).onFailure(ex -> {
-								LOG.error(String.format("Search failed. "), new RuntimeException(ex));
+								LOG.error(String.format(importSitePageFail, SitePage.CLASS_SIMPLE_NAME), ex);
 								promise.fail(ex);
 							});
-						}).onFailure(ex -> {
+						} catch(Exception ex) {
 							LOG.error(String.format(importSitePageFail, SitePage.CLASS_SIMPLE_NAME), ex);
 							promise.fail(ex);
-						});
+						}
 					}).onFailure(ex -> {
 						LOG.error(String.format(importSitePageFail, SitePage.CLASS_SIMPLE_NAME), ex);
 						promise.fail(ex);

@@ -1,5 +1,7 @@
 ---
 
+SITE_NAME: smart-village-view
+SITE_DISPLAY_NAME: Smart Village Project
 SITE_HOST_NAME: localhost
 SITE_PORT: 12080
 SITE_BASE_URL: "http://localhost:12080"
