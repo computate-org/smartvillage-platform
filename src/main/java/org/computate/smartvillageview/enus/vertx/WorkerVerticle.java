@@ -533,7 +533,7 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 							for(String htmGroup : json.fieldNames()) {
 								if(StringUtils.startsWith(htmGroup, "htm")) {
 									JsonArray pageItems = json.getJsonArray(htmGroup);
-									sequenceNum = importSiteHtml(json, stack, pageId, htmGroup, pageItems, futures, sequenceNum);
+									sequenceNum = importSiteHtm(json, stack, pageId, htmGroup, pageItems, futures, sequenceNum);
 								}
 							}
 							importBody.put("list", importItems);
@@ -599,7 +599,7 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 		return promise.future();
 	}
 
-	private Long importSiteHtml(JsonObject json, Stack<String> stack, String pageId, String htmGroup, JsonArray pageItems, List<Future> futures, Long sequenceNum) throws Exception {
+	private Long importSiteHtm(JsonObject json, Stack<String> stack, String pageId, String htmGroup, JsonArray pageItems, List<Future> futures, Long sequenceNum) throws Exception {
 		Double sort = 0D;
 		for(Integer i = 0; i < pageItems.size(); i++) {
 			JsonObject pageItem = (JsonObject)pageItems.getValue(i);
@@ -672,9 +672,9 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 
 			if(in != null) {
 				if(in instanceof JsonObject) {
-					sequenceNum = importSiteHtml(json, stack, pageId, htmGroup, new JsonArray().add(in), futures, sequenceNum);
+					sequenceNum = importSiteHtm(json, stack, pageId, htmGroup, new JsonArray().add(in), futures, sequenceNum);
 				} else if(in instanceof JsonArray) {
-					sequenceNum = importSiteHtml(json, stack, pageId, htmGroup, (JsonArray)in, futures, sequenceNum);
+					sequenceNum = importSiteHtm(json, stack, pageId, htmGroup, (JsonArray)in, futures, sequenceNum);
 				}
 			}
 
