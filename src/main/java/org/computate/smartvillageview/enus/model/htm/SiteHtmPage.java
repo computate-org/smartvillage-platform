@@ -1,4 +1,4 @@
-package org.computate.smartvillageview.enus.model.html;
+package org.computate.smartvillageview.enus.model.htm;
 
 /**
  * Translate: false

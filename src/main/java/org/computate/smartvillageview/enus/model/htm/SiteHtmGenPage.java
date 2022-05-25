@@ -1,4 +1,4 @@
-package org.computate.smartvillageview.enus.model.html;
+package org.computate.smartvillageview.enus.model.htm;
 
 import org.computate.smartvillageview.enus.page.PageLayout;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;

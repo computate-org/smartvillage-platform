@@ -1,4 +1,4 @@
-package org.computate.smartvillageview.enus.model.html;
+package org.computate.smartvillageview.enus.model.htm;
 
 import java.text.Normalizer;
 import java.time.ZoneId;
@@ -16,6 +16,7 @@ import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import io.vertx.core.Promise;
 import io.vertx.core.json.JsonObject;
 
+
 /**
  * Api: true
  * Page: true
@@ -32,8 +33,7 @@ import io.vertx.core.json.JsonObject;
  * ApiMethod: PUTImport
  * 
  * ApiMethod.enUS: SearchPage
- * PageSearchPage.enUS: SiteHtmlPage
- * PageSuperSearchPage.enUS: BaseModelPage
+ * PageSearchPage.enUS: SiteHtmPage
  * ApiUriSearchPage.enUS: /htm
  * 
  * AName.enUS: an HTML

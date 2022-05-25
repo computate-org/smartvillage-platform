@@ -13,9 +13,9 @@ import org.computate.search.wrap.Wrap;
 import org.computate.smartvillageview.enus.config.ConfigKeys;
 import org.computate.smartvillageview.enus.model.base.BaseModel;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
-import org.computate.vertx.search.list.SearchList;
 
 import io.vertx.core.Promise;
+
 
 /**
  * Api: true
@@ -34,13 +34,12 @@ import io.vertx.core.Promise;
  * 
  * ApiMethod.enUS: SearchPage
  * PageSearchPage.enUS: SitePagePage
- * PageSuperSearchPage.enUS: BaseModelPage
  * ApiUriSearchPage.enUS: /page
  * 
  * AName.enUS: an article
  * Color: 2017-navy-peony
  * IconGroup: duotone
- * IconName: sensor-triangle-exclamation
+ * IconName: page
  * NameVar: page
  * 
  * Sort.asc: courseNum
@@ -50,6 +49,21 @@ import io.vertx.core.Promise;
  * Description: A webpage in the site. 
  */
 public class SitePage extends SitePageGen<Object> {
+
+	/**
+	 * {@inheritDoc}
+	 * Ignore: true
+	 * Description: The current request object
+	 */
+	protected void _siteRequest_(Wrap<SiteRequestEnUS> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	protected void _SITE_DISPLAY_NAME(Wrap<String> w) {
+		w.o(siteRequest_.getConfig().getString(ConfigKeys.SITE_DISPLAY_NAME));
+	}
 
 	/**
 	 * {@inheritDoc}
@@ -127,14 +141,6 @@ public class SitePage extends SitePageGen<Object> {
 	 * Description: The 2nd header of this page. 
 	 */
 	protected void _h2(Wrap<String> w) {
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * Ignore: true
-	 * Description: The current request object
-	 */
-	protected void _siteRequest_(Wrap<SiteRequestEnUS> w) {
 	}
 
 	/**

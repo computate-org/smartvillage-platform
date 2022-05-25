@@ -1,4 +1,4 @@
-package org.computate.smartvillageview.enus.model.html;
+package org.computate.smartvillageview.enus.model.htm;
 
 import io.vertx.ext.web.client.WebClient;
 import io.vertx.codegen.annotations.ProxyGen;

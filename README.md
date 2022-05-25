@@ -127,6 +127,11 @@ Add these update sites and install these useful plugins:
 - http://www.genuitec.com/updates/devstyle/ci/
     - Choose "DevStyle Features" for themes
 
+### YAML Editor
+
+- http://www.genuitec.com/updates/devstyle/ci/
+    - Choose "DevStyle Features" for themes
+
 ## Import the smart-village-view project into CodeReady Studio
 
 * In CodeReady Studio, go to File -> Import...

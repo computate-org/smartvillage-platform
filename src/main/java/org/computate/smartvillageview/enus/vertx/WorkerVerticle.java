@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.nio.file.Paths;
 import java.time.Duration;
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -20,11 +21,12 @@ import org.apache.commons.lang3.StringUtils;
 import org.computate.search.serialize.ComputateZonedDateTimeSerializer;
 import org.computate.search.tool.TimeTool;
 import org.computate.search.tool.XmlTool;
+import org.computate.vertx.api.ApiCounter;
+import org.computate.vertx.api.ApiRequest;
 import org.computate.smartvillageview.enus.config.ConfigKeys;
-import org.computate.smartvillageview.enus.model.html.SiteHtm;
-import org.computate.smartvillageview.enus.model.iotnode.IotNode;
-import org.computate.smartvillageview.enus.model.page.SitePage;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
+import org.computate.smartvillageview.enus.model.page.SitePage;
+import org.computate.smartvillageview.enus.model.htm.SiteHtm;
 import org.computate.vertx.api.ApiCounter;
 import org.computate.vertx.api.ApiRequest;
 import org.computate.vertx.config.ComputateVertxConfigKeys;
@@ -52,6 +54,7 @@ import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.authentication.TokenCredentials;
+import io.vertx.ext.jdbc.JDBCClient;
 import io.vertx.ext.mail.MailClient;
 import io.vertx.ext.mail.MailConfig;
 import io.vertx.ext.web.client.WebClient;
@@ -59,9 +62,18 @@ import io.vertx.ext.web.client.predicate.ResponsePredicate;
 import io.vertx.ext.web.templ.handlebars.HandlebarsTemplateEngine;
 import io.vertx.pgclient.PgConnectOptions;
 import io.vertx.pgclient.PgPool;
+import io.vertx.sqlclient.Cursor;
 import io.vertx.sqlclient.PoolOptions;
 import io.vertx.sqlclient.Row;
 import io.vertx.sqlclient.RowStream;
+import io.vertx.sqlclient.SqlConnection;
+import java.time.LocalDateTime;
+import io.vertx.ext.jdbc.JDBCClient;
+import io.vertx.sqlclient.Cursor;
+import io.vertx.sqlclient.SqlConnection;
+import io.vertx.ext.web.client.predicate.ResponsePredicate;
+import io.vertx.ext.auth.authentication.TokenCredentials;
+import org.computate.smartvillageview.enus.model.iotnode.IotNode;
 
 
 /**
@@ -263,26 +275,6 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 		return promise.future();
 	}
 
-	/**	
-	 * Import initial data
-	 * Val.Skip.enUS:The data import is disabled. 
-	 **/
-	private Future<Void> importData() {
-		Promise<Void> promise = Promise.promise();
-		if(config().getBoolean(ConfigKeys.ENABLE_IMPORT_DATA)) {
-			importTimer("IotNode").onSuccess(a -> {
-				importTimer("SitePage").onSuccess(b -> {
-					promise.complete();
-				});
-			});
-		}
-		else {
-			LOG.info(importDataSkip);
-			promise.complete();
-		}
-		return promise.future();
-	}
-
 	/**
 	 * Val.Scheduling.enUS:Scheduling the %s import at %s
 	 * Val.Skip.enUS:Skip importing %s data. 
@@ -338,6 +330,26 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 			}
 		} else {
 			LOG.info(String.format(importTimerSkip, classSimpleName));
+			promise.complete();
+		}
+		return promise.future();
+	}
+
+	/**	
+	 * Import initial data
+	 * Val.Skip.enUS:The data import is disabled. 
+	 **/
+	private Future<Void> importData() {
+		Promise<Void> promise = Promise.promise();
+		if(config().getBoolean(ConfigKeys.ENABLE_IMPORT_DATA)) {
+			importTimer("IotNode").onSuccess(a -> {
+				importTimer("SitePage").onSuccess(b -> {
+					promise.complete();
+				});
+			});
+		}
+		else {
+			LOG.info(importDataSkip);
 			promise.complete();
 		}
 		return promise.future();
@@ -403,7 +415,7 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 						)
 				.onSuccess(tokenResponse -> {
 			JsonObject token = tokenResponse.bodyAsJsonObject();
-			webClient.get(config().getInteger(ConfigKeys.YGGIO_PORT), config().getString(ConfigKeys.YGGIO_HOST_NAME), config().getString(String.format("%s_%s", ConfigKeys.YGGIO_API_RELATIVE_URI, "IotNode")))
+			webClient.get(config().getInteger(ConfigKeys.YGGIO_PORT), config().getString(ConfigKeys.YGGIO_HOST_NAME), config().getString(ConfigKeys.YGGIO_API_RELATIVE_URI_IotNode))
 					.ssl(config().getBoolean(ConfigKeys.YGGIO_SSL))
 					.authentication(new TokenCredentials(token.getString("token")))
 					.expect(ResponsePredicate.SC_OK)
@@ -717,11 +729,26 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 		Promise<Void> promise = Promise.promise();
 		try {
 			if(config().getBoolean(ConfigKeys.ENABLE_REFRESH_DATA, false)) {
-			LOG.info(refreshAllDataStarted);
+				LOG.info(refreshAllDataStarted);
 				refreshData("SiteUser").onSuccess(q -> {
-					refreshData("IotNode").onSuccess(a -> {
-						LOG.info(refreshAllDataComplete);
-						promise.complete();
+					refreshData("IotNode").onSuccess(q1 -> {
+						refreshData("TrafficSimulation").onSuccess(q2 -> {
+							refreshData("SiteHtm").onSuccess(q3 -> {
+								refreshData("SitePage").onSuccess(q4 -> {
+									LOG.info(refreshAllDataComplete);
+									promise.complete();
+								}).onFailure(ex -> {
+									LOG.error(refreshAllDataFail, ex);
+									promise.fail(ex);
+								});
+							}).onFailure(ex -> {
+								LOG.error(refreshAllDataFail, ex);
+								promise.fail(ex);
+							});
+						}).onFailure(ex -> {
+							LOG.error(refreshAllDataFail, ex);
+							promise.fail(ex);
+						});
 					}).onFailure(ex -> {
 						LOG.error(refreshAllDataFail, ex);
 						promise.fail(ex);

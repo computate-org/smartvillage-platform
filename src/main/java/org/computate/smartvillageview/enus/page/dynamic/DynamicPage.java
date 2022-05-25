@@ -1,4 +1,4 @@
-package org.computate.smartvillageview.enus.model.page.dynamic;
+package org.computate.smartvillageview.enus.page.dynamic;
 
 import java.time.ZoneId;
 import java.util.List;
@@ -11,8 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.computate.search.tool.SearchTool;
 import org.computate.search.wrap.Wrap;
 import org.computate.smartvillageview.enus.config.ConfigKeys;
-import org.computate.smartvillageview.enus.model.html.SiteHtm;
-import org.computate.smartvillageview.enus.model.page.SitePage;
+import org.computate.smartvillageview.enus.model.htm.SiteHtm;
 import org.computate.smartvillageview.enus.page.PageLayout;
 import org.computate.vertx.search.list.SearchList;
 
@@ -20,6 +19,7 @@ import io.vertx.core.Future;
 import io.vertx.core.Promise;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+
 
 public class DynamicPage extends DynamicPageGen<PageLayout> {
 
@@ -118,15 +118,6 @@ public class DynamicPage extends DynamicPageGen<PageLayout> {
 		}
 		return promise.future();	
 	}
-//{{#partial "htmHead"}}{{> htmHeadDynamicPage}}{{/partial}}
-//{{#partial "htmTitle"}}{{> htmTitleDynamicPage}}{{/partial}}
-//{{#partial "htmMeta"}}{{> htmMetaDynamicPage}}{{/partial}}
-//{{#partial "htmStyle"}}{{> htmStyleDynamicPage}}{{/partial}}
-//{{#partial "htmScripts"}}{{> htmScriptsDynamicPage}}{{/partial}}
-//{{#partial "htmScript"}}{{> htmScriptDynamicPage}}{{/partial}}
-//{{#partial "htmBodyStart"}}{{> htmBodyStartDynamicPage}}{{/partial}}
-//{{#partial "htmBodyEnd"}}{{> htmBodyEndDynamicPage}}{{/partial}}
-//{{#partial "htmBody"}}{{> htmBodyDynamicPage}}{{/partial}}
 
 	protected void _htmTitle(JsonArray l) {
 	}

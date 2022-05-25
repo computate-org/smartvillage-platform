@@ -416,6 +416,6 @@ public class SitePageGenPage extends SitePageGenPageGen<PageLayout> {
 
 	@Override
 	protected void _contextIconName(Wrap<String> c) {
-			c.o("sensor-triangle-exclamation");
+			c.o("page");
 	}
 }

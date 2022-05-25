@@ -19,6 +19,8 @@ SITE_JAVA_PACKAGE: "org.computate.smartvillageview.enus"
 SUFFIX_SRC_MAIN_JAVA: "/src/main/java"
 SUFFIX_SRC_GEN_JAVA: "/src/gen/java"
 RELATIVE_PATHS_TO_WATCH: "src/main/java/org/computate/smartvillageview/enus"
+API_COUNTER_FETCH: 50
+API_COUNTER_RESUME: 10
 
 SITE_HOST_NAME: "localhost"
 SITE_BASE_URL: "http://localhost:12080"
@@ -46,10 +48,10 @@ AUTH_SECRET: "0518f65a-f86d-42e8-ad65-00f46920443d"
 AUTH_URL: "https://sso.computate.org/auth"
 AUTH_TOKEN_URI: "/auth/realms/RH-IMPACT/protocol/openid-connect/token"
 
+SOLR_COLLECTION: "smart-village-view"
 SOLR_URL: "http://localhost:8983/solr/smart-village-view"
 SOLR_HOST_NAME: localhost
 SOLR_PORT: 8983
-SOLR_COLLECTION: "smart-village-view"
 SOLR_URL_COMPUTATE: "http://localhost:8983/solr/computate"
 
 EMAIL_HOST: 

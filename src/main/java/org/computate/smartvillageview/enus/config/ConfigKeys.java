@@ -25,27 +25,12 @@ public class ConfigKeys extends ComputateVertxConfigKeys {
 	/**
 	 * 
 	 **/
-	public static final String YGGIO_API_RELATIVE_URI = "YGGIO_API_RELATIVE_URI";
-
-	/**
-	 * 
-	 **/
-	public static final String YGGIO_AUTH_TOKEN_URI = "YGGIO_AUTH_TOKEN_URI";
+	public static final String YGGIO_API_RELATIVE_URI_IotNode = "YGGIO_API_RELATIVE_URI_IotNode";
 
 	/**
 	 * 
 	 **/
 	public static final String YGGIO_AUTH_LOCAL_URI = "YGGIO_AUTH_LOCAL_URI";
-
-	/**
-	 * 
-	 **/
-	public static final String YGGIO_AUTH_SCOPE = "YGGIO_AUTH_SCOPE";
-
-	/**
-	 * 
-	 **/
-	public static final String YGGIO_AUTH_CLIENT_ID = "YGGIO_AUTH_CLIENT_ID";
 
 	/**
 	 * 
