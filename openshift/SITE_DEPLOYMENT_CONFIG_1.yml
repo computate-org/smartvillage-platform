@@ -199,6 +199,8 @@ spec:
               value: "{{ SITE_INSTANCES }}"
             - name: WORKER_POOL_SIZE
               value: "{{ WORKER_POOL_SIZE }}"
+            - name: DYNAMIC_PAGE_PATH
+              value: "{{ DYNAMIC_PAGE_PATH }}"
 
             - name: API_COUNTER_FETCH
               value: "{{ API_COUNTER_FETCH }}"

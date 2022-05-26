@@ -144,6 +144,7 @@ SITE_DB_PASSWORD_ENUS: "{{ POSTGRES_DB_PASSWORD }}"
 SITE_DB_NAME_ENUS: "{{ SITE_NAME }}"
 # The Java main class of the site.
 SITE_JAVA_MAIN_CLASS_ENUS: org.curriki.api.enus.vertx.MainVerticle
+DYNAMIC_PAGE_PATH: "/home/jboss/src/main/resources/page"
 
 #################
 # SMTP defaults #

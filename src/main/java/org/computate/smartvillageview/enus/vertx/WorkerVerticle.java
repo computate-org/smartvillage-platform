@@ -471,8 +471,8 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 	 */
 	private Future<Void> importDataSitePage() {
 		Promise<Void> promise = Promise.promise();
-		File pageDir = new File(getClass().getClassLoader().getResource("page").getFile());
-		LOG.info("pageDir: " + pageDir);
+		String dynamicPagePath = config().getString(ConfigKeys.DYNAMIC_PAGE_PATH);
+		File pageDir = new File(Optional.ofNullable(dynamicPagePath).orElse(getClass().getClassLoader().getResource("page").getFile()));
 		String[] fileNames = pageDir.list(new PatternFilenameFilter("^.*.yml$"));
 		List<Future> futures = new ArrayList<>();
 		YamlProcessor yamlProcessor = new YamlProcessor();

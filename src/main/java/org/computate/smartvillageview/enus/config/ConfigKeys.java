@@ -10,6 +10,11 @@ public class ConfigKeys extends ComputateVertxConfigKeys {
 	/**
 	 * 
 	 **/
+	public static final String DYNAMIC_PAGE_PATH = "DYNAMIC_PAGE_PATH";
+
+	/**
+	 * 
+	 **/
 	public static final String YGGIO_HOST_NAME = "YGGIO_HOST_NAME";
 
 	/**
