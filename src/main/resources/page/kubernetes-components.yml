@@ -10,6 +10,7 @@ author:
   title: Red Hat Principal Software Consultant
 htmTitle:
   - text: Kubernetes and OpenShift Components of the {{ page.SITE_DISPLAY_NAME }}
+pageImageUri: /png/page/kubernetes-components/k8s-components.png
 htmBody:
   - e: h1
     a:
@@ -39,6 +40,10 @@ htmBody:
     a:
       class: w3-text-2017-shaded-spruce w3-monospace 
     text: Kubernetes Components
+  - e: img
+    a:
+      class: w3-image 
+      src: "{{ page.STATIC_BASE_URL }}{{ pageImageUri }}"
   - e: ul
     in:
       - e: li

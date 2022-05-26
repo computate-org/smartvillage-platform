@@ -191,6 +191,55 @@ public abstract class SitePageGen<DEV> extends Object {
 		return SitePage.staticSearchStrSITE_DISPLAY_NAME(siteRequest_, SitePage.staticSearchSITE_DISPLAY_NAME(siteRequest_, SitePage.staticSetSITE_DISPLAY_NAME(siteRequest_, o)));
 	}
 
+	/////////////////////
+	// STATIC_BASE_URL //
+	/////////////////////
+
+	/**	 The entity STATIC_BASE_URL
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String STATIC_BASE_URL;
+
+	/**	<br> The entity STATIC_BASE_URL
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.page.SitePage&fq=entiteVar_enUS_indexed_string:STATIC_BASE_URL">Find the entity STATIC_BASE_URL in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _STATIC_BASE_URL(Wrap<String> w);
+
+	public String getSTATIC_BASE_URL() {
+		return STATIC_BASE_URL;
+	}
+	public void setSTATIC_BASE_URL(String o) {
+		this.STATIC_BASE_URL = SitePage.staticSetSTATIC_BASE_URL(siteRequest_, o);
+	}
+	public static String staticSetSTATIC_BASE_URL(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected SitePage STATIC_BASE_URLInit() {
+		Wrap<String> STATIC_BASE_URLWrap = new Wrap<String>().var("STATIC_BASE_URL");
+		if(STATIC_BASE_URL == null) {
+			_STATIC_BASE_URL(STATIC_BASE_URLWrap);
+			setSTATIC_BASE_URL(STATIC_BASE_URLWrap.o);
+		}
+		return (SitePage)this;
+	}
+
+	public static String staticSearchSTATIC_BASE_URL(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrSTATIC_BASE_URL(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqSTATIC_BASE_URL(SiteRequestEnUS siteRequest_, String o) {
+		return SitePage.staticSearchStrSTATIC_BASE_URL(siteRequest_, SitePage.staticSearchSTATIC_BASE_URL(siteRequest_, SitePage.staticSetSTATIC_BASE_URL(siteRequest_, o)));
+	}
+
 	///////////////////
 	// promiseBefore //
 	///////////////////
@@ -821,6 +870,59 @@ public abstract class SitePageGen<DEV> extends Object {
 
 	public String sqlAuthor() {
 		return author;
+	}
+
+	//////////////////
+	// pageImageUri //
+	//////////////////
+
+	/**	 The entity pageImageUri
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String pageImageUri;
+
+	/**	<br> The entity pageImageUri
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.page.SitePage&fq=entiteVar_enUS_indexed_string:pageImageUri">Find the entity pageImageUri in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _pageImageUri(Wrap<String> w);
+
+	public String getPageImageUri() {
+		return pageImageUri;
+	}
+	public void setPageImageUri(String o) {
+		this.pageImageUri = SitePage.staticSetPageImageUri(siteRequest_, o);
+	}
+	public static String staticSetPageImageUri(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected SitePage pageImageUriInit() {
+		Wrap<String> pageImageUriWrap = new Wrap<String>().var("pageImageUri");
+		if(pageImageUri == null) {
+			_pageImageUri(pageImageUriWrap);
+			setPageImageUri(pageImageUriWrap.o);
+		}
+		return (SitePage)this;
+	}
+
+	public static String staticSearchPageImageUri(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrPageImageUri(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqPageImageUri(SiteRequestEnUS siteRequest_, String o) {
+		return SitePage.staticSearchStrPageImageUri(siteRequest_, SitePage.staticSearchPageImageUri(siteRequest_, SitePage.staticSetPageImageUri(siteRequest_, o)));
+	}
+
+	public String sqlPageImageUri() {
+		return pageImageUri;
 	}
 
 	//////////////
@@ -1755,6 +1857,7 @@ public abstract class SitePageGen<DEV> extends Object {
 			try {
 				siteRequest_Init();
 				SITE_DISPLAY_NAMEInit();
+				STATIC_BASE_URLInit();
 				promise2.complete();
 			} catch(Exception ex) {
 				promise2.fail(ex);
@@ -1781,6 +1884,7 @@ public abstract class SitePageGen<DEV> extends Object {
 				createdInit();
 				modifiedInit();
 				authorInit();
+				pageImageUriInit();
 				archivedInit();
 				deletedInit();
 				classCanonicalNameInit();
@@ -1854,6 +1958,8 @@ public abstract class SitePageGen<DEV> extends Object {
 				return oSitePage.siteRequest_;
 			case "SITE_DISPLAY_NAME":
 				return oSitePage.SITE_DISPLAY_NAME;
+			case "STATIC_BASE_URL":
+				return oSitePage.STATIC_BASE_URL;
 			case "promiseBefore":
 				return oSitePage.promiseBefore;
 			case "pageId":
@@ -1876,6 +1982,8 @@ public abstract class SitePageGen<DEV> extends Object {
 				return oSitePage.modified;
 			case "author":
 				return oSitePage.author;
+			case "pageImageUri":
+				return oSitePage.pageImageUri;
 			case "archived":
 				return oSitePage.archived;
 			case "deleted":
@@ -1951,6 +2059,8 @@ public abstract class SitePageGen<DEV> extends Object {
 		switch(entityVar) {
 		case "SITE_DISPLAY_NAME":
 			return SitePage.staticSetSITE_DISPLAY_NAME(siteRequest_, o);
+		case "STATIC_BASE_URL":
+			return SitePage.staticSetSTATIC_BASE_URL(siteRequest_, o);
 		case "pageId":
 			return SitePage.staticSetPageId(siteRequest_, o);
 		case "courseNum":
@@ -1971,6 +2081,8 @@ public abstract class SitePageGen<DEV> extends Object {
 			return SitePage.staticSetModified(siteRequest_, o);
 		case "author":
 			return SitePage.staticSetAuthor(siteRequest_, o);
+		case "pageImageUri":
+			return SitePage.staticSetPageImageUri(siteRequest_, o);
 		case "archived":
 			return SitePage.staticSetArchived(siteRequest_, o);
 		case "deleted":
@@ -2021,6 +2133,8 @@ public abstract class SitePageGen<DEV> extends Object {
 		switch(entityVar) {
 		case "SITE_DISPLAY_NAME":
 			return SitePage.staticSearchSITE_DISPLAY_NAME(siteRequest_, (String)o);
+		case "STATIC_BASE_URL":
+			return SitePage.staticSearchSTATIC_BASE_URL(siteRequest_, (String)o);
 		case "pageId":
 			return SitePage.staticSearchPageId(siteRequest_, (String)o);
 		case "courseNum":
@@ -2041,6 +2155,8 @@ public abstract class SitePageGen<DEV> extends Object {
 			return SitePage.staticSearchModified(siteRequest_, (ZonedDateTime)o);
 		case "author":
 			return SitePage.staticSearchAuthor(siteRequest_, (String)o);
+		case "pageImageUri":
+			return SitePage.staticSearchPageImageUri(siteRequest_, (String)o);
 		case "archived":
 			return SitePage.staticSearchArchived(siteRequest_, (Boolean)o);
 		case "deleted":
@@ -2091,6 +2207,8 @@ public abstract class SitePageGen<DEV> extends Object {
 		switch(entityVar) {
 		case "SITE_DISPLAY_NAME":
 			return SitePage.staticSearchStrSITE_DISPLAY_NAME(siteRequest_, (String)o);
+		case "STATIC_BASE_URL":
+			return SitePage.staticSearchStrSTATIC_BASE_URL(siteRequest_, (String)o);
 		case "pageId":
 			return SitePage.staticSearchStrPageId(siteRequest_, (String)o);
 		case "courseNum":
@@ -2111,6 +2229,8 @@ public abstract class SitePageGen<DEV> extends Object {
 			return SitePage.staticSearchStrModified(siteRequest_, (Date)o);
 		case "author":
 			return SitePage.staticSearchStrAuthor(siteRequest_, (String)o);
+		case "pageImageUri":
+			return SitePage.staticSearchStrPageImageUri(siteRequest_, (String)o);
 		case "archived":
 			return SitePage.staticSearchStrArchived(siteRequest_, (Boolean)o);
 		case "deleted":
@@ -2161,6 +2281,8 @@ public abstract class SitePageGen<DEV> extends Object {
 		switch(entityVar) {
 		case "SITE_DISPLAY_NAME":
 			return SitePage.staticSearchFqSITE_DISPLAY_NAME(siteRequest_, o);
+		case "STATIC_BASE_URL":
+			return SitePage.staticSearchFqSTATIC_BASE_URL(siteRequest_, o);
 		case "pageId":
 			return SitePage.staticSearchFqPageId(siteRequest_, o);
 		case "courseNum":
@@ -2181,6 +2303,8 @@ public abstract class SitePageGen<DEV> extends Object {
 			return SitePage.staticSearchFqModified(siteRequest_, o);
 		case "author":
 			return SitePage.staticSearchFqAuthor(siteRequest_, o);
+		case "pageImageUri":
+			return SitePage.staticSearchFqPageImageUri(siteRequest_, o);
 		case "archived":
 			return SitePage.staticSearchFqArchived(siteRequest_, o);
 		case "deleted":
@@ -2294,6 +2418,11 @@ public abstract class SitePageGen<DEV> extends Object {
 					setAuthor((String)val);
 				saves.add("author");
 				return val;
+			case "pageimageuri":
+				if(val instanceof String)
+					setPageImageUri((String)val);
+				saves.add("pageImageUri");
+				return val;
 			case "archived":
 				if(val instanceof Boolean)
 					setArchived((Boolean)val);
@@ -2375,6 +2504,9 @@ public abstract class SitePageGen<DEV> extends Object {
 		if(author != null) {
 			doc.put("author_docvalues_string", author);
 		}
+		if(pageImageUri != null) {
+			doc.put("pageImageUri_docvalues_string", pageImageUri);
+		}
 		if(archived != null) {
 			doc.put("archived_docvalues_boolean", archived);
 		}
@@ -2455,6 +2587,8 @@ public abstract class SitePageGen<DEV> extends Object {
 				return "modified_docvalues_date";
 			case "author":
 				return "author_docvalues_string";
+			case "pageImageUri":
+				return "pageImageUri_docvalues_string";
 			case "archived":
 				return "archived_docvalues_boolean";
 			case "deleted":
@@ -2508,6 +2642,8 @@ public abstract class SitePageGen<DEV> extends Object {
 				return "modified_docvalues_date";
 			case "author":
 				return "author_docvalues_string";
+			case "pageImageUri":
+				return "pageImageUri_docvalues_string";
 			case "archived":
 				return "archived_docvalues_boolean";
 			case "deleted":
@@ -2567,6 +2703,8 @@ public abstract class SitePageGen<DEV> extends Object {
 				return "modified";
 			case "author_docvalues_string":
 				return "author";
+			case "pageImageUri_docvalues_string":
+				return "pageImageUri";
 			case "archived_docvalues_boolean":
 				return "archived";
 			case "deleted_docvalues_boolean":
@@ -2644,6 +2782,7 @@ public abstract class SitePageGen<DEV> extends Object {
 		oSitePage.setCreated(Optional.ofNullable(doc.get("created_docvalues_date")).map(v -> v.toString()).orElse(null));
 		oSitePage.setModified(Optional.ofNullable(doc.get("modified_docvalues_date")).map(v -> v.toString()).orElse(null));
 		oSitePage.setAuthor(Optional.ofNullable(doc.get("author_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oSitePage.setPageImageUri(Optional.ofNullable(doc.get("pageImageUri_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSitePage.setArchived(Optional.ofNullable(doc.get("archived_docvalues_boolean")).map(v -> v.toString()).orElse(null));
 		oSitePage.setDeleted(Optional.ofNullable(doc.get("deleted_docvalues_boolean")).map(v -> v.toString()).orElse(null));
 		oSitePage.setClassCanonicalName(Optional.ofNullable(doc.get("classCanonicalName_docvalues_string")).map(v -> v.toString()).orElse(null));
@@ -2696,6 +2835,8 @@ public abstract class SitePageGen<DEV> extends Object {
 				apiRequest.addVars("modified");
 			if(!Objects.equals(author, original.getAuthor()))
 				apiRequest.addVars("author");
+			if(!Objects.equals(pageImageUri, original.getPageImageUri()))
+				apiRequest.addVars("pageImageUri");
 			if(!Objects.equals(archived, original.getArchived()))
 				apiRequest.addVars("archived");
 			if(!Objects.equals(deleted, original.getDeleted()))
@@ -2747,6 +2888,7 @@ public abstract class SitePageGen<DEV> extends Object {
 		sb.append(Optional.ofNullable(created).map(v -> "created: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(modified).map(v -> "modified: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(author).map(v -> "author: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(pageImageUri).map(v -> "pageImageUri: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(archived).map(v -> "archived: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(deleted).map(v -> "deleted: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(classCanonicalName).map(v -> "classCanonicalName: \"" + v + "\"\n" ).orElse(""));
@@ -2769,6 +2911,7 @@ public abstract class SitePageGen<DEV> extends Object {
 	public static final String CLASS_SIMPLE_NAME = "SitePage";
 	public static final String VAR_siteRequest_ = "siteRequest_";
 	public static final String VAR_SITE_DISPLAY_NAME = "SITE_DISPLAY_NAME";
+	public static final String VAR_STATIC_BASE_URL = "STATIC_BASE_URL";
 	public static final String VAR_promiseBefore = "promiseBefore";
 	public static final String VAR_pageId = "pageId";
 	public static final String VAR_courseNum = "courseNum";
@@ -2780,6 +2923,7 @@ public abstract class SitePageGen<DEV> extends Object {
 	public static final String VAR_created = "created";
 	public static final String VAR_modified = "modified";
 	public static final String VAR_author = "author";
+	public static final String VAR_pageImageUri = "pageImageUri";
 	public static final String VAR_archived = "archived";
 	public static final String VAR_deleted = "deleted";
 	public static final String VAR_classCanonicalName = "classCanonicalName";
@@ -2817,6 +2961,7 @@ public abstract class SitePageGen<DEV> extends Object {
 		vars.add(VAR_uri);
 		vars.add(VAR_created);
 		vars.add(VAR_author);
+		vars.add(VAR_pageImageUri);
 		return vars;
 	}
 
@@ -2832,6 +2977,7 @@ public abstract class SitePageGen<DEV> extends Object {
 
 	public static final String DISPLAY_NAME_siteRequest_ = "";
 	public static final String DISPLAY_NAME_SITE_DISPLAY_NAME = "";
+	public static final String DISPLAY_NAME_STATIC_BASE_URL = "";
 	public static final String DISPLAY_NAME_promiseBefore = "";
 	public static final String DISPLAY_NAME_pageId = "Page ID";
 	public static final String DISPLAY_NAME_courseNum = "Course Number";
@@ -2843,6 +2989,7 @@ public abstract class SitePageGen<DEV> extends Object {
 	public static final String DISPLAY_NAME_created = "created";
 	public static final String DISPLAY_NAME_modified = "modified";
 	public static final String DISPLAY_NAME_author = "author";
+	public static final String DISPLAY_NAME_pageImageUri = "imageUri";
 	public static final String DISPLAY_NAME_archived = "archived";
 	public static final String DISPLAY_NAME_deleted = "deleted";
 	public static final String DISPLAY_NAME_classCanonicalName = "";
@@ -2870,6 +3017,8 @@ public abstract class SitePageGen<DEV> extends Object {
 			return DISPLAY_NAME_siteRequest_;
 		case VAR_SITE_DISPLAY_NAME:
 			return DISPLAY_NAME_SITE_DISPLAY_NAME;
+		case VAR_STATIC_BASE_URL:
+			return DISPLAY_NAME_STATIC_BASE_URL;
 		case VAR_promiseBefore:
 			return DISPLAY_NAME_promiseBefore;
 		case VAR_pageId:
@@ -2892,6 +3041,8 @@ public abstract class SitePageGen<DEV> extends Object {
 			return DISPLAY_NAME_modified;
 		case VAR_author:
 			return DISPLAY_NAME_author;
+		case VAR_pageImageUri:
+			return DISPLAY_NAME_pageImageUri;
 		case VAR_archived:
 			return DISPLAY_NAME_archived;
 		case VAR_deleted:
@@ -2957,6 +3108,8 @@ public abstract class SitePageGen<DEV> extends Object {
 			return "A modified timestamp for this record in the database";
 		case VAR_author:
 			return "The author";
+		case VAR_pageImageUri:
+			return "The page image URI";
 		case VAR_archived:
 			return "For archiving this record";
 		case VAR_deleted:
@@ -3002,6 +3155,8 @@ public abstract class SitePageGen<DEV> extends Object {
 			return "SiteRequestEnUS";
 		case VAR_SITE_DISPLAY_NAME:
 			return "String";
+		case VAR_STATIC_BASE_URL:
+			return "String";
 		case VAR_promiseBefore:
 			return "Void";
 		case VAR_pageId:
@@ -3023,6 +3178,8 @@ public abstract class SitePageGen<DEV> extends Object {
 		case VAR_modified:
 			return "ZonedDateTime";
 		case VAR_author:
+			return "String";
+		case VAR_pageImageUri:
 			return "String";
 		case VAR_archived:
 			return "Boolean";
@@ -3088,6 +3245,8 @@ public abstract class SitePageGen<DEV> extends Object {
 			return 1;
 		case VAR_author:
 			return 3;
+		case VAR_pageImageUri:
+			return 4;
 		case VAR_archived:
 			return 2;
 		case VAR_deleted:
@@ -3111,6 +3270,8 @@ public abstract class SitePageGen<DEV> extends Object {
 			return 3;
 		case VAR_author:
 			return 3;
+		case VAR_pageImageUri:
+			return 1;
 		case VAR_archived:
 			return 1;
 		case VAR_deleted:

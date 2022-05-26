@@ -519,6 +519,7 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 					page.setUri(json.getString("uri"));
 					page.setH1(json.getString("h1"));
 					page.setH2(json.getString("h2"));
+					page.setPageImageUri(json.getString(SitePage.VAR_pageImageUri));
 					page.promiseDeepForClass(siteRequest).onSuccess(a -> {
 						try {
 							JsonObject importBody = new JsonObject();
@@ -629,7 +630,6 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 					Template template = handlebars.compileInline(text);
 					Context engineContext = Context.newBuilder(json.getMap()).resolver(templateEngine.getResolvers()).build();
 					Buffer buffer = Buffer.buffer(template.apply(engineContext));
-					
 					importItem.put(SiteHtm.VAR_text, new JsonArray().addAll(new JsonArray(Arrays.asList(buffer.toString().split("\r?\n")))));
 				}
 				if(!eNoWrapParent && !tabs.isEmpty()) {
@@ -654,8 +654,17 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 				importItem.put(SiteHtm.VAR_htmGroup, htmGroup);
 				importItem.put(SiteHtm.VAR_sequenceNum, sequenceNum);
 				importItem.put(SiteHtm.VAR_uri, uri);
-				if(a != null)
-					importItem.put(SiteHtm.VAR_a, a);
+				if(a != null) {
+					JsonObject attrs = new JsonObject();
+					for(String field : a.fieldNames()) {
+						String val = a.getString(field);
+						Template template = handlebars.compileInline(val);
+						Context engineContext = Context.newBuilder(json.getMap()).resolver(templateEngine.getResolvers()).build();
+						Buffer buffer = Buffer.buffer(template.apply(engineContext));
+						attrs.put(field, buffer.toString());
+					}
+					importItem.put(SiteHtm.VAR_a, attrs);
+				}
 				importItem.put(SiteHtm.VAR_id, String.format("%s_%s", SiteHtm.CLASS_SIMPLE_NAME, sequenceNum));
 				for(Integer j=1; j <= stack.size(); j++) {
 					importItem.put("sort" + j, stack.get(j - 1));

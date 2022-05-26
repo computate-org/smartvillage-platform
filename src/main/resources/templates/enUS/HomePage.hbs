@@ -22,6 +22,21 @@
 {{#block "htmBodyMenu"}}{{/block}}
 </div>
 {{>htmBodyPageLayout}}
+<div class="w3-row ">
+{{#each listSitePage}}
+	<div class="w3-quarter ">
+		<a href="{{ uri }}">
+			<div class="w3-card w3-margin w3-padding ">
+{{#if pageImageUri}}
+				<img class="w3-image w3-border " src="{{ STATIC_BASE_URL }}{{ pageImageUri }}"/>
+{{/if}}
+				<h3 class="w3-xlarge ">{{h1}}</h3>
+				<h4 class="w3-xlarge ">{{h2}}</h4>
+			</div>
+		</a>
+	</div>
+{{/each}}
+</div>
 {{/partial}}
 {{#partial "htmBodyStart"}}{{> htmBodyStartPageLayout}}
 <!-- Header -->

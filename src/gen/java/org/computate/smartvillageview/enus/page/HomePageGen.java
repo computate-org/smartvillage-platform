@@ -31,10 +31,18 @@ import org.slf4j.LoggerFactory;
 import java.math.RoundingMode;
 import java.util.Map;
 import org.computate.smartvillageview.enus.page.PageLayout;
+import org.computate.vertx.search.list.SearchList;
+import org.computate.smartvillageview.enus.model.page.SitePage;
+import java.lang.String;
+import java.time.ZoneId;
+import java.util.Locale;
+import io.vertx.core.json.JsonArray;
+import org.computate.search.response.solr.SolrResponse.Stats;
+import org.computate.search.response.solr.SolrResponse.FacetCounts;
+import java.lang.Integer;
 import org.computate.search.wrap.Wrap;
 import io.vertx.core.Promise;
 import io.vertx.core.Future;
-import io.vertx.core.json.JsonArray;
 
 /**	
  * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstClasse_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.HomePage">Find the class HomePage in Solr. </a>
@@ -48,6 +56,694 @@ import io.vertx.core.json.JsonArray;
  **/
 public abstract class HomePageGen<DEV> extends PageLayout {
 	protected static final Logger LOG = LoggerFactory.getLogger(HomePage.class);
+
+	////////////////////////
+	// searchListSitePage //
+	////////////////////////
+
+	/**	 The entity searchListSitePage
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonIgnore
+	@JsonInclude(Include.NON_NULL)
+	protected SearchList<SitePage> searchListSitePage;
+
+	/**	<br> The entity searchListSitePage
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.HomePage&fq=entiteVar_enUS_indexed_string:searchListSitePage">Find the entity searchListSitePage in Solr</a>
+	 * <br>
+	 * @param promise is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _searchListSitePage(Promise<SearchList<SitePage>> promise);
+
+	public SearchList<SitePage> getSearchListSitePage() {
+		return searchListSitePage;
+	}
+
+	public void setSearchListSitePage(SearchList<SitePage> searchListSitePage) {
+		this.searchListSitePage = searchListSitePage;
+	}
+	public static SearchList<SitePage> staticSetSearchListSitePage(SiteRequestEnUS siteRequest_, String o) {
+		return null;
+	}
+	protected Future<SearchList<SitePage>> searchListSitePagePromise() {
+		Promise<SearchList<SitePage>> promise = Promise.promise();
+		Promise<SearchList<SitePage>> promise2 = Promise.promise();
+		_searchListSitePage(promise2);
+		promise2.future().onSuccess(o -> {
+			if(o != null && searchListSitePage == null) {
+				o.promiseDeepForClass(siteRequest_).onSuccess(a -> {
+					setSearchListSitePage(o);
+					promise.complete(o);
+				}).onFailure(ex -> {
+					promise.fail(ex);
+				});
+			} else {
+				promise.complete(o);
+			}
+		}).onFailure(ex -> {
+			promise.fail(ex);
+		});
+		return promise.future();
+	}
+
+	//////////////////
+	// pageResponse //
+	//////////////////
+
+	/**	 The entity pageResponse
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String pageResponse;
+
+	/**	<br> The entity pageResponse
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.HomePage&fq=entiteVar_enUS_indexed_string:pageResponse">Find the entity pageResponse in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _pageResponse(Wrap<String> w);
+
+	public String getPageResponse() {
+		return pageResponse;
+	}
+	public void setPageResponse(String o) {
+		this.pageResponse = HomePage.staticSetPageResponse(siteRequest_, o);
+	}
+	public static String staticSetPageResponse(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected HomePage pageResponseInit() {
+		Wrap<String> pageResponseWrap = new Wrap<String>().var("pageResponse");
+		if(pageResponse == null) {
+			_pageResponse(pageResponseWrap);
+			setPageResponse(pageResponseWrap.o);
+		}
+		return (HomePage)this;
+	}
+
+	public static String staticSearchPageResponse(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrPageResponse(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqPageResponse(SiteRequestEnUS siteRequest_, String o) {
+		return HomePage.staticSearchStrPageResponse(siteRequest_, HomePage.staticSearchPageResponse(siteRequest_, HomePage.staticSetPageResponse(siteRequest_, o)));
+	}
+
+	///////////////////
+	// defaultZoneId //
+	///////////////////
+
+	/**	 The entity defaultZoneId
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String defaultZoneId;
+
+	/**	<br> The entity defaultZoneId
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.HomePage&fq=entiteVar_enUS_indexed_string:defaultZoneId">Find the entity defaultZoneId in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _defaultZoneId(Wrap<String> w);
+
+	public String getDefaultZoneId() {
+		return defaultZoneId;
+	}
+	public void setDefaultZoneId(String o) {
+		this.defaultZoneId = HomePage.staticSetDefaultZoneId(siteRequest_, o);
+	}
+	public static String staticSetDefaultZoneId(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected HomePage defaultZoneIdInit() {
+		Wrap<String> defaultZoneIdWrap = new Wrap<String>().var("defaultZoneId");
+		if(defaultZoneId == null) {
+			_defaultZoneId(defaultZoneIdWrap);
+			setDefaultZoneId(defaultZoneIdWrap.o);
+		}
+		return (HomePage)this;
+	}
+
+	public static String staticSearchDefaultZoneId(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrDefaultZoneId(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqDefaultZoneId(SiteRequestEnUS siteRequest_, String o) {
+		return HomePage.staticSearchStrDefaultZoneId(siteRequest_, HomePage.staticSearchDefaultZoneId(siteRequest_, HomePage.staticSetDefaultZoneId(siteRequest_, o)));
+	}
+
+	/////////////////////
+	// defaultTimeZone //
+	/////////////////////
+
+	/**	 The entity defaultTimeZone
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonIgnore
+	@JsonInclude(Include.NON_NULL)
+	protected ZoneId defaultTimeZone;
+
+	/**	<br> The entity defaultTimeZone
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.HomePage&fq=entiteVar_enUS_indexed_string:defaultTimeZone">Find the entity defaultTimeZone in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _defaultTimeZone(Wrap<ZoneId> w);
+
+	public ZoneId getDefaultTimeZone() {
+		return defaultTimeZone;
+	}
+
+	public void setDefaultTimeZone(ZoneId defaultTimeZone) {
+		this.defaultTimeZone = defaultTimeZone;
+	}
+	public static ZoneId staticSetDefaultTimeZone(SiteRequestEnUS siteRequest_, String o) {
+		return null;
+	}
+	protected HomePage defaultTimeZoneInit() {
+		Wrap<ZoneId> defaultTimeZoneWrap = new Wrap<ZoneId>().var("defaultTimeZone");
+		if(defaultTimeZone == null) {
+			_defaultTimeZone(defaultTimeZoneWrap);
+			setDefaultTimeZone(defaultTimeZoneWrap.o);
+		}
+		return (HomePage)this;
+	}
+
+	/////////////////////
+	// defaultLocaleId //
+	/////////////////////
+
+	/**	 The entity defaultLocaleId
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String defaultLocaleId;
+
+	/**	<br> The entity defaultLocaleId
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.HomePage&fq=entiteVar_enUS_indexed_string:defaultLocaleId">Find the entity defaultLocaleId in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _defaultLocaleId(Wrap<String> w);
+
+	public String getDefaultLocaleId() {
+		return defaultLocaleId;
+	}
+	public void setDefaultLocaleId(String o) {
+		this.defaultLocaleId = HomePage.staticSetDefaultLocaleId(siteRequest_, o);
+	}
+	public static String staticSetDefaultLocaleId(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected HomePage defaultLocaleIdInit() {
+		Wrap<String> defaultLocaleIdWrap = new Wrap<String>().var("defaultLocaleId");
+		if(defaultLocaleId == null) {
+			_defaultLocaleId(defaultLocaleIdWrap);
+			setDefaultLocaleId(defaultLocaleIdWrap.o);
+		}
+		return (HomePage)this;
+	}
+
+	public static String staticSearchDefaultLocaleId(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrDefaultLocaleId(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqDefaultLocaleId(SiteRequestEnUS siteRequest_, String o) {
+		return HomePage.staticSearchStrDefaultLocaleId(siteRequest_, HomePage.staticSearchDefaultLocaleId(siteRequest_, HomePage.staticSetDefaultLocaleId(siteRequest_, o)));
+	}
+
+	///////////////////
+	// defaultLocale //
+	///////////////////
+
+	/**	 The entity defaultLocale
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonIgnore
+	@JsonInclude(Include.NON_NULL)
+	protected Locale defaultLocale;
+
+	/**	<br> The entity defaultLocale
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.HomePage&fq=entiteVar_enUS_indexed_string:defaultLocale">Find the entity defaultLocale in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _defaultLocale(Wrap<Locale> w);
+
+	public Locale getDefaultLocale() {
+		return defaultLocale;
+	}
+
+	public void setDefaultLocale(Locale defaultLocale) {
+		this.defaultLocale = defaultLocale;
+	}
+	public static Locale staticSetDefaultLocale(SiteRequestEnUS siteRequest_, String o) {
+		return null;
+	}
+	protected HomePage defaultLocaleInit() {
+		Wrap<Locale> defaultLocaleWrap = new Wrap<Locale>().var("defaultLocale");
+		if(defaultLocale == null) {
+			_defaultLocale(defaultLocaleWrap);
+			setDefaultLocale(defaultLocaleWrap.o);
+		}
+		return (HomePage)this;
+	}
+
+	//////////////////////////
+	// defaultFieldListVars //
+	//////////////////////////
+
+	/**	 The entity defaultFieldListVars
+	 *	 It is constructed before being initialized with the constructor by default. 
+	 */
+	@JsonProperty
+	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
+	@JsonInclude(Include.NON_NULL)
+	protected List<String> defaultFieldListVars = new ArrayList<String>();
+
+	/**	<br> The entity defaultFieldListVars
+	 *  It is constructed before being initialized with the constructor by default. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.HomePage&fq=entiteVar_enUS_indexed_string:defaultFieldListVars">Find the entity defaultFieldListVars in Solr</a>
+	 * <br>
+	 * @param l is the entity already constructed. 
+	 **/
+	protected abstract void _defaultFieldListVars(List<String> l);
+
+	public List<String> getDefaultFieldListVars() {
+		return defaultFieldListVars;
+	}
+
+	public void setDefaultFieldListVars(List<String> defaultFieldListVars) {
+		this.defaultFieldListVars = defaultFieldListVars;
+	}
+	public static String staticSetDefaultFieldListVars(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	public HomePage addDefaultFieldListVars(String...objets) {
+		for(String o : objets) {
+			addDefaultFieldListVars(o);
+		}
+		return (HomePage)this;
+	}
+	public HomePage addDefaultFieldListVars(String o) {
+		if(o != null)
+			this.defaultFieldListVars.add(o);
+		return (HomePage)this;
+	}
+	@JsonIgnore
+	public void setDefaultFieldListVars(JsonArray objets) {
+		defaultFieldListVars.clear();
+		for(int i = 0; i < objets.size(); i++) {
+			String o = objets.getString(i);
+			addDefaultFieldListVars(o);
+		}
+	}
+	protected HomePage defaultFieldListVarsInit() {
+		_defaultFieldListVars(defaultFieldListVars);
+		return (HomePage)this;
+	}
+
+	public static String staticSearchDefaultFieldListVars(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrDefaultFieldListVars(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqDefaultFieldListVars(SiteRequestEnUS siteRequest_, String o) {
+		return HomePage.staticSearchStrDefaultFieldListVars(siteRequest_, HomePage.staticSearchDefaultFieldListVars(siteRequest_, HomePage.staticSetDefaultFieldListVars(siteRequest_, o)));
+	}
+
+	//////////////////////
+	// defaultStatsVars //
+	//////////////////////
+
+	/**	 The entity defaultStatsVars
+	 *	 It is constructed before being initialized with the constructor by default. 
+	 */
+	@JsonProperty
+	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
+	@JsonInclude(Include.NON_NULL)
+	protected List<String> defaultStatsVars = new ArrayList<String>();
+
+	/**	<br> The entity defaultStatsVars
+	 *  It is constructed before being initialized with the constructor by default. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.HomePage&fq=entiteVar_enUS_indexed_string:defaultStatsVars">Find the entity defaultStatsVars in Solr</a>
+	 * <br>
+	 * @param l is the entity already constructed. 
+	 **/
+	protected abstract void _defaultStatsVars(List<String> l);
+
+	public List<String> getDefaultStatsVars() {
+		return defaultStatsVars;
+	}
+
+	public void setDefaultStatsVars(List<String> defaultStatsVars) {
+		this.defaultStatsVars = defaultStatsVars;
+	}
+	public static String staticSetDefaultStatsVars(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	public HomePage addDefaultStatsVars(String...objets) {
+		for(String o : objets) {
+			addDefaultStatsVars(o);
+		}
+		return (HomePage)this;
+	}
+	public HomePage addDefaultStatsVars(String o) {
+		if(o != null)
+			this.defaultStatsVars.add(o);
+		return (HomePage)this;
+	}
+	@JsonIgnore
+	public void setDefaultStatsVars(JsonArray objets) {
+		defaultStatsVars.clear();
+		for(int i = 0; i < objets.size(); i++) {
+			String o = objets.getString(i);
+			addDefaultStatsVars(o);
+		}
+	}
+	protected HomePage defaultStatsVarsInit() {
+		_defaultStatsVars(defaultStatsVars);
+		return (HomePage)this;
+	}
+
+	public static String staticSearchDefaultStatsVars(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrDefaultStatsVars(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqDefaultStatsVars(SiteRequestEnUS siteRequest_, String o) {
+		return HomePage.staticSearchStrDefaultStatsVars(siteRequest_, HomePage.staticSearchDefaultStatsVars(siteRequest_, HomePage.staticSetDefaultStatsVars(siteRequest_, o)));
+	}
+
+	//////////////////////
+	// defaultPivotVars //
+	//////////////////////
+
+	/**	 The entity defaultPivotVars
+	 *	 It is constructed before being initialized with the constructor by default. 
+	 */
+	@JsonProperty
+	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
+	@JsonInclude(Include.NON_NULL)
+	protected List<String> defaultPivotVars = new ArrayList<String>();
+
+	/**	<br> The entity defaultPivotVars
+	 *  It is constructed before being initialized with the constructor by default. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.HomePage&fq=entiteVar_enUS_indexed_string:defaultPivotVars">Find the entity defaultPivotVars in Solr</a>
+	 * <br>
+	 * @param l is the entity already constructed. 
+	 **/
+	protected abstract void _defaultPivotVars(List<String> l);
+
+	public List<String> getDefaultPivotVars() {
+		return defaultPivotVars;
+	}
+
+	public void setDefaultPivotVars(List<String> defaultPivotVars) {
+		this.defaultPivotVars = defaultPivotVars;
+	}
+	public static String staticSetDefaultPivotVars(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	public HomePage addDefaultPivotVars(String...objets) {
+		for(String o : objets) {
+			addDefaultPivotVars(o);
+		}
+		return (HomePage)this;
+	}
+	public HomePage addDefaultPivotVars(String o) {
+		if(o != null)
+			this.defaultPivotVars.add(o);
+		return (HomePage)this;
+	}
+	@JsonIgnore
+	public void setDefaultPivotVars(JsonArray objets) {
+		defaultPivotVars.clear();
+		for(int i = 0; i < objets.size(); i++) {
+			String o = objets.getString(i);
+			addDefaultPivotVars(o);
+		}
+	}
+	protected HomePage defaultPivotVarsInit() {
+		_defaultPivotVars(defaultPivotVars);
+		return (HomePage)this;
+	}
+
+	public static String staticSearchDefaultPivotVars(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrDefaultPivotVars(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqDefaultPivotVars(SiteRequestEnUS siteRequest_, String o) {
+		return HomePage.staticSearchStrDefaultPivotVars(siteRequest_, HomePage.staticSearchDefaultPivotVars(siteRequest_, HomePage.staticSetDefaultPivotVars(siteRequest_, o)));
+	}
+
+	//////////////////
+	// listSitePage //
+	//////////////////
+
+	/**	 The entity listSitePage
+	 *	 It is constructed before being initialized with the constructor by default. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected JsonArray listSitePage = new JsonArray();
+
+	/**	<br> The entity listSitePage
+	 *  It is constructed before being initialized with the constructor by default. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.HomePage&fq=entiteVar_enUS_indexed_string:listSitePage">Find the entity listSitePage in Solr</a>
+	 * <br>
+	 * @param l is the entity already constructed. 
+	 **/
+	protected abstract void _listSitePage(JsonArray l);
+
+	public JsonArray getListSitePage() {
+		return listSitePage;
+	}
+
+	public void setListSitePage(JsonArray listSitePage) {
+		this.listSitePage = listSitePage;
+	}
+	public static JsonArray staticSetListSitePage(SiteRequestEnUS siteRequest_, String o) {
+		return null;
+	}
+	protected HomePage listSitePageInit() {
+		_listSitePage(listSitePage);
+		return (HomePage)this;
+	}
+
+	///////////
+	// stats //
+	///////////
+
+	/**	 The entity stats
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected Stats stats;
+
+	/**	<br> The entity stats
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.HomePage&fq=entiteVar_enUS_indexed_string:stats">Find the entity stats in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _stats(Wrap<Stats> w);
+
+	public Stats getStats() {
+		return stats;
+	}
+
+	public void setStats(Stats stats) {
+		this.stats = stats;
+	}
+	public static Stats staticSetStats(SiteRequestEnUS siteRequest_, String o) {
+		return null;
+	}
+	protected HomePage statsInit() {
+		Wrap<Stats> statsWrap = new Wrap<Stats>().var("stats");
+		if(stats == null) {
+			_stats(statsWrap);
+			setStats(statsWrap.o);
+		}
+		return (HomePage)this;
+	}
+
+	/////////////////
+	// facetCounts //
+	/////////////////
+
+	/**	 The entity facetCounts
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected FacetCounts facetCounts;
+
+	/**	<br> The entity facetCounts
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.HomePage&fq=entiteVar_enUS_indexed_string:facetCounts">Find the entity facetCounts in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _facetCounts(Wrap<FacetCounts> w);
+
+	public FacetCounts getFacetCounts() {
+		return facetCounts;
+	}
+
+	public void setFacetCounts(FacetCounts facetCounts) {
+		this.facetCounts = facetCounts;
+	}
+	public static FacetCounts staticSetFacetCounts(SiteRequestEnUS siteRequest_, String o) {
+		return null;
+	}
+	protected HomePage facetCountsInit() {
+		Wrap<FacetCounts> facetCountsWrap = new Wrap<FacetCounts>().var("facetCounts");
+		if(facetCounts == null) {
+			_facetCounts(facetCountsWrap);
+			setFacetCounts(facetCountsWrap.o);
+		}
+		return (HomePage)this;
+	}
+
+	///////////////////
+	// sitePageCount //
+	///////////////////
+
+	/**	 The entity sitePageCount
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected Integer sitePageCount;
+
+	/**	<br> The entity sitePageCount
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.HomePage&fq=entiteVar_enUS_indexed_string:sitePageCount">Find the entity sitePageCount in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _sitePageCount(Wrap<Integer> w);
+
+	public Integer getSitePageCount() {
+		return sitePageCount;
+	}
+
+	public void setSitePageCount(Integer sitePageCount) {
+		this.sitePageCount = sitePageCount;
+	}
+	@JsonIgnore
+	public void setSitePageCount(String o) {
+		this.sitePageCount = HomePage.staticSetSitePageCount(siteRequest_, o);
+	}
+	public static Integer staticSetSitePageCount(SiteRequestEnUS siteRequest_, String o) {
+		if(NumberUtils.isParsable(o))
+			return Integer.parseInt(o);
+		return null;
+	}
+	protected HomePage sitePageCountInit() {
+		Wrap<Integer> sitePageCountWrap = new Wrap<Integer>().var("sitePageCount");
+		if(sitePageCount == null) {
+			_sitePageCount(sitePageCountWrap);
+			setSitePageCount(sitePageCountWrap.o);
+		}
+		return (HomePage)this;
+	}
+
+	public static Integer staticSearchSitePageCount(SiteRequestEnUS siteRequest_, Integer o) {
+		return o;
+	}
+
+	public static String staticSearchStrSitePageCount(SiteRequestEnUS siteRequest_, Integer o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqSitePageCount(SiteRequestEnUS siteRequest_, String o) {
+		return HomePage.staticSearchStrSitePageCount(siteRequest_, HomePage.staticSearchSitePageCount(siteRequest_, HomePage.staticSetSitePageCount(siteRequest_, o)));
+	}
+
+	///////////////
+	// sitePages //
+	///////////////
+
+	/**	 The entity sitePages
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
+	@JsonInclude(Include.NON_NULL)
+	protected List<SitePage> sitePages;
+
+	/**	<br> The entity sitePages
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.HomePage&fq=entiteVar_enUS_indexed_string:sitePages">Find the entity sitePages in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _sitePages(Wrap<List<SitePage>> w);
+
+	public List<SitePage> getSitePages() {
+		return sitePages;
+	}
+
+	public void setSitePages(List<SitePage> sitePages) {
+		this.sitePages = sitePages;
+	}
+	public static SitePage staticSetSitePages(SiteRequestEnUS siteRequest_, String o) {
+		return null;
+	}
+	public HomePage addSitePages(SitePage...objets) {
+		for(SitePage o : objets) {
+			addSitePages(o);
+		}
+		return (HomePage)this;
+	}
+	public HomePage addSitePages(SitePage o) {
+		if(o != null)
+			this.sitePages.add(o);
+		return (HomePage)this;
+	}
+	protected HomePage sitePagesInit() {
+		Wrap<List<SitePage>> sitePagesWrap = new Wrap<List<SitePage>>().var("sitePages");
+		if(sitePages == null) {
+			_sitePages(sitePagesWrap);
+			setSitePages(sitePagesWrap.o);
+		}
+		return (HomePage)this;
+	}
 
 	//////////////
 	// initDeep //
@@ -83,6 +779,35 @@ public abstract class HomePageGen<DEV> extends PageLayout {
 				promise2.fail(ex);
 			}
 			return promise2.future();
+		}).compose(a -> {
+			Promise<Void> promise2 = Promise.promise();
+			searchListSitePagePromise().onSuccess(searchListSitePage -> {
+				promise2.complete();
+			}).onFailure(ex -> {
+				promise2.fail(ex);
+			});
+			return promise2.future();
+		}).compose(a -> {
+			Promise<Void> promise2 = Promise.promise();
+			try {
+				pageResponseInit();
+				defaultZoneIdInit();
+				defaultTimeZoneInit();
+				defaultLocaleIdInit();
+				defaultLocaleInit();
+				defaultFieldListVarsInit();
+				defaultStatsVarsInit();
+				defaultPivotVarsInit();
+				listSitePageInit();
+				statsInit();
+				facetCountsInit();
+				sitePageCountInit();
+				sitePagesInit();
+				promise2.complete();
+			} catch(Exception ex) {
+				promise2.fail(ex);
+			}
+			return promise2.future();
 		}).onSuccess(a -> {
 			promise.complete();
 		}).onFailure(ex -> {
@@ -101,6 +826,8 @@ public abstract class HomePageGen<DEV> extends PageLayout {
 
 	public void siteRequestHomePage(SiteRequestEnUS siteRequest_) {
 			super.siteRequestPageLayout(siteRequest_);
+		if(searchListSitePage != null)
+			searchListSitePage.setSiteRequest_(siteRequest_);
 	}
 
 	public void siteRequestForClass(SiteRequestEnUS siteRequest_) {
@@ -131,6 +858,34 @@ public abstract class HomePageGen<DEV> extends PageLayout {
 	public Object obtainHomePage(String var) {
 		HomePage oHomePage = (HomePage)this;
 		switch(var) {
+			case "searchListSitePage":
+				return oHomePage.searchListSitePage;
+			case "pageResponse":
+				return oHomePage.pageResponse;
+			case "defaultZoneId":
+				return oHomePage.defaultZoneId;
+			case "defaultTimeZone":
+				return oHomePage.defaultTimeZone;
+			case "defaultLocaleId":
+				return oHomePage.defaultLocaleId;
+			case "defaultLocale":
+				return oHomePage.defaultLocale;
+			case "defaultFieldListVars":
+				return oHomePage.defaultFieldListVars;
+			case "defaultStatsVars":
+				return oHomePage.defaultStatsVars;
+			case "defaultPivotVars":
+				return oHomePage.defaultPivotVars;
+			case "listSitePage":
+				return oHomePage.listSitePage;
+			case "stats":
+				return oHomePage.stats;
+			case "facetCounts":
+				return oHomePage.facetCounts;
+			case "sitePageCount":
+				return oHomePage.sitePageCount;
+			case "sitePages":
+				return oHomePage.sitePages;
 			default:
 				return super.obtainPageLayout(var);
 		}
@@ -170,6 +925,20 @@ public abstract class HomePageGen<DEV> extends PageLayout {
 	}
 	public static Object staticSetHomePage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "pageResponse":
+			return HomePage.staticSetPageResponse(siteRequest_, o);
+		case "defaultZoneId":
+			return HomePage.staticSetDefaultZoneId(siteRequest_, o);
+		case "defaultLocaleId":
+			return HomePage.staticSetDefaultLocaleId(siteRequest_, o);
+		case "defaultFieldListVars":
+			return HomePage.staticSetDefaultFieldListVars(siteRequest_, o);
+		case "defaultStatsVars":
+			return HomePage.staticSetDefaultStatsVars(siteRequest_, o);
+		case "defaultPivotVars":
+			return HomePage.staticSetDefaultPivotVars(siteRequest_, o);
+		case "sitePageCount":
+			return HomePage.staticSetSitePageCount(siteRequest_, o);
 			default:
 				return PageLayout.staticSetPageLayout(entityVar,  siteRequest_, o);
 		}
@@ -184,6 +953,20 @@ public abstract class HomePageGen<DEV> extends PageLayout {
 	}
 	public static Object staticSearchHomePage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "pageResponse":
+			return HomePage.staticSearchPageResponse(siteRequest_, (String)o);
+		case "defaultZoneId":
+			return HomePage.staticSearchDefaultZoneId(siteRequest_, (String)o);
+		case "defaultLocaleId":
+			return HomePage.staticSearchDefaultLocaleId(siteRequest_, (String)o);
+		case "defaultFieldListVars":
+			return HomePage.staticSearchDefaultFieldListVars(siteRequest_, (String)o);
+		case "defaultStatsVars":
+			return HomePage.staticSearchDefaultStatsVars(siteRequest_, (String)o);
+		case "defaultPivotVars":
+			return HomePage.staticSearchDefaultPivotVars(siteRequest_, (String)o);
+		case "sitePageCount":
+			return HomePage.staticSearchSitePageCount(siteRequest_, (Integer)o);
 			default:
 				return PageLayout.staticSearchPageLayout(entityVar,  siteRequest_, o);
 		}
@@ -198,6 +981,20 @@ public abstract class HomePageGen<DEV> extends PageLayout {
 	}
 	public static String staticSearchStrHomePage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "pageResponse":
+			return HomePage.staticSearchStrPageResponse(siteRequest_, (String)o);
+		case "defaultZoneId":
+			return HomePage.staticSearchStrDefaultZoneId(siteRequest_, (String)o);
+		case "defaultLocaleId":
+			return HomePage.staticSearchStrDefaultLocaleId(siteRequest_, (String)o);
+		case "defaultFieldListVars":
+			return HomePage.staticSearchStrDefaultFieldListVars(siteRequest_, (String)o);
+		case "defaultStatsVars":
+			return HomePage.staticSearchStrDefaultStatsVars(siteRequest_, (String)o);
+		case "defaultPivotVars":
+			return HomePage.staticSearchStrDefaultPivotVars(siteRequest_, (String)o);
+		case "sitePageCount":
+			return HomePage.staticSearchStrSitePageCount(siteRequest_, (Integer)o);
 			default:
 				return PageLayout.staticSearchStrPageLayout(entityVar,  siteRequest_, o);
 		}
@@ -212,6 +1009,20 @@ public abstract class HomePageGen<DEV> extends PageLayout {
 	}
 	public static String staticSearchFqHomePage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "pageResponse":
+			return HomePage.staticSearchFqPageResponse(siteRequest_, o);
+		case "defaultZoneId":
+			return HomePage.staticSearchFqDefaultZoneId(siteRequest_, o);
+		case "defaultLocaleId":
+			return HomePage.staticSearchFqDefaultLocaleId(siteRequest_, o);
+		case "defaultFieldListVars":
+			return HomePage.staticSearchFqDefaultFieldListVars(siteRequest_, o);
+		case "defaultStatsVars":
+			return HomePage.staticSearchFqDefaultStatsVars(siteRequest_, o);
+		case "defaultPivotVars":
+			return HomePage.staticSearchFqDefaultPivotVars(siteRequest_, o);
+		case "sitePageCount":
+			return HomePage.staticSearchFqSitePageCount(siteRequest_, o);
 			default:
 				return PageLayout.staticSearchFqPageLayout(entityVar,  siteRequest_, o);
 		}
@@ -228,13 +1039,69 @@ public abstract class HomePageGen<DEV> extends PageLayout {
 	}
 
 	public static final String CLASS_SIMPLE_NAME = "HomePage";
+	public static final String VAR_searchListSitePage = "searchListSitePage";
+	public static final String VAR_pageResponse = "pageResponse";
+	public static final String VAR_defaultZoneId = "defaultZoneId";
+	public static final String VAR_defaultTimeZone = "defaultTimeZone";
+	public static final String VAR_defaultLocaleId = "defaultLocaleId";
+	public static final String VAR_defaultLocale = "defaultLocale";
+	public static final String VAR_defaultFieldListVars = "defaultFieldListVars";
+	public static final String VAR_defaultStatsVars = "defaultStatsVars";
+	public static final String VAR_defaultPivotVars = "defaultPivotVars";
+	public static final String VAR_listSitePage = "listSitePage";
+	public static final String VAR_stats = "stats";
+	public static final String VAR_facetCounts = "facetCounts";
+	public static final String VAR_sitePageCount = "sitePageCount";
+	public static final String VAR_sitePages = "sitePages";
 
+	public static final String DISPLAY_NAME_searchListSitePage = "";
+	public static final String DISPLAY_NAME_pageResponse = "";
+	public static final String DISPLAY_NAME_defaultZoneId = "";
+	public static final String DISPLAY_NAME_defaultTimeZone = "";
+	public static final String DISPLAY_NAME_defaultLocaleId = "";
+	public static final String DISPLAY_NAME_defaultLocale = "";
+	public static final String DISPLAY_NAME_defaultFieldListVars = "";
+	public static final String DISPLAY_NAME_defaultStatsVars = "";
+	public static final String DISPLAY_NAME_defaultPivotVars = "";
+	public static final String DISPLAY_NAME_listSitePage = "";
+	public static final String DISPLAY_NAME_stats = "";
+	public static final String DISPLAY_NAME_facetCounts = "";
+	public static final String DISPLAY_NAME_sitePageCount = "";
+	public static final String DISPLAY_NAME_sitePages = "";
 
 	public static String displayNameForClass(String var) {
 		return HomePage.displayNameHomePage(var);
 	}
 	public static String displayNameHomePage(String var) {
 		switch(var) {
+		case VAR_searchListSitePage:
+			return DISPLAY_NAME_searchListSitePage;
+		case VAR_pageResponse:
+			return DISPLAY_NAME_pageResponse;
+		case VAR_defaultZoneId:
+			return DISPLAY_NAME_defaultZoneId;
+		case VAR_defaultTimeZone:
+			return DISPLAY_NAME_defaultTimeZone;
+		case VAR_defaultLocaleId:
+			return DISPLAY_NAME_defaultLocaleId;
+		case VAR_defaultLocale:
+			return DISPLAY_NAME_defaultLocale;
+		case VAR_defaultFieldListVars:
+			return DISPLAY_NAME_defaultFieldListVars;
+		case VAR_defaultStatsVars:
+			return DISPLAY_NAME_defaultStatsVars;
+		case VAR_defaultPivotVars:
+			return DISPLAY_NAME_defaultPivotVars;
+		case VAR_listSitePage:
+			return DISPLAY_NAME_listSitePage;
+		case VAR_stats:
+			return DISPLAY_NAME_stats;
+		case VAR_facetCounts:
+			return DISPLAY_NAME_facetCounts;
+		case VAR_sitePageCount:
+			return DISPLAY_NAME_sitePageCount;
+		case VAR_sitePages:
+			return DISPLAY_NAME_sitePages;
 		default:
 			return PageLayout.displayNamePageLayout(var);
 		}

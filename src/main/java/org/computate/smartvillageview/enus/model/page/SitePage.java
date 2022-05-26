@@ -67,6 +67,13 @@ public class SitePage extends SitePageGen<Object> {
 
 	/**
 	 * {@inheritDoc}
+	 */
+	protected void _STATIC_BASE_URL(Wrap<String> w) {
+		w.o(siteRequest_.getConfig().getString(ConfigKeys.STATIC_BASE_URL));
+	}
+
+	/**
+	 * {@inheritDoc}
 	 * Ignore: true
 	 * Description: An asynchronous method for searching for a computer related to this message
 	 */
@@ -194,6 +201,19 @@ public class SitePage extends SitePageGen<Object> {
 	 * Description: The author
 	 */
 	protected void _author(Wrap<String> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * HtmlRow: 4
+	 * HtmlCell: 1
+	 * Facet: true
+	 * DisplayName.enUS: imageUri
+	 * Description: The page image URI
+	 */
+	protected void _pageImageUri(Wrap<String> w) {
 	}
 
 	/**

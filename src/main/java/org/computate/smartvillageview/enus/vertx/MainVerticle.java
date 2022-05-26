@@ -133,6 +133,8 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 
 	Handlebars handlebars;
 
+	TemplateHandler templateHandler;
+
 	/**	
 	 *	The main method for the Vert.x application that runs the Vert.x Runner class
 	 **/
@@ -745,6 +747,12 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 			handlebars.registerHelpers(SiteHelpers.class);
 			handlebars.registerHelpers(DateHelpers.class);
 
+			String templatePath = config().getString(ConfigKeys.TEMPLATE_PATH);
+			if(StringUtils.isBlank(templatePath))
+				templateHandler = TemplateHandler.create(templateEngine);
+			else
+				templateHandler = TemplateHandler.create(templateEngine, templatePath, "text/html");
+
 			LOG.info(configureHandlebarsComplete);
 			promise.complete();
 		} catch(Exception ex) {
@@ -794,10 +802,12 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 			});
 
 			router.get("/template/enUS/HomePage").handler(ctx -> {
+				ctx.put(ConfigKeys.STATIC_BASE_URL, config().getString(ConfigKeys.STATIC_BASE_URL));
 				HomePage t = new HomePage();
 				SiteRequestEnUS siteRequest = new SiteRequestEnUS();
 				siteRequest.setConfig(config());
 				siteRequest.setRequestHeaders(ctx.request().headers());
+				siteRequest.setWebClient(webClient);
 				siteRequest.initDeepSiteRequestEnUS();
 				t.promiseDeepForClass(siteRequest).onSuccess(a -> {
 					JsonObject json = JsonObject.mapFrom(t);
@@ -806,6 +816,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 					});
 					ctx.next();
 				}).onFailure(ex -> {
+					LOG.error("Failed to load home page. ", ex);
 					ctx.fail(ex);
 				});
 			});
@@ -858,6 +869,8 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 					ctx.fail(ex);
 				});
 			});
+
+			router.get("/template/*").handler(templateHandler);
 
 			StaticHandler staticHandler = StaticHandler.create().setCachingEnabled(false).setFilesReadOnly(false);
 			if(staticPath != null) {
