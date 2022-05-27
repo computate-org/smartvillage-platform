@@ -115,6 +115,8 @@ SITE_REQUESTS_MEMORY: "200Mi"
 SITE_REQUESTS_CPU: "100m"
 # Whether to install the Build Config
 SITE_BUILD_CONFIG_1: true
+# The dynamic page path. 
+DYNAMIC_PAGE_PATH: "/home/jboss/src/main/resources/page"
 
 #########################################
 # application US English defaults #
@@ -144,7 +146,6 @@ SITE_DB_PASSWORD_ENUS: "{{ POSTGRES_DB_PASSWORD }}"
 SITE_DB_NAME_ENUS: "{{ SITE_NAME }}"
 # The Java main class of the site.
 SITE_JAVA_MAIN_CLASS_ENUS: org.curriki.api.enus.vertx.MainVerticle
-DYNAMIC_PAGE_PATH: "/home/jboss/src/main/resources/page"
 
 #################
 # SMTP defaults #
@@ -235,6 +236,8 @@ ENABLE_IMPORT_DATA: "{{ ENABLE_IMPORT_DATA | lower }}"
 ENABLE_IMPORT_DATA_IotNode: true
 ENABLE_IMPORT_DATA_TrafficSimulation: true
 ENABLE_IMPORT_DATA_SiteHtm: true
+ENABLE_IMPORT_DATA_TimeStep: true
+ENABLE_IMPORT_DATA_VehicleStep: true
 ENABLE_IMPORT_DATA_SitePage: true
 
 # The Auth roles required to be an admin in the site. 
@@ -247,5 +250,9 @@ AUTH_ROLES_REQUIRED_IotNode: ['SiteAdmin']
 AUTH_ROLES_REQUIRED_TrafficSimulation: ['SiteAdmin']
 # The Auth roles required to add and modify HTML records. 
 AUTH_ROLES_REQUIRED_SiteHtm: ['SiteAdmin']
+# The Auth roles required to add and modify time step records. 
+AUTH_ROLES_REQUIRED_TimeStep: ['SiteAdmin']
+# The Auth roles required to add and modify vehicle step records. 
+AUTH_ROLES_REQUIRED_VehicleStep: ['SiteAdmin']
 # The Auth roles required to add and modify article records. 
 AUTH_ROLES_REQUIRED_SitePage: ['SiteAdmin']

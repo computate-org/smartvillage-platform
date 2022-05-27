@@ -1,5 +1,6 @@
 package org.computate.smartvillageview.enus.page;
 
+
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
@@ -14,6 +15,7 @@ import org.computate.search.response.solr.SolrResponse;
 import org.computate.search.wrap.Wrap;
 import org.computate.smartvillageview.enus.config.ConfigKeys;
 import org.computate.smartvillageview.enus.model.page.SitePage;
+import org.computate.smartvillageview.enus.page.PageLayout;
 import org.computate.vertx.search.list.SearchList;
 
 import io.vertx.core.Promise;
@@ -21,6 +23,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
 public class HomePage extends HomePageGen<PageLayout> {
+
 
 	/**
 	 * {@inheritDoc}

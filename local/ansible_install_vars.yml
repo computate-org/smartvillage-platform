@@ -1,5 +1,6 @@
 ---
 GITHUB_ORG: computate-org
+QUAYIO_ORG: computate
 PROJECT_NAME: smart-village-view
 PROJECT_DISPLAY_NAME: Smart Village Project
 PROJECT_REPO: "git@github.com:{{ GITHUB_ORG }}/{{ PROJECT_NAME }}.git"

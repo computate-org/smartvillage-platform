@@ -1,11 +1,11 @@
 package org.computate.smartvillageview.enus.vertx;
 
 import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.file.Paths;
 import java.time.Duration;
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -18,15 +18,15 @@ import java.util.Stack;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.computate.search.serialize.ComputateZonedDateTimeSerializer;
 import org.computate.search.tool.TimeTool;
 import org.computate.search.tool.XmlTool;
-import org.computate.vertx.api.ApiCounter;
-import org.computate.vertx.api.ApiRequest;
 import org.computate.smartvillageview.enus.config.ConfigKeys;
-import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
-import org.computate.smartvillageview.enus.model.page.SitePage;
 import org.computate.smartvillageview.enus.model.htm.SiteHtm;
+import org.computate.smartvillageview.enus.model.iotnode.IotNode;
+import org.computate.smartvillageview.enus.model.page.SitePage;
+import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.vertx.api.ApiCounter;
 import org.computate.vertx.api.ApiRequest;
 import org.computate.vertx.config.ComputateVertxConfigKeys;
@@ -54,7 +54,6 @@ import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.authentication.TokenCredentials;
-import io.vertx.ext.jdbc.JDBCClient;
 import io.vertx.ext.mail.MailClient;
 import io.vertx.ext.mail.MailConfig;
 import io.vertx.ext.web.client.WebClient;
@@ -62,18 +61,9 @@ import io.vertx.ext.web.client.predicate.ResponsePredicate;
 import io.vertx.ext.web.templ.handlebars.HandlebarsTemplateEngine;
 import io.vertx.pgclient.PgConnectOptions;
 import io.vertx.pgclient.PgPool;
-import io.vertx.sqlclient.Cursor;
 import io.vertx.sqlclient.PoolOptions;
 import io.vertx.sqlclient.Row;
 import io.vertx.sqlclient.RowStream;
-import io.vertx.sqlclient.SqlConnection;
-import java.time.LocalDateTime;
-import io.vertx.ext.jdbc.JDBCClient;
-import io.vertx.sqlclient.Cursor;
-import io.vertx.sqlclient.SqlConnection;
-import io.vertx.ext.web.client.predicate.ResponsePredicate;
-import io.vertx.ext.auth.authentication.TokenCredentials;
-import org.computate.smartvillageview.enus.model.iotnode.IotNode;
 
 
 /**
@@ -517,8 +507,6 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 					page.setLessonNum(json.getInteger(SitePage.VAR_lessonNum));
 					page.setAuthor(json.getString("author"));
 					page.setUri(json.getString("uri"));
-					page.setH1(json.getString("h1"));
-					page.setH2(json.getString("h2"));
 					page.setPageImageUri(json.getString(SitePage.VAR_pageImageUri));
 					page.promiseDeepForClass(siteRequest).onSuccess(a -> {
 						try {
@@ -526,8 +514,29 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 							JsonArray importItems = new JsonArray();
 							List<Future> futures = new ArrayList<>();
 							Stack<String> stack = new Stack<>();
-							JsonObject pageBody = JsonObject.mapFrom(page);
-							json.put("page", pageBody);
+							JsonObject pageBody1 = JsonObject.mapFrom(page);
+							json.put("page", pageBody1);
+
+							Optional.ofNullable(json.getString("h1")).ifPresent(val -> {
+								try {
+									Template template = handlebars.compileInline(val);
+									Context engineContext = Context.newBuilder(json.getMap()).resolver(templateEngine.getResolvers()).build();
+									page.setH1(Buffer.buffer(template.apply(engineContext)).toString());
+								} catch (IOException ex) {
+									ExceptionUtils.rethrow(ex);
+								}
+							});
+							Optional.ofNullable(json.getString("h2")).ifPresent(val -> {
+								try {
+									Template template = handlebars.compileInline(val);
+									Context engineContext = Context.newBuilder(json.getMap()).resolver(templateEngine.getResolvers()).build();
+									page.setH2(Buffer.buffer(template.apply(engineContext)).toString());
+								} catch (IOException ex) {
+									ExceptionUtils.rethrow(ex);
+								}
+							});
+							JsonObject pageBody2 = JsonObject.mapFrom(page);
+							json.put("page", pageBody2);
 			
 							stack.push("html");
 							stack.push("body");
@@ -542,7 +551,7 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 			
 							CompositeFuture.all(futures).onSuccess(b -> {
 								JsonObject pageParams = new JsonObject();
-								pageParams.put("body", pageBody);
+								pageParams.put("body", pageBody2);
 								pageParams.put("path", new JsonObject());
 								pageParams.put("cookie", new JsonObject());
 								pageParams.put("query", new JsonObject().put("commitWithin", 1000).put("q", "*:*").put("var", new JsonArray().add("refresh:false")));
@@ -749,9 +758,19 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 					refreshData("IotNode").onSuccess(q1 -> {
 						refreshData("TrafficSimulation").onSuccess(q2 -> {
 							refreshData("SiteHtm").onSuccess(q3 -> {
-								refreshData("SitePage").onSuccess(q4 -> {
-									LOG.info(refreshAllDataComplete);
-									promise.complete();
+								refreshData("TimeStep").onSuccess(q4 -> {
+									refreshData("VehicleStep").onSuccess(q5 -> {
+										refreshData("SitePage").onSuccess(q6 -> {
+											LOG.info(refreshAllDataComplete);
+											promise.complete();
+										}).onFailure(ex -> {
+											LOG.error(refreshAllDataFail, ex);
+											promise.fail(ex);
+										});
+									}).onFailure(ex -> {
+										LOG.error(refreshAllDataFail, ex);
+										promise.fail(ex);
+									});
 								}).onFailure(ex -> {
 									LOG.error(refreshAllDataFail, ex);
 									promise.fail(ex);

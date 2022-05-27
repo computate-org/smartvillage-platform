@@ -78,6 +78,8 @@ ENABLE_IMPORT_DATA: {{ ENABLE_IMPORT_DATA | lower }}
 ENABLE_IMPORT_DATA_IotNode: true
 ENABLE_IMPORT_DATA_TrafficSimulation: true
 ENABLE_IMPORT_DATA_SiteHtm: true
+ENABLE_IMPORT_DATA_TimeStep: true
+ENABLE_IMPORT_DATA_VehicleStep: true
 ENABLE_IMPORT_DATA_SitePage: true
 
 # The Auth roles required to be an admin in the site. 
@@ -90,6 +92,10 @@ AUTH_ROLES_REQUIRED_IotNode: ['SiteAdmin']
 AUTH_ROLES_REQUIRED_TrafficSimulation: ['SiteAdmin']
 # The Auth roles required to add and modify HTML records. 
 AUTH_ROLES_REQUIRED_SiteHtm: ['SiteAdmin']
+# The Auth roles required to add and modify time step records. 
+AUTH_ROLES_REQUIRED_TimeStep: ['SiteAdmin']
+# The Auth roles required to add and modify vehicle step records. 
+AUTH_ROLES_REQUIRED_VehicleStep: ['SiteAdmin']
 # The Auth roles required to add and modify article records. 
 AUTH_ROLES_REQUIRED_SitePage: ['SiteAdmin']
 
