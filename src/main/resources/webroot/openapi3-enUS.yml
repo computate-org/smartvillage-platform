@@ -2790,6 +2790,1386 @@ paths:
             text/html; charset=utf-8:
               schema:
                 $ref: '#/components/schemas/SearchPageTrafficSimulationResponse'
+  /api/time-step:
+    get:
+      operationId: searchTimeStep
+      x-vertx-event-bus: smart-village-view-enUS-TimeStep
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - Time Step
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+        - in: query
+          name: q
+          description: 'The query parameter defines a query using standard query syntax. This parameter is mandatory.'
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: 'The filter query parameter defines a query that can be used to restrict the superset of documents that can be returned, without influencing score. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: var
+          description: 'The var parameters are additional optional variables and values to pass into the application. '
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
+        - in: query
+          name: fl
+          description: 'The field list parameter limits the information included in a query response to a specified list of fields. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sort
+          description: 'The sort parameter arranges search results in either ascending (asc) or descending (desc) order. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: start
+          description: 'The start parameter specifies an offset into a query result set and instructs Solr to begin displaying results from this offset. '
+          required: false
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
+        - in: query
+          name: rows
+          description: 'The rows parameter specifies the maximum number of documents from the complete result set that Solr should return to the client at one time. '
+          required: false
+          schema:
+            type: integer
+            default: 100
+            minimum: 0
+        - in: query
+          name: facet
+          description: 'The facet parameter enables facet counts in the query response. '
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: facet.range.start
+          description: 'The facet.range.start parameter specifies the lower bound of the ranges. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.end
+          description: 'The facet.range.end specifies the upper bound of the ranges. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.gap
+          description: 'The span of each range expressed as a value to be added to the lower bound. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.pivot
+          description: 'The facet.pivot parameter defines the fields to use for the pivot. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range
+          description: 'The facet.range parameter defines the field for which Solr should create range facets. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.field
+          description: 'The facet.field parameter identifies a field that should be treated as a facet. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: d
+          description: 'The radial distance, usually in kilometers. '
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+        - in: query
+          name: pt
+          description: 'he center point using the format lat,lon if latitude & longitude. Otherwise, x,y for PointType or x y for RPT field types. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sfield
+          description: 'A spatial indexed field. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: score
+          description: '(Advanced option; not supported by LatLonType (deprecated) or PointType) If the query is used in a scoring context (e.g., as the main query in q), this local parameter determines what scores will be produced. Valid values are: none, kilometers, miles, degrees, distance, recipDistance, overlapRatio, area, area2D'
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: distanceUnits
+          description: 'This is used to specify the units for distance measurements used throughout the use of this field. This can be degrees, kilometers or miles. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: stats
+          description: 'The Stats component returns simple statistics for numeric, string, and date fields within the document set. '
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: stats.field
+          description: 'Specifies a field for which statistics should be generated. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: >+
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/SearchTimeStepResponse'
+    patch:
+      operationId: patchTimeStep
+      x-vertx-event-bus: smart-village-view-enUS-TimeStep
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - Time Step
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+        - in: query
+          name: q
+          description: 'The query parameter defines a query using standard query syntax. This parameter is mandatory.'
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: 'The filter query parameter defines a query that can be used to restrict the superset of documents that can be returned, without influencing score. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: var
+          description: 'The var parameters are additional optional variables and values to pass into the application. '
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
+      requestBody:
+        description: >+
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PATCHTimeStepRequest'
+      responses:
+        '200':
+          description: >+
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/PATCHTimeStepResponse'
+    post:
+      operationId: postTimeStep
+      x-vertx-event-bus: smart-village-view-enUS-TimeStep
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - Time Step
+      requestBody:
+        description: >+
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POSTTimeStepRequest'
+      responses:
+        '200':
+          description: >+
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/POSTTimeStepResponse'
+  /api/time-step-import:
+    put:
+      operationId: putimportTimeStep
+      x-vertx-event-bus: smart-village-view-enUS-TimeStep
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - Time Step
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+      requestBody:
+        description: >+
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PUTImportTimeStepRequest'
+      responses:
+        '200':
+          description: >+
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/PUTImportTimeStepResponse'
+  /api/time-step/{id}:
+    get:
+      operationId: getTimeStep
+      x-vertx-event-bus: smart-village-view-enUS-TimeStep
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - Time Step
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+        - name: id
+          in: path
+          description: >+
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: >+
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/GETTimeStepResponse'
+  /time-step/{id}:
+    get:
+      operationId: searchpageTimeStepId
+      x-vertx-event-bus: smart-village-view-enUS-TimeStep
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - Time Step
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+        - name: id
+          in: path
+          description: >+
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: q
+          description: 'The query parameter defines a query using standard query syntax. This parameter is mandatory.'
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: 'The filter query parameter defines a query that can be used to restrict the superset of documents that can be returned, without influencing score. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: var
+          description: 'The var parameters are additional optional variables and values to pass into the application. '
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
+        - in: query
+          name: fl
+          description: 'The field list parameter limits the information included in a query response to a specified list of fields. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sort
+          description: 'The sort parameter arranges search results in either ascending (asc) or descending (desc) order. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: start
+          description: 'The start parameter specifies an offset into a query result set and instructs Solr to begin displaying results from this offset. '
+          required: false
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
+        - in: query
+          name: rows
+          description: 'The rows parameter specifies the maximum number of documents from the complete result set that Solr should return to the client at one time. '
+          required: false
+          schema:
+            type: integer
+            default: 100
+            minimum: 0
+        - in: query
+          name: facet
+          description: 'The facet parameter enables facet counts in the query response. '
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: facet.range.start
+          description: 'The facet.range.start parameter specifies the lower bound of the ranges. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.end
+          description: 'The facet.range.end specifies the upper bound of the ranges. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.gap
+          description: 'The span of each range expressed as a value to be added to the lower bound. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.pivot
+          description: 'The facet.pivot parameter defines the fields to use for the pivot. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range
+          description: 'The facet.range parameter defines the field for which Solr should create range facets. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.field
+          description: 'The facet.field parameter identifies a field that should be treated as a facet. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: d
+          description: 'The radial distance, usually in kilometers. '
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+        - in: query
+          name: pt
+          description: 'he center point using the format lat,lon if latitude & longitude. Otherwise, x,y for PointType or x y for RPT field types. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sfield
+          description: 'A spatial indexed field. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: score
+          description: '(Advanced option; not supported by LatLonType (deprecated) or PointType) If the query is used in a scoring context (e.g., as the main query in q), this local parameter determines what scores will be produced. Valid values are: none, kilometers, miles, degrees, distance, recipDistance, overlapRatio, area, area2D'
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: distanceUnits
+          description: 'This is used to specify the units for distance measurements used throughout the use of this field. This can be degrees, kilometers or miles. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: stats
+          description: 'The Stats component returns simple statistics for numeric, string, and date fields within the document set. '
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: stats.field
+          description: 'Specifies a field for which statistics should be generated. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: >+
+          content:
+            text/html; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/SearchPageTimeStepResponse'
+  /time-step:
+    get:
+      operationId: searchpageTimeStep
+      x-vertx-event-bus: smart-village-view-enUS-TimeStep
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - Time Step
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+        - in: query
+          name: q
+          description: 'The query parameter defines a query using standard query syntax. This parameter is mandatory.'
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: 'The filter query parameter defines a query that can be used to restrict the superset of documents that can be returned, without influencing score. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: var
+          description: 'The var parameters are additional optional variables and values to pass into the application. '
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
+        - in: query
+          name: fl
+          description: 'The field list parameter limits the information included in a query response to a specified list of fields. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sort
+          description: 'The sort parameter arranges search results in either ascending (asc) or descending (desc) order. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: start
+          description: 'The start parameter specifies an offset into a query result set and instructs Solr to begin displaying results from this offset. '
+          required: false
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
+        - in: query
+          name: rows
+          description: 'The rows parameter specifies the maximum number of documents from the complete result set that Solr should return to the client at one time. '
+          required: false
+          schema:
+            type: integer
+            default: 100
+            minimum: 0
+        - in: query
+          name: facet
+          description: 'The facet parameter enables facet counts in the query response. '
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: facet.range.start
+          description: 'The facet.range.start parameter specifies the lower bound of the ranges. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.end
+          description: 'The facet.range.end specifies the upper bound of the ranges. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.gap
+          description: 'The span of each range expressed as a value to be added to the lower bound. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.pivot
+          description: 'The facet.pivot parameter defines the fields to use for the pivot. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range
+          description: 'The facet.range parameter defines the field for which Solr should create range facets. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.field
+          description: 'The facet.field parameter identifies a field that should be treated as a facet. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: d
+          description: 'The radial distance, usually in kilometers. '
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+        - in: query
+          name: pt
+          description: 'he center point using the format lat,lon if latitude & longitude. Otherwise, x,y for PointType or x y for RPT field types. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sfield
+          description: 'A spatial indexed field. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: score
+          description: '(Advanced option; not supported by LatLonType (deprecated) or PointType) If the query is used in a scoring context (e.g., as the main query in q), this local parameter determines what scores will be produced. Valid values are: none, kilometers, miles, degrees, distance, recipDistance, overlapRatio, area, area2D'
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: distanceUnits
+          description: 'This is used to specify the units for distance measurements used throughout the use of this field. This can be degrees, kilometers or miles. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: stats
+          description: 'The Stats component returns simple statistics for numeric, string, and date fields within the document set. '
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: stats.field
+          description: 'Specifies a field for which statistics should be generated. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: >+
+          content:
+            text/html; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/SearchPageTimeStepResponse'
+  /api/vehicle-step:
+    get:
+      operationId: searchVehicleStep
+      x-vertx-event-bus: smart-village-view-enUS-VehicleStep
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - Vehicle Step
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+        - in: query
+          name: q
+          description: 'The query parameter defines a query using standard query syntax. This parameter is mandatory.'
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: 'The filter query parameter defines a query that can be used to restrict the superset of documents that can be returned, without influencing score. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: var
+          description: 'The var parameters are additional optional variables and values to pass into the application. '
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
+        - in: query
+          name: fl
+          description: 'The field list parameter limits the information included in a query response to a specified list of fields. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sort
+          description: 'The sort parameter arranges search results in either ascending (asc) or descending (desc) order. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: start
+          description: 'The start parameter specifies an offset into a query result set and instructs Solr to begin displaying results from this offset. '
+          required: false
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
+        - in: query
+          name: rows
+          description: 'The rows parameter specifies the maximum number of documents from the complete result set that Solr should return to the client at one time. '
+          required: false
+          schema:
+            type: integer
+            default: 100
+            minimum: 0
+        - in: query
+          name: facet
+          description: 'The facet parameter enables facet counts in the query response. '
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: facet.range.start
+          description: 'The facet.range.start parameter specifies the lower bound of the ranges. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.end
+          description: 'The facet.range.end specifies the upper bound of the ranges. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.gap
+          description: 'The span of each range expressed as a value to be added to the lower bound. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.pivot
+          description: 'The facet.pivot parameter defines the fields to use for the pivot. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range
+          description: 'The facet.range parameter defines the field for which Solr should create range facets. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.field
+          description: 'The facet.field parameter identifies a field that should be treated as a facet. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: d
+          description: 'The radial distance, usually in kilometers. '
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+        - in: query
+          name: pt
+          description: 'he center point using the format lat,lon if latitude & longitude. Otherwise, x,y for PointType or x y for RPT field types. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sfield
+          description: 'A spatial indexed field. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: score
+          description: '(Advanced option; not supported by LatLonType (deprecated) or PointType) If the query is used in a scoring context (e.g., as the main query in q), this local parameter determines what scores will be produced. Valid values are: none, kilometers, miles, degrees, distance, recipDistance, overlapRatio, area, area2D'
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: distanceUnits
+          description: 'This is used to specify the units for distance measurements used throughout the use of this field. This can be degrees, kilometers or miles. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: stats
+          description: 'The Stats component returns simple statistics for numeric, string, and date fields within the document set. '
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: stats.field
+          description: 'Specifies a field for which statistics should be generated. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: >+
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/SearchVehicleStepResponse'
+    patch:
+      operationId: patchVehicleStep
+      x-vertx-event-bus: smart-village-view-enUS-VehicleStep
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - Vehicle Step
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+        - in: query
+          name: q
+          description: 'The query parameter defines a query using standard query syntax. This parameter is mandatory.'
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: 'The filter query parameter defines a query that can be used to restrict the superset of documents that can be returned, without influencing score. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: var
+          description: 'The var parameters are additional optional variables and values to pass into the application. '
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
+      requestBody:
+        description: >+
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PATCHVehicleStepRequest'
+      responses:
+        '200':
+          description: >+
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/PATCHVehicleStepResponse'
+    post:
+      operationId: postVehicleStep
+      x-vertx-event-bus: smart-village-view-enUS-VehicleStep
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - Vehicle Step
+      requestBody:
+        description: >+
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POSTVehicleStepRequest'
+      responses:
+        '200':
+          description: >+
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/POSTVehicleStepResponse'
+  /api/vehicle-step-import:
+    put:
+      operationId: putimportVehicleStep
+      x-vertx-event-bus: smart-village-view-enUS-VehicleStep
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - Vehicle Step
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+      requestBody:
+        description: >+
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PUTImportVehicleStepRequest'
+      responses:
+        '200':
+          description: >+
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/PUTImportVehicleStepResponse'
+  /api/vehicle-step/{id}:
+    get:
+      operationId: getVehicleStep
+      x-vertx-event-bus: smart-village-view-enUS-VehicleStep
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - Vehicle Step
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+        - name: id
+          in: path
+          description: >+
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: >+
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/GETVehicleStepResponse'
+  /vehicle-step/{id}:
+    get:
+      operationId: searchpageVehicleStepId
+      x-vertx-event-bus: smart-village-view-enUS-VehicleStep
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - Vehicle Step
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+        - name: id
+          in: path
+          description: >+
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: q
+          description: 'The query parameter defines a query using standard query syntax. This parameter is mandatory.'
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: 'The filter query parameter defines a query that can be used to restrict the superset of documents that can be returned, without influencing score. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: var
+          description: 'The var parameters are additional optional variables and values to pass into the application. '
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
+        - in: query
+          name: fl
+          description: 'The field list parameter limits the information included in a query response to a specified list of fields. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sort
+          description: 'The sort parameter arranges search results in either ascending (asc) or descending (desc) order. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: start
+          description: 'The start parameter specifies an offset into a query result set and instructs Solr to begin displaying results from this offset. '
+          required: false
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
+        - in: query
+          name: rows
+          description: 'The rows parameter specifies the maximum number of documents from the complete result set that Solr should return to the client at one time. '
+          required: false
+          schema:
+            type: integer
+            default: 100
+            minimum: 0
+        - in: query
+          name: facet
+          description: 'The facet parameter enables facet counts in the query response. '
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: facet.range.start
+          description: 'The facet.range.start parameter specifies the lower bound of the ranges. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.end
+          description: 'The facet.range.end specifies the upper bound of the ranges. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.gap
+          description: 'The span of each range expressed as a value to be added to the lower bound. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.pivot
+          description: 'The facet.pivot parameter defines the fields to use for the pivot. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range
+          description: 'The facet.range parameter defines the field for which Solr should create range facets. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.field
+          description: 'The facet.field parameter identifies a field that should be treated as a facet. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: d
+          description: 'The radial distance, usually in kilometers. '
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+        - in: query
+          name: pt
+          description: 'he center point using the format lat,lon if latitude & longitude. Otherwise, x,y for PointType or x y for RPT field types. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sfield
+          description: 'A spatial indexed field. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: score
+          description: '(Advanced option; not supported by LatLonType (deprecated) or PointType) If the query is used in a scoring context (e.g., as the main query in q), this local parameter determines what scores will be produced. Valid values are: none, kilometers, miles, degrees, distance, recipDistance, overlapRatio, area, area2D'
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: distanceUnits
+          description: 'This is used to specify the units for distance measurements used throughout the use of this field. This can be degrees, kilometers or miles. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: stats
+          description: 'The Stats component returns simple statistics for numeric, string, and date fields within the document set. '
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: stats.field
+          description: 'Specifies a field for which statistics should be generated. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: >+
+          content:
+            text/html; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/SearchPageVehicleStepResponse'
+  /vehicle-step:
+    get:
+      operationId: searchpageVehicleStep
+      x-vertx-event-bus: smart-village-view-enUS-VehicleStep
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - Vehicle Step
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+        - in: query
+          name: q
+          description: 'The query parameter defines a query using standard query syntax. This parameter is mandatory.'
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: 'The filter query parameter defines a query that can be used to restrict the superset of documents that can be returned, without influencing score. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: var
+          description: 'The var parameters are additional optional variables and values to pass into the application. '
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
+        - in: query
+          name: fl
+          description: 'The field list parameter limits the information included in a query response to a specified list of fields. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sort
+          description: 'The sort parameter arranges search results in either ascending (asc) or descending (desc) order. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: start
+          description: 'The start parameter specifies an offset into a query result set and instructs Solr to begin displaying results from this offset. '
+          required: false
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
+        - in: query
+          name: rows
+          description: 'The rows parameter specifies the maximum number of documents from the complete result set that Solr should return to the client at one time. '
+          required: false
+          schema:
+            type: integer
+            default: 100
+            minimum: 0
+        - in: query
+          name: facet
+          description: 'The facet parameter enables facet counts in the query response. '
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: facet.range.start
+          description: 'The facet.range.start parameter specifies the lower bound of the ranges. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.end
+          description: 'The facet.range.end specifies the upper bound of the ranges. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.gap
+          description: 'The span of each range expressed as a value to be added to the lower bound. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.pivot
+          description: 'The facet.pivot parameter defines the fields to use for the pivot. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range
+          description: 'The facet.range parameter defines the field for which Solr should create range facets. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.field
+          description: 'The facet.field parameter identifies a field that should be treated as a facet. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: d
+          description: 'The radial distance, usually in kilometers. '
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+        - in: query
+          name: pt
+          description: 'he center point using the format lat,lon if latitude & longitude. Otherwise, x,y for PointType or x y for RPT field types. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sfield
+          description: 'A spatial indexed field. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: score
+          description: '(Advanced option; not supported by LatLonType (deprecated) or PointType) If the query is used in a scoring context (e.g., as the main query in q), this local parameter determines what scores will be produced. Valid values are: none, kilometers, miles, degrees, distance, recipDistance, overlapRatio, area, area2D'
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: distanceUnits
+          description: 'This is used to specify the units for distance measurements used throughout the use of this field. This can be degrees, kilometers or miles. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: stats
+          description: 'The Stats component returns simple statistics for numeric, string, and date fields within the document set. '
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: stats.field
+          description: 'Specifies a field for which statistics should be generated. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: >+
+          content:
+            text/html; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/SearchPageVehicleStepResponse'
   /api/user:
     get:
       operationId: searchSiteUser
@@ -3636,6 +5016,96 @@ components:
         text/html; charset=utf-8:
           schema:
             $ref: '#/components/schemas/SearchPageTrafficSimulationResponse'
+    SearchTimeStepResponse:
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/SearchTimeStepResponse'
+    PATCHTimeStepRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PATCHTimeStepRequest'
+    PATCHTimeStepResponse:
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/PATCHTimeStepResponse'
+    POSTTimeStepRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/POSTTimeStepRequest'
+    POSTTimeStepResponse:
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/POSTTimeStepResponse'
+    PUTImportTimeStepRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PUTImportTimeStepRequest'
+    PUTImportTimeStepResponse:
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/PUTImportTimeStepResponse'
+    GETTimeStepResponse:
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/GETTimeStepResponse'
+    SearchPageTimeStepResponse:
+      content:
+        text/html; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/SearchPageTimeStepResponse'
+    SearchVehicleStepResponse:
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/SearchVehicleStepResponse'
+    PATCHVehicleStepRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PATCHVehicleStepRequest'
+    PATCHVehicleStepResponse:
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/PATCHVehicleStepResponse'
+    POSTVehicleStepRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/POSTVehicleStepRequest'
+    POSTVehicleStepResponse:
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/POSTVehicleStepResponse'
+    PUTImportVehicleStepRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PUTImportVehicleStepRequest'
+    PUTImportVehicleStepResponse:
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/PUTImportVehicleStepResponse'
+    GETVehicleStepResponse:
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/GETVehicleStepResponse'
+    SearchPageVehicleStepResponse:
+      content:
+        text/html; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/SearchPageVehicleStepResponse'
     SearchSiteUserResponse:
       content:
         application/json; charset=utf-8:
@@ -5671,6 +7141,10 @@ components:
           items:
             type: object
             properties:
+              SITE_DISPLAY_NAME:
+                type: string
+              STATIC_BASE_URL:
+                type: string
               pageId:
                 type: string
               courseNum:
@@ -5692,6 +7166,8 @@ components:
                 type: string
                 format: date-time
               author:
+                type: string
+              pageImageUri:
                 type: string
               archived:
                 type: boolean
@@ -5735,6 +7211,10 @@ components:
       allOf:
         - type: object
           properties:
+            SITE_DISPLAY_NAME:
+              type: string
+            STATIC_BASE_URL:
+              type: string
             pageId:
               type: string
             courseNum:
@@ -5756,6 +7236,8 @@ components:
               type: string
               format: date-time
             author:
+              type: string
+            pageImageUri:
               type: string
             archived:
               type: boolean
@@ -5799,6 +7281,10 @@ components:
       allOf:
         - type: object
           properties:
+            SITE_DISPLAY_NAME:
+              type: string
+            STATIC_BASE_URL:
+              type: string
             pageId:
               type: string
             courseNum:
@@ -5820,6 +7306,8 @@ components:
               type: string
               format: date-time
             author:
+              type: string
+            pageImageUri:
               type: string
             archived:
               type: boolean
@@ -5863,6 +7351,20 @@ components:
       allOf:
         - type: object
           properties:
+            setSITE_DISPLAY_NAME:
+              type: string
+              nullable: true
+            removeSITE_DISPLAY_NAME:
+              type: string
+            removeAllSITE_DISPLAY_NAME:
+              type: string
+            setSTATIC_BASE_URL:
+              type: string
+              nullable: true
+            removeSTATIC_BASE_URL:
+              type: string
+            removeAllSTATIC_BASE_URL:
+              type: string
             setPageId:
               type: string
               nullable: true
@@ -5938,6 +7440,13 @@ components:
             removeAuthor:
               type: string
             removeAllAuthor:
+              type: string
+            setPageImageUri:
+              type: string
+              nullable: true
+            removePageImageUri:
+              type: string
+            removeAllPageImageUri:
               type: string
             setArchived:
               type: boolean
@@ -6082,6 +7591,20 @@ components:
       allOf:
         - type: object
           properties:
+            setSITE_DISPLAY_NAME:
+              type: string
+              nullable: true
+            removeSITE_DISPLAY_NAME:
+              type: string
+            removeAllSITE_DISPLAY_NAME:
+              type: string
+            setSTATIC_BASE_URL:
+              type: string
+              nullable: true
+            removeSTATIC_BASE_URL:
+              type: string
+            removeAllSTATIC_BASE_URL:
+              type: string
             setPageId:
               type: string
               nullable: true
@@ -6157,6 +7680,13 @@ components:
             removeAuthor:
               type: string
             removeAllAuthor:
+              type: string
+            setPageImageUri:
+              type: string
+              nullable: true
+            removePageImageUri:
+              type: string
+            removeAllPageImageUri:
               type: string
             setArchived:
               type: boolean
@@ -6301,6 +7831,10 @@ components:
       allOf:
         - type: object
           properties:
+            SITE_DISPLAY_NAME:
+              type: string
+            STATIC_BASE_URL:
+              type: string
             pageId:
               type: string
             courseNum:
@@ -6322,6 +7856,8 @@ components:
               type: string
               format: date-time
             author:
+              type: string
+            pageImageUri:
               type: string
             archived:
               type: boolean
@@ -6365,6 +7901,10 @@ components:
       allOf:
         - type: object
           properties:
+            SITE_DISPLAY_NAME:
+              type: string
+            STATIC_BASE_URL:
+              type: string
             pageId:
               type: string
             courseNum:
@@ -6386,6 +7926,8 @@ components:
               type: string
               format: date-time
             author:
+              type: string
+            pageImageUri:
               type: string
             archived:
               type: boolean
@@ -6429,6 +7971,10 @@ components:
       allOf:
         - type: object
           properties:
+            SITE_DISPLAY_NAME:
+              type: string
+            STATIC_BASE_URL:
+              type: string
             pageId:
               type: string
             courseNum:
@@ -6450,6 +7996,8 @@ components:
               type: string
               format: date-time
             author:
+              type: string
+            pageImageUri:
               type: string
             archived:
               type: boolean
@@ -6657,6 +8205,1608 @@ components:
             fcdOutputGeo:
               type: boolean
     SearchPageTrafficSimulationResponse:
+      allOf:
+        - type: string
+    SearchTimeStepResponse:
+      allOf:
+        - type: array
+          items:
+            type: object
+            properties:
+              simulationKey:
+                type: string
+              time:
+                type: string
+              inheritPk:
+                type: string
+              created:
+                type: string
+                format: date-time
+              modified:
+                type: string
+                format: date-time
+              archived:
+                type: boolean
+              deleted:
+                type: boolean
+              classCanonicalName:
+                type: string
+              classSimpleName:
+                type: string
+              classCanonicalNames:
+                type: array
+                items:
+                  type: string
+              sessionId:
+                type: string
+              userKey:
+                type: string
+              saves:
+                type: array
+                items:
+                  type: string
+              objectTitle:
+                type: string
+              objectId:
+                type: string
+              objectNameVar:
+                type: string
+              objectSuggest:
+                type: string
+              objectText:
+                type: string
+              pageUrlId:
+                type: string
+              pageUrlPk:
+                type: string
+              pageUrlApi:
+                type: string
+              id:
+                type: string
+    PATCHTimeStepRequest:
+      allOf:
+        - type: object
+          properties:
+            setSimulationKey:
+              type: string
+              nullable: true
+            removeSimulationKey:
+              type: string
+            removeAllSimulationKey:
+              type: string
+            setTime:
+              type: string
+              nullable: true
+            removeTime:
+              type: string
+            removeAllTime:
+              type: string
+            setInheritPk:
+              type: string
+              nullable: true
+            removeInheritPk:
+              type: string
+            removeAllInheritPk:
+              type: string
+            setCreated:
+              type: string
+              nullable: true
+              format: date-time
+            removeCreated:
+              type: string
+              format: date-time
+            removeAllCreated:
+              type: string
+              format: date-time
+            setModified:
+              type: string
+              nullable: true
+              format: date-time
+            removeModified:
+              type: string
+              format: date-time
+            removeAllModified:
+              type: string
+              format: date-time
+            setArchived:
+              type: boolean
+              nullable: true
+            removeArchived:
+              type: boolean
+            removeAllArchived:
+              type: boolean
+            setDeleted:
+              type: boolean
+              nullable: true
+            removeDeleted:
+              type: boolean
+            removeAllDeleted:
+              type: boolean
+            setClassCanonicalName:
+              type: string
+              nullable: true
+            removeClassCanonicalName:
+              type: string
+            removeAllClassCanonicalName:
+              type: string
+            setClassSimpleName:
+              type: string
+              nullable: true
+            removeClassSimpleName:
+              type: string
+            removeAllClassSimpleName:
+              type: string
+            setClassCanonicalNames:
+              type: array
+              nullable: true
+              items:
+                type: string
+            removeClassCanonicalNames:
+              type: string
+            removeAllClassCanonicalNames:
+              type: array
+              items:
+                type: string
+            addClassCanonicalNames:
+              type: string
+            addAllClassCanonicalNames:
+              type: array
+              items:
+                type: string
+            setSessionId:
+              type: string
+              nullable: true
+            removeSessionId:
+              type: string
+            removeAllSessionId:
+              type: string
+            setUserKey:
+              type: string
+              nullable: true
+            removeUserKey:
+              type: string
+            removeAllUserKey:
+              type: string
+            setSaves:
+              type: array
+              nullable: true
+              items:
+                type: string
+            removeSaves:
+              type: string
+            removeAllSaves:
+              type: array
+              items:
+                type: string
+            addSaves:
+              type: string
+            addAllSaves:
+              type: array
+              items:
+                type: string
+            setObjectTitle:
+              type: string
+              nullable: true
+            removeObjectTitle:
+              type: string
+            removeAllObjectTitle:
+              type: string
+            setObjectId:
+              type: string
+              nullable: true
+            removeObjectId:
+              type: string
+            removeAllObjectId:
+              type: string
+            setObjectNameVar:
+              type: string
+              nullable: true
+            removeObjectNameVar:
+              type: string
+            removeAllObjectNameVar:
+              type: string
+            setObjectSuggest:
+              type: string
+              nullable: true
+            removeObjectSuggest:
+              type: string
+            removeAllObjectSuggest:
+              type: string
+            setObjectText:
+              type: string
+              nullable: true
+            removeObjectText:
+              type: string
+            removeAllObjectText:
+              type: string
+            setPageUrlId:
+              type: string
+              nullable: true
+            removePageUrlId:
+              type: string
+            removeAllPageUrlId:
+              type: string
+            setPageUrlPk:
+              type: string
+              nullable: true
+            removePageUrlPk:
+              type: string
+            removeAllPageUrlPk:
+              type: string
+            setPageUrlApi:
+              type: string
+              nullable: true
+            removePageUrlApi:
+              type: string
+            removeAllPageUrlApi:
+              type: string
+            setId:
+              type: string
+              nullable: true
+            removeId:
+              type: string
+            removeAllId:
+              type: string
+    PATCHTimeStepResponse:
+      allOf:
+        - type: object
+          properties:
+            setSimulationKey:
+              type: string
+              nullable: true
+            removeSimulationKey:
+              type: string
+            removeAllSimulationKey:
+              type: string
+            setTime:
+              type: string
+              nullable: true
+            removeTime:
+              type: string
+            removeAllTime:
+              type: string
+            setInheritPk:
+              type: string
+              nullable: true
+            removeInheritPk:
+              type: string
+            removeAllInheritPk:
+              type: string
+            setCreated:
+              type: string
+              nullable: true
+              format: date-time
+            removeCreated:
+              type: string
+              format: date-time
+            removeAllCreated:
+              type: string
+              format: date-time
+            setModified:
+              type: string
+              nullable: true
+              format: date-time
+            removeModified:
+              type: string
+              format: date-time
+            removeAllModified:
+              type: string
+              format: date-time
+            setArchived:
+              type: boolean
+              nullable: true
+            removeArchived:
+              type: boolean
+            removeAllArchived:
+              type: boolean
+            setDeleted:
+              type: boolean
+              nullable: true
+            removeDeleted:
+              type: boolean
+            removeAllDeleted:
+              type: boolean
+            setClassCanonicalName:
+              type: string
+              nullable: true
+            removeClassCanonicalName:
+              type: string
+            removeAllClassCanonicalName:
+              type: string
+            setClassSimpleName:
+              type: string
+              nullable: true
+            removeClassSimpleName:
+              type: string
+            removeAllClassSimpleName:
+              type: string
+            setClassCanonicalNames:
+              type: array
+              nullable: true
+              items:
+                type: string
+            removeClassCanonicalNames:
+              type: string
+            removeAllClassCanonicalNames:
+              type: array
+              items:
+                type: string
+            addClassCanonicalNames:
+              type: string
+            addAllClassCanonicalNames:
+              type: array
+              items:
+                type: string
+            setSessionId:
+              type: string
+              nullable: true
+            removeSessionId:
+              type: string
+            removeAllSessionId:
+              type: string
+            setUserKey:
+              type: string
+              nullable: true
+            removeUserKey:
+              type: string
+            removeAllUserKey:
+              type: string
+            setSaves:
+              type: array
+              nullable: true
+              items:
+                type: string
+            removeSaves:
+              type: string
+            removeAllSaves:
+              type: array
+              items:
+                type: string
+            addSaves:
+              type: string
+            addAllSaves:
+              type: array
+              items:
+                type: string
+            setObjectTitle:
+              type: string
+              nullable: true
+            removeObjectTitle:
+              type: string
+            removeAllObjectTitle:
+              type: string
+            setObjectId:
+              type: string
+              nullable: true
+            removeObjectId:
+              type: string
+            removeAllObjectId:
+              type: string
+            setObjectNameVar:
+              type: string
+              nullable: true
+            removeObjectNameVar:
+              type: string
+            removeAllObjectNameVar:
+              type: string
+            setObjectSuggest:
+              type: string
+              nullable: true
+            removeObjectSuggest:
+              type: string
+            removeAllObjectSuggest:
+              type: string
+            setObjectText:
+              type: string
+              nullable: true
+            removeObjectText:
+              type: string
+            removeAllObjectText:
+              type: string
+            setPageUrlId:
+              type: string
+              nullable: true
+            removePageUrlId:
+              type: string
+            removeAllPageUrlId:
+              type: string
+            setPageUrlPk:
+              type: string
+              nullable: true
+            removePageUrlPk:
+              type: string
+            removeAllPageUrlPk:
+              type: string
+            setPageUrlApi:
+              type: string
+              nullable: true
+            removePageUrlApi:
+              type: string
+            removeAllPageUrlApi:
+              type: string
+            setId:
+              type: string
+              nullable: true
+            removeId:
+              type: string
+            removeAllId:
+              type: string
+    POSTTimeStepRequest:
+      allOf:
+        - type: object
+          properties:
+            simulationKey:
+              type: string
+            time:
+              type: string
+            inheritPk:
+              type: string
+            created:
+              type: string
+              format: date-time
+            modified:
+              type: string
+              format: date-time
+            archived:
+              type: boolean
+            deleted:
+              type: boolean
+            classCanonicalName:
+              type: string
+            classSimpleName:
+              type: string
+            classCanonicalNames:
+              type: array
+              items:
+                type: string
+            sessionId:
+              type: string
+            userKey:
+              type: string
+            saves:
+              type: array
+              items:
+                type: string
+            objectTitle:
+              type: string
+            objectId:
+              type: string
+            objectNameVar:
+              type: string
+            objectSuggest:
+              type: string
+            objectText:
+              type: string
+            pageUrlId:
+              type: string
+            pageUrlPk:
+              type: string
+            pageUrlApi:
+              type: string
+            id:
+              type: string
+    POSTTimeStepResponse:
+      allOf:
+        - type: object
+          properties:
+            simulationKey:
+              type: string
+            time:
+              type: string
+            inheritPk:
+              type: string
+            created:
+              type: string
+              format: date-time
+            modified:
+              type: string
+              format: date-time
+            archived:
+              type: boolean
+            deleted:
+              type: boolean
+            classCanonicalName:
+              type: string
+            classSimpleName:
+              type: string
+            classCanonicalNames:
+              type: array
+              items:
+                type: string
+            sessionId:
+              type: string
+            userKey:
+              type: string
+            saves:
+              type: array
+              items:
+                type: string
+            objectTitle:
+              type: string
+            objectId:
+              type: string
+            objectNameVar:
+              type: string
+            objectSuggest:
+              type: string
+            objectText:
+              type: string
+            pageUrlId:
+              type: string
+            pageUrlPk:
+              type: string
+            pageUrlApi:
+              type: string
+            id:
+              type: string
+    PUTImportTimeStepRequest:
+      allOf:
+        - type: object
+          properties:
+            simulationKey:
+              type: string
+            time:
+              type: string
+            inheritPk:
+              type: string
+            created:
+              type: string
+              format: date-time
+            modified:
+              type: string
+              format: date-time
+            archived:
+              type: boolean
+            deleted:
+              type: boolean
+            classCanonicalName:
+              type: string
+            classSimpleName:
+              type: string
+            classCanonicalNames:
+              type: array
+              items:
+                type: string
+            sessionId:
+              type: string
+            userKey:
+              type: string
+            saves:
+              type: array
+              items:
+                type: string
+            objectTitle:
+              type: string
+            objectId:
+              type: string
+            objectNameVar:
+              type: string
+            objectSuggest:
+              type: string
+            objectText:
+              type: string
+            pageUrlId:
+              type: string
+            pageUrlPk:
+              type: string
+            pageUrlApi:
+              type: string
+            id:
+              type: string
+    PUTImportTimeStepResponse:
+      allOf:
+        - type: object
+          properties:
+            simulationKey:
+              type: string
+            time:
+              type: string
+            inheritPk:
+              type: string
+            created:
+              type: string
+              format: date-time
+            modified:
+              type: string
+              format: date-time
+            archived:
+              type: boolean
+            deleted:
+              type: boolean
+            classCanonicalName:
+              type: string
+            classSimpleName:
+              type: string
+            classCanonicalNames:
+              type: array
+              items:
+                type: string
+            sessionId:
+              type: string
+            userKey:
+              type: string
+            saves:
+              type: array
+              items:
+                type: string
+            objectTitle:
+              type: string
+            objectId:
+              type: string
+            objectNameVar:
+              type: string
+            objectSuggest:
+              type: string
+            objectText:
+              type: string
+            pageUrlId:
+              type: string
+            pageUrlPk:
+              type: string
+            pageUrlApi:
+              type: string
+            id:
+              type: string
+    GETTimeStepResponse:
+      allOf:
+        - type: object
+          properties:
+            simulationKey:
+              type: string
+            time:
+              type: string
+            inheritPk:
+              type: string
+            created:
+              type: string
+              format: date-time
+            modified:
+              type: string
+              format: date-time
+            archived:
+              type: boolean
+            deleted:
+              type: boolean
+            classCanonicalName:
+              type: string
+            classSimpleName:
+              type: string
+            classCanonicalNames:
+              type: array
+              items:
+                type: string
+            sessionId:
+              type: string
+            userKey:
+              type: string
+            saves:
+              type: array
+              items:
+                type: string
+            objectTitle:
+              type: string
+            objectId:
+              type: string
+            objectNameVar:
+              type: string
+            objectSuggest:
+              type: string
+            objectText:
+              type: string
+            pageUrlId:
+              type: string
+            pageUrlPk:
+              type: string
+            pageUrlApi:
+              type: string
+            id:
+              type: string
+    SearchPageTimeStepResponse:
+      allOf:
+        - type: string
+    SearchVehicleStepResponse:
+      allOf:
+        - type: array
+          items:
+            type: object
+            properties:
+              simulationKey:
+                type: string
+              timeStepKey:
+                type: string
+              time:
+                type: string
+              location:
+                type: string
+              vehicleId:
+                type: string
+              vehicleType:
+                type: string
+              angle:
+                type: string
+              speed:
+                type: string
+              pos:
+                type: string
+              slope:
+                type: string
+              inheritPk:
+                type: string
+              created:
+                type: string
+                format: date-time
+              modified:
+                type: string
+                format: date-time
+              archived:
+                type: boolean
+              deleted:
+                type: boolean
+              classCanonicalName:
+                type: string
+              classSimpleName:
+                type: string
+              classCanonicalNames:
+                type: array
+                items:
+                  type: string
+              sessionId:
+                type: string
+              userKey:
+                type: string
+              saves:
+                type: array
+                items:
+                  type: string
+              objectTitle:
+                type: string
+              objectId:
+                type: string
+              objectNameVar:
+                type: string
+              objectSuggest:
+                type: string
+              objectText:
+                type: string
+              pageUrlId:
+                type: string
+              pageUrlPk:
+                type: string
+              pageUrlApi:
+                type: string
+              id:
+                type: string
+    PATCHVehicleStepRequest:
+      allOf:
+        - type: object
+          properties:
+            setSimulationKey:
+              type: string
+              nullable: true
+            removeSimulationKey:
+              type: string
+            removeAllSimulationKey:
+              type: string
+            setTimeStepKey:
+              type: string
+              nullable: true
+            removeTimeStepKey:
+              type: string
+            removeAllTimeStepKey:
+              type: string
+            setTime:
+              type: string
+              nullable: true
+            removeTime:
+              type: string
+            removeAllTime:
+              type: string
+            setLocation:
+              type: string
+              nullable: true
+            removeLocation:
+              type: string
+            removeAllLocation:
+              type: string
+            setVehicleId:
+              type: string
+              nullable: true
+            removeVehicleId:
+              type: string
+            removeAllVehicleId:
+              type: string
+            setVehicleType:
+              type: string
+              nullable: true
+            removeVehicleType:
+              type: string
+            removeAllVehicleType:
+              type: string
+            setAngle:
+              type: string
+              nullable: true
+            removeAngle:
+              type: string
+            removeAllAngle:
+              type: string
+            setSpeed:
+              type: string
+              nullable: true
+            removeSpeed:
+              type: string
+            removeAllSpeed:
+              type: string
+            setPos:
+              type: string
+              nullable: true
+            removePos:
+              type: string
+            removeAllPos:
+              type: string
+            setSlope:
+              type: string
+              nullable: true
+            removeSlope:
+              type: string
+            removeAllSlope:
+              type: string
+            setInheritPk:
+              type: string
+              nullable: true
+            removeInheritPk:
+              type: string
+            removeAllInheritPk:
+              type: string
+            setCreated:
+              type: string
+              nullable: true
+              format: date-time
+            removeCreated:
+              type: string
+              format: date-time
+            removeAllCreated:
+              type: string
+              format: date-time
+            setModified:
+              type: string
+              nullable: true
+              format: date-time
+            removeModified:
+              type: string
+              format: date-time
+            removeAllModified:
+              type: string
+              format: date-time
+            setArchived:
+              type: boolean
+              nullable: true
+            removeArchived:
+              type: boolean
+            removeAllArchived:
+              type: boolean
+            setDeleted:
+              type: boolean
+              nullable: true
+            removeDeleted:
+              type: boolean
+            removeAllDeleted:
+              type: boolean
+            setClassCanonicalName:
+              type: string
+              nullable: true
+            removeClassCanonicalName:
+              type: string
+            removeAllClassCanonicalName:
+              type: string
+            setClassSimpleName:
+              type: string
+              nullable: true
+            removeClassSimpleName:
+              type: string
+            removeAllClassSimpleName:
+              type: string
+            setClassCanonicalNames:
+              type: array
+              nullable: true
+              items:
+                type: string
+            removeClassCanonicalNames:
+              type: string
+            removeAllClassCanonicalNames:
+              type: array
+              items:
+                type: string
+            addClassCanonicalNames:
+              type: string
+            addAllClassCanonicalNames:
+              type: array
+              items:
+                type: string
+            setSessionId:
+              type: string
+              nullable: true
+            removeSessionId:
+              type: string
+            removeAllSessionId:
+              type: string
+            setUserKey:
+              type: string
+              nullable: true
+            removeUserKey:
+              type: string
+            removeAllUserKey:
+              type: string
+            setSaves:
+              type: array
+              nullable: true
+              items:
+                type: string
+            removeSaves:
+              type: string
+            removeAllSaves:
+              type: array
+              items:
+                type: string
+            addSaves:
+              type: string
+            addAllSaves:
+              type: array
+              items:
+                type: string
+            setObjectTitle:
+              type: string
+              nullable: true
+            removeObjectTitle:
+              type: string
+            removeAllObjectTitle:
+              type: string
+            setObjectId:
+              type: string
+              nullable: true
+            removeObjectId:
+              type: string
+            removeAllObjectId:
+              type: string
+            setObjectNameVar:
+              type: string
+              nullable: true
+            removeObjectNameVar:
+              type: string
+            removeAllObjectNameVar:
+              type: string
+            setObjectSuggest:
+              type: string
+              nullable: true
+            removeObjectSuggest:
+              type: string
+            removeAllObjectSuggest:
+              type: string
+            setObjectText:
+              type: string
+              nullable: true
+            removeObjectText:
+              type: string
+            removeAllObjectText:
+              type: string
+            setPageUrlId:
+              type: string
+              nullable: true
+            removePageUrlId:
+              type: string
+            removeAllPageUrlId:
+              type: string
+            setPageUrlPk:
+              type: string
+              nullable: true
+            removePageUrlPk:
+              type: string
+            removeAllPageUrlPk:
+              type: string
+            setPageUrlApi:
+              type: string
+              nullable: true
+            removePageUrlApi:
+              type: string
+            removeAllPageUrlApi:
+              type: string
+            setId:
+              type: string
+              nullable: true
+            removeId:
+              type: string
+            removeAllId:
+              type: string
+    PATCHVehicleStepResponse:
+      allOf:
+        - type: object
+          properties:
+            setSimulationKey:
+              type: string
+              nullable: true
+            removeSimulationKey:
+              type: string
+            removeAllSimulationKey:
+              type: string
+            setTimeStepKey:
+              type: string
+              nullable: true
+            removeTimeStepKey:
+              type: string
+            removeAllTimeStepKey:
+              type: string
+            setTime:
+              type: string
+              nullable: true
+            removeTime:
+              type: string
+            removeAllTime:
+              type: string
+            setLocation:
+              type: string
+              nullable: true
+            removeLocation:
+              type: string
+            removeAllLocation:
+              type: string
+            setVehicleId:
+              type: string
+              nullable: true
+            removeVehicleId:
+              type: string
+            removeAllVehicleId:
+              type: string
+            setVehicleType:
+              type: string
+              nullable: true
+            removeVehicleType:
+              type: string
+            removeAllVehicleType:
+              type: string
+            setAngle:
+              type: string
+              nullable: true
+            removeAngle:
+              type: string
+            removeAllAngle:
+              type: string
+            setSpeed:
+              type: string
+              nullable: true
+            removeSpeed:
+              type: string
+            removeAllSpeed:
+              type: string
+            setPos:
+              type: string
+              nullable: true
+            removePos:
+              type: string
+            removeAllPos:
+              type: string
+            setSlope:
+              type: string
+              nullable: true
+            removeSlope:
+              type: string
+            removeAllSlope:
+              type: string
+            setInheritPk:
+              type: string
+              nullable: true
+            removeInheritPk:
+              type: string
+            removeAllInheritPk:
+              type: string
+            setCreated:
+              type: string
+              nullable: true
+              format: date-time
+            removeCreated:
+              type: string
+              format: date-time
+            removeAllCreated:
+              type: string
+              format: date-time
+            setModified:
+              type: string
+              nullable: true
+              format: date-time
+            removeModified:
+              type: string
+              format: date-time
+            removeAllModified:
+              type: string
+              format: date-time
+            setArchived:
+              type: boolean
+              nullable: true
+            removeArchived:
+              type: boolean
+            removeAllArchived:
+              type: boolean
+            setDeleted:
+              type: boolean
+              nullable: true
+            removeDeleted:
+              type: boolean
+            removeAllDeleted:
+              type: boolean
+            setClassCanonicalName:
+              type: string
+              nullable: true
+            removeClassCanonicalName:
+              type: string
+            removeAllClassCanonicalName:
+              type: string
+            setClassSimpleName:
+              type: string
+              nullable: true
+            removeClassSimpleName:
+              type: string
+            removeAllClassSimpleName:
+              type: string
+            setClassCanonicalNames:
+              type: array
+              nullable: true
+              items:
+                type: string
+            removeClassCanonicalNames:
+              type: string
+            removeAllClassCanonicalNames:
+              type: array
+              items:
+                type: string
+            addClassCanonicalNames:
+              type: string
+            addAllClassCanonicalNames:
+              type: array
+              items:
+                type: string
+            setSessionId:
+              type: string
+              nullable: true
+            removeSessionId:
+              type: string
+            removeAllSessionId:
+              type: string
+            setUserKey:
+              type: string
+              nullable: true
+            removeUserKey:
+              type: string
+            removeAllUserKey:
+              type: string
+            setSaves:
+              type: array
+              nullable: true
+              items:
+                type: string
+            removeSaves:
+              type: string
+            removeAllSaves:
+              type: array
+              items:
+                type: string
+            addSaves:
+              type: string
+            addAllSaves:
+              type: array
+              items:
+                type: string
+            setObjectTitle:
+              type: string
+              nullable: true
+            removeObjectTitle:
+              type: string
+            removeAllObjectTitle:
+              type: string
+            setObjectId:
+              type: string
+              nullable: true
+            removeObjectId:
+              type: string
+            removeAllObjectId:
+              type: string
+            setObjectNameVar:
+              type: string
+              nullable: true
+            removeObjectNameVar:
+              type: string
+            removeAllObjectNameVar:
+              type: string
+            setObjectSuggest:
+              type: string
+              nullable: true
+            removeObjectSuggest:
+              type: string
+            removeAllObjectSuggest:
+              type: string
+            setObjectText:
+              type: string
+              nullable: true
+            removeObjectText:
+              type: string
+            removeAllObjectText:
+              type: string
+            setPageUrlId:
+              type: string
+              nullable: true
+            removePageUrlId:
+              type: string
+            removeAllPageUrlId:
+              type: string
+            setPageUrlPk:
+              type: string
+              nullable: true
+            removePageUrlPk:
+              type: string
+            removeAllPageUrlPk:
+              type: string
+            setPageUrlApi:
+              type: string
+              nullable: true
+            removePageUrlApi:
+              type: string
+            removeAllPageUrlApi:
+              type: string
+            setId:
+              type: string
+              nullable: true
+            removeId:
+              type: string
+            removeAllId:
+              type: string
+    POSTVehicleStepRequest:
+      allOf:
+        - type: object
+          properties:
+            simulationKey:
+              type: string
+            timeStepKey:
+              type: string
+            time:
+              type: string
+            location:
+              type: string
+            vehicleId:
+              type: string
+            vehicleType:
+              type: string
+            angle:
+              type: string
+            speed:
+              type: string
+            pos:
+              type: string
+            slope:
+              type: string
+            inheritPk:
+              type: string
+            created:
+              type: string
+              format: date-time
+            modified:
+              type: string
+              format: date-time
+            archived:
+              type: boolean
+            deleted:
+              type: boolean
+            classCanonicalName:
+              type: string
+            classSimpleName:
+              type: string
+            classCanonicalNames:
+              type: array
+              items:
+                type: string
+            sessionId:
+              type: string
+            userKey:
+              type: string
+            saves:
+              type: array
+              items:
+                type: string
+            objectTitle:
+              type: string
+            objectId:
+              type: string
+            objectNameVar:
+              type: string
+            objectSuggest:
+              type: string
+            objectText:
+              type: string
+            pageUrlId:
+              type: string
+            pageUrlPk:
+              type: string
+            pageUrlApi:
+              type: string
+            id:
+              type: string
+    POSTVehicleStepResponse:
+      allOf:
+        - type: object
+          properties:
+            simulationKey:
+              type: string
+            timeStepKey:
+              type: string
+            time:
+              type: string
+            location:
+              type: string
+            vehicleId:
+              type: string
+            vehicleType:
+              type: string
+            angle:
+              type: string
+            speed:
+              type: string
+            pos:
+              type: string
+            slope:
+              type: string
+            inheritPk:
+              type: string
+            created:
+              type: string
+              format: date-time
+            modified:
+              type: string
+              format: date-time
+            archived:
+              type: boolean
+            deleted:
+              type: boolean
+            classCanonicalName:
+              type: string
+            classSimpleName:
+              type: string
+            classCanonicalNames:
+              type: array
+              items:
+                type: string
+            sessionId:
+              type: string
+            userKey:
+              type: string
+            saves:
+              type: array
+              items:
+                type: string
+            objectTitle:
+              type: string
+            objectId:
+              type: string
+            objectNameVar:
+              type: string
+            objectSuggest:
+              type: string
+            objectText:
+              type: string
+            pageUrlId:
+              type: string
+            pageUrlPk:
+              type: string
+            pageUrlApi:
+              type: string
+            id:
+              type: string
+    PUTImportVehicleStepRequest:
+      allOf:
+        - type: object
+          properties:
+            simulationKey:
+              type: string
+            timeStepKey:
+              type: string
+            time:
+              type: string
+            location:
+              type: string
+            vehicleId:
+              type: string
+            vehicleType:
+              type: string
+            angle:
+              type: string
+            speed:
+              type: string
+            pos:
+              type: string
+            slope:
+              type: string
+            inheritPk:
+              type: string
+            created:
+              type: string
+              format: date-time
+            modified:
+              type: string
+              format: date-time
+            archived:
+              type: boolean
+            deleted:
+              type: boolean
+            classCanonicalName:
+              type: string
+            classSimpleName:
+              type: string
+            classCanonicalNames:
+              type: array
+              items:
+                type: string
+            sessionId:
+              type: string
+            userKey:
+              type: string
+            saves:
+              type: array
+              items:
+                type: string
+            objectTitle:
+              type: string
+            objectId:
+              type: string
+            objectNameVar:
+              type: string
+            objectSuggest:
+              type: string
+            objectText:
+              type: string
+            pageUrlId:
+              type: string
+            pageUrlPk:
+              type: string
+            pageUrlApi:
+              type: string
+            id:
+              type: string
+    PUTImportVehicleStepResponse:
+      allOf:
+        - type: object
+          properties:
+            simulationKey:
+              type: string
+            timeStepKey:
+              type: string
+            time:
+              type: string
+            location:
+              type: string
+            vehicleId:
+              type: string
+            vehicleType:
+              type: string
+            angle:
+              type: string
+            speed:
+              type: string
+            pos:
+              type: string
+            slope:
+              type: string
+            inheritPk:
+              type: string
+            created:
+              type: string
+              format: date-time
+            modified:
+              type: string
+              format: date-time
+            archived:
+              type: boolean
+            deleted:
+              type: boolean
+            classCanonicalName:
+              type: string
+            classSimpleName:
+              type: string
+            classCanonicalNames:
+              type: array
+              items:
+                type: string
+            sessionId:
+              type: string
+            userKey:
+              type: string
+            saves:
+              type: array
+              items:
+                type: string
+            objectTitle:
+              type: string
+            objectId:
+              type: string
+            objectNameVar:
+              type: string
+            objectSuggest:
+              type: string
+            objectText:
+              type: string
+            pageUrlId:
+              type: string
+            pageUrlPk:
+              type: string
+            pageUrlApi:
+              type: string
+            id:
+              type: string
+    GETVehicleStepResponse:
+      allOf:
+        - type: object
+          properties:
+            simulationKey:
+              type: string
+            timeStepKey:
+              type: string
+            time:
+              type: string
+            location:
+              type: string
+            vehicleId:
+              type: string
+            vehicleType:
+              type: string
+            angle:
+              type: string
+            speed:
+              type: string
+            pos:
+              type: string
+            slope:
+              type: string
+            inheritPk:
+              type: string
+            created:
+              type: string
+              format: date-time
+            modified:
+              type: string
+              format: date-time
+            archived:
+              type: boolean
+            deleted:
+              type: boolean
+            classCanonicalName:
+              type: string
+            classSimpleName:
+              type: string
+            classCanonicalNames:
+              type: array
+              items:
+                type: string
+            sessionId:
+              type: string
+            userKey:
+              type: string
+            saves:
+              type: array
+              items:
+                type: string
+            objectTitle:
+              type: string
+            objectId:
+              type: string
+            objectNameVar:
+              type: string
+            objectSuggest:
+              type: string
+            objectText:
+              type: string
+            pageUrlId:
+              type: string
+            pageUrlPk:
+              type: string
+            pageUrlApi:
+              type: string
+            id:
+              type: string
+    SearchPageVehicleStepResponse:
       allOf:
         - type: string
     SearchSiteUserResponse:
