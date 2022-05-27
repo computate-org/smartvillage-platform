@@ -10,7 +10,7 @@ author:
   title: Red Hat Principal Software Consultant
 htmTitle:
   - text: Kubernetes and OpenShift Components of the {{ page.SITE_DISPLAY_NAME }}
-pageImageUri: /png/page/kubernetes-components/k8s-components.png
+pageImageUri: /png/k8s-components-sample.png
 htmBody:
   - e: h1
     a:
@@ -29,7 +29,14 @@ htmBody:
       - e: div
         a:
           class: font-weight-bold font-style-italic
-        text: "{{ author.title }}"
+        in:
+          - e: i
+            a:
+              class: fa-brands fa-redhat w3-text-red
+          - e: span
+            a:
+              class: font-weight-bold 
+            text: "{{ author.title }}"
   - e: p
     text: |-
       Kubernetes is for developers who want to run their applications in the cloud, interact with them, and scale them in a well defined API (Application Programming Interface). 

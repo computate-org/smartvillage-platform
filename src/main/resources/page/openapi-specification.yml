@@ -1,0 +1,60 @@
+---
+uri: /en-us/openapi-specification
+h1: What APIs are used in the {{ page.SITE_DISPLAY_NAME }}? 
+h2: Discover the OpenAPI 3 specification for the project
+created: "2022-05-27"
+courseNum: 1
+lessonNum: 10
+author:
+  name: Christopher Tate
+  title: Red Hat Principal Software Consultant
+htmTitle:
+  - text: OpenAPI specification of the {{ page.SITE_DISPLAY_NAME }}
+pageImageUri: /png/openapi-spec-sample.png
+htmBody:
+  - e: h1
+    a:
+      class: w3-text-2017-shaded-spruce w3-monospace 
+    text: "{{ page.h1 }}"
+  - e: h2
+    a:
+      class: w3-text-2017-shaded-spruce w3-monospace 
+    text: "{{ page.h2 }}"
+  - e: div
+    a:
+      class: font-style-italic 
+    text: 'Created {{formatZonedDateTime created "EEE MMM d yyyy" "en-US" "America/Denver" }}'
+  - e: a
+    a:
+      target: _new
+      href: https://studio-ws.apicur.io/sharing/bcd69fc4-cc10-40c1-bb40-03ddfe5cf050
+    in:
+      - e: img
+        a:
+          class: w3-image w3-padding-16 
+          src: "{{ page.STATIC_BASE_URL }}{{ pageImageUri }}"
+  - e: p
+    in:
+      - e: div
+        a:
+          class: font-weight-bold 
+        text: "By {{ author.name }}"
+      - e: div
+        a:
+          class: font-weight-bold font-style-italic
+        in:
+          - e: i
+            a:
+              class: fa-brands fa-redhat w3-text-red
+          - e: span
+            a:
+              class: font-weight-bold 
+            text: "{{ author.title }}"
+  - e: p
+    text: |-
+      Here is a link to the OpenAPI specification for the {{ page.SITE_DISPLAY_NAME }}: 
+  - e: a
+    a:
+      target: _new
+      href: https://studio-ws.apicur.io/sharing/bcd69fc4-cc10-40c1-bb40-03ddfe5cf050
+    text: https://studio-ws.apicur.io/sharing/bcd69fc4-cc10-40c1-bb40-03ddfe5cf050

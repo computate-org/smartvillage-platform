@@ -13,6 +13,7 @@ htmTitle:
 os:
   name: Red Hat Enterprise Linux
   abbreviation: RHEL8
+pageImageUri: /png/rhel-9-sample.png
 htmBody:
   - e: h1
     a:
@@ -31,7 +32,19 @@ htmBody:
       - e: div
         a:
           class: font-weight-bold font-style-italic
-        text: "{{ author.title }}"
+        in:
+          - e: i
+            a:
+              class: fa-brands fa-redhat w3-text-red
+          - e: span
+            a:
+              class: font-weight-bold 
+            text: "{{ author.title }}"
+  - e: img
+    a:
+      class: w3-image w3-padding-16 
+      style: "width: 500px; "
+      src: "{{ page.STATIC_BASE_URL }}{{ pageImageUri }}"
   - e: p
     text: |-
       Are you wondering, how do I pick an operating system to develop my website? Between Windows, Mac and many versions of Linux, which one is the most stable, helpful and secure? 
