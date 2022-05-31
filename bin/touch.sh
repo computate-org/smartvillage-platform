@@ -10,3 +10,10 @@ touch /home/ctate/.local/src/smart-village-view/src/main/java/org/computate/smar
 touch /home/ctate/.local/src/smart-village-view/src/main/java/org/computate/smartvillageview/enus/model/base/BaseModel.java
 touch /home/ctate/.local/src/smart-village-view/src/main/java/org/computate/smartvillageview/enus/model/user/SiteUser.java
 touch /home/ctate/.local/src/smart-village-view/src/main/java/org/computate/smartvillageview/enus/model/iotnode/IotNode.java
+touch /home/ctate/.local/src/smart-village-view/src/main/java/org/computate/smartvillageview/enus/model/htm/SiteHtm.java
+touch /home/ctate/.local/src/smart-village-view/src/main/java/org/computate/smartvillageview/enus/model/page/SitePage.java
+touch /home/ctate/.local/src/smart-village-view/src/main/java/org/computate/smartvillageview/enus/model/traffic/time/step/TimeStep.java
+touch /home/ctate/.local/src/smart-village-view/src/main/java/org/computate/smartvillageview/enus/model/traffic/simulation/TrafficSimulation.java
+touch /home/ctate/.local/src/smart-village-view/src/main/java/org/computate/smartvillageview/enus/model/traffic/vehicle/step/VehicleStep.java
+touch /home/ctate/.local/src/smart-village-view/src/main/java/org/computate/smartvillageview/enus/model/traffic/vehicle/step/VehicleStep.java
+

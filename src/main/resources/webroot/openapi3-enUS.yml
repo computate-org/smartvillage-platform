@@ -7,7 +7,7 @@ paths:
   /callback:
     get:
       operationId: callback
-      x-vertx-event-bus: choice-reports-enUS-callback
+      x-vertx-event-bus: smart-village-view-enUS-callback
       description: >+
       responses:
         '200':
@@ -20,7 +20,7 @@ paths:
   /logout:
     get:
       operationId: logout
-      x-vertx-event-bus: choice-reports-enUS-logout
+      x-vertx-event-bus: smart-village-view-enUS-logout
       description: >+
       responses:
         '200':
@@ -2383,7 +2383,7 @@ paths:
         description: >+
         required: true
         content:
-          application/json:
+          application/xml:
             schema:
               $ref: '#/components/schemas/PUTImportTrafficSimulationRequest'
       responses:
