@@ -2696,10 +2696,6 @@ public abstract class SiteHtmGen<DEV> extends Object {
 				return "tabs";
 			case "newLine_docvalues_boolean":
 				return "newLine";
-			case "htmBefore_stored_string":
-				return "htmBefore";
-			case "htmAfter_stored_string":
-				return "htmAfter";
 			case "classCanonicalName_docvalues_string":
 				return "classCanonicalName";
 			case "classSimpleName_docvalues_string":

@@ -46,4 +46,24 @@ public class ConfigKeys extends ComputateVertxConfigKeys {
 	 * 
 	 **/
 	public static final String YGGIO_PASSWORD = "YGGIO_PASSWORD";
+
+	/**
+	 * The name Github organization for the site. 
+	 **/
+	public static final String GITHUB_ORG = "GITHUB_ORG";
+
+	/**
+	 * The project powered by URL. 
+	 **/
+	public static final String PROJECT_POWERED_BY_URL = "PROJECT_POWERED_BY_URL";
+
+	/**
+	 * The project powered by organization name. 
+	 **/
+	public static final String PROJECT_POWERED_BY_NAME = "PROJECT_POWERED_BY_NAME";
+
+	/**
+	 * The project powered by image relative URI. 
+	 **/
+	public static final String PROJECT_POWERED_BY_IMAGE_URI = "PROJECT_POWERED_BY_IMAGE_URI";
 }

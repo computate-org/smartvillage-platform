@@ -767,12 +767,12 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 			if(config().getBoolean(ConfigKeys.ENABLE_REFRESH_DATA, false)) {
 				LOG.info(refreshAllDataStarted);
 				refreshData("SiteUser").onSuccess(q -> {
-					refreshData("IotNode").onSuccess(q1 -> {
-						refreshData("TrafficSimulation").onSuccess(q2 -> {
-							refreshData("SiteHtm").onSuccess(q3 -> {
-								refreshData("TimeStep").onSuccess(q4 -> {
-									refreshData("VehicleStep").onSuccess(q5 -> {
-										refreshData("SitePage").onSuccess(q6 -> {
+					refreshData("SiteHtm").onSuccess(q1 -> {
+						refreshData("TimeStep").onSuccess(q2 -> {
+							refreshData("VehicleStep").onSuccess(q3 -> {
+								refreshData("SitePage").onSuccess(q4 -> {
+									refreshData("TrafficSimulation").onSuccess(q5 -> {
+										refreshData("IotNode").onSuccess(q6 -> {
 											LOG.info(refreshAllDataComplete);
 											promise.complete();
 										}).onFailure(ex -> {

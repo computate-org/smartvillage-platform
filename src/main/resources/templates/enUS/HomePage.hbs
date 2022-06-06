@@ -22,6 +22,7 @@
 {{#block "htmBodyMenu"}}{{/block}}
 </div>
 {{>htmBodyPageLayout}}
+{{#block "htmBodyStart"}}{{/block}}
 <div class="w3-content w3-row ">
 {{#each listSitePage}}
 	<div class="w3-quarter ">
@@ -37,6 +38,7 @@
 	</div>
 {{/each}}
 </div>
+{{#block "htmBodyEnd"}}{{/block}}
 {{/partial}}
 {{#partial "htmBodyStart"}}{{> htmBodyStartPageLayout}}
 <!-- Header -->

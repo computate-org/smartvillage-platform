@@ -1,5 +1,8 @@
 ---
 GITHUB_ORG: "computate-org"
+PROJECT_POWERED_BY_URL: "https://www.operate-first.cloud/"
+PROJECT_POWERED_BY_NAME: "Operate First"
+PROJECT_POWERED_BY_IMAGE_URI: "/png/operate-first-logo.png"
 SITE_NAME: "smart-village-view"
 SITE_DISPLAY_NAME: "Smart Village Project"
 SITE_SERVICES:

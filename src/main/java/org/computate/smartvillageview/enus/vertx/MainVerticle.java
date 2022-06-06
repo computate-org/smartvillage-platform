@@ -33,12 +33,12 @@ import org.computate.smartvillageview.enus.page.dynamic.DynamicPage;
 import org.computate.smartvillageview.enus.model.user.SiteUserEnUSGenApiService;
 import org.computate.smartvillageview.enus.model.page.SitePageEnUSGenApiService;
 import org.computate.smartvillageview.enus.model.htm.SiteHtmEnUSGenApiService;
-import org.computate.smartvillageview.enus.model.iotnode.IotNodeEnUSGenApiService;
-import org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulationEnUSGenApiService;
 import org.computate.smartvillageview.enus.model.htm.SiteHtmEnUSGenApiService;
 import org.computate.smartvillageview.enus.model.traffic.time.step.TimeStepEnUSGenApiService;
 import org.computate.smartvillageview.enus.model.traffic.vehicle.step.VehicleStepEnUSGenApiService;
 import org.computate.smartvillageview.enus.model.page.SitePageEnUSGenApiService;
+import org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulationEnUSGenApiService;
+import org.computate.smartvillageview.enus.model.iotnode.IotNodeEnUSGenApiService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -772,12 +772,12 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 		Promise<Void> promise = Promise.promise();
 		try {
 			SiteUserEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
-			IotNodeEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
-			TrafficSimulationEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
 			SiteHtmEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
 			TimeStepEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
 			VehicleStepEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
 			SitePageEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
+			TrafficSimulationEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
+			IotNodeEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
 
 			LOG.info(configureApiComplete);
 			promise.complete();
@@ -848,6 +848,13 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 						page.setUri(uri);
 						page.promiseDeepForClass(siteRequest).onSuccess(b -> {
 							JsonObject json = JsonObject.mapFrom(page);
+							json.put(ConfigKeys.STATIC_BASE_URL, config().getString(ConfigKeys.STATIC_BASE_URL));
+							json.put(ConfigKeys.GITHUB_ORG, config().getString(ConfigKeys.GITHUB_ORG));
+							json.put(ConfigKeys.SITE_NAME, config().getString(ConfigKeys.SITE_NAME));
+							json.put(ConfigKeys.SITE_DISPLAY_NAME, config().getString(ConfigKeys.SITE_DISPLAY_NAME));
+							json.put(ConfigKeys.PROJECT_POWERED_BY_URL, config().getString(ConfigKeys.PROJECT_POWERED_BY_URL));
+							json.put(ConfigKeys.PROJECT_POWERED_BY_NAME, config().getString(ConfigKeys.PROJECT_POWERED_BY_NAME));
+							json.put(ConfigKeys.PROJECT_POWERED_BY_IMAGE_URI, config().getString(ConfigKeys.PROJECT_POWERED_BY_IMAGE_URI));
 							templateEngine.render(json, Optional.ofNullable(config().getString(ConfigKeys.TEMPLATE_PATH)).orElse("templates") + "/" + lang + "/DynamicPage").onSuccess(buffer -> {
 								try {
 									ctx.response().end(buffer);
@@ -874,6 +881,16 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 				});
 			});
 
+			router.get("/template/*").handler(ctx -> {
+				ctx.put(ConfigKeys.STATIC_BASE_URL, config().getString(ConfigKeys.STATIC_BASE_URL));
+				ctx.put(ConfigKeys.GITHUB_ORG, config().getString(ConfigKeys.GITHUB_ORG));
+				ctx.put(ConfigKeys.SITE_NAME, config().getString(ConfigKeys.SITE_NAME));
+				ctx.put(ConfigKeys.SITE_DISPLAY_NAME, config().getString(ConfigKeys.SITE_DISPLAY_NAME));
+				ctx.put(ConfigKeys.PROJECT_POWERED_BY_URL, config().getString(ConfigKeys.PROJECT_POWERED_BY_URL));
+				ctx.put(ConfigKeys.PROJECT_POWERED_BY_NAME, config().getString(ConfigKeys.PROJECT_POWERED_BY_NAME));
+				ctx.put(ConfigKeys.PROJECT_POWERED_BY_IMAGE_URI, config().getString(ConfigKeys.PROJECT_POWERED_BY_IMAGE_URI));
+				ctx.next();
+			});
 			router.get("/template/*").handler(templateHandler);
 
 			StaticHandler staticHandler = StaticHandler.create().setCachingEnabled(false).setFilesReadOnly(false);

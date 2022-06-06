@@ -88,6 +88,9 @@ SITE_REPO_NAME: "{{ SITE_NAME }}"
 SITE_REPO: "git@github.com:computate-org/smart-village-view.git"
 # The Github Repo HTTPS. 
 SITE_REPO_HTTPS: "https://github.com/computate-org/smart-village-view.git"
+PROJECT_POWERED_BY_URL: "https://www.operate-first.cloud/"
+PROJECT_POWERED_BY_NAME: "Operate First"
+PROJECT_POWERED_BY_IMAGE_URI: "/png/operate-first-logo.png"
 
 ###############################
 # application global defaults #
@@ -233,21 +236,17 @@ WORKER_POOL_SIZE: 5
 
 # Enable data import in the site. 
 ENABLE_IMPORT_DATA: "{{ ENABLE_IMPORT_DATA | lower }}"
-ENABLE_IMPORT_DATA_IotNode: true
-ENABLE_IMPORT_DATA_TrafficSimulation: true
 ENABLE_IMPORT_DATA_SiteHtm: true
 ENABLE_IMPORT_DATA_TimeStep: true
 ENABLE_IMPORT_DATA_VehicleStep: true
 ENABLE_IMPORT_DATA_SitePage: true
+ENABLE_IMPORT_DATA_TrafficSimulation: true
+ENABLE_IMPORT_DATA_IotNode: true
 
 # The Auth roles required to be an admin in the site. 
 AUTH_ROLES_ADMIN: "{{ AUTH_ROLES_ADMIN }}"
 # The Auth roles required to add and modify site user records. 
 AUTH_ROLES_REQUIRED_SiteUser: ['SiteAdmin']
-# The Auth roles required to add and modify IOT node records. 
-AUTH_ROLES_REQUIRED_IotNode: ['SiteAdmin']
-# The Auth roles required to add and modify traffic simulation records. 
-AUTH_ROLES_REQUIRED_TrafficSimulation: ['SiteAdmin']
 # The Auth roles required to add and modify HTML records. 
 AUTH_ROLES_REQUIRED_SiteHtm: ['SiteAdmin']
 # The Auth roles required to add and modify time step records. 
@@ -256,3 +255,7 @@ AUTH_ROLES_REQUIRED_TimeStep: ['SiteAdmin']
 AUTH_ROLES_REQUIRED_VehicleStep: ['SiteAdmin']
 # The Auth roles required to add and modify article records. 
 AUTH_ROLES_REQUIRED_SitePage: ['SiteAdmin']
+# The Auth roles required to add and modify traffic simulation records. 
+AUTH_ROLES_REQUIRED_TrafficSimulation: ['SiteAdmin']
+# The Auth roles required to add and modify IOT node records. 
+AUTH_ROLES_REQUIRED_IotNode: ['SiteAdmin']

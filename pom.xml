@@ -36,6 +36,7 @@
 		<kie.version>7.65.0.Final</kie.version>
 		<drools.version>7.65.0.Final</drools.version>
 		<cloudevents.version>2.3.0</cloudevents.version>
+		<jfreechart.version>1.5.3</jfreechart.version>
 	</properties>
 
 	<dependencyManagement>
@@ -243,6 +244,15 @@
 		<dependency>
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-http</artifactId>
+		</dependency>
+		
+		<!-- ########## -->
+		<!-- jfreechart -->
+		<!-- ########## -->
+		<dependency>
+			<groupId>org.jfree</groupId>
+			<artifactId>jfreechart</artifactId>
+			<version>${jfreechart.version}</version>
 		</dependency>
 
 		<!-- ############ -->

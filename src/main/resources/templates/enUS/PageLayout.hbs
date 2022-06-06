@@ -49,25 +49,28 @@
 {{else}}
 				<a href="/user" class="w3-bar-item w3-button w3-text-teal "><i class="fad fa-house-user w3-text-teal "></i> Login</a>
 {{/if}}
-				<a href="/iot-node" class="w3-bar-item w3-button w3-text-blue "><i class="fad fa-router w3-text-blue "></i> IOT nodes</a>
-				<a href="/traffic-simulation" class="w3-bar-item w3-button w3-text-blue "><i class="fad fa-traffic-light-stop w3-text-blue "></i> traffic simulations</a>
 				<a href="/htm" class="w3-bar-item w3-button w3-text-2017-navy-peony "><i class="fad fa-code w3-text-2017-navy-peony "></i> HTMLs</a>
 				<a href="/time-step" class="w3-bar-item w3-button w3-text-blue "><i class="fad fa-timer w3-text-blue "></i> time steps</a>
 				<a href="/vehicle-step" class="w3-bar-item w3-button w3-text-blue "><i class="fad fa-map-location-dot w3-text-blue "></i> vehicle steps</a>
 				<a href="/page" class="w3-bar-item w3-button w3-text-2017-navy-peony "><i class="fad fa-page w3-text-2017-navy-peony "></i> articles</a>
+				<a href="/traffic-simulation" class="w3-bar-item w3-button w3-text-blue "><i class="fad fa-traffic-light-stop w3-text-blue "></i> traffic simulations</a>
+				<a href="/iot-node" class="w3-bar-item w3-button w3-text-blue "><i class="fad fa-router w3-text-blue "></i> IOT nodes</a>
 {{/inline}}
 {{#*inline "htmBodyStartPageLayout"}}		<!-- inline "htmBodyStartPageLayout" -->
 {{/inline}}
 {{#*inline "htmBodyEndPageLayout"}}		<!-- inline "htmBodyEndPageLayout" -->
-{{/inline}}
-{{#*inline "htmBodyPageLayout"}}		<!-- inline "htmBodyPageLayout" -->
-{{#block "htmBodyStart"}}{{/block}}
-{{#block "htmBodyEnd"}}{{/block}}
 		<footer class="w3-center w3-black w3-text-white w3-padding-24 ">
 			<div class="w3-bar ">
-				<a class="w3-bar-item grow-50" href="https://www.openshift.com/products/online/"><span class="w3-small ">Powered by </span><img alt="" class="w3-image " style="display: inline-block; width: 100px; margin: 0 10px;" src="{{staticBaseUrl}}/svg/openshift.svg"/></a>
+{{#if GITHUB_ORG }}
+				<a class="w3-bar-item grow-20 w3-margin w3-text-white w3-small " href="https://github.com/{{ GITHUB_ORG }}/{{ SITE_NAME }}/" target="_blank">This site is open source <i class="fa-brands fa-github w3-large "></i></a>
+{{/if }}
+{{#if PROJECT_POWERED_BY_URL }}
+				<a class="w3-bar-item grow-20 w3-margin w3-text-white w3-small " href="{{ PROJECT_POWERED_BY_URL }}" target="_blank"><span class="w3-small ">Powered by </span>{{#if PROJECT_POWERED_BY_IMAGE_URI }}<img alt="" class="w3-image " style="display: inline-block; width: 100px; margin: 0 10px;" src="{{ STATIC_BASE_URL }}{{ PROJECT_POWERED_BY_IMAGE_URI }}"/>{{else}}{{#if PROJECT_POWERED_BY_NAME}}{{ PROJECT_POWERED_BY_NAME }}{{/if}}{{/if}}</a>
+{{/if }}
 			</div>
 		</footer>
+{{/inline}}
+{{#*inline "htmBodyPageLayout"}}		<!-- inline "htmBodyPageLayout" -->
 {{/inline}}
 {{#*inline "htmPageLayout"}}<!DOCTYPE html>
 <!-- inline "htmPageLayout" -->
