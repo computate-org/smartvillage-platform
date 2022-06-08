@@ -59,6 +59,7 @@ import io.vertx.core.WorkerExecutor;
 import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.eventbus.EventBusOptions;
 import io.vertx.core.http.Cookie;
+import io.vertx.core.http.HttpClientOptions;
 import io.vertx.core.http.HttpHeaders;
 import io.vertx.core.http.HttpServerOptions;
 import io.vertx.core.json.JsonObject;
@@ -440,6 +441,9 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 			JsonObject extraParams = new JsonObject();
 			extraParams.put("scope", "profile");
 			oauth2ClientOptions.setExtraParameters(extraParams);
+			HttpClientOptions httpClientOptions = new HttpClientOptions();
+			httpClientOptions.setConnectTimeout(10000);
+			oauth2ClientOptions.setHttpClientOptions(httpClientOptions);
 
 			OpenIDConnectAuth.discover(vertx, oauth2ClientOptions, a -> {
 				if(a.succeeded()) {
