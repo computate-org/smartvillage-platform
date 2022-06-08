@@ -42,7 +42,7 @@ htmBody:
       Kubernetes is for developers who want to run their applications in the cloud, interact with them, and scale them in a well defined API (Application Programming Interface). 
       Developers don't have to manage the actual containers or machines running the application. 
       They define the individual components to define how to run the application and make it available on the web. 
-      There are three main Kubernetes components that bring an application to life. 
+      There are some main Kubernetes components that bring an application to life. 
   - e: h2
     a:
       class: w3-text-2017-shaded-spruce w3-monospace 

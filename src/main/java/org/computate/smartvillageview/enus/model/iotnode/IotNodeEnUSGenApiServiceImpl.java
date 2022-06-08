@@ -1304,6 +1304,7 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 	@Override
 	public void searchpageIotNode(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		JsonObject userPrincipal = serviceRequest.getUser();
+		LOG.info(String.format("oauth2AuthenticationProvider: %s", oauth2AuthenticationProvider));
 		LOG.info(String.format("userPrincipal: %s", userPrincipal));
 		User token = User.create(userPrincipal);
 		LOG.info(String.format("token: %s", token));
