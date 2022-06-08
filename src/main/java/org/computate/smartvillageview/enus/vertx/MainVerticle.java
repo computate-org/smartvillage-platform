@@ -639,39 +639,6 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 			HealthCheckHandler healthCheckHandler = HealthCheckHandler.create(vertx);
 			siteInstances = Optional.ofNullable(System.getenv(ConfigKeys.SITE_INSTANCES)).map(s -> Integer.parseInt(s)).orElse(1);
 			workerPoolSize = System.getenv(ConfigKeys.WORKER_POOL_SIZE) == null ? null : Integer.parseInt(System.getenv(ConfigKeys.WORKER_POOL_SIZE));
-
-			healthCheckHandler.register("database", 2000, a -> {
-				pgPool.preparedQuery("select current_timestamp").execute(selectCAsync -> {
-					if(selectCAsync.succeeded()) {
-						a.complete(Status.OK(new JsonObject().put("jdbcMaxPoolSize", jdbcMaxPoolSize).put("jdbcMaxWaitQueueSize", jdbcMaxWaitQueueSize)));
-					} else {
-						LOG.error(configureHealthChecksErrorDatabase, a.future().cause());
-						promise.fail(a.future().cause());
-					}
-				});
-			});
-			healthCheckHandler.register("solr", 2000, a -> {
-				try {
-					String solrHostName = config().getString(ConfigKeys.SOLR_HOST_NAME);
-					Integer solrPort = config().getInteger(ConfigKeys.SOLR_PORT);
-					String solrCollection = config().getString(ConfigKeys.SOLR_COLLECTION);
-					String solrRequestUri = String.format("/solr/%s/select%s", solrCollection, "");
-					webClient.get(solrPort, solrHostName, solrRequestUri).send().onSuccess(b -> {
-						try {
-							a.complete(Status.OK());
-						} catch(Exception ex) {
-							LOG.error("Could not read response from Solr. ", ex);
-							a.fail(ex);
-						}
-					}).onFailure(ex -> {
-						LOG.error(String.format("Solr request failed. "), new RuntimeException(ex));
-						a.fail(ex);
-					});
-				} catch (Exception e) {
-					LOG.error(configureHealthChecksErrorSolr, a.future().cause());
-					a.fail(a.future().cause());
-				}
-			});
 			healthCheckHandler.register("vertx", 2000, a -> {
 				a.complete(Status.OK(new JsonObject().put(ConfigKeys.SITE_INSTANCES, siteInstances).put("workerPoolSize", workerPoolSize)));
 			});
