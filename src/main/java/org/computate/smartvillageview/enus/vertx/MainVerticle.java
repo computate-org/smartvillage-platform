@@ -442,7 +442,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 			extraParams.put("scope", "profile");
 			oauth2ClientOptions.setExtraParameters(extraParams);
 			HttpClientOptions httpClientOptions = new HttpClientOptions();
-			httpClientOptions.setConnectTimeout(10000);
+			httpClientOptions.setConnectTimeout(60000);
 			oauth2ClientOptions.setHttpClientOptions(httpClientOptions);
 
 			OpenIDConnectAuth.discover(vertx, oauth2ClientOptions, a -> {
