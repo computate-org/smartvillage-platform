@@ -66,4 +66,25 @@ public class ConfigKeys extends ComputateVertxConfigKeys {
 	 * The project powered by image relative URI. 
 	 **/
 	public static final String PROJECT_POWERED_BY_IMAGE_URI = "PROJECT_POWERED_BY_IMAGE_URI";
+
+	/**
+	 * The Floating Car Data directory. 
+	 **/
+	public static final String FCD_SYNC_PATH = "FCD_SYNC_PATH";
+
+	/**
+	 * The max number of Floating Car Data records to load in a batch. 
+	 **/
+	public static final String FCD_MAX_RECORD_SIZE = "FCD_MAX_RECORD_SIZE";
+
+	/**
+	 * The max read buffer size to load in a batch. 
+	 **/
+	public static final String READ_BUFFER_SIZE = "READ_BUFFER_SIZE";
+
+	/**
+	 * Periodically check the sync operations to check that they are still progressing. 
+	 * If not, fetch more data. 
+	 **/
+	public static final String API_CHECK_TIMER_MILLIS = "API_CHECK_TIMER_MILLIS";
 }

@@ -246,6 +246,59 @@ public abstract class TimeStepGen<DEV> extends Object {
 	}
 
 	//////////
+	// path //
+	//////////
+
+	/**	 The entity path
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String path;
+
+	/**	<br> The entity path
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.time.step.TimeStep&fq=entiteVar_enUS_indexed_string:path">Find the entity path in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _path(Wrap<String> w);
+
+	public String getPath() {
+		return path;
+	}
+	public void setPath(String o) {
+		this.path = TimeStep.staticSetPath(siteRequest_, o);
+	}
+	public static String staticSetPath(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected TimeStep pathInit() {
+		Wrap<String> pathWrap = new Wrap<String>().var("path");
+		if(path == null) {
+			_path(pathWrap);
+			setPath(pathWrap.o);
+		}
+		return (TimeStep)this;
+	}
+
+	public static String staticSearchPath(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrPath(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqPath(SiteRequestEnUS siteRequest_, String o) {
+		return TimeStep.staticSearchStrPath(siteRequest_, TimeStep.staticSearchPath(siteRequest_, TimeStep.staticSetPath(siteRequest_, o)));
+	}
+
+	public String sqlPath() {
+		return path;
+	}
+
+	//////////
 	// time //
 	//////////
 
@@ -1466,6 +1519,7 @@ public abstract class TimeStepGen<DEV> extends Object {
 			Promise<Void> promise2 = Promise.promise();
 			try {
 				simulationKeyInit();
+				pathInit();
 				timeInit();
 				inheritPkInit();
 				createdInit();
@@ -1545,6 +1599,8 @@ public abstract class TimeStepGen<DEV> extends Object {
 				return oTimeStep.promiseBefore;
 			case "simulationKey":
 				return oTimeStep.simulationKey;
+			case "path":
+				return oTimeStep.path;
 			case "time":
 				return oTimeStep.time;
 			case "inheritPk":
@@ -1628,6 +1684,8 @@ public abstract class TimeStepGen<DEV> extends Object {
 		switch(entityVar) {
 		case "simulationKey":
 			return TimeStep.staticSetSimulationKey(siteRequest_, o);
+		case "path":
+			return TimeStep.staticSetPath(siteRequest_, o);
 		case "time":
 			return TimeStep.staticSetTime(siteRequest_, o);
 		case "inheritPk":
@@ -1686,6 +1744,8 @@ public abstract class TimeStepGen<DEV> extends Object {
 		switch(entityVar) {
 		case "simulationKey":
 			return TimeStep.staticSearchSimulationKey(siteRequest_, (Long)o);
+		case "path":
+			return TimeStep.staticSearchPath(siteRequest_, (String)o);
 		case "time":
 			return TimeStep.staticSearchTime(siteRequest_, (BigDecimal)o);
 		case "inheritPk":
@@ -1744,6 +1804,8 @@ public abstract class TimeStepGen<DEV> extends Object {
 		switch(entityVar) {
 		case "simulationKey":
 			return TimeStep.staticSearchStrSimulationKey(siteRequest_, (Long)o);
+		case "path":
+			return TimeStep.staticSearchStrPath(siteRequest_, (String)o);
 		case "time":
 			return TimeStep.staticSearchStrTime(siteRequest_, (Double)o);
 		case "inheritPk":
@@ -1802,6 +1864,8 @@ public abstract class TimeStepGen<DEV> extends Object {
 		switch(entityVar) {
 		case "simulationKey":
 			return TimeStep.staticSearchFqSimulationKey(siteRequest_, o);
+		case "path":
+			return TimeStep.staticSearchFqPath(siteRequest_, o);
 		case "time":
 			return TimeStep.staticSearchFqTime(siteRequest_, o);
 		case "inheritPk":
@@ -1876,6 +1940,11 @@ public abstract class TimeStepGen<DEV> extends Object {
 				else if(val instanceof String)
 					setSimulationKey((String)val);
 				saves.add("simulationKey");
+				return val;
+			case "path":
+				if(val instanceof String)
+					setPath((String)val);
+				saves.add("path");
 				return val;
 			case "time":
 				if(val instanceof String)
@@ -1952,6 +2021,9 @@ public abstract class TimeStepGen<DEV> extends Object {
 		if(simulationKey != null) {
 			doc.put("simulationKey_docvalues_long", simulationKey);
 		}
+		if(path != null) {
+			doc.put("path_docvalues_string", path);
+		}
 		if(time != null) {
 			doc.put("time_docvalues_double", time.doubleValue());
 		}
@@ -2026,6 +2098,8 @@ public abstract class TimeStepGen<DEV> extends Object {
 		switch(entityVar) {
 			case "simulationKey":
 				return "simulationKey_docvalues_long";
+			case "path":
+				return "path_docvalues_string";
 			case "time":
 				return "time_docvalues_double";
 			case "inheritPk":
@@ -2069,6 +2143,8 @@ public abstract class TimeStepGen<DEV> extends Object {
 		switch(entityVar) {
 			case "simulationKey":
 				return "simulationKey_docvalues_long";
+			case "path":
+				return "path_docvalues_string";
 			case "time":
 				return "time_docvalues_double";
 			case "inheritPk":
@@ -2118,6 +2194,8 @@ public abstract class TimeStepGen<DEV> extends Object {
 		switch(searchVar) {
 			case "simulationKey_docvalues_long":
 				return "simulationKey";
+			case "path_docvalues_string":
+				return "path";
 			case "time_docvalues_double":
 				return "time";
 			case "inheritPk_docvalues_string":
@@ -2194,6 +2272,7 @@ public abstract class TimeStepGen<DEV> extends Object {
 		TimeStep oTimeStep = (TimeStep)this;
 
 		oTimeStep.setSimulationKey(Optional.ofNullable(doc.get("simulationKey_docvalues_long")).map(v -> v.toString()).orElse(null));
+		oTimeStep.setPath(Optional.ofNullable(doc.get("path_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oTimeStep.setTime(Optional.ofNullable(doc.get("time_docvalues_double")).map(v -> v.toString()).orElse(null));
 		oTimeStep.setInheritPk(Optional.ofNullable(doc.get("inheritPk_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oTimeStep.setCreated(Optional.ofNullable(doc.get("created_docvalues_date")).map(v -> v.toString()).orElse(null));
@@ -2232,6 +2311,8 @@ public abstract class TimeStepGen<DEV> extends Object {
 			TimeStep original = (TimeStep)o;
 			if(!Objects.equals(simulationKey, original.getSimulationKey()))
 				apiRequest.addVars("simulationKey");
+			if(!Objects.equals(path, original.getPath()))
+				apiRequest.addVars("path");
 			if(!Objects.equals(time, original.getTime()))
 				apiRequest.addVars("time");
 			if(!Objects.equals(inheritPk, original.getInheritPk()))
@@ -2282,6 +2363,7 @@ public abstract class TimeStepGen<DEV> extends Object {
 	@Override public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(Optional.ofNullable(simulationKey).map(v -> "simulationKey: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(path).map(v -> "path: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(time).map(v -> "time: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(inheritPk).map(v -> "inheritPk: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(created).map(v -> "created: " + v + "\n").orElse(""));
@@ -2309,6 +2391,7 @@ public abstract class TimeStepGen<DEV> extends Object {
 	public static final String VAR_siteRequest_ = "siteRequest_";
 	public static final String VAR_promiseBefore = "promiseBefore";
 	public static final String VAR_simulationKey = "simulationKey";
+	public static final String VAR_path = "path";
 	public static final String VAR_time = "time";
 	public static final String VAR_inheritPk = "inheritPk";
 	public static final String VAR_created = "created";
@@ -2345,6 +2428,7 @@ public abstract class TimeStepGen<DEV> extends Object {
 	}
 	public static List<String> varsFqTimeStep(List<String> vars) {
 		vars.add(VAR_simulationKey);
+		vars.add(VAR_path);
 		vars.add(VAR_time);
 		vars.add(VAR_created);
 		return vars;
@@ -2363,6 +2447,7 @@ public abstract class TimeStepGen<DEV> extends Object {
 	public static final String DISPLAY_NAME_siteRequest_ = "";
 	public static final String DISPLAY_NAME_promiseBefore = "";
 	public static final String DISPLAY_NAME_simulationKey = "Simulation";
+	public static final String DISPLAY_NAME_path = "Path";
 	public static final String DISPLAY_NAME_time = "Time in seconds";
 	public static final String DISPLAY_NAME_inheritPk = "";
 	public static final String DISPLAY_NAME_created = "created";
@@ -2396,6 +2481,8 @@ public abstract class TimeStepGen<DEV> extends Object {
 			return DISPLAY_NAME_promiseBefore;
 		case VAR_simulationKey:
 			return DISPLAY_NAME_simulationKey;
+		case VAR_path:
+			return DISPLAY_NAME_path;
 		case VAR_time:
 			return DISPLAY_NAME_time;
 		case VAR_inheritPk:
@@ -2451,6 +2538,8 @@ public abstract class TimeStepGen<DEV> extends Object {
 			return "An asynchronous method for searching for a computer related to this message";
 		case VAR_simulationKey:
 			return "The simulation key. ";
+		case VAR_path:
+			return "The file path. ";
 		case VAR_time:
 			return "The time in seconds. ";
 		case VAR_inheritPk:
@@ -2506,6 +2595,8 @@ public abstract class TimeStepGen<DEV> extends Object {
 			return "Void";
 		case VAR_simulationKey:
 			return "Long";
+		case VAR_path:
+			return "String";
 		case VAR_time:
 			return "BigDecimal";
 		case VAR_inheritPk:
@@ -2568,6 +2659,8 @@ public abstract class TimeStepGen<DEV> extends Object {
 		switch(var) {
 		case VAR_simulationKey:
 			return 3;
+		case VAR_path:
+			return 3;
 		case VAR_time:
 			return 3;
 		case VAR_created:
@@ -2589,8 +2682,10 @@ public abstract class TimeStepGen<DEV> extends Object {
 		switch(var) {
 		case VAR_simulationKey:
 			return 1;
+		case VAR_path:
+			return 2;
 		case VAR_time:
-			return 1;
+			return 3;
 		case VAR_created:
 			return 2;
 		case VAR_modified:

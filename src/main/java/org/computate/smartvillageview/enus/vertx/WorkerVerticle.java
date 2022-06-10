@@ -28,6 +28,8 @@ import org.computate.vertx.api.ApiRequest;
 import org.computate.smartvillageview.enus.config.ConfigKeys;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.smartvillageview.enus.model.page.SitePage;
+import org.computate.smartvillageview.enus.model.traffic.simulation.reader.TrafficFcdReader;
+import org.computate.smartvillageview.enus.model.traffic.time.step.TimeStep;
 import org.computate.smartvillageview.enus.model.htm.SiteHtm;
 import org.computate.vertx.api.ApiCounter;
 import org.computate.vertx.api.ApiRequest;
@@ -344,9 +346,11 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 	private Future<Void> importData() {
 		Promise<Void> promise = Promise.promise();
 		if(config().getBoolean(ConfigKeys.ENABLE_IMPORT_DATA)) {
-			importTimer("IotNode").onSuccess(a -> {
-				importTimer("SitePage").onSuccess(b -> {
-					promise.complete();
+			importTimer(IotNode.CLASS_SIMPLE_NAME).onSuccess(a -> {
+				importTimer(SitePage.CLASS_SIMPLE_NAME).onSuccess(b -> {
+					importTimer(TimeStep.CLASS_SIMPLE_NAME).onSuccess(c -> {
+						promise.complete();
+					});
 				});
 			});
 		}
@@ -364,7 +368,7 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 	 */
 	private Future<Void> importDataClass(String classSimpleName, ZonedDateTime startDateTime) {
 		Promise<Void> promise = Promise.promise();
-		if("IotNode".equals(classSimpleName)) {
+		if(IotNode.CLASS_SIMPLE_NAME.equals(classSimpleName)) {
 			importDataIotNode().onComplete(a -> {
 				String importPeriod = config().getString(String.format("%s_%s", ConfigKeys.IMPORT_DATA_PERIOD, classSimpleName));
 				if(importPeriod != null && startDateTime != null) {
@@ -380,8 +384,32 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 					promise.complete();
 				}
 			});
-		} else if("SitePage".equals(classSimpleName)) {
+		} else if(SitePage.CLASS_SIMPLE_NAME.equals(classSimpleName)) {
 			importDataSitePage().onComplete(a -> {
+				String importPeriod = config().getString(String.format("%s_%s", ConfigKeys.IMPORT_DATA_PERIOD, classSimpleName));
+				if(importPeriod != null && startDateTime != null) {
+					Duration duration = TimeTool.parseNextDuration(importPeriod);
+					ZonedDateTime nextStartTime = startDateTime.plus(duration);
+					LOG.info(String.format(importTimerScheduling, classSimpleName, nextStartTime.format(TIME_FORMAT)));
+					Duration nextStartDuration = Duration.between(Instant.now(), nextStartTime);
+					vertx.setTimer(nextStartDuration.toMillis(), b -> {
+						importDataClass(classSimpleName, nextStartTime);
+					});
+					promise.complete();
+				} else {
+					promise.complete();
+				}
+			});
+		} else if(TimeStep.CLASS_SIMPLE_NAME.equals(classSimpleName)) {
+			SiteRequestEnUS siteRequest = new SiteRequestEnUS();
+			siteRequest.setConfig(config());
+			siteRequest.setWebClient(webClient);
+			siteRequest.initDeepSiteRequestEnUS(siteRequest);
+			TrafficFcdReader reader = new TrafficFcdReader();
+			reader.setVertx(vertx);
+			reader.setWorkerExecutor(workerExecutor);
+			reader.initDeepForClass(siteRequest);
+			reader.importFcd().onComplete(a -> {
 				String importPeriod = config().getString(String.format("%s_%s", ConfigKeys.IMPORT_DATA_PERIOD, classSimpleName));
 				if(importPeriod != null && startDateTime != null) {
 					Duration duration = TimeTool.parseNextDuration(importPeriod);
@@ -446,7 +474,7 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 					params.put("query", new JsonObject().put("commitWithin", 10000).put("q", "*:*").put("var", new JsonArray().add("refresh:false")));
 					JsonObject context = new JsonObject().put("params", params);
 					JsonObject request = new JsonObject().put("context", context);
-					futures.add(vertx.eventBus().request(String.format("smart-village-view-enUS-%s", "IotNode"), request, new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", IotNode.CLASS_SIMPLE_NAME))));
+					futures.add(vertx.eventBus().request(String.format("smart-village-view-enUS-%s", IotNode.CLASS_SIMPLE_NAME), request, new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", IotNode.CLASS_SIMPLE_NAME))));
 				});
 				CompositeFuture.all(futures).onSuccess(a -> {
 					LOG.info(String.format(importDataIotNodeComplete, IotNode.CLASS_SIMPLE_NAME));
@@ -506,6 +534,7 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 					String pageId = StringUtils.substringBeforeLast(StringUtils.substringAfterLast(path, "/"), ".");
 					SiteRequestEnUS siteRequest = new SiteRequestEnUS();
 					siteRequest.setConfig(config());
+					siteRequest.setWebClient(webClient);
 					siteRequest.initDeepSiteRequestEnUS(siteRequest);
 
 					SitePage page = new SitePage();
@@ -770,9 +799,9 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 					refreshData("SiteHtm").onSuccess(q1 -> {
 						refreshData("TimeStep").onSuccess(q2 -> {
 							refreshData("VehicleStep").onSuccess(q3 -> {
-								refreshData("SitePage").onSuccess(q4 -> {
+								refreshData(SitePage.CLASS_SIMPLE_NAME).onSuccess(q4 -> {
 									refreshData("TrafficSimulation").onSuccess(q5 -> {
-										refreshData("IotNode").onSuccess(q6 -> {
+										refreshData(IotNode.CLASS_SIMPLE_NAME).onSuccess(q6 -> {
 											LOG.info(refreshAllDataComplete);
 											promise.complete();
 										}).onFailure(ex -> {

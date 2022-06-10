@@ -25,6 +25,7 @@ API_CONTACT_EMAIL:
 API_COUNTER_PAUSE: 10
 API_COUNTER_RESUME: 5
 API_COUNTER_FETCH: 10
+API_CHECK_TIMER_MILLIS: 10000
 
 JDBC_HOST: localhost
 JDBC_PORT: 5432
@@ -95,3 +96,5 @@ AUTH_ROLES_REQUIRED_SitePage: ['SiteAdmin']
 AUTH_ROLES_REQUIRED_TrafficSimulation: ['SiteAdmin']
 # The Auth roles required to add and modify IOT node records. 
 AUTH_ROLES_REQUIRED_IotNode: ['SiteAdmin']
+
+ENABLE_FCD_SYNC: false

@@ -82,7 +82,20 @@ public class TimeStep extends TimeStepGen<Object> {
 	 * DocValues: true
 	 * Persist: true
 	 * HtmlRow: 3
-	 * HtmlCell: 1
+	 * HtmlCell: 2
+	 * Facet: true
+	 * DisplayName: Path
+	 * Description: The file path. 
+	 */
+	protected void _path(Wrap<String> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * HtmlRow: 3
+	 * HtmlCell: 3
 	 * Facet: true
 	 * DisplayName: Time in seconds
 	 * Description: The time in seconds. 
@@ -221,6 +234,7 @@ public class TimeStep extends TimeStepGen<Object> {
 	 * Description: The title of this object
 	 */
 	protected void _objectTitle(Wrap<String> w) {
+		w.o(String.format("%s %s", path, time));
 	}
 
 	/**
