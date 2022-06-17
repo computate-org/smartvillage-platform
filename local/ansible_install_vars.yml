@@ -210,6 +210,27 @@ CONFIG_KEYS: |2
   	 * The project powered by image relative URI. 
   	 **/
   	public static final String PROJECT_POWERED_BY_IMAGE_URI = "PROJECT_POWERED_BY_IMAGE_URI";
+  
+  	/**
+  	 * The Floating Car Data directory. 
+  	 **/
+  	public static final String FCD_SYNC_PATH = "FCD_SYNC_PATH";
+  
+  	/**
+  	 * The max number of Floating Car Data records to load in a batch. 
+  	 **/
+  	public static final String FCD_MAX_RECORD_SIZE = "FCD_MAX_RECORD_SIZE";
+  
+  	/**
+  	 * The max read buffer size to load in a batch. 
+  	 **/
+  	public static final String READ_BUFFER_SIZE = "READ_BUFFER_SIZE";
+  
+  	/**
+  	 * Periodically check the sync operations to check that they are still progressing. 
+  	 * If not, fetch more data. 
+  	 **/
+  	public static final String API_CHECK_TIMER_MILLIS = "API_CHECK_TIMER_MILLIS";
 
 WORKER_IMPORTS: |
   import java.time.LocalDateTime;
@@ -219,6 +240,8 @@ WORKER_IMPORTS: |
   import io.vertx.ext.web.client.predicate.ResponsePredicate;
   import io.vertx.ext.auth.authentication.TokenCredentials;
   import org.computate.smartvillageview.enus.model.iotnode.IotNode;
+  import org.computate.smartvillageview.enus.model.traffic.simulation.reader.TrafficFcdReader;
+  import org.computate.smartvillageview.enus.model.traffic.time.step.TimeStep;
 
 WORKER_IMPORT_DATA: |2
   
@@ -231,7 +254,9 @@ WORKER_IMPORT_DATA: |2
   		if(config().getBoolean(ConfigKeys.ENABLE_IMPORT_DATA)) {
   			importTimer("IotNode").onSuccess(a -> {
   				importTimer("SitePage").onSuccess(b -> {
-  					promise.complete();
+  					importTimer(TimeStep.CLASS_SIMPLE_NAME).onSuccess(c -> {
+  						promise.complete();
+  					});
   				});
   			});
   		}
@@ -249,7 +274,7 @@ WORKER_IMPORT_DATA: |2
   	 */
   	private Future<Void> importDataClass(String classSimpleName, ZonedDateTime startDateTime) {
   		Promise<Void> promise = Promise.promise();
-  		if("IotNode".equals(classSimpleName)) {
+  		if(IotNode.CLASS_SIMPLE_NAME.equals(classSimpleName)) {
   			importDataIotNode().onComplete(a -> {
   				String importPeriod = config().getString(String.format("%s_%s", ConfigKeys.IMPORT_DATA_PERIOD, classSimpleName));
   				if(importPeriod != null && startDateTime != null) {
@@ -265,8 +290,32 @@ WORKER_IMPORT_DATA: |2
   					promise.complete();
   				}
   			});
-  		} else if("SitePage".equals(classSimpleName)) {
+  		} else if(SitePage.CLASS_SIMPLE_NAME.equals(classSimpleName)) {
   			importDataSitePage().onComplete(a -> {
+  				String importPeriod = config().getString(String.format("%s_%s", ConfigKeys.IMPORT_DATA_PERIOD, classSimpleName));
+  				if(importPeriod != null && startDateTime != null) {
+  					Duration duration = TimeTool.parseNextDuration(importPeriod);
+  					ZonedDateTime nextStartTime = startDateTime.plus(duration);
+  					LOG.info(String.format(importTimerScheduling, classSimpleName, nextStartTime.format(TIME_FORMAT)));
+  					Duration nextStartDuration = Duration.between(Instant.now(), nextStartTime);
+  					vertx.setTimer(nextStartDuration.toMillis(), b -> {
+  						importDataClass(classSimpleName, nextStartTime);
+  					});
+  					promise.complete();
+  				} else {
+  					promise.complete();
+  				}
+  			});
+  		} else if(TimeStep.CLASS_SIMPLE_NAME.equals(classSimpleName)) {
+  			SiteRequestEnUS siteRequest = new SiteRequestEnUS();
+  			siteRequest.setConfig(config());
+  			siteRequest.setWebClient(webClient);
+  			siteRequest.initDeepSiteRequestEnUS(siteRequest);
+  			TrafficFcdReader reader = new TrafficFcdReader();
+  			reader.setVertx(vertx);
+  			reader.setWorkerExecutor(workerExecutor);
+  			reader.initDeepForClass(siteRequest);
+  			reader.importFcd().onComplete(a -> {
   				String importPeriod = config().getString(String.format("%s_%s", ConfigKeys.IMPORT_DATA_PERIOD, classSimpleName));
   				if(importPeriod != null && startDateTime != null) {
   					Duration duration = TimeTool.parseNextDuration(importPeriod);
@@ -331,7 +380,7 @@ WORKER_IMPORT_DATA: |2
   					params.put("query", new JsonObject().put("commitWithin", 10000).put("q", "*:*").put("var", new JsonArray().add("refresh:false")));
   					JsonObject context = new JsonObject().put("params", params);
   					JsonObject request = new JsonObject().put("context", context);
-  					futures.add(vertx.eventBus().request(String.format("smart-village-view-enUS-%s", "IotNode"), request, new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", IotNode.CLASS_SIMPLE_NAME))));
+  					futures.add(vertx.eventBus().request(String.format("smart-village-view-enUS-%s", IotNode.CLASS_SIMPLE_NAME), request, new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", IotNode.CLASS_SIMPLE_NAME))));
   				});
   				CompositeFuture.all(futures).onSuccess(a -> {
   					LOG.info(String.format(importDataIotNodeComplete, IotNode.CLASS_SIMPLE_NAME));

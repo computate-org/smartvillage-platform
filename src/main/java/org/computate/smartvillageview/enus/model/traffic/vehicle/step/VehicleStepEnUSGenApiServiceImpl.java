@@ -875,7 +875,7 @@ public class VehicleStepEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 							if(body2.size() > 0) {
 								siteRequest.setJsonObject(body2);
 								patchVehicleStepFuture(o2, true).onSuccess(b -> {
-									LOG.info("Import VehicleStep {} succeeded, modified VehicleStep. ", body.getValue("pk"));
+									LOG.info("Import VehicleStep {} succeeded, modified VehicleStep. ", body.getValue(VehicleStep.VAR_id));
 									eventHandler.handle(Future.succeededFuture());
 								}).onFailure(ex -> {
 									LOG.error(String.format("putimportVehicleStepFuture failed. "), ex);
@@ -886,7 +886,7 @@ public class VehicleStepEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 							}
 						} else {
 							postVehicleStepFuture(siteRequest, true).onSuccess(b -> {
-								LOG.info("Import VehicleStep {} succeeded, created new VehicleStep. ", body.getValue("pk"));
+								LOG.info("Import VehicleStep {} succeeded, created new VehicleStep. ", body.getValue(VehicleStep.VAR_id));
 								eventHandler.handle(Future.succeededFuture());
 							}).onFailure(ex -> {
 								LOG.error(String.format("putimportVehicleStepFuture failed. "), ex);

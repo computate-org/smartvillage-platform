@@ -4,21 +4,11 @@ SITE_DISPLAY_NAME: "{{ SITE_DISPLAY_NAME }}"
 RUN_OPENAPI3_GENERATOR: {{ RUN_OPENAPI3_GENERATOR | lower }}
 RUN_SQL_GENERATOR: {{ RUN_SQL_GENERATOR | lower }}
 RUN_ARTICLE_GENERATOR: {{ RUN_ARTICLE_GENERATOR | lower }}
-\{\% if GITHUB_ORG is defined \%\}
 GITHUB_ORG: "{{ GITHUB_ORG }}"
-\{\% endif \%\}
-\{\% if QUAYIO_ORG is defined \%\}
 QUAYIO_ORG: "{{ QUAYIO_ORG }}"
-\{\% endif \%\}
-\{\% if PROJECT_POWERED_BY_URL is defined \%\}
 PROJECT_POWERED_BY_URL: "{{ PROJECT_POWERED_BY_URL }}"
-\{\% endif \%\}
-\{\% if PROJECT_POWERED_BY_NAME is defined \%\}
 PROJECT_POWERED_BY_NAME: "{{ PROJECT_POWERED_BY_NAME }}"
-\{\% endif \%\}
-\{\% if PROJECT_POWERED_BY_IMAGE_URI is defined \%\}
 PROJECT_POWERED_BY_IMAGE_URI: "{{ PROJECT_POWERED_BY_NAME }}"
-\{\% endif \%\}
 
 LANGUAGE_NAME: "{{ LANGUAGE_NAME }}"
 SITE_PATH_enUS: "{{ SITE_SRC }}"
@@ -92,10 +82,10 @@ WRITE_COMMENTS: true
 ENABLE_IMPORT_DATA: {{ ENABLE_IMPORT_DATA | lower }}
 ENABLE_IMPORT_DATA_SiteHtm: true
 ENABLE_IMPORT_DATA_TimeStep: true
-ENABLE_IMPORT_DATA_VehicleStep: true
 ENABLE_IMPORT_DATA_SitePage: true
 ENABLE_IMPORT_DATA_TrafficSimulation: true
 ENABLE_IMPORT_DATA_IotNode: true
+ENABLE_IMPORT_DATA_VehicleStep: true
 
 # The Auth roles required to be an admin in the site. 
 AUTH_ROLES_ADMIN: {{ AUTH_ROLES_ADMIN }}
@@ -105,14 +95,14 @@ AUTH_ROLES_REQUIRED_SiteUser: ['SiteAdmin']
 AUTH_ROLES_REQUIRED_SiteHtm: ['SiteAdmin']
 # The Auth roles required to add and modify time step records. 
 AUTH_ROLES_REQUIRED_TimeStep: ['SiteAdmin']
-# The Auth roles required to add and modify vehicle step records. 
-AUTH_ROLES_REQUIRED_VehicleStep: ['SiteAdmin']
 # The Auth roles required to add and modify article records. 
 AUTH_ROLES_REQUIRED_SitePage: ['SiteAdmin']
 # The Auth roles required to add and modify traffic simulation records. 
 AUTH_ROLES_REQUIRED_TrafficSimulation: ['SiteAdmin']
 # The Auth roles required to add and modify IOT node records. 
 AUTH_ROLES_REQUIRED_IotNode: ['SiteAdmin']
+# The Auth roles required to add and modify vehicle step records. 
+AUTH_ROLES_REQUIRED_VehicleStep: ['SiteAdmin']
 
 YGGIO_HOST_NAME: "{{ YGGIO_HOST_NAME }}"
 YGGIO_PORT: {{ YGGIO_PORT }}

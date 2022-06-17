@@ -249,65 +249,57 @@ public abstract class VehicleStepGen<DEV> extends Object {
 		return simulationKey;
 	}
 
-	/////////////////
-	// timeStepKey //
-	/////////////////
+	////////////////
+	// timeStepId //
+	////////////////
 
-	/**	 The entity timeStepKey
+	/**	 The entity timeStepId
 	 *	 is defined as null before being initialized. 
 	 */
 	@JsonProperty
-	@JsonSerialize(using = ToStringSerializer.class)
 	@JsonInclude(Include.NON_NULL)
-	protected Long timeStepKey;
+	protected String timeStepId;
 
-	/**	<br> The entity timeStepKey
+	/**	<br> The entity timeStepId
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.vehicle.step.VehicleStep&fq=entiteVar_enUS_indexed_string:timeStepKey">Find the entity timeStepKey in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.vehicle.step.VehicleStep&fq=entiteVar_enUS_indexed_string:timeStepId">Find the entity timeStepId in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected abstract void _timeStepKey(Wrap<Long> w);
+	protected abstract void _timeStepId(Wrap<String> w);
 
-	public Long getTimeStepKey() {
-		return timeStepKey;
+	public String getTimeStepId() {
+		return timeStepId;
 	}
-
-	public void setTimeStepKey(Long timeStepKey) {
-		this.timeStepKey = timeStepKey;
+	public void setTimeStepId(String o) {
+		this.timeStepId = VehicleStep.staticSetTimeStepId(siteRequest_, o);
 	}
-	@JsonIgnore
-	public void setTimeStepKey(String o) {
-		this.timeStepKey = VehicleStep.staticSetTimeStepKey(siteRequest_, o);
+	public static String staticSetTimeStepId(SiteRequestEnUS siteRequest_, String o) {
+		return o;
 	}
-	public static Long staticSetTimeStepKey(SiteRequestEnUS siteRequest_, String o) {
-		if(NumberUtils.isParsable(o))
-			return Long.parseLong(o);
-		return null;
-	}
-	protected VehicleStep timeStepKeyInit() {
-		Wrap<Long> timeStepKeyWrap = new Wrap<Long>().var("timeStepKey");
-		if(timeStepKey == null) {
-			_timeStepKey(timeStepKeyWrap);
-			setTimeStepKey(timeStepKeyWrap.o);
+	protected VehicleStep timeStepIdInit() {
+		Wrap<String> timeStepIdWrap = new Wrap<String>().var("timeStepId");
+		if(timeStepId == null) {
+			_timeStepId(timeStepIdWrap);
+			setTimeStepId(timeStepIdWrap.o);
 		}
 		return (VehicleStep)this;
 	}
 
-	public static Long staticSearchTimeStepKey(SiteRequestEnUS siteRequest_, Long o) {
+	public static String staticSearchTimeStepId(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
 
-	public static String staticSearchStrTimeStepKey(SiteRequestEnUS siteRequest_, Long o) {
+	public static String staticSearchStrTimeStepId(SiteRequestEnUS siteRequest_, String o) {
 		return o == null ? null : o.toString();
 	}
 
-	public static String staticSearchFqTimeStepKey(SiteRequestEnUS siteRequest_, String o) {
-		return VehicleStep.staticSearchStrTimeStepKey(siteRequest_, VehicleStep.staticSearchTimeStepKey(siteRequest_, VehicleStep.staticSetTimeStepKey(siteRequest_, o)));
+	public static String staticSearchFqTimeStepId(SiteRequestEnUS siteRequest_, String o) {
+		return VehicleStep.staticSearchStrTimeStepId(siteRequest_, VehicleStep.staticSearchTimeStepId(siteRequest_, VehicleStep.staticSetTimeStepId(siteRequest_, o)));
 	}
 
-	public Long sqlTimeStepKey() {
-		return timeStepKey;
+	public String sqlTimeStepId() {
+		return timeStepId;
 	}
 
 	//////////
@@ -2104,7 +2096,7 @@ public abstract class VehicleStepGen<DEV> extends Object {
 			Promise<Void> promise2 = Promise.promise();
 			try {
 				simulationKeyInit();
-				timeStepKeyInit();
+				timeStepIdInit();
 				timeInit();
 				xInit();
 				yInit();
@@ -2193,8 +2185,8 @@ public abstract class VehicleStepGen<DEV> extends Object {
 				return oVehicleStep.promiseBefore;
 			case "simulationKey":
 				return oVehicleStep.simulationKey;
-			case "timeStepKey":
-				return oVehicleStep.timeStepKey;
+			case "timeStepId":
+				return oVehicleStep.timeStepId;
 			case "time":
 				return oVehicleStep.time;
 			case "x":
@@ -2296,8 +2288,8 @@ public abstract class VehicleStepGen<DEV> extends Object {
 		switch(entityVar) {
 		case "simulationKey":
 			return VehicleStep.staticSetSimulationKey(siteRequest_, o);
-		case "timeStepKey":
-			return VehicleStep.staticSetTimeStepKey(siteRequest_, o);
+		case "timeStepId":
+			return VehicleStep.staticSetTimeStepId(siteRequest_, o);
 		case "time":
 			return VehicleStep.staticSetTime(siteRequest_, o);
 		case "x":
@@ -2374,8 +2366,8 @@ public abstract class VehicleStepGen<DEV> extends Object {
 		switch(entityVar) {
 		case "simulationKey":
 			return VehicleStep.staticSearchSimulationKey(siteRequest_, (Long)o);
-		case "timeStepKey":
-			return VehicleStep.staticSearchTimeStepKey(siteRequest_, (Long)o);
+		case "timeStepId":
+			return VehicleStep.staticSearchTimeStepId(siteRequest_, (String)o);
 		case "time":
 			return VehicleStep.staticSearchTime(siteRequest_, (BigDecimal)o);
 		case "x":
@@ -2452,8 +2444,8 @@ public abstract class VehicleStepGen<DEV> extends Object {
 		switch(entityVar) {
 		case "simulationKey":
 			return VehicleStep.staticSearchStrSimulationKey(siteRequest_, (Long)o);
-		case "timeStepKey":
-			return VehicleStep.staticSearchStrTimeStepKey(siteRequest_, (Long)o);
+		case "timeStepId":
+			return VehicleStep.staticSearchStrTimeStepId(siteRequest_, (String)o);
 		case "time":
 			return VehicleStep.staticSearchStrTime(siteRequest_, (Double)o);
 		case "x":
@@ -2530,8 +2522,8 @@ public abstract class VehicleStepGen<DEV> extends Object {
 		switch(entityVar) {
 		case "simulationKey":
 			return VehicleStep.staticSearchFqSimulationKey(siteRequest_, o);
-		case "timeStepKey":
-			return VehicleStep.staticSearchFqTimeStepKey(siteRequest_, o);
+		case "timeStepId":
+			return VehicleStep.staticSearchFqTimeStepId(siteRequest_, o);
 		case "time":
 			return VehicleStep.staticSearchFqTime(siteRequest_, o);
 		case "x":
@@ -2625,12 +2617,10 @@ public abstract class VehicleStepGen<DEV> extends Object {
 					setSimulationKey((String)val);
 				saves.add("simulationKey");
 				return val;
-			case "timestepkey":
-				if(val instanceof Long)
-					setTimeStepKey((Long)val);
-				else if(val instanceof String)
-					setTimeStepKey((String)val);
-				saves.add("timeStepKey");
+			case "timestepid":
+				if(val instanceof String)
+					setTimeStepId((String)val);
+				saves.add("timeStepId");
 				return val;
 			case "time":
 				if(val instanceof String)
@@ -2766,8 +2756,8 @@ public abstract class VehicleStepGen<DEV> extends Object {
 		if(simulationKey != null) {
 			doc.put("simulationKey_docvalues_long", simulationKey);
 		}
-		if(timeStepKey != null) {
-			doc.put("timeStepKey_docvalues_long", timeStepKey);
+		if(timeStepId != null) {
+			doc.put("timeStepId_docvalues_string", timeStepId);
 		}
 		if(time != null) {
 			doc.put("time_docvalues_double", time.doubleValue());
@@ -2864,8 +2854,8 @@ public abstract class VehicleStepGen<DEV> extends Object {
 		switch(entityVar) {
 			case "simulationKey":
 				return "simulationKey_docvalues_long";
-			case "timeStepKey":
-				return "timeStepKey_docvalues_long";
+			case "timeStepId":
+				return "timeStepId_docvalues_string";
 			case "time":
 				return "time_docvalues_double";
 			case "location":
@@ -2923,8 +2913,8 @@ public abstract class VehicleStepGen<DEV> extends Object {
 		switch(entityVar) {
 			case "simulationKey":
 				return "simulationKey_docvalues_long";
-			case "timeStepKey":
-				return "timeStepKey_docvalues_long";
+			case "timeStepId":
+				return "timeStepId_docvalues_string";
 			case "time":
 				return "time_docvalues_double";
 			case "location":
@@ -2988,8 +2978,8 @@ public abstract class VehicleStepGen<DEV> extends Object {
 		switch(searchVar) {
 			case "simulationKey_docvalues_long":
 				return "simulationKey";
-			case "timeStepKey_docvalues_long":
-				return "timeStepKey";
+			case "timeStepId_docvalues_string":
+				return "timeStepId";
 			case "time_docvalues_double":
 				return "time";
 			case "location_docvalues_location":
@@ -3080,7 +3070,7 @@ public abstract class VehicleStepGen<DEV> extends Object {
 		VehicleStep oVehicleStep = (VehicleStep)this;
 
 		oVehicleStep.setSimulationKey(Optional.ofNullable(doc.get("simulationKey_docvalues_long")).map(v -> v.toString()).orElse(null));
-		oVehicleStep.setTimeStepKey(Optional.ofNullable(doc.get("timeStepKey_docvalues_long")).map(v -> v.toString()).orElse(null));
+		oVehicleStep.setTimeStepId(Optional.ofNullable(doc.get("timeStepId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oVehicleStep.setTime(Optional.ofNullable(doc.get("time_docvalues_double")).map(v -> v.toString()).orElse(null));
 		oVehicleStep.setLocation(Optional.ofNullable(doc.get("location_docvalues_location")).map(v -> v.toString()).orElse(null));
 		oVehicleStep.setVehicleId(Optional.ofNullable(doc.get("vehicleId_docvalues_string")).map(v -> v.toString()).orElse(null));
@@ -3126,8 +3116,8 @@ public abstract class VehicleStepGen<DEV> extends Object {
 			VehicleStep original = (VehicleStep)o;
 			if(!Objects.equals(simulationKey, original.getSimulationKey()))
 				apiRequest.addVars("simulationKey");
-			if(!Objects.equals(timeStepKey, original.getTimeStepKey()))
-				apiRequest.addVars("timeStepKey");
+			if(!Objects.equals(timeStepId, original.getTimeStepId()))
+				apiRequest.addVars("timeStepId");
 			if(!Objects.equals(time, original.getTime()))
 				apiRequest.addVars("time");
 			if(!Objects.equals(x, original.getX()))
@@ -3196,7 +3186,7 @@ public abstract class VehicleStepGen<DEV> extends Object {
 	@Override public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(Optional.ofNullable(simulationKey).map(v -> "simulationKey: " + v + "\n").orElse(""));
-		sb.append(Optional.ofNullable(timeStepKey).map(v -> "timeStepKey: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(timeStepId).map(v -> "timeStepId: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(time).map(v -> "time: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(x).map(v -> "x: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(y).map(v -> "y: " + v + "\n").orElse(""));
@@ -3233,7 +3223,7 @@ public abstract class VehicleStepGen<DEV> extends Object {
 	public static final String VAR_siteRequest_ = "siteRequest_";
 	public static final String VAR_promiseBefore = "promiseBefore";
 	public static final String VAR_simulationKey = "simulationKey";
-	public static final String VAR_timeStepKey = "timeStepKey";
+	public static final String VAR_timeStepId = "timeStepId";
 	public static final String VAR_time = "time";
 	public static final String VAR_x = "x";
 	public static final String VAR_y = "y";
@@ -3279,7 +3269,7 @@ public abstract class VehicleStepGen<DEV> extends Object {
 	}
 	public static List<String> varsFqVehicleStep(List<String> vars) {
 		vars.add(VAR_simulationKey);
-		vars.add(VAR_timeStepKey);
+		vars.add(VAR_timeStepId);
 		vars.add(VAR_time);
 		vars.add(VAR_location);
 		vars.add(VAR_vehicleId);
@@ -3297,7 +3287,6 @@ public abstract class VehicleStepGen<DEV> extends Object {
 	}
 	public static List<String> varsRangeVehicleStep(List<String> vars) {
 		vars.add(VAR_simulationKey);
-		vars.add(VAR_timeStepKey);
 		vars.add(VAR_time);
 		vars.add(VAR_location);
 		vars.add(VAR_angle);
@@ -3311,7 +3300,7 @@ public abstract class VehicleStepGen<DEV> extends Object {
 	public static final String DISPLAY_NAME_siteRequest_ = "";
 	public static final String DISPLAY_NAME_promiseBefore = "";
 	public static final String DISPLAY_NAME_simulationKey = "Simulation";
-	public static final String DISPLAY_NAME_timeStepKey = "Time Step";
+	public static final String DISPLAY_NAME_timeStepId = "Time Step";
 	public static final String DISPLAY_NAME_time = "Time in seconds";
 	public static final String DISPLAY_NAME_x = "";
 	public static final String DISPLAY_NAME_y = "";
@@ -3354,8 +3343,8 @@ public abstract class VehicleStepGen<DEV> extends Object {
 			return DISPLAY_NAME_promiseBefore;
 		case VAR_simulationKey:
 			return DISPLAY_NAME_simulationKey;
-		case VAR_timeStepKey:
-			return DISPLAY_NAME_timeStepKey;
+		case VAR_timeStepId:
+			return DISPLAY_NAME_timeStepId;
 		case VAR_time:
 			return DISPLAY_NAME_time;
 		case VAR_x:
@@ -3429,8 +3418,8 @@ public abstract class VehicleStepGen<DEV> extends Object {
 			return "An asynchronous method for searching for a computer related to this message";
 		case VAR_simulationKey:
 			return "The simulation key. ";
-		case VAR_timeStepKey:
-			return "The time step key. ";
+		case VAR_timeStepId:
+			return "The time step ID. ";
 		case VAR_time:
 			return "The time in seconds. ";
 		case VAR_inheritPk:
@@ -3486,8 +3475,8 @@ public abstract class VehicleStepGen<DEV> extends Object {
 			return "Void";
 		case VAR_simulationKey:
 			return "Long";
-		case VAR_timeStepKey:
-			return "Long";
+		case VAR_timeStepId:
+			return "String";
 		case VAR_time:
 			return "BigDecimal";
 		case VAR_x:
@@ -3568,7 +3557,7 @@ public abstract class VehicleStepGen<DEV> extends Object {
 		switch(var) {
 		case VAR_simulationKey:
 			return 3;
-		case VAR_timeStepKey:
+		case VAR_timeStepId:
 			return 3;
 		case VAR_time:
 			return 4;
@@ -3605,7 +3594,7 @@ public abstract class VehicleStepGen<DEV> extends Object {
 		switch(var) {
 		case VAR_simulationKey:
 			return 1;
-		case VAR_timeStepKey:
+		case VAR_timeStepId:
 			return 2;
 		case VAR_time:
 			return 1;

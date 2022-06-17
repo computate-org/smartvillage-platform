@@ -875,7 +875,7 @@ public class TimeStepEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							if(body2.size() > 0) {
 								siteRequest.setJsonObject(body2);
 								patchTimeStepFuture(o2, true).onSuccess(b -> {
-									LOG.info("Import TimeStep {} succeeded, modified TimeStep. ", body.getValue("pk"));
+									LOG.info("Import TimeStep {} succeeded, modified TimeStep. ", body.getValue(TimeStep.VAR_id));
 									eventHandler.handle(Future.succeededFuture());
 								}).onFailure(ex -> {
 									LOG.error(String.format("putimportTimeStepFuture failed. "), ex);
@@ -886,7 +886,7 @@ public class TimeStepEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							}
 						} else {
 							postTimeStepFuture(siteRequest, true).onSuccess(b -> {
-								LOG.info("Import TimeStep {} succeeded, created new TimeStep. ", body.getValue("pk"));
+								LOG.info("Import TimeStep {} succeeded, created new TimeStep. ", body.getValue(TimeStep.VAR_id));
 								eventHandler.handle(Future.succeededFuture());
 							}).onFailure(ex -> {
 								LOG.error(String.format("putimportTimeStepFuture failed. "), ex);

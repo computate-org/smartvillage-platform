@@ -86,22 +86,19 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 	public Future<Void> importFcd() {
 		Promise<Void> promise = Promise.promise();
 		LOG.info(importFcdStarted);
-		Long millis = 1000L * config.getLong(ConfigKeys.REFRESH_DATA_PAUSE_IN_SECONDS, 10L);
-		vertx.setTimer(millis, a -> {
-			workerExecutor.executeBlocking(blockingCodeHandler -> {
-				importFcdFileList().onSuccess(c -> {
-					LOG.info(importFcdComplete);
-					promise.complete();
-				}).onFailure(ex -> {
-					LOG.error(importFcdFail, ex);
-					promise.fail(ex);
-				});
-			}, false).onSuccess(b -> {
+		workerExecutor.executeBlocking(blockingCodeHandler -> {
+			importFcdFileList().onSuccess(c -> {
+				LOG.info(importFcdComplete);
 				promise.complete();
 			}).onFailure(ex -> {
-				LOG.error(String.format(importFcdFail), ex);
+				LOG.error(importFcdFail, ex);
 				promise.fail(ex);
 			});
+		}, false).onSuccess(b -> {
+			promise.complete();
+		}).onFailure(ex -> {
+			LOG.error(String.format(importFcdFail), ex);
+			promise.fail(ex);
 		});
 		return promise.future();
 	}
@@ -384,6 +381,8 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 				String val = m2.group(2);
 				if("id".equals(var)) {
 					vehicleStep.setVehicleId(val);
+				} else if("type".equals(var)) {
+					vehicleStep.setVehicleType(val);
 				} else {
 					if(vehicleStep.persistForClass(var, val))
 						vehicleStep.addSaves(var);
@@ -396,6 +395,8 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 			vehicleStep.setId(id);
 			vehicleStep.setObjectId(id);
 			vehicleStep.setInheritPk(id);
+			vehicleStep.setTime(timeStep.getTime());
+			vehicleStep.setTimeStepId(timeStep.getId());
 
 			vehicleSteps.add(vehicleStep);
 			found = m.find();

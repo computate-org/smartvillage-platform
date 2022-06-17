@@ -51,12 +51,19 @@
 {{/if}}
 				<a href="/htm" class="w3-bar-item w3-button w3-text-2017-navy-peony "><i class="fad fa-code w3-text-2017-navy-peony "></i> HTMLs</a>
 				<a href="/time-step" class="w3-bar-item w3-button w3-text-blue "><i class="fad fa-timer w3-text-blue "></i> time steps</a>
-				<a href="/vehicle-step" class="w3-bar-item w3-button w3-text-blue "><i class="fad fa-map-location-dot w3-text-blue "></i> vehicle steps</a>
 				<a href="/page" class="w3-bar-item w3-button w3-text-2017-navy-peony "><i class="fad fa-page w3-text-2017-navy-peony "></i> articles</a>
 				<a href="/traffic-simulation" class="w3-bar-item w3-button w3-text-blue "><i class="fad fa-traffic-light-stop w3-text-blue "></i> traffic simulations</a>
 				<a href="/iot-node" class="w3-bar-item w3-button w3-text-blue "><i class="fad fa-router w3-text-blue "></i> IOT nodes</a>
+				<a href="/vehicle-step" class="w3-bar-item w3-button w3-text-blue "><i class="fad fa-map-location-dot w3-text-blue "></i> vehicle steps</a>
 {{/inline}}
 {{#*inline "htmBodyStartPageLayout"}}		<!-- inline "htmBodyStartPageLayout" -->
+		<div class="w3-bar ">
+			<div class="w3-center ">
+{{#block "htmBodyMenu"}}{{/block}}
+			</div>
+		</div>
+{{/inline}}
+{{#*inline "htmBodyMiddlePageLayout"}}		<!-- #*inline "htmBodyMiddlePageLayout" -->
 {{/inline}}
 {{#*inline "htmBodyEndPageLayout"}}		<!-- inline "htmBodyEndPageLayout" -->
 		<footer class="w3-center w3-black w3-text-white w3-padding-24 ">
@@ -71,6 +78,9 @@
 		</footer>
 {{/inline}}
 {{#*inline "htmBodyPageLayout"}}		<!-- inline "htmBodyPageLayout" -->
+{{#block "htmBodyStart"}}{{/block}}
+{{#block "htmBodyMiddle"}}{{/block}}
+{{#block "htmBodyEnd"}}{{/block}}
 {{/inline}}
 {{#*inline "htmPageLayout"}}<!DOCTYPE html>
 <!-- inline "htmPageLayout" -->

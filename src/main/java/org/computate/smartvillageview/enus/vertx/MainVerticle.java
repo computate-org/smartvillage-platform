@@ -35,10 +35,10 @@ import org.computate.smartvillageview.enus.model.page.SitePageEnUSGenApiService;
 import org.computate.smartvillageview.enus.model.htm.SiteHtmEnUSGenApiService;
 import org.computate.smartvillageview.enus.model.htm.SiteHtmEnUSGenApiService;
 import org.computate.smartvillageview.enus.model.traffic.time.step.TimeStepEnUSGenApiService;
-import org.computate.smartvillageview.enus.model.traffic.vehicle.step.VehicleStepEnUSGenApiService;
 import org.computate.smartvillageview.enus.model.page.SitePageEnUSGenApiService;
 import org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulationEnUSGenApiService;
 import org.computate.smartvillageview.enus.model.iotnode.IotNodeEnUSGenApiService;
+import org.computate.smartvillageview.enus.model.traffic.vehicle.step.VehicleStepEnUSGenApiService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -59,7 +59,6 @@ import io.vertx.core.WorkerExecutor;
 import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.eventbus.EventBusOptions;
 import io.vertx.core.http.Cookie;
-import io.vertx.core.http.HttpClientOptions;
 import io.vertx.core.http.HttpHeaders;
 import io.vertx.core.http.HttpServerOptions;
 import io.vertx.core.json.JsonObject;
@@ -441,9 +440,6 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 			JsonObject extraParams = new JsonObject();
 			extraParams.put("scope", "profile");
 			oauth2ClientOptions.setExtraParameters(extraParams);
-			HttpClientOptions httpClientOptions = new HttpClientOptions();
-			httpClientOptions.setConnectTimeout(60000);
-			oauth2ClientOptions.setHttpClientOptions(httpClientOptions);
 
 			OpenIDConnectAuth.discover(vertx, oauth2ClientOptions, a -> {
 				if(a.succeeded()) {
@@ -639,6 +635,39 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 			HealthCheckHandler healthCheckHandler = HealthCheckHandler.create(vertx);
 			siteInstances = Optional.ofNullable(System.getenv(ConfigKeys.SITE_INSTANCES)).map(s -> Integer.parseInt(s)).orElse(1);
 			workerPoolSize = System.getenv(ConfigKeys.WORKER_POOL_SIZE) == null ? null : Integer.parseInt(System.getenv(ConfigKeys.WORKER_POOL_SIZE));
+
+			healthCheckHandler.register("database", 2000, a -> {
+				pgPool.preparedQuery("select current_timestamp").execute(selectCAsync -> {
+					if(selectCAsync.succeeded()) {
+						a.complete(Status.OK(new JsonObject().put("jdbcMaxPoolSize", jdbcMaxPoolSize).put("jdbcMaxWaitQueueSize", jdbcMaxWaitQueueSize)));
+					} else {
+						LOG.error(configureHealthChecksErrorDatabase, a.future().cause());
+						promise.fail(a.future().cause());
+					}
+				});
+			});
+			healthCheckHandler.register("solr", 2000, a -> {
+				try {
+					String solrHostName = config().getString(ConfigKeys.SOLR_HOST_NAME);
+					Integer solrPort = config().getInteger(ConfigKeys.SOLR_PORT);
+					String solrCollection = config().getString(ConfigKeys.SOLR_COLLECTION);
+					String solrRequestUri = String.format("/solr/%s/select%s", solrCollection, "");
+					webClient.get(solrPort, solrHostName, solrRequestUri).send().onSuccess(b -> {
+						try {
+							a.complete(Status.OK());
+						} catch(Exception ex) {
+							LOG.error("Could not read response from Solr. ", ex);
+							a.fail(ex);
+						}
+					}).onFailure(ex -> {
+						LOG.error(String.format("Solr request failed. "), new RuntimeException(ex));
+						a.fail(ex);
+					});
+				} catch (Exception e) {
+					LOG.error(configureHealthChecksErrorSolr, a.future().cause());
+					a.fail(a.future().cause());
+				}
+			});
 			healthCheckHandler.register("vertx", 2000, a -> {
 				a.complete(Status.OK(new JsonObject().put(ConfigKeys.SITE_INSTANCES, siteInstances).put("workerPoolSize", workerPoolSize)));
 			});
@@ -745,10 +774,10 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 			SiteUserEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
 			SiteHtmEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
 			TimeStepEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
-			VehicleStepEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
 			SitePageEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
 			TrafficSimulationEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
 			IotNodeEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
+			VehicleStepEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
 
 			LOG.info(configureApiComplete);
 			promise.complete();

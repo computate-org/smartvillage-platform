@@ -85,9 +85,9 @@ public class VehicleStep extends VehicleStepGen<Object> {
 	 * HtmlCell: 2
 	 * Facet: true
 	 * DisplayName: Time Step
-	 * Description: The time step key. 
+	 * Description: The time step ID. 
 	 */
-	protected void _timeStepKey(Wrap<Long> w) {
+	protected void _timeStepId(Wrap<String> w) {
 	}
 
 	/**

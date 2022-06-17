@@ -527,12 +527,12 @@
 {{#*inline "htmBodySidebarSitePagePage"}}
 				<div class="w3-dropdown-hover w3-bar-block min-width-300px ">
 					<div class="min-width-300px w3-2017-navy-peony ">
-						<span title="Search" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').toggle(); "><i class="fad fa-magnifying-glass hover-box-shadow "></i></span>
-						<span title="Filters" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleFilters').toggle(); "><i class="fad fa-filters hover-box-shadow "></i></span>
-						<span title="Range" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleRange').toggle(); "><i class="fad fa-calendar-range hover-box-shadow "></i></span>
-						<span title="Pivot" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').toggle(); "><i class="fad fa-table-pivot hover-box-shadow "></i></span>
-						<span title="FieldList" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleFieldList').toggle(); "><i class="fad fa-list-ul hover-box-shadow "></i></span>
-						<span title="Stats" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleFieldList').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleStats').toggle(); "><i class="fad fa-chart-candlestick hover-box-shadow "></i></span>
+						<span title="Search" class="siteSidebarToggle " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').toggle(); "><i class="fad fa-magnifying-glass hover-box-shadow w3-xlarge "></i> Search</span>
+						<span title="Filters" class="siteSidebarToggle " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleFilters').toggle(); "><i class="fad fa-filters hover-box-shadow w3-xlarge "></i> Filters</span>
+						<span title="Range" class="siteSidebarToggle " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleRange').toggle(); "><i class="fad fa-calendar-range hover-box-shadow w3-xlarge "></i> Range</span>
+						<span title="Pivot" class="siteSidebarToggle " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').toggle(); "><i class="fad fa-table-pivot hover-box-shadow w3-xlarge "></i> Pivot</span>
+						<span title="FieldList" class="siteSidebarToggle " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleFieldList').toggle(); "><i class="fad fa-list-ul hover-box-shadow w3-xlarge "></i> FieldList</span>
+						<span title="Stats" class="siteSidebarToggle " onclick="$('.siteSidebarToggleFieldList').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleStats').toggle(); "><i class="fad fa-chart-candlestick hover-box-shadow w3-xlarge "></i> Stats</span>
 					</div>
 					<div class="w3-dropdown-content min-width-300px w3-white w3-border w3-border-2017-navy-peony ">
 						<div class="siteSidebarToggle siteSidebarToggleSearch" style="display: none; ">
@@ -595,18 +595,20 @@
 {{#*inline "htmBodyStartSitePagePage"}}
 {{> "htmBodyStartPageLayout"}}
 {{/inline}}
+{{#*inline "htmBodyMiddleSitePagePage"}}
+{{> "htmBodyMiddlePageLayout"}}
+{{/inline}}
 {{#*inline "htmBodyEndSitePagePage"}}
 {{> "htmBodyEndPageLayout"}}
 {{/inline}}
 {{#*inline "htmBodySitePagePage"}}
 {{#block "htmBodyStart"}}{{/block}}
-		<div class="w3-bar ">
-			<div class="w3-bar-item ">
+{{#block "htmBodyMiddle"}}{{/block}}
+{{#block "htmBodyEnd"}}{{/block}}
+{{/inline}}
+{{#*inline "htmBodyMiddleSitePagePage"}}
+		<div class="w3-bar w3-content ">
 {{#block "htmBodySidebar"}}{{/block}}
-			</div>
-			<div class="w3-bar-item ">
-{{#block "htmBodyMenu"}}{{/block}}
-			</div>
 		</div>
 	<div class="pageContent w3-content ">
 {{#block "htmBodyGraph"}}{{/block}}
@@ -625,7 +627,6 @@
 	{{/eq}}
 {{#block "htmForm"}}{{/block}}
 {{#block "htmForms"}}{{/block}}
-{{#block "htmBodyEnd"}}{{/block}}
 	</div>
 {{/inline}}
 {{#*inline "table1SitePagePage"}}

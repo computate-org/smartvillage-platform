@@ -28,8 +28,6 @@ import org.computate.vertx.api.ApiRequest;
 import org.computate.smartvillageview.enus.config.ConfigKeys;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.smartvillageview.enus.model.page.SitePage;
-import org.computate.smartvillageview.enus.model.traffic.simulation.reader.TrafficFcdReader;
-import org.computate.smartvillageview.enus.model.traffic.time.step.TimeStep;
 import org.computate.smartvillageview.enus.model.htm.SiteHtm;
 import org.computate.vertx.api.ApiCounter;
 import org.computate.vertx.api.ApiRequest;
@@ -78,7 +76,16 @@ import io.vertx.sqlclient.SqlConnection;
 import io.vertx.ext.web.client.predicate.ResponsePredicate;
 import io.vertx.ext.auth.authentication.TokenCredentials;
 import org.computate.smartvillageview.enus.model.iotnode.IotNode;
+import org.computate.smartvillageview.enus.model.traffic.simulation.reader.TrafficFcdReader;
+import org.computate.smartvillageview.enus.model.traffic.time.step.TimeStep;
 
+import org.computate.smartvillageview.enus.model.user.SiteUser;
+import org.computate.smartvillageview.enus.model.htm.SiteHtm;
+import org.computate.smartvillageview.enus.model.traffic.time.step.TimeStep;
+import org.computate.smartvillageview.enus.model.page.SitePage;
+import org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation;
+import org.computate.smartvillageview.enus.model.iotnode.IotNode;
+import org.computate.smartvillageview.enus.model.traffic.vehicle.step.VehicleStep;
 
 /**
  */
@@ -346,8 +353,8 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 	private Future<Void> importData() {
 		Promise<Void> promise = Promise.promise();
 		if(config().getBoolean(ConfigKeys.ENABLE_IMPORT_DATA)) {
-			importTimer(IotNode.CLASS_SIMPLE_NAME).onSuccess(a -> {
-				importTimer(SitePage.CLASS_SIMPLE_NAME).onSuccess(b -> {
+			importTimer("IotNode").onSuccess(a -> {
+				importTimer("SitePage").onSuccess(b -> {
 					importTimer(TimeStep.CLASS_SIMPLE_NAME).onSuccess(c -> {
 						promise.complete();
 					});
@@ -795,13 +802,13 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 		try {
 			if(config().getBoolean(ConfigKeys.ENABLE_REFRESH_DATA, false)) {
 				LOG.info(refreshAllDataStarted);
-				refreshData("SiteUser").onSuccess(q -> {
-					refreshData("SiteHtm").onSuccess(q1 -> {
-						refreshData("TimeStep").onSuccess(q2 -> {
-							refreshData("VehicleStep").onSuccess(q3 -> {
-								refreshData(SitePage.CLASS_SIMPLE_NAME).onSuccess(q4 -> {
-									refreshData("TrafficSimulation").onSuccess(q5 -> {
-										refreshData(IotNode.CLASS_SIMPLE_NAME).onSuccess(q6 -> {
+				refreshData(SiteUser.CLASS_SIMPLE_NAME).onSuccess(q -> {
+					refreshData(SiteHtm.CLASS_SIMPLE_NAME).onSuccess(q1 -> {
+						refreshData(TimeStep.CLASS_SIMPLE_NAME).onSuccess(q2 -> {
+							refreshData(SitePage.CLASS_SIMPLE_NAME).onSuccess(q3 -> {
+								refreshData(TrafficSimulation.CLASS_SIMPLE_NAME).onSuccess(q4 -> {
+									refreshData(IotNode.CLASS_SIMPLE_NAME).onSuccess(q5 -> {
+										refreshData(VehicleStep.CLASS_SIMPLE_NAME).onSuccess(q6 -> {
 											LOG.info(refreshAllDataComplete);
 											promise.complete();
 										}).onFailure(ex -> {

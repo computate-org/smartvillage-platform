@@ -1237,7 +1237,7 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 							if(body2.size() > 0) {
 								siteRequest.setJsonObject(body2);
 								patchIotNodeFuture(o, true).onSuccess(b -> {
-									LOG.info("Import IotNode {} succeeded, modified IotNode. ", body.getValue("pk"));
+									LOG.info("Import IotNode {} succeeded, modified IotNode. ", body.getValue(IotNode.VAR_pk));
 									eventHandler.handle(Future.succeededFuture());
 								}).onFailure(ex -> {
 									LOG.error(String.format("putimportIotNodeFuture failed. "), ex);
@@ -1248,7 +1248,7 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 							}
 						} else {
 							postIotNodeFuture(siteRequest, true).onSuccess(b -> {
-								LOG.info("Import IotNode {} succeeded, created new IotNode. ", body.getValue("pk"));
+								LOG.info("Import IotNode {} succeeded, created new IotNode. ", body.getValue(IotNode.VAR_pk));
 								eventHandler.handle(Future.succeededFuture());
 							}).onFailure(ex -> {
 								LOG.error(String.format("putimportIotNodeFuture failed. "), ex);
@@ -1303,11 +1303,6 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 
 	@Override
 	public void searchpageIotNode(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
-		JsonObject userPrincipal = serviceRequest.getUser();
-		LOG.info(String.format("oauth2AuthenticationProvider: %s", oauth2AuthenticationProvider));
-		LOG.info(String.format("userPrincipal: %s", userPrincipal));
-		User token = User.create(userPrincipal);
-		LOG.info(String.format("token: %s", token));
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smart-village-view-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 			try {
 

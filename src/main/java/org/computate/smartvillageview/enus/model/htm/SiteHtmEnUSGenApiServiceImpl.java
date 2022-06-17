@@ -789,7 +789,7 @@ public class SiteHtmEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 							if(body2.size() > 0) {
 								siteRequest.setJsonObject(body2);
 								patchSiteHtmFuture(o2, true).onSuccess(b -> {
-									LOG.info("Import SiteHtm {} succeeded, modified SiteHtm. ", body.getValue("pk"));
+									LOG.info("Import SiteHtm {} succeeded, modified SiteHtm. ", body.getValue(SiteHtm.VAR_id));
 									eventHandler.handle(Future.succeededFuture());
 								}).onFailure(ex -> {
 									LOG.error(String.format("putimportSiteHtmFuture failed. "), ex);
@@ -800,7 +800,7 @@ public class SiteHtmEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 							}
 						} else {
 							postSiteHtmFuture(siteRequest, true).onSuccess(b -> {
-								LOG.info("Import SiteHtm {} succeeded, created new SiteHtm. ", body.getValue("pk"));
+								LOG.info("Import SiteHtm {} succeeded, created new SiteHtm. ", body.getValue(SiteHtm.VAR_id));
 								eventHandler.handle(Future.succeededFuture());
 							}).onFailure(ex -> {
 								LOG.error(String.format("putimportSiteHtmFuture failed. "), ex);

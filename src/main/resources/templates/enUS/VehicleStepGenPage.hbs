@@ -401,7 +401,7 @@
 							</div>
 							<div class="w3-cell-row ">
 {{> "htmSimulationKey" classApiMethodMethod="PATCH"}}
-{{> "htmTimeStepKey" classApiMethodMethod="PATCH"}}
+{{> "htmTimeStepId" classApiMethodMethod="PATCH"}}
 							</div>
 							<div class="w3-cell-row ">
 {{> "htmTime" classApiMethodMethod="PATCH"}}
@@ -453,7 +453,7 @@
 							</div>
 							<div class="w3-cell-row ">
 {{> "htmSimulationKey" classApiMethodMethod="POST"}}
-{{> "htmTimeStepKey" classApiMethodMethod="POST"}}
+{{> "htmTimeStepId" classApiMethodMethod="POST"}}
 							</div>
 							<div class="w3-cell-row ">
 {{> "htmTime" classApiMethodMethod="POST"}}
@@ -528,7 +528,7 @@
 							</div>
 							<div class="w3-cell-row ">
 {{> "htmSimulationKey" classApiMethodMethod="Page"}}
-{{> "htmTimeStepKey" classApiMethodMethod="Page"}}
+{{> "htmTimeStepId" classApiMethodMethod="Page"}}
 							</div>
 							<div class="w3-cell-row ">
 {{> "htmTime" classApiMethodMethod="Page"}}
@@ -551,12 +551,12 @@
 {{#*inline "htmBodySidebarVehicleStepPage"}}
 				<div class="w3-dropdown-hover w3-bar-block min-width-300px ">
 					<div class="min-width-300px w3-blue ">
-						<span title="Search" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').toggle(); "><i class="fad fa-magnifying-glass hover-box-shadow "></i></span>
-						<span title="Filters" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleFilters').toggle(); "><i class="fad fa-filters hover-box-shadow "></i></span>
-						<span title="Range" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleRange').toggle(); "><i class="fad fa-calendar-range hover-box-shadow "></i></span>
-						<span title="Pivot" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').toggle(); "><i class="fad fa-table-pivot hover-box-shadow "></i></span>
-						<span title="FieldList" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleFieldList').toggle(); "><i class="fad fa-list-ul hover-box-shadow "></i></span>
-						<span title="Stats" class="siteSidebarToggle w3-xlarge " onclick="$('.siteSidebarToggleFieldList').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleStats').toggle(); "><i class="fad fa-chart-candlestick hover-box-shadow "></i></span>
+						<span title="Search" class="siteSidebarToggle " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').toggle(); "><i class="fad fa-magnifying-glass hover-box-shadow w3-xlarge "></i> Search</span>
+						<span title="Filters" class="siteSidebarToggle " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleFilters').toggle(); "><i class="fad fa-filters hover-box-shadow w3-xlarge "></i> Filters</span>
+						<span title="Range" class="siteSidebarToggle " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleRange').toggle(); "><i class="fad fa-calendar-range hover-box-shadow w3-xlarge "></i> Range</span>
+						<span title="Pivot" class="siteSidebarToggle " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').toggle(); "><i class="fad fa-table-pivot hover-box-shadow w3-xlarge "></i> Pivot</span>
+						<span title="FieldList" class="siteSidebarToggle " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleFieldList').toggle(); "><i class="fad fa-list-ul hover-box-shadow w3-xlarge "></i> FieldList</span>
+						<span title="Stats" class="siteSidebarToggle " onclick="$('.siteSidebarToggleFieldList').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleStats').toggle(); "><i class="fad fa-chart-candlestick hover-box-shadow w3-xlarge "></i> Stats</span>
 					</div>
 					<div class="w3-dropdown-content min-width-300px w3-white w3-border w3-border-blue ">
 						<div class="siteSidebarToggle siteSidebarToggleSearch" style="display: none; ">
@@ -619,18 +619,20 @@
 {{#*inline "htmBodyStartVehicleStepPage"}}
 {{> "htmBodyStartBaseModelPage"}}
 {{/inline}}
+{{#*inline "htmBodyMiddleVehicleStepPage"}}
+{{> "htmBodyMiddleBaseModelPage"}}
+{{/inline}}
 {{#*inline "htmBodyEndVehicleStepPage"}}
 {{> "htmBodyEndBaseModelPage"}}
 {{/inline}}
 {{#*inline "htmBodyVehicleStepPage"}}
 {{#block "htmBodyStart"}}{{/block}}
-		<div class="w3-bar ">
-			<div class="w3-bar-item ">
+{{#block "htmBodyMiddle"}}{{/block}}
+{{#block "htmBodyEnd"}}{{/block}}
+{{/inline}}
+{{#*inline "htmBodyMiddleVehicleStepPage"}}
+		<div class="w3-bar w3-content ">
 {{#block "htmBodySidebar"}}{{/block}}
-			</div>
-			<div class="w3-bar-item ">
-{{#block "htmBodyMenu"}}{{/block}}
-			</div>
 		</div>
 	<div class="pageContent w3-content ">
 {{#block "htmBodyGraph"}}{{/block}}
@@ -649,7 +651,6 @@
 	{{/eq}}
 {{#block "htmForm"}}{{/block}}
 {{#block "htmForms"}}{{/block}}
-{{#block "htmBodyEnd"}}{{/block}}
 	</div>
 {{/inline}}
 {{#*inline "table1VehicleStepPage"}}
@@ -853,17 +854,17 @@
 		{{/ifContainsAnyRoles}}
 {{/inline}}
 
-{{#*inline "htmTimeStepKey"}}
+{{#*inline "htmTimeStepId"}}
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}VehicleStepTimeStepKey">
+										<div id="suggest{{classApiMethodMethod}}VehicleStepTimeStepId">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-blue">
-													<label for="{{classApiMethodMethod}}_timeStepKey">Time Step</label>
+													<label for="{{classApiMethodMethod}}_timeStepId">Time Step</label>
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputTimeStepKey"}}
+														{{> "inputTimeStepId"}}
 													</div>
 	{{#ifContainsAnyRoles roles rolesRequired}}
 		{{#eq 'Page' classApiMethodMethod}}
@@ -871,7 +872,7 @@
 																<button
 																		tabindex="-1"
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_timeStepKey')); $('#{{classApiMethodMethod}}_timeStepKey').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#VehicleStepForm :input[name=id]').val() }], 'setTimeStepKey', null, function() { addGlow($('#{{classApiMethodMethod}}_timeStepKey')); }, function() { addError($('#{{classApiMethodMethod}}_timeStepKey')); }); "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_timeStepId')); $('#{{classApiMethodMethod}}_timeStepId').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#VehicleStepForm :input[name=id]').val() }], 'setTimeStepId', null, function() { addGlow($('#{{classApiMethodMethod}}_timeStepId')); }, function() { addError($('#{{classApiMethodMethod}}_timeStepId')); }); "
 																		>
 																	<i class="far fa-eraser "></i>
 																</button>
@@ -885,37 +886,37 @@
 								</div>
 {{/inline}}
 
-{{#*inline "inputTimeStepKey"}}
+{{#*inline "inputTimeStepId"}}
 		{{#ifContainsAnyRoles roles rolesRequired}}
 														<input
 															type="text"
 															placeholder="Time Step"
-															title="The time step key. "
-															id="{{classApiMethodMethod}}_timeStepKey"
+															title="The time step ID. "
+															id="{{classApiMethodMethod}}_timeStepId"
 	{{#eq "Page" classApiMethodMethod}}
-																class="setTimeStepKey classVehicleStep inputVehicleStep{{id}}TimeStepKey w3-input w3-border "
-																name="setTimeStepKey"
+																class="setTimeStepId classVehicleStep inputVehicleStep{{id}}TimeStepId w3-input w3-border "
+																name="setTimeStepId"
 	{{else}}
 		{{#eq "PATCH" classApiMethodMethod}}
-																class="setTimeStepKey classVehicleStep inputVehicleStep{{id}}TimeStepKey w3-input w3-border "
-																name="setTimeStepKey"
+																class="setTimeStepId classVehicleStep inputVehicleStep{{id}}TimeStepId w3-input w3-border "
+																name="setTimeStepId"
 		{{else}}
-																class="valueTimeStepKey w3-input w3-border classVehicleStep inputVehicleStep{{id}}TimeStepKey w3-input w3-border "
-																name="timeStepKey"
+																class="valueTimeStepId w3-input w3-border classVehicleStep inputVehicleStep{{id}}TimeStepId w3-input w3-border "
+																name="timeStepId"
 		{{/eq}}
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setTimeStepKey', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_timeStepKey')); }, function() { addError($('#{{classApiMethodMethod}}_timeStepKey')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setTimeStepId', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_timeStepId')); }, function() { addError($('#{{classApiMethodMethod}}_timeStepId')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
-															value="{{vehicleStep_.timeStepKey}}"
+															value="{{vehicleStep_.timeStepId}}"
 	{{/eq}}
 														/>
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varVehicleStep{{id}}TimeStepKey ">{{vehicleStep_.timeStepKey}}</span>
+															<span class="varVehicleStep{{id}}TimeStepId ">{{vehicleStep_.timeStepId}}</span>
 			{{/ifContainsKeys}}
 		{{/ifContainsAnyRoles}}
 {{/inline}}

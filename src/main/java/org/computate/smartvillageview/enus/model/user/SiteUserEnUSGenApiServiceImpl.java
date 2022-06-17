@@ -1157,7 +1157,7 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							if(body2.size() > 0) {
 								siteRequest.setJsonObject(body2);
 								patchSiteUserFuture(o, true).onSuccess(b -> {
-									LOG.info("Import SiteUser {} succeeded, modified SiteUser. ", body.getValue("pk"));
+									LOG.info("Import SiteUser {} succeeded, modified SiteUser. ", body.getValue(SiteUser.VAR_pk));
 									eventHandler.handle(Future.succeededFuture());
 								}).onFailure(ex -> {
 									LOG.error(String.format("putimportSiteUserFuture failed. "), ex);
@@ -1168,7 +1168,7 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							}
 						} else {
 							postSiteUserFuture(siteRequest, true).onSuccess(b -> {
-								LOG.info("Import SiteUser {} succeeded, created new SiteUser. ", body.getValue("pk"));
+								LOG.info("Import SiteUser {} succeeded, created new SiteUser. ", body.getValue(SiteUser.VAR_pk));
 								eventHandler.handle(Future.succeededFuture());
 							}).onFailure(ex -> {
 								LOG.error(String.format("putimportSiteUserFuture failed. "), ex);
