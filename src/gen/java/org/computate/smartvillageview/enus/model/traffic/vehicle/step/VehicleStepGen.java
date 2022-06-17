@@ -35,6 +35,7 @@ import java.lang.Void;
 import java.lang.Long;
 import java.lang.String;
 import java.math.BigDecimal;
+import java.lang.Double;
 import io.vertx.pgclient.data.Point;
 import org.computate.vertx.serialize.pgclient.PgClientPointSerializer;
 import org.computate.vertx.serialize.pgclient.PgClientPointDeserializer;
@@ -377,6 +378,128 @@ public abstract class VehicleStepGen<DEV> extends Object {
 
 	public BigDecimal sqlTime() {
 		return time;
+	}
+
+	///////
+	// x //
+	///////
+
+	/**	 The entity x
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected Double x;
+
+	/**	<br> The entity x
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.vehicle.step.VehicleStep&fq=entiteVar_enUS_indexed_string:x">Find the entity x in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _x(Wrap<Double> w);
+
+	public Double getX() {
+		return x;
+	}
+
+	public void setX(Double x) {
+		this.x = x;
+	}
+	@JsonIgnore
+	public void setX(String o) {
+		this.x = VehicleStep.staticSetX(siteRequest_, o);
+	}
+	public static Double staticSetX(SiteRequestEnUS siteRequest_, String o) {
+		if(NumberUtils.isParsable(o))
+			return Double.parseDouble(o);
+		return null;
+	}
+	protected VehicleStep xInit() {
+		Wrap<Double> xWrap = new Wrap<Double>().var("x");
+		if(x == null) {
+			_x(xWrap);
+			setX(xWrap.o);
+		}
+		return (VehicleStep)this;
+	}
+
+	public static Double staticSearchX(SiteRequestEnUS siteRequest_, Double o) {
+		return o;
+	}
+
+	public static String staticSearchStrX(SiteRequestEnUS siteRequest_, Double o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqX(SiteRequestEnUS siteRequest_, String o) {
+		return VehicleStep.staticSearchStrX(siteRequest_, VehicleStep.staticSearchX(siteRequest_, VehicleStep.staticSetX(siteRequest_, o)));
+	}
+
+	public Double sqlX() {
+		return x;
+	}
+
+	///////
+	// y //
+	///////
+
+	/**	 The entity y
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected Double y;
+
+	/**	<br> The entity y
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.vehicle.step.VehicleStep&fq=entiteVar_enUS_indexed_string:y">Find the entity y in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _y(Wrap<Double> w);
+
+	public Double getY() {
+		return y;
+	}
+
+	public void setY(Double y) {
+		this.y = y;
+	}
+	@JsonIgnore
+	public void setY(String o) {
+		this.y = VehicleStep.staticSetY(siteRequest_, o);
+	}
+	public static Double staticSetY(SiteRequestEnUS siteRequest_, String o) {
+		if(NumberUtils.isParsable(o))
+			return Double.parseDouble(o);
+		return null;
+	}
+	protected VehicleStep yInit() {
+		Wrap<Double> yWrap = new Wrap<Double>().var("y");
+		if(y == null) {
+			_y(yWrap);
+			setY(yWrap.o);
+		}
+		return (VehicleStep)this;
+	}
+
+	public static Double staticSearchY(SiteRequestEnUS siteRequest_, Double o) {
+		return o;
+	}
+
+	public static String staticSearchStrY(SiteRequestEnUS siteRequest_, Double o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqY(SiteRequestEnUS siteRequest_, String o) {
+		return VehicleStep.staticSearchStrY(siteRequest_, VehicleStep.staticSearchY(siteRequest_, VehicleStep.staticSetY(siteRequest_, o)));
+	}
+
+	public Double sqlY() {
+		return y;
 	}
 
 	//////////////
@@ -1983,6 +2106,8 @@ public abstract class VehicleStepGen<DEV> extends Object {
 				simulationKeyInit();
 				timeStepKeyInit();
 				timeInit();
+				xInit();
+				yInit();
 				locationInit();
 				vehicleIdInit();
 				vehicleTypeInit();
@@ -2072,6 +2197,10 @@ public abstract class VehicleStepGen<DEV> extends Object {
 				return oVehicleStep.timeStepKey;
 			case "time":
 				return oVehicleStep.time;
+			case "x":
+				return oVehicleStep.x;
+			case "y":
+				return oVehicleStep.y;
 			case "location":
 				return oVehicleStep.location;
 			case "vehicleId":
@@ -2171,6 +2300,10 @@ public abstract class VehicleStepGen<DEV> extends Object {
 			return VehicleStep.staticSetTimeStepKey(siteRequest_, o);
 		case "time":
 			return VehicleStep.staticSetTime(siteRequest_, o);
+		case "x":
+			return VehicleStep.staticSetX(siteRequest_, o);
+		case "y":
+			return VehicleStep.staticSetY(siteRequest_, o);
 		case "location":
 			return VehicleStep.staticSetLocation(siteRequest_, o);
 		case "vehicleId":
@@ -2245,6 +2378,10 @@ public abstract class VehicleStepGen<DEV> extends Object {
 			return VehicleStep.staticSearchTimeStepKey(siteRequest_, (Long)o);
 		case "time":
 			return VehicleStep.staticSearchTime(siteRequest_, (BigDecimal)o);
+		case "x":
+			return VehicleStep.staticSearchX(siteRequest_, (Double)o);
+		case "y":
+			return VehicleStep.staticSearchY(siteRequest_, (Double)o);
 		case "location":
 			return VehicleStep.staticSearchLocation(siteRequest_, (Point)o);
 		case "vehicleId":
@@ -2319,6 +2456,10 @@ public abstract class VehicleStepGen<DEV> extends Object {
 			return VehicleStep.staticSearchStrTimeStepKey(siteRequest_, (Long)o);
 		case "time":
 			return VehicleStep.staticSearchStrTime(siteRequest_, (Double)o);
+		case "x":
+			return VehicleStep.staticSearchStrX(siteRequest_, (Double)o);
+		case "y":
+			return VehicleStep.staticSearchStrY(siteRequest_, (Double)o);
 		case "location":
 			return VehicleStep.staticSearchStrLocation(siteRequest_, (Point)o);
 		case "vehicleId":
@@ -2393,6 +2534,10 @@ public abstract class VehicleStepGen<DEV> extends Object {
 			return VehicleStep.staticSearchFqTimeStepKey(siteRequest_, o);
 		case "time":
 			return VehicleStep.staticSearchFqTime(siteRequest_, o);
+		case "x":
+			return VehicleStep.staticSearchFqX(siteRequest_, o);
+		case "y":
+			return VehicleStep.staticSearchFqY(siteRequest_, o);
 		case "location":
 			return VehicleStep.staticSearchFqLocation(siteRequest_, o);
 		case "vehicleId":
@@ -2493,6 +2638,20 @@ public abstract class VehicleStepGen<DEV> extends Object {
 				else if(val instanceof Number)
 					setTime(new BigDecimal(((Number)val).doubleValue()));
 				saves.add("time");
+				return val;
+			case "x":
+				if(val instanceof Double)
+					setX((Double)val);
+				else if(val instanceof String)
+					setX((String)val);
+				saves.add("x");
+				return val;
+			case "y":
+				if(val instanceof Double)
+					setY((Double)val);
+				else if(val instanceof String)
+					setY((String)val);
+				saves.add("y");
 				return val;
 			case "location":
 				if(val instanceof String)
@@ -2971,6 +3130,10 @@ public abstract class VehicleStepGen<DEV> extends Object {
 				apiRequest.addVars("timeStepKey");
 			if(!Objects.equals(time, original.getTime()))
 				apiRequest.addVars("time");
+			if(!Objects.equals(x, original.getX()))
+				apiRequest.addVars("x");
+			if(!Objects.equals(y, original.getY()))
+				apiRequest.addVars("y");
 			if(!Objects.equals(location, original.getLocation()))
 				apiRequest.addVars("location");
 			if(!Objects.equals(vehicleId, original.getVehicleId()))
@@ -3035,6 +3198,8 @@ public abstract class VehicleStepGen<DEV> extends Object {
 		sb.append(Optional.ofNullable(simulationKey).map(v -> "simulationKey: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(timeStepKey).map(v -> "timeStepKey: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(time).map(v -> "time: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(x).map(v -> "x: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(y).map(v -> "y: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(location).map(v -> "location: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(vehicleId).map(v -> "vehicleId: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(vehicleType).map(v -> "vehicleType: \"" + v + "\"\n" ).orElse(""));
@@ -3070,6 +3235,8 @@ public abstract class VehicleStepGen<DEV> extends Object {
 	public static final String VAR_simulationKey = "simulationKey";
 	public static final String VAR_timeStepKey = "timeStepKey";
 	public static final String VAR_time = "time";
+	public static final String VAR_x = "x";
+	public static final String VAR_y = "y";
 	public static final String VAR_location = "location";
 	public static final String VAR_vehicleId = "vehicleId";
 	public static final String VAR_vehicleType = "vehicleType";
@@ -3146,6 +3313,8 @@ public abstract class VehicleStepGen<DEV> extends Object {
 	public static final String DISPLAY_NAME_simulationKey = "Simulation";
 	public static final String DISPLAY_NAME_timeStepKey = "Time Step";
 	public static final String DISPLAY_NAME_time = "Time in seconds";
+	public static final String DISPLAY_NAME_x = "";
+	public static final String DISPLAY_NAME_y = "";
 	public static final String DISPLAY_NAME_location = "location";
 	public static final String DISPLAY_NAME_vehicleId = "vehicle ID";
 	public static final String DISPLAY_NAME_vehicleType = "vehicle type";
@@ -3189,6 +3358,10 @@ public abstract class VehicleStepGen<DEV> extends Object {
 			return DISPLAY_NAME_timeStepKey;
 		case VAR_time:
 			return DISPLAY_NAME_time;
+		case VAR_x:
+			return DISPLAY_NAME_x;
+		case VAR_y:
+			return DISPLAY_NAME_y;
 		case VAR_location:
 			return DISPLAY_NAME_location;
 		case VAR_vehicleId:
@@ -3317,6 +3490,10 @@ public abstract class VehicleStepGen<DEV> extends Object {
 			return "Long";
 		case VAR_time:
 			return "BigDecimal";
+		case VAR_x:
+			return "Double";
+		case VAR_y:
+			return "Double";
 		case VAR_location:
 			return "Point";
 		case VAR_vehicleId:

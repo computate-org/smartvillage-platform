@@ -105,6 +105,20 @@ public class VehicleStep extends VehicleStepGen<Object> {
 
 	/**
 	 * {@inheritDoc}
+	 * Persist: true
+	 */
+	protected void _x(Wrap<Double> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * Persist: true
+	 */
+	protected void _y(Wrap<Double> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
 	 * DisplayName: location
@@ -113,6 +127,8 @@ public class VehicleStep extends VehicleStepGen<Object> {
 	 * Facet: true
 	 */
 	protected void _location(Wrap<Point> w) {
+		if(x != null && y != null)
+			w.o(new Point(y, x));
 	}
 
 	/**

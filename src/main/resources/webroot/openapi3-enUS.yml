@@ -8215,6 +8215,8 @@ components:
             properties:
               simulationKey:
                 type: string
+              path:
+                type: string
               time:
                 type: string
               inheritPk:
@@ -8273,6 +8275,13 @@ components:
             removeSimulationKey:
               type: string
             removeAllSimulationKey:
+              type: string
+            setPath:
+              type: string
+              nullable: true
+            removePath:
+              type: string
+            removeAllPath:
               type: string
             setTime:
               type: string
@@ -8458,6 +8467,13 @@ components:
               type: string
             removeAllSimulationKey:
               type: string
+            setPath:
+              type: string
+              nullable: true
+            removePath:
+              type: string
+            removeAllPath:
+              type: string
             setTime:
               type: string
               nullable: true
@@ -8637,6 +8653,8 @@ components:
           properties:
             simulationKey:
               type: string
+            path:
+              type: string
             time:
               type: string
             inheritPk:
@@ -8690,6 +8708,8 @@ components:
         - type: object
           properties:
             simulationKey:
+              type: string
+            path:
               type: string
             time:
               type: string
@@ -8745,6 +8765,8 @@ components:
           properties:
             simulationKey:
               type: string
+            path:
+              type: string
             time:
               type: string
             inheritPk:
@@ -8799,6 +8821,8 @@ components:
           properties:
             simulationKey:
               type: string
+            path:
+              type: string
             time:
               type: string
             inheritPk:
@@ -8852,6 +8876,8 @@ components:
         - type: object
           properties:
             simulationKey:
+              type: string
+            path:
               type: string
             time:
               type: string
@@ -8915,6 +8941,10 @@ components:
               timeStepKey:
                 type: string
               time:
+                type: string
+              x:
+                type: string
+              y:
                 type: string
               location:
                 type: string
@@ -9000,6 +9030,20 @@ components:
             removeTime:
               type: string
             removeAllTime:
+              type: string
+            setX:
+              type: string
+              nullable: true
+            removeX:
+              type: string
+            removeAllX:
+              type: string
+            setY:
+              type: string
+              nullable: true
+            removeY:
+              type: string
+            removeAllY:
               type: string
             setLocation:
               type: string
@@ -9241,6 +9285,20 @@ components:
               type: string
             removeAllTime:
               type: string
+            setX:
+              type: string
+              nullable: true
+            removeX:
+              type: string
+            removeAllX:
+              type: string
+            setY:
+              type: string
+              nullable: true
+            removeY:
+              type: string
+            removeAllY:
+              type: string
             setLocation:
               type: string
               nullable: true
@@ -9466,6 +9524,10 @@ components:
               type: string
             time:
               type: string
+            x:
+              type: string
+            y:
+              type: string
             location:
               type: string
             vehicleId:
@@ -9535,6 +9597,10 @@ components:
             timeStepKey:
               type: string
             time:
+              type: string
+            x:
+              type: string
+            y:
               type: string
             location:
               type: string
@@ -9606,6 +9672,10 @@ components:
               type: string
             time:
               type: string
+            x:
+              type: string
+            y:
+              type: string
             location:
               type: string
             vehicleId:
@@ -9676,6 +9746,10 @@ components:
               type: string
             time:
               type: string
+            x:
+              type: string
+            y:
+              type: string
             location:
               type: string
             vehicleId:
@@ -9745,6 +9819,10 @@ components:
             timeStepKey:
               type: string
             time:
+              type: string
+            x:
+              type: string
+            y:
               type: string
             location:
               type: string
