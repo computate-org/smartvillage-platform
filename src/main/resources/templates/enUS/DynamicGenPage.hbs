@@ -44,11 +44,6 @@
 {{/inline}}
 {{#*inline "htmBodyDynamicPage"}}
 {{#block "htmBodyStart"}}{{/block}}
-		<div class="w3-bar ">
-			<div class="w3-bar-item ">
-{{#block "htmBodyMenu"}}{{/block}}
-			</div>
-		</div>
 	<div class="pageContent w3-content ">
 {{#each htmBody}}{{#if htmBefore}}{{{htmBefore}}}{{/if}}{{#if text}}{{#each text}}{{.}}{{/each}}{{/if}}{{#if htmAfter}}{{{htmAfter}}}{{/if}}{{/each}}
 {{#block "htmBodyEnd"}}{{/block}}
