@@ -53,13 +53,13 @@ PROJECTS:
       - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_PageLayout | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_PageLayout }}.java"
         template: page/PageLayout.java
       - path: "{{ PROJECT_SRC }}/src/main/resources/templates/{{ PROJECT_LANG }}/{{ CLASS_SIMPLE_NAME_PageLayout }}.hbs"
-        template: page/{{ CLASS_SIMPLE_NAME_PageLayout }}.hbs
+        template: page/PageLayout.hbs
       - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_HomePage | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_HomePage }}.java"
         template: page/HomePage.java
       - path: "{{ PROJECT_SRC }}/src/main/resources/templates/{{ PROJECT_LANG }}/{{ CLASS_SIMPLE_NAME_HomePage }}.hbs"
-        template: page/{{ CLASS_SIMPLE_NAME_HomePage }}.hbs
+        template: page/HomePage.hbs
       - path: "{{ PROJECT_SRC }}/src/main/resources/templates/{{ PROJECT_LANG }}/{{ CLASS_SIMPLE_NAME_DynamicPage }}.hbs"
-        template: page/{{ CLASS_SIMPLE_NAME_DynamicPage }}.hbs
+        template: page/DynamicPage.hbs
       - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_MainVerticle | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_MainVerticle }}.java"
         template: vertx/MainVerticle.java
       - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_WorkerVerticle | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_WorkerVerticle }}.java"
