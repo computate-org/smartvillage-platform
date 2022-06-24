@@ -215,10 +215,20 @@ public class SitePageGenPage extends SitePageGenPageGen<PageLayout> {
 	}
 
 	@Override
+	protected void _apiUri(Wrap<String> c) {
+		c.o("/api/page");
+	}
+
+	@Override
 	protected void _roles(List<String> l) {
 		if(siteRequest_ != null) {
 			l.addAll(Stream.concat(siteRequest_.getUserResourceRoles().stream(), siteRequest_.getUserRealmRoles().stream()).distinct().collect(Collectors.toList()));
 		}
+	}
+
+	@Override
+	protected void _rolesRequired(List<String> l) {
+		l.addAll(Optional.ofNullable(siteRequest_.getConfig().getJsonArray(ConfigKeys.AUTH_ROLES_REQUIRED + "_SitePage")).orElse(new JsonArray()).stream().map(o -> o.toString()).collect(Collectors.toList()));
 	}
 
 	@Override
@@ -401,7 +411,7 @@ public class SitePageGenPage extends SitePageGenPageGen<PageLayout> {
 
 	@Override
 	protected void _pageDescription(Wrap<String> c) {
-			c.o("A webpage in the site. ");
+			c.o("An article in the site. ");
 	}
 
 	@Override
@@ -416,6 +426,10 @@ public class SitePageGenPage extends SitePageGenPageGen<PageLayout> {
 
 	@Override
 	protected void _contextIconName(Wrap<String> c) {
-			c.o("page");
+			c.o("newspaper");
+	}
+
+	protected void _pageUriSitePage(Wrap<String> c) {
+			c.o("/page");
 	}
 }

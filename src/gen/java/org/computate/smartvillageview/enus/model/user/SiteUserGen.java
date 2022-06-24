@@ -129,8 +129,8 @@ public abstract class SiteUserGen<DEV> extends BaseModel {
 			return Long.parseLong(o);
 		return null;
 	}
-	public SiteUser addUserKeys(Long...objets) {
-		for(Long o : objets) {
+	public SiteUser addUserKeys(Long...objects) {
+		for(Long o : objects) {
 			addUserKeys(o);
 		}
 		return (SiteUser)this;
@@ -141,10 +141,10 @@ public abstract class SiteUserGen<DEV> extends BaseModel {
 		return (SiteUser)this;
 	}
 	@JsonIgnore
-	public void setUserKeys(JsonArray objets) {
+	public void setUserKeys(JsonArray objects) {
 		userKeys.clear();
-		for(int i = 0; i < objets.size(); i++) {
-			Long o = objets.getLong(i);
+		for(int i = 0; i < objects.size(); i++) {
+			Long o = objects.getLong(i);
 			addUserKeys(o);
 		}
 	}

@@ -2,8 +2,8 @@ package org.computate.smartvillageview.enus.model.user;
 
 import java.util.List;
 import org.computate.search.wrap.Wrap;
-import org.computate.vertx.model.user.ComputateVertxSiteUser;
-import org.computate.vertx.request.ComputateVertxSiteRequest;
+import org.computate.vertx.model.user.ComputateSiteUser;
+import org.computate.vertx.request.ComputateSiteRequest;
 import org.computate.smartvillageview.enus.model.base.BaseModel;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 
@@ -43,7 +43,7 @@ import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
  * Role.enUS: SiteAdmin
  * Description: A user record for each site user
  */
-public class SiteUser extends SiteUserGen<BaseModel> implements ComputateVertxSiteUser {
+public class SiteUser extends SiteUserGen<BaseModel> implements ComputateSiteUser {
 
 	/**
 	 * {@inheritDoc}
@@ -146,7 +146,7 @@ public class SiteUser extends SiteUserGen<BaseModel> implements ComputateVertxSi
 	 * Description: An implementation for the interface to set the request object
 	 */
 	@Override
-	public <T extends ComputateVertxSiteRequest> void setSiteRequest_(T siteRequest) {
+	public <T extends ComputateSiteRequest> void setSiteRequest_(T siteRequest) {
 		siteRequest_ = (SiteRequestEnUS)siteRequest;
 	}
 

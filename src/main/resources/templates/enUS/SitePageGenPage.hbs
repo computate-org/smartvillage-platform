@@ -362,7 +362,7 @@
 {{/inline}}
 {{#*inline "htmFormSitePagePage"}}
 		<!-- #*inline "htmForm" -->
-		<form action="" id="SitePageForm" class="pageForm " style="" onsubmit="event.preventDefault(); return false; ">
+		<form action="/api/page" id="SitePageForm" class="pageForm " style="" onsubmit="event.preventDefault(); return false; ">
 {{#if id}}
 			<input name="id" class="valueId" type="hidden" value="{{id}}"/>
 {{/if}}
@@ -525,17 +525,18 @@
 		</div>
 {{/inline}}
 {{#*inline "htmBodySidebarSitePagePage"}}
-				<div class="w3-dropdown-hover w3-bar-block min-width-300px ">
-					<div class="min-width-300px w3-2017-navy-peony ">
-						<span title="Search" class="siteSidebarToggle " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').toggle(); "><i class="fad fa-magnifying-glass hover-box-shadow w3-xlarge "></i> Search</span>
-						<span title="Filters" class="siteSidebarToggle " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleFilters').toggle(); "><i class="fad fa-filters hover-box-shadow w3-xlarge "></i> Filters</span>
-						<span title="Range" class="siteSidebarToggle " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleRange').toggle(); "><i class="fad fa-calendar-range hover-box-shadow w3-xlarge "></i> Range</span>
-						<span title="Pivot" class="siteSidebarToggle " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').toggle(); "><i class="fad fa-table-pivot hover-box-shadow w3-xlarge "></i> Pivot</span>
-						<span title="FieldList" class="siteSidebarToggle " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleFieldList').toggle(); "><i class="fad fa-list-ul hover-box-shadow w3-xlarge "></i> FieldList</span>
-						<span title="Stats" class="siteSidebarToggle " onclick="$('.siteSidebarToggleFieldList').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleStats').toggle(); "><i class="fad fa-chart-candlestick hover-box-shadow w3-xlarge "></i> Stats</span>
+				<div class="w3-dropdown-click w3-bar-block min-width-300px ">
+					<div class="min-width-300px ">
+						<span title="Search" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-navy-peony " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-2017-navy-peony'); $(this).addClass('w3-black'); $(this).removeClass('w3-2017-navy-peony'); "><i class="fad fa-magnifying-glass hover-box-shadow w3-xlarge "></i> Search</span>
+						<span title="Filters" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-navy-peony " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleFilters').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-2017-navy-peony'); $(this).addClass('w3-black'); $(this).removeClass('w3-2017-navy-peony'); "><i class="fad fa-filters hover-box-shadow w3-xlarge "></i> Filters</span>
+						<span title="Range" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-navy-peony " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleRange').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-2017-navy-peony'); $(this).addClass('w3-black'); $(this).removeClass('w3-2017-navy-peony'); "><i class="fad fa-calendar-range hover-box-shadow w3-xlarge "></i> Range</span>
+						<span title="Pivot" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-navy-peony " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-2017-navy-peony'); $(this).addClass('w3-black'); $(this).removeClass('w3-2017-navy-peony'); "><i class="fad fa-table-pivot hover-box-shadow w3-xlarge "></i> Pivot</span>
+						<span title="FieldList" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-navy-peony " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleFieldList').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-2017-navy-peony'); $(this).addClass('w3-black'); $(this).removeClass('w3-2017-navy-peony'); "><i class="fad fa-list-ul hover-box-shadow w3-xlarge "></i> FieldList</span>
+						<span title="Stats" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-navy-peony " onclick="$('.siteSidebarToggleFieldList').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleStats').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-2017-navy-peony'); $(this).addClass('w3-black'); $(this).removeClass('w3-2017-navy-peony'); "><i class="fad fa-chart-candlestick hover-box-shadow w3-xlarge "></i> Stats</span>
+						<a title="API" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-navy-peony " href="{{ apiUri }}{{ queryStr }}"><i class="fad fa-brackets-curly hover-box-shadow w3-xlarge "></i> API</a>
 					</div>
-					<div class="w3-dropdown-content min-width-300px w3-white w3-border w3-border-2017-navy-peony ">
-						<div class="siteSidebarToggle siteSidebarToggleSearch" style="display: none; ">
+					<div class=" ">
+						<div class="siteSidebarToggle siteSidebarToggleSearch w3-dropdown-content min-width-300px w3-white w3-border w3-border-2017-navy-peony " style="display: none; ">
 							<div class="w3-bar w3-2017-navy-peony ">
 								<span class="w3-bar-item ">
 								<i class="fad fa-magnifying-glass "></i> Search</span>
@@ -544,7 +545,7 @@
 {{#block "htmBodySearch"}}{{/block}}
 							</div>
 						</div>
-						<div  class="siteSidebarToggle siteSidebarToggleFilters" style="display: none; ">
+						<div  class="siteSidebarToggle siteSidebarToggleFilters w3-dropdown-content min-width-300px w3-white w3-border w3-border-2017-navy-peony " style="display: none; ">
 							<div class="w3-bar w3-2017-navy-peony ">
 								<span class="w3-bar-item ">
 								<i class="fad fa-filters "></i> Filters</span>
@@ -553,8 +554,8 @@
 {{#block "htmBodyFilters"}}{{/block}}
 							</div>
 						</div>
-						<div  class="siteSidebarToggle siteSidebarToggleRange" style="display: none; ">
-							<div class="w3-bar w3-2017-navy-peony ">
+						<div  class="siteSidebarToggle siteSidebarToggleRange w3-dropdown-content min-width-300px w3-white w3-border w3-border-2017-navy-peony " style="display: none; ">
+							<div class="w3-bar w3-2017-navy-peony  ">
 								<span class="w3-bar-item ">
 								<i class="fad fa-calendar-range "></i> Range</span>
 							</div>
@@ -562,7 +563,7 @@
 {{#block "htmBodyRange"}}{{/block}}
 							</div>
 						</div>
-						<div  class="siteSidebarToggle siteSidebarTogglePivot" style="display: none; ">
+						<div  class="siteSidebarToggle siteSidebarTogglePivot w3-dropdown-content min-width-300px w3-white w3-border w3-border-2017-navy-peony " style="display: none; ">
 							<div class="w3-bar w3-2017-navy-peony ">
 								<span class="w3-bar-item ">
 								<i class="fad fa-table-pivot "></i> Pivot</span>
@@ -571,7 +572,7 @@
 {{#block "htmBodyPivot"}}{{/block}}
 							</div>
 						</div>
-						<div  class="siteSidebarToggle siteSidebarToggleFieldList" style="display: none; ">
+						<div  class="siteSidebarToggle siteSidebarToggleFieldList w3-dropdown-content min-width-300px w3-white w3-border w3-border-2017-navy-peony " style="display: none; ">
 							<div class="w3-bar w3-2017-navy-peony ">
 								<span class="w3-bar-item ">
 								<i class="fad fa-list-ul "></i> Field List</span>
@@ -580,7 +581,7 @@
 {{#block "htmBodyFieldList"}}{{/block}}
 							</div>
 						</div>
-						<div  class="siteSidebarToggle siteSidebarToggleStats" style="display: none; ">
+						<div  class="siteSidebarToggle siteSidebarToggleStats w3-dropdown-content min-width-300px w3-white w3-border w3-border-2017-navy-peony " style="display: none; ">
 							<div class="w3-bar w3-2017-navy-peony ">
 								<span class="w3-bar-item ">
 								<i class="fad fa-chart-candlestick "></i> Stats</span>
@@ -668,7 +669,7 @@
 						</td>
 						<td>
 							<a href="{{pageUrlPk}}">
-								<i class="fad fa-page "></i>
+								<i class="fad fa-newspaper "></i>
 								<span class="white-space-pre-wrap ">{{objectTitle}}</span>
 							</a>
 						</td>
@@ -766,7 +767,7 @@
 			</div>
 			<div class="">
 				<a href="/page" class="">
-					<i class="fad fa-page"></i>
+					<i class="fad fa-newspaper"></i>
 					see all the articles
 				</a>
 			</div>
@@ -785,6 +786,7 @@
 													<div class="w3-cell ">
 														{{> "inputPageId"}}
 													</div>
+	{{#ifContainsAnyRoles roles rolesRequired}}
 		{{#eq 'Page' classApiMethodMethod}}
 															<div class="w3-cell w3-left-align w3-cell-top ">
 																<button
@@ -796,6 +798,7 @@
 																</button>
 															</div>
 														{{/eq}}
+	{{/ifContainsAnyRoles}}
 												</div>
 											</div>
 										</div>
@@ -804,6 +807,7 @@
 {{/inline}}
 
 {{#*inline "inputPageId"}}
+		{{#ifContainsAnyRoles roles rolesRequired}}
 														<input
 															type="text"
 															placeholder="Page ID"
@@ -830,6 +834,9 @@
 	{{/eq}}
 														/>
 
+													{{else}}
+															<span class="varSitePage{{id}}PageId ">{{sitePage_.pageId}}</span>
+		{{/ifContainsAnyRoles}}
 {{/inline}}
 
 {{#*inline "htmCourseNum"}}
@@ -844,6 +851,7 @@
 													<div class="w3-cell ">
 														{{> "inputCourseNum"}}
 													</div>
+	{{#ifContainsAnyRoles roles rolesRequired}}
 		{{#eq 'Page' classApiMethodMethod}}
 															<div class="w3-cell w3-left-align w3-cell-top ">
 																<button
@@ -855,6 +863,7 @@
 																</button>
 															</div>
 														{{/eq}}
+	{{/ifContainsAnyRoles}}
 												</div>
 											</div>
 										</div>
@@ -863,6 +872,7 @@
 {{/inline}}
 
 {{#*inline "inputCourseNum"}}
+		{{#ifContainsAnyRoles roles rolesRequired}}
 														<input
 															type="text"
 															placeholder="Course Number"
@@ -889,6 +899,9 @@
 	{{/eq}}
 														/>
 
+													{{else}}
+															<span class="varSitePage{{id}}CourseNum ">{{sitePage_.courseNum}}</span>
+		{{/ifContainsAnyRoles}}
 {{/inline}}
 
 {{#*inline "htmLessonNum"}}
@@ -903,6 +916,7 @@
 													<div class="w3-cell ">
 														{{> "inputLessonNum"}}
 													</div>
+	{{#ifContainsAnyRoles roles rolesRequired}}
 		{{#eq 'Page' classApiMethodMethod}}
 															<div class="w3-cell w3-left-align w3-cell-top ">
 																<button
@@ -914,6 +928,7 @@
 																</button>
 															</div>
 														{{/eq}}
+	{{/ifContainsAnyRoles}}
 												</div>
 											</div>
 										</div>
@@ -922,6 +937,7 @@
 {{/inline}}
 
 {{#*inline "inputLessonNum"}}
+		{{#ifContainsAnyRoles roles rolesRequired}}
 														<input
 															type="text"
 															placeholder="Lesson Number"
@@ -948,6 +964,9 @@
 	{{/eq}}
 														/>
 
+													{{else}}
+															<span class="varSitePage{{id}}LessonNum ">{{sitePage_.lessonNum}}</span>
+		{{/ifContainsAnyRoles}}
 {{/inline}}
 
 {{#*inline "htmUri"}}
@@ -962,6 +981,7 @@
 													<div class="w3-cell ">
 														{{> "inputUri"}}
 													</div>
+	{{#ifContainsAnyRoles roles rolesRequired}}
 		{{#eq 'Page' classApiMethodMethod}}
 															<div class="w3-cell w3-left-align w3-cell-top ">
 																<button
@@ -973,6 +993,7 @@
 																</button>
 															</div>
 														{{/eq}}
+	{{/ifContainsAnyRoles}}
 												</div>
 											</div>
 										</div>
@@ -981,6 +1002,7 @@
 {{/inline}}
 
 {{#*inline "inputUri"}}
+		{{#ifContainsAnyRoles roles rolesRequired}}
 														<input
 															type="text"
 															placeholder="URI"
@@ -1007,6 +1029,9 @@
 	{{/eq}}
 														/>
 
+													{{else}}
+															<span class="varSitePage{{id}}Uri ">{{sitePage_.uri}}</span>
+		{{/ifContainsAnyRoles}}
 {{/inline}}
 
 {{#*inline "htmH1"}}
@@ -1021,6 +1046,7 @@
 													<div class="w3-cell ">
 														{{> "inputH1"}}
 													</div>
+	{{#ifContainsAnyRoles roles rolesRequired}}
 		{{#eq 'Page' classApiMethodMethod}}
 															<div class="w3-cell w3-left-align w3-cell-top ">
 																<button
@@ -1032,6 +1058,7 @@
 																</button>
 															</div>
 														{{/eq}}
+	{{/ifContainsAnyRoles}}
 												</div>
 											</div>
 										</div>
@@ -1040,6 +1067,7 @@
 {{/inline}}
 
 {{#*inline "inputH1"}}
+		{{#ifContainsAnyRoles roles rolesRequired}}
 														<input
 															type="text"
 															placeholder="header 1"
@@ -1066,6 +1094,9 @@
 	{{/eq}}
 														/>
 
+													{{else}}
+															<span class="varSitePage{{id}}H1 ">{{sitePage_.h1}}</span>
+		{{/ifContainsAnyRoles}}
 {{/inline}}
 
 {{#*inline "htmH2"}}
@@ -1080,6 +1111,7 @@
 													<div class="w3-cell ">
 														{{> "inputH2"}}
 													</div>
+	{{#ifContainsAnyRoles roles rolesRequired}}
 		{{#eq 'Page' classApiMethodMethod}}
 															<div class="w3-cell w3-left-align w3-cell-top ">
 																<button
@@ -1091,6 +1123,7 @@
 																</button>
 															</div>
 														{{/eq}}
+	{{/ifContainsAnyRoles}}
 												</div>
 											</div>
 										</div>
@@ -1099,6 +1132,7 @@
 {{/inline}}
 
 {{#*inline "inputH2"}}
+		{{#ifContainsAnyRoles roles rolesRequired}}
 														<input
 															type="text"
 															placeholder="header 2"
@@ -1125,6 +1159,9 @@
 	{{/eq}}
 														/>
 
+													{{else}}
+															<span class="varSitePage{{id}}H2 ">{{sitePage_.h2}}</span>
+		{{/ifContainsAnyRoles}}
 {{/inline}}
 
 {{#*inline "htmInheritPk"}}
@@ -1136,6 +1173,7 @@
 													<div class="w3-cell ">
 														{{> "inputInheritPk"}}
 													</div>
+	{{#ifContainsAnyRoles roles rolesRequired}}
 		{{#eq 'Page' classApiMethodMethod}}
 															<div class="w3-cell w3-left-align w3-cell-top ">
 																<button
@@ -1147,6 +1185,7 @@
 																</button>
 															</div>
 														{{/eq}}
+	{{/ifContainsAnyRoles}}
 												</div>
 											</div>
 										</div>
@@ -1155,6 +1194,7 @@
 {{/inline}}
 
 {{#*inline "inputInheritPk"}}
+		{{#ifContainsAnyRoles roles rolesRequired}}
 														<input
 															type="text"
 															title="An optional inherited primary key from a legacy system for this object in the database"
@@ -1180,6 +1220,9 @@
 	{{/eq}}
 														/>
 
+													{{else}}
+															<span class="varSitePage{{id}}InheritPk ">{{sitePage_.inheritPk}}</span>
+		{{/ifContainsAnyRoles}}
 {{/inline}}
 
 {{#*inline "htmCreated"}}
@@ -1248,6 +1291,7 @@
 													<div class="w3-cell ">
 														{{> "inputAuthor"}}
 													</div>
+	{{#ifContainsAnyRoles roles rolesRequired}}
 		{{#eq 'Page' classApiMethodMethod}}
 															<div class="w3-cell w3-left-align w3-cell-top ">
 																<button
@@ -1259,6 +1303,7 @@
 																</button>
 															</div>
 														{{/eq}}
+	{{/ifContainsAnyRoles}}
 												</div>
 											</div>
 										</div>
@@ -1267,6 +1312,7 @@
 {{/inline}}
 
 {{#*inline "inputAuthor"}}
+		{{#ifContainsAnyRoles roles rolesRequired}}
 														<input
 															type="text"
 															placeholder="author"
@@ -1293,6 +1339,9 @@
 	{{/eq}}
 														/>
 
+													{{else}}
+															<span class="varSitePage{{id}}Author ">{{sitePage_.author}}</span>
+		{{/ifContainsAnyRoles}}
 {{/inline}}
 
 {{#*inline "htmPageImageUri"}}
@@ -1307,6 +1356,7 @@
 													<div class="w3-cell ">
 														{{> "inputPageImageUri"}}
 													</div>
+	{{#ifContainsAnyRoles roles rolesRequired}}
 		{{#eq 'Page' classApiMethodMethod}}
 															<div class="w3-cell w3-left-align w3-cell-top ">
 																<button
@@ -1318,6 +1368,7 @@
 																</button>
 															</div>
 														{{/eq}}
+	{{/ifContainsAnyRoles}}
 												</div>
 											</div>
 										</div>
@@ -1326,6 +1377,7 @@
 {{/inline}}
 
 {{#*inline "inputPageImageUri"}}
+		{{#ifContainsAnyRoles roles rolesRequired}}
 														<input
 															type="text"
 															placeholder="imageUri"
@@ -1352,6 +1404,9 @@
 	{{/eq}}
 														/>
 
+													{{else}}
+															<span class="varSitePage{{id}}PageImageUri ">{{sitePage_.pageImageUri}}</span>
+		{{/ifContainsAnyRoles}}
 {{/inline}}
 
 {{#*inline "htmArchived"}}
@@ -1374,6 +1429,7 @@
 {{/inline}}
 
 {{#*inline "inputArchived"}}
+		{{#ifContainsAnyRoles roles rolesRequired}}
 	{{#eq 'Page' classApiMethodMethod}}
 															<input
 																type="checkbox"
@@ -1411,6 +1467,9 @@
 														</select>
 	{{/eq}}
 
+													{{else}}
+															<span class="varSitePage{{id}}Archived ">{{sitePage_.archived}}</span>
+		{{/ifContainsAnyRoles}}
 {{/inline}}
 
 {{#*inline "htmDeleted"}}
@@ -1433,6 +1492,7 @@
 {{/inline}}
 
 {{#*inline "inputDeleted"}}
+		{{#ifContainsAnyRoles roles rolesRequired}}
 	{{#eq 'Page' classApiMethodMethod}}
 															<input
 																type="checkbox"
@@ -1470,6 +1530,9 @@
 														</select>
 	{{/eq}}
 
+													{{else}}
+															<span class="varSitePage{{id}}Deleted ">{{sitePage_.deleted}}</span>
+		{{/ifContainsAnyRoles}}
 {{/inline}}
 
 {{#*inline "htmSessionId"}}
@@ -1554,6 +1617,7 @@
 													<div class="w3-cell ">
 														{{> "inputObjectId"}}
 													</div>
+	{{#ifContainsAnyRoles roles rolesRequired}}
 		{{#eq 'Page' classApiMethodMethod}}
 															<div class="w3-cell w3-left-align w3-cell-top ">
 																<button
@@ -1565,6 +1629,7 @@
 																</button>
 															</div>
 														{{/eq}}
+	{{/ifContainsAnyRoles}}
 												</div>
 											</div>
 										</div>
@@ -1573,6 +1638,7 @@
 {{/inline}}
 
 {{#*inline "inputObjectId"}}
+		{{#ifContainsAnyRoles roles rolesRequired}}
 														<input
 															type="text"
 															placeholder="ID"
@@ -1599,4 +1665,72 @@
 	{{/eq}}
 														/>
 
+													{{else}}
+															<span class="varSitePage{{id}}ObjectId ">{{sitePage_.objectId}}</span>
+		{{/ifContainsAnyRoles}}
+{{/inline}}
+
+{{#*inline "htmObjectText"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SitePageObjectText">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-navy-peony">
+													<label for="{{classApiMethodMethod}}_objectText">text</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputObjectText"}}
+													</div>
+	{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-navy-peony "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_objectText')); $('#{{classApiMethodMethod}}_objectText').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SitePageForm :input[name=id]').val() }], 'setObjectText', null, function() { addGlow($('#{{classApiMethodMethod}}_objectText')); }, function() { addError($('#{{classApiMethodMethod}}_objectText')); }); "
+																		>
+																	<i class="far fa-eraser "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/ifContainsAnyRoles}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputObjectText"}}
+		{{#ifContainsAnyRoles roles rolesRequired}}
+														<input
+															type="text"
+															placeholder="text"
+															title="The full text search field in the search engine for this record while using autosuggest"
+															id="{{classApiMethodMethod}}_objectText"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setObjectText classSitePage inputSitePage{{id}}ObjectText w3-input w3-border "
+																name="setObjectText"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setObjectText classSitePage inputSitePage{{id}}ObjectText w3-input w3-border "
+																name="setObjectText"
+		{{else}}
+																class="valueObjectText w3-input w3-border classSitePage inputSitePage{{id}}ObjectText w3-input w3-border "
+																name="objectText"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setObjectText', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_objectText')); }, function() { addError($('#{{classApiMethodMethod}}_objectText')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{sitePage_.objectText}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+															<span class="varSitePage{{id}}ObjectText ">{{sitePage_.objectText}}</span>
+		{{/ifContainsAnyRoles}}
 {{/inline}}

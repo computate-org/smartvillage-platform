@@ -1,11 +1,11 @@
 package org.computate.smartvillageview.enus.config;
 
-import org.computate.vertx.config.ComputateVertxConfigKeys;
+import org.computate.vertx.config.ComputateConfigKeys;
 
 /**
  * Keyword: classSimpleNameConfigKeys
  */
-public class ConfigKeys extends ComputateVertxConfigKeys {
+public class ConfigKeys extends ComputateConfigKeys {
 
 	/**
 	 * 
@@ -87,4 +87,14 @@ public class ConfigKeys extends ComputateVertxConfigKeys {
 	 * If not, fetch more data. 
 	 **/
 	public static final String API_CHECK_TIMER_MILLIS = "API_CHECK_TIMER_MILLIS";
+
+	/**
+	 * Map default location. 
+	 **/
+	public static final String DEFAULT_MAP_LOCATION = "DEFAULT_MAP_LOCATION";
+
+	/**
+	 * Map default zoom. 
+	 **/
+	public static final String DEFAULT_MAP_ZOOM = "DEFAULT_MAP_ZOOM";
 }

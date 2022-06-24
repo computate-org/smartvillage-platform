@@ -618,6 +618,55 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		return PageLayout.staticSearchStrPageUri(siteRequest_, PageLayout.staticSearchPageUri(siteRequest_, PageLayout.staticSetPageUri(siteRequest_, o)));
 	}
 
+	////////////
+	// apiUri //
+	////////////
+
+	/**	 The entity apiUri
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String apiUri;
+
+	/**	<br> The entity apiUri
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.PageLayout&fq=entiteVar_enUS_indexed_string:apiUri">Find the entity apiUri in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _apiUri(Wrap<String> w);
+
+	public String getApiUri() {
+		return apiUri;
+	}
+	public void setApiUri(String o) {
+		this.apiUri = PageLayout.staticSetApiUri(siteRequest_, o);
+	}
+	public static String staticSetApiUri(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected PageLayout apiUriInit() {
+		Wrap<String> apiUriWrap = new Wrap<String>().var("apiUri");
+		if(apiUri == null) {
+			_apiUri(apiUriWrap);
+			setApiUri(apiUriWrap.o);
+		}
+		return (PageLayout)this;
+	}
+
+	public static String staticSearchApiUri(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrApiUri(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqApiUri(SiteRequestEnUS siteRequest_, String o) {
+		return PageLayout.staticSearchStrApiUri(siteRequest_, PageLayout.staticSearchApiUri(siteRequest_, PageLayout.staticSetApiUri(siteRequest_, o)));
+	}
+
 	////////////////
 	// pageMethod //
 	////////////////
@@ -1375,8 +1424,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	public static String staticSetRoles(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	public PageLayout addRoles(String...objets) {
-		for(String o : objets) {
+	public PageLayout addRoles(String...objects) {
+		for(String o : objects) {
 			addRoles(o);
 		}
 		return (PageLayout)this;
@@ -1387,10 +1436,10 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		return (PageLayout)this;
 	}
 	@JsonIgnore
-	public void setRoles(JsonArray objets) {
+	public void setRoles(JsonArray objects) {
 		roles.clear();
-		for(int i = 0; i < objets.size(); i++) {
-			String o = objets.getString(i);
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
 			addRoles(o);
 		}
 	}
@@ -1441,8 +1490,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	public static String staticSetRolesRequired(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	public PageLayout addRolesRequired(String...objets) {
-		for(String o : objets) {
+	public PageLayout addRolesRequired(String...objects) {
+		for(String o : objects) {
 			addRolesRequired(o);
 		}
 		return (PageLayout)this;
@@ -1453,10 +1502,10 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		return (PageLayout)this;
 	}
 	@JsonIgnore
-	public void setRolesRequired(JsonArray objets) {
+	public void setRolesRequired(JsonArray objects) {
 		rolesRequired.clear();
-		for(int i = 0; i < objets.size(); i++) {
-			String o = objets.getString(i);
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
 			addRolesRequired(o);
 		}
 	}
@@ -1507,8 +1556,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	public static String staticSetAuthRolesAdmin(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	public PageLayout addAuthRolesAdmin(String...objets) {
-		for(String o : objets) {
+	public PageLayout addAuthRolesAdmin(String...objects) {
+		for(String o : objects) {
 			addAuthRolesAdmin(o);
 		}
 		return (PageLayout)this;
@@ -1519,10 +1568,10 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		return (PageLayout)this;
 	}
 	@JsonIgnore
-	public void setAuthRolesAdmin(JsonArray objets) {
+	public void setAuthRolesAdmin(JsonArray objects) {
 		authRolesAdmin.clear();
-		for(int i = 0; i < objets.size(); i++) {
-			String o = objets.getString(i);
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
 			addAuthRolesAdmin(o);
 		}
 	}
@@ -1806,6 +1855,55 @@ public abstract class PageLayoutGen<DEV> extends Object {
 
 	public static String staticSearchFqQuery(SiteRequestEnUS siteRequest_, String o) {
 		return PageLayout.staticSearchStrQuery(siteRequest_, PageLayout.staticSearchQuery(siteRequest_, PageLayout.staticSetQuery(siteRequest_, o)));
+	}
+
+	//////////////
+	// queryStr //
+	//////////////
+
+	/**	 The entity queryStr
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String queryStr;
+
+	/**	<br> The entity queryStr
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.PageLayout&fq=entiteVar_enUS_indexed_string:queryStr">Find the entity queryStr in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _queryStr(Wrap<String> w);
+
+	public String getQueryStr() {
+		return queryStr;
+	}
+	public void setQueryStr(String o) {
+		this.queryStr = PageLayout.staticSetQueryStr(siteRequest_, o);
+	}
+	public static String staticSetQueryStr(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected PageLayout queryStrInit() {
+		Wrap<String> queryStrWrap = new Wrap<String>().var("queryStr");
+		if(queryStr == null) {
+			_queryStr(queryStrWrap);
+			setQueryStr(queryStrWrap.o);
+		}
+		return (PageLayout)this;
+	}
+
+	public static String staticSearchQueryStr(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrQueryStr(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqQueryStr(SiteRequestEnUS siteRequest_, String o) {
+		return PageLayout.staticSearchStrQueryStr(siteRequest_, PageLayout.staticSearchQueryStr(siteRequest_, PageLayout.staticSetQueryStr(siteRequest_, o)));
 	}
 
 	//////////////////
@@ -2295,6 +2393,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 				SITE_AUTH_REALMInit();
 				FONTAWESOME_KITInit();
 				pageUriInit();
+				apiUriInit();
 				pageMethodInit();
 				paramsInit();
 				userKeyInit();
@@ -2332,6 +2431,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 				varsFqInit();
 				varsRangeInit();
 				queryInit();
+				queryStrInit();
 				promise2.complete();
 			} catch(Exception ex) {
 				promise2.fail(ex);
@@ -2432,6 +2532,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 				return oPageLayout.FONTAWESOME_KIT;
 			case "pageUri":
 				return oPageLayout.pageUri;
+			case "apiUri":
+				return oPageLayout.apiUri;
 			case "pageMethod":
 				return oPageLayout.pageMethod;
 			case "params":
@@ -2476,6 +2578,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 				return oPageLayout.varsRange;
 			case "query":
 				return oPageLayout.query;
+			case "queryStr":
+				return oPageLayout.queryStr;
 			case "promiseAfter":
 				return oPageLayout.promiseAfter;
 			case "pageImageUri":
@@ -2551,6 +2655,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSetFONTAWESOME_KIT(siteRequest_, o);
 		case "pageUri":
 			return PageLayout.staticSetPageUri(siteRequest_, o);
+		case "apiUri":
+			return PageLayout.staticSetApiUri(siteRequest_, o);
 		case "pageMethod":
 			return PageLayout.staticSetPageMethod(siteRequest_, o);
 		case "params":
@@ -2593,6 +2699,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSetVarsRange(siteRequest_, o);
 		case "query":
 			return PageLayout.staticSetQuery(siteRequest_, o);
+		case "queryStr":
+			return PageLayout.staticSetQueryStr(siteRequest_, o);
 		case "pageImageUri":
 			return PageLayout.staticSetPageImageUri(siteRequest_, o);
 		case "pageImageWidth":
@@ -2641,6 +2749,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSearchFONTAWESOME_KIT(siteRequest_, (String)o);
 		case "pageUri":
 			return PageLayout.staticSearchPageUri(siteRequest_, (String)o);
+		case "apiUri":
+			return PageLayout.staticSearchApiUri(siteRequest_, (String)o);
 		case "pageMethod":
 			return PageLayout.staticSearchPageMethod(siteRequest_, (String)o);
 		case "params":
@@ -2683,6 +2793,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSearchVarsRange(siteRequest_, (JsonObject)o);
 		case "query":
 			return PageLayout.staticSearchQuery(siteRequest_, (JsonObject)o);
+		case "queryStr":
+			return PageLayout.staticSearchQueryStr(siteRequest_, (String)o);
 		case "pageImageUri":
 			return PageLayout.staticSearchPageImageUri(siteRequest_, (String)o);
 		case "pageImageWidth":
@@ -2731,6 +2843,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSearchStrFONTAWESOME_KIT(siteRequest_, (String)o);
 		case "pageUri":
 			return PageLayout.staticSearchStrPageUri(siteRequest_, (String)o);
+		case "apiUri":
+			return PageLayout.staticSearchStrApiUri(siteRequest_, (String)o);
 		case "pageMethod":
 			return PageLayout.staticSearchStrPageMethod(siteRequest_, (String)o);
 		case "params":
@@ -2773,6 +2887,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSearchStrVarsRange(siteRequest_, (JsonObject)o);
 		case "query":
 			return PageLayout.staticSearchStrQuery(siteRequest_, (JsonObject)o);
+		case "queryStr":
+			return PageLayout.staticSearchStrQueryStr(siteRequest_, (String)o);
 		case "pageImageUri":
 			return PageLayout.staticSearchStrPageImageUri(siteRequest_, (String)o);
 		case "pageImageWidth":
@@ -2821,6 +2937,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSearchFqFONTAWESOME_KIT(siteRequest_, o);
 		case "pageUri":
 			return PageLayout.staticSearchFqPageUri(siteRequest_, o);
+		case "apiUri":
+			return PageLayout.staticSearchFqApiUri(siteRequest_, o);
 		case "pageMethod":
 			return PageLayout.staticSearchFqPageMethod(siteRequest_, o);
 		case "params":
@@ -2863,6 +2981,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSearchFqVarsRange(siteRequest_, o);
 		case "query":
 			return PageLayout.staticSearchFqQuery(siteRequest_, o);
+		case "queryStr":
+			return PageLayout.staticSearchFqQueryStr(siteRequest_, o);
 		case "pageImageUri":
 			return PageLayout.staticSearchFqPageImageUri(siteRequest_, o);
 		case "pageImageWidth":
@@ -2906,6 +3026,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	public static final String VAR_SITE_AUTH_REALM = "SITE_AUTH_REALM";
 	public static final String VAR_FONTAWESOME_KIT = "FONTAWESOME_KIT";
 	public static final String VAR_pageUri = "pageUri";
+	public static final String VAR_apiUri = "apiUri";
 	public static final String VAR_pageMethod = "pageMethod";
 	public static final String VAR_params = "params";
 	public static final String VAR_userKey = "userKey";
@@ -2928,6 +3049,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	public static final String VAR_varsFq = "varsFq";
 	public static final String VAR_varsRange = "varsRange";
 	public static final String VAR_query = "query";
+	public static final String VAR_queryStr = "queryStr";
 	public static final String VAR_promiseAfter = "promiseAfter";
 	public static final String VAR_pageImageUri = "pageImageUri";
 	public static final String VAR_pageImageWidth = "pageImageWidth";
@@ -2950,6 +3072,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	public static final String DISPLAY_NAME_SITE_AUTH_REALM = "";
 	public static final String DISPLAY_NAME_FONTAWESOME_KIT = "";
 	public static final String DISPLAY_NAME_pageUri = "";
+	public static final String DISPLAY_NAME_apiUri = "";
 	public static final String DISPLAY_NAME_pageMethod = "";
 	public static final String DISPLAY_NAME_params = "";
 	public static final String DISPLAY_NAME_userKey = "";
@@ -2972,6 +3095,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	public static final String DISPLAY_NAME_varsFq = "";
 	public static final String DISPLAY_NAME_varsRange = "";
 	public static final String DISPLAY_NAME_query = "";
+	public static final String DISPLAY_NAME_queryStr = "";
 	public static final String DISPLAY_NAME_promiseAfter = "";
 	public static final String DISPLAY_NAME_pageImageUri = "";
 	public static final String DISPLAY_NAME_pageImageWidth = "";
@@ -3011,6 +3135,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return DISPLAY_NAME_FONTAWESOME_KIT;
 		case VAR_pageUri:
 			return DISPLAY_NAME_pageUri;
+		case VAR_apiUri:
+			return DISPLAY_NAME_apiUri;
 		case VAR_pageMethod:
 			return DISPLAY_NAME_pageMethod;
 		case VAR_params:
@@ -3055,6 +3181,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return DISPLAY_NAME_varsRange;
 		case VAR_query:
 			return DISPLAY_NAME_query;
+		case VAR_queryStr:
+			return DISPLAY_NAME_queryStr;
 		case VAR_promiseAfter:
 			return DISPLAY_NAME_promiseAfter;
 		case VAR_pageImageUri:

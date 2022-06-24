@@ -111,6 +111,14 @@ public class VehicleStepGenPage extends VehicleStepGenPageGen<BaseModelPage> {
 		w.o(Optional.ofNullable(searchListVehicleStep_.getFacetPivotMinCount()).orElse(0));
 	}
 
+	protected void _DEFAULT_MAP_LOCATION(Wrap<String> w) {
+		w.o(Optional.ofNullable(siteRequest_.getRequestVars().get(VAR_DEFAULT_MAP_LOCATION)).orElse(siteRequest_.getConfig().getString(ConfigKeys.DEFAULT_MAP_LOCATION)));
+	}
+
+	protected void _DEFAULT_MAP_ZOOM(Wrap<String> w) {
+		w.o(Optional.ofNullable(siteRequest_.getRequestVars().get(VAR_DEFAULT_MAP_ZOOM)).orElse(siteRequest_.getConfig().getString(ConfigKeys.DEFAULT_MAP_ZOOM)));
+	}
+
 	protected void _defaultFieldListVars(List<String> l) {
 		Optional.ofNullable(searchListVehicleStep_.getFields()).orElse(Arrays.asList()).forEach(varStored -> {
 			String varStored2 = varStored;
@@ -213,6 +221,11 @@ public class VehicleStepGenPage extends VehicleStepGenPageGen<BaseModelPage> {
 	@Override
 	protected void _pageUri(Wrap<String> c) {
 		c.o("/vehicle-step");
+	}
+
+	@Override
+	protected void _apiUri(Wrap<String> c) {
+		c.o("/api/vehicle-step");
 	}
 
 	@Override
@@ -418,5 +431,9 @@ public class VehicleStepGenPage extends VehicleStepGenPageGen<BaseModelPage> {
 	@Override
 	protected void _contextIconName(Wrap<String> c) {
 			c.o("map-location-dot");
+	}
+
+	protected void _pageUriVehicleStep(Wrap<String> c) {
+			c.o("/vehicle-step");
 	}
 }

@@ -1392,8 +1392,8 @@ public abstract class VehicleStepGen<DEV> extends Object {
 	public static String staticSetClassCanonicalNames(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	public VehicleStep addClassCanonicalNames(String...objets) {
-		for(String o : objets) {
+	public VehicleStep addClassCanonicalNames(String...objects) {
+		for(String o : objects) {
 			addClassCanonicalNames(o);
 		}
 		return (VehicleStep)this;
@@ -1404,10 +1404,10 @@ public abstract class VehicleStepGen<DEV> extends Object {
 		return (VehicleStep)this;
 	}
 	@JsonIgnore
-	public void setClassCanonicalNames(JsonArray objets) {
+	public void setClassCanonicalNames(JsonArray objects) {
 		classCanonicalNames.clear();
-		for(int i = 0; i < objets.size(); i++) {
-			String o = objets.getString(i);
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
 			addClassCanonicalNames(o);
 		}
 	}
@@ -1572,8 +1572,8 @@ public abstract class VehicleStepGen<DEV> extends Object {
 	public static String staticSetSaves(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	public VehicleStep addSaves(String...objets) {
-		for(String o : objets) {
+	public VehicleStep addSaves(String...objects) {
+		for(String o : objects) {
 			addSaves(o);
 		}
 		return (VehicleStep)this;
@@ -1584,10 +1584,10 @@ public abstract class VehicleStepGen<DEV> extends Object {
 		return (VehicleStep)this;
 	}
 	@JsonIgnore
-	public void setSaves(JsonArray objets) {
+	public void setSaves(JsonArray objects) {
 		saves.clear();
-		for(int i = 0; i < objets.size(); i++) {
-			String o = objets.getString(i);
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
 			addSaves(o);
 		}
 	}

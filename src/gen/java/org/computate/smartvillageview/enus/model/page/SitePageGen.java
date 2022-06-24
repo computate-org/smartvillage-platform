@@ -68,7 +68,7 @@ import io.vertx.core.json.JsonObject;
 public abstract class SitePageGen<DEV> extends Object {
 	protected static final Logger LOG = LoggerFactory.getLogger(SitePage.class);
 
-	public static final String SitePage_Description_enUS = "A webpage in the site. ";
+	public static final String SitePage_Description_enUS = "An article in the site. ";
 	public static final String SitePage_AName_enUS = "an article";
 	public static final String SitePage_This_enUS = "this ";
 	public static final String SitePage_ThisName_enUS = "this article";
@@ -102,7 +102,7 @@ public abstract class SitePageGen<DEV> extends Object {
 
 	public static final String SitePage_Color = "2017-navy-peony";
 	public static final String SitePage_IconGroup = "duotone";
-	public static final String SitePage_IconName = "page";
+	public static final String SitePage_IconName = "newspaper";
 
 	//////////////////
 	// siteRequest_ //
@@ -1169,8 +1169,8 @@ public abstract class SitePageGen<DEV> extends Object {
 	public static String staticSetClassCanonicalNames(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	public SitePage addClassCanonicalNames(String...objets) {
-		for(String o : objets) {
+	public SitePage addClassCanonicalNames(String...objects) {
+		for(String o : objects) {
 			addClassCanonicalNames(o);
 		}
 		return (SitePage)this;
@@ -1181,10 +1181,10 @@ public abstract class SitePageGen<DEV> extends Object {
 		return (SitePage)this;
 	}
 	@JsonIgnore
-	public void setClassCanonicalNames(JsonArray objets) {
+	public void setClassCanonicalNames(JsonArray objects) {
 		classCanonicalNames.clear();
-		for(int i = 0; i < objets.size(); i++) {
-			String o = objets.getString(i);
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
 			addClassCanonicalNames(o);
 		}
 	}
@@ -1349,8 +1349,8 @@ public abstract class SitePageGen<DEV> extends Object {
 	public static String staticSetSaves(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	public SitePage addSaves(String...objets) {
-		for(String o : objets) {
+	public SitePage addSaves(String...objects) {
+		for(String o : objects) {
 			addSaves(o);
 		}
 		return (SitePage)this;
@@ -1361,10 +1361,10 @@ public abstract class SitePageGen<DEV> extends Object {
 		return (SitePage)this;
 	}
 	@JsonIgnore
-	public void setSaves(JsonArray objets) {
+	public void setSaves(JsonArray objects) {
 		saves.clear();
-		for(int i = 0; i < objets.size(); i++) {
-			String o = objets.getString(i);
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
 			addSaves(o);
 		}
 	}
@@ -1590,35 +1590,52 @@ public abstract class SitePageGen<DEV> extends Object {
 	////////////////
 
 	/**	 The entity objectText
-	 *	 is defined as null before being initialized. 
+	 *	 It is constructed before being initialized with the constructor by default. 
 	 */
 	@JsonProperty
+	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
 	@JsonInclude(Include.NON_NULL)
-	protected String objectText;
+	protected List<String> objectText = new ArrayList<String>();
 
 	/**	<br> The entity objectText
-	 *  is defined as null before being initialized. 
+	 *  It is constructed before being initialized with the constructor by default. 
 	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.page.SitePage&fq=entiteVar_enUS_indexed_string:objectText">Find the entity objectText in Solr</a>
 	 * <br>
-	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 * @param l is the entity already constructed. 
 	 **/
-	protected abstract void _objectText(Wrap<String> w);
+	protected abstract void _objectText(List<String> l);
 
-	public String getObjectText() {
+	public List<String> getObjectText() {
 		return objectText;
 	}
-	public void setObjectText(String o) {
-		this.objectText = SitePage.staticSetObjectText(siteRequest_, o);
+
+	public void setObjectText(List<String> objectText) {
+		this.objectText = objectText;
 	}
 	public static String staticSetObjectText(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	protected SitePage objectTextInit() {
-		Wrap<String> objectTextWrap = new Wrap<String>().var("objectText");
-		if(objectText == null) {
-			_objectText(objectTextWrap);
-			setObjectText(objectTextWrap.o);
+	public SitePage addObjectText(String...objects) {
+		for(String o : objects) {
+			addObjectText(o);
 		}
+		return (SitePage)this;
+	}
+	public SitePage addObjectText(String o) {
+		if(o != null)
+			this.objectText.add(o);
+		return (SitePage)this;
+	}
+	@JsonIgnore
+	public void setObjectText(JsonArray objects) {
+		objectText.clear();
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
+			addObjectText(o);
+		}
+	}
+	protected SitePage objectTextInit() {
+		_objectText(objectText);
 		return (SitePage)this;
 	}
 
@@ -1632,6 +1649,10 @@ public abstract class SitePageGen<DEV> extends Object {
 
 	public static String staticSearchFqObjectText(SiteRequestEnUS siteRequest_, String o) {
 		return SitePage.staticSearchStrObjectText(siteRequest_, SitePage.staticSearchObjectText(siteRequest_, SitePage.staticSetObjectText(siteRequest_, o)));
+	}
+
+	public List<String> sqlObjectText() {
+		return objectText;
 	}
 
 	///////////////
@@ -2454,6 +2475,14 @@ public abstract class SitePageGen<DEV> extends Object {
 					setObjectId((String)val);
 				saves.add("objectId");
 				return val;
+			case "objecttext":
+				if(val instanceof List<?>)
+					((List<String>)val).stream().forEach(v -> addObjectText(v));
+				else if(val instanceof JsonArray)
+					((JsonArray)val).stream().forEach(v -> addObjectText(v.toString()));
+				if(!saves.contains("objectText"))
+					saves.add("objectText");
+				return val;
 			default:
 				return null;
 		}
@@ -2549,7 +2578,11 @@ public abstract class SitePageGen<DEV> extends Object {
 			doc.put("objectSuggest_suggested", objectSuggest);
 		}
 		if(objectText != null) {
-			doc.put("objectText_text_enUS", objectText.toString());
+			JsonArray l = new JsonArray();
+			doc.put("objectText_text_enUS", l);
+			for(String o : objectText) {
+				l.add(o);
+			}
 		}
 		if(pageUrlId != null) {
 			doc.put("pageUrlId_docvalues_string", pageUrlId);
@@ -2798,7 +2831,9 @@ public abstract class SitePageGen<DEV> extends Object {
 		oSitePage.setObjectTitle(Optional.ofNullable(doc.get("objectTitle_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSitePage.setObjectId(Optional.ofNullable(doc.get("objectId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSitePage.setObjectSuggest(Optional.ofNullable(doc.get("objectSuggest_suggested")).map(v -> v.toString()).orElse(null));
-		oSitePage.setObjectText(Optional.ofNullable(doc.get("objectText_indexedstored_string")).map(v -> v.toString()).orElse(null));
+		Optional.ofNullable((List<?>)doc.get("objectText_text_enUS")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
+			oSitePage.addObjectText(v.toString());
+		});
 		oSitePage.setPageUrlId(Optional.ofNullable(doc.get("pageUrlId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSitePage.setPageUrlPk(Optional.ofNullable(doc.get("pageUrlPk_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSitePage.setPageUrlApi(Optional.ofNullable(doc.get("pageUrlApi_docvalues_string")).map(v -> v.toString()).orElse(null));
@@ -2900,7 +2935,7 @@ public abstract class SitePageGen<DEV> extends Object {
 		sb.append(Optional.ofNullable(objectTitle).map(v -> "objectTitle: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(objectId).map(v -> "objectId: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(objectSuggest).map(v -> "objectSuggest: \"" + v + "\"\n" ).orElse(""));
-		sb.append(Optional.ofNullable(objectText).map(v -> "objectText: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(objectText).map(v -> "objectText: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(pageUrlId).map(v -> "pageUrlId: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(pageUrlPk).map(v -> "pageUrlPk: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(pageUrlApi).map(v -> "pageUrlApi: \"" + v + "\"\n" ).orElse(""));
@@ -3206,7 +3241,7 @@ public abstract class SitePageGen<DEV> extends Object {
 		case VAR_objectSuggest:
 			return "String";
 		case VAR_objectText:
-			return "String";
+			return "List";
 		case VAR_pageUrlId:
 			return "String";
 		case VAR_pageUrlPk:

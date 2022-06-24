@@ -216,6 +216,11 @@ public class TimeStepGenPage extends TimeStepGenPageGen<BaseModelPage> {
 	}
 
 	@Override
+	protected void _apiUri(Wrap<String> c) {
+		c.o("/api/time-step");
+	}
+
+	@Override
 	protected void _roles(List<String> l) {
 		if(siteRequest_ != null) {
 			l.addAll(Stream.concat(siteRequest_.getUserResourceRoles().stream(), siteRequest_.getUserRealmRoles().stream()).distinct().collect(Collectors.toList()));
@@ -418,5 +423,9 @@ public class TimeStepGenPage extends TimeStepGenPageGen<BaseModelPage> {
 	@Override
 	protected void _contextIconName(Wrap<String> c) {
 			c.o("timer");
+	}
+
+	protected void _pageUriTimeStep(Wrap<String> c) {
+			c.o("/time-step");
 	}
 }

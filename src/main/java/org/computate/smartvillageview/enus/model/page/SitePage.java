@@ -39,14 +39,15 @@ import io.vertx.core.Promise;
  * AName.enUS: an article
  * Color: 2017-navy-peony
  * IconGroup: duotone
- * IconName: page
+ * IconName: newspaper
  * NameVar: page
  * 
  * Sort.asc: courseNum
  * Sort.asc: lessonNum
  * 
- * RoleAll: true
- * Description: A webpage in the site. 
+ * PublicRead: true
+ * Role.enUS: SiteAdmin
+ * Description: An article in the site. 
  */
 public class SitePage extends SitePageGen<Object> {
 
@@ -310,6 +311,12 @@ public class SitePage extends SitePageGen<Object> {
 	 * Description: The title of this object
 	 */
 	protected void _objectTitle(Wrap<String> w) {
+		StringBuilder b = new StringBuilder();
+		if(h1 != null)
+			b.append(" ").append(h1);
+		if(h2 != null)
+			b.append(" ").append(h2);
+		w.o(b.toString());
 	}
 
 	/**
@@ -377,18 +384,17 @@ public class SitePage extends SitePageGen<Object> {
 	/**
 	 * {@inheritDoc}
 	 * Text: true
+	 * Persist: true
 	 * Description: The full text search field in the search engine for this record while using autosuggest
 	 * DisplayName: text
 	 */
-	protected void _objectText(Wrap<String> w) { 
-		StringBuilder b = new StringBuilder();
+	protected void _objectText(List<String> l) { 
 		if(objectNameVar != null)
-			b.append(" ").append(objectNameVar);
+			l.add(objectNameVar);
 		if(objectId != null)
-			b.append(" ").append(objectId);
+			l.add(objectId);
 		if(objectTitle != null)
-			b.append(" ").append(objectTitle);
-		w.o(b.toString());
+			l.add(objectTitle);
 	}
 
 	/**
@@ -399,8 +405,7 @@ public class SitePage extends SitePageGen<Object> {
 	 */
 	protected void _pageUrlId(Wrap<String> w) {
 		if(objectId != null) {
-			String o = siteRequest_.getConfig().getString(ConfigKeys.SITE_BASE_URL) + "/" + objectNameVar + "/" + objectId;
-			w.o(o);
+			w.o(String.format("%s%s", siteRequest_.getConfig().getString(ConfigKeys.SITE_BASE_URL), uri));
 		}
 	}
 

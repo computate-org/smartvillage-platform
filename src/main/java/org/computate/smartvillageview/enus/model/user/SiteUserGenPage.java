@@ -224,6 +224,11 @@ public class SiteUserGenPage extends SiteUserGenPageGen<BaseModelPage> {
 	}
 
 	@Override
+	protected void _apiUri(Wrap<String> c) {
+		c.o("/api/user");
+	}
+
+	@Override
 	protected void _roles(List<String> l) {
 		if(siteRequest_ != null) {
 			l.addAll(Stream.concat(siteRequest_.getUserResourceRoles().stream(), siteRequest_.getUserRealmRoles().stream()).distinct().collect(Collectors.toList()));
@@ -431,5 +436,9 @@ public class SiteUserGenPage extends SiteUserGenPageGen<BaseModelPage> {
 	@Override
 	protected void _contextIconName(Wrap<String> c) {
 			c.o("user-cog");
+	}
+
+	protected void _pageUriSiteUser(Wrap<String> c) {
+			c.o("/user");
 	}
 }

@@ -821,8 +821,8 @@ public abstract class SitePageGenPageGen<DEV> extends PageLayout {
 	public static String staticSetDefaultFieldListVars(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	public SitePageGenPage addDefaultFieldListVars(String...objets) {
-		for(String o : objets) {
+	public SitePageGenPage addDefaultFieldListVars(String...objects) {
+		for(String o : objects) {
 			addDefaultFieldListVars(o);
 		}
 		return (SitePageGenPage)this;
@@ -833,10 +833,10 @@ public abstract class SitePageGenPageGen<DEV> extends PageLayout {
 		return (SitePageGenPage)this;
 	}
 	@JsonIgnore
-	public void setDefaultFieldListVars(JsonArray objets) {
+	public void setDefaultFieldListVars(JsonArray objects) {
 		defaultFieldListVars.clear();
-		for(int i = 0; i < objets.size(); i++) {
-			String o = objets.getString(i);
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
 			addDefaultFieldListVars(o);
 		}
 	}
@@ -887,8 +887,8 @@ public abstract class SitePageGenPageGen<DEV> extends PageLayout {
 	public static String staticSetDefaultStatsVars(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	public SitePageGenPage addDefaultStatsVars(String...objets) {
-		for(String o : objets) {
+	public SitePageGenPage addDefaultStatsVars(String...objects) {
+		for(String o : objects) {
 			addDefaultStatsVars(o);
 		}
 		return (SitePageGenPage)this;
@@ -899,10 +899,10 @@ public abstract class SitePageGenPageGen<DEV> extends PageLayout {
 		return (SitePageGenPage)this;
 	}
 	@JsonIgnore
-	public void setDefaultStatsVars(JsonArray objets) {
+	public void setDefaultStatsVars(JsonArray objects) {
 		defaultStatsVars.clear();
-		for(int i = 0; i < objets.size(); i++) {
-			String o = objets.getString(i);
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
 			addDefaultStatsVars(o);
 		}
 	}
@@ -953,8 +953,8 @@ public abstract class SitePageGenPageGen<DEV> extends PageLayout {
 	public static String staticSetDefaultPivotVars(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	public SitePageGenPage addDefaultPivotVars(String...objets) {
-		for(String o : objets) {
+	public SitePageGenPage addDefaultPivotVars(String...objects) {
+		for(String o : objects) {
 			addDefaultPivotVars(o);
 		}
 		return (SitePageGenPage)this;
@@ -965,10 +965,10 @@ public abstract class SitePageGenPageGen<DEV> extends PageLayout {
 		return (SitePageGenPage)this;
 	}
 	@JsonIgnore
-	public void setDefaultPivotVars(JsonArray objets) {
+	public void setDefaultPivotVars(JsonArray objects) {
 		defaultPivotVars.clear();
-		for(int i = 0; i < objets.size(); i++) {
-			String o = objets.getString(i);
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
 			addDefaultPivotVars(o);
 		}
 	}
@@ -1243,6 +1243,55 @@ public abstract class SitePageGenPageGen<DEV> extends PageLayout {
 		return SitePageGenPage.staticSearchStrId(siteRequest_, SitePageGenPage.staticSearchId(siteRequest_, SitePageGenPage.staticSetId(siteRequest_, o)));
 	}
 
+	/////////////////////
+	// pageUriSitePage //
+	/////////////////////
+
+	/**	 The entity pageUriSitePage
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String pageUriSitePage;
+
+	/**	<br> The entity pageUriSitePage
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.page.SitePageGenPage&fq=entiteVar_enUS_indexed_string:pageUriSitePage">Find the entity pageUriSitePage in Solr</a>
+	 * <br>
+	 * @param c is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _pageUriSitePage(Wrap<String> c);
+
+	public String getPageUriSitePage() {
+		return pageUriSitePage;
+	}
+	public void setPageUriSitePage(String o) {
+		this.pageUriSitePage = SitePageGenPage.staticSetPageUriSitePage(siteRequest_, o);
+	}
+	public static String staticSetPageUriSitePage(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected SitePageGenPage pageUriSitePageInit() {
+		Wrap<String> pageUriSitePageWrap = new Wrap<String>().var("pageUriSitePage");
+		if(pageUriSitePage == null) {
+			_pageUriSitePage(pageUriSitePageWrap);
+			setPageUriSitePage(pageUriSitePageWrap.o);
+		}
+		return (SitePageGenPage)this;
+	}
+
+	public static String staticSearchPageUriSitePage(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrPageUriSitePage(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqPageUriSitePage(SiteRequestEnUS siteRequest_, String o) {
+		return SitePageGenPage.staticSearchStrPageUriSitePage(siteRequest_, SitePageGenPage.staticSearchPageUriSitePage(siteRequest_, SitePageGenPage.staticSetPageUriSitePage(siteRequest_, o)));
+	}
+
 	//////////////
 	// initDeep //
 	//////////////
@@ -1295,6 +1344,7 @@ public abstract class SitePageGenPageGen<DEV> extends PageLayout {
 				sitePageCountInit();
 				sitePage_Init();
 				idInit();
+				pageUriSitePageInit();
 				promise2.complete();
 			} catch(Exception ex) {
 				promise2.fail(ex);
@@ -1394,6 +1444,8 @@ public abstract class SitePageGenPageGen<DEV> extends PageLayout {
 				return oSitePageGenPage.sitePage_;
 			case "id":
 				return oSitePageGenPage.id;
+			case "pageUriSitePage":
+				return oSitePageGenPage.pageUriSitePage;
 			default:
 				return super.obtainPageLayout(var);
 		}
@@ -1465,6 +1517,8 @@ public abstract class SitePageGenPageGen<DEV> extends PageLayout {
 			return SitePageGenPage.staticSetSitePageCount(siteRequest_, o);
 		case "id":
 			return SitePageGenPage.staticSetId(siteRequest_, o);
+		case "pageUriSitePage":
+			return SitePageGenPage.staticSetPageUriSitePage(siteRequest_, o);
 			default:
 				return PageLayout.staticSetPageLayout(entityVar,  siteRequest_, o);
 		}
@@ -1511,6 +1565,8 @@ public abstract class SitePageGenPageGen<DEV> extends PageLayout {
 			return SitePageGenPage.staticSearchSitePageCount(siteRequest_, (Integer)o);
 		case "id":
 			return SitePageGenPage.staticSearchId(siteRequest_, (String)o);
+		case "pageUriSitePage":
+			return SitePageGenPage.staticSearchPageUriSitePage(siteRequest_, (String)o);
 			default:
 				return PageLayout.staticSearchPageLayout(entityVar,  siteRequest_, o);
 		}
@@ -1557,6 +1613,8 @@ public abstract class SitePageGenPageGen<DEV> extends PageLayout {
 			return SitePageGenPage.staticSearchStrSitePageCount(siteRequest_, (Integer)o);
 		case "id":
 			return SitePageGenPage.staticSearchStrId(siteRequest_, (String)o);
+		case "pageUriSitePage":
+			return SitePageGenPage.staticSearchStrPageUriSitePage(siteRequest_, (String)o);
 			default:
 				return PageLayout.staticSearchStrPageLayout(entityVar,  siteRequest_, o);
 		}
@@ -1603,6 +1661,8 @@ public abstract class SitePageGenPageGen<DEV> extends PageLayout {
 			return SitePageGenPage.staticSearchFqSitePageCount(siteRequest_, o);
 		case "id":
 			return SitePageGenPage.staticSearchFqId(siteRequest_, o);
+		case "pageUriSitePage":
+			return SitePageGenPage.staticSearchFqPageUriSitePage(siteRequest_, o);
 			default:
 				return PageLayout.staticSearchFqPageLayout(entityVar,  siteRequest_, o);
 		}
@@ -1642,6 +1702,7 @@ public abstract class SitePageGenPageGen<DEV> extends PageLayout {
 	public static final String VAR_sitePageCount = "sitePageCount";
 	public static final String VAR_sitePage_ = "sitePage_";
 	public static final String VAR_id = "id";
+	public static final String VAR_pageUriSitePage = "pageUriSitePage";
 
 	public static final String DISPLAY_NAME_searchListSitePage_ = "";
 	public static final String DISPLAY_NAME_pageResponse = "";
@@ -1666,6 +1727,7 @@ public abstract class SitePageGenPageGen<DEV> extends PageLayout {
 	public static final String DISPLAY_NAME_sitePageCount = "";
 	public static final String DISPLAY_NAME_sitePage_ = "";
 	public static final String DISPLAY_NAME_id = "";
+	public static final String DISPLAY_NAME_pageUriSitePage = "";
 
 	public static String displayNameForClass(String var) {
 		return SitePageGenPage.displayNameSitePageGenPage(var);
@@ -1718,6 +1780,8 @@ public abstract class SitePageGenPageGen<DEV> extends PageLayout {
 			return DISPLAY_NAME_sitePage_;
 		case VAR_id:
 			return DISPLAY_NAME_id;
+		case VAR_pageUriSitePage:
+			return DISPLAY_NAME_pageUriSitePage;
 		default:
 			return PageLayout.displayNamePageLayout(var);
 		}

@@ -25,13 +25,15 @@ import org.computate.search.tool.TimeTool;
 import org.computate.search.tool.XmlTool;
 import org.computate.vertx.api.ApiCounter;
 import org.computate.vertx.api.ApiRequest;
+import org.computate.vertx.api.ApiCounter;
+import org.computate.vertx.api.ApiRequest;
 import org.computate.smartvillageview.enus.config.ConfigKeys;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.smartvillageview.enus.model.page.SitePage;
 import org.computate.smartvillageview.enus.model.htm.SiteHtm;
 import org.computate.vertx.api.ApiCounter;
 import org.computate.vertx.api.ApiRequest;
-import org.computate.vertx.config.ComputateVertxConfigKeys;
+import org.computate.vertx.config.ComputateConfigKeys;
 import org.computate.vertx.handlebars.AuthHelpers;
 import org.computate.vertx.handlebars.DateHelpers;
 import org.computate.vertx.handlebars.SiteHelpers;
@@ -40,6 +42,7 @@ import org.slf4j.LoggerFactory;
 
 import com.github.jknack.handlebars.Context;
 import com.github.jknack.handlebars.Handlebars;
+import com.github.jknack.handlebars.Jackson2Helper;
 import com.github.jknack.handlebars.Template;
 import com.github.jknack.handlebars.helper.ConditionalHelpers;
 import com.github.jknack.handlebars.helper.StringHelpers;
@@ -82,10 +85,10 @@ import org.computate.smartvillageview.enus.model.traffic.time.step.TimeStep;
 import org.computate.smartvillageview.enus.model.user.SiteUser;
 import org.computate.smartvillageview.enus.model.htm.SiteHtm;
 import org.computate.smartvillageview.enus.model.traffic.time.step.TimeStep;
-import org.computate.smartvillageview.enus.model.page.SitePage;
 import org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation;
 import org.computate.smartvillageview.enus.model.iotnode.IotNode;
 import org.computate.smartvillageview.enus.model.traffic.vehicle.step.VehicleStep;
+import org.computate.smartvillageview.enus.model.page.SitePage;
 
 /**
  */
@@ -164,6 +167,7 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 			handlebars.registerHelpers(AuthHelpers.class);
 			handlebars.registerHelpers(SiteHelpers.class);
 			handlebars.registerHelpers(DateHelpers.class);
+			handlebars.registerHelper("json", Jackson2Helper.INSTANCE);
 
 			LOG.info(configureHandlebarsComplete);
 			promise.complete();
@@ -583,8 +587,6 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 									ExceptionUtils.rethrow(ex);
 								}
 							});
-							JsonObject pageBody2 = JsonObject.mapFrom(page);
-							json.put("page", pageBody2);
 			
 							stack.push("html");
 							stack.push("body");
@@ -592,10 +594,11 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 							for(String htmGroup : json.fieldNames()) {
 								if(StringUtils.startsWith(htmGroup, "htm")) {
 									JsonArray pageItems = json.getJsonArray(htmGroup);
-									sequenceNum = importSiteHtm(json, stack, pageId, htmGroup, pageItems, futures, sequenceNum);
+									sequenceNum = importSiteHtm(page, json, stack, pageId, htmGroup, pageItems, futures, sequenceNum);
 								}
 							}
-							importBody.put("list", importItems);
+							JsonObject pageBody2 = JsonObject.mapFrom(page);
+							json.put("page", pageBody2);
 			
 							CompositeFuture.all(futures).onSuccess(b -> {
 								JsonObject pageParams = new JsonObject();
@@ -606,9 +609,9 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 								JsonObject pageContext = new JsonObject().put("params", pageParams);
 								JsonObject pageRequest = new JsonObject().put("context", pageContext);
 								vertx.eventBus().request(String.format("smart-village-view-enUS-%s", SitePage.CLASS_SIMPLE_NAME), pageRequest, new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", SitePage.CLASS_SIMPLE_NAME))).onSuccess(c -> {
-									String solrHostName = config().getString(ComputateVertxConfigKeys.SOLR_HOST_NAME);
-									Integer solrPort = config().getInteger(ComputateVertxConfigKeys.SOLR_PORT);
-									String solrCollection = config().getString(ComputateVertxConfigKeys.SOLR_COLLECTION);
+									String solrHostName = config().getString(ComputateConfigKeys.SOLR_HOST_NAME);
+									Integer solrPort = config().getInteger(ComputateConfigKeys.SOLR_PORT);
+									String solrCollection = config().getString(ComputateConfigKeys.SOLR_COLLECTION);
 									String solrRequestUri = String.format("/solr/%s/update%s", solrCollection, "?commitWithin=1000&overwrite=true&wt=json");
 									String deleteQuery = String.format("classSimpleName_docvalues_string:%s AND created_docvalues_date:[* TO %s]", SiteHtm.CLASS_SIMPLE_NAME, SiteHtm.staticSearchStrCreated(null, SiteHtm.staticSearchCreated(null, now)));
 									String deleteXml = String.format("<delete><query>%s</query></delete>", deleteQuery);
@@ -658,18 +661,22 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 		return promise.future();
 	}
 
-	private Long importSiteHtm(JsonObject json, Stack<String> stack, String pageId, String htmGroup, JsonArray pageItems, List<Future> futures, Long sequenceNum) throws Exception {
+	private Long importSiteHtm(SitePage page, JsonObject json, Stack<String> stack, String pageId, String htmGroup, JsonArray pageItems, List<Future> futures, Long sequenceNum) throws Exception {
 		Double sort = 0D;
 		for(Integer i = 0; i < pageItems.size(); i++) {
+			// Process a page item, one at a time
 			JsonObject pageItem = (JsonObject)pageItems.getValue(i);
 			String uri = json.getString(SiteHtm.VAR_uri);
 			Object in = pageItem.getValue("in");
 			String e = pageItem.getString("e");
+			String each = pageItem.getString("each");
 			JsonObject a = pageItem.getJsonObject(SiteHtm.VAR_a);
 			Boolean eNoWrapParent = false;
 			Boolean eNoWrap = false;
 			String tabs = "";
+
 			if(e != null) {
+				// Stack the element and determine element name, wrap and tabs
 				String localNameParent = stack.isEmpty() ? null : stack.peek();
 				eNoWrapParent = localNameParent == null || XmlTool.HTML_ELEMENTS_NO_WRAP.contains(localNameParent);
 				eNoWrap = localNameParent == null || XmlTool.HTML_ELEMENTS_NO_WRAP.contains(e);
@@ -678,16 +685,20 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 			}
 
 			{
+				// Import the start of the element
 				sequenceNum++;
 				JsonObject importItem = new JsonObject();
 				if(e != null)
 					importItem.put(SiteHtm.VAR_eBefore, e);
 				String text = pageItem.getString(SiteHtm.VAR_text);
 				if(text != null) {
+					// Split text by lines and index each line as it's own value
 					Template template = handlebars.compileInline(text);
 					Context engineContext = Context.newBuilder(json.getMap()).resolver(templateEngine.getResolvers()).build();
 					Buffer buffer = Buffer.buffer(template.apply(engineContext));
-					importItem.put(SiteHtm.VAR_text, new JsonArray().addAll(new JsonArray(Arrays.asList(buffer.toString().split("\r?\n")))));
+					String[] strs = buffer.toString().split("\r?\n");
+					importItem.put(SiteHtm.VAR_text, new JsonArray().addAll(new JsonArray(Arrays.asList(strs))));
+					page.addObjectText(strs);
 				}
 				if(!eNoWrapParent && !tabs.isEmpty()) {
 					importItem.put(SiteHtm.VAR_tabs, tabs);
@@ -712,21 +723,27 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 				importItem.put(SiteHtm.VAR_sequenceNum, sequenceNum);
 				importItem.put(SiteHtm.VAR_uri, uri);
 				if(a != null) {
+					// Process element attributes
 					JsonObject attrs = new JsonObject();
 					for(String field : a.fieldNames()) {
+						// Get the value of the attribute and process template values before indexing the attribute
 						String val = a.getString(field);
-						Template template = handlebars.compileInline(val);
-						Context engineContext = Context.newBuilder(json.getMap()).resolver(templateEngine.getResolvers()).build();
-						Buffer buffer = Buffer.buffer(template.apply(engineContext));
-						attrs.put(field, buffer.toString());
+						if(val != null) {
+							Template template = handlebars.compileInline(val);
+							Context engineContext = Context.newBuilder(json.getMap()).resolver(templateEngine.getResolvers()).build();
+							Buffer buffer = Buffer.buffer(template.apply(engineContext));
+							attrs.put(field, buffer.toString());
+						}
 					}
 					importItem.put(SiteHtm.VAR_a, attrs);
 				}
 				importItem.put(SiteHtm.VAR_id, String.format("%s_%s", SiteHtm.CLASS_SIMPLE_NAME, sequenceNum));
 				for(Integer j=1; j <= stack.size(); j++) {
+					// Add sort values for the element at each level of the stack
 					importItem.put("sort" + j, stack.get(j - 1));
 				}
 	
+				// Add this element import to the list of futures that will all be requested in a CompositeFuture
 				JsonObject htmParams = new JsonObject();
 				htmParams.put("body", importItem);
 				htmParams.put("path", new JsonObject());
@@ -737,15 +754,47 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 				futures.add(vertx.eventBus().request(String.format("smart-village-view-enUS-%s", SiteHtm.CLASS_SIMPLE_NAME), htmRequest, new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", SiteHtm.CLASS_SIMPLE_NAME))));
 			}
 
-			if(in != null) {
-				if(in instanceof JsonObject) {
-					sequenceNum = importSiteHtm(json, stack, pageId, htmGroup, new JsonArray().add(in), futures, sequenceNum);
-				} else if(in instanceof JsonArray) {
-					sequenceNum = importSiteHtm(json, stack, pageId, htmGroup, (JsonArray)in, futures, sequenceNum);
+			if(each != null) {
+				// Process the "each" element by evaluating the template and processing the values
+				Template template = handlebars.compileInline(String.format("{{json %s }}", each));
+				Context engineContext = Context.newBuilder(json.getMap()).resolver(templateEngine.getResolvers()).build();
+				Buffer buffer = Buffer.buffer(template.apply(engineContext));
+				String eachVar = pageItem.getString("eachVar", "item");
+				String indexVar = pageItem.getString("indexVar", "@index");
+				JsonArray eachArray = new JsonArray(buffer);
+
+				if(in != null) {
+					for(Integer j=0; j < eachArray.size(); j++) {
+						JsonObject eachJson = eachArray.getJsonObject(j);
+						JsonObject json2 = json.copy();
+						json2.put(eachVar, eachJson);
+						json2.put(indexVar, j);
+						// Process nested elements of the "in" value
+						if(in instanceof JsonObject) {
+							// Process the nested JsonObject of the "in" value
+							sequenceNum = importSiteHtm(page, json2, stack, pageId, htmGroup, new JsonArray().add(in), futures, sequenceNum);
+						} else if(in instanceof JsonArray) {
+							// Process the each of the nested JsonObjects in the array of the "in" value
+							sequenceNum = importSiteHtm(page, json2, stack, pageId, htmGroup, (JsonArray)in, futures, sequenceNum);
+						}
+					}
+				}
+				json.remove(eachVar);
+			} else {
+				if(in != null) {
+					// Process nested elements of the "in" value
+					if(in instanceof JsonObject) {
+						// Process the nested JsonObject of the "in" value
+						sequenceNum = importSiteHtm(page, json, stack, pageId, htmGroup, new JsonArray().add(in), futures, sequenceNum);
+					} else if(in instanceof JsonArray) {
+						// Process the each of the nested JsonObjects in the array of the "in" value
+						sequenceNum = importSiteHtm(page, json, stack, pageId, htmGroup, (JsonArray)in, futures, sequenceNum);
+					}
 				}
 			}
 
 			if(e != null) {
+				// Import the end of the element
 				sequenceNum++;
 				JsonObject importItem = new JsonObject();
 				importItem.put(SiteHtm.VAR_eAfter, e);
@@ -805,10 +854,10 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 				refreshData(SiteUser.CLASS_SIMPLE_NAME).onSuccess(q -> {
 					refreshData(SiteHtm.CLASS_SIMPLE_NAME).onSuccess(q1 -> {
 						refreshData(TimeStep.CLASS_SIMPLE_NAME).onSuccess(q2 -> {
-							refreshData(SitePage.CLASS_SIMPLE_NAME).onSuccess(q3 -> {
-								refreshData(TrafficSimulation.CLASS_SIMPLE_NAME).onSuccess(q4 -> {
-									refreshData(IotNode.CLASS_SIMPLE_NAME).onSuccess(q5 -> {
-										refreshData(VehicleStep.CLASS_SIMPLE_NAME).onSuccess(q6 -> {
+							refreshData(TrafficSimulation.CLASS_SIMPLE_NAME).onSuccess(q3 -> {
+								refreshData(IotNode.CLASS_SIMPLE_NAME).onSuccess(q4 -> {
+									refreshData(VehicleStep.CLASS_SIMPLE_NAME).onSuccess(q5 -> {
+										refreshData(SitePage.CLASS_SIMPLE_NAME).onSuccess(q6 -> {
 											LOG.info(refreshAllDataComplete);
 											promise.complete();
 										}).onFailure(ex -> {

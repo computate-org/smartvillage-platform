@@ -8,7 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.computate.search.wrap.Wrap;
-import org.computate.vertx.model.base.ComputateVertxBaseModel;
+import org.computate.vertx.model.base.ComputateBaseModel;
 import org.computate.smartvillageview.enus.config.ConfigKeys;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 
@@ -21,7 +21,7 @@ import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
  * Description: A reusable base class for all database model classes
  * Map.Integer.classSort: 2
  */
-public class BaseModel extends BaseModelGen<Object> implements ComputateVertxBaseModel {
+public class BaseModel extends BaseModelGen<Object> implements ComputateBaseModel {
 
 	/**
 	 * {@inheritDoc}

@@ -1,6 +1,6 @@
 {{> "htmPageLayout"}}
 {{#*inline "htmHeadPageLayout"}}{{> "htmTitlePageLayout"}}{{> "htmMetaPageLayout"}}{{> "htmStylePageLayout"}}{{> "htmScriptsPageLayout"}}{{> "htmScriptPageLayout"}}{{/inline}}
-{{#*inline "htmScriptsPageLayout"}}		<!-- inline "htmScriptsPageLayout" -->
+{{#*inline "htmScriptsPageLayout"}}		<!-- #*inline "htmScriptsPageLayout" -->
 		<script src="{{staticBaseUrl}}/js/jquery-1.12.4.min.js"></script>
 {{#if FONTAWESOME_KIT }}
 		<script src="{{ FONTAWESOME_KIT }}"></script>
@@ -11,28 +11,32 @@
 		<script src="{{staticBaseUrl}}/js/vertx-eventbus.js"></script>
 		<script src="{{staticBaseUrl}}/js/plotly-2.9.0.min.js"></script>
 {{/inline}}
-{{#*inline "htmScriptPageLayout"}}		<!-- inline "htmScriptPageLayout" -->
+{{#*inline "htmScriptPageLayout"}}		<!-- #*inline "htmScriptPageLayout" -->
 {{/inline}}
-{{#*inline "htmStylePageLayout"}}		<!-- inline "htmStylePageLayout" -->
+{{#*inline "htmStylePageLayout"}}		<!-- #*inline "htmStylePageLayout" -->
 		<link rel="icon" href="{{staticBaseUrl}}/favicon.ico" />
 		<link rel="stylesheet" href="{{staticBaseUrl}}/css/w3.css" />
 		<link rel="stylesheet" href="{{staticBaseUrl}}/css/site-enUS.css" />
 {{/inline}}
-{{#*inline "htmMetaPageLayout"}}		<!-- inline "htmMetaPageLayout" -->
+{{#*inline "htmMetaPageLayout"}}		<!-- #*inline "htmMetaPageLayout" -->
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 {{/inline}}
-{{#*inline "htmTitlePageLayout"}}		<!-- inline "htmTitlePageLayout" -->
+{{#*inline "htmTitlePageLayout"}}		<!-- #*inline "htmTitlePageLayout" -->
 		<title>smart-village-view</title>
 {{/inline}}
 {{#*inline "htmBodyMenuPageLayout"}}
 		<div class="w3-bar ">
 			<div class="w3-bar w3-hide-small ">
-				<a class="w3-bar-item w3-button w3-button w3-text-teal " href="{{ SITE_BASE_URL }}"><i class="fad fa-house w3-text-teal "></i> smart-village-view</a>
+				<div class="site-bar-item w3-bar-item ">
+					<a class="w3-bar-item " href="{{ SITE_BASE_URL }}"><i class="fad fa-house "></i> smart-village-view</a>
+				</div>
 {{> "htmMenuItems"}}
 			</div>
 			<div class="w3-bar w3-hide-medium w3-hide-large ">
-				<a class="w3-bar-item w3-button w3-button w3-text-teal " href="{{ SITE_BASE_URL }}"><i class="fad fa-house w3-text-teal "></i> smart-village-view</a>
+				<div class="site-bar-item w3-bar-item ">
+					<a class="w3-bar-item " href="{{ SITE_BASE_URL }}"><i class="fad fa-house "></i> smart-village-view</a>
+				</div>
 				<div class="w3-dropdown-hover ">
 					<button class="w3-button w3-text-black "><i class="fad fa-bars w3-text-black "></i> Menu</button>
 					<div class="w3-dropdown-content w3-bar-block w3-card-4 ">
@@ -44,19 +48,35 @@
 {{/inline}}
 {{#*inline "htmMenuItems"}}
 {{#if userKey}}
-				<a href="/user/{{ userKey }}" class="w3-bar-item w3-button w3-text-teal "><i class="fad fa-house-user w3-text-teal "></i> {{userName}}</a>
-				<a href="{{ logoutUrl }}" class="w3-bar-item w3-button w3-text-teal "><i class="fad fa-house-user w3-text-teal "></i> Logout</a>
+				<div class="site-bar-item w3-bar-item ">
+					<a href="/user/{{ userKey }}" class="header-icon-a w3-hover-opacity w3-center "><i class="fad fa-house-user w3-text-teal "></i> {{userName}}</a>
+					<a href="{{ logoutUrl }}" class="header-icon-a w3-hover-opacity w3-center "><i class="fad fa-house-user w3-text-teal "></i> Logout</a>
+				</div>
 {{else}}
-				<a href="/user" class="w3-bar-item w3-button w3-text-teal "><i class="fad fa-house-user w3-text-teal "></i> Login</a>
+				<div class="site-bar-item w3-bar-item ">
+					<a href="/user" class="header-icon-a w3-hover-opacity w3-center "><i class="fad fa-house-user w3-text-teal "></i> Login</a>
+				</div>
 {{/if}}
-				<a href="/htm" class="w3-bar-item w3-button w3-text-2017-navy-peony "><i class="fad fa-code w3-text-2017-navy-peony "></i> HTMLs</a>
-				<a href="/time-step" class="w3-bar-item w3-button w3-text-blue "><i class="fad fa-timer w3-text-blue "></i> time steps</a>
-				<a href="/page" class="w3-bar-item w3-button w3-text-2017-navy-peony "><i class="fad fa-page w3-text-2017-navy-peony "></i> articles</a>
-				<a href="/traffic-simulation" class="w3-bar-item w3-button w3-text-blue "><i class="fad fa-traffic-light-stop w3-text-blue "></i> traffic simulations</a>
-				<a href="/iot-node" class="w3-bar-item w3-button w3-text-blue "><i class="fad fa-router w3-text-blue "></i> IOT nodes</a>
-				<a href="/vehicle-step" class="w3-bar-item w3-button w3-text-blue "><i class="fad fa-map-location-dot w3-text-blue "></i> vehicle steps</a>
+				<div class="site-bar-item w3-bar-item ">
+					<a href="/htm" class="header-icon-a w3-hover-opacity w3-center w3-text-2017-navy-peony "><i class="fad fa-code w3-text-2017-navy-peony "></i> HTMLs</a>
+				</div>
+				<div class="site-bar-item w3-bar-item ">
+					<a href="/time-step" class="header-icon-a w3-hover-opacity w3-center w3-text-blue "><i class="fad fa-timer w3-text-blue "></i> time steps</a>
+				</div>
+				<div class="site-bar-item w3-bar-item ">
+					<a href="/traffic-simulation" class="header-icon-a w3-hover-opacity w3-center w3-text-blue "><i class="fad fa-traffic-light-stop w3-text-blue "></i> traffic simulations</a>
+				</div>
+				<div class="site-bar-item w3-bar-item ">
+					<a href="/iot-node" class="header-icon-a w3-hover-opacity w3-center w3-text-blue "><i class="fad fa-router w3-text-blue "></i> IOT nodes</a>
+				</div>
+				<div class="site-bar-item w3-bar-item ">
+					<a href="/vehicle-step" class="header-icon-a w3-hover-opacity w3-center w3-text-blue "><i class="fad fa-map-location-dot w3-text-blue "></i> vehicle steps</a>
+				</div>
+				<div class="site-bar-item w3-bar-item ">
+					<a href="/page" class="header-icon-a w3-hover-opacity w3-center w3-text-2017-navy-peony "><i class="fad fa-newspaper w3-text-2017-navy-peony "></i> articles</a>
+				</div>
 {{/inline}}
-{{#*inline "htmBodyStartPageLayout"}}		<!-- inline "htmBodyStartPageLayout" -->
+{{#*inline "htmBodyStartPageLayout"}}		<!-- #*inline "htmBodyStartPageLayout" -->
 		<div class="w3-bar ">
 			<div class="w3-center ">
 {{#block "htmBodyMenu"}}{{/block}}
@@ -64,8 +84,11 @@
 		</div>
 {{/inline}}
 {{#*inline "htmBodyMiddlePageLayout"}}		<!-- #*inline "htmBodyMiddlePageLayout" -->
+	<div class="pageContent w3-content ">
+{{#each htmBody}}{{#if htmBefore}}{{{htmBefore}}}{{/if}}{{#if text}}{{#each text}}{{.}}{{/each}}{{/if}}{{#if htmAfter}}{{{htmAfter}}}{{/if}}{{/each}}
+	</div>
 {{/inline}}
-{{#*inline "htmBodyEndPageLayout"}}		<!-- inline "htmBodyEndPageLayout" -->
+{{#*inline "htmBodyEndPageLayout"}}		<!-- #*inline "htmBodyEndPageLayout" -->
 		<footer class="w3-center w3-black w3-text-white w3-padding-24 ">
 			<div class="w3-bar ">
 {{#if GITHUB_ORG }}
@@ -77,13 +100,13 @@
 			</div>
 		</footer>
 {{/inline}}
-{{#*inline "htmBodyPageLayout"}}		<!-- inline "htmBodyPageLayout" -->
+{{#*inline "htmBodyPageLayout"}}		<!-- #*inline "htmBodyPageLayout" -->
 {{#block "htmBodyStart"}}{{/block}}
 {{#block "htmBodyMiddle"}}{{/block}}
 {{#block "htmBodyEnd"}}{{/block}}
 {{/inline}}
 {{#*inline "htmPageLayout"}}<!DOCTYPE html>
-<!-- inline "htmPageLayout" -->
+<!-- #*inline "htmPageLayout" -->
 <html lang="en" style="height: 100%;">
 	<head>
 {{#block "htmHead"}}{{/block}}

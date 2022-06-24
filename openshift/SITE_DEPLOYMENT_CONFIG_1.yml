@@ -212,14 +212,14 @@ spec:
               value: '{{ ENABLE_IMPORT_DATA_SiteHtm | to_json }}'
             - name: ENABLE_IMPORT_DATA_TimeStep
               value: '{{ ENABLE_IMPORT_DATA_TimeStep | to_json }}'
-            - name: ENABLE_IMPORT_DATA_SitePage
-              value: '{{ ENABLE_IMPORT_DATA_SitePage | to_json }}'
             - name: ENABLE_IMPORT_DATA_TrafficSimulation
               value: '{{ ENABLE_IMPORT_DATA_TrafficSimulation | to_json }}'
             - name: ENABLE_IMPORT_DATA_IotNode
               value: '{{ ENABLE_IMPORT_DATA_IotNode | to_json }}'
             - name: ENABLE_IMPORT_DATA_VehicleStep
               value: '{{ ENABLE_IMPORT_DATA_VehicleStep | to_json }}'
+            - name: ENABLE_IMPORT_DATA_SitePage
+              value: '{{ ENABLE_IMPORT_DATA_SitePage | to_json }}'
             - name: ENABLE_REFRESH_DATA
               value: "{{ ENABLE_REFRESH_DATA }}"
             - name: TIMER_DB_SOLR_SYNC_IN_SECONDS
@@ -232,14 +232,14 @@ spec:
               value: '{{ AUTH_ROLES_REQUIRED_SiteHtm | to_json }}'
             - name: AUTH_ROLES_REQUIRED_TimeStep
               value: '{{ AUTH_ROLES_REQUIRED_TimeStep | to_json }}'
-            - name: AUTH_ROLES_REQUIRED_SitePage
-              value: '{{ AUTH_ROLES_REQUIRED_SitePage | to_json }}'
             - name: AUTH_ROLES_REQUIRED_TrafficSimulation
               value: '{{ AUTH_ROLES_REQUIRED_TrafficSimulation | to_json }}'
             - name: AUTH_ROLES_REQUIRED_IotNode
               value: '{{ AUTH_ROLES_REQUIRED_IotNode | to_json }}'
             - name: AUTH_ROLES_REQUIRED_VehicleStep
               value: '{{ AUTH_ROLES_REQUIRED_VehicleStep | to_json }}'
+            - name: AUTH_ROLES_REQUIRED_SitePage
+              value: '{{ AUTH_ROLES_REQUIRED_SitePage | to_json }}'
 
             - name: "DYNAMIC_PAGE_PATH"
               valueFrom:

@@ -898,8 +898,8 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 	public static String staticSetUserRealmRoles(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	public SiteRequestEnUS addUserRealmRoles(String...objets) {
-		for(String o : objets) {
+	public SiteRequestEnUS addUserRealmRoles(String...objects) {
+		for(String o : objects) {
 			addUserRealmRoles(o);
 		}
 		return (SiteRequestEnUS)this;
@@ -910,10 +910,10 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 		return (SiteRequestEnUS)this;
 	}
 	@JsonIgnore
-	public void setUserRealmRoles(JsonArray objets) {
+	public void setUserRealmRoles(JsonArray objects) {
 		userRealmRoles.clear();
-		for(int i = 0; i < objets.size(); i++) {
-			String o = objets.getString(i);
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
 			addUserRealmRoles(o);
 		}
 	}
@@ -1021,8 +1021,8 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 	public static String staticSetUserResourceRoles(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	public SiteRequestEnUS addUserResourceRoles(String...objets) {
-		for(String o : objets) {
+	public SiteRequestEnUS addUserResourceRoles(String...objects) {
+		for(String o : objects) {
 			addUserResourceRoles(o);
 		}
 		return (SiteRequestEnUS)this;
@@ -1033,10 +1033,10 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 		return (SiteRequestEnUS)this;
 	}
 	@JsonIgnore
-	public void setUserResourceRoles(JsonArray objets) {
+	public void setUserResourceRoles(JsonArray objects) {
 		userResourceRoles.clear();
-		for(int i = 0; i < objets.size(); i++) {
-			String o = objets.getString(i);
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
 			addUserResourceRoles(o);
 		}
 	}

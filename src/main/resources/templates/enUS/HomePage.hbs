@@ -2,59 +2,42 @@
 {{#partial "htmTitle"}}
 		<title>smart-village-view</title>
 {{/partial}}
-{{#partial "htmMeta"}}{{> htmMetaPageLayout}}
-		<meta name="description" content="">
-		<meta name="author" content="">
-		<meta name="keywords" content="">
-{{/partial}}
+{{#partial "htmMeta"}}{{> htmMetaPageLayout}}{{/partial}}
 {{#partial "htmStyle"}}{{> htmStylePageLayout}}{{/partial}}
-{{#partial "htmScripts"}}{{> htmScriptsPageLayout}}
-{{/partial}}
-{{#partial "htmScript"}}{{> htmScriptPageLayout}}
-		<script>//<![CDATA[
-		$(document).ready(function() {
-			window.eventBus = new EventBus('/eventbus');
-		});
-		//]]></script>
-{{/partial}}
-{{#partial "htmBody"}}
-<div class="pageContent w3-content ">
-{{#block "htmBodyMenu"}}{{/block}}
-</div>
-{{>htmBodyPageLayout}}
-{{#block "htmBodyStart"}}{{/block}}
-<div class="w3-content w3-row ">
-{{#each listSitePage}}
-	<div class="w3-quarter ">
-		<a href="{{ uri }}">
-			<div class="w3-card w3-margin w3-padding ">
-{{#if pageImageUri}}
-				<img class="w3-image w3-border " src="{{ STATIC_BASE_URL }}{{ pageImageUri }}"/>
-{{/if}}
-				<div class="font-weight-bold ">{{h1}}</div>
-				<div class="font-style-italic ">{{h2}}</div>
-			</div>
-		</a>
-	</div>
-{{/each}}
-</div>
-{{#block "htmBodyEnd"}}{{/block}}
-{{/partial}}
-{{#partial "htmBodyStart"}}{{> htmBodyStartPageLayout}}
-<!-- Header -->
-<header class="w3-display-container w3-content w3-wide w3-margin-top " style="max-width:1500px;" id="home">
-	<div class="w3-display-bottom-middle w3-margin-top w3-center ">
-		<h1 class="w3-xxlarge "><span class="w3-padding "><b>Smart Village Project</b></span></h1>
-		<div class="w3-padding-32 w3-row ">
+{{#partial "htmScripts"}}{{> htmScriptsPageLayout}}{{/partial}}
+{{#partial "htmScript"}}{{> htmScriptPageLayout}}{{/partial}}
+{{#partial "htmBodyStart"}}{{> htmBodyStartPageLayout}}{{/partial}}
+{{#partial "htmBodyMiddle"}}
+<div class="w3-content w3-row w3-padding ">
+	<div>
+		<h3>Search the articles: </h3>
+		<div class="">
+			<form id="ArticleForm" style="display: inline-block; " method="GET" action="/page" onsubmit="event.preventDefault(); search($('#searchArticlesInput')); return false; ">
+				<div class="w3-bar ">
+					<input type="text" placeholder="search articles" title="" class="recherchePageRecherche_enUS w3-input w3-border w3-bar-item " name="objectText" id="searchArticlesInput">
+					<button class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-vivid-greenish-blue ">
+						<i class="fas fa-search "></i>
+					</button>
+				</div>
+			</form>
 		</div>
+{{#each listSitePage}}
+		<div class="w3-quarter ">
+			<a href="{{ uri }}">
+				<div class="w3-card w3-margin w3-padding ">
+{{#if pageImageUri}}
+					<img class="w3-image w3-border " src="{{ STATIC_BASE_URL }}{{ pageImageUri }}"/>
+{{/if}}
+					<div class="font-weight-bold ">{{h1}}</div>
+					<div class="font-style-italic ">{{h2}}</div>
+				</div>
+			</a>
+		</div>
+{{/each}}
 	</div>
-</header>
-{{/partial}}
+</div>
+{{> htmBodyMiddlePageLayout}}{{/partial}}
 {{#partial "htmBodyEnd"}}{{> htmBodyEndPageLayout}}{{/partial}}
-{{#partial "htmBodySearch"}}{{> htmBodySearchPageLayout}}{{/partial}}
-{{#partial "htmBodyFilters"}}{{> htmBodyFiltersPageLayout}}{{/partial}}
-{{#partial "htmBodyRange"}}{{> htmBodyRangePageLayout}}{{/partial}}
-{{#partial "htmBodyPivot"}}{{> htmBodyPivotPageLayout}}{{/partial}}
 {{#partial "htmBodyMenu"}}{{> htmBodyMenuPageLayout}}{{/partial}}
-{{#partial "htmBodyGraph"}}{{> htmBodyGraphPageLayout}}{{/partial}}
+{{#partial "htmBody"}}{{> htmBodyPageLayout}}{{/partial}}
 {{> PageLayout}}

@@ -1103,6 +1103,55 @@ public abstract class TrafficSimulationGenPageGen<DEV> extends BaseModelPage {
 		return TrafficSimulationGenPage.staticSearchStrId(siteRequest_, TrafficSimulationGenPage.staticSearchId(siteRequest_, TrafficSimulationGenPage.staticSetId(siteRequest_, o)));
 	}
 
+	//////////////////////////////
+	// pageUriTrafficSimulation //
+	//////////////////////////////
+
+	/**	 The entity pageUriTrafficSimulation
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String pageUriTrafficSimulation;
+
+	/**	<br> The entity pageUriTrafficSimulation
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulationGenPage&fq=entiteVar_enUS_indexed_string:pageUriTrafficSimulation">Find the entity pageUriTrafficSimulation in Solr</a>
+	 * <br>
+	 * @param c is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _pageUriTrafficSimulation(Wrap<String> c);
+
+	public String getPageUriTrafficSimulation() {
+		return pageUriTrafficSimulation;
+	}
+	public void setPageUriTrafficSimulation(String o) {
+		this.pageUriTrafficSimulation = TrafficSimulationGenPage.staticSetPageUriTrafficSimulation(siteRequest_, o);
+	}
+	public static String staticSetPageUriTrafficSimulation(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected TrafficSimulationGenPage pageUriTrafficSimulationInit() {
+		Wrap<String> pageUriTrafficSimulationWrap = new Wrap<String>().var("pageUriTrafficSimulation");
+		if(pageUriTrafficSimulation == null) {
+			_pageUriTrafficSimulation(pageUriTrafficSimulationWrap);
+			setPageUriTrafficSimulation(pageUriTrafficSimulationWrap.o);
+		}
+		return (TrafficSimulationGenPage)this;
+	}
+
+	public static String staticSearchPageUriTrafficSimulation(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrPageUriTrafficSimulation(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqPageUriTrafficSimulation(SiteRequestEnUS siteRequest_, String o) {
+		return TrafficSimulationGenPage.staticSearchStrPageUriTrafficSimulation(siteRequest_, TrafficSimulationGenPage.staticSearchPageUriTrafficSimulation(siteRequest_, TrafficSimulationGenPage.staticSetPageUriTrafficSimulation(siteRequest_, o)));
+	}
+
 	//////////////
 	// initDeep //
 	//////////////
@@ -1153,6 +1202,7 @@ public abstract class TrafficSimulationGenPageGen<DEV> extends BaseModelPage {
 				trafficSimulation_Init();
 				pkInit();
 				idInit();
+				pageUriTrafficSimulationInit();
 				promise2.complete();
 			} catch(Exception ex) {
 				promise2.fail(ex);
@@ -1248,6 +1298,8 @@ public abstract class TrafficSimulationGenPageGen<DEV> extends BaseModelPage {
 				return oTrafficSimulationGenPage.pk;
 			case "id":
 				return oTrafficSimulationGenPage.id;
+			case "pageUriTrafficSimulation":
+				return oTrafficSimulationGenPage.pageUriTrafficSimulation;
 			default:
 				return super.obtainBaseModelPage(var);
 		}
@@ -1315,6 +1367,8 @@ public abstract class TrafficSimulationGenPageGen<DEV> extends BaseModelPage {
 			return TrafficSimulationGenPage.staticSetPk(siteRequest_, o);
 		case "id":
 			return TrafficSimulationGenPage.staticSetId(siteRequest_, o);
+		case "pageUriTrafficSimulation":
+			return TrafficSimulationGenPage.staticSetPageUriTrafficSimulation(siteRequest_, o);
 			default:
 				return BaseModelPage.staticSetBaseModelPage(entityVar,  siteRequest_, o);
 		}
@@ -1357,6 +1411,8 @@ public abstract class TrafficSimulationGenPageGen<DEV> extends BaseModelPage {
 			return TrafficSimulationGenPage.staticSearchPk(siteRequest_, (Long)o);
 		case "id":
 			return TrafficSimulationGenPage.staticSearchId(siteRequest_, (String)o);
+		case "pageUriTrafficSimulation":
+			return TrafficSimulationGenPage.staticSearchPageUriTrafficSimulation(siteRequest_, (String)o);
 			default:
 				return BaseModelPage.staticSearchBaseModelPage(entityVar,  siteRequest_, o);
 		}
@@ -1399,6 +1455,8 @@ public abstract class TrafficSimulationGenPageGen<DEV> extends BaseModelPage {
 			return TrafficSimulationGenPage.staticSearchStrPk(siteRequest_, (Long)o);
 		case "id":
 			return TrafficSimulationGenPage.staticSearchStrId(siteRequest_, (String)o);
+		case "pageUriTrafficSimulation":
+			return TrafficSimulationGenPage.staticSearchStrPageUriTrafficSimulation(siteRequest_, (String)o);
 			default:
 				return BaseModelPage.staticSearchStrBaseModelPage(entityVar,  siteRequest_, o);
 		}
@@ -1441,6 +1499,8 @@ public abstract class TrafficSimulationGenPageGen<DEV> extends BaseModelPage {
 			return TrafficSimulationGenPage.staticSearchFqPk(siteRequest_, o);
 		case "id":
 			return TrafficSimulationGenPage.staticSearchFqId(siteRequest_, o);
+		case "pageUriTrafficSimulation":
+			return TrafficSimulationGenPage.staticSearchFqPageUriTrafficSimulation(siteRequest_, o);
 			default:
 				return BaseModelPage.staticSearchFqBaseModelPage(entityVar,  siteRequest_, o);
 		}
@@ -1478,6 +1538,7 @@ public abstract class TrafficSimulationGenPageGen<DEV> extends BaseModelPage {
 	public static final String VAR_trafficSimulation_ = "trafficSimulation_";
 	public static final String VAR_pk = "pk";
 	public static final String VAR_id = "id";
+	public static final String VAR_pageUriTrafficSimulation = "pageUriTrafficSimulation";
 
 	public static final String DISPLAY_NAME_searchListTrafficSimulation_ = "";
 	public static final String DISPLAY_NAME_pageResponse = "";
@@ -1500,6 +1561,7 @@ public abstract class TrafficSimulationGenPageGen<DEV> extends BaseModelPage {
 	public static final String DISPLAY_NAME_trafficSimulation_ = "";
 	public static final String DISPLAY_NAME_pk = "";
 	public static final String DISPLAY_NAME_id = "";
+	public static final String DISPLAY_NAME_pageUriTrafficSimulation = "";
 
 	public static String displayNameForClass(String var) {
 		return TrafficSimulationGenPage.displayNameTrafficSimulationGenPage(var);
@@ -1548,6 +1610,8 @@ public abstract class TrafficSimulationGenPageGen<DEV> extends BaseModelPage {
 			return DISPLAY_NAME_pk;
 		case VAR_id:
 			return DISPLAY_NAME_id;
+		case VAR_pageUriTrafficSimulation:
+			return DISPLAY_NAME_pageUriTrafficSimulation;
 		default:
 			return BaseModelPage.displayNameBaseModelPage(var);
 		}

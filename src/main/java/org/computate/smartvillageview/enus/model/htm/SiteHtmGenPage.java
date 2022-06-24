@@ -215,10 +215,20 @@ public class SiteHtmGenPage extends SiteHtmGenPageGen<PageLayout> {
 	}
 
 	@Override
+	protected void _apiUri(Wrap<String> c) {
+		c.o("/api/htm");
+	}
+
+	@Override
 	protected void _roles(List<String> l) {
 		if(siteRequest_ != null) {
 			l.addAll(Stream.concat(siteRequest_.getUserResourceRoles().stream(), siteRequest_.getUserRealmRoles().stream()).distinct().collect(Collectors.toList()));
 		}
+	}
+
+	@Override
+	protected void _rolesRequired(List<String> l) {
+		l.addAll(Optional.ofNullable(siteRequest_.getConfig().getJsonArray(ConfigKeys.AUTH_ROLES_REQUIRED + "_SiteHtm")).orElse(new JsonArray()).stream().map(o -> o.toString()).collect(Collectors.toList()));
 	}
 
 	@Override
@@ -417,5 +427,9 @@ public class SiteHtmGenPage extends SiteHtmGenPageGen<PageLayout> {
 	@Override
 	protected void _contextIconName(Wrap<String> c) {
 			c.o("code");
+	}
+
+	protected void _pageUriSiteHtm(Wrap<String> c) {
+			c.o("/htm");
 	}
 }

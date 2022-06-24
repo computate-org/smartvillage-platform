@@ -821,8 +821,8 @@ public abstract class TimeStepGenPageGen<DEV> extends BaseModelPage {
 	public static String staticSetDefaultFieldListVars(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	public TimeStepGenPage addDefaultFieldListVars(String...objets) {
-		for(String o : objets) {
+	public TimeStepGenPage addDefaultFieldListVars(String...objects) {
+		for(String o : objects) {
 			addDefaultFieldListVars(o);
 		}
 		return (TimeStepGenPage)this;
@@ -833,10 +833,10 @@ public abstract class TimeStepGenPageGen<DEV> extends BaseModelPage {
 		return (TimeStepGenPage)this;
 	}
 	@JsonIgnore
-	public void setDefaultFieldListVars(JsonArray objets) {
+	public void setDefaultFieldListVars(JsonArray objects) {
 		defaultFieldListVars.clear();
-		for(int i = 0; i < objets.size(); i++) {
-			String o = objets.getString(i);
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
 			addDefaultFieldListVars(o);
 		}
 	}
@@ -887,8 +887,8 @@ public abstract class TimeStepGenPageGen<DEV> extends BaseModelPage {
 	public static String staticSetDefaultStatsVars(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	public TimeStepGenPage addDefaultStatsVars(String...objets) {
-		for(String o : objets) {
+	public TimeStepGenPage addDefaultStatsVars(String...objects) {
+		for(String o : objects) {
 			addDefaultStatsVars(o);
 		}
 		return (TimeStepGenPage)this;
@@ -899,10 +899,10 @@ public abstract class TimeStepGenPageGen<DEV> extends BaseModelPage {
 		return (TimeStepGenPage)this;
 	}
 	@JsonIgnore
-	public void setDefaultStatsVars(JsonArray objets) {
+	public void setDefaultStatsVars(JsonArray objects) {
 		defaultStatsVars.clear();
-		for(int i = 0; i < objets.size(); i++) {
-			String o = objets.getString(i);
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
 			addDefaultStatsVars(o);
 		}
 	}
@@ -953,8 +953,8 @@ public abstract class TimeStepGenPageGen<DEV> extends BaseModelPage {
 	public static String staticSetDefaultPivotVars(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	public TimeStepGenPage addDefaultPivotVars(String...objets) {
-		for(String o : objets) {
+	public TimeStepGenPage addDefaultPivotVars(String...objects) {
+		for(String o : objects) {
 			addDefaultPivotVars(o);
 		}
 		return (TimeStepGenPage)this;
@@ -965,10 +965,10 @@ public abstract class TimeStepGenPageGen<DEV> extends BaseModelPage {
 		return (TimeStepGenPage)this;
 	}
 	@JsonIgnore
-	public void setDefaultPivotVars(JsonArray objets) {
+	public void setDefaultPivotVars(JsonArray objects) {
 		defaultPivotVars.clear();
-		for(int i = 0; i < objets.size(); i++) {
-			String o = objets.getString(i);
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
 			addDefaultPivotVars(o);
 		}
 	}
@@ -1243,6 +1243,55 @@ public abstract class TimeStepGenPageGen<DEV> extends BaseModelPage {
 		return TimeStepGenPage.staticSearchStrId(siteRequest_, TimeStepGenPage.staticSearchId(siteRequest_, TimeStepGenPage.staticSetId(siteRequest_, o)));
 	}
 
+	/////////////////////
+	// pageUriTimeStep //
+	/////////////////////
+
+	/**	 The entity pageUriTimeStep
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String pageUriTimeStep;
+
+	/**	<br> The entity pageUriTimeStep
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.time.step.TimeStepGenPage&fq=entiteVar_enUS_indexed_string:pageUriTimeStep">Find the entity pageUriTimeStep in Solr</a>
+	 * <br>
+	 * @param c is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _pageUriTimeStep(Wrap<String> c);
+
+	public String getPageUriTimeStep() {
+		return pageUriTimeStep;
+	}
+	public void setPageUriTimeStep(String o) {
+		this.pageUriTimeStep = TimeStepGenPage.staticSetPageUriTimeStep(siteRequest_, o);
+	}
+	public static String staticSetPageUriTimeStep(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected TimeStepGenPage pageUriTimeStepInit() {
+		Wrap<String> pageUriTimeStepWrap = new Wrap<String>().var("pageUriTimeStep");
+		if(pageUriTimeStep == null) {
+			_pageUriTimeStep(pageUriTimeStepWrap);
+			setPageUriTimeStep(pageUriTimeStepWrap.o);
+		}
+		return (TimeStepGenPage)this;
+	}
+
+	public static String staticSearchPageUriTimeStep(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrPageUriTimeStep(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqPageUriTimeStep(SiteRequestEnUS siteRequest_, String o) {
+		return TimeStepGenPage.staticSearchStrPageUriTimeStep(siteRequest_, TimeStepGenPage.staticSearchPageUriTimeStep(siteRequest_, TimeStepGenPage.staticSetPageUriTimeStep(siteRequest_, o)));
+	}
+
 	//////////////
 	// initDeep //
 	//////////////
@@ -1295,6 +1344,7 @@ public abstract class TimeStepGenPageGen<DEV> extends BaseModelPage {
 				timeStepCountInit();
 				timeStep_Init();
 				idInit();
+				pageUriTimeStepInit();
 				promise2.complete();
 			} catch(Exception ex) {
 				promise2.fail(ex);
@@ -1394,6 +1444,8 @@ public abstract class TimeStepGenPageGen<DEV> extends BaseModelPage {
 				return oTimeStepGenPage.timeStep_;
 			case "id":
 				return oTimeStepGenPage.id;
+			case "pageUriTimeStep":
+				return oTimeStepGenPage.pageUriTimeStep;
 			default:
 				return super.obtainBaseModelPage(var);
 		}
@@ -1465,6 +1517,8 @@ public abstract class TimeStepGenPageGen<DEV> extends BaseModelPage {
 			return TimeStepGenPage.staticSetTimeStepCount(siteRequest_, o);
 		case "id":
 			return TimeStepGenPage.staticSetId(siteRequest_, o);
+		case "pageUriTimeStep":
+			return TimeStepGenPage.staticSetPageUriTimeStep(siteRequest_, o);
 			default:
 				return BaseModelPage.staticSetBaseModelPage(entityVar,  siteRequest_, o);
 		}
@@ -1511,6 +1565,8 @@ public abstract class TimeStepGenPageGen<DEV> extends BaseModelPage {
 			return TimeStepGenPage.staticSearchTimeStepCount(siteRequest_, (Integer)o);
 		case "id":
 			return TimeStepGenPage.staticSearchId(siteRequest_, (String)o);
+		case "pageUriTimeStep":
+			return TimeStepGenPage.staticSearchPageUriTimeStep(siteRequest_, (String)o);
 			default:
 				return BaseModelPage.staticSearchBaseModelPage(entityVar,  siteRequest_, o);
 		}
@@ -1557,6 +1613,8 @@ public abstract class TimeStepGenPageGen<DEV> extends BaseModelPage {
 			return TimeStepGenPage.staticSearchStrTimeStepCount(siteRequest_, (Integer)o);
 		case "id":
 			return TimeStepGenPage.staticSearchStrId(siteRequest_, (String)o);
+		case "pageUriTimeStep":
+			return TimeStepGenPage.staticSearchStrPageUriTimeStep(siteRequest_, (String)o);
 			default:
 				return BaseModelPage.staticSearchStrBaseModelPage(entityVar,  siteRequest_, o);
 		}
@@ -1603,6 +1661,8 @@ public abstract class TimeStepGenPageGen<DEV> extends BaseModelPage {
 			return TimeStepGenPage.staticSearchFqTimeStepCount(siteRequest_, o);
 		case "id":
 			return TimeStepGenPage.staticSearchFqId(siteRequest_, o);
+		case "pageUriTimeStep":
+			return TimeStepGenPage.staticSearchFqPageUriTimeStep(siteRequest_, o);
 			default:
 				return BaseModelPage.staticSearchFqBaseModelPage(entityVar,  siteRequest_, o);
 		}
@@ -1642,6 +1702,7 @@ public abstract class TimeStepGenPageGen<DEV> extends BaseModelPage {
 	public static final String VAR_timeStepCount = "timeStepCount";
 	public static final String VAR_timeStep_ = "timeStep_";
 	public static final String VAR_id = "id";
+	public static final String VAR_pageUriTimeStep = "pageUriTimeStep";
 
 	public static final String DISPLAY_NAME_searchListTimeStep_ = "";
 	public static final String DISPLAY_NAME_pageResponse = "";
@@ -1666,6 +1727,7 @@ public abstract class TimeStepGenPageGen<DEV> extends BaseModelPage {
 	public static final String DISPLAY_NAME_timeStepCount = "";
 	public static final String DISPLAY_NAME_timeStep_ = "";
 	public static final String DISPLAY_NAME_id = "";
+	public static final String DISPLAY_NAME_pageUriTimeStep = "";
 
 	public static String displayNameForClass(String var) {
 		return TimeStepGenPage.displayNameTimeStepGenPage(var);
@@ -1718,6 +1780,8 @@ public abstract class TimeStepGenPageGen<DEV> extends BaseModelPage {
 			return DISPLAY_NAME_timeStep_;
 		case VAR_id:
 			return DISPLAY_NAME_id;
+		case VAR_pageUriTimeStep:
+			return DISPLAY_NAME_pageUriTimeStep;
 		default:
 			return BaseModelPage.displayNameBaseModelPage(var);
 		}

@@ -42,7 +42,7 @@ import io.vertx.core.json.JsonObject;
  * IconName: code
  * NameVar: htm
  * 
- * RoleAll: true
+ * Role.enUS: SiteAdmin
  * Description: An HTML part that is indexed in the search engine. 
  */
 public class SiteHtm extends SiteHtmGen<Object> {

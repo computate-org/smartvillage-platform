@@ -374,17 +374,18 @@
 {{/if}}
 {{/inline}}
 {{#*inline "htmBodySidebarBaseModelPage"}}
-				<div class="w3-dropdown-hover w3-bar-block min-width-300px ">
-					<div class="min-width-300px w3- ">
-						<span title="Search" class="siteSidebarToggle " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').toggle(); "><i class="fad fa-magnifying-glass hover-box-shadow w3-xlarge "></i> Search</span>
-						<span title="Filters" class="siteSidebarToggle " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleFilters').toggle(); "><i class="fad fa-filters hover-box-shadow w3-xlarge "></i> Filters</span>
-						<span title="Range" class="siteSidebarToggle " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleRange').toggle(); "><i class="fad fa-calendar-range hover-box-shadow w3-xlarge "></i> Range</span>
-						<span title="Pivot" class="siteSidebarToggle " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').toggle(); "><i class="fad fa-table-pivot hover-box-shadow w3-xlarge "></i> Pivot</span>
-						<span title="FieldList" class="siteSidebarToggle " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleFieldList').toggle(); "><i class="fad fa-list-ul hover-box-shadow w3-xlarge "></i> FieldList</span>
-						<span title="Stats" class="siteSidebarToggle " onclick="$('.siteSidebarToggleFieldList').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleStats').toggle(); "><i class="fad fa-chart-candlestick hover-box-shadow w3-xlarge "></i> Stats</span>
+				<div class="w3-dropdown-click w3-bar-block min-width-300px ">
+					<div class="min-width-300px ">
+						<span title="Search" class="siteSidebarToggle w3-padding-small w3-hover-black w3- " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-'); $(this).addClass('w3-black'); $(this).removeClass('w3-'); "><i class="fad fa-magnifying-glass hover-box-shadow w3-xlarge "></i> Search</span>
+						<span title="Filters" class="siteSidebarToggle w3-padding-small w3-hover-black w3- " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleFilters').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-'); $(this).addClass('w3-black'); $(this).removeClass('w3-'); "><i class="fad fa-filters hover-box-shadow w3-xlarge "></i> Filters</span>
+						<span title="Range" class="siteSidebarToggle w3-padding-small w3-hover-black w3- " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleRange').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-'); $(this).addClass('w3-black'); $(this).removeClass('w3-'); "><i class="fad fa-calendar-range hover-box-shadow w3-xlarge "></i> Range</span>
+						<span title="Pivot" class="siteSidebarToggle w3-padding-small w3-hover-black w3- " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-'); $(this).addClass('w3-black'); $(this).removeClass('w3-'); "><i class="fad fa-table-pivot hover-box-shadow w3-xlarge "></i> Pivot</span>
+						<span title="FieldList" class="siteSidebarToggle w3-padding-small w3-hover-black w3- " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleFieldList').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-'); $(this).addClass('w3-black'); $(this).removeClass('w3-'); "><i class="fad fa-list-ul hover-box-shadow w3-xlarge "></i> FieldList</span>
+						<span title="Stats" class="siteSidebarToggle w3-padding-small w3-hover-black w3- " onclick="$('.siteSidebarToggleFieldList').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleStats').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-'); $(this).addClass('w3-black'); $(this).removeClass('w3-'); "><i class="fad fa-chart-candlestick hover-box-shadow w3-xlarge "></i> Stats</span>
+						<a title="API" class="siteSidebarToggle w3-padding-small w3-hover-black w3- " href="{{ apiUri }}{{ queryStr }}"><i class="fad fa-brackets-curly hover-box-shadow w3-xlarge "></i> API</a>
 					</div>
-					<div class="w3-dropdown-content min-width-300px w3-white w3-border w3-border- ">
-						<div class="siteSidebarToggle siteSidebarToggleSearch" style="display: none; ">
+					<div class=" ">
+						<div class="siteSidebarToggle siteSidebarToggleSearch w3-dropdown-content min-width-300px w3-white w3-border w3-border- " style="display: none; ">
 							<div class="w3-bar w3- ">
 								<span class="w3-bar-item ">
 								<i class="fad fa-magnifying-glass "></i> Search</span>
@@ -393,7 +394,7 @@
 {{#block "htmBodySearch"}}{{/block}}
 							</div>
 						</div>
-						<div  class="siteSidebarToggle siteSidebarToggleFilters" style="display: none; ">
+						<div  class="siteSidebarToggle siteSidebarToggleFilters w3-dropdown-content min-width-300px w3-white w3-border w3-border- " style="display: none; ">
 							<div class="w3-bar w3- ">
 								<span class="w3-bar-item ">
 								<i class="fad fa-filters "></i> Filters</span>
@@ -402,8 +403,8 @@
 {{#block "htmBodyFilters"}}{{/block}}
 							</div>
 						</div>
-						<div  class="siteSidebarToggle siteSidebarToggleRange" style="display: none; ">
-							<div class="w3-bar w3- ">
+						<div  class="siteSidebarToggle siteSidebarToggleRange w3-dropdown-content min-width-300px w3-white w3-border w3-border- " style="display: none; ">
+							<div class="w3-bar w3-  ">
 								<span class="w3-bar-item ">
 								<i class="fad fa-calendar-range "></i> Range</span>
 							</div>
@@ -411,7 +412,7 @@
 {{#block "htmBodyRange"}}{{/block}}
 							</div>
 						</div>
-						<div  class="siteSidebarToggle siteSidebarTogglePivot" style="display: none; ">
+						<div  class="siteSidebarToggle siteSidebarTogglePivot w3-dropdown-content min-width-300px w3-white w3-border w3-border- " style="display: none; ">
 							<div class="w3-bar w3- ">
 								<span class="w3-bar-item ">
 								<i class="fad fa-table-pivot "></i> Pivot</span>
@@ -420,7 +421,7 @@
 {{#block "htmBodyPivot"}}{{/block}}
 							</div>
 						</div>
-						<div  class="siteSidebarToggle siteSidebarToggleFieldList" style="display: none; ">
+						<div  class="siteSidebarToggle siteSidebarToggleFieldList w3-dropdown-content min-width-300px w3-white w3-border w3-border- " style="display: none; ">
 							<div class="w3-bar w3- ">
 								<span class="w3-bar-item ">
 								<i class="fad fa-list-ul "></i> Field List</span>
@@ -429,7 +430,7 @@
 {{#block "htmBodyFieldList"}}{{/block}}
 							</div>
 						</div>
-						<div  class="siteSidebarToggle siteSidebarToggleStats" style="display: none; ">
+						<div  class="siteSidebarToggle siteSidebarToggleStats w3-dropdown-content min-width-300px w3-white w3-border w3-border- " style="display: none; ">
 							<div class="w3-bar w3- ">
 								<span class="w3-bar-item ">
 								<i class="fad fa-chart-candlestick "></i> Stats</span>

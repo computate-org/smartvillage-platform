@@ -224,6 +224,11 @@ public class IotNodeGenPage extends IotNodeGenPageGen<BaseModelPage> {
 	}
 
 	@Override
+	protected void _apiUri(Wrap<String> c) {
+		c.o("/api/iot-node");
+	}
+
+	@Override
 	protected void _roles(List<String> l) {
 		if(siteRequest_ != null) {
 			l.addAll(Stream.concat(siteRequest_.getUserResourceRoles().stream(), siteRequest_.getUserRealmRoles().stream()).distinct().collect(Collectors.toList()));
@@ -426,5 +431,9 @@ public class IotNodeGenPage extends IotNodeGenPageGen<BaseModelPage> {
 	@Override
 	protected void _contextIconName(Wrap<String> c) {
 			c.o("router");
+	}
+
+	protected void _pageUriIotNode(Wrap<String> c) {
+			c.o("/iot-node");
 	}
 }

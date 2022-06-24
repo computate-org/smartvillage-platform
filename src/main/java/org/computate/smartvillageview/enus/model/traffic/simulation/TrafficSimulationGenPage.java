@@ -224,6 +224,11 @@ public class TrafficSimulationGenPage extends TrafficSimulationGenPageGen<BaseMo
 	}
 
 	@Override
+	protected void _apiUri(Wrap<String> c) {
+		c.o("/api/traffic-simulation");
+	}
+
+	@Override
 	protected void _roles(List<String> l) {
 		if(siteRequest_ != null) {
 			l.addAll(Stream.concat(siteRequest_.getUserResourceRoles().stream(), siteRequest_.getUserRealmRoles().stream()).distinct().collect(Collectors.toList()));
@@ -426,5 +431,9 @@ public class TrafficSimulationGenPage extends TrafficSimulationGenPageGen<BaseMo
 	@Override
 	protected void _contextIconName(Wrap<String> c) {
 			c.o("traffic-light-stop");
+	}
+
+	protected void _pageUriTrafficSimulation(Wrap<String> c) {
+			c.o("/traffic-simulation");
 	}
 }

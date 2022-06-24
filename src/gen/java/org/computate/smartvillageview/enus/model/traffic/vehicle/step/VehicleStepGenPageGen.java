@@ -792,6 +792,104 @@ public abstract class VehicleStepGenPageGen<DEV> extends BaseModelPage {
 	}
 
 	//////////////////////////
+	// DEFAULT_MAP_LOCATION //
+	//////////////////////////
+
+	/**	 The entity DEFAULT_MAP_LOCATION
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String DEFAULT_MAP_LOCATION;
+
+	/**	<br> The entity DEFAULT_MAP_LOCATION
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.vehicle.step.VehicleStepGenPage&fq=entiteVar_enUS_indexed_string:DEFAULT_MAP_LOCATION">Find the entity DEFAULT_MAP_LOCATION in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _DEFAULT_MAP_LOCATION(Wrap<String> w);
+
+	public String getDEFAULT_MAP_LOCATION() {
+		return DEFAULT_MAP_LOCATION;
+	}
+	public void setDEFAULT_MAP_LOCATION(String o) {
+		this.DEFAULT_MAP_LOCATION = VehicleStepGenPage.staticSetDEFAULT_MAP_LOCATION(siteRequest_, o);
+	}
+	public static String staticSetDEFAULT_MAP_LOCATION(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected VehicleStepGenPage DEFAULT_MAP_LOCATIONInit() {
+		Wrap<String> DEFAULT_MAP_LOCATIONWrap = new Wrap<String>().var("DEFAULT_MAP_LOCATION");
+		if(DEFAULT_MAP_LOCATION == null) {
+			_DEFAULT_MAP_LOCATION(DEFAULT_MAP_LOCATIONWrap);
+			setDEFAULT_MAP_LOCATION(DEFAULT_MAP_LOCATIONWrap.o);
+		}
+		return (VehicleStepGenPage)this;
+	}
+
+	public static String staticSearchDEFAULT_MAP_LOCATION(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrDEFAULT_MAP_LOCATION(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqDEFAULT_MAP_LOCATION(SiteRequestEnUS siteRequest_, String o) {
+		return VehicleStepGenPage.staticSearchStrDEFAULT_MAP_LOCATION(siteRequest_, VehicleStepGenPage.staticSearchDEFAULT_MAP_LOCATION(siteRequest_, VehicleStepGenPage.staticSetDEFAULT_MAP_LOCATION(siteRequest_, o)));
+	}
+
+	//////////////////////
+	// DEFAULT_MAP_ZOOM //
+	//////////////////////
+
+	/**	 The entity DEFAULT_MAP_ZOOM
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String DEFAULT_MAP_ZOOM;
+
+	/**	<br> The entity DEFAULT_MAP_ZOOM
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.vehicle.step.VehicleStepGenPage&fq=entiteVar_enUS_indexed_string:DEFAULT_MAP_ZOOM">Find the entity DEFAULT_MAP_ZOOM in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _DEFAULT_MAP_ZOOM(Wrap<String> w);
+
+	public String getDEFAULT_MAP_ZOOM() {
+		return DEFAULT_MAP_ZOOM;
+	}
+	public void setDEFAULT_MAP_ZOOM(String o) {
+		this.DEFAULT_MAP_ZOOM = VehicleStepGenPage.staticSetDEFAULT_MAP_ZOOM(siteRequest_, o);
+	}
+	public static String staticSetDEFAULT_MAP_ZOOM(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected VehicleStepGenPage DEFAULT_MAP_ZOOMInit() {
+		Wrap<String> DEFAULT_MAP_ZOOMWrap = new Wrap<String>().var("DEFAULT_MAP_ZOOM");
+		if(DEFAULT_MAP_ZOOM == null) {
+			_DEFAULT_MAP_ZOOM(DEFAULT_MAP_ZOOMWrap);
+			setDEFAULT_MAP_ZOOM(DEFAULT_MAP_ZOOMWrap.o);
+		}
+		return (VehicleStepGenPage)this;
+	}
+
+	public static String staticSearchDEFAULT_MAP_ZOOM(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrDEFAULT_MAP_ZOOM(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqDEFAULT_MAP_ZOOM(SiteRequestEnUS siteRequest_, String o) {
+		return VehicleStepGenPage.staticSearchStrDEFAULT_MAP_ZOOM(siteRequest_, VehicleStepGenPage.staticSearchDEFAULT_MAP_ZOOM(siteRequest_, VehicleStepGenPage.staticSetDEFAULT_MAP_ZOOM(siteRequest_, o)));
+	}
+
+	//////////////////////////
 	// defaultFieldListVars //
 	//////////////////////////
 
@@ -821,8 +919,8 @@ public abstract class VehicleStepGenPageGen<DEV> extends BaseModelPage {
 	public static String staticSetDefaultFieldListVars(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	public VehicleStepGenPage addDefaultFieldListVars(String...objets) {
-		for(String o : objets) {
+	public VehicleStepGenPage addDefaultFieldListVars(String...objects) {
+		for(String o : objects) {
 			addDefaultFieldListVars(o);
 		}
 		return (VehicleStepGenPage)this;
@@ -833,10 +931,10 @@ public abstract class VehicleStepGenPageGen<DEV> extends BaseModelPage {
 		return (VehicleStepGenPage)this;
 	}
 	@JsonIgnore
-	public void setDefaultFieldListVars(JsonArray objets) {
+	public void setDefaultFieldListVars(JsonArray objects) {
 		defaultFieldListVars.clear();
-		for(int i = 0; i < objets.size(); i++) {
-			String o = objets.getString(i);
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
 			addDefaultFieldListVars(o);
 		}
 	}
@@ -887,8 +985,8 @@ public abstract class VehicleStepGenPageGen<DEV> extends BaseModelPage {
 	public static String staticSetDefaultStatsVars(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	public VehicleStepGenPage addDefaultStatsVars(String...objets) {
-		for(String o : objets) {
+	public VehicleStepGenPage addDefaultStatsVars(String...objects) {
+		for(String o : objects) {
 			addDefaultStatsVars(o);
 		}
 		return (VehicleStepGenPage)this;
@@ -899,10 +997,10 @@ public abstract class VehicleStepGenPageGen<DEV> extends BaseModelPage {
 		return (VehicleStepGenPage)this;
 	}
 	@JsonIgnore
-	public void setDefaultStatsVars(JsonArray objets) {
+	public void setDefaultStatsVars(JsonArray objects) {
 		defaultStatsVars.clear();
-		for(int i = 0; i < objets.size(); i++) {
-			String o = objets.getString(i);
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
 			addDefaultStatsVars(o);
 		}
 	}
@@ -953,8 +1051,8 @@ public abstract class VehicleStepGenPageGen<DEV> extends BaseModelPage {
 	public static String staticSetDefaultPivotVars(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	public VehicleStepGenPage addDefaultPivotVars(String...objets) {
-		for(String o : objets) {
+	public VehicleStepGenPage addDefaultPivotVars(String...objects) {
+		for(String o : objects) {
 			addDefaultPivotVars(o);
 		}
 		return (VehicleStepGenPage)this;
@@ -965,10 +1063,10 @@ public abstract class VehicleStepGenPageGen<DEV> extends BaseModelPage {
 		return (VehicleStepGenPage)this;
 	}
 	@JsonIgnore
-	public void setDefaultPivotVars(JsonArray objets) {
+	public void setDefaultPivotVars(JsonArray objects) {
 		defaultPivotVars.clear();
-		for(int i = 0; i < objets.size(); i++) {
-			String o = objets.getString(i);
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
 			addDefaultPivotVars(o);
 		}
 	}
@@ -1243,6 +1341,55 @@ public abstract class VehicleStepGenPageGen<DEV> extends BaseModelPage {
 		return VehicleStepGenPage.staticSearchStrId(siteRequest_, VehicleStepGenPage.staticSearchId(siteRequest_, VehicleStepGenPage.staticSetId(siteRequest_, o)));
 	}
 
+	////////////////////////
+	// pageUriVehicleStep //
+	////////////////////////
+
+	/**	 The entity pageUriVehicleStep
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String pageUriVehicleStep;
+
+	/**	<br> The entity pageUriVehicleStep
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.vehicle.step.VehicleStepGenPage&fq=entiteVar_enUS_indexed_string:pageUriVehicleStep">Find the entity pageUriVehicleStep in Solr</a>
+	 * <br>
+	 * @param c is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _pageUriVehicleStep(Wrap<String> c);
+
+	public String getPageUriVehicleStep() {
+		return pageUriVehicleStep;
+	}
+	public void setPageUriVehicleStep(String o) {
+		this.pageUriVehicleStep = VehicleStepGenPage.staticSetPageUriVehicleStep(siteRequest_, o);
+	}
+	public static String staticSetPageUriVehicleStep(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected VehicleStepGenPage pageUriVehicleStepInit() {
+		Wrap<String> pageUriVehicleStepWrap = new Wrap<String>().var("pageUriVehicleStep");
+		if(pageUriVehicleStep == null) {
+			_pageUriVehicleStep(pageUriVehicleStepWrap);
+			setPageUriVehicleStep(pageUriVehicleStepWrap.o);
+		}
+		return (VehicleStepGenPage)this;
+	}
+
+	public static String staticSearchPageUriVehicleStep(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrPageUriVehicleStep(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqPageUriVehicleStep(SiteRequestEnUS siteRequest_, String o) {
+		return VehicleStepGenPage.staticSearchStrPageUriVehicleStep(siteRequest_, VehicleStepGenPage.staticSearchPageUriVehicleStep(siteRequest_, VehicleStepGenPage.staticSetPageUriVehicleStep(siteRequest_, o)));
+	}
+
 	//////////////
 	// initDeep //
 	//////////////
@@ -1286,6 +1433,8 @@ public abstract class VehicleStepGenPageGen<DEV> extends BaseModelPage {
 				defaultFacetLimitInit();
 				defaultFacetMinCountInit();
 				defaultPivotMinCountInit();
+				DEFAULT_MAP_LOCATIONInit();
+				DEFAULT_MAP_ZOOMInit();
 				defaultFieldListVarsInit();
 				defaultStatsVarsInit();
 				defaultPivotVarsInit();
@@ -1295,6 +1444,7 @@ public abstract class VehicleStepGenPageGen<DEV> extends BaseModelPage {
 				vehicleStepCountInit();
 				vehicleStep_Init();
 				idInit();
+				pageUriVehicleStepInit();
 				promise2.complete();
 			} catch(Exception ex) {
 				promise2.fail(ex);
@@ -1376,6 +1526,10 @@ public abstract class VehicleStepGenPageGen<DEV> extends BaseModelPage {
 				return oVehicleStepGenPage.defaultFacetMinCount;
 			case "defaultPivotMinCount":
 				return oVehicleStepGenPage.defaultPivotMinCount;
+			case "DEFAULT_MAP_LOCATION":
+				return oVehicleStepGenPage.DEFAULT_MAP_LOCATION;
+			case "DEFAULT_MAP_ZOOM":
+				return oVehicleStepGenPage.DEFAULT_MAP_ZOOM;
 			case "defaultFieldListVars":
 				return oVehicleStepGenPage.defaultFieldListVars;
 			case "defaultStatsVars":
@@ -1394,6 +1548,8 @@ public abstract class VehicleStepGenPageGen<DEV> extends BaseModelPage {
 				return oVehicleStepGenPage.vehicleStep_;
 			case "id":
 				return oVehicleStepGenPage.id;
+			case "pageUriVehicleStep":
+				return oVehicleStepGenPage.pageUriVehicleStep;
 			default:
 				return super.obtainBaseModelPage(var);
 		}
@@ -1455,6 +1611,10 @@ public abstract class VehicleStepGenPageGen<DEV> extends BaseModelPage {
 			return VehicleStepGenPage.staticSetDefaultFacetMinCount(siteRequest_, o);
 		case "defaultPivotMinCount":
 			return VehicleStepGenPage.staticSetDefaultPivotMinCount(siteRequest_, o);
+		case "DEFAULT_MAP_LOCATION":
+			return VehicleStepGenPage.staticSetDEFAULT_MAP_LOCATION(siteRequest_, o);
+		case "DEFAULT_MAP_ZOOM":
+			return VehicleStepGenPage.staticSetDEFAULT_MAP_ZOOM(siteRequest_, o);
 		case "defaultFieldListVars":
 			return VehicleStepGenPage.staticSetDefaultFieldListVars(siteRequest_, o);
 		case "defaultStatsVars":
@@ -1465,6 +1625,8 @@ public abstract class VehicleStepGenPageGen<DEV> extends BaseModelPage {
 			return VehicleStepGenPage.staticSetVehicleStepCount(siteRequest_, o);
 		case "id":
 			return VehicleStepGenPage.staticSetId(siteRequest_, o);
+		case "pageUriVehicleStep":
+			return VehicleStepGenPage.staticSetPageUriVehicleStep(siteRequest_, o);
 			default:
 				return BaseModelPage.staticSetBaseModelPage(entityVar,  siteRequest_, o);
 		}
@@ -1501,6 +1663,10 @@ public abstract class VehicleStepGenPageGen<DEV> extends BaseModelPage {
 			return VehicleStepGenPage.staticSearchDefaultFacetMinCount(siteRequest_, (Integer)o);
 		case "defaultPivotMinCount":
 			return VehicleStepGenPage.staticSearchDefaultPivotMinCount(siteRequest_, (Integer)o);
+		case "DEFAULT_MAP_LOCATION":
+			return VehicleStepGenPage.staticSearchDEFAULT_MAP_LOCATION(siteRequest_, (String)o);
+		case "DEFAULT_MAP_ZOOM":
+			return VehicleStepGenPage.staticSearchDEFAULT_MAP_ZOOM(siteRequest_, (String)o);
 		case "defaultFieldListVars":
 			return VehicleStepGenPage.staticSearchDefaultFieldListVars(siteRequest_, (String)o);
 		case "defaultStatsVars":
@@ -1511,6 +1677,8 @@ public abstract class VehicleStepGenPageGen<DEV> extends BaseModelPage {
 			return VehicleStepGenPage.staticSearchVehicleStepCount(siteRequest_, (Integer)o);
 		case "id":
 			return VehicleStepGenPage.staticSearchId(siteRequest_, (String)o);
+		case "pageUriVehicleStep":
+			return VehicleStepGenPage.staticSearchPageUriVehicleStep(siteRequest_, (String)o);
 			default:
 				return BaseModelPage.staticSearchBaseModelPage(entityVar,  siteRequest_, o);
 		}
@@ -1547,6 +1715,10 @@ public abstract class VehicleStepGenPageGen<DEV> extends BaseModelPage {
 			return VehicleStepGenPage.staticSearchStrDefaultFacetMinCount(siteRequest_, (Integer)o);
 		case "defaultPivotMinCount":
 			return VehicleStepGenPage.staticSearchStrDefaultPivotMinCount(siteRequest_, (Integer)o);
+		case "DEFAULT_MAP_LOCATION":
+			return VehicleStepGenPage.staticSearchStrDEFAULT_MAP_LOCATION(siteRequest_, (String)o);
+		case "DEFAULT_MAP_ZOOM":
+			return VehicleStepGenPage.staticSearchStrDEFAULT_MAP_ZOOM(siteRequest_, (String)o);
 		case "defaultFieldListVars":
 			return VehicleStepGenPage.staticSearchStrDefaultFieldListVars(siteRequest_, (String)o);
 		case "defaultStatsVars":
@@ -1557,6 +1729,8 @@ public abstract class VehicleStepGenPageGen<DEV> extends BaseModelPage {
 			return VehicleStepGenPage.staticSearchStrVehicleStepCount(siteRequest_, (Integer)o);
 		case "id":
 			return VehicleStepGenPage.staticSearchStrId(siteRequest_, (String)o);
+		case "pageUriVehicleStep":
+			return VehicleStepGenPage.staticSearchStrPageUriVehicleStep(siteRequest_, (String)o);
 			default:
 				return BaseModelPage.staticSearchStrBaseModelPage(entityVar,  siteRequest_, o);
 		}
@@ -1593,6 +1767,10 @@ public abstract class VehicleStepGenPageGen<DEV> extends BaseModelPage {
 			return VehicleStepGenPage.staticSearchFqDefaultFacetMinCount(siteRequest_, o);
 		case "defaultPivotMinCount":
 			return VehicleStepGenPage.staticSearchFqDefaultPivotMinCount(siteRequest_, o);
+		case "DEFAULT_MAP_LOCATION":
+			return VehicleStepGenPage.staticSearchFqDEFAULT_MAP_LOCATION(siteRequest_, o);
+		case "DEFAULT_MAP_ZOOM":
+			return VehicleStepGenPage.staticSearchFqDEFAULT_MAP_ZOOM(siteRequest_, o);
 		case "defaultFieldListVars":
 			return VehicleStepGenPage.staticSearchFqDefaultFieldListVars(siteRequest_, o);
 		case "defaultStatsVars":
@@ -1603,6 +1781,8 @@ public abstract class VehicleStepGenPageGen<DEV> extends BaseModelPage {
 			return VehicleStepGenPage.staticSearchFqVehicleStepCount(siteRequest_, o);
 		case "id":
 			return VehicleStepGenPage.staticSearchFqId(siteRequest_, o);
+		case "pageUriVehicleStep":
+			return VehicleStepGenPage.staticSearchFqPageUriVehicleStep(siteRequest_, o);
 			default:
 				return BaseModelPage.staticSearchFqBaseModelPage(entityVar,  siteRequest_, o);
 		}
@@ -1633,6 +1813,8 @@ public abstract class VehicleStepGenPageGen<DEV> extends BaseModelPage {
 	public static final String VAR_defaultFacetLimit = "defaultFacetLimit";
 	public static final String VAR_defaultFacetMinCount = "defaultFacetMinCount";
 	public static final String VAR_defaultPivotMinCount = "defaultPivotMinCount";
+	public static final String VAR_DEFAULT_MAP_LOCATION = "DEFAULT_MAP_LOCATION";
+	public static final String VAR_DEFAULT_MAP_ZOOM = "DEFAULT_MAP_ZOOM";
 	public static final String VAR_defaultFieldListVars = "defaultFieldListVars";
 	public static final String VAR_defaultStatsVars = "defaultStatsVars";
 	public static final String VAR_defaultPivotVars = "defaultPivotVars";
@@ -1642,6 +1824,7 @@ public abstract class VehicleStepGenPageGen<DEV> extends BaseModelPage {
 	public static final String VAR_vehicleStepCount = "vehicleStepCount";
 	public static final String VAR_vehicleStep_ = "vehicleStep_";
 	public static final String VAR_id = "id";
+	public static final String VAR_pageUriVehicleStep = "pageUriVehicleStep";
 
 	public static final String DISPLAY_NAME_searchListVehicleStep_ = "";
 	public static final String DISPLAY_NAME_pageResponse = "";
@@ -1657,6 +1840,8 @@ public abstract class VehicleStepGenPageGen<DEV> extends BaseModelPage {
 	public static final String DISPLAY_NAME_defaultFacetLimit = "";
 	public static final String DISPLAY_NAME_defaultFacetMinCount = "";
 	public static final String DISPLAY_NAME_defaultPivotMinCount = "";
+	public static final String DISPLAY_NAME_DEFAULT_MAP_LOCATION = "";
+	public static final String DISPLAY_NAME_DEFAULT_MAP_ZOOM = "";
 	public static final String DISPLAY_NAME_defaultFieldListVars = "";
 	public static final String DISPLAY_NAME_defaultStatsVars = "";
 	public static final String DISPLAY_NAME_defaultPivotVars = "";
@@ -1666,6 +1851,7 @@ public abstract class VehicleStepGenPageGen<DEV> extends BaseModelPage {
 	public static final String DISPLAY_NAME_vehicleStepCount = "";
 	public static final String DISPLAY_NAME_vehicleStep_ = "";
 	public static final String DISPLAY_NAME_id = "";
+	public static final String DISPLAY_NAME_pageUriVehicleStep = "";
 
 	public static String displayNameForClass(String var) {
 		return VehicleStepGenPage.displayNameVehicleStepGenPage(var);
@@ -1700,6 +1886,10 @@ public abstract class VehicleStepGenPageGen<DEV> extends BaseModelPage {
 			return DISPLAY_NAME_defaultFacetMinCount;
 		case VAR_defaultPivotMinCount:
 			return DISPLAY_NAME_defaultPivotMinCount;
+		case VAR_DEFAULT_MAP_LOCATION:
+			return DISPLAY_NAME_DEFAULT_MAP_LOCATION;
+		case VAR_DEFAULT_MAP_ZOOM:
+			return DISPLAY_NAME_DEFAULT_MAP_ZOOM;
 		case VAR_defaultFieldListVars:
 			return DISPLAY_NAME_defaultFieldListVars;
 		case VAR_defaultStatsVars:
@@ -1718,6 +1908,8 @@ public abstract class VehicleStepGenPageGen<DEV> extends BaseModelPage {
 			return DISPLAY_NAME_vehicleStep_;
 		case VAR_id:
 			return DISPLAY_NAME_id;
+		case VAR_pageUriVehicleStep:
+			return DISPLAY_NAME_pageUriVehicleStep;
 		default:
 			return BaseModelPage.displayNameBaseModelPage(var);
 		}

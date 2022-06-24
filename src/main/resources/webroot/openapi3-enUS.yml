@@ -1414,9 +1414,6 @@ paths:
     get:
       operationId: searchSitePage
       x-vertx-event-bus: smart-village-view-enUS-SitePage
-      security:
-        - openIdConnect:
-          - profile
       description: >+
       summary: >+
       tags:
@@ -1707,9 +1704,6 @@ paths:
     get:
       operationId: getSitePage
       x-vertx-event-bus: smart-village-view-enUS-SitePage
-      security:
-        - openIdConnect:
-          - profile
       description: >+
       summary: >+
       tags:
@@ -1740,9 +1734,6 @@ paths:
     get:
       operationId: searchpageSitePageId
       x-vertx-event-bus: smart-village-view-enUS-SitePage
-      security:
-        - openIdConnect:
-          - profile
       description: >+
       summary: >+
       tags:
@@ -1925,9 +1916,6 @@ paths:
     get:
       operationId: searchpageSitePage
       x-vertx-event-bus: smart-village-view-enUS-SitePage
-      security:
-        - openIdConnect:
-          - profile
       description: >+
       summary: >+
       tags:
@@ -7198,7 +7186,9 @@ components:
               objectSuggest:
                 type: string
               objectText:
-                type: string
+                type: array
+                items:
+                  type: string
               pageUrlId:
                 type: string
               pageUrlPk:
@@ -7268,7 +7258,9 @@ components:
             objectSuggest:
               type: string
             objectText:
-              type: string
+              type: array
+              items:
+                type: string
             pageUrlId:
               type: string
             pageUrlPk:
@@ -7338,7 +7330,9 @@ components:
             objectSuggest:
               type: string
             objectText:
-              type: string
+              type: array
+              items:
+                type: string
             pageUrlId:
               type: string
             pageUrlPk:
@@ -7553,12 +7547,22 @@ components:
             removeAllObjectSuggest:
               type: string
             setObjectText:
-              type: string
+              type: array
               nullable: true
+              items:
+                type: string
             removeObjectText:
               type: string
             removeAllObjectText:
+              type: array
+              items:
+                type: string
+            addObjectText:
               type: string
+            addAllObjectText:
+              type: array
+              items:
+                type: string
             setPageUrlId:
               type: string
               nullable: true
@@ -7793,12 +7797,22 @@ components:
             removeAllObjectSuggest:
               type: string
             setObjectText:
-              type: string
+              type: array
               nullable: true
+              items:
+                type: string
             removeObjectText:
               type: string
             removeAllObjectText:
+              type: array
+              items:
+                type: string
+            addObjectText:
               type: string
+            addAllObjectText:
+              type: array
+              items:
+                type: string
             setPageUrlId:
               type: string
               nullable: true
@@ -7888,7 +7902,9 @@ components:
             objectSuggest:
               type: string
             objectText:
-              type: string
+              type: array
+              items:
+                type: string
             pageUrlId:
               type: string
             pageUrlPk:
@@ -7958,7 +7974,9 @@ components:
             objectSuggest:
               type: string
             objectText:
-              type: string
+              type: array
+              items:
+                type: string
             pageUrlId:
               type: string
             pageUrlPk:
@@ -8028,7 +8046,9 @@ components:
             objectSuggest:
               type: string
             objectText:
-              type: string
+              type: array
+              items:
+                type: string
             pageUrlId:
               type: string
             pageUrlPk:
@@ -8938,7 +8958,7 @@ components:
             properties:
               simulationKey:
                 type: string
-              timeStepKey:
+              timeStepId:
                 type: string
               time:
                 type: string
@@ -9017,12 +9037,12 @@ components:
               type: string
             removeAllSimulationKey:
               type: string
-            setTimeStepKey:
+            setTimeStepId:
               type: string
               nullable: true
-            removeTimeStepKey:
+            removeTimeStepId:
               type: string
-            removeAllTimeStepKey:
+            removeAllTimeStepId:
               type: string
             setTime:
               type: string
@@ -9271,12 +9291,12 @@ components:
               type: string
             removeAllSimulationKey:
               type: string
-            setTimeStepKey:
+            setTimeStepId:
               type: string
               nullable: true
-            removeTimeStepKey:
+            removeTimeStepId:
               type: string
-            removeAllTimeStepKey:
+            removeAllTimeStepId:
               type: string
             setTime:
               type: string
@@ -9520,7 +9540,7 @@ components:
           properties:
             simulationKey:
               type: string
-            timeStepKey:
+            timeStepId:
               type: string
             time:
               type: string
@@ -9594,7 +9614,7 @@ components:
           properties:
             simulationKey:
               type: string
-            timeStepKey:
+            timeStepId:
               type: string
             time:
               type: string
@@ -9668,7 +9688,7 @@ components:
           properties:
             simulationKey:
               type: string
-            timeStepKey:
+            timeStepId:
               type: string
             time:
               type: string
@@ -9742,7 +9762,7 @@ components:
           properties:
             simulationKey:
               type: string
-            timeStepKey:
+            timeStepId:
               type: string
             time:
               type: string
@@ -9816,7 +9836,7 @@ components:
           properties:
             simulationKey:
               type: string
-            timeStepKey:
+            timeStepId:
               type: string
             time:
               type: string

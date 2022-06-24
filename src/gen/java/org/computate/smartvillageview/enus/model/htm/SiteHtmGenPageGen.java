@@ -821,8 +821,8 @@ public abstract class SiteHtmGenPageGen<DEV> extends PageLayout {
 	public static String staticSetDefaultFieldListVars(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	public SiteHtmGenPage addDefaultFieldListVars(String...objets) {
-		for(String o : objets) {
+	public SiteHtmGenPage addDefaultFieldListVars(String...objects) {
+		for(String o : objects) {
 			addDefaultFieldListVars(o);
 		}
 		return (SiteHtmGenPage)this;
@@ -833,10 +833,10 @@ public abstract class SiteHtmGenPageGen<DEV> extends PageLayout {
 		return (SiteHtmGenPage)this;
 	}
 	@JsonIgnore
-	public void setDefaultFieldListVars(JsonArray objets) {
+	public void setDefaultFieldListVars(JsonArray objects) {
 		defaultFieldListVars.clear();
-		for(int i = 0; i < objets.size(); i++) {
-			String o = objets.getString(i);
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
 			addDefaultFieldListVars(o);
 		}
 	}
@@ -887,8 +887,8 @@ public abstract class SiteHtmGenPageGen<DEV> extends PageLayout {
 	public static String staticSetDefaultStatsVars(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	public SiteHtmGenPage addDefaultStatsVars(String...objets) {
-		for(String o : objets) {
+	public SiteHtmGenPage addDefaultStatsVars(String...objects) {
+		for(String o : objects) {
 			addDefaultStatsVars(o);
 		}
 		return (SiteHtmGenPage)this;
@@ -899,10 +899,10 @@ public abstract class SiteHtmGenPageGen<DEV> extends PageLayout {
 		return (SiteHtmGenPage)this;
 	}
 	@JsonIgnore
-	public void setDefaultStatsVars(JsonArray objets) {
+	public void setDefaultStatsVars(JsonArray objects) {
 		defaultStatsVars.clear();
-		for(int i = 0; i < objets.size(); i++) {
-			String o = objets.getString(i);
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
 			addDefaultStatsVars(o);
 		}
 	}
@@ -953,8 +953,8 @@ public abstract class SiteHtmGenPageGen<DEV> extends PageLayout {
 	public static String staticSetDefaultPivotVars(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	public SiteHtmGenPage addDefaultPivotVars(String...objets) {
-		for(String o : objets) {
+	public SiteHtmGenPage addDefaultPivotVars(String...objects) {
+		for(String o : objects) {
 			addDefaultPivotVars(o);
 		}
 		return (SiteHtmGenPage)this;
@@ -965,10 +965,10 @@ public abstract class SiteHtmGenPageGen<DEV> extends PageLayout {
 		return (SiteHtmGenPage)this;
 	}
 	@JsonIgnore
-	public void setDefaultPivotVars(JsonArray objets) {
+	public void setDefaultPivotVars(JsonArray objects) {
 		defaultPivotVars.clear();
-		for(int i = 0; i < objets.size(); i++) {
-			String o = objets.getString(i);
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
 			addDefaultPivotVars(o);
 		}
 	}
@@ -1243,6 +1243,55 @@ public abstract class SiteHtmGenPageGen<DEV> extends PageLayout {
 		return SiteHtmGenPage.staticSearchStrId(siteRequest_, SiteHtmGenPage.staticSearchId(siteRequest_, SiteHtmGenPage.staticSetId(siteRequest_, o)));
 	}
 
+	////////////////////
+	// pageUriSiteHtm //
+	////////////////////
+
+	/**	 The entity pageUriSiteHtm
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String pageUriSiteHtm;
+
+	/**	<br> The entity pageUriSiteHtm
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtmGenPage&fq=entiteVar_enUS_indexed_string:pageUriSiteHtm">Find the entity pageUriSiteHtm in Solr</a>
+	 * <br>
+	 * @param c is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _pageUriSiteHtm(Wrap<String> c);
+
+	public String getPageUriSiteHtm() {
+		return pageUriSiteHtm;
+	}
+	public void setPageUriSiteHtm(String o) {
+		this.pageUriSiteHtm = SiteHtmGenPage.staticSetPageUriSiteHtm(siteRequest_, o);
+	}
+	public static String staticSetPageUriSiteHtm(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected SiteHtmGenPage pageUriSiteHtmInit() {
+		Wrap<String> pageUriSiteHtmWrap = new Wrap<String>().var("pageUriSiteHtm");
+		if(pageUriSiteHtm == null) {
+			_pageUriSiteHtm(pageUriSiteHtmWrap);
+			setPageUriSiteHtm(pageUriSiteHtmWrap.o);
+		}
+		return (SiteHtmGenPage)this;
+	}
+
+	public static String staticSearchPageUriSiteHtm(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrPageUriSiteHtm(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqPageUriSiteHtm(SiteRequestEnUS siteRequest_, String o) {
+		return SiteHtmGenPage.staticSearchStrPageUriSiteHtm(siteRequest_, SiteHtmGenPage.staticSearchPageUriSiteHtm(siteRequest_, SiteHtmGenPage.staticSetPageUriSiteHtm(siteRequest_, o)));
+	}
+
 	//////////////
 	// initDeep //
 	//////////////
@@ -1295,6 +1344,7 @@ public abstract class SiteHtmGenPageGen<DEV> extends PageLayout {
 				siteHtmCountInit();
 				siteHtm_Init();
 				idInit();
+				pageUriSiteHtmInit();
 				promise2.complete();
 			} catch(Exception ex) {
 				promise2.fail(ex);
@@ -1394,6 +1444,8 @@ public abstract class SiteHtmGenPageGen<DEV> extends PageLayout {
 				return oSiteHtmGenPage.siteHtm_;
 			case "id":
 				return oSiteHtmGenPage.id;
+			case "pageUriSiteHtm":
+				return oSiteHtmGenPage.pageUriSiteHtm;
 			default:
 				return super.obtainPageLayout(var);
 		}
@@ -1465,6 +1517,8 @@ public abstract class SiteHtmGenPageGen<DEV> extends PageLayout {
 			return SiteHtmGenPage.staticSetSiteHtmCount(siteRequest_, o);
 		case "id":
 			return SiteHtmGenPage.staticSetId(siteRequest_, o);
+		case "pageUriSiteHtm":
+			return SiteHtmGenPage.staticSetPageUriSiteHtm(siteRequest_, o);
 			default:
 				return PageLayout.staticSetPageLayout(entityVar,  siteRequest_, o);
 		}
@@ -1511,6 +1565,8 @@ public abstract class SiteHtmGenPageGen<DEV> extends PageLayout {
 			return SiteHtmGenPage.staticSearchSiteHtmCount(siteRequest_, (Integer)o);
 		case "id":
 			return SiteHtmGenPage.staticSearchId(siteRequest_, (String)o);
+		case "pageUriSiteHtm":
+			return SiteHtmGenPage.staticSearchPageUriSiteHtm(siteRequest_, (String)o);
 			default:
 				return PageLayout.staticSearchPageLayout(entityVar,  siteRequest_, o);
 		}
@@ -1557,6 +1613,8 @@ public abstract class SiteHtmGenPageGen<DEV> extends PageLayout {
 			return SiteHtmGenPage.staticSearchStrSiteHtmCount(siteRequest_, (Integer)o);
 		case "id":
 			return SiteHtmGenPage.staticSearchStrId(siteRequest_, (String)o);
+		case "pageUriSiteHtm":
+			return SiteHtmGenPage.staticSearchStrPageUriSiteHtm(siteRequest_, (String)o);
 			default:
 				return PageLayout.staticSearchStrPageLayout(entityVar,  siteRequest_, o);
 		}
@@ -1603,6 +1661,8 @@ public abstract class SiteHtmGenPageGen<DEV> extends PageLayout {
 			return SiteHtmGenPage.staticSearchFqSiteHtmCount(siteRequest_, o);
 		case "id":
 			return SiteHtmGenPage.staticSearchFqId(siteRequest_, o);
+		case "pageUriSiteHtm":
+			return SiteHtmGenPage.staticSearchFqPageUriSiteHtm(siteRequest_, o);
 			default:
 				return PageLayout.staticSearchFqPageLayout(entityVar,  siteRequest_, o);
 		}
@@ -1642,6 +1702,7 @@ public abstract class SiteHtmGenPageGen<DEV> extends PageLayout {
 	public static final String VAR_siteHtmCount = "siteHtmCount";
 	public static final String VAR_siteHtm_ = "siteHtm_";
 	public static final String VAR_id = "id";
+	public static final String VAR_pageUriSiteHtm = "pageUriSiteHtm";
 
 	public static final String DISPLAY_NAME_searchListSiteHtm_ = "";
 	public static final String DISPLAY_NAME_pageResponse = "";
@@ -1666,6 +1727,7 @@ public abstract class SiteHtmGenPageGen<DEV> extends PageLayout {
 	public static final String DISPLAY_NAME_siteHtmCount = "";
 	public static final String DISPLAY_NAME_siteHtm_ = "";
 	public static final String DISPLAY_NAME_id = "";
+	public static final String DISPLAY_NAME_pageUriSiteHtm = "";
 
 	public static String displayNameForClass(String var) {
 		return SiteHtmGenPage.displayNameSiteHtmGenPage(var);
@@ -1718,6 +1780,8 @@ public abstract class SiteHtmGenPageGen<DEV> extends PageLayout {
 			return DISPLAY_NAME_siteHtm_;
 		case VAR_id:
 			return DISPLAY_NAME_id;
+		case VAR_pageUriSiteHtm:
+			return DISPLAY_NAME_pageUriSiteHtm;
 		default:
 			return PageLayout.displayNamePageLayout(var);
 		}

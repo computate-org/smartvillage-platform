@@ -532,8 +532,8 @@ public abstract class SiteHtmGen<DEV> extends Object {
 	public static String staticSetSaves(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	public SiteHtm addSaves(String...objets) {
-		for(String o : objets) {
+	public SiteHtm addSaves(String...objects) {
+		for(String o : objects) {
 			addSaves(o);
 		}
 		return (SiteHtm)this;
@@ -544,10 +544,10 @@ public abstract class SiteHtmGen<DEV> extends Object {
 		return (SiteHtm)this;
 	}
 	@JsonIgnore
-	public void setSaves(JsonArray objets) {
+	public void setSaves(JsonArray objects) {
 		saves.clear();
-		for(int i = 0; i < objets.size(); i++) {
-			String o = objets.getString(i);
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
 			addSaves(o);
 		}
 	}
@@ -985,8 +985,8 @@ public abstract class SiteHtmGen<DEV> extends Object {
 	public static String staticSetText(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	public SiteHtm addText(String...objets) {
-		for(String o : objets) {
+	public SiteHtm addText(String...objects) {
+		for(String o : objects) {
 			addText(o);
 		}
 		return (SiteHtm)this;
@@ -997,10 +997,10 @@ public abstract class SiteHtmGen<DEV> extends Object {
 		return (SiteHtm)this;
 	}
 	@JsonIgnore
-	public void setText(JsonArray objets) {
+	public void setText(JsonArray objects) {
 		text.clear();
-		for(int i = 0; i < objets.size(); i++) {
-			String o = objets.getString(i);
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
 			addText(o);
 		}
 	}
@@ -1370,8 +1370,8 @@ public abstract class SiteHtmGen<DEV> extends Object {
 	public static String staticSetClassCanonicalNames(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	public SiteHtm addClassCanonicalNames(String...objets) {
-		for(String o : objets) {
+	public SiteHtm addClassCanonicalNames(String...objects) {
+		for(String o : objects) {
 			addClassCanonicalNames(o);
 		}
 		return (SiteHtm)this;
@@ -1382,10 +1382,10 @@ public abstract class SiteHtmGen<DEV> extends Object {
 		return (SiteHtm)this;
 	}
 	@JsonIgnore
-	public void setClassCanonicalNames(JsonArray objets) {
+	public void setClassCanonicalNames(JsonArray objects) {
 		classCanonicalNames.clear();
-		for(int i = 0; i < objets.size(); i++) {
-			String o = objets.getString(i);
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
 			addClassCanonicalNames(o);
 		}
 	}

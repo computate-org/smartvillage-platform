@@ -3,6 +3,7 @@ package org.computate.smartvillageview.enus.page;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -10,12 +11,15 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.computate.search.tool.SearchTool;
 import org.computate.search.wrap.Wrap;
 import org.computate.smartvillageview.enus.config.ConfigKeys;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 
 import io.vertx.core.Promise;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.api.service.ServiceRequest;
 
@@ -105,6 +109,12 @@ public class PageLayout extends PageLayoutGen<Object> {
 	 */
 	protected void _pageUri(Wrap<String> w) {
 		w.o(Optional.ofNullable(serviceRequest).map(r -> r.getExtra()).map(e -> e.getString("uri")).orElse(null));
+	}
+
+	/**
+	 * Description: The API request URI
+	 */
+	protected void _apiUri(Wrap<String> w) {
 	}
 
 	/**
@@ -251,6 +261,34 @@ public class PageLayout extends PageLayoutGen<Object> {
 	 * Description: The query data about this request
 	 */
 	protected void _query(JsonObject query) {
+	}
+
+	/**
+	 * Description: The query String for this request
+	 */
+	protected void _queryStr(Wrap<String> w) {
+		ServiceRequest serviceRequest = siteRequest_.getServiceRequest();
+		JsonObject params = serviceRequest.getParams();
+		List<String> paramList = new ArrayList<>();
+
+		JsonObject queryParams = Optional.ofNullable(serviceRequest).map(ServiceRequest::getParams).map(or -> or.getJsonObject("query")).orElse(new JsonObject());
+		for(String paramName : queryParams.fieldNames()) {
+			Object paramObjectValues = queryParams.getValue(paramName);
+			JsonArray paramObjects = paramObjectValues instanceof JsonArray ? (JsonArray)paramObjectValues : new JsonArray().add(paramObjectValues);
+
+			try {
+				for(Object paramObject : paramObjects) {
+					if(paramObject != null)
+						paramList.add(String.format("%s=%s", paramName, SearchTool.urlEncode(paramObject.toString())));
+				}
+			} catch(Exception e) {
+				ExceptionUtils.rethrow(e);
+			}
+		}
+		if(params.size() == 0)
+			w.o("");
+		else
+			w.o(String.format("?%s", StringUtils.join(paramList, "&")));
 	}
 
 	/**
