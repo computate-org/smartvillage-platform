@@ -1,7 +1,6 @@
 package org.computate.smartvillageview.enus.model.traffic.time.step;
 
 import org.computate.smartvillageview.enus.page.PageLayout;
-import org.computate.smartvillageview.enus.model.base.BaseModelPage;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.smartvillageview.enus.model.user.SiteUser;
 import java.io.IOException;
@@ -43,7 +42,7 @@ import java.time.ZoneId;
 /**
  * Translate: false
  **/
-public class TimeStepGenPage extends TimeStepGenPageGen<BaseModelPage> {
+public class TimeStepGenPage extends TimeStepGenPageGen<PageLayout> {
 
 	/**
 	 * {@inheritDoc}
@@ -109,6 +108,21 @@ public class TimeStepGenPage extends TimeStepGenPageGen<BaseModelPage> {
 
 	protected void _defaultPivotMinCount(Wrap<Integer> w) {
 		w.o(Optional.ofNullable(searchListTimeStep_.getFacetPivotMinCount()).orElse(0));
+	}
+
+	protected void _DEFAULT_MAP_LOCATION(Wrap<JsonObject> w) {
+		String pointStr = Optional.ofNullable(siteRequest_.getRequestVars().get(VAR_DEFAULT_MAP_LOCATION)).orElse(siteRequest_.getConfig().getString(ConfigKeys.DEFAULT_MAP_LOCATION));
+		if(pointStr != null) {
+			String[] parts = pointStr.split(",");
+			JsonObject point = new JsonObject().put("lat", Double.parseDouble(parts[0])).put("lon", Double.parseDouble(parts[1]));
+			w.o(point);
+		}
+	}
+
+	protected void _DEFAULT_MAP_ZOOM(Wrap<BigDecimal> w) {
+		String s = Optional.ofNullable(siteRequest_.getRequestVars().get(VAR_DEFAULT_MAP_ZOOM)).orElse(siteRequest_.getConfig().getString(ConfigKeys.DEFAULT_MAP_ZOOM));
+		if(s != null)
+			w.o(new BigDecimal(s));
 	}
 
 	protected void _defaultFieldListVars(List<String> l) {

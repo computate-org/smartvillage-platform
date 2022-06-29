@@ -46,6 +46,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.lang.Integer;
+import io.vertx.core.json.JsonObject;
+import java.math.BigDecimal;
 import io.vertx.core.json.JsonArray;
 import org.computate.search.response.solr.SolrResponse.Stats;
 import org.computate.search.response.solr.SolrResponse.FacetCounts;
@@ -792,6 +794,327 @@ public abstract class SiteUserGenPageGen<DEV> extends BaseModelPage {
 		return SiteUserGenPage.staticSearchStrDefaultPivotMinCount(siteRequest_, SiteUserGenPage.staticSearchDefaultPivotMinCount(siteRequest_, SiteUserGenPage.staticSetDefaultPivotMinCount(siteRequest_, o)));
 	}
 
+	//////////////////////////
+	// DEFAULT_MAP_LOCATION //
+	//////////////////////////
+
+	/**	 The entity DEFAULT_MAP_LOCATION
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected JsonObject DEFAULT_MAP_LOCATION;
+
+	/**	<br> The entity DEFAULT_MAP_LOCATION
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.user.SiteUserGenPage&fq=entiteVar_enUS_indexed_string:DEFAULT_MAP_LOCATION">Find the entity DEFAULT_MAP_LOCATION in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _DEFAULT_MAP_LOCATION(Wrap<JsonObject> w);
+
+	public JsonObject getDEFAULT_MAP_LOCATION() {
+		return DEFAULT_MAP_LOCATION;
+	}
+
+	public void setDEFAULT_MAP_LOCATION(JsonObject DEFAULT_MAP_LOCATION) {
+		this.DEFAULT_MAP_LOCATION = DEFAULT_MAP_LOCATION;
+	}
+	@JsonIgnore
+	public void setDEFAULT_MAP_LOCATION(String o) {
+		this.DEFAULT_MAP_LOCATION = SiteUserGenPage.staticSetDEFAULT_MAP_LOCATION(siteRequest_, o);
+	}
+	public static JsonObject staticSetDEFAULT_MAP_LOCATION(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonObject(o);
+		}
+		return null;
+	}
+	protected SiteUserGenPage DEFAULT_MAP_LOCATIONInit() {
+		Wrap<JsonObject> DEFAULT_MAP_LOCATIONWrap = new Wrap<JsonObject>().var("DEFAULT_MAP_LOCATION");
+		if(DEFAULT_MAP_LOCATION == null) {
+			_DEFAULT_MAP_LOCATION(DEFAULT_MAP_LOCATIONWrap);
+			setDEFAULT_MAP_LOCATION(DEFAULT_MAP_LOCATIONWrap.o);
+		}
+		return (SiteUserGenPage)this;
+	}
+
+	public static JsonObject staticSearchDEFAULT_MAP_LOCATION(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o;
+	}
+
+	public static String staticSearchStrDEFAULT_MAP_LOCATION(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqDEFAULT_MAP_LOCATION(SiteRequestEnUS siteRequest_, String o) {
+		return SiteUserGenPage.staticSearchStrDEFAULT_MAP_LOCATION(siteRequest_, SiteUserGenPage.staticSearchDEFAULT_MAP_LOCATION(siteRequest_, SiteUserGenPage.staticSetDEFAULT_MAP_LOCATION(siteRequest_, o)));
+	}
+
+	//////////////////////
+	// DEFAULT_MAP_ZOOM //
+	//////////////////////
+
+	/**	 The entity DEFAULT_MAP_ZOOM
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected BigDecimal DEFAULT_MAP_ZOOM;
+
+	/**	<br> The entity DEFAULT_MAP_ZOOM
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.user.SiteUserGenPage&fq=entiteVar_enUS_indexed_string:DEFAULT_MAP_ZOOM">Find the entity DEFAULT_MAP_ZOOM in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _DEFAULT_MAP_ZOOM(Wrap<BigDecimal> w);
+
+	public BigDecimal getDEFAULT_MAP_ZOOM() {
+		return DEFAULT_MAP_ZOOM;
+	}
+
+	public void setDEFAULT_MAP_ZOOM(BigDecimal DEFAULT_MAP_ZOOM) {
+		this.DEFAULT_MAP_ZOOM = DEFAULT_MAP_ZOOM;
+	}
+	@JsonIgnore
+	public void setDEFAULT_MAP_ZOOM(String o) {
+		this.DEFAULT_MAP_ZOOM = SiteUserGenPage.staticSetDEFAULT_MAP_ZOOM(siteRequest_, o);
+	}
+	public static BigDecimal staticSetDEFAULT_MAP_ZOOM(SiteRequestEnUS siteRequest_, String o) {
+		o = StringUtils.removeAll(o, "[^\\d\\.]");
+		if(NumberUtils.isParsable(o))
+			return new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		return null;
+	}
+	@JsonIgnore
+	public void setDEFAULT_MAP_ZOOM(Double o) {
+			this.DEFAULT_MAP_ZOOM = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+	}
+	@JsonIgnore
+	public void setDEFAULT_MAP_ZOOM(Integer o) {
+			this.DEFAULT_MAP_ZOOM = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+	}
+	protected SiteUserGenPage DEFAULT_MAP_ZOOMInit() {
+		Wrap<BigDecimal> DEFAULT_MAP_ZOOMWrap = new Wrap<BigDecimal>().var("DEFAULT_MAP_ZOOM");
+		if(DEFAULT_MAP_ZOOM == null) {
+			_DEFAULT_MAP_ZOOM(DEFAULT_MAP_ZOOMWrap);
+			setDEFAULT_MAP_ZOOM(DEFAULT_MAP_ZOOMWrap.o);
+		}
+		return (SiteUserGenPage)this;
+	}
+
+	public static Double staticSearchDEFAULT_MAP_ZOOM(SiteRequestEnUS siteRequest_, BigDecimal o) {
+		return o == null ? null : o.doubleValue();
+	}
+
+	public static String staticSearchStrDEFAULT_MAP_ZOOM(SiteRequestEnUS siteRequest_, Double o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqDEFAULT_MAP_ZOOM(SiteRequestEnUS siteRequest_, String o) {
+		return SiteUserGenPage.staticSearchStrDEFAULT_MAP_ZOOM(siteRequest_, SiteUserGenPage.staticSearchDEFAULT_MAP_ZOOM(siteRequest_, SiteUserGenPage.staticSetDEFAULT_MAP_ZOOM(siteRequest_, o)));
+	}
+
+	//////////////////////////
+	// defaultFieldListVars //
+	//////////////////////////
+
+	/**	 The entity defaultFieldListVars
+	 *	 It is constructed before being initialized with the constructor by default. 
+	 */
+	@JsonProperty
+	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
+	@JsonInclude(Include.NON_NULL)
+	protected List<String> defaultFieldListVars = new ArrayList<String>();
+
+	/**	<br> The entity defaultFieldListVars
+	 *  It is constructed before being initialized with the constructor by default. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.user.SiteUserGenPage&fq=entiteVar_enUS_indexed_string:defaultFieldListVars">Find the entity defaultFieldListVars in Solr</a>
+	 * <br>
+	 * @param l is the entity already constructed. 
+	 **/
+	protected abstract void _defaultFieldListVars(List<String> l);
+
+	public List<String> getDefaultFieldListVars() {
+		return defaultFieldListVars;
+	}
+
+	public void setDefaultFieldListVars(List<String> defaultFieldListVars) {
+		this.defaultFieldListVars = defaultFieldListVars;
+	}
+	public static String staticSetDefaultFieldListVars(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	public SiteUserGenPage addDefaultFieldListVars(String...objects) {
+		for(String o : objects) {
+			addDefaultFieldListVars(o);
+		}
+		return (SiteUserGenPage)this;
+	}
+	public SiteUserGenPage addDefaultFieldListVars(String o) {
+		if(o != null)
+			this.defaultFieldListVars.add(o);
+		return (SiteUserGenPage)this;
+	}
+	@JsonIgnore
+	public void setDefaultFieldListVars(JsonArray objects) {
+		defaultFieldListVars.clear();
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
+			addDefaultFieldListVars(o);
+		}
+	}
+	protected SiteUserGenPage defaultFieldListVarsInit() {
+		_defaultFieldListVars(defaultFieldListVars);
+		return (SiteUserGenPage)this;
+	}
+
+	public static String staticSearchDefaultFieldListVars(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrDefaultFieldListVars(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqDefaultFieldListVars(SiteRequestEnUS siteRequest_, String o) {
+		return SiteUserGenPage.staticSearchStrDefaultFieldListVars(siteRequest_, SiteUserGenPage.staticSearchDefaultFieldListVars(siteRequest_, SiteUserGenPage.staticSetDefaultFieldListVars(siteRequest_, o)));
+	}
+
+	//////////////////////
+	// defaultStatsVars //
+	//////////////////////
+
+	/**	 The entity defaultStatsVars
+	 *	 It is constructed before being initialized with the constructor by default. 
+	 */
+	@JsonProperty
+	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
+	@JsonInclude(Include.NON_NULL)
+	protected List<String> defaultStatsVars = new ArrayList<String>();
+
+	/**	<br> The entity defaultStatsVars
+	 *  It is constructed before being initialized with the constructor by default. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.user.SiteUserGenPage&fq=entiteVar_enUS_indexed_string:defaultStatsVars">Find the entity defaultStatsVars in Solr</a>
+	 * <br>
+	 * @param l is the entity already constructed. 
+	 **/
+	protected abstract void _defaultStatsVars(List<String> l);
+
+	public List<String> getDefaultStatsVars() {
+		return defaultStatsVars;
+	}
+
+	public void setDefaultStatsVars(List<String> defaultStatsVars) {
+		this.defaultStatsVars = defaultStatsVars;
+	}
+	public static String staticSetDefaultStatsVars(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	public SiteUserGenPage addDefaultStatsVars(String...objects) {
+		for(String o : objects) {
+			addDefaultStatsVars(o);
+		}
+		return (SiteUserGenPage)this;
+	}
+	public SiteUserGenPage addDefaultStatsVars(String o) {
+		if(o != null)
+			this.defaultStatsVars.add(o);
+		return (SiteUserGenPage)this;
+	}
+	@JsonIgnore
+	public void setDefaultStatsVars(JsonArray objects) {
+		defaultStatsVars.clear();
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
+			addDefaultStatsVars(o);
+		}
+	}
+	protected SiteUserGenPage defaultStatsVarsInit() {
+		_defaultStatsVars(defaultStatsVars);
+		return (SiteUserGenPage)this;
+	}
+
+	public static String staticSearchDefaultStatsVars(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrDefaultStatsVars(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqDefaultStatsVars(SiteRequestEnUS siteRequest_, String o) {
+		return SiteUserGenPage.staticSearchStrDefaultStatsVars(siteRequest_, SiteUserGenPage.staticSearchDefaultStatsVars(siteRequest_, SiteUserGenPage.staticSetDefaultStatsVars(siteRequest_, o)));
+	}
+
+	//////////////////////
+	// defaultPivotVars //
+	//////////////////////
+
+	/**	 The entity defaultPivotVars
+	 *	 It is constructed before being initialized with the constructor by default. 
+	 */
+	@JsonProperty
+	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
+	@JsonInclude(Include.NON_NULL)
+	protected List<String> defaultPivotVars = new ArrayList<String>();
+
+	/**	<br> The entity defaultPivotVars
+	 *  It is constructed before being initialized with the constructor by default. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.user.SiteUserGenPage&fq=entiteVar_enUS_indexed_string:defaultPivotVars">Find the entity defaultPivotVars in Solr</a>
+	 * <br>
+	 * @param l is the entity already constructed. 
+	 **/
+	protected abstract void _defaultPivotVars(List<String> l);
+
+	public List<String> getDefaultPivotVars() {
+		return defaultPivotVars;
+	}
+
+	public void setDefaultPivotVars(List<String> defaultPivotVars) {
+		this.defaultPivotVars = defaultPivotVars;
+	}
+	public static String staticSetDefaultPivotVars(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	public SiteUserGenPage addDefaultPivotVars(String...objects) {
+		for(String o : objects) {
+			addDefaultPivotVars(o);
+		}
+		return (SiteUserGenPage)this;
+	}
+	public SiteUserGenPage addDefaultPivotVars(String o) {
+		if(o != null)
+			this.defaultPivotVars.add(o);
+		return (SiteUserGenPage)this;
+	}
+	@JsonIgnore
+	public void setDefaultPivotVars(JsonArray objects) {
+		defaultPivotVars.clear();
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
+			addDefaultPivotVars(o);
+		}
+	}
+	protected SiteUserGenPage defaultPivotVarsInit() {
+		_defaultPivotVars(defaultPivotVars);
+		return (SiteUserGenPage)this;
+	}
+
+	public static String staticSearchDefaultPivotVars(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrDefaultPivotVars(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqDefaultPivotVars(SiteRequestEnUS siteRequest_, String o) {
+		return SiteUserGenPage.staticSearchStrDefaultPivotVars(siteRequest_, SiteUserGenPage.staticSearchDefaultPivotVars(siteRequest_, SiteUserGenPage.staticSetDefaultPivotVars(siteRequest_, o)));
+	}
+
 	//////////////////
 	// listSiteUser //
 	//////////////////
@@ -1103,6 +1426,271 @@ public abstract class SiteUserGenPageGen<DEV> extends BaseModelPage {
 		return SiteUserGenPage.staticSearchStrId(siteRequest_, SiteUserGenPage.staticSearchId(siteRequest_, SiteUserGenPage.staticSetId(siteRequest_, o)));
 	}
 
+	////////////////
+	// pagination //
+	////////////////
+
+	/**	 The entity pagination
+	 *	 It is constructed before being initialized with the constructor by default. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected JsonObject pagination = new JsonObject();
+
+	/**	<br> The entity pagination
+	 *  It is constructed before being initialized with the constructor by default. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.user.SiteUserGenPage&fq=entiteVar_enUS_indexed_string:pagination">Find the entity pagination in Solr</a>
+	 * <br>
+	 * @param pagination is the entity already constructed. 
+	 **/
+	protected abstract void _pagination(JsonObject pagination);
+
+	public JsonObject getPagination() {
+		return pagination;
+	}
+
+	public void setPagination(JsonObject pagination) {
+		this.pagination = pagination;
+	}
+	@JsonIgnore
+	public void setPagination(String o) {
+		this.pagination = SiteUserGenPage.staticSetPagination(siteRequest_, o);
+	}
+	public static JsonObject staticSetPagination(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonObject(o);
+		}
+		return null;
+	}
+	protected SiteUserGenPage paginationInit() {
+		_pagination(pagination);
+		return (SiteUserGenPage)this;
+	}
+
+	public static JsonObject staticSearchPagination(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o;
+	}
+
+	public static String staticSearchStrPagination(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqPagination(SiteRequestEnUS siteRequest_, String o) {
+		return SiteUserGenPage.staticSearchStrPagination(siteRequest_, SiteUserGenPage.staticSearchPagination(siteRequest_, SiteUserGenPage.staticSetPagination(siteRequest_, o)));
+	}
+
+	///////////
+	// varsQ //
+	///////////
+
+	/**	 The entity varsQ
+	 *	 It is constructed before being initialized with the constructor by default. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected JsonObject varsQ = new JsonObject();
+
+	/**	<br> The entity varsQ
+	 *  It is constructed before being initialized with the constructor by default. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.user.SiteUserGenPage&fq=entiteVar_enUS_indexed_string:varsQ">Find the entity varsQ in Solr</a>
+	 * <br>
+	 * @param vars is the entity already constructed. 
+	 **/
+	protected abstract void _varsQ(JsonObject vars);
+
+	public JsonObject getVarsQ() {
+		return varsQ;
+	}
+
+	public void setVarsQ(JsonObject varsQ) {
+		this.varsQ = varsQ;
+	}
+	@JsonIgnore
+	public void setVarsQ(String o) {
+		this.varsQ = SiteUserGenPage.staticSetVarsQ(siteRequest_, o);
+	}
+	public static JsonObject staticSetVarsQ(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonObject(o);
+		}
+		return null;
+	}
+	protected SiteUserGenPage varsQInit() {
+		_varsQ(varsQ);
+		return (SiteUserGenPage)this;
+	}
+
+	public static JsonObject staticSearchVarsQ(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o;
+	}
+
+	public static String staticSearchStrVarsQ(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqVarsQ(SiteRequestEnUS siteRequest_, String o) {
+		return SiteUserGenPage.staticSearchStrVarsQ(siteRequest_, SiteUserGenPage.staticSearchVarsQ(siteRequest_, SiteUserGenPage.staticSetVarsQ(siteRequest_, o)));
+	}
+
+	////////////
+	// varsFq //
+	////////////
+
+	/**	 The entity varsFq
+	 *	 It is constructed before being initialized with the constructor by default. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected JsonObject varsFq = new JsonObject();
+
+	/**	<br> The entity varsFq
+	 *  It is constructed before being initialized with the constructor by default. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.user.SiteUserGenPage&fq=entiteVar_enUS_indexed_string:varsFq">Find the entity varsFq in Solr</a>
+	 * <br>
+	 * @param vars is the entity already constructed. 
+	 **/
+	protected abstract void _varsFq(JsonObject vars);
+
+	public JsonObject getVarsFq() {
+		return varsFq;
+	}
+
+	public void setVarsFq(JsonObject varsFq) {
+		this.varsFq = varsFq;
+	}
+	@JsonIgnore
+	public void setVarsFq(String o) {
+		this.varsFq = SiteUserGenPage.staticSetVarsFq(siteRequest_, o);
+	}
+	public static JsonObject staticSetVarsFq(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonObject(o);
+		}
+		return null;
+	}
+	protected SiteUserGenPage varsFqInit() {
+		_varsFq(varsFq);
+		return (SiteUserGenPage)this;
+	}
+
+	public static JsonObject staticSearchVarsFq(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o;
+	}
+
+	public static String staticSearchStrVarsFq(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqVarsFq(SiteRequestEnUS siteRequest_, String o) {
+		return SiteUserGenPage.staticSearchStrVarsFq(siteRequest_, SiteUserGenPage.staticSearchVarsFq(siteRequest_, SiteUserGenPage.staticSetVarsFq(siteRequest_, o)));
+	}
+
+	///////////////
+	// varsRange //
+	///////////////
+
+	/**	 The entity varsRange
+	 *	 It is constructed before being initialized with the constructor by default. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected JsonObject varsRange = new JsonObject();
+
+	/**	<br> The entity varsRange
+	 *  It is constructed before being initialized with the constructor by default. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.user.SiteUserGenPage&fq=entiteVar_enUS_indexed_string:varsRange">Find the entity varsRange in Solr</a>
+	 * <br>
+	 * @param vars is the entity already constructed. 
+	 **/
+	protected abstract void _varsRange(JsonObject vars);
+
+	public JsonObject getVarsRange() {
+		return varsRange;
+	}
+
+	public void setVarsRange(JsonObject varsRange) {
+		this.varsRange = varsRange;
+	}
+	@JsonIgnore
+	public void setVarsRange(String o) {
+		this.varsRange = SiteUserGenPage.staticSetVarsRange(siteRequest_, o);
+	}
+	public static JsonObject staticSetVarsRange(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonObject(o);
+		}
+		return null;
+	}
+	protected SiteUserGenPage varsRangeInit() {
+		_varsRange(varsRange);
+		return (SiteUserGenPage)this;
+	}
+
+	public static JsonObject staticSearchVarsRange(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o;
+	}
+
+	public static String staticSearchStrVarsRange(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqVarsRange(SiteRequestEnUS siteRequest_, String o) {
+		return SiteUserGenPage.staticSearchStrVarsRange(siteRequest_, SiteUserGenPage.staticSearchVarsRange(siteRequest_, SiteUserGenPage.staticSetVarsRange(siteRequest_, o)));
+	}
+
+	///////////
+	// query //
+	///////////
+
+	/**	 The entity query
+	 *	 It is constructed before being initialized with the constructor by default. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected JsonObject query = new JsonObject();
+
+	/**	<br> The entity query
+	 *  It is constructed before being initialized with the constructor by default. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.user.SiteUserGenPage&fq=entiteVar_enUS_indexed_string:query">Find the entity query in Solr</a>
+	 * <br>
+	 * @param query is the entity already constructed. 
+	 **/
+	protected abstract void _query(JsonObject query);
+
+	public JsonObject getQuery() {
+		return query;
+	}
+
+	public void setQuery(JsonObject query) {
+		this.query = query;
+	}
+	@JsonIgnore
+	public void setQuery(String o) {
+		this.query = SiteUserGenPage.staticSetQuery(siteRequest_, o);
+	}
+	public static JsonObject staticSetQuery(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonObject(o);
+		}
+		return null;
+	}
+	protected SiteUserGenPage queryInit() {
+		_query(query);
+		return (SiteUserGenPage)this;
+	}
+
+	public static JsonObject staticSearchQuery(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o;
+	}
+
+	public static String staticSearchStrQuery(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqQuery(SiteRequestEnUS siteRequest_, String o) {
+		return SiteUserGenPage.staticSearchStrQuery(siteRequest_, SiteUserGenPage.staticSearchQuery(siteRequest_, SiteUserGenPage.staticSetQuery(siteRequest_, o)));
+	}
+
 	/////////////////////
 	// pageUriSiteUser //
 	/////////////////////
@@ -1195,6 +1783,11 @@ public abstract class SiteUserGenPageGen<DEV> extends BaseModelPage {
 				defaultFacetLimitInit();
 				defaultFacetMinCountInit();
 				defaultPivotMinCountInit();
+				DEFAULT_MAP_LOCATIONInit();
+				DEFAULT_MAP_ZOOMInit();
+				defaultFieldListVarsInit();
+				defaultStatsVarsInit();
+				defaultPivotVarsInit();
 				listSiteUserInit();
 				statsInit();
 				facetCountsInit();
@@ -1202,6 +1795,11 @@ public abstract class SiteUserGenPageGen<DEV> extends BaseModelPage {
 				siteUser_Init();
 				pkInit();
 				idInit();
+				paginationInit();
+				varsQInit();
+				varsFqInit();
+				varsRangeInit();
+				queryInit();
 				pageUriSiteUserInit();
 				promise2.complete();
 			} catch(Exception ex) {
@@ -1284,6 +1882,16 @@ public abstract class SiteUserGenPageGen<DEV> extends BaseModelPage {
 				return oSiteUserGenPage.defaultFacetMinCount;
 			case "defaultPivotMinCount":
 				return oSiteUserGenPage.defaultPivotMinCount;
+			case "DEFAULT_MAP_LOCATION":
+				return oSiteUserGenPage.DEFAULT_MAP_LOCATION;
+			case "DEFAULT_MAP_ZOOM":
+				return oSiteUserGenPage.DEFAULT_MAP_ZOOM;
+			case "defaultFieldListVars":
+				return oSiteUserGenPage.defaultFieldListVars;
+			case "defaultStatsVars":
+				return oSiteUserGenPage.defaultStatsVars;
+			case "defaultPivotVars":
+				return oSiteUserGenPage.defaultPivotVars;
 			case "listSiteUser":
 				return oSiteUserGenPage.listSiteUser;
 			case "stats":
@@ -1298,6 +1906,16 @@ public abstract class SiteUserGenPageGen<DEV> extends BaseModelPage {
 				return oSiteUserGenPage.pk;
 			case "id":
 				return oSiteUserGenPage.id;
+			case "pagination":
+				return oSiteUserGenPage.pagination;
+			case "varsQ":
+				return oSiteUserGenPage.varsQ;
+			case "varsFq":
+				return oSiteUserGenPage.varsFq;
+			case "varsRange":
+				return oSiteUserGenPage.varsRange;
+			case "query":
+				return oSiteUserGenPage.query;
 			case "pageUriSiteUser":
 				return oSiteUserGenPage.pageUriSiteUser;
 			default:
@@ -1361,12 +1979,32 @@ public abstract class SiteUserGenPageGen<DEV> extends BaseModelPage {
 			return SiteUserGenPage.staticSetDefaultFacetMinCount(siteRequest_, o);
 		case "defaultPivotMinCount":
 			return SiteUserGenPage.staticSetDefaultPivotMinCount(siteRequest_, o);
+		case "DEFAULT_MAP_LOCATION":
+			return SiteUserGenPage.staticSetDEFAULT_MAP_LOCATION(siteRequest_, o);
+		case "DEFAULT_MAP_ZOOM":
+			return SiteUserGenPage.staticSetDEFAULT_MAP_ZOOM(siteRequest_, o);
+		case "defaultFieldListVars":
+			return SiteUserGenPage.staticSetDefaultFieldListVars(siteRequest_, o);
+		case "defaultStatsVars":
+			return SiteUserGenPage.staticSetDefaultStatsVars(siteRequest_, o);
+		case "defaultPivotVars":
+			return SiteUserGenPage.staticSetDefaultPivotVars(siteRequest_, o);
 		case "siteUserCount":
 			return SiteUserGenPage.staticSetSiteUserCount(siteRequest_, o);
 		case "pk":
 			return SiteUserGenPage.staticSetPk(siteRequest_, o);
 		case "id":
 			return SiteUserGenPage.staticSetId(siteRequest_, o);
+		case "pagination":
+			return SiteUserGenPage.staticSetPagination(siteRequest_, o);
+		case "varsQ":
+			return SiteUserGenPage.staticSetVarsQ(siteRequest_, o);
+		case "varsFq":
+			return SiteUserGenPage.staticSetVarsFq(siteRequest_, o);
+		case "varsRange":
+			return SiteUserGenPage.staticSetVarsRange(siteRequest_, o);
+		case "query":
+			return SiteUserGenPage.staticSetQuery(siteRequest_, o);
 		case "pageUriSiteUser":
 			return SiteUserGenPage.staticSetPageUriSiteUser(siteRequest_, o);
 			default:
@@ -1405,12 +2043,32 @@ public abstract class SiteUserGenPageGen<DEV> extends BaseModelPage {
 			return SiteUserGenPage.staticSearchDefaultFacetMinCount(siteRequest_, (Integer)o);
 		case "defaultPivotMinCount":
 			return SiteUserGenPage.staticSearchDefaultPivotMinCount(siteRequest_, (Integer)o);
+		case "DEFAULT_MAP_LOCATION":
+			return SiteUserGenPage.staticSearchDEFAULT_MAP_LOCATION(siteRequest_, (JsonObject)o);
+		case "DEFAULT_MAP_ZOOM":
+			return SiteUserGenPage.staticSearchDEFAULT_MAP_ZOOM(siteRequest_, (BigDecimal)o);
+		case "defaultFieldListVars":
+			return SiteUserGenPage.staticSearchDefaultFieldListVars(siteRequest_, (String)o);
+		case "defaultStatsVars":
+			return SiteUserGenPage.staticSearchDefaultStatsVars(siteRequest_, (String)o);
+		case "defaultPivotVars":
+			return SiteUserGenPage.staticSearchDefaultPivotVars(siteRequest_, (String)o);
 		case "siteUserCount":
 			return SiteUserGenPage.staticSearchSiteUserCount(siteRequest_, (Integer)o);
 		case "pk":
 			return SiteUserGenPage.staticSearchPk(siteRequest_, (Long)o);
 		case "id":
 			return SiteUserGenPage.staticSearchId(siteRequest_, (String)o);
+		case "pagination":
+			return SiteUserGenPage.staticSearchPagination(siteRequest_, (JsonObject)o);
+		case "varsQ":
+			return SiteUserGenPage.staticSearchVarsQ(siteRequest_, (JsonObject)o);
+		case "varsFq":
+			return SiteUserGenPage.staticSearchVarsFq(siteRequest_, (JsonObject)o);
+		case "varsRange":
+			return SiteUserGenPage.staticSearchVarsRange(siteRequest_, (JsonObject)o);
+		case "query":
+			return SiteUserGenPage.staticSearchQuery(siteRequest_, (JsonObject)o);
 		case "pageUriSiteUser":
 			return SiteUserGenPage.staticSearchPageUriSiteUser(siteRequest_, (String)o);
 			default:
@@ -1449,12 +2107,32 @@ public abstract class SiteUserGenPageGen<DEV> extends BaseModelPage {
 			return SiteUserGenPage.staticSearchStrDefaultFacetMinCount(siteRequest_, (Integer)o);
 		case "defaultPivotMinCount":
 			return SiteUserGenPage.staticSearchStrDefaultPivotMinCount(siteRequest_, (Integer)o);
+		case "DEFAULT_MAP_LOCATION":
+			return SiteUserGenPage.staticSearchStrDEFAULT_MAP_LOCATION(siteRequest_, (JsonObject)o);
+		case "DEFAULT_MAP_ZOOM":
+			return SiteUserGenPage.staticSearchStrDEFAULT_MAP_ZOOM(siteRequest_, (Double)o);
+		case "defaultFieldListVars":
+			return SiteUserGenPage.staticSearchStrDefaultFieldListVars(siteRequest_, (String)o);
+		case "defaultStatsVars":
+			return SiteUserGenPage.staticSearchStrDefaultStatsVars(siteRequest_, (String)o);
+		case "defaultPivotVars":
+			return SiteUserGenPage.staticSearchStrDefaultPivotVars(siteRequest_, (String)o);
 		case "siteUserCount":
 			return SiteUserGenPage.staticSearchStrSiteUserCount(siteRequest_, (Integer)o);
 		case "pk":
 			return SiteUserGenPage.staticSearchStrPk(siteRequest_, (Long)o);
 		case "id":
 			return SiteUserGenPage.staticSearchStrId(siteRequest_, (String)o);
+		case "pagination":
+			return SiteUserGenPage.staticSearchStrPagination(siteRequest_, (JsonObject)o);
+		case "varsQ":
+			return SiteUserGenPage.staticSearchStrVarsQ(siteRequest_, (JsonObject)o);
+		case "varsFq":
+			return SiteUserGenPage.staticSearchStrVarsFq(siteRequest_, (JsonObject)o);
+		case "varsRange":
+			return SiteUserGenPage.staticSearchStrVarsRange(siteRequest_, (JsonObject)o);
+		case "query":
+			return SiteUserGenPage.staticSearchStrQuery(siteRequest_, (JsonObject)o);
 		case "pageUriSiteUser":
 			return SiteUserGenPage.staticSearchStrPageUriSiteUser(siteRequest_, (String)o);
 			default:
@@ -1493,12 +2171,32 @@ public abstract class SiteUserGenPageGen<DEV> extends BaseModelPage {
 			return SiteUserGenPage.staticSearchFqDefaultFacetMinCount(siteRequest_, o);
 		case "defaultPivotMinCount":
 			return SiteUserGenPage.staticSearchFqDefaultPivotMinCount(siteRequest_, o);
+		case "DEFAULT_MAP_LOCATION":
+			return SiteUserGenPage.staticSearchFqDEFAULT_MAP_LOCATION(siteRequest_, o);
+		case "DEFAULT_MAP_ZOOM":
+			return SiteUserGenPage.staticSearchFqDEFAULT_MAP_ZOOM(siteRequest_, o);
+		case "defaultFieldListVars":
+			return SiteUserGenPage.staticSearchFqDefaultFieldListVars(siteRequest_, o);
+		case "defaultStatsVars":
+			return SiteUserGenPage.staticSearchFqDefaultStatsVars(siteRequest_, o);
+		case "defaultPivotVars":
+			return SiteUserGenPage.staticSearchFqDefaultPivotVars(siteRequest_, o);
 		case "siteUserCount":
 			return SiteUserGenPage.staticSearchFqSiteUserCount(siteRequest_, o);
 		case "pk":
 			return SiteUserGenPage.staticSearchFqPk(siteRequest_, o);
 		case "id":
 			return SiteUserGenPage.staticSearchFqId(siteRequest_, o);
+		case "pagination":
+			return SiteUserGenPage.staticSearchFqPagination(siteRequest_, o);
+		case "varsQ":
+			return SiteUserGenPage.staticSearchFqVarsQ(siteRequest_, o);
+		case "varsFq":
+			return SiteUserGenPage.staticSearchFqVarsFq(siteRequest_, o);
+		case "varsRange":
+			return SiteUserGenPage.staticSearchFqVarsRange(siteRequest_, o);
+		case "query":
+			return SiteUserGenPage.staticSearchFqQuery(siteRequest_, o);
 		case "pageUriSiteUser":
 			return SiteUserGenPage.staticSearchFqPageUriSiteUser(siteRequest_, o);
 			default:
@@ -1531,6 +2229,11 @@ public abstract class SiteUserGenPageGen<DEV> extends BaseModelPage {
 	public static final String VAR_defaultFacetLimit = "defaultFacetLimit";
 	public static final String VAR_defaultFacetMinCount = "defaultFacetMinCount";
 	public static final String VAR_defaultPivotMinCount = "defaultPivotMinCount";
+	public static final String VAR_DEFAULT_MAP_LOCATION = "DEFAULT_MAP_LOCATION";
+	public static final String VAR_DEFAULT_MAP_ZOOM = "DEFAULT_MAP_ZOOM";
+	public static final String VAR_defaultFieldListVars = "defaultFieldListVars";
+	public static final String VAR_defaultStatsVars = "defaultStatsVars";
+	public static final String VAR_defaultPivotVars = "defaultPivotVars";
 	public static final String VAR_listSiteUser = "listSiteUser";
 	public static final String VAR_stats = "stats";
 	public static final String VAR_facetCounts = "facetCounts";
@@ -1538,6 +2241,11 @@ public abstract class SiteUserGenPageGen<DEV> extends BaseModelPage {
 	public static final String VAR_siteUser_ = "siteUser_";
 	public static final String VAR_pk = "pk";
 	public static final String VAR_id = "id";
+	public static final String VAR_pagination = "pagination";
+	public static final String VAR_varsQ = "varsQ";
+	public static final String VAR_varsFq = "varsFq";
+	public static final String VAR_varsRange = "varsRange";
+	public static final String VAR_query = "query";
 	public static final String VAR_pageUriSiteUser = "pageUriSiteUser";
 
 	public static final String DISPLAY_NAME_searchListSiteUser_ = "";
@@ -1554,6 +2262,11 @@ public abstract class SiteUserGenPageGen<DEV> extends BaseModelPage {
 	public static final String DISPLAY_NAME_defaultFacetLimit = "";
 	public static final String DISPLAY_NAME_defaultFacetMinCount = "";
 	public static final String DISPLAY_NAME_defaultPivotMinCount = "";
+	public static final String DISPLAY_NAME_DEFAULT_MAP_LOCATION = "";
+	public static final String DISPLAY_NAME_DEFAULT_MAP_ZOOM = "";
+	public static final String DISPLAY_NAME_defaultFieldListVars = "";
+	public static final String DISPLAY_NAME_defaultStatsVars = "";
+	public static final String DISPLAY_NAME_defaultPivotVars = "";
 	public static final String DISPLAY_NAME_listSiteUser = "";
 	public static final String DISPLAY_NAME_stats = "";
 	public static final String DISPLAY_NAME_facetCounts = "";
@@ -1561,6 +2274,11 @@ public abstract class SiteUserGenPageGen<DEV> extends BaseModelPage {
 	public static final String DISPLAY_NAME_siteUser_ = "";
 	public static final String DISPLAY_NAME_pk = "";
 	public static final String DISPLAY_NAME_id = "";
+	public static final String DISPLAY_NAME_pagination = "";
+	public static final String DISPLAY_NAME_varsQ = "";
+	public static final String DISPLAY_NAME_varsFq = "";
+	public static final String DISPLAY_NAME_varsRange = "";
+	public static final String DISPLAY_NAME_query = "";
 	public static final String DISPLAY_NAME_pageUriSiteUser = "";
 
 	public static String displayNameForClass(String var) {
@@ -1596,6 +2314,16 @@ public abstract class SiteUserGenPageGen<DEV> extends BaseModelPage {
 			return DISPLAY_NAME_defaultFacetMinCount;
 		case VAR_defaultPivotMinCount:
 			return DISPLAY_NAME_defaultPivotMinCount;
+		case VAR_DEFAULT_MAP_LOCATION:
+			return DISPLAY_NAME_DEFAULT_MAP_LOCATION;
+		case VAR_DEFAULT_MAP_ZOOM:
+			return DISPLAY_NAME_DEFAULT_MAP_ZOOM;
+		case VAR_defaultFieldListVars:
+			return DISPLAY_NAME_defaultFieldListVars;
+		case VAR_defaultStatsVars:
+			return DISPLAY_NAME_defaultStatsVars;
+		case VAR_defaultPivotVars:
+			return DISPLAY_NAME_defaultPivotVars;
 		case VAR_listSiteUser:
 			return DISPLAY_NAME_listSiteUser;
 		case VAR_stats:
@@ -1610,6 +2338,16 @@ public abstract class SiteUserGenPageGen<DEV> extends BaseModelPage {
 			return DISPLAY_NAME_pk;
 		case VAR_id:
 			return DISPLAY_NAME_id;
+		case VAR_pagination:
+			return DISPLAY_NAME_pagination;
+		case VAR_varsQ:
+			return DISPLAY_NAME_varsQ;
+		case VAR_varsFq:
+			return DISPLAY_NAME_varsFq;
+		case VAR_varsRange:
+			return DISPLAY_NAME_varsRange;
+		case VAR_query:
+			return DISPLAY_NAME_query;
 		case VAR_pageUriSiteUser:
 			return DISPLAY_NAME_pageUriSiteUser;
 		default:

@@ -19,7 +19,7 @@ import io.vertx.core.Promise;
 /**
  * Api: true
  * Page: true
- * SuperPage.enUS: BaseModelPage
+ * SuperPage.enUS: PageLayout
  * Indexed: true
  * 
  * ApiTag.enUS: Time Step

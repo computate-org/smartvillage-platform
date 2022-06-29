@@ -29,6 +29,12 @@
 				window.varsFq = JSON.parse('{{{toJsonObjectStringInApostrophes varsFq}}}');
 				pageGraph();
 			});
+{{#if DEFAULT_MAP_LOCATION }}
+			window.DEFAULT_MAP_LOCATION = { lat: {{ DEFAULT_MAP_LOCATION.lat }}, lon: {{ DEFAULT_MAP_LOCATION.lon }} };
+{{/if}}
+{{#if DEFAULT_MAP_ZOOM }}
+			window.DEFAULT_MAP_ZOOM = {{ DEFAULT_MAP_ZOOM }};
+{{/if}}
 		</script>
 {{/inline}}
 {{#*inline "htmUrlBaseModel"}}{{pageUri}}?q={{query.q}}&amp;rows={{#if rows}}{{rows}}{{else}}{{pagination.rows}}{{/if}}&amp;rows={{#if start}}{{start}}{{else}}{{pagination.start}}{{/if}}{{#each query.fq}}{{#eq fq this}}{{else}}&fq={{fq}}:{{val}}{{/eq}}{{/each}}{{#each query.sort}}{{#eq sort this}}{{else}}&sort={{var}} {{order}}{{/eq}}{{/each}}{{/inline}}
@@ -248,7 +254,7 @@
 {{#*inline "htmBodyMenuBaseModelPage"}}		<!-- #*inline "htmBodyMenuBaseModelPage" -->
 {{> "htmBodyMenuPageLayout"}}{{/inline}}
 {{#*inline "htmBodyGraphBaseModelPage"}}		<!-- #*inline "htmBodyGraphBaseModelPage" -->
-<div id="htmBodyGraphPageLayout" class="htmBodyGraph "></div>{{/inline}}
+<div id="htmBodyGraphPageLayout" class="w3-content htmBodyGraph "></div>{{/inline}}
 {{#*inline "htmBodyCount0BaseModelPage"}}		<!-- #*inline "htmBodyCount0BaseModelPage" -->
 		<h1>
 			<a href="{{pageUri}}" class="w3-bar-item w3-btn w3-center w3-block w3- w3-hover-">
@@ -460,8 +466,8 @@
 		<div class="w3-bar w3-content ">
 {{#block "htmBodySidebar"}}{{/block}}
 		</div>
-	<div class="pageContent w3-content ">
 {{#block "htmBodyGraph"}}{{/block}}
+	<div class="pageContent w3-content ">
 	{{#eq baseModelCount int0}}
 {{#block "htmBodyCount0"}}{{/block}}
 	{{else}}

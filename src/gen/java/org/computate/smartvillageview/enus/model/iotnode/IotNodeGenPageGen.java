@@ -46,6 +46,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.lang.Integer;
+import io.vertx.core.json.JsonObject;
+import java.math.BigDecimal;
 import io.vertx.core.json.JsonArray;
 import org.computate.search.response.solr.SolrResponse.Stats;
 import org.computate.search.response.solr.SolrResponse.FacetCounts;
@@ -792,6 +794,327 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 		return IotNodeGenPage.staticSearchStrDefaultPivotMinCount(siteRequest_, IotNodeGenPage.staticSearchDefaultPivotMinCount(siteRequest_, IotNodeGenPage.staticSetDefaultPivotMinCount(siteRequest_, o)));
 	}
 
+	//////////////////////////
+	// DEFAULT_MAP_LOCATION //
+	//////////////////////////
+
+	/**	 The entity DEFAULT_MAP_LOCATION
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected JsonObject DEFAULT_MAP_LOCATION;
+
+	/**	<br> The entity DEFAULT_MAP_LOCATION
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.iotnode.IotNodeGenPage&fq=entiteVar_enUS_indexed_string:DEFAULT_MAP_LOCATION">Find the entity DEFAULT_MAP_LOCATION in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _DEFAULT_MAP_LOCATION(Wrap<JsonObject> w);
+
+	public JsonObject getDEFAULT_MAP_LOCATION() {
+		return DEFAULT_MAP_LOCATION;
+	}
+
+	public void setDEFAULT_MAP_LOCATION(JsonObject DEFAULT_MAP_LOCATION) {
+		this.DEFAULT_MAP_LOCATION = DEFAULT_MAP_LOCATION;
+	}
+	@JsonIgnore
+	public void setDEFAULT_MAP_LOCATION(String o) {
+		this.DEFAULT_MAP_LOCATION = IotNodeGenPage.staticSetDEFAULT_MAP_LOCATION(siteRequest_, o);
+	}
+	public static JsonObject staticSetDEFAULT_MAP_LOCATION(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonObject(o);
+		}
+		return null;
+	}
+	protected IotNodeGenPage DEFAULT_MAP_LOCATIONInit() {
+		Wrap<JsonObject> DEFAULT_MAP_LOCATIONWrap = new Wrap<JsonObject>().var("DEFAULT_MAP_LOCATION");
+		if(DEFAULT_MAP_LOCATION == null) {
+			_DEFAULT_MAP_LOCATION(DEFAULT_MAP_LOCATIONWrap);
+			setDEFAULT_MAP_LOCATION(DEFAULT_MAP_LOCATIONWrap.o);
+		}
+		return (IotNodeGenPage)this;
+	}
+
+	public static JsonObject staticSearchDEFAULT_MAP_LOCATION(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o;
+	}
+
+	public static String staticSearchStrDEFAULT_MAP_LOCATION(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqDEFAULT_MAP_LOCATION(SiteRequestEnUS siteRequest_, String o) {
+		return IotNodeGenPage.staticSearchStrDEFAULT_MAP_LOCATION(siteRequest_, IotNodeGenPage.staticSearchDEFAULT_MAP_LOCATION(siteRequest_, IotNodeGenPage.staticSetDEFAULT_MAP_LOCATION(siteRequest_, o)));
+	}
+
+	//////////////////////
+	// DEFAULT_MAP_ZOOM //
+	//////////////////////
+
+	/**	 The entity DEFAULT_MAP_ZOOM
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected BigDecimal DEFAULT_MAP_ZOOM;
+
+	/**	<br> The entity DEFAULT_MAP_ZOOM
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.iotnode.IotNodeGenPage&fq=entiteVar_enUS_indexed_string:DEFAULT_MAP_ZOOM">Find the entity DEFAULT_MAP_ZOOM in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _DEFAULT_MAP_ZOOM(Wrap<BigDecimal> w);
+
+	public BigDecimal getDEFAULT_MAP_ZOOM() {
+		return DEFAULT_MAP_ZOOM;
+	}
+
+	public void setDEFAULT_MAP_ZOOM(BigDecimal DEFAULT_MAP_ZOOM) {
+		this.DEFAULT_MAP_ZOOM = DEFAULT_MAP_ZOOM;
+	}
+	@JsonIgnore
+	public void setDEFAULT_MAP_ZOOM(String o) {
+		this.DEFAULT_MAP_ZOOM = IotNodeGenPage.staticSetDEFAULT_MAP_ZOOM(siteRequest_, o);
+	}
+	public static BigDecimal staticSetDEFAULT_MAP_ZOOM(SiteRequestEnUS siteRequest_, String o) {
+		o = StringUtils.removeAll(o, "[^\\d\\.]");
+		if(NumberUtils.isParsable(o))
+			return new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		return null;
+	}
+	@JsonIgnore
+	public void setDEFAULT_MAP_ZOOM(Double o) {
+			this.DEFAULT_MAP_ZOOM = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+	}
+	@JsonIgnore
+	public void setDEFAULT_MAP_ZOOM(Integer o) {
+			this.DEFAULT_MAP_ZOOM = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+	}
+	protected IotNodeGenPage DEFAULT_MAP_ZOOMInit() {
+		Wrap<BigDecimal> DEFAULT_MAP_ZOOMWrap = new Wrap<BigDecimal>().var("DEFAULT_MAP_ZOOM");
+		if(DEFAULT_MAP_ZOOM == null) {
+			_DEFAULT_MAP_ZOOM(DEFAULT_MAP_ZOOMWrap);
+			setDEFAULT_MAP_ZOOM(DEFAULT_MAP_ZOOMWrap.o);
+		}
+		return (IotNodeGenPage)this;
+	}
+
+	public static Double staticSearchDEFAULT_MAP_ZOOM(SiteRequestEnUS siteRequest_, BigDecimal o) {
+		return o == null ? null : o.doubleValue();
+	}
+
+	public static String staticSearchStrDEFAULT_MAP_ZOOM(SiteRequestEnUS siteRequest_, Double o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqDEFAULT_MAP_ZOOM(SiteRequestEnUS siteRequest_, String o) {
+		return IotNodeGenPage.staticSearchStrDEFAULT_MAP_ZOOM(siteRequest_, IotNodeGenPage.staticSearchDEFAULT_MAP_ZOOM(siteRequest_, IotNodeGenPage.staticSetDEFAULT_MAP_ZOOM(siteRequest_, o)));
+	}
+
+	//////////////////////////
+	// defaultFieldListVars //
+	//////////////////////////
+
+	/**	 The entity defaultFieldListVars
+	 *	 It is constructed before being initialized with the constructor by default. 
+	 */
+	@JsonProperty
+	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
+	@JsonInclude(Include.NON_NULL)
+	protected List<String> defaultFieldListVars = new ArrayList<String>();
+
+	/**	<br> The entity defaultFieldListVars
+	 *  It is constructed before being initialized with the constructor by default. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.iotnode.IotNodeGenPage&fq=entiteVar_enUS_indexed_string:defaultFieldListVars">Find the entity defaultFieldListVars in Solr</a>
+	 * <br>
+	 * @param l is the entity already constructed. 
+	 **/
+	protected abstract void _defaultFieldListVars(List<String> l);
+
+	public List<String> getDefaultFieldListVars() {
+		return defaultFieldListVars;
+	}
+
+	public void setDefaultFieldListVars(List<String> defaultFieldListVars) {
+		this.defaultFieldListVars = defaultFieldListVars;
+	}
+	public static String staticSetDefaultFieldListVars(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	public IotNodeGenPage addDefaultFieldListVars(String...objects) {
+		for(String o : objects) {
+			addDefaultFieldListVars(o);
+		}
+		return (IotNodeGenPage)this;
+	}
+	public IotNodeGenPage addDefaultFieldListVars(String o) {
+		if(o != null)
+			this.defaultFieldListVars.add(o);
+		return (IotNodeGenPage)this;
+	}
+	@JsonIgnore
+	public void setDefaultFieldListVars(JsonArray objects) {
+		defaultFieldListVars.clear();
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
+			addDefaultFieldListVars(o);
+		}
+	}
+	protected IotNodeGenPage defaultFieldListVarsInit() {
+		_defaultFieldListVars(defaultFieldListVars);
+		return (IotNodeGenPage)this;
+	}
+
+	public static String staticSearchDefaultFieldListVars(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrDefaultFieldListVars(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqDefaultFieldListVars(SiteRequestEnUS siteRequest_, String o) {
+		return IotNodeGenPage.staticSearchStrDefaultFieldListVars(siteRequest_, IotNodeGenPage.staticSearchDefaultFieldListVars(siteRequest_, IotNodeGenPage.staticSetDefaultFieldListVars(siteRequest_, o)));
+	}
+
+	//////////////////////
+	// defaultStatsVars //
+	//////////////////////
+
+	/**	 The entity defaultStatsVars
+	 *	 It is constructed before being initialized with the constructor by default. 
+	 */
+	@JsonProperty
+	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
+	@JsonInclude(Include.NON_NULL)
+	protected List<String> defaultStatsVars = new ArrayList<String>();
+
+	/**	<br> The entity defaultStatsVars
+	 *  It is constructed before being initialized with the constructor by default. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.iotnode.IotNodeGenPage&fq=entiteVar_enUS_indexed_string:defaultStatsVars">Find the entity defaultStatsVars in Solr</a>
+	 * <br>
+	 * @param l is the entity already constructed. 
+	 **/
+	protected abstract void _defaultStatsVars(List<String> l);
+
+	public List<String> getDefaultStatsVars() {
+		return defaultStatsVars;
+	}
+
+	public void setDefaultStatsVars(List<String> defaultStatsVars) {
+		this.defaultStatsVars = defaultStatsVars;
+	}
+	public static String staticSetDefaultStatsVars(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	public IotNodeGenPage addDefaultStatsVars(String...objects) {
+		for(String o : objects) {
+			addDefaultStatsVars(o);
+		}
+		return (IotNodeGenPage)this;
+	}
+	public IotNodeGenPage addDefaultStatsVars(String o) {
+		if(o != null)
+			this.defaultStatsVars.add(o);
+		return (IotNodeGenPage)this;
+	}
+	@JsonIgnore
+	public void setDefaultStatsVars(JsonArray objects) {
+		defaultStatsVars.clear();
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
+			addDefaultStatsVars(o);
+		}
+	}
+	protected IotNodeGenPage defaultStatsVarsInit() {
+		_defaultStatsVars(defaultStatsVars);
+		return (IotNodeGenPage)this;
+	}
+
+	public static String staticSearchDefaultStatsVars(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrDefaultStatsVars(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqDefaultStatsVars(SiteRequestEnUS siteRequest_, String o) {
+		return IotNodeGenPage.staticSearchStrDefaultStatsVars(siteRequest_, IotNodeGenPage.staticSearchDefaultStatsVars(siteRequest_, IotNodeGenPage.staticSetDefaultStatsVars(siteRequest_, o)));
+	}
+
+	//////////////////////
+	// defaultPivotVars //
+	//////////////////////
+
+	/**	 The entity defaultPivotVars
+	 *	 It is constructed before being initialized with the constructor by default. 
+	 */
+	@JsonProperty
+	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
+	@JsonInclude(Include.NON_NULL)
+	protected List<String> defaultPivotVars = new ArrayList<String>();
+
+	/**	<br> The entity defaultPivotVars
+	 *  It is constructed before being initialized with the constructor by default. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.iotnode.IotNodeGenPage&fq=entiteVar_enUS_indexed_string:defaultPivotVars">Find the entity defaultPivotVars in Solr</a>
+	 * <br>
+	 * @param l is the entity already constructed. 
+	 **/
+	protected abstract void _defaultPivotVars(List<String> l);
+
+	public List<String> getDefaultPivotVars() {
+		return defaultPivotVars;
+	}
+
+	public void setDefaultPivotVars(List<String> defaultPivotVars) {
+		this.defaultPivotVars = defaultPivotVars;
+	}
+	public static String staticSetDefaultPivotVars(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	public IotNodeGenPage addDefaultPivotVars(String...objects) {
+		for(String o : objects) {
+			addDefaultPivotVars(o);
+		}
+		return (IotNodeGenPage)this;
+	}
+	public IotNodeGenPage addDefaultPivotVars(String o) {
+		if(o != null)
+			this.defaultPivotVars.add(o);
+		return (IotNodeGenPage)this;
+	}
+	@JsonIgnore
+	public void setDefaultPivotVars(JsonArray objects) {
+		defaultPivotVars.clear();
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
+			addDefaultPivotVars(o);
+		}
+	}
+	protected IotNodeGenPage defaultPivotVarsInit() {
+		_defaultPivotVars(defaultPivotVars);
+		return (IotNodeGenPage)this;
+	}
+
+	public static String staticSearchDefaultPivotVars(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrDefaultPivotVars(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqDefaultPivotVars(SiteRequestEnUS siteRequest_, String o) {
+		return IotNodeGenPage.staticSearchStrDefaultPivotVars(siteRequest_, IotNodeGenPage.staticSearchDefaultPivotVars(siteRequest_, IotNodeGenPage.staticSetDefaultPivotVars(siteRequest_, o)));
+	}
+
 	/////////////////
 	// listIotNode //
 	/////////////////
@@ -1103,6 +1426,271 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 		return IotNodeGenPage.staticSearchStrId(siteRequest_, IotNodeGenPage.staticSearchId(siteRequest_, IotNodeGenPage.staticSetId(siteRequest_, o)));
 	}
 
+	////////////////
+	// pagination //
+	////////////////
+
+	/**	 The entity pagination
+	 *	 It is constructed before being initialized with the constructor by default. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected JsonObject pagination = new JsonObject();
+
+	/**	<br> The entity pagination
+	 *  It is constructed before being initialized with the constructor by default. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.iotnode.IotNodeGenPage&fq=entiteVar_enUS_indexed_string:pagination">Find the entity pagination in Solr</a>
+	 * <br>
+	 * @param pagination is the entity already constructed. 
+	 **/
+	protected abstract void _pagination(JsonObject pagination);
+
+	public JsonObject getPagination() {
+		return pagination;
+	}
+
+	public void setPagination(JsonObject pagination) {
+		this.pagination = pagination;
+	}
+	@JsonIgnore
+	public void setPagination(String o) {
+		this.pagination = IotNodeGenPage.staticSetPagination(siteRequest_, o);
+	}
+	public static JsonObject staticSetPagination(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonObject(o);
+		}
+		return null;
+	}
+	protected IotNodeGenPage paginationInit() {
+		_pagination(pagination);
+		return (IotNodeGenPage)this;
+	}
+
+	public static JsonObject staticSearchPagination(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o;
+	}
+
+	public static String staticSearchStrPagination(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqPagination(SiteRequestEnUS siteRequest_, String o) {
+		return IotNodeGenPage.staticSearchStrPagination(siteRequest_, IotNodeGenPage.staticSearchPagination(siteRequest_, IotNodeGenPage.staticSetPagination(siteRequest_, o)));
+	}
+
+	///////////
+	// varsQ //
+	///////////
+
+	/**	 The entity varsQ
+	 *	 It is constructed before being initialized with the constructor by default. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected JsonObject varsQ = new JsonObject();
+
+	/**	<br> The entity varsQ
+	 *  It is constructed before being initialized with the constructor by default. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.iotnode.IotNodeGenPage&fq=entiteVar_enUS_indexed_string:varsQ">Find the entity varsQ in Solr</a>
+	 * <br>
+	 * @param vars is the entity already constructed. 
+	 **/
+	protected abstract void _varsQ(JsonObject vars);
+
+	public JsonObject getVarsQ() {
+		return varsQ;
+	}
+
+	public void setVarsQ(JsonObject varsQ) {
+		this.varsQ = varsQ;
+	}
+	@JsonIgnore
+	public void setVarsQ(String o) {
+		this.varsQ = IotNodeGenPage.staticSetVarsQ(siteRequest_, o);
+	}
+	public static JsonObject staticSetVarsQ(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonObject(o);
+		}
+		return null;
+	}
+	protected IotNodeGenPage varsQInit() {
+		_varsQ(varsQ);
+		return (IotNodeGenPage)this;
+	}
+
+	public static JsonObject staticSearchVarsQ(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o;
+	}
+
+	public static String staticSearchStrVarsQ(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqVarsQ(SiteRequestEnUS siteRequest_, String o) {
+		return IotNodeGenPage.staticSearchStrVarsQ(siteRequest_, IotNodeGenPage.staticSearchVarsQ(siteRequest_, IotNodeGenPage.staticSetVarsQ(siteRequest_, o)));
+	}
+
+	////////////
+	// varsFq //
+	////////////
+
+	/**	 The entity varsFq
+	 *	 It is constructed before being initialized with the constructor by default. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected JsonObject varsFq = new JsonObject();
+
+	/**	<br> The entity varsFq
+	 *  It is constructed before being initialized with the constructor by default. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.iotnode.IotNodeGenPage&fq=entiteVar_enUS_indexed_string:varsFq">Find the entity varsFq in Solr</a>
+	 * <br>
+	 * @param vars is the entity already constructed. 
+	 **/
+	protected abstract void _varsFq(JsonObject vars);
+
+	public JsonObject getVarsFq() {
+		return varsFq;
+	}
+
+	public void setVarsFq(JsonObject varsFq) {
+		this.varsFq = varsFq;
+	}
+	@JsonIgnore
+	public void setVarsFq(String o) {
+		this.varsFq = IotNodeGenPage.staticSetVarsFq(siteRequest_, o);
+	}
+	public static JsonObject staticSetVarsFq(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonObject(o);
+		}
+		return null;
+	}
+	protected IotNodeGenPage varsFqInit() {
+		_varsFq(varsFq);
+		return (IotNodeGenPage)this;
+	}
+
+	public static JsonObject staticSearchVarsFq(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o;
+	}
+
+	public static String staticSearchStrVarsFq(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqVarsFq(SiteRequestEnUS siteRequest_, String o) {
+		return IotNodeGenPage.staticSearchStrVarsFq(siteRequest_, IotNodeGenPage.staticSearchVarsFq(siteRequest_, IotNodeGenPage.staticSetVarsFq(siteRequest_, o)));
+	}
+
+	///////////////
+	// varsRange //
+	///////////////
+
+	/**	 The entity varsRange
+	 *	 It is constructed before being initialized with the constructor by default. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected JsonObject varsRange = new JsonObject();
+
+	/**	<br> The entity varsRange
+	 *  It is constructed before being initialized with the constructor by default. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.iotnode.IotNodeGenPage&fq=entiteVar_enUS_indexed_string:varsRange">Find the entity varsRange in Solr</a>
+	 * <br>
+	 * @param vars is the entity already constructed. 
+	 **/
+	protected abstract void _varsRange(JsonObject vars);
+
+	public JsonObject getVarsRange() {
+		return varsRange;
+	}
+
+	public void setVarsRange(JsonObject varsRange) {
+		this.varsRange = varsRange;
+	}
+	@JsonIgnore
+	public void setVarsRange(String o) {
+		this.varsRange = IotNodeGenPage.staticSetVarsRange(siteRequest_, o);
+	}
+	public static JsonObject staticSetVarsRange(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonObject(o);
+		}
+		return null;
+	}
+	protected IotNodeGenPage varsRangeInit() {
+		_varsRange(varsRange);
+		return (IotNodeGenPage)this;
+	}
+
+	public static JsonObject staticSearchVarsRange(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o;
+	}
+
+	public static String staticSearchStrVarsRange(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqVarsRange(SiteRequestEnUS siteRequest_, String o) {
+		return IotNodeGenPage.staticSearchStrVarsRange(siteRequest_, IotNodeGenPage.staticSearchVarsRange(siteRequest_, IotNodeGenPage.staticSetVarsRange(siteRequest_, o)));
+	}
+
+	///////////
+	// query //
+	///////////
+
+	/**	 The entity query
+	 *	 It is constructed before being initialized with the constructor by default. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected JsonObject query = new JsonObject();
+
+	/**	<br> The entity query
+	 *  It is constructed before being initialized with the constructor by default. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.iotnode.IotNodeGenPage&fq=entiteVar_enUS_indexed_string:query">Find the entity query in Solr</a>
+	 * <br>
+	 * @param query is the entity already constructed. 
+	 **/
+	protected abstract void _query(JsonObject query);
+
+	public JsonObject getQuery() {
+		return query;
+	}
+
+	public void setQuery(JsonObject query) {
+		this.query = query;
+	}
+	@JsonIgnore
+	public void setQuery(String o) {
+		this.query = IotNodeGenPage.staticSetQuery(siteRequest_, o);
+	}
+	public static JsonObject staticSetQuery(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonObject(o);
+		}
+		return null;
+	}
+	protected IotNodeGenPage queryInit() {
+		_query(query);
+		return (IotNodeGenPage)this;
+	}
+
+	public static JsonObject staticSearchQuery(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o;
+	}
+
+	public static String staticSearchStrQuery(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqQuery(SiteRequestEnUS siteRequest_, String o) {
+		return IotNodeGenPage.staticSearchStrQuery(siteRequest_, IotNodeGenPage.staticSearchQuery(siteRequest_, IotNodeGenPage.staticSetQuery(siteRequest_, o)));
+	}
+
 	////////////////////
 	// pageUriIotNode //
 	////////////////////
@@ -1195,6 +1783,11 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 				defaultFacetLimitInit();
 				defaultFacetMinCountInit();
 				defaultPivotMinCountInit();
+				DEFAULT_MAP_LOCATIONInit();
+				DEFAULT_MAP_ZOOMInit();
+				defaultFieldListVarsInit();
+				defaultStatsVarsInit();
+				defaultPivotVarsInit();
 				listIotNodeInit();
 				statsInit();
 				facetCountsInit();
@@ -1202,6 +1795,11 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 				iotNode_Init();
 				pkInit();
 				idInit();
+				paginationInit();
+				varsQInit();
+				varsFqInit();
+				varsRangeInit();
+				queryInit();
 				pageUriIotNodeInit();
 				promise2.complete();
 			} catch(Exception ex) {
@@ -1284,6 +1882,16 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 				return oIotNodeGenPage.defaultFacetMinCount;
 			case "defaultPivotMinCount":
 				return oIotNodeGenPage.defaultPivotMinCount;
+			case "DEFAULT_MAP_LOCATION":
+				return oIotNodeGenPage.DEFAULT_MAP_LOCATION;
+			case "DEFAULT_MAP_ZOOM":
+				return oIotNodeGenPage.DEFAULT_MAP_ZOOM;
+			case "defaultFieldListVars":
+				return oIotNodeGenPage.defaultFieldListVars;
+			case "defaultStatsVars":
+				return oIotNodeGenPage.defaultStatsVars;
+			case "defaultPivotVars":
+				return oIotNodeGenPage.defaultPivotVars;
 			case "listIotNode":
 				return oIotNodeGenPage.listIotNode;
 			case "stats":
@@ -1298,6 +1906,16 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 				return oIotNodeGenPage.pk;
 			case "id":
 				return oIotNodeGenPage.id;
+			case "pagination":
+				return oIotNodeGenPage.pagination;
+			case "varsQ":
+				return oIotNodeGenPage.varsQ;
+			case "varsFq":
+				return oIotNodeGenPage.varsFq;
+			case "varsRange":
+				return oIotNodeGenPage.varsRange;
+			case "query":
+				return oIotNodeGenPage.query;
 			case "pageUriIotNode":
 				return oIotNodeGenPage.pageUriIotNode;
 			default:
@@ -1361,12 +1979,32 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 			return IotNodeGenPage.staticSetDefaultFacetMinCount(siteRequest_, o);
 		case "defaultPivotMinCount":
 			return IotNodeGenPage.staticSetDefaultPivotMinCount(siteRequest_, o);
+		case "DEFAULT_MAP_LOCATION":
+			return IotNodeGenPage.staticSetDEFAULT_MAP_LOCATION(siteRequest_, o);
+		case "DEFAULT_MAP_ZOOM":
+			return IotNodeGenPage.staticSetDEFAULT_MAP_ZOOM(siteRequest_, o);
+		case "defaultFieldListVars":
+			return IotNodeGenPage.staticSetDefaultFieldListVars(siteRequest_, o);
+		case "defaultStatsVars":
+			return IotNodeGenPage.staticSetDefaultStatsVars(siteRequest_, o);
+		case "defaultPivotVars":
+			return IotNodeGenPage.staticSetDefaultPivotVars(siteRequest_, o);
 		case "iotNodeCount":
 			return IotNodeGenPage.staticSetIotNodeCount(siteRequest_, o);
 		case "pk":
 			return IotNodeGenPage.staticSetPk(siteRequest_, o);
 		case "id":
 			return IotNodeGenPage.staticSetId(siteRequest_, o);
+		case "pagination":
+			return IotNodeGenPage.staticSetPagination(siteRequest_, o);
+		case "varsQ":
+			return IotNodeGenPage.staticSetVarsQ(siteRequest_, o);
+		case "varsFq":
+			return IotNodeGenPage.staticSetVarsFq(siteRequest_, o);
+		case "varsRange":
+			return IotNodeGenPage.staticSetVarsRange(siteRequest_, o);
+		case "query":
+			return IotNodeGenPage.staticSetQuery(siteRequest_, o);
 		case "pageUriIotNode":
 			return IotNodeGenPage.staticSetPageUriIotNode(siteRequest_, o);
 			default:
@@ -1405,12 +2043,32 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 			return IotNodeGenPage.staticSearchDefaultFacetMinCount(siteRequest_, (Integer)o);
 		case "defaultPivotMinCount":
 			return IotNodeGenPage.staticSearchDefaultPivotMinCount(siteRequest_, (Integer)o);
+		case "DEFAULT_MAP_LOCATION":
+			return IotNodeGenPage.staticSearchDEFAULT_MAP_LOCATION(siteRequest_, (JsonObject)o);
+		case "DEFAULT_MAP_ZOOM":
+			return IotNodeGenPage.staticSearchDEFAULT_MAP_ZOOM(siteRequest_, (BigDecimal)o);
+		case "defaultFieldListVars":
+			return IotNodeGenPage.staticSearchDefaultFieldListVars(siteRequest_, (String)o);
+		case "defaultStatsVars":
+			return IotNodeGenPage.staticSearchDefaultStatsVars(siteRequest_, (String)o);
+		case "defaultPivotVars":
+			return IotNodeGenPage.staticSearchDefaultPivotVars(siteRequest_, (String)o);
 		case "iotNodeCount":
 			return IotNodeGenPage.staticSearchIotNodeCount(siteRequest_, (Integer)o);
 		case "pk":
 			return IotNodeGenPage.staticSearchPk(siteRequest_, (Long)o);
 		case "id":
 			return IotNodeGenPage.staticSearchId(siteRequest_, (String)o);
+		case "pagination":
+			return IotNodeGenPage.staticSearchPagination(siteRequest_, (JsonObject)o);
+		case "varsQ":
+			return IotNodeGenPage.staticSearchVarsQ(siteRequest_, (JsonObject)o);
+		case "varsFq":
+			return IotNodeGenPage.staticSearchVarsFq(siteRequest_, (JsonObject)o);
+		case "varsRange":
+			return IotNodeGenPage.staticSearchVarsRange(siteRequest_, (JsonObject)o);
+		case "query":
+			return IotNodeGenPage.staticSearchQuery(siteRequest_, (JsonObject)o);
 		case "pageUriIotNode":
 			return IotNodeGenPage.staticSearchPageUriIotNode(siteRequest_, (String)o);
 			default:
@@ -1449,12 +2107,32 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 			return IotNodeGenPage.staticSearchStrDefaultFacetMinCount(siteRequest_, (Integer)o);
 		case "defaultPivotMinCount":
 			return IotNodeGenPage.staticSearchStrDefaultPivotMinCount(siteRequest_, (Integer)o);
+		case "DEFAULT_MAP_LOCATION":
+			return IotNodeGenPage.staticSearchStrDEFAULT_MAP_LOCATION(siteRequest_, (JsonObject)o);
+		case "DEFAULT_MAP_ZOOM":
+			return IotNodeGenPage.staticSearchStrDEFAULT_MAP_ZOOM(siteRequest_, (Double)o);
+		case "defaultFieldListVars":
+			return IotNodeGenPage.staticSearchStrDefaultFieldListVars(siteRequest_, (String)o);
+		case "defaultStatsVars":
+			return IotNodeGenPage.staticSearchStrDefaultStatsVars(siteRequest_, (String)o);
+		case "defaultPivotVars":
+			return IotNodeGenPage.staticSearchStrDefaultPivotVars(siteRequest_, (String)o);
 		case "iotNodeCount":
 			return IotNodeGenPage.staticSearchStrIotNodeCount(siteRequest_, (Integer)o);
 		case "pk":
 			return IotNodeGenPage.staticSearchStrPk(siteRequest_, (Long)o);
 		case "id":
 			return IotNodeGenPage.staticSearchStrId(siteRequest_, (String)o);
+		case "pagination":
+			return IotNodeGenPage.staticSearchStrPagination(siteRequest_, (JsonObject)o);
+		case "varsQ":
+			return IotNodeGenPage.staticSearchStrVarsQ(siteRequest_, (JsonObject)o);
+		case "varsFq":
+			return IotNodeGenPage.staticSearchStrVarsFq(siteRequest_, (JsonObject)o);
+		case "varsRange":
+			return IotNodeGenPage.staticSearchStrVarsRange(siteRequest_, (JsonObject)o);
+		case "query":
+			return IotNodeGenPage.staticSearchStrQuery(siteRequest_, (JsonObject)o);
 		case "pageUriIotNode":
 			return IotNodeGenPage.staticSearchStrPageUriIotNode(siteRequest_, (String)o);
 			default:
@@ -1493,12 +2171,32 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 			return IotNodeGenPage.staticSearchFqDefaultFacetMinCount(siteRequest_, o);
 		case "defaultPivotMinCount":
 			return IotNodeGenPage.staticSearchFqDefaultPivotMinCount(siteRequest_, o);
+		case "DEFAULT_MAP_LOCATION":
+			return IotNodeGenPage.staticSearchFqDEFAULT_MAP_LOCATION(siteRequest_, o);
+		case "DEFAULT_MAP_ZOOM":
+			return IotNodeGenPage.staticSearchFqDEFAULT_MAP_ZOOM(siteRequest_, o);
+		case "defaultFieldListVars":
+			return IotNodeGenPage.staticSearchFqDefaultFieldListVars(siteRequest_, o);
+		case "defaultStatsVars":
+			return IotNodeGenPage.staticSearchFqDefaultStatsVars(siteRequest_, o);
+		case "defaultPivotVars":
+			return IotNodeGenPage.staticSearchFqDefaultPivotVars(siteRequest_, o);
 		case "iotNodeCount":
 			return IotNodeGenPage.staticSearchFqIotNodeCount(siteRequest_, o);
 		case "pk":
 			return IotNodeGenPage.staticSearchFqPk(siteRequest_, o);
 		case "id":
 			return IotNodeGenPage.staticSearchFqId(siteRequest_, o);
+		case "pagination":
+			return IotNodeGenPage.staticSearchFqPagination(siteRequest_, o);
+		case "varsQ":
+			return IotNodeGenPage.staticSearchFqVarsQ(siteRequest_, o);
+		case "varsFq":
+			return IotNodeGenPage.staticSearchFqVarsFq(siteRequest_, o);
+		case "varsRange":
+			return IotNodeGenPage.staticSearchFqVarsRange(siteRequest_, o);
+		case "query":
+			return IotNodeGenPage.staticSearchFqQuery(siteRequest_, o);
 		case "pageUriIotNode":
 			return IotNodeGenPage.staticSearchFqPageUriIotNode(siteRequest_, o);
 			default:
@@ -1531,6 +2229,11 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 	public static final String VAR_defaultFacetLimit = "defaultFacetLimit";
 	public static final String VAR_defaultFacetMinCount = "defaultFacetMinCount";
 	public static final String VAR_defaultPivotMinCount = "defaultPivotMinCount";
+	public static final String VAR_DEFAULT_MAP_LOCATION = "DEFAULT_MAP_LOCATION";
+	public static final String VAR_DEFAULT_MAP_ZOOM = "DEFAULT_MAP_ZOOM";
+	public static final String VAR_defaultFieldListVars = "defaultFieldListVars";
+	public static final String VAR_defaultStatsVars = "defaultStatsVars";
+	public static final String VAR_defaultPivotVars = "defaultPivotVars";
 	public static final String VAR_listIotNode = "listIotNode";
 	public static final String VAR_stats = "stats";
 	public static final String VAR_facetCounts = "facetCounts";
@@ -1538,6 +2241,11 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 	public static final String VAR_iotNode_ = "iotNode_";
 	public static final String VAR_pk = "pk";
 	public static final String VAR_id = "id";
+	public static final String VAR_pagination = "pagination";
+	public static final String VAR_varsQ = "varsQ";
+	public static final String VAR_varsFq = "varsFq";
+	public static final String VAR_varsRange = "varsRange";
+	public static final String VAR_query = "query";
 	public static final String VAR_pageUriIotNode = "pageUriIotNode";
 
 	public static final String DISPLAY_NAME_searchListIotNode_ = "";
@@ -1554,6 +2262,11 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 	public static final String DISPLAY_NAME_defaultFacetLimit = "";
 	public static final String DISPLAY_NAME_defaultFacetMinCount = "";
 	public static final String DISPLAY_NAME_defaultPivotMinCount = "";
+	public static final String DISPLAY_NAME_DEFAULT_MAP_LOCATION = "";
+	public static final String DISPLAY_NAME_DEFAULT_MAP_ZOOM = "";
+	public static final String DISPLAY_NAME_defaultFieldListVars = "";
+	public static final String DISPLAY_NAME_defaultStatsVars = "";
+	public static final String DISPLAY_NAME_defaultPivotVars = "";
 	public static final String DISPLAY_NAME_listIotNode = "";
 	public static final String DISPLAY_NAME_stats = "";
 	public static final String DISPLAY_NAME_facetCounts = "";
@@ -1561,6 +2274,11 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 	public static final String DISPLAY_NAME_iotNode_ = "";
 	public static final String DISPLAY_NAME_pk = "";
 	public static final String DISPLAY_NAME_id = "";
+	public static final String DISPLAY_NAME_pagination = "";
+	public static final String DISPLAY_NAME_varsQ = "";
+	public static final String DISPLAY_NAME_varsFq = "";
+	public static final String DISPLAY_NAME_varsRange = "";
+	public static final String DISPLAY_NAME_query = "";
 	public static final String DISPLAY_NAME_pageUriIotNode = "";
 
 	public static String displayNameForClass(String var) {
@@ -1596,6 +2314,16 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 			return DISPLAY_NAME_defaultFacetMinCount;
 		case VAR_defaultPivotMinCount:
 			return DISPLAY_NAME_defaultPivotMinCount;
+		case VAR_DEFAULT_MAP_LOCATION:
+			return DISPLAY_NAME_DEFAULT_MAP_LOCATION;
+		case VAR_DEFAULT_MAP_ZOOM:
+			return DISPLAY_NAME_DEFAULT_MAP_ZOOM;
+		case VAR_defaultFieldListVars:
+			return DISPLAY_NAME_defaultFieldListVars;
+		case VAR_defaultStatsVars:
+			return DISPLAY_NAME_defaultStatsVars;
+		case VAR_defaultPivotVars:
+			return DISPLAY_NAME_defaultPivotVars;
 		case VAR_listIotNode:
 			return DISPLAY_NAME_listIotNode;
 		case VAR_stats:
@@ -1610,6 +2338,16 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 			return DISPLAY_NAME_pk;
 		case VAR_id:
 			return DISPLAY_NAME_id;
+		case VAR_pagination:
+			return DISPLAY_NAME_pagination;
+		case VAR_varsQ:
+			return DISPLAY_NAME_varsQ;
+		case VAR_varsFq:
+			return DISPLAY_NAME_varsFq;
+		case VAR_varsRange:
+			return DISPLAY_NAME_varsRange;
+		case VAR_query:
+			return DISPLAY_NAME_query;
 		case VAR_pageUriIotNode:
 			return DISPLAY_NAME_pageUriIotNode;
 		default:

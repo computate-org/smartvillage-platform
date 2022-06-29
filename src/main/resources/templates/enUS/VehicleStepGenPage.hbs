@@ -1,9 +1,9 @@
 {{#*inline "htmTitleVehicleStepPage"}}		<!-- inline "htmTitleVehicleStepPage" -->
 		<title>{{#if searchListVehicleStep_}}{{#eq vehicleStepCount int1}}{{#eq params.query.q "*:*"}}vehicle step{{else}}vehicle step{{/eq}}{{else}}no vehicle step found{{/eq}}{{else}}vehicle steps{{/if}}</title>
 {{/inline}}
-{{#*inline "htmMetaVehicleStepPage"}}{{> "htmMetaBaseModelPage"}}{{/inline}}
-{{#*inline "htmStyleVehicleStepPage"}}{{> "htmStyleBaseModelPage"}}{{/inline}}
-{{#*inline "htmScriptsVehicleStepPage"}}{{> "htmScriptsBaseModelPage"}}		<!-- inline "htmScriptsVehicleStepPage" -->
+{{#*inline "htmMetaVehicleStepPage"}}{{> "htmMetaPageLayout"}}{{/inline}}
+{{#*inline "htmStyleVehicleStepPage"}}{{> "htmStylePageLayout"}}{{/inline}}
+{{#*inline "htmScriptsVehicleStepPage"}}{{> "htmScriptsPageLayout"}}		<!-- inline "htmScriptsVehicleStepPage" -->
 		<script src="{{staticBaseUrl}}/js/enUS/VehicleStepPage.js"></script>
 {{/inline}}
 {{#*inline "htmScriptVehicleStepPage"}}		<!-- inline "htmScriptVehicleStepPage" -->
@@ -29,6 +29,12 @@
 				window.varsFq = JSON.parse('{{{toJsonObjectStringInApostrophes varsFq}}}');
 				pageGraph();
 			});
+{{#if DEFAULT_MAP_LOCATION }}
+			window.DEFAULT_MAP_LOCATION = { lat: {{ DEFAULT_MAP_LOCATION.lat }}, lon: {{ DEFAULT_MAP_LOCATION.lon }} };
+{{/if}}
+{{#if DEFAULT_MAP_ZOOM }}
+			window.DEFAULT_MAP_ZOOM = {{ DEFAULT_MAP_ZOOM }};
+{{/if}}
 		</script>
 {{/inline}}
 {{#*inline "htmUrlVehicleStep"}}{{pageUri}}?q={{query.q}}&amp;rows={{#if rows}}{{rows}}{{else}}{{pagination.rows}}{{/if}}&amp;rows={{#if start}}{{start}}{{else}}{{pagination.start}}{{/if}}{{#each query.fq}}{{#eq fq this}}{{else}}&fq={{fq}}:{{val}}{{/eq}}{{/each}}{{#each query.sort}}{{#eq sort this}}{{else}}&sort={{var}} {{order}}{{/eq}}{{/each}}{{/inline}}
@@ -237,6 +243,8 @@
 												<div data-class="VehicleStep" data-var="{{ ../var }}" data-val="{{ @key }}">{{ @key }}: {{ this }}</div>
 {{/eq}}
 {{/each}}
+{{#if ./stats/min }}
+									<div>									<span> step </span>									<input id="animateStatsStep" placeholder="step" value="1" style="width: 4em; "/>									<span> max </span>									<input id="animateStatsMin" placeholder="min" value="{{ ./stats/min }}" style="width: 4em; "/>									<span> max </span>									<input id="animateStatsMax" placeholder="max" value="{{ ./stats/max }}" style="width: 4em; "/>									<span> speed in seconds </span>									<input id="animateStatsSpeed" placeholder="speed" value="1" style="width: 4em; "/>									<button onclick="animateStats(); ">animate</button>									</div>{{/if}}
 {{/if}}
 											</div>
 										</td>
@@ -246,9 +254,9 @@
 								</table>
 {{/inline}}
 {{#*inline "htmBodyMenuVehicleStepPage"}}		<!-- #*inline "htmBodyMenuVehicleStepPage" -->
-{{> "htmBodyMenuBaseModelPage"}}{{/inline}}
+{{> "htmBodyMenuPageLayout"}}{{/inline}}
 {{#*inline "htmBodyGraphVehicleStepPage"}}		<!-- #*inline "htmBodyGraphVehicleStepPage" -->
-<div id="htmBodyGraphBaseModelPage" class="htmBodyGraph "></div>{{/inline}}
+<div id="htmBodyGraphPageLayout" class="w3-content htmBodyGraph "></div>{{/inline}}
 {{#*inline "htmBodyCount0VehicleStepPage"}}		<!-- #*inline "htmBodyCount0VehicleStepPage" -->
 		<h1>
 			<a href="{{pageUri}}" class="w3-bar-item w3-btn w3-center w3-block w3-blue w3-hover-blue">
@@ -618,13 +626,13 @@
 				</div>
 {{/inline}}
 {{#*inline "htmBodyStartVehicleStepPage"}}
-{{> "htmBodyStartBaseModelPage"}}
+{{> "htmBodyStartPageLayout"}}
 {{/inline}}
 {{#*inline "htmBodyMiddleVehicleStepPage"}}
-{{> "htmBodyMiddleBaseModelPage"}}
+{{> "htmBodyMiddlePageLayout"}}
 {{/inline}}
 {{#*inline "htmBodyEndVehicleStepPage"}}
-{{> "htmBodyEndBaseModelPage"}}
+{{> "htmBodyEndPageLayout"}}
 {{/inline}}
 {{#*inline "htmBodyVehicleStepPage"}}
 {{#block "htmBodyStart"}}{{/block}}
@@ -635,8 +643,8 @@
 		<div class="w3-bar w3-content ">
 {{#block "htmBodySidebar"}}{{/block}}
 		</div>
-	<div class="pageContent w3-content ">
 {{#block "htmBodyGraph"}}{{/block}}
+	<div class="pageContent w3-content ">
 	{{#eq vehicleStepCount int0}}
 {{#block "htmBodyCount0"}}{{/block}}
 	{{else}}
@@ -786,7 +794,7 @@
 				</a>
 			</div>
 {{/inline}}
-{{> BaseModelPage}}
+{{> PageLayout}}
 
 {{#*inline "htmSimulationKey"}}
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">

@@ -12,6 +12,7 @@ import org.apache.commons.lang3.reflect.FieldUtils;
 import org.computate.search.wrap.Wrap;
 import org.computate.smartvillageview.enus.config.ConfigKeys;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
+import org.computate.smartvillageview.enus.tool.HeadingConverter;
 
 import io.vertx.core.Promise;
 import io.vertx.pgclient.data.Point;
@@ -19,7 +20,7 @@ import io.vertx.pgclient.data.Point;
 /**
  * Api: true
  * Page: true
- * SuperPage.enUS: BaseModelPage
+ * SuperPage.enUS: PageLayout
  * Indexed: true
  * 
  * ApiTag.enUS: Vehicle Step
@@ -334,6 +335,20 @@ public class VehicleStep extends VehicleStepGen<Object> {
 	 * Description: The title of this object
 	 */
 	protected void _objectTitle(Wrap<String> w) {
+		StringBuilder b = new StringBuilder();
+		if(vehicleType != null)
+			b.append(" ").append(vehicleType);
+		if(vehicleId != null)
+			b.append(" ").append(vehicleId);
+		if(vehicleId != null)
+			b.append(" ").append(vehicleId);
+		if(speed != null)
+			b.append(" ").append(speed).append("kph");
+		if(angle != null)
+			b.append(" ").append(angle).append("°").append(HeadingConverter.getHeading(angle));
+//		if(slope != null)
+//			b.append(" ").append(slope).append("° slope");
+		w.o(b.toString().trim());
 	}
 
 	/**
