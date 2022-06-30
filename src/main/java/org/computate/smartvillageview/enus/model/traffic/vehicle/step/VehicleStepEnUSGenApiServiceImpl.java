@@ -941,7 +941,9 @@ public class VehicleStepEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 
 	@Override
 	public void searchpageVehicleStep(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
+		LOG.info(String.format("Begin call to user: %s", ZonedDateTime.now().toString()));
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smart-village-view-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
+			LOG.info(String.format("End call to user: %s", ZonedDateTime.now().toString()));
 			try {
 
 				List<String> roles = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_REQUIRED + "_VehicleStep")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
@@ -965,6 +967,7 @@ public class VehicleStepEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 				} else {
 					searchVehicleStepList(siteRequest, false, true, false).onSuccess(listVehicleStep -> {
 						response200SearchPageVehicleStep(listVehicleStep).onSuccess(response -> {
+							LOG.info(String.format("End request: %s", ZonedDateTime.now().toString()));
 							eventHandler.handle(Future.succeededFuture(response));
 							LOG.debug(String.format("searchpageVehicleStep succeeded. "));
 						}).onFailure(ex -> {
