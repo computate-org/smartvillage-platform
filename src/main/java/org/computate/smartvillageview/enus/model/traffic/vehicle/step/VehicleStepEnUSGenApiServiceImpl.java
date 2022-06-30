@@ -965,7 +965,9 @@ public class VehicleStepEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 						)
 					));
 				} else {
+					LOG.info(String.format("Start call to search: %s", ZonedDateTime.now().toString()));
 					searchVehicleStepList(siteRequest, false, true, false).onSuccess(listVehicleStep -> {
+						LOG.info(String.format("Start response: %s", ZonedDateTime.now().toString()));
 						response200SearchPageVehicleStep(listVehicleStep).onSuccess(response -> {
 							LOG.info(String.format("End request: %s", ZonedDateTime.now().toString()));
 							eventHandler.handle(Future.succeededFuture(response));
