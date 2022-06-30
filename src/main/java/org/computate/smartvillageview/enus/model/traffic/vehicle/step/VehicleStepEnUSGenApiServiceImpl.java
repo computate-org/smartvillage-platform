@@ -1008,6 +1008,7 @@ public class VehicleStepEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 		return Optional.ofNullable(config.getString(ConfigKeys.TEMPLATE_PATH)).orElse("templates") + "/enUS/VehicleStepPage";
 	}
 	public Future<ServiceResponse> response200SearchPageVehicleStep(SearchList<VehicleStep> listVehicleStep) {
+		LOG.info("step 1");
 		Promise<ServiceResponse> promise = Promise.promise();
 		try {
 			SiteRequestEnUS siteRequest = listVehicleStep.getSiteRequest_(SiteRequestEnUS.class);
@@ -1017,7 +1018,9 @@ public class VehicleStepEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 
 			page.setSearchListVehicleStep_(listVehicleStep);
 			page.setSiteRequest_(siteRequest);
+			LOG.info("step 2");
 			page.promiseDeepVehicleStepPage(siteRequest).onSuccess(a -> {
+				LOG.info("step 3");
 				JsonObject json = JsonObject.mapFrom(page);
 				json.put(ConfigKeys.STATIC_BASE_URL, config.getString(ConfigKeys.STATIC_BASE_URL));
 				json.put(ConfigKeys.GITHUB_ORG, config.getString(ConfigKeys.GITHUB_ORG));
@@ -1026,7 +1029,9 @@ public class VehicleStepEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 				json.put(ConfigKeys.PROJECT_POWERED_BY_URL, config.getString(ConfigKeys.PROJECT_POWERED_BY_URL));
 				json.put(ConfigKeys.PROJECT_POWERED_BY_NAME, config.getString(ConfigKeys.PROJECT_POWERED_BY_NAME));
 				json.put(ConfigKeys.PROJECT_POWERED_BY_IMAGE_URI, config.getString(ConfigKeys.PROJECT_POWERED_BY_IMAGE_URI));
+				LOG.info("step 4");
 				templateEngine.render(json, templateSearchPageVehicleStep()).onSuccess(buffer -> {
+					LOG.info("step 5");
 					promise.complete(new ServiceResponse(200, "OK", buffer, requestHeaders));
 				}).onFailure(ex -> {
 					promise.fail(ex);
