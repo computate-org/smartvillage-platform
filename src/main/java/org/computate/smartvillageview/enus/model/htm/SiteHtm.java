@@ -147,7 +147,7 @@ public class SiteHtm extends SiteHtmGen<Object> {
 	 * HtmlCell: 1
 	 * HtmlColumn: 3
 	 * Facet: true
-	 * DisplayName: Page ID
+	 * DisplayName: Page URI
 	 * Description: The ID for this page. 
 	 */
 	protected void _uri(Wrap<String> w) {

@@ -243,6 +243,8 @@
 												<div data-class="SiteHtm" data-var="{{ ../var }}" data-val="{{ @key }}">{{ @key }}: {{ this }}</div>
 {{/eq}}
 {{/each}}
+{{#if ./stats/min }}
+									<div>									<span> step </span>									<input id="animateStatsStep" placeholder="step" value="1" style="width: 4em; "/>									<span> max </span>									<input id="animateStatsMin" placeholder="min" value="{{ ./stats/min }}" style="width: 4em; "/>									<span> max </span>									<input id="animateStatsMax" placeholder="max" value="{{ ./stats/max }}" style="width: 4em; "/>									<span> speed in seconds </span>									<input id="animateStatsSpeed" placeholder="speed" value="1" style="width: 4em; "/>									<button onclick="animateStats(); ">animate</button>									</div>{{/if}}
 {{/if}}
 											</div>
 										</td>
@@ -648,7 +650,7 @@
 			<tr>
 						<th>created</th>
 						<th></th>
-						<th>Page ID</th>
+						<th>Page URI</th>
 						<th>Page ID</th>
 						<th>Sequence Number</th>
 			</tr>
@@ -1044,7 +1046,7 @@
 										<div id="suggest{{classApiMethodMethod}}SiteHtmUri">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-navy-peony">
-													<label for="{{classApiMethodMethod}}_uri">Page ID</label>
+													<label for="{{classApiMethodMethod}}_uri">Page URI</label>
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
@@ -1074,7 +1076,7 @@
 		{{#ifContainsAnyRoles roles rolesRequired}}
 														<input
 															type="text"
-															placeholder="Page ID"
+															placeholder="Page URI"
 															title="The ID for this page. "
 															id="{{classApiMethodMethod}}_uri"
 	{{#eq "Page" classApiMethodMethod}}

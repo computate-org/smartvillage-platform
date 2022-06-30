@@ -591,14 +591,14 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 							stack.push("html");
 							stack.push("body");
 							Long sequenceNum = 0L;
+							JsonObject pageBody2 = JsonObject.mapFrom(page);
+							json.put("page", pageBody2);
 							for(String htmGroup : json.fieldNames()) {
 								if(StringUtils.startsWith(htmGroup, "htm")) {
 									JsonArray pageItems = json.getJsonArray(htmGroup);
 									sequenceNum = importSiteHtm(page, json, stack, pageId, htmGroup, pageItems, futures, sequenceNum);
 								}
 							}
-							JsonObject pageBody2 = JsonObject.mapFrom(page);
-							json.put("page", pageBody2);
 			
 							CompositeFuture.all(futures).onSuccess(b -> {
 								JsonObject pageParams = new JsonObject();

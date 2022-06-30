@@ -12,49 +12,53 @@ htmTitle:
   - text: OpenAPI specification of the {{ page.SITE_DISPLAY_NAME }}
 pageImageUri: /png/openapi-spec-sample.png
 htmBody:
-  - e: h1
-    a:
-      class: w3-text-2017-shaded-spruce w3-monospace 
-    text: "{{ page.h1 }}"
-  - e: h2
-    a:
-      class: w3-text-2017-shaded-spruce w3-monospace 
-    text: "{{ page.h2 }}"
   - e: div
     a:
-      class: font-style-italic 
-    text: 'Created {{formatZonedDateTime created "EEE MMM d yyyy" "en-US" "America/Denver" }}'
-  - e: a
-    a:
-      target: _new
-      href: https://studio-ws.apicur.io/sharing/bcd69fc4-cc10-40c1-bb40-03ddfe5cf050
+      class: w3-padding
     in:
-      - e: img
+      - e: h1
         a:
-          class: w3-image w3-padding-16 
-          src: "{{ page.STATIC_BASE_URL }}{{ pageImageUri }}"
-  - e: p
-    in:
+          class: w3-text-2017-shaded-spruce w3-monospace 
+        text: "{{ page.h1 }}"
+      - e: h2
+        a:
+          class: w3-text-2017-shaded-spruce w3-monospace 
+        text: "{{ page.h2 }}"
       - e: div
         a:
-          class: font-weight-bold 
-        text: "By {{ author.name }}"
-      - e: div
-        a:
-          class: font-weight-bold font-style-italic
+          class: font-style-italic 
+        text: 'Created {{formatZonedDateTime created "EEE MMM d yyyy" "en-US" "America/Denver" }}'
+      - e: p
         in:
-          - e: i
-            a:
-              class: fa-brands fa-redhat w3-text-red
-          - e: span
+          - e: div
             a:
               class: font-weight-bold 
-            text: "{{ author.title }}"
-  - e: p
-    text: |-
-      Here is a link to the OpenAPI specification for the {{ page.SITE_DISPLAY_NAME }}: 
-  - e: a
-    a:
-      target: _new
-      href: https://studio-ws.apicur.io/sharing/bcd69fc4-cc10-40c1-bb40-03ddfe5cf050
-    text: https://studio-ws.apicur.io/sharing/bcd69fc4-cc10-40c1-bb40-03ddfe5cf050
+            text: "By {{ author.name }}"
+          - e: div
+            a:
+              class: font-weight-bold font-style-italic
+            in:
+              - e: i
+                a:
+                  class: fa-brands fa-redhat w3-text-red
+              - e: span
+                a:
+                  class: font-weight-bold 
+                text: "{{ author.title }}"
+      - e: a
+        a:
+          target: _new
+          href: https://studio-ws.apicur.io/sharing/bcd69fc4-cc10-40c1-bb40-03ddfe5cf050
+        in:
+          - e: img
+            a:
+              class: w3-image w3-padding-16 
+              src: "{{ page.STATIC_BASE_URL }}{{ pageImageUri }}"
+      - e: p
+        text: |-
+          Here is a link to the OpenAPI specification for the {{ page.SITE_DISPLAY_NAME }}: 
+      - e: a
+        a:
+          target: _new
+          href: https://studio-ws.apicur.io/sharing/bcd69fc4-cc10-40c1-bb40-03ddfe5cf050
+        text: https://studio-ws.apicur.io/sharing/bcd69fc4-cc10-40c1-bb40-03ddfe5cf050

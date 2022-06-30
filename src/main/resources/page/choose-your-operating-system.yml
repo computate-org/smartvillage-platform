@@ -16,135 +16,139 @@ os:
   abbreviation: RHEL9
 pageImageUri: /png/rhel-9-sample.png
 htmBody:
-  - e: h1
-    a:
-      class: w3-text-2017-shaded-spruce w3-monospace 
-    text: Best operating system to develop the {{ page.SITE_DISPLAY_NAME }}
   - e: div
     a:
-      class: font-style-italic 
-    text: 'Created {{formatZonedDateTime created "EEE MMM d yyyy" "en-US" "America/Denver" }}'
-  - e: p
+      class: w3-padding
     in:
+      - e: h1
+        a:
+          class: w3-text-2017-shaded-spruce w3-monospace 
+        text: Best operating system to develop the {{ page.SITE_DISPLAY_NAME }}
       - e: div
         a:
-          class: font-weight-bold 
-        text: "By {{ author.name }}"
-      - e: div
-        a:
-          class: font-weight-bold font-style-italic
+          class: font-style-italic 
+        text: 'Created {{formatZonedDateTime created "EEE MMM d yyyy" "en-US" "America/Denver" }}'
+      - e: p
         in:
-          - e: i
-            a:
-              class: fa-brands fa-redhat w3-text-red
-          - e: span
+          - e: div
             a:
               class: font-weight-bold 
-            text: "{{ author.title }}"
-  - e: img
-    a:
-      class: w3-image w3-padding-16 
-      style: "width: 500px; "
-      src: "{{ page.STATIC_BASE_URL }}{{ pageImageUri }}"
-  - e: p
-    text: |-
-      Are you wondering, how do I pick an operating system to develop my website? Between Windows, Mac and many versions of Linux, which one is the most stable, helpful and secure? 
-      Hello, my name is {{ author.name }}. 
-      I am a Red Hat {{ author.title }} and I love open source software. 
-      I've tried many operating systems over the years. 
-      After switching to linux a decade ago, I've tried many Linux distros. 
-      In terms of stability, usefulness and security, I will always choose {{ os.name }}, and I'll help you get started on {{ os.name }} too. 
-  - e: h2
-    a:
-      class: w3-text-2017-shaded-spruce w3-monospace 
-    text: Red Hat Enterprise Linux
-  - e: p
-    text: |-
-      Red Hat Enterprise Linux is the world’s leading enterprise Linux platform, certified on hundreds of clouds and with thousands of hardware and software vendors. 
-      It's the most stable, the most secure, the most powerful, and the most trusted operating system for software development available. 
-      Best of all, it's available for open source developers for free for individual use, following the terms of the Red Hat Developer Subscription described below. 
-  - e: h2
-    a:
-      class: w3-text-2017-shaded-spruce w3-monospace 
-    text: Red Hat Developer Subscription
-  - e: p
-    text: |-
-      The Red Hat Developer Subscription for Individuals is a no-cost offering of the Red Hat Developer program and includes access to Red Hat Enterprise Linux among other Red Hat products. 
-      It is a program and an offering designed for individual developers, available through the Red Hat Developer program.
-  - e: h3
-    a:
-      class: w3-text-2017-shaded-spruce w3-monospace 
-    text: Be sure to review the Red Hat Developer Subscriptions for Individuals Agreement 
-  - e: p
-    text: |-
-      You will for sure want to read the fine print about the developer subscription to make sure you don't use it in a way that conflicts with the agreement. 
-      Here are some important terms to consider: 
-  - e: ol
-    in:
-      - e: li
+            text: "By {{ author.name }}"
+          - e: div
+            a:
+              class: font-weight-bold font-style-italic
+            in:
+              - e: i
+                a:
+                  class: fa-brands fa-redhat w3-text-red
+              - e: span
+                a:
+                  class: font-weight-bold 
+                text: "{{ author.title }}"
+      - e: img
+        a:
+          class: w3-image w3-padding-16 
+          style: "width: 500px; "
+          src: "{{ page.STATIC_BASE_URL }}{{ pageImageUri }}"
+      - e: p
         text: |-
-          By accepting the Program Terms, you represent that you are acting on your own personal behalf and not as a representative or on behalf of an entity and will be using the Individual Developer Subscriptions solely as set forth in this document. 
-          Red Hat is relying on your representations as a condition of our providing you access.
-      - e: li
+          Are you wondering, how do I pick an operating system to develop my website? Between Windows, Mac and many versions of Linux, which one is the most stable, helpful and secure? 
+          Hello, my name is {{ author.name }}. 
+          I am a Red Hat {{ author.title }} and I love open source software. 
+          I've tried many operating systems over the years. 
+          After switching to linux a decade ago, I've tried many Linux distros. 
+          In terms of stability, usefulness and security, I will always choose {{ os.name }}, and I'll help you get started on {{ os.name }} too. 
+      - e: h2
+        a:
+          class: w3-text-2017-shaded-spruce w3-monospace 
+        text: Red Hat Enterprise Linux
+      - e: p
         text: |-
-          Do not use the Red Hat Subscription Services for Individual Development Use and/or Individual Production Use on more than sixteen (16) Physical or Virtual Nodes. 
-      - e: li
+          Red Hat Enterprise Linux is the world’s leading enterprise Linux platform, certified on hundreds of clouds and with thousands of hardware and software vendors. 
+          It's the most stable, the most secure, the most powerful, and the most trusted operating system for software development available. 
+          Best of all, it's available for open source developers for free for individual use, following the terms of the Red Hat Developer Subscription described below. 
+      - e: h2
+        a:
+          class: w3-text-2017-shaded-spruce w3-monospace 
+        text: Red Hat Developer Subscription
+      - e: p
         text: |-
-          No Selling, distributing and/or rebranding the Red Hat Subscription Services (or any part thereof) contained in the Individual Developer Subscriptions.
-  - e: p
-    text: |-
-      You can review the many frequently asked questions about the Red Hat Developer Subscription and running {{ os.name }} in the FAQ link below: 
-  - e: p
-    a:
-      class: w3-text-2017-shaded-spruce w3-monospace 
-    in:
-      e: a
-      a:
-        href: https://developers.redhat.com/articles/faqs-no-cost-red-hat-enterprise-linux
-        target: _new
-      text: https://developers.redhat.com/articles/faqs-no-cost-red-hat-enterprise-linux
-  - e: h3
-    a:
-      class: w3-text-2017-shaded-spruce w3-monospace 
-    text: Become a Red Hat Developer
-  - e: p
-    text: |-
-      Being a Red Hat Developer doesn't mean that you work for Red Hat. 
-      It means that you have access to the most powerful tools and operating system to do your software development! 
-      Browse the topics, view the articles, download the free e-books and cheat sheets, and explore the Red Hat products. 
-      Get ready to boost your productivity as a true enterprise application developer. 
-      Learn more about the benefits of becoming a Red Hat Developer for free by visiting the site below: 
-  - e: p
-    a:
-      class: w3-text-2017-shaded-spruce w3-monospace 
-    in:
-      e: a
-      a:
-        href: https://developers.redhat.com/
-        target: _new
-      text: https://developers.redhat.com/
-  - e: p
-    text: |-
-      To create your account, click the [ Log In ] button in the top right corner. 
-      Then find the link to "Register for a Red Hat account". 
-  - e: h3
-    a:
-      class: w3-text-2017-shaded-spruce w3-monospace 
-    text: Download the {{ os.abbreviation }} x86_64 DVD ISO
-  - e: p
-    text: |-
-      Now that you are a Red Hat Developer, you have access to download {{ os.name }} for your open source development. 
-      To get started with {{ os.abbreviation }}, you will want to download the {{ os.version }} x86_64 DVD ISO here: 
-  - e: p
-    a:
-      class: w3-text-2017-shaded-spruce w3-monospace 
-    in:
-      e: a
-      a:
-        href: https://developers.redhat.com/products/rhel/download
-        target: _new
-      text: https://developers.redhat.com/products/rhel/download
-  - e: p
-    text: |-
-      Having the {{ os.abbreviation }} ISO file will allow you to burn it to a disk so that you can install it on your physical computers. 
-      You can also create {{ os.abbreviation }} virtual machines using the same ISO file. 
+          The Red Hat Developer Subscription for Individuals is a no-cost offering of the Red Hat Developer program and includes access to Red Hat Enterprise Linux among other Red Hat products. 
+          It is a program and an offering designed for individual developers, available through the Red Hat Developer program.
+      - e: h3
+        a:
+          class: w3-text-2017-shaded-spruce w3-monospace 
+        text: Be sure to review the Red Hat Developer Subscriptions for Individuals Agreement 
+      - e: p
+        text: |-
+          You will for sure want to read the fine print about the developer subscription to make sure you don't use it in a way that conflicts with the agreement. 
+          Here are some important terms to consider: 
+      - e: ol
+        in:
+          - e: li
+            text: |-
+              By accepting the Program Terms, you represent that you are acting on your own personal behalf and not as a representative or on behalf of an entity and will be using the Individual Developer Subscriptions solely as set forth in this document. 
+              Red Hat is relying on your representations as a condition of our providing you access.
+          - e: li
+            text: |-
+              Do not use the Red Hat Subscription Services for Individual Development Use and/or Individual Production Use on more than sixteen (16) Physical or Virtual Nodes. 
+          - e: li
+            text: |-
+              No Selling, distributing and/or rebranding the Red Hat Subscription Services (or any part thereof) contained in the Individual Developer Subscriptions.
+      - e: p
+        text: |-
+          You can review the many frequently asked questions about the Red Hat Developer Subscription and running {{ os.name }} in the FAQ link below: 
+      - e: p
+        a:
+          class: w3-text-2017-shaded-spruce w3-monospace 
+        in:
+          e: a
+          a:
+            href: https://developers.redhat.com/articles/faqs-no-cost-red-hat-enterprise-linux
+            target: _new
+          text: https://developers.redhat.com/articles/faqs-no-cost-red-hat-enterprise-linux
+      - e: h3
+        a:
+          class: w3-text-2017-shaded-spruce w3-monospace 
+        text: Become a Red Hat Developer
+      - e: p
+        text: |-
+          Being a Red Hat Developer doesn't mean that you work for Red Hat. 
+          It means that you have access to the most powerful tools and operating system to do your software development! 
+          Browse the topics, view the articles, download the free e-books and cheat sheets, and explore the Red Hat products. 
+          Get ready to boost your productivity as a true enterprise application developer. 
+          Learn more about the benefits of becoming a Red Hat Developer for free by visiting the site below: 
+      - e: p
+        a:
+          class: w3-text-2017-shaded-spruce w3-monospace 
+        in:
+          e: a
+          a:
+            href: https://developers.redhat.com/
+            target: _new
+          text: https://developers.redhat.com/
+      - e: p
+        text: |-
+          To create your account, click the [ Log In ] button in the top right corner. 
+          Then find the link to "Register for a Red Hat account". 
+      - e: h3
+        a:
+          class: w3-text-2017-shaded-spruce w3-monospace 
+        text: Download the {{ os.abbreviation }} x86_64 DVD ISO
+      - e: p
+        text: |-
+          Now that you are a Red Hat Developer, you have access to download {{ os.name }} for your open source development. 
+          To get started with {{ os.abbreviation }}, you will want to download the {{ os.version }} x86_64 DVD ISO here: 
+      - e: p
+        a:
+          class: w3-text-2017-shaded-spruce w3-monospace 
+        in:
+          e: a
+          a:
+            href: https://developers.redhat.com/products/rhel/download
+            target: _new
+          text: https://developers.redhat.com/products/rhel/download
+      - e: p
+        text: |-
+          Having the {{ os.abbreviation }} ISO file will allow you to burn it to a disk so that you can install it on your physical computers. 
+          You can also create {{ os.abbreviation }} virtual machines using the same ISO file. 

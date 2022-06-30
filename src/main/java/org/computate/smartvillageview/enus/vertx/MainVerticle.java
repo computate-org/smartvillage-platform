@@ -258,10 +258,13 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 			vertxOptions.setClusterManager(clusterManager);
 		}
 		Long vertxWarningExceptionSeconds = config.getLong(ConfigKeys.VERTX_WARNING_EXCEPTION_SECONDS);
+		Long vertxMaxEventLoopExecuteTime = config.getLong(ConfigKeys.VERTX_MAX_EVENT_LOOP_EXECUTE_TIME);
 		Integer siteInstances = config.getInteger(ConfigKeys.SITE_INSTANCES);
 		vertxOptions.setEventBusOptions(eventBusOptions);
 		vertxOptions.setWarningExceptionTime(vertxWarningExceptionSeconds);
 		vertxOptions.setWarningExceptionTimeUnit(TimeUnit.SECONDS);
+		vertxOptions.setMaxEventLoopExecuteTime(vertxMaxEventLoopExecuteTime);
+		vertxOptions.setMaxEventLoopExecuteTimeUnit(TimeUnit.SECONDS);
 		vertxOptions.setWorkerPoolSize(config.getInteger(ConfigKeys.WORKER_POOL_SIZE));
 		Consumer<Vertx> runner = vertx -> {
 			try {

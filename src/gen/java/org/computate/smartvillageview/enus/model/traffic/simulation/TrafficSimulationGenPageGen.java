@@ -917,204 +917,6 @@ public abstract class TrafficSimulationGenPageGen<DEV> extends BaseModelPage {
 		return TrafficSimulationGenPage.staticSearchStrDEFAULT_MAP_ZOOM(siteRequest_, TrafficSimulationGenPage.staticSearchDEFAULT_MAP_ZOOM(siteRequest_, TrafficSimulationGenPage.staticSetDEFAULT_MAP_ZOOM(siteRequest_, o)));
 	}
 
-	//////////////////////////
-	// defaultFieldListVars //
-	//////////////////////////
-
-	/**	 The entity defaultFieldListVars
-	 *	 It is constructed before being initialized with the constructor by default. 
-	 */
-	@JsonProperty
-	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
-	@JsonInclude(Include.NON_NULL)
-	protected List<String> defaultFieldListVars = new ArrayList<String>();
-
-	/**	<br> The entity defaultFieldListVars
-	 *  It is constructed before being initialized with the constructor by default. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulationGenPage&fq=entiteVar_enUS_indexed_string:defaultFieldListVars">Find the entity defaultFieldListVars in Solr</a>
-	 * <br>
-	 * @param l is the entity already constructed. 
-	 **/
-	protected abstract void _defaultFieldListVars(List<String> l);
-
-	public List<String> getDefaultFieldListVars() {
-		return defaultFieldListVars;
-	}
-
-	public void setDefaultFieldListVars(List<String> defaultFieldListVars) {
-		this.defaultFieldListVars = defaultFieldListVars;
-	}
-	public static String staticSetDefaultFieldListVars(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-	public TrafficSimulationGenPage addDefaultFieldListVars(String...objects) {
-		for(String o : objects) {
-			addDefaultFieldListVars(o);
-		}
-		return (TrafficSimulationGenPage)this;
-	}
-	public TrafficSimulationGenPage addDefaultFieldListVars(String o) {
-		if(o != null)
-			this.defaultFieldListVars.add(o);
-		return (TrafficSimulationGenPage)this;
-	}
-	@JsonIgnore
-	public void setDefaultFieldListVars(JsonArray objects) {
-		defaultFieldListVars.clear();
-		for(int i = 0; i < objects.size(); i++) {
-			String o = objects.getString(i);
-			addDefaultFieldListVars(o);
-		}
-	}
-	protected TrafficSimulationGenPage defaultFieldListVarsInit() {
-		_defaultFieldListVars(defaultFieldListVars);
-		return (TrafficSimulationGenPage)this;
-	}
-
-	public static String staticSearchDefaultFieldListVars(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-
-	public static String staticSearchStrDefaultFieldListVars(SiteRequestEnUS siteRequest_, String o) {
-		return o == null ? null : o.toString();
-	}
-
-	public static String staticSearchFqDefaultFieldListVars(SiteRequestEnUS siteRequest_, String o) {
-		return TrafficSimulationGenPage.staticSearchStrDefaultFieldListVars(siteRequest_, TrafficSimulationGenPage.staticSearchDefaultFieldListVars(siteRequest_, TrafficSimulationGenPage.staticSetDefaultFieldListVars(siteRequest_, o)));
-	}
-
-	//////////////////////
-	// defaultStatsVars //
-	//////////////////////
-
-	/**	 The entity defaultStatsVars
-	 *	 It is constructed before being initialized with the constructor by default. 
-	 */
-	@JsonProperty
-	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
-	@JsonInclude(Include.NON_NULL)
-	protected List<String> defaultStatsVars = new ArrayList<String>();
-
-	/**	<br> The entity defaultStatsVars
-	 *  It is constructed before being initialized with the constructor by default. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulationGenPage&fq=entiteVar_enUS_indexed_string:defaultStatsVars">Find the entity defaultStatsVars in Solr</a>
-	 * <br>
-	 * @param l is the entity already constructed. 
-	 **/
-	protected abstract void _defaultStatsVars(List<String> l);
-
-	public List<String> getDefaultStatsVars() {
-		return defaultStatsVars;
-	}
-
-	public void setDefaultStatsVars(List<String> defaultStatsVars) {
-		this.defaultStatsVars = defaultStatsVars;
-	}
-	public static String staticSetDefaultStatsVars(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-	public TrafficSimulationGenPage addDefaultStatsVars(String...objects) {
-		for(String o : objects) {
-			addDefaultStatsVars(o);
-		}
-		return (TrafficSimulationGenPage)this;
-	}
-	public TrafficSimulationGenPage addDefaultStatsVars(String o) {
-		if(o != null)
-			this.defaultStatsVars.add(o);
-		return (TrafficSimulationGenPage)this;
-	}
-	@JsonIgnore
-	public void setDefaultStatsVars(JsonArray objects) {
-		defaultStatsVars.clear();
-		for(int i = 0; i < objects.size(); i++) {
-			String o = objects.getString(i);
-			addDefaultStatsVars(o);
-		}
-	}
-	protected TrafficSimulationGenPage defaultStatsVarsInit() {
-		_defaultStatsVars(defaultStatsVars);
-		return (TrafficSimulationGenPage)this;
-	}
-
-	public static String staticSearchDefaultStatsVars(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-
-	public static String staticSearchStrDefaultStatsVars(SiteRequestEnUS siteRequest_, String o) {
-		return o == null ? null : o.toString();
-	}
-
-	public static String staticSearchFqDefaultStatsVars(SiteRequestEnUS siteRequest_, String o) {
-		return TrafficSimulationGenPage.staticSearchStrDefaultStatsVars(siteRequest_, TrafficSimulationGenPage.staticSearchDefaultStatsVars(siteRequest_, TrafficSimulationGenPage.staticSetDefaultStatsVars(siteRequest_, o)));
-	}
-
-	//////////////////////
-	// defaultPivotVars //
-	//////////////////////
-
-	/**	 The entity defaultPivotVars
-	 *	 It is constructed before being initialized with the constructor by default. 
-	 */
-	@JsonProperty
-	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
-	@JsonInclude(Include.NON_NULL)
-	protected List<String> defaultPivotVars = new ArrayList<String>();
-
-	/**	<br> The entity defaultPivotVars
-	 *  It is constructed before being initialized with the constructor by default. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulationGenPage&fq=entiteVar_enUS_indexed_string:defaultPivotVars">Find the entity defaultPivotVars in Solr</a>
-	 * <br>
-	 * @param l is the entity already constructed. 
-	 **/
-	protected abstract void _defaultPivotVars(List<String> l);
-
-	public List<String> getDefaultPivotVars() {
-		return defaultPivotVars;
-	}
-
-	public void setDefaultPivotVars(List<String> defaultPivotVars) {
-		this.defaultPivotVars = defaultPivotVars;
-	}
-	public static String staticSetDefaultPivotVars(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-	public TrafficSimulationGenPage addDefaultPivotVars(String...objects) {
-		for(String o : objects) {
-			addDefaultPivotVars(o);
-		}
-		return (TrafficSimulationGenPage)this;
-	}
-	public TrafficSimulationGenPage addDefaultPivotVars(String o) {
-		if(o != null)
-			this.defaultPivotVars.add(o);
-		return (TrafficSimulationGenPage)this;
-	}
-	@JsonIgnore
-	public void setDefaultPivotVars(JsonArray objects) {
-		defaultPivotVars.clear();
-		for(int i = 0; i < objects.size(); i++) {
-			String o = objects.getString(i);
-			addDefaultPivotVars(o);
-		}
-	}
-	protected TrafficSimulationGenPage defaultPivotVarsInit() {
-		_defaultPivotVars(defaultPivotVars);
-		return (TrafficSimulationGenPage)this;
-	}
-
-	public static String staticSearchDefaultPivotVars(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-
-	public static String staticSearchStrDefaultPivotVars(SiteRequestEnUS siteRequest_, String o) {
-		return o == null ? null : o.toString();
-	}
-
-	public static String staticSearchFqDefaultPivotVars(SiteRequestEnUS siteRequest_, String o) {
-		return TrafficSimulationGenPage.staticSearchStrDefaultPivotVars(siteRequest_, TrafficSimulationGenPage.staticSearchDefaultPivotVars(siteRequest_, TrafficSimulationGenPage.staticSetDefaultPivotVars(siteRequest_, o)));
-	}
-
 	///////////////////////////
 	// listTrafficSimulation //
 	///////////////////////////
@@ -1426,271 +1228,6 @@ public abstract class TrafficSimulationGenPageGen<DEV> extends BaseModelPage {
 		return TrafficSimulationGenPage.staticSearchStrId(siteRequest_, TrafficSimulationGenPage.staticSearchId(siteRequest_, TrafficSimulationGenPage.staticSetId(siteRequest_, o)));
 	}
 
-	////////////////
-	// pagination //
-	////////////////
-
-	/**	 The entity pagination
-	 *	 It is constructed before being initialized with the constructor by default. 
-	 */
-	@JsonProperty
-	@JsonInclude(Include.NON_NULL)
-	protected JsonObject pagination = new JsonObject();
-
-	/**	<br> The entity pagination
-	 *  It is constructed before being initialized with the constructor by default. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulationGenPage&fq=entiteVar_enUS_indexed_string:pagination">Find the entity pagination in Solr</a>
-	 * <br>
-	 * @param pagination is the entity already constructed. 
-	 **/
-	protected abstract void _pagination(JsonObject pagination);
-
-	public JsonObject getPagination() {
-		return pagination;
-	}
-
-	public void setPagination(JsonObject pagination) {
-		this.pagination = pagination;
-	}
-	@JsonIgnore
-	public void setPagination(String o) {
-		this.pagination = TrafficSimulationGenPage.staticSetPagination(siteRequest_, o);
-	}
-	public static JsonObject staticSetPagination(SiteRequestEnUS siteRequest_, String o) {
-		if(o != null) {
-				return new JsonObject(o);
-		}
-		return null;
-	}
-	protected TrafficSimulationGenPage paginationInit() {
-		_pagination(pagination);
-		return (TrafficSimulationGenPage)this;
-	}
-
-	public static JsonObject staticSearchPagination(SiteRequestEnUS siteRequest_, JsonObject o) {
-		return o;
-	}
-
-	public static String staticSearchStrPagination(SiteRequestEnUS siteRequest_, JsonObject o) {
-		return o == null ? null : o.toString();
-	}
-
-	public static String staticSearchFqPagination(SiteRequestEnUS siteRequest_, String o) {
-		return TrafficSimulationGenPage.staticSearchStrPagination(siteRequest_, TrafficSimulationGenPage.staticSearchPagination(siteRequest_, TrafficSimulationGenPage.staticSetPagination(siteRequest_, o)));
-	}
-
-	///////////
-	// varsQ //
-	///////////
-
-	/**	 The entity varsQ
-	 *	 It is constructed before being initialized with the constructor by default. 
-	 */
-	@JsonProperty
-	@JsonInclude(Include.NON_NULL)
-	protected JsonObject varsQ = new JsonObject();
-
-	/**	<br> The entity varsQ
-	 *  It is constructed before being initialized with the constructor by default. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulationGenPage&fq=entiteVar_enUS_indexed_string:varsQ">Find the entity varsQ in Solr</a>
-	 * <br>
-	 * @param vars is the entity already constructed. 
-	 **/
-	protected abstract void _varsQ(JsonObject vars);
-
-	public JsonObject getVarsQ() {
-		return varsQ;
-	}
-
-	public void setVarsQ(JsonObject varsQ) {
-		this.varsQ = varsQ;
-	}
-	@JsonIgnore
-	public void setVarsQ(String o) {
-		this.varsQ = TrafficSimulationGenPage.staticSetVarsQ(siteRequest_, o);
-	}
-	public static JsonObject staticSetVarsQ(SiteRequestEnUS siteRequest_, String o) {
-		if(o != null) {
-				return new JsonObject(o);
-		}
-		return null;
-	}
-	protected TrafficSimulationGenPage varsQInit() {
-		_varsQ(varsQ);
-		return (TrafficSimulationGenPage)this;
-	}
-
-	public static JsonObject staticSearchVarsQ(SiteRequestEnUS siteRequest_, JsonObject o) {
-		return o;
-	}
-
-	public static String staticSearchStrVarsQ(SiteRequestEnUS siteRequest_, JsonObject o) {
-		return o == null ? null : o.toString();
-	}
-
-	public static String staticSearchFqVarsQ(SiteRequestEnUS siteRequest_, String o) {
-		return TrafficSimulationGenPage.staticSearchStrVarsQ(siteRequest_, TrafficSimulationGenPage.staticSearchVarsQ(siteRequest_, TrafficSimulationGenPage.staticSetVarsQ(siteRequest_, o)));
-	}
-
-	////////////
-	// varsFq //
-	////////////
-
-	/**	 The entity varsFq
-	 *	 It is constructed before being initialized with the constructor by default. 
-	 */
-	@JsonProperty
-	@JsonInclude(Include.NON_NULL)
-	protected JsonObject varsFq = new JsonObject();
-
-	/**	<br> The entity varsFq
-	 *  It is constructed before being initialized with the constructor by default. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulationGenPage&fq=entiteVar_enUS_indexed_string:varsFq">Find the entity varsFq in Solr</a>
-	 * <br>
-	 * @param vars is the entity already constructed. 
-	 **/
-	protected abstract void _varsFq(JsonObject vars);
-
-	public JsonObject getVarsFq() {
-		return varsFq;
-	}
-
-	public void setVarsFq(JsonObject varsFq) {
-		this.varsFq = varsFq;
-	}
-	@JsonIgnore
-	public void setVarsFq(String o) {
-		this.varsFq = TrafficSimulationGenPage.staticSetVarsFq(siteRequest_, o);
-	}
-	public static JsonObject staticSetVarsFq(SiteRequestEnUS siteRequest_, String o) {
-		if(o != null) {
-				return new JsonObject(o);
-		}
-		return null;
-	}
-	protected TrafficSimulationGenPage varsFqInit() {
-		_varsFq(varsFq);
-		return (TrafficSimulationGenPage)this;
-	}
-
-	public static JsonObject staticSearchVarsFq(SiteRequestEnUS siteRequest_, JsonObject o) {
-		return o;
-	}
-
-	public static String staticSearchStrVarsFq(SiteRequestEnUS siteRequest_, JsonObject o) {
-		return o == null ? null : o.toString();
-	}
-
-	public static String staticSearchFqVarsFq(SiteRequestEnUS siteRequest_, String o) {
-		return TrafficSimulationGenPage.staticSearchStrVarsFq(siteRequest_, TrafficSimulationGenPage.staticSearchVarsFq(siteRequest_, TrafficSimulationGenPage.staticSetVarsFq(siteRequest_, o)));
-	}
-
-	///////////////
-	// varsRange //
-	///////////////
-
-	/**	 The entity varsRange
-	 *	 It is constructed before being initialized with the constructor by default. 
-	 */
-	@JsonProperty
-	@JsonInclude(Include.NON_NULL)
-	protected JsonObject varsRange = new JsonObject();
-
-	/**	<br> The entity varsRange
-	 *  It is constructed before being initialized with the constructor by default. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulationGenPage&fq=entiteVar_enUS_indexed_string:varsRange">Find the entity varsRange in Solr</a>
-	 * <br>
-	 * @param vars is the entity already constructed. 
-	 **/
-	protected abstract void _varsRange(JsonObject vars);
-
-	public JsonObject getVarsRange() {
-		return varsRange;
-	}
-
-	public void setVarsRange(JsonObject varsRange) {
-		this.varsRange = varsRange;
-	}
-	@JsonIgnore
-	public void setVarsRange(String o) {
-		this.varsRange = TrafficSimulationGenPage.staticSetVarsRange(siteRequest_, o);
-	}
-	public static JsonObject staticSetVarsRange(SiteRequestEnUS siteRequest_, String o) {
-		if(o != null) {
-				return new JsonObject(o);
-		}
-		return null;
-	}
-	protected TrafficSimulationGenPage varsRangeInit() {
-		_varsRange(varsRange);
-		return (TrafficSimulationGenPage)this;
-	}
-
-	public static JsonObject staticSearchVarsRange(SiteRequestEnUS siteRequest_, JsonObject o) {
-		return o;
-	}
-
-	public static String staticSearchStrVarsRange(SiteRequestEnUS siteRequest_, JsonObject o) {
-		return o == null ? null : o.toString();
-	}
-
-	public static String staticSearchFqVarsRange(SiteRequestEnUS siteRequest_, String o) {
-		return TrafficSimulationGenPage.staticSearchStrVarsRange(siteRequest_, TrafficSimulationGenPage.staticSearchVarsRange(siteRequest_, TrafficSimulationGenPage.staticSetVarsRange(siteRequest_, o)));
-	}
-
-	///////////
-	// query //
-	///////////
-
-	/**	 The entity query
-	 *	 It is constructed before being initialized with the constructor by default. 
-	 */
-	@JsonProperty
-	@JsonInclude(Include.NON_NULL)
-	protected JsonObject query = new JsonObject();
-
-	/**	<br> The entity query
-	 *  It is constructed before being initialized with the constructor by default. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulationGenPage&fq=entiteVar_enUS_indexed_string:query">Find the entity query in Solr</a>
-	 * <br>
-	 * @param query is the entity already constructed. 
-	 **/
-	protected abstract void _query(JsonObject query);
-
-	public JsonObject getQuery() {
-		return query;
-	}
-
-	public void setQuery(JsonObject query) {
-		this.query = query;
-	}
-	@JsonIgnore
-	public void setQuery(String o) {
-		this.query = TrafficSimulationGenPage.staticSetQuery(siteRequest_, o);
-	}
-	public static JsonObject staticSetQuery(SiteRequestEnUS siteRequest_, String o) {
-		if(o != null) {
-				return new JsonObject(o);
-		}
-		return null;
-	}
-	protected TrafficSimulationGenPage queryInit() {
-		_query(query);
-		return (TrafficSimulationGenPage)this;
-	}
-
-	public static JsonObject staticSearchQuery(SiteRequestEnUS siteRequest_, JsonObject o) {
-		return o;
-	}
-
-	public static String staticSearchStrQuery(SiteRequestEnUS siteRequest_, JsonObject o) {
-		return o == null ? null : o.toString();
-	}
-
-	public static String staticSearchFqQuery(SiteRequestEnUS siteRequest_, String o) {
-		return TrafficSimulationGenPage.staticSearchStrQuery(siteRequest_, TrafficSimulationGenPage.staticSearchQuery(siteRequest_, TrafficSimulationGenPage.staticSetQuery(siteRequest_, o)));
-	}
-
 	//////////////////////////////
 	// pageUriTrafficSimulation //
 	//////////////////////////////
@@ -1785,9 +1322,6 @@ public abstract class TrafficSimulationGenPageGen<DEV> extends BaseModelPage {
 				defaultPivotMinCountInit();
 				DEFAULT_MAP_LOCATIONInit();
 				DEFAULT_MAP_ZOOMInit();
-				defaultFieldListVarsInit();
-				defaultStatsVarsInit();
-				defaultPivotVarsInit();
 				listTrafficSimulationInit();
 				statsInit();
 				facetCountsInit();
@@ -1795,11 +1329,6 @@ public abstract class TrafficSimulationGenPageGen<DEV> extends BaseModelPage {
 				trafficSimulation_Init();
 				pkInit();
 				idInit();
-				paginationInit();
-				varsQInit();
-				varsFqInit();
-				varsRangeInit();
-				queryInit();
 				pageUriTrafficSimulationInit();
 				promise2.complete();
 			} catch(Exception ex) {
@@ -1886,12 +1415,6 @@ public abstract class TrafficSimulationGenPageGen<DEV> extends BaseModelPage {
 				return oTrafficSimulationGenPage.DEFAULT_MAP_LOCATION;
 			case "DEFAULT_MAP_ZOOM":
 				return oTrafficSimulationGenPage.DEFAULT_MAP_ZOOM;
-			case "defaultFieldListVars":
-				return oTrafficSimulationGenPage.defaultFieldListVars;
-			case "defaultStatsVars":
-				return oTrafficSimulationGenPage.defaultStatsVars;
-			case "defaultPivotVars":
-				return oTrafficSimulationGenPage.defaultPivotVars;
 			case "listTrafficSimulation":
 				return oTrafficSimulationGenPage.listTrafficSimulation;
 			case "stats":
@@ -1906,16 +1429,6 @@ public abstract class TrafficSimulationGenPageGen<DEV> extends BaseModelPage {
 				return oTrafficSimulationGenPage.pk;
 			case "id":
 				return oTrafficSimulationGenPage.id;
-			case "pagination":
-				return oTrafficSimulationGenPage.pagination;
-			case "varsQ":
-				return oTrafficSimulationGenPage.varsQ;
-			case "varsFq":
-				return oTrafficSimulationGenPage.varsFq;
-			case "varsRange":
-				return oTrafficSimulationGenPage.varsRange;
-			case "query":
-				return oTrafficSimulationGenPage.query;
 			case "pageUriTrafficSimulation":
 				return oTrafficSimulationGenPage.pageUriTrafficSimulation;
 			default:
@@ -1983,28 +1496,12 @@ public abstract class TrafficSimulationGenPageGen<DEV> extends BaseModelPage {
 			return TrafficSimulationGenPage.staticSetDEFAULT_MAP_LOCATION(siteRequest_, o);
 		case "DEFAULT_MAP_ZOOM":
 			return TrafficSimulationGenPage.staticSetDEFAULT_MAP_ZOOM(siteRequest_, o);
-		case "defaultFieldListVars":
-			return TrafficSimulationGenPage.staticSetDefaultFieldListVars(siteRequest_, o);
-		case "defaultStatsVars":
-			return TrafficSimulationGenPage.staticSetDefaultStatsVars(siteRequest_, o);
-		case "defaultPivotVars":
-			return TrafficSimulationGenPage.staticSetDefaultPivotVars(siteRequest_, o);
 		case "trafficSimulationCount":
 			return TrafficSimulationGenPage.staticSetTrafficSimulationCount(siteRequest_, o);
 		case "pk":
 			return TrafficSimulationGenPage.staticSetPk(siteRequest_, o);
 		case "id":
 			return TrafficSimulationGenPage.staticSetId(siteRequest_, o);
-		case "pagination":
-			return TrafficSimulationGenPage.staticSetPagination(siteRequest_, o);
-		case "varsQ":
-			return TrafficSimulationGenPage.staticSetVarsQ(siteRequest_, o);
-		case "varsFq":
-			return TrafficSimulationGenPage.staticSetVarsFq(siteRequest_, o);
-		case "varsRange":
-			return TrafficSimulationGenPage.staticSetVarsRange(siteRequest_, o);
-		case "query":
-			return TrafficSimulationGenPage.staticSetQuery(siteRequest_, o);
 		case "pageUriTrafficSimulation":
 			return TrafficSimulationGenPage.staticSetPageUriTrafficSimulation(siteRequest_, o);
 			default:
@@ -2047,28 +1544,12 @@ public abstract class TrafficSimulationGenPageGen<DEV> extends BaseModelPage {
 			return TrafficSimulationGenPage.staticSearchDEFAULT_MAP_LOCATION(siteRequest_, (JsonObject)o);
 		case "DEFAULT_MAP_ZOOM":
 			return TrafficSimulationGenPage.staticSearchDEFAULT_MAP_ZOOM(siteRequest_, (BigDecimal)o);
-		case "defaultFieldListVars":
-			return TrafficSimulationGenPage.staticSearchDefaultFieldListVars(siteRequest_, (String)o);
-		case "defaultStatsVars":
-			return TrafficSimulationGenPage.staticSearchDefaultStatsVars(siteRequest_, (String)o);
-		case "defaultPivotVars":
-			return TrafficSimulationGenPage.staticSearchDefaultPivotVars(siteRequest_, (String)o);
 		case "trafficSimulationCount":
 			return TrafficSimulationGenPage.staticSearchTrafficSimulationCount(siteRequest_, (Integer)o);
 		case "pk":
 			return TrafficSimulationGenPage.staticSearchPk(siteRequest_, (Long)o);
 		case "id":
 			return TrafficSimulationGenPage.staticSearchId(siteRequest_, (String)o);
-		case "pagination":
-			return TrafficSimulationGenPage.staticSearchPagination(siteRequest_, (JsonObject)o);
-		case "varsQ":
-			return TrafficSimulationGenPage.staticSearchVarsQ(siteRequest_, (JsonObject)o);
-		case "varsFq":
-			return TrafficSimulationGenPage.staticSearchVarsFq(siteRequest_, (JsonObject)o);
-		case "varsRange":
-			return TrafficSimulationGenPage.staticSearchVarsRange(siteRequest_, (JsonObject)o);
-		case "query":
-			return TrafficSimulationGenPage.staticSearchQuery(siteRequest_, (JsonObject)o);
 		case "pageUriTrafficSimulation":
 			return TrafficSimulationGenPage.staticSearchPageUriTrafficSimulation(siteRequest_, (String)o);
 			default:
@@ -2111,28 +1592,12 @@ public abstract class TrafficSimulationGenPageGen<DEV> extends BaseModelPage {
 			return TrafficSimulationGenPage.staticSearchStrDEFAULT_MAP_LOCATION(siteRequest_, (JsonObject)o);
 		case "DEFAULT_MAP_ZOOM":
 			return TrafficSimulationGenPage.staticSearchStrDEFAULT_MAP_ZOOM(siteRequest_, (Double)o);
-		case "defaultFieldListVars":
-			return TrafficSimulationGenPage.staticSearchStrDefaultFieldListVars(siteRequest_, (String)o);
-		case "defaultStatsVars":
-			return TrafficSimulationGenPage.staticSearchStrDefaultStatsVars(siteRequest_, (String)o);
-		case "defaultPivotVars":
-			return TrafficSimulationGenPage.staticSearchStrDefaultPivotVars(siteRequest_, (String)o);
 		case "trafficSimulationCount":
 			return TrafficSimulationGenPage.staticSearchStrTrafficSimulationCount(siteRequest_, (Integer)o);
 		case "pk":
 			return TrafficSimulationGenPage.staticSearchStrPk(siteRequest_, (Long)o);
 		case "id":
 			return TrafficSimulationGenPage.staticSearchStrId(siteRequest_, (String)o);
-		case "pagination":
-			return TrafficSimulationGenPage.staticSearchStrPagination(siteRequest_, (JsonObject)o);
-		case "varsQ":
-			return TrafficSimulationGenPage.staticSearchStrVarsQ(siteRequest_, (JsonObject)o);
-		case "varsFq":
-			return TrafficSimulationGenPage.staticSearchStrVarsFq(siteRequest_, (JsonObject)o);
-		case "varsRange":
-			return TrafficSimulationGenPage.staticSearchStrVarsRange(siteRequest_, (JsonObject)o);
-		case "query":
-			return TrafficSimulationGenPage.staticSearchStrQuery(siteRequest_, (JsonObject)o);
 		case "pageUriTrafficSimulation":
 			return TrafficSimulationGenPage.staticSearchStrPageUriTrafficSimulation(siteRequest_, (String)o);
 			default:
@@ -2175,28 +1640,12 @@ public abstract class TrafficSimulationGenPageGen<DEV> extends BaseModelPage {
 			return TrafficSimulationGenPage.staticSearchFqDEFAULT_MAP_LOCATION(siteRequest_, o);
 		case "DEFAULT_MAP_ZOOM":
 			return TrafficSimulationGenPage.staticSearchFqDEFAULT_MAP_ZOOM(siteRequest_, o);
-		case "defaultFieldListVars":
-			return TrafficSimulationGenPage.staticSearchFqDefaultFieldListVars(siteRequest_, o);
-		case "defaultStatsVars":
-			return TrafficSimulationGenPage.staticSearchFqDefaultStatsVars(siteRequest_, o);
-		case "defaultPivotVars":
-			return TrafficSimulationGenPage.staticSearchFqDefaultPivotVars(siteRequest_, o);
 		case "trafficSimulationCount":
 			return TrafficSimulationGenPage.staticSearchFqTrafficSimulationCount(siteRequest_, o);
 		case "pk":
 			return TrafficSimulationGenPage.staticSearchFqPk(siteRequest_, o);
 		case "id":
 			return TrafficSimulationGenPage.staticSearchFqId(siteRequest_, o);
-		case "pagination":
-			return TrafficSimulationGenPage.staticSearchFqPagination(siteRequest_, o);
-		case "varsQ":
-			return TrafficSimulationGenPage.staticSearchFqVarsQ(siteRequest_, o);
-		case "varsFq":
-			return TrafficSimulationGenPage.staticSearchFqVarsFq(siteRequest_, o);
-		case "varsRange":
-			return TrafficSimulationGenPage.staticSearchFqVarsRange(siteRequest_, o);
-		case "query":
-			return TrafficSimulationGenPage.staticSearchFqQuery(siteRequest_, o);
 		case "pageUriTrafficSimulation":
 			return TrafficSimulationGenPage.staticSearchFqPageUriTrafficSimulation(siteRequest_, o);
 			default:
@@ -2231,9 +1680,6 @@ public abstract class TrafficSimulationGenPageGen<DEV> extends BaseModelPage {
 	public static final String VAR_defaultPivotMinCount = "defaultPivotMinCount";
 	public static final String VAR_DEFAULT_MAP_LOCATION = "DEFAULT_MAP_LOCATION";
 	public static final String VAR_DEFAULT_MAP_ZOOM = "DEFAULT_MAP_ZOOM";
-	public static final String VAR_defaultFieldListVars = "defaultFieldListVars";
-	public static final String VAR_defaultStatsVars = "defaultStatsVars";
-	public static final String VAR_defaultPivotVars = "defaultPivotVars";
 	public static final String VAR_listTrafficSimulation = "listTrafficSimulation";
 	public static final String VAR_stats = "stats";
 	public static final String VAR_facetCounts = "facetCounts";
@@ -2241,11 +1687,6 @@ public abstract class TrafficSimulationGenPageGen<DEV> extends BaseModelPage {
 	public static final String VAR_trafficSimulation_ = "trafficSimulation_";
 	public static final String VAR_pk = "pk";
 	public static final String VAR_id = "id";
-	public static final String VAR_pagination = "pagination";
-	public static final String VAR_varsQ = "varsQ";
-	public static final String VAR_varsFq = "varsFq";
-	public static final String VAR_varsRange = "varsRange";
-	public static final String VAR_query = "query";
 	public static final String VAR_pageUriTrafficSimulation = "pageUriTrafficSimulation";
 
 	public static final String DISPLAY_NAME_searchListTrafficSimulation_ = "";
@@ -2264,9 +1705,6 @@ public abstract class TrafficSimulationGenPageGen<DEV> extends BaseModelPage {
 	public static final String DISPLAY_NAME_defaultPivotMinCount = "";
 	public static final String DISPLAY_NAME_DEFAULT_MAP_LOCATION = "";
 	public static final String DISPLAY_NAME_DEFAULT_MAP_ZOOM = "";
-	public static final String DISPLAY_NAME_defaultFieldListVars = "";
-	public static final String DISPLAY_NAME_defaultStatsVars = "";
-	public static final String DISPLAY_NAME_defaultPivotVars = "";
 	public static final String DISPLAY_NAME_listTrafficSimulation = "";
 	public static final String DISPLAY_NAME_stats = "";
 	public static final String DISPLAY_NAME_facetCounts = "";
@@ -2274,11 +1712,6 @@ public abstract class TrafficSimulationGenPageGen<DEV> extends BaseModelPage {
 	public static final String DISPLAY_NAME_trafficSimulation_ = "";
 	public static final String DISPLAY_NAME_pk = "";
 	public static final String DISPLAY_NAME_id = "";
-	public static final String DISPLAY_NAME_pagination = "";
-	public static final String DISPLAY_NAME_varsQ = "";
-	public static final String DISPLAY_NAME_varsFq = "";
-	public static final String DISPLAY_NAME_varsRange = "";
-	public static final String DISPLAY_NAME_query = "";
 	public static final String DISPLAY_NAME_pageUriTrafficSimulation = "";
 
 	public static String displayNameForClass(String var) {
@@ -2318,12 +1751,6 @@ public abstract class TrafficSimulationGenPageGen<DEV> extends BaseModelPage {
 			return DISPLAY_NAME_DEFAULT_MAP_LOCATION;
 		case VAR_DEFAULT_MAP_ZOOM:
 			return DISPLAY_NAME_DEFAULT_MAP_ZOOM;
-		case VAR_defaultFieldListVars:
-			return DISPLAY_NAME_defaultFieldListVars;
-		case VAR_defaultStatsVars:
-			return DISPLAY_NAME_defaultStatsVars;
-		case VAR_defaultPivotVars:
-			return DISPLAY_NAME_defaultPivotVars;
 		case VAR_listTrafficSimulation:
 			return DISPLAY_NAME_listTrafficSimulation;
 		case VAR_stats:
@@ -2338,16 +1765,6 @@ public abstract class TrafficSimulationGenPageGen<DEV> extends BaseModelPage {
 			return DISPLAY_NAME_pk;
 		case VAR_id:
 			return DISPLAY_NAME_id;
-		case VAR_pagination:
-			return DISPLAY_NAME_pagination;
-		case VAR_varsQ:
-			return DISPLAY_NAME_varsQ;
-		case VAR_varsFq:
-			return DISPLAY_NAME_varsFq;
-		case VAR_varsRange:
-			return DISPLAY_NAME_varsRange;
-		case VAR_query:
-			return DISPLAY_NAME_query;
 		case VAR_pageUriTrafficSimulation:
 			return DISPLAY_NAME_pageUriTrafficSimulation;
 		default:

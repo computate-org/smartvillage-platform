@@ -12,197 +12,201 @@ htmTitle:
   - text: Kubernetes and OpenShift Components of the {{ page.SITE_DISPLAY_NAME }}
 pageImageUri: /png/k8s-components-sample.png
 htmBody:
-  - e: h1
-    a:
-      class: w3-text-2017-shaded-spruce w3-monospace 
-    text: Kubernetes and OpenShift Components of the {{ page.SITE_DISPLAY_NAME }}
   - e: div
     a:
-      class: font-style-italic 
-    text: 'Created {{formatZonedDateTime created "EEE MMM d yyyy" "en-US" "America/Denver" }}'
-  - e: p
+      class: w3-padding
     in:
+      - e: h1
+        a:
+          class: w3-text-2017-shaded-spruce w3-monospace 
+        text: Kubernetes and OpenShift Components of the {{ page.SITE_DISPLAY_NAME }}
       - e: div
         a:
-          class: font-weight-bold 
-        text: "By {{ author.name }}"
-      - e: div
+          class: font-style-italic 
+        text: 'Created {{formatZonedDateTime created "EEE MMM d yyyy" "en-US" "America/Denver" }}'
+      - e: p
+        in:
+          - e: div
+            a:
+              class: font-weight-bold 
+            text: "By {{ author.name }}"
+          - e: div
+            a:
+              class: font-weight-bold font-style-italic
+            in:
+              - e: i
+                a:
+                  class: fa-brands fa-redhat w3-text-red
+              - e: span
+                a:
+                  class: font-weight-bold 
+                text: "{{ author.title }}"
+      - e: p
+        text: |-
+          Kubernetes is for developers who want to run their applications in the cloud, interact with them, and scale them in a well defined API (Application Programming Interface). 
+          Developers don't have to manage the actual containers or machines running the application. 
+          They define the individual components to define how to run the application and make it available on the web. 
+          There are some main Kubernetes components that bring an application to life. 
+      - e: h2
         a:
-          class: font-weight-bold font-style-italic
+          class: w3-text-2017-shaded-spruce w3-monospace 
+        text: Kubernetes Components
+      - e: img
+        a:
+          class: w3-image 
+          src: "{{ page.STATIC_BASE_URL }}{{ pageImageUri }}"
+      - e: ul
+        in:
+          - e: li
+            in:
+              - e: dt
+                a:
+                  class: w3-large w3-text-2017-shaded-spruce 
+                in:
+                  - e: i
+                    a:
+                      class: fa-duotone fa-peapod 
+                  - e: span
+                    text: Pod
+              - e: dd
+                text: |-
+                   A group of containers with shared storage and network resources running the same application. 
+                   A Pod has a unique name and is grouped in a namespace. 
+                   It defines the memory and CPU limits, health checks, environment variables, open ports, and the base container image for the application. 
+          - e: li
+            in:
+              - e: dt
+                a:
+                  class: w3-large w3-text-2017-shaded-spruce 
+                in:
+                  - e: i
+                    a:
+                      class: fa-duotone fa-network-wired 
+                  - e: span
+                    text: Service
+              - e: dd
+                text: |-
+                  An internal network service to load balance requests to pods. 
+                  A Service is linked to pods that match the same selectors. 
+                  It names the ports of the application to expose to the web and assigns them an internal IP address. 
+          - e: li
+            in:
+              - e: dt
+                a:
+                  class: w3-large w3-text-2017-shaded-spruce 
+                in:
+                  - e: i
+                    a:
+                      class: fa-duotone fa-clone 
+                  - e: span
+                    text: ReplicationController
+              - e: dd
+                text: |-
+                  Ensures that a specified number of pod replicas are running at any one time. 
+                  A ReplicationController is also linked to pods that match the same selectors. 
+                  Unlike manually created pods, the pods maintained by a ReplicationController are automatically replaced if they fail, are deleted, or are terminated. 
+          - e: li
+            in:
+              - e: dt
+                a:
+                  class: w3-large w3-text-2017-shaded-spruce 
+                in:
+                  - e: i
+                    a:
+                      class: fa-duotone fa-ballot 
+                  - e: span
+                    text: ConfigMap
+              - e: dd
+                text: |-
+                  Stores non-confidential data in key-value pairs. 
+                  Pods can consume ConfigMaps as environment variables, command-line arguments, or as configuration files in a volume. 
+          - e: li
+            in:
+              - e: dt
+                a:
+                  class: w3-large w3-text-2017-shaded-spruce 
+                in:
+                  - e: i
+                    a:
+                      class: fa-duotone fa-key-skeleton 
+                  - e: span
+                    text: Secret
+              - e: dd
+                text: |-
+                  A Secret is an object that contains a small amount of sensitive data such as a password, a token, or a key. 
+                  Pods can consume Secrets as environment variables, command-line arguments, or as configuration files in a volume. 
+                  Using a Secret means that you don't need to include confidential data in your application code.
+      - e: p
+        text: |-
+          These core Kubernetes components bring an application to life and keep it running stable. 
+          However, Kubernetes doesn't address everything related to running your application the way you want. 
+          Red Hat OpenShift builds upon the core Kubernetes components to give application developers even more power to deploy their applications. 
+      - e: h2
+        a:
+          class: w3-text-2017-shaded-spruce 
         in:
           - e: i
             a:
               class: fa-brands fa-redhat w3-text-red
           - e: span
-            a:
-              class: font-weight-bold 
-            text: "{{ author.title }}"
-  - e: p
-    text: |-
-      Kubernetes is for developers who want to run their applications in the cloud, interact with them, and scale them in a well defined API (Application Programming Interface). 
-      Developers don't have to manage the actual containers or machines running the application. 
-      They define the individual components to define how to run the application and make it available on the web. 
-      There are some main Kubernetes components that bring an application to life. 
-  - e: h2
-    a:
-      class: w3-text-2017-shaded-spruce w3-monospace 
-    text: Kubernetes Components
-  - e: img
-    a:
-      class: w3-image 
-      src: "{{ page.STATIC_BASE_URL }}{{ pageImageUri }}"
-  - e: ul
-    in:
-      - e: li
+            text: OpenShift Components
+      - e: p
+        text: |-
+          OpenShift supplies Kubernetes with extra powerful components for managing container images and their versions, 
+          automatic image builds based off of triggers, 
+          routes for assigning hostnames and site certificates, 
+          and deployment configurations for all of your applications. 
+      - e: ul
         in:
-          - e: dt
-            a:
-              class: w3-large w3-text-2017-shaded-spruce 
+          - e: li
             in:
-              - e: i
+              - e: dt
                 a:
-                  class: fa-duotone fa-peapod 
-              - e: span
-                text: Pod
-          - e: dd
-            text: |-
-               A group of containers with shared storage and network resources running the same application. 
-               A Pod has a unique name and is grouped in a namespace. 
-               It defines the memory and CPU limits, health checks, environment variables, open ports, and the base container image for the application. 
-      - e: li
-        in:
-          - e: dt
-            a:
-              class: w3-large w3-text-2017-shaded-spruce 
+                  class: w3-large w3-text-2017-shaded-spruce 
+                in:
+                  - e: i
+                    a:
+                      class: fa-duotone fa-cart-flatbed-boxes 
+                  - e: span
+                    text: DeploymentConfig
+              - e: dd
+                text: |-
+                  Describes the desired state of a particular component of the application as a pod template. 
+                  DeploymentConfig objects involve one or more replication controllers, which contain a point-in-time record of the state of a deployment. 
+                  They support automatically rolling back to the last successfully deployed replica set in case of a failure. 
+                  Every change in the DeploymentConfig template of a deployment automatically triggers a new rollout. 
+          - e: li
             in:
-              - e: i
+              - e: dt
                 a:
-                  class: fa-duotone fa-network-wired 
-              - e: span
-                text: Service
-          - e: dd
-            text: |-
-              An internal network service to load balance requests to pods. 
-              A Service is linked to pods that match the same selectors. 
-              It names the ports of the application to expose to the web and assigns them an internal IP address. 
-      - e: li
-        in:
-          - e: dt
-            a:
-              class: w3-large w3-text-2017-shaded-spruce 
+                  class: w3-large w3-text-2017-shaded-spruce 
+                in:
+                  - e: i
+                    a:
+                      class: fa-duotone fa-browser 
+                  - e: span
+                    text: Route
+              - e: dd
+                text: |-
+                  A route allows you to host your application at a public URL. 
+                  Routes have built-in powerful features for managing secure TLS certificates for your applications. 
+                  Adding this annotation to a Route will trigger the automatic creation and renewal of the route TLS certificate: kubernetes.io/tls-acme: 'true'
+          - e: li
             in:
-              - e: i
+              - e: dt
                 a:
-                  class: fa-duotone fa-clone 
-              - e: span
-                text: ReplicationController
-          - e: dd
-            text: |-
-              Ensures that a specified number of pod replicas are running at any one time. 
-              A ReplicationController is also linked to pods that match the same selectors. 
-              Unlike manually created pods, the pods maintained by a ReplicationController are automatically replaced if they fail, are deleted, or are terminated. 
-      - e: li
-        in:
-          - e: dt
-            a:
-              class: w3-large w3-text-2017-shaded-spruce 
-            in:
-              - e: i
-                a:
-                  class: fa-duotone fa-ballot 
-              - e: span
-                text: ConfigMap
-          - e: dd
-            text: |-
-              Stores non-confidential data in key-value pairs. 
-              Pods can consume ConfigMaps as environment variables, command-line arguments, or as configuration files in a volume. 
-      - e: li
-        in:
-          - e: dt
-            a:
-              class: w3-large w3-text-2017-shaded-spruce 
-            in:
-              - e: i
-                a:
-                  class: fa-duotone fa-key-skeleton 
-              - e: span
-                text: Secret
-          - e: dd
-            text: |-
-              A Secret is an object that contains a small amount of sensitive data such as a password, a token, or a key. 
-              Pods can consume Secrets as environment variables, command-line arguments, or as configuration files in a volume. 
-              Using a Secret means that you don't need to include confidential data in your application code.
-  - e: p
-    text: |-
-      These core Kubernetes components bring an application to life and keep it running stable. 
-      However, Kubernetes doesn't address everything related to running your application the way you want. 
-      Red Hat OpenShift builds upon the core Kubernetes components to give application developers even more power to deploy their applications. 
-  - e: h2
-    a:
-      class: w3-text-2017-shaded-spruce 
-    in:
-      - e: i
-        a:
-          class: fa-brands fa-redhat w3-text-red
-      - e: span
-        text: OpenShift Components
-  - e: p
-    text: |-
-      OpenShift supplies Kubernetes with extra powerful components for managing container images and their versions, 
-      automatic image builds based off of triggers, 
-      routes for assigning hostnames and site certificates, 
-      and deployment configurations for all of your applications. 
-  - e: ul
-    in:
-      - e: li
-        in:
-          - e: dt
-            a:
-              class: w3-large w3-text-2017-shaded-spruce 
-            in:
-              - e: i
-                a:
-                  class: fa-duotone fa-cart-flatbed-boxes 
-              - e: span
-                text: DeploymentConfig
-          - e: dd
-            text: |-
-              Describes the desired state of a particular component of the application as a pod template. 
-              DeploymentConfig objects involve one or more replication controllers, which contain a point-in-time record of the state of a deployment. 
-              They support automatically rolling back to the last successfully deployed replica set in case of a failure. 
-              Every change in the DeploymentConfig template of a deployment automatically triggers a new rollout. 
-      - e: li
-        in:
-          - e: dt
-            a:
-              class: w3-large w3-text-2017-shaded-spruce 
-            in:
-              - e: i
-                a:
-                  class: fa-duotone fa-browser 
-              - e: span
-                text: Route
-          - e: dd
-            text: |-
-              A route allows you to host your application at a public URL. 
-              Routes have built-in powerful features for managing secure TLS certificates for your applications. 
-              Adding this annotation to a Route will trigger the automatic creation and renewal of the route TLS certificate: kubernetes.io/tls-acme: 'true'
-      - e: li
-        in:
-          - e: dt
-            a:
-              class: w3-large w3-text-2017-shaded-spruce 
-            in:
-              - e: i
-                a:
-                  class: fa-duotone fa-conveyor-belt 
-              - e: span
-                text: ImageStream
-          - e: dd
-            text: |-
-              An image stream and its associated tags provide an abstraction for referencing container images from within OpenShift Container Platform. 
-              You can tag, rollback a tag, and quickly deal with images, without having to re-push. 
-              You can trigger builds and deployments when a new image is pushed to the registry. 
-  - e: p
-    text: |-
-      These are some examples of some powerful features provided by OpenShift when comparing OpenShift DeploymentConfigs and Routes to Kubernetes Deployments and Ingress. 
+                  class: w3-large w3-text-2017-shaded-spruce 
+                in:
+                  - e: i
+                    a:
+                      class: fa-duotone fa-conveyor-belt 
+                  - e: span
+                    text: ImageStream
+              - e: dd
+                text: |-
+                  An image stream and its associated tags provide an abstraction for referencing container images from within OpenShift Container Platform. 
+                  You can tag, rollback a tag, and quickly deal with images, without having to re-push. 
+                  You can trigger builds and deployments when a new image is pushed to the registry. 
+      - e: p
+        text: |-
+          These are some examples of some powerful features provided by OpenShift when comparing OpenShift DeploymentConfigs and Routes to Kubernetes Deployments and Ingress. 

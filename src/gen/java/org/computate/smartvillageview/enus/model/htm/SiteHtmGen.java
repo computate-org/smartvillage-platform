@@ -2963,7 +2963,7 @@ public abstract class SiteHtmGen<DEV> extends Object {
 	public static final String DISPLAY_NAME_archived = "archived";
 	public static final String DISPLAY_NAME_deleted = "deleted";
 	public static final String DISPLAY_NAME_saves = "";
-	public static final String DISPLAY_NAME_uri = "Page ID";
+	public static final String DISPLAY_NAME_uri = "Page URI";
 	public static final String DISPLAY_NAME_pageId = "Page ID";
 	public static final String DISPLAY_NAME_sequenceNum = "Sequence Number";
 	public static final String DISPLAY_NAME_htmGroup = "HTML Group";
