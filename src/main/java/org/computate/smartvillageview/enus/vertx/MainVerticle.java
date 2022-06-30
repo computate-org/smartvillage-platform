@@ -446,7 +446,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 			JsonObject extraParams = new JsonObject();
 			extraParams.put("scope", "profile");
 			oauth2ClientOptions.setExtraParameters(extraParams);
-			oauth2ClientOptions.setHttpClientOptions(new HttpClientOptions().setConnectTimeout(60000));
+			oauth2ClientOptions.setHttpClientOptions(new HttpClientOptions().setConnectTimeout(120000));
 
 			OpenIDConnectAuth.discover(vertx, oauth2ClientOptions, a -> {
 				if(a.succeeded()) {
