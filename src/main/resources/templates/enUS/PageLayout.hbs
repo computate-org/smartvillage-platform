@@ -97,6 +97,7 @@
 {{#if PROJECT_POWERED_BY_URL }}
 				<a class="w3-bar-item grow-20 w3-margin w3-text-white w3-small " href="{{ PROJECT_POWERED_BY_URL }}" target="_blank"><span class="w3-small ">Powered by </span>{{#if PROJECT_POWERED_BY_IMAGE_URI }}<img alt="" class="w3-image " style="display: inline-block; width: 100px; margin: 0 10px;" src="{{ STATIC_BASE_URL }}{{ PROJECT_POWERED_BY_IMAGE_URI }}"/>{{else}}{{#if PROJECT_POWERED_BY_NAME}}{{ PROJECT_POWERED_BY_NAME }}{{/if}}{{/if}}</a>
 {{/if }}
+				<a class="w3-bar-item grow-10 w3-margin w3-text-white w3-small " href="https://www.computate.org" target="_blank"><span class="w3-small ">Generated and automated with </span><img alt="" class="w3-image " style="display: inline-block; width: 300px; margin: 0 10px;" src="{{ STATIC_BASE_URL }}/svg/computate-keys.svg"/></a>
 			</div>
 		</footer>
 {{/inline}}
