@@ -1,6 +1,6 @@
 ---
 GITHUB_ORG: computate-org
-QUAYIO_ORG: computate
+QUAYIO_ORG: computateorg
 PROJECT_POWERED_BY_NAME: Operate First
 PROJECT_POWERED_BY_URL: https://www.operate-first.cloud/
 PROJECT_POWERED_BY_IMAGE_URI: /png/operate-first-logo.png
@@ -138,6 +138,8 @@ PROJECTS:
         template: openshift/SITE_BUILD_CONFIG_1.yml
       - path: "{{ PROJECT_SRC }}/openshift/SITE_DEPLOYMENT_CONFIG_1.yml"
         template: openshift/SITE_DEPLOYMENT_CONFIG_1.yml
+      - path: "{{ PROJECT_SRC }}/Dockerfile"
+        template: openshift/Dockerfile
 
 CONFIG_TEMPLATE: |2
   
