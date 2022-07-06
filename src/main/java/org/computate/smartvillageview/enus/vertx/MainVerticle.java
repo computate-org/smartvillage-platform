@@ -454,6 +454,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 
 			ComputateOpenIDConnectAuth.discover(vertx, oauth2ClientOptions, a -> {
 				if(a.succeeded()) {
+					LOG.info(String.format("%s Call to discover succeeded", Thread.currentThread().getName()));
 					oauth2AuthenticationProvider = a.result();
 
 					authorizationProvider = KeycloakAuthorization.create();
@@ -470,7 +471,9 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 					if(StringUtils.startsWith(siteBaseUrl, "https://"))
 						sessionHandler.setCookieSecureFlag(true);
 			
+					LOG.info(String.format("%s Start openapi router builder create", Thread.currentThread().getName()));
 					RouterBuilder.create(vertx, "webroot/openapi3-enUS.yml", b -> {
+						LOG.info(String.format("%s Completed openapi router builder create", Thread.currentThread().getName()));
 						if (b.succeeded()) {
 							RouterBuilder routerBuilder = b.result();
 							routerBuilder.mountServicesFromExtensions();
@@ -550,6 +553,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 							router = routerBuilder.createRouter();
 			
 							LOG.info(configureOpenApiSuccess);
+							LOG.info(String.format("%s OpenAPI setup completed", Thread.currentThread().getName()));
 							promise.complete();
 						} else {
 							Exception ex = new RuntimeException("OpenID Connect Discovery failed", b.cause());
