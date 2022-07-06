@@ -75,6 +75,7 @@ import io.vertx.ext.auth.oauth2.OAuth2Auth;
 import io.vertx.ext.auth.oauth2.OAuth2FlowType;
 import io.vertx.ext.auth.oauth2.OAuth2Options;
 import io.vertx.ext.auth.oauth2.authorization.KeycloakAuthorization;
+import io.vertx.ext.auth.oauth2.providers.ComputateOpenIDConnectAuth;
 import io.vertx.ext.auth.oauth2.providers.OpenIDConnectAuth;
 import io.vertx.ext.bridge.PermittedOptions;
 import io.vertx.ext.healthchecks.HealthCheckHandler;
@@ -451,7 +452,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 			oauth2ClientOptions.setExtraParameters(extraParams);
 			oauth2ClientOptions.setHttpClientOptions(new HttpClientOptions().setConnectTimeout(120000).setVerifyHost(false).setSslHandshakeTimeout(120));
 
-			OpenIDConnectAuth.discover(vertx, oauth2ClientOptions, a -> {
+			ComputateOpenIDConnectAuth.discover(vertx, oauth2ClientOptions, a -> {
 				if(a.succeeded()) {
 					oauth2AuthenticationProvider = a.result();
 
