@@ -23,6 +23,7 @@ CLUSTER_PORT: "{{ PROJECT_PORT | regex_replace('(...)', '\\1') }}81"
 JDBC_DATABASE: "{{ PROJECT_NAME }}"
 JDBC_USERNAME: "{{ PROJECT_NAME }}"
 SOLR_COLLECTION: "{{ PROJECT_NAME }}"
+JAVA_OPTS: -XX:+UseParallelOldGC -XX:MinHeapFreeRatio=10 -XX:MaxHeapFreeRatio=20 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -XX:MaxMetaspaceSize=100m -XX:ParallelGCThreads=1 -Djava.util.concurrent.ForkJoinPool.common.parallelism=1 -XX:CICompilerCount=2 -XX:+ExitOnOutOfMemoryError
 ENABLE_SESSION_ID: true
 ENABLE_DELETED: true
 ENABLE_ARCHIVED: true
