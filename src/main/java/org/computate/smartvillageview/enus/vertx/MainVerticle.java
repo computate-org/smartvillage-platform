@@ -2,44 +2,39 @@ package org.computate.smartvillageview.enus.vertx;
 
 import java.net.URLDecoder;
 import java.text.Normalizer;
-import java.util.Map.Entry;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
 import org.apache.camel.CamelContext;
-import org.apache.camel.Exchange;
-import org.apache.camel.LoggingLevel;
-import org.apache.camel.builder.ExpressionBuilder;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.vertx.VertxComponent;
 import org.apache.camel.impl.DefaultCamelContext;
-import org.apache.camel.model.dataformat.JsonLibrary;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.computate.search.tool.SearchTool;
+import org.computate.smartvillageview.enus.config.ConfigKeys;
+import org.computate.smartvillageview.enus.model.htm.SiteHtmEnUSGenApiService;
+import org.computate.smartvillageview.enus.model.iotnode.IotNodeEnUSGenApiService;
+import org.computate.smartvillageview.enus.model.page.SitePage;
+import org.computate.smartvillageview.enus.model.page.SitePageEnUSGenApiService;
+import org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulationEnUSGenApiService;
+import org.computate.smartvillageview.enus.model.traffic.time.step.TimeStepEnUSGenApiService;
+import org.computate.smartvillageview.enus.model.traffic.vehicle.step.VehicleStepEnUSGenApiService;
+import org.computate.smartvillageview.enus.model.user.SiteUserEnUSGenApiService;
+import org.computate.smartvillageview.enus.page.HomePage;
+import org.computate.smartvillageview.enus.page.dynamic.DynamicPage;
+import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.vertx.handlebars.AuthHelpers;
 import org.computate.vertx.handlebars.DateHelpers;
 import org.computate.vertx.handlebars.SiteHelpers;
 import org.computate.vertx.openapi.OpenApi3Generator;
 import org.computate.vertx.search.list.SearchList;
 import org.computate.vertx.verticle.EmailVerticle;
-import org.computate.smartvillageview.enus.config.ConfigKeys;
-import org.computate.smartvillageview.enus.page.PageLayout;
-import org.computate.smartvillageview.enus.page.HomePage;
-import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
-import org.computate.smartvillageview.enus.model.page.SitePage;
-import org.computate.smartvillageview.enus.page.dynamic.DynamicPage;
-import org.computate.smartvillageview.enus.model.user.SiteUserEnUSGenApiService;
-import org.computate.smartvillageview.enus.model.page.SitePageEnUSGenApiService;
-import org.computate.smartvillageview.enus.model.htm.SiteHtmEnUSGenApiService;
-import org.computate.smartvillageview.enus.model.iotnode.IotNodeEnUSGenApiService;
-import org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulationEnUSGenApiService;
-import org.computate.smartvillageview.enus.model.traffic.time.step.TimeStepEnUSGenApiService;
-import org.computate.smartvillageview.enus.model.traffic.vehicle.step.VehicleStepEnUSGenApiService;
-import org.computate.smartvillageview.enus.model.page.SitePageEnUSGenApiService;
-import org.computate.smartvillageview.enus.model.htm.SiteHtmEnUSGenApiService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -54,11 +49,11 @@ import io.vertx.config.ConfigStoreOptions;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Future;
+import io.vertx.core.MultiMap;
 import io.vertx.core.Promise;
 import io.vertx.core.Vertx;
 import io.vertx.core.VertxOptions;
 import io.vertx.core.WorkerExecutor;
-import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.eventbus.EventBusOptions;
 import io.vertx.core.http.Cookie;
 import io.vertx.core.http.HttpClientOptions;
@@ -66,7 +61,6 @@ import io.vertx.core.http.HttpHeaders;
 import io.vertx.core.http.HttpServerOptions;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.core.MultiMap;
 import io.vertx.core.net.JksOptions;
 import io.vertx.core.net.PemKeyCertOptions;
 import io.vertx.core.spi.cluster.ClusterManager;
@@ -76,7 +70,6 @@ import io.vertx.ext.auth.oauth2.OAuth2FlowType;
 import io.vertx.ext.auth.oauth2.OAuth2Options;
 import io.vertx.ext.auth.oauth2.authorization.KeycloakAuthorization;
 import io.vertx.ext.auth.oauth2.providers.ComputateOpenIDConnectAuth;
-import io.vertx.ext.auth.oauth2.providers.OpenIDConnectAuth;
 import io.vertx.ext.bridge.PermittedOptions;
 import io.vertx.ext.healthchecks.HealthCheckHandler;
 import io.vertx.ext.healthchecks.Status;
@@ -434,6 +427,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 	private Future<Void> configureOpenApi() {
 		Promise<Void> promise = Promise.promise();
 		try {
+			LocalDateTime now1 = LocalDateTime.now();
 			String siteBaseUrl = config().getString(ConfigKeys.SITE_BASE_URL);
 
 			OAuth2Options oauth2ClientOptions = new OAuth2Options();
@@ -454,7 +448,8 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 
 			ComputateOpenIDConnectAuth.discover(vertx, oauth2ClientOptions, a -> {
 				if(a.succeeded()) {
-					LOG.info(String.format("%s Call to discover succeeded", Thread.currentThread().getName()));
+					LocalDateTime now2 = LocalDateTime.now();
+					LOG.info(String.format("%s %sms Call to discover succeeded", Thread.currentThread().getName(), Duration.between(now1, now2).toMillis()));
 					oauth2AuthenticationProvider = a.result();
 
 					authorizationProvider = KeycloakAuthorization.create();
@@ -471,9 +466,11 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 					if(StringUtils.startsWith(siteBaseUrl, "https://"))
 						sessionHandler.setCookieSecureFlag(true);
 			
-					LOG.info(String.format("%s Start openapi router builder create", Thread.currentThread().getName()));
+					LocalDateTime now3 = LocalDateTime.now();
+					LOG.info(String.format("%s %sms Start openapi router builder create", Thread.currentThread().getName(), Duration.between(now2, now3).toMillis()));
 					RouterBuilder.create(vertx, "webroot/openapi3-enUS.yml", b -> {
-						LOG.info(String.format("%s Completed openapi router builder create", Thread.currentThread().getName()));
+						LocalDateTime now4 = LocalDateTime.now();
+						LOG.info(String.format("%s %sms Completed openapi router builder create", Thread.currentThread().getName(), Duration.between(now3, now4).toMillis()));
 						if (b.succeeded()) {
 							RouterBuilder routerBuilder = b.result();
 							routerBuilder.mountServicesFromExtensions();
@@ -553,7 +550,8 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 							router = routerBuilder.createRouter();
 			
 							LOG.info(configureOpenApiSuccess);
-							LOG.info(String.format("%s OpenAPI setup completed", Thread.currentThread().getName()));
+							LocalDateTime now5 = LocalDateTime.now();
+							LOG.info(String.format("%s %sms OpenAPI setup completed", Thread.currentThread().getName(), Duration.between(now4, now5).toMillis()));
 							promise.complete();
 						} else {
 							Exception ex = new RuntimeException("OpenID Connect Discovery failed", b.cause());
@@ -562,8 +560,9 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 						}
 					});
 				} else {
+					LocalDateTime now6 = LocalDateTime.now();
 					Exception ex = new RuntimeException("OpenID Connect Discovery failed", a.cause());
-					LOG.error(configureOpenApiError, ex);
+					LOG.error(String.format("%s %sms %s", Thread.currentThread().getName(), Duration.between(now1, now6).toMillis(), configureOpenApiError));
 					promise.fail(ex);
 				}
 			});
