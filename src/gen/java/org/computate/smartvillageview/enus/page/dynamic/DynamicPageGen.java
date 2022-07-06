@@ -210,6 +210,93 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 		return DynamicPage.staticSearchStrPageId(siteRequest_, DynamicPage.staticSearchPageId(siteRequest_, DynamicPage.staticSetPageId(siteRequest_, o)));
 	}
 
+	//////////
+	// vars //
+	//////////
+
+	/**	 The entity vars
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonIgnore
+	@JsonInclude(Include.NON_NULL)
+	protected Map<String, String> vars;
+
+	/**	<br> The entity vars
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.dynamic.DynamicPage&fq=entiteVar_enUS_indexed_string:vars">Find the entity vars in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _vars(Wrap<Map<String, String>> w);
+
+	public Map<String, String> getVars() {
+		return vars;
+	}
+
+	public void setVars(Map<String, String> vars) {
+		this.vars = vars;
+	}
+	public static Map<String, String> staticSetVars(SiteRequestEnUS siteRequest_, String o) {
+		return null;
+	}
+	protected DynamicPage varsInit() {
+		Wrap<Map<String, String>> varsWrap = new Wrap<Map<String, String>>().var("vars");
+		if(vars == null) {
+			_vars(varsWrap);
+			setVars(varsWrap.o);
+		}
+		return (DynamicPage)this;
+	}
+
+	/////////////////
+	// filterLabel //
+	/////////////////
+
+	/**	 The entity filterLabel
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String filterLabel;
+
+	/**	<br> The entity filterLabel
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.dynamic.DynamicPage&fq=entiteVar_enUS_indexed_string:filterLabel">Find the entity filterLabel in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _filterLabel(Wrap<String> w);
+
+	public String getFilterLabel() {
+		return filterLabel;
+	}
+	public void setFilterLabel(String o) {
+		this.filterLabel = DynamicPage.staticSetFilterLabel(siteRequest_, o);
+	}
+	public static String staticSetFilterLabel(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected DynamicPage filterLabelInit() {
+		Wrap<String> filterLabelWrap = new Wrap<String>().var("filterLabel");
+		if(filterLabel == null) {
+			_filterLabel(filterLabelWrap);
+			setFilterLabel(filterLabelWrap.o);
+		}
+		return (DynamicPage)this;
+	}
+
+	public static String staticSearchFilterLabel(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrFilterLabel(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqFilterLabel(SiteRequestEnUS siteRequest_, String o) {
+		return DynamicPage.staticSearchStrFilterLabel(siteRequest_, DynamicPage.staticSearchFilterLabel(siteRequest_, DynamicPage.staticSetFilterLabel(siteRequest_, o)));
+	}
+
 	/////////////
 	// htmList //
 	/////////////
@@ -301,6 +388,40 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 	}
 	protected DynamicPage htmTitleInit() {
 		_htmTitle(htmTitle);
+		return (DynamicPage)this;
+	}
+
+	/////////////
+	// htmMeta //
+	/////////////
+
+	/**	 The entity htmMeta
+	 *	 It is constructed before being initialized with the constructor by default. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected JsonArray htmMeta = new JsonArray();
+
+	/**	<br> The entity htmMeta
+	 *  It is constructed before being initialized with the constructor by default. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.dynamic.DynamicPage&fq=entiteVar_enUS_indexed_string:htmMeta">Find the entity htmMeta in Solr</a>
+	 * <br>
+	 * @param l is the entity already constructed. 
+	 **/
+	protected abstract void _htmMeta(JsonArray l);
+
+	public JsonArray getHtmMeta() {
+		return htmMeta;
+	}
+
+	public void setHtmMeta(JsonArray htmMeta) {
+		this.htmMeta = htmMeta;
+	}
+	public static JsonArray staticSetHtmMeta(SiteRequestEnUS siteRequest_, String o) {
+		return null;
+	}
+	protected DynamicPage htmMetaInit() {
+		_htmMeta(htmMeta);
 		return (DynamicPage)this;
 	}
 
@@ -593,6 +714,8 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 				pageInit();
 				uriInit();
 				pageIdInit();
+				varsInit();
+				filterLabelInit();
 				promise2.complete();
 			} catch(Exception ex) {
 				promise2.fail(ex);
@@ -610,6 +733,7 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 			Promise<Void> promise2 = Promise.promise();
 			try {
 				htmTitleInit();
+				htmMetaInit();
 				htmBodyInit();
 				pageResponseInit();
 				defaultZoneIdInit();
@@ -677,10 +801,16 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 				return oDynamicPage.uri;
 			case "pageId":
 				return oDynamicPage.pageId;
+			case "vars":
+				return oDynamicPage.vars;
+			case "filterLabel":
+				return oDynamicPage.filterLabel;
 			case "htmList":
 				return oDynamicPage.htmList;
 			case "htmTitle":
 				return oDynamicPage.htmTitle;
+			case "htmMeta":
+				return oDynamicPage.htmMeta;
 			case "htmBody":
 				return oDynamicPage.htmBody;
 			case "pageResponse":
@@ -738,6 +868,8 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 			return DynamicPage.staticSetUri(siteRequest_, o);
 		case "pageId":
 			return DynamicPage.staticSetPageId(siteRequest_, o);
+		case "filterLabel":
+			return DynamicPage.staticSetFilterLabel(siteRequest_, o);
 		case "pageResponse":
 			return DynamicPage.staticSetPageResponse(siteRequest_, o);
 		case "defaultZoneId":
@@ -764,6 +896,8 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 			return DynamicPage.staticSearchUri(siteRequest_, (String)o);
 		case "pageId":
 			return DynamicPage.staticSearchPageId(siteRequest_, (String)o);
+		case "filterLabel":
+			return DynamicPage.staticSearchFilterLabel(siteRequest_, (String)o);
 		case "pageResponse":
 			return DynamicPage.staticSearchPageResponse(siteRequest_, (String)o);
 		case "defaultZoneId":
@@ -790,6 +924,8 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 			return DynamicPage.staticSearchStrUri(siteRequest_, (String)o);
 		case "pageId":
 			return DynamicPage.staticSearchStrPageId(siteRequest_, (String)o);
+		case "filterLabel":
+			return DynamicPage.staticSearchStrFilterLabel(siteRequest_, (String)o);
 		case "pageResponse":
 			return DynamicPage.staticSearchStrPageResponse(siteRequest_, (String)o);
 		case "defaultZoneId":
@@ -816,6 +952,8 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 			return DynamicPage.staticSearchFqUri(siteRequest_, o);
 		case "pageId":
 			return DynamicPage.staticSearchFqPageId(siteRequest_, o);
+		case "filterLabel":
+			return DynamicPage.staticSearchFqFilterLabel(siteRequest_, o);
 		case "pageResponse":
 			return DynamicPage.staticSearchFqPageResponse(siteRequest_, o);
 		case "defaultZoneId":
@@ -843,8 +981,11 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 	public static final String VAR_page = "page";
 	public static final String VAR_uri = "uri";
 	public static final String VAR_pageId = "pageId";
+	public static final String VAR_vars = "vars";
+	public static final String VAR_filterLabel = "filterLabel";
 	public static final String VAR_htmList = "htmList";
 	public static final String VAR_htmTitle = "htmTitle";
+	public static final String VAR_htmMeta = "htmMeta";
 	public static final String VAR_htmBody = "htmBody";
 	public static final String VAR_pageResponse = "pageResponse";
 	public static final String VAR_defaultZoneId = "defaultZoneId";
@@ -855,8 +996,11 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 	public static final String DISPLAY_NAME_page = "";
 	public static final String DISPLAY_NAME_uri = "";
 	public static final String DISPLAY_NAME_pageId = "";
+	public static final String DISPLAY_NAME_vars = "";
+	public static final String DISPLAY_NAME_filterLabel = "";
 	public static final String DISPLAY_NAME_htmList = "";
 	public static final String DISPLAY_NAME_htmTitle = "";
+	public static final String DISPLAY_NAME_htmMeta = "";
 	public static final String DISPLAY_NAME_htmBody = "";
 	public static final String DISPLAY_NAME_pageResponse = "";
 	public static final String DISPLAY_NAME_defaultZoneId = "";
@@ -875,10 +1019,16 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 			return DISPLAY_NAME_uri;
 		case VAR_pageId:
 			return DISPLAY_NAME_pageId;
+		case VAR_vars:
+			return DISPLAY_NAME_vars;
+		case VAR_filterLabel:
+			return DISPLAY_NAME_filterLabel;
 		case VAR_htmList:
 			return DISPLAY_NAME_htmList;
 		case VAR_htmTitle:
 			return DISPLAY_NAME_htmTitle;
+		case VAR_htmMeta:
+			return DISPLAY_NAME_htmMeta;
 		case VAR_htmBody:
 			return DISPLAY_NAME_htmBody;
 		case VAR_pageResponse:

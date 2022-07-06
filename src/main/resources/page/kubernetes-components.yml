@@ -1,6 +1,6 @@
 ---
 uri: /en-us/kubernetes-components
-h1: What Kubernetes components are used in the {{ page.SITE_DISPLAY_NAME }}? 
+h1: What Kubernetes components are used in {{ page.siteDisplayName }}? 
 h2: Both Kubernetes API objects and OpenShift API Objects
 created: "2022-05-12"
 courseNum: 1
@@ -9,7 +9,7 @@ author:
   name: Christopher Tate
   title: Red Hat Principal Software Consultant
 htmTitle:
-  - text: Kubernetes and OpenShift Components of the {{ page.SITE_DISPLAY_NAME }}
+  - text: Kubernetes and OpenShift Components of {{ page.siteDisplayName }}
 pageImageUri: /png/k8s-components-sample.png
 htmBody:
   - e: div
@@ -19,7 +19,7 @@ htmBody:
       - e: h1
         a:
           class: w3-text-2017-shaded-spruce w3-monospace 
-        text: Kubernetes and OpenShift Components of the {{ page.SITE_DISPLAY_NAME }}
+        text: Kubernetes and OpenShift Components of {{ page.siteDisplayName }}
       - e: div
         a:
           class: font-style-italic 

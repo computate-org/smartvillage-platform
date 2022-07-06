@@ -1,9 +1,6 @@
 ---
 SITE_NAME: "{{ SITE_NAME }}"
 SITE_DISPLAY_NAME: "{{ SITE_DISPLAY_NAME }}"
-RUN_OPENAPI3_GENERATOR: {{ RUN_OPENAPI3_GENERATOR | lower }}
-RUN_SQL_GENERATOR: {{ RUN_SQL_GENERATOR | lower }}
-RUN_ARTICLE_GENERATOR: {{ RUN_ARTICLE_GENERATOR | lower }}
 GITHUB_ORG: "{{ GITHUB_ORG }}"
 QUAYIO_ORG: "{{ QUAYIO_ORG }}"
 PROJECT_POWERED_BY_URL: "{{ PROJECT_POWERED_BY_URL }}"
@@ -80,29 +77,29 @@ WRITE_COMMENTS: true
 
 # Enable data import in the site. 
 ENABLE_IMPORT_DATA: {{ ENABLE_IMPORT_DATA | lower }}
-ENABLE_IMPORT_DATA_SiteHtm: true
-ENABLE_IMPORT_DATA_TimeStep: true
-ENABLE_IMPORT_DATA_TrafficSimulation: true
 ENABLE_IMPORT_DATA_IotNode: true
+ENABLE_IMPORT_DATA_TrafficSimulation: true
+ENABLE_IMPORT_DATA_TimeStep: true
 ENABLE_IMPORT_DATA_VehicleStep: true
 ENABLE_IMPORT_DATA_SitePage: true
+ENABLE_IMPORT_DATA_SiteHtm: true
 
 # The Auth roles required to be an admin in the site. 
 AUTH_ROLES_ADMIN: {{ AUTH_ROLES_ADMIN }}
 # The Auth roles required to add and modify site user records. 
 AUTH_ROLES_REQUIRED_SiteUser: ['SiteAdmin']
-# The Auth roles required to add and modify HTML records. 
-AUTH_ROLES_REQUIRED_SiteHtm: ['SiteAdmin']
-# The Auth roles required to add and modify time step records. 
-AUTH_ROLES_REQUIRED_TimeStep: ['SiteAdmin']
-# The Auth roles required to add and modify traffic simulation records. 
-AUTH_ROLES_REQUIRED_TrafficSimulation: ['SiteAdmin']
 # The Auth roles required to add and modify IOT node records. 
 AUTH_ROLES_REQUIRED_IotNode: ['SiteAdmin']
+# The Auth roles required to add and modify traffic simulation records. 
+AUTH_ROLES_REQUIRED_TrafficSimulation: ['SiteAdmin']
+# The Auth roles required to add and modify time step records. 
+AUTH_ROLES_REQUIRED_TimeStep: ['SiteAdmin']
 # The Auth roles required to add and modify vehicle step records. 
 AUTH_ROLES_REQUIRED_VehicleStep: ['SiteAdmin']
 # The Auth roles required to add and modify article records. 
 AUTH_ROLES_REQUIRED_SitePage: ['SiteAdmin']
+# The Auth roles required to add and modify HTML records. 
+AUTH_ROLES_REQUIRED_SiteHtm: ['SiteAdmin']
 
 YGGIO_HOST_NAME: "{{ YGGIO_HOST_NAME }}"
 YGGIO_PORT: {{ YGGIO_PORT }}
@@ -111,5 +108,5 @@ YGGIO_USERNAME: "{{ YGGIO_USERNAME }}"
 YGGIO_PASSWORD: "{{ YGGIO_PASSWORD }}"
 YGGIO_API_RELATIVE_URI_IotNode: /api/iotnodes
 YGGIO_AUTH_LOCAL_URI: /api/auth/local
-MAP_DEFAULT_LOCATION: "55.61888,13.548799"
-MAP_DEFAULT_ZOOM: "3"
+DEFAULT_MAP_LOCATION: "55.61888,13.548799"
+DEFAULT_MAP_ZOOM: "3"

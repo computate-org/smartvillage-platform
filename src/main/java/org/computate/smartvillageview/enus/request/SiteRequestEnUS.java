@@ -272,7 +272,8 @@ public class SiteRequestEnUS extends SiteRequestEnUSGen<Object> implements Compu
 		o.setConfig(config); // for site configuration info
 		o.setWebClient(webClient); // for performing searches
 		o.setServiceRequest(serviceRequest);  // for info about the original request
-		o.setUser(user); // The user principal
+		o.setUser(user); // The user
+		o.setUserPrincipal(userPrincipal); // The user principal
 		o.setUserKey(userKey); // The user primary key
 		o.setUserId(userId); // The user identifier in the authentication system
 		o.setApiRequest_(apiRequest_); // The current API request information

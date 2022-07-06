@@ -244,7 +244,7 @@
 {{/eq}}
 {{/each}}
 {{#if ./stats/min }}
-									<div>									<span> step </span>									<input id="animateStatsStep" placeholder="step" value="1" style="width: 4em; "/>									<span> max </span>									<input id="animateStatsMin" placeholder="min" value="{{ ./stats/min }}" style="width: 4em; "/>									<span> max </span>									<input id="animateStatsMax" placeholder="max" value="{{ ./stats/max }}" style="width: 4em; "/>									<span> speed in seconds </span>									<input id="animateStatsSpeed" placeholder="speed" value="1" style="width: 4em; "/>									<button onclick="animateStats(); ">animate</button>									</div>{{/if}}
+									<div>									<span> step </span>									<input id="animateStatsStep" placeholder="step" value="1" style="width: 4em; "/>									<span> min </span>									<input id="animateStatsMin" placeholder="min" value="{{ ./stats/min }}" style="width: 4em; "/>									<span> max </span>									<input id="animateStatsMax" placeholder="max" value="{{ ./stats/max }}" style="width: 4em; "/>									<span> speed in seconds </span>									<input id="animateStatsSpeed" placeholder="speed" value="1" style="width: 4em; "/>									<button onclick="animateStats(); ">animate</button>									</div>{{/if}}
 {{/if}}
 											</div>
 										</td>
@@ -1308,6 +1308,73 @@
 		{{/ifContainsAnyRoles}}
 {{/inline}}
 
+{{#*inline "htmLabels"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SiteHtmLabels">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-navy-peony">
+													<label for="{{classApiMethodMethod}}_labels">Labels</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputLabels"}}
+													</div>
+	{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-navy-peony "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_labels')); $('#{{classApiMethodMethod}}_labels').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SiteHtmForm :input[name=id]').val() }], 'setLabels', null, function() { addGlow($('#{{classApiMethodMethod}}_labels')); }, function() { addError($('#{{classApiMethodMethod}}_labels')); }); "
+																		>
+																	<i class="far fa-eraser "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/ifContainsAnyRoles}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputLabels"}}
+		{{#ifContainsAnyRoles roles rolesRequired}}
+														<input
+															type="text"
+															placeholder="Labels"
+															title="A list of labels"
+															id="{{classApiMethodMethod}}_labels"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setLabels classSiteHtm inputSiteHtm{{id}}Labels w3-input w3-border "
+																name="setLabels"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setLabels classSiteHtm inputSiteHtm{{id}}Labels w3-input w3-border "
+																name="setLabels"
+		{{else}}
+																class="valueLabels w3-input w3-border classSiteHtm inputSiteHtm{{id}}Labels w3-input w3-border "
+																name="labels"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setLabels', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_labels')); }, function() { addError($('#{{classApiMethodMethod}}_labels')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{siteHtm_.labels}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varSiteHtm{{id}}Labels ">{{siteHtm_.labels}}</span>
+			{{/ifContainsKeys}}
+		{{/ifContainsAnyRoles}}
+{{/inline}}
+
 {{#*inline "htmEBefore"}}
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									<div class="w3-padding ">
@@ -1572,6 +1639,73 @@
 													{{else}}
 														{{#ifContainsKeys userKeys}}
 															<span class="varSiteHtm{{id}}Text ">{{siteHtm_.text}}</span>
+			{{/ifContainsKeys}}
+		{{/ifContainsAnyRoles}}
+{{/inline}}
+
+{{#*inline "htmComment"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SiteHtmComment">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-navy-peony">
+													<label for="{{classApiMethodMethod}}_comment">Text</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputComment"}}
+													</div>
+	{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-navy-peony "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_comment')); $('#{{classApiMethodMethod}}_comment').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SiteHtmForm :input[name=id]').val() }], 'setComment', null, function() { addGlow($('#{{classApiMethodMethod}}_comment')); }, function() { addError($('#{{classApiMethodMethod}}_comment')); }); "
+																		>
+																	<i class="far fa-eraser "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/ifContainsAnyRoles}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputComment"}}
+		{{#ifContainsAnyRoles roles rolesRequired}}
+														<input
+															type="text"
+															placeholder="Text"
+															title="The text. "
+															id="{{classApiMethodMethod}}_comment"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setComment classSiteHtm inputSiteHtm{{id}}Comment w3-input w3-border "
+																name="setComment"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setComment classSiteHtm inputSiteHtm{{id}}Comment w3-input w3-border "
+																name="setComment"
+		{{else}}
+																class="valueComment w3-input w3-border classSiteHtm inputSiteHtm{{id}}Comment w3-input w3-border "
+																name="comment"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setComment', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_comment')); }, function() { addError($('#{{classApiMethodMethod}}_comment')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{siteHtm_.comment}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varSiteHtm{{id}}Comment ">{{siteHtm_.comment}}</span>
 			{{/ifContainsKeys}}
 		{{/ifContainsAnyRoles}}
 {{/inline}}

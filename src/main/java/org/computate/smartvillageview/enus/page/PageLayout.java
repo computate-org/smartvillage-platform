@@ -84,23 +84,19 @@ public class PageLayout extends PageLayoutGen<Object> {
 		w.o(siteRequest_.getConfig().getString(ConfigKeys.STATIC_BASE_URL));
 	}
 
-	protected void _STATIC_BASE_URL(Wrap<String> w) {
-		w.o(siteRequest_.getConfig().getString(ConfigKeys.STATIC_BASE_URL));
-	}
-
-	protected void _SITE_BASE_URL(Wrap<String> w) {
+	protected void _siteBaseUrl(Wrap<String> w) {
 		w.o(siteRequest_.getConfig().getString(ConfigKeys.SITE_BASE_URL));
 	}
 
-	protected void _SITE_AUTH_URL(Wrap<String> w) {
+	protected void _siteAuthUrl(Wrap<String> w) {
 		w.o(siteRequest_.getConfig().getString(ConfigKeys.AUTH_URL));
 	}
 
-	protected void _SITE_AUTH_REALM(Wrap<String> w) {
+	protected void _siteAuthRealm(Wrap<String> w) {
 		w.o(siteRequest_.getConfig().getString(ConfigKeys.AUTH_REALM));
 	}
 
-	protected void _FONTAWESOME_KIT(Wrap<String> w) {
+	protected void _fontAwesomeKit(Wrap<String> w) {
 		w.o(siteRequest_.getConfig().getString(ConfigKeys.FONTAWESOME_KIT));
 	}
 
@@ -109,6 +105,14 @@ public class PageLayout extends PageLayoutGen<Object> {
 	 */
 	protected void _pageUri(Wrap<String> w) {
 		w.o(Optional.ofNullable(serviceRequest).map(r -> r.getExtra()).map(e -> e.getString("uri")).orElse(null));
+	}
+
+	/**
+	 * Description: The current page name
+	 */
+	protected void _pageId(Wrap<String> w) {
+		if(pageUri != null)
+			w.o(StringUtils.substringAfterLast(pageUri, "/"));
 	}
 
 	/**

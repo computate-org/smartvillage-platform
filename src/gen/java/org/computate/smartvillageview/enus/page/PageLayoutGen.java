@@ -324,249 +324,200 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		return PageLayout.staticSearchStrStaticBaseUrl(siteRequest_, PageLayout.staticSearchStaticBaseUrl(siteRequest_, PageLayout.staticSetStaticBaseUrl(siteRequest_, o)));
 	}
 
-	/////////////////////
-	// STATIC_BASE_URL //
-	/////////////////////
+	/////////////////
+	// siteBaseUrl //
+	/////////////////
 
-	/**	 The entity STATIC_BASE_URL
+	/**	 The entity siteBaseUrl
 	 *	 is defined as null before being initialized. 
 	 */
 	@JsonProperty
 	@JsonInclude(Include.NON_NULL)
-	protected String STATIC_BASE_URL;
+	protected String siteBaseUrl;
 
-	/**	<br> The entity STATIC_BASE_URL
+	/**	<br> The entity siteBaseUrl
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.PageLayout&fq=entiteVar_enUS_indexed_string:STATIC_BASE_URL">Find the entity STATIC_BASE_URL in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.PageLayout&fq=entiteVar_enUS_indexed_string:siteBaseUrl">Find the entity siteBaseUrl in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected abstract void _STATIC_BASE_URL(Wrap<String> w);
+	protected abstract void _siteBaseUrl(Wrap<String> w);
 
-	public String getSTATIC_BASE_URL() {
-		return STATIC_BASE_URL;
+	public String getSiteBaseUrl() {
+		return siteBaseUrl;
 	}
-	public void setSTATIC_BASE_URL(String o) {
-		this.STATIC_BASE_URL = PageLayout.staticSetSTATIC_BASE_URL(siteRequest_, o);
+	public void setSiteBaseUrl(String o) {
+		this.siteBaseUrl = PageLayout.staticSetSiteBaseUrl(siteRequest_, o);
 	}
-	public static String staticSetSTATIC_BASE_URL(SiteRequestEnUS siteRequest_, String o) {
+	public static String staticSetSiteBaseUrl(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	protected PageLayout STATIC_BASE_URLInit() {
-		Wrap<String> STATIC_BASE_URLWrap = new Wrap<String>().var("STATIC_BASE_URL");
-		if(STATIC_BASE_URL == null) {
-			_STATIC_BASE_URL(STATIC_BASE_URLWrap);
-			setSTATIC_BASE_URL(STATIC_BASE_URLWrap.o);
+	protected PageLayout siteBaseUrlInit() {
+		Wrap<String> siteBaseUrlWrap = new Wrap<String>().var("siteBaseUrl");
+		if(siteBaseUrl == null) {
+			_siteBaseUrl(siteBaseUrlWrap);
+			setSiteBaseUrl(siteBaseUrlWrap.o);
 		}
 		return (PageLayout)this;
 	}
 
-	public static String staticSearchSTATIC_BASE_URL(SiteRequestEnUS siteRequest_, String o) {
+	public static String staticSearchSiteBaseUrl(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
 
-	public static String staticSearchStrSTATIC_BASE_URL(SiteRequestEnUS siteRequest_, String o) {
+	public static String staticSearchStrSiteBaseUrl(SiteRequestEnUS siteRequest_, String o) {
 		return o == null ? null : o.toString();
 	}
 
-	public static String staticSearchFqSTATIC_BASE_URL(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrSTATIC_BASE_URL(siteRequest_, PageLayout.staticSearchSTATIC_BASE_URL(siteRequest_, PageLayout.staticSetSTATIC_BASE_URL(siteRequest_, o)));
+	public static String staticSearchFqSiteBaseUrl(SiteRequestEnUS siteRequest_, String o) {
+		return PageLayout.staticSearchStrSiteBaseUrl(siteRequest_, PageLayout.staticSearchSiteBaseUrl(siteRequest_, PageLayout.staticSetSiteBaseUrl(siteRequest_, o)));
+	}
+
+	/////////////////
+	// siteAuthUrl //
+	/////////////////
+
+	/**	 The entity siteAuthUrl
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String siteAuthUrl;
+
+	/**	<br> The entity siteAuthUrl
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.PageLayout&fq=entiteVar_enUS_indexed_string:siteAuthUrl">Find the entity siteAuthUrl in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _siteAuthUrl(Wrap<String> w);
+
+	public String getSiteAuthUrl() {
+		return siteAuthUrl;
+	}
+	public void setSiteAuthUrl(String o) {
+		this.siteAuthUrl = PageLayout.staticSetSiteAuthUrl(siteRequest_, o);
+	}
+	public static String staticSetSiteAuthUrl(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected PageLayout siteAuthUrlInit() {
+		Wrap<String> siteAuthUrlWrap = new Wrap<String>().var("siteAuthUrl");
+		if(siteAuthUrl == null) {
+			_siteAuthUrl(siteAuthUrlWrap);
+			setSiteAuthUrl(siteAuthUrlWrap.o);
+		}
+		return (PageLayout)this;
+	}
+
+	public static String staticSearchSiteAuthUrl(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrSiteAuthUrl(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqSiteAuthUrl(SiteRequestEnUS siteRequest_, String o) {
+		return PageLayout.staticSearchStrSiteAuthUrl(siteRequest_, PageLayout.staticSearchSiteAuthUrl(siteRequest_, PageLayout.staticSetSiteAuthUrl(siteRequest_, o)));
 	}
 
 	///////////////////
-	// SITE_BASE_URL //
+	// siteAuthRealm //
 	///////////////////
 
-	/**	 The entity SITE_BASE_URL
+	/**	 The entity siteAuthRealm
 	 *	 is defined as null before being initialized. 
 	 */
 	@JsonProperty
 	@JsonInclude(Include.NON_NULL)
-	protected String SITE_BASE_URL;
+	protected String siteAuthRealm;
 
-	/**	<br> The entity SITE_BASE_URL
+	/**	<br> The entity siteAuthRealm
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.PageLayout&fq=entiteVar_enUS_indexed_string:SITE_BASE_URL">Find the entity SITE_BASE_URL in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.PageLayout&fq=entiteVar_enUS_indexed_string:siteAuthRealm">Find the entity siteAuthRealm in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected abstract void _SITE_BASE_URL(Wrap<String> w);
+	protected abstract void _siteAuthRealm(Wrap<String> w);
 
-	public String getSITE_BASE_URL() {
-		return SITE_BASE_URL;
+	public String getSiteAuthRealm() {
+		return siteAuthRealm;
 	}
-	public void setSITE_BASE_URL(String o) {
-		this.SITE_BASE_URL = PageLayout.staticSetSITE_BASE_URL(siteRequest_, o);
+	public void setSiteAuthRealm(String o) {
+		this.siteAuthRealm = PageLayout.staticSetSiteAuthRealm(siteRequest_, o);
 	}
-	public static String staticSetSITE_BASE_URL(SiteRequestEnUS siteRequest_, String o) {
+	public static String staticSetSiteAuthRealm(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	protected PageLayout SITE_BASE_URLInit() {
-		Wrap<String> SITE_BASE_URLWrap = new Wrap<String>().var("SITE_BASE_URL");
-		if(SITE_BASE_URL == null) {
-			_SITE_BASE_URL(SITE_BASE_URLWrap);
-			setSITE_BASE_URL(SITE_BASE_URLWrap.o);
+	protected PageLayout siteAuthRealmInit() {
+		Wrap<String> siteAuthRealmWrap = new Wrap<String>().var("siteAuthRealm");
+		if(siteAuthRealm == null) {
+			_siteAuthRealm(siteAuthRealmWrap);
+			setSiteAuthRealm(siteAuthRealmWrap.o);
 		}
 		return (PageLayout)this;
 	}
 
-	public static String staticSearchSITE_BASE_URL(SiteRequestEnUS siteRequest_, String o) {
+	public static String staticSearchSiteAuthRealm(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
 
-	public static String staticSearchStrSITE_BASE_URL(SiteRequestEnUS siteRequest_, String o) {
+	public static String staticSearchStrSiteAuthRealm(SiteRequestEnUS siteRequest_, String o) {
 		return o == null ? null : o.toString();
 	}
 
-	public static String staticSearchFqSITE_BASE_URL(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrSITE_BASE_URL(siteRequest_, PageLayout.staticSearchSITE_BASE_URL(siteRequest_, PageLayout.staticSetSITE_BASE_URL(siteRequest_, o)));
+	public static String staticSearchFqSiteAuthRealm(SiteRequestEnUS siteRequest_, String o) {
+		return PageLayout.staticSearchStrSiteAuthRealm(siteRequest_, PageLayout.staticSearchSiteAuthRealm(siteRequest_, PageLayout.staticSetSiteAuthRealm(siteRequest_, o)));
 	}
 
-	///////////////////
-	// SITE_AUTH_URL //
-	///////////////////
+	////////////////////
+	// fontAwesomeKit //
+	////////////////////
 
-	/**	 The entity SITE_AUTH_URL
+	/**	 The entity fontAwesomeKit
 	 *	 is defined as null before being initialized. 
 	 */
 	@JsonProperty
 	@JsonInclude(Include.NON_NULL)
-	protected String SITE_AUTH_URL;
+	protected String fontAwesomeKit;
 
-	/**	<br> The entity SITE_AUTH_URL
+	/**	<br> The entity fontAwesomeKit
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.PageLayout&fq=entiteVar_enUS_indexed_string:SITE_AUTH_URL">Find the entity SITE_AUTH_URL in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.PageLayout&fq=entiteVar_enUS_indexed_string:fontAwesomeKit">Find the entity fontAwesomeKit in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected abstract void _SITE_AUTH_URL(Wrap<String> w);
+	protected abstract void _fontAwesomeKit(Wrap<String> w);
 
-	public String getSITE_AUTH_URL() {
-		return SITE_AUTH_URL;
+	public String getFontAwesomeKit() {
+		return fontAwesomeKit;
 	}
-	public void setSITE_AUTH_URL(String o) {
-		this.SITE_AUTH_URL = PageLayout.staticSetSITE_AUTH_URL(siteRequest_, o);
+	public void setFontAwesomeKit(String o) {
+		this.fontAwesomeKit = PageLayout.staticSetFontAwesomeKit(siteRequest_, o);
 	}
-	public static String staticSetSITE_AUTH_URL(SiteRequestEnUS siteRequest_, String o) {
+	public static String staticSetFontAwesomeKit(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	protected PageLayout SITE_AUTH_URLInit() {
-		Wrap<String> SITE_AUTH_URLWrap = new Wrap<String>().var("SITE_AUTH_URL");
-		if(SITE_AUTH_URL == null) {
-			_SITE_AUTH_URL(SITE_AUTH_URLWrap);
-			setSITE_AUTH_URL(SITE_AUTH_URLWrap.o);
+	protected PageLayout fontAwesomeKitInit() {
+		Wrap<String> fontAwesomeKitWrap = new Wrap<String>().var("fontAwesomeKit");
+		if(fontAwesomeKit == null) {
+			_fontAwesomeKit(fontAwesomeKitWrap);
+			setFontAwesomeKit(fontAwesomeKitWrap.o);
 		}
 		return (PageLayout)this;
 	}
 
-	public static String staticSearchSITE_AUTH_URL(SiteRequestEnUS siteRequest_, String o) {
+	public static String staticSearchFontAwesomeKit(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
 
-	public static String staticSearchStrSITE_AUTH_URL(SiteRequestEnUS siteRequest_, String o) {
+	public static String staticSearchStrFontAwesomeKit(SiteRequestEnUS siteRequest_, String o) {
 		return o == null ? null : o.toString();
 	}
 
-	public static String staticSearchFqSITE_AUTH_URL(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrSITE_AUTH_URL(siteRequest_, PageLayout.staticSearchSITE_AUTH_URL(siteRequest_, PageLayout.staticSetSITE_AUTH_URL(siteRequest_, o)));
-	}
-
-	/////////////////////
-	// SITE_AUTH_REALM //
-	/////////////////////
-
-	/**	 The entity SITE_AUTH_REALM
-	 *	 is defined as null before being initialized. 
-	 */
-	@JsonProperty
-	@JsonInclude(Include.NON_NULL)
-	protected String SITE_AUTH_REALM;
-
-	/**	<br> The entity SITE_AUTH_REALM
-	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.PageLayout&fq=entiteVar_enUS_indexed_string:SITE_AUTH_REALM">Find the entity SITE_AUTH_REALM in Solr</a>
-	 * <br>
-	 * @param w is for wrapping a value to assign to this entity during initialization. 
-	 **/
-	protected abstract void _SITE_AUTH_REALM(Wrap<String> w);
-
-	public String getSITE_AUTH_REALM() {
-		return SITE_AUTH_REALM;
-	}
-	public void setSITE_AUTH_REALM(String o) {
-		this.SITE_AUTH_REALM = PageLayout.staticSetSITE_AUTH_REALM(siteRequest_, o);
-	}
-	public static String staticSetSITE_AUTH_REALM(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-	protected PageLayout SITE_AUTH_REALMInit() {
-		Wrap<String> SITE_AUTH_REALMWrap = new Wrap<String>().var("SITE_AUTH_REALM");
-		if(SITE_AUTH_REALM == null) {
-			_SITE_AUTH_REALM(SITE_AUTH_REALMWrap);
-			setSITE_AUTH_REALM(SITE_AUTH_REALMWrap.o);
-		}
-		return (PageLayout)this;
-	}
-
-	public static String staticSearchSITE_AUTH_REALM(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-
-	public static String staticSearchStrSITE_AUTH_REALM(SiteRequestEnUS siteRequest_, String o) {
-		return o == null ? null : o.toString();
-	}
-
-	public static String staticSearchFqSITE_AUTH_REALM(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrSITE_AUTH_REALM(siteRequest_, PageLayout.staticSearchSITE_AUTH_REALM(siteRequest_, PageLayout.staticSetSITE_AUTH_REALM(siteRequest_, o)));
-	}
-
-	/////////////////////
-	// FONTAWESOME_KIT //
-	/////////////////////
-
-	/**	 The entity FONTAWESOME_KIT
-	 *	 is defined as null before being initialized. 
-	 */
-	@JsonProperty
-	@JsonInclude(Include.NON_NULL)
-	protected String FONTAWESOME_KIT;
-
-	/**	<br> The entity FONTAWESOME_KIT
-	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.PageLayout&fq=entiteVar_enUS_indexed_string:FONTAWESOME_KIT">Find the entity FONTAWESOME_KIT in Solr</a>
-	 * <br>
-	 * @param w is for wrapping a value to assign to this entity during initialization. 
-	 **/
-	protected abstract void _FONTAWESOME_KIT(Wrap<String> w);
-
-	public String getFONTAWESOME_KIT() {
-		return FONTAWESOME_KIT;
-	}
-	public void setFONTAWESOME_KIT(String o) {
-		this.FONTAWESOME_KIT = PageLayout.staticSetFONTAWESOME_KIT(siteRequest_, o);
-	}
-	public static String staticSetFONTAWESOME_KIT(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-	protected PageLayout FONTAWESOME_KITInit() {
-		Wrap<String> FONTAWESOME_KITWrap = new Wrap<String>().var("FONTAWESOME_KIT");
-		if(FONTAWESOME_KIT == null) {
-			_FONTAWESOME_KIT(FONTAWESOME_KITWrap);
-			setFONTAWESOME_KIT(FONTAWESOME_KITWrap.o);
-		}
-		return (PageLayout)this;
-	}
-
-	public static String staticSearchFONTAWESOME_KIT(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-
-	public static String staticSearchStrFONTAWESOME_KIT(SiteRequestEnUS siteRequest_, String o) {
-		return o == null ? null : o.toString();
-	}
-
-	public static String staticSearchFqFONTAWESOME_KIT(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrFONTAWESOME_KIT(siteRequest_, PageLayout.staticSearchFONTAWESOME_KIT(siteRequest_, PageLayout.staticSetFONTAWESOME_KIT(siteRequest_, o)));
+	public static String staticSearchFqFontAwesomeKit(SiteRequestEnUS siteRequest_, String o) {
+		return PageLayout.staticSearchStrFontAwesomeKit(siteRequest_, PageLayout.staticSearchFontAwesomeKit(siteRequest_, PageLayout.staticSetFontAwesomeKit(siteRequest_, o)));
 	}
 
 	/////////////
@@ -616,6 +567,55 @@ public abstract class PageLayoutGen<DEV> extends Object {
 
 	public static String staticSearchFqPageUri(SiteRequestEnUS siteRequest_, String o) {
 		return PageLayout.staticSearchStrPageUri(siteRequest_, PageLayout.staticSearchPageUri(siteRequest_, PageLayout.staticSetPageUri(siteRequest_, o)));
+	}
+
+	////////////
+	// pageId //
+	////////////
+
+	/**	 The entity pageId
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String pageId;
+
+	/**	<br> The entity pageId
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.PageLayout&fq=entiteVar_enUS_indexed_string:pageId">Find the entity pageId in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _pageId(Wrap<String> w);
+
+	public String getPageId() {
+		return pageId;
+	}
+	public void setPageId(String o) {
+		this.pageId = PageLayout.staticSetPageId(siteRequest_, o);
+	}
+	public static String staticSetPageId(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected PageLayout pageIdInit() {
+		Wrap<String> pageIdWrap = new Wrap<String>().var("pageId");
+		if(pageId == null) {
+			_pageId(pageIdWrap);
+			setPageId(pageIdWrap.o);
+		}
+		return (PageLayout)this;
+	}
+
+	public static String staticSearchPageId(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrPageId(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqPageId(SiteRequestEnUS siteRequest_, String o) {
+		return PageLayout.staticSearchStrPageId(siteRequest_, PageLayout.staticSearchPageId(siteRequest_, PageLayout.staticSetPageId(siteRequest_, o)));
 	}
 
 	////////////
@@ -2387,12 +2387,12 @@ public abstract class PageLayoutGen<DEV> extends Object {
 				configInit();
 				serviceRequestInit();
 				staticBaseUrlInit();
-				STATIC_BASE_URLInit();
-				SITE_BASE_URLInit();
-				SITE_AUTH_URLInit();
-				SITE_AUTH_REALMInit();
-				FONTAWESOME_KITInit();
+				siteBaseUrlInit();
+				siteAuthUrlInit();
+				siteAuthRealmInit();
+				fontAwesomeKitInit();
 				pageUriInit();
+				pageIdInit();
 				apiUriInit();
 				pageMethodInit();
 				paramsInit();
@@ -2520,18 +2520,18 @@ public abstract class PageLayoutGen<DEV> extends Object {
 				return oPageLayout.serviceRequest;
 			case "staticBaseUrl":
 				return oPageLayout.staticBaseUrl;
-			case "STATIC_BASE_URL":
-				return oPageLayout.STATIC_BASE_URL;
-			case "SITE_BASE_URL":
-				return oPageLayout.SITE_BASE_URL;
-			case "SITE_AUTH_URL":
-				return oPageLayout.SITE_AUTH_URL;
-			case "SITE_AUTH_REALM":
-				return oPageLayout.SITE_AUTH_REALM;
-			case "FONTAWESOME_KIT":
-				return oPageLayout.FONTAWESOME_KIT;
+			case "siteBaseUrl":
+				return oPageLayout.siteBaseUrl;
+			case "siteAuthUrl":
+				return oPageLayout.siteAuthUrl;
+			case "siteAuthRealm":
+				return oPageLayout.siteAuthRealm;
+			case "fontAwesomeKit":
+				return oPageLayout.fontAwesomeKit;
 			case "pageUri":
 				return oPageLayout.pageUri;
+			case "pageId":
+				return oPageLayout.pageId;
 			case "apiUri":
 				return oPageLayout.apiUri;
 			case "pageMethod":
@@ -2643,18 +2643,18 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSetConfig(siteRequest_, o);
 		case "staticBaseUrl":
 			return PageLayout.staticSetStaticBaseUrl(siteRequest_, o);
-		case "STATIC_BASE_URL":
-			return PageLayout.staticSetSTATIC_BASE_URL(siteRequest_, o);
-		case "SITE_BASE_URL":
-			return PageLayout.staticSetSITE_BASE_URL(siteRequest_, o);
-		case "SITE_AUTH_URL":
-			return PageLayout.staticSetSITE_AUTH_URL(siteRequest_, o);
-		case "SITE_AUTH_REALM":
-			return PageLayout.staticSetSITE_AUTH_REALM(siteRequest_, o);
-		case "FONTAWESOME_KIT":
-			return PageLayout.staticSetFONTAWESOME_KIT(siteRequest_, o);
+		case "siteBaseUrl":
+			return PageLayout.staticSetSiteBaseUrl(siteRequest_, o);
+		case "siteAuthUrl":
+			return PageLayout.staticSetSiteAuthUrl(siteRequest_, o);
+		case "siteAuthRealm":
+			return PageLayout.staticSetSiteAuthRealm(siteRequest_, o);
+		case "fontAwesomeKit":
+			return PageLayout.staticSetFontAwesomeKit(siteRequest_, o);
 		case "pageUri":
 			return PageLayout.staticSetPageUri(siteRequest_, o);
+		case "pageId":
+			return PageLayout.staticSetPageId(siteRequest_, o);
 		case "apiUri":
 			return PageLayout.staticSetApiUri(siteRequest_, o);
 		case "pageMethod":
@@ -2737,18 +2737,18 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSearchConfig(siteRequest_, (JsonObject)o);
 		case "staticBaseUrl":
 			return PageLayout.staticSearchStaticBaseUrl(siteRequest_, (String)o);
-		case "STATIC_BASE_URL":
-			return PageLayout.staticSearchSTATIC_BASE_URL(siteRequest_, (String)o);
-		case "SITE_BASE_URL":
-			return PageLayout.staticSearchSITE_BASE_URL(siteRequest_, (String)o);
-		case "SITE_AUTH_URL":
-			return PageLayout.staticSearchSITE_AUTH_URL(siteRequest_, (String)o);
-		case "SITE_AUTH_REALM":
-			return PageLayout.staticSearchSITE_AUTH_REALM(siteRequest_, (String)o);
-		case "FONTAWESOME_KIT":
-			return PageLayout.staticSearchFONTAWESOME_KIT(siteRequest_, (String)o);
+		case "siteBaseUrl":
+			return PageLayout.staticSearchSiteBaseUrl(siteRequest_, (String)o);
+		case "siteAuthUrl":
+			return PageLayout.staticSearchSiteAuthUrl(siteRequest_, (String)o);
+		case "siteAuthRealm":
+			return PageLayout.staticSearchSiteAuthRealm(siteRequest_, (String)o);
+		case "fontAwesomeKit":
+			return PageLayout.staticSearchFontAwesomeKit(siteRequest_, (String)o);
 		case "pageUri":
 			return PageLayout.staticSearchPageUri(siteRequest_, (String)o);
+		case "pageId":
+			return PageLayout.staticSearchPageId(siteRequest_, (String)o);
 		case "apiUri":
 			return PageLayout.staticSearchApiUri(siteRequest_, (String)o);
 		case "pageMethod":
@@ -2831,18 +2831,18 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSearchStrConfig(siteRequest_, (JsonObject)o);
 		case "staticBaseUrl":
 			return PageLayout.staticSearchStrStaticBaseUrl(siteRequest_, (String)o);
-		case "STATIC_BASE_URL":
-			return PageLayout.staticSearchStrSTATIC_BASE_URL(siteRequest_, (String)o);
-		case "SITE_BASE_URL":
-			return PageLayout.staticSearchStrSITE_BASE_URL(siteRequest_, (String)o);
-		case "SITE_AUTH_URL":
-			return PageLayout.staticSearchStrSITE_AUTH_URL(siteRequest_, (String)o);
-		case "SITE_AUTH_REALM":
-			return PageLayout.staticSearchStrSITE_AUTH_REALM(siteRequest_, (String)o);
-		case "FONTAWESOME_KIT":
-			return PageLayout.staticSearchStrFONTAWESOME_KIT(siteRequest_, (String)o);
+		case "siteBaseUrl":
+			return PageLayout.staticSearchStrSiteBaseUrl(siteRequest_, (String)o);
+		case "siteAuthUrl":
+			return PageLayout.staticSearchStrSiteAuthUrl(siteRequest_, (String)o);
+		case "siteAuthRealm":
+			return PageLayout.staticSearchStrSiteAuthRealm(siteRequest_, (String)o);
+		case "fontAwesomeKit":
+			return PageLayout.staticSearchStrFontAwesomeKit(siteRequest_, (String)o);
 		case "pageUri":
 			return PageLayout.staticSearchStrPageUri(siteRequest_, (String)o);
+		case "pageId":
+			return PageLayout.staticSearchStrPageId(siteRequest_, (String)o);
 		case "apiUri":
 			return PageLayout.staticSearchStrApiUri(siteRequest_, (String)o);
 		case "pageMethod":
@@ -2925,18 +2925,18 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSearchFqConfig(siteRequest_, o);
 		case "staticBaseUrl":
 			return PageLayout.staticSearchFqStaticBaseUrl(siteRequest_, o);
-		case "STATIC_BASE_URL":
-			return PageLayout.staticSearchFqSTATIC_BASE_URL(siteRequest_, o);
-		case "SITE_BASE_URL":
-			return PageLayout.staticSearchFqSITE_BASE_URL(siteRequest_, o);
-		case "SITE_AUTH_URL":
-			return PageLayout.staticSearchFqSITE_AUTH_URL(siteRequest_, o);
-		case "SITE_AUTH_REALM":
-			return PageLayout.staticSearchFqSITE_AUTH_REALM(siteRequest_, o);
-		case "FONTAWESOME_KIT":
-			return PageLayout.staticSearchFqFONTAWESOME_KIT(siteRequest_, o);
+		case "siteBaseUrl":
+			return PageLayout.staticSearchFqSiteBaseUrl(siteRequest_, o);
+		case "siteAuthUrl":
+			return PageLayout.staticSearchFqSiteAuthUrl(siteRequest_, o);
+		case "siteAuthRealm":
+			return PageLayout.staticSearchFqSiteAuthRealm(siteRequest_, o);
+		case "fontAwesomeKit":
+			return PageLayout.staticSearchFqFontAwesomeKit(siteRequest_, o);
 		case "pageUri":
 			return PageLayout.staticSearchFqPageUri(siteRequest_, o);
+		case "pageId":
+			return PageLayout.staticSearchFqPageId(siteRequest_, o);
 		case "apiUri":
 			return PageLayout.staticSearchFqApiUri(siteRequest_, o);
 		case "pageMethod":
@@ -3020,12 +3020,12 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	public static final String VAR_config = "config";
 	public static final String VAR_serviceRequest = "serviceRequest";
 	public static final String VAR_staticBaseUrl = "staticBaseUrl";
-	public static final String VAR_STATIC_BASE_URL = "STATIC_BASE_URL";
-	public static final String VAR_SITE_BASE_URL = "SITE_BASE_URL";
-	public static final String VAR_SITE_AUTH_URL = "SITE_AUTH_URL";
-	public static final String VAR_SITE_AUTH_REALM = "SITE_AUTH_REALM";
-	public static final String VAR_FONTAWESOME_KIT = "FONTAWESOME_KIT";
+	public static final String VAR_siteBaseUrl = "siteBaseUrl";
+	public static final String VAR_siteAuthUrl = "siteAuthUrl";
+	public static final String VAR_siteAuthRealm = "siteAuthRealm";
+	public static final String VAR_fontAwesomeKit = "fontAwesomeKit";
 	public static final String VAR_pageUri = "pageUri";
+	public static final String VAR_pageId = "pageId";
 	public static final String VAR_apiUri = "apiUri";
 	public static final String VAR_pageMethod = "pageMethod";
 	public static final String VAR_params = "params";
@@ -3066,12 +3066,12 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	public static final String DISPLAY_NAME_config = "";
 	public static final String DISPLAY_NAME_serviceRequest = "";
 	public static final String DISPLAY_NAME_staticBaseUrl = "";
-	public static final String DISPLAY_NAME_STATIC_BASE_URL = "";
-	public static final String DISPLAY_NAME_SITE_BASE_URL = "";
-	public static final String DISPLAY_NAME_SITE_AUTH_URL = "";
-	public static final String DISPLAY_NAME_SITE_AUTH_REALM = "";
-	public static final String DISPLAY_NAME_FONTAWESOME_KIT = "";
+	public static final String DISPLAY_NAME_siteBaseUrl = "";
+	public static final String DISPLAY_NAME_siteAuthUrl = "";
+	public static final String DISPLAY_NAME_siteAuthRealm = "";
+	public static final String DISPLAY_NAME_fontAwesomeKit = "";
 	public static final String DISPLAY_NAME_pageUri = "";
+	public static final String DISPLAY_NAME_pageId = "";
 	public static final String DISPLAY_NAME_apiUri = "";
 	public static final String DISPLAY_NAME_pageMethod = "";
 	public static final String DISPLAY_NAME_params = "";
@@ -3123,18 +3123,18 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return DISPLAY_NAME_serviceRequest;
 		case VAR_staticBaseUrl:
 			return DISPLAY_NAME_staticBaseUrl;
-		case VAR_STATIC_BASE_URL:
-			return DISPLAY_NAME_STATIC_BASE_URL;
-		case VAR_SITE_BASE_URL:
-			return DISPLAY_NAME_SITE_BASE_URL;
-		case VAR_SITE_AUTH_URL:
-			return DISPLAY_NAME_SITE_AUTH_URL;
-		case VAR_SITE_AUTH_REALM:
-			return DISPLAY_NAME_SITE_AUTH_REALM;
-		case VAR_FONTAWESOME_KIT:
-			return DISPLAY_NAME_FONTAWESOME_KIT;
+		case VAR_siteBaseUrl:
+			return DISPLAY_NAME_siteBaseUrl;
+		case VAR_siteAuthUrl:
+			return DISPLAY_NAME_siteAuthUrl;
+		case VAR_siteAuthRealm:
+			return DISPLAY_NAME_siteAuthRealm;
+		case VAR_fontAwesomeKit:
+			return DISPLAY_NAME_fontAwesomeKit;
 		case VAR_pageUri:
 			return DISPLAY_NAME_pageUri;
+		case VAR_pageId:
+			return DISPLAY_NAME_pageId;
 		case VAR_apiUri:
 			return DISPLAY_NAME_apiUri;
 		case VAR_pageMethod:

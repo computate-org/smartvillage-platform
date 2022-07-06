@@ -30,7 +30,7 @@ ZOOKEEPER_VOLUME_SIZE: 1Gi
 # The default hostname for the Zookeeper cluster manager.
 ZOOKEEPER_HOST_NAME: "zookeeper.{{ ZOOKEEPER_NAMESPACE }}.svc"
 # The default storage class name for persistent volumes for Zookeeper. 
-ZOOKEEPER_STORAGE_CLASS_NAME: {{ REDHAT_OPENSHIFT_STORAGE_CLASS_NAME | default('') }}
+ZOOKEEPER_STORAGE_CLASS_NAME: "{{ REDHAT_OPENSHIFT_STORAGE_CLASS_NAME | default('') }}"
 
 #################
 # Solr defaults #
@@ -49,7 +49,7 @@ SOLR_VOLUME_SIZE: 2Gi
 # The default hostname for the Solr search engine.
 SOLR_HOST_NAME: "solr.{{ SOLR_NAMESPACE }}.svc"
 # The default storage class name for persistent volumes for Solr. 
-SOLR_STORAGE_CLASS_NAME: {{ REDHAT_OPENSHIFT_STORAGE_CLASS_NAME | default('') }}
+SOLR_STORAGE_CLASS_NAME: "{{ REDHAT_OPENSHIFT_STORAGE_CLASS_NAME | default('') }}"
 
 #######################
 # PostgreSQL defaults #
@@ -74,7 +74,7 @@ POSTGRES_DB_NAME: "{{ SITE_NAME }}"
 # The default PostgreSQL database password.
 POSTGRES_DB_PASSWORD: "..."
 # The default storage class name for persistent volumes for PostgreSQL. 
-POSTGRES_STORAGE_CLASS_NAME: {{ REDHAT_OPENSHIFT_STORAGE_CLASS_NAME | default('') }}
+POSTGRES_STORAGE_CLASS_NAME: "{{ REDHAT_OPENSHIFT_STORAGE_CLASS_NAME | default('') }}"
 
 ################
 # Git defaults #
@@ -105,7 +105,7 @@ SITE_TOKEN: "{{ REDHAT_OPENSHIFT_TOKEN }}"
 # The application OpenShift namespace where application be deployed.
 SITE_NAMESPACE: "{{ REDHAT_OPENSHIFT_NAMESPACE }}"
 # The base URL where the static files will point to.
-SITE_STATIC_BASE_URL: "https://computate.neocities.org/{{ SITE_NAME }}"
+SITE_STATIC_BASE_URL: "https://computate.neocities.org/smart-village-view"
 # Where static files are placed in the pod. 
 SITE_STATIC_PATH: 
 # App memory limit. 
@@ -120,6 +120,11 @@ SITE_REQUESTS_CPU: "100m"
 SITE_BUILD_CONFIG_1: true
 # The dynamic page path. 
 DYNAMIC_PAGE_PATH: "/home/jboss/src/main/resources/page"
+VERTX_MAX_EVENT_LOOP_EXECUTE_TIME: 30
+VERTX_WARNING_EXCEPTION_SECONDS: 60
+API_COUNTER_PAUSE: 10
+API_COUNTER_RESUME: 5
+API_COUNTER_FETCH: 10
 
 #########################################
 # application US English defaults #
@@ -134,7 +139,7 @@ SITE_PORT_ENUS: "8080"
 # The base URL of the site.
 SITE_BASE_URL_ENUS: "https://{{ SITE_HOST_NAME_ENUS }}"
 # The Solr collection of the site.
-SOLR_COLLECTION: "{{ SOLR_COLLECTION }}"
+SOLR_COLLECTION: "smart-village-view"
 # The timezone of the site.
 SITE_LOCALE: "en-US"
 # The timezone of the site.
@@ -148,7 +153,7 @@ SITE_DB_PASSWORD_ENUS: "{{ POSTGRES_DB_PASSWORD }}"
 # The PostgreSQL database name of the site.
 SITE_DB_NAME_ENUS: "{{ SITE_NAME }}"
 # The Java main class of the site.
-SITE_JAVA_MAIN_CLASS_ENUS: org.curriki.api.enus.vertx.MainVerticle
+SITE_JAVA_MAIN_CLASS_ENUS: "org.computate.smartvillageview.enus.vertx.MainVerticle"
 
 #################
 # SMTP defaults #
@@ -235,27 +240,36 @@ SITE_INSTANCES: 5
 WORKER_POOL_SIZE: 5
 
 # Enable data import in the site. 
-ENABLE_IMPORT_DATA: "{{ ENABLE_IMPORT_DATA | lower }}"
-ENABLE_IMPORT_DATA_SiteHtm: true
-ENABLE_IMPORT_DATA_TimeStep: true
-ENABLE_IMPORT_DATA_TrafficSimulation: true
+ENABLE_IMPORT_DATA: true
 ENABLE_IMPORT_DATA_IotNode: true
+ENABLE_IMPORT_DATA_TrafficSimulation: true
+ENABLE_IMPORT_DATA_TimeStep: true
 ENABLE_IMPORT_DATA_VehicleStep: true
 ENABLE_IMPORT_DATA_SitePage: true
+ENABLE_IMPORT_DATA_SiteHtm: true
+
+# Enable data refresh in the site. 
+ENABLE_REFRESH_DATA: true
+ENABLE_REFRESH_DATA_IotNode: true
+ENABLE_REFRESH_DATA_TrafficSimulation: true
+ENABLE_REFRESH_DATA_TimeStep: true
+ENABLE_REFRESH_DATA_VehicleStep: true
+ENABLE_REFRESH_DATA_SitePage: true
+ENABLE_REFRESH_DATA_SiteHtm: true
 
 # The Auth roles required to be an admin in the site. 
-AUTH_ROLES_ADMIN: "{{ AUTH_ROLES_ADMIN }}"
+AUTH_ROLES_ADMIN: ['SiteAdmin']
 # The Auth roles required to add and modify site user records. 
 AUTH_ROLES_REQUIRED_SiteUser: ['SiteAdmin']
-# The Auth roles required to add and modify HTML records. 
-AUTH_ROLES_REQUIRED_SiteHtm: ['SiteAdmin']
-# The Auth roles required to add and modify time step records. 
-AUTH_ROLES_REQUIRED_TimeStep: ['SiteAdmin']
-# The Auth roles required to add and modify traffic simulation records. 
-AUTH_ROLES_REQUIRED_TrafficSimulation: ['SiteAdmin']
 # The Auth roles required to add and modify IOT node records. 
 AUTH_ROLES_REQUIRED_IotNode: ['SiteAdmin']
+# The Auth roles required to add and modify traffic simulation records. 
+AUTH_ROLES_REQUIRED_TrafficSimulation: ['SiteAdmin']
+# The Auth roles required to add and modify time step records. 
+AUTH_ROLES_REQUIRED_TimeStep: ['SiteAdmin']
 # The Auth roles required to add and modify vehicle step records. 
 AUTH_ROLES_REQUIRED_VehicleStep: ['SiteAdmin']
 # The Auth roles required to add and modify article records. 
 AUTH_ROLES_REQUIRED_SitePage: ['SiteAdmin']
+# The Auth roles required to add and modify HTML records. 
+AUTH_ROLES_REQUIRED_SiteHtm: ['SiteAdmin']

@@ -243,6 +243,8 @@
 												<div data-class="SitePage" data-var="{{ ../var }}" data-val="{{ @key }}">{{ @key }}: {{ this }}</div>
 {{/eq}}
 {{/each}}
+{{#if ./stats/min }}
+									<div>									<span> step </span>									<input id="animateStatsStep" placeholder="step" value="1" style="width: 4em; "/>									<span> min </span>									<input id="animateStatsMin" placeholder="min" value="{{ ./stats/min }}" style="width: 4em; "/>									<span> max </span>									<input id="animateStatsMax" placeholder="max" value="{{ ./stats/max }}" style="width: 4em; "/>									<span> speed in seconds </span>									<input id="animateStatsSpeed" placeholder="speed" value="1" style="width: 4em; "/>									<button onclick="animateStats(); ">animate</button>									</div>{{/if}}
 {{/if}}
 											</div>
 										</td>
@@ -780,71 +782,6 @@
 {{/inline}}
 {{> PageLayout}}
 
-{{#*inline "htmPageId"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}SitePagePageId">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-navy-peony">
-													<label for="{{classApiMethodMethod}}_pageId">Page ID</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputPageId"}}
-													</div>
-	{{#ifContainsAnyRoles roles rolesRequired}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-navy-peony "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_pageId')); $('#{{classApiMethodMethod}}_pageId').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SitePageForm :input[name=id]').val() }], 'setPageId', null, function() { addGlow($('#{{classApiMethodMethod}}_pageId')); }, function() { addError($('#{{classApiMethodMethod}}_pageId')); }); "
-																		>
-																	<i class="far fa-eraser "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/ifContainsAnyRoles}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputPageId"}}
-		{{#ifContainsAnyRoles roles rolesRequired}}
-														<input
-															type="text"
-															placeholder="Page ID"
-															title="The ID for this page. "
-															id="{{classApiMethodMethod}}_pageId"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setPageId classSitePage inputSitePage{{id}}PageId w3-input w3-border "
-																name="setPageId"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setPageId classSitePage inputSitePage{{id}}PageId w3-input w3-border "
-																name="setPageId"
-		{{else}}
-																class="valuePageId w3-input w3-border classSitePage inputSitePage{{id}}PageId w3-input w3-border "
-																name="pageId"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setPageId', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_pageId')); }, function() { addError($('#{{classApiMethodMethod}}_pageId')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{sitePage_.pageId}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-															<span class="varSitePage{{id}}PageId ">{{sitePage_.pageId}}</span>
-		{{/ifContainsAnyRoles}}
-{{/inline}}
-
 {{#*inline "htmCourseNum"}}
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									<div class="w3-padding ">
@@ -1037,6 +974,71 @@
 
 													{{else}}
 															<span class="varSitePage{{id}}Uri ">{{sitePage_.uri}}</span>
+		{{/ifContainsAnyRoles}}
+{{/inline}}
+
+{{#*inline "htmPageId"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SitePagePageId">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-navy-peony">
+													<label for="{{classApiMethodMethod}}_pageId">Page ID</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputPageId"}}
+													</div>
+	{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-navy-peony "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_pageId')); $('#{{classApiMethodMethod}}_pageId').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SitePageForm :input[name=id]').val() }], 'setPageId', null, function() { addGlow($('#{{classApiMethodMethod}}_pageId')); }, function() { addError($('#{{classApiMethodMethod}}_pageId')); }); "
+																		>
+																	<i class="far fa-eraser "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/ifContainsAnyRoles}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputPageId"}}
+		{{#ifContainsAnyRoles roles rolesRequired}}
+														<input
+															type="text"
+															placeholder="Page ID"
+															title="The ID for this page. "
+															id="{{classApiMethodMethod}}_pageId"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setPageId classSitePage inputSitePage{{id}}PageId w3-input w3-border "
+																name="setPageId"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setPageId classSitePage inputSitePage{{id}}PageId w3-input w3-border "
+																name="setPageId"
+		{{else}}
+																class="valuePageId w3-input w3-border classSitePage inputSitePage{{id}}PageId w3-input w3-border "
+																name="pageId"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setPageId', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_pageId')); }, function() { addError($('#{{classApiMethodMethod}}_pageId')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{sitePage_.pageId}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+															<span class="varSitePage{{id}}PageId ">{{sitePage_.pageId}}</span>
 		{{/ifContainsAnyRoles}}
 {{/inline}}
 

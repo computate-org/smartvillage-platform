@@ -1,7 +1,7 @@
 ---
 pageId: what-is-the-smart-village-project
 uri: "/en-us/{{ pageId }}"
-h1: What is the Smart Village Project? 
+h1: What is {{ page.siteDisplayName }}? 
 h2: How Red Hat and Boston University are working together to develop software for eco-smart cities and well-being. 
 created: "2022-07-05"
 author:
@@ -43,7 +43,7 @@ htmBody:
             in:
               - e: i
                 a:
-                  class: fa-solid fa-question
+                  class: fa-solid fa-question padding-right-quarter-em
               - e: span
                 text: "{{ h1 }}"
           - e: h2
@@ -52,7 +52,7 @@ htmBody:
             in:
               - e: i
                 a:
-                  class: fa-solid fa-tree-city
+                  class: fa-solid fa-tree-city padding-right-quarter-em
               - e: span
                 text: "{{ h2 }}"
           - e: div
@@ -85,16 +85,16 @@ htmBody:
                 in:
                   - e: i
                     a:
-                      class: fa-solid fa-signal-stream
+                      class: fa-solid fa-signal-stream padding-right-quarter-em
                   - e: span
-                    text: Can the {{ page.siteDisplayName }} read live data from IOT nodes? 
+                    text: Can {{ page.siteDisplayName }} read live data from IOT nodes? 
               - e: h4
                 a:
                   class: ""
                 in:
                   - e: i
                     a:
-                      class: fa-solid fa-reel
+                      class: fa-solid fa-reel padding-right-quarter-em
                   - e: span
                     text: Live sensor data is imported on a schedule to understand current conditions. 
           - e: div
@@ -107,18 +107,64 @@ htmBody:
                 in:
                   - e: i
                     a:
-                      class: fa-solid fa-male
+                      class: fa-solid fa-globe padding-right-quarter-em
                   - e: span
-                    text: Can the {{ page.siteDisplayName }} simulate data on a map? 
+                    text: Can {{ page.siteDisplayName }} simulate data on a map? 
               - e: h4
                 a:
                   class: ""
                 in:
                   - e: i
                     a:
-                      class: fa-solid fa-globe-americas
+                      class: fa-solid fa-map-location-dot padding-right-quarter-em
                   - e: span
                     text: Traffic data can be simulated in a village to study changing conditions. 
+          - e: div
+            a:
+              class: w3-padding 
+            in:
+              - e: h3
+                a:
+                  class: ""
+                in:
+                  - e: i
+                    a:
+                      class: fa-solid fa-microchip padding-right-quarter-em
+                  - e: span
+                    text: What technology is behind {{ page.siteDisplayName }}? 
+              - e: h4
+                a:
+                  class: ""
+                in:
+                  - e: i
+                    a:
+                      class: fak fa-vertx padding-right-quarter-em
+                      style: "color: #782a90ff; "
+                  - e: span
+                    text: Vert.x, the most resource efficient, scalable, reactive, enterprise software toolkit available. 
+          - e: div
+            a:
+              class: w3-padding 
+            in:
+              - e: h3
+                a:
+                  class: ""
+                in:
+                  - e: i
+                    a:
+                      class: fa-solid fa-sensor-cloud padding-right-quarter-em
+                  - e: span
+                    text: Is {{ page.siteDisplayName }} deployable in the cloud? 
+              - e: h4
+                a:
+                  class: ""
+                in:
+                  - e: i
+                    a:
+                      class: fak fa-openshift padding-right-quarter-em
+                      style: "color: red; "
+                  - e: span
+                    text: A Dockerfile, a quay.io image, and automated deployment to Red Hat OpenShift cloud environment is set up. 
       - e: div
         label:
           - infographic
@@ -212,7 +258,7 @@ htmBody:
                             a:
                               class: "{{ item.in.0.in.0.a.class }}"
                           - e: span
-                            text: '{{item.in.0.in.1.text }}'
+                            text: '{{ item.in.0.in.1.text }}'
                       - e: td
                         a:
                           class: w3-mobile 
@@ -221,4 +267,4 @@ htmBody:
                             a:
                               class: "{{ item.in.1.in.0.a.class }}"
                           - e: span
-                            text: '{{item.in.1.in.1.text }}'
+                            text: '{{ item.in.1.in.1.text }}'

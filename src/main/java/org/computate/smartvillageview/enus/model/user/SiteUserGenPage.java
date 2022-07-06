@@ -126,6 +126,7 @@ public class SiteUserGenPage extends SiteUserGenPageGen<BaseModelPage> {
 			w.o(new BigDecimal(s));
 	}
 
+	@Override
 	protected void _defaultFieldListVars(List<String> l) {
 		Optional.ofNullable(searchListSiteUser_.getFields()).orElse(Arrays.asList()).forEach(varStored -> {
 			String varStored2 = varStored;
@@ -142,6 +143,7 @@ public class SiteUserGenPage extends SiteUserGenPageGen<BaseModelPage> {
 		});
 	}
 
+	@Override
 	protected void _defaultStatsVars(List<String> l) {
 		Optional.ofNullable(searchListSiteUser_.getStatsFields()).orElse(Arrays.asList()).forEach(varIndexed -> {
 			String varIndexed2 = varIndexed;
@@ -158,6 +160,7 @@ public class SiteUserGenPage extends SiteUserGenPageGen<BaseModelPage> {
 		});
 	}
 
+	@Override
 	protected void _defaultPivotVars(List<String> l) {
 		Optional.ofNullable(searchListSiteUser_.getFacetPivots()).orElse(Arrays.asList()).forEach(facetPivot -> {
 			String facetPivot2 = facetPivot;
@@ -252,6 +255,7 @@ public class SiteUserGenPage extends SiteUserGenPageGen<BaseModelPage> {
 		l.addAll(Optional.ofNullable(siteRequest_.getConfig().getJsonArray(ConfigKeys.AUTH_ROLES_REQUIRED + "_SiteUser")).orElse(new JsonArray()).stream().map(o -> o.toString()).collect(Collectors.toList()));
 	}
 
+	@Override
 	protected void _pagination(JsonObject pagination) {
 		JsonArray pages = new JsonArray();
 		Long start = searchListSiteUser_.getStart().longValue();
@@ -296,6 +300,7 @@ public class SiteUserGenPage extends SiteUserGenPageGen<BaseModelPage> {
 		}
 	}
 
+	@Override
 	protected void _varsQ(JsonObject vars) {
 		SiteUser.varsQForClass().forEach(var -> {
 			JsonObject json = new JsonObject();
@@ -307,6 +312,7 @@ public class SiteUserGenPage extends SiteUserGenPageGen<BaseModelPage> {
 		});
 	}
 
+	@Override
 	protected void _varsFq(JsonObject vars) {
 		Map<String, SolrResponse.FacetField> facetFields = Optional.ofNullable(facetCounts).map(c -> c.getFacetFields()).map(f -> f.getFacets()).orElse(new HashMap<String,SolrResponse.FacetField>());
 		SiteUser.varsFqForClass().forEach(var -> {
@@ -349,6 +355,7 @@ public class SiteUserGenPage extends SiteUserGenPageGen<BaseModelPage> {
 		});
 	}
 
+	@Override
 	protected void _varsRange(JsonObject vars) {
 		SiteUser.varsRangeForClass().forEach(var -> {
 			String varIndexed = SiteUser.varIndexedSiteUser(var);
@@ -361,6 +368,7 @@ public class SiteUserGenPage extends SiteUserGenPageGen<BaseModelPage> {
 		});
 	}
 
+	@Override
 	protected void _query(JsonObject query) {
 		ServiceRequest serviceRequest = siteRequest_.getServiceRequest();
 		JsonObject params = serviceRequest.getParams();

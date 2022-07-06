@@ -2,8 +2,8 @@
 {{#*inline "htmHeadPageLayout"}}{{> "htmTitlePageLayout"}}{{> "htmMetaPageLayout"}}{{> "htmStylePageLayout"}}{{> "htmScriptsPageLayout"}}{{> "htmScriptPageLayout"}}{{/inline}}
 {{#*inline "htmScriptsPageLayout"}}		<!-- #*inline "htmScriptsPageLayout" -->
 		<script src="{{staticBaseUrl}}/js/jquery-1.12.4.min.js"></script>
-{{#if FONTAWESOME_KIT }}
-		<script src="{{ FONTAWESOME_KIT }}"></script>
+{{#if fontAwesomeKit }}
+		<script src="{{ fontAwesomeKit }}"></script>
 {{/if}}
 		<script src="{{staticBaseUrl}}/js/site-enUS.js"></script>
 		<script src="{{staticBaseUrl}}/js/moment.js"></script>
@@ -14,39 +14,42 @@
 {{#*inline "htmScriptPageLayout"}}		<!-- #*inline "htmScriptPageLayout" -->
 {{/inline}}
 {{#*inline "htmStylePageLayout"}}		<!-- #*inline "htmStylePageLayout" -->
+
 		<link rel="icon" href="{{staticBaseUrl}}/favicon.ico" />
 		<link rel="stylesheet" href="{{staticBaseUrl}}/css/w3.css" />
 		<link rel="stylesheet" href="{{staticBaseUrl}}/css/site-enUS.css" />
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anonymous%20Pro%7CBellefair%7CJomhuria%7CPT%20Serif%3A700%7CStint%20Ultra%20Condensed&amp;display=swap"/>
+
 {{/inline}}
 {{#*inline "htmMetaPageLayout"}}		<!-- #*inline "htmMetaPageLayout" -->
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+{{#each htmMeta}}{{#if htmBefore}}{{{htmBefore}}}{{/if}}{{#if text}}{{#each text}}{{.}}{{/each}}{{/if}}{{#if htmAfter}}{{{htmAfter}}}{{/if}}{{/each}}
 {{/inline}}
 {{#*inline "htmTitlePageLayout"}}		<!-- #*inline "htmTitlePageLayout" -->
 		<title>smart-village-view</title>
 {{/inline}}
 {{#*inline "htmBodyMenuPageLayout"}}
-		<div class="w3-bar ">
-			<div class="w3-bar w3-hide-small ">
-				<div class="site-bar-item w3-bar-item ">
-					<a class="w3-bar-item " href="{{ SITE_BASE_URL }}"><i class="fad fa-house "></i> smart-village-view</a>
-				</div>
-{{> "htmMenuItems"}}
+		<div class="w3-bar w3-hide-small ">
+			<div class="site-bar-item w3-bar-item ">
+				<a class="w3-bar-item " href="{{ siteBaseUrl }}"><i class="fad fa-house "></i> smart-village-view</a>
 			</div>
-			<div class="w3-bar w3-hide-medium w3-hide-large ">
-				<div class="site-bar-item w3-bar-item ">
-					<a class="w3-bar-item " href="{{ SITE_BASE_URL }}"><i class="fad fa-house "></i> smart-village-view</a>
-				</div>
-				<div class="w3-dropdown-hover ">
-					<button class="w3-button w3-text-black "><i class="fad fa-bars w3-text-black "></i> Menu</button>
-					<div class="w3-dropdown-content w3-bar-block w3-card-4 ">
 {{> "htmMenuItems"}}
-					</div>
+		</div>
+		<div class="w3-bar w3-hide-medium w3-hide-large ">
+			<div class="site-bar-item w3-bar-item ">
+				<a class="w3-bar-item " href="{{ siteBaseUrl }}"><i class="fad fa-house "></i> smart-village-view</a>
+			</div>
+			<div class="w3-dropdown-hover ">
+				<button class="w3-button w3-text-black "><i class="fad fa-bars w3-text-black "></i> Menu</button>
+				<div class="w3-dropdown-content w3-bar-block w3-card-4 ">
+{{> "htmMenuItems"}}
 				</div>
 			</div>
 		</div>
 {{/inline}}
 {{#*inline "htmMenuItems"}}
+
 {{#if userKey}}
 				<div class="site-bar-item w3-bar-item ">
 					<a href="/user/{{ userKey }}" class="header-icon-a w3-hover-opacity w3-center "><i class="fad fa-house-user w3-text-teal "></i> {{userName}}</a>
@@ -58,16 +61,10 @@
 				</div>
 {{/if}}
 				<div class="site-bar-item w3-bar-item ">
-					<a href="/htm" class="header-icon-a w3-hover-opacity w3-center w3-text-2017-navy-peony "><i class="fad fa-code w3-text-2017-navy-peony "></i> HTMLs</a>
-				</div>
-				<div class="site-bar-item w3-bar-item ">
-					<a href="/time-step" class="header-icon-a w3-hover-opacity w3-center w3-text-blue "><i class="fad fa-timer w3-text-blue "></i> time steps</a>
+					<a href="/iot-node" class="header-icon-a w3-hover-opacity w3-center w3-text-blue "><i class="fad fa-router w3-text-blue "></i> IOT nodes</a>
 				</div>
 				<div class="site-bar-item w3-bar-item ">
 					<a href="/traffic-simulation" class="header-icon-a w3-hover-opacity w3-center w3-text-blue "><i class="fad fa-traffic-light-stop w3-text-blue "></i> traffic simulations</a>
-				</div>
-				<div class="site-bar-item w3-bar-item ">
-					<a href="/iot-node" class="header-icon-a w3-hover-opacity w3-center w3-text-blue "><i class="fad fa-router w3-text-blue "></i> IOT nodes</a>
 				</div>
 				<div class="site-bar-item w3-bar-item ">
 					<a href="/vehicle-step" class="header-icon-a w3-hover-opacity w3-center w3-text-blue "><i class="fad fa-map-location-dot w3-text-blue "></i> vehicle steps</a>
@@ -75,12 +72,11 @@
 				<div class="site-bar-item w3-bar-item ">
 					<a href="/page" class="header-icon-a w3-hover-opacity w3-center w3-text-2017-navy-peony "><i class="fad fa-newspaper w3-text-2017-navy-peony "></i> articles</a>
 				</div>
+
 {{/inline}}
 {{#*inline "htmBodyStartPageLayout"}}		<!-- #*inline "htmBodyStartPageLayout" -->
-		<div class="w3-bar ">
-			<div class="w3-center ">
+		<div class="w3-center ">
 {{#block "htmBodyMenu"}}{{/block}}
-			</div>
 		</div>
 {{/inline}}
 {{#*inline "htmBodyMiddlePageLayout"}}		<!-- #*inline "htmBodyMiddlePageLayout" -->
@@ -89,22 +85,30 @@
 	</div>
 {{/inline}}
 {{#*inline "htmBodyEndPageLayout"}}		<!-- #*inline "htmBodyEndPageLayout" -->
+
+  		<div class="w3-center ">
+{{#block "htmBodyMenu"}}{{/block}}
+		</div>
 		<footer class="w3-center w3-black w3-text-white w3-padding-24 ">
 			<div class="w3-bar ">
 {{#if GITHUB_ORG }}
-				<a class="w3-bar-item grow-20 w3-margin w3-text-white w3-small " href="https://github.com/{{ GITHUB_ORG }}/{{ SITE_NAME }}/" target="_blank">This site is open source <i class="fa-brands fa-github w3-large "></i></a>
+				<a class="w3-bar-item grow-20 w3-margin w3-text-white w3-medium " href="https://github.com/{{ GITHUB_ORG }}/{{ SITE_NAME }}/" target="_blank">This site is open source <i class="fa-brands fa-github w3-large "></i></a>
 {{/if }}
 {{#if PROJECT_POWERED_BY_URL }}
-				<a class="w3-bar-item grow-20 w3-margin w3-text-white w3-small " href="{{ PROJECT_POWERED_BY_URL }}" target="_blank"><span class="w3-small ">Powered by </span>{{#if PROJECT_POWERED_BY_IMAGE_URI }}<img alt="" class="w3-image " style="display: inline-block; width: 100px; margin: 0 10px;" src="{{ STATIC_BASE_URL }}{{ PROJECT_POWERED_BY_IMAGE_URI }}"/>{{else}}{{#if PROJECT_POWERED_BY_NAME}}{{ PROJECT_POWERED_BY_NAME }}{{/if}}{{/if}}</a>
+				<a class="w3-bar-item grow-20 w3-margin w3-text-white w3-medium " href="{{ PROJECT_POWERED_BY_URL }}" target="_blank"><span class="w3-medium ">Powered by </span>{{#if PROJECT_POWERED_BY_IMAGE_URI }}<img alt="" class="w3-image " style="display: inline-block; width: 100px; margin: 0 10px;" src="{{ staticBaseUrl }}{{ PROJECT_POWERED_BY_IMAGE_URI }}"/>{{else}}{{#if PROJECT_POWERED_BY_NAME}}{{ PROJECT_POWERED_BY_NAME }}{{/if}}{{/if}}</a>
 {{/if }}
-				<a class="w3-bar-item grow-10 w3-margin w3-text-white w3-small " href="https://www.computate.org" target="_blank"><span class="w3-small ">Generated and automated with </span><img alt="" class="w3-image " style="display: inline-block; width: 300px; margin: 0 10px;" src="{{ STATIC_BASE_URL }}/svg/computate-keys.svg"/></a>
 			</div>
 		</footer>
+
 {{/inline}}
 {{#*inline "htmBodyPageLayout"}}		<!-- #*inline "htmBodyPageLayout" -->
+{{#if filterLabel }}{{else}}
 {{#block "htmBodyStart"}}{{/block}}
+{{/if}}
 {{#block "htmBodyMiddle"}}{{/block}}
+{{#if filterLabel }}{{else}}
 {{#block "htmBodyEnd"}}{{/block}}
+{{/if}}
 {{/inline}}
 {{#*inline "htmPageLayout"}}<!DOCTYPE html>
 <!-- #*inline "htmPageLayout" -->
@@ -112,7 +116,7 @@
 	<head>
 {{#block "htmHead"}}{{/block}}
 	</head>
-	<body class="" style="height: 100%;">
+	<body class="w3-light-grey " style="height: 100%;">
 {{#block "htmBody"}}{{/block}}
 	</body>
 </html>

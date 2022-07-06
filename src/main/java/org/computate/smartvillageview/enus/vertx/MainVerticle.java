@@ -3,6 +3,7 @@ package org.computate.smartvillageview.enus.vertx;
 import java.net.URLDecoder;
 import java.text.Normalizer;
 import java.util.Map.Entry;
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
@@ -33,12 +34,12 @@ import org.computate.smartvillageview.enus.page.dynamic.DynamicPage;
 import org.computate.smartvillageview.enus.model.user.SiteUserEnUSGenApiService;
 import org.computate.smartvillageview.enus.model.page.SitePageEnUSGenApiService;
 import org.computate.smartvillageview.enus.model.htm.SiteHtmEnUSGenApiService;
-import org.computate.smartvillageview.enus.model.htm.SiteHtmEnUSGenApiService;
-import org.computate.smartvillageview.enus.model.traffic.time.step.TimeStepEnUSGenApiService;
-import org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulationEnUSGenApiService;
 import org.computate.smartvillageview.enus.model.iotnode.IotNodeEnUSGenApiService;
+import org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulationEnUSGenApiService;
+import org.computate.smartvillageview.enus.model.traffic.time.step.TimeStepEnUSGenApiService;
 import org.computate.smartvillageview.enus.model.traffic.vehicle.step.VehicleStepEnUSGenApiService;
 import org.computate.smartvillageview.enus.model.page.SitePageEnUSGenApiService;
+import org.computate.smartvillageview.enus.model.htm.SiteHtmEnUSGenApiService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -63,7 +64,9 @@ import io.vertx.core.http.Cookie;
 import io.vertx.core.http.HttpClientOptions;
 import io.vertx.core.http.HttpHeaders;
 import io.vertx.core.http.HttpServerOptions;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.vertx.core.MultiMap;
 import io.vertx.core.net.JksOptions;
 import io.vertx.core.net.PemKeyCertOptions;
 import io.vertx.core.spi.cluster.ClusterManager;
@@ -748,12 +751,12 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 		Promise<Void> promise = Promise.promise();
 		try {
 			SiteUserEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
-			SiteHtmEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
-			TimeStepEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
-			TrafficSimulationEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
 			IotNodeEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
+			TrafficSimulationEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
+			TimeStepEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
 			VehicleStepEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
 			SitePageEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
+			SiteHtmEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
 
 			LOG.info(configureApiComplete);
 			promise.complete();
@@ -785,8 +788,21 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 				try {
 					ctx.put(ConfigKeys.STATIC_BASE_URL, config().getString(ConfigKeys.STATIC_BASE_URL));
 					HomePage t = new HomePage();
+					JsonObject query = new JsonObject();
+					MultiMap queryParams = ctx.queryParams();
+					for(String name : queryParams.names()) {
+						JsonArray array = query.getJsonArray(name);
+						List<String> vals = queryParams.getAll(name);
+						if(array == null) {
+							array = new JsonArray();
+							query.put(name, array);
+						}
+						for(String val : vals) {
+							array.add(val);
+						}
+					}
 					ServiceRequest serviceRequest = new ServiceRequest(
-							new JsonObject().put("path", JsonObject.mapFrom(ctx.pathParams())).put("query", JsonObject.mapFrom(ctx.queryParams())).put("cookie", JsonObject.mapFrom(ctx.cookieMap()))
+							new JsonObject().put("path", JsonObject.mapFrom(ctx.pathParams())).put("query", query).put("cookie", JsonObject.mapFrom(ctx.cookieMap()))
 							, ctx.request().headers()
 							, Optional.ofNullable(ctx.user()).map(u -> u.principal()).orElse(null)
 							, new JsonObject()
@@ -821,8 +837,21 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 			router.getWithRegex("(?<uri>\\/(?<lang>(?<lang1>[a-z][a-z])-(?<lang2>[a-z][a-z]))\\/.*)").handler(ctx -> {
 				String uri = ctx.pathParam("uri");
 				String lang = String.format("%s%s", ctx.pathParam("lang1"), ctx.pathParam("lang2").toUpperCase());
+				JsonObject query = new JsonObject();
+				MultiMap queryParams = ctx.queryParams();
+				for(String name : queryParams.names()) {
+					JsonArray array = query.getJsonArray(name);
+					List<String> vals = queryParams.getAll(name);
+					if(array == null) {
+						array = new JsonArray();
+						query.put(name, array);
+					}
+					for(String val : vals) {
+						array.add(val);
+					}
+				}
 				ServiceRequest serviceRequest = new ServiceRequest(
-						new JsonObject().put("path", JsonObject.mapFrom(ctx.pathParams())).put("query", JsonObject.mapFrom(ctx.queryParams())).put("cookie", JsonObject.mapFrom(ctx.cookieMap()))
+						new JsonObject().put("path", JsonObject.mapFrom(ctx.pathParams())).put("query", query).put("cookie", JsonObject.mapFrom(ctx.cookieMap()))
 						, ctx.request().headers()
 						, Optional.ofNullable(ctx.user()).map(u -> u.principal()).orElse(null)
 						, new JsonObject()
@@ -849,6 +878,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 						page.promiseDeepForClass(siteRequest).onSuccess(b -> {
 							JsonObject json = JsonObject.mapFrom(page);
 							json.put(ConfigKeys.STATIC_BASE_URL, config().getString(ConfigKeys.STATIC_BASE_URL));
+							json.put(ConfigKeys.SITE_BASE_URL, config().getString(ConfigKeys.SITE_BASE_URL));
 							json.put(ConfigKeys.GITHUB_ORG, config().getString(ConfigKeys.GITHUB_ORG));
 							json.put(ConfigKeys.SITE_NAME, config().getString(ConfigKeys.SITE_NAME));
 							json.put(ConfigKeys.SITE_DISPLAY_NAME, config().getString(ConfigKeys.SITE_DISPLAY_NAME));

@@ -263,6 +263,20 @@ ansible-playbook --vault-id @prompt -e @~/.local/src/smart-village-view-ansible/
 ansible-playbook --vault-id @prompt -e @~/.local/src/smart-village-view-ansible/vault/$USER-staging/vault ~/.ansible/roles/computate.computate_project_openshift/install.yml -e SITE_NAME=smart-village-view
 ```
 
+## How to run the application as a Podman container
+
+### Install the prerequiste packages for buildah and podman
+
+```bash
+pkcon install -y buildah
+pkcon install -y podman
+```
+
+```bash
+cd ~/.local/src/smart-village-view
+ podman build -t computateorg/smart-village-view:latest .
+```
+
 ## How the base classes for this project were created
 
 ```bash

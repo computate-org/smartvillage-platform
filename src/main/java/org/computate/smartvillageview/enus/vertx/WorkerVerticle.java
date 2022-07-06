@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.Stack;
 import java.util.concurrent.TimeUnit;
 
@@ -52,6 +53,7 @@ import io.vertx.config.yaml.YamlProcessor;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.CompositeFuture;
 import io.vertx.core.Future;
+import io.vertx.core.MultiMap;
 import io.vertx.core.Promise;
 import io.vertx.core.WorkerExecutor;
 import io.vertx.core.buffer.Buffer;
@@ -59,6 +61,7 @@ import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.authentication.TokenCredentials;
+import io.vertx.ext.auth.authentication.UsernamePasswordCredentials;
 import io.vertx.ext.jdbc.JDBCClient;
 import io.vertx.ext.mail.MailClient;
 import io.vertx.ext.mail.MailConfig;
@@ -83,12 +86,12 @@ import org.computate.smartvillageview.enus.model.traffic.simulation.reader.Traff
 import org.computate.smartvillageview.enus.model.traffic.time.step.TimeStep;
 
 import org.computate.smartvillageview.enus.model.user.SiteUser;
-import org.computate.smartvillageview.enus.model.htm.SiteHtm;
-import org.computate.smartvillageview.enus.model.traffic.time.step.TimeStep;
-import org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation;
 import org.computate.smartvillageview.enus.model.iotnode.IotNode;
+import org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation;
+import org.computate.smartvillageview.enus.model.traffic.time.step.TimeStep;
 import org.computate.smartvillageview.enus.model.traffic.vehicle.step.VehicleStep;
 import org.computate.smartvillageview.enus.model.page.SitePage;
+import org.computate.smartvillageview.enus.model.htm.SiteHtm;
 
 /**
  */
@@ -548,6 +551,26 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 					siteRequest.setWebClient(webClient);
 					siteRequest.initDeepSiteRequestEnUS(siteRequest);
 
+					json.put("page", new JsonObject()
+							.put(SitePage.VAR_siteName, config().getString(ConfigKeys.SITE_NAME))
+							.put(SitePage.VAR_siteDisplayName, config().getString(ConfigKeys.SITE_DISPLAY_NAME))
+							);
+
+					String[] fieldNames = json.fieldNames().toArray(new String[json.fieldNames().size()]);
+					for(Integer i = 0; i < json.size(); i++) {
+						String key = fieldNames[i];
+						Object o = json.getValue(key);
+						if(o instanceof String) {
+							try {
+								Template template = handlebars.compileInline((String)o);
+								Context engineContext = Context.newBuilder(json.getMap()).resolver(templateEngine.getResolvers()).build();
+								json.put(key, Buffer.buffer(template.apply(engineContext)).toString());
+							} catch (IOException ex) {
+								ExceptionUtils.rethrow(ex);
+							}
+						}
+					}
+
 					SitePage page = new SitePage();
 					page.setSiteRequest_(siteRequest);
 					page.setId(pageId);
@@ -591,15 +614,15 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 							stack.push("html");
 							stack.push("body");
 							Long sequenceNum = 0L;
-							JsonObject pageBody2 = JsonObject.mapFrom(page);
-							json.put("page", pageBody2);
 							for(String htmGroup : json.fieldNames()) {
 								if(StringUtils.startsWith(htmGroup, "htm")) {
 									JsonArray pageItems = json.getJsonArray(htmGroup);
-									sequenceNum = importSiteHtm(page, json, stack, pageId, htmGroup, pageItems, futures, sequenceNum);
+									sequenceNum = importSiteHtm(page, json, new JsonArray(), stack, pageId, htmGroup, pageItems, futures, sequenceNum);
 								}
 							}
-			
+							JsonObject pageBody2 = JsonObject.mapFrom(page);
+							json.put("page", pageBody2);
+
 							CompositeFuture.all(futures).onSuccess(b -> {
 								JsonObject pageParams = new JsonObject();
 								pageParams.put("body", pageBody2);
@@ -661,7 +684,7 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 		return promise.future();
 	}
 
-	private Long importSiteHtm(SitePage page, JsonObject json, Stack<String> stack, String pageId, String htmGroup, JsonArray pageItems, List<Future> futures, Long sequenceNum) throws Exception {
+	private Long importSiteHtm(SitePage page, JsonObject json, JsonArray labels, Stack<String> stack, String pageId, String htmGroup, JsonArray pageItems, List<Future> futures, Long sequenceNum) throws Exception {
 		Double sort = 0D;
 		for(Integer i = 0; i < pageItems.size(); i++) {
 			// Process a page item, one at a time
@@ -669,19 +692,24 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 			String uri = json.getString(SiteHtm.VAR_uri);
 			Object in = pageItem.getValue("in");
 			String e = pageItem.getString("e");
+			JsonArray labels2 = Optional.ofNullable(pageItem.getValue("label")).map(o -> o instanceof JsonArray ? (JsonArray)o : new JsonArray().add(o)).orElse(null);
+			JsonArray labels3 = new JsonArray();
 			String each = pageItem.getString("each");
 			JsonObject a = pageItem.getJsonObject(SiteHtm.VAR_a);
 			Boolean eNoWrapParent = false;
 			Boolean eNoWrap = false;
 			String tabs = "";
+			String comment = pageItem.getString(SiteHtm.VAR_comment);
 
 			if(e != null) {
 				// Stack the element and determine element name, wrap and tabs
 				String localNameParent = stack.isEmpty() ? null : stack.peek();
 				eNoWrapParent = localNameParent == null || XmlTool.HTML_ELEMENTS_NO_WRAP.contains(localNameParent);
 				eNoWrap = localNameParent == null || XmlTool.HTML_ELEMENTS_NO_WRAP.contains(e);
-				tabs = String.join("", Collections.nCopies(stack.size(), "  "));
+				tabs = String.join("", Collections.nCopies(stack.size(), "\t"));
 				stack.push(e);
+			} else if(comment != null) {
+				tabs = String.join("", Collections.nCopies(stack.size(), "\t"));
 			}
 
 			{
@@ -690,16 +718,43 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 				JsonObject importItem = new JsonObject();
 				if(e != null)
 					importItem.put(SiteHtm.VAR_eBefore, e);
+
+				if(comment != null) {
+					// Split text by lines and index each line as it's own value
+					Template template = handlebars.compileInline(comment);
+					Context engineContext = Context.newBuilder(json.getMap()).resolver(templateEngine.getResolvers()).build();
+					Buffer buffer = Buffer.buffer(template.apply(engineContext));
+					String[] strs = buffer.toString().split("\r?\n");
+					importItem.put(SiteHtm.VAR_comment, new JsonArray().addAll(new JsonArray(Arrays.asList(strs))));
+					page.addObjectText(strs);
+				}
+
 				String text = pageItem.getString(SiteHtm.VAR_text);
 				if(text != null) {
 					// Split text by lines and index each line as it's own value
 					Template template = handlebars.compileInline(text);
 					Context engineContext = Context.newBuilder(json.getMap()).resolver(templateEngine.getResolvers()).build();
 					Buffer buffer = Buffer.buffer(template.apply(engineContext));
-					String[] strs = buffer.toString().split("\r?\n");
+					String text2 = buffer.toString();
+					if(text2.contains("{{")) {
+						Template template2 = handlebars.compileInline(text2);
+						Context engineContext2 = Context.newBuilder(json.getMap()).resolver(templateEngine.getResolvers()).build();
+						Buffer buffer2 = Buffer.buffer(template2.apply(engineContext2));
+						text2 = buffer2.toString();
+					}
+					String[] strs = text2.split("\r?\n");
 					importItem.put(SiteHtm.VAR_text, new JsonArray().addAll(new JsonArray(Arrays.asList(strs))));
 					page.addObjectText(strs);
 				}
+
+				labels3.addAll(labels);
+				if(labels2 != null) {
+					labels3.addAll(labels2);
+				}
+				if(labels3.size() > 0) {
+					importItem.put(SiteHtm.VAR_labels, labels3);
+				}
+
 				if(!eNoWrapParent && !tabs.isEmpty()) {
 					importItem.put(SiteHtm.VAR_tabs, tabs);
 				}
@@ -716,6 +771,7 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 						.add(SiteHtm.VAR_tabs)
 						.add(SiteHtm.VAR_uri)
 						.add(SiteHtm.VAR_text)
+						.add(SiteHtm.VAR_labels)
 						);
 				importItem.put(SiteHtm.VAR_created, ComputateZonedDateTimeSerializer.ZONED_DATE_TIME_FORMATTER.format(ZonedDateTime.now()));
 				importItem.put(SiteHtm.VAR_pageId, pageId);
@@ -732,7 +788,14 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 							Template template = handlebars.compileInline(val);
 							Context engineContext = Context.newBuilder(json.getMap()).resolver(templateEngine.getResolvers()).build();
 							Buffer buffer = Buffer.buffer(template.apply(engineContext));
-							attrs.put(field, buffer.toString());
+							String val2 = buffer.toString();
+							if(val2.contains("{{")) {
+								Template template2 = handlebars.compileInline(val2);
+								Context engineContext2 = Context.newBuilder(json.getMap()).resolver(templateEngine.getResolvers()).build();
+								Buffer buffer2 = Buffer.buffer(template2.apply(engineContext2));
+								val2 = buffer2.toString();
+							}
+							attrs.put(field, val2);
 						}
 					}
 					importItem.put(SiteHtm.VAR_a, attrs);
@@ -772,10 +835,10 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 						// Process nested elements of the "in" value
 						if(in instanceof JsonObject) {
 							// Process the nested JsonObject of the "in" value
-							sequenceNum = importSiteHtm(page, json2, stack, pageId, htmGroup, new JsonArray().add(in), futures, sequenceNum);
+							sequenceNum = importSiteHtm(page, json2, labels3, stack, pageId, htmGroup, new JsonArray().add(in), futures, sequenceNum);
 						} else if(in instanceof JsonArray) {
 							// Process the each of the nested JsonObjects in the array of the "in" value
-							sequenceNum = importSiteHtm(page, json2, stack, pageId, htmGroup, (JsonArray)in, futures, sequenceNum);
+							sequenceNum = importSiteHtm(page, json2, labels3, stack, pageId, htmGroup, (JsonArray)in, futures, sequenceNum);
 						}
 					}
 				}
@@ -785,10 +848,10 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 					// Process nested elements of the "in" value
 					if(in instanceof JsonObject) {
 						// Process the nested JsonObject of the "in" value
-						sequenceNum = importSiteHtm(page, json, stack, pageId, htmGroup, new JsonArray().add(in), futures, sequenceNum);
+						sequenceNum = importSiteHtm(page, json, labels3, stack, pageId, htmGroup, new JsonArray().add(in), futures, sequenceNum);
 					} else if(in instanceof JsonArray) {
 						// Process the each of the nested JsonObjects in the array of the "in" value
-						sequenceNum = importSiteHtm(page, json, stack, pageId, htmGroup, (JsonArray)in, futures, sequenceNum);
+						sequenceNum = importSiteHtm(page, json, labels3, stack, pageId, htmGroup, (JsonArray)in, futures, sequenceNum);
 					}
 				}
 			}
@@ -804,6 +867,9 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 				if(!eNoWrapParent) {
 					importItem.put(SiteHtm.VAR_newLine, true);
 				}
+				if(labels3.size() > 0) {
+					importItem.put(SiteHtm.VAR_labels, labels3);
+				}
 				importItem.put(SiteHtm.VAR_saves, new JsonArray()
 						.add(SiteHtm.VAR_eAfter)
 						.add(SiteHtm.VAR_htmAfter)
@@ -812,6 +878,7 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 						.add(SiteHtm.VAR_pageId)
 						.add(SiteHtm.VAR_tabs)
 						.add(SiteHtm.VAR_uri)
+						.add(SiteHtm.VAR_labels)
 						);
 				importItem.put(SiteHtm.VAR_created, ComputateZonedDateTimeSerializer.ZONED_DATE_TIME_FORMATTER.format(ZonedDateTime.now()));
 				importItem.put(SiteHtm.VAR_pageId, pageId);
@@ -852,12 +919,12 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 			if(config().getBoolean(ConfigKeys.ENABLE_REFRESH_DATA, false)) {
 				LOG.info(refreshAllDataStarted);
 				refreshData(SiteUser.CLASS_SIMPLE_NAME).onSuccess(q -> {
-					refreshData(SiteHtm.CLASS_SIMPLE_NAME).onSuccess(q1 -> {
-						refreshData(TimeStep.CLASS_SIMPLE_NAME).onSuccess(q2 -> {
-							refreshData(TrafficSimulation.CLASS_SIMPLE_NAME).onSuccess(q3 -> {
-								refreshData(IotNode.CLASS_SIMPLE_NAME).onSuccess(q4 -> {
-									refreshData(VehicleStep.CLASS_SIMPLE_NAME).onSuccess(q5 -> {
-										refreshData(SitePage.CLASS_SIMPLE_NAME).onSuccess(q6 -> {
+					refreshData(IotNode.CLASS_SIMPLE_NAME).onSuccess(q1 -> {
+						refreshData(TrafficSimulation.CLASS_SIMPLE_NAME).onSuccess(q2 -> {
+							refreshData(TimeStep.CLASS_SIMPLE_NAME).onSuccess(q3 -> {
+								refreshData(VehicleStep.CLASS_SIMPLE_NAME).onSuccess(q4 -> {
+									refreshData(SitePage.CLASS_SIMPLE_NAME).onSuccess(q5 -> {
+										refreshData(SiteHtm.CLASS_SIMPLE_NAME).onSuccess(q6 -> {
 											LOG.info(refreshAllDataComplete);
 											promise.complete();
 										}).onFailure(ex -> {

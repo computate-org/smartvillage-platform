@@ -29,6 +29,10 @@ ENABLE_ARCHIVED: true
 ENABLE_ROLE_ADMIN: true
 ENABLE_OPENID_CONNECT: true
 ENABLE_CODE_GENERATION_SERVICE: true
+
+ENABLE_MENU_SiteHtm: false
+ENABLE_MENU_TimeStep: false
+
 WRITE_API: true
 WRITE_COMMENTS: true
 PROJECTS: 
@@ -60,6 +64,8 @@ PROJECTS:
         template: page/HomePage.hbs
       - path: "{{ PROJECT_SRC }}/src/main/resources/templates/{{ PROJECT_LANG }}/{{ CLASS_SIMPLE_NAME_DynamicPage }}.hbs"
         template: page/DynamicPage.hbs
+      - path: "{{ PROJECT_SRC }}/src/main/resources/templates/{{ PROJECT_LANG }}/{{ CLASS_SIMPLE_NAME_DynamicGenPage }}.hbs"
+        template: page/DynamicGenPage.hbs
       - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_MainVerticle | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_MainVerticle }}.java"
         template: vertx/MainVerticle.java
       - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_WorkerVerticle | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_WorkerVerticle }}.java"
@@ -413,6 +419,9 @@ WORKER_IMPORT_DATA: |2
   		});
   		return promise.future();
   	}
+
+AFTER_htmStylePageLayout: |2
+  		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anonymous%20Pro%7CBellefair%7CJomhuria%7CPT%20Serif%3A700%7CStint%20Ultra%20Condensed&amp;display=swap"/>
 
 README_END: |
   

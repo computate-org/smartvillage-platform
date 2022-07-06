@@ -1,6 +1,6 @@
 ---
 uri: /en-us/choose-your-operating-system
-h1: What is the best operating system to develop the {{ page.SITE_DISPLAY_NAME }}? 
+h1: What is the best operating system to develop {{ page.siteDisplayName }}? 
 h2: Red Hat Enterprise Linux is the best operating system for software development. 
 created: "2022-05-23"
 courseNum: 1
@@ -9,7 +9,7 @@ author:
   name: Christopher Tate
   title: Red Hat Principal Software Consultant
 htmTitle:
-  - text: What is the best operating system to develop the {{ page.SITE_DISPLAY_NAME }}? Red Hat Enterprise Linux is the best operating system for software development. 
+  - text: What is the best operating system to develop {{ page.siteDisplayName }}? Red Hat Enterprise Linux is the best operating system for software development. 
 os:
   name: Red Hat Enterprise Linux
   version: 9.0
@@ -23,7 +23,7 @@ htmBody:
       - e: h1
         a:
           class: w3-text-2017-shaded-spruce w3-monospace 
-        text: Best operating system to develop the {{ page.SITE_DISPLAY_NAME }}
+        text: Best operating system to develop {{ page.siteDisplayName }}
       - e: div
         a:
           class: font-style-italic 

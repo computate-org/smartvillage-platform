@@ -42,11 +42,8 @@
 {{#*inline "htmBodyEndDynamicPage"}}
 {{> "htmBodyEndPageLayout"}}
 {{/inline}}
-{{#*inline "htmBodyDynamicPage"}}
-{{#block "htmBodyStart"}}{{/block}}
-	<div class="pageContent w3-content ">
-{{#each htmBody}}{{#if htmBefore}}{{{htmBefore}}}{{/if}}{{#if text}}{{#each text}}{{.}}{{/each}}{{/if}}{{#if htmAfter}}{{{htmAfter}}}{{/if}}{{/each}}
-{{#block "htmBodyEnd"}}{{/block}}
-	</div>
-{{/inline}}
+{{#*inline "htmBodyDynamicPage"}}		<!-- #*inline "htmBodyDynamicPage" -->
+{{> "htmBodyPageLayout"}}{{/inline}}
+{{#*inline "htmBodyMiddleDynamicPage"}}		<!-- #*inline "htmBodyMiddleDynamicPage" -->
+{{> "htmBodyMiddlePageLayout"}}{{/inline}}
 {{> PageLayout}}

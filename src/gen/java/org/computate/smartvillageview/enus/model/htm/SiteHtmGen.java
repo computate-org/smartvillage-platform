@@ -788,6 +788,76 @@ public abstract class SiteHtmGen<DEV> extends Object {
 		return htmGroup;
 	}
 
+	////////////
+	// labels //
+	////////////
+
+	/**	 The entity labels
+	 *	 It is constructed before being initialized with the constructor by default. 
+	 */
+	@JsonProperty
+	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
+	@JsonInclude(Include.NON_NULL)
+	protected List<String> labels = new ArrayList<String>();
+
+	/**	<br> The entity labels
+	 *  It is constructed before being initialized with the constructor by default. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtm&fq=entiteVar_enUS_indexed_string:labels">Find the entity labels in Solr</a>
+	 * <br>
+	 * @param w is the entity already constructed. 
+	 **/
+	protected abstract void _labels(List<String> w);
+
+	public List<String> getLabels() {
+		return labels;
+	}
+
+	public void setLabels(List<String> labels) {
+		this.labels = labels;
+	}
+	public static String staticSetLabels(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	public SiteHtm addLabels(String...objects) {
+		for(String o : objects) {
+			addLabels(o);
+		}
+		return (SiteHtm)this;
+	}
+	public SiteHtm addLabels(String o) {
+		if(o != null)
+			this.labels.add(o);
+		return (SiteHtm)this;
+	}
+	@JsonIgnore
+	public void setLabels(JsonArray objects) {
+		labels.clear();
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
+			addLabels(o);
+		}
+	}
+	protected SiteHtm labelsInit() {
+		_labels(labels);
+		return (SiteHtm)this;
+	}
+
+	public static String staticSearchLabels(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrLabels(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqLabels(SiteRequestEnUS siteRequest_, String o) {
+		return SiteHtm.staticSearchStrLabels(siteRequest_, SiteHtm.staticSearchLabels(siteRequest_, SiteHtm.staticSetLabels(siteRequest_, o)));
+	}
+
+	public List<String> sqlLabels() {
+		return labels;
+	}
+
 	/////////////
 	// eBefore //
 	/////////////
@@ -1023,6 +1093,76 @@ public abstract class SiteHtmGen<DEV> extends Object {
 
 	public List<String> sqlText() {
 		return text;
+	}
+
+	/////////////
+	// comment //
+	/////////////
+
+	/**	 The entity comment
+	 *	 It is constructed before being initialized with the constructor by default. 
+	 */
+	@JsonProperty
+	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
+	@JsonInclude(Include.NON_NULL)
+	protected List<String> comment = new ArrayList<String>();
+
+	/**	<br> The entity comment
+	 *  It is constructed before being initialized with the constructor by default. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtm&fq=entiteVar_enUS_indexed_string:comment">Find the entity comment in Solr</a>
+	 * <br>
+	 * @param w is the entity already constructed. 
+	 **/
+	protected abstract void _comment(List<String> w);
+
+	public List<String> getComment() {
+		return comment;
+	}
+
+	public void setComment(List<String> comment) {
+		this.comment = comment;
+	}
+	public static String staticSetComment(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	public SiteHtm addComment(String...objects) {
+		for(String o : objects) {
+			addComment(o);
+		}
+		return (SiteHtm)this;
+	}
+	public SiteHtm addComment(String o) {
+		if(o != null)
+			this.comment.add(o);
+		return (SiteHtm)this;
+	}
+	@JsonIgnore
+	public void setComment(JsonArray objects) {
+		comment.clear();
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
+			addComment(o);
+		}
+	}
+	protected SiteHtm commentInit() {
+		_comment(comment);
+		return (SiteHtm)this;
+	}
+
+	public static String staticSearchComment(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrComment(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqComment(SiteRequestEnUS siteRequest_, String o) {
+		return SiteHtm.staticSearchStrComment(siteRequest_, SiteHtm.staticSearchComment(siteRequest_, SiteHtm.staticSetComment(siteRequest_, o)));
+	}
+
+	public List<String> sqlComment() {
+		return comment;
 	}
 
 	//////////
@@ -1854,10 +1994,12 @@ public abstract class SiteHtmGen<DEV> extends Object {
 				pageIdInit();
 				sequenceNumInit();
 				htmGroupInit();
+				labelsInit();
 				eBeforeInit();
 				eAfterInit();
 				aInit();
 				textInit();
+				commentInit();
 				tabsInit();
 				newLineInit();
 				htmBeforeInit();
@@ -1949,6 +2091,8 @@ public abstract class SiteHtmGen<DEV> extends Object {
 				return oSiteHtm.sequenceNum;
 			case "htmGroup":
 				return oSiteHtm.htmGroup;
+			case "labels":
+				return oSiteHtm.labels;
 			case "eBefore":
 				return oSiteHtm.eBefore;
 			case "eAfter":
@@ -1957,6 +2101,8 @@ public abstract class SiteHtmGen<DEV> extends Object {
 				return oSiteHtm.a;
 			case "text":
 				return oSiteHtm.text;
+			case "comment":
+				return oSiteHtm.comment;
 			case "tabs":
 				return oSiteHtm.tabs;
 			case "newLine":
@@ -2046,6 +2192,8 @@ public abstract class SiteHtmGen<DEV> extends Object {
 			return SiteHtm.staticSetSequenceNum(siteRequest_, o);
 		case "htmGroup":
 			return SiteHtm.staticSetHtmGroup(siteRequest_, o);
+		case "labels":
+			return SiteHtm.staticSetLabels(siteRequest_, o);
 		case "eBefore":
 			return SiteHtm.staticSetEBefore(siteRequest_, o);
 		case "eAfter":
@@ -2054,6 +2202,8 @@ public abstract class SiteHtmGen<DEV> extends Object {
 			return SiteHtm.staticSetA(siteRequest_, o);
 		case "text":
 			return SiteHtm.staticSetText(siteRequest_, o);
+		case "comment":
+			return SiteHtm.staticSetComment(siteRequest_, o);
 		case "tabs":
 			return SiteHtm.staticSetTabs(siteRequest_, o);
 		case "newLine":
@@ -2118,6 +2268,8 @@ public abstract class SiteHtmGen<DEV> extends Object {
 			return SiteHtm.staticSearchSequenceNum(siteRequest_, (Long)o);
 		case "htmGroup":
 			return SiteHtm.staticSearchHtmGroup(siteRequest_, (String)o);
+		case "labels":
+			return SiteHtm.staticSearchLabels(siteRequest_, (String)o);
 		case "eBefore":
 			return SiteHtm.staticSearchEBefore(siteRequest_, (String)o);
 		case "eAfter":
@@ -2126,6 +2278,8 @@ public abstract class SiteHtmGen<DEV> extends Object {
 			return SiteHtm.staticSearchA(siteRequest_, (JsonObject)o);
 		case "text":
 			return SiteHtm.staticSearchText(siteRequest_, (String)o);
+		case "comment":
+			return SiteHtm.staticSearchComment(siteRequest_, (String)o);
 		case "tabs":
 			return SiteHtm.staticSearchTabs(siteRequest_, (String)o);
 		case "newLine":
@@ -2190,6 +2344,8 @@ public abstract class SiteHtmGen<DEV> extends Object {
 			return SiteHtm.staticSearchStrSequenceNum(siteRequest_, (Long)o);
 		case "htmGroup":
 			return SiteHtm.staticSearchStrHtmGroup(siteRequest_, (String)o);
+		case "labels":
+			return SiteHtm.staticSearchStrLabels(siteRequest_, (String)o);
 		case "eBefore":
 			return SiteHtm.staticSearchStrEBefore(siteRequest_, (String)o);
 		case "eAfter":
@@ -2198,6 +2354,8 @@ public abstract class SiteHtmGen<DEV> extends Object {
 			return SiteHtm.staticSearchStrA(siteRequest_, (JsonObject)o);
 		case "text":
 			return SiteHtm.staticSearchStrText(siteRequest_, (String)o);
+		case "comment":
+			return SiteHtm.staticSearchStrComment(siteRequest_, (String)o);
 		case "tabs":
 			return SiteHtm.staticSearchStrTabs(siteRequest_, (String)o);
 		case "newLine":
@@ -2262,6 +2420,8 @@ public abstract class SiteHtmGen<DEV> extends Object {
 			return SiteHtm.staticSearchFqSequenceNum(siteRequest_, o);
 		case "htmGroup":
 			return SiteHtm.staticSearchFqHtmGroup(siteRequest_, o);
+		case "labels":
+			return SiteHtm.staticSearchFqLabels(siteRequest_, o);
 		case "eBefore":
 			return SiteHtm.staticSearchFqEBefore(siteRequest_, o);
 		case "eAfter":
@@ -2270,6 +2430,8 @@ public abstract class SiteHtmGen<DEV> extends Object {
 			return SiteHtm.staticSearchFqA(siteRequest_, o);
 		case "text":
 			return SiteHtm.staticSearchFqText(siteRequest_, o);
+		case "comment":
+			return SiteHtm.staticSearchFqComment(siteRequest_, o);
 		case "tabs":
 			return SiteHtm.staticSearchFqTabs(siteRequest_, o);
 		case "newLine":
@@ -2376,6 +2538,14 @@ public abstract class SiteHtmGen<DEV> extends Object {
 					setHtmGroup((String)val);
 				saves.add("htmGroup");
 				return val;
+			case "labels":
+				if(val instanceof List<?>)
+					((List<String>)val).stream().forEach(v -> addLabels(v));
+				else if(val instanceof JsonArray)
+					((JsonArray)val).stream().forEach(v -> addLabels(v.toString()));
+				if(!saves.contains("labels"))
+					saves.add("labels");
+				return val;
 			case "ebefore":
 				if(val instanceof String)
 					setEBefore((String)val);
@@ -2400,6 +2570,14 @@ public abstract class SiteHtmGen<DEV> extends Object {
 					((JsonArray)val).stream().forEach(v -> addText(v.toString()));
 				if(!saves.contains("text"))
 					saves.add("text");
+				return val;
+			case "comment":
+				if(val instanceof List<?>)
+					((List<String>)val).stream().forEach(v -> addComment(v));
+				else if(val instanceof JsonArray)
+					((JsonArray)val).stream().forEach(v -> addComment(v.toString()));
+				if(!saves.contains("comment"))
+					saves.add("comment");
 				return val;
 			case "tabs":
 				if(val instanceof String)
@@ -2482,6 +2660,13 @@ public abstract class SiteHtmGen<DEV> extends Object {
 		if(htmGroup != null) {
 			doc.put("htmGroup_docvalues_string", htmGroup);
 		}
+		if(labels != null) {
+			JsonArray l = new JsonArray();
+			doc.put("labels_docvalues_strings", l);
+			for(String o : labels) {
+				l.add(o);
+			}
+		}
 		if(eBefore != null) {
 			doc.put("eBefore_docvalues_string", eBefore);
 		}
@@ -2495,6 +2680,13 @@ public abstract class SiteHtmGen<DEV> extends Object {
 			JsonArray l = new JsonArray();
 			doc.put("text_text_enUS", l);
 			for(String o : text) {
+				l.add(o);
+			}
+		}
+		if(comment != null) {
+			JsonArray l = new JsonArray();
+			doc.put("comment_docvalues_strings", l);
+			for(String o : comment) {
 				l.add(o);
 			}
 		}
@@ -2568,12 +2760,16 @@ public abstract class SiteHtmGen<DEV> extends Object {
 				return "sequenceNum_docvalues_long";
 			case "htmGroup":
 				return "htmGroup_docvalues_string";
+			case "labels":
+				return "labels_docvalues_strings";
 			case "eBefore":
 				return "eBefore_docvalues_string";
 			case "eAfter":
 				return "eAfter_docvalues_string";
 			case "a":
 				return "a_docvalues_string";
+			case "comment":
+				return "comment_docvalues_strings";
 			case "tabs":
 				return "tabs_docvalues_string";
 			case "newLine":
@@ -2625,6 +2821,8 @@ public abstract class SiteHtmGen<DEV> extends Object {
 				return "sequenceNum_docvalues_long";
 			case "htmGroup":
 				return "htmGroup_docvalues_string";
+			case "labels":
+				return "labels_docvalues_strings";
 			case "eBefore":
 				return "eBefore_docvalues_string";
 			case "eAfter":
@@ -2633,6 +2831,8 @@ public abstract class SiteHtmGen<DEV> extends Object {
 				return "a_docvalues_string";
 			case "text":
 				return "text_text_enUS";
+			case "comment":
+				return "comment_docvalues_strings";
 			case "tabs":
 				return "tabs_docvalues_string";
 			case "newLine":
@@ -2684,6 +2884,8 @@ public abstract class SiteHtmGen<DEV> extends Object {
 				return "sequenceNum";
 			case "htmGroup_docvalues_string":
 				return "htmGroup";
+			case "labels_docvalues_strings":
+				return "labels";
 			case "eBefore_docvalues_string":
 				return "eBefore";
 			case "eAfter_docvalues_string":
@@ -2692,6 +2894,8 @@ public abstract class SiteHtmGen<DEV> extends Object {
 				return "a";
 			case "text_text_enUS":
 				return "text";
+			case "comment_docvalues_strings":
+				return "comment";
 			case "tabs_docvalues_string":
 				return "tabs";
 			case "newLine_docvalues_boolean":
@@ -2763,11 +2967,17 @@ public abstract class SiteHtmGen<DEV> extends Object {
 		oSiteHtm.setPageId(Optional.ofNullable(doc.get("pageId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSiteHtm.setSequenceNum(Optional.ofNullable(doc.get("sequenceNum_docvalues_long")).map(v -> v.toString()).orElse(null));
 		oSiteHtm.setHtmGroup(Optional.ofNullable(doc.get("htmGroup_docvalues_string")).map(v -> v.toString()).orElse(null));
+		Optional.ofNullable((List<?>)doc.get("labels_docvalues_strings")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
+			oSiteHtm.addLabels(v.toString());
+		});
 		oSiteHtm.setEBefore(Optional.ofNullable(doc.get("eBefore_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSiteHtm.setEAfter(Optional.ofNullable(doc.get("eAfter_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSiteHtm.setA(Optional.ofNullable(doc.get("a_docvalues_string")).map(v -> v.toString()).orElse(null));
 		Optional.ofNullable((List<?>)doc.get("text_text_enUS")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
 			oSiteHtm.addText(v.toString());
+		});
+		Optional.ofNullable((List<?>)doc.get("comment_docvalues_strings")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
+			oSiteHtm.addComment(v.toString());
 		});
 		oSiteHtm.setTabs(Optional.ofNullable(doc.get("tabs_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSiteHtm.setNewLine(Optional.ofNullable(doc.get("newLine_docvalues_boolean")).map(v -> v.toString()).orElse(null));
@@ -2817,6 +3027,8 @@ public abstract class SiteHtmGen<DEV> extends Object {
 				apiRequest.addVars("sequenceNum");
 			if(!Objects.equals(htmGroup, original.getHtmGroup()))
 				apiRequest.addVars("htmGroup");
+			if(!Objects.equals(labels, original.getLabels()))
+				apiRequest.addVars("labels");
 			if(!Objects.equals(eBefore, original.getEBefore()))
 				apiRequest.addVars("eBefore");
 			if(!Objects.equals(eAfter, original.getEAfter()))
@@ -2825,6 +3037,8 @@ public abstract class SiteHtmGen<DEV> extends Object {
 				apiRequest.addVars("a");
 			if(!Objects.equals(text, original.getText()))
 				apiRequest.addVars("text");
+			if(!Objects.equals(comment, original.getComment()))
+				apiRequest.addVars("comment");
 			if(!Objects.equals(tabs, original.getTabs()))
 				apiRequest.addVars("tabs");
 			if(!Objects.equals(newLine, original.getNewLine()))
@@ -2872,10 +3086,12 @@ public abstract class SiteHtmGen<DEV> extends Object {
 		sb.append(Optional.ofNullable(pageId).map(v -> "pageId: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(sequenceNum).map(v -> "sequenceNum: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(htmGroup).map(v -> "htmGroup: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(labels).map(v -> "labels: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(eBefore).map(v -> "eBefore: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(eAfter).map(v -> "eAfter: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(a).map(v -> "a: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(text).map(v -> "text: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(comment).map(v -> "comment: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(tabs).map(v -> "tabs: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(newLine).map(v -> "newLine: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(htmBefore).map(v -> "htmBefore: \"" + v + "\"\n" ).orElse(""));
@@ -2906,10 +3122,12 @@ public abstract class SiteHtmGen<DEV> extends Object {
 	public static final String VAR_pageId = "pageId";
 	public static final String VAR_sequenceNum = "sequenceNum";
 	public static final String VAR_htmGroup = "htmGroup";
+	public static final String VAR_labels = "labels";
 	public static final String VAR_eBefore = "eBefore";
 	public static final String VAR_eAfter = "eAfter";
 	public static final String VAR_a = "a";
 	public static final String VAR_text = "text";
+	public static final String VAR_comment = "comment";
 	public static final String VAR_tabs = "tabs";
 	public static final String VAR_newLine = "newLine";
 	public static final String VAR_htmBefore = "htmBefore";
@@ -2967,10 +3185,12 @@ public abstract class SiteHtmGen<DEV> extends Object {
 	public static final String DISPLAY_NAME_pageId = "Page ID";
 	public static final String DISPLAY_NAME_sequenceNum = "Sequence Number";
 	public static final String DISPLAY_NAME_htmGroup = "HTML Group";
+	public static final String DISPLAY_NAME_labels = "Labels";
 	public static final String DISPLAY_NAME_eBefore = "HTML Element";
 	public static final String DISPLAY_NAME_eAfter = "HTML Element";
 	public static final String DISPLAY_NAME_a = "HTML Element";
 	public static final String DISPLAY_NAME_text = "Text";
+	public static final String DISPLAY_NAME_comment = "Text";
 	public static final String DISPLAY_NAME_tabs = "Tabs";
 	public static final String DISPLAY_NAME_newLine = "Tabs";
 	public static final String DISPLAY_NAME_htmBefore = "HTML before";
@@ -3016,6 +3236,8 @@ public abstract class SiteHtmGen<DEV> extends Object {
 			return DISPLAY_NAME_sequenceNum;
 		case VAR_htmGroup:
 			return DISPLAY_NAME_htmGroup;
+		case VAR_labels:
+			return DISPLAY_NAME_labels;
 		case VAR_eBefore:
 			return DISPLAY_NAME_eBefore;
 		case VAR_eAfter:
@@ -3024,6 +3246,8 @@ public abstract class SiteHtmGen<DEV> extends Object {
 			return DISPLAY_NAME_a;
 		case VAR_text:
 			return DISPLAY_NAME_text;
+		case VAR_comment:
+			return DISPLAY_NAME_comment;
 		case VAR_tabs:
 			return DISPLAY_NAME_tabs;
 		case VAR_newLine:
@@ -3085,6 +3309,8 @@ public abstract class SiteHtmGen<DEV> extends Object {
 			return "The sequence number for this page. ";
 		case VAR_htmGroup:
 			return "The HTML group. ";
+		case VAR_labels:
+			return "A list of labels";
 		case VAR_eBefore:
 			return "The HTML element. ";
 		case VAR_eAfter:
@@ -3092,6 +3318,8 @@ public abstract class SiteHtmGen<DEV> extends Object {
 		case VAR_a:
 			return "The HTML element. ";
 		case VAR_text:
+			return "The text. ";
+		case VAR_comment:
 			return "The text. ";
 		case VAR_tabs:
 			return "The tabs. ";
@@ -3154,6 +3382,8 @@ public abstract class SiteHtmGen<DEV> extends Object {
 			return "Long";
 		case VAR_htmGroup:
 			return "String";
+		case VAR_labels:
+			return "List";
 		case VAR_eBefore:
 			return "String";
 		case VAR_eAfter:
@@ -3161,6 +3391,8 @@ public abstract class SiteHtmGen<DEV> extends Object {
 		case VAR_a:
 			return "JsonObject";
 		case VAR_text:
+			return "List";
+		case VAR_comment:
 			return "List";
 		case VAR_tabs:
 			return "String";

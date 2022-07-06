@@ -195,6 +195,16 @@ public class SiteHtm extends SiteHtmGen<Object> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
+	 * DisplayName: Labels
+	 * Description: A list of labels
+	 */
+	protected void _labels(List<String> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
 	 * DisplayName: HTML Element
 	 * Description: The HTML element. 
 	 */
@@ -233,6 +243,16 @@ public class SiteHtm extends SiteHtmGen<Object> {
 
 	/**
 	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * DisplayName: Text
+	 * Description: The text. 
+	 */
+	protected void _comment(List<String> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
 	 * Persist: true
 	 * DocValues: true
 	 * DisplayName: Tabs
@@ -260,8 +280,23 @@ public class SiteHtm extends SiteHtmGen<Object> {
 	 * Description: The HTML that comes before the text. 
 	 */
 	protected void _htmBefore(Wrap<String> w) {
+		StringBuilder b = new StringBuilder();
+		if(comment != null) {
+			for(Integer i=0; i < comment.size(); i++) {
+				if(tabs != null)
+					b.append(tabs);
+				if(i == 0)
+					b.append("<!-- ");
+				else
+					b.append("     ");
+				b.append(comment.get(i));
+				if(i == (comment.size() - 1))
+					b.append(" -->\n");
+				else
+					b.append("\n");
+			}
+		}
 		if(eBefore != null) {
-			StringBuilder b = new StringBuilder();
 			if(tabs != null)
 				b.append(tabs);
 			b.append("<").append(eBefore);
@@ -279,8 +314,9 @@ public class SiteHtm extends SiteHtmGen<Object> {
 			if(newLine) {
 				b.append("\n");
 			}
-			w.o(b.toString());
 		}
+		if(b.length() > 0)
+			w.o(b.toString());
 	}
 
 	/**

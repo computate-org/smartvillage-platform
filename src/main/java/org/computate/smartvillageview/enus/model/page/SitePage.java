@@ -1,10 +1,18 @@
 package org.computate.smartvillageview.enus.model.page;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.Normalizer;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
+
+import javax.imageio.ImageIO;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
@@ -62,15 +70,36 @@ public class SitePage extends SitePageGen<Object> {
 	/**
 	 * {@inheritDoc}
 	 */
-	protected void _SITE_DISPLAY_NAME(Wrap<String> w) {
+	protected void _siteName(Wrap<String> w) {
+		w.o(siteRequest_.getConfig().getString(ConfigKeys.SITE_NAME));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	protected void _siteDisplayName(Wrap<String> w) {
 		w.o(siteRequest_.getConfig().getString(ConfigKeys.SITE_DISPLAY_NAME));
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	protected void _STATIC_BASE_URL(Wrap<String> w) {
+	protected void _staticBaseUrl(Wrap<String> w) {
 		w.o(siteRequest_.getConfig().getString(ConfigKeys.STATIC_BASE_URL));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	protected void _staticPath(Wrap<String> w) {
+		w.o(siteRequest_.getConfig().getString(ConfigKeys.STATIC_PATH));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	protected void _siteBaseUrl(Wrap<String> w) {
+		w.o(siteRequest_.getConfig().getString(ConfigKeys.SITE_BASE_URL));
 	}
 
 	/**
@@ -80,19 +109,6 @@ public class SitePage extends SitePageGen<Object> {
 	 */
 	protected void _promiseBefore(Promise<Void> promise) {
 		promise.complete();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * DocValues: true
-	 * Persist: true
-	 * HtmlRow: 3
-	 * HtmlCell: 1
-	 * Facet: true
-	 * DisplayName: Page ID
-	 * Description: The ID for this page. 
-	 */
-	protected void _pageId(Wrap<String> w) {
 	}
 
 	/**
@@ -129,6 +145,21 @@ public class SitePage extends SitePageGen<Object> {
 	 * Description: The relative URI for this page. 
 	 */
 	protected void _uri(Wrap<String> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * HtmlRow: 3
+	 * HtmlCell: 1
+	 * Facet: true
+	 * DisplayName: Page ID
+	 * Description: The ID for this page. 
+	 */
+	protected void _pageId(Wrap<String> w) {
+		if(uri != null)
+			w.o(StringUtils.substringAfterLast(uri, "/"));
 	}
 
 	/**
@@ -215,6 +246,38 @@ public class SitePage extends SitePageGen<Object> {
 	 * Description: The page image URI
 	 */
 	protected void _pageImageUri(Wrap<String> w) {
+	}
+
+	/**
+	 * Description: The image width
+	 */
+	protected void _pageImageWidth(Wrap<Integer> w) {
+		if(pageImageUri != null) {
+			Path path = Paths.get(siteRequest_.getConfig().getString(ConfigKeys.STATIC_PATH), pageImageUri);
+			File file = path.toFile();
+			if(file.exists()) {
+				try {
+					BufferedImage img = ImageIO.read(file);
+					w.o(img.getWidth());
+					setPageImageHeight(img.getHeight());
+					setPageImageType(Files.probeContentType(path));
+				} catch (Exception ex) {
+					ExceptionUtils.rethrow(ex);
+				}
+			}
+		}
+	}
+
+	/**
+	 * Description: The image height
+	 */
+	protected void _pageImageHeight(Wrap<Integer> c) {
+	}
+
+	/**
+	 * Description: The image height
+	 */
+	protected void _pageImageType(Wrap<String> c) {
 	}
 
 	/**
