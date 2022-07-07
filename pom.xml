@@ -30,7 +30,7 @@
 		<exec-maven-plugin.version>1.5.0</exec-maven-plugin.version>
 		<postgresql.version>42.2.2.jre7</postgresql.version>
 		<junit.version>4.13.1</junit.version>
-		<vertx.version>4.1.8.redhat-00003</vertx.version>
+		<vertx.version>4.2.5.redhat-00001</vertx.version>
 		<computate.version>4.2.5.13</computate.version>
 		<camel.version>3.14.1</camel.version>
 		<kie.version>7.65.0.Final</kie.version>
