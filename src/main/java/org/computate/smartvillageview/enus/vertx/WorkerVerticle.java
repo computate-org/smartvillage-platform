@@ -86,12 +86,12 @@ import org.computate.smartvillageview.enus.model.traffic.simulation.reader.Traff
 import org.computate.smartvillageview.enus.model.traffic.time.step.TimeStep;
 
 import org.computate.smartvillageview.enus.model.user.SiteUser;
+import org.computate.smartvillageview.enus.model.page.SitePage;
+import org.computate.smartvillageview.enus.model.htm.SiteHtm;
 import org.computate.smartvillageview.enus.model.iotnode.IotNode;
 import org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation;
 import org.computate.smartvillageview.enus.model.traffic.time.step.TimeStep;
 import org.computate.smartvillageview.enus.model.traffic.vehicle.step.VehicleStep;
-import org.computate.smartvillageview.enus.model.page.SitePage;
-import org.computate.smartvillageview.enus.model.htm.SiteHtm;
 
 /**
  */
@@ -919,12 +919,12 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 			if(config().getBoolean(ConfigKeys.ENABLE_REFRESH_DATA, false)) {
 				LOG.info(refreshAllDataStarted);
 				refreshData(SiteUser.CLASS_SIMPLE_NAME).onSuccess(q -> {
-					refreshData(IotNode.CLASS_SIMPLE_NAME).onSuccess(q1 -> {
-						refreshData(TrafficSimulation.CLASS_SIMPLE_NAME).onSuccess(q2 -> {
-							refreshData(TimeStep.CLASS_SIMPLE_NAME).onSuccess(q3 -> {
-								refreshData(VehicleStep.CLASS_SIMPLE_NAME).onSuccess(q4 -> {
-									refreshData(SitePage.CLASS_SIMPLE_NAME).onSuccess(q5 -> {
-										refreshData(SiteHtm.CLASS_SIMPLE_NAME).onSuccess(q6 -> {
+					refreshData(SitePage.CLASS_SIMPLE_NAME).onSuccess(q1 -> {
+						refreshData(SiteHtm.CLASS_SIMPLE_NAME).onSuccess(q2 -> {
+							refreshData(IotNode.CLASS_SIMPLE_NAME).onSuccess(q3 -> {
+								refreshData(TrafficSimulation.CLASS_SIMPLE_NAME).onSuccess(q4 -> {
+									refreshData(TimeStep.CLASS_SIMPLE_NAME).onSuccess(q5 -> {
+										refreshData(VehicleStep.CLASS_SIMPLE_NAME).onSuccess(q6 -> {
 											LOG.info(refreshAllDataComplete);
 											promise.complete();
 										}).onFailure(ex -> {

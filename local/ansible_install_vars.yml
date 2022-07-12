@@ -23,13 +23,21 @@ CLUSTER_PORT: "{{ PROJECT_PORT | regex_replace('(...)', '\\1') }}81"
 JDBC_DATABASE: "{{ PROJECT_NAME }}"
 JDBC_USERNAME: "{{ PROJECT_NAME }}"
 SOLR_COLLECTION: "{{ PROJECT_NAME }}"
-JAVA_OPTS: -XX:+UseParallelOldGC -XX:MinHeapFreeRatio=10 -XX:MaxHeapFreeRatio=20 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -XX:MaxMetaspaceSize=100m -XX:ParallelGCThreads=1 -Djava.util.concurrent.ForkJoinPool.common.parallelism=1 -XX:CICompilerCount=2 -XX:+ExitOnOutOfMemoryError
+JAVA_OPTS: "-XX:+ExitOnOutOfMemoryError"
 ENABLE_SESSION_ID: true
 ENABLE_DELETED: true
 ENABLE_ARCHIVED: true
 ENABLE_ROLE_ADMIN: true
 ENABLE_OPENID_CONNECT: true
 ENABLE_CODE_GENERATION_SERVICE: true
+PROJECT_VOLUME_SIZE: 30Gi
+PROJECT_VOLUME_NAME: "{{ PROJECT_NAME }}"
+PROJECT_VOLUME_MOUNT_PATH: "/var/{{ PROJECT_NAME }}"
+SITE_LIMITS_MEMORY: "1500Mi"
+SITE_LIMITS_CPU: "700m"
+SITE_REQUESTS_MEMORY: "1500Mi"
+SITE_REQUESTS_CPU: "700m"
+SITE_REPLICAS: 1
 
 ENABLE_MENU_SiteHtm: false
 ENABLE_MENU_TimeStep: false
@@ -145,6 +153,8 @@ PROJECTS:
         template: openshift/SITE_BUILD_CONFIG_1.yml
       - path: "{{ PROJECT_SRC }}/openshift/SITE_DEPLOYMENT_CONFIG_1.yml"
         template: openshift/SITE_DEPLOYMENT_CONFIG_1.yml
+      - path: "{{ PROJECT_SRC }}/openshift/SITE_PERSISTENT_VOLUME_CLAIM_1.yml"
+        template: openshift/SITE_PERSISTENT_VOLUME_CLAIM_1.yml
       - path: "{{ PROJECT_SRC }}/Dockerfile"
         template: openshift/Dockerfile
 
@@ -423,6 +433,31 @@ WORKER_IMPORT_DATA: |2
 
 AFTER_htmStylePageLayout: |2
   		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anonymous%20Pro%7CBellefair%7CJomhuria%7CPT%20Serif%3A700%7CStint%20Ultra%20Condensed&amp;display=swap"/>
+
+BEFORE_Dockerfile: |2
+  
+  ENV APP_NAME=sumo \
+  	APP_DEPENDENCIES="git python3 python3-pip python3-virtualenv make gcc gcc-c++ readline-devel tcl zlib-devel libpng-devel libjpeg-turbo-devel libtiff-devel libXext-devel mesa-libGLw mesa-libGL-devel mesa-libGLU-devel" \
+  	APP_DISPLAY_NAME="SUMO Simulation of Urban Mobility" \
+  	APP_PREFIX="/usr/local" \
+  	APP_SRC="/usr/local/src/sumo" \
+  	APP_SHARE="/usr/local/share/sumo" \
+  	APP_REPO_HTTPS="https://github.com/eclipse/sumo.git" \
+  	APP_TAG="v1_12_0" \
+  	APP_EXEC="/usr/local/bin/sumo-gui" \
+  	PYTHON_DIR="/opt/python"
+
+MIDDLE_Dockerfile: |2
+  
+  RUN microdnf install -y ${APP_DEPENDENCIES}
+  RUN /usr/bin/virtualenv ${PYTHON_DIR}
+  RUN source ${PYTHON_DIR}/bin/activate && pip install setuptools_rust wheel
+  RUN source ${PYTHON_DIR}/bin/activate && pip install --upgrade pip
+  RUN source ${PYTHON_DIR}/bin/activate && pip install ansible
+  RUN git clone https://github.com/computate-org/computate_sumo.git /home/jboss/.ansible/roles/computate.computate_sumo
+  RUN git clone https://github.com/computate-org/computate_sqlite.git /home/jboss/.ansible/roles/computate.computate_sqlite
+  RUN git clone https://github.com/computate-org/computate_fox.git /home/jboss/.ansible/roles/computate.computate_fox
+  RUN source ${PYTHON_DIR}/bin/activate && env APP_PREFIX=/usr/local APP_DOWNLOAD_DIR=/tmp ${PYTHON_DIR}/bin/ansible-playbook /home/jboss/.ansible/roles/computate.computate_sumo/install.yml
 
 README_END: |
   

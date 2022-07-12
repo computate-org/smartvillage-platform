@@ -2,7 +2,7 @@
 apiVersion: apps.openshift.io/v1
 kind: DeploymentConfig
 spec:
-  replicas: 1
+  replicas: '{{ SITE_REPLICAS }}'
   selector:
     app: "{{ SITE_NAME }}"
     deploymentconfig: "{{ SITE_NAME }}"
@@ -216,6 +216,8 @@ spec:
                   fieldPath: status.podIP
             - name: CLUSTER_PUBLIC_HOST_NAME
               value: "{{ SITE_NAME }}.{{ SITE_NAMESPACE }}.svc"
+            - name: JAVA_OPTS
+              value: "{{ JAVA_OPTS }}"
 
             - name: API_COUNTER_FETCH
               value: "{{ API_COUNTER_FETCH }}"
@@ -223,6 +225,10 @@ spec:
               value: "{{ API_COUNTER_RESUME }}"
             - name: ENABLE_IMPORT_DATA
               value: "{{ ENABLE_IMPORT_DATA }}"
+            - name: ENABLE_IMPORT_DATA_SitePage
+              value: '{{ ENABLE_IMPORT_DATA_SitePage | to_json }}'
+            - name: ENABLE_IMPORT_DATA_SiteHtm
+              value: '{{ ENABLE_IMPORT_DATA_SiteHtm | to_json }}'
             - name: ENABLE_IMPORT_DATA_IotNode
               value: '{{ ENABLE_IMPORT_DATA_IotNode | to_json }}'
             - name: ENABLE_IMPORT_DATA_TrafficSimulation
@@ -231,16 +237,16 @@ spec:
               value: '{{ ENABLE_IMPORT_DATA_TimeStep | to_json }}'
             - name: ENABLE_IMPORT_DATA_VehicleStep
               value: '{{ ENABLE_IMPORT_DATA_VehicleStep | to_json }}'
-            - name: ENABLE_IMPORT_DATA_SitePage
-              value: '{{ ENABLE_IMPORT_DATA_SitePage | to_json }}'
-            - name: ENABLE_IMPORT_DATA_SiteHtm
-              value: '{{ ENABLE_IMPORT_DATA_SiteHtm | to_json }}'
             - name: ENABLE_REFRESH_DATA
               value: "{{ ENABLE_REFRESH_DATA }}"
             - name: AUTH_ROLES_ADMIN
               value: '{{ AUTH_ROLES_ADMIN | to_json }}'
             - name: AUTH_ROLES_REQUIRED_SiteUser
               value: '{{ AUTH_ROLES_REQUIRED_SiteUser | to_json }}'
+            - name: AUTH_ROLES_REQUIRED_SitePage
+              value: '{{ AUTH_ROLES_REQUIRED_SitePage | to_json }}'
+            - name: AUTH_ROLES_REQUIRED_SiteHtm
+              value: '{{ AUTH_ROLES_REQUIRED_SiteHtm | to_json }}'
             - name: AUTH_ROLES_REQUIRED_IotNode
               value: '{{ AUTH_ROLES_REQUIRED_IotNode | to_json }}'
             - name: AUTH_ROLES_REQUIRED_TrafficSimulation
@@ -249,10 +255,6 @@ spec:
               value: '{{ AUTH_ROLES_REQUIRED_TimeStep | to_json }}'
             - name: AUTH_ROLES_REQUIRED_VehicleStep
               value: '{{ AUTH_ROLES_REQUIRED_VehicleStep | to_json }}'
-            - name: AUTH_ROLES_REQUIRED_SitePage
-              value: '{{ AUTH_ROLES_REQUIRED_SitePage | to_json }}'
-            - name: AUTH_ROLES_REQUIRED_SiteHtm
-              value: '{{ AUTH_ROLES_REQUIRED_SiteHtm | to_json }}'
 
             - name: "GITHUB_ORG"
               valueFrom:
@@ -345,7 +347,16 @@ spec:
                   key: "DEFAULT_MAP_ZOOM"
                   name: "{{ SITE_NAME }}-secret"
           volumeMounts:
+{% if PROJECT_VOLUME_MOUNT_PATH and PROJECT_VOLUME_NAME %}
+            - mountPath: "{{ PROJECT_VOLUME_MOUNT_PATH }}"
+              name: "{{ PROJECT_VOLUME_NAME }}"
+{% endif %}
       volumes:
+{% if PROJECT_VOLUME_NAME %}
+        - name: "{{ PROJECT_VOLUME_NAME }}"
+          persistentVolumeClaim:
+            claimName: "{{ PROJECT_VOLUME_NAME }}"
+{% endif %}
   triggers:
     - imageChangeParams:
         automatic: true

@@ -5137,76 +5137,96 @@ components:
   schemas:
     SearchSiteHtmResponse:
       allOf:
-        - type: array
-          items:
-            type: object
-            properties:
-              inheritPk:
-                type: string
-              created:
-                type: string
-                format: date-time
-              modified:
-                type: string
-                format: date-time
-              archived:
-                type: boolean
-              deleted:
-                type: boolean
-              saves:
-                type: array
-                items:
-                  type: string
-              uri:
-                type: string
-              pageId:
-                type: string
-              sequenceNum:
-                type: string
-              htmGroup:
-                type: string
-              eBefore:
-                type: string
-              eAfter:
-                type: string
-              a:
+        - type: object
+          properties:
+            startNum:
+              type: integer
+              minimum: 0
+            foundNum:
+              type: integer
+              minimum: 0
+            returnedNum:
+              type: integer
+              minimum: 0
+            list:
+              type: array
+              items:
                 type: object
-              text:
-                type: array
-                items:
-                  type: string
-              tabs:
-                type: string
-              newLine:
-                type: boolean
-              htmBefore:
-                type: string
-              htmAfter:
-                type: string
-              classCanonicalName:
-                type: string
-              classSimpleName:
-                type: string
-              classCanonicalNames:
-                type: array
-                items:
-                  type: string
-              objectTitle:
-                type: string
-              objectId:
-                type: string
-              objectNameVar:
-                type: string
-              objectSuggest:
-                type: string
-              pageUrlId:
-                type: string
-              pageUrlPk:
-                type: string
-              pageUrlApi:
-                type: string
-              id:
-                type: string
+                properties:
+                  inheritPk:
+                    type: string
+                  created:
+                    type: string
+                    format: date-time
+                  modified:
+                    type: string
+                    format: date-time
+                  archived:
+                    type: boolean
+                  deleted:
+                    type: boolean
+                  saves:
+                    type: array
+                    items:
+                      type: string
+                  uri:
+                    type: string
+                  pageId:
+                    type: string
+                  sequenceNum:
+                    type: string
+                  htmGroup:
+                    type: string
+                  labels:
+                    type: array
+                    items:
+                      type: string
+                  eBefore:
+                    type: string
+                  eAfter:
+                    type: string
+                  a:
+                    type: object
+                  text:
+                    type: array
+                    items:
+                      type: string
+                  comment:
+                    type: array
+                    items:
+                      type: string
+                  tabs:
+                    type: string
+                  newLine:
+                    type: boolean
+                  htmBefore:
+                    type: string
+                  htmAfter:
+                    type: string
+                  classCanonicalName:
+                    type: string
+                  classSimpleName:
+                    type: string
+                  classCanonicalNames:
+                    type: array
+                    items:
+                      type: string
+                  objectTitle:
+                    type: string
+                  objectId:
+                    type: string
+                  objectNameVar:
+                    type: string
+                  objectSuggest:
+                    type: string
+                  pageUrlId:
+                    type: string
+                  pageUrlPk:
+                    type: string
+                  pageUrlApi:
+                    type: string
+                  id:
+                    type: string
     POSTSiteHtmRequest:
       allOf:
         - type: object
@@ -5235,6 +5255,10 @@ components:
               type: string
             htmGroup:
               type: string
+            labels:
+              type: array
+              items:
+                type: string
             eBefore:
               type: string
             eAfter:
@@ -5242,6 +5266,10 @@ components:
             a:
               type: object
             text:
+              type: array
+              items:
+                type: string
+            comment:
               type: array
               items:
                 type: string
@@ -5305,6 +5333,10 @@ components:
               type: string
             htmGroup:
               type: string
+            labels:
+              type: array
+              items:
+                type: string
             eBefore:
               type: string
             eAfter:
@@ -5312,6 +5344,10 @@ components:
             a:
               type: object
             text:
+              type: array
+              items:
+                type: string
+            comment:
               type: array
               items:
                 type: string
@@ -5437,6 +5473,23 @@ components:
               type: string
             removeAllHtmGroup:
               type: string
+            setLabels:
+              type: array
+              nullable: true
+              items:
+                type: string
+            removeLabels:
+              type: string
+            removeAllLabels:
+              type: array
+              items:
+                type: string
+            addLabels:
+              type: string
+            addAllLabels:
+              type: array
+              items:
+                type: string
             setEBefore:
               type: string
               nullable: true
@@ -5472,6 +5525,23 @@ components:
             addText:
               type: string
             addAllText:
+              type: array
+              items:
+                type: string
+            setComment:
+              type: array
+              nullable: true
+              items:
+                type: string
+            removeComment:
+              type: string
+            removeAllComment:
+              type: array
+              items:
+                type: string
+            addComment:
+              type: string
+            addAllComment:
               type: array
               items:
                 type: string
@@ -5680,6 +5750,23 @@ components:
               type: string
             removeAllHtmGroup:
               type: string
+            setLabels:
+              type: array
+              nullable: true
+              items:
+                type: string
+            removeLabels:
+              type: string
+            removeAllLabels:
+              type: array
+              items:
+                type: string
+            addLabels:
+              type: string
+            addAllLabels:
+              type: array
+              items:
+                type: string
             setEBefore:
               type: string
               nullable: true
@@ -5715,6 +5802,23 @@ components:
             addText:
               type: string
             addAllText:
+              type: array
+              items:
+                type: string
+            setComment:
+              type: array
+              nullable: true
+              items:
+                type: string
+            removeComment:
+              type: string
+            removeAllComment:
+              type: array
+              items:
+                type: string
+            addComment:
+              type: string
+            addAllComment:
               type: array
               items:
                 type: string
@@ -5861,6 +5965,10 @@ components:
               type: string
             htmGroup:
               type: string
+            labels:
+              type: array
+              items:
+                type: string
             eBefore:
               type: string
             eAfter:
@@ -5868,6 +5976,10 @@ components:
             a:
               type: object
             text:
+              type: array
+              items:
+                type: string
+            comment:
               type: array
               items:
                 type: string
@@ -5931,6 +6043,10 @@ components:
               type: string
             htmGroup:
               type: string
+            labels:
+              type: array
+              items:
+                type: string
             eBefore:
               type: string
             eAfter:
@@ -5938,6 +6054,10 @@ components:
             a:
               type: object
             text:
+              type: array
+              items:
+                type: string
+            comment:
               type: array
               items:
                 type: string
@@ -6001,6 +6121,10 @@ components:
               type: string
             htmGroup:
               type: string
+            labels:
+              type: array
+              items:
+                type: string
             eBefore:
               type: string
             eAfter:
@@ -6008,6 +6132,10 @@ components:
             a:
               type: object
             text:
+              type: array
+              items:
+                type: string
+            comment:
               type: array
               items:
                 type: string
@@ -6048,90 +6176,102 @@ components:
         - type: string
     SearchIotNodeResponse:
       allOf:
-        - type: array
-          items:
-            type: object
-            properties:
-              json:
+        - type: object
+          properties:
+            startNum:
+              type: integer
+              minimum: 0
+            foundNum:
+              type: integer
+              minimum: 0
+            returnedNum:
+              type: integer
+              minimum: 0
+            list:
+              type: array
+              items:
                 type: object
-              nodeName:
-                type: string
-              nodeType:
-                type: string
-              nodeId:
-                type: string
-              location:
-                type: string
-              json_moisture:
-                type: string
-              json_moisture0:
-                type: string
-              json_moisture1:
-                type: string
-              json_temperature:
-                type: string
-              json_temperature0:
-                type: string
-              json_temperatureAverage:
-                type: string
-              json_badConditionsCounter:
-                type: string
-              json_door:
-                type: string
-              json_alarmDoor:
-                type: boolean
-              json_flood:
-                type: string
-              json_alarmFlood:
-                type: boolean
-              json_lux2:
-                type: string
-              json_illuminance:
-                type: string
-              json_resistance0:
-                type: string
-              json_resistance1:
-                type: string
-              json_frequency:
-                type: string
-              json_devEui:
-                type: string
-              json_bandwidth:
-                type: string
-              json_dataRate:
-                type: string
-              json_frameCount:
-                type: string
-              json_maxPayload:
-                type: string
-              json_bitsPerSecond:
-                type: string
-              json_batteryVoltage:
-                type: string
-              json_spreadingFactor:
-                type: string
-              json_dataRateAdaptive:
-                type: boolean
-              json_swversion:
-                type: string
-              json_batteryLevel:
-                type: string
-              json_startUpCount:
-                type: string
-              json_watchdogCount:
-                type: string
-              json_historySequence:
-                type: string
-              json_versionFirmware:
-                type: string
-              json_stackTxFailRebootCount:
-                type: string
-              json_historySequencePrevious:
-                type: string
-              json_snr:
-                type: string
-              json_rssi:
-                type: string
+                properties:
+                  json:
+                    type: object
+                  nodeName:
+                    type: string
+                  nodeType:
+                    type: string
+                  nodeId:
+                    type: string
+                  location:
+                    type: string
+                  json_moisture:
+                    type: string
+                  json_moisture0:
+                    type: string
+                  json_moisture1:
+                    type: string
+                  json_temperature:
+                    type: string
+                  json_temperature0:
+                    type: string
+                  json_temperatureAverage:
+                    type: string
+                  json_badConditionsCounter:
+                    type: string
+                  json_door:
+                    type: string
+                  json_alarmDoor:
+                    type: boolean
+                  json_flood:
+                    type: string
+                  json_alarmFlood:
+                    type: boolean
+                  json_lux2:
+                    type: string
+                  json_illuminance:
+                    type: string
+                  json_resistance0:
+                    type: string
+                  json_resistance1:
+                    type: string
+                  json_frequency:
+                    type: string
+                  json_devEui:
+                    type: string
+                  json_bandwidth:
+                    type: string
+                  json_dataRate:
+                    type: string
+                  json_frameCount:
+                    type: string
+                  json_maxPayload:
+                    type: string
+                  json_bitsPerSecond:
+                    type: string
+                  json_batteryVoltage:
+                    type: string
+                  json_spreadingFactor:
+                    type: string
+                  json_dataRateAdaptive:
+                    type: boolean
+                  json_swversion:
+                    type: string
+                  json_batteryLevel:
+                    type: string
+                  json_startUpCount:
+                    type: string
+                  json_watchdogCount:
+                    type: string
+                  json_historySequence:
+                    type: string
+                  json_versionFirmware:
+                    type: string
+                  json_stackTxFailRebootCount:
+                    type: string
+                  json_historySequencePrevious:
+                    type: string
+                  json_snr:
+                    type: string
+                  json_rssi:
+                    type: string
     PATCHIotNodeRequest:
       allOf:
         - type: object
@@ -7125,93 +7265,123 @@ components:
         - type: string
     SearchSitePageResponse:
       allOf:
-        - type: array
-          items:
-            type: object
-            properties:
-              SITE_DISPLAY_NAME:
-                type: string
-              STATIC_BASE_URL:
-                type: string
-              pageId:
-                type: string
-              courseNum:
-                type: string
-              lessonNum:
-                type: string
-              uri:
-                type: string
-              h1:
-                type: string
-              h2:
-                type: string
-              inheritPk:
-                type: string
-              created:
-                type: string
-                format: date-time
-              modified:
-                type: string
-                format: date-time
-              author:
-                type: string
-              pageImageUri:
-                type: string
-              archived:
-                type: boolean
-              deleted:
-                type: boolean
-              classCanonicalName:
-                type: string
-              classSimpleName:
-                type: string
-              classCanonicalNames:
-                type: array
-                items:
-                  type: string
-              sessionId:
-                type: string
-              userKey:
-                type: string
-              saves:
-                type: array
-                items:
-                  type: string
-              objectTitle:
-                type: string
-              objectId:
-                type: string
-              objectNameVar:
-                type: string
-              objectSuggest:
-                type: string
-              objectText:
-                type: array
-                items:
-                  type: string
-              pageUrlId:
-                type: string
-              pageUrlPk:
-                type: string
-              pageUrlApi:
-                type: string
-              id:
-                type: string
+        - type: object
+          properties:
+            startNum:
+              type: integer
+              minimum: 0
+            foundNum:
+              type: integer
+              minimum: 0
+            returnedNum:
+              type: integer
+              minimum: 0
+            list:
+              type: array
+              items:
+                type: object
+                properties:
+                  siteName:
+                    type: string
+                  siteDisplayName:
+                    type: string
+                  staticBaseUrl:
+                    type: string
+                  staticPath:
+                    type: string
+                  siteBaseUrl:
+                    type: string
+                  courseNum:
+                    type: string
+                  lessonNum:
+                    type: string
+                  uri:
+                    type: string
+                  pageId:
+                    type: string
+                  h1:
+                    type: string
+                  h2:
+                    type: string
+                  inheritPk:
+                    type: string
+                  created:
+                    type: string
+                    format: date-time
+                  modified:
+                    type: string
+                    format: date-time
+                  author:
+                    type: string
+                  pageImageUri:
+                    type: string
+                  pageImageWidth:
+                    type: string
+                  pageImageHeight:
+                    type: string
+                  pageImageType:
+                    type: string
+                  archived:
+                    type: boolean
+                  deleted:
+                    type: boolean
+                  classCanonicalName:
+                    type: string
+                  classSimpleName:
+                    type: string
+                  classCanonicalNames:
+                    type: array
+                    items:
+                      type: string
+                  sessionId:
+                    type: string
+                  userKey:
+                    type: string
+                  saves:
+                    type: array
+                    items:
+                      type: string
+                  objectTitle:
+                    type: string
+                  objectId:
+                    type: string
+                  objectNameVar:
+                    type: string
+                  objectSuggest:
+                    type: string
+                  objectText:
+                    type: array
+                    items:
+                      type: string
+                  pageUrlId:
+                    type: string
+                  pageUrlPk:
+                    type: string
+                  pageUrlApi:
+                    type: string
+                  id:
+                    type: string
     POSTSitePageRequest:
       allOf:
         - type: object
           properties:
-            SITE_DISPLAY_NAME:
+            siteName:
               type: string
-            STATIC_BASE_URL:
+            siteDisplayName:
               type: string
-            pageId:
+            staticBaseUrl:
+              type: string
+            staticPath:
+              type: string
+            siteBaseUrl:
               type: string
             courseNum:
               type: string
             lessonNum:
               type: string
             uri:
+              type: string
+            pageId:
               type: string
             h1:
               type: string
@@ -7228,6 +7398,12 @@ components:
             author:
               type: string
             pageImageUri:
+              type: string
+            pageImageWidth:
+              type: string
+            pageImageHeight:
+              type: string
+            pageImageType:
               type: string
             archived:
               type: boolean
@@ -7273,17 +7449,23 @@ components:
       allOf:
         - type: object
           properties:
-            SITE_DISPLAY_NAME:
+            siteName:
               type: string
-            STATIC_BASE_URL:
+            siteDisplayName:
               type: string
-            pageId:
+            staticBaseUrl:
+              type: string
+            staticPath:
+              type: string
+            siteBaseUrl:
               type: string
             courseNum:
               type: string
             lessonNum:
               type: string
             uri:
+              type: string
+            pageId:
               type: string
             h1:
               type: string
@@ -7300,6 +7482,12 @@ components:
             author:
               type: string
             pageImageUri:
+              type: string
+            pageImageWidth:
+              type: string
+            pageImageHeight:
+              type: string
+            pageImageType:
               type: string
             archived:
               type: boolean
@@ -7345,26 +7533,40 @@ components:
       allOf:
         - type: object
           properties:
-            setSITE_DISPLAY_NAME:
+            setSiteName:
               type: string
               nullable: true
-            removeSITE_DISPLAY_NAME:
+            removeSiteName:
               type: string
-            removeAllSITE_DISPLAY_NAME:
+            removeAllSiteName:
               type: string
-            setSTATIC_BASE_URL:
-              type: string
-              nullable: true
-            removeSTATIC_BASE_URL:
-              type: string
-            removeAllSTATIC_BASE_URL:
-              type: string
-            setPageId:
+            setSiteDisplayName:
               type: string
               nullable: true
-            removePageId:
+            removeSiteDisplayName:
               type: string
-            removeAllPageId:
+            removeAllSiteDisplayName:
+              type: string
+            setStaticBaseUrl:
+              type: string
+              nullable: true
+            removeStaticBaseUrl:
+              type: string
+            removeAllStaticBaseUrl:
+              type: string
+            setStaticPath:
+              type: string
+              nullable: true
+            removeStaticPath:
+              type: string
+            removeAllStaticPath:
+              type: string
+            setSiteBaseUrl:
+              type: string
+              nullable: true
+            removeSiteBaseUrl:
+              type: string
+            removeAllSiteBaseUrl:
               type: string
             setCourseNum:
               type: string
@@ -7386,6 +7588,13 @@ components:
             removeUri:
               type: string
             removeAllUri:
+              type: string
+            setPageId:
+              type: string
+              nullable: true
+            removePageId:
+              type: string
+            removeAllPageId:
               type: string
             setH1:
               type: string
@@ -7441,6 +7650,27 @@ components:
             removePageImageUri:
               type: string
             removeAllPageImageUri:
+              type: string
+            setPageImageWidth:
+              type: string
+              nullable: true
+            removePageImageWidth:
+              type: string
+            removeAllPageImageWidth:
+              type: string
+            setPageImageHeight:
+              type: string
+              nullable: true
+            removePageImageHeight:
+              type: string
+            removeAllPageImageHeight:
+              type: string
+            setPageImageType:
+              type: string
+              nullable: true
+            removePageImageType:
+              type: string
+            removeAllPageImageType:
               type: string
             setArchived:
               type: boolean
@@ -7595,26 +7825,40 @@ components:
       allOf:
         - type: object
           properties:
-            setSITE_DISPLAY_NAME:
+            setSiteName:
               type: string
               nullable: true
-            removeSITE_DISPLAY_NAME:
+            removeSiteName:
               type: string
-            removeAllSITE_DISPLAY_NAME:
+            removeAllSiteName:
               type: string
-            setSTATIC_BASE_URL:
-              type: string
-              nullable: true
-            removeSTATIC_BASE_URL:
-              type: string
-            removeAllSTATIC_BASE_URL:
-              type: string
-            setPageId:
+            setSiteDisplayName:
               type: string
               nullable: true
-            removePageId:
+            removeSiteDisplayName:
               type: string
-            removeAllPageId:
+            removeAllSiteDisplayName:
+              type: string
+            setStaticBaseUrl:
+              type: string
+              nullable: true
+            removeStaticBaseUrl:
+              type: string
+            removeAllStaticBaseUrl:
+              type: string
+            setStaticPath:
+              type: string
+              nullable: true
+            removeStaticPath:
+              type: string
+            removeAllStaticPath:
+              type: string
+            setSiteBaseUrl:
+              type: string
+              nullable: true
+            removeSiteBaseUrl:
+              type: string
+            removeAllSiteBaseUrl:
               type: string
             setCourseNum:
               type: string
@@ -7636,6 +7880,13 @@ components:
             removeUri:
               type: string
             removeAllUri:
+              type: string
+            setPageId:
+              type: string
+              nullable: true
+            removePageId:
+              type: string
+            removeAllPageId:
               type: string
             setH1:
               type: string
@@ -7691,6 +7942,27 @@ components:
             removePageImageUri:
               type: string
             removeAllPageImageUri:
+              type: string
+            setPageImageWidth:
+              type: string
+              nullable: true
+            removePageImageWidth:
+              type: string
+            removeAllPageImageWidth:
+              type: string
+            setPageImageHeight:
+              type: string
+              nullable: true
+            removePageImageHeight:
+              type: string
+            removeAllPageImageHeight:
+              type: string
+            setPageImageType:
+              type: string
+              nullable: true
+            removePageImageType:
+              type: string
+            removeAllPageImageType:
               type: string
             setArchived:
               type: boolean
@@ -7845,17 +8117,23 @@ components:
       allOf:
         - type: object
           properties:
-            SITE_DISPLAY_NAME:
+            siteName:
               type: string
-            STATIC_BASE_URL:
+            siteDisplayName:
               type: string
-            pageId:
+            staticBaseUrl:
+              type: string
+            staticPath:
+              type: string
+            siteBaseUrl:
               type: string
             courseNum:
               type: string
             lessonNum:
               type: string
             uri:
+              type: string
+            pageId:
               type: string
             h1:
               type: string
@@ -7872,6 +8150,12 @@ components:
             author:
               type: string
             pageImageUri:
+              type: string
+            pageImageWidth:
+              type: string
+            pageImageHeight:
+              type: string
+            pageImageType:
               type: string
             archived:
               type: boolean
@@ -7917,17 +8201,23 @@ components:
       allOf:
         - type: object
           properties:
-            SITE_DISPLAY_NAME:
+            siteName:
               type: string
-            STATIC_BASE_URL:
+            siteDisplayName:
               type: string
-            pageId:
+            staticBaseUrl:
+              type: string
+            staticPath:
+              type: string
+            siteBaseUrl:
               type: string
             courseNum:
               type: string
             lessonNum:
               type: string
             uri:
+              type: string
+            pageId:
               type: string
             h1:
               type: string
@@ -7944,6 +8234,12 @@ components:
             author:
               type: string
             pageImageUri:
+              type: string
+            pageImageWidth:
+              type: string
+            pageImageHeight:
+              type: string
+            pageImageType:
               type: string
             archived:
               type: boolean
@@ -7989,17 +8285,23 @@ components:
       allOf:
         - type: object
           properties:
-            SITE_DISPLAY_NAME:
+            siteName:
               type: string
-            STATIC_BASE_URL:
+            siteDisplayName:
               type: string
-            pageId:
+            staticBaseUrl:
+              type: string
+            staticPath:
+              type: string
+            siteBaseUrl:
               type: string
             courseNum:
               type: string
             lessonNum:
               type: string
             uri:
+              type: string
+            pageId:
               type: string
             h1:
               type: string
@@ -8016,6 +8318,12 @@ components:
             author:
               type: string
             pageImageUri:
+              type: string
+            pageImageWidth:
+              type: string
+            pageImageHeight:
+              type: string
+            pageImageType:
               type: string
             archived:
               type: boolean
@@ -8062,20 +8370,32 @@ components:
         - type: string
     SearchTrafficSimulationResponse:
       allOf:
-        - type: array
-          items:
-            type: object
-            properties:
-              simulationName:
-                type: string
-              startSeconds:
-                type: string
-              endSeconds:
-                type: string
-              stepSeconds:
-                type: string
-              fcdOutputGeo:
-                type: boolean
+        - type: object
+          properties:
+            startNum:
+              type: integer
+              minimum: 0
+            foundNum:
+              type: integer
+              minimum: 0
+            returnedNum:
+              type: integer
+              minimum: 0
+            list:
+              type: array
+              items:
+                type: object
+                properties:
+                  simulationName:
+                    type: string
+                  startSeconds:
+                    type: string
+                  endSeconds:
+                    type: string
+                  stepSeconds:
+                    type: string
+                  fcdOutputGeo:
+                    type: boolean
     PATCHTrafficSimulationRequest:
       allOf:
         - type: object
@@ -8229,62 +8549,74 @@ components:
         - type: string
     SearchTimeStepResponse:
       allOf:
-        - type: array
-          items:
-            type: object
-            properties:
-              simulationKey:
-                type: string
-              path:
-                type: string
-              time:
-                type: string
-              inheritPk:
-                type: string
-              created:
-                type: string
-                format: date-time
-              modified:
-                type: string
-                format: date-time
-              archived:
-                type: boolean
-              deleted:
-                type: boolean
-              classCanonicalName:
-                type: string
-              classSimpleName:
-                type: string
-              classCanonicalNames:
-                type: array
-                items:
-                  type: string
-              sessionId:
-                type: string
-              userKey:
-                type: string
-              saves:
-                type: array
-                items:
-                  type: string
-              objectTitle:
-                type: string
-              objectId:
-                type: string
-              objectNameVar:
-                type: string
-              objectSuggest:
-                type: string
-              objectText:
-                type: string
-              pageUrlId:
-                type: string
-              pageUrlPk:
-                type: string
-              pageUrlApi:
-                type: string
-              id:
-                type: string
+        - type: object
+          properties:
+            startNum:
+              type: integer
+              minimum: 0
+            foundNum:
+              type: integer
+              minimum: 0
+            returnedNum:
+              type: integer
+              minimum: 0
+            list:
+              type: array
+              items:
+                type: object
+                properties:
+                  simulationKey:
+                    type: string
+                  path:
+                    type: string
+                  time:
+                    type: string
+                  inheritPk:
+                    type: string
+                  created:
+                    type: string
+                    format: date-time
+                  modified:
+                    type: string
+                    format: date-time
+                  archived:
+                    type: boolean
+                  deleted:
+                    type: boolean
+                  classCanonicalName:
+                    type: string
+                  classSimpleName:
+                    type: string
+                  classCanonicalNames:
+                    type: array
+                    items:
+                      type: string
+                  sessionId:
+                    type: string
+                  userKey:
+                    type: string
+                  saves:
+                    type: array
+                    items:
+                      type: string
+                  objectTitle:
+                    type: string
+                  objectId:
+                    type: string
+                  objectNameVar:
+                    type: string
+                  objectSuggest:
+                    type: string
+                  objectText:
+                    type: string
+                  pageUrlId:
+                    type: string
+                  pageUrlPk:
+                    type: string
+                  pageUrlApi:
+                    type: string
+                  id:
+                    type: string
     PATCHTimeStepRequest:
       allOf:
         - type: object
@@ -8952,80 +9284,92 @@ components:
         - type: string
     SearchVehicleStepResponse:
       allOf:
-        - type: array
-          items:
-            type: object
-            properties:
-              simulationKey:
-                type: string
-              timeStepId:
-                type: string
-              time:
-                type: string
-              x:
-                type: string
-              y:
-                type: string
-              location:
-                type: string
-              vehicleId:
-                type: string
-              vehicleType:
-                type: string
-              angle:
-                type: string
-              speed:
-                type: string
-              pos:
-                type: string
-              slope:
-                type: string
-              inheritPk:
-                type: string
-              created:
-                type: string
-                format: date-time
-              modified:
-                type: string
-                format: date-time
-              archived:
-                type: boolean
-              deleted:
-                type: boolean
-              classCanonicalName:
-                type: string
-              classSimpleName:
-                type: string
-              classCanonicalNames:
-                type: array
-                items:
-                  type: string
-              sessionId:
-                type: string
-              userKey:
-                type: string
-              saves:
-                type: array
-                items:
-                  type: string
-              objectTitle:
-                type: string
-              objectId:
-                type: string
-              objectNameVar:
-                type: string
-              objectSuggest:
-                type: string
-              objectText:
-                type: string
-              pageUrlId:
-                type: string
-              pageUrlPk:
-                type: string
-              pageUrlApi:
-                type: string
-              id:
-                type: string
+        - type: object
+          properties:
+            startNum:
+              type: integer
+              minimum: 0
+            foundNum:
+              type: integer
+              minimum: 0
+            returnedNum:
+              type: integer
+              minimum: 0
+            list:
+              type: array
+              items:
+                type: object
+                properties:
+                  simulationKey:
+                    type: string
+                  timeStepId:
+                    type: string
+                  time:
+                    type: string
+                  x:
+                    type: string
+                  y:
+                    type: string
+                  location:
+                    type: string
+                  vehicleId:
+                    type: string
+                  vehicleType:
+                    type: string
+                  angle:
+                    type: string
+                  speed:
+                    type: string
+                  pos:
+                    type: string
+                  slope:
+                    type: string
+                  inheritPk:
+                    type: string
+                  created:
+                    type: string
+                    format: date-time
+                  modified:
+                    type: string
+                    format: date-time
+                  archived:
+                    type: boolean
+                  deleted:
+                    type: boolean
+                  classCanonicalName:
+                    type: string
+                  classSimpleName:
+                    type: string
+                  classCanonicalNames:
+                    type: array
+                    items:
+                      type: string
+                  sessionId:
+                    type: string
+                  userKey:
+                    type: string
+                  saves:
+                    type: array
+                    items:
+                      type: string
+                  objectTitle:
+                    type: string
+                  objectId:
+                    type: string
+                  objectNameVar:
+                    type: string
+                  objectSuggest:
+                    type: string
+                  objectText:
+                    type: string
+                  pageUrlId:
+                    type: string
+                  pageUrlPk:
+                    type: string
+                  pageUrlApi:
+                    type: string
+                  id:
+                    type: string
     PATCHVehicleStepRequest:
       allOf:
         - type: object
@@ -9909,30 +10253,42 @@ components:
         - type: string
     SearchSiteUserResponse:
       allOf:
-        - type: array
-          items:
-            type: object
-            properties:
-              userKeys:
-                type: array
-                items:
-                  type: string
-              userId:
-                type: string
-              userName:
-                type: string
-              userEmail:
-                type: string
-              userFirstName:
-                type: string
-              userLastName:
-                type: string
-              userFullName:
-                type: string
-              seeArchived:
-                type: boolean
-              seeDeleted:
-                type: boolean
+        - type: object
+          properties:
+            startNum:
+              type: integer
+              minimum: 0
+            foundNum:
+              type: integer
+              minimum: 0
+            returnedNum:
+              type: integer
+              minimum: 0
+            list:
+              type: array
+              items:
+                type: object
+                properties:
+                  userKeys:
+                    type: array
+                    items:
+                      type: string
+                  userId:
+                    type: string
+                  userName:
+                    type: string
+                  userEmail:
+                    type: string
+                  userFirstName:
+                    type: string
+                  userLastName:
+                    type: string
+                  userFullName:
+                    type: string
+                  seeArchived:
+                    type: boolean
+                  seeDeleted:
+                    type: boolean
     PATCHSiteUserRequest:
       allOf:
         - type: object
