@@ -1,0 +1,288 @@
+---
+pageId: what-is-the-smart-village-project
+uri: "/en-us/{{ pageId }}"
+h1: What is {{ page.siteDisplayName }}? 
+h2: How Red Hat and Boston University are working together to develop software for eco-smart cities and well-being. 
+created: "2022-07-05"
+author:
+  name: Christopher Tate
+  title: Red Hat Principal Software Consultant
+pageImageUri: "/png/{{ pageId }}/infographic.png"
+
+#text: |
+#  A good website should be built on fast, scalable technology. 
+#  I've built websites in the past that slowed way down over time because they were not built with tech industry proven solutions. 
+#  I'll explain how we built {{ page.siteDisplayName }} to scale in the Red Hat OpenShift cloud. 
+#  Learn how to build software on a solid foundation like the Eclipse Vert.x project, which is proven open souce enterprise toolkit for developing asynchronous, reactive applications.  
+#  Setting up an Apache Zookeeper cluster manager enables load-balanced front-end and background requests. 
+#  See how PostgreSQL, the best in open source relational databases, and Apache Solr, the best in open source search engines work together transactionally to store and query the {{ page.siteDisplayName }} data. 
+#  User account management,user authentication, and role based access control is provided by Red Hat Single Sign-on. 
+#  And learn how we automate the development and deployment of the whole project with the computate tools. 
+
+#  When I was first learning computer science at Brigham Young University between the year 2000 and 2006, I experimenyed with several ways of making websites. My first, and least performant idea was using XML and XSLT transforms to generate more XML files and render them as XHTML. I was surprised and delighted that it worked. When I built a data-driven site for a local company in my area, I quickly realized how inefficient this was on a live site. 
+#
+#  I continued to study and learn that relational databases and JDBC connections in Java web applications running on Tomcat on bare metal computers were a much more efficient way to insert, query and render web applications. For a long time this is how I built websites. 
+#
+#  I learned about Java Enterprise Applications and Hibernate and annotatiins that simplified, in a way, the persistance of data, but I never became a promoter of that technology. With my background in relational databases, I wanted something more transactional and asynchronous. The way hibernate required me to query something begore updating the whole record, and the way it kept it's own cache never agreed with me. 
+#  
+#  Running websites on my bate metal laptop connected by Ethernet to my router, with port forwarding and a static IP address was also a problem. I couldn't move my laptop or my sites would go down. 
+htmTitle:
+  - text: "{{ h1 }}{{ h2 }}"
+htmMeta:
+  - {e: meta, a: {property: "og:title", content: "{{ h1 }}"}}
+  - {e: meta, a: {property: "og:description", content: "{{ h2 }}"}}
+  - {e: meta, a: {property: "og:url", content: "{{ page.siteBaseUrl }}{{ uri }}"}}
+  - {e: meta, a: {property: "og:site_name", content: "{{ page.siteName }}"}}
+  - {e: meta, a: {property: "og:image", content: "{{ page.staticBaseUrl }}{{ pageImageUri }}"}}
+  - comment: |
+      CutyCapt --min-height=1 --url='{{ page.siteBaseUrl }}{{ uri }}?var=filterLabel:infographic' --out='{{ page.staticPath }}/png/{{ pageId }}/infographic.png'
+      CutyCapt --min-height=1 --url='{{ page.siteBaseUrl }}{{ uri }}?var=filterLabel:image' --out='{{ page.staticPath }}/png/{{ pageId }}/image.png'
+      CutyCapt --min-height=1 --url='{{ page.siteBaseUrl }}{{ uri }}?var=filterLabel:review' --out='{{ page.staticPath }}/png/{{ pageId }}/review.png'
+  - {e: meta, a: {property: "og:image:width", content: "{{ page.pageImageWidth }}"}}
+  - {e: meta, a: {property: "og:image:height", content: "{{ page.pageImageHeight }}"}}
+  - {e: meta, a: {property: "og:image:type", content: "{{ page.pageImageType }}"}}
+  - {e: meta, a: {property: "og:image:alt", content: "{{ h1 }} {{ h2 }}"}}
+  - {e: meta, a: {property: "og:type", content: "article"}}
+  - {e: meta, a: {property: "twitter:card", content: "summary_large_image"}}
+  - {e: meta, a: {property: "twitter:title", content: "{{ h1 }}"}}
+  - {e: meta, a: {property: "twitter:description", content: "{{ h2 }}"}}
+  - {e: meta, a: {property: "twitter:image", content: "{{ page.staticBaseUrl }}{{ pageImageUri }}"}}
+  - {e: meta, a: {property: "description", content: "{{ h2 }}"}}
+htmBody:
+  - e: div
+    a:
+      class: w3-card w3-padding w3-margin-top w3-show w3-white 
+    in:
+      - e: div
+        in:
+          - e: h1
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-question padding-right-quarter-em
+              - e: span
+                text: "{{ h1 }}"
+          - e: h2
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-tree-city padding-right-quarter-em
+              - e: span
+                text: "{{ h2 }}"
+          - e: div
+            a:
+              class: w3-row w3-mobile 
+            label: 
+              - infographic
+              - image
+            in:
+          - e: div
+            a:
+              class: w3-row w3-mobile 
+            label: 
+              - infographic
+              - image
+            in:
+              - e: img
+                a:
+                  class: w3-image 
+                  src: "{{ page.staticBaseUrl }}/png/{{ pageId }}/image.png"
+      - e: div
+        in:
+          - e: div
+            a:
+              class: w3-padding 
+            in:
+              - e: h3
+                a:
+                  class: ""
+                in:
+                  - e: i
+                    a:
+                      class: fa-solid fa-signal-stream padding-right-quarter-em
+                  - e: span
+                    text: Can {{ page.siteDisplayName }} read live data from IOT nodes? 
+              - e: h4
+                a:
+                  class: ""
+                in:
+                  - e: i
+                    a:
+                      class: fa-solid fa-reel padding-right-quarter-em
+                  - e: span
+                    text: Live sensor data is imported on a schedule to understand current conditions. 
+          - e: div
+            a:
+              class: w3-padding 
+            in:
+              - e: h3
+                a:
+                  class: ""
+                in:
+                  - e: i
+                    a:
+                      class: fa-solid fa-globe padding-right-quarter-em
+                  - e: span
+                    text: Can {{ page.siteDisplayName }} simulate data on a map? 
+              - e: h4
+                a:
+                  class: ""
+                in:
+                  - e: i
+                    a:
+                      class: fa-solid fa-map-location-dot padding-right-quarter-em
+                  - e: span
+                    text: Traffic data can be simulated in a village to study changing conditions. 
+          - e: div
+            a:
+              class: w3-padding 
+            in:
+              - e: h3
+                a:
+                  class: ""
+                in:
+                  - e: i
+                    a:
+                      class: fa-solid fa-microchip padding-right-quarter-em
+                  - e: span
+                    text: What technology is behind {{ page.siteDisplayName }}? 
+              - e: h4
+                a:
+                  class: ""
+                in:
+                  - e: i
+                    a:
+                      class: fak fa-vertx padding-right-quarter-em
+                      style: "color: #782a90ff; "
+                  - e: span
+                    text: Vert.x, the most resource efficient, scalable, reactive, enterprise software toolkit available. 
+          - e: div
+            a:
+              class: w3-padding 
+            in:
+              - e: h3
+                a:
+                  class: ""
+                in:
+                  - e: i
+                    a:
+                      class: fa-solid fa-sensor-cloud padding-right-quarter-em
+                  - e: span
+                    text: Is {{ page.siteDisplayName }} deployable in the cloud? 
+              - e: h4
+                a:
+                  class: ""
+                in:
+                  - e: i
+                    a:
+                      class: fak fa-openshift padding-right-quarter-em
+                      style: "color: red; "
+                  - e: span
+                    text: A Dockerfile, a quay.io image, and automated deployment to Red Hat OpenShift cloud environment is set up. 
+      - e: div
+        label:
+          - infographic
+          - review
+        a:
+          id: divReview
+        in:
+          - e: table
+            a:
+              id: tableReview1
+              class: review1Table 
+            in:
+              - e: tbody
+                in:
+                  - e: tr
+                    a:
+                      class: 
+                    in:
+                      - e: td
+                        a:
+                          class: w3-mobile review1TableTr1Td1 review1TableTr1Td even 
+                        in:
+                          - e: span
+                            text: '{{formatZonedDateTime created "EEEE" "en-US" "America/Denver" }}'
+                      - e: td
+                        a:
+                          class: w3-mobile review1TableTr1Td2 review1TableTr1Td odd 
+                        in:
+                          - e: i
+                            a:
+                              class: "{{ htmBody.0.in.0.in.0.in.0.a.class }}"
+                      - e: td
+                        a:
+                          class: w3-mobile review1TableTr1Td3 review1TableTr1Td even 
+                        in:
+                          - e: i
+                            a:
+                              class: "{{ htmBody.0.in.0.in.1.in.0.a.class }}"
+                      - e: td
+                        a:
+                          class: w3-mobile review1TableTr1Td4 review1TableTr1Td odd 
+                        in:
+                          - e: i
+                            a:
+                              class: "fa-solid fa-pen-nib"
+                  - e: tr
+                    a:
+                      class: odd 
+                    in:
+                      - e: td
+                        a:
+                          class: w3-mobile review1TableTr2Td1 review1TableTr2Td even 
+                        in:
+                          - e: span
+                            text: '{{formatZonedDateTime created "MMMM d yyyy" "en-US" "America/Denver" }}'
+                      - e: td
+                        a:
+                          class: w3-mobile review1TableTr2Td2 review1TableTr2Td odd 
+                        in:
+                          - e: span
+                            text: "{{ h1 }}"
+                      - e: td
+                        a:
+                          class: w3-mobile review1TableTr2Td3 review1TableTr2Td even 
+                        in:
+                          - e: span
+                            text: "{{ h2 }}"
+                      - e: td
+                        a:
+                          class: w3-mobile review1TableTr2Td4 review1TableTr2Td odd 
+                        in:
+                          - e: span
+                            text: "{{ author.name }}"
+          - e: table
+            a:
+              id: tableReview2
+              class: review2Table 
+            in:
+              - e: tbody
+                each: htmBody.0.in.1.in
+                in:
+                  - e: tr
+                    a:
+                      class: "{{#even @index }}review2TableTr even {{else}}review2TableTr odd {{/even}}"
+                    in:
+                      - e: td
+                        a:
+                          class: w3-mobile 
+                        in:
+                          - e: i
+                            a:
+                              class: "{{ item.in.0.in.0.a.class }}"
+                          - e: span
+                            text: '{{ item.in.0.in.1.text }}'
+                      - e: td
+                        a:
+                          class: w3-mobile 
+                        in:
+                          - e: i
+                            a:
+                              class: "{{ item.in.1.in.0.a.class }}"
+                          - e: span
+                            text: '{{ item.in.1.in.1.text }}'
