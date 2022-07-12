@@ -11,7 +11,9 @@ ENV APP_NAME=sumo \
 	APP_REPO_HTTPS="https://github.com/eclipse/sumo.git" \
 	APP_TAG="v1_12_0" \
 	APP_EXEC="/usr/local/bin/sumo-gui" \
-	PYTHON_DIR="/opt/python"
+	PYTHON_DIR="/opt/python" \
+	SUMO_HOME="/usr/local/share/sumo" \
+	LD_LIBRARY_PATH="/usr/local/lib"
 
 COPY . .
 USER root
