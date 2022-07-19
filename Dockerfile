@@ -1,4 +1,4 @@
-FROM quay.io/centos/centos:centos8
+FROM quay.io/centos/centos:stream8
 
 MAINTAINER Christopher Tate <computate@computate.org>
 
@@ -23,13 +23,7 @@ USER root
 RUN rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 RUN rpm -ivh https://mirrors.rpmfusion.org/free/el/rpmfusion-free-release-8.noarch.rpm
 
-RUN yum update
 RUN yum install -y ${APP_DEPENDENCIES}
-RUN git clone https://github.com/libigl/eigen.git /usr/local/src/eigen
-RUN install -d /usr/local/src/eigen_build_dir
-WORKDIR /usr/local/src/eigen_build_dir
-RUN cmake /usr/local/src/eigen
-RUN make install
 
 RUN /usr/bin/virtualenv ${PYTHON_DIR}
 RUN source ${PYTHON_DIR}/bin/activate && pip install setuptools_rust wheel
