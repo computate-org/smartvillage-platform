@@ -495,24 +495,13 @@ public class VehicleStepEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 
 		try {
 			ApiRequest apiRequest = siteRequest.getApiRequest_();
-			pgPool.withTransaction(sqlConnection -> {
-				Promise<VehicleStep> promise1 = Promise.promise();
-				siteRequest.setSqlConnection(sqlConnection);
-				persistVehicleStep(o, true).onSuccess(c -> {
-					indexVehicleStep(o).onSuccess(e -> {
-						promise1.complete(o);
-					}).onFailure(ex -> {
-						promise1.fail(ex);
-					});
+			persistVehicleStep(o, true).onSuccess(c -> {
+				indexVehicleStep(o).onSuccess(e -> {
+					promise.complete(o);
 				}).onFailure(ex -> {
-					promise1.fail(ex);
+					promise.fail(ex);
 				});
-				return promise1.future();
-			}).onSuccess(a -> {
-				siteRequest.setSqlConnection(null);
-				promise.complete(o);
 			}).onFailure(ex -> {
-				siteRequest.setSqlConnection(null);
 				promise.fail(ex);
 			});
 		} catch(Exception ex) {
@@ -941,9 +930,7 @@ public class VehicleStepEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 
 	@Override
 	public void searchpageVehicleStep(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
-		LOG.info(String.format("Begin call to user: %s", ZonedDateTime.now().toString()));
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smart-village-view-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
-			LOG.info(String.format("End call to user: %s", ZonedDateTime.now().toString()));
 			try {
 
 				List<String> roles = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_REQUIRED + "_VehicleStep")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
@@ -965,11 +952,8 @@ public class VehicleStepEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 						)
 					));
 				} else {
-					LOG.info(String.format("Start call to search: %s", ZonedDateTime.now().toString()));
 					searchVehicleStepList(siteRequest, false, true, false).onSuccess(listVehicleStep -> {
-						LOG.info(String.format("Start response: %s", ZonedDateTime.now().toString()));
 						response200SearchPageVehicleStep(listVehicleStep).onSuccess(response -> {
-							LOG.info(String.format("End request: %s", ZonedDateTime.now().toString()));
 							eventHandler.handle(Future.succeededFuture(response));
 							LOG.debug(String.format("searchpageVehicleStep succeeded. "));
 						}).onFailure(ex -> {
@@ -1008,7 +992,6 @@ public class VehicleStepEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 		return Optional.ofNullable(config.getString(ConfigKeys.TEMPLATE_PATH)).orElse("templates") + "/enUS/VehicleStepPage";
 	}
 	public Future<ServiceResponse> response200SearchPageVehicleStep(SearchList<VehicleStep> listVehicleStep) {
-		LOG.info("step 1");
 		Promise<ServiceResponse> promise = Promise.promise();
 		try {
 			SiteRequestEnUS siteRequest = listVehicleStep.getSiteRequest_(SiteRequestEnUS.class);
@@ -1018,9 +1001,7 @@ public class VehicleStepEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 
 			page.setSearchListVehicleStep_(listVehicleStep);
 			page.setSiteRequest_(siteRequest);
-			LOG.info("step 2");
 			page.promiseDeepVehicleStepPage(siteRequest).onSuccess(a -> {
-				LOG.info("step 3");
 				JsonObject json = JsonObject.mapFrom(page);
 				json.put(ConfigKeys.STATIC_BASE_URL, config.getString(ConfigKeys.STATIC_BASE_URL));
 				json.put(ConfigKeys.GITHUB_ORG, config.getString(ConfigKeys.GITHUB_ORG));
@@ -1029,9 +1010,7 @@ public class VehicleStepEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 				json.put(ConfigKeys.PROJECT_POWERED_BY_URL, config.getString(ConfigKeys.PROJECT_POWERED_BY_URL));
 				json.put(ConfigKeys.PROJECT_POWERED_BY_NAME, config.getString(ConfigKeys.PROJECT_POWERED_BY_NAME));
 				json.put(ConfigKeys.PROJECT_POWERED_BY_IMAGE_URI, config.getString(ConfigKeys.PROJECT_POWERED_BY_IMAGE_URI));
-				LOG.info("step 4");
 				templateEngine.render(json, templateSearchPageVehicleStep()).onSuccess(buffer -> {
-					LOG.info("step 5");
 					promise.complete(new ServiceResponse(200, "OK", buffer, requestHeaders));
 				}).onFailure(ex -> {
 					promise.fail(ex);

@@ -86,6 +86,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	public static final String PUTImport_enUS_ImageUri = "/png/api/traffic-simulation-import-999.png";
 	public static final String SearchPage_enUS_Uri = "/traffic-simulation";
 	public static final String SearchPage_enUS_ImageUri = "/png/traffic-simulation-999.png";
+	public static final String MapSearchPage_enUS_Uri = "/traffic-simulation-map";
+	public static final String MapSearchPage_enUS_ImageUri = "/png/traffic-simulation-map-999.png";
 
 	public static final String TrafficSimulation_Color = "blue";
 	public static final String TrafficSimulation_IconGroup = "duotone";

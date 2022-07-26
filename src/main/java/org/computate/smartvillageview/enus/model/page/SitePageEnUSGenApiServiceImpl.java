@@ -606,24 +606,13 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 
 		try {
 			ApiRequest apiRequest = siteRequest.getApiRequest_();
-			pgPool.withTransaction(sqlConnection -> {
-				Promise<SitePage> promise1 = Promise.promise();
-				siteRequest.setSqlConnection(sqlConnection);
-				persistSitePage(o, true).onSuccess(c -> {
-					indexSitePage(o).onSuccess(e -> {
-						promise1.complete(o);
-					}).onFailure(ex -> {
-						promise1.fail(ex);
-					});
+			persistSitePage(o, true).onSuccess(c -> {
+				indexSitePage(o).onSuccess(e -> {
+					promise.complete(o);
 				}).onFailure(ex -> {
-					promise1.fail(ex);
+					promise.fail(ex);
 				});
-				return promise1.future();
-			}).onSuccess(a -> {
-				siteRequest.setSqlConnection(null);
-				promise.complete(o);
 			}).onFailure(ex -> {
-				siteRequest.setSqlConnection(null);
 				promise.fail(ex);
 			});
 		} catch(Exception ex) {

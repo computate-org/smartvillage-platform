@@ -497,8 +497,8 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 
 		try {
 			ApiRequest apiRequest = siteRequest.getApiRequest_();
+			Promise<TrafficSimulation> promise1 = Promise.promise();
 			pgPool.withTransaction(sqlConnection -> {
-				Promise<TrafficSimulation> promise1 = Promise.promise();
 				siteRequest.setSqlConnection(sqlConnection);
 				sqlPATCHTrafficSimulation(o, inheritPk).onSuccess(trafficSimulation -> {
 					persistTrafficSimulation(trafficSimulation).onSuccess(c -> {
@@ -1309,6 +1309,112 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 		return promise.future();
 	}
 
+	// MapSearchPage //
+
+	@Override
+	public void mapsearchpageTrafficSimulationId(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
+		mapsearchpageTrafficSimulation(serviceRequest, eventHandler);
+	}
+
+	@Override
+	public void mapsearchpageTrafficSimulation(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
+		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smart-village-view-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
+			try {
+
+				List<String> roles = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_REQUIRED + "_TrafficSimulation")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
+				List<String> roleReads = Arrays.asList("");
+				if(
+						!CollectionUtils.containsAny(siteRequest.getUserResourceRoles(), roles)
+						&& !CollectionUtils.containsAny(siteRequest.getUserRealmRoles(), roles)
+						&& !CollectionUtils.containsAny(siteRequest.getUserResourceRoles(), roleReads)
+						&& !CollectionUtils.containsAny(siteRequest.getUserRealmRoles(), roleReads)
+						) {
+					eventHandler.handle(Future.succeededFuture(
+						new ServiceResponse(401, "UNAUTHORIZED", 
+							Buffer.buffer().appendString(
+								new JsonObject()
+									.put("errorCode", "401")
+									.put("errorMessage", "roles required: " + String.join(", ", roles))
+									.encodePrettily()
+								), MultiMap.caseInsensitiveMultiMap()
+						)
+					));
+				} else {
+					searchTrafficSimulationList(siteRequest, false, true, false).onSuccess(listTrafficSimulation -> {
+						response200MapSearchPageTrafficSimulation(listTrafficSimulation).onSuccess(response -> {
+							eventHandler.handle(Future.succeededFuture(response));
+							LOG.debug(String.format("mapsearchpageTrafficSimulation succeeded. "));
+						}).onFailure(ex -> {
+							LOG.error(String.format("mapsearchpageTrafficSimulation failed. "), ex);
+							error(siteRequest, eventHandler, ex);
+						});
+					}).onFailure(ex -> {
+						LOG.error(String.format("mapsearchpageTrafficSimulation failed. "), ex);
+						error(siteRequest, eventHandler, ex);
+					});
+				}
+			} catch(Exception ex) {
+				LOG.error(String.format("mapsearchpageTrafficSimulation failed. "), ex);
+				error(null, eventHandler, ex);
+			}
+		}).onFailure(ex -> {
+			if("Inactive Token".equals(ex.getMessage()) || StringUtils.startsWith(ex.getMessage(), "invalid_grant:")) {
+				try {
+					eventHandler.handle(Future.succeededFuture(new ServiceResponse(302, "Found", null, MultiMap.caseInsensitiveMultiMap().add(HttpHeaders.LOCATION, "/logout?redirect_uri=" + URLEncoder.encode(serviceRequest.getExtra().getString("uri"), "UTF-8")))));
+				} catch(Exception ex2) {
+					LOG.error(String.format("mapsearchpageTrafficSimulation failed. ", ex2));
+					error(null, eventHandler, ex2);
+				}
+			} else {
+				LOG.error(String.format("mapsearchpageTrafficSimulation failed. "), ex);
+				error(null, eventHandler, ex);
+			}
+		});
+	}
+
+
+	public void mapsearchpageTrafficSimulationPageInit(TrafficSimulationPage page, SearchList<TrafficSimulation> listTrafficSimulation) {
+	}
+
+	public String templateMapSearchPageTrafficSimulation() {
+		return Optional.ofNullable(config.getString(ConfigKeys.TEMPLATE_PATH)).orElse("templates") + "/enUS/TrafficSimulationPage";
+	}
+	public Future<ServiceResponse> response200MapSearchPageTrafficSimulation(SearchList<TrafficSimulation> listTrafficSimulation) {
+		Promise<ServiceResponse> promise = Promise.promise();
+		try {
+			SiteRequestEnUS siteRequest = listTrafficSimulation.getSiteRequest_(SiteRequestEnUS.class);
+			TrafficSimulationPage page = new TrafficSimulationPage();
+			MultiMap requestHeaders = MultiMap.caseInsensitiveMultiMap();
+			siteRequest.setRequestHeaders(requestHeaders);
+
+			if(listTrafficSimulation.size() == 1)
+				siteRequest.setRequestPk(listTrafficSimulation.get(0).getPk());
+			page.setSearchListTrafficSimulation_(listTrafficSimulation);
+			page.setSiteRequest_(siteRequest);
+			page.promiseDeepTrafficSimulationPage(siteRequest).onSuccess(a -> {
+				JsonObject json = JsonObject.mapFrom(page);
+				json.put(ConfigKeys.STATIC_BASE_URL, config.getString(ConfigKeys.STATIC_BASE_URL));
+				json.put(ConfigKeys.GITHUB_ORG, config.getString(ConfigKeys.GITHUB_ORG));
+				json.put(ConfigKeys.SITE_NAME, config.getString(ConfigKeys.SITE_NAME));
+				json.put(ConfigKeys.SITE_DISPLAY_NAME, config.getString(ConfigKeys.SITE_DISPLAY_NAME));
+				json.put(ConfigKeys.PROJECT_POWERED_BY_URL, config.getString(ConfigKeys.PROJECT_POWERED_BY_URL));
+				json.put(ConfigKeys.PROJECT_POWERED_BY_NAME, config.getString(ConfigKeys.PROJECT_POWERED_BY_NAME));
+				json.put(ConfigKeys.PROJECT_POWERED_BY_IMAGE_URI, config.getString(ConfigKeys.PROJECT_POWERED_BY_IMAGE_URI));
+				templateEngine.render(json, templateMapSearchPageTrafficSimulation()).onSuccess(buffer -> {
+					promise.complete(new ServiceResponse(200, "OK", buffer, requestHeaders));
+				}).onFailure(ex -> {
+					promise.fail(ex);
+				});
+			}).onFailure(ex -> {
+				promise.fail(ex);
+			});
+		} catch(Exception ex) {
+			LOG.error(String.format("response200MapSearchPageTrafficSimulation failed. "), ex);
+			promise.fail(ex);
+		}
+		return promise.future();
+	}
+
 	// General //
 
 	public Future<TrafficSimulation> createTrafficSimulation(SiteRequestEnUS siteRequest) {
@@ -1710,7 +1816,7 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 						query.put("softCommit", softCommit);
 					if(commitWithin != null)
 						query.put("commitWithin", commitWithin);
-					query.put("q", "*:*").put("fq", new JsonArray().add("pk:" + o.getPk()));
+					query.put("q", "*:*").put("fq", new JsonArray().add("pk:" + o.getPk())).put("var", new JsonArray().add("refresh:false"));
 					params.put("query", query);
 					JsonObject context = new JsonObject().put("params", params).put("user", siteRequest.getUserPrincipal());
 					JsonObject json = new JsonObject().put("context", context);

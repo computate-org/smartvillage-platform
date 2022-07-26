@@ -1,0 +1,147 @@
+{{#partial "htmHead"}}{{> htmHeadTrafficSimulationPage}}{{/partial}}
+{{#partial "htmTitle"}}{{> htmTitleTrafficSimulationPage}}{{/partial}}
+{{#partial "htmMeta"}}{{> htmMetaTrafficSimulationPage}}{{/partial}}
+{{#partial "htmStyle"}}{{> htmStyleTrafficSimulationPage}}
+		<link rel="stylesheet" href="{{staticBaseUrl}}/css/webWizard-style.css" />
+{{/partial}}
+{{#partial "htmScripts"}}{{> htmScriptsTrafficSimulationPage}}
+		<script src="{{staticBaseUrl}}/js/webWizard-lib.js"></script>
+		<script src="{{staticBaseUrl}}/js/webWizard-script.js"></script>
+{{/partial}}
+{{#partial "htmScript"}}{{> htmScriptTrafficSimulationPage}}{{/partial}}
+{{#partial "htmBodySidebar"}}{{> htmBodySidebarTrafficSimulationPage}}{{/partial}}
+{{#partial "htmBodyStart"}}{{> htmBodyStartTrafficSimulationPage}}{{/partial}}
+{{#partial "htmBodyMiddle"}}
+		<div id="map"></div>
+		<canvas style="display: none"></canvas>
+
+		<div id="side">
+			<div id="tabs">
+				<div class="tab" title="Options">
+					<img src="images/generate.png" />
+				</div>
+				<div class="tab" title="Vehicles">
+					<img src="images/passenger.png" />
+				</div>
+				<div class="tab" title="Copyright">©</div>
+			</div>
+
+			<div class="controls">
+				<div class="container">
+					<h4>Position</h4>
+
+					<div class="options open">
+					  <p>
+						<input id="address" value="Berlin" size="20"/>
+						<input id="buttonSearch" type="button" value="Search"/> </br>
+					  </p>
+					  <p>
+						<input id="lat_lon" value="52.52 13.4" size="20"/>
+						<input id="buttonLatLon" type="button" value="Go to"/> </br>
+					  </p>
+					  <p>
+						<input id="buttonCurrent" type="button" value="Use current location"/></br>
+					  </p>
+					</div>
+				</div>
+
+				<div class="container">
+					<div class="options open">
+						<label>Select Area <input type="checkbox" id="canvas-toggle" /></label>
+					</div>
+				</div>
+
+				<div class="container" style="margin-top: 20px;">
+					<h4>Options</h4>
+
+					<div class="options open">
+						<label>Add Polygons <input id="polygons" type="checkbox" checked /></label>
+						<label>Duration <input id="duration" type="number" value="3600" min="0" step="1" /></label>
+						<label>Import Public Transport <input id="publicTransport" type="checkbox" /></label>
+						<label>Car-only Network <input id="carOnlyNetwork" type="checkbox" /></label>
+						<label>Satellite background <input id="decal" type="checkbox" /></label>
+						<label>Left Hand Traffic <input id="leftHand" type="checkbox" /></label>
+					</div>
+				</div>
+			</div>
+
+			<div class="controls" id="vehicle-controls"></div>
+
+			<div class="controls">
+				<div class="container">
+					<h4>Icon Copyrights</h4>
+
+					<div class="images">
+						<img src="images/generate.png" />
+						<img src="images/passenger.png" />
+						<img src="images/truck.png" />
+						<img src="images/bicycle.png" />
+					</div>
+
+					<p>
+						Icons by <a href="http://google.com/design/">Google Design</a>,
+						licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>
+					</p>
+
+					<div class="images">
+						<img src="images/bus.png" />
+						<img src="images/pedestrian.png" />
+						<img src="images/ship.png" />
+						<img src="images/rail.png" />
+					</div>
+
+					<p>
+						Icons by <a href="http://aiga.org/">AIGA</a>,
+						Open Domain
+					</p>
+
+					<div class="images">
+						<img src="images/tram.png" />
+						<img src="images/rail_urban.png" />
+					</div>
+
+					<p>
+						Icons by <a href="http://www.danilodemarco.com/">Pittogrammi</a>
+					</p>
+
+					<div class="images">
+						<img src="images/motorcycle.png" />
+					</div>
+
+					<p>
+						Icon by <a href="http://icons8.com/">Icons8</a>
+					</p>
+				</div>
+			</div>
+
+			<div id="fixed">
+				<button id="export-button">Generate Scenario</button>
+				<div id="status">
+					<span></span>
+					<div></div>
+				</div>
+			</div>
+		</div>
+{{/partial}}
+{{#partial "htmBodyEnd"}}{{> htmBodyEndTrafficSimulationPage}}{{/partial}}
+{{#partial "htmBody"}}{{> htmBodyTrafficSimulationPage}}{{/partial}}
+{{#partial "htmBodySearch"}}{{> htmBodySearchTrafficSimulationPage}}{{/partial}}
+{{#partial "htmBodyFilters"}}{{> htmBodyFiltersTrafficSimulationPage}}{{/partial}}
+{{#partial "htmBodyRange"}}{{> htmBodyRangeTrafficSimulationPage}}{{/partial}}
+{{#partial "htmBodyPivot"}}{{> htmBodyPivotTrafficSimulationPage}}{{/partial}}
+{{#partial "htmBodyFieldList"}}{{> htmBodyFieldListTrafficSimulationPage}}{{/partial}}
+{{#partial "htmBodyStats"}}{{> htmBodyStatsTrafficSimulationPage}}{{/partial}}
+{{#partial "htmBodyMenu"}}{{> htmBodyMenuTrafficSimulationPage}}{{/partial}}
+{{#partial "htmBodyGraph"}}{{> htmBodyGraphTrafficSimulationPage}}{{/partial}}
+{{#partial "htmBodyCount0"}}{{> htmBodyCount0TrafficSimulationPage}}{{/partial}}
+{{#partial "htmBodyCount1All"}}{{> htmBodyCount1AllTrafficSimulationPage}}{{/partial}}
+{{#partial "htmBodyCount1"}}{{> htmBodyCount1TrafficSimulationPage}}{{/partial}}
+{{#partial "htmBodyAll"}}{{> htmBodyAllTrafficSimulationPage}}{{/partial}}
+{{#partial "htmForm"}}{{> htmFormTrafficSimulationPage}}{{/partial}}
+{{#partial "htmForms"}}{{> htmFormsTrafficSimulationPage}}{{/partial}}
+{{#partial "htmBodySuggested"}}{{> htmBodySuggestedTrafficSimulationPage}}{{/partial}}
+{{#partial "htmForm_patchTrafficSimulation"}}{{> htmFormTrafficSimulationPage_patchTrafficSimulation}}{{/partial}}
+{{#partial "htmForm_postTrafficSimulation"}}{{> htmFormTrafficSimulationPage_postTrafficSimulation}}{{/partial}}
+{{#partial "htmForm_putimportTrafficSimulation"}}{{> htmFormTrafficSimulationPage_putimportTrafficSimulation}}{{/partial}}
+{{#partial "htmForm_searchpageTrafficSimulation"}}{{> htmFormTrafficSimulationPage_searchpageTrafficSimulation}}{{/partial}}
+{{> TrafficSimulationGenPage}}

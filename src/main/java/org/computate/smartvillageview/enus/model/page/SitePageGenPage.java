@@ -113,7 +113,7 @@ public class SitePageGenPage extends SitePageGenPageGen<PageLayout> {
 	protected void _DEFAULT_MAP_LOCATION(Wrap<JsonObject> w) {
 		String pointStr = Optional.ofNullable(siteRequest_.getRequestVars().get(VAR_DEFAULT_MAP_LOCATION)).orElse(siteRequest_.getConfig().getString(ConfigKeys.DEFAULT_MAP_LOCATION));
 		if(pointStr != null) {
-			String[] parts = pointStr.split(",");
+			String[] parts = pointStr.replace("[", "").replace("]", "").replace("\"", "").split(",");
 			JsonObject point = new JsonObject().put("lat", Double.parseDouble(parts[0])).put("lon", Double.parseDouble(parts[1]));
 			w.o(point);
 		}

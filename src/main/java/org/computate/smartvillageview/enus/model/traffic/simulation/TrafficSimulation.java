@@ -28,6 +28,11 @@ import org.computate.smartvillageview.enus.model.base.BaseModel;
  * PageSuperSearchPage.enUS: BaseModelPage
  * ApiUriSearchPage.enUS: /traffic-simulation
  * 
+ * ApiMethod.enUS: MapSearchPage
+ * PageMapSearchPage.enUS: TrafficSimulationMapPage
+ * PageSuperMapSearchPage.enUS: BaseModelPage
+ * ApiUriMapSearchPage.enUS: /traffic-simulation-map
+ * 
  * Role.enUS: SiteAdmin
  * Saves: true
  * 

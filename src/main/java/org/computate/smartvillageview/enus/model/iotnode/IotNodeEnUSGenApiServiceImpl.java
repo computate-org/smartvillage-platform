@@ -497,8 +497,8 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 
 		try {
 			ApiRequest apiRequest = siteRequest.getApiRequest_();
+			Promise<IotNode> promise1 = Promise.promise();
 			pgPool.withTransaction(sqlConnection -> {
-				Promise<IotNode> promise1 = Promise.promise();
 				siteRequest.setSqlConnection(sqlConnection);
 				sqlPATCHIotNode(o, inheritPk).onSuccess(iotNode -> {
 					persistIotNode(iotNode).onSuccess(c -> {
@@ -1801,7 +1801,7 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 						query.put("softCommit", softCommit);
 					if(commitWithin != null)
 						query.put("commitWithin", commitWithin);
-					query.put("q", "*:*").put("fq", new JsonArray().add("pk:" + o.getPk()));
+					query.put("q", "*:*").put("fq", new JsonArray().add("pk:" + o.getPk())).put("var", new JsonArray().add("refresh:false"));
 					params.put("query", query);
 					JsonObject context = new JsonObject().put("params", params).put("user", siteRequest.getUserPrincipal());
 					JsonObject json = new JsonObject().put("context", context);

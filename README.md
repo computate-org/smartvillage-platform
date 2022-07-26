@@ -1,4 +1,5 @@
 
+
 # Setup smart-village-view development environment on MacOSX or Linux (Fedora, RHEL, CentOS, Ubuntu)
 
 ## Install Ansible dependencies on Linux
@@ -272,9 +273,17 @@ pkcon install -y buildah
 pkcon install -y podman
 ```
 
+### Build the container with podman
+
 ```bash
 cd ~/.local/src/smart-village-view
- podman build -t computateorg/smart-village-view:latest .
+podman build -t computateorg/smart-village-view:latest .
+```
+
+### Push the container up to quay.io
+```bash
+podman login quay.io
+podman push computateorg/smart-village-view:latest quay.io/computateorg/smart-village-view:latest
 ```
 
 ## How the base classes for this project were created

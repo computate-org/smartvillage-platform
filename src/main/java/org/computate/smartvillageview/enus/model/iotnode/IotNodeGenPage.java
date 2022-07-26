@@ -114,7 +114,7 @@ public class IotNodeGenPage extends IotNodeGenPageGen<BaseModelPage> {
 	protected void _DEFAULT_MAP_LOCATION(Wrap<JsonObject> w) {
 		String pointStr = Optional.ofNullable(siteRequest_.getRequestVars().get(VAR_DEFAULT_MAP_LOCATION)).orElse(siteRequest_.getConfig().getString(ConfigKeys.DEFAULT_MAP_LOCATION));
 		if(pointStr != null) {
-			String[] parts = pointStr.split(",");
+			String[] parts = pointStr.replace("[", "").replace("]", "").replace("\"", "").split(",");
 			JsonObject point = new JsonObject().put("lat", Double.parseDouble(parts[0])).put("lon", Double.parseDouble(parts[1]));
 			w.o(point);
 		}
@@ -126,6 +126,7 @@ public class IotNodeGenPage extends IotNodeGenPageGen<BaseModelPage> {
 			w.o(new BigDecimal(s));
 	}
 
+	@Override
 	protected void _defaultFieldListVars(List<String> l) {
 		Optional.ofNullable(searchListIotNode_.getFields()).orElse(Arrays.asList()).forEach(varStored -> {
 			String varStored2 = varStored;
@@ -142,6 +143,7 @@ public class IotNodeGenPage extends IotNodeGenPageGen<BaseModelPage> {
 		});
 	}
 
+	@Override
 	protected void _defaultStatsVars(List<String> l) {
 		Optional.ofNullable(searchListIotNode_.getStatsFields()).orElse(Arrays.asList()).forEach(varIndexed -> {
 			String varIndexed2 = varIndexed;
@@ -158,6 +160,7 @@ public class IotNodeGenPage extends IotNodeGenPageGen<BaseModelPage> {
 		});
 	}
 
+	@Override
 	protected void _defaultPivotVars(List<String> l) {
 		Optional.ofNullable(searchListIotNode_.getFacetPivots()).orElse(Arrays.asList()).forEach(facetPivot -> {
 			String facetPivot2 = facetPivot;
@@ -252,6 +255,7 @@ public class IotNodeGenPage extends IotNodeGenPageGen<BaseModelPage> {
 		l.addAll(Optional.ofNullable(siteRequest_.getConfig().getJsonArray(ConfigKeys.AUTH_ROLES_REQUIRED + "_IotNode")).orElse(new JsonArray()).stream().map(o -> o.toString()).collect(Collectors.toList()));
 	}
 
+	@Override
 	protected void _pagination(JsonObject pagination) {
 		JsonArray pages = new JsonArray();
 		Long start = searchListIotNode_.getStart().longValue();
@@ -296,6 +300,7 @@ public class IotNodeGenPage extends IotNodeGenPageGen<BaseModelPage> {
 		}
 	}
 
+	@Override
 	protected void _varsQ(JsonObject vars) {
 		IotNode.varsQForClass().forEach(var -> {
 			JsonObject json = new JsonObject();
@@ -307,6 +312,7 @@ public class IotNodeGenPage extends IotNodeGenPageGen<BaseModelPage> {
 		});
 	}
 
+	@Override
 	protected void _varsFq(JsonObject vars) {
 		Map<String, SolrResponse.FacetField> facetFields = Optional.ofNullable(facetCounts).map(c -> c.getFacetFields()).map(f -> f.getFacets()).orElse(new HashMap<String,SolrResponse.FacetField>());
 		IotNode.varsFqForClass().forEach(var -> {
@@ -349,6 +355,7 @@ public class IotNodeGenPage extends IotNodeGenPageGen<BaseModelPage> {
 		});
 	}
 
+	@Override
 	protected void _varsRange(JsonObject vars) {
 		IotNode.varsRangeForClass().forEach(var -> {
 			String varIndexed = IotNode.varIndexedIotNode(var);
@@ -361,6 +368,7 @@ public class IotNodeGenPage extends IotNodeGenPageGen<BaseModelPage> {
 		});
 	}
 
+	@Override
 	protected void _query(JsonObject query) {
 		ServiceRequest serviceRequest = siteRequest_.getServiceRequest();
 		JsonObject params = serviceRequest.getParams();

@@ -644,24 +644,13 @@ public class SiteHtmEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 
 		try {
 			ApiRequest apiRequest = siteRequest.getApiRequest_();
-			pgPool.withTransaction(sqlConnection -> {
-				Promise<SiteHtm> promise1 = Promise.promise();
-				siteRequest.setSqlConnection(sqlConnection);
-				persistSiteHtm(o, true).onSuccess(c -> {
-					indexSiteHtm(o).onSuccess(e -> {
-						promise1.complete(o);
-					}).onFailure(ex -> {
-						promise1.fail(ex);
-					});
+			persistSiteHtm(o, true).onSuccess(c -> {
+				indexSiteHtm(o).onSuccess(e -> {
+					promise.complete(o);
 				}).onFailure(ex -> {
-					promise1.fail(ex);
+					promise.fail(ex);
 				});
-				return promise1.future();
-			}).onSuccess(a -> {
-				siteRequest.setSqlConnection(null);
-				promise.complete(o);
 			}).onFailure(ex -> {
-				siteRequest.setSqlConnection(null);
 				promise.fail(ex);
 			});
 		} catch(Exception ex) {

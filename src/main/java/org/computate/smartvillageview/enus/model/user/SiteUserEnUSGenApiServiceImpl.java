@@ -390,8 +390,8 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 
 		try {
 			ApiRequest apiRequest = siteRequest.getApiRequest_();
+			Promise<SiteUser> promise1 = Promise.promise();
 			pgPool.withTransaction(sqlConnection -> {
-				Promise<SiteUser> promise1 = Promise.promise();
 				siteRequest.setSqlConnection(sqlConnection);
 				sqlPATCHSiteUser(o, inheritPk).onSuccess(siteUser -> {
 					persistSiteUser(siteUser).onSuccess(c -> {
