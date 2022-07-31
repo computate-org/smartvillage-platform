@@ -85,6 +85,8 @@ PROJECTS:
         template: user/SiteUser.java
       - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_SitePage | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_SitePage }}.java"
         template: page/SitePage.java
+      - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_SitePage | replace('.', '/') }}/reader/{{ CLASS_SIMPLE_NAME_SitePage }}Reader.java"
+        template: page/SitePageReader.java
       - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_SiteHtm | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_SiteHtm }}.java"
         template: htm/SiteHtm.java
       - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_DynamicPage | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_DynamicPage }}.java"
@@ -322,7 +324,17 @@ WORKER_IMPORT_DATA: |2
   				}
   			});
   		} else if(SitePage.CLASS_SIMPLE_NAME.equals(classSimpleName)) {
-  			importDataSitePage().onComplete(a -> {
+  			SiteRequestEnUS siteRequest = new SiteRequestEnUS();
+  			siteRequest.setConfig(config());
+  			siteRequest.setWebClient(webClient);
+  			siteRequest.initDeepSiteRequestEnUS(siteRequest);
+  			SitePageReader reader = new SitePageReader();
+  			reader.setVertx(vertx);
+  			reader.setWorkerExecutor(workerExecutor);
+  			reader.setTemplateEngine(templateEngine);
+  			reader.setHandlebars(handlebars);
+  			reader.initDeepForClass(siteRequest);
+  			reader.importDataSitePage().onComplete(a -> {
   				String importPeriod = config().getString(String.format("%s_%s", ConfigKeys.IMPORT_DATA_PERIOD, classSimpleName));
   				if(importPeriod != null && startDateTime != null) {
   					Duration duration = TimeTool.parseNextDuration(importPeriod);

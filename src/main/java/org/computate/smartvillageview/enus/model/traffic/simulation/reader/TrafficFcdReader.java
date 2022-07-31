@@ -5,12 +5,13 @@ import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.computate.search.wrap.Wrap;
 import org.computate.smartvillageview.enus.config.ConfigKeys;
-import org.computate.smartvillageview.enus.model.page.SitePage;
+import org.computate.smartvillageview.enus.model.system.event.SystemEvent;
 import org.computate.smartvillageview.enus.model.traffic.time.step.TimeStep;
 import org.computate.smartvillageview.enus.model.traffic.vehicle.step.VehicleStep;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
@@ -85,11 +86,32 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 	 **/
 	public Future<Void> importFcd() {
 		Promise<Void> promise = Promise.promise();
+		ZonedDateTime now = ZonedDateTime.now(ZoneId.of(config.getString(ConfigKeys.SITE_ZONE)));
+		SystemEvent systemEvent = new SystemEvent();
+		String id = String.format("%s_%s", SystemEvent.CLASS_SIMPLE_NAME, UUID.randomUUID());
+		systemEvent.setCreated(now);
+		systemEvent.setId(id);
+		systemEvent.setObjectId(id);
+		systemEvent.setInheritPk(id);
+		systemEvent.setStatus(SystemEvent.statusStarted_enUS);
+
 		LOG.info(importFcdStarted);
 		workerExecutor.executeBlocking(blockingCodeHandler -> {
-			importFcdFileList().onSuccess(c -> {
-				LOG.info(importFcdComplete);
-				promise.complete();
+			importSystemEvent(systemEvent).onSuccess(a -> {
+				importFcdFileList().onSuccess(b -> {
+					systemEvent.setCompleted(ZonedDateTime.now(ZoneId.of(config.getString(ConfigKeys.SITE_ZONE))));
+					systemEvent.setStatus(SystemEvent.statusCompleted_enUS);
+					importSystemEvent(systemEvent).onSuccess(c -> {
+						LOG.info(importFcdComplete);
+						promise.complete();
+					}).onFailure(ex -> {
+						LOG.error(importFcdFail, ex);
+						promise.fail(ex);
+					});
+				}).onFailure(ex -> {
+					LOG.error(importFcdFail, ex);
+					promise.fail(ex);
+				});
 			}).onFailure(ex -> {
 				LOG.error(importFcdFail, ex);
 				promise.fail(ex);
@@ -98,6 +120,36 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 			promise.complete();
 		}).onFailure(ex -> {
 			LOG.error(String.format(importFcdFail), ex);
+			promise.fail(ex);
+		});
+		return promise.future();
+	}
+
+	/**
+	 * Val.Started.enUS:Syncing FCD record started: %s
+	 * Val.Complete.enUS:Syncing FCD record completed: %s
+	 * Val.Fail.enUS:Syncing FCD record failed: %s
+	 * Val.WebSocket.enUS:websocket%s
+	 */
+	private Future<Void> importSystemEvent(SystemEvent systemEvent) {
+		Promise<Void> promise = Promise.promise();
+		String id = systemEvent.getId();
+		JsonObject params = new JsonObject();
+		JsonObject body = JsonObject.mapFrom(systemEvent);
+		params.put("body", body);
+		params.put("path", new JsonObject());
+		params.put("cookie", new JsonObject());
+		params.put("query", new JsonObject().put("softCommit", true).put("q", "*:*").put("var", new JsonArray().add("refresh:false")));
+		JsonObject context = new JsonObject().put("params", params);
+		JsonObject request = new JsonObject().put("context", context);
+		vertx.eventBus().request(
+				String.format("%s-enUS-%s", config.getString(ConfigKeys.SITE_NAME), SystemEvent.CLASS_SIMPLE_NAME)
+				, request
+				, new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", SystemEvent.CLASS_SIMPLE_NAME))
+				).onSuccess(a -> {
+			promise.complete();
+		}).onFailure(ex -> {
+			LOG.error(String.format(importFcdHandleBodyFail, id), ex);
 			promise.fail(ex);
 		});
 		return promise.future();
