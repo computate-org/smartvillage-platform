@@ -315,6 +315,13 @@ public abstract class TrafficFcdReaderGen<DEV> extends Object {
 	public static final String importFcdHandleBodyWebSocket1 = "websocket%s";
 	public static final String importFcdHandleBodyWebSocket = importFcdHandleBodyWebSocket1;
 
+	public static final String importVehicleStarted1 = "Syncing FCD vehicle started: %s";
+	public static final String importVehicleStarted = importVehicleStarted1;
+	public static final String importVehicleComplete1 = "Syncing FCD vehicle completed: %s";
+	public static final String importVehicleComplete = importVehicleComplete1;
+	public static final String importVehicleFail1 = "Syncing FCD vehicle failed: %s";
+	public static final String importVehicleFail = importVehicleFail1;
+
 	public static final String importFcdVehicleStepStarted1 = "Syncing FCD record started: %s";
 	public static final String importFcdVehicleStepStarted = importFcdVehicleStepStarted1;
 	public static final String importFcdVehicleStepComplete1 = "Syncing FCD record completed: %s";
@@ -499,7 +506,7 @@ public abstract class TrafficFcdReaderGen<DEV> extends Object {
 		return sb.toString();
 	}
 
-	public static final String[] TrafficFcdReaderVals = new String[] { importFcdComplete1, importFcdFail1, importFcdSkip1, importFcdStarted1, importSystemEventStarted1, importSystemEventComplete1, importSystemEventFail1, importSystemEventWebSocket1, importFcdFileListStarted1, importFcdFileListComplete1, importFcdFileListSkip1, importFcdFileListFail1, importFcdFileStarted1, importFcdFileComplete1, importFcdFileFail1, importFcdHandleBodyStarted1, importFcdHandleBodyComplete1, importFcdHandleBodyFail1, importFcdHandleBodyWebSocket1, importFcdVehicleStepStarted1, importFcdVehicleStepComplete1, importFcdVehicleStepFail1, importFcdVehicleStepWebSocket1 };
+	public static final String[] TrafficFcdReaderVals = new String[] { importFcdComplete1, importFcdFail1, importFcdSkip1, importFcdStarted1, importSystemEventStarted1, importSystemEventComplete1, importSystemEventFail1, importSystemEventWebSocket1, importFcdFileListStarted1, importFcdFileListComplete1, importFcdFileListSkip1, importFcdFileListFail1, importFcdFileStarted1, importFcdFileComplete1, importFcdFileFail1, importFcdHandleBodyStarted1, importFcdHandleBodyComplete1, importFcdHandleBodyFail1, importFcdHandleBodyWebSocket1, importVehicleStarted1, importVehicleComplete1, importVehicleFail1, importFcdVehicleStepStarted1, importFcdVehicleStepComplete1, importFcdVehicleStepFail1, importFcdVehicleStepWebSocket1 };
 
 	public static final String CLASS_SIMPLE_NAME = "TrafficFcdReader";
 	public static final String VAR_siteRequest_ = "siteRequest_";

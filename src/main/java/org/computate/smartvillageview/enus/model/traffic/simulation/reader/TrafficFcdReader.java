@@ -1,5 +1,7 @@
 package org.computate.smartvillageview.enus.model.traffic.simulation.reader;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
@@ -15,6 +17,7 @@ import org.computate.smartvillageview.enus.model.system.event.SystemEvent;
 import org.computate.smartvillageview.enus.model.traffic.time.step.TimeStep;
 import org.computate.smartvillageview.enus.model.traffic.vehicle.step.VehicleStep;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
+import org.computate.smartvillageview.enus.vertx.AsyncInputStream;
 import org.computate.vertx.api.ApiCounter;
 import org.computate.vertx.api.ApiRequest;
 
@@ -38,11 +41,12 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 	public static final Integer INT_COMMIT_WITHIN = 10000;
 
 	public static final String STR_END_TIMESTEP = "</timestep>";
+	public static final String STR_END_VEHICLE = "/>";
 
 	public static final Long LONG_ZERO = 0L;
 
 	public static final String REGEX_TIMESTEP = "<timestep\\s+time=\"([\\d\\.]+)\">";
-	public static final String REGEX_VEHICLE = "<vehicle([^>]*)/>";
+	public static final String REGEX_VEHICLE = "<vehicle([^>]*)";
 	public static final String REGEX_ATTR = "\\s+([^=\\s]+)=\"([^\"]*)\"";
 
 	public TrafficFcdReader(Vertx vertx, WorkerExecutor workerExecutor, SiteRequestEnUS siteRequest, JsonObject config) {
@@ -110,11 +114,25 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 					});
 				}).onFailure(ex -> {
 					LOG.error(importFcdFail, ex);
-					promise.fail(ex);
+					systemEvent.setCompleted(ZonedDateTime.now(ZoneId.of(config.getString(ConfigKeys.SITE_ZONE))));
+					systemEvent.setStatus(SystemEvent.statusError_enUS);
+					importSystemEvent(systemEvent).onSuccess(c -> {
+						promise.complete();
+					}).onFailure(ex2 -> {
+						LOG.error(importFcdFail, ex2);
+						promise.fail(ex2);
+					});
 				});
 			}).onFailure(ex -> {
 				LOG.error(importFcdFail, ex);
-				promise.fail(ex);
+				systemEvent.setCompleted(ZonedDateTime.now(ZoneId.of(config.getString(ConfigKeys.SITE_ZONE))));
+				systemEvent.setStatus(SystemEvent.statusError_enUS);
+				importSystemEvent(systemEvent).onSuccess(c -> {
+					promise.complete();
+				}).onFailure(ex2 -> {
+					LOG.error(importFcdFail, ex2);
+					promise.fail(ex2);
+				});
 			});
 		}, false).onSuccess(b -> {
 			promise.complete();
@@ -233,8 +251,8 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 					fileStream.setReadBufferSize(readBufferSize);
 				});
 				ApiCounter apiCounter = new ApiCounter();
-				Long apiCounterResume = config.getLong(ConfigKeys.API_COUNTER_RESUME);
-				Long apiCounterFetch = config.getLong(ConfigKeys.API_COUNTER_FETCH);
+				Long apiCounterResume = config.getLong(ConfigKeys.API_COUNTER_RESUME_TimeStep);
+				Long apiCounterFetch = config.getLong(ConfigKeys.API_COUNTER_FETCH_TimeStep);
 				apiCounter.setTotalNum(0L);
 
 				RecordParser recordParser = RecordParser.newDelimited(STR_END_TIMESTEP, fileStream);
@@ -243,17 +261,6 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 				});
 
 				recordParser.pause();
-
-//				Long periodicId = vertx.setPeriodic(config.getLong(ConfigKeys.API_CHECK_TIMER_MILLIS), periodicHandler -> {
-//					if(apiCounter.getTotalNum().equals(apiCounter.getTotalNumOld())) {
-//						LOG.info("FETCH FROM PERIODIC TIMER");
-//						apiCounter.setTotalNum(apiCounter.getQueueNum());
-//						recordParser.fetch(apiCounterFetch);
-//						apiCounter.incrementTotalNum(apiCounterFetch);
-//					}
-//					apiCounter.setQueueNumOld(apiCounter.getQueueNum());
-//					apiCounter.setTotalNumOld(apiCounter.getTotalNum());
-//				});
 
 				SiteRequestEnUS siteRequest = new SiteRequestEnUS();
 				siteRequest.setConfig(config);
@@ -268,16 +275,9 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 				apiRequest.initDeepApiRequest(siteRequest);
 
 				recordParser.handler(bufferedText -> {
-					try {
-						importFcdHandleBody(path, bufferedText, apiRequest, recordParser, apiCounter, apiCounterResume, apiCounterFetch).onSuccess(a -> {
-						}).onFailure(ex -> {
-							LOG.error(String.format(importFcdFileFail, path), ex);
-							promise.fail(ex);
-						});
-					} catch (Exception ex) {
-						LOG.error(String.format(importFcdFileFail, path), ex);
-						promise.fail(ex);
-					}
+					importFcdHandleBody(path, bufferedText, apiRequest, recordParser, apiCounter, apiCounterResume, apiCounterFetch).onSuccess(a -> {
+					}).onFailure(ex -> {
+					});
 				}).exceptionHandler(ex -> {
 					LOG.error(String.format(importFcdFileFail, path), new RuntimeException(ex));
 					promise.fail(ex);
@@ -307,9 +307,9 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 	 * Val.Fail.enUS:Syncing FCD record failed: %s
 	 * Val.WebSocket.enUS:websocket%s
 	 */
-	private Future<Void> importFcdHandleBody(String path, Buffer bufferedLine, ApiRequest apiRequest, RecordParser recordParser, ApiCounter apiCounter, Long apiCounterResume, Long apiCounterFetch) {
+	private Future<Void> importFcdHandleBody(String path, Buffer bufferedText, ApiRequest apiRequest, RecordParser recordParser, ApiCounter apiCounter, Long apiCounterResume, Long apiCounterFetch) {
 		Promise<Void> promise = Promise.promise();
-		TimeStep timeStep = importTimeStepText(path, bufferedLine);
+		TimeStep timeStep = importTimeStepText(path, bufferedText);
 		if(timeStep != null) {
 			String id = timeStep.getId();
 			JsonObject params = new JsonObject();
@@ -329,24 +329,13 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 					apiCounter.incrementQueueNum();
 					if(apiCounterResume.compareTo(apiCounter.getTotalNum() - apiCounter.getQueueNum()) >= LONG_ZERO) {
 						recordParser.fetch(apiCounterFetch);
+						LOG.info(String.format("FETCHING TimeStep %s - %s = %s", apiCounter.getTotalNum(), apiCounter.getQueueNum(), apiCounter.getTotalNum() - apiCounter.getQueueNum()));
 						apiCounter.incrementTotalNum(apiCounterFetch);
 						apiRequest.setNumPATCH(apiCounter.getTotalNum());
 						apiRequest.setTimeRemaining(apiRequest.calculateTimeRemaining());
 						vertx.eventBus().publish(String.format(importFcdHandleBodyWebSocket, TimeStep.CLASS_SIMPLE_NAME), JsonObject.mapFrom(apiRequest));
 					}
-					List<VehicleStep> vehicleSteps = importVehicleStepText(timeStep, bufferedLine);
-					List<Future> futures = new ArrayList<>();
-					vehicleSteps.forEach(vehicleStep -> {
-						futures.add(Future.future(promise1 -> {
-							importFcdVehicleStep(timeStep, vehicleStep, apiRequest).onSuccess(b -> {
-								promise1.complete();
-							}).onFailure(ex -> {
-								LOG.error(importFcdFileListFail, ex);
-								promise1.fail(ex);
-							});
-						}));
-					});
-					CompositeFuture.all(futures).onSuccess(b -> {
+					importVehicle(timeStep, bufferedText).onSuccess(b -> {
 						promise.complete();
 					}).onFailure(ex -> {
 						LOG.error(importFcdFileListFail, ex);
@@ -368,12 +357,71 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 	}
 
 	/**
+	 * Val.Started.enUS:Syncing FCD vehicle started: %s
+	 * Val.Complete.enUS:Syncing FCD vehicle completed: %s
+	 * Val.Fail.enUS:Syncing FCD vehicle failed: %s
+	 **/
+	private Future<ApiRequest> importVehicle(TimeStep timeStep, Buffer bufferedText) {
+		Promise<ApiRequest> promise = Promise.promise();
+		try {
+			ApiCounter apiCounter = new ApiCounter();
+			Long apiCounterResume = config.getLong(ConfigKeys.API_COUNTER_RESUME_VehicleStep);
+			Long apiCounterFetch = config.getLong(ConfigKeys.API_COUNTER_FETCH_VehicleStep);
+			apiCounter.setTotalNum(0L);
+
+			InputStream is = new ByteArrayInputStream(bufferedText.getBytes());
+			AsyncInputStream ais = new AsyncInputStream(vertx, vertx.getOrCreateContext(), is);
+			RecordParser recordParser = RecordParser.newDelimited(STR_END_VEHICLE, ais);
+
+			recordParser.pause();
+
+			SiteRequestEnUS siteRequest = new SiteRequestEnUS();
+			siteRequest.setConfig(config);
+			siteRequest.initDeepSiteRequestEnUS(siteRequest);
+
+			Long numFound = apiCounter.getTotalNum();
+			ApiRequest apiRequest = new ApiRequest();
+			apiRequest.setRows(apiCounterFetch);
+			apiRequest.setNumFound(numFound);
+			apiRequest.setNumPATCH(0L);
+			apiRequest.setCreated(ZonedDateTime.now(ZoneId.of(config.getString(ConfigKeys.SITE_ZONE))));
+			apiRequest.initDeepApiRequest(siteRequest);
+
+			recordParser.handler(bufferedText2 -> {
+				VehicleStep vehicleStep = importVehicleStepText(timeStep, bufferedText2);
+				if(vehicleStep == null) {
+					promise.complete();
+				} else {
+					importFcdVehicleStep(timeStep, vehicleStep, apiRequest, recordParser, apiCounter, apiCounterResume, apiCounterFetch).onSuccess(b -> {
+					}).onFailure(ex -> {
+					});
+				}
+			}).exceptionHandler(ex -> {
+				LOG.error(String.format(importVehicleFail, timeStep.getPath()), new RuntimeException(ex));
+				promise.fail(ex);
+			}).endHandler(v -> {
+//					fileStream.flush();
+//					fileStream.close();
+				vertx.eventBus().publish(String.format("websocket%s", TimeStep.CLASS_SIMPLE_NAME), JsonObject.mapFrom(apiRequest));
+				LOG.info(String.format(importVehicleComplete, timeStep.getPath()));
+				promise.complete(apiRequest);
+			});
+			recordParser.fetch(apiCounterFetch);
+			apiCounter.incrementTotalNum(apiCounterFetch);
+		} catch (Exception ex) {
+			LOG.error(String.format(importVehicleFail, timeStep.getPath()), ex);
+			promise.fail(ex);
+		}
+		return promise.future();
+	}
+
+	/**
 	 * Val.Started.enUS:Syncing FCD record started: %s
 	 * Val.Complete.enUS:Syncing FCD record completed: %s
 	 * Val.Fail.enUS:Syncing FCD record failed: %s
 	 * Val.WebSocket.enUS:websocket%s
 	 */
-	private Future<Void> importFcdVehicleStep(TimeStep timeStep, VehicleStep vehicleStep, ApiRequest apiRequest) {
+	private Future<Void> importFcdVehicleStep(TimeStep timeStep, VehicleStep vehicleStep, ApiRequest apiRequest, RecordParser recordParser, ApiCounter apiCounter, Long apiCounterResume, Long apiCounterFetch) {
 		Promise<Void> promise = Promise.promise();
 		if(timeStep != null && vehicleStep != null) {
 			String id = vehicleStep.getId();
@@ -390,6 +438,15 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 					, request
 					, new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", VehicleStep.CLASS_SIMPLE_NAME))
 					).onSuccess(a -> {
+				apiCounter.incrementQueueNum();
+				if(apiCounterResume.compareTo(apiCounter.getTotalNum() - apiCounter.getQueueNum()) >= LONG_ZERO) {
+					recordParser.fetch(apiCounterFetch);
+					LOG.info(String.format("FETCHING VehicleStep %s - %s = %s", apiCounter.getTotalNum(), apiCounter.getQueueNum(), apiCounter.getTotalNum() - apiCounter.getQueueNum()));
+					apiCounter.incrementTotalNum(apiCounterFetch);
+					apiRequest.setNumPATCH(apiCounter.getTotalNum());
+					apiRequest.setTimeRemaining(apiRequest.calculateTimeRemaining());
+					vertx.eventBus().publish(String.format(importFcdHandleBodyWebSocket, TimeStep.CLASS_SIMPLE_NAME), JsonObject.mapFrom(apiRequest));
+				}
 				promise.complete();
 			}).onFailure(ex -> {
 				LOG.error(String.format(importFcdHandleBodyFail, id), ex);
@@ -418,16 +475,16 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 		return timeStep;
 	}
 
-	private List<VehicleStep> importVehicleStepText(TimeStep timeStep, Buffer bufferedText) {
+	private VehicleStep importVehicleStepText(TimeStep timeStep, Buffer bufferedText) {
 		String text = bufferedText.toString();
-		List<VehicleStep> vehicleSteps = new ArrayList<>();
+		VehicleStep vehicleStep = null;
 		Matcher m = Pattern.compile(REGEX_VEHICLE, Pattern.MULTILINE).matcher(text);
 		boolean found = m.find();
-		while (found) {
+		if (found) {
 			String attrs = m.group(m.groupCount());
 			Matcher m2 = Pattern.compile(REGEX_ATTR, Pattern.MULTILINE).matcher(attrs);
 			boolean found2 = m2.find();
-			VehicleStep vehicleStep = new VehicleStep();
+			vehicleStep = new VehicleStep();
 			while (found2) {
 				String var = m2.group(1);
 				String val = m2.group(2);
@@ -450,9 +507,8 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 			vehicleStep.setTime(timeStep.getTime());
 			vehicleStep.setTimeStepId(timeStep.getId());
 
-			vehicleSteps.add(vehicleStep);
 			found = m.find();
 		}
-		return vehicleSteps;
+		return vehicleStep;
 	}
 }

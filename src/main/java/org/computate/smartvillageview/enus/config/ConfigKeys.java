@@ -97,4 +97,49 @@ public class ConfigKeys extends ComputateConfigKeys {
 	 * Map default zoom. 
 	 **/
 	public static final String DEFAULT_MAP_ZOOM = "DEFAULT_MAP_ZOOM";
+
+	/**
+	 * max number of times to retry
+	 */
+	public static final String ZOOKEEPER_MAX_RETRIES = "ZOOKEEPER_MAX_RETRIES";
+
+	/**
+	 * initial amount of time to wait between retries
+	 */
+	public static final String ZOOKEEPER_BASE_SLEEP_TIME_MILLIS = "ZOOKEEPER_BASE_SLEEP_TIME_MILLIS";
+
+	/**
+	 * max time in ms to sleep on each retry
+	 */
+	public static final String ZOOKEEPER_MAX_SLEEP_MILLIS = "ZOOKEEPER_MAX_SLEEP_MILLIS";
+
+	/**
+	 * Zookeeper connection timeout
+	 */
+	public static final String ZOOKEEPER_CONNECTION_TIMEOUT_MILLIS = "ZOOKEEPER_CONNECTION_TIMEOUT_MILLIS";
+
+	/**
+	 * Zookeeper session timeout
+	 */
+	public static final String ZOOKEEPER_SESSION_TIMEOUT_MILLIS = "ZOOKEEPER_SESSION_TIMEOUT_MILLIS";
+
+	/**
+	 * API counter resume TimeStep
+	 */
+	public static final String API_COUNTER_RESUME_TimeStep = "API_COUNTER_RESUME_TimeStep";
+
+	/**
+	 * API counter fetch TimeStep
+	 */
+	public static final String API_COUNTER_FETCH_TimeStep = "API_COUNTER_FETCH_TimeStep";
+
+	/**
+	 * API counter resume VehicleStep
+	 */
+	public static final String API_COUNTER_RESUME_VehicleStep = "API_COUNTER_RESUME_VehicleStep";
+
+	/**
+	 * API counter fetch VehicleStep
+	 */
+	public static final String API_COUNTER_FETCH_VehicleStep = "API_COUNTER_FETCH_VehicleStep";
 }

@@ -217,14 +217,19 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 			Integer clusterPort = config.getInteger(ConfigKeys.CLUSTER_PORT);
 			String clusterPublicHostName = config.getString(ConfigKeys.CLUSTER_PUBLIC_HOST_NAME);
 			Integer clusterPublicPort = config.getInteger(ConfigKeys.CLUSTER_PUBLIC_PORT);
+			Integer zookeeperBaseSleepTimeMillis = config.getInteger(ConfigKeys.ZOOKEEPER_BASE_SLEEP_TIME_MILLIS);
+			Integer zookeeperMaxSleepMillis = config.getInteger(ConfigKeys.ZOOKEEPER_MAX_SLEEP_MILLIS);
+			Integer zookeeperMaxRetries = config.getInteger(ConfigKeys.ZOOKEEPER_MAX_RETRIES);
+			Integer zookeeperConnectionTimeoutMillis = config.getInteger(ConfigKeys.ZOOKEEPER_CONNECTION_TIMEOUT_MILLIS);
+			Integer zookeeperSessionTimeoutMillis = config.getInteger(ConfigKeys.ZOOKEEPER_SESSION_TIMEOUT_MILLIS);
 			zkConfig.put("zookeeperHosts", zookeeperHosts);
-			zkConfig.put("sessionTimeout", 500000);
-			zkConfig.put("connectTimeout", 3000);
+			zkConfig.put("sessionTimeout", zookeeperSessionTimeoutMillis);
+			zkConfig.put("connectTimeout", zookeeperConnectionTimeoutMillis);
 			zkConfig.put("rootPath", "smart-village-view");
 			zkConfig.put("retry", new JsonObject()
-					.put("initialSleepTime", 100)
-					.put("intervalTimes", 10000)
-					.put("maxTimes", 5)
+					.put("initialSleepTime", zookeeperBaseSleepTimeMillis)
+					.put("intervalTimes", zookeeperMaxSleepMillis)
+					.put("maxTimes", zookeeperMaxRetries)
 			);
 			ClusterManager clusterManager = new ZookeeperClusterManager(zkConfig);
 
