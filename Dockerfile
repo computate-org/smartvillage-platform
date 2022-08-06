@@ -16,8 +16,6 @@ ENV APP_NAME=sumo \
 	SUMO_HOME="/usr/local/share/sumo" \
 	LD_LIBRARY_PATH="/usr/local/lib:/usr/local/lib64"
 
-RUN install -d /root/src
-COPY . /root/src
 USER root
 
 RUN rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
@@ -36,6 +34,9 @@ RUN git clone https://github.com/computate-org/computate_gtest.git /root/.ansibl
 RUN git clone https://github.com/computate-org/computate_eigen.git /root/.ansible/roles/computate.computate_eigen
 RUN git clone https://github.com/computate-org/computate_gdal.git /root/.ansible/roles/computate.computate_gdal
 RUN source ${PYTHON_DIR}/bin/activate && ${PYTHON_DIR}/bin/ansible-playbook -e  APP_PREFIX=/usr/local -e APP_DOWNLOAD_DIR=/tmp /root/.ansible/roles/computate.computate_sumo/install.yml
+
+RUN install -d /root/src
+COPY . /root/src
 
 WORKDIR /root/src
 RUN mvn clean install -DskipTests

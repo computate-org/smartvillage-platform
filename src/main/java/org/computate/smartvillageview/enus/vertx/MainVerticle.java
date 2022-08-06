@@ -58,11 +58,13 @@ import io.vertx.core.http.Cookie;
 import io.vertx.core.http.HttpClientOptions;
 import io.vertx.core.http.HttpHeaders;
 import io.vertx.core.http.HttpServerOptions;
+import io.vertx.core.impl.VertxImpl;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.net.JksOptions;
 import io.vertx.core.net.PemKeyCertOptions;
 import io.vertx.core.spi.cluster.ClusterManager;
+import io.vertx.core.spi.cluster.NodeInfo;
 import io.vertx.ext.auth.authorization.AuthorizationProvider;
 import io.vertx.ext.auth.oauth2.OAuth2Auth;
 import io.vertx.ext.auth.oauth2.OAuth2FlowType;
@@ -636,6 +638,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 	private Future<Void> configureHealthChecks() {
 		Promise<Void> promise = Promise.promise();
 		try {
+			ClusterManager clusterManager = ((VertxImpl)vertx).getClusterManager();
 			HealthCheckHandler healthCheckHandler = HealthCheckHandler.create(vertx);
 			siteInstances = Optional.ofNullable(System.getenv(ConfigKeys.SITE_INSTANCES)).map(s -> Integer.parseInt(s)).orElse(1);
 			workerPoolSize = System.getenv(ConfigKeys.WORKER_POOL_SIZE) == null ? null : Integer.parseInt(System.getenv(ConfigKeys.WORKER_POOL_SIZE));
@@ -643,6 +646,17 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 			healthCheckHandler.register("vertx", 2000, a -> {
 				a.complete(Status.OK(new JsonObject().put(ConfigKeys.SITE_INSTANCES, siteInstances).put("workerPoolSize", workerPoolSize)));
 			});
+			if(clusterManager != null) {
+				healthCheckHandler.register("cluster", 2000, a -> {
+					NodeInfo nodeInfo = clusterManager.getNodeInfo();
+					JsonArray nodeArray = new JsonArray();
+					clusterManager.getNodes().forEach(node -> nodeArray.add(node));
+					a.complete(Status.OK(new JsonObject()
+							.put("nodeId", clusterManager.getNodeId())
+							.put("nodes", nodeArray)
+							));
+				});
+			}
 			router.get("/health").handler(healthCheckHandler);
 			LOG.info(configureHealthChecksComplete);
 			promise.complete();
