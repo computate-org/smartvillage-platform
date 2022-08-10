@@ -80,9 +80,9 @@ SITE_REPO_NAME: "{{ SITE_NAME }}"
 SITE_REPO: "git@github.com:computate-org/smart-village-view.git"
 # The Github Repo HTTPS. 
 SITE_REPO_HTTPS: "https://github.com/computate-org/smart-village-view.git"
-PROJECT_POWERED_BY_URL: "https://www.operate-first.cloud/"
-PROJECT_POWERED_BY_NAME: "Operate First"
-PROJECT_POWERED_BY_IMAGE_URI: "/png/operate-first-logo.png"
+SITE_POWERED_BY_URL: "https://www.operate-first.cloud/"
+SITE_POWERED_BY_NAME: "Operate First"
+SITE_POWERED_BY_IMAGE_URI: "/png/operate-first-logo.png"
 
 ###############################
 # application global defaults #
@@ -121,11 +121,11 @@ API_COUNTER_RESUME: 5
 API_COUNTER_FETCH: 10
 JAVA_OPTS: "-XX:+ExitOnOutOfMemoryError"
 # The site volume size for files.
-PROJECT_VOLUME_SIZE: 30Gi
+SITE_VOLUME_SIZE: 30Gi
 # The volume name for files in the site.
-PROJECT_VOLUME_NAME: smart-village-view
+SITE_VOLUME_NAME: smart-village-view
 # The volume mount path for files in the site.
-PROJECT_VOLUME_MOUNT_PATH: /var/smart-village-view
+SITE_VOLUME_MOUNT_PATH: /var/smart-village-view
 
 #########################################
 # application US English defaults #

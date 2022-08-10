@@ -55,17 +55,17 @@ public class ConfigKeys extends ComputateConfigKeys {
 	/**
 	 * The project powered by URL. 
 	 **/
-	public static final String PROJECT_POWERED_BY_URL = "PROJECT_POWERED_BY_URL";
+	public static final String SITE_POWERED_BY_URL = "SITE_POWERED_BY_URL";
 
 	/**
 	 * The project powered by organization name. 
 	 **/
-	public static final String PROJECT_POWERED_BY_NAME = "PROJECT_POWERED_BY_NAME";
+	public static final String SITE_POWERED_BY_NAME = "SITE_POWERED_BY_NAME";
 
 	/**
 	 * The project powered by image relative URI. 
 	 **/
-	public static final String PROJECT_POWERED_BY_IMAGE_URI = "PROJECT_POWERED_BY_IMAGE_URI";
+	public static final String SITE_POWERED_BY_IMAGE_URI = "SITE_POWERED_BY_IMAGE_URI";
 
 	/**
 	 * The Floating Car Data directory. 

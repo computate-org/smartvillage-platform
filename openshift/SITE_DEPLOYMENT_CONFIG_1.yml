@@ -305,20 +305,20 @@ spec:
                 secretKeyRef:
                   key: "GITHUB_ORG"
                   name: "{{ SITE_NAME }}-secret"
-            - name: "PROJECT_POWERED_BY_URL"
+            - name: "SITE_POWERED_BY_URL"
               valueFrom:
                 secretKeyRef:
-                  key: "PROJECT_POWERED_BY_URL"
+                  key: "SITE_POWERED_BY_URL"
                   name: "{{ SITE_NAME }}-secret"
-            - name: "PROJECT_POWERED_BY_NAME"
+            - name: "SITE_POWERED_BY_NAME"
               valueFrom:
                 secretKeyRef:
-                  key: "PROJECT_POWERED_BY_NAME"
+                  key: "SITE_POWERED_BY_NAME"
                   name: "{{ SITE_NAME }}-secret"
-            - name: "PROJECT_POWERED_BY_IMAGE_URI"
+            - name: "SITE_POWERED_BY_IMAGE_URI"
               valueFrom:
                 secretKeyRef:
-                  key: "PROJECT_POWERED_BY_IMAGE_URI"
+                  key: "SITE_POWERED_BY_IMAGE_URI"
                   name: "{{ SITE_NAME }}-secret"
             - name: "FCD_SYNC_PATH"
               valueFrom:
@@ -396,15 +396,15 @@ spec:
                   key: "API_COUNTER_FETCH_VehicleStep"
                   name: "{{ SITE_NAME }}-secret"
           volumeMounts:
-{% if PROJECT_VOLUME_MOUNT_PATH and PROJECT_VOLUME_NAME %}
-            - mountPath: "{{ PROJECT_VOLUME_MOUNT_PATH }}"
-              name: "{{ PROJECT_VOLUME_NAME }}"
+{% if SITE_VOLUME_MOUNT_PATH and SITE_VOLUME_NAME %}
+            - mountPath: "{{ SITE_VOLUME_MOUNT_PATH }}"
+              name: "{{ SITE_VOLUME_NAME }}"
 {% endif %}
       volumes:
-{% if PROJECT_VOLUME_NAME %}
-        - name: "{{ PROJECT_VOLUME_NAME }}"
+{% if SITE_VOLUME_NAME %}
+        - name: "{{ SITE_VOLUME_NAME }}"
           persistentVolumeClaim:
-            claimName: "{{ PROJECT_VOLUME_NAME }}"
+            claimName: "{{ SITE_VOLUME_NAME }}"
 {% endif %}
   triggers:
     - imageChangeParams:

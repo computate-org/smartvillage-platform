@@ -99,8 +99,8 @@
 {{#if GITHUB_ORG }}
 				<a class="w3-bar-item grow-20 w3-margin w3-text-white w3-medium " href="https://github.com/{{ GITHUB_ORG }}/{{ SITE_NAME }}/" target="_blank">This site is open source <i class="fa-brands fa-github w3-large "></i></a>
 {{/if }}
-{{#if PROJECT_POWERED_BY_URL }}
-				<a class="w3-bar-item grow-20 w3-margin w3-text-white w3-medium " href="{{ PROJECT_POWERED_BY_URL }}" target="_blank"><span class="w3-medium ">Powered by </span>{{#if PROJECT_POWERED_BY_IMAGE_URI }}<img alt="" class="w3-image " style="display: inline-block; width: 100px; margin: 0 10px;" src="{{ staticBaseUrl }}{{ PROJECT_POWERED_BY_IMAGE_URI }}"/>{{else}}{{#if PROJECT_POWERED_BY_NAME}}{{ PROJECT_POWERED_BY_NAME }}{{/if}}{{/if}}</a>
+{{#if SITE_POWERED_BY_URL }}
+				<a class="w3-bar-item grow-20 w3-margin w3-text-white w3-medium " href="{{ SITE_POWERED_BY_URL }}" target="_blank"><span class="w3-medium ">Powered by </span>{{#if SITE_POWERED_BY_IMAGE_URI }}<img alt="" class="w3-image " style="display: inline-block; width: 100px; margin: 0 10px;" src="{{ staticBaseUrl }}{{ SITE_POWERED_BY_IMAGE_URI }}"/>{{else}}{{#if SITE_POWERED_BY_NAME}}{{ SITE_POWERED_BY_NAME }}{{/if}}{{/if}}</a>
 {{/if }}
 			</div>
 		</footer>

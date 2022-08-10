@@ -900,9 +900,9 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 							json.put(ConfigKeys.GITHUB_ORG, config().getString(ConfigKeys.GITHUB_ORG));
 							json.put(ConfigKeys.SITE_NAME, config().getString(ConfigKeys.SITE_NAME));
 							json.put(ConfigKeys.SITE_DISPLAY_NAME, config().getString(ConfigKeys.SITE_DISPLAY_NAME));
-							json.put(ConfigKeys.PROJECT_POWERED_BY_URL, config().getString(ConfigKeys.PROJECT_POWERED_BY_URL));
-							json.put(ConfigKeys.PROJECT_POWERED_BY_NAME, config().getString(ConfigKeys.PROJECT_POWERED_BY_NAME));
-							json.put(ConfigKeys.PROJECT_POWERED_BY_IMAGE_URI, config().getString(ConfigKeys.PROJECT_POWERED_BY_IMAGE_URI));
+							json.put(ConfigKeys.SITE_POWERED_BY_URL, config().getString(ConfigKeys.SITE_POWERED_BY_URL));
+							json.put(ConfigKeys.SITE_POWERED_BY_NAME, config().getString(ConfigKeys.SITE_POWERED_BY_NAME));
+							json.put(ConfigKeys.SITE_POWERED_BY_IMAGE_URI, config().getString(ConfigKeys.SITE_POWERED_BY_IMAGE_URI));
 							templateEngine.render(json, Optional.ofNullable(config().getString(ConfigKeys.TEMPLATE_PATH)).orElse("templates") + "/" + lang + "/DynamicPage").onSuccess(buffer -> {
 								try {
 									ctx.response().end(buffer);
@@ -935,9 +935,9 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 					ctx.put(ConfigKeys.GITHUB_ORG, config().getString(ConfigKeys.GITHUB_ORG));
 					ctx.put(ConfigKeys.SITE_NAME, config().getString(ConfigKeys.SITE_NAME));
 					ctx.put(ConfigKeys.SITE_DISPLAY_NAME, config().getString(ConfigKeys.SITE_DISPLAY_NAME));
-					ctx.put(ConfigKeys.PROJECT_POWERED_BY_URL, config().getString(ConfigKeys.PROJECT_POWERED_BY_URL));
-					ctx.put(ConfigKeys.PROJECT_POWERED_BY_NAME, config().getString(ConfigKeys.PROJECT_POWERED_BY_NAME));
-					ctx.put(ConfigKeys.PROJECT_POWERED_BY_IMAGE_URI, config().getString(ConfigKeys.PROJECT_POWERED_BY_IMAGE_URI));
+					ctx.put(ConfigKeys.SITE_POWERED_BY_URL, config().getString(ConfigKeys.SITE_POWERED_BY_URL));
+					ctx.put(ConfigKeys.SITE_POWERED_BY_NAME, config().getString(ConfigKeys.SITE_POWERED_BY_NAME));
+					ctx.put(ConfigKeys.SITE_POWERED_BY_IMAGE_URI, config().getString(ConfigKeys.SITE_POWERED_BY_IMAGE_URI));
 					ctx.next();
 				} catch(Exception ex) {
 					LOG.error("Failed to load page. ", ex);

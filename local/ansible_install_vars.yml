@@ -1,28 +1,28 @@
 ---
 GITHUB_ORG: computate-org
 QUAYIO_ORG: computateorg
-PROJECT_POWERED_BY_NAME: Operate First
-PROJECT_POWERED_BY_URL: https://www.operate-first.cloud/
-PROJECT_POWERED_BY_IMAGE_URI: /png/operate-first-logo.png
-PROJECT_NAME: smart-village-view
-PROJECT_DISPLAY_NAME: Smart Village Project
-PROJECT_REPO: "git@github.com:{{ GITHUB_ORG }}/{{ PROJECT_NAME }}.git"
-PROJECT_REPO_HTTPS: "{{ PROJECT_REPO | replace('git@github.com:', 'https://github.com/') }}"
-PROJECT_LANG: enUS
-PROJECT_ZONE: "America/New_York"
-PROJECT_LOCALE: "en-US"
-PROJECT_SRC: "{{ lookup('env', 'HOME') }}/.local/src/{{ PROJECT_NAME }}"
-PROJECT_POM_GROUP_ID: org.computate
-PROJECT_POM_ARTIFACT_ID_ROOT: "{{ PROJECT_NAME }}"
-PROJECT_POM_VERSION_PREFIX: "1.0.0"
-PROJECT_POM_VERSION_SUFFIX: "-SNAPSHOT"
-PROJECT_POM_VERSION: "{{ PROJECT_POM_VERSION_PREFIX }}{{ PROJECT_POM_VERSION_SUFFIX }}"
-PROJECT_JAVA_PACKAGE: "{{ PROJECT_POM_GROUP_ID }}.smartvillageview.enus"
-PROJECT_PORT: 12080
-CLUSTER_PORT: "{{ PROJECT_PORT | regex_replace('(...)', '\\1') }}81"
-JDBC_DATABASE: "{{ PROJECT_NAME }}"
-JDBC_USERNAME: "{{ PROJECT_NAME }}"
-SOLR_COLLECTION: "{{ PROJECT_NAME }}"
+SITE_POWERED_BY_NAME: Operate First
+SITE_POWERED_BY_URL: https://www.operate-first.cloud/
+SITE_POWERED_BY_IMAGE_URI: /png/operate-first-logo.png
+SITE_NAME: smart-village-view
+SITE_DISPLAY_NAME: Smart Village Project
+SITE_REPO: "git@github.com:{{ GITHUB_ORG }}/{{ SITE_NAME }}.git"
+SITE_REPO_HTTPS: "{{ SITE_REPO | replace('git@github.com:', 'https://github.com/') }}"
+SITE_LANG: enUS
+SITE_ZONE: "America/New_York"
+SITE_LOCALE: "en-US"
+SITE_SRC: "{{ lookup('env', 'HOME') }}/.local/src/{{ SITE_NAME }}"
+SITE_POM_GROUP_ID: org.computate
+SITE_POM_ARTIFACT_ID_ROOT: "{{ SITE_NAME }}"
+SITE_POM_VERSION_PREFIX: "1.0.0"
+SITE_POM_VERSION_SUFFIX: "-SNAPSHOT"
+SITE_POM_VERSION: "{{ SITE_POM_VERSION_PREFIX }}{{ SITE_POM_VERSION_SUFFIX }}"
+SITE_JAVA_PACKAGE: "{{ SITE_POM_GROUP_ID }}.smartvillageview.enus"
+SITE_PORT: 12080
+CLUSTER_PORT: "{{ SITE_PORT | regex_replace('(...)', '\\1') }}81"
+JDBC_DATABASE: "{{ SITE_NAME }}"
+JDBC_USERNAME: "{{ SITE_NAME }}"
+SOLR_COLLECTION: "{{ SITE_NAME }}"
 JAVA_OPTS: "-XX:+ExitOnOutOfMemoryError"
 ENABLE_SESSION_ID: true
 ENABLE_DELETED: true
@@ -30,9 +30,9 @@ ENABLE_ARCHIVED: true
 ENABLE_ROLE_ADMIN: true
 ENABLE_OPENID_CONNECT: true
 ENABLE_CODE_GENERATION_SERVICE: true
-PROJECT_VOLUME_SIZE: 30Gi
-PROJECT_VOLUME_NAME: "{{ PROJECT_NAME }}"
-PROJECT_VOLUME_MOUNT_PATH: "/var/{{ PROJECT_NAME }}"
+SITE_VOLUME_SIZE: 30Gi
+SITE_VOLUME_NAME: "{{ SITE_NAME }}"
+SITE_VOLUME_MOUNT_PATH: "/var/{{ SITE_NAME }}"
 SITE_LIMITS_MEMORY: "1500Mi"
 SITE_LIMITS_CPU: "700m"
 SITE_REQUESTS_MEMORY: "1500Mi"
@@ -47,117 +47,117 @@ WRITE_COMMENTS: true
 PROJECTS: 
 
   - GITHUB_ORG: "{{ GITHUB_ORG }}"
-    PROJECT_NAME: "{{ PROJECT_NAME }}"
-    PROJECT_SRC: "{{ PROJECT_SRC }}"
-    PROJECT_JAVA_PACKAGE: "{{ PROJECT_JAVA_PACKAGE }}"
-    PROJECT_FILES: 
-      - path: "{{ PROJECT_SRC }}/bin/touch.sh"
+    SITE_NAME: "{{ SITE_NAME }}"
+    SITE_SRC: "{{ SITE_SRC }}"
+    SITE_JAVA_PACKAGE: "{{ SITE_JAVA_PACKAGE }}"
+    SITE_FILES: 
+      - path: "{{ SITE_SRC }}/bin/touch.sh"
         template: touch.sh
-      - path: "{{ PROJECT_SRC }}/pom.xml"
+      - path: "{{ SITE_SRC }}/pom.xml"
         template: java/pom.xml
-      - path: "{{ PROJECT_SRC }}/install.yml"
+      - path: "{{ SITE_SRC }}/install.yml"
         template: ansible/install.yml
-      - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/package-info.java"
+      - path: "{{ SITE_SRC }}/src/main/java/{{ SITE_JAVA_PACKAGE | replace('.', '/') }}/package-info.java"
         template: java/package-info.java
-      - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_ConfigKeys | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_ConfigKeys }}.java"
+      - path: "{{ SITE_SRC }}/src/main/java/{{ SITE_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_ConfigKeys | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_ConfigKeys }}.java"
         template: config/ConfigKeys.java
-      - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_SiteRequest | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_SiteRequest }}.java"
+      - path: "{{ SITE_SRC }}/src/main/java/{{ SITE_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_SiteRequest | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_SiteRequest }}.java"
         template: request/SiteRequestEnUS.java
-      - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_PageLayout | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_PageLayout }}.java"
+      - path: "{{ SITE_SRC }}/src/main/java/{{ SITE_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_PageLayout | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_PageLayout }}.java"
         template: page/PageLayout.java
-      - path: "{{ PROJECT_SRC }}/src/main/resources/templates/{{ PROJECT_LANG }}/{{ CLASS_SIMPLE_NAME_PageLayout }}.hbs"
+      - path: "{{ SITE_SRC }}/src/main/resources/templates/{{ SITE_LANG }}/{{ CLASS_SIMPLE_NAME_PageLayout }}.hbs"
         template: page/PageLayout.hbs
-      - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_HomePage | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_HomePage }}.java"
+      - path: "{{ SITE_SRC }}/src/main/java/{{ SITE_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_HomePage | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_HomePage }}.java"
         template: page/HomePage.java
-      - path: "{{ PROJECT_SRC }}/src/main/resources/templates/{{ PROJECT_LANG }}/{{ CLASS_SIMPLE_NAME_HomePage }}.hbs"
+      - path: "{{ SITE_SRC }}/src/main/resources/templates/{{ SITE_LANG }}/{{ CLASS_SIMPLE_NAME_HomePage }}.hbs"
         template: page/HomePage.hbs
-      - path: "{{ PROJECT_SRC }}/src/main/resources/templates/{{ PROJECT_LANG }}/{{ CLASS_SIMPLE_NAME_DynamicPage }}.hbs"
+      - path: "{{ SITE_SRC }}/src/main/resources/templates/{{ SITE_LANG }}/{{ CLASS_SIMPLE_NAME_DynamicPage }}.hbs"
         template: page/DynamicPage.hbs
-      - path: "{{ PROJECT_SRC }}/src/main/resources/templates/{{ PROJECT_LANG }}/{{ CLASS_SIMPLE_NAME_DynamicGenPage }}.hbs"
+      - path: "{{ SITE_SRC }}/src/main/resources/templates/{{ SITE_LANG }}/{{ CLASS_SIMPLE_NAME_DynamicGenPage }}.hbs"
         template: page/DynamicGenPage.hbs
-      - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_MainVerticle | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_MainVerticle }}.java"
+      - path: "{{ SITE_SRC }}/src/main/java/{{ SITE_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_MainVerticle | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_MainVerticle }}.java"
         template: vertx/MainVerticle.java
-      - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_WorkerVerticle | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_WorkerVerticle }}.java"
+      - path: "{{ SITE_SRC }}/src/main/java/{{ SITE_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_WorkerVerticle | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_WorkerVerticle }}.java"
         template: vertx/WorkerVerticle.java
-      - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_BaseModel | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_BaseModel }}.java"
+      - path: "{{ SITE_SRC }}/src/main/java/{{ SITE_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_BaseModel | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_BaseModel }}.java"
         template: base/BaseModel.java
-      - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_SiteUser | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_SiteUser }}.java"
+      - path: "{{ SITE_SRC }}/src/main/java/{{ SITE_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_SiteUser | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_SiteUser }}.java"
         template: user/SiteUser.java
-      - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_SitePage | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_SitePage }}.java"
+      - path: "{{ SITE_SRC }}/src/main/java/{{ SITE_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_SitePage | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_SitePage }}.java"
         template: page/SitePage.java
-      - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_SitePage | replace('.', '/') }}/reader/{{ CLASS_SIMPLE_NAME_SitePage }}Reader.java"
+      - path: "{{ SITE_SRC }}/src/main/java/{{ SITE_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_SitePage | replace('.', '/') }}/reader/{{ CLASS_SIMPLE_NAME_SitePage }}Reader.java"
         template: page/SitePageReader.java
-      - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_SiteHtm | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_SiteHtm }}.java"
+      - path: "{{ SITE_SRC }}/src/main/java/{{ SITE_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_SiteHtm | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_SiteHtm }}.java"
         template: htm/SiteHtm.java
-      - path: "{{ PROJECT_SRC }}/src/main/java/{{ PROJECT_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_DynamicPage | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_DynamicPage }}.java"
+      - path: "{{ SITE_SRC }}/src/main/java/{{ SITE_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_DynamicPage | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_DynamicPage }}.java"
         template: page/DynamicPage.java
-      - path: "{{ PROJECT_SRC }}/src/main/resources/application.yml"
+      - path: "{{ SITE_SRC }}/src/main/resources/application.yml"
         template: java/application.yml
-      - path: "{{ PROJECT_SRC }}/src/main/resources/log4j.properties"
+      - path: "{{ SITE_SRC }}/src/main/resources/log4j.properties"
         template: log4j/log4j.properties
-      - path: "{{ PROJECT_SRC }}/src/main/resources/log4j.xml"
+      - path: "{{ SITE_SRC }}/src/main/resources/log4j.xml"
         template: log4j/log4j.xml
-      - path: "{{ PROJECT_SRC }}/local/defaults.yml"
+      - path: "{{ SITE_SRC }}/local/defaults.yml"
         template: local/defaults.yml
-      - path: "{{ PROJECT_SRC }}/local/template.yml"
+      - path: "{{ SITE_SRC }}/local/template.yml"
         template: local/template.yml
-      - path: "{{ PROJECT_SRC }}/CONTRIBUTING"
+      - path: "{{ SITE_SRC }}/CONTRIBUTING"
         template: license/CONTRIBUTING
-      - path: "{{ PROJECT_SRC }}/DCO"
+      - path: "{{ SITE_SRC }}/DCO"
         template: license/DCO
-      - path: "{{ PROJECT_SRC }}/LICENSE"
+      - path: "{{ SITE_SRC }}/LICENSE"
         template: license/LICENSE
-      - path: "{{ PROJECT_SRC }}/README.md"
+      - path: "{{ SITE_SRC }}/README.md"
         template: local/README.md
-      - path: "{{ PROJECT_SRC }}-static/js/jQuery-Autocomplete/jquery.autocomplete.js"
+      - path: "{{ SITE_SRC }}-static/js/jQuery-Autocomplete/jquery.autocomplete.js"
         template: js/jQuery-Autocomplete/jquery.autocomplete.js
-      - path: "{{ PROJECT_SRC }}-static/js/jQuery-Autocomplete/license.txt"
+      - path: "{{ SITE_SRC }}-static/js/jQuery-Autocomplete/license.txt"
         template: js/jQuery-Autocomplete/license.txt
-      - path: "{{ PROJECT_SRC }}-static/js/jquery-1.12.4.min.js"
+      - path: "{{ SITE_SRC }}-static/js/jquery-1.12.4.min.js"
         template: js/jquery-1.12.4.min.js
-      - path: "{{ PROJECT_SRC }}-static/js/jquery-ui.js"
+      - path: "{{ SITE_SRC }}-static/js/jquery-ui.js"
         template: js/jquery-ui.js
-      - path: "{{ PROJECT_SRC }}-static/js/moment.js"
+      - path: "{{ SITE_SRC }}-static/js/moment.js"
         template: js/moment.js
-      - path: "{{ PROJECT_SRC }}-static/js/plotly-2.9.0.min.js"
+      - path: "{{ SITE_SRC }}-static/js/plotly-2.9.0.min.js"
         template: js/plotly-2.9.0.min.js
-      - path: "{{ PROJECT_SRC }}-static/js/site-enUS.js"
+      - path: "{{ SITE_SRC }}-static/js/site-enUS.js"
         template: js/site-enUS.js
-      - path: "{{ PROJECT_SRC }}-static/js/sockjs.js"
+      - path: "{{ SITE_SRC }}-static/js/sockjs.js"
         template: js/sockjs.js
-      - path: "{{ PROJECT_SRC }}-static/js/sockjs-map.json"
+      - path: "{{ SITE_SRC }}-static/js/sockjs-map.json"
         template: js/sockjs-map.json
-      - path: "{{ PROJECT_SRC }}-static/js/vertx-eventbus.js"
+      - path: "{{ SITE_SRC }}-static/js/vertx-eventbus.js"
         template: js/vertx-eventbus.js
-      - path: "{{ PROJECT_SRC }}-static/css/jquery-ui.css"
+      - path: "{{ SITE_SRC }}-static/css/jquery-ui.css"
         template: css/jquery-ui.css
-      - path: "{{ PROJECT_SRC }}-static/css/site-{{ PROJECT_LANG }}.css"
+      - path: "{{ SITE_SRC }}-static/css/site-{{ SITE_LANG }}.css"
         template: css/site-enUS.css
-      - path: "{{ PROJECT_SRC }}-static/css/w3.css"
+      - path: "{{ SITE_SRC }}-static/css/w3.css"
         template: css/w3.css
-      - path: "{{ PROJECT_SRC }}-static/svg/openshift.svg"
+      - path: "{{ SITE_SRC }}-static/svg/openshift.svg"
         template: svg/openshift.svg
-      - path: "{{ PROJECT_SRC }}/.gitignore"
+      - path: "{{ SITE_SRC }}/.gitignore"
         template: config/gitignore
-      - path: "{{ PROJECT_SRC }}-static/.gitignore"
+      - path: "{{ SITE_SRC }}-static/.gitignore"
         template: config/gitignore
-      - path: "{{ PROJECT_SRC }}/openshift/defaults.yml"
+      - path: "{{ SITE_SRC }}/openshift/defaults.yml"
         template: openshift/defaults.yml
-      - path: "{{ PROJECT_SRC }}/openshift/SITE_SERVICE_1.yml"
+      - path: "{{ SITE_SRC }}/openshift/SITE_SERVICE_1.yml"
         template: openshift/SITE_SERVICE_1.yml
-      - path: "{{ PROJECT_SRC }}/openshift/SITE_SECRET_1.yml"
+      - path: "{{ SITE_SRC }}/openshift/SITE_SECRET_1.yml"
         template: openshift/SITE_SECRET_1.yml
-      - path: "{{ PROJECT_SRC }}/openshift/SITE_ROUTE_1.yml"
+      - path: "{{ SITE_SRC }}/openshift/SITE_ROUTE_1.yml"
         template: openshift/SITE_ROUTE_1.yml
-      - path: "{{ PROJECT_SRC }}/openshift/SITE_IMAGE_STREAM_1.yml"
+      - path: "{{ SITE_SRC }}/openshift/SITE_IMAGE_STREAM_1.yml"
         template: openshift/SITE_IMAGE_STREAM_1.yml
-      - path: "{{ PROJECT_SRC }}/openshift/SITE_BUILD_CONFIG_1.yml"
+      - path: "{{ SITE_SRC }}/openshift/SITE_BUILD_CONFIG_1.yml"
         template: openshift/SITE_BUILD_CONFIG_1.yml
-      - path: "{{ PROJECT_SRC }}/openshift/SITE_DEPLOYMENT_CONFIG_1.yml"
+      - path: "{{ SITE_SRC }}/openshift/SITE_DEPLOYMENT_CONFIG_1.yml"
         template: openshift/SITE_DEPLOYMENT_CONFIG_1.yml
-      - path: "{{ PROJECT_SRC }}/openshift/SITE_PERSISTENT_VOLUME_CLAIM_1.yml"
+      - path: "{{ SITE_SRC }}/openshift/SITE_PERSISTENT_VOLUME_CLAIM_1.yml"
         template: openshift/SITE_PERSISTENT_VOLUME_CLAIM_1.yml
-      - path: "{{ PROJECT_SRC }}/Dockerfile"
+      - path: "{{ SITE_SRC }}/Dockerfile"
         template: openshift/Dockerfile
 
 CONFIG_TEMPLATE: |2
@@ -222,17 +222,17 @@ CONFIG_KEYS: |2
   	/**
   	 * The project powered by URL. 
   	 **/
-  	public static final String PROJECT_POWERED_BY_URL = "PROJECT_POWERED_BY_URL";
+  	public static final String SITE_POWERED_BY_URL = "SITE_POWERED_BY_URL";
   
   	/**
   	 * The project powered by organization name. 
   	 **/
-  	public static final String PROJECT_POWERED_BY_NAME = "PROJECT_POWERED_BY_NAME";
+  	public static final String SITE_POWERED_BY_NAME = "SITE_POWERED_BY_NAME";
   
   	/**
   	 * The project powered by image relative URI. 
   	 **/
-  	public static final String PROJECT_POWERED_BY_IMAGE_URI = "PROJECT_POWERED_BY_IMAGE_URI";
+  	public static final String SITE_POWERED_BY_IMAGE_URI = "SITE_POWERED_BY_IMAGE_URI";
   
   	/**
   	 * The Floating Car Data directory. 

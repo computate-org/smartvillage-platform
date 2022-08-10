@@ -223,7 +223,7 @@ Or the REDHAT_OPENSHIFT_STORAGE_CLASS_NAME which might be different than gp2 for
 If so, try creating a persistent volume in the UI to figure out a good storage class for your environment: 
 
 ```yaml
-PROJECT_NAME: smart-village-view
+SITE_NAME: smart-village-view
 
 REDHAT_OPENSHIFT_HOST: https://api.rh-us-east-1.openshift.com
 REDHAT_OPENSHIFT_TOKEN: OcrtrXzKNKVj0riR2FvfqORgGfnURx98G8zRPd2MUvs
