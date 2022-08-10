@@ -244,19 +244,21 @@ WORKER_POOL_SIZE: 5
 ENABLE_IMPORT_DATA: true
 ENABLE_IMPORT_DATA_SitePage: true
 ENABLE_IMPORT_DATA_SiteHtm: true
+ENABLE_IMPORT_DATA_SystemEvent: true
 ENABLE_IMPORT_DATA_IotNode: true
-ENABLE_IMPORT_DATA_TrafficSimulation: true
 ENABLE_IMPORT_DATA_TimeStep: true
 ENABLE_IMPORT_DATA_VehicleStep: true
+ENABLE_IMPORT_DATA_TrafficSimulation: true
 
 # Enable data refresh in the site. 
 ENABLE_REFRESH_DATA: true
 ENABLE_REFRESH_DATA_SitePage: true
 ENABLE_REFRESH_DATA_SiteHtm: true
+ENABLE_REFRESH_DATA_SystemEvent: true
 ENABLE_REFRESH_DATA_IotNode: true
-ENABLE_REFRESH_DATA_TrafficSimulation: true
 ENABLE_REFRESH_DATA_TimeStep: true
 ENABLE_REFRESH_DATA_VehicleStep: true
+ENABLE_REFRESH_DATA_TrafficSimulation: true
 
 # The Auth roles required to be an admin in the site. 
 AUTH_ROLES_ADMIN: ['SiteAdmin']
@@ -266,11 +268,13 @@ AUTH_ROLES_REQUIRED_SiteUser: ['SiteAdmin']
 AUTH_ROLES_REQUIRED_SitePage: ['SiteAdmin']
 # The Auth roles required to add and modify HTML records. 
 AUTH_ROLES_REQUIRED_SiteHtm: ['SiteAdmin']
+# The Auth roles required to add and modify system event records. 
+AUTH_ROLES_REQUIRED_SystemEvent: ['SiteAdmin']
 # The Auth roles required to add and modify IOT node records. 
 AUTH_ROLES_REQUIRED_IotNode: ['SiteAdmin']
-# The Auth roles required to add and modify traffic simulation records. 
-AUTH_ROLES_REQUIRED_TrafficSimulation: ['SiteAdmin']
 # The Auth roles required to add and modify time step records. 
 AUTH_ROLES_REQUIRED_TimeStep: ['SiteAdmin']
 # The Auth roles required to add and modify vehicle step records. 
 AUTH_ROLES_REQUIRED_VehicleStep: ['SiteAdmin']
+# The Auth roles required to add and modify traffic simulation records. 
+AUTH_ROLES_REQUIRED_TrafficSimulation: ['SiteAdmin']

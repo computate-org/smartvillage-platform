@@ -24,6 +24,13 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.computate.search.serialize.ComputateZonedDateTimeSerializer;
 import org.computate.search.tool.TimeTool;
 import org.computate.search.tool.XmlTool;
+import org.computate.smartvillageview.enus.config.ConfigKeys;
+import org.computate.smartvillageview.enus.model.iotnode.IotNode;
+import org.computate.smartvillageview.enus.model.page.SitePage;
+import org.computate.smartvillageview.enus.model.page.reader.SitePageReader;
+import org.computate.smartvillageview.enus.model.traffic.simulation.reader.TrafficFcdReader;
+import org.computate.smartvillageview.enus.model.traffic.time.step.TimeStep;
+import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.vertx.api.ApiCounter;
 import org.computate.vertx.api.ApiRequest;
 import org.computate.vertx.api.ApiCounter;
@@ -31,7 +38,6 @@ import org.computate.vertx.api.ApiRequest;
 import org.computate.smartvillageview.enus.config.ConfigKeys;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.smartvillageview.enus.model.page.SitePage;
-import org.computate.smartvillageview.enus.model.page.reader.SitePageReader;
 import org.computate.smartvillageview.enus.model.htm.SiteHtm;
 import org.computate.vertx.api.ApiCounter;
 import org.computate.vertx.api.ApiRequest;
@@ -89,10 +95,11 @@ import org.computate.smartvillageview.enus.model.traffic.time.step.TimeStep;
 import org.computate.smartvillageview.enus.model.user.SiteUser;
 import org.computate.smartvillageview.enus.model.page.SitePage;
 import org.computate.smartvillageview.enus.model.htm.SiteHtm;
+import org.computate.smartvillageview.enus.model.system.event.SystemEvent;
 import org.computate.smartvillageview.enus.model.iotnode.IotNode;
-import org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation;
 import org.computate.smartvillageview.enus.model.traffic.time.step.TimeStep;
 import org.computate.smartvillageview.enus.model.traffic.vehicle.step.VehicleStep;
+import org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation;
 
 /**
  */
@@ -533,12 +540,17 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 				refreshData(SiteUser.CLASS_SIMPLE_NAME).onSuccess(q -> {
 					refreshData(SitePage.CLASS_SIMPLE_NAME).onSuccess(q1 -> {
 						refreshData(SiteHtm.CLASS_SIMPLE_NAME).onSuccess(q2 -> {
-							refreshData(IotNode.CLASS_SIMPLE_NAME).onSuccess(q3 -> {
-								refreshData(TrafficSimulation.CLASS_SIMPLE_NAME).onSuccess(q4 -> {
+							refreshData(SystemEvent.CLASS_SIMPLE_NAME).onSuccess(q3 -> {
+								refreshData(IotNode.CLASS_SIMPLE_NAME).onSuccess(q4 -> {
 									refreshData(TimeStep.CLASS_SIMPLE_NAME).onSuccess(q5 -> {
 										refreshData(VehicleStep.CLASS_SIMPLE_NAME).onSuccess(q6 -> {
-											LOG.info(refreshAllDataComplete);
-											promise.complete();
+											refreshData(TrafficSimulation.CLASS_SIMPLE_NAME).onSuccess(q7 -> {
+												LOG.info(refreshAllDataComplete);
+												promise.complete();
+											}).onFailure(ex -> {
+												LOG.error(refreshAllDataFail, ex);
+												promise.fail(ex);
+											});
 										}).onFailure(ex -> {
 											LOG.error(refreshAllDataFail, ex);
 											promise.fail(ex);

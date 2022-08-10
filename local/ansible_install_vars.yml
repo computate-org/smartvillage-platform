@@ -264,6 +264,51 @@ CONFIG_KEYS: |2
   	 * Map default zoom. 
   	 **/
   	public static final String DEFAULT_MAP_ZOOM = "DEFAULT_MAP_ZOOM";
+  
+  	/**
+  	 * max number of times to retry
+  	 */
+  	public static final String ZOOKEEPER_MAX_RETRIES = "ZOOKEEPER_MAX_RETRIES";
+  
+  	/**
+  	 * initial amount of time to wait between retries
+  	 */
+  	public static final String ZOOKEEPER_BASE_SLEEP_TIME_MILLIS = "ZOOKEEPER_BASE_SLEEP_TIME_MILLIS";
+  
+  	/**
+  	 * max time in ms to sleep on each retry
+  	 */
+  	public static final String ZOOKEEPER_MAX_SLEEP_MILLIS = "ZOOKEEPER_MAX_SLEEP_MILLIS";
+  
+  	/**
+  	 * Zookeeper connection timeout
+  	 */
+  	public static final String ZOOKEEPER_CONNECTION_TIMEOUT_MILLIS = "ZOOKEEPER_CONNECTION_TIMEOUT_MILLIS";
+  
+  	/**
+  	 * Zookeeper session timeout
+  	 */
+  	public static final String ZOOKEEPER_SESSION_TIMEOUT_MILLIS = "ZOOKEEPER_SESSION_TIMEOUT_MILLIS";
+  
+  	/**
+  	 * API counter resume TimeStep
+  	 */
+  	public static final String API_COUNTER_RESUME_TimeStep = "API_COUNTER_RESUME_TimeStep";
+  
+  	/**
+  	 * API counter fetch TimeStep
+  	 */
+  	public static final String API_COUNTER_FETCH_TimeStep = "API_COUNTER_FETCH_TimeStep";
+  
+  	/**
+  	 * API counter resume VehicleStep
+  	 */
+  	public static final String API_COUNTER_RESUME_VehicleStep = "API_COUNTER_RESUME_VehicleStep";
+  
+  	/**
+  	 * API counter fetch VehicleStep
+  	 */
+  	public static final String API_COUNTER_FETCH_VehicleStep = "API_COUNTER_FETCH_VehicleStep";
 
 WORKER_IMPORTS: |
   import java.time.LocalDateTime;
@@ -465,8 +510,6 @@ ALL_Dockerfile: |2
   	SUMO_HOME="/usr/local/share/sumo" \
   	LD_LIBRARY_PATH="/usr/local/lib:/usr/local/lib64"
   
-  RUN install -d /root/src
-  COPY . /root/src
   USER root
   
   RUN rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
@@ -485,6 +528,9 @@ ALL_Dockerfile: |2
   RUN git clone https://github.com/computate-org/computate_eigen.git /root/.ansible/roles/computate.computate_eigen
   RUN git clone https://github.com/computate-org/computate_gdal.git /root/.ansible/roles/computate.computate_gdal
   RUN source ${PYTHON_DIR}/bin/activate && ${PYTHON_DIR}/bin/ansible-playbook -e  APP_PREFIX=/usr/local -e APP_DOWNLOAD_DIR=/tmp /root/.ansible/roles/computate.computate_sumo/install.yml
+  
+  RUN install -d /root/src
+  COPY . /root/src
   
   WORKDIR /root/src
   RUN mvn clean install -DskipTests
@@ -551,3 +597,10 @@ README_END: |
   conn.simulationStep()
   ```
 
+MIDDLE_API_COUNTER: |
+  API_COUNTER_RESUME: 0
+  API_COUNTER_FETCH: 1
+  API_COUNTER_RESUME_TimeStep: 0
+  API_COUNTER_FETCH_TimeStep: 1
+  API_COUNTER_RESUME_VehicleStep: 0
+  API_COUNTER_FETCH_VehicleStep: 10

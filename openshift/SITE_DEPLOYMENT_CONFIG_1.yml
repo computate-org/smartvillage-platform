@@ -229,14 +229,16 @@ spec:
               value: '{{ ENABLE_IMPORT_DATA_SitePage | to_json }}'
             - name: ENABLE_IMPORT_DATA_SiteHtm
               value: '{{ ENABLE_IMPORT_DATA_SiteHtm | to_json }}'
+            - name: ENABLE_IMPORT_DATA_SystemEvent
+              value: '{{ ENABLE_IMPORT_DATA_SystemEvent | to_json }}'
             - name: ENABLE_IMPORT_DATA_IotNode
               value: '{{ ENABLE_IMPORT_DATA_IotNode | to_json }}'
-            - name: ENABLE_IMPORT_DATA_TrafficSimulation
-              value: '{{ ENABLE_IMPORT_DATA_TrafficSimulation | to_json }}'
             - name: ENABLE_IMPORT_DATA_TimeStep
               value: '{{ ENABLE_IMPORT_DATA_TimeStep | to_json }}'
             - name: ENABLE_IMPORT_DATA_VehicleStep
               value: '{{ ENABLE_IMPORT_DATA_VehicleStep | to_json }}'
+            - name: ENABLE_IMPORT_DATA_TrafficSimulation
+              value: '{{ ENABLE_IMPORT_DATA_TrafficSimulation | to_json }}'
             - name: ENABLE_REFRESH_DATA
               value: "{{ ENABLE_REFRESH_DATA }}"
             - name: AUTH_ROLES_ADMIN
@@ -247,19 +249,21 @@ spec:
               value: '{{ AUTH_ROLES_REQUIRED_SitePage | to_json }}'
             - name: AUTH_ROLES_REQUIRED_SiteHtm
               value: '{{ AUTH_ROLES_REQUIRED_SiteHtm | to_json }}'
+            - name: AUTH_ROLES_REQUIRED_SystemEvent
+              value: '{{ AUTH_ROLES_REQUIRED_SystemEvent | to_json }}'
             - name: AUTH_ROLES_REQUIRED_IotNode
               value: '{{ AUTH_ROLES_REQUIRED_IotNode | to_json }}'
-            - name: AUTH_ROLES_REQUIRED_TrafficSimulation
-              value: '{{ AUTH_ROLES_REQUIRED_TrafficSimulation | to_json }}'
             - name: AUTH_ROLES_REQUIRED_TimeStep
               value: '{{ AUTH_ROLES_REQUIRED_TimeStep | to_json }}'
             - name: AUTH_ROLES_REQUIRED_VehicleStep
               value: '{{ AUTH_ROLES_REQUIRED_VehicleStep | to_json }}'
+            - name: AUTH_ROLES_REQUIRED_TrafficSimulation
+              value: '{{ AUTH_ROLES_REQUIRED_TrafficSimulation | to_json }}'
 
-            - name: "GITHUB_ORG"
+            - name: "DYNAMIC_PAGE_PATH"
               valueFrom:
                 secretKeyRef:
-                  key: "GITHUB_ORG"
+                  key: "DYNAMIC_PAGE_PATH"
                   name: "{{ SITE_NAME }}-secret"
             - name: "YGGIO_HOST_NAME"
               valueFrom:
@@ -275,11 +279,6 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: "YGGIO_SSL"
-                  name: "{{ SITE_NAME }}-secret"
-            - name: "DYNAMIC_PAGE_PATH"
-              valueFrom:
-                secretKeyRef:
-                  key: "DYNAMIC_PAGE_PATH"
                   name: "{{ SITE_NAME }}-secret"
             - name: "YGGIO_API_RELATIVE_URI_IotNode"
               valueFrom:
@@ -300,6 +299,11 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: "YGGIO_PASSWORD"
+                  name: "{{ SITE_NAME }}-secret"
+            - name: "GITHUB_ORG"
+              valueFrom:
+                secretKeyRef:
+                  key: "GITHUB_ORG"
                   name: "{{ SITE_NAME }}-secret"
             - name: "PROJECT_POWERED_BY_URL"
               valueFrom:
@@ -345,6 +349,51 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: "DEFAULT_MAP_ZOOM"
+                  name: "{{ SITE_NAME }}-secret"
+            - name: "ZOOKEEPER_MAX_RETRIES"
+              valueFrom:
+                secretKeyRef:
+                  key: "ZOOKEEPER_MAX_RETRIES"
+                  name: "{{ SITE_NAME }}-secret"
+            - name: "ZOOKEEPER_BASE_SLEEP_TIME_MILLIS"
+              valueFrom:
+                secretKeyRef:
+                  key: "ZOOKEEPER_BASE_SLEEP_TIME_MILLIS"
+                  name: "{{ SITE_NAME }}-secret"
+            - name: "ZOOKEEPER_MAX_SLEEP_MILLIS"
+              valueFrom:
+                secretKeyRef:
+                  key: "ZOOKEEPER_MAX_SLEEP_MILLIS"
+                  name: "{{ SITE_NAME }}-secret"
+            - name: "ZOOKEEPER_CONNECTION_TIMEOUT_MILLIS"
+              valueFrom:
+                secretKeyRef:
+                  key: "ZOOKEEPER_CONNECTION_TIMEOUT_MILLIS"
+                  name: "{{ SITE_NAME }}-secret"
+            - name: "ZOOKEEPER_SESSION_TIMEOUT_MILLIS"
+              valueFrom:
+                secretKeyRef:
+                  key: "ZOOKEEPER_SESSION_TIMEOUT_MILLIS"
+                  name: "{{ SITE_NAME }}-secret"
+            - name: "API_COUNTER_RESUME_TimeStep"
+              valueFrom:
+                secretKeyRef:
+                  key: "API_COUNTER_RESUME_TimeStep"
+                  name: "{{ SITE_NAME }}-secret"
+            - name: "API_COUNTER_FETCH_TimeStep"
+              valueFrom:
+                secretKeyRef:
+                  key: "API_COUNTER_FETCH_TimeStep"
+                  name: "{{ SITE_NAME }}-secret"
+            - name: "API_COUNTER_RESUME_VehicleStep"
+              valueFrom:
+                secretKeyRef:
+                  key: "API_COUNTER_RESUME_VehicleStep"
+                  name: "{{ SITE_NAME }}-secret"
+            - name: "API_COUNTER_FETCH_VehicleStep"
+              valueFrom:
+                secretKeyRef:
+                  key: "API_COUNTER_FETCH_VehicleStep"
                   name: "{{ SITE_NAME }}-secret"
           volumeMounts:
 {% if PROJECT_VOLUME_MOUNT_PATH and PROJECT_VOLUME_NAME %}
