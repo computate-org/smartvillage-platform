@@ -53,6 +53,8 @@ PROJECTS:
     SITE_FILES: 
       - path: "{{ SITE_SRC }}/bin/touch.sh"
         template: touch.sh
+      - path: "{{ SITE_SRC }}/bin/regenerate_classes.sh"
+        template: bin/regenerate_classes.sh
       - path: "{{ SITE_SRC }}/pom.xml"
         template: java/pom.xml
       - path: "{{ SITE_SRC }}/install.yml"
