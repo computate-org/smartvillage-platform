@@ -598,6 +598,18 @@ README_END: |
   conn.simulationStep()
   conn.simulationStep()
   ```
+  
+  # Installing Solr Helm Chart for scaling Solr
+  
+  ```bash
+  oc apply --server-side=true -k ~/.local/src/smart-village-view/openshift/kustomization/bundle/solr-helm-repo/
+  helm install solr-operator apache-solr/solr-operator --version 0.5.1 --namespace solr --set serviceAccount.create=true --set serviceAccount.name=solr
+  oc apply --server-side=true -k ~/.local/src/smart-village-view/openshift/kustomization/bundle/solr-cloud/
+  
+  oc exec $(oc get pod -l technology=solr-cloud -o jsonpath='{.items[0].metadata.name}' -n solr) -n solr -- /opt/solr/bin/solr zk upconfig -n computate -d /opt/solr/server/solr/configsets/computate -z 'default-solrcloud-zookeeper-0.default-solrcloud-zookeeper-headless.solr.svc.cluster.local:2181'
+  
+  oc exec $(oc get pod -l technology=solr-cloud -o jsonpath='{.items[0].metadata.name}' -n solr) -n solr -- /opt/solr/bin/solr create_collection -c smart-village-view -n computate
+  ```
 
 MIDDLE_API_COUNTER: |
   API_COUNTER_RESUME: 0
