@@ -239,6 +239,7 @@ public class VehicleStep extends VehicleStepGen<Object> {
 	 * HtmlCell: 3
 	 * DisplayName.enUS: modified
 	 * Description: A modified timestamp for this record in the database
+	 * Facet: true
 	 */
 	protected void _modified(Wrap<ZonedDateTime> w) {
 		w.o(ZonedDateTime.now(ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))));
@@ -283,6 +284,8 @@ public class VehicleStep extends VehicleStepGen<Object> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Description: The simple name of this Java class
+	 * DisplayName.enUS: object type
+	 * Facet: true
 	 */
 	protected void _classSimpleName(Wrap<String> w) {
 		w.o(getClass().getSimpleName());

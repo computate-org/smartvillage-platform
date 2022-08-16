@@ -4,7 +4,6 @@ import java.text.Normalizer;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.List;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
@@ -12,10 +11,8 @@ import org.computate.search.tool.XmlTool;
 import org.computate.search.wrap.Wrap;
 import org.computate.smartvillageview.enus.config.ConfigKeys;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
-
 import io.vertx.core.Promise;
 import io.vertx.core.json.JsonObject;
-
 
 /**
  * Api: true
@@ -355,6 +352,8 @@ public class SiteHtm extends SiteHtmGen<Object> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Description: The simple name of this Java class
+	 * DisplayName.enUS: object type
+	 * Facet: true
 	 */
 	protected void _classSimpleName(Wrap<String> w) {
 		w.o(getClass().getSimpleName());

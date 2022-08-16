@@ -157,5 +157,4 @@ public class SiteUser extends SiteUserGen<BaseModel> implements ComputateSiteUse
 	public void apiRequestSiteUser() {
 		super.apiRequestSiteUser();
 	}
-
 }

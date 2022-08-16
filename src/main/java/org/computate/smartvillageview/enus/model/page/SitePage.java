@@ -11,9 +11,7 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
-
 import javax.imageio.ImageIO;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
@@ -21,9 +19,7 @@ import org.computate.search.wrap.Wrap;
 import org.computate.smartvillageview.enus.config.ConfigKeys;
 import org.computate.smartvillageview.enus.model.base.BaseModel;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
-
 import io.vertx.core.Promise;
-
 
 /**
  * Api: true
@@ -321,6 +317,8 @@ public class SitePage extends SitePageGen<Object> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Description: The simple name of this Java class
+	 * DisplayName.enUS: object type
+	 * Facet: true
 	 */
 	protected void _classSimpleName(Wrap<String> w) {
 		w.o(getClass().getSimpleName());

@@ -182,6 +182,8 @@ public class TimeStep extends TimeStepGen<Object> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Description: The simple name of this Java class
+	 * DisplayName.enUS: object type
+	 * Facet: true
 	 */
 	protected void _classSimpleName(Wrap<String> w) {
 		w.o(getClass().getSimpleName());
