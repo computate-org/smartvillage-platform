@@ -39,8 +39,8 @@ import io.vertx.core.Promise;
  * ApiMethod: PUTImport
  * 
  * ApiMethod.enUS: SearchPage
- * PageSearchPage.enUS: SitePagePage
- * ApiUriSearchPage.enUS: /page
+ * Page.SearchPage.enUS: SitePagePage
+ * ApiUri.SearchPage.enUS: /page
  * 
  * AName.enUS: an article
  * Color: 2017-navy-peony

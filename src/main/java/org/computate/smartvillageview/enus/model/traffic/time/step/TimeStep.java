@@ -32,8 +32,8 @@ import io.vertx.core.Promise;
  * ApiMethod: PUTImport
  * 
  * ApiMethod.enUS: SearchPage
- * PageSearchPage.enUS: TimeStepPage
- * ApiUriSearchPage.enUS: /time-step
+ * Page.SearchPage.enUS: TimeStepPage
+ * ApiUri.SearchPage.enUS: /time-step
  * 
  * Role.enUS: SiteAdmin
  * Saves: true

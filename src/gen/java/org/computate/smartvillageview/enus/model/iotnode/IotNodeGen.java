@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import java.util.Date;
 import java.util.Set;
 import org.computate.vertx.api.ApiRequest;
-import org.computate.vertx.config.ComputateConfigKeys;
+import org.computate.smartvillageview.enus.config.ConfigKeys;
 import java.util.Optional;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
@@ -57,8 +57,6 @@ import org.computate.search.response.solr.SolrResponse;
  * The extended class ending with "Gen" did not exist at first, but was automatically created by the same watch service based on the data retrieved from the local Apache Server search engine. 
  * The extended class contains many generated fields, getters, setters, initialization code, and helper methods to help build a website and API fast, reactive, and scalable. 
  * </p>
- * <p>This class contains a comment "Api: true", which means this class will have Java Vert.x API backend code generated for these objects. 
- * </p>
  * <p>This class contains a comment "Model: true", which means this class will be stored in the database. 
  * Every protected void method that begins with "_" that contains a "Persist: true" comment will be a persisted field in the database table. 
  * </p>
@@ -67,6 +65,16 @@ import org.computate.search.response.solr.SolrResponse;
  * </p>
  * <p>This class contains a comment "Page: true", which means this class will have webpage code generated for these objects. 
  * Java Vert.x backend API code, Handlebars HTML template frontend code, and JavaScript code will all generated and can be extended. 
+ * This creates a new Java class org.computate.smartvillageview.enus.model.iotnode.IotNodePage. 
+ * </p>
+ * <p>This class contains a comment "SuperPage.enUS: BaseModelPage", which identifies the Java super class of the page code by it's class simple name "BaseModelPage". 
+ * This means that the newly created class org.computate.smartvillageview.enus.model.iotnode.IotNodePage extends org.computate.smartvillageview.enus.model.base.BaseModelPage. 
+ * </p>
+ * <p>This class contains a comment "Api: true", which means this class will have Java Vert.x API backend code generated for these objects. 
+ * </p>
+ * <p>This class contains a comment "ApiTag: IOT Node", which groups all of the OpenAPIs for IotNode objects under the tag "IOT Node". 
+ * </p>
+ * <p>This class contains a comment "ApiUri: /api/iot-node", which defines the base API URI for IotNode objects as "/api/iot-node" in the OpenAPI spec. 
  * </p>
  * <p>
  * Delete the class IotNode in Solr: 

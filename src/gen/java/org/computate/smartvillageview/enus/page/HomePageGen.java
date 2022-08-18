@@ -3,7 +3,7 @@ package org.computate.smartvillageview.enus.page;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.smartvillageview.enus.model.base.BaseModel;
 import org.computate.vertx.api.ApiRequest;
-import org.computate.vertx.config.ComputateConfigKeys;
+import org.computate.smartvillageview.enus.config.ConfigKeys;
 import java.util.Optional;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
@@ -840,6 +840,8 @@ public abstract class HomePageGen<DEV> extends PageLayout {
 
 	public void siteRequestHomePage(SiteRequestEnUS siteRequest_) {
 			super.siteRequestPageLayout(siteRequest_);
+		if(searchListSitePage != null)
+			searchListSitePage.setSiteRequest_(siteRequest_);
 	}
 
 	public void siteRequestForClass(SiteRequestEnUS siteRequest_) {

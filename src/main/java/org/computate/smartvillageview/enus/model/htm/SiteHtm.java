@@ -32,8 +32,8 @@ import io.vertx.core.json.JsonObject;
  * ApiMethod: PUTImport
  * 
  * ApiMethod.enUS: SearchPage
- * PageSearchPage.enUS: SiteHtmPage
- * ApiUriSearchPage.enUS: /htm
+ * Page.SearchPage.enUS: SiteHtmPage
+ * ApiUri.SearchPage.enUS: /htm
  * 
  * AName.enUS: an HTML
  * Color: 2017-navy-peony

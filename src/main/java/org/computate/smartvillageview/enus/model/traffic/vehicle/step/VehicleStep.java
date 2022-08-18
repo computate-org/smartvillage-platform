@@ -33,8 +33,8 @@ import io.vertx.pgclient.data.Point;
  * ApiMethod: PUTImport
  * 
  * ApiMethod.enUS: SearchPage
- * PageSearchPage.enUS: VehicleStepPage
- * ApiUriSearchPage.enUS: /vehicle-step
+ * Page.SearchPage.enUS: VehicleStepPage
+ * ApiUri.SearchPage.enUS: /vehicle-step
  * 
  * Role.enUS: SiteAdmin
  * Saves: true

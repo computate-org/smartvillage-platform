@@ -37,8 +37,8 @@ import io.vertx.core.Promise;
  * ApiMethod: PUTImport
  * 
  * ApiMethod.enUS: SearchPage
- * PageSearchPage.enUS: SystemEventPage
- * ApiUriSearchPage.enUS: /system-event
+ * Page.SearchPage.enUS: SystemEventPage
+ * ApiUri.SearchPage.enUS: /system-event
  * 
  * AName.enUS: a system event
  * Color: 2017-navy-peony

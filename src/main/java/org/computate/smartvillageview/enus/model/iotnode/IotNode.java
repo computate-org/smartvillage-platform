@@ -29,9 +29,9 @@ import io.vertx.pgclient.data.Point;
  * ApiMethod: PUTImport
  * 
  * ApiMethod.enUS: SearchPage
- * PageSearchPage.enUS: IotNodePage
- * PageSuperSearchPage.enUS: BaseModelPage
- * ApiUriSearchPage.enUS: /iot-node
+ * Page.SearchPage.enUS: IotNodePage
+ * PageSuper.SearchPage.enUS: BaseModelPage
+ * ApiUri.SearchPage.enUS: /iot-node
  * 
  * Role.enUS: SiteAdmin
  * Saves: true

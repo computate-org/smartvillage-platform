@@ -6,6 +6,7 @@ import org.computate.search.wrap.Wrap;
 import org.computate.smartvillageview.enus.model.base.BaseModel;
 
 /**
+ * {@inheritDoc}
  * Model: true
  * Api: true
  * Page: true
@@ -21,17 +22,17 @@ import org.computate.smartvillageview.enus.model.base.BaseModel;
  * ApiMethod: PATCH
  * ApiMethod: POST
  * ApiMethod: PUTImport
- * ApiContentTypeRequestPUTImport: application/xml
+ * ApiContentTypeRequest.PUTImport: application/xml
  * 
  * ApiMethod.enUS: SearchPage
- * PageSearchPage.enUS: TrafficSimulationPage
- * PageSuperSearchPage.enUS: BaseModelPage
- * ApiUriSearchPage.enUS: /traffic-simulation
+ * Page.SearchPage.enUS: TrafficSimulationPage
+ * PageSuper.SearchPage.enUS: BaseModelPage
+ * ApiUri.SearchPage.enUS: /traffic-simulation
  * 
  * ApiMethod.enUS: MapSearchPage
- * PageMapSearchPage.enUS: TrafficSimulationMapPage
- * PageSuperMapSearchPage.enUS: BaseModelPage
- * ApiUriMapSearchPage.enUS: /traffic-simulation-map
+ * Page.MapSearchPage.enUS: TrafficSimulationMapPage
+ * PageSuper.MapSearchPage.enUS: BaseModelPage
+ * ApiUri.MapSearchPage.enUS: /traffic-simulation-map
  * 
  * Role.enUS: SiteAdmin
  * Saves: true
