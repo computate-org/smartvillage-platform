@@ -1,12 +1,12 @@
-{{#*inline "htmTitleTrafficSimulationPage"}}		<!-- inline "htmTitleTrafficSimulationPage" -->
+{{#*inline "htmTitleTrafficSimulationMapPage"}}		<!-- inline "htmTitleTrafficSimulationMapPage" -->
 		<title>{{#if searchListTrafficSimulation_}}{{#eq trafficSimulationCount int1}}{{#eq params.query.q "*:*"}}traffic simulation{{else}}traffic simulation{{/eq}}{{else}}no traffic simulation found{{/eq}}{{else}}traffic simulations{{/if}}</title>
 {{/inline}}
-{{#*inline "htmMetaTrafficSimulationPage"}}{{> "htmMetaBaseModelPage"}}{{/inline}}
-{{#*inline "htmStyleTrafficSimulationPage"}}{{> "htmStyleBaseModelPage"}}{{/inline}}
-{{#*inline "htmScriptsTrafficSimulationPage"}}{{> "htmScriptsBaseModelPage"}}		<!-- inline "htmScriptsTrafficSimulationPage" -->
+{{#*inline "htmMetaTrafficSimulationMapPage"}}{{> "htmMetaBaseModelPage"}}{{/inline}}
+{{#*inline "htmStyleTrafficSimulationMapPage"}}{{> "htmStyleBaseModelPage"}}{{/inline}}
+{{#*inline "htmScriptsTrafficSimulationMapPage"}}{{> "htmScriptsBaseModelPage"}}		<!-- inline "htmScriptsTrafficSimulationMapPage" -->
 		<script src="{{staticBaseUrl}}/js/enUS/TrafficSimulationPage.js"></script>
 {{/inline}}
-{{#*inline "htmScriptTrafficSimulationPage"}}		<!-- inline "htmScriptTrafficSimulationPage" -->
+{{#*inline "htmScriptTrafficSimulationMapPage"}}		<!-- inline "htmScriptTrafficSimulationMapPage" -->
 		<script>
 			$(document).ready(function() {
 				document.onkeydown = function(evt) {
@@ -38,8 +38,8 @@
 		</script>
 {{/inline}}
 {{#*inline "htmUrlTrafficSimulation"}}{{pageUri}}?q={{query.q}}&amp;rows={{#if rows}}{{rows}}{{else}}{{pagination.rows}}{{/if}}&amp;rows={{#if start}}{{start}}{{else}}{{pagination.start}}{{/if}}{{#each query.fq}}{{#eq fq this}}{{else}}&fq={{fq}}:{{val}}{{/eq}}{{/each}}{{#each query.sort}}{{#eq sort this}}{{else}}&sort={{var}} {{order}}{{/eq}}{{/each}}{{/inline}}
-{{#*inline "htmHeadTrafficSimulationPage"}}{{> "htmTitleTrafficSimulationPage"}}{{> "htmMetaTrafficSimulationPage"}}{{> "htmStyleTrafficSimulationPage"}}{{> "htmScriptsTrafficSimulationPage"}}{{> "htmScriptTrafficSimulationPage"}}{{/inline}}
-{{#*inline "htmBodySearchTrafficSimulationPage"}}								<!-- #*inline "htmBodySearchTrafficSimulationPage" -->
+{{#*inline "htmHeadTrafficSimulationMapPage"}}{{#block "htmTitle"}}{{/block}}{{#block "htmMeta"}}{{/block}}{{#block "htmStyle"}}{{/block}}{{#block "htmScripts"}}{{/block}}{{#block "htmScript"}}{{/block}}{{/inline}}
+{{#*inline "htmBodySearchTrafficSimulationMapPage"}}								<!-- #*inline "htmBodySearchTrafficSimulationMapPage" -->
 								<div>
 {{#each varsQ}}
 									<div class="w3-cell-row ">
@@ -78,7 +78,7 @@
 									</div>
 								</div>
 {{/inline}}
-{{#*inline "htmBodyFiltersTrafficSimulationPage"}}								<!-- #*inline "htmBodyFiltersTrafficSimulationPage" -->
+{{#*inline "htmBodyFiltersTrafficSimulationMapPage"}}								<!-- #*inline "htmBodyFiltersTrafficSimulationMapPage" -->
 								<div>
 {{#each varsFq }}
 									<div class="">
@@ -104,7 +104,7 @@
 {{/each}}
 								</div>
 {{/inline}}
-{{#*inline "htmBodyRangeTrafficSimulationPage"}}								<!-- #*inline "htmBodyRangeTrafficSimulationPage" -->
+{{#*inline "htmBodyRangeTrafficSimulationMapPage"}}								<!-- #*inline "htmBodyRangeTrafficSimulationMapPage" -->
 								<table class="w3-padding ">
 									<tr>
 										<td class="w3-padding w3-tiny " colspan="2">
@@ -166,7 +166,7 @@
 {{/each}}
 								</table>
 {{/inline}}
-{{#*inline "htmBodyPivotTrafficSimulationPage"}}								<!-- #*inline "htmBodyPivotTrafficSimulationPage" -->
+{{#*inline "htmBodyPivotTrafficSimulationMapPage"}}								<!-- #*inline "htmBodyPivotTrafficSimulationMapPage" -->
 								<div style="display: none; " class="w3-padding w3-tiny " id="pageSearchVal-PivotTrafficSimulationHidden">
 {{#each defaultPivotVars }}
 									<div class="pageSearchVal-PivotTrafficSimulationHidden " id="pageSearchVal-PivotTrafficSimulationHidden_{{ this }}">{{ this }}</div>
@@ -190,7 +190,7 @@
 {{/each}}
 								</table>
 {{/inline}}
-{{#*inline "htmBodyFieldListTrafficSimulationPage"}}								<!-- #*inline "htmBodyFieldListTrafficSimulationPage" -->
+{{#*inline "htmBodyFieldListTrafficSimulationMapPage"}}								<!-- #*inline "htmBodyFieldListTrafficSimulationMapPage" -->
 								<div style="display: none; " class="w3-padding w3-tiny " id="pageSearchVal-FieldListTrafficSimulationHidden">
 {{#each defaultFieldListVars }}
 									<div class="pageSearchVal-FieldListTrafficSimulationHidden " id="pageSearchVal-FieldListTrafficSimulationHidden_{{ this }}">{{ this }}</div>
@@ -214,7 +214,7 @@
 {{/each}}
 								</table>
 {{/inline}}
-{{#*inline "htmBodyStatsTrafficSimulationPage"}}								<!-- #*inline "htmBodyStatsTrafficSimulationPage" -->
+{{#*inline "htmBodyStatsTrafficSimulationMapPage"}}								<!-- #*inline "htmBodyStatsTrafficSimulationMapPage" -->
 								<div style="display: none; " class="w3-padding w3-tiny " id="pageSearchVal-StatsTrafficSimulationHidden">
 {{#each defaultStatsVars }}
 									<div class="pageSearchVal-StatsTrafficSimulationHidden " id="pageSearchVal-StatsTrafficSimulationHidden_{{ this }}">{{ this }}</div>
@@ -253,11 +253,11 @@
 {{/each}}
 								</table>
 {{/inline}}
-{{#*inline "htmBodyMenuTrafficSimulationPage"}}		<!-- #*inline "htmBodyMenuTrafficSimulationPage" -->
+{{#*inline "htmBodyMenuTrafficSimulationMapPage"}}		<!-- #*inline "htmBodyMenuTrafficSimulationMapPage" -->
 {{> "htmBodyMenuBaseModelPage"}}{{/inline}}
-{{#*inline "htmBodyGraphTrafficSimulationPage"}}		<!-- #*inline "htmBodyGraphTrafficSimulationPage" -->
+{{#*inline "htmBodyGraphTrafficSimulationMapPage"}}		<!-- #*inline "htmBodyGraphTrafficSimulationMapPage" -->
 <div id="htmBodyGraphBaseModelPage" class="w3-content htmBodyGraph "></div>{{/inline}}
-{{#*inline "htmBodyCount0TrafficSimulationPage"}}		<!-- #*inline "htmBodyCount0TrafficSimulationPage" -->
+{{#*inline "htmBodyCount0TrafficSimulationMapPage"}}		<!-- #*inline "htmBodyCount0TrafficSimulationMapPage" -->
 		<h1>
 			<a href="{{pageUri}}" class="w3-bar-item w3-btn w3-center w3-block w3-blue w3-hover-blue">
 				{{#if contextIconCssClasses}}
@@ -275,7 +275,7 @@
 			</span>
 		</h2>
 {{/inline}}
-{{#*inline "htmBodyCount1AllTrafficSimulationPage"}}		<!-- #*inline "htmBodyCount1AllTrafficSimulationPage" -->
+{{#*inline "htmBodyCount1AllTrafficSimulationMapPage"}}		<!-- #*inline "htmBodyCount1AllTrafficSimulationMapPage" -->
 		<h1 class="w3-center ">
 			<a href="{{pageUri}}" class="w3-bar-item w3-btn w3-block w3-blue w3-hover-blue">
 			{{#if contextIconCssClasses}}
@@ -290,7 +290,7 @@
 			</span>
 		</h2>
 {{/inline}}
-{{#*inline "htmBodyCount1TrafficSimulationPage"}}		<!-- #*inline "htmBodyCount1TrafficSimulationPage" -->
+{{#*inline "htmBodyCount1TrafficSimulationMapPage"}}		<!-- #*inline "htmBodyCount1TrafficSimulationMapPage" -->
 		<h1>
 			<a href="{{pageUri}}" class="w3-bar-item w3-btn w3-center w3-block w3-blue w3-hover-blue">
 	{{#if contextIconCssClasses}}
@@ -326,9 +326,9 @@
 	{{/if}}
 			<span>{{ pagination.startNum }} - {{ pagination.endNum }} of {{ pagination.foundNum }}</span>
 		</div>
-{{> "table1TrafficSimulationPage"}}
+{{> "table1TrafficSimulationMapPage"}}
 {{/inline}}
-{{#*inline "htmBodyAllTrafficSimulationPage"}}		<!-- #*inline "htmBodyAllTrafficSimulationPage" -->
+{{#*inline "htmBodyAllTrafficSimulationMapPage"}}		<!-- #*inline "htmBodyAllTrafficSimulationMapPage" -->
 		<h1>
 			<a href="{{pageUri}}" class="w3-bar-item w3-btn w3-center w3-block w3-blue w3-hover-blue">
 	{{#if contextIconCssClasses}}
@@ -365,10 +365,10 @@
 	{{/if}}
 				<span>{{ pagination.startNum }} - {{ pagination.endNum }} of {{ pagination.foundNum }}</span>
 			</div>
-{{> "table1TrafficSimulationPage"}}
+{{> "table1TrafficSimulationMapPage"}}
 		</div>
 {{/inline}}
-{{#*inline "htmFormTrafficSimulationPage"}}
+{{#*inline "htmFormTrafficSimulationMapPage"}}
 		<!-- #*inline "htmForm" -->
 		<form action="/api/traffic-simulation" id="TrafficSimulationForm" class="pageForm " style="" onsubmit="event.preventDefault(); return false; ">
 {{#if pk}}
@@ -381,7 +381,7 @@
 {{#block "htmForm_searchpageTrafficSimulation"}}{{/block}}
 {{/if}}
 {{/inline}}
-{{#*inline "htmFormTrafficSimulationPage_patchTrafficSimulation"}}
+{{#*inline "htmFormTrafficSimulationMapPage_patchTrafficSimulation"}}
 		<button
 			class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-blue "
 			onclick="$('#patchTrafficSimulationModal').show(); "
@@ -426,7 +426,7 @@
 			</div>
 		</div>
 {{/inline}}
-{{#*inline "htmFormTrafficSimulationPage_postTrafficSimulation"}}
+{{#*inline "htmFormTrafficSimulationMapPage_postTrafficSimulation"}}
 		<button
 			class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-blue "
 			onclick="$('#postTrafficSimulationModal').show(); "
@@ -473,7 +473,7 @@
 			</div>
 		</div>
 {{/inline}}
-{{#*inline "htmFormTrafficSimulationPage_putimportTrafficSimulation"}}
+{{#*inline "htmFormTrafficSimulationMapPage_putimportTrafficSimulation"}}
 		<button
 			class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-blue "
 			onclick="$('#putimportTrafficSimulationModal').show(); "
@@ -507,7 +507,7 @@
 			</div>
 		</div>
 {{/inline}}
-{{#*inline "htmFormTrafficSimulationPage_searchpageTrafficSimulation"}}
+{{#*inline "htmFormTrafficSimulationMapPage_searchpageTrafficSimulation"}}
 		<div id="searchpageTrafficSimulationModal" class="">
 			<div class="">
 				<div class="w3-card-4 ">
@@ -540,7 +540,7 @@
 			</div>
 		</div>
 {{/inline}}
-{{#*inline "htmBodySidebarTrafficSimulationPage"}}
+{{#*inline "htmBodySidebarTrafficSimulationMapPage"}}
 				<div class="w3-dropdown-click w3-bar-block min-width-300px ">
 					<div class="min-width-300px ">
 						<span title="Search" class="siteSidebarToggle w3-padding-small w3-hover-black w3-blue " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-blue'); $(this).addClass('w3-black'); $(this).removeClass('w3-blue'); "><i class="fad fa-magnifying-glass hover-box-shadow w3-xlarge "></i> Search</span>
@@ -609,21 +609,21 @@
 					</div>
 				</div>
 {{/inline}}
-{{#*inline "htmBodyStartTrafficSimulationPage"}}
+{{#*inline "htmBodyStartTrafficSimulationMapPage"}}
 {{> "htmBodyStartBaseModelPage"}}
 {{/inline}}
-{{#*inline "htmBodyMiddleTrafficSimulationPage"}}
+{{#*inline "htmBodyMiddleTrafficSimulationMapPage"}}
 {{> "htmBodyMiddleBaseModelPage"}}
 {{/inline}}
-{{#*inline "htmBodyEndTrafficSimulationPage"}}
+{{#*inline "htmBodyEndTrafficSimulationMapPage"}}
 {{> "htmBodyEndBaseModelPage"}}
 {{/inline}}
-{{#*inline "htmBodyTrafficSimulationPage"}}
+{{#*inline "htmBodyTrafficSimulationMapPage"}}
 {{#block "htmBodyStart"}}{{/block}}
 {{#block "htmBodyMiddle"}}{{/block}}
 {{#block "htmBodyEnd"}}{{/block}}
 {{/inline}}
-{{#*inline "htmBodyMiddleTrafficSimulationPage"}}
+{{#*inline "htmBodyMiddleTrafficSimulationMapPage"}}
 		<div class="w3-bar w3-content ">
 {{#block "htmBodySidebar"}}{{/block}}
 		</div>
@@ -646,35 +646,35 @@
 {{#block "htmForms"}}{{/block}}
 	</div>
 {{/inline}}
-{{#*inline "table1TrafficSimulationPage"}}
+{{#*inline "table1TrafficSimulationMapPage"}}
 		<div class="w3-responsive ">
 			<table class="w3-table w3-bordered w3-striped w3-border w3-hoverable ">
-{{> table2TrafficSimulationPage}}
+{{> table2TrafficSimulationMapPage}}
 			</table>
 		</div>
 {{/inline}}
-{{#*inline "table2TrafficSimulationPage"}}
-{{> "thead1TrafficSimulationPage"}}
-{{> "tbody1TrafficSimulationPage"}}
-{{> "tfoot1TrafficSimulationPage"}}
+{{#*inline "table2TrafficSimulationMapPage"}}
+{{> "thead1TrafficSimulationMapPage"}}
+{{> "tbody1TrafficSimulationMapPage"}}
+{{> "tfoot1TrafficSimulationMapPage"}}
 {{/inline}}
-{{#*inline "thead1TrafficSimulationPage"}}
+{{#*inline "thead1TrafficSimulationMapPage"}}
 				<thead class="w3-blue w3-hover-blue">
-{{> thead2TrafficSimulationPage}}
+{{> thead2TrafficSimulationMapPage}}
 				</thead>
 {{/inline}}
-{{#*inline "thead2TrafficSimulationPage"}}
+{{#*inline "thead2TrafficSimulationMapPage"}}
 			<tr>
 						<th>created</th>
 						<th></th>
 			</tr>
 {{/inline}}
-{{#*inline "tbody1TrafficSimulationPage"}}
+{{#*inline "tbody1TrafficSimulationMapPage"}}
 				<tbody>
-{{> tbody2TrafficSimulationPage}}
+{{> tbody2TrafficSimulationMapPage}}
 				</tbody>
 {{/inline}}
-{{#*inline "tbody2TrafficSimulationPage"}}
+{{#*inline "tbody2TrafficSimulationMapPage"}}
 		{{#each listTrafficSimulation}}
 					<tr>
 						<td>
@@ -691,12 +691,12 @@
 					</tr>
 		{{/each}}
 {{/inline}}
-{{#*inline "tfoot1TrafficSimulationPage"}}
+{{#*inline "tfoot1TrafficSimulationMapPage"}}
 				<tfoot class="w3-blue w3-hover-blue">
-{{> tfoot2TrafficSimulationPage}}
+{{> tfoot2TrafficSimulationMapPage}}
 				</tfoot>
 {{/inline}}
-{{#*inline "tfoot2TrafficSimulationPage"}}
+{{#*inline "tfoot2TrafficSimulationMapPage"}}
 			<tr>
 			{{#if getColumnCreated}}
 				<td>
@@ -708,7 +708,7 @@
 			{{/if}}
 			</tr>
 	{{/inline}}
-{{#*inline "htmFormsTrafficSimulationPage"}}
+{{#*inline "htmFormsTrafficSimulationMapPage"}}
 	{{#ifContainsAnyRoles roles rolesRequired}}
 		{{#eq trafficSimulationCount int1}}
 		<button
@@ -727,7 +727,7 @@
 	{{/ifContainsAnyRoles}}
 {{#block "htmSuggested"}}{{/block}}
 {{/inline}}
-{{#*inline "htmSuggestedTrafficSimulationPage"}}
+{{#*inline "htmSuggestedTrafficSimulationMapPage"}}
 			{{#ifContainsAnyRoles roles rolesRequired}}
 					<div class="">
 						<button id="refreshAllTrafficSimulationGenPage{{id}}" class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-blue "

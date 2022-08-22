@@ -87,6 +87,8 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.BooleanUtils;
 import org.computate.smartvillageview.enus.model.user.SiteUserEnUSApiServiceImpl;
 import org.computate.vertx.search.list.SearchList;
+import org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulationPage;
+import org.computate.smartvillageview.enus.model.traffic.simulation.map.TrafficSimulationMapPage;
 
 
 /**
@@ -1373,17 +1375,17 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 	}
 
 
-	public void mapsearchpageTrafficSimulationPageInit(TrafficSimulationPage page, SearchList<TrafficSimulation> listTrafficSimulation) {
+	public void mapsearchpageTrafficSimulationPageInit(TrafficSimulationMapPage page, SearchList<TrafficSimulation> listTrafficSimulation) {
 	}
 
 	public String templateMapSearchPageTrafficSimulation() {
-		return Optional.ofNullable(config.getString(ConfigKeys.TEMPLATE_PATH)).orElse("templates") + "/enUS/TrafficSimulationPage";
+		return Optional.ofNullable(config.getString(ConfigKeys.TEMPLATE_PATH)).orElse("templates") + "/enUS/TrafficSimulationMapPage";
 	}
 	public Future<ServiceResponse> response200MapSearchPageTrafficSimulation(SearchList<TrafficSimulation> listTrafficSimulation) {
 		Promise<ServiceResponse> promise = Promise.promise();
 		try {
 			SiteRequestEnUS siteRequest = listTrafficSimulation.getSiteRequest_(SiteRequestEnUS.class);
-			TrafficSimulationPage page = new TrafficSimulationPage();
+			TrafficSimulationMapPage page = new TrafficSimulationMapPage();
 			MultiMap requestHeaders = MultiMap.caseInsensitiveMultiMap();
 			siteRequest.setRequestHeaders(requestHeaders);
 
@@ -1391,7 +1393,7 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 				siteRequest.setRequestPk(listTrafficSimulation.get(0).getPk());
 			page.setSearchListTrafficSimulation_(listTrafficSimulation);
 			page.setSiteRequest_(siteRequest);
-			page.promiseDeepTrafficSimulationPage(siteRequest).onSuccess(a -> {
+			page.promiseDeepTrafficSimulationMapPage(siteRequest).onSuccess(a -> {
 				JsonObject json = JsonObject.mapFrom(page);
 				json.put(ConfigKeys.STATIC_BASE_URL, config.getString(ConfigKeys.STATIC_BASE_URL));
 				json.put(ConfigKeys.GITHUB_ORG, config.getString(ConfigKeys.GITHUB_ORG));
