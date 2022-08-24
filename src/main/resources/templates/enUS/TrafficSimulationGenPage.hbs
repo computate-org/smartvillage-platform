@@ -38,7 +38,7 @@
 		</script>
 {{/inline}}
 {{#*inline "htmUrlTrafficSimulation"}}{{pageUri}}?q={{query.q}}&amp;rows={{#if rows}}{{rows}}{{else}}{{pagination.rows}}{{/if}}&amp;rows={{#if start}}{{start}}{{else}}{{pagination.start}}{{/if}}{{#each query.fq}}{{#eq fq this}}{{else}}&fq={{fq}}:{{val}}{{/eq}}{{/each}}{{#each query.sort}}{{#eq sort this}}{{else}}&sort={{var}} {{order}}{{/eq}}{{/each}}{{/inline}}
-{{#*inline "htmHeadTrafficSimulationPage"}}{{> "htmTitleTrafficSimulationPage"}}{{> "htmMetaTrafficSimulationPage"}}{{> "htmStyleTrafficSimulationPage"}}{{> "htmScriptsTrafficSimulationPage"}}{{> "htmScriptTrafficSimulationPage"}}{{/inline}}
+{{#*inline "htmHeadTrafficSimulationPage"}}{{/block}}{{#block "htmTitle"}}{{/block}}{{#block "htmMeta"}}{{/block}}{{#block "htmStyle"}}{{/block}}{{#block "htmScripts"}}{{/block}}{{#block "htmScript"}}{{/block}}{{/inline}}
 {{#*inline "htmBodySearchTrafficSimulationPage"}}								<!-- #*inline "htmBodySearchTrafficSimulationPage" -->
 								<div>
 {{#each varsQ}}
@@ -400,13 +400,6 @@
 					</header>
 					<div class="" id="patchTrafficSimulationFormValues">
 							<div class="w3-cell-row ">
-{{> "htmCreated" classApiMethodMethod="PATCH"}}
-							</div>
-							<div class="w3-cell-row ">
-{{> "htmArchived" classApiMethodMethod="PATCH"}}
-{{> "htmDeleted" classApiMethodMethod="PATCH"}}
-							</div>
-							<div class="w3-cell-row ">
 {{> "htmSimulationName" classApiMethodMethod="PATCH"}}
 							</div>
 							<div class="w3-cell-row ">
@@ -445,13 +438,6 @@
 					</header>
 					<div class="" id="postTrafficSimulationFormValues">
 						<div id="postTrafficSimulationForm">
-							<div class="w3-cell-row ">
-{{> "htmCreated" classApiMethodMethod="POST"}}
-							</div>
-							<div class="w3-cell-row ">
-{{> "htmArchived" classApiMethodMethod="POST"}}
-{{> "htmDeleted" classApiMethodMethod="POST"}}
-							</div>
 							<div class="w3-cell-row ">
 {{> "htmSimulationName" classApiMethodMethod="POST"}}
 							</div>
@@ -513,16 +499,6 @@
 				<div class="w3-card-4 ">
 					<div class="" id="searchpageTrafficSimulationFormValues">
 						<div id="searchpageTrafficSimulationForm">
-							<div class="w3-cell-row ">
-{{> "htmPk" classApiMethodMethod="Page"}}
-{{> "htmCreated" classApiMethodMethod="Page"}}
-{{> "htmModified" classApiMethodMethod="Page"}}
-{{> "htmObjectId" classApiMethodMethod="Page"}}
-							</div>
-							<div class="w3-cell-row ">
-{{> "htmArchived" classApiMethodMethod="Page"}}
-{{> "htmDeleted" classApiMethodMethod="Page"}}
-							</div>
 							<div class="w3-cell-row ">
 {{> "htmSimulationName" classApiMethodMethod="Page"}}
 							</div>
@@ -665,8 +641,6 @@
 {{/inline}}
 {{#*inline "thead2TrafficSimulationPage"}}
 			<tr>
-						<th>created</th>
-						<th></th>
 			</tr>
 {{/inline}}
 {{#*inline "tbody1TrafficSimulationPage"}}
@@ -677,17 +651,6 @@
 {{#*inline "tbody2TrafficSimulationPage"}}
 		{{#each listTrafficSimulation}}
 					<tr>
-						<td>
-							<a href="{{pageUrlPk}}">
-								<span class="white-space-pre-wrap ">{{siteZonedDateTimeFormat created "MMM d, yyyy h:mm:ss a" siteLocale}}</span>
-							</a>
-						</td>
-						<td>
-							<a href="{{pageUrlPk}}">
-								<i class="fad fa-traffic-light-stop "></i>
-								<span class="white-space-pre-wrap ">{{objectTitle}}</span>
-							</a>
-						</td>
 					</tr>
 		{{/each}}
 {{/inline}}
@@ -698,14 +661,6 @@
 {{/inline}}
 {{#*inline "tfoot2TrafficSimulationPage"}}
 			<tr>
-			{{#if getColumnCreated}}
-				<td>
-				</td>
-			{{/if}}
-			{{#if getColumnObjectTitle}}
-				<td>
-				</td>
-			{{/if}}
 			</tr>
 	{{/inline}}
 {{#*inline "htmFormsTrafficSimulationPage"}}
