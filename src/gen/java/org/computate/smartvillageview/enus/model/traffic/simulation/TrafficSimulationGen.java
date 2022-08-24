@@ -44,7 +44,7 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.computate.search.response.solr.SolrResponse;
 
 /**	
- * <h1>About this generated class: </h1>
+ * <h1>About the TrafficSimulation class and it's generated class TrafficSimulationGen&lt;BaseModel&gt;: </h1>
  * <p>
  * This Java class extends a generated Java class built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
  * Whenever this Java class is modified or touched, the watch service installed as described in the README, indexes all the information about this Java class in a local Apache Solr Search Engine. 
@@ -179,6 +179,59 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 
 	public String sqlSimulationName() {
 		return simulationName;
+	}
+
+	////////////////////
+	// simulationPath //
+	////////////////////
+
+	/**	 The entity simulationPath
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String simulationPath;
+
+	/**	<br> The entity simulationPath
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation&fq=entiteVar_enUS_indexed_string:simulationPath">Find the entity simulationPath in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _simulationPath(Wrap<String> w);
+
+	public String getSimulationPath() {
+		return simulationPath;
+	}
+	public void setSimulationPath(String o) {
+		this.simulationPath = TrafficSimulation.staticSetSimulationPath(siteRequest_, o);
+	}
+	public static String staticSetSimulationPath(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected TrafficSimulation simulationPathInit() {
+		Wrap<String> simulationPathWrap = new Wrap<String>().var("simulationPath");
+		if(simulationPath == null) {
+			_simulationPath(simulationPathWrap);
+			setSimulationPath(simulationPathWrap.o);
+		}
+		return (TrafficSimulation)this;
+	}
+
+	public static String staticSearchSimulationPath(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrSimulationPath(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqSimulationPath(SiteRequestEnUS siteRequest_, String o) {
+		return TrafficSimulation.staticSearchStrSimulationPath(siteRequest_, TrafficSimulation.staticSearchSimulationPath(siteRequest_, TrafficSimulation.staticSetSimulationPath(siteRequest_, o)));
+	}
+
+	public String sqlSimulationPath() {
+		return simulationPath;
 	}
 
 	//////////////////
@@ -479,6 +532,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			Promise<Void> promise2 = Promise.promise();
 			try {
 				simulationNameInit();
+				simulationPathInit();
 				startSecondsInit();
 				endSecondsInit();
 				stepSecondsInit();
@@ -538,6 +592,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		switch(var) {
 			case "simulationName":
 				return oTrafficSimulation.simulationName;
+			case "simulationPath":
+				return oTrafficSimulation.simulationPath;
 			case "startSeconds":
 				return oTrafficSimulation.startSeconds;
 			case "endSeconds":
@@ -587,6 +643,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		switch(entityVar) {
 		case "simulationName":
 			return TrafficSimulation.staticSetSimulationName(siteRequest_, o);
+		case "simulationPath":
+			return TrafficSimulation.staticSetSimulationPath(siteRequest_, o);
 		case "startSeconds":
 			return TrafficSimulation.staticSetStartSeconds(siteRequest_, o);
 		case "endSeconds":
@@ -611,6 +669,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		switch(entityVar) {
 		case "simulationName":
 			return TrafficSimulation.staticSearchSimulationName(siteRequest_, (String)o);
+		case "simulationPath":
+			return TrafficSimulation.staticSearchSimulationPath(siteRequest_, (String)o);
 		case "startSeconds":
 			return TrafficSimulation.staticSearchStartSeconds(siteRequest_, (BigDecimal)o);
 		case "endSeconds":
@@ -635,6 +695,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		switch(entityVar) {
 		case "simulationName":
 			return TrafficSimulation.staticSearchStrSimulationName(siteRequest_, (String)o);
+		case "simulationPath":
+			return TrafficSimulation.staticSearchStrSimulationPath(siteRequest_, (String)o);
 		case "startSeconds":
 			return TrafficSimulation.staticSearchStrStartSeconds(siteRequest_, (Double)o);
 		case "endSeconds":
@@ -659,6 +721,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		switch(entityVar) {
 		case "simulationName":
 			return TrafficSimulation.staticSearchFqSimulationName(siteRequest_, o);
+		case "simulationPath":
+			return TrafficSimulation.staticSearchFqSimulationPath(siteRequest_, o);
 		case "startSeconds":
 			return TrafficSimulation.staticSearchFqStartSeconds(siteRequest_, o);
 		case "endSeconds":
@@ -697,6 +761,11 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 				if(val instanceof String)
 					setSimulationName((String)val);
 				saves.add("simulationName");
+				return val;
+			case "simulationpath":
+				if(val instanceof String)
+					setSimulationPath((String)val);
+				saves.add("simulationPath");
 				return val;
 			case "startseconds":
 				if(val instanceof String)
@@ -751,6 +820,9 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		if(simulationName != null) {
 			doc.put("simulationName_docvalues_string", simulationName);
 		}
+		if(simulationPath != null) {
+			doc.put("simulationPath_docvalues_string", simulationPath);
+		}
 		if(startSeconds != null) {
 			doc.put("startSeconds_docvalues_double", startSeconds.doubleValue());
 		}
@@ -771,6 +843,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		switch(entityVar) {
 			case "simulationName":
 				return "simulationName_docvalues_string";
+			case "simulationPath":
+				return "simulationPath_docvalues_string";
 			case "startSeconds":
 				return "startSeconds_docvalues_double";
 			case "endSeconds":
@@ -788,6 +862,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		switch(entityVar) {
 			case "simulationName":
 				return "simulationName_docvalues_string";
+			case "simulationPath":
+				return "simulationPath_docvalues_string";
 			case "startSeconds":
 				return "startSeconds_docvalues_double";
 			case "endSeconds":
@@ -805,6 +881,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		switch(searchVar) {
 			case "simulationName_docvalues_string":
 				return "simulationName";
+			case "simulationPath_docvalues_string":
+				return "simulationPath";
 			case "startSeconds_docvalues_double":
 				return "startSeconds";
 			case "endSeconds_docvalues_double":
@@ -843,6 +921,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		TrafficSimulation oTrafficSimulation = (TrafficSimulation)this;
 
 		oTrafficSimulation.setSimulationName(Optional.ofNullable(doc.get("simulationName_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oTrafficSimulation.setSimulationPath(Optional.ofNullable(doc.get("simulationPath_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oTrafficSimulation.setStartSeconds(Optional.ofNullable(doc.get("startSeconds_docvalues_double")).map(v -> v.toString()).orElse(null));
 		oTrafficSimulation.setEndSeconds(Optional.ofNullable(doc.get("endSeconds_docvalues_double")).map(v -> v.toString()).orElse(null));
 		oTrafficSimulation.setStepSeconds(Optional.ofNullable(doc.get("stepSeconds_docvalues_double")).map(v -> v.toString()).orElse(null));
@@ -862,6 +941,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			TrafficSimulation original = (TrafficSimulation)o;
 			if(!Objects.equals(simulationName, original.getSimulationName()))
 				apiRequest.addVars("simulationName");
+			if(!Objects.equals(simulationPath, original.getSimulationPath()))
+				apiRequest.addVars("simulationPath");
 			if(!Objects.equals(startSeconds, original.getStartSeconds()))
 				apiRequest.addVars("startSeconds");
 			if(!Objects.equals(endSeconds, original.getEndSeconds()))
@@ -882,6 +963,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		StringBuilder sb = new StringBuilder();
 		sb.append(super.toString());
 		sb.append(Optional.ofNullable(simulationName).map(v -> "simulationName: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(simulationPath).map(v -> "simulationPath: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(startSeconds).map(v -> "startSeconds: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(endSeconds).map(v -> "endSeconds: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(stepSeconds).map(v -> "stepSeconds: " + v + "\n").orElse(""));
@@ -891,6 +973,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 
 	public static final String CLASS_SIMPLE_NAME = "TrafficSimulation";
 	public static final String VAR_simulationName = "simulationName";
+	public static final String VAR_simulationPath = "simulationPath";
 	public static final String VAR_startSeconds = "startSeconds";
 	public static final String VAR_endSeconds = "endSeconds";
 	public static final String VAR_stepSeconds = "stepSeconds";
@@ -909,6 +992,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	}
 	public static List<String> varsFqTrafficSimulation(List<String> vars) {
 		vars.add(VAR_simulationName);
+		vars.add(VAR_simulationPath);
 		vars.add(VAR_startSeconds);
 		vars.add(VAR_endSeconds);
 		vars.add(VAR_stepSeconds);
@@ -929,6 +1013,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	}
 
 	public static final String DISPLAY_NAME_simulationName = "simulation name";
+	public static final String DISPLAY_NAME_simulationPath = "simulation path";
 	public static final String DISPLAY_NAME_startSeconds = "start seconds";
 	public static final String DISPLAY_NAME_endSeconds = "end seconds";
 	public static final String DISPLAY_NAME_stepSeconds = "step seconds";
@@ -941,6 +1026,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		switch(var) {
 		case VAR_simulationName:
 			return DISPLAY_NAME_simulationName;
+		case VAR_simulationPath:
+			return DISPLAY_NAME_simulationPath;
 		case VAR_startSeconds:
 			return DISPLAY_NAME_startSeconds;
 		case VAR_endSeconds:
@@ -973,6 +1060,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		switch(var) {
 		case VAR_simulationName:
 			return "String";
+		case VAR_simulationPath:
+			return "String";
 		case VAR_startSeconds:
 			return "BigDecimal";
 		case VAR_endSeconds:
@@ -997,6 +1086,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		switch(var) {
 		case VAR_simulationName:
 			return 3;
+		case VAR_simulationPath:
+			return 3;
 		case VAR_startSeconds:
 			return 4;
 		case VAR_endSeconds:
@@ -1014,6 +1105,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		switch(var) {
 		case VAR_simulationName:
 			return 1;
+		case VAR_simulationPath:
+			return 2;
 		case VAR_startSeconds:
 			return 1;
 		case VAR_endSeconds:

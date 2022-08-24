@@ -37,7 +37,14 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 
 /**	
- * <h1>About this generated class: </h1>
+ * <h1>Suggestions that can generate more code for you: </h1>
+ * <ol>
+ * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class TrafficSimulationPageGen into the class TrafficSimulationPage. 
+ * </li>
+ * <li>You can add a class comment "Api: true" if you wish to GET, POST, PATCH or PUT these TrafficSimulationPage objects in a RESTful API. 
+ * </li>
+ * </ol>
+ * <h1>About the TrafficSimulationPage class and it's generated class TrafficSimulationPageGen&lt;TrafficSimulationGenPage&gt;: </h1>
  * <p>
  * This Java class extends a generated Java class built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
  * Whenever this Java class is modified or touched, the watch service installed as described in the README, indexes all the information about this Java class in a local Apache Solr Search Engine. 
@@ -68,21 +75,46 @@ public abstract class TrafficSimulationPageGen<DEV> extends TrafficSimulationGen
 	// initDeep //
 	//////////////
 
-	public TrafficSimulationPage initDeepTrafficSimulationPage(SiteRequestEnUS siteRequest_) {
+	public Future<Void> promiseDeepTrafficSimulationPage(SiteRequestEnUS siteRequest_) {
 		setSiteRequest_(siteRequest_);
-		initDeepTrafficSimulationPage();
-		return (TrafficSimulationPage)this;
+		return promiseDeepTrafficSimulationPage();
 	}
 
-	public void initDeepTrafficSimulationPage() {
-		initTrafficSimulationPage();
+	public Future<Void> promiseDeepTrafficSimulationPage() {
+		Promise<Void> promise = Promise.promise();
+		Promise<Void> promise2 = Promise.promise();
+		promiseTrafficSimulationPage(promise2);
+		promise2.future().onSuccess(a -> {
+			super.promiseDeepTrafficSimulationGenPage(siteRequest_).onSuccess(b -> {
+				promise.complete();
+			}).onFailure(ex -> {
+				promise.fail(ex);
+			});
+		}).onFailure(ex -> {
+			promise.fail(ex);
+		});
+		return promise.future();
 	}
 
-	public void initTrafficSimulationPage() {
+	public Future<Void> promiseTrafficSimulationPage(Promise<Void> promise) {
+		Future.future(a -> a.complete()).compose(a -> {
+			Promise<Void> promise2 = Promise.promise();
+			try {
+				promise2.complete();
+			} catch(Exception ex) {
+				promise2.fail(ex);
+			}
+			return promise2.future();
+		}).onSuccess(a -> {
+			promise.complete();
+		}).onFailure(ex -> {
+			promise.fail(ex);
+		});
+		return promise.future();
 	}
 
-	public void initDeepForClass(SiteRequestEnUS siteRequest_) {
-		initDeepTrafficSimulationPage(siteRequest_);
+	@Override public Future<Void> promiseDeepForClass(SiteRequestEnUS siteRequest_) {
+		return promiseDeepTrafficSimulationPage(siteRequest_);
 	}
 
 	/////////////////
@@ -90,6 +122,7 @@ public abstract class TrafficSimulationPageGen<DEV> extends TrafficSimulationGen
 	/////////////////
 
 	public void siteRequestTrafficSimulationPage(SiteRequestEnUS siteRequest_) {
+			super.siteRequestTrafficSimulationGenPage(siteRequest_);
 	}
 
 	public void siteRequestForClass(SiteRequestEnUS siteRequest_) {
@@ -100,7 +133,7 @@ public abstract class TrafficSimulationPageGen<DEV> extends TrafficSimulationGen
 	// obtain //
 	/////////////
 
-	public Object obtainForClass(String var) {
+	@Override public Object obtainForClass(String var) {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
@@ -121,7 +154,7 @@ public abstract class TrafficSimulationPageGen<DEV> extends TrafficSimulationGen
 		TrafficSimulationPage oTrafficSimulationPage = (TrafficSimulationPage)this;
 		switch(var) {
 			default:
-				return null;
+				return super.obtainTrafficSimulationGenPage(var);
 		}
 	}
 
@@ -129,7 +162,7 @@ public abstract class TrafficSimulationPageGen<DEV> extends TrafficSimulationGen
 	// relate //
 	///////////////
 
-	public boolean relateForClass(String var, Object val) {
+	@Override public boolean relateForClass(String var, Object val) {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
@@ -146,7 +179,7 @@ public abstract class TrafficSimulationPageGen<DEV> extends TrafficSimulationGen
 		TrafficSimulationPage oTrafficSimulationPage = (TrafficSimulationPage)this;
 		switch(var) {
 			default:
-				return null;
+				return super.relateTrafficSimulationGenPage(var, val);
 		}
 	}
 
@@ -160,7 +193,7 @@ public abstract class TrafficSimulationPageGen<DEV> extends TrafficSimulationGen
 	public static Object staticSetTrafficSimulationPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
 			default:
-				return null;
+				return TrafficSimulationGenPage.staticSetTrafficSimulationGenPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -174,7 +207,7 @@ public abstract class TrafficSimulationPageGen<DEV> extends TrafficSimulationGen
 	public static Object staticSearchTrafficSimulationPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
 			default:
-				return null;
+				return TrafficSimulationGenPage.staticSearchTrafficSimulationGenPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -188,7 +221,7 @@ public abstract class TrafficSimulationPageGen<DEV> extends TrafficSimulationGen
 	public static String staticSearchStrTrafficSimulationPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
 			default:
-				return null;
+				return TrafficSimulationGenPage.staticSearchStrTrafficSimulationGenPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -202,7 +235,7 @@ public abstract class TrafficSimulationPageGen<DEV> extends TrafficSimulationGen
 	public static String staticSearchFqTrafficSimulationPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
 			default:
-				return null;
+				return TrafficSimulationGenPage.staticSearchFqTrafficSimulationGenPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -212,6 +245,7 @@ public abstract class TrafficSimulationPageGen<DEV> extends TrafficSimulationGen
 
 	@Override public String toString() {
 		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
 		return sb.toString();
 	}
 
@@ -224,7 +258,7 @@ public abstract class TrafficSimulationPageGen<DEV> extends TrafficSimulationGen
 	public static String displayNameTrafficSimulationPage(String var) {
 		switch(var) {
 		default:
-			return null;
+			return TrafficSimulationGenPage.displayNameTrafficSimulationGenPage(var);
 		}
 	}
 }

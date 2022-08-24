@@ -62,6 +62,18 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
+	 * DisplayName: simulation path
+	 * HtmlRow: 3
+	 * HtmlCell: 2
+	 * Facet: true
+	 */
+	protected void _simulationPath(Wrap<String> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
 	 * DisplayName: start seconds
 	 * Description: -b, --begin TIME Defines the begin time in seconds; The simulation starts at this time
 	 * HtmlRow: 4
