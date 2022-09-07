@@ -1,56 +1,52 @@
-package org.computate.smartvillageview.enus.model.system.event;
+package org.computate.smartvillageview.enus.model.traffic.person.step;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.math.BigDecimal;
 import java.text.Normalizer;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.List;
-import javax.imageio.ImageIO;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.computate.search.wrap.Wrap;
 import org.computate.smartvillageview.enus.config.ConfigKeys;
-import org.computate.smartvillageview.enus.model.base.BaseModel;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
+import org.computate.smartvillageview.enus.tool.HeadingConverter;
+
 import io.vertx.core.Promise;
+import io.vertx.pgclient.data.Point;
 
 /**
  * Api: true
  * Page: true
  * SuperPage.enUS: PageLayout
  * Indexed: true
- * Map.Integer.sqlSort: 101
- * Map.Integer.classSort: 101
  * 
- * ApiTag.enUS: System Event
- * ApiUri.enUS: /api/system-event
+ * ApiTag.enUS: Person Step
+ * ApiUri.enUS: /api/person-step
  * 
  * ApiMethod.enUS: Search
  * ApiMethod: GET
- * ApiMethod: POST
  * ApiMethod: PATCH
+ * ApiMethod: POST
  * ApiMethod: PUTImport
  * 
  * ApiMethod.enUS: SearchPage
- * Page.SearchPage.enUS: SystemEventPage
- * ApiUri.SearchPage.enUS: /system-event
+ * Page.SearchPage.enUS: PersonStepPage
+ * ApiUri.SearchPage.enUS: /person-step
  * 
- * AName.enUS: a system event
- * Color: 2017-navy-peony
- * IconGroup: duotone
- * IconName: square-terminal
- * NameVar: systemEvent
- * 
- * PublicRead: true
  * Role.enUS: SiteAdmin
- * Description: A system event
+ * Saves: true
+ * 
+ * AName.enUS: a person step
+ * Color: blue
+ * IconGroup: duotone
+ * IconName: map-location-dot
+ * NameVar.enUS: personStep
+ * Rows: 100
  */
-public class SystemEvent extends SystemEventGen<Object> {
+public class PersonStep extends PersonStepGen<Object> {
 
 	/**
 	 * {@inheritDoc}
@@ -73,42 +69,13 @@ public class SystemEvent extends SystemEventGen<Object> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * DisplayName: type
-	 * Description: The system event type
 	 * HtmlRow: 3
 	 * HtmlCell: 1
-	 * HtmlColumn: 2
+	 * Facet: true
+	 * DisplayName: Simulation
+	 * Description: The simulation key. 
 	 */
-	protected void _type(Wrap<String> w) {
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * Stored: true
-	 * Persist: true
-	 * DisplayName: message
-	 * Description: The system event message
-	 * HtmlRow: 3
-	 * HtmlCell: 2
-	 * HtmlColumn: 3
-	 */
-	protected void _message(Wrap<String> w) {
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * Stored: true
-	 * Persist: true
-	 * DisplayName: message
-	 * Description: The system event message
-	 * HtmlRow: 3
-	 * HtmlCell: 2
-	 * HtmlColumn: 3
-	 * Val.Started.enUS:Started
-	 * Val.Completed.enUS:Completed
-	 * Val.Error.enUS:Error
-	 */
-	protected void _status(Wrap<String> w) {
+	protected void _simulationKey(Wrap<Long> w) {
 	}
 
 	/**
@@ -116,14 +83,125 @@ public class SystemEvent extends SystemEventGen<Object> {
 	 * DocValues: true
 	 * Persist: true
 	 * HtmlRow: 3
-	 * HtmlCell: 3
-	 * HtmlColumn: 4
+	 * HtmlCell: 2
 	 * Facet: true
-	 * DisplayName.enUS: completed
-	 * FormatHtm: MMM d, yyyy h:mm:ss a
-	 * Description: An optional time this event completed
+	 * DisplayName: Time Step
+	 * Description: The time step ID. 
 	 */
-	protected void _completed(Wrap<ZonedDateTime> w) {
+	protected void _timeStepId(Wrap<String> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * HtmlRow: 4
+	 * HtmlCell: 1
+	 * Facet: true
+	 * DisplayName: Time in seconds
+	 * Description: The time in seconds. 
+	 */
+	protected void _time(Wrap<BigDecimal> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * Persist: true
+	 */
+	protected void _x(Wrap<Double> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * Persist: true
+	 */
+	protected void _y(Wrap<Double> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * DisplayName: location
+	 * HtmlRow: 4
+	 * HtmlCell: 2
+	 * Facet: true
+	 */
+	protected void _location(Wrap<Point> w) {
+		if(x != null && y != null)
+			w.o(new Point(y, x));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * DisplayName: person ID
+	 * HtmlRow: 4
+	 * HtmlCell: 3
+	 * Facet: true
+	 */
+	protected void _personId(Wrap<String> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * DisplayName: person type
+	 * HtmlRow: 4
+	 * HtmlCell: 4
+	 * Facet: true
+	 */
+	protected void _personType(Wrap<String> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * DisplayName: Angle in degrees
+	 * HtmlRow: 5
+	 * HtmlCell: 1
+	 * Facet: true
+	 */
+	protected void _angle(Wrap<BigDecimal> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * DisplayName: Speed
+	 * HtmlRow: 5
+	 * HtmlCell: 2
+	 * Facet: true
+	 */
+	protected void _speed(Wrap<BigDecimal> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * DisplayName: Position
+	 * HtmlRow: 5
+	 * HtmlCell: 3
+	 * Facet: true
+	 */
+	protected void _pos(Wrap<BigDecimal> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * DisplayName: Slope
+	 * HtmlRow: 5
+	 * HtmlCell: 4
+	 * Facet: true
+	 */
+	protected void _slope(Wrap<BigDecimal> w) {
 	}
 
 	/**
@@ -142,7 +220,7 @@ public class SystemEvent extends SystemEventGen<Object> {
 	 * Modify: false
 	 * VarCreated: true
 	 * HtmlRow: 1
-	 * HtmlCell: 4
+	 * HtmlCell: 2
 	 * HtmlColumn: 1
 	 * Facet: true
 	 * DisplayName.enUS: created
@@ -161,54 +239,10 @@ public class SystemEvent extends SystemEventGen<Object> {
 	 * HtmlCell: 3
 	 * DisplayName.enUS: modified
 	 * Description: A modified timestamp for this record in the database
+	 * Facet: true
 	 */
 	protected void _modified(Wrap<ZonedDateTime> w) {
 		w.o(ZonedDateTime.now(ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))));
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * DocValues: true
-	 * Persist: true
-	 * HtmlRow: 4
-	 * HtmlCell: 1
-	 * Facet: true
-	 * DisplayName.enUS: imageUri
-	 * Description: The page image URI
-	 */
-	protected void _pageImageUri(Wrap<String> w) {
-	}
-
-	/**
-	 * Description: The image width
-	 */
-	protected void _pageImageWidth(Wrap<Integer> w) {
-		if(pageImageUri != null) {
-			Path path = Paths.get(siteRequest_.getConfig().getString(ConfigKeys.STATIC_PATH), pageImageUri);
-			File file = path.toFile();
-			if(file.exists()) {
-				try {
-					BufferedImage img = ImageIO.read(file);
-					w.o(img.getWidth());
-					setPageImageHeight(img.getHeight());
-					setPageImageType(Files.probeContentType(path));
-				} catch (Exception ex) {
-					ExceptionUtils.rethrow(ex);
-				}
-			}
-		}
-	}
-
-	/**
-	 * Description: The image height
-	 */
-	protected void _pageImageHeight(Wrap<Integer> c) {
-	}
-
-	/**
-	 * Description: The image height
-	 */
-	protected void _pageImageType(Wrap<String> c) {
 	}
 
 	/**
@@ -263,10 +297,7 @@ public class SystemEvent extends SystemEventGen<Object> {
 	 * Description: All the inherited canonical names of this Java class
 	 */
 	protected void _classCanonicalNames(List<String> l) { 
-		Class<?> cl = getClass();
-		if(!cl.equals(BaseModel.class))
-			l.add(cl.getCanonicalName());
-		l.add(BaseModel.class.getCanonicalName());
+		l.add(getClass().getCanonicalName());
 	}
 
 	/**
@@ -308,9 +339,19 @@ public class SystemEvent extends SystemEventGen<Object> {
 	 */
 	protected void _objectTitle(Wrap<String> w) {
 		StringBuilder b = new StringBuilder();
-		if(message != null)
-			b.append(" ").append(message);
-		w.o(b.toString());
+		if(personType != null)
+			b.append(" ").append(personType);
+		if(personId != null)
+			b.append(" ").append(personId);
+		if(personId != null)
+			b.append(" ").append(personId);
+		if(speed != null)
+			b.append(" ").append(speed).append("kph");
+		if(angle != null)
+			b.append(" ").append(angle).append("°").append(HeadingConverter.getHeading(angle));
+//		if(slope != null)
+//			b.append(" ").append(slope).append("° slope");
+		w.o(b.toString().trim());
 	}
 
 	/**
@@ -378,17 +419,18 @@ public class SystemEvent extends SystemEventGen<Object> {
 	/**
 	 * {@inheritDoc}
 	 * Text: true
-	 * Persist: true
 	 * Description: The full text search field in the search engine for this record while using autosuggest
 	 * DisplayName: text
 	 */
-	protected void _objectText(List<String> l) { 
+	protected void _objectText(Wrap<String> w) { 
+		StringBuilder b = new StringBuilder();
 		if(objectNameVar != null)
-			l.add(objectNameVar);
+			b.append(" ").append(objectNameVar);
 		if(objectId != null)
-			l.add(objectId);
+			b.append(" ").append(objectId);
 		if(objectTitle != null)
-			l.add(objectTitle);
+			b.append(" ").append(objectTitle);
+		w.o(b.toString());
 	}
 
 	/**
@@ -399,7 +441,8 @@ public class SystemEvent extends SystemEventGen<Object> {
 	 */
 	protected void _pageUrlId(Wrap<String> w) {
 		if(objectId != null) {
-			w.o(String.format("%s", id));
+			String o = siteRequest_.getConfig().getString(ConfigKeys.SITE_BASE_URL) + "/" + objectNameVar + "/" + objectId;
+			w.o(o);
 		}
 	}
 
@@ -419,7 +462,8 @@ public class SystemEvent extends SystemEventGen<Object> {
 	 * Description: The link to this object in the API
 	 */
 	protected void _pageUrlApi(Wrap<String> w) {
-		w.o(pageUrlId);
+		String o = siteRequest_.getConfig().getString(ConfigKeys.SITE_BASE_URL) + "/api/" + objectNameVar + "/" + objectId;
+		w.o(o);
 	}
 
 	/**

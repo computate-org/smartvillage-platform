@@ -131,12 +131,16 @@ PROJECTS:
         template: js/sockjs-map.json
       - path: "{{ SITE_SRC }}-static/js/vertx-eventbus.js"
         template: js/vertx-eventbus.js
+      - path: "{{ SITE_SRC }}-static/js/main.min.js"
+        template: fullcalendar/main.min.js
       - path: "{{ SITE_SRC }}-static/css/jquery-ui.css"
         template: css/jquery-ui.css
       - path: "{{ SITE_SRC }}-static/css/site-{{ SITE_LANG }}.css"
         template: css/site-enUS.css
       - path: "{{ SITE_SRC }}-static/css/w3.css"
         template: css/w3.css
+      - path: "{{ SITE_SRC }}-static/css/main.min.js"
+        template: fullcalendar/main.min.css
       - path: "{{ SITE_SRC }}-static/svg/openshift.svg"
         template: svg/openshift.svg
       - path: "{{ SITE_SRC }}/.gitignore"

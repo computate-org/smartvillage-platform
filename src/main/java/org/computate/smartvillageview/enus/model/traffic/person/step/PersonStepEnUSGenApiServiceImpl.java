@@ -1,4 +1,4 @@
-package org.computate.smartvillageview.enus.model.system.event;
+package org.computate.smartvillageview.enus.model.traffic.person.step;
 
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.smartvillageview.enus.model.user.SiteUser;
@@ -87,42 +87,61 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.BooleanUtils;
 import org.computate.smartvillageview.enus.model.user.SiteUserEnUSApiServiceImpl;
 import org.computate.vertx.search.list.SearchList;
-import org.computate.smartvillageview.enus.model.system.event.SystemEventPage;
+import org.computate.smartvillageview.enus.model.traffic.person.step.PersonStepPage;
 
 
 /**
  * Translate: false
  **/
-public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl implements SystemEventEnUSGenApiService {
+public class PersonStepEnUSGenApiServiceImpl extends BaseApiServiceImpl implements PersonStepEnUSGenApiService {
 
-	protected static final Logger LOG = LoggerFactory.getLogger(SystemEventEnUSGenApiServiceImpl.class);
+	protected static final Logger LOG = LoggerFactory.getLogger(PersonStepEnUSGenApiServiceImpl.class);
 
-	public SystemEventEnUSGenApiServiceImpl(EventBus eventBus, JsonObject config, WorkerExecutor workerExecutor, PgPool pgPool, WebClient webClient, OAuth2Auth oauth2AuthenticationProvider, AuthorizationProvider authorizationProvider, HandlebarsTemplateEngine templateEngine) {
+	public PersonStepEnUSGenApiServiceImpl(EventBus eventBus, JsonObject config, WorkerExecutor workerExecutor, PgPool pgPool, WebClient webClient, OAuth2Auth oauth2AuthenticationProvider, AuthorizationProvider authorizationProvider, HandlebarsTemplateEngine templateEngine) {
 		super(eventBus, config, workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine);
 	}
 
 	// Search //
 
 	@Override
-	public void searchSystemEvent(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
+	public void searchPersonStep(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smart-village-view-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 			try {
-				{
-					searchSystemEventList(siteRequest, false, true, false).onSuccess(listSystemEvent -> {
-						response200SearchSystemEvent(listSystemEvent).onSuccess(response -> {
+
+				List<String> roles = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_REQUIRED + "_PersonStep")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
+				List<String> roleReads = Arrays.asList("");
+				if(
+						!CollectionUtils.containsAny(siteRequest.getUserResourceRoles(), roles)
+						&& !CollectionUtils.containsAny(siteRequest.getUserRealmRoles(), roles)
+						&& !CollectionUtils.containsAny(siteRequest.getUserResourceRoles(), roleReads)
+						&& !CollectionUtils.containsAny(siteRequest.getUserRealmRoles(), roleReads)
+						) {
+					eventHandler.handle(Future.succeededFuture(
+						new ServiceResponse(401, "UNAUTHORIZED", 
+							Buffer.buffer().appendString(
+								new JsonObject()
+									.put("errorCode", "401")
+									.put("errorMessage", "roles required: " + String.join(", ", roles))
+									.encodePrettily()
+								), MultiMap.caseInsensitiveMultiMap()
+						)
+					));
+				} else {
+					searchPersonStepList(siteRequest, false, true, false).onSuccess(listPersonStep -> {
+						response200SearchPersonStep(listPersonStep).onSuccess(response -> {
 							eventHandler.handle(Future.succeededFuture(response));
-							LOG.debug(String.format("searchSystemEvent succeeded. "));
+							LOG.debug(String.format("searchPersonStep succeeded. "));
 						}).onFailure(ex -> {
-							LOG.error(String.format("searchSystemEvent failed. "), ex);
+							LOG.error(String.format("searchPersonStep failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
 					}).onFailure(ex -> {
-						LOG.error(String.format("searchSystemEvent failed. "), ex);
+						LOG.error(String.format("searchPersonStep failed. "), ex);
 						error(siteRequest, eventHandler, ex);
 					});
 				}
 			} catch(Exception ex) {
-				LOG.error(String.format("searchSystemEvent failed. "), ex);
+				LOG.error(String.format("searchPersonStep failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		}).onFailure(ex -> {
@@ -130,32 +149,32 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 				try {
 					eventHandler.handle(Future.succeededFuture(new ServiceResponse(302, "Found", null, MultiMap.caseInsensitiveMultiMap().add(HttpHeaders.LOCATION, "/logout?redirect_uri=" + URLEncoder.encode(serviceRequest.getExtra().getString("uri"), "UTF-8")))));
 				} catch(Exception ex2) {
-					LOG.error(String.format("searchSystemEvent failed. ", ex2));
+					LOG.error(String.format("searchPersonStep failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
 			} else {
-				LOG.error(String.format("searchSystemEvent failed. "), ex);
+				LOG.error(String.format("searchPersonStep failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		});
 	}
 
 
-	public Future<ServiceResponse> response200SearchSystemEvent(SearchList<SystemEvent> listSystemEvent) {
+	public Future<ServiceResponse> response200SearchPersonStep(SearchList<PersonStep> listPersonStep) {
 		Promise<ServiceResponse> promise = Promise.promise();
 		try {
-			SiteRequestEnUS siteRequest = listSystemEvent.getSiteRequest_(SiteRequestEnUS.class);
-			List<String> fls = listSystemEvent.getRequest().getFields();
+			SiteRequestEnUS siteRequest = listPersonStep.getSiteRequest_(SiteRequestEnUS.class);
+			List<String> fls = listPersonStep.getRequest().getFields();
 			JsonObject json = new JsonObject();
 			JsonArray l = new JsonArray();
-			listSystemEvent.getList().stream().forEach(o -> {
+			listPersonStep.getList().stream().forEach(o -> {
 				JsonObject json2 = JsonObject.mapFrom(o);
 				if(fls.size() > 0) {
 					Set<String> fieldNames = new HashSet<String>();
 					for(String fieldName : json2.fieldNames()) {
-						String v = SystemEvent.varIndexedSystemEvent(fieldName);
+						String v = PersonStep.varIndexedPersonStep(fieldName);
 						if(v != null)
-							fieldNames.add(SystemEvent.varIndexedSystemEvent(fieldName));
+							fieldNames.add(PersonStep.varIndexedPersonStep(fieldName));
 					}
 					if(fls.size() == 1 && fls.stream().findFirst().orElse(null).equals("saves_docvalues_strings")) {
 						fieldNames.removeAll(Optional.ofNullable(json2.getJsonArray("saves_docvalues_strings")).orElse(new JsonArray()).stream().map(s -> s.toString()).collect(Collectors.toList()));
@@ -173,15 +192,15 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 				l.add(json2);
 			});
 			json.put("list", l);
-			response200Search(listSystemEvent.getRequest(), listSystemEvent.getResponse(), json);
+			response200Search(listPersonStep.getRequest(), listPersonStep.getResponse(), json);
 			promise.complete(ServiceResponse.completedWithJson(Buffer.buffer(Optional.ofNullable(json).orElse(new JsonObject()).encodePrettily())));
 		} catch(Exception ex) {
-			LOG.error(String.format("response200SearchSystemEvent failed. "), ex);
+			LOG.error(String.format("response200SearchPersonStep failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
 	}
-	public void responsePivotSearchSystemEvent(List<SolrResponse.Pivot> pivots, JsonArray pivotArray) {
+	public void responsePivotSearchPersonStep(List<SolrResponse.Pivot> pivots, JsonArray pivotArray) {
 		if(pivots != null) {
 			for(SolrResponse.Pivot pivotField : pivots) {
 				String entityIndexed = pivotField.getField();
@@ -210,7 +229,7 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 				if(pivotFields2 != null) {
 					JsonArray pivotArray2 = new JsonArray();
 					pivotJson.put("pivot", pivotArray2);
-					responsePivotSearchSystemEvent(pivotFields2, pivotArray2);
+					responsePivotSearchPersonStep(pivotFields2, pivotArray2);
 				}
 			}
 		}
@@ -219,25 +238,44 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 	// GET //
 
 	@Override
-	public void getSystemEvent(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
+	public void getPersonStep(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smart-village-view-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 			try {
-				{
-					searchSystemEventList(siteRequest, false, true, false).onSuccess(listSystemEvent -> {
-						response200GETSystemEvent(listSystemEvent).onSuccess(response -> {
+
+				List<String> roles = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_REQUIRED + "_PersonStep")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
+				List<String> roleReads = Arrays.asList("");
+				if(
+						!CollectionUtils.containsAny(siteRequest.getUserResourceRoles(), roles)
+						&& !CollectionUtils.containsAny(siteRequest.getUserRealmRoles(), roles)
+						&& !CollectionUtils.containsAny(siteRequest.getUserResourceRoles(), roleReads)
+						&& !CollectionUtils.containsAny(siteRequest.getUserRealmRoles(), roleReads)
+						) {
+					eventHandler.handle(Future.succeededFuture(
+						new ServiceResponse(401, "UNAUTHORIZED", 
+							Buffer.buffer().appendString(
+								new JsonObject()
+									.put("errorCode", "401")
+									.put("errorMessage", "roles required: " + String.join(", ", roles))
+									.encodePrettily()
+								), MultiMap.caseInsensitiveMultiMap()
+						)
+					));
+				} else {
+					searchPersonStepList(siteRequest, false, true, false).onSuccess(listPersonStep -> {
+						response200GETPersonStep(listPersonStep).onSuccess(response -> {
 							eventHandler.handle(Future.succeededFuture(response));
-							LOG.debug(String.format("getSystemEvent succeeded. "));
+							LOG.debug(String.format("getPersonStep succeeded. "));
 						}).onFailure(ex -> {
-							LOG.error(String.format("getSystemEvent failed. "), ex);
+							LOG.error(String.format("getPersonStep failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
 					}).onFailure(ex -> {
-						LOG.error(String.format("getSystemEvent failed. "), ex);
+						LOG.error(String.format("getPersonStep failed. "), ex);
 						error(siteRequest, eventHandler, ex);
 					});
 				}
 			} catch(Exception ex) {
-				LOG.error(String.format("getSystemEvent failed. "), ex);
+				LOG.error(String.format("getPersonStep failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		}).onFailure(ex -> {
@@ -245,25 +283,242 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 				try {
 					eventHandler.handle(Future.succeededFuture(new ServiceResponse(302, "Found", null, MultiMap.caseInsensitiveMultiMap().add(HttpHeaders.LOCATION, "/logout?redirect_uri=" + URLEncoder.encode(serviceRequest.getExtra().getString("uri"), "UTF-8")))));
 				} catch(Exception ex2) {
-					LOG.error(String.format("getSystemEvent failed. ", ex2));
+					LOG.error(String.format("getPersonStep failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
 			} else {
-				LOG.error(String.format("getSystemEvent failed. "), ex);
+				LOG.error(String.format("getPersonStep failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		});
 	}
 
 
-	public Future<ServiceResponse> response200GETSystemEvent(SearchList<SystemEvent> listSystemEvent) {
+	public Future<ServiceResponse> response200GETPersonStep(SearchList<PersonStep> listPersonStep) {
 		Promise<ServiceResponse> promise = Promise.promise();
 		try {
-			SiteRequestEnUS siteRequest = listSystemEvent.getSiteRequest_(SiteRequestEnUS.class);
-			JsonObject json = JsonObject.mapFrom(listSystemEvent.getList().stream().findFirst().orElse(null));
+			SiteRequestEnUS siteRequest = listPersonStep.getSiteRequest_(SiteRequestEnUS.class);
+			JsonObject json = JsonObject.mapFrom(listPersonStep.getList().stream().findFirst().orElse(null));
 			promise.complete(ServiceResponse.completedWithJson(Buffer.buffer(Optional.ofNullable(json).orElse(new JsonObject()).encodePrettily())));
 		} catch(Exception ex) {
-			LOG.error(String.format("response200GETSystemEvent failed. "), ex);
+			LOG.error(String.format("response200GETPersonStep failed. "), ex);
+			promise.fail(ex);
+		}
+		return promise.future();
+	}
+
+	// PATCH //
+
+	@Override
+	public void patchPersonStep(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
+		LOG.debug(String.format("patchPersonStep started. "));
+		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smart-village-view-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
+			try {
+				siteRequest.setJsonObject(body);
+
+				List<String> roles = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_REQUIRED + "_PersonStep")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
+				if(
+						!CollectionUtils.containsAny(siteRequest.getUserResourceRoles(), roles)
+						&& !CollectionUtils.containsAny(siteRequest.getUserRealmRoles(), roles)
+						) {
+					eventHandler.handle(Future.succeededFuture(
+						new ServiceResponse(401, "UNAUTHORIZED", 
+							Buffer.buffer().appendString(
+								new JsonObject()
+									.put("errorCode", "401")
+									.put("errorMessage", "roles required: " + String.join(", ", roles))
+									.encodePrettily()
+								), MultiMap.caseInsensitiveMultiMap()
+						)
+					));
+				} else {
+					searchPersonStepList(siteRequest, true, false, true).onSuccess(listPersonStep -> {
+						try {
+							List<String> roles2 = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_ADMIN)).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
+							if(listPersonStep.getResponse().getResponse().getNumFound() > 1
+									&& !CollectionUtils.containsAny(siteRequest.getUserResourceRoles(), roles2)
+									&& !CollectionUtils.containsAny(siteRequest.getUserRealmRoles(), roles2)
+									) {
+								String message = String.format("roles required: " + String.join(", ", roles2));
+								LOG.error(message);
+								error(siteRequest, eventHandler, new RuntimeException(message));
+							} else {
+
+								ApiRequest apiRequest = new ApiRequest();
+								apiRequest.setRows(listPersonStep.getRequest().getRows());
+								apiRequest.setNumFound(listPersonStep.getResponse().getResponse().getNumFound());
+								apiRequest.setNumPATCH(0L);
+								apiRequest.initDeepApiRequest(siteRequest);
+								siteRequest.setApiRequest_(apiRequest);
+								if(apiRequest.getNumFound() == 1L)
+									apiRequest.setOriginal(listPersonStep.first());
+								eventBus.publish("websocketPersonStep", JsonObject.mapFrom(apiRequest).toString());
+
+								listPATCHPersonStep(apiRequest, listPersonStep).onSuccess(e -> {
+									response200PATCHPersonStep(siteRequest).onSuccess(response -> {
+										LOG.debug(String.format("patchPersonStep succeeded. "));
+										eventHandler.handle(Future.succeededFuture(response));
+									}).onFailure(ex -> {
+										LOG.error(String.format("patchPersonStep failed. "), ex);
+										error(siteRequest, eventHandler, ex);
+									});
+								}).onFailure(ex -> {
+									LOG.error(String.format("patchPersonStep failed. "), ex);
+									error(siteRequest, eventHandler, ex);
+								});
+							}
+						} catch(Exception ex) {
+							LOG.error(String.format("patchPersonStep failed. "), ex);
+							error(siteRequest, eventHandler, ex);
+						}
+					}).onFailure(ex -> {
+						LOG.error(String.format("patchPersonStep failed. "), ex);
+						error(siteRequest, eventHandler, ex);
+					});
+				}
+			} catch(Exception ex) {
+				LOG.error(String.format("patchPersonStep failed. "), ex);
+				error(null, eventHandler, ex);
+			}
+		}).onFailure(ex -> {
+			if("Inactive Token".equals(ex.getMessage()) || StringUtils.startsWith(ex.getMessage(), "invalid_grant:")) {
+				try {
+					eventHandler.handle(Future.succeededFuture(new ServiceResponse(302, "Found", null, MultiMap.caseInsensitiveMultiMap().add(HttpHeaders.LOCATION, "/logout?redirect_uri=" + URLEncoder.encode(serviceRequest.getExtra().getString("uri"), "UTF-8")))));
+				} catch(Exception ex2) {
+					LOG.error(String.format("patchPersonStep failed. ", ex2));
+					error(null, eventHandler, ex2);
+				}
+			} else {
+				LOG.error(String.format("patchPersonStep failed. "), ex);
+				error(null, eventHandler, ex);
+			}
+		});
+	}
+
+
+	public Future<Void> listPATCHPersonStep(ApiRequest apiRequest, SearchList<PersonStep> listPersonStep) {
+		Promise<Void> promise = Promise.promise();
+		List<Future> futures = new ArrayList<>();
+		SiteRequestEnUS siteRequest = listPersonStep.getSiteRequest_(SiteRequestEnUS.class);
+		listPersonStep.getList().forEach(o -> {
+			SiteRequestEnUS siteRequest2 = generateSiteRequest(siteRequest.getUser(), siteRequest.getUserPrincipal(), siteRequest.getServiceRequest(), siteRequest.getJsonObject(), SiteRequestEnUS.class);
+			o.setSiteRequest_(siteRequest2);
+			siteRequest2.setApiRequest_(siteRequest.getApiRequest_());
+			futures.add(Future.future(promise1 -> {
+				patchPersonStepFuture(o, false).onSuccess(a -> {
+					promise1.complete();
+				}).onFailure(ex -> {
+					LOG.error(String.format("listPATCHPersonStep failed. "), ex);
+					promise1.fail(ex);
+				});
+			}));
+		});
+		CompositeFuture.all(futures).onSuccess( a -> {
+			if(apiRequest != null) {
+				apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listPersonStep.getResponse().getResponse().getDocs().size());
+				if(apiRequest.getNumFound() == 1L)
+					listPersonStep.first().apiRequestPersonStep();
+				eventBus.publish("websocketPersonStep", JsonObject.mapFrom(apiRequest).toString());
+			}
+			listPersonStep.next().onSuccess(next -> {
+				if(next) {
+					listPATCHPersonStep(apiRequest, listPersonStep).onSuccess(b -> {
+						promise.complete();
+					}).onFailure(ex -> {
+						LOG.error(String.format("listPATCHPersonStep failed. "), ex);
+						promise.fail(ex);
+					});
+				} else {
+					promise.complete();
+				}
+			}).onFailure(ex -> {
+				LOG.error(String.format("listPATCHPersonStep failed. "), ex);
+				promise.fail(ex);
+			});
+		}).onFailure(ex -> {
+			LOG.error(String.format("listPATCHPersonStep failed. "), ex);
+			promise.fail(ex);
+		});
+		return promise.future();
+	}
+
+	@Override
+	public void patchPersonStepFuture(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
+		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smart-village-view-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
+			try {
+				siteRequest.setJsonObject(body);
+				serviceRequest.getParams().getJsonObject("query").put("rows", 1);
+				searchPersonStepList(siteRequest, false, true, true).onSuccess(listPersonStep -> {
+					try {
+						PersonStep o = listPersonStep.first();
+						if(o != null && listPersonStep.getResponse().getResponse().getNumFound() == 1) {
+							ApiRequest apiRequest = new ApiRequest();
+							apiRequest.setRows(1L);
+							apiRequest.setNumFound(1L);
+							apiRequest.setNumPATCH(0L);
+							apiRequest.initDeepApiRequest(siteRequest);
+							siteRequest.setApiRequest_(apiRequest);
+							if(Optional.ofNullable(serviceRequest.getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getJsonArray("var")).orElse(new JsonArray()).stream().filter(s -> "refresh:false".equals(s)).count() > 0L) {
+								siteRequest.getRequestVars().put( "refresh", "false" );
+							}
+							if(apiRequest.getNumFound() == 1L)
+								apiRequest.setOriginal(o);
+							eventBus.publish("websocketPersonStep", JsonObject.mapFrom(apiRequest).toString());
+							patchPersonStepFuture(o, false).onSuccess(a -> {
+								eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(new JsonObject().encodePrettily()))));
+							}).onFailure(ex -> {
+								eventHandler.handle(Future.failedFuture(ex));
+							});
+						} else {
+							eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(new JsonObject().encodePrettily()))));
+						}
+					} catch(Exception ex) {
+						LOG.error(String.format("patchPersonStep failed. "), ex);
+						error(siteRequest, eventHandler, ex);
+					}
+				}).onFailure(ex -> {
+					LOG.error(String.format("patchPersonStep failed. "), ex);
+					error(siteRequest, eventHandler, ex);
+				});
+			} catch(Exception ex) {
+				LOG.error(String.format("patchPersonStep failed. "), ex);
+				error(null, eventHandler, ex);
+			}
+		}).onFailure(ex -> {
+			LOG.error(String.format("patchPersonStep failed. "), ex);
+			error(null, eventHandler, ex);
+		});
+	}
+
+	public Future<PersonStep> patchPersonStepFuture(PersonStep o, Boolean inheritPk) {
+		SiteRequestEnUS siteRequest = o.getSiteRequest_();
+		Promise<PersonStep> promise = Promise.promise();
+
+		try {
+			ApiRequest apiRequest = siteRequest.getApiRequest_();
+			persistPersonStep(o, true).onSuccess(c -> {
+				indexPersonStep(o).onSuccess(e -> {
+					promise.complete(o);
+				}).onFailure(ex -> {
+					promise.fail(ex);
+				});
+			}).onFailure(ex -> {
+				promise.fail(ex);
+			});
+		} catch(Exception ex) {
+			LOG.error(String.format("patchPersonStepFuture failed. "), ex);
+			promise.fail(ex);
+		}
+		return promise.future();
+	}
+
+	public Future<ServiceResponse> response200PATCHPersonStep(SiteRequestEnUS siteRequest) {
+		Promise<ServiceResponse> promise = Promise.promise();
+		try {
+			JsonObject json = new JsonObject();
+			promise.complete(ServiceResponse.completedWithJson(Buffer.buffer(Optional.ofNullable(json).orElse(new JsonObject()).encodePrettily())));
+		} catch(Exception ex) {
+			LOG.error(String.format("response200PATCHPersonStep failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
@@ -272,13 +527,13 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 	// POST //
 
 	@Override
-	public void postSystemEvent(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
-		LOG.debug(String.format("postSystemEvent started. "));
+	public void postPersonStep(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
+		LOG.debug(String.format("postPersonStep started. "));
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smart-village-view-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 			try {
 				siteRequest.setJsonObject(body);
 
-				List<String> roles = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_REQUIRED + "_SystemEvent")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
+				List<String> roles = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_REQUIRED + "_PersonStep")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
 				if(
 						!CollectionUtils.containsAny(siteRequest.getUserResourceRoles(), roles)
 						&& !CollectionUtils.containsAny(siteRequest.getUserRealmRoles(), roles)
@@ -300,7 +555,7 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 					apiRequest.setNumPATCH(0L);
 					apiRequest.initDeepApiRequest(siteRequest);
 					siteRequest.setApiRequest_(apiRequest);
-					eventBus.publish("websocketSystemEvent", JsonObject.mapFrom(apiRequest).toString());
+					eventBus.publish("websocketPersonStep", JsonObject.mapFrom(apiRequest).toString());
 					JsonObject params = new JsonObject();
 					params.put("body", siteRequest.getJsonObject());
 					params.put("path", new JsonObject());
@@ -319,18 +574,18 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 					params.put("query", query);
 					JsonObject context = new JsonObject().put("params", params).put("user", siteRequest.getUserPrincipal());
 					JsonObject json = new JsonObject().put("context", context);
-					eventBus.request("smart-village-view-enUS-SystemEvent", json, new DeliveryOptions().addHeader("action", "postSystemEventFuture")).onSuccess(a -> {
+					eventBus.request("smart-village-view-enUS-PersonStep", json, new DeliveryOptions().addHeader("action", "postPersonStepFuture")).onSuccess(a -> {
 						JsonObject responseMessage = (JsonObject)a.body();
 						JsonObject responseBody = new JsonObject(Buffer.buffer(JsonUtil.BASE64_DECODER.decode(responseMessage.getString("payload"))));
 						eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(responseBody.encodePrettily()))));
-						LOG.debug(String.format("postSystemEvent succeeded. "));
+						LOG.debug(String.format("postPersonStep succeeded. "));
 					}).onFailure(ex -> {
-						LOG.error(String.format("postSystemEvent failed. "), ex);
+						LOG.error(String.format("postPersonStep failed. "), ex);
 						error(siteRequest, eventHandler, ex);
 					});
 				}
 			} catch(Exception ex) {
-				LOG.error(String.format("postSystemEvent failed. "), ex);
+				LOG.error(String.format("postPersonStep failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		}).onFailure(ex -> {
@@ -338,11 +593,11 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 				try {
 					eventHandler.handle(Future.succeededFuture(new ServiceResponse(302, "Found", null, MultiMap.caseInsensitiveMultiMap().add(HttpHeaders.LOCATION, "/logout?redirect_uri=" + URLEncoder.encode(serviceRequest.getExtra().getString("uri"), "UTF-8")))));
 				} catch(Exception ex2) {
-					LOG.error(String.format("postSystemEvent failed. ", ex2));
+					LOG.error(String.format("postPersonStep failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
 			} else {
-				LOG.error(String.format("postSystemEvent failed. "), ex);
+				LOG.error(String.format("postPersonStep failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		});
@@ -350,7 +605,7 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 
 
 	@Override
-	public void postSystemEventFuture(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
+	public void postPersonStepFuture(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smart-village-view-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 			ApiRequest apiRequest = new ApiRequest();
 			apiRequest.setRows(1L);
@@ -361,7 +616,7 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 			if(Optional.ofNullable(serviceRequest.getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getJsonArray("var")).orElse(new JsonArray()).stream().filter(s -> "refresh:false".equals(s)).count() > 0L) {
 				siteRequest.getRequestVars().put( "refresh", "false" );
 			}
-			postSystemEventFuture(siteRequest, false).onSuccess(o -> {
+			postPersonStepFuture(siteRequest, false).onSuccess(o -> {
 				eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(JsonObject.mapFrom(o).encodePrettily()))));
 			}).onFailure(ex -> {
 				eventHandler.handle(Future.failedFuture(ex));
@@ -371,24 +626,24 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 				try {
 					eventHandler.handle(Future.succeededFuture(new ServiceResponse(302, "Found", null, MultiMap.caseInsensitiveMultiMap().add(HttpHeaders.LOCATION, "/logout?redirect_uri=" + URLEncoder.encode(serviceRequest.getExtra().getString("uri"), "UTF-8")))));
 				} catch(Exception ex2) {
-					LOG.error(String.format("postSystemEvent failed. ", ex2));
+					LOG.error(String.format("postPersonStep failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
 			} else {
-				LOG.error(String.format("postSystemEvent failed. "), ex);
+				LOG.error(String.format("postPersonStep failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		});
 	}
 
-	public Future<SystemEvent> postSystemEventFuture(SiteRequestEnUS siteRequest, Boolean inheritPk) {
-		Promise<SystemEvent> promise = Promise.promise();
+	public Future<PersonStep> postPersonStepFuture(SiteRequestEnUS siteRequest, Boolean inheritPk) {
+		Promise<PersonStep> promise = Promise.promise();
 
 		try {
-			createSystemEvent(siteRequest).onSuccess(systemEvent -> {
-				persistSystemEvent(systemEvent, false).onSuccess(c -> {
-					indexSystemEvent(systemEvent).onSuccess(e -> {
-						promise.complete(systemEvent);
+			createPersonStep(siteRequest).onSuccess(personStep -> {
+				persistPersonStep(personStep, false).onSuccess(c -> {
+					indexPersonStep(personStep).onSuccess(e -> {
+						promise.complete(personStep);
 					}).onFailure(ex -> {
 						promise.fail(ex);
 					});
@@ -399,237 +654,20 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 				promise.fail(ex);
 			});
 		} catch(Exception ex) {
-			LOG.error(String.format("postSystemEventFuture failed. "), ex);
+			LOG.error(String.format("postPersonStepFuture failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
 	}
 
-	public Future<ServiceResponse> response200POSTSystemEvent(SystemEvent o) {
+	public Future<ServiceResponse> response200POSTPersonStep(PersonStep o) {
 		Promise<ServiceResponse> promise = Promise.promise();
 		try {
 			SiteRequestEnUS siteRequest = o.getSiteRequest_();
 			JsonObject json = JsonObject.mapFrom(o);
 			promise.complete(ServiceResponse.completedWithJson(Buffer.buffer(Optional.ofNullable(json).orElse(new JsonObject()).encodePrettily())));
 		} catch(Exception ex) {
-			LOG.error(String.format("response200POSTSystemEvent failed. "), ex);
-			promise.fail(ex);
-		}
-		return promise.future();
-	}
-
-	// PATCH //
-
-	@Override
-	public void patchSystemEvent(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
-		LOG.debug(String.format("patchSystemEvent started. "));
-		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smart-village-view-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
-			try {
-				siteRequest.setJsonObject(body);
-
-				List<String> roles = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_REQUIRED + "_SystemEvent")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
-				if(
-						!CollectionUtils.containsAny(siteRequest.getUserResourceRoles(), roles)
-						&& !CollectionUtils.containsAny(siteRequest.getUserRealmRoles(), roles)
-						) {
-					eventHandler.handle(Future.succeededFuture(
-						new ServiceResponse(401, "UNAUTHORIZED", 
-							Buffer.buffer().appendString(
-								new JsonObject()
-									.put("errorCode", "401")
-									.put("errorMessage", "roles required: " + String.join(", ", roles))
-									.encodePrettily()
-								), MultiMap.caseInsensitiveMultiMap()
-						)
-					));
-				} else {
-					searchSystemEventList(siteRequest, true, false, true).onSuccess(listSystemEvent -> {
-						try {
-							List<String> roles2 = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_ADMIN)).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
-							if(listSystemEvent.getResponse().getResponse().getNumFound() > 1
-									&& !CollectionUtils.containsAny(siteRequest.getUserResourceRoles(), roles2)
-									&& !CollectionUtils.containsAny(siteRequest.getUserRealmRoles(), roles2)
-									) {
-								String message = String.format("roles required: " + String.join(", ", roles2));
-								LOG.error(message);
-								error(siteRequest, eventHandler, new RuntimeException(message));
-							} else {
-
-								ApiRequest apiRequest = new ApiRequest();
-								apiRequest.setRows(listSystemEvent.getRequest().getRows());
-								apiRequest.setNumFound(listSystemEvent.getResponse().getResponse().getNumFound());
-								apiRequest.setNumPATCH(0L);
-								apiRequest.initDeepApiRequest(siteRequest);
-								siteRequest.setApiRequest_(apiRequest);
-								if(apiRequest.getNumFound() == 1L)
-									apiRequest.setOriginal(listSystemEvent.first());
-								eventBus.publish("websocketSystemEvent", JsonObject.mapFrom(apiRequest).toString());
-
-								listPATCHSystemEvent(apiRequest, listSystemEvent).onSuccess(e -> {
-									response200PATCHSystemEvent(siteRequest).onSuccess(response -> {
-										LOG.debug(String.format("patchSystemEvent succeeded. "));
-										eventHandler.handle(Future.succeededFuture(response));
-									}).onFailure(ex -> {
-										LOG.error(String.format("patchSystemEvent failed. "), ex);
-										error(siteRequest, eventHandler, ex);
-									});
-								}).onFailure(ex -> {
-									LOG.error(String.format("patchSystemEvent failed. "), ex);
-									error(siteRequest, eventHandler, ex);
-								});
-							}
-						} catch(Exception ex) {
-							LOG.error(String.format("patchSystemEvent failed. "), ex);
-							error(siteRequest, eventHandler, ex);
-						}
-					}).onFailure(ex -> {
-						LOG.error(String.format("patchSystemEvent failed. "), ex);
-						error(siteRequest, eventHandler, ex);
-					});
-				}
-			} catch(Exception ex) {
-				LOG.error(String.format("patchSystemEvent failed. "), ex);
-				error(null, eventHandler, ex);
-			}
-		}).onFailure(ex -> {
-			if("Inactive Token".equals(ex.getMessage()) || StringUtils.startsWith(ex.getMessage(), "invalid_grant:")) {
-				try {
-					eventHandler.handle(Future.succeededFuture(new ServiceResponse(302, "Found", null, MultiMap.caseInsensitiveMultiMap().add(HttpHeaders.LOCATION, "/logout?redirect_uri=" + URLEncoder.encode(serviceRequest.getExtra().getString("uri"), "UTF-8")))));
-				} catch(Exception ex2) {
-					LOG.error(String.format("patchSystemEvent failed. ", ex2));
-					error(null, eventHandler, ex2);
-				}
-			} else {
-				LOG.error(String.format("patchSystemEvent failed. "), ex);
-				error(null, eventHandler, ex);
-			}
-		});
-	}
-
-
-	public Future<Void> listPATCHSystemEvent(ApiRequest apiRequest, SearchList<SystemEvent> listSystemEvent) {
-		Promise<Void> promise = Promise.promise();
-		List<Future> futures = new ArrayList<>();
-		SiteRequestEnUS siteRequest = listSystemEvent.getSiteRequest_(SiteRequestEnUS.class);
-		listSystemEvent.getList().forEach(o -> {
-			SiteRequestEnUS siteRequest2 = generateSiteRequest(siteRequest.getUser(), siteRequest.getUserPrincipal(), siteRequest.getServiceRequest(), siteRequest.getJsonObject(), SiteRequestEnUS.class);
-			o.setSiteRequest_(siteRequest2);
-			siteRequest2.setApiRequest_(siteRequest.getApiRequest_());
-			futures.add(Future.future(promise1 -> {
-				patchSystemEventFuture(o, false).onSuccess(a -> {
-					promise1.complete();
-				}).onFailure(ex -> {
-					LOG.error(String.format("listPATCHSystemEvent failed. "), ex);
-					promise1.fail(ex);
-				});
-			}));
-		});
-		CompositeFuture.all(futures).onSuccess( a -> {
-			if(apiRequest != null) {
-				apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listSystemEvent.getResponse().getResponse().getDocs().size());
-				if(apiRequest.getNumFound() == 1L)
-					listSystemEvent.first().apiRequestSystemEvent();
-				eventBus.publish("websocketSystemEvent", JsonObject.mapFrom(apiRequest).toString());
-			}
-			listSystemEvent.next().onSuccess(next -> {
-				if(next) {
-					listPATCHSystemEvent(apiRequest, listSystemEvent).onSuccess(b -> {
-						promise.complete();
-					}).onFailure(ex -> {
-						LOG.error(String.format("listPATCHSystemEvent failed. "), ex);
-						promise.fail(ex);
-					});
-				} else {
-					promise.complete();
-				}
-			}).onFailure(ex -> {
-				LOG.error(String.format("listPATCHSystemEvent failed. "), ex);
-				promise.fail(ex);
-			});
-		}).onFailure(ex -> {
-			LOG.error(String.format("listPATCHSystemEvent failed. "), ex);
-			promise.fail(ex);
-		});
-		return promise.future();
-	}
-
-	@Override
-	public void patchSystemEventFuture(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
-		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smart-village-view-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
-			try {
-				siteRequest.setJsonObject(body);
-				serviceRequest.getParams().getJsonObject("query").put("rows", 1);
-				searchSystemEventList(siteRequest, false, true, true).onSuccess(listSystemEvent -> {
-					try {
-						SystemEvent o = listSystemEvent.first();
-						if(o != null && listSystemEvent.getResponse().getResponse().getNumFound() == 1) {
-							ApiRequest apiRequest = new ApiRequest();
-							apiRequest.setRows(1L);
-							apiRequest.setNumFound(1L);
-							apiRequest.setNumPATCH(0L);
-							apiRequest.initDeepApiRequest(siteRequest);
-							siteRequest.setApiRequest_(apiRequest);
-							if(Optional.ofNullable(serviceRequest.getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getJsonArray("var")).orElse(new JsonArray()).stream().filter(s -> "refresh:false".equals(s)).count() > 0L) {
-								siteRequest.getRequestVars().put( "refresh", "false" );
-							}
-							if(apiRequest.getNumFound() == 1L)
-								apiRequest.setOriginal(o);
-							eventBus.publish("websocketSystemEvent", JsonObject.mapFrom(apiRequest).toString());
-							patchSystemEventFuture(o, false).onSuccess(a -> {
-								eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(new JsonObject().encodePrettily()))));
-							}).onFailure(ex -> {
-								eventHandler.handle(Future.failedFuture(ex));
-							});
-						} else {
-							eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(new JsonObject().encodePrettily()))));
-						}
-					} catch(Exception ex) {
-						LOG.error(String.format("patchSystemEvent failed. "), ex);
-						error(siteRequest, eventHandler, ex);
-					}
-				}).onFailure(ex -> {
-					LOG.error(String.format("patchSystemEvent failed. "), ex);
-					error(siteRequest, eventHandler, ex);
-				});
-			} catch(Exception ex) {
-				LOG.error(String.format("patchSystemEvent failed. "), ex);
-				error(null, eventHandler, ex);
-			}
-		}).onFailure(ex -> {
-			LOG.error(String.format("patchSystemEvent failed. "), ex);
-			error(null, eventHandler, ex);
-		});
-	}
-
-	public Future<SystemEvent> patchSystemEventFuture(SystemEvent o, Boolean inheritPk) {
-		SiteRequestEnUS siteRequest = o.getSiteRequest_();
-		Promise<SystemEvent> promise = Promise.promise();
-
-		try {
-			ApiRequest apiRequest = siteRequest.getApiRequest_();
-			persistSystemEvent(o, true).onSuccess(c -> {
-				indexSystemEvent(o).onSuccess(e -> {
-					promise.complete(o);
-				}).onFailure(ex -> {
-					promise.fail(ex);
-				});
-			}).onFailure(ex -> {
-				promise.fail(ex);
-			});
-		} catch(Exception ex) {
-			LOG.error(String.format("patchSystemEventFuture failed. "), ex);
-			promise.fail(ex);
-		}
-		return promise.future();
-	}
-
-	public Future<ServiceResponse> response200PATCHSystemEvent(SiteRequestEnUS siteRequest) {
-		Promise<ServiceResponse> promise = Promise.promise();
-		try {
-			JsonObject json = new JsonObject();
-			promise.complete(ServiceResponse.completedWithJson(Buffer.buffer(Optional.ofNullable(json).orElse(new JsonObject()).encodePrettily())));
-		} catch(Exception ex) {
-			LOG.error(String.format("response200PATCHSystemEvent failed. "), ex);
+			LOG.error(String.format("response200POSTPersonStep failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
@@ -638,13 +676,13 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 	// PUTImport //
 
 	@Override
-	public void putimportSystemEvent(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
-		LOG.debug(String.format("putimportSystemEvent started. "));
+	public void putimportPersonStep(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
+		LOG.debug(String.format("putimportPersonStep started. "));
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smart-village-view-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 			try {
 				siteRequest.setJsonObject(body);
 
-				List<String> roles = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_REQUIRED + "_SystemEvent")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
+				List<String> roles = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_REQUIRED + "_PersonStep")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
 				if(
 						!CollectionUtils.containsAny(siteRequest.getUserResourceRoles(), roles)
 						&& !CollectionUtils.containsAny(siteRequest.getUserRealmRoles(), roles)
@@ -668,31 +706,31 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 						apiRequest.setNumPATCH(0L);
 						apiRequest.initDeepApiRequest(siteRequest);
 						siteRequest.setApiRequest_(apiRequest);
-						eventBus.publish("websocketSystemEvent", JsonObject.mapFrom(apiRequest).toString());
-						varsSystemEvent(siteRequest).onSuccess(d -> {
-							listPUTImportSystemEvent(apiRequest, siteRequest).onSuccess(e -> {
-								response200PUTImportSystemEvent(siteRequest).onSuccess(response -> {
-									LOG.debug(String.format("putimportSystemEvent succeeded. "));
+						eventBus.publish("websocketPersonStep", JsonObject.mapFrom(apiRequest).toString());
+						varsPersonStep(siteRequest).onSuccess(d -> {
+							listPUTImportPersonStep(apiRequest, siteRequest).onSuccess(e -> {
+								response200PUTImportPersonStep(siteRequest).onSuccess(response -> {
+									LOG.debug(String.format("putimportPersonStep succeeded. "));
 									eventHandler.handle(Future.succeededFuture(response));
 								}).onFailure(ex -> {
-									LOG.error(String.format("putimportSystemEvent failed. "), ex);
+									LOG.error(String.format("putimportPersonStep failed. "), ex);
 									error(siteRequest, eventHandler, ex);
 								});
 							}).onFailure(ex -> {
-								LOG.error(String.format("putimportSystemEvent failed. "), ex);
+								LOG.error(String.format("putimportPersonStep failed. "), ex);
 								error(siteRequest, eventHandler, ex);
 							});
 						}).onFailure(ex -> {
-							LOG.error(String.format("putimportSystemEvent failed. "), ex);
+							LOG.error(String.format("putimportPersonStep failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
 					} catch(Exception ex) {
-						LOG.error(String.format("putimportSystemEvent failed. "), ex);
+						LOG.error(String.format("putimportPersonStep failed. "), ex);
 						error(siteRequest, eventHandler, ex);
 					}
 				}
 			} catch(Exception ex) {
-				LOG.error(String.format("putimportSystemEvent failed. "), ex);
+				LOG.error(String.format("putimportPersonStep failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		}).onFailure(ex -> {
@@ -700,18 +738,18 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 				try {
 					eventHandler.handle(Future.succeededFuture(new ServiceResponse(302, "Found", null, MultiMap.caseInsensitiveMultiMap().add(HttpHeaders.LOCATION, "/logout?redirect_uri=" + URLEncoder.encode(serviceRequest.getExtra().getString("uri"), "UTF-8")))));
 				} catch(Exception ex2) {
-					LOG.error(String.format("putimportSystemEvent failed. ", ex2));
+					LOG.error(String.format("putimportPersonStep failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
 			} else {
-				LOG.error(String.format("putimportSystemEvent failed. "), ex);
+				LOG.error(String.format("putimportPersonStep failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		});
 	}
 
 
-	public Future<Void> listPUTImportSystemEvent(ApiRequest apiRequest, SiteRequestEnUS siteRequest) {
+	public Future<Void> listPUTImportPersonStep(ApiRequest apiRequest, SiteRequestEnUS siteRequest) {
 		Promise<Void> promise = Promise.promise();
 		List<Future> futures = new ArrayList<>();
 		JsonArray jsonArray = Optional.ofNullable(siteRequest.getJsonObject()).map(o -> o.getJsonArray("list")).orElse(new JsonArray());
@@ -736,10 +774,10 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 					params.put("query", query);
 					JsonObject context = new JsonObject().put("params", params).put("user", siteRequest.getUserPrincipal());
 					JsonObject json = new JsonObject().put("context", context);
-					eventBus.request("smart-village-view-enUS-SystemEvent", json, new DeliveryOptions().addHeader("action", "putimportSystemEventFuture")).onSuccess(a -> {
+					eventBus.request("smart-village-view-enUS-PersonStep", json, new DeliveryOptions().addHeader("action", "putimportPersonStepFuture")).onSuccess(a -> {
 						promise1.complete();
 					}).onFailure(ex -> {
-						LOG.error(String.format("listPUTImportSystemEvent failed. "), ex);
+						LOG.error(String.format("listPUTImportPersonStep failed. "), ex);
 						promise1.fail(ex);
 					});
 				}));
@@ -748,18 +786,18 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 				apiRequest.setNumPATCH(apiRequest.getNumPATCH() + 1);
 				promise.complete();
 			}).onFailure(ex -> {
-				LOG.error(String.format("listPUTImportSystemEvent failed. "), ex);
+				LOG.error(String.format("listPUTImportPersonStep failed. "), ex);
 				promise.fail(ex);
 			});
 		} catch(Exception ex) {
-			LOG.error(String.format("listPUTImportSystemEvent failed. "), ex);
+			LOG.error(String.format("listPUTImportPersonStep failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
 	}
 
 	@Override
-	public void putimportSystemEventFuture(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
+	public void putimportPersonStepFuture(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smart-village-view-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 			try {
 				ApiRequest apiRequest = new ApiRequest();
@@ -773,18 +811,18 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 					siteRequest.getRequestVars().put( "refresh", "false" );
 				}
 
-				SearchList<SystemEvent> searchList = new SearchList<SystemEvent>();
+				SearchList<PersonStep> searchList = new SearchList<PersonStep>();
 				searchList.setStore(true);
 				searchList.q("*:*");
-				searchList.setC(SystemEvent.class);
+				searchList.setC(PersonStep.class);
 				searchList.fq("deleted_docvalues_boolean:false");
 				searchList.fq("archived_docvalues_boolean:false");
-				searchList.fq("inheritPk_docvalues_string:" + SearchTool.escapeQueryChars(body.getString(SystemEvent.VAR_id)));
+				searchList.fq("inheritPk_docvalues_string:" + SearchTool.escapeQueryChars(body.getString(PersonStep.VAR_id)));
 				searchList.promiseDeepForClass(siteRequest).onSuccess(a -> {
 					try {
 						if(searchList.size() >= 1) {
-							SystemEvent o = searchList.getList().stream().findFirst().orElse(null);
-							SystemEvent o2 = new SystemEvent();
+							PersonStep o = searchList.getList().stream().findFirst().orElse(null);
+							PersonStep o2 = new PersonStep();
 							o2.setSiteRequest_(siteRequest);
 							JsonObject body2 = new JsonObject();
 							for(String f : body.fieldNames()) {
@@ -826,35 +864,35 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 							}
 							if(body2.size() > 0) {
 								siteRequest.setJsonObject(body2);
-								patchSystemEventFuture(o2, true).onSuccess(b -> {
-									LOG.info("Import SystemEvent {} succeeded, modified SystemEvent. ", body.getValue(SystemEvent.VAR_id));
+								patchPersonStepFuture(o2, true).onSuccess(b -> {
+									LOG.info("Import PersonStep {} succeeded, modified PersonStep. ", body.getValue(PersonStep.VAR_id));
 									eventHandler.handle(Future.succeededFuture());
 								}).onFailure(ex -> {
-									LOG.error(String.format("putimportSystemEventFuture failed. "), ex);
+									LOG.error(String.format("putimportPersonStepFuture failed. "), ex);
 									eventHandler.handle(Future.failedFuture(ex));
 								});
 							} else {
 								eventHandler.handle(Future.succeededFuture());
 							}
 						} else {
-							postSystemEventFuture(siteRequest, true).onSuccess(b -> {
-								LOG.info("Import SystemEvent {} succeeded, created new SystemEvent. ", body.getValue(SystemEvent.VAR_id));
+							postPersonStepFuture(siteRequest, true).onSuccess(b -> {
+								LOG.info("Import PersonStep {} succeeded, created new PersonStep. ", body.getValue(PersonStep.VAR_id));
 								eventHandler.handle(Future.succeededFuture());
 							}).onFailure(ex -> {
-								LOG.error(String.format("putimportSystemEventFuture failed. "), ex);
+								LOG.error(String.format("putimportPersonStepFuture failed. "), ex);
 								eventHandler.handle(Future.failedFuture(ex));
 							});
 						}
 					} catch(Exception ex) {
-						LOG.error(String.format("putimportSystemEventFuture failed. "), ex);
+						LOG.error(String.format("putimportPersonStepFuture failed. "), ex);
 						eventHandler.handle(Future.failedFuture(ex));
 					}
 				}).onFailure(ex -> {
-					LOG.error(String.format("putimportSystemEventFuture failed. "), ex);
+					LOG.error(String.format("putimportPersonStepFuture failed. "), ex);
 					eventHandler.handle(Future.failedFuture(ex));
 				});
 			} catch(Exception ex) {
-				LOG.error(String.format("putimportSystemEventFuture failed. "), ex);
+				LOG.error(String.format("putimportPersonStepFuture failed. "), ex);
 				eventHandler.handle(Future.failedFuture(ex));
 			}
 		}).onFailure(ex -> {
@@ -862,23 +900,23 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 				try {
 					eventHandler.handle(Future.succeededFuture(new ServiceResponse(302, "Found", null, MultiMap.caseInsensitiveMultiMap().add(HttpHeaders.LOCATION, "/logout?redirect_uri=" + URLEncoder.encode(serviceRequest.getExtra().getString("uri"), "UTF-8")))));
 				} catch(Exception ex2) {
-					LOG.error(String.format("putimportSystemEvent failed. ", ex2));
+					LOG.error(String.format("putimportPersonStep failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
 			} else {
-				LOG.error(String.format("putimportSystemEvent failed. "), ex);
+				LOG.error(String.format("putimportPersonStep failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		});
 	}
 
-	public Future<ServiceResponse> response200PUTImportSystemEvent(SiteRequestEnUS siteRequest) {
+	public Future<ServiceResponse> response200PUTImportPersonStep(SiteRequestEnUS siteRequest) {
 		Promise<ServiceResponse> promise = Promise.promise();
 		try {
 			JsonObject json = new JsonObject();
 			promise.complete(ServiceResponse.completedWithJson(Buffer.buffer(Optional.ofNullable(json).orElse(new JsonObject()).encodePrettily())));
 		} catch(Exception ex) {
-			LOG.error(String.format("response200PUTImportSystemEvent failed. "), ex);
+			LOG.error(String.format("response200PUTImportPersonStep failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
@@ -887,30 +925,49 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 	// SearchPage //
 
 	@Override
-	public void searchpageSystemEventId(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
-		searchpageSystemEvent(serviceRequest, eventHandler);
+	public void searchpagePersonStepId(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
+		searchpagePersonStep(serviceRequest, eventHandler);
 	}
 
 	@Override
-	public void searchpageSystemEvent(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
+	public void searchpagePersonStep(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smart-village-view-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 			try {
-				{
-					searchSystemEventList(siteRequest, false, true, false).onSuccess(listSystemEvent -> {
-						response200SearchPageSystemEvent(listSystemEvent).onSuccess(response -> {
+
+				List<String> roles = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_REQUIRED + "_PersonStep")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
+				List<String> roleReads = Arrays.asList("");
+				if(
+						!CollectionUtils.containsAny(siteRequest.getUserResourceRoles(), roles)
+						&& !CollectionUtils.containsAny(siteRequest.getUserRealmRoles(), roles)
+						&& !CollectionUtils.containsAny(siteRequest.getUserResourceRoles(), roleReads)
+						&& !CollectionUtils.containsAny(siteRequest.getUserRealmRoles(), roleReads)
+						) {
+					eventHandler.handle(Future.succeededFuture(
+						new ServiceResponse(401, "UNAUTHORIZED", 
+							Buffer.buffer().appendString(
+								new JsonObject()
+									.put("errorCode", "401")
+									.put("errorMessage", "roles required: " + String.join(", ", roles))
+									.encodePrettily()
+								), MultiMap.caseInsensitiveMultiMap()
+						)
+					));
+				} else {
+					searchPersonStepList(siteRequest, false, true, false).onSuccess(listPersonStep -> {
+						response200SearchPagePersonStep(listPersonStep).onSuccess(response -> {
 							eventHandler.handle(Future.succeededFuture(response));
-							LOG.debug(String.format("searchpageSystemEvent succeeded. "));
+							LOG.debug(String.format("searchpagePersonStep succeeded. "));
 						}).onFailure(ex -> {
-							LOG.error(String.format("searchpageSystemEvent failed. "), ex);
+							LOG.error(String.format("searchpagePersonStep failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
 					}).onFailure(ex -> {
-						LOG.error(String.format("searchpageSystemEvent failed. "), ex);
+						LOG.error(String.format("searchpagePersonStep failed. "), ex);
 						error(siteRequest, eventHandler, ex);
 					});
 				}
 			} catch(Exception ex) {
-				LOG.error(String.format("searchpageSystemEvent failed. "), ex);
+				LOG.error(String.format("searchpagePersonStep failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		}).onFailure(ex -> {
@@ -918,34 +975,34 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 				try {
 					eventHandler.handle(Future.succeededFuture(new ServiceResponse(302, "Found", null, MultiMap.caseInsensitiveMultiMap().add(HttpHeaders.LOCATION, "/logout?redirect_uri=" + URLEncoder.encode(serviceRequest.getExtra().getString("uri"), "UTF-8")))));
 				} catch(Exception ex2) {
-					LOG.error(String.format("searchpageSystemEvent failed. ", ex2));
+					LOG.error(String.format("searchpagePersonStep failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
 			} else {
-				LOG.error(String.format("searchpageSystemEvent failed. "), ex);
+				LOG.error(String.format("searchpagePersonStep failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		});
 	}
 
 
-	public void searchpageSystemEventPageInit(SystemEventPage page, SearchList<SystemEvent> listSystemEvent) {
+	public void searchpagePersonStepPageInit(PersonStepPage page, SearchList<PersonStep> listPersonStep) {
 	}
 
-	public String templateSearchPageSystemEvent() {
-		return Optional.ofNullable(config.getString(ConfigKeys.TEMPLATE_PATH)).orElse("templates") + "/enUS/SystemEventPage";
+	public String templateSearchPagePersonStep() {
+		return Optional.ofNullable(config.getString(ConfigKeys.TEMPLATE_PATH)).orElse("templates") + "/enUS/PersonStepPage";
 	}
-	public Future<ServiceResponse> response200SearchPageSystemEvent(SearchList<SystemEvent> listSystemEvent) {
+	public Future<ServiceResponse> response200SearchPagePersonStep(SearchList<PersonStep> listPersonStep) {
 		Promise<ServiceResponse> promise = Promise.promise();
 		try {
-			SiteRequestEnUS siteRequest = listSystemEvent.getSiteRequest_(SiteRequestEnUS.class);
-			SystemEventPage page = new SystemEventPage();
+			SiteRequestEnUS siteRequest = listPersonStep.getSiteRequest_(SiteRequestEnUS.class);
+			PersonStepPage page = new PersonStepPage();
 			MultiMap requestHeaders = MultiMap.caseInsensitiveMultiMap();
 			siteRequest.setRequestHeaders(requestHeaders);
 
-			page.setSearchListSystemEvent_(listSystemEvent);
+			page.setSearchListPersonStep_(listPersonStep);
 			page.setSiteRequest_(siteRequest);
-			page.promiseDeepSystemEventPage(siteRequest).onSuccess(a -> {
+			page.promiseDeepPersonStepPage(siteRequest).onSuccess(a -> {
 				JsonObject json = JsonObject.mapFrom(page);
 				json.put(ConfigKeys.STATIC_BASE_URL, config.getString(ConfigKeys.STATIC_BASE_URL));
 				json.put(ConfigKeys.GITHUB_ORG, config.getString(ConfigKeys.GITHUB_ORG));
@@ -954,7 +1011,7 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 				json.put(ConfigKeys.SITE_POWERED_BY_URL, config.getString(ConfigKeys.SITE_POWERED_BY_URL));
 				json.put(ConfigKeys.SITE_POWERED_BY_NAME, config.getString(ConfigKeys.SITE_POWERED_BY_NAME));
 				json.put(ConfigKeys.SITE_POWERED_BY_IMAGE_URI, config.getString(ConfigKeys.SITE_POWERED_BY_IMAGE_URI));
-				templateEngine.render(json, templateSearchPageSystemEvent()).onSuccess(buffer -> {
+				templateEngine.render(json, templateSearchPagePersonStep()).onSuccess(buffer -> {
 					promise.complete(new ServiceResponse(200, "OK", buffer, requestHeaders));
 				}).onFailure(ex -> {
 					promise.fail(ex);
@@ -963,7 +1020,7 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 				promise.fail(ex);
 			});
 		} catch(Exception ex) {
-			LOG.error(String.format("response200SearchPageSystemEvent failed. "), ex);
+			LOG.error(String.format("response200SearchPagePersonStep failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
@@ -971,62 +1028,62 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 
 	// General //
 
-	public Future<SystemEvent> createSystemEvent(SiteRequestEnUS siteRequest) {
-		Promise<SystemEvent> promise = Promise.promise();
+	public Future<PersonStep> createPersonStep(SiteRequestEnUS siteRequest) {
+		Promise<PersonStep> promise = Promise.promise();
 		try {
-			SystemEvent o = new SystemEvent();
+			PersonStep o = new PersonStep();
 			o.setSiteRequest_(siteRequest);
 			promise.complete(o);
 		} catch(Exception ex) {
-			LOG.error(String.format("createSystemEvent failed. "), ex);
+			LOG.error(String.format("createPersonStep failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
 	}
 
-	public void searchSystemEventQ(SearchList<SystemEvent> searchList, String entityVar, String valueIndexed, String varIndexed) {
+	public void searchPersonStepQ(SearchList<PersonStep> searchList, String entityVar, String valueIndexed, String varIndexed) {
 		searchList.q(varIndexed + ":" + ("*".equals(valueIndexed) ? valueIndexed : SearchTool.escapeQueryChars(valueIndexed)));
 		if(!"*".equals(entityVar)) {
 		}
 	}
 
-	public String searchSystemEventFq(SearchList<SystemEvent> searchList, String entityVar, String valueIndexed, String varIndexed) {
+	public String searchPersonStepFq(SearchList<PersonStep> searchList, String entityVar, String valueIndexed, String varIndexed) {
 		if(varIndexed == null)
 			throw new RuntimeException(String.format("\"%s\" is not an indexed entity. ", entityVar));
 		if(StringUtils.startsWith(valueIndexed, "[")) {
 			String[] fqs = StringUtils.substringBefore(StringUtils.substringAfter(valueIndexed, "["), "]").split(" TO ");
 			if(fqs.length != 2)
 				throw new RuntimeException(String.format("\"%s\" invalid range query. ", valueIndexed));
-			String fq1 = fqs[0].equals("*") ? fqs[0] : SystemEvent.staticSearchFqForClass(entityVar, searchList.getSiteRequest_(SiteRequestEnUS.class), fqs[0]);
-			String fq2 = fqs[1].equals("*") ? fqs[1] : SystemEvent.staticSearchFqForClass(entityVar, searchList.getSiteRequest_(SiteRequestEnUS.class), fqs[1]);
+			String fq1 = fqs[0].equals("*") ? fqs[0] : PersonStep.staticSearchFqForClass(entityVar, searchList.getSiteRequest_(SiteRequestEnUS.class), fqs[0]);
+			String fq2 = fqs[1].equals("*") ? fqs[1] : PersonStep.staticSearchFqForClass(entityVar, searchList.getSiteRequest_(SiteRequestEnUS.class), fqs[1]);
 			 return varIndexed + ":[" + fq1 + " TO " + fq2 + "]";
 		} else {
-			return varIndexed + ":" + SearchTool.escapeQueryChars(SystemEvent.staticSearchFqForClass(entityVar, searchList.getSiteRequest_(SiteRequestEnUS.class), valueIndexed)).replace("\\", "\\\\");
+			return varIndexed + ":" + SearchTool.escapeQueryChars(PersonStep.staticSearchFqForClass(entityVar, searchList.getSiteRequest_(SiteRequestEnUS.class), valueIndexed)).replace("\\", "\\\\");
 		}
 	}
 
-	public void searchSystemEventSort(SearchList<SystemEvent> searchList, String entityVar, String valueIndexed, String varIndexed) {
+	public void searchPersonStepSort(SearchList<PersonStep> searchList, String entityVar, String valueIndexed, String varIndexed) {
 		if(varIndexed == null)
 			throw new RuntimeException(String.format("\"%s\" is not an indexed entity. ", entityVar));
 		searchList.sort(varIndexed, valueIndexed);
 	}
 
-	public void searchSystemEventRows(SearchList<SystemEvent> searchList, Long valueRows) {
+	public void searchPersonStepRows(SearchList<PersonStep> searchList, Long valueRows) {
 			searchList.rows(valueRows != null ? valueRows : 10L);
 	}
 
-	public void searchSystemEventStart(SearchList<SystemEvent> searchList, Long valueStart) {
+	public void searchPersonStepStart(SearchList<PersonStep> searchList, Long valueStart) {
 		searchList.start(valueStart);
 	}
 
-	public void searchSystemEventVar(SearchList<SystemEvent> searchList, String var, String value) {
+	public void searchPersonStepVar(SearchList<PersonStep> searchList, String var, String value) {
 		searchList.getSiteRequest_(SiteRequestEnUS.class).getRequestVars().put(var, value);
 	}
 
-	public void searchSystemEventUri(SearchList<SystemEvent> searchList) {
+	public void searchPersonStepUri(SearchList<PersonStep> searchList) {
 	}
 
-	public Future<ServiceResponse> varsSystemEvent(SiteRequestEnUS siteRequest) {
+	public Future<ServiceResponse> varsPersonStep(SiteRequestEnUS siteRequest) {
 		Promise<ServiceResponse> promise = Promise.promise();
 		try {
 			ServiceRequest serviceRequest = siteRequest.getServiceRequest();
@@ -1044,33 +1101,33 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 						siteRequest.getRequestVars().put(entityVar, valueIndexed);
 					}
 				} catch(Exception ex) {
-					LOG.error(String.format("searchSystemEvent failed. "), ex);
+					LOG.error(String.format("searchPersonStep failed. "), ex);
 					promise.fail(ex);
 				}
 			});
 			promise.complete();
 		} catch(Exception ex) {
-			LOG.error(String.format("searchSystemEvent failed. "), ex);
+			LOG.error(String.format("searchPersonStep failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
 	}
 
-	public Future<SearchList<SystemEvent>> searchSystemEventList(SiteRequestEnUS siteRequest, Boolean populate, Boolean store, Boolean modify) {
-		Promise<SearchList<SystemEvent>> promise = Promise.promise();
+	public Future<SearchList<PersonStep>> searchPersonStepList(SiteRequestEnUS siteRequest, Boolean populate, Boolean store, Boolean modify) {
+		Promise<SearchList<PersonStep>> promise = Promise.promise();
 		try {
 			ServiceRequest serviceRequest = siteRequest.getServiceRequest();
 			String entityListStr = siteRequest.getServiceRequest().getParams().getJsonObject("query").getString("fl");
 			String[] entityList = entityListStr == null ? null : entityListStr.split(",\\s*");
-			SearchList<SystemEvent> searchList = new SearchList<SystemEvent>();
+			SearchList<PersonStep> searchList = new SearchList<PersonStep>();
 			searchList.setPopulate(populate);
 			searchList.setStore(store);
 			searchList.q("*:*");
-			searchList.setC(SystemEvent.class);
+			searchList.setC(PersonStep.class);
 			searchList.setSiteRequest_(siteRequest);
 			if(entityList != null) {
 				for(String v : entityList) {
-					searchList.fl(SystemEvent.varIndexedSystemEvent(v));
+					searchList.fl(PersonStep.varIndexedPersonStep(v));
 				}
 			}
 
@@ -1103,7 +1160,7 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 							String[] varsIndexed = new String[entityVars.length];
 							for(Integer i = 0; i < entityVars.length; i++) {
 								entityVar = entityVars[i];
-								varsIndexed[i] = SystemEvent.varIndexedSystemEvent(entityVar);
+								varsIndexed[i] = PersonStep.varIndexedPersonStep(entityVar);
 							}
 							searchList.facetPivot((solrLocalParams == null ? "" : solrLocalParams) + StringUtils.join(varsIndexed, ","));
 						}
@@ -1118,8 +1175,8 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 										while(foundQ) {
 											entityVar = mQ.group(1).trim();
 											valueIndexed = mQ.group(2).trim();
-											varIndexed = SystemEvent.varIndexedSystemEvent(entityVar);
-											String entityQ = searchSystemEventFq(searchList, entityVar, valueIndexed, varIndexed);
+											varIndexed = PersonStep.varIndexedPersonStep(entityVar);
+											String entityQ = searchPersonStepFq(searchList, entityVar, valueIndexed, varIndexed);
 											mQ.appendReplacement(sb, entityQ);
 											foundQ = mQ.find();
 										}
@@ -1135,8 +1192,8 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 										while(foundFq) {
 											entityVar = mFq.group(1).trim();
 											valueIndexed = mFq.group(2).trim();
-											varIndexed = SystemEvent.varIndexedSystemEvent(entityVar);
-											String entityFq = searchSystemEventFq(searchList, entityVar, valueIndexed, varIndexed);
+											varIndexed = PersonStep.varIndexedPersonStep(entityVar);
+											String entityFq = searchPersonStepFq(searchList, entityVar, valueIndexed, varIndexed);
 											mFq.appendReplacement(sb, entityFq);
 											foundFq = mFq.find();
 										}
@@ -1147,23 +1204,23 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 								case "sort":
 									entityVar = StringUtils.trim(StringUtils.substringBefore((String)paramObject, " "));
 									valueIndexed = StringUtils.trim(StringUtils.substringAfter((String)paramObject, " "));
-									varIndexed = SystemEvent.varIndexedSystemEvent(entityVar);
-									searchSystemEventSort(searchList, entityVar, valueIndexed, varIndexed);
+									varIndexed = PersonStep.varIndexedPersonStep(entityVar);
+									searchPersonStepSort(searchList, entityVar, valueIndexed, varIndexed);
 									break;
 								case "start":
 									valueStart = paramObject instanceof Long ? (Long)paramObject : Long.parseLong(paramObject.toString());
-									searchSystemEventStart(searchList, valueStart);
+									searchPersonStepStart(searchList, valueStart);
 									break;
 								case "rows":
 									valueRows = paramObject instanceof Long ? (Long)paramObject : Long.parseLong(paramObject.toString());
-									searchSystemEventRows(searchList, valueRows);
+									searchPersonStepRows(searchList, valueRows);
 									break;
 								case "stats":
 									searchList.stats((Boolean)paramObject);
 									break;
 								case "stats.field":
 									entityVar = (String)paramObject;
-									varIndexed = SystemEvent.varIndexedSystemEvent(entityVar);
+									varIndexed = PersonStep.varIndexedPersonStep(entityVar);
 									if(varIndexed != null)
 										searchList.statsField(varIndexed);
 									break;
@@ -1190,20 +1247,20 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 									if(foundFacetRange) {
 										String solrLocalParams = mFacetRange.group(1);
 										entityVar = mFacetRange.group(2).trim();
-										varIndexed = SystemEvent.varIndexedSystemEvent(entityVar);
+										varIndexed = PersonStep.varIndexedPersonStep(entityVar);
 										searchList.facetRange((solrLocalParams == null ? "" : solrLocalParams) + varIndexed);
 									}
 									break;
 								case "facet.field":
 									entityVar = (String)paramObject;
-									varIndexed = SystemEvent.varIndexedSystemEvent(entityVar);
+									varIndexed = PersonStep.varIndexedPersonStep(entityVar);
 									if(varIndexed != null)
 										searchList.facetField(varIndexed);
 									break;
 								case "var":
 									entityVar = StringUtils.trim(StringUtils.substringBefore((String)paramObject, ":"));
 									valueIndexed = URLDecoder.decode(StringUtils.trim(StringUtils.substringAfter((String)paramObject, ":")), "UTF-8");
-									searchSystemEventVar(searchList, entityVar, valueIndexed);
+									searchPersonStepVar(searchList, entityVar, valueIndexed);
 									break;
 								case "cursorMark":
 									valueCursorMark = (String)paramObject;
@@ -1211,7 +1268,7 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 									break;
 							}
 						}
-						searchSystemEventUri(searchList);
+						searchPersonStepUri(searchList);
 					}
 				} catch(Exception e) {
 					ExceptionUtils.rethrow(e);
@@ -1220,23 +1277,23 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 			if("*:*".equals(searchList.getQuery()) && searchList.getSorts().size() == 0) {
 				searchList.sort("created_docvalues_date", "desc");
 			}
-			searchSystemEvent2(siteRequest, populate, store, modify, searchList);
+			searchPersonStep2(siteRequest, populate, store, modify, searchList);
 			searchList.promiseDeepForClass(siteRequest).onSuccess(a -> {
 				promise.complete(searchList);
 			}).onFailure(ex -> {
-				LOG.error(String.format("searchSystemEvent failed. "), ex);
+				LOG.error(String.format("searchPersonStep failed. "), ex);
 				promise.fail(ex);
 			});
 		} catch(Exception ex) {
-			LOG.error(String.format("searchSystemEvent failed. "), ex);
+			LOG.error(String.format("searchPersonStep failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
 	}
-	public void searchSystemEvent2(SiteRequestEnUS siteRequest, Boolean populate, Boolean store, Boolean modify, SearchList<SystemEvent> searchList) {
+	public void searchPersonStep2(SiteRequestEnUS siteRequest, Boolean populate, Boolean store, Boolean modify, SearchList<PersonStep> searchList) {
 	}
 
-	public Future<Void> persistSystemEvent(SystemEvent o, Boolean patch) {
+	public Future<Void> persistPersonStep(PersonStep o, Boolean patch) {
 		Promise<Void> promise = Promise.promise();
 		try {
 			SiteRequestEnUS siteRequest = o.getSiteRequest_();
@@ -1256,23 +1313,23 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 							try {
 								o.persistForClass(columnName, columnValue);
 							} catch(Exception e) {
-								LOG.error(String.format("persistSystemEvent failed. "), e);
+								LOG.error(String.format("persistPersonStep failed. "), e);
 							}
 						}
 					});
 					promise.complete();
 				} catch(Exception ex) {
-					LOG.error(String.format("persistSystemEvent failed. "), ex);
+					LOG.error(String.format("persistPersonStep failed. "), ex);
 					promise.fail(ex);
 				}
 		} catch(Exception ex) {
-			LOG.error(String.format("persistSystemEvent failed. "), ex);
+			LOG.error(String.format("persistPersonStep failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
 	}
 
-	public Future<Void> indexSystemEvent(SystemEvent o) {
+	public Future<Void> indexPersonStep(PersonStep o) {
 		Promise<Void> promise = Promise.promise();
 		try {
 			SiteRequestEnUS siteRequest = o.getSiteRequest_();
@@ -1283,7 +1340,7 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 				json.put("add", add);
 				JsonObject doc = new JsonObject();
 				add.put("doc", doc);
-				o.indexSystemEvent(doc);
+				o.indexPersonStep(doc);
 				String solrHostName = siteRequest.getConfig().getString(ConfigKeys.SOLR_HOST_NAME);
 				Integer solrPort = siteRequest.getConfig().getInteger(ConfigKeys.SOLR_PORT);
 				String solrCollection = siteRequest.getConfig().getString(ConfigKeys.SOLR_COLLECTION);
@@ -1297,15 +1354,15 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 				webClient.post(solrPort, solrHostName, solrRequestUri).putHeader("Content-Type", "application/json").expect(ResponsePredicate.SC_OK).sendBuffer(json.toBuffer()).onSuccess(b -> {
 					promise.complete();
 				}).onFailure(ex -> {
-					LOG.error(String.format("indexSystemEvent failed. "), new RuntimeException(ex));
+					LOG.error(String.format("indexPersonStep failed. "), new RuntimeException(ex));
 					promise.fail(ex);
 				});
 			}).onFailure(ex -> {
-				LOG.error(String.format("indexSystemEvent failed. "), ex);
+				LOG.error(String.format("indexPersonStep failed. "), ex);
 				promise.fail(ex);
 			});
 		} catch(Exception ex) {
-			LOG.error(String.format("indexSystemEvent failed. "), ex);
+			LOG.error(String.format("indexPersonStep failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();

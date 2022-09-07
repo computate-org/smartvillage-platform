@@ -1,4 +1,4 @@
-package org.computate.smartvillageview.enus.model.iotnode;
+package org.computate.smartvillageview.enus.model.traffic.person.step;
 
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.smartvillageview.enus.model.base.BaseModel;
@@ -30,9 +30,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.math.RoundingMode;
 import java.util.Map;
-import org.computate.smartvillageview.enus.model.base.BaseModelPage;
+import org.computate.smartvillageview.enus.page.PageLayout;
 import org.computate.vertx.search.list.SearchList;
-import org.computate.smartvillageview.enus.model.iotnode.IotNode;
+import org.computate.smartvillageview.enus.model.traffic.person.step.PersonStep;
 import java.lang.String;
 import java.time.ZoneId;
 import java.util.Locale;
@@ -51,7 +51,6 @@ import java.math.BigDecimal;
 import io.vertx.core.json.JsonArray;
 import org.computate.search.response.solr.SolrResponse.Stats;
 import org.computate.search.response.solr.SolrResponse.FacetCounts;
-import java.lang.Long;
 import org.computate.search.wrap.Wrap;
 import io.vertx.core.Promise;
 import io.vertx.core.Future;
@@ -59,74 +58,74 @@ import io.vertx.core.Future;
 /**	
  * <h1>Suggestions that can generate more code for you: </h1>
  * <ol>
- * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class IotNodeGenPageGen into the class IotNodeGenPage. 
+ * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class PersonStepGenPageGen into the class PersonStepGenPage. 
  * </li>
- * <li>You can add a class comment "Api: true" if you wish to GET, POST, PATCH or PUT these IotNodeGenPage objects in a RESTful API. 
+ * <li>You can add a class comment "Api: true" if you wish to GET, POST, PATCH or PUT these PersonStepGenPage objects in a RESTful API. 
  * </li>
  * </ol>
- * <h1>About the IotNodeGenPage class and it's generated class IotNodeGenPageGen&lt;BaseModelPage&gt;: </h1>
+ * <h1>About the PersonStepGenPage class and it's generated class PersonStepGenPageGen&lt;PageLayout&gt;: </h1>
  * <p>
  * This Java class extends a generated Java class built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
  * Whenever this Java class is modified or touched, the watch service installed as described in the README, indexes all the information about this Java class in a local Apache Solr Search Engine. 
  * If you are running the service, you can see the indexed data about this Java Class here: 
  * </p>
- * <p><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstClasse_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.iotnode.IotNodeGenPage">Find the class IotNodeGenPage in Solr. </a></p>
+ * <p><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstClasse_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStepGenPage">Find the class PersonStepGenPage in Solr. </a></p>
  * <p>
  * The extended class ending with "Gen" did not exist at first, but was automatically created by the same watch service based on the data retrieved from the local Apache Server search engine. 
  * The extended class contains many generated fields, getters, setters, initialization code, and helper methods to help build a website and API fast, reactive, and scalable. 
  * </p>
  * <p>
- * Delete the class IotNodeGenPage in Solr: 
- * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.iotnode.IotNodeGenPage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * Delete the class PersonStepGenPage in Solr: 
+ * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStepGenPage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
- * Delete  the package org.computate.smartvillageview.enus.model.iotnode in Solr: 
- * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.model.iotnode&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * Delete  the package org.computate.smartvillageview.enus.model.traffic.person.step in Solr: 
+ * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
  * Delete  the project smart-village-view in Solr: 
  * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smart\-village\-view&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  **/
-public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
-	protected static final Logger LOG = LoggerFactory.getLogger(IotNodeGenPage.class);
+public abstract class PersonStepGenPageGen<DEV> extends PageLayout {
+	protected static final Logger LOG = LoggerFactory.getLogger(PersonStepGenPage.class);
 
-	////////////////////////
-	// searchListIotNode_ //
-	////////////////////////
+	///////////////////////////
+	// searchListPersonStep_ //
+	///////////////////////////
 
-	/**	 The entity searchListIotNode_
+	/**	 The entity searchListPersonStep_
 	 *	 is defined as null before being initialized. 
 	 */
 	@JsonIgnore
 	@JsonInclude(Include.NON_NULL)
-	protected SearchList<IotNode> searchListIotNode_;
+	protected SearchList<PersonStep> searchListPersonStep_;
 
-	/**	<br> The entity searchListIotNode_
+	/**	<br> The entity searchListPersonStep_
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.iotnode.IotNodeGenPage&fq=entiteVar_enUS_indexed_string:searchListIotNode_">Find the entity searchListIotNode_ in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStepGenPage&fq=entiteVar_enUS_indexed_string:searchListPersonStep_">Find the entity searchListPersonStep_ in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected abstract void _searchListIotNode_(Wrap<SearchList<IotNode>> w);
+	protected abstract void _searchListPersonStep_(Wrap<SearchList<PersonStep>> w);
 
-	public SearchList<IotNode> getSearchListIotNode_() {
-		return searchListIotNode_;
+	public SearchList<PersonStep> getSearchListPersonStep_() {
+		return searchListPersonStep_;
 	}
 
-	public void setSearchListIotNode_(SearchList<IotNode> searchListIotNode_) {
-		this.searchListIotNode_ = searchListIotNode_;
+	public void setSearchListPersonStep_(SearchList<PersonStep> searchListPersonStep_) {
+		this.searchListPersonStep_ = searchListPersonStep_;
 	}
-	public static SearchList<IotNode> staticSetSearchListIotNode_(SiteRequestEnUS siteRequest_, String o) {
+	public static SearchList<PersonStep> staticSetSearchListPersonStep_(SiteRequestEnUS siteRequest_, String o) {
 		return null;
 	}
-	protected IotNodeGenPage searchListIotNode_Init() {
-		Wrap<SearchList<IotNode>> searchListIotNode_Wrap = new Wrap<SearchList<IotNode>>().var("searchListIotNode_");
-		if(searchListIotNode_ == null) {
-			_searchListIotNode_(searchListIotNode_Wrap);
-			setSearchListIotNode_(searchListIotNode_Wrap.o);
+	protected PersonStepGenPage searchListPersonStep_Init() {
+		Wrap<SearchList<PersonStep>> searchListPersonStep_Wrap = new Wrap<SearchList<PersonStep>>().var("searchListPersonStep_");
+		if(searchListPersonStep_ == null) {
+			_searchListPersonStep_(searchListPersonStep_Wrap);
+			setSearchListPersonStep_(searchListPersonStep_Wrap.o);
 		}
-		return (IotNodeGenPage)this;
+		return (PersonStepGenPage)this;
 	}
 
 	//////////////////
@@ -142,7 +141,7 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 
 	/**	<br> The entity pageResponse
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.iotnode.IotNodeGenPage&fq=entiteVar_enUS_indexed_string:pageResponse">Find the entity pageResponse in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStepGenPage&fq=entiteVar_enUS_indexed_string:pageResponse">Find the entity pageResponse in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -152,18 +151,18 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 		return pageResponse;
 	}
 	public void setPageResponse(String o) {
-		this.pageResponse = IotNodeGenPage.staticSetPageResponse(siteRequest_, o);
+		this.pageResponse = PersonStepGenPage.staticSetPageResponse(siteRequest_, o);
 	}
 	public static String staticSetPageResponse(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	protected IotNodeGenPage pageResponseInit() {
+	protected PersonStepGenPage pageResponseInit() {
 		Wrap<String> pageResponseWrap = new Wrap<String>().var("pageResponse");
 		if(pageResponse == null) {
 			_pageResponse(pageResponseWrap);
 			setPageResponse(pageResponseWrap.o);
 		}
-		return (IotNodeGenPage)this;
+		return (PersonStepGenPage)this;
 	}
 
 	public static String staticSearchPageResponse(SiteRequestEnUS siteRequest_, String o) {
@@ -175,7 +174,7 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 	}
 
 	public static String staticSearchFqPageResponse(SiteRequestEnUS siteRequest_, String o) {
-		return IotNodeGenPage.staticSearchStrPageResponse(siteRequest_, IotNodeGenPage.staticSearchPageResponse(siteRequest_, IotNodeGenPage.staticSetPageResponse(siteRequest_, o)));
+		return PersonStepGenPage.staticSearchStrPageResponse(siteRequest_, PersonStepGenPage.staticSearchPageResponse(siteRequest_, PersonStepGenPage.staticSetPageResponse(siteRequest_, o)));
 	}
 
 	///////////////////
@@ -191,7 +190,7 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 
 	/**	<br> The entity defaultZoneId
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.iotnode.IotNodeGenPage&fq=entiteVar_enUS_indexed_string:defaultZoneId">Find the entity defaultZoneId in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStepGenPage&fq=entiteVar_enUS_indexed_string:defaultZoneId">Find the entity defaultZoneId in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -201,18 +200,18 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 		return defaultZoneId;
 	}
 	public void setDefaultZoneId(String o) {
-		this.defaultZoneId = IotNodeGenPage.staticSetDefaultZoneId(siteRequest_, o);
+		this.defaultZoneId = PersonStepGenPage.staticSetDefaultZoneId(siteRequest_, o);
 	}
 	public static String staticSetDefaultZoneId(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	protected IotNodeGenPage defaultZoneIdInit() {
+	protected PersonStepGenPage defaultZoneIdInit() {
 		Wrap<String> defaultZoneIdWrap = new Wrap<String>().var("defaultZoneId");
 		if(defaultZoneId == null) {
 			_defaultZoneId(defaultZoneIdWrap);
 			setDefaultZoneId(defaultZoneIdWrap.o);
 		}
-		return (IotNodeGenPage)this;
+		return (PersonStepGenPage)this;
 	}
 
 	public static String staticSearchDefaultZoneId(SiteRequestEnUS siteRequest_, String o) {
@@ -224,7 +223,7 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 	}
 
 	public static String staticSearchFqDefaultZoneId(SiteRequestEnUS siteRequest_, String o) {
-		return IotNodeGenPage.staticSearchStrDefaultZoneId(siteRequest_, IotNodeGenPage.staticSearchDefaultZoneId(siteRequest_, IotNodeGenPage.staticSetDefaultZoneId(siteRequest_, o)));
+		return PersonStepGenPage.staticSearchStrDefaultZoneId(siteRequest_, PersonStepGenPage.staticSearchDefaultZoneId(siteRequest_, PersonStepGenPage.staticSetDefaultZoneId(siteRequest_, o)));
 	}
 
 	/////////////////////
@@ -240,7 +239,7 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 
 	/**	<br> The entity defaultTimeZone
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.iotnode.IotNodeGenPage&fq=entiteVar_enUS_indexed_string:defaultTimeZone">Find the entity defaultTimeZone in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStepGenPage&fq=entiteVar_enUS_indexed_string:defaultTimeZone">Find the entity defaultTimeZone in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -256,13 +255,13 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 	public static ZoneId staticSetDefaultTimeZone(SiteRequestEnUS siteRequest_, String o) {
 		return null;
 	}
-	protected IotNodeGenPage defaultTimeZoneInit() {
+	protected PersonStepGenPage defaultTimeZoneInit() {
 		Wrap<ZoneId> defaultTimeZoneWrap = new Wrap<ZoneId>().var("defaultTimeZone");
 		if(defaultTimeZone == null) {
 			_defaultTimeZone(defaultTimeZoneWrap);
 			setDefaultTimeZone(defaultTimeZoneWrap.o);
 		}
-		return (IotNodeGenPage)this;
+		return (PersonStepGenPage)this;
 	}
 
 	/////////////////////
@@ -278,7 +277,7 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 
 	/**	<br> The entity defaultLocaleId
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.iotnode.IotNodeGenPage&fq=entiteVar_enUS_indexed_string:defaultLocaleId">Find the entity defaultLocaleId in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStepGenPage&fq=entiteVar_enUS_indexed_string:defaultLocaleId">Find the entity defaultLocaleId in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -288,18 +287,18 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 		return defaultLocaleId;
 	}
 	public void setDefaultLocaleId(String o) {
-		this.defaultLocaleId = IotNodeGenPage.staticSetDefaultLocaleId(siteRequest_, o);
+		this.defaultLocaleId = PersonStepGenPage.staticSetDefaultLocaleId(siteRequest_, o);
 	}
 	public static String staticSetDefaultLocaleId(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	protected IotNodeGenPage defaultLocaleIdInit() {
+	protected PersonStepGenPage defaultLocaleIdInit() {
 		Wrap<String> defaultLocaleIdWrap = new Wrap<String>().var("defaultLocaleId");
 		if(defaultLocaleId == null) {
 			_defaultLocaleId(defaultLocaleIdWrap);
 			setDefaultLocaleId(defaultLocaleIdWrap.o);
 		}
-		return (IotNodeGenPage)this;
+		return (PersonStepGenPage)this;
 	}
 
 	public static String staticSearchDefaultLocaleId(SiteRequestEnUS siteRequest_, String o) {
@@ -311,7 +310,7 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 	}
 
 	public static String staticSearchFqDefaultLocaleId(SiteRequestEnUS siteRequest_, String o) {
-		return IotNodeGenPage.staticSearchStrDefaultLocaleId(siteRequest_, IotNodeGenPage.staticSearchDefaultLocaleId(siteRequest_, IotNodeGenPage.staticSetDefaultLocaleId(siteRequest_, o)));
+		return PersonStepGenPage.staticSearchStrDefaultLocaleId(siteRequest_, PersonStepGenPage.staticSearchDefaultLocaleId(siteRequest_, PersonStepGenPage.staticSetDefaultLocaleId(siteRequest_, o)));
 	}
 
 	///////////////////
@@ -327,7 +326,7 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 
 	/**	<br> The entity defaultLocale
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.iotnode.IotNodeGenPage&fq=entiteVar_enUS_indexed_string:defaultLocale">Find the entity defaultLocale in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStepGenPage&fq=entiteVar_enUS_indexed_string:defaultLocale">Find the entity defaultLocale in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -343,13 +342,13 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 	public static Locale staticSetDefaultLocale(SiteRequestEnUS siteRequest_, String o) {
 		return null;
 	}
-	protected IotNodeGenPage defaultLocaleInit() {
+	protected PersonStepGenPage defaultLocaleInit() {
 		Wrap<Locale> defaultLocaleWrap = new Wrap<Locale>().var("defaultLocale");
 		if(defaultLocale == null) {
 			_defaultLocale(defaultLocaleWrap);
 			setDefaultLocale(defaultLocaleWrap.o);
 		}
-		return (IotNodeGenPage)this;
+		return (PersonStepGenPage)this;
 	}
 
 	/////////////////////
@@ -365,7 +364,7 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 
 	/**	<br> The entity defaultRangeGap
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.iotnode.IotNodeGenPage&fq=entiteVar_enUS_indexed_string:defaultRangeGap">Find the entity defaultRangeGap in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStepGenPage&fq=entiteVar_enUS_indexed_string:defaultRangeGap">Find the entity defaultRangeGap in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -375,18 +374,18 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 		return defaultRangeGap;
 	}
 	public void setDefaultRangeGap(String o) {
-		this.defaultRangeGap = IotNodeGenPage.staticSetDefaultRangeGap(siteRequest_, o);
+		this.defaultRangeGap = PersonStepGenPage.staticSetDefaultRangeGap(siteRequest_, o);
 	}
 	public static String staticSetDefaultRangeGap(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	protected IotNodeGenPage defaultRangeGapInit() {
+	protected PersonStepGenPage defaultRangeGapInit() {
 		Wrap<String> defaultRangeGapWrap = new Wrap<String>().var("defaultRangeGap");
 		if(defaultRangeGap == null) {
 			_defaultRangeGap(defaultRangeGapWrap);
 			setDefaultRangeGap(defaultRangeGapWrap.o);
 		}
-		return (IotNodeGenPage)this;
+		return (PersonStepGenPage)this;
 	}
 
 	public static String staticSearchDefaultRangeGap(SiteRequestEnUS siteRequest_, String o) {
@@ -398,7 +397,7 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 	}
 
 	public static String staticSearchFqDefaultRangeGap(SiteRequestEnUS siteRequest_, String o) {
-		return IotNodeGenPage.staticSearchStrDefaultRangeGap(siteRequest_, IotNodeGenPage.staticSearchDefaultRangeGap(siteRequest_, IotNodeGenPage.staticSetDefaultRangeGap(siteRequest_, o)));
+		return PersonStepGenPage.staticSearchStrDefaultRangeGap(siteRequest_, PersonStepGenPage.staticSearchDefaultRangeGap(siteRequest_, PersonStepGenPage.staticSetDefaultRangeGap(siteRequest_, o)));
 	}
 
 	/////////////////////
@@ -417,7 +416,7 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 
 	/**	<br> The entity defaultRangeEnd
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.iotnode.IotNodeGenPage&fq=entiteVar_enUS_indexed_string:defaultRangeEnd">Find the entity defaultRangeEnd in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStepGenPage&fq=entiteVar_enUS_indexed_string:defaultRangeEnd">Find the entity defaultRangeEnd in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -437,7 +436,7 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 	/** Example: 2011-12-03T10:15:30+01:00 **/
 	@JsonIgnore
 	public void setDefaultRangeEnd(String o) {
-		this.defaultRangeEnd = IotNodeGenPage.staticSetDefaultRangeEnd(siteRequest_, o);
+		this.defaultRangeEnd = PersonStepGenPage.staticSetDefaultRangeEnd(siteRequest_, o);
 	}
 	public static ZonedDateTime staticSetDefaultRangeEnd(SiteRequestEnUS siteRequest_, String o) {
 		if(StringUtils.endsWith(o, "]"))
@@ -453,13 +452,13 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 	public void setDefaultRangeEnd(Date o) {
 		this.defaultRangeEnd = o == null ? null : ZonedDateTime.ofInstant(o.toInstant(), ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
 	}
-	protected IotNodeGenPage defaultRangeEndInit() {
+	protected PersonStepGenPage defaultRangeEndInit() {
 		Wrap<ZonedDateTime> defaultRangeEndWrap = new Wrap<ZonedDateTime>().var("defaultRangeEnd");
 		if(defaultRangeEnd == null) {
 			_defaultRangeEnd(defaultRangeEndWrap);
 			setDefaultRangeEnd(defaultRangeEndWrap.o);
 		}
-		return (IotNodeGenPage)this;
+		return (PersonStepGenPage)this;
 	}
 
 	public static Date staticSearchDefaultRangeEnd(SiteRequestEnUS siteRequest_, ZonedDateTime o) {
@@ -471,7 +470,7 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 	}
 
 	public static String staticSearchFqDefaultRangeEnd(SiteRequestEnUS siteRequest_, String o) {
-		return IotNodeGenPage.staticSearchStrDefaultRangeEnd(siteRequest_, IotNodeGenPage.staticSearchDefaultRangeEnd(siteRequest_, IotNodeGenPage.staticSetDefaultRangeEnd(siteRequest_, o)));
+		return PersonStepGenPage.staticSearchStrDefaultRangeEnd(siteRequest_, PersonStepGenPage.staticSearchDefaultRangeEnd(siteRequest_, PersonStepGenPage.staticSetDefaultRangeEnd(siteRequest_, o)));
 	}
 
 	///////////////////////
@@ -490,7 +489,7 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 
 	/**	<br> The entity defaultRangeStart
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.iotnode.IotNodeGenPage&fq=entiteVar_enUS_indexed_string:defaultRangeStart">Find the entity defaultRangeStart in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStepGenPage&fq=entiteVar_enUS_indexed_string:defaultRangeStart">Find the entity defaultRangeStart in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -510,7 +509,7 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 	/** Example: 2011-12-03T10:15:30+01:00 **/
 	@JsonIgnore
 	public void setDefaultRangeStart(String o) {
-		this.defaultRangeStart = IotNodeGenPage.staticSetDefaultRangeStart(siteRequest_, o);
+		this.defaultRangeStart = PersonStepGenPage.staticSetDefaultRangeStart(siteRequest_, o);
 	}
 	public static ZonedDateTime staticSetDefaultRangeStart(SiteRequestEnUS siteRequest_, String o) {
 		if(StringUtils.endsWith(o, "]"))
@@ -526,13 +525,13 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 	public void setDefaultRangeStart(Date o) {
 		this.defaultRangeStart = o == null ? null : ZonedDateTime.ofInstant(o.toInstant(), ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
 	}
-	protected IotNodeGenPage defaultRangeStartInit() {
+	protected PersonStepGenPage defaultRangeStartInit() {
 		Wrap<ZonedDateTime> defaultRangeStartWrap = new Wrap<ZonedDateTime>().var("defaultRangeStart");
 		if(defaultRangeStart == null) {
 			_defaultRangeStart(defaultRangeStartWrap);
 			setDefaultRangeStart(defaultRangeStartWrap.o);
 		}
-		return (IotNodeGenPage)this;
+		return (PersonStepGenPage)this;
 	}
 
 	public static Date staticSearchDefaultRangeStart(SiteRequestEnUS siteRequest_, ZonedDateTime o) {
@@ -544,7 +543,7 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 	}
 
 	public static String staticSearchFqDefaultRangeStart(SiteRequestEnUS siteRequest_, String o) {
-		return IotNodeGenPage.staticSearchStrDefaultRangeStart(siteRequest_, IotNodeGenPage.staticSearchDefaultRangeStart(siteRequest_, IotNodeGenPage.staticSetDefaultRangeStart(siteRequest_, o)));
+		return PersonStepGenPage.staticSearchStrDefaultRangeStart(siteRequest_, PersonStepGenPage.staticSearchDefaultRangeStart(siteRequest_, PersonStepGenPage.staticSetDefaultRangeStart(siteRequest_, o)));
 	}
 
 	/////////////////////
@@ -560,7 +559,7 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 
 	/**	<br> The entity defaultRangeVar
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.iotnode.IotNodeGenPage&fq=entiteVar_enUS_indexed_string:defaultRangeVar">Find the entity defaultRangeVar in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStepGenPage&fq=entiteVar_enUS_indexed_string:defaultRangeVar">Find the entity defaultRangeVar in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -570,18 +569,18 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 		return defaultRangeVar;
 	}
 	public void setDefaultRangeVar(String o) {
-		this.defaultRangeVar = IotNodeGenPage.staticSetDefaultRangeVar(siteRequest_, o);
+		this.defaultRangeVar = PersonStepGenPage.staticSetDefaultRangeVar(siteRequest_, o);
 	}
 	public static String staticSetDefaultRangeVar(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	protected IotNodeGenPage defaultRangeVarInit() {
+	protected PersonStepGenPage defaultRangeVarInit() {
 		Wrap<String> defaultRangeVarWrap = new Wrap<String>().var("defaultRangeVar");
 		if(defaultRangeVar == null) {
 			_defaultRangeVar(defaultRangeVarWrap);
 			setDefaultRangeVar(defaultRangeVarWrap.o);
 		}
-		return (IotNodeGenPage)this;
+		return (PersonStepGenPage)this;
 	}
 
 	public static String staticSearchDefaultRangeVar(SiteRequestEnUS siteRequest_, String o) {
@@ -593,7 +592,7 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 	}
 
 	public static String staticSearchFqDefaultRangeVar(SiteRequestEnUS siteRequest_, String o) {
-		return IotNodeGenPage.staticSearchStrDefaultRangeVar(siteRequest_, IotNodeGenPage.staticSearchDefaultRangeVar(siteRequest_, IotNodeGenPage.staticSetDefaultRangeVar(siteRequest_, o)));
+		return PersonStepGenPage.staticSearchStrDefaultRangeVar(siteRequest_, PersonStepGenPage.staticSearchDefaultRangeVar(siteRequest_, PersonStepGenPage.staticSetDefaultRangeVar(siteRequest_, o)));
 	}
 
 	//////////////////////
@@ -609,7 +608,7 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 
 	/**	<br> The entity defaultFacetSort
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.iotnode.IotNodeGenPage&fq=entiteVar_enUS_indexed_string:defaultFacetSort">Find the entity defaultFacetSort in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStepGenPage&fq=entiteVar_enUS_indexed_string:defaultFacetSort">Find the entity defaultFacetSort in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -619,18 +618,18 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 		return defaultFacetSort;
 	}
 	public void setDefaultFacetSort(String o) {
-		this.defaultFacetSort = IotNodeGenPage.staticSetDefaultFacetSort(siteRequest_, o);
+		this.defaultFacetSort = PersonStepGenPage.staticSetDefaultFacetSort(siteRequest_, o);
 	}
 	public static String staticSetDefaultFacetSort(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	protected IotNodeGenPage defaultFacetSortInit() {
+	protected PersonStepGenPage defaultFacetSortInit() {
 		Wrap<String> defaultFacetSortWrap = new Wrap<String>().var("defaultFacetSort");
 		if(defaultFacetSort == null) {
 			_defaultFacetSort(defaultFacetSortWrap);
 			setDefaultFacetSort(defaultFacetSortWrap.o);
 		}
-		return (IotNodeGenPage)this;
+		return (PersonStepGenPage)this;
 	}
 
 	public static String staticSearchDefaultFacetSort(SiteRequestEnUS siteRequest_, String o) {
@@ -642,7 +641,7 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 	}
 
 	public static String staticSearchFqDefaultFacetSort(SiteRequestEnUS siteRequest_, String o) {
-		return IotNodeGenPage.staticSearchStrDefaultFacetSort(siteRequest_, IotNodeGenPage.staticSearchDefaultFacetSort(siteRequest_, IotNodeGenPage.staticSetDefaultFacetSort(siteRequest_, o)));
+		return PersonStepGenPage.staticSearchStrDefaultFacetSort(siteRequest_, PersonStepGenPage.staticSearchDefaultFacetSort(siteRequest_, PersonStepGenPage.staticSetDefaultFacetSort(siteRequest_, o)));
 	}
 
 	///////////////////////
@@ -659,7 +658,7 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 
 	/**	<br> The entity defaultFacetLimit
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.iotnode.IotNodeGenPage&fq=entiteVar_enUS_indexed_string:defaultFacetLimit">Find the entity defaultFacetLimit in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStepGenPage&fq=entiteVar_enUS_indexed_string:defaultFacetLimit">Find the entity defaultFacetLimit in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -674,20 +673,20 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 	}
 	@JsonIgnore
 	public void setDefaultFacetLimit(String o) {
-		this.defaultFacetLimit = IotNodeGenPage.staticSetDefaultFacetLimit(siteRequest_, o);
+		this.defaultFacetLimit = PersonStepGenPage.staticSetDefaultFacetLimit(siteRequest_, o);
 	}
 	public static Integer staticSetDefaultFacetLimit(SiteRequestEnUS siteRequest_, String o) {
 		if(NumberUtils.isParsable(o))
 			return Integer.parseInt(o);
 		return null;
 	}
-	protected IotNodeGenPage defaultFacetLimitInit() {
+	protected PersonStepGenPage defaultFacetLimitInit() {
 		Wrap<Integer> defaultFacetLimitWrap = new Wrap<Integer>().var("defaultFacetLimit");
 		if(defaultFacetLimit == null) {
 			_defaultFacetLimit(defaultFacetLimitWrap);
 			setDefaultFacetLimit(defaultFacetLimitWrap.o);
 		}
-		return (IotNodeGenPage)this;
+		return (PersonStepGenPage)this;
 	}
 
 	public static Integer staticSearchDefaultFacetLimit(SiteRequestEnUS siteRequest_, Integer o) {
@@ -699,7 +698,7 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 	}
 
 	public static String staticSearchFqDefaultFacetLimit(SiteRequestEnUS siteRequest_, String o) {
-		return IotNodeGenPage.staticSearchStrDefaultFacetLimit(siteRequest_, IotNodeGenPage.staticSearchDefaultFacetLimit(siteRequest_, IotNodeGenPage.staticSetDefaultFacetLimit(siteRequest_, o)));
+		return PersonStepGenPage.staticSearchStrDefaultFacetLimit(siteRequest_, PersonStepGenPage.staticSearchDefaultFacetLimit(siteRequest_, PersonStepGenPage.staticSetDefaultFacetLimit(siteRequest_, o)));
 	}
 
 	//////////////////////////
@@ -716,7 +715,7 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 
 	/**	<br> The entity defaultFacetMinCount
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.iotnode.IotNodeGenPage&fq=entiteVar_enUS_indexed_string:defaultFacetMinCount">Find the entity defaultFacetMinCount in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStepGenPage&fq=entiteVar_enUS_indexed_string:defaultFacetMinCount">Find the entity defaultFacetMinCount in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -731,20 +730,20 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 	}
 	@JsonIgnore
 	public void setDefaultFacetMinCount(String o) {
-		this.defaultFacetMinCount = IotNodeGenPage.staticSetDefaultFacetMinCount(siteRequest_, o);
+		this.defaultFacetMinCount = PersonStepGenPage.staticSetDefaultFacetMinCount(siteRequest_, o);
 	}
 	public static Integer staticSetDefaultFacetMinCount(SiteRequestEnUS siteRequest_, String o) {
 		if(NumberUtils.isParsable(o))
 			return Integer.parseInt(o);
 		return null;
 	}
-	protected IotNodeGenPage defaultFacetMinCountInit() {
+	protected PersonStepGenPage defaultFacetMinCountInit() {
 		Wrap<Integer> defaultFacetMinCountWrap = new Wrap<Integer>().var("defaultFacetMinCount");
 		if(defaultFacetMinCount == null) {
 			_defaultFacetMinCount(defaultFacetMinCountWrap);
 			setDefaultFacetMinCount(defaultFacetMinCountWrap.o);
 		}
-		return (IotNodeGenPage)this;
+		return (PersonStepGenPage)this;
 	}
 
 	public static Integer staticSearchDefaultFacetMinCount(SiteRequestEnUS siteRequest_, Integer o) {
@@ -756,7 +755,7 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 	}
 
 	public static String staticSearchFqDefaultFacetMinCount(SiteRequestEnUS siteRequest_, String o) {
-		return IotNodeGenPage.staticSearchStrDefaultFacetMinCount(siteRequest_, IotNodeGenPage.staticSearchDefaultFacetMinCount(siteRequest_, IotNodeGenPage.staticSetDefaultFacetMinCount(siteRequest_, o)));
+		return PersonStepGenPage.staticSearchStrDefaultFacetMinCount(siteRequest_, PersonStepGenPage.staticSearchDefaultFacetMinCount(siteRequest_, PersonStepGenPage.staticSetDefaultFacetMinCount(siteRequest_, o)));
 	}
 
 	//////////////////////////
@@ -773,7 +772,7 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 
 	/**	<br> The entity defaultPivotMinCount
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.iotnode.IotNodeGenPage&fq=entiteVar_enUS_indexed_string:defaultPivotMinCount">Find the entity defaultPivotMinCount in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStepGenPage&fq=entiteVar_enUS_indexed_string:defaultPivotMinCount">Find the entity defaultPivotMinCount in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -788,20 +787,20 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 	}
 	@JsonIgnore
 	public void setDefaultPivotMinCount(String o) {
-		this.defaultPivotMinCount = IotNodeGenPage.staticSetDefaultPivotMinCount(siteRequest_, o);
+		this.defaultPivotMinCount = PersonStepGenPage.staticSetDefaultPivotMinCount(siteRequest_, o);
 	}
 	public static Integer staticSetDefaultPivotMinCount(SiteRequestEnUS siteRequest_, String o) {
 		if(NumberUtils.isParsable(o))
 			return Integer.parseInt(o);
 		return null;
 	}
-	protected IotNodeGenPage defaultPivotMinCountInit() {
+	protected PersonStepGenPage defaultPivotMinCountInit() {
 		Wrap<Integer> defaultPivotMinCountWrap = new Wrap<Integer>().var("defaultPivotMinCount");
 		if(defaultPivotMinCount == null) {
 			_defaultPivotMinCount(defaultPivotMinCountWrap);
 			setDefaultPivotMinCount(defaultPivotMinCountWrap.o);
 		}
-		return (IotNodeGenPage)this;
+		return (PersonStepGenPage)this;
 	}
 
 	public static Integer staticSearchDefaultPivotMinCount(SiteRequestEnUS siteRequest_, Integer o) {
@@ -813,7 +812,7 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 	}
 
 	public static String staticSearchFqDefaultPivotMinCount(SiteRequestEnUS siteRequest_, String o) {
-		return IotNodeGenPage.staticSearchStrDefaultPivotMinCount(siteRequest_, IotNodeGenPage.staticSearchDefaultPivotMinCount(siteRequest_, IotNodeGenPage.staticSetDefaultPivotMinCount(siteRequest_, o)));
+		return PersonStepGenPage.staticSearchStrDefaultPivotMinCount(siteRequest_, PersonStepGenPage.staticSearchDefaultPivotMinCount(siteRequest_, PersonStepGenPage.staticSetDefaultPivotMinCount(siteRequest_, o)));
 	}
 
 	//////////////////////////
@@ -829,7 +828,7 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 
 	/**	<br> The entity DEFAULT_MAP_LOCATION
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.iotnode.IotNodeGenPage&fq=entiteVar_enUS_indexed_string:DEFAULT_MAP_LOCATION">Find the entity DEFAULT_MAP_LOCATION in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStepGenPage&fq=entiteVar_enUS_indexed_string:DEFAULT_MAP_LOCATION">Find the entity DEFAULT_MAP_LOCATION in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -844,7 +843,7 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 	}
 	@JsonIgnore
 	public void setDEFAULT_MAP_LOCATION(String o) {
-		this.DEFAULT_MAP_LOCATION = IotNodeGenPage.staticSetDEFAULT_MAP_LOCATION(siteRequest_, o);
+		this.DEFAULT_MAP_LOCATION = PersonStepGenPage.staticSetDEFAULT_MAP_LOCATION(siteRequest_, o);
 	}
 	public static JsonObject staticSetDEFAULT_MAP_LOCATION(SiteRequestEnUS siteRequest_, String o) {
 		if(o != null) {
@@ -852,13 +851,13 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 		}
 		return null;
 	}
-	protected IotNodeGenPage DEFAULT_MAP_LOCATIONInit() {
+	protected PersonStepGenPage DEFAULT_MAP_LOCATIONInit() {
 		Wrap<JsonObject> DEFAULT_MAP_LOCATIONWrap = new Wrap<JsonObject>().var("DEFAULT_MAP_LOCATION");
 		if(DEFAULT_MAP_LOCATION == null) {
 			_DEFAULT_MAP_LOCATION(DEFAULT_MAP_LOCATIONWrap);
 			setDEFAULT_MAP_LOCATION(DEFAULT_MAP_LOCATIONWrap.o);
 		}
-		return (IotNodeGenPage)this;
+		return (PersonStepGenPage)this;
 	}
 
 	public static JsonObject staticSearchDEFAULT_MAP_LOCATION(SiteRequestEnUS siteRequest_, JsonObject o) {
@@ -870,7 +869,7 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 	}
 
 	public static String staticSearchFqDEFAULT_MAP_LOCATION(SiteRequestEnUS siteRequest_, String o) {
-		return IotNodeGenPage.staticSearchStrDEFAULT_MAP_LOCATION(siteRequest_, IotNodeGenPage.staticSearchDEFAULT_MAP_LOCATION(siteRequest_, IotNodeGenPage.staticSetDEFAULT_MAP_LOCATION(siteRequest_, o)));
+		return PersonStepGenPage.staticSearchStrDEFAULT_MAP_LOCATION(siteRequest_, PersonStepGenPage.staticSearchDEFAULT_MAP_LOCATION(siteRequest_, PersonStepGenPage.staticSetDEFAULT_MAP_LOCATION(siteRequest_, o)));
 	}
 
 	//////////////////////
@@ -887,7 +886,7 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 
 	/**	<br> The entity DEFAULT_MAP_ZOOM
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.iotnode.IotNodeGenPage&fq=entiteVar_enUS_indexed_string:DEFAULT_MAP_ZOOM">Find the entity DEFAULT_MAP_ZOOM in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStepGenPage&fq=entiteVar_enUS_indexed_string:DEFAULT_MAP_ZOOM">Find the entity DEFAULT_MAP_ZOOM in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -902,7 +901,7 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 	}
 	@JsonIgnore
 	public void setDEFAULT_MAP_ZOOM(String o) {
-		this.DEFAULT_MAP_ZOOM = IotNodeGenPage.staticSetDEFAULT_MAP_ZOOM(siteRequest_, o);
+		this.DEFAULT_MAP_ZOOM = PersonStepGenPage.staticSetDEFAULT_MAP_ZOOM(siteRequest_, o);
 	}
 	public static BigDecimal staticSetDEFAULT_MAP_ZOOM(SiteRequestEnUS siteRequest_, String o) {
 		o = StringUtils.removeAll(o, "[^\\d\\.]");
@@ -918,13 +917,13 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 	public void setDEFAULT_MAP_ZOOM(Integer o) {
 			this.DEFAULT_MAP_ZOOM = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
 	}
-	protected IotNodeGenPage DEFAULT_MAP_ZOOMInit() {
+	protected PersonStepGenPage DEFAULT_MAP_ZOOMInit() {
 		Wrap<BigDecimal> DEFAULT_MAP_ZOOMWrap = new Wrap<BigDecimal>().var("DEFAULT_MAP_ZOOM");
 		if(DEFAULT_MAP_ZOOM == null) {
 			_DEFAULT_MAP_ZOOM(DEFAULT_MAP_ZOOMWrap);
 			setDEFAULT_MAP_ZOOM(DEFAULT_MAP_ZOOMWrap.o);
 		}
-		return (IotNodeGenPage)this;
+		return (PersonStepGenPage)this;
 	}
 
 	public static Double staticSearchDEFAULT_MAP_ZOOM(SiteRequestEnUS siteRequest_, BigDecimal o) {
@@ -936,41 +935,239 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 	}
 
 	public static String staticSearchFqDEFAULT_MAP_ZOOM(SiteRequestEnUS siteRequest_, String o) {
-		return IotNodeGenPage.staticSearchStrDEFAULT_MAP_ZOOM(siteRequest_, IotNodeGenPage.staticSearchDEFAULT_MAP_ZOOM(siteRequest_, IotNodeGenPage.staticSetDEFAULT_MAP_ZOOM(siteRequest_, o)));
+		return PersonStepGenPage.staticSearchStrDEFAULT_MAP_ZOOM(siteRequest_, PersonStepGenPage.staticSearchDEFAULT_MAP_ZOOM(siteRequest_, PersonStepGenPage.staticSetDEFAULT_MAP_ZOOM(siteRequest_, o)));
 	}
 
-	/////////////////
-	// listIotNode //
-	/////////////////
+	//////////////////////////
+	// defaultFieldListVars //
+	//////////////////////////
 
-	/**	 The entity listIotNode
+	/**	 The entity defaultFieldListVars
+	 *	 It is constructed before being initialized with the constructor by default. 
+	 */
+	@JsonProperty
+	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
+	@JsonInclude(Include.NON_NULL)
+	protected List<String> defaultFieldListVars = new ArrayList<String>();
+
+	/**	<br> The entity defaultFieldListVars
+	 *  It is constructed before being initialized with the constructor by default. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStepGenPage&fq=entiteVar_enUS_indexed_string:defaultFieldListVars">Find the entity defaultFieldListVars in Solr</a>
+	 * <br>
+	 * @param l is the entity already constructed. 
+	 **/
+	protected abstract void _defaultFieldListVars(List<String> l);
+
+	public List<String> getDefaultFieldListVars() {
+		return defaultFieldListVars;
+	}
+
+	public void setDefaultFieldListVars(List<String> defaultFieldListVars) {
+		this.defaultFieldListVars = defaultFieldListVars;
+	}
+	public static String staticSetDefaultFieldListVars(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	public PersonStepGenPage addDefaultFieldListVars(String...objects) {
+		for(String o : objects) {
+			addDefaultFieldListVars(o);
+		}
+		return (PersonStepGenPage)this;
+	}
+	public PersonStepGenPage addDefaultFieldListVars(String o) {
+		if(o != null)
+			this.defaultFieldListVars.add(o);
+		return (PersonStepGenPage)this;
+	}
+	@JsonIgnore
+	public void setDefaultFieldListVars(JsonArray objects) {
+		defaultFieldListVars.clear();
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
+			addDefaultFieldListVars(o);
+		}
+	}
+	protected PersonStepGenPage defaultFieldListVarsInit() {
+		_defaultFieldListVars(defaultFieldListVars);
+		return (PersonStepGenPage)this;
+	}
+
+	public static String staticSearchDefaultFieldListVars(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrDefaultFieldListVars(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqDefaultFieldListVars(SiteRequestEnUS siteRequest_, String o) {
+		return PersonStepGenPage.staticSearchStrDefaultFieldListVars(siteRequest_, PersonStepGenPage.staticSearchDefaultFieldListVars(siteRequest_, PersonStepGenPage.staticSetDefaultFieldListVars(siteRequest_, o)));
+	}
+
+	//////////////////////
+	// defaultStatsVars //
+	//////////////////////
+
+	/**	 The entity defaultStatsVars
+	 *	 It is constructed before being initialized with the constructor by default. 
+	 */
+	@JsonProperty
+	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
+	@JsonInclude(Include.NON_NULL)
+	protected List<String> defaultStatsVars = new ArrayList<String>();
+
+	/**	<br> The entity defaultStatsVars
+	 *  It is constructed before being initialized with the constructor by default. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStepGenPage&fq=entiteVar_enUS_indexed_string:defaultStatsVars">Find the entity defaultStatsVars in Solr</a>
+	 * <br>
+	 * @param l is the entity already constructed. 
+	 **/
+	protected abstract void _defaultStatsVars(List<String> l);
+
+	public List<String> getDefaultStatsVars() {
+		return defaultStatsVars;
+	}
+
+	public void setDefaultStatsVars(List<String> defaultStatsVars) {
+		this.defaultStatsVars = defaultStatsVars;
+	}
+	public static String staticSetDefaultStatsVars(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	public PersonStepGenPage addDefaultStatsVars(String...objects) {
+		for(String o : objects) {
+			addDefaultStatsVars(o);
+		}
+		return (PersonStepGenPage)this;
+	}
+	public PersonStepGenPage addDefaultStatsVars(String o) {
+		if(o != null)
+			this.defaultStatsVars.add(o);
+		return (PersonStepGenPage)this;
+	}
+	@JsonIgnore
+	public void setDefaultStatsVars(JsonArray objects) {
+		defaultStatsVars.clear();
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
+			addDefaultStatsVars(o);
+		}
+	}
+	protected PersonStepGenPage defaultStatsVarsInit() {
+		_defaultStatsVars(defaultStatsVars);
+		return (PersonStepGenPage)this;
+	}
+
+	public static String staticSearchDefaultStatsVars(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrDefaultStatsVars(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqDefaultStatsVars(SiteRequestEnUS siteRequest_, String o) {
+		return PersonStepGenPage.staticSearchStrDefaultStatsVars(siteRequest_, PersonStepGenPage.staticSearchDefaultStatsVars(siteRequest_, PersonStepGenPage.staticSetDefaultStatsVars(siteRequest_, o)));
+	}
+
+	//////////////////////
+	// defaultPivotVars //
+	//////////////////////
+
+	/**	 The entity defaultPivotVars
+	 *	 It is constructed before being initialized with the constructor by default. 
+	 */
+	@JsonProperty
+	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
+	@JsonInclude(Include.NON_NULL)
+	protected List<String> defaultPivotVars = new ArrayList<String>();
+
+	/**	<br> The entity defaultPivotVars
+	 *  It is constructed before being initialized with the constructor by default. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStepGenPage&fq=entiteVar_enUS_indexed_string:defaultPivotVars">Find the entity defaultPivotVars in Solr</a>
+	 * <br>
+	 * @param l is the entity already constructed. 
+	 **/
+	protected abstract void _defaultPivotVars(List<String> l);
+
+	public List<String> getDefaultPivotVars() {
+		return defaultPivotVars;
+	}
+
+	public void setDefaultPivotVars(List<String> defaultPivotVars) {
+		this.defaultPivotVars = defaultPivotVars;
+	}
+	public static String staticSetDefaultPivotVars(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	public PersonStepGenPage addDefaultPivotVars(String...objects) {
+		for(String o : objects) {
+			addDefaultPivotVars(o);
+		}
+		return (PersonStepGenPage)this;
+	}
+	public PersonStepGenPage addDefaultPivotVars(String o) {
+		if(o != null)
+			this.defaultPivotVars.add(o);
+		return (PersonStepGenPage)this;
+	}
+	@JsonIgnore
+	public void setDefaultPivotVars(JsonArray objects) {
+		defaultPivotVars.clear();
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
+			addDefaultPivotVars(o);
+		}
+	}
+	protected PersonStepGenPage defaultPivotVarsInit() {
+		_defaultPivotVars(defaultPivotVars);
+		return (PersonStepGenPage)this;
+	}
+
+	public static String staticSearchDefaultPivotVars(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrDefaultPivotVars(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqDefaultPivotVars(SiteRequestEnUS siteRequest_, String o) {
+		return PersonStepGenPage.staticSearchStrDefaultPivotVars(siteRequest_, PersonStepGenPage.staticSearchDefaultPivotVars(siteRequest_, PersonStepGenPage.staticSetDefaultPivotVars(siteRequest_, o)));
+	}
+
+	////////////////////
+	// listPersonStep //
+	////////////////////
+
+	/**	 The entity listPersonStep
 	 *	 It is constructed before being initialized with the constructor by default. 
 	 */
 	@JsonProperty
 	@JsonInclude(Include.NON_NULL)
-	protected JsonArray listIotNode = new JsonArray();
+	protected JsonArray listPersonStep = new JsonArray();
 
-	/**	<br> The entity listIotNode
+	/**	<br> The entity listPersonStep
 	 *  It is constructed before being initialized with the constructor by default. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.iotnode.IotNodeGenPage&fq=entiteVar_enUS_indexed_string:listIotNode">Find the entity listIotNode in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStepGenPage&fq=entiteVar_enUS_indexed_string:listPersonStep">Find the entity listPersonStep in Solr</a>
 	 * <br>
 	 * @param l is the entity already constructed. 
 	 **/
-	protected abstract void _listIotNode(JsonArray l);
+	protected abstract void _listPersonStep(JsonArray l);
 
-	public JsonArray getListIotNode() {
-		return listIotNode;
+	public JsonArray getListPersonStep() {
+		return listPersonStep;
 	}
 
-	public void setListIotNode(JsonArray listIotNode) {
-		this.listIotNode = listIotNode;
+	public void setListPersonStep(JsonArray listPersonStep) {
+		this.listPersonStep = listPersonStep;
 	}
-	public static JsonArray staticSetListIotNode(SiteRequestEnUS siteRequest_, String o) {
+	public static JsonArray staticSetListPersonStep(SiteRequestEnUS siteRequest_, String o) {
 		return null;
 	}
-	protected IotNodeGenPage listIotNodeInit() {
-		_listIotNode(listIotNode);
-		return (IotNodeGenPage)this;
+	protected PersonStepGenPage listPersonStepInit() {
+		_listPersonStep(listPersonStep);
+		return (PersonStepGenPage)this;
 	}
 
 	///////////
@@ -986,7 +1183,7 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 
 	/**	<br> The entity stats
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.iotnode.IotNodeGenPage&fq=entiteVar_enUS_indexed_string:stats">Find the entity stats in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStepGenPage&fq=entiteVar_enUS_indexed_string:stats">Find the entity stats in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -1002,13 +1199,13 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 	public static Stats staticSetStats(SiteRequestEnUS siteRequest_, String o) {
 		return null;
 	}
-	protected IotNodeGenPage statsInit() {
+	protected PersonStepGenPage statsInit() {
 		Wrap<Stats> statsWrap = new Wrap<Stats>().var("stats");
 		if(stats == null) {
 			_stats(statsWrap);
 			setStats(statsWrap.o);
 		}
-		return (IotNodeGenPage)this;
+		return (PersonStepGenPage)this;
 	}
 
 	/////////////////
@@ -1024,7 +1221,7 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 
 	/**	<br> The entity facetCounts
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.iotnode.IotNodeGenPage&fq=entiteVar_enUS_indexed_string:facetCounts">Find the entity facetCounts in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStepGenPage&fq=entiteVar_enUS_indexed_string:facetCounts">Find the entity facetCounts in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -1040,165 +1237,108 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 	public static FacetCounts staticSetFacetCounts(SiteRequestEnUS siteRequest_, String o) {
 		return null;
 	}
-	protected IotNodeGenPage facetCountsInit() {
+	protected PersonStepGenPage facetCountsInit() {
 		Wrap<FacetCounts> facetCountsWrap = new Wrap<FacetCounts>().var("facetCounts");
 		if(facetCounts == null) {
 			_facetCounts(facetCountsWrap);
 			setFacetCounts(facetCountsWrap.o);
 		}
-		return (IotNodeGenPage)this;
+		return (PersonStepGenPage)this;
 	}
 
-	//////////////////
-	// iotNodeCount //
-	//////////////////
+	/////////////////////
+	// personStepCount //
+	/////////////////////
 
-	/**	 The entity iotNodeCount
+	/**	 The entity personStepCount
 	 *	 is defined as null before being initialized. 
 	 */
 	@JsonProperty
 	@JsonSerialize(using = ToStringSerializer.class)
 	@JsonInclude(Include.NON_NULL)
-	protected Integer iotNodeCount;
+	protected Integer personStepCount;
 
-	/**	<br> The entity iotNodeCount
+	/**	<br> The entity personStepCount
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.iotnode.IotNodeGenPage&fq=entiteVar_enUS_indexed_string:iotNodeCount">Find the entity iotNodeCount in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStepGenPage&fq=entiteVar_enUS_indexed_string:personStepCount">Find the entity personStepCount in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected abstract void _iotNodeCount(Wrap<Integer> w);
+	protected abstract void _personStepCount(Wrap<Integer> w);
 
-	public Integer getIotNodeCount() {
-		return iotNodeCount;
+	public Integer getPersonStepCount() {
+		return personStepCount;
 	}
 
-	public void setIotNodeCount(Integer iotNodeCount) {
-		this.iotNodeCount = iotNodeCount;
+	public void setPersonStepCount(Integer personStepCount) {
+		this.personStepCount = personStepCount;
 	}
 	@JsonIgnore
-	public void setIotNodeCount(String o) {
-		this.iotNodeCount = IotNodeGenPage.staticSetIotNodeCount(siteRequest_, o);
+	public void setPersonStepCount(String o) {
+		this.personStepCount = PersonStepGenPage.staticSetPersonStepCount(siteRequest_, o);
 	}
-	public static Integer staticSetIotNodeCount(SiteRequestEnUS siteRequest_, String o) {
+	public static Integer staticSetPersonStepCount(SiteRequestEnUS siteRequest_, String o) {
 		if(NumberUtils.isParsable(o))
 			return Integer.parseInt(o);
 		return null;
 	}
-	protected IotNodeGenPage iotNodeCountInit() {
-		Wrap<Integer> iotNodeCountWrap = new Wrap<Integer>().var("iotNodeCount");
-		if(iotNodeCount == null) {
-			_iotNodeCount(iotNodeCountWrap);
-			setIotNodeCount(iotNodeCountWrap.o);
+	protected PersonStepGenPage personStepCountInit() {
+		Wrap<Integer> personStepCountWrap = new Wrap<Integer>().var("personStepCount");
+		if(personStepCount == null) {
+			_personStepCount(personStepCountWrap);
+			setPersonStepCount(personStepCountWrap.o);
 		}
-		return (IotNodeGenPage)this;
+		return (PersonStepGenPage)this;
 	}
 
-	public static Integer staticSearchIotNodeCount(SiteRequestEnUS siteRequest_, Integer o) {
+	public static Integer staticSearchPersonStepCount(SiteRequestEnUS siteRequest_, Integer o) {
 		return o;
 	}
 
-	public static String staticSearchStrIotNodeCount(SiteRequestEnUS siteRequest_, Integer o) {
+	public static String staticSearchStrPersonStepCount(SiteRequestEnUS siteRequest_, Integer o) {
 		return o == null ? null : o.toString();
 	}
 
-	public static String staticSearchFqIotNodeCount(SiteRequestEnUS siteRequest_, String o) {
-		return IotNodeGenPage.staticSearchStrIotNodeCount(siteRequest_, IotNodeGenPage.staticSearchIotNodeCount(siteRequest_, IotNodeGenPage.staticSetIotNodeCount(siteRequest_, o)));
+	public static String staticSearchFqPersonStepCount(SiteRequestEnUS siteRequest_, String o) {
+		return PersonStepGenPage.staticSearchStrPersonStepCount(siteRequest_, PersonStepGenPage.staticSearchPersonStepCount(siteRequest_, PersonStepGenPage.staticSetPersonStepCount(siteRequest_, o)));
 	}
 
-	//////////////
-	// iotNode_ //
-	//////////////
+	/////////////////
+	// personStep_ //
+	/////////////////
 
-	/**	 The entity iotNode_
+	/**	 The entity personStep_
 	 *	 is defined as null before being initialized. 
 	 */
 	@JsonProperty
 	@JsonInclude(Include.NON_NULL)
-	protected IotNode iotNode_;
+	protected PersonStep personStep_;
 
-	/**	<br> The entity iotNode_
+	/**	<br> The entity personStep_
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.iotnode.IotNodeGenPage&fq=entiteVar_enUS_indexed_string:iotNode_">Find the entity iotNode_ in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStepGenPage&fq=entiteVar_enUS_indexed_string:personStep_">Find the entity personStep_ in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected abstract void _iotNode_(Wrap<IotNode> w);
+	protected abstract void _personStep_(Wrap<PersonStep> w);
 
-	public IotNode getIotNode_() {
-		return iotNode_;
+	public PersonStep getPersonStep_() {
+		return personStep_;
 	}
 
-	public void setIotNode_(IotNode iotNode_) {
-		this.iotNode_ = iotNode_;
+	public void setPersonStep_(PersonStep personStep_) {
+		this.personStep_ = personStep_;
 	}
-	public static IotNode staticSetIotNode_(SiteRequestEnUS siteRequest_, String o) {
+	public static PersonStep staticSetPersonStep_(SiteRequestEnUS siteRequest_, String o) {
 		return null;
 	}
-	protected IotNodeGenPage iotNode_Init() {
-		Wrap<IotNode> iotNode_Wrap = new Wrap<IotNode>().var("iotNode_");
-		if(iotNode_ == null) {
-			_iotNode_(iotNode_Wrap);
-			setIotNode_(iotNode_Wrap.o);
+	protected PersonStepGenPage personStep_Init() {
+		Wrap<PersonStep> personStep_Wrap = new Wrap<PersonStep>().var("personStep_");
+		if(personStep_ == null) {
+			_personStep_(personStep_Wrap);
+			setPersonStep_(personStep_Wrap.o);
 		}
-		return (IotNodeGenPage)this;
-	}
-
-	////////
-	// pk //
-	////////
-
-	/**	 The entity pk
-	 *	 is defined as null before being initialized. 
-	 */
-	@JsonProperty
-	@JsonSerialize(using = ToStringSerializer.class)
-	@JsonInclude(Include.NON_NULL)
-	protected Long pk;
-
-	/**	<br> The entity pk
-	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.iotnode.IotNodeGenPage&fq=entiteVar_enUS_indexed_string:pk">Find the entity pk in Solr</a>
-	 * <br>
-	 * @param w is for wrapping a value to assign to this entity during initialization. 
-	 **/
-	protected abstract void _pk(Wrap<Long> w);
-
-	public Long getPk() {
-		return pk;
-	}
-
-	public void setPk(Long pk) {
-		this.pk = pk;
-	}
-	@JsonIgnore
-	public void setPk(String o) {
-		this.pk = IotNodeGenPage.staticSetPk(siteRequest_, o);
-	}
-	public static Long staticSetPk(SiteRequestEnUS siteRequest_, String o) {
-		if(NumberUtils.isParsable(o))
-			return Long.parseLong(o);
-		return null;
-	}
-	protected IotNodeGenPage pkInit() {
-		Wrap<Long> pkWrap = new Wrap<Long>().var("pk");
-		if(pk == null) {
-			_pk(pkWrap);
-			setPk(pkWrap.o);
-		}
-		return (IotNodeGenPage)this;
-	}
-
-	public static Long staticSearchPk(SiteRequestEnUS siteRequest_, Long o) {
-		return o;
-	}
-
-	public static String staticSearchStrPk(SiteRequestEnUS siteRequest_, Long o) {
-		return o == null ? null : o.toString();
-	}
-
-	public static String staticSearchFqPk(SiteRequestEnUS siteRequest_, String o) {
-		return IotNodeGenPage.staticSearchStrPk(siteRequest_, IotNodeGenPage.staticSearchPk(siteRequest_, IotNodeGenPage.staticSetPk(siteRequest_, o)));
+		return (PersonStepGenPage)this;
 	}
 
 	////////
@@ -1214,7 +1354,7 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 
 	/**	<br> The entity id
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.iotnode.IotNodeGenPage&fq=entiteVar_enUS_indexed_string:id">Find the entity id in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStepGenPage&fq=entiteVar_enUS_indexed_string:id">Find the entity id in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -1224,18 +1364,18 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 		return id;
 	}
 	public void setId(String o) {
-		this.id = IotNodeGenPage.staticSetId(siteRequest_, o);
+		this.id = PersonStepGenPage.staticSetId(siteRequest_, o);
 	}
 	public static String staticSetId(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	protected IotNodeGenPage idInit() {
+	protected PersonStepGenPage idInit() {
 		Wrap<String> idWrap = new Wrap<String>().var("id");
 		if(id == null) {
 			_id(idWrap);
 			setId(idWrap.o);
 		}
-		return (IotNodeGenPage)this;
+		return (PersonStepGenPage)this;
 	}
 
 	public static String staticSearchId(SiteRequestEnUS siteRequest_, String o) {
@@ -1247,73 +1387,73 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 	}
 
 	public static String staticSearchFqId(SiteRequestEnUS siteRequest_, String o) {
-		return IotNodeGenPage.staticSearchStrId(siteRequest_, IotNodeGenPage.staticSearchId(siteRequest_, IotNodeGenPage.staticSetId(siteRequest_, o)));
+		return PersonStepGenPage.staticSearchStrId(siteRequest_, PersonStepGenPage.staticSearchId(siteRequest_, PersonStepGenPage.staticSetId(siteRequest_, o)));
 	}
 
-	////////////////////
-	// pageUriIotNode //
-	////////////////////
+	///////////////////////
+	// pageUriPersonStep //
+	///////////////////////
 
-	/**	 The entity pageUriIotNode
+	/**	 The entity pageUriPersonStep
 	 *	 is defined as null before being initialized. 
 	 */
 	@JsonProperty
 	@JsonInclude(Include.NON_NULL)
-	protected String pageUriIotNode;
+	protected String pageUriPersonStep;
 
-	/**	<br> The entity pageUriIotNode
+	/**	<br> The entity pageUriPersonStep
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.iotnode.IotNodeGenPage&fq=entiteVar_enUS_indexed_string:pageUriIotNode">Find the entity pageUriIotNode in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStepGenPage&fq=entiteVar_enUS_indexed_string:pageUriPersonStep">Find the entity pageUriPersonStep in Solr</a>
 	 * <br>
 	 * @param c is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected abstract void _pageUriIotNode(Wrap<String> c);
+	protected abstract void _pageUriPersonStep(Wrap<String> c);
 
-	public String getPageUriIotNode() {
-		return pageUriIotNode;
+	public String getPageUriPersonStep() {
+		return pageUriPersonStep;
 	}
-	public void setPageUriIotNode(String o) {
-		this.pageUriIotNode = IotNodeGenPage.staticSetPageUriIotNode(siteRequest_, o);
+	public void setPageUriPersonStep(String o) {
+		this.pageUriPersonStep = PersonStepGenPage.staticSetPageUriPersonStep(siteRequest_, o);
 	}
-	public static String staticSetPageUriIotNode(SiteRequestEnUS siteRequest_, String o) {
+	public static String staticSetPageUriPersonStep(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	protected IotNodeGenPage pageUriIotNodeInit() {
-		Wrap<String> pageUriIotNodeWrap = new Wrap<String>().var("pageUriIotNode");
-		if(pageUriIotNode == null) {
-			_pageUriIotNode(pageUriIotNodeWrap);
-			setPageUriIotNode(pageUriIotNodeWrap.o);
+	protected PersonStepGenPage pageUriPersonStepInit() {
+		Wrap<String> pageUriPersonStepWrap = new Wrap<String>().var("pageUriPersonStep");
+		if(pageUriPersonStep == null) {
+			_pageUriPersonStep(pageUriPersonStepWrap);
+			setPageUriPersonStep(pageUriPersonStepWrap.o);
 		}
-		return (IotNodeGenPage)this;
+		return (PersonStepGenPage)this;
 	}
 
-	public static String staticSearchPageUriIotNode(SiteRequestEnUS siteRequest_, String o) {
+	public static String staticSearchPageUriPersonStep(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
 
-	public static String staticSearchStrPageUriIotNode(SiteRequestEnUS siteRequest_, String o) {
+	public static String staticSearchStrPageUriPersonStep(SiteRequestEnUS siteRequest_, String o) {
 		return o == null ? null : o.toString();
 	}
 
-	public static String staticSearchFqPageUriIotNode(SiteRequestEnUS siteRequest_, String o) {
-		return IotNodeGenPage.staticSearchStrPageUriIotNode(siteRequest_, IotNodeGenPage.staticSearchPageUriIotNode(siteRequest_, IotNodeGenPage.staticSetPageUriIotNode(siteRequest_, o)));
+	public static String staticSearchFqPageUriPersonStep(SiteRequestEnUS siteRequest_, String o) {
+		return PersonStepGenPage.staticSearchStrPageUriPersonStep(siteRequest_, PersonStepGenPage.staticSearchPageUriPersonStep(siteRequest_, PersonStepGenPage.staticSetPageUriPersonStep(siteRequest_, o)));
 	}
 
 	//////////////
 	// initDeep //
 	//////////////
 
-	public Future<Void> promiseDeepIotNodeGenPage(SiteRequestEnUS siteRequest_) {
+	public Future<Void> promiseDeepPersonStepGenPage(SiteRequestEnUS siteRequest_) {
 		setSiteRequest_(siteRequest_);
-		return promiseDeepIotNodeGenPage();
+		return promiseDeepPersonStepGenPage();
 	}
 
-	public Future<Void> promiseDeepIotNodeGenPage() {
+	public Future<Void> promiseDeepPersonStepGenPage() {
 		Promise<Void> promise = Promise.promise();
 		Promise<Void> promise2 = Promise.promise();
-		promiseIotNodeGenPage(promise2);
+		promisePersonStepGenPage(promise2);
 		promise2.future().onSuccess(a -> {
-			super.promiseDeepBaseModelPage(siteRequest_).onSuccess(b -> {
+			super.promiseDeepPageLayout(siteRequest_).onSuccess(b -> {
 				promise.complete();
 			}).onFailure(ex -> {
 				promise.fail(ex);
@@ -1324,11 +1464,11 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 		return promise.future();
 	}
 
-	public Future<Void> promiseIotNodeGenPage(Promise<Void> promise) {
+	public Future<Void> promisePersonStepGenPage(Promise<Void> promise) {
 		Future.future(a -> a.complete()).compose(a -> {
 			Promise<Void> promise2 = Promise.promise();
 			try {
-				searchListIotNode_Init();
+				searchListPersonStep_Init();
 				pageResponseInit();
 				defaultZoneIdInit();
 				defaultTimeZoneInit();
@@ -1344,14 +1484,16 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 				defaultPivotMinCountInit();
 				DEFAULT_MAP_LOCATIONInit();
 				DEFAULT_MAP_ZOOMInit();
-				listIotNodeInit();
+				defaultFieldListVarsInit();
+				defaultStatsVarsInit();
+				defaultPivotVarsInit();
+				listPersonStepInit();
 				statsInit();
 				facetCountsInit();
-				iotNodeCountInit();
-				iotNode_Init();
-				pkInit();
+				personStepCountInit();
+				personStep_Init();
 				idInit();
-				pageUriIotNodeInit();
+				pageUriPersonStepInit();
 				promise2.complete();
 			} catch(Exception ex) {
 				promise2.fail(ex);
@@ -1366,19 +1508,19 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 	}
 
 	@Override public Future<Void> promiseDeepForClass(SiteRequestEnUS siteRequest_) {
-		return promiseDeepIotNodeGenPage(siteRequest_);
+		return promiseDeepPersonStepGenPage(siteRequest_);
 	}
 
 	/////////////////
 	// siteRequest //
 	/////////////////
 
-	public void siteRequestIotNodeGenPage(SiteRequestEnUS siteRequest_) {
-			super.siteRequestBaseModelPage(siteRequest_);
+	public void siteRequestPersonStepGenPage(SiteRequestEnUS siteRequest_) {
+			super.siteRequestPageLayout(siteRequest_);
 	}
 
 	public void siteRequestForClass(SiteRequestEnUS siteRequest_) {
-		siteRequestIotNodeGenPage(siteRequest_);
+		siteRequestPersonStepGenPage(siteRequest_);
 	}
 
 	/////////////
@@ -1390,7 +1532,7 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 		Object o = null;
 		for(String v : vars) {
 			if(o == null)
-				o = obtainIotNodeGenPage(v);
+				o = obtainPersonStepGenPage(v);
 			else if(o instanceof BaseModel) {
 				BaseModel baseModel = (BaseModel)o;
 				o = baseModel.obtainForClass(v);
@@ -1402,59 +1544,63 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 		}
 		return o;
 	}
-	public Object obtainIotNodeGenPage(String var) {
-		IotNodeGenPage oIotNodeGenPage = (IotNodeGenPage)this;
+	public Object obtainPersonStepGenPage(String var) {
+		PersonStepGenPage oPersonStepGenPage = (PersonStepGenPage)this;
 		switch(var) {
-			case "searchListIotNode_":
-				return oIotNodeGenPage.searchListIotNode_;
+			case "searchListPersonStep_":
+				return oPersonStepGenPage.searchListPersonStep_;
 			case "pageResponse":
-				return oIotNodeGenPage.pageResponse;
+				return oPersonStepGenPage.pageResponse;
 			case "defaultZoneId":
-				return oIotNodeGenPage.defaultZoneId;
+				return oPersonStepGenPage.defaultZoneId;
 			case "defaultTimeZone":
-				return oIotNodeGenPage.defaultTimeZone;
+				return oPersonStepGenPage.defaultTimeZone;
 			case "defaultLocaleId":
-				return oIotNodeGenPage.defaultLocaleId;
+				return oPersonStepGenPage.defaultLocaleId;
 			case "defaultLocale":
-				return oIotNodeGenPage.defaultLocale;
+				return oPersonStepGenPage.defaultLocale;
 			case "defaultRangeGap":
-				return oIotNodeGenPage.defaultRangeGap;
+				return oPersonStepGenPage.defaultRangeGap;
 			case "defaultRangeEnd":
-				return oIotNodeGenPage.defaultRangeEnd;
+				return oPersonStepGenPage.defaultRangeEnd;
 			case "defaultRangeStart":
-				return oIotNodeGenPage.defaultRangeStart;
+				return oPersonStepGenPage.defaultRangeStart;
 			case "defaultRangeVar":
-				return oIotNodeGenPage.defaultRangeVar;
+				return oPersonStepGenPage.defaultRangeVar;
 			case "defaultFacetSort":
-				return oIotNodeGenPage.defaultFacetSort;
+				return oPersonStepGenPage.defaultFacetSort;
 			case "defaultFacetLimit":
-				return oIotNodeGenPage.defaultFacetLimit;
+				return oPersonStepGenPage.defaultFacetLimit;
 			case "defaultFacetMinCount":
-				return oIotNodeGenPage.defaultFacetMinCount;
+				return oPersonStepGenPage.defaultFacetMinCount;
 			case "defaultPivotMinCount":
-				return oIotNodeGenPage.defaultPivotMinCount;
+				return oPersonStepGenPage.defaultPivotMinCount;
 			case "DEFAULT_MAP_LOCATION":
-				return oIotNodeGenPage.DEFAULT_MAP_LOCATION;
+				return oPersonStepGenPage.DEFAULT_MAP_LOCATION;
 			case "DEFAULT_MAP_ZOOM":
-				return oIotNodeGenPage.DEFAULT_MAP_ZOOM;
-			case "listIotNode":
-				return oIotNodeGenPage.listIotNode;
+				return oPersonStepGenPage.DEFAULT_MAP_ZOOM;
+			case "defaultFieldListVars":
+				return oPersonStepGenPage.defaultFieldListVars;
+			case "defaultStatsVars":
+				return oPersonStepGenPage.defaultStatsVars;
+			case "defaultPivotVars":
+				return oPersonStepGenPage.defaultPivotVars;
+			case "listPersonStep":
+				return oPersonStepGenPage.listPersonStep;
 			case "stats":
-				return oIotNodeGenPage.stats;
+				return oPersonStepGenPage.stats;
 			case "facetCounts":
-				return oIotNodeGenPage.facetCounts;
-			case "iotNodeCount":
-				return oIotNodeGenPage.iotNodeCount;
-			case "iotNode_":
-				return oIotNodeGenPage.iotNode_;
-			case "pk":
-				return oIotNodeGenPage.pk;
+				return oPersonStepGenPage.facetCounts;
+			case "personStepCount":
+				return oPersonStepGenPage.personStepCount;
+			case "personStep_":
+				return oPersonStepGenPage.personStep_;
 			case "id":
-				return oIotNodeGenPage.id;
-			case "pageUriIotNode":
-				return oIotNodeGenPage.pageUriIotNode;
+				return oPersonStepGenPage.id;
+			case "pageUriPersonStep":
+				return oPersonStepGenPage.pageUriPersonStep;
 			default:
-				return super.obtainBaseModelPage(var);
+				return super.obtainPageLayout(var);
 		}
 	}
 
@@ -1467,7 +1613,7 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 		Object o = null;
 		for(String v : vars) {
 			if(o == null)
-				o = relateIotNodeGenPage(v, val);
+				o = relatePersonStepGenPage(v, val);
 			else if(o instanceof BaseModel) {
 				BaseModel baseModel = (BaseModel)o;
 				o = baseModel.relateForClass(v, val);
@@ -1475,11 +1621,11 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 		}
 		return o != null;
 	}
-	public Object relateIotNodeGenPage(String var, Object val) {
-		IotNodeGenPage oIotNodeGenPage = (IotNodeGenPage)this;
+	public Object relatePersonStepGenPage(String var, Object val) {
+		PersonStepGenPage oPersonStepGenPage = (PersonStepGenPage)this;
 		switch(var) {
 			default:
-				return super.relateBaseModelPage(var, val);
+				return super.relatePageLayout(var, val);
 		}
 	}
 
@@ -1488,46 +1634,50 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 	///////////////
 
 	public static Object staticSetForClass(String entityVar, SiteRequestEnUS siteRequest_, String o) {
-		return staticSetIotNodeGenPage(entityVar,  siteRequest_, o);
+		return staticSetPersonStepGenPage(entityVar,  siteRequest_, o);
 	}
-	public static Object staticSetIotNodeGenPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
+	public static Object staticSetPersonStepGenPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
 		case "pageResponse":
-			return IotNodeGenPage.staticSetPageResponse(siteRequest_, o);
+			return PersonStepGenPage.staticSetPageResponse(siteRequest_, o);
 		case "defaultZoneId":
-			return IotNodeGenPage.staticSetDefaultZoneId(siteRequest_, o);
+			return PersonStepGenPage.staticSetDefaultZoneId(siteRequest_, o);
 		case "defaultLocaleId":
-			return IotNodeGenPage.staticSetDefaultLocaleId(siteRequest_, o);
+			return PersonStepGenPage.staticSetDefaultLocaleId(siteRequest_, o);
 		case "defaultRangeGap":
-			return IotNodeGenPage.staticSetDefaultRangeGap(siteRequest_, o);
+			return PersonStepGenPage.staticSetDefaultRangeGap(siteRequest_, o);
 		case "defaultRangeEnd":
-			return IotNodeGenPage.staticSetDefaultRangeEnd(siteRequest_, o);
+			return PersonStepGenPage.staticSetDefaultRangeEnd(siteRequest_, o);
 		case "defaultRangeStart":
-			return IotNodeGenPage.staticSetDefaultRangeStart(siteRequest_, o);
+			return PersonStepGenPage.staticSetDefaultRangeStart(siteRequest_, o);
 		case "defaultRangeVar":
-			return IotNodeGenPage.staticSetDefaultRangeVar(siteRequest_, o);
+			return PersonStepGenPage.staticSetDefaultRangeVar(siteRequest_, o);
 		case "defaultFacetSort":
-			return IotNodeGenPage.staticSetDefaultFacetSort(siteRequest_, o);
+			return PersonStepGenPage.staticSetDefaultFacetSort(siteRequest_, o);
 		case "defaultFacetLimit":
-			return IotNodeGenPage.staticSetDefaultFacetLimit(siteRequest_, o);
+			return PersonStepGenPage.staticSetDefaultFacetLimit(siteRequest_, o);
 		case "defaultFacetMinCount":
-			return IotNodeGenPage.staticSetDefaultFacetMinCount(siteRequest_, o);
+			return PersonStepGenPage.staticSetDefaultFacetMinCount(siteRequest_, o);
 		case "defaultPivotMinCount":
-			return IotNodeGenPage.staticSetDefaultPivotMinCount(siteRequest_, o);
+			return PersonStepGenPage.staticSetDefaultPivotMinCount(siteRequest_, o);
 		case "DEFAULT_MAP_LOCATION":
-			return IotNodeGenPage.staticSetDEFAULT_MAP_LOCATION(siteRequest_, o);
+			return PersonStepGenPage.staticSetDEFAULT_MAP_LOCATION(siteRequest_, o);
 		case "DEFAULT_MAP_ZOOM":
-			return IotNodeGenPage.staticSetDEFAULT_MAP_ZOOM(siteRequest_, o);
-		case "iotNodeCount":
-			return IotNodeGenPage.staticSetIotNodeCount(siteRequest_, o);
-		case "pk":
-			return IotNodeGenPage.staticSetPk(siteRequest_, o);
+			return PersonStepGenPage.staticSetDEFAULT_MAP_ZOOM(siteRequest_, o);
+		case "defaultFieldListVars":
+			return PersonStepGenPage.staticSetDefaultFieldListVars(siteRequest_, o);
+		case "defaultStatsVars":
+			return PersonStepGenPage.staticSetDefaultStatsVars(siteRequest_, o);
+		case "defaultPivotVars":
+			return PersonStepGenPage.staticSetDefaultPivotVars(siteRequest_, o);
+		case "personStepCount":
+			return PersonStepGenPage.staticSetPersonStepCount(siteRequest_, o);
 		case "id":
-			return IotNodeGenPage.staticSetId(siteRequest_, o);
-		case "pageUriIotNode":
-			return IotNodeGenPage.staticSetPageUriIotNode(siteRequest_, o);
+			return PersonStepGenPage.staticSetId(siteRequest_, o);
+		case "pageUriPersonStep":
+			return PersonStepGenPage.staticSetPageUriPersonStep(siteRequest_, o);
 			default:
-				return BaseModelPage.staticSetBaseModelPage(entityVar,  siteRequest_, o);
+				return PageLayout.staticSetPageLayout(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -1536,46 +1686,50 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 	////////////////
 
 	public static Object staticSearchForClass(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
-		return staticSearchIotNodeGenPage(entityVar,  siteRequest_, o);
+		return staticSearchPersonStepGenPage(entityVar,  siteRequest_, o);
 	}
-	public static Object staticSearchIotNodeGenPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
+	public static Object staticSearchPersonStepGenPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
 		case "pageResponse":
-			return IotNodeGenPage.staticSearchPageResponse(siteRequest_, (String)o);
+			return PersonStepGenPage.staticSearchPageResponse(siteRequest_, (String)o);
 		case "defaultZoneId":
-			return IotNodeGenPage.staticSearchDefaultZoneId(siteRequest_, (String)o);
+			return PersonStepGenPage.staticSearchDefaultZoneId(siteRequest_, (String)o);
 		case "defaultLocaleId":
-			return IotNodeGenPage.staticSearchDefaultLocaleId(siteRequest_, (String)o);
+			return PersonStepGenPage.staticSearchDefaultLocaleId(siteRequest_, (String)o);
 		case "defaultRangeGap":
-			return IotNodeGenPage.staticSearchDefaultRangeGap(siteRequest_, (String)o);
+			return PersonStepGenPage.staticSearchDefaultRangeGap(siteRequest_, (String)o);
 		case "defaultRangeEnd":
-			return IotNodeGenPage.staticSearchDefaultRangeEnd(siteRequest_, (ZonedDateTime)o);
+			return PersonStepGenPage.staticSearchDefaultRangeEnd(siteRequest_, (ZonedDateTime)o);
 		case "defaultRangeStart":
-			return IotNodeGenPage.staticSearchDefaultRangeStart(siteRequest_, (ZonedDateTime)o);
+			return PersonStepGenPage.staticSearchDefaultRangeStart(siteRequest_, (ZonedDateTime)o);
 		case "defaultRangeVar":
-			return IotNodeGenPage.staticSearchDefaultRangeVar(siteRequest_, (String)o);
+			return PersonStepGenPage.staticSearchDefaultRangeVar(siteRequest_, (String)o);
 		case "defaultFacetSort":
-			return IotNodeGenPage.staticSearchDefaultFacetSort(siteRequest_, (String)o);
+			return PersonStepGenPage.staticSearchDefaultFacetSort(siteRequest_, (String)o);
 		case "defaultFacetLimit":
-			return IotNodeGenPage.staticSearchDefaultFacetLimit(siteRequest_, (Integer)o);
+			return PersonStepGenPage.staticSearchDefaultFacetLimit(siteRequest_, (Integer)o);
 		case "defaultFacetMinCount":
-			return IotNodeGenPage.staticSearchDefaultFacetMinCount(siteRequest_, (Integer)o);
+			return PersonStepGenPage.staticSearchDefaultFacetMinCount(siteRequest_, (Integer)o);
 		case "defaultPivotMinCount":
-			return IotNodeGenPage.staticSearchDefaultPivotMinCount(siteRequest_, (Integer)o);
+			return PersonStepGenPage.staticSearchDefaultPivotMinCount(siteRequest_, (Integer)o);
 		case "DEFAULT_MAP_LOCATION":
-			return IotNodeGenPage.staticSearchDEFAULT_MAP_LOCATION(siteRequest_, (JsonObject)o);
+			return PersonStepGenPage.staticSearchDEFAULT_MAP_LOCATION(siteRequest_, (JsonObject)o);
 		case "DEFAULT_MAP_ZOOM":
-			return IotNodeGenPage.staticSearchDEFAULT_MAP_ZOOM(siteRequest_, (BigDecimal)o);
-		case "iotNodeCount":
-			return IotNodeGenPage.staticSearchIotNodeCount(siteRequest_, (Integer)o);
-		case "pk":
-			return IotNodeGenPage.staticSearchPk(siteRequest_, (Long)o);
+			return PersonStepGenPage.staticSearchDEFAULT_MAP_ZOOM(siteRequest_, (BigDecimal)o);
+		case "defaultFieldListVars":
+			return PersonStepGenPage.staticSearchDefaultFieldListVars(siteRequest_, (String)o);
+		case "defaultStatsVars":
+			return PersonStepGenPage.staticSearchDefaultStatsVars(siteRequest_, (String)o);
+		case "defaultPivotVars":
+			return PersonStepGenPage.staticSearchDefaultPivotVars(siteRequest_, (String)o);
+		case "personStepCount":
+			return PersonStepGenPage.staticSearchPersonStepCount(siteRequest_, (Integer)o);
 		case "id":
-			return IotNodeGenPage.staticSearchId(siteRequest_, (String)o);
-		case "pageUriIotNode":
-			return IotNodeGenPage.staticSearchPageUriIotNode(siteRequest_, (String)o);
+			return PersonStepGenPage.staticSearchId(siteRequest_, (String)o);
+		case "pageUriPersonStep":
+			return PersonStepGenPage.staticSearchPageUriPersonStep(siteRequest_, (String)o);
 			default:
-				return BaseModelPage.staticSearchBaseModelPage(entityVar,  siteRequest_, o);
+				return PageLayout.staticSearchPageLayout(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -1584,46 +1738,50 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 	///////////////////
 
 	public static String staticSearchStrForClass(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
-		return staticSearchStrIotNodeGenPage(entityVar,  siteRequest_, o);
+		return staticSearchStrPersonStepGenPage(entityVar,  siteRequest_, o);
 	}
-	public static String staticSearchStrIotNodeGenPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
+	public static String staticSearchStrPersonStepGenPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
 		case "pageResponse":
-			return IotNodeGenPage.staticSearchStrPageResponse(siteRequest_, (String)o);
+			return PersonStepGenPage.staticSearchStrPageResponse(siteRequest_, (String)o);
 		case "defaultZoneId":
-			return IotNodeGenPage.staticSearchStrDefaultZoneId(siteRequest_, (String)o);
+			return PersonStepGenPage.staticSearchStrDefaultZoneId(siteRequest_, (String)o);
 		case "defaultLocaleId":
-			return IotNodeGenPage.staticSearchStrDefaultLocaleId(siteRequest_, (String)o);
+			return PersonStepGenPage.staticSearchStrDefaultLocaleId(siteRequest_, (String)o);
 		case "defaultRangeGap":
-			return IotNodeGenPage.staticSearchStrDefaultRangeGap(siteRequest_, (String)o);
+			return PersonStepGenPage.staticSearchStrDefaultRangeGap(siteRequest_, (String)o);
 		case "defaultRangeEnd":
-			return IotNodeGenPage.staticSearchStrDefaultRangeEnd(siteRequest_, (Date)o);
+			return PersonStepGenPage.staticSearchStrDefaultRangeEnd(siteRequest_, (Date)o);
 		case "defaultRangeStart":
-			return IotNodeGenPage.staticSearchStrDefaultRangeStart(siteRequest_, (Date)o);
+			return PersonStepGenPage.staticSearchStrDefaultRangeStart(siteRequest_, (Date)o);
 		case "defaultRangeVar":
-			return IotNodeGenPage.staticSearchStrDefaultRangeVar(siteRequest_, (String)o);
+			return PersonStepGenPage.staticSearchStrDefaultRangeVar(siteRequest_, (String)o);
 		case "defaultFacetSort":
-			return IotNodeGenPage.staticSearchStrDefaultFacetSort(siteRequest_, (String)o);
+			return PersonStepGenPage.staticSearchStrDefaultFacetSort(siteRequest_, (String)o);
 		case "defaultFacetLimit":
-			return IotNodeGenPage.staticSearchStrDefaultFacetLimit(siteRequest_, (Integer)o);
+			return PersonStepGenPage.staticSearchStrDefaultFacetLimit(siteRequest_, (Integer)o);
 		case "defaultFacetMinCount":
-			return IotNodeGenPage.staticSearchStrDefaultFacetMinCount(siteRequest_, (Integer)o);
+			return PersonStepGenPage.staticSearchStrDefaultFacetMinCount(siteRequest_, (Integer)o);
 		case "defaultPivotMinCount":
-			return IotNodeGenPage.staticSearchStrDefaultPivotMinCount(siteRequest_, (Integer)o);
+			return PersonStepGenPage.staticSearchStrDefaultPivotMinCount(siteRequest_, (Integer)o);
 		case "DEFAULT_MAP_LOCATION":
-			return IotNodeGenPage.staticSearchStrDEFAULT_MAP_LOCATION(siteRequest_, (JsonObject)o);
+			return PersonStepGenPage.staticSearchStrDEFAULT_MAP_LOCATION(siteRequest_, (JsonObject)o);
 		case "DEFAULT_MAP_ZOOM":
-			return IotNodeGenPage.staticSearchStrDEFAULT_MAP_ZOOM(siteRequest_, (Double)o);
-		case "iotNodeCount":
-			return IotNodeGenPage.staticSearchStrIotNodeCount(siteRequest_, (Integer)o);
-		case "pk":
-			return IotNodeGenPage.staticSearchStrPk(siteRequest_, (Long)o);
+			return PersonStepGenPage.staticSearchStrDEFAULT_MAP_ZOOM(siteRequest_, (Double)o);
+		case "defaultFieldListVars":
+			return PersonStepGenPage.staticSearchStrDefaultFieldListVars(siteRequest_, (String)o);
+		case "defaultStatsVars":
+			return PersonStepGenPage.staticSearchStrDefaultStatsVars(siteRequest_, (String)o);
+		case "defaultPivotVars":
+			return PersonStepGenPage.staticSearchStrDefaultPivotVars(siteRequest_, (String)o);
+		case "personStepCount":
+			return PersonStepGenPage.staticSearchStrPersonStepCount(siteRequest_, (Integer)o);
 		case "id":
-			return IotNodeGenPage.staticSearchStrId(siteRequest_, (String)o);
-		case "pageUriIotNode":
-			return IotNodeGenPage.staticSearchStrPageUriIotNode(siteRequest_, (String)o);
+			return PersonStepGenPage.staticSearchStrId(siteRequest_, (String)o);
+		case "pageUriPersonStep":
+			return PersonStepGenPage.staticSearchStrPageUriPersonStep(siteRequest_, (String)o);
 			default:
-				return BaseModelPage.staticSearchStrBaseModelPage(entityVar,  siteRequest_, o);
+				return PageLayout.staticSearchStrPageLayout(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -1632,46 +1790,50 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 	//////////////////
 
 	public static String staticSearchFqForClass(String entityVar, SiteRequestEnUS siteRequest_, String o) {
-		return staticSearchFqIotNodeGenPage(entityVar,  siteRequest_, o);
+		return staticSearchFqPersonStepGenPage(entityVar,  siteRequest_, o);
 	}
-	public static String staticSearchFqIotNodeGenPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
+	public static String staticSearchFqPersonStepGenPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
 		case "pageResponse":
-			return IotNodeGenPage.staticSearchFqPageResponse(siteRequest_, o);
+			return PersonStepGenPage.staticSearchFqPageResponse(siteRequest_, o);
 		case "defaultZoneId":
-			return IotNodeGenPage.staticSearchFqDefaultZoneId(siteRequest_, o);
+			return PersonStepGenPage.staticSearchFqDefaultZoneId(siteRequest_, o);
 		case "defaultLocaleId":
-			return IotNodeGenPage.staticSearchFqDefaultLocaleId(siteRequest_, o);
+			return PersonStepGenPage.staticSearchFqDefaultLocaleId(siteRequest_, o);
 		case "defaultRangeGap":
-			return IotNodeGenPage.staticSearchFqDefaultRangeGap(siteRequest_, o);
+			return PersonStepGenPage.staticSearchFqDefaultRangeGap(siteRequest_, o);
 		case "defaultRangeEnd":
-			return IotNodeGenPage.staticSearchFqDefaultRangeEnd(siteRequest_, o);
+			return PersonStepGenPage.staticSearchFqDefaultRangeEnd(siteRequest_, o);
 		case "defaultRangeStart":
-			return IotNodeGenPage.staticSearchFqDefaultRangeStart(siteRequest_, o);
+			return PersonStepGenPage.staticSearchFqDefaultRangeStart(siteRequest_, o);
 		case "defaultRangeVar":
-			return IotNodeGenPage.staticSearchFqDefaultRangeVar(siteRequest_, o);
+			return PersonStepGenPage.staticSearchFqDefaultRangeVar(siteRequest_, o);
 		case "defaultFacetSort":
-			return IotNodeGenPage.staticSearchFqDefaultFacetSort(siteRequest_, o);
+			return PersonStepGenPage.staticSearchFqDefaultFacetSort(siteRequest_, o);
 		case "defaultFacetLimit":
-			return IotNodeGenPage.staticSearchFqDefaultFacetLimit(siteRequest_, o);
+			return PersonStepGenPage.staticSearchFqDefaultFacetLimit(siteRequest_, o);
 		case "defaultFacetMinCount":
-			return IotNodeGenPage.staticSearchFqDefaultFacetMinCount(siteRequest_, o);
+			return PersonStepGenPage.staticSearchFqDefaultFacetMinCount(siteRequest_, o);
 		case "defaultPivotMinCount":
-			return IotNodeGenPage.staticSearchFqDefaultPivotMinCount(siteRequest_, o);
+			return PersonStepGenPage.staticSearchFqDefaultPivotMinCount(siteRequest_, o);
 		case "DEFAULT_MAP_LOCATION":
-			return IotNodeGenPage.staticSearchFqDEFAULT_MAP_LOCATION(siteRequest_, o);
+			return PersonStepGenPage.staticSearchFqDEFAULT_MAP_LOCATION(siteRequest_, o);
 		case "DEFAULT_MAP_ZOOM":
-			return IotNodeGenPage.staticSearchFqDEFAULT_MAP_ZOOM(siteRequest_, o);
-		case "iotNodeCount":
-			return IotNodeGenPage.staticSearchFqIotNodeCount(siteRequest_, o);
-		case "pk":
-			return IotNodeGenPage.staticSearchFqPk(siteRequest_, o);
+			return PersonStepGenPage.staticSearchFqDEFAULT_MAP_ZOOM(siteRequest_, o);
+		case "defaultFieldListVars":
+			return PersonStepGenPage.staticSearchFqDefaultFieldListVars(siteRequest_, o);
+		case "defaultStatsVars":
+			return PersonStepGenPage.staticSearchFqDefaultStatsVars(siteRequest_, o);
+		case "defaultPivotVars":
+			return PersonStepGenPage.staticSearchFqDefaultPivotVars(siteRequest_, o);
+		case "personStepCount":
+			return PersonStepGenPage.staticSearchFqPersonStepCount(siteRequest_, o);
 		case "id":
-			return IotNodeGenPage.staticSearchFqId(siteRequest_, o);
-		case "pageUriIotNode":
-			return IotNodeGenPage.staticSearchFqPageUriIotNode(siteRequest_, o);
+			return PersonStepGenPage.staticSearchFqId(siteRequest_, o);
+		case "pageUriPersonStep":
+			return PersonStepGenPage.staticSearchFqPageUriPersonStep(siteRequest_, o);
 			default:
-				return BaseModelPage.staticSearchFqBaseModelPage(entityVar,  siteRequest_, o);
+				return PageLayout.staticSearchFqPageLayout(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -1685,8 +1847,8 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 		return sb.toString();
 	}
 
-	public static final String CLASS_SIMPLE_NAME = "IotNodeGenPage";
-	public static final String VAR_searchListIotNode_ = "searchListIotNode_";
+	public static final String CLASS_SIMPLE_NAME = "PersonStepGenPage";
+	public static final String VAR_searchListPersonStep_ = "searchListPersonStep_";
 	public static final String VAR_pageResponse = "pageResponse";
 	public static final String VAR_defaultZoneId = "defaultZoneId";
 	public static final String VAR_defaultTimeZone = "defaultTimeZone";
@@ -1702,16 +1864,18 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 	public static final String VAR_defaultPivotMinCount = "defaultPivotMinCount";
 	public static final String VAR_DEFAULT_MAP_LOCATION = "DEFAULT_MAP_LOCATION";
 	public static final String VAR_DEFAULT_MAP_ZOOM = "DEFAULT_MAP_ZOOM";
-	public static final String VAR_listIotNode = "listIotNode";
+	public static final String VAR_defaultFieldListVars = "defaultFieldListVars";
+	public static final String VAR_defaultStatsVars = "defaultStatsVars";
+	public static final String VAR_defaultPivotVars = "defaultPivotVars";
+	public static final String VAR_listPersonStep = "listPersonStep";
 	public static final String VAR_stats = "stats";
 	public static final String VAR_facetCounts = "facetCounts";
-	public static final String VAR_iotNodeCount = "iotNodeCount";
-	public static final String VAR_iotNode_ = "iotNode_";
-	public static final String VAR_pk = "pk";
+	public static final String VAR_personStepCount = "personStepCount";
+	public static final String VAR_personStep_ = "personStep_";
 	public static final String VAR_id = "id";
-	public static final String VAR_pageUriIotNode = "pageUriIotNode";
+	public static final String VAR_pageUriPersonStep = "pageUriPersonStep";
 
-	public static final String DISPLAY_NAME_searchListIotNode_ = "";
+	public static final String DISPLAY_NAME_searchListPersonStep_ = "";
 	public static final String DISPLAY_NAME_pageResponse = "";
 	public static final String DISPLAY_NAME_defaultZoneId = "";
 	public static final String DISPLAY_NAME_defaultTimeZone = "";
@@ -1727,22 +1891,24 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 	public static final String DISPLAY_NAME_defaultPivotMinCount = "";
 	public static final String DISPLAY_NAME_DEFAULT_MAP_LOCATION = "";
 	public static final String DISPLAY_NAME_DEFAULT_MAP_ZOOM = "";
-	public static final String DISPLAY_NAME_listIotNode = "";
+	public static final String DISPLAY_NAME_defaultFieldListVars = "";
+	public static final String DISPLAY_NAME_defaultStatsVars = "";
+	public static final String DISPLAY_NAME_defaultPivotVars = "";
+	public static final String DISPLAY_NAME_listPersonStep = "";
 	public static final String DISPLAY_NAME_stats = "";
 	public static final String DISPLAY_NAME_facetCounts = "";
-	public static final String DISPLAY_NAME_iotNodeCount = "";
-	public static final String DISPLAY_NAME_iotNode_ = "";
-	public static final String DISPLAY_NAME_pk = "";
+	public static final String DISPLAY_NAME_personStepCount = "";
+	public static final String DISPLAY_NAME_personStep_ = "";
 	public static final String DISPLAY_NAME_id = "";
-	public static final String DISPLAY_NAME_pageUriIotNode = "";
+	public static final String DISPLAY_NAME_pageUriPersonStep = "";
 
 	public static String displayNameForClass(String var) {
-		return IotNodeGenPage.displayNameIotNodeGenPage(var);
+		return PersonStepGenPage.displayNamePersonStepGenPage(var);
 	}
-	public static String displayNameIotNodeGenPage(String var) {
+	public static String displayNamePersonStepGenPage(String var) {
 		switch(var) {
-		case VAR_searchListIotNode_:
-			return DISPLAY_NAME_searchListIotNode_;
+		case VAR_searchListPersonStep_:
+			return DISPLAY_NAME_searchListPersonStep_;
 		case VAR_pageResponse:
 			return DISPLAY_NAME_pageResponse;
 		case VAR_defaultZoneId:
@@ -1773,24 +1939,28 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 			return DISPLAY_NAME_DEFAULT_MAP_LOCATION;
 		case VAR_DEFAULT_MAP_ZOOM:
 			return DISPLAY_NAME_DEFAULT_MAP_ZOOM;
-		case VAR_listIotNode:
-			return DISPLAY_NAME_listIotNode;
+		case VAR_defaultFieldListVars:
+			return DISPLAY_NAME_defaultFieldListVars;
+		case VAR_defaultStatsVars:
+			return DISPLAY_NAME_defaultStatsVars;
+		case VAR_defaultPivotVars:
+			return DISPLAY_NAME_defaultPivotVars;
+		case VAR_listPersonStep:
+			return DISPLAY_NAME_listPersonStep;
 		case VAR_stats:
 			return DISPLAY_NAME_stats;
 		case VAR_facetCounts:
 			return DISPLAY_NAME_facetCounts;
-		case VAR_iotNodeCount:
-			return DISPLAY_NAME_iotNodeCount;
-		case VAR_iotNode_:
-			return DISPLAY_NAME_iotNode_;
-		case VAR_pk:
-			return DISPLAY_NAME_pk;
+		case VAR_personStepCount:
+			return DISPLAY_NAME_personStepCount;
+		case VAR_personStep_:
+			return DISPLAY_NAME_personStep_;
 		case VAR_id:
 			return DISPLAY_NAME_id;
-		case VAR_pageUriIotNode:
-			return DISPLAY_NAME_pageUriIotNode;
+		case VAR_pageUriPersonStep:
+			return DISPLAY_NAME_pageUriPersonStep;
 		default:
-			return BaseModelPage.displayNameBaseModelPage(var);
+			return PageLayout.displayNamePageLayout(var);
 		}
 	}
 }

@@ -56,6 +56,15 @@ import org.computate.search.response.solr.SolrResponse;
 import io.vertx.core.json.JsonObject;
 
 /**	
+ * <h1>Suggestions that can generate more code for you: </h1>
+ * <ol>
+ * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class SystemEventGen into the class SystemEvent. 
+ * </li>
+ * <li>You can add a class comment "Model: true" if you wish to persist these SystemEvent objects in a relational PostgreSQL database transactionally in the RESTful API. 
+ * The code to persist and query the SystemEventGen data in the database will then be automatically generated. 
+ * </li>
+ * </ol>
+ * <h1>About the SystemEvent class and it's generated class SystemEventGen&lt;Object&gt;: </h1>
  * <p>
  * This Java class extends a generated Java class built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
  * Whenever this Java class is modified or touched, the watch service installed as described in the README, indexes all the information about this Java class in a local Apache Solr Search Engine. 
@@ -2878,7 +2887,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	public static final String DISPLAY_NAME_type = "type";
 	public static final String DISPLAY_NAME_message = "message";
 	public static final String DISPLAY_NAME_status = "message";
-	public static final String DISPLAY_NAME_completed = "created";
+	public static final String DISPLAY_NAME_completed = "completed";
 	public static final String DISPLAY_NAME_inheritPk = "";
 	public static final String DISPLAY_NAME_created = "created";
 	public static final String DISPLAY_NAME_modified = "modified";

@@ -38,7 +38,7 @@
 		</script>
 {{/inline}}
 {{#*inline "htmUrlSystemEvent"}}{{pageUri}}?q={{query.q}}&amp;rows={{#if rows}}{{rows}}{{else}}{{pagination.rows}}{{/if}}&amp;rows={{#if start}}{{start}}{{else}}{{pagination.start}}{{/if}}{{#each query.fq}}{{#eq fq this}}{{else}}&fq={{fq}}:{{val}}{{/eq}}{{/each}}{{#each query.sort}}{{#eq sort this}}{{else}}&sort={{var}} {{order}}{{/eq}}{{/each}}{{/inline}}
-{{#*inline "htmHeadSystemEventPage"}}{{> "htmTitleSystemEventPage"}}{{> "htmMetaSystemEventPage"}}{{> "htmStyleSystemEventPage"}}{{> "htmScriptsSystemEventPage"}}{{> "htmScriptSystemEventPage"}}{{/inline}}
+{{#*inline "htmHeadSystemEventPage"}}{{#block "htmTitle"}}{{/block}}{{#block "htmMeta"}}{{/block}}{{#block "htmStyle"}}{{/block}}{{#block "htmScripts"}}{{/block}}{{#block "htmScript"}}{{/block}}{{/inline}}
 {{#*inline "htmBodySearchSystemEventPage"}}								<!-- #*inline "htmBodySearchSystemEventPage" -->
 								<div>
 {{#each varsQ}}
@@ -665,7 +665,7 @@
 						<th></th>
 						<th>message</th>
 						<th>message</th>
-						<th>created</th>
+						<th>completed</th>
 			</tr>
 {{/inline}}
 {{#*inline "tbody1SystemEventPage"}}
@@ -1016,7 +1016,7 @@
 										<div id="suggest{{classApiMethodMethod}}SystemEventCompleted">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-navy-peony">
-													<label for="{{classApiMethodMethod}}_completed">created</label>
+													<label for="{{classApiMethodMethod}}_completed">completed</label>
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">

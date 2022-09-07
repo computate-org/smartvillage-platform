@@ -3,7 +3,9 @@ package org.computate.smartvillageview.enus.model.traffic.simulation;
 import java.util.Optional;
 
 import org.computate.smartvillageview.enus.config.ConfigKeys;
+import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 
+import io.vertx.core.Future;
 import io.vertx.core.WorkerExecutor;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.json.JsonObject;
@@ -21,4 +23,10 @@ public class TrafficSimulationEnUSApiServiceImpl extends TrafficSimulationEnUSGe
 	public TrafficSimulationEnUSApiServiceImpl(EventBus eventBus, JsonObject config, WorkerExecutor workerExecutor, PgPool pgPool, WebClient webClient, OAuth2Auth oauth2AuthenticationProvider, AuthorizationProvider authorizationProvider, HandlebarsTemplateEngine templateEngine) {
 		super(eventBus, config, workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine);
 	}
+
+	@Override
+		public Future<TrafficSimulation> postTrafficSimulationFuture(SiteRequestEnUS siteRequest, Boolean inheritPk) {
+			// TODO Auto-generated method stub
+			return super.postTrafficSimulationFuture(siteRequest, inheritPk);
+		}
 }

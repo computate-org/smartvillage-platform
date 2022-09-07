@@ -3,7 +3,7 @@ FROM quay.io/centos/centos:stream8
 MAINTAINER Christopher Tate <computate@computate.org>
 
 ENV APP_NAME=sumo \
-	APP_DEPENDENCIES="git python3 python3-pip python3-virtualenv make gcc gcc-c++ readline-devel tcl zlib-devel libpng-devel libjpeg-turbo-devel libtiff-devel libXext-devel libXft-devel mesa-libGLw mesa-libGL-devel mesa-libGLU-devel cmake xerces-c-devel proj-devel gl2ps-devel swig java-11-openjdk-devel maven libsq3-devel libsqlite3x-devel" \
+	APP_DEPENDENCIES="rsync git python3 python3-pip python3-virtualenv make gcc gcc-c++ readline-devel tcl zlib-devel libpng-devel libjpeg-turbo-devel libtiff-devel libXext-devel libXft-devel mesa-libGLw mesa-libGL-devel mesa-libGLU-devel cmake xerces-c-devel proj-devel gl2ps-devel swig java-11-openjdk-devel maven libsq3-devel libsqlite3x-devel" \
 	# gtest-devel gdal-devel ffmpeg-devel
 	APP_DISPLAY_NAME="SUMO Simulation of Urban Mobility" \
 	APP_PREFIX="/usr/local" \

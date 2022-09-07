@@ -1,0 +1,1968 @@
+{{#*inline "htmTitlePersonStepPage"}}		<!-- inline "htmTitlePersonStepPage" -->
+		<title>{{#if searchListPersonStep_}}{{#eq personStepCount int1}}{{#eq params.query.q "*:*"}}person step{{else}}person step{{/eq}}{{else}}no person step found{{/eq}}{{else}}person steps{{/if}}</title>
+{{/inline}}
+{{#*inline "htmMetaPersonStepPage"}}{{> "htmMetaPageLayout"}}{{/inline}}
+{{#*inline "htmStylePersonStepPage"}}{{> "htmStylePageLayout"}}{{/inline}}
+{{#*inline "htmScriptsPersonStepPage"}}{{> "htmScriptsPageLayout"}}		<!-- inline "htmScriptsPersonStepPage" -->
+		<script src="{{staticBaseUrl}}/js/enUS/PersonStepPage.js"></script>
+{{/inline}}
+{{#*inline "htmScriptPersonStepPage"}}		<!-- inline "htmScriptPersonStepPage" -->
+		<script>
+			$(document).ready(function() {
+				document.onkeydown = function(evt) {
+					evt = evt || window.event;
+					var isEscape = false;
+					if ('key' in evt) {
+						isEscape = (evt.key === 'Escape' || evt.key === 'Esc');
+					} else {
+						isEscape = (evt.keyCode === 27);
+					}
+					if (isEscape) {
+						$('.w3-modal:visible').hide();
+					}
+				};
+				window.eventBus = new EventBus('/eventbus');
+				var pk = {{#if pk}}{{pk}}{{else}}null{{/if}};
+				if(pk != null) {
+				}
+				websocketPersonStep(websocketPersonStepInner);
+				window.varsFq = JSON.parse('{{{toJsonObjectStringInApostrophes varsFq}}}');
+				pageGraph();
+			});
+{{#if DEFAULT_MAP_LOCATION }}
+			window.DEFAULT_MAP_LOCATION = { lat: {{ DEFAULT_MAP_LOCATION.lat }}, lon: {{ DEFAULT_MAP_LOCATION.lon }} };
+{{/if}}
+{{#if DEFAULT_MAP_ZOOM }}
+			window.DEFAULT_MAP_ZOOM = {{ DEFAULT_MAP_ZOOM }};
+{{/if}}
+		</script>
+{{/inline}}
+{{#*inline "htmUrlPersonStep"}}{{pageUri}}?q={{query.q}}&amp;rows={{#if rows}}{{rows}}{{else}}{{pagination.rows}}{{/if}}&amp;rows={{#if start}}{{start}}{{else}}{{pagination.start}}{{/if}}{{#each query.fq}}{{#eq fq this}}{{else}}&fq={{fq}}:{{val}}{{/eq}}{{/each}}{{#each query.sort}}{{#eq sort this}}{{else}}&sort={{var}} {{order}}{{/eq}}{{/each}}{{/inline}}
+{{#*inline "htmHeadPersonStepPage"}}{{/block}}{{#block "htmTitle"}}{{/block}}{{#block "htmMeta"}}{{/block}}{{#block "htmStyle"}}{{/block}}{{#block "htmScripts"}}{{/block}}{{#block "htmScript"}}{{/block}}{{/inline}}
+{{#*inline "htmBodySearchPersonStepPage"}}								<!-- #*inline "htmBodySearchPersonStepPage" -->
+								<div>
+{{#each varsQ}}
+									<div class="w3-cell-row ">
+										<div class="w3-cell w3-cell-top ">
+											<label for="qPersonStep_{{ @key }}">{{ displayName }}<sup class="w3-tiny "> ({{ classSimpleName }})</sup></label>
+										</div>
+									</div>
+									<div class="w3-cell-row ">
+										<div class="w3-cell w3-cell-top ">
+											<input id="qPersonStep_{{ @key }}" placeholder="{{ displayName }}" class="" {{#eq ../var 'objectSuggest' }}onkeyup{{else}}onchange{{/eq}}="qChange(this); " data-var="{{ var }}" autocomplete="off="/>
+											<div class="pageSearchVal w3-tiny "></div>
+										</div>
+									</div>
+{{/each}}
+									<div class="w3-cell-row ">
+										<div class="w3-cell w3-cell-top ">
+											<label for="qPersonStep_Start">start<sup class="w3-tiny "> (Long)</sup></label>
+										</div>
+									</div>
+									<div class="w3-cell-row ">
+										<div class="w3-cell w3-cell-top ">
+											<input id="qPersonStep_start" placeholder="{{ displayName }}" class="" onchange="paramChange(this); " data-var="start" autocomplete="off="/>
+											<div class="pageSearchVal w3-tiny "></div>
+										</div>
+									</div>
+									<div class="w3-cell-row ">
+										<div class="w3-cell w3-cell-top ">
+											<label for="qPersonStep_Rows">rows<sup class="w3-tiny "> (Long)</sup></label>
+										</div>
+									</div>
+									<div class="w3-cell-row ">
+										<div class="w3-cell w3-cell-top ">
+											<input id="qPersonStep_rows" placeholder="{{ displayName }}" class="" onchange="paramChange(this); " data-var="rows" autocomplete="off="/>
+											<div class="pageSearchVal w3-tiny "></div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+{{#*inline "htmBodyFiltersPersonStepPage"}}								<!-- #*inline "htmBodyFiltersPersonStepPage" -->
+								<div>
+{{#each varsFq }}
+									<div class="">
+										<label for="fqPersonStep_{{ @key }}">{{ displayName }}<sup class="w3-tiny "> ({{ classSimpleName }})</sup></label>
+										<div class="w3-cell-row ">
+											<div class="w3-cell w3-cell-top ">
+												<button id="buttonFacetPersonStep_{{ @key }}" class="" onclick="facetFieldChange(this); " title="see values " data-var="{{ var }}" data-clear="{{#if facetField }}true{{else}}false{{/if}}"><i class="fas fa-list "></i></button>
+											</div>
+											<div class="w3-cell w3-cell-top ">
+												<input id="fqPersonStep_{{ @key }}" placeholder="{{ displayName }}" class="" onchange="fqChange(this); " data-var="{{ var }}" autocomplete="off=" value="{{ val }}"/>
+											</div>
+										</div>
+									</div>
+									<div class="w3-tiny ">
+										<div class="pageSearchVal " id="pageSearchVal-fqPersonStep_{{ @key }}">{{#if val }}fq={{ var }}:{{encodeURIComponent val }}{{/if}}</div>
+										<div class="pageSearchVal " id="pageSearchVal-buttonFacetPersonStep_{{ @key }}">{{#if facetField.var }}facet.field={{ facetField.var }}{{/if}}</div>
+										<ol class="pageFacetField w3-small pageFacetFieldPersonStep_{{ @key }} " id="pageFacetFieldPersonStep_{{ @key }}">
+{{#each facetField.counts }}
+											<li class="cursor-pointer " data-class="PersonStep" data-var="{{ ../var }}" data-val="{{ @key }}" onclick="fqReplace(this); ">{{ @key }}: {{ this }}</li>
+{{/each}}
+										</ol>
+									</div>
+{{/each}}
+								</div>
+{{/inline}}
+{{#*inline "htmBodyRangePersonStepPage"}}								<!-- #*inline "htmBodyRangePersonStepPage" -->
+								<table class="w3-padding ">
+									<tr>
+										<td class="w3-padding w3-tiny " colspan="2">
+											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeGap-PersonStep">{{#if defaultRangeGap }}facet.range.gap={{encodeURIComponent defaultRangeGap }}{{/if}}</div>
+											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeStart-PersonStep">{{#if defaultRangeStart }}facet.range.start={{encodeURIComponent defaultRangeStart }}{{/if}}</div>
+											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeEnd-PersonStep">{{#if defaultRangeEnd }}facet.range.end={{encodeURIComponent defaultRangeEnd }}{{/if}}</div>
+											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeVar-PersonStep">{{#if defaultRangeVar }}facet.range={!tag=r1}{{encodeURIComponent defaultRangeVar }}{{/if}}</div>
+										</td>
+									</tr>
+								</table>
+								<table class="w3-padding ">
+									<tr class="">
+										<td class="">
+											<span>Range Gap</span>
+										</td>
+										<td class="">
+											<select name="facet.range.gap" id="pageFacetRangeGap-PersonStep" onchange="facetRangeChange(this, 'PersonStep'); ">
+												<option value="+1YEAR"{{#eq defaultRangeGap '+1YEAR'}} selected="selected"{{else}}{{/eq}}>Year</option>
+												<option value="+1MONTH"{{#eq defaultRangeGap '+1MONTH'}} selected="selected"{{else}}{{/eq}}>Month</option>
+												<option value="+1WEEK"{{#eq defaultRangeGap '+1WEEK'}} selected="selected"{{else}}{{/eq}}>Week</option>
+												<option value="+1DAY"{{#eq defaultRangeGap '+1DAY'}} selected="selected"{{else}}{{#if defaultRangeGap}}{{else}} selected="selected"{{/if}}{{/eq}}>Day</option>
+												<option value="+1HOUR"{{#eq defaultRangeGap '+1HOUR'}} selected="selected"{{else}}{{/eq}}>Hour</option>
+												<option value="+1MINUTE"{{#eq defaultRangeGap '+1MINUTE'}} selected="selected"{{else}}{{/eq}}>Minute</option>
+												<option value="+1SECOND"{{#eq defaultRangeGap '+1SECOND'}} selected="selected"{{else}}{{/eq}}>Second</option>
+											</select>
+										</td>
+									</tr>
+									<tr class="">
+										<td class="" colspan="2">
+											<span>Range Start</span>
+										</td>
+									</tr>
+									<tr class="">
+										<td class="" colspan="2">
+											<span><input type="datetime-local" name="facetRangeStart" id="pageFacetRangeStart-PersonStep" value="{{formatZonedDateTime defaultRangeStart "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeChange(this, 'PersonStep'); "/></span>
+										</td>
+									</tr>
+									<tr class="">
+										<td class="" colspan="2">
+											<span>Range End</span>
+										</td>
+									</tr>
+									<tr class="">
+										<td class="" colspan="2">
+											<span><input type="datetime-local" name="facetRangeEnd" id="pageFacetRangeEnd-PersonStep" value="{{formatZonedDateTime defaultRangeEnd "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeChange(this, 'PersonStep'); "/></span>
+										</td>
+									</tr>
+								</table>
+								<table class="w3-padding ">
+{{#each varsRange }}
+									<tr class="">
+										<td class="">
+											<span><input type="radio" name="pageFacetRange" class="pageFacetRange " id="pageFacetRangePersonStep_{{ @key }}" value="{{ var }}"{{#eq defaultRangeVar var }} checked="checked"{{/eq}} onclick="facetRangeChange(this, 'PersonStep'); "/></span>
+										</td>
+										<td class="">
+											<label for="pageFacetRangePersonStep_{{ @key }}">{{ displayName }}</label>
+										</td>
+									</tr>
+{{/each}}
+								</table>
+{{/inline}}
+{{#*inline "htmBodyPivotPersonStepPage"}}								<!-- #*inline "htmBodyPivotPersonStepPage" -->
+								<div style="display: none; " class="w3-padding w3-tiny " id="pageSearchVal-PivotPersonStepHidden">
+{{#each defaultPivotVars }}
+									<div class="pageSearchVal-PivotPersonStepHidden " id="pageSearchVal-PivotPersonStepHidden_{{ this }}">{{ this }}</div>
+{{/each}}
+								</div>
+								<div class="w3-padding w3-tiny " id="pageSearchVal-PivotPersonStep">
+{{#if defaultPivotVars }}
+									<div class="pageSearchVal pageSearchVal-PivotPersonStep " id="pageSearchVal-PivotPersonStep_1">facet.pivot={!range=r1}{{#each defaultPivotVars }}{{#if @index }},{{/if}}{{ this }}{{/each}}</div>
+{{/if}}
+								</div>
+								<table class="w3-table ">
+{{#each varsFq }}
+									<tr class="">
+										<td class="">
+											<span><input type="checkbox" name="pageFacetPivot" class="pageFacetPivot " id="pageFacetPivotPersonStep_{{ @key }}" value="{{ var }}"{{#if pivot }} checked="checked"{{/if}} onclick="facetPivotChange(this, 'PersonStep'); "/></span>
+										</td>
+										<td class="w3-cell ">
+											<label for="pageFacetPivotPersonStep_{{ @key }}">{{ displayName }}</label>
+										</td>
+									</tr>
+{{/each}}
+								</table>
+{{/inline}}
+{{#*inline "htmBodyFieldListPersonStepPage"}}								<!-- #*inline "htmBodyFieldListPersonStepPage" -->
+								<div style="display: none; " class="w3-padding w3-tiny " id="pageSearchVal-FieldListPersonStepHidden">
+{{#each defaultFieldListVars }}
+									<div class="pageSearchVal-FieldListPersonStepHidden " id="pageSearchVal-FieldListPersonStepHidden_{{ this }}">{{ this }}</div>
+{{/each}}
+								</div>
+								<div class="w3-padding w3-tiny " id="pageSearchVal-FieldListPersonStep">
+{{#if defaultFieldListVars }}
+									<div class="pageSearchVal pageSearchVal-FieldListPersonStep " id="pageSearchVal-FieldListPersonStep_1">fl={{#each defaultFieldListVars }}{{#if @index }},{{/if}}{{ this }}{{/each}}</div>
+{{/if}}
+								</div>
+								<table class="w3-table ">
+{{#each varsFq }}
+									<tr class="">
+										<td class="">
+											<span><input type="checkbox" name="pageFieldList" class="pageFieldList " id="pageFieldListPersonStep_{{ @key }}" value="{{ var }}"{{#if fieldList }} checked="checked"{{/if}} onclick="facetFieldListChange(this, 'PersonStep'); "/></span>
+										</td>
+										<td class="w3-cell ">
+											<label for="pageFieldListPersonStep_{{ @key }}">{{ displayName }}</label>
+										</td>
+									</tr>
+{{/each}}
+								</table>
+{{/inline}}
+{{#*inline "htmBodyStatsPersonStepPage"}}								<!-- #*inline "htmBodyStatsPersonStepPage" -->
+								<div style="display: none; " class="w3-padding w3-tiny " id="pageSearchVal-StatsPersonStepHidden">
+{{#each defaultStatsVars }}
+									<div class="pageSearchVal-StatsPersonStepHidden " id="pageSearchVal-StatsPersonStepHidden_{{ this }}">{{ this }}</div>
+{{/each}}
+								</div>
+								<div class="w3-padding w3-tiny " id="pageSearchVal-StatsPersonStep">
+{{#if defaultStatsVars }}
+{{#each defaultStatsVars }}									<div class="pageSearchVal pageSearchVal-StatsPersonStep_{{ this }} " id="pageSearchVal-StatsPersonStep_{{ this }}">stats.field={{ this }}</div>
+{{/each}}{{/if}}
+								</div>
+								<table class="w3-table ">
+{{#each varsFq }}
+{{#if enableStats }}
+									<tr class="">
+										<td class="">
+											<span><input type="checkbox" name="pageStats" class="pageStats " id="pageStatsPersonStep_{{ @key }}" value="{{ var }}"{{#if ./stats }} checked="checked"{{/if}} onclick="facetStatsChange(this, 'PersonStep'); "/></span>
+										</td>
+										<td class="w3-cell ">
+											<div>
+												<label for="pageStatsPersonStep_{{ @key }}">{{ displayName }}</label>
+											</div>
+											<div class="pageStatsField w3-small pageStatsFieldPersonStep_{{ @key }} " id="pageStatsFieldPersonStep_{{ @key }}">
+{{#if ./stats }}
+{{#each ./stats }}
+{{#eq @key 'name' }}{{else}}
+												<div data-class="PersonStep" data-var="{{ ../var }}" data-val="{{ @key }}">{{ @key }}: {{ this }}</div>
+{{/eq}}
+{{/each}}
+{{#if ./stats/min }}
+									<div>									<span> step </span>									<input id="animateStatsStep" placeholder="step" value="1" style="width: 4em; "/>									<span> min </span>									<input id="animateStatsMin" placeholder="min" value="{{ ./stats/min }}" style="width: 4em; "/>									<span> max </span>									<input id="animateStatsMax" placeholder="max" value="{{ ./stats/max }}" style="width: 4em; "/>									<span> speed in seconds </span>									<input id="animateStatsSpeed" placeholder="speed" value="1" style="width: 4em; "/>									<button onclick="animateStats(); ">animate</button>									</div>{{/if}}
+{{/if}}
+											</div>
+										</td>
+									</tr>
+{{/if}}
+{{/each}}
+								</table>
+{{/inline}}
+{{#*inline "htmBodyMenuPersonStepPage"}}		<!-- #*inline "htmBodyMenuPersonStepPage" -->
+{{> "htmBodyMenuPageLayout"}}{{/inline}}
+{{#*inline "htmBodyGraphPersonStepPage"}}		<!-- #*inline "htmBodyGraphPersonStepPage" -->
+<div id="htmBodyGraphPageLayout" class="w3-content htmBodyGraph "></div>{{/inline}}
+{{#*inline "htmBodyCount0PersonStepPage"}}		<!-- #*inline "htmBodyCount0PersonStepPage" -->
+		<h1>
+			<a href="{{pageUri}}" class="w3-bar-item w3-btn w3-center w3-block w3-blue w3-hover-blue">
+				{{#if contextIconCssClasses}}
+					<i class="{{ contextIconCssClasses }} site-menu-icon "></i>
+				{{/if}}
+				<span class="">person steps</span>
+			</a>
+		</h1>
+		<h2>
+			<span class="w3-bar-item w3-padding w3-center w3-block w3-blue">
+				{{#if contextIconCssClasses}}
+					<i class="{{ contextIconCssClasses }}  site-menu-icon "></i>
+				{{/if}}
+				<span class="">no person step found</span>
+			</span>
+		</h2>
+{{/inline}}
+{{#*inline "htmBodyCount1AllPersonStepPage"}}		<!-- #*inline "htmBodyCount1AllPersonStepPage" -->
+		<h1 class="w3-center ">
+			<a href="{{pageUri}}" class="w3-bar-item w3-btn w3-block w3-blue w3-hover-blue">
+			{{#if contextIconCssClasses}}
+				<i class="{{ contextIconCssClasses }} site-menu-icon "></i>
+			{{/if}}
+				<span class="">person step</span>
+			</a>
+		</h1>
+		<h2 class="w3-center ">
+			<span class="w3-bar-item w3-padding w3-center w3-block w3-blue">
+				<span class="">{{personStep_.objectTitle}}</span>
+			</span>
+		</h2>
+{{/inline}}
+{{#*inline "htmBodyCount1PersonStepPage"}}		<!-- #*inline "htmBodyCount1PersonStepPage" -->
+		<h1>
+			<a href="{{pageUri}}" class="w3-bar-item w3-btn w3-center w3-block w3-blue w3-hover-blue">
+	{{#if contextIconCssClasses}}
+				<i class="{{ contextIconCssClasses }} site-menu-icon "></i>
+	{{/if}}
+				<span class="">person steps</span>
+			</a>
+		</h1>
+		<div>
+	{{#if pagination.pagePrevious}}
+			<a href="{{pageUri}}?start={{pagination.pagePrevious.start}}&amp;rows={{pagination.rows}}">
+				<i class="fas fa-arrow-square-left "></i>
+			</a>
+	{{else}}
+			<i class="fas fa-arrow-square-left w3-opacity "></i>
+	{{/if}}
+	{{#gte pagination.rowsPrevious pagination.1L}}
+			<a href="{{pageUri}}?start={{pagination.start}}&amp;rows={{ pagination.rowsPrevious }}">
+				<i class="fas fa-minus-square "></i>
+			</a>
+	{{else}}
+			<i class="fas fa-minus-square w3-opacity "></i>
+	{{/gte}}
+			<a href="{{pageUri}}?start={{pagination.start}}&amp;rows={{ pagination.rowsNext }}">
+				<i class="fas fa-plus-square "></i>
+			</a>
+	{{#if pagination.pageNext}}
+			<a href="{{pageUri}}?start={{pagination.pageNext.start}}&amp;rows={{pagination.rows}}">
+				<i class="fas fa-arrow-square-right "></i>
+			</a>
+	{{else}}
+			<i class="fas fa-arrow-square-right w3-opacity "></i>
+	{{/if}}
+			<span>{{ pagination.startNum }} - {{ pagination.endNum }} of {{ pagination.foundNum }}</span>
+		</div>
+{{> "table1PersonStepPage"}}
+{{/inline}}
+{{#*inline "htmBodyAllPersonStepPage"}}		<!-- #*inline "htmBodyAllPersonStepPage" -->
+		<h1>
+			<a href="{{pageUri}}" class="w3-bar-item w3-btn w3-center w3-block w3-blue w3-hover-blue">
+	{{#if contextIconCssClasses}}
+				<i class="{{ contextIconCssClasses }} site-menu-icon "></i>
+	{{/if}}
+				<span class="">person steps</span>
+			</a>
+		</h1>
+		<div class="">
+			<div>
+	{{#if pagination.pagePrevious}}
+				<a href="{{pageUri}}?start={{pagination.pagePrevious.start}}&amp;rows={{pagination.rows}}">
+					<i class="fas fa-arrow-square-left "></i>
+				</a>
+	{{else}}
+				<i class="fas fa-arrow-square-left w3-opacity "></i>
+	{{/if}}
+	{{#gte pagination.rowsPrevious pagination.1L}}
+				<a href="{{pageUri}}?start={{pagination.start}}&amp;rows={{ pagination.rowsPrevious }}">
+					<i class="fas fa-minus-square "></i>
+				</a>
+	{{else}}
+				<i class="fas fa-minus-square w3-opacity "></i>
+	{{/gte}}
+				<a href="{{pageUri}}?start={{pagination.start}}&amp;rows={{ pagination.rowsNext }}">
+					<i class="fas fa-plus-square "></i>
+				</a>
+	{{#if pagination.pageNext}}
+				<a href="{{pageUri}}?start={{pagination.pageNext.start}}&amp;rows={{pagination.rows}}">
+					<i class="fas fa-arrow-square-right "></i>
+				</a>
+	{{else}}
+				<i class="fas fa-arrow-square-right w3-opacity "></i>
+	{{/if}}
+				<span>{{ pagination.startNum }} - {{ pagination.endNum }} of {{ pagination.foundNum }}</span>
+			</div>
+{{> "table1PersonStepPage"}}
+		</div>
+{{/inline}}
+{{#*inline "htmFormPersonStepPage"}}
+		<!-- #*inline "htmForm" -->
+		<form action="/api/person-step" id="PersonStepForm" class="pageForm " style="" onsubmit="event.preventDefault(); return false; ">
+{{#if id}}
+			<input name="id" class="valueId" type="hidden" value="{{id}}"/>
+{{/if}}
+			<input name="focusId" type="hidden"/>
+			<input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{{toJsonObjectStringInApostrophes pageResponse }}}' type="hidden"/>
+		</form>
+{{#if id}}
+{{#block "htmForm_searchpagePersonStep"}}{{/block}}
+{{/if}}
+{{/inline}}
+{{#*inline "htmFormPersonStepPage_patchPersonStep"}}
+		<button
+			class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-blue "
+			onclick="$('#patchPersonStepModal').show(); "
+			>
+			<i class="fas fa-edit "></i>
+			Modify person steps
+		</button>
+		<div id="patchPersonStepModal" class="w3-modal ">
+			<div class="w3-modal-content ">
+				<div class="w3-card-4 ">
+					<header class="w3-container w3-blue">
+	{{#eq "Page" classApiMethodMethod}}
+						<span class="w3-button w3-display-topright " onclick="$('#patchPersonStepModal').hide(); ">×</span>
+	{{/eq}}
+						<h2 class="w3-padding ">Modify person steps</h2>
+					</header>
+					<div class="" id="patchPersonStepFormValues">
+							<div class="w3-cell-row ">
+{{> "htmCreated" classApiMethodMethod="PATCH"}}
+{{> "htmObjectId" classApiMethodMethod="PATCH"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmArchived" classApiMethodMethod="PATCH"}}
+{{> "htmDeleted" classApiMethodMethod="PATCH"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmSimulationKey" classApiMethodMethod="PATCH"}}
+{{> "htmTimeStepId" classApiMethodMethod="PATCH"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmTime" classApiMethodMethod="PATCH"}}
+{{> "htmLocation" classApiMethodMethod="PATCH"}}
+{{> "htmPersonId" classApiMethodMethod="PATCH"}}
+{{> "htmPersonType" classApiMethodMethod="PATCH"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmAngle" classApiMethodMethod="PATCH"}}
+{{> "htmSpeed" classApiMethodMethod="PATCH"}}
+{{> "htmPos" classApiMethodMethod="PATCH"}}
+{{> "htmSlope" classApiMethodMethod="PATCH"}}
+							</div>
+						<button
+							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-blue "
+							onclick="patchPersonStep(null, $('#patchPersonStepFormValues')); "
+							>Modify person steps</button>
+					</div>
+				</div>
+			</div>
+		</div>
+{{/inline}}
+{{#*inline "htmFormPersonStepPage_postPersonStep"}}
+		<button
+			class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-blue "
+			onclick="$('#postPersonStepModal').show(); "
+			>
+			<i class="fas fa-file-plus "></i>
+			Create a person step
+		</button>
+		<div id="postPersonStepModal" class="w3-modal ">
+			<div class="w3-modal-content ">
+				<div class="w3-card-4 ">
+					<header class="w3-container w3-blue">
+	{{#eq "Page" classApiMethodMethod}}
+						<span class="w3-button w3-display-topright " onclick="$('#postPersonStepModal').hide(); ">×</span>
+	{{/eq}}
+						<h2 class="w3-padding ">Create a person step</h2>
+					</header>
+					<div class="" id="postPersonStepFormValues">
+						<div id="postPersonStepForm">
+							<div class="w3-cell-row ">
+{{> "htmCreated" classApiMethodMethod="POST"}}
+{{> "htmObjectId" classApiMethodMethod="POST"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmArchived" classApiMethodMethod="POST"}}
+{{> "htmDeleted" classApiMethodMethod="POST"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmSimulationKey" classApiMethodMethod="POST"}}
+{{> "htmTimeStepId" classApiMethodMethod="POST"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmTime" classApiMethodMethod="POST"}}
+{{> "htmLocation" classApiMethodMethod="POST"}}
+{{> "htmPersonId" classApiMethodMethod="POST"}}
+{{> "htmPersonType" classApiMethodMethod="POST"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmAngle" classApiMethodMethod="POST"}}
+{{> "htmSpeed" classApiMethodMethod="POST"}}
+{{> "htmPos" classApiMethodMethod="POST"}}
+{{> "htmSlope" classApiMethodMethod="POST"}}
+							</div>
+						</div>
+						<button
+							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-blue "
+							onclick="postPersonStep($('#postPersonStepForm')); "
+							>Create a person step</button>
+					</div>
+				</div>
+			</div>
+		</div>
+{{/inline}}
+{{#*inline "htmFormPersonStepPage_putimportPersonStep"}}
+		<button
+			class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-blue "
+			onclick="$('#putimportPersonStepModal').show(); "
+			>
+			<i class="fas fa-file-import "></i>
+			Import person steps
+		</button>
+		<div id="putimportPersonStepModal" class="w3-modal ">
+			<div class="w3-modal-content ">
+				<div class="w3-card-4 ">
+					<header class="w3-container w3-blue">
+	{{#eq "Page" classApiMethodMethod}}
+						<span class="w3-button w3-display-topright " onclick="$('#putimportPersonStepModal').hide(); ">×</span>
+	{{/eq}}
+						<h2 class="w3-padding ">Import person steps</h2>
+					</header>
+					<div class="" id="putimportPersonStepFormValues">
+						<div class="w3-cell-row ">
+							<textarea
+								class="PUTImport_searchList w3-input w3-border "
+								style="height: 300px; "
+								placeholder="{ 'searchList': [ { 'pk': ... , 'saves': [ ... ] }, ... ] }"
+								></textarea>
+						</div>
+						<button
+							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-blue "
+							onclick="putimportPersonStep($('#putimportPersonStepFormValues')); "
+							>Import person steps</button>
+					</div>
+				</div>
+			</div>
+		</div>
+{{/inline}}
+{{#*inline "htmFormPersonStepPage_searchpagePersonStep"}}
+		<div id="searchpagePersonStepModal" class="">
+			<div class="">
+				<div class="w3-card-4 ">
+					<div class="" id="searchpagePersonStepFormValues">
+						<div id="searchpagePersonStepForm">
+							<div class="w3-cell-row ">
+{{> "htmCreated" classApiMethodMethod="Page"}}
+{{> "htmModified" classApiMethodMethod="Page"}}
+{{> "htmObjectId" classApiMethodMethod="Page"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmArchived" classApiMethodMethod="Page"}}
+{{> "htmDeleted" classApiMethodMethod="Page"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmSimulationKey" classApiMethodMethod="Page"}}
+{{> "htmTimeStepId" classApiMethodMethod="Page"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmTime" classApiMethodMethod="Page"}}
+{{> "htmLocation" classApiMethodMethod="Page"}}
+{{> "htmPersonId" classApiMethodMethod="Page"}}
+{{> "htmPersonType" classApiMethodMethod="Page"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmAngle" classApiMethodMethod="Page"}}
+{{> "htmSpeed" classApiMethodMethod="Page"}}
+{{> "htmPos" classApiMethodMethod="Page"}}
+{{> "htmSlope" classApiMethodMethod="Page"}}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+{{/inline}}
+{{#*inline "htmBodySidebarPersonStepPage"}}
+				<div class="w3-dropdown-click w3-bar-block min-width-300px ">
+					<div class="min-width-300px ">
+						<span title="Search" class="siteSidebarToggle w3-padding-small w3-hover-black w3-blue " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-blue'); $(this).addClass('w3-black'); $(this).removeClass('w3-blue'); "><i class="fad fa-magnifying-glass hover-box-shadow w3-xlarge "></i> Search</span>
+						<span title="Filters" class="siteSidebarToggle w3-padding-small w3-hover-black w3-blue " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleFilters').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-blue'); $(this).addClass('w3-black'); $(this).removeClass('w3-blue'); "><i class="fad fa-filters hover-box-shadow w3-xlarge "></i> Filters</span>
+						<span title="Range" class="siteSidebarToggle w3-padding-small w3-hover-black w3-blue " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleRange').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-blue'); $(this).addClass('w3-black'); $(this).removeClass('w3-blue'); "><i class="fad fa-calendar-range hover-box-shadow w3-xlarge "></i> Range</span>
+						<span title="Pivot" class="siteSidebarToggle w3-padding-small w3-hover-black w3-blue " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-blue'); $(this).addClass('w3-black'); $(this).removeClass('w3-blue'); "><i class="fad fa-table-pivot hover-box-shadow w3-xlarge "></i> Pivot</span>
+						<span title="FieldList" class="siteSidebarToggle w3-padding-small w3-hover-black w3-blue " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleFieldList').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-blue'); $(this).addClass('w3-black'); $(this).removeClass('w3-blue'); "><i class="fad fa-list-ul hover-box-shadow w3-xlarge "></i> FieldList</span>
+						<span title="Stats" class="siteSidebarToggle w3-padding-small w3-hover-black w3-blue " onclick="$('.siteSidebarToggleFieldList').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleStats').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-blue'); $(this).addClass('w3-black'); $(this).removeClass('w3-blue'); "><i class="fad fa-chart-candlestick hover-box-shadow w3-xlarge "></i> Stats</span>
+						<a title="API" class="siteSidebarToggle w3-padding-small w3-hover-black w3-blue " href="{{ apiUri }}{{ queryStr }}"><i class="fad fa-brackets-curly hover-box-shadow w3-xlarge "></i> API</a>
+					</div>
+					<div class=" ">
+						<div class="siteSidebarToggle siteSidebarToggleSearch w3-dropdown-content min-width-300px w3-white w3-border w3-border-blue " style="display: none; ">
+							<div class="w3-bar w3-blue ">
+								<span class="w3-bar-item ">
+								<i class="fad fa-magnifying-glass "></i> Search</span>
+							</div>
+							<div class="w3-bar-block ">
+{{#block "htmBodySearch"}}{{/block}}
+							</div>
+						</div>
+						<div  class="siteSidebarToggle siteSidebarToggleFilters w3-dropdown-content min-width-300px w3-white w3-border w3-border-blue " style="display: none; ">
+							<div class="w3-bar w3-blue ">
+								<span class="w3-bar-item ">
+								<i class="fad fa-filters "></i> Filters</span>
+							</div>
+							<div class="w3-bar-block ">
+{{#block "htmBodyFilters"}}{{/block}}
+							</div>
+						</div>
+						<div  class="siteSidebarToggle siteSidebarToggleRange w3-dropdown-content min-width-300px w3-white w3-border w3-border-blue " style="display: none; ">
+							<div class="w3-bar w3-blue  ">
+								<span class="w3-bar-item ">
+								<i class="fad fa-calendar-range "></i> Range</span>
+							</div>
+							<div class="w3-bar-block ">
+{{#block "htmBodyRange"}}{{/block}}
+							</div>
+						</div>
+						<div  class="siteSidebarToggle siteSidebarTogglePivot w3-dropdown-content min-width-300px w3-white w3-border w3-border-blue " style="display: none; ">
+							<div class="w3-bar w3-blue ">
+								<span class="w3-bar-item ">
+								<i class="fad fa-table-pivot "></i> Pivot</span>
+							</div>
+							<div class="w3-bar-block ">
+{{#block "htmBodyPivot"}}{{/block}}
+							</div>
+						</div>
+						<div  class="siteSidebarToggle siteSidebarToggleFieldList w3-dropdown-content min-width-300px w3-white w3-border w3-border-blue " style="display: none; ">
+							<div class="w3-bar w3-blue ">
+								<span class="w3-bar-item ">
+								<i class="fad fa-list-ul "></i> Field List</span>
+							</div>
+							<div class="w3-bar-block ">
+{{#block "htmBodyFieldList"}}{{/block}}
+							</div>
+						</div>
+						<div  class="siteSidebarToggle siteSidebarToggleStats w3-dropdown-content min-width-300px w3-white w3-border w3-border-blue " style="display: none; ">
+							<div class="w3-bar w3-blue ">
+								<span class="w3-bar-item ">
+								<i class="fad fa-chart-candlestick "></i> Stats</span>
+							</div>
+							<div class="w3-bar-block ">
+{{#block "htmBodyStats"}}{{/block}}
+							</div>
+						</div>
+					</div>
+				</div>
+{{/inline}}
+{{#*inline "htmBodyStartPersonStepPage"}}
+{{> "htmBodyStartPageLayout"}}
+{{/inline}}
+{{#*inline "htmBodyMiddlePersonStepPage"}}
+{{> "htmBodyMiddlePageLayout"}}
+{{/inline}}
+{{#*inline "htmBodyEndPersonStepPage"}}
+{{> "htmBodyEndPageLayout"}}
+{{/inline}}
+{{#*inline "htmBodyPersonStepPage"}}
+{{#block "htmBodyStart"}}{{/block}}
+{{#block "htmBodyMiddle"}}{{/block}}
+{{#block "htmBodyEnd"}}{{/block}}
+{{/inline}}
+{{#*inline "htmBodyMiddlePersonStepPage"}}
+		<div class="w3-bar w3-content ">
+{{#block "htmBodySidebar"}}{{/block}}
+		</div>
+{{#block "htmBodyGraph"}}{{/block}}
+	<div class="pageContent w3-content ">
+	{{#eq personStepCount int0}}
+{{#block "htmBodyCount0"}}{{/block}}
+	{{else}}
+		{{#eq personStepCount int1}}
+			{{#eq params.query.q "*:*"}}
+{{#block "htmBodyCount1All"}}{{/block}}
+			{{else}}
+{{#block "htmBodyCount1"}}{{/block}}
+			{{/eq}}
+		{{else}}
+{{#block "htmBodyAll"}}{{/block}}
+		{{/eq}}
+	{{/eq}}
+{{#block "htmForm"}}{{/block}}
+{{#block "htmForms"}}{{/block}}
+	</div>
+{{/inline}}
+{{#*inline "table1PersonStepPage"}}
+		<div class="w3-responsive ">
+			<table class="w3-table w3-bordered w3-striped w3-border w3-hoverable ">
+{{> table2PersonStepPage}}
+			</table>
+		</div>
+{{/inline}}
+{{#*inline "table2PersonStepPage"}}
+{{> "thead1PersonStepPage"}}
+{{> "tbody1PersonStepPage"}}
+{{> "tfoot1PersonStepPage"}}
+{{/inline}}
+{{#*inline "thead1PersonStepPage"}}
+				<thead class="w3-blue w3-hover-blue">
+{{> thead2PersonStepPage}}
+				</thead>
+{{/inline}}
+{{#*inline "thead2PersonStepPage"}}
+			<tr>
+						<th>created</th>
+						<th></th>
+			</tr>
+{{/inline}}
+{{#*inline "tbody1PersonStepPage"}}
+				<tbody>
+{{> tbody2PersonStepPage}}
+				</tbody>
+{{/inline}}
+{{#*inline "tbody2PersonStepPage"}}
+		{{#each listPersonStep}}
+					<tr>
+						<td>
+							<a href="{{pageUrlPk}}">
+								<span class="white-space-pre-wrap ">{{siteZonedDateTimeFormat created "MMM d, yyyy h:mm:ss a" siteLocale}}</span>
+							</a>
+						</td>
+						<td>
+							<a href="{{pageUrlPk}}">
+								<i class="fad fa-map-location-dot "></i>
+								<span class="white-space-pre-wrap ">{{objectTitle}}</span>
+							</a>
+						</td>
+					</tr>
+		{{/each}}
+{{/inline}}
+{{#*inline "tfoot1PersonStepPage"}}
+				<tfoot class="w3-blue w3-hover-blue">
+{{> tfoot2PersonStepPage}}
+				</tfoot>
+{{/inline}}
+{{#*inline "tfoot2PersonStepPage"}}
+			<tr>
+			{{#if getColumnCreated}}
+				<td>
+				</td>
+			{{/if}}
+			{{#if getColumnObjectTitle}}
+				<td>
+				</td>
+			{{/if}}
+			</tr>
+	{{/inline}}
+{{#*inline "htmFormsPersonStepPage"}}
+	{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq personStepCount int1}}
+		<button
+			class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-blue "
+			id="refreshThisPersonStepGenPage"
+			onclick="patch{{classSimpleName}}Vals( [ {name: 'fq', value: 'id:{{id}}' } ], {}, function() { addGlow($('#refreshThisPersonStepGenPage')); }, function() { addError($('#refreshThisPersonStepGenPage')); }); return false; ">
+			<i class="fas fa-sync-alt "></i>
+			refresh this person step
+		</button>
+		{{/eq}}
+	{{/ifContainsAnyRoles}}
+	{{#ifContainsAnyRoles roles authRolesAdmin}}
+{{#block "htmForm_patchPersonStep"}}{{/block}}
+{{#block "htmForm_postPersonStep"}}{{/block}}
+{{#block "htmForm_putimportPersonStep"}}{{/block}}
+	{{/ifContainsAnyRoles}}
+{{#block "htmSuggested"}}{{/block}}
+{{/inline}}
+{{#*inline "htmSuggestedPersonStepPage"}}
+			{{#ifContainsAnyRoles roles rolesRequired}}
+					<div class="">
+						<button id="refreshAllPersonStepGenPage{{id}}" class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-blue "
+							onclick="patch{{classSimpleName}}Vals([], {}, function() { addGlow($('#refreshAllPersonStepGenPage{{id}}')); }, function() { addError($('#refreshAllPersonStepGenPage{{id}}')); }); "
+							>
+							<i class="fas fa-sync-alt "></i>
+							refresh all the person steps
+						</button>
+					</div>
+			{{/ifContainsAnyRoles}}
+			<div class="w3-cell-row ">
+				<div class="w3-cell ">
+					<span>
+						search person steps: 
+					</span>
+				</div>
+			</div>
+			<div class="w3-bar ">
+				<input
+					type="text"
+					class="suggestPersonStep w3-input w3-border w3-bar-item "
+					name="suggestPersonStep"
+					id="suggestPersonStep{{id}}"
+					autocomplete="off"
+					oninput="suggestPersonStepObjectSuggest( [ { 'name': 'q', 'value': 'objectSuggest:' + $(this).val() }, { 'name': 'rows', 'value': '10' }, { 'name': 'fl', 'value': 'classCanonicalName,,pageUrlPk,objectTitle' } ], $('#suggestListPersonStep{{id}}'), {{id}}; "
+					onkeyup="if (event.keyCode === 13) { event.preventDefault(); window.location.href = '/person-step?q={{query1}}:' + encodeURIComponent(this.value) + '{{fqs}}{{sorts}}&amp;rows={{start2}}&amp;rows={{rows1}}"
+				{{#if listPersonStep}}
+					value="{{query2}}"
+				{{/if}}
+				/>
+				<button
+					class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
+					onclick="window.location.href = '/person-step?q=&quot;, query1, &quot;:' + encodeURIComponent(this.previousElementSibling.value) + '&quot;, fqs, sorts, &quot;&amp;rows=&quot;, start2, &quot;&amp;rows=&quot;, rows1, &quot;'; "
+					>
+					<i class="fas fa-search "></i>
+				</button>
+			<div>
+			<div class="w3-cell-row ">
+				<div class="w3-cell w3-left-align w3-cell-top ">
+					<ul class="w3-ul w3-hoverable " id="suggestListPersonStep{{id}}">
+					</ul>
+				</div>
+			</div>
+			<div class="">
+				<a href="/person-step" class="">
+					<i class="fad fa-map-location-dot"></i>
+					see all the person steps
+				</a>
+			</div>
+{{/inline}}
+{{> PageLayout}}
+
+{{#*inline "htmSimulationKey"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}PersonStepSimulationKey">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label for="{{classApiMethodMethod}}_simulationKey">Simulation</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputSimulationKey"}}
+													</div>
+	{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_simulationKey')); $('#{{classApiMethodMethod}}_simulationKey').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#PersonStepForm :input[name=id]').val() }], 'setSimulationKey', null, function() { addGlow($('#{{classApiMethodMethod}}_simulationKey')); }, function() { addError($('#{{classApiMethodMethod}}_simulationKey')); }); "
+																		>
+																	<i class="far fa-eraser "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/ifContainsAnyRoles}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputSimulationKey"}}
+		{{#ifContainsAnyRoles roles rolesRequired}}
+														<input
+															type="text"
+															placeholder="Simulation"
+															title="The simulation key. "
+															id="{{classApiMethodMethod}}_simulationKey"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setSimulationKey classPersonStep inputPersonStep{{id}}SimulationKey w3-input w3-border "
+																name="setSimulationKey"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setSimulationKey classPersonStep inputPersonStep{{id}}SimulationKey w3-input w3-border "
+																name="setSimulationKey"
+		{{else}}
+																class="valueSimulationKey w3-input w3-border classPersonStep inputPersonStep{{id}}SimulationKey w3-input w3-border "
+																name="simulationKey"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setSimulationKey', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_simulationKey')); }, function() { addError($('#{{classApiMethodMethod}}_simulationKey')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{personStep_.simulationKey}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varPersonStep{{id}}SimulationKey ">{{personStep_.simulationKey}}</span>
+			{{/ifContainsKeys}}
+		{{/ifContainsAnyRoles}}
+{{/inline}}
+
+{{#*inline "htmTimeStepId"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}PersonStepTimeStepId">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label for="{{classApiMethodMethod}}_timeStepId">Time Step</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputTimeStepId"}}
+													</div>
+	{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_timeStepId')); $('#{{classApiMethodMethod}}_timeStepId').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#PersonStepForm :input[name=id]').val() }], 'setTimeStepId', null, function() { addGlow($('#{{classApiMethodMethod}}_timeStepId')); }, function() { addError($('#{{classApiMethodMethod}}_timeStepId')); }); "
+																		>
+																	<i class="far fa-eraser "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/ifContainsAnyRoles}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputTimeStepId"}}
+		{{#ifContainsAnyRoles roles rolesRequired}}
+														<input
+															type="text"
+															placeholder="Time Step"
+															title="The time step ID. "
+															id="{{classApiMethodMethod}}_timeStepId"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setTimeStepId classPersonStep inputPersonStep{{id}}TimeStepId w3-input w3-border "
+																name="setTimeStepId"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setTimeStepId classPersonStep inputPersonStep{{id}}TimeStepId w3-input w3-border "
+																name="setTimeStepId"
+		{{else}}
+																class="valueTimeStepId w3-input w3-border classPersonStep inputPersonStep{{id}}TimeStepId w3-input w3-border "
+																name="timeStepId"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setTimeStepId', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_timeStepId')); }, function() { addError($('#{{classApiMethodMethod}}_timeStepId')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{personStep_.timeStepId}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varPersonStep{{id}}TimeStepId ">{{personStep_.timeStepId}}</span>
+			{{/ifContainsKeys}}
+		{{/ifContainsAnyRoles}}
+{{/inline}}
+
+{{#*inline "htmTime"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}PersonStepTime">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label for="{{classApiMethodMethod}}_time">Time in seconds</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputTime"}}
+													</div>
+	{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_time')); $('#{{classApiMethodMethod}}_time').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#PersonStepForm :input[name=id]').val() }], 'setTime', null, function() { addGlow($('#{{classApiMethodMethod}}_time')); }, function() { addError($('#{{classApiMethodMethod}}_time')); }); "
+																		>
+																	<i class="far fa-eraser "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/ifContainsAnyRoles}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputTime"}}
+		{{#ifContainsAnyRoles roles rolesRequired}}
+														<input
+															type="text"
+															placeholder="Time in seconds"
+															title="The time in seconds. "
+															id="{{classApiMethodMethod}}_time"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setTime classPersonStep inputPersonStep{{id}}Time w3-input w3-border "
+																name="setTime"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setTime classPersonStep inputPersonStep{{id}}Time w3-input w3-border "
+																name="setTime"
+		{{else}}
+																class="valueTime w3-input w3-border classPersonStep inputPersonStep{{id}}Time w3-input w3-border "
+																name="time"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setTime', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_time')); }, function() { addError($('#{{classApiMethodMethod}}_time')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{personStep_.time}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varPersonStep{{id}}Time ">{{personStep_.time}}</span>
+			{{/ifContainsKeys}}
+		{{/ifContainsAnyRoles}}
+{{/inline}}
+
+{{#*inline "htmX"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}PersonStepX">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputX"}}
+													</div>
+	{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_x')); $('#{{classApiMethodMethod}}_x').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#PersonStepForm :input[name=id]').val() }], 'setX', null, function() { addGlow($('#{{classApiMethodMethod}}_x')); }, function() { addError($('#{{classApiMethodMethod}}_x')); }); "
+																		>
+																	<i class="far fa-eraser "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/ifContainsAnyRoles}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputX"}}
+		{{#ifContainsAnyRoles roles rolesRequired}}
+														<input
+															type="text"
+															id="{{classApiMethodMethod}}_x"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setX classPersonStep inputPersonStep{{id}}X w3-input w3-border "
+																name="setX"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setX classPersonStep inputPersonStep{{id}}X w3-input w3-border "
+																name="setX"
+		{{else}}
+																class="valueX w3-input w3-border classPersonStep inputPersonStep{{id}}X w3-input w3-border "
+																name="x"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setX', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_x')); }, function() { addError($('#{{classApiMethodMethod}}_x')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{personStep_.x}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varPersonStep{{id}}X ">{{personStep_.x}}</span>
+			{{/ifContainsKeys}}
+		{{/ifContainsAnyRoles}}
+{{/inline}}
+
+{{#*inline "htmY"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}PersonStepY">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputY"}}
+													</div>
+	{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_y')); $('#{{classApiMethodMethod}}_y').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#PersonStepForm :input[name=id]').val() }], 'setY', null, function() { addGlow($('#{{classApiMethodMethod}}_y')); }, function() { addError($('#{{classApiMethodMethod}}_y')); }); "
+																		>
+																	<i class="far fa-eraser "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/ifContainsAnyRoles}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputY"}}
+		{{#ifContainsAnyRoles roles rolesRequired}}
+														<input
+															type="text"
+															id="{{classApiMethodMethod}}_y"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setY classPersonStep inputPersonStep{{id}}Y w3-input w3-border "
+																name="setY"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setY classPersonStep inputPersonStep{{id}}Y w3-input w3-border "
+																name="setY"
+		{{else}}
+																class="valueY w3-input w3-border classPersonStep inputPersonStep{{id}}Y w3-input w3-border "
+																name="y"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setY', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_y')); }, function() { addError($('#{{classApiMethodMethod}}_y')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{personStep_.y}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varPersonStep{{id}}Y ">{{personStep_.y}}</span>
+			{{/ifContainsKeys}}
+		{{/ifContainsAnyRoles}}
+{{/inline}}
+
+{{#*inline "htmLocation"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}PersonStepLocation">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label for="{{classApiMethodMethod}}_location">location</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputLocation"}}
+													</div>
+	{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_location')); $('#{{classApiMethodMethod}}_location').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#PersonStepForm :input[name=id]').val() }], 'setLocation', null, function() { addGlow($('#{{classApiMethodMethod}}_location')); }, function() { addError($('#{{classApiMethodMethod}}_location')); }); "
+																		>
+																	<i class="far fa-eraser "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/ifContainsAnyRoles}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputLocation"}}
+		{{#ifContainsAnyRoles roles rolesRequired}}
+														<input
+															type="text"
+															placeholder="location"
+															id="{{classApiMethodMethod}}_location"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setLocation classPersonStep inputPersonStep{{id}}Location w3-input w3-border "
+																name="setLocation"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setLocation classPersonStep inputPersonStep{{id}}Location w3-input w3-border "
+																name="setLocation"
+		{{else}}
+																class="valueLocation w3-input w3-border classPersonStep inputPersonStep{{id}}Location w3-input w3-border "
+																name="location"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setLocation', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_location')); }, function() { addError($('#{{classApiMethodMethod}}_location')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{personStep_.location}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varPersonStep{{id}}Location ">{{personStep_.location}}</span>
+			{{/ifContainsKeys}}
+		{{/ifContainsAnyRoles}}
+{{/inline}}
+
+{{#*inline "htmPersonId"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}PersonStepPersonId">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label for="{{classApiMethodMethod}}_personId">person ID</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputPersonId"}}
+													</div>
+	{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_personId')); $('#{{classApiMethodMethod}}_personId').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#PersonStepForm :input[name=id]').val() }], 'setPersonId', null, function() { addGlow($('#{{classApiMethodMethod}}_personId')); }, function() { addError($('#{{classApiMethodMethod}}_personId')); }); "
+																		>
+																	<i class="far fa-eraser "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/ifContainsAnyRoles}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputPersonId"}}
+		{{#ifContainsAnyRoles roles rolesRequired}}
+														<input
+															type="text"
+															placeholder="person ID"
+															id="{{classApiMethodMethod}}_personId"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setPersonId classPersonStep inputPersonStep{{id}}PersonId w3-input w3-border "
+																name="setPersonId"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setPersonId classPersonStep inputPersonStep{{id}}PersonId w3-input w3-border "
+																name="setPersonId"
+		{{else}}
+																class="valuePersonId w3-input w3-border classPersonStep inputPersonStep{{id}}PersonId w3-input w3-border "
+																name="personId"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setPersonId', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_personId')); }, function() { addError($('#{{classApiMethodMethod}}_personId')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{personStep_.personId}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varPersonStep{{id}}PersonId ">{{personStep_.personId}}</span>
+			{{/ifContainsKeys}}
+		{{/ifContainsAnyRoles}}
+{{/inline}}
+
+{{#*inline "htmPersonType"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}PersonStepPersonType">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label for="{{classApiMethodMethod}}_personType">person type</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputPersonType"}}
+													</div>
+	{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_personType')); $('#{{classApiMethodMethod}}_personType').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#PersonStepForm :input[name=id]').val() }], 'setPersonType', null, function() { addGlow($('#{{classApiMethodMethod}}_personType')); }, function() { addError($('#{{classApiMethodMethod}}_personType')); }); "
+																		>
+																	<i class="far fa-eraser "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/ifContainsAnyRoles}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputPersonType"}}
+		{{#ifContainsAnyRoles roles rolesRequired}}
+														<input
+															type="text"
+															placeholder="person type"
+															id="{{classApiMethodMethod}}_personType"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setPersonType classPersonStep inputPersonStep{{id}}PersonType w3-input w3-border "
+																name="setPersonType"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setPersonType classPersonStep inputPersonStep{{id}}PersonType w3-input w3-border "
+																name="setPersonType"
+		{{else}}
+																class="valuePersonType w3-input w3-border classPersonStep inputPersonStep{{id}}PersonType w3-input w3-border "
+																name="personType"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setPersonType', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_personType')); }, function() { addError($('#{{classApiMethodMethod}}_personType')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{personStep_.personType}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varPersonStep{{id}}PersonType ">{{personStep_.personType}}</span>
+			{{/ifContainsKeys}}
+		{{/ifContainsAnyRoles}}
+{{/inline}}
+
+{{#*inline "htmAngle"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}PersonStepAngle">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label for="{{classApiMethodMethod}}_angle">Angle in degrees</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputAngle"}}
+													</div>
+	{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_angle')); $('#{{classApiMethodMethod}}_angle').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#PersonStepForm :input[name=id]').val() }], 'setAngle', null, function() { addGlow($('#{{classApiMethodMethod}}_angle')); }, function() { addError($('#{{classApiMethodMethod}}_angle')); }); "
+																		>
+																	<i class="far fa-eraser "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/ifContainsAnyRoles}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputAngle"}}
+		{{#ifContainsAnyRoles roles rolesRequired}}
+														<input
+															type="text"
+															placeholder="Angle in degrees"
+															id="{{classApiMethodMethod}}_angle"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setAngle classPersonStep inputPersonStep{{id}}Angle w3-input w3-border "
+																name="setAngle"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setAngle classPersonStep inputPersonStep{{id}}Angle w3-input w3-border "
+																name="setAngle"
+		{{else}}
+																class="valueAngle w3-input w3-border classPersonStep inputPersonStep{{id}}Angle w3-input w3-border "
+																name="angle"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setAngle', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_angle')); }, function() { addError($('#{{classApiMethodMethod}}_angle')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{personStep_.angle}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varPersonStep{{id}}Angle ">{{personStep_.angle}}</span>
+			{{/ifContainsKeys}}
+		{{/ifContainsAnyRoles}}
+{{/inline}}
+
+{{#*inline "htmSpeed"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}PersonStepSpeed">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label for="{{classApiMethodMethod}}_speed">Speed</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputSpeed"}}
+													</div>
+	{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_speed')); $('#{{classApiMethodMethod}}_speed').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#PersonStepForm :input[name=id]').val() }], 'setSpeed', null, function() { addGlow($('#{{classApiMethodMethod}}_speed')); }, function() { addError($('#{{classApiMethodMethod}}_speed')); }); "
+																		>
+																	<i class="far fa-eraser "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/ifContainsAnyRoles}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputSpeed"}}
+		{{#ifContainsAnyRoles roles rolesRequired}}
+														<input
+															type="text"
+															placeholder="Speed"
+															id="{{classApiMethodMethod}}_speed"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setSpeed classPersonStep inputPersonStep{{id}}Speed w3-input w3-border "
+																name="setSpeed"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setSpeed classPersonStep inputPersonStep{{id}}Speed w3-input w3-border "
+																name="setSpeed"
+		{{else}}
+																class="valueSpeed w3-input w3-border classPersonStep inputPersonStep{{id}}Speed w3-input w3-border "
+																name="speed"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setSpeed', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_speed')); }, function() { addError($('#{{classApiMethodMethod}}_speed')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{personStep_.speed}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varPersonStep{{id}}Speed ">{{personStep_.speed}}</span>
+			{{/ifContainsKeys}}
+		{{/ifContainsAnyRoles}}
+{{/inline}}
+
+{{#*inline "htmPos"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}PersonStepPos">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label for="{{classApiMethodMethod}}_pos">Position</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputPos"}}
+													</div>
+	{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_pos')); $('#{{classApiMethodMethod}}_pos').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#PersonStepForm :input[name=id]').val() }], 'setPos', null, function() { addGlow($('#{{classApiMethodMethod}}_pos')); }, function() { addError($('#{{classApiMethodMethod}}_pos')); }); "
+																		>
+																	<i class="far fa-eraser "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/ifContainsAnyRoles}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputPos"}}
+		{{#ifContainsAnyRoles roles rolesRequired}}
+														<input
+															type="text"
+															placeholder="Position"
+															id="{{classApiMethodMethod}}_pos"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setPos classPersonStep inputPersonStep{{id}}Pos w3-input w3-border "
+																name="setPos"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setPos classPersonStep inputPersonStep{{id}}Pos w3-input w3-border "
+																name="setPos"
+		{{else}}
+																class="valuePos w3-input w3-border classPersonStep inputPersonStep{{id}}Pos w3-input w3-border "
+																name="pos"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setPos', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_pos')); }, function() { addError($('#{{classApiMethodMethod}}_pos')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{personStep_.pos}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varPersonStep{{id}}Pos ">{{personStep_.pos}}</span>
+			{{/ifContainsKeys}}
+		{{/ifContainsAnyRoles}}
+{{/inline}}
+
+{{#*inline "htmSlope"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}PersonStepSlope">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label for="{{classApiMethodMethod}}_slope">Slope</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputSlope"}}
+													</div>
+	{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_slope')); $('#{{classApiMethodMethod}}_slope').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#PersonStepForm :input[name=id]').val() }], 'setSlope', null, function() { addGlow($('#{{classApiMethodMethod}}_slope')); }, function() { addError($('#{{classApiMethodMethod}}_slope')); }); "
+																		>
+																	<i class="far fa-eraser "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/ifContainsAnyRoles}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputSlope"}}
+		{{#ifContainsAnyRoles roles rolesRequired}}
+														<input
+															type="text"
+															placeholder="Slope"
+															id="{{classApiMethodMethod}}_slope"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setSlope classPersonStep inputPersonStep{{id}}Slope w3-input w3-border "
+																name="setSlope"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setSlope classPersonStep inputPersonStep{{id}}Slope w3-input w3-border "
+																name="setSlope"
+		{{else}}
+																class="valueSlope w3-input w3-border classPersonStep inputPersonStep{{id}}Slope w3-input w3-border "
+																name="slope"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setSlope', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_slope')); }, function() { addError($('#{{classApiMethodMethod}}_slope')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{personStep_.slope}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varPersonStep{{id}}Slope ">{{personStep_.slope}}</span>
+			{{/ifContainsKeys}}
+		{{/ifContainsAnyRoles}}
+{{/inline}}
+
+{{#*inline "htmInheritPk"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}PersonStepInheritPk">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputInheritPk"}}
+													</div>
+	{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_inheritPk')); $('#{{classApiMethodMethod}}_inheritPk').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#PersonStepForm :input[name=id]').val() }], 'setInheritPk', null, function() { addGlow($('#{{classApiMethodMethod}}_inheritPk')); }, function() { addError($('#{{classApiMethodMethod}}_inheritPk')); }); "
+																		>
+																	<i class="far fa-eraser "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/ifContainsAnyRoles}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputInheritPk"}}
+		{{#ifContainsAnyRoles roles rolesRequired}}
+														<input
+															type="text"
+															title="An optional inherited primary key from a legacy system for this object in the database"
+															id="{{classApiMethodMethod}}_inheritPk"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setInheritPk classPersonStep inputPersonStep{{id}}InheritPk w3-input w3-border "
+																name="setInheritPk"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setInheritPk classPersonStep inputPersonStep{{id}}InheritPk w3-input w3-border "
+																name="setInheritPk"
+		{{else}}
+																class="valueInheritPk w3-input w3-border classPersonStep inputPersonStep{{id}}InheritPk w3-input w3-border "
+																name="inheritPk"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setInheritPk', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_inheritPk')); }, function() { addError($('#{{classApiMethodMethod}}_inheritPk')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{personStep_.inheritPk}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varPersonStep{{id}}InheritPk ">{{personStep_.inheritPk}}</span>
+			{{/ifContainsKeys}}
+		{{/ifContainsAnyRoles}}
+{{/inline}}
+
+{{#*inline "htmCreated"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}PersonStepCreated">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label for="{{classApiMethodMethod}}_created">created</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputCreated"}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputCreated"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varPersonStep{{id}}Created " title="{{formatZonedDateTime personStep_.created 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime personStep_.created 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmModified"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									{{#eq 'Page' classApiMethodMethod}}
+										<div class="w3-padding ">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label>modified</label>
+												</div>
+												<div class="w3-cell-row  ">
+													<div class="w3-cell ">
+														<div class="w3-rest ">
+															<span class="">
+																{{> "inputModified"}}
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+	{{/eq}}
+								</div>
+{{/inline}}
+
+{{#*inline "inputModified"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varPersonStep{{id}}Modified " title="{{formatZonedDateTime personStep_.modified 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime personStep_.modified 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmArchived"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}PersonStepArchived">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label for="{{classApiMethodMethod}}_archived">archived</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputArchived"}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputArchived"}}
+		{{#ifContainsAnyRoles roles rolesRequired}}
+	{{#eq 'Page' classApiMethodMethod}}
+															<input
+																type="checkbox"
+																id="{{classApiMethodMethod}}_archived"
+																value="true"
+	{{else}}
+														<select
+															id="{{classApiMethodMethod}}_archived"
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+															class="classPersonStep inputPersonStep{{id}}Archived w3-input w3-border "
+															name="setArchived"
+	{{else}}
+		{{#eq 'Page' classApiMethodMethod}}
+																class="classPersonStep inputPersonStep{{id}}Archived w3-input w3-border "
+																name="setArchived"
+		{{else}}
+																class="setArchived valueArchived classPersonStep inputPersonStep{{id}}Archived w3-input w3-border "
+																name="setArchived"
+		{{/eq}}
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+															onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setArchived', $(this).prop('checked'), function() { addGlow($('#{{classApiMethodMethod}}_archived')); }, function() { addError($('#{{classApiMethodMethod}}_archived')); }); "
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+		{{#if personStep_.archived}}
+																checked="checked"
+		{{/if}}
+																/>
+	{{else}}
+															>
+															<option value="" selected="selected"></option>
+															<option value="true">true</option>
+															<option value="false">false</option>
+														</select>
+	{{/eq}}
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varPersonStep{{id}}Archived ">{{personStep_.archived}}</span>
+			{{/ifContainsKeys}}
+		{{/ifContainsAnyRoles}}
+{{/inline}}
+
+{{#*inline "htmDeleted"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}PersonStepDeleted">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label for="{{classApiMethodMethod}}_deleted">deleted</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputDeleted"}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputDeleted"}}
+		{{#ifContainsAnyRoles roles rolesRequired}}
+	{{#eq 'Page' classApiMethodMethod}}
+															<input
+																type="checkbox"
+																id="{{classApiMethodMethod}}_deleted"
+																value="true"
+	{{else}}
+														<select
+															id="{{classApiMethodMethod}}_deleted"
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+															class="classPersonStep inputPersonStep{{id}}Deleted w3-input w3-border "
+															name="setDeleted"
+	{{else}}
+		{{#eq 'Page' classApiMethodMethod}}
+																class="classPersonStep inputPersonStep{{id}}Deleted w3-input w3-border "
+																name="setDeleted"
+		{{else}}
+																class="setDeleted valueDeleted classPersonStep inputPersonStep{{id}}Deleted w3-input w3-border "
+																name="setDeleted"
+		{{/eq}}
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+															onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setDeleted', $(this).prop('checked'), function() { addGlow($('#{{classApiMethodMethod}}_deleted')); }, function() { addError($('#{{classApiMethodMethod}}_deleted')); }); "
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+		{{#if personStep_.deleted}}
+																checked="checked"
+		{{/if}}
+																/>
+	{{else}}
+															>
+															<option value="" selected="selected"></option>
+															<option value="true">true</option>
+															<option value="false">false</option>
+														</select>
+	{{/eq}}
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varPersonStep{{id}}Deleted ">{{personStep_.deleted}}</span>
+			{{/ifContainsKeys}}
+		{{/ifContainsAnyRoles}}
+{{/inline}}
+
+{{#*inline "htmSessionId"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}PersonStepSessionId">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputSessionId"}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputSessionId"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varPersonStep{{id}}SessionId ">{{personStep_.sessionId}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmUserKey"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}PersonStepUserKey">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputUserKey"}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputUserKey"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varPersonStep{{id}}UserKey ">{{personStep_.userKey}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmObjectTitle"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									{{#eq 'Page' classApiMethodMethod}}
+										<div class="w3-padding ">
+											<div class="w3-card ">
+												<div class="w3-cell-row  ">
+													<div class="w3-cell ">
+														<div class="w3-rest ">
+															<span class="">
+																{{> "inputObjectTitle"}}
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+	{{/eq}}
+								</div>
+{{/inline}}
+
+{{#*inline "inputObjectTitle"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varPersonStep{{id}}ObjectTitle ">{{personStep_.objectTitle}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmObjectId"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}PersonStepObjectId">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label for="{{classApiMethodMethod}}_objectId">ID</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputObjectId"}}
+													</div>
+	{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_objectId')); $('#{{classApiMethodMethod}}_objectId').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#PersonStepForm :input[name=id]').val() }], 'setObjectId', null, function() { addGlow($('#{{classApiMethodMethod}}_objectId')); }, function() { addError($('#{{classApiMethodMethod}}_objectId')); }); "
+																		>
+																	<i class="far fa-eraser "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/ifContainsAnyRoles}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputObjectId"}}
+		{{#ifContainsAnyRoles roles rolesRequired}}
+														<input
+															type="text"
+															placeholder="ID"
+															title="A URL friendly unique ID for this object"
+															id="{{classApiMethodMethod}}_objectId"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setObjectId classPersonStep inputPersonStep{{id}}ObjectId w3-input w3-border "
+																name="setObjectId"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setObjectId classPersonStep inputPersonStep{{id}}ObjectId w3-input w3-border "
+																name="setObjectId"
+		{{else}}
+																class="valueObjectId w3-input w3-border classPersonStep inputPersonStep{{id}}ObjectId w3-input w3-border "
+																name="objectId"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setObjectId', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_objectId')); }, function() { addError($('#{{classApiMethodMethod}}_objectId')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{personStep_.objectId}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varPersonStep{{id}}ObjectId ">{{personStep_.objectId}}</span>
+			{{/ifContainsKeys}}
+		{{/ifContainsAnyRoles}}
+{{/inline}}

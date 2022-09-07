@@ -1,4 +1,4 @@
-package org.computate.smartvillageview.enus.model.system.event;
+package org.computate.smartvillageview.enus.model.traffic.person.step;
 
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.smartvillageview.enus.model.base.BaseModel;
@@ -30,7 +30,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.math.RoundingMode;
 import java.util.Map;
-import org.computate.smartvillageview.enus.model.system.event.SystemEventGenPage;
+import org.computate.smartvillageview.enus.model.traffic.person.step.PersonStepGenPage;
 import org.computate.search.wrap.Wrap;
 import io.vertx.core.Promise;
 import io.vertx.core.Future;
@@ -39,53 +39,53 @@ import io.vertx.core.json.JsonArray;
 /**	
  * <h1>Suggestions that can generate more code for you: </h1>
  * <ol>
- * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class SystemEventPageGen into the class SystemEventPage. 
+ * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class PersonStepPageGen into the class PersonStepPage. 
  * </li>
- * <li>You can add a class comment "Api: true" if you wish to GET, POST, PATCH or PUT these SystemEventPage objects in a RESTful API. 
+ * <li>You can add a class comment "Api: true" if you wish to GET, POST, PATCH or PUT these PersonStepPage objects in a RESTful API. 
  * </li>
  * </ol>
- * <h1>About the SystemEventPage class and it's generated class SystemEventPageGen&lt;SystemEventGenPage&gt;: </h1>
+ * <h1>About the PersonStepPage class and it's generated class PersonStepPageGen&lt;PersonStepGenPage&gt;: </h1>
  * <p>
  * This Java class extends a generated Java class built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
  * Whenever this Java class is modified or touched, the watch service installed as described in the README, indexes all the information about this Java class in a local Apache Solr Search Engine. 
  * If you are running the service, you can see the indexed data about this Java Class here: 
  * </p>
- * <p><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstClasse_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.system.event.SystemEventPage">Find the class SystemEventPage in Solr. </a></p>
+ * <p><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstClasse_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStepPage">Find the class PersonStepPage in Solr. </a></p>
  * <p>
  * The extended class ending with "Gen" did not exist at first, but was automatically created by the same watch service based on the data retrieved from the local Apache Server search engine. 
  * The extended class contains many generated fields, getters, setters, initialization code, and helper methods to help build a website and API fast, reactive, and scalable. 
  * </p>
  * <p>
- * Delete the class SystemEventPage in Solr: 
- * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.system.event.SystemEventPage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * Delete the class PersonStepPage in Solr: 
+ * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStepPage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
- * Delete  the package org.computate.smartvillageview.enus.model.system.event in Solr: 
- * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.model.system.event&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * Delete  the package org.computate.smartvillageview.enus.model.traffic.person.step in Solr: 
+ * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
  * Delete  the project smart-village-view in Solr: 
  * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smart\-village\-view&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  **/
-public abstract class SystemEventPageGen<DEV> extends SystemEventGenPage {
-	protected static final Logger LOG = LoggerFactory.getLogger(SystemEventPage.class);
+public abstract class PersonStepPageGen<DEV> extends PersonStepGenPage {
+	protected static final Logger LOG = LoggerFactory.getLogger(PersonStepPage.class);
 
 	//////////////
 	// initDeep //
 	//////////////
 
-	public Future<Void> promiseDeepSystemEventPage(SiteRequestEnUS siteRequest_) {
+	public Future<Void> promiseDeepPersonStepPage(SiteRequestEnUS siteRequest_) {
 		setSiteRequest_(siteRequest_);
-		return promiseDeepSystemEventPage();
+		return promiseDeepPersonStepPage();
 	}
 
-	public Future<Void> promiseDeepSystemEventPage() {
+	public Future<Void> promiseDeepPersonStepPage() {
 		Promise<Void> promise = Promise.promise();
 		Promise<Void> promise2 = Promise.promise();
-		promiseSystemEventPage(promise2);
+		promisePersonStepPage(promise2);
 		promise2.future().onSuccess(a -> {
-			super.promiseDeepSystemEventGenPage(siteRequest_).onSuccess(b -> {
+			super.promiseDeepPersonStepGenPage(siteRequest_).onSuccess(b -> {
 				promise.complete();
 			}).onFailure(ex -> {
 				promise.fail(ex);
@@ -96,7 +96,7 @@ public abstract class SystemEventPageGen<DEV> extends SystemEventGenPage {
 		return promise.future();
 	}
 
-	public Future<Void> promiseSystemEventPage(Promise<Void> promise) {
+	public Future<Void> promisePersonStepPage(Promise<Void> promise) {
 		Future.future(a -> a.complete()).compose(a -> {
 			Promise<Void> promise2 = Promise.promise();
 			try {
@@ -114,19 +114,19 @@ public abstract class SystemEventPageGen<DEV> extends SystemEventGenPage {
 	}
 
 	@Override public Future<Void> promiseDeepForClass(SiteRequestEnUS siteRequest_) {
-		return promiseDeepSystemEventPage(siteRequest_);
+		return promiseDeepPersonStepPage(siteRequest_);
 	}
 
 	/////////////////
 	// siteRequest //
 	/////////////////
 
-	public void siteRequestSystemEventPage(SiteRequestEnUS siteRequest_) {
-			super.siteRequestSystemEventGenPage(siteRequest_);
+	public void siteRequestPersonStepPage(SiteRequestEnUS siteRequest_) {
+			super.siteRequestPersonStepGenPage(siteRequest_);
 	}
 
 	public void siteRequestForClass(SiteRequestEnUS siteRequest_) {
-		siteRequestSystemEventPage(siteRequest_);
+		siteRequestPersonStepPage(siteRequest_);
 	}
 
 	/////////////
@@ -138,7 +138,7 @@ public abstract class SystemEventPageGen<DEV> extends SystemEventGenPage {
 		Object o = null;
 		for(String v : vars) {
 			if(o == null)
-				o = obtainSystemEventPage(v);
+				o = obtainPersonStepPage(v);
 			else if(o instanceof BaseModel) {
 				BaseModel baseModel = (BaseModel)o;
 				o = baseModel.obtainForClass(v);
@@ -150,11 +150,11 @@ public abstract class SystemEventPageGen<DEV> extends SystemEventGenPage {
 		}
 		return o;
 	}
-	public Object obtainSystemEventPage(String var) {
-		SystemEventPage oSystemEventPage = (SystemEventPage)this;
+	public Object obtainPersonStepPage(String var) {
+		PersonStepPage oPersonStepPage = (PersonStepPage)this;
 		switch(var) {
 			default:
-				return super.obtainSystemEventGenPage(var);
+				return super.obtainPersonStepGenPage(var);
 		}
 	}
 
@@ -167,7 +167,7 @@ public abstract class SystemEventPageGen<DEV> extends SystemEventGenPage {
 		Object o = null;
 		for(String v : vars) {
 			if(o == null)
-				o = relateSystemEventPage(v, val);
+				o = relatePersonStepPage(v, val);
 			else if(o instanceof BaseModel) {
 				BaseModel baseModel = (BaseModel)o;
 				o = baseModel.relateForClass(v, val);
@@ -175,11 +175,11 @@ public abstract class SystemEventPageGen<DEV> extends SystemEventGenPage {
 		}
 		return o != null;
 	}
-	public Object relateSystemEventPage(String var, Object val) {
-		SystemEventPage oSystemEventPage = (SystemEventPage)this;
+	public Object relatePersonStepPage(String var, Object val) {
+		PersonStepPage oPersonStepPage = (PersonStepPage)this;
 		switch(var) {
 			default:
-				return super.relateSystemEventGenPage(var, val);
+				return super.relatePersonStepGenPage(var, val);
 		}
 	}
 
@@ -188,12 +188,12 @@ public abstract class SystemEventPageGen<DEV> extends SystemEventGenPage {
 	///////////////
 
 	public static Object staticSetForClass(String entityVar, SiteRequestEnUS siteRequest_, String o) {
-		return staticSetSystemEventPage(entityVar,  siteRequest_, o);
+		return staticSetPersonStepPage(entityVar,  siteRequest_, o);
 	}
-	public static Object staticSetSystemEventPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
+	public static Object staticSetPersonStepPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
 			default:
-				return SystemEventGenPage.staticSetSystemEventGenPage(entityVar,  siteRequest_, o);
+				return PersonStepGenPage.staticSetPersonStepGenPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -202,12 +202,12 @@ public abstract class SystemEventPageGen<DEV> extends SystemEventGenPage {
 	////////////////
 
 	public static Object staticSearchForClass(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
-		return staticSearchSystemEventPage(entityVar,  siteRequest_, o);
+		return staticSearchPersonStepPage(entityVar,  siteRequest_, o);
 	}
-	public static Object staticSearchSystemEventPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
+	public static Object staticSearchPersonStepPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
 			default:
-				return SystemEventGenPage.staticSearchSystemEventGenPage(entityVar,  siteRequest_, o);
+				return PersonStepGenPage.staticSearchPersonStepGenPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -216,12 +216,12 @@ public abstract class SystemEventPageGen<DEV> extends SystemEventGenPage {
 	///////////////////
 
 	public static String staticSearchStrForClass(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
-		return staticSearchStrSystemEventPage(entityVar,  siteRequest_, o);
+		return staticSearchStrPersonStepPage(entityVar,  siteRequest_, o);
 	}
-	public static String staticSearchStrSystemEventPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
+	public static String staticSearchStrPersonStepPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
 			default:
-				return SystemEventGenPage.staticSearchStrSystemEventGenPage(entityVar,  siteRequest_, o);
+				return PersonStepGenPage.staticSearchStrPersonStepGenPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -230,12 +230,12 @@ public abstract class SystemEventPageGen<DEV> extends SystemEventGenPage {
 	//////////////////
 
 	public static String staticSearchFqForClass(String entityVar, SiteRequestEnUS siteRequest_, String o) {
-		return staticSearchFqSystemEventPage(entityVar,  siteRequest_, o);
+		return staticSearchFqPersonStepPage(entityVar,  siteRequest_, o);
 	}
-	public static String staticSearchFqSystemEventPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
+	public static String staticSearchFqPersonStepPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
 			default:
-				return SystemEventGenPage.staticSearchFqSystemEventGenPage(entityVar,  siteRequest_, o);
+				return PersonStepGenPage.staticSearchFqPersonStepGenPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -249,16 +249,16 @@ public abstract class SystemEventPageGen<DEV> extends SystemEventGenPage {
 		return sb.toString();
 	}
 
-	public static final String CLASS_SIMPLE_NAME = "SystemEventPage";
+	public static final String CLASS_SIMPLE_NAME = "PersonStepPage";
 
 
 	public static String displayNameForClass(String var) {
-		return SystemEventPage.displayNameSystemEventPage(var);
+		return PersonStepPage.displayNamePersonStepPage(var);
 	}
-	public static String displayNameSystemEventPage(String var) {
+	public static String displayNamePersonStepPage(String var) {
 		switch(var) {
 		default:
-			return SystemEventGenPage.displayNameSystemEventGenPage(var);
+			return PersonStepGenPage.displayNamePersonStepGenPage(var);
 		}
 	}
 }
