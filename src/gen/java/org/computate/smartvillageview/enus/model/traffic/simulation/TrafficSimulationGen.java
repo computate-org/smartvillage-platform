@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import java.util.Date;
 import java.util.Set;
 import org.computate.vertx.api.ApiRequest;
-import org.computate.smartvillageview.enus.config.ConfigKeys;
+import org.computate.vertx.config.ComputateConfigKeys;
 import java.util.Optional;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
@@ -74,6 +74,9 @@ import org.computate.search.response.solr.SolrResponse;
  * </p>
  * <p>This class contains a comment "ApiUri: /api/traffic-simulation", which defines the base API URI for TrafficSimulation objects as "/api/traffic-simulation" in the OpenAPI spec. 
  * </p>
+ * <p>This class contains a comment "Rows: 100", which means the TrafficSimulation API will return a default of 100 records instead of 10 by default. 
+ * Each API has built in pagination of the search records to ensure a user can query all the data a page at a time without running the application out of memory. 
+ * </p>
  * <p>
  * Delete the class TrafficSimulation in Solr: 
  * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
@@ -103,7 +106,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	public static final String TrafficSimulation_Title_enUS = "traffic simulations";
 	public static final String TrafficSimulation_ThePluralName_enUS = "the traffic simulations";
 	public static final String TrafficSimulation_NoNameFound_enUS = "no traffic simulation found";
-	public static final String TrafficSimulation_NameVar_enUS = "trafficSimulation";
+	public static final String TrafficSimulation_ApiUri_enUS = "/api/traffic-simulation";
+	public static final String TrafficSimulation_ApiUriSearchPage_enUS = "/traffic-simulation";
 	public static final String TrafficSimulation_OfName_enUS = "of traffic simulation";
 	public static final String TrafficSimulation_ANameAdjective_enUS = "a traffic simulation";
 	public static final String TrafficSimulation_NameAdjectiveSingular_enUS = "traffic simulation";

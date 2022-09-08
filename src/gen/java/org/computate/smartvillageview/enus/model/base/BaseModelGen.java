@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import java.util.Date;
 import java.util.Set;
 import org.computate.vertx.api.ApiRequest;
-import org.computate.smartvillageview.enus.config.ConfigKeys;
+import org.computate.vertx.config.ComputateConfigKeys;
 import java.util.Optional;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
@@ -55,6 +55,14 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.computate.search.response.solr.SolrResponse;
 
 /**	
+ * <h1>Suggestions that can generate more code for you: </h1>
+ * <ol>
+ * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class BaseModelGen into the class BaseModel. 
+ * </li>
+ * <li>You can add a class comment "Api: true" if you wish to GET, POST, PATCH or PUT these BaseModel objects in a RESTful API. 
+ * </li>
+ * </ol>
+ * <h1>About the BaseModel class and it's generated class BaseModelGen&lt;Object&gt;: </h1>
  * <p>
  * This Java class extends a generated Java class built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
  * Whenever this Java class is modified or touched, the watch service installed as described in the README, indexes all the information about this Java class in a local Apache Solr Search Engine. 
@@ -287,15 +295,15 @@ public abstract class BaseModelGen<DEV> extends Object {
 		if(StringUtils.endsWith(o, "]"))
 			return o == null ? null : ZonedDateTime.parse(o, ComputateZonedDateTimeSerializer.ZONED_DATE_TIME_FORMATTER);
 		else if(StringUtils.endsWith(o, "Z"))
-			return o == null ? null : Instant.parse(o).atZone(Optional.ofNullable(siteRequest_).map(r -> r.getConfig()).map(config -> config.getString(ConfigKeys.SITE_ZONE)).map(z -> ZoneId.of(z)).orElse(ZoneId.of("UTC"))).truncatedTo(ChronoUnit.MILLIS);
+			return o == null ? null : Instant.parse(o).atZone(Optional.ofNullable(siteRequest_).map(r -> r.getConfig()).map(config -> config.getString(ComputateConfigKeys.SITE_ZONE)).map(z -> ZoneId.of(z)).orElse(ZoneId.of("UTC"))).truncatedTo(ChronoUnit.MILLIS);
 		else if(StringUtils.contains(o, "T"))
 			return o == null ? null : ZonedDateTime.parse(o, DateTimeFormatter.ISO_DATE_TIME).truncatedTo(ChronoUnit.MILLIS);
 		else
-			return o == null ? null : LocalDate.parse(o, DateTimeFormatter.ISO_DATE).atStartOfDay(ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
+			return o == null ? null : LocalDate.parse(o, DateTimeFormatter.ISO_DATE).atStartOfDay(ZoneId.of(siteRequest_.getConfig().getString(ComputateConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
 	}
 	@JsonIgnore
 	public void setCreated(Date o) {
-		this.created = o == null ? null : ZonedDateTime.ofInstant(o.toInstant(), ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
+		this.created = o == null ? null : ZonedDateTime.ofInstant(o.toInstant(), ZoneId.of(siteRequest_.getConfig().getString(ComputateConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
 	}
 	protected BaseModel createdInit() {
 		Wrap<ZonedDateTime> createdWrap = new Wrap<ZonedDateTime>().var("created");
@@ -364,15 +372,15 @@ public abstract class BaseModelGen<DEV> extends Object {
 		if(StringUtils.endsWith(o, "]"))
 			return o == null ? null : ZonedDateTime.parse(o, ComputateZonedDateTimeSerializer.ZONED_DATE_TIME_FORMATTER);
 		else if(StringUtils.endsWith(o, "Z"))
-			return o == null ? null : Instant.parse(o).atZone(Optional.ofNullable(siteRequest_).map(r -> r.getConfig()).map(config -> config.getString(ConfigKeys.SITE_ZONE)).map(z -> ZoneId.of(z)).orElse(ZoneId.of("UTC"))).truncatedTo(ChronoUnit.MILLIS);
+			return o == null ? null : Instant.parse(o).atZone(Optional.ofNullable(siteRequest_).map(r -> r.getConfig()).map(config -> config.getString(ComputateConfigKeys.SITE_ZONE)).map(z -> ZoneId.of(z)).orElse(ZoneId.of("UTC"))).truncatedTo(ChronoUnit.MILLIS);
 		else if(StringUtils.contains(o, "T"))
 			return o == null ? null : ZonedDateTime.parse(o, DateTimeFormatter.ISO_DATE_TIME).truncatedTo(ChronoUnit.MILLIS);
 		else
-			return o == null ? null : LocalDate.parse(o, DateTimeFormatter.ISO_DATE).atStartOfDay(ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
+			return o == null ? null : LocalDate.parse(o, DateTimeFormatter.ISO_DATE).atStartOfDay(ZoneId.of(siteRequest_.getConfig().getString(ComputateConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
 	}
 	@JsonIgnore
 	public void setModified(Date o) {
-		this.modified = o == null ? null : ZonedDateTime.ofInstant(o.toInstant(), ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
+		this.modified = o == null ? null : ZonedDateTime.ofInstant(o.toInstant(), ZoneId.of(siteRequest_.getConfig().getString(ComputateConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
 	}
 	protected BaseModel modifiedInit() {
 		Wrap<ZonedDateTime> modifiedWrap = new Wrap<ZonedDateTime>().var("modified");
@@ -954,55 +962,6 @@ public abstract class BaseModelGen<DEV> extends Object {
 	}
 
 	///////////////////
-	// objectNameVar //
-	///////////////////
-
-	/**	 The entity objectNameVar
-	 *	 is defined as null before being initialized. 
-	 */
-	@JsonProperty
-	@JsonInclude(Include.NON_NULL)
-	protected String objectNameVar;
-
-	/**	<br> The entity objectNameVar
-	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.base.BaseModel&fq=entiteVar_enUS_indexed_string:objectNameVar">Find the entity objectNameVar in Solr</a>
-	 * <br>
-	 * @param w is for wrapping a value to assign to this entity during initialization. 
-	 **/
-	protected abstract void _objectNameVar(Wrap<String> w);
-
-	public String getObjectNameVar() {
-		return objectNameVar;
-	}
-	public void setObjectNameVar(String o) {
-		this.objectNameVar = BaseModel.staticSetObjectNameVar(siteRequest_, o);
-	}
-	public static String staticSetObjectNameVar(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-	protected BaseModel objectNameVarInit() {
-		Wrap<String> objectNameVarWrap = new Wrap<String>().var("objectNameVar");
-		if(objectNameVar == null) {
-			_objectNameVar(objectNameVarWrap);
-			setObjectNameVar(objectNameVarWrap.o);
-		}
-		return (BaseModel)this;
-	}
-
-	public static String staticSearchObjectNameVar(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-
-	public static String staticSearchStrObjectNameVar(SiteRequestEnUS siteRequest_, String o) {
-		return o == null ? null : o.toString();
-	}
-
-	public static String staticSearchFqObjectNameVar(SiteRequestEnUS siteRequest_, String o) {
-		return BaseModel.staticSearchStrObjectNameVar(siteRequest_, BaseModel.staticSearchObjectNameVar(siteRequest_, BaseModel.staticSetObjectNameVar(siteRequest_, o)));
-	}
-
-	///////////////////
 	// objectSuggest //
 	///////////////////
 
@@ -1336,7 +1295,6 @@ public abstract class BaseModelGen<DEV> extends Object {
 				savesInit();
 				objectTitleInit();
 				objectIdInit();
-				objectNameVarInit();
 				objectSuggestInit();
 				objectTextInit();
 				pageUrlIdInit();
@@ -1425,8 +1383,6 @@ public abstract class BaseModelGen<DEV> extends Object {
 				return oBaseModel.objectTitle;
 			case "objectId":
 				return oBaseModel.objectId;
-			case "objectNameVar":
-				return oBaseModel.objectNameVar;
 			case "objectSuggest":
 				return oBaseModel.objectSuggest;
 			case "objectText":
@@ -1506,8 +1462,6 @@ public abstract class BaseModelGen<DEV> extends Object {
 			return BaseModel.staticSetObjectTitle(siteRequest_, o);
 		case "objectId":
 			return BaseModel.staticSetObjectId(siteRequest_, o);
-		case "objectNameVar":
-			return BaseModel.staticSetObjectNameVar(siteRequest_, o);
 		case "objectSuggest":
 			return BaseModel.staticSetObjectSuggest(siteRequest_, o);
 		case "objectText":
@@ -1562,8 +1516,6 @@ public abstract class BaseModelGen<DEV> extends Object {
 			return BaseModel.staticSearchObjectTitle(siteRequest_, (String)o);
 		case "objectId":
 			return BaseModel.staticSearchObjectId(siteRequest_, (String)o);
-		case "objectNameVar":
-			return BaseModel.staticSearchObjectNameVar(siteRequest_, (String)o);
 		case "objectSuggest":
 			return BaseModel.staticSearchObjectSuggest(siteRequest_, (String)o);
 		case "objectText":
@@ -1618,8 +1570,6 @@ public abstract class BaseModelGen<DEV> extends Object {
 			return BaseModel.staticSearchStrObjectTitle(siteRequest_, (String)o);
 		case "objectId":
 			return BaseModel.staticSearchStrObjectId(siteRequest_, (String)o);
-		case "objectNameVar":
-			return BaseModel.staticSearchStrObjectNameVar(siteRequest_, (String)o);
 		case "objectSuggest":
 			return BaseModel.staticSearchStrObjectSuggest(siteRequest_, (String)o);
 		case "objectText":
@@ -1674,8 +1624,6 @@ public abstract class BaseModelGen<DEV> extends Object {
 			return BaseModel.staticSearchFqObjectTitle(siteRequest_, o);
 		case "objectId":
 			return BaseModel.staticSearchFqObjectId(siteRequest_, o);
-		case "objectNameVar":
-			return BaseModel.staticSearchFqObjectNameVar(siteRequest_, o);
 		case "objectSuggest":
 			return BaseModel.staticSearchFqObjectSuggest(siteRequest_, o);
 		case "objectText":
@@ -1725,7 +1673,7 @@ public abstract class BaseModelGen<DEV> extends Object {
 				else if(val instanceof String)
 					setCreated((String)val);
 				else if(val instanceof OffsetDateTime)
-					setCreated(((OffsetDateTime)val).atZoneSameInstant(ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))));
+					setCreated(((OffsetDateTime)val).atZoneSameInstant(ZoneId.of(siteRequest_.getConfig().getString(ComputateConfigKeys.SITE_ZONE))));
 				saves.add("created");
 				return val;
 			case "archived":
@@ -2141,7 +2089,6 @@ public abstract class BaseModelGen<DEV> extends Object {
 	public static final String VAR_saves = "saves";
 	public static final String VAR_objectTitle = "objectTitle";
 	public static final String VAR_objectId = "objectId";
-	public static final String VAR_objectNameVar = "objectNameVar";
 	public static final String VAR_objectSuggest = "objectSuggest";
 	public static final String VAR_objectText = "objectText";
 	public static final String VAR_pageUrlId = "pageUrlId";
@@ -2194,7 +2141,6 @@ public abstract class BaseModelGen<DEV> extends Object {
 	public static final String DISPLAY_NAME_saves = "";
 	public static final String DISPLAY_NAME_objectTitle = "";
 	public static final String DISPLAY_NAME_objectId = "ID";
-	public static final String DISPLAY_NAME_objectNameVar = "";
 	public static final String DISPLAY_NAME_objectSuggest = "autosuggest";
 	public static final String DISPLAY_NAME_objectText = "text";
 	public static final String DISPLAY_NAME_pageUrlId = "";
@@ -2237,8 +2183,6 @@ public abstract class BaseModelGen<DEV> extends Object {
 			return DISPLAY_NAME_objectTitle;
 		case VAR_objectId:
 			return DISPLAY_NAME_objectId;
-		case VAR_objectNameVar:
-			return DISPLAY_NAME_objectNameVar;
 		case VAR_objectSuggest:
 			return DISPLAY_NAME_objectSuggest;
 		case VAR_objectText:
@@ -2288,8 +2232,6 @@ public abstract class BaseModelGen<DEV> extends Object {
 			return "The title of this object";
 		case VAR_objectId:
 			return "A URL friendly unique ID for this object";
-		case VAR_objectNameVar:
-			return "The var that identifies this type of object in the API";
 		case VAR_objectSuggest:
 			return "The indexed field in the search engine for this record while using autosuggest";
 		case VAR_objectText:
@@ -2338,8 +2280,6 @@ public abstract class BaseModelGen<DEV> extends Object {
 		case VAR_objectTitle:
 			return "String";
 		case VAR_objectId:
-			return "String";
-		case VAR_objectNameVar:
 			return "String";
 		case VAR_objectSuggest:
 			return "String";

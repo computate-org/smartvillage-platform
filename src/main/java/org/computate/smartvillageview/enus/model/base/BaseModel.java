@@ -4,13 +4,15 @@ import java.text.Normalizer;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.Optional;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.computate.search.wrap.Wrap;
-import org.computate.vertx.model.base.ComputateBaseModel;
 import org.computate.smartvillageview.enus.config.ConfigKeys;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
+import org.computate.vertx.model.base.ComputateBaseModel;
 
 /**
  * Indexed: true
@@ -220,21 +222,6 @@ public class BaseModel extends BaseModelGen<Object> implements ComputateBaseMode
 	}
 
 	/**
-	 * Description: The var that identifies this type of object in the API
-	 */
-	protected void _objectNameVar(Wrap<String> w) {
-		if(objectId != null) {
-			Class<?> cl = getClass();
-
-			try {
-				w.o(toId(StringUtils.join(StringUtils.splitByCharacterTypeCamelCase((String)FieldUtils.getField(cl, String.format("%s_NameVar_%s", cl.getSimpleName(), siteRequest_.getLang())).get(this)), "-")));
-			} catch (Exception e) {
-				ExceptionUtils.rethrow(e);
-			}
-		}
-	}
-
-	/**
 	 * {@inheritDoc}
 	 * Suggested: true
 	 * Description: The indexed field in the search engine for this record while using autosuggest
@@ -244,8 +231,6 @@ public class BaseModel extends BaseModelGen<Object> implements ComputateBaseMode
 		StringBuilder b = new StringBuilder();
 		if(pk != null)
 			b.append(" ").append(pk);
-		if(objectNameVar != null)
-			b.append(" ").append(objectNameVar);
 		if(objectId != null)
 			b.append(" ").append(objectId);
 		if(objectTitle != null)
@@ -263,8 +248,6 @@ public class BaseModel extends BaseModelGen<Object> implements ComputateBaseMode
 		StringBuilder b = new StringBuilder();
 		if(pk != null)
 			b.append(" ").append(pk);
-		if(objectNameVar != null)
-			b.append(" ").append(objectNameVar);
 		if(objectId != null)
 			b.append(" ").append(objectId);
 		if(objectTitle != null)
@@ -280,8 +263,13 @@ public class BaseModel extends BaseModelGen<Object> implements ComputateBaseMode
 	 */
 	protected void _pageUrlId(Wrap<String> w) {
 		if(objectId != null) {
-			String o = siteRequest_.getConfig().getString(ConfigKeys.SITE_BASE_URL) + "/" + objectNameVar + "/" + objectId;
-			w.o(o);
+			try {
+				Optional.ofNullable((String)FieldUtils.getField(getClass(), String.format("%s_ApiUriSearchPage_%s", getClass().getSimpleName(), siteRequest_.getLang())).get(this)).ifPresent(classApiUri -> {
+					w.o(siteRequest_.getConfig().getString(ConfigKeys.SITE_BASE_URL) + "/" + classApiUri + "/" + objectId);
+				});
+			} catch (Exception e) {
+				ExceptionUtils.rethrow(e);
+			}
 		}
 	}
 
@@ -293,8 +281,13 @@ public class BaseModel extends BaseModelGen<Object> implements ComputateBaseMode
 	 */
 	protected void _pageUrlPk(Wrap<String> w) {
 		if(pk != null) {
-			String o = siteRequest_.getConfig().getString(ConfigKeys.SITE_BASE_URL) + "/" + objectNameVar + "/" + pk;
-			w.o(o);
+			try {
+				Optional.ofNullable((String)FieldUtils.getField(getClass(), String.format("%s_ApiUriSearchPage_%s", getClass().getSimpleName(), siteRequest_.getLang())).get(this)).ifPresent(classApiUri -> {
+					w.o(siteRequest_.getConfig().getString(ConfigKeys.SITE_BASE_URL) + "/" + classApiUri + "/" + pk);
+				});
+			} catch (Exception e) {
+				ExceptionUtils.rethrow(e);
+			}
 		} else {
 			w.o(pageUrlId);
 		}
@@ -308,8 +301,13 @@ public class BaseModel extends BaseModelGen<Object> implements ComputateBaseMode
 	 */
 	protected void _pageUrlApi(Wrap<String> w) {
 		if(pk != null) {
-			String o = siteRequest_.getConfig().getString(ConfigKeys.SITE_BASE_URL) + "/api/" + objectNameVar + "/" + pk;
-			w.o(o);
+			try {
+				Optional.ofNullable((String)FieldUtils.getField(getClass(), String.format("%s_ApiUri_%s", getClass().getSimpleName(), siteRequest_.getLang())).get(this)).ifPresent(classApiUri -> {
+					w.o(siteRequest_.getConfig().getString(ConfigKeys.SITE_BASE_URL) + "/" + classApiUri + "/" + pk);
+				});
+			} catch (Exception e) {
+				ExceptionUtils.rethrow(e);
+			}
 		}
 	}
 
