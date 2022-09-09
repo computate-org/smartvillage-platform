@@ -13,4 +13,5 @@ touch ~/.local/src/smart-village-view/src/main/java/org/computate/smartvillagevi
 touch ~/.local/src/smart-village-view/src/main/java/org/computate/smartvillageview/enus/model/iotnode/IotNode.java
 touch ~/.local/src/smart-village-view/src/main/java/org/computate/smartvillageview/enus/model/traffic/time/step/TimeStep.java
 touch ~/.local/src/smart-village-view/src/main/java/org/computate/smartvillageview/enus/model/traffic/vehicle/step/VehicleStep.java
+touch ~/.local/src/smart-village-view/src/main/java/org/computate/smartvillageview/enus/model/traffic/person/step/PersonStep.java
 touch ~/.local/src/smart-village-view/src/main/java/org/computate/smartvillageview/enus/model/traffic/simulation/TrafficSimulation.java

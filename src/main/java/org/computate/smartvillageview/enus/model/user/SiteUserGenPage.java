@@ -444,12 +444,12 @@ public class SiteUserGenPage extends SiteUserGenPageGen<BaseModelPage> {
 	}
 
 	@Override
-	protected void _contextIconGroup(Wrap<String> c) {
+	protected void _classIconGroup(Wrap<String> c) {
 			c.o("regular");
 	}
 
 	@Override
-	protected void _contextIconName(Wrap<String> c) {
+	protected void _classIconName(Wrap<String> c) {
 			c.o("user-cog");
 	}
 

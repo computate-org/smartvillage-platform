@@ -63,6 +63,10 @@ import io.vertx.core.json.JsonObject;
  * <li>You can add a class comment "Model: true" if you wish to persist these SystemEvent objects in a relational PostgreSQL database transactionally in the RESTful API. 
  * The code to persist and query the SystemEventGen data in the database will then be automatically generated. 
  * </li>
+ * <li>You can add a class comment "Rows: 100" if you wish the SystemEvent API to return more or less than 10 records by default. 
+ * In this case, the API will return 100 records from the API instead of 10 by default. 
+ * Each API has built in pagination of the search records to ensure a user can query all the data a page at a time without running the application out of memory. 
+ * </li>
  * </ol>
  * <h1>About the SystemEvent class and it's generated class SystemEventGen&lt;Object&gt;: </h1>
  * <p>
@@ -121,7 +125,8 @@ public abstract class SystemEventGen<DEV> extends Object {
 	public static final String SystemEvent_Title_enUS = "system events";
 	public static final String SystemEvent_ThePluralName_enUS = "the system events";
 	public static final String SystemEvent_NoNameFound_enUS = "no system event found";
-	public static final String SystemEvent_NameVar_enUS = "systemEvent";
+	public static final String SystemEvent_ApiUri_enUS = "/api/system-event";
+	public static final String SystemEvent_ApiUriSearchPage_enUS = "/system-event";
 	public static final String SystemEvent_OfName_enUS = "of system event";
 	public static final String SystemEvent_ANameAdjective_enUS = "a system event";
 	public static final String SystemEvent_NameAdjectiveSingular_enUS = "system event";

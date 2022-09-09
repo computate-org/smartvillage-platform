@@ -28,7 +28,14 @@
 				websocketSiteHtm(websocketSiteHtmInner);
 				window.varsFq = JSON.parse('{{{toJsonObjectStringInApostrophes varsFq}}}');
 				pageGraph();
+
+				var calendarEl = document.getElementById('site-calendar');
+				var calendar = new FullCalendar.Calendar(calendarEl, {
+					initialView: 'dayGridMonth'
+				});
+				calendar.render();
 			});
+			$('#site-calendar-box').accordion();
 {{#if DEFAULT_MAP_LOCATION }}
 			window.DEFAULT_MAP_LOCATION = { lat: {{ DEFAULT_MAP_LOCATION.lat }}, lon: {{ DEFAULT_MAP_LOCATION.lon }} };
 {{/if}}
@@ -38,7 +45,7 @@
 		</script>
 {{/inline}}
 {{#*inline "htmUrlSiteHtm"}}{{pageUri}}?q={{query.q}}&amp;rows={{#if rows}}{{rows}}{{else}}{{pagination.rows}}{{/if}}&amp;rows={{#if start}}{{start}}{{else}}{{pagination.start}}{{/if}}{{#each query.fq}}{{#eq fq this}}{{else}}&fq={{fq}}:{{val}}{{/eq}}{{/each}}{{#each query.sort}}{{#eq sort this}}{{else}}&sort={{var}} {{order}}{{/eq}}{{/each}}{{/inline}}
-{{#*inline "htmHeadSiteHtmPage"}}{{> "htmTitleSiteHtmPage"}}{{> "htmMetaSiteHtmPage"}}{{> "htmStyleSiteHtmPage"}}{{> "htmScriptsSiteHtmPage"}}{{> "htmScriptSiteHtmPage"}}{{/inline}}
+{{#*inline "htmHeadSiteHtmPage"}}{{#block "htmTitle"}}{{/block}}{{#block "htmMeta"}}{{/block}}{{#block "htmStyle"}}{{/block}}{{#block "htmScripts"}}{{/block}}{{#block "htmScript"}}{{/block}}{{/inline}}
 {{#*inline "htmBodySearchSiteHtmPage"}}								<!-- #*inline "htmBodySearchSiteHtmPage" -->
 								<div>
 {{#each varsQ}}
@@ -260,16 +267,16 @@
 {{#*inline "htmBodyCount0SiteHtmPage"}}		<!-- #*inline "htmBodyCount0SiteHtmPage" -->
 		<h1>
 			<a href="{{pageUri}}" class="w3-bar-item w3-btn w3-center w3-block w3-2017-navy-peony w3-hover-2017-navy-peony">
-				{{#if contextIconCssClasses}}
-					<i class="{{ contextIconCssClasses }} site-menu-icon "></i>
+				{{#if }}
+					<i class="{{  }} site-menu-icon "></i>
 				{{/if}}
 				<span class="">HTMLs</span>
 			</a>
 		</h1>
 		<h2>
 			<span class="w3-bar-item w3-padding w3-center w3-block w3-2017-navy-peony">
-				{{#if contextIconCssClasses}}
-					<i class="{{ contextIconCssClasses }}  site-menu-icon "></i>
+				{{#if }}
+					<i class="{{  }}  site-menu-icon "></i>
 				{{/if}}
 				<span class="">no HTML found</span>
 			</span>
@@ -278,8 +285,8 @@
 {{#*inline "htmBodyCount1AllSiteHtmPage"}}		<!-- #*inline "htmBodyCount1AllSiteHtmPage" -->
 		<h1 class="w3-center ">
 			<a href="{{pageUri}}" class="w3-bar-item w3-btn w3-block w3-2017-navy-peony w3-hover-2017-navy-peony">
-			{{#if contextIconCssClasses}}
-				<i class="{{ contextIconCssClasses }} site-menu-icon "></i>
+			{{#if }}
+				<i class="{{  }} site-menu-icon "></i>
 			{{/if}}
 				<span class="">HTML</span>
 			</a>
@@ -293,8 +300,8 @@
 {{#*inline "htmBodyCount1SiteHtmPage"}}		<!-- #*inline "htmBodyCount1SiteHtmPage" -->
 		<h1>
 			<a href="{{pageUri}}" class="w3-bar-item w3-btn w3-center w3-block w3-2017-navy-peony w3-hover-2017-navy-peony">
-	{{#if contextIconCssClasses}}
-				<i class="{{ contextIconCssClasses }} site-menu-icon "></i>
+	{{#if }}
+				<i class="{{  }} site-menu-icon "></i>
 	{{/if}}
 				<span class="">HTMLs</span>
 			</a>
@@ -331,8 +338,8 @@
 {{#*inline "htmBodyAllSiteHtmPage"}}		<!-- #*inline "htmBodyAllSiteHtmPage" -->
 		<h1>
 			<a href="{{pageUri}}" class="w3-bar-item w3-btn w3-center w3-block w3-2017-navy-peony w3-hover-2017-navy-peony">
-	{{#if contextIconCssClasses}}
-				<i class="{{ contextIconCssClasses }} site-menu-icon "></i>
+	{{#if }}
+				<i class="{{  }} site-menu-icon "></i>
 	{{/if}}
 				<span class="">HTMLs</span>
 			</a>
@@ -612,6 +619,10 @@
 		</div>
 {{#block "htmBodyGraph"}}{{/block}}
 	<div class="pageContent w3-content ">
+		<div id="site-calendar-box ">
+			<h3 id="site-calendar-title">Calendar</h3>
+			<div id="site-calendar"></div>
+		</div>
 	{{#eq siteHtmCount int0}}
 {{#block "htmBodyCount0"}}{{/block}}
 	{{else}}

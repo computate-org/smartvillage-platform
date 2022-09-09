@@ -46,6 +46,14 @@ import io.vertx.core.Promise;
 import io.vertx.core.Future;
 
 /**	
+ * <h1>Suggestions that can generate more code for you: </h1>
+ * <ol>
+ * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class SiteRequestEnUSGen into the class SiteRequestEnUS. 
+ * </li>
+ * <li>You can add a class comment "Api: true" if you wish to GET, POST, PATCH or PUT these SiteRequestEnUS objects in a RESTful API. 
+ * </li>
+ * </ol>
+ * <h1>About the SiteRequestEnUS class and it's generated class SiteRequestEnUSGen&lt;Object&gt;: </h1>
  * <p>
  * This Java class extends a generated Java class built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
  * Whenever this Java class is modified or touched, the watch service installed as described in the README, indexes all the information about this Java class in a local Apache Solr Search Engine. 

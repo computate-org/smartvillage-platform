@@ -265,7 +265,7 @@ public class BaseModel extends BaseModelGen<Object> implements ComputateBaseMode
 		if(objectId != null) {
 			try {
 				Optional.ofNullable((String)FieldUtils.getField(getClass(), String.format("%s_ApiUriSearchPage_%s", getClass().getSimpleName(), siteRequest_.getLang())).get(this)).ifPresent(classApiUri -> {
-					w.o(siteRequest_.getConfig().getString(ConfigKeys.SITE_BASE_URL) + "/" + classApiUri + "/" + objectId);
+					w.o(siteRequest_.getConfig().getString(ConfigKeys.SITE_BASE_URL) + classApiUri + "/" + objectId);
 				});
 			} catch (Exception e) {
 				ExceptionUtils.rethrow(e);
@@ -283,7 +283,7 @@ public class BaseModel extends BaseModelGen<Object> implements ComputateBaseMode
 		if(pk != null) {
 			try {
 				Optional.ofNullable((String)FieldUtils.getField(getClass(), String.format("%s_ApiUriSearchPage_%s", getClass().getSimpleName(), siteRequest_.getLang())).get(this)).ifPresent(classApiUri -> {
-					w.o(siteRequest_.getConfig().getString(ConfigKeys.SITE_BASE_URL) + "/" + classApiUri + "/" + pk);
+					w.o(siteRequest_.getConfig().getString(ConfigKeys.SITE_BASE_URL) + classApiUri + "/" + pk);
 				});
 			} catch (Exception e) {
 				ExceptionUtils.rethrow(e);
@@ -303,7 +303,7 @@ public class BaseModel extends BaseModelGen<Object> implements ComputateBaseMode
 		if(pk != null) {
 			try {
 				Optional.ofNullable((String)FieldUtils.getField(getClass(), String.format("%s_ApiUri_%s", getClass().getSimpleName(), siteRequest_.getLang())).get(this)).ifPresent(classApiUri -> {
-					w.o(siteRequest_.getConfig().getString(ConfigKeys.SITE_BASE_URL) + "/" + classApiUri + "/" + pk);
+					w.o(siteRequest_.getConfig().getString(ConfigKeys.SITE_BASE_URL) + classApiUri + "/" + pk);
 				});
 			} catch (Exception e) {
 				ExceptionUtils.rethrow(e);

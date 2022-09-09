@@ -95,6 +95,9 @@ import io.vertx.core.json.JsonObject;
  * </p>
  * <p>This class contains a comment "ApiUri: /api/person-step", which defines the base API URI for PersonStep objects as "/api/person-step" in the OpenAPI spec. 
  * </p>
+ * <p>This class contains a comment "Rows: 100", which means the PersonStep API will return a default of 100 records instead of 10 by default. 
+ * Each API has built in pagination of the search records to ensure a user can query all the data a page at a time without running the application out of memory. 
+ * </p>
  * <p>
  * Delete the class PersonStep in Solr: 
  * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStep&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
@@ -124,7 +127,8 @@ public abstract class PersonStepGen<DEV> extends Object {
 	public static final String PersonStep_Title_enUS = "person steps";
 	public static final String PersonStep_ThePluralName_enUS = "the person steps";
 	public static final String PersonStep_NoNameFound_enUS = "no person step found";
-	public static final String PersonStep_NameVar_enUS = "personStep";
+	public static final String PersonStep_ApiUri_enUS = "/api/person-step";
+	public static final String PersonStep_ApiUriSearchPage_enUS = "/person-step";
 	public static final String PersonStep_OfName_enUS = "of person step";
 	public static final String PersonStep_ANameAdjective_enUS = "a person step";
 	public static final String PersonStep_NameAdjectiveSingular_enUS = "person step";

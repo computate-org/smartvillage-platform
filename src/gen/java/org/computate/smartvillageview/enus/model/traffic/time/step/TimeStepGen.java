@@ -56,6 +56,15 @@ import org.computate.search.response.solr.SolrResponse;
 import io.vertx.core.json.JsonObject;
 
 /**	
+ * <h1>Suggestions that can generate more code for you: </h1>
+ * <ol>
+ * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class TimeStepGen into the class TimeStep. 
+ * </li>
+ * <li>You can add a class comment "Model: true" if you wish to persist these TimeStep objects in a relational PostgreSQL database transactionally in the RESTful API. 
+ * The code to persist and query the TimeStepGen data in the database will then be automatically generated. 
+ * </li>
+ * </ol>
+ * <h1>About the TimeStep class and it's generated class TimeStepGen&lt;Object&gt;: </h1>
  * <p>
  * This Java class extends a generated Java class built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
  * Whenever this Java class is modified or touched, the watch service installed as described in the README, indexes all the information about this Java class in a local Apache Solr Search Engine. 
@@ -81,6 +90,9 @@ import io.vertx.core.json.JsonObject;
  * <p>This class contains a comment "ApiTag: Time Step", which groups all of the OpenAPIs for TimeStep objects under the tag "Time Step". 
  * </p>
  * <p>This class contains a comment "ApiUri: /api/time-step", which defines the base API URI for TimeStep objects as "/api/time-step" in the OpenAPI spec. 
+ * </p>
+ * <p>This class contains a comment "Rows: 100", which means the TimeStep API will return a default of 100 records instead of 10 by default. 
+ * Each API has built in pagination of the search records to ensure a user can query all the data a page at a time without running the application out of memory. 
  * </p>
  * <p>
  * Delete the class TimeStep in Solr: 
@@ -111,7 +123,8 @@ public abstract class TimeStepGen<DEV> extends Object {
 	public static final String TimeStep_Title_enUS = "time steps";
 	public static final String TimeStep_ThePluralName_enUS = "the time steps";
 	public static final String TimeStep_NoNameFound_enUS = "no time step found";
-	public static final String TimeStep_NameVar_enUS = "timeStep";
+	public static final String TimeStep_ApiUri_enUS = "/api/time-step";
+	public static final String TimeStep_ApiUriSearchPage_enUS = "/time-step";
 	public static final String TimeStep_OfName_enUS = "of time step";
 	public static final String TimeStep_ANameAdjective_enUS = "a time step";
 	public static final String TimeStep_NameAdjectiveSingular_enUS = "time step";

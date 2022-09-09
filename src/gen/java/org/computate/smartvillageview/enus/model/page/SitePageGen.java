@@ -56,6 +56,19 @@ import org.computate.search.response.solr.SolrResponse;
 import io.vertx.core.json.JsonObject;
 
 /**	
+ * <h1>Suggestions that can generate more code for you: </h1>
+ * <ol>
+ * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class SitePageGen into the class SitePage. 
+ * </li>
+ * <li>You can add a class comment "Model: true" if you wish to persist these SitePage objects in a relational PostgreSQL database transactionally in the RESTful API. 
+ * The code to persist and query the SitePageGen data in the database will then be automatically generated. 
+ * </li>
+ * <li>You can add a class comment "Rows: 100" if you wish the SitePage API to return more or less than 10 records by default. 
+ * In this case, the API will return 100 records from the API instead of 10 by default. 
+ * Each API has built in pagination of the search records to ensure a user can query all the data a page at a time without running the application out of memory. 
+ * </li>
+ * </ol>
+ * <h1>About the SitePage class and it's generated class SitePageGen&lt;Object&gt;: </h1>
  * <p>
  * This Java class extends a generated Java class built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
  * Whenever this Java class is modified or touched, the watch service installed as described in the README, indexes all the information about this Java class in a local Apache Solr Search Engine. 
@@ -112,7 +125,8 @@ public abstract class SitePageGen<DEV> extends Object {
 	public static final String SitePage_Title_enUS = "articles";
 	public static final String SitePage_ThePluralName_enUS = "the articles";
 	public static final String SitePage_NoNameFound_enUS = "no article found";
-	public static final String SitePage_NameVar_enUS = "page";
+	public static final String SitePage_ApiUri_enUS = "/api/page";
+	public static final String SitePage_ApiUriSearchPage_enUS = "/page";
 	public static final String SitePage_OfName_enUS = "of article";
 	public static final String SitePage_ANameAdjective_enUS = "an article";
 	public static final String SitePage_NameAdjectiveSingular_enUS = "article";

@@ -60,6 +60,15 @@ import org.computate.search.response.solr.SolrResponse;
 import io.vertx.core.json.JsonObject;
 
 /**	
+ * <h1>Suggestions that can generate more code for you: </h1>
+ * <ol>
+ * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class VehicleStepGen into the class VehicleStep. 
+ * </li>
+ * <li>You can add a class comment "Model: true" if you wish to persist these VehicleStep objects in a relational PostgreSQL database transactionally in the RESTful API. 
+ * The code to persist and query the VehicleStepGen data in the database will then be automatically generated. 
+ * </li>
+ * </ol>
+ * <h1>About the VehicleStep class and it's generated class VehicleStepGen&lt;Object&gt;: </h1>
  * <p>
  * This Java class extends a generated Java class built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
  * Whenever this Java class is modified or touched, the watch service installed as described in the README, indexes all the information about this Java class in a local Apache Solr Search Engine. 
@@ -85,6 +94,9 @@ import io.vertx.core.json.JsonObject;
  * <p>This class contains a comment "ApiTag: Vehicle Step", which groups all of the OpenAPIs for VehicleStep objects under the tag "Vehicle Step". 
  * </p>
  * <p>This class contains a comment "ApiUri: /api/vehicle-step", which defines the base API URI for VehicleStep objects as "/api/vehicle-step" in the OpenAPI spec. 
+ * </p>
+ * <p>This class contains a comment "Rows: 100", which means the VehicleStep API will return a default of 100 records instead of 10 by default. 
+ * Each API has built in pagination of the search records to ensure a user can query all the data a page at a time without running the application out of memory. 
  * </p>
  * <p>
  * Delete the class VehicleStep in Solr: 
@@ -115,7 +127,8 @@ public abstract class VehicleStepGen<DEV> extends Object {
 	public static final String VehicleStep_Title_enUS = "vehicle steps";
 	public static final String VehicleStep_ThePluralName_enUS = "the vehicle steps";
 	public static final String VehicleStep_NoNameFound_enUS = "no vehicle step found";
-	public static final String VehicleStep_NameVar_enUS = "vehicleStep";
+	public static final String VehicleStep_ApiUri_enUS = "/api/vehicle-step";
+	public static final String VehicleStep_ApiUriSearchPage_enUS = "/vehicle-step";
 	public static final String VehicleStep_OfName_enUS = "of vehicle step";
 	public static final String VehicleStep_ANameAdjective_enUS = "a vehicle step";
 	public static final String VehicleStep_NameAdjectiveSingular_enUS = "vehicle step";

@@ -435,12 +435,12 @@ public class SitePageGenPage extends SitePageGenPageGen<PageLayout> {
 	}
 
 	@Override
-	protected void _contextIconGroup(Wrap<String> c) {
+	protected void _classIconGroup(Wrap<String> c) {
 			c.o("duotone");
 	}
 
 	@Override
-	protected void _contextIconName(Wrap<String> c) {
+	protected void _classIconName(Wrap<String> c) {
 			c.o("newspaper");
 	}
 

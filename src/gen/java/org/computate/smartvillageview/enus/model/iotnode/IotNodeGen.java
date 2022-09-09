@@ -82,6 +82,9 @@ import org.computate.search.response.solr.SolrResponse;
  * </p>
  * <p>This class contains a comment "ApiUri: /api/iot-node", which defines the base API URI for IotNode objects as "/api/iot-node" in the OpenAPI spec. 
  * </p>
+ * <p>This class contains a comment "Rows: 100", which means the IotNode API will return a default of 100 records instead of 10 by default. 
+ * Each API has built in pagination of the search records to ensure a user can query all the data a page at a time without running the application out of memory. 
+ * </p>
  * <p>
  * Delete the class IotNode in Solr: 
  * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.iotnode.IotNode&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
@@ -111,7 +114,8 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 	public static final String IotNode_Title_enUS = "IOT nodes";
 	public static final String IotNode_ThePluralName_enUS = "the IOT nodes";
 	public static final String IotNode_NoNameFound_enUS = "no IOT node found";
-	public static final String IotNode_NameVar_enUS = "iotNode";
+	public static final String IotNode_ApiUri_enUS = "/api/iot-node";
+	public static final String IotNode_ApiUriSearchPage_enUS = "/iot-node";
 	public static final String IotNode_OfName_enUS = "of IOT node";
 	public static final String IotNode_ANameAdjective_enUS = "an IOT node";
 	public static final String IotNode_NameAdjectiveSingular_enUS = "IOT node";

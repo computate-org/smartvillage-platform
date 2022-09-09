@@ -37,6 +37,14 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 
 /**	
+ * <h1>Suggestions that can generate more code for you: </h1>
+ * <ol>
+ * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class WorkerVerticleGen into the class WorkerVerticle. 
+ * </li>
+ * <li>You can add a class comment "Api: true" if you wish to GET, POST, PATCH or PUT these WorkerVerticle objects in a RESTful API. 
+ * </li>
+ * </ol>
+ * <h1>About the WorkerVerticle class and it's generated class WorkerVerticleGen&lt;AbstractVerticle&gt;: </h1>
  * <p>
  * This Java class extends a generated Java class built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
  * Whenever this Java class is modified or touched, the watch service installed as described in the README, indexes all the information about this Java class in a local Apache Solr Search Engine. 
@@ -100,11 +108,6 @@ public abstract class WorkerVerticleGen<DEV> extends AbstractVerticle {
 	public static final String importDataClassComplete = importDataClassComplete1;
 	public static final String importDataClassFail1 = "Configuring the import of %s data failed. ";
 	public static final String importDataClassFail = importDataClassFail1;
-
-	public static final String importDataIotNodeComplete1 = "Importing %s data completed. ";
-	public static final String importDataIotNodeComplete = importDataIotNodeComplete1;
-	public static final String importDataIotNodeFail1 = "Importing %s data failed. ";
-	public static final String importDataIotNodeFail = importDataIotNodeFail1;
 
 	public static final String refreshAllDataComplete1 = "Refresh all data completed. ";
 	public static final String refreshAllDataComplete = refreshAllDataComplete1;
@@ -266,7 +269,7 @@ public abstract class WorkerVerticleGen<DEV> extends AbstractVerticle {
 		return sb.toString();
 	}
 
-	public static final String[] WorkerVerticleVals = new String[] { configureHandlebarsFail1, configureHandlebarsComplete1, configureDataConnectionError1, configureDataConnectionSuccess1, configureDataInitError1, configureDataInitSuccess1, configureSharedWorkerExecutorFail1, configureSharedWorkerExecutorComplete1, configureEmailComplete1, configureEmailFail1, importTimerScheduling1, importTimerSkip1, importTimerFail1, importDataSkip1, importDataClassComplete1, importDataClassFail1, importDataIotNodeComplete1, importDataIotNodeFail1, refreshAllDataComplete1, refreshAllDataStarted1, refreshAllDataFail1, refreshAllDataSkip1, refreshDataComplete1, refreshDataStarted1, refreshDataSkip1, refreshDataFail1, refreshDataCounterResetFail1 };
+	public static final String[] WorkerVerticleVals = new String[] { configureHandlebarsFail1, configureHandlebarsComplete1, configureDataConnectionError1, configureDataConnectionSuccess1, configureDataInitError1, configureDataInitSuccess1, configureSharedWorkerExecutorFail1, configureSharedWorkerExecutorComplete1, configureEmailComplete1, configureEmailFail1, importTimerScheduling1, importTimerSkip1, importTimerFail1, importDataSkip1, importDataClassComplete1, importDataClassFail1, refreshAllDataComplete1, refreshAllDataStarted1, refreshAllDataFail1, refreshAllDataSkip1, refreshDataComplete1, refreshDataStarted1, refreshDataSkip1, refreshDataFail1, refreshDataCounterResetFail1 };
 
 	public static final String CLASS_SIMPLE_NAME = "WorkerVerticle";
 

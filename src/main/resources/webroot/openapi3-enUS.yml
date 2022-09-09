@@ -791,7 +791,7 @@ paths:
           required: false
           schema:
             type: integer
-            default: 100
+            default: 10
             minimum: 0
         - in: query
           name: facet
@@ -1123,7 +1123,7 @@ paths:
           required: false
           schema:
             type: integer
-            default: 100
+            default: 10
             minimum: 0
         - in: query
           name: facet
@@ -1302,7 +1302,7 @@ paths:
           required: false
           schema:
             type: integer
-            default: 100
+            default: 10
             minimum: 0
         - in: query
           name: facet
@@ -2837,7 +2837,7 @@ paths:
           required: false
           schema:
             type: integer
-            default: 100
+            default: 10
             minimum: 0
         - in: query
           name: facet
@@ -3169,7 +3169,7 @@ paths:
           required: false
           schema:
             type: integer
-            default: 100
+            default: 10
             minimum: 0
         - in: query
           name: facet
@@ -3348,7 +3348,7 @@ paths:
           required: false
           schema:
             type: integer
-            default: 100
+            default: 10
             minimum: 0
         - in: query
           name: facet
@@ -3527,7 +3527,7 @@ paths:
           required: false
           schema:
             type: integer
-            default: 100
+            default: 10
             minimum: 0
         - in: query
           name: facet
@@ -3859,7 +3859,7 @@ paths:
           required: false
           schema:
             type: integer
-            default: 100
+            default: 10
             minimum: 0
         - in: query
           name: facet
@@ -4038,7 +4038,7 @@ paths:
           required: false
           schema:
             type: integer
-            default: 100
+            default: 10
             minimum: 0
         - in: query
           name: facet
@@ -4223,7 +4223,7 @@ paths:
           required: false
           schema:
             type: integer
-            default: 100
+            default: 10
             minimum: 0
         - in: query
           name: facet
@@ -4402,7 +4402,7 @@ paths:
           required: false
           schema:
             type: integer
-            default: 100
+            default: 10
             minimum: 0
         - in: query
           name: facet
@@ -4581,7 +4581,7 @@ paths:
           required: false
           schema:
             type: integer
-            default: 100
+            default: 10
             minimum: 0
         - in: query
           name: facet
@@ -4913,7 +4913,7 @@ paths:
           required: false
           schema:
             type: integer
-            default: 100
+            default: 10
             minimum: 0
         - in: query
           name: facet
@@ -5092,7 +5092,7 @@ paths:
           required: false
           schema:
             type: integer
-            default: 100
+            default: 10
             minimum: 0
         - in: query
           name: facet
@@ -5271,7 +5271,7 @@ paths:
           required: false
           schema:
             type: integer
-            default: 100
+            default: 10
             minimum: 0
         - in: query
           name: facet
@@ -5603,7 +5603,7 @@ paths:
           required: false
           schema:
             type: integer
-            default: 100
+            default: 10
             minimum: 0
         - in: query
           name: facet
@@ -5782,7 +5782,7 @@ paths:
           required: false
           schema:
             type: integer
-            default: 100
+            default: 10
             minimum: 0
         - in: query
           name: facet
@@ -6547,6 +6547,696 @@ paths:
             text/html; charset=utf-8:
               schema:
                 $ref: '#/components/schemas/SearchPageSiteUserResponse'
+  /api/iot-node-step:
+    get:
+      operationId: searchIotNodeStep
+      x-vertx-event-bus: smart-village-view-enUS-IotNodeStep
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - IOT Node Step
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+        - in: query
+          name: q
+          description: 'The query parameter defines a query using standard query syntax. This parameter is mandatory.'
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: 'The filter query parameter defines a query that can be used to restrict the superset of documents that can be returned, without influencing score. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: var
+          description: 'The var parameters are additional optional variables and values to pass into the application. '
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
+        - in: query
+          name: fl
+          description: 'The field list parameter limits the information included in a query response to a specified list of fields. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sort
+          description: 'The sort parameter arranges search results in either ascending (asc) or descending (desc) order. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: start
+          description: 'The start parameter specifies an offset into a query result set and instructs Solr to begin displaying results from this offset. '
+          required: false
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
+        - in: query
+          name: rows
+          description: 'The rows parameter specifies the maximum number of documents from the complete result set that Solr should return to the client at one time. '
+          required: false
+          schema:
+            type: integer
+            default: 10
+            minimum: 0
+        - in: query
+          name: facet
+          description: 'The facet parameter enables facet counts in the query response. '
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: facet.range.start
+          description: 'The facet.range.start parameter specifies the lower bound of the ranges. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.end
+          description: 'The facet.range.end specifies the upper bound of the ranges. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.gap
+          description: 'The span of each range expressed as a value to be added to the lower bound. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.pivot
+          description: 'The facet.pivot parameter defines the fields to use for the pivot. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range
+          description: 'The facet.range parameter defines the field for which Solr should create range facets. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.field
+          description: 'The facet.field parameter identifies a field that should be treated as a facet. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: d
+          description: 'The radial distance, usually in kilometers. '
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+        - in: query
+          name: pt
+          description: 'he center point using the format lat,lon if latitude & longitude. Otherwise, x,y for PointType or x y for RPT field types. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sfield
+          description: 'A spatial indexed field. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: score
+          description: '(Advanced option; not supported by LatLonType (deprecated) or PointType) If the query is used in a scoring context (e.g., as the main query in q), this local parameter determines what scores will be produced. Valid values are: none, kilometers, miles, degrees, distance, recipDistance, overlapRatio, area, area2D'
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: distanceUnits
+          description: 'This is used to specify the units for distance measurements used throughout the use of this field. This can be degrees, kilometers or miles. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: stats
+          description: 'The Stats component returns simple statistics for numeric, string, and date fields within the document set. '
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: stats.field
+          description: 'Specifies a field for which statistics should be generated. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: >+
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/SearchIotNodeStepResponse'
+    patch:
+      operationId: patchIotNodeStep
+      x-vertx-event-bus: smart-village-view-enUS-IotNodeStep
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - IOT Node Step
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+        - in: query
+          name: q
+          description: 'The query parameter defines a query using standard query syntax. This parameter is mandatory.'
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: 'The filter query parameter defines a query that can be used to restrict the superset of documents that can be returned, without influencing score. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: var
+          description: 'The var parameters are additional optional variables and values to pass into the application. '
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
+      requestBody:
+        description: >+
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PATCHIotNodeStepRequest'
+      responses:
+        '200':
+          description: >+
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/PATCHIotNodeStepResponse'
+    post:
+      operationId: postIotNodeStep
+      x-vertx-event-bus: smart-village-view-enUS-IotNodeStep
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - IOT Node Step
+      requestBody:
+        description: >+
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POSTIotNodeStepRequest'
+      responses:
+        '200':
+          description: >+
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/POSTIotNodeStepResponse'
+  /api/iot-node-step-import:
+    put:
+      operationId: putimportIotNodeStep
+      x-vertx-event-bus: smart-village-view-enUS-IotNodeStep
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - IOT Node Step
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+      requestBody:
+        description: >+
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PUTImportIotNodeStepRequest'
+      responses:
+        '200':
+          description: >+
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/PUTImportIotNodeStepResponse'
+  /api/iot-node-step/{id}:
+    get:
+      operationId: getIotNodeStep
+      x-vertx-event-bus: smart-village-view-enUS-IotNodeStep
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - IOT Node Step
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+        - name: id
+          in: path
+          description: >+
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: >+
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/GETIotNodeStepResponse'
+  /iot-node-step/{id}:
+    get:
+      operationId: searchpageIotNodeStepId
+      x-vertx-event-bus: smart-village-view-enUS-IotNodeStep
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - IOT Node Step
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+        - name: id
+          in: path
+          description: >+
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: q
+          description: 'The query parameter defines a query using standard query syntax. This parameter is mandatory.'
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: 'The filter query parameter defines a query that can be used to restrict the superset of documents that can be returned, without influencing score. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: var
+          description: 'The var parameters are additional optional variables and values to pass into the application. '
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
+        - in: query
+          name: fl
+          description: 'The field list parameter limits the information included in a query response to a specified list of fields. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sort
+          description: 'The sort parameter arranges search results in either ascending (asc) or descending (desc) order. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: start
+          description: 'The start parameter specifies an offset into a query result set and instructs Solr to begin displaying results from this offset. '
+          required: false
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
+        - in: query
+          name: rows
+          description: 'The rows parameter specifies the maximum number of documents from the complete result set that Solr should return to the client at one time. '
+          required: false
+          schema:
+            type: integer
+            default: 10
+            minimum: 0
+        - in: query
+          name: facet
+          description: 'The facet parameter enables facet counts in the query response. '
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: facet.range.start
+          description: 'The facet.range.start parameter specifies the lower bound of the ranges. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.end
+          description: 'The facet.range.end specifies the upper bound of the ranges. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.gap
+          description: 'The span of each range expressed as a value to be added to the lower bound. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.pivot
+          description: 'The facet.pivot parameter defines the fields to use for the pivot. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range
+          description: 'The facet.range parameter defines the field for which Solr should create range facets. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.field
+          description: 'The facet.field parameter identifies a field that should be treated as a facet. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: d
+          description: 'The radial distance, usually in kilometers. '
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+        - in: query
+          name: pt
+          description: 'he center point using the format lat,lon if latitude & longitude. Otherwise, x,y for PointType or x y for RPT field types. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sfield
+          description: 'A spatial indexed field. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: score
+          description: '(Advanced option; not supported by LatLonType (deprecated) or PointType) If the query is used in a scoring context (e.g., as the main query in q), this local parameter determines what scores will be produced. Valid values are: none, kilometers, miles, degrees, distance, recipDistance, overlapRatio, area, area2D'
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: distanceUnits
+          description: 'This is used to specify the units for distance measurements used throughout the use of this field. This can be degrees, kilometers or miles. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: stats
+          description: 'The Stats component returns simple statistics for numeric, string, and date fields within the document set. '
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: stats.field
+          description: 'Specifies a field for which statistics should be generated. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: >+
+          content:
+            text/html; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/SearchPageIotNodeStepResponse'
+  /iot-node-step:
+    get:
+      operationId: searchpageIotNodeStep
+      x-vertx-event-bus: smart-village-view-enUS-IotNodeStep
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - IOT Node Step
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+        - in: query
+          name: q
+          description: 'The query parameter defines a query using standard query syntax. This parameter is mandatory.'
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: 'The filter query parameter defines a query that can be used to restrict the superset of documents that can be returned, without influencing score. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: var
+          description: 'The var parameters are additional optional variables and values to pass into the application. '
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
+        - in: query
+          name: fl
+          description: 'The field list parameter limits the information included in a query response to a specified list of fields. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sort
+          description: 'The sort parameter arranges search results in either ascending (asc) or descending (desc) order. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: start
+          description: 'The start parameter specifies an offset into a query result set and instructs Solr to begin displaying results from this offset. '
+          required: false
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
+        - in: query
+          name: rows
+          description: 'The rows parameter specifies the maximum number of documents from the complete result set that Solr should return to the client at one time. '
+          required: false
+          schema:
+            type: integer
+            default: 10
+            minimum: 0
+        - in: query
+          name: facet
+          description: 'The facet parameter enables facet counts in the query response. '
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: facet.range.start
+          description: 'The facet.range.start parameter specifies the lower bound of the ranges. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.end
+          description: 'The facet.range.end specifies the upper bound of the ranges. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.gap
+          description: 'The span of each range expressed as a value to be added to the lower bound. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.pivot
+          description: 'The facet.pivot parameter defines the fields to use for the pivot. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range
+          description: 'The facet.range parameter defines the field for which Solr should create range facets. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.field
+          description: 'The facet.field parameter identifies a field that should be treated as a facet. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: d
+          description: 'The radial distance, usually in kilometers. '
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+        - in: query
+          name: pt
+          description: 'he center point using the format lat,lon if latitude & longitude. Otherwise, x,y for PointType or x y for RPT field types. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sfield
+          description: 'A spatial indexed field. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: score
+          description: '(Advanced option; not supported by LatLonType (deprecated) or PointType) If the query is used in a scoring context (e.g., as the main query in q), this local parameter determines what scores will be produced. Valid values are: none, kilometers, miles, degrees, distance, recipDistance, overlapRatio, area, area2D'
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: distanceUnits
+          description: 'This is used to specify the units for distance measurements used throughout the use of this field. This can be degrees, kilometers or miles. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: stats
+          description: 'The Stats component returns simple statistics for numeric, string, and date fields within the document set. '
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: stats.field
+          description: 'Specifies a field for which statistics should be generated. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: >+
+          content:
+            text/html; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/SearchPageIotNodeStepResponse'
 components:
   securitySchemes:
     basicAuth:
@@ -6961,6 +7651,51 @@ components:
         text/html; charset=utf-8:
           schema:
             $ref: '#/components/schemas/SearchPageSiteUserResponse'
+    SearchIotNodeStepResponse:
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/SearchIotNodeStepResponse'
+    PATCHIotNodeStepRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PATCHIotNodeStepRequest'
+    PATCHIotNodeStepResponse:
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/PATCHIotNodeStepResponse'
+    POSTIotNodeStepRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/POSTIotNodeStepRequest'
+    POSTIotNodeStepResponse:
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/POSTIotNodeStepResponse'
+    PUTImportIotNodeStepRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PUTImportIotNodeStepRequest'
+    PUTImportIotNodeStepResponse:
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/PUTImportIotNodeStepResponse'
+    GETIotNodeStepResponse:
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/GETIotNodeStepResponse'
+    SearchPageIotNodeStepResponse:
+      content:
+        text/html; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/SearchPageIotNodeStepResponse'
   schemas:
     SearchSiteHtmResponse:
       allOf:
@@ -14274,5 +15009,1094 @@ components:
             seeDeleted:
               type: boolean
     SearchPageSiteUserResponse:
+      allOf:
+        - type: string
+    SearchIotNodeStepResponse:
+      allOf:
+        - type: object
+          properties:
+            startNum:
+              type: integer
+              minimum: 0
+            foundNum:
+              type: integer
+              minimum: 0
+            returnedNum:
+              type: integer
+              minimum: 0
+            list:
+              type: array
+              items:
+                type: object
+                properties:
+                  json:
+                    type: object
+                  nodeName:
+                    type: string
+                  nodeType:
+                    type: string
+                  nodeId:
+                    type: string
+                  location:
+                    type: string
+                  json_moisture:
+                    type: string
+                  json_moisture0:
+                    type: string
+                  json_moisture1:
+                    type: string
+                  json_temperature:
+                    type: string
+                  json_temperature0:
+                    type: string
+                  json_temperatureAverage:
+                    type: string
+                  json_badConditionsCounter:
+                    type: string
+                  json_door:
+                    type: string
+                  json_alarmDoor:
+                    type: boolean
+                  json_flood:
+                    type: string
+                  json_alarmFlood:
+                    type: boolean
+                  json_lux2:
+                    type: string
+                  json_illuminance:
+                    type: string
+                  json_resistance0:
+                    type: string
+                  json_resistance1:
+                    type: string
+                  json_frequency:
+                    type: string
+                  json_devEui:
+                    type: string
+                  json_bandwidth:
+                    type: string
+                  json_dataRate:
+                    type: string
+                  json_frameCount:
+                    type: string
+                  json_maxPayload:
+                    type: string
+                  json_bitsPerSecond:
+                    type: string
+                  json_batteryVoltage:
+                    type: string
+                  json_spreadingFactor:
+                    type: string
+                  json_dataRateAdaptive:
+                    type: boolean
+                  json_swversion:
+                    type: string
+                  json_batteryLevel:
+                    type: string
+                  json_startUpCount:
+                    type: string
+                  json_watchdogCount:
+                    type: string
+                  json_historySequence:
+                    type: string
+                  json_versionFirmware:
+                    type: string
+                  json_stackTxFailRebootCount:
+                    type: string
+                  json_historySequencePrevious:
+                    type: string
+                  json_snr:
+                    type: string
+                  json_rssi:
+                    type: string
+    PATCHIotNodeStepRequest:
+      allOf:
+        - type: object
+          properties:
+            setJson:
+              type: object
+              nullable: true
+            removeJson:
+              type: object
+            removeAllJson:
+              type: object
+            setNodeName:
+              type: string
+              nullable: true
+            removeNodeName:
+              type: string
+            removeAllNodeName:
+              type: string
+            setNodeType:
+              type: string
+              nullable: true
+            removeNodeType:
+              type: string
+            removeAllNodeType:
+              type: string
+            setNodeId:
+              type: string
+              nullable: true
+            removeNodeId:
+              type: string
+            removeAllNodeId:
+              type: string
+            setLocation:
+              type: string
+              nullable: true
+            removeLocation:
+              type: string
+            removeAllLocation:
+              type: string
+            setJson_moisture:
+              type: string
+              nullable: true
+            removeJson_moisture:
+              type: string
+            removeAllJson_moisture:
+              type: string
+            setJson_moisture0:
+              type: string
+              nullable: true
+            removeJson_moisture0:
+              type: string
+            removeAllJson_moisture0:
+              type: string
+            setJson_moisture1:
+              type: string
+              nullable: true
+            removeJson_moisture1:
+              type: string
+            removeAllJson_moisture1:
+              type: string
+            setJson_temperature:
+              type: string
+              nullable: true
+            removeJson_temperature:
+              type: string
+            removeAllJson_temperature:
+              type: string
+            setJson_temperature0:
+              type: string
+              nullable: true
+            removeJson_temperature0:
+              type: string
+            removeAllJson_temperature0:
+              type: string
+            setJson_temperatureAverage:
+              type: string
+              nullable: true
+            removeJson_temperatureAverage:
+              type: string
+            removeAllJson_temperatureAverage:
+              type: string
+            setJson_badConditionsCounter:
+              type: string
+              nullable: true
+            removeJson_badConditionsCounter:
+              type: string
+            removeAllJson_badConditionsCounter:
+              type: string
+            setJson_door:
+              type: string
+              nullable: true
+            removeJson_door:
+              type: string
+            removeAllJson_door:
+              type: string
+            setJson_alarmDoor:
+              type: boolean
+              nullable: true
+            removeJson_alarmDoor:
+              type: boolean
+            removeAllJson_alarmDoor:
+              type: boolean
+            setJson_flood:
+              type: string
+              nullable: true
+            removeJson_flood:
+              type: string
+            removeAllJson_flood:
+              type: string
+            setJson_alarmFlood:
+              type: boolean
+              nullable: true
+            removeJson_alarmFlood:
+              type: boolean
+            removeAllJson_alarmFlood:
+              type: boolean
+            setJson_lux2:
+              type: string
+              nullable: true
+            removeJson_lux2:
+              type: string
+            removeAllJson_lux2:
+              type: string
+            setJson_illuminance:
+              type: string
+              nullable: true
+            removeJson_illuminance:
+              type: string
+            removeAllJson_illuminance:
+              type: string
+            setJson_resistance0:
+              type: string
+              nullable: true
+            removeJson_resistance0:
+              type: string
+            removeAllJson_resistance0:
+              type: string
+            setJson_resistance1:
+              type: string
+              nullable: true
+            removeJson_resistance1:
+              type: string
+            removeAllJson_resistance1:
+              type: string
+            setJson_frequency:
+              type: string
+              nullable: true
+            removeJson_frequency:
+              type: string
+            removeAllJson_frequency:
+              type: string
+            setJson_devEui:
+              type: string
+              nullable: true
+            removeJson_devEui:
+              type: string
+            removeAllJson_devEui:
+              type: string
+            setJson_bandwidth:
+              type: string
+              nullable: true
+            removeJson_bandwidth:
+              type: string
+            removeAllJson_bandwidth:
+              type: string
+            setJson_dataRate:
+              type: string
+              nullable: true
+            removeJson_dataRate:
+              type: string
+            removeAllJson_dataRate:
+              type: string
+            setJson_frameCount:
+              type: string
+              nullable: true
+            removeJson_frameCount:
+              type: string
+            removeAllJson_frameCount:
+              type: string
+            setJson_maxPayload:
+              type: string
+              nullable: true
+            removeJson_maxPayload:
+              type: string
+            removeAllJson_maxPayload:
+              type: string
+            setJson_bitsPerSecond:
+              type: string
+              nullable: true
+            removeJson_bitsPerSecond:
+              type: string
+            removeAllJson_bitsPerSecond:
+              type: string
+            setJson_batteryVoltage:
+              type: string
+              nullable: true
+            removeJson_batteryVoltage:
+              type: string
+            removeAllJson_batteryVoltage:
+              type: string
+            setJson_spreadingFactor:
+              type: string
+              nullable: true
+            removeJson_spreadingFactor:
+              type: string
+            removeAllJson_spreadingFactor:
+              type: string
+            setJson_dataRateAdaptive:
+              type: boolean
+              nullable: true
+            removeJson_dataRateAdaptive:
+              type: boolean
+            removeAllJson_dataRateAdaptive:
+              type: boolean
+            setJson_swversion:
+              type: string
+              nullable: true
+            removeJson_swversion:
+              type: string
+            removeAllJson_swversion:
+              type: string
+            setJson_batteryLevel:
+              type: string
+              nullable: true
+            removeJson_batteryLevel:
+              type: string
+            removeAllJson_batteryLevel:
+              type: string
+            setJson_startUpCount:
+              type: string
+              nullable: true
+            removeJson_startUpCount:
+              type: string
+            removeAllJson_startUpCount:
+              type: string
+            setJson_watchdogCount:
+              type: string
+              nullable: true
+            removeJson_watchdogCount:
+              type: string
+            removeAllJson_watchdogCount:
+              type: string
+            setJson_historySequence:
+              type: string
+              nullable: true
+            removeJson_historySequence:
+              type: string
+            removeAllJson_historySequence:
+              type: string
+            setJson_versionFirmware:
+              type: string
+              nullable: true
+            removeJson_versionFirmware:
+              type: string
+            removeAllJson_versionFirmware:
+              type: string
+            setJson_stackTxFailRebootCount:
+              type: string
+              nullable: true
+            removeJson_stackTxFailRebootCount:
+              type: string
+            removeAllJson_stackTxFailRebootCount:
+              type: string
+            setJson_historySequencePrevious:
+              type: string
+              nullable: true
+            removeJson_historySequencePrevious:
+              type: string
+            removeAllJson_historySequencePrevious:
+              type: string
+            setJson_snr:
+              type: string
+              nullable: true
+            removeJson_snr:
+              type: string
+            removeAllJson_snr:
+              type: string
+            setJson_rssi:
+              type: string
+              nullable: true
+            removeJson_rssi:
+              type: string
+            removeAllJson_rssi:
+              type: string
+    PATCHIotNodeStepResponse:
+      allOf:
+        - type: object
+          properties:
+            setJson:
+              type: object
+              nullable: true
+            removeJson:
+              type: object
+            removeAllJson:
+              type: object
+            setNodeName:
+              type: string
+              nullable: true
+            removeNodeName:
+              type: string
+            removeAllNodeName:
+              type: string
+            setNodeType:
+              type: string
+              nullable: true
+            removeNodeType:
+              type: string
+            removeAllNodeType:
+              type: string
+            setNodeId:
+              type: string
+              nullable: true
+            removeNodeId:
+              type: string
+            removeAllNodeId:
+              type: string
+            setLocation:
+              type: string
+              nullable: true
+            removeLocation:
+              type: string
+            removeAllLocation:
+              type: string
+            setJson_moisture:
+              type: string
+              nullable: true
+            removeJson_moisture:
+              type: string
+            removeAllJson_moisture:
+              type: string
+            setJson_moisture0:
+              type: string
+              nullable: true
+            removeJson_moisture0:
+              type: string
+            removeAllJson_moisture0:
+              type: string
+            setJson_moisture1:
+              type: string
+              nullable: true
+            removeJson_moisture1:
+              type: string
+            removeAllJson_moisture1:
+              type: string
+            setJson_temperature:
+              type: string
+              nullable: true
+            removeJson_temperature:
+              type: string
+            removeAllJson_temperature:
+              type: string
+            setJson_temperature0:
+              type: string
+              nullable: true
+            removeJson_temperature0:
+              type: string
+            removeAllJson_temperature0:
+              type: string
+            setJson_temperatureAverage:
+              type: string
+              nullable: true
+            removeJson_temperatureAverage:
+              type: string
+            removeAllJson_temperatureAverage:
+              type: string
+            setJson_badConditionsCounter:
+              type: string
+              nullable: true
+            removeJson_badConditionsCounter:
+              type: string
+            removeAllJson_badConditionsCounter:
+              type: string
+            setJson_door:
+              type: string
+              nullable: true
+            removeJson_door:
+              type: string
+            removeAllJson_door:
+              type: string
+            setJson_alarmDoor:
+              type: boolean
+              nullable: true
+            removeJson_alarmDoor:
+              type: boolean
+            removeAllJson_alarmDoor:
+              type: boolean
+            setJson_flood:
+              type: string
+              nullable: true
+            removeJson_flood:
+              type: string
+            removeAllJson_flood:
+              type: string
+            setJson_alarmFlood:
+              type: boolean
+              nullable: true
+            removeJson_alarmFlood:
+              type: boolean
+            removeAllJson_alarmFlood:
+              type: boolean
+            setJson_lux2:
+              type: string
+              nullable: true
+            removeJson_lux2:
+              type: string
+            removeAllJson_lux2:
+              type: string
+            setJson_illuminance:
+              type: string
+              nullable: true
+            removeJson_illuminance:
+              type: string
+            removeAllJson_illuminance:
+              type: string
+            setJson_resistance0:
+              type: string
+              nullable: true
+            removeJson_resistance0:
+              type: string
+            removeAllJson_resistance0:
+              type: string
+            setJson_resistance1:
+              type: string
+              nullable: true
+            removeJson_resistance1:
+              type: string
+            removeAllJson_resistance1:
+              type: string
+            setJson_frequency:
+              type: string
+              nullable: true
+            removeJson_frequency:
+              type: string
+            removeAllJson_frequency:
+              type: string
+            setJson_devEui:
+              type: string
+              nullable: true
+            removeJson_devEui:
+              type: string
+            removeAllJson_devEui:
+              type: string
+            setJson_bandwidth:
+              type: string
+              nullable: true
+            removeJson_bandwidth:
+              type: string
+            removeAllJson_bandwidth:
+              type: string
+            setJson_dataRate:
+              type: string
+              nullable: true
+            removeJson_dataRate:
+              type: string
+            removeAllJson_dataRate:
+              type: string
+            setJson_frameCount:
+              type: string
+              nullable: true
+            removeJson_frameCount:
+              type: string
+            removeAllJson_frameCount:
+              type: string
+            setJson_maxPayload:
+              type: string
+              nullable: true
+            removeJson_maxPayload:
+              type: string
+            removeAllJson_maxPayload:
+              type: string
+            setJson_bitsPerSecond:
+              type: string
+              nullable: true
+            removeJson_bitsPerSecond:
+              type: string
+            removeAllJson_bitsPerSecond:
+              type: string
+            setJson_batteryVoltage:
+              type: string
+              nullable: true
+            removeJson_batteryVoltage:
+              type: string
+            removeAllJson_batteryVoltage:
+              type: string
+            setJson_spreadingFactor:
+              type: string
+              nullable: true
+            removeJson_spreadingFactor:
+              type: string
+            removeAllJson_spreadingFactor:
+              type: string
+            setJson_dataRateAdaptive:
+              type: boolean
+              nullable: true
+            removeJson_dataRateAdaptive:
+              type: boolean
+            removeAllJson_dataRateAdaptive:
+              type: boolean
+            setJson_swversion:
+              type: string
+              nullable: true
+            removeJson_swversion:
+              type: string
+            removeAllJson_swversion:
+              type: string
+            setJson_batteryLevel:
+              type: string
+              nullable: true
+            removeJson_batteryLevel:
+              type: string
+            removeAllJson_batteryLevel:
+              type: string
+            setJson_startUpCount:
+              type: string
+              nullable: true
+            removeJson_startUpCount:
+              type: string
+            removeAllJson_startUpCount:
+              type: string
+            setJson_watchdogCount:
+              type: string
+              nullable: true
+            removeJson_watchdogCount:
+              type: string
+            removeAllJson_watchdogCount:
+              type: string
+            setJson_historySequence:
+              type: string
+              nullable: true
+            removeJson_historySequence:
+              type: string
+            removeAllJson_historySequence:
+              type: string
+            setJson_versionFirmware:
+              type: string
+              nullable: true
+            removeJson_versionFirmware:
+              type: string
+            removeAllJson_versionFirmware:
+              type: string
+            setJson_stackTxFailRebootCount:
+              type: string
+              nullable: true
+            removeJson_stackTxFailRebootCount:
+              type: string
+            removeAllJson_stackTxFailRebootCount:
+              type: string
+            setJson_historySequencePrevious:
+              type: string
+              nullable: true
+            removeJson_historySequencePrevious:
+              type: string
+            removeAllJson_historySequencePrevious:
+              type: string
+            setJson_snr:
+              type: string
+              nullable: true
+            removeJson_snr:
+              type: string
+            removeAllJson_snr:
+              type: string
+            setJson_rssi:
+              type: string
+              nullable: true
+            removeJson_rssi:
+              type: string
+            removeAllJson_rssi:
+              type: string
+    POSTIotNodeStepRequest:
+      allOf:
+        - type: object
+          properties:
+            json:
+              type: object
+            nodeName:
+              type: string
+            nodeType:
+              type: string
+            nodeId:
+              type: string
+            location:
+              type: string
+            json_moisture:
+              type: string
+            json_moisture0:
+              type: string
+            json_moisture1:
+              type: string
+            json_temperature:
+              type: string
+            json_temperature0:
+              type: string
+            json_temperatureAverage:
+              type: string
+            json_badConditionsCounter:
+              type: string
+            json_door:
+              type: string
+            json_alarmDoor:
+              type: boolean
+            json_flood:
+              type: string
+            json_alarmFlood:
+              type: boolean
+            json_lux2:
+              type: string
+            json_illuminance:
+              type: string
+            json_resistance0:
+              type: string
+            json_resistance1:
+              type: string
+            json_frequency:
+              type: string
+            json_devEui:
+              type: string
+            json_bandwidth:
+              type: string
+            json_dataRate:
+              type: string
+            json_frameCount:
+              type: string
+            json_maxPayload:
+              type: string
+            json_bitsPerSecond:
+              type: string
+            json_batteryVoltage:
+              type: string
+            json_spreadingFactor:
+              type: string
+            json_dataRateAdaptive:
+              type: boolean
+            json_swversion:
+              type: string
+            json_batteryLevel:
+              type: string
+            json_startUpCount:
+              type: string
+            json_watchdogCount:
+              type: string
+            json_historySequence:
+              type: string
+            json_versionFirmware:
+              type: string
+            json_stackTxFailRebootCount:
+              type: string
+            json_historySequencePrevious:
+              type: string
+            json_snr:
+              type: string
+            json_rssi:
+              type: string
+    POSTIotNodeStepResponse:
+      allOf:
+        - type: object
+          properties:
+            json:
+              type: object
+            nodeName:
+              type: string
+            nodeType:
+              type: string
+            nodeId:
+              type: string
+            location:
+              type: string
+            json_moisture:
+              type: string
+            json_moisture0:
+              type: string
+            json_moisture1:
+              type: string
+            json_temperature:
+              type: string
+            json_temperature0:
+              type: string
+            json_temperatureAverage:
+              type: string
+            json_badConditionsCounter:
+              type: string
+            json_door:
+              type: string
+            json_alarmDoor:
+              type: boolean
+            json_flood:
+              type: string
+            json_alarmFlood:
+              type: boolean
+            json_lux2:
+              type: string
+            json_illuminance:
+              type: string
+            json_resistance0:
+              type: string
+            json_resistance1:
+              type: string
+            json_frequency:
+              type: string
+            json_devEui:
+              type: string
+            json_bandwidth:
+              type: string
+            json_dataRate:
+              type: string
+            json_frameCount:
+              type: string
+            json_maxPayload:
+              type: string
+            json_bitsPerSecond:
+              type: string
+            json_batteryVoltage:
+              type: string
+            json_spreadingFactor:
+              type: string
+            json_dataRateAdaptive:
+              type: boolean
+            json_swversion:
+              type: string
+            json_batteryLevel:
+              type: string
+            json_startUpCount:
+              type: string
+            json_watchdogCount:
+              type: string
+            json_historySequence:
+              type: string
+            json_versionFirmware:
+              type: string
+            json_stackTxFailRebootCount:
+              type: string
+            json_historySequencePrevious:
+              type: string
+            json_snr:
+              type: string
+            json_rssi:
+              type: string
+    PUTImportIotNodeStepRequest:
+      allOf:
+        - type: object
+          properties:
+            json:
+              type: object
+            nodeName:
+              type: string
+            nodeType:
+              type: string
+            nodeId:
+              type: string
+            location:
+              type: string
+            json_moisture:
+              type: string
+            json_moisture0:
+              type: string
+            json_moisture1:
+              type: string
+            json_temperature:
+              type: string
+            json_temperature0:
+              type: string
+            json_temperatureAverage:
+              type: string
+            json_badConditionsCounter:
+              type: string
+            json_door:
+              type: string
+            json_alarmDoor:
+              type: boolean
+            json_flood:
+              type: string
+            json_alarmFlood:
+              type: boolean
+            json_lux2:
+              type: string
+            json_illuminance:
+              type: string
+            json_resistance0:
+              type: string
+            json_resistance1:
+              type: string
+            json_frequency:
+              type: string
+            json_devEui:
+              type: string
+            json_bandwidth:
+              type: string
+            json_dataRate:
+              type: string
+            json_frameCount:
+              type: string
+            json_maxPayload:
+              type: string
+            json_bitsPerSecond:
+              type: string
+            json_batteryVoltage:
+              type: string
+            json_spreadingFactor:
+              type: string
+            json_dataRateAdaptive:
+              type: boolean
+            json_swversion:
+              type: string
+            json_batteryLevel:
+              type: string
+            json_startUpCount:
+              type: string
+            json_watchdogCount:
+              type: string
+            json_historySequence:
+              type: string
+            json_versionFirmware:
+              type: string
+            json_stackTxFailRebootCount:
+              type: string
+            json_historySequencePrevious:
+              type: string
+            json_snr:
+              type: string
+            json_rssi:
+              type: string
+    PUTImportIotNodeStepResponse:
+      allOf:
+        - type: object
+          properties:
+            json:
+              type: object
+            nodeName:
+              type: string
+            nodeType:
+              type: string
+            nodeId:
+              type: string
+            location:
+              type: string
+            json_moisture:
+              type: string
+            json_moisture0:
+              type: string
+            json_moisture1:
+              type: string
+            json_temperature:
+              type: string
+            json_temperature0:
+              type: string
+            json_temperatureAverage:
+              type: string
+            json_badConditionsCounter:
+              type: string
+            json_door:
+              type: string
+            json_alarmDoor:
+              type: boolean
+            json_flood:
+              type: string
+            json_alarmFlood:
+              type: boolean
+            json_lux2:
+              type: string
+            json_illuminance:
+              type: string
+            json_resistance0:
+              type: string
+            json_resistance1:
+              type: string
+            json_frequency:
+              type: string
+            json_devEui:
+              type: string
+            json_bandwidth:
+              type: string
+            json_dataRate:
+              type: string
+            json_frameCount:
+              type: string
+            json_maxPayload:
+              type: string
+            json_bitsPerSecond:
+              type: string
+            json_batteryVoltage:
+              type: string
+            json_spreadingFactor:
+              type: string
+            json_dataRateAdaptive:
+              type: boolean
+            json_swversion:
+              type: string
+            json_batteryLevel:
+              type: string
+            json_startUpCount:
+              type: string
+            json_watchdogCount:
+              type: string
+            json_historySequence:
+              type: string
+            json_versionFirmware:
+              type: string
+            json_stackTxFailRebootCount:
+              type: string
+            json_historySequencePrevious:
+              type: string
+            json_snr:
+              type: string
+            json_rssi:
+              type: string
+    GETIotNodeStepResponse:
+      allOf:
+        - type: object
+          properties:
+            json:
+              type: object
+            nodeName:
+              type: string
+            nodeType:
+              type: string
+            nodeId:
+              type: string
+            location:
+              type: string
+            json_moisture:
+              type: string
+            json_moisture0:
+              type: string
+            json_moisture1:
+              type: string
+            json_temperature:
+              type: string
+            json_temperature0:
+              type: string
+            json_temperatureAverage:
+              type: string
+            json_badConditionsCounter:
+              type: string
+            json_door:
+              type: string
+            json_alarmDoor:
+              type: boolean
+            json_flood:
+              type: string
+            json_alarmFlood:
+              type: boolean
+            json_lux2:
+              type: string
+            json_illuminance:
+              type: string
+            json_resistance0:
+              type: string
+            json_resistance1:
+              type: string
+            json_frequency:
+              type: string
+            json_devEui:
+              type: string
+            json_bandwidth:
+              type: string
+            json_dataRate:
+              type: string
+            json_frameCount:
+              type: string
+            json_maxPayload:
+              type: string
+            json_bitsPerSecond:
+              type: string
+            json_batteryVoltage:
+              type: string
+            json_spreadingFactor:
+              type: string
+            json_dataRateAdaptive:
+              type: boolean
+            json_swversion:
+              type: string
+            json_batteryLevel:
+              type: string
+            json_startUpCount:
+              type: string
+            json_watchdogCount:
+              type: string
+            json_historySequence:
+              type: string
+            json_versionFirmware:
+              type: string
+            json_stackTxFailRebootCount:
+              type: string
+            json_historySequencePrevious:
+              type: string
+            json_snr:
+              type: string
+            json_rssi:
+              type: string
+    SearchPageIotNodeStepResponse:
       allOf:
         - type: string
