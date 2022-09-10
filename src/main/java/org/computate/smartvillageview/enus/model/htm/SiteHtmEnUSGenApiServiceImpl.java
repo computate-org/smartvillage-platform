@@ -1219,10 +1219,14 @@ public class SiteHtmEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 									searchList.stats((Boolean)paramObject);
 									break;
 								case "stats.field":
-									entityVar = (String)paramObject;
-									varIndexed = SiteHtm.varIndexedSiteHtm(entityVar);
-									if(varIndexed != null)
-										searchList.statsField(varIndexed);
+									Matcher mStats = Pattern.compile("(?:(\\{![^\\}]+\\}))?(.*)").matcher((String)paramObject);
+									boolean foundStats = mStats.find();
+									if(foundStats) {
+										String solrLocalParams = mStats.group(1);
+										entityVar = mStats.group(2).trim();
+										varIndexed = SiteHtm.varIndexedSiteHtm(entityVar);
+										searchList.statsField((solrLocalParams == null ? "" : solrLocalParams) + varIndexed);
+									}
 									break;
 								case "facet":
 									searchList.facet((Boolean)paramObject);
