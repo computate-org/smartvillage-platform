@@ -30,7 +30,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.math.RoundingMode;
 import java.util.Map;
-import org.computate.smartvillageview.enus.page.PageLayout;
+import org.computate.smartvillageview.enus.result.base.BaseResultPage;
 import org.computate.vertx.search.list.SearchList;
 import org.computate.smartvillageview.enus.model.traffic.time.step.TimeStep;
 import java.lang.String;
@@ -60,10 +60,10 @@ import io.vertx.core.Future;
  * <ol>
  * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class TimeStepGenPageGen into the class TimeStepGenPage. 
  * </li>
- * <li>You can add a class comment "Api: true" if you wish to GET, POST, PATCH or PUT these TimeStepGenPage objects in a RESTful API. 
+ * <li>You can add a class comment <b>"Api: true"</b> if you wish to GET, POST, PATCH or PUT these TimeStepGenPage objects in a RESTful API. 
  * </li>
  * </ol>
- * <h1>About the TimeStepGenPage class and it's generated class TimeStepGenPageGen&lt;PageLayout&gt;: </h1>
+ * <h1>About the TimeStepGenPage class and it's generated class TimeStepGenPageGen&lt;BaseResultPage&gt;: </h1>
  * <p>
  * This Java class extends a generated Java class built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
  * Whenever this Java class is modified or touched, the watch service installed as described in the README, indexes all the information about this Java class in a local Apache Solr Search Engine. 
@@ -87,7 +87,7 @@ import io.vertx.core.Future;
  * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smart\-village\-view&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  **/
-public abstract class TimeStepGenPageGen<DEV> extends PageLayout {
+public abstract class TimeStepGenPageGen<DEV> extends BaseResultPage {
 	protected static final Logger LOG = LoggerFactory.getLogger(TimeStepGenPage.class);
 
 	/////////////////////////
@@ -938,204 +938,6 @@ public abstract class TimeStepGenPageGen<DEV> extends PageLayout {
 		return TimeStepGenPage.staticSearchStrDEFAULT_MAP_ZOOM(siteRequest_, TimeStepGenPage.staticSearchDEFAULT_MAP_ZOOM(siteRequest_, TimeStepGenPage.staticSetDEFAULT_MAP_ZOOM(siteRequest_, o)));
 	}
 
-	//////////////////////////
-	// defaultFieldListVars //
-	//////////////////////////
-
-	/**	 The entity defaultFieldListVars
-	 *	 It is constructed before being initialized with the constructor by default. 
-	 */
-	@JsonProperty
-	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
-	@JsonInclude(Include.NON_NULL)
-	protected List<String> defaultFieldListVars = new ArrayList<String>();
-
-	/**	<br> The entity defaultFieldListVars
-	 *  It is constructed before being initialized with the constructor by default. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.time.step.TimeStepGenPage&fq=entiteVar_enUS_indexed_string:defaultFieldListVars">Find the entity defaultFieldListVars in Solr</a>
-	 * <br>
-	 * @param l is the entity already constructed. 
-	 **/
-	protected abstract void _defaultFieldListVars(List<String> l);
-
-	public List<String> getDefaultFieldListVars() {
-		return defaultFieldListVars;
-	}
-
-	public void setDefaultFieldListVars(List<String> defaultFieldListVars) {
-		this.defaultFieldListVars = defaultFieldListVars;
-	}
-	public static String staticSetDefaultFieldListVars(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-	public TimeStepGenPage addDefaultFieldListVars(String...objects) {
-		for(String o : objects) {
-			addDefaultFieldListVars(o);
-		}
-		return (TimeStepGenPage)this;
-	}
-	public TimeStepGenPage addDefaultFieldListVars(String o) {
-		if(o != null)
-			this.defaultFieldListVars.add(o);
-		return (TimeStepGenPage)this;
-	}
-	@JsonIgnore
-	public void setDefaultFieldListVars(JsonArray objects) {
-		defaultFieldListVars.clear();
-		for(int i = 0; i < objects.size(); i++) {
-			String o = objects.getString(i);
-			addDefaultFieldListVars(o);
-		}
-	}
-	protected TimeStepGenPage defaultFieldListVarsInit() {
-		_defaultFieldListVars(defaultFieldListVars);
-		return (TimeStepGenPage)this;
-	}
-
-	public static String staticSearchDefaultFieldListVars(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-
-	public static String staticSearchStrDefaultFieldListVars(SiteRequestEnUS siteRequest_, String o) {
-		return o == null ? null : o.toString();
-	}
-
-	public static String staticSearchFqDefaultFieldListVars(SiteRequestEnUS siteRequest_, String o) {
-		return TimeStepGenPage.staticSearchStrDefaultFieldListVars(siteRequest_, TimeStepGenPage.staticSearchDefaultFieldListVars(siteRequest_, TimeStepGenPage.staticSetDefaultFieldListVars(siteRequest_, o)));
-	}
-
-	//////////////////////
-	// defaultStatsVars //
-	//////////////////////
-
-	/**	 The entity defaultStatsVars
-	 *	 It is constructed before being initialized with the constructor by default. 
-	 */
-	@JsonProperty
-	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
-	@JsonInclude(Include.NON_NULL)
-	protected List<String> defaultStatsVars = new ArrayList<String>();
-
-	/**	<br> The entity defaultStatsVars
-	 *  It is constructed before being initialized with the constructor by default. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.time.step.TimeStepGenPage&fq=entiteVar_enUS_indexed_string:defaultStatsVars">Find the entity defaultStatsVars in Solr</a>
-	 * <br>
-	 * @param l is the entity already constructed. 
-	 **/
-	protected abstract void _defaultStatsVars(List<String> l);
-
-	public List<String> getDefaultStatsVars() {
-		return defaultStatsVars;
-	}
-
-	public void setDefaultStatsVars(List<String> defaultStatsVars) {
-		this.defaultStatsVars = defaultStatsVars;
-	}
-	public static String staticSetDefaultStatsVars(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-	public TimeStepGenPage addDefaultStatsVars(String...objects) {
-		for(String o : objects) {
-			addDefaultStatsVars(o);
-		}
-		return (TimeStepGenPage)this;
-	}
-	public TimeStepGenPage addDefaultStatsVars(String o) {
-		if(o != null)
-			this.defaultStatsVars.add(o);
-		return (TimeStepGenPage)this;
-	}
-	@JsonIgnore
-	public void setDefaultStatsVars(JsonArray objects) {
-		defaultStatsVars.clear();
-		for(int i = 0; i < objects.size(); i++) {
-			String o = objects.getString(i);
-			addDefaultStatsVars(o);
-		}
-	}
-	protected TimeStepGenPage defaultStatsVarsInit() {
-		_defaultStatsVars(defaultStatsVars);
-		return (TimeStepGenPage)this;
-	}
-
-	public static String staticSearchDefaultStatsVars(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-
-	public static String staticSearchStrDefaultStatsVars(SiteRequestEnUS siteRequest_, String o) {
-		return o == null ? null : o.toString();
-	}
-
-	public static String staticSearchFqDefaultStatsVars(SiteRequestEnUS siteRequest_, String o) {
-		return TimeStepGenPage.staticSearchStrDefaultStatsVars(siteRequest_, TimeStepGenPage.staticSearchDefaultStatsVars(siteRequest_, TimeStepGenPage.staticSetDefaultStatsVars(siteRequest_, o)));
-	}
-
-	//////////////////////
-	// defaultPivotVars //
-	//////////////////////
-
-	/**	 The entity defaultPivotVars
-	 *	 It is constructed before being initialized with the constructor by default. 
-	 */
-	@JsonProperty
-	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
-	@JsonInclude(Include.NON_NULL)
-	protected List<String> defaultPivotVars = new ArrayList<String>();
-
-	/**	<br> The entity defaultPivotVars
-	 *  It is constructed before being initialized with the constructor by default. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.time.step.TimeStepGenPage&fq=entiteVar_enUS_indexed_string:defaultPivotVars">Find the entity defaultPivotVars in Solr</a>
-	 * <br>
-	 * @param l is the entity already constructed. 
-	 **/
-	protected abstract void _defaultPivotVars(List<String> l);
-
-	public List<String> getDefaultPivotVars() {
-		return defaultPivotVars;
-	}
-
-	public void setDefaultPivotVars(List<String> defaultPivotVars) {
-		this.defaultPivotVars = defaultPivotVars;
-	}
-	public static String staticSetDefaultPivotVars(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-	public TimeStepGenPage addDefaultPivotVars(String...objects) {
-		for(String o : objects) {
-			addDefaultPivotVars(o);
-		}
-		return (TimeStepGenPage)this;
-	}
-	public TimeStepGenPage addDefaultPivotVars(String o) {
-		if(o != null)
-			this.defaultPivotVars.add(o);
-		return (TimeStepGenPage)this;
-	}
-	@JsonIgnore
-	public void setDefaultPivotVars(JsonArray objects) {
-		defaultPivotVars.clear();
-		for(int i = 0; i < objects.size(); i++) {
-			String o = objects.getString(i);
-			addDefaultPivotVars(o);
-		}
-	}
-	protected TimeStepGenPage defaultPivotVarsInit() {
-		_defaultPivotVars(defaultPivotVars);
-		return (TimeStepGenPage)this;
-	}
-
-	public static String staticSearchDefaultPivotVars(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-
-	public static String staticSearchStrDefaultPivotVars(SiteRequestEnUS siteRequest_, String o) {
-		return o == null ? null : o.toString();
-	}
-
-	public static String staticSearchFqDefaultPivotVars(SiteRequestEnUS siteRequest_, String o) {
-		return TimeStepGenPage.staticSearchStrDefaultPivotVars(siteRequest_, TimeStepGenPage.staticSearchDefaultPivotVars(siteRequest_, TimeStepGenPage.staticSetDefaultPivotVars(siteRequest_, o)));
-	}
-
 	//////////////////
 	// listTimeStep //
 	//////////////////
@@ -1453,7 +1255,7 @@ public abstract class TimeStepGenPageGen<DEV> extends PageLayout {
 		Promise<Void> promise2 = Promise.promise();
 		promiseTimeStepGenPage(promise2);
 		promise2.future().onSuccess(a -> {
-			super.promiseDeepPageLayout(siteRequest_).onSuccess(b -> {
+			super.promiseDeepBaseResultPage(siteRequest_).onSuccess(b -> {
 				promise.complete();
 			}).onFailure(ex -> {
 				promise.fail(ex);
@@ -1484,9 +1286,6 @@ public abstract class TimeStepGenPageGen<DEV> extends PageLayout {
 				defaultPivotMinCountInit();
 				DEFAULT_MAP_LOCATIONInit();
 				DEFAULT_MAP_ZOOMInit();
-				defaultFieldListVarsInit();
-				defaultStatsVarsInit();
-				defaultPivotVarsInit();
 				listTimeStepInit();
 				statsInit();
 				facetCountsInit();
@@ -1516,7 +1315,7 @@ public abstract class TimeStepGenPageGen<DEV> extends PageLayout {
 	/////////////////
 
 	public void siteRequestTimeStepGenPage(SiteRequestEnUS siteRequest_) {
-			super.siteRequestPageLayout(siteRequest_);
+			super.siteRequestBaseResultPage(siteRequest_);
 	}
 
 	public void siteRequestForClass(SiteRequestEnUS siteRequest_) {
@@ -1579,12 +1378,6 @@ public abstract class TimeStepGenPageGen<DEV> extends PageLayout {
 				return oTimeStepGenPage.DEFAULT_MAP_LOCATION;
 			case "DEFAULT_MAP_ZOOM":
 				return oTimeStepGenPage.DEFAULT_MAP_ZOOM;
-			case "defaultFieldListVars":
-				return oTimeStepGenPage.defaultFieldListVars;
-			case "defaultStatsVars":
-				return oTimeStepGenPage.defaultStatsVars;
-			case "defaultPivotVars":
-				return oTimeStepGenPage.defaultPivotVars;
 			case "listTimeStep":
 				return oTimeStepGenPage.listTimeStep;
 			case "stats":
@@ -1600,7 +1393,7 @@ public abstract class TimeStepGenPageGen<DEV> extends PageLayout {
 			case "pageUriTimeStep":
 				return oTimeStepGenPage.pageUriTimeStep;
 			default:
-				return super.obtainPageLayout(var);
+				return super.obtainBaseResultPage(var);
 		}
 	}
 
@@ -1625,7 +1418,7 @@ public abstract class TimeStepGenPageGen<DEV> extends PageLayout {
 		TimeStepGenPage oTimeStepGenPage = (TimeStepGenPage)this;
 		switch(var) {
 			default:
-				return super.relatePageLayout(var, val);
+				return super.relateBaseResultPage(var, val);
 		}
 	}
 
@@ -1664,12 +1457,6 @@ public abstract class TimeStepGenPageGen<DEV> extends PageLayout {
 			return TimeStepGenPage.staticSetDEFAULT_MAP_LOCATION(siteRequest_, o);
 		case "DEFAULT_MAP_ZOOM":
 			return TimeStepGenPage.staticSetDEFAULT_MAP_ZOOM(siteRequest_, o);
-		case "defaultFieldListVars":
-			return TimeStepGenPage.staticSetDefaultFieldListVars(siteRequest_, o);
-		case "defaultStatsVars":
-			return TimeStepGenPage.staticSetDefaultStatsVars(siteRequest_, o);
-		case "defaultPivotVars":
-			return TimeStepGenPage.staticSetDefaultPivotVars(siteRequest_, o);
 		case "timeStepCount":
 			return TimeStepGenPage.staticSetTimeStepCount(siteRequest_, o);
 		case "id":
@@ -1677,7 +1464,7 @@ public abstract class TimeStepGenPageGen<DEV> extends PageLayout {
 		case "pageUriTimeStep":
 			return TimeStepGenPage.staticSetPageUriTimeStep(siteRequest_, o);
 			default:
-				return PageLayout.staticSetPageLayout(entityVar,  siteRequest_, o);
+				return BaseResultPage.staticSetBaseResultPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -1716,12 +1503,6 @@ public abstract class TimeStepGenPageGen<DEV> extends PageLayout {
 			return TimeStepGenPage.staticSearchDEFAULT_MAP_LOCATION(siteRequest_, (JsonObject)o);
 		case "DEFAULT_MAP_ZOOM":
 			return TimeStepGenPage.staticSearchDEFAULT_MAP_ZOOM(siteRequest_, (BigDecimal)o);
-		case "defaultFieldListVars":
-			return TimeStepGenPage.staticSearchDefaultFieldListVars(siteRequest_, (String)o);
-		case "defaultStatsVars":
-			return TimeStepGenPage.staticSearchDefaultStatsVars(siteRequest_, (String)o);
-		case "defaultPivotVars":
-			return TimeStepGenPage.staticSearchDefaultPivotVars(siteRequest_, (String)o);
 		case "timeStepCount":
 			return TimeStepGenPage.staticSearchTimeStepCount(siteRequest_, (Integer)o);
 		case "id":
@@ -1729,7 +1510,7 @@ public abstract class TimeStepGenPageGen<DEV> extends PageLayout {
 		case "pageUriTimeStep":
 			return TimeStepGenPage.staticSearchPageUriTimeStep(siteRequest_, (String)o);
 			default:
-				return PageLayout.staticSearchPageLayout(entityVar,  siteRequest_, o);
+				return BaseResultPage.staticSearchBaseResultPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -1768,12 +1549,6 @@ public abstract class TimeStepGenPageGen<DEV> extends PageLayout {
 			return TimeStepGenPage.staticSearchStrDEFAULT_MAP_LOCATION(siteRequest_, (JsonObject)o);
 		case "DEFAULT_MAP_ZOOM":
 			return TimeStepGenPage.staticSearchStrDEFAULT_MAP_ZOOM(siteRequest_, (Double)o);
-		case "defaultFieldListVars":
-			return TimeStepGenPage.staticSearchStrDefaultFieldListVars(siteRequest_, (String)o);
-		case "defaultStatsVars":
-			return TimeStepGenPage.staticSearchStrDefaultStatsVars(siteRequest_, (String)o);
-		case "defaultPivotVars":
-			return TimeStepGenPage.staticSearchStrDefaultPivotVars(siteRequest_, (String)o);
 		case "timeStepCount":
 			return TimeStepGenPage.staticSearchStrTimeStepCount(siteRequest_, (Integer)o);
 		case "id":
@@ -1781,7 +1556,7 @@ public abstract class TimeStepGenPageGen<DEV> extends PageLayout {
 		case "pageUriTimeStep":
 			return TimeStepGenPage.staticSearchStrPageUriTimeStep(siteRequest_, (String)o);
 			default:
-				return PageLayout.staticSearchStrPageLayout(entityVar,  siteRequest_, o);
+				return BaseResultPage.staticSearchStrBaseResultPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -1820,12 +1595,6 @@ public abstract class TimeStepGenPageGen<DEV> extends PageLayout {
 			return TimeStepGenPage.staticSearchFqDEFAULT_MAP_LOCATION(siteRequest_, o);
 		case "DEFAULT_MAP_ZOOM":
 			return TimeStepGenPage.staticSearchFqDEFAULT_MAP_ZOOM(siteRequest_, o);
-		case "defaultFieldListVars":
-			return TimeStepGenPage.staticSearchFqDefaultFieldListVars(siteRequest_, o);
-		case "defaultStatsVars":
-			return TimeStepGenPage.staticSearchFqDefaultStatsVars(siteRequest_, o);
-		case "defaultPivotVars":
-			return TimeStepGenPage.staticSearchFqDefaultPivotVars(siteRequest_, o);
 		case "timeStepCount":
 			return TimeStepGenPage.staticSearchFqTimeStepCount(siteRequest_, o);
 		case "id":
@@ -1833,7 +1602,7 @@ public abstract class TimeStepGenPageGen<DEV> extends PageLayout {
 		case "pageUriTimeStep":
 			return TimeStepGenPage.staticSearchFqPageUriTimeStep(siteRequest_, o);
 			default:
-				return PageLayout.staticSearchFqPageLayout(entityVar,  siteRequest_, o);
+				return BaseResultPage.staticSearchFqBaseResultPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -1864,9 +1633,6 @@ public abstract class TimeStepGenPageGen<DEV> extends PageLayout {
 	public static final String VAR_defaultPivotMinCount = "defaultPivotMinCount";
 	public static final String VAR_DEFAULT_MAP_LOCATION = "DEFAULT_MAP_LOCATION";
 	public static final String VAR_DEFAULT_MAP_ZOOM = "DEFAULT_MAP_ZOOM";
-	public static final String VAR_defaultFieldListVars = "defaultFieldListVars";
-	public static final String VAR_defaultStatsVars = "defaultStatsVars";
-	public static final String VAR_defaultPivotVars = "defaultPivotVars";
 	public static final String VAR_listTimeStep = "listTimeStep";
 	public static final String VAR_stats = "stats";
 	public static final String VAR_facetCounts = "facetCounts";
@@ -1891,9 +1657,6 @@ public abstract class TimeStepGenPageGen<DEV> extends PageLayout {
 	public static final String DISPLAY_NAME_defaultPivotMinCount = "";
 	public static final String DISPLAY_NAME_DEFAULT_MAP_LOCATION = "";
 	public static final String DISPLAY_NAME_DEFAULT_MAP_ZOOM = "";
-	public static final String DISPLAY_NAME_defaultFieldListVars = "";
-	public static final String DISPLAY_NAME_defaultStatsVars = "";
-	public static final String DISPLAY_NAME_defaultPivotVars = "";
 	public static final String DISPLAY_NAME_listTimeStep = "";
 	public static final String DISPLAY_NAME_stats = "";
 	public static final String DISPLAY_NAME_facetCounts = "";
@@ -1939,12 +1702,6 @@ public abstract class TimeStepGenPageGen<DEV> extends PageLayout {
 			return DISPLAY_NAME_DEFAULT_MAP_LOCATION;
 		case VAR_DEFAULT_MAP_ZOOM:
 			return DISPLAY_NAME_DEFAULT_MAP_ZOOM;
-		case VAR_defaultFieldListVars:
-			return DISPLAY_NAME_defaultFieldListVars;
-		case VAR_defaultStatsVars:
-			return DISPLAY_NAME_defaultStatsVars;
-		case VAR_defaultPivotVars:
-			return DISPLAY_NAME_defaultPivotVars;
 		case VAR_listTimeStep:
 			return DISPLAY_NAME_listTimeStep;
 		case VAR_stats:
@@ -1960,7 +1717,7 @@ public abstract class TimeStepGenPageGen<DEV> extends PageLayout {
 		case VAR_pageUriTimeStep:
 			return DISPLAY_NAME_pageUriTimeStep;
 		default:
-			return PageLayout.displayNamePageLayout(var);
+			return BaseResultPage.displayNameBaseResultPage(var);
 		}
 	}
 }

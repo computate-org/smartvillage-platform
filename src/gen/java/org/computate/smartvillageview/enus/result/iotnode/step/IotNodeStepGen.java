@@ -65,24 +65,37 @@ import org.computate.search.response.solr.SolrResponse;
  * The extended class ending with "Gen" did not exist at first, but was automatically created by the same watch service based on the data retrieved from the local Apache Server search engine. 
  * The extended class contains many generated fields, getters, setters, initialization code, and helper methods to help build a website and API fast, reactive, and scalable. 
  * </p>
- * <p>This class contains a comment "Indexed: true", which means this class will be indexed in the search engine. 
+ * <p>This class contains a comment <b>"Indexed: true"</b>, which means this class will be indexed in the search engine. 
  * Every protected void method that begins with "_" that is marked to be searched with a comment like "Indexed: true", "Stored: true", or "DocValues: true" will be indexed in the search engine. 
  * </p>
- * <p>This class contains a comment "Page: true", which means this class will have webpage code generated for these objects. 
+ * <p>This class contains a comment <b>"Page: true"</b>, which means this class will have webpage code generated for these objects. 
  * Java Vert.x backend API code, Handlebars HTML template frontend code, and JavaScript code will all generated and can be extended. 
  * This creates a new Java class org.computate.smartvillageview.enus.result.iotnode.step.IotNodeStepPage. 
  * </p>
- * <p>This class contains a comment "SuperPage.enUS: BaseModelPage", which identifies the Java super class of the page code by it's class simple name "BaseModelPage". 
- * This means that the newly created class org.computate.smartvillageview.enus.result.iotnode.step.IotNodeStepPage extends org.computate.smartvillageview.enus.model.base.BaseModelPage. 
+ * <p>This class contains a comment <b>"SuperPage.enUS: BaseResultPage"</b>, which identifies the Java super class of the page code by it's class simple name "BaseResultPage". 
+ * This means that the newly created class org.computate.smartvillageview.enus.result.iotnode.step.IotNodeStepPage extends org.computate.smartvillageview.enus.result.base.BaseResultPage. 
  * </p>
- * <p>This class contains a comment "Api: true", which means this class will have Java Vert.x API backend code generated for these objects. 
+ * <p>This class contains a comment <b>"Api: true"</b>, which means this class will have Java Vert.x API backend code generated for these objects. 
  * </p>
- * <p>This class contains a comment "ApiTag: IOT Node Step", which groups all of the OpenAPIs for IotNodeStep objects under the tag "IOT Node Step". 
+ * <p>This class contains a comment <b>"ApiTag: IOT Node Step"</b>, which groups all of the OpenAPIs for IotNodeStep objects under the tag "IOT Node Step". 
  * </p>
- * <p>This class contains a comment "ApiUri: /api/iot-node-step", which defines the base API URI for IotNodeStep objects as "/api/iot-node-step" in the OpenAPI spec. 
+ * <p>This class contains a comment <b>"ApiUri: /api/iot-node-step"</b>, which defines the base API URI for IotNodeStep objects as "/api/iot-node-step" in the OpenAPI spec. 
  * </p>
- * <p>This class contains a comment "Rows: 100", which means the IotNodeStep API will return a default of 100 records instead of 10 by default. 
+ * <p>This class contains a comment <b>"Rows: 100"</b>, which means the IotNodeStep API will return a default of 100 records instead of 10 by default. 
  * Each API has built in pagination of the search records to ensure a user can query all the data a page at a time without running the application out of memory. 
+ * </p>
+ * <p>This class contains a comment <b>"AName.enUS: an IOT node step"</b>, which identifies the language context to describe a IotNodeStep as "an IOT node step". 
+ * </p>
+ * <p>This class contains a comment <b>"Color: blue"</b>, which styles the IotNodeStep page "blue". 
+ * This will reference a CSS class defined by the stylesheets in the project that starts with "w3-". 
+ * A css class of "w3-blue" is expected to exist in the project stylesheets, and is inspired by W3 CSS colors. 
+ * See: <a href="https://www.w3schools.com/w3css/w3css_colors.asp">https://www.w3schools.com/w3css/w3css_colors.asp</a>. 
+ * </p>
+ * <p>This class contains a comment <b>"IconGroup: duotone"</b>, which adds icons on the IotNodeStep page with a group of "duotone". 
+ * This will reference a Font Awesome icon group defined by the stylesheets in the project that starts with "fa" followed by the first letter of the icon group, which is "fad". 
+ * A Font Awesome icon group of "blue" is expected to exist. 
+ * The Font Awesome groups currently supported include: solid, thin, duotone. 
+ * See: <a href="https://www.w3schools.com/w3css/w3css_colors.asp">https://www.w3schools.com/w3css/w3css_colors.asp</a>. 
  * </p>
  * <p>
  * Delete the class IotNodeStep in Solr: 

@@ -59,7 +59,7 @@ import io.vertx.core.json.JsonObject;
  * <ol>
  * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class BaseResultGen into the class BaseResult. 
  * </li>
- * <li>You can add a class comment "Api: true" if you wish to GET, POST, PATCH or PUT these BaseResult objects in a RESTful API. 
+ * <li>You can add a class comment <b>"Api: true"</b> if you wish to GET, POST, PATCH or PUT these BaseResult objects in a RESTful API. 
  * </li>
  * </ol>
  * <h1>About the BaseResult class and it's generated class BaseResultGen&lt;Object&gt;: </h1>
@@ -73,14 +73,14 @@ import io.vertx.core.json.JsonObject;
  * The extended class ending with "Gen" did not exist at first, but was automatically created by the same watch service based on the data retrieved from the local Apache Server search engine. 
  * The extended class contains many generated fields, getters, setters, initialization code, and helper methods to help build a website and API fast, reactive, and scalable. 
  * </p>
- * <p>This class contains a comment "Indexed: true", which means this class will be indexed in the search engine. 
+ * <p>This class contains a comment <b>"Indexed: true"</b>, which means this class will be indexed in the search engine. 
  * Every protected void method that begins with "_" that is marked to be searched with a comment like "Indexed: true", "Stored: true", or "DocValues: true" will be indexed in the search engine. 
  * </p>
- * <p>This class contains a comment "Page: true", which means this class will have webpage code generated for these objects. 
+ * <p>This class contains a comment <b>"Page: true"</b>, which means this class will have webpage code generated for these objects. 
  * Java Vert.x backend API code, Handlebars HTML template frontend code, and JavaScript code will all generated and can be extended. 
  * This creates a new Java class org.computate.smartvillageview.enus.result.base.BaseResultPage. 
  * </p>
- * <p>This class contains a comment "SuperPage.enUS: PageLayout", which identifies the Java super class of the page code by it's class simple name "PageLayout". 
+ * <p>This class contains a comment <b>"SuperPage.enUS: PageLayout"</b>, which identifies the Java super class of the page code by it's class simple name "PageLayout". 
  * This means that the newly created class org.computate.smartvillageview.enus.result.base.BaseResultPage extends org.computate.smartvillageview.enus.page.PageLayout. 
  * </p>
  * <p>
@@ -1001,35 +1001,52 @@ public abstract class BaseResultGen<DEV> extends Object {
 	////////////////
 
 	/**	 The entity objectText
-	 *	 is defined as null before being initialized. 
+	 *	 It is constructed before being initialized with the constructor by default. 
 	 */
 	@JsonProperty
+	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
 	@JsonInclude(Include.NON_NULL)
-	protected String objectText;
+	protected List<String> objectText = new ArrayList<String>();
 
 	/**	<br> The entity objectText
-	 *  is defined as null before being initialized. 
+	 *  It is constructed before being initialized with the constructor by default. 
 	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.result.base.BaseResult&fq=entiteVar_enUS_indexed_string:objectText">Find the entity objectText in Solr</a>
 	 * <br>
-	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 * @param l is the entity already constructed. 
 	 **/
-	protected abstract void _objectText(Wrap<String> w);
+	protected abstract void _objectText(List<String> l);
 
-	public String getObjectText() {
+	public List<String> getObjectText() {
 		return objectText;
 	}
-	public void setObjectText(String o) {
-		this.objectText = BaseResult.staticSetObjectText(siteRequest_, o);
+
+	public void setObjectText(List<String> objectText) {
+		this.objectText = objectText;
 	}
 	public static String staticSetObjectText(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	protected BaseResult objectTextInit() {
-		Wrap<String> objectTextWrap = new Wrap<String>().var("objectText");
-		if(objectText == null) {
-			_objectText(objectTextWrap);
-			setObjectText(objectTextWrap.o);
+	public BaseResult addObjectText(String...objects) {
+		for(String o : objects) {
+			addObjectText(o);
 		}
+		return (BaseResult)this;
+	}
+	public BaseResult addObjectText(String o) {
+		if(o != null)
+			this.objectText.add(o);
+		return (BaseResult)this;
+	}
+	@JsonIgnore
+	public void setObjectText(JsonArray objects) {
+		objectText.clear();
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
+			addObjectText(o);
+		}
+	}
+	protected BaseResult objectTextInit() {
+		_objectText(objectText);
 		return (BaseResult)this;
 	}
 
@@ -1780,7 +1797,11 @@ public abstract class BaseResultGen<DEV> extends Object {
 			doc.put("objectSuggest_suggested", objectSuggest);
 		}
 		if(objectText != null) {
-			doc.put("objectText_text_enUS", objectText.toString());
+			JsonArray l = new JsonArray();
+			doc.put("objectText_text_enUS", l);
+			for(String o : objectText) {
+				l.add(o);
+			}
 		}
 		if(pageUrlId != null) {
 			doc.put("pageUrlId_docvalues_string", pageUrlId);
@@ -1973,7 +1994,9 @@ public abstract class BaseResultGen<DEV> extends Object {
 		oBaseResult.setObjectTitle(Optional.ofNullable(doc.get("objectTitle_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oBaseResult.setObjectId(Optional.ofNullable(doc.get("objectId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oBaseResult.setObjectSuggest(Optional.ofNullable(doc.get("objectSuggest_suggested")).map(v -> v.toString()).orElse(null));
-		oBaseResult.setObjectText(Optional.ofNullable(doc.get("objectText_indexedstored_string")).map(v -> v.toString()).orElse(null));
+		Optional.ofNullable((List<?>)doc.get("objectText_text_enUS")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
+			oBaseResult.addObjectText(v.toString());
+		});
 		oBaseResult.setPageUrlId(Optional.ofNullable(doc.get("pageUrlId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oBaseResult.setPageUrlPk(Optional.ofNullable(doc.get("pageUrlPk_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oBaseResult.setPageUrlApi(Optional.ofNullable(doc.get("pageUrlApi_docvalues_string")).map(v -> v.toString()).orElse(null));
@@ -2051,7 +2074,7 @@ public abstract class BaseResultGen<DEV> extends Object {
 		sb.append(Optional.ofNullable(objectTitle).map(v -> "objectTitle: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(objectId).map(v -> "objectId: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(objectSuggest).map(v -> "objectSuggest: \"" + v + "\"\n" ).orElse(""));
-		sb.append(Optional.ofNullable(objectText).map(v -> "objectText: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(objectText).map(v -> "objectText: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(pageUrlId).map(v -> "pageUrlId: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(pageUrlPk).map(v -> "pageUrlPk: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(pageUrlApi).map(v -> "pageUrlApi: \"" + v + "\"\n" ).orElse(""));
@@ -2268,7 +2291,7 @@ public abstract class BaseResultGen<DEV> extends Object {
 		case VAR_objectSuggest:
 			return "String";
 		case VAR_objectText:
-			return "String";
+			return "List";
 		case VAR_pageUrlId:
 			return "String";
 		case VAR_pageUrlPk:

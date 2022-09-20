@@ -33,9 +33,9 @@
 				var calendar = new FullCalendar.Calendar(calendarEl, {
 					initialView: 'dayGridMonth'
 				});
-				calendar.render();
+				//calendar.render();
 			});
-			$('#site-calendar-box').accordion();
+			$('#site-calendar-box').accordion({ collapsible: true, active: false });
 {{#if DEFAULT_MAP_LOCATION }}
 			window.DEFAULT_MAP_LOCATION = { lat: {{ DEFAULT_MAP_LOCATION.lat }}, lon: {{ DEFAULT_MAP_LOCATION.lon }} };
 {{/if}}
@@ -639,9 +639,9 @@
 		</div>
 {{#block "htmBodyGraph"}}{{/block}}
 	<div class="pageContent w3-content ">
-		<div id="site-calendar-box ">
+		<div id="site-calendar-box">
 			<h3 id="site-calendar-title">Calendar</h3>
-			<div id="site-calendar"></div>
+			<div id="site-calendar-bbb">aa<!-- // --></div>
 		</div>
 	{{#eq trafficSimulationCount int0}}
 {{#block "htmBodyCount0"}}{{/block}}

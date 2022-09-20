@@ -11,12 +11,15 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.StringUtils;
 import org.computate.search.wrap.Wrap;
 import org.computate.smartvillageview.enus.config.ConfigKeys;
 import org.computate.smartvillageview.enus.model.system.event.SystemEvent;
+import org.computate.smartvillageview.enus.model.traffic.person.step.PersonStep;
 import org.computate.smartvillageview.enus.model.traffic.time.step.TimeStep;
 import org.computate.smartvillageview.enus.model.traffic.vehicle.step.VehicleStep;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
+import org.computate.smartvillageview.enus.result.base.BaseResult;
 import org.computate.smartvillageview.enus.vertx.AsyncInputStream;
 import org.computate.vertx.api.ApiCounter;
 import org.computate.vertx.api.ApiRequest;
@@ -46,7 +49,7 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 	public static final Long LONG_ZERO = 0L;
 
 	public static final String REGEX_TIMESTEP = "<timestep\\s+time=\"([\\d\\.]+)\">";
-	public static final String REGEX_VEHICLE = "<vehicle([^>]*)";
+	public static final String REGEX_VEHICLE = "<(vehicle|person)([^>]*)";
 	public static final String REGEX_ATTR = "\\s+([^=\\s]+)=\"([^\"]*)\"";
 
 	public TrafficFcdReader(Vertx vertx, WorkerExecutor workerExecutor, SiteRequestEnUS siteRequest, JsonObject config) {
@@ -388,7 +391,7 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 			apiRequest.initDeepApiRequest(siteRequest);
 
 			recordParser.handler(bufferedText2 -> {
-				VehicleStep vehicleStep = importVehicleStepText(timeStep, bufferedText2);
+				BaseResult vehicleStep = importVehicleStepText(timeStep, bufferedText2);
 				if(vehicleStep == null) {
 					promise.complete();
 				} else {
@@ -421,7 +424,7 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 	 * Val.Fail.enUS:Syncing FCD record failed: %s
 	 * Val.WebSocket.enUS:websocket%s
 	 */
-	private Future<Void> importFcdVehicleStep(TimeStep timeStep, VehicleStep vehicleStep, ApiRequest apiRequest, RecordParser recordParser, ApiCounter apiCounter, Long apiCounterResume, Long apiCounterFetch) {
+	private Future<Void> importFcdVehicleStep(TimeStep timeStep, BaseResult vehicleStep, ApiRequest apiRequest, RecordParser recordParser, ApiCounter apiCounter, Long apiCounterResume, Long apiCounterFetch) {
 		Promise<Void> promise = Promise.promise();
 		if(timeStep != null && vehicleStep != null) {
 			String id = vehicleStep.getId();
@@ -434,18 +437,18 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 			JsonObject context = new JsonObject().put("params", params);
 			JsonObject request = new JsonObject().put("context", context);
 			vertx.eventBus().request(
-					String.format("%s-enUS-%s", config.getString(ConfigKeys.SITE_NAME), VehicleStep.CLASS_SIMPLE_NAME)
+					String.format("%s-enUS-%s", config.getString(ConfigKeys.SITE_NAME), vehicleStep.getClass().getSimpleName())
 					, request
-					, new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", VehicleStep.CLASS_SIMPLE_NAME))
+					, new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", vehicleStep.getClass().getSimpleName()))
 					).onSuccess(a -> {
 				apiCounter.incrementQueueNum();
 				if(apiCounterResume.compareTo(apiCounter.getTotalNum() - apiCounter.getQueueNum()) >= LONG_ZERO) {
 					recordParser.fetch(apiCounterFetch);
-					LOG.info(String.format("FETCHING VehicleStep %s - %s = %s", apiCounter.getTotalNum(), apiCounter.getQueueNum(), apiCounter.getTotalNum() - apiCounter.getQueueNum()));
+					LOG.info(String.format("FETCHING %s %s - %s = %s", vehicleStep.getClass().getSimpleName(), apiCounter.getTotalNum(), apiCounter.getQueueNum(), apiCounter.getTotalNum() - apiCounter.getQueueNum()));
 					apiCounter.incrementTotalNum(apiCounterFetch);
 					apiRequest.setNumPATCH(apiCounter.getTotalNum());
 					apiRequest.setTimeRemaining(apiRequest.calculateTimeRemaining());
-					vertx.eventBus().publish(String.format(importFcdHandleBodyWebSocket, TimeStep.CLASS_SIMPLE_NAME), JsonObject.mapFrom(apiRequest));
+					vertx.eventBus().publish(String.format(importFcdHandleBodyWebSocket, vehicleStep.getClass().getSimpleName()), JsonObject.mapFrom(apiRequest));
 				}
 				promise.complete();
 			}).onFailure(ex -> {
@@ -465,7 +468,7 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 		if(m.find()) {
 			timeStep = new TimeStep();
 			timeStep.setTime(m.group(1));
-			String id = String.format("%s_%s", path, timeStep.getTime().toString());
+			String id = String.format("%s_%s", StringUtils.replace(path, "/", "_"), timeStep.getTime().toString());
 			timeStep.setCreated(ZonedDateTime.now());
 			timeStep.setPath(path);
 			timeStep.setId(id);
@@ -475,40 +478,70 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 		return timeStep;
 	}
 
-	private VehicleStep importVehicleStepText(TimeStep timeStep, Buffer bufferedText) {
+	private BaseResult importVehicleStepText(TimeStep timeStep, Buffer bufferedText) {
 		String text = bufferedText.toString();
-		VehicleStep vehicleStep = null;
 		Matcher m = Pattern.compile(REGEX_VEHICLE, Pattern.MULTILINE).matcher(text);
+		BaseResult result = null;
 		boolean found = m.find();
 		if (found) {
-			String attrs = m.group(m.groupCount());
-			Matcher m2 = Pattern.compile(REGEX_ATTR, Pattern.MULTILINE).matcher(attrs);
-			boolean found2 = m2.find();
-			vehicleStep = new VehicleStep();
-			while (found2) {
-				String var = m2.group(1);
-				String val = m2.group(2);
-				if("id".equals(var)) {
-					vehicleStep.setVehicleId(val);
-				} else if("type".equals(var)) {
-					vehicleStep.setVehicleType(val);
-				} else {
-					if(vehicleStep.persistForClass(var, val))
-						vehicleStep.addSaves(var);
+			String vehicleType = m.group(1);
+			String attrs = m.group(2);
+			if("vehicle".equals(vehicleType)) {
+				Matcher m2 = Pattern.compile(REGEX_ATTR, Pattern.MULTILINE).matcher(attrs);
+				boolean found2 = m2.find();
+				VehicleStep vehicleStep = new VehicleStep();
+				while (found2) {
+					String var = m2.group(1);
+					String val = m2.group(2);
+					if("id".equals(var)) {
+						vehicleStep.setVehicleId(val);
+					} else if("type".equals(var)) {
+						vehicleStep.setVehicleType(val);
+					} else {
+						if(vehicleStep.persistForClass(var, val))
+							vehicleStep.addSaves(var);
+					}
+					found2 = m2.find();
 				}
-				found2 = m2.find();
+	
+				String id = String.format("%s_%s", timeStep.getId(), vehicleStep.getVehicleId());
+				vehicleStep.setCreated(ZonedDateTime.now());
+				vehicleStep.setId(id);
+				vehicleStep.setObjectId(id);
+				vehicleStep.setInheritPk(id);
+				vehicleStep.setTime(timeStep.getTime());
+				vehicleStep.setTimeStepId(timeStep.getId());
+				result = vehicleStep;
+			} else if("person".equals(vehicleType)) {
+				Matcher m2 = Pattern.compile(REGEX_ATTR, Pattern.MULTILINE).matcher(attrs);
+				boolean found2 = m2.find();
+				PersonStep personStep = new PersonStep();
+				while (found2) {
+					String var = m2.group(1);
+					String val = m2.group(2);
+					if("id".equals(var)) {
+						personStep.setPersonId(val);
+					} else if("type".equals(var)) {
+						personStep.setPersonType(val);
+					} else {
+						if(personStep.persistForClass(var, val))
+							personStep.addSaves(var);
+					}
+					found2 = m2.find();
+				}
+	
+				String id = String.format("%s_%s", timeStep.getId(), personStep.getPersonId());
+				personStep.setCreated(ZonedDateTime.now());
+				personStep.setId(id);
+				personStep.setObjectId(id);
+				personStep.setInheritPk(id);
+				personStep.setTime(timeStep.getTime());
+				personStep.setTimeStepId(timeStep.getId());
+				result = personStep;
 			}
-
-			String id = String.format("%s_%s", timeStep.getId(), vehicleStep.getVehicleId());
-			vehicleStep.setCreated(ZonedDateTime.now());
-			vehicleStep.setId(id);
-			vehicleStep.setObjectId(id);
-			vehicleStep.setInheritPk(id);
-			vehicleStep.setTime(timeStep.getTime());
-			vehicleStep.setTimeStepId(timeStep.getId());
 
 			found = m.find();
 		}
-		return vehicleStep;
+		return result;
 	}
 }

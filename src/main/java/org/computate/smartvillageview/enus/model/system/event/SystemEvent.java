@@ -343,22 +343,6 @@ public class SystemEvent extends SystemEventGen<Object> {
 	}
 
 	/**
-	 * Description: The var that identifies this type of object in the API
-	 */
-	protected void _objectNameVar(Wrap<String> w) {
-		if(objectId != null) {
-			Class<?> cl = getClass();
-
-			try {
-				String o = toId(StringUtils.join(StringUtils.splitByCharacterTypeCamelCase((String)FieldUtils.getField(cl, cl.getSimpleName() + "_NameVar_enUS").get(this)), "-"));
-				w.o(o);
-			} catch (Exception e) {
-				ExceptionUtils.rethrow(e);
-			}
-		}
-	}
-
-	/**
 	 * {@inheritDoc}
 	 * Suggested: true
 	 * Description: The indexed field in the search engine for this record while using autosuggest
@@ -366,8 +350,6 @@ public class SystemEvent extends SystemEventGen<Object> {
 	 */
 	protected void _objectSuggest(Wrap<String> w) { 
 		StringBuilder b = new StringBuilder();
-		if(objectNameVar != null)
-			b.append(" ").append(objectNameVar);
 		if(objectId != null)
 			b.append(" ").append(objectId);
 		if(objectTitle != null)
@@ -383,8 +365,6 @@ public class SystemEvent extends SystemEventGen<Object> {
 	 * DisplayName: text
 	 */
 	protected void _objectText(List<String> l) { 
-		if(objectNameVar != null)
-			l.add(objectNameVar);
 		if(objectId != null)
 			l.add(objectId);
 		if(objectTitle != null)

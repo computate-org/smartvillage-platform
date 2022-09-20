@@ -1,4 +1,4 @@
-package org.computate.smartvillageview.enus.model.htm;
+package org.computate.smartvillageview.enus.result.map;
 
 import org.computate.smartvillageview.enus.page.PageLayout;
 import org.computate.smartvillageview.enus.result.base.BaseResultPage;
@@ -43,18 +43,18 @@ import java.time.ZoneId;
 /**
  * Translate: false
  **/
-public class SiteHtmGenPage extends SiteHtmGenPageGen<BaseResultPage> {
+public class MapResultGenPage extends MapResultGenPageGen<BaseResultPage> {
 
 	/**
 	 * {@inheritDoc}
 	 * Ignore: true
 	 **/
-	protected void _searchListSiteHtm_(Wrap<SearchList<SiteHtm>> w) {
+	protected void _searchListMapResult_(Wrap<SearchList<MapResult>> w) {
 	}
 
 	protected void _pageResponse(Wrap<String> w) {
-		if(searchListSiteHtm_ != null)
-			w.o(JsonObject.mapFrom(searchListSiteHtm_.getResponse()).toString());
+		if(searchListMapResult_ != null)
+			w.o(JsonObject.mapFrom(searchListMapResult_.getResponse()).toString());
 	}
 
 	protected void _defaultZoneId(Wrap<String> w) {
@@ -80,35 +80,35 @@ public class SiteHtmGenPage extends SiteHtmGenPageGen<BaseResultPage> {
 	}
 
 	protected void _defaultRangeGap(Wrap<String> w) {
-		w.o(Optional.ofNullable(searchListSiteHtm_.getFacetRangeGap()).orElse("+1DAY"));
+		w.o(Optional.ofNullable(searchListMapResult_.getFacetRangeGap()).orElse("+1DAY"));
 	}
 
 	protected void _defaultRangeEnd(Wrap<ZonedDateTime> w) {
-		w.o(Optional.ofNullable(searchListSiteHtm_.getFacetRangeEnd()).map(s -> TimeTool.parseZonedDateTime(defaultTimeZone, s)).orElse(ZonedDateTime.now(defaultTimeZone).toLocalDate().atStartOfDay(defaultTimeZone).plusDays(1)));
+		w.o(Optional.ofNullable(searchListMapResult_.getFacetRangeEnd()).map(s -> TimeTool.parseZonedDateTime(defaultTimeZone, s)).orElse(ZonedDateTime.now(defaultTimeZone).toLocalDate().atStartOfDay(defaultTimeZone).plusDays(1)));
 	}
 
 	protected void _defaultRangeStart(Wrap<ZonedDateTime> w) {
-		w.o(Optional.ofNullable(searchListSiteHtm_.getFacetRangeStart()).map(s -> TimeTool.parseZonedDateTime(defaultTimeZone, s)).orElse(defaultRangeEnd.minusDays(7).toLocalDate().atStartOfDay(defaultTimeZone)));
+		w.o(Optional.ofNullable(searchListMapResult_.getFacetRangeStart()).map(s -> TimeTool.parseZonedDateTime(defaultTimeZone, s)).orElse(defaultRangeEnd.minusDays(7).toLocalDate().atStartOfDay(defaultTimeZone)));
 	}
 
 	protected void _defaultRangeVar(Wrap<String> w) {
-		w.o(Optional.ofNullable(searchListSiteHtm_.getFacetRanges()).orElse(Arrays.asList()).stream().findFirst().map(v -> { if(v.contains("}")) return StringUtils.substringBefore(StringUtils.substringAfterLast(v, "}"), "_"); else return SiteHtm.searchVarSiteHtm(v); }).orElse("created"));
+		w.o(Optional.ofNullable(searchListMapResult_.getFacetRanges()).orElse(Arrays.asList()).stream().findFirst().map(v -> { if(v.contains("}")) return StringUtils.substringBefore(StringUtils.substringAfterLast(v, "}"), "_"); else return MapResult.searchVarMapResult(v); }).orElse("created"));
 	}
 
 	protected void _defaultFacetSort(Wrap<String> w) {
-		w.o(Optional.ofNullable(searchListSiteHtm_.getFacetSort()).orElse("index"));
+		w.o(Optional.ofNullable(searchListMapResult_.getFacetSort()).orElse("index"));
 	}
 
 	protected void _defaultFacetLimit(Wrap<Integer> w) {
-		w.o(Optional.ofNullable(searchListSiteHtm_.getFacetLimit()).orElse(1));
+		w.o(Optional.ofNullable(searchListMapResult_.getFacetLimit()).orElse(1));
 	}
 
 	protected void _defaultFacetMinCount(Wrap<Integer> w) {
-		w.o(Optional.ofNullable(searchListSiteHtm_.getFacetMinCount()).orElse(1));
+		w.o(Optional.ofNullable(searchListMapResult_.getFacetMinCount()).orElse(1));
 	}
 
 	protected void _defaultPivotMinCount(Wrap<Integer> w) {
-		w.o(Optional.ofNullable(searchListSiteHtm_.getFacetPivotMinCount()).orElse(0));
+		w.o(Optional.ofNullable(searchListMapResult_.getFacetPivotMinCount()).orElse(0));
 	}
 
 	protected void _DEFAULT_MAP_LOCATION(Wrap<JsonObject> w) {
@@ -128,14 +128,14 @@ public class SiteHtmGenPage extends SiteHtmGenPageGen<BaseResultPage> {
 
 	@Override
 	protected void _defaultFieldListVars(List<String> l) {
-		Optional.ofNullable(searchListSiteHtm_.getFields()).orElse(Arrays.asList()).forEach(varStored -> {
+		Optional.ofNullable(searchListMapResult_.getFields()).orElse(Arrays.asList()).forEach(varStored -> {
 			String varStored2 = varStored;
 			if(StringUtils.contains(varStored2, "}"))
 				varStored2 = StringUtils.substringAfterLast(varStored2, "}");
 			String[] parts = varStored2.split(",");
 			for(String part : parts) {
 				if(StringUtils.isNotBlank(part)) {
-					String var = SiteHtm.searchVarSiteHtm(part);
+					String var = MapResult.searchVarMapResult(part);
 					if(StringUtils.isNotBlank(var))
 						l.add(var);
 				}
@@ -145,14 +145,14 @@ public class SiteHtmGenPage extends SiteHtmGenPageGen<BaseResultPage> {
 
 	@Override
 	protected void _defaultStatsVars(List<String> l) {
-		Optional.ofNullable(searchListSiteHtm_.getStatsFields()).orElse(Arrays.asList()).forEach(varIndexed -> {
+		Optional.ofNullable(searchListMapResult_.getStatsFields()).orElse(Arrays.asList()).forEach(varIndexed -> {
 			String varIndexed2 = varIndexed;
 			if(StringUtils.contains(varIndexed2, "}"))
 				varIndexed2 = StringUtils.substringAfterLast(varIndexed2, "}");
 			String[] parts = varIndexed2.split(",");
 			for(String part : parts) {
 				if(StringUtils.isNotBlank(part)) {
-					String var = SiteHtm.searchVarSiteHtm(part);
+					String var = MapResult.searchVarMapResult(part);
 					if(StringUtils.isNotBlank(var))
 						l.add(var);
 				}
@@ -162,14 +162,14 @@ public class SiteHtmGenPage extends SiteHtmGenPageGen<BaseResultPage> {
 
 	@Override
 	protected void _defaultPivotVars(List<String> l) {
-		Optional.ofNullable(searchListSiteHtm_.getFacetPivots()).orElse(Arrays.asList()).forEach(facetPivot -> {
+		Optional.ofNullable(searchListMapResult_.getFacetPivots()).orElse(Arrays.asList()).forEach(facetPivot -> {
 			String facetPivot2 = facetPivot;
 			if(StringUtils.contains(facetPivot2, "}"))
 				facetPivot2 = StringUtils.substringAfterLast(facetPivot2, "}");
 			String[] parts = facetPivot2.split(",");
 			for(String part : parts) {
 				if(StringUtils.isNotBlank(part)) {
-					String var = SiteHtm.searchVarSiteHtm(part);
+					String var = MapResult.searchVarMapResult(part);
 					if(StringUtils.isNotBlank(var))
 						l.add(var);
 				}
@@ -180,30 +180,30 @@ public class SiteHtmGenPage extends SiteHtmGenPageGen<BaseResultPage> {
 	/**
 	 * {@inheritDoc}
 	 **/
-	protected void _listSiteHtm(JsonArray l) {
-		Optional.ofNullable(searchListSiteHtm_).map(o -> o.getList()).orElse(Arrays.asList()).stream().map(o -> JsonObject.mapFrom(o)).forEach(o -> l.add(o));
+	protected void _listMapResult(JsonArray l) {
+		Optional.ofNullable(searchListMapResult_).map(o -> o.getList()).orElse(Arrays.asList()).stream().map(o -> JsonObject.mapFrom(o)).forEach(o -> l.add(o));
 	}
 
 	protected void _stats(Wrap<SolrResponse.Stats> w) {
-		w.o(searchListSiteHtm_.getResponse().getStats());
+		w.o(searchListMapResult_.getResponse().getStats());
 	}
 
 	protected void _facetCounts(Wrap<SolrResponse.FacetCounts> w) {
-		w.o(searchListSiteHtm_.getResponse().getFacetCounts());
+		w.o(searchListMapResult_.getResponse().getFacetCounts());
 	}
 
-	protected void _siteHtmCount(Wrap<Integer> w) {
-		w.o(searchListSiteHtm_ == null ? 0 : searchListSiteHtm_.size());
+	protected void _mapResultCount(Wrap<Integer> w) {
+		w.o(searchListMapResult_ == null ? 0 : searchListMapResult_.size());
 	}
 
-	protected void _siteHtm_(Wrap<SiteHtm> w) {
-		if(siteHtmCount == 1)
-			w.o(searchListSiteHtm_.get(0));
+	protected void _mapResult_(Wrap<MapResult> w) {
+		if(mapResultCount == 1)
+			w.o(searchListMapResult_.get(0));
 	}
 
 	protected void _id(Wrap<String> w) {
-		if(siteHtmCount == 1)
-			w.o(siteHtm_.getId());
+		if(mapResultCount == 1)
+			w.o(mapResult_.getId());
 	}
 
 	@Override
@@ -213,29 +213,29 @@ public class SiteHtmGenPage extends SiteHtmGenPageGen<BaseResultPage> {
 
 	@Override
 	protected void _classSimpleName(Wrap<String> w) {
-		w.o("SiteHtm");
+		w.o("MapResult");
 	}
 
 	@Override
 	protected void _pageTitle(Wrap<String> c) {
-		if(siteHtm_ != null && siteHtm_.getObjectTitle() != null)
-			c.o(siteHtm_.getObjectTitle());
-		else if(siteHtm_ != null)
-			c.o("HTMLs");
-		else if(searchListSiteHtm_ == null || siteHtmCount == 0)
-			c.o("no HTML found");
+		if(mapResult_ != null && mapResult_.getObjectTitle() != null)
+			c.o(mapResult_.getObjectTitle());
+		else if(mapResult_ != null)
+			c.o("map results");
+		else if(searchListMapResult_ == null || mapResultCount == 0)
+			c.o("no map result found");
 		else
-			c.o("HTMLs");
+			c.o("map results");
 	}
 
 	@Override
 	protected void _pageUri(Wrap<String> c) {
-		c.o("/htm");
+		c.o("/map-result");
 	}
 
 	@Override
 	protected void _apiUri(Wrap<String> c) {
-		c.o("/api/htm");
+		c.o("/api/map-result");
 	}
 
 	@Override
@@ -247,15 +247,15 @@ public class SiteHtmGenPage extends SiteHtmGenPageGen<BaseResultPage> {
 
 	@Override
 	protected void _rolesRequired(List<String> l) {
-		l.addAll(Optional.ofNullable(siteRequest_.getConfig().getJsonArray(ConfigKeys.AUTH_ROLES_REQUIRED + "_SiteHtm")).orElse(new JsonArray()).stream().map(o -> o.toString()).collect(Collectors.toList()));
+		l.addAll(Optional.ofNullable(siteRequest_.getConfig().getJsonArray(ConfigKeys.AUTH_ROLES_REQUIRED + "_MapResult")).orElse(new JsonArray()).stream().map(o -> o.toString()).collect(Collectors.toList()));
 	}
 
 	@Override
 	protected void _pagination(JsonObject pagination) {
 		JsonArray pages = new JsonArray();
-		Long start = searchListSiteHtm_.getStart().longValue();
-		Long rows = searchListSiteHtm_.getRows().longValue();
-		Long foundNum = searchListSiteHtm_.getResponse().getResponse().getNumFound().longValue();
+		Long start = searchListMapResult_.getStart().longValue();
+		Long rows = searchListMapResult_.getRows().longValue();
+		Long foundNum = searchListMapResult_.getResponse().getResponse().getNumFound().longValue();
 		Long startNum = start + 1L;
 		Long endNum = start + rows;
 		Long floorMod = (rows == 0L ? 0L : Math.floorMod(foundNum, rows));
@@ -297,12 +297,12 @@ public class SiteHtmGenPage extends SiteHtmGenPageGen<BaseResultPage> {
 
 	@Override
 	protected void _varsQ(JsonObject vars) {
-		SiteHtm.varsQForClass().forEach(var -> {
+		MapResult.varsQForClass().forEach(var -> {
 			JsonObject json = new JsonObject();
 			json.put("var", var);
-			json.put("displayName", Optional.ofNullable(SiteHtm.displayNameSiteHtm(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
-			json.put("classSimpleName", Optional.ofNullable(SiteHtm.classSimpleNameSiteHtm(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
-			json.put("val", Optional.ofNullable(searchListSiteHtm_.getRequest().getQuery()).filter(fq -> fq.startsWith(SiteHtm.varIndexedSiteHtm(var) + ":")).map(s -> StringUtils.substringAfter(s, ":")).orElse(null));
+			json.put("displayName", Optional.ofNullable(MapResult.displayNameMapResult(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
+			json.put("classSimpleName", Optional.ofNullable(MapResult.classSimpleNameMapResult(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
+			json.put("val", Optional.ofNullable(searchListMapResult_.getRequest().getQuery()).filter(fq -> fq.startsWith(MapResult.varIndexedMapResult(var) + ":")).map(s -> StringUtils.substringAfter(s, ":")).orElse(null));
 			vars.put(var, json);
 		});
 	}
@@ -310,17 +310,17 @@ public class SiteHtmGenPage extends SiteHtmGenPageGen<BaseResultPage> {
 	@Override
 	protected void _varsFq(JsonObject vars) {
 		Map<String, SolrResponse.FacetField> facetFields = Optional.ofNullable(facetCounts).map(c -> c.getFacetFields()).map(f -> f.getFacets()).orElse(new HashMap<String,SolrResponse.FacetField>());
-		SiteHtm.varsFqForClass().forEach(var -> {
-			String varIndexed = SiteHtm.varIndexedSiteHtm(var);
-			String varStored = SiteHtm.varStoredSiteHtm(var);
+		MapResult.varsFqForClass().forEach(var -> {
+			String varIndexed = MapResult.varIndexedMapResult(var);
+			String varStored = MapResult.varStoredMapResult(var);
 			JsonObject json = new JsonObject();
 			json.put("var", var);
 			json.put("varStored", varStored);
 			json.put("varIndexed", varIndexed);
 					String type = StringUtils.substringAfterLast(varIndexed, "_");
-			json.put("displayName", Optional.ofNullable(SiteHtm.displayNameSiteHtm(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
-			json.put("classSimpleName", Optional.ofNullable(SiteHtm.classSimpleNameSiteHtm(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
-			json.put("val", searchListSiteHtm_.getRequest().getFilterQueries().stream().filter(fq -> fq.startsWith(SiteHtm.varIndexedSiteHtm(var) + ":")).findFirst().map(s -> StringUtils.substringAfter(s, ":")).orElse(null));
+			json.put("displayName", Optional.ofNullable(MapResult.displayNameMapResult(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
+			json.put("classSimpleName", Optional.ofNullable(MapResult.classSimpleNameMapResult(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
+			json.put("val", searchListMapResult_.getRequest().getFilterQueries().stream().filter(fq -> fq.startsWith(MapResult.varIndexedMapResult(var) + ":")).findFirst().map(s -> StringUtils.substringAfter(s, ":")).orElse(null));
 			Optional.ofNullable(stats).map(s -> s.get(varIndexed)).ifPresent(stat -> {
 				json.put("stats", JsonObject.mapFrom(stat));
 			});
@@ -352,13 +352,13 @@ public class SiteHtmGenPage extends SiteHtmGenPageGen<BaseResultPage> {
 
 	@Override
 	protected void _varsRange(JsonObject vars) {
-		SiteHtm.varsRangeForClass().forEach(var -> {
-			String varIndexed = SiteHtm.varIndexedSiteHtm(var);
+		MapResult.varsRangeForClass().forEach(var -> {
+			String varIndexed = MapResult.varIndexedMapResult(var);
 			JsonObject json = new JsonObject();
 			json.put("var", var);
-			json.put("displayName", Optional.ofNullable(SiteHtm.displayNameSiteHtm(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
-			json.put("classSimpleName", Optional.ofNullable(SiteHtm.classSimpleNameSiteHtm(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
-			json.put("val", searchListSiteHtm_.getRequest().getFilterQueries().stream().filter(fq -> fq.startsWith(SiteHtm.varIndexedSiteHtm(var) + ":")).findFirst().map(s -> StringUtils.substringAfter(s, ":")).orElse(null));
+			json.put("displayName", Optional.ofNullable(MapResult.displayNameMapResult(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
+			json.put("classSimpleName", Optional.ofNullable(MapResult.classSimpleNameMapResult(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
+			json.put("val", searchListMapResult_.getRequest().getFilterQueries().stream().filter(fq -> fq.startsWith(MapResult.varIndexedMapResult(var) + ":")).findFirst().map(s -> StringUtils.substringAfter(s, ":")).orElse(null));
 			vars.put(var, json);
 		});
 	}
@@ -369,7 +369,7 @@ public class SiteHtmGenPage extends SiteHtmGenPageGen<BaseResultPage> {
 		JsonObject params = serviceRequest.getParams();
 
 		JsonObject queryParams = Optional.ofNullable(serviceRequest).map(ServiceRequest::getParams).map(or -> or.getJsonObject("query")).orElse(new JsonObject());
-		Long num = searchListSiteHtm_.getResponse().getResponse().getNumFound().longValue();
+		Long num = searchListMapResult_.getResponse().getResponse().getNumFound().longValue();
 		String q = "*:*";
 		String q1 = "objectText";
 		String q2 = "";
@@ -397,28 +397,28 @@ public class SiteHtmGenPage extends SiteHtmGenPageGen<BaseResultPage> {
 		}
 		query.put("q", q);
 
-		Long rows1 = Optional.ofNullable(searchListSiteHtm_).map(l -> l.getRows()).orElse(10L);
-		Long start1 = Optional.ofNullable(searchListSiteHtm_).map(l -> l.getStart()).orElse(1L);
+		Long rows1 = Optional.ofNullable(searchListMapResult_).map(l -> l.getRows()).orElse(10L);
+		Long start1 = Optional.ofNullable(searchListMapResult_).map(l -> l.getStart()).orElse(1L);
 		Long start2 = start1 - rows1;
 		Long start3 = start1 + rows1;
 		Long rows2 = rows1 / 2;
 		Long rows3 = rows1 * 2;
 		start2 = start2 < 0 ? 0 : start2;
 		JsonObject fqs = new JsonObject();
-		for(String fq : Optional.ofNullable(searchListSiteHtm_).map(l -> l.getFilterQueries()).orElse(Arrays.asList())) {
+		for(String fq : Optional.ofNullable(searchListMapResult_).map(l -> l.getFilterQueries()).orElse(Arrays.asList())) {
 			if(!StringUtils.contains(fq, "(")) {
-				String fq1 = SiteHtm.searchVarSiteHtm(StringUtils.substringBefore(fq, ":"));
+				String fq1 = MapResult.searchVarMapResult(StringUtils.substringBefore(fq, ":"));
 				String fq2 = StringUtils.substringAfter(fq, ":");
 				if(!StringUtils.startsWithAny(fq, "classCanonicalNames_", "archived_", "deleted_", "sessionId", "userKeys"))
-					fqs.put(fq1, new JsonObject().put("var", fq1).put("val", fq2).put("displayName", SiteHtm.displayNameForClass(fq1)));
+					fqs.put(fq1, new JsonObject().put("var", fq1).put("val", fq2).put("displayName", MapResult.displayNameForClass(fq1)));
 				}
 			}
 		query.put("fq", fqs);
 
 		JsonArray sorts = new JsonArray();
-		for(String sort : Optional.ofNullable(searchListSiteHtm_).map(l -> l.getSorts()).orElse(Arrays.asList())) {
-			String sort1 = SiteHtm.searchVarSiteHtm(StringUtils.substringBefore(sort, " "));
-			sorts.add(new JsonObject().put("var", sort1).put("order", StringUtils.substringAfter(sort, " ")).put("displayName", SiteHtm.displayNameForClass(sort1)));
+		for(String sort : Optional.ofNullable(searchListMapResult_).map(l -> l.getSorts()).orElse(Arrays.asList())) {
+			String sort1 = MapResult.searchVarMapResult(StringUtils.substringBefore(sort, " "));
+			sorts.add(new JsonObject().put("var", sort1).put("order", StringUtils.substringAfter(sort, " ")).put("displayName", MapResult.displayNameForClass(sort1)));
 		}
 		query.put("sort", sorts);
 	}
@@ -430,12 +430,12 @@ public class SiteHtmGenPage extends SiteHtmGenPageGen<BaseResultPage> {
 
 	@Override
 	protected void _pageDescription(Wrap<String> c) {
-			c.o("An HTML part that is indexed in the search engine. ");
+			c.o("A reusable map class for all non-model search classes on the map");
 	}
 
 	@Override
 	protected void _pageImageUri(Wrap<String> c) {
-			c.o("/png/htm-999.png");
+			c.o("/png/map-result-999.png");
 	}
 
 	@Override
@@ -445,10 +445,10 @@ public class SiteHtmGenPage extends SiteHtmGenPageGen<BaseResultPage> {
 
 	@Override
 	protected void _classIconName(Wrap<String> c) {
-			c.o("code");
+			c.o("map-location-dot");
 	}
 
-	protected void _pageUriSiteHtm(Wrap<String> c) {
-			c.o("/htm");
+	protected void _pageUriMapResult(Wrap<String> c) {
+			c.o("/map-result");
 	}
 }

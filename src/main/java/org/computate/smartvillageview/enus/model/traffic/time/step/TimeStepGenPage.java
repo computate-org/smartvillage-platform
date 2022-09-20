@@ -1,6 +1,7 @@
 package org.computate.smartvillageview.enus.model.traffic.time.step;
 
 import org.computate.smartvillageview.enus.page.PageLayout;
+import org.computate.smartvillageview.enus.result.base.BaseResultPage;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.smartvillageview.enus.model.user.SiteUser;
 import java.io.IOException;
@@ -42,7 +43,7 @@ import java.time.ZoneId;
 /**
  * Translate: false
  **/
-public class TimeStepGenPage extends TimeStepGenPageGen<PageLayout> {
+public class TimeStepGenPage extends TimeStepGenPageGen<BaseResultPage> {
 
 	/**
 	 * {@inheritDoc}
@@ -125,6 +126,7 @@ public class TimeStepGenPage extends TimeStepGenPageGen<PageLayout> {
 			w.o(new BigDecimal(s));
 	}
 
+	@Override
 	protected void _defaultFieldListVars(List<String> l) {
 		Optional.ofNullable(searchListTimeStep_.getFields()).orElse(Arrays.asList()).forEach(varStored -> {
 			String varStored2 = varStored;
@@ -141,6 +143,7 @@ public class TimeStepGenPage extends TimeStepGenPageGen<PageLayout> {
 		});
 	}
 
+	@Override
 	protected void _defaultStatsVars(List<String> l) {
 		Optional.ofNullable(searchListTimeStep_.getStatsFields()).orElse(Arrays.asList()).forEach(varIndexed -> {
 			String varIndexed2 = varIndexed;
@@ -157,6 +160,7 @@ public class TimeStepGenPage extends TimeStepGenPageGen<PageLayout> {
 		});
 	}
 
+	@Override
 	protected void _defaultPivotVars(List<String> l) {
 		Optional.ofNullable(searchListTimeStep_.getFacetPivots()).orElse(Arrays.asList()).forEach(facetPivot -> {
 			String facetPivot2 = facetPivot;

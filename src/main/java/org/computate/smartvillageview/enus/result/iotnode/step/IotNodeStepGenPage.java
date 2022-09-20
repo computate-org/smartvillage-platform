@@ -1,7 +1,7 @@
 package org.computate.smartvillageview.enus.result.iotnode.step;
 
 import org.computate.smartvillageview.enus.page.PageLayout;
-import org.computate.smartvillageview.enus.model.base.BaseModelPage;
+import org.computate.smartvillageview.enus.result.base.BaseResultPage;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.smartvillageview.enus.model.user.SiteUser;
 import java.io.IOException;
@@ -43,7 +43,7 @@ import java.time.ZoneId;
 /**
  * Translate: false
  **/
-public class IotNodeStepGenPage extends IotNodeStepGenPageGen<BaseModelPage> {
+public class IotNodeStepGenPage extends IotNodeStepGenPageGen<BaseResultPage> {
 
 	/**
 	 * {@inheritDoc}

@@ -1,4 +1,4 @@
-package org.computate.smartvillageview.enus.model.base;
+package org.computate.smartvillageview.enus.result.map;
 
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.smartvillageview.enus.model.base.BaseModel;
@@ -30,7 +30,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.math.RoundingMode;
 import java.util.Map;
-import org.computate.smartvillageview.enus.model.base.BaseModelGenPage;
+import org.computate.smartvillageview.enus.result.map.MapResultGenPage;
 import org.computate.search.wrap.Wrap;
 import io.vertx.core.Promise;
 import io.vertx.core.Future;
@@ -39,53 +39,53 @@ import io.vertx.core.json.JsonArray;
 /**	
  * <h1>Suggestions that can generate more code for you: </h1>
  * <ol>
- * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class BaseModelPageGen into the class BaseModelPage. 
+ * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class MapResultPageGen into the class MapResultPage. 
  * </li>
- * <li>You can add a class comment <b>"Api: true"</b> if you wish to GET, POST, PATCH or PUT these BaseModelPage objects in a RESTful API. 
+ * <li>You can add a class comment <b>"Api: true"</b> if you wish to GET, POST, PATCH or PUT these MapResultPage objects in a RESTful API. 
  * </li>
  * </ol>
- * <h1>About the BaseModelPage class and it's generated class BaseModelPageGen&lt;BaseModelGenPage&gt;: </h1>
+ * <h1>About the MapResultPage class and it's generated class MapResultPageGen&lt;MapResultGenPage&gt;: </h1>
  * <p>
  * This Java class extends a generated Java class built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
  * Whenever this Java class is modified or touched, the watch service installed as described in the README, indexes all the information about this Java class in a local Apache Solr Search Engine. 
  * If you are running the service, you can see the indexed data about this Java Class here: 
  * </p>
- * <p><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstClasse_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.base.BaseModelPage">Find the class BaseModelPage in Solr. </a></p>
+ * <p><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstClasse_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.result.map.MapResultPage">Find the class MapResultPage in Solr. </a></p>
  * <p>
  * The extended class ending with "Gen" did not exist at first, but was automatically created by the same watch service based on the data retrieved from the local Apache Server search engine. 
  * The extended class contains many generated fields, getters, setters, initialization code, and helper methods to help build a website and API fast, reactive, and scalable. 
  * </p>
  * <p>
- * Delete the class BaseModelPage in Solr: 
- * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.base.BaseModelPage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * Delete the class MapResultPage in Solr: 
+ * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.result.map.MapResultPage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
- * Delete  the package org.computate.smartvillageview.enus.model.base in Solr: 
- * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.model.base&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * Delete  the package org.computate.smartvillageview.enus.result.map in Solr: 
+ * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.result.map&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
  * Delete  the project smart-village-view in Solr: 
  * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smart\-village\-view&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  **/
-public abstract class BaseModelPageGen<DEV> extends BaseModelGenPage {
-	protected static final Logger LOG = LoggerFactory.getLogger(BaseModelPage.class);
+public abstract class MapResultPageGen<DEV> extends MapResultGenPage {
+	protected static final Logger LOG = LoggerFactory.getLogger(MapResultPage.class);
 
 	//////////////
 	// initDeep //
 	//////////////
 
-	public Future<Void> promiseDeepBaseModelPage(SiteRequestEnUS siteRequest_) {
+	public Future<Void> promiseDeepMapResultPage(SiteRequestEnUS siteRequest_) {
 		setSiteRequest_(siteRequest_);
-		return promiseDeepBaseModelPage();
+		return promiseDeepMapResultPage();
 	}
 
-	public Future<Void> promiseDeepBaseModelPage() {
+	public Future<Void> promiseDeepMapResultPage() {
 		Promise<Void> promise = Promise.promise();
 		Promise<Void> promise2 = Promise.promise();
-		promiseBaseModelPage(promise2);
+		promiseMapResultPage(promise2);
 		promise2.future().onSuccess(a -> {
-			super.promiseDeepBaseModelGenPage(siteRequest_).onSuccess(b -> {
+			super.promiseDeepMapResultGenPage(siteRequest_).onSuccess(b -> {
 				promise.complete();
 			}).onFailure(ex -> {
 				promise.fail(ex);
@@ -96,7 +96,7 @@ public abstract class BaseModelPageGen<DEV> extends BaseModelGenPage {
 		return promise.future();
 	}
 
-	public Future<Void> promiseBaseModelPage(Promise<Void> promise) {
+	public Future<Void> promiseMapResultPage(Promise<Void> promise) {
 		Future.future(a -> a.complete()).compose(a -> {
 			Promise<Void> promise2 = Promise.promise();
 			try {
@@ -114,19 +114,19 @@ public abstract class BaseModelPageGen<DEV> extends BaseModelGenPage {
 	}
 
 	@Override public Future<Void> promiseDeepForClass(SiteRequestEnUS siteRequest_) {
-		return promiseDeepBaseModelPage(siteRequest_);
+		return promiseDeepMapResultPage(siteRequest_);
 	}
 
 	/////////////////
 	// siteRequest //
 	/////////////////
 
-	public void siteRequestBaseModelPage(SiteRequestEnUS siteRequest_) {
-			super.siteRequestBaseModelGenPage(siteRequest_);
+	public void siteRequestMapResultPage(SiteRequestEnUS siteRequest_) {
+			super.siteRequestMapResultGenPage(siteRequest_);
 	}
 
 	public void siteRequestForClass(SiteRequestEnUS siteRequest_) {
-		siteRequestBaseModelPage(siteRequest_);
+		siteRequestMapResultPage(siteRequest_);
 	}
 
 	/////////////
@@ -138,7 +138,7 @@ public abstract class BaseModelPageGen<DEV> extends BaseModelGenPage {
 		Object o = null;
 		for(String v : vars) {
 			if(o == null)
-				o = obtainBaseModelPage(v);
+				o = obtainMapResultPage(v);
 			else if(o instanceof BaseModel) {
 				BaseModel baseModel = (BaseModel)o;
 				o = baseModel.obtainForClass(v);
@@ -150,11 +150,11 @@ public abstract class BaseModelPageGen<DEV> extends BaseModelGenPage {
 		}
 		return o;
 	}
-	public Object obtainBaseModelPage(String var) {
-		BaseModelPage oBaseModelPage = (BaseModelPage)this;
+	public Object obtainMapResultPage(String var) {
+		MapResultPage oMapResultPage = (MapResultPage)this;
 		switch(var) {
 			default:
-				return super.obtainBaseModelGenPage(var);
+				return super.obtainMapResultGenPage(var);
 		}
 	}
 
@@ -167,7 +167,7 @@ public abstract class BaseModelPageGen<DEV> extends BaseModelGenPage {
 		Object o = null;
 		for(String v : vars) {
 			if(o == null)
-				o = relateBaseModelPage(v, val);
+				o = relateMapResultPage(v, val);
 			else if(o instanceof BaseModel) {
 				BaseModel baseModel = (BaseModel)o;
 				o = baseModel.relateForClass(v, val);
@@ -175,11 +175,11 @@ public abstract class BaseModelPageGen<DEV> extends BaseModelGenPage {
 		}
 		return o != null;
 	}
-	public Object relateBaseModelPage(String var, Object val) {
-		BaseModelPage oBaseModelPage = (BaseModelPage)this;
+	public Object relateMapResultPage(String var, Object val) {
+		MapResultPage oMapResultPage = (MapResultPage)this;
 		switch(var) {
 			default:
-				return super.relateBaseModelGenPage(var, val);
+				return super.relateMapResultGenPage(var, val);
 		}
 	}
 
@@ -188,12 +188,12 @@ public abstract class BaseModelPageGen<DEV> extends BaseModelGenPage {
 	///////////////
 
 	public static Object staticSetForClass(String entityVar, SiteRequestEnUS siteRequest_, String o) {
-		return staticSetBaseModelPage(entityVar,  siteRequest_, o);
+		return staticSetMapResultPage(entityVar,  siteRequest_, o);
 	}
-	public static Object staticSetBaseModelPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
+	public static Object staticSetMapResultPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
 			default:
-				return BaseModelGenPage.staticSetBaseModelGenPage(entityVar,  siteRequest_, o);
+				return MapResultGenPage.staticSetMapResultGenPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -202,12 +202,12 @@ public abstract class BaseModelPageGen<DEV> extends BaseModelGenPage {
 	////////////////
 
 	public static Object staticSearchForClass(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
-		return staticSearchBaseModelPage(entityVar,  siteRequest_, o);
+		return staticSearchMapResultPage(entityVar,  siteRequest_, o);
 	}
-	public static Object staticSearchBaseModelPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
+	public static Object staticSearchMapResultPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
 			default:
-				return BaseModelGenPage.staticSearchBaseModelGenPage(entityVar,  siteRequest_, o);
+				return MapResultGenPage.staticSearchMapResultGenPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -216,12 +216,12 @@ public abstract class BaseModelPageGen<DEV> extends BaseModelGenPage {
 	///////////////////
 
 	public static String staticSearchStrForClass(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
-		return staticSearchStrBaseModelPage(entityVar,  siteRequest_, o);
+		return staticSearchStrMapResultPage(entityVar,  siteRequest_, o);
 	}
-	public static String staticSearchStrBaseModelPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
+	public static String staticSearchStrMapResultPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
 			default:
-				return BaseModelGenPage.staticSearchStrBaseModelGenPage(entityVar,  siteRequest_, o);
+				return MapResultGenPage.staticSearchStrMapResultGenPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -230,12 +230,12 @@ public abstract class BaseModelPageGen<DEV> extends BaseModelGenPage {
 	//////////////////
 
 	public static String staticSearchFqForClass(String entityVar, SiteRequestEnUS siteRequest_, String o) {
-		return staticSearchFqBaseModelPage(entityVar,  siteRequest_, o);
+		return staticSearchFqMapResultPage(entityVar,  siteRequest_, o);
 	}
-	public static String staticSearchFqBaseModelPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
+	public static String staticSearchFqMapResultPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
 			default:
-				return BaseModelGenPage.staticSearchFqBaseModelGenPage(entityVar,  siteRequest_, o);
+				return MapResultGenPage.staticSearchFqMapResultGenPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -249,16 +249,16 @@ public abstract class BaseModelPageGen<DEV> extends BaseModelGenPage {
 		return sb.toString();
 	}
 
-	public static final String CLASS_SIMPLE_NAME = "BaseModelPage";
+	public static final String CLASS_SIMPLE_NAME = "MapResultPage";
 
 
 	public static String displayNameForClass(String var) {
-		return BaseModelPage.displayNameBaseModelPage(var);
+		return MapResultPage.displayNameMapResultPage(var);
 	}
-	public static String displayNameBaseModelPage(String var) {
+	public static String displayNameMapResultPage(String var) {
 		switch(var) {
 		default:
-			return BaseModelGenPage.displayNameBaseModelGenPage(var);
+			return MapResultGenPage.displayNameMapResultGenPage(var);
 		}
 	}
 }

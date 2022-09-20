@@ -60,7 +60,7 @@ import io.vertx.core.Future;
  * <ol>
  * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class SystemEventGenPageGen into the class SystemEventGenPage. 
  * </li>
- * <li>You can add a class comment "Api: true" if you wish to GET, POST, PATCH or PUT these SystemEventGenPage objects in a RESTful API. 
+ * <li>You can add a class comment <b>"Api: true"</b> if you wish to GET, POST, PATCH or PUT these SystemEventGenPage objects in a RESTful API. 
  * </li>
  * </ol>
  * <h1>About the SystemEventGenPage class and it's generated class SystemEventGenPageGen&lt;PageLayout&gt;: </h1>

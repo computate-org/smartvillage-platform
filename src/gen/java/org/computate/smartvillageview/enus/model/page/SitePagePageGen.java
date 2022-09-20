@@ -41,7 +41,7 @@ import io.vertx.core.json.JsonArray;
  * <ol>
  * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class SitePagePageGen into the class SitePagePage. 
  * </li>
- * <li>You can add a class comment "Api: true" if you wish to GET, POST, PATCH or PUT these SitePagePage objects in a RESTful API. 
+ * <li>You can add a class comment <b>"Api: true"</b> if you wish to GET, POST, PATCH or PUT these SitePagePage objects in a RESTful API. 
  * </li>
  * </ol>
  * <h1>About the SitePagePage class and it's generated class SitePagePageGen&lt;SitePageGenPage&gt;: </h1>

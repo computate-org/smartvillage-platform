@@ -79,21 +79,34 @@ import io.vertx.core.json.JsonObject;
  * The extended class ending with "Gen" did not exist at first, but was automatically created by the same watch service based on the data retrieved from the local Apache Server search engine. 
  * The extended class contains many generated fields, getters, setters, initialization code, and helper methods to help build a website and API fast, reactive, and scalable. 
  * </p>
- * <p>This class contains a comment "Indexed: true", which means this class will be indexed in the search engine. 
+ * <p>This class contains a comment <b>"Indexed: true"</b>, which means this class will be indexed in the search engine. 
  * Every protected void method that begins with "_" that is marked to be searched with a comment like "Indexed: true", "Stored: true", or "DocValues: true" will be indexed in the search engine. 
  * </p>
- * <p>This class contains a comment "Page: true", which means this class will have webpage code generated for these objects. 
+ * <p>This class contains a comment <b>"Page: true"</b>, which means this class will have webpage code generated for these objects. 
  * Java Vert.x backend API code, Handlebars HTML template frontend code, and JavaScript code will all generated and can be extended. 
  * This creates a new Java class org.computate.smartvillageview.enus.model.system.event.SystemEventPage. 
  * </p>
- * <p>This class contains a comment "SuperPage.enUS: PageLayout", which identifies the Java super class of the page code by it's class simple name "PageLayout". 
+ * <p>This class contains a comment <b>"SuperPage.enUS: PageLayout"</b>, which identifies the Java super class of the page code by it's class simple name "PageLayout". 
  * This means that the newly created class org.computate.smartvillageview.enus.model.system.event.SystemEventPage extends org.computate.smartvillageview.enus.page.PageLayout. 
  * </p>
- * <p>This class contains a comment "Api: true", which means this class will have Java Vert.x API backend code generated for these objects. 
+ * <p>This class contains a comment <b>"Api: true"</b>, which means this class will have Java Vert.x API backend code generated for these objects. 
  * </p>
- * <p>This class contains a comment "ApiTag: System Event", which groups all of the OpenAPIs for SystemEvent objects under the tag "System Event". 
+ * <p>This class contains a comment <b>"ApiTag: System Event"</b>, which groups all of the OpenAPIs for SystemEvent objects under the tag "System Event". 
  * </p>
- * <p>This class contains a comment "ApiUri: /api/system-event", which defines the base API URI for SystemEvent objects as "/api/system-event" in the OpenAPI spec. 
+ * <p>This class contains a comment <b>"ApiUri: /api/system-event"</b>, which defines the base API URI for SystemEvent objects as "/api/system-event" in the OpenAPI spec. 
+ * </p>
+ * <p>This class contains a comment <b>"AName.enUS: a system event"</b>, which identifies the language context to describe a SystemEvent as "a system event". 
+ * </p>
+ * <p>This class contains a comment <b>"Color: 2017-navy-peony"</b>, which styles the SystemEvent page "2017-navy-peony". 
+ * This will reference a CSS class defined by the stylesheets in the project that starts with "w3-". 
+ * A css class of "w3-2017-navy-peony" is expected to exist in the project stylesheets, and is inspired by W3 CSS colors. 
+ * See: <a href="https://www.w3schools.com/w3css/w3css_colors.asp">https://www.w3schools.com/w3css/w3css_colors.asp</a>. 
+ * </p>
+ * <p>This class contains a comment <b>"IconGroup: duotone"</b>, which adds icons on the SystemEvent page with a group of "duotone". 
+ * This will reference a Font Awesome icon group defined by the stylesheets in the project that starts with "fa" followed by the first letter of the icon group, which is "fad". 
+ * A Font Awesome icon group of "2017-navy-peony" is expected to exist. 
+ * The Font Awesome groups currently supported include: solid, thin, duotone. 
+ * See: <a href="https://www.w3schools.com/w3css/w3css_colors.asp">https://www.w3schools.com/w3css/w3css_colors.asp</a>. 
  * </p>
  * <p>
  * Delete the class SystemEvent in Solr: 
@@ -1453,55 +1466,6 @@ public abstract class SystemEventGen<DEV> extends Object {
 	}
 
 	///////////////////
-	// objectNameVar //
-	///////////////////
-
-	/**	 The entity objectNameVar
-	 *	 is defined as null before being initialized. 
-	 */
-	@JsonProperty
-	@JsonInclude(Include.NON_NULL)
-	protected String objectNameVar;
-
-	/**	<br> The entity objectNameVar
-	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.system.event.SystemEvent&fq=entiteVar_enUS_indexed_string:objectNameVar">Find the entity objectNameVar in Solr</a>
-	 * <br>
-	 * @param w is for wrapping a value to assign to this entity during initialization. 
-	 **/
-	protected abstract void _objectNameVar(Wrap<String> w);
-
-	public String getObjectNameVar() {
-		return objectNameVar;
-	}
-	public void setObjectNameVar(String o) {
-		this.objectNameVar = SystemEvent.staticSetObjectNameVar(siteRequest_, o);
-	}
-	public static String staticSetObjectNameVar(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-	protected SystemEvent objectNameVarInit() {
-		Wrap<String> objectNameVarWrap = new Wrap<String>().var("objectNameVar");
-		if(objectNameVar == null) {
-			_objectNameVar(objectNameVarWrap);
-			setObjectNameVar(objectNameVarWrap.o);
-		}
-		return (SystemEvent)this;
-	}
-
-	public static String staticSearchObjectNameVar(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-
-	public static String staticSearchStrObjectNameVar(SiteRequestEnUS siteRequest_, String o) {
-		return o == null ? null : o.toString();
-	}
-
-	public static String staticSearchFqObjectNameVar(SiteRequestEnUS siteRequest_, String o) {
-		return SystemEvent.staticSearchStrObjectNameVar(siteRequest_, SystemEvent.staticSearchObjectNameVar(siteRequest_, SystemEvent.staticSetObjectNameVar(siteRequest_, o)));
-	}
-
-	///////////////////
 	// objectSuggest //
 	///////////////////
 
@@ -1879,7 +1843,6 @@ public abstract class SystemEventGen<DEV> extends Object {
 				savesInit();
 				objectTitleInit();
 				objectIdInit();
-				objectNameVarInit();
 				objectSuggestInit();
 				objectTextInit();
 				pageUrlIdInit();
@@ -1984,8 +1947,6 @@ public abstract class SystemEventGen<DEV> extends Object {
 				return oSystemEvent.objectTitle;
 			case "objectId":
 				return oSystemEvent.objectId;
-			case "objectNameVar":
-				return oSystemEvent.objectNameVar;
 			case "objectSuggest":
 				return oSystemEvent.objectSuggest;
 			case "objectText":
@@ -2079,8 +2040,6 @@ public abstract class SystemEventGen<DEV> extends Object {
 			return SystemEvent.staticSetObjectTitle(siteRequest_, o);
 		case "objectId":
 			return SystemEvent.staticSetObjectId(siteRequest_, o);
-		case "objectNameVar":
-			return SystemEvent.staticSetObjectNameVar(siteRequest_, o);
 		case "objectSuggest":
 			return SystemEvent.staticSetObjectSuggest(siteRequest_, o);
 		case "objectText":
@@ -2149,8 +2108,6 @@ public abstract class SystemEventGen<DEV> extends Object {
 			return SystemEvent.staticSearchObjectTitle(siteRequest_, (String)o);
 		case "objectId":
 			return SystemEvent.staticSearchObjectId(siteRequest_, (String)o);
-		case "objectNameVar":
-			return SystemEvent.staticSearchObjectNameVar(siteRequest_, (String)o);
 		case "objectSuggest":
 			return SystemEvent.staticSearchObjectSuggest(siteRequest_, (String)o);
 		case "objectText":
@@ -2219,8 +2176,6 @@ public abstract class SystemEventGen<DEV> extends Object {
 			return SystemEvent.staticSearchStrObjectTitle(siteRequest_, (String)o);
 		case "objectId":
 			return SystemEvent.staticSearchStrObjectId(siteRequest_, (String)o);
-		case "objectNameVar":
-			return SystemEvent.staticSearchStrObjectNameVar(siteRequest_, (String)o);
 		case "objectSuggest":
 			return SystemEvent.staticSearchStrObjectSuggest(siteRequest_, (String)o);
 		case "objectText":
@@ -2289,8 +2244,6 @@ public abstract class SystemEventGen<DEV> extends Object {
 			return SystemEvent.staticSearchFqObjectTitle(siteRequest_, o);
 		case "objectId":
 			return SystemEvent.staticSearchFqObjectId(siteRequest_, o);
-		case "objectNameVar":
-			return SystemEvent.staticSearchFqObjectNameVar(siteRequest_, o);
 		case "objectSuggest":
 			return SystemEvent.staticSearchFqObjectSuggest(siteRequest_, o);
 		case "objectText":
@@ -2850,7 +2803,6 @@ public abstract class SystemEventGen<DEV> extends Object {
 	public static final String VAR_saves = "saves";
 	public static final String VAR_objectTitle = "objectTitle";
 	public static final String VAR_objectId = "objectId";
-	public static final String VAR_objectNameVar = "objectNameVar";
 	public static final String VAR_objectSuggest = "objectSuggest";
 	public static final String VAR_objectText = "objectText";
 	public static final String VAR_pageUrlId = "pageUrlId";
@@ -2910,7 +2862,6 @@ public abstract class SystemEventGen<DEV> extends Object {
 	public static final String DISPLAY_NAME_saves = "";
 	public static final String DISPLAY_NAME_objectTitle = "";
 	public static final String DISPLAY_NAME_objectId = "ID";
-	public static final String DISPLAY_NAME_objectNameVar = "";
 	public static final String DISPLAY_NAME_objectSuggest = "autosuggest";
 	public static final String DISPLAY_NAME_objectText = "text";
 	public static final String DISPLAY_NAME_pageUrlId = "";
@@ -2969,8 +2920,6 @@ public abstract class SystemEventGen<DEV> extends Object {
 			return DISPLAY_NAME_objectTitle;
 		case VAR_objectId:
 			return DISPLAY_NAME_objectId;
-		case VAR_objectNameVar:
-			return DISPLAY_NAME_objectNameVar;
 		case VAR_objectSuggest:
 			return DISPLAY_NAME_objectSuggest;
 		case VAR_objectText:
@@ -3036,8 +2985,6 @@ public abstract class SystemEventGen<DEV> extends Object {
 			return "The title of this object";
 		case VAR_objectId:
 			return "A URL friendly unique ID for this object";
-		case VAR_objectNameVar:
-			return "The var that identifies this type of object in the API";
 		case VAR_objectSuggest:
 			return "The indexed field in the search engine for this record while using autosuggest";
 		case VAR_objectText:
@@ -3102,8 +3049,6 @@ public abstract class SystemEventGen<DEV> extends Object {
 		case VAR_objectTitle:
 			return "String";
 		case VAR_objectId:
-			return "String";
-		case VAR_objectNameVar:
 			return "String";
 		case VAR_objectSuggest:
 			return "String";

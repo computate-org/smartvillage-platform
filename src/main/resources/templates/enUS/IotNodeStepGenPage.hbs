@@ -1,9 +1,9 @@
 {{#*inline "htmTitleIotNodeStepPage"}}		<!-- inline "htmTitleIotNodeStepPage" -->
 		<title>{{#if searchListIotNodeStep_}}{{#eq iotNodeStepCount int1}}{{#eq params.query.q "*:*"}}IOT node step{{else}}IOT node step{{/eq}}{{else}}no IOT node step found{{/eq}}{{else}}IOT node steps{{/if}}</title>
 {{/inline}}
-{{#*inline "htmMetaIotNodeStepPage"}}{{> "htmMetaBaseModelPage"}}{{/inline}}
-{{#*inline "htmStyleIotNodeStepPage"}}{{> "htmStyleBaseModelPage"}}{{/inline}}
-{{#*inline "htmScriptsIotNodeStepPage"}}{{> "htmScriptsBaseModelPage"}}		<!-- inline "htmScriptsIotNodeStepPage" -->
+{{#*inline "htmMetaIotNodeStepPage"}}{{> "htmMetaBaseResultPage"}}{{/inline}}
+{{#*inline "htmStyleIotNodeStepPage"}}{{> "htmStyleBaseResultPage"}}{{/inline}}
+{{#*inline "htmScriptsIotNodeStepPage"}}{{> "htmScriptsBaseResultPage"}}		<!-- inline "htmScriptsIotNodeStepPage" -->
 		<script src="{{staticBaseUrl}}/js/enUS/IotNodeStepPage.js"></script>
 {{/inline}}
 {{#*inline "htmScriptIotNodeStepPage"}}		<!-- inline "htmScriptIotNodeStepPage" -->
@@ -35,7 +35,7 @@
 				});
 				calendar.render();
 			});
-			$('#site-calendar-box').accordion();
+			$('#site-calendar-box').accordion({ collapsible: true, active: false });
 {{#if DEFAULT_MAP_LOCATION }}
 			window.DEFAULT_MAP_LOCATION = { lat: {{ DEFAULT_MAP_LOCATION.lat }}, lon: {{ DEFAULT_MAP_LOCATION.lon }} };
 {{/if}}
@@ -261,9 +261,9 @@
 								</table>
 {{/inline}}
 {{#*inline "htmBodyMenuIotNodeStepPage"}}		<!-- #*inline "htmBodyMenuIotNodeStepPage" -->
-{{> "htmBodyMenuBaseModelPage"}}{{/inline}}
+{{> "htmBodyMenuBaseResultPage"}}{{/inline}}
 {{#*inline "htmBodyGraphIotNodeStepPage"}}		<!-- #*inline "htmBodyGraphIotNodeStepPage" -->
-<div id="htmBodyGraphBaseModelPage" class="w3-content htmBodyGraph "></div>{{/inline}}
+<div id="htmBodyGraphBaseResultPage" class="w3-content htmBodyGraph "></div>{{/inline}}
 {{#*inline "htmBodyCount0IotNodeStepPage"}}		<!-- #*inline "htmBodyCount0IotNodeStepPage" -->
 		<h1>
 			<a href="{{pageUri}}" class="w3-bar-item w3-btn w3-center w3-block w3-blue w3-hover-blue">
@@ -660,13 +660,13 @@
 				</div>
 {{/inline}}
 {{#*inline "htmBodyStartIotNodeStepPage"}}
-{{> "htmBodyStartBaseModelPage"}}
+{{> "htmBodyStartBaseResultPage"}}
 {{/inline}}
 {{#*inline "htmBodyMiddleIotNodeStepPage"}}
-{{> "htmBodyMiddleBaseModelPage"}}
+{{> "htmBodyMiddleBaseResultPage"}}
 {{/inline}}
 {{#*inline "htmBodyEndIotNodeStepPage"}}
-{{> "htmBodyEndBaseModelPage"}}
+{{> "htmBodyEndBaseResultPage"}}
 {{/inline}}
 {{#*inline "htmBodyIotNodeStepPage"}}
 {{#block "htmBodyStart"}}{{/block}}
@@ -679,9 +679,9 @@
 		</div>
 {{#block "htmBodyGraph"}}{{/block}}
 	<div class="pageContent w3-content ">
-		<div id="site-calendar-box ">
+		<div id="site-calendar-box">
 			<h3 id="site-calendar-title">Calendar</h3>
-			<div id="site-calendar"></div>
+			<div id="site-calendar"><!-- // --></div>
 		</div>
 	{{#eq iotNodeStepCount int0}}
 {{#block "htmBodyCount0"}}{{/block}}
@@ -832,7 +832,7 @@
 				</a>
 			</div>
 {{/inline}}
-{{> BaseModelPage baseResult_=iotNodeStep_}}
+{{> BaseResultPage baseResult_=iotNodeStep_}}
 
 {{#*inline "htmJson"}}
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">

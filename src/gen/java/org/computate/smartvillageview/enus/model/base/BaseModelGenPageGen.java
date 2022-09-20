@@ -47,7 +47,7 @@ import io.vertx.core.Future;
  * <ol>
  * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class BaseModelGenPageGen into the class BaseModelGenPage. 
  * </li>
- * <li>You can add a class comment "Api: true" if you wish to GET, POST, PATCH or PUT these BaseModelGenPage objects in a RESTful API. 
+ * <li>You can add a class comment <b>"Api: true"</b> if you wish to GET, POST, PATCH or PUT these BaseModelGenPage objects in a RESTful API. 
  * </li>
  * </ol>
  * <h1>About the BaseModelGenPage class and it's generated class BaseModelGenPageGen&lt;PageLayout&gt;: </h1>

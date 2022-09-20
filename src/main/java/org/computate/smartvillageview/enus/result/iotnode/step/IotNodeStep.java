@@ -14,7 +14,7 @@ import io.vertx.pgclient.data.Point;
 /**
  * Api: true
  * Page: true
- * SuperPage.enUS: BaseModelPage
+ * SuperPage.enUS: BaseResultPage
  * Indexed: true
  * 
  * ApiTag.enUS: IOT Node Step
@@ -541,11 +541,6 @@ public class IotNodeStep extends IotNodeStepGen<BaseResult> {
 		StringBuilder b = new StringBuilder();
 		b.append(nodeName);
 		w.o(b.toString());
-	}
-
-	@Override
-	public String toString() {
-		return objectText;
 	}
 
 	public void indexJsonObject(JsonObject doc, String prefix, JsonObject json) {

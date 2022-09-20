@@ -41,7 +41,7 @@ import io.vertx.core.json.JsonArray;
  * <ol>
  * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class IotNodeStepPageGen into the class IotNodeStepPage. 
  * </li>
- * <li>You can add a class comment "Api: true" if you wish to GET, POST, PATCH or PUT these IotNodeStepPage objects in a RESTful API. 
+ * <li>You can add a class comment <b>"Api: true"</b> if you wish to GET, POST, PATCH or PUT these IotNodeStepPage objects in a RESTful API. 
  * </li>
  * </ol>
  * <h1>About the IotNodeStepPage class and it's generated class IotNodeStepPageGen&lt;IotNodeStepGenPage&gt;: </h1>

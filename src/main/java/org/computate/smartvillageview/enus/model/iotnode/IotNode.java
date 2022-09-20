@@ -546,11 +546,6 @@ public class IotNode extends IotNodeGen<BaseModel> {
 		w.o(b.toString());
 	}
 
-	@Override
-	public String toString() {
-		return objectText;
-	}
-
 	public void indexJsonObject(JsonObject doc, String prefix, JsonObject json) {
 		json.forEach(entry -> {
 			String key = entry.getKey();

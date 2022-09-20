@@ -30,7 +30,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.math.RoundingMode;
 import java.util.Map;
-import org.computate.smartvillageview.enus.page.PageLayout;
+import org.computate.smartvillageview.enus.result.map.MapResultPage;
 import org.computate.vertx.search.list.SearchList;
 import org.computate.smartvillageview.enus.model.traffic.person.step.PersonStep;
 import java.lang.String;
@@ -60,10 +60,10 @@ import io.vertx.core.Future;
  * <ol>
  * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class PersonStepGenPageGen into the class PersonStepGenPage. 
  * </li>
- * <li>You can add a class comment "Api: true" if you wish to GET, POST, PATCH or PUT these PersonStepGenPage objects in a RESTful API. 
+ * <li>You can add a class comment <b>"Api: true"</b> if you wish to GET, POST, PATCH or PUT these PersonStepGenPage objects in a RESTful API. 
  * </li>
  * </ol>
- * <h1>About the PersonStepGenPage class and it's generated class PersonStepGenPageGen&lt;PageLayout&gt;: </h1>
+ * <h1>About the PersonStepGenPage class and it's generated class PersonStepGenPageGen&lt;MapResultPage&gt;: </h1>
  * <p>
  * This Java class extends a generated Java class built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
  * Whenever this Java class is modified or touched, the watch service installed as described in the README, indexes all the information about this Java class in a local Apache Solr Search Engine. 
@@ -87,7 +87,7 @@ import io.vertx.core.Future;
  * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smart\-village\-view&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  **/
-public abstract class PersonStepGenPageGen<DEV> extends PageLayout {
+public abstract class PersonStepGenPageGen<DEV> extends MapResultPage {
 	protected static final Logger LOG = LoggerFactory.getLogger(PersonStepGenPage.class);
 
 	///////////////////////////
@@ -938,204 +938,6 @@ public abstract class PersonStepGenPageGen<DEV> extends PageLayout {
 		return PersonStepGenPage.staticSearchStrDEFAULT_MAP_ZOOM(siteRequest_, PersonStepGenPage.staticSearchDEFAULT_MAP_ZOOM(siteRequest_, PersonStepGenPage.staticSetDEFAULT_MAP_ZOOM(siteRequest_, o)));
 	}
 
-	//////////////////////////
-	// defaultFieldListVars //
-	//////////////////////////
-
-	/**	 The entity defaultFieldListVars
-	 *	 It is constructed before being initialized with the constructor by default. 
-	 */
-	@JsonProperty
-	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
-	@JsonInclude(Include.NON_NULL)
-	protected List<String> defaultFieldListVars = new ArrayList<String>();
-
-	/**	<br> The entity defaultFieldListVars
-	 *  It is constructed before being initialized with the constructor by default. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStepGenPage&fq=entiteVar_enUS_indexed_string:defaultFieldListVars">Find the entity defaultFieldListVars in Solr</a>
-	 * <br>
-	 * @param l is the entity already constructed. 
-	 **/
-	protected abstract void _defaultFieldListVars(List<String> l);
-
-	public List<String> getDefaultFieldListVars() {
-		return defaultFieldListVars;
-	}
-
-	public void setDefaultFieldListVars(List<String> defaultFieldListVars) {
-		this.defaultFieldListVars = defaultFieldListVars;
-	}
-	public static String staticSetDefaultFieldListVars(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-	public PersonStepGenPage addDefaultFieldListVars(String...objects) {
-		for(String o : objects) {
-			addDefaultFieldListVars(o);
-		}
-		return (PersonStepGenPage)this;
-	}
-	public PersonStepGenPage addDefaultFieldListVars(String o) {
-		if(o != null)
-			this.defaultFieldListVars.add(o);
-		return (PersonStepGenPage)this;
-	}
-	@JsonIgnore
-	public void setDefaultFieldListVars(JsonArray objects) {
-		defaultFieldListVars.clear();
-		for(int i = 0; i < objects.size(); i++) {
-			String o = objects.getString(i);
-			addDefaultFieldListVars(o);
-		}
-	}
-	protected PersonStepGenPage defaultFieldListVarsInit() {
-		_defaultFieldListVars(defaultFieldListVars);
-		return (PersonStepGenPage)this;
-	}
-
-	public static String staticSearchDefaultFieldListVars(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-
-	public static String staticSearchStrDefaultFieldListVars(SiteRequestEnUS siteRequest_, String o) {
-		return o == null ? null : o.toString();
-	}
-
-	public static String staticSearchFqDefaultFieldListVars(SiteRequestEnUS siteRequest_, String o) {
-		return PersonStepGenPage.staticSearchStrDefaultFieldListVars(siteRequest_, PersonStepGenPage.staticSearchDefaultFieldListVars(siteRequest_, PersonStepGenPage.staticSetDefaultFieldListVars(siteRequest_, o)));
-	}
-
-	//////////////////////
-	// defaultStatsVars //
-	//////////////////////
-
-	/**	 The entity defaultStatsVars
-	 *	 It is constructed before being initialized with the constructor by default. 
-	 */
-	@JsonProperty
-	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
-	@JsonInclude(Include.NON_NULL)
-	protected List<String> defaultStatsVars = new ArrayList<String>();
-
-	/**	<br> The entity defaultStatsVars
-	 *  It is constructed before being initialized with the constructor by default. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStepGenPage&fq=entiteVar_enUS_indexed_string:defaultStatsVars">Find the entity defaultStatsVars in Solr</a>
-	 * <br>
-	 * @param l is the entity already constructed. 
-	 **/
-	protected abstract void _defaultStatsVars(List<String> l);
-
-	public List<String> getDefaultStatsVars() {
-		return defaultStatsVars;
-	}
-
-	public void setDefaultStatsVars(List<String> defaultStatsVars) {
-		this.defaultStatsVars = defaultStatsVars;
-	}
-	public static String staticSetDefaultStatsVars(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-	public PersonStepGenPage addDefaultStatsVars(String...objects) {
-		for(String o : objects) {
-			addDefaultStatsVars(o);
-		}
-		return (PersonStepGenPage)this;
-	}
-	public PersonStepGenPage addDefaultStatsVars(String o) {
-		if(o != null)
-			this.defaultStatsVars.add(o);
-		return (PersonStepGenPage)this;
-	}
-	@JsonIgnore
-	public void setDefaultStatsVars(JsonArray objects) {
-		defaultStatsVars.clear();
-		for(int i = 0; i < objects.size(); i++) {
-			String o = objects.getString(i);
-			addDefaultStatsVars(o);
-		}
-	}
-	protected PersonStepGenPage defaultStatsVarsInit() {
-		_defaultStatsVars(defaultStatsVars);
-		return (PersonStepGenPage)this;
-	}
-
-	public static String staticSearchDefaultStatsVars(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-
-	public static String staticSearchStrDefaultStatsVars(SiteRequestEnUS siteRequest_, String o) {
-		return o == null ? null : o.toString();
-	}
-
-	public static String staticSearchFqDefaultStatsVars(SiteRequestEnUS siteRequest_, String o) {
-		return PersonStepGenPage.staticSearchStrDefaultStatsVars(siteRequest_, PersonStepGenPage.staticSearchDefaultStatsVars(siteRequest_, PersonStepGenPage.staticSetDefaultStatsVars(siteRequest_, o)));
-	}
-
-	//////////////////////
-	// defaultPivotVars //
-	//////////////////////
-
-	/**	 The entity defaultPivotVars
-	 *	 It is constructed before being initialized with the constructor by default. 
-	 */
-	@JsonProperty
-	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
-	@JsonInclude(Include.NON_NULL)
-	protected List<String> defaultPivotVars = new ArrayList<String>();
-
-	/**	<br> The entity defaultPivotVars
-	 *  It is constructed before being initialized with the constructor by default. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStepGenPage&fq=entiteVar_enUS_indexed_string:defaultPivotVars">Find the entity defaultPivotVars in Solr</a>
-	 * <br>
-	 * @param l is the entity already constructed. 
-	 **/
-	protected abstract void _defaultPivotVars(List<String> l);
-
-	public List<String> getDefaultPivotVars() {
-		return defaultPivotVars;
-	}
-
-	public void setDefaultPivotVars(List<String> defaultPivotVars) {
-		this.defaultPivotVars = defaultPivotVars;
-	}
-	public static String staticSetDefaultPivotVars(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-	public PersonStepGenPage addDefaultPivotVars(String...objects) {
-		for(String o : objects) {
-			addDefaultPivotVars(o);
-		}
-		return (PersonStepGenPage)this;
-	}
-	public PersonStepGenPage addDefaultPivotVars(String o) {
-		if(o != null)
-			this.defaultPivotVars.add(o);
-		return (PersonStepGenPage)this;
-	}
-	@JsonIgnore
-	public void setDefaultPivotVars(JsonArray objects) {
-		defaultPivotVars.clear();
-		for(int i = 0; i < objects.size(); i++) {
-			String o = objects.getString(i);
-			addDefaultPivotVars(o);
-		}
-	}
-	protected PersonStepGenPage defaultPivotVarsInit() {
-		_defaultPivotVars(defaultPivotVars);
-		return (PersonStepGenPage)this;
-	}
-
-	public static String staticSearchDefaultPivotVars(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-
-	public static String staticSearchStrDefaultPivotVars(SiteRequestEnUS siteRequest_, String o) {
-		return o == null ? null : o.toString();
-	}
-
-	public static String staticSearchFqDefaultPivotVars(SiteRequestEnUS siteRequest_, String o) {
-		return PersonStepGenPage.staticSearchStrDefaultPivotVars(siteRequest_, PersonStepGenPage.staticSearchDefaultPivotVars(siteRequest_, PersonStepGenPage.staticSetDefaultPivotVars(siteRequest_, o)));
-	}
-
 	////////////////////
 	// listPersonStep //
 	////////////////////
@@ -1453,7 +1255,7 @@ public abstract class PersonStepGenPageGen<DEV> extends PageLayout {
 		Promise<Void> promise2 = Promise.promise();
 		promisePersonStepGenPage(promise2);
 		promise2.future().onSuccess(a -> {
-			super.promiseDeepPageLayout(siteRequest_).onSuccess(b -> {
+			super.promiseDeepMapResultPage(siteRequest_).onSuccess(b -> {
 				promise.complete();
 			}).onFailure(ex -> {
 				promise.fail(ex);
@@ -1484,9 +1286,6 @@ public abstract class PersonStepGenPageGen<DEV> extends PageLayout {
 				defaultPivotMinCountInit();
 				DEFAULT_MAP_LOCATIONInit();
 				DEFAULT_MAP_ZOOMInit();
-				defaultFieldListVarsInit();
-				defaultStatsVarsInit();
-				defaultPivotVarsInit();
 				listPersonStepInit();
 				statsInit();
 				facetCountsInit();
@@ -1516,7 +1315,7 @@ public abstract class PersonStepGenPageGen<DEV> extends PageLayout {
 	/////////////////
 
 	public void siteRequestPersonStepGenPage(SiteRequestEnUS siteRequest_) {
-			super.siteRequestPageLayout(siteRequest_);
+			super.siteRequestMapResultPage(siteRequest_);
 	}
 
 	public void siteRequestForClass(SiteRequestEnUS siteRequest_) {
@@ -1579,12 +1378,6 @@ public abstract class PersonStepGenPageGen<DEV> extends PageLayout {
 				return oPersonStepGenPage.DEFAULT_MAP_LOCATION;
 			case "DEFAULT_MAP_ZOOM":
 				return oPersonStepGenPage.DEFAULT_MAP_ZOOM;
-			case "defaultFieldListVars":
-				return oPersonStepGenPage.defaultFieldListVars;
-			case "defaultStatsVars":
-				return oPersonStepGenPage.defaultStatsVars;
-			case "defaultPivotVars":
-				return oPersonStepGenPage.defaultPivotVars;
 			case "listPersonStep":
 				return oPersonStepGenPage.listPersonStep;
 			case "stats":
@@ -1600,7 +1393,7 @@ public abstract class PersonStepGenPageGen<DEV> extends PageLayout {
 			case "pageUriPersonStep":
 				return oPersonStepGenPage.pageUriPersonStep;
 			default:
-				return super.obtainPageLayout(var);
+				return super.obtainMapResultPage(var);
 		}
 	}
 
@@ -1625,7 +1418,7 @@ public abstract class PersonStepGenPageGen<DEV> extends PageLayout {
 		PersonStepGenPage oPersonStepGenPage = (PersonStepGenPage)this;
 		switch(var) {
 			default:
-				return super.relatePageLayout(var, val);
+				return super.relateMapResultPage(var, val);
 		}
 	}
 
@@ -1664,12 +1457,6 @@ public abstract class PersonStepGenPageGen<DEV> extends PageLayout {
 			return PersonStepGenPage.staticSetDEFAULT_MAP_LOCATION(siteRequest_, o);
 		case "DEFAULT_MAP_ZOOM":
 			return PersonStepGenPage.staticSetDEFAULT_MAP_ZOOM(siteRequest_, o);
-		case "defaultFieldListVars":
-			return PersonStepGenPage.staticSetDefaultFieldListVars(siteRequest_, o);
-		case "defaultStatsVars":
-			return PersonStepGenPage.staticSetDefaultStatsVars(siteRequest_, o);
-		case "defaultPivotVars":
-			return PersonStepGenPage.staticSetDefaultPivotVars(siteRequest_, o);
 		case "personStepCount":
 			return PersonStepGenPage.staticSetPersonStepCount(siteRequest_, o);
 		case "id":
@@ -1677,7 +1464,7 @@ public abstract class PersonStepGenPageGen<DEV> extends PageLayout {
 		case "pageUriPersonStep":
 			return PersonStepGenPage.staticSetPageUriPersonStep(siteRequest_, o);
 			default:
-				return PageLayout.staticSetPageLayout(entityVar,  siteRequest_, o);
+				return MapResultPage.staticSetMapResultPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -1716,12 +1503,6 @@ public abstract class PersonStepGenPageGen<DEV> extends PageLayout {
 			return PersonStepGenPage.staticSearchDEFAULT_MAP_LOCATION(siteRequest_, (JsonObject)o);
 		case "DEFAULT_MAP_ZOOM":
 			return PersonStepGenPage.staticSearchDEFAULT_MAP_ZOOM(siteRequest_, (BigDecimal)o);
-		case "defaultFieldListVars":
-			return PersonStepGenPage.staticSearchDefaultFieldListVars(siteRequest_, (String)o);
-		case "defaultStatsVars":
-			return PersonStepGenPage.staticSearchDefaultStatsVars(siteRequest_, (String)o);
-		case "defaultPivotVars":
-			return PersonStepGenPage.staticSearchDefaultPivotVars(siteRequest_, (String)o);
 		case "personStepCount":
 			return PersonStepGenPage.staticSearchPersonStepCount(siteRequest_, (Integer)o);
 		case "id":
@@ -1729,7 +1510,7 @@ public abstract class PersonStepGenPageGen<DEV> extends PageLayout {
 		case "pageUriPersonStep":
 			return PersonStepGenPage.staticSearchPageUriPersonStep(siteRequest_, (String)o);
 			default:
-				return PageLayout.staticSearchPageLayout(entityVar,  siteRequest_, o);
+				return MapResultPage.staticSearchMapResultPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -1768,12 +1549,6 @@ public abstract class PersonStepGenPageGen<DEV> extends PageLayout {
 			return PersonStepGenPage.staticSearchStrDEFAULT_MAP_LOCATION(siteRequest_, (JsonObject)o);
 		case "DEFAULT_MAP_ZOOM":
 			return PersonStepGenPage.staticSearchStrDEFAULT_MAP_ZOOM(siteRequest_, (Double)o);
-		case "defaultFieldListVars":
-			return PersonStepGenPage.staticSearchStrDefaultFieldListVars(siteRequest_, (String)o);
-		case "defaultStatsVars":
-			return PersonStepGenPage.staticSearchStrDefaultStatsVars(siteRequest_, (String)o);
-		case "defaultPivotVars":
-			return PersonStepGenPage.staticSearchStrDefaultPivotVars(siteRequest_, (String)o);
 		case "personStepCount":
 			return PersonStepGenPage.staticSearchStrPersonStepCount(siteRequest_, (Integer)o);
 		case "id":
@@ -1781,7 +1556,7 @@ public abstract class PersonStepGenPageGen<DEV> extends PageLayout {
 		case "pageUriPersonStep":
 			return PersonStepGenPage.staticSearchStrPageUriPersonStep(siteRequest_, (String)o);
 			default:
-				return PageLayout.staticSearchStrPageLayout(entityVar,  siteRequest_, o);
+				return MapResultPage.staticSearchStrMapResultPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -1820,12 +1595,6 @@ public abstract class PersonStepGenPageGen<DEV> extends PageLayout {
 			return PersonStepGenPage.staticSearchFqDEFAULT_MAP_LOCATION(siteRequest_, o);
 		case "DEFAULT_MAP_ZOOM":
 			return PersonStepGenPage.staticSearchFqDEFAULT_MAP_ZOOM(siteRequest_, o);
-		case "defaultFieldListVars":
-			return PersonStepGenPage.staticSearchFqDefaultFieldListVars(siteRequest_, o);
-		case "defaultStatsVars":
-			return PersonStepGenPage.staticSearchFqDefaultStatsVars(siteRequest_, o);
-		case "defaultPivotVars":
-			return PersonStepGenPage.staticSearchFqDefaultPivotVars(siteRequest_, o);
 		case "personStepCount":
 			return PersonStepGenPage.staticSearchFqPersonStepCount(siteRequest_, o);
 		case "id":
@@ -1833,7 +1602,7 @@ public abstract class PersonStepGenPageGen<DEV> extends PageLayout {
 		case "pageUriPersonStep":
 			return PersonStepGenPage.staticSearchFqPageUriPersonStep(siteRequest_, o);
 			default:
-				return PageLayout.staticSearchFqPageLayout(entityVar,  siteRequest_, o);
+				return MapResultPage.staticSearchFqMapResultPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -1864,9 +1633,6 @@ public abstract class PersonStepGenPageGen<DEV> extends PageLayout {
 	public static final String VAR_defaultPivotMinCount = "defaultPivotMinCount";
 	public static final String VAR_DEFAULT_MAP_LOCATION = "DEFAULT_MAP_LOCATION";
 	public static final String VAR_DEFAULT_MAP_ZOOM = "DEFAULT_MAP_ZOOM";
-	public static final String VAR_defaultFieldListVars = "defaultFieldListVars";
-	public static final String VAR_defaultStatsVars = "defaultStatsVars";
-	public static final String VAR_defaultPivotVars = "defaultPivotVars";
 	public static final String VAR_listPersonStep = "listPersonStep";
 	public static final String VAR_stats = "stats";
 	public static final String VAR_facetCounts = "facetCounts";
@@ -1891,9 +1657,6 @@ public abstract class PersonStepGenPageGen<DEV> extends PageLayout {
 	public static final String DISPLAY_NAME_defaultPivotMinCount = "";
 	public static final String DISPLAY_NAME_DEFAULT_MAP_LOCATION = "";
 	public static final String DISPLAY_NAME_DEFAULT_MAP_ZOOM = "";
-	public static final String DISPLAY_NAME_defaultFieldListVars = "";
-	public static final String DISPLAY_NAME_defaultStatsVars = "";
-	public static final String DISPLAY_NAME_defaultPivotVars = "";
 	public static final String DISPLAY_NAME_listPersonStep = "";
 	public static final String DISPLAY_NAME_stats = "";
 	public static final String DISPLAY_NAME_facetCounts = "";
@@ -1939,12 +1702,6 @@ public abstract class PersonStepGenPageGen<DEV> extends PageLayout {
 			return DISPLAY_NAME_DEFAULT_MAP_LOCATION;
 		case VAR_DEFAULT_MAP_ZOOM:
 			return DISPLAY_NAME_DEFAULT_MAP_ZOOM;
-		case VAR_defaultFieldListVars:
-			return DISPLAY_NAME_defaultFieldListVars;
-		case VAR_defaultStatsVars:
-			return DISPLAY_NAME_defaultStatsVars;
-		case VAR_defaultPivotVars:
-			return DISPLAY_NAME_defaultPivotVars;
 		case VAR_listPersonStep:
 			return DISPLAY_NAME_listPersonStep;
 		case VAR_stats:
@@ -1960,7 +1717,7 @@ public abstract class PersonStepGenPageGen<DEV> extends PageLayout {
 		case VAR_pageUriPersonStep:
 			return DISPLAY_NAME_pageUriPersonStep;
 		default:
-			return PageLayout.displayNamePageLayout(var);
+			return MapResultPage.displayNameMapResultPage(var);
 		}
 	}
 }

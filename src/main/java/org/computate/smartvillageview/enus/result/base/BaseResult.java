@@ -137,6 +137,7 @@ public class BaseResult extends BaseResultGen<Object> {
 	 */
 	protected void _classCanonicalNames(List<String> l) { 
 		l.add(getClass().getCanonicalName());
+		l.add(BaseResult.class.getCanonicalName());
 	}
 
 	/**
@@ -229,13 +230,11 @@ public class BaseResult extends BaseResultGen<Object> {
 	 * Description: The full text search field in the search engine for this record while using autosuggest
 	 * DisplayName: text
 	 */
-	protected void _objectText(Wrap<String> w) { 
-		StringBuilder b = new StringBuilder();
+	protected void _objectText(List<String> l) { 
 		if(objectId != null)
-			b.append(" ").append(objectId);
+			l.add(objectId);
 		if(objectTitle != null)
-			b.append(" ").append(objectTitle);
-		w.o(b.toString());
+			l.add(objectTitle);
 	}
 
 	/**

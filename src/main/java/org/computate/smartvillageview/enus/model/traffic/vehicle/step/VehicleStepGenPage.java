@@ -1,6 +1,7 @@
 package org.computate.smartvillageview.enus.model.traffic.vehicle.step;
 
 import org.computate.smartvillageview.enus.page.PageLayout;
+import org.computate.smartvillageview.enus.result.map.MapResultPage;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.smartvillageview.enus.model.user.SiteUser;
 import java.io.IOException;
@@ -42,7 +43,7 @@ import java.time.ZoneId;
 /**
  * Translate: false
  **/
-public class VehicleStepGenPage extends VehicleStepGenPageGen<PageLayout> {
+public class VehicleStepGenPage extends VehicleStepGenPageGen<MapResultPage> {
 
 	/**
 	 * {@inheritDoc}
@@ -125,6 +126,7 @@ public class VehicleStepGenPage extends VehicleStepGenPageGen<PageLayout> {
 			w.o(new BigDecimal(s));
 	}
 
+	@Override
 	protected void _defaultFieldListVars(List<String> l) {
 		Optional.ofNullable(searchListVehicleStep_.getFields()).orElse(Arrays.asList()).forEach(varStored -> {
 			String varStored2 = varStored;
@@ -141,6 +143,7 @@ public class VehicleStepGenPage extends VehicleStepGenPageGen<PageLayout> {
 		});
 	}
 
+	@Override
 	protected void _defaultStatsVars(List<String> l) {
 		Optional.ofNullable(searchListVehicleStep_.getStatsFields()).orElse(Arrays.asList()).forEach(varIndexed -> {
 			String varIndexed2 = varIndexed;
@@ -157,6 +160,7 @@ public class VehicleStepGenPage extends VehicleStepGenPageGen<PageLayout> {
 		});
 	}
 
+	@Override
 	protected void _defaultPivotVars(List<String> l) {
 		Optional.ofNullable(searchListVehicleStep_.getFacetPivots()).orElse(Arrays.asList()).forEach(facetPivot -> {
 			String facetPivot2 = facetPivot;
