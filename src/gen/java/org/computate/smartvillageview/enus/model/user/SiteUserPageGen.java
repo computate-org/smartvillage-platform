@@ -3,7 +3,7 @@ package org.computate.smartvillageview.enus.model.user;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.smartvillageview.enus.model.base.BaseModel;
 import org.computate.vertx.api.ApiRequest;
-import org.computate.smartvillageview.enus.config.ConfigKeys;
+import org.computate.vertx.config.ComputateConfigKeys;
 import java.util.Optional;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
@@ -41,7 +41,7 @@ import io.vertx.core.json.JsonArray;
  * <ol>
  * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class SiteUserPageGen into the class SiteUserPage. 
  * </li>
- * <li>You can add a class comment "Api: true" if you wish to GET, POST, PATCH or PUT these SiteUserPage objects in a RESTful API. 
+ * <li>You can add a class comment <b>"Api: true"</b> if you wish to GET, POST, PATCH or PUT these SiteUserPage objects in a RESTful API. 
  * </li>
  * </ol>
  * <h1>About the SiteUserPage class and it's generated class SiteUserPageGen&lt;SiteUserGenPage&gt;: </h1>

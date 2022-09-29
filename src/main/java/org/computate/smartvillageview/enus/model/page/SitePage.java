@@ -5,8 +5,6 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 
 import javax.imageio.ImageIO;
 
@@ -14,10 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.computate.search.wrap.Wrap;
 import org.computate.smartvillageview.enus.config.ConfigKeys;
-import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.smartvillageview.enus.result.base.BaseResult;
-
-import io.vertx.core.Promise;
 
 /**
  * Api: true
@@ -57,14 +52,6 @@ public class SitePage extends SitePageGen<BaseResult> {
 
 	/**
 	 * {@inheritDoc}
-	 * Ignore: true
-	 * Description: The current request object
-	 */
-	protected void _siteRequest_(Wrap<SiteRequestEnUS> w) {
-	}
-
-	/**
-	 * {@inheritDoc}
 	 */
 	protected void _siteName(Wrap<String> w) {
 		w.o(siteRequest_.getConfig().getString(ConfigKeys.SITE_NAME));
@@ -96,15 +83,6 @@ public class SitePage extends SitePageGen<BaseResult> {
 	 */
 	protected void _siteBaseUrl(Wrap<String> w) {
 		w.o(siteRequest_.getConfig().getString(ConfigKeys.SITE_BASE_URL));
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * Ignore: true
-	 * Description: An asynchronous method for searching for a computer related to this message
-	 */
-	protected void _promiseBefore(Promise<Void> promise) {
-		promise.complete();
 	}
 
 	/**
@@ -176,46 +154,6 @@ public class SitePage extends SitePageGen<BaseResult> {
 	 * Description: The 2nd header of this page. 
 	 */
 	protected void _h2(Wrap<String> w) {
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * DocValues: true
-	 * InheritPrimaryKey: true
-	 * Persist: true
-	 * Description: An optional inherited primary key from a legacy system for this object in the database
-	 */
-	protected void _inheritPk(Wrap<String> w) {}
-
-	/**
-	 * {@inheritDoc}
-	 * DocValues: true
-	 * Persist: true
-	 * Modify: false
-	 * VarCreated: true
-	 * HtmlRow: 1
-	 * HtmlCell: 2
-	 * HtmlColumn: 1
-	 * Facet: true
-	 * DisplayName.enUS: created
-	 * FormatHtm: MMM d, yyyy h:mm:ss a
-	 * Description: A created timestamp for this record in the database
-	 */
-	protected void _created(Wrap<ZonedDateTime> w) {
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * DocValues: true
-	 * Modify: false
-	 * VarModified: true
-	 * HtmlRow: 1
-	 * HtmlCell: 3
-	 * DisplayName.enUS: modified
-	 * Description: A modified timestamp for this record in the database
-	 */
-	protected void _modified(Wrap<ZonedDateTime> w) {
-		w.o(ZonedDateTime.now(ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))));
 	}
 
 	/**

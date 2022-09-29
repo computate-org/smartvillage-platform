@@ -1,7 +1,7 @@
 ---
 pageId: application-overview
 uri: "/en-us/{{ pageId }}"
-h1: What is {{ page.siteDisplayName }}? 
+h1: "{{ page.siteDisplayName }} application overview"
 h2: How Red Hat and Boston University are working together to develop software for eco-smart cities and well-being. 
 created: "2022-07-05"
 author:

@@ -3,7 +3,7 @@ package org.computate.smartvillageview.enus.model.page;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.smartvillageview.enus.model.base.BaseModel;
 import org.computate.vertx.api.ApiRequest;
-import org.computate.smartvillageview.enus.config.ConfigKeys;
+import org.computate.vertx.config.ComputateConfigKeys;
 import java.util.Optional;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
@@ -32,19 +32,7 @@ import java.math.RoundingMode;
 import java.util.Map;
 import org.computate.smartvillageview.enus.result.base.BaseResult;
 import java.lang.String;
-import java.lang.Void;
 import java.lang.Integer;
-import java.time.ZonedDateTime;
-import java.time.ZoneId;
-import java.time.ZoneOffset;
-import java.time.LocalDateTime;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-import java.util.Date;
-import java.time.format.DateTimeFormatter;
-import java.time.Instant;
-import java.util.Locale;
-import java.time.OffsetDateTime;
 import org.computate.search.wrap.Wrap;
 import io.vertx.core.Promise;
 import io.vertx.core.Future;
@@ -158,44 +146,6 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	public static final String SitePage_Color = "2017-navy-peony";
 	public static final String SitePage_IconGroup = "duotone";
 	public static final String SitePage_IconName = "newspaper";
-
-	//////////////////
-	// siteRequest_ //
-	//////////////////
-
-	/**	 The entity siteRequest_
-	 *	 is defined as null before being initialized. 
-	 */
-	@JsonIgnore
-	@JsonInclude(Include.NON_NULL)
-	protected SiteRequestEnUS siteRequest_;
-
-	/**	<br> The entity siteRequest_
-	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.page.SitePage&fq=entiteVar_enUS_indexed_string:siteRequest_">Find the entity siteRequest_ in Solr</a>
-	 * <br>
-	 * @param w is for wrapping a value to assign to this entity during initialization. 
-	 **/
-	protected abstract void _siteRequest_(Wrap<SiteRequestEnUS> w);
-
-	public SiteRequestEnUS getSiteRequest_() {
-		return siteRequest_;
-	}
-
-	public void setSiteRequest_(SiteRequestEnUS siteRequest_) {
-		this.siteRequest_ = siteRequest_;
-	}
-	public static SiteRequestEnUS staticSetSiteRequest_(SiteRequestEnUS siteRequest_, String o) {
-		return null;
-	}
-	protected SitePage siteRequest_Init() {
-		Wrap<SiteRequestEnUS> siteRequest_Wrap = new Wrap<SiteRequestEnUS>().var("siteRequest_");
-		if(siteRequest_ == null) {
-			_siteRequest_(siteRequest_Wrap);
-			setSiteRequest_(siteRequest_Wrap.o);
-		}
-		return (SitePage)this;
-	}
 
 	//////////////
 	// siteName //
@@ -440,48 +390,6 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 
 	public static String staticSearchFqSiteBaseUrl(SiteRequestEnUS siteRequest_, String o) {
 		return SitePage.staticSearchStrSiteBaseUrl(siteRequest_, SitePage.staticSearchSiteBaseUrl(siteRequest_, SitePage.staticSetSiteBaseUrl(siteRequest_, o)));
-	}
-
-	///////////////////
-	// promiseBefore //
-	///////////////////
-
-	/**	 The entity promiseBefore
-	 *	 is defined as null before being initialized. 
-	 */
-	@JsonIgnore
-	@JsonInclude(Include.NON_NULL)
-	protected Void promiseBefore;
-
-	/**	<br> The entity promiseBefore
-	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.page.SitePage&fq=entiteVar_enUS_indexed_string:promiseBefore">Find the entity promiseBefore in Solr</a>
-	 * <br>
-	 * @param promise is for wrapping a value to assign to this entity during initialization. 
-	 **/
-	protected abstract void _promiseBefore(Promise<Void> promise);
-
-	public Void getPromiseBefore() {
-		return promiseBefore;
-	}
-
-	public void setPromiseBefore(Void promiseBefore) {
-		this.promiseBefore = promiseBefore;
-	}
-	public static Void staticSetPromiseBefore(SiteRequestEnUS siteRequest_, String o) {
-		return null;
-	}
-	protected Future<Void> promiseBeforePromise() {
-		Promise<Void> promise = Promise.promise();
-		Promise<Void> promise2 = Promise.promise();
-		_promiseBefore(promise2);
-		promise2.future().onSuccess(o -> {
-			setPromiseBefore(o);
-			promise.complete(o);
-		}).onFailure(ex -> {
-			promise.fail(ex);
-		});
-		return promise.future();
 	}
 
 	///////////////
@@ -818,209 +726,6 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 		return h2;
 	}
 
-	///////////////
-	// inheritPk //
-	///////////////
-
-	/**	 The entity inheritPk
-	 *	 is defined as null before being initialized. 
-	 */
-	@JsonProperty
-	@JsonInclude(Include.NON_NULL)
-	protected String inheritPk;
-
-	/**	<br> The entity inheritPk
-	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.page.SitePage&fq=entiteVar_enUS_indexed_string:inheritPk">Find the entity inheritPk in Solr</a>
-	 * <br>
-	 * @param w is for wrapping a value to assign to this entity during initialization. 
-	 **/
-	protected abstract void _inheritPk(Wrap<String> w);
-
-	public String getInheritPk() {
-		return inheritPk;
-	}
-	public void setInheritPk(String o) {
-		this.inheritPk = SitePage.staticSetInheritPk(siteRequest_, o);
-	}
-	public static String staticSetInheritPk(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-	protected SitePage inheritPkInit() {
-		Wrap<String> inheritPkWrap = new Wrap<String>().var("inheritPk");
-		if(inheritPk == null) {
-			_inheritPk(inheritPkWrap);
-			setInheritPk(inheritPkWrap.o);
-		}
-		return (SitePage)this;
-	}
-
-	public static String staticSearchInheritPk(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-
-	public static String staticSearchStrInheritPk(SiteRequestEnUS siteRequest_, String o) {
-		return o == null ? null : o.toString();
-	}
-
-	public static String staticSearchFqInheritPk(SiteRequestEnUS siteRequest_, String o) {
-		return SitePage.staticSearchStrInheritPk(siteRequest_, SitePage.staticSearchInheritPk(siteRequest_, SitePage.staticSetInheritPk(siteRequest_, o)));
-	}
-
-	public String sqlInheritPk() {
-		return inheritPk;
-	}
-
-	/////////////
-	// created //
-	/////////////
-
-	/**	 The entity created
-	 *	 is defined as null before being initialized. 
-	 */
-	@JsonProperty
-	@JsonDeserialize(using = ComputateZonedDateTimeDeserializer.class)
-	@JsonSerialize(using = ComputateZonedDateTimeSerializer.class)
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSSV'['VV']'")
-	@JsonInclude(Include.NON_NULL)
-	protected ZonedDateTime created;
-
-	/**	<br> The entity created
-	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.page.SitePage&fq=entiteVar_enUS_indexed_string:created">Find the entity created in Solr</a>
-	 * <br>
-	 * @param w is for wrapping a value to assign to this entity during initialization. 
-	 **/
-	protected abstract void _created(Wrap<ZonedDateTime> w);
-
-	public ZonedDateTime getCreated() {
-		return created;
-	}
-
-	public void setCreated(ZonedDateTime created) {
-		this.created = created;
-	}
-	@JsonIgnore
-	public void setCreated(Instant o) {
-		this.created = o == null ? null : ZonedDateTime.from(o).truncatedTo(ChronoUnit.MILLIS);
-	}
-	/** Example: 2011-12-03T10:15:30+01:00 **/
-	@JsonIgnore
-	public void setCreated(String o) {
-		this.created = SitePage.staticSetCreated(siteRequest_, o);
-	}
-	public static ZonedDateTime staticSetCreated(SiteRequestEnUS siteRequest_, String o) {
-		if(StringUtils.endsWith(o, "]"))
-			return o == null ? null : ZonedDateTime.parse(o, ComputateZonedDateTimeSerializer.ZONED_DATE_TIME_FORMATTER);
-		else if(StringUtils.endsWith(o, "Z"))
-			return o == null ? null : Instant.parse(o).atZone(Optional.ofNullable(siteRequest_).map(r -> r.getConfig()).map(config -> config.getString(ConfigKeys.SITE_ZONE)).map(z -> ZoneId.of(z)).orElse(ZoneId.of("UTC"))).truncatedTo(ChronoUnit.MILLIS);
-		else if(StringUtils.contains(o, "T"))
-			return o == null ? null : ZonedDateTime.parse(o, DateTimeFormatter.ISO_DATE_TIME).truncatedTo(ChronoUnit.MILLIS);
-		else
-			return o == null ? null : LocalDate.parse(o, DateTimeFormatter.ISO_DATE).atStartOfDay(ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
-	}
-	@JsonIgnore
-	public void setCreated(Date o) {
-		this.created = o == null ? null : ZonedDateTime.ofInstant(o.toInstant(), ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
-	}
-	protected SitePage createdInit() {
-		Wrap<ZonedDateTime> createdWrap = new Wrap<ZonedDateTime>().var("created");
-		if(created == null) {
-			_created(createdWrap);
-			setCreated(createdWrap.o);
-		}
-		return (SitePage)this;
-	}
-
-	public static Date staticSearchCreated(SiteRequestEnUS siteRequest_, ZonedDateTime o) {
-		return o == null ? null : Date.from(o.toInstant());
-	}
-
-	public static String staticSearchStrCreated(SiteRequestEnUS siteRequest_, Date o) {
-		return "\"" + DateTimeFormatter.ISO_DATE_TIME.format(o.toInstant().atOffset(ZoneOffset.UTC)) + "\"";
-	}
-
-	public static String staticSearchFqCreated(SiteRequestEnUS siteRequest_, String o) {
-		return SitePage.staticSearchStrCreated(siteRequest_, SitePage.staticSearchCreated(siteRequest_, SitePage.staticSetCreated(siteRequest_, o)));
-	}
-
-	public OffsetDateTime sqlCreated() {
-		return created == null ? null : created.toOffsetDateTime();
-	}
-
-	//////////////
-	// modified //
-	//////////////
-
-	/**	 The entity modified
-	 *	 is defined as null before being initialized. 
-	 */
-	@JsonProperty
-	@JsonDeserialize(using = ComputateZonedDateTimeDeserializer.class)
-	@JsonSerialize(using = ComputateZonedDateTimeSerializer.class)
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSSV'['VV']'")
-	@JsonInclude(Include.NON_NULL)
-	protected ZonedDateTime modified;
-
-	/**	<br> The entity modified
-	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.page.SitePage&fq=entiteVar_enUS_indexed_string:modified">Find the entity modified in Solr</a>
-	 * <br>
-	 * @param w is for wrapping a value to assign to this entity during initialization. 
-	 **/
-	protected abstract void _modified(Wrap<ZonedDateTime> w);
-
-	public ZonedDateTime getModified() {
-		return modified;
-	}
-
-	public void setModified(ZonedDateTime modified) {
-		this.modified = modified;
-	}
-	@JsonIgnore
-	public void setModified(Instant o) {
-		this.modified = o == null ? null : ZonedDateTime.from(o).truncatedTo(ChronoUnit.MILLIS);
-	}
-	/** Example: 2011-12-03T10:15:30+01:00 **/
-	@JsonIgnore
-	public void setModified(String o) {
-		this.modified = SitePage.staticSetModified(siteRequest_, o);
-	}
-	public static ZonedDateTime staticSetModified(SiteRequestEnUS siteRequest_, String o) {
-		if(StringUtils.endsWith(o, "]"))
-			return o == null ? null : ZonedDateTime.parse(o, ComputateZonedDateTimeSerializer.ZONED_DATE_TIME_FORMATTER);
-		else if(StringUtils.endsWith(o, "Z"))
-			return o == null ? null : Instant.parse(o).atZone(Optional.ofNullable(siteRequest_).map(r -> r.getConfig()).map(config -> config.getString(ConfigKeys.SITE_ZONE)).map(z -> ZoneId.of(z)).orElse(ZoneId.of("UTC"))).truncatedTo(ChronoUnit.MILLIS);
-		else if(StringUtils.contains(o, "T"))
-			return o == null ? null : ZonedDateTime.parse(o, DateTimeFormatter.ISO_DATE_TIME).truncatedTo(ChronoUnit.MILLIS);
-		else
-			return o == null ? null : LocalDate.parse(o, DateTimeFormatter.ISO_DATE).atStartOfDay(ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
-	}
-	@JsonIgnore
-	public void setModified(Date o) {
-		this.modified = o == null ? null : ZonedDateTime.ofInstant(o.toInstant(), ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
-	}
-	protected SitePage modifiedInit() {
-		Wrap<ZonedDateTime> modifiedWrap = new Wrap<ZonedDateTime>().var("modified");
-		if(modified == null) {
-			_modified(modifiedWrap);
-			setModified(modifiedWrap.o);
-		}
-		return (SitePage)this;
-	}
-
-	public static Date staticSearchModified(SiteRequestEnUS siteRequest_, ZonedDateTime o) {
-		return o == null ? null : Date.from(o.toInstant());
-	}
-
-	public static String staticSearchStrModified(SiteRequestEnUS siteRequest_, Date o) {
-		return "\"" + DateTimeFormatter.ISO_DATE_TIME.format(o.toInstant().atOffset(ZoneOffset.UTC)) + "\"";
-	}
-
-	public static String staticSearchFqModified(SiteRequestEnUS siteRequest_, String o) {
-		return SitePage.staticSearchStrModified(siteRequest_, SitePage.staticSearchModified(siteRequest_, SitePage.staticSetModified(siteRequest_, o)));
-	}
-
 	////////////
 	// author //
 	////////////
@@ -1319,37 +1024,17 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 		Future.future(a -> a.complete()).compose(a -> {
 			Promise<Void> promise2 = Promise.promise();
 			try {
-				siteRequest_Init();
 				siteNameInit();
 				siteDisplayNameInit();
 				staticBaseUrlInit();
 				staticPathInit();
 				siteBaseUrlInit();
-				promise2.complete();
-			} catch(Exception ex) {
-				promise2.fail(ex);
-			}
-			return promise2.future();
-		}).compose(a -> {
-			Promise<Void> promise2 = Promise.promise();
-			promiseBeforePromise().onSuccess(promiseBefore -> {
-				promise2.complete();
-			}).onFailure(ex -> {
-				promise2.fail(ex);
-			});
-			return promise2.future();
-		}).compose(a -> {
-			Promise<Void> promise2 = Promise.promise();
-			try {
 				courseNumInit();
 				lessonNumInit();
 				uriInit();
 				pageIdInit();
 				h1Init();
 				h2Init();
-				inheritPkInit();
-				createdInit();
-				modifiedInit();
 				authorInit();
 				pageImageUriInit();
 				pageImageWidthInit();
@@ -1408,8 +1093,6 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	public Object obtainSitePage(String var) {
 		SitePage oSitePage = (SitePage)this;
 		switch(var) {
-			case "siteRequest_":
-				return oSitePage.siteRequest_;
 			case "siteName":
 				return oSitePage.siteName;
 			case "siteDisplayName":
@@ -1420,8 +1103,6 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 				return oSitePage.staticPath;
 			case "siteBaseUrl":
 				return oSitePage.siteBaseUrl;
-			case "promiseBefore":
-				return oSitePage.promiseBefore;
 			case "courseNum":
 				return oSitePage.courseNum;
 			case "lessonNum":
@@ -1434,12 +1115,6 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 				return oSitePage.h1;
 			case "h2":
 				return oSitePage.h2;
-			case "inheritPk":
-				return oSitePage.inheritPk;
-			case "created":
-				return oSitePage.created;
-			case "modified":
-				return oSitePage.modified;
 			case "author":
 				return oSitePage.author;
 			case "pageImageUri":
@@ -1511,12 +1186,6 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 			return SitePage.staticSetH1(siteRequest_, o);
 		case "h2":
 			return SitePage.staticSetH2(siteRequest_, o);
-		case "inheritPk":
-			return SitePage.staticSetInheritPk(siteRequest_, o);
-		case "created":
-			return SitePage.staticSetCreated(siteRequest_, o);
-		case "modified":
-			return SitePage.staticSetModified(siteRequest_, o);
 		case "author":
 			return SitePage.staticSetAuthor(siteRequest_, o);
 		case "pageImageUri":
@@ -1563,12 +1232,6 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 			return SitePage.staticSearchH1(siteRequest_, (String)o);
 		case "h2":
 			return SitePage.staticSearchH2(siteRequest_, (String)o);
-		case "inheritPk":
-			return SitePage.staticSearchInheritPk(siteRequest_, (String)o);
-		case "created":
-			return SitePage.staticSearchCreated(siteRequest_, (ZonedDateTime)o);
-		case "modified":
-			return SitePage.staticSearchModified(siteRequest_, (ZonedDateTime)o);
 		case "author":
 			return SitePage.staticSearchAuthor(siteRequest_, (String)o);
 		case "pageImageUri":
@@ -1615,12 +1278,6 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 			return SitePage.staticSearchStrH1(siteRequest_, (String)o);
 		case "h2":
 			return SitePage.staticSearchStrH2(siteRequest_, (String)o);
-		case "inheritPk":
-			return SitePage.staticSearchStrInheritPk(siteRequest_, (String)o);
-		case "created":
-			return SitePage.staticSearchStrCreated(siteRequest_, (Date)o);
-		case "modified":
-			return SitePage.staticSearchStrModified(siteRequest_, (Date)o);
 		case "author":
 			return SitePage.staticSearchStrAuthor(siteRequest_, (String)o);
 		case "pageImageUri":
@@ -1667,12 +1324,6 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 			return SitePage.staticSearchFqH1(siteRequest_, o);
 		case "h2":
 			return SitePage.staticSearchFqH2(siteRequest_, o);
-		case "inheritPk":
-			return SitePage.staticSearchFqInheritPk(siteRequest_, o);
-		case "created":
-			return SitePage.staticSearchFqCreated(siteRequest_, o);
-		case "modified":
-			return SitePage.staticSearchFqModified(siteRequest_, o);
 		case "author":
 			return SitePage.staticSearchFqAuthor(siteRequest_, o);
 		case "pageImageUri":
@@ -1743,20 +1394,6 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 					setH2((String)val);
 				saves.add("h2");
 				return val;
-			case "inheritpk":
-				if(val instanceof String)
-					setInheritPk((String)val);
-				saves.add("inheritPk");
-				return val;
-			case "created":
-				if(val instanceof ZonedDateTime)
-					setCreated((ZonedDateTime)val);
-				else if(val instanceof String)
-					setCreated((String)val);
-				else if(val instanceof OffsetDateTime)
-					setCreated(((OffsetDateTime)val).atZoneSameInstant(ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))));
-				saves.add("created");
-				return val;
 			case "author":
 				if(val instanceof String)
 					setAuthor((String)val);
@@ -1807,15 +1444,6 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 		if(h2 != null) {
 			doc.put("h2_docvalues_string", h2);
 		}
-		if(inheritPk != null) {
-			doc.put("inheritPk_docvalues_string", inheritPk);
-		}
-		if(created != null) {
-			doc.put("created_docvalues_date", DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(ZonedDateTime.ofInstant(created.toInstant(), ZoneId.of("UTC"))));
-		}
-		if(modified != null) {
-			doc.put("modified_docvalues_date", DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(ZonedDateTime.ofInstant(modified.toInstant(), ZoneId.of("UTC"))));
-		}
 		if(author != null) {
 			doc.put("author_docvalues_string", author);
 		}
@@ -1840,12 +1468,6 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 				return "h1_docvalues_string";
 			case "h2":
 				return "h2_docvalues_string";
-			case "inheritPk":
-				return "inheritPk_docvalues_string";
-			case "created":
-				return "created_docvalues_date";
-			case "modified":
-				return "modified_docvalues_date";
 			case "author":
 				return "author_docvalues_string";
 			case "pageImageUri":
@@ -1869,12 +1491,6 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 				return "h1_docvalues_string";
 			case "h2":
 				return "h2_docvalues_string";
-			case "inheritPk":
-				return "inheritPk_docvalues_string";
-			case "created":
-				return "created_docvalues_date";
-			case "modified":
-				return "modified_docvalues_date";
 			case "author":
 				return "author_docvalues_string";
 			case "pageImageUri":
@@ -1898,12 +1514,6 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 				return "h1";
 			case "h2_docvalues_string":
 				return "h2";
-			case "inheritPk_docvalues_string":
-				return "inheritPk";
-			case "created_docvalues_date":
-				return "created";
-			case "modified_docvalues_date":
-				return "modified";
 			case "author_docvalues_string":
 				return "author";
 			case "pageImageUri_docvalues_string":
@@ -1943,9 +1553,6 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 		oSitePage.setPageId(Optional.ofNullable(doc.get("pageId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSitePage.setH1(Optional.ofNullable(doc.get("h1_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSitePage.setH2(Optional.ofNullable(doc.get("h2_docvalues_string")).map(v -> v.toString()).orElse(null));
-		oSitePage.setInheritPk(Optional.ofNullable(doc.get("inheritPk_docvalues_string")).map(v -> v.toString()).orElse(null));
-		oSitePage.setCreated(Optional.ofNullable(doc.get("created_docvalues_date")).map(v -> v.toString()).orElse(null));
-		oSitePage.setModified(Optional.ofNullable(doc.get("modified_docvalues_date")).map(v -> v.toString()).orElse(null));
 		oSitePage.setAuthor(Optional.ofNullable(doc.get("author_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSitePage.setPageImageUri(Optional.ofNullable(doc.get("pageImageUri_docvalues_string")).map(v -> v.toString()).orElse(null));
 
@@ -1973,12 +1580,6 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 				apiRequest.addVars("h1");
 			if(!Objects.equals(h2, original.getH2()))
 				apiRequest.addVars("h2");
-			if(!Objects.equals(inheritPk, original.getInheritPk()))
-				apiRequest.addVars("inheritPk");
-			if(!Objects.equals(created, original.getCreated()))
-				apiRequest.addVars("created");
-			if(!Objects.equals(modified, original.getModified()))
-				apiRequest.addVars("modified");
 			if(!Objects.equals(author, original.getAuthor()))
 				apiRequest.addVars("author");
 			if(!Objects.equals(pageImageUri, original.getPageImageUri()))
@@ -2000,31 +1601,23 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 		sb.append(Optional.ofNullable(pageId).map(v -> "pageId: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(h1).map(v -> "h1: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(h2).map(v -> "h2: \"" + v + "\"\n" ).orElse(""));
-		sb.append(Optional.ofNullable(inheritPk).map(v -> "inheritPk: \"" + v + "\"\n" ).orElse(""));
-		sb.append(Optional.ofNullable(created).map(v -> "created: " + v + "\n").orElse(""));
-		sb.append(Optional.ofNullable(modified).map(v -> "modified: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(author).map(v -> "author: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(pageImageUri).map(v -> "pageImageUri: \"" + v + "\"\n" ).orElse(""));
 		return sb.toString();
 	}
 
 	public static final String CLASS_SIMPLE_NAME = "SitePage";
-	public static final String VAR_siteRequest_ = "siteRequest_";
 	public static final String VAR_siteName = "siteName";
 	public static final String VAR_siteDisplayName = "siteDisplayName";
 	public static final String VAR_staticBaseUrl = "staticBaseUrl";
 	public static final String VAR_staticPath = "staticPath";
 	public static final String VAR_siteBaseUrl = "siteBaseUrl";
-	public static final String VAR_promiseBefore = "promiseBefore";
 	public static final String VAR_courseNum = "courseNum";
 	public static final String VAR_lessonNum = "lessonNum";
 	public static final String VAR_uri = "uri";
 	public static final String VAR_pageId = "pageId";
 	public static final String VAR_h1 = "h1";
 	public static final String VAR_h2 = "h2";
-	public static final String VAR_inheritPk = "inheritPk";
-	public static final String VAR_created = "created";
-	public static final String VAR_modified = "modified";
 	public static final String VAR_author = "author";
 	public static final String VAR_pageImageUri = "pageImageUri";
 	public static final String VAR_pageImageWidth = "pageImageWidth";
@@ -2047,7 +1640,6 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 		vars.add(VAR_lessonNum);
 		vars.add(VAR_uri);
 		vars.add(VAR_pageId);
-		vars.add(VAR_created);
 		vars.add(VAR_author);
 		vars.add(VAR_pageImageUri);
 		BaseResult.varsFqBaseResult(vars);
@@ -2060,27 +1652,21 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	public static List<String> varsRangeSitePage(List<String> vars) {
 		vars.add(VAR_courseNum);
 		vars.add(VAR_lessonNum);
-		vars.add(VAR_created);
 		BaseResult.varsRangeBaseResult(vars);
 		return vars;
 	}
 
-	public static final String DISPLAY_NAME_siteRequest_ = "";
 	public static final String DISPLAY_NAME_siteName = "";
 	public static final String DISPLAY_NAME_siteDisplayName = "";
 	public static final String DISPLAY_NAME_staticBaseUrl = "";
 	public static final String DISPLAY_NAME_staticPath = "";
 	public static final String DISPLAY_NAME_siteBaseUrl = "";
-	public static final String DISPLAY_NAME_promiseBefore = "";
 	public static final String DISPLAY_NAME_courseNum = "Course Number";
 	public static final String DISPLAY_NAME_lessonNum = "Lesson Number";
 	public static final String DISPLAY_NAME_uri = "URI";
 	public static final String DISPLAY_NAME_pageId = "Page ID";
 	public static final String DISPLAY_NAME_h1 = "header 1";
 	public static final String DISPLAY_NAME_h2 = "header 2";
-	public static final String DISPLAY_NAME_inheritPk = "";
-	public static final String DISPLAY_NAME_created = "created";
-	public static final String DISPLAY_NAME_modified = "modified";
 	public static final String DISPLAY_NAME_author = "author";
 	public static final String DISPLAY_NAME_pageImageUri = "imageUri";
 	public static final String DISPLAY_NAME_pageImageWidth = "";
@@ -2092,8 +1678,6 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	}
 	public static String displayNameSitePage(String var) {
 		switch(var) {
-		case VAR_siteRequest_:
-			return DISPLAY_NAME_siteRequest_;
 		case VAR_siteName:
 			return DISPLAY_NAME_siteName;
 		case VAR_siteDisplayName:
@@ -2104,8 +1688,6 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 			return DISPLAY_NAME_staticPath;
 		case VAR_siteBaseUrl:
 			return DISPLAY_NAME_siteBaseUrl;
-		case VAR_promiseBefore:
-			return DISPLAY_NAME_promiseBefore;
 		case VAR_courseNum:
 			return DISPLAY_NAME_courseNum;
 		case VAR_lessonNum:
@@ -2118,12 +1700,6 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 			return DISPLAY_NAME_h1;
 		case VAR_h2:
 			return DISPLAY_NAME_h2;
-		case VAR_inheritPk:
-			return DISPLAY_NAME_inheritPk;
-		case VAR_created:
-			return DISPLAY_NAME_created;
-		case VAR_modified:
-			return DISPLAY_NAME_modified;
 		case VAR_author:
 			return DISPLAY_NAME_author;
 		case VAR_pageImageUri:
@@ -2141,10 +1717,6 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 
 	public static String descriptionSitePage(String var) {
 		switch(var) {
-		case VAR_siteRequest_:
-			return "The current request object";
-		case VAR_promiseBefore:
-			return "An asynchronous method for searching for a computer related to this message";
 		case VAR_courseNum:
 			return "The course number for this page. ";
 		case VAR_lessonNum:
@@ -2157,12 +1729,6 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 			return "The 1st header of this page. ";
 		case VAR_h2:
 			return "The 2nd header of this page. ";
-		case VAR_inheritPk:
-			return "An optional inherited primary key from a legacy system for this object in the database";
-		case VAR_created:
-			return "A created timestamp for this record in the database";
-		case VAR_modified:
-			return "A modified timestamp for this record in the database";
 		case VAR_author:
 			return "The author";
 		case VAR_pageImageUri:
@@ -2180,8 +1746,6 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 
 	public static String classSimpleNameSitePage(String var) {
 		switch(var) {
-		case VAR_siteRequest_:
-			return "SiteRequestEnUS";
 		case VAR_siteName:
 			return "String";
 		case VAR_siteDisplayName:
@@ -2192,8 +1756,6 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 			return "String";
 		case VAR_siteBaseUrl:
 			return "String";
-		case VAR_promiseBefore:
-			return "Void";
 		case VAR_courseNum:
 			return "Integer";
 		case VAR_lessonNum:
@@ -2206,12 +1768,6 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 			return "String";
 		case VAR_h2:
 			return "String";
-		case VAR_inheritPk:
-			return "String";
-		case VAR_created:
-			return "ZonedDateTime";
-		case VAR_modified:
-			return "ZonedDateTime";
 		case VAR_author:
 			return "String";
 		case VAR_pageImageUri:
@@ -2231,8 +1787,6 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 		switch(var) {
 		case VAR_uri:
 			return 4;
-		case VAR_created:
-			return 1;
 			default:
 				return BaseResult.htmlColumnBaseResult(var);
 		}
@@ -2244,10 +1798,6 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 			return 3;
 		case VAR_pageId:
 			return 3;
-		case VAR_created:
-			return 1;
-		case VAR_modified:
-			return 1;
 		case VAR_author:
 			return 3;
 		case VAR_pageImageUri:
@@ -2263,10 +1813,6 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 			return 2;
 		case VAR_pageId:
 			return 1;
-		case VAR_created:
-			return 2;
-		case VAR_modified:
-			return 3;
 		case VAR_author:
 			return 3;
 		case VAR_pageImageUri:

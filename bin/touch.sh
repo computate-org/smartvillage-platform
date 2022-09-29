@@ -6,6 +6,8 @@ touch ~/.local/src/smart-village-view/src/main/java/org/computate/smartvillagevi
 touch ~/.local/src/smart-village-view/src/main/java/org/computate/smartvillageview/enus/vertx/MainVerticle.java
 touch ~/.local/src/smart-village-view/src/main/java/org/computate/smartvillageview/enus/vertx/WorkerVerticle.java
 touch ~/.local/src/smart-village-view/src/main/java/org/computate/smartvillageview/enus/model/base/BaseModel.java
+touch ~/.local/src/smart-village-view/src/main/java/org/computate/smartvillageview/enus/result/base/BaseResult.java
+touch ~/.local/src/smart-village-view/src/main/java/org/computate/smartvillageview/enus/result/map/MapResult.java
 touch ~/.local/src/smart-village-view/src/main/java/org/computate/smartvillageview/enus/model/user/SiteUser.java
 touch ~/.local/src/smart-village-view/src/main/java/org/computate/smartvillageview/enus/model/page/SitePage.java
 touch ~/.local/src/smart-village-view/src/main/java/org/computate/smartvillageview/enus/model/htm/SiteHtm.java

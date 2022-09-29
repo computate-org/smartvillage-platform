@@ -87,7 +87,7 @@ htmBody:
                     a:
                       class: fa-solid fa-signal-stream padding-right-quarter-em
                   - e: span
-                    text: Can {{ page.siteDisplayName }} read live data from IOT nodes? 
+                    text: Creating a global open research platform
               - e: h4
                 a:
                   class: ""
@@ -96,7 +96,14 @@ htmBody:
                     a:
                       class: fa-solid fa-reel padding-right-quarter-em
                   - e: span
-                    text: Live sensor data is imported on a schedule to understand current conditions. 
+                    text: To better understand what socially sustainability entails with data from a real life village
+              - e: p
+                text: |
+                  Red Hat Global Social Innovation Program is partnering with Boston University and Smarta Byar 
+                  in order to collaborate on creating a global and open research platform allowing researchers 
+                  to study what social sustainability means by using a digital twin of Veberöd, Sweden as the test village, supported by  Smarta Byar. 
+                  The goal of this collaboration is to build the open source technological infrastructure so that researchers can collaborate on this platform effectively 
+                  to study mobility, public health, sustainability among other study areas to ultimately help define better the link between well being and eco-smart cities.
           - e: div
             a:
               class: w3-padding 
@@ -109,7 +116,7 @@ htmBody:
                     a:
                       class: fa-solid fa-globe padding-right-quarter-em
                   - e: span
-                    text: Can {{ page.siteDisplayName }} simulate data on a map? 
+                    text: Current smart services in Veberöd
               - e: h4
                 a:
                   class: ""
@@ -118,7 +125,43 @@ htmBody:
                     a:
                       class: fa-solid fa-map-location-dot padding-right-quarter-em
                   - e: span
-                    text: Traffic data can be simulated in a village to study changing conditions. 
+                    text: Veberöd led by Smarta Byar already enjoys the benefits of several IoT based solutions
+              - e: ul
+                in:
+                  - e: li
+                    text: |
+                      A digital twin of the village, for easy visualisation created from thousands of drone pictures and implemented through a gaming software by the University of Lund. 
+                  - e: li
+                    text: |
+                      Middleware provided by Sensative through Yggio, a digitalization management system. 
+                  - e: li
+                    in:
+                      - e: p
+                        text: |
+                          Some of their already implemented use cases are: 
+                      - e: ul
+                        in:
+                          - e: li
+                            text: |
+                              monitoring cattle water supply, for agricultural benefits
+                          - e: li
+                            text: |
+                              barbecue usage, to promote social engagement
+                          - e: li
+                            text: |
+                              bus shelter temperature monitoring, to protect vulnerable passengers
+                          - e: li
+                            text: |
+                              GPS bike tracking, to reduce thefts, and aid recovery of stolen bikes
+                          - e: li
+                            text: |
+                              pre-school security, for child safety
+                          - e: li
+                            text: |
+                              water quality monitoring, to benefit human health
+                          - e: li
+                            text: |
+                              traffic and noise monitoring, to benefit human health and safety
           - e: div
             a:
               class: w3-padding 
@@ -129,19 +172,35 @@ htmBody:
                 in:
                   - e: i
                     a:
-                      class: fa-solid fa-microchip padding-right-quarter-em
+                      class: fa-solid fa-globe padding-right-quarter-em
                   - e: span
-                    text: What technology is behind {{ page.siteDisplayName }}? 
+                    text: Where are the gaps and where can we help? 
               - e: h4
                 a:
                   class: ""
                 in:
                   - e: i
                     a:
-                      class: fak fa-vertx padding-right-quarter-em
-                      style: "color: #782a90ff; "
+                      class: fa-solid fa-map-location-dot padding-right-quarter-em
                   - e: span
-                    text: Vert.x, the most resource efficient, scalable, reactive, enterprise software toolkit available. 
+                    text: Where are the gaps and where can we help? 
+              - e: ul
+                in:
+                  - e: li
+                    text: |
+                      Our data visualization strategy
+              - e: ul
+                in:
+                  - e: li
+                    text: |
+                      Red Hat has partnered with BU and Smartabyar to expand the current technological infrastructure for open source software teams to collaborate effectively, 
+                      and ultimately help define better the link between well being and eco-smart cities.
+                  - e: li
+                    text: |
+                      We design and create the data visualization strategy and front end application for researchers and stakeholders. 
+                  - e: li
+                    text: |
+                      We expand on the strategy to have this platform to be open, scalable, secure and reliable for researchers. 
           - e: div
             a:
               class: w3-padding 
@@ -152,19 +211,34 @@ htmBody:
                 in:
                   - e: i
                     a:
-                      class: fa-solid fa-sensor-cloud padding-right-quarter-em
+                      class: fa-solid fa-globe padding-right-quarter-em
                   - e: span
-                    text: Is {{ page.siteDisplayName }} deployable in the cloud? 
+                    text: Provided Digitalization Services
               - e: h4
                 a:
                   class: ""
                 in:
                   - e: i
                     a:
-                      class: fak fa-openshift padding-right-quarter-em
-                      style: "color: red; "
+                      class: fa-solid fa-map-location-dot padding-right-quarter-em
                   - e: span
-                    text: A Dockerfile, a quay.io image, and automated deployment to Red Hat OpenShift cloud environment is set up. 
+                    text: OpenAPIs for live and simulated data
+              - e: ul
+                in:
+                  - e: li
+                    text: |
+                      Our data visualization strategy
+              - e: ul
+                in:
+                  - e: li
+                    text: |
+                      Interacts with external services to gather live data. 
+                  - e: li
+                    text: |
+                      Interacts with open source applications to simulate traffic. 
+                  - e: li
+                    text: |
+                      Helps University students study smart city indicators. 
       - e: div
         label:
           - infographic

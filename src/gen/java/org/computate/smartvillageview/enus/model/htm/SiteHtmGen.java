@@ -3,7 +3,7 @@ package org.computate.smartvillageview.enus.model.htm;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.smartvillageview.enus.model.base.BaseModel;
 import org.computate.vertx.api.ApiRequest;
-import org.computate.smartvillageview.enus.config.ConfigKeys;
+import org.computate.vertx.config.ComputateConfigKeys;
 import java.util.Optional;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
@@ -31,23 +31,11 @@ import org.slf4j.LoggerFactory;
 import java.math.RoundingMode;
 import java.util.Map;
 import org.computate.smartvillageview.enus.result.base.BaseResult;
-import java.lang.Void;
 import java.lang.String;
-import java.time.ZonedDateTime;
-import java.time.ZoneId;
-import java.time.ZoneOffset;
-import java.time.LocalDateTime;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-import java.util.Date;
-import java.time.format.DateTimeFormatter;
-import java.time.Instant;
-import java.util.Locale;
-import java.time.OffsetDateTime;
-import java.lang.Boolean;
-import io.vertx.core.json.JsonArray;
 import java.lang.Long;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import java.lang.Boolean;
 import org.computate.search.wrap.Wrap;
 import io.vertx.core.Promise;
 import io.vertx.core.Future;
@@ -159,471 +147,6 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	public static final String SiteHtm_Color = "2017-navy-peony";
 	public static final String SiteHtm_IconGroup = "duotone";
 	public static final String SiteHtm_IconName = "code";
-
-	//////////////////
-	// promiseBegin //
-	//////////////////
-
-	/**	 The entity promiseBegin
-	 *	 is defined as null before being initialized. 
-	 */
-	@JsonIgnore
-	@JsonInclude(Include.NON_NULL)
-	protected Void promiseBegin;
-
-	/**	<br> The entity promiseBegin
-	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtm&fq=entiteVar_enUS_indexed_string:promiseBegin">Find the entity promiseBegin in Solr</a>
-	 * <br>
-	 * @param promise is for wrapping a value to assign to this entity during initialization. 
-	 **/
-	protected abstract void _promiseBegin(Promise<Void> promise);
-
-	public Void getPromiseBegin() {
-		return promiseBegin;
-	}
-
-	public void setPromiseBegin(Void promiseBegin) {
-		this.promiseBegin = promiseBegin;
-	}
-	public static Void staticSetPromiseBegin(SiteRequestEnUS siteRequest_, String o) {
-		return null;
-	}
-	protected Future<Void> promiseBeginPromise() {
-		Promise<Void> promise = Promise.promise();
-		Promise<Void> promise2 = Promise.promise();
-		_promiseBegin(promise2);
-		promise2.future().onSuccess(o -> {
-			setPromiseBegin(o);
-			promise.complete(o);
-		}).onFailure(ex -> {
-			promise.fail(ex);
-		});
-		return promise.future();
-	}
-
-	//////////////////
-	// siteRequest_ //
-	//////////////////
-
-	/**	 The entity siteRequest_
-	 *	 is defined as null before being initialized. 
-	 */
-	@JsonIgnore
-	@JsonInclude(Include.NON_NULL)
-	protected SiteRequestEnUS siteRequest_;
-
-	/**	<br> The entity siteRequest_
-	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtm&fq=entiteVar_enUS_indexed_string:siteRequest_">Find the entity siteRequest_ in Solr</a>
-	 * <br>
-	 * @param w is for wrapping a value to assign to this entity during initialization. 
-	 **/
-	protected abstract void _siteRequest_(Wrap<SiteRequestEnUS> w);
-
-	public SiteRequestEnUS getSiteRequest_() {
-		return siteRequest_;
-	}
-
-	public void setSiteRequest_(SiteRequestEnUS siteRequest_) {
-		this.siteRequest_ = siteRequest_;
-	}
-	public static SiteRequestEnUS staticSetSiteRequest_(SiteRequestEnUS siteRequest_, String o) {
-		return null;
-	}
-	protected SiteHtm siteRequest_Init() {
-		Wrap<SiteRequestEnUS> siteRequest_Wrap = new Wrap<SiteRequestEnUS>().var("siteRequest_");
-		if(siteRequest_ == null) {
-			_siteRequest_(siteRequest_Wrap);
-			setSiteRequest_(siteRequest_Wrap.o);
-		}
-		return (SiteHtm)this;
-	}
-
-	///////////////
-	// inheritPk //
-	///////////////
-
-	/**	 The entity inheritPk
-	 *	 is defined as null before being initialized. 
-	 */
-	@JsonProperty
-	@JsonInclude(Include.NON_NULL)
-	protected String inheritPk;
-
-	/**	<br> The entity inheritPk
-	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtm&fq=entiteVar_enUS_indexed_string:inheritPk">Find the entity inheritPk in Solr</a>
-	 * <br>
-	 * @param w is for wrapping a value to assign to this entity during initialization. 
-	 **/
-	protected abstract void _inheritPk(Wrap<String> w);
-
-	public String getInheritPk() {
-		return inheritPk;
-	}
-	public void setInheritPk(String o) {
-		this.inheritPk = SiteHtm.staticSetInheritPk(siteRequest_, o);
-	}
-	public static String staticSetInheritPk(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-	protected SiteHtm inheritPkInit() {
-		Wrap<String> inheritPkWrap = new Wrap<String>().var("inheritPk");
-		if(inheritPk == null) {
-			_inheritPk(inheritPkWrap);
-			setInheritPk(inheritPkWrap.o);
-		}
-		return (SiteHtm)this;
-	}
-
-	public static String staticSearchInheritPk(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-
-	public static String staticSearchStrInheritPk(SiteRequestEnUS siteRequest_, String o) {
-		return o == null ? null : o.toString();
-	}
-
-	public static String staticSearchFqInheritPk(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtm.staticSearchStrInheritPk(siteRequest_, SiteHtm.staticSearchInheritPk(siteRequest_, SiteHtm.staticSetInheritPk(siteRequest_, o)));
-	}
-
-	public String sqlInheritPk() {
-		return inheritPk;
-	}
-
-	/////////////
-	// created //
-	/////////////
-
-	/**	 The entity created
-	 *	 is defined as null before being initialized. 
-	 */
-	@JsonProperty
-	@JsonDeserialize(using = ComputateZonedDateTimeDeserializer.class)
-	@JsonSerialize(using = ComputateZonedDateTimeSerializer.class)
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSSV'['VV']'")
-	@JsonInclude(Include.NON_NULL)
-	protected ZonedDateTime created;
-
-	/**	<br> The entity created
-	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtm&fq=entiteVar_enUS_indexed_string:created">Find the entity created in Solr</a>
-	 * <br>
-	 * @param w is for wrapping a value to assign to this entity during initialization. 
-	 **/
-	protected abstract void _created(Wrap<ZonedDateTime> w);
-
-	public ZonedDateTime getCreated() {
-		return created;
-	}
-
-	public void setCreated(ZonedDateTime created) {
-		this.created = created;
-	}
-	@JsonIgnore
-	public void setCreated(Instant o) {
-		this.created = o == null ? null : ZonedDateTime.from(o).truncatedTo(ChronoUnit.MILLIS);
-	}
-	/** Example: 2011-12-03T10:15:30+01:00 **/
-	@JsonIgnore
-	public void setCreated(String o) {
-		this.created = SiteHtm.staticSetCreated(siteRequest_, o);
-	}
-	public static ZonedDateTime staticSetCreated(SiteRequestEnUS siteRequest_, String o) {
-		if(StringUtils.endsWith(o, "]"))
-			return o == null ? null : ZonedDateTime.parse(o, ComputateZonedDateTimeSerializer.ZONED_DATE_TIME_FORMATTER);
-		else if(StringUtils.endsWith(o, "Z"))
-			return o == null ? null : Instant.parse(o).atZone(Optional.ofNullable(siteRequest_).map(r -> r.getConfig()).map(config -> config.getString(ConfigKeys.SITE_ZONE)).map(z -> ZoneId.of(z)).orElse(ZoneId.of("UTC"))).truncatedTo(ChronoUnit.MILLIS);
-		else if(StringUtils.contains(o, "T"))
-			return o == null ? null : ZonedDateTime.parse(o, DateTimeFormatter.ISO_DATE_TIME).truncatedTo(ChronoUnit.MILLIS);
-		else
-			return o == null ? null : LocalDate.parse(o, DateTimeFormatter.ISO_DATE).atStartOfDay(ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
-	}
-	@JsonIgnore
-	public void setCreated(Date o) {
-		this.created = o == null ? null : ZonedDateTime.ofInstant(o.toInstant(), ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
-	}
-	protected SiteHtm createdInit() {
-		Wrap<ZonedDateTime> createdWrap = new Wrap<ZonedDateTime>().var("created");
-		if(created == null) {
-			_created(createdWrap);
-			setCreated(createdWrap.o);
-		}
-		return (SiteHtm)this;
-	}
-
-	public static Date staticSearchCreated(SiteRequestEnUS siteRequest_, ZonedDateTime o) {
-		return o == null ? null : Date.from(o.toInstant());
-	}
-
-	public static String staticSearchStrCreated(SiteRequestEnUS siteRequest_, Date o) {
-		return "\"" + DateTimeFormatter.ISO_DATE_TIME.format(o.toInstant().atOffset(ZoneOffset.UTC)) + "\"";
-	}
-
-	public static String staticSearchFqCreated(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtm.staticSearchStrCreated(siteRequest_, SiteHtm.staticSearchCreated(siteRequest_, SiteHtm.staticSetCreated(siteRequest_, o)));
-	}
-
-	public OffsetDateTime sqlCreated() {
-		return created == null ? null : created.toOffsetDateTime();
-	}
-
-	//////////////
-	// modified //
-	//////////////
-
-	/**	 The entity modified
-	 *	 is defined as null before being initialized. 
-	 */
-	@JsonProperty
-	@JsonDeserialize(using = ComputateZonedDateTimeDeserializer.class)
-	@JsonSerialize(using = ComputateZonedDateTimeSerializer.class)
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSSV'['VV']'")
-	@JsonInclude(Include.NON_NULL)
-	protected ZonedDateTime modified;
-
-	/**	<br> The entity modified
-	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtm&fq=entiteVar_enUS_indexed_string:modified">Find the entity modified in Solr</a>
-	 * <br>
-	 * @param w is for wrapping a value to assign to this entity during initialization. 
-	 **/
-	protected abstract void _modified(Wrap<ZonedDateTime> w);
-
-	public ZonedDateTime getModified() {
-		return modified;
-	}
-
-	public void setModified(ZonedDateTime modified) {
-		this.modified = modified;
-	}
-	@JsonIgnore
-	public void setModified(Instant o) {
-		this.modified = o == null ? null : ZonedDateTime.from(o).truncatedTo(ChronoUnit.MILLIS);
-	}
-	/** Example: 2011-12-03T10:15:30+01:00 **/
-	@JsonIgnore
-	public void setModified(String o) {
-		this.modified = SiteHtm.staticSetModified(siteRequest_, o);
-	}
-	public static ZonedDateTime staticSetModified(SiteRequestEnUS siteRequest_, String o) {
-		if(StringUtils.endsWith(o, "]"))
-			return o == null ? null : ZonedDateTime.parse(o, ComputateZonedDateTimeSerializer.ZONED_DATE_TIME_FORMATTER);
-		else if(StringUtils.endsWith(o, "Z"))
-			return o == null ? null : Instant.parse(o).atZone(Optional.ofNullable(siteRequest_).map(r -> r.getConfig()).map(config -> config.getString(ConfigKeys.SITE_ZONE)).map(z -> ZoneId.of(z)).orElse(ZoneId.of("UTC"))).truncatedTo(ChronoUnit.MILLIS);
-		else if(StringUtils.contains(o, "T"))
-			return o == null ? null : ZonedDateTime.parse(o, DateTimeFormatter.ISO_DATE_TIME).truncatedTo(ChronoUnit.MILLIS);
-		else
-			return o == null ? null : LocalDate.parse(o, DateTimeFormatter.ISO_DATE).atStartOfDay(ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
-	}
-	@JsonIgnore
-	public void setModified(Date o) {
-		this.modified = o == null ? null : ZonedDateTime.ofInstant(o.toInstant(), ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
-	}
-	protected SiteHtm modifiedInit() {
-		Wrap<ZonedDateTime> modifiedWrap = new Wrap<ZonedDateTime>().var("modified");
-		if(modified == null) {
-			_modified(modifiedWrap);
-			setModified(modifiedWrap.o);
-		}
-		return (SiteHtm)this;
-	}
-
-	public static Date staticSearchModified(SiteRequestEnUS siteRequest_, ZonedDateTime o) {
-		return o == null ? null : Date.from(o.toInstant());
-	}
-
-	public static String staticSearchStrModified(SiteRequestEnUS siteRequest_, Date o) {
-		return "\"" + DateTimeFormatter.ISO_DATE_TIME.format(o.toInstant().atOffset(ZoneOffset.UTC)) + "\"";
-	}
-
-	public static String staticSearchFqModified(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtm.staticSearchStrModified(siteRequest_, SiteHtm.staticSearchModified(siteRequest_, SiteHtm.staticSetModified(siteRequest_, o)));
-	}
-
-	//////////////
-	// archived //
-	//////////////
-
-	/**	 The entity archived
-	 *	 is defined as null before being initialized. 
-	 */
-	@JsonProperty
-	@JsonInclude(Include.NON_NULL)
-	protected Boolean archived;
-
-	/**	<br> The entity archived
-	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtm&fq=entiteVar_enUS_indexed_string:archived">Find the entity archived in Solr</a>
-	 * <br>
-	 * @param w is for wrapping a value to assign to this entity during initialization. 
-	 **/
-	protected abstract void _archived(Wrap<Boolean> w);
-
-	public Boolean getArchived() {
-		return archived;
-	}
-
-	public void setArchived(Boolean archived) {
-		this.archived = archived;
-	}
-	@JsonIgnore
-	public void setArchived(String o) {
-		this.archived = SiteHtm.staticSetArchived(siteRequest_, o);
-	}
-	public static Boolean staticSetArchived(SiteRequestEnUS siteRequest_, String o) {
-		return Boolean.parseBoolean(o);
-	}
-	protected SiteHtm archivedInit() {
-		Wrap<Boolean> archivedWrap = new Wrap<Boolean>().var("archived");
-		if(archived == null) {
-			_archived(archivedWrap);
-			setArchived(archivedWrap.o);
-		}
-		return (SiteHtm)this;
-	}
-
-	public static Boolean staticSearchArchived(SiteRequestEnUS siteRequest_, Boolean o) {
-		return o;
-	}
-
-	public static String staticSearchStrArchived(SiteRequestEnUS siteRequest_, Boolean o) {
-		return o == null ? null : o.toString();
-	}
-
-	public static String staticSearchFqArchived(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtm.staticSearchStrArchived(siteRequest_, SiteHtm.staticSearchArchived(siteRequest_, SiteHtm.staticSetArchived(siteRequest_, o)));
-	}
-
-	public Boolean sqlArchived() {
-		return archived;
-	}
-
-	/////////////
-	// deleted //
-	/////////////
-
-	/**	 The entity deleted
-	 *	 is defined as null before being initialized. 
-	 */
-	@JsonProperty
-	@JsonInclude(Include.NON_NULL)
-	protected Boolean deleted;
-
-	/**	<br> The entity deleted
-	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtm&fq=entiteVar_enUS_indexed_string:deleted">Find the entity deleted in Solr</a>
-	 * <br>
-	 * @param w is for wrapping a value to assign to this entity during initialization. 
-	 **/
-	protected abstract void _deleted(Wrap<Boolean> w);
-
-	public Boolean getDeleted() {
-		return deleted;
-	}
-
-	public void setDeleted(Boolean deleted) {
-		this.deleted = deleted;
-	}
-	@JsonIgnore
-	public void setDeleted(String o) {
-		this.deleted = SiteHtm.staticSetDeleted(siteRequest_, o);
-	}
-	public static Boolean staticSetDeleted(SiteRequestEnUS siteRequest_, String o) {
-		return Boolean.parseBoolean(o);
-	}
-	protected SiteHtm deletedInit() {
-		Wrap<Boolean> deletedWrap = new Wrap<Boolean>().var("deleted");
-		if(deleted == null) {
-			_deleted(deletedWrap);
-			setDeleted(deletedWrap.o);
-		}
-		return (SiteHtm)this;
-	}
-
-	public static Boolean staticSearchDeleted(SiteRequestEnUS siteRequest_, Boolean o) {
-		return o;
-	}
-
-	public static String staticSearchStrDeleted(SiteRequestEnUS siteRequest_, Boolean o) {
-		return o == null ? null : o.toString();
-	}
-
-	public static String staticSearchFqDeleted(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtm.staticSearchStrDeleted(siteRequest_, SiteHtm.staticSearchDeleted(siteRequest_, SiteHtm.staticSetDeleted(siteRequest_, o)));
-	}
-
-	public Boolean sqlDeleted() {
-		return deleted;
-	}
-
-	///////////
-	// saves //
-	///////////
-
-	/**	 The entity saves
-	 *	 It is constructed before being initialized with the constructor by default. 
-	 */
-	@JsonProperty
-	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
-	@JsonInclude(Include.NON_NULL)
-	protected List<String> saves = new ArrayList<String>();
-
-	/**	<br> The entity saves
-	 *  It is constructed before being initialized with the constructor by default. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtm&fq=entiteVar_enUS_indexed_string:saves">Find the entity saves in Solr</a>
-	 * <br>
-	 * @param l is the entity already constructed. 
-	 **/
-	protected abstract void _saves(List<String> l);
-
-	public List<String> getSaves() {
-		return saves;
-	}
-
-	public void setSaves(List<String> saves) {
-		this.saves = saves;
-	}
-	public static String staticSetSaves(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-	public SiteHtm addSaves(String...objects) {
-		for(String o : objects) {
-			addSaves(o);
-		}
-		return (SiteHtm)this;
-	}
-	public SiteHtm addSaves(String o) {
-		if(o != null)
-			this.saves.add(o);
-		return (SiteHtm)this;
-	}
-	@JsonIgnore
-	public void setSaves(JsonArray objects) {
-		saves.clear();
-		for(int i = 0; i < objects.size(); i++) {
-			String o = objects.getString(i);
-			addSaves(o);
-		}
-	}
-	protected SiteHtm savesInit() {
-		_saves(saves);
-		return (SiteHtm)this;
-	}
-
-	public static String staticSearchSaves(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-
-	public static String staticSearchStrSaves(SiteRequestEnUS siteRequest_, String o) {
-		return o == null ? null : o.toString();
-	}
-
-	public static String staticSearchFqSaves(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtm.staticSearchStrSaves(siteRequest_, SiteHtm.staticSearchSaves(siteRequest_, SiteHtm.staticSetSaves(siteRequest_, o)));
-	}
 
 	/////////
 	// uri //
@@ -1439,55 +962,6 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 		return htmAfter;
 	}
 
-	/////////////////
-	// objectTitle //
-	/////////////////
-
-	/**	 The entity objectTitle
-	 *	 is defined as null before being initialized. 
-	 */
-	@JsonProperty
-	@JsonInclude(Include.NON_NULL)
-	protected String objectTitle;
-
-	/**	<br> The entity objectTitle
-	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtm&fq=entiteVar_enUS_indexed_string:objectTitle">Find the entity objectTitle in Solr</a>
-	 * <br>
-	 * @param w is for wrapping a value to assign to this entity during initialization. 
-	 **/
-	protected abstract void _objectTitle(Wrap<String> w);
-
-	public String getObjectTitle() {
-		return objectTitle;
-	}
-	public void setObjectTitle(String o) {
-		this.objectTitle = SiteHtm.staticSetObjectTitle(siteRequest_, o);
-	}
-	public static String staticSetObjectTitle(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-	protected SiteHtm objectTitleInit() {
-		Wrap<String> objectTitleWrap = new Wrap<String>().var("objectTitle");
-		if(objectTitle == null) {
-			_objectTitle(objectTitleWrap);
-			setObjectTitle(objectTitleWrap.o);
-		}
-		return (SiteHtm)this;
-	}
-
-	public static String staticSearchObjectTitle(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-
-	public static String staticSearchStrObjectTitle(SiteRequestEnUS siteRequest_, String o) {
-		return o == null ? null : o.toString();
-	}
-
-	public static String staticSearchFqObjectTitle(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtm.staticSearchStrObjectTitle(siteRequest_, SiteHtm.staticSearchObjectTitle(siteRequest_, SiteHtm.staticSetObjectTitle(siteRequest_, o)));
-	}
-
 	//////////////
 	// initDeep //
 	//////////////
@@ -1517,29 +991,6 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 		Future.future(a -> a.complete()).compose(a -> {
 			Promise<Void> promise2 = Promise.promise();
 			try {
-				promise2.complete();
-			} catch(Exception ex) {
-				promise2.fail(ex);
-			}
-			return promise2.future();
-		}).compose(a -> {
-			Promise<Void> promise2 = Promise.promise();
-			promiseBeginPromise().onSuccess(promiseBegin -> {
-				promise2.complete();
-			}).onFailure(ex -> {
-				promise2.fail(ex);
-			});
-			return promise2.future();
-		}).compose(a -> {
-			Promise<Void> promise2 = Promise.promise();
-			try {
-				siteRequest_Init();
-				inheritPkInit();
-				createdInit();
-				modifiedInit();
-				archivedInit();
-				deletedInit();
-				savesInit();
 				uriInit();
 				pageIdInit();
 				sequenceNumInit();
@@ -1554,7 +1005,6 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 				newLineInit();
 				htmBeforeInit();
 				htmAfterInit();
-				objectTitleInit();
 				promise2.complete();
 			} catch(Exception ex) {
 				promise2.fail(ex);
@@ -1608,22 +1058,6 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	public Object obtainSiteHtm(String var) {
 		SiteHtm oSiteHtm = (SiteHtm)this;
 		switch(var) {
-			case "promiseBegin":
-				return oSiteHtm.promiseBegin;
-			case "siteRequest_":
-				return oSiteHtm.siteRequest_;
-			case "inheritPk":
-				return oSiteHtm.inheritPk;
-			case "created":
-				return oSiteHtm.created;
-			case "modified":
-				return oSiteHtm.modified;
-			case "archived":
-				return oSiteHtm.archived;
-			case "deleted":
-				return oSiteHtm.deleted;
-			case "saves":
-				return oSiteHtm.saves;
 			case "uri":
 				return oSiteHtm.uri;
 			case "pageId":
@@ -1652,8 +1086,6 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 				return oSiteHtm.htmBefore;
 			case "htmAfter":
 				return oSiteHtm.htmAfter;
-			case "objectTitle":
-				return oSiteHtm.objectTitle;
 			default:
 				return super.obtainBaseResult(var);
 		}
@@ -1693,18 +1125,6 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	}
 	public static Object staticSetSiteHtm(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
-		case "inheritPk":
-			return SiteHtm.staticSetInheritPk(siteRequest_, o);
-		case "created":
-			return SiteHtm.staticSetCreated(siteRequest_, o);
-		case "modified":
-			return SiteHtm.staticSetModified(siteRequest_, o);
-		case "archived":
-			return SiteHtm.staticSetArchived(siteRequest_, o);
-		case "deleted":
-			return SiteHtm.staticSetDeleted(siteRequest_, o);
-		case "saves":
-			return SiteHtm.staticSetSaves(siteRequest_, o);
 		case "uri":
 			return SiteHtm.staticSetUri(siteRequest_, o);
 		case "pageId":
@@ -1733,8 +1153,6 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 			return SiteHtm.staticSetHtmBefore(siteRequest_, o);
 		case "htmAfter":
 			return SiteHtm.staticSetHtmAfter(siteRequest_, o);
-		case "objectTitle":
-			return SiteHtm.staticSetObjectTitle(siteRequest_, o);
 			default:
 				return BaseResult.staticSetBaseResult(entityVar,  siteRequest_, o);
 		}
@@ -1749,18 +1167,6 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	}
 	public static Object staticSearchSiteHtm(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
-		case "inheritPk":
-			return SiteHtm.staticSearchInheritPk(siteRequest_, (String)o);
-		case "created":
-			return SiteHtm.staticSearchCreated(siteRequest_, (ZonedDateTime)o);
-		case "modified":
-			return SiteHtm.staticSearchModified(siteRequest_, (ZonedDateTime)o);
-		case "archived":
-			return SiteHtm.staticSearchArchived(siteRequest_, (Boolean)o);
-		case "deleted":
-			return SiteHtm.staticSearchDeleted(siteRequest_, (Boolean)o);
-		case "saves":
-			return SiteHtm.staticSearchSaves(siteRequest_, (String)o);
 		case "uri":
 			return SiteHtm.staticSearchUri(siteRequest_, (String)o);
 		case "pageId":
@@ -1789,8 +1195,6 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 			return SiteHtm.staticSearchHtmBefore(siteRequest_, (String)o);
 		case "htmAfter":
 			return SiteHtm.staticSearchHtmAfter(siteRequest_, (String)o);
-		case "objectTitle":
-			return SiteHtm.staticSearchObjectTitle(siteRequest_, (String)o);
 			default:
 				return BaseResult.staticSearchBaseResult(entityVar,  siteRequest_, o);
 		}
@@ -1805,18 +1209,6 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	}
 	public static String staticSearchStrSiteHtm(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
-		case "inheritPk":
-			return SiteHtm.staticSearchStrInheritPk(siteRequest_, (String)o);
-		case "created":
-			return SiteHtm.staticSearchStrCreated(siteRequest_, (Date)o);
-		case "modified":
-			return SiteHtm.staticSearchStrModified(siteRequest_, (Date)o);
-		case "archived":
-			return SiteHtm.staticSearchStrArchived(siteRequest_, (Boolean)o);
-		case "deleted":
-			return SiteHtm.staticSearchStrDeleted(siteRequest_, (Boolean)o);
-		case "saves":
-			return SiteHtm.staticSearchStrSaves(siteRequest_, (String)o);
 		case "uri":
 			return SiteHtm.staticSearchStrUri(siteRequest_, (String)o);
 		case "pageId":
@@ -1845,8 +1237,6 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 			return SiteHtm.staticSearchStrHtmBefore(siteRequest_, (String)o);
 		case "htmAfter":
 			return SiteHtm.staticSearchStrHtmAfter(siteRequest_, (String)o);
-		case "objectTitle":
-			return SiteHtm.staticSearchStrObjectTitle(siteRequest_, (String)o);
 			default:
 				return BaseResult.staticSearchStrBaseResult(entityVar,  siteRequest_, o);
 		}
@@ -1861,18 +1251,6 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	}
 	public static String staticSearchFqSiteHtm(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
-		case "inheritPk":
-			return SiteHtm.staticSearchFqInheritPk(siteRequest_, o);
-		case "created":
-			return SiteHtm.staticSearchFqCreated(siteRequest_, o);
-		case "modified":
-			return SiteHtm.staticSearchFqModified(siteRequest_, o);
-		case "archived":
-			return SiteHtm.staticSearchFqArchived(siteRequest_, o);
-		case "deleted":
-			return SiteHtm.staticSearchFqDeleted(siteRequest_, o);
-		case "saves":
-			return SiteHtm.staticSearchFqSaves(siteRequest_, o);
 		case "uri":
 			return SiteHtm.staticSearchFqUri(siteRequest_, o);
 		case "pageId":
@@ -1901,8 +1279,6 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 			return SiteHtm.staticSearchFqHtmBefore(siteRequest_, o);
 		case "htmAfter":
 			return SiteHtm.staticSearchFqHtmAfter(siteRequest_, o);
-		case "objectTitle":
-			return SiteHtm.staticSearchFqObjectTitle(siteRequest_, o);
 			default:
 				return BaseResult.staticSearchFqBaseResult(entityVar,  siteRequest_, o);
 		}
@@ -1929,34 +1305,6 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	}
 	public Object persistSiteHtm(String var, Object val) {
 		switch(var.toLowerCase()) {
-			case "inheritpk":
-				if(val instanceof String)
-					setInheritPk((String)val);
-				saves.add("inheritPk");
-				return val;
-			case "created":
-				if(val instanceof ZonedDateTime)
-					setCreated((ZonedDateTime)val);
-				else if(val instanceof String)
-					setCreated((String)val);
-				else if(val instanceof OffsetDateTime)
-					setCreated(((OffsetDateTime)val).atZoneSameInstant(ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))));
-				saves.add("created");
-				return val;
-			case "archived":
-				if(val instanceof Boolean)
-					setArchived((Boolean)val);
-				else if(val instanceof String)
-					setArchived((String)val);
-				saves.add("archived");
-				return val;
-			case "deleted":
-				if(val instanceof Boolean)
-					setDeleted((Boolean)val);
-				else if(val instanceof String)
-					setDeleted((String)val);
-				saves.add("deleted");
-				return val;
 			case "uri":
 				if(val instanceof String)
 					setUri((String)val);
@@ -2064,28 +1412,6 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	}
 
 	public void indexSiteHtm(JsonObject doc) {
-		if(inheritPk != null) {
-			doc.put("inheritPk_docvalues_string", inheritPk);
-		}
-		if(created != null) {
-			doc.put("created_docvalues_date", DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(ZonedDateTime.ofInstant(created.toInstant(), ZoneId.of("UTC"))));
-		}
-		if(modified != null) {
-			doc.put("modified_docvalues_date", DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(ZonedDateTime.ofInstant(modified.toInstant(), ZoneId.of("UTC"))));
-		}
-		if(archived != null) {
-			doc.put("archived_docvalues_boolean", archived);
-		}
-		if(deleted != null) {
-			doc.put("deleted_docvalues_boolean", deleted);
-		}
-		if(saves != null) {
-			JsonArray l = new JsonArray();
-			doc.put("saves_docvalues_strings", l);
-			for(String o : saves) {
-				l.add(o);
-			}
-		}
 		if(uri != null) {
 			doc.put("uri_docvalues_string", uri);
 		}
@@ -2140,27 +1466,12 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 		if(htmAfter != null) {
 			doc.put("htmAfter_stored_string", htmAfter);
 		}
-		if(objectTitle != null) {
-			doc.put("objectTitle_docvalues_string", objectTitle);
-		}
 		super.indexBaseResult(doc);
 
 	}
 
 	public static String varStoredSiteHtm(String entityVar) {
 		switch(entityVar) {
-			case "inheritPk":
-				return "inheritPk_docvalues_string";
-			case "created":
-				return "created_docvalues_date";
-			case "modified":
-				return "modified_docvalues_date";
-			case "archived":
-				return "archived_docvalues_boolean";
-			case "deleted":
-				return "deleted_docvalues_boolean";
-			case "saves":
-				return "saves_docvalues_strings";
 			case "uri":
 				return "uri_docvalues_string";
 			case "pageId":
@@ -2187,8 +1498,6 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 				return "htmBefore_stored_string";
 			case "htmAfter":
 				return "htmAfter_stored_string";
-			case "objectTitle":
-				return "objectTitle_docvalues_string";
 			default:
 				return BaseResult.varStoredBaseResult(entityVar);
 		}
@@ -2196,18 +1505,6 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 
 	public static String varIndexedSiteHtm(String entityVar) {
 		switch(entityVar) {
-			case "inheritPk":
-				return "inheritPk_docvalues_string";
-			case "created":
-				return "created_docvalues_date";
-			case "modified":
-				return "modified_docvalues_date";
-			case "archived":
-				return "archived_docvalues_boolean";
-			case "deleted":
-				return "deleted_docvalues_boolean";
-			case "saves":
-				return "saves_docvalues_strings";
 			case "uri":
 				return "uri_docvalues_string";
 			case "pageId":
@@ -2232,8 +1529,6 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 				return "tabs_docvalues_string";
 			case "newLine":
 				return "newLine_docvalues_boolean";
-			case "objectTitle":
-				return "objectTitle_docvalues_string";
 			default:
 				return BaseResult.varIndexedBaseResult(entityVar);
 		}
@@ -2241,18 +1536,6 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 
 	public static String searchVarSiteHtm(String searchVar) {
 		switch(searchVar) {
-			case "inheritPk_docvalues_string":
-				return "inheritPk";
-			case "created_docvalues_date":
-				return "created";
-			case "modified_docvalues_date":
-				return "modified";
-			case "archived_docvalues_boolean":
-				return "archived";
-			case "deleted_docvalues_boolean":
-				return "deleted";
-			case "saves_docvalues_strings":
-				return "saves";
 			case "uri_docvalues_string":
 				return "uri";
 			case "pageId_docvalues_string":
@@ -2277,8 +1560,6 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 				return "tabs";
 			case "newLine_docvalues_boolean":
 				return "newLine";
-			case "objectTitle_docvalues_string":
-				return "objectTitle";
 			default:
 				return BaseResult.searchVarBaseResult(searchVar);
 		}
@@ -2310,14 +1591,6 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	public void storeSiteHtm(SolrResponse.Doc doc) {
 		SiteHtm oSiteHtm = (SiteHtm)this;
 
-		oSiteHtm.setInheritPk(Optional.ofNullable(doc.get("inheritPk_docvalues_string")).map(v -> v.toString()).orElse(null));
-		oSiteHtm.setCreated(Optional.ofNullable(doc.get("created_docvalues_date")).map(v -> v.toString()).orElse(null));
-		oSiteHtm.setModified(Optional.ofNullable(doc.get("modified_docvalues_date")).map(v -> v.toString()).orElse(null));
-		oSiteHtm.setArchived(Optional.ofNullable(doc.get("archived_docvalues_boolean")).map(v -> v.toString()).orElse(null));
-		oSiteHtm.setDeleted(Optional.ofNullable(doc.get("deleted_docvalues_boolean")).map(v -> v.toString()).orElse(null));
-		Optional.ofNullable((List<?>)doc.get("saves_docvalues_strings")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
-			oSiteHtm.addSaves(v.toString());
-		});
 		oSiteHtm.setUri(Optional.ofNullable(doc.get("uri_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSiteHtm.setPageId(Optional.ofNullable(doc.get("pageId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSiteHtm.setSequenceNum(Optional.ofNullable(doc.get("sequenceNum_docvalues_long")).map(v -> v.toString()).orElse(null));
@@ -2338,7 +1611,6 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 		oSiteHtm.setNewLine(Optional.ofNullable(doc.get("newLine_docvalues_boolean")).map(v -> v.toString()).orElse(null));
 		oSiteHtm.setHtmBefore(Optional.ofNullable(doc.get("htmBefore_stored_string")).map(v -> v.toString()).orElse(null));
 		oSiteHtm.setHtmAfter(Optional.ofNullable(doc.get("htmAfter_stored_string")).map(v -> v.toString()).orElse(null));
-		oSiteHtm.setObjectTitle(Optional.ofNullable(doc.get("objectTitle_docvalues_string")).map(v -> v.toString()).orElse(null));
 
 		super.storeBaseResult(doc);
 	}
@@ -2352,18 +1624,6 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 		Object o = Optional.ofNullable(apiRequest).map(ApiRequest::getOriginal).orElse(null);
 		if(o != null && o instanceof SiteHtm) {
 			SiteHtm original = (SiteHtm)o;
-			if(!Objects.equals(inheritPk, original.getInheritPk()))
-				apiRequest.addVars("inheritPk");
-			if(!Objects.equals(created, original.getCreated()))
-				apiRequest.addVars("created");
-			if(!Objects.equals(modified, original.getModified()))
-				apiRequest.addVars("modified");
-			if(!Objects.equals(archived, original.getArchived()))
-				apiRequest.addVars("archived");
-			if(!Objects.equals(deleted, original.getDeleted()))
-				apiRequest.addVars("deleted");
-			if(!Objects.equals(saves, original.getSaves()))
-				apiRequest.addVars("saves");
 			if(!Objects.equals(uri, original.getUri()))
 				apiRequest.addVars("uri");
 			if(!Objects.equals(pageId, original.getPageId()))
@@ -2392,8 +1652,6 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 				apiRequest.addVars("htmBefore");
 			if(!Objects.equals(htmAfter, original.getHtmAfter()))
 				apiRequest.addVars("htmAfter");
-			if(!Objects.equals(objectTitle, original.getObjectTitle()))
-				apiRequest.addVars("objectTitle");
 			super.apiRequestBaseResult();
 		}
 	}
@@ -2405,12 +1663,6 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	@Override public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(super.toString());
-		sb.append(Optional.ofNullable(inheritPk).map(v -> "inheritPk: \"" + v + "\"\n" ).orElse(""));
-		sb.append(Optional.ofNullable(created).map(v -> "created: " + v + "\n").orElse(""));
-		sb.append(Optional.ofNullable(modified).map(v -> "modified: " + v + "\n").orElse(""));
-		sb.append(Optional.ofNullable(archived).map(v -> "archived: " + v + "\n").orElse(""));
-		sb.append(Optional.ofNullable(deleted).map(v -> "deleted: " + v + "\n").orElse(""));
-		sb.append(Optional.ofNullable(saves).map(v -> "saves: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(uri).map(v -> "uri: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(pageId).map(v -> "pageId: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(sequenceNum).map(v -> "sequenceNum: " + v + "\n").orElse(""));
@@ -2425,19 +1677,10 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 		sb.append(Optional.ofNullable(newLine).map(v -> "newLine: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(htmBefore).map(v -> "htmBefore: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(htmAfter).map(v -> "htmAfter: \"" + v + "\"\n" ).orElse(""));
-		sb.append(Optional.ofNullable(objectTitle).map(v -> "objectTitle: \"" + v + "\"\n" ).orElse(""));
 		return sb.toString();
 	}
 
 	public static final String CLASS_SIMPLE_NAME = "SiteHtm";
-	public static final String VAR_promiseBegin = "promiseBegin";
-	public static final String VAR_siteRequest_ = "siteRequest_";
-	public static final String VAR_inheritPk = "inheritPk";
-	public static final String VAR_created = "created";
-	public static final String VAR_modified = "modified";
-	public static final String VAR_archived = "archived";
-	public static final String VAR_deleted = "deleted";
-	public static final String VAR_saves = "saves";
 	public static final String VAR_uri = "uri";
 	public static final String VAR_pageId = "pageId";
 	public static final String VAR_sequenceNum = "sequenceNum";
@@ -2452,7 +1695,6 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	public static final String VAR_newLine = "newLine";
 	public static final String VAR_htmBefore = "htmBefore";
 	public static final String VAR_htmAfter = "htmAfter";
-	public static final String VAR_objectTitle = "objectTitle";
 
 	public static List<String> varsQForClass() {
 		return SiteHtm.varsQSiteHtm(new ArrayList<String>());
@@ -2467,7 +1709,6 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 		return SiteHtm.varsFqSiteHtm(new ArrayList<String>());
 	}
 	public static List<String> varsFqSiteHtm(List<String> vars) {
-		vars.add(VAR_created);
 		vars.add(VAR_uri);
 		vars.add(VAR_pageId);
 		vars.add(VAR_sequenceNum);
@@ -2479,20 +1720,11 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 		return SiteHtm.varsRangeSiteHtm(new ArrayList<String>());
 	}
 	public static List<String> varsRangeSiteHtm(List<String> vars) {
-		vars.add(VAR_created);
 		vars.add(VAR_sequenceNum);
 		BaseResult.varsRangeBaseResult(vars);
 		return vars;
 	}
 
-	public static final String DISPLAY_NAME_promiseBegin = "";
-	public static final String DISPLAY_NAME_siteRequest_ = "";
-	public static final String DISPLAY_NAME_inheritPk = "";
-	public static final String DISPLAY_NAME_created = "created";
-	public static final String DISPLAY_NAME_modified = "modified";
-	public static final String DISPLAY_NAME_archived = "archived";
-	public static final String DISPLAY_NAME_deleted = "deleted";
-	public static final String DISPLAY_NAME_saves = "";
 	public static final String DISPLAY_NAME_uri = "Page URI";
 	public static final String DISPLAY_NAME_pageId = "Page ID";
 	public static final String DISPLAY_NAME_sequenceNum = "Sequence Number";
@@ -2507,29 +1739,12 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	public static final String DISPLAY_NAME_newLine = "Tabs";
 	public static final String DISPLAY_NAME_htmBefore = "HTML before";
 	public static final String DISPLAY_NAME_htmAfter = "HTML after";
-	public static final String DISPLAY_NAME_objectTitle = "";
 
 	public static String displayNameForClass(String var) {
 		return SiteHtm.displayNameSiteHtm(var);
 	}
 	public static String displayNameSiteHtm(String var) {
 		switch(var) {
-		case VAR_promiseBegin:
-			return DISPLAY_NAME_promiseBegin;
-		case VAR_siteRequest_:
-			return DISPLAY_NAME_siteRequest_;
-		case VAR_inheritPk:
-			return DISPLAY_NAME_inheritPk;
-		case VAR_created:
-			return DISPLAY_NAME_created;
-		case VAR_modified:
-			return DISPLAY_NAME_modified;
-		case VAR_archived:
-			return DISPLAY_NAME_archived;
-		case VAR_deleted:
-			return DISPLAY_NAME_deleted;
-		case VAR_saves:
-			return DISPLAY_NAME_saves;
 		case VAR_uri:
 			return DISPLAY_NAME_uri;
 		case VAR_pageId:
@@ -2558,8 +1773,6 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 			return DISPLAY_NAME_htmBefore;
 		case VAR_htmAfter:
 			return DISPLAY_NAME_htmAfter;
-		case VAR_objectTitle:
-			return DISPLAY_NAME_objectTitle;
 		default:
 			return BaseResult.displayNameBaseResult(var);
 		}
@@ -2567,22 +1780,6 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 
 	public static String descriptionSiteHtm(String var) {
 		switch(var) {
-		case VAR_promiseBegin:
-			return "An asynchronous method for searching for related problems to this message";
-		case VAR_siteRequest_:
-			return "The current request object";
-		case VAR_inheritPk:
-			return "An optional inherited primary key from a legacy system for this object in the database";
-		case VAR_created:
-			return "A created timestamp for this record in the database";
-		case VAR_modified:
-			return "A modified timestamp for this record in the database";
-		case VAR_archived:
-			return "For archiving this record";
-		case VAR_deleted:
-			return "For deleting this record";
-		case VAR_saves:
-			return "A list of fields that are saved for this record in the database";
 		case VAR_uri:
 			return "The ID for this page. ";
 		case VAR_pageId:
@@ -2611,8 +1808,6 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 			return "The HTML that comes before the text. ";
 		case VAR_htmAfter:
 			return "The HTML that comes after the text. ";
-		case VAR_objectTitle:
-			return "The title of this object";
 			default:
 				return BaseResult.descriptionBaseResult(var);
 		}
@@ -2620,22 +1815,6 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 
 	public static String classSimpleNameSiteHtm(String var) {
 		switch(var) {
-		case VAR_promiseBegin:
-			return "Void";
-		case VAR_siteRequest_:
-			return "SiteRequestEnUS";
-		case VAR_inheritPk:
-			return "String";
-		case VAR_created:
-			return "ZonedDateTime";
-		case VAR_modified:
-			return "ZonedDateTime";
-		case VAR_archived:
-			return "Boolean";
-		case VAR_deleted:
-			return "Boolean";
-		case VAR_saves:
-			return "List";
 		case VAR_uri:
 			return "String";
 		case VAR_pageId:
@@ -2664,8 +1843,6 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 			return "String";
 		case VAR_htmAfter:
 			return "String";
-		case VAR_objectTitle:
-			return "String";
 			default:
 				return BaseResult.classSimpleNameBaseResult(var);
 		}
@@ -2673,16 +1850,12 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 
 	public static Integer htmlColumnSiteHtm(String var) {
 		switch(var) {
-		case VAR_created:
-			return 1;
 		case VAR_uri:
 			return 3;
 		case VAR_pageId:
 			return 3;
 		case VAR_sequenceNum:
 			return 4;
-		case VAR_objectTitle:
-			return 2;
 			default:
 				return BaseResult.htmlColumnBaseResult(var);
 		}
@@ -2690,14 +1863,6 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 
 	public static Integer htmlRowSiteHtm(String var) {
 		switch(var) {
-		case VAR_created:
-			return 1;
-		case VAR_modified:
-			return 1;
-		case VAR_archived:
-			return 2;
-		case VAR_deleted:
-			return 2;
 		case VAR_uri:
 			return 3;
 		case VAR_pageId:
@@ -2711,14 +1876,6 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 
 	public static Integer htmlCellSiteHtm(String var) {
 		switch(var) {
-		case VAR_created:
-			return 2;
-		case VAR_modified:
-			return 3;
-		case VAR_archived:
-			return 1;
-		case VAR_deleted:
-			return 2;
 		case VAR_uri:
 			return 1;
 		case VAR_pageId:

@@ -1,16 +1,11 @@
 package org.computate.smartvillageview.enus.model.htm;
 
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.util.List;
 
 import org.computate.search.tool.XmlTool;
 import org.computate.search.wrap.Wrap;
-import org.computate.smartvillageview.enus.config.ConfigKeys;
-import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.smartvillageview.enus.result.base.BaseResult;
 
-import io.vertx.core.Promise;
 import io.vertx.core.json.JsonObject;
 
 /**
@@ -44,98 +39,6 @@ import io.vertx.core.json.JsonObject;
  * Description: An HTML part that is indexed in the search engine. 
  */
 public class SiteHtm extends SiteHtmGen<BaseResult> {
-
-	/**
-	 * {@inheritDoc}
-	 * Ignore: true
-	 * Description: An asynchronous method for searching for related problems to this message
-	 */
-	protected void _promiseBegin(Promise<Void> promise) {
-		promise.complete();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * Ignore: true
-	 * Description: The current request object
-	 */
-	protected void _siteRequest_(Wrap<SiteRequestEnUS> w) {
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * DocValues: true
-	 * InheritPrimaryKey: true
-	 * Persist: true
-	 * Description: An optional inherited primary key from a legacy system for this object in the database
-	 */
-	protected void _inheritPk(Wrap<String> w) {}
-
-	/**
-	 * {@inheritDoc}
-	 * DocValues: true
-	 * Persist: true
-	 * Modify: false
-	 * VarCreated: true
-	 * HtmlRow: 1
-	 * HtmlCell: 2
-	 * HtmlColumn: 1
-	 * Facet: true
-	 * DisplayName.enUS: created
-	 * FormatHtm: MMM d, yyyy h:mm:ss a
-	 * Description: A created timestamp for this record in the database
-	 */
-	protected void _created(Wrap<ZonedDateTime> w) {
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * DocValues: true
-	 * Modify: false
-	 * VarModified: true
-	 * HtmlRow: 1
-	 * HtmlCell: 3
-	 * DisplayName.enUS: modified
-	 * Description: A modified timestamp for this record in the database
-	 */
-	protected void _modified(Wrap<ZonedDateTime> w) {
-		w.o(ZonedDateTime.now(ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))));
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * DocValues: true
-	 * Persist: true
-	 * HtmlRow: 2
-	 * HtmlCell: 1
-	 * DisplayName.enUS: archived
-	 * Description: For archiving this record
-	 */
-	protected void _archived(Wrap<Boolean> w) {
-		w.o(false);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * DocValues: true
-	 * Persist: true
-	 * HtmlRow: 2
-	 * HtmlCell: 2
-	 * DisplayName.enUS: deleted
-	 * Description: For deleting this record
-	 */
-	protected void _deleted(Wrap<Boolean> w) {
-		w.o(false);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * DocValues: true
-	 * Saves: true
-	 * Description: A list of fields that are saved for this record in the database
-	 */
-	protected void _saves(List<String> l) {
-	}
 
 	/**
 	 * {@inheritDoc}
@@ -336,15 +239,5 @@ public class SiteHtm extends SiteHtmGen<BaseResult> {
 			}
 			w.o(b.toString());
 		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * DocValues: true
-	 * VarTitle: true
-	 * HtmlColumn: 2
-	 * Description: The title of this object
-	 */
-	protected void _objectTitle(Wrap<String> w) {
 	}
 }
