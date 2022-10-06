@@ -25,8 +25,14 @@ public class TrafficSimulationEnUSApiServiceImpl extends TrafficSimulationEnUSGe
 	}
 
 	@Override
-		public Future<TrafficSimulation> postTrafficSimulationFuture(SiteRequestEnUS siteRequest, Boolean inheritPk) {
-			// TODO Auto-generated method stub
-			return super.postTrafficSimulationFuture(siteRequest, inheritPk);
-		}
+	public Future<TrafficSimulation> postTrafficSimulationFuture(SiteRequestEnUS siteRequest, Boolean inheritPk) {
+		// TODO Auto-generated method stub
+		return super.postTrafficSimulationFuture(siteRequest, inheritPk);
+	}
+
+	@Override
+	public Future<TrafficSimulation> patchTrafficSimulationFuture(TrafficSimulation o, Boolean inheritPk) {
+		// TODO Auto-generated method stub
+		return super.patchTrafficSimulationFuture(o, inheritPk);
+	}
 }

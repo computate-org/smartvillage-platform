@@ -1,0 +1,1072 @@
+{{#*inline "htmTitleTrafficLightStepPage"}}		<!-- inline "htmTitleTrafficLightStepPage" -->
+		<title>{{#if searchListTrafficLightStep_}}{{#eq trafficLightStepCount int1}}{{#eq params.query.q "*:*"}}traffic light step{{else}}traffic light step{{/eq}}{{else}}no traffic light step found{{/eq}}{{else}}traffic light steps{{/if}}</title>
+{{/inline}}
+{{#*inline "htmMetaTrafficLightStepPage"}}{{> "htmMetaMapResultPage"}}{{/inline}}
+{{#*inline "htmStyleTrafficLightStepPage"}}{{> "htmStyleMapResultPage"}}{{/inline}}
+{{#*inline "htmScriptsTrafficLightStepPage"}}{{> "htmScriptsMapResultPage"}}		<!-- inline "htmScriptsTrafficLightStepPage" -->
+		<script src="{{staticBaseUrl}}/js/enUS/TrafficLightStepPage.js"></script>
+{{/inline}}
+{{#*inline "htmScriptTrafficLightStepPage"}}		<!-- inline "htmScriptTrafficLightStepPage" -->
+		<script>
+			$(document).ready(function() {
+				document.onkeydown = function(evt) {
+					evt = evt || window.event;
+					var isEscape = false;
+					if ('key' in evt) {
+						isEscape = (evt.key === 'Escape' || evt.key === 'Esc');
+					} else {
+						isEscape = (evt.keyCode === 27);
+					}
+					if (isEscape) {
+						$('.w3-modal:visible').hide();
+					}
+				};
+				window.eventBus = new EventBus('/eventbus');
+				var pk = {{#if pk}}{{pk}}{{else}}null{{/if}};
+				if(pk != null) {
+				}
+				websocketTrafficLightStep(websocketTrafficLightStepInner);
+				window.varsFq = JSON.parse('{{{toJsonObjectStringInApostrophes varsFq}}}');
+				pageGraph();
+
+				var calendarEl = document.getElementById('site-calendar');
+				var calendar = new FullCalendar.Calendar(calendarEl, {
+					initialView: 'dayGridMonth'
+				});
+				//calendar.render();
+			});
+			$('#site-calendar-box').accordion({ collapsible: true, active: false });
+{{#if DEFAULT_MAP_LOCATION }}
+			window.DEFAULT_MAP_LOCATION = { lat: {{ DEFAULT_MAP_LOCATION.lat }}, lon: {{ DEFAULT_MAP_LOCATION.lon }} };
+{{/if}}
+{{#if DEFAULT_MAP_ZOOM }}
+			window.DEFAULT_MAP_ZOOM = {{ DEFAULT_MAP_ZOOM }};
+{{/if}}
+		</script>
+{{/inline}}
+{{#*inline "htmUrlTrafficLightStep"}}{{pageUri}}?q={{query.q}}&amp;rows={{#if rows}}{{rows}}{{else}}{{pagination.rows}}{{/if}}&amp;rows={{#if start}}{{start}}{{else}}{{pagination.start}}{{/if}}{{#each query.fq}}{{#eq fq this}}{{else}}&fq={{fq}}:{{val}}{{/eq}}{{/each}}{{#each query.sort}}{{#eq sort this}}{{else}}&sort={{var}} {{order}}{{/eq}}{{/each}}{{/inline}}
+{{#*inline "htmHeadTrafficLightStepPage"}}{{#block "htmTitle"}}{{/block}}{{#block "htmMeta"}}{{/block}}{{#block "htmStyle"}}{{/block}}{{#block "htmScripts"}}{{/block}}{{#block "htmScript"}}{{/block}}{{/inline}}
+{{#*inline "htmBodySearchTrafficLightStepPage"}}								<!-- #*inline "htmBodySearchTrafficLightStepPage" -->
+								<div>
+{{#each varsQ}}
+									<div class="w3-cell-row ">
+										<div class="w3-cell w3-cell-top ">
+											<label for="qTrafficLightStep_{{ @key }}">{{ displayName }}<sup class="w3-tiny "> ({{ classSimpleName }})</sup></label>
+										</div>
+									</div>
+									<div class="w3-cell-row ">
+										<div class="w3-cell w3-cell-top ">
+											<input id="qTrafficLightStep_{{ @key }}" placeholder="{{ displayName }}" class="" {{#eq ../var 'objectSuggest' }}onkeyup{{else}}onchange{{/eq}}="qChange(this); " data-var="{{ var }}" autocomplete="off="/>
+											<div class="pageSearchVal w3-tiny "></div>
+										</div>
+									</div>
+{{/each}}
+									<div class="w3-cell-row ">
+										<div class="w3-cell w3-cell-top ">
+											<label for="qTrafficLightStep_Start">start<sup class="w3-tiny "> (Long)</sup></label>
+										</div>
+									</div>
+									<div class="w3-cell-row ">
+										<div class="w3-cell w3-cell-top ">
+											<input id="qTrafficLightStep_start" placeholder="{{ displayName }}" class="" onchange="paramChange(this); " data-var="start" autocomplete="off="/>
+											<div class="pageSearchVal w3-tiny "></div>
+										</div>
+									</div>
+									<div class="w3-cell-row ">
+										<div class="w3-cell w3-cell-top ">
+											<label for="qTrafficLightStep_Rows">rows<sup class="w3-tiny "> (Long)</sup></label>
+										</div>
+									</div>
+									<div class="w3-cell-row ">
+										<div class="w3-cell w3-cell-top ">
+											<input id="qTrafficLightStep_rows" placeholder="{{ displayName }}" class="" onchange="paramChange(this); " data-var="rows" autocomplete="off="/>
+											<div class="pageSearchVal w3-tiny "></div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+{{#*inline "htmBodyFiltersTrafficLightStepPage"}}								<!-- #*inline "htmBodyFiltersTrafficLightStepPage" -->
+								<div>
+{{#each varsFq }}
+									<div class="">
+										<label for="fqTrafficLightStep_{{ @key }}">{{ displayName }}<sup class="w3-tiny "> ({{ classSimpleName }})</sup></label>
+										<div class="w3-cell-row ">
+											<div class="w3-cell w3-cell-top ">
+												<button id="buttonFacetTrafficLightStep_{{ @key }}" class="" onclick="facetFieldChange(this); " title="see values " data-var="{{ var }}" data-clear="{{#if facetField }}true{{else}}false{{/if}}"><i class="fas fa-list "></i></button>
+											</div>
+											<div class="w3-cell w3-cell-top ">
+												<input id="fqTrafficLightStep_{{ @key }}" placeholder="{{ displayName }}" class="" onchange="fqChange(this); " data-var="{{ var }}" autocomplete="off=" value="{{ val }}"/>
+											</div>
+										</div>
+									</div>
+									<div class="w3-tiny ">
+										<div class="pageSearchVal " id="pageSearchVal-fqTrafficLightStep_{{ @key }}">{{#if val }}fq={{ var }}:{{encodeURIComponent val }}{{/if}}</div>
+										<div class="pageSearchVal " id="pageSearchVal-buttonFacetTrafficLightStep_{{ @key }}">{{#if facetField.var }}facet.field={{ facetField.var }}{{/if}}</div>
+										<ol class="pageFacetField w3-small pageFacetFieldTrafficLightStep_{{ @key }} " id="pageFacetFieldTrafficLightStep_{{ @key }}">
+{{#each facetField.counts }}
+											<li class="cursor-pointer " data-class="TrafficLightStep" data-var="{{ ../var }}" data-val="{{ @key }}" onclick="fqReplace(this); ">{{ @key }}: {{ this }}</li>
+{{/each}}
+										</ol>
+									</div>
+{{/each}}
+								</div>
+{{/inline}}
+{{#*inline "htmBodyRangeTrafficLightStepPage"}}								<!-- #*inline "htmBodyRangeTrafficLightStepPage" -->
+								<table class="w3-padding ">
+									<tr>
+										<td class="w3-padding w3-tiny " colspan="2">
+											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeGap-TrafficLightStep">{{#if defaultRangeGap }}facet.range.gap={{encodeURIComponent defaultRangeGap }}{{/if}}</div>
+											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeStart-TrafficLightStep">{{#if defaultRangeStart }}facet.range.start={{encodeURIComponent defaultRangeStart }}{{/if}}</div>
+											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeEnd-TrafficLightStep">{{#if defaultRangeEnd }}facet.range.end={{encodeURIComponent defaultRangeEnd }}{{/if}}</div>
+											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeVar-TrafficLightStep">{{#if defaultRangeVar }}facet.range={!tag=r1}{{encodeURIComponent defaultRangeVar }}{{/if}}</div>
+										</td>
+									</tr>
+								</table>
+								<table class="w3-padding ">
+									<tr class="">
+										<td class="">
+											<span>Range Gap</span>
+										</td>
+										<td class="">
+											<select name="facet.range.gap" id="pageFacetRangeGap-TrafficLightStep" onchange="facetRangeChange(this, 'TrafficLightStep'); ">
+												<option value="+1YEAR"{{#eq defaultRangeGap '+1YEAR'}} selected="selected"{{else}}{{/eq}}>Year</option>
+												<option value="+1MONTH"{{#eq defaultRangeGap '+1MONTH'}} selected="selected"{{else}}{{/eq}}>Month</option>
+												<option value="+1WEEK"{{#eq defaultRangeGap '+1WEEK'}} selected="selected"{{else}}{{/eq}}>Week</option>
+												<option value="+1DAY"{{#eq defaultRangeGap '+1DAY'}} selected="selected"{{else}}{{#if defaultRangeGap}}{{else}} selected="selected"{{/if}}{{/eq}}>Day</option>
+												<option value="+1HOUR"{{#eq defaultRangeGap '+1HOUR'}} selected="selected"{{else}}{{/eq}}>Hour</option>
+												<option value="+1MINUTE"{{#eq defaultRangeGap '+1MINUTE'}} selected="selected"{{else}}{{/eq}}>Minute</option>
+												<option value="+1SECOND"{{#eq defaultRangeGap '+1SECOND'}} selected="selected"{{else}}{{/eq}}>Second</option>
+											</select>
+										</td>
+									</tr>
+									<tr class="">
+										<td class="" colspan="2">
+											<span>Range Start</span>
+										</td>
+									</tr>
+									<tr class="">
+										<td class="" colspan="2">
+											<span><input type="datetime-local" name="facetRangeStart" id="pageFacetRangeStart-TrafficLightStep" value="{{formatZonedDateTime defaultRangeStart "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeChange(this, 'TrafficLightStep'); "/></span>
+										</td>
+									</tr>
+									<tr class="">
+										<td class="" colspan="2">
+											<span>Range End</span>
+										</td>
+									</tr>
+									<tr class="">
+										<td class="" colspan="2">
+											<span><input type="datetime-local" name="facetRangeEnd" id="pageFacetRangeEnd-TrafficLightStep" value="{{formatZonedDateTime defaultRangeEnd "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeChange(this, 'TrafficLightStep'); "/></span>
+										</td>
+									</tr>
+								</table>
+								<table class="w3-padding ">
+{{#each varsRange }}
+									<tr class="">
+										<td class="">
+											<span><input type="radio" name="pageFacetRange" class="pageFacetRange " id="pageFacetRangeTrafficLightStep_{{ @key }}" value="{{ var }}"{{#eq defaultRangeVar var }} checked="checked"{{/eq}} onclick="facetRangeChange(this, 'TrafficLightStep'); "/></span>
+										</td>
+										<td class="">
+											<label for="pageFacetRangeTrafficLightStep_{{ @key }}">{{ displayName }}</label>
+										</td>
+									</tr>
+{{/each}}
+								</table>
+{{/inline}}
+{{#*inline "htmBodyPivotTrafficLightStepPage"}}								<!-- #*inline "htmBodyPivotTrafficLightStepPage" -->
+								<div style="display: none; " class="w3-padding w3-tiny " id="pageSearchVal-PivotTrafficLightStepHidden">
+{{#each defaultPivotVars }}
+									<div class="pageSearchVal-PivotTrafficLightStepHidden " id="pageSearchVal-PivotTrafficLightStepHidden_{{ this }}">{{ this }}</div>
+{{/each}}
+								</div>
+								<div class="w3-padding w3-tiny " id="pageSearchVal-PivotTrafficLightStep">
+{{#if defaultPivotVars }}
+									<div class="pageSearchVal pageSearchVal-PivotTrafficLightStep " id="pageSearchVal-PivotTrafficLightStep_1">facet.pivot={!range=r1}{{#each defaultPivotVars }}{{#if @index }},{{/if}}{{ this }}{{/each}}</div>
+{{/if}}
+								</div>
+								<table class="w3-table ">
+{{#each varsFq }}
+									<tr class="">
+										<td class="">
+											<span><input type="checkbox" name="pageFacetPivot" class="pageFacetPivot " id="pageFacetPivotTrafficLightStep_{{ @key }}" value="{{ var }}"{{#if pivot }} checked="checked"{{/if}} onclick="facetPivotChange(this, 'TrafficLightStep'); "/></span>
+										</td>
+										<td class="w3-cell ">
+											<label for="pageFacetPivotTrafficLightStep_{{ @key }}">{{ displayName }}</label>
+										</td>
+									</tr>
+{{/each}}
+								</table>
+{{/inline}}
+{{#*inline "htmBodyFieldListTrafficLightStepPage"}}								<!-- #*inline "htmBodyFieldListTrafficLightStepPage" -->
+								<div style="display: none; " class="w3-padding w3-tiny " id="pageSearchVal-FieldListTrafficLightStepHidden">
+{{#each defaultFieldListVars }}
+									<div class="pageSearchVal-FieldListTrafficLightStepHidden " id="pageSearchVal-FieldListTrafficLightStepHidden_{{ this }}">{{ this }}</div>
+{{/each}}
+								</div>
+								<div class="w3-padding w3-tiny " id="pageSearchVal-FieldListTrafficLightStep">
+{{#if defaultFieldListVars }}
+									<div class="pageSearchVal pageSearchVal-FieldListTrafficLightStep " id="pageSearchVal-FieldListTrafficLightStep_1">fl={{#each defaultFieldListVars }}{{#if @index }},{{/if}}{{ this }}{{/each}}</div>
+{{/if}}
+								</div>
+								<table class="w3-table ">
+{{#each varsFq }}
+									<tr class="">
+										<td class="">
+											<span><input type="checkbox" name="pageFieldList" class="pageFieldList " id="pageFieldListTrafficLightStep_{{ @key }}" value="{{ var }}"{{#if fieldList }} checked="checked"{{/if}} onclick="facetFieldListChange(this, 'TrafficLightStep'); "/></span>
+										</td>
+										<td class="w3-cell ">
+											<label for="pageFieldListTrafficLightStep_{{ @key }}">{{ displayName }}</label>
+										</td>
+									</tr>
+{{/each}}
+								</table>
+{{/inline}}
+{{#*inline "htmBodyStatsTrafficLightStepPage"}}								<!-- #*inline "htmBodyStatsTrafficLightStepPage" -->
+								<div style="display: none; " class="w3-padding w3-tiny " id="pageSearchVal-StatsTrafficLightStepHidden">
+{{#each defaultStatsVars }}
+									<div class="pageSearchVal-StatsTrafficLightStepHidden " id="pageSearchVal-StatsTrafficLightStepHidden_{{ this }}">{{ this }}</div>
+{{/each}}
+								</div>
+								<div class="w3-padding w3-tiny " id="pageSearchVal-StatsTrafficLightStep">
+{{#if defaultStatsVars }}
+{{#each defaultStatsVars }}									<div class="pageSearchVal pageSearchVal-StatsTrafficLightStep_{{ this }} " id="pageSearchVal-StatsTrafficLightStep_{{ this }}">stats.field={{ this }}</div>
+{{/each}}{{/if}}
+								</div>
+								<table class="w3-table ">
+{{#each varsFq }}
+{{#if enableStats }}
+									<tr class="">
+										<td class="">
+											<span><input type="checkbox" name="pageStats" class="pageStats " id="pageStatsTrafficLightStep_{{ @key }}" value="{{ var }}"{{#if ./stats }} checked="checked"{{/if}} onclick="facetStatsChange(this, 'TrafficLightStep'); "/></span>
+										</td>
+										<td class="w3-cell ">
+											<div>
+												<label for="pageStatsTrafficLightStep_{{ @key }}">{{ displayName }}</label>
+											</div>
+											<div class="pageStatsField w3-small pageStatsFieldTrafficLightStep_{{ @key }} " id="pageStatsFieldTrafficLightStep_{{ @key }}">
+{{#if ./stats }}
+{{#each ./stats }}
+{{#eq @key 'name' }}{{else}}
+												<div data-class="TrafficLightStep" data-var="{{ ../var }}" data-val="{{ @key }}">{{ @key }}: {{ this }}</div>
+{{/eq}}
+{{/each}}
+{{#if ./stats/min }}
+									<div>									<span> step </span>									<input id="animateStatsStep" placeholder="step" value="1" style="width: 4em; "/>									<span> min </span>									<input id="animateStatsMin" placeholder="min" value="{{ ./stats/min }}" style="width: 4em; "/>									<span> max </span>									<input id="animateStatsMax" placeholder="max" value="{{ ./stats/max }}" style="width: 4em; "/>									<span> speed in seconds </span>									<input id="animateStatsSpeed" placeholder="speed" value="1" style="width: 4em; "/>									<button onclick="animateStats(); ">animate</button>									</div>{{/if}}
+{{/if}}
+											</div>
+										</td>
+									</tr>
+{{/if}}
+{{/each}}
+								</table>
+{{/inline}}
+{{#*inline "htmBodyMenuTrafficLightStepPage"}}		<!-- #*inline "htmBodyMenuTrafficLightStepPage" -->
+{{> "htmBodyMenuMapResultPage"}}{{/inline}}
+{{#*inline "htmBodyGraphTrafficLightStepPage"}}		<!-- #*inline "htmBodyGraphTrafficLightStepPage" -->
+<div id="htmBodyGraphMapResultPage" class="w3-content htmBodyGraph "></div>{{/inline}}
+{{#*inline "htmBodyCount0TrafficLightStepPage"}}		<!-- #*inline "htmBodyCount0TrafficLightStepPage" -->
+		<h1>
+			<a href="{{pageUri}}" class="w3-bar-item w3-btn w3-center w3-block w3-blue w3-hover-blue">
+				{{#if classIconCssClasses}}
+					<i class="{{ classIconCssClasses }} site-menu-icon "></i>
+				{{/if}}
+				<span class="">traffic light steps</span>
+			</a>
+		</h1>
+		<h2>
+			<span class="w3-bar-item w3-padding w3-center w3-block w3-blue">
+				{{#if classIconCssClasses}}
+					<i class="{{ classIconCssClasses }}  site-menu-icon "></i>
+				{{/if}}
+				<span class="">no traffic light step found</span>
+			</span>
+		</h2>
+{{/inline}}
+{{#*inline "htmBodyCount1AllTrafficLightStepPage"}}		<!-- #*inline "htmBodyCount1AllTrafficLightStepPage" -->
+		<h1 class="w3-center ">
+			<a href="{{pageUri}}" class="w3-bar-item w3-btn w3-block w3-blue w3-hover-blue">
+			{{#if classIconCssClasses}}
+				<i class="{{ classIconCssClasses }} site-menu-icon "></i>
+			{{/if}}
+				<span class="">traffic light step</span>
+			</a>
+		</h1>
+		<h2 class="w3-center ">
+			<span class="w3-bar-item w3-padding w3-center w3-block w3-blue">
+				<span class="">{{trafficLightStep_.objectTitle}}</span>
+			</span>
+		</h2>
+{{/inline}}
+{{#*inline "htmBodyCount1TrafficLightStepPage"}}		<!-- #*inline "htmBodyCount1TrafficLightStepPage" -->
+		<h1>
+			<a href="{{pageUri}}" class="w3-bar-item w3-btn w3-center w3-block w3-blue w3-hover-blue">
+	{{#if classIconCssClasses}}
+				<i class="{{ classIconCssClasses }} site-menu-icon "></i>
+	{{/if}}
+				<span class="">traffic light steps</span>
+			</a>
+		</h1>
+		<div>
+	{{#if pagination.pagePrevious}}
+			<a href="{{pageUri}}?start={{pagination.pagePrevious.start}}&amp;rows={{pagination.rows}}">
+				<i class="fas fa-arrow-square-left "></i>
+			</a>
+	{{else}}
+			<i class="fas fa-arrow-square-left w3-opacity "></i>
+	{{/if}}
+	{{#gte pagination.rowsPrevious pagination.1L}}
+			<a href="{{pageUri}}?start={{pagination.start}}&amp;rows={{ pagination.rowsPrevious }}">
+				<i class="fas fa-minus-square "></i>
+			</a>
+	{{else}}
+			<i class="fas fa-minus-square w3-opacity "></i>
+	{{/gte}}
+			<a href="{{pageUri}}?start={{pagination.start}}&amp;rows={{ pagination.rowsNext }}">
+				<i class="fas fa-plus-square "></i>
+			</a>
+	{{#if pagination.pageNext}}
+			<a href="{{pageUri}}?start={{pagination.pageNext.start}}&amp;rows={{pagination.rows}}">
+				<i class="fas fa-arrow-square-right "></i>
+			</a>
+	{{else}}
+			<i class="fas fa-arrow-square-right w3-opacity "></i>
+	{{/if}}
+			<span>{{ pagination.startNum }} - {{ pagination.endNum }} of {{ pagination.foundNum }}</span>
+		</div>
+{{> "table1TrafficLightStepPage"}}
+{{/inline}}
+{{#*inline "htmBodyAllTrafficLightStepPage"}}		<!-- #*inline "htmBodyAllTrafficLightStepPage" -->
+		<h1>
+			<a href="{{pageUri}}" class="w3-bar-item w3-btn w3-center w3-block w3-blue w3-hover-blue">
+	{{#if classIconCssClasses}}
+				<i class="{{ classIconCssClasses }} site-menu-icon "></i>
+	{{/if}}
+				<span class="">traffic light steps</span>
+			</a>
+		</h1>
+		<div class="">
+			<div>
+	{{#if pagination.pagePrevious}}
+				<a href="{{pageUri}}?start={{pagination.pagePrevious.start}}&amp;rows={{pagination.rows}}">
+					<i class="fas fa-arrow-square-left "></i>
+				</a>
+	{{else}}
+				<i class="fas fa-arrow-square-left w3-opacity "></i>
+	{{/if}}
+	{{#gte pagination.rowsPrevious pagination.1L}}
+				<a href="{{pageUri}}?start={{pagination.start}}&amp;rows={{ pagination.rowsPrevious }}">
+					<i class="fas fa-minus-square "></i>
+				</a>
+	{{else}}
+				<i class="fas fa-minus-square w3-opacity "></i>
+	{{/gte}}
+				<a href="{{pageUri}}?start={{pagination.start}}&amp;rows={{ pagination.rowsNext }}">
+					<i class="fas fa-plus-square "></i>
+				</a>
+	{{#if pagination.pageNext}}
+				<a href="{{pageUri}}?start={{pagination.pageNext.start}}&amp;rows={{pagination.rows}}">
+					<i class="fas fa-arrow-square-right "></i>
+				</a>
+	{{else}}
+				<i class="fas fa-arrow-square-right w3-opacity "></i>
+	{{/if}}
+				<span>{{ pagination.startNum }} - {{ pagination.endNum }} of {{ pagination.foundNum }}</span>
+			</div>
+{{> "table1TrafficLightStepPage"}}
+		</div>
+{{/inline}}
+{{#*inline "htmFormTrafficLightStepPage"}}
+		<!-- #*inline "htmForm" -->
+		<form action="/api/traffic-light-step" id="TrafficLightStepForm" class="pageForm " style="" onsubmit="event.preventDefault(); return false; ">
+{{#if id}}
+			<input name="id" class="valueId" type="hidden" value="{{id}}"/>
+{{/if}}
+			<input name="focusId" type="hidden"/>
+			<input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{{toJsonObjectStringInApostrophes pageResponse }}}' type="hidden"/>
+		</form>
+{{#if id}}
+{{#block "htmForm_searchpageTrafficLightStep"}}{{/block}}
+{{/if}}
+{{/inline}}
+{{#*inline "htmFormTrafficLightStepPage_patchTrafficLightStep"}}
+		<button
+			class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-blue "
+			onclick="$('#patchTrafficLightStepModal').show(); "
+			>
+			<i class="fas fa-edit "></i>
+			Modify traffic light steps
+		</button>
+		<div id="patchTrafficLightStepModal" class="w3-modal ">
+			<div class="w3-modal-content ">
+				<div class="w3-card-4 ">
+					<header class="w3-container w3-blue">
+	{{#eq "Page" classApiMethodMethod}}
+						<span class="w3-button w3-display-topright " onclick="$('#patchTrafficLightStepModal').hide(); ">×</span>
+	{{/eq}}
+						<h2 class="w3-padding ">Modify traffic light steps</h2>
+					</header>
+					<div class="" id="patchTrafficLightStepFormValues">
+							<div class="w3-cell-row ">
+{{> "htmCreated" classApiMethodMethod="PATCH"}}
+{{> "htmObjectId" classApiMethodMethod="PATCH"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmArchived" classApiMethodMethod="PATCH"}}
+{{> "htmDeleted" classApiMethodMethod="PATCH"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmSimulationKey" classApiMethodMethod="PATCH"}}
+{{> "htmTimeStepId" classApiMethodMethod="PATCH"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmTime" classApiMethodMethod="PATCH"}}
+{{> "htmLocation" classApiMethodMethod="PATCH"}}
+{{> "htmTrafficLightId" classApiMethodMethod="PATCH"}}
+{{> "htmTrafficLightType" classApiMethodMethod="PATCH"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmAngle" classApiMethodMethod="PATCH"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmColor" classApiMethodMethod="PATCH"}}
+							</div>
+						<button
+							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-blue "
+							onclick="patchTrafficLightStep(null, $('#patchTrafficLightStepFormValues')); "
+							>Modify traffic light steps</button>
+					</div>
+				</div>
+			</div>
+		</div>
+{{/inline}}
+{{#*inline "htmFormTrafficLightStepPage_postTrafficLightStep"}}
+		<button
+			class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-blue "
+			onclick="$('#postTrafficLightStepModal').show(); "
+			>
+			<i class="fas fa-file-plus "></i>
+			Create a traffic light step
+		</button>
+		<div id="postTrafficLightStepModal" class="w3-modal ">
+			<div class="w3-modal-content ">
+				<div class="w3-card-4 ">
+					<header class="w3-container w3-blue">
+	{{#eq "Page" classApiMethodMethod}}
+						<span class="w3-button w3-display-topright " onclick="$('#postTrafficLightStepModal').hide(); ">×</span>
+	{{/eq}}
+						<h2 class="w3-padding ">Create a traffic light step</h2>
+					</header>
+					<div class="" id="postTrafficLightStepFormValues">
+						<div id="postTrafficLightStepForm">
+							<div class="w3-cell-row ">
+{{> "htmCreated" classApiMethodMethod="POST"}}
+{{> "htmObjectId" classApiMethodMethod="POST"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmArchived" classApiMethodMethod="POST"}}
+{{> "htmDeleted" classApiMethodMethod="POST"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmSimulationKey" classApiMethodMethod="POST"}}
+{{> "htmTimeStepId" classApiMethodMethod="POST"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmTime" classApiMethodMethod="POST"}}
+{{> "htmLocation" classApiMethodMethod="POST"}}
+{{> "htmTrafficLightId" classApiMethodMethod="POST"}}
+{{> "htmTrafficLightType" classApiMethodMethod="POST"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmAngle" classApiMethodMethod="POST"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmColor" classApiMethodMethod="POST"}}
+							</div>
+						</div>
+						<button
+							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-blue "
+							onclick="postTrafficLightStep($('#postTrafficLightStepForm')); "
+							>Create a traffic light step</button>
+					</div>
+				</div>
+			</div>
+		</div>
+{{/inline}}
+{{#*inline "htmFormTrafficLightStepPage_putimportTrafficLightStep"}}
+		<button
+			class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-blue "
+			onclick="$('#putimportTrafficLightStepModal').show(); "
+			>
+			<i class="fas fa-file-import "></i>
+			Import traffic light steps
+		</button>
+		<div id="putimportTrafficLightStepModal" class="w3-modal ">
+			<div class="w3-modal-content ">
+				<div class="w3-card-4 ">
+					<header class="w3-container w3-blue">
+	{{#eq "Page" classApiMethodMethod}}
+						<span class="w3-button w3-display-topright " onclick="$('#putimportTrafficLightStepModal').hide(); ">×</span>
+	{{/eq}}
+						<h2 class="w3-padding ">Import traffic light steps</h2>
+					</header>
+					<div class="" id="putimportTrafficLightStepFormValues">
+						<div class="w3-cell-row ">
+							<textarea
+								class="PUTImport_searchList w3-input w3-border "
+								style="height: 300px; "
+								placeholder="{ 'searchList': [ { 'pk': ... , 'saves': [ ... ] }, ... ] }"
+								></textarea>
+						</div>
+						<button
+							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-blue "
+							onclick="putimportTrafficLightStep($('#putimportTrafficLightStepFormValues')); "
+							>Import traffic light steps</button>
+					</div>
+				</div>
+			</div>
+		</div>
+{{/inline}}
+{{#*inline "htmFormTrafficLightStepPage_searchpageTrafficLightStep"}}
+		<div id="searchpageTrafficLightStepModal" class="">
+			<div class="">
+				<div class="w3-card-4 ">
+					<div class="" id="searchpageTrafficLightStepFormValues">
+						<div id="searchpageTrafficLightStepForm">
+							<div class="w3-cell-row ">
+{{> "htmCreated" classApiMethodMethod="Page"}}
+{{> "htmModified" classApiMethodMethod="Page"}}
+{{> "htmObjectId" classApiMethodMethod="Page"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmArchived" classApiMethodMethod="Page"}}
+{{> "htmDeleted" classApiMethodMethod="Page"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmSimulationKey" classApiMethodMethod="Page"}}
+{{> "htmTimeStepId" classApiMethodMethod="Page"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmTime" classApiMethodMethod="Page"}}
+{{> "htmLocation" classApiMethodMethod="Page"}}
+{{> "htmTrafficLightId" classApiMethodMethod="Page"}}
+{{> "htmTrafficLightType" classApiMethodMethod="Page"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmAngle" classApiMethodMethod="Page"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmColor" classApiMethodMethod="Page"}}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+{{/inline}}
+{{#*inline "htmBodySidebarTrafficLightStepPage"}}
+				<div class="w3-dropdown-click w3-bar-block min-width-300px ">
+					<div class="min-width-300px ">
+						<span title="Search" class="siteSidebarToggle w3-padding-small w3-hover-black w3-blue " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-blue'); $(this).addClass('w3-black'); $(this).removeClass('w3-blue'); "><i class="fad fa-magnifying-glass hover-box-shadow w3-xlarge "></i> Search</span>
+						<span title="Filters" class="siteSidebarToggle w3-padding-small w3-hover-black w3-blue " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleFilters').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-blue'); $(this).addClass('w3-black'); $(this).removeClass('w3-blue'); "><i class="fad fa-filters hover-box-shadow w3-xlarge "></i> Filters</span>
+						<span title="Range" class="siteSidebarToggle w3-padding-small w3-hover-black w3-blue " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleRange').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-blue'); $(this).addClass('w3-black'); $(this).removeClass('w3-blue'); "><i class="fad fa-calendar-range hover-box-shadow w3-xlarge "></i> Range</span>
+						<span title="Pivot" class="siteSidebarToggle w3-padding-small w3-hover-black w3-blue " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-blue'); $(this).addClass('w3-black'); $(this).removeClass('w3-blue'); "><i class="fad fa-table-pivot hover-box-shadow w3-xlarge "></i> Pivot</span>
+						<span title="FieldList" class="siteSidebarToggle w3-padding-small w3-hover-black w3-blue " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleFieldList').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-blue'); $(this).addClass('w3-black'); $(this).removeClass('w3-blue'); "><i class="fad fa-list-ul hover-box-shadow w3-xlarge "></i> FieldList</span>
+						<span title="Stats" class="siteSidebarToggle w3-padding-small w3-hover-black w3-blue " onclick="$('.siteSidebarToggleFieldList').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleStats').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-blue'); $(this).addClass('w3-black'); $(this).removeClass('w3-blue'); "><i class="fad fa-chart-candlestick hover-box-shadow w3-xlarge "></i> Stats</span>
+						<a title="API" class="siteSidebarToggle w3-padding-small w3-hover-black w3-blue " href="{{ apiUri }}{{ queryStr }}"><i class="fad fa-brackets-curly hover-box-shadow w3-xlarge "></i> API</a>
+					</div>
+					<div class=" ">
+						<div class="siteSidebarToggle siteSidebarToggleSearch w3-dropdown-content min-width-300px w3-white w3-border w3-border-blue " style="display: none; ">
+							<div class="w3-bar w3-blue ">
+								<span class="w3-bar-item ">
+								<i class="fad fa-magnifying-glass "></i> Search</span>
+							</div>
+							<div class="w3-bar-block ">
+{{#block "htmBodySearch"}}{{/block}}
+							</div>
+						</div>
+						<div  class="siteSidebarToggle siteSidebarToggleFilters w3-dropdown-content min-width-300px w3-white w3-border w3-border-blue " style="display: none; ">
+							<div class="w3-bar w3-blue ">
+								<span class="w3-bar-item ">
+								<i class="fad fa-filters "></i> Filters</span>
+							</div>
+							<div class="w3-bar-block ">
+{{#block "htmBodyFilters"}}{{/block}}
+							</div>
+						</div>
+						<div  class="siteSidebarToggle siteSidebarToggleRange w3-dropdown-content min-width-300px w3-white w3-border w3-border-blue " style="display: none; ">
+							<div class="w3-bar w3-blue  ">
+								<span class="w3-bar-item ">
+								<i class="fad fa-calendar-range "></i> Range</span>
+							</div>
+							<div class="w3-bar-block ">
+{{#block "htmBodyRange"}}{{/block}}
+							</div>
+						</div>
+						<div  class="siteSidebarToggle siteSidebarTogglePivot w3-dropdown-content min-width-300px w3-white w3-border w3-border-blue " style="display: none; ">
+							<div class="w3-bar w3-blue ">
+								<span class="w3-bar-item ">
+								<i class="fad fa-table-pivot "></i> Pivot</span>
+							</div>
+							<div class="w3-bar-block ">
+{{#block "htmBodyPivot"}}{{/block}}
+							</div>
+						</div>
+						<div  class="siteSidebarToggle siteSidebarToggleFieldList w3-dropdown-content min-width-300px w3-white w3-border w3-border-blue " style="display: none; ">
+							<div class="w3-bar w3-blue ">
+								<span class="w3-bar-item ">
+								<i class="fad fa-list-ul "></i> Field List</span>
+							</div>
+							<div class="w3-bar-block ">
+{{#block "htmBodyFieldList"}}{{/block}}
+							</div>
+						</div>
+						<div  class="siteSidebarToggle siteSidebarToggleStats w3-dropdown-content min-width-300px w3-white w3-border w3-border-blue " style="display: none; ">
+							<div class="w3-bar w3-blue ">
+								<span class="w3-bar-item ">
+								<i class="fad fa-chart-candlestick "></i> Stats</span>
+							</div>
+							<div class="w3-bar-block ">
+{{#block "htmBodyStats"}}{{/block}}
+							</div>
+						</div>
+					</div>
+				</div>
+{{/inline}}
+{{#*inline "htmBodyStartTrafficLightStepPage"}}
+{{> "htmBodyStartMapResultPage"}}
+{{/inline}}
+{{#*inline "htmBodyMiddleTrafficLightStepPage"}}
+{{> "htmBodyMiddleMapResultPage"}}
+{{/inline}}
+{{#*inline "htmBodyEndTrafficLightStepPage"}}
+{{> "htmBodyEndMapResultPage"}}
+{{/inline}}
+{{#*inline "htmBodyTrafficLightStepPage"}}
+{{#block "htmBodyStart"}}{{/block}}
+{{#block "htmBodyMiddle"}}{{/block}}
+{{#block "htmBodyEnd"}}{{/block}}
+{{/inline}}
+{{#*inline "htmBodyMiddleTrafficLightStepPage"}}
+		<div class="w3-bar w3-content ">
+{{#block "htmBodySidebar"}}{{/block}}
+		</div>
+{{#block "htmBodyGraph"}}{{/block}}
+	<div class="pageContent w3-content ">
+		<div id="site-calendar-box">
+			<h3 id="site-calendar-title">Calendar</h3>
+			<div id="site-calendar"><!-- // --></div>
+		</div>
+	{{#eq trafficLightStepCount int0}}
+{{#block "htmBodyCount0"}}{{/block}}
+	{{else}}
+		{{#eq trafficLightStepCount int1}}
+			{{#eq params.query.q "*:*"}}
+{{#block "htmBodyCount1All"}}{{/block}}
+			{{else}}
+{{#block "htmBodyCount1"}}{{/block}}
+			{{/eq}}
+		{{else}}
+{{#block "htmBodyAll"}}{{/block}}
+		{{/eq}}
+	{{/eq}}
+{{#block "htmForm"}}{{/block}}
+{{#block "htmForms"}}{{/block}}
+	</div>
+{{/inline}}
+{{#*inline "table1TrafficLightStepPage"}}
+		<div class="w3-responsive ">
+			<table class="w3-table w3-bordered w3-striped w3-border w3-hoverable ">
+{{> table2TrafficLightStepPage}}
+			</table>
+		</div>
+{{/inline}}
+{{#*inline "table2TrafficLightStepPage"}}
+{{> "thead1TrafficLightStepPage"}}
+{{> "tbody1TrafficLightStepPage"}}
+{{> "tfoot1TrafficLightStepPage"}}
+{{/inline}}
+{{#*inline "thead1TrafficLightStepPage"}}
+				<thead class="w3-blue w3-hover-blue">
+{{> thead2TrafficLightStepPage}}
+				</thead>
+{{/inline}}
+{{#*inline "thead2TrafficLightStepPage"}}
+			<tr>
+						<th>created</th>
+						<th></th>
+			</tr>
+{{/inline}}
+{{#*inline "tbody1TrafficLightStepPage"}}
+				<tbody>
+{{> tbody2TrafficLightStepPage}}
+				</tbody>
+{{/inline}}
+{{#*inline "tbody2TrafficLightStepPage"}}
+		{{#each listTrafficLightStep}}
+					<tr>
+						<td>
+							<a href="{{pageUrlPk}}">
+								<span class="white-space-pre-wrap ">{{siteZonedDateTimeFormat created "MMM d, yyyy h:mm:ss a" siteLocale}}</span>
+							</a>
+						</td>
+						<td>
+							<a href="{{pageUrlPk}}">
+								<i class="fad fa-map-location-dot "></i>
+								<span class="white-space-pre-wrap ">{{objectTitle}}</span>
+							</a>
+						</td>
+					</tr>
+		{{/each}}
+{{/inline}}
+{{#*inline "tfoot1TrafficLightStepPage"}}
+				<tfoot class="w3-blue w3-hover-blue">
+{{> tfoot2TrafficLightStepPage}}
+				</tfoot>
+{{/inline}}
+{{#*inline "tfoot2TrafficLightStepPage"}}
+			<tr>
+			{{#if getColumnCreated}}
+				<td>
+				</td>
+			{{/if}}
+			{{#if getColumnObjectTitle}}
+				<td>
+				</td>
+			{{/if}}
+			</tr>
+	{{/inline}}
+{{#*inline "htmFormsTrafficLightStepPage"}}
+	{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq trafficLightStepCount int1}}
+		<button
+			class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-blue "
+			id="refreshThisTrafficLightStepGenPage"
+			onclick="patch{{classSimpleName}}Vals( [ {name: 'fq', value: 'id:{{id}}' } ], {}, function() { addGlow($('#refreshThisTrafficLightStepGenPage')); }, function() { addError($('#refreshThisTrafficLightStepGenPage')); }); return false; ">
+			<i class="fas fa-sync-alt "></i>
+			refresh this traffic light step
+		</button>
+		{{/eq}}
+	{{/ifContainsAnyRoles}}
+	{{#ifContainsAnyRoles roles authRolesAdmin}}
+{{#block "htmForm_patchTrafficLightStep"}}{{/block}}
+{{#block "htmForm_postTrafficLightStep"}}{{/block}}
+{{#block "htmForm_putimportTrafficLightStep"}}{{/block}}
+	{{/ifContainsAnyRoles}}
+{{#block "htmSuggested"}}{{/block}}
+{{/inline}}
+{{#*inline "htmSuggestedTrafficLightStepPage"}}
+			{{#ifContainsAnyRoles roles rolesRequired}}
+					<div class="">
+						<button id="refreshAllTrafficLightStepGenPage{{id}}" class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-blue "
+							onclick="patch{{classSimpleName}}Vals([], {}, function() { addGlow($('#refreshAllTrafficLightStepGenPage{{id}}')); }, function() { addError($('#refreshAllTrafficLightStepGenPage{{id}}')); }); "
+							>
+							<i class="fas fa-sync-alt "></i>
+							refresh all the traffic light steps
+						</button>
+					</div>
+			{{/ifContainsAnyRoles}}
+			<div class="w3-cell-row ">
+				<div class="w3-cell ">
+					<span>
+						search traffic light steps: 
+					</span>
+				</div>
+			</div>
+			<div class="w3-bar ">
+				<input
+					type="text"
+					class="suggestTrafficLightStep w3-input w3-border w3-bar-item "
+					name="suggestTrafficLightStep"
+					id="suggestTrafficLightStep{{id}}"
+					autocomplete="off"
+					oninput="suggestTrafficLightStepObjectSuggest( [ { 'name': 'q', 'value': 'objectSuggest:' + $(this).val() }, { 'name': 'rows', 'value': '10' }, { 'name': 'fl', 'value': 'classCanonicalName,,pageUrlPk,objectTitle' } ], $('#suggestListTrafficLightStep{{id}}'), {{id}}; "
+					onkeyup="if (event.keyCode === 13) { event.preventDefault(); window.location.href = '/traffic-light-step?q={{query1}}:' + encodeURIComponent(this.value) + '{{fqs}}{{sorts}}&amp;rows={{start2}}&amp;rows={{rows1}}"
+				{{#if listTrafficLightStep}}
+					value="{{query2}}"
+				{{/if}}
+				/>
+				<button
+					class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
+					onclick="window.location.href = '/traffic-light-step?q=&quot;, query1, &quot;:' + encodeURIComponent(this.previousElementSibling.value) + '&quot;, fqs, sorts, &quot;&amp;rows=&quot;, start2, &quot;&amp;rows=&quot;, rows1, &quot;'; "
+					>
+					<i class="fas fa-search "></i>
+				</button>
+			<div>
+			<div class="w3-cell-row ">
+				<div class="w3-cell w3-left-align w3-cell-top ">
+					<ul class="w3-ul w3-hoverable " id="suggestListTrafficLightStep{{id}}">
+					</ul>
+				</div>
+			</div>
+			<div class="">
+				<a href="/traffic-light-step" class="">
+					<i class="fad fa-map-location-dot"></i>
+					see all the traffic light steps
+				</a>
+			</div>
+{{/inline}}
+{{> MapResultPage mapResult_=trafficLightStep_}}
+
+{{#*inline "htmTrafficLightId"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficLightStepTrafficLightId">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label for="{{classApiMethodMethod}}_trafficLightId">traffic light ID</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputTrafficLightId"}}
+													</div>
+	{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_trafficLightId')); $('#{{classApiMethodMethod}}_trafficLightId').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficLightStepForm :input[name=id]').val() }], 'setTrafficLightId', null, function() { addGlow($('#{{classApiMethodMethod}}_trafficLightId')); }, function() { addError($('#{{classApiMethodMethod}}_trafficLightId')); }); "
+																		>
+																	<i class="far fa-eraser "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/ifContainsAnyRoles}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputTrafficLightId"}}
+		{{#ifContainsAnyRoles roles rolesRequired}}
+														<input
+															type="text"
+															placeholder="traffic light ID"
+															id="{{classApiMethodMethod}}_trafficLightId"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setTrafficLightId classTrafficLightStep inputTrafficLightStep{{id}}TrafficLightId w3-input w3-border "
+																name="setTrafficLightId"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setTrafficLightId classTrafficLightStep inputTrafficLightStep{{id}}TrafficLightId w3-input w3-border "
+																name="setTrafficLightId"
+		{{else}}
+																class="valueTrafficLightId w3-input w3-border classTrafficLightStep inputTrafficLightStep{{id}}TrafficLightId w3-input w3-border "
+																name="trafficLightId"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setTrafficLightId', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_trafficLightId')); }, function() { addError($('#{{classApiMethodMethod}}_trafficLightId')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficLightStep_.trafficLightId}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficLightStep{{id}}TrafficLightId ">{{trafficLightStep_.trafficLightId}}</span>
+			{{/ifContainsKeys}}
+		{{/ifContainsAnyRoles}}
+{{/inline}}
+
+{{#*inline "htmTrafficLightType"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficLightStepTrafficLightType">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label for="{{classApiMethodMethod}}_trafficLightType">traffic light type</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputTrafficLightType"}}
+													</div>
+	{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_trafficLightType')); $('#{{classApiMethodMethod}}_trafficLightType').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficLightStepForm :input[name=id]').val() }], 'setTrafficLightType', null, function() { addGlow($('#{{classApiMethodMethod}}_trafficLightType')); }, function() { addError($('#{{classApiMethodMethod}}_trafficLightType')); }); "
+																		>
+																	<i class="far fa-eraser "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/ifContainsAnyRoles}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputTrafficLightType"}}
+		{{#ifContainsAnyRoles roles rolesRequired}}
+														<input
+															type="text"
+															placeholder="traffic light type"
+															id="{{classApiMethodMethod}}_trafficLightType"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setTrafficLightType classTrafficLightStep inputTrafficLightStep{{id}}TrafficLightType w3-input w3-border "
+																name="setTrafficLightType"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setTrafficLightType classTrafficLightStep inputTrafficLightStep{{id}}TrafficLightType w3-input w3-border "
+																name="setTrafficLightType"
+		{{else}}
+																class="valueTrafficLightType w3-input w3-border classTrafficLightStep inputTrafficLightStep{{id}}TrafficLightType w3-input w3-border "
+																name="trafficLightType"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setTrafficLightType', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_trafficLightType')); }, function() { addError($('#{{classApiMethodMethod}}_trafficLightType')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficLightStep_.trafficLightType}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficLightStep{{id}}TrafficLightType ">{{trafficLightStep_.trafficLightType}}</span>
+			{{/ifContainsKeys}}
+		{{/ifContainsAnyRoles}}
+{{/inline}}
+
+{{#*inline "htmAngle"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficLightStepAngle">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label for="{{classApiMethodMethod}}_angle">Angle in degrees</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputAngle"}}
+													</div>
+	{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_angle')); $('#{{classApiMethodMethod}}_angle').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficLightStepForm :input[name=id]').val() }], 'setAngle', null, function() { addGlow($('#{{classApiMethodMethod}}_angle')); }, function() { addError($('#{{classApiMethodMethod}}_angle')); }); "
+																		>
+																	<i class="far fa-eraser "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/ifContainsAnyRoles}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputAngle"}}
+		{{#ifContainsAnyRoles roles rolesRequired}}
+														<input
+															type="text"
+															placeholder="Angle in degrees"
+															id="{{classApiMethodMethod}}_angle"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setAngle classTrafficLightStep inputTrafficLightStep{{id}}Angle w3-input w3-border "
+																name="setAngle"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setAngle classTrafficLightStep inputTrafficLightStep{{id}}Angle w3-input w3-border "
+																name="setAngle"
+		{{else}}
+																class="valueAngle w3-input w3-border classTrafficLightStep inputTrafficLightStep{{id}}Angle w3-input w3-border "
+																name="angle"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setAngle', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_angle')); }, function() { addError($('#{{classApiMethodMethod}}_angle')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficLightStep_.angle}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficLightStep{{id}}Angle ">{{trafficLightStep_.angle}}</span>
+			{{/ifContainsKeys}}
+		{{/ifContainsAnyRoles}}
+{{/inline}}
+
+{{#*inline "htmColor"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficLightStepColor">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label for="{{classApiMethodMethod}}_color">Color</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputColor"}}
+													</div>
+	{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_color')); $('#{{classApiMethodMethod}}_color').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficLightStepForm :input[name=id]').val() }], 'setColor', null, function() { addGlow($('#{{classApiMethodMethod}}_color')); }, function() { addError($('#{{classApiMethodMethod}}_color')); }); "
+																		>
+																	<i class="far fa-eraser "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/ifContainsAnyRoles}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputColor"}}
+		{{#ifContainsAnyRoles roles rolesRequired}}
+														<input
+															type="text"
+															placeholder="Color"
+															id="{{classApiMethodMethod}}_color"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setColor classTrafficLightStep inputTrafficLightStep{{id}}Color w3-input w3-border "
+																name="setColor"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setColor classTrafficLightStep inputTrafficLightStep{{id}}Color w3-input w3-border "
+																name="setColor"
+		{{else}}
+																class="valueColor w3-input w3-border classTrafficLightStep inputTrafficLightStep{{id}}Color w3-input w3-border "
+																name="color"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setColor', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_color')); }, function() { addError($('#{{classApiMethodMethod}}_color')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficLightStep_.color}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficLightStep{{id}}Color ">{{trafficLightStep_.color}}</span>
+			{{/ifContainsKeys}}
+		{{/ifContainsAnyRoles}}
+{{/inline}}

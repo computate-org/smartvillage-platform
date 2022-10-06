@@ -415,7 +415,9 @@
 							</div>
 							<div class="w3-cell-row ">
 {{> "htmSimulationName" classApiMethodMethod="PATCH"}}
-{{> "htmSimulationPath" classApiMethodMethod="PATCH"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmSumocfgPath" classApiMethodMethod="PATCH"}}
 							</div>
 							<div class="w3-cell-row ">
 {{> "htmStartSeconds" classApiMethodMethod="PATCH"}}
@@ -424,6 +426,7 @@
 							</div>
 							<div class="w3-cell-row ">
 {{> "htmFcdOutputGeo" classApiMethodMethod="PATCH"}}
+{{> "htmTlsStatesPaths" classApiMethodMethod="PATCH"}}
 							</div>
 						<button
 							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-blue "
@@ -462,7 +465,9 @@
 							</div>
 							<div class="w3-cell-row ">
 {{> "htmSimulationName" classApiMethodMethod="POST"}}
-{{> "htmSimulationPath" classApiMethodMethod="POST"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmSumocfgPath" classApiMethodMethod="POST"}}
 							</div>
 							<div class="w3-cell-row ">
 {{> "htmStartSeconds" classApiMethodMethod="POST"}}
@@ -471,6 +476,7 @@
 							</div>
 							<div class="w3-cell-row ">
 {{> "htmFcdOutputGeo" classApiMethodMethod="POST"}}
+{{> "htmTlsStatesPaths" classApiMethodMethod="POST"}}
 							</div>
 						</div>
 						<button
@@ -534,7 +540,9 @@
 							</div>
 							<div class="w3-cell-row ">
 {{> "htmSimulationName" classApiMethodMethod="Page"}}
-{{> "htmSimulationPath" classApiMethodMethod="Page"}}
+							</div>
+							<div class="w3-cell-row ">
+{{> "htmSumocfgPath" classApiMethodMethod="Page"}}
 							</div>
 							<div class="w3-cell-row ">
 {{> "htmStartSeconds" classApiMethodMethod="Page"}}
@@ -543,6 +551,7 @@
 							</div>
 							<div class="w3-cell-row ">
 {{> "htmFcdOutputGeo" classApiMethodMethod="Page"}}
+{{> "htmTlsStatesPaths" classApiMethodMethod="Page"}}
 							</div>
 						</div>
 					</div>
@@ -860,17 +869,17 @@
 		{{/ifContainsAnyRoles}}
 {{/inline}}
 
-{{#*inline "htmSimulationPath"}}
+{{#*inline "htmSumocfgPath"}}
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}TrafficSimulationSimulationPath">
+										<div id="suggest{{classApiMethodMethod}}TrafficSimulationSumocfgPath">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-blue">
-													<label for="{{classApiMethodMethod}}_simulationPath">simulation path</label>
+													<label for="{{classApiMethodMethod}}_sumocfgPath">sumocfg path</label>
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputSimulationPath"}}
+														{{> "inputSumocfgPath"}}
 													</div>
 	{{#ifContainsAnyRoles roles rolesRequired}}
 		{{#eq 'Page' classApiMethodMethod}}
@@ -878,7 +887,7 @@
 																<button
 																		tabindex="-1"
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_simulationPath')); $('#{{classApiMethodMethod}}_simulationPath').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setSimulationPath', null, function() { addGlow($('#{{classApiMethodMethod}}_simulationPath')); }, function() { addError($('#{{classApiMethodMethod}}_simulationPath')); }); "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_sumocfgPath')); $('#{{classApiMethodMethod}}_sumocfgPath').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setSumocfgPath', null, function() { addGlow($('#{{classApiMethodMethod}}_sumocfgPath')); }, function() { addError($('#{{classApiMethodMethod}}_sumocfgPath')); }); "
 																		>
 																	<i class="far fa-eraser "></i>
 																</button>
@@ -892,36 +901,36 @@
 								</div>
 {{/inline}}
 
-{{#*inline "inputSimulationPath"}}
+{{#*inline "inputSumocfgPath"}}
 		{{#ifContainsAnyRoles roles rolesRequired}}
 														<input
 															type="text"
-															placeholder="simulation path"
-															id="{{classApiMethodMethod}}_simulationPath"
+															placeholder="sumocfg path"
+															id="{{classApiMethodMethod}}_sumocfgPath"
 	{{#eq "Page" classApiMethodMethod}}
-																class="setSimulationPath classTrafficSimulation inputTrafficSimulation{{pk}}SimulationPath w3-input w3-border "
-																name="setSimulationPath"
+																class="setSumocfgPath classTrafficSimulation inputTrafficSimulation{{pk}}SumocfgPath w3-input w3-border "
+																name="setSumocfgPath"
 	{{else}}
 		{{#eq "PATCH" classApiMethodMethod}}
-																class="setSimulationPath classTrafficSimulation inputTrafficSimulation{{pk}}SimulationPath w3-input w3-border "
-																name="setSimulationPath"
+																class="setSumocfgPath classTrafficSimulation inputTrafficSimulation{{pk}}SumocfgPath w3-input w3-border "
+																name="setSumocfgPath"
 		{{else}}
-																class="valueSimulationPath w3-input w3-border classTrafficSimulation inputTrafficSimulation{{pk}}SimulationPath w3-input w3-border "
-																name="simulationPath"
+																class="valueSumocfgPath w3-input w3-border classTrafficSimulation inputTrafficSimulation{{pk}}SumocfgPath w3-input w3-border "
+																name="sumocfgPath"
 		{{/eq}}
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setSimulationPath', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_simulationPath')); }, function() { addError($('#{{classApiMethodMethod}}_simulationPath')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setSumocfgPath', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_sumocfgPath')); }, function() { addError($('#{{classApiMethodMethod}}_sumocfgPath')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
-															value="{{trafficSimulation_.simulationPath}}"
+															value="{{trafficSimulation_.sumocfgPath}}"
 	{{/eq}}
 														/>
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficSimulation{{pk}}SimulationPath ">{{trafficSimulation_.simulationPath}}</span>
+															<span class="varTrafficSimulation{{pk}}SumocfgPath ">{{trafficSimulation_.sumocfgPath}}</span>
 			{{/ifContainsKeys}}
 		{{/ifContainsAnyRoles}}
 {{/inline}}
@@ -1188,6 +1197,73 @@
 													{{else}}
 														{{#ifContainsKeys userKeys}}
 															<span class="varTrafficSimulation{{pk}}FcdOutputGeo ">{{trafficSimulation_.fcdOutputGeo}}</span>
+			{{/ifContainsKeys}}
+		{{/ifContainsAnyRoles}}
+{{/inline}}
+
+{{#*inline "htmTlsStatesPaths"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficSimulationTlsStatesPaths">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label for="{{classApiMethodMethod}}_tlsStatesPaths">TLS States paths</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputTlsStatesPaths"}}
+													</div>
+	{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_tlsStatesPaths')); $('#{{classApiMethodMethod}}_tlsStatesPaths').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setTlsStatesPaths', null, function() { addGlow($('#{{classApiMethodMethod}}_tlsStatesPaths')); }, function() { addError($('#{{classApiMethodMethod}}_tlsStatesPaths')); }); "
+																		>
+																	<i class="far fa-eraser "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/ifContainsAnyRoles}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputTlsStatesPaths"}}
+		{{#ifContainsAnyRoles roles rolesRequired}}
+														<input
+															type="text"
+															placeholder="TLS States paths"
+															title="The paths to all TLS States files"
+															id="{{classApiMethodMethod}}_tlsStatesPaths"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setTlsStatesPaths classTrafficSimulation inputTrafficSimulation{{pk}}TlsStatesPaths w3-input w3-border "
+																name="setTlsStatesPaths"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setTlsStatesPaths classTrafficSimulation inputTrafficSimulation{{pk}}TlsStatesPaths w3-input w3-border "
+																name="setTlsStatesPaths"
+		{{else}}
+																class="valueTlsStatesPaths w3-input w3-border classTrafficSimulation inputTrafficSimulation{{pk}}TlsStatesPaths w3-input w3-border "
+																name="tlsStatesPaths"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setTlsStatesPaths', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_tlsStatesPaths')); }, function() { addError($('#{{classApiMethodMethod}}_tlsStatesPaths')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficSimulation_.tlsStatesPaths}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficSimulation{{pk}}TlsStatesPaths ">{{trafficSimulation_.tlsStatesPaths}}</span>
 			{{/ifContainsKeys}}
 		{{/ifContainsAnyRoles}}
 {{/inline}}

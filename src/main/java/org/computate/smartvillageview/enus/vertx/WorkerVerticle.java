@@ -400,9 +400,7 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 			siteRequest.setConfig(config());
 			siteRequest.setWebClient(webClient);
 			siteRequest.initDeepSiteRequestEnUS(siteRequest);
-			TrafficFcdReader reader = new TrafficFcdReader();
-			reader.setVertx(vertx);
-			reader.setWorkerExecutor(workerExecutor);
+			TrafficFcdReader reader = new TrafficFcdReader(vertx, workerExecutor, siteRequest, config());
 			reader.initDeepForClass(siteRequest);
 			reader.importFcd().onComplete(a -> {
 				String importPeriod = config().getString(String.format("%s_%s", ConfigKeys.IMPORT_DATA_PERIOD, classSimpleName));

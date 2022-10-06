@@ -296,19 +296,44 @@ ansible-playbook -e @~/.local/src/smart-village-view/local/ansible_install_vars.
 
 ```bash
 cd ~/.local/share/sumo/data
-env LD_LIBRARY_PATH=~/.local/lib "SUMO_HOME=$HOME/.local/share/sumo" python ~/.local/share/sumo/tools/osmWebWizard.py
+env LD_LIBRARY_PATH=~/.local/lib:~/.local/lib64 "SUMO_HOME=$HOME/.local/share/sumo" python ~/.local/share/sumo/tools/osmWebWizard.py
 ```
 
 # Export SUMO vehicle coordinate data
 
 ```bash
-env LD_LIBRARY_PATH=~/.local/lib "SUMO_HOME=$HOME/.local/share/sumo" SUMO_HOME=~/.local/share/sumo sumo --fcd-output ~/.local/share/sumo/data/veberod/veberod-fcd.xml -c ~/.local/share/sumo/data/veberod/veberod.sumocfg --fcd-output.geo -b 10 -e 360 --step-length 0.1
+env LD_LIBRARY_PATH=~/.local/lib:~/.local/lib64 "SUMO_HOME=$HOME/.local/share/sumo" SUMO_HOME=~/.local/share/sumo sumo --fcd-output ~/.local/share/sumo/data/veberod/veberod-fcd.xml -c ~/.local/share/sumo/data/veberod/veberod.sumocfg --fcd-output.geo -b 10 -e 360 --step-length 0.1
+```
+
+# Export SUMO full data
+
+```bash
+env LD_LIBRARY_PATH=~/.local/lib:~/.local/lib64 "SUMO_HOME=$HOME/.local/share/sumo" SUMO_HOME=~/.local/share/sumo sumo --full-output ~/.local/share/sumo/data/veberod/veberod-full.xml -c ~/.local/share/sumo/data/veberod/veberod.sumocfg --fcd-output.geo -b 10 -e 360 --step-length 0.1
+```
+
+# Convert X,Y coordinates to geo coordinates with python
+
+The Veberod_intersection.net.xml contains data about traffic lights like the x/y position. 
+
+```xml
+<junction id="267701936" type="traffic_light" x="220.61" y="853.48" 
+```
+
+To convert the x/y position, use python: 
+
+```bash
+pip install pyproj sumolib
+python
+>>> import sumolib
+>>> net = sumolib.net.readNet('/home/ctate/.local/src/TLC/TLC_sumo/Veberod_intersection.net.xml')
+>>> print(net.convertXY2LonLat(220.61,853.48))
+(13.49260653795143, 55.633791753658265)
 ```
 
 # Run SUMO with Traci TCP server
 
 ```bash
-env SUMO_HOME=/home/ctate/.local/share/sumo LD_LIBRARY_PATH=/home/ctate/.local/lib /home/ctate/.local/bin/sumo-gui --remote-port 8813 --num-clients 1 --start
+env SUMO_HOME=/home/ctate/.local/share/sumo LD_LIBRARY_PATH=/home/ctate/.local/lib:~/.local/lib64 /home/ctate/.local/bin/sumo-gui --remote-port 8813 --num-clients 1 --start
 ```
 
 ## Python interact with the Traci TCP server

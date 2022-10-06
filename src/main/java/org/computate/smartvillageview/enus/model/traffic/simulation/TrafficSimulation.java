@@ -1,6 +1,8 @@
 package org.computate.smartvillageview.enus.model.traffic.simulation;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Optional;
 
 import org.computate.search.wrap.Wrap;
 import org.computate.smartvillageview.enus.model.base.BaseModel;
@@ -62,12 +64,12 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * DisplayName: simulation path
-	 * HtmlRow: 3
-	 * HtmlCell: 2
+	 * DisplayName: sumocfg path
+	 * HtmlRow: 4
+	 * HtmlCell: 1
 	 * Facet: true
 	 */
-	protected void _simulationPath(Wrap<String> w) {
+	protected void _sumocfgPath(Wrap<String> w) {
 	}
 
 	/**
@@ -76,7 +78,7 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Persist: true
 	 * DisplayName: start seconds
 	 * Description: -b, --begin TIME Defines the begin time in seconds; The simulation starts at this time
-	 * HtmlRow: 4
+	 * HtmlRow: 5
 	 * HtmlCell: 1
 	 * Facet: true
 	 */
@@ -89,7 +91,7 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Persist: true
 	 * DisplayName: end seconds
 	 * Description: -e, --end TIME Defines the end time in seconds; The simulation ends at this time
-	 * HtmlRow: 4
+	 * HtmlRow: 5
 	 * HtmlCell: 2
 	 * Facet: true
 	 */
@@ -102,7 +104,7 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Persist: true
 	 * DisplayName: step seconds
 	 * Description: --step-length TIME Defines the step duration in seconds
-	 * HtmlRow: 4
+	 * HtmlRow: 5
 	 * HtmlCell: 3
 	 * Facet: true
 	 */
@@ -115,11 +117,32 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Persist: true
 	 * DisplayName: floating car data output geo-coordinates
 	 * Description: --fcd-output.geo Save the Floating Car Data using geo-coordinates (lon/lat)
-	 * HtmlRow: 5
+	 * HtmlRow: 6
 	 * HtmlCell: 1
 	 * Facet: true
 	 */
 	protected void _fcdOutputGeo(Wrap<Boolean> w) {
 		w.o(true);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * DisplayName: TLS States paths
+	 * Description: The paths to all TLS States files
+	 * HtmlRow: 6
+	 * HtmlCell: 2
+	 * Facet: true
+	 */
+	protected void _tlsStatesPaths(List<String> l) {
+	}
+
+	@Override
+	protected void _objectTitle(Wrap<String> w) {
+		StringBuilder b = new StringBuilder();
+		Optional.ofNullable(simulationName).ifPresent(s -> b.append(" Simulation \"").append(s).append("\""));
+		Optional.ofNullable(sumocfgPath).ifPresent(s -> b.append(" in ").append(s));
+		w.o(b.toString().trim());
 	}
 }

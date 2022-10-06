@@ -111,6 +111,19 @@ public class PersonStep extends PersonStepGen<MapResult> {
 	protected void _slope(Wrap<BigDecimal> w) {
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * DisplayName: Color
+	 * HtmlRow: 6
+	 * HtmlCell: 1
+	 * Facet: true
+	 */
+	protected void _color(Wrap<String> w) {
+		w.o("brown");
+	}
+
 	
 	@Override
 	protected void _objectTitle(Wrap<String> w) {

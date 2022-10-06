@@ -34,7 +34,6 @@ import io.vertx.pgclient.data.Point;
  * Color: blue
  * IconGroup: duotone
  * IconName: map-location-dot
- * NameVar.enUS: vehicleStep
  * Rows: 100
  */
 public class VehicleStep extends VehicleStepGen<MapResult> {
@@ -109,6 +108,19 @@ public class VehicleStep extends VehicleStepGen<MapResult> {
 	 * Facet: true
 	 */
 	protected void _slope(Wrap<BigDecimal> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * DisplayName: Color
+	 * HtmlRow: 6
+	 * HtmlCell: 1
+	 * Facet: true
+	 */
+	protected void _color(Wrap<String> w) {
+		w.o("black");
 	}
 
 	@Override

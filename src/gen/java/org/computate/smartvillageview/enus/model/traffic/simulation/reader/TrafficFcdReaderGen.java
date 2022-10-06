@@ -35,6 +35,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.WorkerExecutor;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.client.WebClient;
+import io.vertx.core.eventbus.EventBus;
 import org.computate.search.wrap.Wrap;
 import io.vertx.core.Promise;
 import io.vertx.core.Future;
@@ -79,6 +80,7 @@ public abstract class TrafficFcdReaderGen<DEV> extends Object {
 		setConfig(config);
 		setVertx(vertx);
 		setWorkerExecutor(workerExecutor);
+		setEventBus(vertx.eventBus());
 	}
 
 	public TrafficFcdReaderGen() {
@@ -292,6 +294,44 @@ public abstract class TrafficFcdReaderGen<DEV> extends Object {
 		}
 		return (TrafficFcdReader)this;
 	}
+
+	//////////////
+	// eventBus //
+	//////////////
+
+	/**	 The entity eventBus
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected EventBus eventBus;
+
+	/**	<br> The entity eventBus
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.reader.TrafficFcdReader&fq=entiteVar_enUS_indexed_string:eventBus">Find the entity eventBus in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _eventBus(Wrap<EventBus> w);
+
+	public EventBus getEventBus() {
+		return eventBus;
+	}
+
+	public void setEventBus(EventBus eventBus) {
+		this.eventBus = eventBus;
+	}
+	public static EventBus staticSetEventBus(SiteRequestEnUS siteRequest_, String o) {
+		return null;
+	}
+	protected TrafficFcdReader eventBusInit() {
+		Wrap<EventBus> eventBusWrap = new Wrap<EventBus>().var("eventBus");
+		if(eventBus == null) {
+			_eventBus(eventBusWrap);
+			setEventBus(eventBusWrap.o);
+		}
+		return (TrafficFcdReader)this;
+	}
 	public static final String importFcdComplete1 = "Syncing FCD files completed. ";
 	public static final String importFcdComplete = importFcdComplete1;
 	public static final String importFcdFail1 = "Syncing FCD files failed. ";
@@ -309,6 +349,54 @@ public abstract class TrafficFcdReaderGen<DEV> extends Object {
 	public static final String importSystemEventFail = importSystemEventFail1;
 	public static final String importSystemEventWebSocket1 = "websocket%s";
 	public static final String importSystemEventWebSocket = importSystemEventWebSocket1;
+
+	public static final String importTrafficSimulationFutureComplete1 = "Syncing Traffic simulation import complete: %s";
+	public static final String importTrafficSimulationFutureComplete = importTrafficSimulationFutureComplete1;
+	public static final String importTrafficSimulationFutureFail1 = "Syncing Traffic simulation import failed: %s";
+	public static final String importTrafficSimulationFutureFail = importTrafficSimulationFutureFail1;
+
+	public static final String importSumoAdditionalFilesComplete1 = "Syncing sumocfg file complete: %s";
+	public static final String importSumoAdditionalFilesComplete = importSumoAdditionalFilesComplete1;
+	public static final String importSumoAdditionalFilesFail1 = "Syncing sumocfg file failed: %s";
+	public static final String importSumoAdditionalFilesFail = importSumoAdditionalFilesFail1;
+
+	public static final String getSumoAdditionalFilePathsComplete1 = "Syncing SUMO net file complete: %s";
+	public static final String getSumoAdditionalFilePathsComplete = getSumoAdditionalFilePathsComplete1;
+	public static final String getSumoAdditionalFilePathsFail1 = "Syncing SUMO net file failed: %s";
+	public static final String getSumoAdditionalFilePathsFail = getSumoAdditionalFilePathsFail1;
+
+	public static final String importSumoNetFilesComplete1 = "Syncing sumocfg file complete: %s";
+	public static final String importSumoNetFilesComplete = importSumoNetFilesComplete1;
+	public static final String importSumoNetFilesFail1 = "Syncing sumocfg file failed: %s";
+	public static final String importSumoNetFilesFail = importSumoNetFilesFail1;
+
+	public static final String importSumoNetFilePathComplete1 = "Syncing SUMO net file complete: %s";
+	public static final String importSumoNetFilePathComplete = importSumoNetFilePathComplete1;
+	public static final String importSumoNetFilePathFail1 = "Syncing SUMO net file failed: %s";
+	public static final String importSumoNetFilePathFail = importSumoNetFilePathFail1;
+
+	public static final String importTrafficLightHandleBodyStarted1 = "Syncing Traffic Light record started: %s";
+	public static final String importTrafficLightHandleBodyStarted = importTrafficLightHandleBodyStarted1;
+	public static final String importTrafficLightHandleBodyComplete1 = "Syncing Traffic Light record completed: %s";
+	public static final String importTrafficLightHandleBodyComplete = importTrafficLightHandleBodyComplete1;
+	public static final String importTrafficLightHandleBodyFail1 = "Syncing Traffic Light record failed: %s";
+	public static final String importTrafficLightHandleBodyFail = importTrafficLightHandleBodyFail1;
+	public static final String importTrafficLightHandleBodyWebSocket1 = "websocket%s";
+	public static final String importTrafficLightHandleBodyWebSocket = importTrafficLightHandleBodyWebSocket1;
+
+	public static final String importTlsStatesFileComplete1 = "Syncing SUMO net file complete: %s";
+	public static final String importTlsStatesFileComplete = importTlsStatesFileComplete1;
+	public static final String importTlsStatesFileFail1 = "Syncing SUMO net file failed: %s";
+	public static final String importTlsStatesFileFail = importTlsStatesFileFail1;
+
+	public static final String importTrafficLightStepHandleBodyStarted1 = "Syncing Traffic Light record started: %s";
+	public static final String importTrafficLightStepHandleBodyStarted = importTrafficLightStepHandleBodyStarted1;
+	public static final String importTrafficLightStepHandleBodyComplete1 = "Syncing Traffic Light record completed: %s";
+	public static final String importTrafficLightStepHandleBodyComplete = importTrafficLightStepHandleBodyComplete1;
+	public static final String importTrafficLightStepHandleBodyFail1 = "Syncing Traffic Light record failed: %s";
+	public static final String importTrafficLightStepHandleBodyFail = importTrafficLightStepHandleBodyFail1;
+	public static final String importTrafficLightStepHandleBodyWebSocket1 = "websocket%s";
+	public static final String importTrafficLightStepHandleBodyWebSocket = importTrafficLightStepHandleBodyWebSocket1;
 
 	public static final String importFcdFileListStarted1 = "Syncing FCD files started. ";
 	public static final String importFcdFileListStarted = importFcdFileListStarted1;
@@ -372,6 +460,7 @@ public abstract class TrafficFcdReaderGen<DEV> extends Object {
 				webClientInit();
 				vertxInit();
 				workerExecutorInit();
+				eventBusInit();
 	}
 
 	public void initDeepForClass(SiteRequestEnUS siteRequest_) {
@@ -423,6 +512,8 @@ public abstract class TrafficFcdReaderGen<DEV> extends Object {
 				return oTrafficFcdReader.vertx;
 			case "workerExecutor":
 				return oTrafficFcdReader.workerExecutor;
+			case "eventBus":
+				return oTrafficFcdReader.eventBus;
 			default:
 				return null;
 		}
@@ -526,7 +617,7 @@ public abstract class TrafficFcdReaderGen<DEV> extends Object {
 		return sb.toString();
 	}
 
-	public static final String[] TrafficFcdReaderVals = new String[] { importFcdComplete1, importFcdFail1, importFcdSkip1, importFcdStarted1, importSystemEventStarted1, importSystemEventComplete1, importSystemEventFail1, importSystemEventWebSocket1, importFcdFileListStarted1, importFcdFileListComplete1, importFcdFileListSkip1, importFcdFileListFail1, importFcdFileStarted1, importFcdFileComplete1, importFcdFileFail1, importFcdHandleBodyStarted1, importFcdHandleBodyComplete1, importFcdHandleBodyFail1, importFcdHandleBodyWebSocket1, importVehicleStarted1, importVehicleComplete1, importVehicleFail1, importFcdVehicleStepStarted1, importFcdVehicleStepComplete1, importFcdVehicleStepFail1, importFcdVehicleStepWebSocket1 };
+	public static final String[] TrafficFcdReaderVals = new String[] { importFcdComplete1, importFcdFail1, importFcdSkip1, importFcdStarted1, importSystemEventStarted1, importSystemEventComplete1, importSystemEventFail1, importSystemEventWebSocket1, importTrafficSimulationFutureComplete1, importTrafficSimulationFutureFail1, importSumoAdditionalFilesComplete1, importSumoAdditionalFilesFail1, getSumoAdditionalFilePathsComplete1, getSumoAdditionalFilePathsFail1, importSumoNetFilesComplete1, importSumoNetFilesFail1, importSumoNetFilePathComplete1, importSumoNetFilePathFail1, importTrafficLightHandleBodyStarted1, importTrafficLightHandleBodyComplete1, importTrafficLightHandleBodyFail1, importTrafficLightHandleBodyWebSocket1, importTlsStatesFileComplete1, importTlsStatesFileFail1, importTrafficLightStepHandleBodyStarted1, importTrafficLightStepHandleBodyComplete1, importTrafficLightStepHandleBodyFail1, importTrafficLightStepHandleBodyWebSocket1, importFcdFileListStarted1, importFcdFileListComplete1, importFcdFileListSkip1, importFcdFileListFail1, importFcdFileStarted1, importFcdFileComplete1, importFcdFileFail1, importFcdHandleBodyStarted1, importFcdHandleBodyComplete1, importFcdHandleBodyFail1, importFcdHandleBodyWebSocket1, importVehicleStarted1, importVehicleComplete1, importVehicleFail1, importFcdVehicleStepStarted1, importFcdVehicleStepComplete1, importFcdVehicleStepFail1, importFcdVehicleStepWebSocket1 };
 
 	public static final String CLASS_SIMPLE_NAME = "TrafficFcdReader";
 	public static final String VAR_siteRequest_ = "siteRequest_";
@@ -534,12 +625,14 @@ public abstract class TrafficFcdReaderGen<DEV> extends Object {
 	public static final String VAR_webClient = "webClient";
 	public static final String VAR_vertx = "vertx";
 	public static final String VAR_workerExecutor = "workerExecutor";
+	public static final String VAR_eventBus = "eventBus";
 
 	public static final String DISPLAY_NAME_siteRequest_ = "";
 	public static final String DISPLAY_NAME_config = "";
 	public static final String DISPLAY_NAME_webClient = "";
 	public static final String DISPLAY_NAME_vertx = "";
 	public static final String DISPLAY_NAME_workerExecutor = "";
+	public static final String DISPLAY_NAME_eventBus = "";
 
 	public static String displayNameForClass(String var) {
 		return TrafficFcdReader.displayNameTrafficFcdReader(var);
@@ -556,6 +649,8 @@ public abstract class TrafficFcdReaderGen<DEV> extends Object {
 			return DISPLAY_NAME_vertx;
 		case VAR_workerExecutor:
 			return DISPLAY_NAME_workerExecutor;
+		case VAR_eventBus:
+			return DISPLAY_NAME_eventBus;
 		default:
 			return null;
 		}
