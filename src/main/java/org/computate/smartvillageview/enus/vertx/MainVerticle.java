@@ -18,6 +18,8 @@ import org.computate.smartvillageview.enus.model.iotnode.IotNodeEnUSGenApiServic
 import org.computate.smartvillageview.enus.model.page.SitePage;
 import org.computate.smartvillageview.enus.model.page.SitePageEnUSGenApiService;
 import org.computate.smartvillageview.enus.model.system.event.SystemEventEnUSGenApiService;
+import org.computate.smartvillageview.enus.model.traffic.light.TrafficLightEnUSGenApiService;
+import org.computate.smartvillageview.enus.model.traffic.light.step.TrafficLightStepEnUSGenApiService;
 import org.computate.smartvillageview.enus.model.traffic.person.step.PersonStepEnUSGenApiService;
 import org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulationEnUSGenApiService;
 import org.computate.smartvillageview.enus.model.traffic.time.step.TimeStepEnUSGenApiService;
@@ -769,6 +771,8 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 			VehicleStepEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
 			PersonStepEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
 			TrafficSimulationEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
+			TrafficLightEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
+			TrafficLightStepEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
 
 			LOG.info(configureApiComplete);
 			promise.complete();

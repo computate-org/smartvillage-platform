@@ -76,6 +76,18 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
+	 * DisplayName: net file path
+	 * HtmlRow: 4
+	 * HtmlCell: 1
+	 * Facet: true
+	 */
+	protected void _netFilePath(Wrap<String> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
 	 * DisplayName: start seconds
 	 * Description: -b, --begin TIME Defines the begin time in seconds; The simulation starts at this time
 	 * HtmlRow: 5
@@ -136,6 +148,19 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Facet: true
 	 */
 	protected void _tlsStatesPaths(List<String> l) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * DisplayName: additional file paths
+	 * Description: The paths to all the additional SUMO config files
+	 * HtmlRow: 6
+	 * HtmlCell: 2
+	 * Facet: true
+	 */
+	protected void _additionalFilePaths(List<String> l) {
 	}
 
 	@Override

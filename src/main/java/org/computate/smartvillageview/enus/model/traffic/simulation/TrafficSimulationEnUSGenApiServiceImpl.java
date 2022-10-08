@@ -605,6 +605,14 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 							num++;
 							bParams.add(o2.sqlSumocfgPath());
 						break;
+					case "setNetFilePath":
+							o2.setNetFilePath(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficSimulation.VAR_netFilePath + "=$" + num);
+							num++;
+							bParams.add(o2.sqlNetFilePath());
+						break;
 					case "setStartSeconds":
 							o2.setStartSeconds(jsonObject.getString(entityVar));
 							if(bParams.size() > 0)
@@ -977,6 +985,15 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 						num++;
 						bParams.add(o2.sqlSumocfgPath());
 						break;
+					case TrafficSimulation.VAR_netFilePath:
+						o2.setNetFilePath(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficSimulation.VAR_netFilePath + "=$" + num);
+						num++;
+						bParams.add(o2.sqlNetFilePath());
+						break;
 					case TrafficSimulation.VAR_startSeconds:
 						o2.setStartSeconds(jsonObject.getString(entityVar));
 						if(bParams.size() > 0) {
@@ -1021,6 +1038,15 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 						bSql.append(TrafficSimulation.VAR_tlsStatesPaths + "=$" + num);
 						num++;
 						bParams.add(o2.sqlTlsStatesPaths());
+						break;
+					case TrafficSimulation.VAR_additionalFilePaths:
+						o2.setAdditionalFilePaths(jsonObject.getJsonArray(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficSimulation.VAR_additionalFilePaths + "=$" + num);
+						num++;
+						bParams.add(o2.sqlAdditionalFilePaths());
 						break;
 					}
 				}

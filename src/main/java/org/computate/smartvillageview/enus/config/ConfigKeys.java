@@ -10,6 +10,11 @@ public class ConfigKeys extends ComputateConfigKeys {
 	/**
 	 * 
 	 **/
+	public static final String SUMO_PATH = "SUMO_PATH";
+
+	/**
+	 * 
+	 **/
 	public static final String DYNAMIC_PAGE_PATH = "DYNAMIC_PAGE_PATH";
 
 	/**

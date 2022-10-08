@@ -2766,6 +2766,1386 @@ paths:
             text/html; charset=utf-8:
               schema:
                 $ref: '#/components/schemas/SearchPageSystemEventResponse'
+  /api/traffic-light:
+    get:
+      operationId: searchTrafficLight
+      x-vertx-event-bus: smart-village-view-enUS-TrafficLight
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - Traffic Light
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+        - in: query
+          name: q
+          description: 'The query parameter defines a query using standard query syntax. This parameter is mandatory.'
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: 'The filter query parameter defines a query that can be used to restrict the superset of documents that can be returned, without influencing score. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: var
+          description: 'The var parameters are additional optional variables and values to pass into the application. '
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
+        - in: query
+          name: fl
+          description: 'The field list parameter limits the information included in a query response to a specified list of fields. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sort
+          description: 'The sort parameter arranges search results in either ascending (asc) or descending (desc) order. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: start
+          description: 'The start parameter specifies an offset into a query result set and instructs Solr to begin displaying results from this offset. '
+          required: false
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
+        - in: query
+          name: rows
+          description: 'The rows parameter specifies the maximum number of documents from the complete result set that Solr should return to the client at one time. '
+          required: false
+          schema:
+            type: integer
+            default: 10
+            minimum: 0
+        - in: query
+          name: facet
+          description: 'The facet parameter enables facet counts in the query response. '
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: facet.range.start
+          description: 'The facet.range.start parameter specifies the lower bound of the ranges. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.end
+          description: 'The facet.range.end specifies the upper bound of the ranges. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.gap
+          description: 'The span of each range expressed as a value to be added to the lower bound. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.pivot
+          description: 'The facet.pivot parameter defines the fields to use for the pivot. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range
+          description: 'The facet.range parameter defines the field for which Solr should create range facets. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.field
+          description: 'The facet.field parameter identifies a field that should be treated as a facet. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: d
+          description: 'The radial distance, usually in kilometers. '
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+        - in: query
+          name: pt
+          description: 'he center point using the format lat,lon if latitude & longitude. Otherwise, x,y for PointType or x y for RPT field types. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sfield
+          description: 'A spatial indexed field. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: score
+          description: '(Advanced option; not supported by LatLonType (deprecated) or PointType) If the query is used in a scoring context (e.g., as the main query in q), this local parameter determines what scores will be produced. Valid values are: none, kilometers, miles, degrees, distance, recipDistance, overlapRatio, area, area2D'
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: distanceUnits
+          description: 'This is used to specify the units for distance measurements used throughout the use of this field. This can be degrees, kilometers or miles. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: stats
+          description: 'The Stats component returns simple statistics for numeric, string, and date fields within the document set. '
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: stats.field
+          description: 'Specifies a field for which statistics should be generated. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: >+
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/SearchTrafficLightResponse'
+    patch:
+      operationId: patchTrafficLight
+      x-vertx-event-bus: smart-village-view-enUS-TrafficLight
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - Traffic Light
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+        - in: query
+          name: q
+          description: 'The query parameter defines a query using standard query syntax. This parameter is mandatory.'
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: 'The filter query parameter defines a query that can be used to restrict the superset of documents that can be returned, without influencing score. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: var
+          description: 'The var parameters are additional optional variables and values to pass into the application. '
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
+      requestBody:
+        description: >+
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PATCHTrafficLightRequest'
+      responses:
+        '200':
+          description: >+
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/PATCHTrafficLightResponse'
+    post:
+      operationId: postTrafficLight
+      x-vertx-event-bus: smart-village-view-enUS-TrafficLight
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - Traffic Light
+      requestBody:
+        description: >+
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POSTTrafficLightRequest'
+      responses:
+        '200':
+          description: >+
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/POSTTrafficLightResponse'
+  /api/traffic-light-import:
+    put:
+      operationId: putimportTrafficLight
+      x-vertx-event-bus: smart-village-view-enUS-TrafficLight
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - Traffic Light
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+      requestBody:
+        description: >+
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PUTImportTrafficLightRequest'
+      responses:
+        '200':
+          description: >+
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/PUTImportTrafficLightResponse'
+  /api/traffic-light/{id}:
+    get:
+      operationId: getTrafficLight
+      x-vertx-event-bus: smart-village-view-enUS-TrafficLight
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - Traffic Light
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+        - name: id
+          in: path
+          description: >+
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: >+
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/GETTrafficLightResponse'
+  /traffic-light/{id}:
+    get:
+      operationId: searchpageTrafficLightId
+      x-vertx-event-bus: smart-village-view-enUS-TrafficLight
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - Traffic Light
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+        - name: id
+          in: path
+          description: >+
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: q
+          description: 'The query parameter defines a query using standard query syntax. This parameter is mandatory.'
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: 'The filter query parameter defines a query that can be used to restrict the superset of documents that can be returned, without influencing score. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: var
+          description: 'The var parameters are additional optional variables and values to pass into the application. '
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
+        - in: query
+          name: fl
+          description: 'The field list parameter limits the information included in a query response to a specified list of fields. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sort
+          description: 'The sort parameter arranges search results in either ascending (asc) or descending (desc) order. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: start
+          description: 'The start parameter specifies an offset into a query result set and instructs Solr to begin displaying results from this offset. '
+          required: false
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
+        - in: query
+          name: rows
+          description: 'The rows parameter specifies the maximum number of documents from the complete result set that Solr should return to the client at one time. '
+          required: false
+          schema:
+            type: integer
+            default: 10
+            minimum: 0
+        - in: query
+          name: facet
+          description: 'The facet parameter enables facet counts in the query response. '
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: facet.range.start
+          description: 'The facet.range.start parameter specifies the lower bound of the ranges. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.end
+          description: 'The facet.range.end specifies the upper bound of the ranges. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.gap
+          description: 'The span of each range expressed as a value to be added to the lower bound. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.pivot
+          description: 'The facet.pivot parameter defines the fields to use for the pivot. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range
+          description: 'The facet.range parameter defines the field for which Solr should create range facets. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.field
+          description: 'The facet.field parameter identifies a field that should be treated as a facet. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: d
+          description: 'The radial distance, usually in kilometers. '
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+        - in: query
+          name: pt
+          description: 'he center point using the format lat,lon if latitude & longitude. Otherwise, x,y for PointType or x y for RPT field types. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sfield
+          description: 'A spatial indexed field. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: score
+          description: '(Advanced option; not supported by LatLonType (deprecated) or PointType) If the query is used in a scoring context (e.g., as the main query in q), this local parameter determines what scores will be produced. Valid values are: none, kilometers, miles, degrees, distance, recipDistance, overlapRatio, area, area2D'
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: distanceUnits
+          description: 'This is used to specify the units for distance measurements used throughout the use of this field. This can be degrees, kilometers or miles. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: stats
+          description: 'The Stats component returns simple statistics for numeric, string, and date fields within the document set. '
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: stats.field
+          description: 'Specifies a field for which statistics should be generated. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: >+
+          content:
+            text/html; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/SearchPageTrafficLightResponse'
+  /traffic-light:
+    get:
+      operationId: searchpageTrafficLight
+      x-vertx-event-bus: smart-village-view-enUS-TrafficLight
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - Traffic Light
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+        - in: query
+          name: q
+          description: 'The query parameter defines a query using standard query syntax. This parameter is mandatory.'
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: 'The filter query parameter defines a query that can be used to restrict the superset of documents that can be returned, without influencing score. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: var
+          description: 'The var parameters are additional optional variables and values to pass into the application. '
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
+        - in: query
+          name: fl
+          description: 'The field list parameter limits the information included in a query response to a specified list of fields. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sort
+          description: 'The sort parameter arranges search results in either ascending (asc) or descending (desc) order. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: start
+          description: 'The start parameter specifies an offset into a query result set and instructs Solr to begin displaying results from this offset. '
+          required: false
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
+        - in: query
+          name: rows
+          description: 'The rows parameter specifies the maximum number of documents from the complete result set that Solr should return to the client at one time. '
+          required: false
+          schema:
+            type: integer
+            default: 10
+            minimum: 0
+        - in: query
+          name: facet
+          description: 'The facet parameter enables facet counts in the query response. '
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: facet.range.start
+          description: 'The facet.range.start parameter specifies the lower bound of the ranges. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.end
+          description: 'The facet.range.end specifies the upper bound of the ranges. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.gap
+          description: 'The span of each range expressed as a value to be added to the lower bound. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.pivot
+          description: 'The facet.pivot parameter defines the fields to use for the pivot. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range
+          description: 'The facet.range parameter defines the field for which Solr should create range facets. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.field
+          description: 'The facet.field parameter identifies a field that should be treated as a facet. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: d
+          description: 'The radial distance, usually in kilometers. '
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+        - in: query
+          name: pt
+          description: 'he center point using the format lat,lon if latitude & longitude. Otherwise, x,y for PointType or x y for RPT field types. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sfield
+          description: 'A spatial indexed field. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: score
+          description: '(Advanced option; not supported by LatLonType (deprecated) or PointType) If the query is used in a scoring context (e.g., as the main query in q), this local parameter determines what scores will be produced. Valid values are: none, kilometers, miles, degrees, distance, recipDistance, overlapRatio, area, area2D'
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: distanceUnits
+          description: 'This is used to specify the units for distance measurements used throughout the use of this field. This can be degrees, kilometers or miles. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: stats
+          description: 'The Stats component returns simple statistics for numeric, string, and date fields within the document set. '
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: stats.field
+          description: 'Specifies a field for which statistics should be generated. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: >+
+          content:
+            text/html; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/SearchPageTrafficLightResponse'
+  /api/traffic-light-step:
+    get:
+      operationId: searchTrafficLightStep
+      x-vertx-event-bus: smart-village-view-enUS-TrafficLightStep
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - Traffic Light
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+        - in: query
+          name: q
+          description: 'The query parameter defines a query using standard query syntax. This parameter is mandatory.'
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: 'The filter query parameter defines a query that can be used to restrict the superset of documents that can be returned, without influencing score. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: var
+          description: 'The var parameters are additional optional variables and values to pass into the application. '
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
+        - in: query
+          name: fl
+          description: 'The field list parameter limits the information included in a query response to a specified list of fields. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sort
+          description: 'The sort parameter arranges search results in either ascending (asc) or descending (desc) order. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: start
+          description: 'The start parameter specifies an offset into a query result set and instructs Solr to begin displaying results from this offset. '
+          required: false
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
+        - in: query
+          name: rows
+          description: 'The rows parameter specifies the maximum number of documents from the complete result set that Solr should return to the client at one time. '
+          required: false
+          schema:
+            type: integer
+            default: 10
+            minimum: 0
+        - in: query
+          name: facet
+          description: 'The facet parameter enables facet counts in the query response. '
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: facet.range.start
+          description: 'The facet.range.start parameter specifies the lower bound of the ranges. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.end
+          description: 'The facet.range.end specifies the upper bound of the ranges. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.gap
+          description: 'The span of each range expressed as a value to be added to the lower bound. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.pivot
+          description: 'The facet.pivot parameter defines the fields to use for the pivot. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range
+          description: 'The facet.range parameter defines the field for which Solr should create range facets. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.field
+          description: 'The facet.field parameter identifies a field that should be treated as a facet. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: d
+          description: 'The radial distance, usually in kilometers. '
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+        - in: query
+          name: pt
+          description: 'he center point using the format lat,lon if latitude & longitude. Otherwise, x,y for PointType or x y for RPT field types. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sfield
+          description: 'A spatial indexed field. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: score
+          description: '(Advanced option; not supported by LatLonType (deprecated) or PointType) If the query is used in a scoring context (e.g., as the main query in q), this local parameter determines what scores will be produced. Valid values are: none, kilometers, miles, degrees, distance, recipDistance, overlapRatio, area, area2D'
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: distanceUnits
+          description: 'This is used to specify the units for distance measurements used throughout the use of this field. This can be degrees, kilometers or miles. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: stats
+          description: 'The Stats component returns simple statistics for numeric, string, and date fields within the document set. '
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: stats.field
+          description: 'Specifies a field for which statistics should be generated. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: >+
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/SearchTrafficLightStepResponse'
+    patch:
+      operationId: patchTrafficLightStep
+      x-vertx-event-bus: smart-village-view-enUS-TrafficLightStep
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - Traffic Light
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+        - in: query
+          name: q
+          description: 'The query parameter defines a query using standard query syntax. This parameter is mandatory.'
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: 'The filter query parameter defines a query that can be used to restrict the superset of documents that can be returned, without influencing score. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: var
+          description: 'The var parameters are additional optional variables and values to pass into the application. '
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
+      requestBody:
+        description: >+
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PATCHTrafficLightStepRequest'
+      responses:
+        '200':
+          description: >+
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/PATCHTrafficLightStepResponse'
+    post:
+      operationId: postTrafficLightStep
+      x-vertx-event-bus: smart-village-view-enUS-TrafficLightStep
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - Traffic Light
+      requestBody:
+        description: >+
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POSTTrafficLightStepRequest'
+      responses:
+        '200':
+          description: >+
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/POSTTrafficLightStepResponse'
+  /api/traffic-light-step-import:
+    put:
+      operationId: putimportTrafficLightStep
+      x-vertx-event-bus: smart-village-view-enUS-TrafficLightStep
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - Traffic Light
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+      requestBody:
+        description: >+
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PUTImportTrafficLightStepRequest'
+      responses:
+        '200':
+          description: >+
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/PUTImportTrafficLightStepResponse'
+  /api/traffic-light-step/{id}:
+    get:
+      operationId: getTrafficLightStep
+      x-vertx-event-bus: smart-village-view-enUS-TrafficLightStep
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - Traffic Light
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+        - name: id
+          in: path
+          description: >+
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: >+
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/GETTrafficLightStepResponse'
+  /traffic-light-step/{id}:
+    get:
+      operationId: searchpageTrafficLightStepId
+      x-vertx-event-bus: smart-village-view-enUS-TrafficLightStep
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - Traffic Light
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+        - name: id
+          in: path
+          description: >+
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: q
+          description: 'The query parameter defines a query using standard query syntax. This parameter is mandatory.'
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: 'The filter query parameter defines a query that can be used to restrict the superset of documents that can be returned, without influencing score. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: var
+          description: 'The var parameters are additional optional variables and values to pass into the application. '
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
+        - in: query
+          name: fl
+          description: 'The field list parameter limits the information included in a query response to a specified list of fields. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sort
+          description: 'The sort parameter arranges search results in either ascending (asc) or descending (desc) order. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: start
+          description: 'The start parameter specifies an offset into a query result set and instructs Solr to begin displaying results from this offset. '
+          required: false
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
+        - in: query
+          name: rows
+          description: 'The rows parameter specifies the maximum number of documents from the complete result set that Solr should return to the client at one time. '
+          required: false
+          schema:
+            type: integer
+            default: 10
+            minimum: 0
+        - in: query
+          name: facet
+          description: 'The facet parameter enables facet counts in the query response. '
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: facet.range.start
+          description: 'The facet.range.start parameter specifies the lower bound of the ranges. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.end
+          description: 'The facet.range.end specifies the upper bound of the ranges. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.gap
+          description: 'The span of each range expressed as a value to be added to the lower bound. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.pivot
+          description: 'The facet.pivot parameter defines the fields to use for the pivot. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range
+          description: 'The facet.range parameter defines the field for which Solr should create range facets. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.field
+          description: 'The facet.field parameter identifies a field that should be treated as a facet. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: d
+          description: 'The radial distance, usually in kilometers. '
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+        - in: query
+          name: pt
+          description: 'he center point using the format lat,lon if latitude & longitude. Otherwise, x,y for PointType or x y for RPT field types. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sfield
+          description: 'A spatial indexed field. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: score
+          description: '(Advanced option; not supported by LatLonType (deprecated) or PointType) If the query is used in a scoring context (e.g., as the main query in q), this local parameter determines what scores will be produced. Valid values are: none, kilometers, miles, degrees, distance, recipDistance, overlapRatio, area, area2D'
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: distanceUnits
+          description: 'This is used to specify the units for distance measurements used throughout the use of this field. This can be degrees, kilometers or miles. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: stats
+          description: 'The Stats component returns simple statistics for numeric, string, and date fields within the document set. '
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: stats.field
+          description: 'Specifies a field for which statistics should be generated. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: >+
+          content:
+            text/html; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/SearchPageTrafficLightStepResponse'
+  /traffic-light-step:
+    get:
+      operationId: searchpageTrafficLightStep
+      x-vertx-event-bus: smart-village-view-enUS-TrafficLightStep
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - Traffic Light
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+        - in: query
+          name: q
+          description: 'The query parameter defines a query using standard query syntax. This parameter is mandatory.'
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: 'The filter query parameter defines a query that can be used to restrict the superset of documents that can be returned, without influencing score. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: var
+          description: 'The var parameters are additional optional variables and values to pass into the application. '
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
+        - in: query
+          name: fl
+          description: 'The field list parameter limits the information included in a query response to a specified list of fields. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sort
+          description: 'The sort parameter arranges search results in either ascending (asc) or descending (desc) order. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: start
+          description: 'The start parameter specifies an offset into a query result set and instructs Solr to begin displaying results from this offset. '
+          required: false
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
+        - in: query
+          name: rows
+          description: 'The rows parameter specifies the maximum number of documents from the complete result set that Solr should return to the client at one time. '
+          required: false
+          schema:
+            type: integer
+            default: 10
+            minimum: 0
+        - in: query
+          name: facet
+          description: 'The facet parameter enables facet counts in the query response. '
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: facet.range.start
+          description: 'The facet.range.start parameter specifies the lower bound of the ranges. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.end
+          description: 'The facet.range.end specifies the upper bound of the ranges. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.gap
+          description: 'The span of each range expressed as a value to be added to the lower bound. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.pivot
+          description: 'The facet.pivot parameter defines the fields to use for the pivot. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range
+          description: 'The facet.range parameter defines the field for which Solr should create range facets. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.field
+          description: 'The facet.field parameter identifies a field that should be treated as a facet. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: d
+          description: 'The radial distance, usually in kilometers. '
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+        - in: query
+          name: pt
+          description: 'he center point using the format lat,lon if latitude & longitude. Otherwise, x,y for PointType or x y for RPT field types. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sfield
+          description: 'A spatial indexed field. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: score
+          description: '(Advanced option; not supported by LatLonType (deprecated) or PointType) If the query is used in a scoring context (e.g., as the main query in q), this local parameter determines what scores will be produced. Valid values are: none, kilometers, miles, degrees, distance, recipDistance, overlapRatio, area, area2D'
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: distanceUnits
+          description: 'This is used to specify the units for distance measurements used throughout the use of this field. This can be degrees, kilometers or miles. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: stats
+          description: 'The Stats component returns simple statistics for numeric, string, and date fields within the document set. '
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: stats.field
+          description: 'Specifies a field for which statistics should be generated. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: >+
+          content:
+            text/html; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/SearchPageTrafficLightStepResponse'
   /api/person-step:
     get:
       operationId: searchPersonStep
@@ -8002,6 +9382,96 @@ components:
         text/html; charset=utf-8:
           schema:
             $ref: '#/components/schemas/SearchPageSystemEventResponse'
+    SearchTrafficLightResponse:
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/SearchTrafficLightResponse'
+    PATCHTrafficLightRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PATCHTrafficLightRequest'
+    PATCHTrafficLightResponse:
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/PATCHTrafficLightResponse'
+    POSTTrafficLightRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/POSTTrafficLightRequest'
+    POSTTrafficLightResponse:
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/POSTTrafficLightResponse'
+    PUTImportTrafficLightRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PUTImportTrafficLightRequest'
+    PUTImportTrafficLightResponse:
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/PUTImportTrafficLightResponse'
+    GETTrafficLightResponse:
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/GETTrafficLightResponse'
+    SearchPageTrafficLightResponse:
+      content:
+        text/html; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/SearchPageTrafficLightResponse'
+    SearchTrafficLightStepResponse:
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/SearchTrafficLightStepResponse'
+    PATCHTrafficLightStepRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PATCHTrafficLightStepRequest'
+    PATCHTrafficLightStepResponse:
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/PATCHTrafficLightStepResponse'
+    POSTTrafficLightStepRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/POSTTrafficLightStepRequest'
+    POSTTrafficLightStepResponse:
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/POSTTrafficLightStepResponse'
+    PUTImportTrafficLightStepRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PUTImportTrafficLightStepRequest'
+    PUTImportTrafficLightStepResponse:
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/PUTImportTrafficLightStepResponse'
+    GETTrafficLightStepResponse:
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/GETTrafficLightStepResponse'
+    SearchPageTrafficLightStepResponse:
+      content:
+        text/html; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/SearchPageTrafficLightStepResponse'
     SearchPersonStepResponse:
       content:
         application/json; charset=utf-8:
@@ -8306,22 +9776,6 @@ components:
               items:
                 type: object
                 properties:
-                  inheritPk:
-                    type: string
-                  created:
-                    type: string
-                    format: date-time
-                  modified:
-                    type: string
-                    format: date-time
-                  archived:
-                    type: boolean
-                  deleted:
-                    type: boolean
-                  saves:
-                    type: array
-                    items:
-                      type: string
                   uri:
                     type: string
                   pageId:
@@ -8356,28 +9810,10 @@ components:
                     type: string
                   htmAfter:
                     type: string
-                  objectTitle:
-                    type: string
     POSTSiteHtmRequest:
       allOf:
         - type: object
           properties:
-            inheritPk:
-              type: string
-            created:
-              type: string
-              format: date-time
-            modified:
-              type: string
-              format: date-time
-            archived:
-              type: boolean
-            deleted:
-              type: boolean
-            saves:
-              type: array
-              items:
-                type: string
             uri:
               type: string
             pageId:
@@ -8411,29 +9847,11 @@ components:
             htmBefore:
               type: string
             htmAfter:
-              type: string
-            objectTitle:
               type: string
     POSTSiteHtmResponse:
       allOf:
         - type: object
           properties:
-            inheritPk:
-              type: string
-            created:
-              type: string
-              format: date-time
-            modified:
-              type: string
-              format: date-time
-            archived:
-              type: boolean
-            deleted:
-              type: boolean
-            saves:
-              type: array
-              items:
-                type: string
             uri:
               type: string
             pageId:
@@ -8467,71 +9885,11 @@ components:
             htmBefore:
               type: string
             htmAfter:
-              type: string
-            objectTitle:
               type: string
     PATCHSiteHtmRequest:
       allOf:
         - type: object
           properties:
-            setInheritPk:
-              type: string
-              nullable: true
-            removeInheritPk:
-              type: string
-            removeAllInheritPk:
-              type: string
-            setCreated:
-              type: string
-              nullable: true
-              format: date-time
-            removeCreated:
-              type: string
-              format: date-time
-            removeAllCreated:
-              type: string
-              format: date-time
-            setModified:
-              type: string
-              nullable: true
-              format: date-time
-            removeModified:
-              type: string
-              format: date-time
-            removeAllModified:
-              type: string
-              format: date-time
-            setArchived:
-              type: boolean
-              nullable: true
-            removeArchived:
-              type: boolean
-            removeAllArchived:
-              type: boolean
-            setDeleted:
-              type: boolean
-              nullable: true
-            removeDeleted:
-              type: boolean
-            removeAllDeleted:
-              type: boolean
-            setSaves:
-              type: array
-              nullable: true
-              items:
-                type: string
-            removeSaves:
-              type: string
-            removeAllSaves:
-              type: array
-              items:
-                type: string
-            addSaves:
-              type: string
-            addAllSaves:
-              type: array
-              items:
-                type: string
             setUri:
               type: string
               nullable: true
@@ -8659,76 +10017,11 @@ components:
             removeHtmAfter:
               type: string
             removeAllHtmAfter:
-              type: string
-            setObjectTitle:
-              type: string
-              nullable: true
-            removeObjectTitle:
-              type: string
-            removeAllObjectTitle:
               type: string
     PATCHSiteHtmResponse:
       allOf:
         - type: object
           properties:
-            setInheritPk:
-              type: string
-              nullable: true
-            removeInheritPk:
-              type: string
-            removeAllInheritPk:
-              type: string
-            setCreated:
-              type: string
-              nullable: true
-              format: date-time
-            removeCreated:
-              type: string
-              format: date-time
-            removeAllCreated:
-              type: string
-              format: date-time
-            setModified:
-              type: string
-              nullable: true
-              format: date-time
-            removeModified:
-              type: string
-              format: date-time
-            removeAllModified:
-              type: string
-              format: date-time
-            setArchived:
-              type: boolean
-              nullable: true
-            removeArchived:
-              type: boolean
-            removeAllArchived:
-              type: boolean
-            setDeleted:
-              type: boolean
-              nullable: true
-            removeDeleted:
-              type: boolean
-            removeAllDeleted:
-              type: boolean
-            setSaves:
-              type: array
-              nullable: true
-              items:
-                type: string
-            removeSaves:
-              type: string
-            removeAllSaves:
-              type: array
-              items:
-                type: string
-            addSaves:
-              type: string
-            addAllSaves:
-              type: array
-              items:
-                type: string
             setUri:
               type: string
               nullable: true
@@ -8857,33 +10150,10 @@ components:
               type: string
             removeAllHtmAfter:
               type: string
-            setObjectTitle:
-              type: string
-              nullable: true
-            removeObjectTitle:
-              type: string
-            removeAllObjectTitle:
-              type: string
     PUTImportSiteHtmRequest:
       allOf:
         - type: object
           properties:
-            inheritPk:
-              type: string
-            created:
-              type: string
-              format: date-time
-            modified:
-              type: string
-              format: date-time
-            archived:
-              type: boolean
-            deleted:
-              type: boolean
-            saves:
-              type: array
-              items:
-                type: string
             uri:
               type: string
             pageId:
@@ -8917,29 +10187,11 @@ components:
             htmBefore:
               type: string
             htmAfter:
-              type: string
-            objectTitle:
               type: string
     PUTImportSiteHtmResponse:
       allOf:
         - type: object
           properties:
-            inheritPk:
-              type: string
-            created:
-              type: string
-              format: date-time
-            modified:
-              type: string
-              format: date-time
-            archived:
-              type: boolean
-            deleted:
-              type: boolean
-            saves:
-              type: array
-              items:
-                type: string
             uri:
               type: string
             pageId:
@@ -8973,29 +10225,11 @@ components:
             htmBefore:
               type: string
             htmAfter:
-              type: string
-            objectTitle:
               type: string
     GETSiteHtmResponse:
       allOf:
         - type: object
           properties:
-            inheritPk:
-              type: string
-            created:
-              type: string
-              format: date-time
-            modified:
-              type: string
-              format: date-time
-            archived:
-              type: boolean
-            deleted:
-              type: boolean
-            saves:
-              type: array
-              items:
-                type: string
             uri:
               type: string
             pageId:
@@ -9029,8 +10263,6 @@ components:
             htmBefore:
               type: string
             htmAfter:
-              type: string
-            objectTitle:
               type: string
     SearchPageSiteHtmResponse:
       allOf:
@@ -10164,14 +11396,6 @@ components:
                     type: string
                   h2:
                     type: string
-                  inheritPk:
-                    type: string
-                  created:
-                    type: string
-                    format: date-time
-                  modified:
-                    type: string
-                    format: date-time
                   author:
                     type: string
                   pageImageUri:
@@ -10208,14 +11432,6 @@ components:
               type: string
             h2:
               type: string
-            inheritPk:
-              type: string
-            created:
-              type: string
-              format: date-time
-            modified:
-              type: string
-              format: date-time
             author:
               type: string
             pageImageUri:
@@ -10252,14 +11468,6 @@ components:
               type: string
             h2:
               type: string
-            inheritPk:
-              type: string
-            created:
-              type: string
-              format: date-time
-            modified:
-              type: string
-              format: date-time
             author:
               type: string
             pageImageUri:
@@ -10351,33 +11559,6 @@ components:
               type: string
             removeAllH2:
               type: string
-            setInheritPk:
-              type: string
-              nullable: true
-            removeInheritPk:
-              type: string
-            removeAllInheritPk:
-              type: string
-            setCreated:
-              type: string
-              nullable: true
-              format: date-time
-            removeCreated:
-              type: string
-              format: date-time
-            removeAllCreated:
-              type: string
-              format: date-time
-            setModified:
-              type: string
-              nullable: true
-              format: date-time
-            removeModified:
-              type: string
-              format: date-time
-            removeAllModified:
-              type: string
-              format: date-time
             setAuthor:
               type: string
               nullable: true
@@ -10494,33 +11675,6 @@ components:
               type: string
             removeAllH2:
               type: string
-            setInheritPk:
-              type: string
-              nullable: true
-            removeInheritPk:
-              type: string
-            removeAllInheritPk:
-              type: string
-            setCreated:
-              type: string
-              nullable: true
-              format: date-time
-            removeCreated:
-              type: string
-              format: date-time
-            removeAllCreated:
-              type: string
-              format: date-time
-            setModified:
-              type: string
-              nullable: true
-              format: date-time
-            removeModified:
-              type: string
-              format: date-time
-            removeAllModified:
-              type: string
-              format: date-time
             setAuthor:
               type: string
               nullable: true
@@ -10582,14 +11736,6 @@ components:
               type: string
             h2:
               type: string
-            inheritPk:
-              type: string
-            created:
-              type: string
-              format: date-time
-            modified:
-              type: string
-              format: date-time
             author:
               type: string
             pageImageUri:
@@ -10626,14 +11772,6 @@ components:
               type: string
             h2:
               type: string
-            inheritPk:
-              type: string
-            created:
-              type: string
-              format: date-time
-            modified:
-              type: string
-              format: date-time
             author:
               type: string
             pageImageUri:
@@ -10670,14 +11808,6 @@ components:
               type: string
             h2:
               type: string
-            inheritPk:
-              type: string
-            created:
-              type: string
-              format: date-time
-            modified:
-              type: string
-              format: date-time
             author:
               type: string
             pageImageUri:
@@ -11574,8 +12704,319 @@ components:
     SearchPageSystemEventResponse:
       allOf:
         - type: string
+    SearchTrafficLightResponse:
+      allOf:
+        - $ref: "#/components/schemas/SearchMapResultResponse"
+        - type: object
+          properties:
+            startNum:
+              type: integer
+              minimum: 0
+            foundNum:
+              type: integer
+              minimum: 0
+            returnedNum:
+              type: integer
+              minimum: 0
+            list:
+              type: array
+              items:
+                type: object
+                properties:
+                  trafficLightId:
+                    type: string
+                  trafficLightType:
+                    type: string
+                  angle:
+                    type: string
+                  color:
+                    type: string
+    PATCHTrafficLightRequest:
+      allOf:
+        - type: object
+          properties:
+            setTrafficLightId:
+              type: string
+              nullable: true
+            removeTrafficLightId:
+              type: string
+            removeAllTrafficLightId:
+              type: string
+            setTrafficLightType:
+              type: string
+              nullable: true
+            removeTrafficLightType:
+              type: string
+            removeAllTrafficLightType:
+              type: string
+            setAngle:
+              type: string
+              nullable: true
+            removeAngle:
+              type: string
+            removeAllAngle:
+              type: string
+            setColor:
+              type: string
+              nullable: true
+            removeColor:
+              type: string
+            removeAllColor:
+              type: string
+    PATCHTrafficLightResponse:
+      allOf:
+        - type: object
+          properties:
+            setTrafficLightId:
+              type: string
+              nullable: true
+            removeTrafficLightId:
+              type: string
+            removeAllTrafficLightId:
+              type: string
+            setTrafficLightType:
+              type: string
+              nullable: true
+            removeTrafficLightType:
+              type: string
+            removeAllTrafficLightType:
+              type: string
+            setAngle:
+              type: string
+              nullable: true
+            removeAngle:
+              type: string
+            removeAllAngle:
+              type: string
+            setColor:
+              type: string
+              nullable: true
+            removeColor:
+              type: string
+            removeAllColor:
+              type: string
+    POSTTrafficLightRequest:
+      allOf:
+        - type: object
+          properties:
+            trafficLightId:
+              type: string
+            trafficLightType:
+              type: string
+            angle:
+              type: string
+            color:
+              type: string
+    POSTTrafficLightResponse:
+      allOf:
+        - type: object
+          properties:
+            trafficLightId:
+              type: string
+            trafficLightType:
+              type: string
+            angle:
+              type: string
+            color:
+              type: string
+    PUTImportTrafficLightRequest:
+      allOf:
+        - type: object
+          properties:
+            trafficLightId:
+              type: string
+            trafficLightType:
+              type: string
+            angle:
+              type: string
+            color:
+              type: string
+    PUTImportTrafficLightResponse:
+      allOf:
+        - type: object
+          properties:
+            trafficLightId:
+              type: string
+            trafficLightType:
+              type: string
+            angle:
+              type: string
+            color:
+              type: string
+    GETTrafficLightResponse:
+      allOf:
+        - $ref: "#/components/schemas/GETMapResultResponse"
+        - type: object
+          properties:
+            trafficLightId:
+              type: string
+            trafficLightType:
+              type: string
+            angle:
+              type: string
+            color:
+              type: string
+    SearchPageTrafficLightResponse:
+      allOf:
+        - type: string
+    SearchTrafficLightStepResponse:
+      allOf:
+        - $ref: "#/components/schemas/SearchMapResultResponse"
+        - type: object
+          properties:
+            startNum:
+              type: integer
+              minimum: 0
+            foundNum:
+              type: integer
+              minimum: 0
+            returnedNum:
+              type: integer
+              minimum: 0
+            list:
+              type: array
+              items:
+                type: object
+                properties:
+                  trafficLightId:
+                    type: string
+                  trafficLightType:
+                    type: string
+                  angle:
+                    type: string
+                  color:
+                    type: string
+    PATCHTrafficLightStepRequest:
+      allOf:
+        - type: object
+          properties:
+            setTrafficLightId:
+              type: string
+              nullable: true
+            removeTrafficLightId:
+              type: string
+            removeAllTrafficLightId:
+              type: string
+            setTrafficLightType:
+              type: string
+              nullable: true
+            removeTrafficLightType:
+              type: string
+            removeAllTrafficLightType:
+              type: string
+            setAngle:
+              type: string
+              nullable: true
+            removeAngle:
+              type: string
+            removeAllAngle:
+              type: string
+            setColor:
+              type: string
+              nullable: true
+            removeColor:
+              type: string
+            removeAllColor:
+              type: string
+    PATCHTrafficLightStepResponse:
+      allOf:
+        - type: object
+          properties:
+            setTrafficLightId:
+              type: string
+              nullable: true
+            removeTrafficLightId:
+              type: string
+            removeAllTrafficLightId:
+              type: string
+            setTrafficLightType:
+              type: string
+              nullable: true
+            removeTrafficLightType:
+              type: string
+            removeAllTrafficLightType:
+              type: string
+            setAngle:
+              type: string
+              nullable: true
+            removeAngle:
+              type: string
+            removeAllAngle:
+              type: string
+            setColor:
+              type: string
+              nullable: true
+            removeColor:
+              type: string
+            removeAllColor:
+              type: string
+    POSTTrafficLightStepRequest:
+      allOf:
+        - type: object
+          properties:
+            trafficLightId:
+              type: string
+            trafficLightType:
+              type: string
+            angle:
+              type: string
+            color:
+              type: string
+    POSTTrafficLightStepResponse:
+      allOf:
+        - type: object
+          properties:
+            trafficLightId:
+              type: string
+            trafficLightType:
+              type: string
+            angle:
+              type: string
+            color:
+              type: string
+    PUTImportTrafficLightStepRequest:
+      allOf:
+        - type: object
+          properties:
+            trafficLightId:
+              type: string
+            trafficLightType:
+              type: string
+            angle:
+              type: string
+            color:
+              type: string
+    PUTImportTrafficLightStepResponse:
+      allOf:
+        - type: object
+          properties:
+            trafficLightId:
+              type: string
+            trafficLightType:
+              type: string
+            angle:
+              type: string
+            color:
+              type: string
+    GETTrafficLightStepResponse:
+      allOf:
+        - $ref: "#/components/schemas/GETMapResultResponse"
+        - type: object
+          properties:
+            trafficLightId:
+              type: string
+            trafficLightType:
+              type: string
+            angle:
+              type: string
+            color:
+              type: string
+    SearchPageTrafficLightStepResponse:
+      allOf:
+        - type: string
     SearchPersonStepResponse:
       allOf:
+        - $ref: "#/components/schemas/SearchMapResultResponse"
         - type: object
           properties:
             startNum:
@@ -11603,6 +13044,8 @@ components:
                   pos:
                     type: string
                   slope:
+                    type: string
+                  color:
                     type: string
     PATCHPersonStepRequest:
       allOf:
@@ -11650,6 +13093,13 @@ components:
               type: string
             removeAllSlope:
               type: string
+            setColor:
+              type: string
+              nullable: true
+            removeColor:
+              type: string
+            removeAllColor:
+              type: string
     PATCHPersonStepResponse:
       allOf:
         - type: object
@@ -11696,6 +13146,13 @@ components:
               type: string
             removeAllSlope:
               type: string
+            setColor:
+              type: string
+              nullable: true
+            removeColor:
+              type: string
+            removeAllColor:
+              type: string
     POSTPersonStepRequest:
       allOf:
         - type: object
@@ -11711,6 +13168,8 @@ components:
             pos:
               type: string
             slope:
+              type: string
+            color:
               type: string
     POSTPersonStepResponse:
       allOf:
@@ -11728,6 +13187,8 @@ components:
               type: string
             slope:
               type: string
+            color:
+              type: string
     PUTImportPersonStepRequest:
       allOf:
         - type: object
@@ -11743,6 +13204,8 @@ components:
             pos:
               type: string
             slope:
+              type: string
+            color:
               type: string
     PUTImportPersonStepResponse:
       allOf:
@@ -11760,8 +13223,11 @@ components:
               type: string
             slope:
               type: string
+            color:
+              type: string
     GETPersonStepResponse:
       allOf:
+        - $ref: "#/components/schemas/GETMapResultResponse"
         - type: object
           properties:
             personId:
@@ -11775,6 +13241,8 @@ components:
             pos:
               type: string
             slope:
+              type: string
+            color:
               type: string
     SearchPagePersonStepResponse:
       allOf:
@@ -11799,7 +13267,7 @@ components:
                 properties:
                   simulationName:
                     type: string
-                  simulationPath:
+                  sumocfgPath:
                     type: string
                   startSeconds:
                     type: string
@@ -11809,6 +13277,14 @@ components:
                     type: string
                   fcdOutputGeo:
                     type: boolean
+                  tlsStatesPaths:
+                    type: array
+                    items:
+                      type: string
+                  additionalFilePaths:
+                    type: array
+                    items:
+                      type: string
     PATCHTrafficSimulationRequest:
       allOf:
         - type: object
@@ -11820,12 +13296,12 @@ components:
               type: string
             removeAllSimulationName:
               type: string
-            setSimulationPath:
+            setSumocfgPath:
               type: string
               nullable: true
-            removeSimulationPath:
+            removeSumocfgPath:
               type: string
-            removeAllSimulationPath:
+            removeAllSumocfgPath:
               type: string
             setStartSeconds:
               type: string
@@ -11855,6 +13331,40 @@ components:
               type: boolean
             removeAllFcdOutputGeo:
               type: boolean
+            setTlsStatesPaths:
+              type: array
+              nullable: true
+              items:
+                type: string
+            removeTlsStatesPaths:
+              type: string
+            removeAllTlsStatesPaths:
+              type: array
+              items:
+                type: string
+            addTlsStatesPaths:
+              type: string
+            addAllTlsStatesPaths:
+              type: array
+              items:
+                type: string
+            setAdditionalFilePaths:
+              type: array
+              nullable: true
+              items:
+                type: string
+            removeAdditionalFilePaths:
+              type: string
+            removeAllAdditionalFilePaths:
+              type: array
+              items:
+                type: string
+            addAdditionalFilePaths:
+              type: string
+            addAllAdditionalFilePaths:
+              type: array
+              items:
+                type: string
     PATCHTrafficSimulationResponse:
       allOf:
         - type: object
@@ -11866,12 +13376,12 @@ components:
               type: string
             removeAllSimulationName:
               type: string
-            setSimulationPath:
+            setSumocfgPath:
               type: string
               nullable: true
-            removeSimulationPath:
+            removeSumocfgPath:
               type: string
-            removeAllSimulationPath:
+            removeAllSumocfgPath:
               type: string
             setStartSeconds:
               type: string
@@ -11901,13 +13411,47 @@ components:
               type: boolean
             removeAllFcdOutputGeo:
               type: boolean
+            setTlsStatesPaths:
+              type: array
+              nullable: true
+              items:
+                type: string
+            removeTlsStatesPaths:
+              type: string
+            removeAllTlsStatesPaths:
+              type: array
+              items:
+                type: string
+            addTlsStatesPaths:
+              type: string
+            addAllTlsStatesPaths:
+              type: array
+              items:
+                type: string
+            setAdditionalFilePaths:
+              type: array
+              nullable: true
+              items:
+                type: string
+            removeAdditionalFilePaths:
+              type: string
+            removeAllAdditionalFilePaths:
+              type: array
+              items:
+                type: string
+            addAdditionalFilePaths:
+              type: string
+            addAllAdditionalFilePaths:
+              type: array
+              items:
+                type: string
     POSTTrafficSimulationRequest:
       allOf:
         - type: object
           properties:
             simulationName:
               type: string
-            simulationPath:
+            sumocfgPath:
               type: string
             startSeconds:
               type: string
@@ -11917,13 +13461,21 @@ components:
               type: string
             fcdOutputGeo:
               type: boolean
+            tlsStatesPaths:
+              type: array
+              items:
+                type: string
+            additionalFilePaths:
+              type: array
+              items:
+                type: string
     POSTTrafficSimulationResponse:
       allOf:
         - type: object
           properties:
             simulationName:
               type: string
-            simulationPath:
+            sumocfgPath:
               type: string
             startSeconds:
               type: string
@@ -11933,13 +13485,21 @@ components:
               type: string
             fcdOutputGeo:
               type: boolean
+            tlsStatesPaths:
+              type: array
+              items:
+                type: string
+            additionalFilePaths:
+              type: array
+              items:
+                type: string
     PUTImportTrafficSimulationRequest:
       allOf:
         - type: object
           properties:
             simulationName:
               type: string
-            simulationPath:
+            sumocfgPath:
               type: string
             startSeconds:
               type: string
@@ -11949,13 +13509,21 @@ components:
               type: string
             fcdOutputGeo:
               type: boolean
+            tlsStatesPaths:
+              type: array
+              items:
+                type: string
+            additionalFilePaths:
+              type: array
+              items:
+                type: string
     PUTImportTrafficSimulationResponse:
       allOf:
         - type: object
           properties:
             simulationName:
               type: string
-            simulationPath:
+            sumocfgPath:
               type: string
             startSeconds:
               type: string
@@ -11965,13 +13533,21 @@ components:
               type: string
             fcdOutputGeo:
               type: boolean
+            tlsStatesPaths:
+              type: array
+              items:
+                type: string
+            additionalFilePaths:
+              type: array
+              items:
+                type: string
     GETTrafficSimulationResponse:
       allOf:
         - type: object
           properties:
             simulationName:
               type: string
-            simulationPath:
+            sumocfgPath:
               type: string
             startSeconds:
               type: string
@@ -11981,6 +13557,14 @@ components:
               type: string
             fcdOutputGeo:
               type: boolean
+            tlsStatesPaths:
+              type: array
+              items:
+                type: string
+            additionalFilePaths:
+              type: array
+              items:
+                type: string
     SearchPageTrafficSimulationResponse:
       allOf:
         - type: string
@@ -12116,6 +13700,7 @@ components:
         - type: string
     SearchVehicleStepResponse:
       allOf:
+        - $ref: "#/components/schemas/SearchMapResultResponse"
         - type: object
           properties:
             startNum:
@@ -12143,6 +13728,8 @@ components:
                   pos:
                     type: string
                   slope:
+                    type: string
+                  color:
                     type: string
     PATCHVehicleStepRequest:
       allOf:
@@ -12190,6 +13777,13 @@ components:
               type: string
             removeAllSlope:
               type: string
+            setColor:
+              type: string
+              nullable: true
+            removeColor:
+              type: string
+            removeAllColor:
+              type: string
     PATCHVehicleStepResponse:
       allOf:
         - type: object
@@ -12236,6 +13830,13 @@ components:
               type: string
             removeAllSlope:
               type: string
+            setColor:
+              type: string
+              nullable: true
+            removeColor:
+              type: string
+            removeAllColor:
+              type: string
     POSTVehicleStepRequest:
       allOf:
         - type: object
@@ -12251,6 +13852,8 @@ components:
             pos:
               type: string
             slope:
+              type: string
+            color:
               type: string
     POSTVehicleStepResponse:
       allOf:
@@ -12268,6 +13871,8 @@ components:
               type: string
             slope:
               type: string
+            color:
+              type: string
     PUTImportVehicleStepRequest:
       allOf:
         - type: object
@@ -12283,6 +13888,8 @@ components:
             pos:
               type: string
             slope:
+              type: string
+            color:
               type: string
     PUTImportVehicleStepResponse:
       allOf:
@@ -12300,8 +13907,11 @@ components:
               type: string
             slope:
               type: string
+            color:
+              type: string
     GETVehicleStepResponse:
       allOf:
+        - $ref: "#/components/schemas/GETMapResultResponse"
         - type: object
           properties:
             vehicleId:
@@ -12315,6 +13925,8 @@ components:
             pos:
               type: string
             slope:
+              type: string
+            color:
               type: string
     SearchPageVehicleStepResponse:
       allOf:

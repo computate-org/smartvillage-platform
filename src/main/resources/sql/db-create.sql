@@ -32,7 +32,7 @@ ALTER TABLE IotNode ADD COLUMN IF NOT EXISTS userKey bigint;
 
 CREATE TABLE IF NOT EXISTS TrafficSimulation();
 ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS simulationName text;
-ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS simulationPath text;
+ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS sumocfgPath text;
 ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS startSeconds decimal;
 ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS endSeconds decimal;
 ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS stepSeconds decimal;

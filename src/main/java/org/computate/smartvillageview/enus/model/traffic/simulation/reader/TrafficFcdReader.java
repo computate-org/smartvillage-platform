@@ -1,20 +1,27 @@
 package org.computate.smartvillageview.enus.model.traffic.simulation.reader;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.exec.CommandLine;
+import org.apache.commons.exec.DefaultExecuteResultHandler;
+import org.apache.commons.exec.DefaultExecutor;
+import org.apache.commons.exec.PumpStreamHandler;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.computate.search.wrap.Wrap;
 import org.computate.smartvillageview.enus.config.ConfigKeys;
 import org.computate.smartvillageview.enus.model.system.event.SystemEvent;
@@ -40,11 +47,11 @@ import io.vertx.core.WorkerExecutor;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.eventbus.EventBus;
-import io.vertx.core.file.AsyncFile;
 import io.vertx.core.file.OpenOptions;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.parsetools.RecordParser;
+import io.vertx.ext.web.api.service.ServiceRequest;
 import io.vertx.ext.web.client.WebClient;
 
 public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
@@ -61,10 +68,11 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 	public static final String REGEX_TIMESTEP = "<timestep\\s+time=\"([\\d\\.]+)\">";
 	public static final String REGEX_VEHICLE = "<(vehicle|person)([^>]*)";
 	public static final String REGEX_JUNCTION_TRAFFIC_LIGHT = "<junction([^>]* type=\"traffic_light\"[^>]*)";
-	public static final String REGEX_TLS_STATE = "<tlsState([^>]*)";
-	public static final String REGEX_NET_FILE = "<net-file([^>]*)";
+	public static final String REGEX_TLS_STATE = "<tlsState([^>]* id=\"%s\"[^>]*)";
+	public static final String REGEX_NET_FILE = "<net-file[^>]* value=\"([^\"]+)\"[^>]*";
 	public static final String REGEX_ADDITIONAL_FILES = "<additional-files[^>]* value=\"([^>]*)\"[^>]*";
 	public static final String REGEX_ATTR = "\\s+([^=\\s]+)=\"([^\"]*)\"";
+	public static final String DELIM_NEWLINE = "\n";
 
 	public TrafficFcdReader(Vertx vertx, WorkerExecutor workerExecutor, SiteRequestEnUS siteRequest, JsonObject config) {
 		super();
@@ -123,7 +131,7 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 		LOG.info(importFcdStarted);
 		workerExecutor.executeBlocking(blockingCodeHandler -> {
 			importSystemEvent(systemEvent).onSuccess(a -> {
-				importFcdFileList().onSuccess(b -> {
+				searchTrafficSimulation().onSuccess(b -> {
 					systemEvent.setCompleted(ZonedDateTime.now(ZoneId.of(config.getString(ConfigKeys.SITE_ZONE))));
 					systemEvent.setStatus(SystemEvent.statusCompleted_enUS);
 					importSystemEvent(systemEvent).onSuccess(c -> {
@@ -200,6 +208,14 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 			TrafficSimulationEnUSGenApiServiceImpl service = new TrafficSimulationEnUSGenApiServiceImpl(null, config, workerExecutor, null, webClient, null, null, null);
 			JsonObject body = new JsonObject();
 			SiteRequestEnUS siteRequest = service.generateSiteRequest(null, null, null, body, SiteRequestEnUS.class);
+			ServiceRequest serviceRequest = new ServiceRequest();
+			serviceRequest.setParams(
+					new JsonObject()
+					.put("query", new JsonObject().put("fq", new JsonArray().add(TrafficSimulation.VAR_sumocfgPath)))
+					.put("path", new JsonObject())
+					.put("cookie", new JsonObject())
+					);
+			siteRequest.setServiceRequest(serviceRequest);
 			service.searchTrafficSimulationList(siteRequest, false, true, true).onSuccess(listTrafficSimulation -> {
 				try {
 					ApiRequest apiRequest = new ApiRequest();
@@ -285,10 +301,12 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 		Promise<TrafficSimulation> promise = Promise.promise();
 		try {
 			String sumocfgPath = trafficSimulation.getSumocfgPath();
-			vertx.fileSystem().open(sumocfgPath, new OpenOptions().setRead(true)).onSuccess(sumocfgAsyncFile -> {
-				importSumoNetFiles(sumocfgAsyncFile, trafficSimulation).onSuccess(a -> {
+			obtainSumoAdditionalFiles(sumocfgPath, trafficSimulation).onSuccess(a -> {
+				importSumoNetFiles(sumocfgPath, trafficSimulation).onSuccess(b -> {
 					LOG.info(String.format(importTrafficSimulationFutureComplete, trafficSimulation.getId()));
 					promise.complete();
+				}).onFailure(ex -> {
+					promise.fail(ex);
 				});
 			}).onFailure(ex -> {
 				promise.fail(ex);
@@ -304,41 +322,54 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 	 * Val.Complete.enUS:Syncing sumocfg file complete: %s
 	 * Val.Fail.enUS:Syncing sumocfg file failed: %s
 	 */
-	public Future<TrafficSimulation> importSumoAdditionalFiles(AsyncFile sumocfgAsyncFile, TrafficSimulation trafficSimulation) {
-		SiteRequestEnUS siteRequest = trafficSimulation.getSiteRequest_();
+	public Future<TrafficSimulation> obtainSumoAdditionalFiles(String sumocfgPath, TrafficSimulation trafficSimulation) {
 		Promise<TrafficSimulation> promise = Promise.promise();
 
-		try {
-			ApiCounter apiCounter = new ApiCounter();
-			Long apiCounterResume = 10L;
-			Long apiCounterFetch = 10L;
-			apiCounter.setTotalNum(0L);
-
-			RecordParser recordParser = RecordParser.newDelimited(REGEX_ADDITIONAL_FILES, sumocfgAsyncFile);
-			Optional.ofNullable(config.getInteger(ConfigKeys.FCD_MAX_RECORD_SIZE)).ifPresent(ftpMaxRecordSize -> {
-				recordParser.maxRecordSize(ftpMaxRecordSize);
-			});
-			recordParser.pause();
-			recordParser.handler(bufferedText -> {
-				importSumoAdditionalFilePaths(trafficSimulation, bufferedText.toString()).onComplete(a -> {
-					apiCounter.incrementQueueNum();
-					if(apiCounterResume.compareTo(apiCounter.getTotalNum() - apiCounter.getQueueNum()) >= LONG_ZERO) {
-						recordParser.fetch(apiCounterFetch);
-						LOG.info(String.format("FETCHING net file %s - %s = %s", apiCounter.getTotalNum(), apiCounter.getQueueNum(), apiCounter.getTotalNum() - apiCounter.getQueueNum()));
-					}
+		vertx.fileSystem().open(sumocfgPath, new OpenOptions().setRead(true)).onSuccess(sumocfgAsyncFile -> {
+			try {
+				ApiCounter apiCounter = new ApiCounter();
+				Long apiCounterResume = 10L;
+				Long apiCounterFetch = 10L;
+				apiCounter.setTotalNum(0L);
+	
+				RecordParser recordParser = RecordParser.newDelimited(DELIM_NEWLINE, sumocfgAsyncFile);
+				Optional.ofNullable(config.getInteger(ConfigKeys.FCD_MAX_RECORD_SIZE)).ifPresent(ftpMaxRecordSize -> {
+					recordParser.maxRecordSize(ftpMaxRecordSize);
 				});
-			}).exceptionHandler(ex -> {
-				LOG.error(String.format(importSumoAdditionalFilesFail, sumocfgAsyncFile), new RuntimeException(ex));
+				recordParser.pause();
+				recordParser.handler(bufferedText -> {
+					String str = bufferedText.toString().trim();
+					if(str.startsWith("<additional-files ")) {
+						obtainSumoAdditionalFilePaths(trafficSimulation, str).onComplete(a -> {
+							apiCounter.incrementQueueNum();
+							if(apiCounterResume.compareTo(apiCounter.getTotalNum() - apiCounter.getQueueNum()) >= LONG_ZERO) {
+								recordParser.fetch(apiCounterFetch);
+								LOG.info(String.format("FETCHING additional file %s - %s = %s", apiCounter.getTotalNum(), apiCounter.getQueueNum(), apiCounter.getTotalNum() - apiCounter.getQueueNum()));
+							}
+						});
+					} else {
+						apiCounter.incrementQueueNum();
+						if(apiCounterResume.compareTo(apiCounter.getTotalNum() - apiCounter.getQueueNum()) >= LONG_ZERO) {
+							recordParser.fetch(apiCounterFetch);
+							LOG.info(String.format("FETCHING additional file %s - %s = %s", apiCounter.getTotalNum(), apiCounter.getQueueNum(), apiCounter.getTotalNum() - apiCounter.getQueueNum()));
+						}
+					}
+				}).exceptionHandler(ex -> {
+					LOG.error(String.format(obtainSumoAdditionalFilesFail, sumocfgPath), new RuntimeException(ex));
+					promise.fail(ex);
+				}).endHandler(v -> {
+					LOG.info(String.format(obtainSumoAdditionalFilesComplete, sumocfgPath));
+					promise.complete();
+				});
+				recordParser.fetch(apiCounterFetch);
+			} catch(Exception ex) {
+				LOG.error(String.format(obtainSumoAdditionalFilesFail, sumocfgPath), new RuntimeException(ex));
 				promise.fail(ex);
-			}).endHandler(v -> {
-				LOG.info(String.format(importSumoAdditionalFilesComplete, sumocfgAsyncFile));
-				promise.complete();
-			});
-			recordParser.fetch(apiCounterFetch);
-		} catch(Exception ex) {
-			LOG.error(String.format("importSumoAdditionalFiles failed. "), ex);
+			}
+		}).onFailure(ex -> {
+			LOG.error(String.format(obtainSumoAdditionalFilesFail, sumocfgPath), new RuntimeException(ex));
 			promise.fail(ex);
-		}
+		});
 		return promise.future();
 	}
 
@@ -346,59 +377,19 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 	 * Val.Complete.enUS:Syncing SUMO net file complete: %s
 	 * Val.Fail.enUS:Syncing SUMO net file failed: %s
 	 */
-	public List<String> getSumoAdditionalFilePaths(TrafficSimulation trafficSimulation, String text) {
-		SiteRequestEnUS siteRequest = trafficSimulation.getSiteRequest_();
+	public Future<TrafficSimulation> obtainSumoAdditionalFilePaths(TrafficSimulation trafficSimulation, String text) {
 		Promise<TrafficSimulation> promise = Promise.promise();
-		List<String> sumoAdditionalFilePaths = new ArrayList<>();
-
-		Matcher m = Pattern.compile(REGEX_ADDITIONAL_FILES, Pattern.MULTILINE).matcher(text);
-		TrafficLight result = null;
-		boolean found = m.find();
-		if (found) {
-			String sumoAdditionalFileNames = m.group(1);
-			Arrays.asList(sumoAdditionalFileNames.split(",")).stream().forEach(sumoAdditionalFileName -> {
-				sumoAdditionalFilePaths.add(Paths.get(Paths.get(trafficSimulation.getSumocfgPath()).getParent().toString(), sumoAdditionalFileName).toString());
-			});
-		}
-		return sumoAdditionalFilePaths;
 
 		try {
-			ApiRequest apiRequest = siteRequest.getApiRequest_();
-			vertx.fileSystem().open(sumoAdditionalFilePaths, new OpenOptions().setRead(true)).onSuccess(sumoNetAsyncFile -> {
-				ApiCounter apiCounter = new ApiCounter();
-				Long apiCounterResume = config.getLong(ConfigKeys.API_COUNTER_RESUME_VehicleStep);
-				Long apiCounterFetch = config.getLong(ConfigKeys.API_COUNTER_FETCH_VehicleStep);
-				apiCounter.setTotalNum(0L);
-
-				RecordParser recordParser = RecordParser.newDelimited(REGEX_JUNCTION_TRAFFIC_LIGHT, sumoNetAsyncFile);
-				Optional.ofNullable(config.getInteger(ConfigKeys.FCD_MAX_RECORD_SIZE)).ifPresent(ftpMaxRecordSize -> {
-					recordParser.maxRecordSize(ftpMaxRecordSize);
+			Matcher m = Pattern.compile(REGEX_ADDITIONAL_FILES, Pattern.MULTILINE).matcher(text);
+			boolean found = m.find();
+			if (found) {
+				String sumoAdditionalFileNames = m.group(1);
+				Arrays.asList(sumoAdditionalFileNames.split(",")).stream().forEach(sumoAdditionalFileName -> {
+					trafficSimulation.addAdditionalFilePaths(Paths.get(Paths.get(trafficSimulation.getSumocfgPath()).getParent().toString(), sumoAdditionalFileName).toString());
 				});
-				recordParser.pause();
-				recordParser.handler(bufferedText -> {
-					importTrafficLightHandleBody(trafficSimulation, sumoAdditionalFilePaths, bufferedText, apiRequest, recordParser).onComplete(a -> {
-						apiCounter.incrementQueueNum();
-						if(apiCounterResume.compareTo(apiCounter.getTotalNum() - apiCounter.getQueueNum()) >= LONG_ZERO) {
-							recordParser.fetch(apiCounterFetch);
-							LOG.info(String.format("FETCHING traffic light %s - %s = %s", apiCounter.getTotalNum(), apiCounter.getQueueNum(), apiCounter.getTotalNum() - apiCounter.getQueueNum()));
-							apiCounter.incrementTotalNum(apiCounterFetch);
-							apiRequest.setNumPATCH(apiCounter.getTotalNum());
-							apiRequest.setTimeRemaining(apiRequest.calculateTimeRemaining());
-							vertx.eventBus().publish(String.format(importSumoAdditionalFilePathWebSocket, TrafficLight.CLASS_SIMPLE_NAME), JsonObject.mapFrom(apiRequest));
-						}
-					});
-				}).exceptionHandler(ex -> {
-					LOG.error(String.format(importSumoAdditionalFilePathFail, sumoAdditionalFilePaths), new RuntimeException(ex));
-					promise.fail(ex);
-				}).endHandler(v -> {
-					vertx.eventBus().publish(String.format("websocket%s", TimeStep.CLASS_SIMPLE_NAME), JsonObject.mapFrom(apiRequest));
-					LOG.info(String.format(importSumoAdditionalFilePathComplete, sumoAdditionalFilePaths));
-					promise.complete();
-				});
-				recordParser.fetch(10);
-			}).onFailure(ex -> {
-				promise.fail(ex);
-			});
+			}
+			promise.complete(trafficSimulation);
 		} catch(Exception ex) {
 			LOG.error(String.format("importSumoNetFile failed. "), ex);
 			promise.fail(ex);
@@ -410,41 +401,54 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 	 * Val.Complete.enUS:Syncing sumocfg file complete: %s
 	 * Val.Fail.enUS:Syncing sumocfg file failed: %s
 	 */
-	public Future<TrafficSimulation> importSumoNetFiles(AsyncFile sumocfgAsyncFile, TrafficSimulation trafficSimulation) {
-		SiteRequestEnUS siteRequest = trafficSimulation.getSiteRequest_();
+	public Future<TrafficSimulation> importSumoNetFiles(String sumocfgPath, TrafficSimulation trafficSimulation) {
 		Promise<TrafficSimulation> promise = Promise.promise();
 
-		try {
-			ApiCounter apiCounter = new ApiCounter();
-			Long apiCounterResume = 10L;
-			Long apiCounterFetch = 10L;
-			apiCounter.setTotalNum(0L);
-
-			RecordParser recordParser = RecordParser.newDelimited(REGEX_NET_FILE, sumocfgAsyncFile);
-			Optional.ofNullable(config.getInteger(ConfigKeys.FCD_MAX_RECORD_SIZE)).ifPresent(ftpMaxRecordSize -> {
-				recordParser.maxRecordSize(ftpMaxRecordSize);
-			});
-			recordParser.pause();
-			recordParser.handler(bufferedText -> {
-				importSumoNetFilePath(trafficSimulation, bufferedText.toString()).onComplete(a -> {
-					apiCounter.incrementQueueNum();
-					if(apiCounterResume.compareTo(apiCounter.getTotalNum() - apiCounter.getQueueNum()) >= LONG_ZERO) {
-						recordParser.fetch(apiCounterFetch);
-						LOG.info(String.format("FETCHING net file %s - %s = %s", apiCounter.getTotalNum(), apiCounter.getQueueNum(), apiCounter.getTotalNum() - apiCounter.getQueueNum()));
-					}
+		vertx.fileSystem().open(sumocfgPath, new OpenOptions().setRead(true)).onSuccess(sumocfgAsyncFile -> {
+			try {
+				ApiCounter apiCounter = new ApiCounter();
+				Long apiCounterResume = 10L;
+				Long apiCounterFetch = 10L;
+				apiCounter.setTotalNum(0L);
+	
+				RecordParser recordParser = RecordParser.newDelimited(DELIM_NEWLINE, sumocfgAsyncFile);
+				Optional.ofNullable(config.getInteger(ConfigKeys.FCD_MAX_RECORD_SIZE)).ifPresent(ftpMaxRecordSize -> {
+					recordParser.maxRecordSize(ftpMaxRecordSize);
 				});
-			}).exceptionHandler(ex -> {
-				LOG.error(String.format(importSumoNetFilesFail, sumocfgAsyncFile), new RuntimeException(ex));
+				recordParser.pause();
+				recordParser.handler(bufferedText -> {
+					String str = bufferedText.toString().trim();
+					if(str.startsWith("<net-file ")) {
+						importSumoNetFilePath(trafficSimulation, str).onComplete(a -> {
+							apiCounter.incrementQueueNum();
+							if(apiCounterResume.compareTo(apiCounter.getTotalNum() - apiCounter.getQueueNum()) >= LONG_ZERO) {
+								recordParser.fetch(apiCounterFetch);
+								LOG.info(String.format("FETCHING net file %s - %s = %s", apiCounter.getTotalNum(), apiCounter.getQueueNum(), apiCounter.getTotalNum() - apiCounter.getQueueNum()));
+							}
+						});
+					} else {
+						apiCounter.incrementQueueNum();
+						if(apiCounterResume.compareTo(apiCounter.getTotalNum() - apiCounter.getQueueNum()) >= LONG_ZERO) {
+							recordParser.fetch(apiCounterFetch);
+							LOG.info(String.format("FETCHING net file %s - %s = %s", apiCounter.getTotalNum(), apiCounter.getQueueNum(), apiCounter.getTotalNum() - apiCounter.getQueueNum()));
+						}
+					}
+				}).exceptionHandler(ex -> {
+					LOG.error(String.format(importSumoNetFilesFail, sumocfgPath), new RuntimeException(ex));
+					promise.fail(ex);
+				}).endHandler(v -> {
+					LOG.info(String.format(importSumoNetFilesComplete, sumocfgPath));
+					promise.complete();
+				});
+				recordParser.fetch(apiCounterFetch);
+			} catch(Exception ex) {
+				LOG.error(String.format(importSumoNetFilesFail, sumocfgPath), new RuntimeException(ex));
 				promise.fail(ex);
-			}).endHandler(v -> {
-				LOG.info(String.format(importSumoNetFilesComplete, sumocfgAsyncFile));
-				promise.complete();
-			});
-			recordParser.fetch(apiCounterFetch);
-		} catch(Exception ex) {
-			LOG.error(String.format("importSumoNetFiles failed. "), ex);
+			}
+		}).onFailure(ex -> {
+			LOG.error(String.format(importSumoNetFilesFail, sumocfgPath), new RuntimeException(ex));
 			promise.fail(ex);
-		}
+		});
 		return promise.future();
 	}
 
@@ -457,42 +461,64 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 		Promise<TrafficSimulation> promise = Promise.promise();
 
 		try {
-			ApiRequest apiRequest = siteRequest.getApiRequest_();
-			vertx.fileSystem().open(sumoNetFile, new OpenOptions().setRead(true)).onSuccess(sumoNetAsyncFile -> {
-				ApiCounter apiCounter = new ApiCounter();
-				Long apiCounterResume = config.getLong(ConfigKeys.API_COUNTER_RESUME_VehicleStep);
-				Long apiCounterFetch = config.getLong(ConfigKeys.API_COUNTER_FETCH_VehicleStep);
-				apiCounter.setTotalNum(0L);
-
-				RecordParser recordParser = RecordParser.newDelimited(REGEX_JUNCTION_TRAFFIC_LIGHT, sumoNetAsyncFile);
-				Optional.ofNullable(config.getInteger(ConfigKeys.FCD_MAX_RECORD_SIZE)).ifPresent(ftpMaxRecordSize -> {
-					recordParser.maxRecordSize(ftpMaxRecordSize);
-				});
-				recordParser.pause();
-				recordParser.handler(bufferedText -> {
-					importTrafficLightHandleBody(trafficSimulation, sumoNetFile, bufferedText, apiRequest, recordParser).onComplete(a -> {
-						apiCounter.incrementQueueNum();
-						if(apiCounterResume.compareTo(apiCounter.getTotalNum() - apiCounter.getQueueNum()) >= LONG_ZERO) {
-							recordParser.fetch(apiCounterFetch);
-							LOG.info(String.format("FETCHING traffic light %s - %s = %s", apiCounter.getTotalNum(), apiCounter.getQueueNum(), apiCounter.getTotalNum() - apiCounter.getQueueNum()));
-							apiCounter.incrementTotalNum(apiCounterFetch);
-							apiRequest.setNumPATCH(apiCounter.getTotalNum());
-							apiRequest.setTimeRemaining(apiRequest.calculateTimeRemaining());
-							vertx.eventBus().publish(String.format(importTrafficLightHandleBodyWebSocket, TrafficLight.CLASS_SIMPLE_NAME), JsonObject.mapFrom(apiRequest));
-						}
+			Matcher m = Pattern.compile(REGEX_NET_FILE, Pattern.MULTILINE).matcher(sumoNetFile);
+			boolean found = m.find();
+			if (found) {
+				String netFileName = m.group(1);
+				String netFilePath = Paths.get(Paths.get(trafficSimulation.getSumocfgPath()).getParent().toString(), netFileName).toString();
+				trafficSimulation.setNetFilePath(netFilePath);
+				ApiRequest apiRequest = siteRequest.getApiRequest_();
+				vertx.fileSystem().open(netFilePath, new OpenOptions().setRead(true)).onSuccess(sumoNetAsyncFile -> {
+					ApiCounter apiCounter = new ApiCounter();
+					Long apiCounterResume = config.getLong(ConfigKeys.API_COUNTER_RESUME_VehicleStep);
+					Long apiCounterFetch = config.getLong(ConfigKeys.API_COUNTER_FETCH_VehicleStep);
+					apiCounter.setTotalNum(0L);
+	
+					RecordParser recordParser = RecordParser.newDelimited(DELIM_NEWLINE, sumoNetAsyncFile);
+					Optional.ofNullable(config.getInteger(ConfigKeys.FCD_MAX_RECORD_SIZE)).ifPresent(ftpMaxRecordSize -> {
+						recordParser.maxRecordSize(ftpMaxRecordSize);
 					});
-				}).exceptionHandler(ex -> {
-					LOG.error(String.format(importSumoNetFileFail, sumoNetFile), new RuntimeException(ex));
+					recordParser.pause();
+					recordParser.handler(bufferedText -> {
+						String str = bufferedText.toString().trim();
+						if(str.startsWith("<junction ") && str.contains(" type=\"traffic_light\"")) {
+							importTrafficLightHandleBody(trafficSimulation, netFilePath, str, apiRequest, recordParser).onComplete(a -> {
+								apiCounter.incrementQueueNum();
+								if(apiCounterResume.compareTo(apiCounter.getTotalNum() - apiCounter.getQueueNum()) >= LONG_ZERO) {
+									recordParser.fetch(apiCounterFetch);
+									LOG.info(String.format("FETCHING traffic light %s - %s = %s", apiCounter.getTotalNum(), apiCounter.getQueueNum(), apiCounter.getTotalNum() - apiCounter.getQueueNum()));
+									apiCounter.incrementTotalNum(apiCounterFetch);
+									apiRequest.setNumPATCH(apiCounter.getTotalNum());
+									apiRequest.setTimeRemaining(apiRequest.calculateTimeRemaining());
+									vertx.eventBus().publish(String.format(importTrafficLightHandleBodyWebSocket, TrafficLight.CLASS_SIMPLE_NAME), JsonObject.mapFrom(apiRequest));
+								}
+							});
+						} else {
+							apiCounter.incrementQueueNum();
+							if(apiCounterResume.compareTo(apiCounter.getTotalNum() - apiCounter.getQueueNum()) >= LONG_ZERO) {
+								recordParser.fetch(apiCounterFetch);
+								LOG.info(String.format("FETCHING traffic light %s - %s = %s", apiCounter.getTotalNum(), apiCounter.getQueueNum(), apiCounter.getTotalNum() - apiCounter.getQueueNum()));
+								apiCounter.incrementTotalNum(apiCounterFetch);
+								apiRequest.setNumPATCH(apiCounter.getTotalNum());
+								apiRequest.setTimeRemaining(apiRequest.calculateTimeRemaining());
+								vertx.eventBus().publish(String.format(importTrafficLightHandleBodyWebSocket, TrafficLight.CLASS_SIMPLE_NAME), JsonObject.mapFrom(apiRequest));
+							}
+						}
+					}).exceptionHandler(ex -> {
+						LOG.error(String.format(importSumoNetFilePathFail, sumoNetFile), new RuntimeException(ex));
+						promise.fail(ex);
+					}).endHandler(v -> {
+						vertx.eventBus().publish(String.format("websocket%s", TimeStep.CLASS_SIMPLE_NAME), JsonObject.mapFrom(apiRequest));
+						LOG.info(String.format(importSumoNetFilePathComplete, sumoNetFile));
+						promise.complete();
+					});
+					recordParser.fetch(10);
+				}).onFailure(ex -> {
 					promise.fail(ex);
-				}).endHandler(v -> {
-					vertx.eventBus().publish(String.format("websocket%s", TimeStep.CLASS_SIMPLE_NAME), JsonObject.mapFrom(apiRequest));
-					LOG.info(String.format(importSumoNetFileComplete, sumoNetFile));
-					promise.complete();
 				});
-				recordParser.fetch(10);
-			}).onFailure(ex -> {
-				promise.fail(ex);
-			});
+			} else {
+				promise.complete();
+			}
 		} catch(Exception ex) {
 			LOG.error(String.format("importSumoNetFile failed. "), ex);
 			promise.fail(ex);
@@ -506,87 +532,116 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 	 * Val.Fail.enUS:Syncing Traffic Light record failed: %s
 	 * Val.WebSocket.enUS:websocket%s
 	 */
-	private Future<Void> importTrafficLightHandleBody(TrafficSimulation trafficSimulation, String path, Buffer bufferedText, ApiRequest apiRequest, RecordParser recordParser) {
+	private Future<Void> importTrafficLightHandleBody(TrafficSimulation trafficSimulation, String netFilePath, String str, ApiRequest apiRequest, RecordParser recordParser) {
 		Promise<Void> promise = Promise.promise();
-		TrafficLight trafficLight = importTrafficLightText(path, bufferedText);
-		if(trafficLight != null) {
-			String id = trafficLight.getId();
-			JsonObject params = new JsonObject();
-			JsonObject body = JsonObject.mapFrom(trafficLight);
-			params.put("body", body);
-			params.put("path", new JsonObject());
-			params.put("cookie", new JsonObject());
-			params.put("query", new JsonObject().put("commitWithin", 10000).put("q", "*:*").put("var", new JsonArray().add("refresh:false")));
-			JsonObject context = new JsonObject().put("params", params);
-			JsonObject request = new JsonObject().put("context", context);
-			vertx.eventBus().request(
-					String.format("%s-enUS-%s", config.getString(ConfigKeys.SITE_NAME), TrafficLight.CLASS_SIMPLE_NAME)
-					, request
-					, new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", TrafficLight.CLASS_SIMPLE_NAME))
-					).onSuccess(a -> {
-				try {
-					List<Future> futures = new ArrayList<>();
-					trafficSimulation.getTlsStatesPaths().forEach(tlsStatesPath -> {
-						futures.add(Future.future(promise1 -> {
-							importTlsStatesFile(trafficLight, tlsStatesPath).onSuccess(b -> {
-								promise1.complete();
-							}).onFailure(ex -> {
-								LOG.error(importFcdFileListFail, ex);
-								promise1.fail(ex);
-							});
-						}));
-					});
-					CompositeFuture.all(futures).onSuccess(b -> {
-						promise.complete();
-					}).onFailure(ex -> {
-						LOG.error(importTrafficLightHandleBodyFail, ex);
+		try {
+			TrafficLight trafficLight = importTrafficLightText(netFilePath, str);
+			if(trafficLight != null) {
+				String id = trafficLight.getId();
+				JsonObject params = new JsonObject();
+				JsonObject body = JsonObject.mapFrom(trafficLight);
+				params.put("body", body);
+				params.put("path", new JsonObject());
+				params.put("cookie", new JsonObject());
+				params.put("query", new JsonObject().put("commitWithin", 10000).put("q", "*:*").put("var", new JsonArray().add("refresh:false")));
+				JsonObject context = new JsonObject().put("params", params);
+				JsonObject request = new JsonObject().put("context", context);
+				vertx.eventBus().request(
+						String.format("%s-enUS-%s", config.getString(ConfigKeys.SITE_NAME), TrafficLight.CLASS_SIMPLE_NAME)
+						, request
+						, new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", TrafficLight.CLASS_SIMPLE_NAME))
+						).onSuccess(a -> {
+					try {
+						List<Future> futures = new ArrayList<>();
+						trafficSimulation.getTlsStatesPaths().forEach(tlsStatesPath -> {
+							futures.add(Future.future(promise1 -> {
+								importTlsStatesFile(trafficLight, tlsStatesPath).onSuccess(b -> {
+									promise1.complete();
+								}).onFailure(ex -> {
+									LOG.error(importTrafficLightHandleBodyFail, ex);
+									promise1.fail(ex);
+								});
+							}));
+						});
+						CompositeFuture.all(futures).onSuccess(b -> {
+							promise.complete();
+						}).onFailure(ex -> {
+							LOG.error(importTrafficLightHandleBodyFail, ex);
+							promise.fail(ex);
+						});
+					} catch(Exception ex) {
+						LOG.error(String.format(importTrafficLightHandleBodyFail, id), ex);
 						promise.fail(ex);
-					});
-				} catch(Exception ex) {
+					}
+				}).onFailure(ex -> {
 					LOG.error(String.format(importTrafficLightHandleBodyFail, id), ex);
 					promise.fail(ex);
-				}
-			}).onFailure(ex -> {
-				LOG.error(String.format(importTrafficLightHandleBodyFail, id), ex);
-				promise.fail(ex);
-			});
-		} else {
-			promise.complete();
+				});
+			} else {
+				promise.complete();
+			}
+		} catch(Exception ex) {
+			LOG.error(String.format("importTrafficLightHandleBody failed. "), ex);
+			promise.fail(ex);
 		}
 		return promise.future();
 	}
 
-	private TrafficLight importTrafficLightText(String path, Buffer bufferedText) {
-		String text = bufferedText.toString();
-		Matcher m = Pattern.compile(REGEX_JUNCTION_TRAFFIC_LIGHT, Pattern.MULTILINE).matcher(text);
+	private TrafficLight importTrafficLightText(String netFilePath, String text) {
 		TrafficLight result = null;
-		boolean found = m.find();
-		if (found) {
-			String attrs = m.group(1);
-			Matcher m2 = Pattern.compile(REGEX_ATTR, Pattern.MULTILINE).matcher(attrs);
-			boolean found2 = m2.find();
-			TrafficLight trafficLight = new TrafficLight();
-			while (found2) {
-				String var = m2.group(1);
-				String val = m2.group(2);
-				if("id".equals(var)) {
-					trafficLight.setTrafficLightId(val);
-				} else if("type".equals(var)) {
-					trafficLight.setTrafficLightType(val);
-				} else {
-					if(trafficLight.persistForClass(var, val))
-						trafficLight.addSaves(var);
+		try {
+			Matcher m = Pattern.compile(REGEX_JUNCTION_TRAFFIC_LIGHT, Pattern.MULTILINE).matcher(text);
+			boolean found = m.find();
+			if (found) {
+				String attrs = m.group(1);
+				Matcher m2 = Pattern.compile(REGEX_ATTR, Pattern.MULTILINE).matcher(attrs);
+				boolean found2 = m2.find();
+				TrafficLight trafficLight = new TrafficLight();
+				while (found2) {
+					String var = m2.group(1);
+					String val = m2.group(2);
+					if("id".equals(var)) {
+						trafficLight.setTrafficLightId(val);
+					} else if("type".equals(var)) {
+						trafficLight.setTrafficLightType(val);
+					} else {
+						if(trafficLight.persistForClass(var, val))
+							trafficLight.addSaves(var);
+					}
+					found2 = m2.find();
 				}
-				found2 = m2.find();
+				if(trafficLight.getX() != null && trafficLight.getY() != null) {
+					DefaultExecutor executor = new DefaultExecutor();
+					ByteArrayOutputStream stdout = new ByteArrayOutputStream();
+					ByteArrayOutputStream stderr = new ByteArrayOutputStream();
+					PumpStreamHandler streamHandler = new PumpStreamHandler(stdout, stderr);
+					DefaultExecuteResultHandler resultHandler = new DefaultExecuteResultHandler();
+					executor.setStreamHandler(streamHandler);
+					CommandLine commandLine = CommandLine.parse("/bin/sh -c");
+					commandLine.addArguments(String.format("'/home/ctate/python/bin/python -u -c \"import sumolib; net = sumolib.net.readNet('\"'\"'%s'\"'\"'); print(net.convertXY2LonLat(%s, %s));\"'", netFilePath, trafficLight.getX(), trafficLight.getY()), false);
+					Map<String, String> env = new HashMap<>();
+					executor.execute(commandLine, env, resultHandler);
+					resultHandler.waitFor();
+					String output = stdout.toString().trim().replaceAll("[\\(\\) ]", "");
+					String error = stderr.toString().trim();
+					stdout.close();
+					stderr.close();
+					String[] parts = output.split(",");
+					trafficLight.setX(parts[0]);
+					trafficLight.setY(parts[1]);
+				}
+	
+				String id = String.format("%s_%s", TrafficLight.CLASS_SIMPLE_NAME, trafficLight.getTrafficLightId());
+				trafficLight.setCreated(ZonedDateTime.now());
+				trafficLight.setId(id);
+				trafficLight.setObjectId(id);
+				trafficLight.setInheritPk(id);
+				result = trafficLight;
+				found = m.find();
 			}
-
-			String id = String.format("%s_%s", TrafficLight.CLASS_SIMPLE_NAME, trafficLight.getTrafficLightId());
-			trafficLight.setCreated(ZonedDateTime.now());
-			trafficLight.setId(id);
-			trafficLight.setObjectId(id);
-			trafficLight.setInheritPk(id);
-			result = trafficLight;
-			found = m.find();
+		} catch(Exception ex) {
+			LOG.error(String.format("importTrafficLightHandleBody failed. "), ex);
+			ExceptionUtils.rethrow(ex);
 		}
 		return result;
 	}
@@ -607,13 +662,26 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 				Long apiCounterFetch = config.getLong(ConfigKeys.API_COUNTER_FETCH_VehicleStep);
 				apiCounter.setTotalNum(0L);
 
-				RecordParser recordParser = RecordParser.newDelimited(REGEX_TLS_STATE, additionalAsyncFile);
+				RecordParser recordParser = RecordParser.newDelimited(String.format(DELIM_NEWLINE, trafficLight.getTrafficLightId()), additionalAsyncFile);
 				Optional.ofNullable(config.getInteger(ConfigKeys.FCD_MAX_RECORD_SIZE)).ifPresent(ftpMaxRecordSize -> {
 					recordParser.maxRecordSize(ftpMaxRecordSize);
 				});
 				recordParser.pause();
 				recordParser.handler(bufferedText -> {
-					importTrafficLightStepHandleBody(additionalFilePath, bufferedText, apiRequest, recordParser).onComplete(a -> {
+					String str = bufferedText.toString().trim();
+					if(str.startsWith("<tlsState ")) {
+						importTrafficLightStepHandleBody(trafficLight, additionalFilePath, str, apiRequest, recordParser).onComplete(a -> {
+							apiCounter.incrementQueueNum();
+							if(apiCounterResume.compareTo(apiCounter.getTotalNum() - apiCounter.getQueueNum()) >= LONG_ZERO) {
+								recordParser.fetch(apiCounterFetch);
+								LOG.info(String.format("FETCHING TLS state %s - %s = %s", apiCounter.getTotalNum(), apiCounter.getQueueNum(), apiCounter.getTotalNum() - apiCounter.getQueueNum()));
+								apiCounter.incrementTotalNum(apiCounterFetch);
+								apiRequest.setNumPATCH(apiCounter.getTotalNum());
+								apiRequest.setTimeRemaining(apiRequest.calculateTimeRemaining());
+								vertx.eventBus().publish(String.format(importTrafficLightHandleBodyWebSocket, TrafficLight.CLASS_SIMPLE_NAME), JsonObject.mapFrom(apiRequest));
+							}
+						});
+					} else {
 						apiCounter.incrementQueueNum();
 						if(apiCounterResume.compareTo(apiCounter.getTotalNum() - apiCounter.getQueueNum()) >= LONG_ZERO) {
 							recordParser.fetch(apiCounterFetch);
@@ -623,7 +691,7 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 							apiRequest.setTimeRemaining(apiRequest.calculateTimeRemaining());
 							vertx.eventBus().publish(String.format(importTrafficLightHandleBodyWebSocket, TrafficLight.CLASS_SIMPLE_NAME), JsonObject.mapFrom(apiRequest));
 						}
-					});
+					}
 				}).exceptionHandler(ex -> {
 					LOG.error(String.format(importTlsStatesFileFail, additionalFilePath), new RuntimeException(ex));
 					promise.fail(ex);
@@ -649,13 +717,13 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 	 * Val.Fail.enUS:Syncing Traffic Light record failed: %s
 	 * Val.WebSocket.enUS:websocket%s
 	 */
-	private Future<Void> importTrafficLightStepHandleBody(TrafficLight trafficLight, String path, Buffer bufferedText, ApiRequest apiRequest, RecordParser recordParser) {
+	private Future<Void> importTrafficLightStepHandleBody(TrafficLight trafficLight, String path, String str, ApiRequest apiRequest, RecordParser recordParser) {
 		Promise<Void> promise = Promise.promise();
-		TrafficLightStep trafficLightStep = importTrafficLightStepText(trafficLight, path, bufferedText);
-		if(trafficLight != null) {
-			String id = trafficLight.getId();
+		TrafficLightStep trafficLightStep = importTrafficLightStepText(trafficLight, path, str);
+		if(trafficLightStep != null) {
+			String id = trafficLightStep.getId();
 			JsonObject params = new JsonObject();
-			JsonObject body = JsonObject.mapFrom(trafficLight);
+			JsonObject body = JsonObject.mapFrom(trafficLightStep);
 			params.put("body", body);
 			params.put("path", new JsonObject());
 			params.put("cookie", new JsonObject());
@@ -683,13 +751,11 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 		return promise.future();
 	}
 
-	private BaseResult importTrafficLightStepText(TrafficLight trafficLight, TimeStep timeStep, String path, Buffer bufferedText) {
-		String text = bufferedText.toString();
+	private TrafficLightStep importTrafficLightStepText(TrafficLight trafficLight, String path, String text) {
 		Matcher m = Pattern.compile(REGEX_JUNCTION_TRAFFIC_LIGHT, Pattern.MULTILINE).matcher(text);
-		BaseResult result = null;
+		TrafficLightStep result = null;
 		boolean found = m.find();
 		if (found) {
-			String vehicleType = m.group(1);
 			String attrs = m.group(2);
 			Matcher m2 = Pattern.compile(REGEX_ATTR, Pattern.MULTILINE).matcher(attrs);
 			boolean found2 = m2.find();
@@ -708,13 +774,12 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 				found2 = m2.find();
 			}
 
-			String id = String.format("%s_%s_%s", TrafficLightStep.CLASS_SIMPLE_NAME, trafficLight.getTrafficLightId(), timeStep.getId());
+			String id = String.format("%s_%s_%s", TrafficLightStep.CLASS_SIMPLE_NAME, trafficLight.getTrafficLightId(), trafficLightStep.getTime().toString());
 			trafficLightStep.setCreated(ZonedDateTime.now());
 			trafficLightStep.setId(id);
 			trafficLightStep.setObjectId(id);
 			trafficLightStep.setInheritPk(id);
-			trafficLightStep.setTime(timeStep.getTime());
-			trafficLightStep.setTimeStepId(timeStep.getId());
+			trafficLightStep.setTime(trafficLightStep.getTime());
 			result = trafficLightStep;
 			found = m.find();
 		}

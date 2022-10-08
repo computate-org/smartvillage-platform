@@ -26,7 +26,7 @@ RUN yum install -y ${APP_DEPENDENCIES}
 RUN /usr/bin/virtualenv ${PYTHON_DIR}
 RUN source ${PYTHON_DIR}/bin/activate && pip install setuptools_rust wheel
 RUN source ${PYTHON_DIR}/bin/activate && pip install --upgrade pip
-RUN source ${PYTHON_DIR}/bin/activate && pip install ansible
+RUN source ${PYTHON_DIR}/bin/activate && pip install ansible sumolib
 RUN git clone https://github.com/computate-org/computate_sumo.git /root/.ansible/roles/computate.computate_sumo
 RUN git clone https://github.com/computate-org/computate_sqlite.git /root/.ansible/roles/computate.computate_sqlite
 RUN git clone https://github.com/computate-org/computate_fox.git /root/.ansible/roles/computate.computate_fox
