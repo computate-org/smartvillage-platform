@@ -532,59 +532,6 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 		return slope;
 	}
 
-	///////////
-	// color //
-	///////////
-
-	/**	 The entity color
-	 *	 is defined as null before being initialized. 
-	 */
-	@JsonProperty
-	@JsonInclude(Include.NON_NULL)
-	protected String color;
-
-	/**	<br> The entity color
-	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStep&fq=entiteVar_enUS_indexed_string:color">Find the entity color in Solr</a>
-	 * <br>
-	 * @param w is for wrapping a value to assign to this entity during initialization. 
-	 **/
-	protected abstract void _color(Wrap<String> w);
-
-	public String getColor() {
-		return color;
-	}
-	public void setColor(String o) {
-		this.color = PersonStep.staticSetColor(siteRequest_, o);
-	}
-	public static String staticSetColor(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-	protected PersonStep colorInit() {
-		Wrap<String> colorWrap = new Wrap<String>().var("color");
-		if(color == null) {
-			_color(colorWrap);
-			setColor(colorWrap.o);
-		}
-		return (PersonStep)this;
-	}
-
-	public static String staticSearchColor(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-
-	public static String staticSearchStrColor(SiteRequestEnUS siteRequest_, String o) {
-		return o == null ? null : o.toString();
-	}
-
-	public static String staticSearchFqColor(SiteRequestEnUS siteRequest_, String o) {
-		return PersonStep.staticSearchStrColor(siteRequest_, PersonStep.staticSearchColor(siteRequest_, PersonStep.staticSetColor(siteRequest_, o)));
-	}
-
-	public String sqlColor() {
-		return color;
-	}
-
 	//////////////
 	// initDeep //
 	//////////////
@@ -620,7 +567,6 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 				speedInit();
 				posInit();
 				slopeInit();
-				colorInit();
 				promise2.complete();
 			} catch(Exception ex) {
 				promise2.fail(ex);
@@ -686,8 +632,6 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 				return oPersonStep.pos;
 			case "slope":
 				return oPersonStep.slope;
-			case "color":
-				return oPersonStep.color;
 			default:
 				return super.obtainMapResult(var);
 		}
@@ -739,8 +683,6 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 			return PersonStep.staticSetPos(siteRequest_, o);
 		case "slope":
 			return PersonStep.staticSetSlope(siteRequest_, o);
-		case "color":
-			return PersonStep.staticSetColor(siteRequest_, o);
 			default:
 				return MapResult.staticSetMapResult(entityVar,  siteRequest_, o);
 		}
@@ -767,8 +709,6 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 			return PersonStep.staticSearchPos(siteRequest_, (BigDecimal)o);
 		case "slope":
 			return PersonStep.staticSearchSlope(siteRequest_, (BigDecimal)o);
-		case "color":
-			return PersonStep.staticSearchColor(siteRequest_, (String)o);
 			default:
 				return MapResult.staticSearchMapResult(entityVar,  siteRequest_, o);
 		}
@@ -795,8 +735,6 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 			return PersonStep.staticSearchStrPos(siteRequest_, (Double)o);
 		case "slope":
 			return PersonStep.staticSearchStrSlope(siteRequest_, (Double)o);
-		case "color":
-			return PersonStep.staticSearchStrColor(siteRequest_, (String)o);
 			default:
 				return MapResult.staticSearchStrMapResult(entityVar,  siteRequest_, o);
 		}
@@ -823,8 +761,6 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 			return PersonStep.staticSearchFqPos(siteRequest_, o);
 		case "slope":
 			return PersonStep.staticSearchFqSlope(siteRequest_, o);
-		case "color":
-			return PersonStep.staticSearchFqColor(siteRequest_, o);
 			default:
 				return MapResult.staticSearchFqMapResult(entityVar,  siteRequest_, o);
 		}
@@ -889,11 +825,6 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 					setSlope(new BigDecimal(((Number)val).doubleValue()));
 				saves.add("slope");
 				return val;
-			case "color":
-				if(val instanceof String)
-					setColor((String)val);
-				saves.add("color");
-				return val;
 			default:
 				return super.persistMapResult(var, val);
 		}
@@ -934,9 +865,6 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 		if(slope != null) {
 			doc.put("slope_docvalues_double", slope.doubleValue());
 		}
-		if(color != null) {
-			doc.put("color_docvalues_string", color);
-		}
 		super.indexMapResult(doc);
 
 	}
@@ -955,8 +883,6 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 				return "pos_docvalues_double";
 			case "slope":
 				return "slope_docvalues_double";
-			case "color":
-				return "color_docvalues_string";
 			default:
 				return MapResult.varStoredMapResult(entityVar);
 		}
@@ -976,8 +902,6 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 				return "pos_docvalues_double";
 			case "slope":
 				return "slope_docvalues_double";
-			case "color":
-				return "color_docvalues_string";
 			default:
 				return MapResult.varIndexedMapResult(entityVar);
 		}
@@ -997,8 +921,6 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 				return "pos";
 			case "slope_docvalues_double":
 				return "slope";
-			case "color_docvalues_string":
-				return "color";
 			default:
 				return MapResult.searchVarMapResult(searchVar);
 		}
@@ -1034,7 +956,6 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 		oPersonStep.setSpeed(Optional.ofNullable(doc.get("speed_docvalues_double")).map(v -> v.toString()).orElse(null));
 		oPersonStep.setPos(Optional.ofNullable(doc.get("pos_docvalues_double")).map(v -> v.toString()).orElse(null));
 		oPersonStep.setSlope(Optional.ofNullable(doc.get("slope_docvalues_double")).map(v -> v.toString()).orElse(null));
-		oPersonStep.setColor(Optional.ofNullable(doc.get("color_docvalues_string")).map(v -> v.toString()).orElse(null));
 
 		super.storeMapResult(doc);
 	}
@@ -1060,8 +981,6 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 				apiRequest.addVars("pos");
 			if(!Objects.equals(slope, original.getSlope()))
 				apiRequest.addVars("slope");
-			if(!Objects.equals(color, original.getColor()))
-				apiRequest.addVars("color");
 			super.apiRequestMapResult();
 		}
 	}
@@ -1079,7 +998,6 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 		sb.append(Optional.ofNullable(speed).map(v -> "speed: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(pos).map(v -> "pos: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(slope).map(v -> "slope: " + v + "\n").orElse(""));
-		sb.append(Optional.ofNullable(color).map(v -> "color: \"" + v + "\"\n" ).orElse(""));
 		return sb.toString();
 	}
 
@@ -1090,7 +1008,6 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 	public static final String VAR_speed = "speed";
 	public static final String VAR_pos = "pos";
 	public static final String VAR_slope = "slope";
-	public static final String VAR_color = "color";
 
 	public static List<String> varsQForClass() {
 		return PersonStep.varsQPersonStep(new ArrayList<String>());
@@ -1110,7 +1027,6 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 		vars.add(VAR_speed);
 		vars.add(VAR_pos);
 		vars.add(VAR_slope);
-		vars.add(VAR_color);
 		MapResult.varsFqMapResult(vars);
 		return vars;
 	}
@@ -1133,7 +1049,6 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 	public static final String DISPLAY_NAME_speed = "Speed";
 	public static final String DISPLAY_NAME_pos = "Position";
 	public static final String DISPLAY_NAME_slope = "Slope";
-	public static final String DISPLAY_NAME_color = "Color";
 
 	public static String displayNameForClass(String var) {
 		return PersonStep.displayNamePersonStep(var);
@@ -1152,8 +1067,6 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 			return DISPLAY_NAME_pos;
 		case VAR_slope:
 			return DISPLAY_NAME_slope;
-		case VAR_color:
-			return DISPLAY_NAME_color;
 		default:
 			return MapResult.displayNameMapResult(var);
 		}
@@ -1180,8 +1093,6 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 			return "BigDecimal";
 		case VAR_slope:
 			return "BigDecimal";
-		case VAR_color:
-			return "String";
 			default:
 				return MapResult.classSimpleNameMapResult(var);
 		}
@@ -1208,8 +1119,6 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 			return 5;
 		case VAR_slope:
 			return 5;
-		case VAR_color:
-			return 6;
 			default:
 				return MapResult.htmlRowMapResult(var);
 		}
@@ -1229,8 +1138,6 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 			return 3;
 		case VAR_slope:
 			return 4;
-		case VAR_color:
-			return 1;
 			default:
 				return MapResult.htmlCellMapResult(var);
 		}

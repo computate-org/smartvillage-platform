@@ -33,6 +33,7 @@ import java.util.Map;
 import org.computate.smartvillageview.enus.result.map.MapResult;
 import java.lang.String;
 import java.math.BigDecimal;
+import java.lang.Long;
 import org.computate.search.wrap.Wrap;
 import io.vertx.core.Promise;
 import io.vertx.core.Future;
@@ -323,56 +324,178 @@ public abstract class TrafficLightStepGen<DEV> extends MapResult {
 	}
 
 	///////////
-	// color //
+	// state //
 	///////////
 
-	/**	 The entity color
+	/**	 The entity state
 	 *	 is defined as null before being initialized. 
 	 */
 	@JsonProperty
 	@JsonInclude(Include.NON_NULL)
-	protected String color;
+	protected String state;
 
-	/**	<br> The entity color
+	/**	<br> The entity state
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.light.step.TrafficLightStep&fq=entiteVar_enUS_indexed_string:color">Find the entity color in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.light.step.TrafficLightStep&fq=entiteVar_enUS_indexed_string:state">Find the entity state in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected abstract void _color(Wrap<String> w);
+	protected abstract void _state(Wrap<String> w);
 
-	public String getColor() {
-		return color;
+	public String getState() {
+		return state;
 	}
-	public void setColor(String o) {
-		this.color = TrafficLightStep.staticSetColor(siteRequest_, o);
+	public void setState(String o) {
+		this.state = TrafficLightStep.staticSetState(siteRequest_, o);
 	}
-	public static String staticSetColor(SiteRequestEnUS siteRequest_, String o) {
+	public static String staticSetState(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	protected TrafficLightStep colorInit() {
-		Wrap<String> colorWrap = new Wrap<String>().var("color");
-		if(color == null) {
-			_color(colorWrap);
-			setColor(colorWrap.o);
+	protected TrafficLightStep stateInit() {
+		Wrap<String> stateWrap = new Wrap<String>().var("state");
+		if(state == null) {
+			_state(stateWrap);
+			setState(stateWrap.o);
 		}
 		return (TrafficLightStep)this;
 	}
 
-	public static String staticSearchColor(SiteRequestEnUS siteRequest_, String o) {
+	public static String staticSearchState(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
 
-	public static String staticSearchStrColor(SiteRequestEnUS siteRequest_, String o) {
+	public static String staticSearchStrState(SiteRequestEnUS siteRequest_, String o) {
 		return o == null ? null : o.toString();
 	}
 
-	public static String staticSearchFqColor(SiteRequestEnUS siteRequest_, String o) {
-		return TrafficLightStep.staticSearchStrColor(siteRequest_, TrafficLightStep.staticSearchColor(siteRequest_, TrafficLightStep.staticSetColor(siteRequest_, o)));
+	public static String staticSearchFqState(SiteRequestEnUS siteRequest_, String o) {
+		return TrafficLightStep.staticSearchStrState(siteRequest_, TrafficLightStep.staticSearchState(siteRequest_, TrafficLightStep.staticSetState(siteRequest_, o)));
 	}
 
-	public String sqlColor() {
-		return color;
+	public String sqlState() {
+		return state;
+	}
+
+	///////////////
+	// programId //
+	///////////////
+
+	/**	 The entity programId
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected Long programId;
+
+	/**	<br> The entity programId
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.light.step.TrafficLightStep&fq=entiteVar_enUS_indexed_string:programId">Find the entity programId in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _programId(Wrap<Long> w);
+
+	public Long getProgramId() {
+		return programId;
+	}
+
+	public void setProgramId(Long programId) {
+		this.programId = programId;
+	}
+	@JsonIgnore
+	public void setProgramId(String o) {
+		this.programId = TrafficLightStep.staticSetProgramId(siteRequest_, o);
+	}
+	public static Long staticSetProgramId(SiteRequestEnUS siteRequest_, String o) {
+		if(NumberUtils.isParsable(o))
+			return Long.parseLong(o);
+		return null;
+	}
+	protected TrafficLightStep programIdInit() {
+		Wrap<Long> programIdWrap = new Wrap<Long>().var("programId");
+		if(programId == null) {
+			_programId(programIdWrap);
+			setProgramId(programIdWrap.o);
+		}
+		return (TrafficLightStep)this;
+	}
+
+	public static Long staticSearchProgramId(SiteRequestEnUS siteRequest_, Long o) {
+		return o;
+	}
+
+	public static String staticSearchStrProgramId(SiteRequestEnUS siteRequest_, Long o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqProgramId(SiteRequestEnUS siteRequest_, String o) {
+		return TrafficLightStep.staticSearchStrProgramId(siteRequest_, TrafficLightStep.staticSearchProgramId(siteRequest_, TrafficLightStep.staticSetProgramId(siteRequest_, o)));
+	}
+
+	public Long sqlProgramId() {
+		return programId;
+	}
+
+	///////////
+	// phase //
+	///////////
+
+	/**	 The entity phase
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected Long phase;
+
+	/**	<br> The entity phase
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.light.step.TrafficLightStep&fq=entiteVar_enUS_indexed_string:phase">Find the entity phase in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _phase(Wrap<Long> w);
+
+	public Long getPhase() {
+		return phase;
+	}
+
+	public void setPhase(Long phase) {
+		this.phase = phase;
+	}
+	@JsonIgnore
+	public void setPhase(String o) {
+		this.phase = TrafficLightStep.staticSetPhase(siteRequest_, o);
+	}
+	public static Long staticSetPhase(SiteRequestEnUS siteRequest_, String o) {
+		if(NumberUtils.isParsable(o))
+			return Long.parseLong(o);
+		return null;
+	}
+	protected TrafficLightStep phaseInit() {
+		Wrap<Long> phaseWrap = new Wrap<Long>().var("phase");
+		if(phase == null) {
+			_phase(phaseWrap);
+			setPhase(phaseWrap.o);
+		}
+		return (TrafficLightStep)this;
+	}
+
+	public static Long staticSearchPhase(SiteRequestEnUS siteRequest_, Long o) {
+		return o;
+	}
+
+	public static String staticSearchStrPhase(SiteRequestEnUS siteRequest_, Long o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqPhase(SiteRequestEnUS siteRequest_, String o) {
+		return TrafficLightStep.staticSearchStrPhase(siteRequest_, TrafficLightStep.staticSearchPhase(siteRequest_, TrafficLightStep.staticSetPhase(siteRequest_, o)));
+	}
+
+	public Long sqlPhase() {
+		return phase;
 	}
 
 	//////////////
@@ -407,7 +530,9 @@ public abstract class TrafficLightStepGen<DEV> extends MapResult {
 				trafficLightIdInit();
 				trafficLightTypeInit();
 				angleInit();
-				colorInit();
+				stateInit();
+				programIdInit();
+				phaseInit();
 				promise2.complete();
 			} catch(Exception ex) {
 				promise2.fail(ex);
@@ -467,8 +592,12 @@ public abstract class TrafficLightStepGen<DEV> extends MapResult {
 				return oTrafficLightStep.trafficLightType;
 			case "angle":
 				return oTrafficLightStep.angle;
-			case "color":
-				return oTrafficLightStep.color;
+			case "state":
+				return oTrafficLightStep.state;
+			case "programId":
+				return oTrafficLightStep.programId;
+			case "phase":
+				return oTrafficLightStep.phase;
 			default:
 				return super.obtainMapResult(var);
 		}
@@ -514,8 +643,12 @@ public abstract class TrafficLightStepGen<DEV> extends MapResult {
 			return TrafficLightStep.staticSetTrafficLightType(siteRequest_, o);
 		case "angle":
 			return TrafficLightStep.staticSetAngle(siteRequest_, o);
-		case "color":
-			return TrafficLightStep.staticSetColor(siteRequest_, o);
+		case "state":
+			return TrafficLightStep.staticSetState(siteRequest_, o);
+		case "programId":
+			return TrafficLightStep.staticSetProgramId(siteRequest_, o);
+		case "phase":
+			return TrafficLightStep.staticSetPhase(siteRequest_, o);
 			default:
 				return MapResult.staticSetMapResult(entityVar,  siteRequest_, o);
 		}
@@ -536,8 +669,12 @@ public abstract class TrafficLightStepGen<DEV> extends MapResult {
 			return TrafficLightStep.staticSearchTrafficLightType(siteRequest_, (String)o);
 		case "angle":
 			return TrafficLightStep.staticSearchAngle(siteRequest_, (BigDecimal)o);
-		case "color":
-			return TrafficLightStep.staticSearchColor(siteRequest_, (String)o);
+		case "state":
+			return TrafficLightStep.staticSearchState(siteRequest_, (String)o);
+		case "programId":
+			return TrafficLightStep.staticSearchProgramId(siteRequest_, (Long)o);
+		case "phase":
+			return TrafficLightStep.staticSearchPhase(siteRequest_, (Long)o);
 			default:
 				return MapResult.staticSearchMapResult(entityVar,  siteRequest_, o);
 		}
@@ -558,8 +695,12 @@ public abstract class TrafficLightStepGen<DEV> extends MapResult {
 			return TrafficLightStep.staticSearchStrTrafficLightType(siteRequest_, (String)o);
 		case "angle":
 			return TrafficLightStep.staticSearchStrAngle(siteRequest_, (Double)o);
-		case "color":
-			return TrafficLightStep.staticSearchStrColor(siteRequest_, (String)o);
+		case "state":
+			return TrafficLightStep.staticSearchStrState(siteRequest_, (String)o);
+		case "programId":
+			return TrafficLightStep.staticSearchStrProgramId(siteRequest_, (Long)o);
+		case "phase":
+			return TrafficLightStep.staticSearchStrPhase(siteRequest_, (Long)o);
 			default:
 				return MapResult.staticSearchStrMapResult(entityVar,  siteRequest_, o);
 		}
@@ -580,8 +721,12 @@ public abstract class TrafficLightStepGen<DEV> extends MapResult {
 			return TrafficLightStep.staticSearchFqTrafficLightType(siteRequest_, o);
 		case "angle":
 			return TrafficLightStep.staticSearchFqAngle(siteRequest_, o);
-		case "color":
-			return TrafficLightStep.staticSearchFqColor(siteRequest_, o);
+		case "state":
+			return TrafficLightStep.staticSearchFqState(siteRequest_, o);
+		case "programId":
+			return TrafficLightStep.staticSearchFqProgramId(siteRequest_, o);
+		case "phase":
+			return TrafficLightStep.staticSearchFqPhase(siteRequest_, o);
 			default:
 				return MapResult.staticSearchFqMapResult(entityVar,  siteRequest_, o);
 		}
@@ -625,10 +770,24 @@ public abstract class TrafficLightStepGen<DEV> extends MapResult {
 					setAngle(new BigDecimal(((Number)val).doubleValue()));
 				saves.add("angle");
 				return val;
-			case "color":
+			case "state":
 				if(val instanceof String)
-					setColor((String)val);
-				saves.add("color");
+					setState((String)val);
+				saves.add("state");
+				return val;
+			case "programid":
+				if(val instanceof Long)
+					setProgramId((Long)val);
+				else if(val instanceof String)
+					setProgramId((String)val);
+				saves.add("programId");
+				return val;
+			case "phase":
+				if(val instanceof Long)
+					setPhase((Long)val);
+				else if(val instanceof String)
+					setPhase((String)val);
+				saves.add("phase");
 				return val;
 			default:
 				return super.persistMapResult(var, val);
@@ -661,8 +820,14 @@ public abstract class TrafficLightStepGen<DEV> extends MapResult {
 		if(angle != null) {
 			doc.put("angle_docvalues_double", angle.doubleValue());
 		}
-		if(color != null) {
-			doc.put("color_docvalues_string", color);
+		if(state != null) {
+			doc.put("state_docvalues_string", state);
+		}
+		if(programId != null) {
+			doc.put("programId_docvalues_long", programId);
+		}
+		if(phase != null) {
+			doc.put("phase_docvalues_long", phase);
 		}
 		super.indexMapResult(doc);
 
@@ -676,8 +841,12 @@ public abstract class TrafficLightStepGen<DEV> extends MapResult {
 				return "trafficLightType_docvalues_string";
 			case "angle":
 				return "angle_docvalues_double";
-			case "color":
-				return "color_docvalues_string";
+			case "state":
+				return "state_docvalues_string";
+			case "programId":
+				return "programId_docvalues_long";
+			case "phase":
+				return "phase_docvalues_long";
 			default:
 				return MapResult.varStoredMapResult(entityVar);
 		}
@@ -691,8 +860,12 @@ public abstract class TrafficLightStepGen<DEV> extends MapResult {
 				return "trafficLightType_docvalues_string";
 			case "angle":
 				return "angle_docvalues_double";
-			case "color":
-				return "color_docvalues_string";
+			case "state":
+				return "state_docvalues_string";
+			case "programId":
+				return "programId_docvalues_long";
+			case "phase":
+				return "phase_docvalues_long";
 			default:
 				return MapResult.varIndexedMapResult(entityVar);
 		}
@@ -706,8 +879,12 @@ public abstract class TrafficLightStepGen<DEV> extends MapResult {
 				return "trafficLightType";
 			case "angle_docvalues_double":
 				return "angle";
-			case "color_docvalues_string":
-				return "color";
+			case "state_docvalues_string":
+				return "state";
+			case "programId_docvalues_long":
+				return "programId";
+			case "phase_docvalues_long":
+				return "phase";
 			default:
 				return MapResult.searchVarMapResult(searchVar);
 		}
@@ -740,7 +917,9 @@ public abstract class TrafficLightStepGen<DEV> extends MapResult {
 		oTrafficLightStep.setTrafficLightId(Optional.ofNullable(doc.get("trafficLightId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oTrafficLightStep.setTrafficLightType(Optional.ofNullable(doc.get("trafficLightType_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oTrafficLightStep.setAngle(Optional.ofNullable(doc.get("angle_docvalues_double")).map(v -> v.toString()).orElse(null));
-		oTrafficLightStep.setColor(Optional.ofNullable(doc.get("color_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oTrafficLightStep.setState(Optional.ofNullable(doc.get("state_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oTrafficLightStep.setProgramId(Optional.ofNullable(doc.get("programId_docvalues_long")).map(v -> v.toString()).orElse(null));
+		oTrafficLightStep.setPhase(Optional.ofNullable(doc.get("phase_docvalues_long")).map(v -> v.toString()).orElse(null));
 
 		super.storeMapResult(doc);
 	}
@@ -760,8 +939,12 @@ public abstract class TrafficLightStepGen<DEV> extends MapResult {
 				apiRequest.addVars("trafficLightType");
 			if(!Objects.equals(angle, original.getAngle()))
 				apiRequest.addVars("angle");
-			if(!Objects.equals(color, original.getColor()))
-				apiRequest.addVars("color");
+			if(!Objects.equals(state, original.getState()))
+				apiRequest.addVars("state");
+			if(!Objects.equals(programId, original.getProgramId()))
+				apiRequest.addVars("programId");
+			if(!Objects.equals(phase, original.getPhase()))
+				apiRequest.addVars("phase");
 			super.apiRequestMapResult();
 		}
 	}
@@ -776,7 +959,9 @@ public abstract class TrafficLightStepGen<DEV> extends MapResult {
 		sb.append(Optional.ofNullable(trafficLightId).map(v -> "trafficLightId: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(trafficLightType).map(v -> "trafficLightType: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(angle).map(v -> "angle: " + v + "\n").orElse(""));
-		sb.append(Optional.ofNullable(color).map(v -> "color: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(state).map(v -> "state: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(programId).map(v -> "programId: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(phase).map(v -> "phase: " + v + "\n").orElse(""));
 		return sb.toString();
 	}
 
@@ -784,7 +969,9 @@ public abstract class TrafficLightStepGen<DEV> extends MapResult {
 	public static final String VAR_trafficLightId = "trafficLightId";
 	public static final String VAR_trafficLightType = "trafficLightType";
 	public static final String VAR_angle = "angle";
-	public static final String VAR_color = "color";
+	public static final String VAR_state = "state";
+	public static final String VAR_programId = "programId";
+	public static final String VAR_phase = "phase";
 
 	public static List<String> varsQForClass() {
 		return TrafficLightStep.varsQTrafficLightStep(new ArrayList<String>());
@@ -801,7 +988,9 @@ public abstract class TrafficLightStepGen<DEV> extends MapResult {
 		vars.add(VAR_trafficLightId);
 		vars.add(VAR_trafficLightType);
 		vars.add(VAR_angle);
-		vars.add(VAR_color);
+		vars.add(VAR_state);
+		vars.add(VAR_programId);
+		vars.add(VAR_phase);
 		MapResult.varsFqMapResult(vars);
 		return vars;
 	}
@@ -811,6 +1000,8 @@ public abstract class TrafficLightStepGen<DEV> extends MapResult {
 	}
 	public static List<String> varsRangeTrafficLightStep(List<String> vars) {
 		vars.add(VAR_angle);
+		vars.add(VAR_programId);
+		vars.add(VAR_phase);
 		MapResult.varsRangeMapResult(vars);
 		return vars;
 	}
@@ -818,7 +1009,9 @@ public abstract class TrafficLightStepGen<DEV> extends MapResult {
 	public static final String DISPLAY_NAME_trafficLightId = "traffic light ID";
 	public static final String DISPLAY_NAME_trafficLightType = "traffic light type";
 	public static final String DISPLAY_NAME_angle = "Angle in degrees";
-	public static final String DISPLAY_NAME_color = "Color";
+	public static final String DISPLAY_NAME_state = "state";
+	public static final String DISPLAY_NAME_programId = "program ID";
+	public static final String DISPLAY_NAME_phase = "phase";
 
 	public static String displayNameForClass(String var) {
 		return TrafficLightStep.displayNameTrafficLightStep(var);
@@ -831,8 +1024,12 @@ public abstract class TrafficLightStepGen<DEV> extends MapResult {
 			return DISPLAY_NAME_trafficLightType;
 		case VAR_angle:
 			return DISPLAY_NAME_angle;
-		case VAR_color:
-			return DISPLAY_NAME_color;
+		case VAR_state:
+			return DISPLAY_NAME_state;
+		case VAR_programId:
+			return DISPLAY_NAME_programId;
+		case VAR_phase:
+			return DISPLAY_NAME_phase;
 		default:
 			return MapResult.displayNameMapResult(var);
 		}
@@ -853,8 +1050,12 @@ public abstract class TrafficLightStepGen<DEV> extends MapResult {
 			return "String";
 		case VAR_angle:
 			return "BigDecimal";
-		case VAR_color:
+		case VAR_state:
 			return "String";
+		case VAR_programId:
+			return "Long";
+		case VAR_phase:
+			return "Long";
 			default:
 				return MapResult.classSimpleNameMapResult(var);
 		}
@@ -875,7 +1076,11 @@ public abstract class TrafficLightStepGen<DEV> extends MapResult {
 			return 4;
 		case VAR_angle:
 			return 5;
-		case VAR_color:
+		case VAR_state:
+			return 6;
+		case VAR_programId:
+			return 6;
+		case VAR_phase:
 			return 6;
 			default:
 				return MapResult.htmlRowMapResult(var);
@@ -890,8 +1095,12 @@ public abstract class TrafficLightStepGen<DEV> extends MapResult {
 			return 4;
 		case VAR_angle:
 			return 1;
-		case VAR_color:
+		case VAR_state:
 			return 1;
+		case VAR_programId:
+			return 2;
+		case VAR_phase:
+			return 3;
 			default:
 				return MapResult.htmlCellMapResult(var);
 		}

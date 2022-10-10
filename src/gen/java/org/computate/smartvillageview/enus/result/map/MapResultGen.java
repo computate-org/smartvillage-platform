@@ -3,7 +3,7 @@ package org.computate.smartvillageview.enus.result.map;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.smartvillageview.enus.model.base.BaseModel;
 import org.computate.vertx.api.ApiRequest;
-import org.computate.vertx.config.ComputateConfigKeys;
+import org.computate.smartvillageview.enus.config.ConfigKeys;
 import java.util.Optional;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
@@ -38,6 +38,7 @@ import java.lang.Double;
 import io.vertx.pgclient.data.Point;
 import org.computate.vertx.serialize.pgclient.PgClientPointSerializer;
 import org.computate.vertx.serialize.pgclient.PgClientPointDeserializer;
+import java.lang.Boolean;
 import org.computate.search.wrap.Wrap;
 import io.vertx.core.Promise;
 import io.vertx.core.Future;
@@ -517,6 +518,117 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 		return location;
 	}
 
+	///////////
+	// color //
+	///////////
+
+	/**	 The entity color
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String color;
+
+	/**	<br> The entity color
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.result.map.MapResult&fq=entiteVar_enUS_indexed_string:color">Find the entity color in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _color(Wrap<String> w);
+
+	public String getColor() {
+		return color;
+	}
+	public void setColor(String o) {
+		this.color = MapResult.staticSetColor(siteRequest_, o);
+	}
+	public static String staticSetColor(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected MapResult colorInit() {
+		Wrap<String> colorWrap = new Wrap<String>().var("color");
+		if(color == null) {
+			_color(colorWrap);
+			setColor(colorWrap.o);
+		}
+		return (MapResult)this;
+	}
+
+	public static String staticSearchColor(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrColor(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqColor(SiteRequestEnUS siteRequest_, String o) {
+		return MapResult.staticSearchStrColor(siteRequest_, MapResult.staticSearchColor(siteRequest_, MapResult.staticSetColor(siteRequest_, o)));
+	}
+
+	public String sqlColor() {
+		return color;
+	}
+
+	//////////
+	// step //
+	//////////
+
+	/**	 The entity step
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected Boolean step;
+
+	/**	<br> The entity step
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.result.map.MapResult&fq=entiteVar_enUS_indexed_string:step">Find the entity step in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _step(Wrap<Boolean> w);
+
+	public Boolean getStep() {
+		return step;
+	}
+
+	public void setStep(Boolean step) {
+		this.step = step;
+	}
+	@JsonIgnore
+	public void setStep(String o) {
+		this.step = MapResult.staticSetStep(siteRequest_, o);
+	}
+	public static Boolean staticSetStep(SiteRequestEnUS siteRequest_, String o) {
+		return Boolean.parseBoolean(o);
+	}
+	protected MapResult stepInit() {
+		Wrap<Boolean> stepWrap = new Wrap<Boolean>().var("step");
+		if(step == null) {
+			_step(stepWrap);
+			setStep(stepWrap.o);
+		}
+		return (MapResult)this;
+	}
+
+	public static Boolean staticSearchStep(SiteRequestEnUS siteRequest_, Boolean o) {
+		return o;
+	}
+
+	public static String staticSearchStrStep(SiteRequestEnUS siteRequest_, Boolean o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqStep(SiteRequestEnUS siteRequest_, String o) {
+		return MapResult.staticSearchStrStep(siteRequest_, MapResult.staticSearchStep(siteRequest_, MapResult.staticSetStep(siteRequest_, o)));
+	}
+
+	public Boolean sqlStep() {
+		return step;
+	}
+
 	//////////////
 	// initDeep //
 	//////////////
@@ -552,6 +664,8 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 				xInit();
 				yInit();
 				locationInit();
+				colorInit();
+				stepInit();
 				promise2.complete();
 			} catch(Exception ex) {
 				promise2.fail(ex);
@@ -617,6 +731,10 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 				return oMapResult.y;
 			case "location":
 				return oMapResult.location;
+			case "color":
+				return oMapResult.color;
+			case "step":
+				return oMapResult.step;
 			default:
 				return super.obtainBaseResult(var);
 		}
@@ -668,6 +786,10 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 			return MapResult.staticSetY(siteRequest_, o);
 		case "location":
 			return MapResult.staticSetLocation(siteRequest_, o);
+		case "color":
+			return MapResult.staticSetColor(siteRequest_, o);
+		case "step":
+			return MapResult.staticSetStep(siteRequest_, o);
 			default:
 				return BaseResult.staticSetBaseResult(entityVar,  siteRequest_, o);
 		}
@@ -694,6 +816,10 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 			return MapResult.staticSearchY(siteRequest_, (Double)o);
 		case "location":
 			return MapResult.staticSearchLocation(siteRequest_, (Point)o);
+		case "color":
+			return MapResult.staticSearchColor(siteRequest_, (String)o);
+		case "step":
+			return MapResult.staticSearchStep(siteRequest_, (Boolean)o);
 			default:
 				return BaseResult.staticSearchBaseResult(entityVar,  siteRequest_, o);
 		}
@@ -720,6 +846,10 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 			return MapResult.staticSearchStrY(siteRequest_, (Double)o);
 		case "location":
 			return MapResult.staticSearchStrLocation(siteRequest_, (Point)o);
+		case "color":
+			return MapResult.staticSearchStrColor(siteRequest_, (String)o);
+		case "step":
+			return MapResult.staticSearchStrStep(siteRequest_, (Boolean)o);
 			default:
 				return BaseResult.staticSearchStrBaseResult(entityVar,  siteRequest_, o);
 		}
@@ -746,6 +876,10 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 			return MapResult.staticSearchFqY(siteRequest_, o);
 		case "location":
 			return MapResult.staticSearchFqLocation(siteRequest_, o);
+		case "color":
+			return MapResult.staticSearchFqColor(siteRequest_, o);
+		case "step":
+			return MapResult.staticSearchFqStep(siteRequest_, o);
 			default:
 				return BaseResult.staticSearchFqBaseResult(entityVar,  siteRequest_, o);
 		}
@@ -812,6 +946,18 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 					setLocation((Point)val);
 				saves.add("location");
 				return val;
+			case "color":
+				if(val instanceof String)
+					setColor((String)val);
+				saves.add("color");
+				return val;
+			case "step":
+				if(val instanceof Boolean)
+					setStep((Boolean)val);
+				else if(val instanceof String)
+					setStep((String)val);
+				saves.add("step");
+				return val;
 			default:
 				return super.persistBaseResult(var, val);
 		}
@@ -846,6 +992,12 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 		if(location != null) {
 			doc.put("location_docvalues_location", String.format("%s,%s", location.getX(), location.getY()));
 		}
+		if(color != null) {
+			doc.put("color_docvalues_string", color);
+		}
+		if(step != null) {
+			doc.put("step_docvalues_boolean", step);
+		}
 		super.indexBaseResult(doc);
 
 	}
@@ -860,6 +1012,10 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 				return "time_docvalues_double";
 			case "location":
 				return "location_docvalues_location";
+			case "color":
+				return "color_docvalues_string";
+			case "step":
+				return "step_docvalues_boolean";
 			default:
 				return BaseResult.varStoredBaseResult(entityVar);
 		}
@@ -875,6 +1031,10 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 				return "time_docvalues_double";
 			case "location":
 				return "location_docvalues_location";
+			case "color":
+				return "color_docvalues_string";
+			case "step":
+				return "step_docvalues_boolean";
 			default:
 				return BaseResult.varIndexedBaseResult(entityVar);
 		}
@@ -890,6 +1050,10 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 				return "time";
 			case "location_docvalues_location":
 				return "location";
+			case "color_docvalues_string":
+				return "color";
+			case "step_docvalues_boolean":
+				return "step";
 			default:
 				return BaseResult.searchVarBaseResult(searchVar);
 		}
@@ -923,6 +1087,8 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 		oMapResult.setTimeStepId(Optional.ofNullable(doc.get("timeStepId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oMapResult.setTime(Optional.ofNullable(doc.get("time_docvalues_double")).map(v -> v.toString()).orElse(null));
 		oMapResult.setLocation(Optional.ofNullable(doc.get("location_docvalues_location")).map(v -> v.toString()).orElse(null));
+		oMapResult.setColor(Optional.ofNullable(doc.get("color_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oMapResult.setStep(Optional.ofNullable(doc.get("step_docvalues_boolean")).map(v -> v.toString()).orElse(null));
 
 		super.storeBaseResult(doc);
 	}
@@ -948,6 +1114,10 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 				apiRequest.addVars("y");
 			if(!Objects.equals(location, original.getLocation()))
 				apiRequest.addVars("location");
+			if(!Objects.equals(color, original.getColor()))
+				apiRequest.addVars("color");
+			if(!Objects.equals(step, original.getStep()))
+				apiRequest.addVars("step");
 			super.apiRequestBaseResult();
 		}
 	}
@@ -965,6 +1135,8 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 		sb.append(Optional.ofNullable(x).map(v -> "x: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(y).map(v -> "y: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(location).map(v -> "location: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(color).map(v -> "color: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(step).map(v -> "step: " + v + "\n").orElse(""));
 		return sb.toString();
 	}
 
@@ -975,6 +1147,8 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 	public static final String VAR_x = "x";
 	public static final String VAR_y = "y";
 	public static final String VAR_location = "location";
+	public static final String VAR_color = "color";
+	public static final String VAR_step = "step";
 
 	public static List<String> varsQForClass() {
 		return MapResult.varsQMapResult(new ArrayList<String>());
@@ -992,6 +1166,8 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 		vars.add(VAR_timeStepId);
 		vars.add(VAR_time);
 		vars.add(VAR_location);
+		vars.add(VAR_color);
+		vars.add(VAR_step);
 		BaseResult.varsFqBaseResult(vars);
 		return vars;
 	}
@@ -1013,6 +1189,8 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 	public static final String DISPLAY_NAME_x = "";
 	public static final String DISPLAY_NAME_y = "";
 	public static final String DISPLAY_NAME_location = "location";
+	public static final String DISPLAY_NAME_color = "color";
+	public static final String DISPLAY_NAME_step = "step";
 
 	public static String displayNameForClass(String var) {
 		return MapResult.displayNameMapResult(var);
@@ -1031,6 +1209,10 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 			return DISPLAY_NAME_y;
 		case VAR_location:
 			return DISPLAY_NAME_location;
+		case VAR_color:
+			return DISPLAY_NAME_color;
+		case VAR_step:
+			return DISPLAY_NAME_step;
 		default:
 			return BaseResult.displayNameBaseResult(var);
 		}
@@ -1063,6 +1245,10 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 			return "Double";
 		case VAR_location:
 			return "Point";
+		case VAR_color:
+			return "String";
+		case VAR_step:
+			return "Boolean";
 			default:
 				return BaseResult.classSimpleNameBaseResult(var);
 		}
@@ -1085,6 +1271,10 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 			return 4;
 		case VAR_location:
 			return 4;
+		case VAR_color:
+			return 4;
+		case VAR_step:
+			return 4;
 			default:
 				return BaseResult.htmlRowBaseResult(var);
 		}
@@ -1100,6 +1290,10 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 			return 1;
 		case VAR_location:
 			return 2;
+		case VAR_color:
+			return 3;
+		case VAR_step:
+			return 1;
 			default:
 				return BaseResult.htmlCellBaseResult(var);
 		}

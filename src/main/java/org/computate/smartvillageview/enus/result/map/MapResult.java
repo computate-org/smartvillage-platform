@@ -104,6 +104,33 @@ public class MapResult extends MapResultGen<BaseResult> {
 			w.o(new Point(y, x));
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * DisplayName: color
+	 * HtmlRow: 4
+	 * HtmlCell: 3
+	 * Facet: true
+	 * Color: true
+	 */
+	protected void _color(Wrap<String> w) {
+		w.o("magenta");
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * DisplayName: step
+	 * HtmlRow: 4
+	 * HtmlCell: 1
+	 * Facet: true
+	 */
+	protected void _step(Wrap<Boolean> w) {
+		w.o(false);
+	}
+
 	@Override
 	protected void _classCanonicalNames(List<String> l) { 
 		l.add(MapResult.class.getCanonicalName());

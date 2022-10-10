@@ -110,17 +110,14 @@ public class VehicleStep extends VehicleStepGen<MapResult> {
 	protected void _slope(Wrap<BigDecimal> w) {
 	}
 
-	/**
-	 * {@inheritDoc}
-	 * DocValues: true
-	 * Persist: true
-	 * DisplayName: Color
-	 * HtmlRow: 6
-	 * HtmlCell: 1
-	 * Facet: true
-	 */
+	@Override
+	protected void _step(Wrap<Boolean> w) {
+		w.o(true);
+	}
+
+	@Override
 	protected void _color(Wrap<String> w) {
-		w.o("black");
+		w.o("orange");
 	}
 
 	@Override

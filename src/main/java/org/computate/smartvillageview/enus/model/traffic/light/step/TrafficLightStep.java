@@ -75,13 +75,54 @@ public class TrafficLightStep extends TrafficLightStepGen<MapResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * DisplayName: Color
+	 * DisplayName: state
 	 * HtmlRow: 6
 	 * HtmlCell: 1
 	 * Facet: true
 	 */
+	protected void _state(Wrap<String> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * DisplayName: program ID
+	 * HtmlRow: 6
+	 * HtmlCell: 2
+	 * Facet: true
+	 */
+	protected void _programId(Wrap<Long> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * DisplayName: phase
+	 * HtmlRow: 6
+	 * HtmlCell: 3
+	 * Facet: true
+	 */
+	protected void _phase(Wrap<Long> w) {
+	}
+
+	@Override
+	protected void _step(Wrap<Boolean> w) {
+		w.o(true);
+	}
+
+	@Override
 	protected void _color(Wrap<String> w) {
-		w.o("black");
+		String stateLower = state.toLowerCase();
+		String color = "black";
+		if(stateLower.startsWith("r"))
+			color = "red";
+		else if(stateLower.startsWith("y"))
+			color = "yellow";
+		else if(stateLower.startsWith("g"))
+			color = "green";
+		w.o(color);
 	}
 
 	@Override

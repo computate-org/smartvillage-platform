@@ -10,7 +10,12 @@ public class ConfigKeys extends ComputateConfigKeys {
 	/**
 	 * 
 	 **/
-	public static final String SUMO_PATH = "SUMO_PATH";
+	public static final String SUMO_EXECUTABLE_PATH = "SUMO_EXECUTABLE_PATH";
+
+	/**
+	 * 
+	 **/
+	public static final String PYTHON_EXECUTABLE_PATH = "PYTHON_EXECUTABLE_PATH";
 
 	/**
 	 * 

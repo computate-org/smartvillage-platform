@@ -365,6 +365,16 @@ public abstract class TrafficFcdReaderGen<DEV> extends Object {
 	public static final String obtainSumoAdditionalFilePathsFail1 = "Syncing SUMO net file failed: %s";
 	public static final String obtainSumoAdditionalFilePathsFail = obtainSumoAdditionalFilePathsFail1;
 
+	public static final String obtainTlsStatesFilesComplete1 = "Syncing sumocfg file complete: %s";
+	public static final String obtainTlsStatesFilesComplete = obtainTlsStatesFilesComplete1;
+	public static final String obtainTlsStatesFilesFail1 = "Syncing sumocfg file failed: %s";
+	public static final String obtainTlsStatesFilesFail = obtainTlsStatesFilesFail1;
+
+	public static final String obtainTlsStatesPathsComplete1 = "Syncing SUMO net file complete: %s";
+	public static final String obtainTlsStatesPathsComplete = obtainTlsStatesPathsComplete1;
+	public static final String obtainTlsStatesPathsFail1 = "Syncing SUMO net file failed: %s";
+	public static final String obtainTlsStatesPathsFail = obtainTlsStatesPathsFail1;
+
 	public static final String importSumoNetFilesComplete1 = "Syncing sumocfg file complete: %s";
 	public static final String importSumoNetFilesComplete = importSumoNetFilesComplete1;
 	public static final String importSumoNetFilesFail1 = "Syncing sumocfg file failed: %s";
@@ -617,7 +627,7 @@ public abstract class TrafficFcdReaderGen<DEV> extends Object {
 		return sb.toString();
 	}
 
-	public static final String[] TrafficFcdReaderVals = new String[] { importFcdComplete1, importFcdFail1, importFcdSkip1, importFcdStarted1, importSystemEventStarted1, importSystemEventComplete1, importSystemEventFail1, importSystemEventWebSocket1, importTrafficSimulationFutureComplete1, importTrafficSimulationFutureFail1, obtainSumoAdditionalFilesComplete1, obtainSumoAdditionalFilesFail1, obtainSumoAdditionalFilePathsComplete1, obtainSumoAdditionalFilePathsFail1, importSumoNetFilesComplete1, importSumoNetFilesFail1, importSumoNetFilePathComplete1, importSumoNetFilePathFail1, importTrafficLightHandleBodyStarted1, importTrafficLightHandleBodyComplete1, importTrafficLightHandleBodyFail1, importTrafficLightHandleBodyWebSocket1, importTlsStatesFileComplete1, importTlsStatesFileFail1, importTrafficLightStepHandleBodyStarted1, importTrafficLightStepHandleBodyComplete1, importTrafficLightStepHandleBodyFail1, importTrafficLightStepHandleBodyWebSocket1, importFcdFileListStarted1, importFcdFileListComplete1, importFcdFileListSkip1, importFcdFileListFail1, importFcdFileStarted1, importFcdFileComplete1, importFcdFileFail1, importFcdHandleBodyStarted1, importFcdHandleBodyComplete1, importFcdHandleBodyFail1, importFcdHandleBodyWebSocket1, importVehicleStarted1, importVehicleComplete1, importVehicleFail1, importFcdVehicleStepStarted1, importFcdVehicleStepComplete1, importFcdVehicleStepFail1, importFcdVehicleStepWebSocket1 };
+	public static final String[] TrafficFcdReaderVals = new String[] { importFcdComplete1, importFcdFail1, importFcdSkip1, importFcdStarted1, importSystemEventStarted1, importSystemEventComplete1, importSystemEventFail1, importSystemEventWebSocket1, importTrafficSimulationFutureComplete1, importTrafficSimulationFutureFail1, obtainSumoAdditionalFilesComplete1, obtainSumoAdditionalFilesFail1, obtainSumoAdditionalFilePathsComplete1, obtainSumoAdditionalFilePathsFail1, obtainTlsStatesFilesComplete1, obtainTlsStatesFilesFail1, obtainTlsStatesPathsComplete1, obtainTlsStatesPathsFail1, importSumoNetFilesComplete1, importSumoNetFilesFail1, importSumoNetFilePathComplete1, importSumoNetFilePathFail1, importTrafficLightHandleBodyStarted1, importTrafficLightHandleBodyComplete1, importTrafficLightHandleBodyFail1, importTrafficLightHandleBodyWebSocket1, importTlsStatesFileComplete1, importTlsStatesFileFail1, importTrafficLightStepHandleBodyStarted1, importTrafficLightStepHandleBodyComplete1, importTrafficLightStepHandleBodyFail1, importTrafficLightStepHandleBodyWebSocket1, importFcdFileListStarted1, importFcdFileListComplete1, importFcdFileListSkip1, importFcdFileListFail1, importFcdFileStarted1, importFcdFileComplete1, importFcdFileFail1, importFcdHandleBodyStarted1, importFcdHandleBodyComplete1, importFcdHandleBodyFail1, importFcdHandleBodyWebSocket1, importVehicleStarted1, importVehicleComplete1, importVehicleFail1, importFcdVehicleStepStarted1, importFcdVehicleStepComplete1, importFcdVehicleStepFail1, importFcdVehicleStepWebSocket1 };
 
 	public static final String CLASS_SIMPLE_NAME = "TrafficFcdReader";
 	public static final String VAR_siteRequest_ = "siteRequest_";
