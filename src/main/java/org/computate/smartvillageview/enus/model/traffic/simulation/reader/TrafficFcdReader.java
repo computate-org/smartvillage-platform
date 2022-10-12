@@ -302,11 +302,16 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 		Promise<TrafficSimulation> promise = Promise.promise();
 		try {
 			String sumocfgPath = trafficSimulation.getSumocfgPath();
+			String fcdFilePath = trafficSimulation.getFcdFilePath();
 			obtainSumoAdditionalFiles(sumocfgPath, trafficSimulation).onSuccess(a -> {
 				importSumoNetFiles(sumocfgPath, trafficSimulation).onSuccess(b -> {
 					obtainTlsStatesFiles(trafficSimulation).onSuccess(c -> {
-						LOG.info(String.format(importTrafficSimulationFutureComplete, trafficSimulation.getId()));
-						promise.complete();
+						importFcdFileList(fcdFilePath, trafficSimulation).onSuccess(d -> {
+							LOG.info(String.format(importTrafficSimulationFutureComplete, trafficSimulation.getId()));
+							promise.complete();
+						}).onFailure(ex -> {
+							promise.fail(ex);
+						});
 					}).onFailure(ex -> {
 						promise.fail(ex);
 					});
@@ -623,7 +628,7 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 	private Future<Void> importTrafficLightHandleBody(TrafficSimulation trafficSimulation, String netFilePath, String str, ApiRequest apiRequest, RecordParser recordParser) {
 		Promise<Void> promise = Promise.promise();
 		try {
-			TrafficLight trafficLight = importTrafficLightText(netFilePath, str);
+			TrafficLight trafficLight = importTrafficLightText(trafficSimulation, netFilePath, str);
 			if(trafficLight != null) {
 				String id = trafficLight.getId();
 				JsonObject params = new JsonObject();
@@ -643,7 +648,7 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 						List<Future> futures = new ArrayList<>();
 						trafficSimulation.getTlsStatesPaths().forEach(tlsStatesPath -> {
 							futures.add(Future.future(promise1 -> {
-								importTlsStatesFile(trafficLight, tlsStatesPath).onSuccess(b -> {
+								importTlsStatesFile(trafficSimulation, trafficLight, tlsStatesPath).onSuccess(b -> {
 									promise1.complete();
 								}).onFailure(ex -> {
 									LOG.error(importTrafficLightHandleBodyFail, ex);
@@ -675,7 +680,7 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 		return promise.future();
 	}
 
-	private TrafficLight importTrafficLightText(String netFilePath, String text) {
+	private TrafficLight importTrafficLightText(TrafficSimulation trafficSimulation, String netFilePath, String text) {
 		TrafficLight result = null;
 		try {
 			Matcher m = Pattern.compile(REGEX_JUNCTION_TRAFFIC_LIGHT, Pattern.MULTILINE).matcher(text);
@@ -727,6 +732,8 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 				trafficLight.setId(id);
 				trafficLight.setObjectId(id);
 				trafficLight.setInheritPk(id);
+				trafficLight.setSimulationName(trafficSimulation.getSimulationName());
+				trafficLight.setSumocfgPath(trafficSimulation.getSumocfgPath());
 
 				SiteRequestEnUS siteRequest = new SiteRequestEnUS();
 				siteRequest.setConfig(config);
@@ -747,7 +754,7 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 	 * Val.Complete.enUS:Syncing SUMO net file complete: %s
 	 * Val.Fail.enUS:Syncing SUMO net file failed: %s
 	 */
-	public Future<TrafficSimulation> importTlsStatesFile(TrafficLight trafficLight, String additionalFilePath) {
+	public Future<TrafficSimulation> importTlsStatesFile(TrafficSimulation trafficSimulation, TrafficLight trafficLight, String additionalFilePath) {
 //		SiteRequestEnUS siteRequest = trafficLight.getSiteRequest_();
 		Promise<TrafficSimulation> promise = Promise.promise();
 
@@ -767,7 +774,7 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 				recordParser.handler(bufferedText -> {
 					String str = bufferedText.toString().trim();
 					if(str.startsWith("<tlsState ")) {
-						importTrafficLightStepHandleBody(trafficLight, additionalFilePath, str, recordParser).onComplete(a -> {
+						importTrafficLightStepHandleBody(trafficSimulation, trafficLight, additionalFilePath, str, recordParser).onComplete(a -> {
 							apiCounter.incrementQueueNum();
 							if(apiCounterResume.compareTo(apiCounter.getTotalNum() - apiCounter.getQueueNum()) >= LONG_ZERO) {
 								recordParser.fetch(apiCounterFetch);
@@ -812,10 +819,10 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 	 * Val.Fail.enUS:Syncing Traffic Light record failed: %s
 	 * Val.WebSocket.enUS:websocket%s
 	 */
-	private Future<Void> importTrafficLightStepHandleBody(TrafficLight trafficLight, String path, String str, RecordParser recordParser) {
+	private Future<Void> importTrafficLightStepHandleBody(TrafficSimulation trafficSimulation, TrafficLight trafficLight, String path, String str, RecordParser recordParser) {
 		Promise<Void> promise = Promise.promise();
 		try {
-			TrafficLightStep trafficLightStep = importTrafficLightStepText(trafficLight, path, str);
+			TrafficLightStep trafficLightStep = importTrafficLightStepText(trafficSimulation, trafficLight, path, str);
 			if(trafficLightStep != null) {
 				String id = trafficLightStep.getId();
 				JsonObject params = new JsonObject();
@@ -851,7 +858,7 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 		return promise.future();
 	}
 
-	private TrafficLightStep importTrafficLightStepText(TrafficLight trafficLight, String path, String text) {
+	private TrafficLightStep importTrafficLightStepText(TrafficSimulation trafficSimulation, TrafficLight trafficLight, String path, String text) {
 		Matcher m = Pattern.compile(String.format(REGEX_TLS_STATE, trafficLight.getTrafficLightId()), Pattern.MULTILINE).matcher(text);
 		TrafficLightStep result = null;
 		boolean found = m.find();
@@ -882,6 +889,8 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 			trafficLightStep.setTime(trafficLightStep.getTime());
 			trafficLightStep.setX(trafficLight.getX());
 			trafficLightStep.setY(trafficLight.getY());
+			trafficLightStep.setSimulationName(trafficSimulation.getSimulationName());
+			trafficLightStep.setSumocfgPath(trafficSimulation.getSumocfgPath());
 			result = trafficLightStep;
 			found = m.find();
 		}
@@ -894,30 +903,20 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 	 * Val.Skip.enUS:Syncing FCD files is disabled. 
 	 * Val.Fail.enUS:Syncing FCD files failed. 
 	 **/
-	private Future<ApiRequest> importFcdFileList() {
+	private Future<ApiRequest> importFcdFileList(String fcdFilePath, TrafficSimulation trafficSimulation) {
 		Promise<ApiRequest> promise = Promise.promise();
 		ZonedDateTime now = ZonedDateTime.now(ZoneId.of(config.getString(ConfigKeys.SITE_ZONE)));
 		try {
-			String path = config.getString(ConfigKeys.FCD_SYNC_PATH);
-			vertx.fileSystem().readDir(path).onSuccess(fileNames -> {
-				List<Future> futures = new ArrayList<>();
-				fileNames.forEach(fileName -> {
-					futures.add(Future.future(promise1 -> {
-						importFcdFile(fileName).onSuccess(a -> {
-							promise1.complete();
-						}).onFailure(ex -> {
-							LOG.error(importFcdFileListFail, ex);
-							promise1.fail(ex);
-						});
-					}));
-				});
-				CompositeFuture.all(futures).onSuccess( a -> {
+			if(fcdFilePath == null) {
+				promise.complete();
+			} else {
+				importFcdFile(fcdFilePath, trafficSimulation).onSuccess(a -> {
 					try {
 						String solrHostName = config.getString(ConfigKeys.SOLR_HOST_NAME);
 						Integer solrPort = config.getInteger(ConfigKeys.SOLR_PORT);
 						String solrCollection = config.getString(ConfigKeys.SOLR_COLLECTION);
 						String solrRequestUri = String.format("/solr/%s/update%s", solrCollection, "?commitWithin=1000&overwrite=true&wt=json");
-						String deleteQuery = String.format("classSimpleName_docvalues_string:(%s OR %s) AND (created_docvalues_date:[* TO %s] OR (*:* AND -created_docvalues_date:[* TO *]))", TimeStep.CLASS_SIMPLE_NAME, VehicleStep.CLASS_SIMPLE_NAME, TimeStep.staticSearchStrCreated(null, TimeStep.staticSearchCreated(null, now)));
+						String deleteQuery = String.format("sumocfgPath_docvalues_string:%s AND classSimpleName_docvalues_string:(%s OR %s) AND (created_docvalues_date:[* TO %s] OR (*:* AND -created_docvalues_date:[* TO *]))", trafficSimulation.getSumocfgPath(), TimeStep.CLASS_SIMPLE_NAME, VehicleStep.CLASS_SIMPLE_NAME, TimeStep.staticSearchStrCreated(null, TimeStep.staticSearchCreated(null, now)));
 						String deleteXml = String.format("<delete><query>%s</query></delete>", deleteQuery);
 						webClient.post(solrPort, solrHostName, solrRequestUri)
 								.putHeader("Content-Type", "text/xml")
@@ -941,10 +940,7 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 					LOG.error(importFcdFileListFail, ex);
 					promise.fail(ex);
 				});
-			}).onFailure(ex -> {
-				LOG.error(importFcdFileListFail, ex);
-				promise.fail(ex);
-			});
+			}
 		} catch (Exception ex) {
 			LOG.error(importFcdFileListFail, ex);
 			promise.fail(ex);
@@ -957,7 +953,7 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 	 * Val.Complete.enUS:Syncing FCD file completed: %s
 	 * Val.Fail.enUS:Syncing FCD file failed: %s
 	 **/
-	private Future<ApiRequest> importFcdFile(String path) {
+	private Future<ApiRequest> importFcdFile(String path, TrafficSimulation trafficSimulation) {
 		Promise<ApiRequest> promise = Promise.promise();
 		vertx.fileSystem().open(path, new OpenOptions().setRead(true)).onSuccess(fileStream -> {
 			try {
@@ -990,7 +986,7 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 				apiRequest.initDeepApiRequest(siteRequest);
 
 				recordParser.handler(bufferedText -> {
-					importFcdHandleBody(path, bufferedText, apiRequest, recordParser).onComplete(a -> {
+					importFcdHandleBody(trafficSimulation, path, bufferedText, apiRequest, recordParser).onComplete(a -> {
 						apiCounter.incrementQueueNum();
 						if(apiCounterResume.compareTo(apiCounter.getTotalNum() - apiCounter.getQueueNum()) >= LONG_ZERO) {
 							recordParser.fetch(apiCounterFetch);
@@ -1029,7 +1025,7 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 	 * Val.Fail.enUS:Syncing FCD record failed: %s
 	 * Val.WebSocket.enUS:websocket%s
 	 */
-	private Future<Void> importFcdHandleBody(String path, Buffer bufferedText, ApiRequest apiRequest, RecordParser recordParser) {
+	private Future<Void> importFcdHandleBody(TrafficSimulation trafficSimulation, String path, Buffer bufferedText, ApiRequest apiRequest, RecordParser recordParser) {
 		Promise<Void> promise = Promise.promise();
 		TimeStep timeStep = importTimeStepText(path, bufferedText);
 		if(timeStep != null) {
@@ -1048,7 +1044,7 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 					, new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", TimeStep.CLASS_SIMPLE_NAME))
 					).onSuccess(a -> {
 				try {
-					importVehicle(timeStep, bufferedText).onSuccess(b -> {
+					importVehicle(trafficSimulation, timeStep, bufferedText).onSuccess(b -> {
 						promise.complete();
 					}).onFailure(ex -> {
 						LOG.error(importFcdFileListFail, ex);
@@ -1073,7 +1069,7 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 	 * Val.Complete.enUS:Syncing FCD vehicle completed: %s
 	 * Val.Fail.enUS:Syncing FCD vehicle failed: %s
 	 **/
-	private Future<ApiRequest> importVehicle(TimeStep timeStep, Buffer bufferedText) {
+	private Future<ApiRequest> importVehicle(TrafficSimulation trafficSimulation, TimeStep timeStep, Buffer bufferedText) {
 		Promise<ApiRequest> promise = Promise.promise();
 		try {
 			ApiCounter apiCounter = new ApiCounter();
@@ -1100,7 +1096,7 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 			apiRequest.initDeepApiRequest(siteRequest);
 
 			recordParser.handler(bufferedText2 -> {
-				BaseResult vehicleStep = importVehicleStepText(timeStep, bufferedText2);
+				BaseResult vehicleStep = importVehicleStepText(trafficSimulation, timeStep, bufferedText2);
 				if(vehicleStep == null) {
 					promise.complete();
 				} else {
@@ -1185,7 +1181,7 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 		return timeStep;
 	}
 
-	private BaseResult importVehicleStepText(TimeStep timeStep, Buffer bufferedText) {
+	private BaseResult importVehicleStepText(TrafficSimulation trafficSimulation, TimeStep timeStep, Buffer bufferedText) {
 		String text = bufferedText.toString();
 		Matcher m = Pattern.compile(REGEX_VEHICLE, Pattern.MULTILINE).matcher(text);
 		BaseResult result = null;
@@ -1218,6 +1214,8 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 				vehicleStep.setInheritPk(id);
 				vehicleStep.setTime(timeStep.getTime());
 				vehicleStep.setTimeStepId(timeStep.getId());
+				vehicleStep.setSimulationName(trafficSimulation.getSimulationName());
+				vehicleStep.setSumocfgPath(trafficSimulation.getSumocfgPath());
 				result = vehicleStep;
 			} else if("person".equals(vehicleType)) {
 				Matcher m2 = Pattern.compile(REGEX_ATTR, Pattern.MULTILINE).matcher(attrs);
@@ -1244,6 +1242,8 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 				personStep.setInheritPk(id);
 				personStep.setTime(timeStep.getTime());
 				personStep.setTimeStepId(timeStep.getId());
+				personStep.setSimulationName(trafficSimulation.getSimulationName());
+				personStep.setSumocfgPath(trafficSimulation.getSumocfgPath());
 				result = personStep;
 			}
 

@@ -52,207 +52,20 @@ public class TrafficSimulationGenPage extends TrafficSimulationGenPageGen<BaseMo
 	protected void _searchListTrafficSimulation_(Wrap<SearchList<TrafficSimulation>> w) {
 	}
 
+	@Override
 	protected void _pageResponse(Wrap<String> w) {
 		if(searchListTrafficSimulation_ != null)
 			w.o(JsonObject.mapFrom(searchListTrafficSimulation_.getResponse()).toString());
 	}
 
-	protected void _defaultZoneId(Wrap<String> w) {
-		w.o(Optional.ofNullable(siteRequest_.getRequestVars().get(VAR_defaultZoneId)).orElse(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE)));
-	}
-
-	/**
-	 * Ignore: true
-	 **/
-	protected void _defaultTimeZone(Wrap<ZoneId> w) {
-		w.o(ZoneId.of(defaultZoneId));
-	}
-
-	protected void _defaultLocaleId(Wrap<String> w) {
-		w.o(Optional.ofNullable(siteRequest_.getRequestHeaders().get("Accept-Language")).map(acceptLanguage -> StringUtils.substringBefore(acceptLanguage, ",")).orElse(siteRequest_.getConfig().getString(ConfigKeys.SITE_LOCALE)));
-	}
-
-	/**
-	 * Ignore: true
-	 **/
-	protected void _defaultLocale(Wrap<Locale> w) {
-		w.o(Locale.forLanguageTag(defaultLocaleId));
-	}
-
-	protected void _defaultRangeGap(Wrap<String> w) {
-		w.o(Optional.ofNullable(searchListTrafficSimulation_.getFacetRangeGap()).orElse("+1DAY"));
-	}
-
-	protected void _defaultRangeEnd(Wrap<ZonedDateTime> w) {
-		w.o(Optional.ofNullable(searchListTrafficSimulation_.getFacetRangeEnd()).map(s -> TimeTool.parseZonedDateTime(defaultTimeZone, s)).orElse(ZonedDateTime.now(defaultTimeZone).toLocalDate().atStartOfDay(defaultTimeZone).plusDays(1)));
-	}
-
-	protected void _defaultRangeStart(Wrap<ZonedDateTime> w) {
-		w.o(Optional.ofNullable(searchListTrafficSimulation_.getFacetRangeStart()).map(s -> TimeTool.parseZonedDateTime(defaultTimeZone, s)).orElse(defaultRangeEnd.minusDays(7).toLocalDate().atStartOfDay(defaultTimeZone)));
-	}
-
-	protected void _defaultRangeVar(Wrap<String> w) {
-		w.o(Optional.ofNullable(searchListTrafficSimulation_.getFacetRanges()).orElse(Arrays.asList()).stream().findFirst().map(v -> { if(v.contains("}")) return StringUtils.substringBefore(StringUtils.substringAfterLast(v, "}"), "_"); else return TrafficSimulation.searchVarTrafficSimulation(v); }).orElse("created"));
-	}
-
-	protected void _defaultFacetSort(Wrap<String> w) {
-		w.o(Optional.ofNullable(searchListTrafficSimulation_.getFacetSort()).orElse("index"));
-	}
-
-	protected void _defaultFacetLimit(Wrap<Integer> w) {
-		w.o(Optional.ofNullable(searchListTrafficSimulation_.getFacetLimit()).orElse(1));
-	}
-
-	protected void _defaultFacetMinCount(Wrap<Integer> w) {
-		w.o(Optional.ofNullable(searchListTrafficSimulation_.getFacetMinCount()).orElse(1));
-	}
-
-	protected void _defaultPivotMinCount(Wrap<Integer> w) {
-		w.o(Optional.ofNullable(searchListTrafficSimulation_.getFacetPivotMinCount()).orElse(0));
-	}
-
-	protected void _DEFAULT_MAP_LOCATION(Wrap<JsonObject> w) {
-		String pointStr = Optional.ofNullable(siteRequest_.getRequestVars().get(VAR_DEFAULT_MAP_LOCATION)).orElse(siteRequest_.getConfig().getString(ConfigKeys.DEFAULT_MAP_LOCATION));
-		if(pointStr != null) {
-			String[] parts = pointStr.replace("[", "").replace("]", "").replace("\"", "").split(",");
-			JsonObject point = new JsonObject().put("lat", Double.parseDouble(parts[0])).put("lon", Double.parseDouble(parts[1]));
-			w.o(point);
-		}
-	}
-
-	protected void _DEFAULT_MAP_ZOOM(Wrap<BigDecimal> w) {
-		String s = Optional.ofNullable(siteRequest_.getRequestVars().get(VAR_DEFAULT_MAP_ZOOM)).orElse(siteRequest_.getConfig().getString(ConfigKeys.DEFAULT_MAP_ZOOM));
-		if(s != null)
-			w.o(new BigDecimal(s));
-	}
-
 	@Override
-	protected void _defaultFieldListVars(List<String> l) {
-		Optional.ofNullable(searchListTrafficSimulation_.getFields()).orElse(Arrays.asList()).forEach(varStored -> {
-			String varStored2 = varStored;
-			if(StringUtils.contains(varStored2, "}"))
-				varStored2 = StringUtils.substringAfterLast(varStored2, "}");
-			String[] parts = varStored2.split(",");
-			for(String part : parts) {
-				if(StringUtils.isNotBlank(part)) {
-					String var = TrafficSimulation.searchVarTrafficSimulation(part);
-					if(StringUtils.isNotBlank(var))
-						l.add(var);
-				}
-			}
-		});
-	}
-
-	@Override
-	protected void _defaultStatsVars(List<String> l) {
-		Optional.ofNullable(searchListTrafficSimulation_.getStatsFields()).orElse(Arrays.asList()).forEach(varIndexed -> {
-			String varIndexed2 = varIndexed;
-			if(StringUtils.contains(varIndexed2, "}"))
-				varIndexed2 = StringUtils.substringAfterLast(varIndexed2, "}");
-			String[] parts = varIndexed2.split(",");
-			for(String part : parts) {
-				if(StringUtils.isNotBlank(part)) {
-					String var = TrafficSimulation.searchVarTrafficSimulation(part);
-					if(StringUtils.isNotBlank(var))
-						l.add(var);
-				}
-			}
-		});
-	}
-
-	@Override
-	protected void _defaultPivotVars(List<String> l) {
-		Optional.ofNullable(searchListTrafficSimulation_.getFacetPivots()).orElse(Arrays.asList()).forEach(facetPivot -> {
-			String facetPivot2 = facetPivot;
-			if(StringUtils.contains(facetPivot2, "}"))
-				facetPivot2 = StringUtils.substringAfterLast(facetPivot2, "}");
-			String[] parts = facetPivot2.split(",");
-			for(String part : parts) {
-				if(StringUtils.isNotBlank(part)) {
-					String var = TrafficSimulation.searchVarTrafficSimulation(part);
-					if(StringUtils.isNotBlank(var))
-						l.add(var);
-				}
-			}
-		});
-	}
-
-	/**
-	 * {@inheritDoc}
-	 **/
-	protected void _listTrafficSimulation(JsonArray l) {
-		Optional.ofNullable(searchListTrafficSimulation_).map(o -> o.getList()).orElse(Arrays.asList()).stream().map(o -> JsonObject.mapFrom(o)).forEach(o -> l.add(o));
-	}
-
 	protected void _stats(Wrap<SolrResponse.Stats> w) {
 		w.o(searchListTrafficSimulation_.getResponse().getStats());
 	}
 
+	@Override
 	protected void _facetCounts(Wrap<SolrResponse.FacetCounts> w) {
 		w.o(searchListTrafficSimulation_.getResponse().getFacetCounts());
-	}
-
-	protected void _trafficSimulationCount(Wrap<Integer> w) {
-		w.o(searchListTrafficSimulation_ == null ? 0 : searchListTrafficSimulation_.size());
-	}
-
-	protected void _trafficSimulation_(Wrap<TrafficSimulation> w) {
-		if(trafficSimulationCount == 1)
-			w.o(searchListTrafficSimulation_.get(0));
-	}
-
-	protected void _pk(Wrap<Long> w) {
-		if(trafficSimulationCount == 1)
-			w.o(trafficSimulation_.getPk());
-	}
-
-	protected void _id(Wrap<String> w) {
-		if(trafficSimulationCount == 1)
-			w.o(trafficSimulation_.getId());
-	}
-
-	@Override
-	protected void _promiseBefore(Promise<Void> promise) {
-		promise.complete();
-	}
-
-	@Override
-	protected void _classSimpleName(Wrap<String> w) {
-		w.o("TrafficSimulation");
-	}
-
-	@Override
-	protected void _pageTitle(Wrap<String> c) {
-		if(trafficSimulation_ != null && trafficSimulation_.getObjectTitle() != null)
-			c.o(trafficSimulation_.getObjectTitle());
-		else if(trafficSimulation_ != null)
-			c.o("traffic simulations");
-		else if(searchListTrafficSimulation_ == null || trafficSimulationCount == 0)
-			c.o("no traffic simulation found");
-		else
-			c.o("traffic simulations");
-	}
-
-	@Override
-	protected void _pageUri(Wrap<String> c) {
-		c.o("/traffic-simulation");
-	}
-
-	@Override
-	protected void _apiUri(Wrap<String> c) {
-		c.o("/api/traffic-simulation");
-	}
-
-	@Override
-	protected void _roles(List<String> l) {
-		if(siteRequest_ != null) {
-			l.addAll(Stream.concat(siteRequest_.getUserResourceRoles().stream(), siteRequest_.getUserRealmRoles().stream()).distinct().collect(Collectors.toList()));
-		}
-	}
-
-	@Override
-	protected void _rolesRequired(List<String> l) {
-		l.addAll(Optional.ofNullable(siteRequest_.getConfig().getJsonArray(ConfigKeys.AUTH_ROLES_REQUIRED + "_TrafficSimulation")).orElse(new JsonArray()).stream().map(o -> o.toString()).collect(Collectors.toList()));
 	}
 
 	@Override
@@ -322,7 +135,7 @@ public class TrafficSimulationGenPage extends TrafficSimulationGenPageGen<BaseMo
 			json.put("var", var);
 			json.put("varStored", varStored);
 			json.put("varIndexed", varIndexed);
-					String type = StringUtils.substringAfterLast(varIndexed, "_");
+			String type = StringUtils.substringAfterLast(varIndexed, "_");
 			json.put("displayName", Optional.ofNullable(TrafficSimulation.displayNameTrafficSimulation(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
 			json.put("classSimpleName", Optional.ofNullable(TrafficSimulation.classSimpleNameTrafficSimulation(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
 			json.put("val", searchListTrafficSimulation_.getRequest().getFilterQueries().stream().filter(fq -> fq.startsWith(TrafficSimulation.varIndexedTrafficSimulation(var) + ":")).findFirst().map(s -> StringUtils.substringAfter(s, ":")).orElse(null));
@@ -341,6 +154,10 @@ public class TrafficSimulationGenPage extends TrafficSimulationGenPageGen<BaseMo
 			});
 			if(defaultFieldListVars.contains(var)) {
 				json.put("fieldList", true);
+			}
+			if(StringUtils.equalsAny(type, "date")) {
+				json.put("enableCalendar", true);
+				setDefaultRangeStats(json);
 			}
 			json.put("enableStats", !StringUtils.equalsAny(type, "boolean", "location"));
 			if(defaultStatsVars.contains(var)) {
@@ -426,6 +243,210 @@ public class TrafficSimulationGenPage extends TrafficSimulationGenPageGen<BaseMo
 			sorts.add(new JsonObject().put("var", sort1).put("order", StringUtils.substringAfter(sort, " ")).put("displayName", TrafficSimulation.displayNameForClass(sort1)));
 		}
 		query.put("sort", sorts);
+	}
+
+	@Override
+	protected void _defaultZoneId(Wrap<String> w) {
+		w.o(Optional.ofNullable(siteRequest_.getRequestVars().get(VAR_defaultZoneId)).orElse(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE)));
+	}
+
+	/**
+	 * Ignore: true
+	 **/
+	@Override
+	protected void _defaultTimeZone(Wrap<ZoneId> w) {
+		w.o(ZoneId.of(defaultZoneId));
+	}
+
+	@Override
+	protected void _defaultLocaleId(Wrap<String> w) {
+		w.o(Optional.ofNullable(siteRequest_.getRequestHeaders().get("Accept-Language")).map(acceptLanguage -> StringUtils.substringBefore(acceptLanguage, ",")).orElse(siteRequest_.getConfig().getString(ConfigKeys.SITE_LOCALE)));
+	}
+
+	/**
+	 * Ignore: true
+	 **/
+	@Override
+	protected void _defaultLocale(Wrap<Locale> w) {
+		w.o(Locale.forLanguageTag(defaultLocaleId));
+	}
+
+	@Override
+	protected void _defaultRangeGap(Wrap<String> w) {
+		w.o(Optional.ofNullable(searchListTrafficSimulation_.getFacetRangeGap()).orElse("+1DAY"));
+	}
+
+	@Override
+	protected void _defaultRangeEnd(Wrap<ZonedDateTime> w) {
+		w.o(Optional.ofNullable(searchListTrafficSimulation_.getFacetRangeEnd()).map(s -> TimeTool.parseZonedDateTime(defaultTimeZone, s)).orElse(ZonedDateTime.now(defaultTimeZone).toLocalDate().atStartOfDay(defaultTimeZone).plusDays(1)));
+	}
+
+	@Override
+	protected void _defaultRangeStart(Wrap<ZonedDateTime> w) {
+		w.o(Optional.ofNullable(searchListTrafficSimulation_.getFacetRangeStart()).map(s -> TimeTool.parseZonedDateTime(defaultTimeZone, s)).orElse(defaultRangeEnd.minusDays(7).toLocalDate().atStartOfDay(defaultTimeZone)));
+	}
+
+	@Override
+	protected void _defaultRangeVar(Wrap<String> w) {
+		w.o(Optional.ofNullable(searchListTrafficSimulation_.getFacetRanges()).orElse(Arrays.asList()).stream().findFirst().map(v -> { if(v.contains("}")) return StringUtils.substringBefore(StringUtils.substringAfterLast(v, "}"), "_"); else return TrafficSimulation.searchVarTrafficSimulation(v); }).orElse("created"));
+	}
+
+	@Override
+	protected void _defaultFacetSort(Wrap<String> w) {
+		w.o(Optional.ofNullable(searchListTrafficSimulation_.getFacetSort()).orElse("index"));
+	}
+
+	@Override
+	protected void _defaultFacetLimit(Wrap<Integer> w) {
+		w.o(Optional.ofNullable(searchListTrafficSimulation_.getFacetLimit()).orElse(1));
+	}
+
+	@Override
+	protected void _defaultFacetMinCount(Wrap<Integer> w) {
+		w.o(Optional.ofNullable(searchListTrafficSimulation_.getFacetMinCount()).orElse(1));
+	}
+
+	@Override
+	protected void _defaultPivotMinCount(Wrap<Integer> w) {
+		w.o(Optional.ofNullable(searchListTrafficSimulation_.getFacetPivotMinCount()).orElse(0));
+	}
+
+	@Override
+	protected void _DEFAULT_MAP_LOCATION(Wrap<JsonObject> w) {
+		String pointStr = Optional.ofNullable(siteRequest_.getRequestVars().get(VAR_DEFAULT_MAP_LOCATION)).orElse(siteRequest_.getConfig().getString(ConfigKeys.DEFAULT_MAP_LOCATION));
+		if(pointStr != null) {
+			String[] parts = pointStr.replace("[", "").replace("]", "").replace("\"", "").split(",");
+			JsonObject point = new JsonObject().put("lat", Double.parseDouble(parts[0])).put("lon", Double.parseDouble(parts[1]));
+			w.o(point);
+		}
+	}
+
+	@Override
+	protected void _DEFAULT_MAP_ZOOM(Wrap<BigDecimal> w) {
+		String s = Optional.ofNullable(siteRequest_.getRequestVars().get(VAR_DEFAULT_MAP_ZOOM)).orElse(siteRequest_.getConfig().getString(ConfigKeys.DEFAULT_MAP_ZOOM));
+		if(s != null)
+			w.o(new BigDecimal(s));
+	}
+
+	@Override
+	protected void _defaultFieldListVars(List<String> l) {
+		Optional.ofNullable(searchListTrafficSimulation_.getFields()).orElse(Arrays.asList()).forEach(varStored -> {
+			String varStored2 = varStored;
+			if(StringUtils.contains(varStored2, "}"))
+				varStored2 = StringUtils.substringAfterLast(varStored2, "}");
+			String[] parts = varStored2.split(",");
+			for(String part : parts) {
+				if(StringUtils.isNotBlank(part)) {
+					String var = TrafficSimulation.searchVarTrafficSimulation(part);
+					if(StringUtils.isNotBlank(var))
+						l.add(var);
+				}
+			}
+		});
+	}
+
+	@Override
+	protected void _defaultStatsVars(List<String> l) {
+		Optional.ofNullable(searchListTrafficSimulation_.getStatsFields()).orElse(Arrays.asList()).forEach(varIndexed -> {
+			String varIndexed2 = varIndexed;
+			if(StringUtils.contains(varIndexed2, "}"))
+				varIndexed2 = StringUtils.substringAfterLast(varIndexed2, "}");
+			String[] parts = varIndexed2.split(",");
+			for(String part : parts) {
+				if(StringUtils.isNotBlank(part)) {
+					String var = TrafficSimulation.searchVarTrafficSimulation(part);
+					if(StringUtils.isNotBlank(var))
+						l.add(var);
+				}
+			}
+		});
+	}
+
+	@Override
+	protected void _defaultPivotVars(List<String> l) {
+		Optional.ofNullable(searchListTrafficSimulation_.getFacetPivots()).orElse(Arrays.asList()).forEach(facetPivot -> {
+			String facetPivot2 = facetPivot;
+			if(StringUtils.contains(facetPivot2, "}"))
+				facetPivot2 = StringUtils.substringAfterLast(facetPivot2, "}");
+			String[] parts = facetPivot2.split(",");
+			for(String part : parts) {
+				if(StringUtils.isNotBlank(part)) {
+					String var = TrafficSimulation.searchVarTrafficSimulation(part);
+					if(StringUtils.isNotBlank(var))
+						l.add(var);
+				}
+			}
+		});
+	}
+
+	/**
+	 * {@inheritDoc}
+	 **/
+	protected void _listTrafficSimulation(JsonArray l) {
+		Optional.ofNullable(searchListTrafficSimulation_).map(o -> o.getList()).orElse(Arrays.asList()).stream().map(o -> JsonObject.mapFrom(o)).forEach(o -> l.add(o));
+	}
+
+	protected void _trafficSimulationCount(Wrap<Integer> w) {
+		w.o(searchListTrafficSimulation_ == null ? 0 : searchListTrafficSimulation_.size());
+	}
+
+	protected void _trafficSimulation_(Wrap<TrafficSimulation> w) {
+		if(trafficSimulationCount == 1)
+			w.o(searchListTrafficSimulation_.get(0));
+	}
+
+	protected void _pk(Wrap<Long> w) {
+		if(trafficSimulationCount == 1)
+			w.o(trafficSimulation_.getPk());
+	}
+
+	protected void _id(Wrap<String> w) {
+		if(trafficSimulationCount == 1)
+			w.o(trafficSimulation_.getId());
+	}
+
+	@Override
+	protected void _promiseBefore(Promise<Void> promise) {
+		promise.complete();
+	}
+
+	@Override
+	protected void _classSimpleName(Wrap<String> w) {
+		w.o("TrafficSimulation");
+	}
+
+	@Override
+	protected void _pageTitle(Wrap<String> c) {
+		if(trafficSimulation_ != null && trafficSimulation_.getObjectTitle() != null)
+			c.o(trafficSimulation_.getObjectTitle());
+		else if(trafficSimulation_ != null)
+			c.o("traffic simulations");
+		else if(searchListTrafficSimulation_ == null || trafficSimulationCount == 0)
+			c.o("no traffic simulation found");
+		else
+			c.o("traffic simulations");
+	}
+
+	@Override
+	protected void _pageUri(Wrap<String> c) {
+		c.o("/traffic-simulation");
+	}
+
+	@Override
+	protected void _apiUri(Wrap<String> c) {
+		c.o("/api/traffic-simulation");
+	}
+
+	@Override
+	protected void _roles(List<String> l) {
+		if(siteRequest_ != null) {
+			l.addAll(Stream.concat(siteRequest_.getUserResourceRoles().stream(), siteRequest_.getUserRealmRoles().stream()).distinct().collect(Collectors.toList()));
+		}
+	}
+
+	@Override
+	protected void _rolesRequired(List<String> l) {
+		l.addAll(Optional.ofNullable(siteRequest_.getConfig().getJsonArray(ConfigKeys.AUTH_ROLES_REQUIRED + "_TrafficSimulation")).orElse(new JsonArray()).stream().map(o -> o.toString()).collect(Collectors.toList()));
 	}
 
 	@Override

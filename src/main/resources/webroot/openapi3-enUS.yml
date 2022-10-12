@@ -12884,7 +12884,11 @@ components:
                     type: string
                   angle:
                     type: string
-                  color:
+                  state:
+                    type: string
+                  programId:
+                    type: string
+                  phase:
                     type: string
     PATCHTrafficLightStepRequest:
       allOf:
@@ -12911,12 +12915,26 @@ components:
               type: string
             removeAllAngle:
               type: string
-            setColor:
+            setState:
               type: string
               nullable: true
-            removeColor:
+            removeState:
               type: string
-            removeAllColor:
+            removeAllState:
+              type: string
+            setProgramId:
+              type: string
+              nullable: true
+            removeProgramId:
+              type: string
+            removeAllProgramId:
+              type: string
+            setPhase:
+              type: string
+              nullable: true
+            removePhase:
+              type: string
+            removeAllPhase:
               type: string
     PATCHTrafficLightStepResponse:
       allOf:
@@ -12943,12 +12961,26 @@ components:
               type: string
             removeAllAngle:
               type: string
-            setColor:
+            setState:
               type: string
               nullable: true
-            removeColor:
+            removeState:
               type: string
-            removeAllColor:
+            removeAllState:
+              type: string
+            setProgramId:
+              type: string
+              nullable: true
+            removeProgramId:
+              type: string
+            removeAllProgramId:
+              type: string
+            setPhase:
+              type: string
+              nullable: true
+            removePhase:
+              type: string
+            removeAllPhase:
               type: string
     POSTTrafficLightStepRequest:
       allOf:
@@ -12960,7 +12992,11 @@ components:
               type: string
             angle:
               type: string
-            color:
+            state:
+              type: string
+            programId:
+              type: string
+            phase:
               type: string
     POSTTrafficLightStepResponse:
       allOf:
@@ -12972,7 +13008,11 @@ components:
               type: string
             angle:
               type: string
-            color:
+            state:
+              type: string
+            programId:
+              type: string
+            phase:
               type: string
     PUTImportTrafficLightStepRequest:
       allOf:
@@ -12984,7 +13024,11 @@ components:
               type: string
             angle:
               type: string
-            color:
+            state:
+              type: string
+            programId:
+              type: string
+            phase:
               type: string
     PUTImportTrafficLightStepResponse:
       allOf:
@@ -12996,7 +13040,11 @@ components:
               type: string
             angle:
               type: string
-            color:
+            state:
+              type: string
+            programId:
+              type: string
+            phase:
               type: string
     GETTrafficLightStepResponse:
       allOf:
@@ -13009,7 +13057,11 @@ components:
               type: string
             angle:
               type: string
-            color:
+            state:
+              type: string
+            programId:
+              type: string
+            phase:
               type: string
     SearchPageTrafficLightStepResponse:
       allOf:
@@ -13044,8 +13096,6 @@ components:
                   pos:
                     type: string
                   slope:
-                    type: string
-                  color:
                     type: string
     PATCHPersonStepRequest:
       allOf:
@@ -13093,13 +13143,6 @@ components:
               type: string
             removeAllSlope:
               type: string
-            setColor:
-              type: string
-              nullable: true
-            removeColor:
-              type: string
-            removeAllColor:
-              type: string
     PATCHPersonStepResponse:
       allOf:
         - type: object
@@ -13146,13 +13189,6 @@ components:
               type: string
             removeAllSlope:
               type: string
-            setColor:
-              type: string
-              nullable: true
-            removeColor:
-              type: string
-            removeAllColor:
-              type: string
     POSTPersonStepRequest:
       allOf:
         - type: object
@@ -13168,8 +13204,6 @@ components:
             pos:
               type: string
             slope:
-              type: string
-            color:
               type: string
     POSTPersonStepResponse:
       allOf:
@@ -13187,8 +13221,6 @@ components:
               type: string
             slope:
               type: string
-            color:
-              type: string
     PUTImportPersonStepRequest:
       allOf:
         - type: object
@@ -13204,8 +13236,6 @@ components:
             pos:
               type: string
             slope:
-              type: string
-            color:
               type: string
     PUTImportPersonStepResponse:
       allOf:
@@ -13223,8 +13253,6 @@ components:
               type: string
             slope:
               type: string
-            color:
-              type: string
     GETPersonStepResponse:
       allOf:
         - $ref: "#/components/schemas/GETMapResultResponse"
@@ -13241,8 +13269,6 @@ components:
             pos:
               type: string
             slope:
-              type: string
-            color:
               type: string
     SearchPagePersonStepResponse:
       allOf:
@@ -13268,6 +13294,10 @@ components:
                   simulationName:
                     type: string
                   sumocfgPath:
+                    type: string
+                  fcdFilePath:
+                    type: string
+                  netFilePath:
                     type: string
                   startSeconds:
                     type: string
@@ -13302,6 +13332,20 @@ components:
             removeSumocfgPath:
               type: string
             removeAllSumocfgPath:
+              type: string
+            setFcdFilePath:
+              type: string
+              nullable: true
+            removeFcdFilePath:
+              type: string
+            removeAllFcdFilePath:
+              type: string
+            setNetFilePath:
+              type: string
+              nullable: true
+            removeNetFilePath:
+              type: string
+            removeAllNetFilePath:
               type: string
             setStartSeconds:
               type: string
@@ -13383,6 +13427,20 @@ components:
               type: string
             removeAllSumocfgPath:
               type: string
+            setFcdFilePath:
+              type: string
+              nullable: true
+            removeFcdFilePath:
+              type: string
+            removeAllFcdFilePath:
+              type: string
+            setNetFilePath:
+              type: string
+              nullable: true
+            removeNetFilePath:
+              type: string
+            removeAllNetFilePath:
+              type: string
             setStartSeconds:
               type: string
               nullable: true
@@ -13453,6 +13511,10 @@ components:
               type: string
             sumocfgPath:
               type: string
+            fcdFilePath:
+              type: string
+            netFilePath:
+              type: string
             startSeconds:
               type: string
             endSeconds:
@@ -13476,6 +13538,10 @@ components:
             simulationName:
               type: string
             sumocfgPath:
+              type: string
+            fcdFilePath:
+              type: string
+            netFilePath:
               type: string
             startSeconds:
               type: string
@@ -13501,6 +13567,10 @@ components:
               type: string
             sumocfgPath:
               type: string
+            fcdFilePath:
+              type: string
+            netFilePath:
+              type: string
             startSeconds:
               type: string
             endSeconds:
@@ -13525,6 +13595,10 @@ components:
               type: string
             sumocfgPath:
               type: string
+            fcdFilePath:
+              type: string
+            netFilePath:
+              type: string
             startSeconds:
               type: string
             endSeconds:
@@ -13548,6 +13622,10 @@ components:
             simulationName:
               type: string
             sumocfgPath:
+              type: string
+            fcdFilePath:
+              type: string
+            netFilePath:
               type: string
             startSeconds:
               type: string
@@ -13729,8 +13807,6 @@ components:
                     type: string
                   slope:
                     type: string
-                  color:
-                    type: string
     PATCHVehicleStepRequest:
       allOf:
         - type: object
@@ -13776,13 +13852,6 @@ components:
             removeSlope:
               type: string
             removeAllSlope:
-              type: string
-            setColor:
-              type: string
-              nullable: true
-            removeColor:
-              type: string
-            removeAllColor:
               type: string
     PATCHVehicleStepResponse:
       allOf:
@@ -13830,13 +13899,6 @@ components:
               type: string
             removeAllSlope:
               type: string
-            setColor:
-              type: string
-              nullable: true
-            removeColor:
-              type: string
-            removeAllColor:
-              type: string
     POSTVehicleStepRequest:
       allOf:
         - type: object
@@ -13852,8 +13914,6 @@ components:
             pos:
               type: string
             slope:
-              type: string
-            color:
               type: string
     POSTVehicleStepResponse:
       allOf:
@@ -13871,8 +13931,6 @@ components:
               type: string
             slope:
               type: string
-            color:
-              type: string
     PUTImportVehicleStepRequest:
       allOf:
         - type: object
@@ -13888,8 +13946,6 @@ components:
             pos:
               type: string
             slope:
-              type: string
-            color:
               type: string
     PUTImportVehicleStepResponse:
       allOf:
@@ -13907,8 +13963,6 @@ components:
               type: string
             slope:
               type: string
-            color:
-              type: string
     GETVehicleStepResponse:
       allOf:
         - $ref: "#/components/schemas/GETMapResultResponse"
@@ -13925,8 +13979,6 @@ components:
             pos:
               type: string
             slope:
-              type: string
-            color:
               type: string
     SearchPageVehicleStepResponse:
       allOf:
@@ -15341,6 +15393,10 @@ components:
                     type: string
                   location:
                     type: string
+                  color:
+                    type: string
+                  step:
+                    type: boolean
     GETMapResultResponse:
       allOf:
         - type: object
@@ -15357,6 +15413,10 @@ components:
               type: string
             location:
               type: string
+            color:
+              type: string
+            step:
+              type: boolean
     SearchPageMapResultResponse:
       allOf:
         - type: string

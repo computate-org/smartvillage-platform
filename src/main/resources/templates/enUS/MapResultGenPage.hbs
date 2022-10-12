@@ -404,7 +404,9 @@
 {{> "htmDeleted" classApiMethodMethod="Page"}}
 							</div>
 							<div class="w3-cell-row ">
+{{> "htmSimulationName" classApiMethodMethod="Page"}}
 {{> "htmSimulationKey" classApiMethodMethod="Page"}}
+{{> "htmSumocfgPath" classApiMethodMethod="Page"}}
 {{> "htmTimeStepId" classApiMethodMethod="Page"}}
 							</div>
 							<div class="w3-cell-row ">
@@ -659,6 +661,138 @@
 			</div>
 {{/inline}}
 {{> BaseResultPage baseResult_=mapResult_}}
+
+{{#*inline "htmSimulationName"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}MapResultSimulationName">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label for="{{classApiMethodMethod}}_simulationName">simulation name</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputSimulationName"}}
+													</div>
+	{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_simulationName')); $('#{{classApiMethodMethod}}_simulationName').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#MapResultForm :input[name=id]').val() }], 'setSimulationName', null, function() { addGlow($('#{{classApiMethodMethod}}_simulationName')); }, function() { addError($('#{{classApiMethodMethod}}_simulationName')); }); "
+																		>
+																	<i class="far fa-eraser "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/ifContainsAnyRoles}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputSimulationName"}}
+		{{#ifContainsAnyRoles roles rolesRequired}}
+														<input
+															type="text"
+															placeholder="simulation name"
+															id="{{classApiMethodMethod}}_simulationName"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setSimulationName classMapResult inputMapResult{{id}}SimulationName w3-input w3-border "
+																name="setSimulationName"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setSimulationName classMapResult inputMapResult{{id}}SimulationName w3-input w3-border "
+																name="setSimulationName"
+		{{else}}
+																class="valueSimulationName w3-input w3-border classMapResult inputMapResult{{id}}SimulationName w3-input w3-border "
+																name="simulationName"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setSimulationName', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_simulationName')); }, function() { addError($('#{{classApiMethodMethod}}_simulationName')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{mapResult_.simulationName}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varMapResult{{id}}SimulationName ">{{mapResult_.simulationName}}</span>
+			{{/ifContainsKeys}}
+		{{/ifContainsAnyRoles}}
+{{/inline}}
+
+{{#*inline "htmSumocfgPath"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}MapResultSumocfgPath">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-blue">
+													<label for="{{classApiMethodMethod}}_sumocfgPath">sumocfg path</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputSumocfgPath"}}
+													</div>
+	{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_sumocfgPath')); $('#{{classApiMethodMethod}}_sumocfgPath').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#MapResultForm :input[name=id]').val() }], 'setSumocfgPath', null, function() { addGlow($('#{{classApiMethodMethod}}_sumocfgPath')); }, function() { addError($('#{{classApiMethodMethod}}_sumocfgPath')); }); "
+																		>
+																	<i class="far fa-eraser "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/ifContainsAnyRoles}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputSumocfgPath"}}
+		{{#ifContainsAnyRoles roles rolesRequired}}
+														<input
+															type="text"
+															placeholder="sumocfg path"
+															id="{{classApiMethodMethod}}_sumocfgPath"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setSumocfgPath classMapResult inputMapResult{{id}}SumocfgPath w3-input w3-border "
+																name="setSumocfgPath"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setSumocfgPath classMapResult inputMapResult{{id}}SumocfgPath w3-input w3-border "
+																name="setSumocfgPath"
+		{{else}}
+																class="valueSumocfgPath w3-input w3-border classMapResult inputMapResult{{id}}SumocfgPath w3-input w3-border "
+																name="sumocfgPath"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setSumocfgPath', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_sumocfgPath')); }, function() { addError($('#{{classApiMethodMethod}}_sumocfgPath')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{mapResult_.sumocfgPath}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varMapResult{{id}}SumocfgPath ">{{mapResult_.sumocfgPath}}</span>
+			{{/ifContainsKeys}}
+		{{/ifContainsAnyRoles}}
+{{/inline}}
 
 {{#*inline "htmSimulationKey"}}
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">

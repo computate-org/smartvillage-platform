@@ -605,6 +605,14 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 							num++;
 							bParams.add(o2.sqlSumocfgPath());
 						break;
+					case "setFcdFilePath":
+							o2.setFcdFilePath(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficSimulation.VAR_fcdFilePath + "=$" + num);
+							num++;
+							bParams.add(o2.sqlFcdFilePath());
+						break;
 					case "setNetFilePath":
 							o2.setNetFilePath(jsonObject.getString(entityVar));
 							if(bParams.size() > 0)
@@ -636,14 +644,6 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 							bSql.append(TrafficSimulation.VAR_stepSeconds + "=$" + num);
 							num++;
 							bParams.add(o2.sqlStepSeconds());
-						break;
-					case "setFcdOutputGeo":
-							o2.setFcdOutputGeo(jsonObject.getBoolean(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(TrafficSimulation.VAR_fcdOutputGeo + "=$" + num);
-							num++;
-							bParams.add(o2.sqlFcdOutputGeo());
 						break;
 				}
 			}
@@ -985,6 +985,15 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 						num++;
 						bParams.add(o2.sqlSumocfgPath());
 						break;
+					case TrafficSimulation.VAR_fcdFilePath:
+						o2.setFcdFilePath(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficSimulation.VAR_fcdFilePath + "=$" + num);
+						num++;
+						bParams.add(o2.sqlFcdFilePath());
+						break;
 					case TrafficSimulation.VAR_netFilePath:
 						o2.setNetFilePath(jsonObject.getString(entityVar));
 						if(bParams.size() > 0) {
@@ -1020,33 +1029,6 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 						bSql.append(TrafficSimulation.VAR_stepSeconds + "=$" + num);
 						num++;
 						bParams.add(o2.sqlStepSeconds());
-						break;
-					case TrafficSimulation.VAR_fcdOutputGeo:
-						o2.setFcdOutputGeo(jsonObject.getBoolean(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(TrafficSimulation.VAR_fcdOutputGeo + "=$" + num);
-						num++;
-						bParams.add(o2.sqlFcdOutputGeo());
-						break;
-					case TrafficSimulation.VAR_tlsStatesPaths:
-						o2.setTlsStatesPaths(jsonObject.getJsonArray(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(TrafficSimulation.VAR_tlsStatesPaths + "=$" + num);
-						num++;
-						bParams.add(o2.sqlTlsStatesPaths());
-						break;
-					case TrafficSimulation.VAR_additionalFilePaths:
-						o2.setAdditionalFilePaths(jsonObject.getJsonArray(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(TrafficSimulation.VAR_additionalFilePaths + "=$" + num);
-						num++;
-						bParams.add(o2.sqlAdditionalFilePaths());
 						break;
 					}
 				}

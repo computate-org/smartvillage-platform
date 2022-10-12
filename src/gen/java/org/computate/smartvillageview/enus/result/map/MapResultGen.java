@@ -31,8 +31,8 @@ import org.slf4j.LoggerFactory;
 import java.math.RoundingMode;
 import java.util.Map;
 import org.computate.smartvillageview.enus.result.base.BaseResult;
-import java.lang.Long;
 import java.lang.String;
+import java.lang.Long;
 import java.math.BigDecimal;
 import java.lang.Double;
 import io.vertx.pgclient.data.Point;
@@ -146,6 +146,112 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 	public static final String MapResult_IconGroup = "duotone";
 	public static final String MapResult_IconName = "map-location-dot";
 	public static final Integer MapResult_Rows = 100;
+
+	////////////////////
+	// simulationName //
+	////////////////////
+
+	/**	 The entity simulationName
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String simulationName;
+
+	/**	<br> The entity simulationName
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.result.map.MapResult&fq=entiteVar_enUS_indexed_string:simulationName">Find the entity simulationName in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _simulationName(Wrap<String> w);
+
+	public String getSimulationName() {
+		return simulationName;
+	}
+	public void setSimulationName(String o) {
+		this.simulationName = MapResult.staticSetSimulationName(siteRequest_, o);
+	}
+	public static String staticSetSimulationName(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected MapResult simulationNameInit() {
+		Wrap<String> simulationNameWrap = new Wrap<String>().var("simulationName");
+		if(simulationName == null) {
+			_simulationName(simulationNameWrap);
+			setSimulationName(simulationNameWrap.o);
+		}
+		return (MapResult)this;
+	}
+
+	public static String staticSearchSimulationName(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrSimulationName(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqSimulationName(SiteRequestEnUS siteRequest_, String o) {
+		return MapResult.staticSearchStrSimulationName(siteRequest_, MapResult.staticSearchSimulationName(siteRequest_, MapResult.staticSetSimulationName(siteRequest_, o)));
+	}
+
+	public String sqlSimulationName() {
+		return simulationName;
+	}
+
+	/////////////////
+	// sumocfgPath //
+	/////////////////
+
+	/**	 The entity sumocfgPath
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String sumocfgPath;
+
+	/**	<br> The entity sumocfgPath
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.result.map.MapResult&fq=entiteVar_enUS_indexed_string:sumocfgPath">Find the entity sumocfgPath in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _sumocfgPath(Wrap<String> w);
+
+	public String getSumocfgPath() {
+		return sumocfgPath;
+	}
+	public void setSumocfgPath(String o) {
+		this.sumocfgPath = MapResult.staticSetSumocfgPath(siteRequest_, o);
+	}
+	public static String staticSetSumocfgPath(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected MapResult sumocfgPathInit() {
+		Wrap<String> sumocfgPathWrap = new Wrap<String>().var("sumocfgPath");
+		if(sumocfgPath == null) {
+			_sumocfgPath(sumocfgPathWrap);
+			setSumocfgPath(sumocfgPathWrap.o);
+		}
+		return (MapResult)this;
+	}
+
+	public static String staticSearchSumocfgPath(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrSumocfgPath(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqSumocfgPath(SiteRequestEnUS siteRequest_, String o) {
+		return MapResult.staticSearchStrSumocfgPath(siteRequest_, MapResult.staticSearchSumocfgPath(siteRequest_, MapResult.staticSetSumocfgPath(siteRequest_, o)));
+	}
+
+	public String sqlSumocfgPath() {
+		return sumocfgPath;
+	}
 
 	///////////////////
 	// simulationKey //
@@ -658,6 +764,8 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 		Future.future(a -> a.complete()).compose(a -> {
 			Promise<Void> promise2 = Promise.promise();
 			try {
+				simulationNameInit();
+				sumocfgPathInit();
 				simulationKeyInit();
 				timeStepIdInit();
 				timeInit();
@@ -719,6 +827,10 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 	public Object obtainMapResult(String var) {
 		MapResult oMapResult = (MapResult)this;
 		switch(var) {
+			case "simulationName":
+				return oMapResult.simulationName;
+			case "sumocfgPath":
+				return oMapResult.sumocfgPath;
 			case "simulationKey":
 				return oMapResult.simulationKey;
 			case "timeStepId":
@@ -774,6 +886,10 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 	}
 	public static Object staticSetMapResult(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "simulationName":
+			return MapResult.staticSetSimulationName(siteRequest_, o);
+		case "sumocfgPath":
+			return MapResult.staticSetSumocfgPath(siteRequest_, o);
 		case "simulationKey":
 			return MapResult.staticSetSimulationKey(siteRequest_, o);
 		case "timeStepId":
@@ -804,6 +920,10 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 	}
 	public static Object staticSearchMapResult(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "simulationName":
+			return MapResult.staticSearchSimulationName(siteRequest_, (String)o);
+		case "sumocfgPath":
+			return MapResult.staticSearchSumocfgPath(siteRequest_, (String)o);
 		case "simulationKey":
 			return MapResult.staticSearchSimulationKey(siteRequest_, (Long)o);
 		case "timeStepId":
@@ -834,6 +954,10 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 	}
 	public static String staticSearchStrMapResult(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "simulationName":
+			return MapResult.staticSearchStrSimulationName(siteRequest_, (String)o);
+		case "sumocfgPath":
+			return MapResult.staticSearchStrSumocfgPath(siteRequest_, (String)o);
 		case "simulationKey":
 			return MapResult.staticSearchStrSimulationKey(siteRequest_, (Long)o);
 		case "timeStepId":
@@ -864,6 +988,10 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 	}
 	public static String staticSearchFqMapResult(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "simulationName":
+			return MapResult.staticSearchFqSimulationName(siteRequest_, o);
+		case "sumocfgPath":
+			return MapResult.staticSearchFqSumocfgPath(siteRequest_, o);
 		case "simulationKey":
 			return MapResult.staticSearchFqSimulationKey(siteRequest_, o);
 		case "timeStepId":
@@ -906,6 +1034,16 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 	}
 	public Object persistMapResult(String var, Object val) {
 		switch(var.toLowerCase()) {
+			case "simulationname":
+				if(val instanceof String)
+					setSimulationName((String)val);
+				saves.add("simulationName");
+				return val;
+			case "sumocfgpath":
+				if(val instanceof String)
+					setSumocfgPath((String)val);
+				saves.add("sumocfgPath");
+				return val;
 			case "simulationkey":
 				if(val instanceof Long)
 					setSimulationKey((Long)val);
@@ -980,6 +1118,12 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 	}
 
 	public void indexMapResult(JsonObject doc) {
+		if(simulationName != null) {
+			doc.put("simulationName_docvalues_string", simulationName);
+		}
+		if(sumocfgPath != null) {
+			doc.put("sumocfgPath_docvalues_string", sumocfgPath);
+		}
 		if(simulationKey != null) {
 			doc.put("simulationKey_docvalues_long", simulationKey);
 		}
@@ -1004,6 +1148,10 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 
 	public static String varStoredMapResult(String entityVar) {
 		switch(entityVar) {
+			case "simulationName":
+				return "simulationName_docvalues_string";
+			case "sumocfgPath":
+				return "sumocfgPath_docvalues_string";
 			case "simulationKey":
 				return "simulationKey_docvalues_long";
 			case "timeStepId":
@@ -1023,6 +1171,10 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 
 	public static String varIndexedMapResult(String entityVar) {
 		switch(entityVar) {
+			case "simulationName":
+				return "simulationName_docvalues_string";
+			case "sumocfgPath":
+				return "sumocfgPath_docvalues_string";
 			case "simulationKey":
 				return "simulationKey_docvalues_long";
 			case "timeStepId":
@@ -1042,6 +1194,10 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 
 	public static String searchVarMapResult(String searchVar) {
 		switch(searchVar) {
+			case "simulationName_docvalues_string":
+				return "simulationName";
+			case "sumocfgPath_docvalues_string":
+				return "sumocfgPath";
 			case "simulationKey_docvalues_long":
 				return "simulationKey";
 			case "timeStepId_docvalues_string":
@@ -1083,6 +1239,8 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 	public void storeMapResult(SolrResponse.Doc doc) {
 		MapResult oMapResult = (MapResult)this;
 
+		oMapResult.setSimulationName(Optional.ofNullable(doc.get("simulationName_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oMapResult.setSumocfgPath(Optional.ofNullable(doc.get("sumocfgPath_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oMapResult.setSimulationKey(Optional.ofNullable(doc.get("simulationKey_docvalues_long")).map(v -> v.toString()).orElse(null));
 		oMapResult.setTimeStepId(Optional.ofNullable(doc.get("timeStepId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oMapResult.setTime(Optional.ofNullable(doc.get("time_docvalues_double")).map(v -> v.toString()).orElse(null));
@@ -1102,6 +1260,10 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 		Object o = Optional.ofNullable(apiRequest).map(ApiRequest::getOriginal).orElse(null);
 		if(o != null && o instanceof MapResult) {
 			MapResult original = (MapResult)o;
+			if(!Objects.equals(simulationName, original.getSimulationName()))
+				apiRequest.addVars("simulationName");
+			if(!Objects.equals(sumocfgPath, original.getSumocfgPath()))
+				apiRequest.addVars("sumocfgPath");
 			if(!Objects.equals(simulationKey, original.getSimulationKey()))
 				apiRequest.addVars("simulationKey");
 			if(!Objects.equals(timeStepId, original.getTimeStepId()))
@@ -1129,6 +1291,8 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 	@Override public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(super.toString());
+		sb.append(Optional.ofNullable(simulationName).map(v -> "simulationName: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(sumocfgPath).map(v -> "sumocfgPath: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(simulationKey).map(v -> "simulationKey: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(timeStepId).map(v -> "timeStepId: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(time).map(v -> "time: " + v + "\n").orElse(""));
@@ -1141,6 +1305,8 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 	}
 
 	public static final String CLASS_SIMPLE_NAME = "MapResult";
+	public static final String VAR_simulationName = "simulationName";
+	public static final String VAR_sumocfgPath = "sumocfgPath";
 	public static final String VAR_simulationKey = "simulationKey";
 	public static final String VAR_timeStepId = "timeStepId";
 	public static final String VAR_time = "time";
@@ -1162,6 +1328,8 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 		return MapResult.varsFqMapResult(new ArrayList<String>());
 	}
 	public static List<String> varsFqMapResult(List<String> vars) {
+		vars.add(VAR_simulationName);
+		vars.add(VAR_sumocfgPath);
 		vars.add(VAR_simulationKey);
 		vars.add(VAR_timeStepId);
 		vars.add(VAR_time);
@@ -1183,6 +1351,8 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 		return vars;
 	}
 
+	public static final String DISPLAY_NAME_simulationName = "simulation name";
+	public static final String DISPLAY_NAME_sumocfgPath = "sumocfg path";
 	public static final String DISPLAY_NAME_simulationKey = "Simulation";
 	public static final String DISPLAY_NAME_timeStepId = "Time Step";
 	public static final String DISPLAY_NAME_time = "Time in seconds";
@@ -1197,6 +1367,10 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 	}
 	public static String displayNameMapResult(String var) {
 		switch(var) {
+		case VAR_simulationName:
+			return DISPLAY_NAME_simulationName;
+		case VAR_sumocfgPath:
+			return DISPLAY_NAME_sumocfgPath;
 		case VAR_simulationKey:
 			return DISPLAY_NAME_simulationKey;
 		case VAR_timeStepId:
@@ -1233,6 +1407,10 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 
 	public static String classSimpleNameMapResult(String var) {
 		switch(var) {
+		case VAR_simulationName:
+			return "String";
+		case VAR_sumocfgPath:
+			return "String";
 		case VAR_simulationKey:
 			return "Long";
 		case VAR_timeStepId:
@@ -1263,6 +1441,10 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 
 	public static Integer htmlRowMapResult(String var) {
 		switch(var) {
+		case VAR_simulationName:
+			return 3;
+		case VAR_sumocfgPath:
+			return 3;
 		case VAR_simulationKey:
 			return 3;
 		case VAR_timeStepId:
@@ -1282,6 +1464,10 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 
 	public static Integer htmlCellMapResult(String var) {
 		switch(var) {
+		case VAR_simulationName:
+			return 1;
+		case VAR_sumocfgPath:
+			return 2;
 		case VAR_simulationKey:
 			return 1;
 		case VAR_timeStepId:

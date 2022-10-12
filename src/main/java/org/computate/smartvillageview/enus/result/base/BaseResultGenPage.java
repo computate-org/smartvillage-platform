@@ -34,10 +34,10 @@ import java.util.Arrays;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.math.MathContext;
-import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections4.CollectionUtils;
 import java.util.Objects;
 import io.vertx.core.Promise;
-import org.computate.vertx.config.ComputateConfigKeys;
+import org.computate.smartvillageview.enus.config.ConfigKeys;
 import org.computate.search.response.solr.SolrResponse;
 import java.util.HashMap;
 import org.computate.search.tool.TimeTool;
@@ -56,67 +56,81 @@ public class BaseResultGenPage extends BaseResultGenPageGen<PageLayout> {
 	protected void _searchListBaseResult_(Wrap<SearchList<BaseResult>> w) {
 	}
 
+	@Override
 	protected void _pageResponse(Wrap<String> w) {
 		if(searchListBaseResult_ != null)
 			w.o(JsonObject.mapFrom(searchListBaseResult_.getResponse()).toString());
 	}
 
+	@Override
 	protected void _defaultZoneId(Wrap<String> w) {
-		w.o(Optional.ofNullable(siteRequest_.getRequestVars().get(VAR_defaultZoneId)).orElse(siteRequest_.getConfig().getString(ComputateConfigKeys.SITE_ZONE)));
+		w.o(Optional.ofNullable(siteRequest_.getRequestVars().get(VAR_defaultZoneId)).orElse(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE)));
 	}
 
 	/**
 	 * Ignore: true
 	 **/
+	@Override
 	protected void _defaultTimeZone(Wrap<ZoneId> w) {
 		w.o(ZoneId.of(defaultZoneId));
 	}
 
+	@Override
 	protected void _defaultLocaleId(Wrap<String> w) {
-		w.o(Optional.ofNullable(siteRequest_.getRequestHeaders().get("Accept-Language")).map(acceptLanguage -> StringUtils.substringBefore(acceptLanguage, ",")).orElse(siteRequest_.getConfig().getString(ComputateConfigKeys.SITE_LOCALE)));
+		w.o(Optional.ofNullable(siteRequest_.getRequestHeaders().get("Accept-Language")).map(acceptLanguage -> StringUtils.substringBefore(acceptLanguage, ",")).orElse(siteRequest_.getConfig().getString(ConfigKeys.SITE_LOCALE)));
 	}
 
 	/**
 	 * Ignore: true
 	 **/
+	@Override
 	protected void _defaultLocale(Wrap<Locale> w) {
 		w.o(Locale.forLanguageTag(defaultLocaleId));
 	}
 
+	@Override
 	protected void _defaultRangeGap(Wrap<String> w) {
 		w.o(Optional.ofNullable(searchListBaseResult_.getFacetRangeGap()).orElse("+1DAY"));
 	}
 
+	@Override
 	protected void _defaultRangeEnd(Wrap<ZonedDateTime> w) {
 		w.o(Optional.ofNullable(searchListBaseResult_.getFacetRangeEnd()).map(s -> TimeTool.parseZonedDateTime(defaultTimeZone, s)).orElse(ZonedDateTime.now(defaultTimeZone).toLocalDate().atStartOfDay(defaultTimeZone).plusDays(1)));
 	}
 
+	@Override
 	protected void _defaultRangeStart(Wrap<ZonedDateTime> w) {
 		w.o(Optional.ofNullable(searchListBaseResult_.getFacetRangeStart()).map(s -> TimeTool.parseZonedDateTime(defaultTimeZone, s)).orElse(defaultRangeEnd.minusDays(7).toLocalDate().atStartOfDay(defaultTimeZone)));
 	}
 
+	@Override
 	protected void _defaultRangeVar(Wrap<String> w) {
 		w.o(Optional.ofNullable(searchListBaseResult_.getFacetRanges()).orElse(Arrays.asList()).stream().findFirst().map(v -> { if(v.contains("}")) return StringUtils.substringBefore(StringUtils.substringAfterLast(v, "}"), "_"); else return BaseResult.searchVarBaseResult(v); }).orElse("created"));
 	}
 
+	@Override
 	protected void _defaultFacetSort(Wrap<String> w) {
 		w.o(Optional.ofNullable(searchListBaseResult_.getFacetSort()).orElse("index"));
 	}
 
+	@Override
 	protected void _defaultFacetLimit(Wrap<Integer> w) {
 		w.o(Optional.ofNullable(searchListBaseResult_.getFacetLimit()).orElse(1));
 	}
 
+	@Override
 	protected void _defaultFacetMinCount(Wrap<Integer> w) {
 		w.o(Optional.ofNullable(searchListBaseResult_.getFacetMinCount()).orElse(1));
 	}
 
+	@Override
 	protected void _defaultPivotMinCount(Wrap<Integer> w) {
 		w.o(Optional.ofNullable(searchListBaseResult_.getFacetPivotMinCount()).orElse(0));
 	}
 
+	@Override
 	protected void _DEFAULT_MAP_LOCATION(Wrap<JsonObject> w) {
-		String pointStr = Optional.ofNullable(siteRequest_.getRequestVars().get(VAR_DEFAULT_MAP_LOCATION)).orElse(siteRequest_.getConfig().getString(ComputateConfigKeys.DEFAULT_MAP_LOCATION));
+		String pointStr = Optional.ofNullable(siteRequest_.getRequestVars().get(VAR_DEFAULT_MAP_LOCATION)).orElse(siteRequest_.getConfig().getString(ConfigKeys.DEFAULT_MAP_LOCATION));
 		if(pointStr != null) {
 			String[] parts = pointStr.replace("[", "").replace("]", "").replace("\"", "").split(",");
 			JsonObject point = new JsonObject().put("lat", Double.parseDouble(parts[0])).put("lon", Double.parseDouble(parts[1]));
@@ -124,12 +138,14 @@ public class BaseResultGenPage extends BaseResultGenPageGen<PageLayout> {
 		}
 	}
 
+	@Override
 	protected void _DEFAULT_MAP_ZOOM(Wrap<BigDecimal> w) {
-		String s = Optional.ofNullable(siteRequest_.getRequestVars().get(VAR_DEFAULT_MAP_ZOOM)).orElse(siteRequest_.getConfig().getString(ComputateConfigKeys.DEFAULT_MAP_ZOOM));
+		String s = Optional.ofNullable(siteRequest_.getRequestVars().get(VAR_DEFAULT_MAP_ZOOM)).orElse(siteRequest_.getConfig().getString(ConfigKeys.DEFAULT_MAP_ZOOM));
 		if(s != null)
 			w.o(new BigDecimal(s));
 	}
 
+	@Override
 	protected void _defaultFieldListVars(List<String> l) {
 		Optional.ofNullable(searchListBaseResult_.getFields()).orElse(Arrays.asList()).forEach(varStored -> {
 			String varStored2 = varStored;
@@ -146,6 +162,7 @@ public class BaseResultGenPage extends BaseResultGenPageGen<PageLayout> {
 		});
 	}
 
+	@Override
 	protected void _defaultStatsVars(List<String> l) {
 		Optional.ofNullable(searchListBaseResult_.getStatsFields()).orElse(Arrays.asList()).forEach(varIndexed -> {
 			String varIndexed2 = varIndexed;
@@ -162,6 +179,7 @@ public class BaseResultGenPage extends BaseResultGenPageGen<PageLayout> {
 		});
 	}
 
+	@Override
 	protected void _defaultPivotVars(List<String> l) {
 		Optional.ofNullable(searchListBaseResult_.getFacetPivots()).orElse(Arrays.asList()).forEach(facetPivot -> {
 			String facetPivot2 = facetPivot;
@@ -311,7 +329,7 @@ public class BaseResultGenPage extends BaseResultGenPageGen<PageLayout> {
 			json.put("var", var);
 			json.put("varStored", varStored);
 			json.put("varIndexed", varIndexed);
-					String type = StringUtils.substringAfterLast(varIndexed, "_");
+			String type = StringUtils.substringAfterLast(varIndexed, "_");
 			json.put("displayName", Optional.ofNullable(BaseResult.displayNameBaseResult(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
 			json.put("classSimpleName", Optional.ofNullable(BaseResult.classSimpleNameBaseResult(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
 			json.put("val", searchListBaseResult_.getRequest().getFilterQueries().stream().filter(fq -> fq.startsWith(BaseResult.varIndexedBaseResult(var) + ":")).findFirst().map(s -> StringUtils.substringAfter(s, ":")).orElse(null));
@@ -331,6 +349,7 @@ public class BaseResultGenPage extends BaseResultGenPageGen<PageLayout> {
 			if(defaultFieldListVars.contains(var)) {
 				json.put("fieldList", true);
 			}
+			json.put("enableCalendar", StringUtils.equalsAny(type, "date"));
 			json.put("enableStats", !StringUtils.equalsAny(type, "boolean", "location"));
 			if(defaultStatsVars.contains(var)) {
 				SolrResponse.StatsField varStats = stats.get(varIndexed);

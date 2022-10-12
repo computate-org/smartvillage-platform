@@ -41,6 +41,30 @@ public class MapResult extends MapResultGen<BaseResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
+	 * DisplayName: simulation name
+	 * HtmlRow: 3
+	 * HtmlCell: 1
+	 * Facet: true
+	 */
+	protected void _simulationName(Wrap<String> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * DisplayName: sumocfg path
+	 * HtmlRow: 3
+	 * HtmlCell: 2
+	 * Facet: true
+	 */
+	protected void _sumocfgPath(Wrap<String> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
 	 * HtmlRow: 3
 	 * HtmlCell: 1
 	 * Facet: true

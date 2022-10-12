@@ -1,7 +1,10 @@
 package org.computate.smartvillageview.enus.page;
 
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 import java.net.URLEncoder;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,10 +16,12 @@ import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.computate.search.response.solr.SolrResponse;
 import org.computate.search.tool.SearchTool;
 import org.computate.search.wrap.Wrap;
 import org.computate.smartvillageview.enus.config.ConfigKeys;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
+import org.computate.vertx.config.ComputateConfigKeys;
 
 import io.vertx.core.Promise;
 import io.vertx.core.json.JsonArray;
@@ -246,6 +251,12 @@ public class PageLayout extends PageLayoutGen<Object> {
 		l.addAll(siteRequest_.getConfig().getJsonArray(ConfigKeys.AUTH_ROLES_ADMIN).stream().map(o -> o.toString()).collect(Collectors.toList()));
 	}
 
+	protected void _stats(Wrap<SolrResponse.Stats> w) {
+	}
+
+	protected void _facetCounts(Wrap<SolrResponse.FacetCounts> w) {
+	}
+
 	/**
 	 * Description: The pagination data about this request
 	 */
@@ -265,6 +276,73 @@ public class PageLayout extends PageLayoutGen<Object> {
 	 * Description: The query data about this request
 	 */
 	protected void _query(JsonObject query) {
+	}
+
+	protected void _pageResponse(Wrap<String> w) {
+	}
+
+	protected void _defaultZoneId(Wrap<String> w) {
+		w.o(Optional.ofNullable(siteRequest_.getRequestVars().get(VAR_defaultZoneId)).orElse(siteRequest_.getConfig().getString(ComputateConfigKeys.SITE_ZONE)));
+	}
+
+	/**
+	 * Ignore: true
+	 **/
+	protected void _defaultTimeZone(Wrap<ZoneId> w) {
+		w.o(ZoneId.of(defaultZoneId));
+	}
+
+	protected void _defaultLocaleId(Wrap<String> w) {
+		w.o(Optional.ofNullable(siteRequest_.getRequestHeaders().get("Accept-Language")).map(acceptLanguage -> StringUtils.substringBefore(acceptLanguage, ",")).orElse(siteRequest_.getConfig().getString(ComputateConfigKeys.SITE_LOCALE)));
+	}
+
+	/**
+	 * Ignore: true
+	 **/
+	protected void _defaultLocale(Wrap<Locale> w) {
+		w.o(Locale.forLanguageTag(defaultLocaleId));
+	}
+
+	protected void _defaultRangeStats(Wrap<JsonObject> w) {
+	}
+
+	protected void _defaultRangeGap(Wrap<String> w) {
+	}
+
+	protected void _defaultRangeEnd(Wrap<ZonedDateTime> w) {
+	}
+
+	protected void _defaultRangeStart(Wrap<ZonedDateTime> w) {
+	}
+
+	protected void _defaultRangeVar(Wrap<String> w) {
+	}
+
+	protected void _defaultFacetSort(Wrap<String> w) {
+	}
+
+	protected void _defaultFacetLimit(Wrap<Integer> w) {
+	}
+
+	protected void _defaultFacetMinCount(Wrap<Integer> w) {
+	}
+
+	protected void _defaultPivotMinCount(Wrap<Integer> w) {
+	}
+
+	protected void _DEFAULT_MAP_LOCATION(Wrap<JsonObject> w) {
+	}
+
+	protected void _DEFAULT_MAP_ZOOM(Wrap<BigDecimal> w) {
+	}
+
+	protected void _defaultFieldListVars(List<String> l) {
+	}
+
+	protected void _defaultStatsVars(List<String> l) {
+	}
+
+	protected void _defaultPivotVars(List<String> l) {
 	}
 
 	/**

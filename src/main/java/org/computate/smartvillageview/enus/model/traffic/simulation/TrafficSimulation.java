@@ -76,9 +76,21 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
+	 * DisplayName: Floating Car Data file path
+	 * HtmlRow: 4
+	 * HtmlCell: 3
+	 * Facet: true
+	 */
+	protected void _fcdFilePath(Wrap<String> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
 	 * DisplayName: net file path
 	 * HtmlRow: 4
-	 * HtmlCell: 1
+	 * HtmlCell: 3
 	 * Facet: true
 	 */
 	protected void _netFilePath(Wrap<String> w) {
@@ -125,40 +137,16 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 
 	/**
 	 * {@inheritDoc}
-	 * DocValues: true
-	 * Persist: true
-	 * DisplayName: floating car data output geo-coordinates
-	 * Description: --fcd-output.geo Save the Floating Car Data using geo-coordinates (lon/lat)
-	 * HtmlRow: 6
-	 * HtmlCell: 1
-	 * Facet: true
-	 */
-	protected void _fcdOutputGeo(Wrap<Boolean> w) {
-		w.o(true);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * DocValues: true
-	 * Persist: true
 	 * DisplayName: TLS States paths
 	 * Description: The paths to all TLS States files
-	 * HtmlRow: 6
-	 * HtmlCell: 2
-	 * Facet: true
 	 */
 	protected void _tlsStatesPaths(List<String> l) {
 	}
 
 	/**
 	 * {@inheritDoc}
-	 * DocValues: true
-	 * Persist: true
 	 * DisplayName: additional file paths
 	 * Description: The paths to all the additional SUMO config files
-	 * HtmlRow: 6
-	 * HtmlCell: 2
-	 * Facet: true
 	 */
 	protected void _additionalFilePaths(List<String> l) {
 	}

@@ -35,7 +35,6 @@ import java.math.RoundingMode;
 import java.util.Map;
 import java.lang.String;
 import java.math.BigDecimal;
-import java.lang.Boolean;
 import io.vertx.core.json.JsonArray;
 import org.computate.search.wrap.Wrap;
 import io.vertx.core.Promise;
@@ -249,6 +248,59 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 
 	public String sqlSumocfgPath() {
 		return sumocfgPath;
+	}
+
+	/////////////////
+	// fcdFilePath //
+	/////////////////
+
+	/**	 The entity fcdFilePath
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String fcdFilePath;
+
+	/**	<br> The entity fcdFilePath
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation&fq=entiteVar_enUS_indexed_string:fcdFilePath">Find the entity fcdFilePath in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _fcdFilePath(Wrap<String> w);
+
+	public String getFcdFilePath() {
+		return fcdFilePath;
+	}
+	public void setFcdFilePath(String o) {
+		this.fcdFilePath = TrafficSimulation.staticSetFcdFilePath(siteRequest_, o);
+	}
+	public static String staticSetFcdFilePath(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected TrafficSimulation fcdFilePathInit() {
+		Wrap<String> fcdFilePathWrap = new Wrap<String>().var("fcdFilePath");
+		if(fcdFilePath == null) {
+			_fcdFilePath(fcdFilePathWrap);
+			setFcdFilePath(fcdFilePathWrap.o);
+		}
+		return (TrafficSimulation)this;
+	}
+
+	public static String staticSearchFcdFilePath(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrFcdFilePath(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqFcdFilePath(SiteRequestEnUS siteRequest_, String o) {
+		return TrafficSimulation.staticSearchStrFcdFilePath(siteRequest_, TrafficSimulation.staticSearchFcdFilePath(siteRequest_, TrafficSimulation.staticSetFcdFilePath(siteRequest_, o)));
+	}
+
+	public String sqlFcdFilePath() {
+		return fcdFilePath;
 	}
 
 	/////////////////
@@ -514,64 +566,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		return stepSeconds;
 	}
 
-	//////////////////
-	// fcdOutputGeo //
-	//////////////////
-
-	/**	 The entity fcdOutputGeo
-	 *	 is defined as null before being initialized. 
-	 */
-	@JsonProperty
-	@JsonInclude(Include.NON_NULL)
-	protected Boolean fcdOutputGeo;
-
-	/**	<br> The entity fcdOutputGeo
-	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation&fq=entiteVar_enUS_indexed_string:fcdOutputGeo">Find the entity fcdOutputGeo in Solr</a>
-	 * <br>
-	 * @param w is for wrapping a value to assign to this entity during initialization. 
-	 **/
-	protected abstract void _fcdOutputGeo(Wrap<Boolean> w);
-
-	public Boolean getFcdOutputGeo() {
-		return fcdOutputGeo;
-	}
-
-	public void setFcdOutputGeo(Boolean fcdOutputGeo) {
-		this.fcdOutputGeo = fcdOutputGeo;
-	}
-	@JsonIgnore
-	public void setFcdOutputGeo(String o) {
-		this.fcdOutputGeo = TrafficSimulation.staticSetFcdOutputGeo(siteRequest_, o);
-	}
-	public static Boolean staticSetFcdOutputGeo(SiteRequestEnUS siteRequest_, String o) {
-		return Boolean.parseBoolean(o);
-	}
-	protected TrafficSimulation fcdOutputGeoInit() {
-		Wrap<Boolean> fcdOutputGeoWrap = new Wrap<Boolean>().var("fcdOutputGeo");
-		if(fcdOutputGeo == null) {
-			_fcdOutputGeo(fcdOutputGeoWrap);
-			setFcdOutputGeo(fcdOutputGeoWrap.o);
-		}
-		return (TrafficSimulation)this;
-	}
-
-	public static Boolean staticSearchFcdOutputGeo(SiteRequestEnUS siteRequest_, Boolean o) {
-		return o;
-	}
-
-	public static String staticSearchStrFcdOutputGeo(SiteRequestEnUS siteRequest_, Boolean o) {
-		return o == null ? null : o.toString();
-	}
-
-	public static String staticSearchFqFcdOutputGeo(SiteRequestEnUS siteRequest_, String o) {
-		return TrafficSimulation.staticSearchStrFcdOutputGeo(siteRequest_, TrafficSimulation.staticSearchFcdOutputGeo(siteRequest_, TrafficSimulation.staticSetFcdOutputGeo(siteRequest_, o)));
-	}
-
-	public Boolean sqlFcdOutputGeo() {
-		return fcdOutputGeo;
-	}
-
 	////////////////////
 	// tlsStatesPaths //
 	////////////////////
@@ -636,10 +630,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 
 	public static String staticSearchFqTlsStatesPaths(SiteRequestEnUS siteRequest_, String o) {
 		return TrafficSimulation.staticSearchStrTlsStatesPaths(siteRequest_, TrafficSimulation.staticSearchTlsStatesPaths(siteRequest_, TrafficSimulation.staticSetTlsStatesPaths(siteRequest_, o)));
-	}
-
-	public List<String> sqlTlsStatesPaths() {
-		return tlsStatesPaths;
 	}
 
 	/////////////////////////
@@ -708,10 +698,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		return TrafficSimulation.staticSearchStrAdditionalFilePaths(siteRequest_, TrafficSimulation.staticSearchAdditionalFilePaths(siteRequest_, TrafficSimulation.staticSetAdditionalFilePaths(siteRequest_, o)));
 	}
 
-	public List<String> sqlAdditionalFilePaths() {
-		return additionalFilePaths;
-	}
-
 	//////////////
 	// initDeep //
 	//////////////
@@ -743,11 +729,11 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			try {
 				simulationNameInit();
 				sumocfgPathInit();
+				fcdFilePathInit();
 				netFilePathInit();
 				startSecondsInit();
 				endSecondsInit();
 				stepSecondsInit();
-				fcdOutputGeoInit();
 				tlsStatesPathsInit();
 				additionalFilePathsInit();
 				promise2.complete();
@@ -807,6 +793,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 				return oTrafficSimulation.simulationName;
 			case "sumocfgPath":
 				return oTrafficSimulation.sumocfgPath;
+			case "fcdFilePath":
+				return oTrafficSimulation.fcdFilePath;
 			case "netFilePath":
 				return oTrafficSimulation.netFilePath;
 			case "startSeconds":
@@ -815,8 +803,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 				return oTrafficSimulation.endSeconds;
 			case "stepSeconds":
 				return oTrafficSimulation.stepSeconds;
-			case "fcdOutputGeo":
-				return oTrafficSimulation.fcdOutputGeo;
 			case "tlsStatesPaths":
 				return oTrafficSimulation.tlsStatesPaths;
 			case "additionalFilePaths":
@@ -864,6 +850,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return TrafficSimulation.staticSetSimulationName(siteRequest_, o);
 		case "sumocfgPath":
 			return TrafficSimulation.staticSetSumocfgPath(siteRequest_, o);
+		case "fcdFilePath":
+			return TrafficSimulation.staticSetFcdFilePath(siteRequest_, o);
 		case "netFilePath":
 			return TrafficSimulation.staticSetNetFilePath(siteRequest_, o);
 		case "startSeconds":
@@ -872,8 +860,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return TrafficSimulation.staticSetEndSeconds(siteRequest_, o);
 		case "stepSeconds":
 			return TrafficSimulation.staticSetStepSeconds(siteRequest_, o);
-		case "fcdOutputGeo":
-			return TrafficSimulation.staticSetFcdOutputGeo(siteRequest_, o);
 		case "tlsStatesPaths":
 			return TrafficSimulation.staticSetTlsStatesPaths(siteRequest_, o);
 		case "additionalFilePaths":
@@ -896,6 +882,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return TrafficSimulation.staticSearchSimulationName(siteRequest_, (String)o);
 		case "sumocfgPath":
 			return TrafficSimulation.staticSearchSumocfgPath(siteRequest_, (String)o);
+		case "fcdFilePath":
+			return TrafficSimulation.staticSearchFcdFilePath(siteRequest_, (String)o);
 		case "netFilePath":
 			return TrafficSimulation.staticSearchNetFilePath(siteRequest_, (String)o);
 		case "startSeconds":
@@ -904,8 +892,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return TrafficSimulation.staticSearchEndSeconds(siteRequest_, (BigDecimal)o);
 		case "stepSeconds":
 			return TrafficSimulation.staticSearchStepSeconds(siteRequest_, (BigDecimal)o);
-		case "fcdOutputGeo":
-			return TrafficSimulation.staticSearchFcdOutputGeo(siteRequest_, (Boolean)o);
 		case "tlsStatesPaths":
 			return TrafficSimulation.staticSearchTlsStatesPaths(siteRequest_, (String)o);
 		case "additionalFilePaths":
@@ -928,6 +914,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return TrafficSimulation.staticSearchStrSimulationName(siteRequest_, (String)o);
 		case "sumocfgPath":
 			return TrafficSimulation.staticSearchStrSumocfgPath(siteRequest_, (String)o);
+		case "fcdFilePath":
+			return TrafficSimulation.staticSearchStrFcdFilePath(siteRequest_, (String)o);
 		case "netFilePath":
 			return TrafficSimulation.staticSearchStrNetFilePath(siteRequest_, (String)o);
 		case "startSeconds":
@@ -936,8 +924,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return TrafficSimulation.staticSearchStrEndSeconds(siteRequest_, (Double)o);
 		case "stepSeconds":
 			return TrafficSimulation.staticSearchStrStepSeconds(siteRequest_, (Double)o);
-		case "fcdOutputGeo":
-			return TrafficSimulation.staticSearchStrFcdOutputGeo(siteRequest_, (Boolean)o);
 		case "tlsStatesPaths":
 			return TrafficSimulation.staticSearchStrTlsStatesPaths(siteRequest_, (String)o);
 		case "additionalFilePaths":
@@ -960,6 +946,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return TrafficSimulation.staticSearchFqSimulationName(siteRequest_, o);
 		case "sumocfgPath":
 			return TrafficSimulation.staticSearchFqSumocfgPath(siteRequest_, o);
+		case "fcdFilePath":
+			return TrafficSimulation.staticSearchFqFcdFilePath(siteRequest_, o);
 		case "netFilePath":
 			return TrafficSimulation.staticSearchFqNetFilePath(siteRequest_, o);
 		case "startSeconds":
@@ -968,8 +956,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return TrafficSimulation.staticSearchFqEndSeconds(siteRequest_, o);
 		case "stepSeconds":
 			return TrafficSimulation.staticSearchFqStepSeconds(siteRequest_, o);
-		case "fcdOutputGeo":
-			return TrafficSimulation.staticSearchFqFcdOutputGeo(siteRequest_, o);
 		case "tlsStatesPaths":
 			return TrafficSimulation.staticSearchFqTlsStatesPaths(siteRequest_, o);
 		case "additionalFilePaths":
@@ -1010,6 +996,11 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 					setSumocfgPath((String)val);
 				saves.add("sumocfgPath");
 				return val;
+			case "fcdfilepath":
+				if(val instanceof String)
+					setFcdFilePath((String)val);
+				saves.add("fcdFilePath");
+				return val;
 			case "netfilepath":
 				if(val instanceof String)
 					setNetFilePath((String)val);
@@ -1035,29 +1026,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 				else if(val instanceof Number)
 					setStepSeconds(new BigDecimal(((Number)val).doubleValue()));
 				saves.add("stepSeconds");
-				return val;
-			case "fcdoutputgeo":
-				if(val instanceof Boolean)
-					setFcdOutputGeo((Boolean)val);
-				else if(val instanceof String)
-					setFcdOutputGeo((String)val);
-				saves.add("fcdOutputGeo");
-				return val;
-			case "tlsstatespaths":
-				if(val instanceof List<?>)
-					((List<String>)val).stream().forEach(v -> addTlsStatesPaths(v));
-				else if(val instanceof JsonArray)
-					((JsonArray)val).stream().forEach(v -> addTlsStatesPaths(v.toString()));
-				if(!saves.contains("tlsStatesPaths"))
-					saves.add("tlsStatesPaths");
-				return val;
-			case "additionalfilepaths":
-				if(val instanceof List<?>)
-					((List<String>)val).stream().forEach(v -> addAdditionalFilePaths(v));
-				else if(val instanceof JsonArray)
-					((JsonArray)val).stream().forEach(v -> addAdditionalFilePaths(v.toString()));
-				if(!saves.contains("additionalFilePaths"))
-					saves.add("additionalFilePaths");
 				return val;
 			default:
 				return super.persistBaseModel(var, val);
@@ -1087,6 +1055,9 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		if(sumocfgPath != null) {
 			doc.put("sumocfgPath_docvalues_string", sumocfgPath);
 		}
+		if(fcdFilePath != null) {
+			doc.put("fcdFilePath_docvalues_string", fcdFilePath);
+		}
 		if(netFilePath != null) {
 			doc.put("netFilePath_docvalues_string", netFilePath);
 		}
@@ -1099,23 +1070,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		if(stepSeconds != null) {
 			doc.put("stepSeconds_docvalues_double", stepSeconds.doubleValue());
 		}
-		if(fcdOutputGeo != null) {
-			doc.put("fcdOutputGeo_docvalues_boolean", fcdOutputGeo);
-		}
-		if(tlsStatesPaths != null) {
-			JsonArray l = new JsonArray();
-			doc.put("tlsStatesPaths_docvalues_strings", l);
-			for(String o : tlsStatesPaths) {
-				l.add(o);
-			}
-		}
-		if(additionalFilePaths != null) {
-			JsonArray l = new JsonArray();
-			doc.put("additionalFilePaths_docvalues_strings", l);
-			for(String o : additionalFilePaths) {
-				l.add(o);
-			}
-		}
 		super.indexBaseModel(doc);
 
 	}
@@ -1126,6 +1080,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 				return "simulationName_docvalues_string";
 			case "sumocfgPath":
 				return "sumocfgPath_docvalues_string";
+			case "fcdFilePath":
+				return "fcdFilePath_docvalues_string";
 			case "netFilePath":
 				return "netFilePath_docvalues_string";
 			case "startSeconds":
@@ -1134,12 +1090,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 				return "endSeconds_docvalues_double";
 			case "stepSeconds":
 				return "stepSeconds_docvalues_double";
-			case "fcdOutputGeo":
-				return "fcdOutputGeo_docvalues_boolean";
-			case "tlsStatesPaths":
-				return "tlsStatesPaths_docvalues_strings";
-			case "additionalFilePaths":
-				return "additionalFilePaths_docvalues_strings";
 			default:
 				return BaseModel.varStoredBaseModel(entityVar);
 		}
@@ -1151,6 +1101,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 				return "simulationName_docvalues_string";
 			case "sumocfgPath":
 				return "sumocfgPath_docvalues_string";
+			case "fcdFilePath":
+				return "fcdFilePath_docvalues_string";
 			case "netFilePath":
 				return "netFilePath_docvalues_string";
 			case "startSeconds":
@@ -1159,12 +1111,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 				return "endSeconds_docvalues_double";
 			case "stepSeconds":
 				return "stepSeconds_docvalues_double";
-			case "fcdOutputGeo":
-				return "fcdOutputGeo_docvalues_boolean";
-			case "tlsStatesPaths":
-				return "tlsStatesPaths_docvalues_strings";
-			case "additionalFilePaths":
-				return "additionalFilePaths_docvalues_strings";
 			default:
 				return BaseModel.varIndexedBaseModel(entityVar);
 		}
@@ -1176,6 +1122,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 				return "simulationName";
 			case "sumocfgPath_docvalues_string":
 				return "sumocfgPath";
+			case "fcdFilePath_docvalues_string":
+				return "fcdFilePath";
 			case "netFilePath_docvalues_string":
 				return "netFilePath";
 			case "startSeconds_docvalues_double":
@@ -1184,12 +1132,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 				return "endSeconds";
 			case "stepSeconds_docvalues_double":
 				return "stepSeconds";
-			case "fcdOutputGeo_docvalues_boolean":
-				return "fcdOutputGeo";
-			case "tlsStatesPaths_docvalues_strings":
-				return "tlsStatesPaths";
-			case "additionalFilePaths_docvalues_strings":
-				return "additionalFilePaths";
 			default:
 				return BaseModel.searchVarBaseModel(searchVar);
 		}
@@ -1221,17 +1163,11 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 
 		oTrafficSimulation.setSimulationName(Optional.ofNullable(doc.get("simulationName_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oTrafficSimulation.setSumocfgPath(Optional.ofNullable(doc.get("sumocfgPath_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oTrafficSimulation.setFcdFilePath(Optional.ofNullable(doc.get("fcdFilePath_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oTrafficSimulation.setNetFilePath(Optional.ofNullable(doc.get("netFilePath_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oTrafficSimulation.setStartSeconds(Optional.ofNullable(doc.get("startSeconds_docvalues_double")).map(v -> v.toString()).orElse(null));
 		oTrafficSimulation.setEndSeconds(Optional.ofNullable(doc.get("endSeconds_docvalues_double")).map(v -> v.toString()).orElse(null));
 		oTrafficSimulation.setStepSeconds(Optional.ofNullable(doc.get("stepSeconds_docvalues_double")).map(v -> v.toString()).orElse(null));
-		oTrafficSimulation.setFcdOutputGeo(Optional.ofNullable(doc.get("fcdOutputGeo_docvalues_boolean")).map(v -> v.toString()).orElse(null));
-		Optional.ofNullable((List<?>)doc.get("tlsStatesPaths_docvalues_strings")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
-			oTrafficSimulation.addTlsStatesPaths(v.toString());
-		});
-		Optional.ofNullable((List<?>)doc.get("additionalFilePaths_docvalues_strings")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
-			oTrafficSimulation.addAdditionalFilePaths(v.toString());
-		});
 
 		super.storeBaseModel(doc);
 	}
@@ -1249,6 +1185,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 				apiRequest.addVars("simulationName");
 			if(!Objects.equals(sumocfgPath, original.getSumocfgPath()))
 				apiRequest.addVars("sumocfgPath");
+			if(!Objects.equals(fcdFilePath, original.getFcdFilePath()))
+				apiRequest.addVars("fcdFilePath");
 			if(!Objects.equals(netFilePath, original.getNetFilePath()))
 				apiRequest.addVars("netFilePath");
 			if(!Objects.equals(startSeconds, original.getStartSeconds()))
@@ -1257,12 +1195,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 				apiRequest.addVars("endSeconds");
 			if(!Objects.equals(stepSeconds, original.getStepSeconds()))
 				apiRequest.addVars("stepSeconds");
-			if(!Objects.equals(fcdOutputGeo, original.getFcdOutputGeo()))
-				apiRequest.addVars("fcdOutputGeo");
-			if(!Objects.equals(tlsStatesPaths, original.getTlsStatesPaths()))
-				apiRequest.addVars("tlsStatesPaths");
-			if(!Objects.equals(additionalFilePaths, original.getAdditionalFilePaths()))
-				apiRequest.addVars("additionalFilePaths");
 			super.apiRequestBaseModel();
 		}
 	}
@@ -1276,24 +1208,22 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		sb.append(super.toString());
 		sb.append(Optional.ofNullable(simulationName).map(v -> "simulationName: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(sumocfgPath).map(v -> "sumocfgPath: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(fcdFilePath).map(v -> "fcdFilePath: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(netFilePath).map(v -> "netFilePath: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(startSeconds).map(v -> "startSeconds: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(endSeconds).map(v -> "endSeconds: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(stepSeconds).map(v -> "stepSeconds: " + v + "\n").orElse(""));
-		sb.append(Optional.ofNullable(fcdOutputGeo).map(v -> "fcdOutputGeo: " + v + "\n").orElse(""));
-		sb.append(Optional.ofNullable(tlsStatesPaths).map(v -> "tlsStatesPaths: " + v + "\n").orElse(""));
-		sb.append(Optional.ofNullable(additionalFilePaths).map(v -> "additionalFilePaths: " + v + "\n").orElse(""));
 		return sb.toString();
 	}
 
 	public static final String CLASS_SIMPLE_NAME = "TrafficSimulation";
 	public static final String VAR_simulationName = "simulationName";
 	public static final String VAR_sumocfgPath = "sumocfgPath";
+	public static final String VAR_fcdFilePath = "fcdFilePath";
 	public static final String VAR_netFilePath = "netFilePath";
 	public static final String VAR_startSeconds = "startSeconds";
 	public static final String VAR_endSeconds = "endSeconds";
 	public static final String VAR_stepSeconds = "stepSeconds";
-	public static final String VAR_fcdOutputGeo = "fcdOutputGeo";
 	public static final String VAR_tlsStatesPaths = "tlsStatesPaths";
 	public static final String VAR_additionalFilePaths = "additionalFilePaths";
 
@@ -1311,13 +1241,11 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	public static List<String> varsFqTrafficSimulation(List<String> vars) {
 		vars.add(VAR_simulationName);
 		vars.add(VAR_sumocfgPath);
+		vars.add(VAR_fcdFilePath);
 		vars.add(VAR_netFilePath);
 		vars.add(VAR_startSeconds);
 		vars.add(VAR_endSeconds);
 		vars.add(VAR_stepSeconds);
-		vars.add(VAR_fcdOutputGeo);
-		vars.add(VAR_tlsStatesPaths);
-		vars.add(VAR_additionalFilePaths);
 		BaseModel.varsFqBaseModel(vars);
 		return vars;
 	}
@@ -1335,11 +1263,11 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 
 	public static final String DISPLAY_NAME_simulationName = "simulation name";
 	public static final String DISPLAY_NAME_sumocfgPath = "sumocfg path";
+	public static final String DISPLAY_NAME_fcdFilePath = "Floating Car Data file path";
 	public static final String DISPLAY_NAME_netFilePath = "net file path";
 	public static final String DISPLAY_NAME_startSeconds = "start seconds";
 	public static final String DISPLAY_NAME_endSeconds = "end seconds";
 	public static final String DISPLAY_NAME_stepSeconds = "step seconds";
-	public static final String DISPLAY_NAME_fcdOutputGeo = "floating car data output geo-coordinates";
 	public static final String DISPLAY_NAME_tlsStatesPaths = "TLS States paths";
 	public static final String DISPLAY_NAME_additionalFilePaths = "additional file paths";
 
@@ -1352,6 +1280,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return DISPLAY_NAME_simulationName;
 		case VAR_sumocfgPath:
 			return DISPLAY_NAME_sumocfgPath;
+		case VAR_fcdFilePath:
+			return DISPLAY_NAME_fcdFilePath;
 		case VAR_netFilePath:
 			return DISPLAY_NAME_netFilePath;
 		case VAR_startSeconds:
@@ -1360,8 +1290,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return DISPLAY_NAME_endSeconds;
 		case VAR_stepSeconds:
 			return DISPLAY_NAME_stepSeconds;
-		case VAR_fcdOutputGeo:
-			return DISPLAY_NAME_fcdOutputGeo;
 		case VAR_tlsStatesPaths:
 			return DISPLAY_NAME_tlsStatesPaths;
 		case VAR_additionalFilePaths:
@@ -1379,8 +1307,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return "-e, --end TIME Defines the end time in seconds; The simulation ends at this time";
 		case VAR_stepSeconds:
 			return "--step-length TIME Defines the step duration in seconds";
-		case VAR_fcdOutputGeo:
-			return "--fcd-output.geo Save the Floating Car Data using geo-coordinates (lon/lat)";
 		case VAR_tlsStatesPaths:
 			return "The paths to all TLS States files";
 		case VAR_additionalFilePaths:
@@ -1396,6 +1322,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return "String";
 		case VAR_sumocfgPath:
 			return "String";
+		case VAR_fcdFilePath:
+			return "String";
 		case VAR_netFilePath:
 			return "String";
 		case VAR_startSeconds:
@@ -1404,8 +1332,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return "BigDecimal";
 		case VAR_stepSeconds:
 			return "BigDecimal";
-		case VAR_fcdOutputGeo:
-			return "Boolean";
 		case VAR_tlsStatesPaths:
 			return "List";
 		case VAR_additionalFilePaths:
@@ -1428,6 +1354,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return 3;
 		case VAR_sumocfgPath:
 			return 4;
+		case VAR_fcdFilePath:
+			return 4;
 		case VAR_netFilePath:
 			return 4;
 		case VAR_startSeconds:
@@ -1436,12 +1364,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return 5;
 		case VAR_stepSeconds:
 			return 5;
-		case VAR_fcdOutputGeo:
-			return 6;
-		case VAR_tlsStatesPaths:
-			return 6;
-		case VAR_additionalFilePaths:
-			return 6;
 			default:
 				return BaseModel.htmlRowBaseModel(var);
 		}
@@ -1453,20 +1375,16 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return 1;
 		case VAR_sumocfgPath:
 			return 1;
+		case VAR_fcdFilePath:
+			return 3;
 		case VAR_netFilePath:
-			return 1;
+			return 3;
 		case VAR_startSeconds:
 			return 1;
 		case VAR_endSeconds:
 			return 2;
 		case VAR_stepSeconds:
 			return 3;
-		case VAR_fcdOutputGeo:
-			return 1;
-		case VAR_tlsStatesPaths:
-			return 2;
-		case VAR_additionalFilePaths:
-			return 2;
 			default:
 				return BaseModel.htmlCellBaseModel(var);
 		}
