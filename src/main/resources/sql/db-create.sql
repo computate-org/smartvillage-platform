@@ -38,7 +38,6 @@ ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS netFilePath text;
 ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS startSeconds decimal;
 ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS endSeconds decimal;
 ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS stepSeconds decimal;
-ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS fcdOutputGeo boolean;
 ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS pk bigserial primary key;
 ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS inheritPk text;
 ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS created timestamp with time zone;

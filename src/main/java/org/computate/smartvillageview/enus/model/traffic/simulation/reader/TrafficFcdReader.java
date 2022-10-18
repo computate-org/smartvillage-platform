@@ -394,7 +394,7 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 			if (found) {
 				String sumoAdditionalFileNames = m.group(1);
 				Arrays.asList(sumoAdditionalFileNames.split(",")).stream().forEach(sumoAdditionalFileName -> {
-					String additionalFilePath = Paths.get(Paths.get(trafficSimulation.getSumocfgPath()).getParent().toString(), sumoAdditionalFileName).toString();
+					String additionalFilePath = Paths.get(Paths.get(trafficSimulation.getSumocfgPath()).getParent().toString(), sumoAdditionalFileName).toAbsolutePath().toString();
 					trafficSimulation.addAdditionalFilePaths(additionalFilePath);
 				});
 			}
@@ -483,7 +483,7 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 			boolean found = m.find();
 			if (found) {
 				String tlsStateFileName = m.group(1);
-				String tlsStateFilePath = Paths.get(Paths.get(additionalFilePath).getParent().toString(), tlsStateFileName).toString();
+				String tlsStateFilePath = Paths.get(Paths.get(additionalFilePath).getParent().toString(), tlsStateFileName).toAbsolutePath().toString();
 				trafficSimulation.addTlsStatesPaths(tlsStateFilePath);
 			}
 			promise.complete(trafficSimulation);
@@ -560,7 +560,7 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 			boolean found = m.find();
 			if (found) {
 				String netFileName = m.group(1);
-				String netFilePath = Paths.get(Paths.get(trafficSimulation.getSumocfgPath()).getParent().toString(), netFileName).toString();
+				String netFilePath = Paths.get(Paths.get(trafficSimulation.getSumocfgPath()).getParent().toString(), netFileName).toAbsolutePath().toString();
 				trafficSimulation.setNetFilePath(netFilePath);
 				ApiRequest apiRequest = siteRequest.getApiRequest_();
 				vertx.fileSystem().open(netFilePath, new OpenOptions().setRead(true)).onSuccess(sumoNetAsyncFile -> {

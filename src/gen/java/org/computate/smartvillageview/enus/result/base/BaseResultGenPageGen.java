@@ -34,8 +34,6 @@ import org.computate.smartvillageview.enus.page.PageLayout;
 import org.computate.vertx.search.list.SearchList;
 import org.computate.smartvillageview.enus.result.base.BaseResult;
 import io.vertx.core.json.JsonArray;
-import org.computate.search.response.solr.SolrResponse.Stats;
-import org.computate.search.response.solr.SolrResponse.FacetCounts;
 import java.lang.Integer;
 import java.lang.String;
 import org.computate.search.wrap.Wrap;
@@ -146,82 +144,6 @@ public abstract class BaseResultGenPageGen<DEV> extends PageLayout {
 	}
 	protected BaseResultGenPage listBaseResultInit() {
 		_listBaseResult(listBaseResult);
-		return (BaseResultGenPage)this;
-	}
-
-	///////////
-	// stats //
-	///////////
-
-	/**	 The entity stats
-	 *	 is defined as null before being initialized. 
-	 */
-	@JsonProperty
-	@JsonInclude(Include.NON_NULL)
-	protected Stats stats;
-
-	/**	<br> The entity stats
-	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.result.base.BaseResultGenPage&fq=entiteVar_enUS_indexed_string:stats">Find the entity stats in Solr</a>
-	 * <br>
-	 * @param w is for wrapping a value to assign to this entity during initialization. 
-	 **/
-	protected abstract void _stats(Wrap<Stats> w);
-
-	public Stats getStats() {
-		return stats;
-	}
-
-	public void setStats(Stats stats) {
-		this.stats = stats;
-	}
-	public static Stats staticSetStats(SiteRequestEnUS siteRequest_, String o) {
-		return null;
-	}
-	protected BaseResultGenPage statsInit() {
-		Wrap<Stats> statsWrap = new Wrap<Stats>().var("stats");
-		if(stats == null) {
-			_stats(statsWrap);
-			setStats(statsWrap.o);
-		}
-		return (BaseResultGenPage)this;
-	}
-
-	/////////////////
-	// facetCounts //
-	/////////////////
-
-	/**	 The entity facetCounts
-	 *	 is defined as null before being initialized. 
-	 */
-	@JsonProperty
-	@JsonInclude(Include.NON_NULL)
-	protected FacetCounts facetCounts;
-
-	/**	<br> The entity facetCounts
-	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.result.base.BaseResultGenPage&fq=entiteVar_enUS_indexed_string:facetCounts">Find the entity facetCounts in Solr</a>
-	 * <br>
-	 * @param w is for wrapping a value to assign to this entity during initialization. 
-	 **/
-	protected abstract void _facetCounts(Wrap<FacetCounts> w);
-
-	public FacetCounts getFacetCounts() {
-		return facetCounts;
-	}
-
-	public void setFacetCounts(FacetCounts facetCounts) {
-		this.facetCounts = facetCounts;
-	}
-	public static FacetCounts staticSetFacetCounts(SiteRequestEnUS siteRequest_, String o) {
-		return null;
-	}
-	protected BaseResultGenPage facetCountsInit() {
-		Wrap<FacetCounts> facetCountsWrap = new Wrap<FacetCounts>().var("facetCounts");
-		if(facetCounts == null) {
-			_facetCounts(facetCountsWrap);
-			setFacetCounts(facetCountsWrap.o);
-		}
 		return (BaseResultGenPage)this;
 	}
 
@@ -400,8 +322,6 @@ public abstract class BaseResultGenPageGen<DEV> extends PageLayout {
 			try {
 				searchListBaseResult_Init();
 				listBaseResultInit();
-				statsInit();
-				facetCountsInit();
 				baseResultCountInit();
 				baseResult_Init();
 				idInit();
@@ -462,10 +382,6 @@ public abstract class BaseResultGenPageGen<DEV> extends PageLayout {
 				return oBaseResultGenPage.searchListBaseResult_;
 			case "listBaseResult":
 				return oBaseResultGenPage.listBaseResult;
-			case "stats":
-				return oBaseResultGenPage.stats;
-			case "facetCounts":
-				return oBaseResultGenPage.facetCounts;
 			case "baseResultCount":
 				return oBaseResultGenPage.baseResultCount;
 			case "baseResult_":
@@ -587,16 +503,12 @@ public abstract class BaseResultGenPageGen<DEV> extends PageLayout {
 	public static final String CLASS_SIMPLE_NAME = "BaseResultGenPage";
 	public static final String VAR_searchListBaseResult_ = "searchListBaseResult_";
 	public static final String VAR_listBaseResult = "listBaseResult";
-	public static final String VAR_stats = "stats";
-	public static final String VAR_facetCounts = "facetCounts";
 	public static final String VAR_baseResultCount = "baseResultCount";
 	public static final String VAR_baseResult_ = "baseResult_";
 	public static final String VAR_id = "id";
 
 	public static final String DISPLAY_NAME_searchListBaseResult_ = "";
 	public static final String DISPLAY_NAME_listBaseResult = "";
-	public static final String DISPLAY_NAME_stats = "";
-	public static final String DISPLAY_NAME_facetCounts = "";
 	public static final String DISPLAY_NAME_baseResultCount = "";
 	public static final String DISPLAY_NAME_baseResult_ = "";
 	public static final String DISPLAY_NAME_id = "";
@@ -610,10 +522,6 @@ public abstract class BaseResultGenPageGen<DEV> extends PageLayout {
 			return DISPLAY_NAME_searchListBaseResult_;
 		case VAR_listBaseResult:
 			return DISPLAY_NAME_listBaseResult;
-		case VAR_stats:
-			return DISPLAY_NAME_stats;
-		case VAR_facetCounts:
-			return DISPLAY_NAME_facetCounts;
 		case VAR_baseResultCount:
 			return DISPLAY_NAME_baseResultCount;
 		case VAR_baseResult_:

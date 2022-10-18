@@ -13305,8 +13305,6 @@ components:
                     type: string
                   stepSeconds:
                     type: string
-                  fcdOutputGeo:
-                    type: boolean
                   tlsStatesPaths:
                     type: array
                     items:
@@ -13368,13 +13366,6 @@ components:
               type: string
             removeAllStepSeconds:
               type: string
-            setFcdOutputGeo:
-              type: boolean
-              nullable: true
-            removeFcdOutputGeo:
-              type: boolean
-            removeAllFcdOutputGeo:
-              type: boolean
             setTlsStatesPaths:
               type: array
               nullable: true
@@ -13462,13 +13453,6 @@ components:
               type: string
             removeAllStepSeconds:
               type: string
-            setFcdOutputGeo:
-              type: boolean
-              nullable: true
-            removeFcdOutputGeo:
-              type: boolean
-            removeAllFcdOutputGeo:
-              type: boolean
             setTlsStatesPaths:
               type: array
               nullable: true
@@ -13521,8 +13505,6 @@ components:
               type: string
             stepSeconds:
               type: string
-            fcdOutputGeo:
-              type: boolean
             tlsStatesPaths:
               type: array
               items:
@@ -13549,8 +13531,6 @@ components:
               type: string
             stepSeconds:
               type: string
-            fcdOutputGeo:
-              type: boolean
             tlsStatesPaths:
               type: array
               items:
@@ -13577,8 +13557,6 @@ components:
               type: string
             stepSeconds:
               type: string
-            fcdOutputGeo:
-              type: boolean
             tlsStatesPaths:
               type: array
               items:
@@ -13605,8 +13583,6 @@ components:
               type: string
             stepSeconds:
               type: string
-            fcdOutputGeo:
-              type: boolean
             tlsStatesPaths:
               type: array
               items:
@@ -13633,8 +13609,6 @@ components:
               type: string
             stepSeconds:
               type: string
-            fcdOutputGeo:
-              type: boolean
             tlsStatesPaths:
               type: array
               items:
@@ -15381,6 +15355,10 @@ components:
               items:
                 type: object
                 properties:
+                  simulationName:
+                    type: string
+                  sumocfgPath:
+                    type: string
                   simulationKey:
                     type: string
                   timeStepId:
@@ -15401,6 +15379,10 @@ components:
       allOf:
         - type: object
           properties:
+            simulationName:
+              type: string
+            sumocfgPath:
+              type: string
             simulationKey:
               type: string
             timeStepId:

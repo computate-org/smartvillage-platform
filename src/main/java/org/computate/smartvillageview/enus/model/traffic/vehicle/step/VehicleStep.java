@@ -132,7 +132,7 @@ public class VehicleStep extends VehicleStepGen<MapResult> {
 		if(speed != null)
 			b.append(" ").append(speed).append("kph");
 		if(angle != null)
-			b.append(" ").append(angle).append("°").append(HeadingConverter.getHeading(angle));
+			b.append(" ").append(angle).append("\u00B0").append(HeadingConverter.getHeading(angle));
 //		if(slope != null)
 //			b.append(" ").append(slope).append("° slope");
 		w.o(b.toString().trim());

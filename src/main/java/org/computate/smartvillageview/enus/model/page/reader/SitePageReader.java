@@ -89,6 +89,7 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 	 */
 	public Future<Void> importDataSitePage() {
 		Promise<Void> promise = Promise.promise();
+		ZonedDateTime now = ZonedDateTime.now(ZoneId.of(config.getString(ConfigKeys.SITE_ZONE)));
 		String dynamicPagePath = config.getString(ConfigKeys.DYNAMIC_PAGE_PATH);
 		File pageDir = new File(Optional.ofNullable(dynamicPagePath).orElse(getClass().getClassLoader().getResource("page").getFile()));
 		String[] fileNames = pageDir.list(new PatternFilenameFilter("^.*.yml$"));
@@ -99,8 +100,28 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 			futures.add(importSitePage(yamlProcessor, Paths.get(pageDir.getAbsolutePath(), fileName).toString()));
 		}
 		CompositeFuture.all(futures).onSuccess(a -> {
-			LOG.info(String.format(importDataSitePageComplete, SitePage.CLASS_SIMPLE_NAME));
-			promise.complete();
+			String solrHostName = config.getString(ComputateConfigKeys.SOLR_HOST_NAME);
+			Integer solrPort = config.getInteger(ComputateConfigKeys.SOLR_PORT);
+			String solrCollection = config.getString(ComputateConfigKeys.SOLR_COLLECTION);
+			String solrRequestUri = String.format("/solr/%s/update%s", solrCollection, "?commitWithin=1000&overwrite=true&wt=json");
+			String deleteQuery = String.format("classSimpleName_docvalues_string:(%s %s) AND created_docvalues_date:[* TO %s]", SitePage.CLASS_SIMPLE_NAME, SiteHtm.CLASS_SIMPLE_NAME, SiteHtm.staticSearchStrCreated(null, SiteHtm.staticSearchCreated(null, now)));
+			String deleteXml = String.format("<delete><query>%s</query></delete>", deleteQuery);
+			webClient.post(solrPort, solrHostName, solrRequestUri)
+					.putHeader("Content-Type", "text/xml")
+					.sendBuffer(Buffer.buffer().appendString(deleteXml))
+					.onSuccess(d -> {
+				try {
+					LOG.info(String.format(importDataSitePageComplete, SitePage.CLASS_SIMPLE_NAME));
+					promise.complete();
+				} catch(Exception ex) {
+					LOG.error(String.format("Could not read response from Solr: http://%s:%s%s", solrHostName, solrPort, solrRequestUri), ex);
+					promise.fail(ex);
+				}
+			}).onFailure(ex -> {
+				LOG.error(String.format("Search failed. "), new RuntimeException(ex));
+				promise.fail(ex);
+			});
+
 		}).onFailure(ex -> {
 			LOG.error(String.format(importDataSitePageFail, SitePage.CLASS_SIMPLE_NAME), ex);
 			promise.fail(ex);
@@ -115,7 +136,6 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 	 */
 	private Future<Void> importSitePage(YamlProcessor yamlProcessor, String path) {
 		Promise<Void> promise = Promise.promise();
-		ZonedDateTime now = ZonedDateTime.now(ZoneId.of(config.getString(ConfigKeys.SITE_ZONE)));
 		vertx.fileSystem().readFile(path).onSuccess(buffer -> {
 			yamlProcessor.process(vertx, null, buffer).onSuccess(json -> {
 				try {
@@ -151,7 +171,8 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 					page.setObjectId(pageId);
 					page.setPageId(pageId);
 					page.setObjectTitle(json.getString("title"));
-					page.setCreated(json.getString("created"));
+					page.setCreated(ZonedDateTime.now(ZoneId.of(config.getString(ConfigKeys.SITE_ZONE))));
+					page.setModified(json.getString("created"));
 					page.setCourseNum(json.getInteger(SitePage.VAR_courseNum));
 					page.setLessonNum(json.getInteger(SitePage.VAR_lessonNum));
 					page.setAuthor(json.getString("author"));
@@ -206,27 +227,8 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 								JsonObject pageContext = new JsonObject().put("params", pageParams);
 								JsonObject pageRequest = new JsonObject().put("context", pageContext);
 								vertx.eventBus().request(String.format("smart-village-view-enUS-%s", SitePage.CLASS_SIMPLE_NAME), pageRequest, new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", SitePage.CLASS_SIMPLE_NAME))).onSuccess(c -> {
-									String solrHostName = config.getString(ComputateConfigKeys.SOLR_HOST_NAME);
-									Integer solrPort = config.getInteger(ComputateConfigKeys.SOLR_PORT);
-									String solrCollection = config.getString(ComputateConfigKeys.SOLR_COLLECTION);
-									String solrRequestUri = String.format("/solr/%s/update%s", solrCollection, "?commitWithin=1000&overwrite=true&wt=json");
-									String deleteQuery = String.format("classSimpleName_docvalues_string:%s AND created_docvalues_date:[* TO %s]", SiteHtm.CLASS_SIMPLE_NAME, SiteHtm.staticSearchStrCreated(null, SiteHtm.staticSearchCreated(null, now)));
-									String deleteXml = String.format("<delete><query>%s</query></delete>", deleteQuery);
-									webClient.post(solrPort, solrHostName, solrRequestUri)
-											.putHeader("Content-Type", "text/xml")
-											.sendBuffer(Buffer.buffer().appendString(deleteXml))
-											.onSuccess(d -> {
-										try {
-											LOG.info(String.format(importSitePageComplete, SitePage.CLASS_SIMPLE_NAME));
-											promise.complete();
-										} catch(Exception ex) {
-											LOG.error(String.format("Could not read response from Solr: http://%s:%s%s", solrHostName, solrPort, solrRequestUri), ex);
-											promise.fail(ex);
-										}
-									}).onFailure(ex -> {
-										LOG.error(String.format("Search failed. "), new RuntimeException(ex));
-										promise.fail(ex);
-									});
+									LOG.info(String.format(importSitePageComplete, SitePage.CLASS_SIMPLE_NAME));
+									promise.complete();
 								}).onFailure(ex -> {
 									LOG.error(String.format(importSitePageFail, SitePage.CLASS_SIMPLE_NAME), ex);
 									promise.fail(ex);

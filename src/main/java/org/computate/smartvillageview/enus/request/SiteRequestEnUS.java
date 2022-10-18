@@ -303,4 +303,12 @@ public class SiteRequestEnUS extends SiteRequestEnUSGen<Object> implements Compu
 	public <T extends ComputateSiteUser> T getSiteUser_(Class<T> clazz) {
 		return (T)siteUser_;
 	}
+
+	/**
+	 * Description: An implementation of the interface to set the site user object
+	 */
+	@Override
+	public <T extends ComputateSiteUser> void setSiteUser(T siteUser_) {
+		setSiteUser_((SiteUser)siteUser_);
+	}
 }

@@ -33,10 +33,10 @@ import java.util.Arrays;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.math.MathContext;
-import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections4.CollectionUtils;
 import java.util.Objects;
 import io.vertx.core.Promise;
-import org.computate.vertx.config.ComputateConfigKeys;
+import org.computate.smartvillageview.enus.config.ConfigKeys;
 import org.computate.search.response.solr.SolrResponse;
 import java.util.HashMap;
 import org.computate.search.tool.TimeTool;
@@ -55,128 +55,20 @@ public class BaseModelGenPage extends BaseModelGenPageGen<PageLayout> {
 	protected void _searchListBaseModel_(Wrap<SearchList<BaseModel>> w) {
 	}
 
+	@Override
 	protected void _pageResponse(Wrap<String> w) {
 		if(searchListBaseModel_ != null)
 			w.o(JsonObject.mapFrom(searchListBaseModel_.getResponse()).toString());
 	}
 
-	protected void _defaultFieldListVars(List<String> l) {
-		Optional.ofNullable(searchListBaseModel_.getFields()).orElse(Arrays.asList()).forEach(varStored -> {
-			String varStored2 = varStored;
-			if(StringUtils.contains(varStored2, "}"))
-				varStored2 = StringUtils.substringAfterLast(varStored2, "}");
-			String[] parts = varStored2.split(",");
-			for(String part : parts) {
-				if(StringUtils.isNotBlank(part)) {
-					String var = BaseModel.searchVarBaseModel(part);
-					if(StringUtils.isNotBlank(var))
-						l.add(var);
-				}
-			}
-		});
-	}
-
-	protected void _defaultStatsVars(List<String> l) {
-		Optional.ofNullable(searchListBaseModel_.getStatsFields()).orElse(Arrays.asList()).forEach(varIndexed -> {
-			String varIndexed2 = varIndexed;
-			if(StringUtils.contains(varIndexed2, "}"))
-				varIndexed2 = StringUtils.substringAfterLast(varIndexed2, "}");
-			String[] parts = varIndexed2.split(",");
-			for(String part : parts) {
-				if(StringUtils.isNotBlank(part)) {
-					String var = BaseModel.searchVarBaseModel(part);
-					if(StringUtils.isNotBlank(var))
-						l.add(var);
-				}
-			}
-		});
-	}
-
-	protected void _defaultPivotVars(List<String> l) {
-		Optional.ofNullable(searchListBaseModel_.getFacetPivots()).orElse(Arrays.asList()).forEach(facetPivot -> {
-			String facetPivot2 = facetPivot;
-			if(StringUtils.contains(facetPivot2, "}"))
-				facetPivot2 = StringUtils.substringAfterLast(facetPivot2, "}");
-			String[] parts = facetPivot2.split(",");
-			for(String part : parts) {
-				if(StringUtils.isNotBlank(part)) {
-					String var = BaseModel.searchVarBaseModel(part);
-					if(StringUtils.isNotBlank(var))
-						l.add(var);
-				}
-			}
-		});
-	}
-
-	/**
-	 * {@inheritDoc}
-	 **/
-	protected void _listBaseModel(JsonArray l) {
-		Optional.ofNullable(searchListBaseModel_).map(o -> o.getList()).orElse(Arrays.asList()).stream().map(o -> JsonObject.mapFrom(o)).forEach(o -> l.add(o));
-	}
-
+	@Override
 	protected void _stats(Wrap<SolrResponse.Stats> w) {
 		w.o(searchListBaseModel_.getResponse().getStats());
 	}
 
+	@Override
 	protected void _facetCounts(Wrap<SolrResponse.FacetCounts> w) {
 		w.o(searchListBaseModel_.getResponse().getFacetCounts());
-	}
-
-	protected void _baseModelCount(Wrap<Integer> w) {
-		w.o(searchListBaseModel_ == null ? 0 : searchListBaseModel_.size());
-	}
-
-	protected void _baseModel_(Wrap<BaseModel> w) {
-		if(baseModelCount == 1)
-			w.o(searchListBaseModel_.get(0));
-	}
-
-	protected void _pk(Wrap<Long> w) {
-		if(baseModelCount == 1)
-			w.o(baseModel_.getPk());
-	}
-
-	protected void _id(Wrap<String> w) {
-		if(baseModelCount == 1)
-			w.o(baseModel_.getId());
-	}
-
-	@Override
-	protected void _promiseBefore(Promise<Void> promise) {
-		promise.complete();
-	}
-
-	@Override
-	protected void _classSimpleName(Wrap<String> w) {
-		w.o("BaseModel");
-	}
-
-	@Override
-	protected void _pageTitle(Wrap<String> c) {
-		if(baseModel_ != null && baseModel_.getObjectTitle() != null)
-			c.o(baseModel_.getObjectTitle());
-		else if(baseModel_ != null)
-			c.o("");
-		else if(searchListBaseModel_ == null || baseModelCount == 0)
-			c.o("");
-	}
-
-	@Override
-	protected void _pageUri(Wrap<String> c) {
-		c.o("");
-	}
-
-	@Override
-	protected void _apiUri(Wrap<String> c) {
-		c.o("");
-	}
-
-	@Override
-	protected void _roles(List<String> l) {
-		if(siteRequest_ != null) {
-			l.addAll(Stream.concat(siteRequest_.getUserResourceRoles().stream(), siteRequest_.getUserRealmRoles().stream()).distinct().collect(Collectors.toList()));
-		}
 	}
 
 	@Override
@@ -246,7 +138,7 @@ public class BaseModelGenPage extends BaseModelGenPageGen<PageLayout> {
 			json.put("var", var);
 			json.put("varStored", varStored);
 			json.put("varIndexed", varIndexed);
-					String type = StringUtils.substringAfterLast(varIndexed, "_");
+			String type = StringUtils.substringAfterLast(varIndexed, "_");
 			json.put("displayName", Optional.ofNullable(BaseModel.displayNameBaseModel(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
 			json.put("classSimpleName", Optional.ofNullable(BaseModel.classSimpleNameBaseModel(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
 			json.put("val", searchListBaseModel_.getRequest().getFilterQueries().stream().filter(fq -> fq.startsWith(BaseModel.varIndexedBaseModel(var) + ":")).findFirst().map(s -> StringUtils.substringAfter(s, ":")).orElse(null));
@@ -265,6 +157,10 @@ public class BaseModelGenPage extends BaseModelGenPageGen<PageLayout> {
 			});
 			if(defaultFieldListVars.contains(var)) {
 				json.put("fieldList", true);
+			}
+			if(StringUtils.equalsAny(type, "date")) {
+				json.put("enableCalendar", true);
+				setDefaultRangeStats(json);
 			}
 			json.put("enableStats", !StringUtils.equalsAny(type, "boolean", "location"));
 			if(defaultStatsVars.contains(var)) {
@@ -350,6 +246,120 @@ public class BaseModelGenPage extends BaseModelGenPageGen<PageLayout> {
 			sorts.add(new JsonObject().put("var", sort1).put("order", StringUtils.substringAfter(sort, " ")).put("displayName", BaseModel.displayNameForClass(sort1)));
 		}
 		query.put("sort", sorts);
+	}
+
+	@Override
+	protected void _defaultFieldListVars(List<String> l) {
+		Optional.ofNullable(searchListBaseModel_.getFields()).orElse(Arrays.asList()).forEach(varStored -> {
+			String varStored2 = varStored;
+			if(StringUtils.contains(varStored2, "}"))
+				varStored2 = StringUtils.substringAfterLast(varStored2, "}");
+			String[] parts = varStored2.split(",");
+			for(String part : parts) {
+				if(StringUtils.isNotBlank(part)) {
+					String var = BaseModel.searchVarBaseModel(part);
+					if(StringUtils.isNotBlank(var))
+						l.add(var);
+				}
+			}
+		});
+	}
+
+	@Override
+	protected void _defaultStatsVars(List<String> l) {
+		Optional.ofNullable(searchListBaseModel_.getStatsFields()).orElse(Arrays.asList()).forEach(varIndexed -> {
+			String varIndexed2 = varIndexed;
+			if(StringUtils.contains(varIndexed2, "}"))
+				varIndexed2 = StringUtils.substringAfterLast(varIndexed2, "}");
+			String[] parts = varIndexed2.split(",");
+			for(String part : parts) {
+				if(StringUtils.isNotBlank(part)) {
+					String var = BaseModel.searchVarBaseModel(part);
+					if(StringUtils.isNotBlank(var))
+						l.add(var);
+				}
+			}
+		});
+	}
+
+	@Override
+	protected void _defaultPivotVars(List<String> l) {
+		Optional.ofNullable(searchListBaseModel_.getFacetPivots()).orElse(Arrays.asList()).forEach(facetPivot -> {
+			String facetPivot2 = facetPivot;
+			if(StringUtils.contains(facetPivot2, "}"))
+				facetPivot2 = StringUtils.substringAfterLast(facetPivot2, "}");
+			String[] parts = facetPivot2.split(",");
+			for(String part : parts) {
+				if(StringUtils.isNotBlank(part)) {
+					String var = BaseModel.searchVarBaseModel(part);
+					if(StringUtils.isNotBlank(var))
+						l.add(var);
+				}
+			}
+		});
+	}
+
+	/**
+	 * {@inheritDoc}
+	 **/
+	protected void _listBaseModel(JsonArray l) {
+		Optional.ofNullable(searchListBaseModel_).map(o -> o.getList()).orElse(Arrays.asList()).stream().map(o -> JsonObject.mapFrom(o)).forEach(o -> l.add(o));
+	}
+
+	protected void _baseModelCount(Wrap<Integer> w) {
+		w.o(searchListBaseModel_ == null ? 0 : searchListBaseModel_.size());
+	}
+
+	protected void _baseModel_(Wrap<BaseModel> w) {
+		if(baseModelCount == 1)
+			w.o(searchListBaseModel_.get(0));
+	}
+
+	protected void _pk(Wrap<Long> w) {
+		if(baseModelCount == 1)
+			w.o(baseModel_.getPk());
+	}
+
+	protected void _id(Wrap<String> w) {
+		if(baseModelCount == 1)
+			w.o(baseModel_.getId());
+	}
+
+	@Override
+	protected void _promiseBefore(Promise<Void> promise) {
+		promise.complete();
+	}
+
+	@Override
+	protected void _classSimpleName(Wrap<String> w) {
+		w.o("BaseModel");
+	}
+
+	@Override
+	protected void _pageTitle(Wrap<String> c) {
+		if(baseModel_ != null && baseModel_.getObjectTitle() != null)
+			c.o(baseModel_.getObjectTitle());
+		else if(baseModel_ != null)
+			c.o("");
+		else if(searchListBaseModel_ == null || baseModelCount == 0)
+			c.o("");
+	}
+
+	@Override
+	protected void _pageUri(Wrap<String> c) {
+		c.o("");
+	}
+
+	@Override
+	protected void _apiUri(Wrap<String> c) {
+		c.o("");
+	}
+
+	@Override
+	protected void _roles(List<String> l) {
+		if(siteRequest_ != null) {
+			l.addAll(Stream.concat(siteRequest_.getUserResourceRoles().stream(), siteRequest_.getUserRealmRoles().stream()).distinct().collect(Collectors.toList()));
+		}
 	}
 
 	@Override
