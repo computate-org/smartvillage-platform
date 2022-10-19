@@ -1,7 +1,7 @@
 package org.computate.smartvillageview.enus.model.iotnode;
 
 import org.computate.smartvillageview.enus.page.PageLayout;
-import org.computate.smartvillageview.enus.model.base.BaseModelPage;
+import org.computate.smartvillageview.enus.result.map.MapResultPage;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.smartvillageview.enus.model.user.SiteUser;
 import java.io.IOException;
@@ -14,6 +14,8 @@ import java.time.LocalTime;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Locale;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.api.service.ServiceRequest;
@@ -43,7 +45,7 @@ import java.time.ZoneId;
 /**
  * Translate: false
  **/
-public class IotNodeGenPage extends IotNodeGenPageGen<BaseModelPage> {
+public class IotNodeGenPage extends IotNodeGenPageGen<MapResultPage> {
 
 	/**
 	 * {@inheritDoc}
@@ -155,7 +157,29 @@ public class IotNodeGenPage extends IotNodeGenPageGen<BaseModelPage> {
 			if(defaultFieldListVars.contains(var)) {
 				json.put("fieldList", true);
 			}
-			if(StringUtils.equalsAny(type, "date")) {
+			if(StringUtils.equalsAny(type, "date") && json.containsKey("stats")) {
+				JsonObject stats = json.getJsonObject("stats");
+				Instant min = Instant.parse(stats.getString("min"));
+				Instant max = Instant.parse(stats.getString("max"));
+				Duration duration = Duration.between(min, max);
+				String gap = "DAY";
+				if(duration.toDays() >= 365)
+					gap = "YEAR";
+				else if(duration.toDays() >= 28)
+					gap = "MONTH";
+				else if(duration.toDays() >= 1)
+					gap = "DAY";
+				else if(duration.toHours() >= 1)
+					gap = "HOUR";
+				else if(duration.toMinutes() >= 1)
+					gap = "MINUTE";
+				else if(duration.toMillis() >= 1000)
+					gap = "SECOND";
+				else if(duration.toMillis() >= 1)
+					gap = "MILLI";
+				json.put("defaultRangeGap", String.format("+1%s", gap));
+				json.put("defaultRangeEnd", stats.getString("max"));
+				json.put("defaultRangeStart", stats.getString("min"));
 				json.put("enableCalendar", true);
 				setDefaultRangeStats(json);
 			}
@@ -273,22 +297,22 @@ public class IotNodeGenPage extends IotNodeGenPageGen<BaseModelPage> {
 
 	@Override
 	protected void _defaultRangeGap(Wrap<String> w) {
-		w.o(Optional.ofNullable(searchListIotNode_.getFacetRangeGap()).orElse("+1DAY"));
+		w.o(Optional.ofNullable(searchListIotNode_.getFacetRangeGap()).orElse(Optional.ofNullable(defaultRangeStats).map(s -> s.getString("defaultRangeGap")).orElse("+1DAY")));
 	}
 
 	@Override
 	protected void _defaultRangeEnd(Wrap<ZonedDateTime> w) {
-		w.o(Optional.ofNullable(searchListIotNode_.getFacetRangeEnd()).map(s -> TimeTool.parseZonedDateTime(defaultTimeZone, s)).orElse(ZonedDateTime.now(defaultTimeZone).toLocalDate().atStartOfDay(defaultTimeZone).plusDays(1)));
+		w.o(Optional.ofNullable(searchListIotNode_.getFacetRangeEnd()).map(s -> TimeTool.parseZonedDateTime(defaultTimeZone, s)).orElse(Optional.ofNullable(defaultRangeStats).map(s -> Instant.parse(s.getString("defaultRangeEnd")).atZone(defaultTimeZone)).orElse(ZonedDateTime.now(defaultTimeZone).toLocalDate().atStartOfDay(defaultTimeZone).plusDays(1))));
 	}
 
 	@Override
 	protected void _defaultRangeStart(Wrap<ZonedDateTime> w) {
-		w.o(Optional.ofNullable(searchListIotNode_.getFacetRangeStart()).map(s -> TimeTool.parseZonedDateTime(defaultTimeZone, s)).orElse(defaultRangeEnd.minusDays(7).toLocalDate().atStartOfDay(defaultTimeZone)));
+		w.o(Optional.ofNullable(searchListIotNode_.getFacetRangeStart()).map(s -> TimeTool.parseZonedDateTime(defaultTimeZone, s)).orElse(Optional.ofNullable(defaultRangeStats).map(s -> Instant.parse(s.getString("defaultRangeStart")).atZone(defaultTimeZone)).orElse(defaultRangeEnd.minusDays(7).toLocalDate().atStartOfDay(defaultTimeZone))));
 	}
 
 	@Override
 	protected void _defaultRangeVar(Wrap<String> w) {
-		w.o(Optional.ofNullable(searchListIotNode_.getFacetRanges()).orElse(Arrays.asList()).stream().findFirst().map(v -> { if(v.contains("}")) return StringUtils.substringBefore(StringUtils.substringAfterLast(v, "}"), "_"); else return IotNode.searchVarIotNode(v); }).orElse("created"));
+		w.o(Optional.ofNullable(searchListIotNode_.getFacetRanges()).orElse(Optional.ofNullable(defaultRangeStats).map(s -> Arrays.asList(s.getString("defaultRangeVar"))).orElse(Arrays.asList())).stream().findFirst().map(v -> { if(v.contains("}")) return StringUtils.substringBefore(StringUtils.substringAfterLast(v, "}"), "_"); else return IotNode.searchVarIotNode(v); }).orElse("created"));
 	}
 
 	@Override
@@ -393,11 +417,6 @@ public class IotNodeGenPage extends IotNodeGenPageGen<BaseModelPage> {
 	protected void _iotNode_(Wrap<IotNode> w) {
 		if(iotNodeCount == 1)
 			w.o(searchListIotNode_.get(0));
-	}
-
-	protected void _pk(Wrap<Long> w) {
-		if(iotNodeCount == 1)
-			w.o(iotNode_.getPk());
 	}
 
 	protected void _id(Wrap<String> w) {

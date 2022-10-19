@@ -1,43 +1,33 @@
 package org.computate.smartvillageview.enus.model.htm;
 
-import org.computate.smartvillageview.enus.page.PageLayout;
-import org.computate.smartvillageview.enus.result.base.BaseResultPage;
-import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
-import org.computate.smartvillageview.enus.model.user.SiteUser;
-import java.io.IOException;
-import io.vertx.core.http.HttpServerRequest;
-import io.vertx.core.http.HttpServerResponse;
-import org.computate.vertx.search.list.SearchList;
-import org.computate.search.wrap.Wrap;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.LocalDate;
+import java.math.BigDecimal;
+import java.net.URLDecoder;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.computate.search.response.solr.SolrResponse;
+import org.computate.search.tool.TimeTool;
+import org.computate.search.wrap.Wrap;
+import org.computate.smartvillageview.enus.config.ConfigKeys;
+import org.computate.smartvillageview.enus.result.base.BaseResultPage;
+import org.computate.vertx.search.list.SearchList;
+
+import io.vertx.core.Promise;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.api.service.ServiceRequest;
-import io.vertx.core.json.JsonArray;
-import java.net.URLDecoder;
-import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.apache.commons.lang3.StringUtils;
-import java.util.Map;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Stream;
-import java.util.stream.Collectors;
-import java.util.Arrays;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.math.MathContext;
-import org.apache.commons.collections4.CollectionUtils;
-import java.util.Objects;
-import io.vertx.core.Promise;
-import org.computate.smartvillageview.enus.config.ConfigKeys;
-import org.computate.search.response.solr.SolrResponse;
-import java.util.HashMap;
-import org.computate.search.tool.TimeTool;
-import java.time.ZoneId;
 
 
 /**
@@ -155,7 +145,29 @@ public class SiteHtmGenPage extends SiteHtmGenPageGen<BaseResultPage> {
 			if(defaultFieldListVars.contains(var)) {
 				json.put("fieldList", true);
 			}
-			if(StringUtils.equalsAny(type, "date")) {
+			if(StringUtils.equalsAny(type, "date") && json.containsKey("stats")) {
+				JsonObject stats = json.getJsonObject("stats");
+				Instant min = Instant.parse(stats.getString("min"));
+				Instant max = Instant.parse(stats.getString("max"));
+				Duration duration = Duration.between(min, max);
+				String gap = "DAY";
+				if(duration.toDays() >= 365)
+					gap = "YEAR";
+				else if(duration.toDays() >= 28)
+					gap = "MONTH";
+				else if(duration.toDays() >= 1)
+					gap = "DAY";
+				else if(duration.toHours() >= 1)
+					gap = "HOUR";
+				else if(duration.toMinutes() >= 1)
+					gap = "MINUTE";
+				else if(duration.toMillis() >= 1000)
+					gap = "SECOND";
+				else if(duration.toMillis() >= 1)
+					gap = "MILLI";
+				json.put("defaultRangeGap", String.format("+1%s", gap));
+				json.put("defaultRangeEnd", stats.getString("max"));
+				json.put("defaultRangeStart", stats.getString("min"));
 				json.put("enableCalendar", true);
 				setDefaultRangeStats(json);
 			}
@@ -273,22 +285,22 @@ public class SiteHtmGenPage extends SiteHtmGenPageGen<BaseResultPage> {
 
 	@Override
 	protected void _defaultRangeGap(Wrap<String> w) {
-		w.o(Optional.ofNullable(searchListSiteHtm_.getFacetRangeGap()).orElse("+1DAY"));
+		w.o(Optional.ofNullable(searchListSiteHtm_.getFacetRangeGap()).orElse(Optional.ofNullable(defaultRangeStats).map(s -> s.getString("defaultRangeGap")).orElse("+1DAY")));
 	}
 
 	@Override
 	protected void _defaultRangeEnd(Wrap<ZonedDateTime> w) {
-		w.o(Optional.ofNullable(searchListSiteHtm_.getFacetRangeEnd()).map(s -> TimeTool.parseZonedDateTime(defaultTimeZone, s)).orElse(ZonedDateTime.now(defaultTimeZone).toLocalDate().atStartOfDay(defaultTimeZone).plusDays(1)));
+		w.o(Optional.ofNullable(searchListSiteHtm_.getFacetRangeEnd()).map(s -> TimeTool.parseZonedDateTime(defaultTimeZone, s)).orElse(Optional.ofNullable(defaultRangeStats).map(s -> Instant.parse(s.getString("defaultRangeEnd")).atZone(defaultTimeZone)).orElse(ZonedDateTime.now(defaultTimeZone).toLocalDate().atStartOfDay(defaultTimeZone).plusDays(1))));
 	}
 
 	@Override
 	protected void _defaultRangeStart(Wrap<ZonedDateTime> w) {
-		w.o(Optional.ofNullable(searchListSiteHtm_.getFacetRangeStart()).map(s -> TimeTool.parseZonedDateTime(defaultTimeZone, s)).orElse(defaultRangeEnd.minusDays(7).toLocalDate().atStartOfDay(defaultTimeZone)));
+		w.o(Optional.ofNullable(searchListSiteHtm_.getFacetRangeStart()).map(s -> TimeTool.parseZonedDateTime(defaultTimeZone, s)).orElse(Optional.ofNullable(defaultRangeStats).map(s -> Instant.parse(s.getString("defaultRangeStart")).atZone(defaultTimeZone)).orElse(defaultRangeEnd.minusDays(7).toLocalDate().atStartOfDay(defaultTimeZone))));
 	}
 
 	@Override
 	protected void _defaultRangeVar(Wrap<String> w) {
-		w.o(Optional.ofNullable(searchListSiteHtm_.getFacetRanges()).orElse(Arrays.asList()).stream().findFirst().map(v -> { if(v.contains("}")) return StringUtils.substringBefore(StringUtils.substringAfterLast(v, "}"), "_"); else return SiteHtm.searchVarSiteHtm(v); }).orElse("created"));
+		w.o(Optional.ofNullable(searchListSiteHtm_.getFacetRanges()).orElse(Optional.ofNullable(defaultRangeStats).map(s -> Arrays.asList(s.getString("defaultRangeVar"))).orElse(Arrays.asList())).stream().findFirst().map(v -> { if(v.contains("}")) return StringUtils.substringBefore(StringUtils.substringAfterLast(v, "}"), "_"); else return SiteHtm.searchVarSiteHtm(v); }).orElse("created"));
 	}
 
 	@Override

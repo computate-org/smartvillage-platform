@@ -5,19 +5,18 @@ import java.util.Optional;
 
 import org.apache.commons.lang3.math.NumberUtils;
 import org.computate.search.wrap.Wrap;
-import org.computate.smartvillageview.enus.model.base.BaseModel;
+import org.computate.smartvillageview.enus.result.base.BaseResult;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.pgclient.data.Point;
 
 /**
- * Model: true
  * Api: true
  * Page: true
- * SuperPage.enUS: BaseModelPage
+ * SuperPage.enUS: MapResultPage
  * Indexed: true
- * Map.Integer.sqlSort: 2
+ * Map.Integer.classSort: 12
  * 
  * ApiTag.enUS: IOT Node
  * ApiUri.enUS: /api/iot-node
@@ -30,7 +29,6 @@ import io.vertx.pgclient.data.Point;
  * 
  * ApiMethod.enUS: SearchPage
  * Page.SearchPage.enUS: IotNodePage
- * PageSuper.SearchPage.enUS: BaseModelPage
  * ApiUri.SearchPage.enUS: /iot-node
  * 
  * Role.enUS: SiteAdmin
@@ -43,7 +41,7 @@ import io.vertx.pgclient.data.Point;
  * NameVar.enUS: iotNode
  * Rows: 100
  */
-public class IotNode extends IotNodeGen<BaseModel> {
+public class IotNode extends IotNodeGen<BaseResult> {
 
 	/**
 	 * {@inheritDoc}

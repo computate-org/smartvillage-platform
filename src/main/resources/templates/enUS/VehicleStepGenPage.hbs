@@ -408,7 +408,6 @@
 					<div class="" id="patchVehicleStepFormValues">
 							<div class="w3-cell-row ">
 {{> "htmCreated" classApiMethodMethod="PATCH"}}
-{{> "htmObjectId" classApiMethodMethod="PATCH"}}
 							</div>
 							<div class="w3-cell-row ">
 {{> "htmArchived" classApiMethodMethod="PATCH"}}
@@ -464,7 +463,6 @@
 						<div id="postVehicleStepForm">
 							<div class="w3-cell-row ">
 {{> "htmCreated" classApiMethodMethod="POST"}}
-{{> "htmObjectId" classApiMethodMethod="POST"}}
 							</div>
 							<div class="w3-cell-row ">
 {{> "htmArchived" classApiMethodMethod="POST"}}
@@ -837,7 +835,7 @@
 																<button
 																		tabindex="-1"
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_vehicleId')); $('#{{classApiMethodMethod}}_vehicleId').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#VehicleStepForm :input[name=id]').val() }], 'setVehicleId', null, function() { addGlow($('#{{classApiMethodMethod}}_vehicleId')); }, function() { addError($('#{{classApiMethodMethod}}_vehicleId')); }); "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_vehicleId')); $('#{{classApiMethodMethod}}_vehicleId').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#VehicleStepForm :input[name=id]').val() }], 'setVehicleId', null, function() { addGlow($('#{{classApiMethodMethod}}_vehicleId')); }, function() { addError($('#{{classApiMethodMethod}}_vehicleId')); }); "
 																		>
 																	<i class="far fa-eraser "></i>
 																</button>
@@ -871,7 +869,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setVehicleId', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_vehicleId')); }, function() { addError($('#{{classApiMethodMethod}}_vehicleId')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setVehicleId', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_vehicleId')); }, function() { addError($('#{{classApiMethodMethod}}_vehicleId')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{vehicleStep_.vehicleId}}"
@@ -903,7 +901,7 @@
 																<button
 																		tabindex="-1"
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_vehicleType')); $('#{{classApiMethodMethod}}_vehicleType').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#VehicleStepForm :input[name=id]').val() }], 'setVehicleType', null, function() { addGlow($('#{{classApiMethodMethod}}_vehicleType')); }, function() { addError($('#{{classApiMethodMethod}}_vehicleType')); }); "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_vehicleType')); $('#{{classApiMethodMethod}}_vehicleType').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#VehicleStepForm :input[name=id]').val() }], 'setVehicleType', null, function() { addGlow($('#{{classApiMethodMethod}}_vehicleType')); }, function() { addError($('#{{classApiMethodMethod}}_vehicleType')); }); "
 																		>
 																	<i class="far fa-eraser "></i>
 																</button>
@@ -937,7 +935,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setVehicleType', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_vehicleType')); }, function() { addError($('#{{classApiMethodMethod}}_vehicleType')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setVehicleType', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_vehicleType')); }, function() { addError($('#{{classApiMethodMethod}}_vehicleType')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{vehicleStep_.vehicleType}}"
@@ -969,7 +967,7 @@
 																<button
 																		tabindex="-1"
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_angle')); $('#{{classApiMethodMethod}}_angle').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#VehicleStepForm :input[name=id]').val() }], 'setAngle', null, function() { addGlow($('#{{classApiMethodMethod}}_angle')); }, function() { addError($('#{{classApiMethodMethod}}_angle')); }); "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_angle')); $('#{{classApiMethodMethod}}_angle').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#VehicleStepForm :input[name=id]').val() }], 'setAngle', null, function() { addGlow($('#{{classApiMethodMethod}}_angle')); }, function() { addError($('#{{classApiMethodMethod}}_angle')); }); "
 																		>
 																	<i class="far fa-eraser "></i>
 																</button>
@@ -1003,7 +1001,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setAngle', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_angle')); }, function() { addError($('#{{classApiMethodMethod}}_angle')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setAngle', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_angle')); }, function() { addError($('#{{classApiMethodMethod}}_angle')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{vehicleStep_.angle}}"
@@ -1035,7 +1033,7 @@
 																<button
 																		tabindex="-1"
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_speed')); $('#{{classApiMethodMethod}}_speed').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#VehicleStepForm :input[name=id]').val() }], 'setSpeed', null, function() { addGlow($('#{{classApiMethodMethod}}_speed')); }, function() { addError($('#{{classApiMethodMethod}}_speed')); }); "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_speed')); $('#{{classApiMethodMethod}}_speed').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#VehicleStepForm :input[name=id]').val() }], 'setSpeed', null, function() { addGlow($('#{{classApiMethodMethod}}_speed')); }, function() { addError($('#{{classApiMethodMethod}}_speed')); }); "
 																		>
 																	<i class="far fa-eraser "></i>
 																</button>
@@ -1069,7 +1067,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setSpeed', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_speed')); }, function() { addError($('#{{classApiMethodMethod}}_speed')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setSpeed', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_speed')); }, function() { addError($('#{{classApiMethodMethod}}_speed')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{vehicleStep_.speed}}"
@@ -1101,7 +1099,7 @@
 																<button
 																		tabindex="-1"
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_pos')); $('#{{classApiMethodMethod}}_pos').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#VehicleStepForm :input[name=id]').val() }], 'setPos', null, function() { addGlow($('#{{classApiMethodMethod}}_pos')); }, function() { addError($('#{{classApiMethodMethod}}_pos')); }); "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_pos')); $('#{{classApiMethodMethod}}_pos').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#VehicleStepForm :input[name=id]').val() }], 'setPos', null, function() { addGlow($('#{{classApiMethodMethod}}_pos')); }, function() { addError($('#{{classApiMethodMethod}}_pos')); }); "
 																		>
 																	<i class="far fa-eraser "></i>
 																</button>
@@ -1135,7 +1133,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setPos', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_pos')); }, function() { addError($('#{{classApiMethodMethod}}_pos')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setPos', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_pos')); }, function() { addError($('#{{classApiMethodMethod}}_pos')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{vehicleStep_.pos}}"
@@ -1167,7 +1165,7 @@
 																<button
 																		tabindex="-1"
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_slope')); $('#{{classApiMethodMethod}}_slope').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#VehicleStepForm :input[name=id]').val() }], 'setSlope', null, function() { addGlow($('#{{classApiMethodMethod}}_slope')); }, function() { addError($('#{{classApiMethodMethod}}_slope')); }); "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_slope')); $('#{{classApiMethodMethod}}_slope').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#VehicleStepForm :input[name=id]').val() }], 'setSlope', null, function() { addGlow($('#{{classApiMethodMethod}}_slope')); }, function() { addError($('#{{classApiMethodMethod}}_slope')); }); "
 																		>
 																	<i class="far fa-eraser "></i>
 																</button>
@@ -1201,7 +1199,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setSlope', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_slope')); }, function() { addError($('#{{classApiMethodMethod}}_slope')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setSlope', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_slope')); }, function() { addError($('#{{classApiMethodMethod}}_slope')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{vehicleStep_.slope}}"

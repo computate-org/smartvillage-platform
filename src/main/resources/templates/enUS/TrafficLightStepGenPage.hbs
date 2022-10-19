@@ -408,7 +408,6 @@
 					<div class="" id="patchTrafficLightStepFormValues">
 							<div class="w3-cell-row ">
 {{> "htmCreated" classApiMethodMethod="PATCH"}}
-{{> "htmObjectId" classApiMethodMethod="PATCH"}}
 							</div>
 							<div class="w3-cell-row ">
 {{> "htmArchived" classApiMethodMethod="PATCH"}}
@@ -466,7 +465,6 @@
 						<div id="postTrafficLightStepForm">
 							<div class="w3-cell-row ">
 {{> "htmCreated" classApiMethodMethod="POST"}}
-{{> "htmObjectId" classApiMethodMethod="POST"}}
 							</div>
 							<div class="w3-cell-row ">
 {{> "htmArchived" classApiMethodMethod="POST"}}
@@ -843,7 +841,7 @@
 																<button
 																		tabindex="-1"
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_trafficLightId')); $('#{{classApiMethodMethod}}_trafficLightId').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficLightStepForm :input[name=id]').val() }], 'setTrafficLightId', null, function() { addGlow($('#{{classApiMethodMethod}}_trafficLightId')); }, function() { addError($('#{{classApiMethodMethod}}_trafficLightId')); }); "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_trafficLightId')); $('#{{classApiMethodMethod}}_trafficLightId').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#TrafficLightStepForm :input[name=id]').val() }], 'setTrafficLightId', null, function() { addGlow($('#{{classApiMethodMethod}}_trafficLightId')); }, function() { addError($('#{{classApiMethodMethod}}_trafficLightId')); }); "
 																		>
 																	<i class="far fa-eraser "></i>
 																</button>
@@ -877,7 +875,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setTrafficLightId', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_trafficLightId')); }, function() { addError($('#{{classApiMethodMethod}}_trafficLightId')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setTrafficLightId', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_trafficLightId')); }, function() { addError($('#{{classApiMethodMethod}}_trafficLightId')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{trafficLightStep_.trafficLightId}}"
@@ -909,7 +907,7 @@
 																<button
 																		tabindex="-1"
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_trafficLightType')); $('#{{classApiMethodMethod}}_trafficLightType').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficLightStepForm :input[name=id]').val() }], 'setTrafficLightType', null, function() { addGlow($('#{{classApiMethodMethod}}_trafficLightType')); }, function() { addError($('#{{classApiMethodMethod}}_trafficLightType')); }); "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_trafficLightType')); $('#{{classApiMethodMethod}}_trafficLightType').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#TrafficLightStepForm :input[name=id]').val() }], 'setTrafficLightType', null, function() { addGlow($('#{{classApiMethodMethod}}_trafficLightType')); }, function() { addError($('#{{classApiMethodMethod}}_trafficLightType')); }); "
 																		>
 																	<i class="far fa-eraser "></i>
 																</button>
@@ -943,7 +941,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setTrafficLightType', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_trafficLightType')); }, function() { addError($('#{{classApiMethodMethod}}_trafficLightType')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setTrafficLightType', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_trafficLightType')); }, function() { addError($('#{{classApiMethodMethod}}_trafficLightType')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{trafficLightStep_.trafficLightType}}"
@@ -975,7 +973,7 @@
 																<button
 																		tabindex="-1"
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_angle')); $('#{{classApiMethodMethod}}_angle').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficLightStepForm :input[name=id]').val() }], 'setAngle', null, function() { addGlow($('#{{classApiMethodMethod}}_angle')); }, function() { addError($('#{{classApiMethodMethod}}_angle')); }); "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_angle')); $('#{{classApiMethodMethod}}_angle').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#TrafficLightStepForm :input[name=id]').val() }], 'setAngle', null, function() { addGlow($('#{{classApiMethodMethod}}_angle')); }, function() { addError($('#{{classApiMethodMethod}}_angle')); }); "
 																		>
 																	<i class="far fa-eraser "></i>
 																</button>
@@ -1009,7 +1007,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setAngle', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_angle')); }, function() { addError($('#{{classApiMethodMethod}}_angle')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setAngle', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_angle')); }, function() { addError($('#{{classApiMethodMethod}}_angle')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{trafficLightStep_.angle}}"
@@ -1041,7 +1039,7 @@
 																<button
 																		tabindex="-1"
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_state')); $('#{{classApiMethodMethod}}_state').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficLightStepForm :input[name=id]').val() }], 'setState', null, function() { addGlow($('#{{classApiMethodMethod}}_state')); }, function() { addError($('#{{classApiMethodMethod}}_state')); }); "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_state')); $('#{{classApiMethodMethod}}_state').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#TrafficLightStepForm :input[name=id]').val() }], 'setState', null, function() { addGlow($('#{{classApiMethodMethod}}_state')); }, function() { addError($('#{{classApiMethodMethod}}_state')); }); "
 																		>
 																	<i class="far fa-eraser "></i>
 																</button>
@@ -1075,7 +1073,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setState', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_state')); }, function() { addError($('#{{classApiMethodMethod}}_state')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setState', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_state')); }, function() { addError($('#{{classApiMethodMethod}}_state')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{trafficLightStep_.state}}"
@@ -1107,7 +1105,7 @@
 																<button
 																		tabindex="-1"
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_programId')); $('#{{classApiMethodMethod}}_programId').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficLightStepForm :input[name=id]').val() }], 'setProgramId', null, function() { addGlow($('#{{classApiMethodMethod}}_programId')); }, function() { addError($('#{{classApiMethodMethod}}_programId')); }); "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_programId')); $('#{{classApiMethodMethod}}_programId').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#TrafficLightStepForm :input[name=id]').val() }], 'setProgramId', null, function() { addGlow($('#{{classApiMethodMethod}}_programId')); }, function() { addError($('#{{classApiMethodMethod}}_programId')); }); "
 																		>
 																	<i class="far fa-eraser "></i>
 																</button>
@@ -1141,7 +1139,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setProgramId', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_programId')); }, function() { addError($('#{{classApiMethodMethod}}_programId')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setProgramId', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_programId')); }, function() { addError($('#{{classApiMethodMethod}}_programId')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{trafficLightStep_.programId}}"
@@ -1173,7 +1171,7 @@
 																<button
 																		tabindex="-1"
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_phase')); $('#{{classApiMethodMethod}}_phase').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficLightStepForm :input[name=id]').val() }], 'setPhase', null, function() { addGlow($('#{{classApiMethodMethod}}_phase')); }, function() { addError($('#{{classApiMethodMethod}}_phase')); }); "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_phase')); $('#{{classApiMethodMethod}}_phase').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#TrafficLightStepForm :input[name=id]').val() }], 'setPhase', null, function() { addGlow($('#{{classApiMethodMethod}}_phase')); }, function() { addError($('#{{classApiMethodMethod}}_phase')); }); "
 																		>
 																	<i class="far fa-eraser "></i>
 																</button>
@@ -1207,7 +1205,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setPhase', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_phase')); }, function() { addError($('#{{classApiMethodMethod}}_phase')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setPhase', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_phase')); }, function() { addError($('#{{classApiMethodMethod}}_phase')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{trafficLightStep_.phase}}"

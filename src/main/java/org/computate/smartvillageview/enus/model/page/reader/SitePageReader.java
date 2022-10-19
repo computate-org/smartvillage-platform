@@ -121,7 +121,6 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 				LOG.error(String.format("Search failed. "), new RuntimeException(ex));
 				promise.fail(ex);
 			});
-
 		}).onFailure(ex -> {
 			LOG.error(String.format(importDataSitePageFail, SitePage.CLASS_SIMPLE_NAME), ex);
 			promise.fail(ex);

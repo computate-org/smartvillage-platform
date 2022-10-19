@@ -12,6 +12,7 @@ import org.apache.commons.lang3.reflect.FieldUtils;
 import org.computate.search.wrap.Wrap;
 import org.computate.smartvillageview.enus.config.ConfigKeys;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
+import org.computate.vertx.result.base.ComputateBaseResult;
 
 import io.vertx.core.Promise;
 
@@ -21,9 +22,10 @@ import io.vertx.core.Promise;
  * SuperPage: PageLayout
  * Keyword: classSimpleNameBaseResult
  * Description: A reusable base class for all non-model search classes
- * Map.Integer.classSort: 3
+ * Map.Integer.classSort: 2
+ * Promise: true
  */
-public class BaseResult extends BaseResultGen<Object> {
+public class BaseResult extends BaseResultGen<Object> implements ComputateBaseResult {
 
 	/**
 	 * {@inheritDoc}
@@ -31,15 +33,6 @@ public class BaseResult extends BaseResultGen<Object> {
 	 * Description: The current request object
 	 */
 	protected void _siteRequest_(Wrap<SiteRequestEnUS> w) {
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * Ignore: true
-	 * Description: An asynchronous method for searching for a computer related to this message
-	 */
-	protected void _promiseBefore(Promise<Void> promise) {
-		promise.complete();
 	}
 
 	/**
@@ -60,10 +53,10 @@ public class BaseResult extends BaseResultGen<Object> {
 	 * HtmlRow: 1
 	 * HtmlCell: 2
 	 * HtmlColumn: 1
-	 * Facet: true
 	 * DisplayName.enUS: created
 	 * FormatHtm: MMM d, yyyy h:mm:ss a
 	 * Description: A created timestamp for this record in the database
+	 * Facet: true
 	 */
 	protected void _created(Wrap<ZonedDateTime> w) {
 		w.o(ZonedDateTime.now(ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))));
@@ -183,8 +176,8 @@ public class BaseResult extends BaseResultGen<Object> {
 	/**
 	 * {@inheritDoc}
 	 * DocValues: true
-	 * Persist: true
 	 * VarId: true
+	 * UrlVar: pageUrlId
 	 * HtmlRow: 1
 	 * HtmlCell: 4
 	 * DisplayName.enUS: ID
@@ -268,6 +261,7 @@ public class BaseResult extends BaseResultGen<Object> {
 	/**
 	 * {@inheritDoc}
 	 * DocValues: true
+	 * VarUrlApi: true
 	 * Description: The link to this object in the API
 	 */
 	protected void _pageUrlApi(Wrap<String> w) {
@@ -284,7 +278,6 @@ public class BaseResult extends BaseResultGen<Object> {
 	 * {@inheritDoc}
 	 * UniqueKey: true
 	 * Description: The unique key for this record in the search engine
-	 * Persist: true
 	 */
 	protected void _id(Wrap<String> w) {
 		w.o(objectId);

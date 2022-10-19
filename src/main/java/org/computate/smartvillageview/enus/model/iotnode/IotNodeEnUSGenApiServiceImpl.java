@@ -177,7 +177,7 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 					}
 					if(fls.size() == 1 && fls.stream().findFirst().orElse(null).equals("saves_docvalues_strings")) {
 						fieldNames.removeAll(Optional.ofNullable(json2.getJsonArray("saves_docvalues_strings")).orElse(new JsonArray()).stream().map(s -> s.toString()).collect(Collectors.toList()));
-						fieldNames.remove("pk_docvalues_long");
+						fieldNames.remove("_docvalues_long");
 						fieldNames.remove("created_docvalues_date");
 					}
 					else if(fls.size() >= 1) {
@@ -331,7 +331,7 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 						)
 					));
 				} else {
-					searchIotNodeList(siteRequest, false, true, true).onSuccess(listIotNode -> {
+					searchIotNodeList(siteRequest, true, false, true).onSuccess(listIotNode -> {
 						try {
 							List<String> roles2 = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_ADMIN)).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
 							if(listIotNode.getResponse().getResponse().getNumFound() > 1
@@ -351,7 +351,6 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 								siteRequest.setApiRequest_(apiRequest);
 								if(apiRequest.getNumFound() == 1L)
 									apiRequest.setOriginal(listIotNode.first());
-								apiRequest.setPk(Optional.ofNullable(listIotNode.first()).map(o2 -> o2.getPk()).orElse(null));
 								eventBus.publish("websocketIotNode", JsonObject.mapFrom(apiRequest).toString());
 
 								listPATCHIotNode(apiRequest, listIotNode).onSuccess(e -> {
@@ -463,7 +462,6 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 							}
 							if(apiRequest.getNumFound() == 1L)
 								apiRequest.setOriginal(o);
-							apiRequest.setPk(Optional.ofNullable(listIotNode.first()).map(o2 -> o2.getPk()).orElse(null));
 							eventBus.publish("websocketIotNode", JsonObject.mapFrom(apiRequest).toString());
 							patchIotNodeFuture(o, false).onSuccess(a -> {
 								eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(new JsonObject().encodePrettily()))));
@@ -497,171 +495,17 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 
 		try {
 			ApiRequest apiRequest = siteRequest.getApiRequest_();
-			Promise<IotNode> promise1 = Promise.promise();
-			pgPool.withTransaction(sqlConnection -> {
-				siteRequest.setSqlConnection(sqlConnection);
-				sqlPATCHIotNode(o, inheritPk).onSuccess(iotNode -> {
-					persistIotNode(iotNode).onSuccess(c -> {
-						relateIotNode(iotNode).onSuccess(d -> {
-							indexIotNode(iotNode).onSuccess(e -> {
-								promise1.complete(iotNode);
-							}).onFailure(ex -> {
-								promise1.fail(ex);
-							});
-						}).onFailure(ex -> {
-							promise1.fail(ex);
-						});
-					}).onFailure(ex -> {
-						promise1.fail(ex);
-					});
+			persistIotNode(o, true).onSuccess(c -> {
+				indexIotNode(o).onSuccess(e -> {
+					promise.complete(o);
 				}).onFailure(ex -> {
-					promise1.fail(ex);
+					promise.fail(ex);
 				});
-				return promise1.future();
-			}).onSuccess(a -> {
-				siteRequest.setSqlConnection(null);
-			}).onFailure(ex -> {
-				siteRequest.setSqlConnection(null);
-				promise.fail(ex);
-			}).compose(iotNode -> {
-				Promise<IotNode> promise2 = Promise.promise();
-				refreshIotNode(iotNode).onSuccess(a -> {
-					promise2.complete(iotNode);
-				}).onFailure(ex -> {
-					promise2.fail(ex);
-				});
-				return promise2.future();
-			}).onSuccess(iotNode -> {
-				promise.complete(iotNode);
 			}).onFailure(ex -> {
 				promise.fail(ex);
 			});
 		} catch(Exception ex) {
 			LOG.error(String.format("patchIotNodeFuture failed. "), ex);
-			promise.fail(ex);
-		}
-		return promise.future();
-	}
-
-	public Future<IotNode> sqlPATCHIotNode(IotNode o, Boolean inheritPk) {
-		Promise<IotNode> promise = Promise.promise();
-		try {
-			SiteRequestEnUS siteRequest = o.getSiteRequest_();
-			ApiRequest apiRequest = siteRequest.getApiRequest_();
-			List<Long> pks = Optional.ofNullable(apiRequest).map(r -> r.getPks()).orElse(new ArrayList<>());
-			List<String> classes = Optional.ofNullable(apiRequest).map(r -> r.getClasses()).orElse(new ArrayList<>());
-			SqlConnection sqlConnection = siteRequest.getSqlConnection();
-			Integer num = 1;
-			StringBuilder bSql = new StringBuilder("UPDATE IotNode SET ");
-			List<Object> bParams = new ArrayList<Object>();
-			Long pk = o.getPk();
-			JsonObject jsonObject = siteRequest.getJsonObject();
-			Set<String> methodNames = jsonObject.fieldNames();
-			IotNode o2 = new IotNode();
-			o2.setSiteRequest_(siteRequest);
-			List<Future> futures1 = new ArrayList<>();
-			List<Future> futures2 = new ArrayList<>();
-
-			for(String entityVar : methodNames) {
-				switch(entityVar) {
-					case "setInheritPk":
-							o2.setInheritPk(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(IotNode.VAR_inheritPk + "=$" + num);
-							num++;
-							bParams.add(o2.sqlInheritPk());
-						break;
-					case "setArchived":
-							o2.setArchived(jsonObject.getBoolean(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(IotNode.VAR_archived + "=$" + num);
-							num++;
-							bParams.add(o2.sqlArchived());
-						break;
-					case "setDeleted":
-							o2.setDeleted(jsonObject.getBoolean(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(IotNode.VAR_deleted + "=$" + num);
-							num++;
-							bParams.add(o2.sqlDeleted());
-						break;
-					case "setJson":
-							o2.setJson(jsonObject.getJsonObject(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(IotNode.VAR_json + "=$" + num);
-							num++;
-							bParams.add(o2.sqlJson());
-						break;
-					case "setNodeName":
-							o2.setNodeName(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(IotNode.VAR_nodeName + "=$" + num);
-							num++;
-							bParams.add(o2.sqlNodeName());
-						break;
-					case "setNodeType":
-							o2.setNodeType(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(IotNode.VAR_nodeType + "=$" + num);
-							num++;
-							bParams.add(o2.sqlNodeType());
-						break;
-					case "setNodeId":
-							o2.setNodeId(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(IotNode.VAR_nodeId + "=$" + num);
-							num++;
-							bParams.add(o2.sqlNodeId());
-						break;
-					case "setLocation":
-							o2.setLocation(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(IotNode.VAR_location + "=$" + num);
-							num++;
-							bParams.add(o2.sqlLocation());
-						break;
-				}
-			}
-			bSql.append(" WHERE pk=$" + num);
-			if(bParams.size() > 0) {
-				bParams.add(pk);
-				num++;
-				futures2.add(0, Future.future(a -> {
-					sqlConnection.preparedQuery(bSql.toString())
-							.execute(Tuple.tuple(bParams)
-							).onSuccess(b -> {
-						a.handle(Future.succeededFuture());
-					}).onFailure(ex -> {
-						RuntimeException ex2 = new RuntimeException("value IotNode failed", ex);
-						LOG.error(String.format("relateIotNode failed. "), ex2);
-						a.handle(Future.failedFuture(ex2));
-					});
-				}));
-			}
-			CompositeFuture.all(futures1).onSuccess(a -> {
-				CompositeFuture.all(futures2).onSuccess(b -> {
-					IotNode o3 = new IotNode();
-					o3.setSiteRequest_(o.getSiteRequest_());
-					o3.setPk(pk);
-					promise.complete(o3);
-				}).onFailure(ex -> {
-					LOG.error(String.format("sqlPATCHIotNode failed. "), ex);
-					promise.fail(ex);
-				});
-			}).onFailure(ex -> {
-				LOG.error(String.format("sqlPATCHIotNode failed. "), ex);
-				promise.fail(ex);
-			});
-		} catch(Exception ex) {
-			LOG.error(String.format("sqlPATCHIotNode failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
@@ -732,7 +576,6 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 					eventBus.request("smart-village-view-enUS-IotNode", json, new DeliveryOptions().addHeader("action", "postIotNodeFuture")).onSuccess(a -> {
 						JsonObject responseMessage = (JsonObject)a.body();
 						JsonObject responseBody = new JsonObject(Buffer.buffer(JsonUtil.BASE64_DECODER.decode(responseMessage.getString("payload"))));
-						apiRequest.setPk(Long.parseLong(responseBody.getString("pk")));
 						eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(responseBody.encodePrettily()))));
 						LOG.debug(String.format("postIotNode succeeded. "));
 					}).onFailure(ex -> {
@@ -796,237 +639,21 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 		Promise<IotNode> promise = Promise.promise();
 
 		try {
-			pgPool.withTransaction(sqlConnection -> {
-				Promise<IotNode> promise1 = Promise.promise();
-				siteRequest.setSqlConnection(sqlConnection);
-				createIotNode(siteRequest).onSuccess(iotNode -> {
-					sqlPOSTIotNode(iotNode, inheritPk).onSuccess(b -> {
-						persistIotNode(iotNode).onSuccess(c -> {
-							relateIotNode(iotNode).onSuccess(d -> {
-								indexIotNode(iotNode).onSuccess(e -> {
-									promise1.complete(iotNode);
-								}).onFailure(ex -> {
-									promise1.fail(ex);
-								});
-							}).onFailure(ex -> {
-								promise1.fail(ex);
-							});
-						}).onFailure(ex -> {
-							promise1.fail(ex);
-						});
+			createIotNode(siteRequest).onSuccess(iotNode -> {
+				persistIotNode(iotNode, false).onSuccess(c -> {
+					indexIotNode(iotNode).onSuccess(e -> {
+						promise.complete(iotNode);
 					}).onFailure(ex -> {
-						promise1.fail(ex);
+						promise.fail(ex);
 					});
 				}).onFailure(ex -> {
-					promise1.fail(ex);
+					promise.fail(ex);
 				});
-				return promise1.future();
-			}).onSuccess(a -> {
-				siteRequest.setSqlConnection(null);
-			}).onFailure(ex -> {
-				siteRequest.setSqlConnection(null);
-				promise.fail(ex);
-			}).compose(iotNode -> {
-				Promise<IotNode> promise2 = Promise.promise();
-				refreshIotNode(iotNode).onSuccess(a -> {
-					try {
-						ApiRequest apiRequest = siteRequest.getApiRequest_();
-						if(apiRequest != null) {
-							apiRequest.setNumPATCH(apiRequest.getNumPATCH() + 1);
-							iotNode.apiRequestIotNode();
-							eventBus.publish("websocketIotNode", JsonObject.mapFrom(apiRequest).toString());
-						}
-						promise2.complete(iotNode);
-					} catch(Exception ex) {
-						LOG.error(String.format("postIotNodeFuture failed. "), ex);
-						promise.fail(ex);
-					}
-				}).onFailure(ex -> {
-					promise2.fail(ex);
-				});
-				return promise2.future();
-			}).onSuccess(iotNode -> {
-				promise.complete(iotNode);
 			}).onFailure(ex -> {
 				promise.fail(ex);
 			});
 		} catch(Exception ex) {
 			LOG.error(String.format("postIotNodeFuture failed. "), ex);
-			promise.fail(ex);
-		}
-		return promise.future();
-	}
-
-	public Future<Void> sqlPOSTIotNode(IotNode o, Boolean inheritPk) {
-		Promise<Void> promise = Promise.promise();
-		try {
-			SiteRequestEnUS siteRequest = o.getSiteRequest_();
-			ApiRequest apiRequest = siteRequest.getApiRequest_();
-			List<Long> pks = Optional.ofNullable(apiRequest).map(r -> r.getPks()).orElse(new ArrayList<>());
-			List<String> classes = Optional.ofNullable(apiRequest).map(r -> r.getClasses()).orElse(new ArrayList<>());
-			SqlConnection sqlConnection = siteRequest.getSqlConnection();
-			Integer num = 1;
-			StringBuilder bSql = new StringBuilder("UPDATE IotNode SET ");
-			List<Object> bParams = new ArrayList<Object>();
-			Long pk = o.getPk();
-			JsonObject jsonObject = siteRequest.getJsonObject();
-			IotNode o2 = new IotNode();
-			o2.setSiteRequest_(siteRequest);
-			List<Future> futures1 = new ArrayList<>();
-			List<Future> futures2 = new ArrayList<>();
-
-			if(siteRequest.getSessionId() != null) {
-				if(bParams.size() > 0) {
-					bSql.append(", ");
-				}
-				bSql.append("sessionId=$" + num);
-				num++;
-				bParams.add(siteRequest.getSessionId());
-			}
-			if(siteRequest.getUserKey() != null) {
-				if(bParams.size() > 0) {
-					bSql.append(", ");
-				}
-				bSql.append("userKey=$" + num);
-				num++;
-				bParams.add(siteRequest.getUserKey());
-			}
-
-			if(jsonObject != null) {
-				Set<String> entityVars = jsonObject.fieldNames();
-				for(String entityVar : entityVars) {
-					switch(entityVar) {
-					case IotNode.VAR_inheritPk:
-						o2.setInheritPk(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(IotNode.VAR_inheritPk + "=$" + num);
-						num++;
-						bParams.add(o2.sqlInheritPk());
-						break;
-					case IotNode.VAR_created:
-						o2.setCreated(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(IotNode.VAR_created + "=$" + num);
-						num++;
-						bParams.add(o2.sqlCreated());
-						break;
-					case IotNode.VAR_archived:
-						o2.setArchived(jsonObject.getBoolean(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(IotNode.VAR_archived + "=$" + num);
-						num++;
-						bParams.add(o2.sqlArchived());
-						break;
-					case IotNode.VAR_deleted:
-						o2.setDeleted(jsonObject.getBoolean(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(IotNode.VAR_deleted + "=$" + num);
-						num++;
-						bParams.add(o2.sqlDeleted());
-						break;
-					case IotNode.VAR_sessionId:
-						o2.setSessionId(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(IotNode.VAR_sessionId + "=$" + num);
-						num++;
-						bParams.add(o2.sqlSessionId());
-						break;
-					case IotNode.VAR_userKey:
-						o2.setUserKey(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(IotNode.VAR_userKey + "=$" + num);
-						num++;
-						bParams.add(o2.sqlUserKey());
-						break;
-					case IotNode.VAR_json:
-						o2.setJson(jsonObject.getJsonObject(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(IotNode.VAR_json + "=$" + num);
-						num++;
-						bParams.add(o2.sqlJson());
-						break;
-					case IotNode.VAR_nodeName:
-						o2.setNodeName(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(IotNode.VAR_nodeName + "=$" + num);
-						num++;
-						bParams.add(o2.sqlNodeName());
-						break;
-					case IotNode.VAR_nodeType:
-						o2.setNodeType(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(IotNode.VAR_nodeType + "=$" + num);
-						num++;
-						bParams.add(o2.sqlNodeType());
-						break;
-					case IotNode.VAR_nodeId:
-						o2.setNodeId(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(IotNode.VAR_nodeId + "=$" + num);
-						num++;
-						bParams.add(o2.sqlNodeId());
-						break;
-					case IotNode.VAR_location:
-						o2.setLocation(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(IotNode.VAR_location + "=$" + num);
-						num++;
-						bParams.add(o2.sqlLocation());
-						break;
-					}
-				}
-			}
-			bSql.append(" WHERE pk=$" + num);
-			if(bParams.size() > 0) {
-			bParams.add(pk);
-			num++;
-				futures2.add(0, Future.future(a -> {
-					sqlConnection.preparedQuery(bSql.toString())
-							.execute(Tuple.tuple(bParams)
-							).onSuccess(b -> {
-						a.handle(Future.succeededFuture());
-					}).onFailure(ex -> {
-						RuntimeException ex2 = new RuntimeException("value IotNode failed", ex);
-						LOG.error(String.format("relateIotNode failed. "), ex2);
-						a.handle(Future.failedFuture(ex2));
-					});
-				}));
-			}
-			CompositeFuture.all(futures1).onSuccess(a -> {
-				CompositeFuture.all(futures2).onSuccess(b -> {
-					promise.complete();
-				}).onFailure(ex -> {
-					LOG.error(String.format("sqlPOSTIotNode failed. "), ex);
-					promise.fail(ex);
-				});
-			}).onFailure(ex -> {
-				LOG.error(String.format("sqlPOSTIotNode failed. "), ex);
-				promise.fail(ex);
-			});
-		} catch(Exception ex) {
-			LOG.error(String.format("sqlPOSTIotNode failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
@@ -1178,7 +805,7 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 				apiRequest.setNumPATCH(0L);
 				apiRequest.initDeepApiRequest(siteRequest);
 				siteRequest.setApiRequest_(apiRequest);
-				body.put("inheritPk", body.getValue("pk"));
+				body.put("inheritPk", body.getValue(""));
 				if(Optional.ofNullable(serviceRequest.getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getJsonArray("var")).orElse(new JsonArray()).stream().filter(s -> "refresh:false".equals(s)).count() > 0L) {
 					siteRequest.getRequestVars().put( "refresh", "false" );
 				}
@@ -1189,7 +816,7 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 				searchList.setC(IotNode.class);
 				searchList.fq("deleted_docvalues_boolean:false");
 				searchList.fq("archived_docvalues_boolean:false");
-				searchList.fq("inheritPk_docvalues_string:" + SearchTool.escapeQueryChars(body.getString(IotNode.VAR_pk)));
+				searchList.fq("inheritPk_docvalues_string:" + SearchTool.escapeQueryChars(body.getString(IotNode.VAR_id)));
 				searchList.promiseDeepForClass(siteRequest).onSuccess(a -> {
 					try {
 						if(searchList.size() >= 1) {
@@ -1224,20 +851,20 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 								} else {
 									o2.persistForClass(f, bodyVal);
 									o2.relateForClass(f, bodyVal);
-									if(!StringUtils.containsAny(f, "pk", "created", "setCreated") && !Objects.equals(o.obtainForClass(f), o2.obtainForClass(f)))
+									if(!StringUtils.containsAny(f, "", "created", "setCreated") && !Objects.equals(o.obtainForClass(f), o2.obtainForClass(f)))
 										body2.put("set" + StringUtils.capitalize(f), bodyVal);
 								}
 							}
 							for(String f : Optional.ofNullable(o.getSaves()).orElse(new ArrayList<>())) {
 								if(!body.fieldNames().contains(f)) {
-									if(!StringUtils.containsAny(f, "pk", "created", "setCreated") && !Objects.equals(o.obtainForClass(f), o2.obtainForClass(f)))
+									if(!StringUtils.containsAny(f, "", "created", "setCreated") && !Objects.equals(o.obtainForClass(f), o2.obtainForClass(f)))
 										body2.putNull("set" + StringUtils.capitalize(f));
 								}
 							}
 							if(body2.size() > 0) {
 								siteRequest.setJsonObject(body2);
-								patchIotNodeFuture(o, true).onSuccess(b -> {
-									LOG.info("Import IotNode {} succeeded, modified IotNode. ", body.getValue(IotNode.VAR_pk));
+								patchIotNodeFuture(o2, true).onSuccess(b -> {
+									LOG.info("Import IotNode {} succeeded, modified IotNode. ", body.getValue(IotNode.VAR_id));
 									eventHandler.handle(Future.succeededFuture());
 								}).onFailure(ex -> {
 									LOG.error(String.format("putimportIotNodeFuture failed. "), ex);
@@ -1248,7 +875,7 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 							}
 						} else {
 							postIotNodeFuture(siteRequest, true).onSuccess(b -> {
-								LOG.info("Import IotNode {} succeeded, created new IotNode. ", body.getValue(IotNode.VAR_pk));
+								LOG.info("Import IotNode {} succeeded, created new IotNode. ", body.getValue(IotNode.VAR_id));
 								eventHandler.handle(Future.succeededFuture());
 							}).onFailure(ex -> {
 								LOG.error(String.format("putimportIotNodeFuture failed. "), ex);
@@ -1372,8 +999,6 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 			MultiMap requestHeaders = MultiMap.caseInsensitiveMultiMap();
 			siteRequest.setRequestHeaders(requestHeaders);
 
-			if(listIotNode.size() == 1)
-				siteRequest.setRequestPk(listIotNode.get(0).getPk());
 			page.setSearchListIotNode_(listIotNode);
 			page.setSiteRequest_(siteRequest);
 			page.promiseDeepIotNodePage(siteRequest).onSuccess(a -> {
@@ -1405,25 +1030,9 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 	public Future<IotNode> createIotNode(SiteRequestEnUS siteRequest) {
 		Promise<IotNode> promise = Promise.promise();
 		try {
-			SqlConnection sqlConnection = siteRequest.getSqlConnection();
-			String userId = siteRequest.getUserId();
-			Long userKey = siteRequest.getUserKey();
-			ZonedDateTime created = Optional.ofNullable(siteRequest.getJsonObject()).map(j -> j.getString("created")).map(s -> ZonedDateTime.parse(s, ComputateZonedDateTimeSerializer.ZONED_DATE_TIME_FORMATTER.withZone(ZoneId.of(config.getString(ConfigKeys.SITE_ZONE))))).orElse(ZonedDateTime.now(ZoneId.of(config.getString(ConfigKeys.SITE_ZONE))));
-
-			sqlConnection.preparedQuery("INSERT INTO IotNode(created, userKey) VALUES($1, $2) RETURNING pk")
-					.collecting(Collectors.toList())
-					.execute(Tuple.of(created.toOffsetDateTime(), userKey)).onSuccess(result -> {
-				Row createLine = result.value().stream().findFirst().orElseGet(() -> null);
-				Long pk = createLine.getLong(0);
-				IotNode o = new IotNode();
-				o.setPk(pk);
-				o.setSiteRequest_(siteRequest);
-				promise.complete(o);
-			}).onFailure(ex -> {
-				RuntimeException ex2 = new RuntimeException(ex);
-				LOG.error("createIotNode failed. ", ex2);
-				promise.fail(ex2);
-			});
+			IotNode o = new IotNode();
+			o.setSiteRequest_(siteRequest);
+			promise.complete(o);
 		} catch(Exception ex) {
 			LOG.error(String.format("createIotNode failed. "), ex);
 			promise.fail(ex);
@@ -1523,7 +1132,7 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 
 			String id = serviceRequest.getParams().getJsonObject("path").getString("id");
 			if(id != null && NumberUtils.isCreatable(id)) {
-				searchList.fq("(pk_docvalues_long:" + SearchTool.escapeQueryChars(id) + " OR objectId_docvalues_string:" + SearchTool.escapeQueryChars(id) + ")");
+				searchList.fq("(_docvalues_long:" + SearchTool.escapeQueryChars(id) + " OR objectId_docvalues_string:" + SearchTool.escapeQueryChars(id) + ")");
 			} else if(id != null) {
 				searchList.fq("objectId_docvalues_string:" + SearchTool.escapeQueryChars(id));
 			}
@@ -1687,50 +1296,39 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 	public void searchIotNode2(SiteRequestEnUS siteRequest, Boolean populate, Boolean store, Boolean modify, SearchList<IotNode> searchList) {
 	}
 
-	public Future<Void> persistIotNode(IotNode o) {
+	public Future<Void> persistIotNode(IotNode o, Boolean patch) {
 		Promise<Void> promise = Promise.promise();
 		try {
 			SiteRequestEnUS siteRequest = o.getSiteRequest_();
-			SqlConnection sqlConnection = siteRequest.getSqlConnection();
-			Long pk = o.getPk();
-			sqlConnection.preparedQuery("SELECT * FROM IotNode WHERE pk=$1")
-					.collecting(Collectors.toList())
-					.execute(Tuple.of(pk)
-					).onSuccess(result -> {
 				try {
-					for(Row definition : result.value()) {
-						for(Integer i = 0; i < definition.size(); i++) {
-							String columnName = definition.getColumnName(i);
-							Object columnValue = definition.getValue(i);
-							if(!"pk".equals(columnName)) {
-								try {
-									o.persistForClass(columnName, columnValue);
-								} catch(Exception e) {
-									LOG.error(String.format("persistIotNode failed. "), e);
-								}
+					JsonObject jsonObject = siteRequest.getJsonObject();
+					jsonObject.forEach(definition -> {
+							String columnName;
+							Object columnValue;
+						if(patch && StringUtils.startsWith(definition.getKey(), "set")) {
+							columnName = StringUtils.uncapitalize(StringUtils.substringAfter(definition.getKey(), "set"));
+							columnValue = definition.getValue();
+						} else {
+							columnName = definition.getKey();
+							columnValue = definition.getValue();
+						}
+						if(!"".equals(columnName)) {
+							try {
+								o.persistForClass(columnName, columnValue);
+							} catch(Exception e) {
+								LOG.error(String.format("persistIotNode failed. "), e);
 							}
 						}
-					}
+					});
 					promise.complete();
 				} catch(Exception ex) {
 					LOG.error(String.format("persistIotNode failed. "), ex);
 					promise.fail(ex);
 				}
-			}).onFailure(ex -> {
-				RuntimeException ex2 = new RuntimeException(ex);
-				LOG.error(String.format("persistIotNode failed. "), ex2);
-				promise.fail(ex2);
-			});
 		} catch(Exception ex) {
 			LOG.error(String.format("persistIotNode failed. "), ex);
 			promise.fail(ex);
 		}
-		return promise.future();
-	}
-
-	public Future<Void> relateIotNode(IotNode o) {
-		Promise<Void> promise = Promise.promise();
-			promise.complete();
 		return promise.future();
 	}
 
@@ -1768,67 +1366,6 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 			});
 		} catch(Exception ex) {
 			LOG.error(String.format("indexIotNode failed. "), ex);
-			promise.fail(ex);
-		}
-		return promise.future();
-	}
-
-	public Future<Void> refreshIotNode(IotNode o) {
-		Promise<Void> promise = Promise.promise();
-		SiteRequestEnUS siteRequest = o.getSiteRequest_();
-		try {
-			ApiRequest apiRequest = siteRequest.getApiRequest_();
-			List<Long> pks = Optional.ofNullable(apiRequest).map(r -> r.getPks()).orElse(new ArrayList<>());
-			List<String> classes = Optional.ofNullable(apiRequest).map(r -> r.getClasses()).orElse(new ArrayList<>());
-			Boolean refresh = !"false".equals(siteRequest.getRequestVars().get("refresh"));
-			if(refresh && !Optional.ofNullable(siteRequest.getJsonObject()).map(JsonObject::isEmpty).orElse(true)) {
-				List<Future> futures = new ArrayList<>();
-
-				for(int i=0; i < pks.size(); i++) {
-					Long pk2 = pks.get(i);
-					String classSimpleName2 = classes.get(i);
-				}
-
-				CompositeFuture.all(futures).onSuccess(b -> {
-					JsonObject params = new JsonObject();
-					params.put("body", new JsonObject());
-					params.put("cookie", new JsonObject());
-					params.put("header", new JsonObject());
-					params.put("form", new JsonObject());
-					params.put("path", new JsonObject());
-					JsonObject query = new JsonObject();
-					Boolean softCommit = Optional.ofNullable(siteRequest.getServiceRequest().getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getBoolean("softCommit")).orElse(null);
-					Integer commitWithin = Optional.ofNullable(siteRequest.getServiceRequest().getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getInteger("commitWithin")).orElse(null);
-					if(softCommit == null && commitWithin == null)
-						softCommit = true;
-					if(softCommit != null)
-						query.put("softCommit", softCommit);
-					if(commitWithin != null)
-						query.put("commitWithin", commitWithin);
-					query.put("q", "*:*").put("fq", new JsonArray().add("pk:" + o.getPk())).put("var", new JsonArray().add("refresh:false"));
-					params.put("query", query);
-					JsonObject context = new JsonObject().put("params", params).put("user", siteRequest.getUserPrincipal());
-					JsonObject json = new JsonObject().put("context", context);
-					eventBus.request("smart-village-view-enUS-IotNode", json, new DeliveryOptions().addHeader("action", "patchIotNodeFuture")).onSuccess(c -> {
-						JsonObject responseMessage = (JsonObject)c.body();
-						Integer statusCode = responseMessage.getInteger("statusCode");
-						if(statusCode.equals(200))
-							promise.complete();
-						else
-							promise.fail(new RuntimeException(responseMessage.getString("statusMessage")));
-					}).onFailure(ex -> {
-						LOG.error("Refresh relations failed. ", ex);
-						promise.fail(ex);
-					});
-				}).onFailure(ex -> {
-					LOG.error("Refresh relations failed. ", ex);
-					promise.fail(ex);
-				});
-			} else {
-				promise.complete();
-			}
-		} catch(Exception ex) {
-			LOG.error(String.format("refreshIotNode failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();

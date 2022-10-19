@@ -33,7 +33,7 @@
 				var calendar = new FullCalendar.Calendar(calendarEl, {
 					initialView: 'dayGridMonth'
 				});
-				calendar.render();
+				//calendar.render();
 			});
 			$('#site-calendar-box').accordion({ collapsible: true, active: false });
 {{#if DEFAULT_MAP_LOCATION }}
@@ -250,7 +250,7 @@
 												<div data-class="IotNodeStep" data-var="{{ ../var }}" data-val="{{ @key }}">{{ @key }}: {{ this }}</div>
 {{/eq}}
 {{/each}}
-{{#if ./stats/min }}
+{{#if ./stats/max }}
 									<div>									<span> step </span>									<input id="animateStatsStep" placeholder="step" value="1" style="width: 4em; "/>									<span> min </span>									<input id="animateStatsMin" placeholder="min" value="{{ ./stats/min }}" style="width: 4em; "/>									<span> max </span>									<input id="animateStatsMax" placeholder="max" value="{{ ./stats/max }}" style="width: 4em; "/>									<span> speed in seconds </span>									<input id="animateStatsSpeed" placeholder="speed" value="1" style="width: 4em; "/>									<button onclick="animateStats(); ">animate</button>									</div>{{/if}}
 {{/if}}
 											</div>
@@ -408,7 +408,6 @@
 					<div class="" id="patchIotNodeStepFormValues">
 							<div class="w3-cell-row ">
 {{> "htmCreated" classApiMethodMethod="PATCH"}}
-{{> "htmObjectId" classApiMethodMethod="PATCH"}}
 							</div>
 							<div class="w3-cell-row ">
 {{> "htmArchived" classApiMethodMethod="PATCH"}}
@@ -452,7 +451,6 @@
 						<div id="postIotNodeStepForm">
 							<div class="w3-cell-row ">
 {{> "htmCreated" classApiMethodMethod="POST"}}
-{{> "htmObjectId" classApiMethodMethod="POST"}}
 							</div>
 							<div class="w3-cell-row ">
 {{> "htmArchived" classApiMethodMethod="POST"}}
@@ -852,7 +850,7 @@
 																<button
 																		tabindex="-1"
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_json')); $('#{{classApiMethodMethod}}_json').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#IotNodeStepForm :input[name=id]').val() }], 'setJson', null, function() { addGlow($('#{{classApiMethodMethod}}_json')); }, function() { addError($('#{{classApiMethodMethod}}_json')); }); "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_json')); $('#{{classApiMethodMethod}}_json').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#IotNodeStepForm :input[name=id]').val() }], 'setJson', null, function() { addGlow($('#{{classApiMethodMethod}}_json')); }, function() { addError($('#{{classApiMethodMethod}}_json')); }); "
 																		>
 																	<i class="far fa-eraser "></i>
 																</button>
@@ -886,7 +884,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setJson', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_json')); }, function() { addError($('#{{classApiMethodMethod}}_json')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setJson', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_json')); }, function() { addError($('#{{classApiMethodMethod}}_json')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{iotNodeStep_.json}}"
@@ -918,7 +916,7 @@
 																<button
 																		tabindex="-1"
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_nodeName')); $('#{{classApiMethodMethod}}_nodeName').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#IotNodeStepForm :input[name=id]').val() }], 'setNodeName', null, function() { addGlow($('#{{classApiMethodMethod}}_nodeName')); }, function() { addError($('#{{classApiMethodMethod}}_nodeName')); }); "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_nodeName')); $('#{{classApiMethodMethod}}_nodeName').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#IotNodeStepForm :input[name=id]').val() }], 'setNodeName', null, function() { addGlow($('#{{classApiMethodMethod}}_nodeName')); }, function() { addError($('#{{classApiMethodMethod}}_nodeName')); }); "
 																		>
 																	<i class="far fa-eraser "></i>
 																</button>
@@ -952,7 +950,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setNodeName', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_nodeName')); }, function() { addError($('#{{classApiMethodMethod}}_nodeName')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setNodeName', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_nodeName')); }, function() { addError($('#{{classApiMethodMethod}}_nodeName')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{iotNodeStep_.nodeName}}"
@@ -984,7 +982,7 @@
 																<button
 																		tabindex="-1"
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_nodeType')); $('#{{classApiMethodMethod}}_nodeType').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#IotNodeStepForm :input[name=id]').val() }], 'setNodeType', null, function() { addGlow($('#{{classApiMethodMethod}}_nodeType')); }, function() { addError($('#{{classApiMethodMethod}}_nodeType')); }); "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_nodeType')); $('#{{classApiMethodMethod}}_nodeType').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#IotNodeStepForm :input[name=id]').val() }], 'setNodeType', null, function() { addGlow($('#{{classApiMethodMethod}}_nodeType')); }, function() { addError($('#{{classApiMethodMethod}}_nodeType')); }); "
 																		>
 																	<i class="far fa-eraser "></i>
 																</button>
@@ -1018,7 +1016,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setNodeType', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_nodeType')); }, function() { addError($('#{{classApiMethodMethod}}_nodeType')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setNodeType', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_nodeType')); }, function() { addError($('#{{classApiMethodMethod}}_nodeType')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{iotNodeStep_.nodeType}}"
@@ -1050,7 +1048,7 @@
 																<button
 																		tabindex="-1"
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_nodeId')); $('#{{classApiMethodMethod}}_nodeId').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#IotNodeStepForm :input[name=id]').val() }], 'setNodeId', null, function() { addGlow($('#{{classApiMethodMethod}}_nodeId')); }, function() { addError($('#{{classApiMethodMethod}}_nodeId')); }); "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_nodeId')); $('#{{classApiMethodMethod}}_nodeId').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#IotNodeStepForm :input[name=id]').val() }], 'setNodeId', null, function() { addGlow($('#{{classApiMethodMethod}}_nodeId')); }, function() { addError($('#{{classApiMethodMethod}}_nodeId')); }); "
 																		>
 																	<i class="far fa-eraser "></i>
 																</button>
@@ -1084,7 +1082,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setNodeId', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_nodeId')); }, function() { addError($('#{{classApiMethodMethod}}_nodeId')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setNodeId', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_nodeId')); }, function() { addError($('#{{classApiMethodMethod}}_nodeId')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{iotNodeStep_.nodeId}}"
@@ -1116,7 +1114,7 @@
 																<button
 																		tabindex="-1"
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_location')); $('#{{classApiMethodMethod}}_location').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#IotNodeStepForm :input[name=id]').val() }], 'setLocation', null, function() { addGlow($('#{{classApiMethodMethod}}_location')); }, function() { addError($('#{{classApiMethodMethod}}_location')); }); "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_location')); $('#{{classApiMethodMethod}}_location').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#IotNodeStepForm :input[name=id]').val() }], 'setLocation', null, function() { addGlow($('#{{classApiMethodMethod}}_location')); }, function() { addError($('#{{classApiMethodMethod}}_location')); }); "
 																		>
 																	<i class="far fa-eraser "></i>
 																</button>
@@ -1150,7 +1148,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setLocation', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_location')); }, function() { addError($('#{{classApiMethodMethod}}_location')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setLocation', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_location')); }, function() { addError($('#{{classApiMethodMethod}}_location')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{iotNodeStep_.location}}"

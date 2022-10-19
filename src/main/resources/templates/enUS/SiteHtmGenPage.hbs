@@ -409,7 +409,6 @@
 						<div id="postSiteHtmForm">
 							<div class="w3-cell-row ">
 {{> "htmCreated" classApiMethodMethod="POST"}}
-{{> "htmObjectId" classApiMethodMethod="POST"}}
 							</div>
 							<div class="w3-cell-row ">
 {{> "htmArchived" classApiMethodMethod="POST"}}
@@ -450,7 +449,6 @@
 					<div class="" id="patchSiteHtmFormValues">
 							<div class="w3-cell-row ">
 {{> "htmCreated" classApiMethodMethod="PATCH"}}
-{{> "htmObjectId" classApiMethodMethod="PATCH"}}
 							</div>
 							<div class="w3-cell-row ">
 {{> "htmArchived" classApiMethodMethod="PATCH"}}
@@ -822,7 +820,7 @@
 																<button
 																		tabindex="-1"
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-navy-peony "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_uri')); $('#{{classApiMethodMethod}}_uri').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SiteHtmForm :input[name=id]').val() }], 'setUri', null, function() { addGlow($('#{{classApiMethodMethod}}_uri')); }, function() { addError($('#{{classApiMethodMethod}}_uri')); }); "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_uri')); $('#{{classApiMethodMethod}}_uri').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#SiteHtmForm :input[name=id]').val() }], 'setUri', null, function() { addGlow($('#{{classApiMethodMethod}}_uri')); }, function() { addError($('#{{classApiMethodMethod}}_uri')); }); "
 																		>
 																	<i class="far fa-eraser "></i>
 																</button>
@@ -857,7 +855,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setUri', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_uri')); }, function() { addError($('#{{classApiMethodMethod}}_uri')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setUri', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_uri')); }, function() { addError($('#{{classApiMethodMethod}}_uri')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{siteHtm_.uri}}"
@@ -889,7 +887,7 @@
 																<button
 																		tabindex="-1"
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-navy-peony "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_pageId')); $('#{{classApiMethodMethod}}_pageId').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SiteHtmForm :input[name=id]').val() }], 'setPageId', null, function() { addGlow($('#{{classApiMethodMethod}}_pageId')); }, function() { addError($('#{{classApiMethodMethod}}_pageId')); }); "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_pageId')); $('#{{classApiMethodMethod}}_pageId').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#SiteHtmForm :input[name=id]').val() }], 'setPageId', null, function() { addGlow($('#{{classApiMethodMethod}}_pageId')); }, function() { addError($('#{{classApiMethodMethod}}_pageId')); }); "
 																		>
 																	<i class="far fa-eraser "></i>
 																</button>
@@ -924,7 +922,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setPageId', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_pageId')); }, function() { addError($('#{{classApiMethodMethod}}_pageId')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setPageId', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_pageId')); }, function() { addError($('#{{classApiMethodMethod}}_pageId')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{siteHtm_.pageId}}"
@@ -956,7 +954,7 @@
 																<button
 																		tabindex="-1"
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-navy-peony "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_sequenceNum')); $('#{{classApiMethodMethod}}_sequenceNum').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SiteHtmForm :input[name=id]').val() }], 'setSequenceNum', null, function() { addGlow($('#{{classApiMethodMethod}}_sequenceNum')); }, function() { addError($('#{{classApiMethodMethod}}_sequenceNum')); }); "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_sequenceNum')); $('#{{classApiMethodMethod}}_sequenceNum').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#SiteHtmForm :input[name=id]').val() }], 'setSequenceNum', null, function() { addGlow($('#{{classApiMethodMethod}}_sequenceNum')); }, function() { addError($('#{{classApiMethodMethod}}_sequenceNum')); }); "
 																		>
 																	<i class="far fa-eraser "></i>
 																</button>
@@ -991,7 +989,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setSequenceNum', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_sequenceNum')); }, function() { addError($('#{{classApiMethodMethod}}_sequenceNum')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setSequenceNum', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_sequenceNum')); }, function() { addError($('#{{classApiMethodMethod}}_sequenceNum')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{siteHtm_.sequenceNum}}"
@@ -1023,7 +1021,7 @@
 																<button
 																		tabindex="-1"
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-navy-peony "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_htmGroup')); $('#{{classApiMethodMethod}}_htmGroup').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SiteHtmForm :input[name=id]').val() }], 'setHtmGroup', null, function() { addGlow($('#{{classApiMethodMethod}}_htmGroup')); }, function() { addError($('#{{classApiMethodMethod}}_htmGroup')); }); "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_htmGroup')); $('#{{classApiMethodMethod}}_htmGroup').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#SiteHtmForm :input[name=id]').val() }], 'setHtmGroup', null, function() { addGlow($('#{{classApiMethodMethod}}_htmGroup')); }, function() { addError($('#{{classApiMethodMethod}}_htmGroup')); }); "
 																		>
 																	<i class="far fa-eraser "></i>
 																</button>
@@ -1058,7 +1056,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setHtmGroup', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_htmGroup')); }, function() { addError($('#{{classApiMethodMethod}}_htmGroup')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setHtmGroup', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_htmGroup')); }, function() { addError($('#{{classApiMethodMethod}}_htmGroup')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{siteHtm_.htmGroup}}"
@@ -1090,7 +1088,7 @@
 																<button
 																		tabindex="-1"
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-navy-peony "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_labels')); $('#{{classApiMethodMethod}}_labels').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SiteHtmForm :input[name=id]').val() }], 'setLabels', null, function() { addGlow($('#{{classApiMethodMethod}}_labels')); }, function() { addError($('#{{classApiMethodMethod}}_labels')); }); "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_labels')); $('#{{classApiMethodMethod}}_labels').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#SiteHtmForm :input[name=id]').val() }], 'setLabels', null, function() { addGlow($('#{{classApiMethodMethod}}_labels')); }, function() { addError($('#{{classApiMethodMethod}}_labels')); }); "
 																		>
 																	<i class="far fa-eraser "></i>
 																</button>
@@ -1125,7 +1123,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setLabels', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_labels')); }, function() { addError($('#{{classApiMethodMethod}}_labels')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setLabels', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_labels')); }, function() { addError($('#{{classApiMethodMethod}}_labels')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{siteHtm_.labels}}"
@@ -1157,7 +1155,7 @@
 																<button
 																		tabindex="-1"
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-navy-peony "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_eBefore')); $('#{{classApiMethodMethod}}_eBefore').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SiteHtmForm :input[name=id]').val() }], 'setEBefore', null, function() { addGlow($('#{{classApiMethodMethod}}_eBefore')); }, function() { addError($('#{{classApiMethodMethod}}_eBefore')); }); "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_eBefore')); $('#{{classApiMethodMethod}}_eBefore').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#SiteHtmForm :input[name=id]').val() }], 'setEBefore', null, function() { addGlow($('#{{classApiMethodMethod}}_eBefore')); }, function() { addError($('#{{classApiMethodMethod}}_eBefore')); }); "
 																		>
 																	<i class="far fa-eraser "></i>
 																</button>
@@ -1192,7 +1190,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setEBefore', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_eBefore')); }, function() { addError($('#{{classApiMethodMethod}}_eBefore')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setEBefore', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_eBefore')); }, function() { addError($('#{{classApiMethodMethod}}_eBefore')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{siteHtm_.eBefore}}"
@@ -1224,7 +1222,7 @@
 																<button
 																		tabindex="-1"
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-navy-peony "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_eAfter')); $('#{{classApiMethodMethod}}_eAfter').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SiteHtmForm :input[name=id]').val() }], 'setEAfter', null, function() { addGlow($('#{{classApiMethodMethod}}_eAfter')); }, function() { addError($('#{{classApiMethodMethod}}_eAfter')); }); "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_eAfter')); $('#{{classApiMethodMethod}}_eAfter').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#SiteHtmForm :input[name=id]').val() }], 'setEAfter', null, function() { addGlow($('#{{classApiMethodMethod}}_eAfter')); }, function() { addError($('#{{classApiMethodMethod}}_eAfter')); }); "
 																		>
 																	<i class="far fa-eraser "></i>
 																</button>
@@ -1259,7 +1257,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setEAfter', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_eAfter')); }, function() { addError($('#{{classApiMethodMethod}}_eAfter')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setEAfter', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_eAfter')); }, function() { addError($('#{{classApiMethodMethod}}_eAfter')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{siteHtm_.eAfter}}"
@@ -1291,7 +1289,7 @@
 																<button
 																		tabindex="-1"
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-navy-peony "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_a')); $('#{{classApiMethodMethod}}_a').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SiteHtmForm :input[name=id]').val() }], 'setA', null, function() { addGlow($('#{{classApiMethodMethod}}_a')); }, function() { addError($('#{{classApiMethodMethod}}_a')); }); "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_a')); $('#{{classApiMethodMethod}}_a').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#SiteHtmForm :input[name=id]').val() }], 'setA', null, function() { addGlow($('#{{classApiMethodMethod}}_a')); }, function() { addError($('#{{classApiMethodMethod}}_a')); }); "
 																		>
 																	<i class="far fa-eraser "></i>
 																</button>
@@ -1326,7 +1324,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setA', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_a')); }, function() { addError($('#{{classApiMethodMethod}}_a')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setA', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_a')); }, function() { addError($('#{{classApiMethodMethod}}_a')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{siteHtm_.a}}"
@@ -1358,7 +1356,7 @@
 																<button
 																		tabindex="-1"
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-navy-peony "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_text')); $('#{{classApiMethodMethod}}_text').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SiteHtmForm :input[name=id]').val() }], 'setText', null, function() { addGlow($('#{{classApiMethodMethod}}_text')); }, function() { addError($('#{{classApiMethodMethod}}_text')); }); "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_text')); $('#{{classApiMethodMethod}}_text').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#SiteHtmForm :input[name=id]').val() }], 'setText', null, function() { addGlow($('#{{classApiMethodMethod}}_text')); }, function() { addError($('#{{classApiMethodMethod}}_text')); }); "
 																		>
 																	<i class="far fa-eraser "></i>
 																</button>
@@ -1393,7 +1391,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setText', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_text')); }, function() { addError($('#{{classApiMethodMethod}}_text')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setText', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_text')); }, function() { addError($('#{{classApiMethodMethod}}_text')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{siteHtm_.text}}"
@@ -1425,7 +1423,7 @@
 																<button
 																		tabindex="-1"
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-navy-peony "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_comment')); $('#{{classApiMethodMethod}}_comment').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SiteHtmForm :input[name=id]').val() }], 'setComment', null, function() { addGlow($('#{{classApiMethodMethod}}_comment')); }, function() { addError($('#{{classApiMethodMethod}}_comment')); }); "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_comment')); $('#{{classApiMethodMethod}}_comment').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#SiteHtmForm :input[name=id]').val() }], 'setComment', null, function() { addGlow($('#{{classApiMethodMethod}}_comment')); }, function() { addError($('#{{classApiMethodMethod}}_comment')); }); "
 																		>
 																	<i class="far fa-eraser "></i>
 																</button>
@@ -1460,7 +1458,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setComment', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_comment')); }, function() { addError($('#{{classApiMethodMethod}}_comment')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setComment', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_comment')); }, function() { addError($('#{{classApiMethodMethod}}_comment')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{siteHtm_.comment}}"
@@ -1492,7 +1490,7 @@
 																<button
 																		tabindex="-1"
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-navy-peony "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_tabs')); $('#{{classApiMethodMethod}}_tabs').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SiteHtmForm :input[name=id]').val() }], 'setTabs', null, function() { addGlow($('#{{classApiMethodMethod}}_tabs')); }, function() { addError($('#{{classApiMethodMethod}}_tabs')); }); "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_tabs')); $('#{{classApiMethodMethod}}_tabs').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#SiteHtmForm :input[name=id]').val() }], 'setTabs', null, function() { addGlow($('#{{classApiMethodMethod}}_tabs')); }, function() { addError($('#{{classApiMethodMethod}}_tabs')); }); "
 																		>
 																	<i class="far fa-eraser "></i>
 																</button>
@@ -1527,7 +1525,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setTabs', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_tabs')); }, function() { addError($('#{{classApiMethodMethod}}_tabs')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setTabs', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_tabs')); }, function() { addError($('#{{classApiMethodMethod}}_tabs')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{siteHtm_.tabs}}"
@@ -1584,7 +1582,7 @@
 		{{/eq}}
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
-															onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setNewLine', $(this).prop('checked'), function() { addGlow($('#{{classApiMethodMethod}}_newLine')); }, function() { addError($('#{{classApiMethodMethod}}_newLine')); }); "
+															onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setNewLine', $(this).prop('checked'), function() { addGlow($('#{{classApiMethodMethod}}_newLine')); }, function() { addError($('#{{classApiMethodMethod}}_newLine')); }); "
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
 		{{#if siteHtm_.newLine}}
@@ -1624,7 +1622,7 @@
 																<button
 																		tabindex="-1"
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-navy-peony "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_htmBefore')); $('#{{classApiMethodMethod}}_htmBefore').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SiteHtmForm :input[name=id]').val() }], 'setHtmBefore', null, function() { addGlow($('#{{classApiMethodMethod}}_htmBefore')); }, function() { addError($('#{{classApiMethodMethod}}_htmBefore')); }); "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_htmBefore')); $('#{{classApiMethodMethod}}_htmBefore').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#SiteHtmForm :input[name=id]').val() }], 'setHtmBefore', null, function() { addGlow($('#{{classApiMethodMethod}}_htmBefore')); }, function() { addError($('#{{classApiMethodMethod}}_htmBefore')); }); "
 																		>
 																	<i class="far fa-eraser "></i>
 																</button>
@@ -1659,7 +1657,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setHtmBefore', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_htmBefore')); }, function() { addError($('#{{classApiMethodMethod}}_htmBefore')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setHtmBefore', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_htmBefore')); }, function() { addError($('#{{classApiMethodMethod}}_htmBefore')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{siteHtm_.htmBefore}}"
@@ -1691,7 +1689,7 @@
 																<button
 																		tabindex="-1"
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-navy-peony "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_htmAfter')); $('#{{classApiMethodMethod}}_htmAfter').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SiteHtmForm :input[name=id]').val() }], 'setHtmAfter', null, function() { addGlow($('#{{classApiMethodMethod}}_htmAfter')); }, function() { addError($('#{{classApiMethodMethod}}_htmAfter')); }); "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_htmAfter')); $('#{{classApiMethodMethod}}_htmAfter').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#SiteHtmForm :input[name=id]').val() }], 'setHtmAfter', null, function() { addGlow($('#{{classApiMethodMethod}}_htmAfter')); }, function() { addError($('#{{classApiMethodMethod}}_htmAfter')); }); "
 																		>
 																	<i class="far fa-eraser "></i>
 																</button>
@@ -1726,7 +1724,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setHtmAfter', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_htmAfter')); }, function() { addError($('#{{classApiMethodMethod}}_htmAfter')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setHtmAfter', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_htmAfter')); }, function() { addError($('#{{classApiMethodMethod}}_htmAfter')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{siteHtm_.htmAfter}}"

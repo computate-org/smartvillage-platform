@@ -120,7 +120,7 @@ public class IotNodeReader extends IotNodeReaderGen<Object> {
 									.add(IotNode.VAR_json)
 									)
 							.put(IotNode.VAR_json, json)
-							.put(IotNode.VAR_pk, id)
+							.put(IotNode.VAR_id, id)
 							;
 
 					JsonObject params = new JsonObject();

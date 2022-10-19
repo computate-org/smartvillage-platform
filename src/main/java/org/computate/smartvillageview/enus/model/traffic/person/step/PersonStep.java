@@ -13,6 +13,7 @@ import io.vertx.pgclient.data.Point;
  * Page: true
  * SuperPage.enUS: MapResultPage
  * Indexed: true
+ * Map.Integer.classSort: 11
  * 
  * ApiTag.enUS: Person Step
  * ApiUri.enUS: /api/person-step

@@ -31,7 +31,6 @@ import org.slf4j.LoggerFactory;
 import java.math.RoundingMode;
 import java.util.Map;
 import java.lang.Object;
-import java.lang.Void;
 import java.lang.String;
 import java.time.ZonedDateTime;
 import java.time.ZoneId;
@@ -138,48 +137,6 @@ public abstract class BaseResultGen<DEV> extends Object {
 			setSiteRequest_(siteRequest_Wrap.o);
 		}
 		return (BaseResult)this;
-	}
-
-	///////////////////
-	// promiseBefore //
-	///////////////////
-
-	/**	 The entity promiseBefore
-	 *	 is defined as null before being initialized. 
-	 */
-	@JsonIgnore
-	@JsonInclude(Include.NON_NULL)
-	protected Void promiseBefore;
-
-	/**	<br> The entity promiseBefore
-	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.result.base.BaseResult&fq=entiteVar_enUS_indexed_string:promiseBefore">Find the entity promiseBefore in Solr</a>
-	 * <br>
-	 * @param promise is for wrapping a value to assign to this entity during initialization. 
-	 **/
-	protected abstract void _promiseBefore(Promise<Void> promise);
-
-	public Void getPromiseBefore() {
-		return promiseBefore;
-	}
-
-	public void setPromiseBefore(Void promiseBefore) {
-		this.promiseBefore = promiseBefore;
-	}
-	public static Void staticSetPromiseBefore(SiteRequestEnUS siteRequest_, String o) {
-		return null;
-	}
-	protected Future<Void> promiseBeforePromise() {
-		Promise<Void> promise = Promise.promise();
-		Promise<Void> promise2 = Promise.promise();
-		_promiseBefore(promise2);
-		promise2.future().onSuccess(o -> {
-			setPromiseBefore(o);
-			promise.complete(o);
-		}).onFailure(ex -> {
-			promise.fail(ex);
-		});
-		return promise.future();
 	}
 
 	///////////////
@@ -943,10 +900,6 @@ public abstract class BaseResultGen<DEV> extends Object {
 		return BaseResult.staticSearchStrObjectId(siteRequest_, BaseResult.staticSearchObjectId(siteRequest_, BaseResult.staticSetObjectId(siteRequest_, o)));
 	}
 
-	public String sqlObjectId() {
-		return objectId;
-	}
-
 	///////////////////
 	// objectSuggest //
 	///////////////////
@@ -1258,10 +1211,6 @@ public abstract class BaseResultGen<DEV> extends Object {
 		return BaseResult.staticSearchStrId(siteRequest_, BaseResult.staticSearchId(siteRequest_, BaseResult.staticSetId(siteRequest_, o)));
 	}
 
-	public String sqlId() {
-		return id;
-	}
-
 	//////////////
 	// initDeep //
 	//////////////
@@ -1288,22 +1237,6 @@ public abstract class BaseResultGen<DEV> extends Object {
 			Promise<Void> promise2 = Promise.promise();
 			try {
 				siteRequest_Init();
-				promise2.complete();
-			} catch(Exception ex) {
-				promise2.fail(ex);
-			}
-			return promise2.future();
-		}).compose(a -> {
-			Promise<Void> promise2 = Promise.promise();
-			promiseBeforePromise().onSuccess(promiseBefore -> {
-				promise2.complete();
-			}).onFailure(ex -> {
-				promise2.fail(ex);
-			});
-			return promise2.future();
-		}).compose(a -> {
-			Promise<Void> promise2 = Promise.promise();
-			try {
 				inheritPkInit();
 				createdInit();
 				modifiedInit();
@@ -1377,8 +1310,6 @@ public abstract class BaseResultGen<DEV> extends Object {
 		switch(var) {
 			case "siteRequest_":
 				return oBaseResult.siteRequest_;
-			case "promiseBefore":
-				return oBaseResult.promiseBefore;
 			case "inheritPk":
 				return oBaseResult.inheritPk;
 			case "created":
@@ -1715,16 +1646,6 @@ public abstract class BaseResultGen<DEV> extends Object {
 				else if(val instanceof String)
 					setUserKey((String)val);
 				saves.add("userKey");
-				return val;
-			case "objectid":
-				if(val instanceof String)
-					setObjectId((String)val);
-				saves.add("objectId");
-				return val;
-			case "id":
-				if(val instanceof String)
-					setId((String)val);
-				saves.add("id");
 				return val;
 			default:
 				return null;
@@ -2084,7 +2005,6 @@ public abstract class BaseResultGen<DEV> extends Object {
 
 	public static final String CLASS_SIMPLE_NAME = "BaseResult";
 	public static final String VAR_siteRequest_ = "siteRequest_";
-	public static final String VAR_promiseBefore = "promiseBefore";
 	public static final String VAR_inheritPk = "inheritPk";
 	public static final String VAR_created = "created";
 	public static final String VAR_modified = "modified";
@@ -2134,7 +2054,6 @@ public abstract class BaseResultGen<DEV> extends Object {
 	}
 
 	public static final String DISPLAY_NAME_siteRequest_ = "";
-	public static final String DISPLAY_NAME_promiseBefore = "";
 	public static final String DISPLAY_NAME_inheritPk = "";
 	public static final String DISPLAY_NAME_created = "created";
 	public static final String DISPLAY_NAME_modified = "modified";
@@ -2162,8 +2081,6 @@ public abstract class BaseResultGen<DEV> extends Object {
 		switch(var) {
 		case VAR_siteRequest_:
 			return DISPLAY_NAME_siteRequest_;
-		case VAR_promiseBefore:
-			return DISPLAY_NAME_promiseBefore;
 		case VAR_inheritPk:
 			return DISPLAY_NAME_inheritPk;
 		case VAR_created:
@@ -2211,8 +2128,6 @@ public abstract class BaseResultGen<DEV> extends Object {
 		switch(var) {
 		case VAR_siteRequest_:
 			return "The current request object";
-		case VAR_promiseBefore:
-			return "An asynchronous method for searching for a computer related to this message";
 		case VAR_inheritPk:
 			return "An optional inherited primary key from a legacy system for this object in the database";
 		case VAR_created:
@@ -2260,8 +2175,6 @@ public abstract class BaseResultGen<DEV> extends Object {
 		switch(var) {
 		case VAR_siteRequest_:
 			return "SiteRequestEnUS";
-		case VAR_promiseBefore:
-			return "Void";
 		case VAR_inheritPk:
 			return "String";
 		case VAR_created:

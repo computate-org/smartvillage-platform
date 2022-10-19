@@ -83,6 +83,8 @@ PROJECTS:
         template: vertx/WorkerVerticle.java
       - path: "{{ SITE_SRC }}/src/main/java/{{ SITE_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_BaseModel | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_BaseModel }}.java"
         template: base/BaseModel.java
+      - path: "{{ SITE_SRC }}/src/main/java/{{ SITE_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_BaseResult | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_BaseResult }}.java"
+        template: base/BaseResult.java
       - path: "{{ SITE_SRC }}/src/main/java/{{ SITE_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_SiteUser | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_SiteUser }}.java"
         template: user/SiteUser.java
       - path: "{{ SITE_SRC }}/src/main/java/{{ SITE_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_SitePage | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_SitePage }}.java"
@@ -131,7 +133,7 @@ PROJECTS:
         template: js/sockjs-map.json
       - path: "{{ SITE_SRC }}-static/js/vertx-eventbus.js"
         template: js/vertx-eventbus.js
-      - path: "{{ SITE_SRC }}-static/js/main.min.js"
+      - path: "{{ SITE_SRC }}-static/js/fullcalendar/main.min.js"
         template: fullcalendar/main.min.js
       - path: "{{ SITE_SRC }}-static/css/jquery-ui.css"
         template: css/jquery-ui.css
@@ -139,7 +141,7 @@ PROJECTS:
         template: css/site-enUS.css
       - path: "{{ SITE_SRC }}-static/css/w3.css"
         template: css/w3.css
-      - path: "{{ SITE_SRC }}-static/css/main.min.js"
+      - path: "{{ SITE_SRC }}-static/css/fullcalendar/main.min.js"
         template: fullcalendar/main.min.css
       - path: "{{ SITE_SRC }}-static/svg/openshift.svg"
         template: svg/openshift.svg
@@ -179,6 +181,16 @@ CONFIG_TEMPLATE: |2
   DEFAULT_MAP_ZOOM: "3"
 
 CONFIG_KEYS: |2
+  
+  	/**
+  	 * 
+  	 **/
+  	public static final String SUMO_EXECUTABLE_PATH = "SUMO_EXECUTABLE_PATH";
+  
+  	/**
+  	 * 
+  	 **/
+  	public static final String PYTHON_EXECUTABLE_PATH = "PYTHON_EXECUTABLE_PATH";
   
   	/**
   	 * 
@@ -326,6 +338,7 @@ WORKER_IMPORTS: |
   import org.computate.smartvillageview.enus.model.iotnode.IotNode;
   import org.computate.smartvillageview.enus.model.traffic.simulation.reader.TrafficFcdReader;
   import org.computate.smartvillageview.enus.model.traffic.time.step.TimeStep;
+  import org.computate.smartvillageview.enus.model.iotnode.reader.IotNodeReader;
 
 WORKER_IMPORT_DATA: |2
   
@@ -359,7 +372,17 @@ WORKER_IMPORT_DATA: |2
   	private Future<Void> importDataClass(String classSimpleName, ZonedDateTime startDateTime) {
   		Promise<Void> promise = Promise.promise();
   		if(IotNode.CLASS_SIMPLE_NAME.equals(classSimpleName)) {
-  			importDataIotNode().onComplete(a -> {
+  			SiteRequestEnUS siteRequest = new SiteRequestEnUS();
+  			siteRequest.setConfig(config());
+  			siteRequest.setWebClient(webClient);
+  			siteRequest.initDeepSiteRequestEnUS(siteRequest);
+  			IotNodeReader reader = new IotNodeReader();
+  			reader.setVertx(vertx);
+  			reader.setWorkerExecutor(workerExecutor);
+  			reader.setTemplateEngine(templateEngine);
+  			reader.setHandlebars(handlebars);
+  			reader.initDeepForClass(siteRequest);
+  			reader.importData().onComplete(a -> {
   				String importPeriod = config().getString(String.format("%s_%s", ConfigKeys.IMPORT_DATA_PERIOD, classSimpleName));
   				if(importPeriod != null && startDateTime != null) {
   					Duration duration = TimeTool.parseNextDuration(importPeriod);
@@ -405,9 +428,7 @@ WORKER_IMPORT_DATA: |2
   			siteRequest.setConfig(config());
   			siteRequest.setWebClient(webClient);
   			siteRequest.initDeepSiteRequestEnUS(siteRequest);
-  			TrafficFcdReader reader = new TrafficFcdReader();
-  			reader.setVertx(vertx);
-  			reader.setWorkerExecutor(workerExecutor);
+  			TrafficFcdReader reader = new TrafficFcdReader(vertx, workerExecutor, siteRequest, config());
   			reader.initDeepForClass(siteRequest);
   			reader.importFcd().onComplete(a -> {
   				String importPeriod = config().getString(String.format("%s_%s", ConfigKeys.IMPORT_DATA_PERIOD, classSimpleName));
@@ -427,72 +448,6 @@ WORKER_IMPORT_DATA: |2
   		}
   		return promise.future();
   	}
-  
-  	/**
-  	 * Description: Import IOT Node data
-  	 * Val.Complete.enUS:Importing %s data completed. 
-  	 * Val.Fail.enUS:Importing %s data failed. 
-  	 */
-  	private Future<Void> importDataIotNode() {
-  		Promise<Void> promise = Promise.promise();
-  		webClient.post(config().getInteger(ConfigKeys.YGGIO_PORT), config().getString(ConfigKeys.YGGIO_HOST_NAME), config().getString(ConfigKeys.YGGIO_AUTH_LOCAL_URI))
-  				.ssl(config().getBoolean(ConfigKeys.YGGIO_SSL))
-  				.expect(ResponsePredicate.SC_OK)
-  				.putHeader("Content-Type", "application/json")
-  				.sendJsonObject(new JsonObject()
-  						.put("username", config().getString(ConfigKeys.YGGIO_USERNAME))
-  						.put("password", config().getString(ConfigKeys.YGGIO_PASSWORD))
-  						)
-  				.onSuccess(tokenResponse -> {
-  			JsonObject token = tokenResponse.bodyAsJsonObject();
-  			webClient.get(config().getInteger(ConfigKeys.YGGIO_PORT), config().getString(ConfigKeys.YGGIO_HOST_NAME), config().getString(ConfigKeys.YGGIO_API_RELATIVE_URI_IotNode))
-  					.ssl(config().getBoolean(ConfigKeys.YGGIO_SSL))
-  					.authentication(new TokenCredentials(token.getString("token")))
-  					.expect(ResponsePredicate.SC_OK)
-  					.send()
-  					.onSuccess(response -> {
-  				JsonArray data = response.bodyAsJsonArray();
-  				List<Future> futures = new ArrayList<>();
-  
-  				data.stream().forEach(row -> {
-  					JsonObject json = (JsonObject)row;
-  					String id = json.getString("_id");
-  
-  					JsonObject body = new JsonObject()
-  							.put(IotNode.VAR_saves, new JsonArray()
-  									.add(IotNode.VAR_inheritPk)
-  									.add(IotNode.VAR_json)
-  									)
-  							.put(IotNode.VAR_json, json)
-  							.put(IotNode.VAR_pk, id)
-  							;
-  
-  					JsonObject params = new JsonObject();
-  					params.put("body", body);
-  					params.put("path", new JsonObject());
-  					params.put("cookie", new JsonObject());
-  					params.put("query", new JsonObject().put("commitWithin", 10000).put("q", "*:*").put("var", new JsonArray().add("refresh:false")));
-  					JsonObject context = new JsonObject().put("params", params);
-  					JsonObject request = new JsonObject().put("context", context);
-  					futures.add(vertx.eventBus().request(String.format("smart-village-view-enUS-%s", IotNode.CLASS_SIMPLE_NAME), request, new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", IotNode.CLASS_SIMPLE_NAME))));
-  				});
-  				CompositeFuture.all(futures).onSuccess(a -> {
-  					LOG.info(String.format(importDataIotNodeComplete, IotNode.CLASS_SIMPLE_NAME));
-  					promise.complete();
-  				}).onFailure(ex -> {
-  					LOG.error(String.format(importDataIotNodeFail, IotNode.CLASS_SIMPLE_NAME), ex);
-  					promise.fail(ex);
-  				});
-  			}).onFailure(ex -> {
-  				LOG.error(String.format(importDataIotNodeFail, IotNode.CLASS_SIMPLE_NAME), ex);
-  				promise.fail(ex);
-  			});
-  		}).onFailure(ex -> {
-  			LOG.error(String.format(importDataIotNodeFail, IotNode.CLASS_SIMPLE_NAME), ex);
-  			promise.fail(ex);
-  		});
-  		return promise.future();
-  	}
 
 AFTER_htmStylePageLayout: |2
   		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anonymous%20Pro%7CBellefair%7CJomhuria%7CPT%20Serif%3A700%7CStint%20Ultra%20Condensed&amp;display=swap"/>
@@ -503,7 +458,7 @@ ALL_Dockerfile: |2
   MAINTAINER Christopher Tate <computate@computate.org>
   
   ENV APP_NAME=sumo \
-  	APP_DEPENDENCIES="git python3 python3-pip python3-virtualenv make gcc gcc-c++ readline-devel tcl zlib-devel libpng-devel libjpeg-turbo-devel libtiff-devel libXext-devel libXft-devel mesa-libGLw mesa-libGL-devel mesa-libGLU-devel cmake xerces-c-devel proj-devel gl2ps-devel swig java-11-openjdk-devel maven libsq3-devel libsqlite3x-devel" \
+  	APP_DEPENDENCIES="rsync git python3 python3-pip python3-virtualenv make gcc gcc-c++ readline-devel tcl zlib-devel libpng-devel libjpeg-turbo-devel libtiff-devel libXext-devel libXft-devel mesa-libGLw mesa-libGL-devel mesa-libGLU-devel cmake xerces-c-devel proj-devel gl2ps-devel swig java-11-openjdk-devel maven libsq3-devel libsqlite3x-devel" \
   	# gtest-devel gdal-devel ffmpeg-devel
   	APP_DISPLAY_NAME="SUMO Simulation of Urban Mobility" \
   	APP_PREFIX="/usr/local" \
@@ -526,7 +481,7 @@ ALL_Dockerfile: |2
   RUN /usr/bin/virtualenv ${PYTHON_DIR}
   RUN source ${PYTHON_DIR}/bin/activate && pip install setuptools_rust wheel
   RUN source ${PYTHON_DIR}/bin/activate && pip install --upgrade pip
-  RUN source ${PYTHON_DIR}/bin/activate && pip install ansible
+  RUN source ${PYTHON_DIR}/bin/activate && pip install ansible sumolib pyproj
   RUN git clone https://github.com/computate-org/computate_sumo.git /root/.ansible/roles/computate.computate_sumo
   RUN git clone https://github.com/computate-org/computate_sqlite.git /root/.ansible/roles/computate.computate_sqlite
   RUN git clone https://github.com/computate-org/computate_fox.git /root/.ansible/roles/computate.computate_fox
@@ -570,23 +525,54 @@ MIDDLE_Dockerfile: |2
 
 README_END: |
   
+  ## How the base classes for this project were created
+  
+  ```bash
+  ansible-playbook -e @~/.local/src/smart-village-view/local/ansible_install_vars.yml ~/.local/src/computate-org/vertx_project.yml
+  ```
+  
   # Load a new map traffic data into SUMO
   
   ```bash
   cd ~/.local/share/sumo/data
-  env LD_LIBRARY_PATH=~/.local/lib "SUMO_HOME=$HOME/.local/share/sumo" python ~/.local/share/sumo/tools/osmWebWizard.py
+  env LD_LIBRARY_PATH=~/.local/lib:~/.local/lib64 "SUMO_HOME=$HOME/.local/share/sumo" python ~/.local/share/sumo/tools/osmWebWizard.py
   ```
   
   # Export SUMO vehicle coordinate data
   
   ```bash
-  env LD_LIBRARY_PATH=~/.local/lib "SUMO_HOME=$HOME/.local/share/sumo" SUMO_HOME=~/.local/share/sumo sumo --fcd-output ~/.local/share/sumo/data/veberod/veberod-fcd.xml -c ~/.local/share/sumo/data/veberod/veberod.sumocfg --fcd-output.geo -b 10 -e 360 --step-length 0.1
+  env LD_LIBRARY_PATH=~/.local/lib:~/.local/lib64 "SUMO_HOME=$HOME/.local/share/sumo" SUMO_HOME=~/.local/share/sumo sumo --fcd-output ~/.local/share/sumo/data/veberod/veberod-fcd.xml -c ~/.local/share/sumo/data/veberod/veberod.sumocfg --fcd-output.geo -b 10 -e 360 --step-length 0.1
+  ```
+  
+  # Export SUMO full data
+  
+  ```bash
+  env LD_LIBRARY_PATH=~/.local/lib:~/.local/lib64 "SUMO_HOME=$HOME/.local/share/sumo" SUMO_HOME=~/.local/share/sumo sumo --full-output ~/.local/share/sumo/data/veberod/veberod-full.xml -c ~/.local/share/sumo/data/veberod/veberod.sumocfg --fcd-output.geo -b 10 -e 360 --step-length 0.1
+  ```
+  
+  # Convert X,Y coordinates to geo coordinates with python
+  
+  The Veberod_intersection.net.xml contains data about traffic lights like the x/y position. 
+  
+  ```xml
+  <junction id="267701936" type="traffic_light" x="220.61" y="853.48" 
+  ```
+  
+  To convert the x/y position, use python: 
+  
+  ```bash
+  pip install pyproj sumolib
+  python
+  >>> import sumolib
+  >>> net = sumolib.net.readNet('/home/ctate/.local/src/TLC/TLC_sumo/Veberod_intersection.net.xml')
+  >>> print(net.convertXY2LonLat(220.61,853.48))
+  (13.49260653795143, 55.633791753658265)
   ```
   
   # Run SUMO with Traci TCP server
   
   ```bash
-  env SUMO_HOME=/home/ctate/.local/share/sumo LD_LIBRARY_PATH=/home/ctate/.local/lib /home/ctate/.local/bin/sumo-gui --remote-port 8813 --num-clients 1 --start
+  env SUMO_HOME=/home/ctate/.local/share/sumo LD_LIBRARY_PATH=/home/ctate/.local/lib:~/.local/lib64 /home/ctate/.local/bin/sumo-gui --remote-port 8813 --num-clients 1 --start
   ```
   
   ## Python interact with the Traci TCP server
@@ -602,18 +588,6 @@ README_END: |
   conn.simulationStep()
   conn.simulationStep()
   ```
-  
-  # Installing Solr Helm Chart for scaling Solr
-  
-  ```bash
-  oc apply --server-side=true -k ~/.local/src/smart-village-view/openshift/kustomization/bundle/solr-helm-repo/
-  helm install solr-operator apache-solr/solr-operator --version 0.5.1 --namespace solr --set serviceAccount.create=true --set serviceAccount.name=solr
-  oc apply --server-side=true -k ~/.local/src/smart-village-view/openshift/kustomization/bundle/solr-cloud/
-  
-  oc exec $(oc get pod -l technology=solr-cloud -o jsonpath='{.items[0].metadata.name}' -n solr) -n solr -- /opt/solr/bin/solr zk upconfig -n computate -d /opt/solr/server/solr/configsets/computate -z 'default-solrcloud-zookeeper-0.default-solrcloud-zookeeper-headless.solr.svc.cluster.local:2181'
-  
-  oc exec $(oc get pod -l technology=solr-cloud -o jsonpath='{.items[0].metadata.name}' -n solr) -n solr -- /opt/solr/bin/solr create_collection -c smart-village-view -n computate
-  ```
 
 MIDDLE_API_COUNTER: |
   API_COUNTER_RESUME: 0
@@ -622,3 +596,12 @@ MIDDLE_API_COUNTER: |
   API_COUNTER_FETCH_TimeStep: 1
   API_COUNTER_RESUME_VehicleStep: 0
   API_COUNTER_FETCH_VehicleStep: 10
+
+SITE_POM_DEPENDENCIES_END: |-2
+  
+  
+  		<dependency>
+  			<groupId>org.apache.commons</groupId>
+  			<artifactId>commons-exec</artifactId>
+  			<version>1.3</version>
+  		</dependency>

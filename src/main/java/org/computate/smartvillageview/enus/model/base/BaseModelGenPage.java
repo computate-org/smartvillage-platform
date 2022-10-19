@@ -19,6 +19,8 @@ import org.computate.search.wrap.Wrap;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.LocalDate;
+import java.time.Duration;
+import java.time.Instant;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.api.service.ServiceRequest;
 import io.vertx.core.json.JsonArray;
@@ -158,7 +160,29 @@ public class BaseModelGenPage extends BaseModelGenPageGen<PageLayout> {
 			if(defaultFieldListVars.contains(var)) {
 				json.put("fieldList", true);
 			}
-			if(StringUtils.equalsAny(type, "date")) {
+			if(StringUtils.equalsAny(type, "date") && json.containsKey("stats")) {
+				JsonObject stats = json.getJsonObject("stats");
+				Instant min = Instant.parse(stats.getString("min"));
+				Instant max = Instant.parse(stats.getString("max"));
+				Duration duration = Duration.between(min, max);
+				String gap = "DAY";
+				if(duration.toDays() >= 365)
+					gap = "YEAR";
+				else if(duration.toDays() >= 28)
+					gap = "MONTH";
+				else if(duration.toDays() >= 1)
+					gap = "DAY";
+				else if(duration.toHours() >= 1)
+					gap = "HOUR";
+				else if(duration.toMinutes() >= 1)
+					gap = "MINUTE";
+				else if(duration.toMillis() >= 1000)
+					gap = "SECOND";
+				else if(duration.toMillis() >= 1)
+					gap = "MILLI";
+				json.put("defaultRangeGap", String.format("+1%s", gap));
+				json.put("defaultRangeEnd", stats.getString("max"));
+				json.put("defaultRangeStart", stats.getString("min"));
 				json.put("enableCalendar", true);
 				setDefaultRangeStats(json);
 			}

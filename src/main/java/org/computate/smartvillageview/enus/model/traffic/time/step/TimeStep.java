@@ -13,6 +13,7 @@ import io.vertx.core.Promise;
  * Page: true
  * SuperPage.enUS: BaseResultPage
  * Indexed: true
+ * Map.Integer.classSort: 14
  * 
  * ApiTag.enUS: Time Step
  * ApiUri.enUS: /api/time-step

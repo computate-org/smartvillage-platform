@@ -30,13 +30,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.math.RoundingMode;
 import java.util.Map;
-import org.computate.smartvillageview.enus.model.base.BaseModelPage;
+import org.computate.smartvillageview.enus.result.map.MapResultPage;
 import org.computate.vertx.search.list.SearchList;
 import org.computate.smartvillageview.enus.model.iotnode.IotNode;
 import io.vertx.core.json.JsonArray;
 import java.lang.Integer;
 import java.lang.String;
-import java.lang.Long;
 import org.computate.search.wrap.Wrap;
 import io.vertx.core.Promise;
 import io.vertx.core.Future;
@@ -49,7 +48,7 @@ import io.vertx.core.Future;
  * <li>You can add a class comment <b>"Api: true"</b> if you wish to GET, POST, PATCH or PUT these IotNodeGenPage objects in a RESTful API. 
  * </li>
  * </ol>
- * <h1>About the IotNodeGenPage class and it's generated class IotNodeGenPageGen&lt;BaseModelPage&gt;: </h1>
+ * <h1>About the IotNodeGenPage class and it's generated class IotNodeGenPageGen&lt;MapResultPage&gt;: </h1>
  * <p>
  * This Java class extends a generated Java class built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
  * Whenever this Java class is modified or touched, the watch service installed as described in the README, indexes all the information about this Java class in a local Apache Solr Search Engine. 
@@ -73,7 +72,7 @@ import io.vertx.core.Future;
  * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smart\-village\-view&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  **/
-public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
+public abstract class IotNodeGenPageGen<DEV> extends MapResultPage {
 	protected static final Logger LOG = LoggerFactory.getLogger(IotNodeGenPage.class);
 
 	////////////////////////
@@ -244,63 +243,6 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 	}
 
 	////////
-	// pk //
-	////////
-
-	/**	 The entity pk
-	 *	 is defined as null before being initialized. 
-	 */
-	@JsonProperty
-	@JsonSerialize(using = ToStringSerializer.class)
-	@JsonInclude(Include.NON_NULL)
-	protected Long pk;
-
-	/**	<br> The entity pk
-	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.iotnode.IotNodeGenPage&fq=entiteVar_enUS_indexed_string:pk">Find the entity pk in Solr</a>
-	 * <br>
-	 * @param w is for wrapping a value to assign to this entity during initialization. 
-	 **/
-	protected abstract void _pk(Wrap<Long> w);
-
-	public Long getPk() {
-		return pk;
-	}
-
-	public void setPk(Long pk) {
-		this.pk = pk;
-	}
-	@JsonIgnore
-	public void setPk(String o) {
-		this.pk = IotNodeGenPage.staticSetPk(siteRequest_, o);
-	}
-	public static Long staticSetPk(SiteRequestEnUS siteRequest_, String o) {
-		if(NumberUtils.isParsable(o))
-			return Long.parseLong(o);
-		return null;
-	}
-	protected IotNodeGenPage pkInit() {
-		Wrap<Long> pkWrap = new Wrap<Long>().var("pk");
-		if(pk == null) {
-			_pk(pkWrap);
-			setPk(pkWrap.o);
-		}
-		return (IotNodeGenPage)this;
-	}
-
-	public static Long staticSearchPk(SiteRequestEnUS siteRequest_, Long o) {
-		return o;
-	}
-
-	public static String staticSearchStrPk(SiteRequestEnUS siteRequest_, Long o) {
-		return o == null ? null : o.toString();
-	}
-
-	public static String staticSearchFqPk(SiteRequestEnUS siteRequest_, String o) {
-		return IotNodeGenPage.staticSearchStrPk(siteRequest_, IotNodeGenPage.staticSearchPk(siteRequest_, IotNodeGenPage.staticSetPk(siteRequest_, o)));
-	}
-
-	////////
 	// id //
 	////////
 
@@ -412,7 +354,7 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 		Promise<Void> promise2 = Promise.promise();
 		promiseIotNodeGenPage(promise2);
 		promise2.future().onSuccess(a -> {
-			super.promiseDeepBaseModelPage(siteRequest_).onSuccess(b -> {
+			super.promiseDeepMapResultPage(siteRequest_).onSuccess(b -> {
 				promise.complete();
 			}).onFailure(ex -> {
 				promise.fail(ex);
@@ -431,7 +373,6 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 				listIotNodeInit();
 				iotNodeCountInit();
 				iotNode_Init();
-				pkInit();
 				idInit();
 				pageUriIotNodeInit();
 				promise2.complete();
@@ -456,7 +397,7 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 	/////////////////
 
 	public void siteRequestIotNodeGenPage(SiteRequestEnUS siteRequest_) {
-			super.siteRequestBaseModelPage(siteRequest_);
+			super.siteRequestMapResultPage(siteRequest_);
 	}
 
 	public void siteRequestForClass(SiteRequestEnUS siteRequest_) {
@@ -495,14 +436,12 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 				return oIotNodeGenPage.iotNodeCount;
 			case "iotNode_":
 				return oIotNodeGenPage.iotNode_;
-			case "pk":
-				return oIotNodeGenPage.pk;
 			case "id":
 				return oIotNodeGenPage.id;
 			case "pageUriIotNode":
 				return oIotNodeGenPage.pageUriIotNode;
 			default:
-				return super.obtainBaseModelPage(var);
+				return super.obtainMapResultPage(var);
 		}
 	}
 
@@ -527,7 +466,7 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 		IotNodeGenPage oIotNodeGenPage = (IotNodeGenPage)this;
 		switch(var) {
 			default:
-				return super.relateBaseModelPage(var, val);
+				return super.relateMapResultPage(var, val);
 		}
 	}
 
@@ -542,14 +481,12 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 		switch(entityVar) {
 		case "iotNodeCount":
 			return IotNodeGenPage.staticSetIotNodeCount(siteRequest_, o);
-		case "pk":
-			return IotNodeGenPage.staticSetPk(siteRequest_, o);
 		case "id":
 			return IotNodeGenPage.staticSetId(siteRequest_, o);
 		case "pageUriIotNode":
 			return IotNodeGenPage.staticSetPageUriIotNode(siteRequest_, o);
 			default:
-				return BaseModelPage.staticSetBaseModelPage(entityVar,  siteRequest_, o);
+				return MapResultPage.staticSetMapResultPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -564,14 +501,12 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 		switch(entityVar) {
 		case "iotNodeCount":
 			return IotNodeGenPage.staticSearchIotNodeCount(siteRequest_, (Integer)o);
-		case "pk":
-			return IotNodeGenPage.staticSearchPk(siteRequest_, (Long)o);
 		case "id":
 			return IotNodeGenPage.staticSearchId(siteRequest_, (String)o);
 		case "pageUriIotNode":
 			return IotNodeGenPage.staticSearchPageUriIotNode(siteRequest_, (String)o);
 			default:
-				return BaseModelPage.staticSearchBaseModelPage(entityVar,  siteRequest_, o);
+				return MapResultPage.staticSearchMapResultPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -586,14 +521,12 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 		switch(entityVar) {
 		case "iotNodeCount":
 			return IotNodeGenPage.staticSearchStrIotNodeCount(siteRequest_, (Integer)o);
-		case "pk":
-			return IotNodeGenPage.staticSearchStrPk(siteRequest_, (Long)o);
 		case "id":
 			return IotNodeGenPage.staticSearchStrId(siteRequest_, (String)o);
 		case "pageUriIotNode":
 			return IotNodeGenPage.staticSearchStrPageUriIotNode(siteRequest_, (String)o);
 			default:
-				return BaseModelPage.staticSearchStrBaseModelPage(entityVar,  siteRequest_, o);
+				return MapResultPage.staticSearchStrMapResultPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -608,14 +541,12 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 		switch(entityVar) {
 		case "iotNodeCount":
 			return IotNodeGenPage.staticSearchFqIotNodeCount(siteRequest_, o);
-		case "pk":
-			return IotNodeGenPage.staticSearchFqPk(siteRequest_, o);
 		case "id":
 			return IotNodeGenPage.staticSearchFqId(siteRequest_, o);
 		case "pageUriIotNode":
 			return IotNodeGenPage.staticSearchFqPageUriIotNode(siteRequest_, o);
 			default:
-				return BaseModelPage.staticSearchFqBaseModelPage(entityVar,  siteRequest_, o);
+				return MapResultPage.staticSearchFqMapResultPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -634,7 +565,6 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 	public static final String VAR_listIotNode = "listIotNode";
 	public static final String VAR_iotNodeCount = "iotNodeCount";
 	public static final String VAR_iotNode_ = "iotNode_";
-	public static final String VAR_pk = "pk";
 	public static final String VAR_id = "id";
 	public static final String VAR_pageUriIotNode = "pageUriIotNode";
 
@@ -642,7 +572,6 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 	public static final String DISPLAY_NAME_listIotNode = "";
 	public static final String DISPLAY_NAME_iotNodeCount = "";
 	public static final String DISPLAY_NAME_iotNode_ = "";
-	public static final String DISPLAY_NAME_pk = "";
 	public static final String DISPLAY_NAME_id = "";
 	public static final String DISPLAY_NAME_pageUriIotNode = "";
 
@@ -659,14 +588,12 @@ public abstract class IotNodeGenPageGen<DEV> extends BaseModelPage {
 			return DISPLAY_NAME_iotNodeCount;
 		case VAR_iotNode_:
 			return DISPLAY_NAME_iotNode_;
-		case VAR_pk:
-			return DISPLAY_NAME_pk;
 		case VAR_id:
 			return DISPLAY_NAME_id;
 		case VAR_pageUriIotNode:
 			return DISPLAY_NAME_pageUriIotNode;
 		default:
-			return BaseModelPage.displayNameBaseModelPage(var);
+			return MapResultPage.displayNameMapResultPage(var);
 		}
 	}
 }

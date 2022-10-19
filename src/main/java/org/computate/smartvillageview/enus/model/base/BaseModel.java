@@ -21,7 +21,7 @@ import org.computate.vertx.model.base.ComputateBaseModel;
  * SuperPage: PageLayout
  * Keyword: classSimpleNameBaseModel
  * Description: A reusable base class for all database model classes
- * Map.Integer.classSort: 2
+ * Map.Integer.classSort: 1
  */
 public class BaseModel extends BaseModelGen<Object> implements ComputateBaseModel {
 

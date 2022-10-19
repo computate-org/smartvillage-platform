@@ -16,6 +16,7 @@ import io.vertx.pgclient.data.Point;
  * Page: true
  * SuperPage.enUS: BaseResultPage
  * Indexed: true
+ * Map.Integer.classSort: 13
  * 
  * ApiTag.enUS: IOT Node Step
  * ApiUri.enUS: /api/iot-node-step

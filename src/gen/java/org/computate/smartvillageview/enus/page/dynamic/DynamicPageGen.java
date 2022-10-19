@@ -45,7 +45,7 @@ import io.vertx.core.Future;
 /**	
  * <h1>Suggestions that can generate more code for you: </h1>
  * <ol>
- * <li>You can add a class comment "Api: true" if you wish to GET, POST, PATCH or PUT these DynamicPage objects in a RESTful API. 
+ * <li>You can add a class comment <b>"Api: true"</b> if you wish to GET, POST, PATCH or PUT these DynamicPage objects in a RESTful API. 
  * </li>
  * </ol>
  * <h1>About the DynamicPage class and it's generated class DynamicPageGen&lt;PageLayout&gt;: </h1>

@@ -14,7 +14,8 @@ import org.computate.smartvillageview.enus.model.base.BaseModel;
  * Page: true
  * SuperPage.enUS: BaseModelPage
  * Indexed: true
- * Map.Integer.sqlSort: 3
+ * Map.Integer.sqlSort: 2
+ * Map.Integer.classSort: 5
  * 
  * ApiTag.enUS: Traffic Simulation
  * ApiUri.enUS: /api/traffic-simulation

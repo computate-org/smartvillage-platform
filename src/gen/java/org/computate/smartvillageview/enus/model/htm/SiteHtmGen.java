@@ -1853,9 +1853,9 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 		case VAR_uri:
 			return 3;
 		case VAR_pageId:
-			return 3;
-		case VAR_sequenceNum:
 			return 4;
+		case VAR_sequenceNum:
+			return 5;
 			default:
 				return BaseResult.htmlColumnBaseResult(var);
 		}
@@ -1879,9 +1879,9 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 		case VAR_uri:
 			return 1;
 		case VAR_pageId:
-			return 1;
-		case VAR_sequenceNum:
 			return 2;
+		case VAR_sequenceNum:
+			return 3;
 			default:
 				return BaseResult.htmlCellBaseResult(var);
 		}

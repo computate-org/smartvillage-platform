@@ -10,7 +10,7 @@
 		<script src="{{staticBaseUrl}}/js/moment.js"></script>
 		<script src="{{staticBaseUrl}}/js/sockjs.js"></script>
 		<script src="{{staticBaseUrl}}/js/vertx-eventbus.js"></script>
-		<script src="{{staticBaseUrl}}/js/plotly-2.9.0.js"></script>
+		<script src="{{staticBaseUrl}}/js/plotly-2.9.0.min.js"></script>
 		<script src="{{staticBaseUrl}}/js/fullcalendar/main.min.js"></script>
 {{/inline}}
 {{#*inline "htmScriptPageLayout"}}		<!-- #*inline "htmScriptPageLayout" -->
@@ -65,22 +65,34 @@
 				</div>
 {{/if}}
 				<div class="site-bar-item w3-bar-item ">
-					<a href="/page{{#if defaultRangeGap}}?facet.range.gap={{encodeURIComponent defaultRangeGap }}&facet.range.start={{encodeURIComponent defaultRangeStart }}&facet.range.end={{encodeURIComponent defaultRangeEnd }}&facet.range={!tag=r1}created&facet.pivot={!range=r1}classSimpleName{{/if}}" class="header-icon-a w3-hover-opacity w3-center w3-text-2017-navy-peony "><i class="fad fa-newspaper w3-text-2017-navy-peony "></i> articles</a>
+					<a href="/map-result{{#if defaultRangeGap}}?facet.range.gap={{encodeURIComponent defaultRangeGap }}&facet.range.start={{encodeURIComponent defaultRangeStart }}&facet.range.end={{encodeURIComponent defaultRangeEnd }}&facet.range={!tag=r1}created&facet.pivot={!range=r1}classSimpleName{{/if}}" class="header-icon-a w3-hover-opacity w3-center w3-text- "><i class="fa fa- w3-text- "></i> </a>
 				</div>
 				<div class="site-bar-item w3-bar-item ">
-					<a href="/system-event{{#if defaultRangeGap}}?facet.range.gap={{encodeURIComponent defaultRangeGap }}&facet.range.start={{encodeURIComponent defaultRangeStart }}&facet.range.end={{encodeURIComponent defaultRangeEnd }}&facet.range={!tag=r1}created&facet.pivot={!range=r1}classSimpleName{{/if}}" class="header-icon-a w3-hover-opacity w3-center w3-text-2017-navy-peony "><i class="fad fa-square-terminal w3-text-2017-navy-peony "></i> system events</a>
+					<a href="/traffic-simulation{{#if defaultRangeGap}}?facet.range.gap={{encodeURIComponent defaultRangeGap }}&facet.range.start={{encodeURIComponent defaultRangeStart }}&facet.range.end={{encodeURIComponent defaultRangeEnd }}&facet.range={!tag=r1}created&facet.pivot={!range=r1}classSimpleName{{/if}}" class="header-icon-a w3-hover-opacity w3-center w3-text- "><i class="fa fa- w3-text- "></i> </a>
 				</div>
 				<div class="site-bar-item w3-bar-item ">
-					<a href="/iot-node{{#if defaultRangeGap}}?facet.range.gap={{encodeURIComponent defaultRangeGap }}&facet.range.start={{encodeURIComponent defaultRangeStart }}&facet.range.end={{encodeURIComponent defaultRangeEnd }}&facet.range={!tag=r1}created&facet.pivot={!range=r1}classSimpleName{{/if}}" class="header-icon-a w3-hover-opacity w3-center w3-text-blue "><i class="fad fa-router w3-text-blue "></i> IOT nodes</a>
+					<a href="/traffic-light{{#if defaultRangeGap}}?facet.range.gap={{encodeURIComponent defaultRangeGap }}&facet.range.start={{encodeURIComponent defaultRangeStart }}&facet.range.end={{encodeURIComponent defaultRangeEnd }}&facet.range={!tag=r1}created&facet.pivot={!range=r1}classSimpleName{{/if}}" class="header-icon-a w3-hover-opacity w3-center w3-text- "><i class="fa fa- w3-text- "></i> </a>
 				</div>
 				<div class="site-bar-item w3-bar-item ">
-					<a href="/vehicle-step{{#if defaultRangeGap}}?facet.range.gap={{encodeURIComponent defaultRangeGap }}&facet.range.start={{encodeURIComponent defaultRangeStart }}&facet.range.end={{encodeURIComponent defaultRangeEnd }}&facet.range={!tag=r1}created&facet.pivot={!range=r1}classSimpleName{{/if}}" class="header-icon-a w3-hover-opacity w3-center w3-text-blue "><i class="fad fa-map-location-dot w3-text-blue "></i> vehicle steps</a>
+					<a href="/traffic-light-step{{#if defaultRangeGap}}?facet.range.gap={{encodeURIComponent defaultRangeGap }}&facet.range.start={{encodeURIComponent defaultRangeStart }}&facet.range.end={{encodeURIComponent defaultRangeEnd }}&facet.range={!tag=r1}created&facet.pivot={!range=r1}classSimpleName{{/if}}" class="header-icon-a w3-hover-opacity w3-center w3-text- "><i class="fa fa- w3-text- "></i> </a>
 				</div>
 				<div class="site-bar-item w3-bar-item ">
-					<a href="/traffic-simulation{{#if defaultRangeGap}}?facet.range.gap={{encodeURIComponent defaultRangeGap }}&facet.range.start={{encodeURIComponent defaultRangeStart }}&facet.range.end={{encodeURIComponent defaultRangeEnd }}&facet.range={!tag=r1}created&facet.pivot={!range=r1}classSimpleName{{/if}}" class="header-icon-a w3-hover-opacity w3-center w3-text-blue "><i class="fad fa-traffic-light-stop w3-text-blue "></i> traffic simulations</a>
+					<a href="/vehicle-step{{#if defaultRangeGap}}?facet.range.gap={{encodeURIComponent defaultRangeGap }}&facet.range.start={{encodeURIComponent defaultRangeStart }}&facet.range.end={{encodeURIComponent defaultRangeEnd }}&facet.range={!tag=r1}created&facet.pivot={!range=r1}classSimpleName{{/if}}" class="header-icon-a w3-hover-opacity w3-center w3-text- "><i class="fa fa- w3-text- "></i> </a>
 				</div>
 				<div class="site-bar-item w3-bar-item ">
-					<a href="/map-result{{#if defaultRangeGap}}?facet.range.gap={{encodeURIComponent defaultRangeGap }}&facet.range.start={{encodeURIComponent defaultRangeStart }}&facet.range.end={{encodeURIComponent defaultRangeEnd }}&facet.range={!tag=r1}created&facet.pivot={!range=r1}classSimpleName{{/if}}" class="header-icon-a w3-hover-opacity w3-center w3-text-blue "><i class="fad fa-map-location-dot w3-text-blue "></i> map result</a>
+					<a href="/person-step{{#if defaultRangeGap}}?facet.range.gap={{encodeURIComponent defaultRangeGap }}&facet.range.start={{encodeURIComponent defaultRangeStart }}&facet.range.end={{encodeURIComponent defaultRangeEnd }}&facet.range={!tag=r1}created&facet.pivot={!range=r1}classSimpleName{{/if}}" class="header-icon-a w3-hover-opacity w3-center w3-text- "><i class="fa fa- w3-text- "></i> </a>
+				</div>
+				<div class="site-bar-item w3-bar-item ">
+					<a href="/iot-node{{#if defaultRangeGap}}?facet.range.gap={{encodeURIComponent defaultRangeGap }}&facet.range.start={{encodeURIComponent defaultRangeStart }}&facet.range.end={{encodeURIComponent defaultRangeEnd }}&facet.range={!tag=r1}created&facet.pivot={!range=r1}classSimpleName{{/if}}" class="header-icon-a w3-hover-opacity w3-center w3-text- "><i class="fa fa- w3-text- "></i> </a>
+				</div>
+				<div class="site-bar-item w3-bar-item ">
+					<a href="/iot-node-step{{#if defaultRangeGap}}?facet.range.gap={{encodeURIComponent defaultRangeGap }}&facet.range.start={{encodeURIComponent defaultRangeStart }}&facet.range.end={{encodeURIComponent defaultRangeEnd }}&facet.range={!tag=r1}created&facet.pivot={!range=r1}classSimpleName{{/if}}" class="header-icon-a w3-hover-opacity w3-center w3-text- "><i class="fa fa- w3-text- "></i> </a>
+				</div>
+				<div class="site-bar-item w3-bar-item ">
+					<a href="/page{{#if defaultRangeGap}}?facet.range.gap={{encodeURIComponent defaultRangeGap }}&facet.range.start={{encodeURIComponent defaultRangeStart }}&facet.range.end={{encodeURIComponent defaultRangeEnd }}&facet.range={!tag=r1}created&facet.pivot={!range=r1}classSimpleName{{/if}}" class="header-icon-a w3-hover-opacity w3-center w3-text- "><i class="fa fa- w3-text- "></i> </a>
+				</div>
+				<div class="site-bar-item w3-bar-item ">
+					<a href="/system-event{{#if defaultRangeGap}}?facet.range.gap={{encodeURIComponent defaultRangeGap }}&facet.range.start={{encodeURIComponent defaultRangeStart }}&facet.range.end={{encodeURIComponent defaultRangeEnd }}&facet.range={!tag=r1}created&facet.pivot={!range=r1}classSimpleName{{/if}}" class="header-icon-a w3-hover-opacity w3-center w3-text- "><i class="fa fa- w3-text- "></i> </a>
 				</div>
 
 {{/inline}}

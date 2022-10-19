@@ -408,7 +408,6 @@
 					<div class="" id="patchTimeStepFormValues">
 							<div class="w3-cell-row ">
 {{> "htmCreated" classApiMethodMethod="PATCH"}}
-{{> "htmObjectId" classApiMethodMethod="PATCH"}}
 							</div>
 							<div class="w3-cell-row ">
 {{> "htmArchived" classApiMethodMethod="PATCH"}}
@@ -449,7 +448,6 @@
 						<div id="postTimeStepForm">
 							<div class="w3-cell-row ">
 {{> "htmCreated" classApiMethodMethod="POST"}}
-{{> "htmObjectId" classApiMethodMethod="POST"}}
 							</div>
 							<div class="w3-cell-row ">
 {{> "htmArchived" classApiMethodMethod="POST"}}
@@ -792,7 +790,7 @@
 																<button
 																		tabindex="-1"
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_simulationKey')); $('#{{classApiMethodMethod}}_simulationKey').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TimeStepForm :input[name=id]').val() }], 'setSimulationKey', null, function() { addGlow($('#{{classApiMethodMethod}}_simulationKey')); }, function() { addError($('#{{classApiMethodMethod}}_simulationKey')); }); "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_simulationKey')); $('#{{classApiMethodMethod}}_simulationKey').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#TimeStepForm :input[name=id]').val() }], 'setSimulationKey', null, function() { addGlow($('#{{classApiMethodMethod}}_simulationKey')); }, function() { addError($('#{{classApiMethodMethod}}_simulationKey')); }); "
 																		>
 																	<i class="far fa-eraser "></i>
 																</button>
@@ -827,7 +825,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setSimulationKey', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_simulationKey')); }, function() { addError($('#{{classApiMethodMethod}}_simulationKey')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setSimulationKey', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_simulationKey')); }, function() { addError($('#{{classApiMethodMethod}}_simulationKey')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{timeStep_.simulationKey}}"
@@ -859,7 +857,7 @@
 																<button
 																		tabindex="-1"
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_path')); $('#{{classApiMethodMethod}}_path').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TimeStepForm :input[name=id]').val() }], 'setPath', null, function() { addGlow($('#{{classApiMethodMethod}}_path')); }, function() { addError($('#{{classApiMethodMethod}}_path')); }); "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_path')); $('#{{classApiMethodMethod}}_path').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#TimeStepForm :input[name=id]').val() }], 'setPath', null, function() { addGlow($('#{{classApiMethodMethod}}_path')); }, function() { addError($('#{{classApiMethodMethod}}_path')); }); "
 																		>
 																	<i class="far fa-eraser "></i>
 																</button>
@@ -894,7 +892,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setPath', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_path')); }, function() { addError($('#{{classApiMethodMethod}}_path')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setPath', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_path')); }, function() { addError($('#{{classApiMethodMethod}}_path')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{timeStep_.path}}"
@@ -926,7 +924,7 @@
 																<button
 																		tabindex="-1"
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-blue "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_time')); $('#{{classApiMethodMethod}}_time').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TimeStepForm :input[name=id]').val() }], 'setTime', null, function() { addGlow($('#{{classApiMethodMethod}}_time')); }, function() { addError($('#{{classApiMethodMethod}}_time')); }); "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_time')); $('#{{classApiMethodMethod}}_time').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#TimeStepForm :input[name=id]').val() }], 'setTime', null, function() { addGlow($('#{{classApiMethodMethod}}_time')); }, function() { addError($('#{{classApiMethodMethod}}_time')); }); "
 																		>
 																	<i class="far fa-eraser "></i>
 																</button>
@@ -961,7 +959,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{id}}' }], 'setTime', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_time')); }, function() { addError($('#{{classApiMethodMethod}}_time')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setTime', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_time')); }, function() { addError($('#{{classApiMethodMethod}}_time')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{timeStep_.time}}"

@@ -2,7 +2,6 @@ package org.computate.smartvillageview.enus.result.base;
 
 import org.computate.smartvillageview.enus.result.base.BaseResult;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
-import java.lang.Void;
 import java.lang.String;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;

@@ -2,9 +2,6 @@ package org.computate.smartvillageview.enus.model.iotnode;
 
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.smartvillageview.enus.model.base.BaseModel;
-import io.vertx.core.json.JsonObject;
-import java.util.Date;
-import java.util.Set;
 import org.computate.vertx.api.ApiRequest;
 import org.computate.smartvillageview.enus.config.ConfigKeys;
 import java.util.Optional;
@@ -33,6 +30,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.math.RoundingMode;
 import java.util.Map;
+import org.computate.smartvillageview.enus.result.base.BaseResult;
+import io.vertx.core.json.JsonObject;
 import java.lang.String;
 import io.vertx.pgclient.data.Point;
 import org.computate.vertx.serialize.pgclient.PgClientPointSerializer;
@@ -51,8 +50,11 @@ import org.computate.search.response.solr.SolrResponse;
  * <ol>
  * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class IotNodeGen into the class IotNode. 
  * </li>
+ * <li>You can add a class comment "Model: true" if you wish to persist these IotNode objects in a relational PostgreSQL database transactionally in the RESTful API. 
+ * The code to persist and query the IotNodeGen data in the database will then be automatically generated. 
+ * </li>
  * </ol>
- * <h1>About the IotNode class and it's generated class IotNodeGen&lt;BaseModel&gt;: </h1>
+ * <h1>About the IotNode class and it's generated class IotNodeGen&lt;BaseResult&gt;: </h1>
  * <p>
  * This Java class extends a generated Java class built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
  * Whenever this Java class is modified or touched, the watch service installed as described in the README, indexes all the information about this Java class in a local Apache Solr Search Engine. 
@@ -63,9 +65,6 @@ import org.computate.search.response.solr.SolrResponse;
  * The extended class ending with "Gen" did not exist at first, but was automatically created by the same watch service based on the data retrieved from the local Apache Server search engine. 
  * The extended class contains many generated fields, getters, setters, initialization code, and helper methods to help build a website and API fast, reactive, and scalable. 
  * </p>
- * <p>This class contains a comment <b>"Model: true"</b>, which means this class will be stored in the database. 
- * Every protected void method that begins with "_" that contains a "Persist: true" comment will be a persisted field in the database table. 
- * </p>
  * <p>This class contains a comment <b>"Indexed: true"</b>, which means this class will be indexed in the search engine. 
  * Every protected void method that begins with "_" that is marked to be searched with a comment like "Indexed: true", "Stored: true", or "DocValues: true" will be indexed in the search engine. 
  * </p>
@@ -73,8 +72,8 @@ import org.computate.search.response.solr.SolrResponse;
  * Java Vert.x backend API code, Handlebars HTML template frontend code, and JavaScript code will all generated and can be extended. 
  * This creates a new Java class org.computate.smartvillageview.enus.model.iotnode.IotNodePage. 
  * </p>
- * <p>This class contains a comment <b>"SuperPage.enUS: BaseModelPage"</b>, which identifies the Java super class of the page code by it's class simple name "BaseModelPage". 
- * This means that the newly created class org.computate.smartvillageview.enus.model.iotnode.IotNodePage extends org.computate.smartvillageview.enus.model.base.BaseModelPage. 
+ * <p>This class contains a comment <b>"SuperPage.enUS: MapResultPage"</b>, which identifies the Java super class of the page code by it's class simple name "MapResultPage". 
+ * This means that the newly created class org.computate.smartvillageview.enus.model.iotnode.IotNodePage extends org.computate.smartvillageview.enus.result.map.MapResultPage. 
  * </p>
  * <p>This class contains a comment <b>"Api: true"</b>, which means this class will have Java Vert.x API backend code generated for these objects. 
  * </p>
@@ -111,7 +110,7 @@ import org.computate.search.response.solr.SolrResponse;
  * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smart\-village\-view&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  **/
-public abstract class IotNodeGen<DEV> extends BaseModel {
+public abstract class IotNodeGen<DEV> extends BaseResult {
 	protected static final Logger LOG = LoggerFactory.getLogger(IotNode.class);
 
 	public static final String IotNode_AName_enUS = "an IOT node";
@@ -2639,7 +2638,7 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 		Promise<Void> promise2 = Promise.promise();
 		promiseIotNode(promise2);
 		promise2.future().onSuccess(a -> {
-			super.promiseDeepBaseModel(siteRequest_).onSuccess(b -> {
+			super.promiseDeepBaseResult(siteRequest_).onSuccess(b -> {
 				promise.complete();
 			}).onFailure(ex -> {
 				promise.fail(ex);
@@ -2716,7 +2715,7 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 	/////////////////
 
 	public void siteRequestIotNode(SiteRequestEnUS siteRequest_) {
-			super.siteRequestBaseModel(siteRequest_);
+			super.siteRequestBaseResult(siteRequest_);
 	}
 
 	public void siteRequestForClass(SiteRequestEnUS siteRequest_) {
@@ -2828,7 +2827,7 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 			case "json_rssi":
 				return oIotNode.json_rssi;
 			default:
-				return super.obtainBaseModel(var);
+				return super.obtainBaseResult(var);
 		}
 	}
 
@@ -2853,7 +2852,7 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 		IotNode oIotNode = (IotNode)this;
 		switch(var) {
 			default:
-				return super.relateBaseModel(var, val);
+				return super.relateBaseResult(var, val);
 		}
 	}
 
@@ -2947,7 +2946,7 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 		case "json_rssi":
 			return IotNode.staticSetJson_rssi(siteRequest_, o);
 			default:
-				return BaseModel.staticSetBaseModel(entityVar,  siteRequest_, o);
+				return BaseResult.staticSetBaseResult(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -3041,7 +3040,7 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 		case "json_rssi":
 			return IotNode.staticSearchJson_rssi(siteRequest_, (BigDecimal)o);
 			default:
-				return BaseModel.staticSearchBaseModel(entityVar,  siteRequest_, o);
+				return BaseResult.staticSearchBaseResult(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -3135,7 +3134,7 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 		case "json_rssi":
 			return IotNode.staticSearchStrJson_rssi(siteRequest_, (Double)o);
 			default:
-				return BaseModel.staticSearchStrBaseModel(entityVar,  siteRequest_, o);
+				return BaseResult.staticSearchStrBaseResult(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -3229,7 +3228,7 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 		case "json_rssi":
 			return IotNode.staticSearchFqJson_rssi(siteRequest_, o);
 			default:
-				return BaseModel.staticSearchFqBaseModel(entityVar,  siteRequest_, o);
+				return BaseResult.staticSearchFqBaseResult(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -3284,7 +3283,7 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 				saves.add("location");
 				return val;
 			default:
-				return super.persistBaseModel(var, val);
+				return super.persistBaseResult(var, val);
 		}
 	}
 
@@ -3301,7 +3300,7 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 		if(saves != null) {
 		}
 
-		super.populateBaseModel(doc);
+		super.populateBaseResult(doc);
 	}
 
 	public void indexIotNode(JsonObject doc) {
@@ -3425,7 +3424,7 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 		if(json_rssi != null) {
 			doc.put("json_rssi_docvalues_double", json_rssi.doubleValue());
 		}
-		super.indexBaseModel(doc);
+		super.indexBaseResult(doc);
 
 	}
 
@@ -3512,7 +3511,7 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 			case "json_rssi":
 				return "json_rssi_docvalues_double";
 			default:
-				return BaseModel.varStoredBaseModel(entityVar);
+				return BaseResult.varStoredBaseResult(entityVar);
 		}
 	}
 
@@ -3599,7 +3598,7 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 			case "json_rssi":
 				return "json_rssi_docvalues_double";
 			default:
-				return BaseModel.varIndexedBaseModel(entityVar);
+				return BaseResult.varIndexedBaseResult(entityVar);
 		}
 	}
 
@@ -3686,21 +3685,21 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 			case "json_rssi_docvalues_double":
 				return "json_rssi";
 			default:
-				return BaseModel.searchVarBaseModel(searchVar);
+				return BaseResult.searchVarBaseResult(searchVar);
 		}
 	}
 
 	public static String varSearchIotNode(String entityVar) {
 		switch(entityVar) {
 			default:
-				return BaseModel.varSearchBaseModel(entityVar);
+				return BaseResult.varSearchBaseResult(entityVar);
 		}
 	}
 
 	public static String varSuggestedIotNode(String entityVar) {
 		switch(entityVar) {
 			default:
-				return BaseModel.varSuggestedBaseModel(entityVar);
+				return BaseResult.varSuggestedBaseResult(entityVar);
 		}
 	}
 
@@ -3755,7 +3754,7 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 		oIotNode.setJson_snr(Optional.ofNullable(doc.get("json_snr_docvalues_double")).map(v -> v.toString()).orElse(null));
 		oIotNode.setJson_rssi(Optional.ofNullable(doc.get("json_rssi_docvalues_double")).map(v -> v.toString()).orElse(null));
 
-		super.storeBaseModel(doc);
+		super.storeBaseResult(doc);
 	}
 
 	//////////////////
@@ -3847,7 +3846,7 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 				apiRequest.addVars("json_snr");
 			if(!Objects.equals(json_rssi, original.getJson_rssi()))
 				apiRequest.addVars("json_rssi");
-			super.apiRequestBaseModel();
+			super.apiRequestBaseResult();
 		}
 	}
 
@@ -3947,7 +3946,7 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 		return IotNode.varsQIotNode(new ArrayList<String>());
 	}
 	public static List<String> varsQIotNode(List<String> vars) {
-		BaseModel.varsQBaseModel(vars);
+		BaseResult.varsQBaseResult(vars);
 		return vars;
 	}
 
@@ -3994,7 +3993,7 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 		vars.add(VAR_json_historySequencePrevious);
 		vars.add(VAR_json_snr);
 		vars.add(VAR_json_rssi);
-		BaseModel.varsFqBaseModel(vars);
+		BaseResult.varsFqBaseResult(vars);
 		return vars;
 	}
 
@@ -4030,7 +4029,7 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 		vars.add(VAR_json_historySequencePrevious);
 		vars.add(VAR_json_snr);
 		vars.add(VAR_json_rssi);
-		BaseModel.varsRangeBaseModel(vars);
+		BaseResult.varsRangeBaseResult(vars);
 		return vars;
 	}
 
@@ -4161,7 +4160,7 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 		case VAR_json_rssi:
 			return DISPLAY_NAME_json_rssi;
 		default:
-			return BaseModel.displayNameBaseModel(var);
+			return BaseResult.displayNameBaseResult(var);
 		}
 	}
 
@@ -4188,7 +4187,7 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 		case VAR_json_rssi:
 			return "RSSI is a measurement of how well your device can hear a signal from an access point or router. ";
 			default:
-				return BaseModel.descriptionBaseModel(var);
+				return BaseResult.descriptionBaseResult(var);
 		}
 	}
 
@@ -4275,14 +4274,14 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 		case VAR_json_rssi:
 			return "BigDecimal";
 			default:
-				return BaseModel.classSimpleNameBaseModel(var);
+				return BaseResult.classSimpleNameBaseResult(var);
 		}
 	}
 
 	public static Integer htmlColumnIotNode(String var) {
 		switch(var) {
 			default:
-				return BaseModel.htmlColumnBaseModel(var);
+				return BaseResult.htmlColumnBaseResult(var);
 		}
 	}
 
@@ -4367,7 +4366,7 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 		case VAR_json_rssi:
 			return 12;
 			default:
-				return BaseModel.htmlRowBaseModel(var);
+				return BaseResult.htmlRowBaseResult(var);
 		}
 	}
 
@@ -4452,35 +4451,35 @@ public abstract class IotNodeGen<DEV> extends BaseModel {
 		case VAR_json_rssi:
 			return 4;
 			default:
-				return BaseModel.htmlCellBaseModel(var);
+				return BaseResult.htmlCellBaseResult(var);
 		}
 	}
 
 	public static Integer lengthMinIotNode(String var) {
 		switch(var) {
 			default:
-				return BaseModel.lengthMinBaseModel(var);
+				return BaseResult.lengthMinBaseResult(var);
 		}
 	}
 
 	public static Integer lengthMaxIotNode(String var) {
 		switch(var) {
 			default:
-				return BaseModel.lengthMaxBaseModel(var);
+				return BaseResult.lengthMaxBaseResult(var);
 		}
 	}
 
 	public static Integer maxIotNode(String var) {
 		switch(var) {
 			default:
-				return BaseModel.maxBaseModel(var);
+				return BaseResult.maxBaseResult(var);
 		}
 	}
 
 	public static Integer minIotNode(String var) {
 		switch(var) {
 			default:
-				return BaseModel.minBaseModel(var);
+				return BaseResult.minBaseResult(var);
 		}
 	}
 }
