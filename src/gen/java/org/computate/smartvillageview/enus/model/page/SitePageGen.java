@@ -147,6 +147,55 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	public static final String SitePage_IconGroup = "duotone";
 	public static final String SitePage_IconName = "newspaper";
 
+	///////////////
+	// githubOrg //
+	///////////////
+
+	/**	 The entity githubOrg
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String githubOrg;
+
+	/**	<br> The entity githubOrg
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.page.SitePage&fq=entiteVar_enUS_indexed_string:githubOrg">Find the entity githubOrg in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _githubOrg(Wrap<String> w);
+
+	public String getGithubOrg() {
+		return githubOrg;
+	}
+	public void setGithubOrg(String o) {
+		this.githubOrg = SitePage.staticSetGithubOrg(siteRequest_, o);
+	}
+	public static String staticSetGithubOrg(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected SitePage githubOrgInit() {
+		Wrap<String> githubOrgWrap = new Wrap<String>().var("githubOrg");
+		if(githubOrg == null) {
+			_githubOrg(githubOrgWrap);
+			setGithubOrg(githubOrgWrap.o);
+		}
+		return (SitePage)this;
+	}
+
+	public static String staticSearchGithubOrg(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrGithubOrg(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqGithubOrg(SiteRequestEnUS siteRequest_, String o) {
+		return SitePage.staticSearchStrGithubOrg(siteRequest_, SitePage.staticSearchGithubOrg(siteRequest_, SitePage.staticSetGithubOrg(siteRequest_, o)));
+	}
+
 	//////////////
 	// siteName //
 	//////////////
@@ -1024,6 +1073,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 		Future.future(a -> a.complete()).compose(a -> {
 			Promise<Void> promise2 = Promise.promise();
 			try {
+				githubOrgInit();
 				siteNameInit();
 				siteDisplayNameInit();
 				staticBaseUrlInit();
@@ -1093,6 +1143,8 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	public Object obtainSitePage(String var) {
 		SitePage oSitePage = (SitePage)this;
 		switch(var) {
+			case "githubOrg":
+				return oSitePage.githubOrg;
 			case "siteName":
 				return oSitePage.siteName;
 			case "siteDisplayName":
@@ -1164,6 +1216,8 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	}
 	public static Object staticSetSitePage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "githubOrg":
+			return SitePage.staticSetGithubOrg(siteRequest_, o);
 		case "siteName":
 			return SitePage.staticSetSiteName(siteRequest_, o);
 		case "siteDisplayName":
@@ -1210,6 +1264,8 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	}
 	public static Object staticSearchSitePage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "githubOrg":
+			return SitePage.staticSearchGithubOrg(siteRequest_, (String)o);
 		case "siteName":
 			return SitePage.staticSearchSiteName(siteRequest_, (String)o);
 		case "siteDisplayName":
@@ -1256,6 +1312,8 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	}
 	public static String staticSearchStrSitePage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "githubOrg":
+			return SitePage.staticSearchStrGithubOrg(siteRequest_, (String)o);
 		case "siteName":
 			return SitePage.staticSearchStrSiteName(siteRequest_, (String)o);
 		case "siteDisplayName":
@@ -1302,6 +1360,8 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	}
 	public static String staticSearchFqSitePage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "githubOrg":
+			return SitePage.staticSearchFqGithubOrg(siteRequest_, o);
 		case "siteName":
 			return SitePage.staticSearchFqSiteName(siteRequest_, o);
 		case "siteDisplayName":
@@ -1607,6 +1667,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	}
 
 	public static final String CLASS_SIMPLE_NAME = "SitePage";
+	public static final String VAR_githubOrg = "githubOrg";
 	public static final String VAR_siteName = "siteName";
 	public static final String VAR_siteDisplayName = "siteDisplayName";
 	public static final String VAR_staticBaseUrl = "staticBaseUrl";
@@ -1656,6 +1717,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 		return vars;
 	}
 
+	public static final String DISPLAY_NAME_githubOrg = "";
 	public static final String DISPLAY_NAME_siteName = "";
 	public static final String DISPLAY_NAME_siteDisplayName = "";
 	public static final String DISPLAY_NAME_staticBaseUrl = "";
@@ -1678,6 +1740,8 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	}
 	public static String displayNameSitePage(String var) {
 		switch(var) {
+		case VAR_githubOrg:
+			return DISPLAY_NAME_githubOrg;
 		case VAR_siteName:
 			return DISPLAY_NAME_siteName;
 		case VAR_siteDisplayName:
@@ -1746,6 +1810,8 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 
 	public static String classSimpleNameSitePage(String var) {
 		switch(var) {
+		case VAR_githubOrg:
+			return "String";
 		case VAR_siteName:
 			return "String";
 		case VAR_siteDisplayName:

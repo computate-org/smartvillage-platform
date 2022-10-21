@@ -23,6 +23,9 @@ STATIC_BASE_URL: "{{ STATIC_BASE_URL }}"
 STATIC_PATH: "{{ STATIC_PATH }}"
 TEMPLATE_PATH: "{{ TEMPLATE_PATH }}"
 FONTAWESOME_KIT: "{{ FONTAWESOME_KIT }}"
+I18N_PATHS: "{{ I18N_PATHS }}"
+DYNAMIC_PAGE_PATHS:
+  - "{{ SITE_SRC }}/page"
 
 JDBC_HOST: "{{ JDBC_HOST }}"
 JDBC_PORT: {{ JDBC_PORT }}
@@ -94,29 +97,29 @@ ENABLE_IMPORT_DATA_SystemEvent: true
 AUTH_ROLES_ADMIN: {{ AUTH_ROLES_ADMIN }}
 # The Auth roles required to add and modify site user records. 
 AUTH_ROLES_REQUIRED_SiteUser: ['SiteAdmin']
-# The Auth roles required to add and modify  records. 
+# The Auth roles required to add and modify map result records. 
 AUTH_ROLES_REQUIRED_MapResult: ['SiteAdmin']
-# The Auth roles required to add and modify  records. 
+# The Auth roles required to add and modify traffic simulation records. 
 AUTH_ROLES_REQUIRED_TrafficSimulation: ['SiteAdmin']
-# The Auth roles required to add and modify  records. 
+# The Auth roles required to add and modify traffic light records. 
 AUTH_ROLES_REQUIRED_TrafficLight: ['SiteAdmin']
-# The Auth roles required to add and modify  records. 
+# The Auth roles required to add and modify traffic light step records. 
 AUTH_ROLES_REQUIRED_TrafficLightStep: ['SiteAdmin']
-# The Auth roles required to add and modify  records. 
+# The Auth roles required to add and modify vehicle step records. 
 AUTH_ROLES_REQUIRED_VehicleStep: ['SiteAdmin']
-# The Auth roles required to add and modify  records. 
+# The Auth roles required to add and modify person step records. 
 AUTH_ROLES_REQUIRED_PersonStep: ['SiteAdmin']
-# The Auth roles required to add and modify  records. 
+# The Auth roles required to add and modify IOT node records. 
 AUTH_ROLES_REQUIRED_IotNode: ['SiteAdmin']
-# The Auth roles required to add and modify  records. 
+# The Auth roles required to add and modify IOT node step records. 
 AUTH_ROLES_REQUIRED_IotNodeStep: ['SiteAdmin']
-# The Auth roles required to add and modify  records. 
+# The Auth roles required to add and modify time step records. 
 AUTH_ROLES_REQUIRED_TimeStep: ['SiteAdmin']
-# The Auth roles required to add and modify  records. 
+# The Auth roles required to add and modify article records. 
 AUTH_ROLES_REQUIRED_SitePage: ['SiteAdmin']
-# The Auth roles required to add and modify  records. 
+# The Auth roles required to add and modify HTML records. 
 AUTH_ROLES_REQUIRED_SiteHtm: ['SiteAdmin']
-# The Auth roles required to add and modify  records. 
+# The Auth roles required to add and modify system event records. 
 AUTH_ROLES_REQUIRED_SystemEvent: ['SiteAdmin']
 
 YGGIO_HOST_NAME: "{{ YGGIO_HOST_NAME }}"

@@ -370,6 +370,16 @@ public abstract class SitePageReaderGen<DEV> extends Object {
 		}
 		return (SitePageReader)this;
 	}
+	public static final String i18nGeneratorComplete1 = "Importing %s data completed. ";
+	public static final String i18nGeneratorComplete = i18nGeneratorComplete1;
+	public static final String i18nGeneratorFail1 = "Importing %s data failed. ";
+	public static final String i18nGeneratorFail = i18nGeneratorFail1;
+
+	public static final String i18nGeneratorPathComplete1 = "Importing page %s completed. ";
+	public static final String i18nGeneratorPathComplete = i18nGeneratorPathComplete1;
+	public static final String i18nGeneratorPathFail1 = "Importing page %s failed. ";
+	public static final String i18nGeneratorPathFail = i18nGeneratorPathFail1;
+
 	public static final String importDataSitePageComplete1 = "Importing %s data completed. ";
 	public static final String importDataSitePageComplete = importDataSitePageComplete1;
 	public static final String importDataSitePageFail1 = "Importing %s data failed. ";
@@ -561,7 +571,7 @@ public abstract class SitePageReaderGen<DEV> extends Object {
 		return sb.toString();
 	}
 
-	public static final String[] SitePageReaderVals = new String[] { importDataSitePageComplete1, importDataSitePageFail1, importSitePageComplete1, importSitePageFail1 };
+	public static final String[] SitePageReaderVals = new String[] { i18nGeneratorComplete1, i18nGeneratorFail1, i18nGeneratorPathComplete1, i18nGeneratorPathFail1, importDataSitePageComplete1, importDataSitePageFail1, importSitePageComplete1, importSitePageFail1 };
 
 	public static final String CLASS_SIMPLE_NAME = "SitePageReader";
 	public static final String VAR_siteRequest_ = "siteRequest_";

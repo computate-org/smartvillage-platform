@@ -25,6 +25,7 @@ SUFFIX_SRC_GEN_JAVA: "/src/gen/java"
 RELATIVE_PATHS_TO_WATCH: "src/main/java/org/computate/smartvillageview/enus"
 API_COUNTER_FETCH: 50
 API_COUNTER_RESUME: 10
+COMPUTATE_SRC: "/home/ctate/.local/src/computate"
 
 SITE_HOST_NAME: "localhost"
 SITE_BASE_URL: "http://localhost:12080"

@@ -218,119 +218,124 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 
 	public static Future<Void> run(JsonObject config) {
 		Promise<Void> promise = Promise.promise();
-		Boolean enableZookeeperCluster = Optional.ofNullable(config.getBoolean(ConfigKeys.ENABLE_ZOOKEEPER_CLUSTER)).orElse(false);
-		VertxOptions vertxOptions = new VertxOptions();
-		EventBusOptions eventBusOptions = new EventBusOptions();
-
-		if(enableZookeeperCluster) {
-			JsonObject zkConfig = new JsonObject();
-			String hostname = config.getString(ConfigKeys.HOSTNAME);
-			String openshiftService = config.getString(ConfigKeys.OPENSHIFT_SERVICE);
-			String zookeeperHostName = config.getString(ConfigKeys.ZOOKEEPER_HOST_NAME);
-			Integer zookeeperPort = config.getInteger(ConfigKeys.ZOOKEEPER_PORT);
-			String zookeeperHosts = Optional.ofNullable(config.getString(ConfigKeys.ZOOKEEPER_HOSTS)).orElse(zookeeperHostName + ":" + zookeeperPort);
-			String clusterHostName = config.getString(ConfigKeys.CLUSTER_HOST_NAME);
-			Integer clusterPort = config.getInteger(ConfigKeys.CLUSTER_PORT);
-			String clusterPublicHostName = config.getString(ConfigKeys.CLUSTER_PUBLIC_HOST_NAME);
-			Integer clusterPublicPort = config.getInteger(ConfigKeys.CLUSTER_PUBLIC_PORT);
-			Integer zookeeperBaseSleepTimeMillis = config.getInteger(ConfigKeys.ZOOKEEPER_BASE_SLEEP_TIME_MILLIS);
-			Integer zookeeperMaxSleepMillis = config.getInteger(ConfigKeys.ZOOKEEPER_MAX_SLEEP_MILLIS);
-			Integer zookeeperMaxRetries = config.getInteger(ConfigKeys.ZOOKEEPER_MAX_RETRIES);
-			Integer zookeeperConnectionTimeoutMillis = config.getInteger(ConfigKeys.ZOOKEEPER_CONNECTION_TIMEOUT_MILLIS);
-			Integer zookeeperSessionTimeoutMillis = config.getInteger(ConfigKeys.ZOOKEEPER_SESSION_TIMEOUT_MILLIS);
-			zkConfig.put("zookeeperHosts", zookeeperHosts);
-			zkConfig.put("sessionTimeout", zookeeperSessionTimeoutMillis);
-			zkConfig.put("connectTimeout", zookeeperConnectionTimeoutMillis);
-			zkConfig.put("rootPath", "smart-village-view");
-			zkConfig.put("retry", new JsonObject()
-					.put("initialSleepTime", zookeeperBaseSleepTimeMillis)
-					.put("intervalTimes", zookeeperMaxSleepMillis)
-					.put("maxTimes", zookeeperMaxRetries)
-			);
-			ClusterManager clusterManager = new ZookeeperClusterManager(zkConfig);
-
-			if(clusterHostName == null) {
-				clusterHostName = hostname;
-			}
-			if(clusterPublicHostName == null) {
-				if(hostname != null && openshiftService != null) {
-					clusterPublicHostName = hostname + "." + openshiftService;
+		try {
+			Boolean enableZookeeperCluster = Optional.ofNullable(config.getBoolean(ConfigKeys.ENABLE_ZOOKEEPER_CLUSTER)).orElse(false);
+			VertxOptions vertxOptions = new VertxOptions();
+			EventBusOptions eventBusOptions = new EventBusOptions();
+	
+			if(enableZookeeperCluster) {
+				JsonObject zkConfig = new JsonObject();
+				String hostname = config.getString(ConfigKeys.HOSTNAME);
+				String openshiftService = config.getString(ConfigKeys.OPENSHIFT_SERVICE);
+				String zookeeperHostName = config.getString(ConfigKeys.ZOOKEEPER_HOST_NAME);
+				Integer zookeeperPort = config.getInteger(ConfigKeys.ZOOKEEPER_PORT);
+				String zookeeperHosts = Optional.ofNullable(config.getString(ConfigKeys.ZOOKEEPER_HOSTS)).orElse(zookeeperHostName + ":" + zookeeperPort);
+				String clusterHostName = config.getString(ConfigKeys.CLUSTER_HOST_NAME);
+				Integer clusterPort = config.getInteger(ConfigKeys.CLUSTER_PORT);
+				String clusterPublicHostName = config.getString(ConfigKeys.CLUSTER_PUBLIC_HOST_NAME);
+				Integer clusterPublicPort = config.getInteger(ConfigKeys.CLUSTER_PUBLIC_PORT);
+				Integer zookeeperBaseSleepTimeMillis = config.getInteger(ConfigKeys.ZOOKEEPER_BASE_SLEEP_TIME_MILLIS);
+				Integer zookeeperMaxSleepMillis = config.getInteger(ConfigKeys.ZOOKEEPER_MAX_SLEEP_MILLIS);
+				Integer zookeeperMaxRetries = config.getInteger(ConfigKeys.ZOOKEEPER_MAX_RETRIES);
+				Integer zookeeperConnectionTimeoutMillis = config.getInteger(ConfigKeys.ZOOKEEPER_CONNECTION_TIMEOUT_MILLIS);
+				Integer zookeeperSessionTimeoutMillis = config.getInteger(ConfigKeys.ZOOKEEPER_SESSION_TIMEOUT_MILLIS);
+				zkConfig.put("zookeeperHosts", zookeeperHosts);
+				zkConfig.put("sessionTimeout", zookeeperSessionTimeoutMillis);
+				zkConfig.put("connectTimeout", zookeeperConnectionTimeoutMillis);
+				zkConfig.put("rootPath", "smart-village-view");
+				zkConfig.put("retry", new JsonObject()
+						.put("initialSleepTime", zookeeperBaseSleepTimeMillis)
+						.put("intervalTimes", zookeeperMaxSleepMillis)
+						.put("maxTimes", zookeeperMaxRetries)
+				);
+				ClusterManager clusterManager = new ZookeeperClusterManager(zkConfig);
+	
+				if(clusterHostName == null) {
+					clusterHostName = hostname;
 				}
+				if(clusterPublicHostName == null) {
+					if(hostname != null && openshiftService != null) {
+						clusterPublicHostName = hostname + "." + openshiftService;
+					}
+				}
+				if(clusterHostName != null) {
+					LOG.info(String.format("%s: %s", ConfigKeys.CLUSTER_HOST_NAME, clusterHostName));
+					eventBusOptions.setHost(clusterHostName);
+				}
+				if(clusterPort != null) {
+					LOG.info(String.format("%s: %s", ConfigKeys.CLUSTER_PORT, clusterPort));
+					eventBusOptions.setPort(clusterPort);
+				}
+				if(clusterPublicHostName != null) {
+					LOG.info(String.format("%s: %s", ConfigKeys.CLUSTER_PUBLIC_HOST_NAME, clusterPublicHostName));
+					eventBusOptions.setClusterPublicHost(clusterPublicHostName);
+				}
+				if(clusterPublicPort != null) {
+					LOG.info(String.format("%s: %s", ConfigKeys.CLUSTER_PUBLIC_PORT, clusterPublicPort));
+					eventBusOptions.setClusterPublicPort(clusterPublicPort);
+				}
+				vertxOptions.setClusterManager(clusterManager);
 			}
-			if(clusterHostName != null) {
-				LOG.info(String.format("%s: %s", ConfigKeys.CLUSTER_HOST_NAME, clusterHostName));
-				eventBusOptions.setHost(clusterHostName);
-			}
-			if(clusterPort != null) {
-				LOG.info(String.format("%s: %s", ConfigKeys.CLUSTER_PORT, clusterPort));
-				eventBusOptions.setPort(clusterPort);
-			}
-			if(clusterPublicHostName != null) {
-				LOG.info(String.format("%s: %s", ConfigKeys.CLUSTER_PUBLIC_HOST_NAME, clusterPublicHostName));
-				eventBusOptions.setClusterPublicHost(clusterPublicHostName);
-			}
-			if(clusterPublicPort != null) {
-				LOG.info(String.format("%s: %s", ConfigKeys.CLUSTER_PUBLIC_PORT, clusterPublicPort));
-				eventBusOptions.setClusterPublicPort(clusterPublicPort);
-			}
-			vertxOptions.setClusterManager(clusterManager);
-		}
-		Long vertxWarningExceptionSeconds = config.getLong(ConfigKeys.VERTX_WARNING_EXCEPTION_SECONDS);
-		Long vertxMaxEventLoopExecuteTime = config.getLong(ConfigKeys.VERTX_MAX_EVENT_LOOP_EXECUTE_TIME);
-		Integer siteInstances = config.getInteger(ConfigKeys.SITE_INSTANCES);
-		vertxOptions.setEventBusOptions(eventBusOptions);
-		vertxOptions.setWarningExceptionTime(vertxWarningExceptionSeconds);
-		vertxOptions.setWarningExceptionTimeUnit(TimeUnit.SECONDS);
-		vertxOptions.setMaxEventLoopExecuteTime(vertxMaxEventLoopExecuteTime);
-		vertxOptions.setMaxEventLoopExecuteTimeUnit(TimeUnit.SECONDS);
-		vertxOptions.setWorkerPoolSize(config.getInteger(ConfigKeys.WORKER_POOL_SIZE));
-		Consumer<Vertx> runner = vertx -> {
-			try {
-				DeploymentOptions deploymentOptions = new DeploymentOptions();
-				deploymentOptions.setInstances(siteInstances);
-				deploymentOptions.setConfig(config);
-	
-				DeploymentOptions emailVerticleDeploymentOptions = new DeploymentOptions();
-				emailVerticleDeploymentOptions.setConfig(config);
-				emailVerticleDeploymentOptions.setWorker(true);
-	
-				DeploymentOptions WorkerVerticleDeploymentOptions = new DeploymentOptions();
-				WorkerVerticleDeploymentOptions.setConfig(config);
-				WorkerVerticleDeploymentOptions.setInstances(1);
-	
-				vertx.deployVerticle(MainVerticle.class, deploymentOptions).onSuccess(a -> {
-					LOG.info("Started main verticle. ");
-					vertx.deployVerticle(WorkerVerticle.class, WorkerVerticleDeploymentOptions).onSuccess(b -> {
-						LOG.info("Started worker verticle. ");
-						vertx.deployVerticle(EmailVerticle.class, emailVerticleDeploymentOptions).onSuccess(c -> {
-							LOG.info("Started email verticle. ");
+			Long vertxWarningExceptionSeconds = config.getLong(ConfigKeys.VERTX_WARNING_EXCEPTION_SECONDS);
+			Long vertxMaxEventLoopExecuteTime = config.getLong(ConfigKeys.VERTX_MAX_EVENT_LOOP_EXECUTE_TIME);
+			Integer siteInstances = config.getInteger(ConfigKeys.SITE_INSTANCES);
+			vertxOptions.setEventBusOptions(eventBusOptions);
+			vertxOptions.setWarningExceptionTime(vertxWarningExceptionSeconds);
+			vertxOptions.setWarningExceptionTimeUnit(TimeUnit.SECONDS);
+			vertxOptions.setMaxEventLoopExecuteTime(vertxMaxEventLoopExecuteTime);
+			vertxOptions.setMaxEventLoopExecuteTimeUnit(TimeUnit.SECONDS);
+			vertxOptions.setWorkerPoolSize(config.getInteger(ConfigKeys.WORKER_POOL_SIZE));
+			Consumer<Vertx> runner = vertx -> {
+				try {
+					DeploymentOptions deploymentOptions = new DeploymentOptions();
+					deploymentOptions.setInstances(siteInstances);
+					deploymentOptions.setConfig(config);
+		
+					DeploymentOptions emailVerticleDeploymentOptions = new DeploymentOptions();
+					emailVerticleDeploymentOptions.setConfig(config);
+					emailVerticleDeploymentOptions.setWorker(true);
+		
+					DeploymentOptions WorkerVerticleDeploymentOptions = new DeploymentOptions();
+					WorkerVerticleDeploymentOptions.setConfig(config);
+					WorkerVerticleDeploymentOptions.setInstances(1);
+		
+					vertx.deployVerticle(MainVerticle.class, deploymentOptions).onSuccess(a -> {
+						LOG.info("Started main verticle. ");
+						vertx.deployVerticle(WorkerVerticle.class, WorkerVerticleDeploymentOptions).onSuccess(b -> {
+							LOG.info("Started worker verticle. ");
+							vertx.deployVerticle(EmailVerticle.class, emailVerticleDeploymentOptions).onSuccess(c -> {
+								LOG.info("Started email verticle. ");
+							}).onFailure(ex -> {
+								LOG.error("Failed to start worker verticle. ", ex);
+							});
 						}).onFailure(ex -> {
 							LOG.error("Failed to start worker verticle. ", ex);
 						});
 					}).onFailure(ex -> {
-						LOG.error("Failed to start worker verticle. ", ex);
+						LOG.error("Failed to start main verticle. ", ex);
 					});
+				} catch (Throwable ex) {
+					LOG.error("Creating clustered Vertx failed. ", ex);
+					ExceptionUtils.rethrow(ex);
+				}
+			};
+	
+			if(enableZookeeperCluster) {
+				Vertx.clusteredVertx(vertxOptions).onSuccess(vertx -> {
+					runner.accept(vertx);
+					promise.complete();
 				}).onFailure(ex -> {
-					LOG.error("Failed to start main verticle. ", ex);
+					LOG.error("Creating clustered Vertx failed. ", ex);
+					promise.fail(ex);
 				});
-			} catch (Throwable ex) {
-				LOG.error("Creating clustered Vertx failed. ", ex);
-				ExceptionUtils.rethrow(ex);
-			}
-		};
-
-		if(enableZookeeperCluster) {
-			Vertx.clusteredVertx(vertxOptions).onSuccess(vertx -> {
+			} else {
+				Vertx vertx = Vertx.vertx(vertxOptions);
 				runner.accept(vertx);
 				promise.complete();
-			}).onFailure(ex -> {
-				LOG.error("Creating clustered Vertx failed. ", ex);
-				promise.fail(ex);
-			});
-		} else {
-			Vertx vertx = Vertx.vertx(vertxOptions);
-			runner.accept(vertx);
-			promise.complete();
+			}
+		} catch (Throwable ex) {
+			LOG.error("Creating clustered Vertx failed. ", ex);
+			promise.fail(ex);
 		}
 		return promise.future();
 	}

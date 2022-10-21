@@ -62,6 +62,10 @@ import io.vertx.core.Promise;
  */
 public class SitePage extends SitePageGen<BaseResult> {
 
+	protected void _githubOrg(Wrap<String> w) {
+		w.o(siteRequest_.getConfig().getString(ConfigKeys.GITHUB_ORG));
+	}
+
 	/**
 	 * {@inheritDoc}
 	 */

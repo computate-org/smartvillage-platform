@@ -152,4 +152,14 @@ public class ConfigKeys extends ComputateConfigKeys {
 	 * API counter fetch VehicleStep
 	 */
 	public static final String API_COUNTER_FETCH_VehicleStep = "API_COUNTER_FETCH_VehicleStep";
+
+	/**
+	 * 
+	 **/
+	public static final String I18N_PATHS = "I18N_PATHS";
+
+	/**
+	 * 
+	 **/
+	public static final String DYNAMIC_PAGE_PATHS = "DYNAMIC_PAGE_PATHS";
 }
