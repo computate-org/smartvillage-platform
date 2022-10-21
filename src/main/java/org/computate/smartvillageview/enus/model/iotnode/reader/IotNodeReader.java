@@ -112,7 +112,7 @@ public class IotNodeReader extends IotNodeReaderGen<Object> {
 
 				data.stream().forEach(row -> {
 					JsonObject json = (JsonObject)row;
-					String id = json.getString("_id");
+					String nodeId = json.getString("_id");
 
 					JsonObject body = new JsonObject()
 							.put(IotNode.VAR_saves, new JsonArray()
@@ -120,7 +120,8 @@ public class IotNodeReader extends IotNodeReaderGen<Object> {
 									.add(IotNode.VAR_json)
 									)
 							.put(IotNode.VAR_json, json)
-							.put(IotNode.VAR_id, id)
+							.put(IotNode.VAR_nodeId, nodeId)
+							.put(IotNode.VAR_id, nodeId)
 							;
 
 					JsonObject params = new JsonObject();

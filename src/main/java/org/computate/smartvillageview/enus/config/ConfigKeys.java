@@ -162,4 +162,24 @@ public class ConfigKeys extends ComputateConfigKeys {
 	 * 
 	 **/
 	public static final String DYNAMIC_PAGE_PATHS = "DYNAMIC_PAGE_PATHS";
+
+	/**
+	 * Whether the FIWARE Context Broker uses SSL. 
+	 **/
+	public static final String FIWARE_SSL = "FIWARE_SSL";
+
+	/**
+	 * The FIWARE Context Broker host name. 
+	 **/
+	public static final String FIWARE_HOST_NAME = "FIWARE_HOST_NAME";
+
+	/**
+	 * The FIWARE Context Broker port. 
+	 **/
+	public static final String FIWARE_PORT = "FIWARE_PORT";
+
+	/**
+	 * The FIWARE Context Broker v2 API URI prefix. 
+	 **/
+	public static final String FIWARE_API_URI = "FIWARE_API_URI";
 }

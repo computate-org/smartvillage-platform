@@ -567,4 +567,9 @@ public class IotNode extends IotNodeGen<BaseResult> {
 		super.indexIotNode(doc);
 //		indexJsonObject(doc, "json", json);
 	}
+
+	@Override
+	protected void _objectId(Wrap<String> w) {
+		w.o(String.format("%s_%s", IotNode.CLASS_SIMPLE_NAME, nodeId));
+	}
 }
