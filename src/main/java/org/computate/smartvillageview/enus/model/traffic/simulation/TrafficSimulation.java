@@ -25,7 +25,6 @@ import org.computate.smartvillageview.enus.model.base.BaseModel;
  * ApiMethod: PATCH
  * ApiMethod: POST
  * ApiMethod: PUTImport
- * ApiContentTypeRequest.PUTImport: application/xml
  * 
  * ApiMethod.enUS: SearchPage
  * Page.SearchPage.enUS: TrafficSimulationPage

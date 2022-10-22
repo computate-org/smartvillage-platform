@@ -1,10 +1,10 @@
 package org.computate.smartvillageview.enus.model.page.reader;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.Normalizer;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
@@ -13,6 +13,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.Stack;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -22,15 +23,14 @@ import org.computate.search.serialize.ComputateZonedDateTimeSerializer;
 import org.computate.search.tool.XmlTool;
 import org.computate.search.wrap.Wrap;
 import org.computate.smartvillageview.enus.config.ConfigKeys;
-import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
-import org.computate.smartvillageview.enus.model.page.SitePage;
 import org.computate.smartvillageview.enus.model.htm.SiteHtm;
+import org.computate.smartvillageview.enus.model.page.SitePage;
+import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.vertx.config.ComputateConfigKeys;
 
 import com.github.jknack.handlebars.Context;
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Template;
-import com.google.common.io.PatternFilenameFilter;
 
 import io.vertx.config.yaml.YamlProcessor;
 import io.vertx.core.CompositeFuture;
@@ -46,6 +46,8 @@ import io.vertx.ext.web.client.WebClient;
 import io.vertx.ext.web.templ.handlebars.HandlebarsTemplateEngine;
 
 public class SitePageReader extends SitePageReaderGen<Object> {
+
+	private Pattern PATTERN_HEADER = Pattern.compile("^h\\d+$");
 
 	public SitePageReader(Vertx vertx, WorkerExecutor workerExecutor, SiteRequestEnUS siteRequest, JsonObject config) {
 		super();
@@ -353,6 +355,16 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 			Optional.ofNullable(pageItem.getString("src")).ifPresent(val -> a.put("src", val));
 			Optional.ofNullable(pageItem.getString("href")).ifPresent(val -> a.put("href", val));
 
+			Boolean addId = false;
+			if(e != null) {
+				if(e != null && PATTERN_HEADER.matcher(e).find() && a.getString("id") == null) {
+					addId = true;
+				} else if(stack.size() > 0 && e.equals("span") && PATTERN_HEADER.matcher(stack.peek()).find() && a.getString("id") == null) {
+					addId = true;
+					e = "a";
+				}
+			}
+
 			if(e != null) {
 				// Stack the element and determine element name, wrap and tabs
 				String localNameParent = stack.isEmpty() ? null : stack.peek();
@@ -399,6 +411,14 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 					page.addObjectText(strs);
 				}
 
+				if(addId && StringUtils.isNotBlank(text)) {
+					String id = toId(text);
+					a.put("id", id);
+					if("a".equals(e)) {
+						a.put("href", String.format("#%s", id));
+					}
+				}
+
 				String htm = pageItem.getString("htm");
 				if(htm != null) {
 					// Split text by lines and index each line as it's own value
@@ -440,6 +460,8 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 						.add(SiteHtm.VAR_uri)
 						.add(SiteHtm.VAR_text)
 						.add(SiteHtm.VAR_labels)
+						.add(SiteHtm.VAR_inheritPk)
+						.add(SiteHtm.VAR_objectId)
 						);
 				importItem.put(SiteHtm.VAR_created, ComputateZonedDateTimeSerializer.ZONED_DATE_TIME_FORMATTER.format(ZonedDateTime.now()));
 				importItem.put(SiteHtm.VAR_pageId, pageId);
@@ -468,6 +490,7 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 					}
 					importItem.put(SiteHtm.VAR_a, attrs);
 				}
+				importItem.put(SiteHtm.VAR_objectId, String.format("%s_%s", SiteHtm.CLASS_SIMPLE_NAME, sequenceNum));
 				importItem.put(SiteHtm.VAR_id, String.format("%s_%s", SiteHtm.CLASS_SIMPLE_NAME, sequenceNum));
 				for(Integer j=1; j <= stack.size(); j++) {
 					// Add sort values for the element at each level of the stack
@@ -593,5 +616,21 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 			}
 		}
 		return sequenceNum;
+	}
+
+	/**
+	 * Description: A helper method for generating a URL friendly unique ID for this object
+	 */
+	public String toId(String s) {
+		if(s != null) {
+			s = Normalizer.normalize(s, Normalizer.Form.NFD);
+			s = StringUtils.lowerCase(s);
+			s = StringUtils.trim(s);
+			s = StringUtils.replacePattern(s, "\\s{1,}", "-");
+			s = StringUtils.replacePattern(s, "[^\\w-]", "");
+			s = StringUtils.replacePattern(s, "-{2,}", "-");
+		}
+
+		return s;
 	}
 }

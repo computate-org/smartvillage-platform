@@ -5119,7 +5119,7 @@ paths:
         description: >+
         required: true
         content:
-          application/xml:
+          application/json:
             schema:
               $ref: '#/components/schemas/PUTImportTrafficSimulationRequest'
       responses:
@@ -11374,6 +11374,8 @@ components:
               items:
                 type: object
                 properties:
+                  githubOrg:
+                    type: string
                   siteName:
                     type: string
                   siteDisplayName:
@@ -11410,6 +11412,8 @@ components:
       allOf:
         - type: object
           properties:
+            githubOrg:
+              type: string
             siteName:
               type: string
             siteDisplayName:
@@ -11446,6 +11450,8 @@ components:
       allOf:
         - type: object
           properties:
+            githubOrg:
+              type: string
             siteName:
               type: string
             siteDisplayName:
@@ -11482,6 +11488,13 @@ components:
       allOf:
         - type: object
           properties:
+            setGithubOrg:
+              type: string
+              nullable: true
+            removeGithubOrg:
+              type: string
+            removeAllGithubOrg:
+              type: string
             setSiteName:
               type: string
               nullable: true
@@ -11598,6 +11611,13 @@ components:
       allOf:
         - type: object
           properties:
+            setGithubOrg:
+              type: string
+              nullable: true
+            removeGithubOrg:
+              type: string
+            removeAllGithubOrg:
+              type: string
             setSiteName:
               type: string
               nullable: true
@@ -11714,6 +11734,8 @@ components:
       allOf:
         - type: object
           properties:
+            githubOrg:
+              type: string
             siteName:
               type: string
             siteDisplayName:
@@ -11750,6 +11772,8 @@ components:
       allOf:
         - type: object
           properties:
+            githubOrg:
+              type: string
             siteName:
               type: string
             siteDisplayName:
@@ -11786,6 +11810,8 @@ components:
       allOf:
         - type: object
           properties:
+            githubOrg:
+              type: string
             siteName:
               type: string
             siteDisplayName:

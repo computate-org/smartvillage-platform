@@ -1304,95 +1304,112 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 		return o != null;
 	}
 	public Object persistSiteHtm(String var, Object val) {
-		switch(var.toLowerCase()) {
-			case "uri":
-				if(val instanceof String)
+		String varLower = var.toLowerCase();
+			if("uri".equals(varLower)) {
+				if(val instanceof String) {
 					setUri((String)val);
+				}
 				saves.add("uri");
 				return val;
-			case "pageid":
-				if(val instanceof String)
+			} else if("pageid".equals(varLower)) {
+				if(val instanceof String) {
 					setPageId((String)val);
+				}
 				saves.add("pageId");
 				return val;
-			case "sequencenum":
-				if(val instanceof Long)
+			} else if("sequencenum".equals(varLower)) {
+				if(val instanceof Long) {
 					setSequenceNum((Long)val);
-				else if(val instanceof String)
-					setSequenceNum((String)val);
+				} else {
+					setSequenceNum(val == null ? null : val.toString());
+				}
 				saves.add("sequenceNum");
 				return val;
-			case "htmgroup":
-				if(val instanceof String)
+			} else if("htmgroup".equals(varLower)) {
+				if(val instanceof String) {
 					setHtmGroup((String)val);
+				}
 				saves.add("htmGroup");
 				return val;
-			case "labels":
-				if(val instanceof List<?>)
+			} else if("labels".equals(varLower)) {
+				if(val instanceof List<?>) {
 					((List<String>)val).stream().forEach(v -> addLabels(v));
-				else if(val instanceof JsonArray)
+				} else if(val instanceof JsonArray) {
 					((JsonArray)val).stream().forEach(v -> addLabels(v.toString()));
-				if(!saves.contains("labels"))
+				}
+				if(!saves.contains("labels")) {
 					saves.add("labels");
+				}
 				return val;
-			case "ebefore":
-				if(val instanceof String)
+			} else if("ebefore".equals(varLower)) {
+				if(val instanceof String) {
 					setEBefore((String)val);
+				}
 				saves.add("eBefore");
 				return val;
-			case "eafter":
-				if(val instanceof String)
+			} else if("eafter".equals(varLower)) {
+				if(val instanceof String) {
 					setEAfter((String)val);
+				}
 				saves.add("eAfter");
 				return val;
-			case "a":
-				if(val instanceof String)
+			} else if("a".equals(varLower)) {
+				if(val instanceof String) {
 					setA((String)val);
-				else if(val instanceof JsonObject)
+				} else if(val instanceof JsonObject) {
 					setA((JsonObject)val);
+				}
 				saves.add("a");
 				return val;
-			case "text":
-				if(val instanceof List<?>)
+			} else if("text".equals(varLower)) {
+				if(val instanceof List<?>) {
 					((List<String>)val).stream().forEach(v -> addText(v));
-				else if(val instanceof JsonArray)
+				} else if(val instanceof JsonArray) {
 					((JsonArray)val).stream().forEach(v -> addText(v.toString()));
-				if(!saves.contains("text"))
+				}
+				if(!saves.contains("text")) {
 					saves.add("text");
+				}
 				return val;
-			case "comment":
-				if(val instanceof List<?>)
+			} else if("comment".equals(varLower)) {
+				if(val instanceof List<?>) {
 					((List<String>)val).stream().forEach(v -> addComment(v));
-				else if(val instanceof JsonArray)
+				} else if(val instanceof JsonArray) {
 					((JsonArray)val).stream().forEach(v -> addComment(v.toString()));
-				if(!saves.contains("comment"))
+				}
+				if(!saves.contains("comment")) {
 					saves.add("comment");
+				}
 				return val;
-			case "tabs":
-				if(val instanceof String)
+			} else if("tabs".equals(varLower)) {
+				if(val instanceof String) {
 					setTabs((String)val);
+				}
 				saves.add("tabs");
 				return val;
-			case "newline":
-				if(val instanceof Boolean)
+			} else if("newline".equals(varLower)) {
+				if(val instanceof Boolean) {
 					setNewLine((Boolean)val);
-				else if(val instanceof String)
-					setNewLine((String)val);
+				} else {
+					setNewLine(val == null ? null : val.toString());
+				}
 				saves.add("newLine");
 				return val;
-			case "htmbefore":
-				if(val instanceof String)
+			} else if("htmbefore".equals(varLower)) {
+				if(val instanceof String) {
 					setHtmBefore((String)val);
+				}
 				saves.add("htmBefore");
 				return val;
-			case "htmafter":
-				if(val instanceof String)
+			} else if("htmafter".equals(varLower)) {
+				if(val instanceof String) {
 					setHtmAfter((String)val);
+				}
 				saves.add("htmAfter");
 				return val;
-			default:
+			} else {
 				return super.persistBaseResult(var, val);
-		}
+			}
 	}
 
 	/////////////

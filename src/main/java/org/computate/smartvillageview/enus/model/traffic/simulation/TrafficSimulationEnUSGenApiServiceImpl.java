@@ -1083,10 +1083,11 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 	// PUTImport //
 
 	@Override
-	public void putimportTrafficSimulation(String body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
+	public void putimportTrafficSimulation(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		LOG.debug(String.format("putimportTrafficSimulation started. "));
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smart-village-view-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 			try {
+				siteRequest.setJsonObject(body);
 
 				List<String> roles = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_REQUIRED + "_TrafficSimulation")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
 				if(
@@ -1203,10 +1204,100 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 	}
 
 	@Override
-	public void putimportTrafficSimulationFuture(String body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
+	public void putimportTrafficSimulationFuture(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smart-village-view-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 			try {
-				eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithPlainText(Buffer.buffer())));
+				ApiRequest apiRequest = new ApiRequest();
+				apiRequest.setRows(1L);
+				apiRequest.setNumFound(1L);
+				apiRequest.setNumPATCH(0L);
+				apiRequest.initDeepApiRequest(siteRequest);
+				siteRequest.setApiRequest_(apiRequest);
+				body.put("inheritPk", body.getValue("pk"));
+				if(Optional.ofNullable(serviceRequest.getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getJsonArray("var")).orElse(new JsonArray()).stream().filter(s -> "refresh:false".equals(s)).count() > 0L) {
+					siteRequest.getRequestVars().put( "refresh", "false" );
+				}
+
+				SearchList<TrafficSimulation> searchList = new SearchList<TrafficSimulation>();
+				searchList.setStore(true);
+				searchList.q("*:*");
+				searchList.setC(TrafficSimulation.class);
+				searchList.fq("deleted_docvalues_boolean:false");
+				searchList.fq("archived_docvalues_boolean:false");
+				searchList.fq("inheritPk_docvalues_string:" + SearchTool.escapeQueryChars(body.getString(TrafficSimulation.VAR_pk)));
+				searchList.promiseDeepForClass(siteRequest).onSuccess(a -> {
+					try {
+						if(searchList.size() >= 1) {
+							TrafficSimulation o = searchList.getList().stream().findFirst().orElse(null);
+							TrafficSimulation o2 = new TrafficSimulation();
+							o2.setSiteRequest_(siteRequest);
+							JsonObject body2 = new JsonObject();
+							for(String f : body.fieldNames()) {
+								Object bodyVal = body.getValue(f);
+								if(bodyVal instanceof JsonArray) {
+									JsonArray bodyVals = (JsonArray)bodyVal;
+									Collection<?> vals = (Collection<?>)o.obtainForClass(f);
+									if(bodyVals.size() == vals.size()) {
+										Boolean match = true;
+										for(Object val : vals) {
+											if(val != null) {
+												if(!bodyVals.contains(val.toString())) {
+													match = false;
+													break;
+												}
+											} else {
+												match = false;
+												break;
+											}
+										}
+										if(!match) {
+											body2.put("set" + StringUtils.capitalize(f), bodyVal);
+										}
+									} else {
+										body2.put("set" + StringUtils.capitalize(f), bodyVal);
+									}
+								} else {
+									o2.persistForClass(f, bodyVal);
+									o2.relateForClass(f, bodyVal);
+									if(!StringUtils.containsAny(f, "pk", "created", "setCreated") && !Objects.equals(o.obtainForClass(f), o2.obtainForClass(f)))
+										body2.put("set" + StringUtils.capitalize(f), bodyVal);
+								}
+							}
+							for(String f : Optional.ofNullable(o.getSaves()).orElse(new ArrayList<>())) {
+								if(!body.fieldNames().contains(f)) {
+									if(!StringUtils.containsAny(f, "pk", "created", "setCreated") && !Objects.equals(o.obtainForClass(f), o2.obtainForClass(f)))
+										body2.putNull("set" + StringUtils.capitalize(f));
+								}
+							}
+							if(body2.size() > 0) {
+								siteRequest.setJsonObject(body2);
+								patchTrafficSimulationFuture(o, true).onSuccess(b -> {
+									LOG.info("Import TrafficSimulation {} succeeded, modified TrafficSimulation. ", body.getValue(TrafficSimulation.VAR_pk));
+									eventHandler.handle(Future.succeededFuture());
+								}).onFailure(ex -> {
+									LOG.error(String.format("putimportTrafficSimulationFuture failed. "), ex);
+									eventHandler.handle(Future.failedFuture(ex));
+								});
+							} else {
+								eventHandler.handle(Future.succeededFuture());
+							}
+						} else {
+							postTrafficSimulationFuture(siteRequest, true).onSuccess(b -> {
+								LOG.info("Import TrafficSimulation {} succeeded, created new TrafficSimulation. ", body.getValue(TrafficSimulation.VAR_pk));
+								eventHandler.handle(Future.succeededFuture());
+							}).onFailure(ex -> {
+								LOG.error(String.format("putimportTrafficSimulationFuture failed. "), ex);
+								eventHandler.handle(Future.failedFuture(ex));
+							});
+						}
+					} catch(Exception ex) {
+						LOG.error(String.format("putimportTrafficSimulationFuture failed. "), ex);
+						eventHandler.handle(Future.failedFuture(ex));
+					}
+				}).onFailure(ex -> {
+					LOG.error(String.format("putimportTrafficSimulationFuture failed. "), ex);
+					eventHandler.handle(Future.failedFuture(ex));
+				});
 			} catch(Exception ex) {
 				LOG.error(String.format("putimportTrafficSimulationFuture failed. "), ex);
 				eventHandler.handle(Future.failedFuture(ex));

@@ -349,9 +349,13 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 					promise.fail(ex);
 				});
 			} else {
+				try {
 				vertx.setTimer(nextStartDuration.toMillis(), a -> {
 					importDataClass(classSimpleName, nextStartTime2);
 				});
+				} catch(Exception ex) {
+					ex.toString();
+				}
 				promise.complete();
 			}
 		} else {
@@ -368,9 +372,9 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 	private Future<Void> importData() {
 		Promise<Void> promise = Promise.promise();
 		if(config().getBoolean(ConfigKeys.ENABLE_IMPORT_DATA)) {
-			importTimer("IotNode").onSuccess(a -> {
-				importTimer("SitePage").onSuccess(b -> {
-					importTimer(TimeStep.CLASS_SIMPLE_NAME).onSuccess(c -> {
+			importTimer(IotNode.CLASS_SIMPLE_NAME).onSuccess(a -> {
+				importTimer(SitePage.CLASS_SIMPLE_NAME).onSuccess(b -> {
+					importTimer(TrafficSimulation.CLASS_SIMPLE_NAME).onSuccess(c -> {
 						promise.complete();
 					});
 				});
@@ -442,7 +446,7 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 					promise.complete();
 				}
 			});
-		} else if(TimeStep.CLASS_SIMPLE_NAME.equals(classSimpleName)) {
+		} else if(TrafficSimulation.CLASS_SIMPLE_NAME.equals(classSimpleName)) {
 			SiteRequestEnUS siteRequest = new SiteRequestEnUS();
 			siteRequest.setConfig(config());
 			siteRequest.setWebClient(webClient);

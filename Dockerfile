@@ -27,6 +27,7 @@ RUN /usr/bin/virtualenv ${PYTHON_DIR}
 RUN source ${PYTHON_DIR}/bin/activate && pip install setuptools_rust wheel
 RUN source ${PYTHON_DIR}/bin/activate && pip install --upgrade pip
 RUN source ${PYTHON_DIR}/bin/activate && pip install ansible sumolib pyproj
+RUN git clone https://github.com/computate-org/computate.git /root/src/computate
 RUN git clone https://github.com/computate-org/computate_sumo.git /root/.ansible/roles/computate.computate_sumo
 RUN git clone https://github.com/computate-org/computate_sqlite.git /root/.ansible/roles/computate.computate_sqlite
 RUN git clone https://github.com/computate-org/computate_fox.git /root/.ansible/roles/computate.computate_fox
@@ -35,10 +36,10 @@ RUN git clone https://github.com/computate-org/computate_eigen.git /root/.ansibl
 RUN git clone https://github.com/computate-org/computate_gdal.git /root/.ansible/roles/computate.computate_gdal
 RUN source ${PYTHON_DIR}/bin/activate && ${PYTHON_DIR}/bin/ansible-playbook -e  APP_PREFIX=/usr/local -e APP_DOWNLOAD_DIR=/tmp /root/.ansible/roles/computate.computate_sumo/install.yml
 
-RUN install -d /root/src
-COPY . /root/src
+RUN install -d /root/src/smart-village-view
+COPY . /root/src/smart-village-view
 
-WORKDIR /root/src
+WORKDIR /root/src/smart-village-view
 RUN mvn clean install -DskipTests
-RUN cp /root/src/target/*.jar /root/src/app.jar
+RUN cp /root/src/smart-village-view/target/*.jar /root/src/smart-village-view/app.jar
 CMD java $JAVA_OPTS -cp .:* org.computate.smartvillageview.enus.vertx.MainVerticle
