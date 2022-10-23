@@ -239,4 +239,14 @@ public class SitePage extends SitePageGen<BaseResult> {
 			b.append(" ").append(h2);
 		w.o(b.toString());
 	}
+
+	@Override
+	protected void _objectId(Wrap<String> w) {
+		w.o(String.format("%s_%s", SitePage.CLASS_SIMPLE_NAME, pageId));
+	}
+
+	@Override
+	protected void _id(Wrap<String> w) {
+		w.o(String.format("%s_%s", SitePage.CLASS_SIMPLE_NAME, pageId));
+	}
 }

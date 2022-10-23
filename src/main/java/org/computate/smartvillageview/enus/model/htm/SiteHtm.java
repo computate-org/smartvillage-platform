@@ -250,4 +250,14 @@ public class SiteHtm extends SiteHtmGen<BaseResult> {
 			w.o(b.toString());
 		}
 	}
+
+	@Override
+	protected void _objectId(Wrap<String> w) {
+		w.o(String.format("%s_%s_%s", SiteHtm.CLASS_SIMPLE_NAME, pageId, sequenceNum));
+	}
+
+	@Override
+	protected void _id(Wrap<String> w) {
+		w.o(String.format("%s_%s_%s", SiteHtm.CLASS_SIMPLE_NAME, pageId, sequenceNum));
+	}
 }

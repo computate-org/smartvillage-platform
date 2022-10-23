@@ -180,6 +180,53 @@ htmBody:
                           - e: a
                             href: "{{ page.siteBaseUrl }}/en-us/how-to-contribute#what-are-the-coding-standards"
                             text: "{{ page.siteBaseUrl }}/en-us/how-to-contribute#what-are-the-coding-standards"
+      - e: div
+        a:
+          class: w3-padding 
+        in:
+          - e: h3
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-regular fa-magnifying-glass-arrow-right padding-right-quarter-em
+              - e: span
+                text: Basics
+          - e: h4
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-sharp fa-solid fa-coffee-bean padding-right-quarter-em
+              - e: span
+                text: FLOSS license
+          - e: ul
+            in:
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: "The software produced by the project MUST be released as FLOSS. "
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          The license for {{ page.siteDisplayName }} is the GNU GENERAL PUBLIC LICENSE and can be found here: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/blob/main/LICENSE"
+                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/blob/main/LICENSE"
+                      - e: div
+                        text: |
+                          See here that the GNU GENERAL PUBLIC LICENSE is listed as a FLOSS license: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://en.wikipedia.org/wiki/Comparison_of_free_and_open-source_software_licenses"
+                            text: "https://en.wikipedia.org/wiki/Comparison_of_free_and_open-source_software_licenses"
   - e: div
     label:
       - infographic

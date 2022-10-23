@@ -842,10 +842,10 @@ public class SiteHtmEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 												break;
 											}
 										}
-										if(!match) {
-											body2.put("set" + StringUtils.capitalize(f), bodyVal);
-										}
+										vals.clear();
+										body2.put("set" + StringUtils.capitalize(f), bodyVal);
 									} else {
+										vals.clear();
 										body2.put("set" + StringUtils.capitalize(f), bodyVal);
 									}
 								} else {

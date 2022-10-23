@@ -240,17 +240,15 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 
 					SitePage page = new SitePage();
 					page.setSiteRequest_(siteRequest);
-					page.setId(pageId);
-					page.setObjectId(pageId);
-					page.setPageId(pageId);
-					page.setObjectTitle(json.getString("title"));
-					page.setCreated(ZonedDateTime.now(ZoneId.of(config.getString(ConfigKeys.SITE_ZONE))));
-					page.setModified(json.getString("created"));
-					page.setCourseNum(json.getInteger(SitePage.VAR_courseNum));
-					page.setLessonNum(json.getInteger(SitePage.VAR_lessonNum));
-					page.setAuthor(json.getString("author"));
-					page.setUri(json.getString("uri"));
-					page.setPageImageUri(json.getString(SitePage.VAR_pageImageUri));
+					page.persistForClass(SitePage.VAR_pageId, pageId);
+					page.persistForClass(SitePage.VAR_objectTitle, json.getString("title"));
+					page.persistForClass(SitePage.VAR_created, ZonedDateTime.now(ZoneId.of(config.getString(ConfigKeys.SITE_ZONE))));
+					page.persistForClass(SitePage.VAR_modified, json.getString("created"));
+					page.persistForClass(SitePage.VAR_courseNum, json.getInteger(SitePage.VAR_courseNum));
+					page.persistForClass(SitePage.VAR_lessonNum, json.getInteger(SitePage.VAR_lessonNum));
+					page.persistForClass(SitePage.VAR_author, json.getString("author"));
+					page.persistForClass(SitePage.VAR_uri, json.getString("uri"));
+					page.persistForClass(SitePage.VAR_pageImageUri, json.getString(SitePage.VAR_pageImageUri));
 					page.promiseDeepForClass(siteRequest).onSuccess(a -> {
 						try {
 							JsonObject importBody = new JsonObject();
@@ -410,6 +408,9 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 					importItem.put(SiteHtm.VAR_text, new JsonArray().addAll(new JsonArray(Arrays.asList(strs))));
 					page.addObjectText(strs);
 				}
+				if(sequenceNum.equals(219L)) {
+					LOG.error(String.format("text: %s", importItem.getJsonArray("text")));
+				}
 
 				if(addId && StringUtils.isNotBlank(text)) {
 					String id = toId(text);
@@ -461,7 +462,6 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 						.add(SiteHtm.VAR_text)
 						.add(SiteHtm.VAR_labels)
 						.add(SiteHtm.VAR_inheritPk)
-						.add(SiteHtm.VAR_objectId)
 						);
 				importItem.put(SiteHtm.VAR_created, ComputateZonedDateTimeSerializer.ZONED_DATE_TIME_FORMATTER.format(ZonedDateTime.now()));
 				importItem.put(SiteHtm.VAR_pageId, pageId);
@@ -490,8 +490,7 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 					}
 					importItem.put(SiteHtm.VAR_a, attrs);
 				}
-				importItem.put(SiteHtm.VAR_objectId, String.format("%s_%s", SiteHtm.CLASS_SIMPLE_NAME, sequenceNum));
-				importItem.put(SiteHtm.VAR_id, String.format("%s_%s", SiteHtm.CLASS_SIMPLE_NAME, sequenceNum));
+				importItem.put(SiteHtm.VAR_id, String.format("%s_%s_%s", SiteHtm.CLASS_SIMPLE_NAME, pageId, sequenceNum));
 				for(Integer j=1; j <= stack.size(); j++) {
 					// Add sort values for the element at each level of the stack
 					importItem.put("sort" + j, stack.get(j - 1));
@@ -596,7 +595,7 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 				importItem.put(SiteHtm.VAR_htmGroup, htmGroup);
 				importItem.put(SiteHtm.VAR_sequenceNum, sequenceNum);
 				importItem.put(SiteHtm.VAR_uri, uri);
-				importItem.put(SiteHtm.VAR_id, String.format("%s_%s", SiteHtm.CLASS_SIMPLE_NAME, sequenceNum));
+				importItem.put(SiteHtm.VAR_id, String.format("%s_%s_%s", SiteHtm.CLASS_SIMPLE_NAME, pageId, sequenceNum));
 				for(Integer j=1; j <= stack.size(); j++) {
 					importItem.put("sort" + j, stack.get(j - 1));
 				}

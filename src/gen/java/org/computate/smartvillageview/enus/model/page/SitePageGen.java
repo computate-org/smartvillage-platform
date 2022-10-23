@@ -1419,54 +1419,62 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 		return o != null;
 	}
 	public Object persistSitePage(String var, Object val) {
-		switch(var.toLowerCase()) {
-			case "coursenum":
-				if(val instanceof Integer)
+		String varLower = var.toLowerCase();
+			if("coursenum".equals(varLower)) {
+				if(val instanceof Integer) {
 					setCourseNum((Integer)val);
-				else if(val instanceof String)
-					setCourseNum((String)val);
+				} else {
+					setCourseNum(val == null ? null : val.toString());
+				}
 				saves.add("courseNum");
 				return val;
-			case "lessonnum":
-				if(val instanceof Integer)
+			} else if("lessonnum".equals(varLower)) {
+				if(val instanceof Integer) {
 					setLessonNum((Integer)val);
-				else if(val instanceof String)
-					setLessonNum((String)val);
+				} else {
+					setLessonNum(val == null ? null : val.toString());
+				}
 				saves.add("lessonNum");
 				return val;
-			case "uri":
-				if(val instanceof String)
+			} else if("uri".equals(varLower)) {
+				if(val instanceof String) {
 					setUri((String)val);
+				}
 				saves.add("uri");
 				return val;
-			case "pageid":
-				if(val instanceof String)
+			} else if("pageid".equals(varLower)) {
+				if(val instanceof String) {
 					setPageId((String)val);
+				}
 				saves.add("pageId");
 				return val;
-			case "h1":
-				if(val instanceof String)
+			} else if("h1".equals(varLower)) {
+				if(val instanceof String) {
 					setH1((String)val);
+				}
 				saves.add("h1");
 				return val;
-			case "h2":
-				if(val instanceof String)
+			} else if("h2".equals(varLower)) {
+				if(val instanceof String) {
 					setH2((String)val);
+				}
 				saves.add("h2");
 				return val;
-			case "author":
-				if(val instanceof String)
+			} else if("author".equals(varLower)) {
+				if(val instanceof String) {
 					setAuthor((String)val);
+				}
 				saves.add("author");
 				return val;
-			case "pageimageuri":
-				if(val instanceof String)
+			} else if("pageimageuri".equals(varLower)) {
+				if(val instanceof String) {
 					setPageImageUri((String)val);
+				}
 				saves.add("pageImageUri");
 				return val;
-			default:
+			} else {
 				return super.persistBaseResult(var, val);
-		}
+			}
 	}
 
 	/////////////

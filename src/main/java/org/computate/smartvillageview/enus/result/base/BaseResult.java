@@ -175,6 +175,7 @@ public class BaseResult extends BaseResultGen<Object> implements ComputateBaseRe
 
 	/**
 	 * {@inheritDoc}
+	 * Persist: true
 	 * DocValues: true
 	 * VarId: true
 	 * UrlVar: pageUrlId

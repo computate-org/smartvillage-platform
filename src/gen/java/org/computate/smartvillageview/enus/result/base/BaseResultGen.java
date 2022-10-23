@@ -900,6 +900,10 @@ public abstract class BaseResultGen<DEV> extends Object {
 		return BaseResult.staticSearchStrObjectId(siteRequest_, BaseResult.staticSearchObjectId(siteRequest_, BaseResult.staticSetObjectId(siteRequest_, o)));
 	}
 
+	public String sqlObjectId() {
+		return objectId;
+	}
+
 	///////////////////
 	// objectSuggest //
 	///////////////////
@@ -1606,50 +1610,60 @@ public abstract class BaseResultGen<DEV> extends Object {
 		return o != null;
 	}
 	public Object persistBaseResult(String var, Object val) {
-		switch(var.toLowerCase()) {
-			case "inheritpk":
-				if(val instanceof String)
+		String varLower = var.toLowerCase();
+			if("inheritpk".equals(varLower)) {
+				if(val instanceof String) {
 					setInheritPk((String)val);
+				}
 				saves.add("inheritPk");
 				return val;
-			case "created":
-				if(val instanceof ZonedDateTime)
-					setCreated((ZonedDateTime)val);
-				else if(val instanceof String)
+			} else if("created".equals(varLower)) {
+				if(val instanceof String) {
 					setCreated((String)val);
-				else if(val instanceof OffsetDateTime)
+				} else if(val instanceof OffsetDateTime) {
 					setCreated(((OffsetDateTime)val).atZoneSameInstant(ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))));
+				}
 				saves.add("created");
 				return val;
-			case "archived":
-				if(val instanceof Boolean)
+			} else if("archived".equals(varLower)) {
+				if(val instanceof Boolean) {
 					setArchived((Boolean)val);
-				else if(val instanceof String)
-					setArchived((String)val);
+				} else {
+					setArchived(val == null ? null : val.toString());
+				}
 				saves.add("archived");
 				return val;
-			case "deleted":
-				if(val instanceof Boolean)
+			} else if("deleted".equals(varLower)) {
+				if(val instanceof Boolean) {
 					setDeleted((Boolean)val);
-				else if(val instanceof String)
-					setDeleted((String)val);
+				} else {
+					setDeleted(val == null ? null : val.toString());
+				}
 				saves.add("deleted");
 				return val;
-			case "sessionid":
-				if(val instanceof String)
+			} else if("sessionid".equals(varLower)) {
+				if(val instanceof String) {
 					setSessionId((String)val);
+				}
 				saves.add("sessionId");
 				return val;
-			case "userkey":
-				if(val instanceof Long)
+			} else if("userkey".equals(varLower)) {
+				if(val instanceof Long) {
 					setUserKey((Long)val);
-				else if(val instanceof String)
-					setUserKey((String)val);
+				} else {
+					setUserKey(val == null ? null : val.toString());
+				}
 				saves.add("userKey");
 				return val;
-			default:
+			} else if("objectid".equals(varLower)) {
+				if(val instanceof String) {
+					setObjectId((String)val);
+				}
+				saves.add("objectId");
+				return val;
+			} else {
 				return null;
-		}
+			}
 	}
 
 	/////////////
