@@ -4,7 +4,7 @@ QUAYIO_ORG: computateorg
 SITE_POWERED_BY_NAME: Operate First
 SITE_POWERED_BY_URL: https://www.operate-first.cloud/
 SITE_POWERED_BY_IMAGE_URI: /png/operate-first-logo.png
-SITE_NAME: smart-village-view
+SITE_NAME: smartabyar-smartvillage
 SITE_DISPLAY_NAME: Smart Village Project
 SITE_REPO: "git@github.com:{{ GITHUB_ORG }}/{{ SITE_NAME }}.git"
 SITE_REPO_HTTPS: "{{ SITE_REPO | replace('git@github.com:', 'https://github.com/') }}"

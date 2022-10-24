@@ -1,4 +1,7 @@
 
+# Release notes
+
+[ Click here to see the latest release notes ](release/README.md)
 
 # Setup smart-village-view development environment on MacOSX or Linux (Fedora, RHEL, CentOS, Ubuntu)
 
