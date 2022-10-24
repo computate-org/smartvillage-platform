@@ -9,7 +9,7 @@ spec:
       annotations: null
       from:
         kind: DockerImage
-        name: 'quay.io/computateorg/smart-village-view:latest'
+        name: 'quay.io/computateorg/smartabyar-smartvillage:latest'
       importPolicy:
         scheduled: true
       referencePolicy:

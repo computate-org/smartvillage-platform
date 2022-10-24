@@ -3,7 +3,7 @@ package org.computate.smartvillageview.enus.result.map;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.smartvillageview.enus.model.base.BaseModel;
 import org.computate.vertx.api.ApiRequest;
-import org.computate.smartvillageview.enus.config.ConfigKeys;
+import org.computate.vertx.config.ComputateConfigKeys;
 import java.util.Optional;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
@@ -108,8 +108,8 @@ import io.vertx.core.json.JsonObject;
  * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.result.map&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
- * Delete  the project smart-village-view in Solr: 
- * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smart\-village\-view&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * Delete  the project smartabyar-smartvillage in Solr: 
+ * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartabyar\-smartvillage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  **/
 public abstract class MapResultGen<DEV> extends BaseResult {
@@ -1033,72 +1033,82 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 		return o != null;
 	}
 	public Object persistMapResult(String var, Object val) {
-		switch(var.toLowerCase()) {
-			case "simulationname":
-				if(val instanceof String)
+		String varLower = var.toLowerCase();
+			if("simulationname".equals(varLower)) {
+				if(val instanceof String) {
 					setSimulationName((String)val);
+				}
 				saves.add("simulationName");
 				return val;
-			case "sumocfgpath":
-				if(val instanceof String)
+			} else if("sumocfgpath".equals(varLower)) {
+				if(val instanceof String) {
 					setSumocfgPath((String)val);
+				}
 				saves.add("sumocfgPath");
 				return val;
-			case "simulationkey":
-				if(val instanceof Long)
+			} else if("simulationkey".equals(varLower)) {
+				if(val instanceof Long) {
 					setSimulationKey((Long)val);
-				else if(val instanceof String)
-					setSimulationKey((String)val);
+				} else {
+					setSimulationKey(val == null ? null : val.toString());
+				}
 				saves.add("simulationKey");
 				return val;
-			case "timestepid":
-				if(val instanceof String)
+			} else if("timestepid".equals(varLower)) {
+				if(val instanceof String) {
 					setTimeStepId((String)val);
+				}
 				saves.add("timeStepId");
 				return val;
-			case "time":
-				if(val instanceof String)
+			} else if("time".equals(varLower)) {
+				if(val instanceof String) {
 					setTime((String)val);
-				else if(val instanceof Number)
+				} else if(val instanceof Number) {
 					setTime(new BigDecimal(((Number)val).doubleValue()));
+				}
 				saves.add("time");
 				return val;
-			case "x":
-				if(val instanceof Double)
+			} else if("x".equals(varLower)) {
+				if(val instanceof Double) {
 					setX((Double)val);
-				else if(val instanceof String)
-					setX((String)val);
+				} else {
+					setX(val == null ? null : val.toString());
+				}
 				saves.add("x");
 				return val;
-			case "y":
-				if(val instanceof Double)
+			} else if("y".equals(varLower)) {
+				if(val instanceof Double) {
 					setY((Double)val);
-				else if(val instanceof String)
-					setY((String)val);
+				} else {
+					setY(val == null ? null : val.toString());
+				}
 				saves.add("y");
 				return val;
-			case "location":
-				if(val instanceof String)
+			} else if("location".equals(varLower)) {
+				if(val instanceof String) {
 					setLocation((String)val);
-				else if(val instanceof Point)
+				} else if(val instanceof Point) {
 					setLocation((Point)val);
+				}
 				saves.add("location");
 				return val;
-			case "color":
-				if(val instanceof String)
+			} else if("color".equals(varLower)) {
+				if(val instanceof String) {
 					setColor((String)val);
+				}
 				saves.add("color");
 				return val;
-			case "step":
-				if(val instanceof Boolean)
+			} else if("step".equals(varLower)) {
+				if(val instanceof Boolean) {
 					setStep((Boolean)val);
-				else if(val instanceof String)
-					setStep((String)val);
+				} else {
+					setStep(val == null ? null : val.toString());
+				}
 				saves.add("step");
 				return val;
-			default:
+			} else {
 				return super.persistBaseResult(var, val);
-		}
+			}
 	}
 
 	/////////////

@@ -3,7 +3,7 @@ package org.computate.smartvillageview.enus.model.traffic.light;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.smartvillageview.enus.model.base.BaseModel;
 import org.computate.vertx.api.ApiRequest;
-import org.computate.smartvillageview.enus.config.ConfigKeys;
+import org.computate.vertx.config.ComputateConfigKeys;
 import java.util.Optional;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
@@ -102,8 +102,8 @@ import io.vertx.core.json.JsonObject;
  * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.light&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
- * Delete  the project smart-village-view in Solr: 
- * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smart\-village\-view&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * Delete  the project smartabyar-smartvillage in Solr: 
+ * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartabyar\-smartvillage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  **/
 public abstract class TrafficLightGen<DEV> extends MapResult {
@@ -607,32 +607,36 @@ public abstract class TrafficLightGen<DEV> extends MapResult {
 		return o != null;
 	}
 	public Object persistTrafficLight(String var, Object val) {
-		switch(var.toLowerCase()) {
-			case "trafficlightid":
-				if(val instanceof String)
+		String varLower = var.toLowerCase();
+			if("trafficlightid".equals(varLower)) {
+				if(val instanceof String) {
 					setTrafficLightId((String)val);
+				}
 				saves.add("trafficLightId");
 				return val;
-			case "trafficlighttype":
-				if(val instanceof String)
+			} else if("trafficlighttype".equals(varLower)) {
+				if(val instanceof String) {
 					setTrafficLightType((String)val);
+				}
 				saves.add("trafficLightType");
 				return val;
-			case "angle":
-				if(val instanceof String)
+			} else if("angle".equals(varLower)) {
+				if(val instanceof String) {
 					setAngle((String)val);
-				else if(val instanceof Number)
+				} else if(val instanceof Number) {
 					setAngle(new BigDecimal(((Number)val).doubleValue()));
+				}
 				saves.add("angle");
 				return val;
-			case "color":
-				if(val instanceof String)
+			} else if("color".equals(varLower)) {
+				if(val instanceof String) {
 					setColor((String)val);
+				}
 				saves.add("color");
 				return val;
-			default:
+			} else {
 				return super.persistMapResult(var, val);
-		}
+			}
 	}
 
 	/////////////

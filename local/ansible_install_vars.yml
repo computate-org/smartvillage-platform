@@ -15,7 +15,7 @@ SITE_SRC: "{{ lookup('env', 'HOME') }}/.local/src/{{ SITE_NAME }}"
 SITE_POM_GROUP_ID: org.computate
 SITE_POM_ARTIFACT_ID_ROOT: "{{ SITE_NAME }}"
 SITE_POM_VERSION_PREFIX: "1.0.0"
-SITE_POM_VERSION_SUFFIX: "-SNAPSHOT"
+SITE_POM_VERSION_SUFFIX: ""
 SITE_POM_VERSION: "{{ SITE_POM_VERSION_PREFIX }}{{ SITE_POM_VERSION_SUFFIX }}"
 SITE_JAVA_PACKAGE: "{{ SITE_POM_GROUP_ID }}.smartvillageview.enus"
 SITE_PORT: 12080
@@ -379,8 +379,8 @@ WORKER_IMPORT_DATA: |2
   	private Future<Void> importData() {
   		Promise<Void> promise = Promise.promise();
   		if(config().getBoolean(ConfigKeys.ENABLE_IMPORT_DATA)) {
-  			importTimer("IotNode").onSuccess(a -> {
-  				importTimer("SitePage").onSuccess(b -> {
+  			importTimer(IotNode.CLASS_SIMPLE_NAME).onSuccess(a -> {
+  				importTimer(SitePage.CLASS_SIMPLE_NAME).onSuccess(b -> {
   					importTimer(TimeStep.CLASS_SIMPLE_NAME).onSuccess(c -> {
   						promise.complete();
   					});
@@ -453,7 +453,7 @@ WORKER_IMPORT_DATA: |2
   					promise.complete();
   				}
   			});
-  		} else if(TimeStep.CLASS_SIMPLE_NAME.equals(classSimpleName)) {
+  		} else if(TrafficSimulation.CLASS_SIMPLE_NAME.equals(classSimpleName)) {
   			SiteRequestEnUS siteRequest = new SiteRequestEnUS();
   			siteRequest.setConfig(config());
   			siteRequest.setWebClient(webClient);
@@ -512,6 +512,7 @@ ALL_Dockerfile: |2
   RUN source ${PYTHON_DIR}/bin/activate && pip install setuptools_rust wheel
   RUN source ${PYTHON_DIR}/bin/activate && pip install --upgrade pip
   RUN source ${PYTHON_DIR}/bin/activate && pip install ansible sumolib pyproj
+  RUN git clone https://github.com/computate-org/computate.git /root/src/computate
   RUN git clone https://github.com/computate-org/computate_sumo.git /root/.ansible/roles/computate.computate_sumo
   RUN git clone https://github.com/computate-org/computate_sqlite.git /root/.ansible/roles/computate.computate_sqlite
   RUN git clone https://github.com/computate-org/computate_fox.git /root/.ansible/roles/computate.computate_fox
@@ -520,12 +521,12 @@ ALL_Dockerfile: |2
   RUN git clone https://github.com/computate-org/computate_gdal.git /root/.ansible/roles/computate.computate_gdal
   RUN source ${PYTHON_DIR}/bin/activate && ${PYTHON_DIR}/bin/ansible-playbook -e  APP_PREFIX=/usr/local -e APP_DOWNLOAD_DIR=/tmp /root/.ansible/roles/computate.computate_sumo/install.yml
   
-  RUN install -d /root/src
-  COPY . /root/src
+  RUN install -d /root/src/{{SITE_NAME }}
+  COPY . /root/src/{{SITE_NAME }}
   
-  WORKDIR /root/src
+  WORKDIR /root/src/{{SITE_NAME }}
   RUN mvn clean install -DskipTests
-  RUN cp /root/src/target/*.jar /root/src/app.jar
+  RUN cp /root/src/{{SITE_NAME }}/target/*.jar /root/src/{{SITE_NAME }}/app.jar
   CMD java $JAVA_OPTS -cp .:* org.computate.smartvillageview.enus.vertx.MainVerticle
 
 BEFORE_Dockerfile: |2
@@ -558,7 +559,7 @@ README_END: |
   ## How the base classes for this project were created
   
   ```bash
-  ansible-playbook -e @~/.local/src/smart-village-view/local/ansible_install_vars.yml ~/.local/src/computate-org/vertx_project.yml
+  ansible-playbook -e @~/.local/src/{{ SITE_NAME }}/local/ansible_install_vars.yml ~/.local/src/computate-org/vertx_project.yml
   ```
   
   # Load a new map traffic data into SUMO

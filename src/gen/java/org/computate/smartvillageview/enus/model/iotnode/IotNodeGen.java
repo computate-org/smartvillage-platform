@@ -3,7 +3,7 @@ package org.computate.smartvillageview.enus.model.iotnode;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.smartvillageview.enus.model.base.BaseModel;
 import org.computate.vertx.api.ApiRequest;
-import org.computate.smartvillageview.enus.config.ConfigKeys;
+import org.computate.vertx.config.ComputateConfigKeys;
 import java.util.Optional;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
@@ -106,8 +106,8 @@ import org.computate.search.response.solr.SolrResponse;
  * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.model.iotnode&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
- * Delete  the project smart-village-view in Solr: 
- * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smart\-village\-view&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * Delete  the project smartabyar-smartvillage in Solr: 
+ * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartabyar\-smartvillage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  **/
 public abstract class IotNodeGen<DEV> extends BaseResult {
@@ -3252,39 +3252,44 @@ public abstract class IotNodeGen<DEV> extends BaseResult {
 		return o != null;
 	}
 	public Object persistIotNode(String var, Object val) {
-		switch(var.toLowerCase()) {
-			case "json":
-				if(val instanceof String)
+		String varLower = var.toLowerCase();
+			if("json".equals(varLower)) {
+				if(val instanceof String) {
 					setJson((String)val);
-				else if(val instanceof JsonObject)
+				} else if(val instanceof JsonObject) {
 					setJson((JsonObject)val);
+				}
 				saves.add("json");
 				return val;
-			case "nodename":
-				if(val instanceof String)
+			} else if("nodename".equals(varLower)) {
+				if(val instanceof String) {
 					setNodeName((String)val);
+				}
 				saves.add("nodeName");
 				return val;
-			case "nodetype":
-				if(val instanceof String)
+			} else if("nodetype".equals(varLower)) {
+				if(val instanceof String) {
 					setNodeType((String)val);
+				}
 				saves.add("nodeType");
 				return val;
-			case "nodeid":
-				if(val instanceof String)
+			} else if("nodeid".equals(varLower)) {
+				if(val instanceof String) {
 					setNodeId((String)val);
+				}
 				saves.add("nodeId");
 				return val;
-			case "location":
-				if(val instanceof String)
+			} else if("location".equals(varLower)) {
+				if(val instanceof String) {
 					setLocation((String)val);
-				else if(val instanceof Point)
+				} else if(val instanceof Point) {
 					setLocation((Point)val);
+				}
 				saves.add("location");
 				return val;
-			default:
+			} else {
 				return super.persistBaseResult(var, val);
-		}
+			}
 	}
 
 	/////////////

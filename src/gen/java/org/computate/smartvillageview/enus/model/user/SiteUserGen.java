@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import java.util.Date;
 import java.util.Set;
 import org.computate.vertx.api.ApiRequest;
-import org.computate.smartvillageview.enus.config.ConfigKeys;
+import org.computate.vertx.config.ComputateConfigKeys;
 import java.util.Optional;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
@@ -105,8 +105,8 @@ import org.computate.search.response.solr.SolrResponse;
  * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.model.user&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
- * Delete  the project smart-village-view in Solr: 
- * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smart\-village\-view&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * Delete  the project smartabyar-smartvillage in Solr: 
+ * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartabyar\-smartvillage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  **/
 public abstract class SiteUserGen<DEV> extends BaseModel {
@@ -950,54 +950,62 @@ public abstract class SiteUserGen<DEV> extends BaseModel {
 		return o != null;
 	}
 	public Object persistSiteUser(String var, Object val) {
-		switch(var.toLowerCase()) {
-			case "userid":
-				if(val instanceof String)
+		String varLower = var.toLowerCase();
+			if("userid".equals(varLower)) {
+				if(val instanceof String) {
 					setUserId((String)val);
+				}
 				saves.add("userId");
 				return val;
-			case "username":
-				if(val instanceof String)
+			} else if("username".equals(varLower)) {
+				if(val instanceof String) {
 					setUserName((String)val);
+				}
 				saves.add("userName");
 				return val;
-			case "useremail":
-				if(val instanceof String)
+			} else if("useremail".equals(varLower)) {
+				if(val instanceof String) {
 					setUserEmail((String)val);
+				}
 				saves.add("userEmail");
 				return val;
-			case "userfirstname":
-				if(val instanceof String)
+			} else if("userfirstname".equals(varLower)) {
+				if(val instanceof String) {
 					setUserFirstName((String)val);
+				}
 				saves.add("userFirstName");
 				return val;
-			case "userlastname":
-				if(val instanceof String)
+			} else if("userlastname".equals(varLower)) {
+				if(val instanceof String) {
 					setUserLastName((String)val);
+				}
 				saves.add("userLastName");
 				return val;
-			case "userfullname":
-				if(val instanceof String)
+			} else if("userfullname".equals(varLower)) {
+				if(val instanceof String) {
 					setUserFullName((String)val);
+				}
 				saves.add("userFullName");
 				return val;
-			case "seearchived":
-				if(val instanceof Boolean)
+			} else if("seearchived".equals(varLower)) {
+				if(val instanceof Boolean) {
 					setSeeArchived((Boolean)val);
-				else if(val instanceof String)
-					setSeeArchived((String)val);
+				} else {
+					setSeeArchived(val == null ? null : val.toString());
+				}
 				saves.add("seeArchived");
 				return val;
-			case "seedeleted":
-				if(val instanceof Boolean)
+			} else if("seedeleted".equals(varLower)) {
+				if(val instanceof Boolean) {
 					setSeeDeleted((Boolean)val);
-				else if(val instanceof String)
-					setSeeDeleted((String)val);
+				} else {
+					setSeeDeleted(val == null ? null : val.toString());
+				}
 				saves.add("seeDeleted");
 				return val;
-			default:
+			} else {
 				return super.persistBaseModel(var, val);
-		}
+			}
 	}
 
 	/////////////

@@ -3,7 +3,7 @@ package org.computate.smartvillageview.enus.model.traffic.time.step;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.smartvillageview.enus.model.base.BaseModel;
 import org.computate.vertx.api.ApiRequest;
-import org.computate.smartvillageview.enus.config.ConfigKeys;
+import org.computate.vertx.config.ComputateConfigKeys;
 import java.util.Optional;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
@@ -103,8 +103,8 @@ import io.vertx.core.json.JsonObject;
  * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.time.step&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
- * Delete  the project smart-village-view in Solr: 
- * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smart\-village\-view&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * Delete  the project smartabyar-smartvillage in Solr: 
+ * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartabyar\-smartvillage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  **/
 public abstract class TimeStepGen<DEV> extends BaseResult {
@@ -552,29 +552,32 @@ public abstract class TimeStepGen<DEV> extends BaseResult {
 		return o != null;
 	}
 	public Object persistTimeStep(String var, Object val) {
-		switch(var.toLowerCase()) {
-			case "simulationkey":
-				if(val instanceof Long)
+		String varLower = var.toLowerCase();
+			if("simulationkey".equals(varLower)) {
+				if(val instanceof Long) {
 					setSimulationKey((Long)val);
-				else if(val instanceof String)
-					setSimulationKey((String)val);
+				} else {
+					setSimulationKey(val == null ? null : val.toString());
+				}
 				saves.add("simulationKey");
 				return val;
-			case "path":
-				if(val instanceof String)
+			} else if("path".equals(varLower)) {
+				if(val instanceof String) {
 					setPath((String)val);
+				}
 				saves.add("path");
 				return val;
-			case "time":
-				if(val instanceof String)
+			} else if("time".equals(varLower)) {
+				if(val instanceof String) {
 					setTime((String)val);
-				else if(val instanceof Number)
+				} else if(val instanceof Number) {
 					setTime(new BigDecimal(((Number)val).doubleValue()));
+				}
 				saves.add("time");
 				return val;
-			default:
+			} else {
 				return super.persistBaseResult(var, val);
-		}
+			}
 	}
 
 	/////////////

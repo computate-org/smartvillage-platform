@@ -1,10 +1,10 @@
 ---
-- name: Install the smart-village-view source code and watch service on the target. 
+- name: Install the smartabyar-smartvillage source code and watch service on the target. 
   hosts: localhost
   vars: 
     GITHUB_ORG: "computate-org"
-    SITE_NAME: "smart-village-view"
-    SITE_REPO: "git@github.com:computate-org/smart-village-view.git"
+    SITE_NAME: "smartabyar-smartvillage"
+    SITE_REPO: "git@github.com:computate-org/smartabyar-smartvillage.git"
     SITE_SRC: "{{ playbook_dir }}"
     SITE_JAVA_PACKAGE: "org.computate.smartvillageview.enus"
     RELATIVE_PATHS_TO_WATCH: "src/main/java/org/computate/smartvillageview/enus"

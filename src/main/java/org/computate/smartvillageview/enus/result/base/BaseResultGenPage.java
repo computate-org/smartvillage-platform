@@ -38,7 +38,7 @@ import java.math.MathContext;
 import org.apache.commons.collections4.CollectionUtils;
 import java.util.Objects;
 import io.vertx.core.Promise;
-import org.computate.smartvillageview.enus.config.ConfigKeys;
+import org.computate.vertx.config.ComputateConfigKeys;
 import org.computate.search.response.solr.SolrResponse;
 import java.util.HashMap;
 import org.computate.search.tool.TimeTool;
@@ -274,7 +274,7 @@ public class BaseResultGenPage extends BaseResultGenPageGen<PageLayout> {
 
 	@Override
 	protected void _defaultZoneId(Wrap<String> w) {
-		w.o(Optional.ofNullable(siteRequest_.getRequestVars().get(VAR_defaultZoneId)).orElse(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE)));
+		w.o(Optional.ofNullable(siteRequest_.getRequestVars().get(VAR_defaultZoneId)).orElse(siteRequest_.getConfig().getString(ComputateConfigKeys.SITE_ZONE)));
 	}
 
 	/**
@@ -287,7 +287,7 @@ public class BaseResultGenPage extends BaseResultGenPageGen<PageLayout> {
 
 	@Override
 	protected void _defaultLocaleId(Wrap<String> w) {
-		w.o(Optional.ofNullable(siteRequest_.getRequestHeaders().get("Accept-Language")).map(acceptLanguage -> StringUtils.substringBefore(acceptLanguage, ",")).orElse(siteRequest_.getConfig().getString(ConfigKeys.SITE_LOCALE)));
+		w.o(Optional.ofNullable(siteRequest_.getRequestHeaders().get("Accept-Language")).map(acceptLanguage -> StringUtils.substringBefore(acceptLanguage, ",")).orElse(siteRequest_.getConfig().getString(ComputateConfigKeys.SITE_LOCALE)));
 	}
 
 	/**
@@ -340,7 +340,7 @@ public class BaseResultGenPage extends BaseResultGenPageGen<PageLayout> {
 
 	@Override
 	protected void _DEFAULT_MAP_LOCATION(Wrap<JsonObject> w) {
-		String pointStr = Optional.ofNullable(siteRequest_.getRequestVars().get(VAR_DEFAULT_MAP_LOCATION)).orElse(siteRequest_.getConfig().getString(ConfigKeys.DEFAULT_MAP_LOCATION));
+		String pointStr = Optional.ofNullable(siteRequest_.getRequestVars().get(VAR_DEFAULT_MAP_LOCATION)).orElse(siteRequest_.getConfig().getString(ComputateConfigKeys.DEFAULT_MAP_LOCATION));
 		if(pointStr != null) {
 			String[] parts = pointStr.replace("[", "").replace("]", "").replace("\"", "").split(",");
 			JsonObject point = new JsonObject().put("lat", Double.parseDouble(parts[0])).put("lon", Double.parseDouble(parts[1]));
@@ -350,7 +350,7 @@ public class BaseResultGenPage extends BaseResultGenPageGen<PageLayout> {
 
 	@Override
 	protected void _DEFAULT_MAP_ZOOM(Wrap<BigDecimal> w) {
-		String s = Optional.ofNullable(siteRequest_.getRequestVars().get(VAR_DEFAULT_MAP_ZOOM)).orElse(siteRequest_.getConfig().getString(ConfigKeys.DEFAULT_MAP_ZOOM));
+		String s = Optional.ofNullable(siteRequest_.getRequestVars().get(VAR_DEFAULT_MAP_ZOOM)).orElse(siteRequest_.getConfig().getString(ComputateConfigKeys.DEFAULT_MAP_ZOOM));
 		if(s != null)
 			w.o(new BigDecimal(s));
 	}

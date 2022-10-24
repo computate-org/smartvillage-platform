@@ -350,13 +350,14 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 				});
 			} else {
 				try {
-				vertx.setTimer(nextStartDuration.toMillis(), a -> {
-					importDataClass(classSimpleName, nextStartTime2);
-				});
+					vertx.setTimer(nextStartDuration.toMillis(), a -> {
+						importDataClass(classSimpleName, nextStartTime2);
+					});
+					promise.complete();
 				} catch(Exception ex) {
-					ex.toString();
+					LOG.error(String.format(importTimerFail, classSimpleName), ex);
+					promise.fail(ex);
 				}
-				promise.complete();
 			}
 		} else {
 			LOG.info(String.format(importTimerSkip, classSimpleName));
@@ -374,7 +375,7 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 		if(config().getBoolean(ConfigKeys.ENABLE_IMPORT_DATA)) {
 			importTimer(IotNode.CLASS_SIMPLE_NAME).onSuccess(a -> {
 				importTimer(SitePage.CLASS_SIMPLE_NAME).onSuccess(b -> {
-					importTimer(TrafficSimulation.CLASS_SIMPLE_NAME).onSuccess(c -> {
+					importTimer(TimeStep.CLASS_SIMPLE_NAME).onSuccess(c -> {
 						promise.complete();
 					});
 				});
@@ -617,7 +618,7 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 												apiCounter.incrementQueueNum();
 												try {
 													vertx.eventBus().request(
-															String.format("smart-village-view-enUS-%s", tableName)
+															String.format("smartabyar-smartvillage-enUS-%s", tableName)
 															, new JsonObject().put(
 																	"context"
 																	, new JsonObject().put(

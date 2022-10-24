@@ -3,7 +3,7 @@ package org.computate.smartvillageview.enus.model.system.event;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.smartvillageview.enus.model.base.BaseModel;
 import org.computate.vertx.api.ApiRequest;
-import org.computate.smartvillageview.enus.config.ConfigKeys;
+import org.computate.vertx.config.ComputateConfigKeys;
 import java.util.Optional;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
@@ -117,8 +117,8 @@ import io.vertx.core.json.JsonObject;
  * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.model.system.event&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
- * Delete  the project smart-village-view in Solr: 
- * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smart\-village\-view&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * Delete  the project smartabyar-smartvillage in Solr: 
+ * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartabyar\-smartvillage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  **/
 public abstract class SystemEventGen<DEV> extends Object {
@@ -449,15 +449,15 @@ public abstract class SystemEventGen<DEV> extends Object {
 		if(StringUtils.endsWith(o, "]"))
 			return o == null ? null : ZonedDateTime.parse(o, ComputateZonedDateTimeSerializer.ZONED_DATE_TIME_FORMATTER);
 		else if(StringUtils.endsWith(o, "Z"))
-			return o == null ? null : Instant.parse(o).atZone(Optional.ofNullable(siteRequest_).map(r -> r.getConfig()).map(config -> config.getString(ConfigKeys.SITE_ZONE)).map(z -> ZoneId.of(z)).orElse(ZoneId.of("UTC"))).truncatedTo(ChronoUnit.MILLIS);
+			return o == null ? null : Instant.parse(o).atZone(Optional.ofNullable(siteRequest_).map(r -> r.getConfig()).map(config -> config.getString(ComputateConfigKeys.SITE_ZONE)).map(z -> ZoneId.of(z)).orElse(ZoneId.of("UTC"))).truncatedTo(ChronoUnit.MILLIS);
 		else if(StringUtils.contains(o, "T"))
 			return o == null ? null : ZonedDateTime.parse(o, DateTimeFormatter.ISO_DATE_TIME).truncatedTo(ChronoUnit.MILLIS);
 		else
-			return o == null ? null : LocalDate.parse(o, DateTimeFormatter.ISO_DATE).atStartOfDay(ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
+			return o == null ? null : LocalDate.parse(o, DateTimeFormatter.ISO_DATE).atStartOfDay(ZoneId.of(siteRequest_.getConfig().getString(ComputateConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
 	}
 	@JsonIgnore
 	public void setCompleted(Date o) {
-		this.completed = o == null ? null : ZonedDateTime.ofInstant(o.toInstant(), ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
+		this.completed = o == null ? null : ZonedDateTime.ofInstant(o.toInstant(), ZoneId.of(siteRequest_.getConfig().getString(ComputateConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
 	}
 	protected SystemEvent completedInit() {
 		Wrap<ZonedDateTime> completedWrap = new Wrap<ZonedDateTime>().var("completed");
@@ -579,15 +579,15 @@ public abstract class SystemEventGen<DEV> extends Object {
 		if(StringUtils.endsWith(o, "]"))
 			return o == null ? null : ZonedDateTime.parse(o, ComputateZonedDateTimeSerializer.ZONED_DATE_TIME_FORMATTER);
 		else if(StringUtils.endsWith(o, "Z"))
-			return o == null ? null : Instant.parse(o).atZone(Optional.ofNullable(siteRequest_).map(r -> r.getConfig()).map(config -> config.getString(ConfigKeys.SITE_ZONE)).map(z -> ZoneId.of(z)).orElse(ZoneId.of("UTC"))).truncatedTo(ChronoUnit.MILLIS);
+			return o == null ? null : Instant.parse(o).atZone(Optional.ofNullable(siteRequest_).map(r -> r.getConfig()).map(config -> config.getString(ComputateConfigKeys.SITE_ZONE)).map(z -> ZoneId.of(z)).orElse(ZoneId.of("UTC"))).truncatedTo(ChronoUnit.MILLIS);
 		else if(StringUtils.contains(o, "T"))
 			return o == null ? null : ZonedDateTime.parse(o, DateTimeFormatter.ISO_DATE_TIME).truncatedTo(ChronoUnit.MILLIS);
 		else
-			return o == null ? null : LocalDate.parse(o, DateTimeFormatter.ISO_DATE).atStartOfDay(ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
+			return o == null ? null : LocalDate.parse(o, DateTimeFormatter.ISO_DATE).atStartOfDay(ZoneId.of(siteRequest_.getConfig().getString(ComputateConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
 	}
 	@JsonIgnore
 	public void setCreated(Date o) {
-		this.created = o == null ? null : ZonedDateTime.ofInstant(o.toInstant(), ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
+		this.created = o == null ? null : ZonedDateTime.ofInstant(o.toInstant(), ZoneId.of(siteRequest_.getConfig().getString(ComputateConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
 	}
 	protected SystemEvent createdInit() {
 		Wrap<ZonedDateTime> createdWrap = new Wrap<ZonedDateTime>().var("created");
@@ -656,15 +656,15 @@ public abstract class SystemEventGen<DEV> extends Object {
 		if(StringUtils.endsWith(o, "]"))
 			return o == null ? null : ZonedDateTime.parse(o, ComputateZonedDateTimeSerializer.ZONED_DATE_TIME_FORMATTER);
 		else if(StringUtils.endsWith(o, "Z"))
-			return o == null ? null : Instant.parse(o).atZone(Optional.ofNullable(siteRequest_).map(r -> r.getConfig()).map(config -> config.getString(ConfigKeys.SITE_ZONE)).map(z -> ZoneId.of(z)).orElse(ZoneId.of("UTC"))).truncatedTo(ChronoUnit.MILLIS);
+			return o == null ? null : Instant.parse(o).atZone(Optional.ofNullable(siteRequest_).map(r -> r.getConfig()).map(config -> config.getString(ComputateConfigKeys.SITE_ZONE)).map(z -> ZoneId.of(z)).orElse(ZoneId.of("UTC"))).truncatedTo(ChronoUnit.MILLIS);
 		else if(StringUtils.contains(o, "T"))
 			return o == null ? null : ZonedDateTime.parse(o, DateTimeFormatter.ISO_DATE_TIME).truncatedTo(ChronoUnit.MILLIS);
 		else
-			return o == null ? null : LocalDate.parse(o, DateTimeFormatter.ISO_DATE).atStartOfDay(ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
+			return o == null ? null : LocalDate.parse(o, DateTimeFormatter.ISO_DATE).atStartOfDay(ZoneId.of(siteRequest_.getConfig().getString(ComputateConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
 	}
 	@JsonIgnore
 	public void setModified(Date o) {
-		this.modified = o == null ? null : ZonedDateTime.ofInstant(o.toInstant(), ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
+		this.modified = o == null ? null : ZonedDateTime.ofInstant(o.toInstant(), ZoneId.of(siteRequest_.getConfig().getString(ComputateConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
 	}
 	protected SystemEvent modifiedInit() {
 		Wrap<ZonedDateTime> modifiedWrap = new Wrap<ZonedDateTime>().var("modified");
@@ -2281,92 +2281,102 @@ public abstract class SystemEventGen<DEV> extends Object {
 		return o != null;
 	}
 	public Object persistSystemEvent(String var, Object val) {
-		switch(var.toLowerCase()) {
-			case "type":
-				if(val instanceof String)
+		String varLower = var.toLowerCase();
+			if("type".equals(varLower)) {
+				if(val instanceof String) {
 					setType((String)val);
+				}
 				saves.add("type");
 				return val;
-			case "message":
-				if(val instanceof String)
+			} else if("message".equals(varLower)) {
+				if(val instanceof String) {
 					setMessage((String)val);
+				}
 				saves.add("message");
 				return val;
-			case "status":
-				if(val instanceof String)
+			} else if("status".equals(varLower)) {
+				if(val instanceof String) {
 					setStatus((String)val);
+				}
 				saves.add("status");
 				return val;
-			case "completed":
-				if(val instanceof ZonedDateTime)
-					setCompleted((ZonedDateTime)val);
-				else if(val instanceof String)
+			} else if("completed".equals(varLower)) {
+				if(val instanceof String) {
 					setCompleted((String)val);
-				else if(val instanceof OffsetDateTime)
-					setCompleted(((OffsetDateTime)val).atZoneSameInstant(ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))));
+				} else if(val instanceof OffsetDateTime) {
+					setCompleted(((OffsetDateTime)val).atZoneSameInstant(ZoneId.of(siteRequest_.getConfig().getString(ComputateConfigKeys.SITE_ZONE))));
+				}
 				saves.add("completed");
 				return val;
-			case "inheritpk":
-				if(val instanceof String)
+			} else if("inheritpk".equals(varLower)) {
+				if(val instanceof String) {
 					setInheritPk((String)val);
+				}
 				saves.add("inheritPk");
 				return val;
-			case "created":
-				if(val instanceof ZonedDateTime)
-					setCreated((ZonedDateTime)val);
-				else if(val instanceof String)
+			} else if("created".equals(varLower)) {
+				if(val instanceof String) {
 					setCreated((String)val);
-				else if(val instanceof OffsetDateTime)
-					setCreated(((OffsetDateTime)val).atZoneSameInstant(ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))));
+				} else if(val instanceof OffsetDateTime) {
+					setCreated(((OffsetDateTime)val).atZoneSameInstant(ZoneId.of(siteRequest_.getConfig().getString(ComputateConfigKeys.SITE_ZONE))));
+				}
 				saves.add("created");
 				return val;
-			case "pageimageuri":
-				if(val instanceof String)
+			} else if("pageimageuri".equals(varLower)) {
+				if(val instanceof String) {
 					setPageImageUri((String)val);
+				}
 				saves.add("pageImageUri");
 				return val;
-			case "archived":
-				if(val instanceof Boolean)
+			} else if("archived".equals(varLower)) {
+				if(val instanceof Boolean) {
 					setArchived((Boolean)val);
-				else if(val instanceof String)
-					setArchived((String)val);
+				} else {
+					setArchived(val == null ? null : val.toString());
+				}
 				saves.add("archived");
 				return val;
-			case "deleted":
-				if(val instanceof Boolean)
+			} else if("deleted".equals(varLower)) {
+				if(val instanceof Boolean) {
 					setDeleted((Boolean)val);
-				else if(val instanceof String)
-					setDeleted((String)val);
+				} else {
+					setDeleted(val == null ? null : val.toString());
+				}
 				saves.add("deleted");
 				return val;
-			case "sessionid":
-				if(val instanceof String)
+			} else if("sessionid".equals(varLower)) {
+				if(val instanceof String) {
 					setSessionId((String)val);
+				}
 				saves.add("sessionId");
 				return val;
-			case "userkey":
-				if(val instanceof Long)
+			} else if("userkey".equals(varLower)) {
+				if(val instanceof Long) {
 					setUserKey((Long)val);
-				else if(val instanceof String)
-					setUserKey((String)val);
+				} else {
+					setUserKey(val == null ? null : val.toString());
+				}
 				saves.add("userKey");
 				return val;
-			case "objectid":
-				if(val instanceof String)
+			} else if("objectid".equals(varLower)) {
+				if(val instanceof String) {
 					setObjectId((String)val);
+				}
 				saves.add("objectId");
 				return val;
-			case "objecttext":
-				if(val instanceof List<?>)
+			} else if("objecttext".equals(varLower)) {
+				if(val instanceof List<?>) {
 					((List<String>)val).stream().forEach(v -> addObjectText(v));
-				else if(val instanceof JsonArray)
+				} else if(val instanceof JsonArray) {
 					((JsonArray)val).stream().forEach(v -> addObjectText(v.toString()));
-				if(!saves.contains("objectText"))
+				}
+				if(!saves.contains("objectText")) {
 					saves.add("objectText");
+				}
 				return val;
-			default:
+			} else {
 				return null;
-		}
+			}
 	}
 
 	/////////////

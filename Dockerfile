@@ -36,10 +36,10 @@ RUN git clone https://github.com/computate-org/computate_eigen.git /root/.ansibl
 RUN git clone https://github.com/computate-org/computate_gdal.git /root/.ansible/roles/computate.computate_gdal
 RUN source ${PYTHON_DIR}/bin/activate && ${PYTHON_DIR}/bin/ansible-playbook -e  APP_PREFIX=/usr/local -e APP_DOWNLOAD_DIR=/tmp /root/.ansible/roles/computate.computate_sumo/install.yml
 
-RUN install -d /root/src/smart-village-view
-COPY . /root/src/smart-village-view
+RUN install -d /root/src/smartabyar-smartvillage
+COPY . /root/src/smartabyar-smartvillage
 
-WORKDIR /root/src/smart-village-view
+WORKDIR /root/src/smartabyar-smartvillage
 RUN mvn clean install -DskipTests
-RUN cp /root/src/smart-village-view/target/*.jar /root/src/smart-village-view/app.jar
+RUN cp /root/src/smartabyar-smartvillage/target/*.jar /root/src/smartabyar-smartvillage/app.jar
 CMD java $JAVA_OPTS -cp .:* org.computate.smartvillageview.enus.vertx.MainVerticle

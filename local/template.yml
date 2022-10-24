@@ -46,7 +46,7 @@ AUTH_TOKEN_URI: "{{ AUTH_TOKEN_URI }}"
 SOLR_URL: "{{ SOLR_URL }}"
 SOLR_HOST_NAME: localhost
 SOLR_PORT: 8983
-SOLR_COLLECTION: "smart-village-view"
+SOLR_COLLECTION: "smartabyar-smartvillage"
 SOLR_URL_COMPUTATE: "{{ SOLR_URL_COMPUTATE }}"
 
 API_TITLE: "{{ SITE_NAME }}"

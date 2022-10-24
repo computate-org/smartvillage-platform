@@ -1,13 +1,13 @@
 openapi: 3.0.0
 info:
-  title: "smart-village-view"
+  title: "smartabyar-smartvillage"
   version: 3.0.0
 paths:
 
   /callback:
     get:
       operationId: callback
-      x-vertx-event-bus: smart-village-view-enUS-callback
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-callback
       description: >+
       responses:
         '200':
@@ -20,7 +20,7 @@ paths:
   /logout:
     get:
       operationId: logout
-      x-vertx-event-bus: smart-village-view-enUS-logout
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-logout
       description: >+
       responses:
         '200':
@@ -33,7 +33,7 @@ paths:
   /api/htm:
     get:
       operationId: searchSiteHtm
-      x-vertx-event-bus: smart-village-view-enUS-SiteHtm
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-SiteHtm
       security:
         - openIdConnect:
           - profile
@@ -211,7 +211,7 @@ paths:
                 $ref: '#/components/schemas/SearchSiteHtmResponse'
     post:
       operationId: postSiteHtm
-      x-vertx-event-bus: smart-village-view-enUS-SiteHtm
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-SiteHtm
       security:
         - openIdConnect:
           - profile
@@ -235,7 +235,7 @@ paths:
                 $ref: '#/components/schemas/POSTSiteHtmResponse'
     patch:
       operationId: patchSiteHtm
-      x-vertx-event-bus: smart-village-view-enUS-SiteHtm
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-SiteHtm
       security:
         - openIdConnect:
           - profile
@@ -292,7 +292,7 @@ paths:
   /api/htm-import:
     put:
       operationId: putimportSiteHtm
-      x-vertx-event-bus: smart-village-view-enUS-SiteHtm
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-SiteHtm
       security:
         - openIdConnect:
           - profile
@@ -326,7 +326,7 @@ paths:
   /api/htm/{id}:
     get:
       operationId: getSiteHtm
-      x-vertx-event-bus: smart-village-view-enUS-SiteHtm
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-SiteHtm
       security:
         - openIdConnect:
           - profile
@@ -359,7 +359,7 @@ paths:
   /htm/{id}:
     get:
       operationId: searchpageSiteHtmId
-      x-vertx-event-bus: smart-village-view-enUS-SiteHtm
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-SiteHtm
       security:
         - openIdConnect:
           - profile
@@ -544,7 +544,7 @@ paths:
   /htm:
     get:
       operationId: searchpageSiteHtm
-      x-vertx-event-bus: smart-village-view-enUS-SiteHtm
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-SiteHtm
       security:
         - openIdConnect:
           - profile
@@ -723,7 +723,7 @@ paths:
   /api/iot-node:
     get:
       operationId: searchIotNode
-      x-vertx-event-bus: smart-village-view-enUS-IotNode
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-IotNode
       security:
         - openIdConnect:
           - profile
@@ -901,7 +901,7 @@ paths:
                 $ref: '#/components/schemas/SearchIotNodeResponse'
     patch:
       operationId: patchIotNode
-      x-vertx-event-bus: smart-village-view-enUS-IotNode
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-IotNode
       security:
         - openIdConnect:
           - profile
@@ -957,7 +957,7 @@ paths:
                 $ref: '#/components/schemas/PATCHIotNodeResponse'
     post:
       operationId: postIotNode
-      x-vertx-event-bus: smart-village-view-enUS-IotNode
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-IotNode
       security:
         - openIdConnect:
           - profile
@@ -982,7 +982,7 @@ paths:
   /api/iot-node-import:
     put:
       operationId: putimportIotNode
-      x-vertx-event-bus: smart-village-view-enUS-IotNode
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-IotNode
       security:
         - openIdConnect:
           - profile
@@ -1016,7 +1016,7 @@ paths:
   /api/iot-node/{id}:
     get:
       operationId: getIotNode
-      x-vertx-event-bus: smart-village-view-enUS-IotNode
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-IotNode
       security:
         - openIdConnect:
           - profile
@@ -1049,7 +1049,7 @@ paths:
   /iot-node/{id}:
     get:
       operationId: searchpageIotNodeId
-      x-vertx-event-bus: smart-village-view-enUS-IotNode
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-IotNode
       security:
         - openIdConnect:
           - profile
@@ -1234,7 +1234,7 @@ paths:
   /iot-node:
     get:
       operationId: searchpageIotNode
-      x-vertx-event-bus: smart-village-view-enUS-IotNode
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-IotNode
       security:
         - openIdConnect:
           - profile
@@ -1413,7 +1413,7 @@ paths:
   /api/page:
     get:
       operationId: searchSitePage
-      x-vertx-event-bus: smart-village-view-enUS-SitePage
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-SitePage
       description: >+
       summary: >+
       tags:
@@ -1588,7 +1588,7 @@ paths:
                 $ref: '#/components/schemas/SearchSitePageResponse'
     post:
       operationId: postSitePage
-      x-vertx-event-bus: smart-village-view-enUS-SitePage
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-SitePage
       security:
         - openIdConnect:
           - profile
@@ -1612,7 +1612,7 @@ paths:
                 $ref: '#/components/schemas/POSTSitePageResponse'
     patch:
       operationId: patchSitePage
-      x-vertx-event-bus: smart-village-view-enUS-SitePage
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-SitePage
       security:
         - openIdConnect:
           - profile
@@ -1669,7 +1669,7 @@ paths:
   /api/page-import:
     put:
       operationId: putimportSitePage
-      x-vertx-event-bus: smart-village-view-enUS-SitePage
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-SitePage
       security:
         - openIdConnect:
           - profile
@@ -1703,7 +1703,7 @@ paths:
   /api/page/{id}:
     get:
       operationId: getSitePage
-      x-vertx-event-bus: smart-village-view-enUS-SitePage
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-SitePage
       description: >+
       summary: >+
       tags:
@@ -1733,7 +1733,7 @@ paths:
   /page/{id}:
     get:
       operationId: searchpageSitePageId
-      x-vertx-event-bus: smart-village-view-enUS-SitePage
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-SitePage
       description: >+
       summary: >+
       tags:
@@ -1915,7 +1915,7 @@ paths:
   /page:
     get:
       operationId: searchpageSitePage
-      x-vertx-event-bus: smart-village-view-enUS-SitePage
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-SitePage
       description: >+
       summary: >+
       tags:
@@ -2091,7 +2091,7 @@ paths:
   /api/system-event:
     get:
       operationId: searchSystemEvent
-      x-vertx-event-bus: smart-village-view-enUS-SystemEvent
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-SystemEvent
       description: >+
       summary: >+
       tags:
@@ -2266,7 +2266,7 @@ paths:
                 $ref: '#/components/schemas/SearchSystemEventResponse'
     post:
       operationId: postSystemEvent
-      x-vertx-event-bus: smart-village-view-enUS-SystemEvent
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-SystemEvent
       security:
         - openIdConnect:
           - profile
@@ -2290,7 +2290,7 @@ paths:
                 $ref: '#/components/schemas/POSTSystemEventResponse'
     patch:
       operationId: patchSystemEvent
-      x-vertx-event-bus: smart-village-view-enUS-SystemEvent
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-SystemEvent
       security:
         - openIdConnect:
           - profile
@@ -2347,7 +2347,7 @@ paths:
   /api/system-event-import:
     put:
       operationId: putimportSystemEvent
-      x-vertx-event-bus: smart-village-view-enUS-SystemEvent
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-SystemEvent
       security:
         - openIdConnect:
           - profile
@@ -2381,7 +2381,7 @@ paths:
   /api/system-event/{id}:
     get:
       operationId: getSystemEvent
-      x-vertx-event-bus: smart-village-view-enUS-SystemEvent
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-SystemEvent
       description: >+
       summary: >+
       tags:
@@ -2411,7 +2411,7 @@ paths:
   /system-event/{id}:
     get:
       operationId: searchpageSystemEventId
-      x-vertx-event-bus: smart-village-view-enUS-SystemEvent
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-SystemEvent
       description: >+
       summary: >+
       tags:
@@ -2593,7 +2593,7 @@ paths:
   /system-event:
     get:
       operationId: searchpageSystemEvent
-      x-vertx-event-bus: smart-village-view-enUS-SystemEvent
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-SystemEvent
       description: >+
       summary: >+
       tags:
@@ -2769,7 +2769,7 @@ paths:
   /api/traffic-light:
     get:
       operationId: searchTrafficLight
-      x-vertx-event-bus: smart-village-view-enUS-TrafficLight
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-TrafficLight
       security:
         - openIdConnect:
           - profile
@@ -2947,7 +2947,7 @@ paths:
                 $ref: '#/components/schemas/SearchTrafficLightResponse'
     patch:
       operationId: patchTrafficLight
-      x-vertx-event-bus: smart-village-view-enUS-TrafficLight
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-TrafficLight
       security:
         - openIdConnect:
           - profile
@@ -3003,7 +3003,7 @@ paths:
                 $ref: '#/components/schemas/PATCHTrafficLightResponse'
     post:
       operationId: postTrafficLight
-      x-vertx-event-bus: smart-village-view-enUS-TrafficLight
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-TrafficLight
       security:
         - openIdConnect:
           - profile
@@ -3028,7 +3028,7 @@ paths:
   /api/traffic-light-import:
     put:
       operationId: putimportTrafficLight
-      x-vertx-event-bus: smart-village-view-enUS-TrafficLight
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-TrafficLight
       security:
         - openIdConnect:
           - profile
@@ -3062,7 +3062,7 @@ paths:
   /api/traffic-light/{id}:
     get:
       operationId: getTrafficLight
-      x-vertx-event-bus: smart-village-view-enUS-TrafficLight
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-TrafficLight
       security:
         - openIdConnect:
           - profile
@@ -3095,7 +3095,7 @@ paths:
   /traffic-light/{id}:
     get:
       operationId: searchpageTrafficLightId
-      x-vertx-event-bus: smart-village-view-enUS-TrafficLight
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-TrafficLight
       security:
         - openIdConnect:
           - profile
@@ -3280,7 +3280,7 @@ paths:
   /traffic-light:
     get:
       operationId: searchpageTrafficLight
-      x-vertx-event-bus: smart-village-view-enUS-TrafficLight
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-TrafficLight
       security:
         - openIdConnect:
           - profile
@@ -3459,7 +3459,7 @@ paths:
   /api/traffic-light-step:
     get:
       operationId: searchTrafficLightStep
-      x-vertx-event-bus: smart-village-view-enUS-TrafficLightStep
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-TrafficLightStep
       security:
         - openIdConnect:
           - profile
@@ -3637,7 +3637,7 @@ paths:
                 $ref: '#/components/schemas/SearchTrafficLightStepResponse'
     patch:
       operationId: patchTrafficLightStep
-      x-vertx-event-bus: smart-village-view-enUS-TrafficLightStep
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-TrafficLightStep
       security:
         - openIdConnect:
           - profile
@@ -3693,7 +3693,7 @@ paths:
                 $ref: '#/components/schemas/PATCHTrafficLightStepResponse'
     post:
       operationId: postTrafficLightStep
-      x-vertx-event-bus: smart-village-view-enUS-TrafficLightStep
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-TrafficLightStep
       security:
         - openIdConnect:
           - profile
@@ -3718,7 +3718,7 @@ paths:
   /api/traffic-light-step-import:
     put:
       operationId: putimportTrafficLightStep
-      x-vertx-event-bus: smart-village-view-enUS-TrafficLightStep
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-TrafficLightStep
       security:
         - openIdConnect:
           - profile
@@ -3752,7 +3752,7 @@ paths:
   /api/traffic-light-step/{id}:
     get:
       operationId: getTrafficLightStep
-      x-vertx-event-bus: smart-village-view-enUS-TrafficLightStep
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-TrafficLightStep
       security:
         - openIdConnect:
           - profile
@@ -3785,7 +3785,7 @@ paths:
   /traffic-light-step/{id}:
     get:
       operationId: searchpageTrafficLightStepId
-      x-vertx-event-bus: smart-village-view-enUS-TrafficLightStep
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-TrafficLightStep
       security:
         - openIdConnect:
           - profile
@@ -3970,7 +3970,7 @@ paths:
   /traffic-light-step:
     get:
       operationId: searchpageTrafficLightStep
-      x-vertx-event-bus: smart-village-view-enUS-TrafficLightStep
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-TrafficLightStep
       security:
         - openIdConnect:
           - profile
@@ -4149,7 +4149,7 @@ paths:
   /api/person-step:
     get:
       operationId: searchPersonStep
-      x-vertx-event-bus: smart-village-view-enUS-PersonStep
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-PersonStep
       security:
         - openIdConnect:
           - profile
@@ -4327,7 +4327,7 @@ paths:
                 $ref: '#/components/schemas/SearchPersonStepResponse'
     patch:
       operationId: patchPersonStep
-      x-vertx-event-bus: smart-village-view-enUS-PersonStep
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-PersonStep
       security:
         - openIdConnect:
           - profile
@@ -4383,7 +4383,7 @@ paths:
                 $ref: '#/components/schemas/PATCHPersonStepResponse'
     post:
       operationId: postPersonStep
-      x-vertx-event-bus: smart-village-view-enUS-PersonStep
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-PersonStep
       security:
         - openIdConnect:
           - profile
@@ -4408,7 +4408,7 @@ paths:
   /api/person-step-import:
     put:
       operationId: putimportPersonStep
-      x-vertx-event-bus: smart-village-view-enUS-PersonStep
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-PersonStep
       security:
         - openIdConnect:
           - profile
@@ -4442,7 +4442,7 @@ paths:
   /api/person-step/{id}:
     get:
       operationId: getPersonStep
-      x-vertx-event-bus: smart-village-view-enUS-PersonStep
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-PersonStep
       security:
         - openIdConnect:
           - profile
@@ -4475,7 +4475,7 @@ paths:
   /person-step/{id}:
     get:
       operationId: searchpagePersonStepId
-      x-vertx-event-bus: smart-village-view-enUS-PersonStep
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-PersonStep
       security:
         - openIdConnect:
           - profile
@@ -4660,7 +4660,7 @@ paths:
   /person-step:
     get:
       operationId: searchpagePersonStep
-      x-vertx-event-bus: smart-village-view-enUS-PersonStep
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-PersonStep
       security:
         - openIdConnect:
           - profile
@@ -4839,7 +4839,7 @@ paths:
   /api/traffic-simulation:
     get:
       operationId: searchTrafficSimulation
-      x-vertx-event-bus: smart-village-view-enUS-TrafficSimulation
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-TrafficSimulation
       security:
         - openIdConnect:
           - profile
@@ -5017,7 +5017,7 @@ paths:
                 $ref: '#/components/schemas/SearchTrafficSimulationResponse'
     patch:
       operationId: patchTrafficSimulation
-      x-vertx-event-bus: smart-village-view-enUS-TrafficSimulation
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-TrafficSimulation
       security:
         - openIdConnect:
           - profile
@@ -5073,7 +5073,7 @@ paths:
                 $ref: '#/components/schemas/PATCHTrafficSimulationResponse'
     post:
       operationId: postTrafficSimulation
-      x-vertx-event-bus: smart-village-view-enUS-TrafficSimulation
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-TrafficSimulation
       security:
         - openIdConnect:
           - profile
@@ -5098,7 +5098,7 @@ paths:
   /api/traffic-simulation-import:
     put:
       operationId: putimportTrafficSimulation
-      x-vertx-event-bus: smart-village-view-enUS-TrafficSimulation
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-TrafficSimulation
       security:
         - openIdConnect:
           - profile
@@ -5132,7 +5132,7 @@ paths:
   /api/traffic-simulation/{id}:
     get:
       operationId: getTrafficSimulation
-      x-vertx-event-bus: smart-village-view-enUS-TrafficSimulation
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-TrafficSimulation
       security:
         - openIdConnect:
           - profile
@@ -5165,7 +5165,7 @@ paths:
   /traffic-simulation/{id}:
     get:
       operationId: searchpageTrafficSimulationId
-      x-vertx-event-bus: smart-village-view-enUS-TrafficSimulation
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-TrafficSimulation
       security:
         - openIdConnect:
           - profile
@@ -5350,7 +5350,7 @@ paths:
   /traffic-simulation:
     get:
       operationId: searchpageTrafficSimulation
-      x-vertx-event-bus: smart-village-view-enUS-TrafficSimulation
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-TrafficSimulation
       security:
         - openIdConnect:
           - profile
@@ -5529,7 +5529,7 @@ paths:
   /traffic-simulation-map/{id}:
     get:
       operationId: mapsearchpageTrafficSimulationId
-      x-vertx-event-bus: smart-village-view-enUS-TrafficSimulation
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-TrafficSimulation
       security:
         - openIdConnect:
           - profile
@@ -5714,7 +5714,7 @@ paths:
   /traffic-simulation-map:
     get:
       operationId: mapsearchpageTrafficSimulation
-      x-vertx-event-bus: smart-village-view-enUS-TrafficSimulation
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-TrafficSimulation
       security:
         - openIdConnect:
           - profile
@@ -5893,7 +5893,7 @@ paths:
   /api/time-step:
     get:
       operationId: searchTimeStep
-      x-vertx-event-bus: smart-village-view-enUS-TimeStep
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-TimeStep
       security:
         - openIdConnect:
           - profile
@@ -6071,7 +6071,7 @@ paths:
                 $ref: '#/components/schemas/SearchTimeStepResponse'
     patch:
       operationId: patchTimeStep
-      x-vertx-event-bus: smart-village-view-enUS-TimeStep
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-TimeStep
       security:
         - openIdConnect:
           - profile
@@ -6127,7 +6127,7 @@ paths:
                 $ref: '#/components/schemas/PATCHTimeStepResponse'
     post:
       operationId: postTimeStep
-      x-vertx-event-bus: smart-village-view-enUS-TimeStep
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-TimeStep
       security:
         - openIdConnect:
           - profile
@@ -6152,7 +6152,7 @@ paths:
   /api/time-step-import:
     put:
       operationId: putimportTimeStep
-      x-vertx-event-bus: smart-village-view-enUS-TimeStep
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-TimeStep
       security:
         - openIdConnect:
           - profile
@@ -6186,7 +6186,7 @@ paths:
   /api/time-step/{id}:
     get:
       operationId: getTimeStep
-      x-vertx-event-bus: smart-village-view-enUS-TimeStep
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-TimeStep
       security:
         - openIdConnect:
           - profile
@@ -6219,7 +6219,7 @@ paths:
   /time-step/{id}:
     get:
       operationId: searchpageTimeStepId
-      x-vertx-event-bus: smart-village-view-enUS-TimeStep
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-TimeStep
       security:
         - openIdConnect:
           - profile
@@ -6404,7 +6404,7 @@ paths:
   /time-step:
     get:
       operationId: searchpageTimeStep
-      x-vertx-event-bus: smart-village-view-enUS-TimeStep
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-TimeStep
       security:
         - openIdConnect:
           - profile
@@ -6583,7 +6583,7 @@ paths:
   /api/vehicle-step:
     get:
       operationId: searchVehicleStep
-      x-vertx-event-bus: smart-village-view-enUS-VehicleStep
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-VehicleStep
       security:
         - openIdConnect:
           - profile
@@ -6761,7 +6761,7 @@ paths:
                 $ref: '#/components/schemas/SearchVehicleStepResponse'
     patch:
       operationId: patchVehicleStep
-      x-vertx-event-bus: smart-village-view-enUS-VehicleStep
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-VehicleStep
       security:
         - openIdConnect:
           - profile
@@ -6817,7 +6817,7 @@ paths:
                 $ref: '#/components/schemas/PATCHVehicleStepResponse'
     post:
       operationId: postVehicleStep
-      x-vertx-event-bus: smart-village-view-enUS-VehicleStep
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-VehicleStep
       security:
         - openIdConnect:
           - profile
@@ -6842,7 +6842,7 @@ paths:
   /api/vehicle-step-import:
     put:
       operationId: putimportVehicleStep
-      x-vertx-event-bus: smart-village-view-enUS-VehicleStep
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-VehicleStep
       security:
         - openIdConnect:
           - profile
@@ -6876,7 +6876,7 @@ paths:
   /api/vehicle-step/{id}:
     get:
       operationId: getVehicleStep
-      x-vertx-event-bus: smart-village-view-enUS-VehicleStep
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-VehicleStep
       security:
         - openIdConnect:
           - profile
@@ -6909,7 +6909,7 @@ paths:
   /vehicle-step/{id}:
     get:
       operationId: searchpageVehicleStepId
-      x-vertx-event-bus: smart-village-view-enUS-VehicleStep
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-VehicleStep
       security:
         - openIdConnect:
           - profile
@@ -7094,7 +7094,7 @@ paths:
   /vehicle-step:
     get:
       operationId: searchpageVehicleStep
-      x-vertx-event-bus: smart-village-view-enUS-VehicleStep
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-VehicleStep
       security:
         - openIdConnect:
           - profile
@@ -7273,7 +7273,7 @@ paths:
   /api/user:
     get:
       operationId: searchSiteUser
-      x-vertx-event-bus: smart-village-view-enUS-SiteUser
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-SiteUser
       security:
         - openIdConnect:
           - profile
@@ -7451,7 +7451,7 @@ paths:
                 $ref: '#/components/schemas/SearchSiteUserResponse'
     patch:
       operationId: patchSiteUser
-      x-vertx-event-bus: smart-village-view-enUS-SiteUser
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-SiteUser
       security:
         - openIdConnect:
           - profile
@@ -7507,7 +7507,7 @@ paths:
                 $ref: '#/components/schemas/PATCHSiteUserResponse'
     post:
       operationId: postSiteUser
-      x-vertx-event-bus: smart-village-view-enUS-SiteUser
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-SiteUser
       security:
         - openIdConnect:
           - profile
@@ -7532,7 +7532,7 @@ paths:
   /api/user-import:
     put:
       operationId: putimportSiteUser
-      x-vertx-event-bus: smart-village-view-enUS-SiteUser
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-SiteUser
       security:
         - openIdConnect:
           - profile
@@ -7566,7 +7566,7 @@ paths:
   /user/{id}:
     get:
       operationId: searchpageSiteUserId
-      x-vertx-event-bus: smart-village-view-enUS-SiteUser
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-SiteUser
       security:
         - openIdConnect:
           - profile
@@ -7751,7 +7751,7 @@ paths:
   /user:
     get:
       operationId: searchpageSiteUser
-      x-vertx-event-bus: smart-village-view-enUS-SiteUser
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-SiteUser
       security:
         - openIdConnect:
           - profile
@@ -7930,7 +7930,7 @@ paths:
   /api/iot-node-step:
     get:
       operationId: searchIotNodeStep
-      x-vertx-event-bus: smart-village-view-enUS-IotNodeStep
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-IotNodeStep
       security:
         - openIdConnect:
           - profile
@@ -8108,7 +8108,7 @@ paths:
                 $ref: '#/components/schemas/SearchIotNodeStepResponse'
     patch:
       operationId: patchIotNodeStep
-      x-vertx-event-bus: smart-village-view-enUS-IotNodeStep
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-IotNodeStep
       security:
         - openIdConnect:
           - profile
@@ -8164,7 +8164,7 @@ paths:
                 $ref: '#/components/schemas/PATCHIotNodeStepResponse'
     post:
       operationId: postIotNodeStep
-      x-vertx-event-bus: smart-village-view-enUS-IotNodeStep
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-IotNodeStep
       security:
         - openIdConnect:
           - profile
@@ -8189,7 +8189,7 @@ paths:
   /api/iot-node-step-import:
     put:
       operationId: putimportIotNodeStep
-      x-vertx-event-bus: smart-village-view-enUS-IotNodeStep
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-IotNodeStep
       security:
         - openIdConnect:
           - profile
@@ -8223,7 +8223,7 @@ paths:
   /api/iot-node-step/{id}:
     get:
       operationId: getIotNodeStep
-      x-vertx-event-bus: smart-village-view-enUS-IotNodeStep
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-IotNodeStep
       security:
         - openIdConnect:
           - profile
@@ -8256,7 +8256,7 @@ paths:
   /iot-node-step/{id}:
     get:
       operationId: searchpageIotNodeStepId
-      x-vertx-event-bus: smart-village-view-enUS-IotNodeStep
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-IotNodeStep
       security:
         - openIdConnect:
           - profile
@@ -8441,7 +8441,7 @@ paths:
   /iot-node-step:
     get:
       operationId: searchpageIotNodeStep
-      x-vertx-event-bus: smart-village-view-enUS-IotNodeStep
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-IotNodeStep
       security:
         - openIdConnect:
           - profile
@@ -8620,7 +8620,7 @@ paths:
   /api/map-result:
     get:
       operationId: searchMapResult
-      x-vertx-event-bus: smart-village-view-enUS-MapResult
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-MapResult
       security:
         - openIdConnect:
           - profile
@@ -8799,7 +8799,7 @@ paths:
   /api/map-result/{id}:
     get:
       operationId: getMapResult
-      x-vertx-event-bus: smart-village-view-enUS-MapResult
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-MapResult
       security:
         - openIdConnect:
           - profile
@@ -8832,7 +8832,7 @@ paths:
   /map-result/{id}:
     get:
       operationId: searchpageMapResultId
-      x-vertx-event-bus: smart-village-view-enUS-MapResult
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-MapResult
       security:
         - openIdConnect:
           - profile
@@ -9017,7 +9017,7 @@ paths:
   /map-result:
     get:
       operationId: searchpageMapResult
-      x-vertx-event-bus: smart-village-view-enUS-MapResult
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-MapResult
       security:
         - openIdConnect:
           - profile

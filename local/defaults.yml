@@ -4,11 +4,11 @@ QUAYIO_ORG: "computateorg"
 SITE_POWERED_BY_URL: "https://www.operate-first.cloud/"
 SITE_POWERED_BY_NAME: "Operate First"
 SITE_POWERED_BY_IMAGE_URI: "/png/operate-first-logo.png"
-SITE_NAME: "smart-village-view"
+SITE_NAME: "smartabyar-smartvillage"
 SITE_DISPLAY_NAME: "Smart Village Project"
 SITE_SERVICES:
-  - SITE_NAME: "smart-village-view"
-    SITE_SRC: "/home/ctate/.local/src/smart-village-view"
+  - SITE_NAME: "smartabyar-smartvillage"
+    SITE_SRC: "/home/ctate/.local/src/smartabyar-smartvillage"
 RELATIVE_PACKAGE_MainVerticle: "vertx"
 CLASS_SIMPLE_NAME_MainVerticle: "MainVerticle"
 RUN_OPENAPI3_GENERATOR: true
@@ -16,7 +16,7 @@ RUN_SQL_GENERATOR: true
 RUN_ARTICLE_GENERATOR: false
 
 LANGUAGE_NAME: "enUS"
-SITE_PATH_enUS: "/home/ctate/.local/src/smart-village-view"
+SITE_PATH_enUS: "/home/ctate/.local/src/smartabyar-smartvillage"
 DOMAIN_NAME: "example.com"
 DOMAIN_PACKAGE_NAME: "org.computate.smartvillageview.enus"
 SITE_JAVA_PACKAGE: "org.computate.smartvillageview.enus"
@@ -33,15 +33,15 @@ SITE_PORT: 12080
 SITE_ZONE: "America/New_York"
 SITE_LOCALE: "en-US"
 STATIC_BASE_URL: "http://localhost:12080/static"
-STATIC_PATH: "/home/ctate/.local/src/smart-village-view-static"
-TEMPLATE_PATH: "/home/ctate/.local/src/smart-village-view/src/main/resources/templates"
+STATIC_PATH: "/home/ctate/.local/src/smartabyar-smartvillage-static"
+TEMPLATE_PATH: "/home/ctate/.local/src/smartabyar-smartvillage/src/main/resources/templates"
 API_CONTACT_EMAIL: ""
 FONTAWESOME_KIT: ""
 
 JDBC_HOST: "localhost"
 JDBC_PORT: 5432
-JDBC_DATABASE: "smart-village-view"
-JDBC_USERNAME: "smart-village-view"
+JDBC_DATABASE: "smartabyar-smartvillage"
+JDBC_USERNAME: "smartabyar-smartvillage"
 
 AUTH_HOST_NAME: "sso.computate.org"
 AUTH_PORT: 443
@@ -53,8 +53,8 @@ AUTH_SECRET: "0518f65a-f86d-42e8-ad65-00f46920443d"
 AUTH_URL: "https://sso.computate.org/auth"
 AUTH_TOKEN_URI: "/auth/realms/RH-IMPACT/protocol/openid-connect/token"
 
-SOLR_COLLECTION: "smart-village-view"
-SOLR_URL: "http://localhost:8983/solr/smart-village-view"
+SOLR_COLLECTION: "smartabyar-smartvillage"
+SOLR_URL: "http://localhost:8983/solr/smartabyar-smartvillage"
 SOLR_HOST_NAME: localhost
 SOLR_PORT: 8983
 SOLR_URL_COMPUTATE: "http://localhost:8983/solr/computate"

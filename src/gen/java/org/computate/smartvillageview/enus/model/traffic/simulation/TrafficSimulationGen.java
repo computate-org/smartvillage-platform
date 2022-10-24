@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import java.util.Date;
 import java.util.Set;
 import org.computate.vertx.api.ApiRequest;
-import org.computate.smartvillageview.enus.config.ConfigKeys;
+import org.computate.vertx.config.ComputateConfigKeys;
 import java.util.Optional;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
@@ -98,8 +98,8 @@ import org.computate.search.response.solr.SolrResponse;
  * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
- * Delete  the project smart-village-view in Solr: 
- * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smart\-village\-view&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * Delete  the project smartabyar-smartvillage in Solr: 
+ * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartabyar\-smartvillage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  **/
 public abstract class TrafficSimulationGen<DEV> extends BaseModel {
@@ -985,51 +985,58 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		return o != null;
 	}
 	public Object persistTrafficSimulation(String var, Object val) {
-		switch(var.toLowerCase()) {
-			case "simulationname":
-				if(val instanceof String)
+		String varLower = var.toLowerCase();
+			if("simulationname".equals(varLower)) {
+				if(val instanceof String) {
 					setSimulationName((String)val);
+				}
 				saves.add("simulationName");
 				return val;
-			case "sumocfgpath":
-				if(val instanceof String)
+			} else if("sumocfgpath".equals(varLower)) {
+				if(val instanceof String) {
 					setSumocfgPath((String)val);
+				}
 				saves.add("sumocfgPath");
 				return val;
-			case "fcdfilepath":
-				if(val instanceof String)
+			} else if("fcdfilepath".equals(varLower)) {
+				if(val instanceof String) {
 					setFcdFilePath((String)val);
+				}
 				saves.add("fcdFilePath");
 				return val;
-			case "netfilepath":
-				if(val instanceof String)
+			} else if("netfilepath".equals(varLower)) {
+				if(val instanceof String) {
 					setNetFilePath((String)val);
+				}
 				saves.add("netFilePath");
 				return val;
-			case "startseconds":
-				if(val instanceof String)
+			} else if("startseconds".equals(varLower)) {
+				if(val instanceof String) {
 					setStartSeconds((String)val);
-				else if(val instanceof Number)
+				} else if(val instanceof Number) {
 					setStartSeconds(new BigDecimal(((Number)val).doubleValue()));
+				}
 				saves.add("startSeconds");
 				return val;
-			case "endseconds":
-				if(val instanceof String)
+			} else if("endseconds".equals(varLower)) {
+				if(val instanceof String) {
 					setEndSeconds((String)val);
-				else if(val instanceof Number)
+				} else if(val instanceof Number) {
 					setEndSeconds(new BigDecimal(((Number)val).doubleValue()));
+				}
 				saves.add("endSeconds");
 				return val;
-			case "stepseconds":
-				if(val instanceof String)
+			} else if("stepseconds".equals(varLower)) {
+				if(val instanceof String) {
 					setStepSeconds((String)val);
-				else if(val instanceof Number)
+				} else if(val instanceof Number) {
 					setStepSeconds(new BigDecimal(((Number)val).doubleValue()));
+				}
 				saves.add("stepSeconds");
 				return val;
-			default:
+			} else {
 				return super.persistBaseModel(var, val);
-		}
+			}
 	}
 
 	/////////////

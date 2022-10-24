@@ -1,9 +1,6 @@
 
-# Release notes
 
-[ Click here to see the latest release notes ](release/README.md)
-
-# Setup smart-village-view development environment on MacOSX or Linux (Fedora, RHEL, CentOS, Ubuntu)
+# Setup smartabyar-smartvillage development environment on MacOSX or Linux (Fedora, RHEL, CentOS, Ubuntu)
 
 ## Install Ansible dependencies on Linux
 
@@ -46,8 +43,8 @@ pip install ansible
 ## Setup the directory for the project and clone the git repository into it 
 
 ```bash
-install -d ~/.local/src/smart-village-view
-git clone git@github.com:computate-org/smart-village-view.git ~/.local/src/smart-village-view
+install -d ~/.local/src/smartabyar-smartvillage
+git clone git@github.com:computate-org/smartabyar-smartvillage.git ~/.local/src/smartabyar-smartvillage
 ```
 
 ## Setup the Ansible Galaxy roles for installing the complete project locally. 
@@ -66,7 +63,7 @@ git clone git@github.com:computate-org/computate_project.git ~/.ansible/roles/co
 ansible-playbook ~/.ansible/roles/computate.computate_postgres/install.yml -K
 ansible-playbook ~/.ansible/roles/computate.computate_zookeeper/install.yml -K
 ansible-playbook ~/.ansible/roles/computate.computate_solr/install.yml -K
-ansible-playbook ~/.ansible/roles/computate.computate_project/install.yml -e SITE_NAME=smart-village-view -e ENABLE_CODE_GENERATION_SERVICE=true
+ansible-playbook ~/.ansible/roles/computate.computate_project/install.yml -e SITE_NAME=smartabyar-smartvillage -e ENABLE_CODE_GENERATION_SERVICE=true
 ```
 
 ## Running the project install to override secret variables
@@ -77,20 +74,20 @@ Here is an example of creating a vault directory and creating a new vault, it wi
 Be sure to not commit your vault to source control, it should be ignored by default in the .gitignore file that is created in the project. 
 
 ```bash
-install -d ~/.local/src/smart-village-view-ansible/vault
-ansible-vault create ~/.local/src/smart-village-view-ansible/vault/$USER-local
+install -d ~/.local/src/smartabyar-smartvillage-ansible/vault
+ansible-vault create ~/.local/src/smartabyar-smartvillage-ansible/vault/$USER-local
 ```
 
 You can edit the vault, it will ask for the password. 
 
 ```bash
-ansible-vault edit ~/.local/src/smart-village-view-ansible/vault/$USER-local
+ansible-vault edit ~/.local/src/smartabyar-smartvillage-ansible/vault/$USER-local
 ```
 
 You can then run the project install automation again with the secrets in the vault, it will ask for the password. 
 
 ```bash
-ansible-playbook ~/.ansible/roles/computate.computate_project/install.yml -e SITE_NAME=smart-village-view -e ENABLE_CODE_GENERATION_SERVICE=true -e @~/.local/src/smart-village-view-ansible/vault/$USER-local --vault-id @prompt
+ansible-playbook ~/.ansible/roles/computate.computate_project/install.yml -e SITE_NAME=smartabyar-smartvillage -e ENABLE_CODE_GENERATION_SERVICE=true -e @~/.local/src/smartabyar-smartvillage-ansible/vault/$USER-local --vault-id @prompt
 ```
 
 # Configure Red Hat CodeReady Studio
@@ -136,38 +133,38 @@ Add these update sites and install these useful plugins:
 - http://www.genuitec.com/updates/devstyle/ci/
     - Choose "DevStyle Features" for themes
 
-## Import the smart-village-view project into CodeReady Studio
+## Import the smartabyar-smartvillage project into CodeReady Studio
 
 * In CodeReady Studio, go to File -> Import...
 * Select Maven -> Existing Maven Projects
 * Click [ Next > ]
-* Browse to the directory: ~/.local/src/smart-village-view
+* Browse to the directory: ~/.local/src/smartabyar-smartvillage
 * Click [ Finish ]
 
-## Setup a CodeReady Studio Debug/Run configuration to generate the OpenAPI 3 spec and the SQL create and drop scripts in smart-village-view
+## Setup a CodeReady Studio Debug/Run configuration to generate the OpenAPI 3 spec and the SQL create and drop scripts in smartabyar-smartvillage
 
 * In CodeReady Studio, go to File -> Debug Configurations...
 * Right click on Java Application -> New Configuration
-* Name: smart-village-view-OpenAPIGenerator
-* Project: smart-village-view
+* Name: smartabyar-smartvillage-OpenAPIGenerator
+* Project: smartabyar-smartvillage
 * Main class: org.computate.smartvillageview.enus.vertx.MainVerticle
 
 ### In the Environment tab
 
 Setup the following variables to setup the Vert.x verticle. 
 
-* CONFIG_PATH: ~/.local/src/smart-village-view/config/smart-village-view.yml
+* CONFIG_PATH: ~/.local/src/smartabyar-smartvillage/config/smartabyar-smartvillage.yml
 * RUN_OPENAPI3_GENERATOR: true
 * RUN_SQL_GENERATOR: true
 
 Click [ Apply ] and [ Debug ] to debug the generation of the OpenAPI Spec src/main/resources/webroot and the SQL create and drop scripts in src/main/resources/sql. 
 
-## Setup a CodeReady Studio Debug/Run configuration to run and debug smart-village-view
+## Setup a CodeReady Studio Debug/Run configuration to run and debug smartabyar-smartvillage
 
 * In CodeReady Studio, go to File -> Debug Configurations...
 * Right click on Java Application -> New Configuration
-* Name: smart-village-view
-* Project: smart-village-view
+* Name: smartabyar-smartvillage
+* Project: smartabyar-smartvillage
 * Main class: org.computate.smartvillageview.enus.vertx.MainVerticle
 
 ### In the "Arguments" tab
@@ -182,14 +179,14 @@ Setup the following VM arguments to disable caching for easier web development:
 
 Setup the following variables to setup the Vert.x verticle. 
 
-* CONFIG_PATH: ~/.local/src/smart-village-view/config/smart-village-view.yml
+* CONFIG_PATH: ~/.local/src/smartabyar-smartvillage/config/smartabyar-smartvillage.yml
 * VERTXWEB_ENVIRONMENT: dev
 
 Click [ Apply ] and [ Debug ] to debug the application. 
 
-# Deploy smart-village-view to OpenShift with Ansible
+# Deploy smartabyar-smartvillage to OpenShift with Ansible
 
-To deploy smart-village-view to OpenShift with Ansible, you will want to follow the instructions to install Ansible on your system first above "Install Ansible dependencies on Linux". 
+To deploy smartabyar-smartvillage to OpenShift with Ansible, you will want to follow the instructions to install Ansible on your system first above "Install Ansible dependencies on Linux". 
 
 ## Setup ~/.ansible/roles directory
 
@@ -210,23 +207,23 @@ git clone git@github.com:computate-org/computate_project_openshift.git ~/.ansibl
 
 ## Create an ansible vault for your OpenShift.
 
-You can create and edit an encrypted ansible vault with a password for the host secrets for your shared OpenShift inventory to deploy smart-village-view.
+You can create and edit an encrypted ansible vault with a password for the host secrets for your shared OpenShift inventory to deploy smartabyar-smartvillage.
 It will have you create a password when you save the file for the first time, like using vim to exit. 
 
 ```bash
-install -d ~/.local/src/smart-village-view-ansible
-install -d ~/.local/src/smart-village-view-ansible/vault/$USER-staging/vault
-ansible-vault create ~/.local/src/smart-village-view-ansible/vault/$USER-staging/vault
-ansible-vault edit ~/.local/src/smart-village-view-ansible/vault/$USER-staging/vault
+install -d ~/.local/src/smartabyar-smartvillage-ansible
+install -d ~/.local/src/smartabyar-smartvillage-ansible/vault/$USER-staging/vault
+ansible-vault create ~/.local/src/smartabyar-smartvillage-ansible/vault/$USER-staging/vault
+ansible-vault edit ~/.local/src/smartabyar-smartvillage-ansible/vault/$USER-staging/vault
 ```
 
-Here is an example of a vault that I have used to deploy the smart-village-view application. 
+Here is an example of a vault that I have used to deploy the smartabyar-smartvillage application. 
 You will want to update these values to reflect your OpenShift environment, like the REDHAT_OPENSHIFT_TOKEN which you will need to obtain after logging into OpenShift. 
 Or the REDHAT_OPENSHIFT_STORAGE_CLASS_NAME which might be different than gp2 for you. 
 If so, try creating a persistent volume in the UI to figure out a good storage class for your environment: 
 
 ```yaml
-SITE_NAME: smart-village-view
+SITE_NAME: smartabyar-smartvillage
 
 REDHAT_OPENSHIFT_HOST: https://api.rh-us-east-1.openshift.com
 REDHAT_OPENSHIFT_TOKEN: OcrtrXzKNKVj0riR2FvfqORgGfnURx98G8zRPd2MUvs
@@ -258,13 +255,13 @@ AUTH_TOKEN_URI: "/auth/realms/RH-IMPACT/protocol/openid-connect/token"
 
 ```bash
 
-ansible-playbook --vault-id @prompt -e @~/.local/src/smart-village-view-ansible/vault/$USER-staging/vault ~/.ansible/roles/computate.computate_postgres_openshift/install.yml -e SITE_NAME=smart-village-view
+ansible-playbook --vault-id @prompt -e @~/.local/src/smartabyar-smartvillage-ansible/vault/$USER-staging/vault ~/.ansible/roles/computate.computate_postgres_openshift/install.yml -e SITE_NAME=smartabyar-smartvillage
 
-ansible-playbook --vault-id @prompt -e @~/.local/src/smart-village-view-ansible/vault/$USER-staging/vault ~/.ansible/roles/computate.computate_zookeeper_openshift/install.yml -e SITE_NAME=smart-village-view
+ansible-playbook --vault-id @prompt -e @~/.local/src/smartabyar-smartvillage-ansible/vault/$USER-staging/vault ~/.ansible/roles/computate.computate_zookeeper_openshift/install.yml -e SITE_NAME=smartabyar-smartvillage
 
-ansible-playbook --vault-id @prompt -e @~/.local/src/smart-village-view-ansible/vault/$USER-staging/vault ~/.ansible/roles/computate.computate_solr_openshift/install.yml -e SITE_NAME=smart-village-view
+ansible-playbook --vault-id @prompt -e @~/.local/src/smartabyar-smartvillage-ansible/vault/$USER-staging/vault ~/.ansible/roles/computate.computate_solr_openshift/install.yml -e SITE_NAME=smartabyar-smartvillage
 
-ansible-playbook --vault-id @prompt -e @~/.local/src/smart-village-view-ansible/vault/$USER-staging/vault ~/.ansible/roles/computate.computate_project_openshift/install.yml -e SITE_NAME=smart-village-view
+ansible-playbook --vault-id @prompt -e @~/.local/src/smartabyar-smartvillage-ansible/vault/$USER-staging/vault ~/.ansible/roles/computate.computate_project_openshift/install.yml -e SITE_NAME=smartabyar-smartvillage
 ```
 
 ## How to run the application as a Podman container
@@ -279,20 +276,20 @@ pkcon install -y podman
 ### Build the container with podman
 
 ```bash
-cd ~/.local/src/smart-village-view
-podman build -t computateorg/smart-village-view:latest .
+cd ~/.local/src/smartabyar-smartvillage
+podman build -t computateorg/smartabyar-smartvillage:latest .
 ```
 
 ### Push the container up to quay.io
 ```bash
 podman login quay.io
-podman push computateorg/smart-village-view:latest quay.io/computateorg/smart-village-view:latest
+podman push computateorg/smartabyar-smartvillage:latest quay.io/computateorg/smartabyar-smartvillage:latest
 ```
 
 ## How the base classes for this project were created
 
 ```bash
-ansible-playbook -e @~/.local/src/smart-village-view/local/ansible_install_vars.yml ~/.local/src/computate-org/vertx_project.yml
+ansible-playbook -e @~/.local/src/smartabyar-smartvillage/local/ansible_install_vars.yml ~/.local/src/computate-org/vertx_project.yml
 ```
 
 # Load a new map traffic data into SUMO
