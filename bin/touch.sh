@@ -10,7 +10,6 @@ touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvill
 touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/model/user/SiteUser.java
 touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/result/map/MapResult.java
 touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/model/traffic/simulation/TrafficSimulation.java
-touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/model/traffic/simulation/map/TrafficSimulationMapPage.java
 touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/model/traffic/light/TrafficLight.java
 touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/model/traffic/light/step/TrafficLightStep.java
 touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/model/traffic/vehicle/step/VehicleStep.java

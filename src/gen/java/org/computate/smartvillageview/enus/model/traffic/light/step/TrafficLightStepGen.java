@@ -83,14 +83,14 @@ import io.vertx.core.json.JsonObject;
  * </p>
  * <p>This class contains a comment <b>"AName.enUS: a traffic light step"</b>, which identifies the language context to describe a TrafficLightStep as "a traffic light step". 
  * </p>
- * <p>This class contains a comment <b>"Color: blue"</b>, which styles the TrafficLightStep page "blue". 
+ * <p>This class contains a comment <b>"Color: 2017-shaded-spruce"</b>, which styles the TrafficLightStep page "2017-shaded-spruce". 
  * This will reference a CSS class defined by the stylesheets in the project that starts with "w3-". 
- * A css class of "w3-blue" is expected to exist in the project stylesheets, and is inspired by W3 CSS colors. 
+ * A css class of "w3-2017-shaded-spruce" is expected to exist in the project stylesheets, and is inspired by W3 CSS colors. 
  * See: <a href="https://www.w3schools.com/w3css/w3css_colors.asp">https://www.w3schools.com/w3css/w3css_colors.asp</a>. 
  * </p>
  * <p>This class contains a comment <b>"IconGroup: duotone"</b>, which adds icons on the TrafficLightStep page with a group of "duotone". 
  * This will reference a Font Awesome icon group defined by the stylesheets in the project that starts with "fa" followed by the first letter of the icon group, which is "fad". 
- * A Font Awesome icon group of "blue" is expected to exist. 
+ * A Font Awesome icon group of "2017-shaded-spruce" is expected to exist. 
  * The Font Awesome groups currently supported include: solid, thin, duotone. 
  * See: <a href="https://www.w3schools.com/w3css/w3css_colors.asp">https://www.w3schools.com/w3css/w3css_colors.asp</a>. 
  * </p>
@@ -142,7 +142,7 @@ public abstract class TrafficLightStepGen<DEV> extends MapResult {
 	public static final String SearchPage_enUS_Uri = "/traffic-light-step";
 	public static final String SearchPage_enUS_ImageUri = "/png/traffic-light-step-999.png";
 
-	public static final String TrafficLightStep_Color = "blue";
+	public static final String TrafficLightStep_Color = "2017-shaded-spruce";
 	public static final String TrafficLightStep_IconGroup = "duotone";
 	public static final String TrafficLightStep_IconName = "map-location-dot";
 	public static final Integer TrafficLightStep_Rows = 100;

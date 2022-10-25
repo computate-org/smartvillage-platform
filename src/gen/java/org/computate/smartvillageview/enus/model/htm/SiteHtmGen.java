@@ -84,14 +84,14 @@ import org.computate.search.response.solr.SolrResponse;
  * </p>
  * <p>This class contains a comment <b>"AName.enUS: an HTML"</b>, which identifies the language context to describe a SiteHtm as "an HTML". 
  * </p>
- * <p>This class contains a comment <b>"Color: 2017-navy-peony"</b>, which styles the SiteHtm page "2017-navy-peony". 
+ * <p>This class contains a comment <b>"Color: 2017-shaded-spruce"</b>, which styles the SiteHtm page "2017-shaded-spruce". 
  * This will reference a CSS class defined by the stylesheets in the project that starts with "w3-". 
- * A css class of "w3-2017-navy-peony" is expected to exist in the project stylesheets, and is inspired by W3 CSS colors. 
+ * A css class of "w3-2017-shaded-spruce" is expected to exist in the project stylesheets, and is inspired by W3 CSS colors. 
  * See: <a href="https://www.w3schools.com/w3css/w3css_colors.asp">https://www.w3schools.com/w3css/w3css_colors.asp</a>. 
  * </p>
  * <p>This class contains a comment <b>"IconGroup: duotone"</b>, which adds icons on the SiteHtm page with a group of "duotone". 
  * This will reference a Font Awesome icon group defined by the stylesheets in the project that starts with "fa" followed by the first letter of the icon group, which is "fad". 
- * A Font Awesome icon group of "2017-navy-peony" is expected to exist. 
+ * A Font Awesome icon group of "2017-shaded-spruce" is expected to exist. 
  * The Font Awesome groups currently supported include: solid, thin, duotone. 
  * See: <a href="https://www.w3schools.com/w3css/w3css_colors.asp">https://www.w3schools.com/w3css/w3css_colors.asp</a>. 
  * </p>
@@ -144,7 +144,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	public static final String SearchPage_enUS_Uri = "/htm";
 	public static final String SearchPage_enUS_ImageUri = "/png/htm-999.png";
 
-	public static final String SiteHtm_Color = "2017-navy-peony";
+	public static final String SiteHtm_Color = "2017-shaded-spruce";
 	public static final String SiteHtm_IconGroup = "duotone";
 	public static final String SiteHtm_IconName = "code";
 

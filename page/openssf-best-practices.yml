@@ -3,7 +3,9 @@ pageId: "open-source-software-foundation-best-practices"
 uri: "/en-us/{{ pageId }}"
 h1: "Does the {{ page.siteName }} project follow the OpenSSF Best Practices? "
 h2: "Review the OpenSSF Best Practices checklist for {{ page.siteName }}. "
-created: "2022-07-05"
+created: "2022-10-24"
+courseNum: 1
+lessonNum: 6
 author:
   name: Christopher Tate
   title: Red Hat Principal Software Consultant
@@ -17,9 +19,11 @@ htmMeta:
   - {e: meta, a: {property: "og:site_name", content: "{{ page.siteName }}"}}
   - {e: meta, a: {property: "og:image", content: "{{ page.staticBaseUrl }}{{ pageImageUri }}"}}
   - comment: |
+      install -d {{ page.staticPath }}/png/{{ pageId }}/
       CutyCapt --min-height=1 --url='{{ page.siteBaseUrl }}{{ uri }}?var=filterLabel:infographic' --out='{{ page.staticPath }}/png/{{ pageId }}/infographic.png'
-      CutyCapt --min-height=1 --url='{{ page.siteBaseUrl }}{{ uri }}?var=filterLabel:image' --out='{{ page.staticPath }}/png/{{ pageId }}/image.png'
       CutyCapt --min-height=1 --url='{{ page.siteBaseUrl }}{{ uri }}?var=filterLabel:review' --out='{{ page.staticPath }}/png/{{ pageId }}/review.png'
+      CutyCapt --min-height=1 --url='{{ page.siteBaseUrl }}{{ uri }}?var=filterLabel:image' --out='{{ page.staticPath }}/png/{{ pageId }}/image.png'
+      
   - {e: meta, a: {property: "og:image:width", content: "{{ page.pageImageWidth }}"}}
   - {e: meta, a: {property: "og:image:height", content: "{{ page.pageImageHeight }}"}}
   - {e: meta, a: {property: "og:image:type", content: "{{ page.pageImageType }}"}}

@@ -35,7 +35,7 @@ import io.vertx.pgclient.data.Point;
  * Saves: true
  * 
  * AName.enUS: an IOT node
- * Color: blue
+ * Color: 2017-shaded-spruce
  * IconGroup: duotone
  * IconName: router
  * NameVar.enUS: iotNode

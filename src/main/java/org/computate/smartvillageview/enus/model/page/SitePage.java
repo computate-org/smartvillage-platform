@@ -48,13 +48,13 @@ import io.vertx.core.Promise;
  * ApiUri.SearchPage.enUS: /page
  * 
  * AName.enUS: an article
- * Color: 2017-navy-peony
+ * Color: 2017-shaded-spruce
  * IconGroup: duotone
  * IconName: newspaper
  * NameVar: page
  * 
- * Sort.asc: courseNum
- * Sort.asc: lessonNum
+ * Sort.desc: courseNum
+ * Sort.desc: lessonNum
  * 
  * PublicRead: true
  * Role.enUS: SiteAdmin

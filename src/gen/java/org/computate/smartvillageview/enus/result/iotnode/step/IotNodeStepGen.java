@@ -86,14 +86,14 @@ import org.computate.search.response.solr.SolrResponse;
  * </p>
  * <p>This class contains a comment <b>"AName.enUS: an IOT node step"</b>, which identifies the language context to describe a IotNodeStep as "an IOT node step". 
  * </p>
- * <p>This class contains a comment <b>"Color: blue"</b>, which styles the IotNodeStep page "blue". 
+ * <p>This class contains a comment <b>"Color: 2017-shaded-spruce"</b>, which styles the IotNodeStep page "2017-shaded-spruce". 
  * This will reference a CSS class defined by the stylesheets in the project that starts with "w3-". 
- * A css class of "w3-blue" is expected to exist in the project stylesheets, and is inspired by W3 CSS colors. 
+ * A css class of "w3-2017-shaded-spruce" is expected to exist in the project stylesheets, and is inspired by W3 CSS colors. 
  * See: <a href="https://www.w3schools.com/w3css/w3css_colors.asp">https://www.w3schools.com/w3css/w3css_colors.asp</a>. 
  * </p>
  * <p>This class contains a comment <b>"IconGroup: duotone"</b>, which adds icons on the IotNodeStep page with a group of "duotone". 
  * This will reference a Font Awesome icon group defined by the stylesheets in the project that starts with "fa" followed by the first letter of the icon group, which is "fad". 
- * A Font Awesome icon group of "blue" is expected to exist. 
+ * A Font Awesome icon group of "2017-shaded-spruce" is expected to exist. 
  * The Font Awesome groups currently supported include: solid, thin, duotone. 
  * See: <a href="https://www.w3schools.com/w3css/w3css_colors.asp">https://www.w3schools.com/w3css/w3css_colors.asp</a>. 
  * </p>
@@ -145,7 +145,7 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	public static final String SearchPage_enUS_Uri = "/iot-node-step";
 	public static final String SearchPage_enUS_ImageUri = "/png/iot-node-step-999.png";
 
-	public static final String IotNodeStep_Color = "blue";
+	public static final String IotNodeStep_Color = "2017-shaded-spruce";
 	public static final String IotNodeStep_IconGroup = "duotone";
 	public static final String IotNodeStep_IconName = "router";
 	public static final Integer IotNodeStep_Rows = 100;

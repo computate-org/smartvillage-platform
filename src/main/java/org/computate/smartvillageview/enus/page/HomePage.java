@@ -32,7 +32,7 @@ public class HomePage extends HomePageGen<PageLayout> {
 	protected void _searchListSitePage(Promise<SearchList<SitePage>> promise) {
 		SearchList<SitePage> l = new SearchList<>();
 		l.q("*:*");
-		l.sortDesc("created_docvalues_date");
+		l.sortDesc("courseNum_docvalues_int desc, lessonNum_docvalues_int");
 		l.fq(String.format("created_docvalues_date:[* TO %s]", ZonedDateTime.now().toInstant().atOffset(ZoneOffset.UTC).format(DateTimeFormatter.ISO_DATE_TIME)));
 		l.setC(SitePage.class);
 		l.setStore(true);

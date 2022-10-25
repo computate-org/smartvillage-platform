@@ -4,6 +4,8 @@ uri: "/en-us/{{ pageId }}"
 h1: "How does one contribute to {{ page.siteDisplayName }}? "
 h2: "Review {{ page.siteDisplayName }} contribution guidelines. "
 created: "2022-07-05"
+courseNum: 1
+lessonNum: 2
 author:
   name: Christopher Tate
   title: Red Hat Principal Software Consultant

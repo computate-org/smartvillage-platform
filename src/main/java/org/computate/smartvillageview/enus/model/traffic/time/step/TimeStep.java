@@ -32,7 +32,7 @@ import io.vertx.core.Promise;
  * Saves: true
  * 
  * AName.enUS: a time step
- * Color: blue
+ * Color: 2017-shaded-spruce
  * IconGroup: duotone
  * IconName: timer
  * NameVar.enUS: timeStep

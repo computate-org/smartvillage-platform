@@ -6,7 +6,30 @@
 	<artifactId>smartabyar-smartvillage</artifactId>
 	<version>1.0.0</version>
 	<name>Smart Village Project</name>
-	<description></description>
+	<description>Red Hat Global Social Innovation Program is partnering with Boston University and Smarta Byar in order to collaborate on creating a global and open research platform allowing researchers to study what social sustainability means by using a digital twin of Veberöd, Sweden as the test village, supported by Smarta Byar. The goal of this collaboration is to build the open source technological infrastructure so that researchers can collaborate on this platform effectively to study mobility, public health, sustainability among other study areas to ultimately help define better the link between well being and eco-smart cities.</description>
+	<url>https://smartvillage.computate.org</url>
+	<packaging>jar</packaging>
+
+	<licenses>
+		<license>
+			<name>GNU GENERAL PUBLIC LICENSE, Version 3</name>
+			<url>https://www.gnu.org/licenses/gpl-3.0.en.html</url>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<name>Christopher Tate</name>
+			<organization>computate.org</organization>
+			<organizationUrl>https://www.computate.org/</organizationUrl>
+		</developer>
+	</developers>
+
+	<scm>
+		<connection>scm:git:git://github.com/computate-org/smartabyar-smartvillage.git</connection>
+		<developerConnection>scm:git:ssh://github.com:computate-org/smartabyar-smartvillage.git</developerConnection>
+		<url>http://github.com/computate-org/smartabyar-smartvillage/tree/master</url>
+	</scm>
 
 	<repositories>
 		<repository>
@@ -29,6 +52,12 @@
 		<vertx-maven-plugin.version>1.0.18</vertx-maven-plugin.version>
 		<build-helper-maven-plugin.version>3.0.0</build-helper-maven-plugin.version>
 		<exec-maven-plugin.version>1.5.0</exec-maven-plugin.version>
+		<nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
+		<maven-jar-plugin.version>3.1.0</maven-jar-plugin.version>
+		<flatten-maven-plugin.version>1.0.0</flatten-maven-plugin.version>
+		<maven-source-plugin.version>2.4</maven-source-plugin.version>
+		<maven-javadoc-plugin.version>2.10.4</maven-javadoc-plugin.version>
+		<maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
 		<postgresql.version>42.2.2.jre7</postgresql.version>
 		<junit.version>4.13.1</junit.version>
 		<vertx.version>4.2.5.redhat-00001</vertx.version>
@@ -329,6 +358,72 @@
 		</dependency>
 	</dependencies>
 
+	<profiles>
+		<!-- Deployment profile (required so these plugins are only used when deploying) -->
+		<profile>
+			<id>deploy</id>
+			<build>
+				<plugins>
+					<!-- Source plugin -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-source-plugin</artifactId>
+						<version>${maven-source-plugin.version}</version>
+						<executions>
+							<execution>
+								<id>attach-sources</id>
+								<goals>
+									<goal>jar-no-fork</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+
+					<!-- Javadoc plugin -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<version>${maven-javadoc-plugin.version}</version>
+						<configuration>
+							<additionalJOption>-Xdoclint:none</additionalJOption>
+						</configuration>
+						<executions>
+							<execution>
+								<id>attach-javadocs</id>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+
+					<!-- GPG plugin -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>${maven-gpg-plugin.version}</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+								<configuration>
+									<!-- Prevent `gpg` from using pinentry programs -->
+									<gpgArguments>
+										<arg>--pinentry-mode</arg>
+										<arg>loopback</arg>
+									</gpgArguments>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
 	<build>
 
 		<!-- Source Directory Configuration -->
@@ -339,6 +434,42 @@
 		</resources>
 
 		<plugins>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>flatten-maven-plugin</artifactId>
+				<version>${flatten-maven-plugin.version}</version>
+				<configuration>
+					<updatePomFile>true</updatePomFile>
+					<pomElements>
+						<name />
+						<description />
+						<url />
+						<inceptionYear />
+						<organization />
+						<scm />
+						<developers />
+						<contributors />
+						<mailingLists />
+					</pomElements>
+				</configuration>
+				<executions>
+					<execution>
+						<id>flatten</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>flatten</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>flatten.clean</id>
+						<phase>clean</phase>
+						<goals>
+							<goal>clean</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 
 			<!-- Vert.X Code Generation -->
 			<plugin>
@@ -352,6 +483,12 @@
 						<annotationProcessor>io.vertx.codegen.CodeGenProcessor</annotationProcessor>
 					</annotationProcessors>
 				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>${maven-jar-plugin.version}</version>
 			</plugin>
 
 			<plugin>
@@ -396,6 +533,34 @@
 					<redeploy>true</redeploy>
 				</configuration>
 			</plugin>
+
+			<!-- Nexus Staging Plugin -->
+			<plugin>
+				<groupId>org.sonatype.plugins</groupId>
+				<artifactId>nexus-staging-maven-plugin</artifactId>
+				<version>${nexus-staging-maven-plugin.version}</version>
+				<extensions>true</extensions>
+				<configuration>
+					<serverId>ossrh</serverId>
+					<nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+					<autoReleaseAfterClose>false</autoReleaseAfterClose>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
+
+	<distributionManagement>
+
+		<repository>
+			<id>github</id>
+			<name>GitHub OWNER Apache Maven Packages</name>
+			<url>https://maven.pkg.github.com/computate-org/smartabyar-smartvillage</url>
+		</repository>
+
+		<!-- Central Repository -->
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
 </project>

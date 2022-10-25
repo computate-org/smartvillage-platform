@@ -29,7 +29,7 @@ import org.computate.smartvillageview.enus.result.map.MapResult;
  * Saves: true
  * 
  * AName.enUS: a traffic light
- * Color: blue
+ * Color: 2017-shaded-spruce
  * IconGroup: duotone
  * IconName: map-location-dot
  * Rows: 100

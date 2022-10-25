@@ -6,6 +6,13 @@ SITE_POWERED_BY_URL: https://www.operate-first.cloud/
 SITE_POWERED_BY_IMAGE_URI: /png/operate-first-logo.png
 SITE_NAME: smartabyar-smartvillage
 SITE_DISPLAY_NAME: Smart Village Project
+SITE_DESCRIPTION: Red Hat Global Social Innovation Program is partnering with Boston University and Smarta Byar in order to collaborate on creating a global and open research platform allowing researchers to study what social sustainability means by using a digital twin of Veberöd, Sweden as the test village, supported by Smarta Byar. The goal of this collaboration is to build the open source technological infrastructure so that researchers can collaborate on this platform effectively to study mobility, public health, sustainability among other study areas to ultimately help define better the link between well being and eco-smart cities. 
+SITE_PUBLIC_URL: https://smartvillage.computate.org
+SITE_LICENSE_NAME: GNU GENERAL PUBLIC LICENSE, Version 3
+SITE_LICENSE_URL: https://www.gnu.org/licenses/gpl-3.0.en.html
+DEVELOPER_NAME: Christopher Tate
+DEVELOPER_ORG_NAME: computate.org
+DEVELOPER_ORG_URL: https://www.computate.org/
 SITE_REPO: "git@github.com:{{ GITHUB_ORG }}/{{ SITE_NAME }}.git"
 SITE_REPO_HTTPS: "{{ SITE_REPO | replace('git@github.com:', 'https://github.com/') }}"
 SITE_LANG: enUS
@@ -41,6 +48,8 @@ SITE_REPLICAS: 1
 
 ENABLE_MENU_SiteHtm: false
 ENABLE_MENU_TimeStep: false
+ENABLE_MENU_SystemEvent: false
+ENABLE_MENU_IotNodeStep: false
 
 WRITE_API: true
 WRITE_COMMENTS: true
@@ -636,3 +645,21 @@ SITE_POM_DEPENDENCIES_END: |-2
   			<artifactId>commons-exec</artifactId>
   			<version>1.3</version>
   		</dependency>
+
+SITE_POM_END: |-2
+  
+
+  	<distributionManagement>
+  
+  		<repository>
+  			<id>github</id>
+  			<name>GitHub OWNER Apache Maven Packages</name>
+  			<url>https://maven.pkg.github.com/{{ GITHUB_ORG }}/{{ SITE_NAME }}</url>
+  		</repository>
+  
+  		<!-- Central Repository -->
+  		<snapshotRepository>
+  			<id>ossrh</id>
+  			<url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+  		</snapshotRepository>
+  	</distributionManagement>

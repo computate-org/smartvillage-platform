@@ -40,7 +40,7 @@ import io.vertx.core.json.JsonObject;
  * ApiUri.SearchPage.enUS: /htm
  * 
  * AName.enUS: an HTML
- * Color: 2017-navy-peony
+ * Color: 2017-shaded-spruce
  * IconGroup: duotone
  * IconName: code
  * NameVar: htm

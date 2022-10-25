@@ -40,7 +40,7 @@ import org.computate.smartvillageview.enus.model.base.BaseModel;
  * Saves: true
  * 
  * AName.enUS: a traffic simulation
- * Color: blue
+ * Color: 2017-shaded-spruce
  * IconGroup: duotone
  * IconName: traffic-light-stop
  * NameVar.enUS: trafficSimulation

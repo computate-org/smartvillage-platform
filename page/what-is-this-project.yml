@@ -4,6 +4,8 @@ uri: "/en-us/{{ pageId }}"
 h1: What is {{ page.siteDisplayName }}? 
 h2: How Red Hat and Boston University are working together to develop software for eco-smart cities and well-being. 
 created: "2022-07-05"
+courseNum: 1
+lessonNum: 1
 author:
   name: Christopher Tate
   title: Red Hat Principal Software Consultant

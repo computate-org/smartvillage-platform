@@ -32,7 +32,7 @@ import io.vertx.pgclient.data.Point;
  * Saves: true
  * 
  * AName.enUS: a vehicle step
- * Color: blue
+ * Color: 2017-shaded-spruce
  * IconGroup: duotone
  * IconName: map-location-dot
  * Rows: 100

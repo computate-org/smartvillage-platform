@@ -1221,8 +1221,8 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 				}
 			});
 			if("*:*".equals(searchList.getQuery()) && searchList.getSorts().size() == 0) {
-				searchList.sort("courseNum_docvalues_int", "asc");
-				searchList.sort("lessonNum_docvalues_int", "asc");
+				searchList.sort("courseNum_docvalues_int", "desc");
+				searchList.sort("lessonNum_docvalues_int", "desc");
 			}
 			searchSitePage2(siteRequest, populate, store, modify, searchList);
 			searchList.promiseDeepForClass(siteRequest).onSuccess(a -> {

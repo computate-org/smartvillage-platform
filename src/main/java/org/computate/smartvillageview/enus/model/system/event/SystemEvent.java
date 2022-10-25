@@ -41,7 +41,7 @@ import io.vertx.core.Promise;
  * ApiUri.SearchPage.enUS: /system-event
  * 
  * AName.enUS: a system event
- * Color: 2017-navy-peony
+ * Color: 2017-shaded-spruce
  * IconGroup: duotone
  * IconName: square-terminal
  * NameVar: systemEvent
