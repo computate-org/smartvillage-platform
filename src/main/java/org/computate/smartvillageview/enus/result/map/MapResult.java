@@ -78,9 +78,6 @@ public class MapResult extends MapResultGen<BaseResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 3
-	 * HtmlCell: 2
-	 * Facet: true
 	 * DisplayName: Time Step
 	 * Description: The time step ID. 
 	 */
