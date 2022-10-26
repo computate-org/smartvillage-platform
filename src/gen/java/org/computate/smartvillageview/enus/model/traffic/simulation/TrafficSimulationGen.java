@@ -1362,15 +1362,13 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		case VAR_sumocfgPath:
 			return 4;
 		case VAR_fcdFilePath:
-			return 4;
-		case VAR_netFilePath:
-			return 4;
+			return 5;
 		case VAR_startSeconds:
-			return 5;
+			return 6;
 		case VAR_endSeconds:
-			return 5;
+			return 6;
 		case VAR_stepSeconds:
-			return 5;
+			return 6;
 			default:
 				return BaseModel.htmlRowBaseModel(var);
 		}
@@ -1383,9 +1381,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		case VAR_sumocfgPath:
 			return 1;
 		case VAR_fcdFilePath:
-			return 3;
-		case VAR_netFilePath:
-			return 3;
+			return 1;
 		case VAR_startSeconds:
 			return 1;
 		case VAR_endSeconds:
