@@ -263,6 +263,15 @@ public class PageLayout extends PageLayoutGen<Object> {
 	protected void _pagination(JsonObject pagination) {
 	}
 
+	protected void _defaultFieldListVars(List<String> l) {
+	}
+
+	protected void _defaultStatsVars(List<String> l) {
+	}
+
+	protected void _defaultPivotVars(List<String> l) {
+	}
+
 	protected void _varsQ(JsonObject vars) {
 	}
 
@@ -334,15 +343,6 @@ public class PageLayout extends PageLayoutGen<Object> {
 	}
 
 	protected void _DEFAULT_MAP_ZOOM(Wrap<BigDecimal> w) {
-	}
-
-	protected void _defaultFieldListVars(List<String> l) {
-	}
-
-	protected void _defaultStatsVars(List<String> l) {
-	}
-
-	protected void _defaultPivotVars(List<String> l) {
 	}
 
 	/**
