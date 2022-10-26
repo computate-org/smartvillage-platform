@@ -1757,6 +1757,204 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		return PageLayout.staticSearchStrPagination(siteRequest_, PageLayout.staticSearchPagination(siteRequest_, PageLayout.staticSetPagination(siteRequest_, o)));
 	}
 
+	//////////////////////////
+	// defaultFieldListVars //
+	//////////////////////////
+
+	/**	 The entity defaultFieldListVars
+	 *	 It is constructed before being initialized with the constructor by default. 
+	 */
+	@JsonProperty
+	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
+	@JsonInclude(Include.NON_NULL)
+	protected List<String> defaultFieldListVars = new ArrayList<String>();
+
+	/**	<br> The entity defaultFieldListVars
+	 *  It is constructed before being initialized with the constructor by default. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.PageLayout&fq=entiteVar_enUS_indexed_string:defaultFieldListVars">Find the entity defaultFieldListVars in Solr</a>
+	 * <br>
+	 * @param l is the entity already constructed. 
+	 **/
+	protected abstract void _defaultFieldListVars(List<String> l);
+
+	public List<String> getDefaultFieldListVars() {
+		return defaultFieldListVars;
+	}
+
+	public void setDefaultFieldListVars(List<String> defaultFieldListVars) {
+		this.defaultFieldListVars = defaultFieldListVars;
+	}
+	public static String staticSetDefaultFieldListVars(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	public PageLayout addDefaultFieldListVars(String...objects) {
+		for(String o : objects) {
+			addDefaultFieldListVars(o);
+		}
+		return (PageLayout)this;
+	}
+	public PageLayout addDefaultFieldListVars(String o) {
+		if(o != null)
+			this.defaultFieldListVars.add(o);
+		return (PageLayout)this;
+	}
+	@JsonIgnore
+	public void setDefaultFieldListVars(JsonArray objects) {
+		defaultFieldListVars.clear();
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
+			addDefaultFieldListVars(o);
+		}
+	}
+	protected PageLayout defaultFieldListVarsInit() {
+		_defaultFieldListVars(defaultFieldListVars);
+		return (PageLayout)this;
+	}
+
+	public static String staticSearchDefaultFieldListVars(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrDefaultFieldListVars(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqDefaultFieldListVars(SiteRequestEnUS siteRequest_, String o) {
+		return PageLayout.staticSearchStrDefaultFieldListVars(siteRequest_, PageLayout.staticSearchDefaultFieldListVars(siteRequest_, PageLayout.staticSetDefaultFieldListVars(siteRequest_, o)));
+	}
+
+	//////////////////////
+	// defaultStatsVars //
+	//////////////////////
+
+	/**	 The entity defaultStatsVars
+	 *	 It is constructed before being initialized with the constructor by default. 
+	 */
+	@JsonProperty
+	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
+	@JsonInclude(Include.NON_NULL)
+	protected List<String> defaultStatsVars = new ArrayList<String>();
+
+	/**	<br> The entity defaultStatsVars
+	 *  It is constructed before being initialized with the constructor by default. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.PageLayout&fq=entiteVar_enUS_indexed_string:defaultStatsVars">Find the entity defaultStatsVars in Solr</a>
+	 * <br>
+	 * @param l is the entity already constructed. 
+	 **/
+	protected abstract void _defaultStatsVars(List<String> l);
+
+	public List<String> getDefaultStatsVars() {
+		return defaultStatsVars;
+	}
+
+	public void setDefaultStatsVars(List<String> defaultStatsVars) {
+		this.defaultStatsVars = defaultStatsVars;
+	}
+	public static String staticSetDefaultStatsVars(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	public PageLayout addDefaultStatsVars(String...objects) {
+		for(String o : objects) {
+			addDefaultStatsVars(o);
+		}
+		return (PageLayout)this;
+	}
+	public PageLayout addDefaultStatsVars(String o) {
+		if(o != null)
+			this.defaultStatsVars.add(o);
+		return (PageLayout)this;
+	}
+	@JsonIgnore
+	public void setDefaultStatsVars(JsonArray objects) {
+		defaultStatsVars.clear();
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
+			addDefaultStatsVars(o);
+		}
+	}
+	protected PageLayout defaultStatsVarsInit() {
+		_defaultStatsVars(defaultStatsVars);
+		return (PageLayout)this;
+	}
+
+	public static String staticSearchDefaultStatsVars(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrDefaultStatsVars(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqDefaultStatsVars(SiteRequestEnUS siteRequest_, String o) {
+		return PageLayout.staticSearchStrDefaultStatsVars(siteRequest_, PageLayout.staticSearchDefaultStatsVars(siteRequest_, PageLayout.staticSetDefaultStatsVars(siteRequest_, o)));
+	}
+
+	//////////////////////
+	// defaultPivotVars //
+	//////////////////////
+
+	/**	 The entity defaultPivotVars
+	 *	 It is constructed before being initialized with the constructor by default. 
+	 */
+	@JsonProperty
+	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
+	@JsonInclude(Include.NON_NULL)
+	protected List<String> defaultPivotVars = new ArrayList<String>();
+
+	/**	<br> The entity defaultPivotVars
+	 *  It is constructed before being initialized with the constructor by default. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.PageLayout&fq=entiteVar_enUS_indexed_string:defaultPivotVars">Find the entity defaultPivotVars in Solr</a>
+	 * <br>
+	 * @param l is the entity already constructed. 
+	 **/
+	protected abstract void _defaultPivotVars(List<String> l);
+
+	public List<String> getDefaultPivotVars() {
+		return defaultPivotVars;
+	}
+
+	public void setDefaultPivotVars(List<String> defaultPivotVars) {
+		this.defaultPivotVars = defaultPivotVars;
+	}
+	public static String staticSetDefaultPivotVars(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	public PageLayout addDefaultPivotVars(String...objects) {
+		for(String o : objects) {
+			addDefaultPivotVars(o);
+		}
+		return (PageLayout)this;
+	}
+	public PageLayout addDefaultPivotVars(String o) {
+		if(o != null)
+			this.defaultPivotVars.add(o);
+		return (PageLayout)this;
+	}
+	@JsonIgnore
+	public void setDefaultPivotVars(JsonArray objects) {
+		defaultPivotVars.clear();
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
+			addDefaultPivotVars(o);
+		}
+	}
+	protected PageLayout defaultPivotVarsInit() {
+		_defaultPivotVars(defaultPivotVars);
+		return (PageLayout)this;
+	}
+
+	public static String staticSearchDefaultPivotVars(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrDefaultPivotVars(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqDefaultPivotVars(SiteRequestEnUS siteRequest_, String o) {
+		return PageLayout.staticSearchStrDefaultPivotVars(siteRequest_, PageLayout.staticSearchDefaultPivotVars(siteRequest_, PageLayout.staticSetDefaultPivotVars(siteRequest_, o)));
+	}
+
 	///////////
 	// varsQ //
 	///////////
@@ -2836,204 +3034,6 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		return PageLayout.staticSearchStrDEFAULT_MAP_ZOOM(siteRequest_, PageLayout.staticSearchDEFAULT_MAP_ZOOM(siteRequest_, PageLayout.staticSetDEFAULT_MAP_ZOOM(siteRequest_, o)));
 	}
 
-	//////////////////////////
-	// defaultFieldListVars //
-	//////////////////////////
-
-	/**	 The entity defaultFieldListVars
-	 *	 It is constructed before being initialized with the constructor by default. 
-	 */
-	@JsonProperty
-	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
-	@JsonInclude(Include.NON_NULL)
-	protected List<String> defaultFieldListVars = new ArrayList<String>();
-
-	/**	<br> The entity defaultFieldListVars
-	 *  It is constructed before being initialized with the constructor by default. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.PageLayout&fq=entiteVar_enUS_indexed_string:defaultFieldListVars">Find the entity defaultFieldListVars in Solr</a>
-	 * <br>
-	 * @param l is the entity already constructed. 
-	 **/
-	protected abstract void _defaultFieldListVars(List<String> l);
-
-	public List<String> getDefaultFieldListVars() {
-		return defaultFieldListVars;
-	}
-
-	public void setDefaultFieldListVars(List<String> defaultFieldListVars) {
-		this.defaultFieldListVars = defaultFieldListVars;
-	}
-	public static String staticSetDefaultFieldListVars(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-	public PageLayout addDefaultFieldListVars(String...objects) {
-		for(String o : objects) {
-			addDefaultFieldListVars(o);
-		}
-		return (PageLayout)this;
-	}
-	public PageLayout addDefaultFieldListVars(String o) {
-		if(o != null)
-			this.defaultFieldListVars.add(o);
-		return (PageLayout)this;
-	}
-	@JsonIgnore
-	public void setDefaultFieldListVars(JsonArray objects) {
-		defaultFieldListVars.clear();
-		for(int i = 0; i < objects.size(); i++) {
-			String o = objects.getString(i);
-			addDefaultFieldListVars(o);
-		}
-	}
-	protected PageLayout defaultFieldListVarsInit() {
-		_defaultFieldListVars(defaultFieldListVars);
-		return (PageLayout)this;
-	}
-
-	public static String staticSearchDefaultFieldListVars(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-
-	public static String staticSearchStrDefaultFieldListVars(SiteRequestEnUS siteRequest_, String o) {
-		return o == null ? null : o.toString();
-	}
-
-	public static String staticSearchFqDefaultFieldListVars(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrDefaultFieldListVars(siteRequest_, PageLayout.staticSearchDefaultFieldListVars(siteRequest_, PageLayout.staticSetDefaultFieldListVars(siteRequest_, o)));
-	}
-
-	//////////////////////
-	// defaultStatsVars //
-	//////////////////////
-
-	/**	 The entity defaultStatsVars
-	 *	 It is constructed before being initialized with the constructor by default. 
-	 */
-	@JsonProperty
-	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
-	@JsonInclude(Include.NON_NULL)
-	protected List<String> defaultStatsVars = new ArrayList<String>();
-
-	/**	<br> The entity defaultStatsVars
-	 *  It is constructed before being initialized with the constructor by default. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.PageLayout&fq=entiteVar_enUS_indexed_string:defaultStatsVars">Find the entity defaultStatsVars in Solr</a>
-	 * <br>
-	 * @param l is the entity already constructed. 
-	 **/
-	protected abstract void _defaultStatsVars(List<String> l);
-
-	public List<String> getDefaultStatsVars() {
-		return defaultStatsVars;
-	}
-
-	public void setDefaultStatsVars(List<String> defaultStatsVars) {
-		this.defaultStatsVars = defaultStatsVars;
-	}
-	public static String staticSetDefaultStatsVars(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-	public PageLayout addDefaultStatsVars(String...objects) {
-		for(String o : objects) {
-			addDefaultStatsVars(o);
-		}
-		return (PageLayout)this;
-	}
-	public PageLayout addDefaultStatsVars(String o) {
-		if(o != null)
-			this.defaultStatsVars.add(o);
-		return (PageLayout)this;
-	}
-	@JsonIgnore
-	public void setDefaultStatsVars(JsonArray objects) {
-		defaultStatsVars.clear();
-		for(int i = 0; i < objects.size(); i++) {
-			String o = objects.getString(i);
-			addDefaultStatsVars(o);
-		}
-	}
-	protected PageLayout defaultStatsVarsInit() {
-		_defaultStatsVars(defaultStatsVars);
-		return (PageLayout)this;
-	}
-
-	public static String staticSearchDefaultStatsVars(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-
-	public static String staticSearchStrDefaultStatsVars(SiteRequestEnUS siteRequest_, String o) {
-		return o == null ? null : o.toString();
-	}
-
-	public static String staticSearchFqDefaultStatsVars(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrDefaultStatsVars(siteRequest_, PageLayout.staticSearchDefaultStatsVars(siteRequest_, PageLayout.staticSetDefaultStatsVars(siteRequest_, o)));
-	}
-
-	//////////////////////
-	// defaultPivotVars //
-	//////////////////////
-
-	/**	 The entity defaultPivotVars
-	 *	 It is constructed before being initialized with the constructor by default. 
-	 */
-	@JsonProperty
-	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
-	@JsonInclude(Include.NON_NULL)
-	protected List<String> defaultPivotVars = new ArrayList<String>();
-
-	/**	<br> The entity defaultPivotVars
-	 *  It is constructed before being initialized with the constructor by default. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.PageLayout&fq=entiteVar_enUS_indexed_string:defaultPivotVars">Find the entity defaultPivotVars in Solr</a>
-	 * <br>
-	 * @param l is the entity already constructed. 
-	 **/
-	protected abstract void _defaultPivotVars(List<String> l);
-
-	public List<String> getDefaultPivotVars() {
-		return defaultPivotVars;
-	}
-
-	public void setDefaultPivotVars(List<String> defaultPivotVars) {
-		this.defaultPivotVars = defaultPivotVars;
-	}
-	public static String staticSetDefaultPivotVars(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-	public PageLayout addDefaultPivotVars(String...objects) {
-		for(String o : objects) {
-			addDefaultPivotVars(o);
-		}
-		return (PageLayout)this;
-	}
-	public PageLayout addDefaultPivotVars(String o) {
-		if(o != null)
-			this.defaultPivotVars.add(o);
-		return (PageLayout)this;
-	}
-	@JsonIgnore
-	public void setDefaultPivotVars(JsonArray objects) {
-		defaultPivotVars.clear();
-		for(int i = 0; i < objects.size(); i++) {
-			String o = objects.getString(i);
-			addDefaultPivotVars(o);
-		}
-	}
-	protected PageLayout defaultPivotVarsInit() {
-		_defaultPivotVars(defaultPivotVars);
-		return (PageLayout)this;
-	}
-
-	public static String staticSearchDefaultPivotVars(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-
-	public static String staticSearchStrDefaultPivotVars(SiteRequestEnUS siteRequest_, String o) {
-		return o == null ? null : o.toString();
-	}
-
-	public static String staticSearchFqDefaultPivotVars(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrDefaultPivotVars(siteRequest_, PageLayout.staticSearchDefaultPivotVars(siteRequest_, PageLayout.staticSetDefaultPivotVars(siteRequest_, o)));
-	}
-
 	//////////////
 	// queryStr //
 	//////////////
@@ -3606,6 +3606,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 				statsInit();
 				facetCountsInit();
 				paginationInit();
+				defaultFieldListVarsInit();
+				defaultStatsVarsInit();
+				defaultPivotVarsInit();
 				varsQInit();
 				varsFqInit();
 				varsRangeInit();
@@ -3626,9 +3629,6 @@ public abstract class PageLayoutGen<DEV> extends Object {
 				defaultPivotMinCountInit();
 				DEFAULT_MAP_LOCATIONInit();
 				DEFAULT_MAP_ZOOMInit();
-				defaultFieldListVarsInit();
-				defaultStatsVarsInit();
-				defaultPivotVarsInit();
 				queryStrInit();
 				promise2.complete();
 			} catch(Exception ex) {
@@ -3772,6 +3772,12 @@ public abstract class PageLayoutGen<DEV> extends Object {
 				return oPageLayout.facetCounts;
 			case "pagination":
 				return oPageLayout.pagination;
+			case "defaultFieldListVars":
+				return oPageLayout.defaultFieldListVars;
+			case "defaultStatsVars":
+				return oPageLayout.defaultStatsVars;
+			case "defaultPivotVars":
+				return oPageLayout.defaultPivotVars;
 			case "varsQ":
 				return oPageLayout.varsQ;
 			case "varsFq":
@@ -3812,12 +3818,6 @@ public abstract class PageLayoutGen<DEV> extends Object {
 				return oPageLayout.DEFAULT_MAP_LOCATION;
 			case "DEFAULT_MAP_ZOOM":
 				return oPageLayout.DEFAULT_MAP_ZOOM;
-			case "defaultFieldListVars":
-				return oPageLayout.defaultFieldListVars;
-			case "defaultStatsVars":
-				return oPageLayout.defaultStatsVars;
-			case "defaultPivotVars":
-				return oPageLayout.defaultPivotVars;
 			case "queryStr":
 				return oPageLayout.queryStr;
 			case "promiseAfter":
@@ -3931,6 +3931,12 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSetAuthRolesAdmin(siteRequest_, o);
 		case "pagination":
 			return PageLayout.staticSetPagination(siteRequest_, o);
+		case "defaultFieldListVars":
+			return PageLayout.staticSetDefaultFieldListVars(siteRequest_, o);
+		case "defaultStatsVars":
+			return PageLayout.staticSetDefaultStatsVars(siteRequest_, o);
+		case "defaultPivotVars":
+			return PageLayout.staticSetDefaultPivotVars(siteRequest_, o);
 		case "varsQ":
 			return PageLayout.staticSetVarsQ(siteRequest_, o);
 		case "varsFq":
@@ -3967,12 +3973,6 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSetDEFAULT_MAP_LOCATION(siteRequest_, o);
 		case "DEFAULT_MAP_ZOOM":
 			return PageLayout.staticSetDEFAULT_MAP_ZOOM(siteRequest_, o);
-		case "defaultFieldListVars":
-			return PageLayout.staticSetDefaultFieldListVars(siteRequest_, o);
-		case "defaultStatsVars":
-			return PageLayout.staticSetDefaultStatsVars(siteRequest_, o);
-		case "defaultPivotVars":
-			return PageLayout.staticSetDefaultPivotVars(siteRequest_, o);
 		case "queryStr":
 			return PageLayout.staticSetQueryStr(siteRequest_, o);
 		case "pageImageUri":
@@ -4059,6 +4059,12 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSearchAuthRolesAdmin(siteRequest_, (String)o);
 		case "pagination":
 			return PageLayout.staticSearchPagination(siteRequest_, (JsonObject)o);
+		case "defaultFieldListVars":
+			return PageLayout.staticSearchDefaultFieldListVars(siteRequest_, (String)o);
+		case "defaultStatsVars":
+			return PageLayout.staticSearchDefaultStatsVars(siteRequest_, (String)o);
+		case "defaultPivotVars":
+			return PageLayout.staticSearchDefaultPivotVars(siteRequest_, (String)o);
 		case "varsQ":
 			return PageLayout.staticSearchVarsQ(siteRequest_, (JsonObject)o);
 		case "varsFq":
@@ -4095,12 +4101,6 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSearchDEFAULT_MAP_LOCATION(siteRequest_, (JsonObject)o);
 		case "DEFAULT_MAP_ZOOM":
 			return PageLayout.staticSearchDEFAULT_MAP_ZOOM(siteRequest_, (BigDecimal)o);
-		case "defaultFieldListVars":
-			return PageLayout.staticSearchDefaultFieldListVars(siteRequest_, (String)o);
-		case "defaultStatsVars":
-			return PageLayout.staticSearchDefaultStatsVars(siteRequest_, (String)o);
-		case "defaultPivotVars":
-			return PageLayout.staticSearchDefaultPivotVars(siteRequest_, (String)o);
 		case "queryStr":
 			return PageLayout.staticSearchQueryStr(siteRequest_, (String)o);
 		case "pageImageUri":
@@ -4187,6 +4187,12 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSearchStrAuthRolesAdmin(siteRequest_, (String)o);
 		case "pagination":
 			return PageLayout.staticSearchStrPagination(siteRequest_, (JsonObject)o);
+		case "defaultFieldListVars":
+			return PageLayout.staticSearchStrDefaultFieldListVars(siteRequest_, (String)o);
+		case "defaultStatsVars":
+			return PageLayout.staticSearchStrDefaultStatsVars(siteRequest_, (String)o);
+		case "defaultPivotVars":
+			return PageLayout.staticSearchStrDefaultPivotVars(siteRequest_, (String)o);
 		case "varsQ":
 			return PageLayout.staticSearchStrVarsQ(siteRequest_, (JsonObject)o);
 		case "varsFq":
@@ -4223,12 +4229,6 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSearchStrDEFAULT_MAP_LOCATION(siteRequest_, (JsonObject)o);
 		case "DEFAULT_MAP_ZOOM":
 			return PageLayout.staticSearchStrDEFAULT_MAP_ZOOM(siteRequest_, (Double)o);
-		case "defaultFieldListVars":
-			return PageLayout.staticSearchStrDefaultFieldListVars(siteRequest_, (String)o);
-		case "defaultStatsVars":
-			return PageLayout.staticSearchStrDefaultStatsVars(siteRequest_, (String)o);
-		case "defaultPivotVars":
-			return PageLayout.staticSearchStrDefaultPivotVars(siteRequest_, (String)o);
 		case "queryStr":
 			return PageLayout.staticSearchStrQueryStr(siteRequest_, (String)o);
 		case "pageImageUri":
@@ -4315,6 +4315,12 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSearchFqAuthRolesAdmin(siteRequest_, o);
 		case "pagination":
 			return PageLayout.staticSearchFqPagination(siteRequest_, o);
+		case "defaultFieldListVars":
+			return PageLayout.staticSearchFqDefaultFieldListVars(siteRequest_, o);
+		case "defaultStatsVars":
+			return PageLayout.staticSearchFqDefaultStatsVars(siteRequest_, o);
+		case "defaultPivotVars":
+			return PageLayout.staticSearchFqDefaultPivotVars(siteRequest_, o);
 		case "varsQ":
 			return PageLayout.staticSearchFqVarsQ(siteRequest_, o);
 		case "varsFq":
@@ -4351,12 +4357,6 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSearchFqDEFAULT_MAP_LOCATION(siteRequest_, o);
 		case "DEFAULT_MAP_ZOOM":
 			return PageLayout.staticSearchFqDEFAULT_MAP_ZOOM(siteRequest_, o);
-		case "defaultFieldListVars":
-			return PageLayout.staticSearchFqDefaultFieldListVars(siteRequest_, o);
-		case "defaultStatsVars":
-			return PageLayout.staticSearchFqDefaultStatsVars(siteRequest_, o);
-		case "defaultPivotVars":
-			return PageLayout.staticSearchFqDefaultPivotVars(siteRequest_, o);
 		case "queryStr":
 			return PageLayout.staticSearchFqQueryStr(siteRequest_, o);
 		case "pageImageUri":
@@ -4423,6 +4423,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	public static final String VAR_stats = "stats";
 	public static final String VAR_facetCounts = "facetCounts";
 	public static final String VAR_pagination = "pagination";
+	public static final String VAR_defaultFieldListVars = "defaultFieldListVars";
+	public static final String VAR_defaultStatsVars = "defaultStatsVars";
+	public static final String VAR_defaultPivotVars = "defaultPivotVars";
 	public static final String VAR_varsQ = "varsQ";
 	public static final String VAR_varsFq = "varsFq";
 	public static final String VAR_varsRange = "varsRange";
@@ -4443,9 +4446,6 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	public static final String VAR_defaultPivotMinCount = "defaultPivotMinCount";
 	public static final String VAR_DEFAULT_MAP_LOCATION = "DEFAULT_MAP_LOCATION";
 	public static final String VAR_DEFAULT_MAP_ZOOM = "DEFAULT_MAP_ZOOM";
-	public static final String VAR_defaultFieldListVars = "defaultFieldListVars";
-	public static final String VAR_defaultStatsVars = "defaultStatsVars";
-	public static final String VAR_defaultPivotVars = "defaultPivotVars";
 	public static final String VAR_queryStr = "queryStr";
 	public static final String VAR_promiseAfter = "promiseAfter";
 	public static final String VAR_pageImageUri = "pageImageUri";
@@ -4490,6 +4490,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	public static final String DISPLAY_NAME_stats = "";
 	public static final String DISPLAY_NAME_facetCounts = "";
 	public static final String DISPLAY_NAME_pagination = "";
+	public static final String DISPLAY_NAME_defaultFieldListVars = "";
+	public static final String DISPLAY_NAME_defaultStatsVars = "";
+	public static final String DISPLAY_NAME_defaultPivotVars = "";
 	public static final String DISPLAY_NAME_varsQ = "";
 	public static final String DISPLAY_NAME_varsFq = "";
 	public static final String DISPLAY_NAME_varsRange = "";
@@ -4510,9 +4513,6 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	public static final String DISPLAY_NAME_defaultPivotMinCount = "";
 	public static final String DISPLAY_NAME_DEFAULT_MAP_LOCATION = "";
 	public static final String DISPLAY_NAME_DEFAULT_MAP_ZOOM = "";
-	public static final String DISPLAY_NAME_defaultFieldListVars = "";
-	public static final String DISPLAY_NAME_defaultStatsVars = "";
-	public static final String DISPLAY_NAME_defaultPivotVars = "";
 	public static final String DISPLAY_NAME_queryStr = "";
 	public static final String DISPLAY_NAME_promiseAfter = "";
 	public static final String DISPLAY_NAME_pageImageUri = "";
@@ -4595,6 +4595,12 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return DISPLAY_NAME_facetCounts;
 		case VAR_pagination:
 			return DISPLAY_NAME_pagination;
+		case VAR_defaultFieldListVars:
+			return DISPLAY_NAME_defaultFieldListVars;
+		case VAR_defaultStatsVars:
+			return DISPLAY_NAME_defaultStatsVars;
+		case VAR_defaultPivotVars:
+			return DISPLAY_NAME_defaultPivotVars;
 		case VAR_varsQ:
 			return DISPLAY_NAME_varsQ;
 		case VAR_varsFq:
@@ -4635,12 +4641,6 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return DISPLAY_NAME_DEFAULT_MAP_LOCATION;
 		case VAR_DEFAULT_MAP_ZOOM:
 			return DISPLAY_NAME_DEFAULT_MAP_ZOOM;
-		case VAR_defaultFieldListVars:
-			return DISPLAY_NAME_defaultFieldListVars;
-		case VAR_defaultStatsVars:
-			return DISPLAY_NAME_defaultStatsVars;
-		case VAR_defaultPivotVars:
-			return DISPLAY_NAME_defaultPivotVars;
 		case VAR_queryStr:
 			return DISPLAY_NAME_queryStr;
 		case VAR_promiseAfter:

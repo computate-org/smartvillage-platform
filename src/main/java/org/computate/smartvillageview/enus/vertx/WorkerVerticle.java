@@ -375,7 +375,7 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 		if(config().getBoolean(ConfigKeys.ENABLE_IMPORT_DATA)) {
 			importTimer(IotNode.CLASS_SIMPLE_NAME).onSuccess(a -> {
 				importTimer(SitePage.CLASS_SIMPLE_NAME).onSuccess(b -> {
-					importTimer(TimeStep.CLASS_SIMPLE_NAME).onSuccess(c -> {
+					importTimer(TrafficSimulation.CLASS_SIMPLE_NAME).onSuccess(c -> {
 						promise.complete();
 					});
 				});

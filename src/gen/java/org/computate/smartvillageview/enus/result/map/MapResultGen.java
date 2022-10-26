@@ -1341,7 +1341,6 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 		vars.add(VAR_simulationName);
 		vars.add(VAR_sumocfgPath);
 		vars.add(VAR_simulationKey);
-		vars.add(VAR_timeStepId);
 		vars.add(VAR_time);
 		vars.add(VAR_location);
 		vars.add(VAR_color);
@@ -1457,8 +1456,6 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 			return 3;
 		case VAR_simulationKey:
 			return 3;
-		case VAR_timeStepId:
-			return 3;
 		case VAR_time:
 			return 4;
 		case VAR_location:
@@ -1480,8 +1477,6 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 			return 2;
 		case VAR_simulationKey:
 			return 1;
-		case VAR_timeStepId:
-			return 2;
 		case VAR_time:
 			return 1;
 		case VAR_location:
