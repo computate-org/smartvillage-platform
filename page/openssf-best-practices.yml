@@ -1,7 +1,7 @@
 ---
 pageId: "open-source-software-foundation-best-practices"
 uri: "/en-us/{{ pageId }}"
-h1: "Does the {{ page.siteName }} project follow the OpenSSF Best Practices? "
+h1: "Does the {{ page.siteName }} project follow the Open Source Software Foundation Best Practices? "
 h2: "Review the OpenSSF Best Practices checklist for {{ page.siteName }}. "
 created: "2022-10-24"
 courseNum: 1
@@ -423,7 +423,15 @@ htmBody:
                     in:
                       - e: div
                         text: |
-                          The issues page on GitHub for {{ page.siteDisplayName }} is the best place to start a discussion about proposed changes and issues: 
+                          There is a public mailing list for {{ page.siteDisplayName }} where you can start a discussion about proposed changes and issues: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "{{ page.mailingListUrl }}"
+                            text: "{{ page.mailingListUrl }}"
+                      - e: div
+                        text: |
+                          The issues page on GitHub for {{ page.siteDisplayName }} is another place to start a discussion about proposed changes and issues: 
                       - e: div
                         in:
                           - e: a
@@ -681,6 +689,391 @@ htmBody:
                           - e: a
                             href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/releases"
                             text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/releases"
+      - e: div
+        a:
+          class: w3-padding 
+        in:
+          - e: h3
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-file-chart-column padding-right-quarter-em
+              - e: span
+                text: Reporting
+          - e: h4
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-bug-slash padding-right-quarter-em
+              - e: span
+                text: Bug-reporting process
+          - e: ul
+            in:
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      The project MUST provide a process for users to submit bug reports (e.g., using an issue tracker or a mailing list). 
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          There is a public mailing list for {{ page.siteDisplayName }} where you can submit bug reports: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "{{ page.mailingListUrl }}"
+                            text: "{{ page.mailingListUrl }}"
+                      - e: div
+                        text: |
+                          The issues page on GitHub for {{ page.siteDisplayName }} is another place to submit bug reports: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/issues"
+                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/issues"
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      The project SHOULD use an issue tracker for tracking individual issues. 
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          The issue tracker is on GitHub for {{ page.siteDisplayName }} here: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/issues"
+                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/issues"
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      The project MUST acknowledge a majority of bug reports submitted in the last 2-12 months (inclusive); the response need not include a fix. 
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          You can review the open issues on GitHub for {{ page.siteDisplayName }} here: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/issues"
+                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/issues"
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      The project SHOULD respond to a majority (>50%) of enhancement requests in the last 2-12 months (inclusive). 
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          You can review the enhancement requests on GitHub for {{ page.siteDisplayName }} here: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/issues"
+                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/issues"
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      The project MUST have a publicly available archive for reports and responses for later searching. 
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          There is a public mailing list for {{ page.siteDisplayName }} has a complete archive of messages: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "{{ page.mailingListUrl }}"
+                            text: "{{ page.mailingListUrl }}"
+                      - e: div
+                        text: |
+                          The issues page on GitHub for {{ page.siteDisplayName }} has a complete archive of issues: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/issues"
+                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/issues"
+      - e: div
+        a:
+          class: w3-padding 
+        in:
+          - e: h3
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-file-chart-column padding-right-quarter-em
+              - e: span
+                text: Reporting
+          - e: h4
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-hammer-crash padding-right-quarter-em
+              - e: span
+                text: Vulnerability report process
+          - e: ul
+            in:
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      The project MUST publish the process for reporting vulnerabilities on the project site. 
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          There is a security policy in place for {{ page.siteDisplayName }} where you can email a vulnerability privately to the owner of the project: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/security/policy"
+                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/security/policy"
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      If private vulnerability reports are supported, the project MUST include how to send the information in a way that is kept private. 
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          There is a security policy in place for {{ page.siteDisplayName }} where you can email a vulnerability privately to the owner of the project: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/security/policy"
+                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/security/policy"
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      The project's initial response time for any vulnerability report received in the last 6 months MUST be less than or equal to 14 days. 
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          There is a security policy in place for {{ page.siteDisplayName }} where you can email a vulnerability privately to the owner of the project who will review the vulnerability: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/security/policy"
+                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/security/policy"
+      - e: div
+        a:
+          class: w3-padding 
+        in:
+          - e: h3
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-file-chart-column padding-right-quarter-em
+              - e: span
+                text: Quality
+          - e: h4
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-hammer-crash padding-right-quarter-em
+              - e: span
+                text: Working build system
+          - e: ul
+            in:
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      If the software produced by the project requires building for use, the project MUST provide a working build system that can automatically rebuild the software from source code. 
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          There is a container image build system using the Dockerfile in the {{ page.siteDisplayName }} on quay.io. See the automatically built tags and latest tag based on the latest from the main branch: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://quay.io/repository/{{ page.quayioOrg }}/{{ page.siteName }}?tab=tags"
+                            text: "https://quay.io/repository/{{ page.quayioOrg }}/{{ page.siteName }}?tab=tags"
+                      - e: div
+                        text: |
+                          There is also a Maven build action for {{ page.siteDisplayName }} on GitHub: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/actions"
+                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/actions"
+                      - e: div
+                        text: |
+                          Each release of the project is also built for Maven Central. 
+                          For all the details about the dependencies, vulnerabilities and more see the Maven Repository on Maven Central for {{ page.siteDisplayName }} here: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://mvnrepository.com/artifact/{{ page.sitePomGroupId }}/{{ page.siteName }}/latest"
+                            text: "https://mvnrepository.com/artifact/{{ page.sitePomGroupId }}/{{ page.siteName }}/latest"
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      It is SUGGESTED that common tools be used for building the software. 
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          Quay is a container image registry that enables you to build, organize, distribute, and deploy containers. 
+                          Quay gives you security over your repositories with image vulnerability scanning and robust access controls. 
+                          Project Quay provides a scalable open source platform to host container images across any size organization. 
+                          See: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://www.projectquay.io/"
+                            text: "https://www.projectquay.io/"
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      The project SHOULD be buildable using only FLOSS tools. 
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          Quay is a container image registry that enables you to build, organize, distribute, and deploy containers. 
+                          Quay gives you security over your repositories with image vulnerability scanning and robust access controls. 
+                          Project Quay provides a scalable open source platform to host container images across any size organization. 
+                          See: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://www.projectquay.io/"
+                            text: "https://www.projectquay.io/"
+      - e: div
+        a:
+          class: w3-padding 
+        in:
+          - e: h3
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-file-chart-column padding-right-quarter-em
+              - e: span
+                text: Quality
+          - e: h4
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-microscope padding-right-quarter-em
+              - e: span
+                text: Automated test suite
+          - e: ul
+            in:
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      The project MUST use at least one automated test suite that is publicly released as FLOSS (this test suite may be maintained as a separate FLOSS project). The project MUST clearly show or document how to run the test suite(s) (e.g., via a continuous integration (CI) script or via documentation in files such as BUILD.md, README.md, or CONTRIBUTING.md). 
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          A developer can run the automated test suite locally for the {{ page.siteDisplayName }} with Maven. Building the project with tests is described in the README here: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/actions"
+                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/actions"
+                      - e: div
+                        text: |
+                          There is a container image build system using the Dockerfile in the {{ page.siteDisplayName }} on quay.io. See the automatically built tags and latest tag based on the latest from the main branch: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://quay.io/repository/{{ page.quayioOrg }}/{{ page.siteName }}?tab=tags"
+                            text: "https://quay.io/repository/{{ page.quayioOrg }}/{{ page.siteName }}?tab=tags"
+                      - e: div
+                        text: |
+                          There is also a Maven build action for {{ page.siteDisplayName }} on GitHub: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/actions"
+                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/actions"
+                      - e: div
+                        text: |
+                          Each release of the project is also built for Maven Central. 
+                          For all the details about the dependencies, vulnerabilities and more see the Maven Repository on Maven Central for {{ page.siteDisplayName }} here: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://mvnrepository.com/artifact/{{ page.sitePomGroupId }}/{{ page.siteName }}/latest"
+                            text: "https://mvnrepository.com/artifact/{{ page.sitePomGroupId }}/{{ page.siteName }}/latest"
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      It is SUGGESTED that the project implement continuous integration (where new or changed code is frequently integrated into a central code repository and automated tests are run on the result). 
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          There is a container image build system using the Dockerfile in the {{ page.siteDisplayName }} on quay.io. See the automatically built tags and latest tag based on the latest from the main branch: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://quay.io/repository/{{ page.quayioOrg }}/{{ page.siteName }}?tab=tags"
+                            text: "https://quay.io/repository/{{ page.quayioOrg }}/{{ page.siteName }}?tab=tags"
+                      - e: div
+                        text: |
+                          There is also a Maven build action for {{ page.siteDisplayName }} on GitHub: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/actions"
+                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/actions"
+                      - e: div
+                        text: |
+                          Each release of the project is also built for Maven Central. 
+                          For all the details about the dependencies, vulnerabilities and more see the Maven Repository on Maven Central for {{ page.siteDisplayName }} here: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://mvnrepository.com/artifact/{{ page.sitePomGroupId }}/{{ page.siteName }}/latest"
+                            text: "https://mvnrepository.com/artifact/{{ page.sitePomGroupId }}/{{ page.siteName }}/latest"
   - e: div
     label:
       - infographic
