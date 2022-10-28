@@ -9195,9 +9195,6 @@ paths:
                 $ref: '#/components/schemas/SearchPageMapResultResponse'
 components:
   securitySchemes:
-    basicAuth:
-      type: http
-      scheme: basic
     openIdConnect:
       type: openIdConnect
       openIdConnectUrl: https://sso.computate.org/auth/realms/RH-IMPACT/.well-known/openid-configuration

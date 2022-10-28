@@ -49,7 +49,7 @@ AUTH_SSL: true
 AUTH_SSL_REQUIRED: all
 AUTH_REALM: "RH-IMPACT"
 AUTH_RESOURCE: "rh-impact"
-AUTH_SECRET: "0518f65a-f86d-42e8-ad65-00f46920443d"
+AUTH_SECRET: 
 AUTH_URL: "https://sso.computate.org/auth"
 AUTH_TOKEN_URI: "/auth/realms/RH-IMPACT/protocol/openid-connect/token"
 

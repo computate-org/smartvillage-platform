@@ -915,7 +915,7 @@ htmBody:
                     in:
                       - e: div
                         text: |
-                          There is a container image build system using the Dockerfile in the {{ page.siteDisplayName }} on quay.io. See the automatically built tags and latest tag based on the latest from the main branch: 
+                          There is a container image build system using the Dockerfile in {{ page.siteDisplayName }} on quay.io. See the automatically built tags and latest tag based on the latest from the main branch: 
                       - e: div
                         in:
                           - e: a
@@ -1010,15 +1010,15 @@ htmBody:
                     in:
                       - e: div
                         text: |
-                          A developer can run the automated test suite locally for the {{ page.siteDisplayName }} with Maven. Building the project with tests is described in the README here: 
+                          A developer can run the automated test suite locally for {{ page.siteDisplayName }} with Maven. Building the project with tests is described in the README here: 
                       - e: div
                         in:
                           - e: a
-                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/actions"
-                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/actions"
+                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}#running-the-project-build-and-test-suite"
+                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}#running-the-project-build-and-test-suite"
                       - e: div
                         text: |
-                          There is a container image build system using the Dockerfile in the {{ page.siteDisplayName }} on quay.io. See the automatically built tags and latest tag based on the latest from the main branch: 
+                          There is a container image build system using the Dockerfile in {{ page.siteDisplayName }} on quay.io. See the automatically built tags and latest tag based on the latest from the main branch: 
                       - e: div
                         in:
                           - e: a
@@ -1051,7 +1051,7 @@ htmBody:
                     in:
                       - e: div
                         text: |
-                          There is a container image build system using the Dockerfile in the {{ page.siteDisplayName }} on quay.io. See the automatically built tags and latest tag based on the latest from the main branch: 
+                          There is a container image build system using the Dockerfile in {{ page.siteDisplayName }} on quay.io. See the automatically built tags and latest tag based on the latest from the main branch: 
                       - e: div
                         in:
                           - e: a
@@ -1074,6 +1074,645 @@ htmBody:
                           - e: a
                             href: "https://mvnrepository.com/artifact/{{ page.sitePomGroupId }}/{{ page.siteName }}/latest"
                             text: "https://mvnrepository.com/artifact/{{ page.sitePomGroupId }}/{{ page.siteName }}/latest"
+      - e: div
+        a:
+          class: w3-padding 
+        in:
+          - e: h3
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-file-chart-column padding-right-quarter-em
+              - e: span
+                text: Quality
+          - e: h4
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-cart-plus padding-right-quarter-em
+              - e: span
+                text: New functionality testing
+          - e: ul
+            in:
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      The project MUST have a general policy (formal or not) that as major new functionality is added to the software produced by the project, tests of that functionality should be added to an automated test suite. 
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          This is still a work-in-progress for {{ page.siteDisplayName }}. 
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      The project MUST have evidence that the test_policy for adding tests has been adhered to in the most recent major changes to the software produced by the project. 
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          This is still a work-in-progress for {{ page.siteDisplayName }}. 
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      It is SUGGESTED that this policy on adding tests (see test_policy) be documented in the instructions for change proposals. 
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          This is still a work-in-progress for {{ page.siteDisplayName }}. 
+      - e: div
+        a:
+          class: w3-padding 
+        in:
+          - e: h3
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-file-chart-column padding-right-quarter-em
+              - e: span
+                text: Quality
+          - e: h4
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-triangle-exclamation padding-right-quarter-em
+              - e: span
+                text: Warning flags
+          - e: ul
+            in:
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      The project MUST enable one or more compiler warning flags, a "safe" language mode, or use a separate "linter" tool to look for code quality errors or common simple mistakes, if there is at least one FLOSS tool that can implement this criterion in the selected language. 
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          This is still a work-in-progress for {{ page.siteDisplayName }}. 
+          - e: ul
+            in:
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      The project MUST address warnings. 
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          This is still a work-in-progress for {{ page.siteDisplayName }}. 
+          - e: ul
+            in:
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      It is SUGGESTED that projects be maximally strict with warnings in the software produced by the project, where practical. 
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          This is still a work-in-progress for {{ page.siteDisplayName }}. 
+      - e: div
+        a:
+          class: w3-padding 
+        in:
+          - e: h3
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-shield-check padding-right-quarter-em
+              - e: span
+                text: Security
+          - e: h4
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-user-shield padding-right-quarter-em
+              - e: span
+                text: Secure development knowledge
+          - e: ul
+            in:
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      The project MUST have at least one primary developer who knows how to design secure software. (See ‘details’ for the exact requirements.) 
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          See the principal developers for {{ page.siteDisplayName }} like `computate` a Principal Software Consultant from Red Hat with a background in secure software here: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/graphs/contributors"
+                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/graphs/contributors"
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      At least one of the project's primary developers MUST know of common kinds of errors that lead to vulnerabilities in this kind of software, as well as at least one method to counter or mitigate each of them. 
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          See the principal developers for {{ page.siteDisplayName }} like `computate` a Principal Software Consultant from Red Hat with a background in secure software and vulnerabilities here: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/graphs/contributors"
+                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/graphs/contributors"
+      - e: div
+        a:
+          class: w3-padding 
+        in:
+          - e: h3
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-shield-check padding-right-quarter-em
+              - e: span
+                text: Security
+          - e: h4
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-user-shield padding-right-quarter-em
+              - e: span
+                text: Use basic good cryptographic practices
+          - e: ul
+            in:
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      The software produced by the project MUST use, by default, only cryptographic protocols and algorithms that are publicly published and reviewed by experts (if cryptographic protocols and algorithms are used). 
+                  - e: div
+                    in:
+                      - e: p
+                        in:
+                          - e: div
+                            text: |
+                              The project website for {{ page.siteDisplayName }} supports HTTPS using TLS with valid certificates as you can see here: 
+                          - e: div
+                            in:
+                              - e: a
+                                href: "{{ page.sitePublicUrl }}"
+                                text: "{{ page.sitePublicUrl }}"
+                      - e: p
+                        in:
+                          - e: div
+                            text: |
+                              The OpenAPI spec for {{ page.siteDisplayName }} is using the strong standard openIdConnect scheme of the securitySchemes provided by the OpenAPI Spec for authentication, authorization, and role-based access control. See here: 
+                          - e: div
+                            in:
+                              - e: a
+                                href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/blob/main/src/main/resources/webroot/openapi3-enUS.yml"
+                                text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/blob/main/src/main/resources/webroot/openapi3-enUS.yml"
+                      - e: p
+                        in:
+                          - e: div
+                            text: |
+                              The authentication provider for {{ page.siteDisplayName }} is Red Hat Single Sign On. Red Hat Single Sign-On (RH-SSO) provides Web single sign-on and identity federation based on SAML 2.0, OpenID Connect and OAuth 2.0 specifications. See here: 
+                          - e: div
+                            in:
+                              - e: a
+                                href: "{{ page.sitePublicUrl }}/user"
+                                text: "{{ page.sitePublicUrl }}/user"
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      If the software produced by the project is an application or library, and its primary purpose is not to implement cryptography, then it SHOULD only call on software specifically designed to implement cryptographic functions; it SHOULD NOT re-implement its own. 
+                  - e: div
+                    in:
+                      - e: p
+                        in:
+                          - e: div
+                            text: |
+                              This project is not implementing it's own cryptography. 
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      All functionality in the software produced by the project that depends on cryptography MUST be implementable using FLOSS. 
+                  - e: div
+                    in:
+                      - e: p
+                        in:
+                          - e: div
+                            text: |
+                              This project does not depend on cryptography of data. 
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      The security mechanisms within the software produced by the project MUST use default keylengths that at least meet the NIST minimum requirements through the year 2030 (as stated in 2012). It MUST be possible to configure the software so that smaller keylengths are completely disabled. 
+                  - e: div
+                    in:
+                      - e: p
+                        in:
+                          - e: div
+                            text: |
+                              This project does not depend on cryptography of data. 
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      The default security mechanisms within the software produced by the project MUST NOT depend on broken cryptographic algorithms (e.g., MD4, MD5, single DES, RC4, Dual_EC_DRBG), or use cipher modes that are inappropriate to the context, unless they are necessary to implement an interoperable protocol (where the protocol implemented is the most recent version of that standard broadly supported by the network ecosystem, that ecosystem requires the use of such an algorithm or mode, and that ecosystem does not offer any more secure alternative). The documentation MUST describe any relevant security risks and any known mitigations if these broken algorithms or modes are necessary for an interoperable protocol. 
+                  - e: div
+                    in:
+                      - e: p
+                        in:
+                          - e: div
+                            text: |
+                              This project does not depend on cryptography of data. 
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      The default security mechanisms within the software produced by the project SHOULD NOT depend on cryptographic algorithms or modes with known serious weaknesses (e.g., the SHA-1 cryptographic hash algorithm or the CBC mode in SSH). 
+                  - e: div
+                    in:
+                      - e: p
+                        in:
+                          - e: div
+                            text: |
+                              This project does not depend on cryptography of data. 
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      The security mechanisms within the software produced by the project SHOULD implement perfect forward secrecy for key agreement protocols so a session key derived from a set of long-term keys cannot be compromised if one of the long-term keys is compromised in the future. 
+                  - e: div
+                    in:
+                      - e: p
+                        in:
+                          - e: div
+                            text: |
+                              This project does not depend on cryptography of data. 
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      If the software produced by the project causes the storing of passwords for authentication of external users, the passwords MUST be stored as iterated hashes with a per-user salt by using a key stretching (iterated) algorithm (e.g., Argon2id, Bcrypt, Scrypt, or PBKDF2). See also OWASP Password Storage Cheat Sheet). 
+                  - e: div
+                    in:
+                      - e: p
+                        in:
+                          - e: div
+                            text: |
+                              The trusted authentication provider for {{ page.siteDisplayName }} is Red Hat Single Sign On. Red Hat Single Sign-On (RH-SSO) provides Web single sign-on and identity federation based on SAML 2.0, OpenID Connect and OAuth 2.0 specifications. See here: 
+                          - e: div
+                            in:
+                              - e: a
+                                href: "{{ page.sitePublicUrl }}/user"
+                                text: "{{ page.sitePublicUrl }}/user"
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      The security mechanisms within the software produced by the project MUST generate all cryptographic keys and nonces using a cryptographically secure random number generator, and MUST NOT do so using generators that are cryptographically insecure. 
+                  - e: div
+                    in:
+                      - e: p
+                        in:
+                          - e: div
+                            text: |
+                              This project does not depend on cryptography of data. 
+      - e: div
+        a:
+          class: w3-padding 
+        in:
+          - e: h3
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-shield-check padding-right-quarter-em
+              - e: span
+                text: Security
+          - e: h4
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-user-secret padding-right-quarter-em
+              - e: span
+                text: Secured delivery against man-in-the-middle (MITM) attacks
+          - e: ul
+            in:
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      The project MUST use a delivery mechanism that counters MITM attacks. Using https or ssh+scp is acceptable. 
+                  - e: div
+                    in:
+                      - e: p
+                        in:
+                          - e: div
+                            text: |
+                              The project website for {{ page.siteDisplayName }} supports HTTPS using TLS with valid certificates as you can see here: 
+                          - e: div
+                            in:
+                              - e: a
+                                href: "{{ page.sitePublicUrl }}"
+                                text: "{{ page.sitePublicUrl }}"
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      A cryptographic hash (e.g., a sha1sum) MUST NOT be retrieved over http and used without checking for a cryptographic signature. 
+                  - e: div
+                    in:
+                      - e: p
+                        in:
+                          - e: div
+                            text: |
+                              This project does not depend on retrieving cryptographic hashes. 
+      - e: div
+        a:
+          class: w3-padding 
+        in:
+          - e: h3
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-shield-check padding-right-quarter-em
+              - e: span
+                text: Security
+          - e: h4
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-bug-slash padding-right-quarter-em
+              - e: span
+                text: Publicly known vulnerabilities fixed
+          - e: ul
+            in:
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      There MUST be no unpatched vulnerabilities of medium or higher severity that have been publicly known for more than 60 days. 
+                  - e: div
+                    in:
+                      - e: p
+                        in:
+                          - e: div
+                            text: |
+                              This is still a work-in-progress for {{ page.siteDisplayName }}. 
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      Projects SHOULD fix all critical vulnerabilities rapidly after they are reported. 
+                  - e: div
+                    in:
+                      - e: p
+                        in:
+                          - e: div
+                            text: |
+                              This is still a work-in-progress for {{ page.siteDisplayName }}. 
+      - e: div
+        a:
+          class: w3-padding 
+        in:
+          - e: h3
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-shield-check padding-right-quarter-em
+              - e: span
+                text: Security
+          - e: h4
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-camera-security padding-right-quarter-em
+              - e: span
+                text: Other security issues
+          - e: ul
+            in:
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      The public repositories MUST NOT leak a valid private credential (e.g., a working password or private key) that is intended to limit public access. 
+                  - e: div
+                    in:
+                      - e: p
+                        in:
+                          - e: div
+                            text: |
+                              All credentials for {{ page.siteDisplayName }} are stored as environment variables, configuration files, or secrets that are not included in this project. 
+      - e: div
+        a:
+          class: w3-padding 
+        in:
+          - e: h3
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-magnifying-glass-chart padding-right-quarter-em
+              - e: span
+                text: Analysis
+          - e: h4
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-display-code padding-right-quarter-em
+              - e: span
+                text: Static code analysis
+          - e: ul
+            in:
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      At least one static code analysis tool (beyond compiler warnings and "safe" language modes) MUST be applied to any proposed major production release of the software before its release, if there is at least one FLOSS tool that implements this criterion in the selected language. 
+                  - e: div
+                    in:
+                      - e: p
+                        in:
+                          - e: div
+                            text: |
+                              This is still a work-in-progress for {{ page.siteDisplayName }}. 
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      It is SUGGESTED that at least one of the static analysis tools used for the static_analysis criterion include rules or approaches to look for common vulnerabilities in the analyzed language or environment. 
+                  - e: div
+                    in:
+                      - e: p
+                        in:
+                          - e: div
+                            text: |
+                              This is still a work-in-progress for {{ page.siteDisplayName }}. 
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      All medium and higher severity exploitable vulnerabilities discovered with static code analysis MUST be fixed in a timely way after they are confirmed. 
+                  - e: div
+                    in:
+                      - e: p
+                        in:
+                          - e: div
+                            text: |
+                              This is still a work-in-progress for {{ page.siteDisplayName }}. 
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      It is SUGGESTED that static source code analysis occur on every commit or at least daily. 
+                  - e: div
+                    in:
+                      - e: p
+                        in:
+                          - e: div
+                            text: |
+                              This is still a work-in-progress for {{ page.siteDisplayName }}. 
+      - e: div
+        a:
+          class: w3-padding 
+        in:
+          - e: h3
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-magnifying-glass-chart padding-right-quarter-em
+              - e: span
+                text: Analysis
+          - e: h4
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-code-compare padding-right-quarter-em
+              - e: span
+                text: Dynamic code analysis
+          - e: ul
+            in:
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      It is SUGGESTED that at least one dynamic analysis tool be applied to any proposed major production release of the software before its release. 
+                  - e: div
+                    in:
+                      - e: p
+                        in:
+                          - e: div
+                            text: |
+                              This is still a work-in-progress for {{ page.siteDisplayName }}. 
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      It is SUGGESTED that if the software produced by the project includes software written using a memory-unsafe language (e.g., C or C++), then at least one dynamic tool (e.g., a fuzzer or web application scanner) be routinely used in combination with a mechanism to detect memory safety problems such as buffer overwrites. If the project does not produce software written in a memory-unsafe language, choose "not applicable" (N/A). 
+                  - e: div
+                    in:
+                      - e: p
+                        in:
+                          - e: div
+                            text: |
+                              This is still a work-in-progress for {{ page.siteDisplayName }}. 
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      It is SUGGESTED that the project use a configuration for at least some dynamic analysis (such as testing or fuzzing) which enables many assertions. In many cases these assertions should not be enabled in production builds. 
+                  - e: div
+                    in:
+                      - e: p
+                        in:
+                          - e: div
+                            text: |
+                              This is still a work-in-progress for {{ page.siteDisplayName }}. 
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      All medium and higher severity exploitable vulnerabilities discovered with dynamic code analysis MUST be fixed in a timely way after they are confirmed. 
+                  - e: div
+                    in:
+                      - e: p
+                        in:
+                          - e: div
+                            text: |
+                              This is still a work-in-progress for {{ page.siteDisplayName }}. 
   - e: div
     label:
       - infographic
