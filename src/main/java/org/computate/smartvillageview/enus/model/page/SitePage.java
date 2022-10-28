@@ -93,6 +93,20 @@ public class SitePage extends SitePageGen<BaseResult> {
 	/**
 	 * {@inheritDoc}
 	 */
+	protected void _mailingListUrl(Wrap<String> w) {
+		w.o(siteRequest_.getConfig().getString(ConfigKeys.MAILING_LIST_URL));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	protected void _quayioOrg(Wrap<String> w) {
+		w.o(siteRequest_.getConfig().getString(ConfigKeys.QUAYIO_ORG));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
 	protected void _sitePomGroupId(Wrap<String> w) {
 		w.o(siteRequest_.getConfig().getString(ConfigKeys.SITE_POM_GROUP_ID));
 	}

@@ -344,6 +344,104 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	}
 
 	////////////////////
+	// mailingListUrl //
+	////////////////////
+
+	/**	 The entity mailingListUrl
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String mailingListUrl;
+
+	/**	<br> The entity mailingListUrl
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.page.SitePage&fq=entiteVar_enUS_indexed_string:mailingListUrl">Find the entity mailingListUrl in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _mailingListUrl(Wrap<String> w);
+
+	public String getMailingListUrl() {
+		return mailingListUrl;
+	}
+	public void setMailingListUrl(String o) {
+		this.mailingListUrl = SitePage.staticSetMailingListUrl(siteRequest_, o);
+	}
+	public static String staticSetMailingListUrl(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected SitePage mailingListUrlInit() {
+		Wrap<String> mailingListUrlWrap = new Wrap<String>().var("mailingListUrl");
+		if(mailingListUrl == null) {
+			_mailingListUrl(mailingListUrlWrap);
+			setMailingListUrl(mailingListUrlWrap.o);
+		}
+		return (SitePage)this;
+	}
+
+	public static String staticSearchMailingListUrl(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrMailingListUrl(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqMailingListUrl(SiteRequestEnUS siteRequest_, String o) {
+		return SitePage.staticSearchStrMailingListUrl(siteRequest_, SitePage.staticSearchMailingListUrl(siteRequest_, SitePage.staticSetMailingListUrl(siteRequest_, o)));
+	}
+
+	///////////////
+	// quayioOrg //
+	///////////////
+
+	/**	 The entity quayioOrg
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String quayioOrg;
+
+	/**	<br> The entity quayioOrg
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.page.SitePage&fq=entiteVar_enUS_indexed_string:quayioOrg">Find the entity quayioOrg in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _quayioOrg(Wrap<String> w);
+
+	public String getQuayioOrg() {
+		return quayioOrg;
+	}
+	public void setQuayioOrg(String o) {
+		this.quayioOrg = SitePage.staticSetQuayioOrg(siteRequest_, o);
+	}
+	public static String staticSetQuayioOrg(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected SitePage quayioOrgInit() {
+		Wrap<String> quayioOrgWrap = new Wrap<String>().var("quayioOrg");
+		if(quayioOrg == null) {
+			_quayioOrg(quayioOrgWrap);
+			setQuayioOrg(quayioOrgWrap.o);
+		}
+		return (SitePage)this;
+	}
+
+	public static String staticSearchQuayioOrg(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrQuayioOrg(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqQuayioOrg(SiteRequestEnUS siteRequest_, String o) {
+		return SitePage.staticSearchStrQuayioOrg(siteRequest_, SitePage.staticSearchQuayioOrg(siteRequest_, SitePage.staticSetQuayioOrg(siteRequest_, o)));
+	}
+
+	////////////////////
 	// sitePomGroupId //
 	////////////////////
 
@@ -1175,6 +1273,8 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 				siteNameInit();
 				siteDisplayNameInit();
 				sitePublicUrlInit();
+				mailingListUrlInit();
+				quayioOrgInit();
 				sitePomGroupIdInit();
 				staticBaseUrlInit();
 				staticPathInit();
@@ -1251,6 +1351,10 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 				return oSitePage.siteDisplayName;
 			case "sitePublicUrl":
 				return oSitePage.sitePublicUrl;
+			case "mailingListUrl":
+				return oSitePage.mailingListUrl;
+			case "quayioOrg":
+				return oSitePage.quayioOrg;
 			case "sitePomGroupId":
 				return oSitePage.sitePomGroupId;
 			case "staticBaseUrl":
@@ -1328,6 +1432,10 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 			return SitePage.staticSetSiteDisplayName(siteRequest_, o);
 		case "sitePublicUrl":
 			return SitePage.staticSetSitePublicUrl(siteRequest_, o);
+		case "mailingListUrl":
+			return SitePage.staticSetMailingListUrl(siteRequest_, o);
+		case "quayioOrg":
+			return SitePage.staticSetQuayioOrg(siteRequest_, o);
 		case "sitePomGroupId":
 			return SitePage.staticSetSitePomGroupId(siteRequest_, o);
 		case "staticBaseUrl":
@@ -1380,6 +1488,10 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 			return SitePage.staticSearchSiteDisplayName(siteRequest_, (String)o);
 		case "sitePublicUrl":
 			return SitePage.staticSearchSitePublicUrl(siteRequest_, (String)o);
+		case "mailingListUrl":
+			return SitePage.staticSearchMailingListUrl(siteRequest_, (String)o);
+		case "quayioOrg":
+			return SitePage.staticSearchQuayioOrg(siteRequest_, (String)o);
 		case "sitePomGroupId":
 			return SitePage.staticSearchSitePomGroupId(siteRequest_, (String)o);
 		case "staticBaseUrl":
@@ -1432,6 +1544,10 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 			return SitePage.staticSearchStrSiteDisplayName(siteRequest_, (String)o);
 		case "sitePublicUrl":
 			return SitePage.staticSearchStrSitePublicUrl(siteRequest_, (String)o);
+		case "mailingListUrl":
+			return SitePage.staticSearchStrMailingListUrl(siteRequest_, (String)o);
+		case "quayioOrg":
+			return SitePage.staticSearchStrQuayioOrg(siteRequest_, (String)o);
 		case "sitePomGroupId":
 			return SitePage.staticSearchStrSitePomGroupId(siteRequest_, (String)o);
 		case "staticBaseUrl":
@@ -1484,6 +1600,10 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 			return SitePage.staticSearchFqSiteDisplayName(siteRequest_, o);
 		case "sitePublicUrl":
 			return SitePage.staticSearchFqSitePublicUrl(siteRequest_, o);
+		case "mailingListUrl":
+			return SitePage.staticSearchFqMailingListUrl(siteRequest_, o);
+		case "quayioOrg":
+			return SitePage.staticSearchFqQuayioOrg(siteRequest_, o);
 		case "sitePomGroupId":
 			return SitePage.staticSearchFqSitePomGroupId(siteRequest_, o);
 		case "staticBaseUrl":
@@ -1799,6 +1919,8 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	public static final String VAR_siteName = "siteName";
 	public static final String VAR_siteDisplayName = "siteDisplayName";
 	public static final String VAR_sitePublicUrl = "sitePublicUrl";
+	public static final String VAR_mailingListUrl = "mailingListUrl";
+	public static final String VAR_quayioOrg = "quayioOrg";
 	public static final String VAR_sitePomGroupId = "sitePomGroupId";
 	public static final String VAR_staticBaseUrl = "staticBaseUrl";
 	public static final String VAR_staticPath = "staticPath";
@@ -1851,6 +1973,8 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	public static final String DISPLAY_NAME_siteName = "";
 	public static final String DISPLAY_NAME_siteDisplayName = "";
 	public static final String DISPLAY_NAME_sitePublicUrl = "";
+	public static final String DISPLAY_NAME_mailingListUrl = "";
+	public static final String DISPLAY_NAME_quayioOrg = "";
 	public static final String DISPLAY_NAME_sitePomGroupId = "";
 	public static final String DISPLAY_NAME_staticBaseUrl = "";
 	public static final String DISPLAY_NAME_staticPath = "";
@@ -1880,6 +2004,10 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 			return DISPLAY_NAME_siteDisplayName;
 		case VAR_sitePublicUrl:
 			return DISPLAY_NAME_sitePublicUrl;
+		case VAR_mailingListUrl:
+			return DISPLAY_NAME_mailingListUrl;
+		case VAR_quayioOrg:
+			return DISPLAY_NAME_quayioOrg;
 		case VAR_sitePomGroupId:
 			return DISPLAY_NAME_sitePomGroupId;
 		case VAR_staticBaseUrl:
@@ -1953,6 +2081,10 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 		case VAR_siteDisplayName:
 			return "String";
 		case VAR_sitePublicUrl:
+			return "String";
+		case VAR_mailingListUrl:
+			return "String";
+		case VAR_quayioOrg:
 			return "String";
 		case VAR_sitePomGroupId:
 			return "String";

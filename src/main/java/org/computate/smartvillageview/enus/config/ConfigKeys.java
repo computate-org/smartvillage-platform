@@ -10,6 +10,16 @@ public class ConfigKeys extends ComputateConfigKeys {
 	/**
 	 * 
 	 **/
+	public static final String QUAYIO_ORG = "QUAYIO_ORG";
+
+	/**
+	 * 
+	 **/
+	public static final String MAILING_LIST_URL = "MAILING_LIST_URL";
+
+	/**
+	 * 
+	 **/
 	public static final String SITE_PUBLIC_URL = "SITE_PUBLIC_URL";
 
 	/**
