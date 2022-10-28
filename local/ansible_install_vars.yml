@@ -21,7 +21,7 @@ SITE_LOCALE: "en-US"
 SITE_SRC: "{{ lookup('env', 'HOME') }}/.local/src/{{ SITE_NAME }}"
 SITE_POM_GROUP_ID: org.computate
 SITE_POM_ARTIFACT_ID_ROOT: "{{ SITE_NAME }}"
-SITE_POM_VERSION_PREFIX: "1.0.0"
+SITE_POM_VERSION_PREFIX: "1.0.1"
 SITE_POM_VERSION_SUFFIX: ""
 SITE_POM_VERSION: "{{ SITE_POM_VERSION_PREFIX }}{{ SITE_POM_VERSION_SUFFIX }}"
 SITE_JAVA_PACKAGE: "{{ SITE_POM_GROUP_ID }}.smartvillageview.enus"
@@ -190,6 +190,26 @@ CONFIG_TEMPLATE: |2
   DEFAULT_MAP_ZOOM: "3"
 
 CONFIG_KEYS: |2
+  
+  	/**
+  	 * 
+  	 **/
+  	public static final String QUAYIO_ORG = "QUAYIO_ORG";
+  
+  	/**
+  	 * 
+  	 **/
+  	public static final String MAILING_LIST_URL = "MAILING_LIST_URL";
+  
+  	/**
+  	 * 
+  	 **/
+  	public static final String SITE_PUBLIC_URL = "SITE_PUBLIC_URL";
+  
+  	/**
+  	 * 
+  	 **/
+  	public static final String SITE_POM_GROUP_ID = "SITE_POM_GROUP_ID";
   
   	/**
   	 * 
@@ -390,7 +410,7 @@ WORKER_IMPORT_DATA: |2
   		if(config().getBoolean(ConfigKeys.ENABLE_IMPORT_DATA)) {
   			importTimer(IotNode.CLASS_SIMPLE_NAME).onSuccess(a -> {
   				importTimer(SitePage.CLASS_SIMPLE_NAME).onSuccess(b -> {
-  					importTimer(TimeStep.CLASS_SIMPLE_NAME).onSuccess(c -> {
+  					importTimer(TrafficSimulation.CLASS_SIMPLE_NAME).onSuccess(c -> {
   						promise.complete();
   					});
   				});

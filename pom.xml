@@ -62,10 +62,6 @@
 		<junit.version>4.13.1</junit.version>
 		<vertx.version>4.2.5.redhat-00001</vertx.version>
 		<computate.version>4.2.5.15</computate.version>
-		<camel.version>3.14.1</camel.version>
-		<kie.version>7.65.0.Final</kie.version>
-		<drools.version>7.65.0.Final</drools.version>
-		<cloudevents.version>2.3.0</cloudevents.version>
 		<jfreechart.version>1.5.3</jfreechart.version>
 		<handlebars.version>4.3.0</handlebars.version>
 	</properties>
@@ -77,14 +73,6 @@
 				<groupId>io.vertx</groupId>
 				<artifactId>vertx-dependencies</artifactId>
 				<version>${vertx.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-
-			<dependency>
-				<groupId>org.apache.camel</groupId>
-				<artifactId>camel-bom</artifactId>
-				<version>${camel.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -288,47 +276,6 @@
 		<dependency>
 			<groupId>io.vertx</groupId>
 			<artifactId>vertx-health-check</artifactId>
-		</dependency>
-
-		<!-- ##### -->
-		<!-- Camel -->
-		<!-- ##### -->
-
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-activemq</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-vertx</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-vertx-kafka</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-vertx-http</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-core-languages</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-jackson</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-jbpm</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-http</artifactId>
 		</dependency>
 		
 		<!-- ########## -->

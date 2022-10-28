@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import java.util.Date;
 import java.util.Set;
 import org.computate.vertx.api.ApiRequest;
-import org.computate.vertx.config.ComputateConfigKeys;
+import org.computate.smartvillageview.enus.config.ConfigKeys;
 import java.util.Optional;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
@@ -85,14 +85,14 @@ import org.computate.search.response.solr.SolrResponse;
  * </p>
  * <p>This class contains a comment <b>"AName.enUS: a site user"</b>, which identifies the language context to describe a SiteUser as "a site user". 
  * </p>
- * <p>This class contains a comment <b>"Color: gray"</b>, which styles the SiteUser page "gray". 
+ * <p>This class contains a comment <b>"Color: 2017-shaded-spruce"</b>, which styles the SiteUser page "2017-shaded-spruce". 
  * This will reference a CSS class defined by the stylesheets in the project that starts with "w3-". 
- * A css class of "w3-gray" is expected to exist in the project stylesheets, and is inspired by W3 CSS colors. 
+ * A css class of "w3-2017-shaded-spruce" is expected to exist in the project stylesheets, and is inspired by W3 CSS colors. 
  * See: <a href="https://www.w3schools.com/w3css/w3css_colors.asp">https://www.w3schools.com/w3css/w3css_colors.asp</a>. 
  * </p>
  * <p>This class contains a comment <b>"IconGroup: regular"</b>, which adds icons on the SiteUser page with a group of "regular". 
  * This will reference a Font Awesome icon group defined by the stylesheets in the project that starts with "fa" followed by the first letter of the icon group, which is "far". 
- * A Font Awesome icon group of "gray" is expected to exist. 
+ * A Font Awesome icon group of "2017-shaded-spruce" is expected to exist. 
  * The Font Awesome groups currently supported include: solid, thin, duotone. 
  * See: <a href="https://www.w3schools.com/w3css/w3css_colors.asp">https://www.w3schools.com/w3css/w3css_colors.asp</a>. 
  * </p>
@@ -143,7 +143,7 @@ public abstract class SiteUserGen<DEV> extends BaseModel {
 	public static final String SearchPage_enUS_Uri = "/user";
 	public static final String SearchPage_enUS_ImageUri = "/png/user-999.png";
 
-	public static final String SiteUser_Color = "gray";
+	public static final String SiteUser_Color = "2017-shaded-spruce";
 	public static final String SiteUser_IconGroup = "regular";
 	public static final String SiteUser_IconName = "user-cog";
 
