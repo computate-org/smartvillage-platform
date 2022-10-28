@@ -8,14 +8,6 @@ import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
-import org.apache.camel.CamelContext;
-import org.apache.camel.Exchange;
-import org.apache.camel.LoggingLevel;
-import org.apache.camel.builder.ExpressionBuilder;
-import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.component.vertx.VertxComponent;
-import org.apache.camel.impl.DefaultCamelContext;
-import org.apache.camel.model.dataformat.JsonLibrary;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.computate.search.tool.SearchTool;
@@ -121,7 +113,6 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 	private Integer workerPoolSize;
 	private Integer jdbcMaxPoolSize; 
 	private Integer jdbcMaxWaitQueueSize;
-	private CamelContext camelContext;
 
 	/**
 	 * A io.vertx.ext.jdbc.JDBCClient for connecting to the relational database PostgreSQL. 
