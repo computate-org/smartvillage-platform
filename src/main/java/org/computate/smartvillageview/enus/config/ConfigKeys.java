@@ -10,6 +10,16 @@ public class ConfigKeys extends ComputateConfigKeys {
 	/**
 	 * 
 	 **/
+	public static final String SITE_PUBLIC_URL = "SITE_PUBLIC_URL";
+
+	/**
+	 * 
+	 **/
+	public static final String SITE_POM_GROUP_ID = "SITE_POM_GROUP_ID";
+
+	/**
+	 * 
+	 **/
 	public static final String SUMO_EXECUTABLE_PATH = "SUMO_EXECUTABLE_PATH";
 
 	/**

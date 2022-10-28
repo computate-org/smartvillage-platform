@@ -3,7 +3,7 @@ package org.computate.smartvillageview.enus.model.page;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.smartvillageview.enus.model.base.BaseModel;
 import org.computate.vertx.api.ApiRequest;
-import org.computate.vertx.config.ComputateConfigKeys;
+import org.computate.smartvillageview.enus.config.ConfigKeys;
 import java.util.Optional;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
@@ -292,6 +292,104 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 
 	public static String staticSearchFqSiteDisplayName(SiteRequestEnUS siteRequest_, String o) {
 		return SitePage.staticSearchStrSiteDisplayName(siteRequest_, SitePage.staticSearchSiteDisplayName(siteRequest_, SitePage.staticSetSiteDisplayName(siteRequest_, o)));
+	}
+
+	///////////////////
+	// sitePublicUrl //
+	///////////////////
+
+	/**	 The entity sitePublicUrl
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String sitePublicUrl;
+
+	/**	<br> The entity sitePublicUrl
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.page.SitePage&fq=entiteVar_enUS_indexed_string:sitePublicUrl">Find the entity sitePublicUrl in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _sitePublicUrl(Wrap<String> w);
+
+	public String getSitePublicUrl() {
+		return sitePublicUrl;
+	}
+	public void setSitePublicUrl(String o) {
+		this.sitePublicUrl = SitePage.staticSetSitePublicUrl(siteRequest_, o);
+	}
+	public static String staticSetSitePublicUrl(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected SitePage sitePublicUrlInit() {
+		Wrap<String> sitePublicUrlWrap = new Wrap<String>().var("sitePublicUrl");
+		if(sitePublicUrl == null) {
+			_sitePublicUrl(sitePublicUrlWrap);
+			setSitePublicUrl(sitePublicUrlWrap.o);
+		}
+		return (SitePage)this;
+	}
+
+	public static String staticSearchSitePublicUrl(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrSitePublicUrl(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqSitePublicUrl(SiteRequestEnUS siteRequest_, String o) {
+		return SitePage.staticSearchStrSitePublicUrl(siteRequest_, SitePage.staticSearchSitePublicUrl(siteRequest_, SitePage.staticSetSitePublicUrl(siteRequest_, o)));
+	}
+
+	////////////////////
+	// sitePomGroupId //
+	////////////////////
+
+	/**	 The entity sitePomGroupId
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String sitePomGroupId;
+
+	/**	<br> The entity sitePomGroupId
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.page.SitePage&fq=entiteVar_enUS_indexed_string:sitePomGroupId">Find the entity sitePomGroupId in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _sitePomGroupId(Wrap<String> w);
+
+	public String getSitePomGroupId() {
+		return sitePomGroupId;
+	}
+	public void setSitePomGroupId(String o) {
+		this.sitePomGroupId = SitePage.staticSetSitePomGroupId(siteRequest_, o);
+	}
+	public static String staticSetSitePomGroupId(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected SitePage sitePomGroupIdInit() {
+		Wrap<String> sitePomGroupIdWrap = new Wrap<String>().var("sitePomGroupId");
+		if(sitePomGroupId == null) {
+			_sitePomGroupId(sitePomGroupIdWrap);
+			setSitePomGroupId(sitePomGroupIdWrap.o);
+		}
+		return (SitePage)this;
+	}
+
+	public static String staticSearchSitePomGroupId(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrSitePomGroupId(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqSitePomGroupId(SiteRequestEnUS siteRequest_, String o) {
+		return SitePage.staticSearchStrSitePomGroupId(siteRequest_, SitePage.staticSearchSitePomGroupId(siteRequest_, SitePage.staticSetSitePomGroupId(siteRequest_, o)));
 	}
 
 	///////////////////
@@ -1076,6 +1174,8 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 				githubOrgInit();
 				siteNameInit();
 				siteDisplayNameInit();
+				sitePublicUrlInit();
+				sitePomGroupIdInit();
 				staticBaseUrlInit();
 				staticPathInit();
 				siteBaseUrlInit();
@@ -1149,6 +1249,10 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 				return oSitePage.siteName;
 			case "siteDisplayName":
 				return oSitePage.siteDisplayName;
+			case "sitePublicUrl":
+				return oSitePage.sitePublicUrl;
+			case "sitePomGroupId":
+				return oSitePage.sitePomGroupId;
 			case "staticBaseUrl":
 				return oSitePage.staticBaseUrl;
 			case "staticPath":
@@ -1222,6 +1326,10 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 			return SitePage.staticSetSiteName(siteRequest_, o);
 		case "siteDisplayName":
 			return SitePage.staticSetSiteDisplayName(siteRequest_, o);
+		case "sitePublicUrl":
+			return SitePage.staticSetSitePublicUrl(siteRequest_, o);
+		case "sitePomGroupId":
+			return SitePage.staticSetSitePomGroupId(siteRequest_, o);
 		case "staticBaseUrl":
 			return SitePage.staticSetStaticBaseUrl(siteRequest_, o);
 		case "staticPath":
@@ -1270,6 +1378,10 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 			return SitePage.staticSearchSiteName(siteRequest_, (String)o);
 		case "siteDisplayName":
 			return SitePage.staticSearchSiteDisplayName(siteRequest_, (String)o);
+		case "sitePublicUrl":
+			return SitePage.staticSearchSitePublicUrl(siteRequest_, (String)o);
+		case "sitePomGroupId":
+			return SitePage.staticSearchSitePomGroupId(siteRequest_, (String)o);
 		case "staticBaseUrl":
 			return SitePage.staticSearchStaticBaseUrl(siteRequest_, (String)o);
 		case "staticPath":
@@ -1318,6 +1430,10 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 			return SitePage.staticSearchStrSiteName(siteRequest_, (String)o);
 		case "siteDisplayName":
 			return SitePage.staticSearchStrSiteDisplayName(siteRequest_, (String)o);
+		case "sitePublicUrl":
+			return SitePage.staticSearchStrSitePublicUrl(siteRequest_, (String)o);
+		case "sitePomGroupId":
+			return SitePage.staticSearchStrSitePomGroupId(siteRequest_, (String)o);
 		case "staticBaseUrl":
 			return SitePage.staticSearchStrStaticBaseUrl(siteRequest_, (String)o);
 		case "staticPath":
@@ -1366,6 +1482,10 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 			return SitePage.staticSearchFqSiteName(siteRequest_, o);
 		case "siteDisplayName":
 			return SitePage.staticSearchFqSiteDisplayName(siteRequest_, o);
+		case "sitePublicUrl":
+			return SitePage.staticSearchFqSitePublicUrl(siteRequest_, o);
+		case "sitePomGroupId":
+			return SitePage.staticSearchFqSitePomGroupId(siteRequest_, o);
 		case "staticBaseUrl":
 			return SitePage.staticSearchFqStaticBaseUrl(siteRequest_, o);
 		case "staticPath":
@@ -1678,6 +1798,8 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	public static final String VAR_githubOrg = "githubOrg";
 	public static final String VAR_siteName = "siteName";
 	public static final String VAR_siteDisplayName = "siteDisplayName";
+	public static final String VAR_sitePublicUrl = "sitePublicUrl";
+	public static final String VAR_sitePomGroupId = "sitePomGroupId";
 	public static final String VAR_staticBaseUrl = "staticBaseUrl";
 	public static final String VAR_staticPath = "staticPath";
 	public static final String VAR_siteBaseUrl = "siteBaseUrl";
@@ -1728,6 +1850,8 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	public static final String DISPLAY_NAME_githubOrg = "";
 	public static final String DISPLAY_NAME_siteName = "";
 	public static final String DISPLAY_NAME_siteDisplayName = "";
+	public static final String DISPLAY_NAME_sitePublicUrl = "";
+	public static final String DISPLAY_NAME_sitePomGroupId = "";
 	public static final String DISPLAY_NAME_staticBaseUrl = "";
 	public static final String DISPLAY_NAME_staticPath = "";
 	public static final String DISPLAY_NAME_siteBaseUrl = "";
@@ -1754,6 +1878,10 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 			return DISPLAY_NAME_siteName;
 		case VAR_siteDisplayName:
 			return DISPLAY_NAME_siteDisplayName;
+		case VAR_sitePublicUrl:
+			return DISPLAY_NAME_sitePublicUrl;
+		case VAR_sitePomGroupId:
+			return DISPLAY_NAME_sitePomGroupId;
 		case VAR_staticBaseUrl:
 			return DISPLAY_NAME_staticBaseUrl;
 		case VAR_staticPath:
@@ -1823,6 +1951,10 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 		case VAR_siteName:
 			return "String";
 		case VAR_siteDisplayName:
+			return "String";
+		case VAR_sitePublicUrl:
+			return "String";
+		case VAR_sitePomGroupId:
 			return "String";
 		case VAR_staticBaseUrl:
 			return "String";
