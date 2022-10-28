@@ -1,7 +1,7 @@
 ---
 pageId: "open-source-software-foundation-best-practices"
 uri: "/en-us/{{ pageId }}"
-h1: "Does the {{ page.siteName }} project follow the OpenSSF Best Practices? "
+h1: "Does the {{ page.siteName }} project follow the Open Source Software Foundation Best Practices? "
 h2: "Review the OpenSSF Best Practices checklist for {{ page.siteName }}. "
 created: "2022-10-24"
 courseNum: 1
@@ -110,6 +110,42 @@ htmBody:
             in:
               - e: i
                 a:
+                  class: fa-solid fa-code-branch padding-right-quarter-em
+              - e: span
+                text: Open Source Software Foundation
+          - e: h4
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-badge-check padding-right-quarter-em
+              - e: span
+                text: FLOSS Best Practices Criteria overview
+          - e: p
+            a:
+              class: w3-padding 
+            in:
+              - e: span
+                text: |
+                  The Open Source Software Foundation offers a Best Practices Badge to projects following all the suggested standards below. 
+              - e: a
+                href: https://bestpractices.coreinfrastructure.org/en/criteria
+                text: |
+                  See the FLOSS Best Practices Criteria here. 
+              - e: span
+                text: |
+                  Here is a summary of how {{ page.siteDisplayName }} implements these standards. 
+      - e: div
+        a:
+          class: w3-padding 
+        in:
+          - e: h3
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
                   class: fa-regular fa-magnifying-glass-arrow-right padding-right-quarter-em
               - e: span
                 text: Basics
@@ -119,7 +155,7 @@ htmBody:
             in:
               - e: i
                 a:
-                  class: fa-sharp fa-solid fa-coffee-bean padding-right-quarter-em
+                  class: fa-solid fa-browser padding-right-quarter-em
               - e: span
                 text: Basic project website content
           - e: ul
@@ -203,7 +239,7 @@ htmBody:
             in:
               - e: i
                 a:
-                  class: fa-sharp fa-solid fa-coffee-bean padding-right-quarter-em
+                  class: fa-solid fa-file-certificate padding-right-quarter-em
               - e: span
                 text: FLOSS license
           - e: ul
@@ -231,6 +267,813 @@ htmBody:
                           - e: a
                             href: "https://en.wikipedia.org/wiki/Comparison_of_free_and_open-source_software_licenses"
                             text: "https://en.wikipedia.org/wiki/Comparison_of_free_and_open-source_software_licenses"
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: "It is SUGGESTED that any required license(s) for the software produced by the project be approved by the Open Source Initiative (OSI). "
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          The rest of the licenses of open source maven dependencies you can find here: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://mvnrepository.com/artifact/{{ page.sitePomGroupId }}/{{ page.siteName }}/latest"
+                            text: "https://mvnrepository.com/artifact/{{ page.sitePomGroupId }}/{{ page.siteName }}/latest"
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: "The project MUST post the license(s) of its results in a standard location in their source repository. "
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          The license for {{ page.siteDisplayName }} is in our GitHub repository and can be found here: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/blob/main/LICENSE"
+                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/blob/main/LICENSE"
+      - e: div
+        a:
+          class: w3-padding 
+        in:
+          - e: h3
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-regular fa-magnifying-glass-arrow-right padding-right-quarter-em
+              - e: span
+                text: Basics
+          - e: h4
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-book padding-right-quarter-em
+              - e: span
+                text: Documentation
+          - e: ul
+            in:
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: "The project MUST provide basic documentation for the software produced by the project. "
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          The documentation for installing {{ page.siteDisplayName }} locally and in the OpenShift cloud is available in the README here: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/blob/main/README.md"
+                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/blob/main/README.md"
+                      - e: div
+                        text: |
+                          Additional documentation can be found in the articles on the home page of the public website for {{ page.siteDisplayName }} here: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "{{ page.sitePublicUrl }}"
+                            text: "{{ page.sitePublicUrl }}"
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: "The project MUST provide reference documentation that describes the external interface (both input and output) of the software produced by the project. "
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          The complete OpenAPI spec with inputs and outputs for {{ page.siteDisplayName }} is available here: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/blob/main/src/main/resources/webroot/openapi3-enUS.yml"
+                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/blob/main/src/main/resources/webroot/openapi3-enUS.yml"
+      - e: div
+        a:
+          class: w3-padding 
+        in:
+          - e: h3
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-regular fa-magnifying-glass-arrow-right padding-right-quarter-em
+              - e: span
+                text: Basics
+          - e: h4
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-arrow-right padding-right-quarter-em
+              - e: span
+                text: Other
+          - e: ul
+            in:
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: "The project sites (website, repository, and download URLs) MUST support HTTPS using TLS. "
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          The project website for {{ page.siteDisplayName }} supports HTTPS using TLS with valid certificates as you can see here: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "{{ page.sitePublicUrl }}"
+                            text: "{{ page.sitePublicUrl }}"
+                      - e: div
+                        text: |
+                          The repository for {{ page.siteDisplayName }} also supports HTTPS using TLS with valid certificates as you can see here: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}"
+                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}"
+                      - e: div
+                        text: |
+                          The downloads for {{ page.siteDisplayName }} also supports HTTPS using TLS with valid certificates as you can see here: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/releases"
+                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/releases"
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: "The project MUST have one or more mechanisms for discussion (including proposed changes and issues) that are searchable, allow messages and topics to be addressed by URL, enable new people to participate in some of the discussions, and do not require client-side installation of proprietary software. "
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          There is a public mailing list for {{ page.siteDisplayName }} where you can start a discussion about proposed changes and issues: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "{{ page.mailingListUrl }}"
+                            text: "{{ page.mailingListUrl }}"
+                      - e: div
+                        text: |
+                          The issues page on GitHub for {{ page.siteDisplayName }} is another place to start a discussion about proposed changes and issues: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/issues"
+                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/issues"
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: "The project MUST provide basic documentation for the software produced by the project. "
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          The documentation for {{ page.siteDisplayName }} is in English: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/blob/main/README.md"
+                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/blob/main/README.md"
+                      - e: div
+                        text: |
+                          Additional documentation in English can be found in the articles on the home page of the public website for {{ page.siteDisplayName }} here: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "{{ page.sitePublicUrl }}"
+                            text: "{{ page.sitePublicUrl }}"
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: "The project MUST be maintained. "
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          The {{ page.siteDisplayName }} is actively maintained, as seen in the frequency of commits in the main branch here: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/commits/main"
+                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/commits/main"
+      - e: div
+        a:
+          class: w3-padding 
+        in:
+          - e: h3
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-code-merge padding-right-quarter-em
+              - e: span
+                text: Change Control
+          - e: h4
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-brands fa-github padding-right-quarter-em
+              - e: span
+                text: Public version-controlled source repository
+          - e: ul
+            in:
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: "The project MUST have a version-controlled source repository that is publicly readable and has a URL. "
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          The {{ page.siteDisplayName }} has a public, readable version-controlled source repository on GitHub here: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}"
+                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}"
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: "The project's source repository MUST track what changes were made, who made the changes, and when the changes were made. "
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          See the changes made to the main branch of {{ page.siteDisplayName }} here: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/commits/main"
+                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/commits/main"
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: "To enable collaborative review, the project's source repository MUST include interim versions for review between releases; it MUST NOT include only final releases. "
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          You can find every commit in the main branch of {{ page.siteDisplayName }} leading up to a final release here: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/commits/main"
+                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/commits/main"
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: "It is SUGGESTED that common distributed version control software be used (e.g., git) for the project's source repository. "
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          GitHub is the common distributed version control software for {{ page.siteDisplayName }}, see here: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}"
+                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}"
+      - e: div
+        a:
+          class: w3-padding 
+        in:
+          - e: h3
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-code-merge padding-right-quarter-em
+              - e: span
+                text: Change Control
+          - e: h4
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-list-ol padding-right-quarter-em
+              - e: span
+                text: Unique version numbering
+          - e: ul
+            in:
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: "The project results MUST have a unique version identifier for each release intended to be used by users. "
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          The {{ page.siteDisplayName }} has unique versions of each release, see: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/releases"
+                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/releases"
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: "It is SUGGESTED that the Semantic Versioning (SemVer) or Calendar Versioning (CalVer) version numbering format be used for releases. It is SUGGESTED that those who use CalVer include a micro level value. "
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          The {{ page.siteDisplayName }} Semantic Versioning (major, minor, patch) each release. For example 1.0.0, see the releases here: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/releases"
+                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/releases"
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: "It is SUGGESTED that projects identify each release within their version control system. For example, it is SUGGESTED that those using git identify each release using git tags.  "
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          Each release of {{ page.siteDisplayName }} also corresponds to a tag in GitHub, see the tags here: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/tags"
+                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/tags"
+      - e: div
+        a:
+          class: w3-padding 
+        in:
+          - e: h3
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-code-merge padding-right-quarter-em
+              - e: span
+                text: Change Control
+          - e: h4
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-tags padding-right-quarter-em
+              - e: span
+                text: Release notes
+          - e: ul
+            in:
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      The project MUST provide, in each release, release notes that are a human-readable summary of major changes in that release to help users determine if they should upgrade and what the upgrade impact will be. 
+                      The release notes MUST NOT be the raw output of a version control log (e.g., the "git log" command results are not release notes). 
+                      Projects whose results are not intended for reuse in multiple locations (such as the software for a single website or service) AND employ continuous delivery MAY select "N/A". 
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          The {{ page.siteDisplayName }} provides a human-readable summary of major changes in each release, see: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/releases"
+                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/releases"
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      The release notes MUST identify every publicly known run-time vulnerability fixed in this release that already had a CVE assignment or similar when the release was created. 
+                      This criterion may be marked as not applicable (N/A) if users typically cannot practically update the software themselves (e.g., as is often true for kernel updates). 
+                      This criterion applies only to the project results, not to its dependencies. 
+                      If there are no release notes or there have been no publicly known vulnerabilities, choose N/A.
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          See the list of vulnerabilities fixed in the release notes of {{ page.siteDisplayName }} here: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/releases"
+                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/releases"
+      - e: div
+        a:
+          class: w3-padding 
+        in:
+          - e: h3
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-file-chart-column padding-right-quarter-em
+              - e: span
+                text: Reporting
+          - e: h4
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-bug-slash padding-right-quarter-em
+              - e: span
+                text: Bug-reporting process
+          - e: ul
+            in:
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      The project MUST provide a process for users to submit bug reports (e.g., using an issue tracker or a mailing list). 
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          There is a public mailing list for {{ page.siteDisplayName }} where you can submit bug reports: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "{{ page.mailingListUrl }}"
+                            text: "{{ page.mailingListUrl }}"
+                      - e: div
+                        text: |
+                          The issues page on GitHub for {{ page.siteDisplayName }} is another place to submit bug reports: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/issues"
+                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/issues"
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      The project SHOULD use an issue tracker for tracking individual issues. 
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          The issue tracker is on GitHub for {{ page.siteDisplayName }} here: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/issues"
+                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/issues"
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      The project MUST acknowledge a majority of bug reports submitted in the last 2-12 months (inclusive); the response need not include a fix. 
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          You can review the open issues on GitHub for {{ page.siteDisplayName }} here: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/issues"
+                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/issues"
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      The project SHOULD respond to a majority (>50%) of enhancement requests in the last 2-12 months (inclusive). 
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          You can review the enhancement requests on GitHub for {{ page.siteDisplayName }} here: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/issues"
+                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/issues"
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      The project MUST have a publicly available archive for reports and responses for later searching. 
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          There is a public mailing list for {{ page.siteDisplayName }} has a complete archive of messages: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "{{ page.mailingListUrl }}"
+                            text: "{{ page.mailingListUrl }}"
+                      - e: div
+                        text: |
+                          The issues page on GitHub for {{ page.siteDisplayName }} has a complete archive of issues: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/issues"
+                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/issues"
+      - e: div
+        a:
+          class: w3-padding 
+        in:
+          - e: h3
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-file-chart-column padding-right-quarter-em
+              - e: span
+                text: Reporting
+          - e: h4
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-hammer-crash padding-right-quarter-em
+              - e: span
+                text: Vulnerability report process
+          - e: ul
+            in:
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      The project MUST publish the process for reporting vulnerabilities on the project site. 
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          There is a security policy in place for {{ page.siteDisplayName }} where you can email a vulnerability privately to the owner of the project: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/security/policy"
+                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/security/policy"
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      If private vulnerability reports are supported, the project MUST include how to send the information in a way that is kept private. 
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          There is a security policy in place for {{ page.siteDisplayName }} where you can email a vulnerability privately to the owner of the project: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/security/policy"
+                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/security/policy"
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      The project's initial response time for any vulnerability report received in the last 6 months MUST be less than or equal to 14 days. 
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          There is a security policy in place for {{ page.siteDisplayName }} where you can email a vulnerability privately to the owner of the project who will review the vulnerability: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/security/policy"
+                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/security/policy"
+      - e: div
+        a:
+          class: w3-padding 
+        in:
+          - e: h3
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-file-chart-column padding-right-quarter-em
+              - e: span
+                text: Quality
+          - e: h4
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-hammer-crash padding-right-quarter-em
+              - e: span
+                text: Working build system
+          - e: ul
+            in:
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      If the software produced by the project requires building for use, the project MUST provide a working build system that can automatically rebuild the software from source code. 
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          There is a container image build system using the Dockerfile in the {{ page.siteDisplayName }} on quay.io. See the automatically built tags and latest tag based on the latest from the main branch: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://quay.io/repository/{{ page.quayioOrg }}/{{ page.siteName }}?tab=tags"
+                            text: "https://quay.io/repository/{{ page.quayioOrg }}/{{ page.siteName }}?tab=tags"
+                      - e: div
+                        text: |
+                          There is also a Maven build action for {{ page.siteDisplayName }} on GitHub: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/actions"
+                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/actions"
+                      - e: div
+                        text: |
+                          Each release of the project is also built for Maven Central. 
+                          For all the details about the dependencies, vulnerabilities and more see the Maven Repository on Maven Central for {{ page.siteDisplayName }} here: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://mvnrepository.com/artifact/{{ page.sitePomGroupId }}/{{ page.siteName }}/latest"
+                            text: "https://mvnrepository.com/artifact/{{ page.sitePomGroupId }}/{{ page.siteName }}/latest"
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      It is SUGGESTED that common tools be used for building the software. 
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          Quay is a container image registry that enables you to build, organize, distribute, and deploy containers. 
+                          Quay gives you security over your repositories with image vulnerability scanning and robust access controls. 
+                          Project Quay provides a scalable open source platform to host container images across any size organization. 
+                          See: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://www.projectquay.io/"
+                            text: "https://www.projectquay.io/"
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      The project SHOULD be buildable using only FLOSS tools. 
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          Quay is a container image registry that enables you to build, organize, distribute, and deploy containers. 
+                          Quay gives you security over your repositories with image vulnerability scanning and robust access controls. 
+                          Project Quay provides a scalable open source platform to host container images across any size organization. 
+                          See: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://www.projectquay.io/"
+                            text: "https://www.projectquay.io/"
+      - e: div
+        a:
+          class: w3-padding 
+        in:
+          - e: h3
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-file-chart-column padding-right-quarter-em
+              - e: span
+                text: Quality
+          - e: h4
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-microscope padding-right-quarter-em
+              - e: span
+                text: Automated test suite
+          - e: ul
+            in:
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      The project MUST use at least one automated test suite that is publicly released as FLOSS (this test suite may be maintained as a separate FLOSS project). The project MUST clearly show or document how to run the test suite(s) (e.g., via a continuous integration (CI) script or via documentation in files such as BUILD.md, README.md, or CONTRIBUTING.md). 
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          A developer can run the automated test suite locally for the {{ page.siteDisplayName }} with Maven. Building the project with tests is described in the README here: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/actions"
+                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/actions"
+                      - e: div
+                        text: |
+                          There is a container image build system using the Dockerfile in the {{ page.siteDisplayName }} on quay.io. See the automatically built tags and latest tag based on the latest from the main branch: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://quay.io/repository/{{ page.quayioOrg }}/{{ page.siteName }}?tab=tags"
+                            text: "https://quay.io/repository/{{ page.quayioOrg }}/{{ page.siteName }}?tab=tags"
+                      - e: div
+                        text: |
+                          There is also a Maven build action for {{ page.siteDisplayName }} on GitHub: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/actions"
+                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/actions"
+                      - e: div
+                        text: |
+                          Each release of the project is also built for Maven Central. 
+                          For all the details about the dependencies, vulnerabilities and more see the Maven Repository on Maven Central for {{ page.siteDisplayName }} here: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://mvnrepository.com/artifact/{{ page.sitePomGroupId }}/{{ page.siteName }}/latest"
+                            text: "https://mvnrepository.com/artifact/{{ page.sitePomGroupId }}/{{ page.siteName }}/latest"
+              - e: li
+                in:
+                  - e: div
+                    class: font-weight-bold 
+                    text: |
+                      It is SUGGESTED that the project implement continuous integration (where new or changed code is frequently integrated into a central code repository and automated tests are run on the result). 
+                  - e: div
+                    in:
+                      - e: div
+                        text: |
+                          There is a container image build system using the Dockerfile in the {{ page.siteDisplayName }} on quay.io. See the automatically built tags and latest tag based on the latest from the main branch: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://quay.io/repository/{{ page.quayioOrg }}/{{ page.siteName }}?tab=tags"
+                            text: "https://quay.io/repository/{{ page.quayioOrg }}/{{ page.siteName }}?tab=tags"
+                      - e: div
+                        text: |
+                          There is also a Maven build action for {{ page.siteDisplayName }} on GitHub: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/actions"
+                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/actions"
+                      - e: div
+                        text: |
+                          Each release of the project is also built for Maven Central. 
+                          For all the details about the dependencies, vulnerabilities and more see the Maven Repository on Maven Central for {{ page.siteDisplayName }} here: 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://mvnrepository.com/artifact/{{ page.sitePomGroupId }}/{{ page.siteName }}/latest"
+                            text: "https://mvnrepository.com/artifact/{{ page.sitePomGroupId }}/{{ page.siteName }}/latest"
   - e: div
     label:
       - infographic

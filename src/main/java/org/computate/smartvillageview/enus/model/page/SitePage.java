@@ -62,6 +62,9 @@ import io.vertx.core.Promise;
  */
 public class SitePage extends SitePageGen<BaseResult> {
 
+	/**
+	 * {@inheritDoc}
+	 */
 	protected void _githubOrg(Wrap<String> w) {
 		w.o(siteRequest_.getConfig().getString(ConfigKeys.GITHUB_ORG));
 	}
@@ -78,6 +81,34 @@ public class SitePage extends SitePageGen<BaseResult> {
 	 */
 	protected void _siteDisplayName(Wrap<String> w) {
 		w.o(siteRequest_.getConfig().getString(ConfigKeys.SITE_DISPLAY_NAME));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	protected void _sitePublicUrl(Wrap<String> w) {
+		w.o(siteRequest_.getConfig().getString(ConfigKeys.SITE_PUBLIC_URL));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	protected void _mailingListUrl(Wrap<String> w) {
+		w.o(siteRequest_.getConfig().getString(ConfigKeys.MAILING_LIST_URL));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	protected void _quayioOrg(Wrap<String> w) {
+		w.o(siteRequest_.getConfig().getString(ConfigKeys.QUAYIO_ORG));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	protected void _sitePomGroupId(Wrap<String> w) {
+		w.o(siteRequest_.getConfig().getString(ConfigKeys.SITE_POM_GROUP_ID));
 	}
 
 	/**
