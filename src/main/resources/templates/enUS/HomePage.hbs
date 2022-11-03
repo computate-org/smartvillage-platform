@@ -21,19 +21,21 @@
 				</div>
 			</form>
 		</div>
+		<div class="masonry-container ">
 {{#each listSitePage}}
-		<div class="w3-third ">
-			<a href="{{ uri }}">
-				<div class="w3-card w3-margin w3-padding ">
+			<div class="masonry-item w3-padding-top-32 ">
+				<a href="{{ uri }}">
+					<div class="w3-card w3-padding ">
 {{#if pageImageUri}}
-					<img class="w3-image w3-border " src="{{ STATIC_BASE_URL }}{{ pageImageUri }}"/>
+						<img class="w3-image w3-border " src="{{ STATIC_BASE_URL }}{{ pageImageUri }}"/>
 {{/if}}
-					<div class="font-weight-bold ">{{h1}}</div>
-					<div class="font-style-italic ">{{h2}}</div>
-				</div>
-			</a>
-		</div>
+						<div class="font-weight-bold ">{{h1}}</div>
+						<div class="font-style-italic ">{{h2}}</div>
+					</div>
+				</a>
+			</div>
 {{/each}}
+		</div>
 	</div>
 </div>
 {{> htmBodyMiddlePageLayout}}{{/partial}}
