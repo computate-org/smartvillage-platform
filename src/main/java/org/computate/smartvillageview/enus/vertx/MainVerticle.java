@@ -119,29 +119,21 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 	 **/
 	private PgPool pgPool;
 
-	public PgPool getPgPool() {
-		return pgPool;
-	}
-
-	public void setPgPool(PgPool pgPool) {
-		this.pgPool = pgPool;
-	}
-
 	private WebClient webClient;
 
 	private Router router;
 
-	WorkerExecutor workerExecutor;
+	private WorkerExecutor workerExecutor;
 
-	OAuth2Auth oauth2AuthenticationProvider;
+	private OAuth2Auth oauth2AuthenticationProvider;
 
-	AuthorizationProvider authorizationProvider;
+	private AuthorizationProvider authorizationProvider;
 
-	HandlebarsTemplateEngine templateEngine;
+	private HandlebarsTemplateEngine templateEngine;
 
-	Handlebars handlebars;
+	private Handlebars handlebars;
 
-	TemplateHandler templateHandler;
+	private TemplateHandler templateHandler;
 
 	/**	
 	 *	The main method for the Vert.x application that runs the Vert.x Runner class
@@ -369,7 +361,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 
 	/**	
 	 **/
-	private Future<Void> configureWebClient() {
+	public Future<Void> configureWebClient() {
 		Promise<Void> promise = Promise.promise();
 
 		try {
@@ -395,7 +387,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 	 *	Return a promise that configures a shared database client connection. 
 	 *	Load the database configuration into a shared io.vertx.ext.jdbc.JDBCClient for a scalable, clustered datasource connection pool. 
 	 **/
-	private Future<Void> configureData() {
+	public Future<Void> configureData() {
 		Promise<Void> promise = Promise.promise();
 		try {
 			PgConnectOptions pgOptions = new PgConnectOptions();
@@ -436,7 +428,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 	 *	Setup a logout route for logging out completely of the application. 
 	 *	Return a promise that configures the authentication server and OpenAPI. 
 	 **/
-	private Future<Void> configureOpenApi() {
+	public Future<Void> configureOpenApi() {
 		Promise<Void> promise = Promise.promise();
 		try {
 			String siteBaseUrl = config().getString(ConfigKeys.SITE_BASE_URL);
@@ -620,7 +612,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 	 *	Configure a shared worker executor for running blocking tasks in the background. 
 	 *	Return a promise that configures the shared worker executor. 
 	 **/
-	private Future<Void> configureSharedWorkerExecutor() {
+	public Future<Void> configureSharedWorkerExecutor() {
 		Promise<Void> promise = Promise.promise();
 		try {
 			String name = "MainVerticle-WorkerExecutor";
@@ -645,7 +637,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 	 *	Configure health checks for the status of the website and it's dependent services. 
 	 *	Return a promise that configures the health checks. 
 	 **/
-	private Future<Void> configureHealthChecks() {
+	public Future<Void> configureHealthChecks() {
 		Promise<Void> promise = Promise.promise();
 		try {
 			ClusterManager clusterManager = ((VertxImpl)vertx).getClusterManager();
@@ -682,7 +674,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 	 * Val.Complete.enUS:Configure websockets succeeded. 
 	 * Val.Fail.enUS:Configure websockets failed. 
 	 **/
-	private Future<Void> configureWebsockets() {
+	public Future<Void> configureWebsockets() {
 		Promise<Void> promise = Promise.promise();
 		try {
 			SockJSBridgeOptions options = new SockJSBridgeOptions()
@@ -703,7 +695,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 	 * Val.Complete.enUS:Configure sending email succeeded. 
 	 * Val.Fail.enUS:Configure sending email failed. 
 	 **/
-	private Future<Void> configureEmail() {
+	public Future<Void> configureEmail() {
 		Promise<Void> promise = Promise.promise();
 		try {
 			String emailHost = config().getString(ConfigKeys.EMAIL_HOST);
@@ -732,7 +724,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 	 * Val.Fail.enUS:Handlebars was not configured properly. 
 	 * Val.Complete.enUS:Handlebars was configured properly. 
 	 */
-	private Future<Void> configureHandlebars() {
+	public Future<Void> configureHandlebars() {
 		Promise<Void> promise = Promise.promise();
 		try {
 			templateEngine = HandlebarsTemplateEngine.create(vertx);
@@ -764,7 +756,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 	 * Val.Fail.enUS:The API was not configured properly. 
 	 * Val.Complete.enUS:The API was configured properly. 
 	 */
-	private Future<Void> configureApi() {
+	public Future<Void> configureApi() {
 		Promise<Void> promise = Promise.promise();
 		try {
 			SiteUserEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
@@ -794,7 +786,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 	 * Val.Fail.enUS:The UI was not configured properly. 
 	 * Val.Complete.enUS:The UI was configured properly. 
 	 */
-	private Future<Void> configureUi() {
+	public Future<Void> configureUi() {
 		Promise<Void> promise = Promise.promise();
 		try {
 			String staticPath = config().getString(ConfigKeys.STATIC_PATH);
@@ -996,7 +988,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 	 * Val.Fail.enUS:The Camel Component was not configured properly. 
 	 * Val.Complete.enUS:The Camel Component was configured properly. 
 	 */
-	private Future<Void> configureCamel() {
+	public Future<Void> configureCamel() {
 		Promise<Void> promise = Promise.promise();
 		promise.complete();
 
@@ -1012,7 +1004,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 	 * 
 	 *	Start the Vert.x server. 
 	 **/
-	private Future<Void> startServer() {
+	public Future<Void> startServer() {
 		Promise<Void> promise = Promise.promise();
 
 		try {
@@ -1084,5 +1076,109 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 		}
 
 		return s;
+	}
+
+	public Integer getSiteInstances() {
+		return siteInstances;
+	}
+
+	public void setSiteInstances(Integer siteInstances) {
+		this.siteInstances = siteInstances;
+	}
+
+	public Integer getWorkerPoolSize() {
+		return workerPoolSize;
+	}
+
+	public void setWorkerPoolSize(Integer workerPoolSize) {
+		this.workerPoolSize = workerPoolSize;
+	}
+
+	public Integer getJdbcMaxPoolSize() {
+		return jdbcMaxPoolSize;
+	}
+
+	public void setJdbcMaxPoolSize(Integer jdbcMaxPoolSize) {
+		this.jdbcMaxPoolSize = jdbcMaxPoolSize;
+	}
+
+	public Integer getJdbcMaxWaitQueueSize() {
+		return jdbcMaxWaitQueueSize;
+	}
+
+	public void setJdbcMaxWaitQueueSize(Integer jdbcMaxWaitQueueSize) {
+		this.jdbcMaxWaitQueueSize = jdbcMaxWaitQueueSize;
+	}
+
+	public PgPool getPgPool() {
+		return pgPool;
+	}
+
+	public void setPgPool(PgPool pgPool) {
+		this.pgPool = pgPool;
+	}
+
+	public WebClient getWebClient() {
+		return webClient;
+	}
+
+	public void setWebClient(WebClient webClient) {
+		this.webClient = webClient;
+	}
+
+	public Router getRouter() {
+		return router;
+	}
+
+	public void setRouter(Router router) {
+		this.router = router;
+	}
+
+	public WorkerExecutor getWorkerExecutor() {
+		return workerExecutor;
+	}
+
+	public void setWorkerExecutor(WorkerExecutor workerExecutor) {
+		this.workerExecutor = workerExecutor;
+	}
+
+	public OAuth2Auth getOauth2AuthenticationProvider() {
+		return oauth2AuthenticationProvider;
+	}
+
+	public void setOauth2AuthenticationProvider(OAuth2Auth oauth2AuthenticationProvider) {
+		this.oauth2AuthenticationProvider = oauth2AuthenticationProvider;
+	}
+
+	public AuthorizationProvider getAuthorizationProvider() {
+		return authorizationProvider;
+	}
+
+	public void setAuthorizationProvider(AuthorizationProvider authorizationProvider) {
+		this.authorizationProvider = authorizationProvider;
+	}
+
+	public HandlebarsTemplateEngine getTemplateEngine() {
+		return templateEngine;
+	}
+
+	public void setTemplateEngine(HandlebarsTemplateEngine templateEngine) {
+		this.templateEngine = templateEngine;
+	}
+
+	public Handlebars getHandlebars() {
+		return handlebars;
+	}
+
+	public void setHandlebars(Handlebars handlebars) {
+		this.handlebars = handlebars;
+	}
+
+	public TemplateHandler getTemplateHandler() {
+		return templateHandler;
+	}
+
+	public void setTemplateHandler(TemplateHandler templateHandler) {
+		this.templateHandler = templateHandler;
 	}
 }
