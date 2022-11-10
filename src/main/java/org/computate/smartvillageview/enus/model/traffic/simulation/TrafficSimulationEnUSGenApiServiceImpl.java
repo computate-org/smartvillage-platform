@@ -5,7 +5,7 @@ import org.computate.smartvillageview.enus.model.user.SiteUser;
 import org.computate.vertx.api.ApiRequest;
 import org.computate.vertx.search.list.SearchResult;
 import org.computate.vertx.verticle.EmailVerticle;
-import org.computate.vertx.config.ComputateConfigKeys;
+import org.computate.smartvillageview.enus.config.ConfigKeys;
 import org.computate.vertx.api.BaseApiServiceImpl;
 import io.vertx.ext.web.client.WebClient;
 import java.util.Objects;
@@ -21,6 +21,8 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.time.Instant;
+import java.time.Duration;
+import org.computate.search.response.solr.SolrResponse.StatsField;
 import java.util.stream.Collectors;
 import io.vertx.core.json.Json;
 import org.apache.commons.lang3.StringUtils;
@@ -108,7 +110,7 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 			try {
 
-				List<String> roles = Optional.ofNullable(config.getValue(ComputateConfigKeys.AUTH_ROLES_REQUIRED + "_TrafficSimulation")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
+				List<String> roles = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_REQUIRED + "_TrafficSimulation")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
 				List<String> roleReads = Arrays.asList("");
 				if(
 						!CollectionUtils.containsAny(siteRequest.getUserResourceRoles(), roles)
@@ -242,7 +244,7 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 			try {
 
-				List<String> roles = Optional.ofNullable(config.getValue(ComputateConfigKeys.AUTH_ROLES_REQUIRED + "_TrafficSimulation")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
+				List<String> roles = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_REQUIRED + "_TrafficSimulation")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
 				List<String> roleReads = Arrays.asList("");
 				if(
 						!CollectionUtils.containsAny(siteRequest.getUserResourceRoles(), roles)
@@ -316,7 +318,7 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 			try {
 				siteRequest.setJsonObject(body);
 
-				List<String> roles = Optional.ofNullable(config.getValue(ComputateConfigKeys.AUTH_ROLES_REQUIRED + "_TrafficSimulation")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
+				List<String> roles = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_REQUIRED + "_TrafficSimulation")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
 				if(
 						!CollectionUtils.containsAny(siteRequest.getUserResourceRoles(), roles)
 						&& !CollectionUtils.containsAny(siteRequest.getUserRealmRoles(), roles)
@@ -334,7 +336,7 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 				} else {
 					searchTrafficSimulationList(siteRequest, false, true, true).onSuccess(listTrafficSimulation -> {
 						try {
-							List<String> roles2 = Optional.ofNullable(config.getValue(ComputateConfigKeys.AUTH_ROLES_ADMIN)).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
+							List<String> roles2 = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_ADMIN)).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
 							if(listTrafficSimulation.getResponse().getResponse().getNumFound() > 1
 									&& !CollectionUtils.containsAny(siteRequest.getUserResourceRoles(), roles2)
 									&& !CollectionUtils.containsAny(siteRequest.getUserRealmRoles(), roles2)
@@ -621,6 +623,14 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 							num++;
 							bParams.add(o2.sqlNetFilePath());
 						break;
+					case "setStartDateTime":
+							o2.setStartDateTime(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficSimulation.VAR_startDateTime + "=$" + num);
+							num++;
+							bParams.add(o2.sqlStartDateTime());
+						break;
 					case "setStartSeconds":
 							o2.setStartSeconds(jsonObject.getString(entityVar));
 							if(bParams.size() > 0)
@@ -705,7 +715,7 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 			try {
 				siteRequest.setJsonObject(body);
 
-				List<String> roles = Optional.ofNullable(config.getValue(ComputateConfigKeys.AUTH_ROLES_REQUIRED + "_TrafficSimulation")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
+				List<String> roles = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_REQUIRED + "_TrafficSimulation")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
 				if(
 						!CollectionUtils.containsAny(siteRequest.getUserResourceRoles(), roles)
 						&& !CollectionUtils.containsAny(siteRequest.getUserRealmRoles(), roles)
@@ -1003,6 +1013,15 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 						num++;
 						bParams.add(o2.sqlNetFilePath());
 						break;
+					case TrafficSimulation.VAR_startDateTime:
+						o2.setStartDateTime(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficSimulation.VAR_startDateTime + "=$" + num);
+						num++;
+						bParams.add(o2.sqlStartDateTime());
+						break;
 					case TrafficSimulation.VAR_startSeconds:
 						o2.setStartSeconds(jsonObject.getString(entityVar));
 						if(bParams.size() > 0) {
@@ -1089,7 +1108,7 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 			try {
 				siteRequest.setJsonObject(body);
 
-				List<String> roles = Optional.ofNullable(config.getValue(ComputateConfigKeys.AUTH_ROLES_REQUIRED + "_TrafficSimulation")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
+				List<String> roles = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_REQUIRED + "_TrafficSimulation")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
 				if(
 						!CollectionUtils.containsAny(siteRequest.getUserResourceRoles(), roles)
 						&& !CollectionUtils.containsAny(siteRequest.getUserRealmRoles(), roles)
@@ -1341,7 +1360,7 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 			try {
 
-				List<String> roles = Optional.ofNullable(config.getValue(ComputateConfigKeys.AUTH_ROLES_REQUIRED + "_TrafficSimulation")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
+				List<String> roles = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_REQUIRED + "_TrafficSimulation")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
 				List<String> roleReads = Arrays.asList("");
 				if(
 						!CollectionUtils.containsAny(siteRequest.getUserResourceRoles(), roles)
@@ -1397,7 +1416,7 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 	}
 
 	public String templateSearchPageTrafficSimulation() {
-		return Optional.ofNullable(config.getString(ComputateConfigKeys.TEMPLATE_PATH)).orElse("templates") + "/enUS/TrafficSimulationPage";
+		return Optional.ofNullable(config.getString(ConfigKeys.TEMPLATE_PATH)).orElse("templates") + "/enUS/TrafficSimulationPage";
 	}
 	public Future<ServiceResponse> response200SearchPageTrafficSimulation(SearchList<TrafficSimulation> listTrafficSimulation) {
 		Promise<ServiceResponse> promise = Promise.promise();
@@ -1413,13 +1432,13 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 			page.setSiteRequest_(siteRequest);
 			page.promiseDeepTrafficSimulationPage(siteRequest).onSuccess(a -> {
 				JsonObject json = JsonObject.mapFrom(page);
-				json.put(ComputateConfigKeys.STATIC_BASE_URL, config.getString(ComputateConfigKeys.STATIC_BASE_URL));
-				json.put(ComputateConfigKeys.GITHUB_ORG, config.getString(ComputateConfigKeys.GITHUB_ORG));
-				json.put(ComputateConfigKeys.SITE_NAME, config.getString(ComputateConfigKeys.SITE_NAME));
-				json.put(ComputateConfigKeys.SITE_DISPLAY_NAME, config.getString(ComputateConfigKeys.SITE_DISPLAY_NAME));
-				json.put(ComputateConfigKeys.SITE_POWERED_BY_URL, config.getString(ComputateConfigKeys.SITE_POWERED_BY_URL));
-				json.put(ComputateConfigKeys.SITE_POWERED_BY_NAME, config.getString(ComputateConfigKeys.SITE_POWERED_BY_NAME));
-				json.put(ComputateConfigKeys.SITE_POWERED_BY_IMAGE_URI, config.getString(ComputateConfigKeys.SITE_POWERED_BY_IMAGE_URI));
+				json.put(ConfigKeys.STATIC_BASE_URL, config.getString(ConfigKeys.STATIC_BASE_URL));
+				json.put(ConfigKeys.GITHUB_ORG, config.getString(ConfigKeys.GITHUB_ORG));
+				json.put(ConfigKeys.SITE_NAME, config.getString(ConfigKeys.SITE_NAME));
+				json.put(ConfigKeys.SITE_DISPLAY_NAME, config.getString(ConfigKeys.SITE_DISPLAY_NAME));
+				json.put(ConfigKeys.SITE_POWERED_BY_URL, config.getString(ConfigKeys.SITE_POWERED_BY_URL));
+				json.put(ConfigKeys.SITE_POWERED_BY_NAME, config.getString(ConfigKeys.SITE_POWERED_BY_NAME));
+				json.put(ConfigKeys.SITE_POWERED_BY_IMAGE_URI, config.getString(ConfigKeys.SITE_POWERED_BY_IMAGE_URI));
 				templateEngine.render(json, templateSearchPageTrafficSimulation()).onSuccess(buffer -> {
 					promise.complete(new ServiceResponse(200, "OK", buffer, requestHeaders));
 				}).onFailure(ex -> {
@@ -1447,7 +1466,7 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 			try {
 
-				List<String> roles = Optional.ofNullable(config.getValue(ComputateConfigKeys.AUTH_ROLES_REQUIRED + "_TrafficSimulation")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
+				List<String> roles = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_REQUIRED + "_TrafficSimulation")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
 				List<String> roleReads = Arrays.asList("");
 				if(
 						!CollectionUtils.containsAny(siteRequest.getUserResourceRoles(), roles)
@@ -1503,7 +1522,7 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 	}
 
 	public String templateMapSearchPageTrafficSimulation() {
-		return Optional.ofNullable(config.getString(ComputateConfigKeys.TEMPLATE_PATH)).orElse("templates") + "/enUS/TrafficSimulationMapPage";
+		return Optional.ofNullable(config.getString(ConfigKeys.TEMPLATE_PATH)).orElse("templates") + "/enUS/TrafficSimulationMapPage";
 	}
 	public Future<ServiceResponse> response200MapSearchPageTrafficSimulation(SearchList<TrafficSimulation> listTrafficSimulation) {
 		Promise<ServiceResponse> promise = Promise.promise();
@@ -1519,13 +1538,13 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 			page.setSiteRequest_(siteRequest);
 			page.promiseDeepTrafficSimulationMapPage(siteRequest).onSuccess(a -> {
 				JsonObject json = JsonObject.mapFrom(page);
-				json.put(ComputateConfigKeys.STATIC_BASE_URL, config.getString(ComputateConfigKeys.STATIC_BASE_URL));
-				json.put(ComputateConfigKeys.GITHUB_ORG, config.getString(ComputateConfigKeys.GITHUB_ORG));
-				json.put(ComputateConfigKeys.SITE_NAME, config.getString(ComputateConfigKeys.SITE_NAME));
-				json.put(ComputateConfigKeys.SITE_DISPLAY_NAME, config.getString(ComputateConfigKeys.SITE_DISPLAY_NAME));
-				json.put(ComputateConfigKeys.SITE_POWERED_BY_URL, config.getString(ComputateConfigKeys.SITE_POWERED_BY_URL));
-				json.put(ComputateConfigKeys.SITE_POWERED_BY_NAME, config.getString(ComputateConfigKeys.SITE_POWERED_BY_NAME));
-				json.put(ComputateConfigKeys.SITE_POWERED_BY_IMAGE_URI, config.getString(ComputateConfigKeys.SITE_POWERED_BY_IMAGE_URI));
+				json.put(ConfigKeys.STATIC_BASE_URL, config.getString(ConfigKeys.STATIC_BASE_URL));
+				json.put(ConfigKeys.GITHUB_ORG, config.getString(ConfigKeys.GITHUB_ORG));
+				json.put(ConfigKeys.SITE_NAME, config.getString(ConfigKeys.SITE_NAME));
+				json.put(ConfigKeys.SITE_DISPLAY_NAME, config.getString(ConfigKeys.SITE_DISPLAY_NAME));
+				json.put(ConfigKeys.SITE_POWERED_BY_URL, config.getString(ConfigKeys.SITE_POWERED_BY_URL));
+				json.put(ConfigKeys.SITE_POWERED_BY_NAME, config.getString(ConfigKeys.SITE_POWERED_BY_NAME));
+				json.put(ConfigKeys.SITE_POWERED_BY_IMAGE_URI, config.getString(ConfigKeys.SITE_POWERED_BY_IMAGE_URI));
 				templateEngine.render(json, templateMapSearchPageTrafficSimulation()).onSuccess(buffer -> {
 					promise.complete(new ServiceResponse(200, "OK", buffer, requestHeaders));
 				}).onFailure(ex -> {
@@ -1549,7 +1568,7 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 			SqlConnection sqlConnection = siteRequest.getSqlConnection();
 			String userId = siteRequest.getUserId();
 			Long userKey = siteRequest.getUserKey();
-			ZonedDateTime created = Optional.ofNullable(siteRequest.getJsonObject()).map(j -> j.getString("created")).map(s -> ZonedDateTime.parse(s, ComputateZonedDateTimeSerializer.ZONED_DATE_TIME_FORMATTER.withZone(ZoneId.of(config.getString(ComputateConfigKeys.SITE_ZONE))))).orElse(ZonedDateTime.now(ZoneId.of(config.getString(ComputateConfigKeys.SITE_ZONE))));
+			ZonedDateTime created = Optional.ofNullable(siteRequest.getJsonObject()).map(j -> j.getString("created")).map(s -> ZonedDateTime.parse(s, ComputateZonedDateTimeSerializer.ZONED_DATE_TIME_FORMATTER.withZone(ZoneId.of(config.getString(ConfigKeys.SITE_ZONE))))).orElse(ZonedDateTime.now(ZoneId.of(config.getString(ConfigKeys.SITE_ZONE))));
 
 			sqlConnection.preparedQuery("INSERT INTO TrafficSimulation(created, userKey) VALUES($1, $2) RETURNING pk")
 					.collecting(Collectors.toList())
@@ -1651,6 +1670,12 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 			String entityListStr = siteRequest.getServiceRequest().getParams().getJsonObject("query").getString("fl");
 			String[] entityList = entityListStr == null ? null : entityListStr.split(",\\s*");
 			SearchList<TrafficSimulation> searchList = new SearchList<TrafficSimulation>();
+			String facetRange = null;
+			Date facetRangeStart = null;
+			Date facetRangeEnd = null;
+			String facetRangeGap = null;
+			String statsField = null;
+			String statsFieldIndexed = null;
 			searchList.setPopulate(populate);
 			searchList.setStore(store);
 			searchList.q("*:*");
@@ -1669,7 +1694,8 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 				searchList.fq("objectId_docvalues_string:" + SearchTool.escapeQueryChars(id));
 			}
 
-			serviceRequest.getParams().getJsonObject("query").forEach(paramRequest -> {
+			for(String paramName : serviceRequest.getParams().getJsonObject("query").fieldNames()) {
+				Object paramValuesObject = serviceRequest.getParams().getJsonObject("query").getValue(paramName);
 				String entityVar = null;
 				String valueIndexed = null;
 				String varIndexed = null;
@@ -1677,8 +1703,6 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 				Long valueStart = null;
 				Long valueRows = null;
 				String valueCursorMark = null;
-				String paramName = paramRequest.getKey();
-				Object paramValuesObject = paramRequest.getValue();
 				JsonArray paramObjects = paramValuesObject instanceof JsonArray ? (JsonArray)paramValuesObject : new JsonArray().add(paramValuesObject);
 
 				try {
@@ -1697,110 +1721,100 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 						}
 					} else if(paramValuesObject != null) {
 						for(Object paramObject : paramObjects) {
-							switch(paramName) {
-								case "q":
-									Matcher mQ = Pattern.compile("(\\w+):(.+?(?=(\\)|\\s+OR\\s+|\\s+AND\\s+|\\^|$)))").matcher((String)paramObject);
-									boolean foundQ = mQ.find();
-									if(foundQ) {
-										StringBuffer sb = new StringBuffer();
-										while(foundQ) {
-											entityVar = mQ.group(1).trim();
-											valueIndexed = mQ.group(2).trim();
-											varIndexed = TrafficSimulation.varIndexedTrafficSimulation(entityVar);
-											String entityQ = searchTrafficSimulationFq(searchList, entityVar, valueIndexed, varIndexed);
-											mQ.appendReplacement(sb, entityQ);
-											foundQ = mQ.find();
-										}
-										mQ.appendTail(sb);
-										searchList.q(sb.toString());
-									}
-									break;
-								case "fq":
-									Matcher mFq = Pattern.compile("(\\w+):(.+?(?=(\\)|\\s+OR\\s+|\\s+AND\\s+|$)))").matcher((String)paramObject);
-									boolean foundFq = mFq.find();
-									if(foundFq) {
-										StringBuffer sb = new StringBuffer();
-										while(foundFq) {
-											entityVar = mFq.group(1).trim();
-											valueIndexed = mFq.group(2).trim();
-											varIndexed = TrafficSimulation.varIndexedTrafficSimulation(entityVar);
-											String entityFq = searchTrafficSimulationFq(searchList, entityVar, valueIndexed, varIndexed);
-											mFq.appendReplacement(sb, entityFq);
-											foundFq = mFq.find();
-										}
-										mFq.appendTail(sb);
-										searchList.fq(sb.toString());
-									}
-									break;
-								case "sort":
-									entityVar = StringUtils.trim(StringUtils.substringBefore((String)paramObject, " "));
-									valueIndexed = StringUtils.trim(StringUtils.substringAfter((String)paramObject, " "));
-									varIndexed = TrafficSimulation.varIndexedTrafficSimulation(entityVar);
-									searchTrafficSimulationSort(searchList, entityVar, valueIndexed, varIndexed);
-									break;
-								case "start":
-									valueStart = paramObject instanceof Long ? (Long)paramObject : Long.parseLong(paramObject.toString());
-									searchTrafficSimulationStart(searchList, valueStart);
-									break;
-								case "rows":
-									valueRows = paramObject instanceof Long ? (Long)paramObject : Long.parseLong(paramObject.toString());
-									searchTrafficSimulationRows(searchList, valueRows);
-									break;
-								case "stats":
-									searchList.stats((Boolean)paramObject);
-									break;
-								case "stats.field":
-									Matcher mStats = Pattern.compile("(?:(\\{![^\\}]+\\}))?(.*)").matcher((String)paramObject);
-									boolean foundStats = mStats.find();
-									if(foundStats) {
-										String solrLocalParams = mStats.group(1);
-										entityVar = mStats.group(2).trim();
+							if(paramName.equals("q")) {
+								Matcher mQ = Pattern.compile("(\\w+):(.+?(?=(\\)|\\s+OR\\s+|\\s+AND\\s+|\\^|$)))").matcher((String)paramObject);
+								boolean foundQ = mQ.find();
+								if(foundQ) {
+									StringBuffer sb = new StringBuffer();
+									while(foundQ) {
+										entityVar = mQ.group(1).trim();
+										valueIndexed = mQ.group(2).trim();
 										varIndexed = TrafficSimulation.varIndexedTrafficSimulation(entityVar);
-										searchList.statsField((solrLocalParams == null ? "" : solrLocalParams) + varIndexed);
+										String entityQ = searchTrafficSimulationFq(searchList, entityVar, valueIndexed, varIndexed);
+										mQ.appendReplacement(sb, entityQ);
+										foundQ = mQ.find();
 									}
-									break;
-								case "facet":
-									searchList.facet((Boolean)paramObject);
-									break;
-								case "facet.range.start":
-									String startMathStr = (String)paramObject;
-									Date start = SearchTool.parseMath(startMathStr);
-									searchList.facetRangeStart(start.toInstant().toString());
-									break;
-								case "facet.range.end":
-									String endMathStr = (String)paramObject;
-									Date end = SearchTool.parseMath(endMathStr);
-									searchList.facetRangeEnd(end.toInstant().toString());
-									break;
-								case "facet.range.gap":
-									String gap = (String)paramObject;
-									searchList.facetRangeGap(gap);
-									break;
-								case "facet.range":
-									Matcher mFacetRange = Pattern.compile("(?:(\\{![^\\}]+\\}))?(.*)").matcher((String)paramObject);
-									boolean foundFacetRange = mFacetRange.find();
-									if(foundFacetRange) {
-										String solrLocalParams = mFacetRange.group(1);
-										entityVar = mFacetRange.group(2).trim();
+									mQ.appendTail(sb);
+									searchList.q(sb.toString());
+								}
+							} else if(paramName.equals("fq")) {
+								Matcher mFq = Pattern.compile("(\\w+):(.+?(?=(\\)|\\s+OR\\s+|\\s+AND\\s+|$)))").matcher((String)paramObject);
+								boolean foundFq = mFq.find();
+								if(foundFq) {
+									StringBuffer sb = new StringBuffer();
+									while(foundFq) {
+										entityVar = mFq.group(1).trim();
+										valueIndexed = mFq.group(2).trim();
 										varIndexed = TrafficSimulation.varIndexedTrafficSimulation(entityVar);
-										searchList.facetRange((solrLocalParams == null ? "" : solrLocalParams) + varIndexed);
+										String entityFq = searchTrafficSimulationFq(searchList, entityVar, valueIndexed, varIndexed);
+										mFq.appendReplacement(sb, entityFq);
+										foundFq = mFq.find();
 									}
-									break;
-								case "facet.field":
-									entityVar = (String)paramObject;
+									mFq.appendTail(sb);
+									searchList.fq(sb.toString());
+								}
+							} else if(paramName.equals("sort")) {
+								entityVar = StringUtils.trim(StringUtils.substringBefore((String)paramObject, " "));
+								valueIndexed = StringUtils.trim(StringUtils.substringAfter((String)paramObject, " "));
+								varIndexed = TrafficSimulation.varIndexedTrafficSimulation(entityVar);
+								searchTrafficSimulationSort(searchList, entityVar, valueIndexed, varIndexed);
+							} else if(paramName.equals("start")) {
+								valueStart = paramObject instanceof Long ? (Long)paramObject : Long.parseLong(paramObject.toString());
+								searchTrafficSimulationStart(searchList, valueStart);
+							} else if(paramName.equals("rows")) {
+								valueRows = paramObject instanceof Long ? (Long)paramObject : Long.parseLong(paramObject.toString());
+								searchTrafficSimulationRows(searchList, valueRows);
+							} else if(paramName.equals("stats")) {
+								searchList.stats((Boolean)paramObject);
+							} else if(paramName.equals("stats.field")) {
+								Matcher mStats = Pattern.compile("(?:(\\{![^\\}]+\\}))?(.*)").matcher((String)paramObject);
+								boolean foundStats = mStats.find();
+								if(foundStats) {
+									String solrLocalParams = mStats.group(1);
+									entityVar = mStats.group(2).trim();
 									varIndexed = TrafficSimulation.varIndexedTrafficSimulation(entityVar);
-									if(varIndexed != null)
-										searchList.facetField(varIndexed);
-									break;
-								case "var":
-									entityVar = StringUtils.trim(StringUtils.substringBefore((String)paramObject, ":"));
-									valueIndexed = URLDecoder.decode(StringUtils.trim(StringUtils.substringAfter((String)paramObject, ":")), "UTF-8");
-									searchTrafficSimulationVar(searchList, entityVar, valueIndexed);
-									break;
-								case "cursorMark":
-									valueCursorMark = (String)paramObject;
-									searchList.cursorMark((String)paramObject);
-									break;
+									searchList.statsField((solrLocalParams == null ? "" : solrLocalParams) + varIndexed);
+									statsField = entityVar;
+									statsFieldIndexed = varIndexed;
+								}
+							} else if(paramName.equals("facet")) {
+								searchList.facet((Boolean)paramObject);
+							} else if(paramName.equals("facet.range.start")) {
+								String startMathStr = (String)paramObject;
+								Date start = SearchTool.parseMath(startMathStr);
+								searchList.facetRangeStart(start.toInstant().toString());
+								facetRangeStart = start;
+							} else if(paramName.equals("facet.range.end")) {
+								String endMathStr = (String)paramObject;
+								Date end = SearchTool.parseMath(endMathStr);
+								searchList.facetRangeEnd(end.toInstant().toString());
+								facetRangeEnd = end;
+							} else if(paramName.equals("facet.range.gap")) {
+								String gap = (String)paramObject;
+								searchList.facetRangeGap(gap);
+								facetRangeGap = gap;
+							} else if(paramName.equals("facet.range")) {
+								Matcher mFacetRange = Pattern.compile("(?:(\\{![^\\}]+\\}))?(.*)").matcher((String)paramObject);
+								boolean foundFacetRange = mFacetRange.find();
+								if(foundFacetRange) {
+									String solrLocalParams = mFacetRange.group(1);
+									entityVar = mFacetRange.group(2).trim();
+									varIndexed = TrafficSimulation.varIndexedTrafficSimulation(entityVar);
+									searchList.facetRange((solrLocalParams == null ? "" : solrLocalParams) + varIndexed);
+									facetRange = entityVar;
+								}
+							} else if(paramName.equals("facet.field")) {
+								entityVar = (String)paramObject;
+								varIndexed = TrafficSimulation.varIndexedTrafficSimulation(entityVar);
+								if(varIndexed != null)
+									searchList.facetField(varIndexed);
+							} else if(paramName.equals("var")) {
+								entityVar = StringUtils.trim(StringUtils.substringBefore((String)paramObject, ":"));
+								valueIndexed = URLDecoder.decode(StringUtils.trim(StringUtils.substringAfter((String)paramObject, ":")), "UTF-8");
+								searchTrafficSimulationVar(searchList, entityVar, valueIndexed);
+							} else if(paramName.equals("cursorMark")) {
+								valueCursorMark = (String)paramObject;
+								searchList.cursorMark((String)paramObject);
 							}
 						}
 						searchTrafficSimulationUri(searchList);
@@ -1808,13 +1822,54 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 				} catch(Exception e) {
 					ExceptionUtils.rethrow(e);
 				}
-			});
+			}
 			if("*:*".equals(searchList.getQuery()) && searchList.getSorts().size() == 0) {
 				searchList.sort("created_docvalues_date", "desc");
 			}
+			String facetRange2 = facetRange;
+			Date facetRangeStart2 = facetRangeStart;
+			Date facetRangeEnd2 = facetRangeEnd;
+			String facetRangeGap2 = facetRangeGap;
+			String statsField2 = statsField;
+			String statsFieldIndexed2 = statsFieldIndexed;
 			searchTrafficSimulation2(siteRequest, populate, store, modify, searchList);
 			searchList.promiseDeepForClass(siteRequest).onSuccess(a -> {
-				promise.complete(searchList);
+				if(facetRange2 != null && statsField2 != null && facetRange2.equals(statsField2)) {
+					StatsField stats = searchList.getResponse().getStats().getStatsFields().get(statsFieldIndexed2);
+					Instant min = Instant.parse(stats.getMin().toString());
+					Instant max = Instant.parse(stats.getMax().toString());
+					Duration duration = Duration.between(min, max);
+					String gap = "DAY";
+					if(duration.toDays() >= 365)
+						gap = "YEAR";
+					else if(duration.toDays() >= 28)
+						gap = "MONTH";
+					else if(duration.toDays() >= 1)
+						gap = "DAY";
+					else if(duration.toHours() >= 1)
+						gap = "HOUR";
+					else if(duration.toMinutes() >= 1)
+						gap = "MINUTE";
+					else if(duration.toMillis() >= 1000)
+						gap = "SECOND";
+					else if(duration.toMillis() >= 1)
+						gap = "MILLI";
+
+					if(facetRangeStart2 == null)
+						searchList.facetRangeStart(min.toString());
+					if(facetRangeEnd2 == null)
+						searchList.facetRangeEnd(max.toString());
+					if(facetRangeGap2 == null)
+						searchList.facetRangeGap(String.format("+1%s", gap));
+					searchList.query().onSuccess(b -> {
+						promise.complete(searchList);
+					}).onFailure(ex -> {
+						LOG.error(String.format("searchTrafficSimulation failed. "), ex);
+						promise.fail(ex);
+					});
+				} else {
+					promise.complete(searchList);
+				}
 			}).onFailure(ex -> {
 				LOG.error(String.format("searchTrafficSimulation failed. "), ex);
 				promise.fail(ex);
@@ -1887,9 +1942,9 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 				JsonObject doc = new JsonObject();
 				add.put("doc", doc);
 				o.indexTrafficSimulation(doc);
-				String solrHostName = siteRequest.getConfig().getString(ComputateConfigKeys.SOLR_HOST_NAME);
-				Integer solrPort = siteRequest.getConfig().getInteger(ComputateConfigKeys.SOLR_PORT);
-				String solrCollection = siteRequest.getConfig().getString(ComputateConfigKeys.SOLR_COLLECTION);
+				String solrHostName = siteRequest.getConfig().getString(ConfigKeys.SOLR_HOST_NAME);
+				Integer solrPort = siteRequest.getConfig().getInteger(ConfigKeys.SOLR_PORT);
+				String solrCollection = siteRequest.getConfig().getString(ConfigKeys.SOLR_COLLECTION);
 				Boolean softCommit = Optional.ofNullable(siteRequest.getServiceRequest().getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getBoolean("softCommit")).orElse(null);
 				Integer commitWithin = Optional.ofNullable(siteRequest.getServiceRequest().getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getInteger("commitWithin")).orElse(null);
 					if(softCommit == null && commitWithin == null)

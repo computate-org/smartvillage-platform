@@ -29,7 +29,6 @@ import io.vertx.pgclient.data.Point;
  * ApiUri.SearchPage.enUS: /vehicle-step
  * 
  * Role.enUS: SiteAdmin
- * Saves: true
  * 
  * AName.enUS: a vehicle step
  * Color: 2017-shaded-spruce

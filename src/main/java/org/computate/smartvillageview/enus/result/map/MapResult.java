@@ -1,6 +1,7 @@
 package org.computate.smartvillageview.enus.result.map;
 
 import java.math.BigDecimal;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 import org.computate.search.wrap.Wrap;
@@ -27,7 +28,6 @@ import io.vertx.pgclient.data.Point;
  * ApiUri.SearchPage.enUS: /map-result
  * 
  * Role.enUS: SiteAdmin
- * Saves: true
  * 
  * AName.enUS: a map result
  * Color: 2017-shaded-spruce
@@ -95,6 +95,19 @@ public class MapResult extends MapResultGen<BaseResult> {
 	 * Description: The time in seconds. 
 	 */
 	protected void _time(Wrap<BigDecimal> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * HtmlRow: 4
+	 * HtmlCell: 1
+	 * Facet: true
+	 * DisplayName: Date and Time
+	 * Description: The date and time. 
+	 */
+	protected void _dateTime(Wrap<ZonedDateTime> w) {
 	}
 
 	/**

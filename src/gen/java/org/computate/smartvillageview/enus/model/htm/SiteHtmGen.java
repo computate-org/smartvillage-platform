@@ -3,7 +3,7 @@ package org.computate.smartvillageview.enus.model.htm;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.smartvillageview.enus.model.base.BaseModel;
 import org.computate.vertx.api.ApiRequest;
-import org.computate.vertx.config.ComputateConfigKeys;
+import org.computate.smartvillageview.enus.config.ConfigKeys;
 import java.util.Optional;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
@@ -43,21 +43,30 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.computate.search.response.solr.SolrResponse;
 
 /**	
- * <h1>Suggestions that can generate more code for you: </h1>
- * <ol>
+<ol>
+<li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class SiteHtmGen into the class SiteHtm. 
+</li>
+<li>You can add a class comment "Rows: 100" if you wish the SiteHtm API to return more or less than 10 records by default. 
+In this case, the API will return 100 records from the API instead of 10 by default. 
+Each API has built in pagination of the search records to ensure a user can query all the data a page at a time without running the application out of memory. 
+</li>
+<li>You can add a class comment "Model: true" if you wish to persist these SiteHtm objects in a relational PostgreSQL database transactionally in the RESTful API. 
+The code to persist and query the SiteHtmGen data in the database will then be automatically generated. 
+</li>
+0<h3>Suggestions that can generate more code for you: </h3></ol>
  * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class SiteHtmGen into the class SiteHtm. 
- * </li>
- * <li>You can add a class comment "Model: true" if you wish to persist these SiteHtm objects in a relational PostgreSQL database transactionally in the RESTful API. 
- * The code to persist and query the SiteHtmGen data in the database will then be automatically generated. 
  * </li>
  * <li>You can add a class comment "Rows: 100" if you wish the SiteHtm API to return more or less than 10 records by default. 
  * In this case, the API will return 100 records from the API instead of 10 by default. 
  * Each API has built in pagination of the search records to ensure a user can query all the data a page at a time without running the application out of memory. 
  * </li>
- * </ol>
- * <h1>About the SiteHtm class and it's generated class SiteHtmGen&lt;BaseResult&gt;: </h1>
+ * <li>You can add a class comment "Model: true" if you wish to persist these SiteHtm objects in a relational PostgreSQL database transactionally in the RESTful API. 
+ * The code to persist and query the SiteHtmGen data in the database will then be automatically generated. 
+ * </li>
+ * 0<h3>Suggestions that can generate more code for you: </h3>
+ * <h3>About the SiteHtm class and it's generated class SiteHtmGen&lt;BaseResult&gt;: </h3>extends SiteHtmGen
  * <p>
- * This Java class extends a generated Java class built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
+ * This Java class extends a generated Java class SiteHtmGen built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
  * Whenever this Java class is modified or touched, the watch service installed as described in the README, indexes all the information about this Java class in a local Apache Solr Search Engine. 
  * If you are running the service, you can see the indexed data about this Java Class here: 
  * </p>
@@ -66,34 +75,88 @@ import org.computate.search.response.solr.SolrResponse;
  * The extended class ending with "Gen" did not exist at first, but was automatically created by the same watch service based on the data retrieved from the local Apache Server search engine. 
  * The extended class contains many generated fields, getters, setters, initialization code, and helper methods to help build a website and API fast, reactive, and scalable. 
  * </p>
- * <p>This class contains a comment <b>"Indexed: true"</b>, which means this class will be indexed in the search engine. 
- * Every protected void method that begins with "_" that is marked to be searched with a comment like "Indexed: true", "Stored: true", or "DocValues: true" will be indexed in the search engine. 
+ * extends SiteHtmGen<BaseResult>
+ * <p>This <code>class SiteHtm extends SiteHtmGen&lt;BaseResult&gt;</code>, which means it extends a newly generated SiteHtmGen. 
+ * The generated <code>class SiteHtmGen extends BaseResult</code> which means that SiteHtm extends SiteHtmGen which extends BaseResult. 
+ * This generated inheritance is a powerful feature that allows a lot of boiler plate code to be created for you automatically while still preserving inheritance through the power of Java Generic classes. 
  * </p>
- * <p>This class contains a comment <b>"Page: true"</b>, which means this class will have webpage code generated for these objects. 
- * Java Vert.x backend API code, Handlebars HTML template frontend code, and JavaScript code will all generated and can be extended. 
- * This creates a new Java class org.computate.smartvillageview.enus.model.htm.SiteHtmPage. 
- * </p>
- * <p>This class contains a comment <b>"SuperPage.enUS: BaseResultPage"</b>, which identifies the Java super class of the page code by it's class simple name "BaseResultPage". 
- * This means that the newly created class org.computate.smartvillageview.enus.model.htm.SiteHtmPage extends org.computate.smartvillageview.enus.result.base.BaseResultPage. 
- * </p>
+ * Api: true
  * <p>This class contains a comment <b>"Api: true"</b>, which means this class will have Java Vert.x API backend code generated for these objects. 
  * </p>
+ * ApiTag.enUS: HTM
  * <p>This class contains a comment <b>"ApiTag: HTM"</b>, which groups all of the OpenAPIs for SiteHtm objects under the tag "HTM". 
  * </p>
+ * ApiUri.enUS: /api/htm
  * <p>This class contains a comment <b>"ApiUri: /api/htm"</b>, which defines the base API URI for SiteHtm objects as "/api/htm" in the OpenAPI spec. 
  * </p>
- * <p>This class contains a comment <b>"AName.enUS: an HTML"</b>, which identifies the language context to describe a SiteHtm as "an HTML". 
- * </p>
+ * Color: 2017-shaded-spruce
  * <p>This class contains a comment <b>"Color: 2017-shaded-spruce"</b>, which styles the SiteHtm page "2017-shaded-spruce". 
  * This will reference a CSS class defined by the stylesheets in the project that starts with "w3-". 
  * A css class of "w3-2017-shaded-spruce" is expected to exist in the project stylesheets, and is inspired by W3 CSS colors. 
  * See: <a href="https://www.w3schools.com/w3css/w3css_colors.asp">https://www.w3schools.com/w3css/w3css_colors.asp</a>. 
  * </p>
+ * IconGroup: duotone
  * <p>This class contains a comment <b>"IconGroup: duotone"</b>, which adds icons on the SiteHtm page with a group of "duotone". 
- * This will reference a Font Awesome icon group defined by the stylesheets in the project that starts with "fa" followed by the first letter of the icon group, which is "fad". 
- * A Font Awesome icon group of "2017-shaded-spruce" is expected to exist. 
- * The Font Awesome groups currently supported include: solid, thin, duotone. 
- * See: <a href="https://www.w3schools.com/w3css/w3css_colors.asp">https://www.w3schools.com/w3css/w3css_colors.asp</a>. 
+ * This will reference a Font Awesome icon group that starts with "fa-" followed by the icon group "duotone", together is "fa-duotone". 
+ * A Font Awesome icon group of "duotone" is expected to exist. 
+ * The Font Awesome groups currently supported include: solid, regular, light, thin, duotone, and sharp. 
+ * See: <a href="https://fontawesome.com/docs/web/dig-deeper/styles">https://fontawesome.com/docs/web/dig-deeper/styles</a>. 
+ * </p>
+ * IconName: code
+ * <p>This class contains a comment <b>"IconName: code"</b>, which adds icons on the SiteHtm page with a name of "code". 
+ * This will reference a Font Awesome icon that starts with the icon group "fa-duotone fa-" followed by the icon name, which is "fa-duotone fa-code". 
+ * A Font Awesome icon of "fa-duotone fa-code" is expected to exist. 
+ * See: <a href="https://fontawesome.com/icons">https://fontawesome.com/icons</a>. 
+ * </p>
+ * Indexed: true
+ * <p>This class contains a comment <b>"Indexed: true"</b>, which means this class will be indexed in the search engine. 
+ * Every protected void method that begins with "_" that is marked to be searched with a comment like "Indexed: true", "Stored: true", or "DocValues: true" will be indexed in the search engine. 
+ * </p>
+ * {@inheritDoc}
+ * <p>By adding a class comment "{@inheritDoc}", the SiteHtm class will inherit the helpful inherited class comments from the super class SiteHtmGen. 
+ * </p>
+ * Rows: null
+ * Model: true
+ * Page: true
+ * <p>This class contains a comment <b>"Page: true"</b>, which means this class will have webpage code generated for these objects. 
+ * Java Vert.x backend API code, Handlebars HTML template frontend code, and JavaScript code will all generated and can be extended. 
+ * This creates a new Java class org.computate.smartvillageview.enus.model.htm.SiteHtmPage. 
+ * </p>
+ * SuperPage.enUS: BaseResultPage
+ * <p>This class contains a comment <b>"SuperPage.enUS: BaseResultPage"</b>, which identifies the Java super class of the page code by it's class simple name "BaseResultPage". 
+ * This means that the newly created class org.computate.smartvillageview.enus.model.htm.SiteHtmPage extends org.computate.smartvillageview.enus.result.base.BaseResultPage. 
+ * </p>
+ * Promise: true
+ * <p>
+ *   This class contains a comment <b>"Promise: true"</b>
+ *   Sometimes a Java class must be initialized asynchronously when it involves calling a blocking API. 
+ *   This means that the SiteHtm Java class has promiseDeep methods which must be initialized asynchronously as a Vert.x Promise  instead of initDeep methods which are a simple non-asynchronous method. 
+ * </p>
+ * <p>
+ *   Adding protected void methods beginning with an underscore with a Promise as the only parameter will automatically set `Promise: true`. 
+ * </p>
+ * <p>
+ *   <pre>
+ *   
+ *   	protected void _promiseBefore(Promise&lt;Void&gt; promise) {
+ *   		promise.complete();
+ *   	}
+ *   </pre>
+ * </p>
+ * <p>
+ *   Java classes with the `Model: true` will automatically set `Promise: true`. 
+ * </p>
+ * <p>
+ *   If a super class of this Java class with `Model: true`, then the child class will also inherit `Promise: true`. 
+ * </p>
+ * Role.enUS: SiteAdmin
+ * <p>
+ * This class contains a comment <b>"Role.enUS: SiteAdmin"</b>, which identifies the default role name "SiteAdmin" of the OAuth2/OpenID Connect user role required to access this SiteHtm API. 
+ * It's possible to reconfigure the roles required to access the SiteHtm API by configuring an environment variable like this: 
+ * </p>
+ * <pre>AUTH_ROLES_REQUIRED_SiteHtm: ["SiteAdmin"]</pre>
+ * AName: an HTML
+ * <p>This class contains a comment <b>"AName.enUS: an HTML"</b>, which identifies the language context to describe a SiteHtm as "an HTML". 
  * </p>
  * <p>
  * Delete the class SiteHtm in Solr: 
@@ -152,6 +215,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	// uri //
 	/////////
 
+
 	/**	 The entity uri
 	 *	 is defined as null before being initialized. 
 	 */
@@ -205,6 +269,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	// pageId //
 	////////////
 
+
 	/**	 The entity pageId
 	 *	 is defined as null before being initialized. 
 	 */
@@ -257,6 +322,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	/////////////////
 	// sequenceNum //
 	/////////////////
+
 
 	/**	 The entity sequenceNum
 	 *	 is defined as null before being initialized. 
@@ -319,6 +385,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	// htmGroup //
 	//////////////
 
+
 	/**	 The entity htmGroup
 	 *	 is defined as null before being initialized. 
 	 */
@@ -371,6 +438,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	////////////
 	// labels //
 	////////////
+
 
 	/**	 The entity labels
 	 *	 It is constructed before being initialized with the constructor by default. 
@@ -442,6 +510,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	// eBefore //
 	/////////////
 
+
 	/**	 The entity eBefore
 	 *	 is defined as null before being initialized. 
 	 */
@@ -495,6 +564,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	// eAfter //
 	////////////
 
+
 	/**	 The entity eAfter
 	 *	 is defined as null before being initialized. 
 	 */
@@ -547,6 +617,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	///////
 	// a //
 	///////
+
 
 	/**	 The entity a
 	 *	 is defined as null before being initialized. 
@@ -608,6 +679,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	//////////
 	// text //
 	//////////
+
 
 	/**	 The entity text
 	 *	 It is constructed before being initialized with the constructor by default. 
@@ -679,6 +751,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	// comment //
 	/////////////
 
+
 	/**	 The entity comment
 	 *	 It is constructed before being initialized with the constructor by default. 
 	 */
@@ -749,6 +822,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	// tabs //
 	//////////
 
+
 	/**	 The entity tabs
 	 *	 is defined as null before being initialized. 
 	 */
@@ -801,6 +875,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	/////////////
 	// newLine //
 	/////////////
+
 
 	/**	 The entity newLine
 	 *	 is defined as null before being initialized. 
@@ -860,6 +935,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	// htmBefore //
 	///////////////
 
+
 	/**	 The entity htmBefore
 	 *	 is defined as null before being initialized. 
 	 */
@@ -913,6 +989,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	// htmAfter //
 	//////////////
 
+
 	/**	 The entity htmAfter
 	 *	 is defined as null before being initialized. 
 	 */
@@ -961,6 +1038,8 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	public String sqlHtmAfter() {
 		return htmAfter;
 	}
+
+
 
 	//////////////
 	// initDeep //
@@ -1407,9 +1486,9 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 				}
 				saves.add("htmAfter");
 				return val;
-			} else {
-				return super.persistBaseResult(var, val);
-			}
+		} else {
+			return super.persistBaseResult(var, val);
+		}
 	}
 
 	/////////////

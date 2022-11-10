@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import java.util.Date;
 import java.util.Set;
 import org.computate.vertx.api.ApiRequest;
-import org.computate.vertx.config.ComputateConfigKeys;
+import org.computate.smartvillageview.enus.config.ConfigKeys;
 import java.util.Optional;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
@@ -44,18 +44,24 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.computate.search.response.solr.SolrResponse;
 
 /**	
- * <h1>Suggestions that can generate more code for you: </h1>
- * <ol>
+<ol>
+<li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class SiteUserGen into the class SiteUser. 
+</li>
+<li>You can add a class comment "Rows: 100" if you wish the SiteUser API to return more or less than 10 records by default. 
+In this case, the API will return 100 records from the API instead of 10 by default. 
+Each API has built in pagination of the search records to ensure a user can query all the data a page at a time without running the application out of memory. 
+</li>
+0<h3>Suggestions that can generate more code for you: </h3></ol>
  * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class SiteUserGen into the class SiteUser. 
  * </li>
  * <li>You can add a class comment "Rows: 100" if you wish the SiteUser API to return more or less than 10 records by default. 
  * In this case, the API will return 100 records from the API instead of 10 by default. 
  * Each API has built in pagination of the search records to ensure a user can query all the data a page at a time without running the application out of memory. 
  * </li>
- * </ol>
- * <h1>About the SiteUser class and it's generated class SiteUserGen&lt;BaseModel&gt;: </h1>
+ * 0<h3>Suggestions that can generate more code for you: </h3>
+ * <h3>About the SiteUser class and it's generated class SiteUserGen&lt;BaseModel&gt;: </h3>extends SiteUserGen
  * <p>
- * This Java class extends a generated Java class built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
+ * This Java class extends a generated Java class SiteUserGen built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
  * Whenever this Java class is modified or touched, the watch service installed as described in the README, indexes all the information about this Java class in a local Apache Solr Search Engine. 
  * If you are running the service, you can see the indexed data about this Java Class here: 
  * </p>
@@ -64,37 +70,97 @@ import org.computate.search.response.solr.SolrResponse;
  * The extended class ending with "Gen" did not exist at first, but was automatically created by the same watch service based on the data retrieved from the local Apache Server search engine. 
  * The extended class contains many generated fields, getters, setters, initialization code, and helper methods to help build a website and API fast, reactive, and scalable. 
  * </p>
- * <p>This class contains a comment <b>"Model: true"</b>, which means this class will be stored in the database. 
- * Every protected void method that begins with "_" that contains a "Persist: true" comment will be a persisted field in the database table. 
+ * extends SiteUserGen<BaseModel>
+ * <p>This <code>class SiteUser extends SiteUserGen&lt;BaseModel&gt;</code>, which means it extends a newly generated SiteUserGen. 
+ * The generated <code>class SiteUserGen extends BaseModel</code> which means that SiteUser extends SiteUserGen which extends BaseModel. 
+ * This generated inheritance is a powerful feature that allows a lot of boiler plate code to be created for you automatically while still preserving inheritance through the power of Java Generic classes. 
  * </p>
+ * Api: true
+ * <p>This class contains a comment <b>"Api: true"</b>, which means this class will have Java Vert.x API backend code generated for these objects. 
+ * </p>
+ * ApiTag.enUS: User
+ * <p>This class contains a comment <b>"ApiTag: User"</b>, which groups all of the OpenAPIs for SiteUser objects under the tag "User". 
+ * </p>
+ * ApiUri.enUS: /api/user
+ * <p>This class contains a comment <b>"ApiUri: /api/user"</b>, which defines the base API URI for SiteUser objects as "/api/user" in the OpenAPI spec. 
+ * </p>
+ * Color: 2017-shaded-spruce
+ * <p>This class contains a comment <b>"Color: 2017-shaded-spruce"</b>, which styles the SiteUser page "2017-shaded-spruce". 
+ * This will reference a CSS class defined by the stylesheets in the project that starts with "w3-". 
+ * A css class of "w3-2017-shaded-spruce" is expected to exist in the project stylesheets, and is inspired by W3 CSS colors. 
+ * See: <a href="https://www.w3schools.com/w3css/w3css_colors.asp">https://www.w3schools.com/w3css/w3css_colors.asp</a>. 
+ * </p>
+ * IconGroup: regular
+ * <p>This class contains a comment <b>"IconGroup: regular"</b>, which adds icons on the SiteUser page with a group of "regular". 
+ * This will reference a Font Awesome icon group that starts with "fa-" followed by the icon group "regular", together is "fa-regular". 
+ * A Font Awesome icon group of "regular" is expected to exist. 
+ * The Font Awesome groups currently supported include: solid, regular, light, thin, duotone, and sharp. 
+ * See: <a href="https://fontawesome.com/docs/web/dig-deeper/styles">https://fontawesome.com/docs/web/dig-deeper/styles</a>. 
+ * </p>
+ * IconName: user-cog
+ * <p>This class contains a comment <b>"IconName: user-cog"</b>, which adds icons on the SiteUser page with a name of "user-cog". 
+ * This will reference a Font Awesome icon that starts with the icon group "fa-regular fa-" followed by the icon name, which is "fa-regular fa-user-cog". 
+ * A Font Awesome icon of "fa-regular fa-user-cog" is expected to exist. 
+ * See: <a href="https://fontawesome.com/icons">https://fontawesome.com/icons</a>. 
+ * </p>
+ * Indexed: true
  * <p>This class contains a comment <b>"Indexed: true"</b>, which means this class will be indexed in the search engine. 
  * Every protected void method that begins with "_" that is marked to be searched with a comment like "Indexed: true", "Stored: true", or "DocValues: true" will be indexed in the search engine. 
  * </p>
+ * {@inheritDoc}
+ * <p>By adding a class comment "{@inheritDoc}", the SiteUser class will inherit the helpful inherited class comments from the super class SiteUserGen. 
+ * </p>
+ * Rows: null
+ * Model: true
+ * <p>This class contains a comment <b>"Model: true"</b>, which means this class will be stored in the database. 
+ * Every protected void method that begins with "_" that contains a "Persist: true" comment will be a persisted field in the database table. 
+ * </p>
+ * Page: true
  * <p>This class contains a comment <b>"Page: true"</b>, which means this class will have webpage code generated for these objects. 
  * Java Vert.x backend API code, Handlebars HTML template frontend code, and JavaScript code will all generated and can be extended. 
  * This creates a new Java class org.computate.smartvillageview.enus.model.user.SiteUserPage. 
  * </p>
+ * SuperPage.enUS: BaseModelPage
  * <p>This class contains a comment <b>"SuperPage.enUS: BaseModelPage"</b>, which identifies the Java super class of the page code by it's class simple name "BaseModelPage". 
  * This means that the newly created class org.computate.smartvillageview.enus.model.user.SiteUserPage extends org.computate.smartvillageview.enus.model.base.BaseModelPage. 
  * </p>
- * <p>This class contains a comment <b>"Api: true"</b>, which means this class will have Java Vert.x API backend code generated for these objects. 
+ * Promise: true
+ * <p>
+ *   This class contains a comment <b>"Promise: true"</b>
+ *   Sometimes a Java class must be initialized asynchronously when it involves calling a blocking API. 
+ *   This means that the SiteUser Java class has promiseDeep methods which must be initialized asynchronously as a Vert.x Promise  instead of initDeep methods which are a simple non-asynchronous method. 
  * </p>
- * <p>This class contains a comment <b>"ApiTag: User"</b>, which groups all of the OpenAPIs for SiteUser objects under the tag "User". 
+ * <p>
+ *   Adding protected void methods beginning with an underscore with a Promise as the only parameter will automatically set `Promise: true`. 
  * </p>
- * <p>This class contains a comment <b>"ApiUri: /api/user"</b>, which defines the base API URI for SiteUser objects as "/api/user" in the OpenAPI spec. 
+ * <p>
+ *   <pre>
+ *   
+ *   	protected void _promiseBefore(Promise&lt;Void&gt; promise) {
+ *   		promise.complete();
+ *   	}
+ *   </pre>
  * </p>
+ * <p>
+ *   Java classes with the `Model: true` will automatically set `Promise: true`. 
+ * </p>
+ * <p>
+ *   If a super class of this Java class with `Model: true`, then the child class will also inherit `Promise: true`. 
+ * </p>
+ * Role.enUS: SiteAdmin
+ * <p>
+ * This class contains a comment <b>"Role.enUS: SiteAdmin"</b>, which identifies the default role name "SiteAdmin" of the OAuth2/OpenID Connect user role required to access this SiteUser API. 
+ * It's possible to reconfigure the roles required to access the SiteUser API by configuring an environment variable like this: 
+ * </p>
+ * <pre>AUTH_ROLES_REQUIRED_SiteUser: ["SiteAdmin"]</pre>
+ * Role.enUS: SiteAdmin
+ * <p>
+ * This class contains a comment <b>"Role.enUS: SiteAdmin"</b>, which identifies the default role name "SiteAdmin" of the OAuth2/OpenID Connect user role required to access this SiteUser API. 
+ * It's possible to reconfigure the roles required to access the SiteUser API by configuring an environment variable like this: 
+ * </p>
+ * <pre>AUTH_ROLES_REQUIRED_SiteUser: ["SiteAdmin"]</pre>
+ * AName: a site user
  * <p>This class contains a comment <b>"AName.enUS: a site user"</b>, which identifies the language context to describe a SiteUser as "a site user". 
- * </p>
- * <p>This class contains a comment <b>"Color: gray"</b>, which styles the SiteUser page "gray". 
- * This will reference a CSS class defined by the stylesheets in the project that starts with "w3-". 
- * A css class of "w3-gray" is expected to exist in the project stylesheets, and is inspired by W3 CSS colors. 
- * See: <a href="https://www.w3schools.com/w3css/w3css_colors.asp">https://www.w3schools.com/w3css/w3css_colors.asp</a>. 
- * </p>
- * <p>This class contains a comment <b>"IconGroup: regular"</b>, which adds icons on the SiteUser page with a group of "regular". 
- * This will reference a Font Awesome icon group defined by the stylesheets in the project that starts with "fa" followed by the first letter of the icon group, which is "far". 
- * A Font Awesome icon group of "gray" is expected to exist. 
- * The Font Awesome groups currently supported include: solid, thin, duotone. 
- * See: <a href="https://www.w3schools.com/w3css/w3css_colors.asp">https://www.w3schools.com/w3css/w3css_colors.asp</a>. 
  * </p>
  * <p>
  * Delete the class SiteUser in Solr: 
@@ -143,13 +209,14 @@ public abstract class SiteUserGen<DEV> extends BaseModel {
 	public static final String SearchPage_enUS_Uri = "/user";
 	public static final String SearchPage_enUS_ImageUri = "/png/user-999.png";
 
-	public static final String SiteUser_Color = "gray";
+	public static final String SiteUser_Color = "2017-shaded-spruce";
 	public static final String SiteUser_IconGroup = "regular";
 	public static final String SiteUser_IconName = "user-cog";
 
 	//////////////
 	// userKeys //
 	//////////////
+
 
 	/**	 The entity userKeys
 	 *	 It is constructed before being initialized with the constructor by default. 
@@ -233,6 +300,7 @@ public abstract class SiteUserGen<DEV> extends BaseModel {
 	// userId //
 	////////////
 
+
 	/**	 The entity userId
 	 *	 is defined as null before being initialized. 
 	 */
@@ -285,6 +353,7 @@ public abstract class SiteUserGen<DEV> extends BaseModel {
 	//////////////
 	// userName //
 	//////////////
+
 
 	/**	 The entity userName
 	 *	 is defined as null before being initialized. 
@@ -339,6 +408,7 @@ public abstract class SiteUserGen<DEV> extends BaseModel {
 	// userEmail //
 	///////////////
 
+
 	/**	 The entity userEmail
 	 *	 is defined as null before being initialized. 
 	 */
@@ -391,6 +461,7 @@ public abstract class SiteUserGen<DEV> extends BaseModel {
 	///////////////////
 	// userFirstName //
 	///////////////////
+
 
 	/**	 The entity userFirstName
 	 *	 is defined as null before being initialized. 
@@ -445,6 +516,7 @@ public abstract class SiteUserGen<DEV> extends BaseModel {
 	// userLastName //
 	//////////////////
 
+
 	/**	 The entity userLastName
 	 *	 is defined as null before being initialized. 
 	 */
@@ -498,6 +570,7 @@ public abstract class SiteUserGen<DEV> extends BaseModel {
 	// userFullName //
 	//////////////////
 
+
 	/**	 The entity userFullName
 	 *	 is defined as null before being initialized. 
 	 */
@@ -550,6 +623,7 @@ public abstract class SiteUserGen<DEV> extends BaseModel {
 	/////////////////
 	// seeArchived //
 	/////////////////
+
 
 	/**	 The entity seeArchived
 	 *	 is defined as null before being initialized. 
@@ -609,6 +683,7 @@ public abstract class SiteUserGen<DEV> extends BaseModel {
 	// seeDeleted //
 	////////////////
 
+
 	/**	 The entity seeDeleted
 	 *	 is defined as null before being initialized. 
 	 */
@@ -662,6 +737,9 @@ public abstract class SiteUserGen<DEV> extends BaseModel {
 	public Boolean sqlSeeDeleted() {
 		return seeDeleted;
 	}
+
+
+
 
 	//////////////
 	// initDeep //
@@ -1003,9 +1081,9 @@ public abstract class SiteUserGen<DEV> extends BaseModel {
 				}
 				saves.add("seeDeleted");
 				return val;
-			} else {
-				return super.persistBaseModel(var, val);
-			}
+		} else {
+			return super.persistBaseModel(var, val);
+		}
 	}
 
 	/////////////

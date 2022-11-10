@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import java.util.Date;
 import java.util.Set;
 import org.computate.vertx.api.ApiRequest;
-import org.computate.vertx.config.ComputateConfigKeys;
+import org.computate.smartvillageview.enus.config.ConfigKeys;
 import java.util.Optional;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
@@ -55,16 +55,20 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.computate.search.response.solr.SolrResponse;
 
 /**	
- * <h1>Suggestions that can generate more code for you: </h1>
- * <ol>
- * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class BaseModelGen into the class BaseModel. 
- * </li>
+<ol>
+<li>You can add a class comment <b>"Api: true"</b> if you wish to GET, POST, PATCH or PUT these BaseModel objects in a RESTful API. 
+</li>
+<li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class BaseModelGen into the class BaseModel. 
+</li>
+0<h3>Suggestions that can generate more code for you: </h3></ol>
  * <li>You can add a class comment <b>"Api: true"</b> if you wish to GET, POST, PATCH or PUT these BaseModel objects in a RESTful API. 
  * </li>
- * </ol>
- * <h1>About the BaseModel class and it's generated class BaseModelGen&lt;Object&gt;: </h1>
+ * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class BaseModelGen into the class BaseModel. 
+ * </li>
+ * 0<h3>Suggestions that can generate more code for you: </h3>
+ * <h3>About the BaseModel class and it's generated class BaseModelGen&lt;Object&gt;: </h3>extends BaseModelGen
  * <p>
- * This Java class extends a generated Java class built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
+ * This Java class extends a generated Java class BaseModelGen built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
  * Whenever this Java class is modified or touched, the watch service installed as described in the README, indexes all the information about this Java class in a local Apache Solr Search Engine. 
  * If you are running the service, you can see the indexed data about this Java Class here: 
  * </p>
@@ -73,19 +77,62 @@ import org.computate.search.response.solr.SolrResponse;
  * The extended class ending with "Gen" did not exist at first, but was automatically created by the same watch service based on the data retrieved from the local Apache Server search engine. 
  * The extended class contains many generated fields, getters, setters, initialization code, and helper methods to help build a website and API fast, reactive, and scalable. 
  * </p>
- * <p>This class contains a comment <b>"Model: true"</b>, which means this class will be stored in the database. 
- * Every protected void method that begins with "_" that contains a "Persist: true" comment will be a persisted field in the database table. 
+ * extends BaseModelGen<Object>
+ * <p>This <code>class BaseModel extends BaseModelGen&lt;Object&gt;</code>, which means it extends a newly generated BaseModelGen. 
+ * The generated <code>class BaseModelGen extends Object</code> which means that BaseModel extends BaseModelGen which extends Object. 
+ * This generated inheritance is a powerful feature that allows a lot of boiler plate code to be created for you automatically while still preserving inheritance through the power of Java Generic classes. 
  * </p>
+ * Api: true
+ * ApiTag.enUS: null
+ * ApiUri.enUS: null
+ * Color: null
+ * IconGroup: null
+ * IconName: null
+ * Indexed: true
  * <p>This class contains a comment <b>"Indexed: true"</b>, which means this class will be indexed in the search engine. 
  * Every protected void method that begins with "_" that is marked to be searched with a comment like "Indexed: true", "Stored: true", or "DocValues: true" will be indexed in the search engine. 
  * </p>
+ * {@inheritDoc}
+ * <p>By adding a class comment "{@inheritDoc}", the BaseModel class will inherit the helpful inherited class comments from the super class BaseModelGen. 
+ * </p>
+ * Rows: null
+ * Model: true
+ * <p>This class contains a comment <b>"Model: true"</b>, which means this class will be stored in the database. 
+ * Every protected void method that begins with "_" that contains a "Persist: true" comment will be a persisted field in the database table. 
+ * </p>
+ * Page: true
  * <p>This class contains a comment <b>"Page: true"</b>, which means this class will have webpage code generated for these objects. 
  * Java Vert.x backend API code, Handlebars HTML template frontend code, and JavaScript code will all generated and can be extended. 
  * This creates a new Java class org.computate.smartvillageview.enus.model.base.BaseModelPage. 
  * </p>
+ * SuperPage.enUS: PageLayout
  * <p>This class contains a comment <b>"SuperPage.enUS: PageLayout"</b>, which identifies the Java super class of the page code by it's class simple name "PageLayout". 
  * This means that the newly created class org.computate.smartvillageview.enus.model.base.BaseModelPage extends org.computate.smartvillageview.enus.page.PageLayout. 
  * </p>
+ * Promise: true
+ * <p>
+ *   This class contains a comment <b>"Promise: true"</b>
+ *   Sometimes a Java class must be initialized asynchronously when it involves calling a blocking API. 
+ *   This means that the BaseModel Java class has promiseDeep methods which must be initialized asynchronously as a Vert.x Promise  instead of initDeep methods which are a simple non-asynchronous method. 
+ * </p>
+ * <p>
+ *   Adding protected void methods beginning with an underscore with a Promise as the only parameter will automatically set `Promise: true`. 
+ * </p>
+ * <p>
+ *   <pre>
+ *   
+ *   	protected void _promiseBefore(Promise&lt;Void&gt; promise) {
+ *   		promise.complete();
+ *   	}
+ *   </pre>
+ * </p>
+ * <p>
+ *   Java classes with the `Model: true` will automatically set `Promise: true`. 
+ * </p>
+ * <p>
+ *   If a super class of this Java class with `Model: true`, then the child class will also inherit `Promise: true`. 
+ * </p>
+ * AName: null
  * <p>
  * Delete the class BaseModel in Solr: 
  * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.base.BaseModel&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
@@ -108,6 +155,7 @@ public abstract class BaseModelGen<DEV> extends Object {
 	//////////////////
 	// siteRequest_ //
 	//////////////////
+
 
 	/**	 The entity siteRequest_
 	 *	 is defined as null before being initialized. 
@@ -146,6 +194,7 @@ public abstract class BaseModelGen<DEV> extends Object {
 	////////
 	// pk //
 	////////
+
 
 	/**	 The entity pk
 	 *	 is defined as null before being initialized. 
@@ -204,6 +253,7 @@ public abstract class BaseModelGen<DEV> extends Object {
 	// inheritPk //
 	///////////////
 
+
 	/**	 The entity inheritPk
 	 *	 is defined as null before being initialized. 
 	 */
@@ -257,6 +307,7 @@ public abstract class BaseModelGen<DEV> extends Object {
 	// created //
 	/////////////
 
+
 	/**	 The entity created
 	 *	 is defined as null before being initialized. 
 	 */
@@ -295,15 +346,15 @@ public abstract class BaseModelGen<DEV> extends Object {
 		if(StringUtils.endsWith(o, "]"))
 			return o == null ? null : ZonedDateTime.parse(o, ComputateZonedDateTimeSerializer.ZONED_DATE_TIME_FORMATTER);
 		else if(StringUtils.endsWith(o, "Z"))
-			return o == null ? null : Instant.parse(o).atZone(Optional.ofNullable(siteRequest_).map(r -> r.getConfig()).map(config -> config.getString(ComputateConfigKeys.SITE_ZONE)).map(z -> ZoneId.of(z)).orElse(ZoneId.of("UTC"))).truncatedTo(ChronoUnit.MILLIS);
+			return o == null ? null : Instant.parse(o).atZone(Optional.ofNullable(siteRequest_).map(r -> r.getConfig()).map(config -> config.getString(ConfigKeys.SITE_ZONE)).map(z -> ZoneId.of(z)).orElse(ZoneId.of("UTC"))).truncatedTo(ChronoUnit.MILLIS);
 		else if(StringUtils.contains(o, "T"))
 			return o == null ? null : ZonedDateTime.parse(o, DateTimeFormatter.ISO_DATE_TIME).truncatedTo(ChronoUnit.MILLIS);
 		else
-			return o == null ? null : LocalDate.parse(o, DateTimeFormatter.ISO_DATE).atStartOfDay(ZoneId.of(siteRequest_.getConfig().getString(ComputateConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
+			return o == null ? null : LocalDate.parse(o, DateTimeFormatter.ISO_DATE).atStartOfDay(ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
 	}
 	@JsonIgnore
 	public void setCreated(Date o) {
-		this.created = o == null ? null : ZonedDateTime.ofInstant(o.toInstant(), ZoneId.of(siteRequest_.getConfig().getString(ComputateConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
+		this.created = o == null ? null : ZonedDateTime.ofInstant(o.toInstant(), ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
 	}
 	protected BaseModel createdInit() {
 		Wrap<ZonedDateTime> createdWrap = new Wrap<ZonedDateTime>().var("created");
@@ -333,6 +384,7 @@ public abstract class BaseModelGen<DEV> extends Object {
 	//////////////
 	// modified //
 	//////////////
+
 
 	/**	 The entity modified
 	 *	 is defined as null before being initialized. 
@@ -372,15 +424,15 @@ public abstract class BaseModelGen<DEV> extends Object {
 		if(StringUtils.endsWith(o, "]"))
 			return o == null ? null : ZonedDateTime.parse(o, ComputateZonedDateTimeSerializer.ZONED_DATE_TIME_FORMATTER);
 		else if(StringUtils.endsWith(o, "Z"))
-			return o == null ? null : Instant.parse(o).atZone(Optional.ofNullable(siteRequest_).map(r -> r.getConfig()).map(config -> config.getString(ComputateConfigKeys.SITE_ZONE)).map(z -> ZoneId.of(z)).orElse(ZoneId.of("UTC"))).truncatedTo(ChronoUnit.MILLIS);
+			return o == null ? null : Instant.parse(o).atZone(Optional.ofNullable(siteRequest_).map(r -> r.getConfig()).map(config -> config.getString(ConfigKeys.SITE_ZONE)).map(z -> ZoneId.of(z)).orElse(ZoneId.of("UTC"))).truncatedTo(ChronoUnit.MILLIS);
 		else if(StringUtils.contains(o, "T"))
 			return o == null ? null : ZonedDateTime.parse(o, DateTimeFormatter.ISO_DATE_TIME).truncatedTo(ChronoUnit.MILLIS);
 		else
-			return o == null ? null : LocalDate.parse(o, DateTimeFormatter.ISO_DATE).atStartOfDay(ZoneId.of(siteRequest_.getConfig().getString(ComputateConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
+			return o == null ? null : LocalDate.parse(o, DateTimeFormatter.ISO_DATE).atStartOfDay(ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
 	}
 	@JsonIgnore
 	public void setModified(Date o) {
-		this.modified = o == null ? null : ZonedDateTime.ofInstant(o.toInstant(), ZoneId.of(siteRequest_.getConfig().getString(ComputateConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
+		this.modified = o == null ? null : ZonedDateTime.ofInstant(o.toInstant(), ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
 	}
 	protected BaseModel modifiedInit() {
 		Wrap<ZonedDateTime> modifiedWrap = new Wrap<ZonedDateTime>().var("modified");
@@ -406,6 +458,7 @@ public abstract class BaseModelGen<DEV> extends Object {
 	//////////////
 	// archived //
 	//////////////
+
 
 	/**	 The entity archived
 	 *	 is defined as null before being initialized. 
@@ -465,6 +518,7 @@ public abstract class BaseModelGen<DEV> extends Object {
 	// deleted //
 	/////////////
 
+
 	/**	 The entity deleted
 	 *	 is defined as null before being initialized. 
 	 */
@@ -523,6 +577,7 @@ public abstract class BaseModelGen<DEV> extends Object {
 	// classCanonicalName //
 	////////////////////////
 
+
 	/**	 The entity classCanonicalName
 	 *	 is defined as null before being initialized. 
 	 */
@@ -572,6 +627,7 @@ public abstract class BaseModelGen<DEV> extends Object {
 	// classSimpleName //
 	/////////////////////
 
+
 	/**	 The entity classSimpleName
 	 *	 is defined as null before being initialized. 
 	 */
@@ -620,6 +676,7 @@ public abstract class BaseModelGen<DEV> extends Object {
 	/////////////////////////
 	// classCanonicalNames //
 	/////////////////////////
+
 
 	/**	 The entity classCanonicalNames
 	 *	 It is constructed before being initialized with the constructor by default. 
@@ -687,6 +744,7 @@ public abstract class BaseModelGen<DEV> extends Object {
 	// sessionId //
 	///////////////
 
+
 	/**	 The entity sessionId
 	 *	 is defined as null before being initialized. 
 	 */
@@ -739,6 +797,7 @@ public abstract class BaseModelGen<DEV> extends Object {
 	/////////////
 	// userKey //
 	/////////////
+
 
 	/**	 The entity userKey
 	 *	 is defined as null before being initialized. 
@@ -800,6 +859,7 @@ public abstract class BaseModelGen<DEV> extends Object {
 	///////////
 	// saves //
 	///////////
+
 
 	/**	 The entity saves
 	 *	 It is constructed before being initialized with the constructor by default. 
@@ -867,6 +927,7 @@ public abstract class BaseModelGen<DEV> extends Object {
 	// objectTitle //
 	/////////////////
 
+
 	/**	 The entity objectTitle
 	 *	 is defined as null before being initialized. 
 	 */
@@ -916,6 +977,7 @@ public abstract class BaseModelGen<DEV> extends Object {
 	// objectId //
 	//////////////
 
+
 	/**	 The entity objectId
 	 *	 is defined as null before being initialized. 
 	 */
@@ -961,9 +1023,11 @@ public abstract class BaseModelGen<DEV> extends Object {
 		return BaseModel.staticSearchStrObjectId(siteRequest_, BaseModel.staticSearchObjectId(siteRequest_, BaseModel.staticSetObjectId(siteRequest_, o)));
 	}
 
+
 	///////////////////
 	// objectSuggest //
 	///////////////////
+
 
 	/**	 The entity objectSuggest
 	 *	 is defined as null before being initialized. 
@@ -1013,6 +1077,7 @@ public abstract class BaseModelGen<DEV> extends Object {
 	////////////////
 	// objectText //
 	////////////////
+
 
 	/**	 The entity objectText
 	 *	 It is constructed before being initialized with the constructor by default. 
@@ -1080,6 +1145,7 @@ public abstract class BaseModelGen<DEV> extends Object {
 	// pageUrlId //
 	///////////////
 
+
 	/**	 The entity pageUrlId
 	 *	 is defined as null before being initialized. 
 	 */
@@ -1128,6 +1194,7 @@ public abstract class BaseModelGen<DEV> extends Object {
 	///////////////
 	// pageUrlPk //
 	///////////////
+
 
 	/**	 The entity pageUrlPk
 	 *	 is defined as null before being initialized. 
@@ -1178,6 +1245,7 @@ public abstract class BaseModelGen<DEV> extends Object {
 	// pageUrlApi //
 	////////////////
 
+
 	/**	 The entity pageUrlApi
 	 *	 is defined as null before being initialized. 
 	 */
@@ -1226,6 +1294,7 @@ public abstract class BaseModelGen<DEV> extends Object {
 	////////
 	// id //
 	////////
+
 
 	/**	 The entity id
 	 *	 is defined as null before being initialized. 
@@ -1689,7 +1758,7 @@ public abstract class BaseModelGen<DEV> extends Object {
 				if(val instanceof String) {
 					setCreated((String)val);
 				} else if(val instanceof OffsetDateTime) {
-					setCreated(((OffsetDateTime)val).atZoneSameInstant(ZoneId.of(siteRequest_.getConfig().getString(ComputateConfigKeys.SITE_ZONE))));
+					setCreated(((OffsetDateTime)val).atZoneSameInstant(ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))));
 				}
 				saves.add("created");
 				return val;
@@ -1723,9 +1792,9 @@ public abstract class BaseModelGen<DEV> extends Object {
 				}
 				saves.add("userKey");
 				return val;
-			} else {
-				return null;
-			}
+		} else {
+			return null;
+		}
 	}
 
 	/////////////

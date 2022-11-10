@@ -3,9 +3,11 @@ package org.computate.smartvillageview.enus.model.traffic.simulation.reader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.nio.file.Paths;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.temporal.TemporalAmount;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -734,6 +736,7 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 				trafficLight.setInheritPk(id);
 				trafficLight.setSimulationName(trafficSimulation.getSimulationName());
 				trafficLight.setSumocfgPath(trafficSimulation.getSumocfgPath());
+				trafficLight.setDateTime(trafficSimulation.getStartDateTime());
 
 				SiteRequestEnUS siteRequest = new SiteRequestEnUS();
 				siteRequest.setConfig(config);
@@ -891,6 +894,13 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 			trafficLightStep.setY(trafficLight.getY());
 			trafficLightStep.setSimulationName(trafficSimulation.getSimulationName());
 			trafficLightStep.setSumocfgPath(trafficSimulation.getSumocfgPath());
+			BigDecimal stepSeconds = trafficSimulation.getStepSeconds();
+			ZonedDateTime startDateTime = trafficSimulation.getStartDateTime();
+
+			if(stepSeconds != null && startDateTime != null) {
+				trafficLightStep.setDateTime(startDateTime.plusNanos(trafficLightStep.getTime().multiply(new BigDecimal(1000000000L)).longValue()));
+			}
+//			trafficLightStep.setDateTime(t);
 			result = trafficLightStep;
 			found = m.find();
 		}
@@ -1027,7 +1037,7 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 	 */
 	private Future<Void> importFcdHandleBody(TrafficSimulation trafficSimulation, String path, Buffer bufferedText, ApiRequest apiRequest, RecordParser recordParser) {
 		Promise<Void> promise = Promise.promise();
-		TimeStep timeStep = importTimeStepText(path, bufferedText);
+		TimeStep timeStep = importTimeStepText(trafficSimulation, path, bufferedText);
 		if(timeStep != null) {
 			String id = timeStep.getId();
 			JsonObject params = new JsonObject();
@@ -1164,7 +1174,7 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 		return promise.future();
 	}
 
-	private TimeStep importTimeStepText(String path, Buffer bufferedText) {
+	private TimeStep importTimeStepText(TrafficSimulation trafficSimulation, String path, Buffer bufferedText) {
 		String text = bufferedText.toString();
 		TimeStep timeStep = null;
 		Matcher m = Pattern.compile(REGEX_TIMESTEP, Pattern.MULTILINE).matcher(text);
@@ -1177,6 +1187,13 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 			timeStep.setId(id);
 			timeStep.setObjectId(id);
 			timeStep.setInheritPk(id);
+
+			BigDecimal stepSeconds = trafficSimulation.getStepSeconds();
+			ZonedDateTime startDateTime = trafficSimulation.getStartDateTime();
+
+			if(stepSeconds != null && startDateTime != null) {
+				timeStep.setDateTime(startDateTime.plusNanos(timeStep.getTime().multiply(new BigDecimal(1000000000L)).longValue()));
+			}
 		}
 		return timeStep;
 	}
@@ -1216,6 +1233,14 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 				vehicleStep.setTimeStepId(timeStep.getId());
 				vehicleStep.setSimulationName(trafficSimulation.getSimulationName());
 				vehicleStep.setSumocfgPath(trafficSimulation.getSumocfgPath());
+
+				BigDecimal stepSeconds = trafficSimulation.getStepSeconds();
+				ZonedDateTime startDateTime = trafficSimulation.getStartDateTime();
+
+				if(stepSeconds != null && startDateTime != null) {
+					vehicleStep.setDateTime(startDateTime.plusNanos(vehicleStep.getTime().multiply(new BigDecimal(1000000000L)).longValue()));
+				}
+
 				result = vehicleStep;
 			} else if("person".equals(vehicleType)) {
 				Matcher m2 = Pattern.compile(REGEX_ATTR, Pattern.MULTILINE).matcher(attrs);
@@ -1244,6 +1269,14 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 				personStep.setTimeStepId(timeStep.getId());
 				personStep.setSimulationName(trafficSimulation.getSimulationName());
 				personStep.setSumocfgPath(trafficSimulation.getSumocfgPath());
+
+				BigDecimal stepSeconds = trafficSimulation.getStepSeconds();
+				ZonedDateTime startDateTime = trafficSimulation.getStartDateTime();
+
+				if(stepSeconds != null && startDateTime != null) {
+					personStep.setDateTime(startDateTime.plusNanos(personStep.getTime().multiply(new BigDecimal(1000000000L)).longValue()));
+				}
+
 				result = personStep;
 			}
 

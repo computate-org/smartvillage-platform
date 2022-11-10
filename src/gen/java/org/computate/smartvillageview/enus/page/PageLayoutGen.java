@@ -3,7 +3,7 @@ package org.computate.smartvillageview.enus.page;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.smartvillageview.enus.model.base.BaseModel;
 import org.computate.vertx.api.ApiRequest;
-import org.computate.vertx.config.ComputateConfigKeys;
+import org.computate.smartvillageview.enus.config.ConfigKeys;
 import java.util.Optional;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
@@ -57,16 +57,20 @@ import io.vertx.core.Promise;
 import io.vertx.core.Future;
 
 /**	
- * <h1>Suggestions that can generate more code for you: </h1>
- * <ol>
- * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class PageLayoutGen into the class PageLayout. 
- * </li>
+<ol>
+<li>You can add a class comment <b>"Api: true"</b> if you wish to GET, POST, PATCH or PUT these PageLayout objects in a RESTful API. 
+</li>
+<li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class PageLayoutGen into the class PageLayout. 
+</li>
+0<h3>Suggestions that can generate more code for you: </h3></ol>
  * <li>You can add a class comment <b>"Api: true"</b> if you wish to GET, POST, PATCH or PUT these PageLayout objects in a RESTful API. 
  * </li>
- * </ol>
- * <h1>About the PageLayout class and it's generated class PageLayoutGen&lt;Object&gt;: </h1>
+ * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class PageLayoutGen into the class PageLayout. 
+ * </li>
+ * 0<h3>Suggestions that can generate more code for you: </h3>
+ * <h3>About the PageLayout class and it's generated class PageLayoutGen&lt;Object&gt;: </h3>extends PageLayoutGen
  * <p>
- * This Java class extends a generated Java class built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
+ * This Java class extends a generated Java class PageLayoutGen built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
  * Whenever this Java class is modified or touched, the watch service installed as described in the README, indexes all the information about this Java class in a local Apache Solr Search Engine. 
  * If you are running the service, you can see the indexed data about this Java Class here: 
  * </p>
@@ -75,6 +79,49 @@ import io.vertx.core.Future;
  * The extended class ending with "Gen" did not exist at first, but was automatically created by the same watch service based on the data retrieved from the local Apache Server search engine. 
  * The extended class contains many generated fields, getters, setters, initialization code, and helper methods to help build a website and API fast, reactive, and scalable. 
  * </p>
+ * extends PageLayoutGen<Object>
+ * <p>This <code>class PageLayout extends PageLayoutGen&lt;Object&gt;</code>, which means it extends a newly generated PageLayoutGen. 
+ * The generated <code>class PageLayoutGen extends Object</code> which means that PageLayout extends PageLayoutGen which extends Object. 
+ * This generated inheritance is a powerful feature that allows a lot of boiler plate code to be created for you automatically while still preserving inheritance through the power of Java Generic classes. 
+ * </p>
+ * Api: true
+ * ApiTag.enUS: null
+ * ApiUri.enUS: null
+ * Color: null
+ * IconGroup: null
+ * IconName: null
+ * Indexed: true
+ * {@inheritDoc}
+ * <p>By adding a class comment "{@inheritDoc}", the PageLayout class will inherit the helpful inherited class comments from the super class PageLayoutGen. 
+ * </p>
+ * Rows: null
+ * Model: true
+ * Page: true
+ * SuperPage.enUS: null
+ * Promise: true
+ * <p>
+ *   This class contains a comment <b>"Promise: true"</b>
+ *   Sometimes a Java class must be initialized asynchronously when it involves calling a blocking API. 
+ *   This means that the PageLayout Java class has promiseDeep methods which must be initialized asynchronously as a Vert.x Promise  instead of initDeep methods which are a simple non-asynchronous method. 
+ * </p>
+ * <p>
+ *   Adding protected void methods beginning with an underscore with a Promise as the only parameter will automatically set `Promise: true`. 
+ * </p>
+ * <p>
+ *   <pre>
+ *   
+ *   	protected void _promiseBefore(Promise&lt;Void&gt; promise) {
+ *   		promise.complete();
+ *   	}
+ *   </pre>
+ * </p>
+ * <p>
+ *   Java classes with the `Model: true` will automatically set `Promise: true`. 
+ * </p>
+ * <p>
+ *   If a super class of this Java class with `Model: true`, then the child class will also inherit `Promise: true`. 
+ * </p>
+ * AName: null
  * <p>
  * Delete the class PageLayout in Solr: 
  * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.PageLayout&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
@@ -94,6 +141,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	//////////////////
 	// siteRequest_ //
 	//////////////////
+
 
 	/**	 The entity siteRequest_
 	 *	 is defined as null before being initialized. 
@@ -132,6 +180,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	//////////
 	// lang //
 	//////////
+
 
 	/**	 The entity lang
 	 *	 is defined as null before being initialized. 
@@ -182,6 +231,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	// requestVars //
 	/////////////////
 
+
 	/**	 The entity requestVars
 	 *	 is defined as null before being initialized. 
 	 */
@@ -219,6 +269,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	////////////
 	// config //
 	////////////
+
 
 	/**	 The entity config
 	 *	 is defined as null before being initialized. 
@@ -277,6 +328,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	// serviceRequest //
 	////////////////////
 
+
 	/**	 The entity serviceRequest
 	 *	 is defined as null before being initialized. 
 	 */
@@ -314,6 +366,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	///////////////////
 	// staticBaseUrl //
 	///////////////////
+
 
 	/**	 The entity staticBaseUrl
 	 *	 is defined as null before being initialized. 
@@ -364,6 +417,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	// siteBaseUrl //
 	/////////////////
 
+
 	/**	 The entity siteBaseUrl
 	 *	 is defined as null before being initialized. 
 	 */
@@ -412,6 +466,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	/////////////////
 	// siteAuthUrl //
 	/////////////////
+
 
 	/**	 The entity siteAuthUrl
 	 *	 is defined as null before being initialized. 
@@ -462,6 +517,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	// siteAuthRealm //
 	///////////////////
 
+
 	/**	 The entity siteAuthRealm
 	 *	 is defined as null before being initialized. 
 	 */
@@ -510,6 +566,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	////////////////////
 	// fontAwesomeKit //
 	////////////////////
+
 
 	/**	 The entity fontAwesomeKit
 	 *	 is defined as null before being initialized. 
@@ -560,6 +617,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	// pageUri //
 	/////////////
 
+
 	/**	 The entity pageUri
 	 *	 is defined as null before being initialized. 
 	 */
@@ -608,6 +666,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	////////////
 	// pageId //
 	////////////
+
 
 	/**	 The entity pageId
 	 *	 is defined as null before being initialized. 
@@ -658,6 +717,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	// apiUri //
 	////////////
 
+
 	/**	 The entity apiUri
 	 *	 is defined as null before being initialized. 
 	 */
@@ -707,6 +767,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	// pageMethod //
 	////////////////
 
+
 	/**	 The entity pageMethod
 	 *	 is defined as null before being initialized. 
 	 */
@@ -755,6 +816,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	////////////
 	// params //
 	////////////
+
 
 	/**	 The entity params
 	 *	 is defined as null before being initialized. 
@@ -813,6 +875,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	// userKey //
 	/////////////
 
+
 	/**	 The entity userKey
 	 *	 is defined as null before being initialized. 
 	 */
@@ -870,6 +933,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	// userFullName //
 	//////////////////
 
+
 	/**	 The entity userFullName
 	 *	 is defined as null before being initialized. 
 	 */
@@ -918,6 +982,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	//////////////
 	// userName //
 	//////////////
+
 
 	/**	 The entity userName
 	 *	 is defined as null before being initialized. 
@@ -968,6 +1033,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	// userEmail //
 	///////////////
 
+
 	/**	 The entity userEmail
 	 *	 is defined as null before being initialized. 
 	 */
@@ -1017,6 +1083,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	// logoutUrl //
 	///////////////
 
+
 	/**	 The entity logoutUrl
 	 *	 is defined as null before being initialized. 
 	 */
@@ -1065,6 +1132,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	///////////
 	// long0 //
 	///////////
+
 
 	/**	 The entity long0
 	 *	 is defined as null before being initialized. 
@@ -1123,6 +1191,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	// long1 //
 	///////////
 
+
 	/**	 The entity long1
 	 *	 is defined as null before being initialized. 
 	 */
@@ -1179,6 +1248,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	//////////
 	// int0 //
 	//////////
+
 
 	/**	 The entity int0
 	 *	 is defined as null before being initialized. 
@@ -1237,6 +1307,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	// int1 //
 	//////////
 
+
 	/**	 The entity int1
 	 *	 is defined as null before being initialized. 
 	 */
@@ -1294,6 +1365,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	// promiseBefore //
 	///////////////////
 
+
 	/**	 The entity promiseBefore
 	 *	 is defined as null before being initialized. 
 	 */
@@ -1335,6 +1407,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	/////////////////////
 	// classSimpleName //
 	/////////////////////
+
 
 	/**	 The entity classSimpleName
 	 *	 is defined as null before being initialized. 
@@ -1385,6 +1458,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	// pageTitle //
 	///////////////
 
+
 	/**	 The entity pageTitle
 	 *	 is defined as null before being initialized. 
 	 */
@@ -1433,6 +1507,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	///////////
 	// roles //
 	///////////
+
 
 	/**	 The entity roles
 	 *	 It is constructed before being initialized with the constructor by default. 
@@ -1500,6 +1575,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	// rolesRequired //
 	///////////////////
 
+
 	/**	 The entity rolesRequired
 	 *	 It is constructed before being initialized with the constructor by default. 
 	 */
@@ -1565,6 +1641,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	////////////////////
 	// authRolesAdmin //
 	////////////////////
+
 
 	/**	 The entity authRolesAdmin
 	 *	 It is constructed before being initialized with the constructor by default. 
@@ -1632,6 +1709,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	// stats //
 	///////////
 
+
 	/**	 The entity stats
 	 *	 is defined as null before being initialized. 
 	 */
@@ -1670,6 +1748,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	// facetCounts //
 	/////////////////
 
+
 	/**	 The entity facetCounts
 	 *	 is defined as null before being initialized. 
 	 */
@@ -1707,6 +1786,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	////////////////
 	// pagination //
 	////////////////
+
 
 	/**	 The entity pagination
 	 *	 It is constructed before being initialized with the constructor by default. 
@@ -1760,6 +1840,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	//////////////////////////
 	// defaultFieldListVars //
 	//////////////////////////
+
 
 	/**	 The entity defaultFieldListVars
 	 *	 It is constructed before being initialized with the constructor by default. 
@@ -1827,6 +1908,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	// defaultStatsVars //
 	//////////////////////
 
+
 	/**	 The entity defaultStatsVars
 	 *	 It is constructed before being initialized with the constructor by default. 
 	 */
@@ -1892,6 +1974,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	//////////////////////
 	// defaultPivotVars //
 	//////////////////////
+
 
 	/**	 The entity defaultPivotVars
 	 *	 It is constructed before being initialized with the constructor by default. 
@@ -1959,6 +2042,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	// varsQ //
 	///////////
 
+
 	/**	 The entity varsQ
 	 *	 It is constructed before being initialized with the constructor by default. 
 	 */
@@ -2011,6 +2095,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	////////////
 	// varsFq //
 	////////////
+
 
 	/**	 The entity varsFq
 	 *	 It is constructed before being initialized with the constructor by default. 
@@ -2065,6 +2150,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	// varsRange //
 	///////////////
 
+
 	/**	 The entity varsRange
 	 *	 It is constructed before being initialized with the constructor by default. 
 	 */
@@ -2117,6 +2203,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	///////////
 	// query //
 	///////////
+
 
 	/**	 The entity query
 	 *	 It is constructed before being initialized with the constructor by default. 
@@ -2171,6 +2258,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	// pageResponse //
 	//////////////////
 
+
 	/**	 The entity pageResponse
 	 *	 is defined as null before being initialized. 
 	 */
@@ -2219,6 +2307,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	///////////////////
 	// defaultZoneId //
 	///////////////////
+
 
 	/**	 The entity defaultZoneId
 	 *	 is defined as null before being initialized. 
@@ -2269,6 +2358,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	// defaultTimeZone //
 	/////////////////////
 
+
 	/**	 The entity defaultTimeZone
 	 *	 is defined as null before being initialized. 
 	 */
@@ -2306,6 +2396,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	/////////////////////
 	// defaultLocaleId //
 	/////////////////////
+
 
 	/**	 The entity defaultLocaleId
 	 *	 is defined as null before being initialized. 
@@ -2356,6 +2447,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	// defaultLocale //
 	///////////////////
 
+
 	/**	 The entity defaultLocale
 	 *	 is defined as null before being initialized. 
 	 */
@@ -2393,6 +2485,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	///////////////////////
 	// defaultRangeStats //
 	///////////////////////
+
 
 	/**	 The entity defaultRangeStats
 	 *	 is defined as null before being initialized. 
@@ -2451,6 +2544,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	// defaultRangeGap //
 	/////////////////////
 
+
 	/**	 The entity defaultRangeGap
 	 *	 is defined as null before being initialized. 
 	 */
@@ -2500,6 +2594,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	// defaultRangeEnd //
 	/////////////////////
 
+
 	/**	 The entity defaultRangeEnd
 	 *	 is defined as null before being initialized. 
 	 */
@@ -2538,15 +2633,15 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		if(StringUtils.endsWith(o, "]"))
 			return o == null ? null : ZonedDateTime.parse(o, ComputateZonedDateTimeSerializer.ZONED_DATE_TIME_FORMATTER);
 		else if(StringUtils.endsWith(o, "Z"))
-			return o == null ? null : Instant.parse(o).atZone(Optional.ofNullable(siteRequest_).map(r -> r.getConfig()).map(config -> config.getString(ComputateConfigKeys.SITE_ZONE)).map(z -> ZoneId.of(z)).orElse(ZoneId.of("UTC"))).truncatedTo(ChronoUnit.MILLIS);
+			return o == null ? null : Instant.parse(o).atZone(Optional.ofNullable(siteRequest_).map(r -> r.getConfig()).map(config -> config.getString(ConfigKeys.SITE_ZONE)).map(z -> ZoneId.of(z)).orElse(ZoneId.of("UTC"))).truncatedTo(ChronoUnit.MILLIS);
 		else if(StringUtils.contains(o, "T"))
 			return o == null ? null : ZonedDateTime.parse(o, DateTimeFormatter.ISO_DATE_TIME).truncatedTo(ChronoUnit.MILLIS);
 		else
-			return o == null ? null : LocalDate.parse(o, DateTimeFormatter.ISO_DATE).atStartOfDay(ZoneId.of(siteRequest_.getConfig().getString(ComputateConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
+			return o == null ? null : LocalDate.parse(o, DateTimeFormatter.ISO_DATE).atStartOfDay(ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
 	}
 	@JsonIgnore
 	public void setDefaultRangeEnd(Date o) {
-		this.defaultRangeEnd = o == null ? null : ZonedDateTime.ofInstant(o.toInstant(), ZoneId.of(siteRequest_.getConfig().getString(ComputateConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
+		this.defaultRangeEnd = o == null ? null : ZonedDateTime.ofInstant(o.toInstant(), ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
 	}
 	protected PageLayout defaultRangeEndInit() {
 		Wrap<ZonedDateTime> defaultRangeEndWrap = new Wrap<ZonedDateTime>().var("defaultRangeEnd");
@@ -2572,6 +2667,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	///////////////////////
 	// defaultRangeStart //
 	///////////////////////
+
 
 	/**	 The entity defaultRangeStart
 	 *	 is defined as null before being initialized. 
@@ -2611,15 +2707,15 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		if(StringUtils.endsWith(o, "]"))
 			return o == null ? null : ZonedDateTime.parse(o, ComputateZonedDateTimeSerializer.ZONED_DATE_TIME_FORMATTER);
 		else if(StringUtils.endsWith(o, "Z"))
-			return o == null ? null : Instant.parse(o).atZone(Optional.ofNullable(siteRequest_).map(r -> r.getConfig()).map(config -> config.getString(ComputateConfigKeys.SITE_ZONE)).map(z -> ZoneId.of(z)).orElse(ZoneId.of("UTC"))).truncatedTo(ChronoUnit.MILLIS);
+			return o == null ? null : Instant.parse(o).atZone(Optional.ofNullable(siteRequest_).map(r -> r.getConfig()).map(config -> config.getString(ConfigKeys.SITE_ZONE)).map(z -> ZoneId.of(z)).orElse(ZoneId.of("UTC"))).truncatedTo(ChronoUnit.MILLIS);
 		else if(StringUtils.contains(o, "T"))
 			return o == null ? null : ZonedDateTime.parse(o, DateTimeFormatter.ISO_DATE_TIME).truncatedTo(ChronoUnit.MILLIS);
 		else
-			return o == null ? null : LocalDate.parse(o, DateTimeFormatter.ISO_DATE).atStartOfDay(ZoneId.of(siteRequest_.getConfig().getString(ComputateConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
+			return o == null ? null : LocalDate.parse(o, DateTimeFormatter.ISO_DATE).atStartOfDay(ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
 	}
 	@JsonIgnore
 	public void setDefaultRangeStart(Date o) {
-		this.defaultRangeStart = o == null ? null : ZonedDateTime.ofInstant(o.toInstant(), ZoneId.of(siteRequest_.getConfig().getString(ComputateConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
+		this.defaultRangeStart = o == null ? null : ZonedDateTime.ofInstant(o.toInstant(), ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
 	}
 	protected PageLayout defaultRangeStartInit() {
 		Wrap<ZonedDateTime> defaultRangeStartWrap = new Wrap<ZonedDateTime>().var("defaultRangeStart");
@@ -2645,6 +2741,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	/////////////////////
 	// defaultRangeVar //
 	/////////////////////
+
 
 	/**	 The entity defaultRangeVar
 	 *	 is defined as null before being initialized. 
@@ -2695,6 +2792,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	// defaultFacetSort //
 	//////////////////////
 
+
 	/**	 The entity defaultFacetSort
 	 *	 is defined as null before being initialized. 
 	 */
@@ -2743,6 +2841,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	///////////////////////
 	// defaultFacetLimit //
 	///////////////////////
+
 
 	/**	 The entity defaultFacetLimit
 	 *	 is defined as null before being initialized. 
@@ -2801,6 +2900,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	// defaultFacetMinCount //
 	//////////////////////////
 
+
 	/**	 The entity defaultFacetMinCount
 	 *	 is defined as null before being initialized. 
 	 */
@@ -2857,6 +2957,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	//////////////////////////
 	// defaultPivotMinCount //
 	//////////////////////////
+
 
 	/**	 The entity defaultPivotMinCount
 	 *	 is defined as null before being initialized. 
@@ -2915,6 +3016,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	// DEFAULT_MAP_LOCATION //
 	//////////////////////////
 
+
 	/**	 The entity DEFAULT_MAP_LOCATION
 	 *	 is defined as null before being initialized. 
 	 */
@@ -2971,6 +3073,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	//////////////////////
 	// DEFAULT_MAP_ZOOM //
 	//////////////////////
+
 
 	/**	 The entity DEFAULT_MAP_ZOOM
 	 *	 is defined as null before being initialized. 
@@ -3038,6 +3141,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	// queryStr //
 	//////////////
 
+
 	/**	 The entity queryStr
 	 *	 is defined as null before being initialized. 
 	 */
@@ -3087,6 +3191,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	// promiseAfter //
 	//////////////////
 
+
 	/**	 The entity promiseAfter
 	 *	 is defined as null before being initialized. 
 	 */
@@ -3128,6 +3233,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	//////////////////
 	// pageImageUri //
 	//////////////////
+
 
 	/**	 The entity pageImageUri
 	 *	 is defined as null before being initialized. 
@@ -3177,6 +3283,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	////////////////////
 	// pageImageWidth //
 	////////////////////
+
 
 	/**	 The entity pageImageWidth
 	 *	 is defined as null before being initialized. 
@@ -3235,6 +3342,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	// pageImageHeight //
 	/////////////////////
 
+
 	/**	 The entity pageImageHeight
 	 *	 is defined as null before being initialized. 
 	 */
@@ -3292,6 +3400,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	// pageVideoId //
 	/////////////////
 
+
 	/**	 The entity pageVideoId
 	 *	 is defined as null before being initialized. 
 	 */
@@ -3340,6 +3449,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	////////////////////
 	// classIconGroup //
 	////////////////////
+
 
 	/**	 The entity classIconGroup
 	 *	 is defined as null before being initialized. 
@@ -3390,6 +3500,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	// classIconName //
 	///////////////////
 
+
 	/**	 The entity classIconName
 	 *	 is defined as null before being initialized. 
 	 */
@@ -3439,6 +3550,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	// classIconCssClasses //
 	/////////////////////////
 
+
 	/**	 The entity classIconCssClasses
 	 *	 is defined as null before being initialized. 
 	 */
@@ -3487,6 +3599,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	/////////////////////
 	// pageDescription //
 	/////////////////////
+
 
 	/**	 The entity pageDescription
 	 *	 is defined as null before being initialized. 

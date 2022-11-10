@@ -34,7 +34,7 @@ import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
  * Filter: userId
  * 
  * AName.enUS: a site user
- * Color: gray
+ * Color: 2017-shaded-spruce
  * IconGroup: regular
  * IconName: user-cog
  * NameVar.enUS: user

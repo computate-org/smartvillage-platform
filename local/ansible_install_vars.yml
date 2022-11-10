@@ -8,6 +8,7 @@ SITE_NAME: smartabyar-smartvillage
 SITE_DISPLAY_NAME: Smart Village Project
 SITE_DESCRIPTION: Red Hat Global Social Innovation Program is partnering with Boston University and Smarta Byar in order to collaborate on creating a global and open research platform allowing researchers to study what social sustainability means by using a digital twin of Veberöd, Sweden as the test village, supported by Smarta Byar. The goal of this collaboration is to build the open source technological infrastructure so that researchers can collaborate on this platform effectively to study mobility, public health, sustainability among other study areas to ultimately help define better the link between well being and eco-smart cities. 
 SITE_PUBLIC_URL: https://smartvillage.computate.org
+MAILING_LIST_URL: https://computate.topicbox.com/groups/smartabyar-smartvillage
 SITE_LICENSE_NAME: GNU GENERAL PUBLIC LICENSE, Version 3
 SITE_LICENSE_URL: https://www.gnu.org/licenses/gpl-3.0.en.html
 DEVELOPER_NAME: Christopher Tate
@@ -21,7 +22,7 @@ SITE_LOCALE: "en-US"
 SITE_SRC: "{{ lookup('env', 'HOME') }}/.local/src/{{ SITE_NAME }}"
 SITE_POM_GROUP_ID: org.computate
 SITE_POM_ARTIFACT_ID_ROOT: "{{ SITE_NAME }}"
-SITE_POM_VERSION_PREFIX: "1.0.0"
+SITE_POM_VERSION_PREFIX: "1.0.1"
 SITE_POM_VERSION_SUFFIX: ""
 SITE_POM_VERSION: "{{ SITE_POM_VERSION_PREFIX }}{{ SITE_POM_VERSION_SUFFIX }}"
 SITE_JAVA_PACKAGE: "{{ SITE_POM_GROUP_ID }}.smartvillageview.enus"
@@ -130,8 +131,10 @@ PROJECTS:
         template: js/jquery-1.12.4.min.js
       - path: "{{ SITE_SRC }}-static/js/jquery-ui.js"
         template: js/jquery-ui.js
-      - path: "{{ SITE_SRC }}-static/js/moment.js"
-        template: js/moment.js
+      - path: "{{ SITE_SRC }}-static/js/datePicker.js"
+        template: js/datePicker.js
+      - path: "{{ SITE_SRC }}-static/css/datePicker.css"
+        template: js/datePicker.css
       - path: "{{ SITE_SRC }}-static/js/plotly-2.9.0.min.js"
         template: js/plotly-2.9.0.min.js
       - path: "{{ SITE_SRC }}-static/js/site-enUS.js"
@@ -190,6 +193,26 @@ CONFIG_TEMPLATE: |2
   DEFAULT_MAP_ZOOM: "3"
 
 CONFIG_KEYS: |2
+  
+  	/**
+  	 * 
+  	 **/
+  	public static final String QUAYIO_ORG = "QUAYIO_ORG";
+  
+  	/**
+  	 * 
+  	 **/
+  	public static final String MAILING_LIST_URL = "MAILING_LIST_URL";
+  
+  	/**
+  	 * 
+  	 **/
+  	public static final String SITE_PUBLIC_URL = "SITE_PUBLIC_URL";
+  
+  	/**
+  	 * 
+  	 **/
+  	public static final String SITE_POM_GROUP_ID = "SITE_POM_GROUP_ID";
   
   	/**
   	 * 
@@ -390,7 +413,7 @@ WORKER_IMPORT_DATA: |2
   		if(config().getBoolean(ConfigKeys.ENABLE_IMPORT_DATA)) {
   			importTimer(IotNode.CLASS_SIMPLE_NAME).onSuccess(a -> {
   				importTimer(SitePage.CLASS_SIMPLE_NAME).onSuccess(b -> {
-  					importTimer(TimeStep.CLASS_SIMPLE_NAME).onSuccess(c -> {
+  					importTimer(TrafficSimulation.CLASS_SIMPLE_NAME).onSuccess(c -> {
   						promise.complete();
   					});
   				});

@@ -1,6 +1,7 @@
 package org.computate.smartvillageview.enus.model.traffic.time.step;
 
 import java.math.BigDecimal;
+import java.time.ZonedDateTime;
 
 import org.computate.search.wrap.Wrap;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
@@ -29,7 +30,6 @@ import io.vertx.core.Promise;
  * ApiUri.SearchPage.enUS: /time-step
  * 
  * Role.enUS: SiteAdmin
- * Saves: true
  * 
  * AName.enUS: a time step
  * Color: 2017-shaded-spruce
@@ -77,6 +77,19 @@ public class TimeStep extends TimeStepGen<BaseResult> {
 	 * Description: The time in seconds. 
 	 */
 	protected void _time(Wrap<BigDecimal> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * HtmlRow: 4
+	 * HtmlCell: 1
+	 * Facet: true
+	 * DisplayName: Date and Time in seconds
+	 * Description: The date and time in seconds. 
+	 */
+	protected void _dateTime(Wrap<ZonedDateTime> w) {
 	}
 
 	@Override

@@ -21,6 +21,8 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.time.Instant;
+import java.time.Duration;
+import org.computate.search.response.solr.SolrResponse.StatsField;
 import java.util.stream.Collectors;
 import io.vertx.core.json.Json;
 import org.apache.commons.lang3.StringUtils;
@@ -1062,6 +1064,12 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 			String entityListStr = siteRequest.getServiceRequest().getParams().getJsonObject("query").getString("fl");
 			String[] entityList = entityListStr == null ? null : entityListStr.split(",\\s*");
 			SearchList<SitePage> searchList = new SearchList<SitePage>();
+			String facetRange = null;
+			Date facetRangeStart = null;
+			Date facetRangeEnd = null;
+			String facetRangeGap = null;
+			String statsField = null;
+			String statsFieldIndexed = null;
 			searchList.setPopulate(populate);
 			searchList.setStore(store);
 			searchList.q("*:*");
@@ -1080,7 +1088,8 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 				searchList.fq("objectId_docvalues_string:" + SearchTool.escapeQueryChars(id));
 			}
 
-			serviceRequest.getParams().getJsonObject("query").forEach(paramRequest -> {
+			for(String paramName : serviceRequest.getParams().getJsonObject("query").fieldNames()) {
+				Object paramValuesObject = serviceRequest.getParams().getJsonObject("query").getValue(paramName);
 				String entityVar = null;
 				String valueIndexed = null;
 				String varIndexed = null;
@@ -1088,8 +1097,6 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 				Long valueStart = null;
 				Long valueRows = null;
 				String valueCursorMark = null;
-				String paramName = paramRequest.getKey();
-				Object paramValuesObject = paramRequest.getValue();
 				JsonArray paramObjects = paramValuesObject instanceof JsonArray ? (JsonArray)paramValuesObject : new JsonArray().add(paramValuesObject);
 
 				try {
@@ -1108,110 +1115,100 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 						}
 					} else if(paramValuesObject != null) {
 						for(Object paramObject : paramObjects) {
-							switch(paramName) {
-								case "q":
-									Matcher mQ = Pattern.compile("(\\w+):(.+?(?=(\\)|\\s+OR\\s+|\\s+AND\\s+|\\^|$)))").matcher((String)paramObject);
-									boolean foundQ = mQ.find();
-									if(foundQ) {
-										StringBuffer sb = new StringBuffer();
-										while(foundQ) {
-											entityVar = mQ.group(1).trim();
-											valueIndexed = mQ.group(2).trim();
-											varIndexed = SitePage.varIndexedSitePage(entityVar);
-											String entityQ = searchSitePageFq(searchList, entityVar, valueIndexed, varIndexed);
-											mQ.appendReplacement(sb, entityQ);
-											foundQ = mQ.find();
-										}
-										mQ.appendTail(sb);
-										searchList.q(sb.toString());
-									}
-									break;
-								case "fq":
-									Matcher mFq = Pattern.compile("(\\w+):(.+?(?=(\\)|\\s+OR\\s+|\\s+AND\\s+|$)))").matcher((String)paramObject);
-									boolean foundFq = mFq.find();
-									if(foundFq) {
-										StringBuffer sb = new StringBuffer();
-										while(foundFq) {
-											entityVar = mFq.group(1).trim();
-											valueIndexed = mFq.group(2).trim();
-											varIndexed = SitePage.varIndexedSitePage(entityVar);
-											String entityFq = searchSitePageFq(searchList, entityVar, valueIndexed, varIndexed);
-											mFq.appendReplacement(sb, entityFq);
-											foundFq = mFq.find();
-										}
-										mFq.appendTail(sb);
-										searchList.fq(sb.toString());
-									}
-									break;
-								case "sort":
-									entityVar = StringUtils.trim(StringUtils.substringBefore((String)paramObject, " "));
-									valueIndexed = StringUtils.trim(StringUtils.substringAfter((String)paramObject, " "));
-									varIndexed = SitePage.varIndexedSitePage(entityVar);
-									searchSitePageSort(searchList, entityVar, valueIndexed, varIndexed);
-									break;
-								case "start":
-									valueStart = paramObject instanceof Long ? (Long)paramObject : Long.parseLong(paramObject.toString());
-									searchSitePageStart(searchList, valueStart);
-									break;
-								case "rows":
-									valueRows = paramObject instanceof Long ? (Long)paramObject : Long.parseLong(paramObject.toString());
-									searchSitePageRows(searchList, valueRows);
-									break;
-								case "stats":
-									searchList.stats((Boolean)paramObject);
-									break;
-								case "stats.field":
-									Matcher mStats = Pattern.compile("(?:(\\{![^\\}]+\\}))?(.*)").matcher((String)paramObject);
-									boolean foundStats = mStats.find();
-									if(foundStats) {
-										String solrLocalParams = mStats.group(1);
-										entityVar = mStats.group(2).trim();
+							if(paramName.equals("q")) {
+								Matcher mQ = Pattern.compile("(\\w+):(.+?(?=(\\)|\\s+OR\\s+|\\s+AND\\s+|\\^|$)))").matcher((String)paramObject);
+								boolean foundQ = mQ.find();
+								if(foundQ) {
+									StringBuffer sb = new StringBuffer();
+									while(foundQ) {
+										entityVar = mQ.group(1).trim();
+										valueIndexed = mQ.group(2).trim();
 										varIndexed = SitePage.varIndexedSitePage(entityVar);
-										searchList.statsField((solrLocalParams == null ? "" : solrLocalParams) + varIndexed);
+										String entityQ = searchSitePageFq(searchList, entityVar, valueIndexed, varIndexed);
+										mQ.appendReplacement(sb, entityQ);
+										foundQ = mQ.find();
 									}
-									break;
-								case "facet":
-									searchList.facet((Boolean)paramObject);
-									break;
-								case "facet.range.start":
-									String startMathStr = (String)paramObject;
-									Date start = SearchTool.parseMath(startMathStr);
-									searchList.facetRangeStart(start.toInstant().toString());
-									break;
-								case "facet.range.end":
-									String endMathStr = (String)paramObject;
-									Date end = SearchTool.parseMath(endMathStr);
-									searchList.facetRangeEnd(end.toInstant().toString());
-									break;
-								case "facet.range.gap":
-									String gap = (String)paramObject;
-									searchList.facetRangeGap(gap);
-									break;
-								case "facet.range":
-									Matcher mFacetRange = Pattern.compile("(?:(\\{![^\\}]+\\}))?(.*)").matcher((String)paramObject);
-									boolean foundFacetRange = mFacetRange.find();
-									if(foundFacetRange) {
-										String solrLocalParams = mFacetRange.group(1);
-										entityVar = mFacetRange.group(2).trim();
+									mQ.appendTail(sb);
+									searchList.q(sb.toString());
+								}
+							} else if(paramName.equals("fq")) {
+								Matcher mFq = Pattern.compile("(\\w+):(.+?(?=(\\)|\\s+OR\\s+|\\s+AND\\s+|$)))").matcher((String)paramObject);
+								boolean foundFq = mFq.find();
+								if(foundFq) {
+									StringBuffer sb = new StringBuffer();
+									while(foundFq) {
+										entityVar = mFq.group(1).trim();
+										valueIndexed = mFq.group(2).trim();
 										varIndexed = SitePage.varIndexedSitePage(entityVar);
-										searchList.facetRange((solrLocalParams == null ? "" : solrLocalParams) + varIndexed);
+										String entityFq = searchSitePageFq(searchList, entityVar, valueIndexed, varIndexed);
+										mFq.appendReplacement(sb, entityFq);
+										foundFq = mFq.find();
 									}
-									break;
-								case "facet.field":
-									entityVar = (String)paramObject;
+									mFq.appendTail(sb);
+									searchList.fq(sb.toString());
+								}
+							} else if(paramName.equals("sort")) {
+								entityVar = StringUtils.trim(StringUtils.substringBefore((String)paramObject, " "));
+								valueIndexed = StringUtils.trim(StringUtils.substringAfter((String)paramObject, " "));
+								varIndexed = SitePage.varIndexedSitePage(entityVar);
+								searchSitePageSort(searchList, entityVar, valueIndexed, varIndexed);
+							} else if(paramName.equals("start")) {
+								valueStart = paramObject instanceof Long ? (Long)paramObject : Long.parseLong(paramObject.toString());
+								searchSitePageStart(searchList, valueStart);
+							} else if(paramName.equals("rows")) {
+								valueRows = paramObject instanceof Long ? (Long)paramObject : Long.parseLong(paramObject.toString());
+								searchSitePageRows(searchList, valueRows);
+							} else if(paramName.equals("stats")) {
+								searchList.stats((Boolean)paramObject);
+							} else if(paramName.equals("stats.field")) {
+								Matcher mStats = Pattern.compile("(?:(\\{![^\\}]+\\}))?(.*)").matcher((String)paramObject);
+								boolean foundStats = mStats.find();
+								if(foundStats) {
+									String solrLocalParams = mStats.group(1);
+									entityVar = mStats.group(2).trim();
 									varIndexed = SitePage.varIndexedSitePage(entityVar);
-									if(varIndexed != null)
-										searchList.facetField(varIndexed);
-									break;
-								case "var":
-									entityVar = StringUtils.trim(StringUtils.substringBefore((String)paramObject, ":"));
-									valueIndexed = URLDecoder.decode(StringUtils.trim(StringUtils.substringAfter((String)paramObject, ":")), "UTF-8");
-									searchSitePageVar(searchList, entityVar, valueIndexed);
-									break;
-								case "cursorMark":
-									valueCursorMark = (String)paramObject;
-									searchList.cursorMark((String)paramObject);
-									break;
+									searchList.statsField((solrLocalParams == null ? "" : solrLocalParams) + varIndexed);
+									statsField = entityVar;
+									statsFieldIndexed = varIndexed;
+								}
+							} else if(paramName.equals("facet")) {
+								searchList.facet((Boolean)paramObject);
+							} else if(paramName.equals("facet.range.start")) {
+								String startMathStr = (String)paramObject;
+								Date start = SearchTool.parseMath(startMathStr);
+								searchList.facetRangeStart(start.toInstant().toString());
+								facetRangeStart = start;
+							} else if(paramName.equals("facet.range.end")) {
+								String endMathStr = (String)paramObject;
+								Date end = SearchTool.parseMath(endMathStr);
+								searchList.facetRangeEnd(end.toInstant().toString());
+								facetRangeEnd = end;
+							} else if(paramName.equals("facet.range.gap")) {
+								String gap = (String)paramObject;
+								searchList.facetRangeGap(gap);
+								facetRangeGap = gap;
+							} else if(paramName.equals("facet.range")) {
+								Matcher mFacetRange = Pattern.compile("(?:(\\{![^\\}]+\\}))?(.*)").matcher((String)paramObject);
+								boolean foundFacetRange = mFacetRange.find();
+								if(foundFacetRange) {
+									String solrLocalParams = mFacetRange.group(1);
+									entityVar = mFacetRange.group(2).trim();
+									varIndexed = SitePage.varIndexedSitePage(entityVar);
+									searchList.facetRange((solrLocalParams == null ? "" : solrLocalParams) + varIndexed);
+									facetRange = entityVar;
+								}
+							} else if(paramName.equals("facet.field")) {
+								entityVar = (String)paramObject;
+								varIndexed = SitePage.varIndexedSitePage(entityVar);
+								if(varIndexed != null)
+									searchList.facetField(varIndexed);
+							} else if(paramName.equals("var")) {
+								entityVar = StringUtils.trim(StringUtils.substringBefore((String)paramObject, ":"));
+								valueIndexed = URLDecoder.decode(StringUtils.trim(StringUtils.substringAfter((String)paramObject, ":")), "UTF-8");
+								searchSitePageVar(searchList, entityVar, valueIndexed);
+							} else if(paramName.equals("cursorMark")) {
+								valueCursorMark = (String)paramObject;
+								searchList.cursorMark((String)paramObject);
 							}
 						}
 						searchSitePageUri(searchList);
@@ -1219,14 +1216,55 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 				} catch(Exception e) {
 					ExceptionUtils.rethrow(e);
 				}
-			});
+			}
 			if("*:*".equals(searchList.getQuery()) && searchList.getSorts().size() == 0) {
 				searchList.sort("courseNum_docvalues_int", "desc");
 				searchList.sort("lessonNum_docvalues_int", "desc");
 			}
+			String facetRange2 = facetRange;
+			Date facetRangeStart2 = facetRangeStart;
+			Date facetRangeEnd2 = facetRangeEnd;
+			String facetRangeGap2 = facetRangeGap;
+			String statsField2 = statsField;
+			String statsFieldIndexed2 = statsFieldIndexed;
 			searchSitePage2(siteRequest, populate, store, modify, searchList);
 			searchList.promiseDeepForClass(siteRequest).onSuccess(a -> {
-				promise.complete(searchList);
+				if(facetRange2 != null && statsField2 != null && facetRange2.equals(statsField2)) {
+					StatsField stats = searchList.getResponse().getStats().getStatsFields().get(statsFieldIndexed2);
+					Instant min = Instant.parse(stats.getMin().toString());
+					Instant max = Instant.parse(stats.getMax().toString());
+					Duration duration = Duration.between(min, max);
+					String gap = "DAY";
+					if(duration.toDays() >= 365)
+						gap = "YEAR";
+					else if(duration.toDays() >= 28)
+						gap = "MONTH";
+					else if(duration.toDays() >= 1)
+						gap = "DAY";
+					else if(duration.toHours() >= 1)
+						gap = "HOUR";
+					else if(duration.toMinutes() >= 1)
+						gap = "MINUTE";
+					else if(duration.toMillis() >= 1000)
+						gap = "SECOND";
+					else if(duration.toMillis() >= 1)
+						gap = "MILLI";
+
+					if(facetRangeStart2 == null)
+						searchList.facetRangeStart(min.toString());
+					if(facetRangeEnd2 == null)
+						searchList.facetRangeEnd(max.toString());
+					if(facetRangeGap2 == null)
+						searchList.facetRangeGap(String.format("+1%s", gap));
+					searchList.query().onSuccess(b -> {
+						promise.complete(searchList);
+					}).onFailure(ex -> {
+						LOG.error(String.format("searchSitePage failed. "), ex);
+						promise.fail(ex);
+					});
+				} else {
+					promise.complete(searchList);
+				}
 			}).onFailure(ex -> {
 				LOG.error(String.format("searchSitePage failed. "), ex);
 				promise.fail(ex);

@@ -32,7 +32,6 @@ import io.vertx.pgclient.data.Point;
  * ApiUri.SearchPage.enUS: /iot-node
  * 
  * Role.enUS: SiteAdmin
- * Saves: true
  * 
  * AName.enUS: an IOT node
  * Color: 2017-shaded-spruce

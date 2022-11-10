@@ -1056,15 +1056,15 @@
 		{{#ifContainsAnyRoles roles rolesRequired}}
 														<input
 																type="text"
-																class="w3-input w3-border datepicker setCompleted classSystemEvent inputSystemEvent{{id}}Completed w3-input w3-border "
-																placeholder="MM/DD/YYYY HH:MM AM"
-																data-timeformat="MM/dd/yyyy"
+																class="w3-input w3-border datetimepicker setCompleted classSystemEvent inputSystemEvent{{id}}Completed w3-input w3-border "
+																placeholder="MM/dd/yyyy h:mm a '['VV']'"
+																data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
 																id="{{classApiMethodMethod}}_completed"
-																title="An optional time this event completed (MM/DD/YYYY)"
-																value="{{systemEvent_.completed}}"
+																title="An optional time this event completed (MM/dd/yyyy h:mm a '['VV']')"
+																value="{{#if systemEvent_.completed}}{{formatZonedDateTime systemEvent_.completed "MM/dd/yyyy h:mm a '['VV']'" defaultLocaleId defaultZoneId}}{{/if}}"
 														{{#eq 'Page' classApiMethodMethod}}
 															onclick="removeGlow($(this)); ";
-															onchange="var t = moment(this.value, 'MM/DD/YYYY'); if(t) { var s = t.format('YYYY-MM-DD'); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setCompleted', s, function() { addGlow($('#{{classApiMethodMethod}}_completed')); }, function() { addError($('#{{classApiMethodMethod}}_completed')); }); } "
+															onchange="var timeZone = this.value.split('[').pop().split(']')[0]; var t1 = moment(this.value.split('[')[0].trim(), 'MM/DD/YYYY h:mm a'); var t2 = moment.tz(this.value.split('[')[0].trim(), 'MM/DD/YYYY h:mm a', timeZone); var t3 = new Date(t1._d); t3.setTime(t1.toDate().getTime() + t2.toDate().getTime() - t1.toDate().getTime()); var t = moment(t3); if(t) { var s = t.tz(timeZone).format('YYYY-MM-DDTHH:mm:ss.000') + '[' + timeZone + ']'; patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setCompleted', s, function() { addGlow($('#{{classApiMethodMethod}}_completed')); }, function() { addError($('#{{classApiMethodMethod}}_completed')); }); } "
 														{{/eq}}
 														/>
 													{{else}}

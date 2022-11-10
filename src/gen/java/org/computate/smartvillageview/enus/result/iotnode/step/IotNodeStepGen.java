@@ -3,7 +3,7 @@ package org.computate.smartvillageview.enus.result.iotnode.step;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.smartvillageview.enus.model.base.BaseModel;
 import org.computate.vertx.api.ApiRequest;
-import org.computate.vertx.config.ComputateConfigKeys;
+import org.computate.smartvillageview.enus.config.ConfigKeys;
 import java.util.Optional;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
@@ -46,17 +46,22 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.computate.search.response.solr.SolrResponse;
 
 /**	
- * <h1>Suggestions that can generate more code for you: </h1>
- * <ol>
+<ol>
+<li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class IotNodeStepGen into the class IotNodeStep. 
+</li>
+<li>You can add a class comment "Model: true" if you wish to persist these IotNodeStep objects in a relational PostgreSQL database transactionally in the RESTful API. 
+The code to persist and query the IotNodeStepGen data in the database will then be automatically generated. 
+</li>
+0<h3>Suggestions that can generate more code for you: </h3></ol>
  * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class IotNodeStepGen into the class IotNodeStep. 
  * </li>
  * <li>You can add a class comment "Model: true" if you wish to persist these IotNodeStep objects in a relational PostgreSQL database transactionally in the RESTful API. 
  * The code to persist and query the IotNodeStepGen data in the database will then be automatically generated. 
  * </li>
- * </ol>
- * <h1>About the IotNodeStep class and it's generated class IotNodeStepGen&lt;BaseResult&gt;: </h1>
+ * 0<h3>Suggestions that can generate more code for you: </h3>
+ * <h3>About the IotNodeStep class and it's generated class IotNodeStepGen&lt;BaseResult&gt;: </h3>extends IotNodeStepGen
  * <p>
- * This Java class extends a generated Java class built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
+ * This Java class extends a generated Java class IotNodeStepGen built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
  * Whenever this Java class is modified or touched, the watch service installed as described in the README, indexes all the information about this Java class in a local Apache Solr Search Engine. 
  * If you are running the service, you can see the indexed data about this Java Class here: 
  * </p>
@@ -65,37 +70,91 @@ import org.computate.search.response.solr.SolrResponse;
  * The extended class ending with "Gen" did not exist at first, but was automatically created by the same watch service based on the data retrieved from the local Apache Server search engine. 
  * The extended class contains many generated fields, getters, setters, initialization code, and helper methods to help build a website and API fast, reactive, and scalable. 
  * </p>
- * <p>This class contains a comment <b>"Indexed: true"</b>, which means this class will be indexed in the search engine. 
- * Every protected void method that begins with "_" that is marked to be searched with a comment like "Indexed: true", "Stored: true", or "DocValues: true" will be indexed in the search engine. 
+ * extends IotNodeStepGen<BaseResult>
+ * <p>This <code>class IotNodeStep extends IotNodeStepGen&lt;BaseResult&gt;</code>, which means it extends a newly generated IotNodeStepGen. 
+ * The generated <code>class IotNodeStepGen extends BaseResult</code> which means that IotNodeStep extends IotNodeStepGen which extends BaseResult. 
+ * This generated inheritance is a powerful feature that allows a lot of boiler plate code to be created for you automatically while still preserving inheritance through the power of Java Generic classes. 
  * </p>
- * <p>This class contains a comment <b>"Page: true"</b>, which means this class will have webpage code generated for these objects. 
- * Java Vert.x backend API code, Handlebars HTML template frontend code, and JavaScript code will all generated and can be extended. 
- * This creates a new Java class org.computate.smartvillageview.enus.result.iotnode.step.IotNodeStepPage. 
- * </p>
- * <p>This class contains a comment <b>"SuperPage.enUS: BaseResultPage"</b>, which identifies the Java super class of the page code by it's class simple name "BaseResultPage". 
- * This means that the newly created class org.computate.smartvillageview.enus.result.iotnode.step.IotNodeStepPage extends org.computate.smartvillageview.enus.result.base.BaseResultPage. 
- * </p>
+ * Api: true
  * <p>This class contains a comment <b>"Api: true"</b>, which means this class will have Java Vert.x API backend code generated for these objects. 
  * </p>
+ * ApiTag.enUS: IOT Node Step
  * <p>This class contains a comment <b>"ApiTag: IOT Node Step"</b>, which groups all of the OpenAPIs for IotNodeStep objects under the tag "IOT Node Step". 
  * </p>
+ * ApiUri.enUS: /api/iot-node-step
  * <p>This class contains a comment <b>"ApiUri: /api/iot-node-step"</b>, which defines the base API URI for IotNodeStep objects as "/api/iot-node-step" in the OpenAPI spec. 
  * </p>
- * <p>This class contains a comment <b>"Rows: 100"</b>, which means the IotNodeStep API will return a default of 100 records instead of 10 by default. 
- * Each API has built in pagination of the search records to ensure a user can query all the data a page at a time without running the application out of memory. 
- * </p>
- * <p>This class contains a comment <b>"AName.enUS: an IOT node step"</b>, which identifies the language context to describe a IotNodeStep as "an IOT node step". 
- * </p>
+ * Color: 2017-shaded-spruce
  * <p>This class contains a comment <b>"Color: 2017-shaded-spruce"</b>, which styles the IotNodeStep page "2017-shaded-spruce". 
  * This will reference a CSS class defined by the stylesheets in the project that starts with "w3-". 
  * A css class of "w3-2017-shaded-spruce" is expected to exist in the project stylesheets, and is inspired by W3 CSS colors. 
  * See: <a href="https://www.w3schools.com/w3css/w3css_colors.asp">https://www.w3schools.com/w3css/w3css_colors.asp</a>. 
  * </p>
+ * IconGroup: duotone
  * <p>This class contains a comment <b>"IconGroup: duotone"</b>, which adds icons on the IotNodeStep page with a group of "duotone". 
- * This will reference a Font Awesome icon group defined by the stylesheets in the project that starts with "fa" followed by the first letter of the icon group, which is "fad". 
- * A Font Awesome icon group of "2017-shaded-spruce" is expected to exist. 
- * The Font Awesome groups currently supported include: solid, thin, duotone. 
- * See: <a href="https://www.w3schools.com/w3css/w3css_colors.asp">https://www.w3schools.com/w3css/w3css_colors.asp</a>. 
+ * This will reference a Font Awesome icon group that starts with "fa-" followed by the icon group "duotone", together is "fa-duotone". 
+ * A Font Awesome icon group of "duotone" is expected to exist. 
+ * The Font Awesome groups currently supported include: solid, regular, light, thin, duotone, and sharp. 
+ * See: <a href="https://fontawesome.com/docs/web/dig-deeper/styles">https://fontawesome.com/docs/web/dig-deeper/styles</a>. 
+ * </p>
+ * IconName: router
+ * <p>This class contains a comment <b>"IconName: router"</b>, which adds icons on the IotNodeStep page with a name of "router". 
+ * This will reference a Font Awesome icon that starts with the icon group "fa-duotone fa-" followed by the icon name, which is "fa-duotone fa-router". 
+ * A Font Awesome icon of "fa-duotone fa-router" is expected to exist. 
+ * See: <a href="https://fontawesome.com/icons">https://fontawesome.com/icons</a>. 
+ * </p>
+ * Indexed: true
+ * <p>This class contains a comment <b>"Indexed: true"</b>, which means this class will be indexed in the search engine. 
+ * Every protected void method that begins with "_" that is marked to be searched with a comment like "Indexed: true", "Stored: true", or "DocValues: true" will be indexed in the search engine. 
+ * </p>
+ * {@inheritDoc}
+ * <p>By adding a class comment "{@inheritDoc}", the IotNodeStep class will inherit the helpful inherited class comments from the super class IotNodeStepGen. 
+ * </p>
+ * Rows: 100
+ * <p>This class contains a comment <b>"Rows: 100"</b>, which means the IotNodeStep API will return a default of 100 records instead of 10 by default. 
+ * Each API has built in pagination of the search records to ensure a user can query all the data a page at a time without running the application out of memory. 
+ * </p>
+ * Model: true
+ * Page: true
+ * <p>This class contains a comment <b>"Page: true"</b>, which means this class will have webpage code generated for these objects. 
+ * Java Vert.x backend API code, Handlebars HTML template frontend code, and JavaScript code will all generated and can be extended. 
+ * This creates a new Java class org.computate.smartvillageview.enus.result.iotnode.step.IotNodeStepPage. 
+ * </p>
+ * SuperPage.enUS: BaseResultPage
+ * <p>This class contains a comment <b>"SuperPage.enUS: BaseResultPage"</b>, which identifies the Java super class of the page code by it's class simple name "BaseResultPage". 
+ * This means that the newly created class org.computate.smartvillageview.enus.result.iotnode.step.IotNodeStepPage extends org.computate.smartvillageview.enus.result.base.BaseResultPage. 
+ * </p>
+ * Promise: true
+ * <p>
+ *   This class contains a comment <b>"Promise: true"</b>
+ *   Sometimes a Java class must be initialized asynchronously when it involves calling a blocking API. 
+ *   This means that the IotNodeStep Java class has promiseDeep methods which must be initialized asynchronously as a Vert.x Promise  instead of initDeep methods which are a simple non-asynchronous method. 
+ * </p>
+ * <p>
+ *   Adding protected void methods beginning with an underscore with a Promise as the only parameter will automatically set `Promise: true`. 
+ * </p>
+ * <p>
+ *   <pre>
+ *   
+ *   	protected void _promiseBefore(Promise&lt;Void&gt; promise) {
+ *   		promise.complete();
+ *   	}
+ *   </pre>
+ * </p>
+ * <p>
+ *   Java classes with the `Model: true` will automatically set `Promise: true`. 
+ * </p>
+ * <p>
+ *   If a super class of this Java class with `Model: true`, then the child class will also inherit `Promise: true`. 
+ * </p>
+ * Role.enUS: SiteAdmin
+ * <p>
+ * This class contains a comment <b>"Role.enUS: SiteAdmin"</b>, which identifies the default role name "SiteAdmin" of the OAuth2/OpenID Connect user role required to access this IotNodeStep API. 
+ * It's possible to reconfigure the roles required to access the IotNodeStep API by configuring an environment variable like this: 
+ * </p>
+ * <pre>AUTH_ROLES_REQUIRED_IotNodeStep: ["SiteAdmin"]</pre>
+ * AName: an IOT node step
+ * <p>This class contains a comment <b>"AName.enUS: an IOT node step"</b>, which identifies the language context to describe a IotNodeStep as "an IOT node step". 
  * </p>
  * <p>
  * Delete the class IotNodeStep in Solr: 
@@ -153,6 +212,7 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	//////////
 	// json //
 	//////////
+
 
 	/**	 The entity json
 	 *	 is defined as null before being initialized. 
@@ -215,6 +275,7 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	// nodeName //
 	//////////////
 
+
 	/**	 The entity nodeName
 	 *	 is defined as null before being initialized. 
 	 */
@@ -267,6 +328,7 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	//////////////
 	// nodeType //
 	//////////////
+
 
 	/**	 The entity nodeType
 	 *	 is defined as null before being initialized. 
@@ -321,6 +383,7 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	// nodeId //
 	////////////
 
+
 	/**	 The entity nodeId
 	 *	 is defined as null before being initialized. 
 	 */
@@ -373,6 +436,7 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	//////////////
 	// location //
 	//////////////
+
 
 	/**	 The entity location
 	 *	 is defined as null before being initialized. 
@@ -438,6 +502,7 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	///////////////////
 	// json_moisture //
 	///////////////////
+
 
 	/**	 The entity json_moisture
 	 *	 is defined as null before being initialized. 
@@ -505,6 +570,7 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	// json_moisture0 //
 	////////////////////
 
+
 	/**	 The entity json_moisture0
 	 *	 is defined as null before being initialized. 
 	 */
@@ -570,6 +636,7 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	////////////////////
 	// json_moisture1 //
 	////////////////////
+
 
 	/**	 The entity json_moisture1
 	 *	 is defined as null before being initialized. 
@@ -637,6 +704,7 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	// json_temperature //
 	//////////////////////
 
+
 	/**	 The entity json_temperature
 	 *	 is defined as null before being initialized. 
 	 */
@@ -702,6 +770,7 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	///////////////////////
 	// json_temperature0 //
 	///////////////////////
+
 
 	/**	 The entity json_temperature0
 	 *	 is defined as null before being initialized. 
@@ -769,6 +838,7 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	// json_temperatureAverage //
 	/////////////////////////////
 
+
 	/**	 The entity json_temperatureAverage
 	 *	 is defined as null before being initialized. 
 	 */
@@ -834,6 +904,7 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	///////////////////////////////
 	// json_badConditionsCounter //
 	///////////////////////////////
+
 
 	/**	 The entity json_badConditionsCounter
 	 *	 is defined as null before being initialized. 
@@ -901,6 +972,7 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	// json_door //
 	///////////////
 
+
 	/**	 The entity json_door
 	 *	 is defined as null before being initialized. 
 	 */
@@ -949,6 +1021,7 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	////////////////////
 	// json_alarmDoor //
 	////////////////////
+
 
 	/**	 The entity json_alarmDoor
 	 *	 is defined as null before being initialized. 
@@ -1003,6 +1076,7 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	////////////////
 	// json_flood //
 	////////////////
+
 
 	/**	 The entity json_flood
 	 *	 is defined as null before being initialized. 
@@ -1070,6 +1144,7 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	// json_alarmFlood //
 	/////////////////////
 
+
 	/**	 The entity json_alarmFlood
 	 *	 is defined as null before being initialized. 
 	 */
@@ -1123,6 +1198,7 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	///////////////
 	// json_lux2 //
 	///////////////
+
 
 	/**	 The entity json_lux2
 	 *	 is defined as null before being initialized. 
@@ -1190,6 +1266,7 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	// json_illuminance //
 	//////////////////////
 
+
 	/**	 The entity json_illuminance
 	 *	 is defined as null before being initialized. 
 	 */
@@ -1255,6 +1332,7 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	//////////////////////
 	// json_resistance0 //
 	//////////////////////
+
 
 	/**	 The entity json_resistance0
 	 *	 is defined as null before being initialized. 
@@ -1322,6 +1400,7 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	// json_resistance1 //
 	//////////////////////
 
+
 	/**	 The entity json_resistance1
 	 *	 is defined as null before being initialized. 
 	 */
@@ -1387,6 +1466,7 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	////////////////////
 	// json_frequency //
 	////////////////////
+
 
 	/**	 The entity json_frequency
 	 *	 is defined as null before being initialized. 
@@ -1454,6 +1534,7 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	// json_devEui //
 	/////////////////
 
+
 	/**	 The entity json_devEui
 	 *	 is defined as null before being initialized. 
 	 */
@@ -1503,6 +1584,7 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	// json_bandwidth //
 	////////////////////
 
+
 	/**	 The entity json_bandwidth
 	 *	 is defined as null before being initialized. 
 	 */
@@ -1551,6 +1633,7 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	///////////////////
 	// json_dataRate //
 	///////////////////
+
 
 	/**	 The entity json_dataRate
 	 *	 is defined as null before being initialized. 
@@ -1618,6 +1701,7 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	// json_frameCount //
 	/////////////////////
 
+
 	/**	 The entity json_frameCount
 	 *	 is defined as null before being initialized. 
 	 */
@@ -1683,6 +1767,7 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	/////////////////////
 	// json_maxPayload //
 	/////////////////////
+
 
 	/**	 The entity json_maxPayload
 	 *	 is defined as null before being initialized. 
@@ -1750,6 +1835,7 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	// json_bitsPerSecond //
 	////////////////////////
 
+
 	/**	 The entity json_bitsPerSecond
 	 *	 is defined as null before being initialized. 
 	 */
@@ -1815,6 +1901,7 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	/////////////////////////
 	// json_batteryVoltage //
 	/////////////////////////
+
 
 	/**	 The entity json_batteryVoltage
 	 *	 is defined as null before being initialized. 
@@ -1882,6 +1969,7 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	// json_spreadingFactor //
 	//////////////////////////
 
+
 	/**	 The entity json_spreadingFactor
 	 *	 is defined as null before being initialized. 
 	 */
@@ -1948,6 +2036,7 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	// json_dataRateAdaptive //
 	///////////////////////////
 
+
 	/**	 The entity json_dataRateAdaptive
 	 *	 is defined as null before being initialized. 
 	 */
@@ -2002,6 +2091,7 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	// json_swversion //
 	////////////////////
 
+
 	/**	 The entity json_swversion
 	 *	 is defined as null before being initialized. 
 	 */
@@ -2050,6 +2140,7 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	///////////////////////
 	// json_batteryLevel //
 	///////////////////////
+
 
 	/**	 The entity json_batteryLevel
 	 *	 is defined as null before being initialized. 
@@ -2117,6 +2208,7 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	// json_startUpCount //
 	///////////////////////
 
+
 	/**	 The entity json_startUpCount
 	 *	 is defined as null before being initialized. 
 	 */
@@ -2182,6 +2274,7 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	////////////////////////
 	// json_watchdogCount //
 	////////////////////////
+
 
 	/**	 The entity json_watchdogCount
 	 *	 is defined as null before being initialized. 
@@ -2249,6 +2342,7 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	// json_historySequence //
 	//////////////////////////
 
+
 	/**	 The entity json_historySequence
 	 *	 is defined as null before being initialized. 
 	 */
@@ -2315,6 +2409,7 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	// json_versionFirmware //
 	//////////////////////////
 
+
 	/**	 The entity json_versionFirmware
 	 *	 is defined as null before being initialized. 
 	 */
@@ -2363,6 +2458,7 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	/////////////////////////////////
 	// json_stackTxFailRebootCount //
 	/////////////////////////////////
+
 
 	/**	 The entity json_stackTxFailRebootCount
 	 *	 is defined as null before being initialized. 
@@ -2430,6 +2526,7 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	// json_historySequencePrevious //
 	//////////////////////////////////
 
+
 	/**	 The entity json_historySequencePrevious
 	 *	 is defined as null before being initialized. 
 	 */
@@ -2495,6 +2592,7 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	//////////////
 	// json_snr //
 	//////////////
+
 
 	/**	 The entity json_snr
 	 *	 is defined as null before being initialized. 
@@ -2562,6 +2660,7 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	// json_rssi //
 	///////////////
 
+
 	/**	 The entity json_rssi
 	 *	 is defined as null before being initialized. 
 	 */
@@ -2623,6 +2722,8 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	public static String staticSearchFqJson_rssi(SiteRequestEnUS siteRequest_, String o) {
 		return IotNodeStep.staticSearchStrJson_rssi(siteRequest_, IotNodeStep.staticSearchJson_rssi(siteRequest_, IotNodeStep.staticSetJson_rssi(siteRequest_, o)));
 	}
+
+
 
 	//////////////
 	// initDeep //
@@ -3287,9 +3388,9 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 				}
 				saves.add("location");
 				return val;
-			} else {
-				return super.persistBaseResult(var, val);
-			}
+		} else {
+			return super.persistBaseResult(var, val);
+		}
 	}
 
 	/////////////

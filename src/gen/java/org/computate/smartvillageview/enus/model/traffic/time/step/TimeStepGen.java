@@ -3,7 +3,7 @@ package org.computate.smartvillageview.enus.model.traffic.time.step;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.smartvillageview.enus.model.base.BaseModel;
 import org.computate.vertx.api.ApiRequest;
-import org.computate.vertx.config.ComputateConfigKeys;
+import org.computate.smartvillageview.enus.config.ConfigKeys;
 import java.util.Optional;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
@@ -34,6 +34,17 @@ import org.computate.smartvillageview.enus.result.base.BaseResult;
 import java.lang.Long;
 import java.lang.String;
 import java.math.BigDecimal;
+import java.time.ZonedDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
+import java.time.format.DateTimeFormatter;
+import java.time.Instant;
+import java.util.Locale;
+import java.time.OffsetDateTime;
 import org.computate.search.wrap.Wrap;
 import io.vertx.core.Promise;
 import io.vertx.core.Future;
@@ -43,17 +54,22 @@ import org.computate.search.response.solr.SolrResponse;
 import io.vertx.core.json.JsonObject;
 
 /**	
- * <h1>Suggestions that can generate more code for you: </h1>
- * <ol>
+<ol>
+<li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class TimeStepGen into the class TimeStep. 
+</li>
+<li>You can add a class comment "Model: true" if you wish to persist these TimeStep objects in a relational PostgreSQL database transactionally in the RESTful API. 
+The code to persist and query the TimeStepGen data in the database will then be automatically generated. 
+</li>
+0<h3>Suggestions that can generate more code for you: </h3></ol>
  * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class TimeStepGen into the class TimeStep. 
  * </li>
  * <li>You can add a class comment "Model: true" if you wish to persist these TimeStep objects in a relational PostgreSQL database transactionally in the RESTful API. 
  * The code to persist and query the TimeStepGen data in the database will then be automatically generated. 
  * </li>
- * </ol>
- * <h1>About the TimeStep class and it's generated class TimeStepGen&lt;BaseResult&gt;: </h1>
+ * 0<h3>Suggestions that can generate more code for you: </h3>
+ * <h3>About the TimeStep class and it's generated class TimeStepGen&lt;BaseResult&gt;: </h3>extends TimeStepGen
  * <p>
- * This Java class extends a generated Java class built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
+ * This Java class extends a generated Java class TimeStepGen built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
  * Whenever this Java class is modified or touched, the watch service installed as described in the README, indexes all the information about this Java class in a local Apache Solr Search Engine. 
  * If you are running the service, you can see the indexed data about this Java Class here: 
  * </p>
@@ -62,37 +78,91 @@ import io.vertx.core.json.JsonObject;
  * The extended class ending with "Gen" did not exist at first, but was automatically created by the same watch service based on the data retrieved from the local Apache Server search engine. 
  * The extended class contains many generated fields, getters, setters, initialization code, and helper methods to help build a website and API fast, reactive, and scalable. 
  * </p>
- * <p>This class contains a comment <b>"Indexed: true"</b>, which means this class will be indexed in the search engine. 
- * Every protected void method that begins with "_" that is marked to be searched with a comment like "Indexed: true", "Stored: true", or "DocValues: true" will be indexed in the search engine. 
+ * extends TimeStepGen<BaseResult>
+ * <p>This <code>class TimeStep extends TimeStepGen&lt;BaseResult&gt;</code>, which means it extends a newly generated TimeStepGen. 
+ * The generated <code>class TimeStepGen extends BaseResult</code> which means that TimeStep extends TimeStepGen which extends BaseResult. 
+ * This generated inheritance is a powerful feature that allows a lot of boiler plate code to be created for you automatically while still preserving inheritance through the power of Java Generic classes. 
  * </p>
- * <p>This class contains a comment <b>"Page: true"</b>, which means this class will have webpage code generated for these objects. 
- * Java Vert.x backend API code, Handlebars HTML template frontend code, and JavaScript code will all generated and can be extended. 
- * This creates a new Java class org.computate.smartvillageview.enus.model.traffic.time.step.TimeStepPage. 
- * </p>
- * <p>This class contains a comment <b>"SuperPage.enUS: BaseResultPage"</b>, which identifies the Java super class of the page code by it's class simple name "BaseResultPage". 
- * This means that the newly created class org.computate.smartvillageview.enus.model.traffic.time.step.TimeStepPage extends org.computate.smartvillageview.enus.result.base.BaseResultPage. 
- * </p>
+ * Api: true
  * <p>This class contains a comment <b>"Api: true"</b>, which means this class will have Java Vert.x API backend code generated for these objects. 
  * </p>
+ * ApiTag.enUS: Time Step
  * <p>This class contains a comment <b>"ApiTag: Time Step"</b>, which groups all of the OpenAPIs for TimeStep objects under the tag "Time Step". 
  * </p>
+ * ApiUri.enUS: /api/time-step
  * <p>This class contains a comment <b>"ApiUri: /api/time-step"</b>, which defines the base API URI for TimeStep objects as "/api/time-step" in the OpenAPI spec. 
  * </p>
- * <p>This class contains a comment <b>"Rows: 100"</b>, which means the TimeStep API will return a default of 100 records instead of 10 by default. 
- * Each API has built in pagination of the search records to ensure a user can query all the data a page at a time without running the application out of memory. 
- * </p>
- * <p>This class contains a comment <b>"AName.enUS: a time step"</b>, which identifies the language context to describe a TimeStep as "a time step". 
- * </p>
+ * Color: 2017-shaded-spruce
  * <p>This class contains a comment <b>"Color: 2017-shaded-spruce"</b>, which styles the TimeStep page "2017-shaded-spruce". 
  * This will reference a CSS class defined by the stylesheets in the project that starts with "w3-". 
  * A css class of "w3-2017-shaded-spruce" is expected to exist in the project stylesheets, and is inspired by W3 CSS colors. 
  * See: <a href="https://www.w3schools.com/w3css/w3css_colors.asp">https://www.w3schools.com/w3css/w3css_colors.asp</a>. 
  * </p>
+ * IconGroup: duotone
  * <p>This class contains a comment <b>"IconGroup: duotone"</b>, which adds icons on the TimeStep page with a group of "duotone". 
- * This will reference a Font Awesome icon group defined by the stylesheets in the project that starts with "fa" followed by the first letter of the icon group, which is "fad". 
- * A Font Awesome icon group of "2017-shaded-spruce" is expected to exist. 
- * The Font Awesome groups currently supported include: solid, thin, duotone. 
- * See: <a href="https://www.w3schools.com/w3css/w3css_colors.asp">https://www.w3schools.com/w3css/w3css_colors.asp</a>. 
+ * This will reference a Font Awesome icon group that starts with "fa-" followed by the icon group "duotone", together is "fa-duotone". 
+ * A Font Awesome icon group of "duotone" is expected to exist. 
+ * The Font Awesome groups currently supported include: solid, regular, light, thin, duotone, and sharp. 
+ * See: <a href="https://fontawesome.com/docs/web/dig-deeper/styles">https://fontawesome.com/docs/web/dig-deeper/styles</a>. 
+ * </p>
+ * IconName: timer
+ * <p>This class contains a comment <b>"IconName: timer"</b>, which adds icons on the TimeStep page with a name of "timer". 
+ * This will reference a Font Awesome icon that starts with the icon group "fa-duotone fa-" followed by the icon name, which is "fa-duotone fa-timer". 
+ * A Font Awesome icon of "fa-duotone fa-timer" is expected to exist. 
+ * See: <a href="https://fontawesome.com/icons">https://fontawesome.com/icons</a>. 
+ * </p>
+ * Indexed: true
+ * <p>This class contains a comment <b>"Indexed: true"</b>, which means this class will be indexed in the search engine. 
+ * Every protected void method that begins with "_" that is marked to be searched with a comment like "Indexed: true", "Stored: true", or "DocValues: true" will be indexed in the search engine. 
+ * </p>
+ * {@inheritDoc}
+ * <p>By adding a class comment "{@inheritDoc}", the TimeStep class will inherit the helpful inherited class comments from the super class TimeStepGen. 
+ * </p>
+ * Rows: 100
+ * <p>This class contains a comment <b>"Rows: 100"</b>, which means the TimeStep API will return a default of 100 records instead of 10 by default. 
+ * Each API has built in pagination of the search records to ensure a user can query all the data a page at a time without running the application out of memory. 
+ * </p>
+ * Model: true
+ * Page: true
+ * <p>This class contains a comment <b>"Page: true"</b>, which means this class will have webpage code generated for these objects. 
+ * Java Vert.x backend API code, Handlebars HTML template frontend code, and JavaScript code will all generated and can be extended. 
+ * This creates a new Java class org.computate.smartvillageview.enus.model.traffic.time.step.TimeStepPage. 
+ * </p>
+ * SuperPage.enUS: BaseResultPage
+ * <p>This class contains a comment <b>"SuperPage.enUS: BaseResultPage"</b>, which identifies the Java super class of the page code by it's class simple name "BaseResultPage". 
+ * This means that the newly created class org.computate.smartvillageview.enus.model.traffic.time.step.TimeStepPage extends org.computate.smartvillageview.enus.result.base.BaseResultPage. 
+ * </p>
+ * Promise: true
+ * <p>
+ *   This class contains a comment <b>"Promise: true"</b>
+ *   Sometimes a Java class must be initialized asynchronously when it involves calling a blocking API. 
+ *   This means that the TimeStep Java class has promiseDeep methods which must be initialized asynchronously as a Vert.x Promise  instead of initDeep methods which are a simple non-asynchronous method. 
+ * </p>
+ * <p>
+ *   Adding protected void methods beginning with an underscore with a Promise as the only parameter will automatically set `Promise: true`. 
+ * </p>
+ * <p>
+ *   <pre>
+ *   
+ *   	protected void _promiseBefore(Promise&lt;Void&gt; promise) {
+ *   		promise.complete();
+ *   	}
+ *   </pre>
+ * </p>
+ * <p>
+ *   Java classes with the `Model: true` will automatically set `Promise: true`. 
+ * </p>
+ * <p>
+ *   If a super class of this Java class with `Model: true`, then the child class will also inherit `Promise: true`. 
+ * </p>
+ * Role.enUS: SiteAdmin
+ * <p>
+ * This class contains a comment <b>"Role.enUS: SiteAdmin"</b>, which identifies the default role name "SiteAdmin" of the OAuth2/OpenID Connect user role required to access this TimeStep API. 
+ * It's possible to reconfigure the roles required to access the TimeStep API by configuring an environment variable like this: 
+ * </p>
+ * <pre>AUTH_ROLES_REQUIRED_TimeStep: ["SiteAdmin"]</pre>
+ * AName: a time step
+ * <p>This class contains a comment <b>"AName.enUS: a time step"</b>, which identifies the language context to describe a TimeStep as "a time step". 
  * </p>
  * <p>
  * Delete the class TimeStep in Solr: 
@@ -150,6 +220,7 @@ public abstract class TimeStepGen<DEV> extends BaseResult {
 	///////////////////
 	// simulationKey //
 	///////////////////
+
 
 	/**	 The entity simulationKey
 	 *	 is defined as null before being initialized. 
@@ -212,6 +283,7 @@ public abstract class TimeStepGen<DEV> extends BaseResult {
 	// path //
 	//////////
 
+
 	/**	 The entity path
 	 *	 is defined as null before being initialized. 
 	 */
@@ -264,6 +336,7 @@ public abstract class TimeStepGen<DEV> extends BaseResult {
 	//////////
 	// time //
 	//////////
+
 
 	/**	 The entity time
 	 *	 is defined as null before being initialized. 
@@ -332,6 +405,85 @@ public abstract class TimeStepGen<DEV> extends BaseResult {
 	}
 
 	//////////////
+	// dateTime //
+	//////////////
+
+
+	/**	 The entity dateTime
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonDeserialize(using = ComputateZonedDateTimeDeserializer.class)
+	@JsonSerialize(using = ComputateZonedDateTimeSerializer.class)
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSSV'['VV']'")
+	@JsonInclude(Include.NON_NULL)
+	protected ZonedDateTime dateTime;
+
+	/**	<br> The entity dateTime
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.time.step.TimeStep&fq=entiteVar_enUS_indexed_string:dateTime">Find the entity dateTime in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _dateTime(Wrap<ZonedDateTime> w);
+
+	public ZonedDateTime getDateTime() {
+		return dateTime;
+	}
+
+	public void setDateTime(ZonedDateTime dateTime) {
+		this.dateTime = dateTime;
+	}
+	@JsonIgnore
+	public void setDateTime(Instant o) {
+		this.dateTime = o == null ? null : ZonedDateTime.from(o).truncatedTo(ChronoUnit.MILLIS);
+	}
+	/** Example: 2011-12-03T10:15:30+01:00 **/
+	@JsonIgnore
+	public void setDateTime(String o) {
+		this.dateTime = TimeStep.staticSetDateTime(siteRequest_, o);
+	}
+	public static ZonedDateTime staticSetDateTime(SiteRequestEnUS siteRequest_, String o) {
+		if(StringUtils.endsWith(o, "]"))
+			return o == null ? null : ZonedDateTime.parse(o, ComputateZonedDateTimeSerializer.ZONED_DATE_TIME_FORMATTER);
+		else if(StringUtils.endsWith(o, "Z"))
+			return o == null ? null : Instant.parse(o).atZone(Optional.ofNullable(siteRequest_).map(r -> r.getConfig()).map(config -> config.getString(ConfigKeys.SITE_ZONE)).map(z -> ZoneId.of(z)).orElse(ZoneId.of("UTC"))).truncatedTo(ChronoUnit.MILLIS);
+		else if(StringUtils.contains(o, "T"))
+			return o == null ? null : ZonedDateTime.parse(o, DateTimeFormatter.ISO_DATE_TIME).truncatedTo(ChronoUnit.MILLIS);
+		else
+			return o == null ? null : LocalDate.parse(o, DateTimeFormatter.ISO_DATE).atStartOfDay(ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
+	}
+	@JsonIgnore
+	public void setDateTime(Date o) {
+		this.dateTime = o == null ? null : ZonedDateTime.ofInstant(o.toInstant(), ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
+	}
+	protected TimeStep dateTimeInit() {
+		Wrap<ZonedDateTime> dateTimeWrap = new Wrap<ZonedDateTime>().var("dateTime");
+		if(dateTime == null) {
+			_dateTime(dateTimeWrap);
+			setDateTime(dateTimeWrap.o);
+		}
+		return (TimeStep)this;
+	}
+
+	public static Date staticSearchDateTime(SiteRequestEnUS siteRequest_, ZonedDateTime o) {
+		return o == null ? null : Date.from(o.toInstant());
+	}
+
+	public static String staticSearchStrDateTime(SiteRequestEnUS siteRequest_, Date o) {
+		return "\"" + DateTimeFormatter.ISO_DATE_TIME.format(o.toInstant().atOffset(ZoneOffset.UTC)) + "\"";
+	}
+
+	public static String staticSearchFqDateTime(SiteRequestEnUS siteRequest_, String o) {
+		return TimeStep.staticSearchStrDateTime(siteRequest_, TimeStep.staticSearchDateTime(siteRequest_, TimeStep.staticSetDateTime(siteRequest_, o)));
+	}
+
+	public OffsetDateTime sqlDateTime() {
+		return dateTime == null ? null : dateTime.toOffsetDateTime();
+	}
+
+
+	//////////////
 	// initDeep //
 	//////////////
 
@@ -363,6 +515,7 @@ public abstract class TimeStepGen<DEV> extends BaseResult {
 				simulationKeyInit();
 				pathInit();
 				timeInit();
+				dateTimeInit();
 				promise2.complete();
 			} catch(Exception ex) {
 				promise2.fail(ex);
@@ -422,6 +575,8 @@ public abstract class TimeStepGen<DEV> extends BaseResult {
 				return oTimeStep.path;
 			case "time":
 				return oTimeStep.time;
+			case "dateTime":
+				return oTimeStep.dateTime;
 			default:
 				return super.obtainBaseResult(var);
 		}
@@ -467,6 +622,8 @@ public abstract class TimeStepGen<DEV> extends BaseResult {
 			return TimeStep.staticSetPath(siteRequest_, o);
 		case "time":
 			return TimeStep.staticSetTime(siteRequest_, o);
+		case "dateTime":
+			return TimeStep.staticSetDateTime(siteRequest_, o);
 			default:
 				return BaseResult.staticSetBaseResult(entityVar,  siteRequest_, o);
 		}
@@ -487,6 +644,8 @@ public abstract class TimeStepGen<DEV> extends BaseResult {
 			return TimeStep.staticSearchPath(siteRequest_, (String)o);
 		case "time":
 			return TimeStep.staticSearchTime(siteRequest_, (BigDecimal)o);
+		case "dateTime":
+			return TimeStep.staticSearchDateTime(siteRequest_, (ZonedDateTime)o);
 			default:
 				return BaseResult.staticSearchBaseResult(entityVar,  siteRequest_, o);
 		}
@@ -507,6 +666,8 @@ public abstract class TimeStepGen<DEV> extends BaseResult {
 			return TimeStep.staticSearchStrPath(siteRequest_, (String)o);
 		case "time":
 			return TimeStep.staticSearchStrTime(siteRequest_, (Double)o);
+		case "dateTime":
+			return TimeStep.staticSearchStrDateTime(siteRequest_, (Date)o);
 			default:
 				return BaseResult.staticSearchStrBaseResult(entityVar,  siteRequest_, o);
 		}
@@ -527,6 +688,8 @@ public abstract class TimeStepGen<DEV> extends BaseResult {
 			return TimeStep.staticSearchFqPath(siteRequest_, o);
 		case "time":
 			return TimeStep.staticSearchFqTime(siteRequest_, o);
+		case "dateTime":
+			return TimeStep.staticSearchFqDateTime(siteRequest_, o);
 			default:
 				return BaseResult.staticSearchFqBaseResult(entityVar,  siteRequest_, o);
 		}
@@ -575,9 +738,17 @@ public abstract class TimeStepGen<DEV> extends BaseResult {
 				}
 				saves.add("time");
 				return val;
-			} else {
-				return super.persistBaseResult(var, val);
-			}
+			} else if("datetime".equals(varLower)) {
+				if(val instanceof String) {
+					setDateTime((String)val);
+				} else if(val instanceof OffsetDateTime) {
+					setDateTime(((OffsetDateTime)val).atZoneSameInstant(ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))));
+				}
+				saves.add("dateTime");
+				return val;
+		} else {
+			return super.persistBaseResult(var, val);
+		}
 	}
 
 	/////////////
@@ -606,6 +777,9 @@ public abstract class TimeStepGen<DEV> extends BaseResult {
 		if(time != null) {
 			doc.put("time_docvalues_double", time.doubleValue());
 		}
+		if(dateTime != null) {
+			doc.put("dateTime_docvalues_date", DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(ZonedDateTime.ofInstant(dateTime.toInstant(), ZoneId.of("UTC"))));
+		}
 		super.indexBaseResult(doc);
 
 	}
@@ -618,6 +792,8 @@ public abstract class TimeStepGen<DEV> extends BaseResult {
 				return "path_docvalues_string";
 			case "time":
 				return "time_docvalues_double";
+			case "dateTime":
+				return "dateTime_docvalues_date";
 			default:
 				return BaseResult.varStoredBaseResult(entityVar);
 		}
@@ -631,6 +807,8 @@ public abstract class TimeStepGen<DEV> extends BaseResult {
 				return "path_docvalues_string";
 			case "time":
 				return "time_docvalues_double";
+			case "dateTime":
+				return "dateTime_docvalues_date";
 			default:
 				return BaseResult.varIndexedBaseResult(entityVar);
 		}
@@ -644,6 +822,8 @@ public abstract class TimeStepGen<DEV> extends BaseResult {
 				return "path";
 			case "time_docvalues_double":
 				return "time";
+			case "dateTime_docvalues_date":
+				return "dateTime";
 			default:
 				return BaseResult.searchVarBaseResult(searchVar);
 		}
@@ -676,6 +856,7 @@ public abstract class TimeStepGen<DEV> extends BaseResult {
 		oTimeStep.setSimulationKey(Optional.ofNullable(doc.get("simulationKey_docvalues_long")).map(v -> v.toString()).orElse(null));
 		oTimeStep.setPath(Optional.ofNullable(doc.get("path_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oTimeStep.setTime(Optional.ofNullable(doc.get("time_docvalues_double")).map(v -> v.toString()).orElse(null));
+		oTimeStep.setDateTime(Optional.ofNullable(doc.get("dateTime_docvalues_date")).map(v -> v.toString()).orElse(null));
 
 		super.storeBaseResult(doc);
 	}
@@ -695,6 +876,8 @@ public abstract class TimeStepGen<DEV> extends BaseResult {
 				apiRequest.addVars("path");
 			if(!Objects.equals(time, original.getTime()))
 				apiRequest.addVars("time");
+			if(!Objects.equals(dateTime, original.getDateTime()))
+				apiRequest.addVars("dateTime");
 			super.apiRequestBaseResult();
 		}
 	}
@@ -709,6 +892,7 @@ public abstract class TimeStepGen<DEV> extends BaseResult {
 		sb.append(Optional.ofNullable(simulationKey).map(v -> "simulationKey: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(path).map(v -> "path: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(time).map(v -> "time: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(dateTime).map(v -> "dateTime: " + v + "\n").orElse(""));
 		return sb.toString();
 	}
 
@@ -716,6 +900,7 @@ public abstract class TimeStepGen<DEV> extends BaseResult {
 	public static final String VAR_simulationKey = "simulationKey";
 	public static final String VAR_path = "path";
 	public static final String VAR_time = "time";
+	public static final String VAR_dateTime = "dateTime";
 
 	public static List<String> varsQForClass() {
 		return TimeStep.varsQTimeStep(new ArrayList<String>());
@@ -732,6 +917,7 @@ public abstract class TimeStepGen<DEV> extends BaseResult {
 		vars.add(VAR_simulationKey);
 		vars.add(VAR_path);
 		vars.add(VAR_time);
+		vars.add(VAR_dateTime);
 		BaseResult.varsFqBaseResult(vars);
 		return vars;
 	}
@@ -742,6 +928,7 @@ public abstract class TimeStepGen<DEV> extends BaseResult {
 	public static List<String> varsRangeTimeStep(List<String> vars) {
 		vars.add(VAR_simulationKey);
 		vars.add(VAR_time);
+		vars.add(VAR_dateTime);
 		BaseResult.varsRangeBaseResult(vars);
 		return vars;
 	}
@@ -749,6 +936,7 @@ public abstract class TimeStepGen<DEV> extends BaseResult {
 	public static final String DISPLAY_NAME_simulationKey = "Simulation";
 	public static final String DISPLAY_NAME_path = "Path";
 	public static final String DISPLAY_NAME_time = "Time in seconds";
+	public static final String DISPLAY_NAME_dateTime = "Date and Time in seconds";
 
 	public static String displayNameForClass(String var) {
 		return TimeStep.displayNameTimeStep(var);
@@ -761,6 +949,8 @@ public abstract class TimeStepGen<DEV> extends BaseResult {
 			return DISPLAY_NAME_path;
 		case VAR_time:
 			return DISPLAY_NAME_time;
+		case VAR_dateTime:
+			return DISPLAY_NAME_dateTime;
 		default:
 			return BaseResult.displayNameBaseResult(var);
 		}
@@ -774,6 +964,8 @@ public abstract class TimeStepGen<DEV> extends BaseResult {
 			return "The file path. ";
 		case VAR_time:
 			return "The time in seconds. ";
+		case VAR_dateTime:
+			return "The date and time in seconds. ";
 			default:
 				return BaseResult.descriptionBaseResult(var);
 		}
@@ -787,6 +979,8 @@ public abstract class TimeStepGen<DEV> extends BaseResult {
 			return "String";
 		case VAR_time:
 			return "BigDecimal";
+		case VAR_dateTime:
+			return "ZonedDateTime";
 			default:
 				return BaseResult.classSimpleNameBaseResult(var);
 		}
@@ -807,6 +1001,8 @@ public abstract class TimeStepGen<DEV> extends BaseResult {
 			return 3;
 		case VAR_time:
 			return 3;
+		case VAR_dateTime:
+			return 4;
 			default:
 				return BaseResult.htmlRowBaseResult(var);
 		}
@@ -820,6 +1016,8 @@ public abstract class TimeStepGen<DEV> extends BaseResult {
 			return 2;
 		case VAR_time:
 			return 3;
+		case VAR_dateTime:
+			return 1;
 			default:
 				return BaseResult.htmlCellBaseResult(var);
 		}
