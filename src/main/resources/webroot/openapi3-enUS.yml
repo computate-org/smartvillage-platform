@@ -11377,6 +11377,14 @@ components:
                     type: string
                   siteDisplayName:
                     type: string
+                  sitePublicUrl:
+                    type: string
+                  mailingListUrl:
+                    type: string
+                  quayioOrg:
+                    type: string
+                  sitePomGroupId:
+                    type: string
                   staticBaseUrl:
                     type: string
                   staticPath:
@@ -11415,6 +11423,14 @@ components:
               type: string
             siteDisplayName:
               type: string
+            sitePublicUrl:
+              type: string
+            mailingListUrl:
+              type: string
+            quayioOrg:
+              type: string
+            sitePomGroupId:
+              type: string
             staticBaseUrl:
               type: string
             staticPath:
@@ -11452,6 +11468,14 @@ components:
             siteName:
               type: string
             siteDisplayName:
+              type: string
+            sitePublicUrl:
+              type: string
+            mailingListUrl:
+              type: string
+            quayioOrg:
+              type: string
+            sitePomGroupId:
               type: string
             staticBaseUrl:
               type: string
@@ -11505,6 +11529,34 @@ components:
             removeSiteDisplayName:
               type: string
             removeAllSiteDisplayName:
+              type: string
+            setSitePublicUrl:
+              type: string
+              nullable: true
+            removeSitePublicUrl:
+              type: string
+            removeAllSitePublicUrl:
+              type: string
+            setMailingListUrl:
+              type: string
+              nullable: true
+            removeMailingListUrl:
+              type: string
+            removeAllMailingListUrl:
+              type: string
+            setQuayioOrg:
+              type: string
+              nullable: true
+            removeQuayioOrg:
+              type: string
+            removeAllQuayioOrg:
+              type: string
+            setSitePomGroupId:
+              type: string
+              nullable: true
+            removeSitePomGroupId:
+              type: string
+            removeAllSitePomGroupId:
               type: string
             setStaticBaseUrl:
               type: string
@@ -11629,6 +11681,34 @@ components:
               type: string
             removeAllSiteDisplayName:
               type: string
+            setSitePublicUrl:
+              type: string
+              nullable: true
+            removeSitePublicUrl:
+              type: string
+            removeAllSitePublicUrl:
+              type: string
+            setMailingListUrl:
+              type: string
+              nullable: true
+            removeMailingListUrl:
+              type: string
+            removeAllMailingListUrl:
+              type: string
+            setQuayioOrg:
+              type: string
+              nullable: true
+            removeQuayioOrg:
+              type: string
+            removeAllQuayioOrg:
+              type: string
+            setSitePomGroupId:
+              type: string
+              nullable: true
+            removeSitePomGroupId:
+              type: string
+            removeAllSitePomGroupId:
+              type: string
             setStaticBaseUrl:
               type: string
               nullable: true
@@ -11737,6 +11817,14 @@ components:
               type: string
             siteDisplayName:
               type: string
+            sitePublicUrl:
+              type: string
+            mailingListUrl:
+              type: string
+            quayioOrg:
+              type: string
+            sitePomGroupId:
+              type: string
             staticBaseUrl:
               type: string
             staticPath:
@@ -11775,6 +11863,14 @@ components:
               type: string
             siteDisplayName:
               type: string
+            sitePublicUrl:
+              type: string
+            mailingListUrl:
+              type: string
+            quayioOrg:
+              type: string
+            sitePomGroupId:
+              type: string
             staticBaseUrl:
               type: string
             staticPath:
@@ -11812,6 +11908,14 @@ components:
             siteName:
               type: string
             siteDisplayName:
+              type: string
+            sitePublicUrl:
+              type: string
+            mailingListUrl:
+              type: string
+            quayioOrg:
+              type: string
+            sitePomGroupId:
               type: string
             staticBaseUrl:
               type: string
@@ -13322,6 +13426,8 @@ components:
                     type: string
                   netFilePath:
                     type: string
+                  startDateTime:
+                    type: string
                   startSeconds:
                     type: string
                   endSeconds:
@@ -13367,6 +13473,13 @@ components:
             removeNetFilePath:
               type: string
             removeAllNetFilePath:
+              type: string
+            setStartDateTime:
+              type: string
+              nullable: true
+            removeStartDateTime:
+              type: string
+            removeAllStartDateTime:
               type: string
             setStartSeconds:
               type: string
@@ -13455,6 +13568,13 @@ components:
               type: string
             removeAllNetFilePath:
               type: string
+            setStartDateTime:
+              type: string
+              nullable: true
+            removeStartDateTime:
+              type: string
+            removeAllStartDateTime:
+              type: string
             setStartSeconds:
               type: string
               nullable: true
@@ -13522,6 +13642,8 @@ components:
               type: string
             netFilePath:
               type: string
+            startDateTime:
+              type: string
             startSeconds:
               type: string
             endSeconds:
@@ -13547,6 +13669,8 @@ components:
             fcdFilePath:
               type: string
             netFilePath:
+              type: string
+            startDateTime:
               type: string
             startSeconds:
               type: string
@@ -13574,6 +13698,8 @@ components:
               type: string
             netFilePath:
               type: string
+            startDateTime:
+              type: string
             startSeconds:
               type: string
             endSeconds:
@@ -13600,6 +13726,8 @@ components:
               type: string
             netFilePath:
               type: string
+            startDateTime:
+              type: string
             startSeconds:
               type: string
             endSeconds:
@@ -13625,6 +13753,8 @@ components:
             fcdFilePath:
               type: string
             netFilePath:
+              type: string
+            startDateTime:
               type: string
             startSeconds:
               type: string
@@ -15388,6 +15518,9 @@ components:
                     type: string
                   time:
                     type: string
+                  dateTime:
+                    type: string
+                    format: date-time
                   x:
                     type: string
                   y:
@@ -15412,6 +15545,9 @@ components:
               type: string
             time:
               type: string
+            dateTime:
+              type: string
+              format: date-time
             x:
               type: string
             y:

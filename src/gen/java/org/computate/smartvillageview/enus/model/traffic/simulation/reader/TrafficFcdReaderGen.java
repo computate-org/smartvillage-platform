@@ -42,14 +42,16 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 
 /**	
- * <h1>Suggestions that can generate more code for you: </h1>
- * <ol>
+<ol>
+<li>You can add a class comment <b>"Api: true"</b> if you wish to GET, POST, PATCH or PUT these TrafficFcdReader objects in a RESTful API. 
+</li>
+0<h3>Suggestions that can generate more code for you: </h3></ol>
  * <li>You can add a class comment <b>"Api: true"</b> if you wish to GET, POST, PATCH or PUT these TrafficFcdReader objects in a RESTful API. 
  * </li>
- * </ol>
- * <h1>About the TrafficFcdReader class and it's generated class TrafficFcdReaderGen&lt;Object&gt;: </h1>
+ * 0<h3>Suggestions that can generate more code for you: </h3>
+ * <h3>About the TrafficFcdReader class and it's generated class TrafficFcdReaderGen&lt;Object&gt;: </h3>extends TrafficFcdReaderGen
  * <p>
- * This Java class extends a generated Java class built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
+ * This Java class extends a generated Java class TrafficFcdReaderGen built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
  * Whenever this Java class is modified or touched, the watch service installed as described in the README, indexes all the information about this Java class in a local Apache Solr Search Engine. 
  * If you are running the service, you can see the indexed data about this Java Class here: 
  * </p>
@@ -58,6 +60,27 @@ import io.vertx.core.json.JsonArray;
  * The extended class ending with "Gen" did not exist at first, but was automatically created by the same watch service based on the data retrieved from the local Apache Server search engine. 
  * The extended class contains many generated fields, getters, setters, initialization code, and helper methods to help build a website and API fast, reactive, and scalable. 
  * </p>
+ * extends TrafficFcdReaderGen<Object>
+ * <p>This <code>class TrafficFcdReader extends TrafficFcdReaderGen&lt;Object&gt;</code>, which means it extends a newly generated TrafficFcdReaderGen. 
+ * The generated <code>class TrafficFcdReaderGen extends Object</code> which means that TrafficFcdReader extends TrafficFcdReaderGen which extends Object. 
+ * This generated inheritance is a powerful feature that allows a lot of boiler plate code to be created for you automatically while still preserving inheritance through the power of Java Generic classes. 
+ * </p>
+ * Api: true
+ * ApiTag.enUS: null
+ * ApiUri.enUS: null
+ * Color: null
+ * IconGroup: null
+ * IconName: null
+ * Indexed: true
+ * {@inheritDoc}
+ * <p>By adding a class comment "{@inheritDoc}", the TrafficFcdReader class will inherit the helpful inherited class comments from the super class TrafficFcdReaderGen. 
+ * </p>
+ * Rows: null
+ * Model: true
+ * Page: true
+ * SuperPage.enUS: null
+ * Promise: true
+ * AName: null
  * <p>
  * Delete the class TrafficFcdReader in Solr: 
  * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.reader.TrafficFcdReader&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
@@ -67,8 +90,8 @@ import io.vertx.core.json.JsonArray;
  * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.reader&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
- * Delete  the project smart-village-view in Solr: 
- * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smart\-village\-view&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * Delete  the project smartabyar-smartvillage in Solr: 
+ * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartabyar\-smartvillage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  **/
 public abstract class TrafficFcdReaderGen<DEV> extends Object {
@@ -89,6 +112,7 @@ public abstract class TrafficFcdReaderGen<DEV> extends Object {
 	//////////////////
 	// siteRequest_ //
 	//////////////////
+
 
 	/**	 The entity siteRequest_
 	 *	 is defined as null before being initialized. 
@@ -127,6 +151,7 @@ public abstract class TrafficFcdReaderGen<DEV> extends Object {
 	////////////
 	// config //
 	////////////
+
 
 	/**	 The entity config
 	 *	 is defined as null before being initialized. 
@@ -185,6 +210,7 @@ public abstract class TrafficFcdReaderGen<DEV> extends Object {
 	// webClient //
 	///////////////
 
+
 	/**	 The entity webClient
 	 *	 is defined as null before being initialized. 
 	 */
@@ -222,6 +248,7 @@ public abstract class TrafficFcdReaderGen<DEV> extends Object {
 	///////////
 	// vertx //
 	///////////
+
 
 	/**	 The entity vertx
 	 *	 is defined as null before being initialized. 
@@ -261,6 +288,7 @@ public abstract class TrafficFcdReaderGen<DEV> extends Object {
 	// workerExecutor //
 	////////////////////
 
+
 	/**	 The entity workerExecutor
 	 *	 is defined as null before being initialized. 
 	 */
@@ -298,6 +326,7 @@ public abstract class TrafficFcdReaderGen<DEV> extends Object {
 	//////////////
 	// eventBus //
 	//////////////
+
 
 	/**	 The entity eventBus
 	 *	 is defined as null before being initialized. 
@@ -350,6 +379,8 @@ public abstract class TrafficFcdReaderGen<DEV> extends Object {
 	public static final String importSystemEventWebSocket1 = "websocket%s";
 	public static final String importSystemEventWebSocket = importSystemEventWebSocket1;
 
+
+
 	public static final String importTrafficSimulationFutureComplete1 = "Syncing Traffic simulation import complete: %s";
 	public static final String importTrafficSimulationFutureComplete = importTrafficSimulationFutureComplete1;
 	public static final String importTrafficSimulationFutureFail1 = "Syncing Traffic simulation import failed: %s";
@@ -394,6 +425,7 @@ public abstract class TrafficFcdReaderGen<DEV> extends Object {
 	public static final String importTrafficLightHandleBodyWebSocket1 = "websocket%s";
 	public static final String importTrafficLightHandleBodyWebSocket = importTrafficLightHandleBodyWebSocket1;
 
+
 	public static final String importTlsStatesFileComplete1 = "Syncing SUMO net file complete: %s";
 	public static final String importTlsStatesFileComplete = importTlsStatesFileComplete1;
 	public static final String importTlsStatesFileFail1 = "Syncing SUMO net file failed: %s";
@@ -407,6 +439,7 @@ public abstract class TrafficFcdReaderGen<DEV> extends Object {
 	public static final String importTrafficLightStepHandleBodyFail = importTrafficLightStepHandleBodyFail1;
 	public static final String importTrafficLightStepHandleBodyWebSocket1 = "websocket%s";
 	public static final String importTrafficLightStepHandleBodyWebSocket = importTrafficLightStepHandleBodyWebSocket1;
+
 
 	public static final String importFcdFileListStarted1 = "Syncing FCD files started. ";
 	public static final String importFcdFileListStarted = importFcdFileListStarted1;
@@ -448,6 +481,8 @@ public abstract class TrafficFcdReaderGen<DEV> extends Object {
 	public static final String importFcdVehicleStepFail = importFcdVehicleStepFail1;
 	public static final String importFcdVehicleStepWebSocket1 = "websocket%s";
 	public static final String importFcdVehicleStepWebSocket = importFcdVehicleStepWebSocket1;
+
+
 
 
 	//////////////

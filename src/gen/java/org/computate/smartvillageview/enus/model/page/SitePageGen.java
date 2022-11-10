@@ -42,21 +42,30 @@ import org.computate.search.response.solr.SolrResponse;
 import io.vertx.core.json.JsonObject;
 
 /**	
- * <h1>Suggestions that can generate more code for you: </h1>
- * <ol>
+<ol>
+<li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class SitePageGen into the class SitePage. 
+</li>
+<li>You can add a class comment "Rows: 100" if you wish the SitePage API to return more or less than 10 records by default. 
+In this case, the API will return 100 records from the API instead of 10 by default. 
+Each API has built in pagination of the search records to ensure a user can query all the data a page at a time without running the application out of memory. 
+</li>
+<li>You can add a class comment "Model: true" if you wish to persist these SitePage objects in a relational PostgreSQL database transactionally in the RESTful API. 
+The code to persist and query the SitePageGen data in the database will then be automatically generated. 
+</li>
+0<h3>Suggestions that can generate more code for you: </h3></ol>
  * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class SitePageGen into the class SitePage. 
- * </li>
- * <li>You can add a class comment "Model: true" if you wish to persist these SitePage objects in a relational PostgreSQL database transactionally in the RESTful API. 
- * The code to persist and query the SitePageGen data in the database will then be automatically generated. 
  * </li>
  * <li>You can add a class comment "Rows: 100" if you wish the SitePage API to return more or less than 10 records by default. 
  * In this case, the API will return 100 records from the API instead of 10 by default. 
  * Each API has built in pagination of the search records to ensure a user can query all the data a page at a time without running the application out of memory. 
  * </li>
- * </ol>
- * <h1>About the SitePage class and it's generated class SitePageGen&lt;BaseResult&gt;: </h1>
+ * <li>You can add a class comment "Model: true" if you wish to persist these SitePage objects in a relational PostgreSQL database transactionally in the RESTful API. 
+ * The code to persist and query the SitePageGen data in the database will then be automatically generated. 
+ * </li>
+ * 0<h3>Suggestions that can generate more code for you: </h3>
+ * <h3>About the SitePage class and it's generated class SitePageGen&lt;BaseResult&gt;: </h3>extends SitePageGen
  * <p>
- * This Java class extends a generated Java class built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
+ * This Java class extends a generated Java class SitePageGen built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
  * Whenever this Java class is modified or touched, the watch service installed as described in the README, indexes all the information about this Java class in a local Apache Solr Search Engine. 
  * If you are running the service, you can see the indexed data about this Java Class here: 
  * </p>
@@ -65,34 +74,88 @@ import io.vertx.core.json.JsonObject;
  * The extended class ending with "Gen" did not exist at first, but was automatically created by the same watch service based on the data retrieved from the local Apache Server search engine. 
  * The extended class contains many generated fields, getters, setters, initialization code, and helper methods to help build a website and API fast, reactive, and scalable. 
  * </p>
- * <p>This class contains a comment <b>"Indexed: true"</b>, which means this class will be indexed in the search engine. 
- * Every protected void method that begins with "_" that is marked to be searched with a comment like "Indexed: true", "Stored: true", or "DocValues: true" will be indexed in the search engine. 
+ * extends SitePageGen<BaseResult>
+ * <p>This <code>class SitePage extends SitePageGen&lt;BaseResult&gt;</code>, which means it extends a newly generated SitePageGen. 
+ * The generated <code>class SitePageGen extends BaseResult</code> which means that SitePage extends SitePageGen which extends BaseResult. 
+ * This generated inheritance is a powerful feature that allows a lot of boiler plate code to be created for you automatically while still preserving inheritance through the power of Java Generic classes. 
  * </p>
- * <p>This class contains a comment <b>"Page: true"</b>, which means this class will have webpage code generated for these objects. 
- * Java Vert.x backend API code, Handlebars HTML template frontend code, and JavaScript code will all generated and can be extended. 
- * This creates a new Java class org.computate.smartvillageview.enus.model.page.SitePagePage. 
- * </p>
- * <p>This class contains a comment <b>"SuperPage.enUS: BaseResultPage"</b>, which identifies the Java super class of the page code by it's class simple name "BaseResultPage". 
- * This means that the newly created class org.computate.smartvillageview.enus.model.page.SitePagePage extends org.computate.smartvillageview.enus.result.base.BaseResultPage. 
- * </p>
+ * Api: true
  * <p>This class contains a comment <b>"Api: true"</b>, which means this class will have Java Vert.x API backend code generated for these objects. 
  * </p>
+ * ApiTag.enUS: Page
  * <p>This class contains a comment <b>"ApiTag: Page"</b>, which groups all of the OpenAPIs for SitePage objects under the tag "Page". 
  * </p>
+ * ApiUri.enUS: /api/page
  * <p>This class contains a comment <b>"ApiUri: /api/page"</b>, which defines the base API URI for SitePage objects as "/api/page" in the OpenAPI spec. 
  * </p>
- * <p>This class contains a comment <b>"AName.enUS: an article"</b>, which identifies the language context to describe a SitePage as "an article". 
- * </p>
+ * Color: 2017-shaded-spruce
  * <p>This class contains a comment <b>"Color: 2017-shaded-spruce"</b>, which styles the SitePage page "2017-shaded-spruce". 
  * This will reference a CSS class defined by the stylesheets in the project that starts with "w3-". 
  * A css class of "w3-2017-shaded-spruce" is expected to exist in the project stylesheets, and is inspired by W3 CSS colors. 
  * See: <a href="https://www.w3schools.com/w3css/w3css_colors.asp">https://www.w3schools.com/w3css/w3css_colors.asp</a>. 
  * </p>
+ * IconGroup: duotone
  * <p>This class contains a comment <b>"IconGroup: duotone"</b>, which adds icons on the SitePage page with a group of "duotone". 
- * This will reference a Font Awesome icon group defined by the stylesheets in the project that starts with "fa" followed by the first letter of the icon group, which is "fad". 
- * A Font Awesome icon group of "2017-shaded-spruce" is expected to exist. 
- * The Font Awesome groups currently supported include: solid, thin, duotone. 
- * See: <a href="https://www.w3schools.com/w3css/w3css_colors.asp">https://www.w3schools.com/w3css/w3css_colors.asp</a>. 
+ * This will reference a Font Awesome icon group that starts with "fa-" followed by the icon group "duotone", together is "fa-duotone". 
+ * A Font Awesome icon group of "duotone" is expected to exist. 
+ * The Font Awesome groups currently supported include: solid, regular, light, thin, duotone, and sharp. 
+ * See: <a href="https://fontawesome.com/docs/web/dig-deeper/styles">https://fontawesome.com/docs/web/dig-deeper/styles</a>. 
+ * </p>
+ * IconName: newspaper
+ * <p>This class contains a comment <b>"IconName: newspaper"</b>, which adds icons on the SitePage page with a name of "newspaper". 
+ * This will reference a Font Awesome icon that starts with the icon group "fa-duotone fa-" followed by the icon name, which is "fa-duotone fa-newspaper". 
+ * A Font Awesome icon of "fa-duotone fa-newspaper" is expected to exist. 
+ * See: <a href="https://fontawesome.com/icons">https://fontawesome.com/icons</a>. 
+ * </p>
+ * Indexed: true
+ * <p>This class contains a comment <b>"Indexed: true"</b>, which means this class will be indexed in the search engine. 
+ * Every protected void method that begins with "_" that is marked to be searched with a comment like "Indexed: true", "Stored: true", or "DocValues: true" will be indexed in the search engine. 
+ * </p>
+ * {@inheritDoc}
+ * <p>By adding a class comment "{@inheritDoc}", the SitePage class will inherit the helpful inherited class comments from the super class SitePageGen. 
+ * </p>
+ * Rows: null
+ * Model: true
+ * Page: true
+ * <p>This class contains a comment <b>"Page: true"</b>, which means this class will have webpage code generated for these objects. 
+ * Java Vert.x backend API code, Handlebars HTML template frontend code, and JavaScript code will all generated and can be extended. 
+ * This creates a new Java class org.computate.smartvillageview.enus.model.page.SitePagePage. 
+ * </p>
+ * SuperPage.enUS: BaseResultPage
+ * <p>This class contains a comment <b>"SuperPage.enUS: BaseResultPage"</b>, which identifies the Java super class of the page code by it's class simple name "BaseResultPage". 
+ * This means that the newly created class org.computate.smartvillageview.enus.model.page.SitePagePage extends org.computate.smartvillageview.enus.result.base.BaseResultPage. 
+ * </p>
+ * Promise: true
+ * <p>
+ *   This class contains a comment <b>"Promise: true"</b>
+ *   Sometimes a Java class must be initialized asynchronously when it involves calling a blocking API. 
+ *   This means that the SitePage Java class has promiseDeep methods which must be initialized asynchronously as a Vert.x Promise  instead of initDeep methods which are a simple non-asynchronous method. 
+ * </p>
+ * <p>
+ *   Adding protected void methods beginning with an underscore with a Promise as the only parameter will automatically set `Promise: true`. 
+ * </p>
+ * <p>
+ *   <pre>
+ *   
+ *   	protected void _promiseBefore(Promise&lt;Void&gt; promise) {
+ *   		promise.complete();
+ *   	}
+ *   </pre>
+ * </p>
+ * <p>
+ *   Java classes with the `Model: true` will automatically set `Promise: true`. 
+ * </p>
+ * <p>
+ *   If a super class of this Java class with `Model: true`, then the child class will also inherit `Promise: true`. 
+ * </p>
+ * Role.enUS: SiteAdmin
+ * <p>
+ * This class contains a comment <b>"Role.enUS: SiteAdmin"</b>, which identifies the default role name "SiteAdmin" of the OAuth2/OpenID Connect user role required to access this SitePage API. 
+ * It's possible to reconfigure the roles required to access the SitePage API by configuring an environment variable like this: 
+ * </p>
+ * <pre>AUTH_ROLES_REQUIRED_SitePage: ["SiteAdmin"]</pre>
+ * AName: an article
+ * <p>This class contains a comment <b>"AName.enUS: an article"</b>, which identifies the language context to describe a SitePage as "an article". 
  * </p>
  * <p>
  * Delete the class SitePage in Solr: 
@@ -151,6 +214,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	// githubOrg //
 	///////////////
 
+
 	/**	 The entity githubOrg
 	 *	 is defined as null before being initialized. 
 	 */
@@ -199,6 +263,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	//////////////
 	// siteName //
 	//////////////
+
 
 	/**	 The entity siteName
 	 *	 is defined as null before being initialized. 
@@ -249,6 +314,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	// siteDisplayName //
 	/////////////////////
 
+
 	/**	 The entity siteDisplayName
 	 *	 is defined as null before being initialized. 
 	 */
@@ -297,6 +363,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	///////////////////
 	// sitePublicUrl //
 	///////////////////
+
 
 	/**	 The entity sitePublicUrl
 	 *	 is defined as null before being initialized. 
@@ -347,6 +414,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	// mailingListUrl //
 	////////////////////
 
+
 	/**	 The entity mailingListUrl
 	 *	 is defined as null before being initialized. 
 	 */
@@ -395,6 +463,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	///////////////
 	// quayioOrg //
 	///////////////
+
 
 	/**	 The entity quayioOrg
 	 *	 is defined as null before being initialized. 
@@ -445,6 +514,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	// sitePomGroupId //
 	////////////////////
 
+
 	/**	 The entity sitePomGroupId
 	 *	 is defined as null before being initialized. 
 	 */
@@ -493,6 +563,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	///////////////////
 	// staticBaseUrl //
 	///////////////////
+
 
 	/**	 The entity staticBaseUrl
 	 *	 is defined as null before being initialized. 
@@ -543,6 +614,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	// staticPath //
 	////////////////
 
+
 	/**	 The entity staticPath
 	 *	 is defined as null before being initialized. 
 	 */
@@ -592,6 +664,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	// siteBaseUrl //
 	/////////////////
 
+
 	/**	 The entity siteBaseUrl
 	 *	 is defined as null before being initialized. 
 	 */
@@ -640,6 +713,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	///////////////
 	// courseNum //
 	///////////////
+
 
 	/**	 The entity courseNum
 	 *	 is defined as null before being initialized. 
@@ -702,6 +776,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	// lessonNum //
 	///////////////
 
+
 	/**	 The entity lessonNum
 	 *	 is defined as null before being initialized. 
 	 */
@@ -763,6 +838,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	// uri //
 	/////////
 
+
 	/**	 The entity uri
 	 *	 is defined as null before being initialized. 
 	 */
@@ -815,6 +891,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	////////////
 	// pageId //
 	////////////
+
 
 	/**	 The entity pageId
 	 *	 is defined as null before being initialized. 
@@ -869,6 +946,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	// h1 //
 	////////
 
+
 	/**	 The entity h1
 	 *	 is defined as null before being initialized. 
 	 */
@@ -921,6 +999,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	////////
 	// h2 //
 	////////
+
 
 	/**	 The entity h2
 	 *	 is defined as null before being initialized. 
@@ -975,6 +1054,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	// author //
 	////////////
 
+
 	/**	 The entity author
 	 *	 is defined as null before being initialized. 
 	 */
@@ -1028,6 +1108,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	// pageImageUri //
 	//////////////////
 
+
 	/**	 The entity pageImageUri
 	 *	 is defined as null before being initialized. 
 	 */
@@ -1080,6 +1161,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	////////////////////
 	// pageImageWidth //
 	////////////////////
+
 
 	/**	 The entity pageImageWidth
 	 *	 is defined as null before being initialized. 
@@ -1138,6 +1220,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	// pageImageHeight //
 	/////////////////////
 
+
 	/**	 The entity pageImageHeight
 	 *	 is defined as null before being initialized. 
 	 */
@@ -1195,6 +1278,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	// pageImageType //
 	///////////////////
 
+
 	/**	 The entity pageImageType
 	 *	 is defined as null before being initialized. 
 	 */
@@ -1239,6 +1323,9 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	public static String staticSearchFqPageImageType(SiteRequestEnUS siteRequest_, String o) {
 		return SitePage.staticSearchStrPageImageType(siteRequest_, SitePage.staticSearchPageImageType(siteRequest_, SitePage.staticSetPageImageType(siteRequest_, o)));
 	}
+
+
+
 
 	//////////////
 	// initDeep //
@@ -1712,9 +1799,9 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 				}
 				saves.add("pageImageUri");
 				return val;
-			} else {
-				return super.persistBaseResult(var, val);
-			}
+		} else {
+			return super.persistBaseResult(var, val);
+		}
 	}
 
 	/////////////

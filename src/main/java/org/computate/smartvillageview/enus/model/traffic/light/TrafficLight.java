@@ -26,7 +26,6 @@ import org.computate.smartvillageview.enus.result.map.MapResult;
  * ApiUri.SearchPage.enUS: /traffic-light
  * 
  * Role.enUS: SiteAdmin
- * Saves: true
  * 
  * AName.enUS: a traffic light
  * Color: 2017-shaded-spruce

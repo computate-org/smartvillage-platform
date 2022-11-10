@@ -62,7 +62,7 @@
 		<junit.version>4.13.2</junit.version>
 		<mockito.version>4.8.1</mockito.version>
 		<vertx.version>4.2.5.redhat-00001</vertx.version>
-		<computate.version>4.2.5.15</computate.version>
+		<computate.version>4.2.5.16</computate.version>
 		<jfreechart.version>1.5.3</jfreechart.version>
 		<handlebars.version>4.3.1</handlebars.version>
 		<flying-saucer.version>9.1.22</flying-saucer.version>
@@ -90,12 +90,6 @@
 		<!-- ######### -->
 		<!-- Computate -->
 		<!-- ######### -->
-
-		<dependency>
-			<groupId>org.computate</groupId>
-			<artifactId>computate-vertx</artifactId>
-			<version>${computate.version}</version>
-		</dependency>
 
 		<!-- ############## -->
 		<!-- Apache Commons -->
@@ -290,6 +284,12 @@
 			<artifactId>junit</artifactId>
 			<version>${junit.version}</version>
 			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.computate</groupId>
+			<artifactId>computate-vertx</artifactId>
+			<version>${computate.version}</version>
 		</dependency>
 
 		<dependency>

@@ -3,7 +3,7 @@ package org.computate.smartvillageview.enus.model.system.event;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.smartvillageview.enus.model.base.BaseModel;
 import org.computate.vertx.api.ApiRequest;
-import org.computate.vertx.config.ComputateConfigKeys;
+import org.computate.smartvillageview.enus.config.ConfigKeys;
 import java.util.Optional;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
@@ -56,21 +56,30 @@ import org.computate.search.response.solr.SolrResponse;
 import io.vertx.core.json.JsonObject;
 
 /**	
- * <h1>Suggestions that can generate more code for you: </h1>
- * <ol>
+<ol>
+<li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class SystemEventGen into the class SystemEvent. 
+</li>
+<li>You can add a class comment "Rows: 100" if you wish the SystemEvent API to return more or less than 10 records by default. 
+In this case, the API will return 100 records from the API instead of 10 by default. 
+Each API has built in pagination of the search records to ensure a user can query all the data a page at a time without running the application out of memory. 
+</li>
+<li>You can add a class comment "Model: true" if you wish to persist these SystemEvent objects in a relational PostgreSQL database transactionally in the RESTful API. 
+The code to persist and query the SystemEventGen data in the database will then be automatically generated. 
+</li>
+0<h3>Suggestions that can generate more code for you: </h3></ol>
  * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class SystemEventGen into the class SystemEvent. 
- * </li>
- * <li>You can add a class comment "Model: true" if you wish to persist these SystemEvent objects in a relational PostgreSQL database transactionally in the RESTful API. 
- * The code to persist and query the SystemEventGen data in the database will then be automatically generated. 
  * </li>
  * <li>You can add a class comment "Rows: 100" if you wish the SystemEvent API to return more or less than 10 records by default. 
  * In this case, the API will return 100 records from the API instead of 10 by default. 
  * Each API has built in pagination of the search records to ensure a user can query all the data a page at a time without running the application out of memory. 
  * </li>
- * </ol>
- * <h1>About the SystemEvent class and it's generated class SystemEventGen&lt;Object&gt;: </h1>
+ * <li>You can add a class comment "Model: true" if you wish to persist these SystemEvent objects in a relational PostgreSQL database transactionally in the RESTful API. 
+ * The code to persist and query the SystemEventGen data in the database will then be automatically generated. 
+ * </li>
+ * 0<h3>Suggestions that can generate more code for you: </h3>
+ * <h3>About the SystemEvent class and it's generated class SystemEventGen&lt;Object&gt;: </h3>extends SystemEventGen
  * <p>
- * This Java class extends a generated Java class built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
+ * This Java class extends a generated Java class SystemEventGen built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
  * Whenever this Java class is modified or touched, the watch service installed as described in the README, indexes all the information about this Java class in a local Apache Solr Search Engine. 
  * If you are running the service, you can see the indexed data about this Java Class here: 
  * </p>
@@ -79,34 +88,88 @@ import io.vertx.core.json.JsonObject;
  * The extended class ending with "Gen" did not exist at first, but was automatically created by the same watch service based on the data retrieved from the local Apache Server search engine. 
  * The extended class contains many generated fields, getters, setters, initialization code, and helper methods to help build a website and API fast, reactive, and scalable. 
  * </p>
- * <p>This class contains a comment <b>"Indexed: true"</b>, which means this class will be indexed in the search engine. 
- * Every protected void method that begins with "_" that is marked to be searched with a comment like "Indexed: true", "Stored: true", or "DocValues: true" will be indexed in the search engine. 
+ * extends SystemEventGen<Object>
+ * <p>This <code>class SystemEvent extends SystemEventGen&lt;Object&gt;</code>, which means it extends a newly generated SystemEventGen. 
+ * The generated <code>class SystemEventGen extends Object</code> which means that SystemEvent extends SystemEventGen which extends Object. 
+ * This generated inheritance is a powerful feature that allows a lot of boiler plate code to be created for you automatically while still preserving inheritance through the power of Java Generic classes. 
  * </p>
- * <p>This class contains a comment <b>"Page: true"</b>, which means this class will have webpage code generated for these objects. 
- * Java Vert.x backend API code, Handlebars HTML template frontend code, and JavaScript code will all generated and can be extended. 
- * This creates a new Java class org.computate.smartvillageview.enus.model.system.event.SystemEventPage. 
- * </p>
- * <p>This class contains a comment <b>"SuperPage.enUS: PageLayout"</b>, which identifies the Java super class of the page code by it's class simple name "PageLayout". 
- * This means that the newly created class org.computate.smartvillageview.enus.model.system.event.SystemEventPage extends org.computate.smartvillageview.enus.page.PageLayout. 
- * </p>
+ * Api: true
  * <p>This class contains a comment <b>"Api: true"</b>, which means this class will have Java Vert.x API backend code generated for these objects. 
  * </p>
+ * ApiTag.enUS: System Event
  * <p>This class contains a comment <b>"ApiTag: System Event"</b>, which groups all of the OpenAPIs for SystemEvent objects under the tag "System Event". 
  * </p>
+ * ApiUri.enUS: /api/system-event
  * <p>This class contains a comment <b>"ApiUri: /api/system-event"</b>, which defines the base API URI for SystemEvent objects as "/api/system-event" in the OpenAPI spec. 
  * </p>
- * <p>This class contains a comment <b>"AName.enUS: a system event"</b>, which identifies the language context to describe a SystemEvent as "a system event". 
- * </p>
+ * Color: 2017-shaded-spruce
  * <p>This class contains a comment <b>"Color: 2017-shaded-spruce"</b>, which styles the SystemEvent page "2017-shaded-spruce". 
  * This will reference a CSS class defined by the stylesheets in the project that starts with "w3-". 
  * A css class of "w3-2017-shaded-spruce" is expected to exist in the project stylesheets, and is inspired by W3 CSS colors. 
  * See: <a href="https://www.w3schools.com/w3css/w3css_colors.asp">https://www.w3schools.com/w3css/w3css_colors.asp</a>. 
  * </p>
+ * IconGroup: duotone
  * <p>This class contains a comment <b>"IconGroup: duotone"</b>, which adds icons on the SystemEvent page with a group of "duotone". 
- * This will reference a Font Awesome icon group defined by the stylesheets in the project that starts with "fa" followed by the first letter of the icon group, which is "fad". 
- * A Font Awesome icon group of "2017-shaded-spruce" is expected to exist. 
- * The Font Awesome groups currently supported include: solid, thin, duotone. 
- * See: <a href="https://www.w3schools.com/w3css/w3css_colors.asp">https://www.w3schools.com/w3css/w3css_colors.asp</a>. 
+ * This will reference a Font Awesome icon group that starts with "fa-" followed by the icon group "duotone", together is "fa-duotone". 
+ * A Font Awesome icon group of "duotone" is expected to exist. 
+ * The Font Awesome groups currently supported include: solid, regular, light, thin, duotone, and sharp. 
+ * See: <a href="https://fontawesome.com/docs/web/dig-deeper/styles">https://fontawesome.com/docs/web/dig-deeper/styles</a>. 
+ * </p>
+ * IconName: square-terminal
+ * <p>This class contains a comment <b>"IconName: square-terminal"</b>, which adds icons on the SystemEvent page with a name of "square-terminal". 
+ * This will reference a Font Awesome icon that starts with the icon group "fa-duotone fa-" followed by the icon name, which is "fa-duotone fa-square-terminal". 
+ * A Font Awesome icon of "fa-duotone fa-square-terminal" is expected to exist. 
+ * See: <a href="https://fontawesome.com/icons">https://fontawesome.com/icons</a>. 
+ * </p>
+ * Indexed: true
+ * <p>This class contains a comment <b>"Indexed: true"</b>, which means this class will be indexed in the search engine. 
+ * Every protected void method that begins with "_" that is marked to be searched with a comment like "Indexed: true", "Stored: true", or "DocValues: true" will be indexed in the search engine. 
+ * </p>
+ * {@inheritDoc}
+ * <p>By adding a class comment "{@inheritDoc}", the SystemEvent class will inherit the helpful inherited class comments from the super class SystemEventGen. 
+ * </p>
+ * Rows: null
+ * Model: true
+ * Page: true
+ * <p>This class contains a comment <b>"Page: true"</b>, which means this class will have webpage code generated for these objects. 
+ * Java Vert.x backend API code, Handlebars HTML template frontend code, and JavaScript code will all generated and can be extended. 
+ * This creates a new Java class org.computate.smartvillageview.enus.model.system.event.SystemEventPage. 
+ * </p>
+ * SuperPage.enUS: PageLayout
+ * <p>This class contains a comment <b>"SuperPage.enUS: PageLayout"</b>, which identifies the Java super class of the page code by it's class simple name "PageLayout". 
+ * This means that the newly created class org.computate.smartvillageview.enus.model.system.event.SystemEventPage extends org.computate.smartvillageview.enus.page.PageLayout. 
+ * </p>
+ * Promise: true
+ * <p>
+ *   This class contains a comment <b>"Promise: true"</b>
+ *   Sometimes a Java class must be initialized asynchronously when it involves calling a blocking API. 
+ *   This means that the SystemEvent Java class has promiseDeep methods which must be initialized asynchronously as a Vert.x Promise  instead of initDeep methods which are a simple non-asynchronous method. 
+ * </p>
+ * <p>
+ *   Adding protected void methods beginning with an underscore with a Promise as the only parameter will automatically set `Promise: true`. 
+ * </p>
+ * <p>
+ *   <pre>
+ *   
+ *   	protected void _promiseBefore(Promise&lt;Void&gt; promise) {
+ *   		promise.complete();
+ *   	}
+ *   </pre>
+ * </p>
+ * <p>
+ *   Java classes with the `Model: true` will automatically set `Promise: true`. 
+ * </p>
+ * <p>
+ *   If a super class of this Java class with `Model: true`, then the child class will also inherit `Promise: true`. 
+ * </p>
+ * Role.enUS: SiteAdmin
+ * <p>
+ * This class contains a comment <b>"Role.enUS: SiteAdmin"</b>, which identifies the default role name "SiteAdmin" of the OAuth2/OpenID Connect user role required to access this SystemEvent API. 
+ * It's possible to reconfigure the roles required to access the SystemEvent API by configuring an environment variable like this: 
+ * </p>
+ * <pre>AUTH_ROLES_REQUIRED_SystemEvent: ["SiteAdmin"]</pre>
+ * AName: a system event
+ * <p>This class contains a comment <b>"AName.enUS: a system event"</b>, which identifies the language context to describe a SystemEvent as "a system event". 
  * </p>
  * <p>
  * Delete the class SystemEvent in Solr: 
@@ -165,6 +228,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	// siteRequest_ //
 	//////////////////
 
+
 	/**	 The entity siteRequest_
 	 *	 is defined as null before being initialized. 
 	 */
@@ -202,6 +266,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	///////////////////
 	// promiseBefore //
 	///////////////////
+
 
 	/**	 The entity promiseBefore
 	 *	 is defined as null before being initialized. 
@@ -244,6 +309,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	//////////
 	// type //
 	//////////
+
 
 	/**	 The entity type
 	 *	 is defined as null before being initialized. 
@@ -297,6 +363,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	/////////////
 	// message //
 	/////////////
+
 
 	/**	 The entity message
 	 *	 is defined as null before being initialized. 
@@ -411,6 +478,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	// completed //
 	///////////////
 
+
 	/**	 The entity completed
 	 *	 is defined as null before being initialized. 
 	 */
@@ -449,15 +517,15 @@ public abstract class SystemEventGen<DEV> extends Object {
 		if(StringUtils.endsWith(o, "]"))
 			return o == null ? null : ZonedDateTime.parse(o, ComputateZonedDateTimeSerializer.ZONED_DATE_TIME_FORMATTER);
 		else if(StringUtils.endsWith(o, "Z"))
-			return o == null ? null : Instant.parse(o).atZone(Optional.ofNullable(siteRequest_).map(r -> r.getConfig()).map(config -> config.getString(ComputateConfigKeys.SITE_ZONE)).map(z -> ZoneId.of(z)).orElse(ZoneId.of("UTC"))).truncatedTo(ChronoUnit.MILLIS);
+			return o == null ? null : Instant.parse(o).atZone(Optional.ofNullable(siteRequest_).map(r -> r.getConfig()).map(config -> config.getString(ConfigKeys.SITE_ZONE)).map(z -> ZoneId.of(z)).orElse(ZoneId.of("UTC"))).truncatedTo(ChronoUnit.MILLIS);
 		else if(StringUtils.contains(o, "T"))
 			return o == null ? null : ZonedDateTime.parse(o, DateTimeFormatter.ISO_DATE_TIME).truncatedTo(ChronoUnit.MILLIS);
 		else
-			return o == null ? null : LocalDate.parse(o, DateTimeFormatter.ISO_DATE).atStartOfDay(ZoneId.of(siteRequest_.getConfig().getString(ComputateConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
+			return o == null ? null : LocalDate.parse(o, DateTimeFormatter.ISO_DATE).atStartOfDay(ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
 	}
 	@JsonIgnore
 	public void setCompleted(Date o) {
-		this.completed = o == null ? null : ZonedDateTime.ofInstant(o.toInstant(), ZoneId.of(siteRequest_.getConfig().getString(ComputateConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
+		this.completed = o == null ? null : ZonedDateTime.ofInstant(o.toInstant(), ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
 	}
 	protected SystemEvent completedInit() {
 		Wrap<ZonedDateTime> completedWrap = new Wrap<ZonedDateTime>().var("completed");
@@ -487,6 +555,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	///////////////
 	// inheritPk //
 	///////////////
+
 
 	/**	 The entity inheritPk
 	 *	 is defined as null before being initialized. 
@@ -541,6 +610,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	// created //
 	/////////////
 
+
 	/**	 The entity created
 	 *	 is defined as null before being initialized. 
 	 */
@@ -579,15 +649,15 @@ public abstract class SystemEventGen<DEV> extends Object {
 		if(StringUtils.endsWith(o, "]"))
 			return o == null ? null : ZonedDateTime.parse(o, ComputateZonedDateTimeSerializer.ZONED_DATE_TIME_FORMATTER);
 		else if(StringUtils.endsWith(o, "Z"))
-			return o == null ? null : Instant.parse(o).atZone(Optional.ofNullable(siteRequest_).map(r -> r.getConfig()).map(config -> config.getString(ComputateConfigKeys.SITE_ZONE)).map(z -> ZoneId.of(z)).orElse(ZoneId.of("UTC"))).truncatedTo(ChronoUnit.MILLIS);
+			return o == null ? null : Instant.parse(o).atZone(Optional.ofNullable(siteRequest_).map(r -> r.getConfig()).map(config -> config.getString(ConfigKeys.SITE_ZONE)).map(z -> ZoneId.of(z)).orElse(ZoneId.of("UTC"))).truncatedTo(ChronoUnit.MILLIS);
 		else if(StringUtils.contains(o, "T"))
 			return o == null ? null : ZonedDateTime.parse(o, DateTimeFormatter.ISO_DATE_TIME).truncatedTo(ChronoUnit.MILLIS);
 		else
-			return o == null ? null : LocalDate.parse(o, DateTimeFormatter.ISO_DATE).atStartOfDay(ZoneId.of(siteRequest_.getConfig().getString(ComputateConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
+			return o == null ? null : LocalDate.parse(o, DateTimeFormatter.ISO_DATE).atStartOfDay(ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
 	}
 	@JsonIgnore
 	public void setCreated(Date o) {
-		this.created = o == null ? null : ZonedDateTime.ofInstant(o.toInstant(), ZoneId.of(siteRequest_.getConfig().getString(ComputateConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
+		this.created = o == null ? null : ZonedDateTime.ofInstant(o.toInstant(), ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
 	}
 	protected SystemEvent createdInit() {
 		Wrap<ZonedDateTime> createdWrap = new Wrap<ZonedDateTime>().var("created");
@@ -617,6 +687,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	//////////////
 	// modified //
 	//////////////
+
 
 	/**	 The entity modified
 	 *	 is defined as null before being initialized. 
@@ -656,15 +727,15 @@ public abstract class SystemEventGen<DEV> extends Object {
 		if(StringUtils.endsWith(o, "]"))
 			return o == null ? null : ZonedDateTime.parse(o, ComputateZonedDateTimeSerializer.ZONED_DATE_TIME_FORMATTER);
 		else if(StringUtils.endsWith(o, "Z"))
-			return o == null ? null : Instant.parse(o).atZone(Optional.ofNullable(siteRequest_).map(r -> r.getConfig()).map(config -> config.getString(ComputateConfigKeys.SITE_ZONE)).map(z -> ZoneId.of(z)).orElse(ZoneId.of("UTC"))).truncatedTo(ChronoUnit.MILLIS);
+			return o == null ? null : Instant.parse(o).atZone(Optional.ofNullable(siteRequest_).map(r -> r.getConfig()).map(config -> config.getString(ConfigKeys.SITE_ZONE)).map(z -> ZoneId.of(z)).orElse(ZoneId.of("UTC"))).truncatedTo(ChronoUnit.MILLIS);
 		else if(StringUtils.contains(o, "T"))
 			return o == null ? null : ZonedDateTime.parse(o, DateTimeFormatter.ISO_DATE_TIME).truncatedTo(ChronoUnit.MILLIS);
 		else
-			return o == null ? null : LocalDate.parse(o, DateTimeFormatter.ISO_DATE).atStartOfDay(ZoneId.of(siteRequest_.getConfig().getString(ComputateConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
+			return o == null ? null : LocalDate.parse(o, DateTimeFormatter.ISO_DATE).atStartOfDay(ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
 	}
 	@JsonIgnore
 	public void setModified(Date o) {
-		this.modified = o == null ? null : ZonedDateTime.ofInstant(o.toInstant(), ZoneId.of(siteRequest_.getConfig().getString(ComputateConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
+		this.modified = o == null ? null : ZonedDateTime.ofInstant(o.toInstant(), ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
 	}
 	protected SystemEvent modifiedInit() {
 		Wrap<ZonedDateTime> modifiedWrap = new Wrap<ZonedDateTime>().var("modified");
@@ -690,6 +761,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	//////////////////
 	// pageImageUri //
 	//////////////////
+
 
 	/**	 The entity pageImageUri
 	 *	 is defined as null before being initialized. 
@@ -743,6 +815,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	////////////////////
 	// pageImageWidth //
 	////////////////////
+
 
 	/**	 The entity pageImageWidth
 	 *	 is defined as null before being initialized. 
@@ -801,6 +874,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	// pageImageHeight //
 	/////////////////////
 
+
 	/**	 The entity pageImageHeight
 	 *	 is defined as null before being initialized. 
 	 */
@@ -858,6 +932,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	// pageImageType //
 	///////////////////
 
+
 	/**	 The entity pageImageType
 	 *	 is defined as null before being initialized. 
 	 */
@@ -906,6 +981,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	//////////////
 	// archived //
 	//////////////
+
 
 	/**	 The entity archived
 	 *	 is defined as null before being initialized. 
@@ -965,6 +1041,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	// deleted //
 	/////////////
 
+
 	/**	 The entity deleted
 	 *	 is defined as null before being initialized. 
 	 */
@@ -1023,6 +1100,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	// classCanonicalName //
 	////////////////////////
 
+
 	/**	 The entity classCanonicalName
 	 *	 is defined as null before being initialized. 
 	 */
@@ -1072,6 +1150,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	// classSimpleName //
 	/////////////////////
 
+
 	/**	 The entity classSimpleName
 	 *	 is defined as null before being initialized. 
 	 */
@@ -1120,6 +1199,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	/////////////////////////
 	// classCanonicalNames //
 	/////////////////////////
+
 
 	/**	 The entity classCanonicalNames
 	 *	 It is constructed before being initialized with the constructor by default. 
@@ -1187,6 +1267,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	// sessionId //
 	///////////////
 
+
 	/**	 The entity sessionId
 	 *	 is defined as null before being initialized. 
 	 */
@@ -1239,6 +1320,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	/////////////
 	// userKey //
 	/////////////
+
 
 	/**	 The entity userKey
 	 *	 is defined as null before being initialized. 
@@ -1300,6 +1382,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	///////////
 	// saves //
 	///////////
+
 
 	/**	 The entity saves
 	 *	 It is constructed before being initialized with the constructor by default. 
@@ -1367,6 +1450,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	// objectTitle //
 	/////////////////
 
+
 	/**	 The entity objectTitle
 	 *	 is defined as null before being initialized. 
 	 */
@@ -1415,6 +1499,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	//////////////
 	// objectId //
 	//////////////
+
 
 	/**	 The entity objectId
 	 *	 is defined as null before being initialized. 
@@ -1465,9 +1550,11 @@ public abstract class SystemEventGen<DEV> extends Object {
 		return objectId;
 	}
 
+
 	///////////////////
 	// objectSuggest //
 	///////////////////
+
 
 	/**	 The entity objectSuggest
 	 *	 is defined as null before being initialized. 
@@ -1517,6 +1604,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	////////////////
 	// objectText //
 	////////////////
+
 
 	/**	 The entity objectText
 	 *	 It is constructed before being initialized with the constructor by default. 
@@ -1588,6 +1676,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	// pageUrlId //
 	///////////////
 
+
 	/**	 The entity pageUrlId
 	 *	 is defined as null before being initialized. 
 	 */
@@ -1636,6 +1725,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	///////////////
 	// pageUrlPk //
 	///////////////
+
 
 	/**	 The entity pageUrlPk
 	 *	 is defined as null before being initialized. 
@@ -1686,6 +1776,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	// pageUrlApi //
 	////////////////
 
+
 	/**	 The entity pageUrlApi
 	 *	 is defined as null before being initialized. 
 	 */
@@ -1734,6 +1825,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	////////
 	// id //
 	////////
+
 
 	/**	 The entity id
 	 *	 is defined as null before being initialized. 
@@ -2304,7 +2396,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 				if(val instanceof String) {
 					setCompleted((String)val);
 				} else if(val instanceof OffsetDateTime) {
-					setCompleted(((OffsetDateTime)val).atZoneSameInstant(ZoneId.of(siteRequest_.getConfig().getString(ComputateConfigKeys.SITE_ZONE))));
+					setCompleted(((OffsetDateTime)val).atZoneSameInstant(ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))));
 				}
 				saves.add("completed");
 				return val;
@@ -2318,7 +2410,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 				if(val instanceof String) {
 					setCreated((String)val);
 				} else if(val instanceof OffsetDateTime) {
-					setCreated(((OffsetDateTime)val).atZoneSameInstant(ZoneId.of(siteRequest_.getConfig().getString(ComputateConfigKeys.SITE_ZONE))));
+					setCreated(((OffsetDateTime)val).atZoneSameInstant(ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))));
 				}
 				saves.add("created");
 				return val;
@@ -2374,9 +2466,9 @@ public abstract class SystemEventGen<DEV> extends Object {
 					saves.add("objectText");
 				}
 				return val;
-			} else {
-				return null;
-			}
+		} else {
+			return null;
+		}
 	}
 
 	/////////////
