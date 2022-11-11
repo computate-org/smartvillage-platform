@@ -43,16 +43,10 @@ import io.vertx.core.Future;
 
 /**	
 <ol>
-<li>You can add a class comment <b>"Api: true"</b> if you wish to GET, POST, PATCH or PUT these TrafficSimulationGenPage objects in a RESTful API. 
-</li>
-<li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class TrafficSimulationGenPageGen into the class TrafficSimulationGenPage. 
-</li>
 0<h3>Suggestions that can generate more code for you: </h3></ol>
  * <li>You can add a class comment <b>"Api: true"</b> if you wish to GET, POST, PATCH or PUT these TrafficSimulationGenPage objects in a RESTful API. 
+ * </li><li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class TrafficSimulationGenPageGen into the class TrafficSimulationGenPage. 
  * </li>
- * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class TrafficSimulationGenPageGen into the class TrafficSimulationGenPage. 
- * </li>
- * 0<h3>Suggestions that can generate more code for you: </h3>
  * <h3>About the TrafficSimulationGenPage class and it's generated class TrafficSimulationGenPageGen&lt;BaseModelPage&gt;: </h3>extends TrafficSimulationGenPageGen
  * <p>
  * This Java class extends a generated Java class TrafficSimulationGenPageGen built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
@@ -106,7 +100,7 @@ import io.vertx.core.Future;
  * <p>
  *   If a super class of this Java class with `Model: true`, then the child class will also inherit `Promise: true`. 
  * </p>
- * AName: null
+ * AName.enUS: null
  * <p>
  * Delete the class TrafficSimulationGenPage in Solr: 
  * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulationGenPage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'

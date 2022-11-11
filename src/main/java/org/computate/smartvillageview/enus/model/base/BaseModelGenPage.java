@@ -273,6 +273,10 @@ public class BaseModelGenPage extends BaseModelGenPageGen<PageLayout> {
 	}
 
 	@Override
+	protected void _defaultRangeStats(Wrap<JsonObject> w) {
+	}
+
+	@Override
 	protected void _defaultFieldListVars(List<String> l) {
 		Optional.ofNullable(searchListBaseModel_.getFields()).orElse(Arrays.asList()).forEach(varStored -> {
 			String varStored2 = varStored;

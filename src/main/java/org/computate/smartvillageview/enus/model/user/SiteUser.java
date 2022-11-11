@@ -13,8 +13,8 @@ import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
  * Page: true
  * SuperPage.enUS: BaseModelPage
  * Indexed: true
- * Map.Integer.sqlSort: 1
- * Map.Integer.classSort: 3
+ * SqlOrder: 1
+ * Order: 3
  * 
  * ApiTag.enUS: User
  * ApiUri.enUS: /api/user
@@ -37,7 +37,6 @@ import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
  * Color: 2017-shaded-spruce
  * IconGroup: regular
  * IconName: user-cog
- * NameVar.enUS: user
  * 
  * RoleUser: true
  * Role.enUS: SiteAdmin

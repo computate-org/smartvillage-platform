@@ -1408,4 +1408,8 @@ public class TrafficLightEnUSGenApiServiceImpl extends BaseApiServiceImpl implem
 		}
 		return promise.future();
 	}
+
+	public String searchVar(String varIndexed) {
+		return TrafficLight.searchVarTrafficLight(varIndexed);
+	}
 }

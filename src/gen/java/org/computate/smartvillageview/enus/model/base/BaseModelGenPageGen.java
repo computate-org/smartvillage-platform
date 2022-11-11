@@ -172,6 +172,7 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 
 
 
+
 	///////////////////
 	// listBaseModel //
 	///////////////////

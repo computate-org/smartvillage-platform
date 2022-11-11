@@ -15,8 +15,8 @@ import org.computate.smartvillageview.enus.model.base.BaseModel;
  * Page: true
  * SuperPage.enUS: BaseModelPage
  * Indexed: true
- * Map.Integer.sqlSort: 2
- * Map.Integer.classSort: 5
+ * SqlOrder: 2
+ * Order: 5
  * 
  * ApiTag.enUS: Traffic Simulation
  * ApiUri.enUS: /api/traffic-simulation
@@ -43,7 +43,6 @@ import org.computate.smartvillageview.enus.model.base.BaseModel;
  * Color: 2017-shaded-spruce
  * IconGroup: duotone
  * IconName: traffic-light-stop
- * NameVar.enUS: trafficSimulation
  * Rows: 100
  */
 public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {

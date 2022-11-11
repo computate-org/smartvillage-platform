@@ -1408,4 +1408,8 @@ public class PersonStepEnUSGenApiServiceImpl extends BaseApiServiceImpl implemen
 		}
 		return promise.future();
 	}
+
+	public String searchVar(String varIndexed) {
+		return PersonStep.searchVarPersonStep(varIndexed);
+	}
 }

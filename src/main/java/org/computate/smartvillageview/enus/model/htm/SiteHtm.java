@@ -23,8 +23,8 @@ import io.vertx.core.json.JsonObject;
  * Page: true
  * SuperPage.enUS: BaseResultPage
  * Indexed: true
- * Map.Integer.sqlSort: 101
- * Map.Integer.classSort: 101
+ * SqlOrder: 101
+ * Order: 101
  * 
  * ApiTag.enUS: HTM
  * ApiUri.enUS: /api/htm

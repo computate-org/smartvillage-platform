@@ -13,7 +13,7 @@ import io.vertx.pgclient.data.Point;
  * Page: true
  * SuperPage.enUS: MapResultPage
  * Indexed: true
- * Map.Integer.classSort: 11
+ * Order: 11
  * 
  * ApiTag.enUS: Person Step
  * ApiUri.enUS: /api/person-step
@@ -34,7 +34,6 @@ import io.vertx.pgclient.data.Point;
  * Color: 2017-shaded-spruce
  * IconGroup: duotone
  * IconName: map-location-dot
- * NameVar.enUS: personStep
  * Rows: 100
  */
 public class PersonStep extends PersonStepGen<MapResult> {

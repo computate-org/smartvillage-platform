@@ -16,7 +16,7 @@ import io.vertx.pgclient.data.Point;
  * Page: true
  * SuperPage.enUS: MapResultPage
  * Indexed: true
- * Map.Integer.classSort: 12
+ * Order: 12
  * 
  * ApiTag.enUS: IOT Node
  * ApiUri.enUS: /api/iot-node
@@ -37,7 +37,6 @@ import io.vertx.pgclient.data.Point;
  * Color: 2017-shaded-spruce
  * IconGroup: duotone
  * IconName: router
- * NameVar.enUS: iotNode
  * Rows: 100
  */
 public class IotNode extends IotNodeGen<BaseResult> {

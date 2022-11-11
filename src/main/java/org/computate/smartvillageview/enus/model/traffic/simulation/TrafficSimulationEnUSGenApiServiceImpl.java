@@ -1969,6 +1969,10 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 		return promise.future();
 	}
 
+	public String searchVar(String varIndexed) {
+		return TrafficSimulation.searchVarTrafficSimulation(varIndexed);
+	}
+
 	public Future<Void> refreshTrafficSimulation(TrafficSimulation o) {
 		Promise<Void> promise = Promise.promise();
 		SiteRequestEnUS siteRequest = o.getSiteRequest_();

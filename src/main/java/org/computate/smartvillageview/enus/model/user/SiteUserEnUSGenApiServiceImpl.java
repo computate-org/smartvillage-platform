@@ -1724,6 +1724,10 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 		return promise.future();
 	}
 
+	public String searchVar(String varIndexed) {
+		return SiteUser.searchVarSiteUser(varIndexed);
+	}
+
 	public Future<Void> refreshSiteUser(SiteUser o) {
 		Promise<Void> promise = Promise.promise();
 		SiteRequestEnUS siteRequest = o.getSiteRequest_();

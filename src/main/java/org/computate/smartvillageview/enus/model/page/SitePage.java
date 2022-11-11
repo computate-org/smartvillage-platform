@@ -31,8 +31,8 @@ import io.vertx.core.Promise;
  * Page: true
  * SuperPage.enUS: BaseResultPage
  * Indexed: true
- * Map.Integer.sqlSort: 100
- * Map.Integer.classSort: 100
+ * SqlOrder: 100
+ * Order: 100
  * 
  * ApiTag.enUS: Page
  * ApiUri.enUS: /api/page

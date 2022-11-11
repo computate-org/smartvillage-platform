@@ -1352,4 +1352,8 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 		}
 		return promise.future();
 	}
+
+	public String searchVar(String varIndexed) {
+		return SitePage.searchVarSitePage(varIndexed);
+	}
 }

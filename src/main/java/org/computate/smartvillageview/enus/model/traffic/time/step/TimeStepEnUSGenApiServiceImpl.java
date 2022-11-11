@@ -1408,4 +1408,8 @@ public class TimeStepEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 		}
 		return promise.future();
 	}
+
+	public String searchVar(String varIndexed) {
+		return TimeStep.searchVarTimeStep(varIndexed);
+	}
 }
