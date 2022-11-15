@@ -72,7 +72,7 @@
 		<vertx-maven-plugin.version>1.0.18</vertx-maven-plugin.version>
 		<build-helper-maven-plugin.version>3.0.0</build-helper-maven-plugin.version>
 		<exec-maven-plugin.version>1.5.0</exec-maven-plugin.version>
-		<nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
+		<nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
 		<maven-jar-plugin.version>3.1.0</maven-jar-plugin.version>
 		<flatten-maven-plugin.version>1.0.0</flatten-maven-plugin.version>
 		<maven-source-plugin.version>2.4</maven-source-plugin.version>
