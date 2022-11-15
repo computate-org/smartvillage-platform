@@ -44,26 +44,14 @@ import org.computate.search.response.solr.SolrResponse;
 
 /**	
 <ol>
-<li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class SiteHtmGen into the class SiteHtm. 
-</li>
-<li>You can add a class comment "Rows: 100" if you wish the SiteHtm API to return more or less than 10 records by default. 
-In this case, the API will return 100 records from the API instead of 10 by default. 
-Each API has built in pagination of the search records to ensure a user can query all the data a page at a time without running the application out of memory. 
-</li>
-<li>You can add a class comment "Model: true" if you wish to persist these SiteHtm objects in a relational PostgreSQL database transactionally in the RESTful API. 
-The code to persist and query the SiteHtmGen data in the database will then be automatically generated. 
-</li>
 0<h3>Suggestions that can generate more code for you: </h3></ol>
  * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class SiteHtmGen into the class SiteHtm. 
- * </li>
- * <li>You can add a class comment "Rows: 100" if you wish the SiteHtm API to return more or less than 10 records by default. 
+ * </li><li>You can add a class comment "Rows: 100" if you wish the SiteHtm API to return more or less than 10 records by default. 
  * In this case, the API will return 100 records from the API instead of 10 by default. 
  * Each API has built in pagination of the search records to ensure a user can query all the data a page at a time without running the application out of memory. 
- * </li>
- * <li>You can add a class comment "Model: true" if you wish to persist these SiteHtm objects in a relational PostgreSQL database transactionally in the RESTful API. 
+ * </li><li>You can add a class comment "Model: true" if you wish to persist these SiteHtm objects in a relational PostgreSQL database transactionally in the RESTful API. 
  * The code to persist and query the SiteHtmGen data in the database will then be automatically generated. 
  * </li>
- * 0<h3>Suggestions that can generate more code for you: </h3>
  * <h3>About the SiteHtm class and it's generated class SiteHtmGen&lt;BaseResult&gt;: </h3>extends SiteHtmGen
  * <p>
  * This Java class extends a generated Java class SiteHtmGen built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
@@ -116,6 +104,12 @@ The code to persist and query the SiteHtmGen data in the database will then be a
  * <p>By adding a class comment "{@inheritDoc}", the SiteHtm class will inherit the helpful inherited class comments from the super class SiteHtmGen. 
  * </p>
  * Rows: null
+ * Order: 101
+ * <p>This class contains a comment <b>"Order: 101"</b>, which means this class will be sorted by the given number 101 ascending when code that relates to multiple classes at the same time is generated. 
+ * </p>
+ * SqlOrder: 101
+ * <p>This class contains a comment <b>"SqlOrder: 101"</b>, which means this class will be sorted by the given number 101 ascending when SQL code to create and drop the tables is generated. 
+ * </p>
  * Model: true
  * Page: true
  * <p>This class contains a comment <b>"Page: true"</b>, which means this class will have webpage code generated for these objects. 
@@ -155,7 +149,7 @@ The code to persist and query the SiteHtmGen data in the database will then be a
  * It's possible to reconfigure the roles required to access the SiteHtm API by configuring an environment variable like this: 
  * </p>
  * <pre>AUTH_ROLES_REQUIRED_SiteHtm: ["SiteAdmin"]</pre>
- * AName: an HTML
+ * AName.enUS: an HTML
  * <p>This class contains a comment <b>"AName.enUS: an HTML"</b>, which identifies the language context to describe a SiteHtm as "an HTML". 
  * </p>
  * <p>
@@ -210,6 +204,60 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	public static final String SiteHtm_Color = "2017-shaded-spruce";
 	public static final String SiteHtm_IconGroup = "duotone";
 	public static final String SiteHtm_IconName = "code";
+
+	/////////
+	// url //
+	/////////
+
+
+	/**	 The entity url
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String url;
+
+	/**	<br> The entity url
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtm&fq=entiteVar_enUS_indexed_string:url">Find the entity url in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _url(Wrap<String> w);
+
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String o) {
+		this.url = SiteHtm.staticSetUrl(siteRequest_, o);
+	}
+	public static String staticSetUrl(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected SiteHtm urlInit() {
+		Wrap<String> urlWrap = new Wrap<String>().var("url");
+		if(url == null) {
+			_url(urlWrap);
+			setUrl(urlWrap.o);
+		}
+		return (SiteHtm)this;
+	}
+
+	public static String staticSearchUrl(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrUrl(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqUrl(SiteRequestEnUS siteRequest_, String o) {
+		return SiteHtm.staticSearchStrUrl(siteRequest_, SiteHtm.staticSearchUrl(siteRequest_, SiteHtm.staticSetUrl(siteRequest_, o)));
+	}
+
+	public String sqlUrl() {
+		return url;
+	}
 
 	/////////
 	// uri //
@@ -1070,6 +1118,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 		Future.future(a -> a.complete()).compose(a -> {
 			Promise<Void> promise2 = Promise.promise();
 			try {
+				urlInit();
 				uriInit();
 				pageIdInit();
 				sequenceNumInit();
@@ -1137,6 +1186,8 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	public Object obtainSiteHtm(String var) {
 		SiteHtm oSiteHtm = (SiteHtm)this;
 		switch(var) {
+			case "url":
+				return oSiteHtm.url;
 			case "uri":
 				return oSiteHtm.uri;
 			case "pageId":
@@ -1204,6 +1255,8 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	}
 	public static Object staticSetSiteHtm(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "url":
+			return SiteHtm.staticSetUrl(siteRequest_, o);
 		case "uri":
 			return SiteHtm.staticSetUri(siteRequest_, o);
 		case "pageId":
@@ -1246,6 +1299,8 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	}
 	public static Object staticSearchSiteHtm(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "url":
+			return SiteHtm.staticSearchUrl(siteRequest_, (String)o);
 		case "uri":
 			return SiteHtm.staticSearchUri(siteRequest_, (String)o);
 		case "pageId":
@@ -1288,6 +1343,8 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	}
 	public static String staticSearchStrSiteHtm(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "url":
+			return SiteHtm.staticSearchStrUrl(siteRequest_, (String)o);
 		case "uri":
 			return SiteHtm.staticSearchStrUri(siteRequest_, (String)o);
 		case "pageId":
@@ -1330,6 +1387,8 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	}
 	public static String staticSearchFqSiteHtm(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "url":
+			return SiteHtm.staticSearchFqUrl(siteRequest_, o);
 		case "uri":
 			return SiteHtm.staticSearchFqUri(siteRequest_, o);
 		case "pageId":
@@ -1384,7 +1443,13 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	}
 	public Object persistSiteHtm(String var, Object val) {
 		String varLower = var.toLowerCase();
-			if("uri".equals(varLower)) {
+			if("url".equals(varLower)) {
+				if(val instanceof String) {
+					setUrl((String)val);
+				}
+				saves.add("url");
+				return val;
+			} else if("uri".equals(varLower)) {
 				if(val instanceof String) {
 					setUri((String)val);
 				}
@@ -1508,6 +1573,9 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	}
 
 	public void indexSiteHtm(JsonObject doc) {
+		if(url != null) {
+			doc.put("url_docvalues_string", url);
+		}
 		if(uri != null) {
 			doc.put("uri_docvalues_string", uri);
 		}
@@ -1568,6 +1636,8 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 
 	public static String varStoredSiteHtm(String entityVar) {
 		switch(entityVar) {
+			case "url":
+				return "url_docvalues_string";
 			case "uri":
 				return "uri_docvalues_string";
 			case "pageId":
@@ -1601,6 +1671,8 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 
 	public static String varIndexedSiteHtm(String entityVar) {
 		switch(entityVar) {
+			case "url":
+				return "url_docvalues_string";
 			case "uri":
 				return "uri_docvalues_string";
 			case "pageId":
@@ -1632,6 +1704,8 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 
 	public static String searchVarSiteHtm(String searchVar) {
 		switch(searchVar) {
+			case "url_docvalues_string":
+				return "url";
 			case "uri_docvalues_string":
 				return "uri";
 			case "pageId_docvalues_string":
@@ -1687,6 +1761,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	public void storeSiteHtm(SolrResponse.Doc doc) {
 		SiteHtm oSiteHtm = (SiteHtm)this;
 
+		oSiteHtm.setUrl(Optional.ofNullable(doc.get("url_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSiteHtm.setUri(Optional.ofNullable(doc.get("uri_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSiteHtm.setPageId(Optional.ofNullable(doc.get("pageId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSiteHtm.setSequenceNum(Optional.ofNullable(doc.get("sequenceNum_docvalues_long")).map(v -> v.toString()).orElse(null));
@@ -1720,6 +1795,8 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 		Object o = Optional.ofNullable(apiRequest).map(ApiRequest::getOriginal).orElse(null);
 		if(o != null && o instanceof SiteHtm) {
 			SiteHtm original = (SiteHtm)o;
+			if(!Objects.equals(url, original.getUrl()))
+				apiRequest.addVars("url");
 			if(!Objects.equals(uri, original.getUri()))
 				apiRequest.addVars("uri");
 			if(!Objects.equals(pageId, original.getPageId()))
@@ -1759,6 +1836,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	@Override public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(super.toString());
+		sb.append(Optional.ofNullable(url).map(v -> "url: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(uri).map(v -> "uri: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(pageId).map(v -> "pageId: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(sequenceNum).map(v -> "sequenceNum: " + v + "\n").orElse(""));
@@ -1777,6 +1855,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	}
 
 	public static final String CLASS_SIMPLE_NAME = "SiteHtm";
+	public static final String VAR_url = "url";
 	public static final String VAR_uri = "uri";
 	public static final String VAR_pageId = "pageId";
 	public static final String VAR_sequenceNum = "sequenceNum";
@@ -1805,6 +1884,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 		return SiteHtm.varsFqSiteHtm(new ArrayList<String>());
 	}
 	public static List<String> varsFqSiteHtm(List<String> vars) {
+		vars.add(VAR_url);
 		vars.add(VAR_uri);
 		vars.add(VAR_pageId);
 		vars.add(VAR_sequenceNum);
@@ -1821,7 +1901,8 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 		return vars;
 	}
 
-	public static final String DISPLAY_NAME_uri = "Page URI";
+	public static final String DISPLAY_NAME_url = "Page URL";
+	public static final String DISPLAY_NAME_uri = "URI";
 	public static final String DISPLAY_NAME_pageId = "Page ID";
 	public static final String DISPLAY_NAME_sequenceNum = "Sequence Number";
 	public static final String DISPLAY_NAME_htmGroup = "HTML Group";
@@ -1841,6 +1922,8 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	}
 	public static String displayNameSiteHtm(String var) {
 		switch(var) {
+		case VAR_url:
+			return DISPLAY_NAME_url;
 		case VAR_uri:
 			return DISPLAY_NAME_uri;
 		case VAR_pageId:
@@ -1876,8 +1959,10 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 
 	public static String descriptionSiteHtm(String var) {
 		switch(var) {
+		case VAR_url:
+			return "The URL for this page. ";
 		case VAR_uri:
-			return "The ID for this page. ";
+			return "The relative URI for this page. ";
 		case VAR_pageId:
 			return "The ID for this page. ";
 		case VAR_sequenceNum:
@@ -1911,6 +1996,8 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 
 	public static String classSimpleNameSiteHtm(String var) {
 		switch(var) {
+		case VAR_url:
+			return "String";
 		case VAR_uri:
 			return "String";
 		case VAR_pageId:
@@ -1946,8 +2033,10 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 
 	public static Integer htmlColumnSiteHtm(String var) {
 		switch(var) {
-		case VAR_uri:
+		case VAR_url:
 			return 3;
+		case VAR_uri:
+			return 4;
 		case VAR_pageId:
 			return 4;
 		case VAR_sequenceNum:
@@ -1959,6 +2048,8 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 
 	public static Integer htmlRowSiteHtm(String var) {
 		switch(var) {
+		case VAR_url:
+			return 3;
 		case VAR_uri:
 			return 3;
 		case VAR_pageId:
@@ -1972,8 +2063,10 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 
 	public static Integer htmlCellSiteHtm(String var) {
 		switch(var) {
-		case VAR_uri:
+		case VAR_url:
 			return 1;
+		case VAR_uri:
+			return 2;
 		case VAR_pageId:
 			return 2;
 		case VAR_sequenceNum:

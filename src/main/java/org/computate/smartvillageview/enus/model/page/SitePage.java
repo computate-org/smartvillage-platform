@@ -162,6 +162,20 @@ public class SitePage extends SitePageGen<BaseResult> {
 	 * HtmlCell: 2
 	 * HtmlColumn: 4
 	 * Facet: true
+	 * DisplayName: URL
+	 * Description: The URL for this page. 
+	 */
+	protected void _url(Wrap<String> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * HtmlRow: 3
+	 * HtmlCell: 2
+	 * HtmlColumn: 4
+	 * Facet: true
 	 * DisplayName: URI
 	 * Description: The relative URI for this page. 
 	 */
@@ -179,8 +193,6 @@ public class SitePage extends SitePageGen<BaseResult> {
 	 * Description: The ID for this page. 
 	 */
 	protected void _pageId(Wrap<String> w) {
-		if(uri != null)
-			w.o(StringUtils.substringAfterLast(uri, "/"));
 	}
 
 	/**

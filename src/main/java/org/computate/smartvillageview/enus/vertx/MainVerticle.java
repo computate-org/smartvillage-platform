@@ -851,6 +851,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 
 			router.getWithRegex("(?<uri>\\/(?<lang>(?<lang1>[a-z][a-z])-(?<lang2>[a-z][a-z]))\\/.*)").handler(ctx -> {
 				String uri = ctx.pathParam("uri");
+				String url = String.format("%s%s", config().getString(ConfigKeys.SITE_BASE_URL), uri);
 				String lang = String.format("%s%s", ctx.pathParam("lang1"), ctx.pathParam("lang2").toUpperCase());
 				JsonObject query = new JsonObject();
 				MultiMap queryParams = ctx.queryParams();
@@ -881,7 +882,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 				SearchList<SitePage> l = new SearchList<>();
 				l.q("*:*");
 				l.setC(SitePage.class);
-				l.fq(String.format("%s_docvalues_string:%s", SitePage.VAR_uri, SearchTool.escapeQueryChars(uri)));
+				l.fq(String.format("%s_docvalues_string:%s", SitePage.VAR_url, SearchTool.escapeQueryChars(url)));
 				l.setStore(true);
 				ctx.response().headers().add("Content-Type", "text/html");
 				l.promiseDeepForClass(siteRequest).onSuccess(a -> {
@@ -889,6 +890,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 					try {
 						DynamicPage page = new DynamicPage();
 						page.setPage(JsonObject.mapFrom(result));
+						page.setUrl(url);
 						page.setUri(uri);
 						page.promiseDeepForClass(siteRequest).onSuccess(b -> {
 							JsonObject json = JsonObject.mapFrom(page);

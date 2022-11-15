@@ -1,6 +1,7 @@
 ---
 pageId: "kubernetes-components"
 uri: "/en-us/{{ pageId }}"
+url: "{{ page.siteBaseUrl }}{{ uri }}"
 h1: What Kubernetes components are used in {{ page.siteDisplayName }}? 
 h2: Both Kubernetes API objects and OpenShift API Objects
 created: "2022-05-12"

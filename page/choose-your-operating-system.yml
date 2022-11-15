@@ -1,6 +1,7 @@
 ---
 pageId: "choose-your-operating-system"
 uri: "/en-us/{{ pageId }}"
+url: "{{ page.siteBaseUrl }}{{ uri }}"
 h1: What is the best operating system to develop {{ page.siteDisplayName }}? 
 h2: Red Hat Enterprise Linux is the best operating system for software development. 
 created: "2022-05-23"

@@ -3,7 +3,7 @@ package org.computate.smartvillageview.enus.model.page.reader;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.smartvillageview.enus.model.base.BaseModel;
 import org.computate.vertx.api.ApiRequest;
-import org.computate.vertx.config.ComputateConfigKeys;
+import org.computate.smartvillageview.enus.config.ConfigKeys;
 import java.util.Optional;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
@@ -43,14 +43,13 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 
 /**	
- * <h1>Suggestions that can generate more code for you: </h1>
- * <ol>
+<ol>
+0<h3>Suggestions that can generate more code for you: </h3></ol>
  * <li>You can add a class comment <b>"Api: true"</b> if you wish to GET, POST, PATCH or PUT these SitePageReader objects in a RESTful API. 
  * </li>
- * </ol>
- * <h1>About the SitePageReader class and it's generated class SitePageReaderGen&lt;Object&gt;: </h1>
+ * <h3>About the SitePageReader class and it's generated class SitePageReaderGen&lt;Object&gt;: </h3>extends SitePageReaderGen
  * <p>
- * This Java class extends a generated Java class built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
+ * This Java class extends a generated Java class SitePageReaderGen built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
  * Whenever this Java class is modified or touched, the watch service installed as described in the README, indexes all the information about this Java class in a local Apache Solr Search Engine. 
  * If you are running the service, you can see the indexed data about this Java Class here: 
  * </p>
@@ -59,6 +58,27 @@ import io.vertx.core.json.JsonArray;
  * The extended class ending with "Gen" did not exist at first, but was automatically created by the same watch service based on the data retrieved from the local Apache Server search engine. 
  * The extended class contains many generated fields, getters, setters, initialization code, and helper methods to help build a website and API fast, reactive, and scalable. 
  * </p>
+ * extends SitePageReaderGen<Object>
+ * <p>This <code>class SitePageReader extends SitePageReaderGen&lt;Object&gt;</code>, which means it extends a newly generated SitePageReaderGen. 
+ * The generated <code>class SitePageReaderGen extends Object</code> which means that SitePageReader extends SitePageReaderGen which extends Object. 
+ * This generated inheritance is a powerful feature that allows a lot of boiler plate code to be created for you automatically while still preserving inheritance through the power of Java Generic classes. 
+ * </p>
+ * Api: true
+ * ApiTag.enUS: null
+ * ApiUri.enUS: null
+ * Color: null
+ * IconGroup: null
+ * IconName: null
+ * Indexed: true
+ * {@inheritDoc}
+ * <p>By adding a class comment "{@inheritDoc}", the SitePageReader class will inherit the helpful inherited class comments from the super class SitePageReaderGen. 
+ * </p>
+ * Rows: null
+ * Model: true
+ * Page: true
+ * SuperPage.enUS: null
+ * Promise: true
+ * AName.enUS: null
  * <p>
  * Delete the class SitePageReader in Solr: 
  * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.page.reader.SitePageReader&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
@@ -89,6 +109,7 @@ public abstract class SitePageReaderGen<DEV> extends Object {
 	//////////////////
 	// siteRequest_ //
 	//////////////////
+
 
 	/**	 The entity siteRequest_
 	 *	 is defined as null before being initialized. 
@@ -127,6 +148,7 @@ public abstract class SitePageReaderGen<DEV> extends Object {
 	////////////
 	// config //
 	////////////
+
 
 	/**	 The entity config
 	 *	 is defined as null before being initialized. 
@@ -185,6 +207,7 @@ public abstract class SitePageReaderGen<DEV> extends Object {
 	// webClient //
 	///////////////
 
+
 	/**	 The entity webClient
 	 *	 is defined as null before being initialized. 
 	 */
@@ -222,6 +245,7 @@ public abstract class SitePageReaderGen<DEV> extends Object {
 	///////////
 	// vertx //
 	///////////
+
 
 	/**	 The entity vertx
 	 *	 is defined as null before being initialized. 
@@ -261,6 +285,7 @@ public abstract class SitePageReaderGen<DEV> extends Object {
 	// workerExecutor //
 	////////////////////
 
+
 	/**	 The entity workerExecutor
 	 *	 is defined as null before being initialized. 
 	 */
@@ -299,6 +324,7 @@ public abstract class SitePageReaderGen<DEV> extends Object {
 	// templateEngine //
 	////////////////////
 
+
 	/**	 The entity templateEngine
 	 *	 is defined as null before being initialized. 
 	 */
@@ -336,6 +362,7 @@ public abstract class SitePageReaderGen<DEV> extends Object {
 	////////////////
 	// handlebars //
 	////////////////
+
 
 	/**	 The entity handlebars
 	 *	 is defined as null before being initialized. 
@@ -389,6 +416,8 @@ public abstract class SitePageReaderGen<DEV> extends Object {
 	public static final String importSitePageComplete = importSitePageComplete1;
 	public static final String importSitePageFail1 = "Importing page %s failed. ";
 	public static final String importSitePageFail = importSitePageFail1;
+
+
 
 
 	//////////////

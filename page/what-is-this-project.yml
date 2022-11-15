@@ -1,6 +1,7 @@
 ---
 pageId: what-is-this-project
 uri: "/en-us/{{ pageId }}"
+url: "{{ page.siteBaseUrl }}{{ uri }}"
 h1: What is {{ page.siteDisplayName }}? 
 h2: How Red Hat and Boston University are working together to develop software for eco-smart cities and well-being. 
 created: "2022-07-05"

@@ -37,6 +37,13 @@ public class DynamicPage extends DynamicPageGen<PageLayout> {
 	 * {@inheritDoc}
 	 * Ignore: true
 	 **/
+	protected void _url(Wrap<String> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * Ignore: true
+	 **/
 	protected void _uri(Wrap<String> w) {
 	}
 

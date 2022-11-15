@@ -38,16 +38,10 @@ import io.vertx.core.json.JsonArray;
 
 /**	
 <ol>
-<li>You can add a class comment <b>"Api: true"</b> if you wish to GET, POST, PATCH or PUT these MainVerticle objects in a RESTful API. 
-</li>
-<li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class MainVerticleGen into the class MainVerticle. 
-</li>
 0<h3>Suggestions that can generate more code for you: </h3></ol>
  * <li>You can add a class comment <b>"Api: true"</b> if you wish to GET, POST, PATCH or PUT these MainVerticle objects in a RESTful API. 
+ * </li><li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class MainVerticleGen into the class MainVerticle. 
  * </li>
- * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class MainVerticleGen into the class MainVerticle. 
- * </li>
- * 0<h3>Suggestions that can generate more code for you: </h3>
  * <h3>About the MainVerticle class and it's generated class MainVerticleGen&lt;AbstractVerticle&gt;: </h3>extends MainVerticleGen
  * <p>
  * This Java class extends a generated Java class MainVerticleGen built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
@@ -79,7 +73,7 @@ import io.vertx.core.json.JsonArray;
  * Page: true
  * SuperPage.enUS: null
  * Promise: true
- * AName: null
+ * AName.enUS: null
  * <p>
  * Delete the class MainVerticle in Solr: 
  * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.vertx.MainVerticle&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'

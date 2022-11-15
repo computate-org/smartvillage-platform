@@ -58,8 +58,22 @@ public class SiteHtm extends SiteHtmGen<BaseResult> {
 	 * HtmlCell: 1
 	 * HtmlColumn: 3
 	 * Facet: true
-	 * DisplayName: Page URI
-	 * Description: The ID for this page. 
+	 * DisplayName: Page URL
+	 * Description: The URL for this page. 
+	 */
+	protected void _url(Wrap<String> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * HtmlRow: 3
+	 * HtmlCell: 2
+	 * HtmlColumn: 4
+	 * Facet: true
+	 * DisplayName: URI
+	 * Description: The relative URI for this page. 
 	 */
 	protected void _uri(Wrap<String> w) {
 	}

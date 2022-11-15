@@ -43,26 +43,14 @@ import io.vertx.core.json.JsonObject;
 
 /**	
 <ol>
-<li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class SitePageGen into the class SitePage. 
-</li>
-<li>You can add a class comment "Rows: 100" if you wish the SitePage API to return more or less than 10 records by default. 
-In this case, the API will return 100 records from the API instead of 10 by default. 
-Each API has built in pagination of the search records to ensure a user can query all the data a page at a time without running the application out of memory. 
-</li>
-<li>You can add a class comment "Model: true" if you wish to persist these SitePage objects in a relational PostgreSQL database transactionally in the RESTful API. 
-The code to persist and query the SitePageGen data in the database will then be automatically generated. 
-</li>
 0<h3>Suggestions that can generate more code for you: </h3></ol>
  * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class SitePageGen into the class SitePage. 
- * </li>
- * <li>You can add a class comment "Rows: 100" if you wish the SitePage API to return more or less than 10 records by default. 
+ * </li><li>You can add a class comment "Rows: 100" if you wish the SitePage API to return more or less than 10 records by default. 
  * In this case, the API will return 100 records from the API instead of 10 by default. 
  * Each API has built in pagination of the search records to ensure a user can query all the data a page at a time without running the application out of memory. 
- * </li>
- * <li>You can add a class comment "Model: true" if you wish to persist these SitePage objects in a relational PostgreSQL database transactionally in the RESTful API. 
+ * </li><li>You can add a class comment "Model: true" if you wish to persist these SitePage objects in a relational PostgreSQL database transactionally in the RESTful API. 
  * The code to persist and query the SitePageGen data in the database will then be automatically generated. 
  * </li>
- * 0<h3>Suggestions that can generate more code for you: </h3>
  * <h3>About the SitePage class and it's generated class SitePageGen&lt;BaseResult&gt;: </h3>extends SitePageGen
  * <p>
  * This Java class extends a generated Java class SitePageGen built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
@@ -115,6 +103,12 @@ The code to persist and query the SitePageGen data in the database will then be 
  * <p>By adding a class comment "{@inheritDoc}", the SitePage class will inherit the helpful inherited class comments from the super class SitePageGen. 
  * </p>
  * Rows: null
+ * Order: 100
+ * <p>This class contains a comment <b>"Order: 100"</b>, which means this class will be sorted by the given number 100 ascending when code that relates to multiple classes at the same time is generated. 
+ * </p>
+ * SqlOrder: 100
+ * <p>This class contains a comment <b>"SqlOrder: 100"</b>, which means this class will be sorted by the given number 100 ascending when SQL code to create and drop the tables is generated. 
+ * </p>
  * Model: true
  * Page: true
  * <p>This class contains a comment <b>"Page: true"</b>, which means this class will have webpage code generated for these objects. 
@@ -154,7 +148,7 @@ The code to persist and query the SitePageGen data in the database will then be 
  * It's possible to reconfigure the roles required to access the SitePage API by configuring an environment variable like this: 
  * </p>
  * <pre>AUTH_ROLES_REQUIRED_SitePage: ["SiteAdmin"]</pre>
- * AName: an article
+ * AName.enUS: an article
  * <p>This class contains a comment <b>"AName.enUS: an article"</b>, which identifies the language context to describe a SitePage as "an article". 
  * </p>
  * <p>
@@ -835,6 +829,60 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	}
 
 	/////////
+	// url //
+	/////////
+
+
+	/**	 The entity url
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String url;
+
+	/**	<br> The entity url
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.page.SitePage&fq=entiteVar_enUS_indexed_string:url">Find the entity url in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _url(Wrap<String> w);
+
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String o) {
+		this.url = SitePage.staticSetUrl(siteRequest_, o);
+	}
+	public static String staticSetUrl(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected SitePage urlInit() {
+		Wrap<String> urlWrap = new Wrap<String>().var("url");
+		if(url == null) {
+			_url(urlWrap);
+			setUrl(urlWrap.o);
+		}
+		return (SitePage)this;
+	}
+
+	public static String staticSearchUrl(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrUrl(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqUrl(SiteRequestEnUS siteRequest_, String o) {
+		return SitePage.staticSearchStrUrl(siteRequest_, SitePage.staticSearchUrl(siteRequest_, SitePage.staticSetUrl(siteRequest_, o)));
+	}
+
+	public String sqlUrl() {
+		return url;
+	}
+
+	/////////
 	// uri //
 	/////////
 
@@ -1368,6 +1416,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 				siteBaseUrlInit();
 				courseNumInit();
 				lessonNumInit();
+				urlInit();
 				uriInit();
 				pageIdInit();
 				h1Init();
@@ -1454,6 +1503,8 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 				return oSitePage.courseNum;
 			case "lessonNum":
 				return oSitePage.lessonNum;
+			case "url":
+				return oSitePage.url;
 			case "uri":
 				return oSitePage.uri;
 			case "pageId":
@@ -1535,6 +1586,8 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 			return SitePage.staticSetCourseNum(siteRequest_, o);
 		case "lessonNum":
 			return SitePage.staticSetLessonNum(siteRequest_, o);
+		case "url":
+			return SitePage.staticSetUrl(siteRequest_, o);
 		case "uri":
 			return SitePage.staticSetUri(siteRequest_, o);
 		case "pageId":
@@ -1591,6 +1644,8 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 			return SitePage.staticSearchCourseNum(siteRequest_, (Integer)o);
 		case "lessonNum":
 			return SitePage.staticSearchLessonNum(siteRequest_, (Integer)o);
+		case "url":
+			return SitePage.staticSearchUrl(siteRequest_, (String)o);
 		case "uri":
 			return SitePage.staticSearchUri(siteRequest_, (String)o);
 		case "pageId":
@@ -1647,6 +1702,8 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 			return SitePage.staticSearchStrCourseNum(siteRequest_, (Integer)o);
 		case "lessonNum":
 			return SitePage.staticSearchStrLessonNum(siteRequest_, (Integer)o);
+		case "url":
+			return SitePage.staticSearchStrUrl(siteRequest_, (String)o);
 		case "uri":
 			return SitePage.staticSearchStrUri(siteRequest_, (String)o);
 		case "pageId":
@@ -1703,6 +1760,8 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 			return SitePage.staticSearchFqCourseNum(siteRequest_, o);
 		case "lessonNum":
 			return SitePage.staticSearchFqLessonNum(siteRequest_, o);
+		case "url":
+			return SitePage.staticSearchFqUrl(siteRequest_, o);
 		case "uri":
 			return SitePage.staticSearchFqUri(siteRequest_, o);
 		case "pageId":
@@ -1762,6 +1821,12 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 					setLessonNum(val == null ? null : val.toString());
 				}
 				saves.add("lessonNum");
+				return val;
+			} else if("url".equals(varLower)) {
+				if(val instanceof String) {
+					setUrl((String)val);
+				}
+				saves.add("url");
 				return val;
 			} else if("uri".equals(varLower)) {
 				if(val instanceof String) {
@@ -1827,6 +1892,9 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 		if(lessonNum != null) {
 			doc.put("lessonNum_docvalues_int", lessonNum);
 		}
+		if(url != null) {
+			doc.put("url_docvalues_string", url);
+		}
 		if(uri != null) {
 			doc.put("uri_docvalues_string", uri);
 		}
@@ -1855,6 +1923,8 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 				return "courseNum_docvalues_int";
 			case "lessonNum":
 				return "lessonNum_docvalues_int";
+			case "url":
+				return "url_docvalues_string";
 			case "uri":
 				return "uri_docvalues_string";
 			case "pageId":
@@ -1878,6 +1948,8 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 				return "courseNum_docvalues_int";
 			case "lessonNum":
 				return "lessonNum_docvalues_int";
+			case "url":
+				return "url_docvalues_string";
 			case "uri":
 				return "uri_docvalues_string";
 			case "pageId":
@@ -1901,6 +1973,8 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 				return "courseNum";
 			case "lessonNum_docvalues_int":
 				return "lessonNum";
+			case "url_docvalues_string":
+				return "url";
 			case "uri_docvalues_string":
 				return "uri";
 			case "pageId_docvalues_string":
@@ -1944,6 +2018,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 
 		oSitePage.setCourseNum(Optional.ofNullable(doc.get("courseNum_docvalues_int")).map(v -> v.toString()).orElse(null));
 		oSitePage.setLessonNum(Optional.ofNullable(doc.get("lessonNum_docvalues_int")).map(v -> v.toString()).orElse(null));
+		oSitePage.setUrl(Optional.ofNullable(doc.get("url_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSitePage.setUri(Optional.ofNullable(doc.get("uri_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSitePage.setPageId(Optional.ofNullable(doc.get("pageId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSitePage.setH1(Optional.ofNullable(doc.get("h1_docvalues_string")).map(v -> v.toString()).orElse(null));
@@ -1967,6 +2042,8 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 				apiRequest.addVars("courseNum");
 			if(!Objects.equals(lessonNum, original.getLessonNum()))
 				apiRequest.addVars("lessonNum");
+			if(!Objects.equals(url, original.getUrl()))
+				apiRequest.addVars("url");
 			if(!Objects.equals(uri, original.getUri()))
 				apiRequest.addVars("uri");
 			if(!Objects.equals(pageId, original.getPageId()))
@@ -1992,6 +2069,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 		sb.append(super.toString());
 		sb.append(Optional.ofNullable(courseNum).map(v -> "courseNum: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(lessonNum).map(v -> "lessonNum: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(url).map(v -> "url: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(uri).map(v -> "uri: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(pageId).map(v -> "pageId: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(h1).map(v -> "h1: \"" + v + "\"\n" ).orElse(""));
@@ -2014,6 +2092,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	public static final String VAR_siteBaseUrl = "siteBaseUrl";
 	public static final String VAR_courseNum = "courseNum";
 	public static final String VAR_lessonNum = "lessonNum";
+	public static final String VAR_url = "url";
 	public static final String VAR_uri = "uri";
 	public static final String VAR_pageId = "pageId";
 	public static final String VAR_h1 = "h1";
@@ -2038,6 +2117,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	public static List<String> varsFqSitePage(List<String> vars) {
 		vars.add(VAR_courseNum);
 		vars.add(VAR_lessonNum);
+		vars.add(VAR_url);
 		vars.add(VAR_uri);
 		vars.add(VAR_pageId);
 		vars.add(VAR_author);
@@ -2068,6 +2148,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	public static final String DISPLAY_NAME_siteBaseUrl = "";
 	public static final String DISPLAY_NAME_courseNum = "Course Number";
 	public static final String DISPLAY_NAME_lessonNum = "Lesson Number";
+	public static final String DISPLAY_NAME_url = "URL";
 	public static final String DISPLAY_NAME_uri = "URI";
 	public static final String DISPLAY_NAME_pageId = "Page ID";
 	public static final String DISPLAY_NAME_h1 = "header 1";
@@ -2107,6 +2188,8 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 			return DISPLAY_NAME_courseNum;
 		case VAR_lessonNum:
 			return DISPLAY_NAME_lessonNum;
+		case VAR_url:
+			return DISPLAY_NAME_url;
 		case VAR_uri:
 			return DISPLAY_NAME_uri;
 		case VAR_pageId:
@@ -2136,6 +2219,8 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 			return "The course number for this page. ";
 		case VAR_lessonNum:
 			return "The lesson number for this page. ";
+		case VAR_url:
+			return "The URL for this page. ";
 		case VAR_uri:
 			return "The relative URI for this page. ";
 		case VAR_pageId:
@@ -2185,6 +2270,8 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 			return "Integer";
 		case VAR_lessonNum:
 			return "Integer";
+		case VAR_url:
+			return "String";
 		case VAR_uri:
 			return "String";
 		case VAR_pageId:
@@ -2210,6 +2297,8 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 
 	public static Integer htmlColumnSitePage(String var) {
 		switch(var) {
+		case VAR_url:
+			return 4;
 		case VAR_uri:
 			return 4;
 			default:
@@ -2219,6 +2308,8 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 
 	public static Integer htmlRowSitePage(String var) {
 		switch(var) {
+		case VAR_url:
+			return 3;
 		case VAR_uri:
 			return 3;
 		case VAR_pageId:
@@ -2234,6 +2325,8 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 
 	public static Integer htmlCellSitePage(String var) {
 		switch(var) {
+		case VAR_url:
+			return 2;
 		case VAR_uri:
 			return 2;
 		case VAR_pageId:
