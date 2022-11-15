@@ -1,0 +1,271 @@
+---
+pageId: can-streaming-data-and-machine-learning-build-better-communities
+uri: "/en-us/{{ pageId }}"
+url: "https://research.redhat.com/blog/article/{{ pageId }}/"
+h1: Can streaming data and machine learning build better communities? 
+h2: An open source powered smart village project underway at the Red Hat Collaboratory may have the potential to change the world—or at least a town near you. 
+created: "2022-08-01"
+courseNum: 1
+lessonNum: 1
+author:
+  name: Jim Craig
+  title: Senior Principal Product Marketing Manager
+pageImageUri: "/png/{{ pageId }}/infographic.png"
+htmTitle:
+  - text: "{{ h1 }}{{ h2 }}"
+htmMeta:
+  - {e: meta, a: {property: "og:title", content: "{{ h1 }}"}}
+  - {e: meta, a: {property: "og:description", content: "{{ h2 }}"}}
+  - {e: meta, a: {property: "og:url", content: "{{ page.siteBaseUrl }}{{ uri }}"}}
+  - {e: meta, a: {property: "og:site_name", content: "{{ page.siteName }}"}}
+  - {e: meta, a: {property: "og:image", content: "{{ page.staticBaseUrl }}{{ pageImageUri }}"}}
+  - comment: |
+      CutyCapt --min-height=1 --url='{{ page.siteBaseUrl }}{{ uri }}?var=filterLabel:infographic' --out='{{ page.staticPath }}/png/{{ pageId }}/infographic.png'
+      CutyCapt --min-height=1 --url='{{ page.siteBaseUrl }}{{ uri }}?var=filterLabel:image' --out='{{ page.staticPath }}/png/{{ pageId }}/image.png'
+      CutyCapt --min-height=1 --url='{{ page.siteBaseUrl }}{{ uri }}?var=filterLabel:review' --out='{{ page.staticPath }}/png/{{ pageId }}/review.png'
+  - {e: meta, a: {property: "og:image:width", content: "{{ page.pageImageWidth }}"}}
+  - {e: meta, a: {property: "og:image:height", content: "{{ page.pageImageHeight }}"}}
+  - {e: meta, a: {property: "og:image:type", content: "{{ page.pageImageType }}"}}
+  - {e: meta, a: {property: "og:image:alt", content: "{{ h1 }} {{ h2 }}"}}
+  - {e: meta, a: {property: "og:type", content: "article"}}
+  - {e: meta, a: {property: "twitter:card", content: "summary_large_image"}}
+  - {e: meta, a: {property: "twitter:title", content: "{{ h1 }}"}}
+  - {e: meta, a: {property: "twitter:description", content: "{{ h2 }}"}}
+  - {e: meta, a: {property: "twitter:image", content: "{{ page.staticBaseUrl }}{{ pageImageUri }}"}}
+  - {e: meta, a: {property: "description", content: "{{ h2 }}"}}
+htmBody:
+  - e: div
+    a:
+      class: w3-card w3-padding w3-margin-top w3-show w3-white 
+    in:
+      - e: div
+        in:
+          - e: h1
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-question padding-right-quarter-em
+              - e: span
+                text: "{{ h1 }}"
+          - e: h2
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-tree-city padding-right-quarter-em
+              - e: span
+                text: "{{ h2 }}"
+          - e: div
+            a:
+              class: w3-row w3-mobile 
+            label: 
+              - infographic
+              - image
+            in:
+          - e: div
+            a:
+              class: w3-row w3-mobile 
+            label: 
+              - infographic
+              - image
+            in:
+              - e: img
+                a:
+                  class: w3-image 
+                  src: "{{ page.staticBaseUrl }}/png/{{ pageId }}/image.png"
+      - e: div
+        in:
+          - e: div
+            a:
+              class: w3-padding 
+            in:
+              - e: h3
+                a:
+                  class: ""
+                in:
+                  - e: i
+                    a:
+                      class: fa-solid fa-block-brick padding-right-quarter-em
+                  - e: span
+                    text: Platforms
+              - e: h4
+                a:
+                  class: ""
+                in:
+                  - e: i
+                    a:
+                      class: fa-solid fa-code padding-right-quarter-em
+                  - e: span
+                    text: FIWARE, a not-for-profit foundation based in Berlin, Germany
+          - e: div
+            a:
+              class: w3-padding 
+            in:
+              - e: h3
+                a:
+                  class: ""
+                in:
+                  - e: i
+                    a:
+                      class: fa-solid fa-handshake-angle padding-right-quarter-em
+                  - e: span
+                    text: Smarta Byar and Sensative
+              - e: h4
+                a:
+                  class: ""
+                in:
+                  - e: i
+                    a:
+                      class: fa-solid fa-people-group padding-right-quarter-em
+                  - e: span
+                    text: Jan Malmgren, Yggio
+          - e: div
+            a:
+              class: w3-padding 
+            in:
+              - e: h3
+                a:
+                  class: ""
+                in:
+                  - e: i
+                    a:
+                      class: fa-solid fa-sensor-cloud padding-right-quarter-em
+                  - e: span
+                    text: Early use cases
+              - e: h4
+                a:
+                  class: ""
+                in:
+                  - e: i
+                    a:
+                      class: fa-solid fa-sensor-on padding-right-quarter-em
+                  - e: span
+                    text: Village sensors
+          - e: div
+            a:
+              class: w3-padding 
+            in:
+              - e: h3
+                a:
+                  class: ""
+                in:
+                  - e: i
+                    a:
+                      class: fa-solid fa-atom-simple padding-right-quarter-em
+                  - e: span
+                    text: Scalability through data science
+              - e: h4
+                a:
+                  class: ""
+                in:
+                  - e: i
+                    a:
+                      class: fa-brands fa-redhat padding-right-quarter-em
+                  - e: span
+                    text: Red Hat Social Innovation Program and Boston University Collaboratory
+      - e: div
+        label:
+          - infographic
+          - review
+        a:
+          id: divReview
+        in:
+          - e: table
+            a:
+              id: tableReview1
+              class: review1Table 
+            in:
+              - e: tbody
+                in:
+                  - e: tr
+                    a:
+                      class: 
+                    in:
+                      - e: td
+                        a:
+                          class: w3-mobile review1TableTr1Td1 review1TableTr1Td even 
+                        in:
+                          - e: span
+                            text: '{{formatZonedDateTime created "EEEE" "en-US" "America/Denver" }}'
+                      - e: td
+                        a:
+                          class: w3-mobile review1TableTr1Td2 review1TableTr1Td odd 
+                        in:
+                          - e: i
+                            a:
+                              class: "{{ htmBody.0.in.0.in.0.in.0.a.class }}"
+                      - e: td
+                        a:
+                          class: w3-mobile review1TableTr1Td3 review1TableTr1Td even 
+                        in:
+                          - e: i
+                            a:
+                              class: "{{ htmBody.0.in.0.in.1.in.0.a.class }}"
+                      - e: td
+                        a:
+                          class: w3-mobile review1TableTr1Td4 review1TableTr1Td odd 
+                        in:
+                          - e: i
+                            a:
+                              class: "fa-solid fa-pen-nib"
+                  - e: tr
+                    a:
+                      class: odd 
+                    in:
+                      - e: td
+                        a:
+                          class: w3-mobile review1TableTr2Td1 review1TableTr2Td even 
+                        in:
+                          - e: span
+                            text: '{{formatZonedDateTime created "MMMM d yyyy" "en-US" "America/Denver" }}'
+                      - e: td
+                        a:
+                          class: w3-mobile review1TableTr2Td2 review1TableTr2Td odd 
+                        in:
+                          - e: span
+                            text: "{{ h1 }}"
+                      - e: td
+                        a:
+                          class: w3-mobile review1TableTr2Td3 review1TableTr2Td even 
+                        in:
+                          - e: span
+                            text: "{{ h2 }}"
+                      - e: td
+                        a:
+                          class: w3-mobile review1TableTr2Td4 review1TableTr2Td odd 
+                        in:
+                          - e: span
+                            text: "{{ author.name }}"
+          - e: table
+            a:
+              id: tableReview2
+              class: review2Table 
+            in:
+              - e: tbody
+                each: htmBody.0.in.1.in
+                in:
+                  - e: tr
+                    a:
+                      class: "{{#even @index }}review2TableTr even {{else}}review2TableTr odd {{/even}}"
+                    in:
+                      - e: td
+                        a:
+                          class: w3-mobile 
+                        in:
+                          - e: i
+                            a:
+                              class: "{{ item.in.0.in.0.a.class }}"
+                          - e: span
+                            text: '{{ item.in.0.in.1.text }}'
+                      - e: td
+                        a:
+                          class: w3-mobile 
+                        in:
+                          - e: i
+                            a:
+                              class: "{{ item.in.1.in.0.a.class }}"
+                          - e: span
+                            text: '{{ item.in.1.in.1.text }}'
