@@ -1351,4 +1351,8 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 		}
 		return promise.future();
 	}
+
+	public String searchVar(String varIndexed) {
+		return SystemEvent.searchVarSystemEvent(varIndexed);
+	}
 }

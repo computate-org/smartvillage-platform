@@ -22,7 +22,7 @@ import io.vertx.core.Promise;
  * SuperPage: PageLayout
  * Keyword: classSimpleNameBaseResult
  * Description: A reusable base class for all non-model search classes
- * Map.Integer.classSort: 2
+ * Order: 2
  * Promise: true
  */
 public class BaseResult extends BaseResultGen<Object> implements ComputateBaseResult {

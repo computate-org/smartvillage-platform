@@ -1,6 +1,7 @@
 ---
 pageId: "how-to-contribute"
 uri: "/en-us/{{ pageId }}"
+url: "{{ page.siteBaseUrl }}{{ uri }}"
 h1: "How does one contribute to {{ page.siteDisplayName }}? "
 h2: "Review {{ page.siteDisplayName }} contribution guidelines. "
 created: "2022-07-05"

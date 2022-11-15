@@ -16,7 +16,7 @@ import io.vertx.pgclient.data.Point;
  * Page: true
  * SuperPage.enUS: BaseResultPage
  * Indexed: true
- * Map.Integer.classSort: 13
+ * Order: 13
  * 
  * ApiTag.enUS: IOT Node Step
  * ApiUri.enUS: /api/iot-node-step
@@ -37,7 +37,6 @@ import io.vertx.pgclient.data.Point;
  * Color: 2017-shaded-spruce
  * IconGroup: duotone
  * IconName: router
- * NameVar.enUS: iotNode
  * Rows: 100
  */
 public class IotNodeStep extends IotNodeStepGen<BaseResult> {

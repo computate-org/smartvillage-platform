@@ -13,7 +13,7 @@ import io.vertx.pgclient.data.Point;
  * Page: true
  * SuperPage.enUS: MapResultPage
  * Indexed: true
- * Map.Integer.classSort: 9
+ * Order: 9
  * 
  * ApiTag.enUS: Vehicle Step
  * ApiUri.enUS: /api/vehicle-step

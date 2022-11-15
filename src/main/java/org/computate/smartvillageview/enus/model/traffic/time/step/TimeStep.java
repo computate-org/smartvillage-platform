@@ -14,7 +14,7 @@ import io.vertx.core.Promise;
  * Page: true
  * SuperPage.enUS: BaseResultPage
  * Indexed: true
- * Map.Integer.classSort: 14
+ * Order: 14
  * 
  * ApiTag.enUS: Time Step
  * ApiUri.enUS: /api/time-step
@@ -35,7 +35,6 @@ import io.vertx.core.Promise;
  * Color: 2017-shaded-spruce
  * IconGroup: duotone
  * IconName: timer
- * NameVar.enUS: timeStep
  * Rows: 100
  */
 public class TimeStep extends TimeStepGen<BaseResult> {

@@ -47,18 +47,11 @@ import org.computate.search.response.solr.SolrResponse;
 
 /**	
 <ol>
-<li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class IotNodeGen into the class IotNode. 
-</li>
-<li>You can add a class comment "Model: true" if you wish to persist these IotNode objects in a relational PostgreSQL database transactionally in the RESTful API. 
-The code to persist and query the IotNodeGen data in the database will then be automatically generated. 
-</li>
 0<h3>Suggestions that can generate more code for you: </h3></ol>
  * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class IotNodeGen into the class IotNode. 
- * </li>
- * <li>You can add a class comment "Model: true" if you wish to persist these IotNode objects in a relational PostgreSQL database transactionally in the RESTful API. 
+ * </li><li>You can add a class comment "Model: true" if you wish to persist these IotNode objects in a relational PostgreSQL database transactionally in the RESTful API. 
  * The code to persist and query the IotNodeGen data in the database will then be automatically generated. 
  * </li>
- * 0<h3>Suggestions that can generate more code for you: </h3>
  * <h3>About the IotNode class and it's generated class IotNodeGen&lt;BaseResult&gt;: </h3>extends IotNodeGen
  * <p>
  * This Java class extends a generated Java class IotNodeGen built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
@@ -114,6 +107,9 @@ The code to persist and query the IotNodeGen data in the database will then be a
  * <p>This class contains a comment <b>"Rows: 100"</b>, which means the IotNode API will return a default of 100 records instead of 10 by default. 
  * Each API has built in pagination of the search records to ensure a user can query all the data a page at a time without running the application out of memory. 
  * </p>
+ * Order: 12
+ * <p>This class contains a comment <b>"Order: 12"</b>, which means this class will be sorted by the given number 12 ascending when code that relates to multiple classes at the same time is generated. 
+ * </p>
  * Model: true
  * Page: true
  * <p>This class contains a comment <b>"Page: true"</b>, which means this class will have webpage code generated for these objects. 
@@ -153,7 +149,7 @@ The code to persist and query the IotNodeGen data in the database will then be a
  * It's possible to reconfigure the roles required to access the IotNode API by configuring an environment variable like this: 
  * </p>
  * <pre>AUTH_ROLES_REQUIRED_IotNode: ["SiteAdmin"]</pre>
- * AName: an IOT node
+ * AName.enUS: an IOT node
  * <p>This class contains a comment <b>"AName.enUS: an IOT node"</b>, which identifies the language context to describe a IotNode as "an IOT node". 
  * </p>
  * <p>

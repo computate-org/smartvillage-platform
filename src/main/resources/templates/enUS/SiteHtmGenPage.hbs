@@ -416,6 +416,7 @@
 {{> "htmDeleted" classApiMethodMethod="POST"}}
 							</div>
 							<div class="w3-cell-row ">
+{{> "htmUrl" classApiMethodMethod="POST"}}
 {{> "htmUri" classApiMethodMethod="POST"}}
 {{> "htmPageId" classApiMethodMethod="POST"}}
 {{> "htmSequenceNum" classApiMethodMethod="POST"}}
@@ -457,6 +458,7 @@
 {{> "htmDeleted" classApiMethodMethod="PATCH"}}
 							</div>
 							<div class="w3-cell-row ">
+{{> "htmUrl" classApiMethodMethod="PATCH"}}
 {{> "htmUri" classApiMethodMethod="PATCH"}}
 {{> "htmPageId" classApiMethodMethod="PATCH"}}
 {{> "htmSequenceNum" classApiMethodMethod="PATCH"}}
@@ -520,6 +522,7 @@
 {{> "htmDeleted" classApiMethodMethod="Page"}}
 							</div>
 							<div class="w3-cell-row ">
+{{> "htmUrl" classApiMethodMethod="Page"}}
 {{> "htmUri" classApiMethodMethod="Page"}}
 {{> "htmPageId" classApiMethodMethod="Page"}}
 {{> "htmSequenceNum" classApiMethodMethod="Page"}}
@@ -660,7 +663,8 @@
 			<tr>
 						<th>created</th>
 						<th></th>
-						<th>Page URI</th>
+						<th>Page URL</th>
+						<th>URI</th>
 						<th>Page ID</th>
 						<th>Sequence Number</th>
 			</tr>
@@ -682,6 +686,11 @@
 							<a href="{{pageUrlPk}}">
 								<i class="fad fa-code "></i>
 								<span class="white-space-pre-wrap ">{{objectTitle}}</span>
+							</a>
+						</td>
+						<td>
+							<a href="{{pageUrlPk}}">
+								<span class="white-space-pre-wrap ">{{url}}</span>
 							</a>
 						</td>
 						<td>
@@ -714,6 +723,10 @@
 				</td>
 			{{/if}}
 			{{#if getColumnObjectTitle}}
+				<td>
+				</td>
+			{{/if}}
+			{{#if getColumnUrl}}
 				<td>
 				</td>
 			{{/if}}
@@ -803,13 +816,80 @@
 {{/inline}}
 {{> BaseResultPage baseResult_=siteHtm_}}
 
+{{#*inline "htmUrl"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SiteHtmUrl">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_url">Page URL</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputUrl"}}
+													</div>
+	{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_url')); $('#{{classApiMethodMethod}}_url').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#SiteHtmForm :input[name=id]').val() }], 'setUrl', null, function() { addGlow($('#{{classApiMethodMethod}}_url')); }, function() { addError($('#{{classApiMethodMethod}}_url')); }); "
+																		>
+																	<i class="far fa-eraser "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/ifContainsAnyRoles}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputUrl"}}
+		{{#ifContainsAnyRoles roles rolesRequired}}
+														<input
+															type="text"
+															placeholder="Page URL"
+															title="The URL for this page. "
+															id="{{classApiMethodMethod}}_url"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setUrl classSiteHtm inputSiteHtm{{id}}Url w3-input w3-border "
+																name="setUrl"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setUrl classSiteHtm inputSiteHtm{{id}}Url w3-input w3-border "
+																name="setUrl"
+		{{else}}
+																class="valueUrl w3-input w3-border classSiteHtm inputSiteHtm{{id}}Url w3-input w3-border "
+																name="url"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setUrl', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_url')); }, function() { addError($('#{{classApiMethodMethod}}_url')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{siteHtm_.url}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varSiteHtm{{id}}Url ">{{siteHtm_.url}}</span>
+			{{/ifContainsKeys}}
+		{{/ifContainsAnyRoles}}
+{{/inline}}
+
 {{#*inline "htmUri"}}
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									<div class="w3-padding ">
 										<div id="suggest{{classApiMethodMethod}}SiteHtmUri">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_uri">Page URI</label>
+													<label for="{{classApiMethodMethod}}_uri">URI</label>
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
@@ -839,8 +919,8 @@
 		{{#ifContainsAnyRoles roles rolesRequired}}
 														<input
 															type="text"
-															placeholder="Page URI"
-															title="The ID for this page. "
+															placeholder="URI"
+															title="The relative URI for this page. "
 															id="{{classApiMethodMethod}}_uri"
 	{{#eq "Page" classApiMethodMethod}}
 																class="setUri classSiteHtm inputSiteHtm{{id}}Uri w3-input w3-border "

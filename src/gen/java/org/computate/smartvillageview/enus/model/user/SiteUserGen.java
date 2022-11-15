@@ -45,20 +45,12 @@ import org.computate.search.response.solr.SolrResponse;
 
 /**	
 <ol>
-<li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class SiteUserGen into the class SiteUser. 
-</li>
-<li>You can add a class comment "Rows: 100" if you wish the SiteUser API to return more or less than 10 records by default. 
-In this case, the API will return 100 records from the API instead of 10 by default. 
-Each API has built in pagination of the search records to ensure a user can query all the data a page at a time without running the application out of memory. 
-</li>
 0<h3>Suggestions that can generate more code for you: </h3></ol>
  * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class SiteUserGen into the class SiteUser. 
- * </li>
- * <li>You can add a class comment "Rows: 100" if you wish the SiteUser API to return more or less than 10 records by default. 
+ * </li><li>You can add a class comment "Rows: 100" if you wish the SiteUser API to return more or less than 10 records by default. 
  * In this case, the API will return 100 records from the API instead of 10 by default. 
  * Each API has built in pagination of the search records to ensure a user can query all the data a page at a time without running the application out of memory. 
  * </li>
- * 0<h3>Suggestions that can generate more code for you: </h3>
  * <h3>About the SiteUser class and it's generated class SiteUserGen&lt;BaseModel&gt;: </h3>extends SiteUserGen
  * <p>
  * This Java class extends a generated Java class SiteUserGen built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
@@ -111,6 +103,12 @@ Each API has built in pagination of the search records to ensure a user can quer
  * <p>By adding a class comment "{@inheritDoc}", the SiteUser class will inherit the helpful inherited class comments from the super class SiteUserGen. 
  * </p>
  * Rows: null
+ * Order: 3
+ * <p>This class contains a comment <b>"Order: 3"</b>, which means this class will be sorted by the given number 3 ascending when code that relates to multiple classes at the same time is generated. 
+ * </p>
+ * SqlOrder: 1
+ * <p>This class contains a comment <b>"SqlOrder: 1"</b>, which means this class will be sorted by the given number 1 ascending when SQL code to create and drop the tables is generated. 
+ * </p>
  * Model: true
  * <p>This class contains a comment <b>"Model: true"</b>, which means this class will be stored in the database. 
  * Every protected void method that begins with "_" that contains a "Persist: true" comment will be a persisted field in the database table. 
@@ -159,7 +157,7 @@ Each API has built in pagination of the search records to ensure a user can quer
  * It's possible to reconfigure the roles required to access the SiteUser API by configuring an environment variable like this: 
  * </p>
  * <pre>AUTH_ROLES_REQUIRED_SiteUser: ["SiteAdmin"]</pre>
- * AName: a site user
+ * AName.enUS: a site user
  * <p>This class contains a comment <b>"AName.enUS: a site user"</b>, which identifies the language context to describe a SiteUser as "a site user". 
  * </p>
  * <p>

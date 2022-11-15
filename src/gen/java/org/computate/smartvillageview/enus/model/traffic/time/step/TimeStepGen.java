@@ -55,18 +55,11 @@ import io.vertx.core.json.JsonObject;
 
 /**	
 <ol>
-<li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class TimeStepGen into the class TimeStep. 
-</li>
-<li>You can add a class comment "Model: true" if you wish to persist these TimeStep objects in a relational PostgreSQL database transactionally in the RESTful API. 
-The code to persist and query the TimeStepGen data in the database will then be automatically generated. 
-</li>
 0<h3>Suggestions that can generate more code for you: </h3></ol>
  * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class TimeStepGen into the class TimeStep. 
- * </li>
- * <li>You can add a class comment "Model: true" if you wish to persist these TimeStep objects in a relational PostgreSQL database transactionally in the RESTful API. 
+ * </li><li>You can add a class comment "Model: true" if you wish to persist these TimeStep objects in a relational PostgreSQL database transactionally in the RESTful API. 
  * The code to persist and query the TimeStepGen data in the database will then be automatically generated. 
  * </li>
- * 0<h3>Suggestions that can generate more code for you: </h3>
  * <h3>About the TimeStep class and it's generated class TimeStepGen&lt;BaseResult&gt;: </h3>extends TimeStepGen
  * <p>
  * This Java class extends a generated Java class TimeStepGen built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
@@ -122,6 +115,9 @@ The code to persist and query the TimeStepGen data in the database will then be 
  * <p>This class contains a comment <b>"Rows: 100"</b>, which means the TimeStep API will return a default of 100 records instead of 10 by default. 
  * Each API has built in pagination of the search records to ensure a user can query all the data a page at a time without running the application out of memory. 
  * </p>
+ * Order: 14
+ * <p>This class contains a comment <b>"Order: 14"</b>, which means this class will be sorted by the given number 14 ascending when code that relates to multiple classes at the same time is generated. 
+ * </p>
  * Model: true
  * Page: true
  * <p>This class contains a comment <b>"Page: true"</b>, which means this class will have webpage code generated for these objects. 
@@ -161,7 +157,7 @@ The code to persist and query the TimeStepGen data in the database will then be 
  * It's possible to reconfigure the roles required to access the TimeStep API by configuring an environment variable like this: 
  * </p>
  * <pre>AUTH_ROLES_REQUIRED_TimeStep: ["SiteAdmin"]</pre>
- * AName: a time step
+ * AName.enUS: a time step
  * <p>This class contains a comment <b>"AName.enUS: a time step"</b>, which identifies the language context to describe a TimeStep as "a time step". 
  * </p>
  * <p>

@@ -15,7 +15,7 @@ import io.vertx.pgclient.data.Point;
  * Page: true
  * SuperPage: BaseResultPage
  * Description: A reusable map class for all non-model search classes on the map
- * Map.Integer.classSort: 4
+ * Order: 4
  * 
  * ApiTag.enUS: Map Result
  * ApiUri.enUS: /api/map-result

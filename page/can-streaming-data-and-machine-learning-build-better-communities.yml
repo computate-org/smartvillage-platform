@@ -1,15 +1,15 @@
 ---
-pageId: what-is-this-project
+pageId: can-streaming-data-and-machine-learning-build-better-communities
 uri: "/en-us/{{ pageId }}"
-url: "{{ page.siteBaseUrl }}{{ uri }}"
-h1: What is {{ page.siteDisplayName }}? 
-h2: How Red Hat and Boston University are working together to develop software for eco-smart cities and well-being. 
-created: "2022-07-05"
+url: "https://research.redhat.com/blog/article/{{ pageId }}/"
+h1: Can streaming data and machine learning build better communities? 
+h2: An open source powered smart village project underway at the Red Hat Collaboratory may have the potential to change the world—or at least a town near you. 
+created: "2022-08-01"
 courseNum: 1
 lessonNum: 1
 author:
-  name: Christopher Tate
-  title: Red Hat Principal Software Consultant
+  name: Jim Craig
+  title: Senior Principal Product Marketing Manager
 pageImageUri: "/png/{{ pageId }}/infographic.png"
 htmTitle:
   - text: "{{ h1 }}{{ h2 }}"
@@ -88,25 +88,18 @@ htmBody:
                 in:
                   - e: i
                     a:
-                      class: fa-solid fa-signal-stream padding-right-quarter-em
+                      class: fa-solid fa-block-brick padding-right-quarter-em
                   - e: span
-                    text: Creating a global open research platform
+                    text: Platforms
               - e: h4
                 a:
                   class: ""
                 in:
                   - e: i
                     a:
-                      class: fa-solid fa-reel padding-right-quarter-em
+                      class: fa-solid fa-code padding-right-quarter-em
                   - e: span
-                    text: To better understand what socially sustainability entails with data from a real life village
-              - e: p
-                text: |
-                  Red Hat Global Social Innovation Program is partnering with Boston University and Smarta Byar 
-                  in order to collaborate on creating a global and open research platform allowing researchers 
-                  to study what social sustainability means by using a digital twin of Veberöd, Sweden as the test village, supported by  Smarta Byar. 
-                  The goal of this collaboration is to build the open source technological infrastructure so that researchers can collaborate on this platform effectively 
-                  to study mobility, public health, sustainability among other study areas to ultimately help define better the link between well being and eco-smart cities.
+                    text: FIWARE, a not-for-profit foundation based in Berlin, Germany
           - e: div
             a:
               class: w3-padding 
@@ -117,54 +110,18 @@ htmBody:
                 in:
                   - e: i
                     a:
-                      class: fa-solid fa-globe padding-right-quarter-em
+                      class: fa-solid fa-handshake-angle padding-right-quarter-em
                   - e: span
-                    text: Current smart services in Veberöd
+                    text: Smarta Byar and Sensative
               - e: h4
                 a:
                   class: ""
                 in:
                   - e: i
                     a:
-                      class: fa-solid fa-map-location-dot padding-right-quarter-em
+                      class: fa-solid fa-people-group padding-right-quarter-em
                   - e: span
-                    text: Veberöd led by Smarta Byar already enjoys the benefits of several IoT based solutions
-              - e: ul
-                in:
-                  - e: li
-                    text: |
-                      A digital twin of the village, for easy visualisation created from thousands of drone pictures and implemented through a gaming software by the University of Lund. 
-                  - e: li
-                    text: |
-                      Middleware provided by Sensative through Yggio, a digitalization management system. 
-                  - e: li
-                    in:
-                      - e: p
-                        text: |
-                          Some of their already implemented use cases are: 
-                      - e: ul
-                        in:
-                          - e: li
-                            text: |
-                              monitoring cattle water supply, for agricultural benefits
-                          - e: li
-                            text: |
-                              barbecue usage, to promote social engagement
-                          - e: li
-                            text: |
-                              bus shelter temperature monitoring, to protect vulnerable passengers
-                          - e: li
-                            text: |
-                              GPS bike tracking, to reduce thefts, and aid recovery of stolen bikes
-                          - e: li
-                            text: |
-                              pre-school security, for child safety
-                          - e: li
-                            text: |
-                              water quality monitoring, to benefit human health
-                          - e: li
-                            text: |
-                              traffic and noise monitoring, to benefit human health and safety
+                    text: Jan Malmgren, Yggio
           - e: div
             a:
               class: w3-padding 
@@ -175,35 +132,18 @@ htmBody:
                 in:
                   - e: i
                     a:
-                      class: fa-solid fa-globe padding-right-quarter-em
+                      class: fa-solid fa-sensor-cloud padding-right-quarter-em
                   - e: span
-                    text: Where are the gaps and where can we help? 
+                    text: Early use cases
               - e: h4
                 a:
                   class: ""
                 in:
                   - e: i
                     a:
-                      class: fa-solid fa-map-location-dot padding-right-quarter-em
+                      class: fa-solid fa-sensor-on padding-right-quarter-em
                   - e: span
-                    text: Where are the gaps and where can we help? 
-              - e: ul
-                in:
-                  - e: li
-                    text: |
-                      Our data visualization strategy
-              - e: ul
-                in:
-                  - e: li
-                    text: |
-                      Red Hat has partnered with BU and Smartabyar to expand the current technological infrastructure for open source software teams to collaborate effectively, 
-                      and ultimately help define better the link between well being and eco-smart cities.
-                  - e: li
-                    text: |
-                      We design and create the data visualization strategy and front end application for researchers and stakeholders. 
-                  - e: li
-                    text: |
-                      We expand on the strategy to have this platform to be open, scalable, secure and reliable for researchers. 
+                    text: Village sensors
           - e: div
             a:
               class: w3-padding 
@@ -214,34 +154,18 @@ htmBody:
                 in:
                   - e: i
                     a:
-                      class: fa-solid fa-globe padding-right-quarter-em
+                      class: fa-solid fa-atom-simple padding-right-quarter-em
                   - e: span
-                    text: Provided Digitalization Services
+                    text: Scalability through data science
               - e: h4
                 a:
                   class: ""
                 in:
                   - e: i
                     a:
-                      class: fa-solid fa-map-location-dot padding-right-quarter-em
+                      class: fa-brands fa-redhat padding-right-quarter-em
                   - e: span
-                    text: OpenAPIs for live and simulated data
-              - e: ul
-                in:
-                  - e: li
-                    text: |
-                      Our data visualization strategy
-              - e: ul
-                in:
-                  - e: li
-                    text: |
-                      Interacts with external services to gather live data. 
-                  - e: li
-                    text: |
-                      Interacts with open source applications to simulate traffic. 
-                  - e: li
-                    text: |
-                      Helps University students study smart city indicators. 
+                    text: Red Hat Social Innovation Program and Boston University Collaboratory
       - e: div
         label:
           - infographic

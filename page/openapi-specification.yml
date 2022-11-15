@@ -1,6 +1,7 @@
 ---
 pageId: "openapi-specification"
 uri: "/en-us/{{ pageId }}"
+url: "{{ page.siteBaseUrl }}{{ uri }}"
 h1: What APIs are used in {{ page.siteDisplayName }}? 
 h2: Discover the OpenAPI 3 specification for the project
 created: "2022-05-27"

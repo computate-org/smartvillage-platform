@@ -24,8 +24,8 @@ import io.vertx.core.Promise;
  * Page: true
  * SuperPage.enUS: PageLayout
  * Indexed: true
- * Map.Integer.sqlSort: 102
- * Map.Integer.classSort: 102
+ * SqlOrder: 102
+ * Order: 102
  * 
  * ApiTag.enUS: System Event
  * ApiUri.enUS: /api/system-event

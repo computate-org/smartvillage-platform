@@ -1408,4 +1408,8 @@ public class VehicleStepEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 		}
 		return promise.future();
 	}
+
+	public String searchVar(String varIndexed) {
+		return VehicleStep.searchVarVehicleStep(varIndexed);
+	}
 }

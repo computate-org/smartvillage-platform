@@ -43,18 +43,11 @@ import io.vertx.core.json.JsonObject;
 
 /**	
 <ol>
-<li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class PersonStepGen into the class PersonStep. 
-</li>
-<li>You can add a class comment "Model: true" if you wish to persist these PersonStep objects in a relational PostgreSQL database transactionally in the RESTful API. 
-The code to persist and query the PersonStepGen data in the database will then be automatically generated. 
-</li>
 0<h3>Suggestions that can generate more code for you: </h3></ol>
  * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class PersonStepGen into the class PersonStep. 
- * </li>
- * <li>You can add a class comment "Model: true" if you wish to persist these PersonStep objects in a relational PostgreSQL database transactionally in the RESTful API. 
+ * </li><li>You can add a class comment "Model: true" if you wish to persist these PersonStep objects in a relational PostgreSQL database transactionally in the RESTful API. 
  * The code to persist and query the PersonStepGen data in the database will then be automatically generated. 
  * </li>
- * 0<h3>Suggestions that can generate more code for you: </h3>
  * <h3>About the PersonStep class and it's generated class PersonStepGen&lt;MapResult&gt;: </h3>extends PersonStepGen
  * <p>
  * This Java class extends a generated Java class PersonStepGen built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
@@ -110,6 +103,9 @@ The code to persist and query the PersonStepGen data in the database will then b
  * <p>This class contains a comment <b>"Rows: 100"</b>, which means the PersonStep API will return a default of 100 records instead of 10 by default. 
  * Each API has built in pagination of the search records to ensure a user can query all the data a page at a time without running the application out of memory. 
  * </p>
+ * Order: 11
+ * <p>This class contains a comment <b>"Order: 11"</b>, which means this class will be sorted by the given number 11 ascending when code that relates to multiple classes at the same time is generated. 
+ * </p>
  * Model: true
  * Page: true
  * <p>This class contains a comment <b>"Page: true"</b>, which means this class will have webpage code generated for these objects. 
@@ -149,7 +145,7 @@ The code to persist and query the PersonStepGen data in the database will then b
  * It's possible to reconfigure the roles required to access the PersonStep API by configuring an environment variable like this: 
  * </p>
  * <pre>AUTH_ROLES_REQUIRED_PersonStep: ["SiteAdmin"]</pre>
- * AName: a person step
+ * AName.enUS: a person step
  * <p>This class contains a comment <b>"AName.enUS: a person step"</b>, which identifies the language context to describe a PersonStep as "a person step". 
  * </p>
  * <p>

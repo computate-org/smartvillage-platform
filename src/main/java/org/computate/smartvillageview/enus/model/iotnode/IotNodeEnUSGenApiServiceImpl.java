@@ -1408,4 +1408,8 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 		}
 		return promise.future();
 	}
+
+	public String searchVar(String varIndexed) {
+		return IotNode.searchVarIotNode(varIndexed);
+	}
 }

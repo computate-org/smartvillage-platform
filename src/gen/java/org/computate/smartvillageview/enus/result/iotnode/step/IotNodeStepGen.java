@@ -47,18 +47,11 @@ import org.computate.search.response.solr.SolrResponse;
 
 /**	
 <ol>
-<li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class IotNodeStepGen into the class IotNodeStep. 
-</li>
-<li>You can add a class comment "Model: true" if you wish to persist these IotNodeStep objects in a relational PostgreSQL database transactionally in the RESTful API. 
-The code to persist and query the IotNodeStepGen data in the database will then be automatically generated. 
-</li>
 0<h3>Suggestions that can generate more code for you: </h3></ol>
  * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class IotNodeStepGen into the class IotNodeStep. 
- * </li>
- * <li>You can add a class comment "Model: true" if you wish to persist these IotNodeStep objects in a relational PostgreSQL database transactionally in the RESTful API. 
+ * </li><li>You can add a class comment "Model: true" if you wish to persist these IotNodeStep objects in a relational PostgreSQL database transactionally in the RESTful API. 
  * The code to persist and query the IotNodeStepGen data in the database will then be automatically generated. 
  * </li>
- * 0<h3>Suggestions that can generate more code for you: </h3>
  * <h3>About the IotNodeStep class and it's generated class IotNodeStepGen&lt;BaseResult&gt;: </h3>extends IotNodeStepGen
  * <p>
  * This Java class extends a generated Java class IotNodeStepGen built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
@@ -114,6 +107,9 @@ The code to persist and query the IotNodeStepGen data in the database will then 
  * <p>This class contains a comment <b>"Rows: 100"</b>, which means the IotNodeStep API will return a default of 100 records instead of 10 by default. 
  * Each API has built in pagination of the search records to ensure a user can query all the data a page at a time without running the application out of memory. 
  * </p>
+ * Order: 13
+ * <p>This class contains a comment <b>"Order: 13"</b>, which means this class will be sorted by the given number 13 ascending when code that relates to multiple classes at the same time is generated. 
+ * </p>
  * Model: true
  * Page: true
  * <p>This class contains a comment <b>"Page: true"</b>, which means this class will have webpage code generated for these objects. 
@@ -153,7 +149,7 @@ The code to persist and query the IotNodeStepGen data in the database will then 
  * It's possible to reconfigure the roles required to access the IotNodeStep API by configuring an environment variable like this: 
  * </p>
  * <pre>AUTH_ROLES_REQUIRED_IotNodeStep: ["SiteAdmin"]</pre>
- * AName: an IOT node step
+ * AName.enUS: an IOT node step
  * <p>This class contains a comment <b>"AName.enUS: an IOT node step"</b>, which identifies the language context to describe a IotNodeStep as "an IOT node step". 
  * </p>
  * <p>

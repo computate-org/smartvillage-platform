@@ -1,6 +1,7 @@
 ---
 pageId: "open-source-software-foundation-best-practices"
 uri: "/en-us/{{ pageId }}"
+url: "{{ page.siteBaseUrl }}{{ uri }}"
 h1: "Does the {{ page.siteName }} project follow the Open Source Software Foundation Best Practices? "
 h2: "Review the OpenSSF Best Practices checklist for {{ page.siteName }}. "
 created: "2022-10-24"

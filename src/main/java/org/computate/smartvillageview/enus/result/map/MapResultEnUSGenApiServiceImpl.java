@@ -780,4 +780,8 @@ public class MapResultEnUSGenApiServiceImpl extends BaseApiServiceImpl implement
 		}
 		return promise.future();
 	}
+
+	public String searchVar(String varIndexed) {
+		return MapResult.searchVarMapResult(varIndexed);
+	}
 }

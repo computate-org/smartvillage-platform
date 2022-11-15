@@ -43,14 +43,13 @@ import io.vertx.core.Promise;
 import io.vertx.core.Future;
 
 /**	
- * <h1>Suggestions that can generate more code for you: </h1>
- * <ol>
+<ol>
+0<h3>Suggestions that can generate more code for you: </h3></ol>
  * <li>You can add a class comment <b>"Api: true"</b> if you wish to GET, POST, PATCH or PUT these DynamicPage objects in a RESTful API. 
  * </li>
- * </ol>
- * <h1>About the DynamicPage class and it's generated class DynamicPageGen&lt;PageLayout&gt;: </h1>
+ * <h3>About the DynamicPage class and it's generated class DynamicPageGen&lt;PageLayout&gt;: </h3>extends DynamicPageGen
  * <p>
- * This Java class extends a generated Java class built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
+ * This Java class extends a generated Java class DynamicPageGen built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
  * Whenever this Java class is modified or touched, the watch service installed as described in the README, indexes all the information about this Java class in a local Apache Solr Search Engine. 
  * If you are running the service, you can see the indexed data about this Java Class here: 
  * </p>
@@ -59,6 +58,49 @@ import io.vertx.core.Future;
  * The extended class ending with "Gen" did not exist at first, but was automatically created by the same watch service based on the data retrieved from the local Apache Server search engine. 
  * The extended class contains many generated fields, getters, setters, initialization code, and helper methods to help build a website and API fast, reactive, and scalable. 
  * </p>
+ * extends DynamicPageGen<PageLayout>
+ * <p>This <code>class DynamicPage extends DynamicPageGen&lt;PageLayout&gt;</code>, which means it extends a newly generated DynamicPageGen. 
+ * The generated <code>class DynamicPageGen extends PageLayout</code> which means that DynamicPage extends DynamicPageGen which extends PageLayout. 
+ * This generated inheritance is a powerful feature that allows a lot of boiler plate code to be created for you automatically while still preserving inheritance through the power of Java Generic classes. 
+ * </p>
+ * Api: true
+ * ApiTag.enUS: null
+ * ApiUri.enUS: null
+ * Color: null
+ * IconGroup: null
+ * IconName: null
+ * Indexed: true
+ * {@inheritDoc}
+ * <p>By adding a class comment "{@inheritDoc}", the DynamicPage class will inherit the helpful inherited class comments from the super class DynamicPageGen. 
+ * </p>
+ * Rows: null
+ * Model: true
+ * Page: true
+ * SuperPage.enUS: null
+ * Promise: true
+ * <p>
+ *   This class contains a comment <b>"Promise: true"</b>
+ *   Sometimes a Java class must be initialized asynchronously when it involves calling a blocking API. 
+ *   This means that the DynamicPage Java class has promiseDeep methods which must be initialized asynchronously as a Vert.x Promise  instead of initDeep methods which are a simple non-asynchronous method. 
+ * </p>
+ * <p>
+ *   Adding protected void methods beginning with an underscore with a Promise as the only parameter will automatically set `Promise: true`. 
+ * </p>
+ * <p>
+ *   <pre>
+ *   
+ *   	protected void _promiseBefore(Promise&lt;Void&gt; promise) {
+ *   		promise.complete();
+ *   	}
+ *   </pre>
+ * </p>
+ * <p>
+ *   Java classes with the `Model: true` will automatically set `Promise: true`. 
+ * </p>
+ * <p>
+ *   If a super class of this Java class with `Model: true`, then the child class will also inherit `Promise: true`. 
+ * </p>
+ * AName.enUS: null
  * <p>
  * Delete the class DynamicPage in Solr: 
  * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.dynamic.DynamicPage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
@@ -68,8 +110,8 @@ import io.vertx.core.Future;
  * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.page.dynamic&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
- * Delete  the project smart-village-view in Solr: 
- * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smart\-village\-view&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * Delete  the project smartabyar-smartvillage in Solr: 
+ * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartabyar\-smartvillage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  **/
 public abstract class DynamicPageGen<DEV> extends PageLayout {
@@ -78,6 +120,7 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 	//////////
 	// page //
 	//////////
+
 
 	/**	 The entity page
 	 *	 is defined as null before being initialized. 
@@ -133,8 +176,59 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 	}
 
 	/////////
+	// url //
+	/////////
+
+
+	/**	 The entity url
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonIgnore
+	@JsonInclude(Include.NON_NULL)
+	protected String url;
+
+	/**	<br> The entity url
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.dynamic.DynamicPage&fq=entiteVar_enUS_indexed_string:url">Find the entity url in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _url(Wrap<String> w);
+
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String o) {
+		this.url = DynamicPage.staticSetUrl(siteRequest_, o);
+	}
+	public static String staticSetUrl(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected DynamicPage urlInit() {
+		Wrap<String> urlWrap = new Wrap<String>().var("url");
+		if(url == null) {
+			_url(urlWrap);
+			setUrl(urlWrap.o);
+		}
+		return (DynamicPage)this;
+	}
+
+	public static String staticSearchUrl(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrUrl(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqUrl(SiteRequestEnUS siteRequest_, String o) {
+		return DynamicPage.staticSearchStrUrl(siteRequest_, DynamicPage.staticSearchUrl(siteRequest_, DynamicPage.staticSetUrl(siteRequest_, o)));
+	}
+
+	/////////
 	// uri //
 	/////////
+
 
 	/**	 The entity uri
 	 *	 is defined as null before being initialized. 
@@ -185,6 +279,7 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 	// pageId //
 	////////////
 
+
 	/**	 The entity pageId
 	 *	 is defined as null before being initialized. 
 	 */
@@ -234,6 +329,7 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 	// vars //
 	//////////
 
+
 	/**	 The entity vars
 	 *	 is defined as null before being initialized. 
 	 */
@@ -271,6 +367,7 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 	/////////////////
 	// filterLabel //
 	/////////////////
+
 
 	/**	 The entity filterLabel
 	 *	 is defined as null before being initialized. 
@@ -320,6 +417,7 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 	/////////////
 	// htmList //
 	/////////////
+
 
 	/**	 The entity htmList
 	 *	 is defined as null before being initialized. 
@@ -381,6 +479,7 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 	// htmTitle //
 	//////////////
 
+
 	/**	 The entity htmTitle
 	 *	 It is constructed before being initialized with the constructor by default. 
 	 */
@@ -414,6 +513,7 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 	/////////////
 	// htmMeta //
 	/////////////
+
 
 	/**	 The entity htmMeta
 	 *	 It is constructed before being initialized with the constructor by default. 
@@ -449,6 +549,7 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 	// htmBody //
 	/////////////
 
+
 	/**	 The entity htmBody
 	 *	 It is constructed before being initialized with the constructor by default. 
 	 */
@@ -482,6 +583,7 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 	//////////////////
 	// pageResponse //
 	//////////////////
+
 
 	/**	 The entity pageResponse
 	 *	 is defined as null before being initialized. 
@@ -532,6 +634,7 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 	// defaultZoneId //
 	///////////////////
 
+
 	/**	 The entity defaultZoneId
 	 *	 is defined as null before being initialized. 
 	 */
@@ -581,6 +684,7 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 	// defaultTimeZone //
 	/////////////////////
 
+
 	/**	 The entity defaultTimeZone
 	 *	 is defined as null before being initialized. 
 	 */
@@ -618,6 +722,7 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 	/////////////////////
 	// defaultLocaleId //
 	/////////////////////
+
 
 	/**	 The entity defaultLocaleId
 	 *	 is defined as null before being initialized. 
@@ -668,6 +773,7 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 	// defaultLocale //
 	///////////////////
 
+
 	/**	 The entity defaultLocale
 	 *	 is defined as null before being initialized. 
 	 */
@@ -702,6 +808,14 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 		return (DynamicPage)this;
 	}
 
+
+
+
+
+
+
+
+
 	//////////////
 	// initDeep //
 	//////////////
@@ -732,6 +846,7 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 			Promise<Void> promise2 = Promise.promise();
 			try {
 				pageInit();
+				urlInit();
 				uriInit();
 				pageIdInit();
 				varsInit();
@@ -817,6 +932,8 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 		switch(var) {
 			case "page":
 				return oDynamicPage.page;
+			case "url":
+				return oDynamicPage.url;
 			case "uri":
 				return oDynamicPage.uri;
 			case "pageId":
@@ -884,6 +1001,8 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 		switch(entityVar) {
 		case "page":
 			return DynamicPage.staticSetPage(siteRequest_, o);
+		case "url":
+			return DynamicPage.staticSetUrl(siteRequest_, o);
 		case "uri":
 			return DynamicPage.staticSetUri(siteRequest_, o);
 		case "pageId":
@@ -912,6 +1031,8 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 		switch(entityVar) {
 		case "page":
 			return DynamicPage.staticSearchPage(siteRequest_, (JsonObject)o);
+		case "url":
+			return DynamicPage.staticSearchUrl(siteRequest_, (String)o);
 		case "uri":
 			return DynamicPage.staticSearchUri(siteRequest_, (String)o);
 		case "pageId":
@@ -940,6 +1061,8 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 		switch(entityVar) {
 		case "page":
 			return DynamicPage.staticSearchStrPage(siteRequest_, (JsonObject)o);
+		case "url":
+			return DynamicPage.staticSearchStrUrl(siteRequest_, (String)o);
 		case "uri":
 			return DynamicPage.staticSearchStrUri(siteRequest_, (String)o);
 		case "pageId":
@@ -968,6 +1091,8 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 		switch(entityVar) {
 		case "page":
 			return DynamicPage.staticSearchFqPage(siteRequest_, o);
+		case "url":
+			return DynamicPage.staticSearchFqUrl(siteRequest_, o);
 		case "uri":
 			return DynamicPage.staticSearchFqUri(siteRequest_, o);
 		case "pageId":
@@ -999,6 +1124,7 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 
 	public static final String CLASS_SIMPLE_NAME = "DynamicPage";
 	public static final String VAR_page = "page";
+	public static final String VAR_url = "url";
 	public static final String VAR_uri = "uri";
 	public static final String VAR_pageId = "pageId";
 	public static final String VAR_vars = "vars";
@@ -1014,6 +1140,7 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 	public static final String VAR_defaultLocale = "defaultLocale";
 
 	public static final String DISPLAY_NAME_page = "";
+	public static final String DISPLAY_NAME_url = "";
 	public static final String DISPLAY_NAME_uri = "";
 	public static final String DISPLAY_NAME_pageId = "";
 	public static final String DISPLAY_NAME_vars = "";
@@ -1035,6 +1162,8 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 		switch(var) {
 		case VAR_page:
 			return DISPLAY_NAME_page;
+		case VAR_url:
+			return DISPLAY_NAME_url;
 		case VAR_uri:
 			return DISPLAY_NAME_uri;
 		case VAR_pageId:

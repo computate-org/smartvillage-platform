@@ -219,6 +219,7 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 					siteRequest.initDeepSiteRequestEnUS(siteRequest);
 
 					json.put("page", new JsonObject()
+							.put(SitePage.VAR_siteBaseUrl, config.getString(ConfigKeys.SITE_BASE_URL))
 							.put(SitePage.VAR_siteName, config.getString(ConfigKeys.SITE_NAME))
 							.put(SitePage.VAR_siteDisplayName, config.getString(ConfigKeys.SITE_DISPLAY_NAME))
 							);
@@ -247,7 +248,9 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 					page.persistForClass(SitePage.VAR_courseNum, json.getInteger(SitePage.VAR_courseNum));
 					page.persistForClass(SitePage.VAR_lessonNum, json.getInteger(SitePage.VAR_lessonNum));
 					page.persistForClass(SitePage.VAR_author, json.getString("author"));
+					page.persistForClass(SitePage.VAR_url, json.getString("url"));
 					page.persistForClass(SitePage.VAR_uri, json.getString("uri"));
+					page.persistForClass(SitePage.VAR_pageId, json.getString("pageId"));
 					page.persistForClass(SitePage.VAR_pageImageUri, json.getString(SitePage.VAR_pageImageUri));
 					page.promiseDeepForClass(siteRequest).onSuccess(a -> {
 						try {
@@ -336,6 +339,7 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 		for(Integer i = 0; i < pageItems.size(); i++) {
 			// Process a page item, one at a time
 			JsonObject pageItem = (JsonObject)pageItems.getValue(i);
+			String url = json.getString(SiteHtm.VAR_url);
 			String uri = json.getString(SiteHtm.VAR_uri);
 			Object in = pageItem.getValue("in");
 			String e = pageItem.getString("e");
@@ -455,6 +459,7 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 						.add(SiteHtm.VAR_htmGroup)
 						.add(SiteHtm.VAR_pageId)
 						.add(SiteHtm.VAR_tabs)
+						.add(SiteHtm.VAR_url)
 						.add(SiteHtm.VAR_uri)
 						.add(SiteHtm.VAR_text)
 						.add(SiteHtm.VAR_labels)
@@ -464,6 +469,7 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 				importItem.put(SiteHtm.VAR_pageId, pageId);
 				importItem.put(SiteHtm.VAR_htmGroup, htmGroup);
 				importItem.put(SiteHtm.VAR_sequenceNum, sequenceNum);
+				importItem.put(SiteHtm.VAR_url, url);
 				importItem.put(SiteHtm.VAR_uri, uri);
 				if(a != null) {
 					// Process element attributes
@@ -584,6 +590,7 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 						.add(SiteHtm.VAR_htmGroup)
 						.add(SiteHtm.VAR_pageId)
 						.add(SiteHtm.VAR_tabs)
+						.add(SiteHtm.VAR_url)
 						.add(SiteHtm.VAR_uri)
 						.add(SiteHtm.VAR_labels)
 						);
@@ -591,6 +598,7 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 				importItem.put(SiteHtm.VAR_pageId, pageId);
 				importItem.put(SiteHtm.VAR_htmGroup, htmGroup);
 				importItem.put(SiteHtm.VAR_sequenceNum, sequenceNum);
+				importItem.put(SiteHtm.VAR_url, url);
 				importItem.put(SiteHtm.VAR_uri, uri);
 				importItem.put(SiteHtm.VAR_id, String.format("%s_%s_%s", SiteHtm.CLASS_SIMPLE_NAME, pageId, sequenceNum));
 				for(Integer j=1; j <= stack.size(); j++) {
