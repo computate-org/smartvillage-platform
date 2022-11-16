@@ -242,6 +242,164 @@ htmBody:
                   - e: li
                     text: |
                       Helps University students study smart city indicators. 
+          - e: div
+            a:
+              class: w3-padding 
+            in:
+              - e: h3
+                a:
+                  class: ""
+                in:
+                  - e: i
+                    a:
+                      class: fa-solid fa-traffic-light-stop padding-right-quarter-em
+                  - e: span
+                    text: Designing the Smart Traffic Light Algorithms
+              - e: h4
+                a:
+                  class: ""
+                in:
+                  - e: i
+                    a:
+                      class: fa-solid fa-building-columns padding-right-quarter-em
+                  - e: span
+                    text: at Boston University
+              - e: iframe
+                a:
+                  width: 560
+                  height: 315
+                  src: "https://www.youtube.com/embed/la7-hZ38uEg"
+                  title: YouTube video player
+                  frameborder: "0"
+                  allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen: ""
+                in:
+                  - e: span
+              - e: p
+                in:
+                  - e: span
+                    text: |
+                      Boston University students have done an incredible job simulating traffic at the first potential intersection requiring a traffic light in Veberöd. 
+                      They use an open source application called 
+                  - e: a
+                    href: "https://www.eclipse.org/sumo/"
+                    text: |
+                      SUMO 
+                  - e: span
+                    text: |
+                      to pick a place on a map and load in all the road data into a directory of files for simulation. 
+                      The road data did not have all the details they needed to simulate pedestrian traffic, so they used the SUMO tools to add those sidewalks. 
+                      The default traffic light algorithm proved to be inefficient, so they put their advanced science background to work to develop a new traffic pattern that optimized the traffic flow in all directions for both vehicles and people traffic. 
+                      The new simulation works very efficiently as you can see in the simulation above, where the cars are orange dots, the pedestrians are purple dots, and the traffic light turns from green to red over time. 
+          - e: div
+            a:
+              class: w3-padding 
+            in:
+              - e: h3
+                a:
+                  class: ""
+                in:
+                  - e: i
+                    a:
+                      class: fa-solid fa-up-right-from-square padding-right-quarter-em
+                  - e: span
+                    text: Building a scalable application 
+              - e: h4
+                a:
+                  class: ""
+                in:
+                  - e: i
+                    a:
+                      class: fa-kit fa-openshift padding-right-quarter-em w3-text-red 
+                  - e: span
+                    text: on Red Hat OpenShift
+              - e: p
+                in:
+                  - e: span
+                    text: |
+                      To be able to share the project online, and provide role-based access control to the traffic and IOT data, I have put together the software we came up with at the beginning of the project. 
+                      OpenAPIs for smart cities with use cases to do the following: 
+              - e: p
+                in:
+                  - e: ul
+                    in:
+                      - e: li
+                        in:
+                          - e: span
+                            text: |
+                              Interact with external services to gather live data
+                      - e: li
+                        in:
+                          - e: span
+                            text: |
+                              Interact with open source applications to simulate traffic
+                      - e: li
+                        in:
+                          - e: span
+                            text: |
+                              Help University students study smart city indicators
+              - e: p
+                in:
+                  - e: span
+                    text: |
+                      The site, which you can find running live in production here at 
+                  - e: a
+                    href: "https://smartvillage.computate.org/"
+                    text: |
+                      smartvillage.computate.org 
+                  - e: span
+                    text: |
+                      has everything an innovative project running in the cloud deserves, security, high availability, scalability, updates, storage and more. 
+                      The site is deployed on the 
+                  - e: a
+                    href: "https://www.operate-first.cloud/"
+                    text: |
+                      Operate First 
+                  - e: span
+                    text: |
+                      environment. 
+                      It’s an open source community cloud where maintainers come use environments to develop, deploy, and operate their services in an open fashion on Red Hat OpenShift. 
+              - e: p
+                in:
+                  - e: span
+                    text: |
+                      As a brand new open source project growing in maturity, we are integrating our project with the 
+                  - e: a
+                    href: "https://bestpractices.coreinfrastructure.org/en"
+                    text: |
+                      Open Source Software Foundation standards for obtaining a Best Practices Badge. 
+                  - e: span
+                    text: |
+                      We hope to build a community around smart cities that can thrive by observing all the standards in our project around documentation, change control, reporting, quality, security, and analysis. 
+                      I’m pleased to announce that our latest stable version of the smartabyar-smartvillage project is now available in the following community locations: 
+              - e: p
+                in:
+                  - e: ul
+                    in:
+                      - e: li
+                        in:
+                          - e: a
+                            href: "https://github.com/computate-org/smartabyar-smartvillage/releases"
+                            text: |
+                              See the latest smartabyar-smartvillage releases tag in GitHub here
+                      - e: li
+                        in:
+                          - e: a
+                            href: "https://quay.io/repository/computateorg/smartabyar-smartvillage?tab=tags"
+                            text: |
+                              See the latest smartabyar-smartvillage container image on quay.io
+                      - e: li
+                        in:
+                          - e: a
+                            href: "https://mvnrepository.com/artifact/org.computate/smartabyar-smartvillage"
+                            text: |
+                              See the latest smartabyar-smartvillage Maven artifacts in Maven Central
+                      - e: li
+                        in:
+                          - e: a
+                            href: "https://javadoc.io/doc/org.computate/smartabyar-smartvillage/latest/index.html"
+                            text: |
+                              See the latest smartabyar-smartvillage Javadocs
       - e: div
         label:
           - infographic
