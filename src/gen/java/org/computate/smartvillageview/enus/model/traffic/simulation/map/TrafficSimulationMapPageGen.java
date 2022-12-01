@@ -57,16 +57,14 @@ import io.vertx.core.Promise;
 import io.vertx.core.Future;
 
 /**	
- * <h1>Suggestions that can generate more code for you: </h1>
- * <ol>
- * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class TrafficSimulationMapPageGen into the class TrafficSimulationMapPage. 
- * </li>
+<ol>
+0<h3>Suggestions that can generate more code for you: </h3></ol>
  * <li>You can add a class comment <b>"Api: true"</b> if you wish to GET, POST, PATCH or PUT these TrafficSimulationMapPage objects in a RESTful API. 
+ * </li><li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class TrafficSimulationMapPageGen into the class TrafficSimulationMapPage. 
  * </li>
- * </ol>
- * <h1>About the TrafficSimulationMapPage class and it's generated class TrafficSimulationMapPageGen&lt;BaseModelPage&gt;: </h1>
+ * <h3>About the TrafficSimulationMapPage class and it's generated class TrafficSimulationMapPageGen&lt;BaseModelPage&gt;: </h3>extends TrafficSimulationMapPageGen
  * <p>
- * This Java class extends a generated Java class built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
+ * This Java class extends a generated Java class TrafficSimulationMapPageGen built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
  * Whenever this Java class is modified or touched, the watch service installed as described in the README, indexes all the information about this Java class in a local Apache Solr Search Engine. 
  * If you are running the service, you can see the indexed data about this Java Class here: 
  * </p>
@@ -75,6 +73,49 @@ import io.vertx.core.Future;
  * The extended class ending with "Gen" did not exist at first, but was automatically created by the same watch service based on the data retrieved from the local Apache Server search engine. 
  * The extended class contains many generated fields, getters, setters, initialization code, and helper methods to help build a website and API fast, reactive, and scalable. 
  * </p>
+ * extends TrafficSimulationMapPageGen<BaseModelPage>
+ * <p>This <code>class TrafficSimulationMapPage extends TrafficSimulationMapPageGen&lt;BaseModelPage&gt;</code>, which means it extends a newly generated TrafficSimulationMapPageGen. 
+ * The generated <code>class TrafficSimulationMapPageGen extends BaseModelPage</code> which means that TrafficSimulationMapPage extends TrafficSimulationMapPageGen which extends BaseModelPage. 
+ * This generated inheritance is a powerful feature that allows a lot of boiler plate code to be created for you automatically while still preserving inheritance through the power of Java Generic classes. 
+ * </p>
+ * Api: true
+ * ApiTag.enUS: true
+ * ApiUri.enUS: null
+ * Color: null
+ * IconGroup: null
+ * IconName: null
+ * Indexed: true
+ * {@inheritDoc}
+ * <p>By adding a class comment "{@inheritDoc}", the TrafficSimulationMapPage class will inherit the helpful inherited class comments from the super class TrafficSimulationMapPageGen. 
+ * </p>
+ * Rows: null
+ * Model: true
+ * Page: true
+ * SuperPage.enUS: null
+ * Promise: true
+ * <p>
+ *   This class contains a comment <b>"Promise: true"</b>
+ *   Sometimes a Java class must be initialized asynchronously when it involves calling a blocking API. 
+ *   This means that the TrafficSimulationMapPage Java class has promiseDeep methods which must be initialized asynchronously as a Vert.x Promise  instead of initDeep methods which are a simple non-asynchronous method. 
+ * </p>
+ * <p>
+ *   Adding protected void methods beginning with an underscore with a Promise as the only parameter will automatically set `Promise: true`. 
+ * </p>
+ * <p>
+ *   <pre>
+ *   
+ *   	protected void _promiseBefore(Promise&lt;Void&gt; promise) {
+ *   		promise.complete();
+ *   	}
+ *   </pre>
+ * </p>
+ * <p>
+ *   Java classes with the `Model: true` will automatically set `Promise: true`. 
+ * </p>
+ * <p>
+ *   If a super class of this Java class with `Model: true`, then the child class will also inherit `Promise: true`. 
+ * </p>
+ * AName.enUS: null
  * <p>
  * Delete the class TrafficSimulationMapPage in Solr: 
  * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.map.TrafficSimulationMapPage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
@@ -94,6 +135,7 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 	//////////////////////////////////
 	// searchListTrafficSimulation_ //
 	//////////////////////////////////
+
 
 	/**	 The entity searchListTrafficSimulation_
 	 *	 is defined as null before being initialized. 
@@ -132,6 +174,7 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 	//////////////////
 	// pageResponse //
 	//////////////////
+
 
 	/**	 The entity pageResponse
 	 *	 is defined as null before being initialized. 
@@ -182,6 +225,7 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 	// defaultZoneId //
 	///////////////////
 
+
 	/**	 The entity defaultZoneId
 	 *	 is defined as null before being initialized. 
 	 */
@@ -231,6 +275,7 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 	// defaultTimeZone //
 	/////////////////////
 
+
 	/**	 The entity defaultTimeZone
 	 *	 is defined as null before being initialized. 
 	 */
@@ -268,6 +313,7 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 	/////////////////////
 	// defaultLocaleId //
 	/////////////////////
+
 
 	/**	 The entity defaultLocaleId
 	 *	 is defined as null before being initialized. 
@@ -318,6 +364,7 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 	// defaultLocale //
 	///////////////////
 
+
 	/**	 The entity defaultLocale
 	 *	 is defined as null before being initialized. 
 	 */
@@ -355,6 +402,7 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 	/////////////////////
 	// defaultRangeGap //
 	/////////////////////
+
 
 	/**	 The entity defaultRangeGap
 	 *	 is defined as null before being initialized. 
@@ -404,6 +452,7 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 	/////////////////////
 	// defaultRangeEnd //
 	/////////////////////
+
 
 	/**	 The entity defaultRangeEnd
 	 *	 is defined as null before being initialized. 
@@ -478,6 +527,7 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 	// defaultRangeStart //
 	///////////////////////
 
+
 	/**	 The entity defaultRangeStart
 	 *	 is defined as null before being initialized. 
 	 */
@@ -551,6 +601,7 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 	// defaultRangeVar //
 	/////////////////////
 
+
 	/**	 The entity defaultRangeVar
 	 *	 is defined as null before being initialized. 
 	 */
@@ -600,6 +651,7 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 	// defaultFacetSort //
 	//////////////////////
 
+
 	/**	 The entity defaultFacetSort
 	 *	 is defined as null before being initialized. 
 	 */
@@ -648,6 +700,7 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 	///////////////////////
 	// defaultFacetLimit //
 	///////////////////////
+
 
 	/**	 The entity defaultFacetLimit
 	 *	 is defined as null before being initialized. 
@@ -706,6 +759,7 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 	// defaultFacetMinCount //
 	//////////////////////////
 
+
 	/**	 The entity defaultFacetMinCount
 	 *	 is defined as null before being initialized. 
 	 */
@@ -762,6 +816,7 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 	//////////////////////////
 	// defaultPivotMinCount //
 	//////////////////////////
+
 
 	/**	 The entity defaultPivotMinCount
 	 *	 is defined as null before being initialized. 
@@ -820,6 +875,7 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 	// DEFAULT_MAP_LOCATION //
 	//////////////////////////
 
+
 	/**	 The entity DEFAULT_MAP_LOCATION
 	 *	 is defined as null before being initialized. 
 	 */
@@ -876,6 +932,7 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 	//////////////////////
 	// DEFAULT_MAP_ZOOM //
 	//////////////////////
+
 
 	/**	 The entity DEFAULT_MAP_ZOOM
 	 *	 is defined as null before being initialized. 
@@ -943,6 +1000,7 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 	// listTrafficSimulation //
 	///////////////////////////
 
+
 	/**	 The entity listTrafficSimulation
 	 *	 It is constructed before being initialized with the constructor by default. 
 	 */
@@ -976,6 +1034,7 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 	///////////
 	// stats //
 	///////////
+
 
 	/**	 The entity stats
 	 *	 is defined as null before being initialized. 
@@ -1015,6 +1074,7 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 	// facetCounts //
 	/////////////////
 
+
 	/**	 The entity facetCounts
 	 *	 is defined as null before being initialized. 
 	 */
@@ -1052,6 +1112,7 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 	////////////////////////////
 	// trafficSimulationCount //
 	////////////////////////////
+
 
 	/**	 The entity trafficSimulationCount
 	 *	 is defined as null before being initialized. 
@@ -1110,6 +1171,7 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 	// trafficSimulation_ //
 	////////////////////////
 
+
 	/**	 The entity trafficSimulation_
 	 *	 is defined as null before being initialized. 
 	 */
@@ -1147,6 +1209,7 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 	////////
 	// pk //
 	////////
+
 
 	/**	 The entity pk
 	 *	 is defined as null before being initialized. 
@@ -1205,6 +1268,7 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 	// id //
 	////////
 
+
 	/**	 The entity id
 	 *	 is defined as null before being initialized. 
 	 */
@@ -1253,6 +1317,7 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 	//////////////////////////////
 	// pageUriTrafficSimulation //
 	//////////////////////////////
+
 
 	/**	 The entity pageUriTrafficSimulation
 	 *	 is defined as null before being initialized. 

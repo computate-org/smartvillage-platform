@@ -3,7 +3,7 @@ package org.computate.smartvillageview.enus.result.map;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.smartvillageview.enus.model.base.BaseModel;
 import org.computate.vertx.api.ApiRequest;
-import org.computate.smartvillageview.enus.config.ConfigKeys;
+import org.computate.vertx.config.ComputateConfigKeys;
 import java.util.Optional;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
@@ -60,18 +60,11 @@ import io.vertx.core.json.JsonObject;
 
 /**	
 <ol>
-<li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class MapResultGen into the class MapResult. 
-</li>
-<li>You can add a class comment "Model: true" if you wish to persist these MapResult objects in a relational PostgreSQL database transactionally in the RESTful API. 
-The code to persist and query the MapResultGen data in the database will then be automatically generated. 
-</li>
 0<h3>Suggestions that can generate more code for you: </h3></ol>
  * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class MapResultGen into the class MapResult. 
- * </li>
- * <li>You can add a class comment "Model: true" if you wish to persist these MapResult objects in a relational PostgreSQL database transactionally in the RESTful API. 
+ * </li><li>You can add a class comment "Model: true" if you wish to persist these MapResult objects in a relational PostgreSQL database transactionally in the RESTful API. 
  * The code to persist and query the MapResultGen data in the database will then be automatically generated. 
  * </li>
- * 0<h3>Suggestions that can generate more code for you: </h3>
  * <h3>About the MapResult class and it's generated class MapResultGen&lt;BaseResult&gt;: </h3>extends MapResultGen
  * <p>
  * This Java class extends a generated Java class MapResultGen built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
@@ -91,7 +84,16 @@ The code to persist and query the MapResultGen data in the database will then be
  * Api: true
  * <p>This class contains a comment <b>"Api: true"</b>, which means this class will have Java Vert.x API backend code generated for these objects. 
  * </p>
- * ApiTag.enUS: Map Result
+ * ApiMethode.enUS: true
+ * <p>This class contains a comment <b>"ApiTag: Map Result"</b>, which groups all of the OpenAPIs for MapResult objects under the tag "Map Result". 
+ * </p>
+ * ApiMethode.enUS: true
+ * <p>This class contains a comment <b>"ApiTag: Map Result"</b>, which groups all of the OpenAPIs for MapResult objects under the tag "Map Result". 
+ * </p>
+ * ApiMethode.enUS: true
+ * <p>This class contains a comment <b>"ApiTag: Map Result"</b>, which groups all of the OpenAPIs for MapResult objects under the tag "Map Result". 
+ * </p>
+ * ApiTag.enUS: true
  * <p>This class contains a comment <b>"ApiTag: Map Result"</b>, which groups all of the OpenAPIs for MapResult objects under the tag "Map Result". 
  * </p>
  * ApiUri.enUS: /api/map-result
@@ -107,7 +109,7 @@ The code to persist and query the MapResultGen data in the database will then be
  * <p>This class contains a comment <b>"IconGroup: duotone"</b>, which adds icons on the MapResult page with a group of "duotone". 
  * This will reference a Font Awesome icon group that starts with "fa-" followed by the icon group "duotone", together is "fa-duotone". 
  * A Font Awesome icon group of "duotone" is expected to exist. 
- * The Font Awesome groups currently supported include: solid, regular, light, thin, duotone, and sharp. 
+ * The Font Awesome groups currently supported include: solid, regular, light, thin, duotone, sharp, and kit. 
  * See: <a href="https://fontawesome.com/docs/web/dig-deeper/styles">https://fontawesome.com/docs/web/dig-deeper/styles</a>. 
  * </p>
  * IconName: map-location-dot
@@ -126,6 +128,9 @@ The code to persist and query the MapResultGen data in the database will then be
  * Rows: 100
  * <p>This class contains a comment <b>"Rows: 100"</b>, which means the MapResult API will return a default of 100 records instead of 10 by default. 
  * Each API has built in pagination of the search records to ensure a user can query all the data a page at a time without running the application out of memory. 
+ * </p>
+ * Order: 4
+ * <p>This class contains a comment <b>"Order: 4"</b>, which means this class will be sorted by the given number 4 ascending when code that relates to multiple classes at the same time is generated. 
  * </p>
  * Model: true
  * Page: true
@@ -166,7 +171,7 @@ The code to persist and query the MapResultGen data in the database will then be
  * It's possible to reconfigure the roles required to access the MapResult API by configuring an environment variable like this: 
  * </p>
  * <pre>AUTH_ROLES_REQUIRED_MapResult: ["SiteAdmin"]</pre>
- * AName: a map result
+ * AName.enUS: a map result
  * <p>This class contains a comment <b>"AName.enUS: a map result"</b>, which identifies the language context to describe a MapResult as "a map result". 
  * </p>
  * <p>
@@ -555,15 +560,15 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 		if(StringUtils.endsWith(o, "]"))
 			return o == null ? null : ZonedDateTime.parse(o, ComputateZonedDateTimeSerializer.ZONED_DATE_TIME_FORMATTER);
 		else if(StringUtils.endsWith(o, "Z"))
-			return o == null ? null : Instant.parse(o).atZone(Optional.ofNullable(siteRequest_).map(r -> r.getConfig()).map(config -> config.getString(ConfigKeys.SITE_ZONE)).map(z -> ZoneId.of(z)).orElse(ZoneId.of("UTC"))).truncatedTo(ChronoUnit.MILLIS);
+			return o == null ? null : Instant.parse(o).atZone(Optional.ofNullable(siteRequest_).map(r -> r.getConfig()).map(config -> config.getString(ComputateConfigKeys.SITE_ZONE)).map(z -> ZoneId.of(z)).orElse(ZoneId.of("UTC"))).truncatedTo(ChronoUnit.MILLIS);
 		else if(StringUtils.contains(o, "T"))
 			return o == null ? null : ZonedDateTime.parse(o, DateTimeFormatter.ISO_DATE_TIME).truncatedTo(ChronoUnit.MILLIS);
 		else
-			return o == null ? null : LocalDate.parse(o, DateTimeFormatter.ISO_DATE).atStartOfDay(ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
+			return o == null ? null : LocalDate.parse(o, DateTimeFormatter.ISO_DATE).atStartOfDay(ZoneId.of(siteRequest_.getConfig().getString(ComputateConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
 	}
 	@JsonIgnore
 	public void setDateTime(Date o) {
-		this.dateTime = o == null ? null : ZonedDateTime.ofInstant(o.toInstant(), ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
+		this.dateTime = o == null ? null : ZonedDateTime.ofInstant(o.toInstant(), ZoneId.of(siteRequest_.getConfig().getString(ComputateConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
 	}
 	protected MapResult dateTimeInit() {
 		Wrap<ZonedDateTime> dateTimeWrap = new Wrap<ZonedDateTime>().var("dateTime");
@@ -892,7 +897,6 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 	public Boolean sqlStep() {
 		return step;
 	}
-
 
 	//////////////
 	// initDeep //
@@ -1242,7 +1246,7 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 				if(val instanceof String) {
 					setDateTime((String)val);
 				} else if(val instanceof OffsetDateTime) {
-					setDateTime(((OffsetDateTime)val).atZoneSameInstant(ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))));
+					setDateTime(((OffsetDateTime)val).atZoneSameInstant(ZoneId.of(siteRequest_.getConfig().getString(ComputateConfigKeys.SITE_ZONE))));
 				}
 				saves.add("dateTime");
 				return val;

@@ -3,7 +3,7 @@ package org.computate.smartvillageview.enus.model.traffic.light;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.smartvillageview.enus.model.base.BaseModel;
 import org.computate.vertx.api.ApiRequest;
-import org.computate.smartvillageview.enus.config.ConfigKeys;
+import org.computate.vertx.config.ComputateConfigKeys;
 import java.util.Optional;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
@@ -42,16 +42,10 @@ import io.vertx.core.Future;
 
 /**	
 <ol>
-<li>You can add a class comment <b>"Api: true"</b> if you wish to GET, POST, PATCH or PUT these TrafficLightGenPage objects in a RESTful API. 
-</li>
-<li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class TrafficLightGenPageGen into the class TrafficLightGenPage. 
-</li>
 0<h3>Suggestions that can generate more code for you: </h3></ol>
  * <li>You can add a class comment <b>"Api: true"</b> if you wish to GET, POST, PATCH or PUT these TrafficLightGenPage objects in a RESTful API. 
+ * </li><li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class TrafficLightGenPageGen into the class TrafficLightGenPage. 
  * </li>
- * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class TrafficLightGenPageGen into the class TrafficLightGenPage. 
- * </li>
- * 0<h3>Suggestions that can generate more code for you: </h3>
  * <h3>About the TrafficLightGenPage class and it's generated class TrafficLightGenPageGen&lt;MapResultPage&gt;: </h3>extends TrafficLightGenPageGen
  * <p>
  * This Java class extends a generated Java class TrafficLightGenPageGen built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
@@ -69,7 +63,7 @@ import io.vertx.core.Future;
  * This generated inheritance is a powerful feature that allows a lot of boiler plate code to be created for you automatically while still preserving inheritance through the power of Java Generic classes. 
  * </p>
  * Api: true
- * ApiTag.enUS: null
+ * ApiTag.enUS: true
  * ApiUri.enUS: null
  * Color: null
  * IconGroup: null
@@ -105,7 +99,7 @@ import io.vertx.core.Future;
  * <p>
  *   If a super class of this Java class with `Model: true`, then the child class will also inherit `Promise: true`. 
  * </p>
- * AName: null
+ * AName.enUS: null
  * <p>
  * Delete the class TrafficLightGenPage in Solr: 
  * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.light.TrafficLightGenPage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
@@ -160,31 +154,6 @@ public abstract class TrafficLightGenPageGen<DEV> extends MapResultPage {
 		}
 		return (TrafficLightGenPage)this;
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 	//////////////////////
 	// listTrafficLight //
@@ -367,17 +336,6 @@ public abstract class TrafficLightGenPageGen<DEV> extends MapResultPage {
 	public static String staticSearchFqId(SiteRequestEnUS siteRequest_, String o) {
 		return TrafficLightGenPage.staticSearchStrId(siteRequest_, TrafficLightGenPage.staticSearchId(siteRequest_, TrafficLightGenPage.staticSetId(siteRequest_, o)));
 	}
-
-
-
-
-
-
-
-
-
-
-
 
 	/////////////////////////
 	// pageUriTrafficLight //

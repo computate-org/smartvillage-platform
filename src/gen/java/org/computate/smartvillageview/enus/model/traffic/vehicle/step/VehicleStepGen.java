@@ -3,7 +3,7 @@ package org.computate.smartvillageview.enus.model.traffic.vehicle.step;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.smartvillageview.enus.model.base.BaseModel;
 import org.computate.vertx.api.ApiRequest;
-import org.computate.smartvillageview.enus.config.ConfigKeys;
+import org.computate.vertx.config.ComputateConfigKeys;
 import java.util.Optional;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
@@ -43,18 +43,11 @@ import io.vertx.core.json.JsonObject;
 
 /**	
 <ol>
-<li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class VehicleStepGen into the class VehicleStep. 
-</li>
-<li>You can add a class comment "Model: true" if you wish to persist these VehicleStep objects in a relational PostgreSQL database transactionally in the RESTful API. 
-The code to persist and query the VehicleStepGen data in the database will then be automatically generated. 
-</li>
 0<h3>Suggestions that can generate more code for you: </h3></ol>
  * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class VehicleStepGen into the class VehicleStep. 
- * </li>
- * <li>You can add a class comment "Model: true" if you wish to persist these VehicleStep objects in a relational PostgreSQL database transactionally in the RESTful API. 
+ * </li><li>You can add a class comment "Model: true" if you wish to persist these VehicleStep objects in a relational PostgreSQL database transactionally in the RESTful API. 
  * The code to persist and query the VehicleStepGen data in the database will then be automatically generated. 
  * </li>
- * 0<h3>Suggestions that can generate more code for you: </h3>
  * <h3>About the VehicleStep class and it's generated class VehicleStepGen&lt;MapResult&gt;: </h3>extends VehicleStepGen
  * <p>
  * This Java class extends a generated Java class VehicleStepGen built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
@@ -74,7 +67,25 @@ The code to persist and query the VehicleStepGen data in the database will then 
  * Api: true
  * <p>This class contains a comment <b>"Api: true"</b>, which means this class will have Java Vert.x API backend code generated for these objects. 
  * </p>
- * ApiTag.enUS: Vehicle Step
+ * ApiMethode.enUS: true
+ * <p>This class contains a comment <b>"ApiTag: Vehicle Step"</b>, which groups all of the OpenAPIs for VehicleStep objects under the tag "Vehicle Step". 
+ * </p>
+ * ApiMethode.enUS: true
+ * <p>This class contains a comment <b>"ApiTag: Vehicle Step"</b>, which groups all of the OpenAPIs for VehicleStep objects under the tag "Vehicle Step". 
+ * </p>
+ * ApiMethode.enUS: true
+ * <p>This class contains a comment <b>"ApiTag: Vehicle Step"</b>, which groups all of the OpenAPIs for VehicleStep objects under the tag "Vehicle Step". 
+ * </p>
+ * ApiMethode.enUS: true
+ * <p>This class contains a comment <b>"ApiTag: Vehicle Step"</b>, which groups all of the OpenAPIs for VehicleStep objects under the tag "Vehicle Step". 
+ * </p>
+ * ApiMethode.enUS: true
+ * <p>This class contains a comment <b>"ApiTag: Vehicle Step"</b>, which groups all of the OpenAPIs for VehicleStep objects under the tag "Vehicle Step". 
+ * </p>
+ * ApiMethode.enUS: true
+ * <p>This class contains a comment <b>"ApiTag: Vehicle Step"</b>, which groups all of the OpenAPIs for VehicleStep objects under the tag "Vehicle Step". 
+ * </p>
+ * ApiTag.enUS: true
  * <p>This class contains a comment <b>"ApiTag: Vehicle Step"</b>, which groups all of the OpenAPIs for VehicleStep objects under the tag "Vehicle Step". 
  * </p>
  * ApiUri.enUS: /api/vehicle-step
@@ -90,7 +101,7 @@ The code to persist and query the VehicleStepGen data in the database will then 
  * <p>This class contains a comment <b>"IconGroup: duotone"</b>, which adds icons on the VehicleStep page with a group of "duotone". 
  * This will reference a Font Awesome icon group that starts with "fa-" followed by the icon group "duotone", together is "fa-duotone". 
  * A Font Awesome icon group of "duotone" is expected to exist. 
- * The Font Awesome groups currently supported include: solid, regular, light, thin, duotone, and sharp. 
+ * The Font Awesome groups currently supported include: solid, regular, light, thin, duotone, sharp, and kit. 
  * See: <a href="https://fontawesome.com/docs/web/dig-deeper/styles">https://fontawesome.com/docs/web/dig-deeper/styles</a>. 
  * </p>
  * IconName: map-location-dot
@@ -109,6 +120,9 @@ The code to persist and query the VehicleStepGen data in the database will then 
  * Rows: 100
  * <p>This class contains a comment <b>"Rows: 100"</b>, which means the VehicleStep API will return a default of 100 records instead of 10 by default. 
  * Each API has built in pagination of the search records to ensure a user can query all the data a page at a time without running the application out of memory. 
+ * </p>
+ * Order: 9
+ * <p>This class contains a comment <b>"Order: 9"</b>, which means this class will be sorted by the given number 9 ascending when code that relates to multiple classes at the same time is generated. 
  * </p>
  * Model: true
  * Page: true
@@ -149,7 +163,7 @@ The code to persist and query the VehicleStepGen data in the database will then 
  * It's possible to reconfigure the roles required to access the VehicleStep API by configuring an environment variable like this: 
  * </p>
  * <pre>AUTH_ROLES_REQUIRED_VehicleStep: ["SiteAdmin"]</pre>
- * AName: a vehicle step
+ * AName.enUS: a vehicle step
  * <p>This class contains a comment <b>"AName.enUS: a vehicle step"</b>, which identifies the language context to describe a VehicleStep as "a vehicle step". 
  * </p>
  * <p>
@@ -596,9 +610,6 @@ public abstract class VehicleStepGen<DEV> extends MapResult {
 	public BigDecimal sqlSlope() {
 		return slope;
 	}
-
-
-
 
 	//////////////
 	// initDeep //
