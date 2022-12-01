@@ -1,0 +1,571 @@
+---
+pageId: "our-fiware-ihub-guideline-for-applicants"
+uri: "/en-us/{{ pageId }}"
+url: "{{ page.siteBaseUrl }}{{ uri }}"
+h1: "FIWARE iHub guidelines for {{ page.siteDisplayName }}"
+h2: "The guidelines we followed to organize our smart village technology and resources into a FIWARE iHub"
+created: "2022-12-01"
+courseNum: 1
+lessonNum: 7
+author:
+  name: Christopher Tate
+  title: Red Hat Principal Software Consultant
+pageImageUri: "/png/{{ pageId }}/infographic.png"
+
+IHUB_ORG_NAME: Red Hat and Boston University
+IHUB_ORG_DESCRIPTION: |
+  Red Hat builds partnerships across public, private, and nonprofit sectors to foster collaboration towards building better open source solutions towards the benefit of all. 
+  Through Red Hat Impact, Red Hatters are enabled to contribute their skills to impactful open source community projects. 
+  
+  Boston University provides a partnership with Red Hat, advancing research and learning in emerging technologies. 
+  The Red Hat Collaboratory connects Boston University faculty and students with industry practitioners working in open-source software communities.
+IHUB_ORG_CONTACT_NAME: Christopher Tate
+IHUB_ORG_CONTACT_EMAIL: smartabyar-smartvillage@computate.topicbox.com
+IHUB_ORG_CONTACT_PHONE: TODO
+
+IHUB_NAME: Smarta Byar Smart Village iHub with FIWARE
+IHUB_DESCRIPTION: |
+  The Red Hat Global Social Innovation Program is partnering with Boston University and Smarta Byar in order to create a global and open research platform. 
+  This will allow researchers to study what social sustainability means by using a digital twin of Veberöd, Sweden as the test village, supported by  Smarta Byar. 
+  We have added integration with the Orion LD Context Broker supported by FIWARE technology implementing their Smart Data Models to align ourselves with the rest of the open source smart solution community. 
+  The goal of this collaboration is to build the open source technological infrastructure so that researchers can collaborate on this platform effectively to study mobility, public health, sustainability among other study areas to ultimately help define better the link between well being and eco-smart cities. 
+IHUB_WEBSITE: https://smartvillage.computate.org/
+IHUB_DOMAINS:
+  - name: Smart Cities
+IHUB_REGION: North America
+IHUB_COUNTRY: USA
+IHUB_STATE: TODO
+IHUB_CITY: TODO
+IHUB_STREET: TODO
+IHUB_ZIP_CODE: TODO
+IHUB_WHY: |
+  We learned about the FIWARE Marketplace and the strong community of FIWARE Innovation Hubs and partners while attending the FIWARE Summit. 
+  Building with the FIWARE context broker means that we can combine our data with the rest of the FIWARE Marketplace applications to discover new ways to visualize our data. 
+  FIWARE's Smart Data Models align with our smart solutions as well, and the FIWARE Context Broker supports all of these data models, which is why our project is now powered by a FIWARE Context Broker. 
+IHUB_REGIONAL_CONNECTION_TO_PUBLIC_AUTHORITIES: |
+  
+IHUB_REGIONAL_DEMANDS: |
+  
+IHUB_FIWARE_EXPERIENCE: |
+  
+IHUB_EXPECTED_LEVEL: Advanced Services
+
+htmTitle:
+  - text: "{{ h1 }}{{ h2 }}"
+htmMeta:
+  - {e: meta, a: {property: "og:title", content: "{{ h1 }}"}}
+  - {e: meta, a: {property: "og:description", content: "{{ h2 }}"}}
+  - {e: meta, a: {property: "og:url", content: "{{ page.siteBaseUrl }}{{ uri }}"}}
+  - {e: meta, a: {property: "og:site_name", content: "{{ page.siteName }}"}}
+  - {e: meta, a: {property: "og:image", content: "{{ page.staticBaseUrl }}{{ pageImageUri }}"}}
+  - comment: |
+      install -d {{ page.staticPath }}/png/{{ pageId }}/
+      CutyCapt --min-height=1 --url='{{ page.siteBaseUrl }}{{ uri }}?var=filterLabel:infographic' --out='{{ page.staticPath }}/png/{{ pageId }}/infographic.png'
+      CutyCapt --min-height=1 --url='{{ page.siteBaseUrl }}{{ uri }}?var=filterLabel:review' --out='{{ page.staticPath }}/png/{{ pageId }}/review.png'
+      CutyCapt --min-height=1 --url='{{ page.siteBaseUrl }}{{ uri }}?var=filterLabel:image' --out='{{ page.staticPath }}/png/{{ pageId }}/image.png'
+      
+  - {e: meta, a: {property: "og:image:width", content: "{{ page.pageImageWidth }}"}}
+  - {e: meta, a: {property: "og:image:height", content: "{{ page.pageImageHeight }}"}}
+  - {e: meta, a: {property: "og:image:type", content: "{{ page.pageImageType }}"}}
+  - {e: meta, a: {property: "og:image:alt", content: "{{ h1 }} {{ h2 }}"}}
+  - {e: meta, a: {property: "og:type", content: "article"}}
+  - {e: meta, a: {property: "twitter:card", content: "summary_large_image"}}
+  - {e: meta, a: {property: "twitter:title", content: "{{ h1 }}"}}
+  - {e: meta, a: {property: "twitter:description", content: "{{ h2 }}"}}
+  - {e: meta, a: {property: "twitter:image", content: "{{ page.staticBaseUrl }}{{ pageImageUri }}"}}
+  - {e: meta, a: {property: "description", content: "{{ h2 }}"}}
+htmBody:
+- e: div
+  a:
+    class: w3-card w3-padding w3-margin-top w3-show w3-white 
+  in:
+  - e: div
+    in:
+      - e: h1
+        a:
+          class: ""
+        in:
+          - e: i
+            a:
+              class: fa-solid fa-rectangle-list padding-right-quarter-em
+          - e: span
+            text: "{{ h1 }}"
+      - e: h2
+        a:
+          class: ""
+        in:
+          - e: i
+            a:
+              class: fa-solid fa-list-check padding-right-quarter-em
+          - e: span
+            text: "{{ h2 }}"
+      - e: div
+        a:
+          class: font-style-italic 
+        text: 'Created {{formatZonedDateTime created "EEE MMM d yyyy" "en-US" "America/Denver" }}'
+      - e: p
+        in:
+          - e: div
+            a:
+              class: font-weight-bold 
+            text: "By {{ author.name }}"
+          - e: div
+            a:
+              class: font-weight-bold font-style-italic
+            in:
+              - e: i
+                a:
+                  class: fa-brands fa-redhat w3-text-red
+              - e: span
+                a:
+                  class: font-weight-bold 
+                text: "{{ author.title }}"
+      - e: div
+        a:
+          class: w3-row w3-mobile 
+        label: 
+          - infographic
+          - image
+        in:
+      - e: div
+        a:
+          class: w3-row w3-mobile 
+        label: 
+          - infographic
+          - image
+        in:
+          - e: img
+            a:
+              class: w3-image 
+              src: "{{ page.staticBaseUrl }}/png/{{ pageId }}/image.png"
+  - e: div
+    in:
+      - e: div
+        a:
+          class: w3-padding 
+        in:
+          - e: h3
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-building padding-right-quarter-em
+              - e: span
+                text: What is a FIWARE iHub?
+          - e: h4
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-city padding-right-quarter-em
+              - e: span
+                text: Here are the details about FIWARE iHubs. 
+          - e: p
+            in:
+              - e: a
+                href: https://www.fiware.org/wp-content/uploads/2020/06/FF_iHubs_GuideforApplicants.pdf
+                text: |
+                  See the FIWARE Guidelines for Applicants 
+              - e: span
+                text: |
+                  where this information was provided. 
+          - e: p
+            in:
+              - e: span
+                text: |
+                  A FIWARE iHub is the center for the adoption of FIWARE technologies among businesses in a given region. 
+                  iHubs address the traditional barriers for business expansion of SMEs, mid-caps and large companies, improving accessibility to their target markets. 
+                  They increase competitiveness through modernization and, at a regional level, facilitate the diversification of the local economy. 
+          - e: p
+            in:
+              - e: span
+                text: |
+                  A FIWARE iHub offers several services to local companies, including technology and consulting support, training, research and testing, all using FIWARE technology. 
+                  It brings them support to join the FIWARE Marketplace.
+          - e: p
+            in:
+              - e: span
+                text: |
+                  iHub services include market information, certifications, product analysis, search for distributors, local representatives and partners, communication channels, individual coaching of SMEs, site location evaluation, organization of events and fact-finding missions for companies, associations and official delegations. 
+          - e: p
+            in:
+              - e: span
+                text: |
+                  FIWARE iHubs are classified by the services they provide, by the resources they allocate and by other factors. 
+                  They have to be operated by organizations which are members of the FIWARE Foundation. 
+                  There are four categories of FIWARE iHubs, starting with the lowest category, named ‘Basic’, where up to three stars can be gained, as services and resources are growing. 
+                  Different kinds of FIWARE iHubs can be approved, depending on their characteristics. 
+                  The FIWARE iHubs Committee, with the support of the FIWARE Foundation, has the responsibility of assessing the performance of existing or new FIWARE iHub candidates with respect to defined FIWARE iHubs levels and facilitating the overall coordination and collaboration of FIWARE iHubs. 
+      - e: div
+        a:
+          class: w3-padding 
+        in:
+          - e: h3
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-rectangle-list padding-right-quarter-em
+              - e: span
+                text: Getting started with FIWARE iHubs
+          - e: h4
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-checkered-flag padding-right-quarter-em
+              - e: span
+                text: Here are details for starting a FIWARE iHub. 
+          - e: p
+            in:
+              - e: a
+                href: https://www.fiware.org/community/fiware-ihubs/
+                text: |
+                  See the FIWARE iHubs landing page 
+              - e: span
+                text: |
+                  where this information was provided. 
+          - e: p
+            in:
+              - e: span
+                text: |
+                  Your FIWARE iHub is devoted to instructing and educating, but also helping and advising local communities, matching the demands of their local market and creating new demands.
+                  Applicants must carry out such tasks through a strong multidisciplinary team, with relevant experience in similar activities. 
+                  Among other criteria, it is necessary that iHub staff demonstrate abilities in technology counseling, using FIWARE technology. 
+                  iHubs need to demonstrate that they have – or are planning to have – resources to provide such services. 
+      - e: div
+        a:
+          class: w3-padding 
+        in:
+          - e: h3
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-buildings padding-right-quarter-em
+              - e: span
+                text: 5.2.1 Organization and contact information
+          - e: h4
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-handshake padding-right-quarter-em
+              - e: span
+                text: Our organization partnership details
+          - e: p
+            a:
+              class: w3-padding 
+            in:
+              - e: span
+                text: |
+                  You need to provide the information to the people and organization behind the iHub. You need to provide:
+          - e: ol
+            in:
+              - e: li
+                in:
+                  - e: dt
+                    in:
+                      - e: span
+                        text: Organization name
+                  - e: dd
+                    text: |-
+                      {{ IHUB_ORG_NAME }}
+              - e: li
+                in:
+                  - e: dt
+                    in:
+                      - e: span
+                        text: Organization description
+                  - e: dd
+                    text: |-
+                      {{ IHUB_ORG_DESCRIPTION }}
+              - e: li
+                in:
+                  - e: dt
+                    in:
+                      - e: span
+                        text: Name of the contact person
+                  - e: dd
+                    text: |-
+                      {{ IHUB_ORG_CONTACT_NAME }}
+              - e: li
+                in:
+                  - e: dt
+                    in:
+                      - e: span
+                        text: Contact email
+                  - e: dd
+                    text: |-
+                      {{ IHUB_ORG_CONTACT_EMAIL }}
+              - e: li
+                in:
+                  - e: dt
+                    in:
+                      - e: span
+                        text: Contact phone number
+                  - e: dd
+                    text: |-
+                      {{ IHUB_ORG_CONTACT_PHONE }}
+      - e: div
+        a:
+          class: w3-padding 
+        in:
+          - e: h3
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-buildings padding-right-quarter-em
+              - e: span
+                text: 5.2.2 iHub information
+          - e: h4
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-building-flag padding-right-quarter-em
+              - e: span
+                text: Our iHub details
+          - e: p
+            a:
+              class: w3-padding 
+            in:
+              - e: span
+                text: |
+                  You need to provide information about the iHub, domains of actuations, expected iHub level etc. You need to provide: 
+          - e: ol
+            in:
+              - e: li
+                in:
+                  - e: dt
+                    in:
+                      - e: span
+                        text: iHub name
+                  - e: dd
+                    text: |-
+                      {{ IHUB_NAME }}
+              - e: li
+                in:
+                  - e: dt
+                    in:
+                      - e: span
+                        text: iHub website
+                  - e: dd
+                    text: |-
+                      {{ IHUB_WEBSITE }}
+              - e: li
+                in:
+                  - e: dt
+                    in:
+                      - e: span
+                        text: iHub domains
+                  - e: dd
+                    in:
+                      - e: ul
+                        each: IHUB_DOMAINS
+                        in:
+                          - e: li
+                            text: |-
+                              {{ item.name }}
+              - e: li
+                in:
+                  - e: dt
+                    in:
+                      - e: span
+                        text: Region
+                  - e: dd
+                    text: |-
+                      {{ IHUB_REGION }}
+              - e: li
+                in:
+                  - e: dt
+                    in:
+                      - e: span
+                        text: City
+                  - e: dd
+                    text: |-
+                      {{ IHUB_CITY }}
+              - e: li
+                in:
+                  - e: dt
+                    in:
+                      - e: span
+                        text: Street
+                  - e: dd
+                    text: |-
+                      {{ IHUB_STREET }}
+              - e: li
+                in:
+                  - e: dt
+                    in:
+                      - e: span
+                        text: Zip Code
+                  - e: dd
+                    text: |-
+                      {{ IHUB_ZIP_CODE }}
+              - e: li
+                in:
+                  - e: dt
+                    in:
+                      - e: span
+                        text: Country
+                  - e: dd
+                    text: |-
+                      {{ IHUB_COUNTRY }}
+              - e: li
+                in:
+                  - e: dt
+                    in:
+                      - e: span
+                        text: Why do you want to be a FIWARE iHub?
+                  - e: dd
+                    text: |-
+                      {{ IHUB_WHY }}
+              - e: li
+                in:
+                  - e: dt
+                    in:
+                      - e: span
+                        text: Describe briefly your regional connection with public authorities
+                  - e: dd
+                    text: |-
+                      {{ IHUB_REGIONAL_CONNECTION_TO_PUBLIC_AUTHORITIES }}
+              - e: li
+                in:
+                  - e: dt
+                    in:
+                      - e: span
+                        text: Describe briefly how you plan to meet regional needs and demands
+                  - e: dd
+                    text: |-
+                      {{ IHUB_REGIONAL_DEMANDS }}
+              - e: li
+                in:
+                  - e: dt
+                    in:
+                      - e: span
+                        text: Describe your experience with FIWARE
+                  - e: dd
+                    text: |-
+                      {{ IHUB_FIWARE_EXPERIENCE }}
+              - e: li
+                in:
+                  - e: dt
+                    in:
+                      - e: span
+                        text: Expected level of FIWARE iHub
+                  - e: dd
+                    text: |-
+                      {{ IHUB_EXPECTED_LEVEL }}
+  - e: div
+    label:
+      - infographic
+      - review
+    a:
+      id: divReview
+    in:
+      - e: table
+        a:
+          id: tableReview1
+          class: review1Table 
+        in:
+          - e: tbody
+            in:
+              - e: tr
+                a:
+                  class: 
+                in:
+                  - e: td
+                    a:
+                      class: w3-mobile review1TableTr1Td1 review1TableTr1Td even 
+                    in:
+                      - e: span
+                        text: '{{formatZonedDateTime created "EEEE" "en-US" "America/Denver" }}'
+                  - e: td
+                    a:
+                      class: w3-mobile review1TableTr1Td2 review1TableTr1Td odd 
+                    in:
+                      - e: i
+                        a:
+                          class: "{{ htmBody.0.in.0.in.0.in.0.a.class }}"
+                  - e: td
+                    a:
+                      class: w3-mobile review1TableTr1Td3 review1TableTr1Td even 
+                    in:
+                      - e: i
+                        a:
+                          class: "{{ htmBody.0.in.0.in.1.in.0.a.class }}"
+                  - e: td
+                    a:
+                      class: w3-mobile review1TableTr1Td4 review1TableTr1Td odd 
+                    in:
+                      - e: i
+                        a:
+                          class: "fa-solid fa-pen-nib"
+              - e: tr
+                a:
+                  class: odd 
+                in:
+                  - e: td
+                    a:
+                      class: w3-mobile review1TableTr2Td1 review1TableTr2Td even 
+                    in:
+                      - e: span
+                        text: '{{formatZonedDateTime created "MMMM d yyyy" "en-US" "America/Denver" }}'
+                  - e: td
+                    a:
+                      class: w3-mobile review1TableTr2Td2 review1TableTr2Td odd 
+                    in:
+                      - e: span
+                        text: "{{ h1 }}"
+                  - e: td
+                    a:
+                      class: w3-mobile review1TableTr2Td3 review1TableTr2Td even 
+                    in:
+                      - e: span
+                        text: "{{ h2 }}"
+                  - e: td
+                    a:
+                      class: w3-mobile review1TableTr2Td4 review1TableTr2Td odd 
+                    in:
+                      - e: span
+                        text: "{{ author.name }}"
+      - e: table
+        a:
+          id: tableReview2
+          class: review2Table 
+        in:
+          - e: tbody
+            each: htmBody.0.in.1.in
+            in:
+              - e: tr
+                a:
+                  class: "{{#even @index }}review2TableTr even {{else}}review2TableTr odd {{/even}}"
+                in:
+                  - e: td
+                    a:
+                      class: w3-mobile 
+                    in:
+                      - e: i
+                        a:
+                          class: "{{ item.in.0.in.0.a.class }}"
+                      - e: span
+                        text: '{{ item.in.0.in.1.text }}'
+                  - e: td
+                    a:
+                      class: w3-mobile 
+                    in:
+                      - e: i
+                        a:
+                          class: "{{ item.in.1.in.0.a.class }}"
+                      - e: span
+                        text: '{{ item.in.1.in.1.text }}'
