@@ -131,8 +131,8 @@ htmBody:
           - e: a
             a:
               target: _new
-              href: https://studio-ws.apicur.io/sharing/bcd69fc4-cc10-40c1-bb40-03ddfe5cf050
-            text: https://studio-ws.apicur.io/sharing/bcd69fc4-cc10-40c1-bb40-03ddfe5cf050
+              href: "{{ page.siteBaseUrl }}/api"
+            text: "{{ page.siteBaseUrl }}/api"
   - e: div
     label:
       - infographic
