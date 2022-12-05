@@ -3,7 +3,7 @@ package org.computate.smartvillageview.enus.model.traffic.vehicle.step;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.smartvillageview.enus.model.base.BaseModel;
 import org.computate.vertx.api.ApiRequest;
-import org.computate.vertx.config.ComputateConfigKeys;
+import org.computate.smartvillageview.enus.config.ConfigKeys;
 import java.util.Optional;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
@@ -67,25 +67,7 @@ import io.vertx.core.json.JsonObject;
  * Api: true
  * <p>This class contains a comment <b>"Api: true"</b>, which means this class will have Java Vert.x API backend code generated for these objects. 
  * </p>
- * ApiMethode.enUS: true
- * <p>This class contains a comment <b>"ApiTag: Vehicle Step"</b>, which groups all of the OpenAPIs for VehicleStep objects under the tag "Vehicle Step". 
- * </p>
- * ApiMethode.enUS: true
- * <p>This class contains a comment <b>"ApiTag: Vehicle Step"</b>, which groups all of the OpenAPIs for VehicleStep objects under the tag "Vehicle Step". 
- * </p>
- * ApiMethode.enUS: true
- * <p>This class contains a comment <b>"ApiTag: Vehicle Step"</b>, which groups all of the OpenAPIs for VehicleStep objects under the tag "Vehicle Step". 
- * </p>
- * ApiMethode.enUS: true
- * <p>This class contains a comment <b>"ApiTag: Vehicle Step"</b>, which groups all of the OpenAPIs for VehicleStep objects under the tag "Vehicle Step". 
- * </p>
- * ApiMethode.enUS: true
- * <p>This class contains a comment <b>"ApiTag: Vehicle Step"</b>, which groups all of the OpenAPIs for VehicleStep objects under the tag "Vehicle Step". 
- * </p>
- * ApiMethode.enUS: true
- * <p>This class contains a comment <b>"ApiTag: Vehicle Step"</b>, which groups all of the OpenAPIs for VehicleStep objects under the tag "Vehicle Step". 
- * </p>
- * ApiTag.enUS: true
+ * ApiTag.enUS: Vehicle Step
  * <p>This class contains a comment <b>"ApiTag: Vehicle Step"</b>, which groups all of the OpenAPIs for VehicleStep objects under the tag "Vehicle Step". 
  * </p>
  * ApiUri.enUS: /api/vehicle-step

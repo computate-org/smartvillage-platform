@@ -466,6 +466,184 @@ htmBody:
                   - e: dd
                     text: |-
                       {{ IHUB_EXPECTED_LEVEL }}
+      - e: div
+        a:
+          class: w3-padding 
+        in:
+          - e: h3
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-buildings padding-right-quarter-em
+              - e: span
+                text: 5.2.3 Documents
+          - e: h4
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-building-flag padding-right-quarter-em
+              - e: span
+                text: Required documents for our iHub
+          - e: p
+            a:
+              class: w3-padding 
+            in:
+              - e: span
+                text: |
+                  There are 6 types of documents:
+          - e: ol
+            in:
+              - e: li
+                in:
+                  - e: span
+                    text: Activities overview
+              - e: li
+                in:
+                  - e: span
+                    text: Activities evidences
+              - e: li
+                in:
+                  - e: span
+                    text: Resources overview
+              - e: li
+                in:
+                  - e: span
+                    text: Resources evidences
+              - e: li
+                in:
+                  - e: span
+                    text: Pledge letter
+              - e: li
+                in:
+                  - e: span
+                    text: Action plan
+          - e: p
+            a:
+              class: w3-padding 
+            in:
+              - e: span
+                text: |
+                  If you are running as an iHub before the application process, you have developed some activities. 
+                  In that case, you can apply to be an established iHub. 
+                  According to activities you already performed during the year before the application date, you will obtain a specific level (Basic, Standard/1 star, Advanced/2 stars or Premium/3 stars). 
+          - e: p
+            a:
+              class: w3-padding 
+            in:
+              - e: span
+                text: |
+                  In case you have not started running your activity as an iHub yet, you can apply to be an incubated iHub. 
+                  You need to provide an Action Plan for the next year. 
+                  Both cases, you need to provide resource evidence. 
+          - e: table
+            a:
+              class: w3-table 
+            in:
+              - e: thead
+                in:
+                  - e: tr
+                    in:
+                      - e: td
+                        text: Resource
+                      - e: td
+                        text: Incubated iHub
+                      - e: td
+                        text: Basic, 1,2 or 3 star iHub
+              - e: tbody
+                in:
+                  - e: tr
+                    in:
+                      - e: td
+                        in:
+                          - e: span
+                            text: Organization and contact information
+                      - e: td
+                        in:
+                          - e: i
+                            class: fa-solid fa-square-check padding-right-quarter-em
+                      - e: td
+                        in:
+                          - e: i
+                            class: fa-solid fa-square-check padding-right-quarter-em
+                  - e: tr
+                    in:
+                      - e: td
+                        in:
+                          - e: span
+                            text: iHub information
+                      - e: td
+                        in:
+                          - e: i
+                            class: fa-solid fa-square-check padding-right-quarter-em
+                      - e: td
+                        in:
+                          - e: i
+                            class: fa-solid fa-square-check padding-right-quarter-em
+                  - e: tr
+                    in:
+                      - e: td
+                        in:
+                          - e: span
+                            text: Activities resume
+                      - e: td
+                      - e: td
+                        in:
+                          - e: i
+                            class: fa-solid fa-square-check padding-right-quarter-em
+                  - e: tr
+                    in:
+                      - e: td
+                        in:
+                          - e: span
+                            text: Activities evidence
+                      - e: td
+                      - e: td
+                        in:
+                          - e: i
+                            class: fa-solid fa-square-check padding-right-quarter-em
+                  - e: tr
+                    in:
+                      - e: td
+                        in:
+                          - e: span
+                            text: Resources resume
+                      - e: td
+                        in:
+                          - e: i
+                            class: fa-solid fa-square-check padding-right-quarter-em
+                      - e: td
+                        in:
+                          - e: i
+                            class: fa-solid fa-square-check padding-right-quarter-em
+                  - e: tr
+                    in:
+                      - e: td
+                        in:
+                          - e: span
+                            text: Resources evidence
+                      - e: td
+                        in:
+                          - e: i
+                            class: fa-solid fa-square-check padding-right-quarter-em
+                      - e: td
+                        in:
+                          - e: i
+                            class: fa-solid fa-square-check padding-right-quarter-em
+                  - e: tr
+                    in:
+                      - e: td
+                        in:
+                          - e: span
+                            text: Action plan
+                      - e: td
+                        in:
+                          - e: i
+                            class: fa-solid fa-square-check padding-right-quarter-em
+                      - e: td
   - e: div
     label:
       - infographic
