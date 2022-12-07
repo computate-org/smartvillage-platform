@@ -103,7 +103,36 @@
 {{/inline}}
 {{#*inline "htmBodyEndPageLayout"}}		<!-- #*inline "htmBodyEndPageLayout" -->
 
-  		<div class="w3-center ">
+		<footer class="w3-content w3-center w3-padding-32 ">
+			<h3>Share this page. </h3>
+			<div class="w3-cell-row ">
+				<div class="blog-publication-social-div w3-cell ">
+					<img alt="" class="blog-publication-social-img" src="{{ staticBaseUrl }}/svg/facebook.svg">
+					<div>
+						<div id="fb-root"></div>
+						<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version={{ facebookGraphVersion }}&appId={{ facebookAppId }}&autoLogAppEvents=1" nonce="FOKrbAYI"></script>
+						<div class="fb-like" data-href="{{ siteBaseUrl }}{{ pageUri }}" data-width="" data-layout="box_count" data-action="like" data-size="small" data-share="true"></div>
+					</div>
+				</div>
+				<div class="blog-publication-social-div w3-cell ">
+					<img alt="" class="blog-publication-social-img" src="{{ staticBaseUrl }}/svg/twitter.svg">
+					<div>
+						<a href="https://twitter.com/share" class="twitter-share-button " data-show-count="false"></a>
+						<script async="" src="//platform.twitter.com/widgets.js"></script>
+					</div>
+				</div>
+				<div class="blog-publication-social-div w3-cell ">
+					<img alt="" class="blog-publication-social-img" src="{{ staticBaseUrl }}/svg/pinterest.svg">
+					<div class="pinterest-div ">
+						<script async="" defer="" src="//assets.pinterest.com/js/pinit_main.js?0.8726554954646004"></script>
+						<a data-pin-media="{{ siteBaseUrl }}{{ pageImageUri }}" data-pin-description="{{ pageTitle }}" data-pin-url="{{ siteBaseUrl }}{{ pageUri }}" data-pin-id="" href="https://www.pinterest.com/pin/create/button/" data-pin-do="buttonPin">
+							<img alt="" src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_gray_20.png"/>
+						</a>
+					</div>
+				</div>
+			</div>
+		</footer>
+	 	<div class="w3-center ">
 {{#block "htmBodyMenu"}}{{/block}}
 		</div>
 		<footer class="w3-center w3-black w3-padding-48 ">

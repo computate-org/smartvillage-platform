@@ -208,7 +208,7 @@ public class DynamicPage extends DynamicPageGen<PageLayout> {
 
 	@Override
 	protected void _pageUri(Wrap<String> c) {
-		c.o("/iot-node");
+		c.o(uri);
 	}
 
 	@Override
@@ -230,7 +230,6 @@ public class DynamicPage extends DynamicPageGen<PageLayout> {
 
 	@Override
 	protected void _pageImageUri(Wrap<String> c) {
-			c.o("/png/iot-node-999.png");
 	}
 
 	@Override

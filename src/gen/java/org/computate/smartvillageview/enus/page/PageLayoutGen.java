@@ -32,8 +32,8 @@ import java.math.RoundingMode;
 import java.util.Map;
 import java.lang.Object;
 import java.lang.String;
-import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.api.service.ServiceRequest;
+import io.vertx.core.json.JsonObject;
 import java.lang.Long;
 import java.lang.Integer;
 import java.lang.Void;
@@ -258,64 +258,6 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			setRequestVars(requestVarsWrap.o);
 		}
 		return (PageLayout)this;
-	}
-
-	////////////
-	// config //
-	////////////
-
-
-	/**	 The entity config
-	 *	 is defined as null before being initialized. 
-	 */
-	@JsonIgnore
-	@JsonInclude(Include.NON_NULL)
-	protected JsonObject config;
-
-	/**	<br> The entity config
-	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.PageLayout&fq=entiteVar_enUS_indexed_string:config">Find the entity config in Solr</a>
-	 * <br>
-	 * @param w is for wrapping a value to assign to this entity during initialization. 
-	 **/
-	protected abstract void _config(Wrap<JsonObject> w);
-
-	public JsonObject getConfig() {
-		return config;
-	}
-
-	public void setConfig(JsonObject config) {
-		this.config = config;
-	}
-	@JsonIgnore
-	public void setConfig(String o) {
-		this.config = PageLayout.staticSetConfig(siteRequest_, o);
-	}
-	public static JsonObject staticSetConfig(SiteRequestEnUS siteRequest_, String o) {
-		if(o != null) {
-				return new JsonObject(o);
-		}
-		return null;
-	}
-	protected PageLayout configInit() {
-		Wrap<JsonObject> configWrap = new Wrap<JsonObject>().var("config");
-		if(config == null) {
-			_config(configWrap);
-			setConfig(configWrap.o);
-		}
-		return (PageLayout)this;
-	}
-
-	public static JsonObject staticSearchConfig(SiteRequestEnUS siteRequest_, JsonObject o) {
-		return o;
-	}
-
-	public static String staticSearchStrConfig(SiteRequestEnUS siteRequest_, JsonObject o) {
-		return o == null ? null : o.toString();
-	}
-
-	public static String staticSearchFqConfig(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrConfig(siteRequest_, PageLayout.staticSearchConfig(siteRequest_, PageLayout.staticSetConfig(siteRequest_, o)));
 	}
 
 	////////////////////
@@ -605,6 +547,106 @@ public abstract class PageLayoutGen<DEV> extends Object {
 
 	public static String staticSearchFqFontAwesomeKit(SiteRequestEnUS siteRequest_, String o) {
 		return PageLayout.staticSearchStrFontAwesomeKit(siteRequest_, PageLayout.staticSearchFontAwesomeKit(siteRequest_, PageLayout.staticSetFontAwesomeKit(siteRequest_, o)));
+	}
+
+	//////////////////////////
+	// facebookGraphVersion //
+	//////////////////////////
+
+
+	/**	 The entity facebookGraphVersion
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String facebookGraphVersion;
+
+	/**	<br> The entity facebookGraphVersion
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.PageLayout&fq=entiteVar_enUS_indexed_string:facebookGraphVersion">Find the entity facebookGraphVersion in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _facebookGraphVersion(Wrap<String> w);
+
+	public String getFacebookGraphVersion() {
+		return facebookGraphVersion;
+	}
+	public void setFacebookGraphVersion(String o) {
+		this.facebookGraphVersion = PageLayout.staticSetFacebookGraphVersion(siteRequest_, o);
+	}
+	public static String staticSetFacebookGraphVersion(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected PageLayout facebookGraphVersionInit() {
+		Wrap<String> facebookGraphVersionWrap = new Wrap<String>().var("facebookGraphVersion");
+		if(facebookGraphVersion == null) {
+			_facebookGraphVersion(facebookGraphVersionWrap);
+			setFacebookGraphVersion(facebookGraphVersionWrap.o);
+		}
+		return (PageLayout)this;
+	}
+
+	public static String staticSearchFacebookGraphVersion(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrFacebookGraphVersion(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqFacebookGraphVersion(SiteRequestEnUS siteRequest_, String o) {
+		return PageLayout.staticSearchStrFacebookGraphVersion(siteRequest_, PageLayout.staticSearchFacebookGraphVersion(siteRequest_, PageLayout.staticSetFacebookGraphVersion(siteRequest_, o)));
+	}
+
+	///////////////////
+	// facebookAppId //
+	///////////////////
+
+
+	/**	 The entity facebookAppId
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String facebookAppId;
+
+	/**	<br> The entity facebookAppId
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.PageLayout&fq=entiteVar_enUS_indexed_string:facebookAppId">Find the entity facebookAppId in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _facebookAppId(Wrap<String> w);
+
+	public String getFacebookAppId() {
+		return facebookAppId;
+	}
+	public void setFacebookAppId(String o) {
+		this.facebookAppId = PageLayout.staticSetFacebookAppId(siteRequest_, o);
+	}
+	public static String staticSetFacebookAppId(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected PageLayout facebookAppIdInit() {
+		Wrap<String> facebookAppIdWrap = new Wrap<String>().var("facebookAppId");
+		if(facebookAppId == null) {
+			_facebookAppId(facebookAppIdWrap);
+			setFacebookAppId(facebookAppIdWrap.o);
+		}
+		return (PageLayout)this;
+	}
+
+	public static String staticSearchFacebookAppId(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrFacebookAppId(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqFacebookAppId(SiteRequestEnUS siteRequest_, String o) {
+		return PageLayout.staticSearchStrFacebookAppId(siteRequest_, PageLayout.staticSearchFacebookAppId(siteRequest_, PageLayout.staticSetFacebookAppId(siteRequest_, o)));
 	}
 
 	/////////////
@@ -3668,13 +3710,14 @@ public abstract class PageLayoutGen<DEV> extends Object {
 				siteRequest_Init();
 				langInit();
 				requestVarsInit();
-				configInit();
 				serviceRequestInit();
 				staticBaseUrlInit();
 				siteBaseUrlInit();
 				siteAuthUrlInit();
 				siteAuthRealmInit();
 				fontAwesomeKitInit();
+				facebookGraphVersionInit();
+				facebookAppIdInit();
 				pageUriInit();
 				pageIdInit();
 				apiUriInit();
@@ -3819,8 +3862,6 @@ public abstract class PageLayoutGen<DEV> extends Object {
 				return oPageLayout.lang;
 			case "requestVars":
 				return oPageLayout.requestVars;
-			case "config":
-				return oPageLayout.config;
 			case "serviceRequest":
 				return oPageLayout.serviceRequest;
 			case "staticBaseUrl":
@@ -3833,6 +3874,10 @@ public abstract class PageLayoutGen<DEV> extends Object {
 				return oPageLayout.siteAuthRealm;
 			case "fontAwesomeKit":
 				return oPageLayout.fontAwesomeKit;
+			case "facebookGraphVersion":
+				return oPageLayout.facebookGraphVersion;
+			case "facebookAppId":
+				return oPageLayout.facebookAppId;
 			case "pageUri":
 				return oPageLayout.pageUri;
 			case "pageId":
@@ -3986,8 +4031,6 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		switch(entityVar) {
 		case "lang":
 			return PageLayout.staticSetLang(siteRequest_, o);
-		case "config":
-			return PageLayout.staticSetConfig(siteRequest_, o);
 		case "staticBaseUrl":
 			return PageLayout.staticSetStaticBaseUrl(siteRequest_, o);
 		case "siteBaseUrl":
@@ -3998,6 +4041,10 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSetSiteAuthRealm(siteRequest_, o);
 		case "fontAwesomeKit":
 			return PageLayout.staticSetFontAwesomeKit(siteRequest_, o);
+		case "facebookGraphVersion":
+			return PageLayout.staticSetFacebookGraphVersion(siteRequest_, o);
+		case "facebookAppId":
+			return PageLayout.staticSetFacebookAppId(siteRequest_, o);
 		case "pageUri":
 			return PageLayout.staticSetPageUri(siteRequest_, o);
 		case "pageId":
@@ -4114,8 +4161,6 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		switch(entityVar) {
 		case "lang":
 			return PageLayout.staticSearchLang(siteRequest_, (String)o);
-		case "config":
-			return PageLayout.staticSearchConfig(siteRequest_, (JsonObject)o);
 		case "staticBaseUrl":
 			return PageLayout.staticSearchStaticBaseUrl(siteRequest_, (String)o);
 		case "siteBaseUrl":
@@ -4126,6 +4171,10 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSearchSiteAuthRealm(siteRequest_, (String)o);
 		case "fontAwesomeKit":
 			return PageLayout.staticSearchFontAwesomeKit(siteRequest_, (String)o);
+		case "facebookGraphVersion":
+			return PageLayout.staticSearchFacebookGraphVersion(siteRequest_, (String)o);
+		case "facebookAppId":
+			return PageLayout.staticSearchFacebookAppId(siteRequest_, (String)o);
 		case "pageUri":
 			return PageLayout.staticSearchPageUri(siteRequest_, (String)o);
 		case "pageId":
@@ -4242,8 +4291,6 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		switch(entityVar) {
 		case "lang":
 			return PageLayout.staticSearchStrLang(siteRequest_, (String)o);
-		case "config":
-			return PageLayout.staticSearchStrConfig(siteRequest_, (JsonObject)o);
 		case "staticBaseUrl":
 			return PageLayout.staticSearchStrStaticBaseUrl(siteRequest_, (String)o);
 		case "siteBaseUrl":
@@ -4254,6 +4301,10 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSearchStrSiteAuthRealm(siteRequest_, (String)o);
 		case "fontAwesomeKit":
 			return PageLayout.staticSearchStrFontAwesomeKit(siteRequest_, (String)o);
+		case "facebookGraphVersion":
+			return PageLayout.staticSearchStrFacebookGraphVersion(siteRequest_, (String)o);
+		case "facebookAppId":
+			return PageLayout.staticSearchStrFacebookAppId(siteRequest_, (String)o);
 		case "pageUri":
 			return PageLayout.staticSearchStrPageUri(siteRequest_, (String)o);
 		case "pageId":
@@ -4370,8 +4421,6 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		switch(entityVar) {
 		case "lang":
 			return PageLayout.staticSearchFqLang(siteRequest_, o);
-		case "config":
-			return PageLayout.staticSearchFqConfig(siteRequest_, o);
 		case "staticBaseUrl":
 			return PageLayout.staticSearchFqStaticBaseUrl(siteRequest_, o);
 		case "siteBaseUrl":
@@ -4382,6 +4431,10 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSearchFqSiteAuthRealm(siteRequest_, o);
 		case "fontAwesomeKit":
 			return PageLayout.staticSearchFqFontAwesomeKit(siteRequest_, o);
+		case "facebookGraphVersion":
+			return PageLayout.staticSearchFqFacebookGraphVersion(siteRequest_, o);
+		case "facebookAppId":
+			return PageLayout.staticSearchFqFacebookAppId(siteRequest_, o);
 		case "pageUri":
 			return PageLayout.staticSearchFqPageUri(siteRequest_, o);
 		case "pageId":
@@ -4500,13 +4553,14 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	public static final String VAR_siteRequest_ = "siteRequest_";
 	public static final String VAR_lang = "lang";
 	public static final String VAR_requestVars = "requestVars";
-	public static final String VAR_config = "config";
 	public static final String VAR_serviceRequest = "serviceRequest";
 	public static final String VAR_staticBaseUrl = "staticBaseUrl";
 	public static final String VAR_siteBaseUrl = "siteBaseUrl";
 	public static final String VAR_siteAuthUrl = "siteAuthUrl";
 	public static final String VAR_siteAuthRealm = "siteAuthRealm";
 	public static final String VAR_fontAwesomeKit = "fontAwesomeKit";
+	public static final String VAR_facebookGraphVersion = "facebookGraphVersion";
+	public static final String VAR_facebookAppId = "facebookAppId";
 	public static final String VAR_pageUri = "pageUri";
 	public static final String VAR_pageId = "pageId";
 	public static final String VAR_apiUri = "apiUri";
@@ -4567,13 +4621,14 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	public static final String DISPLAY_NAME_siteRequest_ = "";
 	public static final String DISPLAY_NAME_lang = "";
 	public static final String DISPLAY_NAME_requestVars = "";
-	public static final String DISPLAY_NAME_config = "";
 	public static final String DISPLAY_NAME_serviceRequest = "";
 	public static final String DISPLAY_NAME_staticBaseUrl = "";
 	public static final String DISPLAY_NAME_siteBaseUrl = "";
 	public static final String DISPLAY_NAME_siteAuthUrl = "";
 	public static final String DISPLAY_NAME_siteAuthRealm = "";
 	public static final String DISPLAY_NAME_fontAwesomeKit = "";
+	public static final String DISPLAY_NAME_facebookGraphVersion = "";
+	public static final String DISPLAY_NAME_facebookAppId = "";
 	public static final String DISPLAY_NAME_pageUri = "";
 	public static final String DISPLAY_NAME_pageId = "";
 	public static final String DISPLAY_NAME_apiUri = "";
@@ -4642,8 +4697,6 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return DISPLAY_NAME_lang;
 		case VAR_requestVars:
 			return DISPLAY_NAME_requestVars;
-		case VAR_config:
-			return DISPLAY_NAME_config;
 		case VAR_serviceRequest:
 			return DISPLAY_NAME_serviceRequest;
 		case VAR_staticBaseUrl:
@@ -4656,6 +4709,10 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return DISPLAY_NAME_siteAuthRealm;
 		case VAR_fontAwesomeKit:
 			return DISPLAY_NAME_fontAwesomeKit;
+		case VAR_facebookGraphVersion:
+			return DISPLAY_NAME_facebookGraphVersion;
+		case VAR_facebookAppId:
+			return DISPLAY_NAME_facebookAppId;
 		case VAR_pageUri:
 			return DISPLAY_NAME_pageUri;
 		case VAR_pageId:

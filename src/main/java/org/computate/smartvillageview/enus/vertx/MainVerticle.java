@@ -892,6 +892,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 						page.setPage(JsonObject.mapFrom(result));
 						page.setUrl(url);
 						page.setUri(uri);
+						page.setPageImageUri(result.getPageImageUri());
 						page.promiseDeepForClass(siteRequest).onSuccess(b -> {
 							JsonObject json = JsonObject.mapFrom(page);
 							json.put(ConfigKeys.STATIC_BASE_URL, config().getString(ConfigKeys.STATIC_BASE_URL));

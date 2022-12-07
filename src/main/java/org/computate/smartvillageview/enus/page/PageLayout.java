@@ -71,14 +71,6 @@ public class PageLayout extends PageLayoutGen<Object> {
 	}
 
 	/**
-	 * Ignore: true
-	 * Description: the site configuration
-	 */
-	protected void _config(Wrap<JsonObject> w) {
-		w.o(siteRequest_.getConfig());
-	}
-
-	/**
 	 * Description: The current Vert.x service request
 	 */
 	protected void _serviceRequest(Wrap<ServiceRequest> w) {
@@ -103,6 +95,14 @@ public class PageLayout extends PageLayoutGen<Object> {
 
 	protected void _fontAwesomeKit(Wrap<String> w) {
 		w.o(siteRequest_.getConfig().getString(ConfigKeys.FONTAWESOME_KIT));
+	}
+
+	protected void _facebookGraphVersion(Wrap<String> w) {
+		w.o(siteRequest_.getConfig().getString(ConfigKeys.FACEBOOK_GRAPH_VERSION));
+	}
+
+	protected void _facebookAppId(Wrap<String> w) {
+		w.o(siteRequest_.getConfig().getString(ConfigKeys.FACEBOOK_APP_ID));
 	}
 
 	/**

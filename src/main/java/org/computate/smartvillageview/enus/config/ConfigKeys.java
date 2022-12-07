@@ -8,6 +8,16 @@ import org.computate.vertx.config.ComputateConfigKeys;
 public class ConfigKeys extends ComputateConfigKeys {
 
 	/**
+	 * Facebook Graph Version
+	 **/
+	public static final String FACEBOOK_GRAPH_VERSION = "FACEBOOK_GRAPH_VERSION";
+
+	/**
+	 * Facebook App ID
+	 **/
+	public static final String FACEBOOK_APP_ID = "FACEBOOK_APP_ID";
+
+	/**
 	 * 
 	 **/
 	public static final String QUAYIO_ORG = "QUAYIO_ORG";
