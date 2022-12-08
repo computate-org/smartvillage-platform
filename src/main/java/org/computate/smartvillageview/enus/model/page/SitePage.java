@@ -174,7 +174,6 @@ public class SitePage extends SitePageGen<BaseResult> {
 	 * Persist: true
 	 * HtmlRow: 3
 	 * HtmlCell: 2
-	 * HtmlColumn: 4
 	 * Facet: true
 	 * DisplayName: URI
 	 * Description: The relative URI for this page. 
@@ -291,5 +290,15 @@ public class SitePage extends SitePageGen<BaseResult> {
 	@Override
 	protected void _id(Wrap<String> w) {
 		w.o(String.format("%s_%s", SitePage.CLASS_SIMPLE_NAME, pageId));
+	}
+
+	@Override
+	protected void _pageUrlId(Wrap<String> w) {
+		w.o(url);
+	}
+
+	@Override
+	protected void _pageUrlPk(Wrap<String> w) {
+		w.o(url);
 	}
 }

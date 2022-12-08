@@ -2296,8 +2296,6 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 		switch(var) {
 		case VAR_url:
 			return 4;
-		case VAR_uri:
-			return 4;
 			default:
 				return BaseResult.htmlColumnBaseResult(var);
 		}

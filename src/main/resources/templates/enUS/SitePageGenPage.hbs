@@ -408,21 +408,57 @@
 					<div class="" id="postSitePageFormValues">
 						<div id="postSitePageForm">
 							<div class="w3-cell-row ">
-{{> "htmCreated" classApiMethodMethod="POST"}}
-{{> "htmObjectId" classApiMethodMethod="POST"}}
+{{#ifContainsAnyRoles roles rolesRequired}}
+{{> "htmCreated" classApiMethodMethod="POST" rolesRequired="true"}}
+{{else}}
+{{> "htmCreated" classApiMethodMethod="POST" rolesRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles rolesRequired}}
+{{> "htmObjectId" classApiMethodMethod="POST" rolesRequired="true"}}
+{{else}}
+{{> "htmObjectId" classApiMethodMethod="POST" rolesRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
-{{> "htmArchived" classApiMethodMethod="POST"}}
-{{> "htmDeleted" classApiMethodMethod="POST"}}
+{{#ifContainsAnyRoles roles rolesRequired}}
+{{> "htmArchived" classApiMethodMethod="POST" rolesRequired="true"}}
+{{else}}
+{{> "htmArchived" classApiMethodMethod="POST" rolesRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles rolesRequired}}
+{{> "htmDeleted" classApiMethodMethod="POST" rolesRequired="true"}}
+{{else}}
+{{> "htmDeleted" classApiMethodMethod="POST" rolesRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
-{{> "htmPageId" classApiMethodMethod="POST"}}
-{{> "htmUrl" classApiMethodMethod="POST"}}
-{{> "htmUri" classApiMethodMethod="POST"}}
-{{> "htmAuthor" classApiMethodMethod="POST"}}
+{{#ifContainsAnyRoles roles rolesRequired}}
+{{> "htmPageId" classApiMethodMethod="POST" rolesRequired="true"}}
+{{else}}
+{{> "htmPageId" classApiMethodMethod="POST" rolesRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles rolesRequired}}
+{{> "htmUrl" classApiMethodMethod="POST" rolesRequired="true"}}
+{{else}}
+{{> "htmUrl" classApiMethodMethod="POST" rolesRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles rolesRequired}}
+{{> "htmUri" classApiMethodMethod="POST" rolesRequired="true"}}
+{{else}}
+{{> "htmUri" classApiMethodMethod="POST" rolesRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles rolesRequired}}
+{{> "htmAuthor" classApiMethodMethod="POST" rolesRequired="true"}}
+{{else}}
+{{> "htmAuthor" classApiMethodMethod="POST" rolesRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
-{{> "htmPageImageUri" classApiMethodMethod="POST"}}
+{{#ifContainsAnyRoles roles rolesRequired}}
+{{> "htmPageImageUri" classApiMethodMethod="POST" rolesRequired="true"}}
+{{else}}
+{{> "htmPageImageUri" classApiMethodMethod="POST" rolesRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 						</div>
 						<button
@@ -453,21 +489,57 @@
 					</header>
 					<div class="" id="patchSitePageFormValues">
 							<div class="w3-cell-row ">
-{{> "htmCreated" classApiMethodMethod="PATCH"}}
-{{> "htmObjectId" classApiMethodMethod="PATCH"}}
+{{#ifContainsAnyRoles roles rolesRequired}}
+{{> "htmCreated" classApiMethodMethod="PATCH" rolesRequired="true"}}
+{{else}}
+{{> "htmCreated" classApiMethodMethod="PATCH" rolesRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles rolesRequired}}
+{{> "htmObjectId" classApiMethodMethod="PATCH" rolesRequired="true"}}
+{{else}}
+{{> "htmObjectId" classApiMethodMethod="PATCH" rolesRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
-{{> "htmArchived" classApiMethodMethod="PATCH"}}
-{{> "htmDeleted" classApiMethodMethod="PATCH"}}
+{{#ifContainsAnyRoles roles rolesRequired}}
+{{> "htmArchived" classApiMethodMethod="PATCH" rolesRequired="true"}}
+{{else}}
+{{> "htmArchived" classApiMethodMethod="PATCH" rolesRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles rolesRequired}}
+{{> "htmDeleted" classApiMethodMethod="PATCH" rolesRequired="true"}}
+{{else}}
+{{> "htmDeleted" classApiMethodMethod="PATCH" rolesRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
-{{> "htmPageId" classApiMethodMethod="PATCH"}}
-{{> "htmUrl" classApiMethodMethod="PATCH"}}
-{{> "htmUri" classApiMethodMethod="PATCH"}}
-{{> "htmAuthor" classApiMethodMethod="PATCH"}}
+{{#ifContainsAnyRoles roles rolesRequired}}
+{{> "htmPageId" classApiMethodMethod="PATCH" rolesRequired="true"}}
+{{else}}
+{{> "htmPageId" classApiMethodMethod="PATCH" rolesRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles rolesRequired}}
+{{> "htmUrl" classApiMethodMethod="PATCH" rolesRequired="true"}}
+{{else}}
+{{> "htmUrl" classApiMethodMethod="PATCH" rolesRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles rolesRequired}}
+{{> "htmUri" classApiMethodMethod="PATCH" rolesRequired="true"}}
+{{else}}
+{{> "htmUri" classApiMethodMethod="PATCH" rolesRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles rolesRequired}}
+{{> "htmAuthor" classApiMethodMethod="PATCH" rolesRequired="true"}}
+{{else}}
+{{> "htmAuthor" classApiMethodMethod="PATCH" rolesRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
-{{> "htmPageImageUri" classApiMethodMethod="PATCH"}}
+{{#ifContainsAnyRoles roles rolesRequired}}
+{{> "htmPageImageUri" classApiMethodMethod="PATCH" rolesRequired="true"}}
+{{else}}
+{{> "htmPageImageUri" classApiMethodMethod="PATCH" rolesRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 						<button
 							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-2017-shaded-spruce "
@@ -519,22 +591,62 @@
 					<div class="" id="searchpageSitePageFormValues">
 						<div id="searchpageSitePageForm">
 							<div class="w3-cell-row ">
-{{> "htmCreated" classApiMethodMethod="Page"}}
-{{> "htmModified" classApiMethodMethod="Page"}}
-{{> "htmObjectId" classApiMethodMethod="Page"}}
+{{#ifContainsAnyRoles roles rolesRequired}}
+{{> "htmCreated" classApiMethodMethod="Page" rolesRequired="true"}}
+{{else}}
+{{> "htmCreated" classApiMethodMethod="Page" rolesRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles rolesRequired}}
+{{> "htmModified" classApiMethodMethod="Page" rolesRequired="true"}}
+{{else}}
+{{> "htmModified" classApiMethodMethod="Page" rolesRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles rolesRequired}}
+{{> "htmObjectId" classApiMethodMethod="Page" rolesRequired="true"}}
+{{else}}
+{{> "htmObjectId" classApiMethodMethod="Page" rolesRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
-{{> "htmArchived" classApiMethodMethod="Page"}}
-{{> "htmDeleted" classApiMethodMethod="Page"}}
+{{#ifContainsAnyRoles roles rolesRequired}}
+{{> "htmArchived" classApiMethodMethod="Page" rolesRequired="true"}}
+{{else}}
+{{> "htmArchived" classApiMethodMethod="Page" rolesRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles rolesRequired}}
+{{> "htmDeleted" classApiMethodMethod="Page" rolesRequired="true"}}
+{{else}}
+{{> "htmDeleted" classApiMethodMethod="Page" rolesRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
-{{> "htmPageId" classApiMethodMethod="Page"}}
-{{> "htmUrl" classApiMethodMethod="Page"}}
-{{> "htmUri" classApiMethodMethod="Page"}}
-{{> "htmAuthor" classApiMethodMethod="Page"}}
+{{#ifContainsAnyRoles roles rolesRequired}}
+{{> "htmPageId" classApiMethodMethod="Page" rolesRequired="true"}}
+{{else}}
+{{> "htmPageId" classApiMethodMethod="Page" rolesRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles rolesRequired}}
+{{> "htmUrl" classApiMethodMethod="Page" rolesRequired="true"}}
+{{else}}
+{{> "htmUrl" classApiMethodMethod="Page" rolesRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles rolesRequired}}
+{{> "htmUri" classApiMethodMethod="Page" rolesRequired="true"}}
+{{else}}
+{{> "htmUri" classApiMethodMethod="Page" rolesRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles rolesRequired}}
+{{> "htmAuthor" classApiMethodMethod="Page" rolesRequired="true"}}
+{{else}}
+{{> "htmAuthor" classApiMethodMethod="Page" rolesRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
-{{> "htmPageImageUri" classApiMethodMethod="Page"}}
+{{#ifContainsAnyRoles roles rolesRequired}}
+{{> "htmPageImageUri" classApiMethodMethod="Page" rolesRequired="true"}}
+{{else}}
+{{> "htmPageImageUri" classApiMethodMethod="Page" rolesRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 						</div>
 					</div>
@@ -673,7 +785,6 @@
 						<th>created</th>
 						<th></th>
 						<th>URL</th>
-						<th>URI</th>
 			</tr>
 {{/inline}}
 {{#*inline "tbody1SitePagePage"}}
@@ -700,11 +811,6 @@
 								<span class="white-space-pre-wrap ">{{url}}</span>
 							</a>
 						</td>
-						<td>
-							<a href="{{pageUrlPk}}">
-								<span class="white-space-pre-wrap ">{{uri}}</span>
-							</a>
-						</td>
 					</tr>
 		{{/each}}
 {{/inline}}
@@ -724,10 +830,6 @@
 				</td>
 			{{/if}}
 			{{#if getColumnUrl}}
-				<td>
-				</td>
-			{{/if}}
-			{{#if getColumnUri}}
 				<td>
 				</td>
 			{{/if}}
@@ -815,9 +917,9 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputCourseNum"}}
+														{{> "inputCourseNum" rolesRequired=rolesRequired}}
 													</div>
-	{{#ifContainsAnyRoles roles rolesRequired}}
+	{{#eq rolesRequired "true"}}
 		{{#eq 'Page' classApiMethodMethod}}
 															<div class="w3-cell w3-left-align w3-cell-top ">
 																<button
@@ -829,7 +931,7 @@
 																</button>
 															</div>
 														{{/eq}}
-	{{/ifContainsAnyRoles}}
+	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -838,7 +940,7 @@
 {{/inline}}
 
 {{#*inline "inputCourseNum"}}
-		{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq rolesRequired "true"}}
 														<input
 															type="text"
 															placeholder="Course Number"
@@ -867,7 +969,9 @@
 
 													{{else}}
 															<span class="varSitePage{{id}}CourseNum ">{{sitePage_.courseNum}}</span>
-		{{/ifContainsAnyRoles}}
+		{{else}}
+														<span class="varSitePage{{id}}CourseNum ">{{sitePage_.courseNum}}</span>
+		{{/eq}}
 {{/inline}}
 
 {{#*inline "htmLessonNum"}}
@@ -880,9 +984,9 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputLessonNum"}}
+														{{> "inputLessonNum" rolesRequired=rolesRequired}}
 													</div>
-	{{#ifContainsAnyRoles roles rolesRequired}}
+	{{#eq rolesRequired "true"}}
 		{{#eq 'Page' classApiMethodMethod}}
 															<div class="w3-cell w3-left-align w3-cell-top ">
 																<button
@@ -894,7 +998,7 @@
 																</button>
 															</div>
 														{{/eq}}
-	{{/ifContainsAnyRoles}}
+	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -903,7 +1007,7 @@
 {{/inline}}
 
 {{#*inline "inputLessonNum"}}
-		{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq rolesRequired "true"}}
 														<input
 															type="text"
 															placeholder="Lesson Number"
@@ -932,7 +1036,9 @@
 
 													{{else}}
 															<span class="varSitePage{{id}}LessonNum ">{{sitePage_.lessonNum}}</span>
-		{{/ifContainsAnyRoles}}
+		{{else}}
+														<span class="varSitePage{{id}}LessonNum ">{{sitePage_.lessonNum}}</span>
+		{{/eq}}
 {{/inline}}
 
 {{#*inline "htmUrl"}}
@@ -945,9 +1051,9 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputUrl"}}
+														{{> "inputUrl" rolesRequired=rolesRequired}}
 													</div>
-	{{#ifContainsAnyRoles roles rolesRequired}}
+	{{#eq rolesRequired "true"}}
 		{{#eq 'Page' classApiMethodMethod}}
 															<div class="w3-cell w3-left-align w3-cell-top ">
 																<button
@@ -959,7 +1065,7 @@
 																</button>
 															</div>
 														{{/eq}}
-	{{/ifContainsAnyRoles}}
+	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -968,7 +1074,7 @@
 {{/inline}}
 
 {{#*inline "inputUrl"}}
-		{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq rolesRequired "true"}}
 														<input
 															type="text"
 															placeholder="URL"
@@ -997,7 +1103,9 @@
 
 													{{else}}
 															<span class="varSitePage{{id}}Url ">{{sitePage_.url}}</span>
-		{{/ifContainsAnyRoles}}
+		{{else}}
+														<span class="varSitePage{{id}}Url ">{{sitePage_.url}}</span>
+		{{/eq}}
 {{/inline}}
 
 {{#*inline "htmUri"}}
@@ -1010,9 +1118,9 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputUri"}}
+														{{> "inputUri" rolesRequired=rolesRequired}}
 													</div>
-	{{#ifContainsAnyRoles roles rolesRequired}}
+	{{#eq rolesRequired "true"}}
 		{{#eq 'Page' classApiMethodMethod}}
 															<div class="w3-cell w3-left-align w3-cell-top ">
 																<button
@@ -1024,7 +1132,7 @@
 																</button>
 															</div>
 														{{/eq}}
-	{{/ifContainsAnyRoles}}
+	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -1033,7 +1141,7 @@
 {{/inline}}
 
 {{#*inline "inputUri"}}
-		{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq rolesRequired "true"}}
 														<input
 															type="text"
 															placeholder="URI"
@@ -1062,7 +1170,9 @@
 
 													{{else}}
 															<span class="varSitePage{{id}}Uri ">{{sitePage_.uri}}</span>
-		{{/ifContainsAnyRoles}}
+		{{else}}
+														<span class="varSitePage{{id}}Uri ">{{sitePage_.uri}}</span>
+		{{/eq}}
 {{/inline}}
 
 {{#*inline "htmPageId"}}
@@ -1075,9 +1185,9 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputPageId"}}
+														{{> "inputPageId" rolesRequired=rolesRequired}}
 													</div>
-	{{#ifContainsAnyRoles roles rolesRequired}}
+	{{#eq rolesRequired "true"}}
 		{{#eq 'Page' classApiMethodMethod}}
 															<div class="w3-cell w3-left-align w3-cell-top ">
 																<button
@@ -1089,7 +1199,7 @@
 																</button>
 															</div>
 														{{/eq}}
-	{{/ifContainsAnyRoles}}
+	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -1098,7 +1208,7 @@
 {{/inline}}
 
 {{#*inline "inputPageId"}}
-		{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq rolesRequired "true"}}
 														<input
 															type="text"
 															placeholder="Page ID"
@@ -1127,7 +1237,9 @@
 
 													{{else}}
 															<span class="varSitePage{{id}}PageId ">{{sitePage_.pageId}}</span>
-		{{/ifContainsAnyRoles}}
+		{{else}}
+														<span class="varSitePage{{id}}PageId ">{{sitePage_.pageId}}</span>
+		{{/eq}}
 {{/inline}}
 
 {{#*inline "htmH1"}}
@@ -1140,9 +1252,9 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputH1"}}
+														{{> "inputH1" rolesRequired=rolesRequired}}
 													</div>
-	{{#ifContainsAnyRoles roles rolesRequired}}
+	{{#eq rolesRequired "true"}}
 		{{#eq 'Page' classApiMethodMethod}}
 															<div class="w3-cell w3-left-align w3-cell-top ">
 																<button
@@ -1154,7 +1266,7 @@
 																</button>
 															</div>
 														{{/eq}}
-	{{/ifContainsAnyRoles}}
+	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -1163,7 +1275,7 @@
 {{/inline}}
 
 {{#*inline "inputH1"}}
-		{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq rolesRequired "true"}}
 														<input
 															type="text"
 															placeholder="header 1"
@@ -1192,7 +1304,9 @@
 
 													{{else}}
 															<span class="varSitePage{{id}}H1 ">{{sitePage_.h1}}</span>
-		{{/ifContainsAnyRoles}}
+		{{else}}
+														<span class="varSitePage{{id}}H1 ">{{sitePage_.h1}}</span>
+		{{/eq}}
 {{/inline}}
 
 {{#*inline "htmH2"}}
@@ -1205,9 +1319,9 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputH2"}}
+														{{> "inputH2" rolesRequired=rolesRequired}}
 													</div>
-	{{#ifContainsAnyRoles roles rolesRequired}}
+	{{#eq rolesRequired "true"}}
 		{{#eq 'Page' classApiMethodMethod}}
 															<div class="w3-cell w3-left-align w3-cell-top ">
 																<button
@@ -1219,7 +1333,7 @@
 																</button>
 															</div>
 														{{/eq}}
-	{{/ifContainsAnyRoles}}
+	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -1228,7 +1342,7 @@
 {{/inline}}
 
 {{#*inline "inputH2"}}
-		{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq rolesRequired "true"}}
 														<input
 															type="text"
 															placeholder="header 2"
@@ -1257,7 +1371,9 @@
 
 													{{else}}
 															<span class="varSitePage{{id}}H2 ">{{sitePage_.h2}}</span>
-		{{/ifContainsAnyRoles}}
+		{{else}}
+														<span class="varSitePage{{id}}H2 ">{{sitePage_.h2}}</span>
+		{{/eq}}
 {{/inline}}
 
 {{#*inline "htmAuthor"}}
@@ -1270,9 +1386,9 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputAuthor"}}
+														{{> "inputAuthor" rolesRequired=rolesRequired}}
 													</div>
-	{{#ifContainsAnyRoles roles rolesRequired}}
+	{{#eq rolesRequired "true"}}
 		{{#eq 'Page' classApiMethodMethod}}
 															<div class="w3-cell w3-left-align w3-cell-top ">
 																<button
@@ -1284,7 +1400,7 @@
 																</button>
 															</div>
 														{{/eq}}
-	{{/ifContainsAnyRoles}}
+	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -1293,7 +1409,7 @@
 {{/inline}}
 
 {{#*inline "inputAuthor"}}
-		{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq rolesRequired "true"}}
 														<input
 															type="text"
 															placeholder="author"
@@ -1322,7 +1438,9 @@
 
 													{{else}}
 															<span class="varSitePage{{id}}Author ">{{sitePage_.author}}</span>
-		{{/ifContainsAnyRoles}}
+		{{else}}
+														<span class="varSitePage{{id}}Author ">{{sitePage_.author}}</span>
+		{{/eq}}
 {{/inline}}
 
 {{#*inline "htmPageImageUri"}}
@@ -1335,9 +1453,9 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputPageImageUri"}}
+														{{> "inputPageImageUri" rolesRequired=rolesRequired}}
 													</div>
-	{{#ifContainsAnyRoles roles rolesRequired}}
+	{{#eq rolesRequired "true"}}
 		{{#eq 'Page' classApiMethodMethod}}
 															<div class="w3-cell w3-left-align w3-cell-top ">
 																<button
@@ -1349,7 +1467,7 @@
 																</button>
 															</div>
 														{{/eq}}
-	{{/ifContainsAnyRoles}}
+	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -1358,7 +1476,7 @@
 {{/inline}}
 
 {{#*inline "inputPageImageUri"}}
-		{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq rolesRequired "true"}}
 														<input
 															type="text"
 															placeholder="imageUri"
@@ -1387,5 +1505,7 @@
 
 													{{else}}
 															<span class="varSitePage{{id}}PageImageUri ">{{sitePage_.pageImageUri}}</span>
-		{{/ifContainsAnyRoles}}
+		{{else}}
+														<span class="varSitePage{{id}}PageImageUri ">{{sitePage_.pageImageUri}}</span>
+		{{/eq}}
 {{/inline}}

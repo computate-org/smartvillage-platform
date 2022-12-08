@@ -638,7 +638,7 @@
 													<div class="w3-cell ">
 														<div class="w3-rest ">
 															<span class="">
-																{{> "inputPk"}}
+																{{> "inputPk" rolesRequired=rolesRequired}}
 															</span>
 														</div>
 													</div>
@@ -662,8 +662,9 @@
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputInheritPk"}}
+														{{> "inputInheritPk" rolesRequired=rolesRequired}}
 													</div>
+	{{#eq rolesRequired "true"}}
 		{{#eq 'Page' classApiMethodMethod}}
 															<div class="w3-cell w3-left-align w3-cell-top ">
 																<button
@@ -675,6 +676,7 @@
 																</button>
 															</div>
 														{{/eq}}
+	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -683,6 +685,7 @@
 {{/inline}}
 
 {{#*inline "inputInheritPk"}}
+		{{#eq rolesRequired "true"}}
 														<input
 															type="text"
 															title="An optional inherited primary key from a legacy system for this object in the database"
@@ -708,6 +711,9 @@
 	{{/eq}}
 														/>
 
+		{{else}}
+														<span class="varBaseModel{{pk}}InheritPk ">{{baseModel_.inheritPk}}</span>
+		{{/eq}}
 {{/inline}}
 
 {{#*inline "htmCreated"}}
@@ -720,7 +726,7 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputCreated"}}
+														{{> "inputCreated" rolesRequired=rolesRequired}}
 													</div>
 												</div>
 											</div>
@@ -747,7 +753,7 @@
 													<div class="w3-cell ">
 														<div class="w3-rest ">
 															<span class="">
-																{{> "inputModified"}}
+																{{> "inputModified" rolesRequired=rolesRequired}}
 															</span>
 														</div>
 													</div>
@@ -774,7 +780,7 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputArchived"}}
+														{{> "inputArchived" rolesRequired=rolesRequired}}
 													</div>
 												</div>
 											</div>
@@ -784,6 +790,7 @@
 {{/inline}}
 
 {{#*inline "inputArchived"}}
+		{{#eq rolesRequired "true"}}
 	{{#eq 'Page' classApiMethodMethod}}
 															<input
 																type="checkbox"
@@ -821,6 +828,9 @@
 														</select>
 	{{/eq}}
 
+		{{else}}
+														<span class="varBaseModel{{pk}}Archived ">{{baseModel_.archived}}</span>
+		{{/eq}}
 {{/inline}}
 
 {{#*inline "htmDeleted"}}
@@ -833,7 +843,7 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputDeleted"}}
+														{{> "inputDeleted" rolesRequired=rolesRequired}}
 													</div>
 												</div>
 											</div>
@@ -843,6 +853,7 @@
 {{/inline}}
 
 {{#*inline "inputDeleted"}}
+		{{#eq rolesRequired "true"}}
 	{{#eq 'Page' classApiMethodMethod}}
 															<input
 																type="checkbox"
@@ -880,6 +891,9 @@
 														</select>
 	{{/eq}}
 
+		{{else}}
+														<span class="varBaseModel{{pk}}Deleted ">{{baseModel_.deleted}}</span>
+		{{/eq}}
 {{/inline}}
 
 {{#*inline "htmSessionId"}}
@@ -889,7 +903,7 @@
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputSessionId"}}
+														{{> "inputSessionId" rolesRequired=rolesRequired}}
 													</div>
 												</div>
 											</div>
@@ -911,7 +925,7 @@
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputUserKey"}}
+														{{> "inputUserKey" rolesRequired=rolesRequired}}
 													</div>
 												</div>
 											</div>
@@ -935,7 +949,7 @@
 													<div class="w3-cell ">
 														<div class="w3-rest ">
 															<span class="">
-																{{> "inputObjectTitle"}}
+																{{> "inputObjectTitle" rolesRequired=rolesRequired}}
 															</span>
 														</div>
 													</div>
@@ -964,7 +978,7 @@
 													<div class="w3-cell ">
 														<div class="w3-rest ">
 															<span class="">
-																{{> "inputObjectId"}}
+																{{> "inputObjectId" rolesRequired=rolesRequired}}
 															</span>
 														</div>
 													</div>

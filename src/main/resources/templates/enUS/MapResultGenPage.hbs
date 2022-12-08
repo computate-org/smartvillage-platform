@@ -395,25 +395,77 @@
 					<div class="" id="searchpageMapResultFormValues">
 						<div id="searchpageMapResultForm">
 							<div class="w3-cell-row ">
-{{> "htmCreated" classApiMethodMethod="Page"}}
-{{> "htmModified" classApiMethodMethod="Page"}}
-{{> "htmObjectId" classApiMethodMethod="Page"}}
+{{#ifContainsAnyRoles roles rolesRequired}}
+{{> "htmCreated" classApiMethodMethod="Page" rolesRequired="true"}}
+{{else}}
+{{> "htmCreated" classApiMethodMethod="Page" rolesRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles rolesRequired}}
+{{> "htmModified" classApiMethodMethod="Page" rolesRequired="true"}}
+{{else}}
+{{> "htmModified" classApiMethodMethod="Page" rolesRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles rolesRequired}}
+{{> "htmObjectId" classApiMethodMethod="Page" rolesRequired="true"}}
+{{else}}
+{{> "htmObjectId" classApiMethodMethod="Page" rolesRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
-{{> "htmArchived" classApiMethodMethod="Page"}}
-{{> "htmDeleted" classApiMethodMethod="Page"}}
+{{#ifContainsAnyRoles roles rolesRequired}}
+{{> "htmArchived" classApiMethodMethod="Page" rolesRequired="true"}}
+{{else}}
+{{> "htmArchived" classApiMethodMethod="Page" rolesRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles rolesRequired}}
+{{> "htmDeleted" classApiMethodMethod="Page" rolesRequired="true"}}
+{{else}}
+{{> "htmDeleted" classApiMethodMethod="Page" rolesRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
-{{> "htmSimulationName" classApiMethodMethod="Page"}}
-{{> "htmSimulationKey" classApiMethodMethod="Page"}}
-{{> "htmSumocfgPath" classApiMethodMethod="Page"}}
+{{#ifContainsAnyRoles roles rolesRequired}}
+{{> "htmSimulationName" classApiMethodMethod="Page" rolesRequired="true"}}
+{{else}}
+{{> "htmSimulationName" classApiMethodMethod="Page" rolesRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles rolesRequired}}
+{{> "htmSimulationKey" classApiMethodMethod="Page" rolesRequired="true"}}
+{{else}}
+{{> "htmSimulationKey" classApiMethodMethod="Page" rolesRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles rolesRequired}}
+{{> "htmSumocfgPath" classApiMethodMethod="Page" rolesRequired="true"}}
+{{else}}
+{{> "htmSumocfgPath" classApiMethodMethod="Page" rolesRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
-{{> "htmTime" classApiMethodMethod="Page"}}
-{{> "htmDateTime" classApiMethodMethod="Page"}}
-{{> "htmStep" classApiMethodMethod="Page"}}
-{{> "htmLocation" classApiMethodMethod="Page"}}
-{{> "htmColor" classApiMethodMethod="Page"}}
+{{#ifContainsAnyRoles roles rolesRequired}}
+{{> "htmTime" classApiMethodMethod="Page" rolesRequired="true"}}
+{{else}}
+{{> "htmTime" classApiMethodMethod="Page" rolesRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles rolesRequired}}
+{{> "htmDateTime" classApiMethodMethod="Page" rolesRequired="true"}}
+{{else}}
+{{> "htmDateTime" classApiMethodMethod="Page" rolesRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles rolesRequired}}
+{{> "htmStep" classApiMethodMethod="Page" rolesRequired="true"}}
+{{else}}
+{{> "htmStep" classApiMethodMethod="Page" rolesRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles rolesRequired}}
+{{> "htmLocation" classApiMethodMethod="Page" rolesRequired="true"}}
+{{else}}
+{{> "htmLocation" classApiMethodMethod="Page" rolesRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles rolesRequired}}
+{{> "htmColor" classApiMethodMethod="Page" rolesRequired="true"}}
+{{else}}
+{{> "htmColor" classApiMethodMethod="Page" rolesRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 						</div>
 					</div>
@@ -671,9 +723,9 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputSimulationName"}}
+														{{> "inputSimulationName" rolesRequired=rolesRequired}}
 													</div>
-	{{#ifContainsAnyRoles roles rolesRequired}}
+	{{#eq rolesRequired "true"}}
 		{{#eq 'Page' classApiMethodMethod}}
 															<div class="w3-cell w3-left-align w3-cell-top ">
 																<button
@@ -685,7 +737,7 @@
 																</button>
 															</div>
 														{{/eq}}
-	{{/ifContainsAnyRoles}}
+	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -694,7 +746,7 @@
 {{/inline}}
 
 {{#*inline "inputSimulationName"}}
-		{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq rolesRequired "true"}}
 														<input
 															type="text"
 															placeholder="simulation name"
@@ -724,7 +776,9 @@
 														{{#ifContainsKeys userKeys}}
 															<span class="varMapResult{{id}}SimulationName ">{{mapResult_.simulationName}}</span>
 			{{/ifContainsKeys}}
-		{{/ifContainsAnyRoles}}
+		{{else}}
+														<span class="varMapResult{{id}}SimulationName ">{{mapResult_.simulationName}}</span>
+		{{/eq}}
 {{/inline}}
 
 {{#*inline "htmSumocfgPath"}}
@@ -737,9 +791,9 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputSumocfgPath"}}
+														{{> "inputSumocfgPath" rolesRequired=rolesRequired}}
 													</div>
-	{{#ifContainsAnyRoles roles rolesRequired}}
+	{{#eq rolesRequired "true"}}
 		{{#eq 'Page' classApiMethodMethod}}
 															<div class="w3-cell w3-left-align w3-cell-top ">
 																<button
@@ -751,7 +805,7 @@
 																</button>
 															</div>
 														{{/eq}}
-	{{/ifContainsAnyRoles}}
+	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -760,7 +814,7 @@
 {{/inline}}
 
 {{#*inline "inputSumocfgPath"}}
-		{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq rolesRequired "true"}}
 														<input
 															type="text"
 															placeholder="sumocfg path"
@@ -790,7 +844,9 @@
 														{{#ifContainsKeys userKeys}}
 															<span class="varMapResult{{id}}SumocfgPath ">{{mapResult_.sumocfgPath}}</span>
 			{{/ifContainsKeys}}
-		{{/ifContainsAnyRoles}}
+		{{else}}
+														<span class="varMapResult{{id}}SumocfgPath ">{{mapResult_.sumocfgPath}}</span>
+		{{/eq}}
 {{/inline}}
 
 {{#*inline "htmSimulationKey"}}
@@ -803,9 +859,9 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputSimulationKey"}}
+														{{> "inputSimulationKey" rolesRequired=rolesRequired}}
 													</div>
-	{{#ifContainsAnyRoles roles rolesRequired}}
+	{{#eq rolesRequired "true"}}
 		{{#eq 'Page' classApiMethodMethod}}
 															<div class="w3-cell w3-left-align w3-cell-top ">
 																<button
@@ -817,7 +873,7 @@
 																</button>
 															</div>
 														{{/eq}}
-	{{/ifContainsAnyRoles}}
+	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -826,7 +882,7 @@
 {{/inline}}
 
 {{#*inline "inputSimulationKey"}}
-		{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq rolesRequired "true"}}
 														<input
 															type="text"
 															placeholder="Simulation"
@@ -857,7 +913,9 @@
 														{{#ifContainsKeys userKeys}}
 															<span class="varMapResult{{id}}SimulationKey ">{{mapResult_.simulationKey}}</span>
 			{{/ifContainsKeys}}
-		{{/ifContainsAnyRoles}}
+		{{else}}
+														<span class="varMapResult{{id}}SimulationKey ">{{mapResult_.simulationKey}}</span>
+		{{/eq}}
 {{/inline}}
 
 {{#*inline "htmTimeStepId"}}
@@ -870,9 +928,9 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputTimeStepId"}}
+														{{> "inputTimeStepId" rolesRequired=rolesRequired}}
 													</div>
-	{{#ifContainsAnyRoles roles rolesRequired}}
+	{{#eq rolesRequired "true"}}
 		{{#eq 'Page' classApiMethodMethod}}
 															<div class="w3-cell w3-left-align w3-cell-top ">
 																<button
@@ -884,7 +942,7 @@
 																</button>
 															</div>
 														{{/eq}}
-	{{/ifContainsAnyRoles}}
+	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -893,7 +951,7 @@
 {{/inline}}
 
 {{#*inline "inputTimeStepId"}}
-		{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq rolesRequired "true"}}
 														<input
 															type="text"
 															placeholder="Time Step"
@@ -924,7 +982,9 @@
 														{{#ifContainsKeys userKeys}}
 															<span class="varMapResult{{id}}TimeStepId ">{{mapResult_.timeStepId}}</span>
 			{{/ifContainsKeys}}
-		{{/ifContainsAnyRoles}}
+		{{else}}
+														<span class="varMapResult{{id}}TimeStepId ">{{mapResult_.timeStepId}}</span>
+		{{/eq}}
 {{/inline}}
 
 {{#*inline "htmTime"}}
@@ -937,9 +997,9 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputTime"}}
+														{{> "inputTime" rolesRequired=rolesRequired}}
 													</div>
-	{{#ifContainsAnyRoles roles rolesRequired}}
+	{{#eq rolesRequired "true"}}
 		{{#eq 'Page' classApiMethodMethod}}
 															<div class="w3-cell w3-left-align w3-cell-top ">
 																<button
@@ -951,7 +1011,7 @@
 																</button>
 															</div>
 														{{/eq}}
-	{{/ifContainsAnyRoles}}
+	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -960,7 +1020,7 @@
 {{/inline}}
 
 {{#*inline "inputTime"}}
-		{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq rolesRequired "true"}}
 														<input
 															type="text"
 															placeholder="Time in seconds"
@@ -991,7 +1051,9 @@
 														{{#ifContainsKeys userKeys}}
 															<span class="varMapResult{{id}}Time ">{{mapResult_.time}}</span>
 			{{/ifContainsKeys}}
-		{{/ifContainsAnyRoles}}
+		{{else}}
+														<span class="varMapResult{{id}}Time ">{{mapResult_.time}}</span>
+		{{/eq}}
 {{/inline}}
 
 {{#*inline "htmDateTime"}}
@@ -1004,9 +1066,9 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputDateTime"}}
+														{{> "inputDateTime" rolesRequired=rolesRequired}}
 													</div>
-	{{#ifContainsAnyRoles roles rolesRequired}}
+	{{#eq rolesRequired "true"}}
 		{{#eq 'Page' classApiMethodMethod}}
 															<div class="w3-cell w3-left-align w3-cell-top ">
 																<button
@@ -1018,7 +1080,7 @@
 																</button>
 															</div>
 														{{/eq}}
-	{{/ifContainsAnyRoles}}
+	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -1027,7 +1089,7 @@
 {{/inline}}
 
 {{#*inline "inputDateTime"}}
-		{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq rolesRequired "true"}}
 														<input
 																type="text"
 																class="w3-input w3-border datetimepicker setDateTime classMapResult inputMapResult{{id}}DateTime w3-input w3-border "
@@ -1045,7 +1107,9 @@
 														{{#ifContainsKeys userKeys}}
 															<span class="varMapResult{{id}}DateTime ">{{mapResult_.dateTime}}</span>
 			{{/ifContainsKeys}}
-		{{/ifContainsAnyRoles}}
+		{{else}}
+														<span class="varMapResult{{id}}DateTime ">{{mapResult_.dateTime}}</span>
+		{{/eq}}
 {{/inline}}
 
 {{#*inline "htmX"}}
@@ -1055,9 +1119,9 @@
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputX"}}
+														{{> "inputX" rolesRequired=rolesRequired}}
 													</div>
-	{{#ifContainsAnyRoles roles rolesRequired}}
+	{{#eq rolesRequired "true"}}
 		{{#eq 'Page' classApiMethodMethod}}
 															<div class="w3-cell w3-left-align w3-cell-top ">
 																<button
@@ -1069,7 +1133,7 @@
 																</button>
 															</div>
 														{{/eq}}
-	{{/ifContainsAnyRoles}}
+	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -1078,7 +1142,7 @@
 {{/inline}}
 
 {{#*inline "inputX"}}
-		{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq rolesRequired "true"}}
 														<input
 															type="text"
 															id="{{classApiMethodMethod}}_x"
@@ -1107,7 +1171,9 @@
 														{{#ifContainsKeys userKeys}}
 															<span class="varMapResult{{id}}X ">{{mapResult_.x}}</span>
 			{{/ifContainsKeys}}
-		{{/ifContainsAnyRoles}}
+		{{else}}
+														<span class="varMapResult{{id}}X ">{{mapResult_.x}}</span>
+		{{/eq}}
 {{/inline}}
 
 {{#*inline "htmY"}}
@@ -1117,9 +1183,9 @@
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputY"}}
+														{{> "inputY" rolesRequired=rolesRequired}}
 													</div>
-	{{#ifContainsAnyRoles roles rolesRequired}}
+	{{#eq rolesRequired "true"}}
 		{{#eq 'Page' classApiMethodMethod}}
 															<div class="w3-cell w3-left-align w3-cell-top ">
 																<button
@@ -1131,7 +1197,7 @@
 																</button>
 															</div>
 														{{/eq}}
-	{{/ifContainsAnyRoles}}
+	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -1140,7 +1206,7 @@
 {{/inline}}
 
 {{#*inline "inputY"}}
-		{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq rolesRequired "true"}}
 														<input
 															type="text"
 															id="{{classApiMethodMethod}}_y"
@@ -1169,7 +1235,9 @@
 														{{#ifContainsKeys userKeys}}
 															<span class="varMapResult{{id}}Y ">{{mapResult_.y}}</span>
 			{{/ifContainsKeys}}
-		{{/ifContainsAnyRoles}}
+		{{else}}
+														<span class="varMapResult{{id}}Y ">{{mapResult_.y}}</span>
+		{{/eq}}
 {{/inline}}
 
 {{#*inline "htmLocation"}}
@@ -1182,9 +1250,9 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputLocation"}}
+														{{> "inputLocation" rolesRequired=rolesRequired}}
 													</div>
-	{{#ifContainsAnyRoles roles rolesRequired}}
+	{{#eq rolesRequired "true"}}
 		{{#eq 'Page' classApiMethodMethod}}
 															<div class="w3-cell w3-left-align w3-cell-top ">
 																<button
@@ -1196,7 +1264,7 @@
 																</button>
 															</div>
 														{{/eq}}
-	{{/ifContainsAnyRoles}}
+	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -1205,7 +1273,7 @@
 {{/inline}}
 
 {{#*inline "inputLocation"}}
-		{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq rolesRequired "true"}}
 														<input
 															type="text"
 															placeholder="location"
@@ -1235,7 +1303,9 @@
 														{{#ifContainsKeys userKeys}}
 															<span class="varMapResult{{id}}Location ">{{mapResult_.location}}</span>
 			{{/ifContainsKeys}}
-		{{/ifContainsAnyRoles}}
+		{{else}}
+														<span class="varMapResult{{id}}Location ">{{mapResult_.location}}</span>
+		{{/eq}}
 {{/inline}}
 
 {{#*inline "htmColor"}}
@@ -1248,9 +1318,9 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputColor"}}
+														{{> "inputColor" rolesRequired=rolesRequired}}
 													</div>
-	{{#ifContainsAnyRoles roles rolesRequired}}
+	{{#eq rolesRequired "true"}}
 		{{#eq 'Page' classApiMethodMethod}}
 															<div class="w3-cell w3-left-align w3-cell-top ">
 																<button
@@ -1262,7 +1332,7 @@
 																</button>
 															</div>
 														{{/eq}}
-	{{/ifContainsAnyRoles}}
+	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -1271,7 +1341,7 @@
 {{/inline}}
 
 {{#*inline "inputColor"}}
-		{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq rolesRequired "true"}}
 														<input
 															type="text"
 															placeholder="color"
@@ -1301,7 +1371,9 @@
 														{{#ifContainsKeys userKeys}}
 															<span class="varMapResult{{id}}Color ">{{mapResult_.color}}</span>
 			{{/ifContainsKeys}}
-		{{/ifContainsAnyRoles}}
+		{{else}}
+														<span class="varMapResult{{id}}Color ">{{mapResult_.color}}</span>
+		{{/eq}}
 {{/inline}}
 
 {{#*inline "htmStep"}}
@@ -1314,7 +1386,7 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputStep"}}
+														{{> "inputStep" rolesRequired=rolesRequired}}
 													</div>
 												</div>
 											</div>
@@ -1324,7 +1396,7 @@
 {{/inline}}
 
 {{#*inline "inputStep"}}
-		{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq rolesRequired "true"}}
 	{{#eq 'Page' classApiMethodMethod}}
 															<input
 																type="checkbox"
@@ -1366,5 +1438,7 @@
 														{{#ifContainsKeys userKeys}}
 															<span class="varMapResult{{id}}Step ">{{mapResult_.step}}</span>
 			{{/ifContainsKeys}}
-		{{/ifContainsAnyRoles}}
+		{{else}}
+														<span class="varMapResult{{id}}Step ">{{mapResult_.step}}</span>
+		{{/eq}}
 {{/inline}}
