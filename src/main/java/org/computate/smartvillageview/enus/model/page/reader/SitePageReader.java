@@ -109,9 +109,9 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 	}
 
 	/**
-	 * Description: Import page
-	 * Val.Complete.enUS:Importing page %s completed. 
-	 * Val.Fail.enUS:Importing page %s failed. 
+	 * Description: Generate I18n path
+	 * Val.Complete.enUS:Generating i18n path for page %s completed. 
+	 * Val.Fail.enUS:Generating i18n path for page %s failed. 
 	 */
 	private Future<JsonObject> i18nGeneratorPath(JsonObject i18n, YamlProcessor yamlProcessor, List<String> i18nPaths, Integer i) {
 		Promise<JsonObject> promise = Promise.promise();
@@ -123,15 +123,15 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 					i18nGeneratorPath(i18n3, yamlProcessor, i18nPaths, i + 1).onSuccess(i18n4 -> {
 						promise.complete(i18n4);
 					}).onFailure(ex -> {
-						LOG.error(String.format(importSitePageFail, SitePage.CLASS_SIMPLE_NAME), ex);
+						LOG.error(String.format(i18nGeneratorPathFail, SitePage.CLASS_SIMPLE_NAME), ex);
 						promise.fail(ex);
 					});
 				}).onFailure(ex -> {
-					LOG.error(String.format(importSitePageFail, SitePage.CLASS_SIMPLE_NAME), ex);
+					LOG.error(String.format(i18nGeneratorPathFail, SitePage.CLASS_SIMPLE_NAME), ex);
 					promise.fail(ex);
 				});
 			}).onFailure(ex -> {
-				LOG.error(String.format(importSitePageFail, SitePage.CLASS_SIMPLE_NAME), ex);
+				LOG.error(String.format(i18nGeneratorPathFail, SitePage.CLASS_SIMPLE_NAME), ex);
 				promise.fail(ex);
 			});
 		} else {
@@ -400,8 +400,7 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 					// Split text by lines and index each line as it's own value
 					Template template = handlebars.compileInline(text);
 					Context engineContext = Context.newBuilder(json.getMap()).resolver(templateEngine.getResolvers()).build();
-					Buffer buffer = Buffer.buffer(template.apply(engineContext));
-					String text2 = buffer.toString();
+					String text2 = template.apply(engineContext).replace("&#x27;", "'");
 					if(text2.contains("{{")) {
 						Template template2 = handlebars.compileInline(text2);
 						Context engineContext2 = Context.newBuilder(json.getMap()).resolver(templateEngine.getResolvers()).build();

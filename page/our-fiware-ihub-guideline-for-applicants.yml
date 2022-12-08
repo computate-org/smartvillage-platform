@@ -541,11 +541,12 @@ htmBody:
                   Both cases, you need to provide resource evidence. 
           - e: table
             a:
-              class: w3-table 
+              class: w3-table-all 
             in:
               - e: thead
                 in:
                   - e: tr
+                    class: w3-black 
                     in:
                       - e: td
                         text: Resource
@@ -644,6 +645,220 @@ htmBody:
                           - e: i
                             class: fa-solid fa-square-check padding-right-quarter-em
                       - e: td
+      - e: div
+        a:
+          class: w3-padding 
+        in:
+          - e: h3
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-buildings padding-right-quarter-em
+              - e: span
+                text: 5.2.3.1 Activities overview
+          - e: h4
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-building-flag padding-right-quarter-em
+              - e: span
+                text: Our iHub activities
+          - e: p
+            a:
+              class: w3-padding 
+            in:
+              - e: span
+                text: |
+                  You need to put the number of activities that have already performed for each type of activity described in the document. 
+                  The document will calculate your final mark in each category according to each activity score. 
+                  At the end, you need to compare the score of each category and total scoring with thresholds defined in Annex I. 
+      - e: div
+        a:
+          class: w3-padding 
+        in:
+          - e: h3
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-buildings padding-right-quarter-em
+              - e: span
+                text: 5.2.3.2 Activities evidences
+          - e: h4
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-building-flag padding-right-quarter-em
+              - e: span
+                text: Evidence of our iHub activities
+          - e: p
+            a:
+              class: w3-padding 
+            in:
+              - e: span
+                text: |
+                  In order to provide evidence of each activity included in the activity overview, you need include specific details for each one. The typical information requested is: 
+          - e: ul
+            in:
+              - e: li
+                in:
+                  - e: span
+                    text: |
+                      Description: (Required)
+              - e: li
+                in:
+                  - e: span
+                    text: |
+                      Date (dd/mm/yy): (Required)
+              - e: li
+                in:
+                  - e: span
+                    text: |
+                      Target Audience:
+              - e: li
+                in:
+                  - e: span
+                    text: |
+                      Topics and FIWARE Technologies
+              - e: li
+                in:
+                  - e: span
+                    text: |
+                      Number of participants
+              - e: li
+                in:
+                  - e: span
+                    text: |
+                      Photo or media
+              - e: li
+                in:
+                  - e: span
+                    text: |
+                      Additional info
+          - e: div
+            a:
+              class: w3-padding 
+            in:
+              - e: h5
+                a:
+                  class: ""
+                in:
+                  - e: i
+                    a:
+                      class: fa-solid fa-buildings padding-right-quarter-em
+                  - e: span
+                    text: Meeting at Boston University with FIWARE about our Research and future FIWARE iHub
+                    
+              - e: p
+                a:
+                  class: w3-padding 
+                in:
+                  - e: ul
+                    in:
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Description
+                          - e: dd
+                            text: |-
+                              Christopher Tate from Red Hat, together our professor and students at Boston University, and Juanjo CTO of FIWARE met together at Boston University Campus to discuss a new FIWARE Innovation Hub. 
+                              A FIWARE iHub, gravitating around university activities, is a good basis for creating an ecosystem, training, and research for the concept of smart cities. 
+                              We all agreed on the benefits of building a FIWARE iHub, supporting the use of FIWARE technologies, together between Boston University and Red Hat. 
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Date (dd/mm/yy)
+                          - e: dd
+                            text: |-
+                              26/09/22
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Target Audience
+                          - e: dd
+                            text: |-
+                              Red Hat Social Innovation Program, Boston University Research Team focused on Smart Cities, FIWARE CTO
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Topics and FIWARE Technologies
+                          - e: dd
+                            text: |-
+                              The creation of a FIWARE iHub, smart city university research, open source software development, Orion LD Context Broker integration and deployment on Red Hat OpenShift. 
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Number of participants
+                          - e: dd
+                            text: |-
+                              11
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Additional info
+                          - e: dd
+                            in:
+                              - e: span
+                                text: |-
+                                  The resulting meeting is moving Red Hat and Boston University forward towards an incubated FIWARE iHub. 
+                                  We have successfully contributed 
+                              - e: a
+                                href: https://github.com/FIWARE-Ops/marinera/pulls?q=is%3Apr+author%3Acomputate
+                                text: |-
+                                  pull requests to adopt OpenShift Local and Kubernetes Kustomize Native Configuration Management scripts 
+                              - e: span
+                                text: |-
+                                  to make installation of the Orion LD Context Broker for development even easier than before. 
+                              - e: span
+                                text: |-
+                                  We are also planning an upcoming 
+                              - e: a
+                                href: https://github.com/orgs/rh-impact/projects/6
+                                text: |-
+                                  hackathon in North America 
+                              - e: span
+                                text: |-
+                                  and another 
+                              - e: a
+                                href: https://github.com/orgs/rh-impact/projects/5
+                                text: |-
+                                  hackathon in Europe 
+                              - e: span
+                                text: |-
+                                  to work as teams with Smart Data Models and the Orion LD Context Broker on OpenShift Local. 
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Photo or media
+              - e: p
+                a:
+                  class: w3-padding 
+                in:
+                  - e: img
+                    a:
+                      class: w3-image 
+                      src: "{{ page.staticBaseUrl }}/png/what-is-this-project/image.png"
   - e: div
     label:
       - infographic
