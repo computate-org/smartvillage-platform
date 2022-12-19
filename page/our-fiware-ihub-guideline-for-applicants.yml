@@ -859,6 +859,211 @@ htmBody:
                     a:
                       class: w3-image 
                       src: "{{ page.staticBaseUrl }}/png/what-is-this-project/image.png"
+      - e: div
+        a:
+          class: w3-padding 
+        in:
+          - e: h3
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-buildings padding-right-quarter-em
+              - e: span
+                text: 5.2.3.3 Resources overview
+          - e: h4
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-building-flag padding-right-quarter-em
+              - e: span
+                text: The resources required for a FIWARE iHub
+          - e: p
+            a:
+              class: w3-padding 
+            in:
+              - e: span
+                text: |
+                  You need to fulfil in green each cell of each resource you already have on the document. 
+                  You need all resources marked with x in each category to be eligible as that iHub level. 
+                  You need to reach at least the 85% of all resources required for each iHub level. 
+      - e: div
+        a:
+          class: w3-padding 
+        in:
+          - e: h3
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-buildings padding-right-quarter-em
+              - e: span
+                text: 5.2.3.4 Resources evidences
+          - e: h4
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-building-flag padding-right-quarter-em
+              - e: span
+                text: The evidence of our FIWARE iHub resources
+          - e: p
+            a:
+              class: w3-padding 
+            in:
+              - e: span
+                text: |
+                  The aim of the resources evidence file is to provide evidence of resources you have (for example, pictures of physical venue, audio-visual equipment, labs etc.) in the same way that Activities evidence. 
+          - e: ul
+            in:
+              - e: li
+                in:
+                  - e: span
+                    text: |
+                      iHub Name
+              - e: li
+                in:
+                  - e: span
+                    text: |
+                      Contact info
+              - e: li
+                in:
+                  - e: span
+                    text: |
+                      Expected iHub Level
+              - e: li
+                in:
+                  - e: span
+                    text: |
+                      Country
+              - e: li
+                in:
+                  - e: span
+                    text: |
+                      Resources Resume
+              - e: li
+                in:
+                  - e: span
+                    text: |
+                      Resource Code
+              - e: li
+                in:
+                  - e: span
+                    text: |
+                      Date
+              - e: li
+                in:
+                  - e: span
+                    text: |
+                      Resource Name
+              - e: li
+                in:
+                  - e: span
+                    text: |
+                      Resource example
+              - e: li
+                in:
+                  - e: span
+                    text: |
+                      Description
+              - e: li
+                in:
+                  - e: span
+                    text: |
+                      Example description
+              - e: li
+                in:
+                  - e: span
+                    text: |
+                      Target Audience
+              - e: li
+                in:
+                  - e: span
+                    text: |
+                      Media resources / Photos
+              - e: li
+                in:
+                  - e: span
+                    text: |
+                      Additional information
+      - e: div
+        a:
+          class: w3-padding 
+        in:
+          - e: h3
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-buildings padding-right-quarter-em
+              - e: span
+                text: 5.2.3.5 Pledge letter
+          - e: h4
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-building-flag padding-right-quarter-em
+              - e: span
+                text: Our FIWARE iHub pledge letter
+          - e: p
+            a:
+              class: w3-padding 
+            in:
+              - e: span
+                text: |
+                  The document provides the commitment of entity planning enrol to FIWARE iHub program, ensuring the veracity and accuracy of all information provided to justify the activities performed by the organization and resources dedicated. 
+                  Must be fulfilled and signed by the head of iHub entity or a legal representative. 
+          - e: div
+            class: w3-card w3-padding w3-margin-top w3-show w3-white 
+            in:
+              - e: p
+                class: w3-xlarge font-weight-bold 
+                in:
+                  - e: span
+                    text: |
+                      Responsibility pledge letter
+              - e: p
+                in:
+                  - e: span
+                    text: |
+                      TODO
+      - e: div
+        a:
+          class: w3-padding 
+        in:
+          - e: h3
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-buildings padding-right-quarter-em
+              - e: span
+                text: 5.2.3.6 Action plan
+          - e: h4
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-building-flag padding-right-quarter-em
+              - e: span
+                text: Our FIWARE iHub action plan
+          - e: p
+            a:
+              class: w3-padding 
+            in:
+              - e: span
+                text: |
+                  In case you have no previous experience with FIWARE, you have to describe your action plan for the next year, provide the activities you will perform, Gantt chart etc.
   - e: div
     label:
       - infographic

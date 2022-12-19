@@ -210,6 +210,16 @@ htmBody:
                       href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/pulls"
                       text: |
                         {{ page.siteDisplayName }} pull requests
+              - e: li
+                in: 
+                  - e: div
+                    text: |
+                      There is a public mailing list for {{ page.siteDisplayName }} where you can submit bug reports: 
+                  - e: div
+                    in:
+                      - e: a
+                        href: "{{ page.mailingListUrl }}"
+                        text: "{{ page.mailingListUrl }}"
       - e: div
         a:
           class: w3-padding 
