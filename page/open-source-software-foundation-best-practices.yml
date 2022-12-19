@@ -123,20 +123,36 @@ htmBody:
                   class: fa-solid fa-badge-check padding-right-quarter-em
               - e: span
                 text: FLOSS Best Practices Criteria overview
-          - e: p
-            a:
-              class: w3-padding 
+          - e: div
             in:
-              - e: span
-                text: |
-                  The Open Source Software Foundation offers a Best Practices Badge to projects following all the suggested standards below. 
-              - e: a
-                href: https://bestpractices.coreinfrastructure.org/en/criteria
-                text: |
-                  See the FLOSS Best Practices Criteria here. 
-              - e: span
-                text: |
-                  Here is a summary of how {{ page.siteDisplayName }} implements these standards. 
+              - e: p
+                in:
+                  - e: span
+                    text: |
+                      Here is our Open Source Software Foundation offers a Best Practices Badge for {{ page.siteDisplayName }}. 
+              - e: p
+                in:
+                  - e: span
+                    in:
+                      - e: a
+                        href: |
+                          https://bestpractices.coreinfrastructure.org/projects/6846
+                        in:
+                          - e: img
+                            src: |
+                              https://bestpractices.coreinfrastructure.org/projects/6846/badge
+              - e: p
+                in:
+                  - e: span
+                    text: |
+                      The Open Source Software Foundation offers a Best Practices Badge to projects following all the suggested standards below. 
+                  - e: a
+                    href: https://bestpractices.coreinfrastructure.org/en/criteria
+                    text: |
+                      See the FLOSS Best Practices Criteria here. 
+                  - e: span
+                    text: |
+                      Below is a summary of how {{ page.siteDisplayName }} implements these standards. 
       - e: div
         a:
           class: w3-padding 
