@@ -1,6 +1,9 @@
 ---
 SITE_NAME: "{{ SITE_NAME }}"
+SITE_SRC: "{{ SITE_SRC }}"
 SITE_DISPLAY_NAME: "{{ SITE_DISPLAY_NAME }}"
+SITE_POM_GROUP_ID: "{{ SITE_POM_GROUP_ID }}"
+SITE_PUBLIC_URL: "{{ SITE_PUBLIC_URL }}"
 GITHUB_ORG: "{{ GITHUB_ORG }}"
 QUAYIO_ORG: "{{ QUAYIO_ORG }}"
 SITE_POWERED_BY_URL: "{{ SITE_POWERED_BY_URL }}"
@@ -23,10 +26,8 @@ STATIC_BASE_URL: "{{ STATIC_BASE_URL }}"
 STATIC_PATH: "{{ STATIC_PATH }}"
 TEMPLATE_PATH: "{{ TEMPLATE_PATH }}"
 FONTAWESOME_KIT: "{{ FONTAWESOME_KIT }}"
-I18N_PATHS: "{{ I18N_PATHS }}"
-DYNAMIC_PAGE_PATHS:
-  - "{{ SITE_SRC }}/page"
-
+I18N_PATHS: {{ I18N_PATHS }}
+DYNAMIC_PAGE_PATHS: "{{ DYNAMIC_PAGE_PATHS }}"
 JDBC_HOST: "{{ JDBC_HOST }}"
 JDBC_PORT: {{ JDBC_PORT }}
 JDBC_DATABASE: "{{ JDBC_DATABASE }}"
@@ -81,17 +82,19 @@ WRITE_COMMENTS: true
 # Enable data import in the site. 
 ENABLE_IMPORT_DATA: {{ ENABLE_IMPORT_DATA | lower }}
 ENABLE_IMPORT_DATA_MapResult: true
+ENABLE_IMPORT_DATA_SystemEvent: true
+ENABLE_IMPORT_DATA_SitePage: true
+ENABLE_IMPORT_DATA_SiteHtm: true
+ENABLE_IMPORT_DATA_IotNode: true
+ENABLE_IMPORT_DATA_IotNodeStep: true
+ENABLE_IMPORT_DATA_PersonStep: true
+ENABLE_IMPORT_DATA_BicycleStep: true
+ENABLE_IMPORT_DATA_TimeStep: true
 ENABLE_IMPORT_DATA_TrafficSimulation: true
+ENABLE_IMPORT_DATA_TrafficFlowObserved: true
 ENABLE_IMPORT_DATA_TrafficLight: true
 ENABLE_IMPORT_DATA_TrafficLightStep: true
 ENABLE_IMPORT_DATA_VehicleStep: true
-ENABLE_IMPORT_DATA_PersonStep: true
-ENABLE_IMPORT_DATA_IotNode: true
-ENABLE_IMPORT_DATA_IotNodeStep: true
-ENABLE_IMPORT_DATA_TimeStep: true
-ENABLE_IMPORT_DATA_SitePage: true
-ENABLE_IMPORT_DATA_SiteHtm: true
-ENABLE_IMPORT_DATA_SystemEvent: true
 
 # The Auth roles required to be an admin in the site. 
 AUTH_ROLES_ADMIN: {{ AUTH_ROLES_ADMIN }}
@@ -99,28 +102,32 @@ AUTH_ROLES_ADMIN: {{ AUTH_ROLES_ADMIN }}
 AUTH_ROLES_REQUIRED_SiteUser: ['SiteAdmin']
 # The Auth roles required to add and modify map result records. 
 AUTH_ROLES_REQUIRED_MapResult: ['SiteAdmin']
+# The Auth roles required to add and modify system event records. 
+AUTH_ROLES_REQUIRED_SystemEvent: ['SiteAdmin']
+# The Auth roles required to add and modify article records. 
+AUTH_ROLES_REQUIRED_SitePage: ['SiteAdmin']
+# The Auth roles required to add and modify HTML records. 
+AUTH_ROLES_REQUIRED_SiteHtm: ['SiteAdmin']
+# The Auth roles required to add and modify IOT node records. 
+AUTH_ROLES_REQUIRED_IotNode: ['SiteAdmin']
+# The Auth roles required to add and modify IOT node step records. 
+AUTH_ROLES_REQUIRED_IotNodeStep: ['SiteAdmin']
+# The Auth roles required to add and modify person step records. 
+AUTH_ROLES_REQUIRED_PersonStep: ['SiteAdmin']
+# The Auth roles required to add and modify bicycle step records. 
+AUTH_ROLES_REQUIRED_BicycleStep: ['SiteAdmin']
+# The Auth roles required to add and modify time step records. 
+AUTH_ROLES_REQUIRED_TimeStep: ['SiteAdmin']
 # The Auth roles required to add and modify traffic simulation records. 
 AUTH_ROLES_REQUIRED_TrafficSimulation: ['SiteAdmin']
+# The Auth roles required to add and modify traffic flow observed records. 
+AUTH_ROLES_REQUIRED_TrafficFlowObserved: ['SiteAdmin']
 # The Auth roles required to add and modify traffic light records. 
 AUTH_ROLES_REQUIRED_TrafficLight: ['SiteAdmin']
 # The Auth roles required to add and modify traffic light step records. 
 AUTH_ROLES_REQUIRED_TrafficLightStep: ['SiteAdmin']
 # The Auth roles required to add and modify vehicle step records. 
 AUTH_ROLES_REQUIRED_VehicleStep: ['SiteAdmin']
-# The Auth roles required to add and modify person step records. 
-AUTH_ROLES_REQUIRED_PersonStep: ['SiteAdmin']
-# The Auth roles required to add and modify IOT node records. 
-AUTH_ROLES_REQUIRED_IotNode: ['SiteAdmin']
-# The Auth roles required to add and modify IOT node step records. 
-AUTH_ROLES_REQUIRED_IotNodeStep: ['SiteAdmin']
-# The Auth roles required to add and modify time step records. 
-AUTH_ROLES_REQUIRED_TimeStep: ['SiteAdmin']
-# The Auth roles required to add and modify article records. 
-AUTH_ROLES_REQUIRED_SitePage: ['SiteAdmin']
-# The Auth roles required to add and modify HTML records. 
-AUTH_ROLES_REQUIRED_SiteHtm: ['SiteAdmin']
-# The Auth roles required to add and modify system event records. 
-AUTH_ROLES_REQUIRED_SystemEvent: ['SiteAdmin']
 
 YGGIO_HOST_NAME: "{{ YGGIO_HOST_NAME }}"
 YGGIO_PORT: {{ YGGIO_PORT }}

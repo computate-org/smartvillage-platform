@@ -89,17 +89,19 @@ import org.computate.smartvillageview.enus.model.iotnode.reader.IotNodeReader;
 
 import org.computate.smartvillageview.enus.model.user.SiteUser;
 import org.computate.smartvillageview.enus.result.map.MapResult;
+import org.computate.smartvillageview.enus.model.system.event.SystemEvent;
+import org.computate.smartvillageview.enus.model.page.SitePage;
+import org.computate.smartvillageview.enus.model.htm.SiteHtm;
+import org.computate.smartvillageview.enus.model.iotnode.IotNode;
+import org.computate.smartvillageview.enus.result.iotnode.step.IotNodeStep;
+import org.computate.smartvillageview.enus.model.traffic.person.step.PersonStep;
+import org.computate.smartvillageview.enus.model.traffic.bicycle.step.BicycleStep;
+import org.computate.smartvillageview.enus.model.traffic.time.step.TimeStep;
 import org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation;
+import org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved.TrafficFlowObserved;
 import org.computate.smartvillageview.enus.model.traffic.light.TrafficLight;
 import org.computate.smartvillageview.enus.model.traffic.light.step.TrafficLightStep;
 import org.computate.smartvillageview.enus.model.traffic.vehicle.step.VehicleStep;
-import org.computate.smartvillageview.enus.model.traffic.person.step.PersonStep;
-import org.computate.smartvillageview.enus.model.iotnode.IotNode;
-import org.computate.smartvillageview.enus.result.iotnode.step.IotNodeStep;
-import org.computate.smartvillageview.enus.model.traffic.time.step.TimeStep;
-import org.computate.smartvillageview.enus.model.page.SitePage;
-import org.computate.smartvillageview.enus.model.htm.SiteHtm;
-import org.computate.smartvillageview.enus.model.system.event.SystemEvent;
 
 /**
  */
@@ -486,19 +488,29 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 				LOG.info(refreshAllDataStarted);
 				refreshData(SiteUser.CLASS_SIMPLE_NAME).onSuccess(q -> {
 					refreshData(MapResult.CLASS_SIMPLE_NAME).onSuccess(q1 -> {
-						refreshData(TrafficSimulation.CLASS_SIMPLE_NAME).onSuccess(q2 -> {
-							refreshData(TrafficLight.CLASS_SIMPLE_NAME).onSuccess(q3 -> {
-								refreshData(TrafficLightStep.CLASS_SIMPLE_NAME).onSuccess(q4 -> {
-									refreshData(VehicleStep.CLASS_SIMPLE_NAME).onSuccess(q5 -> {
-										refreshData(PersonStep.CLASS_SIMPLE_NAME).onSuccess(q6 -> {
-											refreshData(IotNode.CLASS_SIMPLE_NAME).onSuccess(q7 -> {
-												refreshData(IotNodeStep.CLASS_SIMPLE_NAME).onSuccess(q8 -> {
+						refreshData(SystemEvent.CLASS_SIMPLE_NAME).onSuccess(q2 -> {
+							refreshData(SitePage.CLASS_SIMPLE_NAME).onSuccess(q3 -> {
+								refreshData(SiteHtm.CLASS_SIMPLE_NAME).onSuccess(q4 -> {
+									refreshData(IotNode.CLASS_SIMPLE_NAME).onSuccess(q5 -> {
+										refreshData(IotNodeStep.CLASS_SIMPLE_NAME).onSuccess(q6 -> {
+											refreshData(PersonStep.CLASS_SIMPLE_NAME).onSuccess(q7 -> {
+												refreshData(BicycleStep.CLASS_SIMPLE_NAME).onSuccess(q8 -> {
 													refreshData(TimeStep.CLASS_SIMPLE_NAME).onSuccess(q9 -> {
-														refreshData(SitePage.CLASS_SIMPLE_NAME).onSuccess(q10 -> {
-															refreshData(SiteHtm.CLASS_SIMPLE_NAME).onSuccess(q11 -> {
-																refreshData(SystemEvent.CLASS_SIMPLE_NAME).onSuccess(q12 -> {
-																	LOG.info(refreshAllDataComplete);
-																	promise.complete();
+														refreshData(TrafficSimulation.CLASS_SIMPLE_NAME).onSuccess(q10 -> {
+															refreshData(TrafficFlowObserved.CLASS_SIMPLE_NAME).onSuccess(q11 -> {
+																refreshData(TrafficLight.CLASS_SIMPLE_NAME).onSuccess(q12 -> {
+																	refreshData(TrafficLightStep.CLASS_SIMPLE_NAME).onSuccess(q13 -> {
+																		refreshData(VehicleStep.CLASS_SIMPLE_NAME).onSuccess(q14 -> {
+																			LOG.info(refreshAllDataComplete);
+																			promise.complete();
+																		}).onFailure(ex -> {
+																			LOG.error(refreshAllDataFail, ex);
+																			promise.fail(ex);
+																		});
+																	}).onFailure(ex -> {
+																		LOG.error(refreshAllDataFail, ex);
+																		promise.fail(ex);
+																	});
 																}).onFailure(ex -> {
 																	LOG.error(refreshAllDataFail, ex);
 																	promise.fail(ex);

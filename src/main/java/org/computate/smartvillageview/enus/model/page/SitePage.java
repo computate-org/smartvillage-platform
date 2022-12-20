@@ -51,7 +51,6 @@ import io.vertx.core.Promise;
  * Color: 2017-shaded-spruce
  * IconGroup: duotone
  * IconName: newspaper
- * NameVar: page
  * 
  * Sort.desc: courseNum
  * Sort.desc: lessonNum

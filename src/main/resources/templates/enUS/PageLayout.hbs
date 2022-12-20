@@ -19,9 +19,9 @@
 
 		<link rel="icon" href="{{staticBaseUrl}}/favicon.ico" />
 		<link rel="stylesheet" href="{{staticBaseUrl}}/css/w3.css" />
-		<link rel="stylesheet" href="{{staticBaseUrl}}/css/site-enUS.css" />
-		<link rel="stylesheet" href="{{staticBaseUrl}}/css/jquery-ui.css" />
-		<link rel="stylesheet" href="{{staticBaseUrl}}/css/datePicker.css" />
+		<link rel="stylesheet" href="{{staticBaseUrl}}/css/site-enUS.css"/>
+		<link rel="stylesheet" href="{{staticBaseUrl}}/css/jquery-ui.css"/>
+		<link rel="stylesheet" href="{{staticBaseUrl}}/css/datePicker.css"/>
 		<link rel="stylesheet" href="{{staticBaseUrl}}/css/fullcalendar/main.min.css"/>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anonymous%20Pro%7CBellefair%7CJomhuria%7CPT%20Serif%3A700%7CStint%20Ultra%20Condensed&amp;display=swap"/>
 
@@ -37,13 +37,13 @@
 {{#*inline "htmBodyMenuPageLayout"}}
 		<div class="w3-bar w3-hide-small ">
 			<div class="site-bar-item w3-bar-item ">
-				<a class="w3-bar-item w3-text-2017-shaded-spruce " href="{{ siteBaseUrl }}"><i class="fad fa-house "></i> smartabyar-smartvillage</a>
+				<a class="w3-bar-item " href="{{ siteBaseUrl }}"><i class="fad fa-house "></i> smartabyar-smartvillage</a>
 			</div>
 {{> "htmMenuItems"}}
 		</div>
 		<div class="w3-bar w3-hide-medium w3-hide-large ">
 			<div class="site-bar-item w3-bar-item ">
-				<a class="w3-bar-item w3-text-2017-shaded-spruce " href="{{ siteBaseUrl }}"><i class="fad fa-house "></i> smartabyar-smartvillage</a>
+				<a class="w3-bar-item " href="{{ siteBaseUrl }}"><i class="fad fa-house "></i> smartabyar-smartvillage</a>
 			</div>
 			<div class="w3-dropdown-hover ">
 				<button class="w3-button w3-text-black "><i class="fad fa-bars w3-text-black "></i> Menu</button>
@@ -66,28 +66,34 @@
 				</div>
 {{/if}}
 				<div class="site-bar-item w3-bar-item ">
-					<a href="/map-result{{#if defaultRangeGap}}?facet.range.gap={{encodeURIComponent defaultRangeGap }}&facet.range.start={{encodeURIComponent defaultRangeStart }}&facet.range.end={{encodeURIComponent defaultRangeEnd }}&facet.range={!tag=r1}created&facet.pivot={!range=r1}classSimpleName{{/if}}" class="header-icon-a w3-hover-opacity w3-center w3-text-2017-shaded-spruce "><i class="fad fa-map-location-dot w3-text-2017-shaded-spruce "></i> map results</a>
+					<a href="/person-step?facet.range={!tag=r1}created&&stats.field={!tag=r1}created&facet.pivot={!range=r1}classSimpleName" class="header-icon-a w3-hover-opacity w3-center w3-text-2017-shaded-spruce "><i class="fad fa-map-location-dot w3-text-2017-shaded-spruce "></i> person steps</a>
 				</div>
 				<div class="site-bar-item w3-bar-item ">
-					<a href="/traffic-simulation{{#if defaultRangeGap}}?facet.range.gap={{encodeURIComponent defaultRangeGap }}&facet.range.start={{encodeURIComponent defaultRangeStart }}&facet.range.end={{encodeURIComponent defaultRangeEnd }}&facet.range={!tag=r1}created&facet.pivot={!range=r1}classSimpleName{{/if}}" class="header-icon-a w3-hover-opacity w3-center w3-text-2017-shaded-spruce "><i class="fad fa-traffic-light-stop w3-text-2017-shaded-spruce "></i> traffic simulations</a>
+					<a href="/bicycle-step?facet.range={!tag=r1}created&&stats.field={!tag=r1}created&facet.pivot={!range=r1}classSimpleName" class="header-icon-a w3-hover-opacity w3-center w3-text-2017-shaded-spruce "><i class="fad fa-map-location-dot w3-text-2017-shaded-spruce "></i> bicycle steps</a>
 				</div>
 				<div class="site-bar-item w3-bar-item ">
-					<a href="/traffic-light{{#if defaultRangeGap}}?facet.range.gap={{encodeURIComponent defaultRangeGap }}&facet.range.start={{encodeURIComponent defaultRangeStart }}&facet.range.end={{encodeURIComponent defaultRangeEnd }}&facet.range={!tag=r1}created&facet.pivot={!range=r1}classSimpleName{{/if}}" class="header-icon-a w3-hover-opacity w3-center w3-text-2017-shaded-spruce "><i class="fad fa-map-location-dot w3-text-2017-shaded-spruce "></i> traffic lights</a>
+					<a href="/traffic-flow-observed?facet.range={!tag=r1}created&&stats.field={!tag=r1}created&facet.pivot={!range=r1}classSimpleName" class="header-icon-a w3-hover-opacity w3-center w3-text-2017-shaded-spruce "><i class="fad fa-map-location-dot w3-text-2017-shaded-spruce "></i> traffic flow observeds</a>
 				</div>
 				<div class="site-bar-item w3-bar-item ">
-					<a href="/traffic-light-step{{#if defaultRangeGap}}?facet.range.gap={{encodeURIComponent defaultRangeGap }}&facet.range.start={{encodeURIComponent defaultRangeStart }}&facet.range.end={{encodeURIComponent defaultRangeEnd }}&facet.range={!tag=r1}created&facet.pivot={!range=r1}classSimpleName{{/if}}" class="header-icon-a w3-hover-opacity w3-center w3-text-2017-shaded-spruce "><i class="fad fa-map-location-dot w3-text-2017-shaded-spruce "></i> traffic light steps</a>
+					<a href="/traffic-simulation?facet.range={!tag=r1}created&&stats.field={!tag=r1}created&facet.pivot={!range=r1}classSimpleName" class="header-icon-a w3-hover-opacity w3-center w3-text-2017-shaded-spruce "><i class="fad fa-traffic-light-stop w3-text-2017-shaded-spruce "></i> traffic simulations</a>
 				</div>
 				<div class="site-bar-item w3-bar-item ">
-					<a href="/vehicle-step{{#if defaultRangeGap}}?facet.range.gap={{encodeURIComponent defaultRangeGap }}&facet.range.start={{encodeURIComponent defaultRangeStart }}&facet.range.end={{encodeURIComponent defaultRangeEnd }}&facet.range={!tag=r1}created&facet.pivot={!range=r1}classSimpleName{{/if}}" class="header-icon-a w3-hover-opacity w3-center w3-text-2017-shaded-spruce "><i class="fad fa-map-location-dot w3-text-2017-shaded-spruce "></i> vehicle steps</a>
+					<a href="/page?facet.range={!tag=r1}created&&stats.field={!tag=r1}created&facet.pivot={!range=r1}classSimpleName" class="header-icon-a w3-hover-opacity w3-center w3-text-2017-shaded-spruce "><i class="fad fa-newspaper w3-text-2017-shaded-spruce "></i> articles</a>
 				</div>
 				<div class="site-bar-item w3-bar-item ">
-					<a href="/person-step{{#if defaultRangeGap}}?facet.range.gap={{encodeURIComponent defaultRangeGap }}&facet.range.start={{encodeURIComponent defaultRangeStart }}&facet.range.end={{encodeURIComponent defaultRangeEnd }}&facet.range={!tag=r1}created&facet.pivot={!range=r1}classSimpleName{{/if}}" class="header-icon-a w3-hover-opacity w3-center w3-text-2017-shaded-spruce "><i class="fad fa-map-location-dot w3-text-2017-shaded-spruce "></i> person steps</a>
+					<a href="/map-result?facet.range={!tag=r1}created&&stats.field={!tag=r1}created&facet.pivot={!range=r1}classSimpleName" class="header-icon-a w3-hover-opacity w3-center w3-text-2017-shaded-spruce "><i class="fad fa-map-location-dot w3-text-2017-shaded-spruce "></i> map results</a>
 				</div>
 				<div class="site-bar-item w3-bar-item ">
-					<a href="/iot-node{{#if defaultRangeGap}}?facet.range.gap={{encodeURIComponent defaultRangeGap }}&facet.range.start={{encodeURIComponent defaultRangeStart }}&facet.range.end={{encodeURIComponent defaultRangeEnd }}&facet.range={!tag=r1}created&facet.pivot={!range=r1}classSimpleName{{/if}}" class="header-icon-a w3-hover-opacity w3-center w3-text-2017-shaded-spruce "><i class="fad fa-router w3-text-2017-shaded-spruce "></i> IOT nodes</a>
+					<a href="/iot-node?facet.range={!tag=r1}created&&stats.field={!tag=r1}created&facet.pivot={!range=r1}classSimpleName" class="header-icon-a w3-hover-opacity w3-center w3-text-2017-shaded-spruce "><i class="fad fa-router w3-text-2017-shaded-spruce "></i> IOT nodes</a>
 				</div>
 				<div class="site-bar-item w3-bar-item ">
-					<a href="/page{{#if defaultRangeGap}}?facet.range.gap={{encodeURIComponent defaultRangeGap }}&facet.range.start={{encodeURIComponent defaultRangeStart }}&facet.range.end={{encodeURIComponent defaultRangeEnd }}&facet.range={!tag=r1}created&facet.pivot={!range=r1}classSimpleName{{/if}}" class="header-icon-a w3-hover-opacity w3-center w3-text-2017-shaded-spruce "><i class="fad fa-newspaper w3-text-2017-shaded-spruce "></i> articles</a>
+					<a href="/traffic-light-step?facet.range={!tag=r1}created&&stats.field={!tag=r1}created&facet.pivot={!range=r1}classSimpleName" class="header-icon-a w3-hover-opacity w3-center w3-text-2017-shaded-spruce "><i class="fad fa-map-location-dot w3-text-2017-shaded-spruce "></i> traffic light steps</a>
+				</div>
+				<div class="site-bar-item w3-bar-item ">
+					<a href="/vehicle-step?facet.range={!tag=r1}created&&stats.field={!tag=r1}created&facet.pivot={!range=r1}classSimpleName" class="header-icon-a w3-hover-opacity w3-center w3-text-2017-shaded-spruce "><i class="fad fa-map-location-dot w3-text-2017-shaded-spruce "></i> vehicle steps</a>
+				</div>
+				<div class="site-bar-item w3-bar-item ">
+					<a href="/traffic-light?facet.range={!tag=r1}created&&stats.field={!tag=r1}created&facet.pivot={!range=r1}classSimpleName" class="header-icon-a w3-hover-opacity w3-center w3-text-2017-shaded-spruce "><i class="fad fa-map-location-dot w3-text-2017-shaded-spruce "></i> traffic lights</a>
 				</div>
 
 {{/inline}}
@@ -102,6 +108,7 @@
 	</div>
 {{/inline}}
 {{#*inline "htmBodyEndPageLayout"}}		<!-- #*inline "htmBodyEndPageLayout" -->
+
 
 		<footer class="w3-content w3-center w3-padding-32 ">
 			<h3>Share this page. </h3>
@@ -135,7 +142,7 @@
 	 	<div class="w3-center ">
 {{#block "htmBodyMenu"}}{{/block}}
 		</div>
-		<footer class="w3-center w3-black w3-padding-48 ">
+		<footer class="w3-center w3-black w3-text-white w3-padding-24 ">
 {{#if GITHUB_ORG }}
 			<div class="w3-margin ">
 				<div class="grow-20 ">
@@ -177,22 +184,6 @@
 				</div>
 			</div>
 		</footer>
-
-	<footer class="w3-row site-section-contact w3-text-white w3-padding-48 ">
-		<div class="w3-content w3-center  w3-cell-row w3-margin-bottom-32 ">
-			<div class="w3-container ">
-				<div class="w3-container w3-text-black w3-margin-top ">
-					<h6 id="h2-contactez-nous" class="w3-xlarge w3-text-white ">Let's get connected. </h6>
-					<div style="">
-						<a target="_blank" rel="noopener noreferrer" data-ajax="false" href="https://www.youtube.com/playlist?list=PLcVjtgfCeLvRk53di62IbRPDr8DdAUAS_"><img alt="" class="grow-20 " style="display: inline-block; width: 50px; height: 50px; margin: 0 10px;" src="{{ staticBaseUrl }}/svg/youtube.svg"></a>
-						<a target="_blank" rel="noopener noreferrer" data-ajax="false" href="https://github.com/computate-org/smartabyar-smartvillage"><img alt="" class="grow-20 " style="display: inline-block; width: 50px; height: 50px; margin: 0 10px;" src="{{ staticBaseUrl }}/svg/github-white.svg"></a>
-						<a target="_blank" rel="noopener noreferrer" data-ajax="false" href="https://computate.topicbox.com/groups/smartabyar-smartvillage"><img alt="" class="grow-20 " style="display: inline-block; width: 50px; height: 50px; margin: 0 10px;" src="{{ staticBaseUrl }}/svg/mail.svg"></a>
-					</div>
-					<h6><a href="#top" class="w3-text-white ">Up to the top. </a></h6>
-				</div>
-			</div>
-		</div>
-	</footer>
 
 {{/inline}}
 {{#*inline "htmBodyPageLayout"}}		<!-- #*inline "htmBodyPageLayout" -->

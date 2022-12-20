@@ -13,7 +13,7 @@ import io.vertx.core.json.JsonObject;
  * Page: true
  * SuperPage.enUS: MapResultPage
  * Indexed: true
- * Order: 9
+ * Order: 18
  * 
  * ApiTag.enUS: Traffic Flow Observed
  * ApiUri.enUS: /api/traffic-flow-observed

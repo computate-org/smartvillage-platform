@@ -8,7 +8,7 @@ import org.computate.smartvillageview.enus.result.map.MapResult;
  * Page: true
  * SuperPage.enUS: MapResultPage
  * Indexed: true
- * Order: 12
+ * Order: 16
  * 
  * ApiTag.enUS: Bicycle Step
  * ApiUri.enUS: /api/bicycle-step

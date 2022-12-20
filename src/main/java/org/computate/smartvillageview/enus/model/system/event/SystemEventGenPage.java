@@ -158,8 +158,8 @@ public class SystemEventGenPage extends SystemEventGenPageGen<PageLayout> {
 			}
 			if(StringUtils.equalsAny(type, "date") && json.containsKey("stats")) {
 				JsonObject stats = json.getJsonObject("stats");
-				Instant min = Instant.parse(stats.getString("min"));
-				Instant max = Instant.parse(stats.getString("max"));
+				Instant min = Optional.ofNullable(stats.getString("min")).map(val -> Instant.parse(val.toString())).orElse(Instant.now());
+				Instant max = Optional.ofNullable(stats.getString("max")).map(val -> Instant.parse(val.toString())).orElse(Instant.now());
 				Duration duration = Duration.between(min, max);
 				String gap = "DAY";
 				if(duration.toDays() >= 365)
@@ -177,8 +177,8 @@ public class SystemEventGenPage extends SystemEventGenPageGen<PageLayout> {
 				else if(duration.toMillis() >= 1)
 					gap = "MILLI";
 				json.put("defaultRangeGap", String.format("+1%s", gap));
-				json.put("defaultRangeEnd", stats.getString("max"));
-				json.put("defaultRangeStart", stats.getString("min"));
+				json.put("defaultRangeEnd", max.toString());
+				json.put("defaultRangeStart", min.toString());
 				json.put("enableCalendar", true);
 				setDefaultRangeStats(json);
 			}

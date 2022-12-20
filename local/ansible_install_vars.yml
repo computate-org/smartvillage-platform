@@ -9,6 +9,7 @@ SITE_DISPLAY_NAME: Smart Village Project
 SITE_DESCRIPTION: Red Hat Global Social Innovation Program is partnering with Boston University and Smarta Byar in order to collaborate on creating a global and open research platform allowing researchers to study what social sustainability means by using a digital twin of Veberöd, Sweden as the test village, supported by Smarta Byar. The goal of this collaboration is to build the open source technological infrastructure so that researchers can collaborate on this platform effectively to study mobility, public health, sustainability among other study areas to ultimately help define better the link between well being and eco-smart cities. 
 SITE_PUBLIC_URL: https://smartvillage.computate.org
 MAILING_LIST_URL: https://computate.topicbox.com/groups/smartabyar-smartvillage
+MAILING_LIST_EMAIL: smartabyar-smartvillage@computate.topicbox.com
 SITE_LICENSE_NAME: GNU GENERAL PUBLIC LICENSE, Version 3
 SITE_LICENSE_URL: https://www.gnu.org/licenses/gpl-3.0.en.html
 DEVELOPER_NAME: Christopher Tate
@@ -61,124 +62,124 @@ PROJECTS:
     SITE_SRC: "{{ SITE_SRC }}"
     SITE_JAVA_PACKAGE: "{{ SITE_JAVA_PACKAGE }}"
     SITE_FILES: 
-      - path: "{{ SITE_SRC }}/bin/touch.sh"
-        template: touch.sh
-      - path: "{{ SITE_SRC }}/bin/regenerate_classes.sh"
-        template: bin/regenerate_classes.sh
-      - path: "{{ SITE_SRC }}/pom.xml"
-        template: java/pom.xml
-      - path: "{{ SITE_SRC }}/install.yml"
-        template: ansible/install.yml
-      - path: "{{ SITE_SRC }}/src/main/java/{{ SITE_JAVA_PACKAGE | replace('.', '/') }}/package-info.java"
-        template: java/package-info.java
-      - path: "{{ SITE_SRC }}/src/main/java/{{ SITE_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_ConfigKeys | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_ConfigKeys }}.java"
-        template: config/ConfigKeys.java
-      - path: "{{ SITE_SRC }}/src/main/java/{{ SITE_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_SiteRequest | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_SiteRequest }}.java"
-        template: request/SiteRequestEnUS.java
-      - path: "{{ SITE_SRC }}/src/main/java/{{ SITE_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_PageLayout | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_PageLayout }}.java"
-        template: page/PageLayout.java
+#      - path: "{{ SITE_SRC }}/bin/touch.sh"
+#        template: touch.sh
+#      - path: "{{ SITE_SRC }}/bin/regenerate_classes.sh"
+#        template: bin/regenerate_classes.sh
+#      - path: "{{ SITE_SRC }}/pom.xml"
+#        template: java/pom.xml
+#      - path: "{{ SITE_SRC }}/install.yml"
+#        template: ansible/install.yml
+#      - path: "{{ SITE_SRC }}/src/main/java/{{ SITE_JAVA_PACKAGE | replace('.', '/') }}/package-info.java"
+#        template: java/package-info.java
+#      - path: "{{ SITE_SRC }}/src/main/java/{{ SITE_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_ConfigKeys | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_ConfigKeys }}.java"
+#        template: config/ConfigKeys.java
+#      - path: "{{ SITE_SRC }}/src/main/java/{{ SITE_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_SiteRequest | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_SiteRequest }}.java"
+#        template: request/SiteRequestEnUS.java
+#      - path: "{{ SITE_SRC }}/src/main/java/{{ SITE_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_PageLayout | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_PageLayout }}.java"
+#        template: page/PageLayout.java
       - path: "{{ SITE_SRC }}/src/main/resources/templates/{{ SITE_LANG }}/{{ CLASS_SIMPLE_NAME_PageLayout }}.hbs"
         template: page/PageLayout.hbs
-      - path: "{{ SITE_SRC }}/src/main/java/{{ SITE_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_HomePage | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_HomePage }}.java"
-        template: page/HomePage.java
-      - path: "{{ SITE_SRC }}/src/main/resources/templates/{{ SITE_LANG }}/{{ CLASS_SIMPLE_NAME_HomePage }}.hbs"
-        template: page/HomePage.hbs
-      - path: "{{ SITE_SRC }}/src/main/resources/templates/{{ SITE_LANG }}/{{ CLASS_SIMPLE_NAME_DynamicPage }}.hbs"
-        template: page/DynamicPage.hbs
-      - path: "{{ SITE_SRC }}/src/main/resources/templates/{{ SITE_LANG }}/{{ CLASS_SIMPLE_NAME_DynamicGenPage }}.hbs"
-        template: page/DynamicGenPage.hbs
-      - path: "{{ SITE_SRC }}/src/main/java/{{ SITE_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_MainVerticle | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_MainVerticle }}.java"
-        template: vertx/MainVerticle.java
-      - path: "{{ SITE_SRC }}/src/main/java/{{ SITE_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_WorkerVerticle | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_WorkerVerticle }}.java"
-        template: vertx/WorkerVerticle.java
-      - path: "{{ SITE_SRC }}/src/main/java/{{ SITE_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_BaseModel | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_BaseModel }}.java"
-        template: base/BaseModel.java
-      - path: "{{ SITE_SRC }}/src/main/java/{{ SITE_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_BaseResult | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_BaseResult }}.java"
-        template: base/BaseResult.java
-      - path: "{{ SITE_SRC }}/src/main/java/{{ SITE_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_SiteUser | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_SiteUser }}.java"
-        template: user/SiteUser.java
-      - path: "{{ SITE_SRC }}/src/main/java/{{ SITE_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_SitePage | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_SitePage }}.java"
-        template: page/SitePage.java
-      - path: "{{ SITE_SRC }}/src/main/java/{{ SITE_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_SitePage | replace('.', '/') }}/reader/{{ CLASS_SIMPLE_NAME_SitePage }}Reader.java"
-        template: page/SitePageReader.java
-      - path: "{{ SITE_SRC }}/src/main/java/{{ SITE_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_SiteHtm | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_SiteHtm }}.java"
-        template: htm/SiteHtm.java
-      - path: "{{ SITE_SRC }}/src/main/java/{{ SITE_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_DynamicPage | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_DynamicPage }}.java"
-        template: page/DynamicPage.java
-      - path: "{{ SITE_SRC }}/src/main/resources/application.yml"
-        template: java/application.yml
-      - path: "{{ SITE_SRC }}/src/main/resources/log4j.properties"
-        template: log4j/log4j.properties
-      - path: "{{ SITE_SRC }}/src/main/resources/log4j.xml"
-        template: log4j/log4j.xml
-      - path: "{{ SITE_SRC }}/local/defaults.yml"
-        template: local/defaults.yml
-      - path: "{{ SITE_SRC }}/local/template.yml"
-        template: local/template.yml
-      - path: "{{ SITE_SRC }}/CONTRIBUTING"
-        template: license/CONTRIBUTING
-      - path: "{{ SITE_SRC }}/DCO"
-        template: license/DCO
-      - path: "{{ SITE_SRC }}/LICENSE"
-        template: license/LICENSE
-      - path: "{{ SITE_SRC }}/README.md"
-        template: local/README.md
-      - path: "{{ SITE_SRC }}-static/js/jQuery-Autocomplete/jquery.autocomplete.js"
-        template: js/jQuery-Autocomplete/jquery.autocomplete.js
-      - path: "{{ SITE_SRC }}-static/js/jQuery-Autocomplete/license.txt"
-        template: js/jQuery-Autocomplete/license.txt
-      - path: "{{ SITE_SRC }}-static/js/jquery-1.12.4.min.js"
-        template: js/jquery-1.12.4.min.js
-      - path: "{{ SITE_SRC }}-static/js/jquery-ui.js"
-        template: js/jquery-ui.js
-      - path: "{{ SITE_SRC }}-static/js/datePicker.js"
-        template: js/datePicker.js
-      - path: "{{ SITE_SRC }}-static/css/datePicker.css"
-        template: js/datePicker.css
-      - path: "{{ SITE_SRC }}-static/js/plotly-2.9.0.min.js"
-        template: js/plotly-2.9.0.min.js
-      - path: "{{ SITE_SRC }}-static/js/site-enUS.js"
-        template: js/site-enUS.js
-      - path: "{{ SITE_SRC }}-static/js/sockjs.js"
-        template: js/sockjs.js
-      - path: "{{ SITE_SRC }}-static/js/sockjs-map.json"
-        template: js/sockjs-map.json
-      - path: "{{ SITE_SRC }}-static/js/vertx-eventbus.js"
-        template: js/vertx-eventbus.js
-      - path: "{{ SITE_SRC }}-static/js/fullcalendar/main.min.js"
-        template: fullcalendar/main.min.js
-      - path: "{{ SITE_SRC }}-static/css/jquery-ui.css"
-        template: css/jquery-ui.css
-      - path: "{{ SITE_SRC }}-static/css/site-{{ SITE_LANG }}.css"
-        template: css/site-enUS.css
-      - path: "{{ SITE_SRC }}-static/css/w3.css"
-        template: css/w3.css
-      - path: "{{ SITE_SRC }}-static/css/fullcalendar/main.min.js"
-        template: fullcalendar/main.min.css
-      - path: "{{ SITE_SRC }}-static/svg/openshift.svg"
-        template: svg/openshift.svg
-      - path: "{{ SITE_SRC }}/.gitignore"
-        template: config/gitignore
-      - path: "{{ SITE_SRC }}-static/.gitignore"
-        template: config/gitignore
-      - path: "{{ SITE_SRC }}/openshift/defaults.yml"
-        template: openshift/defaults.yml
-      - path: "{{ SITE_SRC }}/openshift/SITE_SERVICE_1.yml"
-        template: openshift/SITE_SERVICE_1.yml
-      - path: "{{ SITE_SRC }}/openshift/SITE_SECRET_1.yml"
-        template: openshift/SITE_SECRET_1.yml
-      - path: "{{ SITE_SRC }}/openshift/SITE_ROUTE_1.yml"
-        template: openshift/SITE_ROUTE_1.yml
-      - path: "{{ SITE_SRC }}/openshift/SITE_IMAGE_STREAM_1.yml"
-        template: openshift/SITE_IMAGE_STREAM_1.yml
-      - path: "{{ SITE_SRC }}/openshift/SITE_BUILD_CONFIG_1.yml"
-        template: openshift/SITE_BUILD_CONFIG_1.yml
-      - path: "{{ SITE_SRC }}/openshift/SITE_DEPLOYMENT_CONFIG_1.yml"
-        template: openshift/SITE_DEPLOYMENT_CONFIG_1.yml
-      - path: "{{ SITE_SRC }}/openshift/SITE_PERSISTENT_VOLUME_CLAIM_1.yml"
-        template: openshift/SITE_PERSISTENT_VOLUME_CLAIM_1.yml
-      - path: "{{ SITE_SRC }}/Dockerfile"
-        template: openshift/Dockerfile
+#      - path: "{{ SITE_SRC }}/src/main/java/{{ SITE_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_HomePage | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_HomePage }}.java"
+#        template: page/HomePage.java
+#      - path: "{{ SITE_SRC }}/src/main/resources/templates/{{ SITE_LANG }}/{{ CLASS_SIMPLE_NAME_HomePage }}.hbs"
+#        template: page/HomePage.hbs
+#      - path: "{{ SITE_SRC }}/src/main/resources/templates/{{ SITE_LANG }}/{{ CLASS_SIMPLE_NAME_DynamicPage }}.hbs"
+#        template: page/DynamicPage.hbs
+#      - path: "{{ SITE_SRC }}/src/main/resources/templates/{{ SITE_LANG }}/{{ CLASS_SIMPLE_NAME_DynamicGenPage }}.hbs"
+#        template: page/DynamicGenPage.hbs
+#      - path: "{{ SITE_SRC }}/src/main/java/{{ SITE_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_MainVerticle | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_MainVerticle }}.java"
+#        template: vertx/MainVerticle.java
+#      - path: "{{ SITE_SRC }}/src/main/java/{{ SITE_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_WorkerVerticle | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_WorkerVerticle }}.java"
+#        template: vertx/WorkerVerticle.java
+#      - path: "{{ SITE_SRC }}/src/main/java/{{ SITE_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_BaseModel | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_BaseModel }}.java"
+#        template: base/BaseModel.java
+#      - path: "{{ SITE_SRC }}/src/main/java/{{ SITE_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_BaseResult | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_BaseResult }}.java"
+#        template: base/BaseResult.java
+#      - path: "{{ SITE_SRC }}/src/main/java/{{ SITE_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_SiteUser | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_SiteUser }}.java"
+#        template: user/SiteUser.java
+#      - path: "{{ SITE_SRC }}/src/main/java/{{ SITE_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_SitePage | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_SitePage }}.java"
+#        template: page/SitePage.java
+#      - path: "{{ SITE_SRC }}/src/main/java/{{ SITE_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_SitePage | replace('.', '/') }}/reader/{{ CLASS_SIMPLE_NAME_SitePage }}Reader.java"
+#        template: page/SitePageReader.java
+#      - path: "{{ SITE_SRC }}/src/main/java/{{ SITE_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_SiteHtm | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_SiteHtm }}.java"
+#        template: htm/SiteHtm.java
+#      - path: "{{ SITE_SRC }}/src/main/java/{{ SITE_JAVA_PACKAGE | replace('.', '/') }}/{{ RELATIVE_PACKAGE_DynamicPage | replace('.', '/') }}/{{ CLASS_SIMPLE_NAME_DynamicPage }}.java"
+#        template: page/DynamicPage.java
+#      - path: "{{ SITE_SRC }}/src/main/resources/application.yml"
+#        template: java/application.yml
+#      - path: "{{ SITE_SRC }}/src/main/resources/log4j.properties"
+#        template: log4j/log4j.properties
+#      - path: "{{ SITE_SRC }}/src/main/resources/log4j.xml"
+#        template: log4j/log4j.xml
+#      - path: "{{ SITE_SRC }}/local/defaults.yml"
+#        template: local/defaults.yml
+#      - path: "{{ SITE_SRC }}/local/template.yml"
+#        template: local/template.yml
+#      - path: "{{ SITE_SRC }}/CONTRIBUTING"
+#        template: license/CONTRIBUTING
+#      - path: "{{ SITE_SRC }}/DCO"
+#        template: license/DCO
+#      - path: "{{ SITE_SRC }}/LICENSE"
+#        template: license/LICENSE
+#      - path: "{{ SITE_SRC }}/README.md"
+#        template: local/README.md
+#      - path: "{{ SITE_SRC }}-static/js/jQuery-Autocomplete/jquery.autocomplete.js"
+#        template: js/jQuery-Autocomplete/jquery.autocomplete.js
+#      - path: "{{ SITE_SRC }}-static/js/jQuery-Autocomplete/license.txt"
+#        template: js/jQuery-Autocomplete/license.txt
+#      - path: "{{ SITE_SRC }}-static/js/jquery-1.12.4.min.js"
+#        template: js/jquery-1.12.4.min.js
+#      - path: "{{ SITE_SRC }}-static/js/jquery-ui.js"
+#        template: js/jquery-ui.js
+#      - path: "{{ SITE_SRC }}-static/js/datePicker.js"
+#        template: js/datePicker.js
+#      - path: "{{ SITE_SRC }}-static/css/datePicker.css"
+#        template: css/datePicker.css
+#      - path: "{{ SITE_SRC }}-static/js/plotly-2.9.0.min.js"
+#        template: js/plotly-2.9.0.min.js
+#      - path: "{{ SITE_SRC }}-static/js/site-enUS.js"
+#        template: js/site-enUS.js
+#      - path: "{{ SITE_SRC }}-static/js/sockjs.js"
+#        template: js/sockjs.js
+#      - path: "{{ SITE_SRC }}-static/js/sockjs-map.json"
+#        template: js/sockjs-map.json
+#      - path: "{{ SITE_SRC }}-static/js/vertx-eventbus.js"
+#        template: js/vertx-eventbus.js
+#      - path: "{{ SITE_SRC }}-static/js/fullcalendar/main.min.js"
+#        template: fullcalendar/main.min.js
+#      - path: "{{ SITE_SRC }}-static/css/jquery-ui.css"
+#        template: css/jquery-ui.css
+#      - path: "{{ SITE_SRC }}-static/css/site-{{ SITE_LANG }}.css"
+#        template: css/site-enUS.css
+#      - path: "{{ SITE_SRC }}-static/css/w3.css"
+#        template: css/w3.css
+#      - path: "{{ SITE_SRC }}-static/css/fullcalendar/main.min.js"
+#        template: fullcalendar/main.min.css
+#      - path: "{{ SITE_SRC }}-static/svg/openshift.svg"
+#        template: svg/openshift.svg
+#      - path: "{{ SITE_SRC }}/.gitignore"
+#        template: config/gitignore
+#      - path: "{{ SITE_SRC }}-static/.gitignore"
+#        template: config/gitignore
+#      - path: "{{ SITE_SRC }}/openshift/defaults.yml"
+#        template: openshift/defaults.yml
+#      - path: "{{ SITE_SRC }}/openshift/SITE_SERVICE_1.yml"
+#        template: openshift/SITE_SERVICE_1.yml
+#      - path: "{{ SITE_SRC }}/openshift/SITE_SECRET_1.yml"
+#        template: openshift/SITE_SECRET_1.yml
+#      - path: "{{ SITE_SRC }}/openshift/SITE_ROUTE_1.yml"
+#        template: openshift/SITE_ROUTE_1.yml
+#      - path: "{{ SITE_SRC }}/openshift/SITE_IMAGE_STREAM_1.yml"
+#        template: openshift/SITE_IMAGE_STREAM_1.yml
+#      - path: "{{ SITE_SRC }}/openshift/SITE_BUILD_CONFIG_1.yml"
+#        template: openshift/SITE_BUILD_CONFIG_1.yml
+#      - path: "{{ SITE_SRC }}/openshift/SITE_DEPLOYMENT_CONFIG_1.yml"
+#        template: openshift/SITE_DEPLOYMENT_CONFIG_1.yml
+#      - path: "{{ SITE_SRC }}/openshift/SITE_PERSISTENT_VOLUME_CLAIM_1.yml"
+#        template: openshift/SITE_PERSISTENT_VOLUME_CLAIM_1.yml
+#      - path: "{{ SITE_SRC }}/Dockerfile"
+#        template: openshift/Dockerfile
 
 CONFIG_TEMPLATE: |2
   
@@ -193,6 +194,16 @@ CONFIG_TEMPLATE: |2
   DEFAULT_MAP_ZOOM: "3"
 
 CONFIG_KEYS: |2
+  
+  	/**
+  	 * Facebook Graph Version
+  	 **/
+  	public static final String FACEBOOK_GRAPH_VERSION = "FACEBOOK_GRAPH_VERSION";
+  
+  	/**
+  	 * Facebook App ID
+  	 **/
+  	public static final String FACEBOOK_APP_ID = "FACEBOOK_APP_ID";
   
   	/**
   	 * 
@@ -673,13 +684,6 @@ SITE_POM_END: |-2
   
 
   	<distributionManagement>
-  
-  		<repository>
-  			<id>github</id>
-  			<name>GitHub OWNER Apache Maven Packages</name>
-  			<url>https://maven.pkg.github.com/{{ GITHUB_ORG }}/{{ SITE_NAME }}</url>
-  		</repository>
-  
   		<!-- Central Repository -->
   		<snapshotRepository>
   			<id>ossrh</id>

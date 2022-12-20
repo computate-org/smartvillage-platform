@@ -38,7 +38,7 @@ JDBC_HOST: localhost
 JDBC_PORT: 5432
 JDBC_DATABASE: smartabyar-smartvillage
 JDBC_USERNAME: smartabyar-smartvillage
-JDBC_PASSWORD: 
+JDBC_PASSWORD: password
 JDBC_MAX_POOL_SIZE: 10
 JDBC_MAX_WAIT_QUEUE_SIZE: 1000
 
@@ -78,31 +78,35 @@ EMAIL_ADMIN:
 REFRESH_DATA_PAUSE_IN_SECONDS: 10
 ENABLE_REFRESH_DATA: false
 ENABLE_REFRESH_DATA_MapResult: true
+ENABLE_REFRESH_DATA_SystemEvent: true
+ENABLE_REFRESH_DATA_SitePage: true
+ENABLE_REFRESH_DATA_SiteHtm: true
+ENABLE_REFRESH_DATA_IotNode: true
+ENABLE_REFRESH_DATA_IotNodeStep: true
+ENABLE_REFRESH_DATA_PersonStep: true
+ENABLE_REFRESH_DATA_BicycleStep: true
+ENABLE_REFRESH_DATA_TimeStep: true
 ENABLE_REFRESH_DATA_TrafficSimulation: true
+ENABLE_REFRESH_DATA_TrafficFlowObserved: true
 ENABLE_REFRESH_DATA_TrafficLight: true
 ENABLE_REFRESH_DATA_TrafficLightStep: true
 ENABLE_REFRESH_DATA_VehicleStep: true
-ENABLE_REFRESH_DATA_PersonStep: true
-ENABLE_REFRESH_DATA_IotNode: true
-ENABLE_REFRESH_DATA_IotNodeStep: true
-ENABLE_REFRESH_DATA_TimeStep: true
-ENABLE_REFRESH_DATA_SitePage: true
-ENABLE_REFRESH_DATA_SiteHtm: true
-ENABLE_REFRESH_DATA_SystemEvent: true
 
 ENABLE_IMPORT_DATA: true
 ENABLE_IMPORT_DATA_MapResult: true
+ENABLE_IMPORT_DATA_SystemEvent: true
+ENABLE_IMPORT_DATA_SitePage: true
+ENABLE_IMPORT_DATA_SiteHtm: true
+ENABLE_IMPORT_DATA_IotNode: true
+ENABLE_IMPORT_DATA_IotNodeStep: true
+ENABLE_IMPORT_DATA_PersonStep: true
+ENABLE_IMPORT_DATA_BicycleStep: true
+ENABLE_IMPORT_DATA_TimeStep: true
 ENABLE_IMPORT_DATA_TrafficSimulation: true
+ENABLE_IMPORT_DATA_TrafficFlowObserved: true
 ENABLE_IMPORT_DATA_TrafficLight: true
 ENABLE_IMPORT_DATA_TrafficLightStep: true
 ENABLE_IMPORT_DATA_VehicleStep: true
-ENABLE_IMPORT_DATA_PersonStep: true
-ENABLE_IMPORT_DATA_IotNode: true
-ENABLE_IMPORT_DATA_IotNodeStep: true
-ENABLE_IMPORT_DATA_TimeStep: true
-ENABLE_IMPORT_DATA_SitePage: true
-ENABLE_IMPORT_DATA_SiteHtm: true
-ENABLE_IMPORT_DATA_SystemEvent: true
 
 # The Auth roles required to be an admin in the site. 
 AUTH_ROLES_ADMIN: ['SiteAdmin']
@@ -110,25 +114,29 @@ AUTH_ROLES_ADMIN: ['SiteAdmin']
 AUTH_ROLES_REQUIRED_SiteUser: ['SiteAdmin']
 # The Auth roles required to add and modify map result records. 
 AUTH_ROLES_REQUIRED_MapResult: ['SiteAdmin']
+# The Auth roles required to add and modify system event records. 
+AUTH_ROLES_REQUIRED_SystemEvent: ['SiteAdmin']
+# The Auth roles required to add and modify article records. 
+AUTH_ROLES_REQUIRED_SitePage: ['SiteAdmin']
+# The Auth roles required to add and modify HTML records. 
+AUTH_ROLES_REQUIRED_SiteHtm: ['SiteAdmin']
+# The Auth roles required to add and modify IOT node records. 
+AUTH_ROLES_REQUIRED_IotNode: ['SiteAdmin']
+# The Auth roles required to add and modify IOT node step records. 
+AUTH_ROLES_REQUIRED_IotNodeStep: ['SiteAdmin']
+# The Auth roles required to add and modify person step records. 
+AUTH_ROLES_REQUIRED_PersonStep: ['SiteAdmin']
+# The Auth roles required to add and modify bicycle step records. 
+AUTH_ROLES_REQUIRED_BicycleStep: ['SiteAdmin']
+# The Auth roles required to add and modify time step records. 
+AUTH_ROLES_REQUIRED_TimeStep: ['SiteAdmin']
 # The Auth roles required to add and modify traffic simulation records. 
 AUTH_ROLES_REQUIRED_TrafficSimulation: ['SiteAdmin']
+# The Auth roles required to add and modify traffic flow observed records. 
+AUTH_ROLES_REQUIRED_TrafficFlowObserved: ['SiteAdmin']
 # The Auth roles required to add and modify traffic light records. 
 AUTH_ROLES_REQUIRED_TrafficLight: ['SiteAdmin']
 # The Auth roles required to add and modify traffic light step records. 
 AUTH_ROLES_REQUIRED_TrafficLightStep: ['SiteAdmin']
 # The Auth roles required to add and modify vehicle step records. 
 AUTH_ROLES_REQUIRED_VehicleStep: ['SiteAdmin']
-# The Auth roles required to add and modify person step records. 
-AUTH_ROLES_REQUIRED_PersonStep: ['SiteAdmin']
-# The Auth roles required to add and modify IOT node records. 
-AUTH_ROLES_REQUIRED_IotNode: ['SiteAdmin']
-# The Auth roles required to add and modify IOT node step records. 
-AUTH_ROLES_REQUIRED_IotNodeStep: ['SiteAdmin']
-# The Auth roles required to add and modify time step records. 
-AUTH_ROLES_REQUIRED_TimeStep: ['SiteAdmin']
-# The Auth roles required to add and modify article records. 
-AUTH_ROLES_REQUIRED_SitePage: ['SiteAdmin']
-# The Auth roles required to add and modify HTML records. 
-AUTH_ROLES_REQUIRED_SiteHtm: ['SiteAdmin']
-# The Auth roles required to add and modify system event records. 
-AUTH_ROLES_REQUIRED_SystemEvent: ['SiteAdmin']

@@ -5,6 +5,8 @@ SITE_POWERED_BY_URL: "https://www.operate-first.cloud/"
 SITE_POWERED_BY_NAME: "Operate First"
 SITE_POWERED_BY_IMAGE_URI: "/png/operate-first-logo.png"
 SITE_NAME: "smartabyar-smartvillage"
+SITE_POM_GROUP_ID: "org.computate"
+SITE_PUBLIC_URL: "https://smartvillage.computate.org"
 SITE_DISPLAY_NAME: "Smart Village Project"
 SITE_SERVICES:
   - SITE_NAME: "smartabyar-smartvillage"
@@ -14,6 +16,8 @@ CLASS_SIMPLE_NAME_MainVerticle: "MainVerticle"
 RUN_OPENAPI3_GENERATOR: true
 RUN_SQL_GENERATOR: true
 RUN_ARTICLE_GENERATOR: false
+I18N_PATHS: ["/home/ctate/.local/src/computate/src/main/resources/org/computate/i18n/i18n_enUS.yml"]
+DYNAMIC_PAGE_PATHS: ["/home/ctate/.local/src/smartabyar-smartvillage/page"]
 
 LANGUAGE_NAME: "enUS"
 SITE_PATH_enUS: "/home/ctate/.local/src/smartabyar-smartvillage"
@@ -49,7 +53,7 @@ AUTH_SSL: true
 AUTH_SSL_REQUIRED: all
 AUTH_REALM: "RH-IMPACT"
 AUTH_RESOURCE: "rh-impact"
-AUTH_SECRET: 
+AUTH_SECRET: "0518f65a-f86d-42e8-ad65-00f46920443d"
 AUTH_URL: "https://sso.computate.org/auth"
 AUTH_TOKEN_URI: "/auth/realms/RH-IMPACT/protocol/openid-connect/token"
 

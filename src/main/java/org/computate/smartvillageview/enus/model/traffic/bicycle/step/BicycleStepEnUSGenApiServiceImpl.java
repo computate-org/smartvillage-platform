@@ -1287,8 +1287,8 @@ public class BicycleStepEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 			searchList.promiseDeepForClass(siteRequest).onSuccess(a -> {
 				if(facetRange2 != null && statsField2 != null && facetRange2.equals(statsField2)) {
 					StatsField stats = searchList.getResponse().getStats().getStatsFields().get(statsFieldIndexed2);
-					Instant min = Instant.parse(stats.getMin().toString());
-					Instant max = Instant.parse(stats.getMax().toString());
+					Instant min = Optional.ofNullable(stats.getMin()).map(val -> Instant.parse(val.toString())).orElse(Instant.now());
+					Instant max = Optional.ofNullable(stats.getMax()).map(val -> Instant.parse(val.toString())).orElse(Instant.now());
 					Duration duration = Duration.between(min, max);
 					String gap = "DAY";
 					if(duration.toDays() >= 365)

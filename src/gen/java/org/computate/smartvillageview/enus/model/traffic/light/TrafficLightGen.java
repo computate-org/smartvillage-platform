@@ -103,8 +103,8 @@ import io.vertx.core.json.JsonObject;
  * <p>This class contains a comment <b>"Rows: 100"</b>, which means the TrafficLight API will return a default of 100 records instead of 10 by default. 
  * Each API has built in pagination of the search records to ensure a user can query all the data a page at a time without running the application out of memory. 
  * </p>
- * Order: 6
- * <p>This class contains a comment <b>"Order: 6"</b>, which means this class will be sorted by the given number 6 ascending when code that relates to multiple classes at the same time is generated. 
+ * Order: 9
+ * <p>This class contains a comment <b>"Order: 9"</b>, which means this class will be sorted by the given number 9 ascending when code that relates to multiple classes at the same time is generated. 
  * </p>
  * Model: true
  * Page: true

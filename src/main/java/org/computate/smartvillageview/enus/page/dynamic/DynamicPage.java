@@ -97,7 +97,7 @@ public class DynamicPage extends DynamicPageGen<PageLayout> {
 		SearchList<SiteHtm> l = new SearchList<>();
 		l.q("*:*");
 		l.setC(SiteHtm.class);
-		l.fq(String.format("uri_docvalues_string:%s", SearchTool.escapeQueryChars(uri)));
+		l.fq(String.format("url_docvalues_string:%s", SearchTool.escapeQueryChars(url)));
 		if(filterLabel != null)
 			l.fq(String.format("labels_docvalues_strings:%s", SearchTool.escapeQueryChars(filterLabel)));
 		l.sortAsc("sequenceNum_docvalues_long");
