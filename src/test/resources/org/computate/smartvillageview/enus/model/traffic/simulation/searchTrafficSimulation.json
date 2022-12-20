@@ -1,0 +1,70 @@
+{
+  "responseHeader": {
+    "zkConnected": true,
+    "status": 0,
+    "QTime": 0,
+    "params": {
+      "q": "*:*",
+      "start": "0",
+      "fq": [
+        "classCanonicalNames_docvalues_strings:org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation",
+        "deleted_docvalues_boolean:false",
+        "archived_docvalues_boolean:false"
+      ],
+      "sort": "created_docvalues_date desc",
+      "rows": "10"
+    }
+  },
+  "response": {
+    "numFound": 1,
+    "start": 0,
+    "numFoundExact": true,
+    "docs": [
+      {
+        "simulationName_docvalues_string": "Veberod_intersection",
+        "sumocfgPath_docvalues_string": "/home/ctate/.local/src/TLC/TLC_sumo/input/Veberod_intersection_pedestrian.sumocfg",
+        "fcdFilePath_docvalues_string": "/home/ctate/.local/src/TLC/TLC_sumo/output/veberod-fcd.xml",
+        "startDateTime_docvalues_date": "2022-11-07T20:15:00Z",
+        "startSeconds_docvalues_double": 0,
+        "endSeconds_docvalues_double": 300,
+        "stepSeconds_docvalues_double": 1,
+        "pk_docvalues_long": 1,
+        "created_docvalues_date": "2022-10-03T19:46:34.893Z",
+        "modified_docvalues_date": "2022-11-09T18:25:52.237Z",
+        "archived_docvalues_boolean": false,
+        "deleted_docvalues_boolean": false,
+        "classCanonicalName_docvalues_string": "org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation",
+        "classSimpleName_docvalues_string": "TrafficSimulation",
+        "classCanonicalNames_docvalues_strings": [
+          "org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation",
+          "org.computate.smartvillageview.enus.model.base.BaseModel"
+        ],
+        "userKey_docvalues_long": 1,
+        "saves_docvalues_strings": [
+          "simulationName",
+          "startSeconds",
+          "endSeconds",
+          "stepSeconds",
+          "created",
+          "deleted",
+          "userKey",
+          "sumocfgPath",
+          "fcdFilePath",
+          "startDateTime"
+        ],
+        "objectTitle_docvalues_string": "Simulation \"Veberod_intersection\" in /home/ctate/.local/src/TLC/TLC_sumo/input/Veberod_intersection_pedestrian.sumocfg",
+        "objectId_docvalues_string": "simulation-veberod_intersection-in-homectatelocalsrctlctlc_sumoinputveberod_intersection_pedestriansumocfg",
+        "objectSuggest_suggested": " 1 simulation-veberod_intersection-in-homectatelocalsrctlctlc_sumoinputveberod_intersection_pedestriansumocfg Simulation \"Veberod_intersection\" in /home/ctate/.local/src/TLC/TLC_sumo/input/Veberod_intersection_pedestrian.sumocfg",
+        "objectText_text_enUS": [
+          "simulation-veberod_intersection-in-homectatelocalsrctlctlc_sumoinputveberod_intersection_pedestriansumocfg",
+          "Simulation \"Veberod_intersection\" in /home/ctate/.local/src/TLC/TLC_sumo/input/Veberod_intersection_pedestrian.sumocfg"
+        ],
+        "pageUrlId_docvalues_string": "http://localhost:12080/traffic-simulation/simulation-veberod_intersection-in-homectatelocalsrctlctlc_sumoinputveberod_intersection_pedestriansumocfg",
+        "pageUrlPk_docvalues_string": "http://localhost:12080/traffic-simulation/1",
+        "pageUrlApi_docvalues_string": "http://localhost:12080/api/traffic-simulation/1",
+        "id": "TrafficSimulation_1",
+        "_version_": 1749044011716313000
+      }
+    ]
+  }
+}
