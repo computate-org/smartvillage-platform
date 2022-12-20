@@ -203,11 +203,11 @@ public class TrafficSimulationTest {
 		params.put("query", new JsonObject()
 				.put("rows", "10")
 				.put("start", "0")
-				.put("facet.range.gap", "+1DAY")
-				.put("facet.range.start", "2022-12-14T00:00:00.000[America/Denver]")
-				.put("facet.range.start", "2022-12-21T00:00:00.000[America/Denver]")
-				.put("facet.range", "{!tag=r1}created")
-				.put("facet.pivot", "{!range=r1}classSimpleName")
+//				.put("facet.range.gap", "+1DAY")
+//				.put("facet.range.start", "2022-12-14T00:00:00.000[America/Denver]")
+//				.put("facet.range.start", "2022-12-21T00:00:00.000[America/Denver]")
+//				.put("facet.range", "{!tag=r1}created")
+//				.put("facet.pivot", "{!range=r1}classSimpleName")
 				);
 		JsonObject context = new JsonObject().put("params", params).put("user", new JsonObject().put("access_token", "..."));
 		JsonObject json = new JsonObject().put("context", context);
@@ -215,9 +215,9 @@ public class TrafficSimulationTest {
 		vertx.eventBus().request(address, json, new DeliveryOptions().addHeader("action", "searchTrafficSimulation")).onSuccess(response -> {
 			JsonObject body = (JsonObject)response.body();
 			JsonObject responseBody = new JsonObject(Buffer.buffer(JsonUtil.BASE64_DECODER.decode(body.getString("payload"))));
-			testContext.assertEquals(responseBody.getLong("foundNum"), 1L);
-			testContext.assertEquals(responseBody.getLong("returnedNum"), 1L);
-			testContext.assertEquals(responseBody.getLong("startNum"), 0L);
+			testContext.assertEquals(1L, responseBody.getLong("foundNum"));
+			testContext.assertEquals(1L, responseBody.getLong("returnedNum"));
+			testContext.assertEquals(0L, responseBody.getLong("startNum"));
 			async.complete();
 		}).onFailure(ex -> {
 			async.complete();
