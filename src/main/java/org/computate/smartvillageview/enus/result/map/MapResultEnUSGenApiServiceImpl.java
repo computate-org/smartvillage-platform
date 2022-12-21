@@ -85,7 +85,6 @@ import org.computate.search.tool.SearchTool;
 import org.computate.search.response.solr.SolrResponse;
 import java.util.Base64;
 import java.time.ZonedDateTime;
-import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.BooleanUtils;
 import org.computate.vertx.search.list.SearchList;
 import org.computate.smartvillageview.enus.result.map.MapResultPage;
@@ -112,10 +111,10 @@ public class MapResultEnUSGenApiServiceImpl extends BaseApiServiceImpl implement
 				List<String> roles = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_REQUIRED + "_MapResult")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
 				List<String> roleReads = Arrays.asList("");
 				if(
-						!CollectionUtils.containsAny(siteRequest.getUserResourceRoles(), roles)
-						&& !CollectionUtils.containsAny(siteRequest.getUserRealmRoles(), roles)
-						&& !CollectionUtils.containsAny(siteRequest.getUserResourceRoles(), roleReads)
-						&& !CollectionUtils.containsAny(siteRequest.getUserRealmRoles(), roleReads)
+						!siteRequest.getUserResourceRoles().stream().anyMatch(roles::contains)
+						&& !siteRequest.getUserRealmRoles().stream().anyMatch(roles::contains)
+						&& !siteRequest.getUserResourceRoles().stream().anyMatch(roleReads::contains)
+						&& !siteRequest.getUserRealmRoles().stream().anyMatch(roleReads::contains)
 						) {
 					eventHandler.handle(Future.succeededFuture(
 						new ServiceResponse(401, "UNAUTHORIZED", 
@@ -246,10 +245,10 @@ public class MapResultEnUSGenApiServiceImpl extends BaseApiServiceImpl implement
 				List<String> roles = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_REQUIRED + "_MapResult")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
 				List<String> roleReads = Arrays.asList("");
 				if(
-						!CollectionUtils.containsAny(siteRequest.getUserResourceRoles(), roles)
-						&& !CollectionUtils.containsAny(siteRequest.getUserRealmRoles(), roles)
-						&& !CollectionUtils.containsAny(siteRequest.getUserResourceRoles(), roleReads)
-						&& !CollectionUtils.containsAny(siteRequest.getUserRealmRoles(), roleReads)
+						!siteRequest.getUserResourceRoles().stream().anyMatch(roles::contains)
+						&& !siteRequest.getUserRealmRoles().stream().anyMatch(roles::contains)
+						&& !siteRequest.getUserResourceRoles().stream().anyMatch(roleReads::contains)
+						&& !siteRequest.getUserRealmRoles().stream().anyMatch(roleReads::contains)
 						) {
 					eventHandler.handle(Future.succeededFuture(
 						new ServiceResponse(401, "UNAUTHORIZED", 
@@ -323,10 +322,10 @@ public class MapResultEnUSGenApiServiceImpl extends BaseApiServiceImpl implement
 				List<String> roles = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_REQUIRED + "_MapResult")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
 				List<String> roleReads = Arrays.asList("");
 				if(
-						!CollectionUtils.containsAny(siteRequest.getUserResourceRoles(), roles)
-						&& !CollectionUtils.containsAny(siteRequest.getUserRealmRoles(), roles)
-						&& !CollectionUtils.containsAny(siteRequest.getUserResourceRoles(), roleReads)
-						&& !CollectionUtils.containsAny(siteRequest.getUserRealmRoles(), roleReads)
+						!siteRequest.getUserResourceRoles().stream().anyMatch(roles::contains)
+						&& !siteRequest.getUserRealmRoles().stream().anyMatch(roles::contains)
+						&& !siteRequest.getUserResourceRoles().stream().anyMatch(roleReads::contains)
+						&& !siteRequest.getUserRealmRoles().stream().anyMatch(roleReads::contains)
 						) {
 					eventHandler.handle(Future.succeededFuture(
 						new ServiceResponse(401, "UNAUTHORIZED", 

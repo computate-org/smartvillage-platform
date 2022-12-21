@@ -85,7 +85,6 @@ import org.computate.search.tool.SearchTool;
 import org.computate.search.response.solr.SolrResponse;
 import java.util.Base64;
 import java.time.ZonedDateTime;
-import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.BooleanUtils;
 import org.computate.vertx.search.list.SearchList;
 import org.computate.smartvillageview.enus.model.user.SiteUserPage;
@@ -230,8 +229,8 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 						try {
 							List<String> roles2 = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_ADMIN)).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
 							if(listSiteUser.getResponse().getResponse().getNumFound() > 1
-									&& !CollectionUtils.containsAny(siteRequest.getUserResourceRoles(), roles2)
-									&& !CollectionUtils.containsAny(siteRequest.getUserRealmRoles(), roles2)
+									&& !siteRequest.getUserResourceRoles().stream().anyMatch(roles2::contains)
+									&& !siteRequest.getUserRealmRoles().stream().anyMatch(roles2::contains)
 									) {
 								String message = String.format("roles required: " + String.join(", ", roles2));
 								LOG.error(message);
@@ -1440,10 +1439,10 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 			List<String> roles = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_REQUIRED + "_SiteUser")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
 			List<String> roleReads = Arrays.asList("");
 			if(
-					!CollectionUtils.containsAny(siteRequest.getUserResourceRoles(), roles)
-					&& !CollectionUtils.containsAny(siteRequest.getUserRealmRoles(), roles)
-					&& (modify || !CollectionUtils.containsAny(siteRequest.getUserResourceRoles(), roleReads))
-					&& (modify || !CollectionUtils.containsAny(siteRequest.getUserRealmRoles(), roleReads))
+					!siteRequest.getUserResourceRoles().stream().anyMatch(roles::contains)
+					&& !siteRequest.getUserRealmRoles().stream().anyMatch(roles::contains)
+					&& (modify || !siteRequest.getUserResourceRoles().stream().anyMatch(roleReads::contains))
+					&& (modify || !siteRequest.getUserRealmRoles().stream().anyMatch(roleReads::contains))
 					) {
 				searchList.fq("sessionId_docvalues_string:" + SearchTool.escapeQueryChars(Optional.ofNullable(siteRequest.getSessionId()).orElse("-----")) + " OR " + "sessionId_docvalues_string:" + SearchTool.escapeQueryChars(Optional.ofNullable(siteRequest.getSessionIdBefore()).orElse("-----"))
 						+ " OR userKeys_docvalues_longs:" + Optional.ofNullable(siteRequest.getUserKey()).orElse(0L));

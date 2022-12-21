@@ -32,7 +32,6 @@ import java.util.Arrays;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.math.MathContext;
-import org.apache.commons.collections4.CollectionUtils;
 import java.util.Objects;
 import io.vertx.core.Promise;
 import org.computate.smartvillageview.enus.config.ConfigKeys;
