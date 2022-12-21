@@ -1071,6 +1071,8 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 				LOG.error(stopFail, ex);
 				promise.fail(ex);
 			});
+		} else {
+			promise.complete();
 		}
 	}
 
