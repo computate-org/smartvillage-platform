@@ -1,0 +1,23 @@
+apiVersion: broker.amq.io/v1beta1
+kind: ActiveMQArtemis
+metadata:
+  name: fiware-broker
+  namespace: fiware
+spec:
+  acceptors:
+    - name: AMQP
+      protocols: AMQP
+      sslEnabled: false
+    - name: MQTT
+      protocols: MQTT
+  console:
+    expose: true
+  deploymentPlan:
+    image: placeholder
+    jolokiaAgentEnabled: false
+    journalType: nio
+    managementRBACEnabled: true
+    messageMigration: false
+    persistenceEnabled: false
+    requireLogin: false
+    size: 2

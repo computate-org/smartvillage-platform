@@ -1,0 +1,36 @@
+---
+
+#mongo -u $MONGODB_ROOT_USER -p $MONGODB_ROOT_PASSWORD --eval 'db.createCollection("iotagentul");'
+#mongo -u $MONGODB_ROOT_USER -p $MONGODB_ROOT_PASSWORD --eval 'db.createCollection("devices");'
+#mongo -u $MONGODB_ROOT_USER -p $MONGODB_ROOT_PASSWORD --eval 'db.devices.createIndex({"_id.service": 1, "_id.id": 1, "_id.type": 1});'
+#mongo -u $MONGODB_ROOT_USER -p $MONGODB_ROOT_PASSWORD --eval 'db.devices.createIndex({"_id.type": 1});'
+#mongo -u $MONGODB_ROOT_USER -p $MONGODB_ROOT_PASSWORD --eval 'db.devices.createIndex({"_id.id": 1});'
+#mongo -u $MONGODB_ROOT_USER -p $MONGODB_ROOT_PASSWORD --eval 'db.createCollection("groups");'
+#mongo -u $MONGODB_ROOT_USER -p $MONGODB_ROOT_PASSWORD --eval 'db.groups.createIndex({"_id.resource": 1, "_id.apikey": 1, "_id.service": 1});'
+#mongo -u $MONGODB_ROOT_USER -p $MONGODB_ROOT_PASSWORD --eval 'db.groups.createIndex({"_id.type": 1});' > /dev/null'
+
+- block:
+    - name: "Create service group"
+      connection: local
+      uri:
+        timeout: 90
+        url: "http://iotagent-ul-north-fiware.apps-crc.testing/iot/services"
+        method: POST
+        headers:
+          Content-Type: "application/json"
+          fiware-service: openiot
+          fiware-servicepath: /
+        body_format: json
+        body:
+          services:
+            - apikey: 4jggokgpepnvsb2uv4s40d59ov
+              cbroker: http://orion:1026
+              entity_type: TrafficFlowObserved
+              resource: /iot/d
+        return_content: true
+        status_code: 
+          - 200
+          - 201
+      register: CREATE_SERVICE_GROUP
+    - debug:
+        var: CREATE_SERVICE_GROUP
