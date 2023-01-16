@@ -11,7 +11,7 @@
         msg: >
           Missing variables REDHAT_OPENSHIFT_HOST and REDHAT_OPENSHIFT_TOKEN. 
           Find the login command to OpenShift and and set these variables, for example: 
-          ansible-playbook ~/.local/src/smartabyar-smartvillage/openshift/ansible/setup-iotagent-ul.yml 
+          ansible-playbook ~/.local/src/smartabyar-smartvillage/openshift/ansible/setup-iotagent-json.yml 
           -e REDHAT_OPENSHIFT_HOST=https://api.crc.testing:6443 
           -e REDHAT_OPENSHIFT_TOKEN=sha256~KNsu4uF9jsFUVZJE6smixzmWhoHVq9rgADUICQIrrDI
       when: create_mongodb_user.failed
@@ -21,3 +21,29 @@
       ignore_errors: true
     - debug:
         var: create_mongodb_collections
+
+#- block:
+#    - name: "Create service group"
+#      connection: local
+#      uri:
+#        timeout: 90
+#        url: "http://iotagent-json-north-fiware.apps-crc.testing/iot/services"
+#        method: POST
+#        headers:
+#          Content-Type: "application/json"
+#          fiware-service: openiot
+#          fiware-servicepath: /
+#        body_format: json
+#        body:
+#          services:
+#            - apikey: 4jggokgpepnvsb2uv4s40d59ov
+#              cbroker: http://orion:1026
+#              entity_type: TrafficFlowObserved
+#              resource: /iot/d
+#        return_content: true
+#        status_code: 
+#          - 200
+#          - 201
+#      register: CREATE_SERVICE_GROUP
+#    - debug:
+#        var: CREATE_SERVICE_GROUP

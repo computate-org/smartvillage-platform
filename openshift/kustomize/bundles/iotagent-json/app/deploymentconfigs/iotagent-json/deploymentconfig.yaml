@@ -1,14 +1,14 @@
 apiVersion: apps.openshift.io/v1
 kind: DeploymentConfig
 metadata:
-  name: iotagent-ul
+  name: iotagent-json
   namespace: fiware
 spec:
   replicas: 1
   revisionHistoryLimit: 10
   selector:
-    app: iotagent-ul
-    deploymentconfig: iotagent-ul
+    app: iotagent-json
+    deploymentconfig: iotagent-json
   strategy:
     activeDeadlineSeconds: 21600
     resources: {}
@@ -23,12 +23,12 @@ spec:
     metadata:
       creationTimestamp: null
       labels:
-        app: iotagent-ul
-        deploymentconfig: iotagent-ul
+        app: iotagent-json
+        deploymentconfig: iotagent-json
     spec:
       containers:
       - imagePullPolicy: Always
-        name: iotagent-ul
+        name: iotagent-json
         ports:
         - containerPort: 7896
           protocol: TCP
@@ -63,11 +63,11 @@ spec:
                 name: mongodb-secret
                 key: mongodb-root-password
           - name: IOTA_MONGO_DB
-            value: 'iotagent-json'
+            value: 'iotagentjson'
           - name: IOTA_HTTP_PORT
             value: '7896'
           - name: IOTA_PROVIDER_URL
-            value: 'http://iotagent-ul.fiware.svc.cluster.local:4041'
+            value: 'http://iotagent-json.fiware.svc.cluster.local:4041'
 
           - name: IOTA_MQTT_DISABLED
             value: 'false'
@@ -101,10 +101,10 @@ spec:
   - imageChangeParams:
       automatic: true
       containerNames:
-      - iotagent-ul
+      - iotagent-json
       from:
         kind: ImageStreamTag
-        name: iotagent-ul:latest
+        name: iotagent-json:latest
         namespace: fiware
     type: ImageChange
   - type: ConfigChange
