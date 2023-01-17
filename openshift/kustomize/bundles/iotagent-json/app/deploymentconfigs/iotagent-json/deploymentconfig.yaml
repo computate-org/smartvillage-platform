@@ -77,6 +77,8 @@ spec:
             value: '61616'
           - name: IOTA_AMQP_DISABLED
             value: 'true'
+          - name: IOTA_MQTT_KEY
+            value: '1234'
 
 #          - name: IOTA_MQTT_DISABLED
 #            value: 'true'
