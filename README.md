@@ -8,7 +8,7 @@
 pkcon install -y git
 pkcon install -y python3
 pkcon install -y python3-pip
-pkcon install -y python3-virtualenv
+pip install virtualenv
 ```
 
 ## Install Ansible dependencies on MacOSX
