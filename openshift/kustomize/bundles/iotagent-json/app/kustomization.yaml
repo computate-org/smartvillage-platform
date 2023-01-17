@@ -5,3 +5,4 @@ resources:
   - imagestreams/
   - services/
   - deploymentconfigs/
+  - routes/
