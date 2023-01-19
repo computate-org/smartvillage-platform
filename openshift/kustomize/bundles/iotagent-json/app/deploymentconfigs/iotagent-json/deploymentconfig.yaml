@@ -72,9 +72,11 @@ spec:
           - name: IOTA_MQTT_DISABLED
             value: 'false'
           - name: IOTA_MQTT_HOST
-            value: 'fiware-broker-hdls-svc.fiware.svc.cluster.local'
+            value: 'fiware-broker-mqtt-0-svc.fiware.svc.cluster.local'
           - name: IOTA_MQTT_PORT
-            value: '61616'
+            value: '1883'
+          - name: IOTA_MQTT_REJECT_UNAUTHORIZED
+            value: 'false'
           - name: IOTA_AMQP_DISABLED
             value: 'true'
 

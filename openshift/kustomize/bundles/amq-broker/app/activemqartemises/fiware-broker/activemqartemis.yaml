@@ -5,11 +5,9 @@ metadata:
   namespace: fiware
 spec:
   acceptors:
-    - name: AMQP
-      protocols: AMQP
-      sslEnabled: false
-    - name: MQTT
-      protocols: MQTT
+    - name: mqtt
+      protocols: mqtt
+      port: 1883
   console:
     expose: true
   deploymentPlan:

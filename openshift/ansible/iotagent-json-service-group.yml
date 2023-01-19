@@ -2,8 +2,6 @@
 - name: Setup iotagent-json
   hosts: localhost
   connection: local
-#  vars_files:
-#    - "{{ lookup('env', 'HOME') }}/.local/src/fiware-hackathon-2023/vaults/fiware-2023/vault"
   roles:
     - iotagent-json-service-group
 

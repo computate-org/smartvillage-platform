@@ -1,0 +1,9 @@
+---
+DEVICE1_BODY:
+  device_id: ansible_test1
+  entity_name: TrafficFlowObserved
+  entity_type: TrafficFlowObserved
+  attributes:
+    - object_id: intensity
+      name: intensity
+      type: integer

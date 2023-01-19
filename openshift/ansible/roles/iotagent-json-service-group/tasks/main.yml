@@ -1,49 +1,49 @@
 ---
 
-- block:
-    - name: Create MongoDB user for FIWARE
-      shell: "oc login {{ REDHAT_OPENSHIFT_HOST }} --token={{ REDHAT_OPENSHIFT_TOKEN }} && oc exec $(oc get pod -l app.kubernetes.io/name=mongodb -o jsonpath='{.items[0].metadata.name}' -n fiware) -n fiware -- sh -c 'mongo -u \"$MONGODB_ROOT_USER\" -p \"$MONGODB_ROOT_PASSWORD\" --eval '\"'\"'{{ MONGODB_CREATE_USER_COMMAND }}'\"'\"'' || true"
-      register: create_mongodb_user
-      ignore_errors: true
-    - debug:
-        var: create_mongodb_user
-    - fail:
-        msg: >
-          Missing variables REDHAT_OPENSHIFT_HOST and REDHAT_OPENSHIFT_TOKEN. 
-          Find the login command to OpenShift and and set these variables, for example: 
-          ansible-playbook ~/.local/src/smartabyar-smartvillage/openshift/ansible/setup-iotagent-json.yml 
-          -e REDHAT_OPENSHIFT_HOST=https://api.crc.testing:6443 
-          -e REDHAT_OPENSHIFT_TOKEN=sha256~KNsu4uF9jsFUVZJE6smixzmWhoHVq9rgADUICQIrrDI
-      when: create_mongodb_user.failed
-    - name: Create MongoDB collections and indexes for FIWARE
-      shell: "oc login {{ REDHAT_OPENSHIFT_HOST }} --token={{ REDHAT_OPENSHIFT_TOKEN }} && oc exec $(oc get pod -l app.kubernetes.io/name=mongodb -o jsonpath='{.items[0].metadata.name}' -n fiware) -n fiware -- sh -c 'mongo -u \"$MONGODB_ROOT_USER\" -p \"$MONGODB_ROOT_PASSWORD\" --eval '\"'\"'{{ MONGODB_CREATE_COLLECTIONS_COMMAND }}'\"'\"'' || true"
-      register: create_mongodb_collections
-      ignore_errors: true
-    - debug:
-        var: create_mongodb_collections
-
-#- block:
-#    - name: "Create service group"
-#      connection: local
-#      uri:
-#        timeout: 90
-#        url: "http://iotagent-json-north-fiware.apps-crc.testing/iot/services"
-#        method: POST
-#        headers:
-#          Content-Type: "application/json"
-#          fiware-service: openiot
-#          fiware-servicepath: /
-#        body_format: json
-#        body:
-#          services:
-#            - apikey: 4jggokgpepnvsb2uv4s40d59ov
-#              cbroker: http://orion:1026
-#              entity_type: TrafficFlowObserved
-#              resource: /iot/d
-#        return_content: true
-#        status_code: 
-#          - 200
-#          - 201
-#      register: CREATE_SERVICE_GROUP
-#    - debug:
-#        var: CREATE_SERVICE_GROUP
+- name: "Provision the {{ SERVICE1_BODY.service_id }} service"
+  connection: local
+  uri:
+    timeout: 90
+    url: "http://iotagent-json-north-fiware.apps-crc.testing/iot/services"
+    method: POST
+    headers:
+      Content-Type: "application/json"
+      Fiware-Service: ansible_test
+      Fiware-ServicePath: /environment
+    body_format: json
+    body:
+      services:
+        - "{{ SERVICE1_BODY }}"
+    return_content: true
+    status_code: 
+      - 200
+      - 201
+  register: CREATE_SERVICE
+  ignore_errors: true
+- debug:
+    var: CREATE_SERVICE
+- name: "Update the ansible-test1 service"
+  connection: local
+  uri:
+    timeout: 90
+    url: "http://iotagent-json-north-fiware.apps-crc.testing/iot/services?apikey={{ SERVICE1_BODY.apikey | urlencode }}&resource={{ SERVICE1_BODY.resource | urlencode }}"
+    method: PUT
+    headers:
+      Content-Type: "application/json"
+      Fiware-Service: ansible_test
+      Fiware-ServicePath: /environment
+      Cache-Control: no-cache
+    body_format: json
+    body: "{{ SERVICE1_BODY | combine({ 'apikey': omit }) | combine({ 'resource': omit }) }}"
+    return_content: true
+    status_code: 
+      - 204
+  register: UPDATE_SERVICE
+  ignore_errors: true
+  when: CREATE_SERVICE.failed
+- debug:
+    msg: "{{ UPDATE_SERVICE }}"
+  when: CREATE_SERVICE.failed
+- fail:
+    msg: "{{ UPDATE_SERVICE }}"
+  when: CREATE_SERVICE.failed and UPDATE_SERVICE.failed
