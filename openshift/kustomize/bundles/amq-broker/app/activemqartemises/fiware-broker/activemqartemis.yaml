@@ -8,8 +8,6 @@ spec:
     - name: mqtt
       protocols: mqtt
       port: 1883
-  console:
-    expose: true
   deploymentPlan:
     image: placeholder
     jolokiaAgentEnabled: false
