@@ -1,8 +1,8 @@
 SERVICE1_BODY:
-  apikey: apikeyTrafficFlowObserved
+  apikey: apikeyTrafficFlowObserved1
   cbHost: http://orion-ld-fiware.apps-crc.testing
   entity_type: TrafficFlowObserved
-  resource: /iot/TrafficFlowObserved
+  resource: /iot/json
   attributes:
     - object_id: intensity
       name: intensity

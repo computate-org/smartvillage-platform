@@ -9,7 +9,7 @@
     headers:
       Content-Type: "application/json"
       Fiware-Service: ansible_test
-      Fiware-ServicePath: /environment
+      Fiware-ServicePath: /
       Cache-Control: no-cache
     body_format: json
     body:
