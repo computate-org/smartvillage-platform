@@ -503,66 +503,21 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 																		refreshData(VehicleStep.CLASS_SIMPLE_NAME).onSuccess(q14 -> {
 																			LOG.info(refreshAllDataComplete);
 																			promise.complete();
-																		}).onFailure(ex -> {
-																			LOG.error(refreshAllDataFail, ex);
-																			promise.fail(ex);
-																		});
-																	}).onFailure(ex -> {
-																		LOG.error(refreshAllDataFail, ex);
-																		promise.fail(ex);
-																	});
-																}).onFailure(ex -> {
-																	LOG.error(refreshAllDataFail, ex);
-																	promise.fail(ex);
-																});
-															}).onFailure(ex -> {
-																LOG.error(refreshAllDataFail, ex);
-																promise.fail(ex);
-															});
-														}).onFailure(ex -> {
-															LOG.error(refreshAllDataFail, ex);
-															promise.fail(ex);
-														});
-													}).onFailure(ex -> {
-														LOG.error(refreshAllDataFail, ex);
-														promise.fail(ex);
-													});
-												}).onFailure(ex -> {
-													LOG.error(refreshAllDataFail, ex);
-													promise.fail(ex);
-												});
-											}).onFailure(ex -> {
-												LOG.error(refreshAllDataFail, ex);
-												promise.fail(ex);
-											});
-										}).onFailure(ex -> {
-											LOG.error(refreshAllDataFail, ex);
-											promise.fail(ex);
-										});
-									}).onFailure(ex -> {
-										LOG.error(refreshAllDataFail, ex);
-										promise.fail(ex);
-									});
-								}).onFailure(ex -> {
-									LOG.error(refreshAllDataFail, ex);
-									promise.fail(ex);
-								});
-							}).onFailure(ex -> {
-								LOG.error(refreshAllDataFail, ex);
-								promise.fail(ex);
-							});
-						}).onFailure(ex -> {
-							LOG.error(refreshAllDataFail, ex);
-							promise.fail(ex);
-						});
-					}).onFailure(ex -> {
-						LOG.error(refreshAllDataFail, ex);
-						promise.fail(ex);
-					});
-				}).onFailure(ex -> {
-					LOG.error(refreshAllDataFail, ex);
-					promise.fail(ex);
-				});
+																		}).onFailure(ex -> promise.fail(ex));
+																	}).onFailure(ex -> promise.fail(ex));
+																}).onFailure(ex -> promise.fail(ex));
+															}).onFailure(ex -> promise.fail(ex));
+														}).onFailure(ex -> promise.fail(ex));
+													}).onFailure(ex -> promise.fail(ex));
+												}).onFailure(ex -> promise.fail(ex));
+											}).onFailure(ex -> promise.fail(ex));
+										}).onFailure(ex -> promise.fail(ex));
+									}).onFailure(ex -> promise.fail(ex));
+								}).onFailure(ex -> promise.fail(ex));
+							}).onFailure(ex -> promise.fail(ex));
+						}).onFailure(ex -> promise.fail(ex));
+					}).onFailure(ex -> promise.fail(ex));
+				}).onFailure(ex -> promise.fail(ex));
 			} else {
 				LOG.info(refreshAllDataSkip);
 				promise.complete();
@@ -651,10 +606,7 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 															apiRequest.setTimeRemaining(apiRequest.calculateTimeRemaining());
 															vertx.eventBus().publish(String.format("websocket%s", tableName), JsonObject.mapFrom(apiRequest));
 														}
-													}).onFailure(ex -> {
-														LOG.error(String.format(refreshDataFail, tableName), ex);
-														promise1.fail(ex);
-													});
+													}).onFailure(ex -> promise1.fail(ex));
 												} catch (Exception ex) {
 													LOG.error(String.format(refreshDataFail, tableName), ex);
 													promise1.fail(ex);
@@ -664,10 +616,7 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 											LOG.error(String.format(refreshDataFail, tableName), ex);
 											promise1.fail(ex);
 										}
-									}).onFailure(ex -> {
-										LOG.error(String.format(refreshDataFail, tableName), ex);
-										promise1.fail(ex);
-									});
+									}).onFailure(ex -> promise1.fail(ex));
 								} else {
 									promise1.complete();
 								}
@@ -675,17 +624,11 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 								LOG.error(String.format(refreshDataFail, tableName), ex);
 								promise1.fail(ex);
 							}
-						}).onFailure(ex -> {
-							LOG.error(String.format(refreshDataFail, tableName), ex);
-							promise1.fail(ex);
-						});
+						}).onFailure(ex -> promise1.fail(ex));
 						return promise1.future();
 					}).onSuccess(a -> {
 						promise.complete();
-					}).onFailure(ex -> {
-						LOG.error(String.format(refreshDataFail, tableName), ex);
-						promise.fail(ex);
-					});
+					}).onFailure(ex -> promise.fail(ex));
 				} catch (Exception ex) {
 					LOG.error(String.format(refreshDataFail, tableName), ex);
 					promise.fail(ex);
