@@ -4,10 +4,4 @@ resources:
   - namespaces/
   - helmchartrepositories/
   - https://solr.apache.org/operator/downloads/crds/v0.6.0/all-with-dependencies.yaml
-  - rolebindings/
-  - solrclouds/
-  - serviceaccounts/
-
-  - statefulsets/
-  - configmaps/
-  - routes/
+  - applications/
