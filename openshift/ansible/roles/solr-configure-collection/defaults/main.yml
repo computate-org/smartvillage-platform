@@ -1,0 +1,95 @@
+---
+
+######################
+# OpenShift defaults #
+######################
+
+# The OpenShift base URL where applications will be deployed.
+REDHAT_OPENSHIFT_HOST: https://api.crc.testing:6443
+# The OpenShift secret token to grant access to OpenShift (https://api.pro-us-east-1.openshift.com/oauth/token/request).
+REDHAT_OPENSHIFT_TOKEN: "{{ default(omit) }}"
+# The OpenShift namespace where applications will be deployed.
+REDHAT_OPENSHIFT_NAMESPACE: "solr"
+# Solr memory limit. 
+SOLR_LIMITS_MEMORY: "500Mi"
+# Solr cpu limit. 
+SOLR_LIMITS_CPU: "500m"
+# Solr memory requests. 
+SOLR_REQUESTS_MEMORY: "200Mi"
+# Solr cpu requests. 
+SOLR_REQUESTS_CPU: "100m"
+
+#################
+# Solr defaults #
+#################
+
+# The directory for solr. 
+SOLR_OPT: /opt/solr
+# The version of solr to use. 
+SOLR_VERSION: 8.8.1
+# The size of the solr data volume. 
+SOLR_VOLUME_SIZE: 1Gi
+# The default port that Solr runs.
+SOLR_PORT: 8983
+# The Solr OpenShift base URL where Solr will be deployed.
+SOLR_HOST: "{{REDHAT_OPENSHIFT_HOST}}"
+# The Solr OpenShift secret token to grant access to OpenShift (https://api.pro-us-east-1.openshift.com/oauth/token/request).
+SOLR_TOKEN: "{{REDHAT_OPENSHIFT_TOKEN}}"
+# The Solr OpenShift namespace where Solr be deployed.
+SOLR_NAMESPACE: "{{REDHAT_OPENSHIFT_NAMESPACE}}"
+# The Solr volume size for Solr files.
+SOLR_VOLUME_SIZE: 2Gi
+# The default hostname for the Solr search engine.
+SOLR_HOST_NAME: "solr.{{SOLR_NAMESPACE}}.svc"
+# The Kubernetes pod label that identifies a Solr pod to connect to. 
+SOLR_LABEL: statefulset.kubernetes.io/pod-name=site-solrcloud-0
+# The Solr collection to create
+SOLR_COLLECTION: smartabyar-smartvillage
+
+# Enable Solr Basic Authentication/Authorization
+ENABLE_SOLR_BASIC_AUTH: false
+
+# Enable Solr SSL
+ENABLE_SOLR_SSL: false
+SSL_KEYSTORE_PATH: /opt/keystore
+SSL_JKS_FILENAME: "{{ SSL_ALIAS }}.jks"
+SSL_JKS_PATH: "{{ SSL_KEYSTORE_PATH }}/{{ SSL_JKS_FILENAME }}"
+SSL_JKS_PASSWORD: "..."
+SSL_JKS_BASE64: "{{ lookup('file', '{{ SSL_JKS_PATH }}') | b64encode }}"
+
+######################
+# Zookeeper defaults #
+######################
+
+# The version of zookeeper to use. 
+ZOOKEEPER_VERSION: 3.6.2
+# The size of the zookeeper data volume. 
+ZOOKEEPER_VOLUME_SIZE: 1Gi
+# The OpenShift storage class for the zookeeper persistent volume claim. 
+REDHAT_OPENSHIFT_STORAGE_CLASS_NAME: gp2
+# The default port that Zookeeper runs to manage the cluster.
+ZOOKEEPER_PORT: 2181
+# The Zookeeper OpenShift base URL where Zookeeper will be deployed.
+ZOOKEEPER_HOST: "{{REDHAT_OPENSHIFT_HOST}}"
+# The Zookeeper OpenShift secret token to grant access to OpenShift (https://api.pro-us-east-1.openshift.com/oauth/token/request).
+ZOOKEEPER_TOKEN: "{{REDHAT_OPENSHIFT_TOKEN}}"
+# The Zookeeper OpenShift namespace where Zookeeper will be deployed.
+ZOOKEEPER_NAMESPACE: "{{ SOLR_NAMESPACE }}"
+# The Zookeeper volume size for Zookeeper files.
+ZOOKEEPER_VOLUME_SIZE: 1Gi
+# The default hostname for the Zookeeper cluster manager.
+ZOOKEEPER_HOST_NAME: "default-solrcloud-zookeeper-headless.{{ ZOOKEEPER_NAMESPACE }}.svc"
+
+######################
+# Zookeeper commands #
+######################
+
+SOLR_COMMAND_POD_UPLOAD_CONFIGSET: >
+  {{ SOLR_OPT }}/bin/solr zk upconfig -n computate -d {{ SOLR_OPT }}/server/solr/configsets/computate -z '{{ ZOOKEEPER_HOST_NAME }}:{{ ZOOKEEPER_PORT }}' || true
+SOLR_COMMAND_OC_UPLOAD_CONFIGSET: >
+  oc login {{ SOLR_HOST }} --token={{ REDHAT_OPENSHIFT_TOKEN }} && oc exec $(oc get pod -l {{ SOLR_LABEL }} -o jsonpath='{.items[0].metadata.name}' -n {{ SOLR_NAMESPACE }}) -n {{ SOLR_NAMESPACE }} -- {{ SOLR_COMMAND_POD_UPLOAD_CONFIGSET }}
+
+SOLR_COMMAND_POD_CREATE_COLLECTION: >
+  {{ SOLR_OPT }}/bin/solr create_collection -c {{ SOLR_COLLECTION }} -n computate || true
+SOLR_COMMAND_OC_CREATE_COLLECTION: >
+  oc login {{ SOLR_HOST }} --token={{ REDHAT_OPENSHIFT_TOKEN }} && oc exec $(oc get pod -l {{ SOLR_LABEL }} -o jsonpath='{.items[0].metadata.name}' -n {{ SOLR_NAMESPACE }}) -n {{ SOLR_NAMESPACE }} -- {{ SOLR_COMMAND_POD_CREATE_COLLECTION }}
