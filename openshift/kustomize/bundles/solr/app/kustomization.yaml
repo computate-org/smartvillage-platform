@@ -6,6 +6,6 @@ resources:
   - solrclouds/
 #  - serviceaccounts/
 
-  - statefulsets/
+#  - statefulsets/
   - configmaps/
   - routes/

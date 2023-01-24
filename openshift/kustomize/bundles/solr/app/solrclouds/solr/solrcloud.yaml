@@ -4,6 +4,6 @@ metadata:
   name: default
   namespace: solr
 spec:
-  replicas: 0
+  replicas: 2
   solrImage:
     tag: 8.1.1
