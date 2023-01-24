@@ -4,4 +4,4 @@ metadata:
   name: zookeeper-cluster
   namespace: zookeeper
 spec:
-  replicas: 1
+  replicas: 2
