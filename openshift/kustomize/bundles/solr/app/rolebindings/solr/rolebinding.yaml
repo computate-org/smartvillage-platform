@@ -11,6 +11,9 @@ subjects:
   - kind: ServiceAccount
     name: solr
     namespace: solr
+  - kind: ServiceAccount
+    name: default
+    namespace: solr
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -28,6 +31,9 @@ subjects:
   - kind: ServiceAccount
     name: solr
     namespace: solr
+  - kind: ServiceAccount
+    name: default
+    namespace: solr
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -44,6 +50,9 @@ subjects:
     namespace: solr
   - kind: ServiceAccount
     name: solr
+    namespace: solr
+  - kind: ServiceAccount
+    name: default
     namespace: solr
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -129,6 +138,9 @@ subjects:
     namespace: solr
   - kind: ServiceAccount
     name: solr
+    namespace: solr
+  - kind: ServiceAccount
+    name: default
     namespace: solr
 roleRef:
   apiGroup: rbac.authorization.k8s.io
