@@ -17,6 +17,8 @@ spec:
           value: "true"
         - name: serviceAccount.name
           value: "solr"
+        - name: podOptions.serviceAccountName
+          value: "solr"
   destination:
     namespace: solr
     server: 'https://kubernetes.default.svc'
