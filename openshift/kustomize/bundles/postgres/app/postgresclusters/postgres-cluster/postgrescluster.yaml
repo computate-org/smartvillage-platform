@@ -29,3 +29,17 @@ spec:
   postgresVersion: 15
   openshift: true
   postGISVersion: 3.3.0
+  users:
+    - name: sso
+      databases:
+        - sso
+    - name: smartvillage
+      databases:
+        - smartvillage
+  patroni:
+    dynamicConfiguration:
+      postgresql:
+        pg_hba:
+          - "host sso sso all md5"
+          - "host smartvillage smartvillage all md5"
+        

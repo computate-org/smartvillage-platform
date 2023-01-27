@@ -1,0 +1,88 @@
+---
+- name: Fetch the database SSO secrets
+  set_fact:
+    SSO_POSTGRES_SECRET: "{{ query('kubernetes.core.k8s', kind='Secret', resource_name=SSO_POSTGRES_SECRET_NAME, namespace=SSO_NAMESPACE, validate_certs=false)[0].data }}"
+  vars:
+    K8S_AUTH_HOST: "{{ REDHAT_OPENSHIFT_HOST }}"
+    K8S_AUTH_API_KEY: "{{ REDHAT_OPENSHIFT_TOKEN }}"
+  register: fetch_database_sso_secrets
+  ignore_errors: true
+- fail:
+    msg: >
+      Missing variables REDHAT_OPENSHIFT_HOST and REDHAT_OPENSHIFT_TOKEN. 
+      Find the login command to OpenShift and and set these variables, for example: 
+      ansible-playbook ~/.local/src/smartabyar-smartvillage/openshift/ansible/sso-configure-database.yml
+      -e REDHAT_OPENSHIFT_HOST=https://api.crc.testing:6443
+      -e REDHAT_OPENSHIFT_TOKEN=sha256~KNsu4uF9jsFUVZJE6smixzmWhoHVq9rgADUICQIrrDI
+  when: fetch_database_sso_secrets.failed
+- name: Update postgres sso password from vault
+  kubernetes.core.k8s_json_patch:
+    namespace: "{{ POSTGRES_NAMESPACE }}"
+    kind: Secret
+    name: "{{ POSTGRES_USER_SECRET_SSO }}"
+    host: "{{ REDHAT_OPENSHIFT_HOST }}"
+    api_key: "{{ REDHAT_OPENSHIFT_TOKEN }}"
+    validate_certs: false
+    patch:
+      - op: replace
+        path: /data/password
+        value: "{{ SSO_POSTGRES_SECRET.POSTGRES_PASSWORD }}"
+      - op: replace
+        path: /data/verifier
+        value: ""
+  ignore_errors: true
+#- name: Fetch the database root secrets
+#  set_fact:
+#    SSO_POSTGRES_ROOT_SECRET: "{{ query('kubernetes.core.k8s', kind='Secret', resource_name=POSTGRES_USER_SECRET_SSO, namespace=POSTGRES_NAMESPACE, validate_certs=false)[0].data }}"
+#  vars:
+#    K8S_AUTH_HOST: "{{ REDHAT_OPENSHIFT_HOST }}"
+#    K8S_AUTH_API_KEY: "{{ REDHAT_OPENSHIFT_TOKEN }}"
+#  register: fetch_database_root_secrets
+#  ignore_errors: true
+#- debug:
+#    var: SSO_POSTGRES_ROOT_SECRET
+#- debug:
+#    var: SSO_POSTGRES_SECRET
+#- name: Setup the database secrets
+#  set_fact:
+#    DATABASE_PASSWORD: "{{ SSO_POSTGRES_ROOT_SECRET.password | b64decode }}"
+#    POSTGRES_BECOME_USER: "{{ SSO_POSTGRES_ROOT_SECRET.user | b64decode }}"
+#    DATABASE_DATABASE: "{{ SSO_POSTGRES_SECRET.POSTGRES_DATABASE | b64decode }}"
+#    DATABASE_USERNAME: "{{ SSO_POSTGRES_SECRET.POSTGRES_USERNAME | b64decode }}"
+#
+##- name: Setup the pod create user command
+##  set_fact:
+##    POSTGRES_POD_CREATE_USER: >
+##      psql postgres -c "create user {{ DATABASE_USERNAME }} password '{{ DATABASE_PASSWORD }}';"
+##- name: Setup the oc create user command
+##  set_fact:
+##    POSTGRES_OC_CREATE_USER: >
+##      oc login {{ REDHAT_OPENSHIFT_HOST }} --token={{ REDHAT_OPENSHIFT_TOKEN }} && oc exec $(oc get pod -l {{ POSTGRES_POD_LABEL }} -o jsonpath='{.items[0].metadata.name}' -n {{ POSTGRES_NAMESPACE }}) -n {{ POSTGRES_NAMESPACE }} -- {{ POSTGRES_POD_CREATE_USER }}
+#
+#- name: Setup the pod create database command
+#  set_fact:
+#    POSTGRES_POD_CREATE_DATABASE: >
+#      psql postgres -c 'create database {{ DATABASE_DATABASE }} owner "{{ DATABASE_USERNAME }}";'
+#- name: Setup the oc create database command
+#  set_fact:
+#    POSTGRES_OC_CREATE_DATABASE: >
+#      oc login {{ REDHAT_OPENSHIFT_HOST }} --token={{ REDHAT_OPENSHIFT_TOKEN }} && oc exec $(oc get pod -l {{ POSTGRES_POD_LABEL }} -o jsonpath='{.items[0].metadata.name}' -n {{ POSTGRES_NAMESPACE }}) -n {{ POSTGRES_NAMESPACE }} -- {{ POSTGRES_POD_CREATE_DATABASE }}
+#
+###############
+## PostgreSQL #
+###############
+#
+##- block:
+##    - name: Create SSO database user
+##      shell: "{{ POSTGRES_OC_CREATE_USER }}"
+##      register: sso_create_database_user
+##      ignore_errors: true
+##    - debug:
+##        var: sso_create_database_user
+#- block:
+#    - name: Create SSO database
+#      shell: "{{ POSTGRES_OC_CREATE_DATABASE }}"
+#      register: sso_create_database
+#      ignore_errors: true
+#    - debug:
+#        var: sso_create_database
