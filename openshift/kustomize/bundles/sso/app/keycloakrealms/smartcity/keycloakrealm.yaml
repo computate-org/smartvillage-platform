@@ -1,0 +1,30 @@
+apiVersion: keycloak.org/v1alpha1
+kind: KeycloakRealm
+metadata:
+  name: smartcity
+  namespace: sso
+  labels:
+    app: sso
+    realm: SMARTCITY
+spec:
+  realm:
+    id: "SMARTCITY"
+    realm: "SMARTCITY"
+    enabled: True
+    displayName: "SMARTCITY"
+    clientScopes:
+      - id: smartcity
+        name: smartcity
+        description: A client scope for the smartcity client
+        protocol: openid-connect
+#        protocolMappers:
+#          - id: smartcity
+#            name: smartcity
+#            protocol: openid-connect
+#
+#            mapperType: Audience
+#            includedClientAudience: smartcity
+#            addToAccessToken: true
+  instanceSelector:
+    matchLabels:
+      app: sso
