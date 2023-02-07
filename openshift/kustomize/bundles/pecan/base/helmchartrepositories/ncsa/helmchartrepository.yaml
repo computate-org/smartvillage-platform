@@ -1,0 +1,8 @@
+apiVersion: helm.openshift.io/v1beta1
+kind: HelmChartRepository
+metadata:
+  name: ncsa
+spec:
+  name: ncsa
+  connectionConfig:
+    url: https://opensource.ncsa.illinois.edu/charts/

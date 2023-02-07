@@ -1,0 +1,34 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: Replace=true
+  name: pecan-helm
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://opensource.ncsa.illinois.edu/charts/
+    chart: pecan
+    targetRevision: 0.6.2
+    helm:
+      parameters:
+        - name: clustername
+          value: "pecan-server"
+        - name: clusterfqdn
+          value: "pecan-server-pecan.apps-crc.testing"
+        - name: initializeData
+          value: "true"
+        - name: ingress.enabled
+          value: "true"
+        - name: ingress.hosts
+          value: "[\"pecan-server-pecan.apps-crc.testing\"]"
+  destination:
+    namespace: pecan
+    server: 'https://kubernetes.default.svc'
+  syncPolicy:
+    automated:
+      # resources that no longer exist get deleted on sync
+      prune: true
+      # sync will be attempted again on failure after self heal timeout (5 seconds by default)
+      selfHeal: true

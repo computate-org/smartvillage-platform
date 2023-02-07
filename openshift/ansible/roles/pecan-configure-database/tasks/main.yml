@@ -1,7 +1,7 @@
 ---
-- name: Fetch the database SSO secrets
+- name: Fetch the database Pecan secrets
   set_fact:
-    SSO_POSTGRES_SECRET: "{{ query('kubernetes.core.k8s', kind='Secret', resource_name=SSO_POSTGRES_SECRET_NAME, namespace=SSO_NAMESPACE, validate_certs=false)[0].data }}"
+    PECAN_POSTGRES_SECRET: "{{ query('kubernetes.core.k8s', kind='Secret', resource_name=PECAN_POSTGRES_SECRET_NAME, namespace=PECAN_NAMESPACE, validate_certs=false)[0].data }}"
   vars:
     K8S_AUTH_HOST: "{{ REDHAT_OPENSHIFT_HOST }}"
     K8S_AUTH_API_KEY: "{{ REDHAT_OPENSHIFT_TOKEN }}"
@@ -19,14 +19,14 @@
   kubernetes.core.k8s_json_patch:
     namespace: "{{ POSTGRES_NAMESPACE }}"
     kind: Secret
-    name: "{{ POSTGRES_USER_SECRET_SSO }}"
+    name: "{{ POSTGRES_USER_SECRET_PECAN }}"
     host: "{{ REDHAT_OPENSHIFT_HOST }}"
     api_key: "{{ REDHAT_OPENSHIFT_TOKEN }}"
     validate_certs: false
     patch:
       - op: replace
         path: /data/password
-        value: "{{ SSO_POSTGRES_SECRET.POSTGRES_PASSWORD }}"
+        value: "{{ PECAN_POSTGRES_SECRET.POSTGRES_PASSWORD }}"
       - op: replace
         path: /data/verifier
         value: ""

@@ -1,0 +1,14 @@
+kind: SecurityContextConstraints
+apiVersion: security.openshift.io/v1
+metadata:
+  name: pecan
+runAsUser:
+  type: RunAsAny
+seLinuxContext:
+  type: RunAsAny
+fsGroup:
+  type: RunAsAny
+allowHostNetwork: true
+allowPrivilegeEscalation: true
+users:
+- system:serviceaccount:pecan:pecan-helm-rabbitmq

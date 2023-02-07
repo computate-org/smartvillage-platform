@@ -1,0 +1,8 @@
+apiVersion: helm.openshift.io/v1beta1
+kind: HelmChartRepository
+metadata:
+  name: bitnami
+spec:
+  name: bitnami
+  connectionConfig:
+    url: https://raw.githubusercontent.com/bitnami/charts/pre-2022/bitnami
