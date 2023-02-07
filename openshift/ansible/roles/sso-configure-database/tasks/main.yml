@@ -31,3 +31,12 @@
         path: /data/verifier
         value: ""
   ignore_errors: true
+- name: Delete keycloak pods
+  kubernetes.core.k8s:
+    namespace: "{{ SSO_NAMESPACE }}"
+    kind: Pod
+    state: absent
+    name: "keycloak-0"
+    host: "{{ REDHAT_OPENSHIFT_HOST }}"
+    api_key: "{{ REDHAT_OPENSHIFT_TOKEN }}"
+    validate_certs: false
