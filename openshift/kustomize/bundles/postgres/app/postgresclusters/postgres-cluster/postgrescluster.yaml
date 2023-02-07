@@ -31,18 +31,25 @@ spec:
   postGISVersion: 3.3.0
   users:
     - name: sso
+      options: "SUPERUSER"
       databases:
         - sso
     - name: pecan
+      options: "SUPERUSER"
       databases:
         - pecan
     - name: smartvillage
+      options: "SUPERUSER"
       databases:
         - smartvillage
   patroni:
     dynamicConfiguration:
       postgresql:
         pg_hba:
-          - "host sso postgres all md5"
-          - "host smartvillage postgres all md5"
+          - "host sso sso all md5"
+          - "local sso sso trust"
+          - "host pecan pecan all md5"
+          - "local pecan pecan trust"
+          - "host smartvillage smartvillage all md5"
+          - "local smartvillage smartvillage trust"
         
