@@ -1,0 +1,25 @@
+apiVersion: keycloak.org/v1alpha1
+kind: KeycloakUser
+metadata:
+  name: keycloak-admin
+spec:
+  user:
+    username: "keycloak-admin"
+    firstName: "Keycloak"
+    lastName: "Admin"
+    email: "keycloak-admin@example.com"
+    enabled: True
+    emailVerified: False
+    credentials:
+      - type: "password"
+        value: "12345"
+    realmRoles:
+      - "offline_access"
+    clientRoles:
+      account:
+        - "manage-account"
+      realm-management:
+        - "manage-users"
+  realmSelector:
+    matchLabels:
+      app: sso

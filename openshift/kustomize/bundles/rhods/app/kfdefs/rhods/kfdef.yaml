@@ -1,0 +1,15 @@
+kind: KfDef
+apiVersion: kfdef.apps.kubeflow.org/v1
+metadata:
+  name: rhods
+  namespace: redhat-ods-operator
+spec:
+  applications:
+    - kustomizeConfig:
+        repoRef:
+          name: manifests
+          path: rhods-component
+      name: rhods-component
+  repos:
+    - name: manifests
+      uri: 'file:///opt/manifests/odh-manifests.tar.gz'
