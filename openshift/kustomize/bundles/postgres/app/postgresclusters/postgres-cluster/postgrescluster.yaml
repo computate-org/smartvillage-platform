@@ -43,6 +43,6 @@ spec:
     dynamicConfiguration:
       postgresql:
         pg_hba:
-          - "host sso sso all md5"
-          - "host smartvillage smartvillage all md5"
+          - "host sso postgres all md5"
+          - "host smartvillage postgres all md5"
         
