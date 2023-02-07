@@ -1,0 +1,17 @@
+---
+
+- block:
+    - name: Configure SSO CA ConfigMap
+      shell: "{{ SSO_COMMAND_OC_CONFIGURE_CA_CONFIGMAP }}"
+      register: sso_configure_ca_configmap
+      ignore_errors: true
+    - debug:
+        var: sso_configure_ca_configmap
+    - fail:
+        msg: >
+          Missing variables REDHAT_OPENSHIFT_HOST and REDHAT_OPENSHIFT_TOKEN.
+          Find the login command to OpenShift and and set these variables, for example:
+          ansible-playbook ~/.local/src/smartabyar-smartvillage/openshift/ansible/sso-configure-ca-config-map.yml
+          -e REDHAT_OPENSHIFT_HOST=https://api.crc.testing:6443
+          -e REDHAT_OPENSHIFT_TOKEN=sha256~KNsu4uF9jsFUVZJE6smixzmWhoHVq9rgADUICQIrrDI
+      when: sso_configure_ca_configmap.failed

@@ -1,0 +1,34 @@
+apiVersion: postgresql.k8s.enterprisedb.io/v1
+kind: Cluster
+metadata:
+  name: enterprisedb-cluster
+  namespace: openshift-operators
+spec:
+  logLevel: info
+  startDelay: 30
+  stopDelay: 30
+  nodeMaintenanceWindow:
+    inProgress: false
+    reusePVC: true
+  enableSuperuserAccess: true
+  monitoring:
+    disableDefaultQueries: false
+    enablePodMonitor: false
+  minSyncReplicas: 0
+  postgresGID: 26
+  replicationSlots:
+    highAvailability:
+      slotPrefix: _cnp_
+    updateInterval: 30
+  primaryUpdateMethod: switchover
+  postgresUID: 26
+  walStorage:
+    resizeInUseVolumes: true
+    size: 1Gi
+  maxSyncReplicas: 0
+  switchoverDelay: 40000000
+  storage:
+    resizeInUseVolumes: true
+    size: 1Gi
+  primaryUpdateStrategy: unsupervised
+  instances: 2

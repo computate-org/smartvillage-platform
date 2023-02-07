@@ -4,3 +4,5 @@ resources:
   - externalsecrets/
   - keycloaks/
   - keycloakrealms/
+  - keycloakclients/
+  - oauths/

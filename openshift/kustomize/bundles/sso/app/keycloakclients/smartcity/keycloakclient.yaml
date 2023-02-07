@@ -19,3 +19,4 @@ spec:
     redirectUris:
       - http://localhost:12080/logout
       - http://localhost:12080/callback
+      - https://oauth-openshift.apps-crc.testing/oauth2callback/sso

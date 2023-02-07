@@ -1,0 +1,50 @@
+apiVersion: config.openshift.io/v1
+kind: OAuth
+metadata:
+  name: cluster
+spec:
+  identityProviders:
+    - name: computate
+      mappingMethod: claim
+      type: OpenID
+      openID:
+        clientID: computate.org
+        clientSecret:
+          name: computate-openshift-client-secret
+#        ca:
+#          name: computate-ca-config-map
+        claims: 
+          preferredUsername:
+          - preferred_username
+          name:
+          - name
+          email:
+          - email
+          groups:
+          - groups
+        issuer: https://sso.computate.org/auth/realms/COMPUTATE.ORG
+        teams:
+          - ocp-on-nerc/nerc-ops
+    - name: sso
+      mappingMethod: claim
+      type: OpenID
+      openID:
+        clientID: smartcity
+        clientSecret:
+          name: sso-openshift-client-secret
+        ca:
+          # Create with this command: 
+          # oc -n openshift-config create configmap sso-ca-config-map --from-literal="ca.crt=$(oc -n openshift-ingress-operator get secret/router-ca -o jsonpath='{.data.tls\.crt}' | base64 -d)"
+          name: sso-ca-config-map
+        claims: 
+          preferredUsername:
+          - preferred_username
+          name:
+          - name
+          email:
+          - email
+          groups:
+          - groups
+        issuer: https://keycloak-sso.apps-crc.testing/auth/realms/SMARTCITY
+        teams:
+          - ocp-on-nerc/nerc-ops
