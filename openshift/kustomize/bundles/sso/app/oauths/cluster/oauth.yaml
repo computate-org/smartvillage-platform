@@ -22,9 +22,6 @@ spec:
           # oc -n openshift-config create configmap sso-ca-config-map --from-literal="ca.crt=$(oc -n openshift-ingress-operator get secret/router-ca -o jsonpath='{.data.tls\.crt}' | base64 -d)"
           name: sso-ca-config-map
         claims: 
-          id:
-            - preferred_username
-            - sub
           preferredUsername:
             - preferred_username
             - username
