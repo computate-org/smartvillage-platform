@@ -4,6 +4,12 @@ metadata:
   name: cluster
 spec:
   identityProviders:
+    - name: developer
+      type: HTPasswd
+      mappingMethod: claim
+      htpasswd:
+        fileData:
+          name: htpass-secret
     - name: computate
       mappingMethod: claim
       type: OpenID
