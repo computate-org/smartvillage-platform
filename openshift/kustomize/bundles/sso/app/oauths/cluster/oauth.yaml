@@ -10,25 +10,6 @@ spec:
       htpasswd:
         fileData:
           name: htpass-secret
-    - name: computate
-      mappingMethod: claim
-      type: OpenID
-      openID:
-        clientID: computate.org
-        clientSecret:
-          name: computate-openshift-client-secret
-#        ca:
-#          name: computate-ca-config-map
-        claims: 
-          preferredUsername:
-          - preferred_username
-          name:
-          - name
-          email:
-          - email
-          groups:
-          - groups
-        issuer: https://sso.computate.org/auth/realms/COMPUTATE.ORG
     - name: sso
       mappingMethod: claim
       type: OpenID
@@ -41,12 +22,17 @@ spec:
           # oc -n openshift-config create configmap sso-ca-config-map --from-literal="ca.crt=$(oc -n openshift-ingress-operator get secret/router-ca -o jsonpath='{.data.tls\.crt}' | base64 -d)"
           name: sso-ca-config-map
         claims: 
+          id:
+            - preferred_username
+            - sub
           preferredUsername:
-          - preferred_username
+            - preferred_username
+            - username
           name:
-          - name
+            - name
+            - full name
           email:
-          - email
+            - email
           groups:
-          - groups
+            - groups
         issuer: https://keycloak-sso.apps-crc.testing/auth/realms/SMARTCITY
