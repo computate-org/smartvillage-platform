@@ -23,8 +23,6 @@ spec:
           groups:
           - groups
         issuer: https://sso.computate.org/auth/realms/COMPUTATE.ORG
-        teams:
-          - ocp-on-nerc/nerc-ops
     - name: sso
       mappingMethod: claim
       type: OpenID
@@ -46,5 +44,3 @@ spec:
           groups:
           - groups
         issuer: https://keycloak-sso.apps-crc.testing/auth/realms/SMARTCITY
-        teams:
-          - ocp-on-nerc/nerc-ops
