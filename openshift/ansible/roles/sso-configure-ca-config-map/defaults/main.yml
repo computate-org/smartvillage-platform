@@ -15,3 +15,5 @@ REDHAT_OPENSHIFT_TOKEN: "{{ default(omit) }}"
 
 SSO_COMMAND_OC_CONFIGURE_CA_CONFIGMAP: >
   oc login {{ REDHAT_OPENSHIFT_HOST }} --token={{ REDHAT_OPENSHIFT_TOKEN }} && oc  -n openshift-config create configmap sso-ca-config-map --from-literal="ca.crt=$(oc -n openshift-ingress-operator get secret/router-ca -o jsonpath='{.data.tls\.crt}' | base64 -d)"
+SSO_COMMAND_OC_CONFIGURE_CA_CONFIGMAP: >
+  oc login {{ REDHAT_OPENSHIFT_HOST }} --token={{ REDHAT_OPENSHIFT_TOKEN }} && oc  -n group-sync-operator create configmap sso-ca-config-map --from-literal="ca.crt=$(oc -n openshift-ingress-operator get secret/router-ca -o jsonpath='{.data.tls\.crt}' | base64 -d)"

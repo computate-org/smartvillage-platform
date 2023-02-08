@@ -1,0 +1,25 @@
+apiVersion: keycloak.org/v1alpha1
+kind: KeycloakUser
+metadata:
+  name: group-sync
+  namespace: sso
+spec:
+  user:
+    username: group-sync
+    firstName: Group
+    lastName: Sync
+    email: "group-sync@example.com"
+    enabled: true
+    emailVerified: true
+    realmRoles:
+      - offline_access
+    clientRoles:
+      account:
+        - query-groups
+        - query-users
+        - view-users
+      realm-management:
+        - manage-users
+  realmSelector:
+    matchLabels:
+      name: master

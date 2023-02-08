@@ -21,13 +21,15 @@ spec:
 #          name: computate-ca-config-map
         claims: 
           preferredUsername:
-          - preferred_username
+            - username
           name:
-          - name
+            - full name
           email:
-          - email
+            - email
           groups:
-          - groups
+            - groups
+        extraScopes:
+          - smartcity
         issuer: https://sso.computate.org/auth/realms/COMPUTATE.ORG
     - name: sso
       mappingMethod: claim
@@ -42,11 +44,13 @@ spec:
           name: sso-ca-config-map
         claims: 
           preferredUsername:
-          - preferred_username
+            - username
           name:
-          - name
+            - full name
           email:
-          - email
+            - email
           groups:
-          - groups
+            - groups
+        extraScopes:
+          - smartcity
         issuer: https://keycloak-sso.apps-crc.testing/auth/realms/SMARTCITY

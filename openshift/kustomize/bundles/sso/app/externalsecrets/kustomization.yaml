@@ -5,3 +5,4 @@ resources:
   - computate-openshift-client-secret
   - sso-openshift-client-secret
   - sso-database-secret
+  - sso-group-sync
