@@ -12,6 +12,12 @@ spec:
     realm: "SMARTCITY"
     enabled: true
     displayName: "SMARTCITY"
+    registrationAllowed: true
+    resetPasswordAllowed: true
+    editUsernameAllowed: true
+    rememberMe: true
+    verifyEmail: true
+    loginWithEmailAllowed: true
     clientScopes:
       - id: smartcity
         name: smartcity
