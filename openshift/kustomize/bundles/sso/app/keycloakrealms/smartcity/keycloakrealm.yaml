@@ -18,8 +18,20 @@ spec:
     rememberMe: true
     verifyEmail: true
     loginWithEmailAllowed: true
+    roles:
+      realm:
+        - id: viewer
+          name: viewer
+        - id: admin
+          name: admin
+        - id: super-admin
+          name: super-admin
+          composite: true
+          composites:
+            realm:
+              - admin
     clientScopes:
-      - id: smartcity
+      - id: smartcity-smartcity
         name: smartcity
         description: A client scope for the smartcity client
         protocol: openid-connect
@@ -33,6 +45,11 @@ spec:
             name: smartcity
             protocol: openid-connect
             protocolMapper: oidc-audience-mapper
+      - id: smartcity-profile
+        name: profile
+        description: "OpenID Connect built-in scope: profile"
+        protocol: openid-connect
+        protocolMappers: 
           - config:
               access.token.claim: 'true'
               claim.name: email_verified
