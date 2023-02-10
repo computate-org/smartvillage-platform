@@ -13,6 +13,7 @@ spec:
       app: sso
       realm: SMARTCITY
   client:
+    id: smartcity
     clientId: smartcity
     standardFlowEnabled: true
     serviceAccountsEnabled: true
@@ -59,11 +60,30 @@ spec:
             - PATCH
             - PUTImport
             - Search
+        - name: SiteUser
+          displayName: SiteUser
+          uris:
+            - /api/user
+            - /user
+          scopes:
+            - POST
+            - DELETE
+            - GET
+            - PATCH
+            - PUTImport
+            - Search
       policies:
-        - id: admin
+        - id: admin-policy
           name: admin
           logic: POSITIVE
           decisionStrategy: UNANIMOUS
           type: role
           config:
             roles: "[{\"id\":\"admin\",\"required\":true}]"
+        - id: user-policy
+          name: user
+          logic: POSITIVE
+          decisionStrategy: UNANIMOUS
+          type: client
+          config:
+            clients: "[\"smartcity\"]"

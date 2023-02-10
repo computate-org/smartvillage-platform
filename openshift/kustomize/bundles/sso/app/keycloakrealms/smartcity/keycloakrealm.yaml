@@ -18,8 +18,14 @@ spec:
     rememberMe: true
     verifyEmail: true
     loginWithEmailAllowed: true
+    defaultRoles:
+      - user
     roles:
       realm:
+        - id: user
+          name: user
+        - id: student
+          name: student
         - id: viewer
           name: viewer
         - id: admin
