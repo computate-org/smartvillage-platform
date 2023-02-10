@@ -1,0 +1,7 @@
+---
+- name: Get insights from SSO API
+  hosts: localhost
+  connection: local
+  roles:
+    - sso-insights
+

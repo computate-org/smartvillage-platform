@@ -1,0 +1,8 @@
+---
+REDHAT_OPENSHIFT_HOST: https://api.crc.testing:6443
+REDHAT_OPENSHIFT_TOKEN: "{{ lookup('env', 'REDHAT_OPENSHIFT_TOKEN' | default(omit) }}"
+SSO_SITE_BASE_URL: https://keycloak-sso.apps-crc.testing
+SSO_ADMIN_USERNAME: admin
+SSO_NAMESPACE: sso
+SSO_SMARTCITY_REALM_NAME: SMARTCITY
+SSO_SMARTCITY_CLIENT_NAME: smartcity
