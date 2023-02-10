@@ -10,7 +10,7 @@ spec:
     targetRevision: HEAD
     path: openshift/kustomize/bundles/serverless/app
   destination:
-    namespace: redhat-ods-operator
+    namespace: pecan
     server: 'https://kubernetes.default.svc'
   syncPolicy:
     automated:
