@@ -1,10 +1,10 @@
 kind: KafkaTopic
 apiVersion: kafka.strimzi.io/v1beta2
 metadata:
-  name: fiware-topic
+  name: smartvillage-sumo-run
   labels:
-    strimzi.io/cluster: fiware-kafka
-  namespace: fiware
+    strimzi.io/cluster: smartvillage-kafka
+  namespace: smartabyar-smartvillage
 spec:
   partitions: 10
   replicas: 3

@@ -1,0 +1,12 @@
+{
+	"type": "resource",
+	"logic": "POSITIVE",
+	"decisionStrategy": "UNANIMOUS",
+	"name": "{{ PERMISSION_RESOURCE_ID }}-{{ PERMISSION_POLICY }}",
+	"resources": [
+		"{{ PERMISSION_RESOURCE_ID }}"
+	],
+	"policies": [
+		"{{ PERMISSION_POLICY }}"
+	]
+}

@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: postgres
-  namespace: argocd
+  namespace: openshift-gitopsift-gitops
 spec:
   project: default
   source:

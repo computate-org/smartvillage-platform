@@ -219,7 +219,7 @@ SSO_SITE_HOST_NAME: "sso.example.com"
 # The Auth realm.
 AUTH_REALM: EXAMPLE.COM
 # The Auth client or resource.
-AUTH_RESOURCE: example.com
+AUTH_CLIENT: example.com
 # The Auth secret.
 AUTH_SECRET: "..."
 # The Auth token ID. 

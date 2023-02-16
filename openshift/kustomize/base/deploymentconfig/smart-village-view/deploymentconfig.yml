@@ -117,11 +117,11 @@ spec:
                 secretKeyRef:
                   name: smart-village-view-secret
                   key: AUTH_REALM
-            - name: AUTH_RESOURCE
+            - name: AUTH_CLIENT
               valueFrom:
                 secretKeyRef:
                   name: smart-village-view-secret
-                  key: AUTH_RESOURCE
+                  key: AUTH_CLIENT
             - name: AUTH_SECRET
               valueFrom:
                 secretKeyRef:

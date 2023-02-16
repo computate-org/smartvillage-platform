@@ -73,10 +73,10 @@ spec:
                 secretKeyRef:
                   key: AUTH_REALM
                   name: "{{ SITE_NAME }}-secret"
-            - name: AUTH_RESOURCE
+            - name: AUTH_CLIENT
               valueFrom:
                 secretKeyRef:
-                  key: AUTH_RESOURCE
+                  key: AUTH_CLIENT
                   name: "{{ SITE_NAME }}-secret"
             - name: AUTH_SECRET
               valueFrom:

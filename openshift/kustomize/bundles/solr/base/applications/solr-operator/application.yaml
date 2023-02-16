@@ -4,7 +4,7 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: Replace=true
   name: solr-operator
-  namespace: argocd
+  namespace: openshift-gitops
 spec:
   project: default
   source:
