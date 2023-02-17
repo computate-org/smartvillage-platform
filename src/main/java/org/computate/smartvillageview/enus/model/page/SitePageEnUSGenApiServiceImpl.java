@@ -69,6 +69,7 @@ import io.vertx.core.buffer.Buffer;
 import io.vertx.core.CompositeFuture;
 import io.vertx.core.http.HttpHeaders;
 import java.nio.charset.Charset;
+import io.vertx.ext.auth.authorization.RoleBasedAuthorization;
 import io.vertx.ext.web.api.service.ServiceRequest;
 import io.vertx.ext.web.api.service.ServiceResponse;
 import io.vertx.ext.web.client.predicate.ResponsePredicate;
@@ -106,25 +107,25 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 	@Override
 	public void searchSitePage(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
-			try {
-				{
-					searchSitePageList(siteRequest, false, true, false).onSuccess(listSitePage -> {
-						response200SearchSitePage(listSitePage).onSuccess(response -> {
-							eventHandler.handle(Future.succeededFuture(response));
-							LOG.debug(String.format("searchSitePage succeeded. "));
+					{
+				try {
+						searchSitePageList(siteRequest, false, true, false).onSuccess(listSitePage -> {
+							response200SearchSitePage(listSitePage).onSuccess(response -> {
+								eventHandler.handle(Future.succeededFuture(response));
+								LOG.debug(String.format("searchSitePage succeeded. "));
+							}).onFailure(ex -> {
+								LOG.error(String.format("searchSitePage failed. "), ex);
+								error(siteRequest, eventHandler, ex);
+							});
 						}).onFailure(ex -> {
 							LOG.error(String.format("searchSitePage failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
-					}).onFailure(ex -> {
+					} catch(Exception ex) {
 						LOG.error(String.format("searchSitePage failed. "), ex);
-						error(siteRequest, eventHandler, ex);
-					});
+						error(null, eventHandler, ex);
+					}
 				}
-			} catch(Exception ex) {
-				LOG.error(String.format("searchSitePage failed. "), ex);
-				error(null, eventHandler, ex);
-			}
 		}).onFailure(ex -> {
 			if("Inactive Token".equals(ex.getMessage()) || StringUtils.startsWith(ex.getMessage(), "invalid_grant:")) {
 				try {
@@ -133,6 +134,17 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 					LOG.error(String.format("searchSitePage failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
+			} else if(StringUtils.startsWith(ex.getMessage(), "401 UNAUTHORIZED ")) {
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", "SSO Resource Permission check returned DENY")
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+							)
+					));
 			} else {
 				LOG.error(String.format("searchSitePage failed. "), ex);
 				error(null, eventHandler, ex);
@@ -221,25 +233,25 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 	@Override
 	public void getSitePage(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
-			try {
-				{
-					searchSitePageList(siteRequest, false, true, false).onSuccess(listSitePage -> {
-						response200GETSitePage(listSitePage).onSuccess(response -> {
-							eventHandler.handle(Future.succeededFuture(response));
-							LOG.debug(String.format("getSitePage succeeded. "));
+					{
+				try {
+						searchSitePageList(siteRequest, false, true, false).onSuccess(listSitePage -> {
+							response200GETSitePage(listSitePage).onSuccess(response -> {
+								eventHandler.handle(Future.succeededFuture(response));
+								LOG.debug(String.format("getSitePage succeeded. "));
+							}).onFailure(ex -> {
+								LOG.error(String.format("getSitePage failed. "), ex);
+								error(siteRequest, eventHandler, ex);
+							});
 						}).onFailure(ex -> {
 							LOG.error(String.format("getSitePage failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
-					}).onFailure(ex -> {
+					} catch(Exception ex) {
 						LOG.error(String.format("getSitePage failed. "), ex);
-						error(siteRequest, eventHandler, ex);
-					});
+						error(null, eventHandler, ex);
+					}
 				}
-			} catch(Exception ex) {
-				LOG.error(String.format("getSitePage failed. "), ex);
-				error(null, eventHandler, ex);
-			}
 		}).onFailure(ex -> {
 			if("Inactive Token".equals(ex.getMessage()) || StringUtils.startsWith(ex.getMessage(), "invalid_grant:")) {
 				try {
@@ -248,6 +260,17 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 					LOG.error(String.format("getSitePage failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
+			} else if(StringUtils.startsWith(ex.getMessage(), "401 UNAUTHORIZED ")) {
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", "SSO Resource Permission check returned DENY")
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+							)
+					));
 			} else {
 				LOG.error(String.format("getSitePage failed. "), ex);
 				error(null, eventHandler, ex);
@@ -275,64 +298,74 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 	public void postSitePage(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		LOG.debug(String.format("postSitePage started. "));
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
-			try {
-				siteRequest.setJsonObject(body);
 
-				List<String> roles = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_REQUIRED + "_SitePage")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
-				if(
-						!siteRequest.getUserResourceRoles().stream().anyMatch(roles::contains)
-						&& !siteRequest.getUserRealmRoles().stream().anyMatch(roles::contains)
-						) {
+			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
+				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", msg)
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+					)
+				));
+			}).onSuccess(b -> {
+				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SitePage")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 					eventHandler.handle(Future.succeededFuture(
-						new ServiceResponse(401, "UNAUTHORIZED", 
+						new ServiceResponse(401, "UNAUTHORIZED",
 							Buffer.buffer().appendString(
 								new JsonObject()
 									.put("errorCode", "401")
-									.put("errorMessage", "roles required: " + String.join(", ", roles))
+									.put("errorMessage", msg)
 									.encodePrettily()
 								), MultiMap.caseInsensitiveMultiMap()
 						)
 					));
 				} else {
-					ApiRequest apiRequest = new ApiRequest();
-					apiRequest.setRows(1L);
-					apiRequest.setNumFound(1L);
-					apiRequest.setNumPATCH(0L);
-					apiRequest.initDeepApiRequest(siteRequest);
-					siteRequest.setApiRequest_(apiRequest);
-					eventBus.publish("websocketSitePage", JsonObject.mapFrom(apiRequest).toString());
-					JsonObject params = new JsonObject();
-					params.put("body", siteRequest.getJsonObject());
-					params.put("path", new JsonObject());
-					params.put("cookie", new JsonObject());
-					params.put("header", new JsonObject());
-					params.put("form", new JsonObject());
-					JsonObject query = new JsonObject();
-					Boolean softCommit = Optional.ofNullable(siteRequest.getServiceRequest().getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getBoolean("softCommit")).orElse(null);
-					Integer commitWithin = Optional.ofNullable(siteRequest.getServiceRequest().getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getInteger("commitWithin")).orElse(null);
-					if(softCommit == null && commitWithin == null)
-						softCommit = true;
-					if(softCommit != null)
-						query.put("softCommit", softCommit);
-					if(commitWithin != null)
-						query.put("commitWithin", commitWithin);
-					params.put("query", query);
-					JsonObject context = new JsonObject().put("params", params).put("user", siteRequest.getUserPrincipal());
-					JsonObject json = new JsonObject().put("context", context);
-					eventBus.request("smartabyar-smartvillage-enUS-SitePage", json, new DeliveryOptions().addHeader("action", "postSitePageFuture")).onSuccess(a -> {
-						JsonObject responseMessage = (JsonObject)a.body();
-						JsonObject responseBody = new JsonObject(Buffer.buffer(JsonUtil.BASE64_DECODER.decode(responseMessage.getString("payload"))));
-						eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(responseBody.encodePrettily()))));
-						LOG.debug(String.format("postSitePage succeeded. "));
-					}).onFailure(ex -> {
+					try {
+						ApiRequest apiRequest = new ApiRequest();
+						apiRequest.setRows(1L);
+						apiRequest.setNumFound(1L);
+						apiRequest.setNumPATCH(0L);
+						apiRequest.initDeepApiRequest(siteRequest);
+						siteRequest.setApiRequest_(apiRequest);
+						eventBus.publish("websocketSitePage", JsonObject.mapFrom(apiRequest).toString());
+						JsonObject params = new JsonObject();
+						params.put("body", siteRequest.getJsonObject());
+						params.put("path", new JsonObject());
+						params.put("cookie", new JsonObject());
+						params.put("header", new JsonObject());
+						params.put("form", new JsonObject());
+						JsonObject query = new JsonObject();
+						Boolean softCommit = Optional.ofNullable(siteRequest.getServiceRequest().getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getBoolean("softCommit")).orElse(null);
+						Integer commitWithin = Optional.ofNullable(siteRequest.getServiceRequest().getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getInteger("commitWithin")).orElse(null);
+						if(softCommit == null && commitWithin == null)
+							softCommit = true;
+						if(softCommit != null)
+							query.put("softCommit", softCommit);
+						if(commitWithin != null)
+							query.put("commitWithin", commitWithin);
+						params.put("query", query);
+						JsonObject context = new JsonObject().put("params", params).put("user", siteRequest.getUserPrincipal());
+						JsonObject json = new JsonObject().put("context", context);
+						eventBus.request("smartabyar-smartvillage-enUS-SitePage", json, new DeliveryOptions().addHeader("action", "postSitePageFuture")).onSuccess(a -> {
+							JsonObject responseMessage = (JsonObject)a.body();
+							JsonObject responseBody = new JsonObject(Buffer.buffer(JsonUtil.BASE64_DECODER.decode(responseMessage.getString("payload"))));
+							eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(responseBody.encodePrettily()))));
+							LOG.debug(String.format("postSitePage succeeded. "));
+						}).onFailure(ex -> {
+							LOG.error(String.format("postSitePage failed. "), ex);
+							error(siteRequest, eventHandler, ex);
+						});
+					} catch(Exception ex) {
 						LOG.error(String.format("postSitePage failed. "), ex);
-						error(siteRequest, eventHandler, ex);
-					});
+						error(null, eventHandler, ex);
+					}
 				}
-			} catch(Exception ex) {
-				LOG.error(String.format("postSitePage failed. "), ex);
-				error(null, eventHandler, ex);
-			}
+			});
 		}).onFailure(ex -> {
 			if("Inactive Token".equals(ex.getMessage()) || StringUtils.startsWith(ex.getMessage(), "invalid_grant:")) {
 				try {
@@ -341,6 +374,17 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 					LOG.error(String.format("postSitePage failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
+			} else if(StringUtils.startsWith(ex.getMessage(), "401 UNAUTHORIZED ")) {
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", "SSO Resource Permission check returned DENY")
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+							)
+					));
 			} else {
 				LOG.error(String.format("postSitePage failed. "), ex);
 				error(null, eventHandler, ex);
@@ -374,6 +418,17 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 					LOG.error(String.format("postSitePage failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
+			} else if(StringUtils.startsWith(ex.getMessage(), "401 UNAUTHORIZED ")) {
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", "SSO Resource Permission check returned DENY")
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+							)
+					));
 			} else {
 				LOG.error(String.format("postSitePage failed. "), ex);
 				error(null, eventHandler, ex);
@@ -424,73 +479,81 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 	public void patchSitePage(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		LOG.debug(String.format("patchSitePage started. "));
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
-			try {
-				siteRequest.setJsonObject(body);
 
-				List<String> roles = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_REQUIRED + "_SitePage")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
-				if(
-						!siteRequest.getUserResourceRoles().stream().anyMatch(roles::contains)
-						&& !siteRequest.getUserRealmRoles().stream().anyMatch(roles::contains)
-						) {
+			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
+				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", msg)
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+					)
+				));
+			}).onSuccess(b -> {
+				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SitePage")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 					eventHandler.handle(Future.succeededFuture(
-						new ServiceResponse(401, "UNAUTHORIZED", 
+						new ServiceResponse(401, "UNAUTHORIZED",
 							Buffer.buffer().appendString(
 								new JsonObject()
 									.put("errorCode", "401")
-									.put("errorMessage", "roles required: " + String.join(", ", roles))
+									.put("errorMessage", msg)
 									.encodePrettily()
 								), MultiMap.caseInsensitiveMultiMap()
 						)
 					));
 				} else {
-					searchSitePageList(siteRequest, true, false, true).onSuccess(listSitePage -> {
-						try {
-							List<String> roles2 = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_ADMIN)).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
-							if(listSitePage.getResponse().getResponse().getNumFound() > 1
-									&& !siteRequest.getUserResourceRoles().stream().anyMatch(roles2::contains)
-									&& !siteRequest.getUserRealmRoles().stream().anyMatch(roles2::contains)
-									) {
-								String message = String.format("roles required: " + String.join(", ", roles2));
-								LOG.error(message);
-								error(siteRequest, eventHandler, new RuntimeException(message));
-							} else {
+					try {
+						searchSitePageList(siteRequest, true, false, true).onSuccess(listSitePage -> {
+							try {
+								if(listSitePage.getResponse().getResponse().getNumFound() > 1
+										&& !Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SitePage")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+										) {
+									String message = String.format("roles required: " + config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SitePage"));
+									LOG.error(message);
+									error(siteRequest, eventHandler, new RuntimeException(message));
+								} else {
 
-								ApiRequest apiRequest = new ApiRequest();
-								apiRequest.setRows(listSitePage.getRequest().getRows());
-								apiRequest.setNumFound(listSitePage.getResponse().getResponse().getNumFound());
-								apiRequest.setNumPATCH(0L);
-								apiRequest.initDeepApiRequest(siteRequest);
-								siteRequest.setApiRequest_(apiRequest);
-								if(apiRequest.getNumFound() == 1L)
-									apiRequest.setOriginal(listSitePage.first());
-								eventBus.publish("websocketSitePage", JsonObject.mapFrom(apiRequest).toString());
+									ApiRequest apiRequest = new ApiRequest();
+									apiRequest.setRows(listSitePage.getRequest().getRows());
+									apiRequest.setNumFound(listSitePage.getResponse().getResponse().getNumFound());
+									apiRequest.setNumPATCH(0L);
+									apiRequest.initDeepApiRequest(siteRequest);
+									siteRequest.setApiRequest_(apiRequest);
+									if(apiRequest.getNumFound() == 1L)
+										apiRequest.setOriginal(listSitePage.first());
+									eventBus.publish("websocketSitePage", JsonObject.mapFrom(apiRequest).toString());
 
-								listPATCHSitePage(apiRequest, listSitePage).onSuccess(e -> {
-									response200PATCHSitePage(siteRequest).onSuccess(response -> {
-										LOG.debug(String.format("patchSitePage succeeded. "));
-										eventHandler.handle(Future.succeededFuture(response));
+									listPATCHSitePage(apiRequest, listSitePage).onSuccess(e -> {
+										response200PATCHSitePage(siteRequest).onSuccess(response -> {
+											LOG.debug(String.format("patchSitePage succeeded. "));
+											eventHandler.handle(Future.succeededFuture(response));
+										}).onFailure(ex -> {
+											LOG.error(String.format("patchSitePage failed. "), ex);
+											error(siteRequest, eventHandler, ex);
+										});
 									}).onFailure(ex -> {
 										LOG.error(String.format("patchSitePage failed. "), ex);
 										error(siteRequest, eventHandler, ex);
 									});
-								}).onFailure(ex -> {
-									LOG.error(String.format("patchSitePage failed. "), ex);
-									error(siteRequest, eventHandler, ex);
-								});
+								}
+							} catch(Exception ex) {
+								LOG.error(String.format("patchSitePage failed. "), ex);
+								error(siteRequest, eventHandler, ex);
 							}
-						} catch(Exception ex) {
+						}).onFailure(ex -> {
 							LOG.error(String.format("patchSitePage failed. "), ex);
 							error(siteRequest, eventHandler, ex);
-						}
-					}).onFailure(ex -> {
+						});
+					} catch(Exception ex) {
 						LOG.error(String.format("patchSitePage failed. "), ex);
-						error(siteRequest, eventHandler, ex);
-					});
+						error(null, eventHandler, ex);
+					}
 				}
-			} catch(Exception ex) {
-				LOG.error(String.format("patchSitePage failed. "), ex);
-				error(null, eventHandler, ex);
-			}
+			});
 		}).onFailure(ex -> {
 			if("Inactive Token".equals(ex.getMessage()) || StringUtils.startsWith(ex.getMessage(), "invalid_grant:")) {
 				try {
@@ -499,6 +562,17 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 					LOG.error(String.format("patchSitePage failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
+			} else if(StringUtils.startsWith(ex.getMessage(), "401 UNAUTHORIZED ")) {
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", "SSO Resource Permission check returned DENY")
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+							)
+					));
 			} else {
 				LOG.error(String.format("patchSitePage failed. "), ex);
 				error(null, eventHandler, ex);
@@ -641,39 +715,52 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 	public void putimportSitePage(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		LOG.debug(String.format("putimportSitePage started. "));
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
-			try {
-				siteRequest.setJsonObject(body);
 
-				List<String> roles = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_REQUIRED + "_SitePage")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
-				if(
-						!siteRequest.getUserResourceRoles().stream().anyMatch(roles::contains)
-						&& !siteRequest.getUserRealmRoles().stream().anyMatch(roles::contains)
-						) {
+			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
+				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", msg)
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+					)
+				));
+			}).onSuccess(b -> {
+				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SitePage")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 					eventHandler.handle(Future.succeededFuture(
-						new ServiceResponse(401, "UNAUTHORIZED", 
+						new ServiceResponse(401, "UNAUTHORIZED",
 							Buffer.buffer().appendString(
 								new JsonObject()
 									.put("errorCode", "401")
-									.put("errorMessage", "roles required: " + String.join(", ", roles))
+									.put("errorMessage", msg)
 									.encodePrettily()
 								), MultiMap.caseInsensitiveMultiMap()
 						)
 					));
 				} else {
 					try {
-						ApiRequest apiRequest = new ApiRequest();
-						JsonArray jsonArray = Optional.ofNullable(siteRequest.getJsonObject()).map(o -> o.getJsonArray("list")).orElse(new JsonArray());
-						apiRequest.setRows(Long.valueOf(jsonArray.size()));
-						apiRequest.setNumFound(Long.valueOf(jsonArray.size()));
-						apiRequest.setNumPATCH(0L);
-						apiRequest.initDeepApiRequest(siteRequest);
-						siteRequest.setApiRequest_(apiRequest);
-						eventBus.publish("websocketSitePage", JsonObject.mapFrom(apiRequest).toString());
-						varsSitePage(siteRequest).onSuccess(d -> {
-							listPUTImportSitePage(apiRequest, siteRequest).onSuccess(e -> {
-								response200PUTImportSitePage(siteRequest).onSuccess(response -> {
-									LOG.debug(String.format("putimportSitePage succeeded. "));
-									eventHandler.handle(Future.succeededFuture(response));
+						try {
+							ApiRequest apiRequest = new ApiRequest();
+							JsonArray jsonArray = Optional.ofNullable(siteRequest.getJsonObject()).map(o -> o.getJsonArray("list")).orElse(new JsonArray());
+							apiRequest.setRows(Long.valueOf(jsonArray.size()));
+							apiRequest.setNumFound(Long.valueOf(jsonArray.size()));
+							apiRequest.setNumPATCH(0L);
+							apiRequest.initDeepApiRequest(siteRequest);
+							siteRequest.setApiRequest_(apiRequest);
+							eventBus.publish("websocketSitePage", JsonObject.mapFrom(apiRequest).toString());
+							varsSitePage(siteRequest).onSuccess(d -> {
+								listPUTImportSitePage(apiRequest, siteRequest).onSuccess(e -> {
+									response200PUTImportSitePage(siteRequest).onSuccess(response -> {
+										LOG.debug(String.format("putimportSitePage succeeded. "));
+										eventHandler.handle(Future.succeededFuture(response));
+									}).onFailure(ex -> {
+										LOG.error(String.format("putimportSitePage failed. "), ex);
+										error(siteRequest, eventHandler, ex);
+									});
 								}).onFailure(ex -> {
 									LOG.error(String.format("putimportSitePage failed. "), ex);
 									error(siteRequest, eventHandler, ex);
@@ -682,19 +769,16 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 								LOG.error(String.format("putimportSitePage failed. "), ex);
 								error(siteRequest, eventHandler, ex);
 							});
-						}).onFailure(ex -> {
+						} catch(Exception ex) {
 							LOG.error(String.format("putimportSitePage failed. "), ex);
 							error(siteRequest, eventHandler, ex);
-						});
+						}
 					} catch(Exception ex) {
 						LOG.error(String.format("putimportSitePage failed. "), ex);
-						error(siteRequest, eventHandler, ex);
+						error(null, eventHandler, ex);
 					}
 				}
-			} catch(Exception ex) {
-				LOG.error(String.format("putimportSitePage failed. "), ex);
-				error(null, eventHandler, ex);
-			}
+			});
 		}).onFailure(ex -> {
 			if("Inactive Token".equals(ex.getMessage()) || StringUtils.startsWith(ex.getMessage(), "invalid_grant:")) {
 				try {
@@ -703,6 +787,17 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 					LOG.error(String.format("putimportSitePage failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
+			} else if(StringUtils.startsWith(ex.getMessage(), "401 UNAUTHORIZED ")) {
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", "SSO Resource Permission check returned DENY")
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+							)
+					));
 			} else {
 				LOG.error(String.format("putimportSitePage failed. "), ex);
 				error(null, eventHandler, ex);
@@ -865,6 +960,17 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 					LOG.error(String.format("putimportSitePage failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
+			} else if(StringUtils.startsWith(ex.getMessage(), "401 UNAUTHORIZED ")) {
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", "SSO Resource Permission check returned DENY")
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+							)
+					));
 			} else {
 				LOG.error(String.format("putimportSitePage failed. "), ex);
 				error(null, eventHandler, ex);
@@ -894,25 +1000,25 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 	@Override
 	public void searchpageSitePage(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
-			try {
-				{
-					searchSitePageList(siteRequest, false, true, false).onSuccess(listSitePage -> {
-						response200SearchPageSitePage(listSitePage).onSuccess(response -> {
-							eventHandler.handle(Future.succeededFuture(response));
-							LOG.debug(String.format("searchpageSitePage succeeded. "));
+					{
+				try {
+						searchSitePageList(siteRequest, false, true, false).onSuccess(listSitePage -> {
+							response200SearchPageSitePage(listSitePage).onSuccess(response -> {
+								eventHandler.handle(Future.succeededFuture(response));
+								LOG.debug(String.format("searchpageSitePage succeeded. "));
+							}).onFailure(ex -> {
+								LOG.error(String.format("searchpageSitePage failed. "), ex);
+								error(siteRequest, eventHandler, ex);
+							});
 						}).onFailure(ex -> {
 							LOG.error(String.format("searchpageSitePage failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
-					}).onFailure(ex -> {
+					} catch(Exception ex) {
 						LOG.error(String.format("searchpageSitePage failed. "), ex);
-						error(siteRequest, eventHandler, ex);
-					});
+						error(null, eventHandler, ex);
+					}
 				}
-			} catch(Exception ex) {
-				LOG.error(String.format("searchpageSitePage failed. "), ex);
-				error(null, eventHandler, ex);
-			}
 		}).onFailure(ex -> {
 			if("Inactive Token".equals(ex.getMessage()) || StringUtils.startsWith(ex.getMessage(), "invalid_grant:")) {
 				try {
@@ -921,6 +1027,17 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 					LOG.error(String.format("searchpageSitePage failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
+			} else if(StringUtils.startsWith(ex.getMessage(), "401 UNAUTHORIZED ")) {
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", "SSO Resource Permission check returned DENY")
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+							)
+					));
 			} else {
 				LOG.error(String.format("searchpageSitePage failed. "), ex);
 				error(null, eventHandler, ex);

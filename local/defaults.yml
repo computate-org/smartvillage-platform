@@ -52,7 +52,7 @@ AUTH_PORT: 443
 AUTH_SSL: true
 AUTH_SSL_REQUIRED: all
 AUTH_REALM: "RH-IMPACT"
-AUTH_RESOURCE: "rh-impact"
+AUTH_CLIENT: "rh-impact"
 AUTH_SECRET: "0518f65a-f86d-42e8-ad65-00f46920443d"
 AUTH_URL: "https://sso.computate.org/auth"
 AUTH_TOKEN_URI: "/auth/realms/RH-IMPACT/protocol/openid-connect/token"
@@ -90,7 +90,7 @@ WRITE_API: true
 WRITE_COMMENTS: true
 
 # The Auth roles required to be an admin in the site. 
-AUTH_ROLES_ADMIN: ['SiteAdmin']
+AUTH_ROLE_ADMIN: 'SiteAdmin'
 
 # Enable data import in the site. 
 ENABLE_IMPORT_DATA: true

@@ -148,7 +148,7 @@ import org.computate.search.response.solr.SolrResponse;
  * This class contains a comment <b>"Role.enUS: SiteAdmin"</b>, which identifies the default role name "SiteAdmin" of the OAuth2/OpenID Connect user role required to access this IotNode API. 
  * It's possible to reconfigure the roles required to access the IotNode API by configuring an environment variable like this: 
  * </p>
- * <pre>AUTH_ROLES_REQUIRED_IotNode: ["SiteAdmin"]</pre>
+ * <pre>AUTH_ROLE_REQUIRED_IotNode: ["SiteAdmin"]</pre>
  * AName.enUS: an IOT node
  * <p>This class contains a comment <b>"AName.enUS: an IOT node"</b>, which identifies the language context to describe a IotNode as "an IOT node". 
  * </p>

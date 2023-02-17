@@ -69,6 +69,7 @@ import io.vertx.core.buffer.Buffer;
 import io.vertx.core.CompositeFuture;
 import io.vertx.core.http.HttpHeaders;
 import java.nio.charset.Charset;
+import io.vertx.ext.auth.authorization.RoleBasedAuthorization;
 import io.vertx.ext.web.api.service.ServiceRequest;
 import io.vertx.ext.web.api.service.ServiceResponse;
 import io.vertx.ext.web.client.predicate.ResponsePredicate;
@@ -106,44 +107,52 @@ public class MapResultEnUSGenApiServiceImpl extends BaseApiServiceImpl implement
 	@Override
 	public void searchMapResult(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
-			try {
 
-				List<String> roles = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_REQUIRED + "_MapResult")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
-				List<String> roleReads = Arrays.asList("");
-				if(
-						!siteRequest.getUserResourceRoles().stream().anyMatch(roles::contains)
-						&& !siteRequest.getUserRealmRoles().stream().anyMatch(roles::contains)
-						&& !siteRequest.getUserResourceRoles().stream().anyMatch(roleReads::contains)
-						&& !siteRequest.getUserRealmRoles().stream().anyMatch(roleReads::contains)
-						) {
+			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
+				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", msg)
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+					)
+				));
+			}).onSuccess(b -> {
+				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_MapResult")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 					eventHandler.handle(Future.succeededFuture(
-						new ServiceResponse(401, "UNAUTHORIZED", 
+						new ServiceResponse(401, "UNAUTHORIZED",
 							Buffer.buffer().appendString(
 								new JsonObject()
 									.put("errorCode", "401")
-									.put("errorMessage", "roles required: " + String.join(", ", roles))
+									.put("errorMessage", msg)
 									.encodePrettily()
 								), MultiMap.caseInsensitiveMultiMap()
 						)
 					));
 				} else {
-					searchMapResultList(siteRequest, false, true, false).onSuccess(listMapResult -> {
-						response200SearchMapResult(listMapResult).onSuccess(response -> {
-							eventHandler.handle(Future.succeededFuture(response));
-							LOG.debug(String.format("searchMapResult succeeded. "));
+					try {
+						searchMapResultList(siteRequest, false, true, false).onSuccess(listMapResult -> {
+							response200SearchMapResult(listMapResult).onSuccess(response -> {
+								eventHandler.handle(Future.succeededFuture(response));
+								LOG.debug(String.format("searchMapResult succeeded. "));
+							}).onFailure(ex -> {
+								LOG.error(String.format("searchMapResult failed. "), ex);
+								error(siteRequest, eventHandler, ex);
+							});
 						}).onFailure(ex -> {
 							LOG.error(String.format("searchMapResult failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
-					}).onFailure(ex -> {
+					} catch(Exception ex) {
 						LOG.error(String.format("searchMapResult failed. "), ex);
-						error(siteRequest, eventHandler, ex);
-					});
+						error(null, eventHandler, ex);
+					}
 				}
-			} catch(Exception ex) {
-				LOG.error(String.format("searchMapResult failed. "), ex);
-				error(null, eventHandler, ex);
-			}
+			});
 		}).onFailure(ex -> {
 			if("Inactive Token".equals(ex.getMessage()) || StringUtils.startsWith(ex.getMessage(), "invalid_grant:")) {
 				try {
@@ -152,6 +161,17 @@ public class MapResultEnUSGenApiServiceImpl extends BaseApiServiceImpl implement
 					LOG.error(String.format("searchMapResult failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
+			} else if(StringUtils.startsWith(ex.getMessage(), "401 UNAUTHORIZED ")) {
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", "SSO Resource Permission check returned DENY")
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+							)
+					));
 			} else {
 				LOG.error(String.format("searchMapResult failed. "), ex);
 				error(null, eventHandler, ex);
@@ -240,44 +260,52 @@ public class MapResultEnUSGenApiServiceImpl extends BaseApiServiceImpl implement
 	@Override
 	public void getMapResult(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
-			try {
 
-				List<String> roles = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_REQUIRED + "_MapResult")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
-				List<String> roleReads = Arrays.asList("");
-				if(
-						!siteRequest.getUserResourceRoles().stream().anyMatch(roles::contains)
-						&& !siteRequest.getUserRealmRoles().stream().anyMatch(roles::contains)
-						&& !siteRequest.getUserResourceRoles().stream().anyMatch(roleReads::contains)
-						&& !siteRequest.getUserRealmRoles().stream().anyMatch(roleReads::contains)
-						) {
+			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
+				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", msg)
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+					)
+				));
+			}).onSuccess(b -> {
+				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_MapResult")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 					eventHandler.handle(Future.succeededFuture(
-						new ServiceResponse(401, "UNAUTHORIZED", 
+						new ServiceResponse(401, "UNAUTHORIZED",
 							Buffer.buffer().appendString(
 								new JsonObject()
 									.put("errorCode", "401")
-									.put("errorMessage", "roles required: " + String.join(", ", roles))
+									.put("errorMessage", msg)
 									.encodePrettily()
 								), MultiMap.caseInsensitiveMultiMap()
 						)
 					));
 				} else {
-					searchMapResultList(siteRequest, false, true, false).onSuccess(listMapResult -> {
-						response200GETMapResult(listMapResult).onSuccess(response -> {
-							eventHandler.handle(Future.succeededFuture(response));
-							LOG.debug(String.format("getMapResult succeeded. "));
+					try {
+						searchMapResultList(siteRequest, false, true, false).onSuccess(listMapResult -> {
+							response200GETMapResult(listMapResult).onSuccess(response -> {
+								eventHandler.handle(Future.succeededFuture(response));
+								LOG.debug(String.format("getMapResult succeeded. "));
+							}).onFailure(ex -> {
+								LOG.error(String.format("getMapResult failed. "), ex);
+								error(siteRequest, eventHandler, ex);
+							});
 						}).onFailure(ex -> {
 							LOG.error(String.format("getMapResult failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
-					}).onFailure(ex -> {
+					} catch(Exception ex) {
 						LOG.error(String.format("getMapResult failed. "), ex);
-						error(siteRequest, eventHandler, ex);
-					});
+						error(null, eventHandler, ex);
+					}
 				}
-			} catch(Exception ex) {
-				LOG.error(String.format("getMapResult failed. "), ex);
-				error(null, eventHandler, ex);
-			}
+			});
 		}).onFailure(ex -> {
 			if("Inactive Token".equals(ex.getMessage()) || StringUtils.startsWith(ex.getMessage(), "invalid_grant:")) {
 				try {
@@ -286,6 +314,17 @@ public class MapResultEnUSGenApiServiceImpl extends BaseApiServiceImpl implement
 					LOG.error(String.format("getMapResult failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
+			} else if(StringUtils.startsWith(ex.getMessage(), "401 UNAUTHORIZED ")) {
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", "SSO Resource Permission check returned DENY")
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+							)
+					));
 			} else {
 				LOG.error(String.format("getMapResult failed. "), ex);
 				error(null, eventHandler, ex);
@@ -317,44 +356,52 @@ public class MapResultEnUSGenApiServiceImpl extends BaseApiServiceImpl implement
 	@Override
 	public void searchpageMapResult(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
-			try {
 
-				List<String> roles = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_REQUIRED + "_MapResult")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
-				List<String> roleReads = Arrays.asList("");
-				if(
-						!siteRequest.getUserResourceRoles().stream().anyMatch(roles::contains)
-						&& !siteRequest.getUserRealmRoles().stream().anyMatch(roles::contains)
-						&& !siteRequest.getUserResourceRoles().stream().anyMatch(roleReads::contains)
-						&& !siteRequest.getUserRealmRoles().stream().anyMatch(roleReads::contains)
-						) {
+			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
+				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", msg)
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+					)
+				));
+			}).onSuccess(b -> {
+				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_MapResult")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 					eventHandler.handle(Future.succeededFuture(
-						new ServiceResponse(401, "UNAUTHORIZED", 
+						new ServiceResponse(401, "UNAUTHORIZED",
 							Buffer.buffer().appendString(
 								new JsonObject()
 									.put("errorCode", "401")
-									.put("errorMessage", "roles required: " + String.join(", ", roles))
+									.put("errorMessage", msg)
 									.encodePrettily()
 								), MultiMap.caseInsensitiveMultiMap()
 						)
 					));
 				} else {
-					searchMapResultList(siteRequest, false, true, false).onSuccess(listMapResult -> {
-						response200SearchPageMapResult(listMapResult).onSuccess(response -> {
-							eventHandler.handle(Future.succeededFuture(response));
-							LOG.debug(String.format("searchpageMapResult succeeded. "));
+					try {
+						searchMapResultList(siteRequest, false, true, false).onSuccess(listMapResult -> {
+							response200SearchPageMapResult(listMapResult).onSuccess(response -> {
+								eventHandler.handle(Future.succeededFuture(response));
+								LOG.debug(String.format("searchpageMapResult succeeded. "));
+							}).onFailure(ex -> {
+								LOG.error(String.format("searchpageMapResult failed. "), ex);
+								error(siteRequest, eventHandler, ex);
+							});
 						}).onFailure(ex -> {
 							LOG.error(String.format("searchpageMapResult failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
-					}).onFailure(ex -> {
+					} catch(Exception ex) {
 						LOG.error(String.format("searchpageMapResult failed. "), ex);
-						error(siteRequest, eventHandler, ex);
-					});
+						error(null, eventHandler, ex);
+					}
 				}
-			} catch(Exception ex) {
-				LOG.error(String.format("searchpageMapResult failed. "), ex);
-				error(null, eventHandler, ex);
-			}
+			});
 		}).onFailure(ex -> {
 			if("Inactive Token".equals(ex.getMessage()) || StringUtils.startsWith(ex.getMessage(), "invalid_grant:")) {
 				try {
@@ -363,6 +410,17 @@ public class MapResultEnUSGenApiServiceImpl extends BaseApiServiceImpl implement
 					LOG.error(String.format("searchpageMapResult failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
+			} else if(StringUtils.startsWith(ex.getMessage(), "401 UNAUTHORIZED ")) {
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", "SSO Resource Permission check returned DENY")
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+							)
+					));
 			} else {
 				LOG.error(String.format("searchpageMapResult failed. "), ex);
 				error(null, eventHandler, ex);

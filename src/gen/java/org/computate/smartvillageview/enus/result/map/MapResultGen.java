@@ -161,7 +161,7 @@ import io.vertx.core.json.JsonObject;
  * This class contains a comment <b>"Role.enUS: SiteAdmin"</b>, which identifies the default role name "SiteAdmin" of the OAuth2/OpenID Connect user role required to access this MapResult API. 
  * It's possible to reconfigure the roles required to access the MapResult API by configuring an environment variable like this: 
  * </p>
- * <pre>AUTH_ROLES_REQUIRED_MapResult: ["SiteAdmin"]</pre>
+ * <pre>AUTH_ROLE_REQUIRED_MapResult: ["SiteAdmin"]</pre>
  * AName.enUS: a map result
  * <p>This class contains a comment <b>"AName.enUS: a map result"</b>, which identifies the language context to describe a MapResult as "a map result". 
  * </p>

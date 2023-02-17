@@ -145,7 +145,7 @@ import io.vertx.core.json.JsonObject;
  * This class contains a comment <b>"Role.enUS: SiteAdmin"</b>, which identifies the default role name "SiteAdmin" of the OAuth2/OpenID Connect user role required to access this TrafficLightStep API. 
  * It's possible to reconfigure the roles required to access the TrafficLightStep API by configuring an environment variable like this: 
  * </p>
- * <pre>AUTH_ROLES_REQUIRED_TrafficLightStep: ["SiteAdmin"]</pre>
+ * <pre>AUTH_ROLE_REQUIRED_TrafficLightStep: ["SiteAdmin"]</pre>
  * AName.enUS: a traffic light step
  * <p>This class contains a comment <b>"AName.enUS: a traffic light step"</b>, which identifies the language context to describe a TrafficLightStep as "a traffic light step". 
  * </p>

@@ -43,13 +43,15 @@ JDBC_MAX_POOL_SIZE: 10
 JDBC_MAX_WAIT_QUEUE_SIZE: 1000
 
 AUTH_REALM: 
-AUTH_RESOURCE: 
+AUTH_CLIENT: 
 AUTH_SECRET: 
 AUTH_HOST_NAME: 
 AUTH_PORT: 443
 AUTH_SSL: true
 AUTH_SSL_REQUIRED: all
 AUTH_TOKEN_URI: /auth/realms/AUTH_REALM/protocol/openid-connect/token
+AUTH_FINE_GRAINED_POLICY_PERMISSIONS: false
+SSL_VERIFY: true
 
 ZOOKEEPER_HOST_NAME: localhost
 ZOOKEEPER_PORT: 2181
@@ -109,34 +111,34 @@ ENABLE_IMPORT_DATA_TrafficLightStep: true
 ENABLE_IMPORT_DATA_VehicleStep: true
 
 # The Auth roles required to be an admin in the site. 
-AUTH_ROLES_ADMIN: ['SiteAdmin']
+AUTH_ROLE_ADMIN: 'SiteAdmin'
 # The Auth roles required to add and modify site user records. 
-AUTH_ROLES_REQUIRED_SiteUser: ['SiteAdmin']
+AUTH_ROLE_REQUIRED_SiteUser: 'SiteAdmin'
 # The Auth roles required to add and modify map result records. 
-AUTH_ROLES_REQUIRED_MapResult: ['SiteAdmin']
+AUTH_ROLE_REQUIRED_MapResult: 'SiteAdmin'
 # The Auth roles required to add and modify system event records. 
-AUTH_ROLES_REQUIRED_SystemEvent: ['SiteAdmin']
+AUTH_ROLE_REQUIRED_SystemEvent: 'SiteAdmin'
 # The Auth roles required to add and modify article records. 
-AUTH_ROLES_REQUIRED_SitePage: ['SiteAdmin']
+AUTH_ROLE_REQUIRED_SitePage: 'SiteAdmin'
 # The Auth roles required to add and modify HTML records. 
-AUTH_ROLES_REQUIRED_SiteHtm: ['SiteAdmin']
+AUTH_ROLE_REQUIRED_SiteHtm: 'SiteAdmin'
 # The Auth roles required to add and modify IOT node records. 
-AUTH_ROLES_REQUIRED_IotNode: ['SiteAdmin']
+AUTH_ROLE_REQUIRED_IotNode: 'SiteAdmin'
 # The Auth roles required to add and modify IOT node step records. 
-AUTH_ROLES_REQUIRED_IotNodeStep: ['SiteAdmin']
+AUTH_ROLE_REQUIRED_IotNodeStep: 'SiteAdmin'
 # The Auth roles required to add and modify person step records. 
-AUTH_ROLES_REQUIRED_PersonStep: ['SiteAdmin']
+AUTH_ROLE_REQUIRED_PersonStep: 'SiteAdmin'
 # The Auth roles required to add and modify bicycle step records. 
-AUTH_ROLES_REQUIRED_BicycleStep: ['SiteAdmin']
+AUTH_ROLE_REQUIRED_BicycleStep: 'SiteAdmin'
 # The Auth roles required to add and modify time step records. 
-AUTH_ROLES_REQUIRED_TimeStep: ['SiteAdmin']
+AUTH_ROLE_REQUIRED_TimeStep: 'SiteAdmin'
 # The Auth roles required to add and modify traffic simulation records. 
-AUTH_ROLES_REQUIRED_TrafficSimulation: ['SiteAdmin']
+AUTH_ROLE_REQUIRED_TrafficSimulation: 'SiteAdmin'
 # The Auth roles required to add and modify traffic flow observed records. 
-AUTH_ROLES_REQUIRED_TrafficFlowObserved: ['SiteAdmin']
+AUTH_ROLE_REQUIRED_TrafficFlowObserved: 'SiteAdmin'
 # The Auth roles required to add and modify traffic light records. 
-AUTH_ROLES_REQUIRED_TrafficLight: ['SiteAdmin']
+AUTH_ROLE_REQUIRED_TrafficLight: 'SiteAdmin'
 # The Auth roles required to add and modify traffic light step records. 
-AUTH_ROLES_REQUIRED_TrafficLightStep: ['SiteAdmin']
+AUTH_ROLE_REQUIRED_TrafficLightStep: 'SiteAdmin'
 # The Auth roles required to add and modify vehicle step records. 
-AUTH_ROLES_REQUIRED_VehicleStep: ['SiteAdmin']
+AUTH_ROLE_REQUIRED_VehicleStep: 'SiteAdmin'

@@ -69,6 +69,7 @@ import io.vertx.core.buffer.Buffer;
 import io.vertx.core.CompositeFuture;
 import io.vertx.core.http.HttpHeaders;
 import java.nio.charset.Charset;
+import io.vertx.ext.auth.authorization.RoleBasedAuthorization;
 import io.vertx.ext.web.api.service.ServiceRequest;
 import io.vertx.ext.web.api.service.ServiceResponse;
 import io.vertx.ext.web.client.predicate.ResponsePredicate;
@@ -106,44 +107,52 @@ public class PersonStepEnUSGenApiServiceImpl extends BaseApiServiceImpl implemen
 	@Override
 	public void searchPersonStep(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
-			try {
 
-				List<String> roles = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_REQUIRED + "_PersonStep")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
-				List<String> roleReads = Arrays.asList("");
-				if(
-						!siteRequest.getUserResourceRoles().stream().anyMatch(roles::contains)
-						&& !siteRequest.getUserRealmRoles().stream().anyMatch(roles::contains)
-						&& !siteRequest.getUserResourceRoles().stream().anyMatch(roleReads::contains)
-						&& !siteRequest.getUserRealmRoles().stream().anyMatch(roleReads::contains)
-						) {
+			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
+				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", msg)
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+					)
+				));
+			}).onSuccess(b -> {
+				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_PersonStep")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 					eventHandler.handle(Future.succeededFuture(
-						new ServiceResponse(401, "UNAUTHORIZED", 
+						new ServiceResponse(401, "UNAUTHORIZED",
 							Buffer.buffer().appendString(
 								new JsonObject()
 									.put("errorCode", "401")
-									.put("errorMessage", "roles required: " + String.join(", ", roles))
+									.put("errorMessage", msg)
 									.encodePrettily()
 								), MultiMap.caseInsensitiveMultiMap()
 						)
 					));
 				} else {
-					searchPersonStepList(siteRequest, false, true, false).onSuccess(listPersonStep -> {
-						response200SearchPersonStep(listPersonStep).onSuccess(response -> {
-							eventHandler.handle(Future.succeededFuture(response));
-							LOG.debug(String.format("searchPersonStep succeeded. "));
+					try {
+						searchPersonStepList(siteRequest, false, true, false).onSuccess(listPersonStep -> {
+							response200SearchPersonStep(listPersonStep).onSuccess(response -> {
+								eventHandler.handle(Future.succeededFuture(response));
+								LOG.debug(String.format("searchPersonStep succeeded. "));
+							}).onFailure(ex -> {
+								LOG.error(String.format("searchPersonStep failed. "), ex);
+								error(siteRequest, eventHandler, ex);
+							});
 						}).onFailure(ex -> {
 							LOG.error(String.format("searchPersonStep failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
-					}).onFailure(ex -> {
+					} catch(Exception ex) {
 						LOG.error(String.format("searchPersonStep failed. "), ex);
-						error(siteRequest, eventHandler, ex);
-					});
+						error(null, eventHandler, ex);
+					}
 				}
-			} catch(Exception ex) {
-				LOG.error(String.format("searchPersonStep failed. "), ex);
-				error(null, eventHandler, ex);
-			}
+			});
 		}).onFailure(ex -> {
 			if("Inactive Token".equals(ex.getMessage()) || StringUtils.startsWith(ex.getMessage(), "invalid_grant:")) {
 				try {
@@ -152,6 +161,17 @@ public class PersonStepEnUSGenApiServiceImpl extends BaseApiServiceImpl implemen
 					LOG.error(String.format("searchPersonStep failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
+			} else if(StringUtils.startsWith(ex.getMessage(), "401 UNAUTHORIZED ")) {
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", "SSO Resource Permission check returned DENY")
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+							)
+					));
 			} else {
 				LOG.error(String.format("searchPersonStep failed. "), ex);
 				error(null, eventHandler, ex);
@@ -240,44 +260,52 @@ public class PersonStepEnUSGenApiServiceImpl extends BaseApiServiceImpl implemen
 	@Override
 	public void getPersonStep(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
-			try {
 
-				List<String> roles = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_REQUIRED + "_PersonStep")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
-				List<String> roleReads = Arrays.asList("");
-				if(
-						!siteRequest.getUserResourceRoles().stream().anyMatch(roles::contains)
-						&& !siteRequest.getUserRealmRoles().stream().anyMatch(roles::contains)
-						&& !siteRequest.getUserResourceRoles().stream().anyMatch(roleReads::contains)
-						&& !siteRequest.getUserRealmRoles().stream().anyMatch(roleReads::contains)
-						) {
+			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
+				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", msg)
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+					)
+				));
+			}).onSuccess(b -> {
+				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_PersonStep")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 					eventHandler.handle(Future.succeededFuture(
-						new ServiceResponse(401, "UNAUTHORIZED", 
+						new ServiceResponse(401, "UNAUTHORIZED",
 							Buffer.buffer().appendString(
 								new JsonObject()
 									.put("errorCode", "401")
-									.put("errorMessage", "roles required: " + String.join(", ", roles))
+									.put("errorMessage", msg)
 									.encodePrettily()
 								), MultiMap.caseInsensitiveMultiMap()
 						)
 					));
 				} else {
-					searchPersonStepList(siteRequest, false, true, false).onSuccess(listPersonStep -> {
-						response200GETPersonStep(listPersonStep).onSuccess(response -> {
-							eventHandler.handle(Future.succeededFuture(response));
-							LOG.debug(String.format("getPersonStep succeeded. "));
+					try {
+						searchPersonStepList(siteRequest, false, true, false).onSuccess(listPersonStep -> {
+							response200GETPersonStep(listPersonStep).onSuccess(response -> {
+								eventHandler.handle(Future.succeededFuture(response));
+								LOG.debug(String.format("getPersonStep succeeded. "));
+							}).onFailure(ex -> {
+								LOG.error(String.format("getPersonStep failed. "), ex);
+								error(siteRequest, eventHandler, ex);
+							});
 						}).onFailure(ex -> {
 							LOG.error(String.format("getPersonStep failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
-					}).onFailure(ex -> {
+					} catch(Exception ex) {
 						LOG.error(String.format("getPersonStep failed. "), ex);
-						error(siteRequest, eventHandler, ex);
-					});
+						error(null, eventHandler, ex);
+					}
 				}
-			} catch(Exception ex) {
-				LOG.error(String.format("getPersonStep failed. "), ex);
-				error(null, eventHandler, ex);
-			}
+			});
 		}).onFailure(ex -> {
 			if("Inactive Token".equals(ex.getMessage()) || StringUtils.startsWith(ex.getMessage(), "invalid_grant:")) {
 				try {
@@ -286,6 +314,17 @@ public class PersonStepEnUSGenApiServiceImpl extends BaseApiServiceImpl implemen
 					LOG.error(String.format("getPersonStep failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
+			} else if(StringUtils.startsWith(ex.getMessage(), "401 UNAUTHORIZED ")) {
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", "SSO Resource Permission check returned DENY")
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+							)
+					));
 			} else {
 				LOG.error(String.format("getPersonStep failed. "), ex);
 				error(null, eventHandler, ex);
@@ -313,73 +352,81 @@ public class PersonStepEnUSGenApiServiceImpl extends BaseApiServiceImpl implemen
 	public void patchPersonStep(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		LOG.debug(String.format("patchPersonStep started. "));
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
-			try {
-				siteRequest.setJsonObject(body);
 
-				List<String> roles = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_REQUIRED + "_PersonStep")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
-				if(
-						!siteRequest.getUserResourceRoles().stream().anyMatch(roles::contains)
-						&& !siteRequest.getUserRealmRoles().stream().anyMatch(roles::contains)
-						) {
+			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
+				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", msg)
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+					)
+				));
+			}).onSuccess(b -> {
+				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_PersonStep")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 					eventHandler.handle(Future.succeededFuture(
-						new ServiceResponse(401, "UNAUTHORIZED", 
+						new ServiceResponse(401, "UNAUTHORIZED",
 							Buffer.buffer().appendString(
 								new JsonObject()
 									.put("errorCode", "401")
-									.put("errorMessage", "roles required: " + String.join(", ", roles))
+									.put("errorMessage", msg)
 									.encodePrettily()
 								), MultiMap.caseInsensitiveMultiMap()
 						)
 					));
 				} else {
-					searchPersonStepList(siteRequest, true, false, true).onSuccess(listPersonStep -> {
-						try {
-							List<String> roles2 = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_ADMIN)).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
-							if(listPersonStep.getResponse().getResponse().getNumFound() > 1
-									&& !siteRequest.getUserResourceRoles().stream().anyMatch(roles2::contains)
-									&& !siteRequest.getUserRealmRoles().stream().anyMatch(roles2::contains)
-									) {
-								String message = String.format("roles required: " + String.join(", ", roles2));
-								LOG.error(message);
-								error(siteRequest, eventHandler, new RuntimeException(message));
-							} else {
+					try {
+						searchPersonStepList(siteRequest, true, false, true).onSuccess(listPersonStep -> {
+							try {
+								if(listPersonStep.getResponse().getResponse().getNumFound() > 1
+										&& !Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_PersonStep")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+										) {
+									String message = String.format("roles required: " + config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_PersonStep"));
+									LOG.error(message);
+									error(siteRequest, eventHandler, new RuntimeException(message));
+								} else {
 
-								ApiRequest apiRequest = new ApiRequest();
-								apiRequest.setRows(listPersonStep.getRequest().getRows());
-								apiRequest.setNumFound(listPersonStep.getResponse().getResponse().getNumFound());
-								apiRequest.setNumPATCH(0L);
-								apiRequest.initDeepApiRequest(siteRequest);
-								siteRequest.setApiRequest_(apiRequest);
-								if(apiRequest.getNumFound() == 1L)
-									apiRequest.setOriginal(listPersonStep.first());
-								eventBus.publish("websocketPersonStep", JsonObject.mapFrom(apiRequest).toString());
+									ApiRequest apiRequest = new ApiRequest();
+									apiRequest.setRows(listPersonStep.getRequest().getRows());
+									apiRequest.setNumFound(listPersonStep.getResponse().getResponse().getNumFound());
+									apiRequest.setNumPATCH(0L);
+									apiRequest.initDeepApiRequest(siteRequest);
+									siteRequest.setApiRequest_(apiRequest);
+									if(apiRequest.getNumFound() == 1L)
+										apiRequest.setOriginal(listPersonStep.first());
+									eventBus.publish("websocketPersonStep", JsonObject.mapFrom(apiRequest).toString());
 
-								listPATCHPersonStep(apiRequest, listPersonStep).onSuccess(e -> {
-									response200PATCHPersonStep(siteRequest).onSuccess(response -> {
-										LOG.debug(String.format("patchPersonStep succeeded. "));
-										eventHandler.handle(Future.succeededFuture(response));
+									listPATCHPersonStep(apiRequest, listPersonStep).onSuccess(e -> {
+										response200PATCHPersonStep(siteRequest).onSuccess(response -> {
+											LOG.debug(String.format("patchPersonStep succeeded. "));
+											eventHandler.handle(Future.succeededFuture(response));
+										}).onFailure(ex -> {
+											LOG.error(String.format("patchPersonStep failed. "), ex);
+											error(siteRequest, eventHandler, ex);
+										});
 									}).onFailure(ex -> {
 										LOG.error(String.format("patchPersonStep failed. "), ex);
 										error(siteRequest, eventHandler, ex);
 									});
-								}).onFailure(ex -> {
-									LOG.error(String.format("patchPersonStep failed. "), ex);
-									error(siteRequest, eventHandler, ex);
-								});
+								}
+							} catch(Exception ex) {
+								LOG.error(String.format("patchPersonStep failed. "), ex);
+								error(siteRequest, eventHandler, ex);
 							}
-						} catch(Exception ex) {
+						}).onFailure(ex -> {
 							LOG.error(String.format("patchPersonStep failed. "), ex);
 							error(siteRequest, eventHandler, ex);
-						}
-					}).onFailure(ex -> {
+						});
+					} catch(Exception ex) {
 						LOG.error(String.format("patchPersonStep failed. "), ex);
-						error(siteRequest, eventHandler, ex);
-					});
+						error(null, eventHandler, ex);
+					}
 				}
-			} catch(Exception ex) {
-				LOG.error(String.format("patchPersonStep failed. "), ex);
-				error(null, eventHandler, ex);
-			}
+			});
 		}).onFailure(ex -> {
 			if("Inactive Token".equals(ex.getMessage()) || StringUtils.startsWith(ex.getMessage(), "invalid_grant:")) {
 				try {
@@ -388,6 +435,17 @@ public class PersonStepEnUSGenApiServiceImpl extends BaseApiServiceImpl implemen
 					LOG.error(String.format("patchPersonStep failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
+			} else if(StringUtils.startsWith(ex.getMessage(), "401 UNAUTHORIZED ")) {
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", "SSO Resource Permission check returned DENY")
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+							)
+					));
 			} else {
 				LOG.error(String.format("patchPersonStep failed. "), ex);
 				error(null, eventHandler, ex);
@@ -530,64 +588,74 @@ public class PersonStepEnUSGenApiServiceImpl extends BaseApiServiceImpl implemen
 	public void postPersonStep(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		LOG.debug(String.format("postPersonStep started. "));
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
-			try {
-				siteRequest.setJsonObject(body);
 
-				List<String> roles = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_REQUIRED + "_PersonStep")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
-				if(
-						!siteRequest.getUserResourceRoles().stream().anyMatch(roles::contains)
-						&& !siteRequest.getUserRealmRoles().stream().anyMatch(roles::contains)
-						) {
+			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
+				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", msg)
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+					)
+				));
+			}).onSuccess(b -> {
+				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_PersonStep")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 					eventHandler.handle(Future.succeededFuture(
-						new ServiceResponse(401, "UNAUTHORIZED", 
+						new ServiceResponse(401, "UNAUTHORIZED",
 							Buffer.buffer().appendString(
 								new JsonObject()
 									.put("errorCode", "401")
-									.put("errorMessage", "roles required: " + String.join(", ", roles))
+									.put("errorMessage", msg)
 									.encodePrettily()
 								), MultiMap.caseInsensitiveMultiMap()
 						)
 					));
 				} else {
-					ApiRequest apiRequest = new ApiRequest();
-					apiRequest.setRows(1L);
-					apiRequest.setNumFound(1L);
-					apiRequest.setNumPATCH(0L);
-					apiRequest.initDeepApiRequest(siteRequest);
-					siteRequest.setApiRequest_(apiRequest);
-					eventBus.publish("websocketPersonStep", JsonObject.mapFrom(apiRequest).toString());
-					JsonObject params = new JsonObject();
-					params.put("body", siteRequest.getJsonObject());
-					params.put("path", new JsonObject());
-					params.put("cookie", new JsonObject());
-					params.put("header", new JsonObject());
-					params.put("form", new JsonObject());
-					JsonObject query = new JsonObject();
-					Boolean softCommit = Optional.ofNullable(siteRequest.getServiceRequest().getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getBoolean("softCommit")).orElse(null);
-					Integer commitWithin = Optional.ofNullable(siteRequest.getServiceRequest().getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getInteger("commitWithin")).orElse(null);
-					if(softCommit == null && commitWithin == null)
-						softCommit = true;
-					if(softCommit != null)
-						query.put("softCommit", softCommit);
-					if(commitWithin != null)
-						query.put("commitWithin", commitWithin);
-					params.put("query", query);
-					JsonObject context = new JsonObject().put("params", params).put("user", siteRequest.getUserPrincipal());
-					JsonObject json = new JsonObject().put("context", context);
-					eventBus.request("smartabyar-smartvillage-enUS-PersonStep", json, new DeliveryOptions().addHeader("action", "postPersonStepFuture")).onSuccess(a -> {
-						JsonObject responseMessage = (JsonObject)a.body();
-						JsonObject responseBody = new JsonObject(Buffer.buffer(JsonUtil.BASE64_DECODER.decode(responseMessage.getString("payload"))));
-						eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(responseBody.encodePrettily()))));
-						LOG.debug(String.format("postPersonStep succeeded. "));
-					}).onFailure(ex -> {
+					try {
+						ApiRequest apiRequest = new ApiRequest();
+						apiRequest.setRows(1L);
+						apiRequest.setNumFound(1L);
+						apiRequest.setNumPATCH(0L);
+						apiRequest.initDeepApiRequest(siteRequest);
+						siteRequest.setApiRequest_(apiRequest);
+						eventBus.publish("websocketPersonStep", JsonObject.mapFrom(apiRequest).toString());
+						JsonObject params = new JsonObject();
+						params.put("body", siteRequest.getJsonObject());
+						params.put("path", new JsonObject());
+						params.put("cookie", new JsonObject());
+						params.put("header", new JsonObject());
+						params.put("form", new JsonObject());
+						JsonObject query = new JsonObject();
+						Boolean softCommit = Optional.ofNullable(siteRequest.getServiceRequest().getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getBoolean("softCommit")).orElse(null);
+						Integer commitWithin = Optional.ofNullable(siteRequest.getServiceRequest().getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getInteger("commitWithin")).orElse(null);
+						if(softCommit == null && commitWithin == null)
+							softCommit = true;
+						if(softCommit != null)
+							query.put("softCommit", softCommit);
+						if(commitWithin != null)
+							query.put("commitWithin", commitWithin);
+						params.put("query", query);
+						JsonObject context = new JsonObject().put("params", params).put("user", siteRequest.getUserPrincipal());
+						JsonObject json = new JsonObject().put("context", context);
+						eventBus.request("smartabyar-smartvillage-enUS-PersonStep", json, new DeliveryOptions().addHeader("action", "postPersonStepFuture")).onSuccess(a -> {
+							JsonObject responseMessage = (JsonObject)a.body();
+							JsonObject responseBody = new JsonObject(Buffer.buffer(JsonUtil.BASE64_DECODER.decode(responseMessage.getString("payload"))));
+							eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(responseBody.encodePrettily()))));
+							LOG.debug(String.format("postPersonStep succeeded. "));
+						}).onFailure(ex -> {
+							LOG.error(String.format("postPersonStep failed. "), ex);
+							error(siteRequest, eventHandler, ex);
+						});
+					} catch(Exception ex) {
 						LOG.error(String.format("postPersonStep failed. "), ex);
-						error(siteRequest, eventHandler, ex);
-					});
+						error(null, eventHandler, ex);
+					}
 				}
-			} catch(Exception ex) {
-				LOG.error(String.format("postPersonStep failed. "), ex);
-				error(null, eventHandler, ex);
-			}
+			});
 		}).onFailure(ex -> {
 			if("Inactive Token".equals(ex.getMessage()) || StringUtils.startsWith(ex.getMessage(), "invalid_grant:")) {
 				try {
@@ -596,6 +664,17 @@ public class PersonStepEnUSGenApiServiceImpl extends BaseApiServiceImpl implemen
 					LOG.error(String.format("postPersonStep failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
+			} else if(StringUtils.startsWith(ex.getMessage(), "401 UNAUTHORIZED ")) {
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", "SSO Resource Permission check returned DENY")
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+							)
+					));
 			} else {
 				LOG.error(String.format("postPersonStep failed. "), ex);
 				error(null, eventHandler, ex);
@@ -629,6 +708,17 @@ public class PersonStepEnUSGenApiServiceImpl extends BaseApiServiceImpl implemen
 					LOG.error(String.format("postPersonStep failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
+			} else if(StringUtils.startsWith(ex.getMessage(), "401 UNAUTHORIZED ")) {
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", "SSO Resource Permission check returned DENY")
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+							)
+					));
 			} else {
 				LOG.error(String.format("postPersonStep failed. "), ex);
 				error(null, eventHandler, ex);
@@ -679,39 +769,52 @@ public class PersonStepEnUSGenApiServiceImpl extends BaseApiServiceImpl implemen
 	public void putimportPersonStep(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		LOG.debug(String.format("putimportPersonStep started. "));
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
-			try {
-				siteRequest.setJsonObject(body);
 
-				List<String> roles = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_REQUIRED + "_PersonStep")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
-				if(
-						!siteRequest.getUserResourceRoles().stream().anyMatch(roles::contains)
-						&& !siteRequest.getUserRealmRoles().stream().anyMatch(roles::contains)
-						) {
+			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
+				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", msg)
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+					)
+				));
+			}).onSuccess(b -> {
+				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_PersonStep")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 					eventHandler.handle(Future.succeededFuture(
-						new ServiceResponse(401, "UNAUTHORIZED", 
+						new ServiceResponse(401, "UNAUTHORIZED",
 							Buffer.buffer().appendString(
 								new JsonObject()
 									.put("errorCode", "401")
-									.put("errorMessage", "roles required: " + String.join(", ", roles))
+									.put("errorMessage", msg)
 									.encodePrettily()
 								), MultiMap.caseInsensitiveMultiMap()
 						)
 					));
 				} else {
 					try {
-						ApiRequest apiRequest = new ApiRequest();
-						JsonArray jsonArray = Optional.ofNullable(siteRequest.getJsonObject()).map(o -> o.getJsonArray("list")).orElse(new JsonArray());
-						apiRequest.setRows(Long.valueOf(jsonArray.size()));
-						apiRequest.setNumFound(Long.valueOf(jsonArray.size()));
-						apiRequest.setNumPATCH(0L);
-						apiRequest.initDeepApiRequest(siteRequest);
-						siteRequest.setApiRequest_(apiRequest);
-						eventBus.publish("websocketPersonStep", JsonObject.mapFrom(apiRequest).toString());
-						varsPersonStep(siteRequest).onSuccess(d -> {
-							listPUTImportPersonStep(apiRequest, siteRequest).onSuccess(e -> {
-								response200PUTImportPersonStep(siteRequest).onSuccess(response -> {
-									LOG.debug(String.format("putimportPersonStep succeeded. "));
-									eventHandler.handle(Future.succeededFuture(response));
+						try {
+							ApiRequest apiRequest = new ApiRequest();
+							JsonArray jsonArray = Optional.ofNullable(siteRequest.getJsonObject()).map(o -> o.getJsonArray("list")).orElse(new JsonArray());
+							apiRequest.setRows(Long.valueOf(jsonArray.size()));
+							apiRequest.setNumFound(Long.valueOf(jsonArray.size()));
+							apiRequest.setNumPATCH(0L);
+							apiRequest.initDeepApiRequest(siteRequest);
+							siteRequest.setApiRequest_(apiRequest);
+							eventBus.publish("websocketPersonStep", JsonObject.mapFrom(apiRequest).toString());
+							varsPersonStep(siteRequest).onSuccess(d -> {
+								listPUTImportPersonStep(apiRequest, siteRequest).onSuccess(e -> {
+									response200PUTImportPersonStep(siteRequest).onSuccess(response -> {
+										LOG.debug(String.format("putimportPersonStep succeeded. "));
+										eventHandler.handle(Future.succeededFuture(response));
+									}).onFailure(ex -> {
+										LOG.error(String.format("putimportPersonStep failed. "), ex);
+										error(siteRequest, eventHandler, ex);
+									});
 								}).onFailure(ex -> {
 									LOG.error(String.format("putimportPersonStep failed. "), ex);
 									error(siteRequest, eventHandler, ex);
@@ -720,19 +823,16 @@ public class PersonStepEnUSGenApiServiceImpl extends BaseApiServiceImpl implemen
 								LOG.error(String.format("putimportPersonStep failed. "), ex);
 								error(siteRequest, eventHandler, ex);
 							});
-						}).onFailure(ex -> {
+						} catch(Exception ex) {
 							LOG.error(String.format("putimportPersonStep failed. "), ex);
 							error(siteRequest, eventHandler, ex);
-						});
+						}
 					} catch(Exception ex) {
 						LOG.error(String.format("putimportPersonStep failed. "), ex);
-						error(siteRequest, eventHandler, ex);
+						error(null, eventHandler, ex);
 					}
 				}
-			} catch(Exception ex) {
-				LOG.error(String.format("putimportPersonStep failed. "), ex);
-				error(null, eventHandler, ex);
-			}
+			});
 		}).onFailure(ex -> {
 			if("Inactive Token".equals(ex.getMessage()) || StringUtils.startsWith(ex.getMessage(), "invalid_grant:")) {
 				try {
@@ -741,6 +841,17 @@ public class PersonStepEnUSGenApiServiceImpl extends BaseApiServiceImpl implemen
 					LOG.error(String.format("putimportPersonStep failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
+			} else if(StringUtils.startsWith(ex.getMessage(), "401 UNAUTHORIZED ")) {
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", "SSO Resource Permission check returned DENY")
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+							)
+					));
 			} else {
 				LOG.error(String.format("putimportPersonStep failed. "), ex);
 				error(null, eventHandler, ex);
@@ -903,6 +1014,17 @@ public class PersonStepEnUSGenApiServiceImpl extends BaseApiServiceImpl implemen
 					LOG.error(String.format("putimportPersonStep failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
+			} else if(StringUtils.startsWith(ex.getMessage(), "401 UNAUTHORIZED ")) {
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", "SSO Resource Permission check returned DENY")
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+							)
+					));
 			} else {
 				LOG.error(String.format("putimportPersonStep failed. "), ex);
 				error(null, eventHandler, ex);
@@ -932,44 +1054,52 @@ public class PersonStepEnUSGenApiServiceImpl extends BaseApiServiceImpl implemen
 	@Override
 	public void searchpagePersonStep(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
-			try {
 
-				List<String> roles = Optional.ofNullable(config.getValue(ConfigKeys.AUTH_ROLES_REQUIRED + "_PersonStep")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
-				List<String> roleReads = Arrays.asList("");
-				if(
-						!siteRequest.getUserResourceRoles().stream().anyMatch(roles::contains)
-						&& !siteRequest.getUserRealmRoles().stream().anyMatch(roles::contains)
-						&& !siteRequest.getUserResourceRoles().stream().anyMatch(roleReads::contains)
-						&& !siteRequest.getUserRealmRoles().stream().anyMatch(roleReads::contains)
-						) {
+			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
+				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", msg)
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+					)
+				));
+			}).onSuccess(b -> {
+				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_PersonStep")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 					eventHandler.handle(Future.succeededFuture(
-						new ServiceResponse(401, "UNAUTHORIZED", 
+						new ServiceResponse(401, "UNAUTHORIZED",
 							Buffer.buffer().appendString(
 								new JsonObject()
 									.put("errorCode", "401")
-									.put("errorMessage", "roles required: " + String.join(", ", roles))
+									.put("errorMessage", msg)
 									.encodePrettily()
 								), MultiMap.caseInsensitiveMultiMap()
 						)
 					));
 				} else {
-					searchPersonStepList(siteRequest, false, true, false).onSuccess(listPersonStep -> {
-						response200SearchPagePersonStep(listPersonStep).onSuccess(response -> {
-							eventHandler.handle(Future.succeededFuture(response));
-							LOG.debug(String.format("searchpagePersonStep succeeded. "));
+					try {
+						searchPersonStepList(siteRequest, false, true, false).onSuccess(listPersonStep -> {
+							response200SearchPagePersonStep(listPersonStep).onSuccess(response -> {
+								eventHandler.handle(Future.succeededFuture(response));
+								LOG.debug(String.format("searchpagePersonStep succeeded. "));
+							}).onFailure(ex -> {
+								LOG.error(String.format("searchpagePersonStep failed. "), ex);
+								error(siteRequest, eventHandler, ex);
+							});
 						}).onFailure(ex -> {
 							LOG.error(String.format("searchpagePersonStep failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
-					}).onFailure(ex -> {
+					} catch(Exception ex) {
 						LOG.error(String.format("searchpagePersonStep failed. "), ex);
-						error(siteRequest, eventHandler, ex);
-					});
+						error(null, eventHandler, ex);
+					}
 				}
-			} catch(Exception ex) {
-				LOG.error(String.format("searchpagePersonStep failed. "), ex);
-				error(null, eventHandler, ex);
-			}
+			});
 		}).onFailure(ex -> {
 			if("Inactive Token".equals(ex.getMessage()) || StringUtils.startsWith(ex.getMessage(), "invalid_grant:")) {
 				try {
@@ -978,6 +1108,17 @@ public class PersonStepEnUSGenApiServiceImpl extends BaseApiServiceImpl implemen
 					LOG.error(String.format("searchpagePersonStep failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
+			} else if(StringUtils.startsWith(ex.getMessage(), "401 UNAUTHORIZED ")) {
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", "SSO Resource Permission check returned DENY")
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+							)
+					));
 			} else {
 				LOG.error(String.format("searchpagePersonStep failed. "), ex);
 				error(null, eventHandler, ex);

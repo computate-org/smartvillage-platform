@@ -25,3 +25,18 @@ ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS startDateTime timestamp w
 ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS startSeconds decimal;
 ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS endSeconds decimal;
 ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS stepSeconds decimal;
+ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS paramInitialPar text;
+ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS paramLam text;
+ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS paramDemandScale integer;
+ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS paramStepSize integer;
+ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS paramUpdateStepSize integer;
+ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS paramRunTime integer;
+ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS paramTotalIterNum integer;
+ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS paramItersPerPar integer;
+ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS pk bigserial primary key;
+ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS inheritPk text;
+ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS created timestamp with time zone;
+ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS archived boolean;
+ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS deleted boolean;
+ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS sessionId text;
+ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS userKey bigint;

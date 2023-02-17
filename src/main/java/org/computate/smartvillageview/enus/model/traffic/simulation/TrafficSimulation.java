@@ -147,6 +147,110 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 
 	/**
 	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * HtmlRow: 8
+	 * HtmlCell: 1
+	 * Facet: true
+	 * DisplayName: initial params
+	 * Description: 
+	 */
+	protected void _paramInitialPar(Wrap<String> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * HtmlRow: 9
+	 * HtmlCell: 1
+	 * Facet: true
+	 * DisplayName: Traffic Demand
+	 * Description: 
+	 */
+	protected void _paramLam(Wrap<String> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * HtmlRow: 10
+	 * HtmlCell: 1
+	 * Facet: true
+	 * DisplayName: demand scale
+	 * Description: 
+	 */
+	protected void _paramDemandScale(Wrap<Integer> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * HtmlRow: 10
+	 * HtmlCell: 2
+	 * Facet: true
+	 * DisplayName: step size
+	 * Description: 
+	 */
+	protected void _paramStepSize(Wrap<Integer> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * HtmlRow: 10
+	 * HtmlCell: 3
+	 * Facet: true
+	 * DisplayName: update step size
+	 * Description: 
+	 */
+	protected void _paramUpdateStepSize(Wrap<Integer> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * HtmlRow: 11
+	 * HtmlCell: 1
+	 * Facet: true
+	 * DisplayName: run time
+	 * Description: Time duration of each simulated sample path. 
+	 */
+	protected void _paramRunTime(Wrap<Integer> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * HtmlRow: 11
+	 * HtmlCell: 2
+	 * Facet: true
+	 * DisplayName: total iterations
+	 * Description: Total iterations to update performance. 
+	 */
+	protected void _paramTotalIterNum(Wrap<Integer> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * HtmlRow: 11
+	 * HtmlCell: 3
+	 * Facet: true
+	 * DisplayName: iteration repetitions
+	 * Description: Number of repeats per round. 
+	 */
+	protected void _paramItersPerPar(Wrap<Integer> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
 	 * DisplayName: TLS States paths
 	 * Description: The paths to all TLS States files
 	 */

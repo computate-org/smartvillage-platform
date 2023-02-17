@@ -104,7 +104,7 @@
 		<drools.version>8.32.0.Final</drools.version>
 		<cloudevents.version>2.4.0</cloudevents.version>
 
-		<computate.version>4.3.3.19</computate.version>
+		<computate.version>4.3.3.20</computate.version>
 	</properties>
 
 	<dependencyManagement>

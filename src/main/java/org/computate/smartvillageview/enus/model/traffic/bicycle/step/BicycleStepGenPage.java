@@ -463,8 +463,8 @@ public class BicycleStepGenPage extends BicycleStepGenPageGen<MapResultPage> {
 	}
 
 	@Override
-	protected void _rolesRequired(List<String> l) {
-		l.addAll(Optional.ofNullable(siteRequest_.getConfig().getJsonArray(ConfigKeys.AUTH_ROLES_REQUIRED + "_BicycleStep")).orElse(new JsonArray()).stream().map(o -> o.toString()).collect(Collectors.toList()));
+	protected void _roleRequired(List<String> l) {
+		l.add(siteRequest_.getConfig().getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_BicycleStep"));
 	}
 
 	@Override

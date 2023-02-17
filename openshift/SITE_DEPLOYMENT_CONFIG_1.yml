@@ -255,38 +255,38 @@ spec:
               value: '{{ ENABLE_IMPORT_DATA_VehicleStep | to_json }}'
             - name: ENABLE_REFRESH_DATA
               value: "{{ ENABLE_REFRESH_DATA }}"
-            - name: AUTH_ROLES_ADMIN
-              value: '{{ AUTH_ROLES_ADMIN | to_json }}'
-            - name: AUTH_ROLES_REQUIRED_SiteUser
-              value: '{{ AUTH_ROLES_REQUIRED_SiteUser | to_json }}'
-            - name: AUTH_ROLES_REQUIRED_MapResult
-              value: '{{ AUTH_ROLES_REQUIRED_MapResult | to_json }}'
-            - name: AUTH_ROLES_REQUIRED_SystemEvent
-              value: '{{ AUTH_ROLES_REQUIRED_SystemEvent | to_json }}'
-            - name: AUTH_ROLES_REQUIRED_SitePage
-              value: '{{ AUTH_ROLES_REQUIRED_SitePage | to_json }}'
-            - name: AUTH_ROLES_REQUIRED_SiteHtm
-              value: '{{ AUTH_ROLES_REQUIRED_SiteHtm | to_json }}'
-            - name: AUTH_ROLES_REQUIRED_IotNode
-              value: '{{ AUTH_ROLES_REQUIRED_IotNode | to_json }}'
-            - name: AUTH_ROLES_REQUIRED_IotNodeStep
-              value: '{{ AUTH_ROLES_REQUIRED_IotNodeStep | to_json }}'
-            - name: AUTH_ROLES_REQUIRED_PersonStep
-              value: '{{ AUTH_ROLES_REQUIRED_PersonStep | to_json }}'
-            - name: AUTH_ROLES_REQUIRED_BicycleStep
-              value: '{{ AUTH_ROLES_REQUIRED_BicycleStep | to_json }}'
-            - name: AUTH_ROLES_REQUIRED_TimeStep
-              value: '{{ AUTH_ROLES_REQUIRED_TimeStep | to_json }}'
-            - name: AUTH_ROLES_REQUIRED_TrafficSimulation
-              value: '{{ AUTH_ROLES_REQUIRED_TrafficSimulation | to_json }}'
-            - name: AUTH_ROLES_REQUIRED_TrafficFlowObserved
-              value: '{{ AUTH_ROLES_REQUIRED_TrafficFlowObserved | to_json }}'
-            - name: AUTH_ROLES_REQUIRED_TrafficLight
-              value: '{{ AUTH_ROLES_REQUIRED_TrafficLight | to_json }}'
-            - name: AUTH_ROLES_REQUIRED_TrafficLightStep
-              value: '{{ AUTH_ROLES_REQUIRED_TrafficLightStep | to_json }}'
-            - name: AUTH_ROLES_REQUIRED_VehicleStep
-              value: '{{ AUTH_ROLES_REQUIRED_VehicleStep | to_json }}'
+            - name: AUTH_ROLE_ADMIN
+              value: '{{ AUTH_ROLE_ADMIN | to_json }}'
+            - name: AUTH_ROLE_REQUIRED_SiteUser
+              value: '{{ AUTH_ROLE_REQUIRED_SiteUser | to_json }}'
+            - name: AUTH_ROLE_REQUIRED_MapResult
+              value: '{{ AUTH_ROLE_REQUIRED_MapResult | to_json }}'
+            - name: AUTH_ROLE_REQUIRED_SystemEvent
+              value: '{{ AUTH_ROLE_REQUIRED_SystemEvent | to_json }}'
+            - name: AUTH_ROLE_REQUIRED_SitePage
+              value: '{{ AUTH_ROLE_REQUIRED_SitePage | to_json }}'
+            - name: AUTH_ROLE_REQUIRED_SiteHtm
+              value: '{{ AUTH_ROLE_REQUIRED_SiteHtm | to_json }}'
+            - name: AUTH_ROLE_REQUIRED_IotNode
+              value: '{{ AUTH_ROLE_REQUIRED_IotNode | to_json }}'
+            - name: AUTH_ROLE_REQUIRED_IotNodeStep
+              value: '{{ AUTH_ROLE_REQUIRED_IotNodeStep | to_json }}'
+            - name: AUTH_ROLE_REQUIRED_PersonStep
+              value: '{{ AUTH_ROLE_REQUIRED_PersonStep | to_json }}'
+            - name: AUTH_ROLE_REQUIRED_BicycleStep
+              value: '{{ AUTH_ROLE_REQUIRED_BicycleStep | to_json }}'
+            - name: AUTH_ROLE_REQUIRED_TimeStep
+              value: '{{ AUTH_ROLE_REQUIRED_TimeStep | to_json }}'
+            - name: AUTH_ROLE_REQUIRED_TrafficSimulation
+              value: '{{ AUTH_ROLE_REQUIRED_TrafficSimulation | to_json }}'
+            - name: AUTH_ROLE_REQUIRED_TrafficFlowObserved
+              value: '{{ AUTH_ROLE_REQUIRED_TrafficFlowObserved | to_json }}'
+            - name: AUTH_ROLE_REQUIRED_TrafficLight
+              value: '{{ AUTH_ROLE_REQUIRED_TrafficLight | to_json }}'
+            - name: AUTH_ROLE_REQUIRED_TrafficLightStep
+              value: '{{ AUTH_ROLE_REQUIRED_TrafficLightStep | to_json }}'
+            - name: AUTH_ROLE_REQUIRED_VehicleStep
+              value: '{{ AUTH_ROLE_REQUIRED_VehicleStep | to_json }}'
 
             - name: "QUAYIO_ORG"
               valueFrom:

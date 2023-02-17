@@ -247,12 +247,12 @@ spec:
               value: '2'
             - name: ENABLE_IMPORT_DATA
               value: 'false'
-            - name: AUTH_ROLES_ADMIN
-              value: '["SiteAdmin"]'
-            - name: AUTH_ROLES_REQUIRED_SiteUser
-              value: '["SiteAdmin"]'
-            - name: AUTH_ROLES_REQUIRED_IotNode
-              value: '["SiteAdmin"]'
+            - name: AUTH_ROLE_ADMIN
+              value: '"SiteAdmin"'
+            - name: AUTH_ROLE_REQUIRED_SiteUser
+              value: '"SiteAdmin"'
+            - name: AUTH_ROLE_REQUIRED_IotNode
+              value: '"SiteAdmin"'
             - name: YGGIO_HOST_NAME
               valueFrom:
                 secretKeyRef:

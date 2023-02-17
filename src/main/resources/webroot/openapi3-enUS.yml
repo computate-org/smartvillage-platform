@@ -10577,7 +10577,7 @@ components:
   securitySchemes:
     openIdConnect:
       type: openIdConnect
-      openIdConnectUrl: https://sso.computate.org/auth/realms/RH-IMPACT/.well-known/openid-configuration
+      openIdConnectUrl: https://keycloak-sso.apps-crc.testing/auth/realms/SMARTCITY/.well-known/openid-configuration
   requestBodies:
     SearchSiteHtmResponse:
       content:
@@ -15776,6 +15776,22 @@ components:
                     type: string
                   stepSeconds:
                     type: string
+                  paramInitialPar:
+                    type: string
+                  paramLam:
+                    type: string
+                  paramDemandScale:
+                    type: string
+                  paramStepSize:
+                    type: string
+                  paramUpdateStepSize:
+                    type: string
+                  paramRunTime:
+                    type: string
+                  paramTotalIterNum:
+                    type: string
+                  paramItersPerPar:
+                    type: string
                   tlsStatesPaths:
                     type: array
                     items:
@@ -15843,6 +15859,62 @@ components:
             removeStepSeconds:
               type: string
             removeAllStepSeconds:
+              type: string
+            setParamInitialPar:
+              type: string
+              nullable: true
+            removeParamInitialPar:
+              type: string
+            removeAllParamInitialPar:
+              type: string
+            setParamLam:
+              type: string
+              nullable: true
+            removeParamLam:
+              type: string
+            removeAllParamLam:
+              type: string
+            setParamDemandScale:
+              type: string
+              nullable: true
+            removeParamDemandScale:
+              type: string
+            removeAllParamDemandScale:
+              type: string
+            setParamStepSize:
+              type: string
+              nullable: true
+            removeParamStepSize:
+              type: string
+            removeAllParamStepSize:
+              type: string
+            setParamUpdateStepSize:
+              type: string
+              nullable: true
+            removeParamUpdateStepSize:
+              type: string
+            removeAllParamUpdateStepSize:
+              type: string
+            setParamRunTime:
+              type: string
+              nullable: true
+            removeParamRunTime:
+              type: string
+            removeAllParamRunTime:
+              type: string
+            setParamTotalIterNum:
+              type: string
+              nullable: true
+            removeParamTotalIterNum:
+              type: string
+            removeAllParamTotalIterNum:
+              type: string
+            setParamItersPerPar:
+              type: string
+              nullable: true
+            removeParamItersPerPar:
+              type: string
+            removeAllParamItersPerPar:
               type: string
             setTlsStatesPaths:
               type: array
@@ -15938,6 +16010,62 @@ components:
               type: string
             removeAllStepSeconds:
               type: string
+            setParamInitialPar:
+              type: string
+              nullable: true
+            removeParamInitialPar:
+              type: string
+            removeAllParamInitialPar:
+              type: string
+            setParamLam:
+              type: string
+              nullable: true
+            removeParamLam:
+              type: string
+            removeAllParamLam:
+              type: string
+            setParamDemandScale:
+              type: string
+              nullable: true
+            removeParamDemandScale:
+              type: string
+            removeAllParamDemandScale:
+              type: string
+            setParamStepSize:
+              type: string
+              nullable: true
+            removeParamStepSize:
+              type: string
+            removeAllParamStepSize:
+              type: string
+            setParamUpdateStepSize:
+              type: string
+              nullable: true
+            removeParamUpdateStepSize:
+              type: string
+            removeAllParamUpdateStepSize:
+              type: string
+            setParamRunTime:
+              type: string
+              nullable: true
+            removeParamRunTime:
+              type: string
+            removeAllParamRunTime:
+              type: string
+            setParamTotalIterNum:
+              type: string
+              nullable: true
+            removeParamTotalIterNum:
+              type: string
+            removeAllParamTotalIterNum:
+              type: string
+            setParamItersPerPar:
+              type: string
+              nullable: true
+            removeParamItersPerPar:
+              type: string
+            removeAllParamItersPerPar:
+              type: string
             setTlsStatesPaths:
               type: array
               nullable: true
@@ -15992,6 +16120,22 @@ components:
               type: string
             stepSeconds:
               type: string
+            paramInitialPar:
+              type: string
+            paramLam:
+              type: string
+            paramDemandScale:
+              type: string
+            paramStepSize:
+              type: string
+            paramUpdateStepSize:
+              type: string
+            paramRunTime:
+              type: string
+            paramTotalIterNum:
+              type: string
+            paramItersPerPar:
+              type: string
             tlsStatesPaths:
               type: array
               items:
@@ -16019,6 +16163,22 @@ components:
             endSeconds:
               type: string
             stepSeconds:
+              type: string
+            paramInitialPar:
+              type: string
+            paramLam:
+              type: string
+            paramDemandScale:
+              type: string
+            paramStepSize:
+              type: string
+            paramUpdateStepSize:
+              type: string
+            paramRunTime:
+              type: string
+            paramTotalIterNum:
+              type: string
+            paramItersPerPar:
               type: string
             tlsStatesPaths:
               type: array
@@ -16048,6 +16208,22 @@ components:
               type: string
             stepSeconds:
               type: string
+            paramInitialPar:
+              type: string
+            paramLam:
+              type: string
+            paramDemandScale:
+              type: string
+            paramStepSize:
+              type: string
+            paramUpdateStepSize:
+              type: string
+            paramRunTime:
+              type: string
+            paramTotalIterNum:
+              type: string
+            paramItersPerPar:
+              type: string
             tlsStatesPaths:
               type: array
               items:
@@ -16076,6 +16252,22 @@ components:
               type: string
             stepSeconds:
               type: string
+            paramInitialPar:
+              type: string
+            paramLam:
+              type: string
+            paramDemandScale:
+              type: string
+            paramStepSize:
+              type: string
+            paramUpdateStepSize:
+              type: string
+            paramRunTime:
+              type: string
+            paramTotalIterNum:
+              type: string
+            paramItersPerPar:
+              type: string
             tlsStatesPaths:
               type: array
               items:
@@ -16103,6 +16295,22 @@ components:
             endSeconds:
               type: string
             stepSeconds:
+              type: string
+            paramInitialPar:
+              type: string
+            paramLam:
+              type: string
+            paramDemandScale:
+              type: string
+            paramStepSize:
+              type: string
+            paramUpdateStepSize:
+              type: string
+            paramRunTime:
+              type: string
+            paramTotalIterNum:
+              type: string
+            paramItersPerPar:
               type: string
             tlsStatesPaths:
               type: array

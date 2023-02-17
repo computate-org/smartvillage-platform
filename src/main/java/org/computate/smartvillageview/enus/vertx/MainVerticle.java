@@ -89,6 +89,7 @@ import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.Session;
 import io.vertx.ext.web.api.service.ServiceRequest;
 import io.vertx.ext.web.client.WebClient;
+import io.vertx.ext.web.client.WebClientOptions;
 import io.vertx.ext.web.handler.OAuth2AuthHandler;
 import io.vertx.ext.web.handler.SessionHandler;
 import io.vertx.ext.web.handler.StaticHandler;
@@ -148,7 +149,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 			try {
 				Future<Void> originalFuture = Future.future(a -> a.complete());
 				Future<Void> future = originalFuture;
-				WebClient webClient = WebClient.create(vertx);
+				WebClient webClient = WebClient.create(vertx, new WebClientOptions().setVerifyHost(false).setTrustAll(true));
 				Boolean runOpenApi3Generator = Optional.ofNullable(config.getBoolean(ConfigKeys.RUN_OPENAPI3_GENERATOR)).orElse(false);
 				Boolean runSqlGenerator = Optional.ofNullable(config.getBoolean(ConfigKeys.RUN_SQL_GENERATOR)).orElse(false);
 				Boolean runArticleGenerator = Optional.ofNullable(config.getBoolean(ConfigKeys.RUN_ARTICLE_GENERATOR)).orElse(false);
@@ -185,7 +186,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 
 	public static void  runOpenApi3Generator(String[] args, Vertx vertx, JsonObject config) {
 		OpenApi3Generator api = new OpenApi3Generator();
-		WebClient webClient = WebClient.create(vertx);
+		WebClient webClient = WebClient.create(vertx, new WebClientOptions().setVerifyHost(false).setTrustAll(true));
 		SiteRequestEnUS siteRequest = new SiteRequestEnUS();
 		siteRequest.setConfig(config);
 		siteRequest.setWebClient(webClient);
@@ -368,7 +369,8 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 		Promise<Void> promise = Promise.promise();
 
 		try {
-			webClient = WebClient.create(vertx);
+			Boolean sslVerify = config().getBoolean(ConfigKeys.SSL_VERIFY);
+			webClient = WebClient.create(vertx, new WebClientOptions().setVerifyHost(sslVerify).setTrustAll(!sslVerify));
 			promise.complete();
 		} catch(Exception ex) {
 			LOG.error("Unable to configure site context. ", ex);
@@ -443,14 +445,13 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 			String authUrl = String.format("%s://%s%s/auth", (authSsl ? "https" : "http"), authHostName, (authPort == 443 || authPort == 80 ? "" : ":" + authPort));
 			oauth2ClientOptions.setSite(authUrl + "/realms/" + config().getString(ConfigKeys.AUTH_REALM));
 			oauth2ClientOptions.setTenant(config().getString(ConfigKeys.AUTH_REALM));
-			oauth2ClientOptions.setClientId(config().getString(ConfigKeys.AUTH_RESOURCE));
+			oauth2ClientOptions.setClientId(config().getString(ConfigKeys.AUTH_CLIENT));
 			oauth2ClientOptions.setClientSecret(config().getString(ConfigKeys.AUTH_SECRET));
-			oauth2ClientOptions.setFlow(OAuth2FlowType.AUTH_CODE);
 			oauth2ClientOptions.setAuthorizationPath("/oauth/authorize");
 			JsonObject extraParams = new JsonObject();
 			extraParams.put("scope", "profile");
 			oauth2ClientOptions.setExtraParameters(extraParams);
-			oauth2ClientOptions.setHttpClientOptions(new HttpClientOptions().setConnectTimeout(120000));
+			oauth2ClientOptions.setHttpClientOptions(new HttpClientOptions().setTrustAll(true).setVerifyHost(false).setConnectTimeout(120000));
 
 			OpenIDConnectAuth.discover(vertx, oauth2ClientOptions, a -> {
 				if(a.succeeded()) {
@@ -470,9 +471,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 					if(StringUtils.startsWith(siteBaseUrl, "https://"))
 						sessionHandler.setCookieSecureFlag(true);
 			
-					RouterBuilder.create(vertx, "webroot/openapi3-enUS.yml", b -> {
-						if (b.succeeded()) {
-							RouterBuilder routerBuilder = b.result();
+					RouterBuilder.create(vertx, "webroot/openapi3-enUS.yml").onSuccess(routerBuilder -> {
 							routerBuilder.mountServicesFromExtensions();
 			
 							routerBuilder.serviceExtraPayloadMapper(routingContext -> new JsonObject()
@@ -551,11 +550,10 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 			
 							LOG.info(configureOpenApiSuccess);
 							promise.complete();
-						} else {
-							Exception ex = new RuntimeException("OpenID Connect Discovery failed", b.cause());
-							LOG.error(configureOpenApiError, ex);
-							promise.fail(ex);
-						}
+					}).onFailure(ex -> {
+						Exception ex2 = new RuntimeException("OpenID Connect Discovery failed", ex);
+						LOG.error(configureOpenApiError, ex2);
+						promise.fail(ex2);
 					});
 				} else {
 					Exception ex = new RuntimeException("OpenID Connect Discovery failed", a.cause());

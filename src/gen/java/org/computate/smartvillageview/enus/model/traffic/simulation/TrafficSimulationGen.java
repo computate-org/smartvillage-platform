@@ -45,6 +45,7 @@ import java.time.Instant;
 import java.util.Locale;
 import java.time.OffsetDateTime;
 import java.math.BigDecimal;
+import java.lang.Integer;
 import io.vertx.core.json.JsonArray;
 import org.computate.search.wrap.Wrap;
 import io.vertx.core.Promise;
@@ -155,7 +156,7 @@ import org.computate.search.response.solr.SolrResponse;
  * This class contains a comment <b>"Role.enUS: SiteAdmin"</b>, which identifies the default role name "SiteAdmin" of the OAuth2/OpenID Connect user role required to access this TrafficSimulation API. 
  * It's possible to reconfigure the roles required to access the TrafficSimulation API by configuring an environment variable like this: 
  * </p>
- * <pre>AUTH_ROLES_REQUIRED_TrafficSimulation: ["SiteAdmin"]</pre>
+ * <pre>AUTH_ROLE_REQUIRED_TrafficSimulation: ["SiteAdmin"]</pre>
  * AName.enUS: a traffic simulation
  * <p>This class contains a comment <b>"AName.enUS: a traffic simulation"</b>, which identifies the language context to describe a TrafficSimulation as "a traffic simulation". 
  * </p>
@@ -721,6 +722,486 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		return stepSeconds;
 	}
 
+	/////////////////////
+	// paramInitialPar //
+	/////////////////////
+
+
+	/**	 The entity paramInitialPar
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String paramInitialPar;
+
+	/**	<br> The entity paramInitialPar
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation&fq=entiteVar_enUS_indexed_string:paramInitialPar">Find the entity paramInitialPar in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _paramInitialPar(Wrap<String> w);
+
+	public String getParamInitialPar() {
+		return paramInitialPar;
+	}
+	public void setParamInitialPar(String o) {
+		this.paramInitialPar = TrafficSimulation.staticSetParamInitialPar(siteRequest_, o);
+	}
+	public static String staticSetParamInitialPar(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected TrafficSimulation paramInitialParInit() {
+		Wrap<String> paramInitialParWrap = new Wrap<String>().var("paramInitialPar");
+		if(paramInitialPar == null) {
+			_paramInitialPar(paramInitialParWrap);
+			setParamInitialPar(paramInitialParWrap.o);
+		}
+		return (TrafficSimulation)this;
+	}
+
+	public static String staticSearchParamInitialPar(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrParamInitialPar(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqParamInitialPar(SiteRequestEnUS siteRequest_, String o) {
+		return TrafficSimulation.staticSearchStrParamInitialPar(siteRequest_, TrafficSimulation.staticSearchParamInitialPar(siteRequest_, TrafficSimulation.staticSetParamInitialPar(siteRequest_, o)));
+	}
+
+	public String sqlParamInitialPar() {
+		return paramInitialPar;
+	}
+
+	//////////////
+	// paramLam //
+	//////////////
+
+
+	/**	 The entity paramLam
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String paramLam;
+
+	/**	<br> The entity paramLam
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation&fq=entiteVar_enUS_indexed_string:paramLam">Find the entity paramLam in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _paramLam(Wrap<String> w);
+
+	public String getParamLam() {
+		return paramLam;
+	}
+	public void setParamLam(String o) {
+		this.paramLam = TrafficSimulation.staticSetParamLam(siteRequest_, o);
+	}
+	public static String staticSetParamLam(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected TrafficSimulation paramLamInit() {
+		Wrap<String> paramLamWrap = new Wrap<String>().var("paramLam");
+		if(paramLam == null) {
+			_paramLam(paramLamWrap);
+			setParamLam(paramLamWrap.o);
+		}
+		return (TrafficSimulation)this;
+	}
+
+	public static String staticSearchParamLam(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrParamLam(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqParamLam(SiteRequestEnUS siteRequest_, String o) {
+		return TrafficSimulation.staticSearchStrParamLam(siteRequest_, TrafficSimulation.staticSearchParamLam(siteRequest_, TrafficSimulation.staticSetParamLam(siteRequest_, o)));
+	}
+
+	public String sqlParamLam() {
+		return paramLam;
+	}
+
+	//////////////////////
+	// paramDemandScale //
+	//////////////////////
+
+
+	/**	 The entity paramDemandScale
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected Integer paramDemandScale;
+
+	/**	<br> The entity paramDemandScale
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation&fq=entiteVar_enUS_indexed_string:paramDemandScale">Find the entity paramDemandScale in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _paramDemandScale(Wrap<Integer> w);
+
+	public Integer getParamDemandScale() {
+		return paramDemandScale;
+	}
+
+	public void setParamDemandScale(Integer paramDemandScale) {
+		this.paramDemandScale = paramDemandScale;
+	}
+	@JsonIgnore
+	public void setParamDemandScale(String o) {
+		this.paramDemandScale = TrafficSimulation.staticSetParamDemandScale(siteRequest_, o);
+	}
+	public static Integer staticSetParamDemandScale(SiteRequestEnUS siteRequest_, String o) {
+		if(NumberUtils.isParsable(o))
+			return Integer.parseInt(o);
+		return null;
+	}
+	protected TrafficSimulation paramDemandScaleInit() {
+		Wrap<Integer> paramDemandScaleWrap = new Wrap<Integer>().var("paramDemandScale");
+		if(paramDemandScale == null) {
+			_paramDemandScale(paramDemandScaleWrap);
+			setParamDemandScale(paramDemandScaleWrap.o);
+		}
+		return (TrafficSimulation)this;
+	}
+
+	public static Integer staticSearchParamDemandScale(SiteRequestEnUS siteRequest_, Integer o) {
+		return o;
+	}
+
+	public static String staticSearchStrParamDemandScale(SiteRequestEnUS siteRequest_, Integer o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqParamDemandScale(SiteRequestEnUS siteRequest_, String o) {
+		return TrafficSimulation.staticSearchStrParamDemandScale(siteRequest_, TrafficSimulation.staticSearchParamDemandScale(siteRequest_, TrafficSimulation.staticSetParamDemandScale(siteRequest_, o)));
+	}
+
+	public Integer sqlParamDemandScale() {
+		return paramDemandScale;
+	}
+
+	///////////////////
+	// paramStepSize //
+	///////////////////
+
+
+	/**	 The entity paramStepSize
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected Integer paramStepSize;
+
+	/**	<br> The entity paramStepSize
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation&fq=entiteVar_enUS_indexed_string:paramStepSize">Find the entity paramStepSize in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _paramStepSize(Wrap<Integer> w);
+
+	public Integer getParamStepSize() {
+		return paramStepSize;
+	}
+
+	public void setParamStepSize(Integer paramStepSize) {
+		this.paramStepSize = paramStepSize;
+	}
+	@JsonIgnore
+	public void setParamStepSize(String o) {
+		this.paramStepSize = TrafficSimulation.staticSetParamStepSize(siteRequest_, o);
+	}
+	public static Integer staticSetParamStepSize(SiteRequestEnUS siteRequest_, String o) {
+		if(NumberUtils.isParsable(o))
+			return Integer.parseInt(o);
+		return null;
+	}
+	protected TrafficSimulation paramStepSizeInit() {
+		Wrap<Integer> paramStepSizeWrap = new Wrap<Integer>().var("paramStepSize");
+		if(paramStepSize == null) {
+			_paramStepSize(paramStepSizeWrap);
+			setParamStepSize(paramStepSizeWrap.o);
+		}
+		return (TrafficSimulation)this;
+	}
+
+	public static Integer staticSearchParamStepSize(SiteRequestEnUS siteRequest_, Integer o) {
+		return o;
+	}
+
+	public static String staticSearchStrParamStepSize(SiteRequestEnUS siteRequest_, Integer o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqParamStepSize(SiteRequestEnUS siteRequest_, String o) {
+		return TrafficSimulation.staticSearchStrParamStepSize(siteRequest_, TrafficSimulation.staticSearchParamStepSize(siteRequest_, TrafficSimulation.staticSetParamStepSize(siteRequest_, o)));
+	}
+
+	public Integer sqlParamStepSize() {
+		return paramStepSize;
+	}
+
+	/////////////////////////
+	// paramUpdateStepSize //
+	/////////////////////////
+
+
+	/**	 The entity paramUpdateStepSize
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected Integer paramUpdateStepSize;
+
+	/**	<br> The entity paramUpdateStepSize
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation&fq=entiteVar_enUS_indexed_string:paramUpdateStepSize">Find the entity paramUpdateStepSize in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _paramUpdateStepSize(Wrap<Integer> w);
+
+	public Integer getParamUpdateStepSize() {
+		return paramUpdateStepSize;
+	}
+
+	public void setParamUpdateStepSize(Integer paramUpdateStepSize) {
+		this.paramUpdateStepSize = paramUpdateStepSize;
+	}
+	@JsonIgnore
+	public void setParamUpdateStepSize(String o) {
+		this.paramUpdateStepSize = TrafficSimulation.staticSetParamUpdateStepSize(siteRequest_, o);
+	}
+	public static Integer staticSetParamUpdateStepSize(SiteRequestEnUS siteRequest_, String o) {
+		if(NumberUtils.isParsable(o))
+			return Integer.parseInt(o);
+		return null;
+	}
+	protected TrafficSimulation paramUpdateStepSizeInit() {
+		Wrap<Integer> paramUpdateStepSizeWrap = new Wrap<Integer>().var("paramUpdateStepSize");
+		if(paramUpdateStepSize == null) {
+			_paramUpdateStepSize(paramUpdateStepSizeWrap);
+			setParamUpdateStepSize(paramUpdateStepSizeWrap.o);
+		}
+		return (TrafficSimulation)this;
+	}
+
+	public static Integer staticSearchParamUpdateStepSize(SiteRequestEnUS siteRequest_, Integer o) {
+		return o;
+	}
+
+	public static String staticSearchStrParamUpdateStepSize(SiteRequestEnUS siteRequest_, Integer o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqParamUpdateStepSize(SiteRequestEnUS siteRequest_, String o) {
+		return TrafficSimulation.staticSearchStrParamUpdateStepSize(siteRequest_, TrafficSimulation.staticSearchParamUpdateStepSize(siteRequest_, TrafficSimulation.staticSetParamUpdateStepSize(siteRequest_, o)));
+	}
+
+	public Integer sqlParamUpdateStepSize() {
+		return paramUpdateStepSize;
+	}
+
+	//////////////////
+	// paramRunTime //
+	//////////////////
+
+
+	/**	 The entity paramRunTime
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected Integer paramRunTime;
+
+	/**	<br> The entity paramRunTime
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation&fq=entiteVar_enUS_indexed_string:paramRunTime">Find the entity paramRunTime in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _paramRunTime(Wrap<Integer> w);
+
+	public Integer getParamRunTime() {
+		return paramRunTime;
+	}
+
+	public void setParamRunTime(Integer paramRunTime) {
+		this.paramRunTime = paramRunTime;
+	}
+	@JsonIgnore
+	public void setParamRunTime(String o) {
+		this.paramRunTime = TrafficSimulation.staticSetParamRunTime(siteRequest_, o);
+	}
+	public static Integer staticSetParamRunTime(SiteRequestEnUS siteRequest_, String o) {
+		if(NumberUtils.isParsable(o))
+			return Integer.parseInt(o);
+		return null;
+	}
+	protected TrafficSimulation paramRunTimeInit() {
+		Wrap<Integer> paramRunTimeWrap = new Wrap<Integer>().var("paramRunTime");
+		if(paramRunTime == null) {
+			_paramRunTime(paramRunTimeWrap);
+			setParamRunTime(paramRunTimeWrap.o);
+		}
+		return (TrafficSimulation)this;
+	}
+
+	public static Integer staticSearchParamRunTime(SiteRequestEnUS siteRequest_, Integer o) {
+		return o;
+	}
+
+	public static String staticSearchStrParamRunTime(SiteRequestEnUS siteRequest_, Integer o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqParamRunTime(SiteRequestEnUS siteRequest_, String o) {
+		return TrafficSimulation.staticSearchStrParamRunTime(siteRequest_, TrafficSimulation.staticSearchParamRunTime(siteRequest_, TrafficSimulation.staticSetParamRunTime(siteRequest_, o)));
+	}
+
+	public Integer sqlParamRunTime() {
+		return paramRunTime;
+	}
+
+	///////////////////////
+	// paramTotalIterNum //
+	///////////////////////
+
+
+	/**	 The entity paramTotalIterNum
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected Integer paramTotalIterNum;
+
+	/**	<br> The entity paramTotalIterNum
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation&fq=entiteVar_enUS_indexed_string:paramTotalIterNum">Find the entity paramTotalIterNum in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _paramTotalIterNum(Wrap<Integer> w);
+
+	public Integer getParamTotalIterNum() {
+		return paramTotalIterNum;
+	}
+
+	public void setParamTotalIterNum(Integer paramTotalIterNum) {
+		this.paramTotalIterNum = paramTotalIterNum;
+	}
+	@JsonIgnore
+	public void setParamTotalIterNum(String o) {
+		this.paramTotalIterNum = TrafficSimulation.staticSetParamTotalIterNum(siteRequest_, o);
+	}
+	public static Integer staticSetParamTotalIterNum(SiteRequestEnUS siteRequest_, String o) {
+		if(NumberUtils.isParsable(o))
+			return Integer.parseInt(o);
+		return null;
+	}
+	protected TrafficSimulation paramTotalIterNumInit() {
+		Wrap<Integer> paramTotalIterNumWrap = new Wrap<Integer>().var("paramTotalIterNum");
+		if(paramTotalIterNum == null) {
+			_paramTotalIterNum(paramTotalIterNumWrap);
+			setParamTotalIterNum(paramTotalIterNumWrap.o);
+		}
+		return (TrafficSimulation)this;
+	}
+
+	public static Integer staticSearchParamTotalIterNum(SiteRequestEnUS siteRequest_, Integer o) {
+		return o;
+	}
+
+	public static String staticSearchStrParamTotalIterNum(SiteRequestEnUS siteRequest_, Integer o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqParamTotalIterNum(SiteRequestEnUS siteRequest_, String o) {
+		return TrafficSimulation.staticSearchStrParamTotalIterNum(siteRequest_, TrafficSimulation.staticSearchParamTotalIterNum(siteRequest_, TrafficSimulation.staticSetParamTotalIterNum(siteRequest_, o)));
+	}
+
+	public Integer sqlParamTotalIterNum() {
+		return paramTotalIterNum;
+	}
+
+	//////////////////////
+	// paramItersPerPar //
+	//////////////////////
+
+
+	/**	 The entity paramItersPerPar
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected Integer paramItersPerPar;
+
+	/**	<br> The entity paramItersPerPar
+	 *  is defined as null before being initialized. 
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation&fq=entiteVar_enUS_indexed_string:paramItersPerPar">Find the entity paramItersPerPar in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _paramItersPerPar(Wrap<Integer> w);
+
+	public Integer getParamItersPerPar() {
+		return paramItersPerPar;
+	}
+
+	public void setParamItersPerPar(Integer paramItersPerPar) {
+		this.paramItersPerPar = paramItersPerPar;
+	}
+	@JsonIgnore
+	public void setParamItersPerPar(String o) {
+		this.paramItersPerPar = TrafficSimulation.staticSetParamItersPerPar(siteRequest_, o);
+	}
+	public static Integer staticSetParamItersPerPar(SiteRequestEnUS siteRequest_, String o) {
+		if(NumberUtils.isParsable(o))
+			return Integer.parseInt(o);
+		return null;
+	}
+	protected TrafficSimulation paramItersPerParInit() {
+		Wrap<Integer> paramItersPerParWrap = new Wrap<Integer>().var("paramItersPerPar");
+		if(paramItersPerPar == null) {
+			_paramItersPerPar(paramItersPerParWrap);
+			setParamItersPerPar(paramItersPerParWrap.o);
+		}
+		return (TrafficSimulation)this;
+	}
+
+	public static Integer staticSearchParamItersPerPar(SiteRequestEnUS siteRequest_, Integer o) {
+		return o;
+	}
+
+	public static String staticSearchStrParamItersPerPar(SiteRequestEnUS siteRequest_, Integer o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqParamItersPerPar(SiteRequestEnUS siteRequest_, String o) {
+		return TrafficSimulation.staticSearchStrParamItersPerPar(siteRequest_, TrafficSimulation.staticSearchParamItersPerPar(siteRequest_, TrafficSimulation.staticSetParamItersPerPar(siteRequest_, o)));
+	}
+
+	public Integer sqlParamItersPerPar() {
+		return paramItersPerPar;
+	}
+
 	////////////////////
 	// tlsStatesPaths //
 	////////////////////
@@ -892,6 +1373,14 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 				startSecondsInit();
 				endSecondsInit();
 				stepSecondsInit();
+				paramInitialParInit();
+				paramLamInit();
+				paramDemandScaleInit();
+				paramStepSizeInit();
+				paramUpdateStepSizeInit();
+				paramRunTimeInit();
+				paramTotalIterNumInit();
+				paramItersPerParInit();
 				tlsStatesPathsInit();
 				additionalFilePathsInit();
 				promise2.complete();
@@ -963,6 +1452,22 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 				return oTrafficSimulation.endSeconds;
 			case "stepSeconds":
 				return oTrafficSimulation.stepSeconds;
+			case "paramInitialPar":
+				return oTrafficSimulation.paramInitialPar;
+			case "paramLam":
+				return oTrafficSimulation.paramLam;
+			case "paramDemandScale":
+				return oTrafficSimulation.paramDemandScale;
+			case "paramStepSize":
+				return oTrafficSimulation.paramStepSize;
+			case "paramUpdateStepSize":
+				return oTrafficSimulation.paramUpdateStepSize;
+			case "paramRunTime":
+				return oTrafficSimulation.paramRunTime;
+			case "paramTotalIterNum":
+				return oTrafficSimulation.paramTotalIterNum;
+			case "paramItersPerPar":
+				return oTrafficSimulation.paramItersPerPar;
 			case "tlsStatesPaths":
 				return oTrafficSimulation.tlsStatesPaths;
 			case "additionalFilePaths":
@@ -1022,6 +1527,22 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return TrafficSimulation.staticSetEndSeconds(siteRequest_, o);
 		case "stepSeconds":
 			return TrafficSimulation.staticSetStepSeconds(siteRequest_, o);
+		case "paramInitialPar":
+			return TrafficSimulation.staticSetParamInitialPar(siteRequest_, o);
+		case "paramLam":
+			return TrafficSimulation.staticSetParamLam(siteRequest_, o);
+		case "paramDemandScale":
+			return TrafficSimulation.staticSetParamDemandScale(siteRequest_, o);
+		case "paramStepSize":
+			return TrafficSimulation.staticSetParamStepSize(siteRequest_, o);
+		case "paramUpdateStepSize":
+			return TrafficSimulation.staticSetParamUpdateStepSize(siteRequest_, o);
+		case "paramRunTime":
+			return TrafficSimulation.staticSetParamRunTime(siteRequest_, o);
+		case "paramTotalIterNum":
+			return TrafficSimulation.staticSetParamTotalIterNum(siteRequest_, o);
+		case "paramItersPerPar":
+			return TrafficSimulation.staticSetParamItersPerPar(siteRequest_, o);
 		case "tlsStatesPaths":
 			return TrafficSimulation.staticSetTlsStatesPaths(siteRequest_, o);
 		case "additionalFilePaths":
@@ -1056,6 +1577,22 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return TrafficSimulation.staticSearchEndSeconds(siteRequest_, (BigDecimal)o);
 		case "stepSeconds":
 			return TrafficSimulation.staticSearchStepSeconds(siteRequest_, (BigDecimal)o);
+		case "paramInitialPar":
+			return TrafficSimulation.staticSearchParamInitialPar(siteRequest_, (String)o);
+		case "paramLam":
+			return TrafficSimulation.staticSearchParamLam(siteRequest_, (String)o);
+		case "paramDemandScale":
+			return TrafficSimulation.staticSearchParamDemandScale(siteRequest_, (Integer)o);
+		case "paramStepSize":
+			return TrafficSimulation.staticSearchParamStepSize(siteRequest_, (Integer)o);
+		case "paramUpdateStepSize":
+			return TrafficSimulation.staticSearchParamUpdateStepSize(siteRequest_, (Integer)o);
+		case "paramRunTime":
+			return TrafficSimulation.staticSearchParamRunTime(siteRequest_, (Integer)o);
+		case "paramTotalIterNum":
+			return TrafficSimulation.staticSearchParamTotalIterNum(siteRequest_, (Integer)o);
+		case "paramItersPerPar":
+			return TrafficSimulation.staticSearchParamItersPerPar(siteRequest_, (Integer)o);
 		case "tlsStatesPaths":
 			return TrafficSimulation.staticSearchTlsStatesPaths(siteRequest_, (String)o);
 		case "additionalFilePaths":
@@ -1090,6 +1627,22 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return TrafficSimulation.staticSearchStrEndSeconds(siteRequest_, (Double)o);
 		case "stepSeconds":
 			return TrafficSimulation.staticSearchStrStepSeconds(siteRequest_, (Double)o);
+		case "paramInitialPar":
+			return TrafficSimulation.staticSearchStrParamInitialPar(siteRequest_, (String)o);
+		case "paramLam":
+			return TrafficSimulation.staticSearchStrParamLam(siteRequest_, (String)o);
+		case "paramDemandScale":
+			return TrafficSimulation.staticSearchStrParamDemandScale(siteRequest_, (Integer)o);
+		case "paramStepSize":
+			return TrafficSimulation.staticSearchStrParamStepSize(siteRequest_, (Integer)o);
+		case "paramUpdateStepSize":
+			return TrafficSimulation.staticSearchStrParamUpdateStepSize(siteRequest_, (Integer)o);
+		case "paramRunTime":
+			return TrafficSimulation.staticSearchStrParamRunTime(siteRequest_, (Integer)o);
+		case "paramTotalIterNum":
+			return TrafficSimulation.staticSearchStrParamTotalIterNum(siteRequest_, (Integer)o);
+		case "paramItersPerPar":
+			return TrafficSimulation.staticSearchStrParamItersPerPar(siteRequest_, (Integer)o);
 		case "tlsStatesPaths":
 			return TrafficSimulation.staticSearchStrTlsStatesPaths(siteRequest_, (String)o);
 		case "additionalFilePaths":
@@ -1124,6 +1677,22 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return TrafficSimulation.staticSearchFqEndSeconds(siteRequest_, o);
 		case "stepSeconds":
 			return TrafficSimulation.staticSearchFqStepSeconds(siteRequest_, o);
+		case "paramInitialPar":
+			return TrafficSimulation.staticSearchFqParamInitialPar(siteRequest_, o);
+		case "paramLam":
+			return TrafficSimulation.staticSearchFqParamLam(siteRequest_, o);
+		case "paramDemandScale":
+			return TrafficSimulation.staticSearchFqParamDemandScale(siteRequest_, o);
+		case "paramStepSize":
+			return TrafficSimulation.staticSearchFqParamStepSize(siteRequest_, o);
+		case "paramUpdateStepSize":
+			return TrafficSimulation.staticSearchFqParamUpdateStepSize(siteRequest_, o);
+		case "paramRunTime":
+			return TrafficSimulation.staticSearchFqParamRunTime(siteRequest_, o);
+		case "paramTotalIterNum":
+			return TrafficSimulation.staticSearchFqParamTotalIterNum(siteRequest_, o);
+		case "paramItersPerPar":
+			return TrafficSimulation.staticSearchFqParamItersPerPar(siteRequest_, o);
 		case "tlsStatesPaths":
 			return TrafficSimulation.staticSearchFqTlsStatesPaths(siteRequest_, o);
 		case "additionalFilePaths":
@@ -1210,6 +1779,66 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 				}
 				saves.add("stepSeconds");
 				return val;
+			} else if("paraminitialpar".equals(varLower)) {
+				if(val instanceof String) {
+					setParamInitialPar((String)val);
+				}
+				saves.add("paramInitialPar");
+				return val;
+			} else if("paramlam".equals(varLower)) {
+				if(val instanceof String) {
+					setParamLam((String)val);
+				}
+				saves.add("paramLam");
+				return val;
+			} else if("paramdemandscale".equals(varLower)) {
+				if(val instanceof Integer) {
+					setParamDemandScale((Integer)val);
+				} else {
+					setParamDemandScale(val == null ? null : val.toString());
+				}
+				saves.add("paramDemandScale");
+				return val;
+			} else if("paramstepsize".equals(varLower)) {
+				if(val instanceof Integer) {
+					setParamStepSize((Integer)val);
+				} else {
+					setParamStepSize(val == null ? null : val.toString());
+				}
+				saves.add("paramStepSize");
+				return val;
+			} else if("paramupdatestepsize".equals(varLower)) {
+				if(val instanceof Integer) {
+					setParamUpdateStepSize((Integer)val);
+				} else {
+					setParamUpdateStepSize(val == null ? null : val.toString());
+				}
+				saves.add("paramUpdateStepSize");
+				return val;
+			} else if("paramruntime".equals(varLower)) {
+				if(val instanceof Integer) {
+					setParamRunTime((Integer)val);
+				} else {
+					setParamRunTime(val == null ? null : val.toString());
+				}
+				saves.add("paramRunTime");
+				return val;
+			} else if("paramtotaliternum".equals(varLower)) {
+				if(val instanceof Integer) {
+					setParamTotalIterNum((Integer)val);
+				} else {
+					setParamTotalIterNum(val == null ? null : val.toString());
+				}
+				saves.add("paramTotalIterNum");
+				return val;
+			} else if("paramitersperpar".equals(varLower)) {
+				if(val instanceof Integer) {
+					setParamItersPerPar((Integer)val);
+				} else {
+					setParamItersPerPar(val == null ? null : val.toString());
+				}
+				saves.add("paramItersPerPar");
+				return val;
 		} else {
 			return super.persistBaseModel(var, val);
 		}
@@ -1256,6 +1885,30 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		if(stepSeconds != null) {
 			doc.put("stepSeconds_docvalues_double", stepSeconds.doubleValue());
 		}
+		if(paramInitialPar != null) {
+			doc.put("paramInitialPar_docvalues_string", paramInitialPar);
+		}
+		if(paramLam != null) {
+			doc.put("paramLam_docvalues_string", paramLam);
+		}
+		if(paramDemandScale != null) {
+			doc.put("paramDemandScale_docvalues_int", paramDemandScale);
+		}
+		if(paramStepSize != null) {
+			doc.put("paramStepSize_docvalues_int", paramStepSize);
+		}
+		if(paramUpdateStepSize != null) {
+			doc.put("paramUpdateStepSize_docvalues_int", paramUpdateStepSize);
+		}
+		if(paramRunTime != null) {
+			doc.put("paramRunTime_docvalues_int", paramRunTime);
+		}
+		if(paramTotalIterNum != null) {
+			doc.put("paramTotalIterNum_docvalues_int", paramTotalIterNum);
+		}
+		if(paramItersPerPar != null) {
+			doc.put("paramItersPerPar_docvalues_int", paramItersPerPar);
+		}
 		super.indexBaseModel(doc);
 
 	}
@@ -1278,6 +1931,22 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 				return "endSeconds_docvalues_double";
 			case "stepSeconds":
 				return "stepSeconds_docvalues_double";
+			case "paramInitialPar":
+				return "paramInitialPar_docvalues_string";
+			case "paramLam":
+				return "paramLam_docvalues_string";
+			case "paramDemandScale":
+				return "paramDemandScale_docvalues_int";
+			case "paramStepSize":
+				return "paramStepSize_docvalues_int";
+			case "paramUpdateStepSize":
+				return "paramUpdateStepSize_docvalues_int";
+			case "paramRunTime":
+				return "paramRunTime_docvalues_int";
+			case "paramTotalIterNum":
+				return "paramTotalIterNum_docvalues_int";
+			case "paramItersPerPar":
+				return "paramItersPerPar_docvalues_int";
 			default:
 				return BaseModel.varStoredBaseModel(entityVar);
 		}
@@ -1301,6 +1970,22 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 				return "endSeconds_docvalues_double";
 			case "stepSeconds":
 				return "stepSeconds_docvalues_double";
+			case "paramInitialPar":
+				return "paramInitialPar_docvalues_string";
+			case "paramLam":
+				return "paramLam_docvalues_string";
+			case "paramDemandScale":
+				return "paramDemandScale_docvalues_int";
+			case "paramStepSize":
+				return "paramStepSize_docvalues_int";
+			case "paramUpdateStepSize":
+				return "paramUpdateStepSize_docvalues_int";
+			case "paramRunTime":
+				return "paramRunTime_docvalues_int";
+			case "paramTotalIterNum":
+				return "paramTotalIterNum_docvalues_int";
+			case "paramItersPerPar":
+				return "paramItersPerPar_docvalues_int";
 			default:
 				return BaseModel.varIndexedBaseModel(entityVar);
 		}
@@ -1324,6 +2009,22 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 				return "endSeconds";
 			case "stepSeconds_docvalues_double":
 				return "stepSeconds";
+			case "paramInitialPar_docvalues_string":
+				return "paramInitialPar";
+			case "paramLam_docvalues_string":
+				return "paramLam";
+			case "paramDemandScale_docvalues_int":
+				return "paramDemandScale";
+			case "paramStepSize_docvalues_int":
+				return "paramStepSize";
+			case "paramUpdateStepSize_docvalues_int":
+				return "paramUpdateStepSize";
+			case "paramRunTime_docvalues_int":
+				return "paramRunTime";
+			case "paramTotalIterNum_docvalues_int":
+				return "paramTotalIterNum";
+			case "paramItersPerPar_docvalues_int":
+				return "paramItersPerPar";
 			default:
 				return BaseModel.searchVarBaseModel(searchVar);
 		}
@@ -1361,6 +2062,14 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		oTrafficSimulation.setStartSeconds(Optional.ofNullable(doc.get("startSeconds_docvalues_double")).map(v -> v.toString()).orElse(null));
 		oTrafficSimulation.setEndSeconds(Optional.ofNullable(doc.get("endSeconds_docvalues_double")).map(v -> v.toString()).orElse(null));
 		oTrafficSimulation.setStepSeconds(Optional.ofNullable(doc.get("stepSeconds_docvalues_double")).map(v -> v.toString()).orElse(null));
+		oTrafficSimulation.setParamInitialPar(Optional.ofNullable(doc.get("paramInitialPar_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oTrafficSimulation.setParamLam(Optional.ofNullable(doc.get("paramLam_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oTrafficSimulation.setParamDemandScale(Optional.ofNullable(doc.get("paramDemandScale_docvalues_int")).map(v -> v.toString()).orElse(null));
+		oTrafficSimulation.setParamStepSize(Optional.ofNullable(doc.get("paramStepSize_docvalues_int")).map(v -> v.toString()).orElse(null));
+		oTrafficSimulation.setParamUpdateStepSize(Optional.ofNullable(doc.get("paramUpdateStepSize_docvalues_int")).map(v -> v.toString()).orElse(null));
+		oTrafficSimulation.setParamRunTime(Optional.ofNullable(doc.get("paramRunTime_docvalues_int")).map(v -> v.toString()).orElse(null));
+		oTrafficSimulation.setParamTotalIterNum(Optional.ofNullable(doc.get("paramTotalIterNum_docvalues_int")).map(v -> v.toString()).orElse(null));
+		oTrafficSimulation.setParamItersPerPar(Optional.ofNullable(doc.get("paramItersPerPar_docvalues_int")).map(v -> v.toString()).orElse(null));
 
 		super.storeBaseModel(doc);
 	}
@@ -1390,6 +2099,22 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 				apiRequest.addVars("endSeconds");
 			if(!Objects.equals(stepSeconds, original.getStepSeconds()))
 				apiRequest.addVars("stepSeconds");
+			if(!Objects.equals(paramInitialPar, original.getParamInitialPar()))
+				apiRequest.addVars("paramInitialPar");
+			if(!Objects.equals(paramLam, original.getParamLam()))
+				apiRequest.addVars("paramLam");
+			if(!Objects.equals(paramDemandScale, original.getParamDemandScale()))
+				apiRequest.addVars("paramDemandScale");
+			if(!Objects.equals(paramStepSize, original.getParamStepSize()))
+				apiRequest.addVars("paramStepSize");
+			if(!Objects.equals(paramUpdateStepSize, original.getParamUpdateStepSize()))
+				apiRequest.addVars("paramUpdateStepSize");
+			if(!Objects.equals(paramRunTime, original.getParamRunTime()))
+				apiRequest.addVars("paramRunTime");
+			if(!Objects.equals(paramTotalIterNum, original.getParamTotalIterNum()))
+				apiRequest.addVars("paramTotalIterNum");
+			if(!Objects.equals(paramItersPerPar, original.getParamItersPerPar()))
+				apiRequest.addVars("paramItersPerPar");
 			super.apiRequestBaseModel();
 		}
 	}
@@ -1409,6 +2134,14 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		sb.append(Optional.ofNullable(startSeconds).map(v -> "startSeconds: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(endSeconds).map(v -> "endSeconds: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(stepSeconds).map(v -> "stepSeconds: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(paramInitialPar).map(v -> "paramInitialPar: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(paramLam).map(v -> "paramLam: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(paramDemandScale).map(v -> "paramDemandScale: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(paramStepSize).map(v -> "paramStepSize: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(paramUpdateStepSize).map(v -> "paramUpdateStepSize: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(paramRunTime).map(v -> "paramRunTime: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(paramTotalIterNum).map(v -> "paramTotalIterNum: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(paramItersPerPar).map(v -> "paramItersPerPar: " + v + "\n").orElse(""));
 		return sb.toString();
 	}
 
@@ -1421,6 +2154,14 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	public static final String VAR_startSeconds = "startSeconds";
 	public static final String VAR_endSeconds = "endSeconds";
 	public static final String VAR_stepSeconds = "stepSeconds";
+	public static final String VAR_paramInitialPar = "paramInitialPar";
+	public static final String VAR_paramLam = "paramLam";
+	public static final String VAR_paramDemandScale = "paramDemandScale";
+	public static final String VAR_paramStepSize = "paramStepSize";
+	public static final String VAR_paramUpdateStepSize = "paramUpdateStepSize";
+	public static final String VAR_paramRunTime = "paramRunTime";
+	public static final String VAR_paramTotalIterNum = "paramTotalIterNum";
+	public static final String VAR_paramItersPerPar = "paramItersPerPar";
 	public static final String VAR_tlsStatesPaths = "tlsStatesPaths";
 	public static final String VAR_additionalFilePaths = "additionalFilePaths";
 
@@ -1444,6 +2185,14 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		vars.add(VAR_startSeconds);
 		vars.add(VAR_endSeconds);
 		vars.add(VAR_stepSeconds);
+		vars.add(VAR_paramInitialPar);
+		vars.add(VAR_paramLam);
+		vars.add(VAR_paramDemandScale);
+		vars.add(VAR_paramStepSize);
+		vars.add(VAR_paramUpdateStepSize);
+		vars.add(VAR_paramRunTime);
+		vars.add(VAR_paramTotalIterNum);
+		vars.add(VAR_paramItersPerPar);
 		BaseModel.varsFqBaseModel(vars);
 		return vars;
 	}
@@ -1456,6 +2205,12 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		vars.add(VAR_startSeconds);
 		vars.add(VAR_endSeconds);
 		vars.add(VAR_stepSeconds);
+		vars.add(VAR_paramDemandScale);
+		vars.add(VAR_paramStepSize);
+		vars.add(VAR_paramUpdateStepSize);
+		vars.add(VAR_paramRunTime);
+		vars.add(VAR_paramTotalIterNum);
+		vars.add(VAR_paramItersPerPar);
 		BaseModel.varsRangeBaseModel(vars);
 		return vars;
 	}
@@ -1468,6 +2223,14 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	public static final String DISPLAY_NAME_startSeconds = "start seconds";
 	public static final String DISPLAY_NAME_endSeconds = "end seconds";
 	public static final String DISPLAY_NAME_stepSeconds = "step seconds";
+	public static final String DISPLAY_NAME_paramInitialPar = "initial params";
+	public static final String DISPLAY_NAME_paramLam = "Traffic Demand";
+	public static final String DISPLAY_NAME_paramDemandScale = "demand scale";
+	public static final String DISPLAY_NAME_paramStepSize = "step size";
+	public static final String DISPLAY_NAME_paramUpdateStepSize = "update step size";
+	public static final String DISPLAY_NAME_paramRunTime = "run time";
+	public static final String DISPLAY_NAME_paramTotalIterNum = "total iterations";
+	public static final String DISPLAY_NAME_paramItersPerPar = "iteration repetitions";
 	public static final String DISPLAY_NAME_tlsStatesPaths = "TLS States paths";
 	public static final String DISPLAY_NAME_additionalFilePaths = "additional file paths";
 
@@ -1492,6 +2255,22 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return DISPLAY_NAME_endSeconds;
 		case VAR_stepSeconds:
 			return DISPLAY_NAME_stepSeconds;
+		case VAR_paramInitialPar:
+			return DISPLAY_NAME_paramInitialPar;
+		case VAR_paramLam:
+			return DISPLAY_NAME_paramLam;
+		case VAR_paramDemandScale:
+			return DISPLAY_NAME_paramDemandScale;
+		case VAR_paramStepSize:
+			return DISPLAY_NAME_paramStepSize;
+		case VAR_paramUpdateStepSize:
+			return DISPLAY_NAME_paramUpdateStepSize;
+		case VAR_paramRunTime:
+			return DISPLAY_NAME_paramRunTime;
+		case VAR_paramTotalIterNum:
+			return DISPLAY_NAME_paramTotalIterNum;
+		case VAR_paramItersPerPar:
+			return DISPLAY_NAME_paramItersPerPar;
 		case VAR_tlsStatesPaths:
 			return DISPLAY_NAME_tlsStatesPaths;
 		case VAR_additionalFilePaths:
@@ -1511,6 +2290,12 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return "-e, --end TIME Defines the end time in seconds; The simulation ends at this time";
 		case VAR_stepSeconds:
 			return "--step-length TIME Defines the step duration in seconds";
+		case VAR_paramRunTime:
+			return "Time duration of each simulated sample path. ";
+		case VAR_paramTotalIterNum:
+			return "Total iterations to update performance. ";
+		case VAR_paramItersPerPar:
+			return "Number of repeats per round. ";
 		case VAR_tlsStatesPaths:
 			return "The paths to all TLS States files";
 		case VAR_additionalFilePaths:
@@ -1538,6 +2323,22 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return "BigDecimal";
 		case VAR_stepSeconds:
 			return "BigDecimal";
+		case VAR_paramInitialPar:
+			return "String";
+		case VAR_paramLam:
+			return "String";
+		case VAR_paramDemandScale:
+			return "Integer";
+		case VAR_paramStepSize:
+			return "Integer";
+		case VAR_paramUpdateStepSize:
+			return "Integer";
+		case VAR_paramRunTime:
+			return "Integer";
+		case VAR_paramTotalIterNum:
+			return "Integer";
+		case VAR_paramItersPerPar:
+			return "Integer";
 		case VAR_tlsStatesPaths:
 			return "List";
 		case VAR_additionalFilePaths:
@@ -1570,6 +2371,22 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return 7;
 		case VAR_stepSeconds:
 			return 7;
+		case VAR_paramInitialPar:
+			return 8;
+		case VAR_paramLam:
+			return 9;
+		case VAR_paramDemandScale:
+			return 10;
+		case VAR_paramStepSize:
+			return 10;
+		case VAR_paramUpdateStepSize:
+			return 10;
+		case VAR_paramRunTime:
+			return 11;
+		case VAR_paramTotalIterNum:
+			return 11;
+		case VAR_paramItersPerPar:
+			return 11;
 			default:
 				return BaseModel.htmlRowBaseModel(var);
 		}
@@ -1590,6 +2407,22 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		case VAR_endSeconds:
 			return 2;
 		case VAR_stepSeconds:
+			return 3;
+		case VAR_paramInitialPar:
+			return 1;
+		case VAR_paramLam:
+			return 1;
+		case VAR_paramDemandScale:
+			return 1;
+		case VAR_paramStepSize:
+			return 2;
+		case VAR_paramUpdateStepSize:
+			return 3;
+		case VAR_paramRunTime:
+			return 1;
+		case VAR_paramTotalIterNum:
+			return 2;
+		case VAR_paramItersPerPar:
 			return 3;
 			default:
 				return BaseModel.htmlCellBaseModel(var);

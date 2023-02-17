@@ -148,7 +148,7 @@ import org.computate.search.response.solr.SolrResponse;
  * This class contains a comment <b>"Role.enUS: SiteAdmin"</b>, which identifies the default role name "SiteAdmin" of the OAuth2/OpenID Connect user role required to access this SiteHtm API. 
  * It's possible to reconfigure the roles required to access the SiteHtm API by configuring an environment variable like this: 
  * </p>
- * <pre>AUTH_ROLES_REQUIRED_SiteHtm: ["SiteAdmin"]</pre>
+ * <pre>AUTH_ROLE_REQUIRED_SiteHtm: ["SiteAdmin"]</pre>
  * AName.enUS: an HTML
  * <p>This class contains a comment <b>"AName.enUS: an HTML"</b>, which identifies the language context to describe a SiteHtm as "an HTML". 
  * </p>

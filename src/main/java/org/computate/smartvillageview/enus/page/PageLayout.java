@@ -32,6 +32,7 @@ import io.vertx.ext.web.api.service.ServiceRequest;
 /**
  * Keyword: classSimpleNamePageLayout
  * Description: Defines variables to be used when rendering Handlebars template pages
+ * Promise: true
  **/
 public class PageLayout extends PageLayoutGen<Object> {
 
@@ -174,7 +175,7 @@ public class PageLayout extends PageLayoutGen<Object> {
 	protected void _logoutUrl(Wrap<String> w) {
 		JsonObject config = siteRequest_.getConfig();
 		try {
-			w.o(config.getString(ConfigKeys.AUTH_URL) + "/realms/" + config.getString(ConfigKeys.AUTH_REALM) + "/protocol/openid-connect/logout?redirect_uri=" + URLEncoder.encode(config.getString(ConfigKeys.SITE_BASE_URL) + "/logout", "UTF-8"));
+			w.o(config.getString(ConfigKeys.AUTH_URL) + "/realms/" + config.getString(ConfigKeys.AUTH_REALM) + "/protocol/openid-connect/logout?redirect_url=" + URLEncoder.encode(config.getString(ConfigKeys.SITE_BASE_URL) + "/logout", "UTF-8"));
 		} catch (UnsupportedEncodingException ex) {
 			ExceptionUtils.rethrow(ex);
 		}
@@ -240,15 +241,15 @@ public class PageLayout extends PageLayoutGen<Object> {
 	/**
 	 * Description: The required roles to access this page
 	 */
-	protected void _rolesRequired(List<String> l) {
-		l.addAll(siteRequest_.getConfig().getJsonArray(ConfigKeys.AUTH_ROLES_ADMIN).stream().map(o -> o.toString()).collect(Collectors.toList()));
+	protected void _roleRequired(List<String> l) {
+		l.add(siteRequest_.getConfig().getString(ConfigKeys.AUTH_ROLE_ADMIN));
 	}
 
 	/**
 	 * Description: The admin roles required to access this page
 	 */
-	protected void _authRolesAdmin(List<String> l) {
-		l.addAll(siteRequest_.getConfig().getJsonArray(ConfigKeys.AUTH_ROLES_ADMIN).stream().map(o -> o.toString()).collect(Collectors.toList()));
+	protected void _authRoleAdmin(List<String> l) {
+		l.add(siteRequest_.getConfig().getString(ConfigKeys.AUTH_ROLE_ADMIN));
 	}
 
 	protected void _stats(Wrap<SolrResponse.Stats> w) {

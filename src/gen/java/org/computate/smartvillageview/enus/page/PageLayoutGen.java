@@ -1607,138 +1607,138 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		return PageLayout.staticSearchStrRoles(siteRequest_, PageLayout.staticSearchRoles(siteRequest_, PageLayout.staticSetRoles(siteRequest_, o)));
 	}
 
-	///////////////////
-	// rolesRequired //
-	///////////////////
+	//////////////////
+	// roleRequired //
+	//////////////////
 
 
-	/**	 The entity rolesRequired
+	/**	 The entity roleRequired
 	 *	 It is constructed before being initialized with the constructor by default. 
 	 */
 	@JsonProperty
 	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
 	@JsonInclude(Include.NON_NULL)
-	protected List<String> rolesRequired = new ArrayList<String>();
+	protected List<String> roleRequired = new ArrayList<String>();
 
-	/**	<br> The entity rolesRequired
+	/**	<br> The entity roleRequired
 	 *  It is constructed before being initialized with the constructor by default. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.PageLayout&fq=entiteVar_enUS_indexed_string:rolesRequired">Find the entity rolesRequired in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.PageLayout&fq=entiteVar_enUS_indexed_string:roleRequired">Find the entity roleRequired in Solr</a>
 	 * <br>
 	 * @param l is the entity already constructed. 
 	 **/
-	protected abstract void _rolesRequired(List<String> l);
+	protected abstract void _roleRequired(List<String> l);
 
-	public List<String> getRolesRequired() {
-		return rolesRequired;
+	public List<String> getRoleRequired() {
+		return roleRequired;
 	}
 
-	public void setRolesRequired(List<String> rolesRequired) {
-		this.rolesRequired = rolesRequired;
+	public void setRoleRequired(List<String> roleRequired) {
+		this.roleRequired = roleRequired;
 	}
-	public static String staticSetRolesRequired(SiteRequestEnUS siteRequest_, String o) {
+	public static String staticSetRoleRequired(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	public PageLayout addRolesRequired(String...objects) {
+	public PageLayout addRoleRequired(String...objects) {
 		for(String o : objects) {
-			addRolesRequired(o);
+			addRoleRequired(o);
 		}
 		return (PageLayout)this;
 	}
-	public PageLayout addRolesRequired(String o) {
+	public PageLayout addRoleRequired(String o) {
 		if(o != null)
-			this.rolesRequired.add(o);
+			this.roleRequired.add(o);
 		return (PageLayout)this;
 	}
 	@JsonIgnore
-	public void setRolesRequired(JsonArray objects) {
-		rolesRequired.clear();
+	public void setRoleRequired(JsonArray objects) {
+		roleRequired.clear();
 		for(int i = 0; i < objects.size(); i++) {
 			String o = objects.getString(i);
-			addRolesRequired(o);
+			addRoleRequired(o);
 		}
 	}
-	protected PageLayout rolesRequiredInit() {
-		_rolesRequired(rolesRequired);
+	protected PageLayout roleRequiredInit() {
+		_roleRequired(roleRequired);
 		return (PageLayout)this;
 	}
 
-	public static String staticSearchRolesRequired(SiteRequestEnUS siteRequest_, String o) {
+	public static String staticSearchRoleRequired(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
 
-	public static String staticSearchStrRolesRequired(SiteRequestEnUS siteRequest_, String o) {
+	public static String staticSearchStrRoleRequired(SiteRequestEnUS siteRequest_, String o) {
 		return o == null ? null : o.toString();
 	}
 
-	public static String staticSearchFqRolesRequired(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrRolesRequired(siteRequest_, PageLayout.staticSearchRolesRequired(siteRequest_, PageLayout.staticSetRolesRequired(siteRequest_, o)));
+	public static String staticSearchFqRoleRequired(SiteRequestEnUS siteRequest_, String o) {
+		return PageLayout.staticSearchStrRoleRequired(siteRequest_, PageLayout.staticSearchRoleRequired(siteRequest_, PageLayout.staticSetRoleRequired(siteRequest_, o)));
 	}
 
-	////////////////////
-	// authRolesAdmin //
-	////////////////////
+	///////////////////
+	// authRoleAdmin //
+	///////////////////
 
 
-	/**	 The entity authRolesAdmin
+	/**	 The entity authRoleAdmin
 	 *	 It is constructed before being initialized with the constructor by default. 
 	 */
 	@JsonProperty
 	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
 	@JsonInclude(Include.NON_NULL)
-	protected List<String> authRolesAdmin = new ArrayList<String>();
+	protected List<String> authRoleAdmin = new ArrayList<String>();
 
-	/**	<br> The entity authRolesAdmin
+	/**	<br> The entity authRoleAdmin
 	 *  It is constructed before being initialized with the constructor by default. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.PageLayout&fq=entiteVar_enUS_indexed_string:authRolesAdmin">Find the entity authRolesAdmin in Solr</a>
+	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.PageLayout&fq=entiteVar_enUS_indexed_string:authRoleAdmin">Find the entity authRoleAdmin in Solr</a>
 	 * <br>
 	 * @param l is the entity already constructed. 
 	 **/
-	protected abstract void _authRolesAdmin(List<String> l);
+	protected abstract void _authRoleAdmin(List<String> l);
 
-	public List<String> getAuthRolesAdmin() {
-		return authRolesAdmin;
+	public List<String> getAuthRoleAdmin() {
+		return authRoleAdmin;
 	}
 
-	public void setAuthRolesAdmin(List<String> authRolesAdmin) {
-		this.authRolesAdmin = authRolesAdmin;
+	public void setAuthRoleAdmin(List<String> authRoleAdmin) {
+		this.authRoleAdmin = authRoleAdmin;
 	}
-	public static String staticSetAuthRolesAdmin(SiteRequestEnUS siteRequest_, String o) {
+	public static String staticSetAuthRoleAdmin(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	public PageLayout addAuthRolesAdmin(String...objects) {
+	public PageLayout addAuthRoleAdmin(String...objects) {
 		for(String o : objects) {
-			addAuthRolesAdmin(o);
+			addAuthRoleAdmin(o);
 		}
 		return (PageLayout)this;
 	}
-	public PageLayout addAuthRolesAdmin(String o) {
+	public PageLayout addAuthRoleAdmin(String o) {
 		if(o != null)
-			this.authRolesAdmin.add(o);
+			this.authRoleAdmin.add(o);
 		return (PageLayout)this;
 	}
 	@JsonIgnore
-	public void setAuthRolesAdmin(JsonArray objects) {
-		authRolesAdmin.clear();
+	public void setAuthRoleAdmin(JsonArray objects) {
+		authRoleAdmin.clear();
 		for(int i = 0; i < objects.size(); i++) {
 			String o = objects.getString(i);
-			addAuthRolesAdmin(o);
+			addAuthRoleAdmin(o);
 		}
 	}
-	protected PageLayout authRolesAdminInit() {
-		_authRolesAdmin(authRolesAdmin);
+	protected PageLayout authRoleAdminInit() {
+		_authRoleAdmin(authRoleAdmin);
 		return (PageLayout)this;
 	}
 
-	public static String staticSearchAuthRolesAdmin(SiteRequestEnUS siteRequest_, String o) {
+	public static String staticSearchAuthRoleAdmin(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
 
-	public static String staticSearchStrAuthRolesAdmin(SiteRequestEnUS siteRequest_, String o) {
+	public static String staticSearchStrAuthRoleAdmin(SiteRequestEnUS siteRequest_, String o) {
 		return o == null ? null : o.toString();
 	}
 
-	public static String staticSearchFqAuthRolesAdmin(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrAuthRolesAdmin(siteRequest_, PageLayout.staticSearchAuthRolesAdmin(siteRequest_, PageLayout.staticSetAuthRolesAdmin(siteRequest_, o)));
+	public static String staticSearchFqAuthRoleAdmin(SiteRequestEnUS siteRequest_, String o) {
+		return PageLayout.staticSearchStrAuthRoleAdmin(siteRequest_, PageLayout.staticSearchAuthRoleAdmin(siteRequest_, PageLayout.staticSetAuthRoleAdmin(siteRequest_, o)));
 	}
 
 	///////////
@@ -3751,8 +3751,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 				classSimpleNameInit();
 				pageTitleInit();
 				rolesInit();
-				rolesRequiredInit();
-				authRolesAdminInit();
+				roleRequiredInit();
+				authRoleAdminInit();
 				statsInit();
 				facetCountsInit();
 				paginationInit();
@@ -3914,10 +3914,10 @@ public abstract class PageLayoutGen<DEV> extends Object {
 				return oPageLayout.pageTitle;
 			case "roles":
 				return oPageLayout.roles;
-			case "rolesRequired":
-				return oPageLayout.rolesRequired;
-			case "authRolesAdmin":
-				return oPageLayout.authRolesAdmin;
+			case "roleRequired":
+				return oPageLayout.roleRequired;
+			case "authRoleAdmin":
+				return oPageLayout.authRoleAdmin;
 			case "stats":
 				return oPageLayout.stats;
 			case "facetCounts":
@@ -4079,10 +4079,10 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSetPageTitle(siteRequest_, o);
 		case "roles":
 			return PageLayout.staticSetRoles(siteRequest_, o);
-		case "rolesRequired":
-			return PageLayout.staticSetRolesRequired(siteRequest_, o);
-		case "authRolesAdmin":
-			return PageLayout.staticSetAuthRolesAdmin(siteRequest_, o);
+		case "roleRequired":
+			return PageLayout.staticSetRoleRequired(siteRequest_, o);
+		case "authRoleAdmin":
+			return PageLayout.staticSetAuthRoleAdmin(siteRequest_, o);
 		case "pagination":
 			return PageLayout.staticSetPagination(siteRequest_, o);
 		case "defaultFieldListVars":
@@ -4209,10 +4209,10 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSearchPageTitle(siteRequest_, (String)o);
 		case "roles":
 			return PageLayout.staticSearchRoles(siteRequest_, (String)o);
-		case "rolesRequired":
-			return PageLayout.staticSearchRolesRequired(siteRequest_, (String)o);
-		case "authRolesAdmin":
-			return PageLayout.staticSearchAuthRolesAdmin(siteRequest_, (String)o);
+		case "roleRequired":
+			return PageLayout.staticSearchRoleRequired(siteRequest_, (String)o);
+		case "authRoleAdmin":
+			return PageLayout.staticSearchAuthRoleAdmin(siteRequest_, (String)o);
 		case "pagination":
 			return PageLayout.staticSearchPagination(siteRequest_, (JsonObject)o);
 		case "defaultFieldListVars":
@@ -4339,10 +4339,10 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSearchStrPageTitle(siteRequest_, (String)o);
 		case "roles":
 			return PageLayout.staticSearchStrRoles(siteRequest_, (String)o);
-		case "rolesRequired":
-			return PageLayout.staticSearchStrRolesRequired(siteRequest_, (String)o);
-		case "authRolesAdmin":
-			return PageLayout.staticSearchStrAuthRolesAdmin(siteRequest_, (String)o);
+		case "roleRequired":
+			return PageLayout.staticSearchStrRoleRequired(siteRequest_, (String)o);
+		case "authRoleAdmin":
+			return PageLayout.staticSearchStrAuthRoleAdmin(siteRequest_, (String)o);
 		case "pagination":
 			return PageLayout.staticSearchStrPagination(siteRequest_, (JsonObject)o);
 		case "defaultFieldListVars":
@@ -4469,10 +4469,10 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSearchFqPageTitle(siteRequest_, o);
 		case "roles":
 			return PageLayout.staticSearchFqRoles(siteRequest_, o);
-		case "rolesRequired":
-			return PageLayout.staticSearchFqRolesRequired(siteRequest_, o);
-		case "authRolesAdmin":
-			return PageLayout.staticSearchFqAuthRolesAdmin(siteRequest_, o);
+		case "roleRequired":
+			return PageLayout.staticSearchFqRoleRequired(siteRequest_, o);
+		case "authRoleAdmin":
+			return PageLayout.staticSearchFqAuthRoleAdmin(siteRequest_, o);
 		case "pagination":
 			return PageLayout.staticSearchFqPagination(siteRequest_, o);
 		case "defaultFieldListVars":
@@ -4579,8 +4579,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	public static final String VAR_classSimpleName = "classSimpleName";
 	public static final String VAR_pageTitle = "pageTitle";
 	public static final String VAR_roles = "roles";
-	public static final String VAR_rolesRequired = "rolesRequired";
-	public static final String VAR_authRolesAdmin = "authRolesAdmin";
+	public static final String VAR_roleRequired = "roleRequired";
+	public static final String VAR_authRoleAdmin = "authRoleAdmin";
 	public static final String VAR_stats = "stats";
 	public static final String VAR_facetCounts = "facetCounts";
 	public static final String VAR_pagination = "pagination";
@@ -4647,8 +4647,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	public static final String DISPLAY_NAME_classSimpleName = "";
 	public static final String DISPLAY_NAME_pageTitle = "";
 	public static final String DISPLAY_NAME_roles = "";
-	public static final String DISPLAY_NAME_rolesRequired = "";
-	public static final String DISPLAY_NAME_authRolesAdmin = "";
+	public static final String DISPLAY_NAME_roleRequired = "";
+	public static final String DISPLAY_NAME_authRoleAdmin = "";
 	public static final String DISPLAY_NAME_stats = "";
 	public static final String DISPLAY_NAME_facetCounts = "";
 	public static final String DISPLAY_NAME_pagination = "";
@@ -4749,10 +4749,10 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return DISPLAY_NAME_pageTitle;
 		case VAR_roles:
 			return DISPLAY_NAME_roles;
-		case VAR_rolesRequired:
-			return DISPLAY_NAME_rolesRequired;
-		case VAR_authRolesAdmin:
-			return DISPLAY_NAME_authRolesAdmin;
+		case VAR_roleRequired:
+			return DISPLAY_NAME_roleRequired;
+		case VAR_authRoleAdmin:
+			return DISPLAY_NAME_authRoleAdmin;
 		case VAR_stats:
 			return DISPLAY_NAME_stats;
 		case VAR_facetCounts:
