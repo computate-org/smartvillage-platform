@@ -82,15 +82,15 @@
 		<junit.version>5.9.1</junit.version>
 		<mockito.version>4.10.0</mockito.version>
 
-		<quarkus-base.version>2.13.7</quarkus-base.version>
-		<quarkus.version>${quarkus-base.version}.Final-redhat-00003</quarkus.version>
+		<quarkus-base.version>2.7.6</quarkus-base.version>
+		<quarkus.version>${quarkus-base.version}.Final-redhat-00006</quarkus.version>
 		<quarkus-plugin.version>${quarkus.version}</quarkus-plugin.version>
 		<quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
 		<quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
 		<quarkus.platform.version>${quarkus.version}</quarkus.platform.version>
 
-		<vertx-base.version>4.3.3</vertx-base.version>
-		<vertx.version>${vertx-base.version}.redhat-00006</vertx.version>
+		<vertx-base.version>4.2.7</vertx-base.version>
+		<vertx.version>${vertx-base.version}.redhat-00003</vertx.version>
 
 		<jfreechart.version>1.5.3</jfreechart.version>
 		<handlebars.version>4.3.1</handlebars.version>
@@ -113,7 +113,7 @@
 		<drools.version>8.32.0.Final</drools.version>
 		<cloudevents.version>2.4.0</cloudevents.version>
 
-		<computate.version>4.3.3.20</computate.version>
+		<computate.version>4.2.7.20</computate.version>
 	</properties>
 
 	<dependencyManagement>
@@ -349,6 +349,14 @@
 		</dependency>
 		<dependency>
 			<groupId>io.quarkus</groupId>
+			<artifactId>quarkus-openshift</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.quarkus</groupId>
+			<artifactId>quarkus-smallrye-health</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.quarkus</groupId>
 			<artifactId>quarkus-arc</artifactId>
 		</dependency>
 		<dependency>
@@ -557,8 +565,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${maven-compiler-plugin.version}</version>
 				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
+					<source>11</source>
+					<target>11</target>
 					<encoding>UTF-8</encoding>
 					<annotationProcessors>
 						<annotationProcessor>io.vertx.codegen.CodeGenProcessor</annotationProcessor>
