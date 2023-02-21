@@ -5,8 +5,12 @@ metadata:
   namespace: solr
 spec:
   replicas: 2
+  busyBoxImage:
+    repository: docker.io/library/busybox
+    tag: 1.36.0-glibc
   solrImage:
-    tag: 8.1.1
+    repository: docker.io/library/solr
+    tag: 9.1.1
   dataStorage:
     persistent:
       pvcTemplate:
@@ -16,6 +20,4 @@ spec:
               storage: 20Gi
   customSolrKubeOptions:
     podOptions:
-      podSecurityContext:
-        runAsUser: 1001
       serviceAccountName: solr
