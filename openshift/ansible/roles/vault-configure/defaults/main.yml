@@ -1,0 +1,17 @@
+REDHAT_OPENSHIFT_HOST: https://api.crc.testing:6443
+REDHAT_OPENSHIFT_TOKEN: "{{ lookup('env', 'REDHAT_OPENSHIFT_TOKEN') | default(omit) }}"
+VAULT_UNSEAL_KEY: "{{ lookup('env', 'VAULT_UNSEAL_KEY') | default(omit) }}"
+VAULT_ROOT_TOKEN: "{{ lookup('env', 'VAULT_ROOT_TOKEN') | default(omit) }}"
+
+VAULT_LABEL: statefulset.kubernetes.io/pod-name=vault-operator-0
+VAULT_NAMESPACE: vault
+
+VAULT_COMMAND_POD_VAULT_INIT: >
+  vault operator init -address http://vault-operator.vault.svc.cluster.local:8200 -ca-path /var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt -format=json -key-shares 1 -key-threshold 1
+VAULT_COMMAND_OC_VAULT_INIT: >
+  oc login {{ REDHAT_OPENSHIFT_HOST }} --token={{ REDHAT_OPENSHIFT_TOKEN }} && oc exec $(oc get pod -l {{ VAULT_LABEL }} -o jsonpath='{.items[0].metadata.name}' -n {{ VAULT_NAMESPACE }}) -n {{ VAULT_NAMESPACE }} -- {{ VAULT_COMMAND_POD_VAULT_INIT }}
+
+VAULT_COMMAND_POD_VAULT_UNSEAL: >
+  vault operator unseal -address http://vault-operator.vault.svc.cluster.local:8200 -ca-path /var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt "$(oc get secret vault-init -n {{ VAULT_NAMESPACE }} -o jsonpath='{.data.VAULT_UNSEAL_KEY}' | base64 -d )"
+VAULT_COMMAND_OC_VAULT_UNSEAL: >
+  oc login {{ REDHAT_OPENSHIFT_HOST }} --token={{ REDHAT_OPENSHIFT_TOKEN }} && oc exec $(oc get pod -l {{ VAULT_LABEL }} -o jsonpath='{.items[0].metadata.name}' -n {{ VAULT_NAMESPACE }}) -n {{ VAULT_NAMESPACE }} -- {{ VAULT_COMMAND_POD_VAULT_UNSEAL }}

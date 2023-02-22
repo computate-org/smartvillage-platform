@@ -1,5 +1,6 @@
 ---
 REDHAT_OPENSHIFT_HOST: https://api.crc.testing:6443
+REDHAT_OPENSHIFT_TOKEN: "{{ lookup('env', 'REDHAT_OPENSHIFT_TOKEN') | default(omit) }}"
 POSTGRES_POD_LABEL: postgres-operator.crunchydata.com/data=postgres
 POSTGRES_USER_SECRET_PECAN: postgres-cluster-pguser-pecan
 POSTGRES_NAMESPACE: postgres

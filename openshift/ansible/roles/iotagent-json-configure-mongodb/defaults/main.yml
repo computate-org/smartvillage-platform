@@ -1,4 +1,5 @@
 REDHAT_OPENSHIFT_HOST: https://api.crc.testing:6443
+REDHAT_OPENSHIFT_TOKEN: "{{ lookup('env', 'REDHAT_OPENSHIFT_TOKEN') | default(omit) }}"
 MONGODB_CREATE_USER_COMMAND_iotagentjson: >
   db = db.getSiblingDB("iotagentjson"); 
   db.createUser({ user: "root", pwd: "'"'"'"$MONGODB_ROOT_PASSWORD"'"'"'", roles: [{ role: "dbOwner", db: "iotagentjson"}]}); 

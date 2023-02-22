@@ -1,0 +1,113 @@
+---
+
+- block:
+    - name: Initialize vault
+      shell: "{{ VAULT_COMMAND_OC_VAULT_INIT }}"
+      register: vault_init
+      ignore_errors: true
+    - debug:
+        var: vault_init
+    - fail:
+        msg: >
+          Missing variables REDHAT_OPENSHIFT_HOST and REDHAT_OPENSHIFT_TOKEN.
+          Find the login command to OpenShift and and set these variables, for example:
+          ansible-playbook ~/.local/src/smartabyar-smartvillage/openshift/ansible/vault-configure.yml
+          -e REDHAT_OPENSHIFT_HOST=https://api.crc.testing:6443
+          -e REDHAT_OPENSHIFT_TOKEN=sha256~KNsu4uF9jsFUVZJE6smixzmWhoHVq9rgADUICQIrrDI
+      when: vault_init.failed
+    - name: Get vault init dev secrets
+      set_fact:
+        VAULT_UNSEAL_KEY: "{{ vault_init.stdout | regex_search('\\\\\"unseal_keys_b64\\\\\": [\\\\n\\s*\\\\\"([^\"])\\\\\"', '\\1') | first }}"
+        VAULT_ROOT_TOKEN: "{{ vault_init.stdout | regex_search('\\\\\"root_token\\\\\":\\s*\\\\\"([^\"])\\\\\"', '\\1') | first }}"
+  when: VAULT_UNSEAL_KEY is not defined and VAULT_ROOT_TOKEN is not defined
+- name: Install vault root secret for dev on OpenShift
+  k8s:
+    state: present
+    name: "vault-init"
+    host: "{{ REDHAT_OPENSHIFT_HOST }}"
+    api_key: "{{ REDHAT_OPENSHIFT_TOKEN }}"
+    namespace: "{{ VAULT_NAMESPACE }}"
+    definition: "{{ lookup('template', 'vault-init-secret.yml') }}"
+    validate_certs: false
+  when: VAULT_UNSEAL_KEY is defined and VAULT_ROOT_TOKEN is defined
+
+- name: Get vault init dev secrets
+  set_fact:
+    VAULT_UNSEAL_KEY: "{{ query('kubernetes.core.k8s', kind='Secret', resource_name='vault-init', namespace=VAULT_NAMESPACE, validate_certs=false)[0].data.VAULT_UNSEAL_KEY | b64decode }}"
+    VAULT_ROOT_TOKEN: "{{ query('kubernetes.core.k8s', kind='Secret', resource_name='vault-init', namespace=VAULT_NAMESPACE, validate_certs=false)[0].data.VAULT_ROOT_TOKEN | b64decode }}"
+  vars:
+    K8S_AUTH_HOST: "{{ REDHAT_OPENSHIFT_HOST }}"
+    K8S_AUTH_API_KEY: "{{ REDHAT_OPENSHIFT_TOKEN }}"
+  when: VAULT_UNSEAL_KEY is not defined and VAULT_ROOT_TOKEN is not defined
+
+- block:
+    - name: Unseal vault
+      shell: "{{ VAULT_COMMAND_OC_VAULT_UNSEAL }}"
+      register: vault_unseal
+      ignore_errors: true
+    - debug:
+        var: vault_unseal
+
+- block:
+    - name: Setup vault admin policy
+      set_fact:
+        VAULT_COMMAND_POD_WRITE_ADMIN_POLICY: >
+          bash -c 'echo '"'"'{{ lookup('template', 'vault-admin-policy.hcl') | default(omit) }}'"'"' | env VAULT_ADDR=https://vault.apps-crc.testing VAULT_TOKEN={{ VAULT_ROOT_TOKEN }} vault policy write -tls-skip-verify vault-admin -'
+    - name: Setup vault admin policy
+      set_fact:
+        VAULT_COMMAND_OC_WRITE_ADMIN_POLICY: >
+          oc login {{ REDHAT_OPENSHIFT_HOST }} --token={{ REDHAT_OPENSHIFT_TOKEN }} && oc exec $(oc get pod -l {{ VAULT_LABEL }} -o jsonpath='{.items[0].metadata.name}' -n {{ VAULT_NAMESPACE }}) -n {{ VAULT_NAMESPACE }} -- {{ VAULT_COMMAND_POD_WRITE_ADMIN_POLICY }}
+    - name: Write vault admin policy
+      shell: "{{ VAULT_COMMAND_OC_WRITE_ADMIN_POLICY }}"
+      register: vault_write_admin_policy
+      ignore_errors: true
+    - debug:
+        var: vault_write_admin_policy
+
+- block:
+    - name: Enable kubernetes vault auth facts
+      set_fact:
+        VAULT_COMMAND_POD_ENABLE_KUBERNETES_AUTH: >
+          env VAULT_ADDR=https://vault.apps-crc.testing VAULT_TOKEN={{ VAULT_ROOT_TOKEN }} vault auth enable -tls-skip-verify kubernetes
+    - name: Enable kubernetes vault auth facts
+      set_fact:
+        VAULT_COMMAND_OC_ENABLE_KUBERNETES_AUTH: >
+          oc login {{ REDHAT_OPENSHIFT_HOST }} --token={{ REDHAT_OPENSHIFT_TOKEN }} && oc exec $(oc get pod -l {{ VAULT_LABEL }} -o jsonpath='{.items[0].metadata.name}' -n {{ VAULT_NAMESPACE }}) -n {{ VAULT_NAMESPACE }} -- {{ VAULT_COMMAND_POD_ENABLE_KUBERNETES_AUTH }}
+    - name: Enable kubernetes vault auth
+      shell: "{{ VAULT_COMMAND_OC_ENABLE_KUBERNETES_AUTH }}"
+      register: vault_enable_kubernetes_auth
+      ignore_errors: true
+    - debug:
+        var: vault_enable_kubernetes_auth
+
+- block:
+    - name: Write kubernetes auth config facts
+      set_fact:
+        VAULT_COMMAND_POD_WRITE_KUBERNETES_AUTH_CONFIG: >
+          env VAULT_ADDR=https://vault.apps-crc.testing VAULT_TOKEN={{ VAULT_ROOT_TOKEN }} vault write -tls-skip-verify auth/kubernetes/config kubernetes_host=https://kubernetes.default.svc:443
+    - name: Write kubernetes auth config facts
+      set_fact:
+        VAULT_COMMAND_OC_WRITE_KUBERNETES_AUTH_CONFIG: >
+          oc login {{ REDHAT_OPENSHIFT_HOST }} --token={{ REDHAT_OPENSHIFT_TOKEN }} && oc exec $(oc get pod -l {{ VAULT_LABEL }} -o jsonpath='{.items[0].metadata.name}' -n {{ VAULT_NAMESPACE }}) -n {{ VAULT_NAMESPACE }} -- {{ VAULT_COMMAND_POD_WRITE_KUBERNETES_AUTH_CONFIG }}
+    - name: Write kubernetes auth config
+      shell: "{{ VAULT_COMMAND_OC_WRITE_KUBERNETES_AUTH_CONFIG }}"
+      register: vault_write_kubernetes_auth_config
+      ignore_errors: true
+    - debug:
+        var: vault_write_kubernetes_auth_config
+
+- block:
+    - name: Write kubernetes admin role facts
+      set_fact:
+        VAULT_COMMAND_POD_WRITE_KUBERNETES_ADMIN_ROLE: >
+          env VAULT_ADDR=https://vault.apps-crc.testing VAULT_TOKEN={{ VAULT_ROOT_TOKEN }} vault write -tls-skip-verify auth/kubernetes/role/policy-admin bound_service_account_names=default bound_service_account_namespaces=vault-admin policies=vault-admin ttl=10s
+    - name: Write kubernetes admin role facts
+      set_fact:
+        VAULT_COMMAND_OC_WRITE_KUBERNETES_ADMIN_ROLE: >
+          oc login {{ REDHAT_OPENSHIFT_HOST }} --token={{ REDHAT_OPENSHIFT_TOKEN }} && oc exec $(oc get pod -l {{ VAULT_LABEL }} -o jsonpath='{.items[0].metadata.name}' -n {{ VAULT_NAMESPACE }}) -n {{ VAULT_NAMESPACE }} -- {{ VAULT_COMMAND_POD_WRITE_KUBERNETES_ADMIN_ROLE }}
+    - name: Write kubernetes admin role
+      shell: "{{ VAULT_COMMAND_OC_WRITE_KUBERNETES_ADMIN_ROLE }}"
+      register: vault_write_kubernetes_admin_role
+      ignore_errors: true
+    - debug:
+        var: vault_write_kubernetes_admin_role

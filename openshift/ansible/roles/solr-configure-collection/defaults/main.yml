@@ -7,7 +7,7 @@
 # The OpenShift base URL where applications will be deployed.
 REDHAT_OPENSHIFT_HOST: https://api.crc.testing:6443
 # The OpenShift secret token to grant access to OpenShift (https://api.pro-us-east-1.openshift.com/oauth/token/request).
-REDHAT_OPENSHIFT_TOKEN: "{{ default(omit) }}"
+REDHAT_OPENSHIFT_TOKEN: "{{ lookup('env', 'REDHAT_OPENSHIFT_TOKEN') | default(omit) }}"
 # The OpenShift namespace where applications will be deployed.
 REDHAT_OPENSHIFT_NAMESPACE: "solr"
 # Solr memory limit. 
@@ -45,6 +45,8 @@ SOLR_HOST_NAME: "solr.{{SOLR_NAMESPACE}}.svc"
 SOLR_LABEL: statefulset.kubernetes.io/pod-name=default-solrcloud-0
 # The Solr collection to create
 SOLR_COLLECTION: smartabyar-smartvillage
+# The computate Solr collection to create
+SOLR_COLLECTION_COMPUTATE: computate
 
 # Enable Solr Basic Authentication/Authorization
 ENABLE_SOLR_BASIC_AUTH: false
@@ -93,3 +95,8 @@ SOLR_COMMAND_POD_CREATE_COLLECTION: >
   {{ SOLR_OPT }}/bin/solr create_collection -c {{ SOLR_COLLECTION }} -n computate || true
 SOLR_COMMAND_OC_CREATE_COLLECTION: >
   oc login {{ SOLR_HOST }} --token={{ REDHAT_OPENSHIFT_TOKEN }} && oc exec $(oc get pod -l {{ SOLR_LABEL }} -o jsonpath='{.items[0].metadata.name}' -n {{ SOLR_NAMESPACE }}) -n {{ SOLR_NAMESPACE }} -- {{ SOLR_COMMAND_POD_CREATE_COLLECTION }}
+
+SOLR_COMMAND_POD_CREATE_COLLECTION_COMPUTATE: >
+  {{ SOLR_OPT }}/bin/solr create_collection -c {{ SOLR_COLLECTION_COMPUTATE }} -n computate || true
+SOLR_COMMAND_OC_CREATE_COLLECTION_COMPUTATE: >
+  oc login {{ SOLR_HOST }} --token={{ REDHAT_OPENSHIFT_TOKEN }} && oc exec $(oc get pod -l {{ SOLR_LABEL }} -o jsonpath='{.items[0].metadata.name}' -n {{ SOLR_NAMESPACE }}) -n {{ SOLR_NAMESPACE }} -- {{ SOLR_COMMAND_POD_CREATE_COLLECTION_COMPUTATE }}
