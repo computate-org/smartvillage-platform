@@ -1,11 +1,12 @@
 ---
-- name: Get SSO admin password
+- name: Fetch the database sso secrets
   set_fact:
-    SSO_ADMIN_PASSWORD: "{{ query('kubernetes.core.k8s', kind='Secret', resource_name='credential-sso', namespace=SSO_NAMESPACE, validate_certs=false)[0].data.ADMIN_PASSWORD | b64decode }}"
+    SSO_POSTGRES_SECRET: "{{ query('kubernetes.core.k8s', kind='Secret', resource_name=SSO_POSTGRES_SECRET_NAME, namespace=SSO_NAMESPACE, validate_certs=false)[0].data }}"
   vars:
     K8S_AUTH_HOST: "{{ REDHAT_OPENSHIFT_HOST }}"
     K8S_AUTH_API_KEY: "{{ REDHAT_OPENSHIFT_TOKEN }}"
-  register: GET_SSO_ADMIN_PASSWORD
+  register: fetch_database_sso_secrets
+  ignore_errors: true
 - fail:
     msg: >
       Missing variables REDHAT_OPENSHIFT_HOST and REDHAT_OPENSHIFT_TOKEN. 
@@ -13,29 +14,31 @@
       ansible-playbook ~/.local/src/smartabyar-smartvillage/openshift/ansible/sso-configure-database.yml
       -e REDHAT_OPENSHIFT_HOST=https://api.crc.testing:6443
       -e REDHAT_OPENSHIFT_TOKEN=sha256~KNsu4uF9jsFUVZJE6smixzmWhoHVq9rgADUICQIrrDI
-  when: GET_SSO_ADMIN_PASSWORD.failed
-- name: "Create Token for SSO"
-  uri:
+  when: fetch_database_sso_secrets.failed
+- name: Update postgres sso password from vault
+  kubernetes.core.k8s_json_patch:
+    namespace: "{{ POSTGRES_NAMESPACE }}"
+    kind: Secret
+    name: "{{ POSTGRES_USER_SECRET_SSO }}"
+    host: "{{ REDHAT_OPENSHIFT_HOST }}"
+    api_key: "{{ REDHAT_OPENSHIFT_TOKEN }}"
     validate_certs: false
-    url: "{{ SSO_SITE_BASE_URL }}/auth/realms/master/protocol/openid-connect/token"
-    method: POST
-    body_format: form-urlencoded
-    body:
-      username: "{{ SSO_ADMIN_USERNAME }}"
-      password: "{{ SSO_ADMIN_PASSWORD }}"
-      grant_type: "password"
-      client_id: "admin-cli"
-  register: SSO_TOKEN
-- name: "Update SSO Master Realm for longer token timeout"
-  uri:
+    patch:
+      - op: replace
+        path: /data/password
+        value: "{{ SSO_POSTGRES_SECRET.POSTGRES_PASSWORD }}"
+      - op: replace
+        path: /data/verifier
+        value: ""
+  ignore_errors: true
+
+- name: Restart sso pod
+  k8s:
+    state: absent
+    kind: Pod
+    name: "keycloak-0"
+    host: "{{ REDHAT_OPENSHIFT_HOST }}"
+    api_key: "{{ REDHAT_OPENSHIFT_TOKEN }}"
+    namespace: "{{ SSO_NAMESPACE }}"
     validate_certs: false
-    url: "{{ SSO_SITE_BASE_URL }}/auth/admin/realms/master"
-    method: PUT
-    body_format: json
-    body: "{{ lookup('template', 'sso-master-realm-extend-token.json') }}"
-    status_code:
-      - 204
-    headers:
-      Content-Type: "application/json"
-      Accept: "application/json"
-      Authorization: "Bearer {{ SSO_TOKEN.json.access_token }}"
+  

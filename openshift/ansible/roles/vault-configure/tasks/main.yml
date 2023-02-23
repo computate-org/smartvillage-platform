@@ -2,24 +2,29 @@
 
 - block:
     - name: Initialize vault
-      shell: "{{ VAULT_COMMAND_OC_VAULT_INIT }}"
+      shell: >-
+        {{ VAULT_COMMAND_OC }} vault operator init -address http://vault.vault.svc.cluster.local:8200 -ca-path /var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt -format=json -key-shares 1 -key-threshold 1
       register: vault_init
       ignore_errors: true
     - debug:
         var: vault_init
-    - fail:
-        msg: >
-          Missing variables REDHAT_OPENSHIFT_HOST and REDHAT_OPENSHIFT_TOKEN.
-          Find the login command to OpenShift and and set these variables, for example:
-          ansible-playbook ~/.local/src/smartabyar-smartvillage/openshift/ansible/vault-configure.yml
-          -e REDHAT_OPENSHIFT_HOST=https://api.crc.testing:6443
-          -e REDHAT_OPENSHIFT_TOKEN=sha256~KNsu4uF9jsFUVZJE6smixzmWhoHVq9rgADUICQIrrDI
-      when: vault_init.failed
+#    - fail:
+#        msg: >
+#          Missing variables REDHAT_OPENSHIFT_HOST and REDHAT_OPENSHIFT_TOKEN.
+#          Find the login command to OpenShift and and set these variables, for example:
+#          ansible-playbook ~/.local/src/smartabyar-smartvillage/openshift/ansible/vault-configure.yml
+#          -e REDHAT_OPENSHIFT_HOST=https://api.crc.testing:6443
+#          -e REDHAT_OPENSHIFT_TOKEN=sha256~KNsu4uF9jsFUVZJE6smixzmWhoHVq9rgADUICQIrrDI
+#      when: vault_init.failed
     - name: Get vault init dev secrets
       set_fact:
-        VAULT_UNSEAL_KEY: "{{ vault_init.stdout | regex_search('\\\\\"unseal_keys_b64\\\\\": [\\\\n\\s*\\\\\"([^\"])\\\\\"', '\\1') | first }}"
-        VAULT_ROOT_TOKEN: "{{ vault_init.stdout | regex_search('\\\\\"root_token\\\\\":\\s*\\\\\"([^\"])\\\\\"', '\\1') | first }}"
-  when: VAULT_UNSEAL_KEY is not defined and VAULT_ROOT_TOKEN is not defined
+        VAULT_UNSEAL_KEY: >-
+          {{ vault_init.stdout | regex_search('"unseal_keys_b64":\s*\[\s*"([^"]+)"', '\1') | first }}
+        VAULT_ROOT_TOKEN: >-
+          {{ vault_init.stdout | regex_search('"root_token":\s*"([^"]+)"', '\1') | first }}
+      when: not vault_init.failed
+  when: VAULT_UNSEAL_KEY is not defined and VAULT_ROOT_TOKEN is not defined or VAULT_UNSEAL_KEY == '' and VAULT_ROOT_TOKEN == ''
+
 - name: Install vault root secret for dev on OpenShift
   k8s:
     state: present
@@ -29,7 +34,7 @@
     namespace: "{{ VAULT_NAMESPACE }}"
     definition: "{{ lookup('template', 'vault-init-secret.yml') }}"
     validate_certs: false
-  when: VAULT_UNSEAL_KEY is defined and VAULT_ROOT_TOKEN is defined
+  when: VAULT_UNSEAL_KEY is defined and VAULT_ROOT_TOKEN is defined and VAULT_UNSEAL_KEY != '' and VAULT_ROOT_TOKEN != ''
 
 - name: Get vault init dev secrets
   set_fact:
@@ -38,76 +43,112 @@
   vars:
     K8S_AUTH_HOST: "{{ REDHAT_OPENSHIFT_HOST }}"
     K8S_AUTH_API_KEY: "{{ REDHAT_OPENSHIFT_TOKEN }}"
-  when: VAULT_UNSEAL_KEY is not defined and VAULT_ROOT_TOKEN is not defined
+  when: VAULT_UNSEAL_KEY is not defined and VAULT_ROOT_TOKEN is not defined or VAULT_UNSEAL_KEY == '' and VAULT_ROOT_TOKEN == ''
+
+- debug:
+    var: VAULT_UNSEAL_KEY
+- debug:
+    var: VAULT_ROOT_TOKEN
 
 - block:
     - name: Unseal vault
-      shell: "{{ VAULT_COMMAND_OC_VAULT_UNSEAL }}"
+      shell: >-
+        {{ VAULT_COMMAND_OC }} vault operator unseal -address http://vault.vault.svc.cluster.local:8200 -ca-path /var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt "$(oc get secret vault-init -n {{ VAULT_NAMESPACE }} -o jsonpath='{.data.VAULT_UNSEAL_KEY}' | base64 -d )"
       register: vault_unseal
       ignore_errors: true
     - debug:
         var: vault_unseal
 
 - block:
-    - name: Setup vault admin policy
-      set_fact:
-        VAULT_COMMAND_POD_WRITE_ADMIN_POLICY: >
-          bash -c 'echo '"'"'{{ lookup('template', 'vault-admin-policy.hcl') | default(omit) }}'"'"' | env VAULT_ADDR=https://vault.apps-crc.testing VAULT_TOKEN={{ VAULT_ROOT_TOKEN }} vault policy write -tls-skip-verify vault-admin -'
-    - name: Setup vault admin policy
-      set_fact:
-        VAULT_COMMAND_OC_WRITE_ADMIN_POLICY: >
-          oc login {{ REDHAT_OPENSHIFT_HOST }} --token={{ REDHAT_OPENSHIFT_TOKEN }} && oc exec $(oc get pod -l {{ VAULT_LABEL }} -o jsonpath='{.items[0].metadata.name}' -n {{ VAULT_NAMESPACE }}) -n {{ VAULT_NAMESPACE }} -- {{ VAULT_COMMAND_POD_WRITE_ADMIN_POLICY }}
     - name: Write vault admin policy
-      shell: "{{ VAULT_COMMAND_OC_WRITE_ADMIN_POLICY }}"
+      shell: >-
+        {{ VAULT_COMMAND_OC }} bash -c 'echo '"'"'{{ lookup('template', 'vault-admin-policy.hcl') | default(omit) }}'"'"' | env VAULT_TOKEN="{{ VAULT_ROOT_TOKEN }}" vault policy write -tls-skip-verify vault-admin -'
       register: vault_write_admin_policy
       ignore_errors: true
     - debug:
         var: vault_write_admin_policy
 
 - block:
-    - name: Enable kubernetes vault auth facts
-      set_fact:
-        VAULT_COMMAND_POD_ENABLE_KUBERNETES_AUTH: >
-          env VAULT_ADDR=https://vault.apps-crc.testing VAULT_TOKEN={{ VAULT_ROOT_TOKEN }} vault auth enable -tls-skip-verify kubernetes
-    - name: Enable kubernetes vault auth facts
-      set_fact:
-        VAULT_COMMAND_OC_ENABLE_KUBERNETES_AUTH: >
-          oc login {{ REDHAT_OPENSHIFT_HOST }} --token={{ REDHAT_OPENSHIFT_TOKEN }} && oc exec $(oc get pod -l {{ VAULT_LABEL }} -o jsonpath='{.items[0].metadata.name}' -n {{ VAULT_NAMESPACE }}) -n {{ VAULT_NAMESPACE }} -- {{ VAULT_COMMAND_POD_ENABLE_KUBERNETES_AUTH }}
     - name: Enable kubernetes vault auth
-      shell: "{{ VAULT_COMMAND_OC_ENABLE_KUBERNETES_AUTH }}"
+      shell: >-
+        {{ VAULT_COMMAND_OC }} env VAULT_TOKEN="{{ VAULT_ROOT_TOKEN }}" vault auth enable -tls-skip-verify kubernetes
       register: vault_enable_kubernetes_auth
       ignore_errors: true
     - debug:
         var: vault_enable_kubernetes_auth
 
 - block:
-    - name: Write kubernetes auth config facts
-      set_fact:
-        VAULT_COMMAND_POD_WRITE_KUBERNETES_AUTH_CONFIG: >
-          env VAULT_ADDR=https://vault.apps-crc.testing VAULT_TOKEN={{ VAULT_ROOT_TOKEN }} vault write -tls-skip-verify auth/kubernetes/config kubernetes_host=https://kubernetes.default.svc:443
-    - name: Write kubernetes auth config facts
-      set_fact:
-        VAULT_COMMAND_OC_WRITE_KUBERNETES_AUTH_CONFIG: >
-          oc login {{ REDHAT_OPENSHIFT_HOST }} --token={{ REDHAT_OPENSHIFT_TOKEN }} && oc exec $(oc get pod -l {{ VAULT_LABEL }} -o jsonpath='{.items[0].metadata.name}' -n {{ VAULT_NAMESPACE }}) -n {{ VAULT_NAMESPACE }} -- {{ VAULT_COMMAND_POD_WRITE_KUBERNETES_AUTH_CONFIG }}
     - name: Write kubernetes auth config
-      shell: "{{ VAULT_COMMAND_OC_WRITE_KUBERNETES_AUTH_CONFIG }}"
+      shell: >
+        {{ VAULT_COMMAND_OC }} env VAULT_TOKEN="{{ VAULT_ROOT_TOKEN }}" vault write -tls-skip-verify auth/kubernetes/config kubernetes_host=https://kubernetes.default.svc:443
       register: vault_write_kubernetes_auth_config
       ignore_errors: true
     - debug:
         var: vault_write_kubernetes_auth_config
 
 - block:
-    - name: Write kubernetes admin role facts
+    - name: Read vault sys/auth
+      shell: >-
+        {{ VAULT_COMMAND_OC }} env VAULT_TOKEN="{{ VAULT_ROOT_TOKEN }}" vault read -tls-skip-verify -format json sys/auth
+      register: vault_read_sys_auth
+      ignore_errors: true
+    - debug:
+        var: vault_read_sys_auth
+    - name: Set vault sys/auth
       set_fact:
-        VAULT_COMMAND_POD_WRITE_KUBERNETES_ADMIN_ROLE: >
-          env VAULT_ADDR=https://vault.apps-crc.testing VAULT_TOKEN={{ VAULT_ROOT_TOKEN }} vault write -tls-skip-verify auth/kubernetes/role/policy-admin bound_service_account_names=default bound_service_account_namespaces=vault-admin policies=vault-admin ttl=10s
-    - name: Write kubernetes admin role facts
-      set_fact:
-        VAULT_COMMAND_OC_WRITE_KUBERNETES_ADMIN_ROLE: >
-          oc login {{ REDHAT_OPENSHIFT_HOST }} --token={{ REDHAT_OPENSHIFT_TOKEN }} && oc exec $(oc get pod -l {{ VAULT_LABEL }} -o jsonpath='{.items[0].metadata.name}' -n {{ VAULT_NAMESPACE }}) -n {{ VAULT_NAMESPACE }} -- {{ VAULT_COMMAND_POD_WRITE_KUBERNETES_ADMIN_ROLE }}
+        VAULT_SYS_AUTH: >-
+          {{ vault_read_sys_auth.stdout | regex_search('Using project \"default\"\.\s+([\s\S]+)', '\1') | first | from_json }}
+    - debug:
+        var: VAULT_SYS_AUTH
+
+- block:
     - name: Write kubernetes admin role
-      shell: "{{ VAULT_COMMAND_OC_WRITE_KUBERNETES_ADMIN_ROLE }}"
+      shell: >-
+        {{ VAULT_COMMAND_OC }} env VAULT_TOKEN="{{ VAULT_ROOT_TOKEN }}" vault write -tls-skip-verify auth/kubernetes/role/policy-admin bound_service_account_names=default bound_service_account_namespaces=vault-admin policies=vault-admin ttl=10s
       register: vault_write_kubernetes_admin_role
       ignore_errors: true
     - debug:
         var: vault_write_kubernetes_admin_role
+
+- block:
+    - name: Create vault-admin token
+      shell: >-
+        oc create token default -n vault-admin
+      register: vault_create_admin_token
+      ignore_errors: true
+
+- block:
+    - name: Write kubernetes policy-admin login
+      shell: >-
+        {{ VAULT_COMMAND_OC }} env VAULT_TOKEN="{{ VAULT_ROOT_TOKEN }}" vault write -tls-skip-verify auth/kubernetes/login role=policy-admin jwt={{ vault_create_admin_token.stdout }}
+      register: vault_write_kubernetes_policy_admin_login
+      ignore_errors: true
+    - debug:
+        var: vault_write_kubernetes_policy_admin_login
+
+- block:
+    - name: Write vault kv-engine-admin policy
+      shell: >-
+        {{ VAULT_COMMAND_OC }} bash -c 'echo '"'"'{{ lookup('template', 'kv-engine-admin-policy.hcl') | regex_replace('\\{\\{', '{{', multiline=True) | regex_replace('\\}\\}', '}}', multiline=True) }}'"'"' | env VAULT_TOKEN="{{ VAULT_ROOT_TOKEN }}" vault policy write -tls-skip-verify kv-engine-admin -'
+      register: vault_write_kv_engine_admin_policy
+      ignore_errors: true
+    - debug:
+        var: vault_write_kv_engine_admin_policy
+
+- block:
+    - name: Write vault secret-writer policy
+      shell: >-
+        {{ VAULT_COMMAND_OC }} bash -c 'echo '"'"'{{ lookup('template', 'secret-writer-policy.hcl') | regex_replace('\\{\\{', '{{', multiline=True) | regex_replace('\\}\\}', '}}', multiline=True) }}'"'"' | env VAULT_TOKEN="{{ VAULT_ROOT_TOKEN }}" vault policy write -tls-skip-verify secret-writer -'
+      register: vault_write_secret_writer_policy
+      ignore_errors: true
+    - debug:
+        var: vault_write_secret_writer_policy
+
+- block:
+    - name: Write vault secret-reader policy
+      shell: >-
+        {{ VAULT_COMMAND_OC }} bash -c 'echo '"'"'{{ lookup('template', 'secret-reader-policy.hcl') | regex_replace('\\{\\{', '{{', multiline=True) | regex_replace('\\}\\}', '}}', multiline=True) }}'"'"' | env VAULT_TOKEN="{{ VAULT_ROOT_TOKEN }}" vault policy write -tls-skip-verify secret-reader -'
+      register: vault_write_secret_reader_policy
+      ignore_errors: true
+    - debug:
+        var: vault_write_secret_reader_policy

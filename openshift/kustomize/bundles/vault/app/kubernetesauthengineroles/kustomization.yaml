@@ -1,0 +1,7 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - kv-engine-admin/
+  - secret-writer/
+  - secret-reader/
+  - vault-secret-reader/

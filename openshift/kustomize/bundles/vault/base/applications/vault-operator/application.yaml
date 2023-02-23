@@ -12,16 +12,27 @@ spec:
     chart: vault
     targetRevision: 0.23.0
     helm:
+      releaseName: vault
       parameters:
 
         - name: global.openshift
           value: "true"
+        - name: server.logLevel
+          value: "debug"
         - name: server.route.enabled
           value: "true"
         - name: server.route.host
           value: "vault.apps-crc.testing"
         - name: server.route.tls.termination
           value: "edge"
+        - name: server.statefulSet.securityContext.pod.runAsNonRoot
+          value: "true"
+        - name: server.statefulSet.securityContext.pod.runAsGroup
+          value: "1000"
+        - name: server.statefulSet.securityContext.pod.runAsUser
+          value: "100"
+        - name: server.statefulSet.securityContext.pod.fsGroup
+          value: "1000"
 
         - name: injector.image.repository
           value: "registry.connect.redhat.com/hashicorp/vault-k8s"

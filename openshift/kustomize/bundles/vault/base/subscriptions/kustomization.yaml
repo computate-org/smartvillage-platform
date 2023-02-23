@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - vault-config-operator/
   - namespace-configuration-operator/
+  - external-secrets-operator/
