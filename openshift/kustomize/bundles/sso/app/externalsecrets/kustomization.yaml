@@ -3,6 +3,6 @@ kind: Kustomization
 
 resources:
   - keycloak-db-secret
-#  - computate-openshift-client-secret
-#  - sso-openshift-client-secret
-#  - sso-group-sync
+  - computate-openshift-client-secret
+  - sso-openshift-client-secret
+  - sso-group-sync
