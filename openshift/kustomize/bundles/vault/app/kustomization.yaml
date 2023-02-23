@@ -5,5 +5,4 @@ resources:
   - passwordpolicies/
   - policies/
   - kubernetesauthengineroles/
-  - secretenginemounts/
   - operatorconfigs/

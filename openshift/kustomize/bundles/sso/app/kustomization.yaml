@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - randomsecrets/
   - secretstores/
+  - secretenginemounts/
   - externalsecrets/
   - keycloaks/
   - keycloakrealms/
