@@ -13,6 +13,8 @@ spec:
   path: kubernetes
   policies:
     - secret-writer
+  targetServiceAccounts:
+    - default
   targetNamespaces:
     targetNamespaceSelector:
       matchLabels:

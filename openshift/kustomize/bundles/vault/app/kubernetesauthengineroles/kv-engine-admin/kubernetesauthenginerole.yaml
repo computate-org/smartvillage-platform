@@ -13,6 +13,8 @@ spec:
   path: kubernetes  
   policies:
     - kv-engine-admin
+  targetServiceAccounts:
+    - default
   targetNamespaces:
     targetNamespaceSelector:
       matchLabels:
