@@ -22,6 +22,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.time.Instant;
 import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 import org.computate.search.response.solr.SolrResponse.StatsField;
 import java.util.stream.Collectors;
 import io.vertx.core.json.Json;
@@ -108,7 +109,19 @@ public class SiteHtmEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 	public void searchSiteHtm(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 
-			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
+			webClient.post(
+					config.getInteger(ConfigKeys.AUTH_PORT)
+					, config.getString(ConfigKeys.AUTH_HOST_NAME)
+					, config.getString(ConfigKeys.AUTH_TOKEN_URI)
+					)
+					.ssl(config.getBoolean(ConfigKeys.AUTH_SSL))
+					.putHeader("Authorization", String.format("Bearer %s", siteRequest.getUser().principal().getString("access_token")))
+					.sendForm(MultiMap.caseInsensitiveMultiMap()
+							.add("grant_type", "urn:ietf:params:oauth:grant-type:uma-ticket")
+							.add("audience", config.getString(ConfigKeys.AUTH_CLIENT))
+							.add("response_mode", "decision")
+							.add("permission", String.format("%s#%s", SiteHtm.CLASS_SIMPLE_NAME, "Search"))
+			).onFailure(ex -> {
 				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 				eventHandler.handle(Future.succeededFuture(
 					new ServiceResponse(401, "UNAUTHORIZED",
@@ -120,21 +133,21 @@ public class SiteHtmEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 							), MultiMap.caseInsensitiveMultiMap()
 					)
 				));
-			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SiteHtm")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
-					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
-					eventHandler.handle(Future.succeededFuture(
-						new ServiceResponse(401, "UNAUTHORIZED",
-							Buffer.buffer().appendString(
-								new JsonObject()
-									.put("errorCode", "401")
-									.put("errorMessage", msg)
-									.encodePrettily()
-								), MultiMap.caseInsensitiveMultiMap()
-						)
-					));
-				} else {
-					try {
+			}).onSuccess(authorizationDecision -> {
+				try {
+					if(!authorizationDecision.bodyAsJsonObject().getBoolean("result")) {
+						String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+						eventHandler.handle(Future.succeededFuture(
+							new ServiceResponse(401, "UNAUTHORIZED",
+								Buffer.buffer().appendString(
+									new JsonObject()
+										.put("errorCode", "401")
+										.put("errorMessage", msg)
+										.encodePrettily()
+									), MultiMap.caseInsensitiveMultiMap()
+							)
+						));
+					} else {
 						searchSiteHtmList(siteRequest, false, true, false).onSuccess(listSiteHtm -> {
 							response200SearchSiteHtm(listSiteHtm).onSuccess(response -> {
 								eventHandler.handle(Future.succeededFuture(response));
@@ -147,10 +160,10 @@ public class SiteHtmEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 							LOG.error(String.format("searchSiteHtm failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
-					} catch(Exception ex) {
-						LOG.error(String.format("searchSiteHtm failed. "), ex);
-						error(null, eventHandler, ex);
 					}
+				} catch(Exception ex) {
+					LOG.error(String.format("searchSiteHtm failed. "), ex);
+					error(null, eventHandler, ex);
 				}
 			});
 		}).onFailure(ex -> {
@@ -261,7 +274,19 @@ public class SiteHtmEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 	public void getSiteHtm(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 
-			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
+			webClient.post(
+					config.getInteger(ConfigKeys.AUTH_PORT)
+					, config.getString(ConfigKeys.AUTH_HOST_NAME)
+					, config.getString(ConfigKeys.AUTH_TOKEN_URI)
+					)
+					.ssl(config.getBoolean(ConfigKeys.AUTH_SSL))
+					.putHeader("Authorization", String.format("Bearer %s", siteRequest.getUser().principal().getString("access_token")))
+					.sendForm(MultiMap.caseInsensitiveMultiMap()
+							.add("grant_type", "urn:ietf:params:oauth:grant-type:uma-ticket")
+							.add("audience", config.getString(ConfigKeys.AUTH_CLIENT))
+							.add("response_mode", "decision")
+							.add("permission", String.format("%s#%s", SiteHtm.CLASS_SIMPLE_NAME, "GET"))
+			).onFailure(ex -> {
 				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 				eventHandler.handle(Future.succeededFuture(
 					new ServiceResponse(401, "UNAUTHORIZED",
@@ -273,21 +298,21 @@ public class SiteHtmEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 							), MultiMap.caseInsensitiveMultiMap()
 					)
 				));
-			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SiteHtm")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
-					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
-					eventHandler.handle(Future.succeededFuture(
-						new ServiceResponse(401, "UNAUTHORIZED",
-							Buffer.buffer().appendString(
-								new JsonObject()
-									.put("errorCode", "401")
-									.put("errorMessage", msg)
-									.encodePrettily()
-								), MultiMap.caseInsensitiveMultiMap()
-						)
-					));
-				} else {
-					try {
+			}).onSuccess(authorizationDecision -> {
+				try {
+					if(!authorizationDecision.bodyAsJsonObject().getBoolean("result")) {
+						String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+						eventHandler.handle(Future.succeededFuture(
+							new ServiceResponse(401, "UNAUTHORIZED",
+								Buffer.buffer().appendString(
+									new JsonObject()
+										.put("errorCode", "401")
+										.put("errorMessage", msg)
+										.encodePrettily()
+									), MultiMap.caseInsensitiveMultiMap()
+							)
+						));
+					} else {
 						searchSiteHtmList(siteRequest, false, true, false).onSuccess(listSiteHtm -> {
 							response200GETSiteHtm(listSiteHtm).onSuccess(response -> {
 								eventHandler.handle(Future.succeededFuture(response));
@@ -300,10 +325,10 @@ public class SiteHtmEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 							LOG.error(String.format("getSiteHtm failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
-					} catch(Exception ex) {
-						LOG.error(String.format("getSiteHtm failed. "), ex);
-						error(null, eventHandler, ex);
 					}
+				} catch(Exception ex) {
+					LOG.error(String.format("getSiteHtm failed. "), ex);
+					error(null, eventHandler, ex);
 				}
 			});
 		}).onFailure(ex -> {
@@ -353,7 +378,19 @@ public class SiteHtmEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 		LOG.debug(String.format("postSiteHtm started. "));
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 
-			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
+			webClient.post(
+					config.getInteger(ConfigKeys.AUTH_PORT)
+					, config.getString(ConfigKeys.AUTH_HOST_NAME)
+					, config.getString(ConfigKeys.AUTH_TOKEN_URI)
+					)
+					.ssl(config.getBoolean(ConfigKeys.AUTH_SSL))
+					.putHeader("Authorization", String.format("Bearer %s", siteRequest.getUser().principal().getString("access_token")))
+					.sendForm(MultiMap.caseInsensitiveMultiMap()
+							.add("grant_type", "urn:ietf:params:oauth:grant-type:uma-ticket")
+							.add("audience", config.getString(ConfigKeys.AUTH_CLIENT))
+							.add("response_mode", "decision")
+							.add("permission", String.format("%s#%s", SiteHtm.CLASS_SIMPLE_NAME, "POST"))
+			).onFailure(ex -> {
 				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 				eventHandler.handle(Future.succeededFuture(
 					new ServiceResponse(401, "UNAUTHORIZED",
@@ -365,21 +402,21 @@ public class SiteHtmEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 							), MultiMap.caseInsensitiveMultiMap()
 					)
 				));
-			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SiteHtm")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
-					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
-					eventHandler.handle(Future.succeededFuture(
-						new ServiceResponse(401, "UNAUTHORIZED",
-							Buffer.buffer().appendString(
-								new JsonObject()
-									.put("errorCode", "401")
-									.put("errorMessage", msg)
-									.encodePrettily()
-								), MultiMap.caseInsensitiveMultiMap()
-						)
-					));
-				} else {
-					try {
+			}).onSuccess(authorizationDecision -> {
+				try {
+					if(!authorizationDecision.bodyAsJsonObject().getBoolean("result")) {
+						String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+						eventHandler.handle(Future.succeededFuture(
+							new ServiceResponse(401, "UNAUTHORIZED",
+								Buffer.buffer().appendString(
+									new JsonObject()
+										.put("errorCode", "401")
+										.put("errorMessage", msg)
+										.encodePrettily()
+									), MultiMap.caseInsensitiveMultiMap()
+							)
+						));
+					} else {
 						ApiRequest apiRequest = new ApiRequest();
 						apiRequest.setRows(1L);
 						apiRequest.setNumFound(1L);
@@ -414,10 +451,10 @@ public class SiteHtmEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 							LOG.error(String.format("postSiteHtm failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
-					} catch(Exception ex) {
-						LOG.error(String.format("postSiteHtm failed. "), ex);
-						error(null, eventHandler, ex);
 					}
+				} catch(Exception ex) {
+					LOG.error(String.format("postSiteHtm failed. "), ex);
+					error(null, eventHandler, ex);
 				}
 			});
 		}).onFailure(ex -> {
@@ -534,7 +571,19 @@ public class SiteHtmEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 		LOG.debug(String.format("patchSiteHtm started. "));
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 
-			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
+			webClient.post(
+					config.getInteger(ConfigKeys.AUTH_PORT)
+					, config.getString(ConfigKeys.AUTH_HOST_NAME)
+					, config.getString(ConfigKeys.AUTH_TOKEN_URI)
+					)
+					.ssl(config.getBoolean(ConfigKeys.AUTH_SSL))
+					.putHeader("Authorization", String.format("Bearer %s", siteRequest.getUser().principal().getString("access_token")))
+					.sendForm(MultiMap.caseInsensitiveMultiMap()
+							.add("grant_type", "urn:ietf:params:oauth:grant-type:uma-ticket")
+							.add("audience", config.getString(ConfigKeys.AUTH_CLIENT))
+							.add("response_mode", "decision")
+							.add("permission", String.format("%s#%s", SiteHtm.CLASS_SIMPLE_NAME, "PATCH"))
+			).onFailure(ex -> {
 				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 				eventHandler.handle(Future.succeededFuture(
 					new ServiceResponse(401, "UNAUTHORIZED",
@@ -546,21 +595,21 @@ public class SiteHtmEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 							), MultiMap.caseInsensitiveMultiMap()
 					)
 				));
-			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SiteHtm")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
-					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
-					eventHandler.handle(Future.succeededFuture(
-						new ServiceResponse(401, "UNAUTHORIZED",
-							Buffer.buffer().appendString(
-								new JsonObject()
-									.put("errorCode", "401")
-									.put("errorMessage", msg)
-									.encodePrettily()
-								), MultiMap.caseInsensitiveMultiMap()
-						)
-					));
-				} else {
-					try {
+			}).onSuccess(authorizationDecision -> {
+				try {
+					if(!authorizationDecision.bodyAsJsonObject().getBoolean("result")) {
+						String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+						eventHandler.handle(Future.succeededFuture(
+							new ServiceResponse(401, "UNAUTHORIZED",
+								Buffer.buffer().appendString(
+									new JsonObject()
+										.put("errorCode", "401")
+										.put("errorMessage", msg)
+										.encodePrettily()
+									), MultiMap.caseInsensitiveMultiMap()
+							)
+						));
+					} else {
 						searchSiteHtmList(siteRequest, true, false, true).onSuccess(listSiteHtm -> {
 							try {
 								if(listSiteHtm.getResponse().getResponse().getNumFound() > 1
@@ -602,10 +651,10 @@ public class SiteHtmEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 							LOG.error(String.format("patchSiteHtm failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
-					} catch(Exception ex) {
-						LOG.error(String.format("patchSiteHtm failed. "), ex);
-						error(null, eventHandler, ex);
 					}
+				} catch(Exception ex) {
+					LOG.error(String.format("patchSiteHtm failed. "), ex);
+					error(null, eventHandler, ex);
 				}
 			});
 		}).onFailure(ex -> {
@@ -770,7 +819,19 @@ public class SiteHtmEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 		LOG.debug(String.format("putimportSiteHtm started. "));
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 
-			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
+			webClient.post(
+					config.getInteger(ConfigKeys.AUTH_PORT)
+					, config.getString(ConfigKeys.AUTH_HOST_NAME)
+					, config.getString(ConfigKeys.AUTH_TOKEN_URI)
+					)
+					.ssl(config.getBoolean(ConfigKeys.AUTH_SSL))
+					.putHeader("Authorization", String.format("Bearer %s", siteRequest.getUser().principal().getString("access_token")))
+					.sendForm(MultiMap.caseInsensitiveMultiMap()
+							.add("grant_type", "urn:ietf:params:oauth:grant-type:uma-ticket")
+							.add("audience", config.getString(ConfigKeys.AUTH_CLIENT))
+							.add("response_mode", "decision")
+							.add("permission", String.format("%s#%s", SiteHtm.CLASS_SIMPLE_NAME, "PUTImport"))
+			).onFailure(ex -> {
 				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 				eventHandler.handle(Future.succeededFuture(
 					new ServiceResponse(401, "UNAUTHORIZED",
@@ -782,21 +843,21 @@ public class SiteHtmEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 							), MultiMap.caseInsensitiveMultiMap()
 					)
 				));
-			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SiteHtm")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
-					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
-					eventHandler.handle(Future.succeededFuture(
-						new ServiceResponse(401, "UNAUTHORIZED",
-							Buffer.buffer().appendString(
-								new JsonObject()
-									.put("errorCode", "401")
-									.put("errorMessage", msg)
-									.encodePrettily()
-								), MultiMap.caseInsensitiveMultiMap()
-						)
-					));
-				} else {
-					try {
+			}).onSuccess(authorizationDecision -> {
+				try {
+					if(!authorizationDecision.bodyAsJsonObject().getBoolean("result")) {
+						String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+						eventHandler.handle(Future.succeededFuture(
+							new ServiceResponse(401, "UNAUTHORIZED",
+								Buffer.buffer().appendString(
+									new JsonObject()
+										.put("errorCode", "401")
+										.put("errorMessage", msg)
+										.encodePrettily()
+									), MultiMap.caseInsensitiveMultiMap()
+							)
+						));
+					} else {
 						try {
 							ApiRequest apiRequest = new ApiRequest();
 							JsonArray jsonArray = Optional.ofNullable(siteRequest.getJsonObject()).map(o -> o.getJsonArray("list")).orElse(new JsonArray());
@@ -827,10 +888,10 @@ public class SiteHtmEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 							LOG.error(String.format("putimportSiteHtm failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						}
-					} catch(Exception ex) {
-						LOG.error(String.format("putimportSiteHtm failed. "), ex);
-						error(null, eventHandler, ex);
 					}
+				} catch(Exception ex) {
+					LOG.error(String.format("putimportSiteHtm failed. "), ex);
+					error(null, eventHandler, ex);
 				}
 			});
 		}).onFailure(ex -> {
@@ -1055,7 +1116,19 @@ public class SiteHtmEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 	public void searchpageSiteHtm(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 
-			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
+			webClient.post(
+					config.getInteger(ConfigKeys.AUTH_PORT)
+					, config.getString(ConfigKeys.AUTH_HOST_NAME)
+					, config.getString(ConfigKeys.AUTH_TOKEN_URI)
+					)
+					.ssl(config.getBoolean(ConfigKeys.AUTH_SSL))
+					.putHeader("Authorization", String.format("Bearer %s", siteRequest.getUser().principal().getString("access_token")))
+					.sendForm(MultiMap.caseInsensitiveMultiMap()
+							.add("grant_type", "urn:ietf:params:oauth:grant-type:uma-ticket")
+							.add("audience", config.getString(ConfigKeys.AUTH_CLIENT))
+							.add("response_mode", "decision")
+							.add("permission", String.format("%s#%s", SiteHtm.CLASS_SIMPLE_NAME, "SearchPage"))
+			).onFailure(ex -> {
 				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 				eventHandler.handle(Future.succeededFuture(
 					new ServiceResponse(401, "UNAUTHORIZED",
@@ -1067,21 +1140,21 @@ public class SiteHtmEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 							), MultiMap.caseInsensitiveMultiMap()
 					)
 				));
-			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SiteHtm")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
-					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
-					eventHandler.handle(Future.succeededFuture(
-						new ServiceResponse(401, "UNAUTHORIZED",
-							Buffer.buffer().appendString(
-								new JsonObject()
-									.put("errorCode", "401")
-									.put("errorMessage", msg)
-									.encodePrettily()
-								), MultiMap.caseInsensitiveMultiMap()
-						)
-					));
-				} else {
-					try {
+			}).onSuccess(authorizationDecision -> {
+				try {
+					if(!authorizationDecision.bodyAsJsonObject().getBoolean("result")) {
+						String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+						eventHandler.handle(Future.succeededFuture(
+							new ServiceResponse(401, "UNAUTHORIZED",
+								Buffer.buffer().appendString(
+									new JsonObject()
+										.put("errorCode", "401")
+										.put("errorMessage", msg)
+										.encodePrettily()
+									), MultiMap.caseInsensitiveMultiMap()
+							)
+						));
+					} else {
 						searchSiteHtmList(siteRequest, false, true, false).onSuccess(listSiteHtm -> {
 							response200SearchPageSiteHtm(listSiteHtm).onSuccess(response -> {
 								eventHandler.handle(Future.succeededFuture(response));
@@ -1094,10 +1167,10 @@ public class SiteHtmEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 							LOG.error(String.format("searchpageSiteHtm failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
-					} catch(Exception ex) {
-						LOG.error(String.format("searchpageSiteHtm failed. "), ex);
-						error(null, eventHandler, ex);
 					}
+				} catch(Exception ex) {
+					LOG.error(String.format("searchpageSiteHtm failed. "), ex);
+					error(null, eventHandler, ex);
 				}
 			});
 		}).onFailure(ex -> {
@@ -1429,6 +1502,10 @@ public class SiteHtmEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 					StatsField stats = searchList.getResponse().getStats().getStatsFields().get(statsFieldIndexed2);
 					Instant min = Optional.ofNullable(stats.getMin()).map(val -> Instant.parse(val.toString())).orElse(Instant.now());
 					Instant max = Optional.ofNullable(stats.getMax()).map(val -> Instant.parse(val.toString())).orElse(Instant.now());
+					if(min.equals(max)) {
+						min = min.minus(1, ChronoUnit.DAYS);
+						max = max.plus(2, ChronoUnit.DAYS);
+					}
 					Duration duration = Duration.between(min, max);
 					String gap = "DAY";
 					if(duration.toDays() >= 365)

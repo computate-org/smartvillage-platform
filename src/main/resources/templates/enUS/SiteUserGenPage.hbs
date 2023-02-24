@@ -27,6 +27,8 @@
 				}
 				websocketSiteUser(websocketSiteUserInner);
 				window.varsFq = JSON.parse('{{{toJsonObjectStringInApostrophes varsFq}}}');
+				window.varsRange = JSON.parse('{{{toJsonObjectStringInApostrophes varsRange}}}');
+				window.defaultRangeVar = '{{ defaultRangeVar }}';
 				pageGraph();
 
 				var calendarEl = document.getElementById('site-calendar');
@@ -42,6 +44,7 @@
 {{#if DEFAULT_MAP_ZOOM }}
 			window.DEFAULT_MAP_ZOOM = {{ DEFAULT_MAP_ZOOM }};
 {{/if}}
+			window.DEFAULT_ZONE_ID = '{{ defaultZoneId }}';
 		</script>
 {{/inline}}
 {{#*inline "htmUrlSiteUser"}}{{pageUri}}?q={{query.q}}&amp;rows={{#if rows}}{{rows}}{{else}}{{pagination.rows}}{{/if}}&amp;rows={{#if start}}{{start}}{{else}}{{pagination.start}}{{/if}}{{#each query.fq}}{{#eq fq this}}{{else}}&fq={{fq}}:{{val}}{{/eq}}{{/each}}{{#each query.sort}}{{#eq sort this}}{{else}}&sort={{var}} {{order}}{{/eq}}{{/each}}{{/inline}}
@@ -115,9 +118,9 @@
 								<table class="w3-padding ">
 									<tr>
 										<td class="w3-padding w3-tiny " colspan="2">
-											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeGap-SiteUser">{{#if defaultRangeGap }}facet.range.gap={{encodeURIComponent defaultRangeGap }}{{/if}}</div>
-											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeStart-SiteUser">{{#if defaultRangeStart }}facet.range.start={{encodeURIComponent defaultRangeStart }}{{/if}}</div>
-											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeEnd-SiteUser">{{#if defaultRangeEnd }}facet.range.end={{encodeURIComponent defaultRangeEnd }}{{/if}}</div>
+											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeGap-SiteUser">{{#if rangeGap }}facet.range.gap={{encodeURIComponent rangeGap }}{{/if}}</div>
+											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeStart-SiteUser">{{#if rangeStart }}facet.range.start={{encodeURIComponent rangeStart }}{{/if}}</div>
+											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeEnd-SiteUser">{{#if rangeEnd }}facet.range.end={{encodeURIComponent rangeEnd }}{{/if}}</div>
 											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeVar-SiteUser">{{#if defaultRangeVar }}facet.range={!tag=r1}{{encodeURIComponent defaultRangeVar }}{{/if}}</div>
 										</td>
 									</tr>
@@ -128,7 +131,7 @@
 											<span>Range Gap</span>
 										</td>
 										<td class="">
-											<select name="facet.range.gap" id="pageFacetRangeGap-SiteUser" onchange="facetRangeChange(this, 'SiteUser'); ">
+											<select name="facet.range.gap" id="pageFacetRangeGap-SiteUser" onchange="facetRangeGapChange(this, 'SiteUser'); ">
 												<option value="+1YEAR"{{#eq defaultRangeGap '+1YEAR'}} selected="selected"{{else}}{{/eq}}>Year</option>
 												<option value="+1MONTH"{{#eq defaultRangeGap '+1MONTH'}} selected="selected"{{else}}{{/eq}}>Month</option>
 												<option value="+1WEEK"{{#eq defaultRangeGap '+1WEEK'}} selected="selected"{{else}}{{/eq}}>Week</option>
@@ -146,7 +149,7 @@
 									</tr>
 									<tr class="">
 										<td class="" colspan="2">
-											<span><input type="datetime-local" name="facetRangeStart" id="pageFacetRangeStart-SiteUser" value="{{formatZonedDateTime defaultRangeStart "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeChange(this, 'SiteUser'); "/></span>
+											<span><input type="datetime-local" name="facetRangeStart" id="pageFacetRangeStart-SiteUser" value="{{formatZonedDateTime defaultRangeStart "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeStartChange(this, 'SiteUser'); "/></span>
 										</td>
 									</tr>
 									<tr class="">
@@ -156,7 +159,7 @@
 									</tr>
 									<tr class="">
 										<td class="" colspan="2">
-											<span><input type="datetime-local" name="facetRangeEnd" id="pageFacetRangeEnd-SiteUser" value="{{formatZonedDateTime defaultRangeEnd "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeChange(this, 'SiteUser'); "/></span>
+											<span><input type="datetime-local" name="facetRangeEnd" id="pageFacetRangeEnd-SiteUser" value="{{formatZonedDateTime defaultRangeEnd "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeEndChange(this, 'SiteUser'); "/></span>
 										</td>
 									</tr>
 								</table>
@@ -858,7 +861,7 @@
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
 																		onclick="removeGlow($('#{{classApiMethodMethod}}_userId')); $('#{{classApiMethodMethod}}_userId').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SiteUserForm :input[name=pk]').val() }], 'setUserId', null, function() { addGlow($('#{{classApiMethodMethod}}_userId')); }, function() { addError($('#{{classApiMethodMethod}}_userId')); }); "
 																		>
-																	<i class="far fa-eraser "></i>
+																	<i class="far fa-delete-left "></i>
 																</button>
 															</div>
 														{{/eq}}
@@ -921,7 +924,7 @@
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
 																		onclick="removeGlow($('#{{classApiMethodMethod}}_userName')); $('#{{classApiMethodMethod}}_userName').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SiteUserForm :input[name=pk]').val() }], 'setUserName', null, function() { addGlow($('#{{classApiMethodMethod}}_userName')); }, function() { addError($('#{{classApiMethodMethod}}_userName')); }); "
 																		>
-																	<i class="far fa-eraser "></i>
+																	<i class="far fa-delete-left "></i>
 																</button>
 															</div>
 														{{/eq}}
@@ -984,7 +987,7 @@
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
 																		onclick="removeGlow($('#{{classApiMethodMethod}}_userEmail')); $('#{{classApiMethodMethod}}_userEmail').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SiteUserForm :input[name=pk]').val() }], 'setUserEmail', null, function() { addGlow($('#{{classApiMethodMethod}}_userEmail')); }, function() { addError($('#{{classApiMethodMethod}}_userEmail')); }); "
 																		>
-																	<i class="far fa-eraser "></i>
+																	<i class="far fa-delete-left "></i>
 																</button>
 															</div>
 														{{/eq}}
@@ -1047,7 +1050,7 @@
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
 																		onclick="removeGlow($('#{{classApiMethodMethod}}_userFirstName')); $('#{{classApiMethodMethod}}_userFirstName').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SiteUserForm :input[name=pk]').val() }], 'setUserFirstName', null, function() { addGlow($('#{{classApiMethodMethod}}_userFirstName')); }, function() { addError($('#{{classApiMethodMethod}}_userFirstName')); }); "
 																		>
-																	<i class="far fa-eraser "></i>
+																	<i class="far fa-delete-left "></i>
 																</button>
 															</div>
 														{{/eq}}
@@ -1110,7 +1113,7 @@
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
 																		onclick="removeGlow($('#{{classApiMethodMethod}}_userLastName')); $('#{{classApiMethodMethod}}_userLastName').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SiteUserForm :input[name=pk]').val() }], 'setUserLastName', null, function() { addGlow($('#{{classApiMethodMethod}}_userLastName')); }, function() { addError($('#{{classApiMethodMethod}}_userLastName')); }); "
 																		>
-																	<i class="far fa-eraser "></i>
+																	<i class="far fa-delete-left "></i>
 																</button>
 															</div>
 														{{/eq}}
@@ -1173,7 +1176,7 @@
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
 																		onclick="removeGlow($('#{{classApiMethodMethod}}_userFullName')); $('#{{classApiMethodMethod}}_userFullName').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SiteUserForm :input[name=pk]').val() }], 'setUserFullName', null, function() { addGlow($('#{{classApiMethodMethod}}_userFullName')); }, function() { addError($('#{{classApiMethodMethod}}_userFullName')); }); "
 																		>
-																	<i class="far fa-eraser "></i>
+																	<i class="far fa-delete-left "></i>
 																</button>
 															</div>
 														{{/eq}}

@@ -156,6 +156,7 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Description: 
 	 */
 	protected void _paramInitialPar(Wrap<String> w) {
+		w.o("10, 20, 30, 50, 10, 10, 8, 8, 5, 5");
 	}
 
 	/**
@@ -169,6 +170,7 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Description: 
 	 */
 	protected void _paramLam(Wrap<String> w) {
+		w.o("10, 10, 6, 6");
 	}
 
 	/**
@@ -182,6 +184,7 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Description: 
 	 */
 	protected void _paramDemandScale(Wrap<Integer> w) {
+		w.o(1);
 	}
 
 	/**
@@ -195,6 +198,7 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Description: 
 	 */
 	protected void _paramStepSize(Wrap<Integer> w) {
+		w.o(1);
 	}
 
 	/**
@@ -208,6 +212,7 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Description: 
 	 */
 	protected void _paramUpdateStepSize(Wrap<Integer> w) {
+		w.o(30);
 	}
 
 	/**
@@ -221,6 +226,7 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Description: Time duration of each simulated sample path. 
 	 */
 	protected void _paramRunTime(Wrap<Integer> w) {
+		w.o(1000);
 	}
 
 	/**
@@ -234,6 +240,7 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Description: Total iterations to update performance. 
 	 */
 	protected void _paramTotalIterNum(Wrap<Integer> w) {
+		w.o(10);
 	}
 
 	/**
@@ -247,6 +254,7 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Description: Number of repeats per round. 
 	 */
 	protected void _paramItersPerPar(Wrap<Integer> w) {
+		w.o(5);
 	}
 
 	/**
@@ -271,5 +279,11 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 		Optional.ofNullable(simulationName).ifPresent(s -> b.append(" Simulation \"").append(s).append("\""));
 		Optional.ofNullable(sumocfgPath).ifPresent(s -> b.append(" in ").append(s));
 		w.o(b.toString().trim());
+	}
+
+	@Override
+	protected void _objectId(Wrap<String> w) {
+		if(pk != null)
+			w.o(pk.toString());
 	}
 }

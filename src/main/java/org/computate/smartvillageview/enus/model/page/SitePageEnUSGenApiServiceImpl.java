@@ -22,6 +22,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.time.Instant;
 import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 import org.computate.search.response.solr.SolrResponse.StatsField;
 import java.util.stream.Collectors;
 import io.vertx.core.json.Json;
@@ -107,8 +108,8 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 	@Override
 	public void searchSitePage(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
-					{
 				try {
+					{
 						searchSitePageList(siteRequest, false, true, false).onSuccess(listSitePage -> {
 							response200SearchSitePage(listSitePage).onSuccess(response -> {
 								eventHandler.handle(Future.succeededFuture(response));
@@ -121,10 +122,10 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							LOG.error(String.format("searchSitePage failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
-					} catch(Exception ex) {
-						LOG.error(String.format("searchSitePage failed. "), ex);
-						error(null, eventHandler, ex);
 					}
+				} catch(Exception ex) {
+					LOG.error(String.format("searchSitePage failed. "), ex);
+					error(null, eventHandler, ex);
 				}
 		}).onFailure(ex -> {
 			if("Inactive Token".equals(ex.getMessage()) || StringUtils.startsWith(ex.getMessage(), "invalid_grant:")) {
@@ -233,8 +234,8 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 	@Override
 	public void getSitePage(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
-					{
 				try {
+					{
 						searchSitePageList(siteRequest, false, true, false).onSuccess(listSitePage -> {
 							response200GETSitePage(listSitePage).onSuccess(response -> {
 								eventHandler.handle(Future.succeededFuture(response));
@@ -247,10 +248,10 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							LOG.error(String.format("getSitePage failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
-					} catch(Exception ex) {
-						LOG.error(String.format("getSitePage failed. "), ex);
-						error(null, eventHandler, ex);
 					}
+				} catch(Exception ex) {
+					LOG.error(String.format("getSitePage failed. "), ex);
+					error(null, eventHandler, ex);
 				}
 		}).onFailure(ex -> {
 			if("Inactive Token".equals(ex.getMessage()) || StringUtils.startsWith(ex.getMessage(), "invalid_grant:")) {
@@ -299,7 +300,19 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 		LOG.debug(String.format("postSitePage started. "));
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 
-			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
+			webClient.post(
+					config.getInteger(ConfigKeys.AUTH_PORT)
+					, config.getString(ConfigKeys.AUTH_HOST_NAME)
+					, config.getString(ConfigKeys.AUTH_TOKEN_URI)
+					)
+					.ssl(config.getBoolean(ConfigKeys.AUTH_SSL))
+					.putHeader("Authorization", String.format("Bearer %s", siteRequest.getUser().principal().getString("access_token")))
+					.sendForm(MultiMap.caseInsensitiveMultiMap()
+							.add("grant_type", "urn:ietf:params:oauth:grant-type:uma-ticket")
+							.add("audience", config.getString(ConfigKeys.AUTH_CLIENT))
+							.add("response_mode", "decision")
+							.add("permission", String.format("%s#%s", SitePage.CLASS_SIMPLE_NAME, "POST"))
+			).onFailure(ex -> {
 				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 				eventHandler.handle(Future.succeededFuture(
 					new ServiceResponse(401, "UNAUTHORIZED",
@@ -311,21 +324,21 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							), MultiMap.caseInsensitiveMultiMap()
 					)
 				));
-			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SitePage")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
-					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
-					eventHandler.handle(Future.succeededFuture(
-						new ServiceResponse(401, "UNAUTHORIZED",
-							Buffer.buffer().appendString(
-								new JsonObject()
-									.put("errorCode", "401")
-									.put("errorMessage", msg)
-									.encodePrettily()
-								), MultiMap.caseInsensitiveMultiMap()
-						)
-					));
-				} else {
-					try {
+			}).onSuccess(authorizationDecision -> {
+				try {
+					if(!authorizationDecision.bodyAsJsonObject().getBoolean("result")) {
+						String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+						eventHandler.handle(Future.succeededFuture(
+							new ServiceResponse(401, "UNAUTHORIZED",
+								Buffer.buffer().appendString(
+									new JsonObject()
+										.put("errorCode", "401")
+										.put("errorMessage", msg)
+										.encodePrettily()
+									), MultiMap.caseInsensitiveMultiMap()
+							)
+						));
+					} else {
 						ApiRequest apiRequest = new ApiRequest();
 						apiRequest.setRows(1L);
 						apiRequest.setNumFound(1L);
@@ -360,10 +373,10 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							LOG.error(String.format("postSitePage failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
-					} catch(Exception ex) {
-						LOG.error(String.format("postSitePage failed. "), ex);
-						error(null, eventHandler, ex);
 					}
+				} catch(Exception ex) {
+					LOG.error(String.format("postSitePage failed. "), ex);
+					error(null, eventHandler, ex);
 				}
 			});
 		}).onFailure(ex -> {
@@ -480,7 +493,19 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 		LOG.debug(String.format("patchSitePage started. "));
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 
-			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
+			webClient.post(
+					config.getInteger(ConfigKeys.AUTH_PORT)
+					, config.getString(ConfigKeys.AUTH_HOST_NAME)
+					, config.getString(ConfigKeys.AUTH_TOKEN_URI)
+					)
+					.ssl(config.getBoolean(ConfigKeys.AUTH_SSL))
+					.putHeader("Authorization", String.format("Bearer %s", siteRequest.getUser().principal().getString("access_token")))
+					.sendForm(MultiMap.caseInsensitiveMultiMap()
+							.add("grant_type", "urn:ietf:params:oauth:grant-type:uma-ticket")
+							.add("audience", config.getString(ConfigKeys.AUTH_CLIENT))
+							.add("response_mode", "decision")
+							.add("permission", String.format("%s#%s", SitePage.CLASS_SIMPLE_NAME, "PATCH"))
+			).onFailure(ex -> {
 				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 				eventHandler.handle(Future.succeededFuture(
 					new ServiceResponse(401, "UNAUTHORIZED",
@@ -492,21 +517,21 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							), MultiMap.caseInsensitiveMultiMap()
 					)
 				));
-			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SitePage")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
-					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
-					eventHandler.handle(Future.succeededFuture(
-						new ServiceResponse(401, "UNAUTHORIZED",
-							Buffer.buffer().appendString(
-								new JsonObject()
-									.put("errorCode", "401")
-									.put("errorMessage", msg)
-									.encodePrettily()
-								), MultiMap.caseInsensitiveMultiMap()
-						)
-					));
-				} else {
-					try {
+			}).onSuccess(authorizationDecision -> {
+				try {
+					if(!authorizationDecision.bodyAsJsonObject().getBoolean("result")) {
+						String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+						eventHandler.handle(Future.succeededFuture(
+							new ServiceResponse(401, "UNAUTHORIZED",
+								Buffer.buffer().appendString(
+									new JsonObject()
+										.put("errorCode", "401")
+										.put("errorMessage", msg)
+										.encodePrettily()
+									), MultiMap.caseInsensitiveMultiMap()
+							)
+						));
+					} else {
 						searchSitePageList(siteRequest, true, false, true).onSuccess(listSitePage -> {
 							try {
 								if(listSitePage.getResponse().getResponse().getNumFound() > 1
@@ -548,10 +573,10 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							LOG.error(String.format("patchSitePage failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
-					} catch(Exception ex) {
-						LOG.error(String.format("patchSitePage failed. "), ex);
-						error(null, eventHandler, ex);
 					}
+				} catch(Exception ex) {
+					LOG.error(String.format("patchSitePage failed. "), ex);
+					error(null, eventHandler, ex);
 				}
 			});
 		}).onFailure(ex -> {
@@ -716,7 +741,19 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 		LOG.debug(String.format("putimportSitePage started. "));
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 
-			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
+			webClient.post(
+					config.getInteger(ConfigKeys.AUTH_PORT)
+					, config.getString(ConfigKeys.AUTH_HOST_NAME)
+					, config.getString(ConfigKeys.AUTH_TOKEN_URI)
+					)
+					.ssl(config.getBoolean(ConfigKeys.AUTH_SSL))
+					.putHeader("Authorization", String.format("Bearer %s", siteRequest.getUser().principal().getString("access_token")))
+					.sendForm(MultiMap.caseInsensitiveMultiMap()
+							.add("grant_type", "urn:ietf:params:oauth:grant-type:uma-ticket")
+							.add("audience", config.getString(ConfigKeys.AUTH_CLIENT))
+							.add("response_mode", "decision")
+							.add("permission", String.format("%s#%s", SitePage.CLASS_SIMPLE_NAME, "PUTImport"))
+			).onFailure(ex -> {
 				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 				eventHandler.handle(Future.succeededFuture(
 					new ServiceResponse(401, "UNAUTHORIZED",
@@ -728,21 +765,21 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							), MultiMap.caseInsensitiveMultiMap()
 					)
 				));
-			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SitePage")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
-					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
-					eventHandler.handle(Future.succeededFuture(
-						new ServiceResponse(401, "UNAUTHORIZED",
-							Buffer.buffer().appendString(
-								new JsonObject()
-									.put("errorCode", "401")
-									.put("errorMessage", msg)
-									.encodePrettily()
-								), MultiMap.caseInsensitiveMultiMap()
-						)
-					));
-				} else {
-					try {
+			}).onSuccess(authorizationDecision -> {
+				try {
+					if(!authorizationDecision.bodyAsJsonObject().getBoolean("result")) {
+						String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+						eventHandler.handle(Future.succeededFuture(
+							new ServiceResponse(401, "UNAUTHORIZED",
+								Buffer.buffer().appendString(
+									new JsonObject()
+										.put("errorCode", "401")
+										.put("errorMessage", msg)
+										.encodePrettily()
+									), MultiMap.caseInsensitiveMultiMap()
+							)
+						));
+					} else {
 						try {
 							ApiRequest apiRequest = new ApiRequest();
 							JsonArray jsonArray = Optional.ofNullable(siteRequest.getJsonObject()).map(o -> o.getJsonArray("list")).orElse(new JsonArray());
@@ -773,10 +810,10 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							LOG.error(String.format("putimportSitePage failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						}
-					} catch(Exception ex) {
-						LOG.error(String.format("putimportSitePage failed. "), ex);
-						error(null, eventHandler, ex);
 					}
+				} catch(Exception ex) {
+					LOG.error(String.format("putimportSitePage failed. "), ex);
+					error(null, eventHandler, ex);
 				}
 			});
 		}).onFailure(ex -> {
@@ -1000,8 +1037,8 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 	@Override
 	public void searchpageSitePage(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
-					{
 				try {
+					{
 						searchSitePageList(siteRequest, false, true, false).onSuccess(listSitePage -> {
 							response200SearchPageSitePage(listSitePage).onSuccess(response -> {
 								eventHandler.handle(Future.succeededFuture(response));
@@ -1014,10 +1051,10 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							LOG.error(String.format("searchpageSitePage failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
-					} catch(Exception ex) {
-						LOG.error(String.format("searchpageSitePage failed. "), ex);
-						error(null, eventHandler, ex);
 					}
+				} catch(Exception ex) {
+					LOG.error(String.format("searchpageSitePage failed. "), ex);
+					error(null, eventHandler, ex);
 				}
 		}).onFailure(ex -> {
 			if("Inactive Token".equals(ex.getMessage()) || StringUtils.startsWith(ex.getMessage(), "invalid_grant:")) {
@@ -1349,6 +1386,10 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 					StatsField stats = searchList.getResponse().getStats().getStatsFields().get(statsFieldIndexed2);
 					Instant min = Optional.ofNullable(stats.getMin()).map(val -> Instant.parse(val.toString())).orElse(Instant.now());
 					Instant max = Optional.ofNullable(stats.getMax()).map(val -> Instant.parse(val.toString())).orElse(Instant.now());
+					if(min.equals(max)) {
+						min = min.minus(1, ChronoUnit.DAYS);
+						max = max.plus(2, ChronoUnit.DAYS);
+					}
 					Duration duration = Duration.between(min, max);
 					String gap = "DAY";
 					if(duration.toDays() >= 365)

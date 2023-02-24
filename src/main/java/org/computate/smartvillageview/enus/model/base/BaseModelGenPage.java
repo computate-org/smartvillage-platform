@@ -19,6 +19,7 @@ import org.computate.search.wrap.Wrap;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.time.Duration;
 import java.time.Instant;
 import io.vertx.core.json.JsonObject;
@@ -163,6 +164,10 @@ public class BaseModelGenPage extends BaseModelGenPageGen<PageLayout> {
 				JsonObject stats = json.getJsonObject("stats");
 				Instant min = Optional.ofNullable(stats.getString("min")).map(val -> Instant.parse(val.toString())).orElse(Instant.now());
 				Instant max = Optional.ofNullable(stats.getString("max")).map(val -> Instant.parse(val.toString())).orElse(Instant.now());
+				if(min.equals(max)) {
+					min = min.minus(1, ChronoUnit.DAYS);
+					max = max.plus(2, ChronoUnit.DAYS);
+				}
 				Duration duration = Duration.between(min, max);
 				String gap = "DAY";
 				if(duration.toDays() >= 365)

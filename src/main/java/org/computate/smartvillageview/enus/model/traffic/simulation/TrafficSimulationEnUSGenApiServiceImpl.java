@@ -22,6 +22,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.time.Instant;
 import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 import org.computate.search.response.solr.SolrResponse.StatsField;
 import java.util.stream.Collectors;
 import io.vertx.core.json.Json;
@@ -109,7 +110,19 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 	public void searchTrafficSimulation(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 
-			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
+			webClient.post(
+					config.getInteger(ConfigKeys.AUTH_PORT)
+					, config.getString(ConfigKeys.AUTH_HOST_NAME)
+					, config.getString(ConfigKeys.AUTH_TOKEN_URI)
+					)
+					.ssl(config.getBoolean(ConfigKeys.AUTH_SSL))
+					.putHeader("Authorization", String.format("Bearer %s", siteRequest.getUser().principal().getString("access_token")))
+					.sendForm(MultiMap.caseInsensitiveMultiMap()
+							.add("grant_type", "urn:ietf:params:oauth:grant-type:uma-ticket")
+							.add("audience", config.getString(ConfigKeys.AUTH_CLIENT))
+							.add("response_mode", "decision")
+							.add("permission", String.format("%s#%s", TrafficSimulation.CLASS_SIMPLE_NAME, "Search"))
+			).onFailure(ex -> {
 				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 				eventHandler.handle(Future.succeededFuture(
 					new ServiceResponse(401, "UNAUTHORIZED",
@@ -121,21 +134,21 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 							), MultiMap.caseInsensitiveMultiMap()
 					)
 				));
-			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_TrafficSimulation")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
-					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
-					eventHandler.handle(Future.succeededFuture(
-						new ServiceResponse(401, "UNAUTHORIZED",
-							Buffer.buffer().appendString(
-								new JsonObject()
-									.put("errorCode", "401")
-									.put("errorMessage", msg)
-									.encodePrettily()
-								), MultiMap.caseInsensitiveMultiMap()
-						)
-					));
-				} else {
-					try {
+			}).onSuccess(authorizationDecision -> {
+				try {
+					if(!authorizationDecision.bodyAsJsonObject().getBoolean("result")) {
+						String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+						eventHandler.handle(Future.succeededFuture(
+							new ServiceResponse(401, "UNAUTHORIZED",
+								Buffer.buffer().appendString(
+									new JsonObject()
+										.put("errorCode", "401")
+										.put("errorMessage", msg)
+										.encodePrettily()
+									), MultiMap.caseInsensitiveMultiMap()
+							)
+						));
+					} else {
 						searchTrafficSimulationList(siteRequest, false, true, false).onSuccess(listTrafficSimulation -> {
 							response200SearchTrafficSimulation(listTrafficSimulation).onSuccess(response -> {
 								eventHandler.handle(Future.succeededFuture(response));
@@ -148,10 +161,10 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 							LOG.error(String.format("searchTrafficSimulation failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
-					} catch(Exception ex) {
-						LOG.error(String.format("searchTrafficSimulation failed. "), ex);
-						error(null, eventHandler, ex);
 					}
+				} catch(Exception ex) {
+					LOG.error(String.format("searchTrafficSimulation failed. "), ex);
+					error(null, eventHandler, ex);
 				}
 			});
 		}).onFailure(ex -> {
@@ -262,7 +275,19 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 	public void getTrafficSimulation(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 
-			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
+			webClient.post(
+					config.getInteger(ConfigKeys.AUTH_PORT)
+					, config.getString(ConfigKeys.AUTH_HOST_NAME)
+					, config.getString(ConfigKeys.AUTH_TOKEN_URI)
+					)
+					.ssl(config.getBoolean(ConfigKeys.AUTH_SSL))
+					.putHeader("Authorization", String.format("Bearer %s", siteRequest.getUser().principal().getString("access_token")))
+					.sendForm(MultiMap.caseInsensitiveMultiMap()
+							.add("grant_type", "urn:ietf:params:oauth:grant-type:uma-ticket")
+							.add("audience", config.getString(ConfigKeys.AUTH_CLIENT))
+							.add("response_mode", "decision")
+							.add("permission", String.format("%s#%s", TrafficSimulation.CLASS_SIMPLE_NAME, "GET"))
+			).onFailure(ex -> {
 				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 				eventHandler.handle(Future.succeededFuture(
 					new ServiceResponse(401, "UNAUTHORIZED",
@@ -274,21 +299,21 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 							), MultiMap.caseInsensitiveMultiMap()
 					)
 				));
-			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_TrafficSimulation")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
-					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
-					eventHandler.handle(Future.succeededFuture(
-						new ServiceResponse(401, "UNAUTHORIZED",
-							Buffer.buffer().appendString(
-								new JsonObject()
-									.put("errorCode", "401")
-									.put("errorMessage", msg)
-									.encodePrettily()
-								), MultiMap.caseInsensitiveMultiMap()
-						)
-					));
-				} else {
-					try {
+			}).onSuccess(authorizationDecision -> {
+				try {
+					if(!authorizationDecision.bodyAsJsonObject().getBoolean("result")) {
+						String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+						eventHandler.handle(Future.succeededFuture(
+							new ServiceResponse(401, "UNAUTHORIZED",
+								Buffer.buffer().appendString(
+									new JsonObject()
+										.put("errorCode", "401")
+										.put("errorMessage", msg)
+										.encodePrettily()
+									), MultiMap.caseInsensitiveMultiMap()
+							)
+						));
+					} else {
 						searchTrafficSimulationList(siteRequest, false, true, false).onSuccess(listTrafficSimulation -> {
 							response200GETTrafficSimulation(listTrafficSimulation).onSuccess(response -> {
 								eventHandler.handle(Future.succeededFuture(response));
@@ -301,10 +326,10 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 							LOG.error(String.format("getTrafficSimulation failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
-					} catch(Exception ex) {
-						LOG.error(String.format("getTrafficSimulation failed. "), ex);
-						error(null, eventHandler, ex);
 					}
+				} catch(Exception ex) {
+					LOG.error(String.format("getTrafficSimulation failed. "), ex);
+					error(null, eventHandler, ex);
 				}
 			});
 		}).onFailure(ex -> {
@@ -354,7 +379,19 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 		LOG.debug(String.format("patchTrafficSimulation started. "));
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 
-			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
+			webClient.post(
+					config.getInteger(ConfigKeys.AUTH_PORT)
+					, config.getString(ConfigKeys.AUTH_HOST_NAME)
+					, config.getString(ConfigKeys.AUTH_TOKEN_URI)
+					)
+					.ssl(config.getBoolean(ConfigKeys.AUTH_SSL))
+					.putHeader("Authorization", String.format("Bearer %s", siteRequest.getUser().principal().getString("access_token")))
+					.sendForm(MultiMap.caseInsensitiveMultiMap()
+							.add("grant_type", "urn:ietf:params:oauth:grant-type:uma-ticket")
+							.add("audience", config.getString(ConfigKeys.AUTH_CLIENT))
+							.add("response_mode", "decision")
+							.add("permission", String.format("%s#%s", TrafficSimulation.CLASS_SIMPLE_NAME, "PATCH"))
+			).onFailure(ex -> {
 				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 				eventHandler.handle(Future.succeededFuture(
 					new ServiceResponse(401, "UNAUTHORIZED",
@@ -366,21 +403,21 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 							), MultiMap.caseInsensitiveMultiMap()
 					)
 				));
-			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_TrafficSimulation")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
-					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
-					eventHandler.handle(Future.succeededFuture(
-						new ServiceResponse(401, "UNAUTHORIZED",
-							Buffer.buffer().appendString(
-								new JsonObject()
-									.put("errorCode", "401")
-									.put("errorMessage", msg)
-									.encodePrettily()
-								), MultiMap.caseInsensitiveMultiMap()
-						)
-					));
-				} else {
-					try {
+			}).onSuccess(authorizationDecision -> {
+				try {
+					if(!authorizationDecision.bodyAsJsonObject().getBoolean("result")) {
+						String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+						eventHandler.handle(Future.succeededFuture(
+							new ServiceResponse(401, "UNAUTHORIZED",
+								Buffer.buffer().appendString(
+									new JsonObject()
+										.put("errorCode", "401")
+										.put("errorMessage", msg)
+										.encodePrettily()
+									), MultiMap.caseInsensitiveMultiMap()
+							)
+						));
+					} else {
 						searchTrafficSimulationList(siteRequest, false, true, true).onSuccess(listTrafficSimulation -> {
 							try {
 								if(listTrafficSimulation.getResponse().getResponse().getNumFound() > 1
@@ -423,10 +460,10 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 							LOG.error(String.format("patchTrafficSimulation failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
-					} catch(Exception ex) {
-						LOG.error(String.format("patchTrafficSimulation failed. "), ex);
-						error(null, eventHandler, ex);
 					}
+				} catch(Exception ex) {
+					LOG.error(String.format("patchTrafficSimulation failed. "), ex);
+					error(null, eventHandler, ex);
 				}
 			});
 		}).onFailure(ex -> {
@@ -834,7 +871,19 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 		LOG.debug(String.format("postTrafficSimulation started. "));
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 
-			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
+			webClient.post(
+					config.getInteger(ConfigKeys.AUTH_PORT)
+					, config.getString(ConfigKeys.AUTH_HOST_NAME)
+					, config.getString(ConfigKeys.AUTH_TOKEN_URI)
+					)
+					.ssl(config.getBoolean(ConfigKeys.AUTH_SSL))
+					.putHeader("Authorization", String.format("Bearer %s", siteRequest.getUser().principal().getString("access_token")))
+					.sendForm(MultiMap.caseInsensitiveMultiMap()
+							.add("grant_type", "urn:ietf:params:oauth:grant-type:uma-ticket")
+							.add("audience", config.getString(ConfigKeys.AUTH_CLIENT))
+							.add("response_mode", "decision")
+							.add("permission", String.format("%s#%s", TrafficSimulation.CLASS_SIMPLE_NAME, "POST"))
+			).onFailure(ex -> {
 				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 				eventHandler.handle(Future.succeededFuture(
 					new ServiceResponse(401, "UNAUTHORIZED",
@@ -846,21 +895,21 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 							), MultiMap.caseInsensitiveMultiMap()
 					)
 				));
-			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_TrafficSimulation")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
-					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
-					eventHandler.handle(Future.succeededFuture(
-						new ServiceResponse(401, "UNAUTHORIZED",
-							Buffer.buffer().appendString(
-								new JsonObject()
-									.put("errorCode", "401")
-									.put("errorMessage", msg)
-									.encodePrettily()
-								), MultiMap.caseInsensitiveMultiMap()
-						)
-					));
-				} else {
-					try {
+			}).onSuccess(authorizationDecision -> {
+				try {
+					if(!authorizationDecision.bodyAsJsonObject().getBoolean("result")) {
+						String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+						eventHandler.handle(Future.succeededFuture(
+							new ServiceResponse(401, "UNAUTHORIZED",
+								Buffer.buffer().appendString(
+									new JsonObject()
+										.put("errorCode", "401")
+										.put("errorMessage", msg)
+										.encodePrettily()
+									), MultiMap.caseInsensitiveMultiMap()
+							)
+						));
+					} else {
 						ApiRequest apiRequest = new ApiRequest();
 						apiRequest.setRows(1L);
 						apiRequest.setNumFound(1L);
@@ -896,10 +945,10 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 							LOG.error(String.format("postTrafficSimulation failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
-					} catch(Exception ex) {
-						LOG.error(String.format("postTrafficSimulation failed. "), ex);
-						error(null, eventHandler, ex);
 					}
+				} catch(Exception ex) {
+					LOG.error(String.format("postTrafficSimulation failed. "), ex);
+					error(null, eventHandler, ex);
 				}
 			});
 		}).onFailure(ex -> {
@@ -1331,7 +1380,19 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 		LOG.debug(String.format("putimportTrafficSimulation started. "));
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 
-			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
+			webClient.post(
+					config.getInteger(ConfigKeys.AUTH_PORT)
+					, config.getString(ConfigKeys.AUTH_HOST_NAME)
+					, config.getString(ConfigKeys.AUTH_TOKEN_URI)
+					)
+					.ssl(config.getBoolean(ConfigKeys.AUTH_SSL))
+					.putHeader("Authorization", String.format("Bearer %s", siteRequest.getUser().principal().getString("access_token")))
+					.sendForm(MultiMap.caseInsensitiveMultiMap()
+							.add("grant_type", "urn:ietf:params:oauth:grant-type:uma-ticket")
+							.add("audience", config.getString(ConfigKeys.AUTH_CLIENT))
+							.add("response_mode", "decision")
+							.add("permission", String.format("%s#%s", TrafficSimulation.CLASS_SIMPLE_NAME, "PUTImport"))
+			).onFailure(ex -> {
 				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 				eventHandler.handle(Future.succeededFuture(
 					new ServiceResponse(401, "UNAUTHORIZED",
@@ -1343,21 +1404,21 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 							), MultiMap.caseInsensitiveMultiMap()
 					)
 				));
-			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_TrafficSimulation")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
-					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
-					eventHandler.handle(Future.succeededFuture(
-						new ServiceResponse(401, "UNAUTHORIZED",
-							Buffer.buffer().appendString(
-								new JsonObject()
-									.put("errorCode", "401")
-									.put("errorMessage", msg)
-									.encodePrettily()
-								), MultiMap.caseInsensitiveMultiMap()
-						)
-					));
-				} else {
-					try {
+			}).onSuccess(authorizationDecision -> {
+				try {
+					if(!authorizationDecision.bodyAsJsonObject().getBoolean("result")) {
+						String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+						eventHandler.handle(Future.succeededFuture(
+							new ServiceResponse(401, "UNAUTHORIZED",
+								Buffer.buffer().appendString(
+									new JsonObject()
+										.put("errorCode", "401")
+										.put("errorMessage", msg)
+										.encodePrettily()
+									), MultiMap.caseInsensitiveMultiMap()
+							)
+						));
+					} else {
 						try {
 							ApiRequest apiRequest = new ApiRequest();
 							JsonArray jsonArray = Optional.ofNullable(siteRequest.getJsonObject()).map(o -> o.getJsonArray("list")).orElse(new JsonArray());
@@ -1388,10 +1449,10 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 							LOG.error(String.format("putimportTrafficSimulation failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						}
-					} catch(Exception ex) {
-						LOG.error(String.format("putimportTrafficSimulation failed. "), ex);
-						error(null, eventHandler, ex);
 					}
+				} catch(Exception ex) {
+					LOG.error(String.format("putimportTrafficSimulation failed. "), ex);
+					error(null, eventHandler, ex);
 				}
 			});
 		}).onFailure(ex -> {
@@ -1616,7 +1677,19 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 	public void searchpageTrafficSimulation(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 
-			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
+			webClient.post(
+					config.getInteger(ConfigKeys.AUTH_PORT)
+					, config.getString(ConfigKeys.AUTH_HOST_NAME)
+					, config.getString(ConfigKeys.AUTH_TOKEN_URI)
+					)
+					.ssl(config.getBoolean(ConfigKeys.AUTH_SSL))
+					.putHeader("Authorization", String.format("Bearer %s", siteRequest.getUser().principal().getString("access_token")))
+					.sendForm(MultiMap.caseInsensitiveMultiMap()
+							.add("grant_type", "urn:ietf:params:oauth:grant-type:uma-ticket")
+							.add("audience", config.getString(ConfigKeys.AUTH_CLIENT))
+							.add("response_mode", "decision")
+							.add("permission", String.format("%s#%s", TrafficSimulation.CLASS_SIMPLE_NAME, "SearchPage"))
+			).onFailure(ex -> {
 				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 				eventHandler.handle(Future.succeededFuture(
 					new ServiceResponse(401, "UNAUTHORIZED",
@@ -1628,21 +1701,21 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 							), MultiMap.caseInsensitiveMultiMap()
 					)
 				));
-			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_TrafficSimulation")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
-					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
-					eventHandler.handle(Future.succeededFuture(
-						new ServiceResponse(401, "UNAUTHORIZED",
-							Buffer.buffer().appendString(
-								new JsonObject()
-									.put("errorCode", "401")
-									.put("errorMessage", msg)
-									.encodePrettily()
-								), MultiMap.caseInsensitiveMultiMap()
-						)
-					));
-				} else {
-					try {
+			}).onSuccess(authorizationDecision -> {
+				try {
+					if(!authorizationDecision.bodyAsJsonObject().getBoolean("result")) {
+						String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+						eventHandler.handle(Future.succeededFuture(
+							new ServiceResponse(401, "UNAUTHORIZED",
+								Buffer.buffer().appendString(
+									new JsonObject()
+										.put("errorCode", "401")
+										.put("errorMessage", msg)
+										.encodePrettily()
+									), MultiMap.caseInsensitiveMultiMap()
+							)
+						));
+					} else {
 						searchTrafficSimulationList(siteRequest, false, true, false).onSuccess(listTrafficSimulation -> {
 							response200SearchPageTrafficSimulation(listTrafficSimulation).onSuccess(response -> {
 								eventHandler.handle(Future.succeededFuture(response));
@@ -1655,10 +1728,10 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 							LOG.error(String.format("searchpageTrafficSimulation failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
-					} catch(Exception ex) {
-						LOG.error(String.format("searchpageTrafficSimulation failed. "), ex);
-						error(null, eventHandler, ex);
 					}
+				} catch(Exception ex) {
+					LOG.error(String.format("searchpageTrafficSimulation failed. "), ex);
+					error(null, eventHandler, ex);
 				}
 			});
 		}).onFailure(ex -> {
@@ -1741,7 +1814,19 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 	public void mapsearchpageTrafficSimulation(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 
-			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
+			webClient.post(
+					config.getInteger(ConfigKeys.AUTH_PORT)
+					, config.getString(ConfigKeys.AUTH_HOST_NAME)
+					, config.getString(ConfigKeys.AUTH_TOKEN_URI)
+					)
+					.ssl(config.getBoolean(ConfigKeys.AUTH_SSL))
+					.putHeader("Authorization", String.format("Bearer %s", siteRequest.getUser().principal().getString("access_token")))
+					.sendForm(MultiMap.caseInsensitiveMultiMap()
+							.add("grant_type", "urn:ietf:params:oauth:grant-type:uma-ticket")
+							.add("audience", config.getString(ConfigKeys.AUTH_CLIENT))
+							.add("response_mode", "decision")
+							.add("permission", String.format("%s#%s", TrafficSimulation.CLASS_SIMPLE_NAME, "MapSearchPage"))
+			).onFailure(ex -> {
 				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 				eventHandler.handle(Future.succeededFuture(
 					new ServiceResponse(401, "UNAUTHORIZED",
@@ -1753,21 +1838,21 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 							), MultiMap.caseInsensitiveMultiMap()
 					)
 				));
-			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_TrafficSimulation")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
-					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
-					eventHandler.handle(Future.succeededFuture(
-						new ServiceResponse(401, "UNAUTHORIZED",
-							Buffer.buffer().appendString(
-								new JsonObject()
-									.put("errorCode", "401")
-									.put("errorMessage", msg)
-									.encodePrettily()
-								), MultiMap.caseInsensitiveMultiMap()
-						)
-					));
-				} else {
-					try {
+			}).onSuccess(authorizationDecision -> {
+				try {
+					if(!authorizationDecision.bodyAsJsonObject().getBoolean("result")) {
+						String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+						eventHandler.handle(Future.succeededFuture(
+							new ServiceResponse(401, "UNAUTHORIZED",
+								Buffer.buffer().appendString(
+									new JsonObject()
+										.put("errorCode", "401")
+										.put("errorMessage", msg)
+										.encodePrettily()
+									), MultiMap.caseInsensitiveMultiMap()
+							)
+						));
+					} else {
 						searchTrafficSimulationList(siteRequest, false, true, false).onSuccess(listTrafficSimulation -> {
 							response200MapSearchPageTrafficSimulation(listTrafficSimulation).onSuccess(response -> {
 								eventHandler.handle(Future.succeededFuture(response));
@@ -1780,10 +1865,10 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 							LOG.error(String.format("mapsearchpageTrafficSimulation failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
-					} catch(Exception ex) {
-						LOG.error(String.format("mapsearchpageTrafficSimulation failed. "), ex);
-						error(null, eventHandler, ex);
 					}
+				} catch(Exception ex) {
+					LOG.error(String.format("mapsearchpageTrafficSimulation failed. "), ex);
+					error(null, eventHandler, ex);
 				}
 			});
 		}).onFailure(ex -> {
@@ -2133,6 +2218,10 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 					StatsField stats = searchList.getResponse().getStats().getStatsFields().get(statsFieldIndexed2);
 					Instant min = Optional.ofNullable(stats.getMin()).map(val -> Instant.parse(val.toString())).orElse(Instant.now());
 					Instant max = Optional.ofNullable(stats.getMax()).map(val -> Instant.parse(val.toString())).orElse(Instant.now());
+					if(min.equals(max)) {
+						min = min.minus(1, ChronoUnit.DAYS);
+						max = max.plus(2, ChronoUnit.DAYS);
+					}
 					Duration duration = Duration.between(min, max);
 					String gap = "DAY";
 					if(duration.toDays() >= 365)

@@ -14,6 +14,7 @@ import java.time.LocalTime;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Locale;
@@ -160,6 +161,10 @@ public class TrafficLightGenPage extends TrafficLightGenPageGen<MapResultPage> {
 				JsonObject stats = json.getJsonObject("stats");
 				Instant min = Optional.ofNullable(stats.getString("min")).map(val -> Instant.parse(val.toString())).orElse(Instant.now());
 				Instant max = Optional.ofNullable(stats.getString("max")).map(val -> Instant.parse(val.toString())).orElse(Instant.now());
+				if(min.equals(max)) {
+					min = min.minus(1, ChronoUnit.DAYS);
+					max = max.plus(2, ChronoUnit.DAYS);
+				}
 				Duration duration = Duration.between(min, max);
 				String gap = "DAY";
 				if(duration.toDays() >= 365)
@@ -295,18 +300,36 @@ public class TrafficLightGenPage extends TrafficLightGenPageGen<MapResultPage> {
 	}
 
 	@Override
+	protected void _rangeGap(Wrap<String> w) {
+		if(serviceRequest.getParams().getJsonObject("query").getString("facet.range.gap", null) != null)
+			w.o(Optional.ofNullable(searchListTrafficLight_.getFacetRangeGap()).orElse(null));
+	}
+
+	@Override
+	protected void _rangeEnd(Wrap<ZonedDateTime> w) {
+		if(serviceRequest.getParams().getJsonObject("query").getString("facet.range.end", null) != null)
+			w.o(Optional.ofNullable(searchListTrafficLight_.getFacetRangeEnd()).map(s -> TimeTool.parseZonedDateTime(defaultTimeZone, s)).orElse(null));
+	}
+
+	@Override
+	protected void _rangeStart(Wrap<ZonedDateTime> w) {
+		if(serviceRequest.getParams().getJsonObject("query").getString("facet.range.start", null) != null)
+			w.o(Optional.ofNullable(searchListTrafficLight_.getFacetRangeStart()).map(s -> TimeTool.parseZonedDateTime(defaultTimeZone, s)).orElse(null));
+	}
+
+	@Override
 	protected void _defaultRangeGap(Wrap<String> w) {
-		w.o(Optional.ofNullable(searchListTrafficLight_.getFacetRangeGap()).orElse(Optional.ofNullable(defaultRangeStats).map(s -> s.getString("defaultRangeGap")).orElse("+1DAY")));
+		w.o(Optional.ofNullable(rangeGap).orElse(Optional.ofNullable(defaultRangeStats).map(s -> s.getString("defaultRangeGap")).orElse("+1DAY")));
 	}
 
 	@Override
 	protected void _defaultRangeEnd(Wrap<ZonedDateTime> w) {
-		w.o(Optional.ofNullable(searchListTrafficLight_.getFacetRangeEnd()).map(s -> TimeTool.parseZonedDateTime(defaultTimeZone, s)).orElse(Optional.ofNullable(defaultRangeStats).map(s -> Instant.parse(s.getString("defaultRangeEnd")).atZone(defaultTimeZone)).orElse(ZonedDateTime.now(defaultTimeZone).toLocalDate().atStartOfDay(defaultTimeZone).plusDays(1))));
+		w.o(Optional.ofNullable(rangeEnd).orElse(Optional.ofNullable(defaultRangeStats).map(s -> Instant.parse(s.getString("defaultRangeEnd")).atZone(defaultTimeZone)).orElse(ZonedDateTime.now(defaultTimeZone).toLocalDate().atStartOfDay(defaultTimeZone).plusDays(1))));
 	}
 
 	@Override
 	protected void _defaultRangeStart(Wrap<ZonedDateTime> w) {
-		w.o(Optional.ofNullable(searchListTrafficLight_.getFacetRangeStart()).map(s -> TimeTool.parseZonedDateTime(defaultTimeZone, s)).orElse(Optional.ofNullable(defaultRangeStats).map(s -> Instant.parse(s.getString("defaultRangeStart")).atZone(defaultTimeZone)).orElse(defaultRangeEnd.minusDays(7).toLocalDate().atStartOfDay(defaultTimeZone))));
+		w.o(Optional.ofNullable(rangeStart).orElse(Optional.ofNullable(defaultRangeStats).map(s -> Instant.parse(s.getString("defaultRangeStart")).atZone(defaultTimeZone)).orElse(defaultRangeEnd.minusDays(7).toLocalDate().atStartOfDay(defaultTimeZone))));
 	}
 
 	@Override

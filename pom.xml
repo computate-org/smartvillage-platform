@@ -79,6 +79,7 @@
 		<maven-javadoc-plugin.version>3.4.1</maven-javadoc-plugin.version>
 		<maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
 		<postgresql.version>42.5.1</postgresql.version>
+		<ongres-scram.version>2.1</ongres-scram.version>
 		<junit.version>5.9.1</junit.version>
 		<mockito.version>4.10.0</mockito.version>
 
@@ -173,6 +174,18 @@
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>${postgresql.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.ongres.scram</groupId>
+			<artifactId>common</artifactId>
+			<version>${ongres-scram.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.ongres.scram</groupId>
+			<artifactId>client</artifactId>
+			<version>${ongres-scram.version}</version>
 		</dependency>
 
 		<!-- ################# -->

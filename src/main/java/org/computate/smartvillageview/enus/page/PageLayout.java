@@ -313,6 +313,15 @@ public class PageLayout extends PageLayoutGen<Object> {
 		w.o(Locale.forLanguageTag(defaultLocaleId));
 	}
 
+	protected void _rangeGap(Wrap<String> w) {
+	}
+
+	protected void _rangeEnd(Wrap<ZonedDateTime> w) {
+	}
+
+	protected void _rangeStart(Wrap<ZonedDateTime> w) {
+	}
+
 	protected void _defaultRangeStats(Wrap<JsonObject> w) {
 	}
 

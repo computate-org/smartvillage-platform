@@ -22,6 +22,8 @@ touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvill
 touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/page/HomePage.java
 touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/vertx/MainVerticle.java
 touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/vertx/WorkerVerticle.java
+
+touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/model/traffic/simulation/map/TrafficSimulationMapPage.java
 sleep 5
 touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/result/iotnode/step/IotNodeStep.java
 touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/model/traffic/person/step/PersonStep.java

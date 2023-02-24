@@ -212,4 +212,6 @@ public class ConfigKeys extends ComputateConfigKeys {
 	 * The FIWARE Context Broker v2 API URI prefix. 
 	 **/
 	public static final String FIWARE_API_URI = "FIWARE_API_URI";
+
+	public static final String SOLR_SSL = "SOLR_SSL";
 }
