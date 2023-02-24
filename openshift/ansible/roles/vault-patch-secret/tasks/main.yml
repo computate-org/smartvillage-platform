@@ -1,0 +1,36 @@
+---
+- name: Fetch the database sso secrets
+  set_fact:
+    SOURCE_SECRET: "{{ query('kubernetes.core.k8s', kind='Secret', resource_name=SOURCE_SECRET_NAME, namespace=SOURCE_NAMESPACE, validate_certs=false)[0].data }}"
+  vars:
+    K8S_AUTH_HOST: "{{ REDHAT_OPENSHIFT_HOST }}"
+    K8S_AUTH_API_KEY: "{{ REDHAT_OPENSHIFT_TOKEN }}"
+  register: fetch_secret
+  ignore_errors: true
+- fail:
+    msg: >
+      Missing variables REDHAT_OPENSHIFT_HOST and REDHAT_OPENSHIFT_TOKEN. 
+      Find the login command to OpenShift and and set these variables, for example: 
+      ansible-playbook ~/.local/src/smartabyar-smartvillage/openshift/ansible/sso-configure-database.yml
+      -e REDHAT_OPENSHIFT_HOST=https://api.crc.testing:6443
+      -e REDHAT_OPENSHIFT_TOKEN=sha256~KNsu4uF9jsFUVZJE6smixzmWhoHVq9rgADUICQIrrDI
+  when: fetch_secret.failed
+
+- name: Get vault init dev secrets
+  set_fact:
+    VAULT_ROOT_TOKEN: "{{ query('kubernetes.core.k8s', kind='Secret', resource_name='vault-init', namespace=VAULT_NAMESPACE, validate_certs=false)[0].data.VAULT_ROOT_TOKEN | b64decode }}"
+  vars:
+    K8S_AUTH_HOST: "{{ REDHAT_OPENSHIFT_HOST }}"
+    K8S_AUTH_API_KEY: "{{ REDHAT_OPENSHIFT_TOKEN }}"
+  when: VAULT_ROOT_TOKEN is not defined or VAULT_ROOT_TOKEN == ''
+
+- name: Write secret value to vault
+  shell: >-
+    {{ VAULT_COMMAND_OC }} env VAULT_TOKEN="{{ VAULT_ROOT_TOKEN }}" 
+    vault kv put -mount={{ DESTINATION_VAULT_MOUNT }} {{ DESTINATION_SECRET_NAME }} 
+    {% if SOURCE_SECRET_KEYS and DESTINATION_SECRET_KEYS %}
+    {% for SOURCE_SECRET_KEY in SOURCE_SECRET_KEYS %} {{ DESTINATION_SECRET_KEYS[loop.index0] }}="{{ SOURCE_SECRET[SOURCE_SECRET_KEY] | b64decode }}"{% endfor %}
+    {% elif SOURCE_SECRET_KEYS %}
+    {% for SOURCE_SECRET_KEY in SOURCE_SECRET_KEYS %} {{ SOURCE_SECRET_KEY }}="{{ SOURCE_SECRET[SOURCE_SECRET_KEY] | b64decode }}"{% endfor %}
+    {% endif %}
+    {% if COPY_KEYS %}{% for COPY_KEY in COPY_KEYS %}{% if SOURCE_SECRET[COPY_KEY] %} {{ COPY_KEY }}="{{ SOURCE_SECRET[COPY_KEY] | b64decode }}"{% endif %}{% endfor %}{% endif %}

@@ -3,5 +3,5 @@
   hosts: localhost
   connection: local
   roles:
-    - sso-configure-database
+    - sso-patch-vault
 
