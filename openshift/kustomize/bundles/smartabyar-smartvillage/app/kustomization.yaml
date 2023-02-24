@@ -4,3 +4,6 @@ resources:
   - randomsecrets/
   - kafkas/
   - kafkatopics/
+  - secretenginemounts/
+  - secretstores/
+  - externalsecrets/

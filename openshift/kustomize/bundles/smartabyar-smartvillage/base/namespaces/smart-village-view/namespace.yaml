@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: smart-village-view
+  labels:
+    database-engine-admin: 'true'
+spec: {}

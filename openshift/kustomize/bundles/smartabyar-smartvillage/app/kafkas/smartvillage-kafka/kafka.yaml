@@ -2,7 +2,7 @@ kind: Kafka
 apiVersion: kafka.strimzi.io/v1beta2
 metadata:
   name: smartvillage-kafka
-  namespace: smartabyar-smartvillage
+  namespace: smart-village-view
 spec:
   kafka:
     version: 3.2.3

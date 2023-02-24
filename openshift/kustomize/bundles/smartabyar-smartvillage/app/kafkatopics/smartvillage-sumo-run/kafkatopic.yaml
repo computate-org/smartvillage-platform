@@ -4,7 +4,7 @@ metadata:
   name: smartvillage-sumo-run
   labels:
     strimzi.io/cluster: smartvillage-kafka
-  namespace: smartabyar-smartvillage
+  namespace: smart-village-view
 spec:
   partitions: 10
   replicas: 3

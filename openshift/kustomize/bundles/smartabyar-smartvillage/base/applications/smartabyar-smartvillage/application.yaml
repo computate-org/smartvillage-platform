@@ -10,7 +10,7 @@ spec:
     targetRevision: HEAD
     path: openshift/kustomize/bundles/smartabyar-smartvillage/app
   destination:
-    namespace: smartabyar-smartvillage
+    namespace: smart-village-view
     server: 'https://kubernetes.default.svc'
   syncPolicy:
     automated:

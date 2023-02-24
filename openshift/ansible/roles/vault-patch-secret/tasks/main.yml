@@ -34,3 +34,4 @@
     {% for SOURCE_SECRET_KEY in SOURCE_SECRET_KEYS %} {{ SOURCE_SECRET_KEY }}="{{ SOURCE_SECRET[SOURCE_SECRET_KEY] | b64decode }}"{% endfor %}
     {% endif %}
     {% if COPY_KEYS %}{% for COPY_KEY in COPY_KEYS %}{% if SOURCE_SECRET[COPY_KEY] %} {{ COPY_KEY }}="{{ SOURCE_SECRET[COPY_KEY] | b64decode }}"{% endif %}{% endfor %}{% endif %}
+    {% if COPY_KEY_VALUES %}{% for key, value in COPY_KEY_VALUES.items() %} {{ key }}="{{ value }}"{% endfor %}{% endif %}
