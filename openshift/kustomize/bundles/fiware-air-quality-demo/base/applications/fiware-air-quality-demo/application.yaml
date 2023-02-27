@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: Replace=true
+  name: fiware-air-quality-demo
+  namespace: openshift-gitops
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/FIWARE-Ops/marinera
+    targetRevision: HEAD
+    path: fiware-platform
+    helm:
+      releaseName: fiware-platform
+      parameters:
+
+  destination:
+    namespace: openshift-gitops
+    server: 'https://kubernetes.default.svc'
+  syncPolicy:
+    automated:
+      # resources that no longer exist get deleted on sync
+      prune: true
+      # sync will be attempted again on failure after self heal timeout (5 seconds by default)
+      selfHeal: true
