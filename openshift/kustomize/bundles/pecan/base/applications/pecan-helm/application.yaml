@@ -25,7 +25,6 @@ spec:
         - name: "ingress.hosts"
           value: "{pecan-server-pecan.apps-crc.testing}"
   destination:
-    namespace: pecan
     server: 'https://kubernetes.default.svc'
   syncPolicy:
     automated:

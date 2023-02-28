@@ -21,7 +21,6 @@ spec:
         - name: serviceAccountName
           value: "pecan-betydb"
   destination:
-    namespace: pecan
     server: 'https://kubernetes.default.svc'
   syncPolicy:
     automated:
