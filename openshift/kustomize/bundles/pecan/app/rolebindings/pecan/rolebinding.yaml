@@ -11,6 +11,9 @@ subjects:
   - kind: ServiceAccount
     name: pecan-betydb-agent-injector
     namespace: pecan
+  - kind: ServiceAccount
+    name: pecan-rabbitmq
+    namespace: pecan
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole

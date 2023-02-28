@@ -8,14 +8,29 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://opensource.ncsa.illinois.edu/charts/
-    chart: pecan
-    targetRevision: 0.6.2
+    repoURL: https://github.com/computate-org/pecan-helm.git
+    targetRevision: HEAD
+    path: .
     helm:
       releaseName: pecan
       parameters:
         - name: betydb.enabled
           value: "false"
+        - name: betydb.postgresql.enabled
+          value: "false"
+        - name: betydb.postgresql.postgresqlHost
+          value: "postgres-cluster-ha.postgres.svc.cluster.local"
+        - name: betydb.postgresql.postgresqlUser
+          value: "bety"
+        - name: betydb.postgresql.postgresqlUsername
+          value: "bety"
+        - name: betydb.postgresql.postgresqlDatabase
+          value: "bety"
+        - name: betydb.postgresql.service.port
+          value: "5432"
+        - name: betydb.service.port
+          value: "8000"
+
         - name: clustername
           value: "pecan-server"
         - name: clusterfqdn
@@ -24,6 +39,14 @@ spec:
           value: "true"
         - name: ingress.enabled
           value: "true"
+        - name: "pecan.env.betydb"
+          value: "http://betydb.pecan.svc.cluster.local:8000/"
+        - name: "betydb.betyUser"
+          value: "bety"
+        - name: "betydb.betyDatabase"
+          value: "bety"
+        - name: "betydb.ingress.hosts"
+          value: "{betydb.pecan.svc.cluster.local}"
         - name: "ingress.hosts"
           value: "{pecan-server-pecan.apps-crc.testing}"
   destination:

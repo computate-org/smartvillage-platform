@@ -20,6 +20,8 @@ spec:
           value: "postgres-cluster-ha.postgres.svc.cluster.local"
         - name: postgresql.postgresqlUsername
           value: "bety"
+        - name: postgresql.postgresqlDatabase
+          value: "bety"
         - name: serviceAccountName
           value: "pecan-betydb"
         - name: externalSecret
