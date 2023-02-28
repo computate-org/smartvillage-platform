@@ -18,8 +18,12 @@ spec:
           value: "false"
         - name: postgresql.postgresqlHost
           value: "postgres-cluster-ha.postgres.svc.cluster.local"
+        - name: postgresql.postgresqlUsername
+          value: "bety"
         - name: serviceAccountName
           value: "pecan-betydb"
+        - name: externalSecret
+          value: "false"
   destination:
     server: 'https://kubernetes.default.svc'
   syncPolicy:

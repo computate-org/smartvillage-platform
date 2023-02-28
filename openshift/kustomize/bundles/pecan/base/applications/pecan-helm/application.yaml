@@ -14,6 +14,8 @@ spec:
     helm:
       releaseName: pecan
       parameters:
+        - name: betydb.enabled
+          value: "false"
         - name: clustername
           value: "pecan-server"
         - name: clusterfqdn
