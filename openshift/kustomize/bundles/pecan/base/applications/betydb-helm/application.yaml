@@ -25,6 +25,7 @@ spec:
         - name: externalSecret
           value: "false"
   destination:
+    namespace: pecan
     server: 'https://kubernetes.default.svc'
   syncPolicy:
     automated:

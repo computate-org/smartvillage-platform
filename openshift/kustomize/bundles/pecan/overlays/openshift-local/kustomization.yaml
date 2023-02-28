@@ -3,7 +3,6 @@ kind: Kustomization
 resources:
   - ../../base/
   - namespaces/
-namespace: pecan
 patchesStrategicMerge:
   - applications/betydb-helm/application.yaml
   - applications/pecan-helm/application.yaml
