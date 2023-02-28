@@ -1,0 +1,7 @@
+---
+- name: Configure the SSO database
+  hosts: localhost
+  connection: local
+  roles:
+    - pecan-patch-vault
+

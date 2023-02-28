@@ -3,5 +3,4 @@ kind: Kustomization
 resources:
   - namespaces/
   - helmchartrepositories/
-  - securitycontextconstraints/
   - applications/

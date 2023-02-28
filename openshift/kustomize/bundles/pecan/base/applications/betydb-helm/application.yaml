@@ -3,27 +3,23 @@ kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-options: Replace=true
-  name: pecan-helm
+  name: betydb-helm
   namespace: openshift-gitops
 spec:
   project: default
   source:
-    repoURL: https://opensource.ncsa.illinois.edu/charts/
-    chart: pecan
-    targetRevision: 0.6.2
+    repoURL: https://github.com/computate-org/bety-helm.git
+    targetRevision: HEAD
+    path: .
     helm:
-      releaseName: pecan
+      releaseName: betydb
       parameters:
-        - name: clustername
-          value: "pecan-server"
-        - name: clusterfqdn
-          value: "pecan-server-pecan.apps-crc.testing"
-        - name: initializeData
-          value: "true"
-        - name: ingress.enabled
-          value: "true"
-        - name: "ingress.hosts"
-          value: "{pecan-server-pecan.apps-crc.testing}"
+        - name: postgresql.enabled
+          value: "false"
+        - name: postgresql.postgresqlHost
+          value: "postgres-cluster-ha.postgres.svc.cluster.local"
+        - name: serviceAccountName
+          value: "pecan-betydb"
   destination:
     namespace: pecan
     server: 'https://kubernetes.default.svc'

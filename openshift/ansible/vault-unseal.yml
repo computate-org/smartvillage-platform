@@ -1,0 +1,7 @@
+---
+- name: Setup vault-configure
+  hosts: localhost
+  connection: local
+  roles:
+    - vault-unseal
+

@@ -1,0 +1,11 @@
+REDHAT_OPENSHIFT_HOST: https://api.crc.testing:6443
+REDHAT_OPENSHIFT_TOKEN: "{{ lookup('env', 'REDHAT_OPENSHIFT_TOKEN') | default(omit) }}"
+VAULT_UNSEAL_KEY: "{{ lookup('env', 'VAULT_UNSEAL_KEY') | default(omit) }}"
+VAULT_ROOT_TOKEN: "{{ lookup('env', 'VAULT_ROOT_TOKEN') | default(omit) }}"
+VAULT_ADDR: https://vault.apps-crc.testing
+
+VAULT_LABEL: statefulset.kubernetes.io/pod-name=vault-0
+VAULT_NAMESPACE: vault
+
+VAULT_COMMAND_OC: >-
+  oc login {{ REDHAT_OPENSHIFT_HOST }} --token={{ REDHAT_OPENSHIFT_TOKEN }} && oc exec $(oc get pod -l {{ VAULT_LABEL }} -o jsonpath='{.items[0].metadata.name}' -n {{ VAULT_NAMESPACE }}) -n {{ VAULT_NAMESPACE }} --
