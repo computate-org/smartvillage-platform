@@ -38,6 +38,10 @@ spec:
       options: "SUPERUSER"
       databases:
         - pecan
+    - name: betydb
+      options: "SUPERUSER"
+      databases:
+        - betydb
     - name: smartvillage
       options: "SUPERUSER"
       databases:
@@ -50,6 +54,8 @@ spec:
           - "local sso sso trust"
           - "host pecan pecan all md5"
           - "local pecan pecan trust"
+          - "host betydb betydb all md5"
+          - "local betydb betydb trust"
           - "host smartvillage smartvillage all md5"
           - "local smartvillage smartvillage trust"
         
