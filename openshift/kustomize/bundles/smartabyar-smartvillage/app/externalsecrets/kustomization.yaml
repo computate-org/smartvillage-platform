@@ -3,7 +3,3 @@ kind: Kustomization
 
 resources:
   - smartabyar-smartvillage
-  - keycloak-db-secret
-  - computate-openshift-client-secret
-  - sso-openshift-client-secret
-  - sso-group-sync
