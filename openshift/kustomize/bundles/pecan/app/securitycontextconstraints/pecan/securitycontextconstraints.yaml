@@ -10,5 +10,11 @@ fsGroup:
   type: RunAsAny
 allowHostNetwork: true
 allowPrivilegeEscalation: true
+allowHostDirVolumePlugin: false
+allowHostIPC: false
+allowHostPID: false
+allowHostPorts: false
+allowPrivilegedContainer: false
+readOnlyRootFilesystem: false
 users:
 - system:serviceaccount:pecan:pecan-helm-rabbitmq
