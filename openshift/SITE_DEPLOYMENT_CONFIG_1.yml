@@ -73,10 +73,10 @@ spec:
                 secretKeyRef:
                   key: AUTH_REALM
                   name: "{{ SITE_NAME }}-secret"
-            - name: AUTH_RESOURCE
+            - name: AUTH_CLIENT
               valueFrom:
                 secretKeyRef:
-                  key: AUTH_RESOURCE
+                  key: AUTH_CLIENT
                   name: "{{ SITE_NAME }}-secret"
             - name: AUTH_SECRET
               valueFrom:
@@ -227,59 +227,262 @@ spec:
               value: "{{ ENABLE_IMPORT_DATA }}"
             - name: ENABLE_IMPORT_DATA_MapResult
               value: '{{ ENABLE_IMPORT_DATA_MapResult | to_json }}'
+            - name: ENABLE_IMPORT_DATA_SystemEvent
+              value: '{{ ENABLE_IMPORT_DATA_SystemEvent | to_json }}'
+            - name: ENABLE_IMPORT_DATA_SitePage
+              value: '{{ ENABLE_IMPORT_DATA_SitePage | to_json }}'
+            - name: ENABLE_IMPORT_DATA_SiteHtm
+              value: '{{ ENABLE_IMPORT_DATA_SiteHtm | to_json }}'
+            - name: ENABLE_IMPORT_DATA_IotNode
+              value: '{{ ENABLE_IMPORT_DATA_IotNode | to_json }}'
+            - name: ENABLE_IMPORT_DATA_IotNodeStep
+              value: '{{ ENABLE_IMPORT_DATA_IotNodeStep | to_json }}'
+            - name: ENABLE_IMPORT_DATA_PersonStep
+              value: '{{ ENABLE_IMPORT_DATA_PersonStep | to_json }}'
+            - name: ENABLE_IMPORT_DATA_BicycleStep
+              value: '{{ ENABLE_IMPORT_DATA_BicycleStep | to_json }}'
+            - name: ENABLE_IMPORT_DATA_TimeStep
+              value: '{{ ENABLE_IMPORT_DATA_TimeStep | to_json }}'
             - name: ENABLE_IMPORT_DATA_TrafficSimulation
               value: '{{ ENABLE_IMPORT_DATA_TrafficSimulation | to_json }}'
+            - name: ENABLE_IMPORT_DATA_TrafficFlowObserved
+              value: '{{ ENABLE_IMPORT_DATA_TrafficFlowObserved | to_json }}'
             - name: ENABLE_IMPORT_DATA_TrafficLight
               value: '{{ ENABLE_IMPORT_DATA_TrafficLight | to_json }}'
             - name: ENABLE_IMPORT_DATA_TrafficLightStep
               value: '{{ ENABLE_IMPORT_DATA_TrafficLightStep | to_json }}'
             - name: ENABLE_IMPORT_DATA_VehicleStep
               value: '{{ ENABLE_IMPORT_DATA_VehicleStep | to_json }}'
-            - name: ENABLE_IMPORT_DATA_PersonStep
-              value: '{{ ENABLE_IMPORT_DATA_PersonStep | to_json }}'
-            - name: ENABLE_IMPORT_DATA_IotNode
-              value: '{{ ENABLE_IMPORT_DATA_IotNode | to_json }}'
-            - name: ENABLE_IMPORT_DATA_IotNodeStep
-              value: '{{ ENABLE_IMPORT_DATA_IotNodeStep | to_json }}'
-            - name: ENABLE_IMPORT_DATA_TimeStep
-              value: '{{ ENABLE_IMPORT_DATA_TimeStep | to_json }}'
-            - name: ENABLE_IMPORT_DATA_SitePage
-              value: '{{ ENABLE_IMPORT_DATA_SitePage | to_json }}'
-            - name: ENABLE_IMPORT_DATA_SiteHtm
-              value: '{{ ENABLE_IMPORT_DATA_SiteHtm | to_json }}'
-            - name: ENABLE_IMPORT_DATA_SystemEvent
-              value: '{{ ENABLE_IMPORT_DATA_SystemEvent | to_json }}'
             - name: ENABLE_REFRESH_DATA
               value: "{{ ENABLE_REFRESH_DATA }}"
-            - name: AUTH_ROLES_ADMIN
-              value: '{{ AUTH_ROLES_ADMIN | to_json }}'
-            - name: AUTH_ROLES_REQUIRED_SiteUser
-              value: '{{ AUTH_ROLES_REQUIRED_SiteUser | to_json }}'
-            - name: AUTH_ROLES_REQUIRED_MapResult
-              value: '{{ AUTH_ROLES_REQUIRED_MapResult | to_json }}'
-            - name: AUTH_ROLES_REQUIRED_TrafficSimulation
-              value: '{{ AUTH_ROLES_REQUIRED_TrafficSimulation | to_json }}'
-            - name: AUTH_ROLES_REQUIRED_TrafficLight
-              value: '{{ AUTH_ROLES_REQUIRED_TrafficLight | to_json }}'
-            - name: AUTH_ROLES_REQUIRED_TrafficLightStep
-              value: '{{ AUTH_ROLES_REQUIRED_TrafficLightStep | to_json }}'
-            - name: AUTH_ROLES_REQUIRED_VehicleStep
-              value: '{{ AUTH_ROLES_REQUIRED_VehicleStep | to_json }}'
-            - name: AUTH_ROLES_REQUIRED_PersonStep
-              value: '{{ AUTH_ROLES_REQUIRED_PersonStep | to_json }}'
-            - name: AUTH_ROLES_REQUIRED_IotNode
-              value: '{{ AUTH_ROLES_REQUIRED_IotNode | to_json }}'
-            - name: AUTH_ROLES_REQUIRED_IotNodeStep
-              value: '{{ AUTH_ROLES_REQUIRED_IotNodeStep | to_json }}'
-            - name: AUTH_ROLES_REQUIRED_TimeStep
-              value: '{{ AUTH_ROLES_REQUIRED_TimeStep | to_json }}'
-            - name: AUTH_ROLES_REQUIRED_SitePage
-              value: '{{ AUTH_ROLES_REQUIRED_SitePage | to_json }}'
-            - name: AUTH_ROLES_REQUIRED_SiteHtm
-              value: '{{ AUTH_ROLES_REQUIRED_SiteHtm | to_json }}'
-            - name: AUTH_ROLES_REQUIRED_SystemEvent
-              value: '{{ AUTH_ROLES_REQUIRED_SystemEvent | to_json }}'
+            - name: AUTH_ROLE_ADMIN
+              value: '{{ AUTH_ROLE_ADMIN | to_json }}'
+            - name: AUTH_ROLE_REQUIRED_SiteUser
+              value: '{{ AUTH_ROLE_REQUIRED_SiteUser | to_json }}'
+            - name: AUTH_ROLE_REQUIRED_MapResult
+              value: '{{ AUTH_ROLE_REQUIRED_MapResult | to_json }}'
+            - name: AUTH_ROLE_REQUIRED_SystemEvent
+              value: '{{ AUTH_ROLE_REQUIRED_SystemEvent | to_json }}'
+            - name: AUTH_ROLE_REQUIRED_SitePage
+              value: '{{ AUTH_ROLE_REQUIRED_SitePage | to_json }}'
+            - name: AUTH_ROLE_REQUIRED_SiteHtm
+              value: '{{ AUTH_ROLE_REQUIRED_SiteHtm | to_json }}'
+            - name: AUTH_ROLE_REQUIRED_IotNode
+              value: '{{ AUTH_ROLE_REQUIRED_IotNode | to_json }}'
+            - name: AUTH_ROLE_REQUIRED_IotNodeStep
+              value: '{{ AUTH_ROLE_REQUIRED_IotNodeStep | to_json }}'
+            - name: AUTH_ROLE_REQUIRED_PersonStep
+              value: '{{ AUTH_ROLE_REQUIRED_PersonStep | to_json }}'
+            - name: AUTH_ROLE_REQUIRED_BicycleStep
+              value: '{{ AUTH_ROLE_REQUIRED_BicycleStep | to_json }}'
+            - name: AUTH_ROLE_REQUIRED_TimeStep
+              value: '{{ AUTH_ROLE_REQUIRED_TimeStep | to_json }}'
+            - name: AUTH_ROLE_REQUIRED_TrafficSimulation
+              value: '{{ AUTH_ROLE_REQUIRED_TrafficSimulation | to_json }}'
+            - name: AUTH_ROLE_REQUIRED_TrafficFlowObserved
+              value: '{{ AUTH_ROLE_REQUIRED_TrafficFlowObserved | to_json }}'
+            - name: AUTH_ROLE_REQUIRED_TrafficLight
+              value: '{{ AUTH_ROLE_REQUIRED_TrafficLight | to_json }}'
+            - name: AUTH_ROLE_REQUIRED_TrafficLightStep
+              value: '{{ AUTH_ROLE_REQUIRED_TrafficLightStep | to_json }}'
+            - name: AUTH_ROLE_REQUIRED_VehicleStep
+              value: '{{ AUTH_ROLE_REQUIRED_VehicleStep | to_json }}'
 
+            - name: "QUAYIO_ORG"
+              valueFrom:
+                secretKeyRef:
+                  key: "QUAYIO_ORG"
+                  name: "{{ SITE_NAME }}-secret"
+            - name: "MAILING_LIST_URL"
+              valueFrom:
+                secretKeyRef:
+                  key: "MAILING_LIST_URL"
+                  name: "{{ SITE_NAME }}-secret"
+            - name: "SITE_PUBLIC_URL"
+              valueFrom:
+                secretKeyRef:
+                  key: "SITE_PUBLIC_URL"
+                  name: "{{ SITE_NAME }}-secret"
+            - name: "SITE_POM_GROUP_ID"
+              valueFrom:
+                secretKeyRef:
+                  key: "SITE_POM_GROUP_ID"
+                  name: "{{ SITE_NAME }}-secret"
+            - name: "SUMO_EXECUTABLE_PATH"
+              valueFrom:
+                secretKeyRef:
+                  key: "SUMO_EXECUTABLE_PATH"
+                  name: "{{ SITE_NAME }}-secret"
+            - name: "PYTHON_EXECUTABLE_PATH"
+              valueFrom:
+                secretKeyRef:
+                  key: "PYTHON_EXECUTABLE_PATH"
+                  name: "{{ SITE_NAME }}-secret"
+            - name: "DYNAMIC_PAGE_PATH"
+              valueFrom:
+                secretKeyRef:
+                  key: "DYNAMIC_PAGE_PATH"
+                  name: "{{ SITE_NAME }}-secret"
+            - name: "YGGIO_HOST_NAME"
+              valueFrom:
+                secretKeyRef:
+                  key: "YGGIO_HOST_NAME"
+                  name: "{{ SITE_NAME }}-secret"
+            - name: "YGGIO_PORT"
+              valueFrom:
+                secretKeyRef:
+                  key: "YGGIO_PORT"
+                  name: "{{ SITE_NAME }}-secret"
+            - name: "YGGIO_SSL"
+              valueFrom:
+                secretKeyRef:
+                  key: "YGGIO_SSL"
+                  name: "{{ SITE_NAME }}-secret"
+            - name: "YGGIO_API_RELATIVE_URI_IotNode"
+              valueFrom:
+                secretKeyRef:
+                  key: "YGGIO_API_RELATIVE_URI_IotNode"
+                  name: "{{ SITE_NAME }}-secret"
+            - name: "YGGIO_AUTH_LOCAL_URI"
+              valueFrom:
+                secretKeyRef:
+                  key: "YGGIO_AUTH_LOCAL_URI"
+                  name: "{{ SITE_NAME }}-secret"
+            - name: "YGGIO_USERNAME"
+              valueFrom:
+                secretKeyRef:
+                  key: "YGGIO_USERNAME"
+                  name: "{{ SITE_NAME }}-secret"
+            - name: "YGGIO_PASSWORD"
+              valueFrom:
+                secretKeyRef:
+                  key: "YGGIO_PASSWORD"
+                  name: "{{ SITE_NAME }}-secret"
+            - name: "GITHUB_ORG"
+              valueFrom:
+                secretKeyRef:
+                  key: "GITHUB_ORG"
+                  name: "{{ SITE_NAME }}-secret"
+            - name: "SITE_POWERED_BY_URL"
+              valueFrom:
+                secretKeyRef:
+                  key: "SITE_POWERED_BY_URL"
+                  name: "{{ SITE_NAME }}-secret"
+            - name: "SITE_POWERED_BY_NAME"
+              valueFrom:
+                secretKeyRef:
+                  key: "SITE_POWERED_BY_NAME"
+                  name: "{{ SITE_NAME }}-secret"
+            - name: "SITE_POWERED_BY_IMAGE_URI"
+              valueFrom:
+                secretKeyRef:
+                  key: "SITE_POWERED_BY_IMAGE_URI"
+                  name: "{{ SITE_NAME }}-secret"
+            - name: "FCD_SYNC_PATH"
+              valueFrom:
+                secretKeyRef:
+                  key: "FCD_SYNC_PATH"
+                  name: "{{ SITE_NAME }}-secret"
+            - name: "FCD_MAX_RECORD_SIZE"
+              valueFrom:
+                secretKeyRef:
+                  key: "FCD_MAX_RECORD_SIZE"
+                  name: "{{ SITE_NAME }}-secret"
+            - name: "READ_BUFFER_SIZE"
+              valueFrom:
+                secretKeyRef:
+                  key: "READ_BUFFER_SIZE"
+                  name: "{{ SITE_NAME }}-secret"
+            - name: "API_CHECK_TIMER_MILLIS"
+              valueFrom:
+                secretKeyRef:
+                  key: "API_CHECK_TIMER_MILLIS"
+                  name: "{{ SITE_NAME }}-secret"
+            - name: "DEFAULT_MAP_LOCATION"
+              valueFrom:
+                secretKeyRef:
+                  key: "DEFAULT_MAP_LOCATION"
+                  name: "{{ SITE_NAME }}-secret"
+            - name: "DEFAULT_MAP_ZOOM"
+              valueFrom:
+                secretKeyRef:
+                  key: "DEFAULT_MAP_ZOOM"
+                  name: "{{ SITE_NAME }}-secret"
+            - name: "ZOOKEEPER_MAX_RETRIES"
+              valueFrom:
+                secretKeyRef:
+                  key: "ZOOKEEPER_MAX_RETRIES"
+                  name: "{{ SITE_NAME }}-secret"
+            - name: "ZOOKEEPER_BASE_SLEEP_TIME_MILLIS"
+              valueFrom:
+                secretKeyRef:
+                  key: "ZOOKEEPER_BASE_SLEEP_TIME_MILLIS"
+                  name: "{{ SITE_NAME }}-secret"
+            - name: "ZOOKEEPER_MAX_SLEEP_MILLIS"
+              valueFrom:
+                secretKeyRef:
+                  key: "ZOOKEEPER_MAX_SLEEP_MILLIS"
+                  name: "{{ SITE_NAME }}-secret"
+            - name: "ZOOKEEPER_CONNECTION_TIMEOUT_MILLIS"
+              valueFrom:
+                secretKeyRef:
+                  key: "ZOOKEEPER_CONNECTION_TIMEOUT_MILLIS"
+                  name: "{{ SITE_NAME }}-secret"
+            - name: "ZOOKEEPER_SESSION_TIMEOUT_MILLIS"
+              valueFrom:
+                secretKeyRef:
+                  key: "ZOOKEEPER_SESSION_TIMEOUT_MILLIS"
+                  name: "{{ SITE_NAME }}-secret"
+            - name: "API_COUNTER_RESUME_TimeStep"
+              valueFrom:
+                secretKeyRef:
+                  key: "API_COUNTER_RESUME_TimeStep"
+                  name: "{{ SITE_NAME }}-secret"
+            - name: "API_COUNTER_FETCH_TimeStep"
+              valueFrom:
+                secretKeyRef:
+                  key: "API_COUNTER_FETCH_TimeStep"
+                  name: "{{ SITE_NAME }}-secret"
+            - name: "API_COUNTER_RESUME_VehicleStep"
+              valueFrom:
+                secretKeyRef:
+                  key: "API_COUNTER_RESUME_VehicleStep"
+                  name: "{{ SITE_NAME }}-secret"
+            - name: "API_COUNTER_FETCH_VehicleStep"
+              valueFrom:
+                secretKeyRef:
+                  key: "API_COUNTER_FETCH_VehicleStep"
+                  name: "{{ SITE_NAME }}-secret"
+            - name: "I18N_PATHS"
+              valueFrom:
+                secretKeyRef:
+                  key: "I18N_PATHS"
+                  name: "{{ SITE_NAME }}-secret"
+            - name: "DYNAMIC_PAGE_PATHS"
+              valueFrom:
+                secretKeyRef:
+                  key: "DYNAMIC_PAGE_PATHS"
+                  name: "{{ SITE_NAME }}-secret"
+            - name: "FIWARE_SSL"
+              valueFrom:
+                secretKeyRef:
+                  key: "FIWARE_SSL"
+                  name: "{{ SITE_NAME }}-secret"
+            - name: "FIWARE_HOST_NAME"
+              valueFrom:
+                secretKeyRef:
+                  key: "FIWARE_HOST_NAME"
+                  name: "{{ SITE_NAME }}-secret"
+            - name: "FIWARE_PORT"
+              valueFrom:
+                secretKeyRef:
+                  key: "FIWARE_PORT"
+                  name: "{{ SITE_NAME }}-secret"
+            - name: "FIWARE_API_URI"
+              valueFrom:
+                secretKeyRef:
+                  key: "FIWARE_API_URI"
+                  name: "{{ SITE_NAME }}-secret"
           volumeMounts:
 {% if SITE_VOLUME_MOUNT_PATH and SITE_VOLUME_NAME %}
             - mountPath: "{{ SITE_VOLUME_MOUNT_PATH }}"

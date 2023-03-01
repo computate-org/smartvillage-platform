@@ -1,0 +1,1029 @@
+{{#*inline "htmTitleBicycleStepPage"}}		<!-- inline "htmTitleBicycleStepPage" -->
+		<title>{{#if searchListBicycleStep_}}{{#eq bicycleStepCount int1}}{{#eq params.query.q "*:*"}}bicycle step{{else}}bicycle step{{/eq}}{{else}}no bicycle step found{{/eq}}{{else}}bicycle steps{{/if}}</title>
+{{/inline}}
+{{#*inline "htmMetaBicycleStepPage"}}{{> "htmMetaMapResultPage"}}{{/inline}}
+{{#*inline "htmStyleBicycleStepPage"}}{{> "htmStyleMapResultPage"}}{{/inline}}
+{{#*inline "htmScriptsBicycleStepPage"}}{{> "htmScriptsMapResultPage"}}		<!-- inline "htmScriptsBicycleStepPage" -->
+		<script src="{{staticBaseUrl}}/js/enUS/BicycleStepPage.js"></script>
+{{/inline}}
+{{#*inline "htmScriptBicycleStepPage"}}		<!-- inline "htmScriptBicycleStepPage" -->
+		<script>
+			$(document).ready(function() {
+				document.onkeydown = function(evt) {
+					evt = evt || window.event;
+					var isEscape = false;
+					if ('key' in evt) {
+						isEscape = (evt.key === 'Escape' || evt.key === 'Esc');
+					} else {
+						isEscape = (evt.keyCode === 27);
+					}
+					if (isEscape) {
+						$('.w3-modal:visible').hide();
+					}
+				};
+				window.eventBus = new EventBus('/eventbus');
+				var pk = {{#if pk}}{{pk}}{{else}}null{{/if}};
+				if(pk != null) {
+				}
+				websocketBicycleStep(websocketBicycleStepInner);
+				window.varsFq = JSON.parse('{{{toJsonObjectStringInApostrophes varsFq}}}');
+				window.varsRange = JSON.parse('{{{toJsonObjectStringInApostrophes varsRange}}}');
+				window.defaultRangeVar = '{{ defaultRangeVar }}';
+				pageGraph();
+
+				var calendarEl = document.getElementById('site-calendar');
+				var calendar = new FullCalendar.Calendar(calendarEl, {
+					initialView: 'dayGridMonth'
+				});
+				//calendar.render();
+			});
+			$('#site-calendar-box').accordion({ collapsible: true, active: false });
+{{#if DEFAULT_MAP_LOCATION }}
+			window.DEFAULT_MAP_LOCATION = { lat: {{ DEFAULT_MAP_LOCATION.lat }}, lon: {{ DEFAULT_MAP_LOCATION.lon }} };
+{{/if}}
+{{#if DEFAULT_MAP_ZOOM }}
+			window.DEFAULT_MAP_ZOOM = {{ DEFAULT_MAP_ZOOM }};
+{{/if}}
+			window.DEFAULT_ZONE_ID = '{{ defaultZoneId }}';
+		</script>
+{{/inline}}
+{{#*inline "htmUrlBicycleStep"}}{{pageUri}}?q={{query.q}}&amp;rows={{#if rows}}{{rows}}{{else}}{{pagination.rows}}{{/if}}&amp;rows={{#if start}}{{start}}{{else}}{{pagination.start}}{{/if}}{{#each query.fq}}{{#eq fq this}}{{else}}&fq={{fq}}:{{val}}{{/eq}}{{/each}}{{#each query.sort}}{{#eq sort this}}{{else}}&sort={{var}} {{order}}{{/eq}}{{/each}}{{/inline}}
+{{#*inline "htmHeadBicycleStepPage"}}{{#block "htmTitle"}}{{/block}}{{#block "htmMeta"}}{{/block}}{{#block "htmStyle"}}{{/block}}{{#block "htmScripts"}}{{/block}}{{#block "htmScript"}}{{/block}}{{/inline}}
+{{#*inline "htmBodySearchBicycleStepPage"}}								<!-- #*inline "htmBodySearchBicycleStepPage" -->
+								<div>
+{{#each varsQ}}
+									<div class="w3-cell-row ">
+										<div class="w3-cell w3-cell-top ">
+											<label for="qBicycleStep_{{ @key }}">{{ displayName }}<sup class="w3-tiny "> ({{ classSimpleName }})</sup></label>
+										</div>
+									</div>
+									<div class="w3-cell-row ">
+										<div class="w3-cell w3-cell-top ">
+											<input id="qBicycleStep_{{ @key }}" placeholder="{{ displayName }}" class="" {{#eq ../var 'objectSuggest' }}onkeyup{{else}}onchange{{/eq}}="qChange(this); " data-var="{{ var }}" autocomplete="off="/>
+											<div class="pageSearchVal w3-tiny "></div>
+										</div>
+									</div>
+{{/each}}
+									<div class="w3-cell-row ">
+										<div class="w3-cell w3-cell-top ">
+											<label for="qBicycleStep_Start">start<sup class="w3-tiny "> (Long)</sup></label>
+										</div>
+									</div>
+									<div class="w3-cell-row ">
+										<div class="w3-cell w3-cell-top ">
+											<input id="qBicycleStep_start" placeholder="{{ displayName }}" class="" onchange="paramChange(this); " data-var="start" autocomplete="off="/>
+											<div class="pageSearchVal w3-tiny "></div>
+										</div>
+									</div>
+									<div class="w3-cell-row ">
+										<div class="w3-cell w3-cell-top ">
+											<label for="qBicycleStep_Rows">rows<sup class="w3-tiny "> (Long)</sup></label>
+										</div>
+									</div>
+									<div class="w3-cell-row ">
+										<div class="w3-cell w3-cell-top ">
+											<input id="qBicycleStep_rows" placeholder="{{ displayName }}" class="" onchange="paramChange(this); " data-var="rows" autocomplete="off="/>
+											<div class="pageSearchVal w3-tiny "></div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+{{#*inline "htmBodyFiltersBicycleStepPage"}}								<!-- #*inline "htmBodyFiltersBicycleStepPage" -->
+								<div>
+{{#each varsFq }}
+									<div class="">
+										<label for="fqBicycleStep_{{ @key }}">{{ displayName }}<sup class="w3-tiny "> ({{ classSimpleName }})</sup></label>
+										<div class="w3-cell-row ">
+											<div class="w3-cell w3-cell-top ">
+												<button id="buttonFacetBicycleStep_{{ @key }}" class="" onclick="facetFieldChange(this); " title="see values " data-var="{{ var }}" data-clear="{{#if facetField }}true{{else}}false{{/if}}"><i class="fas fa-list "></i></button>
+											</div>
+											<div class="w3-cell w3-cell-top ">
+												<input id="fqBicycleStep_{{ @key }}" placeholder="{{ displayName }}" class="" onchange="fqChange(this); " data-var="{{ var }}" autocomplete="off=" value="{{ val }}"/>
+											</div>
+										</div>
+									</div>
+									<div class="w3-tiny ">
+										<div class="pageSearchVal " id="pageSearchVal-fqBicycleStep_{{ @key }}">{{#if val }}fq={{ var }}:{{encodeURIComponent val }}{{/if}}</div>
+										<div class="pageSearchVal " id="pageSearchVal-buttonFacetBicycleStep_{{ @key }}">{{#if facetField.var }}facet.field={{ facetField.var }}{{/if}}</div>
+										<ol class="pageFacetField w3-small pageFacetFieldBicycleStep_{{ @key }} " id="pageFacetFieldBicycleStep_{{ @key }}">
+{{#each facetField.counts }}
+											<li class="cursor-pointer " data-class="BicycleStep" data-var="{{ ../var }}" data-val="{{ @key }}" onclick="fqReplace(this); ">{{ @key }}: {{ this }}</li>
+{{/each}}
+										</ol>
+									</div>
+{{/each}}
+								</div>
+{{/inline}}
+{{#*inline "htmBodyRangeBicycleStepPage"}}								<!-- #*inline "htmBodyRangeBicycleStepPage" -->
+								<table class="w3-padding ">
+									<tr>
+										<td class="w3-padding w3-tiny " colspan="2">
+											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeGap-BicycleStep">{{#if rangeGap }}facet.range.gap={{encodeURIComponent rangeGap }}{{/if}}</div>
+											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeStart-BicycleStep">{{#if rangeStart }}facet.range.start={{encodeURIComponent rangeStart }}{{/if}}</div>
+											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeEnd-BicycleStep">{{#if rangeEnd }}facet.range.end={{encodeURIComponent rangeEnd }}{{/if}}</div>
+											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeVar-BicycleStep">{{#if defaultRangeVar }}facet.range={!tag=r1}{{encodeURIComponent defaultRangeVar }}{{/if}}</div>
+										</td>
+									</tr>
+								</table>
+								<table class="w3-padding ">
+									<tr class="">
+										<td class="">
+											<span>Range Gap</span>
+										</td>
+										<td class="">
+											<select name="facet.range.gap" id="pageFacetRangeGap-BicycleStep" onchange="facetRangeGapChange(this, 'BicycleStep'); ">
+												<option value="+1YEAR"{{#eq defaultRangeGap '+1YEAR'}} selected="selected"{{else}}{{/eq}}>Year</option>
+												<option value="+1MONTH"{{#eq defaultRangeGap '+1MONTH'}} selected="selected"{{else}}{{/eq}}>Month</option>
+												<option value="+1WEEK"{{#eq defaultRangeGap '+1WEEK'}} selected="selected"{{else}}{{/eq}}>Week</option>
+												<option value="+1DAY"{{#eq defaultRangeGap '+1DAY'}} selected="selected"{{else}}{{#if defaultRangeGap}}{{else}} selected="selected"{{/if}}{{/eq}}>Day</option>
+												<option value="+1HOUR"{{#eq defaultRangeGap '+1HOUR'}} selected="selected"{{else}}{{/eq}}>Hour</option>
+												<option value="+1MINUTE"{{#eq defaultRangeGap '+1MINUTE'}} selected="selected"{{else}}{{/eq}}>Minute</option>
+												<option value="+1SECOND"{{#eq defaultRangeGap '+1SECOND'}} selected="selected"{{else}}{{/eq}}>Second</option>
+											</select>
+										</td>
+									</tr>
+									<tr class="">
+										<td class="" colspan="2">
+											<span>Range Start</span>
+										</td>
+									</tr>
+									<tr class="">
+										<td class="" colspan="2">
+											<span><input type="datetime-local" name="facetRangeStart" id="pageFacetRangeStart-BicycleStep" value="{{formatZonedDateTime defaultRangeStart "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeStartChange(this, 'BicycleStep'); "/></span>
+										</td>
+									</tr>
+									<tr class="">
+										<td class="" colspan="2">
+											<span>Range End</span>
+										</td>
+									</tr>
+									<tr class="">
+										<td class="" colspan="2">
+											<span><input type="datetime-local" name="facetRangeEnd" id="pageFacetRangeEnd-BicycleStep" value="{{formatZonedDateTime defaultRangeEnd "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeEndChange(this, 'BicycleStep'); "/></span>
+										</td>
+									</tr>
+								</table>
+								<table class="w3-padding ">
+{{#each varsRange }}
+									<tr class="">
+										<td class="">
+											<span><input type="radio" name="pageFacetRange" class="pageFacetRange " id="pageFacetRangeBicycleStep_{{ @key }}" value="{{ var }}"{{#eq defaultRangeVar var }} checked="checked"{{/eq}} onclick="facetRangeChange(this, 'BicycleStep'); "/></span>
+										</td>
+										<td class="">
+											<label for="pageFacetRangeBicycleStep_{{ @key }}">{{ displayName }}</label>
+										</td>
+									</tr>
+{{/each}}
+								</table>
+{{/inline}}
+{{#*inline "htmBodyPivotBicycleStepPage"}}								<!-- #*inline "htmBodyPivotBicycleStepPage" -->
+								<div style="display: none; " class="w3-padding w3-tiny " id="pageSearchVal-PivotBicycleStepHidden">
+{{#each defaultPivotVars }}
+									<div class="pageSearchVal-PivotBicycleStepHidden " id="pageSearchVal-PivotBicycleStepHidden_{{ this }}">{{ this }}</div>
+{{/each}}
+								</div>
+								<div class="w3-padding w3-tiny " id="pageSearchVal-PivotBicycleStep">
+{{#if defaultPivotVars }}
+									<div class="pageSearchVal pageSearchVal-PivotBicycleStep " id="pageSearchVal-PivotBicycleStep_1">facet.pivot={!range=r1}{{#each defaultPivotVars }}{{#if @index }},{{/if}}{{ this }}{{/each}}</div>
+{{/if}}
+								</div>
+								<table class="w3-table ">
+{{#each varsFq }}
+									<tr class="">
+										<td class="">
+											<span><input type="checkbox" name="pageFacetPivot" class="pageFacetPivot " id="pageFacetPivotBicycleStep_{{ @key }}" value="{{ var }}"{{#if pivot }} checked="checked"{{/if}} onclick="facetPivotChange(this, 'BicycleStep'); "/></span>
+										</td>
+										<td class="w3-cell ">
+											<label for="pageFacetPivotBicycleStep_{{ @key }}">{{ displayName }}</label>
+										</td>
+									</tr>
+{{/each}}
+								</table>
+{{/inline}}
+{{#*inline "htmBodyFieldListBicycleStepPage"}}								<!-- #*inline "htmBodyFieldListBicycleStepPage" -->
+								<div style="display: none; " class="w3-padding w3-tiny " id="pageSearchVal-FieldListBicycleStepHidden">
+{{#each defaultFieldListVars }}
+									<div class="pageSearchVal-FieldListBicycleStepHidden " id="pageSearchVal-FieldListBicycleStepHidden_{{ this }}">{{ this }}</div>
+{{/each}}
+								</div>
+								<div class="w3-padding w3-tiny " id="pageSearchVal-FieldListBicycleStep">
+{{#if defaultFieldListVars }}
+									<div class="pageSearchVal pageSearchVal-FieldListBicycleStep " id="pageSearchVal-FieldListBicycleStep_1">fl={{#each defaultFieldListVars }}{{#if @index }},{{/if}}{{ this }}{{/each}}</div>
+{{/if}}
+								</div>
+								<table class="w3-table ">
+{{#each varsFq }}
+									<tr class="">
+										<td class="">
+											<span><input type="checkbox" name="pageFieldList" class="pageFieldList " id="pageFieldListBicycleStep_{{ @key }}" value="{{ var }}"{{#if fieldList }} checked="checked"{{/if}} onclick="facetFieldListChange(this, 'BicycleStep'); "/></span>
+										</td>
+										<td class="w3-cell ">
+											<label for="pageFieldListBicycleStep_{{ @key }}">{{ displayName }}</label>
+										</td>
+									</tr>
+{{/each}}
+								</table>
+{{/inline}}
+{{#*inline "htmBodyStatsBicycleStepPage"}}								<!-- #*inline "htmBodyStatsBicycleStepPage" -->
+								<div style="display: none; " class="w3-padding w3-tiny " id="pageSearchVal-StatsBicycleStepHidden">
+{{#each defaultStatsVars }}
+									<div class="pageSearchVal-StatsBicycleStepHidden " id="pageSearchVal-StatsBicycleStepHidden_{{ this }}">{{ this }}</div>
+{{/each}}
+								</div>
+								<div class="w3-padding w3-tiny " id="pageSearchVal-StatsBicycleStep">
+{{#if defaultStatsVars }}
+{{#each defaultStatsVars }}									<div class="pageSearchVal pageSearchVal-StatsBicycleStep_{{ this }} " id="pageSearchVal-StatsBicycleStep_{{ this }}">stats.field={{ this }}</div>
+{{/each}}{{/if}}
+								</div>
+								<table class="w3-table ">
+{{#each varsFq }}
+{{#if enableStats }}
+									<tr class="">
+										<td class="">
+											<span><input type="checkbox" name="pageStats" class="pageStats " id="pageStatsBicycleStep_{{ @key }}" value="{{ var }}"{{#if ./stats }} checked="checked"{{/if}} onclick="facetStatsChange(this, 'BicycleStep'); "/></span>
+										</td>
+										<td class="w3-cell ">
+											<div>
+												<label for="pageStatsBicycleStep_{{ @key }}">{{ displayName }}</label>
+											</div>
+											<div class="pageStatsField w3-small pageStatsFieldBicycleStep_{{ @key }} " id="pageStatsFieldBicycleStep_{{ @key }}">
+{{#if ./stats }}
+{{#each ./stats }}
+{{#eq @key 'name' }}{{else}}
+												<div data-class="BicycleStep" data-var="{{ ../var }}" data-val="{{ @key }}">{{ @key }}: {{ this }}</div>
+{{/eq}}
+{{/each}}
+{{#if ./stats/max }}
+									<div>									<span> step </span>									<input id="animateStatsStep" placeholder="step" value="1" style="width: 4em; "/>									<span> min </span>									<input id="animateStatsMin" placeholder="min" value="{{ ./stats/min }}" style="width: 4em; "/>									<span> max </span>									<input id="animateStatsMax" placeholder="max" value="{{ ./stats/max }}" style="width: 4em; "/>									<span> speed in seconds </span>									<input id="animateStatsSpeed" placeholder="speed" value="1" style="width: 4em; "/>									<button onclick="animateStats(); ">animate</button>									</div>{{/if}}
+{{/if}}
+											</div>
+										</td>
+									</tr>
+{{/if}}
+{{/each}}
+								</table>
+{{/inline}}
+{{#*inline "htmBodyMenuBicycleStepPage"}}		<!-- #*inline "htmBodyMenuBicycleStepPage" -->
+{{> "htmBodyMenuMapResultPage"}}{{/inline}}
+{{#*inline "htmBodyGraphBicycleStepPage"}}		<!-- #*inline "htmBodyGraphBicycleStepPage" -->
+<div id="htmBodyGraphMapResultPage" class="w3-content htmBodyGraph "></div>{{/inline}}
+{{#*inline "htmBodyCount0BicycleStepPage"}}		<!-- #*inline "htmBodyCount0BicycleStepPage" -->
+		<h1>
+			<a href="{{pageUri}}" class="w3-bar-item w3-btn w3-center w3-block w3-2017-shaded-spruce w3-hover-2017-shaded-spruce">
+				{{#if classIconCssClasses}}
+					<i class="{{ classIconCssClasses }} site-menu-icon "></i>
+				{{/if}}
+				<span class="">bicycle steps</span>
+			</a>
+		</h1>
+		<h2>
+			<span class="w3-bar-item w3-padding w3-center w3-block w3-2017-shaded-spruce">
+				{{#if classIconCssClasses}}
+					<i class="{{ classIconCssClasses }}  site-menu-icon "></i>
+				{{/if}}
+				<span class="">no bicycle step found</span>
+			</span>
+		</h2>
+{{/inline}}
+{{#*inline "htmBodyCount1AllBicycleStepPage"}}		<!-- #*inline "htmBodyCount1AllBicycleStepPage" -->
+		<h1 class="w3-center ">
+			<a href="{{pageUri}}" class="w3-bar-item w3-btn w3-block w3-2017-shaded-spruce w3-hover-2017-shaded-spruce">
+			{{#if classIconCssClasses}}
+				<i class="{{ classIconCssClasses }} site-menu-icon "></i>
+			{{/if}}
+				<span class="">bicycle step</span>
+			</a>
+		</h1>
+		<h2 class="w3-center ">
+			<span class="w3-bar-item w3-padding w3-center w3-block w3-2017-shaded-spruce">
+				<span class="">{{bicycleStep_.objectTitle}}</span>
+			</span>
+		</h2>
+{{/inline}}
+{{#*inline "htmBodyCount1BicycleStepPage"}}		<!-- #*inline "htmBodyCount1BicycleStepPage" -->
+		<h1>
+			<a href="{{pageUri}}" class="w3-bar-item w3-btn w3-center w3-block w3-2017-shaded-spruce w3-hover-2017-shaded-spruce">
+	{{#if classIconCssClasses}}
+				<i class="{{ classIconCssClasses }} site-menu-icon "></i>
+	{{/if}}
+				<span class="">bicycle steps</span>
+			</a>
+		</h1>
+		<div>
+	{{#if pagination.pagePrevious}}
+			<a href="{{pageUri}}?start={{pagination.pagePrevious.start}}&amp;rows={{pagination.rows}}">
+				<i class="fas fa-arrow-square-left "></i>
+			</a>
+	{{else}}
+			<i class="fas fa-arrow-square-left w3-opacity "></i>
+	{{/if}}
+	{{#gte pagination.rowsPrevious pagination.1L}}
+			<a href="{{pageUri}}?start={{pagination.start}}&amp;rows={{ pagination.rowsPrevious }}">
+				<i class="fas fa-minus-square "></i>
+			</a>
+	{{else}}
+			<i class="fas fa-minus-square w3-opacity "></i>
+	{{/gte}}
+			<a href="{{pageUri}}?start={{pagination.start}}&amp;rows={{ pagination.rowsNext }}">
+				<i class="fas fa-plus-square "></i>
+			</a>
+	{{#if pagination.pageNext}}
+			<a href="{{pageUri}}?start={{pagination.pageNext.start}}&amp;rows={{pagination.rows}}">
+				<i class="fas fa-arrow-square-right "></i>
+			</a>
+	{{else}}
+			<i class="fas fa-arrow-square-right w3-opacity "></i>
+	{{/if}}
+			<span>{{ pagination.startNum }} - {{ pagination.endNum }} of {{ pagination.foundNum }}</span>
+		</div>
+{{> "table1BicycleStepPage"}}
+{{/inline}}
+{{#*inline "htmBodyAllBicycleStepPage"}}		<!-- #*inline "htmBodyAllBicycleStepPage" -->
+		<h1>
+			<a href="{{pageUri}}" class="w3-bar-item w3-btn w3-center w3-block w3-2017-shaded-spruce w3-hover-2017-shaded-spruce">
+	{{#if classIconCssClasses}}
+				<i class="{{ classIconCssClasses }} site-menu-icon "></i>
+	{{/if}}
+				<span class="">bicycle steps</span>
+			</a>
+		</h1>
+		<div class="">
+			<div>
+	{{#if pagination.pagePrevious}}
+				<a href="{{pageUri}}?start={{pagination.pagePrevious.start}}&amp;rows={{pagination.rows}}">
+					<i class="fas fa-arrow-square-left "></i>
+				</a>
+	{{else}}
+				<i class="fas fa-arrow-square-left w3-opacity "></i>
+	{{/if}}
+	{{#gte pagination.rowsPrevious pagination.1L}}
+				<a href="{{pageUri}}?start={{pagination.start}}&amp;rows={{ pagination.rowsPrevious }}">
+					<i class="fas fa-minus-square "></i>
+				</a>
+	{{else}}
+				<i class="fas fa-minus-square w3-opacity "></i>
+	{{/gte}}
+				<a href="{{pageUri}}?start={{pagination.start}}&amp;rows={{ pagination.rowsNext }}">
+					<i class="fas fa-plus-square "></i>
+				</a>
+	{{#if pagination.pageNext}}
+				<a href="{{pageUri}}?start={{pagination.pageNext.start}}&amp;rows={{pagination.rows}}">
+					<i class="fas fa-arrow-square-right "></i>
+				</a>
+	{{else}}
+				<i class="fas fa-arrow-square-right w3-opacity "></i>
+	{{/if}}
+				<span>{{ pagination.startNum }} - {{ pagination.endNum }} of {{ pagination.foundNum }}</span>
+			</div>
+{{> "table1BicycleStepPage"}}
+		</div>
+{{/inline}}
+{{#*inline "htmFormBicycleStepPage"}}
+		<!-- #*inline "htmForm" -->
+		<form action="/api/bicycle-step" id="BicycleStepForm" class="pageForm " style="" onsubmit="event.preventDefault(); return false; ">
+{{#if id}}
+			<input name="id" class="valueId" type="hidden" value="{{id}}"/>
+{{/if}}
+			<input name="focusId" type="hidden"/>
+			<input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{{toJsonObjectStringInApostrophes pageResponse }}}' type="hidden"/>
+		</form>
+{{#if id}}
+{{#block "htmForm_searchpageBicycleStep"}}{{/block}}
+{{/if}}
+{{/inline}}
+{{#*inline "htmFormBicycleStepPage_patchBicycleStep"}}
+		<button
+			class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce "
+			onclick="$('#patchBicycleStepModal').show(); "
+			>
+			<i class="fas fa-edit "></i>
+			Modify bicycle steps
+		</button>
+		<div id="patchBicycleStepModal" class="w3-modal ">
+			<div class="w3-modal-content ">
+				<div class="w3-card-4 ">
+					<header class="w3-container w3-2017-shaded-spruce">
+	{{#eq "Page" classApiMethodMethod}}
+						<span class="w3-button w3-display-topright " onclick="$('#patchBicycleStepModal').hide(); ">×</span>
+	{{/eq}}
+						<h2 class="w3-padding ">Modify bicycle steps</h2>
+					</header>
+					<div class="" id="patchBicycleStepFormValues">
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCreated" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmCreated" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmObjectId" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmObjectId" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmArchived" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmArchived" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDeleted" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmDeleted" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmSimulationName" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmSimulationName" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmSimulationKey" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmSimulationKey" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmSumocfgPath" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmSumocfgPath" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmTime" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmTime" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDateTime" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmDateTime" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmStep" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmStep" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmLocation" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmLocation" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmColor" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmColor" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmBicycleId" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmBicycleId" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+						<button
+							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-2017-shaded-spruce "
+							onclick="patchBicycleStep(null, $('#patchBicycleStepFormValues')); "
+							>Modify bicycle steps</button>
+					</div>
+				</div>
+			</div>
+		</div>
+{{/inline}}
+{{#*inline "htmFormBicycleStepPage_postBicycleStep"}}
+		<button
+			class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce "
+			onclick="$('#postBicycleStepModal').show(); "
+			>
+			<i class="fas fa-file-plus "></i>
+			Create a bicycle step
+		</button>
+		<div id="postBicycleStepModal" class="w3-modal ">
+			<div class="w3-modal-content ">
+				<div class="w3-card-4 ">
+					<header class="w3-container w3-2017-shaded-spruce">
+	{{#eq "Page" classApiMethodMethod}}
+						<span class="w3-button w3-display-topright " onclick="$('#postBicycleStepModal').hide(); ">×</span>
+	{{/eq}}
+						<h2 class="w3-padding ">Create a bicycle step</h2>
+					</header>
+					<div class="" id="postBicycleStepFormValues">
+						<div id="postBicycleStepForm">
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCreated" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmCreated" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmObjectId" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmObjectId" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmArchived" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmArchived" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDeleted" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmDeleted" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmSimulationName" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmSimulationName" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmSimulationKey" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmSimulationKey" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmSumocfgPath" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmSumocfgPath" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmTime" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmTime" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDateTime" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmDateTime" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmStep" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmStep" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmLocation" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmLocation" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmColor" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmColor" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmBicycleId" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmBicycleId" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+						</div>
+						<button
+							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-2017-shaded-spruce "
+							onclick="postBicycleStep($('#postBicycleStepForm')); "
+							>Create a bicycle step</button>
+					</div>
+				</div>
+			</div>
+		</div>
+{{/inline}}
+{{#*inline "htmFormBicycleStepPage_putimportBicycleStep"}}
+		<button
+			class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce "
+			onclick="$('#putimportBicycleStepModal').show(); "
+			>
+			<i class="fas fa-file-import "></i>
+			Import bicycle steps
+		</button>
+		<div id="putimportBicycleStepModal" class="w3-modal ">
+			<div class="w3-modal-content ">
+				<div class="w3-card-4 ">
+					<header class="w3-container w3-2017-shaded-spruce">
+	{{#eq "Page" classApiMethodMethod}}
+						<span class="w3-button w3-display-topright " onclick="$('#putimportBicycleStepModal').hide(); ">×</span>
+	{{/eq}}
+						<h2 class="w3-padding ">Import bicycle steps</h2>
+					</header>
+					<div class="" id="putimportBicycleStepFormValues">
+						<div class="w3-cell-row ">
+							<textarea
+								class="PUTImport_searchList w3-input w3-border "
+								style="height: 300px; "
+								placeholder="{ 'searchList': [ { 'pk': ... , 'saves': [ ... ] }, ... ] }"
+								></textarea>
+						</div>
+						<button
+							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-2017-shaded-spruce "
+							onclick="putimportBicycleStep($('#putimportBicycleStepFormValues')); "
+							>Import bicycle steps</button>
+					</div>
+				</div>
+			</div>
+		</div>
+{{/inline}}
+{{#*inline "htmFormBicycleStepPage_searchpageBicycleStep"}}
+		<div id="searchpageBicycleStepModal" class="">
+			<div class="">
+				<div class="w3-card-4 ">
+					<div class="" id="searchpageBicycleStepFormValues">
+						<div id="searchpageBicycleStepForm">
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCreated" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmCreated" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmModified" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmModified" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmObjectId" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmObjectId" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmArchived" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmArchived" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDeleted" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmDeleted" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmSimulationName" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmSimulationName" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmSimulationKey" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmSimulationKey" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmSumocfgPath" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmSumocfgPath" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmTime" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmTime" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDateTime" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmDateTime" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmStep" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmStep" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmLocation" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmLocation" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmColor" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmColor" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmBicycleId" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmBicycleId" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+{{/inline}}
+{{#*inline "htmBodySidebarBicycleStepPage"}}
+				<div class="w3-dropdown-click w3-bar-block min-width-300px ">
+					<div class="min-width-300px ">
+						<span title="Search" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-shaded-spruce " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-2017-shaded-spruce'); $(this).addClass('w3-black'); $(this).removeClass('w3-2017-shaded-spruce'); "><i class="fad fa-magnifying-glass hover-box-shadow w3-xlarge "></i> Search</span>
+						<span title="Filters" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-shaded-spruce " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleFilters').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-2017-shaded-spruce'); $(this).addClass('w3-black'); $(this).removeClass('w3-2017-shaded-spruce'); "><i class="fad fa-filters hover-box-shadow w3-xlarge "></i> Filters</span>
+						<span title="Range" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-shaded-spruce " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleRange').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-2017-shaded-spruce'); $(this).addClass('w3-black'); $(this).removeClass('w3-2017-shaded-spruce'); "><i class="fad fa-calendar-range hover-box-shadow w3-xlarge "></i> Range</span>
+						<span title="Pivot" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-shaded-spruce " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-2017-shaded-spruce'); $(this).addClass('w3-black'); $(this).removeClass('w3-2017-shaded-spruce'); "><i class="fad fa-table-pivot hover-box-shadow w3-xlarge "></i> Pivot</span>
+						<span title="FieldList" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-shaded-spruce " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleFieldList').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-2017-shaded-spruce'); $(this).addClass('w3-black'); $(this).removeClass('w3-2017-shaded-spruce'); "><i class="fad fa-list-ul hover-box-shadow w3-xlarge "></i> FieldList</span>
+						<span title="Stats" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-shaded-spruce " onclick="$('.siteSidebarToggleFieldList').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleStats').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-2017-shaded-spruce'); $(this).addClass('w3-black'); $(this).removeClass('w3-2017-shaded-spruce'); "><i class="fad fa-chart-candlestick hover-box-shadow w3-xlarge "></i> Stats</span>
+						<a title="API" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-shaded-spruce " href="{{ apiUri }}{{ queryStr }}"><i class="fad fa-brackets-curly hover-box-shadow w3-xlarge "></i> API</a>
+					</div>
+					<div class=" ">
+						<div class="siteSidebarToggle siteSidebarToggleSearch w3-dropdown-content min-width-300px w3-white w3-border w3-border-2017-shaded-spruce " style="display: none; ">
+							<div class="w3-bar w3-2017-shaded-spruce ">
+								<span class="w3-bar-item ">
+								<i class="fad fa-magnifying-glass "></i> Search</span>
+							</div>
+							<div class="w3-bar-block ">
+{{#block "htmBodySearch"}}{{/block}}
+							</div>
+						</div>
+						<div  class="siteSidebarToggle siteSidebarToggleFilters w3-dropdown-content min-width-300px w3-white w3-border w3-border-2017-shaded-spruce " style="display: none; ">
+							<div class="w3-bar w3-2017-shaded-spruce ">
+								<span class="w3-bar-item ">
+								<i class="fad fa-filters "></i> Filters</span>
+							</div>
+							<div class="w3-bar-block ">
+{{#block "htmBodyFilters"}}{{/block}}
+							</div>
+						</div>
+						<div  class="siteSidebarToggle siteSidebarToggleRange w3-dropdown-content min-width-300px w3-white w3-border w3-border-2017-shaded-spruce " style="display: none; ">
+							<div class="w3-bar w3-2017-shaded-spruce  ">
+								<span class="w3-bar-item ">
+								<i class="fad fa-calendar-range "></i> Range</span>
+							</div>
+							<div class="w3-bar-block ">
+{{#block "htmBodyRange"}}{{/block}}
+							</div>
+						</div>
+						<div  class="siteSidebarToggle siteSidebarTogglePivot w3-dropdown-content min-width-300px w3-white w3-border w3-border-2017-shaded-spruce " style="display: none; ">
+							<div class="w3-bar w3-2017-shaded-spruce ">
+								<span class="w3-bar-item ">
+								<i class="fad fa-table-pivot "></i> Pivot</span>
+							</div>
+							<div class="w3-bar-block ">
+{{#block "htmBodyPivot"}}{{/block}}
+							</div>
+						</div>
+						<div  class="siteSidebarToggle siteSidebarToggleFieldList w3-dropdown-content min-width-300px w3-white w3-border w3-border-2017-shaded-spruce " style="display: none; ">
+							<div class="w3-bar w3-2017-shaded-spruce ">
+								<span class="w3-bar-item ">
+								<i class="fad fa-list-ul "></i> Field List</span>
+							</div>
+							<div class="w3-bar-block ">
+{{#block "htmBodyFieldList"}}{{/block}}
+							</div>
+						</div>
+						<div  class="siteSidebarToggle siteSidebarToggleStats w3-dropdown-content min-width-300px w3-white w3-border w3-border-2017-shaded-spruce " style="display: none; ">
+							<div class="w3-bar w3-2017-shaded-spruce ">
+								<span class="w3-bar-item ">
+								<i class="fad fa-chart-candlestick "></i> Stats</span>
+							</div>
+							<div class="w3-bar-block ">
+{{#block "htmBodyStats"}}{{/block}}
+							</div>
+						</div>
+					</div>
+				</div>
+{{/inline}}
+{{#*inline "htmBodyStartBicycleStepPage"}}
+{{> "htmBodyStartMapResultPage"}}
+{{/inline}}
+{{#*inline "htmBodyMiddleBicycleStepPage"}}
+{{> "htmBodyMiddleMapResultPage"}}
+{{/inline}}
+{{#*inline "htmBodyEndBicycleStepPage"}}
+{{> "htmBodyEndMapResultPage"}}
+{{/inline}}
+{{#*inline "htmBodyBicycleStepPage"}}
+{{#block "htmBodyStart"}}{{/block}}
+{{#block "htmBodyMiddle"}}{{/block}}
+{{#block "htmBodyEnd"}}{{/block}}
+{{/inline}}
+{{#*inline "htmBodyMiddleBicycleStepPage"}}
+		<div class="w3-bar w3-content ">
+{{#block "htmBodySidebar"}}{{/block}}
+		</div>
+{{#block "htmBodyGraph"}}{{/block}}
+	<div class="pageContent w3-content ">
+		<div id="site-calendar-box">
+			<div id="site-calendar"><!-- // --></div>
+		</div>
+	{{#eq bicycleStepCount int0}}
+{{#block "htmBodyCount0"}}{{/block}}
+	{{else}}
+		{{#eq bicycleStepCount int1}}
+			{{#eq params.query.q "*:*"}}
+{{#block "htmBodyCount1All"}}{{/block}}
+			{{else}}
+{{#block "htmBodyCount1"}}{{/block}}
+			{{/eq}}
+		{{else}}
+{{#block "htmBodyAll"}}{{/block}}
+		{{/eq}}
+	{{/eq}}
+{{#block "htmForm"}}{{/block}}
+{{#block "htmForms"}}{{/block}}
+	</div>
+{{/inline}}
+{{#*inline "table1BicycleStepPage"}}
+		<div class="w3-responsive ">
+			<table class="w3-table w3-bordered w3-striped w3-border w3-hoverable ">
+{{> table2BicycleStepPage}}
+			</table>
+		</div>
+{{/inline}}
+{{#*inline "table2BicycleStepPage"}}
+{{> "thead1BicycleStepPage"}}
+{{> "tbody1BicycleStepPage"}}
+{{> "tfoot1BicycleStepPage"}}
+{{/inline}}
+{{#*inline "thead1BicycleStepPage"}}
+				<thead class="w3-2017-shaded-spruce w3-hover-2017-shaded-spruce">
+{{> thead2BicycleStepPage}}
+				</thead>
+{{/inline}}
+{{#*inline "thead2BicycleStepPage"}}
+			<tr>
+						<th>created</th>
+						<th></th>
+			</tr>
+{{/inline}}
+{{#*inline "tbody1BicycleStepPage"}}
+				<tbody>
+{{> tbody2BicycleStepPage}}
+				</tbody>
+{{/inline}}
+{{#*inline "tbody2BicycleStepPage"}}
+		{{#each listBicycleStep}}
+					<tr>
+						<td>
+							<a href="{{pageUrlPk}}">
+								<span class="white-space-pre-wrap ">{{siteZonedDateTimeFormat created "MMM d, yyyy h:mm:ss a" siteLocale}}</span>
+							</a>
+						</td>
+						<td>
+							<a href="{{pageUrlPk}}">
+								<i class="fad fa-map-location-dot "></i>
+								<span class="white-space-pre-wrap ">{{objectTitle}}</span>
+							</a>
+						</td>
+					</tr>
+		{{/each}}
+{{/inline}}
+{{#*inline "tfoot1BicycleStepPage"}}
+				<tfoot class="w3-2017-shaded-spruce w3-hover-2017-shaded-spruce">
+{{> tfoot2BicycleStepPage}}
+				</tfoot>
+{{/inline}}
+{{#*inline "tfoot2BicycleStepPage"}}
+			<tr>
+			{{#if getColumnCreated}}
+				<td>
+				</td>
+			{{/if}}
+			{{#if getColumnObjectTitle}}
+				<td>
+				</td>
+			{{/if}}
+			</tr>
+	{{/inline}}
+{{#*inline "htmFormsBicycleStepPage"}}
+	{{#ifContainsAnyRoles roles roleRequired}}
+		{{#eq bicycleStepCount int1}}
+		<button
+			class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce "
+			id="refreshThisBicycleStepGenPage"
+			onclick="patch{{classSimpleName}}Vals( [ {name: 'fq', value: 'id:{{id}}' } ], {}, function() { addGlow($('#refreshThisBicycleStepGenPage')); }, function() { addError($('#refreshThisBicycleStepGenPage')); }); return false; ">
+			<i class="fas fa-sync-alt "></i>
+			refresh this bicycle step
+		</button>
+		{{/eq}}
+	{{/ifContainsAnyRoles}}
+	{{#ifContainsAnyRoles roles authRolesAdmin}}
+{{#block "htmForm_patchBicycleStep"}}{{/block}}
+{{#block "htmForm_postBicycleStep"}}{{/block}}
+{{#block "htmForm_putimportBicycleStep"}}{{/block}}
+	{{/ifContainsAnyRoles}}
+{{#block "htmSuggested"}}{{/block}}
+{{/inline}}
+{{#*inline "htmSuggestedBicycleStepPage"}}
+			{{#ifContainsAnyRoles roles roleRequired}}
+					<div class="">
+						<button id="refreshAllBicycleStepGenPage{{id}}" class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce "
+							onclick="patch{{classSimpleName}}Vals([], {}, function() { addGlow($('#refreshAllBicycleStepGenPage{{id}}')); }, function() { addError($('#refreshAllBicycleStepGenPage{{id}}')); }); "
+							>
+							<i class="fas fa-sync-alt "></i>
+							refresh all the bicycle steps
+						</button>
+					</div>
+			{{/ifContainsAnyRoles}}
+			<div class="w3-cell-row ">
+				<div class="w3-cell ">
+					<span>
+						search bicycle steps: 
+					</span>
+				</div>
+			</div>
+			<div class="w3-bar ">
+				<input
+					type="text"
+					class="suggestBicycleStep w3-input w3-border w3-bar-item "
+					name="suggestBicycleStep"
+					id="suggestBicycleStep{{id}}"
+					autocomplete="off"
+					oninput="suggestBicycleStepObjectSuggest( [ { 'name': 'q', 'value': 'objectSuggest:' + $(this).val() }, { 'name': 'rows', 'value': '10' }, { 'name': 'fl', 'value': 'classCanonicalName,,pageUrlPk,objectTitle' } ], $('#suggestListBicycleStep{{id}}'), {{id}}; "
+					onkeyup="if (event.keyCode === 13) { event.preventDefault(); window.location.href = '/bicycle-step?q={{query1}}:' + encodeURIComponent(this.value) + '{{fqs}}{{sorts}}&amp;rows={{start2}}&amp;rows={{rows1}}"
+				{{#if listBicycleStep}}
+					value="{{query2}}"
+				{{/if}}
+				/>
+				<button
+					class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+					onclick="window.location.href = '/bicycle-step?q=&quot;, query1, &quot;:' + encodeURIComponent(this.previousElementSibling.value) + '&quot;, fqs, sorts, &quot;&amp;rows=&quot;, start2, &quot;&amp;rows=&quot;, rows1, &quot;'; "
+					>
+					<i class="fas fa-search "></i>
+				</button>
+			<div>
+			<div class="w3-cell-row ">
+				<div class="w3-cell w3-left-align w3-cell-top ">
+					<ul class="w3-ul w3-hoverable " id="suggestListBicycleStep{{id}}">
+					</ul>
+				</div>
+			</div>
+			<div class="">
+				<a href="/bicycle-step" class="">
+					<i class="fad fa-map-location-dot"></i>
+					see all the bicycle steps
+				</a>
+			</div>
+{{/inline}}
+{{> MapResultPage mapResult_=bicycleStep_}}
+
+{{#*inline "htmBicycleId"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}BicycleStepBicycleId">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_bicycleId">bicycle ID</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputBicycleId" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_bicycleId')); $('#{{classApiMethodMethod}}_bicycleId').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#BicycleStepForm :input[name=id]').val() }], 'setBicycleId', null, function() { addGlow($('#{{classApiMethodMethod}}_bicycleId')); }, function() { addError($('#{{classApiMethodMethod}}_bicycleId')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputBicycleId"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															placeholder="bicycle ID"
+															id="{{classApiMethodMethod}}_bicycleId"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setBicycleId classBicycleStep inputBicycleStep{{id}}BicycleId w3-input w3-border "
+																name="setBicycleId"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setBicycleId classBicycleStep inputBicycleStep{{id}}BicycleId w3-input w3-border "
+																name="setBicycleId"
+		{{else}}
+																class="valueBicycleId w3-input w3-border classBicycleStep inputBicycleStep{{id}}BicycleId w3-input w3-border "
+																name="bicycleId"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setBicycleId', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_bicycleId')); }, function() { addError($('#{{classApiMethodMethod}}_bicycleId')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{bicycleStep_.bicycleId}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varBicycleStep{{id}}BicycleId ">{{bicycleStep_.bicycleId}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varBicycleStep{{id}}BicycleId ">{{bicycleStep_.bicycleId}}</span>
+		{{/eq}}
+{{/inline}}

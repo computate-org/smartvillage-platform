@@ -1,0 +1,19 @@
+---
+REDHAT_OPENSHIFT_HOST: https://api.crc.testing:6443
+REDHAT_OPENSHIFT_TOKEN: "{{ lookup('env', 'REDHAT_OPENSHIFT_TOKEN') | default(omit) }}"
+VAULT_LABEL: statefulset.kubernetes.io/pod-name=vault-0
+VAULT_NAMESPACE: vault
+VAULT_COMMAND_OC: >-
+  oc login {{ REDHAT_OPENSHIFT_HOST }} --token={{ REDHAT_OPENSHIFT_TOKEN }} && oc exec $(oc get pod -l {{ VAULT_LABEL }} -o jsonpath='{.items[0].metadata.name}' -n {{ VAULT_NAMESPACE }}) -n {{ VAULT_NAMESPACE }} --
+
+SOURCE_SECRET_NAME: 
+SOURCE_SECRET_KEYS: []
+SOURCE_NAMESPACE: 
+
+DESTINATION_SECRET_NAME: "{{ SOURCE_SECRET_NAME }}"
+DESTINATION_SECRET_KEYS: "{{ SOURCE_SECRET_KEYS }}"
+DESTINATION_NAMESPACE: 
+DESTINATION_VAULT_MOUNT: "{{ DESTINATION_NAMESPACE }}/kv"
+
+COPY_KEYS: []
+COPY_KEY_VALUES: []

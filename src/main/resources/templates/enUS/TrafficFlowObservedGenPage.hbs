@@ -1,0 +1,3342 @@
+{{#*inline "htmTitleTrafficFlowObservedPage"}}		<!-- inline "htmTitleTrafficFlowObservedPage" -->
+		<title>{{#if searchListTrafficFlowObserved_}}{{#eq trafficFlowObservedCount int1}}{{#eq params.query.q "*:*"}}traffic flow observed{{else}}traffic flow observed{{/eq}}{{else}}no traffic flow observed found{{/eq}}{{else}}traffic flow observeds{{/if}}</title>
+{{/inline}}
+{{#*inline "htmMetaTrafficFlowObservedPage"}}{{> "htmMetaMapResultPage"}}{{/inline}}
+{{#*inline "htmStyleTrafficFlowObservedPage"}}{{> "htmStyleMapResultPage"}}{{/inline}}
+{{#*inline "htmScriptsTrafficFlowObservedPage"}}{{> "htmScriptsMapResultPage"}}		<!-- inline "htmScriptsTrafficFlowObservedPage" -->
+		<script src="{{staticBaseUrl}}/js/enUS/TrafficFlowObservedPage.js"></script>
+{{/inline}}
+{{#*inline "htmScriptTrafficFlowObservedPage"}}		<!-- inline "htmScriptTrafficFlowObservedPage" -->
+		<script>
+			$(document).ready(function() {
+				document.onkeydown = function(evt) {
+					evt = evt || window.event;
+					var isEscape = false;
+					if ('key' in evt) {
+						isEscape = (evt.key === 'Escape' || evt.key === 'Esc');
+					} else {
+						isEscape = (evt.keyCode === 27);
+					}
+					if (isEscape) {
+						$('.w3-modal:visible').hide();
+					}
+				};
+				window.eventBus = new EventBus('/eventbus');
+				var pk = {{#if pk}}{{pk}}{{else}}null{{/if}};
+				if(pk != null) {
+				}
+				websocketTrafficFlowObserved(websocketTrafficFlowObservedInner);
+				window.varsFq = JSON.parse('{{{toJsonObjectStringInApostrophes varsFq}}}');
+				window.varsRange = JSON.parse('{{{toJsonObjectStringInApostrophes varsRange}}}');
+				window.defaultRangeVar = '{{ defaultRangeVar }}';
+				pageGraph();
+
+				var calendarEl = document.getElementById('site-calendar');
+				var calendar = new FullCalendar.Calendar(calendarEl, {
+					initialView: 'dayGridMonth'
+				});
+				//calendar.render();
+			});
+			$('#site-calendar-box').accordion({ collapsible: true, active: false });
+{{#if DEFAULT_MAP_LOCATION }}
+			window.DEFAULT_MAP_LOCATION = { lat: {{ DEFAULT_MAP_LOCATION.lat }}, lon: {{ DEFAULT_MAP_LOCATION.lon }} };
+{{/if}}
+{{#if DEFAULT_MAP_ZOOM }}
+			window.DEFAULT_MAP_ZOOM = {{ DEFAULT_MAP_ZOOM }};
+{{/if}}
+			window.DEFAULT_ZONE_ID = '{{ defaultZoneId }}';
+		</script>
+{{/inline}}
+{{#*inline "htmUrlTrafficFlowObserved"}}{{pageUri}}?q={{query.q}}&amp;rows={{#if rows}}{{rows}}{{else}}{{pagination.rows}}{{/if}}&amp;rows={{#if start}}{{start}}{{else}}{{pagination.start}}{{/if}}{{#each query.fq}}{{#eq fq this}}{{else}}&fq={{fq}}:{{val}}{{/eq}}{{/each}}{{#each query.sort}}{{#eq sort this}}{{else}}&sort={{var}} {{order}}{{/eq}}{{/each}}{{/inline}}
+{{#*inline "htmHeadTrafficFlowObservedPage"}}{{#block "htmTitle"}}{{/block}}{{#block "htmMeta"}}{{/block}}{{#block "htmStyle"}}{{/block}}{{#block "htmScripts"}}{{/block}}{{#block "htmScript"}}{{/block}}{{/inline}}
+{{#*inline "htmBodySearchTrafficFlowObservedPage"}}								<!-- #*inline "htmBodySearchTrafficFlowObservedPage" -->
+								<div>
+{{#each varsQ}}
+									<div class="w3-cell-row ">
+										<div class="w3-cell w3-cell-top ">
+											<label for="qTrafficFlowObserved_{{ @key }}">{{ displayName }}<sup class="w3-tiny "> ({{ classSimpleName }})</sup></label>
+										</div>
+									</div>
+									<div class="w3-cell-row ">
+										<div class="w3-cell w3-cell-top ">
+											<input id="qTrafficFlowObserved_{{ @key }}" placeholder="{{ displayName }}" class="" {{#eq ../var 'objectSuggest' }}onkeyup{{else}}onchange{{/eq}}="qChange(this); " data-var="{{ var }}" autocomplete="off="/>
+											<div class="pageSearchVal w3-tiny "></div>
+										</div>
+									</div>
+{{/each}}
+									<div class="w3-cell-row ">
+										<div class="w3-cell w3-cell-top ">
+											<label for="qTrafficFlowObserved_Start">start<sup class="w3-tiny "> (Long)</sup></label>
+										</div>
+									</div>
+									<div class="w3-cell-row ">
+										<div class="w3-cell w3-cell-top ">
+											<input id="qTrafficFlowObserved_start" placeholder="{{ displayName }}" class="" onchange="paramChange(this); " data-var="start" autocomplete="off="/>
+											<div class="pageSearchVal w3-tiny "></div>
+										</div>
+									</div>
+									<div class="w3-cell-row ">
+										<div class="w3-cell w3-cell-top ">
+											<label for="qTrafficFlowObserved_Rows">rows<sup class="w3-tiny "> (Long)</sup></label>
+										</div>
+									</div>
+									<div class="w3-cell-row ">
+										<div class="w3-cell w3-cell-top ">
+											<input id="qTrafficFlowObserved_rows" placeholder="{{ displayName }}" class="" onchange="paramChange(this); " data-var="rows" autocomplete="off="/>
+											<div class="pageSearchVal w3-tiny "></div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+{{#*inline "htmBodyFiltersTrafficFlowObservedPage"}}								<!-- #*inline "htmBodyFiltersTrafficFlowObservedPage" -->
+								<div>
+{{#each varsFq }}
+									<div class="">
+										<label for="fqTrafficFlowObserved_{{ @key }}">{{ displayName }}<sup class="w3-tiny "> ({{ classSimpleName }})</sup></label>
+										<div class="w3-cell-row ">
+											<div class="w3-cell w3-cell-top ">
+												<button id="buttonFacetTrafficFlowObserved_{{ @key }}" class="" onclick="facetFieldChange(this); " title="see values " data-var="{{ var }}" data-clear="{{#if facetField }}true{{else}}false{{/if}}"><i class="fas fa-list "></i></button>
+											</div>
+											<div class="w3-cell w3-cell-top ">
+												<input id="fqTrafficFlowObserved_{{ @key }}" placeholder="{{ displayName }}" class="" onchange="fqChange(this); " data-var="{{ var }}" autocomplete="off=" value="{{ val }}"/>
+											</div>
+										</div>
+									</div>
+									<div class="w3-tiny ">
+										<div class="pageSearchVal " id="pageSearchVal-fqTrafficFlowObserved_{{ @key }}">{{#if val }}fq={{ var }}:{{encodeURIComponent val }}{{/if}}</div>
+										<div class="pageSearchVal " id="pageSearchVal-buttonFacetTrafficFlowObserved_{{ @key }}">{{#if facetField.var }}facet.field={{ facetField.var }}{{/if}}</div>
+										<ol class="pageFacetField w3-small pageFacetFieldTrafficFlowObserved_{{ @key }} " id="pageFacetFieldTrafficFlowObserved_{{ @key }}">
+{{#each facetField.counts }}
+											<li class="cursor-pointer " data-class="TrafficFlowObserved" data-var="{{ ../var }}" data-val="{{ @key }}" onclick="fqReplace(this); ">{{ @key }}: {{ this }}</li>
+{{/each}}
+										</ol>
+									</div>
+{{/each}}
+								</div>
+{{/inline}}
+{{#*inline "htmBodyRangeTrafficFlowObservedPage"}}								<!-- #*inline "htmBodyRangeTrafficFlowObservedPage" -->
+								<table class="w3-padding ">
+									<tr>
+										<td class="w3-padding w3-tiny " colspan="2">
+											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeGap-TrafficFlowObserved">{{#if rangeGap }}facet.range.gap={{encodeURIComponent rangeGap }}{{/if}}</div>
+											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeStart-TrafficFlowObserved">{{#if rangeStart }}facet.range.start={{encodeURIComponent rangeStart }}{{/if}}</div>
+											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeEnd-TrafficFlowObserved">{{#if rangeEnd }}facet.range.end={{encodeURIComponent rangeEnd }}{{/if}}</div>
+											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeVar-TrafficFlowObserved">{{#if defaultRangeVar }}facet.range={!tag=r1}{{encodeURIComponent defaultRangeVar }}{{/if}}</div>
+										</td>
+									</tr>
+								</table>
+								<table class="w3-padding ">
+									<tr class="">
+										<td class="">
+											<span>Range Gap</span>
+										</td>
+										<td class="">
+											<select name="facet.range.gap" id="pageFacetRangeGap-TrafficFlowObserved" onchange="facetRangeGapChange(this, 'TrafficFlowObserved'); ">
+												<option value="+1YEAR"{{#eq defaultRangeGap '+1YEAR'}} selected="selected"{{else}}{{/eq}}>Year</option>
+												<option value="+1MONTH"{{#eq defaultRangeGap '+1MONTH'}} selected="selected"{{else}}{{/eq}}>Month</option>
+												<option value="+1WEEK"{{#eq defaultRangeGap '+1WEEK'}} selected="selected"{{else}}{{/eq}}>Week</option>
+												<option value="+1DAY"{{#eq defaultRangeGap '+1DAY'}} selected="selected"{{else}}{{#if defaultRangeGap}}{{else}} selected="selected"{{/if}}{{/eq}}>Day</option>
+												<option value="+1HOUR"{{#eq defaultRangeGap '+1HOUR'}} selected="selected"{{else}}{{/eq}}>Hour</option>
+												<option value="+1MINUTE"{{#eq defaultRangeGap '+1MINUTE'}} selected="selected"{{else}}{{/eq}}>Minute</option>
+												<option value="+1SECOND"{{#eq defaultRangeGap '+1SECOND'}} selected="selected"{{else}}{{/eq}}>Second</option>
+											</select>
+										</td>
+									</tr>
+									<tr class="">
+										<td class="" colspan="2">
+											<span>Range Start</span>
+										</td>
+									</tr>
+									<tr class="">
+										<td class="" colspan="2">
+											<span><input type="datetime-local" name="facetRangeStart" id="pageFacetRangeStart-TrafficFlowObserved" value="{{formatZonedDateTime defaultRangeStart "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeStartChange(this, 'TrafficFlowObserved'); "/></span>
+										</td>
+									</tr>
+									<tr class="">
+										<td class="" colspan="2">
+											<span>Range End</span>
+										</td>
+									</tr>
+									<tr class="">
+										<td class="" colspan="2">
+											<span><input type="datetime-local" name="facetRangeEnd" id="pageFacetRangeEnd-TrafficFlowObserved" value="{{formatZonedDateTime defaultRangeEnd "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeEndChange(this, 'TrafficFlowObserved'); "/></span>
+										</td>
+									</tr>
+								</table>
+								<table class="w3-padding ">
+{{#each varsRange }}
+									<tr class="">
+										<td class="">
+											<span><input type="radio" name="pageFacetRange" class="pageFacetRange " id="pageFacetRangeTrafficFlowObserved_{{ @key }}" value="{{ var }}"{{#eq defaultRangeVar var }} checked="checked"{{/eq}} onclick="facetRangeChange(this, 'TrafficFlowObserved'); "/></span>
+										</td>
+										<td class="">
+											<label for="pageFacetRangeTrafficFlowObserved_{{ @key }}">{{ displayName }}</label>
+										</td>
+									</tr>
+{{/each}}
+								</table>
+{{/inline}}
+{{#*inline "htmBodyPivotTrafficFlowObservedPage"}}								<!-- #*inline "htmBodyPivotTrafficFlowObservedPage" -->
+								<div style="display: none; " class="w3-padding w3-tiny " id="pageSearchVal-PivotTrafficFlowObservedHidden">
+{{#each defaultPivotVars }}
+									<div class="pageSearchVal-PivotTrafficFlowObservedHidden " id="pageSearchVal-PivotTrafficFlowObservedHidden_{{ this }}">{{ this }}</div>
+{{/each}}
+								</div>
+								<div class="w3-padding w3-tiny " id="pageSearchVal-PivotTrafficFlowObserved">
+{{#if defaultPivotVars }}
+									<div class="pageSearchVal pageSearchVal-PivotTrafficFlowObserved " id="pageSearchVal-PivotTrafficFlowObserved_1">facet.pivot={!range=r1}{{#each defaultPivotVars }}{{#if @index }},{{/if}}{{ this }}{{/each}}</div>
+{{/if}}
+								</div>
+								<table class="w3-table ">
+{{#each varsFq }}
+									<tr class="">
+										<td class="">
+											<span><input type="checkbox" name="pageFacetPivot" class="pageFacetPivot " id="pageFacetPivotTrafficFlowObserved_{{ @key }}" value="{{ var }}"{{#if pivot }} checked="checked"{{/if}} onclick="facetPivotChange(this, 'TrafficFlowObserved'); "/></span>
+										</td>
+										<td class="w3-cell ">
+											<label for="pageFacetPivotTrafficFlowObserved_{{ @key }}">{{ displayName }}</label>
+										</td>
+									</tr>
+{{/each}}
+								</table>
+{{/inline}}
+{{#*inline "htmBodyFieldListTrafficFlowObservedPage"}}								<!-- #*inline "htmBodyFieldListTrafficFlowObservedPage" -->
+								<div style="display: none; " class="w3-padding w3-tiny " id="pageSearchVal-FieldListTrafficFlowObservedHidden">
+{{#each defaultFieldListVars }}
+									<div class="pageSearchVal-FieldListTrafficFlowObservedHidden " id="pageSearchVal-FieldListTrafficFlowObservedHidden_{{ this }}">{{ this }}</div>
+{{/each}}
+								</div>
+								<div class="w3-padding w3-tiny " id="pageSearchVal-FieldListTrafficFlowObserved">
+{{#if defaultFieldListVars }}
+									<div class="pageSearchVal pageSearchVal-FieldListTrafficFlowObserved " id="pageSearchVal-FieldListTrafficFlowObserved_1">fl={{#each defaultFieldListVars }}{{#if @index }},{{/if}}{{ this }}{{/each}}</div>
+{{/if}}
+								</div>
+								<table class="w3-table ">
+{{#each varsFq }}
+									<tr class="">
+										<td class="">
+											<span><input type="checkbox" name="pageFieldList" class="pageFieldList " id="pageFieldListTrafficFlowObserved_{{ @key }}" value="{{ var }}"{{#if fieldList }} checked="checked"{{/if}} onclick="facetFieldListChange(this, 'TrafficFlowObserved'); "/></span>
+										</td>
+										<td class="w3-cell ">
+											<label for="pageFieldListTrafficFlowObserved_{{ @key }}">{{ displayName }}</label>
+										</td>
+									</tr>
+{{/each}}
+								</table>
+{{/inline}}
+{{#*inline "htmBodyStatsTrafficFlowObservedPage"}}								<!-- #*inline "htmBodyStatsTrafficFlowObservedPage" -->
+								<div style="display: none; " class="w3-padding w3-tiny " id="pageSearchVal-StatsTrafficFlowObservedHidden">
+{{#each defaultStatsVars }}
+									<div class="pageSearchVal-StatsTrafficFlowObservedHidden " id="pageSearchVal-StatsTrafficFlowObservedHidden_{{ this }}">{{ this }}</div>
+{{/each}}
+								</div>
+								<div class="w3-padding w3-tiny " id="pageSearchVal-StatsTrafficFlowObserved">
+{{#if defaultStatsVars }}
+{{#each defaultStatsVars }}									<div class="pageSearchVal pageSearchVal-StatsTrafficFlowObserved_{{ this }} " id="pageSearchVal-StatsTrafficFlowObserved_{{ this }}">stats.field={{ this }}</div>
+{{/each}}{{/if}}
+								</div>
+								<table class="w3-table ">
+{{#each varsFq }}
+{{#if enableStats }}
+									<tr class="">
+										<td class="">
+											<span><input type="checkbox" name="pageStats" class="pageStats " id="pageStatsTrafficFlowObserved_{{ @key }}" value="{{ var }}"{{#if ./stats }} checked="checked"{{/if}} onclick="facetStatsChange(this, 'TrafficFlowObserved'); "/></span>
+										</td>
+										<td class="w3-cell ">
+											<div>
+												<label for="pageStatsTrafficFlowObserved_{{ @key }}">{{ displayName }}</label>
+											</div>
+											<div class="pageStatsField w3-small pageStatsFieldTrafficFlowObserved_{{ @key }} " id="pageStatsFieldTrafficFlowObserved_{{ @key }}">
+{{#if ./stats }}
+{{#each ./stats }}
+{{#eq @key 'name' }}{{else}}
+												<div data-class="TrafficFlowObserved" data-var="{{ ../var }}" data-val="{{ @key }}">{{ @key }}: {{ this }}</div>
+{{/eq}}
+{{/each}}
+{{#if ./stats/max }}
+									<div>									<span> step </span>									<input id="animateStatsStep" placeholder="step" value="1" style="width: 4em; "/>									<span> min </span>									<input id="animateStatsMin" placeholder="min" value="{{ ./stats/min }}" style="width: 4em; "/>									<span> max </span>									<input id="animateStatsMax" placeholder="max" value="{{ ./stats/max }}" style="width: 4em; "/>									<span> speed in seconds </span>									<input id="animateStatsSpeed" placeholder="speed" value="1" style="width: 4em; "/>									<button onclick="animateStats(); ">animate</button>									</div>{{/if}}
+{{/if}}
+											</div>
+										</td>
+									</tr>
+{{/if}}
+{{/each}}
+								</table>
+{{/inline}}
+{{#*inline "htmBodyMenuTrafficFlowObservedPage"}}		<!-- #*inline "htmBodyMenuTrafficFlowObservedPage" -->
+{{> "htmBodyMenuMapResultPage"}}{{/inline}}
+{{#*inline "htmBodyGraphTrafficFlowObservedPage"}}		<!-- #*inline "htmBodyGraphTrafficFlowObservedPage" -->
+<div id="htmBodyGraphMapResultPage" class="w3-content htmBodyGraph "></div>{{/inline}}
+{{#*inline "htmBodyCount0TrafficFlowObservedPage"}}		<!-- #*inline "htmBodyCount0TrafficFlowObservedPage" -->
+		<h1>
+			<a href="{{pageUri}}" class="w3-bar-item w3-btn w3-center w3-block w3-2017-shaded-spruce w3-hover-2017-shaded-spruce">
+				{{#if classIconCssClasses}}
+					<i class="{{ classIconCssClasses }} site-menu-icon "></i>
+				{{/if}}
+				<span class="">traffic flow observeds</span>
+			</a>
+		</h1>
+		<h2>
+			<span class="w3-bar-item w3-padding w3-center w3-block w3-2017-shaded-spruce">
+				{{#if classIconCssClasses}}
+					<i class="{{ classIconCssClasses }}  site-menu-icon "></i>
+				{{/if}}
+				<span class="">no traffic flow observed found</span>
+			</span>
+		</h2>
+{{/inline}}
+{{#*inline "htmBodyCount1AllTrafficFlowObservedPage"}}		<!-- #*inline "htmBodyCount1AllTrafficFlowObservedPage" -->
+		<h1 class="w3-center ">
+			<a href="{{pageUri}}" class="w3-bar-item w3-btn w3-block w3-2017-shaded-spruce w3-hover-2017-shaded-spruce">
+			{{#if classIconCssClasses}}
+				<i class="{{ classIconCssClasses }} site-menu-icon "></i>
+			{{/if}}
+				<span class="">traffic flow observed</span>
+			</a>
+		</h1>
+		<h2 class="w3-center ">
+			<span class="w3-bar-item w3-padding w3-center w3-block w3-2017-shaded-spruce">
+				<span class="">{{trafficFlowObserved_.objectTitle}}</span>
+			</span>
+		</h2>
+{{/inline}}
+{{#*inline "htmBodyCount1TrafficFlowObservedPage"}}		<!-- #*inline "htmBodyCount1TrafficFlowObservedPage" -->
+		<h1>
+			<a href="{{pageUri}}" class="w3-bar-item w3-btn w3-center w3-block w3-2017-shaded-spruce w3-hover-2017-shaded-spruce">
+	{{#if classIconCssClasses}}
+				<i class="{{ classIconCssClasses }} site-menu-icon "></i>
+	{{/if}}
+				<span class="">traffic flow observeds</span>
+			</a>
+		</h1>
+		<div>
+	{{#if pagination.pagePrevious}}
+			<a href="{{pageUri}}?start={{pagination.pagePrevious.start}}&amp;rows={{pagination.rows}}">
+				<i class="fas fa-arrow-square-left "></i>
+			</a>
+	{{else}}
+			<i class="fas fa-arrow-square-left w3-opacity "></i>
+	{{/if}}
+	{{#gte pagination.rowsPrevious pagination.1L}}
+			<a href="{{pageUri}}?start={{pagination.start}}&amp;rows={{ pagination.rowsPrevious }}">
+				<i class="fas fa-minus-square "></i>
+			</a>
+	{{else}}
+			<i class="fas fa-minus-square w3-opacity "></i>
+	{{/gte}}
+			<a href="{{pageUri}}?start={{pagination.start}}&amp;rows={{ pagination.rowsNext }}">
+				<i class="fas fa-plus-square "></i>
+			</a>
+	{{#if pagination.pageNext}}
+			<a href="{{pageUri}}?start={{pagination.pageNext.start}}&amp;rows={{pagination.rows}}">
+				<i class="fas fa-arrow-square-right "></i>
+			</a>
+	{{else}}
+			<i class="fas fa-arrow-square-right w3-opacity "></i>
+	{{/if}}
+			<span>{{ pagination.startNum }} - {{ pagination.endNum }} of {{ pagination.foundNum }}</span>
+		</div>
+{{> "table1TrafficFlowObservedPage"}}
+{{/inline}}
+{{#*inline "htmBodyAllTrafficFlowObservedPage"}}		<!-- #*inline "htmBodyAllTrafficFlowObservedPage" -->
+		<h1>
+			<a href="{{pageUri}}" class="w3-bar-item w3-btn w3-center w3-block w3-2017-shaded-spruce w3-hover-2017-shaded-spruce">
+	{{#if classIconCssClasses}}
+				<i class="{{ classIconCssClasses }} site-menu-icon "></i>
+	{{/if}}
+				<span class="">traffic flow observeds</span>
+			</a>
+		</h1>
+		<div class="">
+			<div>
+	{{#if pagination.pagePrevious}}
+				<a href="{{pageUri}}?start={{pagination.pagePrevious.start}}&amp;rows={{pagination.rows}}">
+					<i class="fas fa-arrow-square-left "></i>
+				</a>
+	{{else}}
+				<i class="fas fa-arrow-square-left w3-opacity "></i>
+	{{/if}}
+	{{#gte pagination.rowsPrevious pagination.1L}}
+				<a href="{{pageUri}}?start={{pagination.start}}&amp;rows={{ pagination.rowsPrevious }}">
+					<i class="fas fa-minus-square "></i>
+				</a>
+	{{else}}
+				<i class="fas fa-minus-square w3-opacity "></i>
+	{{/gte}}
+				<a href="{{pageUri}}?start={{pagination.start}}&amp;rows={{ pagination.rowsNext }}">
+					<i class="fas fa-plus-square "></i>
+				</a>
+	{{#if pagination.pageNext}}
+				<a href="{{pageUri}}?start={{pagination.pageNext.start}}&amp;rows={{pagination.rows}}">
+					<i class="fas fa-arrow-square-right "></i>
+				</a>
+	{{else}}
+				<i class="fas fa-arrow-square-right w3-opacity "></i>
+	{{/if}}
+				<span>{{ pagination.startNum }} - {{ pagination.endNum }} of {{ pagination.foundNum }}</span>
+			</div>
+{{> "table1TrafficFlowObservedPage"}}
+		</div>
+{{/inline}}
+{{#*inline "htmFormTrafficFlowObservedPage"}}
+		<!-- #*inline "htmForm" -->
+		<form action="/api/traffic-flow-observed" id="TrafficFlowObservedForm" class="pageForm " style="" onsubmit="event.preventDefault(); return false; ">
+{{#if id}}
+			<input name="id" class="valueId" type="hidden" value="{{id}}"/>
+{{/if}}
+			<input name="focusId" type="hidden"/>
+			<input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{{toJsonObjectStringInApostrophes pageResponse }}}' type="hidden"/>
+		</form>
+{{#if id}}
+{{#block "htmForm_searchpageTrafficFlowObserved"}}{{/block}}
+{{/if}}
+{{/inline}}
+{{#*inline "htmFormTrafficFlowObservedPage_patchTrafficFlowObserved"}}
+		<button
+			class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce "
+			onclick="$('#patchTrafficFlowObservedModal').show(); "
+			>
+			<i class="fas fa-edit "></i>
+			Modify traffic flow observeds
+		</button>
+		<div id="patchTrafficFlowObservedModal" class="w3-modal ">
+			<div class="w3-modal-content ">
+				<div class="w3-card-4 ">
+					<header class="w3-container w3-2017-shaded-spruce">
+	{{#eq "Page" classApiMethodMethod}}
+						<span class="w3-button w3-display-topright " onclick="$('#patchTrafficFlowObservedModal').hide(); ">×</span>
+	{{/eq}}
+						<h2 class="w3-padding ">Modify traffic flow observeds</h2>
+					</header>
+					<div class="" id="patchTrafficFlowObservedFormValues">
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCreated" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmCreated" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmObjectId" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmObjectId" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmArchived" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmArchived" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDeleted" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmDeleted" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmSimulationName" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmSimulationName" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmSimulationKey" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmSimulationKey" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmAddress" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmAddress" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmSumocfgPath" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmSumocfgPath" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmAlternateName" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmAlternateName" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmAreaServed" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmAreaServed" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmTime" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmTime" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDateTime" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmDateTime" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmStep" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmStep" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmAverageGapDistance" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmAverageGapDistance" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmLocation" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmLocation" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmAverageHeadwayTime" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmAverageHeadwayTime" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmColor" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmColor" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmAverageVehicleLength" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmAverageVehicleLength" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmAverageVehicleSpeed" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmAverageVehicleSpeed" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCongested" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmCongested" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDataProvider" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmDataProvider" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDateCreated" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmDateCreated" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDateModified" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmDateModified" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDateObserved" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmDateObserved" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDateObservedFrom" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmDateObservedFrom" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDateObservedTo" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmDateObservedTo" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDescription" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmDescription" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmIntensity" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmIntensity" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmLaneDirection" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmLaneDirection" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmLaneId" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmLaneId" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmName" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmName" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmOccupancy" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmOccupancy" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmOwner" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmOwner" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmRefRoadSegment" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmRefRoadSegment" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmReversedLane" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmReversedLane" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmSeeAlso" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmSeeAlso" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmSource" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmSource" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmType" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmType" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmVehicleSubType" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmVehicleSubType" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmVehicleType" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmVehicleType" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+						<button
+							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-2017-shaded-spruce "
+							onclick="patchTrafficFlowObserved(null, $('#patchTrafficFlowObservedFormValues')); "
+							>Modify traffic flow observeds</button>
+					</div>
+				</div>
+			</div>
+		</div>
+{{/inline}}
+{{#*inline "htmFormTrafficFlowObservedPage_postTrafficFlowObserved"}}
+		<button
+			class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce "
+			onclick="$('#postTrafficFlowObservedModal').show(); "
+			>
+			<i class="fas fa-file-plus "></i>
+			Create a traffic flow observed
+		</button>
+		<div id="postTrafficFlowObservedModal" class="w3-modal ">
+			<div class="w3-modal-content ">
+				<div class="w3-card-4 ">
+					<header class="w3-container w3-2017-shaded-spruce">
+	{{#eq "Page" classApiMethodMethod}}
+						<span class="w3-button w3-display-topright " onclick="$('#postTrafficFlowObservedModal').hide(); ">×</span>
+	{{/eq}}
+						<h2 class="w3-padding ">Create a traffic flow observed</h2>
+					</header>
+					<div class="" id="postTrafficFlowObservedFormValues">
+						<div id="postTrafficFlowObservedForm">
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCreated" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmCreated" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmObjectId" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmObjectId" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmArchived" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmArchived" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDeleted" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmDeleted" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmSimulationName" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmSimulationName" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmSimulationKey" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmSimulationKey" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmAddress" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmAddress" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmSumocfgPath" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmSumocfgPath" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmAlternateName" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmAlternateName" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmAreaServed" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmAreaServed" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmTime" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmTime" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDateTime" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmDateTime" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmStep" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmStep" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmAverageGapDistance" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmAverageGapDistance" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmLocation" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmLocation" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmAverageHeadwayTime" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmAverageHeadwayTime" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmColor" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmColor" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmAverageVehicleLength" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmAverageVehicleLength" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmAverageVehicleSpeed" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmAverageVehicleSpeed" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCongested" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmCongested" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDataProvider" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmDataProvider" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDateCreated" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmDateCreated" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDateModified" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmDateModified" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDateObserved" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmDateObserved" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDateObservedFrom" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmDateObservedFrom" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDateObservedTo" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmDateObservedTo" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDescription" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmDescription" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmIntensity" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmIntensity" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmLaneDirection" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmLaneDirection" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmLaneId" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmLaneId" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmName" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmName" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmOccupancy" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmOccupancy" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmOwner" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmOwner" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmRefRoadSegment" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmRefRoadSegment" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmReversedLane" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmReversedLane" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmSeeAlso" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmSeeAlso" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmSource" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmSource" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmType" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmType" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmVehicleSubType" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmVehicleSubType" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmVehicleType" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmVehicleType" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+						</div>
+						<button
+							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-2017-shaded-spruce "
+							onclick="postTrafficFlowObserved($('#postTrafficFlowObservedForm')); "
+							>Create a traffic flow observed</button>
+					</div>
+				</div>
+			</div>
+		</div>
+{{/inline}}
+{{#*inline "htmFormTrafficFlowObservedPage_putimportTrafficFlowObserved"}}
+		<button
+			class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce "
+			onclick="$('#putimportTrafficFlowObservedModal').show(); "
+			>
+			<i class="fas fa-file-import "></i>
+			Import traffic flow observeds
+		</button>
+		<div id="putimportTrafficFlowObservedModal" class="w3-modal ">
+			<div class="w3-modal-content ">
+				<div class="w3-card-4 ">
+					<header class="w3-container w3-2017-shaded-spruce">
+	{{#eq "Page" classApiMethodMethod}}
+						<span class="w3-button w3-display-topright " onclick="$('#putimportTrafficFlowObservedModal').hide(); ">×</span>
+	{{/eq}}
+						<h2 class="w3-padding ">Import traffic flow observeds</h2>
+					</header>
+					<div class="" id="putimportTrafficFlowObservedFormValues">
+						<div class="w3-cell-row ">
+							<textarea
+								class="PUTImport_searchList w3-input w3-border "
+								style="height: 300px; "
+								placeholder="{ 'searchList': [ { 'pk': ... , 'saves': [ ... ] }, ... ] }"
+								></textarea>
+						</div>
+						<button
+							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-2017-shaded-spruce "
+							onclick="putimportTrafficFlowObserved($('#putimportTrafficFlowObservedFormValues')); "
+							>Import traffic flow observeds</button>
+					</div>
+				</div>
+			</div>
+		</div>
+{{/inline}}
+{{#*inline "htmFormTrafficFlowObservedPage_searchpageTrafficFlowObserved"}}
+		<div id="searchpageTrafficFlowObservedModal" class="">
+			<div class="">
+				<div class="w3-card-4 ">
+					<div class="" id="searchpageTrafficFlowObservedFormValues">
+						<div id="searchpageTrafficFlowObservedForm">
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCreated" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmCreated" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmModified" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmModified" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmObjectId" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmObjectId" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmArchived" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmArchived" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDeleted" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmDeleted" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmSimulationName" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmSimulationName" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmSimulationKey" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmSimulationKey" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmAddress" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmAddress" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmSumocfgPath" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmSumocfgPath" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmAlternateName" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmAlternateName" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmAreaServed" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmAreaServed" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmTime" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmTime" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDateTime" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmDateTime" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmStep" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmStep" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmAverageGapDistance" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmAverageGapDistance" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmLocation" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmLocation" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmAverageHeadwayTime" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmAverageHeadwayTime" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmColor" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmColor" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmAverageVehicleLength" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmAverageVehicleLength" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmAverageVehicleSpeed" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmAverageVehicleSpeed" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCongested" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmCongested" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDataProvider" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmDataProvider" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDateCreated" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmDateCreated" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDateModified" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmDateModified" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDateObserved" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmDateObserved" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDateObservedFrom" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmDateObservedFrom" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDateObservedTo" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmDateObservedTo" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDescription" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmDescription" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmIntensity" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmIntensity" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmLaneDirection" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmLaneDirection" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmLaneId" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmLaneId" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmName" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmName" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmOccupancy" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmOccupancy" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmOwner" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmOwner" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmRefRoadSegment" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmRefRoadSegment" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmReversedLane" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmReversedLane" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmSeeAlso" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmSeeAlso" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmSource" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmSource" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmType" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmType" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmVehicleSubType" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmVehicleSubType" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmVehicleType" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmVehicleType" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+{{/inline}}
+{{#*inline "htmBodySidebarTrafficFlowObservedPage"}}
+				<div class="w3-dropdown-click w3-bar-block min-width-300px ">
+					<div class="min-width-300px ">
+						<span title="Search" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-shaded-spruce " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-2017-shaded-spruce'); $(this).addClass('w3-black'); $(this).removeClass('w3-2017-shaded-spruce'); "><i class="fad fa-magnifying-glass hover-box-shadow w3-xlarge "></i> Search</span>
+						<span title="Filters" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-shaded-spruce " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleFilters').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-2017-shaded-spruce'); $(this).addClass('w3-black'); $(this).removeClass('w3-2017-shaded-spruce'); "><i class="fad fa-filters hover-box-shadow w3-xlarge "></i> Filters</span>
+						<span title="Range" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-shaded-spruce " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleRange').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-2017-shaded-spruce'); $(this).addClass('w3-black'); $(this).removeClass('w3-2017-shaded-spruce'); "><i class="fad fa-calendar-range hover-box-shadow w3-xlarge "></i> Range</span>
+						<span title="Pivot" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-shaded-spruce " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-2017-shaded-spruce'); $(this).addClass('w3-black'); $(this).removeClass('w3-2017-shaded-spruce'); "><i class="fad fa-table-pivot hover-box-shadow w3-xlarge "></i> Pivot</span>
+						<span title="FieldList" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-shaded-spruce " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleFieldList').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-2017-shaded-spruce'); $(this).addClass('w3-black'); $(this).removeClass('w3-2017-shaded-spruce'); "><i class="fad fa-list-ul hover-box-shadow w3-xlarge "></i> FieldList</span>
+						<span title="Stats" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-shaded-spruce " onclick="$('.siteSidebarToggleFieldList').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleStats').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-2017-shaded-spruce'); $(this).addClass('w3-black'); $(this).removeClass('w3-2017-shaded-spruce'); "><i class="fad fa-chart-candlestick hover-box-shadow w3-xlarge "></i> Stats</span>
+						<a title="API" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-shaded-spruce " href="{{ apiUri }}{{ queryStr }}"><i class="fad fa-brackets-curly hover-box-shadow w3-xlarge "></i> API</a>
+					</div>
+					<div class=" ">
+						<div class="siteSidebarToggle siteSidebarToggleSearch w3-dropdown-content min-width-300px w3-white w3-border w3-border-2017-shaded-spruce " style="display: none; ">
+							<div class="w3-bar w3-2017-shaded-spruce ">
+								<span class="w3-bar-item ">
+								<i class="fad fa-magnifying-glass "></i> Search</span>
+							</div>
+							<div class="w3-bar-block ">
+{{#block "htmBodySearch"}}{{/block}}
+							</div>
+						</div>
+						<div  class="siteSidebarToggle siteSidebarToggleFilters w3-dropdown-content min-width-300px w3-white w3-border w3-border-2017-shaded-spruce " style="display: none; ">
+							<div class="w3-bar w3-2017-shaded-spruce ">
+								<span class="w3-bar-item ">
+								<i class="fad fa-filters "></i> Filters</span>
+							</div>
+							<div class="w3-bar-block ">
+{{#block "htmBodyFilters"}}{{/block}}
+							</div>
+						</div>
+						<div  class="siteSidebarToggle siteSidebarToggleRange w3-dropdown-content min-width-300px w3-white w3-border w3-border-2017-shaded-spruce " style="display: none; ">
+							<div class="w3-bar w3-2017-shaded-spruce  ">
+								<span class="w3-bar-item ">
+								<i class="fad fa-calendar-range "></i> Range</span>
+							</div>
+							<div class="w3-bar-block ">
+{{#block "htmBodyRange"}}{{/block}}
+							</div>
+						</div>
+						<div  class="siteSidebarToggle siteSidebarTogglePivot w3-dropdown-content min-width-300px w3-white w3-border w3-border-2017-shaded-spruce " style="display: none; ">
+							<div class="w3-bar w3-2017-shaded-spruce ">
+								<span class="w3-bar-item ">
+								<i class="fad fa-table-pivot "></i> Pivot</span>
+							</div>
+							<div class="w3-bar-block ">
+{{#block "htmBodyPivot"}}{{/block}}
+							</div>
+						</div>
+						<div  class="siteSidebarToggle siteSidebarToggleFieldList w3-dropdown-content min-width-300px w3-white w3-border w3-border-2017-shaded-spruce " style="display: none; ">
+							<div class="w3-bar w3-2017-shaded-spruce ">
+								<span class="w3-bar-item ">
+								<i class="fad fa-list-ul "></i> Field List</span>
+							</div>
+							<div class="w3-bar-block ">
+{{#block "htmBodyFieldList"}}{{/block}}
+							</div>
+						</div>
+						<div  class="siteSidebarToggle siteSidebarToggleStats w3-dropdown-content min-width-300px w3-white w3-border w3-border-2017-shaded-spruce " style="display: none; ">
+							<div class="w3-bar w3-2017-shaded-spruce ">
+								<span class="w3-bar-item ">
+								<i class="fad fa-chart-candlestick "></i> Stats</span>
+							</div>
+							<div class="w3-bar-block ">
+{{#block "htmBodyStats"}}{{/block}}
+							</div>
+						</div>
+					</div>
+				</div>
+{{/inline}}
+{{#*inline "htmBodyStartTrafficFlowObservedPage"}}
+{{> "htmBodyStartMapResultPage"}}
+{{/inline}}
+{{#*inline "htmBodyMiddleTrafficFlowObservedPage"}}
+{{> "htmBodyMiddleMapResultPage"}}
+{{/inline}}
+{{#*inline "htmBodyEndTrafficFlowObservedPage"}}
+{{> "htmBodyEndMapResultPage"}}
+{{/inline}}
+{{#*inline "htmBodyTrafficFlowObservedPage"}}
+{{#block "htmBodyStart"}}{{/block}}
+{{#block "htmBodyMiddle"}}{{/block}}
+{{#block "htmBodyEnd"}}{{/block}}
+{{/inline}}
+{{#*inline "htmBodyMiddleTrafficFlowObservedPage"}}
+		<div class="w3-bar w3-content ">
+{{#block "htmBodySidebar"}}{{/block}}
+		</div>
+{{#block "htmBodyGraph"}}{{/block}}
+	<div class="pageContent w3-content ">
+		<div id="site-calendar-box">
+			<div id="site-calendar"><!-- // --></div>
+		</div>
+	{{#eq trafficFlowObservedCount int0}}
+{{#block "htmBodyCount0"}}{{/block}}
+	{{else}}
+		{{#eq trafficFlowObservedCount int1}}
+			{{#eq params.query.q "*:*"}}
+{{#block "htmBodyCount1All"}}{{/block}}
+			{{else}}
+{{#block "htmBodyCount1"}}{{/block}}
+			{{/eq}}
+		{{else}}
+{{#block "htmBodyAll"}}{{/block}}
+		{{/eq}}
+	{{/eq}}
+{{#block "htmForm"}}{{/block}}
+{{#block "htmForms"}}{{/block}}
+	</div>
+{{/inline}}
+{{#*inline "table1TrafficFlowObservedPage"}}
+		<div class="w3-responsive ">
+			<table class="w3-table w3-bordered w3-striped w3-border w3-hoverable ">
+{{> table2TrafficFlowObservedPage}}
+			</table>
+		</div>
+{{/inline}}
+{{#*inline "table2TrafficFlowObservedPage"}}
+{{> "thead1TrafficFlowObservedPage"}}
+{{> "tbody1TrafficFlowObservedPage"}}
+{{> "tfoot1TrafficFlowObservedPage"}}
+{{/inline}}
+{{#*inline "thead1TrafficFlowObservedPage"}}
+				<thead class="w3-2017-shaded-spruce w3-hover-2017-shaded-spruce">
+{{> thead2TrafficFlowObservedPage}}
+				</thead>
+{{/inline}}
+{{#*inline "thead2TrafficFlowObservedPage"}}
+			<tr>
+						<th>created</th>
+						<th></th>
+			</tr>
+{{/inline}}
+{{#*inline "tbody1TrafficFlowObservedPage"}}
+				<tbody>
+{{> tbody2TrafficFlowObservedPage}}
+				</tbody>
+{{/inline}}
+{{#*inline "tbody2TrafficFlowObservedPage"}}
+		{{#each listTrafficFlowObserved}}
+					<tr>
+						<td>
+							<a href="{{pageUrlPk}}">
+								<span class="white-space-pre-wrap ">{{siteZonedDateTimeFormat created "MMM d, yyyy h:mm:ss a" siteLocale}}</span>
+							</a>
+						</td>
+						<td>
+							<a href="{{pageUrlPk}}">
+								<i class="fad fa-map-location-dot "></i>
+								<span class="white-space-pre-wrap ">{{objectTitle}}</span>
+							</a>
+						</td>
+					</tr>
+		{{/each}}
+{{/inline}}
+{{#*inline "tfoot1TrafficFlowObservedPage"}}
+				<tfoot class="w3-2017-shaded-spruce w3-hover-2017-shaded-spruce">
+{{> tfoot2TrafficFlowObservedPage}}
+				</tfoot>
+{{/inline}}
+{{#*inline "tfoot2TrafficFlowObservedPage"}}
+			<tr>
+			{{#if getColumnCreated}}
+				<td>
+				</td>
+			{{/if}}
+			{{#if getColumnObjectTitle}}
+				<td>
+				</td>
+			{{/if}}
+			</tr>
+	{{/inline}}
+{{#*inline "htmFormsTrafficFlowObservedPage"}}
+	{{#ifContainsAnyRoles roles roleRequired}}
+		{{#eq trafficFlowObservedCount int1}}
+		<button
+			class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce "
+			id="refreshThisTrafficFlowObservedGenPage"
+			onclick="patch{{classSimpleName}}Vals( [ {name: 'fq', value: 'id:{{id}}' } ], {}, function() { addGlow($('#refreshThisTrafficFlowObservedGenPage')); }, function() { addError($('#refreshThisTrafficFlowObservedGenPage')); }); return false; ">
+			<i class="fas fa-sync-alt "></i>
+			refresh this traffic flow observed
+		</button>
+		{{/eq}}
+	{{/ifContainsAnyRoles}}
+	{{#ifContainsAnyRoles roles authRolesAdmin}}
+{{#block "htmForm_patchTrafficFlowObserved"}}{{/block}}
+{{#block "htmForm_postTrafficFlowObserved"}}{{/block}}
+{{#block "htmForm_putimportTrafficFlowObserved"}}{{/block}}
+	{{/ifContainsAnyRoles}}
+{{#block "htmSuggested"}}{{/block}}
+{{/inline}}
+{{#*inline "htmSuggestedTrafficFlowObservedPage"}}
+			{{#ifContainsAnyRoles roles roleRequired}}
+					<div class="">
+						<button id="refreshAllTrafficFlowObservedGenPage{{id}}" class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce "
+							onclick="patch{{classSimpleName}}Vals([], {}, function() { addGlow($('#refreshAllTrafficFlowObservedGenPage{{id}}')); }, function() { addError($('#refreshAllTrafficFlowObservedGenPage{{id}}')); }); "
+							>
+							<i class="fas fa-sync-alt "></i>
+							refresh all the traffic flow observeds
+						</button>
+					</div>
+			{{/ifContainsAnyRoles}}
+			<div class="w3-cell-row ">
+				<div class="w3-cell ">
+					<span>
+						search traffic flow observeds: 
+					</span>
+				</div>
+			</div>
+			<div class="w3-bar ">
+				<input
+					type="text"
+					class="suggestTrafficFlowObserved w3-input w3-border w3-bar-item "
+					name="suggestTrafficFlowObserved"
+					id="suggestTrafficFlowObserved{{id}}"
+					autocomplete="off"
+					oninput="suggestTrafficFlowObservedObjectSuggest( [ { 'name': 'q', 'value': 'objectSuggest:' + $(this).val() }, { 'name': 'rows', 'value': '10' }, { 'name': 'fl', 'value': 'classCanonicalName,,pageUrlPk,objectTitle' } ], $('#suggestListTrafficFlowObserved{{id}}'), {{id}}; "
+					onkeyup="if (event.keyCode === 13) { event.preventDefault(); window.location.href = '/traffic-flow-observed?q={{query1}}:' + encodeURIComponent(this.value) + '{{fqs}}{{sorts}}&amp;rows={{start2}}&amp;rows={{rows1}}"
+				{{#if listTrafficFlowObserved}}
+					value="{{query2}}"
+				{{/if}}
+				/>
+				<button
+					class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+					onclick="window.location.href = '/traffic-flow-observed?q=&quot;, query1, &quot;:' + encodeURIComponent(this.previousElementSibling.value) + '&quot;, fqs, sorts, &quot;&amp;rows=&quot;, start2, &quot;&amp;rows=&quot;, rows1, &quot;'; "
+					>
+					<i class="fas fa-search "></i>
+				</button>
+			<div>
+			<div class="w3-cell-row ">
+				<div class="w3-cell w3-left-align w3-cell-top ">
+					<ul class="w3-ul w3-hoverable " id="suggestListTrafficFlowObserved{{id}}">
+					</ul>
+				</div>
+			</div>
+			<div class="">
+				<a href="/traffic-flow-observed" class="">
+					<i class="fad fa-map-location-dot"></i>
+					see all the traffic flow observeds
+				</a>
+			</div>
+{{/inline}}
+{{> MapResultPage mapResult_=trafficFlowObserved_}}
+
+{{#*inline "htmAddress"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficFlowObservedAddress">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_address">address</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputAddress" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_address')); $('#{{classApiMethodMethod}}_address').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#TrafficFlowObservedForm :input[name=id]').val() }], 'setAddress', null, function() { addGlow($('#{{classApiMethodMethod}}_address')); }, function() { addError($('#{{classApiMethodMethod}}_address')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputAddress"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															placeholder="address"
+															title="The mailing address"
+															id="{{classApiMethodMethod}}_address"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setAddress classTrafficFlowObserved inputTrafficFlowObserved{{id}}Address w3-input w3-border "
+																name="setAddress"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setAddress classTrafficFlowObserved inputTrafficFlowObserved{{id}}Address w3-input w3-border "
+																name="setAddress"
+		{{else}}
+																class="valueAddress w3-input w3-border classTrafficFlowObserved inputTrafficFlowObserved{{id}}Address w3-input w3-border "
+																name="address"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setAddress', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_address')); }, function() { addError($('#{{classApiMethodMethod}}_address')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficFlowObserved_.address}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficFlowObserved{{id}}Address ">{{trafficFlowObserved_.address}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficFlowObserved{{id}}Address ">{{trafficFlowObserved_.address}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmAlternateName"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficFlowObservedAlternateName">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_alternateName">alternate name</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputAlternateName" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_alternateName')); $('#{{classApiMethodMethod}}_alternateName').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#TrafficFlowObservedForm :input[name=id]').val() }], 'setAlternateName', null, function() { addGlow($('#{{classApiMethodMethod}}_alternateName')); }, function() { addError($('#{{classApiMethodMethod}}_alternateName')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputAlternateName"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															placeholder="alternate name"
+															title="An alternative name for this item"
+															id="{{classApiMethodMethod}}_alternateName"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setAlternateName classTrafficFlowObserved inputTrafficFlowObserved{{id}}AlternateName w3-input w3-border "
+																name="setAlternateName"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setAlternateName classTrafficFlowObserved inputTrafficFlowObserved{{id}}AlternateName w3-input w3-border "
+																name="setAlternateName"
+		{{else}}
+																class="valueAlternateName w3-input w3-border classTrafficFlowObserved inputTrafficFlowObserved{{id}}AlternateName w3-input w3-border "
+																name="alternateName"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setAlternateName', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_alternateName')); }, function() { addError($('#{{classApiMethodMethod}}_alternateName')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficFlowObserved_.alternateName}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficFlowObserved{{id}}AlternateName ">{{trafficFlowObserved_.alternateName}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficFlowObserved{{id}}AlternateName ">{{trafficFlowObserved_.alternateName}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmAreaServed"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficFlowObservedAreaServed">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_areaServed">area served</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputAreaServed" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_areaServed')); $('#{{classApiMethodMethod}}_areaServed').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#TrafficFlowObservedForm :input[name=id]').val() }], 'setAreaServed', null, function() { addGlow($('#{{classApiMethodMethod}}_areaServed')); }, function() { addError($('#{{classApiMethodMethod}}_areaServed')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputAreaServed"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															placeholder="area served"
+															title="The geographic area where a service or offered item is provided"
+															id="{{classApiMethodMethod}}_areaServed"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setAreaServed classTrafficFlowObserved inputTrafficFlowObserved{{id}}AreaServed w3-input w3-border "
+																name="setAreaServed"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setAreaServed classTrafficFlowObserved inputTrafficFlowObserved{{id}}AreaServed w3-input w3-border "
+																name="setAreaServed"
+		{{else}}
+																class="valueAreaServed w3-input w3-border classTrafficFlowObserved inputTrafficFlowObserved{{id}}AreaServed w3-input w3-border "
+																name="areaServed"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setAreaServed', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_areaServed')); }, function() { addError($('#{{classApiMethodMethod}}_areaServed')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficFlowObserved_.areaServed}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficFlowObserved{{id}}AreaServed ">{{trafficFlowObserved_.areaServed}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficFlowObserved{{id}}AreaServed ">{{trafficFlowObserved_.areaServed}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmAverageGapDistance"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficFlowObservedAverageGapDistance">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_averageGapDistance">average gap distance</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputAverageGapDistance" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_averageGapDistance')); $('#{{classApiMethodMethod}}_averageGapDistance').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#TrafficFlowObservedForm :input[name=id]').val() }], 'setAverageGapDistance', null, function() { addGlow($('#{{classApiMethodMethod}}_averageGapDistance')); }, function() { addError($('#{{classApiMethodMethod}}_averageGapDistance')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputAverageGapDistance"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															placeholder="average gap distance"
+															title="Average gap distance between consecutive vehicles"
+															id="{{classApiMethodMethod}}_averageGapDistance"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setAverageGapDistance classTrafficFlowObserved inputTrafficFlowObserved{{id}}AverageGapDistance w3-input w3-border "
+																name="setAverageGapDistance"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setAverageGapDistance classTrafficFlowObserved inputTrafficFlowObserved{{id}}AverageGapDistance w3-input w3-border "
+																name="setAverageGapDistance"
+		{{else}}
+																class="valueAverageGapDistance w3-input w3-border classTrafficFlowObserved inputTrafficFlowObserved{{id}}AverageGapDistance w3-input w3-border "
+																name="averageGapDistance"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setAverageGapDistance', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_averageGapDistance')); }, function() { addError($('#{{classApiMethodMethod}}_averageGapDistance')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficFlowObserved_.averageGapDistance}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficFlowObserved{{id}}AverageGapDistance ">{{trafficFlowObserved_.averageGapDistance}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficFlowObserved{{id}}AverageGapDistance ">{{trafficFlowObserved_.averageGapDistance}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmAverageHeadwayTime"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficFlowObservedAverageHeadwayTime">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_averageHeadwayTime">average headway time</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputAverageHeadwayTime" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_averageHeadwayTime')); $('#{{classApiMethodMethod}}_averageHeadwayTime').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#TrafficFlowObservedForm :input[name=id]').val() }], 'setAverageHeadwayTime', null, function() { addGlow($('#{{classApiMethodMethod}}_averageHeadwayTime')); }, function() { addError($('#{{classApiMethodMethod}}_averageHeadwayTime')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputAverageHeadwayTime"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															placeholder="average headway time"
+															title="Average headway time. Headway time is the time ellapsed between two consecutive vehicles"
+															id="{{classApiMethodMethod}}_averageHeadwayTime"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setAverageHeadwayTime classTrafficFlowObserved inputTrafficFlowObserved{{id}}AverageHeadwayTime w3-input w3-border "
+																name="setAverageHeadwayTime"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setAverageHeadwayTime classTrafficFlowObserved inputTrafficFlowObserved{{id}}AverageHeadwayTime w3-input w3-border "
+																name="setAverageHeadwayTime"
+		{{else}}
+																class="valueAverageHeadwayTime w3-input w3-border classTrafficFlowObserved inputTrafficFlowObserved{{id}}AverageHeadwayTime w3-input w3-border "
+																name="averageHeadwayTime"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setAverageHeadwayTime', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_averageHeadwayTime')); }, function() { addError($('#{{classApiMethodMethod}}_averageHeadwayTime')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficFlowObserved_.averageHeadwayTime}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficFlowObserved{{id}}AverageHeadwayTime ">{{trafficFlowObserved_.averageHeadwayTime}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficFlowObserved{{id}}AverageHeadwayTime ">{{trafficFlowObserved_.averageHeadwayTime}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmAverageVehicleLength"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficFlowObservedAverageVehicleLength">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_averageVehicleLength">average vehicle length</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputAverageVehicleLength" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_averageVehicleLength')); $('#{{classApiMethodMethod}}_averageVehicleLength').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#TrafficFlowObservedForm :input[name=id]').val() }], 'setAverageVehicleLength', null, function() { addGlow($('#{{classApiMethodMethod}}_averageVehicleLength')); }, function() { addError($('#{{classApiMethodMethod}}_averageVehicleLength')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputAverageVehicleLength"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															placeholder="average vehicle length"
+															title="Average length of the vehicles transiting during     the observation period"
+															id="{{classApiMethodMethod}}_averageVehicleLength"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setAverageVehicleLength classTrafficFlowObserved inputTrafficFlowObserved{{id}}AverageVehicleLength w3-input w3-border "
+																name="setAverageVehicleLength"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setAverageVehicleLength classTrafficFlowObserved inputTrafficFlowObserved{{id}}AverageVehicleLength w3-input w3-border "
+																name="setAverageVehicleLength"
+		{{else}}
+																class="valueAverageVehicleLength w3-input w3-border classTrafficFlowObserved inputTrafficFlowObserved{{id}}AverageVehicleLength w3-input w3-border "
+																name="averageVehicleLength"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setAverageVehicleLength', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_averageVehicleLength')); }, function() { addError($('#{{classApiMethodMethod}}_averageVehicleLength')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficFlowObserved_.averageVehicleLength}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficFlowObserved{{id}}AverageVehicleLength ">{{trafficFlowObserved_.averageVehicleLength}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficFlowObserved{{id}}AverageVehicleLength ">{{trafficFlowObserved_.averageVehicleLength}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmAverageVehicleSpeed"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficFlowObservedAverageVehicleSpeed">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_averageVehicleSpeed">average vehicle speed</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputAverageVehicleSpeed" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_averageVehicleSpeed')); $('#{{classApiMethodMethod}}_averageVehicleSpeed').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#TrafficFlowObservedForm :input[name=id]').val() }], 'setAverageVehicleSpeed', null, function() { addGlow($('#{{classApiMethodMethod}}_averageVehicleSpeed')); }, function() { addError($('#{{classApiMethodMethod}}_averageVehicleSpeed')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputAverageVehicleSpeed"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															placeholder="average vehicle speed"
+															title="Average speed of the vehicles transiting during the observation period"
+															id="{{classApiMethodMethod}}_averageVehicleSpeed"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setAverageVehicleSpeed classTrafficFlowObserved inputTrafficFlowObserved{{id}}AverageVehicleSpeed w3-input w3-border "
+																name="setAverageVehicleSpeed"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setAverageVehicleSpeed classTrafficFlowObserved inputTrafficFlowObserved{{id}}AverageVehicleSpeed w3-input w3-border "
+																name="setAverageVehicleSpeed"
+		{{else}}
+																class="valueAverageVehicleSpeed w3-input w3-border classTrafficFlowObserved inputTrafficFlowObserved{{id}}AverageVehicleSpeed w3-input w3-border "
+																name="averageVehicleSpeed"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setAverageVehicleSpeed', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_averageVehicleSpeed')); }, function() { addError($('#{{classApiMethodMethod}}_averageVehicleSpeed')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficFlowObserved_.averageVehicleSpeed}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficFlowObserved{{id}}AverageVehicleSpeed ">{{trafficFlowObserved_.averageVehicleSpeed}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficFlowObserved{{id}}AverageVehicleSpeed ">{{trafficFlowObserved_.averageVehicleSpeed}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmCongested"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficFlowObservedCongested">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_congested">congested</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputCongested" roleRequired=roleRequired}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputCongested"}}
+		{{#eq roleRequired "true"}}
+	{{#eq 'Page' classApiMethodMethod}}
+															<input
+																type="checkbox"
+																id="{{classApiMethodMethod}}_congested"
+																value="true"
+	{{else}}
+														<select
+															id="{{classApiMethodMethod}}_congested"
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+															class="classTrafficFlowObserved inputTrafficFlowObserved{{id}}Congested w3-input w3-border "
+															name="setCongested"
+	{{else}}
+		{{#eq 'Page' classApiMethodMethod}}
+																class="classTrafficFlowObserved inputTrafficFlowObserved{{id}}Congested w3-input w3-border "
+																name="setCongested"
+		{{else}}
+																class="setCongested valueCongested classTrafficFlowObserved inputTrafficFlowObserved{{id}}Congested w3-input w3-border "
+																name="setCongested"
+		{{/eq}}
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+															onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setCongested', $(this).prop('checked'), function() { addGlow($('#{{classApiMethodMethod}}_congested')); }, function() { addError($('#{{classApiMethodMethod}}_congested')); }); "
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+		{{#if trafficFlowObserved_.congested}}
+																checked="checked"
+		{{/if}}
+																/>
+	{{else}}
+															>
+															<option value="" selected="selected"></option>
+															<option value="true">true</option>
+															<option value="false">false</option>
+														</select>
+	{{/eq}}
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficFlowObserved{{id}}Congested ">{{trafficFlowObserved_.congested}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficFlowObserved{{id}}Congested ">{{trafficFlowObserved_.congested}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmDataProvider"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficFlowObservedDataProvider">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_dataProvider">data provider</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputDataProvider" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_dataProvider')); $('#{{classApiMethodMethod}}_dataProvider').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#TrafficFlowObservedForm :input[name=id]').val() }], 'setDataProvider', null, function() { addGlow($('#{{classApiMethodMethod}}_dataProvider')); }, function() { addError($('#{{classApiMethodMethod}}_dataProvider')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputDataProvider"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															placeholder="data provider"
+															title="A sequence of characters identifying the provider of the harmonised data entity."
+															id="{{classApiMethodMethod}}_dataProvider"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setDataProvider classTrafficFlowObserved inputTrafficFlowObserved{{id}}DataProvider w3-input w3-border "
+																name="setDataProvider"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setDataProvider classTrafficFlowObserved inputTrafficFlowObserved{{id}}DataProvider w3-input w3-border "
+																name="setDataProvider"
+		{{else}}
+																class="valueDataProvider w3-input w3-border classTrafficFlowObserved inputTrafficFlowObserved{{id}}DataProvider w3-input w3-border "
+																name="dataProvider"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setDataProvider', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_dataProvider')); }, function() { addError($('#{{classApiMethodMethod}}_dataProvider')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficFlowObserved_.dataProvider}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficFlowObserved{{id}}DataProvider ">{{trafficFlowObserved_.dataProvider}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficFlowObserved{{id}}DataProvider ">{{trafficFlowObserved_.dataProvider}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmDateCreated"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficFlowObservedDateCreated">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_dateCreated">date created</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputDateCreated" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_dateCreated')); $('#{{classApiMethodMethod}}_dateCreated').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#TrafficFlowObservedForm :input[name=id]').val() }], 'setDateCreated', null, function() { addGlow($('#{{classApiMethodMethod}}_dateCreated')); }, function() { addError($('#{{classApiMethodMethod}}_dateCreated')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputDateCreated"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															placeholder="date created"
+															title="Entity creation timestamp. This will usually be allocated by the storage platform."
+															id="{{classApiMethodMethod}}_dateCreated"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setDateCreated classTrafficFlowObserved inputTrafficFlowObserved{{id}}DateCreated w3-input w3-border "
+																name="setDateCreated"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setDateCreated classTrafficFlowObserved inputTrafficFlowObserved{{id}}DateCreated w3-input w3-border "
+																name="setDateCreated"
+		{{else}}
+																class="valueDateCreated w3-input w3-border classTrafficFlowObserved inputTrafficFlowObserved{{id}}DateCreated w3-input w3-border "
+																name="dateCreated"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setDateCreated', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_dateCreated')); }, function() { addError($('#{{classApiMethodMethod}}_dateCreated')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficFlowObserved_.dateCreated}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficFlowObserved{{id}}DateCreated ">{{trafficFlowObserved_.dateCreated}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficFlowObserved{{id}}DateCreated ">{{trafficFlowObserved_.dateCreated}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmDateModified"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficFlowObservedDateModified">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_dateModified">date modified</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputDateModified" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_dateModified')); $('#{{classApiMethodMethod}}_dateModified').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#TrafficFlowObservedForm :input[name=id]').val() }], 'setDateModified', null, function() { addGlow($('#{{classApiMethodMethod}}_dateModified')); }, function() { addError($('#{{classApiMethodMethod}}_dateModified')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputDateModified"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															placeholder="date modified"
+															title="Timestamp of the last modification of the entity. This will usually be allocated by the storage platform."
+															id="{{classApiMethodMethod}}_dateModified"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setDateModified classTrafficFlowObserved inputTrafficFlowObserved{{id}}DateModified w3-input w3-border "
+																name="setDateModified"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setDateModified classTrafficFlowObserved inputTrafficFlowObserved{{id}}DateModified w3-input w3-border "
+																name="setDateModified"
+		{{else}}
+																class="valueDateModified w3-input w3-border classTrafficFlowObserved inputTrafficFlowObserved{{id}}DateModified w3-input w3-border "
+																name="dateModified"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setDateModified', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_dateModified')); }, function() { addError($('#{{classApiMethodMethod}}_dateModified')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficFlowObserved_.dateModified}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficFlowObserved{{id}}DateModified ">{{trafficFlowObserved_.dateModified}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficFlowObserved{{id}}DateModified ">{{trafficFlowObserved_.dateModified}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmDateObserved"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficFlowObservedDateObserved">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_dateObserved">date observed</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputDateObserved" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_dateObserved')); $('#{{classApiMethodMethod}}_dateObserved').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#TrafficFlowObservedForm :input[name=id]').val() }], 'setDateObserved', null, function() { addGlow($('#{{classApiMethodMethod}}_dateObserved')); }, function() { addError($('#{{classApiMethodMethod}}_dateObserved')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputDateObserved"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															placeholder="date observed"
+															title="The date and time of this observation in ISO8601 UTC format. It can be represented by an specific time instant or by an ISO8601 interval. As a workaround for the lack of support of Orion Context Broker for datetime intervals, it can be used two separate attributes: `dateObservedFrom`, `dateObservedTo`. [DateTime](https://schema.org/DateTime) or an ISO8601 interval represented as [Text](https://schema.org/Text)"
+															id="{{classApiMethodMethod}}_dateObserved"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setDateObserved classTrafficFlowObserved inputTrafficFlowObserved{{id}}DateObserved w3-input w3-border "
+																name="setDateObserved"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setDateObserved classTrafficFlowObserved inputTrafficFlowObserved{{id}}DateObserved w3-input w3-border "
+																name="setDateObserved"
+		{{else}}
+																class="valueDateObserved w3-input w3-border classTrafficFlowObserved inputTrafficFlowObserved{{id}}DateObserved w3-input w3-border "
+																name="dateObserved"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setDateObserved', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_dateObserved')); }, function() { addError($('#{{classApiMethodMethod}}_dateObserved')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficFlowObserved_.dateObserved}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficFlowObserved{{id}}DateObserved ">{{trafficFlowObserved_.dateObserved}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficFlowObserved{{id}}DateObserved ">{{trafficFlowObserved_.dateObserved}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmDateObservedFrom"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficFlowObservedDateObservedFrom">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_dateObservedFrom">date observed from</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputDateObservedFrom" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_dateObservedFrom')); $('#{{classApiMethodMethod}}_dateObservedFrom').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#TrafficFlowObservedForm :input[name=id]').val() }], 'setDateObservedFrom', null, function() { addGlow($('#{{classApiMethodMethod}}_dateObservedFrom')); }, function() { addError($('#{{classApiMethodMethod}}_dateObservedFrom')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputDateObservedFrom"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															placeholder="date observed from"
+															title="Observation period start date and time. See `dateObserved`"
+															id="{{classApiMethodMethod}}_dateObservedFrom"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setDateObservedFrom classTrafficFlowObserved inputTrafficFlowObserved{{id}}DateObservedFrom w3-input w3-border "
+																name="setDateObservedFrom"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setDateObservedFrom classTrafficFlowObserved inputTrafficFlowObserved{{id}}DateObservedFrom w3-input w3-border "
+																name="setDateObservedFrom"
+		{{else}}
+																class="valueDateObservedFrom w3-input w3-border classTrafficFlowObserved inputTrafficFlowObserved{{id}}DateObservedFrom w3-input w3-border "
+																name="dateObservedFrom"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setDateObservedFrom', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_dateObservedFrom')); }, function() { addError($('#{{classApiMethodMethod}}_dateObservedFrom')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficFlowObserved_.dateObservedFrom}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficFlowObserved{{id}}DateObservedFrom ">{{trafficFlowObserved_.dateObservedFrom}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficFlowObserved{{id}}DateObservedFrom ">{{trafficFlowObserved_.dateObservedFrom}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmDateObservedTo"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficFlowObservedDateObservedTo">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_dateObservedTo">date observed to</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputDateObservedTo" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_dateObservedTo')); $('#{{classApiMethodMethod}}_dateObservedTo').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#TrafficFlowObservedForm :input[name=id]').val() }], 'setDateObservedTo', null, function() { addGlow($('#{{classApiMethodMethod}}_dateObservedTo')); }, function() { addError($('#{{classApiMethodMethod}}_dateObservedTo')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputDateObservedTo"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															placeholder="date observed to"
+															title="Observation period end date and time. See `dateObserved`"
+															id="{{classApiMethodMethod}}_dateObservedTo"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setDateObservedTo classTrafficFlowObserved inputTrafficFlowObserved{{id}}DateObservedTo w3-input w3-border "
+																name="setDateObservedTo"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setDateObservedTo classTrafficFlowObserved inputTrafficFlowObserved{{id}}DateObservedTo w3-input w3-border "
+																name="setDateObservedTo"
+		{{else}}
+																class="valueDateObservedTo w3-input w3-border classTrafficFlowObserved inputTrafficFlowObserved{{id}}DateObservedTo w3-input w3-border "
+																name="dateObservedTo"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setDateObservedTo', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_dateObservedTo')); }, function() { addError($('#{{classApiMethodMethod}}_dateObservedTo')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficFlowObserved_.dateObservedTo}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficFlowObserved{{id}}DateObservedTo ">{{trafficFlowObserved_.dateObservedTo}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficFlowObserved{{id}}DateObservedTo ">{{trafficFlowObserved_.dateObservedTo}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmDescription"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficFlowObservedDescription">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_description">description</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputDescription" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_description')); $('#{{classApiMethodMethod}}_description').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#TrafficFlowObservedForm :input[name=id]').val() }], 'setDescription', null, function() { addGlow($('#{{classApiMethodMethod}}_description')); }, function() { addError($('#{{classApiMethodMethod}}_description')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputDescription"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															placeholder="description"
+															title="A description of this item"
+															id="{{classApiMethodMethod}}_description"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setDescription classTrafficFlowObserved inputTrafficFlowObserved{{id}}Description w3-input w3-border "
+																name="setDescription"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setDescription classTrafficFlowObserved inputTrafficFlowObserved{{id}}Description w3-input w3-border "
+																name="setDescription"
+		{{else}}
+																class="valueDescription w3-input w3-border classTrafficFlowObserved inputTrafficFlowObserved{{id}}Description w3-input w3-border "
+																name="description"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setDescription', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_description')); }, function() { addError($('#{{classApiMethodMethod}}_description')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficFlowObserved_.description}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficFlowObserved{{id}}Description ">{{trafficFlowObserved_.description}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficFlowObserved{{id}}Description ">{{trafficFlowObserved_.description}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmIntensity"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficFlowObservedIntensity">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_intensity">intensity</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputIntensity" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_intensity')); $('#{{classApiMethodMethod}}_intensity').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#TrafficFlowObservedForm :input[name=id]').val() }], 'setIntensity', null, function() { addGlow($('#{{classApiMethodMethod}}_intensity')); }, function() { addError($('#{{classApiMethodMethod}}_intensity')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputIntensity"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															placeholder="intensity"
+															title="Total number of vehicles detected during this observation period"
+															id="{{classApiMethodMethod}}_intensity"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setIntensity classTrafficFlowObserved inputTrafficFlowObserved{{id}}Intensity w3-input w3-border "
+																name="setIntensity"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setIntensity classTrafficFlowObserved inputTrafficFlowObserved{{id}}Intensity w3-input w3-border "
+																name="setIntensity"
+		{{else}}
+																class="valueIntensity w3-input w3-border classTrafficFlowObserved inputTrafficFlowObserved{{id}}Intensity w3-input w3-border "
+																name="intensity"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setIntensity', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_intensity')); }, function() { addError($('#{{classApiMethodMethod}}_intensity')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficFlowObserved_.intensity}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficFlowObserved{{id}}Intensity ">{{trafficFlowObserved_.intensity}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficFlowObserved{{id}}Intensity ">{{trafficFlowObserved_.intensity}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmLaneDirection"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficFlowObservedLaneDirection">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_laneDirection">lane direction</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputLaneDirection" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_laneDirection')); $('#{{classApiMethodMethod}}_laneDirection').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#TrafficFlowObservedForm :input[name=id]').val() }], 'setLaneDirection', null, function() { addGlow($('#{{classApiMethodMethod}}_laneDirection')); }, function() { addError($('#{{classApiMethodMethod}}_laneDirection')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputLaneDirection"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															placeholder="lane direction"
+															title="Usual direction of travel in the lane referred by this observation. This attribute is useful when the observation is not referencing any road segment, allowing to know the direction of travel of the traffic flow observed. Enum:forward, backward'. See RoadSegment for a description of the semantics of these values."
+															id="{{classApiMethodMethod}}_laneDirection"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setLaneDirection classTrafficFlowObserved inputTrafficFlowObserved{{id}}LaneDirection w3-input w3-border "
+																name="setLaneDirection"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setLaneDirection classTrafficFlowObserved inputTrafficFlowObserved{{id}}LaneDirection w3-input w3-border "
+																name="setLaneDirection"
+		{{else}}
+																class="valueLaneDirection w3-input w3-border classTrafficFlowObserved inputTrafficFlowObserved{{id}}LaneDirection w3-input w3-border "
+																name="laneDirection"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setLaneDirection', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_laneDirection')); }, function() { addError($('#{{classApiMethodMethod}}_laneDirection')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficFlowObserved_.laneDirection}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficFlowObserved{{id}}LaneDirection ">{{trafficFlowObserved_.laneDirection}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficFlowObserved{{id}}LaneDirection ">{{trafficFlowObserved_.laneDirection}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmLaneId"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficFlowObservedLaneId">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_laneId">lane id</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputLaneId" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_laneId')); $('#{{classApiMethodMethod}}_laneId').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#TrafficFlowObservedForm :input[name=id]').val() }], 'setLaneId', null, function() { addGlow($('#{{classApiMethodMethod}}_laneId')); }, function() { addError($('#{{classApiMethodMethod}}_laneId')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputLaneId"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															placeholder="lane id"
+															title="Lane identifier. Lane identification is done using the conventions defined by RoadSegment entity which are based on [OpenStreetMap](http://wiki.openstreetmap.org/wiki/Forward_%26_backward,_left_%26_right)."
+															id="{{classApiMethodMethod}}_laneId"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setLaneId classTrafficFlowObserved inputTrafficFlowObserved{{id}}LaneId w3-input w3-border "
+																name="setLaneId"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setLaneId classTrafficFlowObserved inputTrafficFlowObserved{{id}}LaneId w3-input w3-border "
+																name="setLaneId"
+		{{else}}
+																class="valueLaneId w3-input w3-border classTrafficFlowObserved inputTrafficFlowObserved{{id}}LaneId w3-input w3-border "
+																name="laneId"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setLaneId', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_laneId')); }, function() { addError($('#{{classApiMethodMethod}}_laneId')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficFlowObserved_.laneId}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficFlowObserved{{id}}LaneId ">{{trafficFlowObserved_.laneId}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficFlowObserved{{id}}LaneId ">{{trafficFlowObserved_.laneId}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmName"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficFlowObservedName">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_name">name</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputName" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_name')); $('#{{classApiMethodMethod}}_name').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#TrafficFlowObservedForm :input[name=id]').val() }], 'setName', null, function() { addGlow($('#{{classApiMethodMethod}}_name')); }, function() { addError($('#{{classApiMethodMethod}}_name')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputName"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															placeholder="name"
+															title="The name of this item."
+															id="{{classApiMethodMethod}}_name"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setName classTrafficFlowObserved inputTrafficFlowObserved{{id}}Name w3-input w3-border "
+																name="setName"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setName classTrafficFlowObserved inputTrafficFlowObserved{{id}}Name w3-input w3-border "
+																name="setName"
+		{{else}}
+																class="valueName w3-input w3-border classTrafficFlowObserved inputTrafficFlowObserved{{id}}Name w3-input w3-border "
+																name="name"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setName', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_name')); }, function() { addError($('#{{classApiMethodMethod}}_name')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficFlowObserved_.name}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficFlowObserved{{id}}Name ">{{trafficFlowObserved_.name}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficFlowObserved{{id}}Name ">{{trafficFlowObserved_.name}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmOccupancy"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficFlowObservedOccupancy">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_occupancy">occupancy</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputOccupancy" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_occupancy')); $('#{{classApiMethodMethod}}_occupancy').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#TrafficFlowObservedForm :input[name=id]').val() }], 'setOccupancy', null, function() { addGlow($('#{{classApiMethodMethod}}_occupancy')); }, function() { addError($('#{{classApiMethodMethod}}_occupancy')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputOccupancy"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															placeholder="occupancy"
+															title="Fraction of the observation time where a vehicle has been occupying the observed lane"
+															id="{{classApiMethodMethod}}_occupancy"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setOccupancy classTrafficFlowObserved inputTrafficFlowObserved{{id}}Occupancy w3-input w3-border "
+																name="setOccupancy"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setOccupancy classTrafficFlowObserved inputTrafficFlowObserved{{id}}Occupancy w3-input w3-border "
+																name="setOccupancy"
+		{{else}}
+																class="valueOccupancy w3-input w3-border classTrafficFlowObserved inputTrafficFlowObserved{{id}}Occupancy w3-input w3-border "
+																name="occupancy"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setOccupancy', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_occupancy')); }, function() { addError($('#{{classApiMethodMethod}}_occupancy')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficFlowObserved_.occupancy}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficFlowObserved{{id}}Occupancy ">{{trafficFlowObserved_.occupancy}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficFlowObserved{{id}}Occupancy ">{{trafficFlowObserved_.occupancy}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmOwner"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficFlowObservedOwner">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_owner">owner</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputOwner" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_owner')); $('#{{classApiMethodMethod}}_owner').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#TrafficFlowObservedForm :input[name=id]').val() }], 'setOwner', null, function() { addGlow($('#{{classApiMethodMethod}}_owner')); }, function() { addError($('#{{classApiMethodMethod}}_owner')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputOwner"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															placeholder="owner"
+															title="A List containing a JSON encoded sequence of characters referencing the unique Ids of the owner(s)"
+															id="{{classApiMethodMethod}}_owner"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setOwner classTrafficFlowObserved inputTrafficFlowObserved{{id}}Owner w3-input w3-border "
+																name="setOwner"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setOwner classTrafficFlowObserved inputTrafficFlowObserved{{id}}Owner w3-input w3-border "
+																name="setOwner"
+		{{else}}
+																class="valueOwner w3-input w3-border classTrafficFlowObserved inputTrafficFlowObserved{{id}}Owner w3-input w3-border "
+																name="owner"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setOwner', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_owner')); }, function() { addError($('#{{classApiMethodMethod}}_owner')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficFlowObserved_.owner}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficFlowObserved{{id}}Owner ">{{trafficFlowObserved_.owner}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficFlowObserved{{id}}Owner ">{{trafficFlowObserved_.owner}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmRefRoadSegment"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficFlowObservedRefRoadSegment">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_refRoadSegment">ref road segment</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputRefRoadSegment" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_refRoadSegment')); $('#{{classApiMethodMethod}}_refRoadSegment').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#TrafficFlowObservedForm :input[name=id]').val() }], 'setRefRoadSegment', null, function() { addGlow($('#{{classApiMethodMethod}}_refRoadSegment')); }, function() { addError($('#{{classApiMethodMethod}}_refRoadSegment')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputRefRoadSegment"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															placeholder="ref road segment"
+															title="Concerned road segment on which the observation has been made. Reference to an entity of type RoadSegment"
+															id="{{classApiMethodMethod}}_refRoadSegment"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setRefRoadSegment classTrafficFlowObserved inputTrafficFlowObserved{{id}}RefRoadSegment w3-input w3-border "
+																name="setRefRoadSegment"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setRefRoadSegment classTrafficFlowObserved inputTrafficFlowObserved{{id}}RefRoadSegment w3-input w3-border "
+																name="setRefRoadSegment"
+		{{else}}
+																class="valueRefRoadSegment w3-input w3-border classTrafficFlowObserved inputTrafficFlowObserved{{id}}RefRoadSegment w3-input w3-border "
+																name="refRoadSegment"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setRefRoadSegment', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_refRoadSegment')); }, function() { addError($('#{{classApiMethodMethod}}_refRoadSegment')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficFlowObserved_.refRoadSegment}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficFlowObserved{{id}}RefRoadSegment ">{{trafficFlowObserved_.refRoadSegment}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficFlowObserved{{id}}RefRoadSegment ">{{trafficFlowObserved_.refRoadSegment}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmReversedLane"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficFlowObservedReversedLane">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_reversedLane">reversed lane</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputReversedLane" roleRequired=roleRequired}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputReversedLane"}}
+		{{#eq roleRequired "true"}}
+	{{#eq 'Page' classApiMethodMethod}}
+															<input
+																type="checkbox"
+																id="{{classApiMethodMethod}}_reversedLane"
+																value="true"
+	{{else}}
+														<select
+															id="{{classApiMethodMethod}}_reversedLane"
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+															class="classTrafficFlowObserved inputTrafficFlowObserved{{id}}ReversedLane w3-input w3-border "
+															name="setReversedLane"
+	{{else}}
+		{{#eq 'Page' classApiMethodMethod}}
+																class="classTrafficFlowObserved inputTrafficFlowObserved{{id}}ReversedLane w3-input w3-border "
+																name="setReversedLane"
+		{{else}}
+																class="setReversedLane valueReversedLane classTrafficFlowObserved inputTrafficFlowObserved{{id}}ReversedLane w3-input w3-border "
+																name="setReversedLane"
+		{{/eq}}
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+															onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setReversedLane', $(this).prop('checked'), function() { addGlow($('#{{classApiMethodMethod}}_reversedLane')); }, function() { addError($('#{{classApiMethodMethod}}_reversedLane')); }); "
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+		{{#if trafficFlowObserved_.reversedLane}}
+																checked="checked"
+		{{/if}}
+																/>
+	{{else}}
+															>
+															<option value="" selected="selected"></option>
+															<option value="true">true</option>
+															<option value="false">false</option>
+														</select>
+	{{/eq}}
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficFlowObserved{{id}}ReversedLane ">{{trafficFlowObserved_.reversedLane}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficFlowObserved{{id}}ReversedLane ">{{trafficFlowObserved_.reversedLane}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmSeeAlso"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficFlowObservedSeeAlso">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_seeAlso">see also</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputSeeAlso" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_seeAlso')); $('#{{classApiMethodMethod}}_seeAlso').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#TrafficFlowObservedForm :input[name=id]').val() }], 'setSeeAlso', null, function() { addGlow($('#{{classApiMethodMethod}}_seeAlso')); }, function() { addError($('#{{classApiMethodMethod}}_seeAlso')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputSeeAlso"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															placeholder="see also"
+															title="list of uri pointing to additional resources about the item"
+															id="{{classApiMethodMethod}}_seeAlso"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setSeeAlso classTrafficFlowObserved inputTrafficFlowObserved{{id}}SeeAlso w3-input w3-border "
+																name="setSeeAlso"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setSeeAlso classTrafficFlowObserved inputTrafficFlowObserved{{id}}SeeAlso w3-input w3-border "
+																name="setSeeAlso"
+		{{else}}
+																class="valueSeeAlso w3-input w3-border classTrafficFlowObserved inputTrafficFlowObserved{{id}}SeeAlso w3-input w3-border "
+																name="seeAlso"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setSeeAlso', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_seeAlso')); }, function() { addError($('#{{classApiMethodMethod}}_seeAlso')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficFlowObserved_.seeAlso}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficFlowObserved{{id}}SeeAlso ">{{trafficFlowObserved_.seeAlso}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficFlowObserved{{id}}SeeAlso ">{{trafficFlowObserved_.seeAlso}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmSource"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficFlowObservedSource">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_source">source</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputSource" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_source')); $('#{{classApiMethodMethod}}_source').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#TrafficFlowObservedForm :input[name=id]').val() }], 'setSource', null, function() { addGlow($('#{{classApiMethodMethod}}_source')); }, function() { addError($('#{{classApiMethodMethod}}_source')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputSource"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															placeholder="source"
+															title="A sequence of characters giving the original source of the entity data as a URL. Recommended to be the fully qualified domain name of the source provider, or the URL to the source object."
+															id="{{classApiMethodMethod}}_source"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setSource classTrafficFlowObserved inputTrafficFlowObserved{{id}}Source w3-input w3-border "
+																name="setSource"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setSource classTrafficFlowObserved inputTrafficFlowObserved{{id}}Source w3-input w3-border "
+																name="setSource"
+		{{else}}
+																class="valueSource w3-input w3-border classTrafficFlowObserved inputTrafficFlowObserved{{id}}Source w3-input w3-border "
+																name="source"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setSource', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_source')); }, function() { addError($('#{{classApiMethodMethod}}_source')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficFlowObserved_.source}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficFlowObserved{{id}}Source ">{{trafficFlowObserved_.source}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficFlowObserved{{id}}Source ">{{trafficFlowObserved_.source}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmType"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficFlowObservedType">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_type">type</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputType" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_type')); $('#{{classApiMethodMethod}}_type').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#TrafficFlowObservedForm :input[name=id]').val() }], 'setType', null, function() { addGlow($('#{{classApiMethodMethod}}_type')); }, function() { addError($('#{{classApiMethodMethod}}_type')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputType"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															placeholder="type"
+															title="NGSI Entity type. It has to be TrafficFlowObserved"
+															id="{{classApiMethodMethod}}_type"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setType classTrafficFlowObserved inputTrafficFlowObserved{{id}}Type w3-input w3-border "
+																name="setType"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setType classTrafficFlowObserved inputTrafficFlowObserved{{id}}Type w3-input w3-border "
+																name="setType"
+		{{else}}
+																class="valueType w3-input w3-border classTrafficFlowObserved inputTrafficFlowObserved{{id}}Type w3-input w3-border "
+																name="type"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setType', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_type')); }, function() { addError($('#{{classApiMethodMethod}}_type')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficFlowObserved_.type}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficFlowObserved{{id}}Type ">{{trafficFlowObserved_.type}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficFlowObserved{{id}}Type ">{{trafficFlowObserved_.type}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmVehicleSubType"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficFlowObservedVehicleSubType">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_vehicleSubType">vehicle sub type</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputVehicleSubType" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_vehicleSubType')); $('#{{classApiMethodMethod}}_vehicleSubType').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#TrafficFlowObservedForm :input[name=id]').val() }], 'setVehicleSubType', null, function() { addGlow($('#{{classApiMethodMethod}}_vehicleSubType')); }, function() { addError($('#{{classApiMethodMethod}}_vehicleSubType')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputVehicleSubType"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															placeholder="vehicle sub type"
+															title="It allows to specify a sub type of `vehicleType`, eg if the `vehicleType` is set to `Lorry` the `vehicleSubType` may be `OGV1` or `OGV2` to convey more information about the exact type of vehicle."
+															id="{{classApiMethodMethod}}_vehicleSubType"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setVehicleSubType classTrafficFlowObserved inputTrafficFlowObserved{{id}}VehicleSubType w3-input w3-border "
+																name="setVehicleSubType"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setVehicleSubType classTrafficFlowObserved inputTrafficFlowObserved{{id}}VehicleSubType w3-input w3-border "
+																name="setVehicleSubType"
+		{{else}}
+																class="valueVehicleSubType w3-input w3-border classTrafficFlowObserved inputTrafficFlowObserved{{id}}VehicleSubType w3-input w3-border "
+																name="vehicleSubType"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setVehicleSubType', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_vehicleSubType')); }, function() { addError($('#{{classApiMethodMethod}}_vehicleSubType')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficFlowObserved_.vehicleSubType}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficFlowObserved{{id}}VehicleSubType ">{{trafficFlowObserved_.vehicleSubType}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficFlowObserved{{id}}VehicleSubType ">{{trafficFlowObserved_.vehicleSubType}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmVehicleType"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficFlowObservedVehicleType">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_vehicleType">vehicle type</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputVehicleType" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_vehicleType')); $('#{{classApiMethodMethod}}_vehicleType').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#TrafficFlowObservedForm :input[name=id]').val() }], 'setVehicleType', null, function() { addGlow($('#{{classApiMethodMethod}}_vehicleType')); }, function() { addError($('#{{classApiMethodMethod}}_vehicleType')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputVehicleType"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															placeholder="vehicle type"
+															title="Type of vehicle from the point of view of its structural characteristics. Enum:'agriculturalVehicle, bicycle, bus, minibus, car, caravan, tram, tanker, carWithCaravan, carWithTrailer, lorry, moped, motorcycle, motorcycleWithSideCar, motorscooter, trailer, van, constructionOrMaintenanceVehicle, trolley, binTrolley, sweepingMachine, cleaningTrolley'"
+															id="{{classApiMethodMethod}}_vehicleType"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setVehicleType classTrafficFlowObserved inputTrafficFlowObserved{{id}}VehicleType w3-input w3-border "
+																name="setVehicleType"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setVehicleType classTrafficFlowObserved inputTrafficFlowObserved{{id}}VehicleType w3-input w3-border "
+																name="setVehicleType"
+		{{else}}
+																class="valueVehicleType w3-input w3-border classTrafficFlowObserved inputTrafficFlowObserved{{id}}VehicleType w3-input w3-border "
+																name="vehicleType"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setVehicleType', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_vehicleType')); }, function() { addError($('#{{classApiMethodMethod}}_vehicleType')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficFlowObserved_.vehicleType}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficFlowObserved{{id}}VehicleType ">{{trafficFlowObserved_.vehicleType}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficFlowObserved{{id}}VehicleType ">{{trafficFlowObserved_.vehicleType}}</span>
+		{{/eq}}
+{{/inline}}

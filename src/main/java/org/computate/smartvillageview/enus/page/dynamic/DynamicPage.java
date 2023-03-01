@@ -97,7 +97,7 @@ public class DynamicPage extends DynamicPageGen<PageLayout> {
 		SearchList<SiteHtm> l = new SearchList<>();
 		l.q("*:*");
 		l.setC(SiteHtm.class);
-		l.fq(String.format("uri_docvalues_string:%s", SearchTool.escapeQueryChars(uri)));
+		l.fq(String.format("url_docvalues_string:%s", SearchTool.escapeQueryChars(url)));
 		if(filterLabel != null)
 			l.fq(String.format("labels_docvalues_strings:%s", SearchTool.escapeQueryChars(filterLabel)));
 		l.sortAsc("sequenceNum_docvalues_long");
@@ -208,7 +208,7 @@ public class DynamicPage extends DynamicPageGen<PageLayout> {
 
 	@Override
 	protected void _pageUri(Wrap<String> c) {
-		c.o("/iot-node");
+		c.o(uri);
 	}
 
 	@Override
@@ -219,8 +219,8 @@ public class DynamicPage extends DynamicPageGen<PageLayout> {
 	}
 
 	@Override
-	protected void _rolesRequired(List<String> l) {
-		l.addAll(Optional.ofNullable(siteRequest_.getConfig().getJsonArray(ConfigKeys.AUTH_ROLES_REQUIRED + "_SiteHtm")).orElse(new JsonArray()).stream().map(o -> o.toString()).collect(Collectors.toList()));
+	protected void _roleRequired(List<String> l) {
+		l.add(siteRequest_.getConfig().getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SiteHtm"));
 	}
 
 	@Override
@@ -230,7 +230,6 @@ public class DynamicPage extends DynamicPageGen<PageLayout> {
 
 	@Override
 	protected void _pageImageUri(Wrap<String> c) {
-			c.o("/png/iot-node-999.png");
 	}
 
 	@Override

@@ -1,0 +1,7 @@
+---
+- name: Setup iotagent-json
+  hosts: localhost
+  connection: local
+  roles:
+    - solr-configure-collection
+

@@ -1,0 +1,60 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: Replace=true
+  name: vault-operator
+  namespace: openshift-gitops
+spec:
+  project: default
+  source:
+    repoURL: https://helm.releases.hashicorp.com
+    chart: vault
+    targetRevision: 0.23.0
+    helm:
+      releaseName: vault
+      parameters:
+
+        - name: global.openshift
+          value: "true"
+        - name: server.logLevel
+          value: "debug"
+        - name: server.route.enabled
+          value: "true"
+        - name: server.route.host
+          value: "vault.apps-crc.testing"
+        - name: server.route.tls.termination
+          value: "edge"
+        - name: server.statefulSet.securityContext.pod.runAsNonRoot
+          value: "true"
+        - name: server.statefulSet.securityContext.pod.runAsGroup
+          value: "1000"
+        - name: server.statefulSet.securityContext.pod.runAsUser
+          value: "100"
+        - name: server.statefulSet.securityContext.pod.fsGroup
+          value: "1000"
+
+        - name: injector.image.repository
+          value: "registry.connect.redhat.com/hashicorp/vault-k8s"
+        - name: injector.image.tag
+          value: "1.1.0-ubi"
+
+        - name: injector.agentImage.repository
+          value: "registry.connect.redhat.com/hashicorp/vault"
+        - name: injector.agentImage.tag
+          value: "1.12.1-ubi"
+
+        - name: server.image.repository
+          value: "registry.connect.redhat.com/hashicorp/vault"
+        - name: server.image.tag
+          value: "1.12.1-ubi"
+
+  destination:
+    namespace: vault
+    server: 'https://kubernetes.default.svc'
+  syncPolicy:
+    automated:
+      # resources that no longer exist get deleted on sync
+      prune: true
+      # sync will be attempted again on failure after self heal timeout (5 seconds by default)
+      selfHeal: true

@@ -123,20 +123,36 @@ htmBody:
                   class: fa-solid fa-badge-check padding-right-quarter-em
               - e: span
                 text: FLOSS Best Practices Criteria overview
-          - e: p
-            a:
-              class: w3-padding 
+          - e: div
             in:
-              - e: span
-                text: |
-                  The Open Source Software Foundation offers a Best Practices Badge to projects following all the suggested standards below. 
-              - e: a
-                href: https://bestpractices.coreinfrastructure.org/en/criteria
-                text: |
-                  See the FLOSS Best Practices Criteria here. 
-              - e: span
-                text: |
-                  Here is a summary of how {{ page.siteDisplayName }} implements these standards. 
+              - e: p
+                in:
+                  - e: span
+                    text: |
+                      Here is our Open Source Software Foundation offers a Best Practices Badge for {{ page.siteDisplayName }}. 
+              - e: p
+                in:
+                  - e: span
+                    in:
+                      - e: a
+                        href: |
+                          https://bestpractices.coreinfrastructure.org/projects/6846
+                        in:
+                          - e: img
+                            src: |
+                              https://bestpractices.coreinfrastructure.org/projects/6846/badge
+              - e: p
+                in:
+                  - e: span
+                    text: |
+                      The Open Source Software Foundation offers a Best Practices Badge to projects following all the suggested standards below. 
+                  - e: a
+                    href: https://bestpractices.coreinfrastructure.org/en/criteria
+                    text: |
+                      See the FLOSS Best Practices Criteria here. 
+                  - e: span
+                    text: |
+                      Below is a summary of how {{ page.siteDisplayName }} implements these standards. 
       - e: div
         a:
           class: w3-padding 
@@ -924,12 +940,12 @@ htmBody:
                             text: "https://quay.io/repository/{{ page.quayioOrg }}/{{ page.siteName }}?tab=tags"
                       - e: div
                         text: |
-                          There is also a Maven build action for {{ page.siteDisplayName }} on GitHub: 
+                          There is also a Java CI with Maven build action for {{ page.siteDisplayName }} on GitHub. It compiles the code and runs the tests and reports Success or Failure, errors, and warnings: 
                       - e: div
                         in:
                           - e: a
-                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/actions"
-                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/actions"
+                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/actions/workflows/maven.yml"
+                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/actions/workflows/maven.yml"
                       - e: div
                         text: |
                           Each release of the project is also built for Maven Central. 
@@ -945,7 +961,7 @@ htmBody:
                     class: font-weight-bold 
                     text: |
                       It is SUGGESTED that common tools be used for building the software. 
-                  - e: div
+                  - e: p
                     in:
                       - e: div
                         text: |
@@ -958,13 +974,23 @@ htmBody:
                           - e: a
                             href: "https://www.projectquay.io/"
                             text: "https://www.projectquay.io/"
+                  - e: p
+                    in:
+                      - e: div
+                        text: |
+                          The Java CI with Maven build action provided by GitHub is also open source. 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://github.com/actions/starter-workflows/blob/main/ci/maven.yml"
+                            text: "https://github.com/actions/starter-workflows/blob/main/ci/maven.yml"
               - e: li
                 in:
                   - e: div
                     class: font-weight-bold 
                     text: |
                       The project SHOULD be buildable using only FLOSS tools. 
-                  - e: div
+                  - e: p
                     in:
                       - e: div
                         text: |
@@ -977,6 +1003,16 @@ htmBody:
                           - e: a
                             href: "https://www.projectquay.io/"
                             text: "https://www.projectquay.io/"
+                  - e: p
+                    in:
+                      - e: div
+                        text: |
+                          The Java CI with Maven build action provided by GitHub is also open source. 
+                      - e: div
+                        in:
+                          - e: a
+                            href: "https://github.com/actions/starter-workflows/blob/main/ci/maven.yml"
+                            text: "https://github.com/actions/starter-workflows/blob/main/ci/maven.yml"
       - e: div
         a:
           class: w3-padding 
@@ -1027,12 +1063,12 @@ htmBody:
                             text: "https://quay.io/repository/{{ page.quayioOrg }}/{{ page.siteName }}?tab=tags"
                       - e: div
                         text: |
-                          There is also a Maven build action for {{ page.siteDisplayName }} on GitHub: 
+                          There is also a Java CI with Maven build action for {{ page.siteDisplayName }} on GitHub. It compiles the code and runs the tests and reports Success or Failure, errors, and warnings: 
                       - e: div
                         in:
                           - e: a
-                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/actions"
-                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/actions"
+                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/actions/workflows/maven.yml"
+                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/actions/workflows/maven.yml"
                       - e: div
                         text: |
                           Each release of the project is also built for Maven Central. 
@@ -1060,12 +1096,12 @@ htmBody:
                             text: "https://quay.io/repository/{{ page.quayioOrg }}/{{ page.siteName }}?tab=tags"
                       - e: div
                         text: |
-                          There is also a Maven build action for {{ page.siteDisplayName }} on GitHub: 
+                          There is also a Java CI with Maven build action for {{ page.siteDisplayName }} on GitHub. It compiles the code and runs the tests and reports Success or Failure, errors, and warnings: 
                       - e: div
                         in:
                           - e: a
-                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/actions"
-                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/actions"
+                            href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/actions/workflows/maven.yml"
+                            text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/actions/workflows/maven.yml"
                       - e: div
                         text: |
                           Each release of the project is also built for Maven Central. 
@@ -1164,9 +1200,16 @@ htmBody:
                       The project MUST enable one or more compiler warning flags, a "safe" language mode, or use a separate "linter" tool to look for code quality errors or common simple mistakes, if there is at least one FLOSS tool that can implement this criterion in the selected language. 
                   - e: div
                     in:
-                      - e: div
-                        text: |
-                          This is still a work-in-progress for {{ page.siteDisplayName }}. 
+                      - e: p
+                        in:
+                          - e: div
+                            text: |
+                              A linter tool to look for code quality errors accomplished with the Super Linter Lint Code Base build action for {{ page.siteDisplayName }} on GitHub. It is a simple combination of various linters, written in bash, to help validate your source code. 
+                          - e: div
+                            in:
+                              - e: a
+                                href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/actions/workflows/super-linter.yml"
+                                text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/actions/workflows/super-linter.yml"
           - e: ul
             in:
               - e: li
@@ -1177,9 +1220,29 @@ htmBody:
                       The project MUST address warnings. 
                   - e: div
                     in:
-                      - e: div
-                        text: |
-                          This is still a work-in-progress for {{ page.siteDisplayName }}. 
+                      - e: p
+                        in:
+                          - e: div
+                            text: |
+                              The Super Linter build tool is configured with it's default settings for {{ page.siteDisplayName }}. 
+                              See the configuration of the Super Linter build tool for {{ page.siteDisplayName }}. 
+                          - e: div
+                            in:
+                              - e: a
+                                href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/blob/main/.github/workflows/super-linter.yml"
+                                text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/blob/main/.github/workflows/super-linter.yml"
+                      - e: p
+                        in:
+                          - e: div
+                            text: |
+                              See all the configuration options for the Super Linter here: 
+                          - e: div
+                            in:
+                              - e: a
+                                href: |
+                                  https://github.com/github/super-linter#environment-variables
+                                text: |
+                                  https://github.com/github/super-linter#environment-variables
           - e: ul
             in:
               - e: li
@@ -1190,9 +1253,29 @@ htmBody:
                       It is SUGGESTED that projects be maximally strict with warnings in the software produced by the project, where practical. 
                   - e: div
                     in:
-                      - e: div
-                        text: |
-                          This is still a work-in-progress for {{ page.siteDisplayName }}. 
+                      - e: p
+                        in:
+                          - e: div
+                            text: |
+                              The Super Linter build tool is configured with it's default settings for {{ page.siteDisplayName }}. 
+                              See the configuration of the Super Linter build tool for {{ page.siteDisplayName }}. 
+                          - e: div
+                            in:
+                              - e: a
+                                href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/blob/main/.github/workflows/super-linter.yml"
+                                text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/blob/main/.github/workflows/super-linter.yml"
+                      - e: p
+                        in:
+                          - e: div
+                            text: |
+                              See all the configuration options for the Super Linter here: 
+                          - e: div
+                            in:
+                              - e: a
+                                href: |
+                                  https://github.com/github/super-linter#environment-variables
+                                text: |
+                                  https://github.com/github/super-linter#environment-variables
       - e: div
         a:
           class: w3-padding 
@@ -1512,6 +1595,30 @@ htmBody:
                           - e: div
                             text: |
                               This is still a work-in-progress for {{ page.siteDisplayName }}. 
+                      - e: p
+                        in:
+                          - e: div
+                            text: |
+                              We have submitted a pull request to vertx-zookeeper that was merged to fix several of the current vulnerabilities in the project. We are waiting for these changes to be released in the right version of Vert.x supported by Red Hat GA. 
+                          - e: div
+                            in:
+                              - e: a
+                                href: |
+                                  https://github.com/vert-x3/vertx-zookeeper/pull/130
+                                text: |
+                                  https://github.com/vert-x3/vertx-zookeeper/pull/130
+                      - e: p
+                        in:
+                          - e: div
+                            text: |
+                              We have submitted a pull request to apache/curator to fix several of the current vulnerabilities in the project. 
+                          - e: div
+                            in:
+                              - e: a
+                                href: |
+                                  https://github.com/apache/curator/pull/440
+                                text: |
+                                  https://github.com/apache/curator/pull/440
               - e: li
                 in:
                   - e: div
@@ -1525,6 +1632,30 @@ htmBody:
                           - e: div
                             text: |
                               This is still a work-in-progress for {{ page.siteDisplayName }}. 
+                      - e: p
+                        in:
+                          - e: div
+                            text: |
+                              We have submitted a pull request to vertx-zookeeper that was merged to fix several of the current vulnerabilities in the project. We are waiting for these changes to be released in the right version of Vert.x supported by Red Hat GA. 
+                          - e: div
+                            in:
+                              - e: a
+                                href: |
+                                  https://github.com/vert-x3/vertx-zookeeper/pull/130
+                                text: |
+                                  https://github.com/vert-x3/vertx-zookeeper/pull/130
+                      - e: p
+                        in:
+                          - e: div
+                            text: |
+                              We have submitted a pull request to apache/curator to fix several of the current vulnerabilities in the project. 
+                          - e: div
+                            in:
+                              - e: a
+                                href: |
+                                  https://github.com/apache/curator/pull/440
+                                text: |
+                                  https://github.com/apache/curator/pull/440
       - e: div
         a:
           class: w3-padding 
@@ -1598,7 +1729,12 @@ htmBody:
                         in:
                           - e: div
                             text: |
-                              This is still a work-in-progress for {{ page.siteDisplayName }}. 
+                              Static code analysis is accomplished with the CodeQL build action for {{ page.siteDisplayName }} on GitHub. It analyzes the Java code and reports Success or Failure, errors, and warnings: 
+                          - e: div
+                            in:
+                              - e: a
+                                href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/actions/workflows/codeql.yml"
+                                text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/actions/workflows/codeql.yml"
               - e: li
                 in:
                   - e: div
@@ -1611,7 +1747,12 @@ htmBody:
                         in:
                           - e: div
                             text: |
-                              This is still a work-in-progress for {{ page.siteDisplayName }}. 
+                              The CodeQL static code analysis tests for security vulnerabilities, bugs, and other errors, and supports Java code. See the About CodeQL documentation to learn more. 
+                          - e: div
+                            in:
+                              - e: a
+                                href: "https://codeql.github.com/docs/codeql-overview/about-codeql/"
+                                text: "https://codeql.github.com/docs/codeql-overview/about-codeql/"
               - e: li
                 in:
                   - e: div
@@ -1624,7 +1765,12 @@ htmBody:
                         in:
                           - e: div
                             text: |
-                              This is still a work-in-progress for {{ page.siteDisplayName }}. 
+                              See that the medium and higher severity vulnerabilities are resolved for {{ page.siteDisplayName }} on GitHub. 
+                          - e: div
+                            in:
+                              - e: a
+                                href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/actions/workflows/codeql.yml"
+                                text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/actions/workflows/codeql.yml"
               - e: li
                 in:
                   - e: div
@@ -1637,7 +1783,12 @@ htmBody:
                         in:
                           - e: div
                             text: |
-                              This is still a work-in-progress for {{ page.siteDisplayName }}. 
+                              Static code analysis is enabled on every commit to the main branch. See the configuration here: 
+                          - e: div
+                            in:
+                              - e: a
+                                href: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/blob/main/.github/workflows/codeql.yml"
+                                text: "https://github.com/{{ page.githubOrg }}/{{ page.siteName }}/blob/main/.github/workflows/codeql.yml"
       - e: div
         a:
           class: w3-padding 

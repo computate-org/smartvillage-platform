@@ -9,6 +9,7 @@ SITE_DISPLAY_NAME: Smart Village Project
 SITE_DESCRIPTION: Red Hat Global Social Innovation Program is partnering with Boston University and Smarta Byar in order to collaborate on creating a global and open research platform allowing researchers to study what social sustainability means by using a digital twin of Veberöd, Sweden as the test village, supported by Smarta Byar. The goal of this collaboration is to build the open source technological infrastructure so that researchers can collaborate on this platform effectively to study mobility, public health, sustainability among other study areas to ultimately help define better the link between well being and eco-smart cities. 
 SITE_PUBLIC_URL: https://smartvillage.computate.org
 MAILING_LIST_URL: https://computate.topicbox.com/groups/smartabyar-smartvillage
+MAILING_LIST_EMAIL: smartabyar-smartvillage@computate.topicbox.com
 SITE_LICENSE_NAME: GNU GENERAL PUBLIC LICENSE, Version 3
 SITE_LICENSE_URL: https://www.gnu.org/licenses/gpl-3.0.en.html
 DEVELOPER_NAME: Christopher Tate
@@ -134,7 +135,7 @@ PROJECTS:
       - path: "{{ SITE_SRC }}-static/js/datePicker.js"
         template: js/datePicker.js
       - path: "{{ SITE_SRC }}-static/css/datePicker.css"
-        template: js/datePicker.css
+        template: css/datePicker.css
       - path: "{{ SITE_SRC }}-static/js/plotly-2.9.0.min.js"
         template: js/plotly-2.9.0.min.js
       - path: "{{ SITE_SRC }}-static/js/site-enUS.js"
@@ -193,6 +194,16 @@ CONFIG_TEMPLATE: |2
   DEFAULT_MAP_ZOOM: "3"
 
 CONFIG_KEYS: |2
+  
+  	/**
+  	 * Facebook Graph Version
+  	 **/
+  	public static final String FACEBOOK_GRAPH_VERSION = "FACEBOOK_GRAPH_VERSION";
+  
+  	/**
+  	 * Facebook App ID
+  	 **/
+  	public static final String FACEBOOK_APP_ID = "FACEBOOK_APP_ID";
   
   	/**
   	 * 
@@ -673,13 +684,6 @@ SITE_POM_END: |-2
   
 
   	<distributionManagement>
-  
-  		<repository>
-  			<id>github</id>
-  			<name>GitHub OWNER Apache Maven Packages</name>
-  			<url>https://maven.pkg.github.com/{{ GITHUB_ORG }}/{{ SITE_NAME }}</url>
-  		</repository>
-  
   		<!-- Central Repository -->
   		<snapshotRepository>
   			<id>ossrh</id>

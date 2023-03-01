@@ -1,0 +1,21 @@
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: KubernetesAuthEngineRole
+metadata:
+  name: kv-engine-admin
+  namespace: vault-admin
+spec:
+  # Add fields here
+  authentication: 
+    path: kubernetes
+    role: policy-admin
+  connection:
+    address: 'http://vault.vault.svc.cluster.local:8200'
+  path: kubernetes  
+  policies:
+    - kv-engine-admin
+  targetServiceAccounts:
+    - default
+  targetNamespaces:
+    targetNamespaceSelector:
+      matchLabels:
+        database-engine-admin: "true"

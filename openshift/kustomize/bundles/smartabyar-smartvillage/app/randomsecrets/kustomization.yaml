@@ -1,0 +1,9 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - postgres-cluster-pguser-smartvillage
+  - keycloak-client-secret-smartcity
+  - email
+  - yggio
+  - fontawesome

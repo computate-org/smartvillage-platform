@@ -1,0 +1,16 @@
+---
+REDHAT_OPENSHIFT_HOST: https://api.crc.testing:6443
+REDHAT_OPENSHIFT_TOKEN: "{{ lookup('env', 'REDHAT_OPENSHIFT_TOKEN') | default(omit) }}"
+#SSO_POSTGRES_ROUTE_NAME: sso-postgres
+#SSO_POSTGRES_ROUTE_HOST: sso-postgres-postgres.apps-crc.testing
+#SSO_POSTGRES_ROUTE_SERVICE_NAME: postgres-cluster-ha
+#SSO_POSTGRES_ROUTE_SERVICE_PORT_NAME: postgres
+POSTGRES_POD_LABEL: postgres-operator.crunchydata.com/data=postgres
+POSTGRES_USER_SECRET_SSO: postgres-cluster-pguser-sso
+POSTGRES_NAMESPACE: postgres
+SSO_NAMESPACE: sso
+SSO_POSTGRES_SECRET_NAME: keycloak-db-secret
+SSO_ADMIN_USERNAME: j
+POSTGRES_PORT: 80
+# The default path to the PostgreSQL hba file to manage user permissions. 
+POSTGRES_HBA_CONF: "/pgdata/pg15/pg_hba.conf"

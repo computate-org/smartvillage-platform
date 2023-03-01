@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: Replace=true
+  name: solr-operator
+  namespace: openshift-gitops
+spec:
+  project: default
+  source:
+    repoURL: https://solr.apache.org/charts
+    chart: solr-operator
+    targetRevision: v0.6.0
+    helm:
+      parameters:
+        - name: serviceAccount.create
+          value: "true"
+        - name: serviceAccount.name
+          value: "solr"
+        - name: podOptions.serviceAccountName
+          value: "solr"
+  destination:
+    namespace: solr
+    server: 'https://kubernetes.default.svc'
+  syncPolicy:
+    automated:
+      # resources that no longer exist get deleted on sync
+      prune: true
+      # sync will be attempted again on failure after self heal timeout (5 seconds by default)
+      selfHeal: true

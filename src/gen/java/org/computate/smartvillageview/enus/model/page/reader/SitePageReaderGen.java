@@ -402,9 +402,9 @@ public abstract class SitePageReaderGen<DEV> extends Object {
 	public static final String i18nGeneratorFail1 = "Importing %s data failed. ";
 	public static final String i18nGeneratorFail = i18nGeneratorFail1;
 
-	public static final String i18nGeneratorPathComplete1 = "Importing page %s completed. ";
+	public static final String i18nGeneratorPathComplete1 = "Generating i18n path for page %s completed. ";
 	public static final String i18nGeneratorPathComplete = i18nGeneratorPathComplete1;
-	public static final String i18nGeneratorPathFail1 = "Importing page %s failed. ";
+	public static final String i18nGeneratorPathFail1 = "Generating i18n path for page %s failed. ";
 	public static final String i18nGeneratorPathFail = i18nGeneratorPathFail1;
 
 	public static final String importDataSitePageComplete1 = "Importing %s data completed. ";
@@ -416,8 +416,6 @@ public abstract class SitePageReaderGen<DEV> extends Object {
 	public static final String importSitePageComplete = importSitePageComplete1;
 	public static final String importSitePageFail1 = "Importing page %s failed. ";
 	public static final String importSitePageFail = importSitePageFail1;
-
-
 
 
 	//////////////

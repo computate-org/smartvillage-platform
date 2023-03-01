@@ -1,0 +1,7 @@
+apiVersion: zookeeper.streamnative.io/v1alpha1
+kind: ZooKeeperCluster
+metadata:
+  name: zookeeper-cluster
+  namespace: zookeeper
+spec:
+  replicas: 2

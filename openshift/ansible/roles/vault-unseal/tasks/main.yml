@@ -1,0 +1,24 @@
+---
+
+- name: Get vault init dev secrets
+  set_fact:
+    VAULT_UNSEAL_KEY: "{{ query('kubernetes.core.k8s', kind='Secret', resource_name='vault-init', namespace=VAULT_NAMESPACE, validate_certs=false)[0].data.VAULT_UNSEAL_KEY | b64decode }}"
+    VAULT_ROOT_TOKEN: "{{ query('kubernetes.core.k8s', kind='Secret', resource_name='vault-init', namespace=VAULT_NAMESPACE, validate_certs=false)[0].data.VAULT_ROOT_TOKEN | b64decode }}"
+  vars:
+    K8S_AUTH_HOST: "{{ REDHAT_OPENSHIFT_HOST }}"
+    K8S_AUTH_API_KEY: "{{ REDHAT_OPENSHIFT_TOKEN }}"
+  when: VAULT_UNSEAL_KEY is not defined and VAULT_ROOT_TOKEN is not defined or VAULT_UNSEAL_KEY == '' and VAULT_ROOT_TOKEN == ''
+
+- debug:
+    var: VAULT_UNSEAL_KEY
+- debug:
+    var: VAULT_ROOT_TOKEN
+
+- block:
+    - name: Unseal vault
+      shell: >-
+        {{ VAULT_COMMAND_OC }} vault operator unseal -address http://vault.vault.svc.cluster.local:8200 -ca-path /var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt "$(oc get secret vault-init -n {{ VAULT_NAMESPACE }} -o jsonpath='{.data.VAULT_UNSEAL_KEY}' | base64 -d )"
+      register: vault_unseal
+      ignore_errors: true
+    - debug:
+        var: vault_unseal

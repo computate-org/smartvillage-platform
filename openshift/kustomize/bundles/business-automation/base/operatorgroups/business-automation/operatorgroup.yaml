@@ -1,0 +1,8 @@
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: business-automation
+  namespace: business-automation
+spec:
+  targetNamespaces:
+    - business-automation

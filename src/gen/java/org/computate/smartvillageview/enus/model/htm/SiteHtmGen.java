@@ -3,7 +3,7 @@ package org.computate.smartvillageview.enus.model.htm;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.smartvillageview.enus.model.base.BaseModel;
 import org.computate.vertx.api.ApiRequest;
-import org.computate.vertx.config.ComputateConfigKeys;
+import org.computate.smartvillageview.enus.config.ConfigKeys;
 import java.util.Optional;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
@@ -58,7 +58,7 @@ import org.computate.search.response.solr.SolrResponse;
  * Whenever this Java class is modified or touched, the watch service installed as described in the README, indexes all the information about this Java class in a local Apache Solr Search Engine. 
  * If you are running the service, you can see the indexed data about this Java Class here: 
  * </p>
- * <p><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstClasse_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtm">Find the class SiteHtm in Solr. </a></p>
+ * <p><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstClasse_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtm">Find the class SiteHtm in Solr. </a></p>
  * <p>
  * The extended class ending with "Gen" did not exist at first, but was automatically created by the same watch service based on the data retrieved from the local Apache Server search engine. 
  * The extended class contains many generated fields, getters, setters, initialization code, and helper methods to help build a website and API fast, reactive, and scalable. 
@@ -71,25 +71,7 @@ import org.computate.search.response.solr.SolrResponse;
  * Api: true
  * <p>This class contains a comment <b>"Api: true"</b>, which means this class will have Java Vert.x API backend code generated for these objects. 
  * </p>
- * ApiMethode.enUS: true
- * <p>This class contains a comment <b>"ApiTag: HTM"</b>, which groups all of the OpenAPIs for SiteHtm objects under the tag "HTM". 
- * </p>
- * ApiMethode.enUS: true
- * <p>This class contains a comment <b>"ApiTag: HTM"</b>, which groups all of the OpenAPIs for SiteHtm objects under the tag "HTM". 
- * </p>
- * ApiMethode.enUS: true
- * <p>This class contains a comment <b>"ApiTag: HTM"</b>, which groups all of the OpenAPIs for SiteHtm objects under the tag "HTM". 
- * </p>
- * ApiMethode.enUS: true
- * <p>This class contains a comment <b>"ApiTag: HTM"</b>, which groups all of the OpenAPIs for SiteHtm objects under the tag "HTM". 
- * </p>
- * ApiMethode.enUS: true
- * <p>This class contains a comment <b>"ApiTag: HTM"</b>, which groups all of the OpenAPIs for SiteHtm objects under the tag "HTM". 
- * </p>
- * ApiMethode.enUS: true
- * <p>This class contains a comment <b>"ApiTag: HTM"</b>, which groups all of the OpenAPIs for SiteHtm objects under the tag "HTM". 
- * </p>
- * ApiTag.enUS: true
+ * ApiTag.enUS: HTM
  * <p>This class contains a comment <b>"ApiTag: HTM"</b>, which groups all of the OpenAPIs for SiteHtm objects under the tag "HTM". 
  * </p>
  * ApiUri.enUS: /api/htm
@@ -166,21 +148,21 @@ import org.computate.search.response.solr.SolrResponse;
  * This class contains a comment <b>"Role.enUS: SiteAdmin"</b>, which identifies the default role name "SiteAdmin" of the OAuth2/OpenID Connect user role required to access this SiteHtm API. 
  * It's possible to reconfigure the roles required to access the SiteHtm API by configuring an environment variable like this: 
  * </p>
- * <pre>AUTH_ROLES_REQUIRED_SiteHtm: ["SiteAdmin"]</pre>
+ * <pre>AUTH_ROLE_REQUIRED_SiteHtm: ["SiteAdmin"]</pre>
  * AName.enUS: an HTML
  * <p>This class contains a comment <b>"AName.enUS: an HTML"</b>, which identifies the language context to describe a SiteHtm as "an HTML". 
  * </p>
  * <p>
  * Delete the class SiteHtm in Solr: 
- * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtm&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtm&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
  * Delete  the package org.computate.smartvillageview.enus.model.htm in Solr: 
- * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
  * Delete  the project smartabyar-smartvillage in Solr: 
- * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartabyar\-smartvillage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartabyar\-smartvillage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  **/
 public abstract class SiteHtmGen<DEV> extends BaseResult {
@@ -237,7 +219,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 
 	/**	<br> The entity url
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtm&fq=entiteVar_enUS_indexed_string:url">Find the entity url in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtm&fq=entiteVar_enUS_indexed_string:url">Find the entity url in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -291,7 +273,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 
 	/**	<br> The entity uri
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtm&fq=entiteVar_enUS_indexed_string:uri">Find the entity uri in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtm&fq=entiteVar_enUS_indexed_string:uri">Find the entity uri in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -345,7 +327,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 
 	/**	<br> The entity pageId
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtm&fq=entiteVar_enUS_indexed_string:pageId">Find the entity pageId in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtm&fq=entiteVar_enUS_indexed_string:pageId">Find the entity pageId in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -400,7 +382,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 
 	/**	<br> The entity sequenceNum
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtm&fq=entiteVar_enUS_indexed_string:sequenceNum">Find the entity sequenceNum in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtm&fq=entiteVar_enUS_indexed_string:sequenceNum">Find the entity sequenceNum in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -461,7 +443,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 
 	/**	<br> The entity htmGroup
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtm&fq=entiteVar_enUS_indexed_string:htmGroup">Find the entity htmGroup in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtm&fq=entiteVar_enUS_indexed_string:htmGroup">Find the entity htmGroup in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -516,7 +498,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 
 	/**	<br> The entity labels
 	 *  It is constructed before being initialized with the constructor by default. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtm&fq=entiteVar_enUS_indexed_string:labels">Find the entity labels in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtm&fq=entiteVar_enUS_indexed_string:labels">Find the entity labels in Solr</a>
 	 * <br>
 	 * @param w is the entity already constructed. 
 	 **/
@@ -586,7 +568,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 
 	/**	<br> The entity eBefore
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtm&fq=entiteVar_enUS_indexed_string:eBefore">Find the entity eBefore in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtm&fq=entiteVar_enUS_indexed_string:eBefore">Find the entity eBefore in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -640,7 +622,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 
 	/**	<br> The entity eAfter
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtm&fq=entiteVar_enUS_indexed_string:eAfter">Find the entity eAfter in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtm&fq=entiteVar_enUS_indexed_string:eAfter">Find the entity eAfter in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -694,7 +676,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 
 	/**	<br> The entity a
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtm&fq=entiteVar_enUS_indexed_string:a">Find the entity a in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtm&fq=entiteVar_enUS_indexed_string:a">Find the entity a in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -757,7 +739,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 
 	/**	<br> The entity text
 	 *  It is constructed before being initialized with the constructor by default. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtm&fq=entiteVar_enUS_indexed_string:text">Find the entity text in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtm&fq=entiteVar_enUS_indexed_string:text">Find the entity text in Solr</a>
 	 * <br>
 	 * @param w is the entity already constructed. 
 	 **/
@@ -828,7 +810,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 
 	/**	<br> The entity comment
 	 *  It is constructed before being initialized with the constructor by default. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtm&fq=entiteVar_enUS_indexed_string:comment">Find the entity comment in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtm&fq=entiteVar_enUS_indexed_string:comment">Find the entity comment in Solr</a>
 	 * <br>
 	 * @param w is the entity already constructed. 
 	 **/
@@ -898,7 +880,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 
 	/**	<br> The entity tabs
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtm&fq=entiteVar_enUS_indexed_string:tabs">Find the entity tabs in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtm&fq=entiteVar_enUS_indexed_string:tabs">Find the entity tabs in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -952,7 +934,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 
 	/**	<br> The entity newLine
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtm&fq=entiteVar_enUS_indexed_string:newLine">Find the entity newLine in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtm&fq=entiteVar_enUS_indexed_string:newLine">Find the entity newLine in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -1011,7 +993,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 
 	/**	<br> The entity htmBefore
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtm&fq=entiteVar_enUS_indexed_string:htmBefore">Find the entity htmBefore in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtm&fq=entiteVar_enUS_indexed_string:htmBefore">Find the entity htmBefore in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -1065,7 +1047,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 
 	/**	<br> The entity htmAfter
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtm&fq=entiteVar_enUS_indexed_string:htmAfter">Find the entity htmAfter in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtm&fq=entiteVar_enUS_indexed_string:htmAfter">Find the entity htmAfter in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/

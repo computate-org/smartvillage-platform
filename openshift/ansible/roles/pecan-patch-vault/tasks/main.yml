@@ -1,0 +1,12 @@
+---
+
+- name: Update betydb postgres secret value to vault
+  include_role:
+    name: vault-patch-secret
+  vars:
+    SOURCE_NAMESPACE: postgres
+    SOURCE_SECRET_NAME: postgres-cluster-pguser-pecan
+    SOURCE_SECRET_KEYS: [ 'password', 'password' ]
+    DESTINATION_NAMESPACE: pecan
+    DESTINATION_SECRET_NAME: betydb
+    DESTINATION_SECRET_KEYS: [ 'betyPassword', 'postgresqlPassword' ]

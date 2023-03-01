@@ -2,8 +2,10 @@ package org.computate.smartvillageview.enus.vertx;
 
 import java.net.URLDecoder;
 import java.text.Normalizer;
-import java.util.Map.Entry;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
@@ -11,33 +13,34 @@ import java.util.function.Consumer;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.computate.search.tool.SearchTool;
+import org.computate.smartvillageview.enus.camel.tlc.TlcCamelIntegration;
+import org.computate.smartvillageview.enus.config.ConfigKeys;
+import org.computate.smartvillageview.enus.model.htm.SiteHtmEnUSGenApiService;
+import org.computate.smartvillageview.enus.model.iotnode.IotNodeEnUSGenApiService;
+import org.computate.smartvillageview.enus.model.page.SitePage;
+import org.computate.smartvillageview.enus.model.page.SitePageEnUSGenApiService;
+import org.computate.smartvillageview.enus.model.system.event.SystemEventEnUSGenApiService;
+import org.computate.smartvillageview.enus.model.traffic.bicycle.step.BicycleStepEnUSGenApiService;
+import org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved.TrafficFlowObservedEnUSGenApiService;
+import org.computate.smartvillageview.enus.model.traffic.light.TrafficLightEnUSGenApiService;
+import org.computate.smartvillageview.enus.model.traffic.light.step.TrafficLightStepEnUSGenApiService;
+import org.computate.smartvillageview.enus.model.traffic.person.step.PersonStepEnUSGenApiService;
+import org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulationEnUSGenApiService;
+import org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReportEnUSGenApiService;
+import org.computate.smartvillageview.enus.model.traffic.time.step.TimeStepEnUSGenApiService;
+import org.computate.smartvillageview.enus.model.traffic.vehicle.step.VehicleStepEnUSGenApiService;
+import org.computate.smartvillageview.enus.model.user.SiteUserEnUSGenApiService;
+import org.computate.smartvillageview.enus.page.HomePage;
+import org.computate.smartvillageview.enus.page.dynamic.DynamicPage;
+import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
+import org.computate.smartvillageview.enus.result.iotnode.step.IotNodeStepEnUSGenApiService;
+import org.computate.smartvillageview.enus.result.map.MapResultEnUSGenApiService;
 import org.computate.vertx.handlebars.AuthHelpers;
 import org.computate.vertx.handlebars.DateHelpers;
 import org.computate.vertx.handlebars.SiteHelpers;
 import org.computate.vertx.openapi.OpenApi3Generator;
 import org.computate.vertx.search.list.SearchList;
 import org.computate.vertx.verticle.EmailVerticle;
-import org.computate.smartvillageview.enus.config.ConfigKeys;
-import org.computate.smartvillageview.enus.page.PageLayout;
-import org.computate.smartvillageview.enus.page.HomePage;
-import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
-import org.computate.smartvillageview.enus.model.page.SitePage;
-import org.computate.smartvillageview.enus.page.dynamic.DynamicPage;
-import org.computate.smartvillageview.enus.model.user.SiteUserEnUSGenApiService;
-import org.computate.smartvillageview.enus.model.page.SitePageEnUSGenApiService;
-import org.computate.smartvillageview.enus.model.htm.SiteHtmEnUSGenApiService;
-import org.computate.smartvillageview.enus.result.map.MapResultEnUSGenApiService;
-import org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulationEnUSGenApiService;
-import org.computate.smartvillageview.enus.model.traffic.light.TrafficLightEnUSGenApiService;
-import org.computate.smartvillageview.enus.model.traffic.light.step.TrafficLightStepEnUSGenApiService;
-import org.computate.smartvillageview.enus.model.traffic.vehicle.step.VehicleStepEnUSGenApiService;
-import org.computate.smartvillageview.enus.model.traffic.person.step.PersonStepEnUSGenApiService;
-import org.computate.smartvillageview.enus.model.iotnode.IotNodeEnUSGenApiService;
-import org.computate.smartvillageview.enus.result.iotnode.step.IotNodeStepEnUSGenApiService;
-import org.computate.smartvillageview.enus.model.traffic.time.step.TimeStepEnUSGenApiService;
-import org.computate.smartvillageview.enus.model.page.SitePageEnUSGenApiService;
-import org.computate.smartvillageview.enus.model.htm.SiteHtmEnUSGenApiService;
-import org.computate.smartvillageview.enus.model.system.event.SystemEventEnUSGenApiService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -52,11 +55,11 @@ import io.vertx.config.ConfigStoreOptions;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Future;
+import io.vertx.core.MultiMap;
 import io.vertx.core.Promise;
 import io.vertx.core.Vertx;
 import io.vertx.core.VertxOptions;
 import io.vertx.core.WorkerExecutor;
-import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.eventbus.EventBusOptions;
 import io.vertx.core.http.Cookie;
 import io.vertx.core.http.HttpClientOptions;
@@ -65,14 +68,12 @@ import io.vertx.core.http.HttpServerOptions;
 import io.vertx.core.impl.VertxImpl;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.core.MultiMap;
 import io.vertx.core.net.JksOptions;
 import io.vertx.core.net.PemKeyCertOptions;
 import io.vertx.core.spi.cluster.ClusterManager;
 import io.vertx.core.spi.cluster.NodeInfo;
 import io.vertx.ext.auth.authorization.AuthorizationProvider;
 import io.vertx.ext.auth.oauth2.OAuth2Auth;
-import io.vertx.ext.auth.oauth2.OAuth2FlowType;
 import io.vertx.ext.auth.oauth2.OAuth2Options;
 import io.vertx.ext.auth.oauth2.authorization.KeycloakAuthorization;
 import io.vertx.ext.auth.oauth2.providers.OpenIDConnectAuth;
@@ -86,6 +87,7 @@ import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.Session;
 import io.vertx.ext.web.api.service.ServiceRequest;
 import io.vertx.ext.web.client.WebClient;
+import io.vertx.ext.web.client.WebClientOptions;
 import io.vertx.ext.web.handler.OAuth2AuthHandler;
 import io.vertx.ext.web.handler.SessionHandler;
 import io.vertx.ext.web.handler.StaticHandler;
@@ -95,10 +97,12 @@ import io.vertx.ext.web.handler.sockjs.SockJSHandler;
 import io.vertx.ext.web.openapi.RouterBuilder;
 import io.vertx.ext.web.sstore.LocalSessionStore;
 import io.vertx.ext.web.templ.handlebars.HandlebarsTemplateEngine;
+import io.vertx.kafka.client.producer.KafkaProducer;
 import io.vertx.pgclient.PgConnectOptions;
 import io.vertx.pgclient.PgPool;
 import io.vertx.spi.cluster.zookeeper.ZookeeperClusterManager;
 import io.vertx.sqlclient.PoolOptions;
+import io.vertx.sqlclient.Tuple;
 
 
 
@@ -135,6 +139,8 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 
 	private TemplateHandler templateHandler;
 
+	private KafkaProducer<String, String> kafkaProducer;
+
 	/**	
 	 *	The main method for the Vert.x application that runs the Vert.x Runner class
 	 **/
@@ -145,7 +151,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 			try {
 				Future<Void> originalFuture = Future.future(a -> a.complete());
 				Future<Void> future = originalFuture;
-				WebClient webClient = WebClient.create(vertx);
+				WebClient webClient = WebClient.create(vertx, new WebClientOptions().setVerifyHost(false).setTrustAll(true));
 				Boolean runOpenApi3Generator = Optional.ofNullable(config.getBoolean(ConfigKeys.RUN_OPENAPI3_GENERATOR)).orElse(false);
 				Boolean runSqlGenerator = Optional.ofNullable(config.getBoolean(ConfigKeys.RUN_SQL_GENERATOR)).orElse(false);
 				Boolean runArticleGenerator = Optional.ofNullable(config.getBoolean(ConfigKeys.RUN_ARTICLE_GENERATOR)).orElse(false);
@@ -182,7 +188,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 
 	public static void  runOpenApi3Generator(String[] args, Vertx vertx, JsonObject config) {
 		OpenApi3Generator api = new OpenApi3Generator();
-		WebClient webClient = WebClient.create(vertx);
+		WebClient webClient = WebClient.create(vertx, new WebClientOptions().setVerifyHost(false).setTrustAll(true));
 		SiteRequestEnUS siteRequest = new SiteRequestEnUS();
 		siteRequest.setConfig(config);
 		siteRequest.setWebClient(webClient);
@@ -332,17 +338,19 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 	public void  start(Promise<Void> startPromise) throws Exception, Exception {
 		try {
 			configureWebClient().onComplete(a ->
-				configureData().onComplete(b -> 
+				configureDataLoop().onComplete(b -> 
 					configureOpenApi().onComplete(d -> 
 						configureHealthChecks().onComplete(e -> 
 							configureSharedWorkerExecutor().onComplete(f -> 
 								configureWebsockets().onComplete(g -> 
 									configureEmail().onComplete(i -> 
 										configureHandlebars().onComplete(j -> 
-											configureApi().onComplete(k -> 
-												configureUi().onComplete(l -> 
-													configureCamel().onComplete(m -> 
-														startServer().onComplete(n -> startPromise.complete())
+											configureKafka().onComplete(k -> 
+												configureApi().onComplete(l -> 
+													configureUi().onComplete(m -> 
+														configureCamel().onComplete(n -> 
+															startServer().onComplete(o -> startPromise.complete())
+														).onFailure(ex -> startPromise.fail(ex))
 													).onFailure(ex -> startPromise.fail(ex))
 												).onFailure(ex -> startPromise.fail(ex))
 											).onFailure(ex -> startPromise.fail(ex))
@@ -365,13 +373,49 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 		Promise<Void> promise = Promise.promise();
 
 		try {
-			webClient = WebClient.create(vertx);
+			Boolean sslVerify = config().getBoolean(ConfigKeys.SSL_VERIFY);
+			webClient = WebClient.create(vertx, new WebClientOptions().setVerifyHost(sslVerify).setTrustAll(!sslVerify));
 			promise.complete();
 		} catch(Exception ex) {
 			LOG.error("Unable to configure site context. ", ex);
 			promise.fail(ex);
 		}
 
+		return promise.future();
+	}
+
+	/**
+	 **/
+	public Future<KafkaProducer<String, String>> configureKafka() {
+		Promise<KafkaProducer<String, String>> promise = Promise.promise();
+
+		try {
+			Map<String, String> kafkaConfig = new HashMap<>();
+			kafkaConfig.put("bootstrap.servers", config().getString(ConfigKeys.KAFKA_BROKERS));
+			kafkaConfig.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+			kafkaConfig.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+			kafkaConfig.put("acks", "1");
+			kafkaProducer = KafkaProducer.createShared(vertx, SITE_NAME, kafkaConfig);
+			promise.complete(kafkaProducer);
+		} catch(Exception ex) {
+			LOG.error("Unable to configure site context. ", ex);
+			promise.fail(ex);
+		}
+
+		return promise.future();
+	}
+
+	public Future<Void> configureDataLoop() {
+		Promise<Void> promise = Promise.promise();
+		configureData().onSuccess(a -> {
+			promise.complete();
+		}).onFailure(ex -> {
+			LOG.info("Call timer");
+			vertx.setTimer(10000, a -> {
+			LOG.info("Timer triggered");
+				configureDataLoop();
+			});
+		});
 		return promise.future();
 	}
 
@@ -407,9 +451,24 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 			poolOptions.setMaxWaitQueueSize(jdbcMaxWaitQueueSize);
 
 			pgPool = PgPool.pool(vertx, pgOptions, poolOptions);
-
-			LOG.info(configureDataInitSuccess);
-			promise.complete();
+			Promise<Void> promise1 = Promise.promise();
+			pgPool.withConnection(sqlConnection -> {
+				sqlConnection.preparedQuery("SELECT")
+						.execute(Tuple.tuple()
+						).onSuccess(result -> {
+					promise1.complete();
+				}).onFailure(ex -> {
+					LOG.error(configureDataInitError, ex);
+					promise1.fail(ex);
+				});
+				return promise1.future();
+			}).onSuccess(a -> {
+				LOG.info(configureDataInitSuccess);
+				promise.complete();
+			}).onFailure(ex -> {
+				LOG.error(configureDataInitError, ex);
+				promise.fail(ex);
+			});
 		} catch (Exception ex) {
 			LOG.error(configureDataInitError, ex);
 			promise.fail(ex);
@@ -440,14 +499,13 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 			String authUrl = String.format("%s://%s%s/auth", (authSsl ? "https" : "http"), authHostName, (authPort == 443 || authPort == 80 ? "" : ":" + authPort));
 			oauth2ClientOptions.setSite(authUrl + "/realms/" + config().getString(ConfigKeys.AUTH_REALM));
 			oauth2ClientOptions.setTenant(config().getString(ConfigKeys.AUTH_REALM));
-			oauth2ClientOptions.setClientId(config().getString(ConfigKeys.AUTH_RESOURCE));
+			oauth2ClientOptions.setClientId(config().getString(ConfigKeys.AUTH_CLIENT));
 			oauth2ClientOptions.setClientSecret(config().getString(ConfigKeys.AUTH_SECRET));
-			oauth2ClientOptions.setFlow(OAuth2FlowType.AUTH_CODE);
 			oauth2ClientOptions.setAuthorizationPath("/oauth/authorize");
 			JsonObject extraParams = new JsonObject();
 			extraParams.put("scope", "profile");
 			oauth2ClientOptions.setExtraParameters(extraParams);
-			oauth2ClientOptions.setHttpClientOptions(new HttpClientOptions().setConnectTimeout(120000));
+			oauth2ClientOptions.setHttpClientOptions(new HttpClientOptions().setTrustAll(true).setVerifyHost(false).setConnectTimeout(120000));
 
 			OpenIDConnectAuth.discover(vertx, oauth2ClientOptions, a -> {
 				if(a.succeeded()) {
@@ -467,9 +525,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 					if(StringUtils.startsWith(siteBaseUrl, "https://"))
 						sessionHandler.setCookieSecureFlag(true);
 			
-					RouterBuilder.create(vertx, "webroot/openapi3-enUS.yml", b -> {
-						if (b.succeeded()) {
-							RouterBuilder routerBuilder = b.result();
+					RouterBuilder.create(vertx, "webroot/openapi3-enUS.yml").onSuccess(routerBuilder -> {
 							routerBuilder.mountServicesFromExtensions();
 			
 							routerBuilder.serviceExtraPayloadMapper(routingContext -> new JsonObject()
@@ -548,11 +604,10 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 			
 							LOG.info(configureOpenApiSuccess);
 							promise.complete();
-						} else {
-							Exception ex = new RuntimeException("OpenID Connect Discovery failed", b.cause());
-							LOG.error(configureOpenApiError, ex);
-							promise.fail(ex);
-						}
+					}).onFailure(ex -> {
+						Exception ex2 = new RuntimeException("OpenID Connect Discovery failed", ex);
+						LOG.error(configureOpenApiError, ex2);
+						promise.fail(ex2);
 					});
 				} else {
 					Exception ex = new RuntimeException("OpenID Connect Discovery failed", a.cause());
@@ -759,19 +814,22 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 	public Future<Void> configureApi() {
 		Promise<Void> promise = Promise.promise();
 		try {
-			SiteUserEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
-			MapResultEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
-			TrafficSimulationEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
-			TrafficLightEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
-			TrafficLightStepEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
-			VehicleStepEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
-			PersonStepEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
-			IotNodeEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
-			IotNodeStepEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
-			TimeStepEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
-			SitePageEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
-			SiteHtmEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
-			SystemEventEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
+			SiteUserEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
+			MapResultEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
+			SystemEventEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
+			SitePageEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
+			SiteHtmEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
+			IotNodeEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
+			IotNodeStepEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
+			PersonStepEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
+			BicycleStepEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
+			TimeStepEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
+			TrafficSimulationEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
+			TrafficFlowObservedEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
+			TrafficLightEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
+			TrafficLightStepEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
+			VehicleStepEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
+			SimulationReportEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
 
 			LOG.info(configureApiComplete);
 			promise.complete();
@@ -892,6 +950,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 						page.setPage(JsonObject.mapFrom(result));
 						page.setUrl(url);
 						page.setUri(uri);
+						page.setPageImageUri(result.getPageImageUri());
 						page.promiseDeepForClass(siteRequest).onSuccess(b -> {
 							JsonObject json = JsonObject.mapFrom(page);
 							json.put(ConfigKeys.STATIC_BASE_URL, config().getString(ConfigKeys.STATIC_BASE_URL));
@@ -949,6 +1008,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 			if(staticPath != null) {
 				staticHandler.setAllowRootFileSystemAccess(true);
 				staticHandler.setWebRoot(staticPath);
+				staticHandler.setFilesReadOnly(true);
 			}
 			router.route("/static/*").handler(staticHandler);
 
@@ -992,7 +1052,13 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 	 */
 	public Future<Void> configureCamel() {
 		Promise<Void> promise = Promise.promise();
-		promise.complete();
+		TlcCamelIntegration.configureCamel(vertx, config()).onSuccess(a -> {
+			LOG.info(configureCamelComplete);
+			promise.complete();
+		}).onFailure(ex -> {
+			LOG.error(configureCamelFail, ex);
+			promise.fail(ex);
+		});
 
 		return promise.future();
 	}
@@ -1064,6 +1130,8 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 				LOG.error(stopFail, ex);
 				promise.fail(ex);
 			});
+		} else {
+			promise.complete();
 		}
 	}
 

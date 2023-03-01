@@ -5,13 +5,14 @@ import org.computate.smartvillageview.enus.model.user.SiteUser;
 import org.computate.vertx.api.ApiRequest;
 import org.computate.vertx.search.list.SearchResult;
 import org.computate.vertx.verticle.EmailVerticle;
-import org.computate.vertx.config.ComputateConfigKeys;
+import org.computate.smartvillageview.enus.config.ConfigKeys;
 import org.computate.vertx.api.BaseApiServiceImpl;
 import io.vertx.ext.web.client.WebClient;
 import java.util.Objects;
 import io.vertx.core.WorkerExecutor;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.pgclient.PgPool;
+import io.vertx.kafka.client.producer.KafkaProducer;
 import io.vertx.core.json.impl.JsonUtil;
 import io.vertx.ext.auth.authorization.AuthorizationProvider;
 import io.vertx.ext.web.templ.handlebars.HandlebarsTemplateEngine;
@@ -22,6 +23,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.time.Instant;
 import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 import org.computate.search.response.solr.SolrResponse.StatsField;
 import java.util.stream.Collectors;
 import io.vertx.core.json.Json;
@@ -69,6 +71,7 @@ import io.vertx.core.buffer.Buffer;
 import io.vertx.core.CompositeFuture;
 import io.vertx.core.http.HttpHeaders;
 import java.nio.charset.Charset;
+import io.vertx.ext.auth.authorization.RoleBasedAuthorization;
 import io.vertx.ext.web.api.service.ServiceRequest;
 import io.vertx.ext.web.api.service.ServiceResponse;
 import io.vertx.ext.web.client.predicate.ResponsePredicate;
@@ -85,7 +88,6 @@ import org.computate.search.tool.SearchTool;
 import org.computate.search.response.solr.SolrResponse;
 import java.util.Base64;
 import java.time.ZonedDateTime;
-import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.BooleanUtils;
 import org.computate.vertx.search.list.SearchList;
 import org.computate.smartvillageview.enus.model.system.event.SystemEventPage;
@@ -98,8 +100,8 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 
 	protected static final Logger LOG = LoggerFactory.getLogger(SystemEventEnUSGenApiServiceImpl.class);
 
-	public SystemEventEnUSGenApiServiceImpl(EventBus eventBus, JsonObject config, WorkerExecutor workerExecutor, PgPool pgPool, WebClient webClient, OAuth2Auth oauth2AuthenticationProvider, AuthorizationProvider authorizationProvider, HandlebarsTemplateEngine templateEngine) {
-		super(eventBus, config, workerExecutor, pgPool, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine);
+	public SystemEventEnUSGenApiServiceImpl(EventBus eventBus, JsonObject config, WorkerExecutor workerExecutor, PgPool pgPool, KafkaProducer<String, String> kafkaProducer, WebClient webClient, OAuth2Auth oauth2AuthenticationProvider, AuthorizationProvider authorizationProvider, HandlebarsTemplateEngine templateEngine) {
+		super(eventBus, config, workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine);
 	}
 
 	// Search //
@@ -107,25 +109,25 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 	@Override
 	public void searchSystemEvent(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
-			try {
-				{
-					searchSystemEventList(siteRequest, false, true, false).onSuccess(listSystemEvent -> {
-						response200SearchSystemEvent(listSystemEvent).onSuccess(response -> {
-							eventHandler.handle(Future.succeededFuture(response));
-							LOG.debug(String.format("searchSystemEvent succeeded. "));
+				try {
+					{
+						searchSystemEventList(siteRequest, false, true, false).onSuccess(listSystemEvent -> {
+							response200SearchSystemEvent(listSystemEvent).onSuccess(response -> {
+								eventHandler.handle(Future.succeededFuture(response));
+								LOG.debug(String.format("searchSystemEvent succeeded. "));
+							}).onFailure(ex -> {
+								LOG.error(String.format("searchSystemEvent failed. "), ex);
+								error(siteRequest, eventHandler, ex);
+							});
 						}).onFailure(ex -> {
 							LOG.error(String.format("searchSystemEvent failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
-					}).onFailure(ex -> {
-						LOG.error(String.format("searchSystemEvent failed. "), ex);
-						error(siteRequest, eventHandler, ex);
-					});
+					}
+				} catch(Exception ex) {
+					LOG.error(String.format("searchSystemEvent failed. "), ex);
+					error(null, eventHandler, ex);
 				}
-			} catch(Exception ex) {
-				LOG.error(String.format("searchSystemEvent failed. "), ex);
-				error(null, eventHandler, ex);
-			}
 		}).onFailure(ex -> {
 			if("Inactive Token".equals(ex.getMessage()) || StringUtils.startsWith(ex.getMessage(), "invalid_grant:")) {
 				try {
@@ -134,6 +136,17 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 					LOG.error(String.format("searchSystemEvent failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
+			} else if(StringUtils.startsWith(ex.getMessage(), "401 UNAUTHORIZED ")) {
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", "SSO Resource Permission check returned DENY")
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+							)
+					));
 			} else {
 				LOG.error(String.format("searchSystemEvent failed. "), ex);
 				error(null, eventHandler, ex);
@@ -222,25 +235,25 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 	@Override
 	public void getSystemEvent(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
-			try {
-				{
-					searchSystemEventList(siteRequest, false, true, false).onSuccess(listSystemEvent -> {
-						response200GETSystemEvent(listSystemEvent).onSuccess(response -> {
-							eventHandler.handle(Future.succeededFuture(response));
-							LOG.debug(String.format("getSystemEvent succeeded. "));
+				try {
+					{
+						searchSystemEventList(siteRequest, false, true, false).onSuccess(listSystemEvent -> {
+							response200GETSystemEvent(listSystemEvent).onSuccess(response -> {
+								eventHandler.handle(Future.succeededFuture(response));
+								LOG.debug(String.format("getSystemEvent succeeded. "));
+							}).onFailure(ex -> {
+								LOG.error(String.format("getSystemEvent failed. "), ex);
+								error(siteRequest, eventHandler, ex);
+							});
 						}).onFailure(ex -> {
 							LOG.error(String.format("getSystemEvent failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
-					}).onFailure(ex -> {
-						LOG.error(String.format("getSystemEvent failed. "), ex);
-						error(siteRequest, eventHandler, ex);
-					});
+					}
+				} catch(Exception ex) {
+					LOG.error(String.format("getSystemEvent failed. "), ex);
+					error(null, eventHandler, ex);
 				}
-			} catch(Exception ex) {
-				LOG.error(String.format("getSystemEvent failed. "), ex);
-				error(null, eventHandler, ex);
-			}
 		}).onFailure(ex -> {
 			if("Inactive Token".equals(ex.getMessage()) || StringUtils.startsWith(ex.getMessage(), "invalid_grant:")) {
 				try {
@@ -249,6 +262,17 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 					LOG.error(String.format("getSystemEvent failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
+			} else if(StringUtils.startsWith(ex.getMessage(), "401 UNAUTHORIZED ")) {
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", "SSO Resource Permission check returned DENY")
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+							)
+					));
 			} else {
 				LOG.error(String.format("getSystemEvent failed. "), ex);
 				error(null, eventHandler, ex);
@@ -276,64 +300,86 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 	public void postSystemEvent(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		LOG.debug(String.format("postSystemEvent started. "));
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
-			try {
-				siteRequest.setJsonObject(body);
 
-				List<String> roles = Optional.ofNullable(config.getValue(ComputateConfigKeys.AUTH_ROLES_REQUIRED + "_SystemEvent")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
-				if(
-						!CollectionUtils.containsAny(siteRequest.getUserResourceRoles(), roles)
-						&& !CollectionUtils.containsAny(siteRequest.getUserRealmRoles(), roles)
-						) {
-					eventHandler.handle(Future.succeededFuture(
-						new ServiceResponse(401, "UNAUTHORIZED", 
-							Buffer.buffer().appendString(
-								new JsonObject()
-									.put("errorCode", "401")
-									.put("errorMessage", "roles required: " + String.join(", ", roles))
-									.encodePrettily()
-								), MultiMap.caseInsensitiveMultiMap()
-						)
-					));
-				} else {
-					ApiRequest apiRequest = new ApiRequest();
-					apiRequest.setRows(1L);
-					apiRequest.setNumFound(1L);
-					apiRequest.setNumPATCH(0L);
-					apiRequest.initDeepApiRequest(siteRequest);
-					siteRequest.setApiRequest_(apiRequest);
-					eventBus.publish("websocketSystemEvent", JsonObject.mapFrom(apiRequest).toString());
-					JsonObject params = new JsonObject();
-					params.put("body", siteRequest.getJsonObject());
-					params.put("path", new JsonObject());
-					params.put("cookie", new JsonObject());
-					params.put("header", new JsonObject());
-					params.put("form", new JsonObject());
-					JsonObject query = new JsonObject();
-					Boolean softCommit = Optional.ofNullable(siteRequest.getServiceRequest().getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getBoolean("softCommit")).orElse(null);
-					Integer commitWithin = Optional.ofNullable(siteRequest.getServiceRequest().getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getInteger("commitWithin")).orElse(null);
-					if(softCommit == null && commitWithin == null)
-						softCommit = true;
-					if(softCommit != null)
-						query.put("softCommit", softCommit);
-					if(commitWithin != null)
-						query.put("commitWithin", commitWithin);
-					params.put("query", query);
-					JsonObject context = new JsonObject().put("params", params).put("user", siteRequest.getUserPrincipal());
-					JsonObject json = new JsonObject().put("context", context);
-					eventBus.request("smartabyar-smartvillage-enUS-SystemEvent", json, new DeliveryOptions().addHeader("action", "postSystemEventFuture")).onSuccess(a -> {
-						JsonObject responseMessage = (JsonObject)a.body();
-						JsonObject responseBody = new JsonObject(Buffer.buffer(JsonUtil.BASE64_DECODER.decode(responseMessage.getString("payload"))));
-						eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(responseBody.encodePrettily()))));
-						LOG.debug(String.format("postSystemEvent succeeded. "));
-					}).onFailure(ex -> {
-						LOG.error(String.format("postSystemEvent failed. "), ex);
-						error(siteRequest, eventHandler, ex);
-					});
+			webClient.post(
+					config.getInteger(ConfigKeys.AUTH_PORT)
+					, config.getString(ConfigKeys.AUTH_HOST_NAME)
+					, config.getString(ConfigKeys.AUTH_TOKEN_URI)
+					)
+					.ssl(config.getBoolean(ConfigKeys.AUTH_SSL))
+					.putHeader("Authorization", String.format("Bearer %s", siteRequest.getUser().principal().getString("access_token")))
+					.sendForm(MultiMap.caseInsensitiveMultiMap()
+							.add("grant_type", "urn:ietf:params:oauth:grant-type:uma-ticket")
+							.add("audience", config.getString(ConfigKeys.AUTH_CLIENT))
+							.add("response_mode", "decision")
+							.add("permission", String.format("%s#%s", SystemEvent.CLASS_SIMPLE_NAME, "POST"))
+			).onFailure(ex -> {
+				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", msg)
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+					)
+				));
+			}).onSuccess(authorizationDecision -> {
+				try {
+					if(!authorizationDecision.bodyAsJsonObject().getBoolean("result")) {
+						String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+						eventHandler.handle(Future.succeededFuture(
+							new ServiceResponse(401, "UNAUTHORIZED",
+								Buffer.buffer().appendString(
+									new JsonObject()
+										.put("errorCode", "401")
+										.put("errorMessage", msg)
+										.encodePrettily()
+									), MultiMap.caseInsensitiveMultiMap()
+							)
+						));
+					} else {
+						ApiRequest apiRequest = new ApiRequest();
+						apiRequest.setRows(1L);
+						apiRequest.setNumFound(1L);
+						apiRequest.setNumPATCH(0L);
+						apiRequest.initDeepApiRequest(siteRequest);
+						siteRequest.setApiRequest_(apiRequest);
+						eventBus.publish("websocketSystemEvent", JsonObject.mapFrom(apiRequest).toString());
+						JsonObject params = new JsonObject();
+						params.put("body", siteRequest.getJsonObject());
+						params.put("path", new JsonObject());
+						params.put("cookie", new JsonObject());
+						params.put("header", new JsonObject());
+						params.put("form", new JsonObject());
+						JsonObject query = new JsonObject();
+						Boolean softCommit = Optional.ofNullable(siteRequest.getServiceRequest().getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getBoolean("softCommit")).orElse(null);
+						Integer commitWithin = Optional.ofNullable(siteRequest.getServiceRequest().getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getInteger("commitWithin")).orElse(null);
+						if(softCommit == null && commitWithin == null)
+							softCommit = true;
+						if(softCommit != null)
+							query.put("softCommit", softCommit);
+						if(commitWithin != null)
+							query.put("commitWithin", commitWithin);
+						params.put("query", query);
+						JsonObject context = new JsonObject().put("params", params).put("user", siteRequest.getUserPrincipal());
+						JsonObject json = new JsonObject().put("context", context);
+						eventBus.request("smartabyar-smartvillage-enUS-SystemEvent", json, new DeliveryOptions().addHeader("action", "postSystemEventFuture")).onSuccess(a -> {
+							JsonObject responseMessage = (JsonObject)a.body();
+							JsonObject responseBody = new JsonObject(Buffer.buffer(JsonUtil.BASE64_DECODER.decode(responseMessage.getString("payload"))));
+							eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(responseBody.encodePrettily()))));
+							LOG.debug(String.format("postSystemEvent succeeded. "));
+						}).onFailure(ex -> {
+							LOG.error(String.format("postSystemEvent failed. "), ex);
+							error(siteRequest, eventHandler, ex);
+						});
+					}
+				} catch(Exception ex) {
+					LOG.error(String.format("postSystemEvent failed. "), ex);
+					error(null, eventHandler, ex);
 				}
-			} catch(Exception ex) {
-				LOG.error(String.format("postSystemEvent failed. "), ex);
-				error(null, eventHandler, ex);
-			}
+			});
 		}).onFailure(ex -> {
 			if("Inactive Token".equals(ex.getMessage()) || StringUtils.startsWith(ex.getMessage(), "invalid_grant:")) {
 				try {
@@ -342,6 +388,17 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 					LOG.error(String.format("postSystemEvent failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
+			} else if(StringUtils.startsWith(ex.getMessage(), "401 UNAUTHORIZED ")) {
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", "SSO Resource Permission check returned DENY")
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+							)
+					));
 			} else {
 				LOG.error(String.format("postSystemEvent failed. "), ex);
 				error(null, eventHandler, ex);
@@ -375,6 +432,17 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 					LOG.error(String.format("postSystemEvent failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
+			} else if(StringUtils.startsWith(ex.getMessage(), "401 UNAUTHORIZED ")) {
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", "SSO Resource Permission check returned DENY")
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+							)
+					));
 			} else {
 				LOG.error(String.format("postSystemEvent failed. "), ex);
 				error(null, eventHandler, ex);
@@ -425,73 +493,93 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 	public void patchSystemEvent(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		LOG.debug(String.format("patchSystemEvent started. "));
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
-			try {
-				siteRequest.setJsonObject(body);
 
-				List<String> roles = Optional.ofNullable(config.getValue(ComputateConfigKeys.AUTH_ROLES_REQUIRED + "_SystemEvent")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
-				if(
-						!CollectionUtils.containsAny(siteRequest.getUserResourceRoles(), roles)
-						&& !CollectionUtils.containsAny(siteRequest.getUserRealmRoles(), roles)
-						) {
-					eventHandler.handle(Future.succeededFuture(
-						new ServiceResponse(401, "UNAUTHORIZED", 
-							Buffer.buffer().appendString(
-								new JsonObject()
-									.put("errorCode", "401")
-									.put("errorMessage", "roles required: " + String.join(", ", roles))
-									.encodePrettily()
-								), MultiMap.caseInsensitiveMultiMap()
-						)
-					));
-				} else {
-					searchSystemEventList(siteRequest, true, false, true).onSuccess(listSystemEvent -> {
-						try {
-							List<String> roles2 = Optional.ofNullable(config.getValue(ComputateConfigKeys.AUTH_ROLES_ADMIN)).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
-							if(listSystemEvent.getResponse().getResponse().getNumFound() > 1
-									&& !CollectionUtils.containsAny(siteRequest.getUserResourceRoles(), roles2)
-									&& !CollectionUtils.containsAny(siteRequest.getUserRealmRoles(), roles2)
-									) {
-								String message = String.format("roles required: " + String.join(", ", roles2));
-								LOG.error(message);
-								error(siteRequest, eventHandler, new RuntimeException(message));
-							} else {
+			webClient.post(
+					config.getInteger(ConfigKeys.AUTH_PORT)
+					, config.getString(ConfigKeys.AUTH_HOST_NAME)
+					, config.getString(ConfigKeys.AUTH_TOKEN_URI)
+					)
+					.ssl(config.getBoolean(ConfigKeys.AUTH_SSL))
+					.putHeader("Authorization", String.format("Bearer %s", siteRequest.getUser().principal().getString("access_token")))
+					.sendForm(MultiMap.caseInsensitiveMultiMap()
+							.add("grant_type", "urn:ietf:params:oauth:grant-type:uma-ticket")
+							.add("audience", config.getString(ConfigKeys.AUTH_CLIENT))
+							.add("response_mode", "decision")
+							.add("permission", String.format("%s#%s", SystemEvent.CLASS_SIMPLE_NAME, "PATCH"))
+			).onFailure(ex -> {
+				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", msg)
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+					)
+				));
+			}).onSuccess(authorizationDecision -> {
+				try {
+					if(!authorizationDecision.bodyAsJsonObject().getBoolean("result")) {
+						String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+						eventHandler.handle(Future.succeededFuture(
+							new ServiceResponse(401, "UNAUTHORIZED",
+								Buffer.buffer().appendString(
+									new JsonObject()
+										.put("errorCode", "401")
+										.put("errorMessage", msg)
+										.encodePrettily()
+									), MultiMap.caseInsensitiveMultiMap()
+							)
+						));
+					} else {
+						searchSystemEventList(siteRequest, true, false, true).onSuccess(listSystemEvent -> {
+							try {
+								if(listSystemEvent.getResponse().getResponse().getNumFound() > 1
+										&& !Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SystemEvent")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+										) {
+									String message = String.format("roles required: " + config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SystemEvent"));
+									LOG.error(message);
+									error(siteRequest, eventHandler, new RuntimeException(message));
+								} else {
 
-								ApiRequest apiRequest = new ApiRequest();
-								apiRequest.setRows(listSystemEvent.getRequest().getRows());
-								apiRequest.setNumFound(listSystemEvent.getResponse().getResponse().getNumFound());
-								apiRequest.setNumPATCH(0L);
-								apiRequest.initDeepApiRequest(siteRequest);
-								siteRequest.setApiRequest_(apiRequest);
-								if(apiRequest.getNumFound() == 1L)
-									apiRequest.setOriginal(listSystemEvent.first());
-								eventBus.publish("websocketSystemEvent", JsonObject.mapFrom(apiRequest).toString());
+									ApiRequest apiRequest = new ApiRequest();
+									apiRequest.setRows(listSystemEvent.getRequest().getRows());
+									apiRequest.setNumFound(listSystemEvent.getResponse().getResponse().getNumFound());
+									apiRequest.setNumPATCH(0L);
+									apiRequest.initDeepApiRequest(siteRequest);
+									siteRequest.setApiRequest_(apiRequest);
+									if(apiRequest.getNumFound() == 1L)
+										apiRequest.setOriginal(listSystemEvent.first());
+									eventBus.publish("websocketSystemEvent", JsonObject.mapFrom(apiRequest).toString());
 
-								listPATCHSystemEvent(apiRequest, listSystemEvent).onSuccess(e -> {
-									response200PATCHSystemEvent(siteRequest).onSuccess(response -> {
-										LOG.debug(String.format("patchSystemEvent succeeded. "));
-										eventHandler.handle(Future.succeededFuture(response));
+									listPATCHSystemEvent(apiRequest, listSystemEvent).onSuccess(e -> {
+										response200PATCHSystemEvent(siteRequest).onSuccess(response -> {
+											LOG.debug(String.format("patchSystemEvent succeeded. "));
+											eventHandler.handle(Future.succeededFuture(response));
+										}).onFailure(ex -> {
+											LOG.error(String.format("patchSystemEvent failed. "), ex);
+											error(siteRequest, eventHandler, ex);
+										});
 									}).onFailure(ex -> {
 										LOG.error(String.format("patchSystemEvent failed. "), ex);
 										error(siteRequest, eventHandler, ex);
 									});
-								}).onFailure(ex -> {
-									LOG.error(String.format("patchSystemEvent failed. "), ex);
-									error(siteRequest, eventHandler, ex);
-								});
+								}
+							} catch(Exception ex) {
+								LOG.error(String.format("patchSystemEvent failed. "), ex);
+								error(siteRequest, eventHandler, ex);
 							}
-						} catch(Exception ex) {
+						}).onFailure(ex -> {
 							LOG.error(String.format("patchSystemEvent failed. "), ex);
 							error(siteRequest, eventHandler, ex);
-						}
-					}).onFailure(ex -> {
-						LOG.error(String.format("patchSystemEvent failed. "), ex);
-						error(siteRequest, eventHandler, ex);
-					});
+						});
+					}
+				} catch(Exception ex) {
+					LOG.error(String.format("patchSystemEvent failed. "), ex);
+					error(null, eventHandler, ex);
 				}
-			} catch(Exception ex) {
-				LOG.error(String.format("patchSystemEvent failed. "), ex);
-				error(null, eventHandler, ex);
-			}
+			});
 		}).onFailure(ex -> {
 			if("Inactive Token".equals(ex.getMessage()) || StringUtils.startsWith(ex.getMessage(), "invalid_grant:")) {
 				try {
@@ -500,6 +588,17 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 					LOG.error(String.format("patchSystemEvent failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
+			} else if(StringUtils.startsWith(ex.getMessage(), "401 UNAUTHORIZED ")) {
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", "SSO Resource Permission check returned DENY")
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+							)
+					));
 			} else {
 				LOG.error(String.format("patchSystemEvent failed. "), ex);
 				error(null, eventHandler, ex);
@@ -642,39 +741,64 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 	public void putimportSystemEvent(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		LOG.debug(String.format("putimportSystemEvent started. "));
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
-			try {
-				siteRequest.setJsonObject(body);
 
-				List<String> roles = Optional.ofNullable(config.getValue(ComputateConfigKeys.AUTH_ROLES_REQUIRED + "_SystemEvent")).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).getList();
-				if(
-						!CollectionUtils.containsAny(siteRequest.getUserResourceRoles(), roles)
-						&& !CollectionUtils.containsAny(siteRequest.getUserRealmRoles(), roles)
-						) {
-					eventHandler.handle(Future.succeededFuture(
-						new ServiceResponse(401, "UNAUTHORIZED", 
-							Buffer.buffer().appendString(
-								new JsonObject()
-									.put("errorCode", "401")
-									.put("errorMessage", "roles required: " + String.join(", ", roles))
-									.encodePrettily()
-								), MultiMap.caseInsensitiveMultiMap()
-						)
-					));
-				} else {
-					try {
-						ApiRequest apiRequest = new ApiRequest();
-						JsonArray jsonArray = Optional.ofNullable(siteRequest.getJsonObject()).map(o -> o.getJsonArray("list")).orElse(new JsonArray());
-						apiRequest.setRows(Long.valueOf(jsonArray.size()));
-						apiRequest.setNumFound(Long.valueOf(jsonArray.size()));
-						apiRequest.setNumPATCH(0L);
-						apiRequest.initDeepApiRequest(siteRequest);
-						siteRequest.setApiRequest_(apiRequest);
-						eventBus.publish("websocketSystemEvent", JsonObject.mapFrom(apiRequest).toString());
-						varsSystemEvent(siteRequest).onSuccess(d -> {
-							listPUTImportSystemEvent(apiRequest, siteRequest).onSuccess(e -> {
-								response200PUTImportSystemEvent(siteRequest).onSuccess(response -> {
-									LOG.debug(String.format("putimportSystemEvent succeeded. "));
-									eventHandler.handle(Future.succeededFuture(response));
+			webClient.post(
+					config.getInteger(ConfigKeys.AUTH_PORT)
+					, config.getString(ConfigKeys.AUTH_HOST_NAME)
+					, config.getString(ConfigKeys.AUTH_TOKEN_URI)
+					)
+					.ssl(config.getBoolean(ConfigKeys.AUTH_SSL))
+					.putHeader("Authorization", String.format("Bearer %s", siteRequest.getUser().principal().getString("access_token")))
+					.sendForm(MultiMap.caseInsensitiveMultiMap()
+							.add("grant_type", "urn:ietf:params:oauth:grant-type:uma-ticket")
+							.add("audience", config.getString(ConfigKeys.AUTH_CLIENT))
+							.add("response_mode", "decision")
+							.add("permission", String.format("%s#%s", SystemEvent.CLASS_SIMPLE_NAME, "PUTImport"))
+			).onFailure(ex -> {
+				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", msg)
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+					)
+				));
+			}).onSuccess(authorizationDecision -> {
+				try {
+					if(!authorizationDecision.bodyAsJsonObject().getBoolean("result")) {
+						String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+						eventHandler.handle(Future.succeededFuture(
+							new ServiceResponse(401, "UNAUTHORIZED",
+								Buffer.buffer().appendString(
+									new JsonObject()
+										.put("errorCode", "401")
+										.put("errorMessage", msg)
+										.encodePrettily()
+									), MultiMap.caseInsensitiveMultiMap()
+							)
+						));
+					} else {
+						try {
+							ApiRequest apiRequest = new ApiRequest();
+							JsonArray jsonArray = Optional.ofNullable(siteRequest.getJsonObject()).map(o -> o.getJsonArray("list")).orElse(new JsonArray());
+							apiRequest.setRows(Long.valueOf(jsonArray.size()));
+							apiRequest.setNumFound(Long.valueOf(jsonArray.size()));
+							apiRequest.setNumPATCH(0L);
+							apiRequest.initDeepApiRequest(siteRequest);
+							siteRequest.setApiRequest_(apiRequest);
+							eventBus.publish("websocketSystemEvent", JsonObject.mapFrom(apiRequest).toString());
+							varsSystemEvent(siteRequest).onSuccess(d -> {
+								listPUTImportSystemEvent(apiRequest, siteRequest).onSuccess(e -> {
+									response200PUTImportSystemEvent(siteRequest).onSuccess(response -> {
+										LOG.debug(String.format("putimportSystemEvent succeeded. "));
+										eventHandler.handle(Future.succeededFuture(response));
+									}).onFailure(ex -> {
+										LOG.error(String.format("putimportSystemEvent failed. "), ex);
+										error(siteRequest, eventHandler, ex);
+									});
 								}).onFailure(ex -> {
 									LOG.error(String.format("putimportSystemEvent failed. "), ex);
 									error(siteRequest, eventHandler, ex);
@@ -683,19 +807,16 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 								LOG.error(String.format("putimportSystemEvent failed. "), ex);
 								error(siteRequest, eventHandler, ex);
 							});
-						}).onFailure(ex -> {
+						} catch(Exception ex) {
 							LOG.error(String.format("putimportSystemEvent failed. "), ex);
 							error(siteRequest, eventHandler, ex);
-						});
-					} catch(Exception ex) {
-						LOG.error(String.format("putimportSystemEvent failed. "), ex);
-						error(siteRequest, eventHandler, ex);
+						}
 					}
+				} catch(Exception ex) {
+					LOG.error(String.format("putimportSystemEvent failed. "), ex);
+					error(null, eventHandler, ex);
 				}
-			} catch(Exception ex) {
-				LOG.error(String.format("putimportSystemEvent failed. "), ex);
-				error(null, eventHandler, ex);
-			}
+			});
 		}).onFailure(ex -> {
 			if("Inactive Token".equals(ex.getMessage()) || StringUtils.startsWith(ex.getMessage(), "invalid_grant:")) {
 				try {
@@ -704,6 +825,17 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 					LOG.error(String.format("putimportSystemEvent failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
+			} else if(StringUtils.startsWith(ex.getMessage(), "401 UNAUTHORIZED ")) {
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", "SSO Resource Permission check returned DENY")
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+							)
+					));
 			} else {
 				LOG.error(String.format("putimportSystemEvent failed. "), ex);
 				error(null, eventHandler, ex);
@@ -866,6 +998,17 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 					LOG.error(String.format("putimportSystemEvent failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
+			} else if(StringUtils.startsWith(ex.getMessage(), "401 UNAUTHORIZED ")) {
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", "SSO Resource Permission check returned DENY")
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+							)
+					));
 			} else {
 				LOG.error(String.format("putimportSystemEvent failed. "), ex);
 				error(null, eventHandler, ex);
@@ -895,25 +1038,25 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 	@Override
 	public void searchpageSystemEvent(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
-			try {
-				{
-					searchSystemEventList(siteRequest, false, true, false).onSuccess(listSystemEvent -> {
-						response200SearchPageSystemEvent(listSystemEvent).onSuccess(response -> {
-							eventHandler.handle(Future.succeededFuture(response));
-							LOG.debug(String.format("searchpageSystemEvent succeeded. "));
+				try {
+					{
+						searchSystemEventList(siteRequest, false, true, false).onSuccess(listSystemEvent -> {
+							response200SearchPageSystemEvent(listSystemEvent).onSuccess(response -> {
+								eventHandler.handle(Future.succeededFuture(response));
+								LOG.debug(String.format("searchpageSystemEvent succeeded. "));
+							}).onFailure(ex -> {
+								LOG.error(String.format("searchpageSystemEvent failed. "), ex);
+								error(siteRequest, eventHandler, ex);
+							});
 						}).onFailure(ex -> {
 							LOG.error(String.format("searchpageSystemEvent failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
-					}).onFailure(ex -> {
-						LOG.error(String.format("searchpageSystemEvent failed. "), ex);
-						error(siteRequest, eventHandler, ex);
-					});
+					}
+				} catch(Exception ex) {
+					LOG.error(String.format("searchpageSystemEvent failed. "), ex);
+					error(null, eventHandler, ex);
 				}
-			} catch(Exception ex) {
-				LOG.error(String.format("searchpageSystemEvent failed. "), ex);
-				error(null, eventHandler, ex);
-			}
 		}).onFailure(ex -> {
 			if("Inactive Token".equals(ex.getMessage()) || StringUtils.startsWith(ex.getMessage(), "invalid_grant:")) {
 				try {
@@ -922,6 +1065,17 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 					LOG.error(String.format("searchpageSystemEvent failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
+			} else if(StringUtils.startsWith(ex.getMessage(), "401 UNAUTHORIZED ")) {
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", "SSO Resource Permission check returned DENY")
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+							)
+					));
 			} else {
 				LOG.error(String.format("searchpageSystemEvent failed. "), ex);
 				error(null, eventHandler, ex);
@@ -934,7 +1088,7 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 	}
 
 	public String templateSearchPageSystemEvent() {
-		return Optional.ofNullable(config.getString(ComputateConfigKeys.TEMPLATE_PATH)).orElse("templates") + "/enUS/SystemEventPage";
+		return Optional.ofNullable(config.getString(ConfigKeys.TEMPLATE_PATH)).orElse("templates") + "/enUS/SystemEventPage";
 	}
 	public Future<ServiceResponse> response200SearchPageSystemEvent(SearchList<SystemEvent> listSystemEvent) {
 		Promise<ServiceResponse> promise = Promise.promise();
@@ -948,13 +1102,13 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 			page.setSiteRequest_(siteRequest);
 			page.promiseDeepSystemEventPage(siteRequest).onSuccess(a -> {
 				JsonObject json = JsonObject.mapFrom(page);
-				json.put(ComputateConfigKeys.STATIC_BASE_URL, config.getString(ComputateConfigKeys.STATIC_BASE_URL));
-				json.put(ComputateConfigKeys.GITHUB_ORG, config.getString(ComputateConfigKeys.GITHUB_ORG));
-				json.put(ComputateConfigKeys.SITE_NAME, config.getString(ComputateConfigKeys.SITE_NAME));
-				json.put(ComputateConfigKeys.SITE_DISPLAY_NAME, config.getString(ComputateConfigKeys.SITE_DISPLAY_NAME));
-				json.put(ComputateConfigKeys.SITE_POWERED_BY_URL, config.getString(ComputateConfigKeys.SITE_POWERED_BY_URL));
-				json.put(ComputateConfigKeys.SITE_POWERED_BY_NAME, config.getString(ComputateConfigKeys.SITE_POWERED_BY_NAME));
-				json.put(ComputateConfigKeys.SITE_POWERED_BY_IMAGE_URI, config.getString(ComputateConfigKeys.SITE_POWERED_BY_IMAGE_URI));
+				json.put(ConfigKeys.STATIC_BASE_URL, config.getString(ConfigKeys.STATIC_BASE_URL));
+				json.put(ConfigKeys.GITHUB_ORG, config.getString(ConfigKeys.GITHUB_ORG));
+				json.put(ConfigKeys.SITE_NAME, config.getString(ConfigKeys.SITE_NAME));
+				json.put(ConfigKeys.SITE_DISPLAY_NAME, config.getString(ConfigKeys.SITE_DISPLAY_NAME));
+				json.put(ConfigKeys.SITE_POWERED_BY_URL, config.getString(ConfigKeys.SITE_POWERED_BY_URL));
+				json.put(ConfigKeys.SITE_POWERED_BY_NAME, config.getString(ConfigKeys.SITE_POWERED_BY_NAME));
+				json.put(ConfigKeys.SITE_POWERED_BY_IMAGE_URI, config.getString(ConfigKeys.SITE_POWERED_BY_IMAGE_URI));
 				templateEngine.render(json, templateSearchPageSystemEvent()).onSuccess(buffer -> {
 					promise.complete(new ServiceResponse(200, "OK", buffer, requestHeaders));
 				}).onFailure(ex -> {
@@ -1230,8 +1384,12 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 			searchList.promiseDeepForClass(siteRequest).onSuccess(a -> {
 				if(facetRange2 != null && statsField2 != null && facetRange2.equals(statsField2)) {
 					StatsField stats = searchList.getResponse().getStats().getStatsFields().get(statsFieldIndexed2);
-					Instant min = Instant.parse(stats.getMin().toString());
-					Instant max = Instant.parse(stats.getMax().toString());
+					Instant min = Optional.ofNullable(stats.getMin()).map(val -> Instant.parse(val.toString())).orElse(Instant.now());
+					Instant max = Optional.ofNullable(stats.getMax()).map(val -> Instant.parse(val.toString())).orElse(Instant.now());
+					if(min.equals(max)) {
+						min = min.minus(1, ChronoUnit.DAYS);
+						max = max.plus(2, ChronoUnit.DAYS);
+					}
 					Duration duration = Duration.between(min, max);
 					String gap = "DAY";
 					if(duration.toDays() >= 365)
@@ -1325,9 +1483,9 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 				JsonObject doc = new JsonObject();
 				add.put("doc", doc);
 				o.indexSystemEvent(doc);
-				String solrHostName = siteRequest.getConfig().getString(ComputateConfigKeys.SOLR_HOST_NAME);
-				Integer solrPort = siteRequest.getConfig().getInteger(ComputateConfigKeys.SOLR_PORT);
-				String solrCollection = siteRequest.getConfig().getString(ComputateConfigKeys.SOLR_COLLECTION);
+				String solrHostName = siteRequest.getConfig().getString(ConfigKeys.SOLR_HOST_NAME);
+				Integer solrPort = siteRequest.getConfig().getInteger(ConfigKeys.SOLR_PORT);
+				String solrCollection = siteRequest.getConfig().getString(ConfigKeys.SOLR_COLLECTION);
 				Boolean softCommit = Optional.ofNullable(siteRequest.getServiceRequest().getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getBoolean("softCommit")).orElse(null);
 				Integer commitWithin = Optional.ofNullable(siteRequest.getServiceRequest().getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getInteger("commitWithin")).orElse(null);
 					if(softCommit == null && commitWithin == null)

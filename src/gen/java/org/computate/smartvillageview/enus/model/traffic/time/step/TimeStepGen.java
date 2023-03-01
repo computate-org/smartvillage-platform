@@ -3,7 +3,7 @@ package org.computate.smartvillageview.enus.model.traffic.time.step;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.smartvillageview.enus.model.base.BaseModel;
 import org.computate.vertx.api.ApiRequest;
-import org.computate.vertx.config.ComputateConfigKeys;
+import org.computate.smartvillageview.enus.config.ConfigKeys;
 import java.util.Optional;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
@@ -66,7 +66,7 @@ import io.vertx.core.json.JsonObject;
  * Whenever this Java class is modified or touched, the watch service installed as described in the README, indexes all the information about this Java class in a local Apache Solr Search Engine. 
  * If you are running the service, you can see the indexed data about this Java Class here: 
  * </p>
- * <p><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstClasse_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.time.step.TimeStep">Find the class TimeStep in Solr. </a></p>
+ * <p><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstClasse_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.time.step.TimeStep">Find the class TimeStep in Solr. </a></p>
  * <p>
  * The extended class ending with "Gen" did not exist at first, but was automatically created by the same watch service based on the data retrieved from the local Apache Server search engine. 
  * The extended class contains many generated fields, getters, setters, initialization code, and helper methods to help build a website and API fast, reactive, and scalable. 
@@ -79,25 +79,7 @@ import io.vertx.core.json.JsonObject;
  * Api: true
  * <p>This class contains a comment <b>"Api: true"</b>, which means this class will have Java Vert.x API backend code generated for these objects. 
  * </p>
- * ApiMethode.enUS: true
- * <p>This class contains a comment <b>"ApiTag: Time Step"</b>, which groups all of the OpenAPIs for TimeStep objects under the tag "Time Step". 
- * </p>
- * ApiMethode.enUS: true
- * <p>This class contains a comment <b>"ApiTag: Time Step"</b>, which groups all of the OpenAPIs for TimeStep objects under the tag "Time Step". 
- * </p>
- * ApiMethode.enUS: true
- * <p>This class contains a comment <b>"ApiTag: Time Step"</b>, which groups all of the OpenAPIs for TimeStep objects under the tag "Time Step". 
- * </p>
- * ApiMethode.enUS: true
- * <p>This class contains a comment <b>"ApiTag: Time Step"</b>, which groups all of the OpenAPIs for TimeStep objects under the tag "Time Step". 
- * </p>
- * ApiMethode.enUS: true
- * <p>This class contains a comment <b>"ApiTag: Time Step"</b>, which groups all of the OpenAPIs for TimeStep objects under the tag "Time Step". 
- * </p>
- * ApiMethode.enUS: true
- * <p>This class contains a comment <b>"ApiTag: Time Step"</b>, which groups all of the OpenAPIs for TimeStep objects under the tag "Time Step". 
- * </p>
- * ApiTag.enUS: true
+ * ApiTag.enUS: Time Step
  * <p>This class contains a comment <b>"ApiTag: Time Step"</b>, which groups all of the OpenAPIs for TimeStep objects under the tag "Time Step". 
  * </p>
  * ApiUri.enUS: /api/time-step
@@ -133,8 +115,8 @@ import io.vertx.core.json.JsonObject;
  * <p>This class contains a comment <b>"Rows: 100"</b>, which means the TimeStep API will return a default of 100 records instead of 10 by default. 
  * Each API has built in pagination of the search records to ensure a user can query all the data a page at a time without running the application out of memory. 
  * </p>
- * Order: 14
- * <p>This class contains a comment <b>"Order: 14"</b>, which means this class will be sorted by the given number 14 ascending when code that relates to multiple classes at the same time is generated. 
+ * Order: 7
+ * <p>This class contains a comment <b>"Order: 7"</b>, which means this class will be sorted by the given number 7 ascending when code that relates to multiple classes at the same time is generated. 
  * </p>
  * Model: true
  * Page: true
@@ -174,21 +156,21 @@ import io.vertx.core.json.JsonObject;
  * This class contains a comment <b>"Role.enUS: SiteAdmin"</b>, which identifies the default role name "SiteAdmin" of the OAuth2/OpenID Connect user role required to access this TimeStep API. 
  * It's possible to reconfigure the roles required to access the TimeStep API by configuring an environment variable like this: 
  * </p>
- * <pre>AUTH_ROLES_REQUIRED_TimeStep: ["SiteAdmin"]</pre>
+ * <pre>AUTH_ROLE_REQUIRED_TimeStep: ["SiteAdmin"]</pre>
  * AName.enUS: a time step
  * <p>This class contains a comment <b>"AName.enUS: a time step"</b>, which identifies the language context to describe a TimeStep as "a time step". 
  * </p>
  * <p>
  * Delete the class TimeStep in Solr: 
- * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.time.step.TimeStep&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.time.step.TimeStep&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
  * Delete  the package org.computate.smartvillageview.enus.model.traffic.time.step in Solr: 
- * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.time.step&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.time.step&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
  * Delete  the project smartabyar-smartvillage in Solr: 
- * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartabyar\-smartvillage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartabyar\-smartvillage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  **/
 public abstract class TimeStepGen<DEV> extends BaseResult {
@@ -246,7 +228,7 @@ public abstract class TimeStepGen<DEV> extends BaseResult {
 
 	/**	<br> The entity simulationKey
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.time.step.TimeStep&fq=entiteVar_enUS_indexed_string:simulationKey">Find the entity simulationKey in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.time.step.TimeStep&fq=entiteVar_enUS_indexed_string:simulationKey">Find the entity simulationKey in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -307,7 +289,7 @@ public abstract class TimeStepGen<DEV> extends BaseResult {
 
 	/**	<br> The entity path
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.time.step.TimeStep&fq=entiteVar_enUS_indexed_string:path">Find the entity path in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.time.step.TimeStep&fq=entiteVar_enUS_indexed_string:path">Find the entity path in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -362,7 +344,7 @@ public abstract class TimeStepGen<DEV> extends BaseResult {
 
 	/**	<br> The entity time
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.time.step.TimeStep&fq=entiteVar_enUS_indexed_string:time">Find the entity time in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.time.step.TimeStep&fq=entiteVar_enUS_indexed_string:time">Find the entity time in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -435,7 +417,7 @@ public abstract class TimeStepGen<DEV> extends BaseResult {
 
 	/**	<br> The entity dateTime
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.time.step.TimeStep&fq=entiteVar_enUS_indexed_string:dateTime">Find the entity dateTime in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.time.step.TimeStep&fq=entiteVar_enUS_indexed_string:dateTime">Find the entity dateTime in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -461,15 +443,15 @@ public abstract class TimeStepGen<DEV> extends BaseResult {
 		if(StringUtils.endsWith(o, "]"))
 			return o == null ? null : ZonedDateTime.parse(o, ComputateZonedDateTimeSerializer.ZONED_DATE_TIME_FORMATTER);
 		else if(StringUtils.endsWith(o, "Z"))
-			return o == null ? null : Instant.parse(o).atZone(Optional.ofNullable(siteRequest_).map(r -> r.getConfig()).map(config -> config.getString(ComputateConfigKeys.SITE_ZONE)).map(z -> ZoneId.of(z)).orElse(ZoneId.of("UTC"))).truncatedTo(ChronoUnit.MILLIS);
+			return o == null ? null : Instant.parse(o).atZone(Optional.ofNullable(siteRequest_).map(r -> r.getConfig()).map(config -> config.getString(ConfigKeys.SITE_ZONE)).map(z -> ZoneId.of(z)).orElse(ZoneId.of("UTC"))).truncatedTo(ChronoUnit.MILLIS);
 		else if(StringUtils.contains(o, "T"))
 			return o == null ? null : ZonedDateTime.parse(o, DateTimeFormatter.ISO_DATE_TIME).truncatedTo(ChronoUnit.MILLIS);
 		else
-			return o == null ? null : LocalDate.parse(o, DateTimeFormatter.ISO_DATE).atStartOfDay(ZoneId.of(siteRequest_.getConfig().getString(ComputateConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
+			return o == null ? null : LocalDate.parse(o, DateTimeFormatter.ISO_DATE).atStartOfDay(ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
 	}
 	@JsonIgnore
 	public void setDateTime(Date o) {
-		this.dateTime = o == null ? null : ZonedDateTime.ofInstant(o.toInstant(), ZoneId.of(siteRequest_.getConfig().getString(ComputateConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
+		this.dateTime = o == null ? null : ZonedDateTime.ofInstant(o.toInstant(), ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
 	}
 	protected TimeStep dateTimeInit() {
 		Wrap<ZonedDateTime> dateTimeWrap = new Wrap<ZonedDateTime>().var("dateTime");
@@ -755,7 +737,7 @@ public abstract class TimeStepGen<DEV> extends BaseResult {
 				if(val instanceof String) {
 					setDateTime((String)val);
 				} else if(val instanceof OffsetDateTime) {
-					setDateTime(((OffsetDateTime)val).atZoneSameInstant(ZoneId.of(siteRequest_.getConfig().getString(ComputateConfigKeys.SITE_ZONE))));
+					setDateTime(((OffsetDateTime)val).atZoneSameInstant(ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))));
 				}
 				saves.add("dateTime");
 				return val;

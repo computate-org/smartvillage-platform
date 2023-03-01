@@ -1,6 +1,9 @@
 ---
 SITE_NAME: "{{ SITE_NAME }}"
+SITE_SRC: "{{ SITE_SRC }}"
 SITE_DISPLAY_NAME: "{{ SITE_DISPLAY_NAME }}"
+SITE_POM_GROUP_ID: "{{ SITE_POM_GROUP_ID }}"
+SITE_PUBLIC_URL: "{{ SITE_PUBLIC_URL }}"
 GITHUB_ORG: "{{ GITHUB_ORG }}"
 QUAYIO_ORG: "{{ QUAYIO_ORG }}"
 SITE_POWERED_BY_URL: "{{ SITE_POWERED_BY_URL }}"
@@ -26,7 +29,6 @@ FONTAWESOME_KIT: "{{ FONTAWESOME_KIT }}"
 I18N_PATHS: {{ I18N_PATHS | to_json }}
 DYNAMIC_PAGE_PATHS:
   - "{{ SITE_SRC }}/page"
-
 JDBC_HOST: "{{ JDBC_HOST }}"
 JDBC_PORT: {{ JDBC_PORT }}
 JDBC_DATABASE: "{{ JDBC_DATABASE }}"
@@ -38,7 +40,7 @@ AUTH_PORT: {{ AUTH_PORT }}
 AUTH_SSL: {{ AUTH_SSL | lower }}
 AUTH_SSL_REQUIRED: {{ AUTH_SSL_REQUIRED }}
 AUTH_REALM: "{{ AUTH_REALM }}"
-AUTH_RESOURCE: "{{ AUTH_RESOURCE }}"
+AUTH_CLIENT: "{{ AUTH_CLIENT }}"
 AUTH_SECRET: "{{ AUTH_SECRET }}"
 AUTH_URL: "{{ AUTH_URL }}"
 AUTH_TOKEN_URI: "{{ AUTH_TOKEN_URI }}"
@@ -81,46 +83,52 @@ WRITE_COMMENTS: true
 # Enable data import in the site. 
 ENABLE_IMPORT_DATA: {{ ENABLE_IMPORT_DATA | lower }}
 ENABLE_IMPORT_DATA_MapResult: true
+ENABLE_IMPORT_DATA_SystemEvent: true
+ENABLE_IMPORT_DATA_SitePage: true
+ENABLE_IMPORT_DATA_SiteHtm: true
+ENABLE_IMPORT_DATA_IotNode: true
+ENABLE_IMPORT_DATA_IotNodeStep: true
+ENABLE_IMPORT_DATA_PersonStep: true
+ENABLE_IMPORT_DATA_BicycleStep: true
+ENABLE_IMPORT_DATA_TimeStep: true
 ENABLE_IMPORT_DATA_TrafficSimulation: true
+ENABLE_IMPORT_DATA_TrafficFlowObserved: true
 ENABLE_IMPORT_DATA_TrafficLight: true
 ENABLE_IMPORT_DATA_TrafficLightStep: true
 ENABLE_IMPORT_DATA_VehicleStep: true
-ENABLE_IMPORT_DATA_PersonStep: true
-ENABLE_IMPORT_DATA_IotNode: true
-ENABLE_IMPORT_DATA_IotNodeStep: true
-ENABLE_IMPORT_DATA_TimeStep: true
-ENABLE_IMPORT_DATA_SitePage: true
-ENABLE_IMPORT_DATA_SiteHtm: true
-ENABLE_IMPORT_DATA_SystemEvent: true
 
 # The Auth roles required to be an admin in the site. 
-AUTH_ROLES_ADMIN: {{ AUTH_ROLES_ADMIN }}
+AUTH_ROLE_ADMIN: {{ AUTH_ROLE_ADMIN }}
 # The Auth roles required to add and modify site user records. 
-AUTH_ROLES_REQUIRED_SiteUser: ['SiteAdmin']
+AUTH_ROLE_REQUIRED_SiteUser: 'SiteAdmin'
 # The Auth roles required to add and modify map result records. 
-AUTH_ROLES_REQUIRED_MapResult: ['SiteAdmin']
-# The Auth roles required to add and modify traffic simulation records. 
-AUTH_ROLES_REQUIRED_TrafficSimulation: ['SiteAdmin']
-# The Auth roles required to add and modify traffic light records. 
-AUTH_ROLES_REQUIRED_TrafficLight: ['SiteAdmin']
-# The Auth roles required to add and modify traffic light step records. 
-AUTH_ROLES_REQUIRED_TrafficLightStep: ['SiteAdmin']
-# The Auth roles required to add and modify vehicle step records. 
-AUTH_ROLES_REQUIRED_VehicleStep: ['SiteAdmin']
-# The Auth roles required to add and modify person step records. 
-AUTH_ROLES_REQUIRED_PersonStep: ['SiteAdmin']
-# The Auth roles required to add and modify IOT node records. 
-AUTH_ROLES_REQUIRED_IotNode: ['SiteAdmin']
-# The Auth roles required to add and modify IOT node step records. 
-AUTH_ROLES_REQUIRED_IotNodeStep: ['SiteAdmin']
-# The Auth roles required to add and modify time step records. 
-AUTH_ROLES_REQUIRED_TimeStep: ['SiteAdmin']
-# The Auth roles required to add and modify article records. 
-AUTH_ROLES_REQUIRED_SitePage: ['SiteAdmin']
-# The Auth roles required to add and modify HTML records. 
-AUTH_ROLES_REQUIRED_SiteHtm: ['SiteAdmin']
+AUTH_ROLE_REQUIRED_MapResult: 'SiteAdmin'
 # The Auth roles required to add and modify system event records. 
-AUTH_ROLES_REQUIRED_SystemEvent: ['SiteAdmin']
+AUTH_ROLE_REQUIRED_SystemEvent: 'SiteAdmin'
+# The Auth roles required to add and modify article records. 
+AUTH_ROLE_REQUIRED_SitePage: 'SiteAdmin'
+# The Auth roles required to add and modify HTML records. 
+AUTH_ROLE_REQUIRED_SiteHtm: 'SiteAdmin'
+# The Auth roles required to add and modify IOT node records. 
+AUTH_ROLE_REQUIRED_IotNode: 'SiteAdmin'
+# The Auth roles required to add and modify IOT node step records. 
+AUTH_ROLE_REQUIRED_IotNodeStep: 'SiteAdmin'
+# The Auth roles required to add and modify person step records. 
+AUTH_ROLE_REQUIRED_PersonStep: 'SiteAdmin'
+# The Auth roles required to add and modify bicycle step records. 
+AUTH_ROLE_REQUIRED_BicycleStep: 'SiteAdmin'
+# The Auth roles required to add and modify time step records. 
+AUTH_ROLE_REQUIRED_TimeStep: 'SiteAdmin'
+# The Auth roles required to add and modify traffic simulation records. 
+AUTH_ROLE_REQUIRED_TrafficSimulation: 'SiteAdmin'
+# The Auth roles required to add and modify traffic flow observed records. 
+AUTH_ROLE_REQUIRED_TrafficFlowObserved: 'SiteAdmin'
+# The Auth roles required to add and modify traffic light records. 
+AUTH_ROLE_REQUIRED_TrafficLight: 'SiteAdmin'
+# The Auth roles required to add and modify traffic light step records. 
+AUTH_ROLE_REQUIRED_TrafficLightStep: 'SiteAdmin'
+# The Auth roles required to add and modify vehicle step records. 
+AUTH_ROLE_REQUIRED_VehicleStep: 'SiteAdmin'
 
 YGGIO_HOST_NAME: "{{ YGGIO_HOST_NAME }}"
 YGGIO_PORT: {{ YGGIO_PORT }}

@@ -27,6 +27,8 @@
 				}
 				websocketBaseResult(websocketBaseResultInner);
 				window.varsFq = JSON.parse('{{{toJsonObjectStringInApostrophes varsFq}}}');
+				window.varsRange = JSON.parse('{{{toJsonObjectStringInApostrophes varsRange}}}');
+				window.defaultRangeVar = '{{ defaultRangeVar }}';
 				pageGraph();
 
 				var calendarEl = document.getElementById('site-calendar');
@@ -42,6 +44,7 @@
 {{#if DEFAULT_MAP_ZOOM }}
 			window.DEFAULT_MAP_ZOOM = {{ DEFAULT_MAP_ZOOM }};
 {{/if}}
+			window.DEFAULT_ZONE_ID = '{{ defaultZoneId }}';
 		</script>
 {{/inline}}
 {{#*inline "htmUrlBaseResult"}}{{pageUri}}?q={{query.q}}&amp;rows={{#if rows}}{{rows}}{{else}}{{pagination.rows}}{{/if}}&amp;rows={{#if start}}{{start}}{{else}}{{pagination.start}}{{/if}}{{#each query.fq}}{{#eq fq this}}{{else}}&fq={{fq}}:{{val}}{{/eq}}{{/each}}{{#each query.sort}}{{#eq sort this}}{{else}}&sort={{var}} {{order}}{{/eq}}{{/each}}{{/inline}}
@@ -115,9 +118,9 @@
 								<table class="w3-padding ">
 									<tr>
 										<td class="w3-padding w3-tiny " colspan="2">
-											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeGap-BaseResult">{{#if defaultRangeGap }}facet.range.gap={{encodeURIComponent defaultRangeGap }}{{/if}}</div>
-											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeStart-BaseResult">{{#if defaultRangeStart }}facet.range.start={{encodeURIComponent defaultRangeStart }}{{/if}}</div>
-											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeEnd-BaseResult">{{#if defaultRangeEnd }}facet.range.end={{encodeURIComponent defaultRangeEnd }}{{/if}}</div>
+											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeGap-BaseResult">{{#if rangeGap }}facet.range.gap={{encodeURIComponent rangeGap }}{{/if}}</div>
+											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeStart-BaseResult">{{#if rangeStart }}facet.range.start={{encodeURIComponent rangeStart }}{{/if}}</div>
+											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeEnd-BaseResult">{{#if rangeEnd }}facet.range.end={{encodeURIComponent rangeEnd }}{{/if}}</div>
 											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeVar-BaseResult">{{#if defaultRangeVar }}facet.range={!tag=r1}{{encodeURIComponent defaultRangeVar }}{{/if}}</div>
 										</td>
 									</tr>
@@ -128,7 +131,7 @@
 											<span>Range Gap</span>
 										</td>
 										<td class="">
-											<select name="facet.range.gap" id="pageFacetRangeGap-BaseResult" onchange="facetRangeChange(this, 'BaseResult'); ">
+											<select name="facet.range.gap" id="pageFacetRangeGap-BaseResult" onchange="facetRangeGapChange(this, 'BaseResult'); ">
 												<option value="+1YEAR"{{#eq defaultRangeGap '+1YEAR'}} selected="selected"{{else}}{{/eq}}>Year</option>
 												<option value="+1MONTH"{{#eq defaultRangeGap '+1MONTH'}} selected="selected"{{else}}{{/eq}}>Month</option>
 												<option value="+1WEEK"{{#eq defaultRangeGap '+1WEEK'}} selected="selected"{{else}}{{/eq}}>Week</option>
@@ -146,7 +149,7 @@
 									</tr>
 									<tr class="">
 										<td class="" colspan="2">
-											<span><input type="datetime-local" name="facetRangeStart" id="pageFacetRangeStart-BaseResult" value="{{formatZonedDateTime defaultRangeStart "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeChange(this, 'BaseResult'); "/></span>
+											<span><input type="datetime-local" name="facetRangeStart" id="pageFacetRangeStart-BaseResult" value="{{formatZonedDateTime defaultRangeStart "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeStartChange(this, 'BaseResult'); "/></span>
 										</td>
 									</tr>
 									<tr class="">
@@ -156,7 +159,7 @@
 									</tr>
 									<tr class="">
 										<td class="" colspan="2">
-											<span><input type="datetime-local" name="facetRangeEnd" id="pageFacetRangeEnd-BaseResult" value="{{formatZonedDateTime defaultRangeEnd "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeChange(this, 'BaseResult'); "/></span>
+											<span><input type="datetime-local" name="facetRangeEnd" id="pageFacetRangeEnd-BaseResult" value="{{formatZonedDateTime defaultRangeEnd "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeEndChange(this, 'BaseResult'); "/></span>
 										</td>
 									</tr>
 								</table>
@@ -559,7 +562,7 @@
 			</tr>
 	{{/inline}}
 {{#*inline "htmFormsBaseResultPage"}}
-	{{#ifContainsAnyRoles roles rolesRequired}}
+	{{#ifContainsAnyRoles roles roleRequired}}
 		{{#eq baseResultCount int1}}
 		<button
 			class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3- "
@@ -575,7 +578,7 @@
 {{#block "htmSuggested"}}{{/block}}
 {{/inline}}
 {{#*inline "htmSuggestedBaseResultPage"}}
-			{{#ifContainsAnyRoles roles rolesRequired}}
+			{{#ifContainsAnyRoles roles roleRequired}}
 					<div class="">
 						<button id="refreshBaseResultGenPage{{id}}" class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3- "
 							onclick="patch{{classSimpleName}}Vals([], {}, function() { addGlow($('#refreshBaseResultGenPage{{id}}')); }, function() { addError($('#refreshBaseResultGenPage{{id}}')); }); "
@@ -633,8 +636,9 @@
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputInheritPk"}}
+														{{> "inputInheritPk" roleRequired=roleRequired}}
 													</div>
+	{{#eq roleRequired "true"}}
 		{{#eq 'Page' classApiMethodMethod}}
 															<div class="w3-cell w3-left-align w3-cell-top ">
 																<button
@@ -642,10 +646,11 @@
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3- "
 																		onclick="removeGlow($('#{{classApiMethodMethod}}_inheritPk')); $('#{{classApiMethodMethod}}_inheritPk').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#BaseResultForm :input[name=id]').val() }], 'setInheritPk', null, function() { addGlow($('#{{classApiMethodMethod}}_inheritPk')); }, function() { addError($('#{{classApiMethodMethod}}_inheritPk')); }); "
 																		>
-																	<i class="far fa-eraser "></i>
+																	<i class="far fa-delete-left "></i>
 																</button>
 															</div>
 														{{/eq}}
+	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -654,6 +659,7 @@
 {{/inline}}
 
 {{#*inline "inputInheritPk"}}
+		{{#eq roleRequired "true"}}
 														<input
 															type="text"
 															title="An optional inherited primary key from a legacy system for this object in the database"
@@ -679,6 +685,9 @@
 	{{/eq}}
 														/>
 
+		{{else}}
+														<span class="varBaseResult{{id}}InheritPk ">{{baseResult_.inheritPk}}</span>
+		{{/eq}}
 {{/inline}}
 
 {{#*inline "htmCreated"}}
@@ -691,7 +700,7 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputCreated"}}
+														{{> "inputCreated" roleRequired=roleRequired}}
 													</div>
 												</div>
 											</div>
@@ -718,7 +727,7 @@
 													<div class="w3-cell ">
 														<div class="w3-rest ">
 															<span class="">
-																{{> "inputModified"}}
+																{{> "inputModified" roleRequired=roleRequired}}
 															</span>
 														</div>
 													</div>
@@ -745,7 +754,7 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputArchived"}}
+														{{> "inputArchived" roleRequired=roleRequired}}
 													</div>
 												</div>
 											</div>
@@ -755,6 +764,7 @@
 {{/inline}}
 
 {{#*inline "inputArchived"}}
+		{{#eq roleRequired "true"}}
 	{{#eq 'Page' classApiMethodMethod}}
 															<input
 																type="checkbox"
@@ -792,6 +802,9 @@
 														</select>
 	{{/eq}}
 
+		{{else}}
+														<span class="varBaseResult{{id}}Archived ">{{baseResult_.archived}}</span>
+		{{/eq}}
 {{/inline}}
 
 {{#*inline "htmDeleted"}}
@@ -804,7 +817,7 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputDeleted"}}
+														{{> "inputDeleted" roleRequired=roleRequired}}
 													</div>
 												</div>
 											</div>
@@ -814,6 +827,7 @@
 {{/inline}}
 
 {{#*inline "inputDeleted"}}
+		{{#eq roleRequired "true"}}
 	{{#eq 'Page' classApiMethodMethod}}
 															<input
 																type="checkbox"
@@ -851,6 +865,9 @@
 														</select>
 	{{/eq}}
 
+		{{else}}
+														<span class="varBaseResult{{id}}Deleted ">{{baseResult_.deleted}}</span>
+		{{/eq}}
 {{/inline}}
 
 {{#*inline "htmSessionId"}}
@@ -860,7 +877,7 @@
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputSessionId"}}
+														{{> "inputSessionId" roleRequired=roleRequired}}
 													</div>
 												</div>
 											</div>
@@ -882,7 +899,7 @@
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputUserKey"}}
+														{{> "inputUserKey" roleRequired=roleRequired}}
 													</div>
 												</div>
 											</div>
@@ -906,7 +923,7 @@
 													<div class="w3-cell ">
 														<div class="w3-rest ">
 															<span class="">
-																{{> "inputObjectTitle"}}
+																{{> "inputObjectTitle" roleRequired=roleRequired}}
 															</span>
 														</div>
 													</div>
@@ -933,8 +950,9 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputObjectId"}}
+														{{> "inputObjectId" roleRequired=roleRequired}}
 													</div>
+	{{#eq roleRequired "true"}}
 		{{#eq 'Page' classApiMethodMethod}}
 															<div class="w3-cell w3-left-align w3-cell-top ">
 																<button
@@ -942,10 +960,11 @@
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3- "
 																		onclick="removeGlow($('#{{classApiMethodMethod}}_objectId')); $('#{{classApiMethodMethod}}_objectId').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#BaseResultForm :input[name=id]').val() }], 'setObjectId', null, function() { addGlow($('#{{classApiMethodMethod}}_objectId')); }, function() { addError($('#{{classApiMethodMethod}}_objectId')); }); "
 																		>
-																	<i class="far fa-eraser "></i>
+																	<i class="far fa-delete-left "></i>
 																</button>
 															</div>
 														{{/eq}}
+	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -954,6 +973,7 @@
 {{/inline}}
 
 {{#*inline "inputObjectId"}}
+		{{#eq roleRequired "true"}}
 														<input
 															type="text"
 															placeholder="ID"
@@ -980,4 +1000,7 @@
 	{{/eq}}
 														/>
 
+		{{else}}
+														<span class="varBaseResult{{id}}ObjectId ">{{baseResult_.objectId}}</span>
+		{{/eq}}
 {{/inline}}

@@ -1,0 +1,18 @@
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: KubernetesAuthEngineRole
+metadata:
+  name: vault-secret-reader
+  namespace: vault-admin
+spec:
+  # Add fields here
+  authentication: 
+    path: kubernetes
+    role: policy-admin
+  path: kubernetes
+  policies:
+    - vault-secret-reader
+  targetServiceAccounts:
+    - vault-secret-reader
+  targetNamespaces:
+    targetNamespaces:
+      - external-secrets-operator

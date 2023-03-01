@@ -1,0 +1,32 @@
+---
+
+- name: Update sso admin secret value to vault
+  include_role:
+    name: vault-patch-secret
+  vars:
+    SOURCE_NAMESPACE: sso
+    SOURCE_SECRET_NAME: credential-sso
+    SOURCE_SECRET_KEYS: [ 'ADMIN_USERNAME', 'ADMIN_PASSWORD' ]
+    DESTINATION_NAMESPACE: sso
+    DESTINATION_SECRET_NAME: keycloak-admin-secret
+
+- name: Update sso postgres secret value to vault
+  include_role:
+    name: vault-patch-secret
+  vars:
+    SOURCE_NAMESPACE: postgres
+    SOURCE_SECRET_NAME: postgres-cluster-pguser-sso
+    SOURCE_SECRET_KEYS: [ 'password' ]
+    DESTINATION_NAMESPACE: sso
+    DESTINATION_SECRET_NAME: keycloak-db-secret
+    DESTINATION_SECRET_KEYS: [ 'POSTGRES_PASSWORD' ]
+
+- name: Restart sso pod
+  k8s:
+    state: absent
+    kind: Pod
+    name: "keycloak-0"
+    host: "{{ REDHAT_OPENSHIFT_HOST }}"
+    api_key: "{{ REDHAT_OPENSHIFT_TOKEN }}"
+    namespace: "{{ SSO_NAMESPACE }}"
+    validate_certs: false

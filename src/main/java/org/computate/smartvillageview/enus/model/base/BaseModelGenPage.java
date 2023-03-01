@@ -19,6 +19,7 @@ import org.computate.search.wrap.Wrap;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.time.Duration;
 import java.time.Instant;
 import io.vertx.core.json.JsonObject;
@@ -35,10 +36,9 @@ import java.util.Arrays;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.math.MathContext;
-import org.apache.commons.collections4.CollectionUtils;
 import java.util.Objects;
 import io.vertx.core.Promise;
-import org.computate.vertx.config.ComputateConfigKeys;
+import org.computate.smartvillageview.enus.config.ConfigKeys;
 import org.computate.search.response.solr.SolrResponse;
 import java.util.HashMap;
 import org.computate.search.tool.TimeTool;
@@ -162,8 +162,12 @@ public class BaseModelGenPage extends BaseModelGenPageGen<PageLayout> {
 			}
 			if(StringUtils.equalsAny(type, "date") && json.containsKey("stats")) {
 				JsonObject stats = json.getJsonObject("stats");
-				Instant min = Instant.parse(stats.getString("min"));
-				Instant max = Instant.parse(stats.getString("max"));
+				Instant min = Optional.ofNullable(stats.getString("min")).map(val -> Instant.parse(val.toString())).orElse(Instant.now());
+				Instant max = Optional.ofNullable(stats.getString("max")).map(val -> Instant.parse(val.toString())).orElse(Instant.now());
+				if(min.equals(max)) {
+					min = min.minus(1, ChronoUnit.DAYS);
+					max = max.plus(2, ChronoUnit.DAYS);
+				}
 				Duration duration = Duration.between(min, max);
 				String gap = "DAY";
 				if(duration.toDays() >= 365)
@@ -181,8 +185,8 @@ public class BaseModelGenPage extends BaseModelGenPageGen<PageLayout> {
 				else if(duration.toMillis() >= 1)
 					gap = "MILLI";
 				json.put("defaultRangeGap", String.format("+1%s", gap));
-				json.put("defaultRangeEnd", stats.getString("max"));
-				json.put("defaultRangeStart", stats.getString("min"));
+				json.put("defaultRangeEnd", max.toString());
+				json.put("defaultRangeStart", min.toString());
 				json.put("enableCalendar", true);
 				setDefaultRangeStats(json);
 			}

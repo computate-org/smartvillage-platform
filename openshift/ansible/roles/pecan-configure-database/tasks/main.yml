@@ -1,0 +1,21 @@
+---
+- name: Create betydb schema
+  shell: >-
+    oc login {{ REDHAT_OPENSHIFT_HOST }} --token={{ REDHAT_OPENSHIFT_TOKEN }} && oc exec $(oc get pod -l postgres-operator.crunchydata.com/data=postgres -l postgres-operator.crunchydata.com/role=master -o jsonpath='{.items[0].metadata.name}' -n {{ POSTGRES_NAMESPACE }}) -n {{ POSTGRES_NAMESPACE }} -- 
+    bash -c 'curl https://raw.githubusercontent.com/PecanProject/bety/master/db/structure.sql -o /tmp/structure.sql 
+    && psql -U bety bety < /tmp/structure.sql'
+  register: create_betydb_schema
+  ignore_errors: true
+- debug:
+    var: create_betydb_schema
+
+- name: Restart betydb pod
+  k8s:
+    state: absent
+    kind: Pod
+    label_selectors:
+      - app.kubernetes.io/name=betydb
+    host: "{{ REDHAT_OPENSHIFT_HOST }}"
+    api_key: "{{ REDHAT_OPENSHIFT_TOKEN }}"
+    namespace: "pecan"
+    validate_certs: false

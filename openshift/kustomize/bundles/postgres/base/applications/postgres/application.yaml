@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: postgres
+  namespace: openshift-gitops
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/computate-org/smartabyar-smartvillage.git
+    targetRevision: HEAD
+    path: openshift/kustomize/bundles/postgres/app
+  destination:
+    namespace: postgres
+    server: 'https://kubernetes.default.svc'
+  syncPolicy:
+    automated:
+      # resources that no longer exist get deleted on sync
+      prune: true
+      # sync will be attempted again on failure after self heal timeout (5 seconds by default)
+      selfHeal: true

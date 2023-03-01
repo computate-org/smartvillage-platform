@@ -1,0 +1,140 @@
+---
+- name: Get SSO admin password
+  set_fact:
+    SSO_ADMIN_PASSWORD: "{{ query('kubernetes.core.k8s', kind='Secret', resource_name='credential-sso', namespace=SSO_NAMESPACE, validate_certs=false)[0].data.ADMIN_PASSWORD | b64decode }}"
+  vars:
+    K8S_AUTH_HOST: "{{ REDHAT_OPENSHIFT_HOST }}"
+    K8S_AUTH_API_KEY: "{{ REDHAT_OPENSHIFT_TOKEN }}"
+  register: GET_SSO_ADMIN_PASSWORD
+- fail:
+    msg: >
+      Missing variables REDHAT_OPENSHIFT_HOST and REDHAT_OPENSHIFT_TOKEN. 
+      Find the login command to OpenShift and and set these variables, for example: 
+      ansible-playbook ~/.local/src/smartabyar-smartvillage/openshift/ansible/sso-configure-database.yml
+      -e REDHAT_OPENSHIFT_HOST=https://api.crc.testing:6443
+      -e REDHAT_OPENSHIFT_TOKEN=sha256~KNsu4uF9jsFUVZJE6smixzmWhoHVq9rgADUICQIrrDI
+  when: GET_SSO_ADMIN_PASSWORD.failed
+- name: "Create Token for SSO"
+  uri:
+    validate_certs: false
+    url: "{{ SSO_SITE_BASE_URL }}/auth/realms/master/protocol/openid-connect/token"
+    method: POST
+    body_format: form-urlencoded
+    body:
+      username: "{{ SSO_ADMIN_USERNAME }}"
+      password: "{{ SSO_ADMIN_PASSWORD }}"
+      grant_type: "password"
+      client_id: "admin-cli"
+  register: SSO_TOKEN
+- name: "Update SSO Master Realm for longer token timeout"
+  uri:
+    validate_certs: false
+    url: "{{ SSO_SITE_BASE_URL }}/auth/admin/realms/master"
+    method: PUT
+    body_format: json
+    body: "{{ lookup('template', 'sso-master-realm-extend-token.json') }}"
+    status_code:
+      - 204
+    headers:
+      Content-Type: "application/json"
+      Accept: "application/json"
+      Authorization: "Bearer {{ SSO_TOKEN.json.access_token }}"
+- name: "Get SMARTCITY realm"
+  uri:
+    validate_certs: false
+    url: "{{ SSO_SITE_BASE_URL }}/auth/admin/realms/{{ SSO_SMARTCITY_REALM_NAME }}"
+    method: GET
+    status_code:
+      - 200
+    headers:
+      Content-Type: "application/json"
+      Accept: "application/json"
+      Authorization: "Bearer {{ SSO_TOKEN.json.access_token }}"
+  ignore_errors: true
+  register: SSO_SMARTCITY_REALM
+- debug:
+    var: SSO_SMARTCITY_REALM.json
+
+- name: "Get SMARTCITY realm roles"
+  uri:
+    validate_certs: false
+    url: "{{ SSO_SITE_BASE_URL }}/auth/admin/realms/{{ SSO_SMARTCITY_REALM_NAME }}/roles"
+    method: GET
+    status_code:
+      - 200
+    headers:
+      Content-Type: "application/json"
+      Accept: "application/json"
+      Authorization: "Bearer {{ SSO_TOKEN.json.access_token }}"
+  ignore_errors: true
+  register: SSO_SMARTCITY_REALM_ROLES
+- debug:
+    var: SSO_SMARTCITY_REALM_ROLES.json
+
+- name: "Get SMARTCITY realm client scopes"
+  uri:
+    validate_certs: false
+    url: "{{ SSO_SITE_BASE_URL }}/auth/admin/realms/{{ SSO_SMARTCITY_REALM_NAME }}/client-scopes"
+    method: GET
+    status_code:
+      - 200
+    headers:
+      Content-Type: "application/json"
+      Accept: "application/json"
+      Authorization: "Bearer {{ SSO_TOKEN.json.access_token }}"
+  ignore_errors: true
+  register: SSO_SMARTCITY_REALM_CLIENT_SCOPES
+- debug:
+    var: SSO_SMARTCITY_REALM_CLIENT_SCOPES.json
+
+- name: "Get {{ SSO_SMARTCITY_CLIENT_NAME }} client"
+  uri:
+    validate_certs: false
+    url: "{{ SSO_SITE_BASE_URL }}/auth/admin/realms/{{ SSO_SMARTCITY_REALM_NAME }}/clients?clientId={{ SSO_SMARTCITY_CLIENT_NAME }}"
+    method: GET
+    status_code:
+      - 200
+    headers:
+      Content-Type: "application/json"
+      Accept: "application/json"
+      Authorization: "Bearer {{ SSO_TOKEN.json.access_token }}"
+  ignore_errors: true
+  register: SSO_SMARTCITY_CLIENT_RESPONSE
+- name: set {{ SSO_SMARTCITY_CLIENT_NAME }} client var
+  set_fact:
+    SSO_SMARTCITY_CLIENT: "{{ SSO_SMARTCITY_CLIENT_RESPONSE.json[0] }}"
+    SSO_SMARTCITY_CLIENT_ID: "{{ SSO_SMARTCITY_CLIENT_RESPONSE.json[0].id }}"
+- debug:
+    var: SSO_SMARTCITY_CLIENT
+
+- name: "Get SMARTCITY realm client policies"
+  uri:
+    validate_certs: false
+    url: "{{ SSO_SITE_BASE_URL }}/auth/admin/realms/{{ SSO_SMARTCITY_REALM_NAME }}/clients/{{ SSO_SMARTCITY_CLIENT_ID }}/authz/resource-server/policy?deep=false&first=0&max=20"
+    method: GET
+    status_code:
+      - 200
+    headers:
+      Content-Type: "application/json"
+      Accept: "application/json"
+      Authorization: "Bearer {{ SSO_TOKEN.json.access_token }}"
+  ignore_errors: true
+  register: SSO_SMARTCITY_REALM_CLIENT_POLICIES
+- debug:
+    var: SSO_SMARTCITY_REALM_CLIENT_POLICIES.json
+
+- name: "Get SMARTCITY realm client permissions"
+  uri:
+    validate_certs: false
+    url: "{{ SSO_SITE_BASE_URL }}/auth/admin/realms/{{ SSO_SMARTCITY_REALM_NAME }}/clients/{{ SSO_SMARTCITY_CLIENT_ID }}/authz/resource-server/permission?first=0&max=20"
+    method: GET
+    status_code:
+      - 200
+    headers:
+      Content-Type: "application/json"
+      Accept: "application/json"
+      Authorization: "Bearer {{ SSO_TOKEN.json.access_token }}"
+  ignore_errors: true
+  register: SSO_SMARTCITY_REALM_CLIENT_PERMISSIONS
+- debug:
+    var: SSO_SMARTCITY_REALM_CLIENT_PERMISSIONS.json

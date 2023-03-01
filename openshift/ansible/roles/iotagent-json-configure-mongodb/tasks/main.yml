@@ -1,0 +1,23 @@
+---
+
+- block:
+    - name: Create MongoDB user for iotagentjson
+      shell: "oc login {{ REDHAT_OPENSHIFT_HOST }} --token={{ REDHAT_OPENSHIFT_TOKEN }} && oc exec $(oc get pod -l app.kubernetes.io/name=mongodb -o jsonpath='{.items[0].metadata.name}' -n fiware) -n fiware -- sh -c 'mongo -u \"$MONGODB_ROOT_USER\" -p \"$MONGODB_ROOT_PASSWORD\" --eval '\"'\"'{{ MONGODB_CREATE_USER_COMMAND_iotagentjson }}'\"'\"'' || true"
+      register: create_mongodb_user
+      ignore_errors: true
+    - debug:
+        var: create_mongodb_user
+    - fail:
+        msg: >
+          Missing variables REDHAT_OPENSHIFT_HOST and REDHAT_OPENSHIFT_TOKEN. 
+          Find the login command to OpenShift and and set these variables, for example: 
+          ansible-playbook ~/.local/src/smartabyar-smartvillage/openshift/ansible/setup-iotagent-json.yml 
+          -e REDHAT_OPENSHIFT_HOST=https://api.crc.testing:6443 
+          -e REDHAT_OPENSHIFT_TOKEN=sha256~KNsu4uF9jsFUVZJE6smixzmWhoHVq9rgADUICQIrrDI
+      when: create_mongodb_user.failed
+    - name: Create MongoDB collections and indexes for FIWARE
+      shell: "oc login {{ REDHAT_OPENSHIFT_HOST }} --token={{ REDHAT_OPENSHIFT_TOKEN }} && oc exec $(oc get pod -l app.kubernetes.io/name=mongodb -o jsonpath='{.items[0].metadata.name}' -n fiware) -n fiware -- sh -c 'mongo -u \"$MONGODB_ROOT_USER\" -p \"$MONGODB_ROOT_PASSWORD\" --eval '\"'\"'{{ MONGODB_CREATE_COLLECTIONS_COMMAND_iotagentjson }}'\"'\"'' || true"
+      register: create_mongodb_collections
+      ignore_errors: true
+    - debug:
+        var: create_mongodb_collections

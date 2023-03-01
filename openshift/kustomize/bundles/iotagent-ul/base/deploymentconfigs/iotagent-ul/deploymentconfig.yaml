@@ -1,0 +1,110 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  name: iotagent-ul
+  namespace: fiware
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    app: iotagent-ul
+    deploymentconfig: iotagent-ul
+  strategy:
+    activeDeadlineSeconds: 21600
+    resources: {}
+    rollingParams:
+      intervalSeconds: 1
+      maxSurge: 25%
+      maxUnavailable: 25%
+      timeoutSeconds: 600
+      updatePeriodSeconds: 1
+    type: Rolling
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: iotagent-ul
+        deploymentconfig: iotagent-ul
+    spec:
+      containers:
+      - imagePullPolicy: Always
+        name: iotagent-ul
+        ports:
+        - containerPort: 7896
+          protocol: TCP
+        - containerPort: 4041
+          protocol: TCP
+        env:
+          - name: IOTA_CB_HOST
+            value: 'orion-ld.fiware.svc.cluster.local'
+          - name: IOTA_CB_PORT
+            value: '1026'
+          - name: IOTA_NORTH_PORT
+            value: '4041'
+          - name: IOTA_REGISTRY_TYPE
+            value: 'mongodb'
+          - name: IOTA_LOG_LEVEL
+            value: 'DEBUG'
+          - name: IOTA_TIMESTAMP
+            value: 'true'
+          - name: IOTA_CB_NGSI_VERSION
+            value: 'v2'
+          - name: IOTA_AUTOCAST
+            value: 'true'
+          - name: IOTA_MONGO_HOST
+            value: 'mongodb-orion.fiware.svc.cluster.local'
+          - name: IOTA_MONGO_PORT
+            value: '27017'
+          - name: IOTA_MONGO_USER
+            value: 'root'
+          - name: IOTA_MONGO_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mongodb-secret
+                key: mongodb-root-password
+          - name: IOTA_MONGO_DB
+            value: 'iotagent-json'
+          - name: IOTA_HTTP_PORT
+            value: '7896'
+          - name: IOTA_PROVIDER_URL
+            value: 'http://iotagent-ul.fiware.svc.cluster.local:4041'
+
+          - name: IOTA_MQTT_DISABLED
+            value: 'false'
+          - name: IOTA_MQTT_HOST
+            value: 'fiware-broker-hdls-svc.fiware.svc.cluster.local'
+          - name: IOTA_MQTT_PORT
+            value: '61616'
+          - name: IOTA_AMQP_DISABLED
+            value: 'true'
+
+#          - name: IOTA_MQTT_DISABLED
+#            value: 'true'
+#          - name: IOTA_AMQP_HOST
+#            value: 'fiware-broker-hdls-svc.fiware.svc.cluster.local'
+#          - name: IOTA_AMQP_PORT
+#            value: '61626'
+#          - name: IOTA_AMQP_QUEUE
+#            value: 'fiware-queue'
+#          - name: IOTA_AMQP_DISABLED
+#            value: 'false'
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+  test: false
+  triggers:
+  - imageChangeParams:
+      automatic: true
+      containerNames:
+      - iotagent-ul
+      from:
+        kind: ImageStreamTag
+        name: iotagent-ul:latest
+        namespace: fiware
+    type: ImageChange
+  - type: ConfigChange

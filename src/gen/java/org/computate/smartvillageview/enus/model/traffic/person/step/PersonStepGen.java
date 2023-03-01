@@ -3,7 +3,7 @@ package org.computate.smartvillageview.enus.model.traffic.person.step;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.smartvillageview.enus.model.base.BaseModel;
 import org.computate.vertx.api.ApiRequest;
-import org.computate.vertx.config.ComputateConfigKeys;
+import org.computate.smartvillageview.enus.config.ConfigKeys;
 import java.util.Optional;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
@@ -54,7 +54,7 @@ import io.vertx.core.json.JsonObject;
  * Whenever this Java class is modified or touched, the watch service installed as described in the README, indexes all the information about this Java class in a local Apache Solr Search Engine. 
  * If you are running the service, you can see the indexed data about this Java Class here: 
  * </p>
- * <p><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstClasse_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStep">Find the class PersonStep in Solr. </a></p>
+ * <p><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstClasse_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStep">Find the class PersonStep in Solr. </a></p>
  * <p>
  * The extended class ending with "Gen" did not exist at first, but was automatically created by the same watch service based on the data retrieved from the local Apache Server search engine. 
  * The extended class contains many generated fields, getters, setters, initialization code, and helper methods to help build a website and API fast, reactive, and scalable. 
@@ -67,25 +67,7 @@ import io.vertx.core.json.JsonObject;
  * Api: true
  * <p>This class contains a comment <b>"Api: true"</b>, which means this class will have Java Vert.x API backend code generated for these objects. 
  * </p>
- * ApiMethode.enUS: true
- * <p>This class contains a comment <b>"ApiTag: Person Step"</b>, which groups all of the OpenAPIs for PersonStep objects under the tag "Person Step". 
- * </p>
- * ApiMethode.enUS: true
- * <p>This class contains a comment <b>"ApiTag: Person Step"</b>, which groups all of the OpenAPIs for PersonStep objects under the tag "Person Step". 
- * </p>
- * ApiMethode.enUS: true
- * <p>This class contains a comment <b>"ApiTag: Person Step"</b>, which groups all of the OpenAPIs for PersonStep objects under the tag "Person Step". 
- * </p>
- * ApiMethode.enUS: true
- * <p>This class contains a comment <b>"ApiTag: Person Step"</b>, which groups all of the OpenAPIs for PersonStep objects under the tag "Person Step". 
- * </p>
- * ApiMethode.enUS: true
- * <p>This class contains a comment <b>"ApiTag: Person Step"</b>, which groups all of the OpenAPIs for PersonStep objects under the tag "Person Step". 
- * </p>
- * ApiMethode.enUS: true
- * <p>This class contains a comment <b>"ApiTag: Person Step"</b>, which groups all of the OpenAPIs for PersonStep objects under the tag "Person Step". 
- * </p>
- * ApiTag.enUS: true
+ * ApiTag.enUS: Person Step
  * <p>This class contains a comment <b>"ApiTag: Person Step"</b>, which groups all of the OpenAPIs for PersonStep objects under the tag "Person Step". 
  * </p>
  * ApiUri.enUS: /api/person-step
@@ -121,8 +103,8 @@ import io.vertx.core.json.JsonObject;
  * <p>This class contains a comment <b>"Rows: 100"</b>, which means the PersonStep API will return a default of 100 records instead of 10 by default. 
  * Each API has built in pagination of the search records to ensure a user can query all the data a page at a time without running the application out of memory. 
  * </p>
- * Order: 11
- * <p>This class contains a comment <b>"Order: 11"</b>, which means this class will be sorted by the given number 11 ascending when code that relates to multiple classes at the same time is generated. 
+ * Order: 14
+ * <p>This class contains a comment <b>"Order: 14"</b>, which means this class will be sorted by the given number 14 ascending when code that relates to multiple classes at the same time is generated. 
  * </p>
  * Model: true
  * Page: true
@@ -162,21 +144,21 @@ import io.vertx.core.json.JsonObject;
  * This class contains a comment <b>"Role.enUS: SiteAdmin"</b>, which identifies the default role name "SiteAdmin" of the OAuth2/OpenID Connect user role required to access this PersonStep API. 
  * It's possible to reconfigure the roles required to access the PersonStep API by configuring an environment variable like this: 
  * </p>
- * <pre>AUTH_ROLES_REQUIRED_PersonStep: ["SiteAdmin"]</pre>
+ * <pre>AUTH_ROLE_REQUIRED_PersonStep: ["SiteAdmin"]</pre>
  * AName.enUS: a person step
  * <p>This class contains a comment <b>"AName.enUS: a person step"</b>, which identifies the language context to describe a PersonStep as "a person step". 
  * </p>
  * <p>
  * Delete the class PersonStep in Solr: 
- * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStep&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStep&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
  * Delete  the package org.computate.smartvillageview.enus.model.traffic.person.step in Solr: 
- * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
  * Delete  the project smartabyar-smartvillage in Solr: 
- * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartabyar\-smartvillage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartabyar\-smartvillage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  **/
 public abstract class PersonStepGen<DEV> extends MapResult {
@@ -233,7 +215,7 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 
 	/**	<br> The entity personId
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStep&fq=entiteVar_enUS_indexed_string:personId">Find the entity personId in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStep&fq=entiteVar_enUS_indexed_string:personId">Find the entity personId in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -287,7 +269,7 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 
 	/**	<br> The entity personType
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStep&fq=entiteVar_enUS_indexed_string:personType">Find the entity personType in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStep&fq=entiteVar_enUS_indexed_string:personType">Find the entity personType in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -342,7 +324,7 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 
 	/**	<br> The entity angle
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStep&fq=entiteVar_enUS_indexed_string:angle">Find the entity angle in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStep&fq=entiteVar_enUS_indexed_string:angle">Find the entity angle in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -413,7 +395,7 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 
 	/**	<br> The entity speed
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStep&fq=entiteVar_enUS_indexed_string:speed">Find the entity speed in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStep&fq=entiteVar_enUS_indexed_string:speed">Find the entity speed in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -484,7 +466,7 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 
 	/**	<br> The entity pos
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStep&fq=entiteVar_enUS_indexed_string:pos">Find the entity pos in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStep&fq=entiteVar_enUS_indexed_string:pos">Find the entity pos in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -555,7 +537,7 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 
 	/**	<br> The entity slope
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStep&fq=entiteVar_enUS_indexed_string:slope">Find the entity slope in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStep&fq=entiteVar_enUS_indexed_string:slope">Find the entity slope in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/

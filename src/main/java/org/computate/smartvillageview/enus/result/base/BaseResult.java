@@ -268,7 +268,7 @@ public class BaseResult extends BaseResultGen<Object> implements ComputateBaseRe
 	protected void _pageUrlApi(Wrap<String> w) {
 		try {
 			Optional.ofNullable((String)FieldUtils.getField(getClass(), String.format("%s_ApiUri_%s", getClass().getSimpleName(), siteRequest_.getLang())).get(this)).ifPresent(classApiUri -> {
-				w.o(siteRequest_.getConfig().getString(ConfigKeys.SITE_BASE_URL) + classApiUri + "/" + id);
+				w.o(siteRequest_.getConfig().getString(ConfigKeys.SITE_BASE_URL) + classApiUri + "/" + objectId);
 			});
 		} catch (Exception e) {
 			ExceptionUtils.rethrow(e);

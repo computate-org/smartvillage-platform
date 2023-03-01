@@ -10,7 +10,7 @@ import org.computate.smartvillageview.enus.result.map.MapResult;
  * Page: true
  * SuperPage.enUS: MapResultPage
  * Indexed: true
- * Order: 7
+ * Order: 10
  * 
  * ApiTag.enUS: Traffic Light
  * ApiUri.enUS: /api/traffic-light-step

@@ -1,0 +1,11 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: cloud-native-postgresql
+  namespace: openshift-operators
+spec:
+  channel: stable-v1.18
+  installPlanApproval: Automatic
+  name: cloud-native-postgresql
+  source: certified-operators
+  sourceNamespace: openshift-marketplace

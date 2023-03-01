@@ -1,0 +1,61 @@
+apiVersion: postgres-operator.crunchydata.com/v1beta1
+kind: PostgresCluster
+metadata:
+  name: postgres-cluster
+  namespace: postgres
+spec:
+  backups:
+    pgbackrest:
+      image: registry.developers.crunchydata.com/crunchydata/crunchy-pgbackrest:ubi8-2.41-2
+      repos:
+      - name: repo1
+        volume:
+          volumeClaimSpec:
+            accessModes:
+            - "ReadWriteOnce"
+            resources:
+              requests:
+                storage: 1Gi
+  instances:
+    - dataVolumeClaimSpec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
+      replicas: 2
+      name: 'smartabyar-smartvillage'
+  image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres-gis:ubi8-15.1-3.3-0
+  postgresVersion: 15
+  openshift: true
+  postGISVersion: 3.3.0
+  users:
+    - name: sso
+      options: "SUPERUSER"
+      databases:
+        - sso
+    - name: pecan
+      options: "SUPERUSER"
+      databases:
+        - pecan
+    - name: bety
+      options: "SUPERUSER"
+      databases:
+        - bety
+    - name: smartvillage
+      options: "SUPERUSER"
+      databases:
+        - smartvillage
+  patroni:
+    dynamicConfiguration:
+      postgresql:
+        pg_hba:
+          - "host sso sso all md5"
+          - "local sso sso trust"
+          - "host pecan pecan all md5"
+          - "local pecan pecan trust"
+          - "host bety bety all md5"
+          - "local bety bety trust"
+          - "host smartvillage smartvillage all md5"
+          - "local smartvillage smartvillage trust"
+        

@@ -1,0 +1,64 @@
+---
+
+- name: Update smartabyar-smartvillage postgres secret value to vault
+  include_role:
+    name: vault-patch-secret
+  vars:
+    SOURCE_NAMESPACE: postgres
+    SOURCE_SECRET_NAME: postgres-cluster-pguser-smartvillage
+    SOURCE_SECRET_KEYS: [ 'password' ]
+    DESTINATION_NAMESPACE: smart-village-view
+    COPY_KEYS:
+      - dbname
+      - host
+      - port
+      - user
+      - jdbc-uri
+
+- name: Update smartabyar-smartvillage sso secret value to vault
+  include_role:
+    name: vault-patch-secret
+  vars:
+    SOURCE_NAMESPACE: sso
+    SOURCE_SECRET_NAME: keycloak-client-secret-smartcity
+    SOURCE_SECRET_KEYS: [ 'CLIENT_ID', 'CLIENT_SECRET' ]
+    DESTINATION_NAMESPACE: smart-village-view
+
+- name: Update smartabyar-smartvillage email secrets to vault
+  include_role:
+    name: vault-patch-secret
+  vars:
+    DESTINATION_SECRET_NAME: email
+    DESTINATION_NAMESPACE: smart-village-view
+    COPY_KEY_VALUES:
+      EMAIL_HOST: TODO
+      EMAIL_PORT: 465
+      EMAIL_FROM: TODO
+      EMAIL_SSL: "true"
+      EMAIL_AUTH: "true"
+      EMAIL_USERNAME: TODO
+      EMAIL_PASSWORD: TODO
+
+- name: Update smartabyar-smartvillage Yggio secrets to vault
+  include_role:
+    name: vault-patch-secret
+  vars:
+    DESTINATION_SECRET_NAME: yggio
+    DESTINATION_NAMESPACE: smart-village-view
+    COPY_KEY_VALUES:
+      YGGIO_HOST_NAME: TODO
+      YGGIO_PORT: "443"
+      YGGIO_SSL: "true"
+      YGGIO_API_RELATIVE_URI_IotNode: /api/iotnodes
+      YGGIO_AUTH_LOCAL_URI: /api/auth/local
+      YGGIO_USERNAME: TODO
+      YGGIO_PASSWORD: TODO
+
+- name: Update smartabyar-smartvillage Font Awesome secrets to vault
+  include_role:
+    name: vault-patch-secret
+  vars:
+    DESTINATION_SECRET_NAME: fontawesome
+    DESTINATION_NAMESPACE: smart-village-view
+    COPY_KEY_VALUES:
+      FONTAWESOME_KIT: https://kit.fontawesome.com/TODO.js

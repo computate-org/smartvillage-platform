@@ -27,6 +27,8 @@
 				}
 				websocketIotNode(websocketIotNodeInner);
 				window.varsFq = JSON.parse('{{{toJsonObjectStringInApostrophes varsFq}}}');
+				window.varsRange = JSON.parse('{{{toJsonObjectStringInApostrophes varsRange}}}');
+				window.defaultRangeVar = '{{ defaultRangeVar }}';
 				pageGraph();
 
 				var calendarEl = document.getElementById('site-calendar');
@@ -42,6 +44,7 @@
 {{#if DEFAULT_MAP_ZOOM }}
 			window.DEFAULT_MAP_ZOOM = {{ DEFAULT_MAP_ZOOM }};
 {{/if}}
+			window.DEFAULT_ZONE_ID = '{{ defaultZoneId }}';
 		</script>
 {{/inline}}
 {{#*inline "htmUrlIotNode"}}{{pageUri}}?q={{query.q}}&amp;rows={{#if rows}}{{rows}}{{else}}{{pagination.rows}}{{/if}}&amp;rows={{#if start}}{{start}}{{else}}{{pagination.start}}{{/if}}{{#each query.fq}}{{#eq fq this}}{{else}}&fq={{fq}}:{{val}}{{/eq}}{{/each}}{{#each query.sort}}{{#eq sort this}}{{else}}&sort={{var}} {{order}}{{/eq}}{{/each}}{{/inline}}
@@ -115,9 +118,9 @@
 								<table class="w3-padding ">
 									<tr>
 										<td class="w3-padding w3-tiny " colspan="2">
-											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeGap-IotNode">{{#if defaultRangeGap }}facet.range.gap={{encodeURIComponent defaultRangeGap }}{{/if}}</div>
-											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeStart-IotNode">{{#if defaultRangeStart }}facet.range.start={{encodeURIComponent defaultRangeStart }}{{/if}}</div>
-											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeEnd-IotNode">{{#if defaultRangeEnd }}facet.range.end={{encodeURIComponent defaultRangeEnd }}{{/if}}</div>
+											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeGap-IotNode">{{#if rangeGap }}facet.range.gap={{encodeURIComponent rangeGap }}{{/if}}</div>
+											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeStart-IotNode">{{#if rangeStart }}facet.range.start={{encodeURIComponent rangeStart }}{{/if}}</div>
+											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeEnd-IotNode">{{#if rangeEnd }}facet.range.end={{encodeURIComponent rangeEnd }}{{/if}}</div>
 											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeVar-IotNode">{{#if defaultRangeVar }}facet.range={!tag=r1}{{encodeURIComponent defaultRangeVar }}{{/if}}</div>
 										</td>
 									</tr>
@@ -128,7 +131,7 @@
 											<span>Range Gap</span>
 										</td>
 										<td class="">
-											<select name="facet.range.gap" id="pageFacetRangeGap-IotNode" onchange="facetRangeChange(this, 'IotNode'); ">
+											<select name="facet.range.gap" id="pageFacetRangeGap-IotNode" onchange="facetRangeGapChange(this, 'IotNode'); ">
 												<option value="+1YEAR"{{#eq defaultRangeGap '+1YEAR'}} selected="selected"{{else}}{{/eq}}>Year</option>
 												<option value="+1MONTH"{{#eq defaultRangeGap '+1MONTH'}} selected="selected"{{else}}{{/eq}}>Month</option>
 												<option value="+1WEEK"{{#eq defaultRangeGap '+1WEEK'}} selected="selected"{{else}}{{/eq}}>Week</option>
@@ -146,7 +149,7 @@
 									</tr>
 									<tr class="">
 										<td class="" colspan="2">
-											<span><input type="datetime-local" name="facetRangeStart" id="pageFacetRangeStart-IotNode" value="{{formatZonedDateTime defaultRangeStart "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeChange(this, 'IotNode'); "/></span>
+											<span><input type="datetime-local" name="facetRangeStart" id="pageFacetRangeStart-IotNode" value="{{formatZonedDateTime defaultRangeStart "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeStartChange(this, 'IotNode'); "/></span>
 										</td>
 									</tr>
 									<tr class="">
@@ -156,7 +159,7 @@
 									</tr>
 									<tr class="">
 										<td class="" colspan="2">
-											<span><input type="datetime-local" name="facetRangeEnd" id="pageFacetRangeEnd-IotNode" value="{{formatZonedDateTime defaultRangeEnd "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeChange(this, 'IotNode'); "/></span>
+											<span><input type="datetime-local" name="facetRangeEnd" id="pageFacetRangeEnd-IotNode" value="{{formatZonedDateTime defaultRangeEnd "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeEndChange(this, 'IotNode'); "/></span>
 										</td>
 									</tr>
 								</table>
@@ -407,20 +410,52 @@
 					</header>
 					<div class="" id="patchIotNodeFormValues">
 							<div class="w3-cell-row ">
-{{> "htmCreated" classApiMethodMethod="PATCH"}}
-{{> "htmObjectId" classApiMethodMethod="PATCH"}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCreated" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmCreated" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmObjectId" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmObjectId" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
-{{> "htmArchived" classApiMethodMethod="PATCH"}}
-{{> "htmDeleted" classApiMethodMethod="PATCH"}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmArchived" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmArchived" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDeleted" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmDeleted" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
-{{> "htmNodeName" classApiMethodMethod="PATCH"}}
-{{> "htmNodeType" classApiMethodMethod="PATCH"}}
-{{> "htmNodeId" classApiMethodMethod="PATCH"}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmNodeName" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmNodeName" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmNodeType" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmNodeType" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmNodeId" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmNodeId" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
-{{> "htmLocation" classApiMethodMethod="PATCH"}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmLocation" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmLocation" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 						<button
 							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-2017-shaded-spruce "
@@ -451,20 +486,52 @@
 					<div class="" id="postIotNodeFormValues">
 						<div id="postIotNodeForm">
 							<div class="w3-cell-row ">
-{{> "htmCreated" classApiMethodMethod="POST"}}
-{{> "htmObjectId" classApiMethodMethod="POST"}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCreated" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmCreated" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmObjectId" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmObjectId" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
-{{> "htmArchived" classApiMethodMethod="POST"}}
-{{> "htmDeleted" classApiMethodMethod="POST"}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmArchived" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmArchived" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDeleted" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmDeleted" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
-{{> "htmNodeName" classApiMethodMethod="POST"}}
-{{> "htmNodeType" classApiMethodMethod="POST"}}
-{{> "htmNodeId" classApiMethodMethod="POST"}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmNodeName" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmNodeName" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmNodeType" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmNodeType" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmNodeId" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmNodeId" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
-{{> "htmLocation" classApiMethodMethod="POST"}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmLocation" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmLocation" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 						</div>
 						<button
@@ -517,72 +584,248 @@
 					<div class="" id="searchpageIotNodeFormValues">
 						<div id="searchpageIotNodeForm">
 							<div class="w3-cell-row ">
-{{> "htmCreated" classApiMethodMethod="Page"}}
-{{> "htmModified" classApiMethodMethod="Page"}}
-{{> "htmObjectId" classApiMethodMethod="Page"}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCreated" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmCreated" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmModified" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmModified" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmObjectId" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmObjectId" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
-{{> "htmArchived" classApiMethodMethod="Page"}}
-{{> "htmDeleted" classApiMethodMethod="Page"}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmArchived" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmArchived" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDeleted" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmDeleted" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
-{{> "htmNodeName" classApiMethodMethod="Page"}}
-{{> "htmNodeType" classApiMethodMethod="Page"}}
-{{> "htmNodeId" classApiMethodMethod="Page"}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmNodeName" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmNodeName" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmNodeType" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmNodeType" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmNodeId" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmNodeId" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
-{{> "htmLocation" classApiMethodMethod="Page"}}
-{{> "htmJson_moisture" classApiMethodMethod="Page"}}
-{{> "htmJson_moisture0" classApiMethodMethod="Page"}}
-{{> "htmJson_moisture1" classApiMethodMethod="Page"}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmLocation" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmLocation" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_moisture" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmJson_moisture" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_moisture0" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmJson_moisture0" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_moisture1" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmJson_moisture1" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
-{{> "htmJson_temperature" classApiMethodMethod="Page"}}
-{{> "htmJson_temperature0" classApiMethodMethod="Page"}}
-{{> "htmJson_temperatureAverage" classApiMethodMethod="Page"}}
-{{> "htmJson_badConditionsCounter" classApiMethodMethod="Page"}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_temperature" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmJson_temperature" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_temperature0" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmJson_temperature0" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_temperatureAverage" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmJson_temperatureAverage" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_badConditionsCounter" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmJson_badConditionsCounter" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
-{{> "htmJson_door" classApiMethodMethod="Page"}}
-{{> "htmJson_alarmDoor" classApiMethodMethod="Page"}}
-{{> "htmJson_flood" classApiMethodMethod="Page"}}
-{{> "htmJson_alarmFlood" classApiMethodMethod="Page"}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_door" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmJson_door" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_alarmDoor" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmJson_alarmDoor" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_flood" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmJson_flood" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_alarmFlood" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmJson_alarmFlood" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
-{{> "htmJson_lux2" classApiMethodMethod="Page"}}
-{{> "htmJson_illuminance" classApiMethodMethod="Page"}}
-{{> "htmJson_resistance0" classApiMethodMethod="Page"}}
-{{> "htmJson_resistance1" classApiMethodMethod="Page"}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_lux2" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmJson_lux2" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_illuminance" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmJson_illuminance" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_resistance0" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmJson_resistance0" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_resistance1" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmJson_resistance1" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
-{{> "htmJson_frequency" classApiMethodMethod="Page"}}
-{{> "htmJson_devEui" classApiMethodMethod="Page"}}
-{{> "htmJson_bandwidth" classApiMethodMethod="Page"}}
-{{> "htmJson_dataRate" classApiMethodMethod="Page"}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_frequency" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmJson_frequency" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_devEui" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmJson_devEui" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_bandwidth" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmJson_bandwidth" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_dataRate" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmJson_dataRate" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
-{{> "htmJson_frameCount" classApiMethodMethod="Page"}}
-{{> "htmJson_maxPayload" classApiMethodMethod="Page"}}
-{{> "htmJson_bitsPerSecond" classApiMethodMethod="Page"}}
-{{> "htmJson_batteryVoltage" classApiMethodMethod="Page"}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_frameCount" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmJson_frameCount" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_maxPayload" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmJson_maxPayload" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_bitsPerSecond" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmJson_bitsPerSecond" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_batteryVoltage" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmJson_batteryVoltage" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
-{{> "htmJson_spreadingFactor" classApiMethodMethod="Page"}}
-{{> "htmJson_dataRateAdaptive" classApiMethodMethod="Page"}}
-{{> "htmJson_swversion" classApiMethodMethod="Page"}}
-{{> "htmJson_batteryLevel" classApiMethodMethod="Page"}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_spreadingFactor" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmJson_spreadingFactor" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_dataRateAdaptive" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmJson_dataRateAdaptive" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_swversion" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmJson_swversion" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_batteryLevel" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmJson_batteryLevel" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
-{{> "htmJson_startUpCount" classApiMethodMethod="Page"}}
-{{> "htmJson_watchdogCount" classApiMethodMethod="Page"}}
-{{> "htmJson_historySequence" classApiMethodMethod="Page"}}
-{{> "htmJson_versionFirmware" classApiMethodMethod="Page"}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_startUpCount" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmJson_startUpCount" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_watchdogCount" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmJson_watchdogCount" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_historySequence" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmJson_historySequence" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_versionFirmware" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmJson_versionFirmware" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
-{{> "htmJson_stackTxFailRebootCount" classApiMethodMethod="Page"}}
-{{> "htmJson_historySequencePrevious" classApiMethodMethod="Page"}}
-{{> "htmJson_snr" classApiMethodMethod="Page"}}
-{{> "htmJson_rssi" classApiMethodMethod="Page"}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_stackTxFailRebootCount" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmJson_stackTxFailRebootCount" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_historySequencePrevious" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmJson_historySequencePrevious" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_snr" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmJson_snr" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_rssi" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmJson_rssi" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 						</div>
 					</div>
@@ -762,7 +1005,7 @@
 			</tr>
 	{{/inline}}
 {{#*inline "htmFormsIotNodePage"}}
-	{{#ifContainsAnyRoles roles rolesRequired}}
+	{{#ifContainsAnyRoles roles roleRequired}}
 		{{#eq iotNodeCount int1}}
 		<button
 			class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce "
@@ -781,7 +1024,7 @@
 {{#block "htmSuggested"}}{{/block}}
 {{/inline}}
 {{#*inline "htmSuggestedIotNodePage"}}
-			{{#ifContainsAnyRoles roles rolesRequired}}
+			{{#ifContainsAnyRoles roles roleRequired}}
 					<div class="">
 						<button id="refreshAllIotNodeGenPage{{id}}" class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce "
 							onclick="patch{{classSimpleName}}Vals([], {}, function() { addGlow($('#refreshAllIotNodeGenPage{{id}}')); }, function() { addError($('#refreshAllIotNodeGenPage{{id}}')); }); "
@@ -843,9 +1086,9 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputJson"}}
+														{{> "inputJson" roleRequired=roleRequired}}
 													</div>
-	{{#ifContainsAnyRoles roles rolesRequired}}
+	{{#eq roleRequired "true"}}
 		{{#eq 'Page' classApiMethodMethod}}
 															<div class="w3-cell w3-left-align w3-cell-top ">
 																<button
@@ -853,11 +1096,11 @@
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
 																		onclick="removeGlow($('#{{classApiMethodMethod}}_json')); $('#{{classApiMethodMethod}}_json').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#IotNodeForm :input[name=id]').val() }], 'setJson', null, function() { addGlow($('#{{classApiMethodMethod}}_json')); }, function() { addError($('#{{classApiMethodMethod}}_json')); }); "
 																		>
-																	<i class="far fa-eraser "></i>
+																	<i class="far fa-delete-left "></i>
 																</button>
 															</div>
 														{{/eq}}
-	{{/ifContainsAnyRoles}}
+	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -866,7 +1109,7 @@
 {{/inline}}
 
 {{#*inline "inputJson"}}
-		{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq roleRequired "true"}}
 														<input
 															type="text"
 															placeholder="json"
@@ -896,7 +1139,9 @@
 														{{#ifContainsKeys userKeys}}
 															<span class="varIotNode{{id}}Json ">{{iotNode_.json}}</span>
 			{{/ifContainsKeys}}
-		{{/ifContainsAnyRoles}}
+		{{else}}
+														<span class="varIotNode{{id}}Json ">{{iotNode_.json}}</span>
+		{{/eq}}
 {{/inline}}
 
 {{#*inline "htmNodeName"}}
@@ -909,9 +1154,9 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputNodeName"}}
+														{{> "inputNodeName" roleRequired=roleRequired}}
 													</div>
-	{{#ifContainsAnyRoles roles rolesRequired}}
+	{{#eq roleRequired "true"}}
 		{{#eq 'Page' classApiMethodMethod}}
 															<div class="w3-cell w3-left-align w3-cell-top ">
 																<button
@@ -919,11 +1164,11 @@
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
 																		onclick="removeGlow($('#{{classApiMethodMethod}}_nodeName')); $('#{{classApiMethodMethod}}_nodeName').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#IotNodeForm :input[name=id]').val() }], 'setNodeName', null, function() { addGlow($('#{{classApiMethodMethod}}_nodeName')); }, function() { addError($('#{{classApiMethodMethod}}_nodeName')); }); "
 																		>
-																	<i class="far fa-eraser "></i>
+																	<i class="far fa-delete-left "></i>
 																</button>
 															</div>
 														{{/eq}}
-	{{/ifContainsAnyRoles}}
+	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -932,7 +1177,7 @@
 {{/inline}}
 
 {{#*inline "inputNodeName"}}
-		{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq roleRequired "true"}}
 														<input
 															type="text"
 															placeholder="node name"
@@ -962,7 +1207,9 @@
 														{{#ifContainsKeys userKeys}}
 															<span class="varIotNode{{id}}NodeName ">{{iotNode_.nodeName}}</span>
 			{{/ifContainsKeys}}
-		{{/ifContainsAnyRoles}}
+		{{else}}
+														<span class="varIotNode{{id}}NodeName ">{{iotNode_.nodeName}}</span>
+		{{/eq}}
 {{/inline}}
 
 {{#*inline "htmNodeType"}}
@@ -975,9 +1222,9 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputNodeType"}}
+														{{> "inputNodeType" roleRequired=roleRequired}}
 													</div>
-	{{#ifContainsAnyRoles roles rolesRequired}}
+	{{#eq roleRequired "true"}}
 		{{#eq 'Page' classApiMethodMethod}}
 															<div class="w3-cell w3-left-align w3-cell-top ">
 																<button
@@ -985,11 +1232,11 @@
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
 																		onclick="removeGlow($('#{{classApiMethodMethod}}_nodeType')); $('#{{classApiMethodMethod}}_nodeType').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#IotNodeForm :input[name=id]').val() }], 'setNodeType', null, function() { addGlow($('#{{classApiMethodMethod}}_nodeType')); }, function() { addError($('#{{classApiMethodMethod}}_nodeType')); }); "
 																		>
-																	<i class="far fa-eraser "></i>
+																	<i class="far fa-delete-left "></i>
 																</button>
 															</div>
 														{{/eq}}
-	{{/ifContainsAnyRoles}}
+	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -998,7 +1245,7 @@
 {{/inline}}
 
 {{#*inline "inputNodeType"}}
-		{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq roleRequired "true"}}
 														<input
 															type="text"
 															placeholder="node type"
@@ -1028,7 +1275,9 @@
 														{{#ifContainsKeys userKeys}}
 															<span class="varIotNode{{id}}NodeType ">{{iotNode_.nodeType}}</span>
 			{{/ifContainsKeys}}
-		{{/ifContainsAnyRoles}}
+		{{else}}
+														<span class="varIotNode{{id}}NodeType ">{{iotNode_.nodeType}}</span>
+		{{/eq}}
 {{/inline}}
 
 {{#*inline "htmNodeId"}}
@@ -1041,9 +1290,9 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputNodeId"}}
+														{{> "inputNodeId" roleRequired=roleRequired}}
 													</div>
-	{{#ifContainsAnyRoles roles rolesRequired}}
+	{{#eq roleRequired "true"}}
 		{{#eq 'Page' classApiMethodMethod}}
 															<div class="w3-cell w3-left-align w3-cell-top ">
 																<button
@@ -1051,11 +1300,11 @@
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
 																		onclick="removeGlow($('#{{classApiMethodMethod}}_nodeId')); $('#{{classApiMethodMethod}}_nodeId').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#IotNodeForm :input[name=id]').val() }], 'setNodeId', null, function() { addGlow($('#{{classApiMethodMethod}}_nodeId')); }, function() { addError($('#{{classApiMethodMethod}}_nodeId')); }); "
 																		>
-																	<i class="far fa-eraser "></i>
+																	<i class="far fa-delete-left "></i>
 																</button>
 															</div>
 														{{/eq}}
-	{{/ifContainsAnyRoles}}
+	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -1064,7 +1313,7 @@
 {{/inline}}
 
 {{#*inline "inputNodeId"}}
-		{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq roleRequired "true"}}
 														<input
 															type="text"
 															placeholder="node ID"
@@ -1094,7 +1343,9 @@
 														{{#ifContainsKeys userKeys}}
 															<span class="varIotNode{{id}}NodeId ">{{iotNode_.nodeId}}</span>
 			{{/ifContainsKeys}}
-		{{/ifContainsAnyRoles}}
+		{{else}}
+														<span class="varIotNode{{id}}NodeId ">{{iotNode_.nodeId}}</span>
+		{{/eq}}
 {{/inline}}
 
 {{#*inline "htmLocation"}}
@@ -1107,9 +1358,9 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputLocation"}}
+														{{> "inputLocation" roleRequired=roleRequired}}
 													</div>
-	{{#ifContainsAnyRoles roles rolesRequired}}
+	{{#eq roleRequired "true"}}
 		{{#eq 'Page' classApiMethodMethod}}
 															<div class="w3-cell w3-left-align w3-cell-top ">
 																<button
@@ -1117,11 +1368,11 @@
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
 																		onclick="removeGlow($('#{{classApiMethodMethod}}_location')); $('#{{classApiMethodMethod}}_location').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#IotNodeForm :input[name=id]').val() }], 'setLocation', null, function() { addGlow($('#{{classApiMethodMethod}}_location')); }, function() { addError($('#{{classApiMethodMethod}}_location')); }); "
 																		>
-																	<i class="far fa-eraser "></i>
+																	<i class="far fa-delete-left "></i>
 																</button>
 															</div>
 														{{/eq}}
-	{{/ifContainsAnyRoles}}
+	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -1130,7 +1381,7 @@
 {{/inline}}
 
 {{#*inline "inputLocation"}}
-		{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq roleRequired "true"}}
 														<input
 															type="text"
 															placeholder="location"
@@ -1160,7 +1411,9 @@
 														{{#ifContainsKeys userKeys}}
 															<span class="varIotNode{{id}}Location ">{{iotNode_.location}}</span>
 			{{/ifContainsKeys}}
-		{{/ifContainsAnyRoles}}
+		{{else}}
+														<span class="varIotNode{{id}}Location ">{{iotNode_.location}}</span>
+		{{/eq}}
 {{/inline}}
 
 {{#*inline "htmJson_moisture"}}
@@ -1175,7 +1428,7 @@
 													<div class="w3-cell ">
 														<div class="w3-rest ">
 															<span class="">
-																{{> "inputJson_moisture"}}
+																{{> "inputJson_moisture" roleRequired=roleRequired}}
 															</span>
 														</div>
 													</div>
@@ -1204,7 +1457,7 @@
 													<div class="w3-cell ">
 														<div class="w3-rest ">
 															<span class="">
-																{{> "inputJson_moisture0"}}
+																{{> "inputJson_moisture0" roleRequired=roleRequired}}
 															</span>
 														</div>
 													</div>
@@ -1233,7 +1486,7 @@
 													<div class="w3-cell ">
 														<div class="w3-rest ">
 															<span class="">
-																{{> "inputJson_moisture1"}}
+																{{> "inputJson_moisture1" roleRequired=roleRequired}}
 															</span>
 														</div>
 													</div>
@@ -1262,7 +1515,7 @@
 													<div class="w3-cell ">
 														<div class="w3-rest ">
 															<span class="">
-																{{> "inputJson_temperature"}}
+																{{> "inputJson_temperature" roleRequired=roleRequired}}
 															</span>
 														</div>
 													</div>
@@ -1291,7 +1544,7 @@
 													<div class="w3-cell ">
 														<div class="w3-rest ">
 															<span class="">
-																{{> "inputJson_temperature0"}}
+																{{> "inputJson_temperature0" roleRequired=roleRequired}}
 															</span>
 														</div>
 													</div>
@@ -1320,7 +1573,7 @@
 													<div class="w3-cell ">
 														<div class="w3-rest ">
 															<span class="">
-																{{> "inputJson_temperatureAverage"}}
+																{{> "inputJson_temperatureAverage" roleRequired=roleRequired}}
 															</span>
 														</div>
 													</div>
@@ -1349,7 +1602,7 @@
 													<div class="w3-cell ">
 														<div class="w3-rest ">
 															<span class="">
-																{{> "inputJson_badConditionsCounter"}}
+																{{> "inputJson_badConditionsCounter" roleRequired=roleRequired}}
 															</span>
 														</div>
 													</div>
@@ -1378,7 +1631,7 @@
 													<div class="w3-cell ">
 														<div class="w3-rest ">
 															<span class="">
-																{{> "inputJson_door"}}
+																{{> "inputJson_door" roleRequired=roleRequired}}
 															</span>
 														</div>
 													</div>
@@ -1407,7 +1660,7 @@
 													<div class="w3-cell ">
 														<div class="w3-rest ">
 															<span class="">
-																{{> "inputJson_alarmDoor"}}
+																{{> "inputJson_alarmDoor" roleRequired=roleRequired}}
 															</span>
 														</div>
 													</div>
@@ -1436,7 +1689,7 @@
 													<div class="w3-cell ">
 														<div class="w3-rest ">
 															<span class="">
-																{{> "inputJson_flood"}}
+																{{> "inputJson_flood" roleRequired=roleRequired}}
 															</span>
 														</div>
 													</div>
@@ -1465,7 +1718,7 @@
 													<div class="w3-cell ">
 														<div class="w3-rest ">
 															<span class="">
-																{{> "inputJson_alarmFlood"}}
+																{{> "inputJson_alarmFlood" roleRequired=roleRequired}}
 															</span>
 														</div>
 													</div>
@@ -1494,7 +1747,7 @@
 													<div class="w3-cell ">
 														<div class="w3-rest ">
 															<span class="">
-																{{> "inputJson_lux2"}}
+																{{> "inputJson_lux2" roleRequired=roleRequired}}
 															</span>
 														</div>
 													</div>
@@ -1523,7 +1776,7 @@
 													<div class="w3-cell ">
 														<div class="w3-rest ">
 															<span class="">
-																{{> "inputJson_illuminance"}}
+																{{> "inputJson_illuminance" roleRequired=roleRequired}}
 															</span>
 														</div>
 													</div>
@@ -1552,7 +1805,7 @@
 													<div class="w3-cell ">
 														<div class="w3-rest ">
 															<span class="">
-																{{> "inputJson_resistance0"}}
+																{{> "inputJson_resistance0" roleRequired=roleRequired}}
 															</span>
 														</div>
 													</div>
@@ -1581,7 +1834,7 @@
 													<div class="w3-cell ">
 														<div class="w3-rest ">
 															<span class="">
-																{{> "inputJson_resistance1"}}
+																{{> "inputJson_resistance1" roleRequired=roleRequired}}
 															</span>
 														</div>
 													</div>
@@ -1610,7 +1863,7 @@
 													<div class="w3-cell ">
 														<div class="w3-rest ">
 															<span class="">
-																{{> "inputJson_frequency"}}
+																{{> "inputJson_frequency" roleRequired=roleRequired}}
 															</span>
 														</div>
 													</div>
@@ -1639,7 +1892,7 @@
 													<div class="w3-cell ">
 														<div class="w3-rest ">
 															<span class="">
-																{{> "inputJson_devEui"}}
+																{{> "inputJson_devEui" roleRequired=roleRequired}}
 															</span>
 														</div>
 													</div>
@@ -1668,7 +1921,7 @@
 													<div class="w3-cell ">
 														<div class="w3-rest ">
 															<span class="">
-																{{> "inputJson_bandwidth"}}
+																{{> "inputJson_bandwidth" roleRequired=roleRequired}}
 															</span>
 														</div>
 													</div>
@@ -1697,7 +1950,7 @@
 													<div class="w3-cell ">
 														<div class="w3-rest ">
 															<span class="">
-																{{> "inputJson_dataRate"}}
+																{{> "inputJson_dataRate" roleRequired=roleRequired}}
 															</span>
 														</div>
 													</div>
@@ -1726,7 +1979,7 @@
 													<div class="w3-cell ">
 														<div class="w3-rest ">
 															<span class="">
-																{{> "inputJson_frameCount"}}
+																{{> "inputJson_frameCount" roleRequired=roleRequired}}
 															</span>
 														</div>
 													</div>
@@ -1755,7 +2008,7 @@
 													<div class="w3-cell ">
 														<div class="w3-rest ">
 															<span class="">
-																{{> "inputJson_maxPayload"}}
+																{{> "inputJson_maxPayload" roleRequired=roleRequired}}
 															</span>
 														</div>
 													</div>
@@ -1784,7 +2037,7 @@
 													<div class="w3-cell ">
 														<div class="w3-rest ">
 															<span class="">
-																{{> "inputJson_bitsPerSecond"}}
+																{{> "inputJson_bitsPerSecond" roleRequired=roleRequired}}
 															</span>
 														</div>
 													</div>
@@ -1813,7 +2066,7 @@
 													<div class="w3-cell ">
 														<div class="w3-rest ">
 															<span class="">
-																{{> "inputJson_batteryVoltage"}}
+																{{> "inputJson_batteryVoltage" roleRequired=roleRequired}}
 															</span>
 														</div>
 													</div>
@@ -1842,7 +2095,7 @@
 													<div class="w3-cell ">
 														<div class="w3-rest ">
 															<span class="">
-																{{> "inputJson_spreadingFactor"}}
+																{{> "inputJson_spreadingFactor" roleRequired=roleRequired}}
 															</span>
 														</div>
 													</div>
@@ -1871,7 +2124,7 @@
 													<div class="w3-cell ">
 														<div class="w3-rest ">
 															<span class="">
-																{{> "inputJson_dataRateAdaptive"}}
+																{{> "inputJson_dataRateAdaptive" roleRequired=roleRequired}}
 															</span>
 														</div>
 													</div>
@@ -1900,7 +2153,7 @@
 													<div class="w3-cell ">
 														<div class="w3-rest ">
 															<span class="">
-																{{> "inputJson_swversion"}}
+																{{> "inputJson_swversion" roleRequired=roleRequired}}
 															</span>
 														</div>
 													</div>
@@ -1929,7 +2182,7 @@
 													<div class="w3-cell ">
 														<div class="w3-rest ">
 															<span class="">
-																{{> "inputJson_batteryLevel"}}
+																{{> "inputJson_batteryLevel" roleRequired=roleRequired}}
 															</span>
 														</div>
 													</div>
@@ -1958,7 +2211,7 @@
 													<div class="w3-cell ">
 														<div class="w3-rest ">
 															<span class="">
-																{{> "inputJson_startUpCount"}}
+																{{> "inputJson_startUpCount" roleRequired=roleRequired}}
 															</span>
 														</div>
 													</div>
@@ -1987,7 +2240,7 @@
 													<div class="w3-cell ">
 														<div class="w3-rest ">
 															<span class="">
-																{{> "inputJson_watchdogCount"}}
+																{{> "inputJson_watchdogCount" roleRequired=roleRequired}}
 															</span>
 														</div>
 													</div>
@@ -2016,7 +2269,7 @@
 													<div class="w3-cell ">
 														<div class="w3-rest ">
 															<span class="">
-																{{> "inputJson_historySequence"}}
+																{{> "inputJson_historySequence" roleRequired=roleRequired}}
 															</span>
 														</div>
 													</div>
@@ -2045,7 +2298,7 @@
 													<div class="w3-cell ">
 														<div class="w3-rest ">
 															<span class="">
-																{{> "inputJson_versionFirmware"}}
+																{{> "inputJson_versionFirmware" roleRequired=roleRequired}}
 															</span>
 														</div>
 													</div>
@@ -2074,7 +2327,7 @@
 													<div class="w3-cell ">
 														<div class="w3-rest ">
 															<span class="">
-																{{> "inputJson_stackTxFailRebootCount"}}
+																{{> "inputJson_stackTxFailRebootCount" roleRequired=roleRequired}}
 															</span>
 														</div>
 													</div>
@@ -2103,7 +2356,7 @@
 													<div class="w3-cell ">
 														<div class="w3-rest ">
 															<span class="">
-																{{> "inputJson_historySequencePrevious"}}
+																{{> "inputJson_historySequencePrevious" roleRequired=roleRequired}}
 															</span>
 														</div>
 													</div>
@@ -2132,7 +2385,7 @@
 													<div class="w3-cell ">
 														<div class="w3-rest ">
 															<span class="">
-																{{> "inputJson_snr"}}
+																{{> "inputJson_snr" roleRequired=roleRequired}}
 															</span>
 														</div>
 													</div>
@@ -2161,7 +2414,7 @@
 													<div class="w3-cell ">
 														<div class="w3-rest ">
 															<span class="">
-																{{> "inputJson_rssi"}}
+																{{> "inputJson_rssi" roleRequired=roleRequired}}
 															</span>
 														</div>
 													</div>

@@ -1,0 +1,49 @@
+---
+
+- name: "Provision the {{ SERVICE1_BODY.service_id }} service"
+  connection: local
+  uri:
+    timeout: 90
+    url: "http://iotagent-json-north-fiware.apps-crc.testing/iot/services"
+    method: POST
+    headers:
+      Content-Type: "application/json"
+      Fiware-Service: ansible_test
+      Fiware-ServicePath: /
+    body_format: json
+    body:
+      services:
+        - "{{ SERVICE1_BODY }}"
+    return_content: true
+    status_code: 
+      - 200
+      - 201
+  register: CREATE_SERVICE
+  ignore_errors: true
+- debug:
+    var: CREATE_SERVICE
+- name: "Update the ansible-test1 service"
+  connection: local
+  uri:
+    timeout: 90
+    url: "http://iotagent-json-north-fiware.apps-crc.testing/iot/services?apikey={{ SERVICE1_BODY.apikey | urlencode }}&resource={{ SERVICE1_BODY.resource | urlencode }}"
+    method: PUT
+    headers:
+      Content-Type: "application/json"
+      Fiware-Service: ansible_test
+      Fiware-ServicePath: /environment
+      Cache-Control: no-cache
+    body_format: json
+    body: "{{ SERVICE1_BODY | combine({ 'apikey': omit }) | combine({ 'resource': omit }) }}"
+    return_content: true
+    status_code: 
+      - 204
+  register: UPDATE_SERVICE
+  ignore_errors: true
+  when: CREATE_SERVICE.failed
+- debug:
+    msg: "{{ UPDATE_SERVICE }}"
+  when: CREATE_SERVICE.failed
+- fail:
+    msg: "{{ UPDATE_SERVICE }}"
+  when: CREATE_SERVICE.failed and UPDATE_SERVICE.failed

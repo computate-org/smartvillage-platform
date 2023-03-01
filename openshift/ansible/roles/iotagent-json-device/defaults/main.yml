@@ -1,0 +1,10 @@
+---
+DEVICE1_BODY:
+  device_id: TrafficFlowObserved1
+  entity_name: urn:ngsi-ld:TrafficFlowObserved:TrafficFlowObserved1
+  entity_type: TrafficFlowObserved
+  transport: MQTT
+  attributes:
+    - object_id: intensity
+      name: intensity
+      type: Integer

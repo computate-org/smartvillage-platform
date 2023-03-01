@@ -8,7 +8,7 @@
 pkcon install -y git
 pkcon install -y python3
 pkcon install -y python3-pip
-pkcon install -y python3-virtualenv
+pip install virtualenv
 ```
 
 ## Install Ansible dependencies on MacOSX
@@ -253,7 +253,7 @@ SOLR_VOLUME_SIZE: 2Gi
 SOLR_STORAGE_CLASS_NAME: "{{ REDHAT_OPENSHIFT_STORAGE_CLASS_NAME }}"
 
 AUTH_REALM: TEAM19
-AUTH_RESOURCE: team19
+AUTH_CLIENT: team19
 AUTH_SECRET: ...
 AUTH_HOST_NAME: sso.computate.org
 AUTH_PORT: 443

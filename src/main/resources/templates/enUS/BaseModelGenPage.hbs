@@ -27,6 +27,8 @@
 				}
 				websocketBaseModel(websocketBaseModelInner);
 				window.varsFq = JSON.parse('{{{toJsonObjectStringInApostrophes varsFq}}}');
+				window.varsRange = JSON.parse('{{{toJsonObjectStringInApostrophes varsRange}}}');
+				window.defaultRangeVar = '{{ defaultRangeVar }}';
 				pageGraph();
 
 				var calendarEl = document.getElementById('site-calendar');
@@ -42,6 +44,7 @@
 {{#if DEFAULT_MAP_ZOOM }}
 			window.DEFAULT_MAP_ZOOM = {{ DEFAULT_MAP_ZOOM }};
 {{/if}}
+			window.DEFAULT_ZONE_ID = '{{ defaultZoneId }}';
 		</script>
 {{/inline}}
 {{#*inline "htmUrlBaseModel"}}{{pageUri}}?q={{query.q}}&amp;rows={{#if rows}}{{rows}}{{else}}{{pagination.rows}}{{/if}}&amp;rows={{#if start}}{{start}}{{else}}{{pagination.start}}{{/if}}{{#each query.fq}}{{#eq fq this}}{{else}}&fq={{fq}}:{{val}}{{/eq}}{{/each}}{{#each query.sort}}{{#eq sort this}}{{else}}&sort={{var}} {{order}}{{/eq}}{{/each}}{{/inline}}
@@ -115,9 +118,9 @@
 								<table class="w3-padding ">
 									<tr>
 										<td class="w3-padding w3-tiny " colspan="2">
-											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeGap-BaseModel">{{#if defaultRangeGap }}facet.range.gap={{encodeURIComponent defaultRangeGap }}{{/if}}</div>
-											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeStart-BaseModel">{{#if defaultRangeStart }}facet.range.start={{encodeURIComponent defaultRangeStart }}{{/if}}</div>
-											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeEnd-BaseModel">{{#if defaultRangeEnd }}facet.range.end={{encodeURIComponent defaultRangeEnd }}{{/if}}</div>
+											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeGap-BaseModel">{{#if rangeGap }}facet.range.gap={{encodeURIComponent rangeGap }}{{/if}}</div>
+											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeStart-BaseModel">{{#if rangeStart }}facet.range.start={{encodeURIComponent rangeStart }}{{/if}}</div>
+											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeEnd-BaseModel">{{#if rangeEnd }}facet.range.end={{encodeURIComponent rangeEnd }}{{/if}}</div>
 											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeVar-BaseModel">{{#if defaultRangeVar }}facet.range={!tag=r1}{{encodeURIComponent defaultRangeVar }}{{/if}}</div>
 										</td>
 									</tr>
@@ -128,7 +131,7 @@
 											<span>Range Gap</span>
 										</td>
 										<td class="">
-											<select name="facet.range.gap" id="pageFacetRangeGap-BaseModel" onchange="facetRangeChange(this, 'BaseModel'); ">
+											<select name="facet.range.gap" id="pageFacetRangeGap-BaseModel" onchange="facetRangeGapChange(this, 'BaseModel'); ">
 												<option value="+1YEAR"{{#eq defaultRangeGap '+1YEAR'}} selected="selected"{{else}}{{/eq}}>Year</option>
 												<option value="+1MONTH"{{#eq defaultRangeGap '+1MONTH'}} selected="selected"{{else}}{{/eq}}>Month</option>
 												<option value="+1WEEK"{{#eq defaultRangeGap '+1WEEK'}} selected="selected"{{else}}{{/eq}}>Week</option>
@@ -146,7 +149,7 @@
 									</tr>
 									<tr class="">
 										<td class="" colspan="2">
-											<span><input type="datetime-local" name="facetRangeStart" id="pageFacetRangeStart-BaseModel" value="{{formatZonedDateTime defaultRangeStart "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeChange(this, 'BaseModel'); "/></span>
+											<span><input type="datetime-local" name="facetRangeStart" id="pageFacetRangeStart-BaseModel" value="{{formatZonedDateTime defaultRangeStart "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeStartChange(this, 'BaseModel'); "/></span>
 										</td>
 									</tr>
 									<tr class="">
@@ -156,7 +159,7 @@
 									</tr>
 									<tr class="">
 										<td class="" colspan="2">
-											<span><input type="datetime-local" name="facetRangeEnd" id="pageFacetRangeEnd-BaseModel" value="{{formatZonedDateTime defaultRangeEnd "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeChange(this, 'BaseModel'); "/></span>
+											<span><input type="datetime-local" name="facetRangeEnd" id="pageFacetRangeEnd-BaseModel" value="{{formatZonedDateTime defaultRangeEnd "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeEndChange(this, 'BaseModel'); "/></span>
 										</td>
 									</tr>
 								</table>
@@ -559,7 +562,7 @@
 			</tr>
 	{{/inline}}
 {{#*inline "htmFormsBaseModelPage"}}
-	{{#ifContainsAnyRoles roles rolesRequired}}
+	{{#ifContainsAnyRoles roles roleRequired}}
 		{{#eq baseModelCount int1}}
 		<button
 			class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3- "
@@ -575,7 +578,7 @@
 {{#block "htmSuggested"}}{{/block}}
 {{/inline}}
 {{#*inline "htmSuggestedBaseModelPage"}}
-			{{#ifContainsAnyRoles roles rolesRequired}}
+			{{#ifContainsAnyRoles roles roleRequired}}
 					<div class="">
 						<button id="refreshBaseModelGenPage{{id}}" class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3- "
 							onclick="patch{{classSimpleName}}Vals([], {}, function() { addGlow($('#refreshBaseModelGenPage{{id}}')); }, function() { addError($('#refreshBaseModelGenPage{{id}}')); }); "
@@ -638,7 +641,7 @@
 													<div class="w3-cell ">
 														<div class="w3-rest ">
 															<span class="">
-																{{> "inputPk"}}
+																{{> "inputPk" roleRequired=roleRequired}}
 															</span>
 														</div>
 													</div>
@@ -662,8 +665,9 @@
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputInheritPk"}}
+														{{> "inputInheritPk" roleRequired=roleRequired}}
 													</div>
+	{{#eq roleRequired "true"}}
 		{{#eq 'Page' classApiMethodMethod}}
 															<div class="w3-cell w3-left-align w3-cell-top ">
 																<button
@@ -671,10 +675,11 @@
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3- "
 																		onclick="removeGlow($('#{{classApiMethodMethod}}_inheritPk')); $('#{{classApiMethodMethod}}_inheritPk').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#BaseModelForm :input[name=pk]').val() }], 'setInheritPk', null, function() { addGlow($('#{{classApiMethodMethod}}_inheritPk')); }, function() { addError($('#{{classApiMethodMethod}}_inheritPk')); }); "
 																		>
-																	<i class="far fa-eraser "></i>
+																	<i class="far fa-delete-left "></i>
 																</button>
 															</div>
 														{{/eq}}
+	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -683,6 +688,7 @@
 {{/inline}}
 
 {{#*inline "inputInheritPk"}}
+		{{#eq roleRequired "true"}}
 														<input
 															type="text"
 															title="An optional inherited primary key from a legacy system for this object in the database"
@@ -708,6 +714,9 @@
 	{{/eq}}
 														/>
 
+		{{else}}
+														<span class="varBaseModel{{pk}}InheritPk ">{{baseModel_.inheritPk}}</span>
+		{{/eq}}
 {{/inline}}
 
 {{#*inline "htmCreated"}}
@@ -720,7 +729,7 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputCreated"}}
+														{{> "inputCreated" roleRequired=roleRequired}}
 													</div>
 												</div>
 											</div>
@@ -747,7 +756,7 @@
 													<div class="w3-cell ">
 														<div class="w3-rest ">
 															<span class="">
-																{{> "inputModified"}}
+																{{> "inputModified" roleRequired=roleRequired}}
 															</span>
 														</div>
 													</div>
@@ -774,7 +783,7 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputArchived"}}
+														{{> "inputArchived" roleRequired=roleRequired}}
 													</div>
 												</div>
 											</div>
@@ -784,6 +793,7 @@
 {{/inline}}
 
 {{#*inline "inputArchived"}}
+		{{#eq roleRequired "true"}}
 	{{#eq 'Page' classApiMethodMethod}}
 															<input
 																type="checkbox"
@@ -821,6 +831,9 @@
 														</select>
 	{{/eq}}
 
+		{{else}}
+														<span class="varBaseModel{{pk}}Archived ">{{baseModel_.archived}}</span>
+		{{/eq}}
 {{/inline}}
 
 {{#*inline "htmDeleted"}}
@@ -833,7 +846,7 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputDeleted"}}
+														{{> "inputDeleted" roleRequired=roleRequired}}
 													</div>
 												</div>
 											</div>
@@ -843,6 +856,7 @@
 {{/inline}}
 
 {{#*inline "inputDeleted"}}
+		{{#eq roleRequired "true"}}
 	{{#eq 'Page' classApiMethodMethod}}
 															<input
 																type="checkbox"
@@ -880,6 +894,9 @@
 														</select>
 	{{/eq}}
 
+		{{else}}
+														<span class="varBaseModel{{pk}}Deleted ">{{baseModel_.deleted}}</span>
+		{{/eq}}
 {{/inline}}
 
 {{#*inline "htmSessionId"}}
@@ -889,7 +906,7 @@
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputSessionId"}}
+														{{> "inputSessionId" roleRequired=roleRequired}}
 													</div>
 												</div>
 											</div>
@@ -911,7 +928,7 @@
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputUserKey"}}
+														{{> "inputUserKey" roleRequired=roleRequired}}
 													</div>
 												</div>
 											</div>
@@ -935,7 +952,7 @@
 													<div class="w3-cell ">
 														<div class="w3-rest ">
 															<span class="">
-																{{> "inputObjectTitle"}}
+																{{> "inputObjectTitle" roleRequired=roleRequired}}
 															</span>
 														</div>
 													</div>
@@ -964,7 +981,7 @@
 													<div class="w3-cell ">
 														<div class="w3-rest ">
 															<span class="">
-																{{> "inputObjectId"}}
+																{{> "inputObjectId" roleRequired=roleRequired}}
 															</span>
 														</div>
 													</div>

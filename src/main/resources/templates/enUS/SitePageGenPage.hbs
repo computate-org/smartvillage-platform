@@ -27,6 +27,8 @@
 				}
 				websocketSitePage(websocketSitePageInner);
 				window.varsFq = JSON.parse('{{{toJsonObjectStringInApostrophes varsFq}}}');
+				window.varsRange = JSON.parse('{{{toJsonObjectStringInApostrophes varsRange}}}');
+				window.defaultRangeVar = '{{ defaultRangeVar }}';
 				pageGraph();
 
 				var calendarEl = document.getElementById('site-calendar');
@@ -42,6 +44,7 @@
 {{#if DEFAULT_MAP_ZOOM }}
 			window.DEFAULT_MAP_ZOOM = {{ DEFAULT_MAP_ZOOM }};
 {{/if}}
+			window.DEFAULT_ZONE_ID = '{{ defaultZoneId }}';
 		</script>
 {{/inline}}
 {{#*inline "htmUrlSitePage"}}{{pageUri}}?q={{query.q}}&amp;rows={{#if rows}}{{rows}}{{else}}{{pagination.rows}}{{/if}}&amp;rows={{#if start}}{{start}}{{else}}{{pagination.start}}{{/if}}{{#each query.fq}}{{#eq fq this}}{{else}}&fq={{fq}}:{{val}}{{/eq}}{{/each}}{{#each query.sort}}{{#eq sort this}}{{else}}&sort={{var}} {{order}}{{/eq}}{{/each}}{{/inline}}
@@ -115,9 +118,9 @@
 								<table class="w3-padding ">
 									<tr>
 										<td class="w3-padding w3-tiny " colspan="2">
-											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeGap-SitePage">{{#if defaultRangeGap }}facet.range.gap={{encodeURIComponent defaultRangeGap }}{{/if}}</div>
-											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeStart-SitePage">{{#if defaultRangeStart }}facet.range.start={{encodeURIComponent defaultRangeStart }}{{/if}}</div>
-											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeEnd-SitePage">{{#if defaultRangeEnd }}facet.range.end={{encodeURIComponent defaultRangeEnd }}{{/if}}</div>
+											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeGap-SitePage">{{#if rangeGap }}facet.range.gap={{encodeURIComponent rangeGap }}{{/if}}</div>
+											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeStart-SitePage">{{#if rangeStart }}facet.range.start={{encodeURIComponent rangeStart }}{{/if}}</div>
+											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeEnd-SitePage">{{#if rangeEnd }}facet.range.end={{encodeURIComponent rangeEnd }}{{/if}}</div>
 											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeVar-SitePage">{{#if defaultRangeVar }}facet.range={!tag=r1}{{encodeURIComponent defaultRangeVar }}{{/if}}</div>
 										</td>
 									</tr>
@@ -128,7 +131,7 @@
 											<span>Range Gap</span>
 										</td>
 										<td class="">
-											<select name="facet.range.gap" id="pageFacetRangeGap-SitePage" onchange="facetRangeChange(this, 'SitePage'); ">
+											<select name="facet.range.gap" id="pageFacetRangeGap-SitePage" onchange="facetRangeGapChange(this, 'SitePage'); ">
 												<option value="+1YEAR"{{#eq defaultRangeGap '+1YEAR'}} selected="selected"{{else}}{{/eq}}>Year</option>
 												<option value="+1MONTH"{{#eq defaultRangeGap '+1MONTH'}} selected="selected"{{else}}{{/eq}}>Month</option>
 												<option value="+1WEEK"{{#eq defaultRangeGap '+1WEEK'}} selected="selected"{{else}}{{/eq}}>Week</option>
@@ -146,7 +149,7 @@
 									</tr>
 									<tr class="">
 										<td class="" colspan="2">
-											<span><input type="datetime-local" name="facetRangeStart" id="pageFacetRangeStart-SitePage" value="{{formatZonedDateTime defaultRangeStart "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeChange(this, 'SitePage'); "/></span>
+											<span><input type="datetime-local" name="facetRangeStart" id="pageFacetRangeStart-SitePage" value="{{formatZonedDateTime defaultRangeStart "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeStartChange(this, 'SitePage'); "/></span>
 										</td>
 									</tr>
 									<tr class="">
@@ -156,7 +159,7 @@
 									</tr>
 									<tr class="">
 										<td class="" colspan="2">
-											<span><input type="datetime-local" name="facetRangeEnd" id="pageFacetRangeEnd-SitePage" value="{{formatZonedDateTime defaultRangeEnd "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeChange(this, 'SitePage'); "/></span>
+											<span><input type="datetime-local" name="facetRangeEnd" id="pageFacetRangeEnd-SitePage" value="{{formatZonedDateTime defaultRangeEnd "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeEndChange(this, 'SitePage'); "/></span>
 										</td>
 									</tr>
 								</table>
@@ -408,21 +411,57 @@
 					<div class="" id="postSitePageFormValues">
 						<div id="postSitePageForm">
 							<div class="w3-cell-row ">
-{{> "htmCreated" classApiMethodMethod="POST"}}
-{{> "htmObjectId" classApiMethodMethod="POST"}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCreated" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmCreated" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmObjectId" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmObjectId" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
-{{> "htmArchived" classApiMethodMethod="POST"}}
-{{> "htmDeleted" classApiMethodMethod="POST"}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmArchived" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmArchived" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDeleted" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmDeleted" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
-{{> "htmPageId" classApiMethodMethod="POST"}}
-{{> "htmUrl" classApiMethodMethod="POST"}}
-{{> "htmUri" classApiMethodMethod="POST"}}
-{{> "htmAuthor" classApiMethodMethod="POST"}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmPageId" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmPageId" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmUrl" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmUrl" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmUri" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmUri" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmAuthor" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmAuthor" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
-{{> "htmPageImageUri" classApiMethodMethod="POST"}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmPageImageUri" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmPageImageUri" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 						</div>
 						<button
@@ -453,21 +492,57 @@
 					</header>
 					<div class="" id="patchSitePageFormValues">
 							<div class="w3-cell-row ">
-{{> "htmCreated" classApiMethodMethod="PATCH"}}
-{{> "htmObjectId" classApiMethodMethod="PATCH"}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCreated" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmCreated" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmObjectId" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmObjectId" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
-{{> "htmArchived" classApiMethodMethod="PATCH"}}
-{{> "htmDeleted" classApiMethodMethod="PATCH"}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmArchived" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmArchived" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDeleted" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmDeleted" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
-{{> "htmPageId" classApiMethodMethod="PATCH"}}
-{{> "htmUrl" classApiMethodMethod="PATCH"}}
-{{> "htmUri" classApiMethodMethod="PATCH"}}
-{{> "htmAuthor" classApiMethodMethod="PATCH"}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmPageId" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmPageId" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmUrl" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmUrl" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmUri" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmUri" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmAuthor" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmAuthor" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
-{{> "htmPageImageUri" classApiMethodMethod="PATCH"}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmPageImageUri" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmPageImageUri" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 						<button
 							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-2017-shaded-spruce "
@@ -519,22 +594,62 @@
 					<div class="" id="searchpageSitePageFormValues">
 						<div id="searchpageSitePageForm">
 							<div class="w3-cell-row ">
-{{> "htmCreated" classApiMethodMethod="Page"}}
-{{> "htmModified" classApiMethodMethod="Page"}}
-{{> "htmObjectId" classApiMethodMethod="Page"}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCreated" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmCreated" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmModified" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmModified" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmObjectId" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmObjectId" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
-{{> "htmArchived" classApiMethodMethod="Page"}}
-{{> "htmDeleted" classApiMethodMethod="Page"}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmArchived" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmArchived" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDeleted" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmDeleted" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
-{{> "htmPageId" classApiMethodMethod="Page"}}
-{{> "htmUrl" classApiMethodMethod="Page"}}
-{{> "htmUri" classApiMethodMethod="Page"}}
-{{> "htmAuthor" classApiMethodMethod="Page"}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmPageId" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmPageId" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmUrl" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmUrl" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmUri" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmUri" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmAuthor" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmAuthor" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
-{{> "htmPageImageUri" classApiMethodMethod="Page"}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmPageImageUri" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmPageImageUri" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 						</div>
 					</div>
@@ -673,7 +788,6 @@
 						<th>created</th>
 						<th></th>
 						<th>URL</th>
-						<th>URI</th>
 			</tr>
 {{/inline}}
 {{#*inline "tbody1SitePagePage"}}
@@ -700,11 +814,6 @@
 								<span class="white-space-pre-wrap ">{{url}}</span>
 							</a>
 						</td>
-						<td>
-							<a href="{{pageUrlPk}}">
-								<span class="white-space-pre-wrap ">{{uri}}</span>
-							</a>
-						</td>
 					</tr>
 		{{/each}}
 {{/inline}}
@@ -727,14 +836,10 @@
 				<td>
 				</td>
 			{{/if}}
-			{{#if getColumnUri}}
-				<td>
-				</td>
-			{{/if}}
 			</tr>
 	{{/inline}}
 {{#*inline "htmFormsSitePagePage"}}
-	{{#ifContainsAnyRoles roles rolesRequired}}
+	{{#ifContainsAnyRoles roles roleRequired}}
 		{{#eq sitePageCount int1}}
 		<button
 			class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce "
@@ -753,7 +858,7 @@
 {{#block "htmSuggested"}}{{/block}}
 {{/inline}}
 {{#*inline "htmSuggestedSitePagePage"}}
-			{{#ifContainsAnyRoles roles rolesRequired}}
+			{{#ifContainsAnyRoles roles roleRequired}}
 					<div class="">
 						<button id="refreshAllSitePageGenPage{{id}}" class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce "
 							onclick="patch{{classSimpleName}}Vals([], {}, function() { addGlow($('#refreshAllSitePageGenPage{{id}}')); }, function() { addError($('#refreshAllSitePageGenPage{{id}}')); }); "
@@ -815,9 +920,9 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputCourseNum"}}
+														{{> "inputCourseNum" roleRequired=roleRequired}}
 													</div>
-	{{#ifContainsAnyRoles roles rolesRequired}}
+	{{#eq roleRequired "true"}}
 		{{#eq 'Page' classApiMethodMethod}}
 															<div class="w3-cell w3-left-align w3-cell-top ">
 																<button
@@ -825,11 +930,11 @@
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
 																		onclick="removeGlow($('#{{classApiMethodMethod}}_courseNum')); $('#{{classApiMethodMethod}}_courseNum').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#SitePageForm :input[name=id]').val() }], 'setCourseNum', null, function() { addGlow($('#{{classApiMethodMethod}}_courseNum')); }, function() { addError($('#{{classApiMethodMethod}}_courseNum')); }); "
 																		>
-																	<i class="far fa-eraser "></i>
+																	<i class="far fa-delete-left "></i>
 																</button>
 															</div>
 														{{/eq}}
-	{{/ifContainsAnyRoles}}
+	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -838,7 +943,7 @@
 {{/inline}}
 
 {{#*inline "inputCourseNum"}}
-		{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq roleRequired "true"}}
 														<input
 															type="text"
 															placeholder="Course Number"
@@ -867,7 +972,9 @@
 
 													{{else}}
 															<span class="varSitePage{{id}}CourseNum ">{{sitePage_.courseNum}}</span>
-		{{/ifContainsAnyRoles}}
+		{{else}}
+														<span class="varSitePage{{id}}CourseNum ">{{sitePage_.courseNum}}</span>
+		{{/eq}}
 {{/inline}}
 
 {{#*inline "htmLessonNum"}}
@@ -880,9 +987,9 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputLessonNum"}}
+														{{> "inputLessonNum" roleRequired=roleRequired}}
 													</div>
-	{{#ifContainsAnyRoles roles rolesRequired}}
+	{{#eq roleRequired "true"}}
 		{{#eq 'Page' classApiMethodMethod}}
 															<div class="w3-cell w3-left-align w3-cell-top ">
 																<button
@@ -890,11 +997,11 @@
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
 																		onclick="removeGlow($('#{{classApiMethodMethod}}_lessonNum')); $('#{{classApiMethodMethod}}_lessonNum').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#SitePageForm :input[name=id]').val() }], 'setLessonNum', null, function() { addGlow($('#{{classApiMethodMethod}}_lessonNum')); }, function() { addError($('#{{classApiMethodMethod}}_lessonNum')); }); "
 																		>
-																	<i class="far fa-eraser "></i>
+																	<i class="far fa-delete-left "></i>
 																</button>
 															</div>
 														{{/eq}}
-	{{/ifContainsAnyRoles}}
+	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -903,7 +1010,7 @@
 {{/inline}}
 
 {{#*inline "inputLessonNum"}}
-		{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq roleRequired "true"}}
 														<input
 															type="text"
 															placeholder="Lesson Number"
@@ -932,7 +1039,9 @@
 
 													{{else}}
 															<span class="varSitePage{{id}}LessonNum ">{{sitePage_.lessonNum}}</span>
-		{{/ifContainsAnyRoles}}
+		{{else}}
+														<span class="varSitePage{{id}}LessonNum ">{{sitePage_.lessonNum}}</span>
+		{{/eq}}
 {{/inline}}
 
 {{#*inline "htmUrl"}}
@@ -945,9 +1054,9 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputUrl"}}
+														{{> "inputUrl" roleRequired=roleRequired}}
 													</div>
-	{{#ifContainsAnyRoles roles rolesRequired}}
+	{{#eq roleRequired "true"}}
 		{{#eq 'Page' classApiMethodMethod}}
 															<div class="w3-cell w3-left-align w3-cell-top ">
 																<button
@@ -955,11 +1064,11 @@
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
 																		onclick="removeGlow($('#{{classApiMethodMethod}}_url')); $('#{{classApiMethodMethod}}_url').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#SitePageForm :input[name=id]').val() }], 'setUrl', null, function() { addGlow($('#{{classApiMethodMethod}}_url')); }, function() { addError($('#{{classApiMethodMethod}}_url')); }); "
 																		>
-																	<i class="far fa-eraser "></i>
+																	<i class="far fa-delete-left "></i>
 																</button>
 															</div>
 														{{/eq}}
-	{{/ifContainsAnyRoles}}
+	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -968,7 +1077,7 @@
 {{/inline}}
 
 {{#*inline "inputUrl"}}
-		{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq roleRequired "true"}}
 														<input
 															type="text"
 															placeholder="URL"
@@ -997,7 +1106,9 @@
 
 													{{else}}
 															<span class="varSitePage{{id}}Url ">{{sitePage_.url}}</span>
-		{{/ifContainsAnyRoles}}
+		{{else}}
+														<span class="varSitePage{{id}}Url ">{{sitePage_.url}}</span>
+		{{/eq}}
 {{/inline}}
 
 {{#*inline "htmUri"}}
@@ -1010,9 +1121,9 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputUri"}}
+														{{> "inputUri" roleRequired=roleRequired}}
 													</div>
-	{{#ifContainsAnyRoles roles rolesRequired}}
+	{{#eq roleRequired "true"}}
 		{{#eq 'Page' classApiMethodMethod}}
 															<div class="w3-cell w3-left-align w3-cell-top ">
 																<button
@@ -1020,11 +1131,11 @@
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
 																		onclick="removeGlow($('#{{classApiMethodMethod}}_uri')); $('#{{classApiMethodMethod}}_uri').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#SitePageForm :input[name=id]').val() }], 'setUri', null, function() { addGlow($('#{{classApiMethodMethod}}_uri')); }, function() { addError($('#{{classApiMethodMethod}}_uri')); }); "
 																		>
-																	<i class="far fa-eraser "></i>
+																	<i class="far fa-delete-left "></i>
 																</button>
 															</div>
 														{{/eq}}
-	{{/ifContainsAnyRoles}}
+	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -1033,7 +1144,7 @@
 {{/inline}}
 
 {{#*inline "inputUri"}}
-		{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq roleRequired "true"}}
 														<input
 															type="text"
 															placeholder="URI"
@@ -1062,7 +1173,9 @@
 
 													{{else}}
 															<span class="varSitePage{{id}}Uri ">{{sitePage_.uri}}</span>
-		{{/ifContainsAnyRoles}}
+		{{else}}
+														<span class="varSitePage{{id}}Uri ">{{sitePage_.uri}}</span>
+		{{/eq}}
 {{/inline}}
 
 {{#*inline "htmPageId"}}
@@ -1075,9 +1188,9 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputPageId"}}
+														{{> "inputPageId" roleRequired=roleRequired}}
 													</div>
-	{{#ifContainsAnyRoles roles rolesRequired}}
+	{{#eq roleRequired "true"}}
 		{{#eq 'Page' classApiMethodMethod}}
 															<div class="w3-cell w3-left-align w3-cell-top ">
 																<button
@@ -1085,11 +1198,11 @@
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
 																		onclick="removeGlow($('#{{classApiMethodMethod}}_pageId')); $('#{{classApiMethodMethod}}_pageId').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#SitePageForm :input[name=id]').val() }], 'setPageId', null, function() { addGlow($('#{{classApiMethodMethod}}_pageId')); }, function() { addError($('#{{classApiMethodMethod}}_pageId')); }); "
 																		>
-																	<i class="far fa-eraser "></i>
+																	<i class="far fa-delete-left "></i>
 																</button>
 															</div>
 														{{/eq}}
-	{{/ifContainsAnyRoles}}
+	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -1098,7 +1211,7 @@
 {{/inline}}
 
 {{#*inline "inputPageId"}}
-		{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq roleRequired "true"}}
 														<input
 															type="text"
 															placeholder="Page ID"
@@ -1127,7 +1240,9 @@
 
 													{{else}}
 															<span class="varSitePage{{id}}PageId ">{{sitePage_.pageId}}</span>
-		{{/ifContainsAnyRoles}}
+		{{else}}
+														<span class="varSitePage{{id}}PageId ">{{sitePage_.pageId}}</span>
+		{{/eq}}
 {{/inline}}
 
 {{#*inline "htmH1"}}
@@ -1140,9 +1255,9 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputH1"}}
+														{{> "inputH1" roleRequired=roleRequired}}
 													</div>
-	{{#ifContainsAnyRoles roles rolesRequired}}
+	{{#eq roleRequired "true"}}
 		{{#eq 'Page' classApiMethodMethod}}
 															<div class="w3-cell w3-left-align w3-cell-top ">
 																<button
@@ -1150,11 +1265,11 @@
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
 																		onclick="removeGlow($('#{{classApiMethodMethod}}_h1')); $('#{{classApiMethodMethod}}_h1').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#SitePageForm :input[name=id]').val() }], 'setH1', null, function() { addGlow($('#{{classApiMethodMethod}}_h1')); }, function() { addError($('#{{classApiMethodMethod}}_h1')); }); "
 																		>
-																	<i class="far fa-eraser "></i>
+																	<i class="far fa-delete-left "></i>
 																</button>
 															</div>
 														{{/eq}}
-	{{/ifContainsAnyRoles}}
+	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -1163,7 +1278,7 @@
 {{/inline}}
 
 {{#*inline "inputH1"}}
-		{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq roleRequired "true"}}
 														<input
 															type="text"
 															placeholder="header 1"
@@ -1192,7 +1307,9 @@
 
 													{{else}}
 															<span class="varSitePage{{id}}H1 ">{{sitePage_.h1}}</span>
-		{{/ifContainsAnyRoles}}
+		{{else}}
+														<span class="varSitePage{{id}}H1 ">{{sitePage_.h1}}</span>
+		{{/eq}}
 {{/inline}}
 
 {{#*inline "htmH2"}}
@@ -1205,9 +1322,9 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputH2"}}
+														{{> "inputH2" roleRequired=roleRequired}}
 													</div>
-	{{#ifContainsAnyRoles roles rolesRequired}}
+	{{#eq roleRequired "true"}}
 		{{#eq 'Page' classApiMethodMethod}}
 															<div class="w3-cell w3-left-align w3-cell-top ">
 																<button
@@ -1215,11 +1332,11 @@
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
 																		onclick="removeGlow($('#{{classApiMethodMethod}}_h2')); $('#{{classApiMethodMethod}}_h2').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#SitePageForm :input[name=id]').val() }], 'setH2', null, function() { addGlow($('#{{classApiMethodMethod}}_h2')); }, function() { addError($('#{{classApiMethodMethod}}_h2')); }); "
 																		>
-																	<i class="far fa-eraser "></i>
+																	<i class="far fa-delete-left "></i>
 																</button>
 															</div>
 														{{/eq}}
-	{{/ifContainsAnyRoles}}
+	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -1228,7 +1345,7 @@
 {{/inline}}
 
 {{#*inline "inputH2"}}
-		{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq roleRequired "true"}}
 														<input
 															type="text"
 															placeholder="header 2"
@@ -1257,7 +1374,9 @@
 
 													{{else}}
 															<span class="varSitePage{{id}}H2 ">{{sitePage_.h2}}</span>
-		{{/ifContainsAnyRoles}}
+		{{else}}
+														<span class="varSitePage{{id}}H2 ">{{sitePage_.h2}}</span>
+		{{/eq}}
 {{/inline}}
 
 {{#*inline "htmAuthor"}}
@@ -1270,9 +1389,9 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputAuthor"}}
+														{{> "inputAuthor" roleRequired=roleRequired}}
 													</div>
-	{{#ifContainsAnyRoles roles rolesRequired}}
+	{{#eq roleRequired "true"}}
 		{{#eq 'Page' classApiMethodMethod}}
 															<div class="w3-cell w3-left-align w3-cell-top ">
 																<button
@@ -1280,11 +1399,11 @@
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
 																		onclick="removeGlow($('#{{classApiMethodMethod}}_author')); $('#{{classApiMethodMethod}}_author').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#SitePageForm :input[name=id]').val() }], 'setAuthor', null, function() { addGlow($('#{{classApiMethodMethod}}_author')); }, function() { addError($('#{{classApiMethodMethod}}_author')); }); "
 																		>
-																	<i class="far fa-eraser "></i>
+																	<i class="far fa-delete-left "></i>
 																</button>
 															</div>
 														{{/eq}}
-	{{/ifContainsAnyRoles}}
+	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -1293,7 +1412,7 @@
 {{/inline}}
 
 {{#*inline "inputAuthor"}}
-		{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq roleRequired "true"}}
 														<input
 															type="text"
 															placeholder="author"
@@ -1322,7 +1441,9 @@
 
 													{{else}}
 															<span class="varSitePage{{id}}Author ">{{sitePage_.author}}</span>
-		{{/ifContainsAnyRoles}}
+		{{else}}
+														<span class="varSitePage{{id}}Author ">{{sitePage_.author}}</span>
+		{{/eq}}
 {{/inline}}
 
 {{#*inline "htmPageImageUri"}}
@@ -1335,9 +1456,9 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputPageImageUri"}}
+														{{> "inputPageImageUri" roleRequired=roleRequired}}
 													</div>
-	{{#ifContainsAnyRoles roles rolesRequired}}
+	{{#eq roleRequired "true"}}
 		{{#eq 'Page' classApiMethodMethod}}
 															<div class="w3-cell w3-left-align w3-cell-top ">
 																<button
@@ -1345,11 +1466,11 @@
 																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
 																		onclick="removeGlow($('#{{classApiMethodMethod}}_pageImageUri')); $('#{{classApiMethodMethod}}_pageImageUri').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#SitePageForm :input[name=id]').val() }], 'setPageImageUri', null, function() { addGlow($('#{{classApiMethodMethod}}_pageImageUri')); }, function() { addError($('#{{classApiMethodMethod}}_pageImageUri')); }); "
 																		>
-																	<i class="far fa-eraser "></i>
+																	<i class="far fa-delete-left "></i>
 																</button>
 															</div>
 														{{/eq}}
-	{{/ifContainsAnyRoles}}
+	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -1358,7 +1479,7 @@
 {{/inline}}
 
 {{#*inline "inputPageImageUri"}}
-		{{#ifContainsAnyRoles roles rolesRequired}}
+		{{#eq roleRequired "true"}}
 														<input
 															type="text"
 															placeholder="imageUri"
@@ -1387,5 +1508,7 @@
 
 													{{else}}
 															<span class="varSitePage{{id}}PageImageUri ">{{sitePage_.pageImageUri}}</span>
-		{{/ifContainsAnyRoles}}
+		{{else}}
+														<span class="varSitePage{{id}}PageImageUri ">{{sitePage_.pageImageUri}}</span>
+		{{/eq}}
 {{/inline}}

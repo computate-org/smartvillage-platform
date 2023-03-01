@@ -8,6 +8,16 @@ import org.computate.vertx.config.ComputateConfigKeys;
 public class ConfigKeys extends ComputateConfigKeys {
 
 	/**
+	 * Facebook Graph Version
+	 **/
+	public static final String FACEBOOK_GRAPH_VERSION = "FACEBOOK_GRAPH_VERSION";
+
+	/**
+	 * Facebook App ID
+	 **/
+	public static final String FACEBOOK_APP_ID = "FACEBOOK_APP_ID";
+
+	/**
 	 * 
 	 **/
 	public static final String QUAYIO_ORG = "QUAYIO_ORG";
@@ -202,4 +212,11 @@ public class ConfigKeys extends ComputateConfigKeys {
 	 * The FIWARE Context Broker v2 API URI prefix. 
 	 **/
 	public static final String FIWARE_API_URI = "FIWARE_API_URI";
+
+	public static final String SOLR_SSL = "SOLR_SSL";
+
+	public static final String KAFKA_BROKERS = "KAFKA_BROKERS";
+	public static final String KAFKA_GROUP = "KAFKA_GROUP";
+	public static final String KAFKA_TOPIC_SUMO_RUN = "KAFKA_TOPIC_SUMO_RUN";
+	public static final String KAFKA_TOPIC_SUMO_RUN_REPORT = "KAFKA_TOPIC_SUMO_RUN_REPORT";
 }

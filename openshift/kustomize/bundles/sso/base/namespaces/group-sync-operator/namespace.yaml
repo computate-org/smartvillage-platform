@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: group-sync-operator
+  labels:
+    database-engine-admin: 'true'
+spec: {}

@@ -43,7 +43,6 @@ import io.vertx.core.json.JsonObject;
  * Color: 2017-shaded-spruce
  * IconGroup: duotone
  * IconName: code
- * NameVar: htm
  * 
  * Role.enUS: SiteAdmin
  * Description: An HTML part that is indexed in the search engine. 

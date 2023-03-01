@@ -1,0 +1,320 @@
+kind: DeploymentConfig
+apiVersion: apps.openshift.io/v1
+metadata:
+  name: smartabyar-smartvillage
+  namespace: smart-village-view
+spec:
+  strategy:
+    type: Rolling
+    rollingParams:
+      updatePeriodSeconds: 1
+      intervalSeconds: 1
+      timeoutSeconds: 600
+      maxUnavailable: 25%
+      maxSurge: 25%
+    resources: {}
+    activeDeadlineSeconds: 21600
+  triggers:
+    - type: ImageChange
+      imageChangeParams:
+        automatic: true
+        containerNames:
+          - smartabyar-smartvillage
+        from:
+          kind: ImageStreamTag
+          namespace: smart-village-view
+          name: 'smartabyar-smartvillage:latest'
+    - type: ConfigChange
+  replicas: 1
+  selector:
+    app: smartabyar-smartvillage
+    deploymentconfig: smartabyar-smartvillage
+  template:
+    metadata:
+      labels:
+        app: smartabyar-smartvillage
+        deploymentconfig: smartabyar-smartvillage
+    spec:
+      containers:
+        - resources:
+            limits:
+              cpu: '500m'
+              memory: 500Mi
+            requests:
+              cpu: '500m'
+              memory: 500Mi
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 30
+            timeoutSeconds: 5
+            periodSeconds: 20
+            successThreshold: 1
+            failureThreshold: 20
+          terminationMessagePath: /dev/termination-log
+          name: smartabyar-smartvillage
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 30
+            timeoutSeconds: 5
+            periodSeconds: 20
+            successThreshold: 1
+            failureThreshold: 20
+          env:
+            - name: AUTH_REALM
+              valueFrom:
+                secretKeyRef:
+                  name: smartabyar-smartvillage
+                  key: AUTH_REALM
+            - name: AUTH_RESOURCE
+              valueFrom:
+                secretKeyRef:
+                  name: smartabyar-smartvillage
+                  key: AUTH_RESOURCE
+            - name: AUTH_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: smartabyar-smartvillage
+                  key: AUTH_SECRET
+            - name: AUTH_HOST_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: smartabyar-smartvillage
+                  key: AUTH_HOST_NAME
+            - name: AUTH_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: smartabyar-smartvillage
+                  key: AUTH_PORT
+            - name: AUTH_SSL
+              valueFrom:
+                secretKeyRef:
+                  name: smartabyar-smartvillage
+                  key: AUTH_SSL
+            - name: AUTH_URL
+              valueFrom:
+                secretKeyRef:
+                  name: smartabyar-smartvillage
+                  key: AUTH_URL
+            - name: AUTH_TOKEN_URI
+              value: /auth/realms/RH-IMPACT/protocol/openid-connect/token
+            - name: EMAIL_AUTH
+              valueFrom:
+                secretKeyRef:
+                  name: smartabyar-smartvillage
+                  key: EMAIL_AUTH
+            - name: EMAIL_FROM
+              valueFrom:
+                secretKeyRef:
+                  name: smartabyar-smartvillage
+                  key: EMAIL_FROM
+            - name: EMAIL_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: smartabyar-smartvillage
+                  key: EMAIL_HOST
+            - name: EMAIL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: smartabyar-smartvillage
+                  key: EMAIL_PASSWORD
+            - name: EMAIL_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: smartabyar-smartvillage
+                  key: EMAIL_PORT
+            - name: EMAIL_SSL
+              valueFrom:
+                secretKeyRef:
+                  name: smartabyar-smartvillage
+                  key: EMAIL_SSL
+            - name: EMAIL_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: smartabyar-smartvillage
+                  key: EMAIL_USERNAME
+            - name: JDBC_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: smartabyar-smartvillage
+                  key: JDBC_HOST
+            - name: JDBC_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: smartabyar-smartvillage
+                  key: JDBC_PORT
+            - name: JDBC_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: smartabyar-smartvillage
+                  key: JDBC_DATABASE
+            - name: JDBC_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: smartabyar-smartvillage
+                  key: JDBC_USERNAME
+            - name: JDBC_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: smartabyar-smartvillage
+                  key: JDBC_PASSWORD
+            - name: OPENSHIFT_SERVICE
+              value: smartabyar-smartvillage
+            - name: CLUSTER_PORT
+              value: '8081'
+            - name: ZOOKEEPER_HOST_NAME
+              value: default-solrcloud-zookeeper-client.solr.svc.cluster.local
+            - name: ZOOKEEPER_PORT
+              value: '2181'
+            - name: SOLR_HOST_NAME
+              value: default-solrcloud-common.solr.svc.cluster.local
+            - name: SOLR_PORT
+              value: '8983'
+            - name: SOLR_URL
+              value: 'http://default-solrcloud-common.solr.svc.cluster.local/solr/smartabyar-smartvillage'
+            - name: SOLR_COLLECTION
+              value: smartvillage
+            - name: SITE_HOST_NAME
+              value: smartvillage.apps-crc.testing
+            - name: SITE_PORT
+              value: '8080'
+            - name: SITE_BASE_URL
+              value: 'https://smartvillage.apps-crc.testing'
+            - name: STATIC_BASE_URL
+              value: 'https://computate.neocities.org/smartabyar-smartvillage'
+            - name: STATIC_PATH
+              value: /root/src/smartabyar-smartvillage/src/main/resources/webroot
+            - name: SITE_ZONE
+              value: America/New_York
+            - name: SITE_LOCALE
+              value: en-US
+            - name: JAVA_MAIN_CLASS
+              value: org.curriki.api.enus.vertx.MainVerticle
+            - name: SITE_INSTANCES
+              value: '4'
+            - name: WORKER_POOL_SIZE
+              value: '4'
+            - name: ENABLE_IMPORT_DATA
+              value: 'false'
+            - name: AUTH_ROLES_ADMIN
+              value: '["SiteAdmin"]'
+            - name: AUTH_ROLES_REQUIRED_SiteUser
+              value: '["SiteAdmin"]'
+            - name: AUTH_ROLES_REQUIRED_IotNode
+              value: '["SiteAdmin"]'
+            - name: YGGIO_HOST_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: smartabyar-smartvillage
+                  key: YGGIO_HOST_NAME
+            - name: YGGIO_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: smartabyar-smartvillage
+                  key: YGGIO_PORT
+            - name: YGGIO_SSL
+              valueFrom:
+                secretKeyRef:
+                  name: smartabyar-smartvillage
+                  key: YGGIO_SSL
+            - name: YGGIO_API_RELATIVE_URI
+              valueFrom:
+                secretKeyRef:
+                  name: smartabyar-smartvillage
+                  key: YGGIO_API_RELATIVE_URI
+            - name: YGGIO_AUTH_TOKEN_URI
+              valueFrom:
+                secretKeyRef:
+                  name: smartabyar-smartvillage
+                  key: YGGIO_AUTH_TOKEN_URI
+            - name: YGGIO_AUTH_LOCAL_URI
+              valueFrom:
+                secretKeyRef:
+                  name: smartabyar-smartvillage
+                  key: YGGIO_AUTH_LOCAL_URI
+            - name: YGGIO_AUTH_SCOPE
+              valueFrom:
+                secretKeyRef:
+                  name: smartabyar-smartvillage
+                  key: YGGIO_AUTH_SCOPE
+            - name: YGGIO_AUTH_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: smartabyar-smartvillage
+                  key: YGGIO_AUTH_CLIENT_ID
+            - name: YGGIO_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: smartabyar-smartvillage
+                  key: YGGIO_USERNAME
+            - name: YGGIO_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: smartabyar-smartvillage
+                  key: YGGIO_PASSWORD
+            - name: YGGIO_API_RELATIVE_URI_IotNode
+              value: /api/iotnodes
+            - name: FONTAWESOME_KIT
+              valueFrom:
+                secretKeyRef:
+                  name: smartabyar-smartvillage
+                  key: FONTAWESOME_KIT
+            - name: ENABLE_REFRESH_DATA
+              value: 'false'
+            - name: ENABLE_ZOOKEEPER_CLUSTER
+              value: 'true'
+            - name: CLUSTER_HOST_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: status.podIP
+            - name: VERTX_WARNING_EXCEPTION_SECONDS
+              value: '60'
+            - name: CLUSTER_PUBLIC_HOST_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: status.podIP
+            - name: TEMPLATE_PATH
+              value: /root/src/smartabyar-smartvillage/src/main/resources/templates
+            - name: JAVA_OPTS
+            - name: FCD_SYNC_PATH
+              value: /usr/local/share/sumo/fcd
+            - name: DEFAULT_MAP_LOCATION
+              value: '55.61888,13.548799'
+            - name: DEFAULT_MAP_ZOOM
+              value: '11'
+            - name: AUTH_ROLES_REQUIRED_MapResult
+              value: '["SiteAdmin"]'
+            - name: I18N_PATHS
+              value: >-
+                ["/root/src/computate/src/main/resources/org/computate/i18n/i18n_enUS.yml"]
+            - name: DYNAMIC_PAGE_PATHS
+              value: '["/root/src/smartabyar-smartvillage/page"]'
+            - name: ZOOKEEPER_SESSION_TIMEOUT_MILLIS
+              value: '5000'
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+            - name: cluster
+              containerPort: 8081
+              protocol: TCP
+            - name: prometheus
+              containerPort: 9779
+              protocol: TCP
+            - name: jolokia
+              containerPort: 8778
+              protocol: TCP
+            - name: jms
+              containerPort: 3333
+              protocol: TCP
+            - name: debug
+              containerPort: 8998
+              protocol: TCP
+      securityContext: {}

@@ -14,8 +14,8 @@ import org.computate.smartvillageview.enus.model.base.BaseModel;
  * Page: true
  * SuperPage.enUS: BaseModelPage
  * Indexed: true
- * Map.Integer.sqlSort: 2
- * Map.Integer.classSort: 5
+ * SqlOrder: 2
+ * Order: 8
  * 
  * ApiTag.enUS: Traffic Simulation
  * ApiUri.enUS: /api/traffic-simulation
@@ -135,6 +135,118 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 
 	/**
 	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * HtmlRow: 8
+	 * HtmlCell: 1
+	 * Facet: true
+	 * DisplayName: initial params
+	 * Description: 
+	 */
+	protected void _paramInitialPar(Wrap<String> w) {
+		w.o("10, 20, 30, 50, 10, 10, 8, 8, 5, 5");
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * HtmlRow: 9
+	 * HtmlCell: 1
+	 * Facet: true
+	 * DisplayName: Traffic Demand
+	 * Description: 
+	 */
+	protected void _paramLam(Wrap<String> w) {
+		w.o("10, 10, 6, 6");
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * HtmlRow: 10
+	 * HtmlCell: 1
+	 * Facet: true
+	 * DisplayName: demand scale
+	 * Description: 
+	 */
+	protected void _paramDemandScale(Wrap<Integer> w) {
+		w.o(1);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * HtmlRow: 10
+	 * HtmlCell: 2
+	 * Facet: true
+	 * DisplayName: step size
+	 * Description: 
+	 */
+	protected void _paramStepSize(Wrap<Integer> w) {
+		w.o(1);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * HtmlRow: 10
+	 * HtmlCell: 3
+	 * Facet: true
+	 * DisplayName: update step size
+	 * Description: 
+	 */
+	protected void _paramUpdateStepSize(Wrap<Integer> w) {
+		w.o(30);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * HtmlRow: 11
+	 * HtmlCell: 1
+	 * Facet: true
+	 * DisplayName: run time
+	 * Description: Time duration of each simulated sample path. 
+	 */
+	protected void _paramRunTime(Wrap<Integer> w) {
+		w.o(1000);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * HtmlRow: 11
+	 * HtmlCell: 2
+	 * Facet: true
+	 * DisplayName: total iterations
+	 * Description: Total iterations to update performance. 
+	 */
+	protected void _paramTotalIterNum(Wrap<Integer> w) {
+		w.o(10);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * HtmlRow: 11
+	 * HtmlCell: 3
+	 * Facet: true
+	 * DisplayName: iteration repetitions
+	 * Description: Number of repeats per round. 
+	 */
+	protected void _paramItersPerPar(Wrap<Integer> w) {
+		w.o(5);
+	}
+
+	/**
+	 * {@inheritDoc}
 	 * DisplayName: TLS States paths
 	 * Description: The paths to all TLS States files
 	 */
@@ -155,5 +267,11 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 		Optional.ofNullable(simulationName).ifPresent(s -> b.append(" Simulation \"").append(s).append("\""));
 		Optional.ofNullable(sumocfgPath).ifPresent(s -> b.append(" in ").append(s));
 		w.o(b.toString().trim());
+	}
+
+	@Override
+	protected void _objectId(Wrap<String> w) {
+		if(pk != null)
+			w.o(pk.toString());
 	}
 }

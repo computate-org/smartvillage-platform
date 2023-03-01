@@ -1,0 +1,7 @@
+{
+  "id": "master"
+  , "realm": "master"
+  , "displayName": "rh-sso"
+  , "accessCodeLifespan": 300
+  , "accessTokenLifespan": 300
+}
