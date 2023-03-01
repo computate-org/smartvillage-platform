@@ -650,6 +650,14 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 							num++;
 							bParams.add(o2.sqlDeleted());
 						break;
+					case "setStartDateTime":
+							o2.setStartDateTime(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficSimulation.VAR_startDateTime + "=$" + num);
+							num++;
+							bParams.add(o2.sqlStartDateTime());
+						break;
 					case "setSimulationName":
 							o2.setSimulationName(jsonObject.getString(entityVar));
 							if(bParams.size() > 0)
@@ -681,14 +689,6 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 							bSql.append(TrafficSimulation.VAR_netFilePath + "=$" + num);
 							num++;
 							bParams.add(o2.sqlNetFilePath());
-						break;
-					case "setStartDateTime":
-							o2.setStartDateTime(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(TrafficSimulation.VAR_startDateTime + "=$" + num);
-							num++;
-							bParams.add(o2.sqlStartDateTime());
 						break;
 					case "setStartSeconds":
 							o2.setStartSeconds(jsonObject.getString(entityVar));
@@ -1132,6 +1132,15 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 						num++;
 						bParams.add(o2.sqlUserKey());
 						break;
+					case TrafficSimulation.VAR_startDateTime:
+						o2.setStartDateTime(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficSimulation.VAR_startDateTime + "=$" + num);
+						num++;
+						bParams.add(o2.sqlStartDateTime());
+						break;
 					case TrafficSimulation.VAR_simulationName:
 						o2.setSimulationName(jsonObject.getString(entityVar));
 						if(bParams.size() > 0) {
@@ -1167,15 +1176,6 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 						bSql.append(TrafficSimulation.VAR_netFilePath + "=$" + num);
 						num++;
 						bParams.add(o2.sqlNetFilePath());
-						break;
-					case TrafficSimulation.VAR_startDateTime:
-						o2.setStartDateTime(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(TrafficSimulation.VAR_startDateTime + "=$" + num);
-						num++;
-						bParams.add(o2.sqlStartDateTime());
 						break;
 					case TrafficSimulation.VAR_startSeconds:
 						o2.setStartSeconds(jsonObject.getString(entityVar));

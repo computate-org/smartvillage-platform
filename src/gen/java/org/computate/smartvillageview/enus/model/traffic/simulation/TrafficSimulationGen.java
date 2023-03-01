@@ -33,7 +33,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.math.RoundingMode;
 import java.util.Map;
-import java.lang.String;
 import java.time.ZonedDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
@@ -44,6 +43,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.Instant;
 import java.util.Locale;
 import java.time.OffsetDateTime;
+import java.lang.String;
 import java.math.BigDecimal;
 import java.lang.Integer;
 import io.vertx.core.json.JsonArray;
@@ -73,7 +73,28 @@ import org.computate.search.response.solr.SolrResponse;
  * Api: true
  * <p>This class contains a comment <b>"Api: true"</b>, which means this class will have Java Vert.x API backend code generated for these objects. 
  * </p>
- * ApiTag.enUS: Traffic Simulation
+ * ApiMethode: Search
+ * <p>This class contains a comment <b>"ApiMethod: Search"</b>, which creates an API "Search". 
+ * </p>
+ * ApiMethode: GET
+ * <p>This class contains a comment <b>"ApiMethod: GET"</b>, which creates an API "GET". 
+ * </p>
+ * ApiMethode: PATCH
+ * <p>This class contains a comment <b>"ApiMethod: PATCH"</b>, which creates an API "PATCH". 
+ * </p>
+ * ApiMethode: POST
+ * <p>This class contains a comment <b>"ApiMethod: POST"</b>, which creates an API "POST". 
+ * </p>
+ * ApiMethode: PUTImport
+ * <p>This class contains a comment <b>"ApiMethod: PUTImport"</b>, which creates an API "PUTImport". 
+ * </p>
+ * ApiMethode: SearchPage
+ * <p>This class contains a comment <b>"ApiMethod: SearchPage"</b>, which creates an API "SearchPage". 
+ * </p>
+ * ApiMethode: MapSearchPage
+ * <p>This class contains a comment <b>"ApiMethod: MapSearchPage"</b>, which creates an API "MapSearchPage". 
+ * </p>
+ * ApiTag.enUS: true
  * <p>This class contains a comment <b>"ApiTag: Traffic Simulation"</b>, which groups all of the OpenAPIs for TrafficSimulation objects under the tag "Traffic Simulation". 
  * </p>
  * ApiUri.enUS: /api/traffic-simulation
@@ -214,6 +235,84 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	public static final String TrafficSimulation_IconGroup = "duotone";
 	public static final String TrafficSimulation_IconName = "traffic-light-stop";
 	public static final Integer TrafficSimulation_Rows = 100;
+
+	///////////////////
+	// startDateTime //
+	///////////////////
+
+
+	/**	 The entity startDateTime
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonDeserialize(using = ComputateZonedDateTimeDeserializer.class)
+	@JsonSerialize(using = ComputateZonedDateTimeSerializer.class)
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSSV'['VV']'")
+	@JsonInclude(Include.NON_NULL)
+	protected ZonedDateTime startDateTime;
+
+	/**	<br> The entity startDateTime
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation&fq=entiteVar_enUS_indexed_string:startDateTime">Find the entity startDateTime in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _startDateTime(Wrap<ZonedDateTime> w);
+
+	public ZonedDateTime getStartDateTime() {
+		return startDateTime;
+	}
+
+	public void setStartDateTime(ZonedDateTime startDateTime) {
+		this.startDateTime = startDateTime;
+	}
+	@JsonIgnore
+	public void setStartDateTime(Instant o) {
+		this.startDateTime = o == null ? null : ZonedDateTime.from(o).truncatedTo(ChronoUnit.MILLIS);
+	}
+	/** Example: 2011-12-03T10:15:30+01:00 **/
+	@JsonIgnore
+	public void setStartDateTime(String o) {
+		this.startDateTime = TrafficSimulation.staticSetStartDateTime(siteRequest_, o);
+	}
+	public static ZonedDateTime staticSetStartDateTime(SiteRequestEnUS siteRequest_, String o) {
+		if(StringUtils.endsWith(o, "]"))
+			return o == null ? null : ZonedDateTime.parse(o, ComputateZonedDateTimeSerializer.ZONED_DATE_TIME_FORMATTER);
+		else if(StringUtils.endsWith(o, "Z"))
+			return o == null ? null : Instant.parse(o).atZone(Optional.ofNullable(siteRequest_).map(r -> r.getConfig()).map(config -> config.getString(ConfigKeys.SITE_ZONE)).map(z -> ZoneId.of(z)).orElse(ZoneId.of("UTC"))).truncatedTo(ChronoUnit.MILLIS);
+		else if(StringUtils.contains(o, "T"))
+			return o == null ? null : ZonedDateTime.parse(o, DateTimeFormatter.ISO_DATE_TIME).truncatedTo(ChronoUnit.MILLIS);
+		else
+			return o == null ? null : LocalDate.parse(o, DateTimeFormatter.ISO_DATE).atStartOfDay(ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
+	}
+	@JsonIgnore
+	public void setStartDateTime(Date o) {
+		this.startDateTime = o == null ? null : ZonedDateTime.ofInstant(o.toInstant(), ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
+	}
+	protected TrafficSimulation startDateTimeInit() {
+		Wrap<ZonedDateTime> startDateTimeWrap = new Wrap<ZonedDateTime>().var("startDateTime");
+		if(startDateTime == null) {
+			_startDateTime(startDateTimeWrap);
+			setStartDateTime(startDateTimeWrap.o);
+		}
+		return (TrafficSimulation)this;
+	}
+
+	public static Date staticSearchStartDateTime(SiteRequestEnUS siteRequest_, ZonedDateTime o) {
+		return o == null ? null : Date.from(o.toInstant());
+	}
+
+	public static String staticSearchStrStartDateTime(SiteRequestEnUS siteRequest_, Date o) {
+		return "\"" + DateTimeFormatter.ISO_DATE_TIME.format(o.toInstant().atOffset(ZoneOffset.UTC)) + "\"";
+	}
+
+	public static String staticSearchFqStartDateTime(SiteRequestEnUS siteRequest_, String o) {
+		return TrafficSimulation.staticSearchStrStartDateTime(siteRequest_, TrafficSimulation.staticSearchStartDateTime(siteRequest_, TrafficSimulation.staticSetStartDateTime(siteRequest_, o)));
+	}
+
+	public OffsetDateTime sqlStartDateTime() {
+		return startDateTime == null ? null : startDateTime.toOffsetDateTime();
+	}
 
 	////////////////////
 	// simulationName //
@@ -429,84 +528,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 
 	public String sqlNetFilePath() {
 		return netFilePath;
-	}
-
-	///////////////////
-	// startDateTime //
-	///////////////////
-
-
-	/**	 The entity startDateTime
-	 *	 is defined as null before being initialized. 
-	 */
-	@JsonProperty
-	@JsonDeserialize(using = ComputateZonedDateTimeDeserializer.class)
-	@JsonSerialize(using = ComputateZonedDateTimeSerializer.class)
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSSV'['VV']'")
-	@JsonInclude(Include.NON_NULL)
-	protected ZonedDateTime startDateTime;
-
-	/**	<br> The entity startDateTime
-	 *  is defined as null before being initialized. 
-	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation&fq=entiteVar_enUS_indexed_string:startDateTime">Find the entity startDateTime in Solr</a>
-	 * <br>
-	 * @param w is for wrapping a value to assign to this entity during initialization. 
-	 **/
-	protected abstract void _startDateTime(Wrap<ZonedDateTime> w);
-
-	public ZonedDateTime getStartDateTime() {
-		return startDateTime;
-	}
-
-	public void setStartDateTime(ZonedDateTime startDateTime) {
-		this.startDateTime = startDateTime;
-	}
-	@JsonIgnore
-	public void setStartDateTime(Instant o) {
-		this.startDateTime = o == null ? null : ZonedDateTime.from(o).truncatedTo(ChronoUnit.MILLIS);
-	}
-	/** Example: 2011-12-03T10:15:30+01:00 **/
-	@JsonIgnore
-	public void setStartDateTime(String o) {
-		this.startDateTime = TrafficSimulation.staticSetStartDateTime(siteRequest_, o);
-	}
-	public static ZonedDateTime staticSetStartDateTime(SiteRequestEnUS siteRequest_, String o) {
-		if(StringUtils.endsWith(o, "]"))
-			return o == null ? null : ZonedDateTime.parse(o, ComputateZonedDateTimeSerializer.ZONED_DATE_TIME_FORMATTER);
-		else if(StringUtils.endsWith(o, "Z"))
-			return o == null ? null : Instant.parse(o).atZone(Optional.ofNullable(siteRequest_).map(r -> r.getConfig()).map(config -> config.getString(ConfigKeys.SITE_ZONE)).map(z -> ZoneId.of(z)).orElse(ZoneId.of("UTC"))).truncatedTo(ChronoUnit.MILLIS);
-		else if(StringUtils.contains(o, "T"))
-			return o == null ? null : ZonedDateTime.parse(o, DateTimeFormatter.ISO_DATE_TIME).truncatedTo(ChronoUnit.MILLIS);
-		else
-			return o == null ? null : LocalDate.parse(o, DateTimeFormatter.ISO_DATE).atStartOfDay(ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
-	}
-	@JsonIgnore
-	public void setStartDateTime(Date o) {
-		this.startDateTime = o == null ? null : ZonedDateTime.ofInstant(o.toInstant(), ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))).truncatedTo(ChronoUnit.MILLIS);
-	}
-	protected TrafficSimulation startDateTimeInit() {
-		Wrap<ZonedDateTime> startDateTimeWrap = new Wrap<ZonedDateTime>().var("startDateTime");
-		if(startDateTime == null) {
-			_startDateTime(startDateTimeWrap);
-			setStartDateTime(startDateTimeWrap.o);
-		}
-		return (TrafficSimulation)this;
-	}
-
-	public static Date staticSearchStartDateTime(SiteRequestEnUS siteRequest_, ZonedDateTime o) {
-		return o == null ? null : Date.from(o.toInstant());
-	}
-
-	public static String staticSearchStrStartDateTime(SiteRequestEnUS siteRequest_, Date o) {
-		return "\"" + DateTimeFormatter.ISO_DATE_TIME.format(o.toInstant().atOffset(ZoneOffset.UTC)) + "\"";
-	}
-
-	public static String staticSearchFqStartDateTime(SiteRequestEnUS siteRequest_, String o) {
-		return TrafficSimulation.staticSearchStrStartDateTime(siteRequest_, TrafficSimulation.staticSearchStartDateTime(siteRequest_, TrafficSimulation.staticSetStartDateTime(siteRequest_, o)));
-	}
-
-	public OffsetDateTime sqlStartDateTime() {
-		return startDateTime == null ? null : startDateTime.toOffsetDateTime();
 	}
 
 	//////////////////
@@ -1365,11 +1386,11 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		Future.future(a -> a.complete()).compose(a -> {
 			Promise<Void> promise2 = Promise.promise();
 			try {
+				startDateTimeInit();
 				simulationNameInit();
 				sumocfgPathInit();
 				fcdFilePathInit();
 				netFilePathInit();
-				startDateTimeInit();
 				startSecondsInit();
 				endSecondsInit();
 				stepSecondsInit();
@@ -1436,6 +1457,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	public Object obtainTrafficSimulation(String var) {
 		TrafficSimulation oTrafficSimulation = (TrafficSimulation)this;
 		switch(var) {
+			case "startDateTime":
+				return oTrafficSimulation.startDateTime;
 			case "simulationName":
 				return oTrafficSimulation.simulationName;
 			case "sumocfgPath":
@@ -1444,8 +1467,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 				return oTrafficSimulation.fcdFilePath;
 			case "netFilePath":
 				return oTrafficSimulation.netFilePath;
-			case "startDateTime":
-				return oTrafficSimulation.startDateTime;
 			case "startSeconds":
 				return oTrafficSimulation.startSeconds;
 			case "endSeconds":
@@ -1511,6 +1532,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	}
 	public static Object staticSetTrafficSimulation(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "startDateTime":
+			return TrafficSimulation.staticSetStartDateTime(siteRequest_, o);
 		case "simulationName":
 			return TrafficSimulation.staticSetSimulationName(siteRequest_, o);
 		case "sumocfgPath":
@@ -1519,8 +1542,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return TrafficSimulation.staticSetFcdFilePath(siteRequest_, o);
 		case "netFilePath":
 			return TrafficSimulation.staticSetNetFilePath(siteRequest_, o);
-		case "startDateTime":
-			return TrafficSimulation.staticSetStartDateTime(siteRequest_, o);
 		case "startSeconds":
 			return TrafficSimulation.staticSetStartSeconds(siteRequest_, o);
 		case "endSeconds":
@@ -1561,6 +1582,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	}
 	public static Object staticSearchTrafficSimulation(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "startDateTime":
+			return TrafficSimulation.staticSearchStartDateTime(siteRequest_, (ZonedDateTime)o);
 		case "simulationName":
 			return TrafficSimulation.staticSearchSimulationName(siteRequest_, (String)o);
 		case "sumocfgPath":
@@ -1569,8 +1592,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return TrafficSimulation.staticSearchFcdFilePath(siteRequest_, (String)o);
 		case "netFilePath":
 			return TrafficSimulation.staticSearchNetFilePath(siteRequest_, (String)o);
-		case "startDateTime":
-			return TrafficSimulation.staticSearchStartDateTime(siteRequest_, (ZonedDateTime)o);
 		case "startSeconds":
 			return TrafficSimulation.staticSearchStartSeconds(siteRequest_, (BigDecimal)o);
 		case "endSeconds":
@@ -1611,6 +1632,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	}
 	public static String staticSearchStrTrafficSimulation(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "startDateTime":
+			return TrafficSimulation.staticSearchStrStartDateTime(siteRequest_, (Date)o);
 		case "simulationName":
 			return TrafficSimulation.staticSearchStrSimulationName(siteRequest_, (String)o);
 		case "sumocfgPath":
@@ -1619,8 +1642,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return TrafficSimulation.staticSearchStrFcdFilePath(siteRequest_, (String)o);
 		case "netFilePath":
 			return TrafficSimulation.staticSearchStrNetFilePath(siteRequest_, (String)o);
-		case "startDateTime":
-			return TrafficSimulation.staticSearchStrStartDateTime(siteRequest_, (Date)o);
 		case "startSeconds":
 			return TrafficSimulation.staticSearchStrStartSeconds(siteRequest_, (Double)o);
 		case "endSeconds":
@@ -1661,6 +1682,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	}
 	public static String staticSearchFqTrafficSimulation(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "startDateTime":
+			return TrafficSimulation.staticSearchFqStartDateTime(siteRequest_, o);
 		case "simulationName":
 			return TrafficSimulation.staticSearchFqSimulationName(siteRequest_, o);
 		case "sumocfgPath":
@@ -1669,8 +1692,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return TrafficSimulation.staticSearchFqFcdFilePath(siteRequest_, o);
 		case "netFilePath":
 			return TrafficSimulation.staticSearchFqNetFilePath(siteRequest_, o);
-		case "startDateTime":
-			return TrafficSimulation.staticSearchFqStartDateTime(siteRequest_, o);
 		case "startSeconds":
 			return TrafficSimulation.staticSearchFqStartSeconds(siteRequest_, o);
 		case "endSeconds":
@@ -1723,7 +1744,15 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	}
 	public Object persistTrafficSimulation(String var, Object val) {
 		String varLower = var.toLowerCase();
-			if("simulationname".equals(varLower)) {
+			if("startdatetime".equals(varLower)) {
+				if(val instanceof String) {
+					setStartDateTime((String)val);
+				} else if(val instanceof OffsetDateTime) {
+					setStartDateTime(((OffsetDateTime)val).atZoneSameInstant(ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))));
+				}
+				saves.add("startDateTime");
+				return val;
+			} else if("simulationname".equals(varLower)) {
 				if(val instanceof String) {
 					setSimulationName((String)val);
 				}
@@ -1746,14 +1775,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 					setNetFilePath((String)val);
 				}
 				saves.add("netFilePath");
-				return val;
-			} else if("startdatetime".equals(varLower)) {
-				if(val instanceof String) {
-					setStartDateTime((String)val);
-				} else if(val instanceof OffsetDateTime) {
-					setStartDateTime(((OffsetDateTime)val).atZoneSameInstant(ZoneId.of(siteRequest_.getConfig().getString(ConfigKeys.SITE_ZONE))));
-				}
-				saves.add("startDateTime");
 				return val;
 			} else if("startseconds".equals(varLower)) {
 				if(val instanceof String) {
@@ -1861,6 +1882,9 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	}
 
 	public void indexTrafficSimulation(JsonObject doc) {
+		if(startDateTime != null) {
+			doc.put("startDateTime_docvalues_date", DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(ZonedDateTime.ofInstant(startDateTime.toInstant(), ZoneId.of("UTC"))));
+		}
 		if(simulationName != null) {
 			doc.put("simulationName_docvalues_string", simulationName);
 		}
@@ -1872,9 +1896,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		}
 		if(netFilePath != null) {
 			doc.put("netFilePath_docvalues_string", netFilePath);
-		}
-		if(startDateTime != null) {
-			doc.put("startDateTime_docvalues_date", DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(ZonedDateTime.ofInstant(startDateTime.toInstant(), ZoneId.of("UTC"))));
 		}
 		if(startSeconds != null) {
 			doc.put("startSeconds_docvalues_double", startSeconds.doubleValue());
@@ -1915,6 +1936,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 
 	public static String varStoredTrafficSimulation(String entityVar) {
 		switch(entityVar) {
+			case "startDateTime":
+				return "startDateTime_docvalues_date";
 			case "simulationName":
 				return "simulationName_docvalues_string";
 			case "sumocfgPath":
@@ -1923,8 +1946,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 				return "fcdFilePath_docvalues_string";
 			case "netFilePath":
 				return "netFilePath_docvalues_string";
-			case "startDateTime":
-				return "startDateTime_docvalues_date";
 			case "startSeconds":
 				return "startSeconds_docvalues_double";
 			case "endSeconds":
@@ -1954,6 +1975,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 
 	public static String varIndexedTrafficSimulation(String entityVar) {
 		switch(entityVar) {
+			case "startDateTime":
+				return "startDateTime_docvalues_date";
 			case "simulationName":
 				return "simulationName_docvalues_string";
 			case "sumocfgPath":
@@ -1962,8 +1985,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 				return "fcdFilePath_docvalues_string";
 			case "netFilePath":
 				return "netFilePath_docvalues_string";
-			case "startDateTime":
-				return "startDateTime_docvalues_date";
 			case "startSeconds":
 				return "startSeconds_docvalues_double";
 			case "endSeconds":
@@ -1993,6 +2014,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 
 	public static String searchVarTrafficSimulation(String searchVar) {
 		switch(searchVar) {
+			case "startDateTime_docvalues_date":
+				return "startDateTime";
 			case "simulationName_docvalues_string":
 				return "simulationName";
 			case "sumocfgPath_docvalues_string":
@@ -2001,8 +2024,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 				return "fcdFilePath";
 			case "netFilePath_docvalues_string":
 				return "netFilePath";
-			case "startDateTime_docvalues_date":
-				return "startDateTime";
 			case "startSeconds_docvalues_double":
 				return "startSeconds";
 			case "endSeconds_docvalues_double":
@@ -2054,11 +2075,11 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	public void storeTrafficSimulation(SolrResponse.Doc doc) {
 		TrafficSimulation oTrafficSimulation = (TrafficSimulation)this;
 
+		oTrafficSimulation.setStartDateTime(Optional.ofNullable(doc.get("startDateTime_docvalues_date")).map(v -> v.toString()).orElse(null));
 		oTrafficSimulation.setSimulationName(Optional.ofNullable(doc.get("simulationName_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oTrafficSimulation.setSumocfgPath(Optional.ofNullable(doc.get("sumocfgPath_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oTrafficSimulation.setFcdFilePath(Optional.ofNullable(doc.get("fcdFilePath_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oTrafficSimulation.setNetFilePath(Optional.ofNullable(doc.get("netFilePath_docvalues_string")).map(v -> v.toString()).orElse(null));
-		oTrafficSimulation.setStartDateTime(Optional.ofNullable(doc.get("startDateTime_docvalues_date")).map(v -> v.toString()).orElse(null));
 		oTrafficSimulation.setStartSeconds(Optional.ofNullable(doc.get("startSeconds_docvalues_double")).map(v -> v.toString()).orElse(null));
 		oTrafficSimulation.setEndSeconds(Optional.ofNullable(doc.get("endSeconds_docvalues_double")).map(v -> v.toString()).orElse(null));
 		oTrafficSimulation.setStepSeconds(Optional.ofNullable(doc.get("stepSeconds_docvalues_double")).map(v -> v.toString()).orElse(null));
@@ -2083,6 +2104,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		Object o = Optional.ofNullable(apiRequest).map(ApiRequest::getOriginal).orElse(null);
 		if(o != null && o instanceof TrafficSimulation) {
 			TrafficSimulation original = (TrafficSimulation)o;
+			if(!Objects.equals(startDateTime, original.getStartDateTime()))
+				apiRequest.addVars("startDateTime");
 			if(!Objects.equals(simulationName, original.getSimulationName()))
 				apiRequest.addVars("simulationName");
 			if(!Objects.equals(sumocfgPath, original.getSumocfgPath()))
@@ -2091,8 +2114,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 				apiRequest.addVars("fcdFilePath");
 			if(!Objects.equals(netFilePath, original.getNetFilePath()))
 				apiRequest.addVars("netFilePath");
-			if(!Objects.equals(startDateTime, original.getStartDateTime()))
-				apiRequest.addVars("startDateTime");
 			if(!Objects.equals(startSeconds, original.getStartSeconds()))
 				apiRequest.addVars("startSeconds");
 			if(!Objects.equals(endSeconds, original.getEndSeconds()))
@@ -2126,11 +2147,11 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	@Override public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(super.toString());
+		sb.append(Optional.ofNullable(startDateTime).map(v -> "startDateTime: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(simulationName).map(v -> "simulationName: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(sumocfgPath).map(v -> "sumocfgPath: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(fcdFilePath).map(v -> "fcdFilePath: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(netFilePath).map(v -> "netFilePath: \"" + v + "\"\n" ).orElse(""));
-		sb.append(Optional.ofNullable(startDateTime).map(v -> "startDateTime: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(startSeconds).map(v -> "startSeconds: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(endSeconds).map(v -> "endSeconds: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(stepSeconds).map(v -> "stepSeconds: " + v + "\n").orElse(""));
@@ -2146,11 +2167,11 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	}
 
 	public static final String CLASS_SIMPLE_NAME = "TrafficSimulation";
+	public static final String VAR_startDateTime = "startDateTime";
 	public static final String VAR_simulationName = "simulationName";
 	public static final String VAR_sumocfgPath = "sumocfgPath";
 	public static final String VAR_fcdFilePath = "fcdFilePath";
 	public static final String VAR_netFilePath = "netFilePath";
-	public static final String VAR_startDateTime = "startDateTime";
 	public static final String VAR_startSeconds = "startSeconds";
 	public static final String VAR_endSeconds = "endSeconds";
 	public static final String VAR_stepSeconds = "stepSeconds";
@@ -2177,11 +2198,11 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		return TrafficSimulation.varsFqTrafficSimulation(new ArrayList<String>());
 	}
 	public static List<String> varsFqTrafficSimulation(List<String> vars) {
+		vars.add(VAR_startDateTime);
 		vars.add(VAR_simulationName);
 		vars.add(VAR_sumocfgPath);
 		vars.add(VAR_fcdFilePath);
 		vars.add(VAR_netFilePath);
-		vars.add(VAR_startDateTime);
 		vars.add(VAR_startSeconds);
 		vars.add(VAR_endSeconds);
 		vars.add(VAR_stepSeconds);
@@ -2215,11 +2236,11 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		return vars;
 	}
 
+	public static final String DISPLAY_NAME_startDateTime = "Start date and Time";
 	public static final String DISPLAY_NAME_simulationName = "simulation name";
 	public static final String DISPLAY_NAME_sumocfgPath = "sumocfg path";
 	public static final String DISPLAY_NAME_fcdFilePath = "Floating Car Data file path";
 	public static final String DISPLAY_NAME_netFilePath = "net file path";
-	public static final String DISPLAY_NAME_startDateTime = "Start date and Time";
 	public static final String DISPLAY_NAME_startSeconds = "start seconds";
 	public static final String DISPLAY_NAME_endSeconds = "end seconds";
 	public static final String DISPLAY_NAME_stepSeconds = "step seconds";
@@ -2239,6 +2260,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	}
 	public static String displayNameTrafficSimulation(String var) {
 		switch(var) {
+		case VAR_startDateTime:
+			return DISPLAY_NAME_startDateTime;
 		case VAR_simulationName:
 			return DISPLAY_NAME_simulationName;
 		case VAR_sumocfgPath:
@@ -2247,8 +2270,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return DISPLAY_NAME_fcdFilePath;
 		case VAR_netFilePath:
 			return DISPLAY_NAME_netFilePath;
-		case VAR_startDateTime:
-			return DISPLAY_NAME_startDateTime;
 		case VAR_startSeconds:
 			return DISPLAY_NAME_startSeconds;
 		case VAR_endSeconds:
@@ -2307,6 +2328,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 
 	public static String classSimpleNameTrafficSimulation(String var) {
 		switch(var) {
+		case VAR_startDateTime:
+			return "ZonedDateTime";
 		case VAR_simulationName:
 			return "String";
 		case VAR_sumocfgPath:
@@ -2315,8 +2338,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return "String";
 		case VAR_netFilePath:
 			return "String";
-		case VAR_startDateTime:
-			return "ZonedDateTime";
 		case VAR_startSeconds:
 			return "BigDecimal";
 		case VAR_endSeconds:
@@ -2357,20 +2378,20 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 
 	public static Integer htmlRowTrafficSimulation(String var) {
 		switch(var) {
+		case VAR_startDateTime:
+			return 6;
 		case VAR_simulationName:
 			return 3;
 		case VAR_sumocfgPath:
 			return 4;
 		case VAR_fcdFilePath:
 			return 5;
-		case VAR_startDateTime:
-			return 6;
 		case VAR_startSeconds:
-			return 7;
+			return 6;
 		case VAR_endSeconds:
-			return 7;
+			return 6;
 		case VAR_stepSeconds:
-			return 7;
+			return 6;
 		case VAR_paramInitialPar:
 			return 8;
 		case VAR_paramLam:
@@ -2394,13 +2415,13 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 
 	public static Integer htmlCellTrafficSimulation(String var) {
 		switch(var) {
+		case VAR_startDateTime:
+			return 1;
 		case VAR_simulationName:
 			return 1;
 		case VAR_sumocfgPath:
 			return 1;
 		case VAR_fcdFilePath:
-			return 1;
-		case VAR_startDateTime:
 			return 1;
 		case VAR_startSeconds:
 			return 1;

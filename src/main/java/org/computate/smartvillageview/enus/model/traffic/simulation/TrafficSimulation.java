@@ -1,6 +1,7 @@
 package org.computate.smartvillageview.enus.model.traffic.simulation;
 
 import java.math.BigDecimal;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,6 +48,18 @@ import org.computate.smartvillageview.enus.model.base.BaseModel;
  * Rows: 100
  */
 public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * HtmlRow: 6
+	 * HtmlCell: 1
+	 * Facet: true
+	 * DisplayName: Start date and Time
+	 * Description: The start date and time. 
+	 */
+	protected void _startDateTime(Wrap<ZonedDateTime> w) {
+	}
 
 	/**
 	 * {@inheritDoc}

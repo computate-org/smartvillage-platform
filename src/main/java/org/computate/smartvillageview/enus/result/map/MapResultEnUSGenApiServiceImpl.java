@@ -110,19 +110,7 @@ public class MapResultEnUSGenApiServiceImpl extends BaseApiServiceImpl implement
 	public void searchMapResult(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 
-			webClient.post(
-					config.getInteger(ConfigKeys.AUTH_PORT)
-					, config.getString(ConfigKeys.AUTH_HOST_NAME)
-					, config.getString(ConfigKeys.AUTH_TOKEN_URI)
-					)
-					.ssl(config.getBoolean(ConfigKeys.AUTH_SSL))
-					.putHeader("Authorization", String.format("Bearer %s", siteRequest.getUser().principal().getString("access_token")))
-					.sendForm(MultiMap.caseInsensitiveMultiMap()
-							.add("grant_type", "urn:ietf:params:oauth:grant-type:uma-ticket")
-							.add("audience", config.getString(ConfigKeys.AUTH_CLIENT))
-							.add("response_mode", "decision")
-							.add("permission", String.format("%s#%s", MapResult.CLASS_SIMPLE_NAME, "Search"))
-			).onFailure(ex -> {
+			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
 				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 				eventHandler.handle(Future.succeededFuture(
 					new ServiceResponse(401, "UNAUTHORIZED",
@@ -134,21 +122,21 @@ public class MapResultEnUSGenApiServiceImpl extends BaseApiServiceImpl implement
 							), MultiMap.caseInsensitiveMultiMap()
 					)
 				));
-			}).onSuccess(authorizationDecision -> {
-				try {
-					if(!authorizationDecision.bodyAsJsonObject().getBoolean("result")) {
-						String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
-						eventHandler.handle(Future.succeededFuture(
-							new ServiceResponse(401, "UNAUTHORIZED",
-								Buffer.buffer().appendString(
-									new JsonObject()
-										.put("errorCode", "401")
-										.put("errorMessage", msg)
-										.encodePrettily()
-									), MultiMap.caseInsensitiveMultiMap()
-							)
-						));
-					} else {
+			}).onSuccess(b -> {
+				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_MapResult")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+					eventHandler.handle(Future.succeededFuture(
+						new ServiceResponse(401, "UNAUTHORIZED",
+							Buffer.buffer().appendString(
+								new JsonObject()
+									.put("errorCode", "401")
+									.put("errorMessage", msg)
+									.encodePrettily()
+								), MultiMap.caseInsensitiveMultiMap()
+						)
+					));
+				} else {
+					try {
 						searchMapResultList(siteRequest, false, true, false).onSuccess(listMapResult -> {
 							response200SearchMapResult(listMapResult).onSuccess(response -> {
 								eventHandler.handle(Future.succeededFuture(response));
@@ -161,10 +149,10 @@ public class MapResultEnUSGenApiServiceImpl extends BaseApiServiceImpl implement
 							LOG.error(String.format("searchMapResult failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
+					} catch(Exception ex) {
+						LOG.error(String.format("searchMapResult failed. "), ex);
+						error(null, eventHandler, ex);
 					}
-				} catch(Exception ex) {
-					LOG.error(String.format("searchMapResult failed. "), ex);
-					error(null, eventHandler, ex);
 				}
 			});
 		}).onFailure(ex -> {
@@ -275,19 +263,7 @@ public class MapResultEnUSGenApiServiceImpl extends BaseApiServiceImpl implement
 	public void getMapResult(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 
-			webClient.post(
-					config.getInteger(ConfigKeys.AUTH_PORT)
-					, config.getString(ConfigKeys.AUTH_HOST_NAME)
-					, config.getString(ConfigKeys.AUTH_TOKEN_URI)
-					)
-					.ssl(config.getBoolean(ConfigKeys.AUTH_SSL))
-					.putHeader("Authorization", String.format("Bearer %s", siteRequest.getUser().principal().getString("access_token")))
-					.sendForm(MultiMap.caseInsensitiveMultiMap()
-							.add("grant_type", "urn:ietf:params:oauth:grant-type:uma-ticket")
-							.add("audience", config.getString(ConfigKeys.AUTH_CLIENT))
-							.add("response_mode", "decision")
-							.add("permission", String.format("%s#%s", MapResult.CLASS_SIMPLE_NAME, "GET"))
-			).onFailure(ex -> {
+			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
 				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 				eventHandler.handle(Future.succeededFuture(
 					new ServiceResponse(401, "UNAUTHORIZED",
@@ -299,21 +275,21 @@ public class MapResultEnUSGenApiServiceImpl extends BaseApiServiceImpl implement
 							), MultiMap.caseInsensitiveMultiMap()
 					)
 				));
-			}).onSuccess(authorizationDecision -> {
-				try {
-					if(!authorizationDecision.bodyAsJsonObject().getBoolean("result")) {
-						String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
-						eventHandler.handle(Future.succeededFuture(
-							new ServiceResponse(401, "UNAUTHORIZED",
-								Buffer.buffer().appendString(
-									new JsonObject()
-										.put("errorCode", "401")
-										.put("errorMessage", msg)
-										.encodePrettily()
-									), MultiMap.caseInsensitiveMultiMap()
-							)
-						));
-					} else {
+			}).onSuccess(b -> {
+				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_MapResult")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+					eventHandler.handle(Future.succeededFuture(
+						new ServiceResponse(401, "UNAUTHORIZED",
+							Buffer.buffer().appendString(
+								new JsonObject()
+									.put("errorCode", "401")
+									.put("errorMessage", msg)
+									.encodePrettily()
+								), MultiMap.caseInsensitiveMultiMap()
+						)
+					));
+				} else {
+					try {
 						searchMapResultList(siteRequest, false, true, false).onSuccess(listMapResult -> {
 							response200GETMapResult(listMapResult).onSuccess(response -> {
 								eventHandler.handle(Future.succeededFuture(response));
@@ -326,10 +302,10 @@ public class MapResultEnUSGenApiServiceImpl extends BaseApiServiceImpl implement
 							LOG.error(String.format("getMapResult failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
+					} catch(Exception ex) {
+						LOG.error(String.format("getMapResult failed. "), ex);
+						error(null, eventHandler, ex);
 					}
-				} catch(Exception ex) {
-					LOG.error(String.format("getMapResult failed. "), ex);
-					error(null, eventHandler, ex);
 				}
 			});
 		}).onFailure(ex -> {
@@ -383,19 +359,7 @@ public class MapResultEnUSGenApiServiceImpl extends BaseApiServiceImpl implement
 	public void searchpageMapResult(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 
-			webClient.post(
-					config.getInteger(ConfigKeys.AUTH_PORT)
-					, config.getString(ConfigKeys.AUTH_HOST_NAME)
-					, config.getString(ConfigKeys.AUTH_TOKEN_URI)
-					)
-					.ssl(config.getBoolean(ConfigKeys.AUTH_SSL))
-					.putHeader("Authorization", String.format("Bearer %s", siteRequest.getUser().principal().getString("access_token")))
-					.sendForm(MultiMap.caseInsensitiveMultiMap()
-							.add("grant_type", "urn:ietf:params:oauth:grant-type:uma-ticket")
-							.add("audience", config.getString(ConfigKeys.AUTH_CLIENT))
-							.add("response_mode", "decision")
-							.add("permission", String.format("%s#%s", MapResult.CLASS_SIMPLE_NAME, "SearchPage"))
-			).onFailure(ex -> {
+			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
 				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 				eventHandler.handle(Future.succeededFuture(
 					new ServiceResponse(401, "UNAUTHORIZED",
@@ -407,21 +371,21 @@ public class MapResultEnUSGenApiServiceImpl extends BaseApiServiceImpl implement
 							), MultiMap.caseInsensitiveMultiMap()
 					)
 				));
-			}).onSuccess(authorizationDecision -> {
-				try {
-					if(!authorizationDecision.bodyAsJsonObject().getBoolean("result")) {
-						String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
-						eventHandler.handle(Future.succeededFuture(
-							new ServiceResponse(401, "UNAUTHORIZED",
-								Buffer.buffer().appendString(
-									new JsonObject()
-										.put("errorCode", "401")
-										.put("errorMessage", msg)
-										.encodePrettily()
-									), MultiMap.caseInsensitiveMultiMap()
-							)
-						));
-					} else {
+			}).onSuccess(b -> {
+				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_MapResult")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+					eventHandler.handle(Future.succeededFuture(
+						new ServiceResponse(401, "UNAUTHORIZED",
+							Buffer.buffer().appendString(
+								new JsonObject()
+									.put("errorCode", "401")
+									.put("errorMessage", msg)
+									.encodePrettily()
+								), MultiMap.caseInsensitiveMultiMap()
+						)
+					));
+				} else {
+					try {
 						searchMapResultList(siteRequest, false, true, false).onSuccess(listMapResult -> {
 							response200SearchPageMapResult(listMapResult).onSuccess(response -> {
 								eventHandler.handle(Future.succeededFuture(response));
@@ -434,10 +398,10 @@ public class MapResultEnUSGenApiServiceImpl extends BaseApiServiceImpl implement
 							LOG.error(String.format("searchpageMapResult failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
+					} catch(Exception ex) {
+						LOG.error(String.format("searchpageMapResult failed. "), ex);
+						error(null, eventHandler, ex);
 					}
-				} catch(Exception ex) {
-					LOG.error(String.format("searchpageMapResult failed. "), ex);
-					error(null, eventHandler, ex);
 				}
 			});
 		}).onFailure(ex -> {
@@ -856,6 +820,7 @@ public class MapResultEnUSGenApiServiceImpl extends BaseApiServiceImpl implement
 				String solrHostName = siteRequest.getConfig().getString(ConfigKeys.SOLR_HOST_NAME);
 				Integer solrPort = siteRequest.getConfig().getInteger(ConfigKeys.SOLR_PORT);
 				String solrCollection = siteRequest.getConfig().getString(ConfigKeys.SOLR_COLLECTION);
+				Boolean solrSsl = siteRequest.getConfig().getBoolean(ConfigKeys.SOLR_SSL);
 				Boolean softCommit = Optional.ofNullable(siteRequest.getServiceRequest().getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getBoolean("softCommit")).orElse(null);
 				Integer commitWithin = Optional.ofNullable(siteRequest.getServiceRequest().getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getInteger("commitWithin")).orElse(null);
 					if(softCommit == null && commitWithin == null)
@@ -863,7 +828,7 @@ public class MapResultEnUSGenApiServiceImpl extends BaseApiServiceImpl implement
 					else if(softCommit == null)
 						softCommit = false;
 				String solrRequestUri = String.format("/solr/%s/update%s%s%s", solrCollection, "?overwrite=true&wt=json", softCommit ? "&softCommit=true" : "", commitWithin != null ? ("&commitWithin=" + commitWithin) : "");
-				webClient.post(solrPort, solrHostName, solrRequestUri).putHeader("Content-Type", "application/json").expect(ResponsePredicate.SC_OK).sendBuffer(json.toBuffer()).onSuccess(b -> {
+				webClient.post(solrPort, solrHostName, solrRequestUri).ssl(solrSsl).putHeader("Content-Type", "application/json").expect(ResponsePredicate.SC_OK).sendBuffer(json.toBuffer()).onSuccess(b -> {
 					promise.complete();
 				}).onFailure(ex -> {
 					LOG.error(String.format("indexMapResult failed. "), new RuntimeException(ex));

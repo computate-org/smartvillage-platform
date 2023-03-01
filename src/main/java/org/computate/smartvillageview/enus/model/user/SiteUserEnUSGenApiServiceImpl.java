@@ -109,8 +109,8 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 	@Override
 	public void searchSiteUser(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
-				try {
-					{
+				{
+					try {
 						searchSiteUserList(siteRequest, false, true, false).onSuccess(listSiteUser -> {
 							response200SearchSiteUser(listSiteUser).onSuccess(response -> {
 								eventHandler.handle(Future.succeededFuture(response));
@@ -123,10 +123,10 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							LOG.error(String.format("searchSiteUser failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
+					} catch(Exception ex) {
+						LOG.error(String.format("searchSiteUser failed. "), ex);
+						error(null, eventHandler, ex);
 					}
-				} catch(Exception ex) {
-					LOG.error(String.format("searchSiteUser failed. "), ex);
-					error(null, eventHandler, ex);
 				}
 		}).onFailure(ex -> {
 			if("Inactive Token".equals(ex.getMessage()) || StringUtils.startsWith(ex.getMessage(), "invalid_grant:")) {
@@ -236,8 +236,8 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 	public void patchSiteUser(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		LOG.debug(String.format("patchSiteUser started. "));
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
-				try {
-					{
+				{
+					try {
 						searchSiteUserList(siteRequest, false, true, true).onSuccess(listSiteUser -> {
 							try {
 								if(listSiteUser.getResponse().getResponse().getNumFound() > 1
@@ -280,10 +280,10 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							LOG.error(String.format("patchSiteUser failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
+					} catch(Exception ex) {
+						LOG.error(String.format("patchSiteUser failed. "), ex);
+						error(null, eventHandler, ex);
 					}
-				} catch(Exception ex) {
-					LOG.error(String.format("patchSiteUser failed. "), ex);
-					error(null, eventHandler, ex);
 				}
 		}).onFailure(ex -> {
 			if("Inactive Token".equals(ex.getMessage()) || StringUtils.startsWith(ex.getMessage(), "invalid_grant:")) {
@@ -625,8 +625,8 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 	public void postSiteUser(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		LOG.debug(String.format("postSiteUser started. "));
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
-				try {
-					{
+				{
+					try {
 						ApiRequest apiRequest = new ApiRequest();
 						apiRequest.setRows(1L);
 						apiRequest.setNumFound(1L);
@@ -662,10 +662,10 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							LOG.error(String.format("postSiteUser failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
+					} catch(Exception ex) {
+						LOG.error(String.format("postSiteUser failed. "), ex);
+						error(null, eventHandler, ex);
 					}
-				} catch(Exception ex) {
-					LOG.error(String.format("postSiteUser failed. "), ex);
-					error(null, eventHandler, ex);
 				}
 		}).onFailure(ex -> {
 			if("Inactive Token".equals(ex.getMessage()) || StringUtils.startsWith(ex.getMessage(), "invalid_grant:")) {
@@ -1031,8 +1031,8 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 	public void putimportSiteUser(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		LOG.debug(String.format("putimportSiteUser started. "));
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
-				try {
-					{
+				{
+					try {
 						try {
 							ApiRequest apiRequest = new ApiRequest();
 							JsonArray jsonArray = Optional.ofNullable(siteRequest.getJsonObject()).map(o -> o.getJsonArray("list")).orElse(new JsonArray());
@@ -1063,10 +1063,10 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							LOG.error(String.format("putimportSiteUser failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						}
+					} catch(Exception ex) {
+						LOG.error(String.format("putimportSiteUser failed. "), ex);
+						error(null, eventHandler, ex);
 					}
-				} catch(Exception ex) {
-					LOG.error(String.format("putimportSiteUser failed. "), ex);
-					error(null, eventHandler, ex);
 				}
 		}).onFailure(ex -> {
 			if("Inactive Token".equals(ex.getMessage()) || StringUtils.startsWith(ex.getMessage(), "invalid_grant:")) {
@@ -1289,8 +1289,8 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 	@Override
 	public void searchpageSiteUser(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
-				try {
-					{
+				{
+					try {
 						searchSiteUserList(siteRequest, false, true, false).onSuccess(listSiteUser -> {
 							response200SearchPageSiteUser(listSiteUser).onSuccess(response -> {
 								eventHandler.handle(Future.succeededFuture(response));
@@ -1303,10 +1303,10 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							LOG.error(String.format("searchpageSiteUser failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
+					} catch(Exception ex) {
+						LOG.error(String.format("searchpageSiteUser failed. "), ex);
+						error(null, eventHandler, ex);
 					}
-				} catch(Exception ex) {
-					LOG.error(String.format("searchpageSiteUser failed. "), ex);
-					error(null, eventHandler, ex);
 				}
 		}).onFailure(ex -> {
 			if("Inactive Token".equals(ex.getMessage()) || StringUtils.startsWith(ex.getMessage(), "invalid_grant:")) {

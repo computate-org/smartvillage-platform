@@ -16495,6 +16495,8 @@ components:
               items:
                 type: object
                 properties:
+                  startDateTime:
+                    type: string
                   simulationName:
                     type: string
                   sumocfgPath:
@@ -16502,8 +16504,6 @@ components:
                   fcdFilePath:
                     type: string
                   netFilePath:
-                    type: string
-                  startDateTime:
                     type: string
                   startSeconds:
                     type: string
@@ -16539,6 +16539,13 @@ components:
       allOf:
         - type: object
           properties:
+            setStartDateTime:
+              type: string
+              nullable: true
+            removeStartDateTime:
+              type: string
+            removeAllStartDateTime:
+              type: string
             setSimulationName:
               type: string
               nullable: true
@@ -16566,13 +16573,6 @@ components:
             removeNetFilePath:
               type: string
             removeAllNetFilePath:
-              type: string
-            setStartDateTime:
-              type: string
-              nullable: true
-            removeStartDateTime:
-              type: string
-            removeAllStartDateTime:
               type: string
             setStartSeconds:
               type: string
@@ -16689,6 +16689,13 @@ components:
       allOf:
         - type: object
           properties:
+            setStartDateTime:
+              type: string
+              nullable: true
+            removeStartDateTime:
+              type: string
+            removeAllStartDateTime:
+              type: string
             setSimulationName:
               type: string
               nullable: true
@@ -16716,13 +16723,6 @@ components:
             removeNetFilePath:
               type: string
             removeAllNetFilePath:
-              type: string
-            setStartDateTime:
-              type: string
-              nullable: true
-            removeStartDateTime:
-              type: string
-            removeAllStartDateTime:
               type: string
             setStartSeconds:
               type: string
@@ -16839,6 +16839,8 @@ components:
       allOf:
         - type: object
           properties:
+            startDateTime:
+              type: string
             simulationName:
               type: string
             sumocfgPath:
@@ -16846,8 +16848,6 @@ components:
             fcdFilePath:
               type: string
             netFilePath:
-              type: string
-            startDateTime:
               type: string
             startSeconds:
               type: string
@@ -16883,6 +16883,8 @@ components:
       allOf:
         - type: object
           properties:
+            startDateTime:
+              type: string
             simulationName:
               type: string
             sumocfgPath:
@@ -16890,8 +16892,6 @@ components:
             fcdFilePath:
               type: string
             netFilePath:
-              type: string
-            startDateTime:
               type: string
             startSeconds:
               type: string
@@ -16927,6 +16927,8 @@ components:
       allOf:
         - type: object
           properties:
+            startDateTime:
+              type: string
             simulationName:
               type: string
             sumocfgPath:
@@ -16934,8 +16936,6 @@ components:
             fcdFilePath:
               type: string
             netFilePath:
-              type: string
-            startDateTime:
               type: string
             startSeconds:
               type: string
@@ -16971,6 +16971,8 @@ components:
       allOf:
         - type: object
           properties:
+            startDateTime:
+              type: string
             simulationName:
               type: string
             sumocfgPath:
@@ -16978,8 +16980,6 @@ components:
             fcdFilePath:
               type: string
             netFilePath:
-              type: string
-            startDateTime:
               type: string
             startSeconds:
               type: string
@@ -17015,6 +17015,8 @@ components:
       allOf:
         - type: object
           properties:
+            startDateTime:
+              type: string
             simulationName:
               type: string
             sumocfgPath:
@@ -17022,8 +17024,6 @@ components:
             fcdFilePath:
               type: string
             netFilePath:
-              type: string
-            startDateTime:
               type: string
             startSeconds:
               type: string
