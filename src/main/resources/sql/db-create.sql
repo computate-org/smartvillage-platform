@@ -40,3 +40,13 @@ ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS archived boolean;
 ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS deleted boolean;
 ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS sessionId text;
 ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS userKey bigint;
+
+CREATE TABLE IF NOT EXISTS SimulationReport();
+ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS simulationName text;
+ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS pk bigserial primary key;
+ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS inheritPk text;
+ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS created timestamp with time zone;
+ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS archived boolean;
+ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS deleted boolean;
+ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS sessionId text;
+ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS userKey bigint;

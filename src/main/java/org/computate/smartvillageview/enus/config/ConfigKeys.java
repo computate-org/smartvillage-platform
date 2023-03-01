@@ -214,4 +214,9 @@ public class ConfigKeys extends ComputateConfigKeys {
 	public static final String FIWARE_API_URI = "FIWARE_API_URI";
 
 	public static final String SOLR_SSL = "SOLR_SSL";
+
+	public static final String KAFKA_BROKERS = "KAFKA_BROKERS";
+	public static final String KAFKA_GROUP = "KAFKA_GROUP";
+	public static final String KAFKA_TOPIC_SUMO_RUN = "KAFKA_TOPIC_SUMO_RUN";
+	public static final String KAFKA_TOPIC_SUMO_RUN_REPORT = "KAFKA_TOPIC_SUMO_RUN_REPORT";
 }

@@ -89,6 +89,8 @@ import io.vertx.core.json.JsonArray;
  **/
 public abstract class MainVerticleGen<DEV> extends AbstractVerticle {
 	protected static final Logger LOG = LoggerFactory.getLogger(MainVerticle.class);
+
+	public static final String SITE_NAME = "smartabyar-smartvillage";
 	public static final String configureDataConnectionError1 = "Could not open the database client connection. ";
 	public static final String configureDataConnectionError = configureDataConnectionError1;
 	public static final String configureDataConnectionSuccess1 = "The database client connection was successful. ";

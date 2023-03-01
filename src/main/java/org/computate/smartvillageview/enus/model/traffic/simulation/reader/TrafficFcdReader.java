@@ -208,7 +208,7 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 	public Future<Void> searchTrafficSimulation() {
 		Promise<Void> promise = Promise.promise();
 		try {
-			TrafficSimulationEnUSGenApiServiceImpl service = new TrafficSimulationEnUSGenApiServiceImpl(null, config, workerExecutor, null, webClient, null, null, null);
+			TrafficSimulationEnUSGenApiServiceImpl service = new TrafficSimulationEnUSGenApiServiceImpl(null, config, workerExecutor, null, null, webClient, null, null, null);
 			JsonObject body = new JsonObject();
 			SiteRequestEnUS siteRequest = service.generateSiteRequest(null, null, null, body, SiteRequestEnUS.class);
 			ServiceRequest serviceRequest = new ServiceRequest();

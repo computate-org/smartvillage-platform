@@ -16,6 +16,23 @@ spec:
         port: 9093
         type: internal
         tls: true
+      - name: external
+        port: 9094
+        tls: false
+        type: nodeport
+        configuration:
+          bootstrap:
+            nodePort: 32100
+          brokers:
+            - broker: 0
+              nodePort: 32000
+              advertisedHost: kafka0.apps-crc.testing
+            - broker: 1
+              nodePort: 32001
+              advertisedHost: kafka1.apps-crc.testing
+            - broker: 2
+              nodePort: 32002
+              advertisedHost: kafka2.apps-crc.testing
     storage:
       type: ephemeral
   zookeeper:

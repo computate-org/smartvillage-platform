@@ -54,3 +54,4 @@ touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvill
 touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/model/iotnode/IotNode.java
 touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/model/traffic/light/step/TrafficLightStep.java
 touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/model/traffic/light/TrafficLight.java
+touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/model/traffic/simulation/report/SimulationReport.java

@@ -8,8 +8,6 @@ import org.computate.search.request.SearchRequest;
 import org.computate.smartvillageview.enus.config.ConfigKeys;
 import org.computate.smartvillageview.enus.vertx.MainVerticle;
 import org.computate.vertx.search.list.SearchList;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -50,6 +48,7 @@ import io.vertx.ext.web.client.impl.WebClientBase;
 import io.vertx.junit5.RunTestOnContext;
 import io.vertx.junit5.VertxExtension;
 import io.vertx.junit5.VertxTestContext;
+import io.vertx.kafka.client.producer.KafkaProducer;
 import io.vertx.pgclient.PgPool;
 
 @ExtendWith(VertxExtension.class)
@@ -69,6 +68,8 @@ public class TrafficSimulationTest {
 	private static WebClientBase webClient;
 
 	private static PgPool pgPool;
+
+	private KafkaProducer<String, String> kafkaProducer;
 
 	private static String mainVerticleDeploymentId;
 
@@ -216,7 +217,7 @@ public class TrafficSimulationTest {
 
 	@Test
 	public void testServiceMethods(VertxTestContext testContext) {
-		TrafficSimulationEnUSGenApiServiceImpl service = new TrafficSimulationEnUSGenApiServiceImpl(vertx.eventBus(), mainVerticle.config(), null, pgPool, webClient, oauth2AuthenticationProvider, null, null);
+		TrafficSimulationEnUSGenApiServiceImpl service = new TrafficSimulationEnUSGenApiServiceImpl(vertx.eventBus(), mainVerticle.config(), null, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, null, null);
 		SearchList<TrafficSimulation> searchList = new SearchList<>();
 
 		try {
