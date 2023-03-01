@@ -15,13 +15,13 @@ import org.computate.smartvillageview.enus.result.map.MapResult;
  * ApiTag.enUS: Traffic Light
  * ApiUri.enUS: /api/traffic-light
  * 
- * ApiMethod.enUS: Search
+ * ApiMethod: Search
  * ApiMethod: GET
  * ApiMethod: PATCH
  * ApiMethod: POST
  * ApiMethod: PUTImport
  * 
- * ApiMethod.enUS: SearchPage
+ * ApiMethod: SearchPage
  * Page.SearchPage.enUS: TrafficLightPage
  * ApiUri.SearchPage.enUS: /traffic-light
  * 

@@ -18,13 +18,13 @@ import io.vertx.pgclient.data.Point;
  * ApiTag.enUS: Vehicle Step
  * ApiUri.enUS: /api/vehicle-step
  * 
- * ApiMethod.enUS: Search
+ * ApiMethod: Search
  * ApiMethod: GET
  * ApiMethod: PATCH
  * ApiMethod: POST
  * ApiMethod: PUTImport
  * 
- * ApiMethod.enUS: SearchPage
+ * ApiMethod: SearchPage
  * Page.SearchPage.enUS: VehicleStepPage
  * ApiUri.SearchPage.enUS: /vehicle-step
  * 

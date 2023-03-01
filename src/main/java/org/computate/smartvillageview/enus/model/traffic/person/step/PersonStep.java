@@ -18,13 +18,13 @@ import io.vertx.pgclient.data.Point;
  * ApiTag.enUS: Person Step
  * ApiUri.enUS: /api/person-step
  * 
- * ApiMethod.enUS: Search
+ * ApiMethod: Search
  * ApiMethod: GET
  * ApiMethod: PATCH
  * ApiMethod: POST
  * ApiMethod: PUTImport
  * 
- * ApiMethod.enUS: SearchPage
+ * ApiMethod: SearchPage
  * Page.SearchPage.enUS: PersonStepPage
  * ApiUri.SearchPage.enUS: /person-step
  * 

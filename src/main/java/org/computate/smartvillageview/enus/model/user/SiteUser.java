@@ -19,12 +19,12 @@ import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
  * ApiTag.enUS: User
  * ApiUri.enUS: /api/user
  * 
- * ApiMethod.enUS: Search
+ * ApiMethod: Search
  * ApiMethod: PATCH
  * ApiMethod: POST
  * ApiMethod: PUTImport
  * 
- * ApiMethod.enUS: SearchPage
+ * ApiMethod: SearchPage
  * Page.SearchPage.enUS: SiteUserPage
  * PageSuper.SearchPage.enUS: BaseModelPage
  * ApiUri.SearchPage.enUS: /user

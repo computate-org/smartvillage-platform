@@ -20,10 +20,10 @@ import io.vertx.pgclient.data.Point;
  * ApiTag.enUS: Map Result
  * ApiUri.enUS: /api/map-result
  * 
- * ApiMethod.enUS: Search
+ * ApiMethod: Search
  * ApiMethod: GET
  * 
- * ApiMethod.enUS: SearchPage
+ * ApiMethod: SearchPage
  * Page.SearchPage.enUS: MapResultPage
  * ApiUri.SearchPage.enUS: /map-result
  * 

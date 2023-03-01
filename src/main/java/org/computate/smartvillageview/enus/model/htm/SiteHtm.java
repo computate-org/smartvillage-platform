@@ -29,13 +29,13 @@ import io.vertx.core.json.JsonObject;
  * ApiTag.enUS: HTM
  * ApiUri.enUS: /api/htm
  * 
- * ApiMethod.enUS: Search
+ * ApiMethod: Search
  * ApiMethod: GET
  * ApiMethod: POST
  * ApiMethod: PATCH
  * ApiMethod: PUTImport
  * 
- * ApiMethod.enUS: SearchPage
+ * ApiMethod: SearchPage
  * Page.SearchPage.enUS: SiteHtmPage
  * ApiUri.SearchPage.enUS: /htm
  * 

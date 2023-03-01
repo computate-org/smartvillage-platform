@@ -19,13 +19,13 @@ import io.vertx.core.Promise;
  * ApiTag.enUS: Time Step
  * ApiUri.enUS: /api/time-step
  * 
- * ApiMethod.enUS: Search
+ * ApiMethod: Search
  * ApiMethod: GET
  * ApiMethod: PATCH
  * ApiMethod: POST
  * ApiMethod: PUTImport
  * 
- * ApiMethod.enUS: SearchPage
+ * ApiMethod: SearchPage
  * Page.SearchPage.enUS: TimeStepPage
  * ApiUri.SearchPage.enUS: /time-step
  * 

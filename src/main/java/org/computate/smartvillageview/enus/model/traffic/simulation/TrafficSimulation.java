@@ -1,7 +1,6 @@
 package org.computate.smartvillageview.enus.model.traffic.simulation;
 
 import java.math.BigDecimal;
-import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,34 +14,36 @@ import org.computate.smartvillageview.enus.model.base.BaseModel;
  * Page: true
  * SuperPage.enUS: BaseModelPage
  * Indexed: true
- * SqlOrder: 2
- * Order: 5
+ * Map.Integer.sqlSort: 2
+ * Map.Integer.classSort: 5
  * 
  * ApiTag.enUS: Traffic Simulation
  * ApiUri.enUS: /api/traffic-simulation
  * 
- * ApiMethod.enUS: Search
+ * ApiMethod: Search
  * ApiMethod: GET
  * ApiMethod: PATCH
  * ApiMethod: POST
  * ApiMethod: PUTImport
  * 
- * ApiMethod.enUS: SearchPage
+ * ApiMethod: SearchPage
  * Page.SearchPage.enUS: TrafficSimulationPage
  * PageSuper.SearchPage.enUS: BaseModelPage
  * ApiUri.SearchPage.enUS: /traffic-simulation
  * 
- * ApiMethod.enUS: MapSearchPage
+ * ApiMethod: MapSearchPage
  * Page.MapSearchPage.enUS: TrafficSimulationMapPage
  * PageSuper.MapSearchPage.enUS: BaseModelPage
  * ApiUri.MapSearchPage.enUS: /traffic-simulation-map
  * 
  * Role.enUS: SiteAdmin
+ * Saves: true
  * 
  * AName.enUS: a traffic simulation
  * Color: 2017-shaded-spruce
  * IconGroup: duotone
  * IconName: traffic-light-stop
+ * NameVar.enUS: trafficSimulation
  * Rows: 100
  */
 public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
@@ -97,22 +98,9 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 6
-	 * HtmlCell: 1
-	 * Facet: true
-	 * DisplayName: Start date and Time
-	 * Description: The start date and time. 
-	 */
-	protected void _startDateTime(Wrap<ZonedDateTime> w) {
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * DocValues: true
-	 * Persist: true
 	 * DisplayName: start seconds
 	 * Description: -b, --begin TIME Defines the begin time in seconds; The simulation starts at this time
-	 * HtmlRow: 7
+	 * HtmlRow: 6
 	 * HtmlCell: 1
 	 * Facet: true
 	 */
@@ -125,7 +113,7 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Persist: true
 	 * DisplayName: end seconds
 	 * Description: -e, --end TIME Defines the end time in seconds; The simulation ends at this time
-	 * HtmlRow: 7
+	 * HtmlRow: 6
 	 * HtmlCell: 2
 	 * Facet: true
 	 */
@@ -138,7 +126,7 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Persist: true
 	 * DisplayName: step seconds
 	 * Description: --step-length TIME Defines the step duration in seconds
-	 * HtmlRow: 7
+	 * HtmlRow: 6
 	 * HtmlCell: 3
 	 * Facet: true
 	 */

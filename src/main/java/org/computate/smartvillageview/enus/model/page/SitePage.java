@@ -37,13 +37,13 @@ import io.vertx.core.Promise;
  * ApiTag.enUS: Page
  * ApiUri.enUS: /api/page
  * 
- * ApiMethod.enUS: Search
+ * ApiMethod: Search
  * ApiMethod: GET
  * ApiMethod: POST
  * ApiMethod: PATCH
  * ApiMethod: PUTImport
  * 
- * ApiMethod.enUS: SearchPage
+ * ApiMethod: SearchPage
  * Page.SearchPage.enUS: SitePagePage
  * ApiUri.SearchPage.enUS: /page
  * 

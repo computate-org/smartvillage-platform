@@ -30,13 +30,13 @@ import io.vertx.core.Promise;
  * ApiTag.enUS: System Event
  * ApiUri.enUS: /api/system-event
  * 
- * ApiMethod.enUS: Search
+ * ApiMethod: Search
  * ApiMethod: GET
  * ApiMethod: POST
  * ApiMethod: PATCH
  * ApiMethod: PUTImport
  * 
- * ApiMethod.enUS: SearchPage
+ * ApiMethod: SearchPage
  * Page.SearchPage.enUS: SystemEventPage
  * ApiUri.SearchPage.enUS: /system-event
  * 

@@ -21,13 +21,13 @@ import io.vertx.pgclient.data.Point;
  * ApiTag.enUS: IOT Node
  * ApiUri.enUS: /api/iot-node
  * 
- * ApiMethod.enUS: Search
+ * ApiMethod: Search
  * ApiMethod: GET
  * ApiMethod: PATCH
  * ApiMethod: POST
  * ApiMethod: PUTImport
  * 
- * ApiMethod.enUS: SearchPage
+ * ApiMethod: SearchPage
  * Page.SearchPage.enUS: IotNodePage
  * ApiUri.SearchPage.enUS: /iot-node
  * 
