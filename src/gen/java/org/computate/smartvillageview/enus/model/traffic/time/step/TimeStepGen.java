@@ -79,7 +79,25 @@ import io.vertx.core.json.JsonObject;
  * Api: true
  * <p>This class contains a comment <b>"Api: true"</b>, which means this class will have Java Vert.x API backend code generated for these objects. 
  * </p>
- * ApiTag.enUS: Time Step
+ * ApiMethode: Search
+ * <p>This class contains a comment <b>"ApiMethod: Search"</b>, which creates an API "Search". 
+ * </p>
+ * ApiMethode: GET
+ * <p>This class contains a comment <b>"ApiMethod: GET"</b>, which creates an API "GET". 
+ * </p>
+ * ApiMethode: PATCH
+ * <p>This class contains a comment <b>"ApiMethod: PATCH"</b>, which creates an API "PATCH". 
+ * </p>
+ * ApiMethode: POST
+ * <p>This class contains a comment <b>"ApiMethod: POST"</b>, which creates an API "POST". 
+ * </p>
+ * ApiMethode: PUTImport
+ * <p>This class contains a comment <b>"ApiMethod: PUTImport"</b>, which creates an API "PUTImport". 
+ * </p>
+ * ApiMethode: SearchPage
+ * <p>This class contains a comment <b>"ApiMethod: SearchPage"</b>, which creates an API "SearchPage". 
+ * </p>
+ * ApiTag.enUS: true
  * <p>This class contains a comment <b>"ApiTag: Time Step"</b>, which groups all of the OpenAPIs for TimeStep objects under the tag "Time Step". 
  * </p>
  * ApiUri.enUS: /api/time-step
@@ -369,11 +387,15 @@ public abstract class TimeStepGen<DEV> extends BaseResult {
 	}
 	@JsonIgnore
 	public void setTime(Double o) {
-			this.time = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setTime(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	@JsonIgnore
 	public void setTime(Integer o) {
-			this.time = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setTime(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setTime(Number o) {
+		setTime(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	protected TimeStep timeInit() {
 		Wrap<BigDecimal> timeWrap = new Wrap<BigDecimal>().var("time");

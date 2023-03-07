@@ -70,7 +70,25 @@ import io.vertx.core.json.JsonObject;
  * Api: true
  * <p>This class contains a comment <b>"Api: true"</b>, which means this class will have Java Vert.x API backend code generated for these objects. 
  * </p>
- * ApiTag.enUS: Page
+ * ApiMethode: Search
+ * <p>This class contains a comment <b>"ApiMethod: Search"</b>, which creates an API "Search". 
+ * </p>
+ * ApiMethode: GET
+ * <p>This class contains a comment <b>"ApiMethod: GET"</b>, which creates an API "GET". 
+ * </p>
+ * ApiMethode: POST
+ * <p>This class contains a comment <b>"ApiMethod: POST"</b>, which creates an API "POST". 
+ * </p>
+ * ApiMethode: PATCH
+ * <p>This class contains a comment <b>"ApiMethod: PATCH"</b>, which creates an API "PATCH". 
+ * </p>
+ * ApiMethode: PUTImport
+ * <p>This class contains a comment <b>"ApiMethod: PUTImport"</b>, which creates an API "PUTImport". 
+ * </p>
+ * ApiMethode: SearchPage
+ * <p>This class contains a comment <b>"ApiMethod: SearchPage"</b>, which creates an API "SearchPage". 
+ * </p>
+ * ApiTag.enUS: true
  * <p>This class contains a comment <b>"ApiTag: Page"</b>, which groups all of the OpenAPIs for SitePage objects under the tag "Page". 
  * </p>
  * ApiUri.enUS: /api/page

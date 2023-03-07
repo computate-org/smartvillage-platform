@@ -71,7 +71,25 @@ import org.computate.search.response.solr.SolrResponse;
  * Api: true
  * <p>This class contains a comment <b>"Api: true"</b>, which means this class will have Java Vert.x API backend code generated for these objects. 
  * </p>
- * ApiTag.enUS: IOT Node Step
+ * ApiMethode: Search
+ * <p>This class contains a comment <b>"ApiMethod: Search"</b>, which creates an API "Search". 
+ * </p>
+ * ApiMethode: GET
+ * <p>This class contains a comment <b>"ApiMethod: GET"</b>, which creates an API "GET". 
+ * </p>
+ * ApiMethode: PATCH
+ * <p>This class contains a comment <b>"ApiMethod: PATCH"</b>, which creates an API "PATCH". 
+ * </p>
+ * ApiMethode: POST
+ * <p>This class contains a comment <b>"ApiMethod: POST"</b>, which creates an API "POST". 
+ * </p>
+ * ApiMethode: PUTImport
+ * <p>This class contains a comment <b>"ApiMethod: PUTImport"</b>, which creates an API "PUTImport". 
+ * </p>
+ * ApiMethode: SearchPage
+ * <p>This class contains a comment <b>"ApiMethod: SearchPage"</b>, which creates an API "SearchPage". 
+ * </p>
+ * ApiTag.enUS: true
  * <p>This class contains a comment <b>"ApiTag: IOT Node Step"</b>, which groups all of the OpenAPIs for IotNodeStep objects under the tag "IOT Node Step". 
  * </p>
  * ApiUri.enUS: /api/iot-node-step
@@ -535,11 +553,15 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	}
 	@JsonIgnore
 	public void setJson_moisture(Double o) {
-			this.json_moisture = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_moisture(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	@JsonIgnore
 	public void setJson_moisture(Integer o) {
-			this.json_moisture = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_moisture(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setJson_moisture(Number o) {
+		setJson_moisture(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	protected IotNodeStep json_moistureInit() {
 		Wrap<BigDecimal> json_moistureWrap = new Wrap<BigDecimal>().var("json_moisture");
@@ -602,11 +624,15 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	}
 	@JsonIgnore
 	public void setJson_moisture0(Double o) {
-			this.json_moisture0 = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_moisture0(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	@JsonIgnore
 	public void setJson_moisture0(Integer o) {
-			this.json_moisture0 = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_moisture0(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setJson_moisture0(Number o) {
+		setJson_moisture0(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	protected IotNodeStep json_moisture0Init() {
 		Wrap<BigDecimal> json_moisture0Wrap = new Wrap<BigDecimal>().var("json_moisture0");
@@ -669,11 +695,15 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	}
 	@JsonIgnore
 	public void setJson_moisture1(Double o) {
-			this.json_moisture1 = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_moisture1(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	@JsonIgnore
 	public void setJson_moisture1(Integer o) {
-			this.json_moisture1 = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_moisture1(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setJson_moisture1(Number o) {
+		setJson_moisture1(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	protected IotNodeStep json_moisture1Init() {
 		Wrap<BigDecimal> json_moisture1Wrap = new Wrap<BigDecimal>().var("json_moisture1");
@@ -736,11 +766,15 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	}
 	@JsonIgnore
 	public void setJson_temperature(Double o) {
-			this.json_temperature = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_temperature(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	@JsonIgnore
 	public void setJson_temperature(Integer o) {
-			this.json_temperature = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_temperature(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setJson_temperature(Number o) {
+		setJson_temperature(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	protected IotNodeStep json_temperatureInit() {
 		Wrap<BigDecimal> json_temperatureWrap = new Wrap<BigDecimal>().var("json_temperature");
@@ -803,11 +837,15 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	}
 	@JsonIgnore
 	public void setJson_temperature0(Double o) {
-			this.json_temperature0 = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_temperature0(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	@JsonIgnore
 	public void setJson_temperature0(Integer o) {
-			this.json_temperature0 = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_temperature0(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setJson_temperature0(Number o) {
+		setJson_temperature0(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	protected IotNodeStep json_temperature0Init() {
 		Wrap<BigDecimal> json_temperature0Wrap = new Wrap<BigDecimal>().var("json_temperature0");
@@ -870,11 +908,15 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	}
 	@JsonIgnore
 	public void setJson_temperatureAverage(Double o) {
-			this.json_temperatureAverage = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_temperatureAverage(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	@JsonIgnore
 	public void setJson_temperatureAverage(Integer o) {
-			this.json_temperatureAverage = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_temperatureAverage(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setJson_temperatureAverage(Number o) {
+		setJson_temperatureAverage(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	protected IotNodeStep json_temperatureAverageInit() {
 		Wrap<BigDecimal> json_temperatureAverageWrap = new Wrap<BigDecimal>().var("json_temperatureAverage");
@@ -937,11 +979,15 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	}
 	@JsonIgnore
 	public void setJson_badConditionsCounter(Double o) {
-			this.json_badConditionsCounter = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_badConditionsCounter(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	@JsonIgnore
 	public void setJson_badConditionsCounter(Integer o) {
-			this.json_badConditionsCounter = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_badConditionsCounter(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setJson_badConditionsCounter(Number o) {
+		setJson_badConditionsCounter(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	protected IotNodeStep json_badConditionsCounterInit() {
 		Wrap<BigDecimal> json_badConditionsCounterWrap = new Wrap<BigDecimal>().var("json_badConditionsCounter");
@@ -1109,11 +1155,15 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	}
 	@JsonIgnore
 	public void setJson_flood(Double o) {
-			this.json_flood = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_flood(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	@JsonIgnore
 	public void setJson_flood(Integer o) {
-			this.json_flood = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_flood(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setJson_flood(Number o) {
+		setJson_flood(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	protected IotNodeStep json_floodInit() {
 		Wrap<BigDecimal> json_floodWrap = new Wrap<BigDecimal>().var("json_flood");
@@ -1231,11 +1281,15 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	}
 	@JsonIgnore
 	public void setJson_lux2(Double o) {
-			this.json_lux2 = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_lux2(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	@JsonIgnore
 	public void setJson_lux2(Integer o) {
-			this.json_lux2 = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_lux2(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setJson_lux2(Number o) {
+		setJson_lux2(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	protected IotNodeStep json_lux2Init() {
 		Wrap<BigDecimal> json_lux2Wrap = new Wrap<BigDecimal>().var("json_lux2");
@@ -1298,11 +1352,15 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	}
 	@JsonIgnore
 	public void setJson_illuminance(Double o) {
-			this.json_illuminance = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_illuminance(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	@JsonIgnore
 	public void setJson_illuminance(Integer o) {
-			this.json_illuminance = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_illuminance(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setJson_illuminance(Number o) {
+		setJson_illuminance(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	protected IotNodeStep json_illuminanceInit() {
 		Wrap<BigDecimal> json_illuminanceWrap = new Wrap<BigDecimal>().var("json_illuminance");
@@ -1365,11 +1423,15 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	}
 	@JsonIgnore
 	public void setJson_resistance0(Double o) {
-			this.json_resistance0 = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_resistance0(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	@JsonIgnore
 	public void setJson_resistance0(Integer o) {
-			this.json_resistance0 = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_resistance0(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setJson_resistance0(Number o) {
+		setJson_resistance0(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	protected IotNodeStep json_resistance0Init() {
 		Wrap<BigDecimal> json_resistance0Wrap = new Wrap<BigDecimal>().var("json_resistance0");
@@ -1432,11 +1494,15 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	}
 	@JsonIgnore
 	public void setJson_resistance1(Double o) {
-			this.json_resistance1 = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_resistance1(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	@JsonIgnore
 	public void setJson_resistance1(Integer o) {
-			this.json_resistance1 = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_resistance1(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setJson_resistance1(Number o) {
+		setJson_resistance1(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	protected IotNodeStep json_resistance1Init() {
 		Wrap<BigDecimal> json_resistance1Wrap = new Wrap<BigDecimal>().var("json_resistance1");
@@ -1499,11 +1565,15 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	}
 	@JsonIgnore
 	public void setJson_frequency(Double o) {
-			this.json_frequency = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_frequency(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	@JsonIgnore
 	public void setJson_frequency(Integer o) {
-			this.json_frequency = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_frequency(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setJson_frequency(Number o) {
+		setJson_frequency(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	protected IotNodeStep json_frequencyInit() {
 		Wrap<BigDecimal> json_frequencyWrap = new Wrap<BigDecimal>().var("json_frequency");
@@ -1666,11 +1736,15 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	}
 	@JsonIgnore
 	public void setJson_dataRate(Double o) {
-			this.json_dataRate = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_dataRate(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	@JsonIgnore
 	public void setJson_dataRate(Integer o) {
-			this.json_dataRate = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_dataRate(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setJson_dataRate(Number o) {
+		setJson_dataRate(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	protected IotNodeStep json_dataRateInit() {
 		Wrap<BigDecimal> json_dataRateWrap = new Wrap<BigDecimal>().var("json_dataRate");
@@ -1733,11 +1807,15 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	}
 	@JsonIgnore
 	public void setJson_frameCount(Double o) {
-			this.json_frameCount = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_frameCount(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	@JsonIgnore
 	public void setJson_frameCount(Integer o) {
-			this.json_frameCount = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_frameCount(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setJson_frameCount(Number o) {
+		setJson_frameCount(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	protected IotNodeStep json_frameCountInit() {
 		Wrap<BigDecimal> json_frameCountWrap = new Wrap<BigDecimal>().var("json_frameCount");
@@ -1800,11 +1878,15 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	}
 	@JsonIgnore
 	public void setJson_maxPayload(Double o) {
-			this.json_maxPayload = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_maxPayload(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	@JsonIgnore
 	public void setJson_maxPayload(Integer o) {
-			this.json_maxPayload = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_maxPayload(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setJson_maxPayload(Number o) {
+		setJson_maxPayload(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	protected IotNodeStep json_maxPayloadInit() {
 		Wrap<BigDecimal> json_maxPayloadWrap = new Wrap<BigDecimal>().var("json_maxPayload");
@@ -1867,11 +1949,15 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	}
 	@JsonIgnore
 	public void setJson_bitsPerSecond(Double o) {
-			this.json_bitsPerSecond = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_bitsPerSecond(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	@JsonIgnore
 	public void setJson_bitsPerSecond(Integer o) {
-			this.json_bitsPerSecond = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_bitsPerSecond(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setJson_bitsPerSecond(Number o) {
+		setJson_bitsPerSecond(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	protected IotNodeStep json_bitsPerSecondInit() {
 		Wrap<BigDecimal> json_bitsPerSecondWrap = new Wrap<BigDecimal>().var("json_bitsPerSecond");
@@ -1934,11 +2020,15 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	}
 	@JsonIgnore
 	public void setJson_batteryVoltage(Double o) {
-			this.json_batteryVoltage = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_batteryVoltage(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	@JsonIgnore
 	public void setJson_batteryVoltage(Integer o) {
-			this.json_batteryVoltage = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_batteryVoltage(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setJson_batteryVoltage(Number o) {
+		setJson_batteryVoltage(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	protected IotNodeStep json_batteryVoltageInit() {
 		Wrap<BigDecimal> json_batteryVoltageWrap = new Wrap<BigDecimal>().var("json_batteryVoltage");
@@ -2001,11 +2091,15 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	}
 	@JsonIgnore
 	public void setJson_spreadingFactor(Double o) {
-			this.json_spreadingFactor = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_spreadingFactor(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	@JsonIgnore
 	public void setJson_spreadingFactor(Integer o) {
-			this.json_spreadingFactor = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_spreadingFactor(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setJson_spreadingFactor(Number o) {
+		setJson_spreadingFactor(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	protected IotNodeStep json_spreadingFactorInit() {
 		Wrap<BigDecimal> json_spreadingFactorWrap = new Wrap<BigDecimal>().var("json_spreadingFactor");
@@ -2173,11 +2267,15 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	}
 	@JsonIgnore
 	public void setJson_batteryLevel(Double o) {
-			this.json_batteryLevel = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_batteryLevel(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	@JsonIgnore
 	public void setJson_batteryLevel(Integer o) {
-			this.json_batteryLevel = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_batteryLevel(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setJson_batteryLevel(Number o) {
+		setJson_batteryLevel(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	protected IotNodeStep json_batteryLevelInit() {
 		Wrap<BigDecimal> json_batteryLevelWrap = new Wrap<BigDecimal>().var("json_batteryLevel");
@@ -2240,11 +2338,15 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	}
 	@JsonIgnore
 	public void setJson_startUpCount(Double o) {
-			this.json_startUpCount = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_startUpCount(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	@JsonIgnore
 	public void setJson_startUpCount(Integer o) {
-			this.json_startUpCount = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_startUpCount(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setJson_startUpCount(Number o) {
+		setJson_startUpCount(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	protected IotNodeStep json_startUpCountInit() {
 		Wrap<BigDecimal> json_startUpCountWrap = new Wrap<BigDecimal>().var("json_startUpCount");
@@ -2307,11 +2409,15 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	}
 	@JsonIgnore
 	public void setJson_watchdogCount(Double o) {
-			this.json_watchdogCount = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_watchdogCount(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	@JsonIgnore
 	public void setJson_watchdogCount(Integer o) {
-			this.json_watchdogCount = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_watchdogCount(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setJson_watchdogCount(Number o) {
+		setJson_watchdogCount(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	protected IotNodeStep json_watchdogCountInit() {
 		Wrap<BigDecimal> json_watchdogCountWrap = new Wrap<BigDecimal>().var("json_watchdogCount");
@@ -2374,11 +2480,15 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	}
 	@JsonIgnore
 	public void setJson_historySequence(Double o) {
-			this.json_historySequence = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_historySequence(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	@JsonIgnore
 	public void setJson_historySequence(Integer o) {
-			this.json_historySequence = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_historySequence(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setJson_historySequence(Number o) {
+		setJson_historySequence(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	protected IotNodeStep json_historySequenceInit() {
 		Wrap<BigDecimal> json_historySequenceWrap = new Wrap<BigDecimal>().var("json_historySequence");
@@ -2491,11 +2601,15 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	}
 	@JsonIgnore
 	public void setJson_stackTxFailRebootCount(Double o) {
-			this.json_stackTxFailRebootCount = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_stackTxFailRebootCount(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	@JsonIgnore
 	public void setJson_stackTxFailRebootCount(Integer o) {
-			this.json_stackTxFailRebootCount = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_stackTxFailRebootCount(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setJson_stackTxFailRebootCount(Number o) {
+		setJson_stackTxFailRebootCount(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	protected IotNodeStep json_stackTxFailRebootCountInit() {
 		Wrap<BigDecimal> json_stackTxFailRebootCountWrap = new Wrap<BigDecimal>().var("json_stackTxFailRebootCount");
@@ -2558,11 +2672,15 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	}
 	@JsonIgnore
 	public void setJson_historySequencePrevious(Double o) {
-			this.json_historySequencePrevious = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_historySequencePrevious(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	@JsonIgnore
 	public void setJson_historySequencePrevious(Integer o) {
-			this.json_historySequencePrevious = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_historySequencePrevious(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setJson_historySequencePrevious(Number o) {
+		setJson_historySequencePrevious(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	protected IotNodeStep json_historySequencePreviousInit() {
 		Wrap<BigDecimal> json_historySequencePreviousWrap = new Wrap<BigDecimal>().var("json_historySequencePrevious");
@@ -2625,11 +2743,15 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	}
 	@JsonIgnore
 	public void setJson_snr(Double o) {
-			this.json_snr = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_snr(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	@JsonIgnore
 	public void setJson_snr(Integer o) {
-			this.json_snr = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_snr(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setJson_snr(Number o) {
+		setJson_snr(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	protected IotNodeStep json_snrInit() {
 		Wrap<BigDecimal> json_snrWrap = new Wrap<BigDecimal>().var("json_snr");
@@ -2692,11 +2814,15 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	}
 	@JsonIgnore
 	public void setJson_rssi(Double o) {
-			this.json_rssi = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_rssi(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	@JsonIgnore
 	public void setJson_rssi(Integer o) {
-			this.json_rssi = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setJson_rssi(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setJson_rssi(Number o) {
+		setJson_rssi(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	protected IotNodeStep json_rssiInit() {
 		Wrap<BigDecimal> json_rssiWrap = new Wrap<BigDecimal>().var("json_rssi");

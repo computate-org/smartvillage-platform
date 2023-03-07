@@ -110,19 +110,7 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 	public void searchTrafficLightStep(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 
-			webClient.post(
-					config.getInteger(ConfigKeys.AUTH_PORT)
-					, config.getString(ConfigKeys.AUTH_HOST_NAME)
-					, config.getString(ConfigKeys.AUTH_TOKEN_URI)
-					)
-					.ssl(config.getBoolean(ConfigKeys.AUTH_SSL))
-					.putHeader("Authorization", String.format("Bearer %s", siteRequest.getUser().principal().getString("access_token")))
-					.sendForm(MultiMap.caseInsensitiveMultiMap()
-							.add("grant_type", "urn:ietf:params:oauth:grant-type:uma-ticket")
-							.add("audience", config.getString(ConfigKeys.AUTH_CLIENT))
-							.add("response_mode", "decision")
-							.add("permission", String.format("%s#%s", TrafficLightStep.CLASS_SIMPLE_NAME, "Search"))
-			).onFailure(ex -> {
+			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
 				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 				eventHandler.handle(Future.succeededFuture(
 					new ServiceResponse(401, "UNAUTHORIZED",
@@ -134,21 +122,21 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							), MultiMap.caseInsensitiveMultiMap()
 					)
 				));
-			}).onSuccess(authorizationDecision -> {
-				try {
-					if(!authorizationDecision.bodyAsJsonObject().getBoolean("result")) {
-						String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
-						eventHandler.handle(Future.succeededFuture(
-							new ServiceResponse(401, "UNAUTHORIZED",
-								Buffer.buffer().appendString(
-									new JsonObject()
-										.put("errorCode", "401")
-										.put("errorMessage", msg)
-										.encodePrettily()
-									), MultiMap.caseInsensitiveMultiMap()
-							)
-						));
-					} else {
+			}).onSuccess(b -> {
+				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_TrafficLightStep")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+					eventHandler.handle(Future.succeededFuture(
+						new ServiceResponse(401, "UNAUTHORIZED",
+							Buffer.buffer().appendString(
+								new JsonObject()
+									.put("errorCode", "401")
+									.put("errorMessage", msg)
+									.encodePrettily()
+								), MultiMap.caseInsensitiveMultiMap()
+						)
+					));
+				} else {
+					try {
 						searchTrafficLightStepList(siteRequest, false, true, false).onSuccess(listTrafficLightStep -> {
 							response200SearchTrafficLightStep(listTrafficLightStep).onSuccess(response -> {
 								eventHandler.handle(Future.succeededFuture(response));
@@ -161,10 +149,10 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							LOG.error(String.format("searchTrafficLightStep failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
+					} catch(Exception ex) {
+						LOG.error(String.format("searchTrafficLightStep failed. "), ex);
+						error(null, eventHandler, ex);
 					}
-				} catch(Exception ex) {
-					LOG.error(String.format("searchTrafficLightStep failed. "), ex);
-					error(null, eventHandler, ex);
 				}
 			});
 		}).onFailure(ex -> {
@@ -275,19 +263,7 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 	public void getTrafficLightStep(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 
-			webClient.post(
-					config.getInteger(ConfigKeys.AUTH_PORT)
-					, config.getString(ConfigKeys.AUTH_HOST_NAME)
-					, config.getString(ConfigKeys.AUTH_TOKEN_URI)
-					)
-					.ssl(config.getBoolean(ConfigKeys.AUTH_SSL))
-					.putHeader("Authorization", String.format("Bearer %s", siteRequest.getUser().principal().getString("access_token")))
-					.sendForm(MultiMap.caseInsensitiveMultiMap()
-							.add("grant_type", "urn:ietf:params:oauth:grant-type:uma-ticket")
-							.add("audience", config.getString(ConfigKeys.AUTH_CLIENT))
-							.add("response_mode", "decision")
-							.add("permission", String.format("%s#%s", TrafficLightStep.CLASS_SIMPLE_NAME, "GET"))
-			).onFailure(ex -> {
+			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
 				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 				eventHandler.handle(Future.succeededFuture(
 					new ServiceResponse(401, "UNAUTHORIZED",
@@ -299,21 +275,21 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							), MultiMap.caseInsensitiveMultiMap()
 					)
 				));
-			}).onSuccess(authorizationDecision -> {
-				try {
-					if(!authorizationDecision.bodyAsJsonObject().getBoolean("result")) {
-						String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
-						eventHandler.handle(Future.succeededFuture(
-							new ServiceResponse(401, "UNAUTHORIZED",
-								Buffer.buffer().appendString(
-									new JsonObject()
-										.put("errorCode", "401")
-										.put("errorMessage", msg)
-										.encodePrettily()
-									), MultiMap.caseInsensitiveMultiMap()
-							)
-						));
-					} else {
+			}).onSuccess(b -> {
+				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_TrafficLightStep")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+					eventHandler.handle(Future.succeededFuture(
+						new ServiceResponse(401, "UNAUTHORIZED",
+							Buffer.buffer().appendString(
+								new JsonObject()
+									.put("errorCode", "401")
+									.put("errorMessage", msg)
+									.encodePrettily()
+								), MultiMap.caseInsensitiveMultiMap()
+						)
+					));
+				} else {
+					try {
 						searchTrafficLightStepList(siteRequest, false, true, false).onSuccess(listTrafficLightStep -> {
 							response200GETTrafficLightStep(listTrafficLightStep).onSuccess(response -> {
 								eventHandler.handle(Future.succeededFuture(response));
@@ -326,10 +302,10 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							LOG.error(String.format("getTrafficLightStep failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
+					} catch(Exception ex) {
+						LOG.error(String.format("getTrafficLightStep failed. "), ex);
+						error(null, eventHandler, ex);
 					}
-				} catch(Exception ex) {
-					LOG.error(String.format("getTrafficLightStep failed. "), ex);
-					error(null, eventHandler, ex);
 				}
 			});
 		}).onFailure(ex -> {
@@ -379,19 +355,7 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 		LOG.debug(String.format("patchTrafficLightStep started. "));
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 
-			webClient.post(
-					config.getInteger(ConfigKeys.AUTH_PORT)
-					, config.getString(ConfigKeys.AUTH_HOST_NAME)
-					, config.getString(ConfigKeys.AUTH_TOKEN_URI)
-					)
-					.ssl(config.getBoolean(ConfigKeys.AUTH_SSL))
-					.putHeader("Authorization", String.format("Bearer %s", siteRequest.getUser().principal().getString("access_token")))
-					.sendForm(MultiMap.caseInsensitiveMultiMap()
-							.add("grant_type", "urn:ietf:params:oauth:grant-type:uma-ticket")
-							.add("audience", config.getString(ConfigKeys.AUTH_CLIENT))
-							.add("response_mode", "decision")
-							.add("permission", String.format("%s#%s", TrafficLightStep.CLASS_SIMPLE_NAME, "PATCH"))
-			).onFailure(ex -> {
+			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
 				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 				eventHandler.handle(Future.succeededFuture(
 					new ServiceResponse(401, "UNAUTHORIZED",
@@ -403,21 +367,21 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							), MultiMap.caseInsensitiveMultiMap()
 					)
 				));
-			}).onSuccess(authorizationDecision -> {
-				try {
-					if(!authorizationDecision.bodyAsJsonObject().getBoolean("result")) {
-						String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
-						eventHandler.handle(Future.succeededFuture(
-							new ServiceResponse(401, "UNAUTHORIZED",
-								Buffer.buffer().appendString(
-									new JsonObject()
-										.put("errorCode", "401")
-										.put("errorMessage", msg)
-										.encodePrettily()
-									), MultiMap.caseInsensitiveMultiMap()
-							)
-						));
-					} else {
+			}).onSuccess(b -> {
+				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_TrafficLightStep")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+					eventHandler.handle(Future.succeededFuture(
+						new ServiceResponse(401, "UNAUTHORIZED",
+							Buffer.buffer().appendString(
+								new JsonObject()
+									.put("errorCode", "401")
+									.put("errorMessage", msg)
+									.encodePrettily()
+								), MultiMap.caseInsensitiveMultiMap()
+						)
+					));
+				} else {
+					try {
 						searchTrafficLightStepList(siteRequest, true, false, true).onSuccess(listTrafficLightStep -> {
 							try {
 								if(listTrafficLightStep.getResponse().getResponse().getNumFound() > 1
@@ -459,10 +423,10 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							LOG.error(String.format("patchTrafficLightStep failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
+					} catch(Exception ex) {
+						LOG.error(String.format("patchTrafficLightStep failed. "), ex);
+						error(null, eventHandler, ex);
 					}
-				} catch(Exception ex) {
-					LOG.error(String.format("patchTrafficLightStep failed. "), ex);
-					error(null, eventHandler, ex);
 				}
 			});
 		}).onFailure(ex -> {
@@ -627,19 +591,7 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 		LOG.debug(String.format("postTrafficLightStep started. "));
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 
-			webClient.post(
-					config.getInteger(ConfigKeys.AUTH_PORT)
-					, config.getString(ConfigKeys.AUTH_HOST_NAME)
-					, config.getString(ConfigKeys.AUTH_TOKEN_URI)
-					)
-					.ssl(config.getBoolean(ConfigKeys.AUTH_SSL))
-					.putHeader("Authorization", String.format("Bearer %s", siteRequest.getUser().principal().getString("access_token")))
-					.sendForm(MultiMap.caseInsensitiveMultiMap()
-							.add("grant_type", "urn:ietf:params:oauth:grant-type:uma-ticket")
-							.add("audience", config.getString(ConfigKeys.AUTH_CLIENT))
-							.add("response_mode", "decision")
-							.add("permission", String.format("%s#%s", TrafficLightStep.CLASS_SIMPLE_NAME, "POST"))
-			).onFailure(ex -> {
+			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
 				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 				eventHandler.handle(Future.succeededFuture(
 					new ServiceResponse(401, "UNAUTHORIZED",
@@ -651,21 +603,21 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							), MultiMap.caseInsensitiveMultiMap()
 					)
 				));
-			}).onSuccess(authorizationDecision -> {
-				try {
-					if(!authorizationDecision.bodyAsJsonObject().getBoolean("result")) {
-						String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
-						eventHandler.handle(Future.succeededFuture(
-							new ServiceResponse(401, "UNAUTHORIZED",
-								Buffer.buffer().appendString(
-									new JsonObject()
-										.put("errorCode", "401")
-										.put("errorMessage", msg)
-										.encodePrettily()
-									), MultiMap.caseInsensitiveMultiMap()
-							)
-						));
-					} else {
+			}).onSuccess(b -> {
+				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_TrafficLightStep")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+					eventHandler.handle(Future.succeededFuture(
+						new ServiceResponse(401, "UNAUTHORIZED",
+							Buffer.buffer().appendString(
+								new JsonObject()
+									.put("errorCode", "401")
+									.put("errorMessage", msg)
+									.encodePrettily()
+								), MultiMap.caseInsensitiveMultiMap()
+						)
+					));
+				} else {
+					try {
 						ApiRequest apiRequest = new ApiRequest();
 						apiRequest.setRows(1L);
 						apiRequest.setNumFound(1L);
@@ -700,10 +652,10 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							LOG.error(String.format("postTrafficLightStep failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
+					} catch(Exception ex) {
+						LOG.error(String.format("postTrafficLightStep failed. "), ex);
+						error(null, eventHandler, ex);
 					}
-				} catch(Exception ex) {
-					LOG.error(String.format("postTrafficLightStep failed. "), ex);
-					error(null, eventHandler, ex);
 				}
 			});
 		}).onFailure(ex -> {
@@ -820,19 +772,7 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 		LOG.debug(String.format("putimportTrafficLightStep started. "));
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 
-			webClient.post(
-					config.getInteger(ConfigKeys.AUTH_PORT)
-					, config.getString(ConfigKeys.AUTH_HOST_NAME)
-					, config.getString(ConfigKeys.AUTH_TOKEN_URI)
-					)
-					.ssl(config.getBoolean(ConfigKeys.AUTH_SSL))
-					.putHeader("Authorization", String.format("Bearer %s", siteRequest.getUser().principal().getString("access_token")))
-					.sendForm(MultiMap.caseInsensitiveMultiMap()
-							.add("grant_type", "urn:ietf:params:oauth:grant-type:uma-ticket")
-							.add("audience", config.getString(ConfigKeys.AUTH_CLIENT))
-							.add("response_mode", "decision")
-							.add("permission", String.format("%s#%s", TrafficLightStep.CLASS_SIMPLE_NAME, "PUTImport"))
-			).onFailure(ex -> {
+			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
 				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 				eventHandler.handle(Future.succeededFuture(
 					new ServiceResponse(401, "UNAUTHORIZED",
@@ -844,21 +784,21 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							), MultiMap.caseInsensitiveMultiMap()
 					)
 				));
-			}).onSuccess(authorizationDecision -> {
-				try {
-					if(!authorizationDecision.bodyAsJsonObject().getBoolean("result")) {
-						String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
-						eventHandler.handle(Future.succeededFuture(
-							new ServiceResponse(401, "UNAUTHORIZED",
-								Buffer.buffer().appendString(
-									new JsonObject()
-										.put("errorCode", "401")
-										.put("errorMessage", msg)
-										.encodePrettily()
-									), MultiMap.caseInsensitiveMultiMap()
-							)
-						));
-					} else {
+			}).onSuccess(b -> {
+				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_TrafficLightStep")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+					eventHandler.handle(Future.succeededFuture(
+						new ServiceResponse(401, "UNAUTHORIZED",
+							Buffer.buffer().appendString(
+								new JsonObject()
+									.put("errorCode", "401")
+									.put("errorMessage", msg)
+									.encodePrettily()
+								), MultiMap.caseInsensitiveMultiMap()
+						)
+					));
+				} else {
+					try {
 						try {
 							ApiRequest apiRequest = new ApiRequest();
 							JsonArray jsonArray = Optional.ofNullable(siteRequest.getJsonObject()).map(o -> o.getJsonArray("list")).orElse(new JsonArray());
@@ -889,10 +829,10 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							LOG.error(String.format("putimportTrafficLightStep failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						}
+					} catch(Exception ex) {
+						LOG.error(String.format("putimportTrafficLightStep failed. "), ex);
+						error(null, eventHandler, ex);
 					}
-				} catch(Exception ex) {
-					LOG.error(String.format("putimportTrafficLightStep failed. "), ex);
-					error(null, eventHandler, ex);
 				}
 			});
 		}).onFailure(ex -> {
@@ -1117,19 +1057,7 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 	public void searchpageTrafficLightStep(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 
-			webClient.post(
-					config.getInteger(ConfigKeys.AUTH_PORT)
-					, config.getString(ConfigKeys.AUTH_HOST_NAME)
-					, config.getString(ConfigKeys.AUTH_TOKEN_URI)
-					)
-					.ssl(config.getBoolean(ConfigKeys.AUTH_SSL))
-					.putHeader("Authorization", String.format("Bearer %s", siteRequest.getUser().principal().getString("access_token")))
-					.sendForm(MultiMap.caseInsensitiveMultiMap()
-							.add("grant_type", "urn:ietf:params:oauth:grant-type:uma-ticket")
-							.add("audience", config.getString(ConfigKeys.AUTH_CLIENT))
-							.add("response_mode", "decision")
-							.add("permission", String.format("%s#%s", TrafficLightStep.CLASS_SIMPLE_NAME, "SearchPage"))
-			).onFailure(ex -> {
+			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
 				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 				eventHandler.handle(Future.succeededFuture(
 					new ServiceResponse(401, "UNAUTHORIZED",
@@ -1141,21 +1069,21 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							), MultiMap.caseInsensitiveMultiMap()
 					)
 				));
-			}).onSuccess(authorizationDecision -> {
-				try {
-					if(!authorizationDecision.bodyAsJsonObject().getBoolean("result")) {
-						String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
-						eventHandler.handle(Future.succeededFuture(
-							new ServiceResponse(401, "UNAUTHORIZED",
-								Buffer.buffer().appendString(
-									new JsonObject()
-										.put("errorCode", "401")
-										.put("errorMessage", msg)
-										.encodePrettily()
-									), MultiMap.caseInsensitiveMultiMap()
-							)
-						));
-					} else {
+			}).onSuccess(b -> {
+				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_TrafficLightStep")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+					eventHandler.handle(Future.succeededFuture(
+						new ServiceResponse(401, "UNAUTHORIZED",
+							Buffer.buffer().appendString(
+								new JsonObject()
+									.put("errorCode", "401")
+									.put("errorMessage", msg)
+									.encodePrettily()
+								), MultiMap.caseInsensitiveMultiMap()
+						)
+					));
+				} else {
+					try {
 						searchTrafficLightStepList(siteRequest, false, true, false).onSuccess(listTrafficLightStep -> {
 							response200SearchPageTrafficLightStep(listTrafficLightStep).onSuccess(response -> {
 								eventHandler.handle(Future.succeededFuture(response));
@@ -1168,10 +1096,10 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							LOG.error(String.format("searchpageTrafficLightStep failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
+					} catch(Exception ex) {
+						LOG.error(String.format("searchpageTrafficLightStep failed. "), ex);
+						error(null, eventHandler, ex);
 					}
-				} catch(Exception ex) {
-					LOG.error(String.format("searchpageTrafficLightStep failed. "), ex);
-					error(null, eventHandler, ex);
 				}
 			});
 		}).onFailure(ex -> {
@@ -1603,6 +1531,7 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 				String solrHostName = siteRequest.getConfig().getString(ConfigKeys.SOLR_HOST_NAME);
 				Integer solrPort = siteRequest.getConfig().getInteger(ConfigKeys.SOLR_PORT);
 				String solrCollection = siteRequest.getConfig().getString(ConfigKeys.SOLR_COLLECTION);
+				Boolean solrSsl = siteRequest.getConfig().getBoolean(ConfigKeys.SOLR_SSL);
 				Boolean softCommit = Optional.ofNullable(siteRequest.getServiceRequest().getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getBoolean("softCommit")).orElse(null);
 				Integer commitWithin = Optional.ofNullable(siteRequest.getServiceRequest().getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getInteger("commitWithin")).orElse(null);
 					if(softCommit == null && commitWithin == null)
@@ -1610,7 +1539,7 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 					else if(softCommit == null)
 						softCommit = false;
 				String solrRequestUri = String.format("/solr/%s/update%s%s%s", solrCollection, "?overwrite=true&wt=json", softCommit ? "&softCommit=true" : "", commitWithin != null ? ("&commitWithin=" + commitWithin) : "");
-				webClient.post(solrPort, solrHostName, solrRequestUri).putHeader("Content-Type", "application/json").expect(ResponsePredicate.SC_OK).sendBuffer(json.toBuffer()).onSuccess(b -> {
+				webClient.post(solrPort, solrHostName, solrRequestUri).ssl(solrSsl).putHeader("Content-Type", "application/json").expect(ResponsePredicate.SC_OK).sendBuffer(json.toBuffer()).onSuccess(b -> {
 					promise.complete();
 				}).onFailure(ex -> {
 					LOG.error(String.format("indexTrafficLightStep failed. "), new RuntimeException(ex));

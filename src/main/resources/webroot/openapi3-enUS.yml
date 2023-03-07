@@ -16512,9 +16512,13 @@ components:
                   stepSeconds:
                     type: string
                   paramInitialPar:
-                    type: string
+                    type: array
+                    items:
+                      type: string
                   paramLam:
-                    type: string
+                    type: array
+                    items:
+                      type: string
                   paramDemandScale:
                     type: string
                   paramStepSize:
@@ -16527,6 +16531,10 @@ components:
                     type: string
                   paramItersPerPar:
                     type: string
+                  reportKeys:
+                    type: array
+                    items:
+                      type: string
                   tlsStatesPaths:
                     type: array
                     items:
@@ -16596,19 +16604,39 @@ components:
             removeAllStepSeconds:
               type: string
             setParamInitialPar:
-              type: string
+              type: array
               nullable: true
+              items:
+                type: string
             removeParamInitialPar:
               type: string
             removeAllParamInitialPar:
+              type: array
+              items:
+                type: string
+            addParamInitialPar:
               type: string
+            addAllParamInitialPar:
+              type: array
+              items:
+                type: string
             setParamLam:
-              type: string
+              type: array
               nullable: true
+              items:
+                type: string
             removeParamLam:
               type: string
             removeAllParamLam:
+              type: array
+              items:
+                type: string
+            addParamLam:
               type: string
+            addAllParamLam:
+              type: array
+              items:
+                type: string
             setParamDemandScale:
               type: string
               nullable: true
@@ -16651,6 +16679,23 @@ components:
               type: string
             removeAllParamItersPerPar:
               type: string
+            setReportKeys:
+              type: array
+              nullable: true
+              items:
+                type: string
+            removeReportKeys:
+              type: string
+            removeAllReportKeys:
+              type: array
+              items:
+                type: string
+            addReportKeys:
+              type: string
+            addAllReportKeys:
+              type: array
+              items:
+                type: string
             setTlsStatesPaths:
               type: array
               nullable: true
@@ -16746,19 +16791,39 @@ components:
             removeAllStepSeconds:
               type: string
             setParamInitialPar:
-              type: string
+              type: array
               nullable: true
+              items:
+                type: string
             removeParamInitialPar:
               type: string
             removeAllParamInitialPar:
+              type: array
+              items:
+                type: string
+            addParamInitialPar:
               type: string
+            addAllParamInitialPar:
+              type: array
+              items:
+                type: string
             setParamLam:
-              type: string
+              type: array
               nullable: true
+              items:
+                type: string
             removeParamLam:
               type: string
             removeAllParamLam:
+              type: array
+              items:
+                type: string
+            addParamLam:
               type: string
+            addAllParamLam:
+              type: array
+              items:
+                type: string
             setParamDemandScale:
               type: string
               nullable: true
@@ -16801,6 +16866,23 @@ components:
               type: string
             removeAllParamItersPerPar:
               type: string
+            setReportKeys:
+              type: array
+              nullable: true
+              items:
+                type: string
+            removeReportKeys:
+              type: string
+            removeAllReportKeys:
+              type: array
+              items:
+                type: string
+            addReportKeys:
+              type: string
+            addAllReportKeys:
+              type: array
+              items:
+                type: string
             setTlsStatesPaths:
               type: array
               nullable: true
@@ -16856,9 +16938,13 @@ components:
             stepSeconds:
               type: string
             paramInitialPar:
-              type: string
+              type: array
+              items:
+                type: string
             paramLam:
-              type: string
+              type: array
+              items:
+                type: string
             paramDemandScale:
               type: string
             paramStepSize:
@@ -16871,6 +16957,10 @@ components:
               type: string
             paramItersPerPar:
               type: string
+            reportKeys:
+              type: array
+              items:
+                type: string
             tlsStatesPaths:
               type: array
               items:
@@ -16900,9 +16990,13 @@ components:
             stepSeconds:
               type: string
             paramInitialPar:
-              type: string
+              type: array
+              items:
+                type: string
             paramLam:
-              type: string
+              type: array
+              items:
+                type: string
             paramDemandScale:
               type: string
             paramStepSize:
@@ -16915,6 +17009,10 @@ components:
               type: string
             paramItersPerPar:
               type: string
+            reportKeys:
+              type: array
+              items:
+                type: string
             tlsStatesPaths:
               type: array
               items:
@@ -16944,9 +17042,13 @@ components:
             stepSeconds:
               type: string
             paramInitialPar:
-              type: string
+              type: array
+              items:
+                type: string
             paramLam:
-              type: string
+              type: array
+              items:
+                type: string
             paramDemandScale:
               type: string
             paramStepSize:
@@ -16959,6 +17061,10 @@ components:
               type: string
             paramItersPerPar:
               type: string
+            reportKeys:
+              type: array
+              items:
+                type: string
             tlsStatesPaths:
               type: array
               items:
@@ -16988,9 +17094,13 @@ components:
             stepSeconds:
               type: string
             paramInitialPar:
-              type: string
+              type: array
+              items:
+                type: string
             paramLam:
-              type: string
+              type: array
+              items:
+                type: string
             paramDemandScale:
               type: string
             paramStepSize:
@@ -17003,6 +17113,10 @@ components:
               type: string
             paramItersPerPar:
               type: string
+            reportKeys:
+              type: array
+              items:
+                type: string
             tlsStatesPaths:
               type: array
               items:
@@ -17032,9 +17146,13 @@ components:
             stepSeconds:
               type: string
             paramInitialPar:
-              type: string
+              type: array
+              items:
+                type: string
             paramLam:
-              type: string
+              type: array
+              items:
+                type: string
             paramDemandScale:
               type: string
             paramStepSize:
@@ -17047,6 +17165,10 @@ components:
               type: string
             paramItersPerPar:
               type: string
+            reportKeys:
+              type: array
+              items:
+                type: string
             tlsStatesPaths:
               type: array
               items:
@@ -17079,23 +17201,135 @@ components:
               items:
                 type: object
                 properties:
+                  simulationKey:
+                    type: string
                   simulationName:
+                    type: string
+                  paramInitialPar:
+                    type: array
+                    items:
+                      type: string
+                  paramLam:
+                    type: array
+                    items:
+                      type: string
+                  paramDemandScale:
+                    type: string
+                  paramStepSize:
+                    type: string
+                  paramUpdateStepSize:
+                    type: string
+                  paramRunTime:
+                    type: string
+                  paramTotalIterNum:
+                    type: string
+                  paramItersPerPar:
                     type: string
     PATCHSimulationReportRequest:
       allOf:
         - type: object
           properties:
+            setSimulationKey:
+              type: string
+              nullable: true
+            removeSimulationKey:
+              type: string
+            removeAllSimulationKey:
+              type: string
             setSimulationName:
               type: string
               nullable: true
             removeSimulationName:
               type: string
             removeAllSimulationName:
+              type: string
+            setParamInitialPar:
+              type: array
+              nullable: true
+              items:
+                type: string
+            removeParamInitialPar:
+              type: string
+            removeAllParamInitialPar:
+              type: array
+              items:
+                type: string
+            addParamInitialPar:
+              type: string
+            addAllParamInitialPar:
+              type: array
+              items:
+                type: string
+            setParamLam:
+              type: array
+              nullable: true
+              items:
+                type: string
+            removeParamLam:
+              type: string
+            removeAllParamLam:
+              type: array
+              items:
+                type: string
+            addParamLam:
+              type: string
+            addAllParamLam:
+              type: array
+              items:
+                type: string
+            setParamDemandScale:
+              type: string
+              nullable: true
+            removeParamDemandScale:
+              type: string
+            removeAllParamDemandScale:
+              type: string
+            setParamStepSize:
+              type: string
+              nullable: true
+            removeParamStepSize:
+              type: string
+            removeAllParamStepSize:
+              type: string
+            setParamUpdateStepSize:
+              type: string
+              nullable: true
+            removeParamUpdateStepSize:
+              type: string
+            removeAllParamUpdateStepSize:
+              type: string
+            setParamRunTime:
+              type: string
+              nullable: true
+            removeParamRunTime:
+              type: string
+            removeAllParamRunTime:
+              type: string
+            setParamTotalIterNum:
+              type: string
+              nullable: true
+            removeParamTotalIterNum:
+              type: string
+            removeAllParamTotalIterNum:
+              type: string
+            setParamItersPerPar:
+              type: string
+              nullable: true
+            removeParamItersPerPar:
+              type: string
+            removeAllParamItersPerPar:
               type: string
     PATCHSimulationReportResponse:
       allOf:
         - type: object
           properties:
+            setSimulationKey:
+              type: string
+              nullable: true
+            removeSimulationKey:
+              type: string
+            removeAllSimulationKey:
+              type: string
             setSimulationName:
               type: string
               nullable: true
@@ -17103,35 +17337,221 @@ components:
               type: string
             removeAllSimulationName:
               type: string
+            setParamInitialPar:
+              type: array
+              nullable: true
+              items:
+                type: string
+            removeParamInitialPar:
+              type: string
+            removeAllParamInitialPar:
+              type: array
+              items:
+                type: string
+            addParamInitialPar:
+              type: string
+            addAllParamInitialPar:
+              type: array
+              items:
+                type: string
+            setParamLam:
+              type: array
+              nullable: true
+              items:
+                type: string
+            removeParamLam:
+              type: string
+            removeAllParamLam:
+              type: array
+              items:
+                type: string
+            addParamLam:
+              type: string
+            addAllParamLam:
+              type: array
+              items:
+                type: string
+            setParamDemandScale:
+              type: string
+              nullable: true
+            removeParamDemandScale:
+              type: string
+            removeAllParamDemandScale:
+              type: string
+            setParamStepSize:
+              type: string
+              nullable: true
+            removeParamStepSize:
+              type: string
+            removeAllParamStepSize:
+              type: string
+            setParamUpdateStepSize:
+              type: string
+              nullable: true
+            removeParamUpdateStepSize:
+              type: string
+            removeAllParamUpdateStepSize:
+              type: string
+            setParamRunTime:
+              type: string
+              nullable: true
+            removeParamRunTime:
+              type: string
+            removeAllParamRunTime:
+              type: string
+            setParamTotalIterNum:
+              type: string
+              nullable: true
+            removeParamTotalIterNum:
+              type: string
+            removeAllParamTotalIterNum:
+              type: string
+            setParamItersPerPar:
+              type: string
+              nullable: true
+            removeParamItersPerPar:
+              type: string
+            removeAllParamItersPerPar:
+              type: string
     POSTSimulationReportRequest:
       allOf:
         - type: object
           properties:
+            simulationKey:
+              type: string
             simulationName:
+              type: string
+            paramInitialPar:
+              type: array
+              items:
+                type: string
+            paramLam:
+              type: array
+              items:
+                type: string
+            paramDemandScale:
+              type: string
+            paramStepSize:
+              type: string
+            paramUpdateStepSize:
+              type: string
+            paramRunTime:
+              type: string
+            paramTotalIterNum:
+              type: string
+            paramItersPerPar:
               type: string
     POSTSimulationReportResponse:
       allOf:
         - type: object
           properties:
+            simulationKey:
+              type: string
             simulationName:
+              type: string
+            paramInitialPar:
+              type: array
+              items:
+                type: string
+            paramLam:
+              type: array
+              items:
+                type: string
+            paramDemandScale:
+              type: string
+            paramStepSize:
+              type: string
+            paramUpdateStepSize:
+              type: string
+            paramRunTime:
+              type: string
+            paramTotalIterNum:
+              type: string
+            paramItersPerPar:
               type: string
     PUTImportSimulationReportRequest:
       allOf:
         - type: object
           properties:
+            simulationKey:
+              type: string
             simulationName:
+              type: string
+            paramInitialPar:
+              type: array
+              items:
+                type: string
+            paramLam:
+              type: array
+              items:
+                type: string
+            paramDemandScale:
+              type: string
+            paramStepSize:
+              type: string
+            paramUpdateStepSize:
+              type: string
+            paramRunTime:
+              type: string
+            paramTotalIterNum:
+              type: string
+            paramItersPerPar:
               type: string
     PUTImportSimulationReportResponse:
       allOf:
         - type: object
           properties:
+            simulationKey:
+              type: string
             simulationName:
+              type: string
+            paramInitialPar:
+              type: array
+              items:
+                type: string
+            paramLam:
+              type: array
+              items:
+                type: string
+            paramDemandScale:
+              type: string
+            paramStepSize:
+              type: string
+            paramUpdateStepSize:
+              type: string
+            paramRunTime:
+              type: string
+            paramTotalIterNum:
+              type: string
+            paramItersPerPar:
               type: string
     GETSimulationReportResponse:
       allOf:
         - type: object
           properties:
+            simulationKey:
+              type: string
             simulationName:
+              type: string
+            paramInitialPar:
+              type: array
+              items:
+                type: string
+            paramLam:
+              type: array
+              items:
+                type: string
+            paramDemandScale:
+              type: string
+            paramStepSize:
+              type: string
+            paramUpdateStepSize:
+              type: string
+            paramRunTime:
+              type: string
+            paramTotalIterNum:
+              type: string
+            paramItersPerPar:
               type: string
     SearchPageSimulationReportResponse:
       allOf:

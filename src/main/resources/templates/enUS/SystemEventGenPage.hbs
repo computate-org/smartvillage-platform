@@ -880,7 +880,7 @@
 		</button>
 		{{/eq}}
 	{{/ifContainsAnyRoles}}
-	{{#ifContainsAnyRoles roles authRolesAdmin}}
+	{{#ifContainsAnyRoles roles authRoleAdmin}}
 {{#block "htmForm_postSystemEvent"}}{{/block}}
 {{#block "htmForm_patchSystemEvent"}}{{/block}}
 {{#block "htmForm_putimportSystemEvent"}}{{/block}}
@@ -1699,7 +1699,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setObjectText', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_objectText')); }, function() { addError($('#{{classApiMethodMethod}}_objectText')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setObjectText', $(this).val().replace('[','').replace(']','').split(/[ ,]+/), function() { addGlow($('#{{classApiMethodMethod}}_objectText')); }, function() { addError($('#{{classApiMethodMethod}}_objectText')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{systemEvent_.objectText}}"

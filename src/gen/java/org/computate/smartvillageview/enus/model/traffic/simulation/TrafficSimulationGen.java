@@ -45,8 +45,10 @@ import java.util.Locale;
 import java.time.OffsetDateTime;
 import java.lang.String;
 import java.math.BigDecimal;
-import java.lang.Integer;
 import io.vertx.core.json.JsonArray;
+import java.lang.Integer;
+import java.lang.Long;
+import org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport;
 import org.computate.search.wrap.Wrap;
 import io.vertx.core.Promise;
 import io.vertx.core.Future;
@@ -570,11 +572,15 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	}
 	@JsonIgnore
 	public void setStartSeconds(Double o) {
-			this.startSeconds = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setStartSeconds(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	@JsonIgnore
 	public void setStartSeconds(Integer o) {
-			this.startSeconds = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setStartSeconds(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setStartSeconds(Number o) {
+		setStartSeconds(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	protected TrafficSimulation startSecondsInit() {
 		Wrap<BigDecimal> startSecondsWrap = new Wrap<BigDecimal>().var("startSeconds");
@@ -641,11 +647,15 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	}
 	@JsonIgnore
 	public void setEndSeconds(Double o) {
-			this.endSeconds = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setEndSeconds(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	@JsonIgnore
 	public void setEndSeconds(Integer o) {
-			this.endSeconds = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setEndSeconds(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setEndSeconds(Number o) {
+		setEndSeconds(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	protected TrafficSimulation endSecondsInit() {
 		Wrap<BigDecimal> endSecondsWrap = new Wrap<BigDecimal>().var("endSeconds");
@@ -712,11 +722,15 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	}
 	@JsonIgnore
 	public void setStepSeconds(Double o) {
-			this.stepSeconds = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setStepSeconds(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	@JsonIgnore
 	public void setStepSeconds(Integer o) {
-			this.stepSeconds = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setStepSeconds(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setStepSeconds(Number o) {
+		setStepSeconds(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	protected TrafficSimulation stepSecondsInit() {
 		Wrap<BigDecimal> stepSecondsWrap = new Wrap<BigDecimal>().var("stepSeconds");
@@ -749,43 +763,90 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 
 
 	/**	 The entity paramInitialPar
-	 *	 is defined as null before being initialized. 
+	 *	 It is constructed before being initialized with the constructor by default. 
 	 */
 	@JsonProperty
+	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
 	@JsonInclude(Include.NON_NULL)
-	protected String paramInitialPar;
+	protected List<BigDecimal> paramInitialPar = new ArrayList<BigDecimal>();
 
 	/**	<br> The entity paramInitialPar
-	 *  is defined as null before being initialized. 
+	 *  It is constructed before being initialized with the constructor by default. 
 	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation&fq=entiteVar_enUS_indexed_string:paramInitialPar">Find the entity paramInitialPar in Solr</a>
 	 * <br>
-	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 * @param l is the entity already constructed. 
 	 **/
-	protected abstract void _paramInitialPar(Wrap<String> w);
+	protected abstract void _paramInitialPar(List<BigDecimal> l);
 
-	public String getParamInitialPar() {
+	public List<BigDecimal> getParamInitialPar() {
 		return paramInitialPar;
 	}
+
+	public void setParamInitialPar(List<BigDecimal> paramInitialPar) {
+		this.paramInitialPar = paramInitialPar;
+	}
+	@JsonIgnore
 	public void setParamInitialPar(String o) {
-		this.paramInitialPar = TrafficSimulation.staticSetParamInitialPar(siteRequest_, o);
+		BigDecimal l = TrafficSimulation.staticSetParamInitialPar(siteRequest_, o);
+		if(l != null)
+			addParamInitialPar(l);
 	}
-	public static String staticSetParamInitialPar(SiteRequestEnUS siteRequest_, String o) {
-		return o;
+	public static BigDecimal staticSetParamInitialPar(SiteRequestEnUS siteRequest_, String o) {
+		o = StringUtils.removeAll(o, "[^\\d\\.]");
+		if(NumberUtils.isParsable(o))
+			return new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		return null;
 	}
-	protected TrafficSimulation paramInitialParInit() {
-		Wrap<String> paramInitialParWrap = new Wrap<String>().var("paramInitialPar");
-		if(paramInitialPar == null) {
-			_paramInitialPar(paramInitialParWrap);
-			setParamInitialPar(paramInitialParWrap.o);
+	@JsonIgnore
+	public void setParamInitialPar(Double o) {
+		addParamInitialPar(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setParamInitialPar(Integer o) {
+		addParamInitialPar(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setParamInitialPar(Number o) {
+		addParamInitialPar(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	public TrafficSimulation addParamInitialPar(BigDecimal...objects) {
+		for(BigDecimal o : objects) {
+			addParamInitialPar(o);
 		}
 		return (TrafficSimulation)this;
 	}
+	public TrafficSimulation addParamInitialPar(BigDecimal o) {
+		if(o != null)
+			this.paramInitialPar.add(o);
+		return (TrafficSimulation)this;
+	}
+	@JsonIgnore
+	public void setParamInitialPar(JsonArray objects) {
+		paramInitialPar.clear();
+		if(objects == null)
+			return;
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
+			addParamInitialPar(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+		}
+	}
+	public TrafficSimulation addParamInitialPar(String o) {
+		if(NumberUtils.isParsable(o)) {
+			BigDecimal p = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+			addParamInitialPar(p);
+		}
+		return (TrafficSimulation)this;
+	}
+	protected TrafficSimulation paramInitialParInit() {
+		_paramInitialPar(paramInitialPar);
+		return (TrafficSimulation)this;
+	}
 
-	public static String staticSearchParamInitialPar(SiteRequestEnUS siteRequest_, String o) {
+	public static BigDecimal staticSearchParamInitialPar(SiteRequestEnUS siteRequest_, BigDecimal o) {
 		return o;
 	}
 
-	public static String staticSearchStrParamInitialPar(SiteRequestEnUS siteRequest_, String o) {
+	public static String staticSearchStrParamInitialPar(SiteRequestEnUS siteRequest_, BigDecimal o) {
 		return o == null ? null : o.toString();
 	}
 
@@ -793,8 +854,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		return TrafficSimulation.staticSearchStrParamInitialPar(siteRequest_, TrafficSimulation.staticSearchParamInitialPar(siteRequest_, TrafficSimulation.staticSetParamInitialPar(siteRequest_, o)));
 	}
 
-	public String sqlParamInitialPar() {
-		return paramInitialPar;
+	public Number[] sqlParamInitialPar() {
+		return paramInitialPar.stream().map(v -> (Number)v).toArray(Number[]::new);
 	}
 
 	//////////////
@@ -803,43 +864,90 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 
 
 	/**	 The entity paramLam
-	 *	 is defined as null before being initialized. 
+	 *	 It is constructed before being initialized with the constructor by default. 
 	 */
 	@JsonProperty
+	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
 	@JsonInclude(Include.NON_NULL)
-	protected String paramLam;
+	protected List<BigDecimal> paramLam = new ArrayList<BigDecimal>();
 
 	/**	<br> The entity paramLam
-	 *  is defined as null before being initialized. 
+	 *  It is constructed before being initialized with the constructor by default. 
 	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation&fq=entiteVar_enUS_indexed_string:paramLam">Find the entity paramLam in Solr</a>
 	 * <br>
-	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 * @param l is the entity already constructed. 
 	 **/
-	protected abstract void _paramLam(Wrap<String> w);
+	protected abstract void _paramLam(List<BigDecimal> l);
 
-	public String getParamLam() {
+	public List<BigDecimal> getParamLam() {
 		return paramLam;
 	}
+
+	public void setParamLam(List<BigDecimal> paramLam) {
+		this.paramLam = paramLam;
+	}
+	@JsonIgnore
 	public void setParamLam(String o) {
-		this.paramLam = TrafficSimulation.staticSetParamLam(siteRequest_, o);
+		BigDecimal l = TrafficSimulation.staticSetParamLam(siteRequest_, o);
+		if(l != null)
+			addParamLam(l);
 	}
-	public static String staticSetParamLam(SiteRequestEnUS siteRequest_, String o) {
-		return o;
+	public static BigDecimal staticSetParamLam(SiteRequestEnUS siteRequest_, String o) {
+		o = StringUtils.removeAll(o, "[^\\d\\.]");
+		if(NumberUtils.isParsable(o))
+			return new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		return null;
 	}
-	protected TrafficSimulation paramLamInit() {
-		Wrap<String> paramLamWrap = new Wrap<String>().var("paramLam");
-		if(paramLam == null) {
-			_paramLam(paramLamWrap);
-			setParamLam(paramLamWrap.o);
+	@JsonIgnore
+	public void setParamLam(Double o) {
+		addParamLam(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setParamLam(Integer o) {
+		addParamLam(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setParamLam(Number o) {
+		addParamLam(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	public TrafficSimulation addParamLam(BigDecimal...objects) {
+		for(BigDecimal o : objects) {
+			addParamLam(o);
 		}
 		return (TrafficSimulation)this;
 	}
+	public TrafficSimulation addParamLam(BigDecimal o) {
+		if(o != null)
+			this.paramLam.add(o);
+		return (TrafficSimulation)this;
+	}
+	@JsonIgnore
+	public void setParamLam(JsonArray objects) {
+		paramLam.clear();
+		if(objects == null)
+			return;
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
+			addParamLam(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+		}
+	}
+	public TrafficSimulation addParamLam(String o) {
+		if(NumberUtils.isParsable(o)) {
+			BigDecimal p = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+			addParamLam(p);
+		}
+		return (TrafficSimulation)this;
+	}
+	protected TrafficSimulation paramLamInit() {
+		_paramLam(paramLam);
+		return (TrafficSimulation)this;
+	}
 
-	public static String staticSearchParamLam(SiteRequestEnUS siteRequest_, String o) {
+	public static BigDecimal staticSearchParamLam(SiteRequestEnUS siteRequest_, BigDecimal o) {
 		return o;
 	}
 
-	public static String staticSearchStrParamLam(SiteRequestEnUS siteRequest_, String o) {
+	public static String staticSearchStrParamLam(SiteRequestEnUS siteRequest_, BigDecimal o) {
 		return o == null ? null : o.toString();
 	}
 
@@ -847,8 +955,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		return TrafficSimulation.staticSearchStrParamLam(siteRequest_, TrafficSimulation.staticSearchParamLam(siteRequest_, TrafficSimulation.staticSetParamLam(siteRequest_, o)));
 	}
 
-	public String sqlParamLam() {
-		return paramLam;
+	public Number[] sqlParamLam() {
+		return paramLam.stream().map(v -> (Number)v).toArray(Number[]::new);
 	}
 
 	//////////////////////
@@ -862,7 +970,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	@JsonProperty
 	@JsonSerialize(using = ToStringSerializer.class)
 	@JsonInclude(Include.NON_NULL)
-	protected Integer paramDemandScale;
+	protected BigDecimal paramDemandScale;
 
 	/**	<br> The entity paramDemandScale
 	 *  is defined as null before being initialized. 
@@ -870,26 +978,39 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected abstract void _paramDemandScale(Wrap<Integer> w);
+	protected abstract void _paramDemandScale(Wrap<BigDecimal> w);
 
-	public Integer getParamDemandScale() {
+	public BigDecimal getParamDemandScale() {
 		return paramDemandScale;
 	}
 
-	public void setParamDemandScale(Integer paramDemandScale) {
+	public void setParamDemandScale(BigDecimal paramDemandScale) {
 		this.paramDemandScale = paramDemandScale;
 	}
 	@JsonIgnore
 	public void setParamDemandScale(String o) {
 		this.paramDemandScale = TrafficSimulation.staticSetParamDemandScale(siteRequest_, o);
 	}
-	public static Integer staticSetParamDemandScale(SiteRequestEnUS siteRequest_, String o) {
+	public static BigDecimal staticSetParamDemandScale(SiteRequestEnUS siteRequest_, String o) {
+		o = StringUtils.removeAll(o, "[^\\d\\.]");
 		if(NumberUtils.isParsable(o))
-			return Integer.parseInt(o);
+			return new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
 		return null;
 	}
+	@JsonIgnore
+	public void setParamDemandScale(Double o) {
+		setParamDemandScale(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setParamDemandScale(Integer o) {
+		setParamDemandScale(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setParamDemandScale(Number o) {
+		setParamDemandScale(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
 	protected TrafficSimulation paramDemandScaleInit() {
-		Wrap<Integer> paramDemandScaleWrap = new Wrap<Integer>().var("paramDemandScale");
+		Wrap<BigDecimal> paramDemandScaleWrap = new Wrap<BigDecimal>().var("paramDemandScale");
 		if(paramDemandScale == null) {
 			_paramDemandScale(paramDemandScaleWrap);
 			setParamDemandScale(paramDemandScaleWrap.o);
@@ -897,11 +1018,11 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		return (TrafficSimulation)this;
 	}
 
-	public static Integer staticSearchParamDemandScale(SiteRequestEnUS siteRequest_, Integer o) {
-		return o;
+	public static Double staticSearchParamDemandScale(SiteRequestEnUS siteRequest_, BigDecimal o) {
+		return o == null ? null : o.doubleValue();
 	}
 
-	public static String staticSearchStrParamDemandScale(SiteRequestEnUS siteRequest_, Integer o) {
+	public static String staticSearchStrParamDemandScale(SiteRequestEnUS siteRequest_, Double o) {
 		return o == null ? null : o.toString();
 	}
 
@@ -909,7 +1030,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		return TrafficSimulation.staticSearchStrParamDemandScale(siteRequest_, TrafficSimulation.staticSearchParamDemandScale(siteRequest_, TrafficSimulation.staticSetParamDemandScale(siteRequest_, o)));
 	}
 
-	public Integer sqlParamDemandScale() {
+	public BigDecimal sqlParamDemandScale() {
 		return paramDemandScale;
 	}
 
@@ -924,7 +1045,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	@JsonProperty
 	@JsonSerialize(using = ToStringSerializer.class)
 	@JsonInclude(Include.NON_NULL)
-	protected Integer paramStepSize;
+	protected BigDecimal paramStepSize;
 
 	/**	<br> The entity paramStepSize
 	 *  is defined as null before being initialized. 
@@ -932,26 +1053,39 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected abstract void _paramStepSize(Wrap<Integer> w);
+	protected abstract void _paramStepSize(Wrap<BigDecimal> w);
 
-	public Integer getParamStepSize() {
+	public BigDecimal getParamStepSize() {
 		return paramStepSize;
 	}
 
-	public void setParamStepSize(Integer paramStepSize) {
+	public void setParamStepSize(BigDecimal paramStepSize) {
 		this.paramStepSize = paramStepSize;
 	}
 	@JsonIgnore
 	public void setParamStepSize(String o) {
 		this.paramStepSize = TrafficSimulation.staticSetParamStepSize(siteRequest_, o);
 	}
-	public static Integer staticSetParamStepSize(SiteRequestEnUS siteRequest_, String o) {
+	public static BigDecimal staticSetParamStepSize(SiteRequestEnUS siteRequest_, String o) {
+		o = StringUtils.removeAll(o, "[^\\d\\.]");
 		if(NumberUtils.isParsable(o))
-			return Integer.parseInt(o);
+			return new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
 		return null;
 	}
+	@JsonIgnore
+	public void setParamStepSize(Double o) {
+		setParamStepSize(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setParamStepSize(Integer o) {
+		setParamStepSize(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setParamStepSize(Number o) {
+		setParamStepSize(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
 	protected TrafficSimulation paramStepSizeInit() {
-		Wrap<Integer> paramStepSizeWrap = new Wrap<Integer>().var("paramStepSize");
+		Wrap<BigDecimal> paramStepSizeWrap = new Wrap<BigDecimal>().var("paramStepSize");
 		if(paramStepSize == null) {
 			_paramStepSize(paramStepSizeWrap);
 			setParamStepSize(paramStepSizeWrap.o);
@@ -959,11 +1093,11 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		return (TrafficSimulation)this;
 	}
 
-	public static Integer staticSearchParamStepSize(SiteRequestEnUS siteRequest_, Integer o) {
-		return o;
+	public static Double staticSearchParamStepSize(SiteRequestEnUS siteRequest_, BigDecimal o) {
+		return o == null ? null : o.doubleValue();
 	}
 
-	public static String staticSearchStrParamStepSize(SiteRequestEnUS siteRequest_, Integer o) {
+	public static String staticSearchStrParamStepSize(SiteRequestEnUS siteRequest_, Double o) {
 		return o == null ? null : o.toString();
 	}
 
@@ -971,7 +1105,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		return TrafficSimulation.staticSearchStrParamStepSize(siteRequest_, TrafficSimulation.staticSearchParamStepSize(siteRequest_, TrafficSimulation.staticSetParamStepSize(siteRequest_, o)));
 	}
 
-	public Integer sqlParamStepSize() {
+	public BigDecimal sqlParamStepSize() {
 		return paramStepSize;
 	}
 
@@ -1223,6 +1357,95 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		return paramItersPerPar;
 	}
 
+	////////////////
+	// reportKeys //
+	////////////////
+
+
+	/**	 The entity reportKeys
+	 *	 It is constructed before being initialized with the constructor by default. 
+	 */
+	@JsonProperty
+	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
+	@JsonSerialize(contentUsing = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected List<Long> reportKeys = new ArrayList<Long>();
+
+	/**	<br> The entity reportKeys
+	 *  It is constructed before being initialized with the constructor by default. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation&fq=entiteVar_enUS_indexed_string:reportKeys">Find the entity reportKeys in Solr</a>
+	 * <br>
+	 * @param w is the entity already constructed. 
+	 **/
+	protected abstract void _reportKeys(List<Long> w);
+
+	public List<Long> getReportKeys() {
+		return reportKeys;
+	}
+
+	public void setReportKeys(List<Long> reportKeys) {
+		this.reportKeys = reportKeys;
+	}
+	@JsonIgnore
+	public void setReportKeys(String o) {
+		Long l = TrafficSimulation.staticSetReportKeys(siteRequest_, o);
+		if(l != null)
+			addReportKeys(l);
+	}
+	public static Long staticSetReportKeys(SiteRequestEnUS siteRequest_, String o) {
+		if(NumberUtils.isParsable(o))
+			return Long.parseLong(o);
+		return null;
+	}
+	public TrafficSimulation addReportKeys(Long...objects) {
+		for(Long o : objects) {
+			addReportKeys(o);
+		}
+		return (TrafficSimulation)this;
+	}
+	public TrafficSimulation addReportKeys(Long o) {
+		if(o != null)
+			this.reportKeys.add(o);
+		return (TrafficSimulation)this;
+	}
+	@JsonIgnore
+	public void setReportKeys(JsonArray objects) {
+		reportKeys.clear();
+		if(objects == null)
+			return;
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
+			setReportKeys(o);
+		}
+	}
+	public TrafficSimulation addReportKeys(String o) {
+		if(NumberUtils.isParsable(o)) {
+			Long p = Long.parseLong(o);
+			addReportKeys(p);
+		}
+		return (TrafficSimulation)this;
+	}
+	protected TrafficSimulation reportKeysInit() {
+		_reportKeys(reportKeys);
+		return (TrafficSimulation)this;
+	}
+
+	public static Long staticSearchReportKeys(SiteRequestEnUS siteRequest_, Long o) {
+		return o;
+	}
+
+	public static String staticSearchStrReportKeys(SiteRequestEnUS siteRequest_, Long o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqReportKeys(SiteRequestEnUS siteRequest_, String o) {
+		return TrafficSimulation.staticSearchStrReportKeys(siteRequest_, TrafficSimulation.staticSearchReportKeys(siteRequest_, TrafficSimulation.staticSetReportKeys(siteRequest_, o)));
+	}
+
+	public Number[] sqlReportKeys() {
+		return reportKeys.stream().map(v -> (Number)v).toArray(Number[]::new);
+	}
+
 	////////////////////
 	// tlsStatesPaths //
 	////////////////////
@@ -1268,6 +1491,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	@JsonIgnore
 	public void setTlsStatesPaths(JsonArray objects) {
 		tlsStatesPaths.clear();
+		if(objects == null)
+			return;
 		for(int i = 0; i < objects.size(); i++) {
 			String o = objects.getString(i);
 			addTlsStatesPaths(o);
@@ -1335,6 +1560,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	@JsonIgnore
 	public void setAdditionalFilePaths(JsonArray objects) {
 		additionalFilePaths.clear();
+		if(objects == null)
+			return;
 		for(int i = 0; i < objects.size(); i++) {
 			String o = objects.getString(i);
 			addAdditionalFilePaths(o);
@@ -1402,6 +1629,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 				paramRunTimeInit();
 				paramTotalIterNumInit();
 				paramItersPerParInit();
+				reportKeysInit();
 				tlsStatesPathsInit();
 				additionalFilePathsInit();
 				promise2.complete();
@@ -1489,6 +1717,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 				return oTrafficSimulation.paramTotalIterNum;
 			case "paramItersPerPar":
 				return oTrafficSimulation.paramItersPerPar;
+			case "reportKeys":
+				return oTrafficSimulation.reportKeys;
 			case "tlsStatesPaths":
 				return oTrafficSimulation.tlsStatesPaths;
 			case "additionalFilePaths":
@@ -1518,6 +1748,11 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	public Object relateTrafficSimulation(String var, Object val) {
 		TrafficSimulation oTrafficSimulation = (TrafficSimulation)this;
 		switch(var) {
+			case "reportKeys":
+				oTrafficSimulation.addReportKeys((Long)val);
+				if(!saves.contains("reportKeys"))
+					saves.add("reportKeys");
+				return val;
 			default:
 				return super.relateBaseModel(var, val);
 		}
@@ -1564,6 +1799,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return TrafficSimulation.staticSetParamTotalIterNum(siteRequest_, o);
 		case "paramItersPerPar":
 			return TrafficSimulation.staticSetParamItersPerPar(siteRequest_, o);
+		case "reportKeys":
+			return TrafficSimulation.staticSetReportKeys(siteRequest_, o);
 		case "tlsStatesPaths":
 			return TrafficSimulation.staticSetTlsStatesPaths(siteRequest_, o);
 		case "additionalFilePaths":
@@ -1599,13 +1836,13 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		case "stepSeconds":
 			return TrafficSimulation.staticSearchStepSeconds(siteRequest_, (BigDecimal)o);
 		case "paramInitialPar":
-			return TrafficSimulation.staticSearchParamInitialPar(siteRequest_, (String)o);
+			return TrafficSimulation.staticSearchParamInitialPar(siteRequest_, (BigDecimal)o);
 		case "paramLam":
-			return TrafficSimulation.staticSearchParamLam(siteRequest_, (String)o);
+			return TrafficSimulation.staticSearchParamLam(siteRequest_, (BigDecimal)o);
 		case "paramDemandScale":
-			return TrafficSimulation.staticSearchParamDemandScale(siteRequest_, (Integer)o);
+			return TrafficSimulation.staticSearchParamDemandScale(siteRequest_, (BigDecimal)o);
 		case "paramStepSize":
-			return TrafficSimulation.staticSearchParamStepSize(siteRequest_, (Integer)o);
+			return TrafficSimulation.staticSearchParamStepSize(siteRequest_, (BigDecimal)o);
 		case "paramUpdateStepSize":
 			return TrafficSimulation.staticSearchParamUpdateStepSize(siteRequest_, (Integer)o);
 		case "paramRunTime":
@@ -1614,6 +1851,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return TrafficSimulation.staticSearchParamTotalIterNum(siteRequest_, (Integer)o);
 		case "paramItersPerPar":
 			return TrafficSimulation.staticSearchParamItersPerPar(siteRequest_, (Integer)o);
+		case "reportKeys":
+			return TrafficSimulation.staticSearchReportKeys(siteRequest_, (Long)o);
 		case "tlsStatesPaths":
 			return TrafficSimulation.staticSearchTlsStatesPaths(siteRequest_, (String)o);
 		case "additionalFilePaths":
@@ -1649,13 +1888,13 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		case "stepSeconds":
 			return TrafficSimulation.staticSearchStrStepSeconds(siteRequest_, (Double)o);
 		case "paramInitialPar":
-			return TrafficSimulation.staticSearchStrParamInitialPar(siteRequest_, (String)o);
+			return TrafficSimulation.staticSearchStrParamInitialPar(siteRequest_, (BigDecimal)o);
 		case "paramLam":
-			return TrafficSimulation.staticSearchStrParamLam(siteRequest_, (String)o);
+			return TrafficSimulation.staticSearchStrParamLam(siteRequest_, (BigDecimal)o);
 		case "paramDemandScale":
-			return TrafficSimulation.staticSearchStrParamDemandScale(siteRequest_, (Integer)o);
+			return TrafficSimulation.staticSearchStrParamDemandScale(siteRequest_, (Double)o);
 		case "paramStepSize":
-			return TrafficSimulation.staticSearchStrParamStepSize(siteRequest_, (Integer)o);
+			return TrafficSimulation.staticSearchStrParamStepSize(siteRequest_, (Double)o);
 		case "paramUpdateStepSize":
 			return TrafficSimulation.staticSearchStrParamUpdateStepSize(siteRequest_, (Integer)o);
 		case "paramRunTime":
@@ -1664,6 +1903,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return TrafficSimulation.staticSearchStrParamTotalIterNum(siteRequest_, (Integer)o);
 		case "paramItersPerPar":
 			return TrafficSimulation.staticSearchStrParamItersPerPar(siteRequest_, (Integer)o);
+		case "reportKeys":
+			return TrafficSimulation.staticSearchStrReportKeys(siteRequest_, (Long)o);
 		case "tlsStatesPaths":
 			return TrafficSimulation.staticSearchStrTlsStatesPaths(siteRequest_, (String)o);
 		case "additionalFilePaths":
@@ -1714,6 +1955,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return TrafficSimulation.staticSearchFqParamTotalIterNum(siteRequest_, o);
 		case "paramItersPerPar":
 			return TrafficSimulation.staticSearchFqParamItersPerPar(siteRequest_, o);
+		case "reportKeys":
+			return TrafficSimulation.staticSearchFqReportKeys(siteRequest_, o);
 		case "tlsStatesPaths":
 			return TrafficSimulation.staticSearchFqTlsStatesPaths(siteRequest_, o);
 		case "additionalFilePaths":
@@ -1801,30 +2044,46 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 				saves.add("stepSeconds");
 				return val;
 			} else if("paraminitialpar".equals(varLower)) {
-				if(val instanceof String) {
-					setParamInitialPar((String)val);
+				if(val instanceof List<?>) {
+					((List<BigDecimal>)val).stream().forEach(v -> addParamInitialPar(v));
+				} else if(val instanceof JsonArray) {
+					((JsonArray)val).stream().forEach(v -> setParamInitialPar(v.toString()));
+				} else if(val instanceof BigDecimal[]) {
+					Arrays.asList((BigDecimal[])val).stream().forEach(v -> setParamInitialPar((BigDecimal)v));
+				} else if(val instanceof Number[]) {
+					Arrays.asList((Number[])val).stream().forEach(v -> setParamInitialPar((Number)v));
 				}
-				saves.add("paramInitialPar");
+				if(!saves.contains("paramInitialPar")) {
+					saves.add("paramInitialPar");
+				}
 				return val;
 			} else if("paramlam".equals(varLower)) {
-				if(val instanceof String) {
-					setParamLam((String)val);
+				if(val instanceof List<?>) {
+					((List<BigDecimal>)val).stream().forEach(v -> addParamLam(v));
+				} else if(val instanceof JsonArray) {
+					((JsonArray)val).stream().forEach(v -> setParamLam(v.toString()));
+				} else if(val instanceof BigDecimal[]) {
+					Arrays.asList((BigDecimal[])val).stream().forEach(v -> setParamLam((BigDecimal)v));
+				} else if(val instanceof Number[]) {
+					Arrays.asList((Number[])val).stream().forEach(v -> setParamLam((Number)v));
 				}
-				saves.add("paramLam");
+				if(!saves.contains("paramLam")) {
+					saves.add("paramLam");
+				}
 				return val;
 			} else if("paramdemandscale".equals(varLower)) {
-				if(val instanceof Integer) {
-					setParamDemandScale((Integer)val);
-				} else {
-					setParamDemandScale(val == null ? null : val.toString());
+				if(val instanceof String) {
+					setParamDemandScale((String)val);
+				} else if(val instanceof Number) {
+					setParamDemandScale(new BigDecimal(((Number)val).doubleValue()));
 				}
 				saves.add("paramDemandScale");
 				return val;
 			} else if("paramstepsize".equals(varLower)) {
-				if(val instanceof Integer) {
-					setParamStepSize((Integer)val);
-				} else {
-					setParamStepSize(val == null ? null : val.toString());
+				if(val instanceof String) {
+					setParamStepSize((String)val);
+				} else if(val instanceof Number) {
+					setParamStepSize(new BigDecimal(((Number)val).doubleValue()));
 				}
 				saves.add("paramStepSize");
 				return val;
@@ -1907,16 +2166,24 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			doc.put("stepSeconds_docvalues_double", stepSeconds.doubleValue());
 		}
 		if(paramInitialPar != null) {
-			doc.put("paramInitialPar_docvalues_string", paramInitialPar);
+			JsonArray l = new JsonArray();
+			doc.put("paramInitialPar_docvalues_doubles", l);
+			for(BigDecimal o : paramInitialPar) {
+				l.add(o);
+			}
 		}
 		if(paramLam != null) {
-			doc.put("paramLam_docvalues_string", paramLam);
+			JsonArray l = new JsonArray();
+			doc.put("paramLam_docvalues_doubles", l);
+			for(BigDecimal o : paramLam) {
+				l.add(o);
+			}
 		}
 		if(paramDemandScale != null) {
-			doc.put("paramDemandScale_docvalues_int", paramDemandScale);
+			doc.put("paramDemandScale_docvalues_double", paramDemandScale.doubleValue());
 		}
 		if(paramStepSize != null) {
-			doc.put("paramStepSize_docvalues_int", paramStepSize);
+			doc.put("paramStepSize_docvalues_double", paramStepSize.doubleValue());
 		}
 		if(paramUpdateStepSize != null) {
 			doc.put("paramUpdateStepSize_docvalues_int", paramUpdateStepSize);
@@ -1929,6 +2196,13 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		}
 		if(paramItersPerPar != null) {
 			doc.put("paramItersPerPar_docvalues_int", paramItersPerPar);
+		}
+		if(reportKeys != null) {
+			JsonArray l = new JsonArray();
+			doc.put("reportKeys_docvalues_longs", l);
+			for(Long o : reportKeys) {
+				l.add(o);
+			}
 		}
 		super.indexBaseModel(doc);
 
@@ -1953,13 +2227,13 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			case "stepSeconds":
 				return "stepSeconds_docvalues_double";
 			case "paramInitialPar":
-				return "paramInitialPar_docvalues_string";
+				return "paramInitialPar_docvalues_doubles";
 			case "paramLam":
-				return "paramLam_docvalues_string";
+				return "paramLam_docvalues_doubles";
 			case "paramDemandScale":
-				return "paramDemandScale_docvalues_int";
+				return "paramDemandScale_docvalues_double";
 			case "paramStepSize":
-				return "paramStepSize_docvalues_int";
+				return "paramStepSize_docvalues_double";
 			case "paramUpdateStepSize":
 				return "paramUpdateStepSize_docvalues_int";
 			case "paramRunTime":
@@ -1968,6 +2242,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 				return "paramTotalIterNum_docvalues_int";
 			case "paramItersPerPar":
 				return "paramItersPerPar_docvalues_int";
+			case "reportKeys":
+				return "reportKeys_docvalues_longs";
 			default:
 				return BaseModel.varStoredBaseModel(entityVar);
 		}
@@ -1992,13 +2268,13 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			case "stepSeconds":
 				return "stepSeconds_docvalues_double";
 			case "paramInitialPar":
-				return "paramInitialPar_docvalues_string";
+				return "paramInitialPar_docvalues_doubles";
 			case "paramLam":
-				return "paramLam_docvalues_string";
+				return "paramLam_docvalues_doubles";
 			case "paramDemandScale":
-				return "paramDemandScale_docvalues_int";
+				return "paramDemandScale_docvalues_double";
 			case "paramStepSize":
-				return "paramStepSize_docvalues_int";
+				return "paramStepSize_docvalues_double";
 			case "paramUpdateStepSize":
 				return "paramUpdateStepSize_docvalues_int";
 			case "paramRunTime":
@@ -2007,6 +2283,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 				return "paramTotalIterNum_docvalues_int";
 			case "paramItersPerPar":
 				return "paramItersPerPar_docvalues_int";
+			case "reportKeys":
+				return "reportKeys_docvalues_longs";
 			default:
 				return BaseModel.varIndexedBaseModel(entityVar);
 		}
@@ -2030,13 +2308,13 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 				return "endSeconds";
 			case "stepSeconds_docvalues_double":
 				return "stepSeconds";
-			case "paramInitialPar_docvalues_string":
+			case "paramInitialPar_docvalues_doubles":
 				return "paramInitialPar";
-			case "paramLam_docvalues_string":
+			case "paramLam_docvalues_doubles":
 				return "paramLam";
-			case "paramDemandScale_docvalues_int":
+			case "paramDemandScale_docvalues_double":
 				return "paramDemandScale";
-			case "paramStepSize_docvalues_int":
+			case "paramStepSize_docvalues_double":
 				return "paramStepSize";
 			case "paramUpdateStepSize_docvalues_int":
 				return "paramUpdateStepSize";
@@ -2046,6 +2324,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 				return "paramTotalIterNum";
 			case "paramItersPerPar_docvalues_int":
 				return "paramItersPerPar";
+			case "reportKeys_docvalues_longs":
+				return "reportKeys";
 			default:
 				return BaseModel.searchVarBaseModel(searchVar);
 		}
@@ -2083,14 +2363,21 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		oTrafficSimulation.setStartSeconds(Optional.ofNullable(doc.get("startSeconds_docvalues_double")).map(v -> v.toString()).orElse(null));
 		oTrafficSimulation.setEndSeconds(Optional.ofNullable(doc.get("endSeconds_docvalues_double")).map(v -> v.toString()).orElse(null));
 		oTrafficSimulation.setStepSeconds(Optional.ofNullable(doc.get("stepSeconds_docvalues_double")).map(v -> v.toString()).orElse(null));
-		oTrafficSimulation.setParamInitialPar(Optional.ofNullable(doc.get("paramInitialPar_docvalues_string")).map(v -> v.toString()).orElse(null));
-		oTrafficSimulation.setParamLam(Optional.ofNullable(doc.get("paramLam_docvalues_string")).map(v -> v.toString()).orElse(null));
-		oTrafficSimulation.setParamDemandScale(Optional.ofNullable(doc.get("paramDemandScale_docvalues_int")).map(v -> v.toString()).orElse(null));
-		oTrafficSimulation.setParamStepSize(Optional.ofNullable(doc.get("paramStepSize_docvalues_int")).map(v -> v.toString()).orElse(null));
+		Optional.ofNullable((List<?>)doc.get("paramInitialPar_docvalues_doubles")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
+			oTrafficSimulation.addParamInitialPar(v.toString());
+		});
+		Optional.ofNullable((List<?>)doc.get("paramLam_docvalues_doubles")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
+			oTrafficSimulation.addParamLam(v.toString());
+		});
+		oTrafficSimulation.setParamDemandScale(Optional.ofNullable(doc.get("paramDemandScale_docvalues_double")).map(v -> v.toString()).orElse(null));
+		oTrafficSimulation.setParamStepSize(Optional.ofNullable(doc.get("paramStepSize_docvalues_double")).map(v -> v.toString()).orElse(null));
 		oTrafficSimulation.setParamUpdateStepSize(Optional.ofNullable(doc.get("paramUpdateStepSize_docvalues_int")).map(v -> v.toString()).orElse(null));
 		oTrafficSimulation.setParamRunTime(Optional.ofNullable(doc.get("paramRunTime_docvalues_int")).map(v -> v.toString()).orElse(null));
 		oTrafficSimulation.setParamTotalIterNum(Optional.ofNullable(doc.get("paramTotalIterNum_docvalues_int")).map(v -> v.toString()).orElse(null));
 		oTrafficSimulation.setParamItersPerPar(Optional.ofNullable(doc.get("paramItersPerPar_docvalues_int")).map(v -> v.toString()).orElse(null));
+		Optional.ofNullable((List<?>)doc.get("reportKeys_docvalues_longs")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
+			oTrafficSimulation.addReportKeys(v.toString());
+		});
 
 		super.storeBaseModel(doc);
 	}
@@ -2136,6 +2423,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 				apiRequest.addVars("paramTotalIterNum");
 			if(!Objects.equals(paramItersPerPar, original.getParamItersPerPar()))
 				apiRequest.addVars("paramItersPerPar");
+			if(!Objects.equals(reportKeys, original.getReportKeys()))
+				apiRequest.addVars("reportKeys");
 			super.apiRequestBaseModel();
 		}
 	}
@@ -2155,14 +2444,15 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		sb.append(Optional.ofNullable(startSeconds).map(v -> "startSeconds: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(endSeconds).map(v -> "endSeconds: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(stepSeconds).map(v -> "stepSeconds: " + v + "\n").orElse(""));
-		sb.append(Optional.ofNullable(paramInitialPar).map(v -> "paramInitialPar: \"" + v + "\"\n" ).orElse(""));
-		sb.append(Optional.ofNullable(paramLam).map(v -> "paramLam: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(paramInitialPar).map(v -> "paramInitialPar: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(paramLam).map(v -> "paramLam: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(paramDemandScale).map(v -> "paramDemandScale: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(paramStepSize).map(v -> "paramStepSize: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(paramUpdateStepSize).map(v -> "paramUpdateStepSize: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(paramRunTime).map(v -> "paramRunTime: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(paramTotalIterNum).map(v -> "paramTotalIterNum: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(paramItersPerPar).map(v -> "paramItersPerPar: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(reportKeys).map(v -> "reportKeys: " + v + "\n").orElse(""));
 		return sb.toString();
 	}
 
@@ -2183,6 +2473,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	public static final String VAR_paramRunTime = "paramRunTime";
 	public static final String VAR_paramTotalIterNum = "paramTotalIterNum";
 	public static final String VAR_paramItersPerPar = "paramItersPerPar";
+	public static final String VAR_reportKeys = "reportKeys";
 	public static final String VAR_tlsStatesPaths = "tlsStatesPaths";
 	public static final String VAR_additionalFilePaths = "additionalFilePaths";
 
@@ -2214,6 +2505,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		vars.add(VAR_paramRunTime);
 		vars.add(VAR_paramTotalIterNum);
 		vars.add(VAR_paramItersPerPar);
+		vars.add(VAR_reportKeys);
 		BaseModel.varsFqBaseModel(vars);
 		return vars;
 	}
@@ -2252,6 +2544,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	public static final String DISPLAY_NAME_paramRunTime = "run time";
 	public static final String DISPLAY_NAME_paramTotalIterNum = "total iterations";
 	public static final String DISPLAY_NAME_paramItersPerPar = "iteration repetitions";
+	public static final String DISPLAY_NAME_reportKeys = "simulation reports";
 	public static final String DISPLAY_NAME_tlsStatesPaths = "TLS States paths";
 	public static final String DISPLAY_NAME_additionalFilePaths = "additional file paths";
 
@@ -2292,6 +2585,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return DISPLAY_NAME_paramTotalIterNum;
 		case VAR_paramItersPerPar:
 			return DISPLAY_NAME_paramItersPerPar;
+		case VAR_reportKeys:
+			return DISPLAY_NAME_reportKeys;
 		case VAR_tlsStatesPaths:
 			return DISPLAY_NAME_tlsStatesPaths;
 		case VAR_additionalFilePaths:
@@ -2317,6 +2612,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return "Total iterations to update performance. ";
 		case VAR_paramItersPerPar:
 			return "Number of repeats per round. ";
+		case VAR_reportKeys:
+			return "The generated reports for this simulation";
 		case VAR_tlsStatesPaths:
 			return "The paths to all TLS States files";
 		case VAR_additionalFilePaths:
@@ -2345,13 +2642,13 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		case VAR_stepSeconds:
 			return "BigDecimal";
 		case VAR_paramInitialPar:
-			return "String";
+			return "List";
 		case VAR_paramLam:
-			return "String";
+			return "List";
 		case VAR_paramDemandScale:
-			return "Integer";
+			return "BigDecimal";
 		case VAR_paramStepSize:
-			return "Integer";
+			return "BigDecimal";
 		case VAR_paramUpdateStepSize:
 			return "Integer";
 		case VAR_paramRunTime:
@@ -2360,6 +2657,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return "Integer";
 		case VAR_paramItersPerPar:
 			return "Integer";
+		case VAR_reportKeys:
+			return "List";
 		case VAR_tlsStatesPaths:
 			return "List";
 		case VAR_additionalFilePaths:
@@ -2408,6 +2707,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return 11;
 		case VAR_paramItersPerPar:
 			return 11;
+		case VAR_reportKeys:
+			return 12;
 			default:
 				return BaseModel.htmlRowBaseModel(var);
 		}
@@ -2445,6 +2746,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return 2;
 		case VAR_paramItersPerPar:
 			return 3;
+		case VAR_reportKeys:
+			return 1;
 			default:
 				return BaseModel.htmlCellBaseModel(var);
 		}

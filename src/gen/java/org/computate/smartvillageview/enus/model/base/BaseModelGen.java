@@ -79,7 +79,7 @@ import org.computate.search.response.solr.SolrResponse;
  * This generated inheritance is a powerful feature that allows a lot of boiler plate code to be created for you automatically while still preserving inheritance through the power of Java Generic classes. 
  * </p>
  * Api: true
- * ApiTag.enUS: null
+ * ApiTag.enUS: true
  * ApiUri.enUS: null
  * Color: null
  * IconGroup: null
@@ -717,6 +717,8 @@ public abstract class BaseModelGen<DEV> extends Object {
 	@JsonIgnore
 	public void setClassCanonicalNames(JsonArray objects) {
 		classCanonicalNames.clear();
+		if(objects == null)
+			return;
 		for(int i = 0; i < objects.size(); i++) {
 			String o = objects.getString(i);
 			addClassCanonicalNames(o);
@@ -900,6 +902,8 @@ public abstract class BaseModelGen<DEV> extends Object {
 	@JsonIgnore
 	public void setSaves(JsonArray objects) {
 		saves.clear();
+		if(objects == null)
+			return;
 		for(int i = 0; i < objects.size(); i++) {
 			String o = objects.getString(i);
 			addSaves(o);
@@ -1117,6 +1121,8 @@ public abstract class BaseModelGen<DEV> extends Object {
 	@JsonIgnore
 	public void setObjectText(JsonArray objects) {
 		objectText.clear();
+		if(objects == null)
+			return;
 		for(int i = 0; i < objects.size(); i++) {
 			String o = objects.getString(i);
 			addObjectText(o);

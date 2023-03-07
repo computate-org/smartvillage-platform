@@ -67,7 +67,25 @@ import io.vertx.core.json.JsonObject;
  * Api: true
  * <p>This class contains a comment <b>"Api: true"</b>, which means this class will have Java Vert.x API backend code generated for these objects. 
  * </p>
- * ApiTag.enUS: Person Step
+ * ApiMethode: Search
+ * <p>This class contains a comment <b>"ApiMethod: Search"</b>, which creates an API "Search". 
+ * </p>
+ * ApiMethode: GET
+ * <p>This class contains a comment <b>"ApiMethod: GET"</b>, which creates an API "GET". 
+ * </p>
+ * ApiMethode: PATCH
+ * <p>This class contains a comment <b>"ApiMethod: PATCH"</b>, which creates an API "PATCH". 
+ * </p>
+ * ApiMethode: POST
+ * <p>This class contains a comment <b>"ApiMethod: POST"</b>, which creates an API "POST". 
+ * </p>
+ * ApiMethode: PUTImport
+ * <p>This class contains a comment <b>"ApiMethod: PUTImport"</b>, which creates an API "PUTImport". 
+ * </p>
+ * ApiMethode: SearchPage
+ * <p>This class contains a comment <b>"ApiMethod: SearchPage"</b>, which creates an API "SearchPage". 
+ * </p>
+ * ApiTag.enUS: true
  * <p>This class contains a comment <b>"ApiTag: Person Step"</b>, which groups all of the OpenAPIs for PersonStep objects under the tag "Person Step". 
  * </p>
  * ApiUri.enUS: /api/person-step
@@ -349,11 +367,15 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 	}
 	@JsonIgnore
 	public void setAngle(Double o) {
-			this.angle = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setAngle(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	@JsonIgnore
 	public void setAngle(Integer o) {
-			this.angle = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setAngle(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setAngle(Number o) {
+		setAngle(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	protected PersonStep angleInit() {
 		Wrap<BigDecimal> angleWrap = new Wrap<BigDecimal>().var("angle");
@@ -420,11 +442,15 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 	}
 	@JsonIgnore
 	public void setSpeed(Double o) {
-			this.speed = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setSpeed(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	@JsonIgnore
 	public void setSpeed(Integer o) {
-			this.speed = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setSpeed(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setSpeed(Number o) {
+		setSpeed(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	protected PersonStep speedInit() {
 		Wrap<BigDecimal> speedWrap = new Wrap<BigDecimal>().var("speed");
@@ -491,11 +517,15 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 	}
 	@JsonIgnore
 	public void setPos(Double o) {
-			this.pos = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setPos(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	@JsonIgnore
 	public void setPos(Integer o) {
-			this.pos = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setPos(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setPos(Number o) {
+		setPos(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	protected PersonStep posInit() {
 		Wrap<BigDecimal> posWrap = new Wrap<BigDecimal>().var("pos");
@@ -562,11 +592,15 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 	}
 	@JsonIgnore
 	public void setSlope(Double o) {
-			this.slope = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setSlope(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	@JsonIgnore
 	public void setSlope(Integer o) {
-			this.slope = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setSlope(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setSlope(Number o) {
+		setSlope(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	protected PersonStep slopeInit() {
 		Wrap<BigDecimal> slopeWrap = new Wrap<BigDecimal>().var("slope");

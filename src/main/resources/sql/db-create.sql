@@ -1,14 +1,4 @@
 
-CREATE TABLE IF NOT EXISTS SimulationReport();
-ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS simulationName text;
-ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS pk bigserial primary key;
-ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS inheritPk text;
-ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS created timestamp with time zone;
-ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS archived boolean;
-ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS deleted boolean;
-ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS sessionId text;
-ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS userKey bigint;
-
 CREATE TABLE IF NOT EXISTS SiteUser();
 ALTER TABLE SiteUser ADD COLUMN IF NOT EXISTS userId text;
 ALTER TABLE SiteUser ADD COLUMN IF NOT EXISTS userName text;
@@ -26,6 +16,25 @@ ALTER TABLE SiteUser ADD COLUMN IF NOT EXISTS deleted boolean;
 ALTER TABLE SiteUser ADD COLUMN IF NOT EXISTS sessionId text;
 ALTER TABLE SiteUser ADD COLUMN IF NOT EXISTS userKey bigint;
 
+CREATE TABLE IF NOT EXISTS SimulationReport();
+ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS simulationKey bigint references TrafficSimulation(pk);
+ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS simulationName text;
+ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS paramInitialPar decimal[];
+ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS paramLam decimal[];
+ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS paramDemandScale decimal;
+ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS paramStepSize decimal;
+ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS paramUpdateStepSize integer;
+ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS paramRunTime integer;
+ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS paramTotalIterNum integer;
+ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS paramItersPerPar integer;
+ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS pk bigserial primary key;
+ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS inheritPk text;
+ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS created timestamp with time zone;
+ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS archived boolean;
+ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS deleted boolean;
+ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS sessionId text;
+ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS userKey bigint;
+
 CREATE TABLE IF NOT EXISTS TrafficSimulation();
 ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS startDateTime timestamp with time zone;
 ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS simulationName text;
@@ -35,10 +44,10 @@ ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS netFilePath text;
 ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS startSeconds decimal;
 ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS endSeconds decimal;
 ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS stepSeconds decimal;
-ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS paramInitialPar text;
-ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS paramLam text;
-ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS paramDemandScale integer;
-ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS paramStepSize integer;
+ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS paramInitialPar decimal[];
+ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS paramLam decimal[];
+ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS paramDemandScale decimal;
+ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS paramStepSize decimal;
 ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS paramUpdateStepSize integer;
 ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS paramRunTime integer;
 ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS paramTotalIterNum integer;

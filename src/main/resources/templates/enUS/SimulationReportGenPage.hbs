@@ -5,6 +5,7 @@
 {{#*inline "htmStyleSimulationReportPage"}}{{> "htmStyleBaseModelPage"}}{{/inline}}
 {{#*inline "htmScriptsSimulationReportPage"}}{{> "htmScriptsBaseModelPage"}}		<!-- inline "htmScriptsSimulationReportPage" -->
 		<script src="{{staticBaseUrl}}/js/enUS/SimulationReportPage.js"></script>
+		<script src="{{staticBaseUrl}}/js/enUS/TrafficSimulationPage.js"></script>
 {{/inline}}
 {{#*inline "htmScriptSimulationReportPage"}}		<!-- inline "htmScriptSimulationReportPage" -->
 		<script>
@@ -24,6 +25,11 @@
 				window.eventBus = new EventBus('/eventbus');
 				var pk = {{#if pk}}{{pk}}{{else}}null{{/if}};
 				if(pk != null) {
+		{{#ifContainsAnyRoles roles roleRequired}}
+					suggestSimulationReportSimulationKey([{'name':'fq','value':'reportKeys:' + pk}], $('#listSimulationReportSimulationKey_Page'), pk, true);
+		{{else}}
+					suggestSimulationReportSimulationKey([{'name':'fq','value':'reportKeys:' + pk}], $('#listSimulationReportSimulationKey_Page'), pk, false);
+		{{/ifContainsAnyRoles}}
 				}
 				websocketSimulationReport(websocketSimulationReportInner);
 				window.varsFq = JSON.parse('{{{toJsonObjectStringInApostrophes varsFq}}}');
@@ -430,9 +436,62 @@
 							</div>
 							<div class="w3-cell-row ">
 {{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmSimulationKey" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmSimulationKey" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
 {{> "htmSimulationName" classApiMethodMethod="PATCH" roleRequired="true"}}
 {{else}}
 {{> "htmSimulationName" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmParamInitialPar" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmParamInitialPar" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmParamLam" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmParamLam" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmParamDemandScale" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmParamDemandScale" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmParamStepSize" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmParamStepSize" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmParamUpdateStepSize" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmParamUpdateStepSize" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmParamRunTime" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmParamRunTime" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmParamTotalIterNum" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmParamTotalIterNum" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmParamItersPerPar" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmParamItersPerPar" classApiMethodMethod="PATCH" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 						<button
@@ -484,9 +543,62 @@
 							</div>
 							<div class="w3-cell-row ">
 {{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmSimulationKey" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmSimulationKey" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
 {{> "htmSimulationName" classApiMethodMethod="POST" roleRequired="true"}}
 {{else}}
 {{> "htmSimulationName" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmParamInitialPar" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmParamInitialPar" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmParamLam" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmParamLam" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmParamDemandScale" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmParamDemandScale" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmParamStepSize" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmParamStepSize" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmParamUpdateStepSize" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmParamUpdateStepSize" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmParamRunTime" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmParamRunTime" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmParamTotalIterNum" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmParamTotalIterNum" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmParamItersPerPar" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmParamItersPerPar" classApiMethodMethod="POST" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 						</div>
@@ -575,9 +687,62 @@
 							</div>
 							<div class="w3-cell-row ">
 {{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmSimulationKey" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmSimulationKey" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
 {{> "htmSimulationName" classApiMethodMethod="Page" roleRequired="true"}}
 {{else}}
 {{> "htmSimulationName" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmParamInitialPar" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmParamInitialPar" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmParamLam" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmParamLam" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmParamDemandScale" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmParamDemandScale" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmParamStepSize" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmParamStepSize" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmParamUpdateStepSize" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmParamUpdateStepSize" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmParamRunTime" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmParamRunTime" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmParamTotalIterNum" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmParamTotalIterNum" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmParamItersPerPar" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmParamItersPerPar" classApiMethodMethod="Page" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 						</div>
@@ -829,6 +994,82 @@
 {{/inline}}
 {{> BaseModelPage baseModel_=simulationReport_}}
 
+{{#*inline "htmSimulationKey"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SimulationReportSimulationKey">
+											<div class="w3-card ">
+												<div class="w3-cell-row ">
+													<a href="/traffic-simulation?fq=reportKeys:{{simulationReport_.pk}}" class="w3-cell w3-btn w3-center h4 w3-block h4 w3-2017-shaded-spruce w3-hover-2017-shaded-spruce ">
+														<i class="fad fa-traffic-light-stop "></i>
+														traffic simulation
+													</a>
+												</div>
+												<div class="w3-cell-row ">
+													<h5 class="w3-cell ">
+														<i class="far fa-search w3-xxlarge w3-cell w3-cell-middle "></i>
+														relate a traffic simulation to this simulation report
+													</h5>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														<div class="w3-cell-row ">
+
+														{{> "inputSimulationKey" roleRequired=roleRequired}}
+														</div>
+													</div>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell w3-left-align w3-cell-top ">
+														<ul class="w3-ul w3-hoverable " id="listSimulationReportSimulationKey_{{classApiMethodMethod}}">
+														</ul>
+														{{#eq roleRequired "true"}}
+	{{#eq 'Page' classApiMethodMethod}}
+																<div class="w3-cell-row ">
+																	<button
+																		 class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce "
+																		 id="{{classApiMethodMethod}}_simulationKey_add"
+																		 onclick="$(this).addClass('w3-disabled'); this.disabled = true; this.innerHTML = 'Sending…'; postTrafficSimulationVals({ reportKeys: [ '{{pk}}' ] }, function() { $('#{{classApiMethodMethod}}_simulationKey_add').disabled = false; $('#{{classApiMethodMethod}}_simulationKey_add').innerHTML = 'add a traffic simulation'; }, function() { addError($('#{{classApiMethodMethod}}simulationKey')); });"
+																		>add a traffic simulation</button>
+																</div>
+	{{/eq}}
+														{{/eq}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputSimulationKey"}}
+		{{#eq roleRequired "true"}}
+														{{#eq 'PUTCopy' classApiMethodMethod}}
+															<div>
+																<input 
+																	type="checkbox"
+																	id="{{classApiMethodMethod}}_simulationKey_clear"
+																	class="simulationKey_clear "
+																	>
+																<label for="{{classApiMethodMethod}}_simulationKey_clear">clear</label>
+															</div>
+														{{/eq}}
+														<input
+																type="text"
+																placeholder="traffic simulation"
+																title="The traffic simulation for this report. "															class="valueObjectSuggest suggestSimulationKey w3-input w3-border w3-cell w3-cell-middle "
+															name="setSimulationKey"
+															id="{{classApiMethodMethod}}_simulationKey"
+															autocomplete="off"
+															oninput="suggestSimulationReportSimulationKey($(this).val() ? [ { 'name': 'q', 'value': 'objectSuggest:' + $(this).val() }, { 'name': 'rows', 'value': '10' }, { 'name': 'fl', 'value': 'classCanonicalName,reportKeys,pk,pageUrlPk,objectTitle' } ] : [{{#if pk}}{'name':'fq','value':'reportKeys:{{pk}}'}{{else}}{{/if}}], $('#listSimulationReportSimulationKey_{{classApiMethodMethod}}'), {{pk}}); "
+															/>
+
+													{{else}}
+		{{else}}
+														<span class="varSimulationReport{{pk}}SimulationKey ">{{simulationReport_.simulationKey}}</span>
+		{{/eq}}
+{{/inline}}
+
 {{#*inline "htmSimulationName"}}
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									<div class="w3-padding ">
@@ -894,5 +1135,552 @@
 			{{/ifContainsKeys}}
 		{{else}}
 														<span class="varSimulationReport{{pk}}SimulationName ">{{simulationReport_.simulationName}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmParamInitialPar"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SimulationReportParamInitialPar">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_paramInitialPar">initial params</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputParamInitialPar" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramInitialPar')); $('#{{classApiMethodMethod}}_paramInitialPar').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SimulationReportForm :input[name=pk]').val() }], 'setParamInitialPar', null, function() { addGlow($('#{{classApiMethodMethod}}_paramInitialPar')); }, function() { addError($('#{{classApiMethodMethod}}_paramInitialPar')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputParamInitialPar"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															placeholder="initial params"
+															id="{{classApiMethodMethod}}_paramInitialPar"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setParamInitialPar classSimulationReport inputSimulationReport{{pk}}ParamInitialPar w3-input w3-border "
+																name="setParamInitialPar"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setParamInitialPar classSimulationReport inputSimulationReport{{pk}}ParamInitialPar w3-input w3-border "
+																name="setParamInitialPar"
+		{{else}}
+																class="valueParamInitialPar w3-input w3-border classSimulationReport inputSimulationReport{{pk}}ParamInitialPar w3-input w3-border "
+																name="paramInitialPar"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setParamInitialPar', $(this).val().replace('[','').replace(']','').split(/[ ,]+/), function() { addGlow($('#{{classApiMethodMethod}}_paramInitialPar')); }, function() { addError($('#{{classApiMethodMethod}}_paramInitialPar')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{simulationReport_.paramInitialPar}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varSimulationReport{{pk}}ParamInitialPar ">{{simulationReport_.paramInitialPar}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varSimulationReport{{pk}}ParamInitialPar ">{{simulationReport_.paramInitialPar}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmParamLam"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SimulationReportParamLam">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_paramLam">Traffic Demand</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputParamLam" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramLam')); $('#{{classApiMethodMethod}}_paramLam').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SimulationReportForm :input[name=pk]').val() }], 'setParamLam', null, function() { addGlow($('#{{classApiMethodMethod}}_paramLam')); }, function() { addError($('#{{classApiMethodMethod}}_paramLam')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputParamLam"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															placeholder="Traffic Demand"
+															id="{{classApiMethodMethod}}_paramLam"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setParamLam classSimulationReport inputSimulationReport{{pk}}ParamLam w3-input w3-border "
+																name="setParamLam"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setParamLam classSimulationReport inputSimulationReport{{pk}}ParamLam w3-input w3-border "
+																name="setParamLam"
+		{{else}}
+																class="valueParamLam w3-input w3-border classSimulationReport inputSimulationReport{{pk}}ParamLam w3-input w3-border "
+																name="paramLam"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setParamLam', $(this).val().replace('[','').replace(']','').split(/[ ,]+/), function() { addGlow($('#{{classApiMethodMethod}}_paramLam')); }, function() { addError($('#{{classApiMethodMethod}}_paramLam')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{simulationReport_.paramLam}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varSimulationReport{{pk}}ParamLam ">{{simulationReport_.paramLam}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varSimulationReport{{pk}}ParamLam ">{{simulationReport_.paramLam}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmParamDemandScale"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SimulationReportParamDemandScale">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_paramDemandScale">demand scale</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputParamDemandScale" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramDemandScale')); $('#{{classApiMethodMethod}}_paramDemandScale').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SimulationReportForm :input[name=pk]').val() }], 'setParamDemandScale', null, function() { addGlow($('#{{classApiMethodMethod}}_paramDemandScale')); }, function() { addError($('#{{classApiMethodMethod}}_paramDemandScale')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputParamDemandScale"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															placeholder="demand scale"
+															id="{{classApiMethodMethod}}_paramDemandScale"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setParamDemandScale classSimulationReport inputSimulationReport{{pk}}ParamDemandScale w3-input w3-border "
+																name="setParamDemandScale"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setParamDemandScale classSimulationReport inputSimulationReport{{pk}}ParamDemandScale w3-input w3-border "
+																name="setParamDemandScale"
+		{{else}}
+																class="valueParamDemandScale w3-input w3-border classSimulationReport inputSimulationReport{{pk}}ParamDemandScale w3-input w3-border "
+																name="paramDemandScale"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setParamDemandScale', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_paramDemandScale')); }, function() { addError($('#{{classApiMethodMethod}}_paramDemandScale')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{simulationReport_.paramDemandScale}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varSimulationReport{{pk}}ParamDemandScale ">{{simulationReport_.paramDemandScale}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varSimulationReport{{pk}}ParamDemandScale ">{{simulationReport_.paramDemandScale}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmParamStepSize"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SimulationReportParamStepSize">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_paramStepSize">step size</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputParamStepSize" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramStepSize')); $('#{{classApiMethodMethod}}_paramStepSize').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SimulationReportForm :input[name=pk]').val() }], 'setParamStepSize', null, function() { addGlow($('#{{classApiMethodMethod}}_paramStepSize')); }, function() { addError($('#{{classApiMethodMethod}}_paramStepSize')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputParamStepSize"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															placeholder="step size"
+															id="{{classApiMethodMethod}}_paramStepSize"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setParamStepSize classSimulationReport inputSimulationReport{{pk}}ParamStepSize w3-input w3-border "
+																name="setParamStepSize"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setParamStepSize classSimulationReport inputSimulationReport{{pk}}ParamStepSize w3-input w3-border "
+																name="setParamStepSize"
+		{{else}}
+																class="valueParamStepSize w3-input w3-border classSimulationReport inputSimulationReport{{pk}}ParamStepSize w3-input w3-border "
+																name="paramStepSize"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setParamStepSize', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_paramStepSize')); }, function() { addError($('#{{classApiMethodMethod}}_paramStepSize')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{simulationReport_.paramStepSize}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varSimulationReport{{pk}}ParamStepSize ">{{simulationReport_.paramStepSize}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varSimulationReport{{pk}}ParamStepSize ">{{simulationReport_.paramStepSize}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmParamUpdateStepSize"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SimulationReportParamUpdateStepSize">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_paramUpdateStepSize">update step size</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputParamUpdateStepSize" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramUpdateStepSize')); $('#{{classApiMethodMethod}}_paramUpdateStepSize').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SimulationReportForm :input[name=pk]').val() }], 'setParamUpdateStepSize', null, function() { addGlow($('#{{classApiMethodMethod}}_paramUpdateStepSize')); }, function() { addError($('#{{classApiMethodMethod}}_paramUpdateStepSize')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputParamUpdateStepSize"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															placeholder="update step size"
+															id="{{classApiMethodMethod}}_paramUpdateStepSize"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setParamUpdateStepSize classSimulationReport inputSimulationReport{{pk}}ParamUpdateStepSize w3-input w3-border "
+																name="setParamUpdateStepSize"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setParamUpdateStepSize classSimulationReport inputSimulationReport{{pk}}ParamUpdateStepSize w3-input w3-border "
+																name="setParamUpdateStepSize"
+		{{else}}
+																class="valueParamUpdateStepSize w3-input w3-border classSimulationReport inputSimulationReport{{pk}}ParamUpdateStepSize w3-input w3-border "
+																name="paramUpdateStepSize"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setParamUpdateStepSize', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_paramUpdateStepSize')); }, function() { addError($('#{{classApiMethodMethod}}_paramUpdateStepSize')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{simulationReport_.paramUpdateStepSize}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varSimulationReport{{pk}}ParamUpdateStepSize ">{{simulationReport_.paramUpdateStepSize}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varSimulationReport{{pk}}ParamUpdateStepSize ">{{simulationReport_.paramUpdateStepSize}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmParamRunTime"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SimulationReportParamRunTime">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_paramRunTime">run time</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputParamRunTime" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramRunTime')); $('#{{classApiMethodMethod}}_paramRunTime').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SimulationReportForm :input[name=pk]').val() }], 'setParamRunTime', null, function() { addGlow($('#{{classApiMethodMethod}}_paramRunTime')); }, function() { addError($('#{{classApiMethodMethod}}_paramRunTime')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputParamRunTime"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															placeholder="run time"
+															title="Time duration of each simulated sample path. "
+															id="{{classApiMethodMethod}}_paramRunTime"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setParamRunTime classSimulationReport inputSimulationReport{{pk}}ParamRunTime w3-input w3-border "
+																name="setParamRunTime"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setParamRunTime classSimulationReport inputSimulationReport{{pk}}ParamRunTime w3-input w3-border "
+																name="setParamRunTime"
+		{{else}}
+																class="valueParamRunTime w3-input w3-border classSimulationReport inputSimulationReport{{pk}}ParamRunTime w3-input w3-border "
+																name="paramRunTime"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setParamRunTime', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_paramRunTime')); }, function() { addError($('#{{classApiMethodMethod}}_paramRunTime')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{simulationReport_.paramRunTime}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varSimulationReport{{pk}}ParamRunTime ">{{simulationReport_.paramRunTime}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varSimulationReport{{pk}}ParamRunTime ">{{simulationReport_.paramRunTime}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmParamTotalIterNum"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SimulationReportParamTotalIterNum">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_paramTotalIterNum">total iterations</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputParamTotalIterNum" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramTotalIterNum')); $('#{{classApiMethodMethod}}_paramTotalIterNum').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SimulationReportForm :input[name=pk]').val() }], 'setParamTotalIterNum', null, function() { addGlow($('#{{classApiMethodMethod}}_paramTotalIterNum')); }, function() { addError($('#{{classApiMethodMethod}}_paramTotalIterNum')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputParamTotalIterNum"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															placeholder="total iterations"
+															title="Total iterations to update performance. "
+															id="{{classApiMethodMethod}}_paramTotalIterNum"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setParamTotalIterNum classSimulationReport inputSimulationReport{{pk}}ParamTotalIterNum w3-input w3-border "
+																name="setParamTotalIterNum"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setParamTotalIterNum classSimulationReport inputSimulationReport{{pk}}ParamTotalIterNum w3-input w3-border "
+																name="setParamTotalIterNum"
+		{{else}}
+																class="valueParamTotalIterNum w3-input w3-border classSimulationReport inputSimulationReport{{pk}}ParamTotalIterNum w3-input w3-border "
+																name="paramTotalIterNum"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setParamTotalIterNum', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_paramTotalIterNum')); }, function() { addError($('#{{classApiMethodMethod}}_paramTotalIterNum')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{simulationReport_.paramTotalIterNum}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varSimulationReport{{pk}}ParamTotalIterNum ">{{simulationReport_.paramTotalIterNum}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varSimulationReport{{pk}}ParamTotalIterNum ">{{simulationReport_.paramTotalIterNum}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmParamItersPerPar"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SimulationReportParamItersPerPar">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_paramItersPerPar">iteration repetitions</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputParamItersPerPar" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramItersPerPar')); $('#{{classApiMethodMethod}}_paramItersPerPar').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SimulationReportForm :input[name=pk]').val() }], 'setParamItersPerPar', null, function() { addGlow($('#{{classApiMethodMethod}}_paramItersPerPar')); }, function() { addError($('#{{classApiMethodMethod}}_paramItersPerPar')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputParamItersPerPar"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															placeholder="iteration repetitions"
+															title="Number of repeats per round. "
+															id="{{classApiMethodMethod}}_paramItersPerPar"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setParamItersPerPar classSimulationReport inputSimulationReport{{pk}}ParamItersPerPar w3-input w3-border "
+																name="setParamItersPerPar"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setParamItersPerPar classSimulationReport inputSimulationReport{{pk}}ParamItersPerPar w3-input w3-border "
+																name="setParamItersPerPar"
+		{{else}}
+																class="valueParamItersPerPar w3-input w3-border classSimulationReport inputSimulationReport{{pk}}ParamItersPerPar w3-input w3-border "
+																name="paramItersPerPar"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setParamItersPerPar', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_paramItersPerPar')); }, function() { addError($('#{{classApiMethodMethod}}_paramItersPerPar')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{simulationReport_.paramItersPerPar}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varSimulationReport{{pk}}ParamItersPerPar ">{{simulationReport_.paramItersPerPar}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varSimulationReport{{pk}}ParamItersPerPar ">{{simulationReport_.paramItersPerPar}}</span>
 		{{/eq}}
 {{/inline}}

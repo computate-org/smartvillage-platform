@@ -84,7 +84,25 @@ import io.vertx.core.json.JsonObject;
  * Api: true
  * <p>This class contains a comment <b>"Api: true"</b>, which means this class will have Java Vert.x API backend code generated for these objects. 
  * </p>
- * ApiTag.enUS: System Event
+ * ApiMethode: Search
+ * <p>This class contains a comment <b>"ApiMethod: Search"</b>, which creates an API "Search". 
+ * </p>
+ * ApiMethode: GET
+ * <p>This class contains a comment <b>"ApiMethod: GET"</b>, which creates an API "GET". 
+ * </p>
+ * ApiMethode: POST
+ * <p>This class contains a comment <b>"ApiMethod: POST"</b>, which creates an API "POST". 
+ * </p>
+ * ApiMethode: PATCH
+ * <p>This class contains a comment <b>"ApiMethod: PATCH"</b>, which creates an API "PATCH". 
+ * </p>
+ * ApiMethode: PUTImport
+ * <p>This class contains a comment <b>"ApiMethod: PUTImport"</b>, which creates an API "PUTImport". 
+ * </p>
+ * ApiMethode: SearchPage
+ * <p>This class contains a comment <b>"ApiMethod: SearchPage"</b>, which creates an API "SearchPage". 
+ * </p>
+ * ApiTag.enUS: true
  * <p>This class contains a comment <b>"ApiTag: System Event"</b>, which groups all of the OpenAPIs for SystemEvent objects under the tag "System Event". 
  * </p>
  * ApiUri.enUS: /api/system-event
@@ -1214,9 +1232,10 @@ public abstract class SystemEventGen<DEV> extends Object {
 	public List<String> getClassCanonicalNames() {
 		return classCanonicalNames;
 	}
-
-	public void setClassCanonicalNames(List<String> classCanonicalNames) {
-		this.classCanonicalNames = classCanonicalNames;
+	public void setClassCanonicalNames(String o) {
+		String l = SystemEvent.staticSetClassCanonicalNames(siteRequest_, o);
+		if(l != null)
+			addClassCanonicalNames(l);
 	}
 	public static String staticSetClassCanonicalNames(SiteRequestEnUS siteRequest_, String o) {
 		return o;
@@ -1235,6 +1254,8 @@ public abstract class SystemEventGen<DEV> extends Object {
 	@JsonIgnore
 	public void setClassCanonicalNames(JsonArray objects) {
 		classCanonicalNames.clear();
+		if(objects == null)
+			return;
 		for(int i = 0; i < objects.size(); i++) {
 			String o = objects.getString(i);
 			addClassCanonicalNames(o);
@@ -1397,9 +1418,10 @@ public abstract class SystemEventGen<DEV> extends Object {
 	public List<String> getSaves() {
 		return saves;
 	}
-
-	public void setSaves(List<String> saves) {
-		this.saves = saves;
+	public void setSaves(String o) {
+		String l = SystemEvent.staticSetSaves(siteRequest_, o);
+		if(l != null)
+			addSaves(l);
 	}
 	public static String staticSetSaves(SiteRequestEnUS siteRequest_, String o) {
 		return o;
@@ -1418,6 +1440,8 @@ public abstract class SystemEventGen<DEV> extends Object {
 	@JsonIgnore
 	public void setSaves(JsonArray objects) {
 		saves.clear();
+		if(objects == null)
+			return;
 		for(int i = 0; i < objects.size(); i++) {
 			String o = objects.getString(i);
 			addSaves(o);
@@ -1618,9 +1642,10 @@ public abstract class SystemEventGen<DEV> extends Object {
 	public List<String> getObjectText() {
 		return objectText;
 	}
-
-	public void setObjectText(List<String> objectText) {
-		this.objectText = objectText;
+	public void setObjectText(String o) {
+		String l = SystemEvent.staticSetObjectText(siteRequest_, o);
+		if(l != null)
+			addObjectText(l);
 	}
 	public static String staticSetObjectText(SiteRequestEnUS siteRequest_, String o) {
 		return o;
@@ -1639,6 +1664,8 @@ public abstract class SystemEventGen<DEV> extends Object {
 	@JsonIgnore
 	public void setObjectText(JsonArray objects) {
 		objectText.clear();
+		if(objects == null)
+			return;
 		for(int i = 0; i < objects.size(); i++) {
 			String o = objects.getString(i);
 			addObjectText(o);
@@ -2453,7 +2480,9 @@ public abstract class SystemEventGen<DEV> extends Object {
 				if(val instanceof List<?>) {
 					((List<String>)val).stream().forEach(v -> addObjectText(v));
 				} else if(val instanceof JsonArray) {
-					((JsonArray)val).stream().forEach(v -> addObjectText(v.toString()));
+					((JsonArray)val).stream().forEach(v -> setObjectText(v.toString()));
+				} else if(val instanceof String[]) {
+					Arrays.asList((String[])val).stream().forEach(v -> setObjectText((String)v));
 				}
 				if(!saves.contains("objectText")) {
 					saves.add("objectText");

@@ -70,7 +70,22 @@ import org.computate.search.response.solr.SolrResponse;
  * Api: true
  * <p>This class contains a comment <b>"Api: true"</b>, which means this class will have Java Vert.x API backend code generated for these objects. 
  * </p>
- * ApiTag.enUS: User
+ * ApiMethode: Search
+ * <p>This class contains a comment <b>"ApiMethod: Search"</b>, which creates an API "Search". 
+ * </p>
+ * ApiMethode: PATCH
+ * <p>This class contains a comment <b>"ApiMethod: PATCH"</b>, which creates an API "PATCH". 
+ * </p>
+ * ApiMethode: POST
+ * <p>This class contains a comment <b>"ApiMethod: POST"</b>, which creates an API "POST". 
+ * </p>
+ * ApiMethode: PUTImport
+ * <p>This class contains a comment <b>"ApiMethod: PUTImport"</b>, which creates an API "PUTImport". 
+ * </p>
+ * ApiMethode: SearchPage
+ * <p>This class contains a comment <b>"ApiMethod: SearchPage"</b>, which creates an API "SearchPage". 
+ * </p>
+ * ApiTag.enUS: true
  * <p>This class contains a comment <b>"ApiTag: User"</b>, which groups all of the OpenAPIs for SiteUser objects under the tag "User". 
  * </p>
  * ApiUri.enUS: /api/user
@@ -265,9 +280,11 @@ public abstract class SiteUserGen<DEV> extends BaseModel {
 	@JsonIgnore
 	public void setUserKeys(JsonArray objects) {
 		userKeys.clear();
+		if(objects == null)
+			return;
 		for(int i = 0; i < objects.size(); i++) {
-			Long o = objects.getLong(i);
-			addUserKeys(o);
+			String o = objects.getString(i);
+			setUserKeys(o);
 		}
 	}
 	public SiteUser addUserKeys(String o) {

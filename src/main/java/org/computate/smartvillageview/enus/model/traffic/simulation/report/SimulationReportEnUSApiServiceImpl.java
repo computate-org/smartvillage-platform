@@ -28,14 +28,37 @@ public class SimulationReportEnUSApiServiceImpl extends SimulationReportEnUSGenA
 	}
 
 	@Override
+	public Future<SimulationReport> patchSimulationReportFuture(SimulationReport o, Boolean inheritPk) {
+		Promise<SimulationReport> promise = Promise.promise();
+		super.patchSimulationReportFuture(o, inheritPk).onSuccess(simulationReport -> {
+			JsonObject body = null;
+			try {
+				body = JsonObject.mapFrom(simulationReport);
+				KafkaProducerRecord<String, String> record = KafkaProducerRecord.create(config.getString(ConfigKeys.KAFKA_TOPIC_SUMO_RUN), body.encode());
+				kafkaProducer.send(record).onSuccess(recordMetadata -> {
+					promise.complete(simulationReport);
+				}).onFailure(ex -> {
+					LOG.error(String.format("Could not send record to kafka: %s", "aaa"), ex);
+					promise.fail(ex);
+				});
+			} catch(Exception ex) {
+				LOG.error(String.format("Could not send record to kafka: %s", Optional.ofNullable(body).map(b -> b.encode()).orElse("")), ex);
+				promise.fail(ex);
+			}
+		}).onFailure(ex -> {
+			promise.fail(ex);
+		});
+		return promise.future();
+	}
+
+	@Override
 	public Future<SimulationReport> postSimulationReportFuture(SiteRequestEnUS siteRequest, Boolean inheritPk) {
 		Promise<SimulationReport> promise = Promise.promise();
 		super.postSimulationReportFuture(siteRequest, inheritPk).onSuccess(simulationReport -> {
 			JsonObject body = null;
 			try {
 				body = JsonObject.mapFrom(simulationReport);
-//				KafkaProducerRecord<String, String> record = KafkaProducerRecord.create(config.getString(ConfigKeys.KAFKA_TOPIC_SUMO_RUN), body.encode());
-				KafkaProducerRecord<String, String> record = KafkaProducerRecord.create(config.getString(ConfigKeys.KAFKA_TOPIC_SUMO_RUN), "aaa");
+				KafkaProducerRecord<String, String> record = KafkaProducerRecord.create(config.getString(ConfigKeys.KAFKA_TOPIC_SUMO_RUN), body.encode());
 				kafkaProducer.send(record).onSuccess(recordMetadata -> {
 					promise.complete(simulationReport);
 				}).onFailure(ex -> {

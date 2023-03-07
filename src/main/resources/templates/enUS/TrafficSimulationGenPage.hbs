@@ -5,6 +5,7 @@
 {{#*inline "htmStyleTrafficSimulationPage"}}{{> "htmStyleBaseModelPage"}}{{/inline}}
 {{#*inline "htmScriptsTrafficSimulationPage"}}{{> "htmScriptsBaseModelPage"}}		<!-- inline "htmScriptsTrafficSimulationPage" -->
 		<script src="{{staticBaseUrl}}/js/enUS/TrafficSimulationPage.js"></script>
+		<script src="{{staticBaseUrl}}/js/enUS/SimulationReportPage.js"></script>
 {{/inline}}
 {{#*inline "htmScriptTrafficSimulationPage"}}		<!-- inline "htmScriptTrafficSimulationPage" -->
 		<script>
@@ -24,6 +25,11 @@
 				window.eventBus = new EventBus('/eventbus');
 				var pk = {{#if pk}}{{pk}}{{else}}null{{/if}};
 				if(pk != null) {
+		{{#ifContainsAnyRoles roles roleRequired}}
+					suggestTrafficSimulationReportKeys([{'name':'fq','value':'simulationKey:' + pk}], $('#listTrafficSimulationReportKeys_Page'), pk, true);
+		{{else}}
+					suggestTrafficSimulationReportKeys([{'name':'fq','value':'simulationKey:' + pk}], $('#listTrafficSimulationReportKeys_Page'), pk, false);
+		{{/ifContainsAnyRoles}}
 				}
 				websocketTrafficSimulation(websocketTrafficSimulationInner);
 				window.varsFq = JSON.parse('{{{toJsonObjectStringInApostrophes varsFq}}}');
@@ -519,6 +525,13 @@
 {{> "htmParamItersPerPar" classApiMethodMethod="PATCH" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmReportKeys" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{else}}
+{{> "htmReportKeys" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
 						<button
 							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-2017-shaded-spruce "
 							onclick="patchTrafficSimulation(null, $('#patchTrafficSimulationFormValues')); "
@@ -655,6 +668,13 @@
 {{> "htmParamItersPerPar" classApiMethodMethod="POST" roleRequired="true"}}
 {{else}}
 {{> "htmParamItersPerPar" classApiMethodMethod="POST" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmReportKeys" classApiMethodMethod="POST" roleRequired="true"}}
+{{else}}
+{{> "htmReportKeys" classApiMethodMethod="POST" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 						</div>
@@ -830,6 +850,13 @@
 {{> "htmParamItersPerPar" classApiMethodMethod="Page" roleRequired="true"}}
 {{else}}
 {{> "htmParamItersPerPar" classApiMethodMethod="Page" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmReportKeys" classApiMethodMethod="Page" roleRequired="true"}}
+{{else}}
+{{> "htmReportKeys" classApiMethodMethod="Page" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 						</div>
@@ -1668,7 +1695,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setParamInitialPar', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_paramInitialPar')); }, function() { addError($('#{{classApiMethodMethod}}_paramInitialPar')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setParamInitialPar', $(this).val().replace('[','').replace(']','').split(/[ ,]+/), function() { addGlow($('#{{classApiMethodMethod}}_paramInitialPar')); }, function() { addError($('#{{classApiMethodMethod}}_paramInitialPar')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{trafficSimulation_.paramInitialPar}}"
@@ -1736,7 +1763,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setParamLam', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_paramLam')); }, function() { addError($('#{{classApiMethodMethod}}_paramLam')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setParamLam', $(this).val().replace('[','').replace(']','').split(/[ ,]+/), function() { addGlow($('#{{classApiMethodMethod}}_paramLam')); }, function() { addError($('#{{classApiMethodMethod}}_paramLam')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{trafficSimulation_.paramLam}}"
@@ -2160,5 +2187,81 @@
 			{{/ifContainsKeys}}
 		{{else}}
 														<span class="varTrafficSimulation{{pk}}ParamItersPerPar ">{{trafficSimulation_.paramItersPerPar}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmReportKeys"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficSimulationReportKeys">
+											<div class="w3-card ">
+												<div class="w3-cell-row ">
+													<a href="/simulation-report?fq=simulationKey:{{trafficSimulation_.pk}}" class="w3-cell w3-btn w3-center h4 w3-block h4 w3-2017-shaded-spruce w3-hover-2017-shaded-spruce ">
+														<i class="fad fa-file-chart-column "></i>
+														simulation reports
+													</a>
+												</div>
+												<div class="w3-cell-row ">
+													<h5 class="w3-cell ">
+														<i class="far fa-search w3-xxlarge w3-cell w3-cell-middle "></i>
+														relate  to this traffic simulation
+													</h5>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														<div class="w3-cell-row ">
+
+														{{> "inputReportKeys" roleRequired=roleRequired}}
+														</div>
+													</div>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell w3-left-align w3-cell-top ">
+														<ul class="w3-ul w3-hoverable " id="listTrafficSimulationReportKeys_{{classApiMethodMethod}}">
+														</ul>
+														{{#eq roleRequired "true"}}
+	{{#eq 'Page' classApiMethodMethod}}
+																<div class="w3-cell-row ">
+																	<button
+																		 class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce "
+																		 id="{{classApiMethodMethod}}_reportKeys_add"
+																		 onclick="$(this).addClass('w3-disabled'); this.disabled = true; this.innerHTML = 'Sending…'; postSimulationReportVals({ simulationKey: '{{pk}}' }, function() { $('#{{classApiMethodMethod}}_reportKeys_add').disabled = false; $('#{{classApiMethodMethod}}_reportKeys_add').innerHTML = 'add a simulation report'; }, function() { addError($('#{{classApiMethodMethod}}reportKeys')); });"
+																		>add a simulation report</button>
+																</div>
+	{{/eq}}
+														{{/eq}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputReportKeys"}}
+		{{#eq roleRequired "true"}}
+														{{#eq 'PUTCopy' classApiMethodMethod}}
+															<div>
+																<input 
+																	type="checkbox"
+																	id="{{classApiMethodMethod}}_reportKeys_clear"
+																	class="reportKeys_clear "
+																	>
+																<label for="{{classApiMethodMethod}}_reportKeys_clear">clear</label>
+															</div>
+														{{/eq}}
+														<input
+																type="text"
+																placeholder="simulation reports"
+																title="The generated reports for this simulation"															class="valueObjectSuggest suggestReportKeys w3-input w3-border w3-cell w3-cell-middle "
+															name="setReportKeys"
+															id="{{classApiMethodMethod}}_reportKeys"
+															autocomplete="off"
+															oninput="suggestTrafficSimulationReportKeys($(this).val() ? [ { 'name': 'q', 'value': 'objectSuggest:' + $(this).val() }, { 'name': 'rows', 'value': '10' }, { 'name': 'fl', 'value': 'classCanonicalName,simulationKey,pk,pageUrlPk,objectTitle' } ] : [{{#if pk}}{'name':'fq','value':'simulationKey:{{pk}}'}{{else}}{{/if}}], $('#listTrafficSimulationReportKeys_{{classApiMethodMethod}}'), {{pk}}); "
+															/>
+
+													{{else}}
+		{{else}}
+														<span class="varTrafficSimulation{{pk}}ReportKeys ">{{trafficSimulation_.reportKeys}}</span>
 		{{/eq}}
 {{/inline}}

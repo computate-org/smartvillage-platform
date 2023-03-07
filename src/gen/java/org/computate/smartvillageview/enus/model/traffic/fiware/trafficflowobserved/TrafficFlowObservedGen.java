@@ -69,7 +69,25 @@ import org.computate.search.response.solr.SolrResponse;
  * Api: true
  * <p>This class contains a comment <b>"Api: true"</b>, which means this class will have Java Vert.x API backend code generated for these objects. 
  * </p>
- * ApiTag.enUS: Traffic Flow Observed
+ * ApiMethode: Search
+ * <p>This class contains a comment <b>"ApiMethod: Search"</b>, which creates an API "Search". 
+ * </p>
+ * ApiMethode: GET
+ * <p>This class contains a comment <b>"ApiMethod: GET"</b>, which creates an API "GET". 
+ * </p>
+ * ApiMethode: PATCH
+ * <p>This class contains a comment <b>"ApiMethod: PATCH"</b>, which creates an API "PATCH". 
+ * </p>
+ * ApiMethode: POST
+ * <p>This class contains a comment <b>"ApiMethod: POST"</b>, which creates an API "POST". 
+ * </p>
+ * ApiMethode: PUTImport
+ * <p>This class contains a comment <b>"ApiMethod: PUTImport"</b>, which creates an API "PUTImport". 
+ * </p>
+ * ApiMethode: SearchPage
+ * <p>This class contains a comment <b>"ApiMethod: SearchPage"</b>, which creates an API "SearchPage". 
+ * </p>
+ * ApiTag.enUS: true
  * <p>This class contains a comment <b>"ApiTag: Traffic Flow Observed"</b>, which groups all of the OpenAPIs for TrafficFlowObserved objects under the tag "Traffic Flow Observed". 
  * </p>
  * ApiUri.enUS: /api/traffic-flow-observed
@@ -806,11 +824,15 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 	}
 	@JsonIgnore
 	public void setAverageGapDistance(Double o) {
-			this.averageGapDistance = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setAverageGapDistance(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	@JsonIgnore
 	public void setAverageGapDistance(Integer o) {
-			this.averageGapDistance = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setAverageGapDistance(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setAverageGapDistance(Number o) {
+		setAverageGapDistance(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	protected TrafficFlowObserved averageGapDistanceInit() {
 		Wrap<BigDecimal> averageGapDistanceWrap = new Wrap<BigDecimal>().var("averageGapDistance");
@@ -877,11 +899,15 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 	}
 	@JsonIgnore
 	public void setAverageHeadwayTime(Double o) {
-			this.averageHeadwayTime = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setAverageHeadwayTime(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	@JsonIgnore
 	public void setAverageHeadwayTime(Integer o) {
-			this.averageHeadwayTime = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setAverageHeadwayTime(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setAverageHeadwayTime(Number o) {
+		setAverageHeadwayTime(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	protected TrafficFlowObserved averageHeadwayTimeInit() {
 		Wrap<BigDecimal> averageHeadwayTimeWrap = new Wrap<BigDecimal>().var("averageHeadwayTime");
@@ -948,11 +974,15 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 	}
 	@JsonIgnore
 	public void setAverageVehicleLength(Double o) {
-			this.averageVehicleLength = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setAverageVehicleLength(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	@JsonIgnore
 	public void setAverageVehicleLength(Integer o) {
-			this.averageVehicleLength = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setAverageVehicleLength(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setAverageVehicleLength(Number o) {
+		setAverageVehicleLength(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	protected TrafficFlowObserved averageVehicleLengthInit() {
 		Wrap<BigDecimal> averageVehicleLengthWrap = new Wrap<BigDecimal>().var("averageVehicleLength");
@@ -1019,11 +1049,15 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 	}
 	@JsonIgnore
 	public void setAverageVehicleSpeed(Double o) {
-			this.averageVehicleSpeed = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setAverageVehicleSpeed(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	@JsonIgnore
 	public void setAverageVehicleSpeed(Integer o) {
-			this.averageVehicleSpeed = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setAverageVehicleSpeed(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setAverageVehicleSpeed(Number o) {
+		setAverageVehicleSpeed(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	protected TrafficFlowObserved averageVehicleSpeedInit() {
 		Wrap<BigDecimal> averageVehicleSpeedWrap = new Wrap<BigDecimal>().var("averageVehicleSpeed");
@@ -1527,11 +1561,15 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 	}
 	@JsonIgnore
 	public void setIntensity(Double o) {
-			this.intensity = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setIntensity(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	@JsonIgnore
 	public void setIntensity(Integer o) {
-			this.intensity = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setIntensity(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setIntensity(Number o) {
+		setIntensity(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	protected TrafficFlowObserved intensityInit() {
 		Wrap<BigDecimal> intensityWrap = new Wrap<BigDecimal>().var("intensity");
@@ -1768,11 +1806,15 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 	}
 	@JsonIgnore
 	public void setOccupancy(Double o) {
-			this.occupancy = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setOccupancy(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	@JsonIgnore
 	public void setOccupancy(Integer o) {
-			this.occupancy = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setOccupancy(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setOccupancy(Number o) {
+		setOccupancy(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	protected TrafficFlowObserved occupancyInit() {
 		Wrap<BigDecimal> occupancyWrap = new Wrap<BigDecimal>().var("occupancy");

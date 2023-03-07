@@ -2,6 +2,7 @@ package org.computate.smartvillageview.enus.model.traffic.simulation;
 
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,6 +49,7 @@ import org.computate.smartvillageview.enus.model.base.BaseModel;
  * Rows: 100
  */
 public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
+
 	/**
 	 * {@inheritDoc}
 	 * DocValues: true
@@ -156,8 +158,8 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * DisplayName: initial params
 	 * Description: 
 	 */
-	protected void _paramInitialPar(Wrap<String> w) {
-		w.o("10, 20, 30, 50, 10, 10, 8, 8, 5, 5");
+	protected void _paramInitialPar(List<BigDecimal> l) {
+		l.addAll(Arrays.asList(new BigDecimal(10), new BigDecimal(20), new BigDecimal(30), new BigDecimal(50), new BigDecimal(10), new BigDecimal(10), new BigDecimal(8), new BigDecimal(8), new BigDecimal(5), new BigDecimal(5)));
 	}
 
 	/**
@@ -170,8 +172,8 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * DisplayName: Traffic Demand
 	 * Description: 
 	 */
-	protected void _paramLam(Wrap<String> w) {
-		w.o("10, 10, 6, 6");
+	protected void _paramLam(List<BigDecimal> l) {
+		l.addAll(Arrays.asList(new BigDecimal(10), new BigDecimal(10), new BigDecimal(6), new BigDecimal(6)));
 	}
 
 	/**
@@ -184,8 +186,8 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * DisplayName: demand scale
 	 * Description: 
 	 */
-	protected void _paramDemandScale(Wrap<Integer> w) {
-		w.o(1);
+	protected void _paramDemandScale(Wrap<BigDecimal> w) {
+		w.o(new BigDecimal(1));
 	}
 
 	/**
@@ -198,8 +200,8 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * DisplayName: step size
 	 * Description: 
 	 */
-	protected void _paramStepSize(Wrap<Integer> w) {
-		w.o(1);
+	protected void _paramStepSize(Wrap<BigDecimal> w) {
+		w.o(new BigDecimal(1));
 	}
 
 	/**
@@ -256,6 +258,19 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 */
 	protected void _paramItersPerPar(Wrap<Integer> w) {
 		w.o(5);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Relate: SimulationReport.simulationKey
+	 * HtmlRow: 12
+	 * HtmlCell: 1
+	 * Facet: true
+	 * DisplayName: simulation reports
+	 * Description: The generated reports for this simulation
+	 */
+	protected void _reportKeys(List<Long> w) {
 	}
 
 	/**

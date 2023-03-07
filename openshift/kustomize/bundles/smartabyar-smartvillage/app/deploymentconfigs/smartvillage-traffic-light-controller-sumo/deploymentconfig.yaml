@@ -25,7 +25,7 @@ spec:
               path: /
               port: 8081
               scheme: HTTP
-            initialDelaySeconds: 30
+            initialDelaySeconds: 5
             timeoutSeconds: 5
             periodSeconds: 20
             successThreshold: 1

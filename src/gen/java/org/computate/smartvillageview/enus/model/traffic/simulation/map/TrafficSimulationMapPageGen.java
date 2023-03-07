@@ -79,7 +79,7 @@ import io.vertx.core.Future;
  * This generated inheritance is a powerful feature that allows a lot of boiler plate code to be created for you automatically while still preserving inheritance through the power of Java Generic classes. 
  * </p>
  * Api: true
- * ApiTag.enUS: null
+ * ApiTag.enUS: true
  * ApiUri.enUS: null
  * Color: null
  * IconGroup: null
@@ -969,11 +969,15 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 	}
 	@JsonIgnore
 	public void setDEFAULT_MAP_ZOOM(Double o) {
-			this.DEFAULT_MAP_ZOOM = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setDEFAULT_MAP_ZOOM(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	@JsonIgnore
 	public void setDEFAULT_MAP_ZOOM(Integer o) {
-			this.DEFAULT_MAP_ZOOM = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		setDEFAULT_MAP_ZOOM(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setDEFAULT_MAP_ZOOM(Number o) {
+		setDEFAULT_MAP_ZOOM(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	protected TrafficSimulationMapPage DEFAULT_MAP_ZOOMInit() {
 		Wrap<BigDecimal> DEFAULT_MAP_ZOOMWrap = new Wrap<BigDecimal>().var("DEFAULT_MAP_ZOOM");

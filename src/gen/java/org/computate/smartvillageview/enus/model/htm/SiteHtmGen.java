@@ -71,7 +71,25 @@ import org.computate.search.response.solr.SolrResponse;
  * Api: true
  * <p>This class contains a comment <b>"Api: true"</b>, which means this class will have Java Vert.x API backend code generated for these objects. 
  * </p>
- * ApiTag.enUS: HTM
+ * ApiMethode: Search
+ * <p>This class contains a comment <b>"ApiMethod: Search"</b>, which creates an API "Search". 
+ * </p>
+ * ApiMethode: GET
+ * <p>This class contains a comment <b>"ApiMethod: GET"</b>, which creates an API "GET". 
+ * </p>
+ * ApiMethode: POST
+ * <p>This class contains a comment <b>"ApiMethod: POST"</b>, which creates an API "POST". 
+ * </p>
+ * ApiMethode: PATCH
+ * <p>This class contains a comment <b>"ApiMethod: PATCH"</b>, which creates an API "PATCH". 
+ * </p>
+ * ApiMethode: PUTImport
+ * <p>This class contains a comment <b>"ApiMethod: PUTImport"</b>, which creates an API "PUTImport". 
+ * </p>
+ * ApiMethode: SearchPage
+ * <p>This class contains a comment <b>"ApiMethod: SearchPage"</b>, which creates an API "SearchPage". 
+ * </p>
+ * ApiTag.enUS: true
  * <p>This class contains a comment <b>"ApiTag: HTM"</b>, which groups all of the OpenAPIs for SiteHtm objects under the tag "HTM". 
  * </p>
  * ApiUri.enUS: /api/htm
@@ -507,9 +525,10 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	public List<String> getLabels() {
 		return labels;
 	}
-
-	public void setLabels(List<String> labels) {
-		this.labels = labels;
+	public void setLabels(String o) {
+		String l = SiteHtm.staticSetLabels(siteRequest_, o);
+		if(l != null)
+			addLabels(l);
 	}
 	public static String staticSetLabels(SiteRequestEnUS siteRequest_, String o) {
 		return o;
@@ -528,6 +547,8 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	@JsonIgnore
 	public void setLabels(JsonArray objects) {
 		labels.clear();
+		if(objects == null)
+			return;
 		for(int i = 0; i < objects.size(); i++) {
 			String o = objects.getString(i);
 			addLabels(o);
@@ -748,9 +769,10 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	public List<String> getText() {
 		return text;
 	}
-
-	public void setText(List<String> text) {
-		this.text = text;
+	public void setText(String o) {
+		String l = SiteHtm.staticSetText(siteRequest_, o);
+		if(l != null)
+			addText(l);
 	}
 	public static String staticSetText(SiteRequestEnUS siteRequest_, String o) {
 		return o;
@@ -769,6 +791,8 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	@JsonIgnore
 	public void setText(JsonArray objects) {
 		text.clear();
+		if(objects == null)
+			return;
 		for(int i = 0; i < objects.size(); i++) {
 			String o = objects.getString(i);
 			addText(o);
@@ -819,9 +843,10 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	public List<String> getComment() {
 		return comment;
 	}
-
-	public void setComment(List<String> comment) {
-		this.comment = comment;
+	public void setComment(String o) {
+		String l = SiteHtm.staticSetComment(siteRequest_, o);
+		if(l != null)
+			addComment(l);
 	}
 	public static String staticSetComment(SiteRequestEnUS siteRequest_, String o) {
 		return o;
@@ -840,6 +865,8 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	@JsonIgnore
 	public void setComment(JsonArray objects) {
 		comment.clear();
+		if(objects == null)
+			return;
 		for(int i = 0; i < objects.size(); i++) {
 			String o = objects.getString(i);
 			addComment(o);
@@ -1477,7 +1504,9 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 				if(val instanceof List<?>) {
 					((List<String>)val).stream().forEach(v -> addLabels(v));
 				} else if(val instanceof JsonArray) {
-					((JsonArray)val).stream().forEach(v -> addLabels(v.toString()));
+					((JsonArray)val).stream().forEach(v -> setLabels(v.toString()));
+				} else if(val instanceof String[]) {
+					Arrays.asList((String[])val).stream().forEach(v -> setLabels((String)v));
 				}
 				if(!saves.contains("labels")) {
 					saves.add("labels");
@@ -1507,7 +1536,9 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 				if(val instanceof List<?>) {
 					((List<String>)val).stream().forEach(v -> addText(v));
 				} else if(val instanceof JsonArray) {
-					((JsonArray)val).stream().forEach(v -> addText(v.toString()));
+					((JsonArray)val).stream().forEach(v -> setText(v.toString()));
+				} else if(val instanceof String[]) {
+					Arrays.asList((String[])val).stream().forEach(v -> setText((String)v));
 				}
 				if(!saves.contains("text")) {
 					saves.add("text");
@@ -1517,7 +1548,9 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 				if(val instanceof List<?>) {
 					((List<String>)val).stream().forEach(v -> addComment(v));
 				} else if(val instanceof JsonArray) {
-					((JsonArray)val).stream().forEach(v -> addComment(v.toString()));
+					((JsonArray)val).stream().forEach(v -> setComment(v.toString()));
+				} else if(val instanceof String[]) {
+					Arrays.asList((String[])val).stream().forEach(v -> setComment((String)v));
 				}
 				if(!saves.contains("comment")) {
 					saves.add("comment");

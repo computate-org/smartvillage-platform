@@ -33,11 +33,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.math.RoundingMode;
 import java.util.Map;
+import java.lang.Long;
+import org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation;
 import java.lang.String;
+import org.computate.vertx.search.list.SearchList;
+import java.math.BigDecimal;
+import io.vertx.core.json.JsonArray;
+import java.lang.Integer;
 import org.computate.search.wrap.Wrap;
 import io.vertx.core.Promise;
 import io.vertx.core.Future;
-import io.vertx.core.json.JsonArray;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.computate.search.response.solr.SolrResponse;
 
@@ -61,7 +66,25 @@ import org.computate.search.response.solr.SolrResponse;
  * Api: true
  * <p>This class contains a comment <b>"Api: true"</b>, which means this class will have Java Vert.x API backend code generated for these objects. 
  * </p>
- * ApiTag.enUS: SimulationReport
+ * ApiMethode: Search
+ * <p>This class contains a comment <b>"ApiMethod: Search"</b>, which creates an API "Search". 
+ * </p>
+ * ApiMethode: GET
+ * <p>This class contains a comment <b>"ApiMethod: GET"</b>, which creates an API "GET". 
+ * </p>
+ * ApiMethode: PATCH
+ * <p>This class contains a comment <b>"ApiMethod: PATCH"</b>, which creates an API "PATCH". 
+ * </p>
+ * ApiMethode: POST
+ * <p>This class contains a comment <b>"ApiMethod: POST"</b>, which creates an API "POST". 
+ * </p>
+ * ApiMethode: PUTImport
+ * <p>This class contains a comment <b>"ApiMethod: PUTImport"</b>, which creates an API "PUTImport". 
+ * </p>
+ * ApiMethode: SearchPage
+ * <p>This class contains a comment <b>"ApiMethod: SearchPage"</b>, which creates an API "SearchPage". 
+ * </p>
+ * ApiTag.enUS: true
  * <p>This class contains a comment <b>"ApiTag: SimulationReport"</b>, which groups all of the OpenAPIs for SimulationReport objects under the tag "SimulationReport". 
  * </p>
  * ApiUri.enUS: /api/simulation-report
@@ -201,6 +224,158 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 	public static final String SimulationReport_IconName = "file-chart-column";
 	public static final Integer SimulationReport_Rows = 100;
 
+	///////////////////
+	// simulationKey //
+	///////////////////
+
+
+	/**	 The entity simulationKey
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected Long simulationKey;
+
+	/**	<br> The entity simulationKey
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:simulationKey">Find the entity simulationKey in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _simulationKey(Wrap<Long> w);
+
+	public Long getSimulationKey() {
+		return simulationKey;
+	}
+
+	public void setSimulationKey(Long simulationKey) {
+		this.simulationKey = simulationKey;
+	}
+	@JsonIgnore
+	public void setSimulationKey(String o) {
+		this.simulationKey = SimulationReport.staticSetSimulationKey(siteRequest_, o);
+	}
+	public static Long staticSetSimulationKey(SiteRequestEnUS siteRequest_, String o) {
+		if(NumberUtils.isParsable(o))
+			return Long.parseLong(o);
+		return null;
+	}
+	protected SimulationReport simulationKeyInit() {
+		Wrap<Long> simulationKeyWrap = new Wrap<Long>().var("simulationKey");
+		if(simulationKey == null) {
+			_simulationKey(simulationKeyWrap);
+			setSimulationKey(simulationKeyWrap.o);
+		}
+		return (SimulationReport)this;
+	}
+
+	public static Long staticSearchSimulationKey(SiteRequestEnUS siteRequest_, Long o) {
+		return o;
+	}
+
+	public static String staticSearchStrSimulationKey(SiteRequestEnUS siteRequest_, Long o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqSimulationKey(SiteRequestEnUS siteRequest_, String o) {
+		return SimulationReport.staticSearchStrSimulationKey(siteRequest_, SimulationReport.staticSearchSimulationKey(siteRequest_, SimulationReport.staticSetSimulationKey(siteRequest_, o)));
+	}
+
+	public Long sqlSimulationKey() {
+		return simulationKey;
+	}
+
+	//////////////////////
+	// simulationSearch //
+	//////////////////////
+
+
+	/**	 The entity simulationSearch
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonIgnore
+	@JsonInclude(Include.NON_NULL)
+	protected SearchList<TrafficSimulation> simulationSearch;
+
+	/**	<br> The entity simulationSearch
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:simulationSearch">Find the entity simulationSearch in Solr</a>
+	 * <br>
+	 * @param promise is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _simulationSearch(Promise<SearchList<TrafficSimulation>> promise);
+
+	public SearchList<TrafficSimulation> getSimulationSearch() {
+		return simulationSearch;
+	}
+
+	public void setSimulationSearch(SearchList<TrafficSimulation> simulationSearch) {
+		this.simulationSearch = simulationSearch;
+	}
+	public static SearchList<TrafficSimulation> staticSetSimulationSearch(SiteRequestEnUS siteRequest_, String o) {
+		return null;
+	}
+	protected Future<SearchList<TrafficSimulation>> simulationSearchPromise() {
+		Promise<SearchList<TrafficSimulation>> promise = Promise.promise();
+		Promise<SearchList<TrafficSimulation>> promise2 = Promise.promise();
+		_simulationSearch(promise2);
+		promise2.future().onSuccess(o -> {
+			if(o != null && simulationSearch == null) {
+				o.promiseDeepForClass(siteRequest_).onSuccess(a -> {
+					setSimulationSearch(o);
+					promise.complete(o);
+				}).onFailure(ex -> {
+					promise.fail(ex);
+				});
+			} else {
+				promise.complete(o);
+			}
+		}).onFailure(ex -> {
+			promise.fail(ex);
+		});
+		return promise.future();
+	}
+
+	/////////////////
+	// simulation_ //
+	/////////////////
+
+
+	/**	 The entity simulation_
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonIgnore
+	@JsonInclude(Include.NON_NULL)
+	protected TrafficSimulation simulation_;
+
+	/**	<br> The entity simulation_
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:simulation_">Find the entity simulation_ in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _simulation_(Wrap<TrafficSimulation> w);
+
+	public TrafficSimulation getSimulation_() {
+		return simulation_;
+	}
+
+	public void setSimulation_(TrafficSimulation simulation_) {
+		this.simulation_ = simulation_;
+	}
+	public static TrafficSimulation staticSetSimulation_(SiteRequestEnUS siteRequest_, String o) {
+		return null;
+	}
+	protected SimulationReport simulation_Init() {
+		Wrap<TrafficSimulation> simulation_Wrap = new Wrap<TrafficSimulation>().var("simulation_");
+		if(simulation_ == null) {
+			_simulation_(simulation_Wrap);
+			setSimulation_(simulation_Wrap.o);
+		}
+		return (SimulationReport)this;
+	}
+
 	////////////////////
 	// simulationName //
 	////////////////////
@@ -255,6 +430,606 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		return simulationName;
 	}
 
+	/////////////////////
+	// paramInitialPar //
+	/////////////////////
+
+
+	/**	 The entity paramInitialPar
+	 *	 It is constructed before being initialized with the constructor by default. 
+	 */
+	@JsonProperty
+	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
+	@JsonInclude(Include.NON_NULL)
+	protected List<BigDecimal> paramInitialPar = new ArrayList<BigDecimal>();
+
+	/**	<br> The entity paramInitialPar
+	 *  It is constructed before being initialized with the constructor by default. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:paramInitialPar">Find the entity paramInitialPar in Solr</a>
+	 * <br>
+	 * @param l is the entity already constructed. 
+	 **/
+	protected abstract void _paramInitialPar(List<BigDecimal> l);
+
+	public List<BigDecimal> getParamInitialPar() {
+		return paramInitialPar;
+	}
+
+	public void setParamInitialPar(List<BigDecimal> paramInitialPar) {
+		this.paramInitialPar = paramInitialPar;
+	}
+	@JsonIgnore
+	public void setParamInitialPar(String o) {
+		BigDecimal l = SimulationReport.staticSetParamInitialPar(siteRequest_, o);
+		if(l != null)
+			addParamInitialPar(l);
+	}
+	public static BigDecimal staticSetParamInitialPar(SiteRequestEnUS siteRequest_, String o) {
+		o = StringUtils.removeAll(o, "[^\\d\\.]");
+		if(NumberUtils.isParsable(o))
+			return new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		return null;
+	}
+	@JsonIgnore
+	public void setParamInitialPar(Double o) {
+		addParamInitialPar(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setParamInitialPar(Integer o) {
+		addParamInitialPar(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setParamInitialPar(Number o) {
+		addParamInitialPar(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	public SimulationReport addParamInitialPar(BigDecimal...objects) {
+		for(BigDecimal o : objects) {
+			addParamInitialPar(o);
+		}
+		return (SimulationReport)this;
+	}
+	public SimulationReport addParamInitialPar(BigDecimal o) {
+		if(o != null)
+			this.paramInitialPar.add(o);
+		return (SimulationReport)this;
+	}
+	@JsonIgnore
+	public void setParamInitialPar(JsonArray objects) {
+		paramInitialPar.clear();
+		if(objects == null)
+			return;
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
+			addParamInitialPar(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+		}
+	}
+	public SimulationReport addParamInitialPar(String o) {
+		if(NumberUtils.isParsable(o)) {
+			BigDecimal p = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+			addParamInitialPar(p);
+		}
+		return (SimulationReport)this;
+	}
+	protected SimulationReport paramInitialParInit() {
+		_paramInitialPar(paramInitialPar);
+		return (SimulationReport)this;
+	}
+
+	public static BigDecimal staticSearchParamInitialPar(SiteRequestEnUS siteRequest_, BigDecimal o) {
+		return o;
+	}
+
+	public static String staticSearchStrParamInitialPar(SiteRequestEnUS siteRequest_, BigDecimal o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqParamInitialPar(SiteRequestEnUS siteRequest_, String o) {
+		return SimulationReport.staticSearchStrParamInitialPar(siteRequest_, SimulationReport.staticSearchParamInitialPar(siteRequest_, SimulationReport.staticSetParamInitialPar(siteRequest_, o)));
+	}
+
+	public Number[] sqlParamInitialPar() {
+		return paramInitialPar.stream().map(v -> (Number)v).toArray(Number[]::new);
+	}
+
+	//////////////
+	// paramLam //
+	//////////////
+
+
+	/**	 The entity paramLam
+	 *	 It is constructed before being initialized with the constructor by default. 
+	 */
+	@JsonProperty
+	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
+	@JsonInclude(Include.NON_NULL)
+	protected List<BigDecimal> paramLam = new ArrayList<BigDecimal>();
+
+	/**	<br> The entity paramLam
+	 *  It is constructed before being initialized with the constructor by default. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:paramLam">Find the entity paramLam in Solr</a>
+	 * <br>
+	 * @param l is the entity already constructed. 
+	 **/
+	protected abstract void _paramLam(List<BigDecimal> l);
+
+	public List<BigDecimal> getParamLam() {
+		return paramLam;
+	}
+
+	public void setParamLam(List<BigDecimal> paramLam) {
+		this.paramLam = paramLam;
+	}
+	@JsonIgnore
+	public void setParamLam(String o) {
+		BigDecimal l = SimulationReport.staticSetParamLam(siteRequest_, o);
+		if(l != null)
+			addParamLam(l);
+	}
+	public static BigDecimal staticSetParamLam(SiteRequestEnUS siteRequest_, String o) {
+		o = StringUtils.removeAll(o, "[^\\d\\.]");
+		if(NumberUtils.isParsable(o))
+			return new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		return null;
+	}
+	@JsonIgnore
+	public void setParamLam(Double o) {
+		addParamLam(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setParamLam(Integer o) {
+		addParamLam(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setParamLam(Number o) {
+		addParamLam(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	public SimulationReport addParamLam(BigDecimal...objects) {
+		for(BigDecimal o : objects) {
+			addParamLam(o);
+		}
+		return (SimulationReport)this;
+	}
+	public SimulationReport addParamLam(BigDecimal o) {
+		if(o != null)
+			this.paramLam.add(o);
+		return (SimulationReport)this;
+	}
+	@JsonIgnore
+	public void setParamLam(JsonArray objects) {
+		paramLam.clear();
+		if(objects == null)
+			return;
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
+			addParamLam(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+		}
+	}
+	public SimulationReport addParamLam(String o) {
+		if(NumberUtils.isParsable(o)) {
+			BigDecimal p = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+			addParamLam(p);
+		}
+		return (SimulationReport)this;
+	}
+	protected SimulationReport paramLamInit() {
+		_paramLam(paramLam);
+		return (SimulationReport)this;
+	}
+
+	public static BigDecimal staticSearchParamLam(SiteRequestEnUS siteRequest_, BigDecimal o) {
+		return o;
+	}
+
+	public static String staticSearchStrParamLam(SiteRequestEnUS siteRequest_, BigDecimal o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqParamLam(SiteRequestEnUS siteRequest_, String o) {
+		return SimulationReport.staticSearchStrParamLam(siteRequest_, SimulationReport.staticSearchParamLam(siteRequest_, SimulationReport.staticSetParamLam(siteRequest_, o)));
+	}
+
+	public Number[] sqlParamLam() {
+		return paramLam.stream().map(v -> (Number)v).toArray(Number[]::new);
+	}
+
+	//////////////////////
+	// paramDemandScale //
+	//////////////////////
+
+
+	/**	 The entity paramDemandScale
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected BigDecimal paramDemandScale;
+
+	/**	<br> The entity paramDemandScale
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:paramDemandScale">Find the entity paramDemandScale in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _paramDemandScale(Wrap<BigDecimal> w);
+
+	public BigDecimal getParamDemandScale() {
+		return paramDemandScale;
+	}
+
+	public void setParamDemandScale(BigDecimal paramDemandScale) {
+		this.paramDemandScale = paramDemandScale;
+	}
+	@JsonIgnore
+	public void setParamDemandScale(String o) {
+		this.paramDemandScale = SimulationReport.staticSetParamDemandScale(siteRequest_, o);
+	}
+	public static BigDecimal staticSetParamDemandScale(SiteRequestEnUS siteRequest_, String o) {
+		o = StringUtils.removeAll(o, "[^\\d\\.]");
+		if(NumberUtils.isParsable(o))
+			return new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		return null;
+	}
+	@JsonIgnore
+	public void setParamDemandScale(Double o) {
+		setParamDemandScale(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setParamDemandScale(Integer o) {
+		setParamDemandScale(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setParamDemandScale(Number o) {
+		setParamDemandScale(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	protected SimulationReport paramDemandScaleInit() {
+		Wrap<BigDecimal> paramDemandScaleWrap = new Wrap<BigDecimal>().var("paramDemandScale");
+		if(paramDemandScale == null) {
+			_paramDemandScale(paramDemandScaleWrap);
+			setParamDemandScale(paramDemandScaleWrap.o);
+		}
+		return (SimulationReport)this;
+	}
+
+	public static Double staticSearchParamDemandScale(SiteRequestEnUS siteRequest_, BigDecimal o) {
+		return o == null ? null : o.doubleValue();
+	}
+
+	public static String staticSearchStrParamDemandScale(SiteRequestEnUS siteRequest_, Double o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqParamDemandScale(SiteRequestEnUS siteRequest_, String o) {
+		return SimulationReport.staticSearchStrParamDemandScale(siteRequest_, SimulationReport.staticSearchParamDemandScale(siteRequest_, SimulationReport.staticSetParamDemandScale(siteRequest_, o)));
+	}
+
+	public BigDecimal sqlParamDemandScale() {
+		return paramDemandScale;
+	}
+
+	///////////////////
+	// paramStepSize //
+	///////////////////
+
+
+	/**	 The entity paramStepSize
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected BigDecimal paramStepSize;
+
+	/**	<br> The entity paramStepSize
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:paramStepSize">Find the entity paramStepSize in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _paramStepSize(Wrap<BigDecimal> w);
+
+	public BigDecimal getParamStepSize() {
+		return paramStepSize;
+	}
+
+	public void setParamStepSize(BigDecimal paramStepSize) {
+		this.paramStepSize = paramStepSize;
+	}
+	@JsonIgnore
+	public void setParamStepSize(String o) {
+		this.paramStepSize = SimulationReport.staticSetParamStepSize(siteRequest_, o);
+	}
+	public static BigDecimal staticSetParamStepSize(SiteRequestEnUS siteRequest_, String o) {
+		o = StringUtils.removeAll(o, "[^\\d\\.]");
+		if(NumberUtils.isParsable(o))
+			return new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		return null;
+	}
+	@JsonIgnore
+	public void setParamStepSize(Double o) {
+		setParamStepSize(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setParamStepSize(Integer o) {
+		setParamStepSize(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setParamStepSize(Number o) {
+		setParamStepSize(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	protected SimulationReport paramStepSizeInit() {
+		Wrap<BigDecimal> paramStepSizeWrap = new Wrap<BigDecimal>().var("paramStepSize");
+		if(paramStepSize == null) {
+			_paramStepSize(paramStepSizeWrap);
+			setParamStepSize(paramStepSizeWrap.o);
+		}
+		return (SimulationReport)this;
+	}
+
+	public static Double staticSearchParamStepSize(SiteRequestEnUS siteRequest_, BigDecimal o) {
+		return o == null ? null : o.doubleValue();
+	}
+
+	public static String staticSearchStrParamStepSize(SiteRequestEnUS siteRequest_, Double o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqParamStepSize(SiteRequestEnUS siteRequest_, String o) {
+		return SimulationReport.staticSearchStrParamStepSize(siteRequest_, SimulationReport.staticSearchParamStepSize(siteRequest_, SimulationReport.staticSetParamStepSize(siteRequest_, o)));
+	}
+
+	public BigDecimal sqlParamStepSize() {
+		return paramStepSize;
+	}
+
+	/////////////////////////
+	// paramUpdateStepSize //
+	/////////////////////////
+
+
+	/**	 The entity paramUpdateStepSize
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected Integer paramUpdateStepSize;
+
+	/**	<br> The entity paramUpdateStepSize
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:paramUpdateStepSize">Find the entity paramUpdateStepSize in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _paramUpdateStepSize(Wrap<Integer> w);
+
+	public Integer getParamUpdateStepSize() {
+		return paramUpdateStepSize;
+	}
+
+	public void setParamUpdateStepSize(Integer paramUpdateStepSize) {
+		this.paramUpdateStepSize = paramUpdateStepSize;
+	}
+	@JsonIgnore
+	public void setParamUpdateStepSize(String o) {
+		this.paramUpdateStepSize = SimulationReport.staticSetParamUpdateStepSize(siteRequest_, o);
+	}
+	public static Integer staticSetParamUpdateStepSize(SiteRequestEnUS siteRequest_, String o) {
+		if(NumberUtils.isParsable(o))
+			return Integer.parseInt(o);
+		return null;
+	}
+	protected SimulationReport paramUpdateStepSizeInit() {
+		Wrap<Integer> paramUpdateStepSizeWrap = new Wrap<Integer>().var("paramUpdateStepSize");
+		if(paramUpdateStepSize == null) {
+			_paramUpdateStepSize(paramUpdateStepSizeWrap);
+			setParamUpdateStepSize(paramUpdateStepSizeWrap.o);
+		}
+		return (SimulationReport)this;
+	}
+
+	public static Integer staticSearchParamUpdateStepSize(SiteRequestEnUS siteRequest_, Integer o) {
+		return o;
+	}
+
+	public static String staticSearchStrParamUpdateStepSize(SiteRequestEnUS siteRequest_, Integer o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqParamUpdateStepSize(SiteRequestEnUS siteRequest_, String o) {
+		return SimulationReport.staticSearchStrParamUpdateStepSize(siteRequest_, SimulationReport.staticSearchParamUpdateStepSize(siteRequest_, SimulationReport.staticSetParamUpdateStepSize(siteRequest_, o)));
+	}
+
+	public Integer sqlParamUpdateStepSize() {
+		return paramUpdateStepSize;
+	}
+
+	//////////////////
+	// paramRunTime //
+	//////////////////
+
+
+	/**	 The entity paramRunTime
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected Integer paramRunTime;
+
+	/**	<br> The entity paramRunTime
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:paramRunTime">Find the entity paramRunTime in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _paramRunTime(Wrap<Integer> w);
+
+	public Integer getParamRunTime() {
+		return paramRunTime;
+	}
+
+	public void setParamRunTime(Integer paramRunTime) {
+		this.paramRunTime = paramRunTime;
+	}
+	@JsonIgnore
+	public void setParamRunTime(String o) {
+		this.paramRunTime = SimulationReport.staticSetParamRunTime(siteRequest_, o);
+	}
+	public static Integer staticSetParamRunTime(SiteRequestEnUS siteRequest_, String o) {
+		if(NumberUtils.isParsable(o))
+			return Integer.parseInt(o);
+		return null;
+	}
+	protected SimulationReport paramRunTimeInit() {
+		Wrap<Integer> paramRunTimeWrap = new Wrap<Integer>().var("paramRunTime");
+		if(paramRunTime == null) {
+			_paramRunTime(paramRunTimeWrap);
+			setParamRunTime(paramRunTimeWrap.o);
+		}
+		return (SimulationReport)this;
+	}
+
+	public static Integer staticSearchParamRunTime(SiteRequestEnUS siteRequest_, Integer o) {
+		return o;
+	}
+
+	public static String staticSearchStrParamRunTime(SiteRequestEnUS siteRequest_, Integer o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqParamRunTime(SiteRequestEnUS siteRequest_, String o) {
+		return SimulationReport.staticSearchStrParamRunTime(siteRequest_, SimulationReport.staticSearchParamRunTime(siteRequest_, SimulationReport.staticSetParamRunTime(siteRequest_, o)));
+	}
+
+	public Integer sqlParamRunTime() {
+		return paramRunTime;
+	}
+
+	///////////////////////
+	// paramTotalIterNum //
+	///////////////////////
+
+
+	/**	 The entity paramTotalIterNum
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected Integer paramTotalIterNum;
+
+	/**	<br> The entity paramTotalIterNum
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:paramTotalIterNum">Find the entity paramTotalIterNum in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _paramTotalIterNum(Wrap<Integer> w);
+
+	public Integer getParamTotalIterNum() {
+		return paramTotalIterNum;
+	}
+
+	public void setParamTotalIterNum(Integer paramTotalIterNum) {
+		this.paramTotalIterNum = paramTotalIterNum;
+	}
+	@JsonIgnore
+	public void setParamTotalIterNum(String o) {
+		this.paramTotalIterNum = SimulationReport.staticSetParamTotalIterNum(siteRequest_, o);
+	}
+	public static Integer staticSetParamTotalIterNum(SiteRequestEnUS siteRequest_, String o) {
+		if(NumberUtils.isParsable(o))
+			return Integer.parseInt(o);
+		return null;
+	}
+	protected SimulationReport paramTotalIterNumInit() {
+		Wrap<Integer> paramTotalIterNumWrap = new Wrap<Integer>().var("paramTotalIterNum");
+		if(paramTotalIterNum == null) {
+			_paramTotalIterNum(paramTotalIterNumWrap);
+			setParamTotalIterNum(paramTotalIterNumWrap.o);
+		}
+		return (SimulationReport)this;
+	}
+
+	public static Integer staticSearchParamTotalIterNum(SiteRequestEnUS siteRequest_, Integer o) {
+		return o;
+	}
+
+	public static String staticSearchStrParamTotalIterNum(SiteRequestEnUS siteRequest_, Integer o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqParamTotalIterNum(SiteRequestEnUS siteRequest_, String o) {
+		return SimulationReport.staticSearchStrParamTotalIterNum(siteRequest_, SimulationReport.staticSearchParamTotalIterNum(siteRequest_, SimulationReport.staticSetParamTotalIterNum(siteRequest_, o)));
+	}
+
+	public Integer sqlParamTotalIterNum() {
+		return paramTotalIterNum;
+	}
+
+	//////////////////////
+	// paramItersPerPar //
+	//////////////////////
+
+
+	/**	 The entity paramItersPerPar
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected Integer paramItersPerPar;
+
+	/**	<br> The entity paramItersPerPar
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:paramItersPerPar">Find the entity paramItersPerPar in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _paramItersPerPar(Wrap<Integer> w);
+
+	public Integer getParamItersPerPar() {
+		return paramItersPerPar;
+	}
+
+	public void setParamItersPerPar(Integer paramItersPerPar) {
+		this.paramItersPerPar = paramItersPerPar;
+	}
+	@JsonIgnore
+	public void setParamItersPerPar(String o) {
+		this.paramItersPerPar = SimulationReport.staticSetParamItersPerPar(siteRequest_, o);
+	}
+	public static Integer staticSetParamItersPerPar(SiteRequestEnUS siteRequest_, String o) {
+		if(NumberUtils.isParsable(o))
+			return Integer.parseInt(o);
+		return null;
+	}
+	protected SimulationReport paramItersPerParInit() {
+		Wrap<Integer> paramItersPerParWrap = new Wrap<Integer>().var("paramItersPerPar");
+		if(paramItersPerPar == null) {
+			_paramItersPerPar(paramItersPerParWrap);
+			setParamItersPerPar(paramItersPerParWrap.o);
+		}
+		return (SimulationReport)this;
+	}
+
+	public static Integer staticSearchParamItersPerPar(SiteRequestEnUS siteRequest_, Integer o) {
+		return o;
+	}
+
+	public static String staticSearchStrParamItersPerPar(SiteRequestEnUS siteRequest_, Integer o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqParamItersPerPar(SiteRequestEnUS siteRequest_, String o) {
+		return SimulationReport.staticSearchStrParamItersPerPar(siteRequest_, SimulationReport.staticSearchParamItersPerPar(siteRequest_, SimulationReport.staticSetParamItersPerPar(siteRequest_, o)));
+	}
+
+	public Integer sqlParamItersPerPar() {
+		return paramItersPerPar;
+	}
+
 	//////////////
 	// initDeep //
 	//////////////
@@ -284,7 +1059,33 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		Future.future(a -> a.complete()).compose(a -> {
 			Promise<Void> promise2 = Promise.promise();
 			try {
+				simulationKeyInit();
+				promise2.complete();
+			} catch(Exception ex) {
+				promise2.fail(ex);
+			}
+			return promise2.future();
+		}).compose(a -> {
+			Promise<Void> promise2 = Promise.promise();
+			simulationSearchPromise().onSuccess(simulationSearch -> {
+				promise2.complete();
+			}).onFailure(ex -> {
+				promise2.fail(ex);
+			});
+			return promise2.future();
+		}).compose(a -> {
+			Promise<Void> promise2 = Promise.promise();
+			try {
+				simulation_Init();
 				simulationNameInit();
+				paramInitialParInit();
+				paramLamInit();
+				paramDemandScaleInit();
+				paramStepSizeInit();
+				paramUpdateStepSizeInit();
+				paramRunTimeInit();
+				paramTotalIterNumInit();
+				paramItersPerParInit();
 				promise2.complete();
 			} catch(Exception ex) {
 				promise2.fail(ex);
@@ -338,8 +1139,30 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 	public Object obtainSimulationReport(String var) {
 		SimulationReport oSimulationReport = (SimulationReport)this;
 		switch(var) {
+			case "simulationKey":
+				return oSimulationReport.simulationKey;
+			case "simulationSearch":
+				return oSimulationReport.simulationSearch;
+			case "simulation_":
+				return oSimulationReport.simulation_;
 			case "simulationName":
 				return oSimulationReport.simulationName;
+			case "paramInitialPar":
+				return oSimulationReport.paramInitialPar;
+			case "paramLam":
+				return oSimulationReport.paramLam;
+			case "paramDemandScale":
+				return oSimulationReport.paramDemandScale;
+			case "paramStepSize":
+				return oSimulationReport.paramStepSize;
+			case "paramUpdateStepSize":
+				return oSimulationReport.paramUpdateStepSize;
+			case "paramRunTime":
+				return oSimulationReport.paramRunTime;
+			case "paramTotalIterNum":
+				return oSimulationReport.paramTotalIterNum;
+			case "paramItersPerPar":
+				return oSimulationReport.paramItersPerPar;
 			default:
 				return super.obtainBaseModel(var);
 		}
@@ -365,6 +1188,12 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 	public Object relateSimulationReport(String var, Object val) {
 		SimulationReport oSimulationReport = (SimulationReport)this;
 		switch(var) {
+			case "simulationKey":
+				if(oSimulationReport.getSimulationKey() == null)
+					oSimulationReport.setSimulationKey(val == null ? null : (NumberUtils.isCreatable(val.toString()) ? Long.parseLong(val.toString()) : -1));
+				if(!saves.contains("simulationKey"))
+					saves.add("simulationKey");
+				return val;
 			default:
 				return super.relateBaseModel(var, val);
 		}
@@ -379,8 +1208,26 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 	}
 	public static Object staticSetSimulationReport(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "simulationKey":
+			return SimulationReport.staticSetSimulationKey(siteRequest_, o);
 		case "simulationName":
 			return SimulationReport.staticSetSimulationName(siteRequest_, o);
+		case "paramInitialPar":
+			return SimulationReport.staticSetParamInitialPar(siteRequest_, o);
+		case "paramLam":
+			return SimulationReport.staticSetParamLam(siteRequest_, o);
+		case "paramDemandScale":
+			return SimulationReport.staticSetParamDemandScale(siteRequest_, o);
+		case "paramStepSize":
+			return SimulationReport.staticSetParamStepSize(siteRequest_, o);
+		case "paramUpdateStepSize":
+			return SimulationReport.staticSetParamUpdateStepSize(siteRequest_, o);
+		case "paramRunTime":
+			return SimulationReport.staticSetParamRunTime(siteRequest_, o);
+		case "paramTotalIterNum":
+			return SimulationReport.staticSetParamTotalIterNum(siteRequest_, o);
+		case "paramItersPerPar":
+			return SimulationReport.staticSetParamItersPerPar(siteRequest_, o);
 			default:
 				return BaseModel.staticSetBaseModel(entityVar,  siteRequest_, o);
 		}
@@ -395,8 +1242,26 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 	}
 	public static Object staticSearchSimulationReport(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "simulationKey":
+			return SimulationReport.staticSearchSimulationKey(siteRequest_, (Long)o);
 		case "simulationName":
 			return SimulationReport.staticSearchSimulationName(siteRequest_, (String)o);
+		case "paramInitialPar":
+			return SimulationReport.staticSearchParamInitialPar(siteRequest_, (BigDecimal)o);
+		case "paramLam":
+			return SimulationReport.staticSearchParamLam(siteRequest_, (BigDecimal)o);
+		case "paramDemandScale":
+			return SimulationReport.staticSearchParamDemandScale(siteRequest_, (BigDecimal)o);
+		case "paramStepSize":
+			return SimulationReport.staticSearchParamStepSize(siteRequest_, (BigDecimal)o);
+		case "paramUpdateStepSize":
+			return SimulationReport.staticSearchParamUpdateStepSize(siteRequest_, (Integer)o);
+		case "paramRunTime":
+			return SimulationReport.staticSearchParamRunTime(siteRequest_, (Integer)o);
+		case "paramTotalIterNum":
+			return SimulationReport.staticSearchParamTotalIterNum(siteRequest_, (Integer)o);
+		case "paramItersPerPar":
+			return SimulationReport.staticSearchParamItersPerPar(siteRequest_, (Integer)o);
 			default:
 				return BaseModel.staticSearchBaseModel(entityVar,  siteRequest_, o);
 		}
@@ -411,8 +1276,26 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 	}
 	public static String staticSearchStrSimulationReport(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "simulationKey":
+			return SimulationReport.staticSearchStrSimulationKey(siteRequest_, (Long)o);
 		case "simulationName":
 			return SimulationReport.staticSearchStrSimulationName(siteRequest_, (String)o);
+		case "paramInitialPar":
+			return SimulationReport.staticSearchStrParamInitialPar(siteRequest_, (BigDecimal)o);
+		case "paramLam":
+			return SimulationReport.staticSearchStrParamLam(siteRequest_, (BigDecimal)o);
+		case "paramDemandScale":
+			return SimulationReport.staticSearchStrParamDemandScale(siteRequest_, (Double)o);
+		case "paramStepSize":
+			return SimulationReport.staticSearchStrParamStepSize(siteRequest_, (Double)o);
+		case "paramUpdateStepSize":
+			return SimulationReport.staticSearchStrParamUpdateStepSize(siteRequest_, (Integer)o);
+		case "paramRunTime":
+			return SimulationReport.staticSearchStrParamRunTime(siteRequest_, (Integer)o);
+		case "paramTotalIterNum":
+			return SimulationReport.staticSearchStrParamTotalIterNum(siteRequest_, (Integer)o);
+		case "paramItersPerPar":
+			return SimulationReport.staticSearchStrParamItersPerPar(siteRequest_, (Integer)o);
 			default:
 				return BaseModel.staticSearchStrBaseModel(entityVar,  siteRequest_, o);
 		}
@@ -427,8 +1310,26 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 	}
 	public static String staticSearchFqSimulationReport(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "simulationKey":
+			return SimulationReport.staticSearchFqSimulationKey(siteRequest_, o);
 		case "simulationName":
 			return SimulationReport.staticSearchFqSimulationName(siteRequest_, o);
+		case "paramInitialPar":
+			return SimulationReport.staticSearchFqParamInitialPar(siteRequest_, o);
+		case "paramLam":
+			return SimulationReport.staticSearchFqParamLam(siteRequest_, o);
+		case "paramDemandScale":
+			return SimulationReport.staticSearchFqParamDemandScale(siteRequest_, o);
+		case "paramStepSize":
+			return SimulationReport.staticSearchFqParamStepSize(siteRequest_, o);
+		case "paramUpdateStepSize":
+			return SimulationReport.staticSearchFqParamUpdateStepSize(siteRequest_, o);
+		case "paramRunTime":
+			return SimulationReport.staticSearchFqParamRunTime(siteRequest_, o);
+		case "paramTotalIterNum":
+			return SimulationReport.staticSearchFqParamTotalIterNum(siteRequest_, o);
+		case "paramItersPerPar":
+			return SimulationReport.staticSearchFqParamItersPerPar(siteRequest_, o);
 			default:
 				return BaseModel.staticSearchFqBaseModel(entityVar,  siteRequest_, o);
 		}
@@ -455,11 +1356,95 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 	}
 	public Object persistSimulationReport(String var, Object val) {
 		String varLower = var.toLowerCase();
-			if("simulationname".equals(varLower)) {
+			if("simulationkey".equals(varLower)) {
+				if(val instanceof Long) {
+					setSimulationKey((Long)val);
+				} else {
+					setSimulationKey(val == null ? null : val.toString());
+				}
+				saves.add("simulationKey");
+				return val;
+			} else if("simulationname".equals(varLower)) {
 				if(val instanceof String) {
 					setSimulationName((String)val);
 				}
 				saves.add("simulationName");
+				return val;
+			} else if("paraminitialpar".equals(varLower)) {
+				if(val instanceof List<?>) {
+					((List<BigDecimal>)val).stream().forEach(v -> addParamInitialPar(v));
+				} else if(val instanceof JsonArray) {
+					((JsonArray)val).stream().forEach(v -> setParamInitialPar(v.toString()));
+				} else if(val instanceof BigDecimal[]) {
+					Arrays.asList((BigDecimal[])val).stream().forEach(v -> setParamInitialPar((BigDecimal)v));
+				} else if(val instanceof Number[]) {
+					Arrays.asList((Number[])val).stream().forEach(v -> setParamInitialPar((Number)v));
+				}
+				if(!saves.contains("paramInitialPar")) {
+					saves.add("paramInitialPar");
+				}
+				return val;
+			} else if("paramlam".equals(varLower)) {
+				if(val instanceof List<?>) {
+					((List<BigDecimal>)val).stream().forEach(v -> addParamLam(v));
+				} else if(val instanceof JsonArray) {
+					((JsonArray)val).stream().forEach(v -> setParamLam(v.toString()));
+				} else if(val instanceof BigDecimal[]) {
+					Arrays.asList((BigDecimal[])val).stream().forEach(v -> setParamLam((BigDecimal)v));
+				} else if(val instanceof Number[]) {
+					Arrays.asList((Number[])val).stream().forEach(v -> setParamLam((Number)v));
+				}
+				if(!saves.contains("paramLam")) {
+					saves.add("paramLam");
+				}
+				return val;
+			} else if("paramdemandscale".equals(varLower)) {
+				if(val instanceof String) {
+					setParamDemandScale((String)val);
+				} else if(val instanceof Number) {
+					setParamDemandScale(new BigDecimal(((Number)val).doubleValue()));
+				}
+				saves.add("paramDemandScale");
+				return val;
+			} else if("paramstepsize".equals(varLower)) {
+				if(val instanceof String) {
+					setParamStepSize((String)val);
+				} else if(val instanceof Number) {
+					setParamStepSize(new BigDecimal(((Number)val).doubleValue()));
+				}
+				saves.add("paramStepSize");
+				return val;
+			} else if("paramupdatestepsize".equals(varLower)) {
+				if(val instanceof Integer) {
+					setParamUpdateStepSize((Integer)val);
+				} else {
+					setParamUpdateStepSize(val == null ? null : val.toString());
+				}
+				saves.add("paramUpdateStepSize");
+				return val;
+			} else if("paramruntime".equals(varLower)) {
+				if(val instanceof Integer) {
+					setParamRunTime((Integer)val);
+				} else {
+					setParamRunTime(val == null ? null : val.toString());
+				}
+				saves.add("paramRunTime");
+				return val;
+			} else if("paramtotaliternum".equals(varLower)) {
+				if(val instanceof Integer) {
+					setParamTotalIterNum((Integer)val);
+				} else {
+					setParamTotalIterNum(val == null ? null : val.toString());
+				}
+				saves.add("paramTotalIterNum");
+				return val;
+			} else if("paramitersperpar".equals(varLower)) {
+				if(val instanceof Integer) {
+					setParamItersPerPar((Integer)val);
+				} else {
+					setParamItersPerPar(val == null ? null : val.toString());
+				}
+				saves.add("paramItersPerPar");
 				return val;
 		} else {
 			return super.persistBaseModel(var, val);
@@ -483,8 +1468,43 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 	}
 
 	public void indexSimulationReport(JsonObject doc) {
+		if(simulationKey != null) {
+			doc.put("simulationKey_docvalues_long", simulationKey);
+		}
 		if(simulationName != null) {
 			doc.put("simulationName_docvalues_string", simulationName);
+		}
+		if(paramInitialPar != null) {
+			JsonArray l = new JsonArray();
+			doc.put("paramInitialPar_docvalues_doubles", l);
+			for(BigDecimal o : paramInitialPar) {
+				l.add(o);
+			}
+		}
+		if(paramLam != null) {
+			JsonArray l = new JsonArray();
+			doc.put("paramLam_docvalues_doubles", l);
+			for(BigDecimal o : paramLam) {
+				l.add(o);
+			}
+		}
+		if(paramDemandScale != null) {
+			doc.put("paramDemandScale_docvalues_double", paramDemandScale.doubleValue());
+		}
+		if(paramStepSize != null) {
+			doc.put("paramStepSize_docvalues_double", paramStepSize.doubleValue());
+		}
+		if(paramUpdateStepSize != null) {
+			doc.put("paramUpdateStepSize_docvalues_int", paramUpdateStepSize);
+		}
+		if(paramRunTime != null) {
+			doc.put("paramRunTime_docvalues_int", paramRunTime);
+		}
+		if(paramTotalIterNum != null) {
+			doc.put("paramTotalIterNum_docvalues_int", paramTotalIterNum);
+		}
+		if(paramItersPerPar != null) {
+			doc.put("paramItersPerPar_docvalues_int", paramItersPerPar);
 		}
 		super.indexBaseModel(doc);
 
@@ -492,8 +1512,26 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 
 	public static String varStoredSimulationReport(String entityVar) {
 		switch(entityVar) {
+			case "simulationKey":
+				return "simulationKey_docvalues_long";
 			case "simulationName":
 				return "simulationName_docvalues_string";
+			case "paramInitialPar":
+				return "paramInitialPar_docvalues_doubles";
+			case "paramLam":
+				return "paramLam_docvalues_doubles";
+			case "paramDemandScale":
+				return "paramDemandScale_docvalues_double";
+			case "paramStepSize":
+				return "paramStepSize_docvalues_double";
+			case "paramUpdateStepSize":
+				return "paramUpdateStepSize_docvalues_int";
+			case "paramRunTime":
+				return "paramRunTime_docvalues_int";
+			case "paramTotalIterNum":
+				return "paramTotalIterNum_docvalues_int";
+			case "paramItersPerPar":
+				return "paramItersPerPar_docvalues_int";
 			default:
 				return BaseModel.varStoredBaseModel(entityVar);
 		}
@@ -501,8 +1539,26 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 
 	public static String varIndexedSimulationReport(String entityVar) {
 		switch(entityVar) {
+			case "simulationKey":
+				return "simulationKey_docvalues_long";
 			case "simulationName":
 				return "simulationName_docvalues_string";
+			case "paramInitialPar":
+				return "paramInitialPar_docvalues_doubles";
+			case "paramLam":
+				return "paramLam_docvalues_doubles";
+			case "paramDemandScale":
+				return "paramDemandScale_docvalues_double";
+			case "paramStepSize":
+				return "paramStepSize_docvalues_double";
+			case "paramUpdateStepSize":
+				return "paramUpdateStepSize_docvalues_int";
+			case "paramRunTime":
+				return "paramRunTime_docvalues_int";
+			case "paramTotalIterNum":
+				return "paramTotalIterNum_docvalues_int";
+			case "paramItersPerPar":
+				return "paramItersPerPar_docvalues_int";
 			default:
 				return BaseModel.varIndexedBaseModel(entityVar);
 		}
@@ -510,8 +1566,26 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 
 	public static String searchVarSimulationReport(String searchVar) {
 		switch(searchVar) {
+			case "simulationKey_docvalues_long":
+				return "simulationKey";
 			case "simulationName_docvalues_string":
 				return "simulationName";
+			case "paramInitialPar_docvalues_doubles":
+				return "paramInitialPar";
+			case "paramLam_docvalues_doubles":
+				return "paramLam";
+			case "paramDemandScale_docvalues_double":
+				return "paramDemandScale";
+			case "paramStepSize_docvalues_double":
+				return "paramStepSize";
+			case "paramUpdateStepSize_docvalues_int":
+				return "paramUpdateStepSize";
+			case "paramRunTime_docvalues_int":
+				return "paramRunTime";
+			case "paramTotalIterNum_docvalues_int":
+				return "paramTotalIterNum";
+			case "paramItersPerPar_docvalues_int":
+				return "paramItersPerPar";
 			default:
 				return BaseModel.searchVarBaseModel(searchVar);
 		}
@@ -541,7 +1615,20 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 	public void storeSimulationReport(SolrResponse.Doc doc) {
 		SimulationReport oSimulationReport = (SimulationReport)this;
 
+		oSimulationReport.setSimulationKey(Optional.ofNullable(doc.get("simulationKey_docvalues_long")).map(v -> v.toString()).orElse(null));
 		oSimulationReport.setSimulationName(Optional.ofNullable(doc.get("simulationName_docvalues_string")).map(v -> v.toString()).orElse(null));
+		Optional.ofNullable((List<?>)doc.get("paramInitialPar_docvalues_doubles")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
+			oSimulationReport.addParamInitialPar(v.toString());
+		});
+		Optional.ofNullable((List<?>)doc.get("paramLam_docvalues_doubles")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
+			oSimulationReport.addParamLam(v.toString());
+		});
+		oSimulationReport.setParamDemandScale(Optional.ofNullable(doc.get("paramDemandScale_docvalues_double")).map(v -> v.toString()).orElse(null));
+		oSimulationReport.setParamStepSize(Optional.ofNullable(doc.get("paramStepSize_docvalues_double")).map(v -> v.toString()).orElse(null));
+		oSimulationReport.setParamUpdateStepSize(Optional.ofNullable(doc.get("paramUpdateStepSize_docvalues_int")).map(v -> v.toString()).orElse(null));
+		oSimulationReport.setParamRunTime(Optional.ofNullable(doc.get("paramRunTime_docvalues_int")).map(v -> v.toString()).orElse(null));
+		oSimulationReport.setParamTotalIterNum(Optional.ofNullable(doc.get("paramTotalIterNum_docvalues_int")).map(v -> v.toString()).orElse(null));
+		oSimulationReport.setParamItersPerPar(Optional.ofNullable(doc.get("paramItersPerPar_docvalues_int")).map(v -> v.toString()).orElse(null));
 
 		super.storeBaseModel(doc);
 	}
@@ -555,8 +1642,26 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		Object o = Optional.ofNullable(apiRequest).map(ApiRequest::getOriginal).orElse(null);
 		if(o != null && o instanceof SimulationReport) {
 			SimulationReport original = (SimulationReport)o;
+			if(!Objects.equals(simulationKey, original.getSimulationKey()))
+				apiRequest.addVars("simulationKey");
 			if(!Objects.equals(simulationName, original.getSimulationName()))
 				apiRequest.addVars("simulationName");
+			if(!Objects.equals(paramInitialPar, original.getParamInitialPar()))
+				apiRequest.addVars("paramInitialPar");
+			if(!Objects.equals(paramLam, original.getParamLam()))
+				apiRequest.addVars("paramLam");
+			if(!Objects.equals(paramDemandScale, original.getParamDemandScale()))
+				apiRequest.addVars("paramDemandScale");
+			if(!Objects.equals(paramStepSize, original.getParamStepSize()))
+				apiRequest.addVars("paramStepSize");
+			if(!Objects.equals(paramUpdateStepSize, original.getParamUpdateStepSize()))
+				apiRequest.addVars("paramUpdateStepSize");
+			if(!Objects.equals(paramRunTime, original.getParamRunTime()))
+				apiRequest.addVars("paramRunTime");
+			if(!Objects.equals(paramTotalIterNum, original.getParamTotalIterNum()))
+				apiRequest.addVars("paramTotalIterNum");
+			if(!Objects.equals(paramItersPerPar, original.getParamItersPerPar()))
+				apiRequest.addVars("paramItersPerPar");
 			super.apiRequestBaseModel();
 		}
 	}
@@ -568,12 +1673,32 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 	@Override public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(super.toString());
+		sb.append(Optional.ofNullable(simulationKey).map(v -> "simulationKey: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(simulationName).map(v -> "simulationName: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(paramInitialPar).map(v -> "paramInitialPar: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(paramLam).map(v -> "paramLam: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(paramDemandScale).map(v -> "paramDemandScale: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(paramStepSize).map(v -> "paramStepSize: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(paramUpdateStepSize).map(v -> "paramUpdateStepSize: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(paramRunTime).map(v -> "paramRunTime: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(paramTotalIterNum).map(v -> "paramTotalIterNum: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(paramItersPerPar).map(v -> "paramItersPerPar: " + v + "\n").orElse(""));
 		return sb.toString();
 	}
 
 	public static final String CLASS_SIMPLE_NAME = "SimulationReport";
+	public static final String VAR_simulationKey = "simulationKey";
+	public static final String VAR_simulationSearch = "simulationSearch";
+	public static final String VAR_simulation_ = "simulation_";
 	public static final String VAR_simulationName = "simulationName";
+	public static final String VAR_paramInitialPar = "paramInitialPar";
+	public static final String VAR_paramLam = "paramLam";
+	public static final String VAR_paramDemandScale = "paramDemandScale";
+	public static final String VAR_paramStepSize = "paramStepSize";
+	public static final String VAR_paramUpdateStepSize = "paramUpdateStepSize";
+	public static final String VAR_paramRunTime = "paramRunTime";
+	public static final String VAR_paramTotalIterNum = "paramTotalIterNum";
+	public static final String VAR_paramItersPerPar = "paramItersPerPar";
 
 	public static List<String> varsQForClass() {
 		return SimulationReport.varsQSimulationReport(new ArrayList<String>());
@@ -587,7 +1712,16 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		return SimulationReport.varsFqSimulationReport(new ArrayList<String>());
 	}
 	public static List<String> varsFqSimulationReport(List<String> vars) {
+		vars.add(VAR_simulationKey);
 		vars.add(VAR_simulationName);
+		vars.add(VAR_paramInitialPar);
+		vars.add(VAR_paramLam);
+		vars.add(VAR_paramDemandScale);
+		vars.add(VAR_paramStepSize);
+		vars.add(VAR_paramUpdateStepSize);
+		vars.add(VAR_paramRunTime);
+		vars.add(VAR_paramTotalIterNum);
+		vars.add(VAR_paramItersPerPar);
 		BaseModel.varsFqBaseModel(vars);
 		return vars;
 	}
@@ -596,19 +1730,58 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		return SimulationReport.varsRangeSimulationReport(new ArrayList<String>());
 	}
 	public static List<String> varsRangeSimulationReport(List<String> vars) {
+		vars.add(VAR_paramDemandScale);
+		vars.add(VAR_paramStepSize);
+		vars.add(VAR_paramUpdateStepSize);
+		vars.add(VAR_paramRunTime);
+		vars.add(VAR_paramTotalIterNum);
+		vars.add(VAR_paramItersPerPar);
 		BaseModel.varsRangeBaseModel(vars);
 		return vars;
 	}
 
+	public static final String DISPLAY_NAME_simulationKey = "traffic simulation";
+	public static final String DISPLAY_NAME_simulationSearch = "";
+	public static final String DISPLAY_NAME_simulation_ = "";
 	public static final String DISPLAY_NAME_simulationName = "simulation name";
+	public static final String DISPLAY_NAME_paramInitialPar = "initial params";
+	public static final String DISPLAY_NAME_paramLam = "Traffic Demand";
+	public static final String DISPLAY_NAME_paramDemandScale = "demand scale";
+	public static final String DISPLAY_NAME_paramStepSize = "step size";
+	public static final String DISPLAY_NAME_paramUpdateStepSize = "update step size";
+	public static final String DISPLAY_NAME_paramRunTime = "run time";
+	public static final String DISPLAY_NAME_paramTotalIterNum = "total iterations";
+	public static final String DISPLAY_NAME_paramItersPerPar = "iteration repetitions";
 
 	public static String displayNameForClass(String var) {
 		return SimulationReport.displayNameSimulationReport(var);
 	}
 	public static String displayNameSimulationReport(String var) {
 		switch(var) {
+		case VAR_simulationKey:
+			return DISPLAY_NAME_simulationKey;
+		case VAR_simulationSearch:
+			return DISPLAY_NAME_simulationSearch;
+		case VAR_simulation_:
+			return DISPLAY_NAME_simulation_;
 		case VAR_simulationName:
 			return DISPLAY_NAME_simulationName;
+		case VAR_paramInitialPar:
+			return DISPLAY_NAME_paramInitialPar;
+		case VAR_paramLam:
+			return DISPLAY_NAME_paramLam;
+		case VAR_paramDemandScale:
+			return DISPLAY_NAME_paramDemandScale;
+		case VAR_paramStepSize:
+			return DISPLAY_NAME_paramStepSize;
+		case VAR_paramUpdateStepSize:
+			return DISPLAY_NAME_paramUpdateStepSize;
+		case VAR_paramRunTime:
+			return DISPLAY_NAME_paramRunTime;
+		case VAR_paramTotalIterNum:
+			return DISPLAY_NAME_paramTotalIterNum;
+		case VAR_paramItersPerPar:
+			return DISPLAY_NAME_paramItersPerPar;
 		default:
 			return BaseModel.displayNameBaseModel(var);
 		}
@@ -616,6 +1789,14 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 
 	public static String descriptionSimulationReport(String var) {
 		switch(var) {
+		case VAR_simulationKey:
+			return "The traffic simulation for this report. ";
+		case VAR_paramRunTime:
+			return "Time duration of each simulated sample path. ";
+		case VAR_paramTotalIterNum:
+			return "Total iterations to update performance. ";
+		case VAR_paramItersPerPar:
+			return "Number of repeats per round. ";
 			default:
 				return BaseModel.descriptionBaseModel(var);
 		}
@@ -623,8 +1804,30 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 
 	public static String classSimpleNameSimulationReport(String var) {
 		switch(var) {
+		case VAR_simulationKey:
+			return "Long";
+		case VAR_simulationSearch:
+			return "SearchList";
+		case VAR_simulation_:
+			return "TrafficSimulation";
 		case VAR_simulationName:
 			return "String";
+		case VAR_paramInitialPar:
+			return "List";
+		case VAR_paramLam:
+			return "List";
+		case VAR_paramDemandScale:
+			return "BigDecimal";
+		case VAR_paramStepSize:
+			return "BigDecimal";
+		case VAR_paramUpdateStepSize:
+			return "Integer";
+		case VAR_paramRunTime:
+			return "Integer";
+		case VAR_paramTotalIterNum:
+			return "Integer";
+		case VAR_paramItersPerPar:
+			return "Integer";
 			default:
 				return BaseModel.classSimpleNameBaseModel(var);
 		}
@@ -639,8 +1842,26 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 
 	public static Integer htmlRowSimulationReport(String var) {
 		switch(var) {
+		case VAR_simulationKey:
+			return 3;
 		case VAR_simulationName:
 			return 3;
+		case VAR_paramInitialPar:
+			return 4;
+		case VAR_paramLam:
+			return 5;
+		case VAR_paramDemandScale:
+			return 6;
+		case VAR_paramStepSize:
+			return 6;
+		case VAR_paramUpdateStepSize:
+			return 6;
+		case VAR_paramRunTime:
+			return 7;
+		case VAR_paramTotalIterNum:
+			return 7;
+		case VAR_paramItersPerPar:
+			return 7;
 			default:
 				return BaseModel.htmlRowBaseModel(var);
 		}
@@ -648,8 +1869,26 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 
 	public static Integer htmlCellSimulationReport(String var) {
 		switch(var) {
-		case VAR_simulationName:
+		case VAR_simulationKey:
 			return 1;
+		case VAR_simulationName:
+			return 2;
+		case VAR_paramInitialPar:
+			return 1;
+		case VAR_paramLam:
+			return 1;
+		case VAR_paramDemandScale:
+			return 1;
+		case VAR_paramStepSize:
+			return 2;
+		case VAR_paramUpdateStepSize:
+			return 3;
+		case VAR_paramRunTime:
+			return 1;
+		case VAR_paramTotalIterNum:
+			return 2;
+		case VAR_paramItersPerPar:
+			return 3;
 			default:
 				return BaseModel.htmlCellBaseModel(var);
 		}
