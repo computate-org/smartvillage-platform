@@ -22,7 +22,9 @@ spec:
           value: "bety"
         - name: postgresql.postgresqlDatabase
           value: "bety"
-        - name: serviceAccountName
+        - name: serviceAccount.enabled
+          value: "true"
+        - name: serviceAccount.name
           value: "pecan-betydb"
         - name: externalSecret
           value: "false"
