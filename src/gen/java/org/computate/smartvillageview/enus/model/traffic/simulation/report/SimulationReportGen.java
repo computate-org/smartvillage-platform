@@ -81,6 +81,9 @@ import org.computate.search.response.solr.SolrResponse;
  * ApiMethode: PUTImport
  * <p>This class contains a comment <b>"ApiMethod: PUTImport"</b>, which creates an API "PUTImport". 
  * </p>
+ * ApiMethode: PATCHRunSimulation
+ * <p>This class contains a comment <b>"ApiMethod: PATCHRunSimulation"</b>, which creates an API "PATCHRunSimulation". 
+ * </p>
  * ApiMethode: SearchPage
  * <p>This class contains a comment <b>"ApiMethod: SearchPage"</b>, which creates an API "SearchPage". 
  * </p>
@@ -216,6 +219,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 	public static final String POST_enUS_ImageUri = "/png/api/simulation-report-999.png";
 	public static final String PUTImport_enUS_Uri = "/api/simulation-report-import";
 	public static final String PUTImport_enUS_ImageUri = "/png/api/simulation-report-import-999.png";
+	public static final String PATCHRunSimulation_enUS_Uri = "/api/run-simulation-report";
+	public static final String PATCHRunSimulation_enUS_ImageUri = "/png/api/run-simulation-report-999.png";
 	public static final String SearchPage_enUS_Uri = "/simulation-report";
 	public static final String SearchPage_enUS_ImageUri = "/png/simulation-report-999.png";
 
@@ -1030,6 +1035,130 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		return paramItersPerPar;
 	}
 
+	///////////////////////
+	// updatedParameters //
+	///////////////////////
+
+
+	/**	 The entity updatedParameters
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected JsonArray updatedParameters;
+
+	/**	<br> The entity updatedParameters
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:updatedParameters">Find the entity updatedParameters in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _updatedParameters(Wrap<JsonArray> w);
+
+	public JsonArray getUpdatedParameters() {
+		return updatedParameters;
+	}
+
+	public void setUpdatedParameters(JsonArray updatedParameters) {
+		this.updatedParameters = updatedParameters;
+	}
+	@JsonIgnore
+	public void setUpdatedParameters(String o) {
+		this.updatedParameters = SimulationReport.staticSetUpdatedParameters(siteRequest_, o);
+	}
+	public static JsonArray staticSetUpdatedParameters(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonArray(o);
+		}
+		return null;
+	}
+	protected SimulationReport updatedParametersInit() {
+		Wrap<JsonArray> updatedParametersWrap = new Wrap<JsonArray>().var("updatedParameters");
+		if(updatedParameters == null) {
+			_updatedParameters(updatedParametersWrap);
+			setUpdatedParameters(updatedParametersWrap.o);
+		}
+		return (SimulationReport)this;
+	}
+
+	public static JsonArray staticSearchUpdatedParameters(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o;
+	}
+
+	public static String staticSearchStrUpdatedParameters(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqUpdatedParameters(SiteRequestEnUS siteRequest_, String o) {
+		return SimulationReport.staticSearchStrUpdatedParameters(siteRequest_, SimulationReport.staticSearchUpdatedParameters(siteRequest_, SimulationReport.staticSetUpdatedParameters(siteRequest_, o)));
+	}
+
+	public JsonArray sqlUpdatedParameters() {
+		return updatedParameters;
+	}
+
+	////////////////////////
+	// updatedPerformance //
+	////////////////////////
+
+
+	/**	 The entity updatedPerformance
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected JsonArray updatedPerformance;
+
+	/**	<br> The entity updatedPerformance
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:updatedPerformance">Find the entity updatedPerformance in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _updatedPerformance(Wrap<JsonArray> w);
+
+	public JsonArray getUpdatedPerformance() {
+		return updatedPerformance;
+	}
+
+	public void setUpdatedPerformance(JsonArray updatedPerformance) {
+		this.updatedPerformance = updatedPerformance;
+	}
+	@JsonIgnore
+	public void setUpdatedPerformance(String o) {
+		this.updatedPerformance = SimulationReport.staticSetUpdatedPerformance(siteRequest_, o);
+	}
+	public static JsonArray staticSetUpdatedPerformance(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonArray(o);
+		}
+		return null;
+	}
+	protected SimulationReport updatedPerformanceInit() {
+		Wrap<JsonArray> updatedPerformanceWrap = new Wrap<JsonArray>().var("updatedPerformance");
+		if(updatedPerformance == null) {
+			_updatedPerformance(updatedPerformanceWrap);
+			setUpdatedPerformance(updatedPerformanceWrap.o);
+		}
+		return (SimulationReport)this;
+	}
+
+	public static JsonArray staticSearchUpdatedPerformance(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o;
+	}
+
+	public static String staticSearchStrUpdatedPerformance(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqUpdatedPerformance(SiteRequestEnUS siteRequest_, String o) {
+		return SimulationReport.staticSearchStrUpdatedPerformance(siteRequest_, SimulationReport.staticSearchUpdatedPerformance(siteRequest_, SimulationReport.staticSetUpdatedPerformance(siteRequest_, o)));
+	}
+
+	public JsonArray sqlUpdatedPerformance() {
+		return updatedPerformance;
+	}
+
 	//////////////
 	// initDeep //
 	//////////////
@@ -1086,6 +1215,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 				paramRunTimeInit();
 				paramTotalIterNumInit();
 				paramItersPerParInit();
+				updatedParametersInit();
+				updatedPerformanceInit();
 				promise2.complete();
 			} catch(Exception ex) {
 				promise2.fail(ex);
@@ -1163,6 +1294,10 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 				return oSimulationReport.paramTotalIterNum;
 			case "paramItersPerPar":
 				return oSimulationReport.paramItersPerPar;
+			case "updatedParameters":
+				return oSimulationReport.updatedParameters;
+			case "updatedPerformance":
+				return oSimulationReport.updatedPerformance;
 			default:
 				return super.obtainBaseModel(var);
 		}
@@ -1228,6 +1363,10 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return SimulationReport.staticSetParamTotalIterNum(siteRequest_, o);
 		case "paramItersPerPar":
 			return SimulationReport.staticSetParamItersPerPar(siteRequest_, o);
+		case "updatedParameters":
+			return SimulationReport.staticSetUpdatedParameters(siteRequest_, o);
+		case "updatedPerformance":
+			return SimulationReport.staticSetUpdatedPerformance(siteRequest_, o);
 			default:
 				return BaseModel.staticSetBaseModel(entityVar,  siteRequest_, o);
 		}
@@ -1262,6 +1401,10 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return SimulationReport.staticSearchParamTotalIterNum(siteRequest_, (Integer)o);
 		case "paramItersPerPar":
 			return SimulationReport.staticSearchParamItersPerPar(siteRequest_, (Integer)o);
+		case "updatedParameters":
+			return SimulationReport.staticSearchUpdatedParameters(siteRequest_, (JsonArray)o);
+		case "updatedPerformance":
+			return SimulationReport.staticSearchUpdatedPerformance(siteRequest_, (JsonArray)o);
 			default:
 				return BaseModel.staticSearchBaseModel(entityVar,  siteRequest_, o);
 		}
@@ -1296,6 +1439,10 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return SimulationReport.staticSearchStrParamTotalIterNum(siteRequest_, (Integer)o);
 		case "paramItersPerPar":
 			return SimulationReport.staticSearchStrParamItersPerPar(siteRequest_, (Integer)o);
+		case "updatedParameters":
+			return SimulationReport.staticSearchStrUpdatedParameters(siteRequest_, (JsonArray)o);
+		case "updatedPerformance":
+			return SimulationReport.staticSearchStrUpdatedPerformance(siteRequest_, (JsonArray)o);
 			default:
 				return BaseModel.staticSearchStrBaseModel(entityVar,  siteRequest_, o);
 		}
@@ -1330,6 +1477,10 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return SimulationReport.staticSearchFqParamTotalIterNum(siteRequest_, o);
 		case "paramItersPerPar":
 			return SimulationReport.staticSearchFqParamItersPerPar(siteRequest_, o);
+		case "updatedParameters":
+			return SimulationReport.staticSearchFqUpdatedParameters(siteRequest_, o);
+		case "updatedPerformance":
+			return SimulationReport.staticSearchFqUpdatedPerformance(siteRequest_, o);
 			default:
 				return BaseModel.staticSearchFqBaseModel(entityVar,  siteRequest_, o);
 		}
@@ -1446,6 +1597,22 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 				}
 				saves.add("paramItersPerPar");
 				return val;
+			} else if("updatedparameters".equals(varLower)) {
+				if(val instanceof String) {
+					setUpdatedParameters((String)val);
+				} else if(val instanceof JsonArray) {
+					setUpdatedParameters((JsonArray)val);
+				}
+				saves.add("updatedParameters");
+				return val;
+			} else if("updatedperformance".equals(varLower)) {
+				if(val instanceof String) {
+					setUpdatedPerformance((String)val);
+				} else if(val instanceof JsonArray) {
+					setUpdatedPerformance((JsonArray)val);
+				}
+				saves.add("updatedPerformance");
+				return val;
 		} else {
 			return super.persistBaseModel(var, val);
 		}
@@ -1506,6 +1673,12 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		if(paramItersPerPar != null) {
 			doc.put("paramItersPerPar_docvalues_int", paramItersPerPar);
 		}
+		if(updatedParameters != null) {
+			doc.put("updatedParameters_docvalues_string", updatedParameters.toString());
+		}
+		if(updatedPerformance != null) {
+			doc.put("updatedPerformance_docvalues_string", updatedPerformance.toString());
+		}
 		super.indexBaseModel(doc);
 
 	}
@@ -1532,6 +1705,10 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 				return "paramTotalIterNum_docvalues_int";
 			case "paramItersPerPar":
 				return "paramItersPerPar_docvalues_int";
+			case "updatedParameters":
+				return "updatedParameters_docvalues_string";
+			case "updatedPerformance":
+				return "updatedPerformance_docvalues_string";
 			default:
 				return BaseModel.varStoredBaseModel(entityVar);
 		}
@@ -1559,6 +1736,10 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 				return "paramTotalIterNum_docvalues_int";
 			case "paramItersPerPar":
 				return "paramItersPerPar_docvalues_int";
+			case "updatedParameters":
+				return "updatedParameters_docvalues_string";
+			case "updatedPerformance":
+				return "updatedPerformance_docvalues_string";
 			default:
 				return BaseModel.varIndexedBaseModel(entityVar);
 		}
@@ -1586,6 +1767,10 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 				return "paramTotalIterNum";
 			case "paramItersPerPar_docvalues_int":
 				return "paramItersPerPar";
+			case "updatedParameters_docvalues_string":
+				return "updatedParameters";
+			case "updatedPerformance_docvalues_string":
+				return "updatedPerformance";
 			default:
 				return BaseModel.searchVarBaseModel(searchVar);
 		}
@@ -1629,6 +1814,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		oSimulationReport.setParamRunTime(Optional.ofNullable(doc.get("paramRunTime_docvalues_int")).map(v -> v.toString()).orElse(null));
 		oSimulationReport.setParamTotalIterNum(Optional.ofNullable(doc.get("paramTotalIterNum_docvalues_int")).map(v -> v.toString()).orElse(null));
 		oSimulationReport.setParamItersPerPar(Optional.ofNullable(doc.get("paramItersPerPar_docvalues_int")).map(v -> v.toString()).orElse(null));
+		oSimulationReport.setUpdatedParameters(Optional.ofNullable(doc.get("updatedParameters_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oSimulationReport.setUpdatedPerformance(Optional.ofNullable(doc.get("updatedPerformance_docvalues_string")).map(v -> v.toString()).orElse(null));
 
 		super.storeBaseModel(doc);
 	}
@@ -1662,6 +1849,10 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 				apiRequest.addVars("paramTotalIterNum");
 			if(!Objects.equals(paramItersPerPar, original.getParamItersPerPar()))
 				apiRequest.addVars("paramItersPerPar");
+			if(!Objects.equals(updatedParameters, original.getUpdatedParameters()))
+				apiRequest.addVars("updatedParameters");
+			if(!Objects.equals(updatedPerformance, original.getUpdatedPerformance()))
+				apiRequest.addVars("updatedPerformance");
 			super.apiRequestBaseModel();
 		}
 	}
@@ -1683,6 +1874,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		sb.append(Optional.ofNullable(paramRunTime).map(v -> "paramRunTime: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(paramTotalIterNum).map(v -> "paramTotalIterNum: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(paramItersPerPar).map(v -> "paramItersPerPar: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(updatedParameters).map(v -> "updatedParameters: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(updatedPerformance).map(v -> "updatedPerformance: " + v + "\n").orElse(""));
 		return sb.toString();
 	}
 
@@ -1699,6 +1892,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 	public static final String VAR_paramRunTime = "paramRunTime";
 	public static final String VAR_paramTotalIterNum = "paramTotalIterNum";
 	public static final String VAR_paramItersPerPar = "paramItersPerPar";
+	public static final String VAR_updatedParameters = "updatedParameters";
+	public static final String VAR_updatedPerformance = "updatedPerformance";
 
 	public static List<String> varsQForClass() {
 		return SimulationReport.varsQSimulationReport(new ArrayList<String>());
@@ -1722,6 +1917,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		vars.add(VAR_paramRunTime);
 		vars.add(VAR_paramTotalIterNum);
 		vars.add(VAR_paramItersPerPar);
+		vars.add(VAR_updatedParameters);
+		vars.add(VAR_updatedPerformance);
 		BaseModel.varsFqBaseModel(vars);
 		return vars;
 	}
@@ -1736,6 +1933,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		vars.add(VAR_paramRunTime);
 		vars.add(VAR_paramTotalIterNum);
 		vars.add(VAR_paramItersPerPar);
+		vars.add(VAR_updatedParameters);
+		vars.add(VAR_updatedPerformance);
 		BaseModel.varsRangeBaseModel(vars);
 		return vars;
 	}
@@ -1752,6 +1951,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 	public static final String DISPLAY_NAME_paramRunTime = "run time";
 	public static final String DISPLAY_NAME_paramTotalIterNum = "total iterations";
 	public static final String DISPLAY_NAME_paramItersPerPar = "iteration repetitions";
+	public static final String DISPLAY_NAME_updatedParameters = "updated parameters";
+	public static final String DISPLAY_NAME_updatedPerformance = "updated performance";
 
 	public static String displayNameForClass(String var) {
 		return SimulationReport.displayNameSimulationReport(var);
@@ -1782,6 +1983,10 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return DISPLAY_NAME_paramTotalIterNum;
 		case VAR_paramItersPerPar:
 			return DISPLAY_NAME_paramItersPerPar;
+		case VAR_updatedParameters:
+			return DISPLAY_NAME_updatedParameters;
+		case VAR_updatedPerformance:
+			return DISPLAY_NAME_updatedPerformance;
 		default:
 			return BaseModel.displayNameBaseModel(var);
 		}
@@ -1797,6 +2002,10 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return "Total iterations to update performance. ";
 		case VAR_paramItersPerPar:
 			return "Number of repeats per round. ";
+		case VAR_updatedParameters:
+			return "the resulting updated parameters after a simulation";
+		case VAR_updatedPerformance:
+			return "the resulting updated performance after a simulation";
 			default:
 				return BaseModel.descriptionBaseModel(var);
 		}
@@ -1828,6 +2037,10 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return "Integer";
 		case VAR_paramItersPerPar:
 			return "Integer";
+		case VAR_updatedParameters:
+			return "JsonArray";
+		case VAR_updatedPerformance:
+			return "JsonArray";
 			default:
 				return BaseModel.classSimpleNameBaseModel(var);
 		}
@@ -1862,6 +2075,10 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return 7;
 		case VAR_paramItersPerPar:
 			return 7;
+		case VAR_updatedParameters:
+			return 8;
+		case VAR_updatedPerformance:
+			return 9;
 			default:
 				return BaseModel.htmlRowBaseModel(var);
 		}
@@ -1889,6 +2106,10 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return 2;
 		case VAR_paramItersPerPar:
 			return 3;
+		case VAR_updatedParameters:
+			return 1;
+		case VAR_updatedPerformance:
+			return 1;
 			default:
 				return BaseModel.htmlCellBaseModel(var);
 		}

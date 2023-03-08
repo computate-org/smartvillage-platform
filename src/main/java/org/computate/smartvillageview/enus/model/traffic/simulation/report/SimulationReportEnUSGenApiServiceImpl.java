@@ -477,12 +477,6 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 			}));
 		});
 		CompositeFuture.all(futures).onSuccess( a -> {
-			if(apiRequest != null) {
-				apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listSimulationReport.getResponse().getResponse().getDocs().size());
-				if(apiRequest.getNumFound() == 1L)
-					listSimulationReport.first().apiRequestSimulationReport();
-				eventBus.publish("websocketSimulationReport", JsonObject.mapFrom(apiRequest).toString());
-			}
 			listSimulationReport.next().onSuccess(next -> {
 				if(next) {
 					listPATCHSimulationReport(apiRequest, listSimulationReport).onSuccess(b -> {
@@ -528,7 +522,13 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 								apiRequest.setOriginal(o);
 							apiRequest.setPk(Optional.ofNullable(listSimulationReport.first()).map(o2 -> o2.getPk()).orElse(null));
 							eventBus.publish("websocketSimulationReport", JsonObject.mapFrom(apiRequest).toString());
-							patchSimulationReportFuture(o, false).onSuccess(a -> {
+							patchSimulationReportFuture(o, false).onSuccess(o2 -> {
+								if(apiRequest != null) {
+									apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listSimulationReport.getResponse().getResponse().getDocs().size());
+									if(apiRequest.getNumFound() == 1L)
+										o2.apiRequestSimulationReport();
+									eventBus.publish("websocketSimulationReport", JsonObject.mapFrom(apiRequest).toString());
+								}
 								eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(new JsonObject().encodePrettily()))));
 							}).onFailure(ex -> {
 								eventHandler.handle(Future.failedFuture(ex));
@@ -741,6 +741,22 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							bSql.append(SimulationReport.VAR_paramItersPerPar + "=$" + num);
 							num++;
 							bParams.add(o2.sqlParamItersPerPar());
+						break;
+					case "setUpdatedParameters":
+							o2.setUpdatedParameters(jsonObject.getJsonArray(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_updatedParameters + "=$" + num);
+							num++;
+							bParams.add(o2.sqlUpdatedParameters());
+						break;
+					case "setUpdatedPerformance":
+							o2.setUpdatedPerformance(jsonObject.getJsonArray(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_updatedPerformance + "=$" + num);
+							num++;
+							bParams.add(o2.sqlUpdatedPerformance());
 						break;
 				}
 			}
@@ -1196,6 +1212,24 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 						num++;
 						bParams.add(o2.sqlParamItersPerPar());
 						break;
+					case SimulationReport.VAR_updatedParameters:
+						o2.setUpdatedParameters(jsonObject.getJsonArray(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_updatedParameters + "=$" + num);
+						num++;
+						bParams.add(o2.sqlUpdatedParameters());
+						break;
+					case SimulationReport.VAR_updatedPerformance:
+						o2.setUpdatedPerformance(jsonObject.getJsonArray(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_updatedPerformance + "=$" + num);
+						num++;
+						bParams.add(o2.sqlUpdatedPerformance());
+						break;
 					}
 				}
 			}
@@ -1522,6 +1556,465 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 			promise.complete(ServiceResponse.completedWithJson(Buffer.buffer(Optional.ofNullable(json).orElse(new JsonObject()).encodePrettily())));
 		} catch(Exception ex) {
 			LOG.error(String.format("response200PUTImportSimulationReport failed. "), ex);
+			promise.fail(ex);
+		}
+		return promise.future();
+	}
+
+	// PATCHRunSimulation //
+
+	@Override
+	public void patchrunsimulationSimulationReport(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
+		LOG.debug(String.format("patchrunsimulationSimulationReport started. "));
+		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
+
+			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
+				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", msg)
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+					)
+				));
+			}).onSuccess(b -> {
+				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SimulationReport")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+					eventHandler.handle(Future.succeededFuture(
+						new ServiceResponse(401, "UNAUTHORIZED",
+							Buffer.buffer().appendString(
+								new JsonObject()
+									.put("errorCode", "401")
+									.put("errorMessage", msg)
+									.encodePrettily()
+								), MultiMap.caseInsensitiveMultiMap()
+						)
+					));
+				} else {
+					try {
+						searchSimulationReportList(siteRequest, false, true, true).onSuccess(listSimulationReport -> {
+							try {
+								if(listSimulationReport.getResponse().getResponse().getNumFound() > 1
+										&& !Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SimulationReport")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+										) {
+									String message = String.format("roles required: " + config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SimulationReport"));
+									LOG.error(message);
+									error(siteRequest, eventHandler, new RuntimeException(message));
+								} else {
+
+									ApiRequest apiRequest = new ApiRequest();
+									apiRequest.setRows(listSimulationReport.getRequest().getRows());
+									apiRequest.setNumFound(listSimulationReport.getResponse().getResponse().getNumFound());
+									apiRequest.setNumPATCH(0L);
+									apiRequest.initDeepApiRequest(siteRequest);
+									siteRequest.setApiRequest_(apiRequest);
+									if(apiRequest.getNumFound() == 1L)
+										apiRequest.setOriginal(listSimulationReport.first());
+									apiRequest.setPk(Optional.ofNullable(listSimulationReport.first()).map(o2 -> o2.getPk()).orElse(null));
+									eventBus.publish("websocketSimulationReport", JsonObject.mapFrom(apiRequest).toString());
+
+									listPATCHRunSimulationSimulationReport(apiRequest, listSimulationReport).onSuccess(e -> {
+										response200PATCHRunSimulationSimulationReport(siteRequest).onSuccess(response -> {
+											LOG.debug(String.format("patchrunsimulationSimulationReport succeeded. "));
+											eventHandler.handle(Future.succeededFuture(response));
+										}).onFailure(ex -> {
+											LOG.error(String.format("patchrunsimulationSimulationReport failed. "), ex);
+											error(siteRequest, eventHandler, ex);
+										});
+									}).onFailure(ex -> {
+										LOG.error(String.format("patchrunsimulationSimulationReport failed. "), ex);
+										error(siteRequest, eventHandler, ex);
+									});
+								}
+							} catch(Exception ex) {
+								LOG.error(String.format("patchrunsimulationSimulationReport failed. "), ex);
+								error(siteRequest, eventHandler, ex);
+							}
+						}).onFailure(ex -> {
+							LOG.error(String.format("patchrunsimulationSimulationReport failed. "), ex);
+							error(siteRequest, eventHandler, ex);
+						});
+					} catch(Exception ex) {
+						LOG.error(String.format("patchrunsimulationSimulationReport failed. "), ex);
+						error(null, eventHandler, ex);
+					}
+				}
+			});
+		}).onFailure(ex -> {
+			if("Inactive Token".equals(ex.getMessage()) || StringUtils.startsWith(ex.getMessage(), "invalid_grant:")) {
+				try {
+					eventHandler.handle(Future.succeededFuture(new ServiceResponse(302, "Found", null, MultiMap.caseInsensitiveMultiMap().add(HttpHeaders.LOCATION, "/logout?redirect_uri=" + URLEncoder.encode(serviceRequest.getExtra().getString("uri"), "UTF-8")))));
+				} catch(Exception ex2) {
+					LOG.error(String.format("patchrunsimulationSimulationReport failed. ", ex2));
+					error(null, eventHandler, ex2);
+				}
+			} else if(StringUtils.startsWith(ex.getMessage(), "401 UNAUTHORIZED ")) {
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", "SSO Resource Permission check returned DENY")
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+							)
+					));
+			} else {
+				LOG.error(String.format("patchrunsimulationSimulationReport failed. "), ex);
+				error(null, eventHandler, ex);
+			}
+		});
+	}
+
+
+	public Future<Void> listPATCHRunSimulationSimulationReport(ApiRequest apiRequest, SearchList<SimulationReport> listSimulationReport) {
+		Promise<Void> promise = Promise.promise();
+		List<Future> futures = new ArrayList<>();
+		SiteRequestEnUS siteRequest = listSimulationReport.getSiteRequest_(SiteRequestEnUS.class);
+		listSimulationReport.getList().forEach(o -> {
+			SiteRequestEnUS siteRequest2 = generateSiteRequest(siteRequest.getUser(), siteRequest.getUserPrincipal(), siteRequest.getServiceRequest(), siteRequest.getJsonObject(), SiteRequestEnUS.class);
+			o.setSiteRequest_(siteRequest2);
+			siteRequest2.setApiRequest_(siteRequest.getApiRequest_());
+			futures.add(Future.future(promise1 -> {
+				patchrunsimulationSimulationReportFuture(o, false).onSuccess(a -> {
+					promise1.complete();
+				}).onFailure(ex -> {
+					LOG.error(String.format("listPATCHRunSimulationSimulationReport failed. "), ex);
+					promise1.fail(ex);
+				});
+			}));
+		});
+		CompositeFuture.all(futures).onSuccess( a -> {
+			listSimulationReport.next().onSuccess(next -> {
+				if(next) {
+					listPATCHRunSimulationSimulationReport(apiRequest, listSimulationReport).onSuccess(b -> {
+						promise.complete();
+					}).onFailure(ex -> {
+						LOG.error(String.format("listPATCHRunSimulationSimulationReport failed. "), ex);
+						promise.fail(ex);
+					});
+				} else {
+					promise.complete();
+				}
+			}).onFailure(ex -> {
+				LOG.error(String.format("listPATCHRunSimulationSimulationReport failed. "), ex);
+				promise.fail(ex);
+			});
+		}).onFailure(ex -> {
+			LOG.error(String.format("listPATCHRunSimulationSimulationReport failed. "), ex);
+			promise.fail(ex);
+		});
+		return promise.future();
+	}
+
+	@Override
+	public void patchrunsimulationSimulationReportFuture(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
+		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
+			try {
+				siteRequest.setJsonObject(body);
+				serviceRequest.getParams().getJsonObject("query").put("rows", 1);
+				searchSimulationReportList(siteRequest, false, true, true).onSuccess(listSimulationReport -> {
+					try {
+						SimulationReport o = listSimulationReport.first();
+						if(o != null && listSimulationReport.getResponse().getResponse().getNumFound() == 1) {
+							ApiRequest apiRequest = new ApiRequest();
+							apiRequest.setRows(1L);
+							apiRequest.setNumFound(1L);
+							apiRequest.setNumPATCH(0L);
+							apiRequest.initDeepApiRequest(siteRequest);
+							siteRequest.setApiRequest_(apiRequest);
+							if(Optional.ofNullable(serviceRequest.getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getJsonArray("var")).orElse(new JsonArray()).stream().filter(s -> "refresh:false".equals(s)).count() > 0L) {
+								siteRequest.getRequestVars().put( "refresh", "false" );
+							}
+							if(apiRequest.getNumFound() == 1L)
+								apiRequest.setOriginal(o);
+							apiRequest.setPk(Optional.ofNullable(listSimulationReport.first()).map(o2 -> o2.getPk()).orElse(null));
+							eventBus.publish("websocketSimulationReport", JsonObject.mapFrom(apiRequest).toString());
+							patchrunsimulationSimulationReportFuture(o, false).onSuccess(o2 -> {
+								if(apiRequest != null) {
+									apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listSimulationReport.getResponse().getResponse().getDocs().size());
+									if(apiRequest.getNumFound() == 1L)
+										o2.apiRequestSimulationReport();
+									eventBus.publish("websocketSimulationReport", JsonObject.mapFrom(apiRequest).toString());
+								}
+								eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(new JsonObject().encodePrettily()))));
+							}).onFailure(ex -> {
+								eventHandler.handle(Future.failedFuture(ex));
+							});
+						} else {
+							eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(new JsonObject().encodePrettily()))));
+						}
+					} catch(Exception ex) {
+						LOG.error(String.format("patchrunsimulationSimulationReport failed. "), ex);
+						error(siteRequest, eventHandler, ex);
+					}
+				}).onFailure(ex -> {
+					LOG.error(String.format("patchrunsimulationSimulationReport failed. "), ex);
+					error(siteRequest, eventHandler, ex);
+				});
+			} catch(Exception ex) {
+				LOG.error(String.format("patchrunsimulationSimulationReport failed. "), ex);
+				error(null, eventHandler, ex);
+			}
+		}).onFailure(ex -> {
+			LOG.error(String.format("patchrunsimulationSimulationReport failed. "), ex);
+			error(null, eventHandler, ex);
+		});
+	}
+
+	public Future<SimulationReport> patchrunsimulationSimulationReportFuture(SimulationReport o, Boolean inheritPk) {
+		SiteRequestEnUS siteRequest = o.getSiteRequest_();
+		Promise<SimulationReport> promise = Promise.promise();
+
+		try {
+			ApiRequest apiRequest = siteRequest.getApiRequest_();
+			Promise<SimulationReport> promise1 = Promise.promise();
+			pgPool.withTransaction(sqlConnection -> {
+				siteRequest.setSqlConnection(sqlConnection);
+				sqlPATCHRunSimulationSimulationReport(o, inheritPk).onSuccess(simulationReport -> {
+					persistSimulationReport(simulationReport).onSuccess(c -> {
+						relateSimulationReport(simulationReport).onSuccess(d -> {
+							indexSimulationReport(simulationReport).onSuccess(e -> {
+								promise1.complete(simulationReport);
+							}).onFailure(ex -> {
+								promise1.fail(ex);
+							});
+						}).onFailure(ex -> {
+							promise1.fail(ex);
+						});
+					}).onFailure(ex -> {
+						promise1.fail(ex);
+					});
+				}).onFailure(ex -> {
+					promise1.fail(ex);
+				});
+				return promise1.future();
+			}).onSuccess(a -> {
+				siteRequest.setSqlConnection(null);
+			}).onFailure(ex -> {
+				siteRequest.setSqlConnection(null);
+				promise.fail(ex);
+			}).compose(simulationReport -> {
+				Promise<SimulationReport> promise2 = Promise.promise();
+				refreshSimulationReport(simulationReport).onSuccess(a -> {
+					promise2.complete(simulationReport);
+				}).onFailure(ex -> {
+					promise2.fail(ex);
+				});
+				return promise2.future();
+			}).onSuccess(simulationReport -> {
+				promise.complete(simulationReport);
+			}).onFailure(ex -> {
+				promise.fail(ex);
+			});
+		} catch(Exception ex) {
+			LOG.error(String.format("patchrunsimulationSimulationReportFuture failed. "), ex);
+			promise.fail(ex);
+		}
+		return promise.future();
+	}
+
+	public Future<SimulationReport> sqlPATCHRunSimulationSimulationReport(SimulationReport o, Boolean inheritPk) {
+		Promise<SimulationReport> promise = Promise.promise();
+		try {
+			SiteRequestEnUS siteRequest = o.getSiteRequest_();
+			ApiRequest apiRequest = siteRequest.getApiRequest_();
+			List<Long> pks = Optional.ofNullable(apiRequest).map(r -> r.getPks()).orElse(new ArrayList<>());
+			List<String> classes = Optional.ofNullable(apiRequest).map(r -> r.getClasses()).orElse(new ArrayList<>());
+			SqlConnection sqlConnection = siteRequest.getSqlConnection();
+			Integer num = 1;
+			StringBuilder bSql = new StringBuilder("UPDATE SimulationReport SET ");
+			List<Object> bParams = new ArrayList<Object>();
+			Long pk = o.getPk();
+			JsonObject jsonObject = siteRequest.getJsonObject();
+			Set<String> methodNames = jsonObject.fieldNames();
+			SimulationReport o2 = new SimulationReport();
+			o2.setSiteRequest_(siteRequest);
+			List<Future> futures1 = new ArrayList<>();
+			List<Future> futures2 = new ArrayList<>();
+
+			for(String entityVar : methodNames) {
+				switch(entityVar) {
+					case "setInheritPk":
+							o2.setInheritPk(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_inheritPk + "=$" + num);
+							num++;
+							bParams.add(o2.sqlInheritPk());
+						break;
+					case "setArchived":
+							o2.setArchived(jsonObject.getBoolean(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_archived + "=$" + num);
+							num++;
+							bParams.add(o2.sqlArchived());
+						break;
+					case "setDeleted":
+							o2.setDeleted(jsonObject.getBoolean(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_deleted + "=$" + num);
+							num++;
+							bParams.add(o2.sqlDeleted());
+						break;
+					case "setSimulationKey":
+						Optional.ofNullable(jsonObject.getString(entityVar)).ifPresent(val -> {
+							futures1.add(Future.future(promise2 -> {
+								search(siteRequest).query(TrafficSimulation.class, val, inheritPk).onSuccess(pk2 -> {
+									if(!pks.contains(pk2)) {
+										pks.add(pk2);
+										classes.add("TrafficSimulation");
+									}
+									sql(siteRequest).update(SimulationReport.class, pk).set(SimulationReport.VAR_simulationKey, TrafficSimulation.class, pk2).onSuccess(a -> {
+										promise2.complete();
+									}).onFailure(ex -> {
+										promise2.fail(ex);
+									});
+								}).onFailure(ex -> {
+									promise2.fail(ex);
+								});
+							}));
+						});
+						break;
+					case "setSimulationName":
+							o2.setSimulationName(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_simulationName + "=$" + num);
+							num++;
+							bParams.add(o2.sqlSimulationName());
+						break;
+					case "setParamInitialPar":
+							o2.setParamInitialPar(jsonObject.getJsonArray(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_paramInitialPar + "=$" + num);
+							num++;
+							bParams.add(o2.sqlParamInitialPar());
+						break;
+					case "setParamLam":
+							o2.setParamLam(jsonObject.getJsonArray(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_paramLam + "=$" + num);
+							num++;
+							bParams.add(o2.sqlParamLam());
+						break;
+					case "setParamDemandScale":
+							o2.setParamDemandScale(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_paramDemandScale + "=$" + num);
+							num++;
+							bParams.add(o2.sqlParamDemandScale());
+						break;
+					case "setParamStepSize":
+							o2.setParamStepSize(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_paramStepSize + "=$" + num);
+							num++;
+							bParams.add(o2.sqlParamStepSize());
+						break;
+					case "setParamUpdateStepSize":
+							o2.setParamUpdateStepSize(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_paramUpdateStepSize + "=$" + num);
+							num++;
+							bParams.add(o2.sqlParamUpdateStepSize());
+						break;
+					case "setParamRunTime":
+							o2.setParamRunTime(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_paramRunTime + "=$" + num);
+							num++;
+							bParams.add(o2.sqlParamRunTime());
+						break;
+					case "setParamTotalIterNum":
+							o2.setParamTotalIterNum(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_paramTotalIterNum + "=$" + num);
+							num++;
+							bParams.add(o2.sqlParamTotalIterNum());
+						break;
+					case "setParamItersPerPar":
+							o2.setParamItersPerPar(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_paramItersPerPar + "=$" + num);
+							num++;
+							bParams.add(o2.sqlParamItersPerPar());
+						break;
+					case "setUpdatedParameters":
+							o2.setUpdatedParameters(jsonObject.getJsonArray(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_updatedParameters + "=$" + num);
+							num++;
+							bParams.add(o2.sqlUpdatedParameters());
+						break;
+					case "setUpdatedPerformance":
+							o2.setUpdatedPerformance(jsonObject.getJsonArray(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_updatedPerformance + "=$" + num);
+							num++;
+							bParams.add(o2.sqlUpdatedPerformance());
+						break;
+				}
+			}
+			bSql.append(" WHERE pk=$" + num);
+			if(bParams.size() > 0) {
+				bParams.add(pk);
+				num++;
+				futures2.add(0, Future.future(a -> {
+					sqlConnection.preparedQuery(bSql.toString())
+							.execute(Tuple.tuple(bParams)
+							).onSuccess(b -> {
+						a.handle(Future.succeededFuture());
+					}).onFailure(ex -> {
+						RuntimeException ex2 = new RuntimeException("value SimulationReport failed", ex);
+						LOG.error(String.format("relateSimulationReport failed. "), ex2);
+						a.handle(Future.failedFuture(ex2));
+					});
+				}));
+			}
+			CompositeFuture.all(futures1).onSuccess(a -> {
+				CompositeFuture.all(futures2).onSuccess(b -> {
+					SimulationReport o3 = new SimulationReport();
+					o3.setSiteRequest_(o.getSiteRequest_());
+					o3.setPk(pk);
+					promise.complete(o3);
+				}).onFailure(ex -> {
+					LOG.error(String.format("sqlPATCHRunSimulationSimulationReport failed. "), ex);
+					promise.fail(ex);
+				});
+			}).onFailure(ex -> {
+				LOG.error(String.format("sqlPATCHRunSimulationSimulationReport failed. "), ex);
+				promise.fail(ex);
+			});
+		} catch(Exception ex) {
+			LOG.error(String.format("sqlPATCHRunSimulationSimulationReport failed. "), ex);
+			promise.fail(ex);
+		}
+		return promise.future();
+	}
+
+	public Future<ServiceResponse> response200PATCHRunSimulationSimulationReport(SiteRequestEnUS siteRequest) {
+		Promise<ServiceResponse> promise = Promise.promise();
+		try {
+			JsonObject json = new JsonObject();
+			promise.complete(ServiceResponse.completedWithJson(Buffer.buffer(Optional.ofNullable(json).orElse(new JsonObject()).encodePrettily())));
+		} catch(Exception ex) {
+			LOG.error(String.format("response200PATCHRunSimulationSimulationReport failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();

@@ -9,6 +9,8 @@ import org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimul
 import org.computate.vertx.search.list.SearchList;
 
 import io.vertx.core.Promise;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 
 /**
  * {@inheritDoc}
@@ -28,6 +30,9 @@ import io.vertx.core.Promise;
  * ApiMethod: PATCH
  * ApiMethod: POST
  * ApiMethod: PUTImport
+ * 
+ * ApiMethod: PATCHRunSimulation
+ * ApiUri.PATCHRunSimulation.enUS: /api/run-simulation-report
  * 
  * ApiMethod.enUS: SearchPage
  * Page.SearchPage.enUS: SimulationReportPage
@@ -222,5 +227,51 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	protected void _paramItersPerPar(Wrap<Integer> w) {
 		if(simulation_ != null)
 			w.o(simulation_.getParamItersPerPar());
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * HtmlRow: 8
+	 * HtmlCell: 1
+	 * Facet: true
+	 * DisplayName: updated parameters
+	 * Description: the resulting updated parameters after a simulation
+	 */
+	protected void _updatedParameters(Wrap<JsonArray> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * HtmlRow: 9
+	 * HtmlCell: 1
+	 * Facet: true
+	 * DisplayName: updated performance
+	 * Description: the resulting updated performance after a simulation
+	 */
+	protected void _updatedPerformance(Wrap<JsonArray> w) {
+	}
+
+	/**
+	 * Description: Prepares a message record to be put on the event bus
+	 */
+	public JsonObject patchSimulationReportFuture(JsonObject exchangeBody) {
+
+		JsonObject params = new JsonObject();
+		params.put("body", exchangeBody);
+		params.put("cookie", new JsonObject());
+		params.put("header", new JsonObject());
+		params.put("form", new JsonObject());
+		params.put("path", new JsonObject());
+		JsonObject query = new JsonObject();
+		query.put("softCommit", true);
+		query.put("fq", new JsonArray().add(String.format("pk:%s", exchangeBody.getString("pk"))));
+		params.put("query", query);
+		JsonObject context = new JsonObject().put("params", params);
+		JsonObject json = new JsonObject().put("context", context);
+		return json;
 	}
 }

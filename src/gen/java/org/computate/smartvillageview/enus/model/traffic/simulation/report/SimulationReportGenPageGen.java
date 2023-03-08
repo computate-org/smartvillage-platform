@@ -183,12 +183,31 @@ public abstract class SimulationReportGenPageGen<DEV> extends BaseModelPage {
 	public void setListSimulationReport(JsonArray listSimulationReport) {
 		this.listSimulationReport = listSimulationReport;
 	}
+	@JsonIgnore
+	public void setListSimulationReport(String o) {
+		this.listSimulationReport = SimulationReportGenPage.staticSetListSimulationReport(siteRequest_, o);
+	}
 	public static JsonArray staticSetListSimulationReport(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonArray(o);
+		}
 		return null;
 	}
 	protected SimulationReportGenPage listSimulationReportInit() {
 		_listSimulationReport(listSimulationReport);
 		return (SimulationReportGenPage)this;
+	}
+
+	public static JsonArray staticSearchListSimulationReport(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o;
+	}
+
+	public static String staticSearchStrListSimulationReport(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqListSimulationReport(SiteRequestEnUS siteRequest_, String o) {
+		return SimulationReportGenPage.staticSearchStrListSimulationReport(siteRequest_, SimulationReportGenPage.staticSearchListSimulationReport(siteRequest_, SimulationReportGenPage.staticSetListSimulationReport(siteRequest_, o)));
 	}
 
 	///////////////////////////
@@ -588,6 +607,8 @@ public abstract class SimulationReportGenPageGen<DEV> extends BaseModelPage {
 	}
 	public static Object staticSetSimulationReportGenPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "listSimulationReport":
+			return SimulationReportGenPage.staticSetListSimulationReport(siteRequest_, o);
 		case "simulationReportCount":
 			return SimulationReportGenPage.staticSetSimulationReportCount(siteRequest_, o);
 		case "pk":
@@ -610,6 +631,8 @@ public abstract class SimulationReportGenPageGen<DEV> extends BaseModelPage {
 	}
 	public static Object staticSearchSimulationReportGenPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "listSimulationReport":
+			return SimulationReportGenPage.staticSearchListSimulationReport(siteRequest_, (JsonArray)o);
 		case "simulationReportCount":
 			return SimulationReportGenPage.staticSearchSimulationReportCount(siteRequest_, (Integer)o);
 		case "pk":
@@ -632,6 +655,8 @@ public abstract class SimulationReportGenPageGen<DEV> extends BaseModelPage {
 	}
 	public static String staticSearchStrSimulationReportGenPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "listSimulationReport":
+			return SimulationReportGenPage.staticSearchStrListSimulationReport(siteRequest_, (JsonArray)o);
 		case "simulationReportCount":
 			return SimulationReportGenPage.staticSearchStrSimulationReportCount(siteRequest_, (Integer)o);
 		case "pk":
@@ -654,6 +679,8 @@ public abstract class SimulationReportGenPageGen<DEV> extends BaseModelPage {
 	}
 	public static String staticSearchFqSimulationReportGenPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "listSimulationReport":
+			return SimulationReportGenPage.staticSearchFqListSimulationReport(siteRequest_, o);
 		case "simulationReportCount":
 			return SimulationReportGenPage.staticSearchFqSimulationReportCount(siteRequest_, o);
 		case "pk":

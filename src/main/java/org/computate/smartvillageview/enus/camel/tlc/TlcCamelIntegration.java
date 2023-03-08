@@ -29,35 +29,11 @@ public class TlcCamelIntegration extends TlcCamelIntegrationGen<Object> {
 	public static Future<Void> configureCamel(Vertx vertx, JsonObject config) {
 		Promise<Void> promise = Promise.promise();
 		try {
-			vertx.eventBus().consumer("eventphenomenon-enUS-kafkaEvent", message -> {
-				vertx.eventBus().request("eventphenomenon-enUS-SimulationReport", (JsonObject)message.body(), new DeliveryOptions().addHeader("action", "postSimulationReport")).onSuccess(a -> {
+			vertx.eventBus().consumer("smartabyar-smartvillage-enUS-SimulationReport-patchSimulationReportFuture", message -> {
+				vertx.eventBus().request("smartabyar-smartvillage-enUS-SimulationReport", (JsonObject)message.body(), new DeliveryOptions().addHeader("action", "patchSimulationReportFuture")).onSuccess(a -> {
 					message.reply(a.body());
 				}).onFailure(ex -> {
-					LOG.error("Creating Event failed. ", ex);
-					message.reply(null);
-				});
-			});
-			vertx.eventBus().consumer("eventphenomenon-enUS-fromAnsibleToPhenomenalJob", message -> {
-				vertx.eventBus().request("eventphenomenon-enUS-PhenomenalJob", (JsonObject)message.body(), new DeliveryOptions().addHeader("action", "postPhenomenalJob")).onSuccess(a -> {
-					message.reply(a.body());
-				}).onFailure(ex -> {
-					LOG.error("Creating Event failed. ", ex);
-					message.reply(null);
-				});
-			});
-			vertx.eventBus().consumer("eventphenomenon-enUS-importMessage", message -> {
-				vertx.eventBus().request("eventphenomenon-enUS-SimulationReport", (JsonObject)message.body(), new DeliveryOptions().addHeader("action", "putimportSimulationReportFuture")).onSuccess(a -> {
-					message.reply(a.body());
-				}).onFailure(ex -> {
-					LOG.error("Creating Event failed. ", ex);
-					message.reply(null);
-				});
-			});
-			vertx.eventBus().consumer("eventphenomenon-enUS-fromMessageToProblem", message -> {
-				vertx.eventBus().request("eventphenomenon-enUS-PhenomenalProblem", (JsonObject)message.body(), new DeliveryOptions().addHeader("action", "postPhenomenalProblem")).onSuccess(a -> {
-					message.reply(a.body());
-				}).onFailure(ex -> {
-					LOG.error("Creating Event failed. ", ex);
+					LOG.error("Patching SimulationReport failed. ", ex);
 					message.reply(null);
 				});
 			});
@@ -68,15 +44,17 @@ public class TlcCamelIntegration extends TlcCamelIntegrationGen<Object> {
 			camelContext.addComponent("vertx", vertxComponent);
 			RouteBuilder routeBuilder = new RouteBuilder() {
 				public void configure() {
-//					from(String.format("vertx-kafka:%s?bootstrapServers=%s&groupId=%s&seekToPosition=end"
-//							, config.getString(ConfigKeys.KAFKA_TOPIC_SUMO_RUN_REPORT)
-//							, config.getString(ConfigKeys.KAFKA_BROKERS)
-//							, config.getString(ConfigKeys.KAFKA_GROUP)
-//							))
-//					.log("received SUMO run report event: ${body}")
-//					.bean(SimulationReport.class, "sensuToMessage")
-//					.bean(SimulationReport.class, "eventBus")
-//					.to("vertx:eventphenomenon-enUS-kafkaEvent?exchangePattern=InOut")
+					from(String.format("vertx-kafka:%s?bootstrapServers=%s&groupId=%s&seekToPosition=end"
+							, config.getString(ConfigKeys.KAFKA_TOPIC_SUMO_RUN_REPORT)
+							, config.getString(ConfigKeys.KAFKA_BROKERS)
+							, config.getString(ConfigKeys.KAFKA_GROUP)
+							))
+					.log("received SUMO run report event: ${body}")
+					.bean(TlcCamelIntegration.class, "exchangeToJsonObject")
+					.bean(SimulationReport.class, "patchSimulationReportFuture")
+					.to("vertx:smartabyar-smartvillage-enUS-SimulationReport-patchSimulationReportFuture?exchangePattern=InOut")
+					.end();
+
 //					.setProperty(ConfigKeys.KIE_SERVER_BASE_URL, ExpressionBuilder.constantExpression(config.getString(ConfigKeys.KIE_SERVER_BASE_URL)))
 //					.setProperty(ConfigKeys.KIE_SERVER_USERNAME, ExpressionBuilder.constantExpression(config.getString(ConfigKeys.KIE_SERVER_USERNAME)))
 //					.setProperty(ConfigKeys.KIE_SERVER_PASSWORD, ExpressionBuilder.constantExpression(config.getString(ConfigKeys.KIE_SERVER_PASSWORD)))
@@ -130,5 +108,14 @@ public class TlcCamelIntegration extends TlcCamelIntegrationGen<Object> {
 		}
 
 		return promise.future();
+	}
+
+	/**
+	 * Description: Converts a Camel exchange message to a JsonObject. 
+	 */
+	public JsonObject exchangeToJsonObject(Exchange exchange) {
+		String str = (String)exchange.getIn().getBody();
+		JsonObject body = new JsonObject(str);
+		return body;
 	}
 }

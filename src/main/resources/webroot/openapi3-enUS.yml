@@ -7270,6 +7270,63 @@ paths:
             text/html; charset=utf-8:
               schema:
                 $ref: '#/components/schemas/MapSearchPageTrafficSimulationResponse'
+  /api/run-simulation-report:
+    patch:
+      operationId: patchrunsimulationSimulationReport
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-SimulationReport
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - SimulationReport
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+        - in: query
+          name: q
+          description: 'The query parameter defines a query using standard query syntax. This parameter is mandatory.'
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: 'The filter query parameter defines a query that can be used to restrict the superset of documents that can be returned, without influencing score. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: var
+          description: 'The var parameters are additional optional variables and values to pass into the application. '
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
+      requestBody:
+        description: >+
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PATCHRunSimulationSimulationReportRequest'
+      responses:
+        '200':
+          description: >+
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/PATCHRunSimulationSimulationReportResponse'
   /api/simulation-report:
     get:
       operationId: searchSimulationReport
@@ -11724,6 +11781,16 @@ components:
         text/html; charset=utf-8:
           schema:
             $ref: '#/components/schemas/MapSearchPageTrafficSimulationResponse'
+    PATCHRunSimulationSimulationReportRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PATCHRunSimulationSimulationReportRequest'
+    PATCHRunSimulationSimulationReportResponse:
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/PATCHRunSimulationSimulationReportResponse'
     SearchSimulationReportResponse:
       content:
         application/json; charset=utf-8:
@@ -17183,6 +17250,222 @@ components:
     MapSearchPageTrafficSimulationResponse:
       allOf:
         - type: string
+    PATCHRunSimulationSimulationReportRequest:
+      allOf:
+        - type: object
+          properties:
+            setSimulationKey:
+              type: string
+              nullable: true
+            removeSimulationKey:
+              type: string
+            removeAllSimulationKey:
+              type: string
+            setSimulationName:
+              type: string
+              nullable: true
+            removeSimulationName:
+              type: string
+            removeAllSimulationName:
+              type: string
+            setParamInitialPar:
+              type: array
+              nullable: true
+              items:
+                type: string
+            removeParamInitialPar:
+              type: string
+            removeAllParamInitialPar:
+              type: array
+              items:
+                type: string
+            addParamInitialPar:
+              type: string
+            addAllParamInitialPar:
+              type: array
+              items:
+                type: string
+            setParamLam:
+              type: array
+              nullable: true
+              items:
+                type: string
+            removeParamLam:
+              type: string
+            removeAllParamLam:
+              type: array
+              items:
+                type: string
+            addParamLam:
+              type: string
+            addAllParamLam:
+              type: array
+              items:
+                type: string
+            setParamDemandScale:
+              type: string
+              nullable: true
+            removeParamDemandScale:
+              type: string
+            removeAllParamDemandScale:
+              type: string
+            setParamStepSize:
+              type: string
+              nullable: true
+            removeParamStepSize:
+              type: string
+            removeAllParamStepSize:
+              type: string
+            setParamUpdateStepSize:
+              type: string
+              nullable: true
+            removeParamUpdateStepSize:
+              type: string
+            removeAllParamUpdateStepSize:
+              type: string
+            setParamRunTime:
+              type: string
+              nullable: true
+            removeParamRunTime:
+              type: string
+            removeAllParamRunTime:
+              type: string
+            setParamTotalIterNum:
+              type: string
+              nullable: true
+            removeParamTotalIterNum:
+              type: string
+            removeAllParamTotalIterNum:
+              type: string
+            setParamItersPerPar:
+              type: string
+              nullable: true
+            removeParamItersPerPar:
+              type: string
+            removeAllParamItersPerPar:
+              type: string
+            setUpdatedParameters:
+              type: array
+              nullable: true
+            removeUpdatedParameters:
+              type: array
+            removeAllUpdatedParameters:
+              type: array
+            setUpdatedPerformance:
+              type: array
+              nullable: true
+            removeUpdatedPerformance:
+              type: array
+            removeAllUpdatedPerformance:
+              type: array
+    PATCHRunSimulationSimulationReportResponse:
+      allOf:
+        - type: object
+          properties:
+            setSimulationKey:
+              type: string
+              nullable: true
+            removeSimulationKey:
+              type: string
+            removeAllSimulationKey:
+              type: string
+            setSimulationName:
+              type: string
+              nullable: true
+            removeSimulationName:
+              type: string
+            removeAllSimulationName:
+              type: string
+            setParamInitialPar:
+              type: array
+              nullable: true
+              items:
+                type: string
+            removeParamInitialPar:
+              type: string
+            removeAllParamInitialPar:
+              type: array
+              items:
+                type: string
+            addParamInitialPar:
+              type: string
+            addAllParamInitialPar:
+              type: array
+              items:
+                type: string
+            setParamLam:
+              type: array
+              nullable: true
+              items:
+                type: string
+            removeParamLam:
+              type: string
+            removeAllParamLam:
+              type: array
+              items:
+                type: string
+            addParamLam:
+              type: string
+            addAllParamLam:
+              type: array
+              items:
+                type: string
+            setParamDemandScale:
+              type: string
+              nullable: true
+            removeParamDemandScale:
+              type: string
+            removeAllParamDemandScale:
+              type: string
+            setParamStepSize:
+              type: string
+              nullable: true
+            removeParamStepSize:
+              type: string
+            removeAllParamStepSize:
+              type: string
+            setParamUpdateStepSize:
+              type: string
+              nullable: true
+            removeParamUpdateStepSize:
+              type: string
+            removeAllParamUpdateStepSize:
+              type: string
+            setParamRunTime:
+              type: string
+              nullable: true
+            removeParamRunTime:
+              type: string
+            removeAllParamRunTime:
+              type: string
+            setParamTotalIterNum:
+              type: string
+              nullable: true
+            removeParamTotalIterNum:
+              type: string
+            removeAllParamTotalIterNum:
+              type: string
+            setParamItersPerPar:
+              type: string
+              nullable: true
+            removeParamItersPerPar:
+              type: string
+            removeAllParamItersPerPar:
+              type: string
+            setUpdatedParameters:
+              type: array
+              nullable: true
+            removeUpdatedParameters:
+              type: array
+            removeAllUpdatedParameters:
+              type: array
+            setUpdatedPerformance:
+              type: array
+              nullable: true
+            removeUpdatedPerformance:
+              type: array
+            removeAllUpdatedPerformance:
+              type: array
     SearchSimulationReportResponse:
       allOf:
         - type: object
@@ -17225,6 +17508,10 @@ components:
                     type: string
                   paramItersPerPar:
                     type: string
+                  updatedParameters:
+                    type: array
+                  updatedPerformance:
+                    type: array
     PATCHSimulationReportRequest:
       allOf:
         - type: object
@@ -17319,6 +17606,20 @@ components:
               type: string
             removeAllParamItersPerPar:
               type: string
+            setUpdatedParameters:
+              type: array
+              nullable: true
+            removeUpdatedParameters:
+              type: array
+            removeAllUpdatedParameters:
+              type: array
+            setUpdatedPerformance:
+              type: array
+              nullable: true
+            removeUpdatedPerformance:
+              type: array
+            removeAllUpdatedPerformance:
+              type: array
     PATCHSimulationReportResponse:
       allOf:
         - type: object
@@ -17413,6 +17714,20 @@ components:
               type: string
             removeAllParamItersPerPar:
               type: string
+            setUpdatedParameters:
+              type: array
+              nullable: true
+            removeUpdatedParameters:
+              type: array
+            removeAllUpdatedParameters:
+              type: array
+            setUpdatedPerformance:
+              type: array
+              nullable: true
+            removeUpdatedPerformance:
+              type: array
+            removeAllUpdatedPerformance:
+              type: array
     POSTSimulationReportRequest:
       allOf:
         - type: object
@@ -17441,6 +17756,10 @@ components:
               type: string
             paramItersPerPar:
               type: string
+            updatedParameters:
+              type: array
+            updatedPerformance:
+              type: array
     POSTSimulationReportResponse:
       allOf:
         - type: object
@@ -17469,6 +17788,10 @@ components:
               type: string
             paramItersPerPar:
               type: string
+            updatedParameters:
+              type: array
+            updatedPerformance:
+              type: array
     PUTImportSimulationReportRequest:
       allOf:
         - type: object
@@ -17497,6 +17820,10 @@ components:
               type: string
             paramItersPerPar:
               type: string
+            updatedParameters:
+              type: array
+            updatedPerformance:
+              type: array
     PUTImportSimulationReportResponse:
       allOf:
         - type: object
@@ -17525,6 +17852,10 @@ components:
               type: string
             paramItersPerPar:
               type: string
+            updatedParameters:
+              type: array
+            updatedPerformance:
+              type: array
     GETSimulationReportResponse:
       allOf:
         - type: object
@@ -17553,6 +17884,10 @@ components:
               type: string
             paramItersPerPar:
               type: string
+            updatedParameters:
+              type: array
+            updatedPerformance:
+              type: array
     SearchPageSimulationReportResponse:
       allOf:
         - type: string
