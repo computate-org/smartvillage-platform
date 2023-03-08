@@ -69,11 +69,11 @@ public class TlcCamelIntegration extends TlcCamelIntegrationGen<Object> {
 			RouteBuilder routeBuilder = new RouteBuilder() {
 				public void configure() {
 //					from(String.format("vertx-kafka:%s?bootstrapServers=%s&groupId=%s&seekToPosition=end"
-//							, config.getString(ConfigKeys.KAFKA_TOPIC_SUMO_RUN)
+//							, config.getString(ConfigKeys.KAFKA_TOPIC_SUMO_RUN_REPORT)
 //							, config.getString(ConfigKeys.KAFKA_BROKERS)
 //							, config.getString(ConfigKeys.KAFKA_GROUP)
 //							))
-//					.log("received SUMO run event: ${body}")
+//					.log("received SUMO run report event: ${body}")
 //					.bean(SimulationReport.class, "sensuToMessage")
 //					.bean(SimulationReport.class, "eventBus")
 //					.to("vertx:eventphenomenon-enUS-kafkaEvent?exchangePattern=InOut")
