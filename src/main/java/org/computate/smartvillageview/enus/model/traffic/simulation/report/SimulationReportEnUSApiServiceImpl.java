@@ -30,22 +30,25 @@ public class SimulationReportEnUSApiServiceImpl extends SimulationReportEnUSGenA
 	@Override
 	public Future<SimulationReport> patchrunsimulationSimulationReportFuture(SimulationReport o, Boolean inheritPk) {
 		Promise<SimulationReport> promise = Promise.promise();
+		LOG.info("Sending record to kafka");
 		super.patchrunsimulationSimulationReportFuture(o, inheritPk).onSuccess(simulationReport -> {
-			JsonObject body = null;
 			try {
-				body = JsonObject.mapFrom(simulationReport);
-				KafkaProducerRecord<String, String> record = KafkaProducerRecord.create(config.getString(ConfigKeys.KAFKA_TOPIC_SUMO_RUN), body.encode());
+				String topic = config.getString(ConfigKeys.KAFKA_TOPIC_SUMO_RUN);
+				JsonObject body = JsonObject.mapFrom(simulationReport);
+				KafkaProducerRecord<String, String> record = KafkaProducerRecord.create(topic, body.encode());
 				kafkaProducer.send(record).onSuccess(recordMetadata -> {
+					LOG.info(String.format("Sent record to kafka topic %s: %s", topic, body.encode()));
 					promise.complete(simulationReport);
 				}).onFailure(ex -> {
-					LOG.error(String.format("Could not send record to kafka: %s", "aaa"), ex);
+					LOG.error(String.format("Could not send record to kafka topic %s: %s", topic, body.encode()), ex);
 					promise.fail(ex);
 				});
 			} catch(Exception ex) {
-				LOG.error(String.format("Could not send record to kafka: %s", Optional.ofNullable(body).map(b -> b.encode()).orElse("")), ex);
+				LOG.error(String.format("Could not send record to kafka: %s", Optional.ofNullable(JsonObject.mapFrom(simulationReport)).map(b -> b.encode()).orElse("")), ex);
 				promise.fail(ex);
 			}
 		}).onFailure(ex -> {
+			LOG.error("Could not send record to kafka", ex);
 			promise.fail(ex);
 		});
 		return promise.future();
