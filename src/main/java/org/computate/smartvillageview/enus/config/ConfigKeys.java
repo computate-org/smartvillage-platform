@@ -219,4 +219,9 @@ public class ConfigKeys extends ComputateConfigKeys {
 	public static final String KAFKA_GROUP = "KAFKA_GROUP";
 	public static final String KAFKA_TOPIC_SUMO_RUN = "KAFKA_TOPIC_SUMO_RUN";
 	public static final String KAFKA_TOPIC_SUMO_RUN_REPORT = "KAFKA_TOPIC_SUMO_RUN_REPORT";
+	public static final String KAFKA_SECURITY_PROTOCOL = "KAFKA_SECURITY_PROTOCOL";
+	public static final String KAFKA_SSL_KEYSTORE_LOCATION = "KAFKA_SSL_KEYSTORE_LOCATION";
+	public static final String KAFKA_SSL_KEYSTORE_PASSWORD = "KAFKA_SSL_KEYSTORE_PASSWORD";
+	public static final String KAFKA_SSL_TRUSTSTORE_LOCATION = "KAFKA_SSL_TRUSTSTORE_LOCATION";
+	public static final String KAFKA_SSL_TRUSTSTORE_PASSWORD = "KAFKA_SSL_TRUSTSTORE_PASSWORD";
 }

@@ -31,6 +31,7 @@ import org.slf4j.LoggerFactory;
 import java.math.RoundingMode;
 import java.util.Map;
 import org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReportGenPage;
+import java.lang.String;
 import org.computate.search.wrap.Wrap;
 import io.vertx.core.Promise;
 import io.vertx.core.Future;
@@ -112,6 +113,56 @@ import io.vertx.core.json.JsonArray;
 public abstract class SimulationReportPageGen<DEV> extends SimulationReportGenPage {
 	protected static final Logger LOG = LoggerFactory.getLogger(SimulationReportPage.class);
 
+	/////////////////////
+	// plotPerformance //
+	/////////////////////
+
+
+	/**	 The entity plotPerformance
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String plotPerformance;
+
+	/**	<br> The entity plotPerformance
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReportPage&fq=entiteVar_enUS_indexed_string:plotPerformance">Find the entity plotPerformance in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _plotPerformance(Wrap<String> w);
+
+	public String getPlotPerformance() {
+		return plotPerformance;
+	}
+	public void setPlotPerformance(String o) {
+		this.plotPerformance = SimulationReportPage.staticSetPlotPerformance(siteRequest_, o);
+	}
+	public static String staticSetPlotPerformance(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected SimulationReportPage plotPerformanceInit() {
+		Wrap<String> plotPerformanceWrap = new Wrap<String>().var("plotPerformance");
+		if(plotPerformance == null) {
+			_plotPerformance(plotPerformanceWrap);
+			setPlotPerformance(plotPerformanceWrap.o);
+		}
+		return (SimulationReportPage)this;
+	}
+
+	public static String staticSearchPlotPerformance(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrPlotPerformance(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqPlotPerformance(SiteRequestEnUS siteRequest_, String o) {
+		return SimulationReportPage.staticSearchStrPlotPerformance(siteRequest_, SimulationReportPage.staticSearchPlotPerformance(siteRequest_, SimulationReportPage.staticSetPlotPerformance(siteRequest_, o)));
+	}
+
 	//////////////
 	// initDeep //
 	//////////////
@@ -141,6 +192,7 @@ public abstract class SimulationReportPageGen<DEV> extends SimulationReportGenPa
 		Future.future(a -> a.complete()).compose(a -> {
 			Promise<Void> promise2 = Promise.promise();
 			try {
+				plotPerformanceInit();
 				promise2.complete();
 			} catch(Exception ex) {
 				promise2.fail(ex);
@@ -194,6 +246,8 @@ public abstract class SimulationReportPageGen<DEV> extends SimulationReportGenPa
 	public Object obtainSimulationReportPage(String var) {
 		SimulationReportPage oSimulationReportPage = (SimulationReportPage)this;
 		switch(var) {
+			case "plotPerformance":
+				return oSimulationReportPage.plotPerformance;
 			default:
 				return super.obtainSimulationReportGenPage(var);
 		}
@@ -233,6 +287,8 @@ public abstract class SimulationReportPageGen<DEV> extends SimulationReportGenPa
 	}
 	public static Object staticSetSimulationReportPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "plotPerformance":
+			return SimulationReportPage.staticSetPlotPerformance(siteRequest_, o);
 			default:
 				return SimulationReportGenPage.staticSetSimulationReportGenPage(entityVar,  siteRequest_, o);
 		}
@@ -247,6 +303,8 @@ public abstract class SimulationReportPageGen<DEV> extends SimulationReportGenPa
 	}
 	public static Object staticSearchSimulationReportPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "plotPerformance":
+			return SimulationReportPage.staticSearchPlotPerformance(siteRequest_, (String)o);
 			default:
 				return SimulationReportGenPage.staticSearchSimulationReportGenPage(entityVar,  siteRequest_, o);
 		}
@@ -261,6 +319,8 @@ public abstract class SimulationReportPageGen<DEV> extends SimulationReportGenPa
 	}
 	public static String staticSearchStrSimulationReportPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "plotPerformance":
+			return SimulationReportPage.staticSearchStrPlotPerformance(siteRequest_, (String)o);
 			default:
 				return SimulationReportGenPage.staticSearchStrSimulationReportGenPage(entityVar,  siteRequest_, o);
 		}
@@ -275,6 +335,8 @@ public abstract class SimulationReportPageGen<DEV> extends SimulationReportGenPa
 	}
 	public static String staticSearchFqSimulationReportPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "plotPerformance":
+			return SimulationReportPage.staticSearchFqPlotPerformance(siteRequest_, o);
 			default:
 				return SimulationReportGenPage.staticSearchFqSimulationReportGenPage(entityVar,  siteRequest_, o);
 		}
@@ -287,17 +349,22 @@ public abstract class SimulationReportPageGen<DEV> extends SimulationReportGenPa
 	@Override public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(super.toString());
+		sb.append(Optional.ofNullable(plotPerformance).map(v -> "plotPerformance: \"" + v + "\"\n" ).orElse(""));
 		return sb.toString();
 	}
 
 	public static final String CLASS_SIMPLE_NAME = "SimulationReportPage";
+	public static final String VAR_plotPerformance = "plotPerformance";
 
+	public static final String DISPLAY_NAME_plotPerformance = "";
 
 	public static String displayNameForClass(String var) {
 		return SimulationReportPage.displayNameSimulationReportPage(var);
 	}
 	public static String displayNameSimulationReportPage(String var) {
 		switch(var) {
+		case VAR_plotPerformance:
+			return DISPLAY_NAME_plotPerformance;
 		default:
 			return SimulationReportGenPage.displayNameSimulationReportGenPage(var);
 		}

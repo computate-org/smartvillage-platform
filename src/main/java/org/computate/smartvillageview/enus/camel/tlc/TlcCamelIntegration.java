@@ -44,10 +44,16 @@ public class TlcCamelIntegration extends TlcCamelIntegrationGen<Object> {
 			camelContext.addComponent("vertx", vertxComponent);
 			RouteBuilder routeBuilder = new RouteBuilder() {
 				public void configure() {
-					from(String.format("vertx-kafka:%s?bootstrapServers=%s&groupId=%s&seekToPosition=end"
+					from(String.format("vertx-kafka:%s?bootstrapServers=%s&groupId=%s&securityProtocol=%s&sslKeystoreLocation=%s&sslKeystorePassword=%s&sslTruststoreLocation=%s&sslTruststorePassword=%s&seekToPosition=end"
 							, config.getString(ConfigKeys.KAFKA_TOPIC_SUMO_RUN_REPORT)
 							, config.getString(ConfigKeys.KAFKA_BROKERS)
 							, config.getString(ConfigKeys.KAFKA_GROUP)
+
+							, config.getString(ConfigKeys.KAFKA_SECURITY_PROTOCOL)
+							, config.getString(ConfigKeys.KAFKA_SSL_KEYSTORE_LOCATION)
+							, config.getString(ConfigKeys.KAFKA_SSL_KEYSTORE_PASSWORD)
+							, config.getString(ConfigKeys.KAFKA_SSL_TRUSTSTORE_LOCATION)
+							, config.getString(ConfigKeys.KAFKA_SSL_TRUSTSTORE_PASSWORD)
 							))
 					.log("received SUMO run report event: ${body}")
 					.bean(TlcCamelIntegration.class, "exchangeToJsonObject")

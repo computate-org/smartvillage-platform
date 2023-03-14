@@ -41,5 +41,10 @@
 {{#partial "htmForm_patchSimulationReport"}}{{> htmFormSimulationReportPage_patchSimulationReport}}{{/partial}}
 {{#partial "htmForm_postSimulationReport"}}{{> htmFormSimulationReportPage_postSimulationReport}}{{/partial}}
 {{#partial "htmForm_putimportSimulationReport"}}{{> htmFormSimulationReportPage_putimportSimulationReport}}{{/partial}}
-{{#partial "htmForm_searchpageSimulationReport"}}{{> htmFormSimulationReportPage_searchpageSimulationReport}}{{/partial}}
+{{#partial "htmForm_searchpageSimulationReport"}}{{> htmFormSimulationReportPage_searchpageSimulationReport}}
+
+<div>
+	<img src="data:image/png;base64,{{ plotPerformance }}"/>
+</div>
+{{/partial}}
 {{> SimulationReportGenPage}}
