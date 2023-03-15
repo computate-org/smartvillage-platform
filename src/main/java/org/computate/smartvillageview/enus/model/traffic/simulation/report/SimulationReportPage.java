@@ -42,7 +42,7 @@ public class SimulationReportPage extends SimulationReportPageGen<SimulationRepo
 		try {
 			JsonArray updatedParameters = simulationReport_.getUpdatedParameters();
 			JsonArray updatedPerformance = simulationReport_.getUpdatedPerformance();
-			if(updatedPerformance.size() >= 3 && simulationReport_ != null && updatedParameters != null && updatedPerformance != null) {
+			if(updatedPerformance != null && updatedPerformance.size() >= 3 && simulationReport_ != null && updatedParameters != null && updatedPerformance != null) {
 				Integer size = updatedPerformance.size();
 
 				XYSeries series = new XYSeries("vehicle and pedestrian");
