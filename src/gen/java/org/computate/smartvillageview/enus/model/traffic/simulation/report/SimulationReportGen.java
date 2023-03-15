@@ -435,105 +435,454 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		return simulationName;
 	}
 
-	/////////////////////
-	// paramInitialPar //
-	/////////////////////
+	/////////////////////////////////////////
+	// paramAvgVehiclePerMinFromWestToEast //
+	/////////////////////////////////////////
 
 
-	/**	 The entity paramInitialPar
-	 *	 It is constructed before being initialized with the constructor by default. 
+	/**	 The entity paramAvgVehiclePerMinFromWestToEast
+	 *	 is defined as null before being initialized. 
 	 */
 	@JsonProperty
-	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
+	@JsonSerialize(using = ToStringSerializer.class)
 	@JsonInclude(Include.NON_NULL)
-	protected List<BigDecimal> paramInitialPar = new ArrayList<BigDecimal>();
+	protected BigDecimal paramAvgVehiclePerMinFromWestToEast;
 
-	/**	<br> The entity paramInitialPar
-	 *  It is constructed before being initialized with the constructor by default. 
-	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:paramInitialPar">Find the entity paramInitialPar in Solr</a>
+	/**	<br> The entity paramAvgVehiclePerMinFromWestToEast
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:paramAvgVehiclePerMinFromWestToEast">Find the entity paramAvgVehiclePerMinFromWestToEast in Solr</a>
 	 * <br>
-	 * @param l is the entity already constructed. 
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected abstract void _paramInitialPar(List<BigDecimal> l);
+	protected abstract void _paramAvgVehiclePerMinFromWestToEast(Wrap<BigDecimal> w);
 
-	public List<BigDecimal> getParamInitialPar() {
-		return paramInitialPar;
+	public BigDecimal getParamAvgVehiclePerMinFromWestToEast() {
+		return paramAvgVehiclePerMinFromWestToEast;
 	}
 
-	public void setParamInitialPar(List<BigDecimal> paramInitialPar) {
-		this.paramInitialPar = paramInitialPar;
+	public void setParamAvgVehiclePerMinFromWestToEast(BigDecimal paramAvgVehiclePerMinFromWestToEast) {
+		this.paramAvgVehiclePerMinFromWestToEast = paramAvgVehiclePerMinFromWestToEast;
 	}
 	@JsonIgnore
-	public void setParamInitialPar(String o) {
-		BigDecimal l = SimulationReport.staticSetParamInitialPar(siteRequest_, o);
-		if(l != null)
-			addParamInitialPar(l);
+	public void setParamAvgVehiclePerMinFromWestToEast(String o) {
+		this.paramAvgVehiclePerMinFromWestToEast = SimulationReport.staticSetParamAvgVehiclePerMinFromWestToEast(siteRequest_, o);
 	}
-	public static BigDecimal staticSetParamInitialPar(SiteRequestEnUS siteRequest_, String o) {
+	public static BigDecimal staticSetParamAvgVehiclePerMinFromWestToEast(SiteRequestEnUS siteRequest_, String o) {
 		o = StringUtils.removeAll(o, "[^\\d\\.]");
 		if(NumberUtils.isParsable(o))
 			return new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
 		return null;
 	}
 	@JsonIgnore
-	public void setParamInitialPar(Double o) {
-		addParamInitialPar(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	public void setParamAvgVehiclePerMinFromWestToEast(Double o) {
+		setParamAvgVehiclePerMinFromWestToEast(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	@JsonIgnore
-	public void setParamInitialPar(Integer o) {
-		addParamInitialPar(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	public void setParamAvgVehiclePerMinFromWestToEast(Integer o) {
+		setParamAvgVehiclePerMinFromWestToEast(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	@JsonIgnore
-	public void setParamInitialPar(Number o) {
-		addParamInitialPar(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	public void setParamAvgVehiclePerMinFromWestToEast(Number o) {
+		setParamAvgVehiclePerMinFromWestToEast(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
-	public SimulationReport addParamInitialPar(BigDecimal...objects) {
-		for(BigDecimal o : objects) {
-			addParamInitialPar(o);
+	protected SimulationReport paramAvgVehiclePerMinFromWestToEastInit() {
+		Wrap<BigDecimal> paramAvgVehiclePerMinFromWestToEastWrap = new Wrap<BigDecimal>().var("paramAvgVehiclePerMinFromWestToEast");
+		if(paramAvgVehiclePerMinFromWestToEast == null) {
+			_paramAvgVehiclePerMinFromWestToEast(paramAvgVehiclePerMinFromWestToEastWrap);
+			setParamAvgVehiclePerMinFromWestToEast(paramAvgVehiclePerMinFromWestToEastWrap.o);
 		}
-		return (SimulationReport)this;
-	}
-	public SimulationReport addParamInitialPar(BigDecimal o) {
-		if(o != null)
-			this.paramInitialPar.add(o);
-		return (SimulationReport)this;
-	}
-	@JsonIgnore
-	public void setParamInitialPar(JsonArray objects) {
-		paramInitialPar.clear();
-		if(objects == null)
-			return;
-		for(int i = 0; i < objects.size(); i++) {
-			String o = objects.getString(i);
-			addParamInitialPar(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
-		}
-	}
-	public SimulationReport addParamInitialPar(String o) {
-		if(NumberUtils.isParsable(o)) {
-			BigDecimal p = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
-			addParamInitialPar(p);
-		}
-		return (SimulationReport)this;
-	}
-	protected SimulationReport paramInitialParInit() {
-		_paramInitialPar(paramInitialPar);
 		return (SimulationReport)this;
 	}
 
-	public static BigDecimal staticSearchParamInitialPar(SiteRequestEnUS siteRequest_, BigDecimal o) {
-		return o;
+	public static Double staticSearchParamAvgVehiclePerMinFromWestToEast(SiteRequestEnUS siteRequest_, BigDecimal o) {
+		return o == null ? null : o.doubleValue();
 	}
 
-	public static String staticSearchStrParamInitialPar(SiteRequestEnUS siteRequest_, BigDecimal o) {
+	public static String staticSearchStrParamAvgVehiclePerMinFromWestToEast(SiteRequestEnUS siteRequest_, Double o) {
 		return o == null ? null : o.toString();
 	}
 
-	public static String staticSearchFqParamInitialPar(SiteRequestEnUS siteRequest_, String o) {
-		return SimulationReport.staticSearchStrParamInitialPar(siteRequest_, SimulationReport.staticSearchParamInitialPar(siteRequest_, SimulationReport.staticSetParamInitialPar(siteRequest_, o)));
+	public static String staticSearchFqParamAvgVehiclePerMinFromWestToEast(SiteRequestEnUS siteRequest_, String o) {
+		return SimulationReport.staticSearchStrParamAvgVehiclePerMinFromWestToEast(siteRequest_, SimulationReport.staticSearchParamAvgVehiclePerMinFromWestToEast(siteRequest_, SimulationReport.staticSetParamAvgVehiclePerMinFromWestToEast(siteRequest_, o)));
 	}
 
-	public Number[] sqlParamInitialPar() {
-		return paramInitialPar.stream().map(v -> (Number)v).toArray(Number[]::new);
+	public BigDecimal sqlParamAvgVehiclePerMinFromWestToEast() {
+		return paramAvgVehiclePerMinFromWestToEast;
+	}
+
+	///////////////////////////////////////////
+	// paramAvgVehiclePerMinFromSouthToNorth //
+	///////////////////////////////////////////
+
+
+	/**	 The entity paramAvgVehiclePerMinFromSouthToNorth
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected BigDecimal paramAvgVehiclePerMinFromSouthToNorth;
+
+	/**	<br> The entity paramAvgVehiclePerMinFromSouthToNorth
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:paramAvgVehiclePerMinFromSouthToNorth">Find the entity paramAvgVehiclePerMinFromSouthToNorth in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _paramAvgVehiclePerMinFromSouthToNorth(Wrap<BigDecimal> w);
+
+	public BigDecimal getParamAvgVehiclePerMinFromSouthToNorth() {
+		return paramAvgVehiclePerMinFromSouthToNorth;
+	}
+
+	public void setParamAvgVehiclePerMinFromSouthToNorth(BigDecimal paramAvgVehiclePerMinFromSouthToNorth) {
+		this.paramAvgVehiclePerMinFromSouthToNorth = paramAvgVehiclePerMinFromSouthToNorth;
+	}
+	@JsonIgnore
+	public void setParamAvgVehiclePerMinFromSouthToNorth(String o) {
+		this.paramAvgVehiclePerMinFromSouthToNorth = SimulationReport.staticSetParamAvgVehiclePerMinFromSouthToNorth(siteRequest_, o);
+	}
+	public static BigDecimal staticSetParamAvgVehiclePerMinFromSouthToNorth(SiteRequestEnUS siteRequest_, String o) {
+		o = StringUtils.removeAll(o, "[^\\d\\.]");
+		if(NumberUtils.isParsable(o))
+			return new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		return null;
+	}
+	@JsonIgnore
+	public void setParamAvgVehiclePerMinFromSouthToNorth(Double o) {
+		setParamAvgVehiclePerMinFromSouthToNorth(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setParamAvgVehiclePerMinFromSouthToNorth(Integer o) {
+		setParamAvgVehiclePerMinFromSouthToNorth(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setParamAvgVehiclePerMinFromSouthToNorth(Number o) {
+		setParamAvgVehiclePerMinFromSouthToNorth(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	protected SimulationReport paramAvgVehiclePerMinFromSouthToNorthInit() {
+		Wrap<BigDecimal> paramAvgVehiclePerMinFromSouthToNorthWrap = new Wrap<BigDecimal>().var("paramAvgVehiclePerMinFromSouthToNorth");
+		if(paramAvgVehiclePerMinFromSouthToNorth == null) {
+			_paramAvgVehiclePerMinFromSouthToNorth(paramAvgVehiclePerMinFromSouthToNorthWrap);
+			setParamAvgVehiclePerMinFromSouthToNorth(paramAvgVehiclePerMinFromSouthToNorthWrap.o);
+		}
+		return (SimulationReport)this;
+	}
+
+	public static Double staticSearchParamAvgVehiclePerMinFromSouthToNorth(SiteRequestEnUS siteRequest_, BigDecimal o) {
+		return o == null ? null : o.doubleValue();
+	}
+
+	public static String staticSearchStrParamAvgVehiclePerMinFromSouthToNorth(SiteRequestEnUS siteRequest_, Double o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqParamAvgVehiclePerMinFromSouthToNorth(SiteRequestEnUS siteRequest_, String o) {
+		return SimulationReport.staticSearchStrParamAvgVehiclePerMinFromSouthToNorth(siteRequest_, SimulationReport.staticSearchParamAvgVehiclePerMinFromSouthToNorth(siteRequest_, SimulationReport.staticSetParamAvgVehiclePerMinFromSouthToNorth(siteRequest_, o)));
+	}
+
+	public BigDecimal sqlParamAvgVehiclePerMinFromSouthToNorth() {
+		return paramAvgVehiclePerMinFromSouthToNorth;
+	}
+
+	/////////////////////////////////////
+	// paramVehicleDemandScalingFactor //
+	/////////////////////////////////////
+
+
+	/**	 The entity paramVehicleDemandScalingFactor
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected BigDecimal paramVehicleDemandScalingFactor;
+
+	/**	<br> The entity paramVehicleDemandScalingFactor
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:paramVehicleDemandScalingFactor">Find the entity paramVehicleDemandScalingFactor in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _paramVehicleDemandScalingFactor(Wrap<BigDecimal> w);
+
+	public BigDecimal getParamVehicleDemandScalingFactor() {
+		return paramVehicleDemandScalingFactor;
+	}
+
+	public void setParamVehicleDemandScalingFactor(BigDecimal paramVehicleDemandScalingFactor) {
+		this.paramVehicleDemandScalingFactor = paramVehicleDemandScalingFactor;
+	}
+	@JsonIgnore
+	public void setParamVehicleDemandScalingFactor(String o) {
+		this.paramVehicleDemandScalingFactor = SimulationReport.staticSetParamVehicleDemandScalingFactor(siteRequest_, o);
+	}
+	public static BigDecimal staticSetParamVehicleDemandScalingFactor(SiteRequestEnUS siteRequest_, String o) {
+		o = StringUtils.removeAll(o, "[^\\d\\.]");
+		if(NumberUtils.isParsable(o))
+			return new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		return null;
+	}
+	@JsonIgnore
+	public void setParamVehicleDemandScalingFactor(Double o) {
+		setParamVehicleDemandScalingFactor(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setParamVehicleDemandScalingFactor(Integer o) {
+		setParamVehicleDemandScalingFactor(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setParamVehicleDemandScalingFactor(Number o) {
+		setParamVehicleDemandScalingFactor(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	protected SimulationReport paramVehicleDemandScalingFactorInit() {
+		Wrap<BigDecimal> paramVehicleDemandScalingFactorWrap = new Wrap<BigDecimal>().var("paramVehicleDemandScalingFactor");
+		if(paramVehicleDemandScalingFactor == null) {
+			_paramVehicleDemandScalingFactor(paramVehicleDemandScalingFactorWrap);
+			setParamVehicleDemandScalingFactor(paramVehicleDemandScalingFactorWrap.o);
+		}
+		return (SimulationReport)this;
+	}
+
+	public static Double staticSearchParamVehicleDemandScalingFactor(SiteRequestEnUS siteRequest_, BigDecimal o) {
+		return o == null ? null : o.doubleValue();
+	}
+
+	public static String staticSearchStrParamVehicleDemandScalingFactor(SiteRequestEnUS siteRequest_, Double o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqParamVehicleDemandScalingFactor(SiteRequestEnUS siteRequest_, String o) {
+		return SimulationReport.staticSearchStrParamVehicleDemandScalingFactor(siteRequest_, SimulationReport.staticSearchParamVehicleDemandScalingFactor(siteRequest_, SimulationReport.staticSetParamVehicleDemandScalingFactor(siteRequest_, o)));
+	}
+
+	public BigDecimal sqlParamVehicleDemandScalingFactor() {
+		return paramVehicleDemandScalingFactor;
+	}
+
+	////////////////////////////////////////////
+	// paramAvgPedestrianPerMinFromWestToEast //
+	////////////////////////////////////////////
+
+
+	/**	 The entity paramAvgPedestrianPerMinFromWestToEast
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected BigDecimal paramAvgPedestrianPerMinFromWestToEast;
+
+	/**	<br> The entity paramAvgPedestrianPerMinFromWestToEast
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:paramAvgPedestrianPerMinFromWestToEast">Find the entity paramAvgPedestrianPerMinFromWestToEast in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _paramAvgPedestrianPerMinFromWestToEast(Wrap<BigDecimal> w);
+
+	public BigDecimal getParamAvgPedestrianPerMinFromWestToEast() {
+		return paramAvgPedestrianPerMinFromWestToEast;
+	}
+
+	public void setParamAvgPedestrianPerMinFromWestToEast(BigDecimal paramAvgPedestrianPerMinFromWestToEast) {
+		this.paramAvgPedestrianPerMinFromWestToEast = paramAvgPedestrianPerMinFromWestToEast;
+	}
+	@JsonIgnore
+	public void setParamAvgPedestrianPerMinFromWestToEast(String o) {
+		this.paramAvgPedestrianPerMinFromWestToEast = SimulationReport.staticSetParamAvgPedestrianPerMinFromWestToEast(siteRequest_, o);
+	}
+	public static BigDecimal staticSetParamAvgPedestrianPerMinFromWestToEast(SiteRequestEnUS siteRequest_, String o) {
+		o = StringUtils.removeAll(o, "[^\\d\\.]");
+		if(NumberUtils.isParsable(o))
+			return new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		return null;
+	}
+	@JsonIgnore
+	public void setParamAvgPedestrianPerMinFromWestToEast(Double o) {
+		setParamAvgPedestrianPerMinFromWestToEast(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setParamAvgPedestrianPerMinFromWestToEast(Integer o) {
+		setParamAvgPedestrianPerMinFromWestToEast(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setParamAvgPedestrianPerMinFromWestToEast(Number o) {
+		setParamAvgPedestrianPerMinFromWestToEast(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	protected SimulationReport paramAvgPedestrianPerMinFromWestToEastInit() {
+		Wrap<BigDecimal> paramAvgPedestrianPerMinFromWestToEastWrap = new Wrap<BigDecimal>().var("paramAvgPedestrianPerMinFromWestToEast");
+		if(paramAvgPedestrianPerMinFromWestToEast == null) {
+			_paramAvgPedestrianPerMinFromWestToEast(paramAvgPedestrianPerMinFromWestToEastWrap);
+			setParamAvgPedestrianPerMinFromWestToEast(paramAvgPedestrianPerMinFromWestToEastWrap.o);
+		}
+		return (SimulationReport)this;
+	}
+
+	public static Double staticSearchParamAvgPedestrianPerMinFromWestToEast(SiteRequestEnUS siteRequest_, BigDecimal o) {
+		return o == null ? null : o.doubleValue();
+	}
+
+	public static String staticSearchStrParamAvgPedestrianPerMinFromWestToEast(SiteRequestEnUS siteRequest_, Double o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqParamAvgPedestrianPerMinFromWestToEast(SiteRequestEnUS siteRequest_, String o) {
+		return SimulationReport.staticSearchStrParamAvgPedestrianPerMinFromWestToEast(siteRequest_, SimulationReport.staticSearchParamAvgPedestrianPerMinFromWestToEast(siteRequest_, SimulationReport.staticSetParamAvgPedestrianPerMinFromWestToEast(siteRequest_, o)));
+	}
+
+	public BigDecimal sqlParamAvgPedestrianPerMinFromWestToEast() {
+		return paramAvgPedestrianPerMinFromWestToEast;
+	}
+
+	//////////////////////////////////////////////
+	// paramAvgPedestrianPerMinFromSouthToNorth //
+	//////////////////////////////////////////////
+
+
+	/**	 The entity paramAvgPedestrianPerMinFromSouthToNorth
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected BigDecimal paramAvgPedestrianPerMinFromSouthToNorth;
+
+	/**	<br> The entity paramAvgPedestrianPerMinFromSouthToNorth
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:paramAvgPedestrianPerMinFromSouthToNorth">Find the entity paramAvgPedestrianPerMinFromSouthToNorth in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _paramAvgPedestrianPerMinFromSouthToNorth(Wrap<BigDecimal> w);
+
+	public BigDecimal getParamAvgPedestrianPerMinFromSouthToNorth() {
+		return paramAvgPedestrianPerMinFromSouthToNorth;
+	}
+
+	public void setParamAvgPedestrianPerMinFromSouthToNorth(BigDecimal paramAvgPedestrianPerMinFromSouthToNorth) {
+		this.paramAvgPedestrianPerMinFromSouthToNorth = paramAvgPedestrianPerMinFromSouthToNorth;
+	}
+	@JsonIgnore
+	public void setParamAvgPedestrianPerMinFromSouthToNorth(String o) {
+		this.paramAvgPedestrianPerMinFromSouthToNorth = SimulationReport.staticSetParamAvgPedestrianPerMinFromSouthToNorth(siteRequest_, o);
+	}
+	public static BigDecimal staticSetParamAvgPedestrianPerMinFromSouthToNorth(SiteRequestEnUS siteRequest_, String o) {
+		o = StringUtils.removeAll(o, "[^\\d\\.]");
+		if(NumberUtils.isParsable(o))
+			return new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		return null;
+	}
+	@JsonIgnore
+	public void setParamAvgPedestrianPerMinFromSouthToNorth(Double o) {
+		setParamAvgPedestrianPerMinFromSouthToNorth(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setParamAvgPedestrianPerMinFromSouthToNorth(Integer o) {
+		setParamAvgPedestrianPerMinFromSouthToNorth(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setParamAvgPedestrianPerMinFromSouthToNorth(Number o) {
+		setParamAvgPedestrianPerMinFromSouthToNorth(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	protected SimulationReport paramAvgPedestrianPerMinFromSouthToNorthInit() {
+		Wrap<BigDecimal> paramAvgPedestrianPerMinFromSouthToNorthWrap = new Wrap<BigDecimal>().var("paramAvgPedestrianPerMinFromSouthToNorth");
+		if(paramAvgPedestrianPerMinFromSouthToNorth == null) {
+			_paramAvgPedestrianPerMinFromSouthToNorth(paramAvgPedestrianPerMinFromSouthToNorthWrap);
+			setParamAvgPedestrianPerMinFromSouthToNorth(paramAvgPedestrianPerMinFromSouthToNorthWrap.o);
+		}
+		return (SimulationReport)this;
+	}
+
+	public static Double staticSearchParamAvgPedestrianPerMinFromSouthToNorth(SiteRequestEnUS siteRequest_, BigDecimal o) {
+		return o == null ? null : o.doubleValue();
+	}
+
+	public static String staticSearchStrParamAvgPedestrianPerMinFromSouthToNorth(SiteRequestEnUS siteRequest_, Double o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqParamAvgPedestrianPerMinFromSouthToNorth(SiteRequestEnUS siteRequest_, String o) {
+		return SimulationReport.staticSearchStrParamAvgPedestrianPerMinFromSouthToNorth(siteRequest_, SimulationReport.staticSearchParamAvgPedestrianPerMinFromSouthToNorth(siteRequest_, SimulationReport.staticSetParamAvgPedestrianPerMinFromSouthToNorth(siteRequest_, o)));
+	}
+
+	public BigDecimal sqlParamAvgPedestrianPerMinFromSouthToNorth() {
+		return paramAvgPedestrianPerMinFromSouthToNorth;
+	}
+
+	////////////////////////////////////////
+	// paramPedestrianDemandScalingFactor //
+	////////////////////////////////////////
+
+
+	/**	 The entity paramPedestrianDemandScalingFactor
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected BigDecimal paramPedestrianDemandScalingFactor;
+
+	/**	<br> The entity paramPedestrianDemandScalingFactor
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:paramPedestrianDemandScalingFactor">Find the entity paramPedestrianDemandScalingFactor in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _paramPedestrianDemandScalingFactor(Wrap<BigDecimal> w);
+
+	public BigDecimal getParamPedestrianDemandScalingFactor() {
+		return paramPedestrianDemandScalingFactor;
+	}
+
+	public void setParamPedestrianDemandScalingFactor(BigDecimal paramPedestrianDemandScalingFactor) {
+		this.paramPedestrianDemandScalingFactor = paramPedestrianDemandScalingFactor;
+	}
+	@JsonIgnore
+	public void setParamPedestrianDemandScalingFactor(String o) {
+		this.paramPedestrianDemandScalingFactor = SimulationReport.staticSetParamPedestrianDemandScalingFactor(siteRequest_, o);
+	}
+	public static BigDecimal staticSetParamPedestrianDemandScalingFactor(SiteRequestEnUS siteRequest_, String o) {
+		o = StringUtils.removeAll(o, "[^\\d\\.]");
+		if(NumberUtils.isParsable(o))
+			return new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		return null;
+	}
+	@JsonIgnore
+	public void setParamPedestrianDemandScalingFactor(Double o) {
+		setParamPedestrianDemandScalingFactor(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setParamPedestrianDemandScalingFactor(Integer o) {
+		setParamPedestrianDemandScalingFactor(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setParamPedestrianDemandScalingFactor(Number o) {
+		setParamPedestrianDemandScalingFactor(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	protected SimulationReport paramPedestrianDemandScalingFactorInit() {
+		Wrap<BigDecimal> paramPedestrianDemandScalingFactorWrap = new Wrap<BigDecimal>().var("paramPedestrianDemandScalingFactor");
+		if(paramPedestrianDemandScalingFactor == null) {
+			_paramPedestrianDemandScalingFactor(paramPedestrianDemandScalingFactorWrap);
+			setParamPedestrianDemandScalingFactor(paramPedestrianDemandScalingFactorWrap.o);
+		}
+		return (SimulationReport)this;
+	}
+
+	public static Double staticSearchParamPedestrianDemandScalingFactor(SiteRequestEnUS siteRequest_, BigDecimal o) {
+		return o == null ? null : o.doubleValue();
+	}
+
+	public static String staticSearchStrParamPedestrianDemandScalingFactor(SiteRequestEnUS siteRequest_, Double o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqParamPedestrianDemandScalingFactor(SiteRequestEnUS siteRequest_, String o) {
+		return SimulationReport.staticSearchStrParamPedestrianDemandScalingFactor(siteRequest_, SimulationReport.staticSearchParamPedestrianDemandScalingFactor(siteRequest_, SimulationReport.staticSetParamPedestrianDemandScalingFactor(siteRequest_, o)));
+	}
+
+	public BigDecimal sqlParamPedestrianDemandScalingFactor() {
+		return paramPedestrianDemandScalingFactor;
 	}
 
 	//////////////
@@ -633,8 +982,754 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		return SimulationReport.staticSearchStrParamLam(siteRequest_, SimulationReport.staticSearchParamLam(siteRequest_, SimulationReport.staticSetParamLam(siteRequest_, o)));
 	}
 
-	public Number[] sqlParamLam() {
-		return paramLam.stream().map(v -> (Number)v).toArray(Number[]::new);
+	//////////////////////////////////
+	// paramMinGreenTimeSecWestEast //
+	//////////////////////////////////
+
+
+	/**	 The entity paramMinGreenTimeSecWestEast
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected BigDecimal paramMinGreenTimeSecWestEast;
+
+	/**	<br> The entity paramMinGreenTimeSecWestEast
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:paramMinGreenTimeSecWestEast">Find the entity paramMinGreenTimeSecWestEast in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _paramMinGreenTimeSecWestEast(Wrap<BigDecimal> w);
+
+	public BigDecimal getParamMinGreenTimeSecWestEast() {
+		return paramMinGreenTimeSecWestEast;
+	}
+
+	public void setParamMinGreenTimeSecWestEast(BigDecimal paramMinGreenTimeSecWestEast) {
+		this.paramMinGreenTimeSecWestEast = paramMinGreenTimeSecWestEast;
+	}
+	@JsonIgnore
+	public void setParamMinGreenTimeSecWestEast(String o) {
+		this.paramMinGreenTimeSecWestEast = SimulationReport.staticSetParamMinGreenTimeSecWestEast(siteRequest_, o);
+	}
+	public static BigDecimal staticSetParamMinGreenTimeSecWestEast(SiteRequestEnUS siteRequest_, String o) {
+		o = StringUtils.removeAll(o, "[^\\d\\.]");
+		if(NumberUtils.isParsable(o))
+			return new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		return null;
+	}
+	@JsonIgnore
+	public void setParamMinGreenTimeSecWestEast(Double o) {
+		setParamMinGreenTimeSecWestEast(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setParamMinGreenTimeSecWestEast(Integer o) {
+		setParamMinGreenTimeSecWestEast(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setParamMinGreenTimeSecWestEast(Number o) {
+		setParamMinGreenTimeSecWestEast(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	protected SimulationReport paramMinGreenTimeSecWestEastInit() {
+		Wrap<BigDecimal> paramMinGreenTimeSecWestEastWrap = new Wrap<BigDecimal>().var("paramMinGreenTimeSecWestEast");
+		if(paramMinGreenTimeSecWestEast == null) {
+			_paramMinGreenTimeSecWestEast(paramMinGreenTimeSecWestEastWrap);
+			setParamMinGreenTimeSecWestEast(paramMinGreenTimeSecWestEastWrap.o);
+		}
+		return (SimulationReport)this;
+	}
+
+	public static Double staticSearchParamMinGreenTimeSecWestEast(SiteRequestEnUS siteRequest_, BigDecimal o) {
+		return o == null ? null : o.doubleValue();
+	}
+
+	public static String staticSearchStrParamMinGreenTimeSecWestEast(SiteRequestEnUS siteRequest_, Double o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqParamMinGreenTimeSecWestEast(SiteRequestEnUS siteRequest_, String o) {
+		return SimulationReport.staticSearchStrParamMinGreenTimeSecWestEast(siteRequest_, SimulationReport.staticSearchParamMinGreenTimeSecWestEast(siteRequest_, SimulationReport.staticSetParamMinGreenTimeSecWestEast(siteRequest_, o)));
+	}
+
+	public BigDecimal sqlParamMinGreenTimeSecWestEast() {
+		return paramMinGreenTimeSecWestEast;
+	}
+
+	//////////////////////////////////
+	// paramMaxGreenTimeSecWestEast //
+	//////////////////////////////////
+
+
+	/**	 The entity paramMaxGreenTimeSecWestEast
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected BigDecimal paramMaxGreenTimeSecWestEast;
+
+	/**	<br> The entity paramMaxGreenTimeSecWestEast
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:paramMaxGreenTimeSecWestEast">Find the entity paramMaxGreenTimeSecWestEast in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _paramMaxGreenTimeSecWestEast(Wrap<BigDecimal> w);
+
+	public BigDecimal getParamMaxGreenTimeSecWestEast() {
+		return paramMaxGreenTimeSecWestEast;
+	}
+
+	public void setParamMaxGreenTimeSecWestEast(BigDecimal paramMaxGreenTimeSecWestEast) {
+		this.paramMaxGreenTimeSecWestEast = paramMaxGreenTimeSecWestEast;
+	}
+	@JsonIgnore
+	public void setParamMaxGreenTimeSecWestEast(String o) {
+		this.paramMaxGreenTimeSecWestEast = SimulationReport.staticSetParamMaxGreenTimeSecWestEast(siteRequest_, o);
+	}
+	public static BigDecimal staticSetParamMaxGreenTimeSecWestEast(SiteRequestEnUS siteRequest_, String o) {
+		o = StringUtils.removeAll(o, "[^\\d\\.]");
+		if(NumberUtils.isParsable(o))
+			return new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		return null;
+	}
+	@JsonIgnore
+	public void setParamMaxGreenTimeSecWestEast(Double o) {
+		setParamMaxGreenTimeSecWestEast(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setParamMaxGreenTimeSecWestEast(Integer o) {
+		setParamMaxGreenTimeSecWestEast(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setParamMaxGreenTimeSecWestEast(Number o) {
+		setParamMaxGreenTimeSecWestEast(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	protected SimulationReport paramMaxGreenTimeSecWestEastInit() {
+		Wrap<BigDecimal> paramMaxGreenTimeSecWestEastWrap = new Wrap<BigDecimal>().var("paramMaxGreenTimeSecWestEast");
+		if(paramMaxGreenTimeSecWestEast == null) {
+			_paramMaxGreenTimeSecWestEast(paramMaxGreenTimeSecWestEastWrap);
+			setParamMaxGreenTimeSecWestEast(paramMaxGreenTimeSecWestEastWrap.o);
+		}
+		return (SimulationReport)this;
+	}
+
+	public static Double staticSearchParamMaxGreenTimeSecWestEast(SiteRequestEnUS siteRequest_, BigDecimal o) {
+		return o == null ? null : o.doubleValue();
+	}
+
+	public static String staticSearchStrParamMaxGreenTimeSecWestEast(SiteRequestEnUS siteRequest_, Double o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqParamMaxGreenTimeSecWestEast(SiteRequestEnUS siteRequest_, String o) {
+		return SimulationReport.staticSearchStrParamMaxGreenTimeSecWestEast(siteRequest_, SimulationReport.staticSearchParamMaxGreenTimeSecWestEast(siteRequest_, SimulationReport.staticSetParamMaxGreenTimeSecWestEast(siteRequest_, o)));
+	}
+
+	public BigDecimal sqlParamMaxGreenTimeSecWestEast() {
+		return paramMaxGreenTimeSecWestEast;
+	}
+
+	////////////////////////////////////
+	// paramMinGreenTimeSecSouthNorth //
+	////////////////////////////////////
+
+
+	/**	 The entity paramMinGreenTimeSecSouthNorth
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected BigDecimal paramMinGreenTimeSecSouthNorth;
+
+	/**	<br> The entity paramMinGreenTimeSecSouthNorth
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:paramMinGreenTimeSecSouthNorth">Find the entity paramMinGreenTimeSecSouthNorth in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _paramMinGreenTimeSecSouthNorth(Wrap<BigDecimal> w);
+
+	public BigDecimal getParamMinGreenTimeSecSouthNorth() {
+		return paramMinGreenTimeSecSouthNorth;
+	}
+
+	public void setParamMinGreenTimeSecSouthNorth(BigDecimal paramMinGreenTimeSecSouthNorth) {
+		this.paramMinGreenTimeSecSouthNorth = paramMinGreenTimeSecSouthNorth;
+	}
+	@JsonIgnore
+	public void setParamMinGreenTimeSecSouthNorth(String o) {
+		this.paramMinGreenTimeSecSouthNorth = SimulationReport.staticSetParamMinGreenTimeSecSouthNorth(siteRequest_, o);
+	}
+	public static BigDecimal staticSetParamMinGreenTimeSecSouthNorth(SiteRequestEnUS siteRequest_, String o) {
+		o = StringUtils.removeAll(o, "[^\\d\\.]");
+		if(NumberUtils.isParsable(o))
+			return new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		return null;
+	}
+	@JsonIgnore
+	public void setParamMinGreenTimeSecSouthNorth(Double o) {
+		setParamMinGreenTimeSecSouthNorth(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setParamMinGreenTimeSecSouthNorth(Integer o) {
+		setParamMinGreenTimeSecSouthNorth(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setParamMinGreenTimeSecSouthNorth(Number o) {
+		setParamMinGreenTimeSecSouthNorth(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	protected SimulationReport paramMinGreenTimeSecSouthNorthInit() {
+		Wrap<BigDecimal> paramMinGreenTimeSecSouthNorthWrap = new Wrap<BigDecimal>().var("paramMinGreenTimeSecSouthNorth");
+		if(paramMinGreenTimeSecSouthNorth == null) {
+			_paramMinGreenTimeSecSouthNorth(paramMinGreenTimeSecSouthNorthWrap);
+			setParamMinGreenTimeSecSouthNorth(paramMinGreenTimeSecSouthNorthWrap.o);
+		}
+		return (SimulationReport)this;
+	}
+
+	public static Double staticSearchParamMinGreenTimeSecSouthNorth(SiteRequestEnUS siteRequest_, BigDecimal o) {
+		return o == null ? null : o.doubleValue();
+	}
+
+	public static String staticSearchStrParamMinGreenTimeSecSouthNorth(SiteRequestEnUS siteRequest_, Double o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqParamMinGreenTimeSecSouthNorth(SiteRequestEnUS siteRequest_, String o) {
+		return SimulationReport.staticSearchStrParamMinGreenTimeSecSouthNorth(siteRequest_, SimulationReport.staticSearchParamMinGreenTimeSecSouthNorth(siteRequest_, SimulationReport.staticSetParamMinGreenTimeSecSouthNorth(siteRequest_, o)));
+	}
+
+	public BigDecimal sqlParamMinGreenTimeSecSouthNorth() {
+		return paramMinGreenTimeSecSouthNorth;
+	}
+
+	////////////////////////////////////
+	// paramMaxGreenTimeSecSouthNorth //
+	////////////////////////////////////
+
+
+	/**	 The entity paramMaxGreenTimeSecSouthNorth
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected BigDecimal paramMaxGreenTimeSecSouthNorth;
+
+	/**	<br> The entity paramMaxGreenTimeSecSouthNorth
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:paramMaxGreenTimeSecSouthNorth">Find the entity paramMaxGreenTimeSecSouthNorth in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _paramMaxGreenTimeSecSouthNorth(Wrap<BigDecimal> w);
+
+	public BigDecimal getParamMaxGreenTimeSecSouthNorth() {
+		return paramMaxGreenTimeSecSouthNorth;
+	}
+
+	public void setParamMaxGreenTimeSecSouthNorth(BigDecimal paramMaxGreenTimeSecSouthNorth) {
+		this.paramMaxGreenTimeSecSouthNorth = paramMaxGreenTimeSecSouthNorth;
+	}
+	@JsonIgnore
+	public void setParamMaxGreenTimeSecSouthNorth(String o) {
+		this.paramMaxGreenTimeSecSouthNorth = SimulationReport.staticSetParamMaxGreenTimeSecSouthNorth(siteRequest_, o);
+	}
+	public static BigDecimal staticSetParamMaxGreenTimeSecSouthNorth(SiteRequestEnUS siteRequest_, String o) {
+		o = StringUtils.removeAll(o, "[^\\d\\.]");
+		if(NumberUtils.isParsable(o))
+			return new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		return null;
+	}
+	@JsonIgnore
+	public void setParamMaxGreenTimeSecSouthNorth(Double o) {
+		setParamMaxGreenTimeSecSouthNorth(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setParamMaxGreenTimeSecSouthNorth(Integer o) {
+		setParamMaxGreenTimeSecSouthNorth(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setParamMaxGreenTimeSecSouthNorth(Number o) {
+		setParamMaxGreenTimeSecSouthNorth(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	protected SimulationReport paramMaxGreenTimeSecSouthNorthInit() {
+		Wrap<BigDecimal> paramMaxGreenTimeSecSouthNorthWrap = new Wrap<BigDecimal>().var("paramMaxGreenTimeSecSouthNorth");
+		if(paramMaxGreenTimeSecSouthNorth == null) {
+			_paramMaxGreenTimeSecSouthNorth(paramMaxGreenTimeSecSouthNorthWrap);
+			setParamMaxGreenTimeSecSouthNorth(paramMaxGreenTimeSecSouthNorthWrap.o);
+		}
+		return (SimulationReport)this;
+	}
+
+	public static Double staticSearchParamMaxGreenTimeSecSouthNorth(SiteRequestEnUS siteRequest_, BigDecimal o) {
+		return o == null ? null : o.doubleValue();
+	}
+
+	public static String staticSearchStrParamMaxGreenTimeSecSouthNorth(SiteRequestEnUS siteRequest_, Double o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqParamMaxGreenTimeSecSouthNorth(SiteRequestEnUS siteRequest_, String o) {
+		return SimulationReport.staticSearchStrParamMaxGreenTimeSecSouthNorth(siteRequest_, SimulationReport.staticSearchParamMaxGreenTimeSecSouthNorth(siteRequest_, SimulationReport.staticSetParamMaxGreenTimeSecSouthNorth(siteRequest_, o)));
+	}
+
+	public BigDecimal sqlParamMaxGreenTimeSecSouthNorth() {
+		return paramMaxGreenTimeSecSouthNorth;
+	}
+
+	///////////////////////////////////////////////
+	// paramPedestrianWaitThresholdSecNorthSouth //
+	///////////////////////////////////////////////
+
+
+	/**	 The entity paramPedestrianWaitThresholdSecNorthSouth
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected BigDecimal paramPedestrianWaitThresholdSecNorthSouth;
+
+	/**	<br> The entity paramPedestrianWaitThresholdSecNorthSouth
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:paramPedestrianWaitThresholdSecNorthSouth">Find the entity paramPedestrianWaitThresholdSecNorthSouth in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _paramPedestrianWaitThresholdSecNorthSouth(Wrap<BigDecimal> w);
+
+	public BigDecimal getParamPedestrianWaitThresholdSecNorthSouth() {
+		return paramPedestrianWaitThresholdSecNorthSouth;
+	}
+
+	public void setParamPedestrianWaitThresholdSecNorthSouth(BigDecimal paramPedestrianWaitThresholdSecNorthSouth) {
+		this.paramPedestrianWaitThresholdSecNorthSouth = paramPedestrianWaitThresholdSecNorthSouth;
+	}
+	@JsonIgnore
+	public void setParamPedestrianWaitThresholdSecNorthSouth(String o) {
+		this.paramPedestrianWaitThresholdSecNorthSouth = SimulationReport.staticSetParamPedestrianWaitThresholdSecNorthSouth(siteRequest_, o);
+	}
+	public static BigDecimal staticSetParamPedestrianWaitThresholdSecNorthSouth(SiteRequestEnUS siteRequest_, String o) {
+		o = StringUtils.removeAll(o, "[^\\d\\.]");
+		if(NumberUtils.isParsable(o))
+			return new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		return null;
+	}
+	@JsonIgnore
+	public void setParamPedestrianWaitThresholdSecNorthSouth(Double o) {
+		setParamPedestrianWaitThresholdSecNorthSouth(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setParamPedestrianWaitThresholdSecNorthSouth(Integer o) {
+		setParamPedestrianWaitThresholdSecNorthSouth(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setParamPedestrianWaitThresholdSecNorthSouth(Number o) {
+		setParamPedestrianWaitThresholdSecNorthSouth(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	protected SimulationReport paramPedestrianWaitThresholdSecNorthSouthInit() {
+		Wrap<BigDecimal> paramPedestrianWaitThresholdSecNorthSouthWrap = new Wrap<BigDecimal>().var("paramPedestrianWaitThresholdSecNorthSouth");
+		if(paramPedestrianWaitThresholdSecNorthSouth == null) {
+			_paramPedestrianWaitThresholdSecNorthSouth(paramPedestrianWaitThresholdSecNorthSouthWrap);
+			setParamPedestrianWaitThresholdSecNorthSouth(paramPedestrianWaitThresholdSecNorthSouthWrap.o);
+		}
+		return (SimulationReport)this;
+	}
+
+	public static Double staticSearchParamPedestrianWaitThresholdSecNorthSouth(SiteRequestEnUS siteRequest_, BigDecimal o) {
+		return o == null ? null : o.doubleValue();
+	}
+
+	public static String staticSearchStrParamPedestrianWaitThresholdSecNorthSouth(SiteRequestEnUS siteRequest_, Double o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqParamPedestrianWaitThresholdSecNorthSouth(SiteRequestEnUS siteRequest_, String o) {
+		return SimulationReport.staticSearchStrParamPedestrianWaitThresholdSecNorthSouth(siteRequest_, SimulationReport.staticSearchParamPedestrianWaitThresholdSecNorthSouth(siteRequest_, SimulationReport.staticSetParamPedestrianWaitThresholdSecNorthSouth(siteRequest_, o)));
+	}
+
+	public BigDecimal sqlParamPedestrianWaitThresholdSecNorthSouth() {
+		return paramPedestrianWaitThresholdSecNorthSouth;
+	}
+
+	/////////////////////////////////////////////
+	// paramPedestrianWaitThresholdSecWestEast //
+	/////////////////////////////////////////////
+
+
+	/**	 The entity paramPedestrianWaitThresholdSecWestEast
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected BigDecimal paramPedestrianWaitThresholdSecWestEast;
+
+	/**	<br> The entity paramPedestrianWaitThresholdSecWestEast
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:paramPedestrianWaitThresholdSecWestEast">Find the entity paramPedestrianWaitThresholdSecWestEast in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _paramPedestrianWaitThresholdSecWestEast(Wrap<BigDecimal> w);
+
+	public BigDecimal getParamPedestrianWaitThresholdSecWestEast() {
+		return paramPedestrianWaitThresholdSecWestEast;
+	}
+
+	public void setParamPedestrianWaitThresholdSecWestEast(BigDecimal paramPedestrianWaitThresholdSecWestEast) {
+		this.paramPedestrianWaitThresholdSecWestEast = paramPedestrianWaitThresholdSecWestEast;
+	}
+	@JsonIgnore
+	public void setParamPedestrianWaitThresholdSecWestEast(String o) {
+		this.paramPedestrianWaitThresholdSecWestEast = SimulationReport.staticSetParamPedestrianWaitThresholdSecWestEast(siteRequest_, o);
+	}
+	public static BigDecimal staticSetParamPedestrianWaitThresholdSecWestEast(SiteRequestEnUS siteRequest_, String o) {
+		o = StringUtils.removeAll(o, "[^\\d\\.]");
+		if(NumberUtils.isParsable(o))
+			return new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		return null;
+	}
+	@JsonIgnore
+	public void setParamPedestrianWaitThresholdSecWestEast(Double o) {
+		setParamPedestrianWaitThresholdSecWestEast(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setParamPedestrianWaitThresholdSecWestEast(Integer o) {
+		setParamPedestrianWaitThresholdSecWestEast(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setParamPedestrianWaitThresholdSecWestEast(Number o) {
+		setParamPedestrianWaitThresholdSecWestEast(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	protected SimulationReport paramPedestrianWaitThresholdSecWestEastInit() {
+		Wrap<BigDecimal> paramPedestrianWaitThresholdSecWestEastWrap = new Wrap<BigDecimal>().var("paramPedestrianWaitThresholdSecWestEast");
+		if(paramPedestrianWaitThresholdSecWestEast == null) {
+			_paramPedestrianWaitThresholdSecWestEast(paramPedestrianWaitThresholdSecWestEastWrap);
+			setParamPedestrianWaitThresholdSecWestEast(paramPedestrianWaitThresholdSecWestEastWrap.o);
+		}
+		return (SimulationReport)this;
+	}
+
+	public static Double staticSearchParamPedestrianWaitThresholdSecWestEast(SiteRequestEnUS siteRequest_, BigDecimal o) {
+		return o == null ? null : o.doubleValue();
+	}
+
+	public static String staticSearchStrParamPedestrianWaitThresholdSecWestEast(SiteRequestEnUS siteRequest_, Double o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqParamPedestrianWaitThresholdSecWestEast(SiteRequestEnUS siteRequest_, String o) {
+		return SimulationReport.staticSearchStrParamPedestrianWaitThresholdSecWestEast(siteRequest_, SimulationReport.staticSearchParamPedestrianWaitThresholdSecWestEast(siteRequest_, SimulationReport.staticSetParamPedestrianWaitThresholdSecWestEast(siteRequest_, o)));
+	}
+
+	public BigDecimal sqlParamPedestrianWaitThresholdSecWestEast() {
+		return paramPedestrianWaitThresholdSecWestEast;
+	}
+
+	////////////////////////////////////////
+	// paramVehicleQueueThresholdWestEast //
+	////////////////////////////////////////
+
+
+	/**	 The entity paramVehicleQueueThresholdWestEast
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected BigDecimal paramVehicleQueueThresholdWestEast;
+
+	/**	<br> The entity paramVehicleQueueThresholdWestEast
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:paramVehicleQueueThresholdWestEast">Find the entity paramVehicleQueueThresholdWestEast in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _paramVehicleQueueThresholdWestEast(Wrap<BigDecimal> w);
+
+	public BigDecimal getParamVehicleQueueThresholdWestEast() {
+		return paramVehicleQueueThresholdWestEast;
+	}
+
+	public void setParamVehicleQueueThresholdWestEast(BigDecimal paramVehicleQueueThresholdWestEast) {
+		this.paramVehicleQueueThresholdWestEast = paramVehicleQueueThresholdWestEast;
+	}
+	@JsonIgnore
+	public void setParamVehicleQueueThresholdWestEast(String o) {
+		this.paramVehicleQueueThresholdWestEast = SimulationReport.staticSetParamVehicleQueueThresholdWestEast(siteRequest_, o);
+	}
+	public static BigDecimal staticSetParamVehicleQueueThresholdWestEast(SiteRequestEnUS siteRequest_, String o) {
+		o = StringUtils.removeAll(o, "[^\\d\\.]");
+		if(NumberUtils.isParsable(o))
+			return new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		return null;
+	}
+	@JsonIgnore
+	public void setParamVehicleQueueThresholdWestEast(Double o) {
+		setParamVehicleQueueThresholdWestEast(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setParamVehicleQueueThresholdWestEast(Integer o) {
+		setParamVehicleQueueThresholdWestEast(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setParamVehicleQueueThresholdWestEast(Number o) {
+		setParamVehicleQueueThresholdWestEast(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	protected SimulationReport paramVehicleQueueThresholdWestEastInit() {
+		Wrap<BigDecimal> paramVehicleQueueThresholdWestEastWrap = new Wrap<BigDecimal>().var("paramVehicleQueueThresholdWestEast");
+		if(paramVehicleQueueThresholdWestEast == null) {
+			_paramVehicleQueueThresholdWestEast(paramVehicleQueueThresholdWestEastWrap);
+			setParamVehicleQueueThresholdWestEast(paramVehicleQueueThresholdWestEastWrap.o);
+		}
+		return (SimulationReport)this;
+	}
+
+	public static Double staticSearchParamVehicleQueueThresholdWestEast(SiteRequestEnUS siteRequest_, BigDecimal o) {
+		return o == null ? null : o.doubleValue();
+	}
+
+	public static String staticSearchStrParamVehicleQueueThresholdWestEast(SiteRequestEnUS siteRequest_, Double o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqParamVehicleQueueThresholdWestEast(SiteRequestEnUS siteRequest_, String o) {
+		return SimulationReport.staticSearchStrParamVehicleQueueThresholdWestEast(siteRequest_, SimulationReport.staticSearchParamVehicleQueueThresholdWestEast(siteRequest_, SimulationReport.staticSetParamVehicleQueueThresholdWestEast(siteRequest_, o)));
+	}
+
+	public BigDecimal sqlParamVehicleQueueThresholdWestEast() {
+		return paramVehicleQueueThresholdWestEast;
+	}
+
+	//////////////////////////////////////////
+	// paramVehicleQueueThresholdSouthNorth //
+	//////////////////////////////////////////
+
+
+	/**	 The entity paramVehicleQueueThresholdSouthNorth
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected BigDecimal paramVehicleQueueThresholdSouthNorth;
+
+	/**	<br> The entity paramVehicleQueueThresholdSouthNorth
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:paramVehicleQueueThresholdSouthNorth">Find the entity paramVehicleQueueThresholdSouthNorth in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _paramVehicleQueueThresholdSouthNorth(Wrap<BigDecimal> w);
+
+	public BigDecimal getParamVehicleQueueThresholdSouthNorth() {
+		return paramVehicleQueueThresholdSouthNorth;
+	}
+
+	public void setParamVehicleQueueThresholdSouthNorth(BigDecimal paramVehicleQueueThresholdSouthNorth) {
+		this.paramVehicleQueueThresholdSouthNorth = paramVehicleQueueThresholdSouthNorth;
+	}
+	@JsonIgnore
+	public void setParamVehicleQueueThresholdSouthNorth(String o) {
+		this.paramVehicleQueueThresholdSouthNorth = SimulationReport.staticSetParamVehicleQueueThresholdSouthNorth(siteRequest_, o);
+	}
+	public static BigDecimal staticSetParamVehicleQueueThresholdSouthNorth(SiteRequestEnUS siteRequest_, String o) {
+		o = StringUtils.removeAll(o, "[^\\d\\.]");
+		if(NumberUtils.isParsable(o))
+			return new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		return null;
+	}
+	@JsonIgnore
+	public void setParamVehicleQueueThresholdSouthNorth(Double o) {
+		setParamVehicleQueueThresholdSouthNorth(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setParamVehicleQueueThresholdSouthNorth(Integer o) {
+		setParamVehicleQueueThresholdSouthNorth(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setParamVehicleQueueThresholdSouthNorth(Number o) {
+		setParamVehicleQueueThresholdSouthNorth(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	protected SimulationReport paramVehicleQueueThresholdSouthNorthInit() {
+		Wrap<BigDecimal> paramVehicleQueueThresholdSouthNorthWrap = new Wrap<BigDecimal>().var("paramVehicleQueueThresholdSouthNorth");
+		if(paramVehicleQueueThresholdSouthNorth == null) {
+			_paramVehicleQueueThresholdSouthNorth(paramVehicleQueueThresholdSouthNorthWrap);
+			setParamVehicleQueueThresholdSouthNorth(paramVehicleQueueThresholdSouthNorthWrap.o);
+		}
+		return (SimulationReport)this;
+	}
+
+	public static Double staticSearchParamVehicleQueueThresholdSouthNorth(SiteRequestEnUS siteRequest_, BigDecimal o) {
+		return o == null ? null : o.doubleValue();
+	}
+
+	public static String staticSearchStrParamVehicleQueueThresholdSouthNorth(SiteRequestEnUS siteRequest_, Double o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqParamVehicleQueueThresholdSouthNorth(SiteRequestEnUS siteRequest_, String o) {
+		return SimulationReport.staticSearchStrParamVehicleQueueThresholdSouthNorth(siteRequest_, SimulationReport.staticSearchParamVehicleQueueThresholdSouthNorth(siteRequest_, SimulationReport.staticSetParamVehicleQueueThresholdSouthNorth(siteRequest_, o)));
+	}
+
+	public BigDecimal sqlParamVehicleQueueThresholdSouthNorth() {
+		return paramVehicleQueueThresholdSouthNorth;
+	}
+
+	/////////////////////////////////////////////
+	// paramPedestrianQueueThresholdNorthSouth //
+	/////////////////////////////////////////////
+
+
+	/**	 The entity paramPedestrianQueueThresholdNorthSouth
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected BigDecimal paramPedestrianQueueThresholdNorthSouth;
+
+	/**	<br> The entity paramPedestrianQueueThresholdNorthSouth
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:paramPedestrianQueueThresholdNorthSouth">Find the entity paramPedestrianQueueThresholdNorthSouth in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _paramPedestrianQueueThresholdNorthSouth(Wrap<BigDecimal> w);
+
+	public BigDecimal getParamPedestrianQueueThresholdNorthSouth() {
+		return paramPedestrianQueueThresholdNorthSouth;
+	}
+
+	public void setParamPedestrianQueueThresholdNorthSouth(BigDecimal paramPedestrianQueueThresholdNorthSouth) {
+		this.paramPedestrianQueueThresholdNorthSouth = paramPedestrianQueueThresholdNorthSouth;
+	}
+	@JsonIgnore
+	public void setParamPedestrianQueueThresholdNorthSouth(String o) {
+		this.paramPedestrianQueueThresholdNorthSouth = SimulationReport.staticSetParamPedestrianQueueThresholdNorthSouth(siteRequest_, o);
+	}
+	public static BigDecimal staticSetParamPedestrianQueueThresholdNorthSouth(SiteRequestEnUS siteRequest_, String o) {
+		o = StringUtils.removeAll(o, "[^\\d\\.]");
+		if(NumberUtils.isParsable(o))
+			return new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		return null;
+	}
+	@JsonIgnore
+	public void setParamPedestrianQueueThresholdNorthSouth(Double o) {
+		setParamPedestrianQueueThresholdNorthSouth(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setParamPedestrianQueueThresholdNorthSouth(Integer o) {
+		setParamPedestrianQueueThresholdNorthSouth(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setParamPedestrianQueueThresholdNorthSouth(Number o) {
+		setParamPedestrianQueueThresholdNorthSouth(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	protected SimulationReport paramPedestrianQueueThresholdNorthSouthInit() {
+		Wrap<BigDecimal> paramPedestrianQueueThresholdNorthSouthWrap = new Wrap<BigDecimal>().var("paramPedestrianQueueThresholdNorthSouth");
+		if(paramPedestrianQueueThresholdNorthSouth == null) {
+			_paramPedestrianQueueThresholdNorthSouth(paramPedestrianQueueThresholdNorthSouthWrap);
+			setParamPedestrianQueueThresholdNorthSouth(paramPedestrianQueueThresholdNorthSouthWrap.o);
+		}
+		return (SimulationReport)this;
+	}
+
+	public static Double staticSearchParamPedestrianQueueThresholdNorthSouth(SiteRequestEnUS siteRequest_, BigDecimal o) {
+		return o == null ? null : o.doubleValue();
+	}
+
+	public static String staticSearchStrParamPedestrianQueueThresholdNorthSouth(SiteRequestEnUS siteRequest_, Double o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqParamPedestrianQueueThresholdNorthSouth(SiteRequestEnUS siteRequest_, String o) {
+		return SimulationReport.staticSearchStrParamPedestrianQueueThresholdNorthSouth(siteRequest_, SimulationReport.staticSearchParamPedestrianQueueThresholdNorthSouth(siteRequest_, SimulationReport.staticSetParamPedestrianQueueThresholdNorthSouth(siteRequest_, o)));
+	}
+
+	public BigDecimal sqlParamPedestrianQueueThresholdNorthSouth() {
+		return paramPedestrianQueueThresholdNorthSouth;
+	}
+
+	///////////////////////////////////////////
+	// paramPedestrianQueueThresholdWestEast //
+	///////////////////////////////////////////
+
+
+	/**	 The entity paramPedestrianQueueThresholdWestEast
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected BigDecimal paramPedestrianQueueThresholdWestEast;
+
+	/**	<br> The entity paramPedestrianQueueThresholdWestEast
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:paramPedestrianQueueThresholdWestEast">Find the entity paramPedestrianQueueThresholdWestEast in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _paramPedestrianQueueThresholdWestEast(Wrap<BigDecimal> w);
+
+	public BigDecimal getParamPedestrianQueueThresholdWestEast() {
+		return paramPedestrianQueueThresholdWestEast;
+	}
+
+	public void setParamPedestrianQueueThresholdWestEast(BigDecimal paramPedestrianQueueThresholdWestEast) {
+		this.paramPedestrianQueueThresholdWestEast = paramPedestrianQueueThresholdWestEast;
+	}
+	@JsonIgnore
+	public void setParamPedestrianQueueThresholdWestEast(String o) {
+		this.paramPedestrianQueueThresholdWestEast = SimulationReport.staticSetParamPedestrianQueueThresholdWestEast(siteRequest_, o);
+	}
+	public static BigDecimal staticSetParamPedestrianQueueThresholdWestEast(SiteRequestEnUS siteRequest_, String o) {
+		o = StringUtils.removeAll(o, "[^\\d\\.]");
+		if(NumberUtils.isParsable(o))
+			return new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		return null;
+	}
+	@JsonIgnore
+	public void setParamPedestrianQueueThresholdWestEast(Double o) {
+		setParamPedestrianQueueThresholdWestEast(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setParamPedestrianQueueThresholdWestEast(Integer o) {
+		setParamPedestrianQueueThresholdWestEast(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setParamPedestrianQueueThresholdWestEast(Number o) {
+		setParamPedestrianQueueThresholdWestEast(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	protected SimulationReport paramPedestrianQueueThresholdWestEastInit() {
+		Wrap<BigDecimal> paramPedestrianQueueThresholdWestEastWrap = new Wrap<BigDecimal>().var("paramPedestrianQueueThresholdWestEast");
+		if(paramPedestrianQueueThresholdWestEast == null) {
+			_paramPedestrianQueueThresholdWestEast(paramPedestrianQueueThresholdWestEastWrap);
+			setParamPedestrianQueueThresholdWestEast(paramPedestrianQueueThresholdWestEastWrap.o);
+		}
+		return (SimulationReport)this;
+	}
+
+	public static Double staticSearchParamPedestrianQueueThresholdWestEast(SiteRequestEnUS siteRequest_, BigDecimal o) {
+		return o == null ? null : o.doubleValue();
+	}
+
+	public static String staticSearchStrParamPedestrianQueueThresholdWestEast(SiteRequestEnUS siteRequest_, Double o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqParamPedestrianQueueThresholdWestEast(SiteRequestEnUS siteRequest_, String o) {
+		return SimulationReport.staticSearchStrParamPedestrianQueueThresholdWestEast(siteRequest_, SimulationReport.staticSearchParamPedestrianQueueThresholdWestEast(siteRequest_, SimulationReport.staticSetParamPedestrianQueueThresholdWestEast(siteRequest_, o)));
+	}
+
+	public BigDecimal sqlParamPedestrianQueueThresholdWestEast() {
+		return paramPedestrianQueueThresholdWestEast;
 	}
 
 	//////////////////////
@@ -710,6 +1805,103 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 
 	public BigDecimal sqlParamDemandScale() {
 		return paramDemandScale;
+	}
+
+	/////////////////////
+	// paramInitialPar //
+	/////////////////////
+
+
+	/**	 The entity paramInitialPar
+	 *	 It is constructed before being initialized with the constructor by default. 
+	 */
+	@JsonProperty
+	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
+	@JsonInclude(Include.NON_NULL)
+	protected List<BigDecimal> paramInitialPar = new ArrayList<BigDecimal>();
+
+	/**	<br> The entity paramInitialPar
+	 *  It is constructed before being initialized with the constructor by default. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:paramInitialPar">Find the entity paramInitialPar in Solr</a>
+	 * <br>
+	 * @param l is the entity already constructed. 
+	 **/
+	protected abstract void _paramInitialPar(List<BigDecimal> l);
+
+	public List<BigDecimal> getParamInitialPar() {
+		return paramInitialPar;
+	}
+
+	public void setParamInitialPar(List<BigDecimal> paramInitialPar) {
+		this.paramInitialPar = paramInitialPar;
+	}
+	@JsonIgnore
+	public void setParamInitialPar(String o) {
+		BigDecimal l = SimulationReport.staticSetParamInitialPar(siteRequest_, o);
+		if(l != null)
+			addParamInitialPar(l);
+	}
+	public static BigDecimal staticSetParamInitialPar(SiteRequestEnUS siteRequest_, String o) {
+		o = StringUtils.removeAll(o, "[^\\d\\.]");
+		if(NumberUtils.isParsable(o))
+			return new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		return null;
+	}
+	@JsonIgnore
+	public void setParamInitialPar(Double o) {
+		addParamInitialPar(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setParamInitialPar(Integer o) {
+		addParamInitialPar(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setParamInitialPar(Number o) {
+		addParamInitialPar(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	public SimulationReport addParamInitialPar(BigDecimal...objects) {
+		for(BigDecimal o : objects) {
+			addParamInitialPar(o);
+		}
+		return (SimulationReport)this;
+	}
+	public SimulationReport addParamInitialPar(BigDecimal o) {
+		if(o != null)
+			this.paramInitialPar.add(o);
+		return (SimulationReport)this;
+	}
+	@JsonIgnore
+	public void setParamInitialPar(JsonArray objects) {
+		paramInitialPar.clear();
+		if(objects == null)
+			return;
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
+			addParamInitialPar(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+		}
+	}
+	public SimulationReport addParamInitialPar(String o) {
+		if(NumberUtils.isParsable(o)) {
+			BigDecimal p = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+			addParamInitialPar(p);
+		}
+		return (SimulationReport)this;
+	}
+	protected SimulationReport paramInitialParInit() {
+		_paramInitialPar(paramInitialPar);
+		return (SimulationReport)this;
+	}
+
+	public static BigDecimal staticSearchParamInitialPar(SiteRequestEnUS siteRequest_, BigDecimal o) {
+		return o;
+	}
+
+	public static String staticSearchStrParamInitialPar(SiteRequestEnUS siteRequest_, BigDecimal o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqParamInitialPar(SiteRequestEnUS siteRequest_, String o) {
+		return SimulationReport.staticSearchStrParamInitialPar(siteRequest_, SimulationReport.staticSearchParamInitialPar(siteRequest_, SimulationReport.staticSetParamInitialPar(siteRequest_, o)));
 	}
 
 	///////////////////
@@ -911,68 +2103,6 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		return paramRunTime;
 	}
 
-	///////////////////////
-	// paramTotalIterNum //
-	///////////////////////
-
-
-	/**	 The entity paramTotalIterNum
-	 *	 is defined as null before being initialized. 
-	 */
-	@JsonProperty
-	@JsonSerialize(using = ToStringSerializer.class)
-	@JsonInclude(Include.NON_NULL)
-	protected Integer paramTotalIterNum;
-
-	/**	<br> The entity paramTotalIterNum
-	 *  is defined as null before being initialized. 
-	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:paramTotalIterNum">Find the entity paramTotalIterNum in Solr</a>
-	 * <br>
-	 * @param w is for wrapping a value to assign to this entity during initialization. 
-	 **/
-	protected abstract void _paramTotalIterNum(Wrap<Integer> w);
-
-	public Integer getParamTotalIterNum() {
-		return paramTotalIterNum;
-	}
-
-	public void setParamTotalIterNum(Integer paramTotalIterNum) {
-		this.paramTotalIterNum = paramTotalIterNum;
-	}
-	@JsonIgnore
-	public void setParamTotalIterNum(String o) {
-		this.paramTotalIterNum = SimulationReport.staticSetParamTotalIterNum(siteRequest_, o);
-	}
-	public static Integer staticSetParamTotalIterNum(SiteRequestEnUS siteRequest_, String o) {
-		if(NumberUtils.isParsable(o))
-			return Integer.parseInt(o);
-		return null;
-	}
-	protected SimulationReport paramTotalIterNumInit() {
-		Wrap<Integer> paramTotalIterNumWrap = new Wrap<Integer>().var("paramTotalIterNum");
-		if(paramTotalIterNum == null) {
-			_paramTotalIterNum(paramTotalIterNumWrap);
-			setParamTotalIterNum(paramTotalIterNumWrap.o);
-		}
-		return (SimulationReport)this;
-	}
-
-	public static Integer staticSearchParamTotalIterNum(SiteRequestEnUS siteRequest_, Integer o) {
-		return o;
-	}
-
-	public static String staticSearchStrParamTotalIterNum(SiteRequestEnUS siteRequest_, Integer o) {
-		return o == null ? null : o.toString();
-	}
-
-	public static String staticSearchFqParamTotalIterNum(SiteRequestEnUS siteRequest_, String o) {
-		return SimulationReport.staticSearchStrParamTotalIterNum(siteRequest_, SimulationReport.staticSearchParamTotalIterNum(siteRequest_, SimulationReport.staticSetParamTotalIterNum(siteRequest_, o)));
-	}
-
-	public Integer sqlParamTotalIterNum() {
-		return paramTotalIterNum;
-	}
-
 	//////////////////////
 	// paramItersPerPar //
 	//////////////////////
@@ -1033,6 +2163,68 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 
 	public Integer sqlParamItersPerPar() {
 		return paramItersPerPar;
+	}
+
+	///////////////////////
+	// paramTotalIterNum //
+	///////////////////////
+
+
+	/**	 The entity paramTotalIterNum
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected Integer paramTotalIterNum;
+
+	/**	<br> The entity paramTotalIterNum
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:paramTotalIterNum">Find the entity paramTotalIterNum in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _paramTotalIterNum(Wrap<Integer> w);
+
+	public Integer getParamTotalIterNum() {
+		return paramTotalIterNum;
+	}
+
+	public void setParamTotalIterNum(Integer paramTotalIterNum) {
+		this.paramTotalIterNum = paramTotalIterNum;
+	}
+	@JsonIgnore
+	public void setParamTotalIterNum(String o) {
+		this.paramTotalIterNum = SimulationReport.staticSetParamTotalIterNum(siteRequest_, o);
+	}
+	public static Integer staticSetParamTotalIterNum(SiteRequestEnUS siteRequest_, String o) {
+		if(NumberUtils.isParsable(o))
+			return Integer.parseInt(o);
+		return null;
+	}
+	protected SimulationReport paramTotalIterNumInit() {
+		Wrap<Integer> paramTotalIterNumWrap = new Wrap<Integer>().var("paramTotalIterNum");
+		if(paramTotalIterNum == null) {
+			_paramTotalIterNum(paramTotalIterNumWrap);
+			setParamTotalIterNum(paramTotalIterNumWrap.o);
+		}
+		return (SimulationReport)this;
+	}
+
+	public static Integer staticSearchParamTotalIterNum(SiteRequestEnUS siteRequest_, Integer o) {
+		return o;
+	}
+
+	public static String staticSearchStrParamTotalIterNum(SiteRequestEnUS siteRequest_, Integer o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqParamTotalIterNum(SiteRequestEnUS siteRequest_, String o) {
+		return SimulationReport.staticSearchStrParamTotalIterNum(siteRequest_, SimulationReport.staticSearchParamTotalIterNum(siteRequest_, SimulationReport.staticSetParamTotalIterNum(siteRequest_, o)));
+	}
+
+	public Integer sqlParamTotalIterNum() {
+		return paramTotalIterNum;
 	}
 
 	///////////////////////
@@ -1207,14 +2399,30 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			try {
 				simulation_Init();
 				simulationNameInit();
-				paramInitialParInit();
+				paramAvgVehiclePerMinFromWestToEastInit();
+				paramAvgVehiclePerMinFromSouthToNorthInit();
+				paramVehicleDemandScalingFactorInit();
+				paramAvgPedestrianPerMinFromWestToEastInit();
+				paramAvgPedestrianPerMinFromSouthToNorthInit();
+				paramPedestrianDemandScalingFactorInit();
 				paramLamInit();
+				paramMinGreenTimeSecWestEastInit();
+				paramMaxGreenTimeSecWestEastInit();
+				paramMinGreenTimeSecSouthNorthInit();
+				paramMaxGreenTimeSecSouthNorthInit();
+				paramPedestrianWaitThresholdSecNorthSouthInit();
+				paramPedestrianWaitThresholdSecWestEastInit();
+				paramVehicleQueueThresholdWestEastInit();
+				paramVehicleQueueThresholdSouthNorthInit();
+				paramPedestrianQueueThresholdNorthSouthInit();
+				paramPedestrianQueueThresholdWestEastInit();
 				paramDemandScaleInit();
+				paramInitialParInit();
 				paramStepSizeInit();
 				paramUpdateStepSizeInit();
 				paramRunTimeInit();
-				paramTotalIterNumInit();
 				paramItersPerParInit();
+				paramTotalIterNumInit();
 				updatedParametersInit();
 				updatedPerformanceInit();
 				promise2.complete();
@@ -1278,22 +2486,54 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 				return oSimulationReport.simulation_;
 			case "simulationName":
 				return oSimulationReport.simulationName;
-			case "paramInitialPar":
-				return oSimulationReport.paramInitialPar;
+			case "paramAvgVehiclePerMinFromWestToEast":
+				return oSimulationReport.paramAvgVehiclePerMinFromWestToEast;
+			case "paramAvgVehiclePerMinFromSouthToNorth":
+				return oSimulationReport.paramAvgVehiclePerMinFromSouthToNorth;
+			case "paramVehicleDemandScalingFactor":
+				return oSimulationReport.paramVehicleDemandScalingFactor;
+			case "paramAvgPedestrianPerMinFromWestToEast":
+				return oSimulationReport.paramAvgPedestrianPerMinFromWestToEast;
+			case "paramAvgPedestrianPerMinFromSouthToNorth":
+				return oSimulationReport.paramAvgPedestrianPerMinFromSouthToNorth;
+			case "paramPedestrianDemandScalingFactor":
+				return oSimulationReport.paramPedestrianDemandScalingFactor;
 			case "paramLam":
 				return oSimulationReport.paramLam;
+			case "paramMinGreenTimeSecWestEast":
+				return oSimulationReport.paramMinGreenTimeSecWestEast;
+			case "paramMaxGreenTimeSecWestEast":
+				return oSimulationReport.paramMaxGreenTimeSecWestEast;
+			case "paramMinGreenTimeSecSouthNorth":
+				return oSimulationReport.paramMinGreenTimeSecSouthNorth;
+			case "paramMaxGreenTimeSecSouthNorth":
+				return oSimulationReport.paramMaxGreenTimeSecSouthNorth;
+			case "paramPedestrianWaitThresholdSecNorthSouth":
+				return oSimulationReport.paramPedestrianWaitThresholdSecNorthSouth;
+			case "paramPedestrianWaitThresholdSecWestEast":
+				return oSimulationReport.paramPedestrianWaitThresholdSecWestEast;
+			case "paramVehicleQueueThresholdWestEast":
+				return oSimulationReport.paramVehicleQueueThresholdWestEast;
+			case "paramVehicleQueueThresholdSouthNorth":
+				return oSimulationReport.paramVehicleQueueThresholdSouthNorth;
+			case "paramPedestrianQueueThresholdNorthSouth":
+				return oSimulationReport.paramPedestrianQueueThresholdNorthSouth;
+			case "paramPedestrianQueueThresholdWestEast":
+				return oSimulationReport.paramPedestrianQueueThresholdWestEast;
 			case "paramDemandScale":
 				return oSimulationReport.paramDemandScale;
+			case "paramInitialPar":
+				return oSimulationReport.paramInitialPar;
 			case "paramStepSize":
 				return oSimulationReport.paramStepSize;
 			case "paramUpdateStepSize":
 				return oSimulationReport.paramUpdateStepSize;
 			case "paramRunTime":
 				return oSimulationReport.paramRunTime;
-			case "paramTotalIterNum":
-				return oSimulationReport.paramTotalIterNum;
 			case "paramItersPerPar":
 				return oSimulationReport.paramItersPerPar;
+			case "paramTotalIterNum":
+				return oSimulationReport.paramTotalIterNum;
 			case "updatedParameters":
 				return oSimulationReport.updatedParameters;
 			case "updatedPerformance":
@@ -1347,22 +2587,54 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return SimulationReport.staticSetSimulationKey(siteRequest_, o);
 		case "simulationName":
 			return SimulationReport.staticSetSimulationName(siteRequest_, o);
-		case "paramInitialPar":
-			return SimulationReport.staticSetParamInitialPar(siteRequest_, o);
+		case "paramAvgVehiclePerMinFromWestToEast":
+			return SimulationReport.staticSetParamAvgVehiclePerMinFromWestToEast(siteRequest_, o);
+		case "paramAvgVehiclePerMinFromSouthToNorth":
+			return SimulationReport.staticSetParamAvgVehiclePerMinFromSouthToNorth(siteRequest_, o);
+		case "paramVehicleDemandScalingFactor":
+			return SimulationReport.staticSetParamVehicleDemandScalingFactor(siteRequest_, o);
+		case "paramAvgPedestrianPerMinFromWestToEast":
+			return SimulationReport.staticSetParamAvgPedestrianPerMinFromWestToEast(siteRequest_, o);
+		case "paramAvgPedestrianPerMinFromSouthToNorth":
+			return SimulationReport.staticSetParamAvgPedestrianPerMinFromSouthToNorth(siteRequest_, o);
+		case "paramPedestrianDemandScalingFactor":
+			return SimulationReport.staticSetParamPedestrianDemandScalingFactor(siteRequest_, o);
 		case "paramLam":
 			return SimulationReport.staticSetParamLam(siteRequest_, o);
+		case "paramMinGreenTimeSecWestEast":
+			return SimulationReport.staticSetParamMinGreenTimeSecWestEast(siteRequest_, o);
+		case "paramMaxGreenTimeSecWestEast":
+			return SimulationReport.staticSetParamMaxGreenTimeSecWestEast(siteRequest_, o);
+		case "paramMinGreenTimeSecSouthNorth":
+			return SimulationReport.staticSetParamMinGreenTimeSecSouthNorth(siteRequest_, o);
+		case "paramMaxGreenTimeSecSouthNorth":
+			return SimulationReport.staticSetParamMaxGreenTimeSecSouthNorth(siteRequest_, o);
+		case "paramPedestrianWaitThresholdSecNorthSouth":
+			return SimulationReport.staticSetParamPedestrianWaitThresholdSecNorthSouth(siteRequest_, o);
+		case "paramPedestrianWaitThresholdSecWestEast":
+			return SimulationReport.staticSetParamPedestrianWaitThresholdSecWestEast(siteRequest_, o);
+		case "paramVehicleQueueThresholdWestEast":
+			return SimulationReport.staticSetParamVehicleQueueThresholdWestEast(siteRequest_, o);
+		case "paramVehicleQueueThresholdSouthNorth":
+			return SimulationReport.staticSetParamVehicleQueueThresholdSouthNorth(siteRequest_, o);
+		case "paramPedestrianQueueThresholdNorthSouth":
+			return SimulationReport.staticSetParamPedestrianQueueThresholdNorthSouth(siteRequest_, o);
+		case "paramPedestrianQueueThresholdWestEast":
+			return SimulationReport.staticSetParamPedestrianQueueThresholdWestEast(siteRequest_, o);
 		case "paramDemandScale":
 			return SimulationReport.staticSetParamDemandScale(siteRequest_, o);
+		case "paramInitialPar":
+			return SimulationReport.staticSetParamInitialPar(siteRequest_, o);
 		case "paramStepSize":
 			return SimulationReport.staticSetParamStepSize(siteRequest_, o);
 		case "paramUpdateStepSize":
 			return SimulationReport.staticSetParamUpdateStepSize(siteRequest_, o);
 		case "paramRunTime":
 			return SimulationReport.staticSetParamRunTime(siteRequest_, o);
-		case "paramTotalIterNum":
-			return SimulationReport.staticSetParamTotalIterNum(siteRequest_, o);
 		case "paramItersPerPar":
 			return SimulationReport.staticSetParamItersPerPar(siteRequest_, o);
+		case "paramTotalIterNum":
+			return SimulationReport.staticSetParamTotalIterNum(siteRequest_, o);
 		case "updatedParameters":
 			return SimulationReport.staticSetUpdatedParameters(siteRequest_, o);
 		case "updatedPerformance":
@@ -1385,22 +2657,54 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return SimulationReport.staticSearchSimulationKey(siteRequest_, (Long)o);
 		case "simulationName":
 			return SimulationReport.staticSearchSimulationName(siteRequest_, (String)o);
-		case "paramInitialPar":
-			return SimulationReport.staticSearchParamInitialPar(siteRequest_, (BigDecimal)o);
+		case "paramAvgVehiclePerMinFromWestToEast":
+			return SimulationReport.staticSearchParamAvgVehiclePerMinFromWestToEast(siteRequest_, (BigDecimal)o);
+		case "paramAvgVehiclePerMinFromSouthToNorth":
+			return SimulationReport.staticSearchParamAvgVehiclePerMinFromSouthToNorth(siteRequest_, (BigDecimal)o);
+		case "paramVehicleDemandScalingFactor":
+			return SimulationReport.staticSearchParamVehicleDemandScalingFactor(siteRequest_, (BigDecimal)o);
+		case "paramAvgPedestrianPerMinFromWestToEast":
+			return SimulationReport.staticSearchParamAvgPedestrianPerMinFromWestToEast(siteRequest_, (BigDecimal)o);
+		case "paramAvgPedestrianPerMinFromSouthToNorth":
+			return SimulationReport.staticSearchParamAvgPedestrianPerMinFromSouthToNorth(siteRequest_, (BigDecimal)o);
+		case "paramPedestrianDemandScalingFactor":
+			return SimulationReport.staticSearchParamPedestrianDemandScalingFactor(siteRequest_, (BigDecimal)o);
 		case "paramLam":
 			return SimulationReport.staticSearchParamLam(siteRequest_, (BigDecimal)o);
+		case "paramMinGreenTimeSecWestEast":
+			return SimulationReport.staticSearchParamMinGreenTimeSecWestEast(siteRequest_, (BigDecimal)o);
+		case "paramMaxGreenTimeSecWestEast":
+			return SimulationReport.staticSearchParamMaxGreenTimeSecWestEast(siteRequest_, (BigDecimal)o);
+		case "paramMinGreenTimeSecSouthNorth":
+			return SimulationReport.staticSearchParamMinGreenTimeSecSouthNorth(siteRequest_, (BigDecimal)o);
+		case "paramMaxGreenTimeSecSouthNorth":
+			return SimulationReport.staticSearchParamMaxGreenTimeSecSouthNorth(siteRequest_, (BigDecimal)o);
+		case "paramPedestrianWaitThresholdSecNorthSouth":
+			return SimulationReport.staticSearchParamPedestrianWaitThresholdSecNorthSouth(siteRequest_, (BigDecimal)o);
+		case "paramPedestrianWaitThresholdSecWestEast":
+			return SimulationReport.staticSearchParamPedestrianWaitThresholdSecWestEast(siteRequest_, (BigDecimal)o);
+		case "paramVehicleQueueThresholdWestEast":
+			return SimulationReport.staticSearchParamVehicleQueueThresholdWestEast(siteRequest_, (BigDecimal)o);
+		case "paramVehicleQueueThresholdSouthNorth":
+			return SimulationReport.staticSearchParamVehicleQueueThresholdSouthNorth(siteRequest_, (BigDecimal)o);
+		case "paramPedestrianQueueThresholdNorthSouth":
+			return SimulationReport.staticSearchParamPedestrianQueueThresholdNorthSouth(siteRequest_, (BigDecimal)o);
+		case "paramPedestrianQueueThresholdWestEast":
+			return SimulationReport.staticSearchParamPedestrianQueueThresholdWestEast(siteRequest_, (BigDecimal)o);
 		case "paramDemandScale":
 			return SimulationReport.staticSearchParamDemandScale(siteRequest_, (BigDecimal)o);
+		case "paramInitialPar":
+			return SimulationReport.staticSearchParamInitialPar(siteRequest_, (BigDecimal)o);
 		case "paramStepSize":
 			return SimulationReport.staticSearchParamStepSize(siteRequest_, (BigDecimal)o);
 		case "paramUpdateStepSize":
 			return SimulationReport.staticSearchParamUpdateStepSize(siteRequest_, (Integer)o);
 		case "paramRunTime":
 			return SimulationReport.staticSearchParamRunTime(siteRequest_, (Integer)o);
-		case "paramTotalIterNum":
-			return SimulationReport.staticSearchParamTotalIterNum(siteRequest_, (Integer)o);
 		case "paramItersPerPar":
 			return SimulationReport.staticSearchParamItersPerPar(siteRequest_, (Integer)o);
+		case "paramTotalIterNum":
+			return SimulationReport.staticSearchParamTotalIterNum(siteRequest_, (Integer)o);
 		case "updatedParameters":
 			return SimulationReport.staticSearchUpdatedParameters(siteRequest_, (JsonArray)o);
 		case "updatedPerformance":
@@ -1423,22 +2727,54 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return SimulationReport.staticSearchStrSimulationKey(siteRequest_, (Long)o);
 		case "simulationName":
 			return SimulationReport.staticSearchStrSimulationName(siteRequest_, (String)o);
-		case "paramInitialPar":
-			return SimulationReport.staticSearchStrParamInitialPar(siteRequest_, (BigDecimal)o);
+		case "paramAvgVehiclePerMinFromWestToEast":
+			return SimulationReport.staticSearchStrParamAvgVehiclePerMinFromWestToEast(siteRequest_, (Double)o);
+		case "paramAvgVehiclePerMinFromSouthToNorth":
+			return SimulationReport.staticSearchStrParamAvgVehiclePerMinFromSouthToNorth(siteRequest_, (Double)o);
+		case "paramVehicleDemandScalingFactor":
+			return SimulationReport.staticSearchStrParamVehicleDemandScalingFactor(siteRequest_, (Double)o);
+		case "paramAvgPedestrianPerMinFromWestToEast":
+			return SimulationReport.staticSearchStrParamAvgPedestrianPerMinFromWestToEast(siteRequest_, (Double)o);
+		case "paramAvgPedestrianPerMinFromSouthToNorth":
+			return SimulationReport.staticSearchStrParamAvgPedestrianPerMinFromSouthToNorth(siteRequest_, (Double)o);
+		case "paramPedestrianDemandScalingFactor":
+			return SimulationReport.staticSearchStrParamPedestrianDemandScalingFactor(siteRequest_, (Double)o);
 		case "paramLam":
 			return SimulationReport.staticSearchStrParamLam(siteRequest_, (BigDecimal)o);
+		case "paramMinGreenTimeSecWestEast":
+			return SimulationReport.staticSearchStrParamMinGreenTimeSecWestEast(siteRequest_, (Double)o);
+		case "paramMaxGreenTimeSecWestEast":
+			return SimulationReport.staticSearchStrParamMaxGreenTimeSecWestEast(siteRequest_, (Double)o);
+		case "paramMinGreenTimeSecSouthNorth":
+			return SimulationReport.staticSearchStrParamMinGreenTimeSecSouthNorth(siteRequest_, (Double)o);
+		case "paramMaxGreenTimeSecSouthNorth":
+			return SimulationReport.staticSearchStrParamMaxGreenTimeSecSouthNorth(siteRequest_, (Double)o);
+		case "paramPedestrianWaitThresholdSecNorthSouth":
+			return SimulationReport.staticSearchStrParamPedestrianWaitThresholdSecNorthSouth(siteRequest_, (Double)o);
+		case "paramPedestrianWaitThresholdSecWestEast":
+			return SimulationReport.staticSearchStrParamPedestrianWaitThresholdSecWestEast(siteRequest_, (Double)o);
+		case "paramVehicleQueueThresholdWestEast":
+			return SimulationReport.staticSearchStrParamVehicleQueueThresholdWestEast(siteRequest_, (Double)o);
+		case "paramVehicleQueueThresholdSouthNorth":
+			return SimulationReport.staticSearchStrParamVehicleQueueThresholdSouthNorth(siteRequest_, (Double)o);
+		case "paramPedestrianQueueThresholdNorthSouth":
+			return SimulationReport.staticSearchStrParamPedestrianQueueThresholdNorthSouth(siteRequest_, (Double)o);
+		case "paramPedestrianQueueThresholdWestEast":
+			return SimulationReport.staticSearchStrParamPedestrianQueueThresholdWestEast(siteRequest_, (Double)o);
 		case "paramDemandScale":
 			return SimulationReport.staticSearchStrParamDemandScale(siteRequest_, (Double)o);
+		case "paramInitialPar":
+			return SimulationReport.staticSearchStrParamInitialPar(siteRequest_, (BigDecimal)o);
 		case "paramStepSize":
 			return SimulationReport.staticSearchStrParamStepSize(siteRequest_, (Double)o);
 		case "paramUpdateStepSize":
 			return SimulationReport.staticSearchStrParamUpdateStepSize(siteRequest_, (Integer)o);
 		case "paramRunTime":
 			return SimulationReport.staticSearchStrParamRunTime(siteRequest_, (Integer)o);
-		case "paramTotalIterNum":
-			return SimulationReport.staticSearchStrParamTotalIterNum(siteRequest_, (Integer)o);
 		case "paramItersPerPar":
 			return SimulationReport.staticSearchStrParamItersPerPar(siteRequest_, (Integer)o);
+		case "paramTotalIterNum":
+			return SimulationReport.staticSearchStrParamTotalIterNum(siteRequest_, (Integer)o);
 		case "updatedParameters":
 			return SimulationReport.staticSearchStrUpdatedParameters(siteRequest_, (JsonArray)o);
 		case "updatedPerformance":
@@ -1461,22 +2797,54 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return SimulationReport.staticSearchFqSimulationKey(siteRequest_, o);
 		case "simulationName":
 			return SimulationReport.staticSearchFqSimulationName(siteRequest_, o);
-		case "paramInitialPar":
-			return SimulationReport.staticSearchFqParamInitialPar(siteRequest_, o);
+		case "paramAvgVehiclePerMinFromWestToEast":
+			return SimulationReport.staticSearchFqParamAvgVehiclePerMinFromWestToEast(siteRequest_, o);
+		case "paramAvgVehiclePerMinFromSouthToNorth":
+			return SimulationReport.staticSearchFqParamAvgVehiclePerMinFromSouthToNorth(siteRequest_, o);
+		case "paramVehicleDemandScalingFactor":
+			return SimulationReport.staticSearchFqParamVehicleDemandScalingFactor(siteRequest_, o);
+		case "paramAvgPedestrianPerMinFromWestToEast":
+			return SimulationReport.staticSearchFqParamAvgPedestrianPerMinFromWestToEast(siteRequest_, o);
+		case "paramAvgPedestrianPerMinFromSouthToNorth":
+			return SimulationReport.staticSearchFqParamAvgPedestrianPerMinFromSouthToNorth(siteRequest_, o);
+		case "paramPedestrianDemandScalingFactor":
+			return SimulationReport.staticSearchFqParamPedestrianDemandScalingFactor(siteRequest_, o);
 		case "paramLam":
 			return SimulationReport.staticSearchFqParamLam(siteRequest_, o);
+		case "paramMinGreenTimeSecWestEast":
+			return SimulationReport.staticSearchFqParamMinGreenTimeSecWestEast(siteRequest_, o);
+		case "paramMaxGreenTimeSecWestEast":
+			return SimulationReport.staticSearchFqParamMaxGreenTimeSecWestEast(siteRequest_, o);
+		case "paramMinGreenTimeSecSouthNorth":
+			return SimulationReport.staticSearchFqParamMinGreenTimeSecSouthNorth(siteRequest_, o);
+		case "paramMaxGreenTimeSecSouthNorth":
+			return SimulationReport.staticSearchFqParamMaxGreenTimeSecSouthNorth(siteRequest_, o);
+		case "paramPedestrianWaitThresholdSecNorthSouth":
+			return SimulationReport.staticSearchFqParamPedestrianWaitThresholdSecNorthSouth(siteRequest_, o);
+		case "paramPedestrianWaitThresholdSecWestEast":
+			return SimulationReport.staticSearchFqParamPedestrianWaitThresholdSecWestEast(siteRequest_, o);
+		case "paramVehicleQueueThresholdWestEast":
+			return SimulationReport.staticSearchFqParamVehicleQueueThresholdWestEast(siteRequest_, o);
+		case "paramVehicleQueueThresholdSouthNorth":
+			return SimulationReport.staticSearchFqParamVehicleQueueThresholdSouthNorth(siteRequest_, o);
+		case "paramPedestrianQueueThresholdNorthSouth":
+			return SimulationReport.staticSearchFqParamPedestrianQueueThresholdNorthSouth(siteRequest_, o);
+		case "paramPedestrianQueueThresholdWestEast":
+			return SimulationReport.staticSearchFqParamPedestrianQueueThresholdWestEast(siteRequest_, o);
 		case "paramDemandScale":
 			return SimulationReport.staticSearchFqParamDemandScale(siteRequest_, o);
+		case "paramInitialPar":
+			return SimulationReport.staticSearchFqParamInitialPar(siteRequest_, o);
 		case "paramStepSize":
 			return SimulationReport.staticSearchFqParamStepSize(siteRequest_, o);
 		case "paramUpdateStepSize":
 			return SimulationReport.staticSearchFqParamUpdateStepSize(siteRequest_, o);
 		case "paramRunTime":
 			return SimulationReport.staticSearchFqParamRunTime(siteRequest_, o);
-		case "paramTotalIterNum":
-			return SimulationReport.staticSearchFqParamTotalIterNum(siteRequest_, o);
 		case "paramItersPerPar":
 			return SimulationReport.staticSearchFqParamItersPerPar(siteRequest_, o);
+		case "paramTotalIterNum":
+			return SimulationReport.staticSearchFqParamTotalIterNum(siteRequest_, o);
 		case "updatedParameters":
 			return SimulationReport.staticSearchFqUpdatedParameters(siteRequest_, o);
 		case "updatedPerformance":
@@ -1521,33 +2889,133 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 				}
 				saves.add("simulationName");
 				return val;
-			} else if("paraminitialpar".equals(varLower)) {
-				if(val instanceof List<?>) {
-					((List<BigDecimal>)val).stream().forEach(v -> addParamInitialPar(v));
-				} else if(val instanceof JsonArray) {
-					((JsonArray)val).stream().forEach(v -> setParamInitialPar(v.toString()));
-				} else if(val instanceof BigDecimal[]) {
-					Arrays.asList((BigDecimal[])val).stream().forEach(v -> setParamInitialPar((BigDecimal)v));
-				} else if(val instanceof Number[]) {
-					Arrays.asList((Number[])val).stream().forEach(v -> setParamInitialPar((Number)v));
+			} else if("paramavgvehicleperminfromwesttoeast".equals(varLower)) {
+				if(val instanceof String) {
+					setParamAvgVehiclePerMinFromWestToEast((String)val);
+				} else if(val instanceof Number) {
+					setParamAvgVehiclePerMinFromWestToEast(new BigDecimal(((Number)val).doubleValue()));
 				}
-				if(!saves.contains("paramInitialPar")) {
-					saves.add("paramInitialPar");
-				}
+				saves.add("paramAvgVehiclePerMinFromWestToEast");
 				return val;
-			} else if("paramlam".equals(varLower)) {
-				if(val instanceof List<?>) {
-					((List<BigDecimal>)val).stream().forEach(v -> addParamLam(v));
-				} else if(val instanceof JsonArray) {
-					((JsonArray)val).stream().forEach(v -> setParamLam(v.toString()));
-				} else if(val instanceof BigDecimal[]) {
-					Arrays.asList((BigDecimal[])val).stream().forEach(v -> setParamLam((BigDecimal)v));
-				} else if(val instanceof Number[]) {
-					Arrays.asList((Number[])val).stream().forEach(v -> setParamLam((Number)v));
+			} else if("paramavgvehicleperminfromsouthtonorth".equals(varLower)) {
+				if(val instanceof String) {
+					setParamAvgVehiclePerMinFromSouthToNorth((String)val);
+				} else if(val instanceof Number) {
+					setParamAvgVehiclePerMinFromSouthToNorth(new BigDecimal(((Number)val).doubleValue()));
 				}
-				if(!saves.contains("paramLam")) {
-					saves.add("paramLam");
+				saves.add("paramAvgVehiclePerMinFromSouthToNorth");
+				return val;
+			} else if("paramvehicledemandscalingfactor".equals(varLower)) {
+				if(val instanceof String) {
+					setParamVehicleDemandScalingFactor((String)val);
+				} else if(val instanceof Number) {
+					setParamVehicleDemandScalingFactor(new BigDecimal(((Number)val).doubleValue()));
 				}
+				saves.add("paramVehicleDemandScalingFactor");
+				return val;
+			} else if("paramavgpedestrianperminfromwesttoeast".equals(varLower)) {
+				if(val instanceof String) {
+					setParamAvgPedestrianPerMinFromWestToEast((String)val);
+				} else if(val instanceof Number) {
+					setParamAvgPedestrianPerMinFromWestToEast(new BigDecimal(((Number)val).doubleValue()));
+				}
+				saves.add("paramAvgPedestrianPerMinFromWestToEast");
+				return val;
+			} else if("paramavgpedestrianperminfromsouthtonorth".equals(varLower)) {
+				if(val instanceof String) {
+					setParamAvgPedestrianPerMinFromSouthToNorth((String)val);
+				} else if(val instanceof Number) {
+					setParamAvgPedestrianPerMinFromSouthToNorth(new BigDecimal(((Number)val).doubleValue()));
+				}
+				saves.add("paramAvgPedestrianPerMinFromSouthToNorth");
+				return val;
+			} else if("parampedestriandemandscalingfactor".equals(varLower)) {
+				if(val instanceof String) {
+					setParamPedestrianDemandScalingFactor((String)val);
+				} else if(val instanceof Number) {
+					setParamPedestrianDemandScalingFactor(new BigDecimal(((Number)val).doubleValue()));
+				}
+				saves.add("paramPedestrianDemandScalingFactor");
+				return val;
+			} else if("parammingreentimesecwesteast".equals(varLower)) {
+				if(val instanceof String) {
+					setParamMinGreenTimeSecWestEast((String)val);
+				} else if(val instanceof Number) {
+					setParamMinGreenTimeSecWestEast(new BigDecimal(((Number)val).doubleValue()));
+				}
+				saves.add("paramMinGreenTimeSecWestEast");
+				return val;
+			} else if("parammaxgreentimesecwesteast".equals(varLower)) {
+				if(val instanceof String) {
+					setParamMaxGreenTimeSecWestEast((String)val);
+				} else if(val instanceof Number) {
+					setParamMaxGreenTimeSecWestEast(new BigDecimal(((Number)val).doubleValue()));
+				}
+				saves.add("paramMaxGreenTimeSecWestEast");
+				return val;
+			} else if("parammingreentimesecsouthnorth".equals(varLower)) {
+				if(val instanceof String) {
+					setParamMinGreenTimeSecSouthNorth((String)val);
+				} else if(val instanceof Number) {
+					setParamMinGreenTimeSecSouthNorth(new BigDecimal(((Number)val).doubleValue()));
+				}
+				saves.add("paramMinGreenTimeSecSouthNorth");
+				return val;
+			} else if("parammaxgreentimesecsouthnorth".equals(varLower)) {
+				if(val instanceof String) {
+					setParamMaxGreenTimeSecSouthNorth((String)val);
+				} else if(val instanceof Number) {
+					setParamMaxGreenTimeSecSouthNorth(new BigDecimal(((Number)val).doubleValue()));
+				}
+				saves.add("paramMaxGreenTimeSecSouthNorth");
+				return val;
+			} else if("parampedestrianwaitthresholdsecnorthsouth".equals(varLower)) {
+				if(val instanceof String) {
+					setParamPedestrianWaitThresholdSecNorthSouth((String)val);
+				} else if(val instanceof Number) {
+					setParamPedestrianWaitThresholdSecNorthSouth(new BigDecimal(((Number)val).doubleValue()));
+				}
+				saves.add("paramPedestrianWaitThresholdSecNorthSouth");
+				return val;
+			} else if("parampedestrianwaitthresholdsecwesteast".equals(varLower)) {
+				if(val instanceof String) {
+					setParamPedestrianWaitThresholdSecWestEast((String)val);
+				} else if(val instanceof Number) {
+					setParamPedestrianWaitThresholdSecWestEast(new BigDecimal(((Number)val).doubleValue()));
+				}
+				saves.add("paramPedestrianWaitThresholdSecWestEast");
+				return val;
+			} else if("paramvehiclequeuethresholdwesteast".equals(varLower)) {
+				if(val instanceof String) {
+					setParamVehicleQueueThresholdWestEast((String)val);
+				} else if(val instanceof Number) {
+					setParamVehicleQueueThresholdWestEast(new BigDecimal(((Number)val).doubleValue()));
+				}
+				saves.add("paramVehicleQueueThresholdWestEast");
+				return val;
+			} else if("paramvehiclequeuethresholdsouthnorth".equals(varLower)) {
+				if(val instanceof String) {
+					setParamVehicleQueueThresholdSouthNorth((String)val);
+				} else if(val instanceof Number) {
+					setParamVehicleQueueThresholdSouthNorth(new BigDecimal(((Number)val).doubleValue()));
+				}
+				saves.add("paramVehicleQueueThresholdSouthNorth");
+				return val;
+			} else if("parampedestrianqueuethresholdnorthsouth".equals(varLower)) {
+				if(val instanceof String) {
+					setParamPedestrianQueueThresholdNorthSouth((String)val);
+				} else if(val instanceof Number) {
+					setParamPedestrianQueueThresholdNorthSouth(new BigDecimal(((Number)val).doubleValue()));
+				}
+				saves.add("paramPedestrianQueueThresholdNorthSouth");
+				return val;
+			} else if("parampedestrianqueuethresholdwesteast".equals(varLower)) {
+				if(val instanceof String) {
+					setParamPedestrianQueueThresholdWestEast((String)val);
+				} else if(val instanceof Number) {
+					setParamPedestrianQueueThresholdWestEast(new BigDecimal(((Number)val).doubleValue()));
+				}
+				saves.add("paramPedestrianQueueThresholdWestEast");
 				return val;
 			} else if("paramdemandscale".equals(varLower)) {
 				if(val instanceof String) {
@@ -1581,14 +3049,6 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 				}
 				saves.add("paramRunTime");
 				return val;
-			} else if("paramtotaliternum".equals(varLower)) {
-				if(val instanceof Integer) {
-					setParamTotalIterNum((Integer)val);
-				} else {
-					setParamTotalIterNum(val == null ? null : val.toString());
-				}
-				saves.add("paramTotalIterNum");
-				return val;
 			} else if("paramitersperpar".equals(varLower)) {
 				if(val instanceof Integer) {
 					setParamItersPerPar((Integer)val);
@@ -1596,6 +3056,14 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 					setParamItersPerPar(val == null ? null : val.toString());
 				}
 				saves.add("paramItersPerPar");
+				return val;
+			} else if("paramtotaliternum".equals(varLower)) {
+				if(val instanceof Integer) {
+					setParamTotalIterNum((Integer)val);
+				} else {
+					setParamTotalIterNum(val == null ? null : val.toString());
+				}
+				saves.add("paramTotalIterNum");
 				return val;
 			} else if("updatedparameters".equals(varLower)) {
 				if(val instanceof String) {
@@ -1641,12 +3109,23 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		if(simulationName != null) {
 			doc.put("simulationName_docvalues_string", simulationName);
 		}
-		if(paramInitialPar != null) {
-			JsonArray l = new JsonArray();
-			doc.put("paramInitialPar_docvalues_doubles", l);
-			for(BigDecimal o : paramInitialPar) {
-				l.add(o);
-			}
+		if(paramAvgVehiclePerMinFromWestToEast != null) {
+			doc.put("paramAvgVehiclePerMinFromWestToEast_docvalues_double", paramAvgVehiclePerMinFromWestToEast.doubleValue());
+		}
+		if(paramAvgVehiclePerMinFromSouthToNorth != null) {
+			doc.put("paramAvgVehiclePerMinFromSouthToNorth_docvalues_double", paramAvgVehiclePerMinFromSouthToNorth.doubleValue());
+		}
+		if(paramVehicleDemandScalingFactor != null) {
+			doc.put("paramVehicleDemandScalingFactor_docvalues_double", paramVehicleDemandScalingFactor.doubleValue());
+		}
+		if(paramAvgPedestrianPerMinFromWestToEast != null) {
+			doc.put("paramAvgPedestrianPerMinFromWestToEast_docvalues_double", paramAvgPedestrianPerMinFromWestToEast.doubleValue());
+		}
+		if(paramAvgPedestrianPerMinFromSouthToNorth != null) {
+			doc.put("paramAvgPedestrianPerMinFromSouthToNorth_docvalues_double", paramAvgPedestrianPerMinFromSouthToNorth.doubleValue());
+		}
+		if(paramPedestrianDemandScalingFactor != null) {
+			doc.put("paramPedestrianDemandScalingFactor_docvalues_double", paramPedestrianDemandScalingFactor.doubleValue());
 		}
 		if(paramLam != null) {
 			JsonArray l = new JsonArray();
@@ -1655,8 +3134,45 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 				l.add(o);
 			}
 		}
+		if(paramMinGreenTimeSecWestEast != null) {
+			doc.put("paramMinGreenTimeSecWestEast_docvalues_double", paramMinGreenTimeSecWestEast.doubleValue());
+		}
+		if(paramMaxGreenTimeSecWestEast != null) {
+			doc.put("paramMaxGreenTimeSecWestEast_docvalues_double", paramMaxGreenTimeSecWestEast.doubleValue());
+		}
+		if(paramMinGreenTimeSecSouthNorth != null) {
+			doc.put("paramMinGreenTimeSecSouthNorth_docvalues_double", paramMinGreenTimeSecSouthNorth.doubleValue());
+		}
+		if(paramMaxGreenTimeSecSouthNorth != null) {
+			doc.put("paramMaxGreenTimeSecSouthNorth_docvalues_double", paramMaxGreenTimeSecSouthNorth.doubleValue());
+		}
+		if(paramPedestrianWaitThresholdSecNorthSouth != null) {
+			doc.put("paramPedestrianWaitThresholdSecNorthSouth_docvalues_double", paramPedestrianWaitThresholdSecNorthSouth.doubleValue());
+		}
+		if(paramPedestrianWaitThresholdSecWestEast != null) {
+			doc.put("paramPedestrianWaitThresholdSecWestEast_docvalues_double", paramPedestrianWaitThresholdSecWestEast.doubleValue());
+		}
+		if(paramVehicleQueueThresholdWestEast != null) {
+			doc.put("paramVehicleQueueThresholdWestEast_docvalues_double", paramVehicleQueueThresholdWestEast.doubleValue());
+		}
+		if(paramVehicleQueueThresholdSouthNorth != null) {
+			doc.put("paramVehicleQueueThresholdSouthNorth_docvalues_double", paramVehicleQueueThresholdSouthNorth.doubleValue());
+		}
+		if(paramPedestrianQueueThresholdNorthSouth != null) {
+			doc.put("paramPedestrianQueueThresholdNorthSouth_docvalues_double", paramPedestrianQueueThresholdNorthSouth.doubleValue());
+		}
+		if(paramPedestrianQueueThresholdWestEast != null) {
+			doc.put("paramPedestrianQueueThresholdWestEast_docvalues_double", paramPedestrianQueueThresholdWestEast.doubleValue());
+		}
 		if(paramDemandScale != null) {
 			doc.put("paramDemandScale_docvalues_double", paramDemandScale.doubleValue());
+		}
+		if(paramInitialPar != null) {
+			JsonArray l = new JsonArray();
+			doc.put("paramInitialPar_docvalues_doubles", l);
+			for(BigDecimal o : paramInitialPar) {
+				l.add(o);
+			}
 		}
 		if(paramStepSize != null) {
 			doc.put("paramStepSize_docvalues_double", paramStepSize.doubleValue());
@@ -1667,11 +3183,11 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		if(paramRunTime != null) {
 			doc.put("paramRunTime_docvalues_int", paramRunTime);
 		}
-		if(paramTotalIterNum != null) {
-			doc.put("paramTotalIterNum_docvalues_int", paramTotalIterNum);
-		}
 		if(paramItersPerPar != null) {
 			doc.put("paramItersPerPar_docvalues_int", paramItersPerPar);
+		}
+		if(paramTotalIterNum != null) {
+			doc.put("paramTotalIterNum_docvalues_int", paramTotalIterNum);
 		}
 		if(updatedParameters != null) {
 			doc.put("updatedParameters_docvalues_string", updatedParameters.toString());
@@ -1689,22 +3205,54 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 				return "simulationKey_docvalues_long";
 			case "simulationName":
 				return "simulationName_docvalues_string";
-			case "paramInitialPar":
-				return "paramInitialPar_docvalues_doubles";
+			case "paramAvgVehiclePerMinFromWestToEast":
+				return "paramAvgVehiclePerMinFromWestToEast_docvalues_double";
+			case "paramAvgVehiclePerMinFromSouthToNorth":
+				return "paramAvgVehiclePerMinFromSouthToNorth_docvalues_double";
+			case "paramVehicleDemandScalingFactor":
+				return "paramVehicleDemandScalingFactor_docvalues_double";
+			case "paramAvgPedestrianPerMinFromWestToEast":
+				return "paramAvgPedestrianPerMinFromWestToEast_docvalues_double";
+			case "paramAvgPedestrianPerMinFromSouthToNorth":
+				return "paramAvgPedestrianPerMinFromSouthToNorth_docvalues_double";
+			case "paramPedestrianDemandScalingFactor":
+				return "paramPedestrianDemandScalingFactor_docvalues_double";
 			case "paramLam":
 				return "paramLam_docvalues_doubles";
+			case "paramMinGreenTimeSecWestEast":
+				return "paramMinGreenTimeSecWestEast_docvalues_double";
+			case "paramMaxGreenTimeSecWestEast":
+				return "paramMaxGreenTimeSecWestEast_docvalues_double";
+			case "paramMinGreenTimeSecSouthNorth":
+				return "paramMinGreenTimeSecSouthNorth_docvalues_double";
+			case "paramMaxGreenTimeSecSouthNorth":
+				return "paramMaxGreenTimeSecSouthNorth_docvalues_double";
+			case "paramPedestrianWaitThresholdSecNorthSouth":
+				return "paramPedestrianWaitThresholdSecNorthSouth_docvalues_double";
+			case "paramPedestrianWaitThresholdSecWestEast":
+				return "paramPedestrianWaitThresholdSecWestEast_docvalues_double";
+			case "paramVehicleQueueThresholdWestEast":
+				return "paramVehicleQueueThresholdWestEast_docvalues_double";
+			case "paramVehicleQueueThresholdSouthNorth":
+				return "paramVehicleQueueThresholdSouthNorth_docvalues_double";
+			case "paramPedestrianQueueThresholdNorthSouth":
+				return "paramPedestrianQueueThresholdNorthSouth_docvalues_double";
+			case "paramPedestrianQueueThresholdWestEast":
+				return "paramPedestrianQueueThresholdWestEast_docvalues_double";
 			case "paramDemandScale":
 				return "paramDemandScale_docvalues_double";
+			case "paramInitialPar":
+				return "paramInitialPar_docvalues_doubles";
 			case "paramStepSize":
 				return "paramStepSize_docvalues_double";
 			case "paramUpdateStepSize":
 				return "paramUpdateStepSize_docvalues_int";
 			case "paramRunTime":
 				return "paramRunTime_docvalues_int";
-			case "paramTotalIterNum":
-				return "paramTotalIterNum_docvalues_int";
 			case "paramItersPerPar":
 				return "paramItersPerPar_docvalues_int";
+			case "paramTotalIterNum":
+				return "paramTotalIterNum_docvalues_int";
 			case "updatedParameters":
 				return "updatedParameters_docvalues_string";
 			case "updatedPerformance":
@@ -1720,22 +3268,54 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 				return "simulationKey_docvalues_long";
 			case "simulationName":
 				return "simulationName_docvalues_string";
-			case "paramInitialPar":
-				return "paramInitialPar_docvalues_doubles";
+			case "paramAvgVehiclePerMinFromWestToEast":
+				return "paramAvgVehiclePerMinFromWestToEast_docvalues_double";
+			case "paramAvgVehiclePerMinFromSouthToNorth":
+				return "paramAvgVehiclePerMinFromSouthToNorth_docvalues_double";
+			case "paramVehicleDemandScalingFactor":
+				return "paramVehicleDemandScalingFactor_docvalues_double";
+			case "paramAvgPedestrianPerMinFromWestToEast":
+				return "paramAvgPedestrianPerMinFromWestToEast_docvalues_double";
+			case "paramAvgPedestrianPerMinFromSouthToNorth":
+				return "paramAvgPedestrianPerMinFromSouthToNorth_docvalues_double";
+			case "paramPedestrianDemandScalingFactor":
+				return "paramPedestrianDemandScalingFactor_docvalues_double";
 			case "paramLam":
 				return "paramLam_docvalues_doubles";
+			case "paramMinGreenTimeSecWestEast":
+				return "paramMinGreenTimeSecWestEast_docvalues_double";
+			case "paramMaxGreenTimeSecWestEast":
+				return "paramMaxGreenTimeSecWestEast_docvalues_double";
+			case "paramMinGreenTimeSecSouthNorth":
+				return "paramMinGreenTimeSecSouthNorth_docvalues_double";
+			case "paramMaxGreenTimeSecSouthNorth":
+				return "paramMaxGreenTimeSecSouthNorth_docvalues_double";
+			case "paramPedestrianWaitThresholdSecNorthSouth":
+				return "paramPedestrianWaitThresholdSecNorthSouth_docvalues_double";
+			case "paramPedestrianWaitThresholdSecWestEast":
+				return "paramPedestrianWaitThresholdSecWestEast_docvalues_double";
+			case "paramVehicleQueueThresholdWestEast":
+				return "paramVehicleQueueThresholdWestEast_docvalues_double";
+			case "paramVehicleQueueThresholdSouthNorth":
+				return "paramVehicleQueueThresholdSouthNorth_docvalues_double";
+			case "paramPedestrianQueueThresholdNorthSouth":
+				return "paramPedestrianQueueThresholdNorthSouth_docvalues_double";
+			case "paramPedestrianQueueThresholdWestEast":
+				return "paramPedestrianQueueThresholdWestEast_docvalues_double";
 			case "paramDemandScale":
 				return "paramDemandScale_docvalues_double";
+			case "paramInitialPar":
+				return "paramInitialPar_docvalues_doubles";
 			case "paramStepSize":
 				return "paramStepSize_docvalues_double";
 			case "paramUpdateStepSize":
 				return "paramUpdateStepSize_docvalues_int";
 			case "paramRunTime":
 				return "paramRunTime_docvalues_int";
-			case "paramTotalIterNum":
-				return "paramTotalIterNum_docvalues_int";
 			case "paramItersPerPar":
 				return "paramItersPerPar_docvalues_int";
+			case "paramTotalIterNum":
+				return "paramTotalIterNum_docvalues_int";
 			case "updatedParameters":
 				return "updatedParameters_docvalues_string";
 			case "updatedPerformance":
@@ -1751,22 +3331,54 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 				return "simulationKey";
 			case "simulationName_docvalues_string":
 				return "simulationName";
-			case "paramInitialPar_docvalues_doubles":
-				return "paramInitialPar";
+			case "paramAvgVehiclePerMinFromWestToEast_docvalues_double":
+				return "paramAvgVehiclePerMinFromWestToEast";
+			case "paramAvgVehiclePerMinFromSouthToNorth_docvalues_double":
+				return "paramAvgVehiclePerMinFromSouthToNorth";
+			case "paramVehicleDemandScalingFactor_docvalues_double":
+				return "paramVehicleDemandScalingFactor";
+			case "paramAvgPedestrianPerMinFromWestToEast_docvalues_double":
+				return "paramAvgPedestrianPerMinFromWestToEast";
+			case "paramAvgPedestrianPerMinFromSouthToNorth_docvalues_double":
+				return "paramAvgPedestrianPerMinFromSouthToNorth";
+			case "paramPedestrianDemandScalingFactor_docvalues_double":
+				return "paramPedestrianDemandScalingFactor";
 			case "paramLam_docvalues_doubles":
 				return "paramLam";
+			case "paramMinGreenTimeSecWestEast_docvalues_double":
+				return "paramMinGreenTimeSecWestEast";
+			case "paramMaxGreenTimeSecWestEast_docvalues_double":
+				return "paramMaxGreenTimeSecWestEast";
+			case "paramMinGreenTimeSecSouthNorth_docvalues_double":
+				return "paramMinGreenTimeSecSouthNorth";
+			case "paramMaxGreenTimeSecSouthNorth_docvalues_double":
+				return "paramMaxGreenTimeSecSouthNorth";
+			case "paramPedestrianWaitThresholdSecNorthSouth_docvalues_double":
+				return "paramPedestrianWaitThresholdSecNorthSouth";
+			case "paramPedestrianWaitThresholdSecWestEast_docvalues_double":
+				return "paramPedestrianWaitThresholdSecWestEast";
+			case "paramVehicleQueueThresholdWestEast_docvalues_double":
+				return "paramVehicleQueueThresholdWestEast";
+			case "paramVehicleQueueThresholdSouthNorth_docvalues_double":
+				return "paramVehicleQueueThresholdSouthNorth";
+			case "paramPedestrianQueueThresholdNorthSouth_docvalues_double":
+				return "paramPedestrianQueueThresholdNorthSouth";
+			case "paramPedestrianQueueThresholdWestEast_docvalues_double":
+				return "paramPedestrianQueueThresholdWestEast";
 			case "paramDemandScale_docvalues_double":
 				return "paramDemandScale";
+			case "paramInitialPar_docvalues_doubles":
+				return "paramInitialPar";
 			case "paramStepSize_docvalues_double":
 				return "paramStepSize";
 			case "paramUpdateStepSize_docvalues_int":
 				return "paramUpdateStepSize";
 			case "paramRunTime_docvalues_int":
 				return "paramRunTime";
-			case "paramTotalIterNum_docvalues_int":
-				return "paramTotalIterNum";
 			case "paramItersPerPar_docvalues_int":
 				return "paramItersPerPar";
+			case "paramTotalIterNum_docvalues_int":
+				return "paramTotalIterNum";
 			case "updatedParameters_docvalues_string":
 				return "updatedParameters";
 			case "updatedPerformance_docvalues_string":
@@ -1802,18 +3414,34 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 
 		oSimulationReport.setSimulationKey(Optional.ofNullable(doc.get("simulationKey_docvalues_long")).map(v -> v.toString()).orElse(null));
 		oSimulationReport.setSimulationName(Optional.ofNullable(doc.get("simulationName_docvalues_string")).map(v -> v.toString()).orElse(null));
-		Optional.ofNullable((List<?>)doc.get("paramInitialPar_docvalues_doubles")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
-			oSimulationReport.addParamInitialPar(v.toString());
-		});
+		oSimulationReport.setParamAvgVehiclePerMinFromWestToEast(Optional.ofNullable(doc.get("paramAvgVehiclePerMinFromWestToEast_docvalues_double")).map(v -> v.toString()).orElse(null));
+		oSimulationReport.setParamAvgVehiclePerMinFromSouthToNorth(Optional.ofNullable(doc.get("paramAvgVehiclePerMinFromSouthToNorth_docvalues_double")).map(v -> v.toString()).orElse(null));
+		oSimulationReport.setParamVehicleDemandScalingFactor(Optional.ofNullable(doc.get("paramVehicleDemandScalingFactor_docvalues_double")).map(v -> v.toString()).orElse(null));
+		oSimulationReport.setParamAvgPedestrianPerMinFromWestToEast(Optional.ofNullable(doc.get("paramAvgPedestrianPerMinFromWestToEast_docvalues_double")).map(v -> v.toString()).orElse(null));
+		oSimulationReport.setParamAvgPedestrianPerMinFromSouthToNorth(Optional.ofNullable(doc.get("paramAvgPedestrianPerMinFromSouthToNorth_docvalues_double")).map(v -> v.toString()).orElse(null));
+		oSimulationReport.setParamPedestrianDemandScalingFactor(Optional.ofNullable(doc.get("paramPedestrianDemandScalingFactor_docvalues_double")).map(v -> v.toString()).orElse(null));
 		Optional.ofNullable((List<?>)doc.get("paramLam_docvalues_doubles")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
 			oSimulationReport.addParamLam(v.toString());
 		});
+		oSimulationReport.setParamMinGreenTimeSecWestEast(Optional.ofNullable(doc.get("paramMinGreenTimeSecWestEast_docvalues_double")).map(v -> v.toString()).orElse(null));
+		oSimulationReport.setParamMaxGreenTimeSecWestEast(Optional.ofNullable(doc.get("paramMaxGreenTimeSecWestEast_docvalues_double")).map(v -> v.toString()).orElse(null));
+		oSimulationReport.setParamMinGreenTimeSecSouthNorth(Optional.ofNullable(doc.get("paramMinGreenTimeSecSouthNorth_docvalues_double")).map(v -> v.toString()).orElse(null));
+		oSimulationReport.setParamMaxGreenTimeSecSouthNorth(Optional.ofNullable(doc.get("paramMaxGreenTimeSecSouthNorth_docvalues_double")).map(v -> v.toString()).orElse(null));
+		oSimulationReport.setParamPedestrianWaitThresholdSecNorthSouth(Optional.ofNullable(doc.get("paramPedestrianWaitThresholdSecNorthSouth_docvalues_double")).map(v -> v.toString()).orElse(null));
+		oSimulationReport.setParamPedestrianWaitThresholdSecWestEast(Optional.ofNullable(doc.get("paramPedestrianWaitThresholdSecWestEast_docvalues_double")).map(v -> v.toString()).orElse(null));
+		oSimulationReport.setParamVehicleQueueThresholdWestEast(Optional.ofNullable(doc.get("paramVehicleQueueThresholdWestEast_docvalues_double")).map(v -> v.toString()).orElse(null));
+		oSimulationReport.setParamVehicleQueueThresholdSouthNorth(Optional.ofNullable(doc.get("paramVehicleQueueThresholdSouthNorth_docvalues_double")).map(v -> v.toString()).orElse(null));
+		oSimulationReport.setParamPedestrianQueueThresholdNorthSouth(Optional.ofNullable(doc.get("paramPedestrianQueueThresholdNorthSouth_docvalues_double")).map(v -> v.toString()).orElse(null));
+		oSimulationReport.setParamPedestrianQueueThresholdWestEast(Optional.ofNullable(doc.get("paramPedestrianQueueThresholdWestEast_docvalues_double")).map(v -> v.toString()).orElse(null));
 		oSimulationReport.setParamDemandScale(Optional.ofNullable(doc.get("paramDemandScale_docvalues_double")).map(v -> v.toString()).orElse(null));
+		Optional.ofNullable((List<?>)doc.get("paramInitialPar_docvalues_doubles")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
+			oSimulationReport.addParamInitialPar(v.toString());
+		});
 		oSimulationReport.setParamStepSize(Optional.ofNullable(doc.get("paramStepSize_docvalues_double")).map(v -> v.toString()).orElse(null));
 		oSimulationReport.setParamUpdateStepSize(Optional.ofNullable(doc.get("paramUpdateStepSize_docvalues_int")).map(v -> v.toString()).orElse(null));
 		oSimulationReport.setParamRunTime(Optional.ofNullable(doc.get("paramRunTime_docvalues_int")).map(v -> v.toString()).orElse(null));
-		oSimulationReport.setParamTotalIterNum(Optional.ofNullable(doc.get("paramTotalIterNum_docvalues_int")).map(v -> v.toString()).orElse(null));
 		oSimulationReport.setParamItersPerPar(Optional.ofNullable(doc.get("paramItersPerPar_docvalues_int")).map(v -> v.toString()).orElse(null));
+		oSimulationReport.setParamTotalIterNum(Optional.ofNullable(doc.get("paramTotalIterNum_docvalues_int")).map(v -> v.toString()).orElse(null));
 		oSimulationReport.setUpdatedParameters(Optional.ofNullable(doc.get("updatedParameters_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSimulationReport.setUpdatedPerformance(Optional.ofNullable(doc.get("updatedPerformance_docvalues_string")).map(v -> v.toString()).orElse(null));
 
@@ -1833,22 +3461,54 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 				apiRequest.addVars("simulationKey");
 			if(!Objects.equals(simulationName, original.getSimulationName()))
 				apiRequest.addVars("simulationName");
-			if(!Objects.equals(paramInitialPar, original.getParamInitialPar()))
-				apiRequest.addVars("paramInitialPar");
+			if(!Objects.equals(paramAvgVehiclePerMinFromWestToEast, original.getParamAvgVehiclePerMinFromWestToEast()))
+				apiRequest.addVars("paramAvgVehiclePerMinFromWestToEast");
+			if(!Objects.equals(paramAvgVehiclePerMinFromSouthToNorth, original.getParamAvgVehiclePerMinFromSouthToNorth()))
+				apiRequest.addVars("paramAvgVehiclePerMinFromSouthToNorth");
+			if(!Objects.equals(paramVehicleDemandScalingFactor, original.getParamVehicleDemandScalingFactor()))
+				apiRequest.addVars("paramVehicleDemandScalingFactor");
+			if(!Objects.equals(paramAvgPedestrianPerMinFromWestToEast, original.getParamAvgPedestrianPerMinFromWestToEast()))
+				apiRequest.addVars("paramAvgPedestrianPerMinFromWestToEast");
+			if(!Objects.equals(paramAvgPedestrianPerMinFromSouthToNorth, original.getParamAvgPedestrianPerMinFromSouthToNorth()))
+				apiRequest.addVars("paramAvgPedestrianPerMinFromSouthToNorth");
+			if(!Objects.equals(paramPedestrianDemandScalingFactor, original.getParamPedestrianDemandScalingFactor()))
+				apiRequest.addVars("paramPedestrianDemandScalingFactor");
 			if(!Objects.equals(paramLam, original.getParamLam()))
 				apiRequest.addVars("paramLam");
+			if(!Objects.equals(paramMinGreenTimeSecWestEast, original.getParamMinGreenTimeSecWestEast()))
+				apiRequest.addVars("paramMinGreenTimeSecWestEast");
+			if(!Objects.equals(paramMaxGreenTimeSecWestEast, original.getParamMaxGreenTimeSecWestEast()))
+				apiRequest.addVars("paramMaxGreenTimeSecWestEast");
+			if(!Objects.equals(paramMinGreenTimeSecSouthNorth, original.getParamMinGreenTimeSecSouthNorth()))
+				apiRequest.addVars("paramMinGreenTimeSecSouthNorth");
+			if(!Objects.equals(paramMaxGreenTimeSecSouthNorth, original.getParamMaxGreenTimeSecSouthNorth()))
+				apiRequest.addVars("paramMaxGreenTimeSecSouthNorth");
+			if(!Objects.equals(paramPedestrianWaitThresholdSecNorthSouth, original.getParamPedestrianWaitThresholdSecNorthSouth()))
+				apiRequest.addVars("paramPedestrianWaitThresholdSecNorthSouth");
+			if(!Objects.equals(paramPedestrianWaitThresholdSecWestEast, original.getParamPedestrianWaitThresholdSecWestEast()))
+				apiRequest.addVars("paramPedestrianWaitThresholdSecWestEast");
+			if(!Objects.equals(paramVehicleQueueThresholdWestEast, original.getParamVehicleQueueThresholdWestEast()))
+				apiRequest.addVars("paramVehicleQueueThresholdWestEast");
+			if(!Objects.equals(paramVehicleQueueThresholdSouthNorth, original.getParamVehicleQueueThresholdSouthNorth()))
+				apiRequest.addVars("paramVehicleQueueThresholdSouthNorth");
+			if(!Objects.equals(paramPedestrianQueueThresholdNorthSouth, original.getParamPedestrianQueueThresholdNorthSouth()))
+				apiRequest.addVars("paramPedestrianQueueThresholdNorthSouth");
+			if(!Objects.equals(paramPedestrianQueueThresholdWestEast, original.getParamPedestrianQueueThresholdWestEast()))
+				apiRequest.addVars("paramPedestrianQueueThresholdWestEast");
 			if(!Objects.equals(paramDemandScale, original.getParamDemandScale()))
 				apiRequest.addVars("paramDemandScale");
+			if(!Objects.equals(paramInitialPar, original.getParamInitialPar()))
+				apiRequest.addVars("paramInitialPar");
 			if(!Objects.equals(paramStepSize, original.getParamStepSize()))
 				apiRequest.addVars("paramStepSize");
 			if(!Objects.equals(paramUpdateStepSize, original.getParamUpdateStepSize()))
 				apiRequest.addVars("paramUpdateStepSize");
 			if(!Objects.equals(paramRunTime, original.getParamRunTime()))
 				apiRequest.addVars("paramRunTime");
-			if(!Objects.equals(paramTotalIterNum, original.getParamTotalIterNum()))
-				apiRequest.addVars("paramTotalIterNum");
 			if(!Objects.equals(paramItersPerPar, original.getParamItersPerPar()))
 				apiRequest.addVars("paramItersPerPar");
+			if(!Objects.equals(paramTotalIterNum, original.getParamTotalIterNum()))
+				apiRequest.addVars("paramTotalIterNum");
 			if(!Objects.equals(updatedParameters, original.getUpdatedParameters()))
 				apiRequest.addVars("updatedParameters");
 			if(!Objects.equals(updatedPerformance, original.getUpdatedPerformance()))
@@ -1866,14 +3526,30 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		sb.append(super.toString());
 		sb.append(Optional.ofNullable(simulationKey).map(v -> "simulationKey: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(simulationName).map(v -> "simulationName: \"" + v + "\"\n" ).orElse(""));
-		sb.append(Optional.ofNullable(paramInitialPar).map(v -> "paramInitialPar: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(paramAvgVehiclePerMinFromWestToEast).map(v -> "paramAvgVehiclePerMinFromWestToEast: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(paramAvgVehiclePerMinFromSouthToNorth).map(v -> "paramAvgVehiclePerMinFromSouthToNorth: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(paramVehicleDemandScalingFactor).map(v -> "paramVehicleDemandScalingFactor: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(paramAvgPedestrianPerMinFromWestToEast).map(v -> "paramAvgPedestrianPerMinFromWestToEast: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(paramAvgPedestrianPerMinFromSouthToNorth).map(v -> "paramAvgPedestrianPerMinFromSouthToNorth: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(paramPedestrianDemandScalingFactor).map(v -> "paramPedestrianDemandScalingFactor: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(paramLam).map(v -> "paramLam: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(paramMinGreenTimeSecWestEast).map(v -> "paramMinGreenTimeSecWestEast: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(paramMaxGreenTimeSecWestEast).map(v -> "paramMaxGreenTimeSecWestEast: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(paramMinGreenTimeSecSouthNorth).map(v -> "paramMinGreenTimeSecSouthNorth: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(paramMaxGreenTimeSecSouthNorth).map(v -> "paramMaxGreenTimeSecSouthNorth: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(paramPedestrianWaitThresholdSecNorthSouth).map(v -> "paramPedestrianWaitThresholdSecNorthSouth: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(paramPedestrianWaitThresholdSecWestEast).map(v -> "paramPedestrianWaitThresholdSecWestEast: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(paramVehicleQueueThresholdWestEast).map(v -> "paramVehicleQueueThresholdWestEast: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(paramVehicleQueueThresholdSouthNorth).map(v -> "paramVehicleQueueThresholdSouthNorth: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(paramPedestrianQueueThresholdNorthSouth).map(v -> "paramPedestrianQueueThresholdNorthSouth: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(paramPedestrianQueueThresholdWestEast).map(v -> "paramPedestrianQueueThresholdWestEast: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(paramDemandScale).map(v -> "paramDemandScale: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(paramInitialPar).map(v -> "paramInitialPar: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(paramStepSize).map(v -> "paramStepSize: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(paramUpdateStepSize).map(v -> "paramUpdateStepSize: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(paramRunTime).map(v -> "paramRunTime: " + v + "\n").orElse(""));
-		sb.append(Optional.ofNullable(paramTotalIterNum).map(v -> "paramTotalIterNum: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(paramItersPerPar).map(v -> "paramItersPerPar: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(paramTotalIterNum).map(v -> "paramTotalIterNum: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(updatedParameters).map(v -> "updatedParameters: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(updatedPerformance).map(v -> "updatedPerformance: " + v + "\n").orElse(""));
 		return sb.toString();
@@ -1884,14 +3560,30 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 	public static final String VAR_simulationSearch = "simulationSearch";
 	public static final String VAR_simulation_ = "simulation_";
 	public static final String VAR_simulationName = "simulationName";
-	public static final String VAR_paramInitialPar = "paramInitialPar";
+	public static final String VAR_paramAvgVehiclePerMinFromWestToEast = "paramAvgVehiclePerMinFromWestToEast";
+	public static final String VAR_paramAvgVehiclePerMinFromSouthToNorth = "paramAvgVehiclePerMinFromSouthToNorth";
+	public static final String VAR_paramVehicleDemandScalingFactor = "paramVehicleDemandScalingFactor";
+	public static final String VAR_paramAvgPedestrianPerMinFromWestToEast = "paramAvgPedestrianPerMinFromWestToEast";
+	public static final String VAR_paramAvgPedestrianPerMinFromSouthToNorth = "paramAvgPedestrianPerMinFromSouthToNorth";
+	public static final String VAR_paramPedestrianDemandScalingFactor = "paramPedestrianDemandScalingFactor";
 	public static final String VAR_paramLam = "paramLam";
+	public static final String VAR_paramMinGreenTimeSecWestEast = "paramMinGreenTimeSecWestEast";
+	public static final String VAR_paramMaxGreenTimeSecWestEast = "paramMaxGreenTimeSecWestEast";
+	public static final String VAR_paramMinGreenTimeSecSouthNorth = "paramMinGreenTimeSecSouthNorth";
+	public static final String VAR_paramMaxGreenTimeSecSouthNorth = "paramMaxGreenTimeSecSouthNorth";
+	public static final String VAR_paramPedestrianWaitThresholdSecNorthSouth = "paramPedestrianWaitThresholdSecNorthSouth";
+	public static final String VAR_paramPedestrianWaitThresholdSecWestEast = "paramPedestrianWaitThresholdSecWestEast";
+	public static final String VAR_paramVehicleQueueThresholdWestEast = "paramVehicleQueueThresholdWestEast";
+	public static final String VAR_paramVehicleQueueThresholdSouthNorth = "paramVehicleQueueThresholdSouthNorth";
+	public static final String VAR_paramPedestrianQueueThresholdNorthSouth = "paramPedestrianQueueThresholdNorthSouth";
+	public static final String VAR_paramPedestrianQueueThresholdWestEast = "paramPedestrianQueueThresholdWestEast";
 	public static final String VAR_paramDemandScale = "paramDemandScale";
+	public static final String VAR_paramInitialPar = "paramInitialPar";
 	public static final String VAR_paramStepSize = "paramStepSize";
 	public static final String VAR_paramUpdateStepSize = "paramUpdateStepSize";
 	public static final String VAR_paramRunTime = "paramRunTime";
-	public static final String VAR_paramTotalIterNum = "paramTotalIterNum";
 	public static final String VAR_paramItersPerPar = "paramItersPerPar";
+	public static final String VAR_paramTotalIterNum = "paramTotalIterNum";
 	public static final String VAR_updatedParameters = "updatedParameters";
 	public static final String VAR_updatedPerformance = "updatedPerformance";
 
@@ -1909,14 +3601,30 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 	public static List<String> varsFqSimulationReport(List<String> vars) {
 		vars.add(VAR_simulationKey);
 		vars.add(VAR_simulationName);
-		vars.add(VAR_paramInitialPar);
+		vars.add(VAR_paramAvgVehiclePerMinFromWestToEast);
+		vars.add(VAR_paramAvgVehiclePerMinFromSouthToNorth);
+		vars.add(VAR_paramVehicleDemandScalingFactor);
+		vars.add(VAR_paramAvgPedestrianPerMinFromWestToEast);
+		vars.add(VAR_paramAvgPedestrianPerMinFromSouthToNorth);
+		vars.add(VAR_paramPedestrianDemandScalingFactor);
 		vars.add(VAR_paramLam);
+		vars.add(VAR_paramMinGreenTimeSecWestEast);
+		vars.add(VAR_paramMaxGreenTimeSecWestEast);
+		vars.add(VAR_paramMinGreenTimeSecSouthNorth);
+		vars.add(VAR_paramMaxGreenTimeSecSouthNorth);
+		vars.add(VAR_paramPedestrianWaitThresholdSecNorthSouth);
+		vars.add(VAR_paramPedestrianWaitThresholdSecWestEast);
+		vars.add(VAR_paramVehicleQueueThresholdWestEast);
+		vars.add(VAR_paramVehicleQueueThresholdSouthNorth);
+		vars.add(VAR_paramPedestrianQueueThresholdNorthSouth);
+		vars.add(VAR_paramPedestrianQueueThresholdWestEast);
 		vars.add(VAR_paramDemandScale);
+		vars.add(VAR_paramInitialPar);
 		vars.add(VAR_paramStepSize);
 		vars.add(VAR_paramUpdateStepSize);
 		vars.add(VAR_paramRunTime);
-		vars.add(VAR_paramTotalIterNum);
 		vars.add(VAR_paramItersPerPar);
+		vars.add(VAR_paramTotalIterNum);
 		vars.add(VAR_updatedParameters);
 		vars.add(VAR_updatedPerformance);
 		BaseModel.varsFqBaseModel(vars);
@@ -1927,12 +3635,28 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		return SimulationReport.varsRangeSimulationReport(new ArrayList<String>());
 	}
 	public static List<String> varsRangeSimulationReport(List<String> vars) {
+		vars.add(VAR_paramAvgVehiclePerMinFromWestToEast);
+		vars.add(VAR_paramAvgVehiclePerMinFromSouthToNorth);
+		vars.add(VAR_paramVehicleDemandScalingFactor);
+		vars.add(VAR_paramAvgPedestrianPerMinFromWestToEast);
+		vars.add(VAR_paramAvgPedestrianPerMinFromSouthToNorth);
+		vars.add(VAR_paramPedestrianDemandScalingFactor);
+		vars.add(VAR_paramMinGreenTimeSecWestEast);
+		vars.add(VAR_paramMaxGreenTimeSecWestEast);
+		vars.add(VAR_paramMinGreenTimeSecSouthNorth);
+		vars.add(VAR_paramMaxGreenTimeSecSouthNorth);
+		vars.add(VAR_paramPedestrianWaitThresholdSecNorthSouth);
+		vars.add(VAR_paramPedestrianWaitThresholdSecWestEast);
+		vars.add(VAR_paramVehicleQueueThresholdWestEast);
+		vars.add(VAR_paramVehicleQueueThresholdSouthNorth);
+		vars.add(VAR_paramPedestrianQueueThresholdNorthSouth);
+		vars.add(VAR_paramPedestrianQueueThresholdWestEast);
 		vars.add(VAR_paramDemandScale);
 		vars.add(VAR_paramStepSize);
 		vars.add(VAR_paramUpdateStepSize);
 		vars.add(VAR_paramRunTime);
-		vars.add(VAR_paramTotalIterNum);
 		vars.add(VAR_paramItersPerPar);
+		vars.add(VAR_paramTotalIterNum);
 		vars.add(VAR_updatedParameters);
 		vars.add(VAR_updatedPerformance);
 		BaseModel.varsRangeBaseModel(vars);
@@ -1943,14 +3667,30 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 	public static final String DISPLAY_NAME_simulationSearch = "";
 	public static final String DISPLAY_NAME_simulation_ = "";
 	public static final String DISPLAY_NAME_simulationName = "simulation name";
-	public static final String DISPLAY_NAME_paramInitialPar = "initial params";
-	public static final String DISPLAY_NAME_paramLam = "Traffic Demand";
+	public static final String DISPLAY_NAME_paramAvgVehiclePerMinFromWestToEast = "Average vehicle/min from WEST to EAST";
+	public static final String DISPLAY_NAME_paramAvgVehiclePerMinFromSouthToNorth = "Average vehicle/min from SOUTH to NORTH";
+	public static final String DISPLAY_NAME_paramVehicleDemandScalingFactor = "Demand scaling factor (multiplies all vehicle demands)";
+	public static final String DISPLAY_NAME_paramAvgPedestrianPerMinFromWestToEast = "Average pedestrian/min from WEST to EAST";
+	public static final String DISPLAY_NAME_paramAvgPedestrianPerMinFromSouthToNorth = "Average pedestrian/min from WEST to EAST";
+	public static final String DISPLAY_NAME_paramPedestrianDemandScalingFactor = "Demand scaling factor (multiplies all pedestrian demands)";
+	public static final String DISPLAY_NAME_paramLam = "traffic demand";
+	public static final String DISPLAY_NAME_paramMinGreenTimeSecWestEast = "Min GREEN time for WEST-EAST traffic (sec)";
+	public static final String DISPLAY_NAME_paramMaxGreenTimeSecWestEast = "Max GREEN time for WEST-EAST traffic (sec)";
+	public static final String DISPLAY_NAME_paramMinGreenTimeSecSouthNorth = "Min GREEN time for SOUTH-NORTH traffic (sec)";
+	public static final String DISPLAY_NAME_paramMaxGreenTimeSecSouthNorth = "Max GREEN time for SOUTH-NORTH traffic (sec)";
+	public static final String DISPLAY_NAME_paramPedestrianWaitThresholdSecNorthSouth = "Pedestrian waiting time tolerance threshold for NORTH-SOUTH (sec)";
+	public static final String DISPLAY_NAME_paramPedestrianWaitThresholdSecWestEast = "Pedestrian waiting time tolerance threshold for WEST-EAST (sec)";
+	public static final String DISPLAY_NAME_paramVehicleQueueThresholdWestEast = "Vehicle queue length threshold between low-high content for WEST-EAST";
+	public static final String DISPLAY_NAME_paramVehicleQueueThresholdSouthNorth = "Vehicle queue length threshold between low-high content for SOUTH-NORTH";
+	public static final String DISPLAY_NAME_paramPedestrianQueueThresholdNorthSouth = "Pedestrian queue length threshold between low-high content for NORTH-SOUTH";
+	public static final String DISPLAY_NAME_paramPedestrianQueueThresholdWestEast = "Pedestrian queue length threshold between low-high content for WEST-EAST";
 	public static final String DISPLAY_NAME_paramDemandScale = "demand scale";
-	public static final String DISPLAY_NAME_paramStepSize = "step size";
+	public static final String DISPLAY_NAME_paramInitialPar = "initial params";
+	public static final String DISPLAY_NAME_paramStepSize = "Simulation time step (sec)";
 	public static final String DISPLAY_NAME_paramUpdateStepSize = "update step size";
-	public static final String DISPLAY_NAME_paramRunTime = "run time";
-	public static final String DISPLAY_NAME_paramTotalIterNum = "total iterations";
-	public static final String DISPLAY_NAME_paramItersPerPar = "iteration repetitions";
+	public static final String DISPLAY_NAME_paramRunTime = "time for each round of traffic simulation (sec)";
+	public static final String DISPLAY_NAME_paramItersPerPar = "Number of simulation repetitions with same input (for statistical accuracy)";
+	public static final String DISPLAY_NAME_paramTotalIterNum = "Number of parameter update iterations before output";
 	public static final String DISPLAY_NAME_updatedParameters = "updated parameters";
 	public static final String DISPLAY_NAME_updatedPerformance = "updated performance";
 
@@ -1967,22 +3707,54 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return DISPLAY_NAME_simulation_;
 		case VAR_simulationName:
 			return DISPLAY_NAME_simulationName;
-		case VAR_paramInitialPar:
-			return DISPLAY_NAME_paramInitialPar;
+		case VAR_paramAvgVehiclePerMinFromWestToEast:
+			return DISPLAY_NAME_paramAvgVehiclePerMinFromWestToEast;
+		case VAR_paramAvgVehiclePerMinFromSouthToNorth:
+			return DISPLAY_NAME_paramAvgVehiclePerMinFromSouthToNorth;
+		case VAR_paramVehicleDemandScalingFactor:
+			return DISPLAY_NAME_paramVehicleDemandScalingFactor;
+		case VAR_paramAvgPedestrianPerMinFromWestToEast:
+			return DISPLAY_NAME_paramAvgPedestrianPerMinFromWestToEast;
+		case VAR_paramAvgPedestrianPerMinFromSouthToNorth:
+			return DISPLAY_NAME_paramAvgPedestrianPerMinFromSouthToNorth;
+		case VAR_paramPedestrianDemandScalingFactor:
+			return DISPLAY_NAME_paramPedestrianDemandScalingFactor;
 		case VAR_paramLam:
 			return DISPLAY_NAME_paramLam;
+		case VAR_paramMinGreenTimeSecWestEast:
+			return DISPLAY_NAME_paramMinGreenTimeSecWestEast;
+		case VAR_paramMaxGreenTimeSecWestEast:
+			return DISPLAY_NAME_paramMaxGreenTimeSecWestEast;
+		case VAR_paramMinGreenTimeSecSouthNorth:
+			return DISPLAY_NAME_paramMinGreenTimeSecSouthNorth;
+		case VAR_paramMaxGreenTimeSecSouthNorth:
+			return DISPLAY_NAME_paramMaxGreenTimeSecSouthNorth;
+		case VAR_paramPedestrianWaitThresholdSecNorthSouth:
+			return DISPLAY_NAME_paramPedestrianWaitThresholdSecNorthSouth;
+		case VAR_paramPedestrianWaitThresholdSecWestEast:
+			return DISPLAY_NAME_paramPedestrianWaitThresholdSecWestEast;
+		case VAR_paramVehicleQueueThresholdWestEast:
+			return DISPLAY_NAME_paramVehicleQueueThresholdWestEast;
+		case VAR_paramVehicleQueueThresholdSouthNorth:
+			return DISPLAY_NAME_paramVehicleQueueThresholdSouthNorth;
+		case VAR_paramPedestrianQueueThresholdNorthSouth:
+			return DISPLAY_NAME_paramPedestrianQueueThresholdNorthSouth;
+		case VAR_paramPedestrianQueueThresholdWestEast:
+			return DISPLAY_NAME_paramPedestrianQueueThresholdWestEast;
 		case VAR_paramDemandScale:
 			return DISPLAY_NAME_paramDemandScale;
+		case VAR_paramInitialPar:
+			return DISPLAY_NAME_paramInitialPar;
 		case VAR_paramStepSize:
 			return DISPLAY_NAME_paramStepSize;
 		case VAR_paramUpdateStepSize:
 			return DISPLAY_NAME_paramUpdateStepSize;
 		case VAR_paramRunTime:
 			return DISPLAY_NAME_paramRunTime;
-		case VAR_paramTotalIterNum:
-			return DISPLAY_NAME_paramTotalIterNum;
 		case VAR_paramItersPerPar:
 			return DISPLAY_NAME_paramItersPerPar;
+		case VAR_paramTotalIterNum:
+			return DISPLAY_NAME_paramTotalIterNum;
 		case VAR_updatedParameters:
 			return DISPLAY_NAME_updatedParameters;
 		case VAR_updatedPerformance:
@@ -1998,10 +3770,10 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return "The traffic simulation for this report. ";
 		case VAR_paramRunTime:
 			return "Time duration of each simulated sample path. ";
-		case VAR_paramTotalIterNum:
-			return "Total iterations to update performance. ";
 		case VAR_paramItersPerPar:
 			return "Number of repeats per round. ";
+		case VAR_paramTotalIterNum:
+			return "Total iterations to update performance. ";
 		case VAR_updatedParameters:
 			return "the resulting updated parameters after a simulation";
 		case VAR_updatedPerformance:
@@ -2021,21 +3793,53 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return "TrafficSimulation";
 		case VAR_simulationName:
 			return "String";
-		case VAR_paramInitialPar:
-			return "List";
+		case VAR_paramAvgVehiclePerMinFromWestToEast:
+			return "BigDecimal";
+		case VAR_paramAvgVehiclePerMinFromSouthToNorth:
+			return "BigDecimal";
+		case VAR_paramVehicleDemandScalingFactor:
+			return "BigDecimal";
+		case VAR_paramAvgPedestrianPerMinFromWestToEast:
+			return "BigDecimal";
+		case VAR_paramAvgPedestrianPerMinFromSouthToNorth:
+			return "BigDecimal";
+		case VAR_paramPedestrianDemandScalingFactor:
+			return "BigDecimal";
 		case VAR_paramLam:
 			return "List";
+		case VAR_paramMinGreenTimeSecWestEast:
+			return "BigDecimal";
+		case VAR_paramMaxGreenTimeSecWestEast:
+			return "BigDecimal";
+		case VAR_paramMinGreenTimeSecSouthNorth:
+			return "BigDecimal";
+		case VAR_paramMaxGreenTimeSecSouthNorth:
+			return "BigDecimal";
+		case VAR_paramPedestrianWaitThresholdSecNorthSouth:
+			return "BigDecimal";
+		case VAR_paramPedestrianWaitThresholdSecWestEast:
+			return "BigDecimal";
+		case VAR_paramVehicleQueueThresholdWestEast:
+			return "BigDecimal";
+		case VAR_paramVehicleQueueThresholdSouthNorth:
+			return "BigDecimal";
+		case VAR_paramPedestrianQueueThresholdNorthSouth:
+			return "BigDecimal";
+		case VAR_paramPedestrianQueueThresholdWestEast:
+			return "BigDecimal";
 		case VAR_paramDemandScale:
 			return "BigDecimal";
+		case VAR_paramInitialPar:
+			return "List";
 		case VAR_paramStepSize:
 			return "BigDecimal";
 		case VAR_paramUpdateStepSize:
 			return "Integer";
 		case VAR_paramRunTime:
 			return "Integer";
-		case VAR_paramTotalIterNum:
-			return "Integer";
 		case VAR_paramItersPerPar:
+			return "Integer";
+		case VAR_paramTotalIterNum:
 			return "Integer";
 		case VAR_updatedParameters:
 			return "JsonArray";
@@ -2059,26 +3863,50 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return 3;
 		case VAR_simulationName:
 			return 3;
-		case VAR_paramInitialPar:
+		case VAR_paramAvgVehiclePerMinFromWestToEast:
 			return 4;
-		case VAR_paramLam:
+		case VAR_paramAvgVehiclePerMinFromSouthToNorth:
+			return 4;
+		case VAR_paramVehicleDemandScalingFactor:
+			return 4;
+		case VAR_paramAvgPedestrianPerMinFromWestToEast:
 			return 5;
-		case VAR_paramDemandScale:
+		case VAR_paramAvgPedestrianPerMinFromSouthToNorth:
+			return 5;
+		case VAR_paramPedestrianDemandScalingFactor:
+			return 5;
+		case VAR_paramMinGreenTimeSecWestEast:
 			return 6;
-		case VAR_paramStepSize:
+		case VAR_paramMaxGreenTimeSecWestEast:
 			return 6;
-		case VAR_paramUpdateStepSize:
-			return 6;
-		case VAR_paramRunTime:
+		case VAR_paramMinGreenTimeSecSouthNorth:
 			return 7;
-		case VAR_paramTotalIterNum:
+		case VAR_paramMaxGreenTimeSecSouthNorth:
 			return 7;
-		case VAR_paramItersPerPar:
-			return 7;
-		case VAR_updatedParameters:
+		case VAR_paramPedestrianWaitThresholdSecNorthSouth:
 			return 8;
-		case VAR_updatedPerformance:
+		case VAR_paramPedestrianWaitThresholdSecWestEast:
+			return 8;
+		case VAR_paramVehicleQueueThresholdWestEast:
 			return 9;
+		case VAR_paramVehicleQueueThresholdSouthNorth:
+			return 9;
+		case VAR_paramPedestrianQueueThresholdNorthSouth:
+			return 10;
+		case VAR_paramPedestrianQueueThresholdWestEast:
+			return 10;
+		case VAR_paramStepSize:
+			return 11;
+		case VAR_paramRunTime:
+			return 11;
+		case VAR_paramItersPerPar:
+			return 12;
+		case VAR_paramTotalIterNum:
+			return 12;
+		case VAR_updatedParameters:
+			return 13;
+		case VAR_updatedPerformance:
+			return 14;
 			default:
 				return BaseModel.htmlRowBaseModel(var);
 		}
@@ -2090,22 +3918,46 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return 1;
 		case VAR_simulationName:
 			return 2;
-		case VAR_paramInitialPar:
+		case VAR_paramAvgVehiclePerMinFromWestToEast:
 			return 1;
-		case VAR_paramLam:
-			return 1;
-		case VAR_paramDemandScale:
-			return 1;
-		case VAR_paramStepSize:
+		case VAR_paramAvgVehiclePerMinFromSouthToNorth:
 			return 2;
-		case VAR_paramUpdateStepSize:
+		case VAR_paramVehicleDemandScalingFactor:
 			return 3;
+		case VAR_paramAvgPedestrianPerMinFromWestToEast:
+			return 1;
+		case VAR_paramAvgPedestrianPerMinFromSouthToNorth:
+			return 2;
+		case VAR_paramPedestrianDemandScalingFactor:
+			return 3;
+		case VAR_paramMinGreenTimeSecWestEast:
+			return 1;
+		case VAR_paramMaxGreenTimeSecWestEast:
+			return 2;
+		case VAR_paramMinGreenTimeSecSouthNorth:
+			return 1;
+		case VAR_paramMaxGreenTimeSecSouthNorth:
+			return 2;
+		case VAR_paramPedestrianWaitThresholdSecNorthSouth:
+			return 1;
+		case VAR_paramPedestrianWaitThresholdSecWestEast:
+			return 2;
+		case VAR_paramVehicleQueueThresholdWestEast:
+			return 1;
+		case VAR_paramVehicleQueueThresholdSouthNorth:
+			return 2;
+		case VAR_paramPedestrianQueueThresholdNorthSouth:
+			return 1;
+		case VAR_paramPedestrianQueueThresholdWestEast:
+			return 2;
+		case VAR_paramStepSize:
+			return 1;
 		case VAR_paramRunTime:
+			return 2;
+		case VAR_paramItersPerPar:
 			return 1;
 		case VAR_paramTotalIterNum:
 			return 2;
-		case VAR_paramItersPerPar:
-			return 3;
 		case VAR_updatedParameters:
 			return 1;
 		case VAR_updatedPerformance:

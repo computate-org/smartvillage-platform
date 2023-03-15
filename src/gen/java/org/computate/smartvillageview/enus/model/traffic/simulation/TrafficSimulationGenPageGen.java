@@ -183,12 +183,31 @@ public abstract class TrafficSimulationGenPageGen<DEV> extends BaseModelPage {
 	public void setListTrafficSimulation(JsonArray listTrafficSimulation) {
 		this.listTrafficSimulation = listTrafficSimulation;
 	}
+	@JsonIgnore
+	public void setListTrafficSimulation(String o) {
+		this.listTrafficSimulation = TrafficSimulationGenPage.staticSetListTrafficSimulation(siteRequest_, o);
+	}
 	public static JsonArray staticSetListTrafficSimulation(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonArray(o);
+		}
 		return null;
 	}
 	protected TrafficSimulationGenPage listTrafficSimulationInit() {
 		_listTrafficSimulation(listTrafficSimulation);
 		return (TrafficSimulationGenPage)this;
+	}
+
+	public static JsonArray staticSearchListTrafficSimulation(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o;
+	}
+
+	public static String staticSearchStrListTrafficSimulation(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqListTrafficSimulation(SiteRequestEnUS siteRequest_, String o) {
+		return TrafficSimulationGenPage.staticSearchStrListTrafficSimulation(siteRequest_, TrafficSimulationGenPage.staticSearchListTrafficSimulation(siteRequest_, TrafficSimulationGenPage.staticSetListTrafficSimulation(siteRequest_, o)));
 	}
 
 	////////////////////////////
@@ -588,6 +607,8 @@ public abstract class TrafficSimulationGenPageGen<DEV> extends BaseModelPage {
 	}
 	public static Object staticSetTrafficSimulationGenPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "listTrafficSimulation":
+			return TrafficSimulationGenPage.staticSetListTrafficSimulation(siteRequest_, o);
 		case "trafficSimulationCount":
 			return TrafficSimulationGenPage.staticSetTrafficSimulationCount(siteRequest_, o);
 		case "pk":
@@ -610,6 +631,8 @@ public abstract class TrafficSimulationGenPageGen<DEV> extends BaseModelPage {
 	}
 	public static Object staticSearchTrafficSimulationGenPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "listTrafficSimulation":
+			return TrafficSimulationGenPage.staticSearchListTrafficSimulation(siteRequest_, (JsonArray)o);
 		case "trafficSimulationCount":
 			return TrafficSimulationGenPage.staticSearchTrafficSimulationCount(siteRequest_, (Integer)o);
 		case "pk":
@@ -632,6 +655,8 @@ public abstract class TrafficSimulationGenPageGen<DEV> extends BaseModelPage {
 	}
 	public static String staticSearchStrTrafficSimulationGenPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "listTrafficSimulation":
+			return TrafficSimulationGenPage.staticSearchStrListTrafficSimulation(siteRequest_, (JsonArray)o);
 		case "trafficSimulationCount":
 			return TrafficSimulationGenPage.staticSearchStrTrafficSimulationCount(siteRequest_, (Integer)o);
 		case "pk":
@@ -654,6 +679,8 @@ public abstract class TrafficSimulationGenPageGen<DEV> extends BaseModelPage {
 	}
 	public static String staticSearchFqTrafficSimulationGenPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "listTrafficSimulation":
+			return TrafficSimulationGenPage.staticSearchFqListTrafficSimulation(siteRequest_, o);
 		case "trafficSimulationCount":
 			return TrafficSimulationGenPage.staticSearchFqTrafficSimulationCount(siteRequest_, o);
 		case "pk":

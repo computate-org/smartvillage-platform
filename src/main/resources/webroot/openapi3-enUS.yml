@@ -16578,15 +16578,39 @@ components:
                     type: string
                   stepSeconds:
                     type: string
-                  paramInitialPar:
-                    type: array
-                    items:
-                      type: string
-                  paramLam:
-                    type: array
-                    items:
-                      type: string
+                  paramAvgVehiclePerMinFromWestToEast:
+                    type: string
+                  paramAvgVehiclePerMinFromSouthToNorth:
+                    type: string
+                  paramVehicleDemandScalingFactor:
+                    type: string
+                  paramAvgPedestrianPerMinFromWestToEast:
+                    type: string
+                  paramAvgPedestrianPerMinFromSouthToNorth:
+                    type: string
+                  paramPedestrianDemandScalingFactor:
+                    type: string
                   paramDemandScale:
+                    type: string
+                  paramMinGreenTimeSecWestEast:
+                    type: string
+                  paramMaxGreenTimeSecWestEast:
+                    type: string
+                  paramMinGreenTimeSecSouthNorth:
+                    type: string
+                  paramMaxGreenTimeSecSouthNorth:
+                    type: string
+                  paramPedestrianWaitThresholdSecNorthSouth:
+                    type: string
+                  paramPedestrianWaitThresholdSecWestEast:
+                    type: string
+                  paramVehicleQueueThresholdWestEast:
+                    type: string
+                  paramVehicleQueueThresholdSouthNorth:
+                    type: string
+                  paramPedestrianQueueThresholdNorthSouth:
+                    type: string
+                  paramPedestrianQueueThresholdWestEast:
                     type: string
                   paramStepSize:
                     type: string
@@ -16594,9 +16618,9 @@ components:
                     type: string
                   paramRunTime:
                     type: string
-                  paramTotalIterNum:
-                    type: string
                   paramItersPerPar:
+                    type: string
+                  paramTotalIterNum:
                     type: string
                   reportKeys:
                     type: array
@@ -16670,46 +16694,124 @@ components:
               type: string
             removeAllStepSeconds:
               type: string
-            setParamInitialPar:
-              type: array
+            setParamAvgVehiclePerMinFromWestToEast:
+              type: string
               nullable: true
-              items:
-                type: string
-            removeParamInitialPar:
+            removeParamAvgVehiclePerMinFromWestToEast:
               type: string
-            removeAllParamInitialPar:
-              type: array
-              items:
-                type: string
-            addParamInitialPar:
+            removeAllParamAvgVehiclePerMinFromWestToEast:
               type: string
-            addAllParamInitialPar:
-              type: array
-              items:
-                type: string
-            setParamLam:
-              type: array
+            setParamAvgVehiclePerMinFromSouthToNorth:
+              type: string
               nullable: true
-              items:
-                type: string
-            removeParamLam:
+            removeParamAvgVehiclePerMinFromSouthToNorth:
               type: string
-            removeAllParamLam:
-              type: array
-              items:
-                type: string
-            addParamLam:
+            removeAllParamAvgVehiclePerMinFromSouthToNorth:
               type: string
-            addAllParamLam:
-              type: array
-              items:
-                type: string
+            setParamVehicleDemandScalingFactor:
+              type: string
+              nullable: true
+            removeParamVehicleDemandScalingFactor:
+              type: string
+            removeAllParamVehicleDemandScalingFactor:
+              type: string
+            setParamAvgPedestrianPerMinFromWestToEast:
+              type: string
+              nullable: true
+            removeParamAvgPedestrianPerMinFromWestToEast:
+              type: string
+            removeAllParamAvgPedestrianPerMinFromWestToEast:
+              type: string
+            setParamAvgPedestrianPerMinFromSouthToNorth:
+              type: string
+              nullable: true
+            removeParamAvgPedestrianPerMinFromSouthToNorth:
+              type: string
+            removeAllParamAvgPedestrianPerMinFromSouthToNorth:
+              type: string
+            setParamPedestrianDemandScalingFactor:
+              type: string
+              nullable: true
+            removeParamPedestrianDemandScalingFactor:
+              type: string
+            removeAllParamPedestrianDemandScalingFactor:
+              type: string
             setParamDemandScale:
               type: string
               nullable: true
             removeParamDemandScale:
               type: string
             removeAllParamDemandScale:
+              type: string
+            setParamMinGreenTimeSecWestEast:
+              type: string
+              nullable: true
+            removeParamMinGreenTimeSecWestEast:
+              type: string
+            removeAllParamMinGreenTimeSecWestEast:
+              type: string
+            setParamMaxGreenTimeSecWestEast:
+              type: string
+              nullable: true
+            removeParamMaxGreenTimeSecWestEast:
+              type: string
+            removeAllParamMaxGreenTimeSecWestEast:
+              type: string
+            setParamMinGreenTimeSecSouthNorth:
+              type: string
+              nullable: true
+            removeParamMinGreenTimeSecSouthNorth:
+              type: string
+            removeAllParamMinGreenTimeSecSouthNorth:
+              type: string
+            setParamMaxGreenTimeSecSouthNorth:
+              type: string
+              nullable: true
+            removeParamMaxGreenTimeSecSouthNorth:
+              type: string
+            removeAllParamMaxGreenTimeSecSouthNorth:
+              type: string
+            setParamPedestrianWaitThresholdSecNorthSouth:
+              type: string
+              nullable: true
+            removeParamPedestrianWaitThresholdSecNorthSouth:
+              type: string
+            removeAllParamPedestrianWaitThresholdSecNorthSouth:
+              type: string
+            setParamPedestrianWaitThresholdSecWestEast:
+              type: string
+              nullable: true
+            removeParamPedestrianWaitThresholdSecWestEast:
+              type: string
+            removeAllParamPedestrianWaitThresholdSecWestEast:
+              type: string
+            setParamVehicleQueueThresholdWestEast:
+              type: string
+              nullable: true
+            removeParamVehicleQueueThresholdWestEast:
+              type: string
+            removeAllParamVehicleQueueThresholdWestEast:
+              type: string
+            setParamVehicleQueueThresholdSouthNorth:
+              type: string
+              nullable: true
+            removeParamVehicleQueueThresholdSouthNorth:
+              type: string
+            removeAllParamVehicleQueueThresholdSouthNorth:
+              type: string
+            setParamPedestrianQueueThresholdNorthSouth:
+              type: string
+              nullable: true
+            removeParamPedestrianQueueThresholdNorthSouth:
+              type: string
+            removeAllParamPedestrianQueueThresholdNorthSouth:
+              type: string
+            setParamPedestrianQueueThresholdWestEast:
+              type: string
+              nullable: true
+            removeParamPedestrianQueueThresholdWestEast:
+              type: string
+            removeAllParamPedestrianQueueThresholdWestEast:
               type: string
             setParamStepSize:
               type: string
@@ -16732,19 +16834,19 @@ components:
               type: string
             removeAllParamRunTime:
               type: string
-            setParamTotalIterNum:
-              type: string
-              nullable: true
-            removeParamTotalIterNum:
-              type: string
-            removeAllParamTotalIterNum:
-              type: string
             setParamItersPerPar:
               type: string
               nullable: true
             removeParamItersPerPar:
               type: string
             removeAllParamItersPerPar:
+              type: string
+            setParamTotalIterNum:
+              type: string
+              nullable: true
+            removeParamTotalIterNum:
+              type: string
+            removeAllParamTotalIterNum:
               type: string
             setReportKeys:
               type: array
@@ -16857,46 +16959,124 @@ components:
               type: string
             removeAllStepSeconds:
               type: string
-            setParamInitialPar:
-              type: array
+            setParamAvgVehiclePerMinFromWestToEast:
+              type: string
               nullable: true
-              items:
-                type: string
-            removeParamInitialPar:
+            removeParamAvgVehiclePerMinFromWestToEast:
               type: string
-            removeAllParamInitialPar:
-              type: array
-              items:
-                type: string
-            addParamInitialPar:
+            removeAllParamAvgVehiclePerMinFromWestToEast:
               type: string
-            addAllParamInitialPar:
-              type: array
-              items:
-                type: string
-            setParamLam:
-              type: array
+            setParamAvgVehiclePerMinFromSouthToNorth:
+              type: string
               nullable: true
-              items:
-                type: string
-            removeParamLam:
+            removeParamAvgVehiclePerMinFromSouthToNorth:
               type: string
-            removeAllParamLam:
-              type: array
-              items:
-                type: string
-            addParamLam:
+            removeAllParamAvgVehiclePerMinFromSouthToNorth:
               type: string
-            addAllParamLam:
-              type: array
-              items:
-                type: string
+            setParamVehicleDemandScalingFactor:
+              type: string
+              nullable: true
+            removeParamVehicleDemandScalingFactor:
+              type: string
+            removeAllParamVehicleDemandScalingFactor:
+              type: string
+            setParamAvgPedestrianPerMinFromWestToEast:
+              type: string
+              nullable: true
+            removeParamAvgPedestrianPerMinFromWestToEast:
+              type: string
+            removeAllParamAvgPedestrianPerMinFromWestToEast:
+              type: string
+            setParamAvgPedestrianPerMinFromSouthToNorth:
+              type: string
+              nullable: true
+            removeParamAvgPedestrianPerMinFromSouthToNorth:
+              type: string
+            removeAllParamAvgPedestrianPerMinFromSouthToNorth:
+              type: string
+            setParamPedestrianDemandScalingFactor:
+              type: string
+              nullable: true
+            removeParamPedestrianDemandScalingFactor:
+              type: string
+            removeAllParamPedestrianDemandScalingFactor:
+              type: string
             setParamDemandScale:
               type: string
               nullable: true
             removeParamDemandScale:
               type: string
             removeAllParamDemandScale:
+              type: string
+            setParamMinGreenTimeSecWestEast:
+              type: string
+              nullable: true
+            removeParamMinGreenTimeSecWestEast:
+              type: string
+            removeAllParamMinGreenTimeSecWestEast:
+              type: string
+            setParamMaxGreenTimeSecWestEast:
+              type: string
+              nullable: true
+            removeParamMaxGreenTimeSecWestEast:
+              type: string
+            removeAllParamMaxGreenTimeSecWestEast:
+              type: string
+            setParamMinGreenTimeSecSouthNorth:
+              type: string
+              nullable: true
+            removeParamMinGreenTimeSecSouthNorth:
+              type: string
+            removeAllParamMinGreenTimeSecSouthNorth:
+              type: string
+            setParamMaxGreenTimeSecSouthNorth:
+              type: string
+              nullable: true
+            removeParamMaxGreenTimeSecSouthNorth:
+              type: string
+            removeAllParamMaxGreenTimeSecSouthNorth:
+              type: string
+            setParamPedestrianWaitThresholdSecNorthSouth:
+              type: string
+              nullable: true
+            removeParamPedestrianWaitThresholdSecNorthSouth:
+              type: string
+            removeAllParamPedestrianWaitThresholdSecNorthSouth:
+              type: string
+            setParamPedestrianWaitThresholdSecWestEast:
+              type: string
+              nullable: true
+            removeParamPedestrianWaitThresholdSecWestEast:
+              type: string
+            removeAllParamPedestrianWaitThresholdSecWestEast:
+              type: string
+            setParamVehicleQueueThresholdWestEast:
+              type: string
+              nullable: true
+            removeParamVehicleQueueThresholdWestEast:
+              type: string
+            removeAllParamVehicleQueueThresholdWestEast:
+              type: string
+            setParamVehicleQueueThresholdSouthNorth:
+              type: string
+              nullable: true
+            removeParamVehicleQueueThresholdSouthNorth:
+              type: string
+            removeAllParamVehicleQueueThresholdSouthNorth:
+              type: string
+            setParamPedestrianQueueThresholdNorthSouth:
+              type: string
+              nullable: true
+            removeParamPedestrianQueueThresholdNorthSouth:
+              type: string
+            removeAllParamPedestrianQueueThresholdNorthSouth:
+              type: string
+            setParamPedestrianQueueThresholdWestEast:
+              type: string
+              nullable: true
+            removeParamPedestrianQueueThresholdWestEast:
+              type: string
+            removeAllParamPedestrianQueueThresholdWestEast:
               type: string
             setParamStepSize:
               type: string
@@ -16919,19 +17099,19 @@ components:
               type: string
             removeAllParamRunTime:
               type: string
-            setParamTotalIterNum:
-              type: string
-              nullable: true
-            removeParamTotalIterNum:
-              type: string
-            removeAllParamTotalIterNum:
-              type: string
             setParamItersPerPar:
               type: string
               nullable: true
             removeParamItersPerPar:
               type: string
             removeAllParamItersPerPar:
+              type: string
+            setParamTotalIterNum:
+              type: string
+              nullable: true
+            removeParamTotalIterNum:
+              type: string
+            removeAllParamTotalIterNum:
               type: string
             setReportKeys:
               type: array
@@ -17004,15 +17184,39 @@ components:
               type: string
             stepSeconds:
               type: string
-            paramInitialPar:
-              type: array
-              items:
-                type: string
-            paramLam:
-              type: array
-              items:
-                type: string
+            paramAvgVehiclePerMinFromWestToEast:
+              type: string
+            paramAvgVehiclePerMinFromSouthToNorth:
+              type: string
+            paramVehicleDemandScalingFactor:
+              type: string
+            paramAvgPedestrianPerMinFromWestToEast:
+              type: string
+            paramAvgPedestrianPerMinFromSouthToNorth:
+              type: string
+            paramPedestrianDemandScalingFactor:
+              type: string
             paramDemandScale:
+              type: string
+            paramMinGreenTimeSecWestEast:
+              type: string
+            paramMaxGreenTimeSecWestEast:
+              type: string
+            paramMinGreenTimeSecSouthNorth:
+              type: string
+            paramMaxGreenTimeSecSouthNorth:
+              type: string
+            paramPedestrianWaitThresholdSecNorthSouth:
+              type: string
+            paramPedestrianWaitThresholdSecWestEast:
+              type: string
+            paramVehicleQueueThresholdWestEast:
+              type: string
+            paramVehicleQueueThresholdSouthNorth:
+              type: string
+            paramPedestrianQueueThresholdNorthSouth:
+              type: string
+            paramPedestrianQueueThresholdWestEast:
               type: string
             paramStepSize:
               type: string
@@ -17020,9 +17224,9 @@ components:
               type: string
             paramRunTime:
               type: string
-            paramTotalIterNum:
-              type: string
             paramItersPerPar:
+              type: string
+            paramTotalIterNum:
               type: string
             reportKeys:
               type: array
@@ -17056,15 +17260,39 @@ components:
               type: string
             stepSeconds:
               type: string
-            paramInitialPar:
-              type: array
-              items:
-                type: string
-            paramLam:
-              type: array
-              items:
-                type: string
+            paramAvgVehiclePerMinFromWestToEast:
+              type: string
+            paramAvgVehiclePerMinFromSouthToNorth:
+              type: string
+            paramVehicleDemandScalingFactor:
+              type: string
+            paramAvgPedestrianPerMinFromWestToEast:
+              type: string
+            paramAvgPedestrianPerMinFromSouthToNorth:
+              type: string
+            paramPedestrianDemandScalingFactor:
+              type: string
             paramDemandScale:
+              type: string
+            paramMinGreenTimeSecWestEast:
+              type: string
+            paramMaxGreenTimeSecWestEast:
+              type: string
+            paramMinGreenTimeSecSouthNorth:
+              type: string
+            paramMaxGreenTimeSecSouthNorth:
+              type: string
+            paramPedestrianWaitThresholdSecNorthSouth:
+              type: string
+            paramPedestrianWaitThresholdSecWestEast:
+              type: string
+            paramVehicleQueueThresholdWestEast:
+              type: string
+            paramVehicleQueueThresholdSouthNorth:
+              type: string
+            paramPedestrianQueueThresholdNorthSouth:
+              type: string
+            paramPedestrianQueueThresholdWestEast:
               type: string
             paramStepSize:
               type: string
@@ -17072,9 +17300,9 @@ components:
               type: string
             paramRunTime:
               type: string
-            paramTotalIterNum:
-              type: string
             paramItersPerPar:
+              type: string
+            paramTotalIterNum:
               type: string
             reportKeys:
               type: array
@@ -17108,15 +17336,39 @@ components:
               type: string
             stepSeconds:
               type: string
-            paramInitialPar:
-              type: array
-              items:
-                type: string
-            paramLam:
-              type: array
-              items:
-                type: string
+            paramAvgVehiclePerMinFromWestToEast:
+              type: string
+            paramAvgVehiclePerMinFromSouthToNorth:
+              type: string
+            paramVehicleDemandScalingFactor:
+              type: string
+            paramAvgPedestrianPerMinFromWestToEast:
+              type: string
+            paramAvgPedestrianPerMinFromSouthToNorth:
+              type: string
+            paramPedestrianDemandScalingFactor:
+              type: string
             paramDemandScale:
+              type: string
+            paramMinGreenTimeSecWestEast:
+              type: string
+            paramMaxGreenTimeSecWestEast:
+              type: string
+            paramMinGreenTimeSecSouthNorth:
+              type: string
+            paramMaxGreenTimeSecSouthNorth:
+              type: string
+            paramPedestrianWaitThresholdSecNorthSouth:
+              type: string
+            paramPedestrianWaitThresholdSecWestEast:
+              type: string
+            paramVehicleQueueThresholdWestEast:
+              type: string
+            paramVehicleQueueThresholdSouthNorth:
+              type: string
+            paramPedestrianQueueThresholdNorthSouth:
+              type: string
+            paramPedestrianQueueThresholdWestEast:
               type: string
             paramStepSize:
               type: string
@@ -17124,9 +17376,9 @@ components:
               type: string
             paramRunTime:
               type: string
-            paramTotalIterNum:
-              type: string
             paramItersPerPar:
+              type: string
+            paramTotalIterNum:
               type: string
             reportKeys:
               type: array
@@ -17160,15 +17412,39 @@ components:
               type: string
             stepSeconds:
               type: string
-            paramInitialPar:
-              type: array
-              items:
-                type: string
-            paramLam:
-              type: array
-              items:
-                type: string
+            paramAvgVehiclePerMinFromWestToEast:
+              type: string
+            paramAvgVehiclePerMinFromSouthToNorth:
+              type: string
+            paramVehicleDemandScalingFactor:
+              type: string
+            paramAvgPedestrianPerMinFromWestToEast:
+              type: string
+            paramAvgPedestrianPerMinFromSouthToNorth:
+              type: string
+            paramPedestrianDemandScalingFactor:
+              type: string
             paramDemandScale:
+              type: string
+            paramMinGreenTimeSecWestEast:
+              type: string
+            paramMaxGreenTimeSecWestEast:
+              type: string
+            paramMinGreenTimeSecSouthNorth:
+              type: string
+            paramMaxGreenTimeSecSouthNorth:
+              type: string
+            paramPedestrianWaitThresholdSecNorthSouth:
+              type: string
+            paramPedestrianWaitThresholdSecWestEast:
+              type: string
+            paramVehicleQueueThresholdWestEast:
+              type: string
+            paramVehicleQueueThresholdSouthNorth:
+              type: string
+            paramPedestrianQueueThresholdNorthSouth:
+              type: string
+            paramPedestrianQueueThresholdWestEast:
               type: string
             paramStepSize:
               type: string
@@ -17176,9 +17452,9 @@ components:
               type: string
             paramRunTime:
               type: string
-            paramTotalIterNum:
-              type: string
             paramItersPerPar:
+              type: string
+            paramTotalIterNum:
               type: string
             reportKeys:
               type: array
@@ -17212,15 +17488,39 @@ components:
               type: string
             stepSeconds:
               type: string
-            paramInitialPar:
-              type: array
-              items:
-                type: string
-            paramLam:
-              type: array
-              items:
-                type: string
+            paramAvgVehiclePerMinFromWestToEast:
+              type: string
+            paramAvgVehiclePerMinFromSouthToNorth:
+              type: string
+            paramVehicleDemandScalingFactor:
+              type: string
+            paramAvgPedestrianPerMinFromWestToEast:
+              type: string
+            paramAvgPedestrianPerMinFromSouthToNorth:
+              type: string
+            paramPedestrianDemandScalingFactor:
+              type: string
             paramDemandScale:
+              type: string
+            paramMinGreenTimeSecWestEast:
+              type: string
+            paramMaxGreenTimeSecWestEast:
+              type: string
+            paramMinGreenTimeSecSouthNorth:
+              type: string
+            paramMaxGreenTimeSecSouthNorth:
+              type: string
+            paramPedestrianWaitThresholdSecNorthSouth:
+              type: string
+            paramPedestrianWaitThresholdSecWestEast:
+              type: string
+            paramVehicleQueueThresholdWestEast:
+              type: string
+            paramVehicleQueueThresholdSouthNorth:
+              type: string
+            paramPedestrianQueueThresholdNorthSouth:
+              type: string
+            paramPedestrianQueueThresholdWestEast:
               type: string
             paramStepSize:
               type: string
@@ -17228,9 +17528,9 @@ components:
               type: string
             paramRunTime:
               type: string
-            paramTotalIterNum:
-              type: string
             paramItersPerPar:
+              type: string
+            paramTotalIterNum:
               type: string
             reportKeys:
               type: array
@@ -17268,23 +17568,48 @@ components:
               type: string
             removeAllSimulationName:
               type: string
-            setParamInitialPar:
-              type: array
+            setParamAvgVehiclePerMinFromWestToEast:
+              type: string
               nullable: true
-              items:
-                type: string
-            removeParamInitialPar:
+            removeParamAvgVehiclePerMinFromWestToEast:
               type: string
-            removeAllParamInitialPar:
-              type: array
-              items:
-                type: string
-            addParamInitialPar:
+            removeAllParamAvgVehiclePerMinFromWestToEast:
               type: string
-            addAllParamInitialPar:
-              type: array
-              items:
-                type: string
+            setParamAvgVehiclePerMinFromSouthToNorth:
+              type: string
+              nullable: true
+            removeParamAvgVehiclePerMinFromSouthToNorth:
+              type: string
+            removeAllParamAvgVehiclePerMinFromSouthToNorth:
+              type: string
+            setParamVehicleDemandScalingFactor:
+              type: string
+              nullable: true
+            removeParamVehicleDemandScalingFactor:
+              type: string
+            removeAllParamVehicleDemandScalingFactor:
+              type: string
+            setParamAvgPedestrianPerMinFromWestToEast:
+              type: string
+              nullable: true
+            removeParamAvgPedestrianPerMinFromWestToEast:
+              type: string
+            removeAllParamAvgPedestrianPerMinFromWestToEast:
+              type: string
+            setParamAvgPedestrianPerMinFromSouthToNorth:
+              type: string
+              nullable: true
+            removeParamAvgPedestrianPerMinFromSouthToNorth:
+              type: string
+            removeAllParamAvgPedestrianPerMinFromSouthToNorth:
+              type: string
+            setParamPedestrianDemandScalingFactor:
+              type: string
+              nullable: true
+            removeParamPedestrianDemandScalingFactor:
+              type: string
+            removeAllParamPedestrianDemandScalingFactor:
+              type: string
             setParamLam:
               type: array
               nullable: true
@@ -17302,6 +17627,76 @@ components:
               type: array
               items:
                 type: string
+            setParamMinGreenTimeSecWestEast:
+              type: string
+              nullable: true
+            removeParamMinGreenTimeSecWestEast:
+              type: string
+            removeAllParamMinGreenTimeSecWestEast:
+              type: string
+            setParamMaxGreenTimeSecWestEast:
+              type: string
+              nullable: true
+            removeParamMaxGreenTimeSecWestEast:
+              type: string
+            removeAllParamMaxGreenTimeSecWestEast:
+              type: string
+            setParamMinGreenTimeSecSouthNorth:
+              type: string
+              nullable: true
+            removeParamMinGreenTimeSecSouthNorth:
+              type: string
+            removeAllParamMinGreenTimeSecSouthNorth:
+              type: string
+            setParamMaxGreenTimeSecSouthNorth:
+              type: string
+              nullable: true
+            removeParamMaxGreenTimeSecSouthNorth:
+              type: string
+            removeAllParamMaxGreenTimeSecSouthNorth:
+              type: string
+            setParamPedestrianWaitThresholdSecNorthSouth:
+              type: string
+              nullable: true
+            removeParamPedestrianWaitThresholdSecNorthSouth:
+              type: string
+            removeAllParamPedestrianWaitThresholdSecNorthSouth:
+              type: string
+            setParamPedestrianWaitThresholdSecWestEast:
+              type: string
+              nullable: true
+            removeParamPedestrianWaitThresholdSecWestEast:
+              type: string
+            removeAllParamPedestrianWaitThresholdSecWestEast:
+              type: string
+            setParamVehicleQueueThresholdWestEast:
+              type: string
+              nullable: true
+            removeParamVehicleQueueThresholdWestEast:
+              type: string
+            removeAllParamVehicleQueueThresholdWestEast:
+              type: string
+            setParamVehicleQueueThresholdSouthNorth:
+              type: string
+              nullable: true
+            removeParamVehicleQueueThresholdSouthNorth:
+              type: string
+            removeAllParamVehicleQueueThresholdSouthNorth:
+              type: string
+            setParamPedestrianQueueThresholdNorthSouth:
+              type: string
+              nullable: true
+            removeParamPedestrianQueueThresholdNorthSouth:
+              type: string
+            removeAllParamPedestrianQueueThresholdNorthSouth:
+              type: string
+            setParamPedestrianQueueThresholdWestEast:
+              type: string
+              nullable: true
+            removeParamPedestrianQueueThresholdWestEast:
+              type: string
+            removeAllParamPedestrianQueueThresholdWestEast:
+              type: string
             setParamDemandScale:
               type: string
               nullable: true
@@ -17309,6 +17704,23 @@ components:
               type: string
             removeAllParamDemandScale:
               type: string
+            setParamInitialPar:
+              type: array
+              nullable: true
+              items:
+                type: string
+            removeParamInitialPar:
+              type: string
+            removeAllParamInitialPar:
+              type: array
+              items:
+                type: string
+            addParamInitialPar:
+              type: string
+            addAllParamInitialPar:
+              type: array
+              items:
+                type: string
             setParamStepSize:
               type: string
               nullable: true
@@ -17330,19 +17742,19 @@ components:
               type: string
             removeAllParamRunTime:
               type: string
-            setParamTotalIterNum:
-              type: string
-              nullable: true
-            removeParamTotalIterNum:
-              type: string
-            removeAllParamTotalIterNum:
-              type: string
             setParamItersPerPar:
               type: string
               nullable: true
             removeParamItersPerPar:
               type: string
             removeAllParamItersPerPar:
+              type: string
+            setParamTotalIterNum:
+              type: string
+              nullable: true
+            removeParamTotalIterNum:
+              type: string
+            removeAllParamTotalIterNum:
               type: string
             setUpdatedParameters:
               type: array
@@ -17376,23 +17788,48 @@ components:
               type: string
             removeAllSimulationName:
               type: string
-            setParamInitialPar:
-              type: array
+            setParamAvgVehiclePerMinFromWestToEast:
+              type: string
               nullable: true
-              items:
-                type: string
-            removeParamInitialPar:
+            removeParamAvgVehiclePerMinFromWestToEast:
               type: string
-            removeAllParamInitialPar:
-              type: array
-              items:
-                type: string
-            addParamInitialPar:
+            removeAllParamAvgVehiclePerMinFromWestToEast:
               type: string
-            addAllParamInitialPar:
-              type: array
-              items:
-                type: string
+            setParamAvgVehiclePerMinFromSouthToNorth:
+              type: string
+              nullable: true
+            removeParamAvgVehiclePerMinFromSouthToNorth:
+              type: string
+            removeAllParamAvgVehiclePerMinFromSouthToNorth:
+              type: string
+            setParamVehicleDemandScalingFactor:
+              type: string
+              nullable: true
+            removeParamVehicleDemandScalingFactor:
+              type: string
+            removeAllParamVehicleDemandScalingFactor:
+              type: string
+            setParamAvgPedestrianPerMinFromWestToEast:
+              type: string
+              nullable: true
+            removeParamAvgPedestrianPerMinFromWestToEast:
+              type: string
+            removeAllParamAvgPedestrianPerMinFromWestToEast:
+              type: string
+            setParamAvgPedestrianPerMinFromSouthToNorth:
+              type: string
+              nullable: true
+            removeParamAvgPedestrianPerMinFromSouthToNorth:
+              type: string
+            removeAllParamAvgPedestrianPerMinFromSouthToNorth:
+              type: string
+            setParamPedestrianDemandScalingFactor:
+              type: string
+              nullable: true
+            removeParamPedestrianDemandScalingFactor:
+              type: string
+            removeAllParamPedestrianDemandScalingFactor:
+              type: string
             setParamLam:
               type: array
               nullable: true
@@ -17410,6 +17847,76 @@ components:
               type: array
               items:
                 type: string
+            setParamMinGreenTimeSecWestEast:
+              type: string
+              nullable: true
+            removeParamMinGreenTimeSecWestEast:
+              type: string
+            removeAllParamMinGreenTimeSecWestEast:
+              type: string
+            setParamMaxGreenTimeSecWestEast:
+              type: string
+              nullable: true
+            removeParamMaxGreenTimeSecWestEast:
+              type: string
+            removeAllParamMaxGreenTimeSecWestEast:
+              type: string
+            setParamMinGreenTimeSecSouthNorth:
+              type: string
+              nullable: true
+            removeParamMinGreenTimeSecSouthNorth:
+              type: string
+            removeAllParamMinGreenTimeSecSouthNorth:
+              type: string
+            setParamMaxGreenTimeSecSouthNorth:
+              type: string
+              nullable: true
+            removeParamMaxGreenTimeSecSouthNorth:
+              type: string
+            removeAllParamMaxGreenTimeSecSouthNorth:
+              type: string
+            setParamPedestrianWaitThresholdSecNorthSouth:
+              type: string
+              nullable: true
+            removeParamPedestrianWaitThresholdSecNorthSouth:
+              type: string
+            removeAllParamPedestrianWaitThresholdSecNorthSouth:
+              type: string
+            setParamPedestrianWaitThresholdSecWestEast:
+              type: string
+              nullable: true
+            removeParamPedestrianWaitThresholdSecWestEast:
+              type: string
+            removeAllParamPedestrianWaitThresholdSecWestEast:
+              type: string
+            setParamVehicleQueueThresholdWestEast:
+              type: string
+              nullable: true
+            removeParamVehicleQueueThresholdWestEast:
+              type: string
+            removeAllParamVehicleQueueThresholdWestEast:
+              type: string
+            setParamVehicleQueueThresholdSouthNorth:
+              type: string
+              nullable: true
+            removeParamVehicleQueueThresholdSouthNorth:
+              type: string
+            removeAllParamVehicleQueueThresholdSouthNorth:
+              type: string
+            setParamPedestrianQueueThresholdNorthSouth:
+              type: string
+              nullable: true
+            removeParamPedestrianQueueThresholdNorthSouth:
+              type: string
+            removeAllParamPedestrianQueueThresholdNorthSouth:
+              type: string
+            setParamPedestrianQueueThresholdWestEast:
+              type: string
+              nullable: true
+            removeParamPedestrianQueueThresholdWestEast:
+              type: string
+            removeAllParamPedestrianQueueThresholdWestEast:
+              type: string
             setParamDemandScale:
               type: string
               nullable: true
@@ -17417,6 +17924,23 @@ components:
               type: string
             removeAllParamDemandScale:
               type: string
+            setParamInitialPar:
+              type: array
+              nullable: true
+              items:
+                type: string
+            removeParamInitialPar:
+              type: string
+            removeAllParamInitialPar:
+              type: array
+              items:
+                type: string
+            addParamInitialPar:
+              type: string
+            addAllParamInitialPar:
+              type: array
+              items:
+                type: string
             setParamStepSize:
               type: string
               nullable: true
@@ -17438,19 +17962,19 @@ components:
               type: string
             removeAllParamRunTime:
               type: string
-            setParamTotalIterNum:
-              type: string
-              nullable: true
-            removeParamTotalIterNum:
-              type: string
-            removeAllParamTotalIterNum:
-              type: string
             setParamItersPerPar:
               type: string
               nullable: true
             removeParamItersPerPar:
               type: string
             removeAllParamItersPerPar:
+              type: string
+            setParamTotalIterNum:
+              type: string
+              nullable: true
+            removeParamTotalIterNum:
+              type: string
+            removeAllParamTotalIterNum:
               type: string
             setUpdatedParameters:
               type: array
@@ -17488,25 +18012,57 @@ components:
                     type: string
                   simulationName:
                     type: string
-                  paramInitialPar:
-                    type: array
-                    items:
-                      type: string
+                  paramAvgVehiclePerMinFromWestToEast:
+                    type: string
+                  paramAvgVehiclePerMinFromSouthToNorth:
+                    type: string
+                  paramVehicleDemandScalingFactor:
+                    type: string
+                  paramAvgPedestrianPerMinFromWestToEast:
+                    type: string
+                  paramAvgPedestrianPerMinFromSouthToNorth:
+                    type: string
+                  paramPedestrianDemandScalingFactor:
+                    type: string
                   paramLam:
                     type: array
                     items:
                       type: string
+                  paramMinGreenTimeSecWestEast:
+                    type: string
+                  paramMaxGreenTimeSecWestEast:
+                    type: string
+                  paramMinGreenTimeSecSouthNorth:
+                    type: string
+                  paramMaxGreenTimeSecSouthNorth:
+                    type: string
+                  paramPedestrianWaitThresholdSecNorthSouth:
+                    type: string
+                  paramPedestrianWaitThresholdSecWestEast:
+                    type: string
+                  paramVehicleQueueThresholdWestEast:
+                    type: string
+                  paramVehicleQueueThresholdSouthNorth:
+                    type: string
+                  paramPedestrianQueueThresholdNorthSouth:
+                    type: string
+                  paramPedestrianQueueThresholdWestEast:
+                    type: string
                   paramDemandScale:
                     type: string
+                  paramInitialPar:
+                    type: array
+                    items:
+                      type: string
                   paramStepSize:
                     type: string
                   paramUpdateStepSize:
                     type: string
                   paramRunTime:
                     type: string
-                  paramTotalIterNum:
-                    type: string
                   paramItersPerPar:
+                    type: string
+                  paramTotalIterNum:
                     type: string
                   updatedParameters:
                     type: array
@@ -17530,23 +18086,48 @@ components:
               type: string
             removeAllSimulationName:
               type: string
-            setParamInitialPar:
-              type: array
+            setParamAvgVehiclePerMinFromWestToEast:
+              type: string
               nullable: true
-              items:
-                type: string
-            removeParamInitialPar:
+            removeParamAvgVehiclePerMinFromWestToEast:
               type: string
-            removeAllParamInitialPar:
-              type: array
-              items:
-                type: string
-            addParamInitialPar:
+            removeAllParamAvgVehiclePerMinFromWestToEast:
               type: string
-            addAllParamInitialPar:
-              type: array
-              items:
-                type: string
+            setParamAvgVehiclePerMinFromSouthToNorth:
+              type: string
+              nullable: true
+            removeParamAvgVehiclePerMinFromSouthToNorth:
+              type: string
+            removeAllParamAvgVehiclePerMinFromSouthToNorth:
+              type: string
+            setParamVehicleDemandScalingFactor:
+              type: string
+              nullable: true
+            removeParamVehicleDemandScalingFactor:
+              type: string
+            removeAllParamVehicleDemandScalingFactor:
+              type: string
+            setParamAvgPedestrianPerMinFromWestToEast:
+              type: string
+              nullable: true
+            removeParamAvgPedestrianPerMinFromWestToEast:
+              type: string
+            removeAllParamAvgPedestrianPerMinFromWestToEast:
+              type: string
+            setParamAvgPedestrianPerMinFromSouthToNorth:
+              type: string
+              nullable: true
+            removeParamAvgPedestrianPerMinFromSouthToNorth:
+              type: string
+            removeAllParamAvgPedestrianPerMinFromSouthToNorth:
+              type: string
+            setParamPedestrianDemandScalingFactor:
+              type: string
+              nullable: true
+            removeParamPedestrianDemandScalingFactor:
+              type: string
+            removeAllParamPedestrianDemandScalingFactor:
+              type: string
             setParamLam:
               type: array
               nullable: true
@@ -17564,6 +18145,76 @@ components:
               type: array
               items:
                 type: string
+            setParamMinGreenTimeSecWestEast:
+              type: string
+              nullable: true
+            removeParamMinGreenTimeSecWestEast:
+              type: string
+            removeAllParamMinGreenTimeSecWestEast:
+              type: string
+            setParamMaxGreenTimeSecWestEast:
+              type: string
+              nullable: true
+            removeParamMaxGreenTimeSecWestEast:
+              type: string
+            removeAllParamMaxGreenTimeSecWestEast:
+              type: string
+            setParamMinGreenTimeSecSouthNorth:
+              type: string
+              nullable: true
+            removeParamMinGreenTimeSecSouthNorth:
+              type: string
+            removeAllParamMinGreenTimeSecSouthNorth:
+              type: string
+            setParamMaxGreenTimeSecSouthNorth:
+              type: string
+              nullable: true
+            removeParamMaxGreenTimeSecSouthNorth:
+              type: string
+            removeAllParamMaxGreenTimeSecSouthNorth:
+              type: string
+            setParamPedestrianWaitThresholdSecNorthSouth:
+              type: string
+              nullable: true
+            removeParamPedestrianWaitThresholdSecNorthSouth:
+              type: string
+            removeAllParamPedestrianWaitThresholdSecNorthSouth:
+              type: string
+            setParamPedestrianWaitThresholdSecWestEast:
+              type: string
+              nullable: true
+            removeParamPedestrianWaitThresholdSecWestEast:
+              type: string
+            removeAllParamPedestrianWaitThresholdSecWestEast:
+              type: string
+            setParamVehicleQueueThresholdWestEast:
+              type: string
+              nullable: true
+            removeParamVehicleQueueThresholdWestEast:
+              type: string
+            removeAllParamVehicleQueueThresholdWestEast:
+              type: string
+            setParamVehicleQueueThresholdSouthNorth:
+              type: string
+              nullable: true
+            removeParamVehicleQueueThresholdSouthNorth:
+              type: string
+            removeAllParamVehicleQueueThresholdSouthNorth:
+              type: string
+            setParamPedestrianQueueThresholdNorthSouth:
+              type: string
+              nullable: true
+            removeParamPedestrianQueueThresholdNorthSouth:
+              type: string
+            removeAllParamPedestrianQueueThresholdNorthSouth:
+              type: string
+            setParamPedestrianQueueThresholdWestEast:
+              type: string
+              nullable: true
+            removeParamPedestrianQueueThresholdWestEast:
+              type: string
+            removeAllParamPedestrianQueueThresholdWestEast:
+              type: string
             setParamDemandScale:
               type: string
               nullable: true
@@ -17571,6 +18222,23 @@ components:
               type: string
             removeAllParamDemandScale:
               type: string
+            setParamInitialPar:
+              type: array
+              nullable: true
+              items:
+                type: string
+            removeParamInitialPar:
+              type: string
+            removeAllParamInitialPar:
+              type: array
+              items:
+                type: string
+            addParamInitialPar:
+              type: string
+            addAllParamInitialPar:
+              type: array
+              items:
+                type: string
             setParamStepSize:
               type: string
               nullable: true
@@ -17592,19 +18260,19 @@ components:
               type: string
             removeAllParamRunTime:
               type: string
-            setParamTotalIterNum:
-              type: string
-              nullable: true
-            removeParamTotalIterNum:
-              type: string
-            removeAllParamTotalIterNum:
-              type: string
             setParamItersPerPar:
               type: string
               nullable: true
             removeParamItersPerPar:
               type: string
             removeAllParamItersPerPar:
+              type: string
+            setParamTotalIterNum:
+              type: string
+              nullable: true
+            removeParamTotalIterNum:
+              type: string
+            removeAllParamTotalIterNum:
               type: string
             setUpdatedParameters:
               type: array
@@ -17638,23 +18306,48 @@ components:
               type: string
             removeAllSimulationName:
               type: string
-            setParamInitialPar:
-              type: array
+            setParamAvgVehiclePerMinFromWestToEast:
+              type: string
               nullable: true
-              items:
-                type: string
-            removeParamInitialPar:
+            removeParamAvgVehiclePerMinFromWestToEast:
               type: string
-            removeAllParamInitialPar:
-              type: array
-              items:
-                type: string
-            addParamInitialPar:
+            removeAllParamAvgVehiclePerMinFromWestToEast:
               type: string
-            addAllParamInitialPar:
-              type: array
-              items:
-                type: string
+            setParamAvgVehiclePerMinFromSouthToNorth:
+              type: string
+              nullable: true
+            removeParamAvgVehiclePerMinFromSouthToNorth:
+              type: string
+            removeAllParamAvgVehiclePerMinFromSouthToNorth:
+              type: string
+            setParamVehicleDemandScalingFactor:
+              type: string
+              nullable: true
+            removeParamVehicleDemandScalingFactor:
+              type: string
+            removeAllParamVehicleDemandScalingFactor:
+              type: string
+            setParamAvgPedestrianPerMinFromWestToEast:
+              type: string
+              nullable: true
+            removeParamAvgPedestrianPerMinFromWestToEast:
+              type: string
+            removeAllParamAvgPedestrianPerMinFromWestToEast:
+              type: string
+            setParamAvgPedestrianPerMinFromSouthToNorth:
+              type: string
+              nullable: true
+            removeParamAvgPedestrianPerMinFromSouthToNorth:
+              type: string
+            removeAllParamAvgPedestrianPerMinFromSouthToNorth:
+              type: string
+            setParamPedestrianDemandScalingFactor:
+              type: string
+              nullable: true
+            removeParamPedestrianDemandScalingFactor:
+              type: string
+            removeAllParamPedestrianDemandScalingFactor:
+              type: string
             setParamLam:
               type: array
               nullable: true
@@ -17672,6 +18365,76 @@ components:
               type: array
               items:
                 type: string
+            setParamMinGreenTimeSecWestEast:
+              type: string
+              nullable: true
+            removeParamMinGreenTimeSecWestEast:
+              type: string
+            removeAllParamMinGreenTimeSecWestEast:
+              type: string
+            setParamMaxGreenTimeSecWestEast:
+              type: string
+              nullable: true
+            removeParamMaxGreenTimeSecWestEast:
+              type: string
+            removeAllParamMaxGreenTimeSecWestEast:
+              type: string
+            setParamMinGreenTimeSecSouthNorth:
+              type: string
+              nullable: true
+            removeParamMinGreenTimeSecSouthNorth:
+              type: string
+            removeAllParamMinGreenTimeSecSouthNorth:
+              type: string
+            setParamMaxGreenTimeSecSouthNorth:
+              type: string
+              nullable: true
+            removeParamMaxGreenTimeSecSouthNorth:
+              type: string
+            removeAllParamMaxGreenTimeSecSouthNorth:
+              type: string
+            setParamPedestrianWaitThresholdSecNorthSouth:
+              type: string
+              nullable: true
+            removeParamPedestrianWaitThresholdSecNorthSouth:
+              type: string
+            removeAllParamPedestrianWaitThresholdSecNorthSouth:
+              type: string
+            setParamPedestrianWaitThresholdSecWestEast:
+              type: string
+              nullable: true
+            removeParamPedestrianWaitThresholdSecWestEast:
+              type: string
+            removeAllParamPedestrianWaitThresholdSecWestEast:
+              type: string
+            setParamVehicleQueueThresholdWestEast:
+              type: string
+              nullable: true
+            removeParamVehicleQueueThresholdWestEast:
+              type: string
+            removeAllParamVehicleQueueThresholdWestEast:
+              type: string
+            setParamVehicleQueueThresholdSouthNorth:
+              type: string
+              nullable: true
+            removeParamVehicleQueueThresholdSouthNorth:
+              type: string
+            removeAllParamVehicleQueueThresholdSouthNorth:
+              type: string
+            setParamPedestrianQueueThresholdNorthSouth:
+              type: string
+              nullable: true
+            removeParamPedestrianQueueThresholdNorthSouth:
+              type: string
+            removeAllParamPedestrianQueueThresholdNorthSouth:
+              type: string
+            setParamPedestrianQueueThresholdWestEast:
+              type: string
+              nullable: true
+            removeParamPedestrianQueueThresholdWestEast:
+              type: string
+            removeAllParamPedestrianQueueThresholdWestEast:
+              type: string
             setParamDemandScale:
               type: string
               nullable: true
@@ -17679,6 +18442,23 @@ components:
               type: string
             removeAllParamDemandScale:
               type: string
+            setParamInitialPar:
+              type: array
+              nullable: true
+              items:
+                type: string
+            removeParamInitialPar:
+              type: string
+            removeAllParamInitialPar:
+              type: array
+              items:
+                type: string
+            addParamInitialPar:
+              type: string
+            addAllParamInitialPar:
+              type: array
+              items:
+                type: string
             setParamStepSize:
               type: string
               nullable: true
@@ -17700,19 +18480,19 @@ components:
               type: string
             removeAllParamRunTime:
               type: string
-            setParamTotalIterNum:
-              type: string
-              nullable: true
-            removeParamTotalIterNum:
-              type: string
-            removeAllParamTotalIterNum:
-              type: string
             setParamItersPerPar:
               type: string
               nullable: true
             removeParamItersPerPar:
               type: string
             removeAllParamItersPerPar:
+              type: string
+            setParamTotalIterNum:
+              type: string
+              nullable: true
+            removeParamTotalIterNum:
+              type: string
+            removeAllParamTotalIterNum:
               type: string
             setUpdatedParameters:
               type: array
@@ -17736,25 +18516,57 @@ components:
               type: string
             simulationName:
               type: string
-            paramInitialPar:
-              type: array
-              items:
-                type: string
+            paramAvgVehiclePerMinFromWestToEast:
+              type: string
+            paramAvgVehiclePerMinFromSouthToNorth:
+              type: string
+            paramVehicleDemandScalingFactor:
+              type: string
+            paramAvgPedestrianPerMinFromWestToEast:
+              type: string
+            paramAvgPedestrianPerMinFromSouthToNorth:
+              type: string
+            paramPedestrianDemandScalingFactor:
+              type: string
             paramLam:
               type: array
               items:
                 type: string
+            paramMinGreenTimeSecWestEast:
+              type: string
+            paramMaxGreenTimeSecWestEast:
+              type: string
+            paramMinGreenTimeSecSouthNorth:
+              type: string
+            paramMaxGreenTimeSecSouthNorth:
+              type: string
+            paramPedestrianWaitThresholdSecNorthSouth:
+              type: string
+            paramPedestrianWaitThresholdSecWestEast:
+              type: string
+            paramVehicleQueueThresholdWestEast:
+              type: string
+            paramVehicleQueueThresholdSouthNorth:
+              type: string
+            paramPedestrianQueueThresholdNorthSouth:
+              type: string
+            paramPedestrianQueueThresholdWestEast:
+              type: string
             paramDemandScale:
               type: string
+            paramInitialPar:
+              type: array
+              items:
+                type: string
             paramStepSize:
               type: string
             paramUpdateStepSize:
               type: string
             paramRunTime:
               type: string
-            paramTotalIterNum:
-              type: string
             paramItersPerPar:
+              type: string
+            paramTotalIterNum:
               type: string
             updatedParameters:
               type: array
@@ -17768,25 +18580,57 @@ components:
               type: string
             simulationName:
               type: string
-            paramInitialPar:
-              type: array
-              items:
-                type: string
+            paramAvgVehiclePerMinFromWestToEast:
+              type: string
+            paramAvgVehiclePerMinFromSouthToNorth:
+              type: string
+            paramVehicleDemandScalingFactor:
+              type: string
+            paramAvgPedestrianPerMinFromWestToEast:
+              type: string
+            paramAvgPedestrianPerMinFromSouthToNorth:
+              type: string
+            paramPedestrianDemandScalingFactor:
+              type: string
             paramLam:
               type: array
               items:
                 type: string
+            paramMinGreenTimeSecWestEast:
+              type: string
+            paramMaxGreenTimeSecWestEast:
+              type: string
+            paramMinGreenTimeSecSouthNorth:
+              type: string
+            paramMaxGreenTimeSecSouthNorth:
+              type: string
+            paramPedestrianWaitThresholdSecNorthSouth:
+              type: string
+            paramPedestrianWaitThresholdSecWestEast:
+              type: string
+            paramVehicleQueueThresholdWestEast:
+              type: string
+            paramVehicleQueueThresholdSouthNorth:
+              type: string
+            paramPedestrianQueueThresholdNorthSouth:
+              type: string
+            paramPedestrianQueueThresholdWestEast:
+              type: string
             paramDemandScale:
               type: string
+            paramInitialPar:
+              type: array
+              items:
+                type: string
             paramStepSize:
               type: string
             paramUpdateStepSize:
               type: string
             paramRunTime:
               type: string
-            paramTotalIterNum:
-              type: string
             paramItersPerPar:
+              type: string
+            paramTotalIterNum:
               type: string
             updatedParameters:
               type: array
@@ -17800,25 +18644,57 @@ components:
               type: string
             simulationName:
               type: string
-            paramInitialPar:
-              type: array
-              items:
-                type: string
+            paramAvgVehiclePerMinFromWestToEast:
+              type: string
+            paramAvgVehiclePerMinFromSouthToNorth:
+              type: string
+            paramVehicleDemandScalingFactor:
+              type: string
+            paramAvgPedestrianPerMinFromWestToEast:
+              type: string
+            paramAvgPedestrianPerMinFromSouthToNorth:
+              type: string
+            paramPedestrianDemandScalingFactor:
+              type: string
             paramLam:
               type: array
               items:
                 type: string
+            paramMinGreenTimeSecWestEast:
+              type: string
+            paramMaxGreenTimeSecWestEast:
+              type: string
+            paramMinGreenTimeSecSouthNorth:
+              type: string
+            paramMaxGreenTimeSecSouthNorth:
+              type: string
+            paramPedestrianWaitThresholdSecNorthSouth:
+              type: string
+            paramPedestrianWaitThresholdSecWestEast:
+              type: string
+            paramVehicleQueueThresholdWestEast:
+              type: string
+            paramVehicleQueueThresholdSouthNorth:
+              type: string
+            paramPedestrianQueueThresholdNorthSouth:
+              type: string
+            paramPedestrianQueueThresholdWestEast:
+              type: string
             paramDemandScale:
               type: string
+            paramInitialPar:
+              type: array
+              items:
+                type: string
             paramStepSize:
               type: string
             paramUpdateStepSize:
               type: string
             paramRunTime:
               type: string
-            paramTotalIterNum:
-              type: string
             paramItersPerPar:
+              type: string
+            paramTotalIterNum:
               type: string
             updatedParameters:
               type: array
@@ -17832,25 +18708,57 @@ components:
               type: string
             simulationName:
               type: string
-            paramInitialPar:
-              type: array
-              items:
-                type: string
+            paramAvgVehiclePerMinFromWestToEast:
+              type: string
+            paramAvgVehiclePerMinFromSouthToNorth:
+              type: string
+            paramVehicleDemandScalingFactor:
+              type: string
+            paramAvgPedestrianPerMinFromWestToEast:
+              type: string
+            paramAvgPedestrianPerMinFromSouthToNorth:
+              type: string
+            paramPedestrianDemandScalingFactor:
+              type: string
             paramLam:
               type: array
               items:
                 type: string
+            paramMinGreenTimeSecWestEast:
+              type: string
+            paramMaxGreenTimeSecWestEast:
+              type: string
+            paramMinGreenTimeSecSouthNorth:
+              type: string
+            paramMaxGreenTimeSecSouthNorth:
+              type: string
+            paramPedestrianWaitThresholdSecNorthSouth:
+              type: string
+            paramPedestrianWaitThresholdSecWestEast:
+              type: string
+            paramVehicleQueueThresholdWestEast:
+              type: string
+            paramVehicleQueueThresholdSouthNorth:
+              type: string
+            paramPedestrianQueueThresholdNorthSouth:
+              type: string
+            paramPedestrianQueueThresholdWestEast:
+              type: string
             paramDemandScale:
               type: string
+            paramInitialPar:
+              type: array
+              items:
+                type: string
             paramStepSize:
               type: string
             paramUpdateStepSize:
               type: string
             paramRunTime:
               type: string
-            paramTotalIterNum:
-              type: string
             paramItersPerPar:
+              type: string
+            paramTotalIterNum:
               type: string
             updatedParameters:
               type: array
@@ -17864,25 +18772,57 @@ components:
               type: string
             simulationName:
               type: string
-            paramInitialPar:
-              type: array
-              items:
-                type: string
+            paramAvgVehiclePerMinFromWestToEast:
+              type: string
+            paramAvgVehiclePerMinFromSouthToNorth:
+              type: string
+            paramVehicleDemandScalingFactor:
+              type: string
+            paramAvgPedestrianPerMinFromWestToEast:
+              type: string
+            paramAvgPedestrianPerMinFromSouthToNorth:
+              type: string
+            paramPedestrianDemandScalingFactor:
+              type: string
             paramLam:
               type: array
               items:
                 type: string
+            paramMinGreenTimeSecWestEast:
+              type: string
+            paramMaxGreenTimeSecWestEast:
+              type: string
+            paramMinGreenTimeSecSouthNorth:
+              type: string
+            paramMaxGreenTimeSecSouthNorth:
+              type: string
+            paramPedestrianWaitThresholdSecNorthSouth:
+              type: string
+            paramPedestrianWaitThresholdSecWestEast:
+              type: string
+            paramVehicleQueueThresholdWestEast:
+              type: string
+            paramVehicleQueueThresholdSouthNorth:
+              type: string
+            paramPedestrianQueueThresholdNorthSouth:
+              type: string
+            paramPedestrianQueueThresholdWestEast:
+              type: string
             paramDemandScale:
               type: string
+            paramInitialPar:
+              type: array
+              items:
+                type: string
             paramStepSize:
               type: string
             paramUpdateStepSize:
               type: string
             paramRunTime:
               type: string
-            paramTotalIterNum:
-              type: string
             paramItersPerPar:
+              type: string
+            paramTotalIterNum:
               type: string
             updatedParameters:
               type: array

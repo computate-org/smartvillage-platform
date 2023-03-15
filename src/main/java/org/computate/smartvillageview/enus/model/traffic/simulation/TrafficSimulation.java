@@ -152,14 +152,96 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
+	 * HtmlRow: 7
+	 * HtmlCell: 1
+	 * Facet: true
+	 * DisplayName: Average vehicle/min from WEST to EAST
+	 * Description: 
+	 */
+	protected void _paramAvgVehiclePerMinFromWestToEast(Wrap<BigDecimal> w) {
+		w.o(new BigDecimal(10));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * HtmlRow: 7
+	 * HtmlCell: 2
+	 * Facet: true
+	 * DisplayName: Average vehicle/min from SOUTH to NORTH
+	 * Description: 
+	 */
+	protected void _paramAvgVehiclePerMinFromSouthToNorth(Wrap<BigDecimal> w) {
+		w.o(new BigDecimal(10));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * HtmlRow: 7
+	 * HtmlCell: 3
+	 * Facet: true
+	 * DisplayName: Demand scaling factor (multiplies all vehicle demands)
+	 * Description: 
+	 */
+	protected void _paramVehicleDemandScalingFactor(Wrap<BigDecimal> w) {
+		w.o(new BigDecimal(1));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
 	 * HtmlRow: 8
 	 * HtmlCell: 1
 	 * Facet: true
-	 * DisplayName: initial params
+	 * DisplayName: Average pedestrian/min from WEST to EAST
 	 * Description: 
 	 */
-	protected void _paramInitialPar(List<BigDecimal> l) {
-		l.addAll(Arrays.asList(new BigDecimal(10), new BigDecimal(20), new BigDecimal(30), new BigDecimal(50), new BigDecimal(10), new BigDecimal(10), new BigDecimal(8), new BigDecimal(8), new BigDecimal(5), new BigDecimal(5)));
+	protected void _paramAvgPedestrianPerMinFromWestToEast(Wrap<BigDecimal> w) {
+		w.o(new BigDecimal(5));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * HtmlRow: 8
+	 * HtmlCell: 2
+	 * Facet: true
+	 * DisplayName: Average pedestrian/min from WEST to EAST
+	 * Description: 
+	 */
+	protected void _paramAvgPedestrianPerMinFromSouthToNorth(Wrap<BigDecimal> w) {
+		w.o(new BigDecimal(5));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * HtmlRow: 8
+	 * HtmlCell: 3
+	 * Facet: true
+	 * DisplayName: Demand scaling factor (multiplies all pedestrian demands)
+	 * Description: 
+	 */
+	protected void _paramPedestrianDemandScalingFactor(Wrap<BigDecimal> w) {
+		w.o(new BigDecimal(1));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * Facet: true
+	 * DisplayName: demand scale
+	 * Description: 
+	 */
+	protected void _paramDemandScale(Wrap<BigDecimal> w) {
+		w.o(paramVehicleDemandScalingFactor);
 	}
 
 	/**
@@ -169,11 +251,25 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * HtmlRow: 9
 	 * HtmlCell: 1
 	 * Facet: true
-	 * DisplayName: Traffic Demand
+	 * DisplayName: Min GREEN time for WEST-EAST traffic (sec)
 	 * Description: 
 	 */
-	protected void _paramLam(List<BigDecimal> l) {
-		l.addAll(Arrays.asList(new BigDecimal(10), new BigDecimal(10), new BigDecimal(6), new BigDecimal(6)));
+	protected void _paramMinGreenTimeSecWestEast(Wrap<BigDecimal> w) {
+		w.o(new BigDecimal(10));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * HtmlRow: 9
+	 * HtmlCell: 2
+	 * Facet: true
+	 * DisplayName: Max GREEN time for WEST-EAST traffic (sec)
+	 * Description: 
+	 */
+	protected void _paramMaxGreenTimeSecWestEast(Wrap<BigDecimal> w) {
+		w.o(new BigDecimal(20));
 	}
 
 	/**
@@ -183,11 +279,11 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * HtmlRow: 10
 	 * HtmlCell: 1
 	 * Facet: true
-	 * DisplayName: demand scale
+	 * DisplayName: Min GREEN time for SOUTH-NORTH traffic (sec)
 	 * Description: 
 	 */
-	protected void _paramDemandScale(Wrap<BigDecimal> w) {
-		w.o(new BigDecimal(1));
+	protected void _paramMinGreenTimeSecSouthNorth(Wrap<BigDecimal> w) {
+		w.o(new BigDecimal(30));
 	}
 
 	/**
@@ -197,7 +293,105 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * HtmlRow: 10
 	 * HtmlCell: 2
 	 * Facet: true
-	 * DisplayName: step size
+	 * DisplayName: Max GREEN time for SOUTH-NORTH traffic (sec)
+	 * Description: 
+	 */
+	protected void _paramMaxGreenTimeSecSouthNorth(Wrap<BigDecimal> w) {
+		w.o(new BigDecimal(50));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * HtmlRow: 11
+	 * HtmlCell: 1
+	 * Facet: true
+	 * DisplayName: Pedestrian waiting time tolerance threshold for NORTH-SOUTH (sec)
+	 * Description: 
+	 */
+	protected void _paramPedestrianWaitThresholdSecNorthSouth(Wrap<BigDecimal> w) {
+		w.o(new BigDecimal(10));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * HtmlRow: 11
+	 * HtmlCell: 2
+	 * Facet: true
+	 * DisplayName: Pedestrian waiting time tolerance threshold for WEST-EAST (sec)
+	 * Description: 
+	 */
+	protected void _paramPedestrianWaitThresholdSecWestEast(Wrap<BigDecimal> w) {
+		w.o(new BigDecimal(10));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * HtmlRow: 12
+	 * HtmlCell: 1
+	 * Facet: true
+	 * DisplayName: Vehicle queue length threshold between low-high content for WEST-EAST
+	 * Description: 
+	 */
+	protected void _paramVehicleQueueThresholdWestEast(Wrap<BigDecimal> w) {
+		w.o(new BigDecimal(8));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * HtmlRow: 12
+	 * HtmlCell: 2
+	 * Facet: true
+	 * DisplayName: Vehicle queue length threshold between low-high content for SOUTH-NORTH
+	 * Description: 
+	 */
+	protected void _paramVehicleQueueThresholdSouthNorth(Wrap<BigDecimal> w) {
+		w.o(new BigDecimal(8));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * HtmlRow: 13
+	 * HtmlCell: 1
+	 * Facet: true
+	 * DisplayName: Pedestrian queue length threshold between low-high content for NORTH-SOUTH
+	 * Description: 
+	 */
+	protected void _paramPedestrianQueueThresholdNorthSouth(Wrap<BigDecimal> w) {
+		w.o(new BigDecimal(5));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * HtmlRow: 13
+	 * HtmlCell: 2
+	 * Facet: true
+	 * DisplayName: Pedestrian queue length threshold between low-high content for WEST-EAST
+	 * Description: 
+	 */
+	protected void _paramPedestrianQueueThresholdWestEast(Wrap<BigDecimal> w) {
+		w.o(new BigDecimal(6));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * HtmlRow: 14
+	 * HtmlCell: 2
+	 * Facet: true
+	 * DisplayName: Simulation time step (sec)
 	 * Description: 
 	 */
 	protected void _paramStepSize(Wrap<BigDecimal> w) {
@@ -208,8 +402,6 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 10
-	 * HtmlCell: 3
 	 * Facet: true
 	 * DisplayName: update step size
 	 * Description: 
@@ -222,10 +414,10 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 11
+	 * HtmlRow: 14
 	 * HtmlCell: 1
 	 * Facet: true
-	 * DisplayName: run time
+	 * DisplayName: time for each round of traffic simulation (sec)
 	 * Description: Time duration of each simulated sample path. 
 	 */
 	protected void _paramRunTime(Wrap<Integer> w) {
@@ -236,24 +428,10 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 11
-	 * HtmlCell: 2
+	 * HtmlRow: 15
+	 * HtmlCell: 1
 	 * Facet: true
-	 * DisplayName: total iterations
-	 * Description: Total iterations to update performance. 
-	 */
-	protected void _paramTotalIterNum(Wrap<Integer> w) {
-		w.o(10);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * DocValues: true
-	 * Persist: true
-	 * HtmlRow: 11
-	 * HtmlCell: 3
-	 * Facet: true
-	 * DisplayName: iteration repetitions
+	 * DisplayName: Number of simulation repetitions with same input (for statistical accuracy)
 	 * Description: Number of repeats per round. 
 	 */
 	protected void _paramItersPerPar(Wrap<Integer> w) {
@@ -263,8 +441,22 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	/**
 	 * {@inheritDoc}
 	 * DocValues: true
+	 * Persist: true
+	 * HtmlRow: 15
+	 * HtmlCell: 2
+	 * Facet: true
+	 * DisplayName: Number of parameter update iterations before output
+	 * Description: Total iterations to update performance. 
+	 */
+	protected void _paramTotalIterNum(Wrap<Integer> w) {
+		w.o(10);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
 	 * Relate: SimulationReport.simulationKey
-	 * HtmlRow: 12
+	 * HtmlRow: 16
 	 * HtmlCell: 1
 	 * Facet: true
 	 * DisplayName: simulation reports
