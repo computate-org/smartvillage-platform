@@ -1,0 +1,196 @@
+---
+pageId: creating-a-global-open-research-platform-to-better-understand-social-sustainability-using-data-from-a-real-life-smart-village
+uri: "/en-us/{{ pageId }}"
+url: "https://research.redhat.com/blog/research_project/creating-a-global-open-research-platform-to-better-understand-social-sustainability-using-data-from-a-real-life-smart-village/"
+h1: Creating a global open research platform to better understand social sustainability using data from a real-life smart village
+h2: Red Hat Collaboratory with Boston University Project in 2022 and renewal awarded in 2023
+created: "2022-01-17"
+courseNum: 1
+lessonNum: 1
+author:
+  name: Christopher Tate
+  title: Senior Software Consultant
+pageImageUri: "/png/{{ pageId }}/infographic.png"
+htmTitle:
+  - text: "{{ h1 }}{{ h2 }}"
+htmMeta:
+  - {e: meta, a: {property: "og:title", content: "{{ h1 }}"}}
+  - {e: meta, a: {property: "og:description", content: "{{ h2 }}"}}
+  - {e: meta, a: {property: "og:url", content: "{{ page.siteBaseUrl }}{{ uri }}"}}
+  - {e: meta, a: {property: "og:site_name", content: "{{ page.siteName }}"}}
+  - {e: meta, a: {property: "og:image", content: "{{ page.staticBaseUrl }}{{ pageImageUri }}"}}
+  - comment: |
+      CutyCapt --min-height=1 --url='{{ page.siteBaseUrl }}{{ uri }}?var=filterLabel:infographic' --out='{{ page.staticPath }}/png/{{ pageId }}/infographic.png'
+      CutyCapt --min-height=1 --url='{{ page.siteBaseUrl }}{{ uri }}?var=filterLabel:image' --out='{{ page.staticPath }}/png/{{ pageId }}/image.png'
+      CutyCapt --min-height=1 --url='{{ page.siteBaseUrl }}{{ uri }}?var=filterLabel:review' --out='{{ page.staticPath }}/png/{{ pageId }}/review.png'
+  - {e: meta, a: {property: "og:image:width", content: "{{ page.pageImageWidth }}"}}
+  - {e: meta, a: {property: "og:image:height", content: "{{ page.pageImageHeight }}"}}
+  - {e: meta, a: {property: "og:image:type", content: "{{ page.pageImageType }}"}}
+  - {e: meta, a: {property: "og:image:alt", content: "{{ h1 }} {{ h2 }}"}}
+  - {e: meta, a: {property: "og:type", content: "article"}}
+  - {e: meta, a: {property: "twitter:card", content: "summary_large_image"}}
+  - {e: meta, a: {property: "twitter:title", content: "{{ h1 }}"}}
+  - {e: meta, a: {property: "twitter:description", content: "{{ h2 }}"}}
+  - {e: meta, a: {property: "twitter:image", content: "{{ page.staticBaseUrl }}{{ pageImageUri }}"}}
+  - {e: meta, a: {property: "description", content: "{{ h2 }}"}}
+htmBody:
+  - e: div
+    a:
+      class: w3-card w3-padding w3-margin-top w3-show w3-white 
+    in:
+      - e: div
+        in:
+          - e: h1
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-question padding-right-quarter-em
+              - e: span
+                text: "{{ h1 }}"
+          - e: h2
+            a:
+              class: ""
+            in:
+              - e: i
+                a:
+                  class: fa-solid fa-tree-city padding-right-quarter-em
+              - e: span
+                text: "{{ h2 }}"
+          - e: div
+            a:
+              class: w3-row w3-mobile 
+            label: 
+              - infographic
+              - image
+            in:
+          - e: div
+            a:
+              class: w3-row w3-mobile 
+            label: 
+              - infographic
+              - image
+            in:
+              - e: img
+                a:
+                  class: w3-image 
+                  src: "{{ page.staticBaseUrl }}/png/{{ pageId }}/image.png"
+      - e: div
+        in:
+          - e: div
+            a:
+              class: w3-padding 
+            in:
+              - e: div
+                in:
+                  - e: span
+                    text: |
+                      A BU team is working with SmartaByar and the Red Hat Social Innovation Program in order to create a global secure open source research platform allowing universities and researchers to study what social sustainability means using actual data from Veberöd, Sweden (or from its digital twin) as a test village supported by SmartaByar. 
+                      The goal of this project is to build an open source technological infrastructure which has never been built before, so that researchers can collaborate on this platform effectively and securely to study topics that will ultimately define a link between well-being and eco-smart cities and provide smart services to their citizens. 
+                      During the first year of the project, the team studied the available data and designed an open source platform that interfaces with the data sources (IoT devices) and supports a digital twin model of the village on which smart services can be tested. 
+                      A specific use case (a smart traffic light) was identified from which a smart service is being built. 
+                      The second-year goals are to (a) complete the open source platform to include large-scale data exchange APIs which are aligned with open standards used in digital twin and application development platforms for smart cities, and (b) test the use case using actual real-time data and scale up the use case to the entire smart village and beyond.
+      - e: div
+        label:
+          - infographic
+          - review
+        a:
+          id: divReview
+        in:
+          - e: table
+            a:
+              id: tableReview1
+              class: review1Table 
+            in:
+              - e: tbody
+                in:
+                  - e: tr
+                    a:
+                      class: 
+                    in:
+                      - e: td
+                        a:
+                          class: w3-mobile review1TableTr1Td1 review1TableTr1Td even 
+                        in:
+                          - e: span
+                            text: '{{formatZonedDateTime created "EEEE" "en-US" "America/Denver" }}'
+                      - e: td
+                        a:
+                          class: w3-mobile review1TableTr1Td2 review1TableTr1Td odd 
+                        in:
+                          - e: i
+                            a:
+                              class: "{{ htmBody.0.in.0.in.0.in.0.a.class }}"
+                      - e: td
+                        a:
+                          class: w3-mobile review1TableTr1Td3 review1TableTr1Td even 
+                        in:
+                          - e: i
+                            a:
+                              class: "{{ htmBody.0.in.0.in.1.in.0.a.class }}"
+                      - e: td
+                        a:
+                          class: w3-mobile review1TableTr1Td4 review1TableTr1Td odd 
+                        in:
+                          - e: i
+                            a:
+                              class: "fa-solid fa-pen-nib"
+                  - e: tr
+                    a:
+                      class: odd 
+                    in:
+                      - e: td
+                        a:
+                          class: w3-mobile review1TableTr2Td1 review1TableTr2Td even 
+                        in:
+                          - e: span
+                            text: '{{formatZonedDateTime created "MMMM d yyyy" "en-US" "America/Denver" }}'
+                      - e: td
+                        a:
+                          class: w3-mobile review1TableTr2Td2 review1TableTr2Td odd 
+                        in:
+                          - e: span
+                            text: "{{ h1 }}"
+                      - e: td
+                        a:
+                          class: w3-mobile review1TableTr2Td3 review1TableTr2Td even 
+                        in:
+                          - e: span
+                            text: "{{ h2 }}"
+                      - e: td
+                        a:
+                          class: w3-mobile review1TableTr2Td4 review1TableTr2Td odd 
+                        in:
+                          - e: span
+                            text: "{{ author.name }}"
+          - e: table
+            a:
+              id: tableReview2
+              class: review2Table 
+            in:
+              - e: tbody
+                each: htmBody.0.in.1.in
+                in:
+                  - e: tr
+                    a:
+                      class: "{{#even @index }}review2TableTr even {{else}}review2TableTr odd {{/even}}"
+                    in:
+                      - e: td
+                        a:
+                          class: w3-mobile 
+                        in:
+                          - e: i
+                            a:
+                              class: "{{ item.in.0.in.0.a.class }}"
+                          - e: span
+                            text: '{{ item.in.0.in.1.text }}'
+                      - e: td
+                        a:
+                          class: w3-mobile 
+                        in:
+                          - e: i
+                            a:
+                              class: "{{ item.in.1.in.0.a.class }}"
+                          - e: span
+                            text: '{{ item.in.1.in.1.text }}'
