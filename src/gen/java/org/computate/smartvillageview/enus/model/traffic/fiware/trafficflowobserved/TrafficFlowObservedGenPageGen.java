@@ -182,12 +182,31 @@ public abstract class TrafficFlowObservedGenPageGen<DEV> extends MapResultPage {
 	public void setListTrafficFlowObserved(JsonArray listTrafficFlowObserved) {
 		this.listTrafficFlowObserved = listTrafficFlowObserved;
 	}
+	@JsonIgnore
+	public void setListTrafficFlowObserved(String o) {
+		this.listTrafficFlowObserved = TrafficFlowObservedGenPage.staticSetListTrafficFlowObserved(siteRequest_, o);
+	}
 	public static JsonArray staticSetListTrafficFlowObserved(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonArray(o);
+		}
 		return null;
 	}
 	protected TrafficFlowObservedGenPage listTrafficFlowObservedInit() {
 		_listTrafficFlowObserved(listTrafficFlowObserved);
 		return (TrafficFlowObservedGenPage)this;
+	}
+
+	public static JsonArray staticSearchListTrafficFlowObserved(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o;
+	}
+
+	public static String staticSearchStrListTrafficFlowObserved(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqListTrafficFlowObserved(SiteRequestEnUS siteRequest_, String o) {
+		return TrafficFlowObservedGenPage.staticSearchStrListTrafficFlowObserved(siteRequest_, TrafficFlowObservedGenPage.staticSearchListTrafficFlowObserved(siteRequest_, TrafficFlowObservedGenPage.staticSetListTrafficFlowObserved(siteRequest_, o)));
 	}
 
 	//////////////////////////////
@@ -526,6 +545,8 @@ public abstract class TrafficFlowObservedGenPageGen<DEV> extends MapResultPage {
 	}
 	public static Object staticSetTrafficFlowObservedGenPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "listTrafficFlowObserved":
+			return TrafficFlowObservedGenPage.staticSetListTrafficFlowObserved(siteRequest_, o);
 		case "trafficFlowObservedCount":
 			return TrafficFlowObservedGenPage.staticSetTrafficFlowObservedCount(siteRequest_, o);
 		case "id":
@@ -546,6 +567,8 @@ public abstract class TrafficFlowObservedGenPageGen<DEV> extends MapResultPage {
 	}
 	public static Object staticSearchTrafficFlowObservedGenPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "listTrafficFlowObserved":
+			return TrafficFlowObservedGenPage.staticSearchListTrafficFlowObserved(siteRequest_, (JsonArray)o);
 		case "trafficFlowObservedCount":
 			return TrafficFlowObservedGenPage.staticSearchTrafficFlowObservedCount(siteRequest_, (Integer)o);
 		case "id":
@@ -566,6 +589,8 @@ public abstract class TrafficFlowObservedGenPageGen<DEV> extends MapResultPage {
 	}
 	public static String staticSearchStrTrafficFlowObservedGenPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "listTrafficFlowObserved":
+			return TrafficFlowObservedGenPage.staticSearchStrListTrafficFlowObserved(siteRequest_, (JsonArray)o);
 		case "trafficFlowObservedCount":
 			return TrafficFlowObservedGenPage.staticSearchStrTrafficFlowObservedCount(siteRequest_, (Integer)o);
 		case "id":
@@ -586,6 +611,8 @@ public abstract class TrafficFlowObservedGenPageGen<DEV> extends MapResultPage {
 	}
 	public static String staticSearchFqTrafficFlowObservedGenPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "listTrafficFlowObserved":
+			return TrafficFlowObservedGenPage.staticSearchFqListTrafficFlowObserved(siteRequest_, o);
 		case "trafficFlowObservedCount":
 			return TrafficFlowObservedGenPage.staticSearchFqTrafficFlowObservedCount(siteRequest_, o);
 		case "id":

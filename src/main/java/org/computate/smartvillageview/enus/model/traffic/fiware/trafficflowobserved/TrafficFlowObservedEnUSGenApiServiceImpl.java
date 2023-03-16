@@ -474,12 +474,6 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 			}));
 		});
 		CompositeFuture.all(futures).onSuccess( a -> {
-			if(apiRequest != null) {
-				apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listTrafficFlowObserved.getResponse().getResponse().getDocs().size());
-				if(apiRequest.getNumFound() == 1L)
-					listTrafficFlowObserved.first().apiRequestTrafficFlowObserved();
-				eventBus.publish("websocketTrafficFlowObserved", JsonObject.mapFrom(apiRequest).toString());
-			}
 			listTrafficFlowObserved.next().onSuccess(next -> {
 				if(next) {
 					listPATCHTrafficFlowObserved(apiRequest, listTrafficFlowObserved).onSuccess(b -> {
@@ -524,7 +518,13 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 							if(apiRequest.getNumFound() == 1L)
 								apiRequest.setOriginal(o);
 							eventBus.publish("websocketTrafficFlowObserved", JsonObject.mapFrom(apiRequest).toString());
-							patchTrafficFlowObservedFuture(o, false).onSuccess(a -> {
+							patchTrafficFlowObservedFuture(o, false).onSuccess(o2 -> {
+								if(apiRequest != null) {
+									apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listTrafficFlowObserved.getResponse().getResponse().getDocs().size());
+									if(apiRequest.getNumFound() == 1L)
+										o2.apiRequestTrafficFlowObserved();
+									eventBus.publish("websocketTrafficFlowObserved", JsonObject.mapFrom(apiRequest).toString());
+								}
 								eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(new JsonObject().encodePrettily()))));
 							}).onFailure(ex -> {
 								eventHandler.handle(Future.failedFuture(ex));

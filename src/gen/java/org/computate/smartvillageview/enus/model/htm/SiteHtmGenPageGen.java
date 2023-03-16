@@ -182,12 +182,31 @@ public abstract class SiteHtmGenPageGen<DEV> extends BaseResultPage {
 	public void setListSiteHtm(JsonArray listSiteHtm) {
 		this.listSiteHtm = listSiteHtm;
 	}
+	@JsonIgnore
+	public void setListSiteHtm(String o) {
+		this.listSiteHtm = SiteHtmGenPage.staticSetListSiteHtm(siteRequest_, o);
+	}
 	public static JsonArray staticSetListSiteHtm(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonArray(o);
+		}
 		return null;
 	}
 	protected SiteHtmGenPage listSiteHtmInit() {
 		_listSiteHtm(listSiteHtm);
 		return (SiteHtmGenPage)this;
+	}
+
+	public static JsonArray staticSearchListSiteHtm(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o;
+	}
+
+	public static String staticSearchStrListSiteHtm(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqListSiteHtm(SiteRequestEnUS siteRequest_, String o) {
+		return SiteHtmGenPage.staticSearchStrListSiteHtm(siteRequest_, SiteHtmGenPage.staticSearchListSiteHtm(siteRequest_, SiteHtmGenPage.staticSetListSiteHtm(siteRequest_, o)));
 	}
 
 	//////////////////
@@ -526,6 +545,8 @@ public abstract class SiteHtmGenPageGen<DEV> extends BaseResultPage {
 	}
 	public static Object staticSetSiteHtmGenPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "listSiteHtm":
+			return SiteHtmGenPage.staticSetListSiteHtm(siteRequest_, o);
 		case "siteHtmCount":
 			return SiteHtmGenPage.staticSetSiteHtmCount(siteRequest_, o);
 		case "id":
@@ -546,6 +567,8 @@ public abstract class SiteHtmGenPageGen<DEV> extends BaseResultPage {
 	}
 	public static Object staticSearchSiteHtmGenPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "listSiteHtm":
+			return SiteHtmGenPage.staticSearchListSiteHtm(siteRequest_, (JsonArray)o);
 		case "siteHtmCount":
 			return SiteHtmGenPage.staticSearchSiteHtmCount(siteRequest_, (Integer)o);
 		case "id":
@@ -566,6 +589,8 @@ public abstract class SiteHtmGenPageGen<DEV> extends BaseResultPage {
 	}
 	public static String staticSearchStrSiteHtmGenPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "listSiteHtm":
+			return SiteHtmGenPage.staticSearchStrListSiteHtm(siteRequest_, (JsonArray)o);
 		case "siteHtmCount":
 			return SiteHtmGenPage.staticSearchStrSiteHtmCount(siteRequest_, (Integer)o);
 		case "id":
@@ -586,6 +611,8 @@ public abstract class SiteHtmGenPageGen<DEV> extends BaseResultPage {
 	}
 	public static String staticSearchFqSiteHtmGenPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "listSiteHtm":
+			return SiteHtmGenPage.staticSearchFqListSiteHtm(siteRequest_, o);
 		case "siteHtmCount":
 			return SiteHtmGenPage.staticSearchFqSiteHtmCount(siteRequest_, o);
 		case "id":

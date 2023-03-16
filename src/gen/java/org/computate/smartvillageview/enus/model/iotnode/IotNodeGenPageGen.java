@@ -182,12 +182,31 @@ public abstract class IotNodeGenPageGen<DEV> extends MapResultPage {
 	public void setListIotNode(JsonArray listIotNode) {
 		this.listIotNode = listIotNode;
 	}
+	@JsonIgnore
+	public void setListIotNode(String o) {
+		this.listIotNode = IotNodeGenPage.staticSetListIotNode(siteRequest_, o);
+	}
 	public static JsonArray staticSetListIotNode(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonArray(o);
+		}
 		return null;
 	}
 	protected IotNodeGenPage listIotNodeInit() {
 		_listIotNode(listIotNode);
 		return (IotNodeGenPage)this;
+	}
+
+	public static JsonArray staticSearchListIotNode(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o;
+	}
+
+	public static String staticSearchStrListIotNode(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqListIotNode(SiteRequestEnUS siteRequest_, String o) {
+		return IotNodeGenPage.staticSearchStrListIotNode(siteRequest_, IotNodeGenPage.staticSearchListIotNode(siteRequest_, IotNodeGenPage.staticSetListIotNode(siteRequest_, o)));
 	}
 
 	//////////////////
@@ -526,6 +545,8 @@ public abstract class IotNodeGenPageGen<DEV> extends MapResultPage {
 	}
 	public static Object staticSetIotNodeGenPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "listIotNode":
+			return IotNodeGenPage.staticSetListIotNode(siteRequest_, o);
 		case "iotNodeCount":
 			return IotNodeGenPage.staticSetIotNodeCount(siteRequest_, o);
 		case "id":
@@ -546,6 +567,8 @@ public abstract class IotNodeGenPageGen<DEV> extends MapResultPage {
 	}
 	public static Object staticSearchIotNodeGenPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "listIotNode":
+			return IotNodeGenPage.staticSearchListIotNode(siteRequest_, (JsonArray)o);
 		case "iotNodeCount":
 			return IotNodeGenPage.staticSearchIotNodeCount(siteRequest_, (Integer)o);
 		case "id":
@@ -566,6 +589,8 @@ public abstract class IotNodeGenPageGen<DEV> extends MapResultPage {
 	}
 	public static String staticSearchStrIotNodeGenPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "listIotNode":
+			return IotNodeGenPage.staticSearchStrListIotNode(siteRequest_, (JsonArray)o);
 		case "iotNodeCount":
 			return IotNodeGenPage.staticSearchStrIotNodeCount(siteRequest_, (Integer)o);
 		case "id":
@@ -586,6 +611,8 @@ public abstract class IotNodeGenPageGen<DEV> extends MapResultPage {
 	}
 	public static String staticSearchFqIotNodeGenPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "listIotNode":
+			return IotNodeGenPage.staticSearchFqListIotNode(siteRequest_, o);
 		case "iotNodeCount":
 			return IotNodeGenPage.staticSearchFqIotNodeCount(siteRequest_, o);
 		case "id":

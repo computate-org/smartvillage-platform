@@ -182,12 +182,31 @@ public abstract class PersonStepGenPageGen<DEV> extends MapResultPage {
 	public void setListPersonStep(JsonArray listPersonStep) {
 		this.listPersonStep = listPersonStep;
 	}
+	@JsonIgnore
+	public void setListPersonStep(String o) {
+		this.listPersonStep = PersonStepGenPage.staticSetListPersonStep(siteRequest_, o);
+	}
 	public static JsonArray staticSetListPersonStep(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonArray(o);
+		}
 		return null;
 	}
 	protected PersonStepGenPage listPersonStepInit() {
 		_listPersonStep(listPersonStep);
 		return (PersonStepGenPage)this;
+	}
+
+	public static JsonArray staticSearchListPersonStep(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o;
+	}
+
+	public static String staticSearchStrListPersonStep(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqListPersonStep(SiteRequestEnUS siteRequest_, String o) {
+		return PersonStepGenPage.staticSearchStrListPersonStep(siteRequest_, PersonStepGenPage.staticSearchListPersonStep(siteRequest_, PersonStepGenPage.staticSetListPersonStep(siteRequest_, o)));
 	}
 
 	/////////////////////
@@ -526,6 +545,8 @@ public abstract class PersonStepGenPageGen<DEV> extends MapResultPage {
 	}
 	public static Object staticSetPersonStepGenPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "listPersonStep":
+			return PersonStepGenPage.staticSetListPersonStep(siteRequest_, o);
 		case "personStepCount":
 			return PersonStepGenPage.staticSetPersonStepCount(siteRequest_, o);
 		case "id":
@@ -546,6 +567,8 @@ public abstract class PersonStepGenPageGen<DEV> extends MapResultPage {
 	}
 	public static Object staticSearchPersonStepGenPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "listPersonStep":
+			return PersonStepGenPage.staticSearchListPersonStep(siteRequest_, (JsonArray)o);
 		case "personStepCount":
 			return PersonStepGenPage.staticSearchPersonStepCount(siteRequest_, (Integer)o);
 		case "id":
@@ -566,6 +589,8 @@ public abstract class PersonStepGenPageGen<DEV> extends MapResultPage {
 	}
 	public static String staticSearchStrPersonStepGenPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "listPersonStep":
+			return PersonStepGenPage.staticSearchStrListPersonStep(siteRequest_, (JsonArray)o);
 		case "personStepCount":
 			return PersonStepGenPage.staticSearchStrPersonStepCount(siteRequest_, (Integer)o);
 		case "id":
@@ -586,6 +611,8 @@ public abstract class PersonStepGenPageGen<DEV> extends MapResultPage {
 	}
 	public static String staticSearchFqPersonStepGenPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "listPersonStep":
+			return PersonStepGenPage.staticSearchFqListPersonStep(siteRequest_, o);
 		case "personStepCount":
 			return PersonStepGenPage.staticSearchFqPersonStepCount(siteRequest_, o);
 		case "id":

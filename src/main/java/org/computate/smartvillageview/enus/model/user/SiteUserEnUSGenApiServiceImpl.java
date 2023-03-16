@@ -330,12 +330,6 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 			}));
 		});
 		CompositeFuture.all(futures).onSuccess( a -> {
-			if(apiRequest != null) {
-				apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listSiteUser.getResponse().getResponse().getDocs().size());
-				if(apiRequest.getNumFound() == 1L)
-					listSiteUser.first().apiRequestSiteUser();
-				eventBus.publish("websocketSiteUser", JsonObject.mapFrom(apiRequest).toString());
-			}
 			listSiteUser.next().onSuccess(next -> {
 				if(next) {
 					listPATCHSiteUser(apiRequest, listSiteUser).onSuccess(b -> {
@@ -381,7 +375,13 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 								apiRequest.setOriginal(o);
 							apiRequest.setPk(Optional.ofNullable(listSiteUser.first()).map(o2 -> o2.getPk()).orElse(null));
 							eventBus.publish("websocketSiteUser", JsonObject.mapFrom(apiRequest).toString());
-							patchSiteUserFuture(o, false).onSuccess(a -> {
+							patchSiteUserFuture(o, false).onSuccess(o2 -> {
+								if(apiRequest != null) {
+									apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listSiteUser.getResponse().getResponse().getDocs().size());
+									if(apiRequest.getNumFound() == 1L)
+										o2.apiRequestSiteUser();
+									eventBus.publish("websocketSiteUser", JsonObject.mapFrom(apiRequest).toString());
+								}
 								eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(new JsonObject().encodePrettily()))));
 							}).onFailure(ex -> {
 								eventHandler.handle(Future.failedFuture(ex));

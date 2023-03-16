@@ -422,9 +422,10 @@ public abstract class HomePageGen<DEV> extends PageLayout {
 	public List<String> getDefaultFieldListVars() {
 		return defaultFieldListVars;
 	}
-
-	public void setDefaultFieldListVars(List<String> defaultFieldListVars) {
-		this.defaultFieldListVars = defaultFieldListVars;
+	public void setDefaultFieldListVars(String o) {
+		String l = HomePage.staticSetDefaultFieldListVars(siteRequest_, o);
+		if(l != null)
+			addDefaultFieldListVars(l);
 	}
 	public static String staticSetDefaultFieldListVars(SiteRequestEnUS siteRequest_, String o) {
 		return o;
@@ -491,9 +492,10 @@ public abstract class HomePageGen<DEV> extends PageLayout {
 	public List<String> getDefaultStatsVars() {
 		return defaultStatsVars;
 	}
-
-	public void setDefaultStatsVars(List<String> defaultStatsVars) {
-		this.defaultStatsVars = defaultStatsVars;
+	public void setDefaultStatsVars(String o) {
+		String l = HomePage.staticSetDefaultStatsVars(siteRequest_, o);
+		if(l != null)
+			addDefaultStatsVars(l);
 	}
 	public static String staticSetDefaultStatsVars(SiteRequestEnUS siteRequest_, String o) {
 		return o;
@@ -560,9 +562,10 @@ public abstract class HomePageGen<DEV> extends PageLayout {
 	public List<String> getDefaultPivotVars() {
 		return defaultPivotVars;
 	}
-
-	public void setDefaultPivotVars(List<String> defaultPivotVars) {
-		this.defaultPivotVars = defaultPivotVars;
+	public void setDefaultPivotVars(String o) {
+		String l = HomePage.staticSetDefaultPivotVars(siteRequest_, o);
+		if(l != null)
+			addDefaultPivotVars(l);
 	}
 	public static String staticSetDefaultPivotVars(SiteRequestEnUS siteRequest_, String o) {
 		return o;
@@ -632,12 +635,31 @@ public abstract class HomePageGen<DEV> extends PageLayout {
 	public void setListSitePage(JsonArray listSitePage) {
 		this.listSitePage = listSitePage;
 	}
+	@JsonIgnore
+	public void setListSitePage(String o) {
+		this.listSitePage = HomePage.staticSetListSitePage(siteRequest_, o);
+	}
 	public static JsonArray staticSetListSitePage(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonArray(o);
+		}
 		return null;
 	}
 	protected HomePage listSitePageInit() {
 		_listSitePage(listSitePage);
 		return (HomePage)this;
+	}
+
+	public static JsonArray staticSearchListSitePage(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o;
+	}
+
+	public static String staticSearchStrListSitePage(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqListSitePage(SiteRequestEnUS siteRequest_, String o) {
+		return HomePage.staticSearchStrListSitePage(siteRequest_, HomePage.staticSearchListSitePage(siteRequest_, HomePage.staticSetListSitePage(siteRequest_, o)));
 	}
 
 	///////////
@@ -1017,6 +1039,8 @@ public abstract class HomePageGen<DEV> extends PageLayout {
 			return HomePage.staticSetDefaultStatsVars(siteRequest_, o);
 		case "defaultPivotVars":
 			return HomePage.staticSetDefaultPivotVars(siteRequest_, o);
+		case "listSitePage":
+			return HomePage.staticSetListSitePage(siteRequest_, o);
 		case "sitePageCount":
 			return HomePage.staticSetSitePageCount(siteRequest_, o);
 			default:
@@ -1045,6 +1069,8 @@ public abstract class HomePageGen<DEV> extends PageLayout {
 			return HomePage.staticSearchDefaultStatsVars(siteRequest_, (String)o);
 		case "defaultPivotVars":
 			return HomePage.staticSearchDefaultPivotVars(siteRequest_, (String)o);
+		case "listSitePage":
+			return HomePage.staticSearchListSitePage(siteRequest_, (JsonArray)o);
 		case "sitePageCount":
 			return HomePage.staticSearchSitePageCount(siteRequest_, (Integer)o);
 			default:
@@ -1073,6 +1099,8 @@ public abstract class HomePageGen<DEV> extends PageLayout {
 			return HomePage.staticSearchStrDefaultStatsVars(siteRequest_, (String)o);
 		case "defaultPivotVars":
 			return HomePage.staticSearchStrDefaultPivotVars(siteRequest_, (String)o);
+		case "listSitePage":
+			return HomePage.staticSearchStrListSitePage(siteRequest_, (JsonArray)o);
 		case "sitePageCount":
 			return HomePage.staticSearchStrSitePageCount(siteRequest_, (Integer)o);
 			default:
@@ -1101,6 +1129,8 @@ public abstract class HomePageGen<DEV> extends PageLayout {
 			return HomePage.staticSearchFqDefaultStatsVars(siteRequest_, o);
 		case "defaultPivotVars":
 			return HomePage.staticSearchFqDefaultPivotVars(siteRequest_, o);
+		case "listSitePage":
+			return HomePage.staticSearchFqListSitePage(siteRequest_, o);
 		case "sitePageCount":
 			return HomePage.staticSearchFqSitePageCount(siteRequest_, o);
 			default:

@@ -182,12 +182,31 @@ public abstract class SystemEventGenPageGen<DEV> extends PageLayout {
 	public void setListSystemEvent(JsonArray listSystemEvent) {
 		this.listSystemEvent = listSystemEvent;
 	}
+	@JsonIgnore
+	public void setListSystemEvent(String o) {
+		this.listSystemEvent = SystemEventGenPage.staticSetListSystemEvent(siteRequest_, o);
+	}
 	public static JsonArray staticSetListSystemEvent(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonArray(o);
+		}
 		return null;
 	}
 	protected SystemEventGenPage listSystemEventInit() {
 		_listSystemEvent(listSystemEvent);
 		return (SystemEventGenPage)this;
+	}
+
+	public static JsonArray staticSearchListSystemEvent(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o;
+	}
+
+	public static String staticSearchStrListSystemEvent(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqListSystemEvent(SiteRequestEnUS siteRequest_, String o) {
+		return SystemEventGenPage.staticSearchStrListSystemEvent(siteRequest_, SystemEventGenPage.staticSearchListSystemEvent(siteRequest_, SystemEventGenPage.staticSetListSystemEvent(siteRequest_, o)));
 	}
 
 	//////////////////////
@@ -526,6 +545,8 @@ public abstract class SystemEventGenPageGen<DEV> extends PageLayout {
 	}
 	public static Object staticSetSystemEventGenPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "listSystemEvent":
+			return SystemEventGenPage.staticSetListSystemEvent(siteRequest_, o);
 		case "systemEventCount":
 			return SystemEventGenPage.staticSetSystemEventCount(siteRequest_, o);
 		case "id":
@@ -546,6 +567,8 @@ public abstract class SystemEventGenPageGen<DEV> extends PageLayout {
 	}
 	public static Object staticSearchSystemEventGenPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "listSystemEvent":
+			return SystemEventGenPage.staticSearchListSystemEvent(siteRequest_, (JsonArray)o);
 		case "systemEventCount":
 			return SystemEventGenPage.staticSearchSystemEventCount(siteRequest_, (Integer)o);
 		case "id":
@@ -566,6 +589,8 @@ public abstract class SystemEventGenPageGen<DEV> extends PageLayout {
 	}
 	public static String staticSearchStrSystemEventGenPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "listSystemEvent":
+			return SystemEventGenPage.staticSearchStrListSystemEvent(siteRequest_, (JsonArray)o);
 		case "systemEventCount":
 			return SystemEventGenPage.staticSearchStrSystemEventCount(siteRequest_, (Integer)o);
 		case "id":
@@ -586,6 +611,8 @@ public abstract class SystemEventGenPageGen<DEV> extends PageLayout {
 	}
 	public static String staticSearchFqSystemEventGenPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "listSystemEvent":
+			return SystemEventGenPage.staticSearchFqListSystemEvent(siteRequest_, o);
 		case "systemEventCount":
 			return SystemEventGenPage.staticSearchFqSystemEventCount(siteRequest_, o);
 		case "id":

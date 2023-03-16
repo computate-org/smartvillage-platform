@@ -182,12 +182,31 @@ public abstract class VehicleStepGenPageGen<DEV> extends MapResultPage {
 	public void setListVehicleStep(JsonArray listVehicleStep) {
 		this.listVehicleStep = listVehicleStep;
 	}
+	@JsonIgnore
+	public void setListVehicleStep(String o) {
+		this.listVehicleStep = VehicleStepGenPage.staticSetListVehicleStep(siteRequest_, o);
+	}
 	public static JsonArray staticSetListVehicleStep(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonArray(o);
+		}
 		return null;
 	}
 	protected VehicleStepGenPage listVehicleStepInit() {
 		_listVehicleStep(listVehicleStep);
 		return (VehicleStepGenPage)this;
+	}
+
+	public static JsonArray staticSearchListVehicleStep(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o;
+	}
+
+	public static String staticSearchStrListVehicleStep(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqListVehicleStep(SiteRequestEnUS siteRequest_, String o) {
+		return VehicleStepGenPage.staticSearchStrListVehicleStep(siteRequest_, VehicleStepGenPage.staticSearchListVehicleStep(siteRequest_, VehicleStepGenPage.staticSetListVehicleStep(siteRequest_, o)));
 	}
 
 	//////////////////////
@@ -526,6 +545,8 @@ public abstract class VehicleStepGenPageGen<DEV> extends MapResultPage {
 	}
 	public static Object staticSetVehicleStepGenPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "listVehicleStep":
+			return VehicleStepGenPage.staticSetListVehicleStep(siteRequest_, o);
 		case "vehicleStepCount":
 			return VehicleStepGenPage.staticSetVehicleStepCount(siteRequest_, o);
 		case "id":
@@ -546,6 +567,8 @@ public abstract class VehicleStepGenPageGen<DEV> extends MapResultPage {
 	}
 	public static Object staticSearchVehicleStepGenPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "listVehicleStep":
+			return VehicleStepGenPage.staticSearchListVehicleStep(siteRequest_, (JsonArray)o);
 		case "vehicleStepCount":
 			return VehicleStepGenPage.staticSearchVehicleStepCount(siteRequest_, (Integer)o);
 		case "id":
@@ -566,6 +589,8 @@ public abstract class VehicleStepGenPageGen<DEV> extends MapResultPage {
 	}
 	public static String staticSearchStrVehicleStepGenPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "listVehicleStep":
+			return VehicleStepGenPage.staticSearchStrListVehicleStep(siteRequest_, (JsonArray)o);
 		case "vehicleStepCount":
 			return VehicleStepGenPage.staticSearchStrVehicleStepCount(siteRequest_, (Integer)o);
 		case "id":
@@ -586,6 +611,8 @@ public abstract class VehicleStepGenPageGen<DEV> extends MapResultPage {
 	}
 	public static String staticSearchFqVehicleStepGenPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "listVehicleStep":
+			return VehicleStepGenPage.staticSearchFqListVehicleStep(siteRequest_, o);
 		case "vehicleStepCount":
 			return VehicleStepGenPage.staticSearchFqVehicleStepCount(siteRequest_, o);
 		case "id":

@@ -182,12 +182,31 @@ public abstract class BaseResultGenPageGen<DEV> extends PageLayout {
 	public void setListBaseResult(JsonArray listBaseResult) {
 		this.listBaseResult = listBaseResult;
 	}
+	@JsonIgnore
+	public void setListBaseResult(String o) {
+		this.listBaseResult = BaseResultGenPage.staticSetListBaseResult(siteRequest_, o);
+	}
 	public static JsonArray staticSetListBaseResult(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonArray(o);
+		}
 		return null;
 	}
 	protected BaseResultGenPage listBaseResultInit() {
 		_listBaseResult(listBaseResult);
 		return (BaseResultGenPage)this;
+	}
+
+	public static JsonArray staticSearchListBaseResult(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o;
+	}
+
+	public static String staticSearchStrListBaseResult(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqListBaseResult(SiteRequestEnUS siteRequest_, String o) {
+		return BaseResultGenPage.staticSearchStrListBaseResult(siteRequest_, BaseResultGenPage.staticSearchListBaseResult(siteRequest_, BaseResultGenPage.staticSetListBaseResult(siteRequest_, o)));
 	}
 
 	/////////////////////
@@ -473,6 +492,8 @@ public abstract class BaseResultGenPageGen<DEV> extends PageLayout {
 	}
 	public static Object staticSetBaseResultGenPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "listBaseResult":
+			return BaseResultGenPage.staticSetListBaseResult(siteRequest_, o);
 		case "baseResultCount":
 			return BaseResultGenPage.staticSetBaseResultCount(siteRequest_, o);
 		case "id":
@@ -491,6 +512,8 @@ public abstract class BaseResultGenPageGen<DEV> extends PageLayout {
 	}
 	public static Object staticSearchBaseResultGenPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "listBaseResult":
+			return BaseResultGenPage.staticSearchListBaseResult(siteRequest_, (JsonArray)o);
 		case "baseResultCount":
 			return BaseResultGenPage.staticSearchBaseResultCount(siteRequest_, (Integer)o);
 		case "id":
@@ -509,6 +532,8 @@ public abstract class BaseResultGenPageGen<DEV> extends PageLayout {
 	}
 	public static String staticSearchStrBaseResultGenPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "listBaseResult":
+			return BaseResultGenPage.staticSearchStrListBaseResult(siteRequest_, (JsonArray)o);
 		case "baseResultCount":
 			return BaseResultGenPage.staticSearchStrBaseResultCount(siteRequest_, (Integer)o);
 		case "id":
@@ -527,6 +552,8 @@ public abstract class BaseResultGenPageGen<DEV> extends PageLayout {
 	}
 	public static String staticSearchFqBaseResultGenPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "listBaseResult":
+			return BaseResultGenPage.staticSearchFqListBaseResult(siteRequest_, o);
 		case "baseResultCount":
 			return BaseResultGenPage.staticSearchFqBaseResultCount(siteRequest_, o);
 		case "id":

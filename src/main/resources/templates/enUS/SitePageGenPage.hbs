@@ -8,6 +8,14 @@
 {{/inline}}
 {{#*inline "htmScriptSitePagePage"}}		<!-- inline "htmScriptSitePagePage" -->
 		<script>
+			$('#site-calendar-box').accordion({ collapsible: true, active: false });
+{{#if DEFAULT_MAP_LOCATION }}
+			window.DEFAULT_MAP_LOCATION = { lat: {{ DEFAULT_MAP_LOCATION.lat }}, lon: {{ DEFAULT_MAP_LOCATION.lon }} };
+{{/if}}
+{{#if DEFAULT_MAP_ZOOM }}
+			window.DEFAULT_MAP_ZOOM = {{ DEFAULT_MAP_ZOOM }};
+{{/if}}
+			window.DEFAULT_ZONE_ID = '{{ defaultZoneId }}';
 			$(document).ready(function() {
 				document.onkeydown = function(evt) {
 					evt = evt || window.event;
@@ -25,7 +33,6 @@
 				var pk = {{#if pk}}{{pk}}{{else}}null{{/if}};
 				if(pk != null) {
 				}
-				websocketSitePage(websocketSitePageInner);
 				window.varsFq = JSON.parse('{{{toJsonObjectStringInApostrophes varsFq}}}');
 				window.varsRange = JSON.parse('{{{toJsonObjectStringInApostrophes varsRange}}}');
 				window.defaultRangeVar = '{{ defaultRangeVar }}';
@@ -36,16 +43,13 @@
 					initialView: 'dayGridMonth'
 				});
 				//calendar.render();
+{{#block "websocket"}}{{/block}}
 			});
-			$('#site-calendar-box').accordion({ collapsible: true, active: false });
-{{#if DEFAULT_MAP_LOCATION }}
-			window.DEFAULT_MAP_LOCATION = { lat: {{ DEFAULT_MAP_LOCATION.lat }}, lon: {{ DEFAULT_MAP_LOCATION.lon }} };
-{{/if}}
-{{#if DEFAULT_MAP_ZOOM }}
-			window.DEFAULT_MAP_ZOOM = {{ DEFAULT_MAP_ZOOM }};
-{{/if}}
-			window.DEFAULT_ZONE_ID = '{{ defaultZoneId }}';
 		</script>
+{{/inline}}
+{{#*inline "websocketSitePagePage"}}
+				<!-- inline "websocketSitePagePage" -->
+				websocketSitePage(websocketSitePageInner);
 {{/inline}}
 {{#*inline "htmUrlSitePage"}}{{pageUri}}?q={{query.q}}&amp;rows={{#if rows}}{{rows}}{{else}}{{pagination.rows}}{{/if}}&amp;rows={{#if start}}{{start}}{{else}}{{pagination.start}}{{/if}}{{#each query.fq}}{{#eq fq this}}{{else}}&fq={{fq}}:{{val}}{{/eq}}{{/each}}{{#each query.sort}}{{#eq sort this}}{{else}}&sort={{var}} {{order}}{{/eq}}{{/each}}{{/inline}}
 {{#*inline "htmHeadSitePagePage"}}{{#block "htmTitle"}}{{/block}}{{#block "htmMeta"}}{{/block}}{{#block "htmStyle"}}{{/block}}{{#block "htmScripts"}}{{/block}}{{#block "htmScript"}}{{/block}}{{/inline}}

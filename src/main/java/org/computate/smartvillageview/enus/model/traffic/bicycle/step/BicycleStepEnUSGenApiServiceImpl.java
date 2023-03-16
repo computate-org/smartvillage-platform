@@ -474,12 +474,6 @@ public class BicycleStepEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 			}));
 		});
 		CompositeFuture.all(futures).onSuccess( a -> {
-			if(apiRequest != null) {
-				apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listBicycleStep.getResponse().getResponse().getDocs().size());
-				if(apiRequest.getNumFound() == 1L)
-					listBicycleStep.first().apiRequestBicycleStep();
-				eventBus.publish("websocketBicycleStep", JsonObject.mapFrom(apiRequest).toString());
-			}
 			listBicycleStep.next().onSuccess(next -> {
 				if(next) {
 					listPATCHBicycleStep(apiRequest, listBicycleStep).onSuccess(b -> {
@@ -524,7 +518,13 @@ public class BicycleStepEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 							if(apiRequest.getNumFound() == 1L)
 								apiRequest.setOriginal(o);
 							eventBus.publish("websocketBicycleStep", JsonObject.mapFrom(apiRequest).toString());
-							patchBicycleStepFuture(o, false).onSuccess(a -> {
+							patchBicycleStepFuture(o, false).onSuccess(o2 -> {
+								if(apiRequest != null) {
+									apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listBicycleStep.getResponse().getResponse().getDocs().size());
+									if(apiRequest.getNumFound() == 1L)
+										o2.apiRequestBicycleStep();
+									eventBus.publish("websocketBicycleStep", JsonObject.mapFrom(apiRequest).toString());
+								}
 								eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(new JsonObject().encodePrettily()))));
 							}).onFailure(ex -> {
 								eventHandler.handle(Future.failedFuture(ex));

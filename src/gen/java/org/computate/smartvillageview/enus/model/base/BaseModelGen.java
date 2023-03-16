@@ -696,9 +696,10 @@ public abstract class BaseModelGen<DEV> extends Object {
 	public List<String> getClassCanonicalNames() {
 		return classCanonicalNames;
 	}
-
-	public void setClassCanonicalNames(List<String> classCanonicalNames) {
-		this.classCanonicalNames = classCanonicalNames;
+	public void setClassCanonicalNames(String o) {
+		String l = BaseModel.staticSetClassCanonicalNames(siteRequest_, o);
+		if(l != null)
+			addClassCanonicalNames(l);
 	}
 	public static String staticSetClassCanonicalNames(SiteRequestEnUS siteRequest_, String o) {
 		return o;
@@ -881,9 +882,10 @@ public abstract class BaseModelGen<DEV> extends Object {
 	public List<String> getSaves() {
 		return saves;
 	}
-
-	public void setSaves(List<String> saves) {
-		this.saves = saves;
+	public void setSaves(String o) {
+		String l = BaseModel.staticSetSaves(siteRequest_, o);
+		if(l != null)
+			addSaves(l);
 	}
 	public static String staticSetSaves(SiteRequestEnUS siteRequest_, String o) {
 		return o;
@@ -1100,9 +1102,10 @@ public abstract class BaseModelGen<DEV> extends Object {
 	public List<String> getObjectText() {
 		return objectText;
 	}
-
-	public void setObjectText(List<String> objectText) {
-		this.objectText = objectText;
+	public void setObjectText(String o) {
+		String l = BaseModel.staticSetObjectText(siteRequest_, o);
+		if(l != null)
+			addObjectText(l);
 	}
 	public static String staticSetObjectText(SiteRequestEnUS siteRequest_, String o) {
 		return o;

@@ -182,12 +182,31 @@ public abstract class SitePageGenPageGen<DEV> extends BaseResultPage {
 	public void setListSitePage(JsonArray listSitePage) {
 		this.listSitePage = listSitePage;
 	}
+	@JsonIgnore
+	public void setListSitePage(String o) {
+		this.listSitePage = SitePageGenPage.staticSetListSitePage(siteRequest_, o);
+	}
 	public static JsonArray staticSetListSitePage(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonArray(o);
+		}
 		return null;
 	}
 	protected SitePageGenPage listSitePageInit() {
 		_listSitePage(listSitePage);
 		return (SitePageGenPage)this;
+	}
+
+	public static JsonArray staticSearchListSitePage(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o;
+	}
+
+	public static String staticSearchStrListSitePage(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqListSitePage(SiteRequestEnUS siteRequest_, String o) {
+		return SitePageGenPage.staticSearchStrListSitePage(siteRequest_, SitePageGenPage.staticSearchListSitePage(siteRequest_, SitePageGenPage.staticSetListSitePage(siteRequest_, o)));
 	}
 
 	///////////////////
@@ -526,6 +545,8 @@ public abstract class SitePageGenPageGen<DEV> extends BaseResultPage {
 	}
 	public static Object staticSetSitePageGenPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "listSitePage":
+			return SitePageGenPage.staticSetListSitePage(siteRequest_, o);
 		case "sitePageCount":
 			return SitePageGenPage.staticSetSitePageCount(siteRequest_, o);
 		case "id":
@@ -546,6 +567,8 @@ public abstract class SitePageGenPageGen<DEV> extends BaseResultPage {
 	}
 	public static Object staticSearchSitePageGenPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "listSitePage":
+			return SitePageGenPage.staticSearchListSitePage(siteRequest_, (JsonArray)o);
 		case "sitePageCount":
 			return SitePageGenPage.staticSearchSitePageCount(siteRequest_, (Integer)o);
 		case "id":
@@ -566,6 +589,8 @@ public abstract class SitePageGenPageGen<DEV> extends BaseResultPage {
 	}
 	public static String staticSearchStrSitePageGenPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "listSitePage":
+			return SitePageGenPage.staticSearchStrListSitePage(siteRequest_, (JsonArray)o);
 		case "sitePageCount":
 			return SitePageGenPage.staticSearchStrSitePageCount(siteRequest_, (Integer)o);
 		case "id":
@@ -586,6 +611,8 @@ public abstract class SitePageGenPageGen<DEV> extends BaseResultPage {
 	}
 	public static String staticSearchFqSitePageGenPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "listSitePage":
+			return SitePageGenPage.staticSearchFqListSitePage(siteRequest_, o);
 		case "sitePageCount":
 			return SitePageGenPage.staticSearchFqSitePageCount(siteRequest_, o);
 		case "id":

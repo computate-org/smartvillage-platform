@@ -183,12 +183,31 @@ public abstract class SiteUserGenPageGen<DEV> extends BaseModelPage {
 	public void setListSiteUser(JsonArray listSiteUser) {
 		this.listSiteUser = listSiteUser;
 	}
+	@JsonIgnore
+	public void setListSiteUser(String o) {
+		this.listSiteUser = SiteUserGenPage.staticSetListSiteUser(siteRequest_, o);
+	}
 	public static JsonArray staticSetListSiteUser(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonArray(o);
+		}
 		return null;
 	}
 	protected SiteUserGenPage listSiteUserInit() {
 		_listSiteUser(listSiteUser);
 		return (SiteUserGenPage)this;
+	}
+
+	public static JsonArray staticSearchListSiteUser(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o;
+	}
+
+	public static String staticSearchStrListSiteUser(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqListSiteUser(SiteRequestEnUS siteRequest_, String o) {
+		return SiteUserGenPage.staticSearchStrListSiteUser(siteRequest_, SiteUserGenPage.staticSearchListSiteUser(siteRequest_, SiteUserGenPage.staticSetListSiteUser(siteRequest_, o)));
 	}
 
 	///////////////////
@@ -588,6 +607,8 @@ public abstract class SiteUserGenPageGen<DEV> extends BaseModelPage {
 	}
 	public static Object staticSetSiteUserGenPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "listSiteUser":
+			return SiteUserGenPage.staticSetListSiteUser(siteRequest_, o);
 		case "siteUserCount":
 			return SiteUserGenPage.staticSetSiteUserCount(siteRequest_, o);
 		case "pk":
@@ -610,6 +631,8 @@ public abstract class SiteUserGenPageGen<DEV> extends BaseModelPage {
 	}
 	public static Object staticSearchSiteUserGenPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "listSiteUser":
+			return SiteUserGenPage.staticSearchListSiteUser(siteRequest_, (JsonArray)o);
 		case "siteUserCount":
 			return SiteUserGenPage.staticSearchSiteUserCount(siteRequest_, (Integer)o);
 		case "pk":
@@ -632,6 +655,8 @@ public abstract class SiteUserGenPageGen<DEV> extends BaseModelPage {
 	}
 	public static String staticSearchStrSiteUserGenPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "listSiteUser":
+			return SiteUserGenPage.staticSearchStrListSiteUser(siteRequest_, (JsonArray)o);
 		case "siteUserCount":
 			return SiteUserGenPage.staticSearchStrSiteUserCount(siteRequest_, (Integer)o);
 		case "pk":
@@ -654,6 +679,8 @@ public abstract class SiteUserGenPageGen<DEV> extends BaseModelPage {
 	}
 	public static String staticSearchFqSiteUserGenPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "listSiteUser":
+			return SiteUserGenPage.staticSearchFqListSiteUser(siteRequest_, o);
 		case "siteUserCount":
 			return SiteUserGenPage.staticSearchFqSiteUserCount(siteRequest_, o);
 		case "pk":

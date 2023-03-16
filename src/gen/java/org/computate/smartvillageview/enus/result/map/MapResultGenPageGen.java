@@ -182,12 +182,31 @@ public abstract class MapResultGenPageGen<DEV> extends BaseResultPage {
 	public void setListMapResult(JsonArray listMapResult) {
 		this.listMapResult = listMapResult;
 	}
+	@JsonIgnore
+	public void setListMapResult(String o) {
+		this.listMapResult = MapResultGenPage.staticSetListMapResult(siteRequest_, o);
+	}
 	public static JsonArray staticSetListMapResult(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonArray(o);
+		}
 		return null;
 	}
 	protected MapResultGenPage listMapResultInit() {
 		_listMapResult(listMapResult);
 		return (MapResultGenPage)this;
+	}
+
+	public static JsonArray staticSearchListMapResult(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o;
+	}
+
+	public static String staticSearchStrListMapResult(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqListMapResult(SiteRequestEnUS siteRequest_, String o) {
+		return MapResultGenPage.staticSearchStrListMapResult(siteRequest_, MapResultGenPage.staticSearchListMapResult(siteRequest_, MapResultGenPage.staticSetListMapResult(siteRequest_, o)));
 	}
 
 	////////////////////
@@ -526,6 +545,8 @@ public abstract class MapResultGenPageGen<DEV> extends BaseResultPage {
 	}
 	public static Object staticSetMapResultGenPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "listMapResult":
+			return MapResultGenPage.staticSetListMapResult(siteRequest_, o);
 		case "mapResultCount":
 			return MapResultGenPage.staticSetMapResultCount(siteRequest_, o);
 		case "id":
@@ -546,6 +567,8 @@ public abstract class MapResultGenPageGen<DEV> extends BaseResultPage {
 	}
 	public static Object staticSearchMapResultGenPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "listMapResult":
+			return MapResultGenPage.staticSearchListMapResult(siteRequest_, (JsonArray)o);
 		case "mapResultCount":
 			return MapResultGenPage.staticSearchMapResultCount(siteRequest_, (Integer)o);
 		case "id":
@@ -566,6 +589,8 @@ public abstract class MapResultGenPageGen<DEV> extends BaseResultPage {
 	}
 	public static String staticSearchStrMapResultGenPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "listMapResult":
+			return MapResultGenPage.staticSearchStrListMapResult(siteRequest_, (JsonArray)o);
 		case "mapResultCount":
 			return MapResultGenPage.staticSearchStrMapResultCount(siteRequest_, (Integer)o);
 		case "id":
@@ -586,6 +611,8 @@ public abstract class MapResultGenPageGen<DEV> extends BaseResultPage {
 	}
 	public static String staticSearchFqMapResultGenPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "listMapResult":
+			return MapResultGenPage.staticSearchFqListMapResult(siteRequest_, o);
 		case "mapResultCount":
 			return MapResultGenPage.staticSearchFqMapResultCount(siteRequest_, o);
 		case "id":

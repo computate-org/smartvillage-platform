@@ -474,12 +474,6 @@ public class PersonStepEnUSGenApiServiceImpl extends BaseApiServiceImpl implemen
 			}));
 		});
 		CompositeFuture.all(futures).onSuccess( a -> {
-			if(apiRequest != null) {
-				apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listPersonStep.getResponse().getResponse().getDocs().size());
-				if(apiRequest.getNumFound() == 1L)
-					listPersonStep.first().apiRequestPersonStep();
-				eventBus.publish("websocketPersonStep", JsonObject.mapFrom(apiRequest).toString());
-			}
 			listPersonStep.next().onSuccess(next -> {
 				if(next) {
 					listPATCHPersonStep(apiRequest, listPersonStep).onSuccess(b -> {
@@ -524,7 +518,13 @@ public class PersonStepEnUSGenApiServiceImpl extends BaseApiServiceImpl implemen
 							if(apiRequest.getNumFound() == 1L)
 								apiRequest.setOriginal(o);
 							eventBus.publish("websocketPersonStep", JsonObject.mapFrom(apiRequest).toString());
-							patchPersonStepFuture(o, false).onSuccess(a -> {
+							patchPersonStepFuture(o, false).onSuccess(o2 -> {
+								if(apiRequest != null) {
+									apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listPersonStep.getResponse().getResponse().getDocs().size());
+									if(apiRequest.getNumFound() == 1L)
+										o2.apiRequestPersonStep();
+									eventBus.publish("websocketPersonStep", JsonObject.mapFrom(apiRequest).toString());
+								}
 								eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(new JsonObject().encodePrettily()))));
 							}).onFailure(ex -> {
 								eventHandler.handle(Future.failedFuture(ex));

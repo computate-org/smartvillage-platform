@@ -601,12 +601,6 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 			}));
 		});
 		CompositeFuture.all(futures).onSuccess( a -> {
-			if(apiRequest != null) {
-				apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listSystemEvent.getResponse().getResponse().getDocs().size());
-				if(apiRequest.getNumFound() == 1L)
-					listSystemEvent.first().apiRequestSystemEvent();
-				eventBus.publish("websocketSystemEvent", JsonObject.mapFrom(apiRequest).toString());
-			}
 			listSystemEvent.next().onSuccess(next -> {
 				if(next) {
 					listPATCHSystemEvent(apiRequest, listSystemEvent).onSuccess(b -> {
@@ -651,7 +645,13 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 							if(apiRequest.getNumFound() == 1L)
 								apiRequest.setOriginal(o);
 							eventBus.publish("websocketSystemEvent", JsonObject.mapFrom(apiRequest).toString());
-							patchSystemEventFuture(o, false).onSuccess(a -> {
+							patchSystemEventFuture(o, false).onSuccess(o2 -> {
+								if(apiRequest != null) {
+									apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listSystemEvent.getResponse().getResponse().getDocs().size());
+									if(apiRequest.getNumFound() == 1L)
+										o2.apiRequestSystemEvent();
+									eventBus.publish("websocketSystemEvent", JsonObject.mapFrom(apiRequest).toString());
+								}
 								eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(new JsonObject().encodePrettily()))));
 							}).onFailure(ex -> {
 								eventHandler.handle(Future.failedFuture(ex));

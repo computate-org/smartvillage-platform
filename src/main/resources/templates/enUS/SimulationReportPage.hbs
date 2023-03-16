@@ -3,7 +3,34 @@
 {{#partial "htmMeta"}}{{> htmMetaSimulationReportPage}}{{/partial}}
 {{#partial "htmStyle"}}{{> htmStyleSimulationReportPage}}{{/partial}}
 {{#partial "htmScripts"}}{{> htmScriptsSimulationReportPage}}{{/partial}}
-{{#partial "htmScript"}}{{> htmScriptSimulationReportPage}}{{/partial}}
+{{#partial "htmScript"}}{{> htmScriptSimulationReportPage}}
+		<script>
+async function websocketSimulationReportInner2(apiRequest) {
+	var pk = apiRequest['pk'];
+	var vars = apiRequest['vars'];
+	if(pk != null) {
+		websocketSimulationReportInner(apiRequest);
+
+		if(vars.includes('updatedPerformance')) {
+			var queryParams = "?" + $(".pageSearchVal").get().filter(elem => elem.innerText.length > 0).map(elem => elem.innerText).join("&");
+			var uri = location.pathname + queryParams;
+			$.get(uri, {}, function(data) {
+				var $response = $("<html/>").html(data);
+				$('.plotPerformance').each(function(index, fragment) {
+					var $fragment = $(fragment);
+					$fragment.replaceWith($response.find(".plotPerformance"));
+				});
+			}, 'html');
+
+			addGlow($('.plotPerformance'));
+		}
+	}
+}
+		</script>
+{{/partial}}
+{{#partial "websocket"}}
+				websocketSimulationReport(websocketSimulationReportInner2);
+{{/partial}}
 {{#partial "htmBodySidebar"}}{{> htmBodySidebarSimulationReportPage}}{{/partial}}
 {{#partial "htmBodyStart"}}{{> htmBodyStartSimulationReportPage}}{{/partial}}
 {{#partial "htmBodyMiddle"}}{{> htmBodyMiddleSimulationReportPage}}{{/partial}}
@@ -44,7 +71,7 @@
 {{#partial "htmForm_searchpageSimulationReport"}}{{> htmFormSimulationReportPage_searchpageSimulationReport}}
 
 <div>
-	<img src="data:image/png;base64,{{ plotPerformance }}"/>
+	<img class="plotPerformance" class="plotPerformance " src="data:image/png;base64,{{ plotPerformance }}"/>
 </div>
 {{/partial}}
 {{> SimulationReportGenPage}}

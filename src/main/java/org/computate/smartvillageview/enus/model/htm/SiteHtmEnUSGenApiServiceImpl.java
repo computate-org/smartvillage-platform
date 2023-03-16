@@ -655,12 +655,6 @@ public class SiteHtmEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 			}));
 		});
 		CompositeFuture.all(futures).onSuccess( a -> {
-			if(apiRequest != null) {
-				apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listSiteHtm.getResponse().getResponse().getDocs().size());
-				if(apiRequest.getNumFound() == 1L)
-					listSiteHtm.first().apiRequestSiteHtm();
-				eventBus.publish("websocketSiteHtm", JsonObject.mapFrom(apiRequest).toString());
-			}
 			listSiteHtm.next().onSuccess(next -> {
 				if(next) {
 					listPATCHSiteHtm(apiRequest, listSiteHtm).onSuccess(b -> {
@@ -705,7 +699,13 @@ public class SiteHtmEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 							if(apiRequest.getNumFound() == 1L)
 								apiRequest.setOriginal(o);
 							eventBus.publish("websocketSiteHtm", JsonObject.mapFrom(apiRequest).toString());
-							patchSiteHtmFuture(o, false).onSuccess(a -> {
+							patchSiteHtmFuture(o, false).onSuccess(o2 -> {
+								if(apiRequest != null) {
+									apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listSiteHtm.getResponse().getResponse().getDocs().size());
+									if(apiRequest.getNumFound() == 1L)
+										o2.apiRequestSiteHtm();
+									eventBus.publish("websocketSiteHtm", JsonObject.mapFrom(apiRequest).toString());
+								}
 								eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(new JsonObject().encodePrettily()))));
 							}).onFailure(ex -> {
 								eventHandler.handle(Future.failedFuture(ex));

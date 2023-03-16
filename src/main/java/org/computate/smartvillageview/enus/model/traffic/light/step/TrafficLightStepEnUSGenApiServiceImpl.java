@@ -474,12 +474,6 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 			}));
 		});
 		CompositeFuture.all(futures).onSuccess( a -> {
-			if(apiRequest != null) {
-				apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listTrafficLightStep.getResponse().getResponse().getDocs().size());
-				if(apiRequest.getNumFound() == 1L)
-					listTrafficLightStep.first().apiRequestTrafficLightStep();
-				eventBus.publish("websocketTrafficLightStep", JsonObject.mapFrom(apiRequest).toString());
-			}
 			listTrafficLightStep.next().onSuccess(next -> {
 				if(next) {
 					listPATCHTrafficLightStep(apiRequest, listTrafficLightStep).onSuccess(b -> {
@@ -524,7 +518,13 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							if(apiRequest.getNumFound() == 1L)
 								apiRequest.setOriginal(o);
 							eventBus.publish("websocketTrafficLightStep", JsonObject.mapFrom(apiRequest).toString());
-							patchTrafficLightStepFuture(o, false).onSuccess(a -> {
+							patchTrafficLightStepFuture(o, false).onSuccess(o2 -> {
+								if(apiRequest != null) {
+									apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listTrafficLightStep.getResponse().getResponse().getDocs().size());
+									if(apiRequest.getNumFound() == 1L)
+										o2.apiRequestTrafficLightStep();
+									eventBus.publish("websocketTrafficLightStep", JsonObject.mapFrom(apiRequest).toString());
+								}
 								eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(new JsonObject().encodePrettily()))));
 							}).onFailure(ex -> {
 								eventHandler.handle(Future.failedFuture(ex));

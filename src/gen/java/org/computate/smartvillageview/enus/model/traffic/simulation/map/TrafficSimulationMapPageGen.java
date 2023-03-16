@@ -1027,12 +1027,31 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 	public void setListTrafficSimulation(JsonArray listTrafficSimulation) {
 		this.listTrafficSimulation = listTrafficSimulation;
 	}
+	@JsonIgnore
+	public void setListTrafficSimulation(String o) {
+		this.listTrafficSimulation = TrafficSimulationMapPage.staticSetListTrafficSimulation(siteRequest_, o);
+	}
 	public static JsonArray staticSetListTrafficSimulation(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonArray(o);
+		}
 		return null;
 	}
 	protected TrafficSimulationMapPage listTrafficSimulationInit() {
 		_listTrafficSimulation(listTrafficSimulation);
 		return (TrafficSimulationMapPage)this;
+	}
+
+	public static JsonArray staticSearchListTrafficSimulation(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o;
+	}
+
+	public static String staticSearchStrListTrafficSimulation(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqListTrafficSimulation(SiteRequestEnUS siteRequest_, String o) {
+		return TrafficSimulationMapPage.staticSearchStrListTrafficSimulation(siteRequest_, TrafficSimulationMapPage.staticSearchListTrafficSimulation(siteRequest_, TrafficSimulationMapPage.staticSetListTrafficSimulation(siteRequest_, o)));
 	}
 
 	///////////
@@ -1587,6 +1606,8 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 			return TrafficSimulationMapPage.staticSetDEFAULT_MAP_LOCATION(siteRequest_, o);
 		case "DEFAULT_MAP_ZOOM":
 			return TrafficSimulationMapPage.staticSetDEFAULT_MAP_ZOOM(siteRequest_, o);
+		case "listTrafficSimulation":
+			return TrafficSimulationMapPage.staticSetListTrafficSimulation(siteRequest_, o);
 		case "trafficSimulationCount":
 			return TrafficSimulationMapPage.staticSetTrafficSimulationCount(siteRequest_, o);
 		case "pk":
@@ -1635,6 +1656,8 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 			return TrafficSimulationMapPage.staticSearchDEFAULT_MAP_LOCATION(siteRequest_, (JsonObject)o);
 		case "DEFAULT_MAP_ZOOM":
 			return TrafficSimulationMapPage.staticSearchDEFAULT_MAP_ZOOM(siteRequest_, (BigDecimal)o);
+		case "listTrafficSimulation":
+			return TrafficSimulationMapPage.staticSearchListTrafficSimulation(siteRequest_, (JsonArray)o);
 		case "trafficSimulationCount":
 			return TrafficSimulationMapPage.staticSearchTrafficSimulationCount(siteRequest_, (Integer)o);
 		case "pk":
@@ -1683,6 +1706,8 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 			return TrafficSimulationMapPage.staticSearchStrDEFAULT_MAP_LOCATION(siteRequest_, (JsonObject)o);
 		case "DEFAULT_MAP_ZOOM":
 			return TrafficSimulationMapPage.staticSearchStrDEFAULT_MAP_ZOOM(siteRequest_, (Double)o);
+		case "listTrafficSimulation":
+			return TrafficSimulationMapPage.staticSearchStrListTrafficSimulation(siteRequest_, (JsonArray)o);
 		case "trafficSimulationCount":
 			return TrafficSimulationMapPage.staticSearchStrTrafficSimulationCount(siteRequest_, (Integer)o);
 		case "pk":
@@ -1731,6 +1756,8 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 			return TrafficSimulationMapPage.staticSearchFqDEFAULT_MAP_LOCATION(siteRequest_, o);
 		case "DEFAULT_MAP_ZOOM":
 			return TrafficSimulationMapPage.staticSearchFqDEFAULT_MAP_ZOOM(siteRequest_, o);
+		case "listTrafficSimulation":
+			return TrafficSimulationMapPage.staticSearchFqListTrafficSimulation(siteRequest_, o);
 		case "trafficSimulationCount":
 			return TrafficSimulationMapPage.staticSearchFqTrafficSimulationCount(siteRequest_, o);
 		case "pk":

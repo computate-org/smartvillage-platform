@@ -182,12 +182,31 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 	public void setListBaseModel(JsonArray listBaseModel) {
 		this.listBaseModel = listBaseModel;
 	}
+	@JsonIgnore
+	public void setListBaseModel(String o) {
+		this.listBaseModel = BaseModelGenPage.staticSetListBaseModel(siteRequest_, o);
+	}
 	public static JsonArray staticSetListBaseModel(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonArray(o);
+		}
 		return null;
 	}
 	protected BaseModelGenPage listBaseModelInit() {
 		_listBaseModel(listBaseModel);
 		return (BaseModelGenPage)this;
+	}
+
+	public static JsonArray staticSearchListBaseModel(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o;
+	}
+
+	public static String staticSearchStrListBaseModel(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqListBaseModel(SiteRequestEnUS siteRequest_, String o) {
+		return BaseModelGenPage.staticSearchStrListBaseModel(siteRequest_, BaseModelGenPage.staticSearchListBaseModel(siteRequest_, BaseModelGenPage.staticSetListBaseModel(siteRequest_, o)));
 	}
 
 	////////////////////
@@ -534,6 +553,8 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 	}
 	public static Object staticSetBaseModelGenPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "listBaseModel":
+			return BaseModelGenPage.staticSetListBaseModel(siteRequest_, o);
 		case "baseModelCount":
 			return BaseModelGenPage.staticSetBaseModelCount(siteRequest_, o);
 		case "pk":
@@ -554,6 +575,8 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 	}
 	public static Object staticSearchBaseModelGenPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "listBaseModel":
+			return BaseModelGenPage.staticSearchListBaseModel(siteRequest_, (JsonArray)o);
 		case "baseModelCount":
 			return BaseModelGenPage.staticSearchBaseModelCount(siteRequest_, (Integer)o);
 		case "pk":
@@ -574,6 +597,8 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 	}
 	public static String staticSearchStrBaseModelGenPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "listBaseModel":
+			return BaseModelGenPage.staticSearchStrListBaseModel(siteRequest_, (JsonArray)o);
 		case "baseModelCount":
 			return BaseModelGenPage.staticSearchStrBaseModelCount(siteRequest_, (Integer)o);
 		case "pk":
@@ -594,6 +619,8 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 	}
 	public static String staticSearchFqBaseModelGenPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "listBaseModel":
+			return BaseModelGenPage.staticSearchFqListBaseModel(siteRequest_, o);
 		case "baseModelCount":
 			return BaseModelGenPage.staticSearchFqBaseModelCount(siteRequest_, o);
 		case "pk":

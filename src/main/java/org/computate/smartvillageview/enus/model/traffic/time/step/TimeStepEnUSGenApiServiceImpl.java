@@ -474,12 +474,6 @@ public class TimeStepEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 			}));
 		});
 		CompositeFuture.all(futures).onSuccess( a -> {
-			if(apiRequest != null) {
-				apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listTimeStep.getResponse().getResponse().getDocs().size());
-				if(apiRequest.getNumFound() == 1L)
-					listTimeStep.first().apiRequestTimeStep();
-				eventBus.publish("websocketTimeStep", JsonObject.mapFrom(apiRequest).toString());
-			}
 			listTimeStep.next().onSuccess(next -> {
 				if(next) {
 					listPATCHTimeStep(apiRequest, listTimeStep).onSuccess(b -> {
@@ -524,7 +518,13 @@ public class TimeStepEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							if(apiRequest.getNumFound() == 1L)
 								apiRequest.setOriginal(o);
 							eventBus.publish("websocketTimeStep", JsonObject.mapFrom(apiRequest).toString());
-							patchTimeStepFuture(o, false).onSuccess(a -> {
+							patchTimeStepFuture(o, false).onSuccess(o2 -> {
+								if(apiRequest != null) {
+									apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listTimeStep.getResponse().getResponse().getDocs().size());
+									if(apiRequest.getNumFound() == 1L)
+										o2.apiRequestTimeStep();
+									eventBus.publish("websocketTimeStep", JsonObject.mapFrom(apiRequest).toString());
+								}
 								eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(new JsonObject().encodePrettily()))));
 							}).onFailure(ex -> {
 								eventHandler.handle(Future.failedFuture(ex));

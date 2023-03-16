@@ -182,12 +182,31 @@ public abstract class TimeStepGenPageGen<DEV> extends BaseResultPage {
 	public void setListTimeStep(JsonArray listTimeStep) {
 		this.listTimeStep = listTimeStep;
 	}
+	@JsonIgnore
+	public void setListTimeStep(String o) {
+		this.listTimeStep = TimeStepGenPage.staticSetListTimeStep(siteRequest_, o);
+	}
 	public static JsonArray staticSetListTimeStep(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonArray(o);
+		}
 		return null;
 	}
 	protected TimeStepGenPage listTimeStepInit() {
 		_listTimeStep(listTimeStep);
 		return (TimeStepGenPage)this;
+	}
+
+	public static JsonArray staticSearchListTimeStep(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o;
+	}
+
+	public static String staticSearchStrListTimeStep(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqListTimeStep(SiteRequestEnUS siteRequest_, String o) {
+		return TimeStepGenPage.staticSearchStrListTimeStep(siteRequest_, TimeStepGenPage.staticSearchListTimeStep(siteRequest_, TimeStepGenPage.staticSetListTimeStep(siteRequest_, o)));
 	}
 
 	///////////////////
@@ -526,6 +545,8 @@ public abstract class TimeStepGenPageGen<DEV> extends BaseResultPage {
 	}
 	public static Object staticSetTimeStepGenPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "listTimeStep":
+			return TimeStepGenPage.staticSetListTimeStep(siteRequest_, o);
 		case "timeStepCount":
 			return TimeStepGenPage.staticSetTimeStepCount(siteRequest_, o);
 		case "id":
@@ -546,6 +567,8 @@ public abstract class TimeStepGenPageGen<DEV> extends BaseResultPage {
 	}
 	public static Object staticSearchTimeStepGenPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "listTimeStep":
+			return TimeStepGenPage.staticSearchListTimeStep(siteRequest_, (JsonArray)o);
 		case "timeStepCount":
 			return TimeStepGenPage.staticSearchTimeStepCount(siteRequest_, (Integer)o);
 		case "id":
@@ -566,6 +589,8 @@ public abstract class TimeStepGenPageGen<DEV> extends BaseResultPage {
 	}
 	public static String staticSearchStrTimeStepGenPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "listTimeStep":
+			return TimeStepGenPage.staticSearchStrListTimeStep(siteRequest_, (JsonArray)o);
 		case "timeStepCount":
 			return TimeStepGenPage.staticSearchStrTimeStepCount(siteRequest_, (Integer)o);
 		case "id":
@@ -586,6 +611,8 @@ public abstract class TimeStepGenPageGen<DEV> extends BaseResultPage {
 	}
 	public static String staticSearchFqTimeStepGenPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "listTimeStep":
+			return TimeStepGenPage.staticSearchFqListTimeStep(siteRequest_, o);
 		case "timeStepCount":
 			return TimeStepGenPage.staticSearchFqTimeStepCount(siteRequest_, o);
 		case "id":

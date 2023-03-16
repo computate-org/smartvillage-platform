@@ -182,12 +182,31 @@ public abstract class TrafficLightGenPageGen<DEV> extends MapResultPage {
 	public void setListTrafficLight(JsonArray listTrafficLight) {
 		this.listTrafficLight = listTrafficLight;
 	}
+	@JsonIgnore
+	public void setListTrafficLight(String o) {
+		this.listTrafficLight = TrafficLightGenPage.staticSetListTrafficLight(siteRequest_, o);
+	}
 	public static JsonArray staticSetListTrafficLight(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonArray(o);
+		}
 		return null;
 	}
 	protected TrafficLightGenPage listTrafficLightInit() {
 		_listTrafficLight(listTrafficLight);
 		return (TrafficLightGenPage)this;
+	}
+
+	public static JsonArray staticSearchListTrafficLight(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o;
+	}
+
+	public static String staticSearchStrListTrafficLight(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqListTrafficLight(SiteRequestEnUS siteRequest_, String o) {
+		return TrafficLightGenPage.staticSearchStrListTrafficLight(siteRequest_, TrafficLightGenPage.staticSearchListTrafficLight(siteRequest_, TrafficLightGenPage.staticSetListTrafficLight(siteRequest_, o)));
 	}
 
 	///////////////////////
@@ -526,6 +545,8 @@ public abstract class TrafficLightGenPageGen<DEV> extends MapResultPage {
 	}
 	public static Object staticSetTrafficLightGenPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "listTrafficLight":
+			return TrafficLightGenPage.staticSetListTrafficLight(siteRequest_, o);
 		case "trafficLightCount":
 			return TrafficLightGenPage.staticSetTrafficLightCount(siteRequest_, o);
 		case "id":
@@ -546,6 +567,8 @@ public abstract class TrafficLightGenPageGen<DEV> extends MapResultPage {
 	}
 	public static Object staticSearchTrafficLightGenPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "listTrafficLight":
+			return TrafficLightGenPage.staticSearchListTrafficLight(siteRequest_, (JsonArray)o);
 		case "trafficLightCount":
 			return TrafficLightGenPage.staticSearchTrafficLightCount(siteRequest_, (Integer)o);
 		case "id":
@@ -566,6 +589,8 @@ public abstract class TrafficLightGenPageGen<DEV> extends MapResultPage {
 	}
 	public static String staticSearchStrTrafficLightGenPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "listTrafficLight":
+			return TrafficLightGenPage.staticSearchStrListTrafficLight(siteRequest_, (JsonArray)o);
 		case "trafficLightCount":
 			return TrafficLightGenPage.staticSearchStrTrafficLightCount(siteRequest_, (Integer)o);
 		case "id":
@@ -586,6 +611,8 @@ public abstract class TrafficLightGenPageGen<DEV> extends MapResultPage {
 	}
 	public static String staticSearchFqTrafficLightGenPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "listTrafficLight":
+			return TrafficLightGenPage.staticSearchFqListTrafficLight(siteRequest_, o);
 		case "trafficLightCount":
 			return TrafficLightGenPage.staticSearchFqTrafficLightCount(siteRequest_, o);
 		case "id":

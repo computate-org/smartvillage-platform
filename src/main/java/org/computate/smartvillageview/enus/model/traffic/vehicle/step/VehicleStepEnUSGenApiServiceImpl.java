@@ -474,12 +474,6 @@ public class VehicleStepEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 			}));
 		});
 		CompositeFuture.all(futures).onSuccess( a -> {
-			if(apiRequest != null) {
-				apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listVehicleStep.getResponse().getResponse().getDocs().size());
-				if(apiRequest.getNumFound() == 1L)
-					listVehicleStep.first().apiRequestVehicleStep();
-				eventBus.publish("websocketVehicleStep", JsonObject.mapFrom(apiRequest).toString());
-			}
 			listVehicleStep.next().onSuccess(next -> {
 				if(next) {
 					listPATCHVehicleStep(apiRequest, listVehicleStep).onSuccess(b -> {
@@ -524,7 +518,13 @@ public class VehicleStepEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 							if(apiRequest.getNumFound() == 1L)
 								apiRequest.setOriginal(o);
 							eventBus.publish("websocketVehicleStep", JsonObject.mapFrom(apiRequest).toString());
-							patchVehicleStepFuture(o, false).onSuccess(a -> {
+							patchVehicleStepFuture(o, false).onSuccess(o2 -> {
+								if(apiRequest != null) {
+									apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listVehicleStep.getResponse().getResponse().getDocs().size());
+									if(apiRequest.getNumFound() == 1L)
+										o2.apiRequestVehicleStep();
+									eventBus.publish("websocketVehicleStep", JsonObject.mapFrom(apiRequest).toString());
+								}
 								eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(new JsonObject().encodePrettily()))));
 							}).onFailure(ex -> {
 								eventHandler.handle(Future.failedFuture(ex));

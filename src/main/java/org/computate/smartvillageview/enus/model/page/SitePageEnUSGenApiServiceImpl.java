@@ -601,12 +601,6 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 			}));
 		});
 		CompositeFuture.all(futures).onSuccess( a -> {
-			if(apiRequest != null) {
-				apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listSitePage.getResponse().getResponse().getDocs().size());
-				if(apiRequest.getNumFound() == 1L)
-					listSitePage.first().apiRequestSitePage();
-				eventBus.publish("websocketSitePage", JsonObject.mapFrom(apiRequest).toString());
-			}
 			listSitePage.next().onSuccess(next -> {
 				if(next) {
 					listPATCHSitePage(apiRequest, listSitePage).onSuccess(b -> {
@@ -651,7 +645,13 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							if(apiRequest.getNumFound() == 1L)
 								apiRequest.setOriginal(o);
 							eventBus.publish("websocketSitePage", JsonObject.mapFrom(apiRequest).toString());
-							patchSitePageFuture(o, false).onSuccess(a -> {
+							patchSitePageFuture(o, false).onSuccess(o2 -> {
+								if(apiRequest != null) {
+									apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listSitePage.getResponse().getResponse().getDocs().size());
+									if(apiRequest.getNumFound() == 1L)
+										o2.apiRequestSitePage();
+									eventBus.publish("websocketSitePage", JsonObject.mapFrom(apiRequest).toString());
+								}
 								eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(new JsonObject().encodePrettily()))));
 							}).onFailure(ex -> {
 								eventHandler.handle(Future.failedFuture(ex));

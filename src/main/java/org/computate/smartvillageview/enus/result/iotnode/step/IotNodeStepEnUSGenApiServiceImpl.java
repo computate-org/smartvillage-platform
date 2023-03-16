@@ -474,12 +474,6 @@ public class IotNodeStepEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 			}));
 		});
 		CompositeFuture.all(futures).onSuccess( a -> {
-			if(apiRequest != null) {
-				apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listIotNodeStep.getResponse().getResponse().getDocs().size());
-				if(apiRequest.getNumFound() == 1L)
-					listIotNodeStep.first().apiRequestIotNodeStep();
-				eventBus.publish("websocketIotNodeStep", JsonObject.mapFrom(apiRequest).toString());
-			}
 			listIotNodeStep.next().onSuccess(next -> {
 				if(next) {
 					listPATCHIotNodeStep(apiRequest, listIotNodeStep).onSuccess(b -> {
@@ -524,7 +518,13 @@ public class IotNodeStepEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 							if(apiRequest.getNumFound() == 1L)
 								apiRequest.setOriginal(o);
 							eventBus.publish("websocketIotNodeStep", JsonObject.mapFrom(apiRequest).toString());
-							patchIotNodeStepFuture(o, false).onSuccess(a -> {
+							patchIotNodeStepFuture(o, false).onSuccess(o2 -> {
+								if(apiRequest != null) {
+									apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listIotNodeStep.getResponse().getResponse().getDocs().size());
+									if(apiRequest.getNumFound() == 1L)
+										o2.apiRequestIotNodeStep();
+									eventBus.publish("websocketIotNodeStep", JsonObject.mapFrom(apiRequest).toString());
+								}
 								eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(new JsonObject().encodePrettily()))));
 							}).onFailure(ex -> {
 								eventHandler.handle(Future.failedFuture(ex));

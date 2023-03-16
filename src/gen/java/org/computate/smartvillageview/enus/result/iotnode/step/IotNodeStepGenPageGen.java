@@ -182,12 +182,31 @@ public abstract class IotNodeStepGenPageGen<DEV> extends BaseResultPage {
 	public void setListIotNodeStep(JsonArray listIotNodeStep) {
 		this.listIotNodeStep = listIotNodeStep;
 	}
+	@JsonIgnore
+	public void setListIotNodeStep(String o) {
+		this.listIotNodeStep = IotNodeStepGenPage.staticSetListIotNodeStep(siteRequest_, o);
+	}
 	public static JsonArray staticSetListIotNodeStep(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonArray(o);
+		}
 		return null;
 	}
 	protected IotNodeStepGenPage listIotNodeStepInit() {
 		_listIotNodeStep(listIotNodeStep);
 		return (IotNodeStepGenPage)this;
+	}
+
+	public static JsonArray staticSearchListIotNodeStep(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o;
+	}
+
+	public static String staticSearchStrListIotNodeStep(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqListIotNodeStep(SiteRequestEnUS siteRequest_, String o) {
+		return IotNodeStepGenPage.staticSearchStrListIotNodeStep(siteRequest_, IotNodeStepGenPage.staticSearchListIotNodeStep(siteRequest_, IotNodeStepGenPage.staticSetListIotNodeStep(siteRequest_, o)));
 	}
 
 	//////////////////////
@@ -526,6 +545,8 @@ public abstract class IotNodeStepGenPageGen<DEV> extends BaseResultPage {
 	}
 	public static Object staticSetIotNodeStepGenPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "listIotNodeStep":
+			return IotNodeStepGenPage.staticSetListIotNodeStep(siteRequest_, o);
 		case "iotNodeStepCount":
 			return IotNodeStepGenPage.staticSetIotNodeStepCount(siteRequest_, o);
 		case "id":
@@ -546,6 +567,8 @@ public abstract class IotNodeStepGenPageGen<DEV> extends BaseResultPage {
 	}
 	public static Object staticSearchIotNodeStepGenPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "listIotNodeStep":
+			return IotNodeStepGenPage.staticSearchListIotNodeStep(siteRequest_, (JsonArray)o);
 		case "iotNodeStepCount":
 			return IotNodeStepGenPage.staticSearchIotNodeStepCount(siteRequest_, (Integer)o);
 		case "id":
@@ -566,6 +589,8 @@ public abstract class IotNodeStepGenPageGen<DEV> extends BaseResultPage {
 	}
 	public static String staticSearchStrIotNodeStepGenPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "listIotNodeStep":
+			return IotNodeStepGenPage.staticSearchStrListIotNodeStep(siteRequest_, (JsonArray)o);
 		case "iotNodeStepCount":
 			return IotNodeStepGenPage.staticSearchStrIotNodeStepCount(siteRequest_, (Integer)o);
 		case "id":
@@ -586,6 +611,8 @@ public abstract class IotNodeStepGenPageGen<DEV> extends BaseResultPage {
 	}
 	public static String staticSearchFqIotNodeStepGenPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "listIotNodeStep":
+			return IotNodeStepGenPage.staticSearchFqListIotNodeStep(siteRequest_, o);
 		case "iotNodeStepCount":
 			return IotNodeStepGenPage.staticSearchFqIotNodeStepCount(siteRequest_, o);
 		case "id":

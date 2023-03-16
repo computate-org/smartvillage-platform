@@ -182,12 +182,31 @@ public abstract class BicycleStepGenPageGen<DEV> extends MapResultPage {
 	public void setListBicycleStep(JsonArray listBicycleStep) {
 		this.listBicycleStep = listBicycleStep;
 	}
+	@JsonIgnore
+	public void setListBicycleStep(String o) {
+		this.listBicycleStep = BicycleStepGenPage.staticSetListBicycleStep(siteRequest_, o);
+	}
 	public static JsonArray staticSetListBicycleStep(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonArray(o);
+		}
 		return null;
 	}
 	protected BicycleStepGenPage listBicycleStepInit() {
 		_listBicycleStep(listBicycleStep);
 		return (BicycleStepGenPage)this;
+	}
+
+	public static JsonArray staticSearchListBicycleStep(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o;
+	}
+
+	public static String staticSearchStrListBicycleStep(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqListBicycleStep(SiteRequestEnUS siteRequest_, String o) {
+		return BicycleStepGenPage.staticSearchStrListBicycleStep(siteRequest_, BicycleStepGenPage.staticSearchListBicycleStep(siteRequest_, BicycleStepGenPage.staticSetListBicycleStep(siteRequest_, o)));
 	}
 
 	//////////////////////
@@ -526,6 +545,8 @@ public abstract class BicycleStepGenPageGen<DEV> extends MapResultPage {
 	}
 	public static Object staticSetBicycleStepGenPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "listBicycleStep":
+			return BicycleStepGenPage.staticSetListBicycleStep(siteRequest_, o);
 		case "bicycleStepCount":
 			return BicycleStepGenPage.staticSetBicycleStepCount(siteRequest_, o);
 		case "id":
@@ -546,6 +567,8 @@ public abstract class BicycleStepGenPageGen<DEV> extends MapResultPage {
 	}
 	public static Object staticSearchBicycleStepGenPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "listBicycleStep":
+			return BicycleStepGenPage.staticSearchListBicycleStep(siteRequest_, (JsonArray)o);
 		case "bicycleStepCount":
 			return BicycleStepGenPage.staticSearchBicycleStepCount(siteRequest_, (Integer)o);
 		case "id":
@@ -566,6 +589,8 @@ public abstract class BicycleStepGenPageGen<DEV> extends MapResultPage {
 	}
 	public static String staticSearchStrBicycleStepGenPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "listBicycleStep":
+			return BicycleStepGenPage.staticSearchStrListBicycleStep(siteRequest_, (JsonArray)o);
 		case "bicycleStepCount":
 			return BicycleStepGenPage.staticSearchStrBicycleStepCount(siteRequest_, (Integer)o);
 		case "id":
@@ -586,6 +611,8 @@ public abstract class BicycleStepGenPageGen<DEV> extends MapResultPage {
 	}
 	public static String staticSearchFqBicycleStepGenPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "listBicycleStep":
+			return BicycleStepGenPage.staticSearchFqListBicycleStep(siteRequest_, o);
 		case "bicycleStepCount":
 			return BicycleStepGenPage.staticSearchFqBicycleStepCount(siteRequest_, o);
 		case "id":
