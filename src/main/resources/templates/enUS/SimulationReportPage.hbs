@@ -20,6 +20,10 @@ async function websocketSimulationReportInner2(apiRequest) {
 					var $fragment = $(fragment);
 					$fragment.replaceWith($response.find(".plotPerformance"));
 				});
+				$('.plotGreenLengthThresholdVehicle').each(function(index, fragment) {
+					var $fragment = $(fragment);
+					$fragment.replaceWith($response.find(".plotGreenLengthThresholdVehicle"));
+				});
 			}, 'html');
 
 			addGlow($('.plotPerformance'));
@@ -72,6 +76,9 @@ async function websocketSimulationReportInner2(apiRequest) {
 
 <div>
 	<img class="plotPerformance" class="plotPerformance " src="data:image/png;base64,{{ plotPerformance }}"/>
+</div>
+<div>
+	<img class="plotGreenLengthThresholdVehicle" class="plotGreenLengthThresholdVehicle " src="data:image/png;base64,{{ plotGreenLengthThresholdVehicle }}"/>
 </div>
 {{/partial}}
 {{> SimulationReportGenPage}}
