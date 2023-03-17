@@ -40,64 +40,66 @@ public class SimulationReportPage extends SimulationReportPageGen<SimulationRepo
 	 */ 
 	protected void _plotPerformance(Wrap<String> w) {
 		try {
-			JsonArray updatedParameters = simulationReport_.getUpdatedParameters();
-			JsonArray updatedPerformance = simulationReport_.getUpdatedPerformance();
-			if(updatedPerformance != null && updatedPerformance.size() >= 3 && simulationReport_ != null && updatedParameters != null && updatedPerformance != null) {
-				Integer size = updatedPerformance.size();
-
-				XYSeries series = new XYSeries("vehicle and pedestrian");
-				for(int i = 0; i < updatedPerformance.getJsonArray(0).size(); i++) {
-					series.add(i + 1, updatedPerformance.getJsonArray(size-1).getDouble(i));
+			if(simulationReport_ != null) {
+				JsonArray updatedParameters = simulationReport_.getUpdatedParameters();
+				JsonArray updatedPerformance = simulationReport_.getUpdatedPerformance();
+				if(updatedPerformance != null && updatedPerformance.size() >= 3 && simulationReport_ != null && updatedParameters != null && updatedPerformance != null) {
+					Integer size = updatedPerformance.size();
+	
+					XYSeries series = new XYSeries("vehicle and pedestrian");
+					for(int i = 0; i < updatedPerformance.getJsonArray(0).size(); i++) {
+						series.add(i + 1, updatedPerformance.getJsonArray(size-1).getDouble(i));
+					}
+					XYSeriesCollection dataset = new XYSeriesCollection(series);
+					XYSeries series2 = new XYSeries("only vehicle");
+					for(int i = 0; i < updatedPerformance.getJsonArray(0).size(); i++) {
+						series2.add(i + 1, updatedPerformance.getJsonArray(size-3).getDouble(i));
+					}
+					dataset.addSeries(series2);
+					XYSeries series3 = new XYSeries("only pedestrian");
+					for(int i = 0; i < updatedPerformance.getJsonArray(0).size(); i++) {
+						series3.add(i + 1, updatedPerformance.getJsonArray(size-2).getDouble(i));
+					}
+					dataset.addSeries(series3);
+	
+					// create plot...
+					NumberAxis xAxis = new NumberAxis("iterations");
+					xAxis.setAutoRangeIncludesZero(false);
+					NumberAxis yAxis = new NumberAxis("average waiting time(s)");
+					yAxis.setAutoRangeIncludesZero(false);
+		
+					XYItemRenderer renderer1 = new XYLineAndShapeRenderer();
+					renderer1.setSeriesPaint(0, Color.yellow);
+					renderer1.setSeriesPaint(1, Color.red);
+					renderer1.setSeriesPaint(2, Color.pink);
+	
+					XYPlot plot = new XYPlot(dataset, xAxis, yAxis, renderer1);
+	//				XYPlot plot = (XYPlot)chart.getPlot();
+	//				plot.setBackgroundPaint(Color.WHITE);
+	//				plot.setDomainGridlinePaint(Color.LIGHT_GRAY);
+	//				plot.setRangeGridlinePaint(Color.LIGHT_GRAY);
+					plot.setDomainPannable(true);
+					plot.setRangePannable(false);
+					plot.setDomainCrosshairVisible(true);
+					plot.setRangeCrosshairVisible(true);
+					plot.setAxisOffset(new RectangleInsets(4, 4, 4, 4));
+		
+					// create and return the chart panel...
+					JFreeChart chart = new JFreeChart("Performance", JFreeChart.DEFAULT_TITLE_FONT, plot, true);
+					ChartUtils.applyCurrentTheme(chart);
+		
+					ChartRenderingInfo chartRenderingInfo = new ChartRenderingInfo(new StandardEntityCollection());
+					BufferedImage image = chart.createBufferedImage(600, 400, chartRenderingInfo);
+		
+					ByteArrayOutputStream baos = new ByteArrayOutputStream();
+					ImageIO.write(image, "png", baos);
+					baos.flush();
+					byte[] imageInByte = baos.toByteArray();
+					baos.close();
+		
+					String imageStr = new String(Base64.getEncoder().encode(imageInByte), Charset.forName("UTF-8"));
+					w.o(imageStr);
 				}
-				XYSeriesCollection dataset = new XYSeriesCollection(series);
-				XYSeries series2 = new XYSeries("only vehicle");
-				for(int i = 0; i < updatedPerformance.getJsonArray(0).size(); i++) {
-					series2.add(i + 1, updatedPerformance.getJsonArray(size-3).getDouble(i));
-				}
-				dataset.addSeries(series2);
-				XYSeries series3 = new XYSeries("only pedestrian");
-				for(int i = 0; i < updatedPerformance.getJsonArray(0).size(); i++) {
-					series3.add(i + 1, updatedPerformance.getJsonArray(size-2).getDouble(i));
-				}
-				dataset.addSeries(series3);
-
-				// create plot...
-				NumberAxis xAxis = new NumberAxis("iterations");
-				xAxis.setAutoRangeIncludesZero(false);
-				NumberAxis yAxis = new NumberAxis("average waiting time(s)");
-				yAxis.setAutoRangeIncludesZero(false);
-	
-				XYItemRenderer renderer1 = new XYLineAndShapeRenderer();
-				renderer1.setSeriesPaint(0, Color.yellow);
-				renderer1.setSeriesPaint(1, Color.red);
-				renderer1.setSeriesPaint(2, Color.pink);
-
-				XYPlot plot = new XYPlot(dataset, xAxis, yAxis, renderer1);
-//				XYPlot plot = (XYPlot)chart.getPlot();
-//				plot.setBackgroundPaint(Color.WHITE);
-//				plot.setDomainGridlinePaint(Color.LIGHT_GRAY);
-//				plot.setRangeGridlinePaint(Color.LIGHT_GRAY);
-				plot.setDomainPannable(true);
-				plot.setRangePannable(false);
-				plot.setDomainCrosshairVisible(true);
-				plot.setRangeCrosshairVisible(true);
-				plot.setAxisOffset(new RectangleInsets(4, 4, 4, 4));
-	
-				// create and return the chart panel...
-				JFreeChart chart = new JFreeChart("Performance", JFreeChart.DEFAULT_TITLE_FONT, plot, true);
-				ChartUtils.applyCurrentTheme(chart);
-	
-				ChartRenderingInfo chartRenderingInfo = new ChartRenderingInfo(new StandardEntityCollection());
-				BufferedImage image = chart.createBufferedImage(600, 400, chartRenderingInfo);
-	
-				ByteArrayOutputStream baos = new ByteArrayOutputStream();
-				ImageIO.write(image, "png", baos);
-				baos.flush();
-				byte[] imageInByte = baos.toByteArray();
-				baos.close();
-	
-				String imageStr = new String(Base64.getEncoder().encode(imageInByte), Charset.forName("UTF-8"));
-				w.o(imageStr);
 			}
 		} catch (IOException ex) {
 			ExceptionUtils.rethrow(ex);
@@ -110,69 +112,71 @@ public class SimulationReportPage extends SimulationReportPageGen<SimulationRepo
 	 */ 
 	protected void _plotGreenLengthThresholdVehicle(Wrap<String> w) {
 		try {
-			JsonArray updatedParameters = simulationReport_.getUpdatedParameters();
-			JsonArray updatedPerformance = simulationReport_.getUpdatedPerformance();
-			if(updatedParameters != null && updatedParameters.size() >= 4 && simulationReport_ != null && updatedParameters != null && updatedPerformance != null) {
-				Integer size = updatedPerformance.size();
-
-				XYSeries series = new XYSeries("θ_1^min");
-				for(int i = 0; i < updatedParameters.getJsonArray(0).size(); i++) {
-					series.add(i + 1, updatedParameters.getJsonArray(0).getDouble(i));
+			if(simulationReport_ != null) {
+				JsonArray updatedParameters = simulationReport_.getUpdatedParameters();
+				JsonArray updatedPerformance = simulationReport_.getUpdatedPerformance();
+				if(updatedParameters != null && updatedParameters.size() >= 4 && simulationReport_ != null && updatedParameters != null && updatedPerformance != null) {
+					Integer size = updatedPerformance.size();
+	
+					XYSeries series = new XYSeries("θ_1^min");
+					for(int i = 0; i < updatedParameters.getJsonArray(0).size(); i++) {
+						series.add(i + 1, updatedParameters.getJsonArray(0).getDouble(i));
+					}
+					XYSeriesCollection dataset = new XYSeriesCollection(series);
+					XYSeries series2 = new XYSeries("θ_1^max");
+					for(int i = 0; i < updatedParameters.getJsonArray(0).size(); i++) {
+						series2.add(i + 1, updatedParameters.getJsonArray(1).getDouble(i));
+					}
+					dataset.addSeries(series2);
+					XYSeries series3 = new XYSeries("θ_2^min");
+					for(int i = 0; i < updatedParameters.getJsonArray(0).size(); i++) {
+						series3.add(i + 1, updatedParameters.getJsonArray(2).getDouble(i));
+					}
+					dataset.addSeries(series3);
+					XYSeries series4 = new XYSeries("θ_2^max");
+					for(int i = 0; i < updatedParameters.getJsonArray(0).size(); i++) {
+						series4.add(i + 1, updatedParameters.getJsonArray(3).getDouble(i));
+					}
+					dataset.addSeries(series4);
+	
+					// create plot...
+					NumberAxis xAxis = new NumberAxis("iterations");
+					xAxis.setAutoRangeIncludesZero(false);
+					NumberAxis yAxis = new NumberAxis("GREEN length threshold");
+					yAxis.setAutoRangeIncludesZero(false);
+		
+					XYItemRenderer renderer1 = new XYLineAndShapeRenderer();
+					renderer1.setSeriesPaint(0, Color.yellow);
+					renderer1.setSeriesPaint(1, Color.red);
+					renderer1.setSeriesPaint(2, Color.pink);
+	
+					XYPlot plot = new XYPlot(dataset, xAxis, yAxis, renderer1);
+	//				XYPlot plot = (XYPlot)chart.getPlot();
+	//				plot.setBackgroundPaint(Color.WHITE);
+	//				plot.setDomainGridlinePaint(Color.LIGHT_GRAY);
+	//				plot.setRangeGridlinePaint(Color.LIGHT_GRAY);
+					plot.setDomainPannable(true);
+					plot.setRangePannable(false);
+					plot.setDomainCrosshairVisible(true);
+					plot.setRangeCrosshairVisible(true);
+					plot.setAxisOffset(new RectangleInsets(4, 4, 4, 4));
+		
+					// create and return the chart panel...
+					JFreeChart chart = new JFreeChart("Green Length Threshold", JFreeChart.DEFAULT_TITLE_FONT, plot, true);
+					ChartUtils.applyCurrentTheme(chart);
+		
+					ChartRenderingInfo chartRenderingInfo = new ChartRenderingInfo(new StandardEntityCollection());
+					BufferedImage image = chart.createBufferedImage(600, 400, chartRenderingInfo);
+		
+					ByteArrayOutputStream baos = new ByteArrayOutputStream();
+					ImageIO.write(image, "png", baos);
+					baos.flush();
+					byte[] imageInByte = baos.toByteArray();
+					baos.close();
+		
+					String imageStr = new String(Base64.getEncoder().encode(imageInByte), Charset.forName("UTF-8"));
+					w.o(imageStr);
 				}
-				XYSeriesCollection dataset = new XYSeriesCollection(series);
-				XYSeries series2 = new XYSeries("θ_1^max");
-				for(int i = 0; i < updatedParameters.getJsonArray(0).size(); i++) {
-					series2.add(i + 1, updatedParameters.getJsonArray(1).getDouble(i));
-				}
-				dataset.addSeries(series2);
-				XYSeries series3 = new XYSeries("θ_2^min");
-				for(int i = 0; i < updatedParameters.getJsonArray(0).size(); i++) {
-					series3.add(i + 1, updatedParameters.getJsonArray(2).getDouble(i));
-				}
-				dataset.addSeries(series3);
-				XYSeries series4 = new XYSeries("θ_2^max");
-				for(int i = 0; i < updatedParameters.getJsonArray(0).size(); i++) {
-					series4.add(i + 1, updatedParameters.getJsonArray(3).getDouble(i));
-				}
-				dataset.addSeries(series4);
-
-				// create plot...
-				NumberAxis xAxis = new NumberAxis("iterations");
-				xAxis.setAutoRangeIncludesZero(false);
-				NumberAxis yAxis = new NumberAxis("GREEN length threshold");
-				yAxis.setAutoRangeIncludesZero(false);
-	
-				XYItemRenderer renderer1 = new XYLineAndShapeRenderer();
-				renderer1.setSeriesPaint(0, Color.yellow);
-				renderer1.setSeriesPaint(1, Color.red);
-				renderer1.setSeriesPaint(2, Color.pink);
-
-				XYPlot plot = new XYPlot(dataset, xAxis, yAxis, renderer1);
-//				XYPlot plot = (XYPlot)chart.getPlot();
-//				plot.setBackgroundPaint(Color.WHITE);
-//				plot.setDomainGridlinePaint(Color.LIGHT_GRAY);
-//				plot.setRangeGridlinePaint(Color.LIGHT_GRAY);
-				plot.setDomainPannable(true);
-				plot.setRangePannable(false);
-				plot.setDomainCrosshairVisible(true);
-				plot.setRangeCrosshairVisible(true);
-				plot.setAxisOffset(new RectangleInsets(4, 4, 4, 4));
-	
-				// create and return the chart panel...
-				JFreeChart chart = new JFreeChart("Green Length Threshold", JFreeChart.DEFAULT_TITLE_FONT, plot, true);
-				ChartUtils.applyCurrentTheme(chart);
-	
-				ChartRenderingInfo chartRenderingInfo = new ChartRenderingInfo(new StandardEntityCollection());
-				BufferedImage image = chart.createBufferedImage(600, 400, chartRenderingInfo);
-	
-				ByteArrayOutputStream baos = new ByteArrayOutputStream();
-				ImageIO.write(image, "png", baos);
-				baos.flush();
-				byte[] imageInByte = baos.toByteArray();
-				baos.close();
-	
-				String imageStr = new String(Base64.getEncoder().encode(imageInByte), Charset.forName("UTF-8"));
-				w.o(imageStr);
 			}
 		} catch (IOException ex) {
 			ExceptionUtils.rethrow(ex);
