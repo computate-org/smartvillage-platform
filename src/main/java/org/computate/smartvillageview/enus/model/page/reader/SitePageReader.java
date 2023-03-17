@@ -203,8 +203,8 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 
 	/**
 	 * Description: Import page
-	 * Val.Complete.enUS:Importing page %s completed. 
-	 * Val.Fail.enUS:Importing page %s failed. 
+	 * Val.Complete.enUS:Importing page completed: %s
+	 * Val.Fail.enUS:Importing page failed: %s
 	 */
 	private Future<Void> importSitePage(JsonObject i18n, YamlProcessor yamlProcessor, String path) {
 		Promise<Void> promise = Promise.promise();
@@ -301,14 +301,14 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 								JsonObject pageContext = new JsonObject().put("params", pageParams);
 								JsonObject pageRequest = new JsonObject().put("context", pageContext);
 								vertx.eventBus().request(String.format("smartabyar-smartvillage-enUS-%s", SitePage.CLASS_SIMPLE_NAME), pageRequest, new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", SitePage.CLASS_SIMPLE_NAME))).onSuccess(c -> {
-									LOG.info(String.format(importSitePageComplete, SitePage.CLASS_SIMPLE_NAME));
+									LOG.info(String.format(importSitePageComplete, pageBody2.getString(SitePage.VAR_id)));
 									promise.complete();
 								}).onFailure(ex -> {
-									LOG.error(String.format(importSitePageFail, SitePage.CLASS_SIMPLE_NAME), ex);
+									LOG.error(String.format(importSitePageFail, pageBody2.getString(SitePage.VAR_id)), ex);
 									promise.fail(ex);
 								});
 							}).onFailure(ex -> {
-								LOG.error(String.format(importSitePageFail, SitePage.CLASS_SIMPLE_NAME), ex);
+								LOG.error(String.format(importSitePageFail, pageBody2.getString(SitePage.VAR_id)), ex);
 								promise.fail(ex);
 							});
 						} catch(Exception ex) {
@@ -334,289 +334,299 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 		return promise.future();
 	}
 
+	/**
+	 * Description: Import page HTM content
+	 * Val.Complete.enUS:Importing page htm completed: %s
+	 * Val.Fail.enUS:Importing page htm failed: %s
+	 */
 	private Long importSiteHtm(SitePage page, JsonObject json, JsonArray labels, Stack<String> stack, String pageId, String htmGroup, JsonArray pageItems, List<Future> futures, Long sequenceNum) throws Exception {
-		Double sort = 0D;
-		for(Integer i = 0; i < pageItems.size(); i++) {
-			// Process a page item, one at a time
-			JsonObject pageItem = (JsonObject)pageItems.getValue(i);
-			String url = json.getString(SiteHtm.VAR_url);
-			String uri = json.getString(SiteHtm.VAR_uri);
-			Object in = pageItem.getValue("in");
-			String e = pageItem.getString("e");
-			JsonArray labels2 = Optional.ofNullable(pageItem.getValue("label")).map(o -> o instanceof JsonArray ? (JsonArray)o : new JsonArray().add(o)).orElse(null);
-			JsonArray labels3 = new JsonArray();
-			String each = pageItem.getString("each");
-			Boolean eNoWrapParent = false;
-			Boolean eNoWrap = false;
-			String tabs = "";
-			String comment = pageItem.getString(SiteHtm.VAR_comment);
-			JsonObject a = Optional.ofNullable(pageItem.getJsonObject(SiteHtm.VAR_a)).orElse(new JsonObject());
-			Optional.ofNullable(pageItem.getString("class")).ifPresent(val -> a.put("class", val));
-			Optional.ofNullable(pageItem.getString("id")).ifPresent(val -> a.put("id", val));
-			Optional.ofNullable(pageItem.getString("style")).ifPresent(val -> a.put("style", val));
-			Optional.ofNullable(pageItem.getString("src")).ifPresent(val -> a.put("src", val));
-			Optional.ofNullable(pageItem.getString("href")).ifPresent(val -> a.put("href", val));
-
-			Boolean addId = false;
-			if(e != null) {
-				if(e != null && PATTERN_HEADER.matcher(e).find() && a.getString("id") == null) {
-					addId = true;
-				} else if(stack.size() > 0 && e.equals("span") && PATTERN_HEADER.matcher(stack.peek()).find() && a.getString("id") == null) {
-					addId = true;
-					e = "a";
-				}
-			}
-
-			if(e != null) {
-				// Stack the element and determine element name, wrap and tabs
-				String localNameParent = stack.isEmpty() ? null : stack.peek();
-				eNoWrapParent = localNameParent == null || XmlTool.HTML_ELEMENTS_NO_WRAP.contains(localNameParent);
-				eNoWrap = localNameParent == null || XmlTool.HTML_ELEMENTS_NO_WRAP.contains(e);
-				tabs = String.join("", Collections.nCopies(stack.size(), "\t"));
-				stack.push(e);
-			} else if(comment != null) {
-				tabs = String.join("", Collections.nCopies(stack.size(), "\t"));
-			}
-
-			{
-				// Import the start of the element
-				sequenceNum++;
-				JsonObject importItem = new JsonObject();
-				if(e != null)
-					importItem.put(SiteHtm.VAR_eBefore, e);
-
-				if(comment != null) {
-					// Split text by lines and index each line as it's own value
-					Template template = handlebars.compileInline(comment);
-					Context engineContext = Context.newBuilder(new JsonObject(json.toString()).getMap()).resolver(templateEngine.getResolvers()).build();
-					Buffer buffer = Buffer.buffer(template.apply(engineContext));
-					String[] strs = buffer.toString().split("\r?\n");
-					importItem.put(SiteHtm.VAR_comment, new JsonArray().addAll(new JsonArray(Arrays.asList(strs))));
-					page.addObjectText(strs);
-				}
-
-				String text = pageItem.getString(SiteHtm.VAR_text);
-				if(text != null) {
-					// Split text by lines and index each line as it's own value
-					Template template = handlebars.compileInline(text);
-					Context engineContext = Context.newBuilder(new JsonObject(json.toString()).getMap()).resolver(templateEngine.getResolvers()).build();
-					String text2 = template.apply(engineContext).replace("&#x27;", "'");
-					if(text2.contains("{{")) {
-						Template template2 = handlebars.compileInline(text2);
-						Context engineContext2 = Context.newBuilder(new JsonObject(json.toString()).getMap()).resolver(templateEngine.getResolvers()).build();
-						Buffer buffer2 = Buffer.buffer(template2.apply(engineContext2));
-						text2 = buffer2.toString();
+		try {
+			Double sort = 0D;
+			for(Integer i = 0; i < pageItems.size(); i++) {
+				// Process a page item, one at a time
+				JsonObject pageItem = (JsonObject)pageItems.getValue(i);
+				String url = json.getString(SiteHtm.VAR_url);
+				String uri = json.getString(SiteHtm.VAR_uri);
+				Object in = pageItem.getValue("in");
+				String e = pageItem.getString("e");
+				JsonArray labels2 = Optional.ofNullable(pageItem.getValue("label")).map(o -> o instanceof JsonArray ? (JsonArray)o : new JsonArray().add(o)).orElse(null);
+				JsonArray labels3 = new JsonArray();
+				String each = pageItem.getString("each");
+				Boolean eNoWrapParent = false;
+				Boolean eNoWrap = false;
+				String tabs = "";
+				String comment = pageItem.getString(SiteHtm.VAR_comment);
+				JsonObject a = Optional.ofNullable(pageItem.getJsonObject(SiteHtm.VAR_a)).orElse(new JsonObject());
+				Optional.ofNullable(pageItem.getString("class")).ifPresent(val -> a.put("class", val));
+				Optional.ofNullable(pageItem.getString("id")).ifPresent(val -> a.put("id", val));
+				Optional.ofNullable(pageItem.getString("style")).ifPresent(val -> a.put("style", val));
+				Optional.ofNullable(pageItem.getString("src")).ifPresent(val -> a.put("src", val));
+				Optional.ofNullable(pageItem.getString("href")).ifPresent(val -> a.put("href", val));
+	
+				Boolean addId = false;
+				if(e != null) {
+					if(e != null && PATTERN_HEADER.matcher(e).find() && a.getString("id") == null) {
+						addId = true;
+					} else if(stack.size() > 0 && e.equals("span") && PATTERN_HEADER.matcher(stack.peek()).find() && a.getString("id") == null) {
+						addId = true;
+						e = "a";
 					}
-					String[] strs = text2.split("\r?\n");
-					importItem.put(SiteHtm.VAR_text, new JsonArray().addAll(new JsonArray(Arrays.asList(strs))));
-					page.addObjectText(strs);
-				}
-
-				if(addId && StringUtils.isNotBlank(text)) {
-					String id = toId(text);
-					a.put("id", id);
-					if("a".equals(e)) {
-						a.put("href", String.format("#%s", id));
-					}
-				}
-
-				String htm = pageItem.getString("htm");
-				if(htm != null) {
-					// Split text by lines and index each line as it's own value
-					Template template = handlebars.compileInline(htm);
-					Context engineContext = Context.newBuilder(new JsonObject(json.toString()).getMap()).resolver(templateEngine.getResolvers()).build();
-					Buffer buffer = Buffer.buffer(template.apply(engineContext));
-					String htm2 = buffer.toString();
-					if(htm2.contains("{{")) {
-						Template template2 = handlebars.compileInline(htm2);
-						Context engineContext2 = Context.newBuilder(new JsonObject(json.toString()).getMap()).resolver(templateEngine.getResolvers()).build();
-						Buffer buffer2 = Buffer.buffer(template2.apply(engineContext2));
-						htm2 = buffer2.toString();
-					}
-					importItem.put(SiteHtm.VAR_htmBefore, htm2);
-				}
-
-				labels3.addAll(labels);
-				if(labels2 != null) {
-					labels3.addAll(labels2);
-				}
-				if(labels3.size() > 0) {
-					importItem.put(SiteHtm.VAR_labels, labels3);
-				}
-
-				if(!eNoWrapParent && !tabs.isEmpty()) {
-					importItem.put(SiteHtm.VAR_tabs, tabs);
-				}
-				if(!eNoWrap) {
-					importItem.put(SiteHtm.VAR_newLine, true);
-				}
-				importItem.put(SiteHtm.VAR_saves, new JsonArray()
-						.add(SiteHtm.VAR_eBefore)
-						.add(SiteHtm.VAR_a)
-						.add(SiteHtm.VAR_htmBefore)
-						.add(SiteHtm.VAR_sequenceNum)
-						.add(SiteHtm.VAR_htmGroup)
-						.add(SiteHtm.VAR_pageId)
-						.add(SiteHtm.VAR_tabs)
-						.add(SiteHtm.VAR_url)
-						.add(SiteHtm.VAR_uri)
-						.add(SiteHtm.VAR_text)
-						.add(SiteHtm.VAR_labels)
-						.add(SiteHtm.VAR_inheritPk)
-						);
-				importItem.put(SiteHtm.VAR_created, ComputateZonedDateTimeSerializer.ZONED_DATE_TIME_FORMATTER.format(ZonedDateTime.now()));
-				importItem.put(SiteHtm.VAR_pageId, pageId);
-				importItem.put(SiteHtm.VAR_htmGroup, htmGroup);
-				importItem.put(SiteHtm.VAR_sequenceNum, sequenceNum);
-				importItem.put(SiteHtm.VAR_url, url);
-				importItem.put(SiteHtm.VAR_uri, uri);
-				if(a != null) {
-					// Process element attributes
-					JsonObject attrs = new JsonObject();
-					for(String field : a.fieldNames()) {
-						// Get the value of the attribute and process template values before indexing the attribute
-						String val = a.getString(field);
-						if(val != null) {
-							Template template = handlebars.compileInline(val);
-							Context engineContext = Context.newBuilder(new JsonObject(json.toString()).getMap()).resolver(templateEngine.getResolvers()).build();
-							Buffer buffer = Buffer.buffer(template.apply(engineContext));
-							String val2 = buffer.toString();
-							if(val2.contains("{{")) {
-								Template template2 = handlebars.compileInline(val2);
-								Context engineContext2 = Context.newBuilder(new JsonObject(json.toString()).getMap()).resolver(templateEngine.getResolvers()).build();
-								Buffer buffer2 = Buffer.buffer(template2.apply(engineContext2));
-								val2 = buffer2.toString();
-							}
-							attrs.put(field, val2);
-						}
-					}
-					importItem.put(SiteHtm.VAR_a, attrs);
-				}
-				importItem.put(SiteHtm.VAR_id, String.format("%s_%s", SiteHtm.CLASS_SIMPLE_NAME, pageId, sequenceNum));
-				for(Integer j=1; j <= stack.size(); j++) {
-					// Add sort values for the element at each level of the stack
-					importItem.put("sort" + j, stack.get(j - 1));
 				}
 	
-				// Add this element import to the list of futures that will all be requested in a CompositeFuture
-				JsonObject htmParams = new JsonObject();
-				htmParams.put("body", importItem);
-				htmParams.put("path", new JsonObject());
-				htmParams.put("cookie", new JsonObject());
-				htmParams.put("query", new JsonObject().put("commitWithin", 1000).put("q", "*:*").put("var", new JsonArray().add("refresh:false")));
-				JsonObject htmContext = new JsonObject().put("params", htmParams);
-				JsonObject htmRequest = new JsonObject().put("context", htmContext);
-				futures.add(vertx.eventBus().request(String.format("smartabyar-smartvillage-enUS-%s", SiteHtm.CLASS_SIMPLE_NAME), htmRequest, new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", SiteHtm.CLASS_SIMPLE_NAME))));
-			}
-
-			if(each != null) {
-				// Process the "each" element by evaluating the template and processing the values
-				Template template = handlebars.compileInline(String.format("{{json %s }}", each));
-				Context engineContext = Context.newBuilder(new JsonObject(json.toString()).getMap()).resolver(templateEngine.getResolvers()).build();
-				String str = template.apply(engineContext);
-				String eachVar = pageItem.getString("eachVar", "item");
-				String indexVar = pageItem.getString("indexVar", "@index");
-
-				if(in != null) {
-					if(StringUtils.startsWith(str, "[")) {
-						JsonArray eachArray = new JsonArray(Buffer.buffer(str));
-						for(Integer j=0; j < eachArray.size(); j++) {
-							JsonObject eachJson = eachArray.getJsonObject(j);
-							JsonObject json2 = json.copy();
-							json2.put(eachVar, eachJson);
-							json2.put(indexVar, j);
-							// Process nested elements of the "in" value
-							if(in instanceof JsonObject) {
-								// Process the nested JsonObject of the "in" value
-								sequenceNum = importSiteHtm(page, json2, labels3, stack, pageId, htmGroup, new JsonArray().add(in), futures, sequenceNum);
-							} else if(in instanceof JsonArray) {
-								// Process the each of the nested JsonObjects in the array of the "in" value
-								sequenceNum = importSiteHtm(page, json2, labels3, stack, pageId, htmGroup, (JsonArray)in, futures, sequenceNum);
-							}
-						}
-					} else if(StringUtils.startsWith(str, "{")) {
-						JsonObject eachObject = new JsonObject(Buffer.buffer(str));
-						List<String> keys = eachObject.fieldNames().stream().sorted().collect(Collectors.toList());
-						for(Integer j=0; j < eachObject.size(); j++) {
-							String key = keys.get(j);
-							JsonObject eachJson = eachObject.getJsonObject(key);
-							JsonObject json2 = json.copy();
-							json2.put(eachVar, new JsonObject().put("key", key).put("value", eachJson));
-							json2.put(indexVar, j);
-							// Process nested elements of the "in" value
-							if(in instanceof JsonObject) {
-								// Process the nested JsonObject of the "in" value
-								sequenceNum = importSiteHtm(page, json2, labels3, stack, pageId, htmGroup, new JsonArray().add(in), futures, sequenceNum);
-							} else if(in instanceof JsonArray) {
-								// Process the each of the nested JsonObjects in the array of the "in" value
-								sequenceNum = importSiteHtm(page, json2, labels3, stack, pageId, htmGroup, (JsonArray)in, futures, sequenceNum);
-							}
-						}
-					}
-				}
-				json.remove(eachVar);
-			} else {
-				if(in != null) {
-					// Process nested elements of the "block" value
-					if(in instanceof JsonObject) {
-						// Process the nested JsonObject of the "block" value
-						sequenceNum = importSiteHtm(page, json, labels3, stack, pageId, htmGroup, new JsonArray().add(in), futures, sequenceNum);
-					} else if(in instanceof JsonArray) {
-						// Process the each of the nested JsonObjects in the array of the "block" value
-						sequenceNum = importSiteHtm(page, json, labels3, stack, pageId, htmGroup, (JsonArray)in, futures, sequenceNum);
-					}
-				}
-			}
-
-			if(e != null) {
-				// Import the end of the element
-				sequenceNum++;
-				JsonObject importItem = new JsonObject();
-				importItem.put(SiteHtm.VAR_eAfter, e);
-				if(!eNoWrap && !tabs.isEmpty()) {
-					importItem.put(SiteHtm.VAR_tabs, tabs);
-				}
-				if(!eNoWrapParent) {
-					importItem.put(SiteHtm.VAR_newLine, true);
-				}
-				if(labels3.size() > 0) {
-					importItem.put(SiteHtm.VAR_labels, labels3);
-				}
-				importItem.put(SiteHtm.VAR_saves, new JsonArray()
-						.add(SiteHtm.VAR_eAfter)
-						.add(SiteHtm.VAR_htmAfter)
-						.add(SiteHtm.VAR_sequenceNum)
-						.add(SiteHtm.VAR_htmGroup)
-						.add(SiteHtm.VAR_pageId)
-						.add(SiteHtm.VAR_tabs)
-						.add(SiteHtm.VAR_url)
-						.add(SiteHtm.VAR_uri)
-						.add(SiteHtm.VAR_labels)
-						);
-				importItem.put(SiteHtm.VAR_created, ComputateZonedDateTimeSerializer.ZONED_DATE_TIME_FORMATTER.format(ZonedDateTime.now()));
-				importItem.put(SiteHtm.VAR_pageId, pageId);
-				importItem.put(SiteHtm.VAR_htmGroup, htmGroup);
-				importItem.put(SiteHtm.VAR_sequenceNum, sequenceNum);
-				importItem.put(SiteHtm.VAR_url, url);
-				importItem.put(SiteHtm.VAR_uri, uri);
-				importItem.put(SiteHtm.VAR_id, String.format("%s_%s_%s", SiteHtm.CLASS_SIMPLE_NAME, pageId, sequenceNum));
-				for(Integer j=1; j <= stack.size(); j++) {
-					importItem.put("sort" + j, stack.get(j - 1));
+				if(e != null) {
+					// Stack the element and determine element name, wrap and tabs
+					String localNameParent = stack.isEmpty() ? null : stack.peek();
+					eNoWrapParent = localNameParent == null || XmlTool.HTML_ELEMENTS_NO_WRAP.contains(localNameParent);
+					eNoWrap = localNameParent == null || XmlTool.HTML_ELEMENTS_NO_WRAP.contains(e);
+					tabs = String.join("", Collections.nCopies(stack.size(), "\t"));
+					stack.push(e);
+				} else if(comment != null) {
+					tabs = String.join("", Collections.nCopies(stack.size(), "\t"));
 				}
 	
-				JsonObject htmParams = new JsonObject();
-				htmParams.put("body", importItem);
-				htmParams.put("path", new JsonObject());
-				htmParams.put("cookie", new JsonObject());
-				htmParams.put("query", new JsonObject().put("commitWithin", 1000).put("q", "*:*").put("var", new JsonArray().add("refresh:false")));
-				JsonObject htmContext = new JsonObject().put("params", htmParams);
-				JsonObject htmRequest = new JsonObject().put("context", htmContext);
-				futures.add(vertx.eventBus().request(String.format("smartabyar-smartvillage-enUS-%s", SiteHtm.CLASS_SIMPLE_NAME), htmRequest, new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", SiteHtm.CLASS_SIMPLE_NAME))));
+				{
+					// Import the start of the element
+					sequenceNum++;
+					JsonObject importItem = new JsonObject();
+					if(e != null)
+						importItem.put(SiteHtm.VAR_eBefore, e);
+	
+					if(comment != null) {
+						// Split text by lines and index each line as it's own value
+						Template template = handlebars.compileInline(comment);
+						Context engineContext = Context.newBuilder(new JsonObject(json.toString()).getMap()).resolver(templateEngine.getResolvers()).build();
+						Buffer buffer = Buffer.buffer(template.apply(engineContext));
+						String[] strs = buffer.toString().split("\r?\n");
+						importItem.put(SiteHtm.VAR_comment, new JsonArray().addAll(new JsonArray(Arrays.asList(strs))));
+						page.addObjectText(strs);
+					}
+	
+					String text = pageItem.getString(SiteHtm.VAR_text);
+					if(text != null) {
+						// Split text by lines and index each line as it's own value
+						Template template = handlebars.compileInline(text);
+						Context engineContext = Context.newBuilder(new JsonObject(json.toString()).getMap()).resolver(templateEngine.getResolvers()).build();
+						String text2 = template.apply(engineContext).replace("&#x27;", "'");
+						if(text2.contains("{{")) {
+							Template template2 = handlebars.compileInline(text2);
+							Context engineContext2 = Context.newBuilder(new JsonObject(json.toString()).getMap()).resolver(templateEngine.getResolvers()).build();
+							Buffer buffer2 = Buffer.buffer(template2.apply(engineContext2));
+							text2 = buffer2.toString();
+						}
+						String[] strs = text2.split("\r?\n");
+						importItem.put(SiteHtm.VAR_text, new JsonArray().addAll(new JsonArray(Arrays.asList(strs))));
+						page.addObjectText(strs);
+					}
+	
+					if(addId && StringUtils.isNotBlank(text)) {
+						String id = toId(text);
+						a.put("id", id);
+						if("a".equals(e)) {
+							a.put("href", String.format("#%s", id));
+						}
+					}
+	
+					String htm = pageItem.getString("htm");
+					if(htm != null) {
+						// Split text by lines and index each line as it's own value
+						Template template = handlebars.compileInline(htm);
+						Context engineContext = Context.newBuilder(new JsonObject(json.toString()).getMap()).resolver(templateEngine.getResolvers()).build();
+						Buffer buffer = Buffer.buffer(template.apply(engineContext));
+						String htm2 = buffer.toString();
+						if(htm2.contains("{{")) {
+							Template template2 = handlebars.compileInline(htm2);
+							Context engineContext2 = Context.newBuilder(new JsonObject(json.toString()).getMap()).resolver(templateEngine.getResolvers()).build();
+							Buffer buffer2 = Buffer.buffer(template2.apply(engineContext2));
+							htm2 = buffer2.toString();
+						}
+						importItem.put(SiteHtm.VAR_htmBefore, htm2);
+					}
+	
+					labels3.addAll(labels);
+					if(labels2 != null) {
+						labels3.addAll(labels2);
+					}
+					if(labels3.size() > 0) {
+						importItem.put(SiteHtm.VAR_labels, labels3);
+					}
+	
+					if(!eNoWrapParent && !tabs.isEmpty()) {
+						importItem.put(SiteHtm.VAR_tabs, tabs);
+					}
+					if(!eNoWrap) {
+						importItem.put(SiteHtm.VAR_newLine, true);
+					}
+					importItem.put(SiteHtm.VAR_saves, new JsonArray()
+							.add(SiteHtm.VAR_eBefore)
+							.add(SiteHtm.VAR_a)
+							.add(SiteHtm.VAR_htmBefore)
+							.add(SiteHtm.VAR_sequenceNum)
+							.add(SiteHtm.VAR_htmGroup)
+							.add(SiteHtm.VAR_pageId)
+							.add(SiteHtm.VAR_tabs)
+							.add(SiteHtm.VAR_url)
+							.add(SiteHtm.VAR_uri)
+							.add(SiteHtm.VAR_text)
+							.add(SiteHtm.VAR_labels)
+							.add(SiteHtm.VAR_inheritPk)
+							);
+					importItem.put(SiteHtm.VAR_created, ComputateZonedDateTimeSerializer.ZONED_DATE_TIME_FORMATTER.format(ZonedDateTime.now()));
+					importItem.put(SiteHtm.VAR_pageId, pageId);
+					importItem.put(SiteHtm.VAR_htmGroup, htmGroup);
+					importItem.put(SiteHtm.VAR_sequenceNum, sequenceNum);
+					importItem.put(SiteHtm.VAR_url, url);
+					importItem.put(SiteHtm.VAR_uri, uri);
+					if(a != null) {
+						// Process element attributes
+						JsonObject attrs = new JsonObject();
+						for(String field : a.fieldNames()) {
+							// Get the value of the attribute and process template values before indexing the attribute
+							String val = a.getString(field);
+							if(val != null) {
+								Template template = handlebars.compileInline(val);
+								Context engineContext = Context.newBuilder(new JsonObject(json.toString()).getMap()).resolver(templateEngine.getResolvers()).build();
+								Buffer buffer = Buffer.buffer(template.apply(engineContext));
+								String val2 = buffer.toString();
+								if(val2.contains("{{")) {
+									Template template2 = handlebars.compileInline(val2);
+									Context engineContext2 = Context.newBuilder(new JsonObject(json.toString()).getMap()).resolver(templateEngine.getResolvers()).build();
+									Buffer buffer2 = Buffer.buffer(template2.apply(engineContext2));
+									val2 = buffer2.toString();
+								}
+								attrs.put(field, val2);
+							}
+						}
+						importItem.put(SiteHtm.VAR_a, attrs);
+					}
+					importItem.put(SiteHtm.VAR_id, String.format("%s_%s", SiteHtm.CLASS_SIMPLE_NAME, pageId, sequenceNum));
+					for(Integer j=1; j <= stack.size(); j++) {
+						// Add sort values for the element at each level of the stack
+						importItem.put("sort" + j, stack.get(j - 1));
+					}
+		
+					// Add this element import to the list of futures that will all be requested in a CompositeFuture
+					JsonObject htmParams = new JsonObject();
+					htmParams.put("body", importItem);
+					htmParams.put("path", new JsonObject());
+					htmParams.put("cookie", new JsonObject());
+					htmParams.put("query", new JsonObject().put("commitWithin", 1000).put("q", "*:*").put("var", new JsonArray().add("refresh:false")));
+					JsonObject htmContext = new JsonObject().put("params", htmParams);
+					JsonObject htmRequest = new JsonObject().put("context", htmContext);
+					futures.add(vertx.eventBus().request(String.format("smartabyar-smartvillage-enUS-%s", SiteHtm.CLASS_SIMPLE_NAME), htmRequest, new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", SiteHtm.CLASS_SIMPLE_NAME))));
+				}
+	
+				if(each != null) {
+					// Process the "each" element by evaluating the template and processing the values
+					Template template = handlebars.compileInline(String.format("{{json %s }}", each));
+					Context engineContext = Context.newBuilder(new JsonObject(json.toString()).getMap()).resolver(templateEngine.getResolvers()).build();
+					String str = template.apply(engineContext);
+					String eachVar = pageItem.getString("eachVar", "item");
+					String indexVar = pageItem.getString("indexVar", "@index");
+	
+					if(in != null) {
+						if(StringUtils.startsWith(str, "[")) {
+							JsonArray eachArray = new JsonArray(Buffer.buffer(str));
+							for(Integer j=0; j < eachArray.size(); j++) {
+								JsonObject eachJson = eachArray.getJsonObject(j);
+								JsonObject json2 = json.copy();
+								json2.put(eachVar, eachJson);
+								json2.put(indexVar, j);
+								// Process nested elements of the "in" value
+								if(in instanceof JsonObject) {
+									// Process the nested JsonObject of the "in" value
+									sequenceNum = importSiteHtm(page, json2, labels3, stack, pageId, htmGroup, new JsonArray().add(in), futures, sequenceNum);
+								} else if(in instanceof JsonArray) {
+									// Process the each of the nested JsonObjects in the array of the "in" value
+									sequenceNum = importSiteHtm(page, json2, labels3, stack, pageId, htmGroup, (JsonArray)in, futures, sequenceNum);
+								}
+							}
+						} else if(StringUtils.startsWith(str, "{")) {
+							JsonObject eachObject = new JsonObject(Buffer.buffer(str));
+							List<String> keys = eachObject.fieldNames().stream().sorted().collect(Collectors.toList());
+							for(Integer j=0; j < eachObject.size(); j++) {
+								String key = keys.get(j);
+								JsonObject eachJson = eachObject.getJsonObject(key);
+								JsonObject json2 = json.copy();
+								json2.put(eachVar, new JsonObject().put("key", key).put("value", eachJson));
+								json2.put(indexVar, j);
+								// Process nested elements of the "in" value
+								if(in instanceof JsonObject) {
+									// Process the nested JsonObject of the "in" value
+									sequenceNum = importSiteHtm(page, json2, labels3, stack, pageId, htmGroup, new JsonArray().add(in), futures, sequenceNum);
+								} else if(in instanceof JsonArray) {
+									// Process the each of the nested JsonObjects in the array of the "in" value
+									sequenceNum = importSiteHtm(page, json2, labels3, stack, pageId, htmGroup, (JsonArray)in, futures, sequenceNum);
+								}
+							}
+						}
+					}
+					json.remove(eachVar);
+				} else {
+					if(in != null) {
+						// Process nested elements of the "block" value
+						if(in instanceof JsonObject) {
+							// Process the nested JsonObject of the "block" value
+							sequenceNum = importSiteHtm(page, json, labels3, stack, pageId, htmGroup, new JsonArray().add(in), futures, sequenceNum);
+						} else if(in instanceof JsonArray) {
+							// Process the each of the nested JsonObjects in the array of the "block" value
+							sequenceNum = importSiteHtm(page, json, labels3, stack, pageId, htmGroup, (JsonArray)in, futures, sequenceNum);
+						}
+					}
+				}
+	
+				if(e != null) {
+					// Import the end of the element
+					sequenceNum++;
+					JsonObject importItem = new JsonObject();
+					importItem.put(SiteHtm.VAR_eAfter, e);
+					if(!eNoWrap && !tabs.isEmpty()) {
+						importItem.put(SiteHtm.VAR_tabs, tabs);
+					}
+					if(!eNoWrapParent) {
+						importItem.put(SiteHtm.VAR_newLine, true);
+					}
+					if(labels3.size() > 0) {
+						importItem.put(SiteHtm.VAR_labels, labels3);
+					}
+					importItem.put(SiteHtm.VAR_saves, new JsonArray()
+							.add(SiteHtm.VAR_eAfter)
+							.add(SiteHtm.VAR_htmAfter)
+							.add(SiteHtm.VAR_sequenceNum)
+							.add(SiteHtm.VAR_htmGroup)
+							.add(SiteHtm.VAR_pageId)
+							.add(SiteHtm.VAR_tabs)
+							.add(SiteHtm.VAR_url)
+							.add(SiteHtm.VAR_uri)
+							.add(SiteHtm.VAR_labels)
+							);
+					importItem.put(SiteHtm.VAR_created, ComputateZonedDateTimeSerializer.ZONED_DATE_TIME_FORMATTER.format(ZonedDateTime.now()));
+					importItem.put(SiteHtm.VAR_pageId, pageId);
+					importItem.put(SiteHtm.VAR_htmGroup, htmGroup);
+					importItem.put(SiteHtm.VAR_sequenceNum, sequenceNum);
+					importItem.put(SiteHtm.VAR_url, url);
+					importItem.put(SiteHtm.VAR_uri, uri);
+					importItem.put(SiteHtm.VAR_id, String.format("%s_%s_%s", SiteHtm.CLASS_SIMPLE_NAME, pageId, sequenceNum));
+					for(Integer j=1; j <= stack.size(); j++) {
+						importItem.put("sort" + j, stack.get(j - 1));
+					}
+		
+					JsonObject htmParams = new JsonObject();
+					htmParams.put("body", importItem);
+					htmParams.put("path", new JsonObject());
+					htmParams.put("cookie", new JsonObject());
+					htmParams.put("query", new JsonObject().put("commitWithin", 1000).put("q", "*:*").put("var", new JsonArray().add("refresh:false")));
+					JsonObject htmContext = new JsonObject().put("params", htmParams);
+					JsonObject htmRequest = new JsonObject().put("context", htmContext);
+					futures.add(vertx.eventBus().request(String.format("smartabyar-smartvillage-enUS-%s", SiteHtm.CLASS_SIMPLE_NAME), htmRequest, new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", SiteHtm.CLASS_SIMPLE_NAME))));
+				}
+	
+				if(e != null) {
+					stack.pop();
+				}
 			}
-
-			if(e != null) {
-				stack.pop();
-			}
+		} catch(Exception ex) {
+			LOG.error(String.format(importSiteHtmFail, page.getId()), ex);
+			ExceptionUtils.rethrow(ex);
 		}
 		return sequenceNum;
 	}

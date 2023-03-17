@@ -924,7 +924,7 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							if(body2.size() > 0) {
 								siteRequest.setJsonObject(body2);
 								patchSitePageFuture(o2, true).onSuccess(b -> {
-									LOG.info("Import SitePage {} succeeded, modified SitePage. ", body.getValue(SitePage.VAR_id));
+									LOG.debug("Import SitePage {} succeeded, modified SitePage. ", body.getValue(SitePage.VAR_id));
 									eventHandler.handle(Future.succeededFuture());
 								}).onFailure(ex -> {
 									LOG.error(String.format("putimportSitePageFuture failed. "), ex);
@@ -935,7 +935,7 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							}
 						} else {
 							postSitePageFuture(siteRequest, true).onSuccess(b -> {
-								LOG.info("Import SitePage {} succeeded, created new SitePage. ", body.getValue(SitePage.VAR_id));
+								LOG.debug("Import SitePage {} succeeded, created new SitePage. ", body.getValue(SitePage.VAR_id));
 								eventHandler.handle(Future.succeededFuture());
 							}).onFailure(ex -> {
 								LOG.error(String.format("putimportSitePageFuture failed. "), ex);
