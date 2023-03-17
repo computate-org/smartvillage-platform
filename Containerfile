@@ -11,7 +11,7 @@ RUN yum install -y ${APP_DEPENDENCIES}
 
 RUN install -d /usr/local/src/smartabyar-smartvillage
 COPY . /usr/local/src/smartabyar-smartvillage
-
+RUN git clone https://github.com/computate-org/computate.git /usr/local/src/computate
 WORKDIR /usr/local/src/smartabyar-smartvillage
 RUN mvn clean install -DskipTests
 RUN cp /usr/local/src/smartabyar-smartvillage/target/*.jar /usr/local/src/smartabyar-smartvillage/app.jar
