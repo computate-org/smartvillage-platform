@@ -1,5 +1,5 @@
 
-clear; toilet -t -f smblock --rainbow -F border 'The Smarta Byar Smart Village Partners'
+clear; echo -e 'The Smarta Byar \nSmart Village Partners' | toilet -t -f smblock --rainbow -F border 
 echo ''
 echo '- Smarta Byar'
 echo '- Red Hat'
@@ -8,16 +8,16 @@ xdg-open '/home/ctate/.local/src/smartabyar-smartvillage-static/png/smartabyar-r
 read -p "" < /dev/tty
 echo ''
 
-clear; toilet -t -f smblock --rainbow -F border 'Meet the team'
+clear; echo -e 'Meet the team' | toilet -t -f smblock --rainbow -F border 
 echo ''
 echo '- Yingqing Chen - Boston University'
 echo '- Jan Malmgren - Smarta Byar'
-echo '- Christopher Tate - Red Hat'
+echo '- Chris Tate - Red Hat'
 xdg-open '/home/ctate/.local/src/smartabyar-smartvillage-static/png/meet-the-team.png'
 read -p "" < /dev/tty
 echo ''
 
-clear; toilet -t -f smblock --rainbow -F border 'In the beginning (2022)...'
+clear; echo -e 'In the beginning (2022)' | toilet -t -f smblock --rainbow -F border 
 echo ''
 echo '- Jan to Jim: "Just wanted to see what is out there for driving open source for digital twins"'
 xdg-open '/home/ctate/.local/src/smartabyar-smartvillage-static/png/smartabyar-smartvillage-in-the-beginning.png'
@@ -30,33 +30,33 @@ xdg-open 'https://research.redhat.com/blog/research_project/creating-a-global-op
 read -p "" < /dev/tty
 echo ''
 
-clear; toilet -t -f smblock --rainbow -F border '2023 Collaboratory Project Renewal'
+clear; echo -e '2023 Collaboratory \nProject Renewal' | toilet -t -f smblock --rainbow -F border 
 echo ''
 echo '- Our project receivied a 2023 Red Hat Collaboratory Research Incubation Award renewal!'
 xdg-open 'https://www.bu.edu/rhcollab/2023/01/27/2023-red-hat-collaboratory-research-incubation-awards-recipients/'
 read -p "" < /dev/tty
 echo ''
 
-clear; toilet -t -f smblock --rainbow -F border 'The Veberöd smart village'
+clear; echo -e 'The Veberöd \nsmart village' | toilet -t -f smblock --rainbow -F border 
 echo ''
 toilet -t -f smmono12 'Jan Malmgren'
 read -p "" < /dev/tty
 echo ''
 
-clear; toilet -t -f smblock --rainbow -F border 'Our collaborative innovation'
+clear; echo -e 'Our collaborative \ninnovation' | toilet -t -f smblock --rainbow -F border 
 echo ''
-toilet -t -f smmono12 'Christopher Tate'
+toilet -t -f smmono12 'Chris Tate'
 read -p "" < /dev/tty
 echo ''
 
-clear; toilet -t -f smblock --rainbow -F border 'Red Hat Social Innovation Program'
+clear; echo -e 'Red Hat Social \nInnovation Program' | toilet -t -f smblock --rainbow -F border 
 echo ''
 echo 'Building open source solutions for the greater good'
 echo ''
 xdg-open 'https://www.redhat.com/en/about/social-innovation'
 read -p "" < /dev/tty
 
-clear; toilet -t -f smblock --rainbow -F border 'Provided digitalization services'
+clear; echo -e 'Provided digitalization \nservices' | toilet -t -f smblock --rainbow -F border 
 echo ''
 echo '- OpenAPIs for smart cities'
 xdg-open 'https://smartvillage.computate.org/api'
@@ -72,7 +72,7 @@ echo ''
 xdg-open 'https://smartvillage.computate.org/simulation-report?facet.range={!tag=r1}created&stats.field={!tag=r1}created&facet.pivot={!range=r1}classSimpleName'
 read -p "" < /dev/tty
 
-clear; toilet -t -f smblock --rainbow -F border 'Running Research Projects in the Cloud'
+clear; echo -e 'Running Research \nProjects in the Cloud' | toilet -t -f smblock --rainbow -F border 
 echo ''
 echo 'Every website deserves:'
 echo '  - security'
@@ -92,7 +92,7 @@ xdg-open 'https://console-openshift-console.apps.smaug.na.operate-first.cloud/k8
 read -p "" < /dev/tty
 echo ''
 
-clear; toilet -t -f smblock --rainbow -F border 'Red Hat OpenShift Cloud Environment'
+clear; echo -e 'Our Red Hat OpenShift \nCloud Environment' | toilet -t -f smblock --rainbow -F border 
 echo ''
 echo 'take a look into our Operate First cloud environment in production:'
 xdg-open 'https://www.operate-first.cloud/'
@@ -107,7 +107,7 @@ echo '  - Smarta Byar Smart Village Worker'
 echo '  - Smart Traffic Light Controller SUMO'
 echo ''
 
-clear; toilet -t -f smblock --rainbow -F border 'How do our microservices communicate?'
+clear; echo -e 'How do our microservices \ncommunicate?' | toilet -t -f smblock --rainbow -F border 
 echo ''
 echo 'connecting microservices:'
 echo '  - PostgreSQL port 5432'
@@ -119,7 +119,7 @@ echo '  - Strimzi Kafka Topics'
 echo ''
 read -p "" < /dev/tty
 
-clear; toilet -t -f smblock --rainbow -F border "Our project's open source communities"
+clear; echo -e "Our project's \nopen source communities" | toilet -t -f smblock --rainbow -F border 
 echo ''
 echo 'our communities:'
 echo '  - GitHub'
@@ -139,26 +139,26 @@ xdg-open 'https://www.youtube.com/@computateorg/playlists'
 read -p "" < /dev/tty
 echo ''
 
-clear; toilet -t -f smblock --rainbow -F border 'Research at Boston University'
+clear; echo -e 'Research at \nBoston University' | toilet -t -f smblock --rainbow -F border 
 echo ''
 toilet -t -f smmono12 'Yingqing Chen'
 read -p "" < /dev/tty
 echo ''
 
-clear; toilet -t -f smblock --rainbow -F border 'Merging real world and simulated data'
+clear; echo -e 'Merging real world \nand simulated data' | toilet -t -f smblock --rainbow -F border
 echo ''
-toilet -t -f smmono12 'Christopher Tate'
+toilet -t -f smmono12 'Chris Tate'
 read -p "" < /dev/tty
 echo ''
 
-clear; toilet -t -f smblock --rainbow -F border 'Real world data'
+clear; echo -e 'Real world data' | toilet -t -f smblock --rainbow -F border 
 echo ''
 echo 'IOT Nodes in the village of Veberöd'
 echo ''
 xdg-open 'https://smartvillage.computate.org/iot-node?facet.range={!tag=r1}created&stats.field={!tag=r1}created&facet.pivot={!range=r1}classSimpleName'
 read -p "" < /dev/tty
 
-clear; toilet -t -f smblock --rainbow -F border "Demo of a traffic simulation"
+clear; echo -e "Demo of a \ntraffic simulation" | toilet -t -f smblock --rainbow -F border 
 echo ''
 echo 'Steps to run a simulation:'
 echo '  - Visit the map results dashboard at smartvillage.computate.org'
@@ -173,15 +173,15 @@ echo '  - Click [ animate ]'
 xdg-open 'https://smartvillage.computate.org/map-result?facet.range={!tag=r1}created&stats.field={!tag=r1}created&facet.pivot={!range=r1}classSimpleName'
 read -p "" < /dev/tty
 
-clear; toilet -t -f smblock --rainbow -F border "What's next at Boston University"
+clear; echo -e "What's next at \nBoston University" | toilet -t -f smblock --rainbow -F border 
 echo ''
 toilet -t -f smmono12 'Yingqing Chen'
 read -p "" < /dev/tty
 echo ''
 
-clear; toilet -t -f smblock --rainbow -F border "What's next at Red Hat"
+clear; echo -e "What's next at Red Hat" | toilet -t -f smblock --rainbow -F border 
 echo ''
-toilet -t -f smmono12 'Christopher Tate'
+toilet -t -f smmono12 'Chris Tate'
 read -p "" < /dev/tty
 echo '- More graphs and data in the simulation reports'
 xdg-open 'https://smartvillage.computate.org/simulation-report?facet.range={!tag=r1}created&stats.field={!tag=r1}created&facet.pivot={!range=r1}classSimpleName'
@@ -193,7 +193,7 @@ echo '- Testing traffic simulations on Red Hat Device Edge and Microshift'
 read -p "" < /dev/tty
 echo ''
 
-clear; toilet -t -f smblock --rainbow -F border 'Implementing FIWARE standards'
+clear; echo -e 'Implementing FIWARE \nstandards for \nsmart devices' | toilet -t -f smblock --rainbow -F border 
 echo ''
 echo '- FIWARE is the open standard for smart device data'
 echo '- We met with FIWARE CTO about the Smarta Byar Smart Village project'
@@ -204,8 +204,13 @@ xdg-open '/home/ctate/.local/src/smartabyar-smartvillage-static/png/fiware-slide
 read -p "" < /dev/tty
 echo ''
 
-clear; toilet -t -f smblock --rainbow -F border "What's next for the village of Veberöd"
+clear; echo -e "What's next for the \nvillage of Veberöd" | toilet -t -f smblock --rainbow -F border 
 echo ''
 toilet -t -f smmono12 'Jan Malmgren'
+read -p "" < /dev/tty
+echo ''
+
+clear; echo -e 'Q&A' | toilet -t -f smblock --rainbow -F border 
+echo ''
 read -p "" < /dev/tty
 echo ''
