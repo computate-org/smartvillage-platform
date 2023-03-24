@@ -16,18 +16,22 @@ spec:
       parameters:
         - name: postgresql.enabled
           value: "false"
+        - name: postgresql.fullnameOverride
+          value: "pecan-postgresql"
+        - name: postgresql.serviceAccount.enabled
+          value: "true"
         - name: postgresql.postgresqlHost
-          value: "postgres-cluster-ha.postgres.svc.cluster.local"
-        - name: postgresql.postgresqlUsername
-          value: "bety"
-        - name: postgresql.postgresqlDatabase
-          value: "bety"
+          value: "pecan-postgresql.pecan.svc.cluster.local"
         - name: serviceAccount.enabled
           value: "true"
         - name: serviceAccount.name
           value: "pecan-betydb"
         - name: externalSecret
           value: "false"
+        - name: nameOverride
+          value: "pecan"
+        - name: fullnameOverride
+          value: "pecan-betydb"
   destination:
     namespace: pecan
     server: 'https://kubernetes.default.svc'

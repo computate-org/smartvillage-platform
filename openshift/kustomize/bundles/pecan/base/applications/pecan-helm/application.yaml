@@ -18,14 +18,16 @@ spec:
           value: "false"
         - name: betydb.postgresql.enabled
           value: "false"
+#        - name: betydb.postgresql.postgresqlHost
+#          value: "postgres-cluster-ha.postgres.svc.cluster.local"
         - name: betydb.postgresql.postgresqlHost
-          value: "postgres-cluster-ha.postgres.svc.cluster.local"
+          value: "pecan-postgresql.pecan.svc.cluster.local"
         - name: betydb.postgresql.postgresqlUser
-          value: "bety"
+          value: "postgres"
         - name: betydb.postgresql.postgresqlUsername
-          value: "bety"
+          value: "postgres"
         - name: betydb.postgresql.postgresqlDatabase
-          value: "bety"
+          value: "postgres"
         - name: betydb.postgresql.service.port
           value: "5432"
         - name: betydb.service.port

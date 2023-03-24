@@ -6,6 +6,9 @@ metadata:
   namespace: pecan
 subjects:
   - kind: ServiceAccount
+    name: pecan-postgresql
+    namespace: pecan
+  - kind: ServiceAccount
     name: pecan-betydb
     namespace: pecan
   - kind: ServiceAccount
