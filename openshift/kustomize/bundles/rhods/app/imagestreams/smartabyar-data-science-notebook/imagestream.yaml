@@ -2,7 +2,7 @@ apiVersion: image.openshift.io/v1
 kind: ImageStream
 metadata:
   name: smartabyar-data-science-notebook
-  namespace: redhat-ods-operator
+  namespace: redhat-ods-applications
   labels:
     opendatahub.io/notebook-image: "true"
   annotations:
