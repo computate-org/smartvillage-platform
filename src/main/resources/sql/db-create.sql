@@ -57,6 +57,7 @@ ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS userKey bigint;
 CREATE TABLE IF NOT EXISTS SimulationReport();
 ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS simulationKey bigint references TrafficSimulation(pk);
 ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS simulationName text;
+ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS reportName text;
 ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS paramAvgVehiclePerMinFromWestToEast decimal;
 ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS paramAvgVehiclePerMinFromSouthToNorth decimal;
 ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS paramVehicleDemandScalingFactor decimal;

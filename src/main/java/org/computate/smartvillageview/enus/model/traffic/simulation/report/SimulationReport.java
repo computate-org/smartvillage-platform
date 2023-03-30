@@ -89,8 +89,6 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * DocValues: true
 	 * Persist: true
 	 * DisplayName: simulation name
-	 * HtmRow: 3
-	 * HtmCell: 2
 	 * Facet: true
 	 */
 	protected void _simulationName(Wrap<String> w) {
@@ -98,16 +96,26 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 			w.o(simulation_.getSimulationName());
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * DisplayName: report name
+	 * HtmRow: 3
+	 * HtmCell: 2
+	 * Facet: true
+	 */
+	protected void _reportName(Wrap<String> w) {
+	}
+
 	@Override
 	protected void _objectTitle(Wrap<String> w) {
-		StringBuilder b = new StringBuilder();
-		w.o(b.toString().trim());
+		w.o(String.format("%s: %s", simulationName, reportName == null ? String.format("report %s", pk) : reportName));
 	}
 
 	@Override
 	protected void _objectId(Wrap<String> w) {
-		if(pk != null)
-			w.o(pk.toString());
+		super._objectId(w);
 	}
 
 	/**

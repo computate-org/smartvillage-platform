@@ -435,6 +435,60 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		return simulationName;
 	}
 
+	////////////////
+	// reportName //
+	////////////////
+
+
+	/**	 The entity reportName
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String reportName;
+
+	/**	<br> The entity reportName
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:reportName">Find the entity reportName in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _reportName(Wrap<String> w);
+
+	public String getReportName() {
+		return reportName;
+	}
+	public void setReportName(String o) {
+		this.reportName = SimulationReport.staticSetReportName(siteRequest_, o);
+	}
+	public static String staticSetReportName(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected SimulationReport reportNameInit() {
+		Wrap<String> reportNameWrap = new Wrap<String>().var("reportName");
+		if(reportName == null) {
+			_reportName(reportNameWrap);
+			setReportName(reportNameWrap.o);
+		}
+		return (SimulationReport)this;
+	}
+
+	public static String staticSearchReportName(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrReportName(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqReportName(SiteRequestEnUS siteRequest_, String o) {
+		return SimulationReport.staticSearchStrReportName(siteRequest_, SimulationReport.staticSearchReportName(siteRequest_, SimulationReport.staticSetReportName(siteRequest_, o)));
+	}
+
+	public String sqlReportName() {
+		return reportName;
+	}
+
 	/////////////////////////////////////////
 	// paramAvgVehiclePerMinFromWestToEast //
 	/////////////////////////////////////////
@@ -2653,6 +2707,7 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			try {
 				simulation_Init();
 				simulationNameInit();
+				reportNameInit();
 				paramAvgVehiclePerMinFromWestToEastInit();
 				paramAvgVehiclePerMinFromSouthToNorthInit();
 				paramVehicleDemandScalingFactorInit();
@@ -2744,6 +2799,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 				return oSimulationReport.simulation_;
 			case "simulationName":
 				return oSimulationReport.simulationName;
+			case "reportName":
+				return oSimulationReport.reportName;
 			case "paramAvgVehiclePerMinFromWestToEast":
 				return oSimulationReport.paramAvgVehiclePerMinFromWestToEast;
 			case "paramAvgVehiclePerMinFromSouthToNorth":
@@ -2853,6 +2910,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return SimulationReport.staticSetSimulationKey(siteRequest_, o);
 		case "simulationName":
 			return SimulationReport.staticSetSimulationName(siteRequest_, o);
+		case "reportName":
+			return SimulationReport.staticSetReportName(siteRequest_, o);
 		case "paramAvgVehiclePerMinFromWestToEast":
 			return SimulationReport.staticSetParamAvgVehiclePerMinFromWestToEast(siteRequest_, o);
 		case "paramAvgVehiclePerMinFromSouthToNorth":
@@ -2931,6 +2990,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return SimulationReport.staticSearchSimulationKey(siteRequest_, (Long)o);
 		case "simulationName":
 			return SimulationReport.staticSearchSimulationName(siteRequest_, (String)o);
+		case "reportName":
+			return SimulationReport.staticSearchReportName(siteRequest_, (String)o);
 		case "paramAvgVehiclePerMinFromWestToEast":
 			return SimulationReport.staticSearchParamAvgVehiclePerMinFromWestToEast(siteRequest_, (BigDecimal)o);
 		case "paramAvgVehiclePerMinFromSouthToNorth":
@@ -3009,6 +3070,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return SimulationReport.staticSearchStrSimulationKey(siteRequest_, (Long)o);
 		case "simulationName":
 			return SimulationReport.staticSearchStrSimulationName(siteRequest_, (String)o);
+		case "reportName":
+			return SimulationReport.staticSearchStrReportName(siteRequest_, (String)o);
 		case "paramAvgVehiclePerMinFromWestToEast":
 			return SimulationReport.staticSearchStrParamAvgVehiclePerMinFromWestToEast(siteRequest_, (Double)o);
 		case "paramAvgVehiclePerMinFromSouthToNorth":
@@ -3087,6 +3150,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return SimulationReport.staticSearchFqSimulationKey(siteRequest_, o);
 		case "simulationName":
 			return SimulationReport.staticSearchFqSimulationName(siteRequest_, o);
+		case "reportName":
+			return SimulationReport.staticSearchFqReportName(siteRequest_, o);
 		case "paramAvgVehiclePerMinFromWestToEast":
 			return SimulationReport.staticSearchFqParamAvgVehiclePerMinFromWestToEast(siteRequest_, o);
 		case "paramAvgVehiclePerMinFromSouthToNorth":
@@ -3186,6 +3251,12 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 					setSimulationName((String)val);
 				}
 				saves.add("simulationName");
+				return val;
+			} else if("reportname".equals(varLower)) {
+				if(val instanceof String) {
+					setReportName((String)val);
+				}
+				saves.add("reportName");
 				return val;
 			} else if("paramavgvehicleperminfromwesttoeast".equals(varLower)) {
 				if(val instanceof String) {
@@ -3405,6 +3476,9 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		if(simulationName != null) {
 			doc.put("simulationName_docvalues_string", simulationName);
 		}
+		if(reportName != null) {
+			doc.put("reportName_docvalues_string", reportName);
+		}
 		if(paramAvgVehiclePerMinFromWestToEast != null) {
 			doc.put("paramAvgVehiclePerMinFromWestToEast_docvalues_double", paramAvgVehiclePerMinFromWestToEast.doubleValue());
 		}
@@ -3517,6 +3591,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 				return "simulationKey_docvalues_long";
 			case "simulationName":
 				return "simulationName_docvalues_string";
+			case "reportName":
+				return "reportName_docvalues_string";
 			case "paramAvgVehiclePerMinFromWestToEast":
 				return "paramAvgVehiclePerMinFromWestToEast_docvalues_double";
 			case "paramAvgVehiclePerMinFromSouthToNorth":
@@ -3588,6 +3664,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 				return "simulationKey_docvalues_long";
 			case "simulationName":
 				return "simulationName_docvalues_string";
+			case "reportName":
+				return "reportName_docvalues_string";
 			case "paramAvgVehiclePerMinFromWestToEast":
 				return "paramAvgVehiclePerMinFromWestToEast_docvalues_double";
 			case "paramAvgVehiclePerMinFromSouthToNorth":
@@ -3659,6 +3737,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 				return "simulationKey";
 			case "simulationName_docvalues_string":
 				return "simulationName";
+			case "reportName_docvalues_string":
+				return "reportName";
 			case "paramAvgVehiclePerMinFromWestToEast_docvalues_double":
 				return "paramAvgVehiclePerMinFromWestToEast";
 			case "paramAvgVehiclePerMinFromSouthToNorth_docvalues_double":
@@ -3750,6 +3830,7 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 
 		oSimulationReport.setSimulationKey(Optional.ofNullable(doc.get("simulationKey_docvalues_long")).map(v -> v.toString()).orElse(null));
 		oSimulationReport.setSimulationName(Optional.ofNullable(doc.get("simulationName_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oSimulationReport.setReportName(Optional.ofNullable(doc.get("reportName_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSimulationReport.setParamAvgVehiclePerMinFromWestToEast(Optional.ofNullable(doc.get("paramAvgVehiclePerMinFromWestToEast_docvalues_double")).map(v -> v.toString()).orElse(null));
 		oSimulationReport.setParamAvgVehiclePerMinFromSouthToNorth(Optional.ofNullable(doc.get("paramAvgVehiclePerMinFromSouthToNorth_docvalues_double")).map(v -> v.toString()).orElse(null));
 		oSimulationReport.setParamVehicleDemandScalingFactor(Optional.ofNullable(doc.get("paramVehicleDemandScalingFactor_docvalues_double")).map(v -> v.toString()).orElse(null));
@@ -3803,6 +3884,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 				apiRequest.addVars("simulationKey");
 			if(!Objects.equals(simulationName, original.getSimulationName()))
 				apiRequest.addVars("simulationName");
+			if(!Objects.equals(reportName, original.getReportName()))
+				apiRequest.addVars("reportName");
 			if(!Objects.equals(paramAvgVehiclePerMinFromWestToEast, original.getParamAvgVehiclePerMinFromWestToEast()))
 				apiRequest.addVars("paramAvgVehiclePerMinFromWestToEast");
 			if(!Objects.equals(paramAvgVehiclePerMinFromSouthToNorth, original.getParamAvgVehiclePerMinFromSouthToNorth()))
@@ -3876,6 +3959,7 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		sb.append(super.toString());
 		sb.append(Optional.ofNullable(simulationKey).map(v -> "simulationKey: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(simulationName).map(v -> "simulationName: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(reportName).map(v -> "reportName: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(paramAvgVehiclePerMinFromWestToEast).map(v -> "paramAvgVehiclePerMinFromWestToEast: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(paramAvgVehiclePerMinFromSouthToNorth).map(v -> "paramAvgVehiclePerMinFromSouthToNorth: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(paramVehicleDemandScalingFactor).map(v -> "paramVehicleDemandScalingFactor: " + v + "\n").orElse(""));
@@ -3914,6 +3998,7 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 	public static final String VAR_simulationSearch = "simulationSearch";
 	public static final String VAR_simulation_ = "simulation_";
 	public static final String VAR_simulationName = "simulationName";
+	public static final String VAR_reportName = "reportName";
 	public static final String VAR_paramAvgVehiclePerMinFromWestToEast = "paramAvgVehiclePerMinFromWestToEast";
 	public static final String VAR_paramAvgVehiclePerMinFromSouthToNorth = "paramAvgVehiclePerMinFromSouthToNorth";
 	public static final String VAR_paramVehicleDemandScalingFactor = "paramVehicleDemandScalingFactor";
@@ -3959,6 +4044,7 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 	public static List<String> varsFqSimulationReport(List<String> vars) {
 		vars.add(VAR_simulationKey);
 		vars.add(VAR_simulationName);
+		vars.add(VAR_reportName);
 		vars.add(VAR_paramAvgVehiclePerMinFromWestToEast);
 		vars.add(VAR_paramAvgVehiclePerMinFromSouthToNorth);
 		vars.add(VAR_paramVehicleDemandScalingFactor);
@@ -4032,6 +4118,7 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 	public static final String DISPLAY_NAME_simulationSearch = "";
 	public static final String DISPLAY_NAME_simulation_ = "";
 	public static final String DISPLAY_NAME_simulationName = "simulation name";
+	public static final String DISPLAY_NAME_reportName = "report name";
 	public static final String DISPLAY_NAME_paramAvgVehiclePerMinFromWestToEast = "Average vehicle/min from WEST to EAST";
 	public static final String DISPLAY_NAME_paramAvgVehiclePerMinFromSouthToNorth = "Average vehicle/min from SOUTH to NORTH";
 	public static final String DISPLAY_NAME_paramVehicleDemandScalingFactor = "Demand scaling factor (multiplies all vehicle demands)";
@@ -4076,6 +4163,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return DISPLAY_NAME_simulation_;
 		case VAR_simulationName:
 			return DISPLAY_NAME_simulationName;
+		case VAR_reportName:
+			return DISPLAY_NAME_reportName;
 		case VAR_paramAvgVehiclePerMinFromWestToEast:
 			return DISPLAY_NAME_paramAvgVehiclePerMinFromWestToEast;
 		case VAR_paramAvgVehiclePerMinFromSouthToNorth:
@@ -4170,6 +4259,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return "TrafficSimulation";
 		case VAR_simulationName:
 			return "String";
+		case VAR_reportName:
+			return "String";
 		case VAR_paramAvgVehiclePerMinFromWestToEast:
 			return "BigDecimal";
 		case VAR_paramAvgVehiclePerMinFromSouthToNorth:
@@ -4246,7 +4337,7 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		switch(var) {
 		case VAR_simulationKey:
 			return 3;
-		case VAR_simulationName:
+		case VAR_reportName:
 			return 3;
 		case VAR_paramAvgVehiclePerMinFromWestToEast:
 			return 4;
@@ -4309,7 +4400,7 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		switch(var) {
 		case VAR_simulationKey:
 			return 1;
-		case VAR_simulationName:
+		case VAR_reportName:
 			return 2;
 		case VAR_paramAvgVehiclePerMinFromWestToEast:
 			return 1;

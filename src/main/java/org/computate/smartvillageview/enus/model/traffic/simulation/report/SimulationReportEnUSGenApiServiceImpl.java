@@ -678,6 +678,14 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							num++;
 							bParams.add(o2.sqlSimulationName());
 						break;
+					case "setReportName":
+							o2.setReportName(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_reportName + "=$" + num);
+							num++;
+							bParams.add(o2.sqlReportName());
+						break;
 					case "setParamAvgVehiclePerMinFromWestToEast":
 							o2.setParamAvgVehiclePerMinFromWestToEast(jsonObject.getString(entityVar));
 							if(bParams.size() > 0)
@@ -1243,6 +1251,15 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 						bSql.append(SimulationReport.VAR_simulationName + "=$" + num);
 						num++;
 						bParams.add(o2.sqlSimulationName());
+						break;
+					case SimulationReport.VAR_reportName:
+						o2.setReportName(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_reportName + "=$" + num);
+						num++;
+						bParams.add(o2.sqlReportName());
 						break;
 					case SimulationReport.VAR_paramAvgVehiclePerMinFromWestToEast:
 						o2.setParamAvgVehiclePerMinFromWestToEast(jsonObject.getString(entityVar));
@@ -2109,6 +2126,14 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							bSql.append(SimulationReport.VAR_simulationName + "=$" + num);
 							num++;
 							bParams.add(o2.sqlSimulationName());
+						break;
+					case "setReportName":
+							o2.setReportName(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_reportName + "=$" + num);
+							num++;
+							bParams.add(o2.sqlReportName());
 						break;
 					case "setParamAvgVehiclePerMinFromWestToEast":
 							o2.setParamAvgVehiclePerMinFromWestToEast(jsonObject.getString(entityVar));

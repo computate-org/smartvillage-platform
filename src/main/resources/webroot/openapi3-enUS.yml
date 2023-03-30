@@ -17574,6 +17574,13 @@ components:
               type: string
             removeAllSimulationName:
               type: string
+            setReportName:
+              type: string
+              nullable: true
+            removeReportName:
+              type: string
+            removeAllReportName:
+              type: string
             setParamAvgVehiclePerMinFromWestToEast:
               type: string
               nullable: true
@@ -17778,6 +17785,41 @@ components:
             removeUpdatedPerformance:
               type: array
             removeAllUpdatedPerformance:
+              type: array
+            setUpdatedPerformanceWaitWestEastVehicleSec:
+              type: array
+              nullable: true
+            removeUpdatedPerformanceWaitWestEastVehicleSec:
+              type: array
+            removeAllUpdatedPerformanceWaitWestEastVehicleSec:
+              type: array
+            setUpdatedPerformanceWaitSouthNorthVehicleSec:
+              type: array
+              nullable: true
+            removeUpdatedPerformanceWaitSouthNorthVehicleSec:
+              type: array
+            removeAllUpdatedPerformanceWaitSouthNorthVehicleSec:
+              type: array
+            setUpdatedPerformanceWaitAllVehicleSec:
+              type: array
+              nullable: true
+            removeUpdatedPerformanceWaitAllVehicleSec:
+              type: array
+            removeAllUpdatedPerformanceWaitAllVehicleSec:
+              type: array
+            setUpdatedPerformanceWaitAllPedestrianSec:
+              type: array
+              nullable: true
+            removeUpdatedPerformanceWaitAllPedestrianSec:
+              type: array
+            removeAllUpdatedPerformanceWaitAllPedestrianSec:
+              type: array
+            setUpdatedPerformanceWaitAllVehiclePedestrianSec:
+              type: array
+              nullable: true
+            removeUpdatedPerformanceWaitAllVehiclePedestrianSec:
+              type: array
+            removeAllUpdatedPerformanceWaitAllVehiclePedestrianSec:
               type: array
     PATCHRunSimulationSimulationReportResponse:
       allOf:
@@ -17797,6 +17839,13 @@ components:
               type: string
             removeAllSimulationName:
               type: string
+            setReportName:
+              type: string
+              nullable: true
+            removeReportName:
+              type: string
+            removeAllReportName:
+              type: string
             setParamAvgVehiclePerMinFromWestToEast:
               type: string
               nullable: true
@@ -18001,6 +18050,41 @@ components:
             removeUpdatedPerformance:
               type: array
             removeAllUpdatedPerformance:
+              type: array
+            setUpdatedPerformanceWaitWestEastVehicleSec:
+              type: array
+              nullable: true
+            removeUpdatedPerformanceWaitWestEastVehicleSec:
+              type: array
+            removeAllUpdatedPerformanceWaitWestEastVehicleSec:
+              type: array
+            setUpdatedPerformanceWaitSouthNorthVehicleSec:
+              type: array
+              nullable: true
+            removeUpdatedPerformanceWaitSouthNorthVehicleSec:
+              type: array
+            removeAllUpdatedPerformanceWaitSouthNorthVehicleSec:
+              type: array
+            setUpdatedPerformanceWaitAllVehicleSec:
+              type: array
+              nullable: true
+            removeUpdatedPerformanceWaitAllVehicleSec:
+              type: array
+            removeAllUpdatedPerformanceWaitAllVehicleSec:
+              type: array
+            setUpdatedPerformanceWaitAllPedestrianSec:
+              type: array
+              nullable: true
+            removeUpdatedPerformanceWaitAllPedestrianSec:
+              type: array
+            removeAllUpdatedPerformanceWaitAllPedestrianSec:
+              type: array
+            setUpdatedPerformanceWaitAllVehiclePedestrianSec:
+              type: array
+              nullable: true
+            removeUpdatedPerformanceWaitAllVehiclePedestrianSec:
+              type: array
+            removeAllUpdatedPerformanceWaitAllVehiclePedestrianSec:
               type: array
     SearchSimulationReportResponse:
       allOf:
@@ -18023,6 +18107,8 @@ components:
                   simulationKey:
                     type: string
                   simulationName:
+                    type: string
+                  reportName:
                     type: string
                   paramAvgVehiclePerMinFromWestToEast:
                     type: string
@@ -18080,6 +18166,16 @@ components:
                     type: array
                   updatedPerformance:
                     type: array
+                  updatedPerformanceWaitWestEastVehicleSec:
+                    type: array
+                  updatedPerformanceWaitSouthNorthVehicleSec:
+                    type: array
+                  updatedPerformanceWaitAllVehicleSec:
+                    type: array
+                  updatedPerformanceWaitAllPedestrianSec:
+                    type: array
+                  updatedPerformanceWaitAllVehiclePedestrianSec:
+                    type: array
     PATCHSimulationReportRequest:
       allOf:
         - type: object
@@ -18097,6 +18193,13 @@ components:
             removeSimulationName:
               type: string
             removeAllSimulationName:
+              type: string
+            setReportName:
+              type: string
+              nullable: true
+            removeReportName:
+              type: string
+            removeAllReportName:
               type: string
             setParamAvgVehiclePerMinFromWestToEast:
               type: string
@@ -18302,6 +18405,41 @@ components:
             removeUpdatedPerformance:
               type: array
             removeAllUpdatedPerformance:
+              type: array
+            setUpdatedPerformanceWaitWestEastVehicleSec:
+              type: array
+              nullable: true
+            removeUpdatedPerformanceWaitWestEastVehicleSec:
+              type: array
+            removeAllUpdatedPerformanceWaitWestEastVehicleSec:
+              type: array
+            setUpdatedPerformanceWaitSouthNorthVehicleSec:
+              type: array
+              nullable: true
+            removeUpdatedPerformanceWaitSouthNorthVehicleSec:
+              type: array
+            removeAllUpdatedPerformanceWaitSouthNorthVehicleSec:
+              type: array
+            setUpdatedPerformanceWaitAllVehicleSec:
+              type: array
+              nullable: true
+            removeUpdatedPerformanceWaitAllVehicleSec:
+              type: array
+            removeAllUpdatedPerformanceWaitAllVehicleSec:
+              type: array
+            setUpdatedPerformanceWaitAllPedestrianSec:
+              type: array
+              nullable: true
+            removeUpdatedPerformanceWaitAllPedestrianSec:
+              type: array
+            removeAllUpdatedPerformanceWaitAllPedestrianSec:
+              type: array
+            setUpdatedPerformanceWaitAllVehiclePedestrianSec:
+              type: array
+              nullable: true
+            removeUpdatedPerformanceWaitAllVehiclePedestrianSec:
+              type: array
+            removeAllUpdatedPerformanceWaitAllVehiclePedestrianSec:
               type: array
     PATCHSimulationReportResponse:
       allOf:
@@ -18321,6 +18459,13 @@ components:
               type: string
             removeAllSimulationName:
               type: string
+            setReportName:
+              type: string
+              nullable: true
+            removeReportName:
+              type: string
+            removeAllReportName:
+              type: string
             setParamAvgVehiclePerMinFromWestToEast:
               type: string
               nullable: true
@@ -18526,6 +18671,41 @@ components:
               type: array
             removeAllUpdatedPerformance:
               type: array
+            setUpdatedPerformanceWaitWestEastVehicleSec:
+              type: array
+              nullable: true
+            removeUpdatedPerformanceWaitWestEastVehicleSec:
+              type: array
+            removeAllUpdatedPerformanceWaitWestEastVehicleSec:
+              type: array
+            setUpdatedPerformanceWaitSouthNorthVehicleSec:
+              type: array
+              nullable: true
+            removeUpdatedPerformanceWaitSouthNorthVehicleSec:
+              type: array
+            removeAllUpdatedPerformanceWaitSouthNorthVehicleSec:
+              type: array
+            setUpdatedPerformanceWaitAllVehicleSec:
+              type: array
+              nullable: true
+            removeUpdatedPerformanceWaitAllVehicleSec:
+              type: array
+            removeAllUpdatedPerformanceWaitAllVehicleSec:
+              type: array
+            setUpdatedPerformanceWaitAllPedestrianSec:
+              type: array
+              nullable: true
+            removeUpdatedPerformanceWaitAllPedestrianSec:
+              type: array
+            removeAllUpdatedPerformanceWaitAllPedestrianSec:
+              type: array
+            setUpdatedPerformanceWaitAllVehiclePedestrianSec:
+              type: array
+              nullable: true
+            removeUpdatedPerformanceWaitAllVehiclePedestrianSec:
+              type: array
+            removeAllUpdatedPerformanceWaitAllVehiclePedestrianSec:
+              type: array
     POSTSimulationReportRequest:
       allOf:
         - type: object
@@ -18533,6 +18713,8 @@ components:
             simulationKey:
               type: string
             simulationName:
+              type: string
+            reportName:
               type: string
             paramAvgVehiclePerMinFromWestToEast:
               type: string
@@ -18589,6 +18771,16 @@ components:
             updatedParameters:
               type: array
             updatedPerformance:
+              type: array
+            updatedPerformanceWaitWestEastVehicleSec:
+              type: array
+            updatedPerformanceWaitSouthNorthVehicleSec:
+              type: array
+            updatedPerformanceWaitAllVehicleSec:
+              type: array
+            updatedPerformanceWaitAllPedestrianSec:
+              type: array
+            updatedPerformanceWaitAllVehiclePedestrianSec:
               type: array
     POSTSimulationReportResponse:
       allOf:
@@ -18598,6 +18790,8 @@ components:
               type: string
             simulationName:
               type: string
+            reportName:
+              type: string
             paramAvgVehiclePerMinFromWestToEast:
               type: string
             paramAvgVehiclePerMinFromSouthToNorth:
@@ -18653,6 +18847,16 @@ components:
             updatedParameters:
               type: array
             updatedPerformance:
+              type: array
+            updatedPerformanceWaitWestEastVehicleSec:
+              type: array
+            updatedPerformanceWaitSouthNorthVehicleSec:
+              type: array
+            updatedPerformanceWaitAllVehicleSec:
+              type: array
+            updatedPerformanceWaitAllPedestrianSec:
+              type: array
+            updatedPerformanceWaitAllVehiclePedestrianSec:
               type: array
     PUTImportSimulationReportRequest:
       allOf:
@@ -18662,6 +18866,8 @@ components:
               type: string
             simulationName:
               type: string
+            reportName:
+              type: string
             paramAvgVehiclePerMinFromWestToEast:
               type: string
             paramAvgVehiclePerMinFromSouthToNorth:
@@ -18717,6 +18923,16 @@ components:
             updatedParameters:
               type: array
             updatedPerformance:
+              type: array
+            updatedPerformanceWaitWestEastVehicleSec:
+              type: array
+            updatedPerformanceWaitSouthNorthVehicleSec:
+              type: array
+            updatedPerformanceWaitAllVehicleSec:
+              type: array
+            updatedPerformanceWaitAllPedestrianSec:
+              type: array
+            updatedPerformanceWaitAllVehiclePedestrianSec:
               type: array
     PUTImportSimulationReportResponse:
       allOf:
@@ -18726,6 +18942,8 @@ components:
               type: string
             simulationName:
               type: string
+            reportName:
+              type: string
             paramAvgVehiclePerMinFromWestToEast:
               type: string
             paramAvgVehiclePerMinFromSouthToNorth:
@@ -18781,6 +18999,16 @@ components:
             updatedParameters:
               type: array
             updatedPerformance:
+              type: array
+            updatedPerformanceWaitWestEastVehicleSec:
+              type: array
+            updatedPerformanceWaitSouthNorthVehicleSec:
+              type: array
+            updatedPerformanceWaitAllVehicleSec:
+              type: array
+            updatedPerformanceWaitAllPedestrianSec:
+              type: array
+            updatedPerformanceWaitAllVehiclePedestrianSec:
               type: array
     GETSimulationReportResponse:
       allOf:
@@ -18790,6 +19018,8 @@ components:
               type: string
             simulationName:
               type: string
+            reportName:
+              type: string
             paramAvgVehiclePerMinFromWestToEast:
               type: string
             paramAvgVehiclePerMinFromSouthToNorth:
@@ -18845,6 +19075,16 @@ components:
             updatedParameters:
               type: array
             updatedPerformance:
+              type: array
+            updatedPerformanceWaitWestEastVehicleSec:
+              type: array
+            updatedPerformanceWaitSouthNorthVehicleSec:
+              type: array
+            updatedPerformanceWaitAllVehicleSec:
+              type: array
+            updatedPerformanceWaitAllPedestrianSec:
+              type: array
+            updatedPerformanceWaitAllVehiclePedestrianSec:
               type: array
     SearchPageSimulationReportResponse:
       allOf:
