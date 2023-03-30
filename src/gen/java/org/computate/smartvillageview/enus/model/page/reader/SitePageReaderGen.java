@@ -33,6 +33,7 @@ import java.util.Map;
 import java.lang.Object;
 import io.vertx.core.Vertx;
 import io.vertx.core.WorkerExecutor;
+import io.vertx.kafka.client.producer.KafkaProducer;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.client.WebClient;
 import io.vertx.ext.web.templ.handlebars.HandlebarsTemplateEngine;
@@ -81,26 +82,27 @@ import io.vertx.core.json.JsonArray;
  * AName.enUS: null
  * <p>
  * Delete the class SitePageReader in Solr: 
- * curl 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.page.reader.SitePageReader&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.page.reader.SitePageReader&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
  * Delete  the package org.computate.smartvillageview.enus.model.page.reader in Solr: 
- * curl 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.model.page.reader&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.model.page.reader&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
  * Delete  the project smartabyar-smartvillage in Solr: 
- * curl 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartabyar\-smartvillage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartabyar\-smartvillage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  **/
 public abstract class SitePageReaderGen<DEV> extends Object {
 	protected static final Logger LOG = LoggerFactory.getLogger(SitePageReader.class);
 
-	public SitePageReaderGen(Vertx vertx, WorkerExecutor workerExecutor, SiteRequestEnUS siteRequest, JsonObject config) {
+	public SitePageReaderGen(Vertx vertx, WorkerExecutor workerExecutor, KafkaProducer<String, String> kafkaProducer, SiteRequestEnUS siteRequest, JsonObject config) {
 		super();
 		setSiteRequest_(siteRequest);
 		setConfig(config);
 		setVertx(vertx);
 		setWorkerExecutor(workerExecutor);
+		setKafkaProducer(kafkaProducer);
 	}
 
 	public SitePageReaderGen() {
@@ -238,6 +240,45 @@ public abstract class SitePageReaderGen<DEV> extends Object {
 		if(webClient == null) {
 			_webClient(webClientWrap);
 			setWebClient(webClientWrap.o);
+		}
+		return (SitePageReader)this;
+	}
+
+	///////////////////
+	// kafkaProducer //
+	///////////////////
+
+
+	/**	 The entity kafkaProducer
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected KafkaProducer<String, String> kafkaProducer;
+
+	/**	<br> The entity kafkaProducer
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.page.reader.SitePageReader&fq=entiteVar_enUS_indexed_string:kafkaProducer">Find the entity kafkaProducer in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _kafkaProducer(Wrap<KafkaProducer<String, String>> w);
+
+	public KafkaProducer<String, String> getKafkaProducer() {
+		return kafkaProducer;
+	}
+
+	public void setKafkaProducer(KafkaProducer<String, String> kafkaProducer) {
+		this.kafkaProducer = kafkaProducer;
+	}
+	public static KafkaProducer<String, String> staticSetKafkaProducer(SiteRequestEnUS siteRequest_, String o) {
+		return null;
+	}
+	protected SitePageReader kafkaProducerInit() {
+		Wrap<KafkaProducer<String, String>> kafkaProducerWrap = new Wrap<KafkaProducer<String, String>>().var("kafkaProducer");
+		if(kafkaProducer == null) {
+			_kafkaProducer(kafkaProducerWrap);
+			setKafkaProducer(kafkaProducerWrap.o);
 		}
 		return (SitePageReader)this;
 	}
@@ -407,6 +448,11 @@ public abstract class SitePageReaderGen<DEV> extends Object {
 	public static final String i18nGeneratorPathFail1 = "Generating i18n path for page %s failed. ";
 	public static final String i18nGeneratorPathFail = i18nGeneratorPathFail1;
 
+	public static final String deletePageDataComplete1 = "Importing %s data completed. ";
+	public static final String deletePageDataComplete = deletePageDataComplete1;
+	public static final String deletePageDataFail1 = "Importing %s data failed. ";
+	public static final String deletePageDataFail = deletePageDataFail1;
+
 	public static final String importDataSitePageComplete1 = "Importing %s data completed. ";
 	public static final String importDataSitePageComplete = importDataSitePageComplete1;
 	public static final String importDataSitePageFail1 = "Importing %s data failed. ";
@@ -441,6 +487,7 @@ public abstract class SitePageReaderGen<DEV> extends Object {
 				siteRequest_Init();
 				configInit();
 				webClientInit();
+				kafkaProducerInit();
 				vertxInit();
 				workerExecutorInit();
 				templateEngineInit();
@@ -492,6 +539,8 @@ public abstract class SitePageReaderGen<DEV> extends Object {
 				return oSitePageReader.config;
 			case "webClient":
 				return oSitePageReader.webClient;
+			case "kafkaProducer":
+				return oSitePageReader.kafkaProducer;
 			case "vertx":
 				return oSitePageReader.vertx;
 			case "workerExecutor":
@@ -603,12 +652,13 @@ public abstract class SitePageReaderGen<DEV> extends Object {
 		return sb.toString();
 	}
 
-	public static final String[] SitePageReaderVals = new String[] { i18nGeneratorComplete1, i18nGeneratorFail1, i18nGeneratorPathComplete1, i18nGeneratorPathFail1, importDataSitePageComplete1, importDataSitePageFail1, importSitePageComplete1, importSitePageFail1, importSiteHtmComplete1, importSiteHtmFail1 };
+	public static final String[] SitePageReaderVals = new String[] { i18nGeneratorComplete1, i18nGeneratorFail1, i18nGeneratorPathComplete1, i18nGeneratorPathFail1, deletePageDataComplete1, deletePageDataFail1, importDataSitePageComplete1, importDataSitePageFail1, importSitePageComplete1, importSitePageFail1, importSiteHtmComplete1, importSiteHtmFail1 };
 
 	public static final String CLASS_SIMPLE_NAME = "SitePageReader";
 	public static final String VAR_siteRequest_ = "siteRequest_";
 	public static final String VAR_config = "config";
 	public static final String VAR_webClient = "webClient";
+	public static final String VAR_kafkaProducer = "kafkaProducer";
 	public static final String VAR_vertx = "vertx";
 	public static final String VAR_workerExecutor = "workerExecutor";
 	public static final String VAR_templateEngine = "templateEngine";
@@ -617,6 +667,7 @@ public abstract class SitePageReaderGen<DEV> extends Object {
 	public static final String DISPLAY_NAME_siteRequest_ = "";
 	public static final String DISPLAY_NAME_config = "";
 	public static final String DISPLAY_NAME_webClient = "";
+	public static final String DISPLAY_NAME_kafkaProducer = "";
 	public static final String DISPLAY_NAME_vertx = "";
 	public static final String DISPLAY_NAME_workerExecutor = "";
 	public static final String DISPLAY_NAME_templateEngine = "";
@@ -633,6 +684,8 @@ public abstract class SitePageReaderGen<DEV> extends Object {
 			return DISPLAY_NAME_config;
 		case VAR_webClient:
 			return DISPLAY_NAME_webClient;
+		case VAR_kafkaProducer:
+			return DISPLAY_NAME_kafkaProducer;
 		case VAR_vertx:
 			return DISPLAY_NAME_vertx;
 		case VAR_workerExecutor:

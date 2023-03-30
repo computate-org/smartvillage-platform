@@ -413,37 +413,6 @@
 						<h2 class="w3-padding ">Modify site users</h2>
 					</header>
 					<div class="" id="patchSiteUserFormValues">
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmCreated" classApiMethodMethod="PATCH" roleRequired="true"}}
-{{else}}
-{{> "htmCreated" classApiMethodMethod="PATCH" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmArchived" classApiMethodMethod="PATCH" roleRequired="true"}}
-{{else}}
-{{> "htmArchived" classApiMethodMethod="PATCH" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmDeleted" classApiMethodMethod="PATCH" roleRequired="true"}}
-{{else}}
-{{> "htmDeleted" classApiMethodMethod="PATCH" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmSeeArchived" classApiMethodMethod="PATCH" roleRequired="true"}}
-{{else}}
-{{> "htmSeeArchived" classApiMethodMethod="PATCH" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmSeeDeleted" classApiMethodMethod="PATCH" roleRequired="true"}}
-{{else}}
-{{> "htmSeeDeleted" classApiMethodMethod="PATCH" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-							</div>
 						<button
 							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-2017-shaded-spruce "
 							onclick="patchSiteUser(null, $('#patchSiteUserFormValues')); "
@@ -472,37 +441,6 @@
 					</header>
 					<div class="" id="postSiteUserFormValues">
 						<div id="postSiteUserForm">
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmCreated" classApiMethodMethod="POST" roleRequired="true"}}
-{{else}}
-{{> "htmCreated" classApiMethodMethod="POST" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmArchived" classApiMethodMethod="POST" roleRequired="true"}}
-{{else}}
-{{> "htmArchived" classApiMethodMethod="POST" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmDeleted" classApiMethodMethod="POST" roleRequired="true"}}
-{{else}}
-{{> "htmDeleted" classApiMethodMethod="POST" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmSeeArchived" classApiMethodMethod="POST" roleRequired="true"}}
-{{else}}
-{{> "htmSeeArchived" classApiMethodMethod="POST" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmSeeDeleted" classApiMethodMethod="POST" roleRequired="true"}}
-{{else}}
-{{> "htmSeeDeleted" classApiMethodMethod="POST" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-							</div>
 						</div>
 						<button
 							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-2017-shaded-spruce "
@@ -553,52 +491,6 @@
 				<div class="w3-card-4 ">
 					<div class="" id="searchpageSiteUserFormValues">
 						<div id="searchpageSiteUserForm">
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmPk" classApiMethodMethod="Page" roleRequired="true"}}
-{{else}}
-{{> "htmPk" classApiMethodMethod="Page" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmCreated" classApiMethodMethod="Page" roleRequired="true"}}
-{{else}}
-{{> "htmCreated" classApiMethodMethod="Page" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmModified" classApiMethodMethod="Page" roleRequired="true"}}
-{{else}}
-{{> "htmModified" classApiMethodMethod="Page" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmObjectId" classApiMethodMethod="Page" roleRequired="true"}}
-{{else}}
-{{> "htmObjectId" classApiMethodMethod="Page" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmArchived" classApiMethodMethod="Page" roleRequired="true"}}
-{{else}}
-{{> "htmArchived" classApiMethodMethod="Page" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmDeleted" classApiMethodMethod="Page" roleRequired="true"}}
-{{else}}
-{{> "htmDeleted" classApiMethodMethod="Page" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmSeeArchived" classApiMethodMethod="Page" roleRequired="true"}}
-{{else}}
-{{> "htmSeeArchived" classApiMethodMethod="Page" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmSeeDeleted" classApiMethodMethod="Page" roleRequired="true"}}
-{{else}}
-{{> "htmSeeDeleted" classApiMethodMethod="Page" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-							</div>
 						</div>
 					</div>
 				</div>
@@ -733,8 +625,6 @@
 {{/inline}}
 {{#*inline "thead2SiteUserPage"}}
 			<tr>
-						<th>created</th>
-						<th></th>
 			</tr>
 {{/inline}}
 {{#*inline "tbody1SiteUserPage"}}
@@ -745,17 +635,6 @@
 {{#*inline "tbody2SiteUserPage"}}
 		{{#each listSiteUser}}
 					<tr>
-						<td>
-							<a href="{{pageUrlPk}}">
-								<span class="white-space-pre-wrap ">{{siteZonedDateTimeFormat created "MMM d, yyyy h:mm:ss a" siteLocale}}</span>
-							</a>
-						</td>
-						<td>
-							<a href="{{pageUrlPk}}">
-								<i class="far fa-user-cog "></i>
-								<span class="white-space-pre-wrap ">{{objectTitle}}</span>
-							</a>
-						</td>
 					</tr>
 		{{/each}}
 {{/inline}}
@@ -766,14 +645,6 @@
 {{/inline}}
 {{#*inline "tfoot2SiteUserPage"}}
 			<tr>
-			{{#if getColumnCreated}}
-				<td>
-				</td>
-			{{/if}}
-			{{#if getColumnObjectTitle}}
-				<td>
-				</td>
-			{{/if}}
 			</tr>
 	{{/inline}}
 {{#*inline "htmFormsSiteUserPage"}}

@@ -4,5 +4,3 @@ resources:
   - namespaces/
   - operatorgroups/
   - subscriptions/
-  - automationcontrollers/
-  - automationhubs/

@@ -24,9 +24,20 @@ async function websocketSimulationReportInner2(apiRequest) {
 					var $fragment = $(fragment);
 					$fragment.replaceWith($response.find(".plotGreenLengthThresholdVehicle"));
 				});
+				$('.updatedPerformanceTable').each(function(index, fragment) {
+					var $fragment = $(fragment);
+					$fragment.replaceWith($response.find(".updatedPerformanceTable"));
+				});
+				$('.updatedParametersTable').each(function(index, fragment) {
+					var $fragment = $(fragment);
+					$fragment.replaceWith($response.find(".updatedParametersTable"));
+				});
 			}, 'html');
 
 			addGlow($('.plotPerformance'));
+			addGlow($('.plotGreenLengthThresholdVehicle'));
+			addGlow($('.updatedPerformanceTable'));
+			addGlow($('.updatedParametersTable'));
 		}
 	}
 }
@@ -68,17 +79,483 @@ async function websocketSimulationReportInner2(apiRequest) {
 	Run Report
 </button>
 {{/partial}}
-{{#partial "htmBodySuggested"}}{{> htmBodySuggestedSimulationReportPage}}{{/partial}}
-{{#partial "htmForm_patchSimulationReport"}}{{> htmFormSimulationReportPage_patchSimulationReport}}{{/partial}}
-{{#partial "htmForm_postSimulationReport"}}{{> htmFormSimulationReportPage_postSimulationReport}}{{/partial}}
-{{#partial "htmForm_putimportSimulationReport"}}{{> htmFormSimulationReportPage_putimportSimulationReport}}{{/partial}}
-{{#partial "htmForm_searchpageSimulationReport"}}{{> htmFormSimulationReportPage_searchpageSimulationReport}}
+{{#partial "htmBodySuggested"}}{{> htmBodySuggestedSimulationReportPage classApiMethodMethod="Page"}}{{/partial}}
+{{#partial "htmForm_patchSimulationReport"}}{{> htmFormSimulationReportPage_patchSimulationReport classApiMethodMethod="PATCH"}}{{/partial}}
+{{#partial "htmForm_postSimulationReport"}}{{> htmFormSimulationReportPage_postSimulationReport classApiMethodMethod="POST"}}{{/partial}}
+{{#partial "htmForm_putimportSimulationReport"}}{{> htmFormSimulationReportPage_putimportSimulationReport classApiMethodMethod="PUT"}}{{/partial}}
+{{#*inline "htmFormSimulationReportPage_searchpageSimulationReport_custom"}}
+		<div id="searchpageSimulationReportModal" class="">
+			<div class="">
+				<div class="w3-card-4 ">
+					<div class="" id="searchpageSimulationReportFormValues">
+						<div id="searchpageSimulationReportForm">
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmSimulationKey" roleRequired="true"}}
+{{else}}
+{{> "htmSimulationKey" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmSimulationName" roleRequired="true"}}
+{{else}}
+{{> "htmSimulationName" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-padding ">
+								<table class="w3-table-all ">
+									<thead>
+										<tr class="">
+											<th class="w3-2017-shaded-spruce " colspan="3">
+												<span>Vehicle traffic demand</span>
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr class="">
+											<td class="">
+												<span>Average vehicle/min from WEST to EAST</span>
+											</td>
+											<td class="w3-cell ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "inputParamAvgVehiclePerMinFromWestToEast" roleRequired="true"}}
+{{else}}
+{{> "inputParamAvgVehiclePerMinFromWestToEast" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+											</td>
+											<td class="w3-cell w3-text-blue ">
+												<span>[1, 30] corresponding to 1st value in list</span>
+											</td>
+										</tr>
+										<tr class="">
+											<td class="">
+												<span>Average vehicle/min from SOUTH to NORTH</span>
+											</td>
+											<td class="w3-cell ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "inputParamAvgVehiclePerMinFromSouthToNorth" roleRequired="true"}}
+{{else}}
+{{> "inputParamAvgVehiclePerMinFromSouthToNorth" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+											</td>
+											<td class="w3-cell w3-text-blue ">
+												<span>[1, 30] corresponding to 2nd value in list</span>
+											</td>
+										</tr>
+										<tr class="">
+											<td class="">
+												<span>Demand scaling factor (multiplies all vehicle demands)</span>
+											</td>
+											<td class="w3-cell ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "inputParamVehicleDemandScalingFactor" roleRequired="true"}}
+{{else}}
+{{> "inputParamVehicleDemandScalingFactor" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+											</td>
+											<td class="w3-cell w3-text-blue ">
+												<span>[1, 2] corresponding to "demand scale"</span>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="w3-padding ">
+								<table class="w3-table-all ">
+									<thead>
+										<tr class="">
+											<th class="w3-2017-shaded-spruce " colspan="3">
+												<span>Pedestrian traffic demand</span>
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr class="">
+											<td class="">
+												<span>Average pedestrian/min from WEST to EAST</span>
+											</td>
+											<td class="w3-cell ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "inputParamAvgPedestrianPerMinFromWestToEast" roleRequired="true"}}
+{{else}}
+{{> "inputParamAvgPedestrianPerMinFromWestToEast" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+											</td>
+											<td class="w3-cell w3-text-blue ">
+												<span>[1, 30] corresponding to 3rd value in list</span>
+											</td>
+										</tr>
+										<tr class="">
+											<td class="">
+												<span>Average pedestrian/min from SOUTH to NORTH</span>
+											</td>
+											<td class="w3-cell ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "inputParamAvgPedestrianPerMinFromSouthToNorth" roleRequired="true"}}
+{{else}}
+{{> "inputParamAvgPedestrianPerMinFromSouthToNorth" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+											</td>
+											<td class="w3-cell w3-text-blue ">
+												<span>[1, 30] corresponding to 4th value in list</span>
+											</td>
+										</tr>
+										<tr class="">
+											<td class="">
+												<span>Demand scaling factor (multiplies all vehicle demands)</span>
+											</td>
+											<td class="w3-cell ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "inputParamPedestrianDemandScalingFactor" roleRequired="true"}}
+{{else}}
+{{> "inputParamPedestrianDemandScalingFactor" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+											</td>
+											<td class="w3-cell w3-text-blue ">
+												<span>[1, 2] corresponding to "demand scale"</span>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="w3-padding ">
+								<table class="w3-table-all ">
+									<thead>
+										<tr class="">
+											<th class="w3-2017-shaded-spruce " colspan="3">
+												<span>Initial Traffic Light Control parameters</span>
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr class="">
+											<td class="">
+												<span>Min GREEN time for WEST-EAST traffic (sec)</span>
+											</td>
+											<td class="w3-cell ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "inputParamMinGreenTimeSecWestEast" roleRequired="true"}}
+{{else}}
+{{> "inputParamMinGreenTimeSecWestEast" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+											</td>
+											<td class="">
+												<span>[1, 50]</span>
+											</td>
+										</tr>
+										<tr class="">
+											<td class="">
+												<span>Max GREEN time for WEST-EAST traffic (sec)</span>
+											</td>
+											<td class="w3-cell ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "inputParamMaxGreenTimeSecWestEast" roleRequired="true"}}
+{{else}}
+{{> "inputParamMaxGreenTimeSecWestEast" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+											</td>
+											<td class="">
+												<span>[1, 100], also greater than min value</span>
+											</td>
+										</tr>
+										<tr class="">
+											<td class="">
+												<span>Min GREEN time for SOUTH-NORTH traffic (sec)</span>
+											</td>
+											<td class="w3-cell ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "inputParamMinGreenTimeSecSouthNorth" roleRequired="true"}}
+{{else}}
+{{> "inputParamMinGreenTimeSecSouthNorth" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+											</td>
+											<td class="">
+												<span>[1, 50]</span>
+											</td>
+										</tr>
+										<tr class="">
+											<td class="">
+												<span>Max GREEN time for SOUTH-NORTH traffic (sec)</span>
+											</td>
+											<td class="w3-cell ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "inputParamMaxGreenTimeSecSouthNorth" roleRequired="true"}}
+{{else}}
+{{> "inputParamMaxGreenTimeSecSouthNorth" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+											</td>
+											<td class="">
+												<span>[1, 100], also greater than min value</span>
+											</td>
+										</tr>
+										<tr class="">
+											<td class="">
+												<span>Pedestrian waiting time tolerance threshold for NORTH-SOUTH (sec)</span>
+											</td>
+											<td class="w3-cell ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "inputParamPedestrianWaitThresholdSecNorthSouth" roleRequired="true"}}
+{{else}}
+{{> "inputParamPedestrianWaitThresholdSecNorthSouth" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+											</td>
+											<td class="">
+												<span>[1, 60]</span>
+											</td>
+										</tr>
+										<tr class="">
+											<td class="">
+												<span>Pedestrian waiting time tolerance threshold for WEST-EAST (sec)</span>
+											</td>
+											<td class="w3-cell ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "inputParamPedestrianWaitThresholdSecWestEast" roleRequired="true"}}
+{{else}}
+{{> "inputParamPedestrianWaitThresholdSecWestEast" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+											</td>
+											<td class="">
+												<span>[1, 60]</span>
+											</td>
+										</tr>
+										<tr class="">
+											<td class="">
+												<span>Vehicle queue length threshold between low-high content for WEST-EAST </span>
+											</td>
+											<td class="w3-cell ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "inputParamVehicleQueueThresholdWestEast" roleRequired="true"}}
+{{else}}
+{{> "inputParamVehicleQueueThresholdWestEast" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+											</td>
+											<td class="">
+												<span>[1, 15]</span>
+											</td>
+										</tr>
+										<tr class="">
+											<td class="">
+												<span>Vehicle queue length threshold between low-high content for SOUTH-NORTH</span>
+											</td>
+											<td class="w3-cell ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "inputParamVehicleQueueThresholdSouthNorth" roleRequired="true"}}
+{{else}}
+{{> "inputParamVehicleQueueThresholdSouthNorth" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+											</td>
+											<td class="">
+												<span>[1, 15]</span>
+											</td>
+										</tr>
+										<tr class="">
+											<td class="">
+												<span>Pedestrian queue length threshold between low-high content for NORTH-SOUTH</span>
+											</td>
+											<td class="w3-cell ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "inputParamPedestrianQueueThresholdNorthSouth" roleRequired="true"}}
+{{else}}
+{{> "inputParamPedestrianQueueThresholdNorthSouth" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+											</td>
+											<td class="">
+												<span>[1, 15]</span>
+											</td>
+										</tr>
+										<tr class="">
+											<td class="">
+												<span>Pedestrian queue length threshold between low-high content for WEST-EAST</span>
+											</td>
+											<td class="w3-cell ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "inputParamPedestrianQueueThresholdWestEast" roleRequired="true"}}
+{{else}}
+{{> "inputParamPedestrianQueueThresholdWestEast" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+											</td>
+											<td class="">
+												<span>[1, 15]</span>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="w3-padding ">
+								<table class="w3-table-all ">
+									<thead>
+										<tr class="">
+											<th class="w3-2017-shaded-spruce " colspan="3">
+												<span>Time and iterations</span>
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr class="">
+											<td class="">
+												<span>Simulation time step</span>
+											</td>
+											<td class="w3-cell ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "inputParamStepSize" roleRequired="true"}}
+{{else}}
+{{> "inputParamStepSize" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+											</td>
+											<td class="">
+												<span>[0.5, 2.0]</span>
+											</td>
+										</tr>
+										<tr class="">
+											<td class="">
+												<span>Time for each round of simulation</span>
+											</td>
+											<td class="w3-cell ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "inputParamRunTime" roleRequired="true"}}
+{{else}}
+{{> "inputParamRunTime" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+											</td>
+											<td class="">
+												<span>[500, 3600]</span>
+											</td>
+										</tr>
+										<tr class="">
+											<td class="">
+												<span>Number of simulation repetitions with same input</span>
+											</td>
+											<td class="w3-cell ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "inputParamItersPerPar" roleRequired="true"}}
+{{else}}
+{{> "inputParamItersPerPar" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+											</td>
+											<td class="">
+												<span>[1, 30]</span>
+											</td>
+										</tr>
+										<tr class="">
+											<td class="">
+												<span>Number of parameter update iterations before output</span>
+											</td>
+											<td class="w3-cell ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "inputParamTotalIterNum" roleRequired="true"}}
+{{else}}
+{{> "inputParamTotalIterNum" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+											</td>
+											<td class="">
+												<span>[1, 30]</span>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
 
-<div>
-	<img class="plotPerformance" class="plotPerformance " src="data:image/png;base64,{{ plotPerformance }}"/>
-</div>
-<div>
-	<img class="plotGreenLengthThresholdVehicle" class="plotGreenLengthThresholdVehicle " src="data:image/png;base64,{{ plotGreenLengthThresholdVehicle }}"/>
-</div>
-{{/partial}}
+							<div class="w3-padding updatedParametersTable ">
+								<table class="w3-table-all ">
+									<thead>
+										<tr class="">
+											<th class="w3-2017-shaded-spruce " colspan="2">
+												<span>updated parameters</span>
+											</th>
+											{{#each simulationReport_.updatedParameters.0}}<th class="w3-2017-shaded-spruce ">iter {{numberAdd @index 1}}</th>{{/each}}
+										</tr>
+									</thead>
+									<tbody>
+{{#each simulationReport_.updatedParameters}}
+										<tr class="">
+											<td class="">
+												{{#eq @index 0}}<span>Min GREEN time for WEST-EAST traffic (sec)</span>{{/eq}}
+												{{#eq @index 1}}<span>Max GREEN time for WEST-EAST traffic (sec) </span>{{/eq}}
+												{{#eq @index 2}}<span>Min GREEN time for SOUTH-NORTH traffic (sec) </span>{{/eq}}
+												{{#eq @index 3}}<span>Max GREEN time for SOUTH-NORTH traffic (sec) </span>{{/eq}}
+												{{#eq @index 4}}<span>Pedestrian waiting time tolerance threshold for NORTH-SOUTH (sec) </span>{{/eq}}
+												{{#eq @index 5}}<span>Pedestrian waiting time tolerance threshold for WEST-EAST (sec) </span>{{/eq}}
+												{{#eq @index 6}}<span>Vehicle queue length threshold between low-high content for WEST-EAST </span>{{/eq}}
+												{{#eq @index 7}}<span>Vehicle queue length threshold between low-high content for SOUTH-NORTH </span>{{/eq}}
+												{{#eq @index 8}}<span>Pedestrian queue length threshold between low-high content for NORTH-SOUTH </span>{{/eq}}
+												{{#eq @index 9}}<span>Pedestrian queue length threshold between low-high content for WEST-EAST </span>{{/eq}}
+											</td>
+											<td class="w3-cell ">
+												{{#each .}}<td>{{.}}</td>{{/each}}
+											</td>
+										</tr>
+{{/each}}
+									</tbody>
+								</table>
+							</div>
+
+							<div class="w3-padding updatedPerformanceTable ">
+								<table class="w3-table-all ">
+									<thead>
+										<tr class="">
+											<th class="w3-2017-shaded-spruce " colspan="2">
+												<span>updated performance</span>
+											</th>
+											{{#each simulationReport_.updatedPerformanceWaitWestEastVehicleSec}}<th class="w3-2017-shaded-spruce ">iter {{numberAdd @index 1}}</th>{{/each}}
+										</tr>
+									</thead>
+									<tbody>
+										<tr class="">
+											<td class="">
+												<span>Average waiting time for WEST-EAST vehicles (sec)</span>
+											</td>
+											<td class="w3-cell ">
+												{{#each simulationReport_.updatedPerformanceWaitWestEastVehicleSec}}<td>{{.}}</td>{{/each}}
+											</td>
+										</tr>
+										<tr class="">
+											<td class="">
+												<span>Average waiting time for SOUTH-NORTH vehicles (sec)</span>
+											</td>
+											<td class="w3-cell ">
+												{{#each simulationReport_.updatedPerformanceWaitSouthNorthVehicleSec}}<td>{{.}}</td>{{/each}}
+											</td>
+										</tr>
+										<tr class="">
+											<td class="">
+												<span>Average waiting time for all vehicles (sec)</span>
+											</td>
+											<td class="w3-cell ">
+												{{#each simulationReport_.updatedPerformanceWaitAllVehicleSec}}<td>{{.}}</td>{{/each}}
+											</td>
+										</tr>
+										<tr class="">
+											<td class="">
+												<span>Average waiting time for pedestrians (sec)</span>
+											</td>
+											<td class="w3-cell ">
+												{{#each simulationReport_.updatedPerformanceWaitAllPedestrianSec}}<td>{{.}}</td>{{/each}}
+											</td>
+										</tr>
+										<tr class="">
+											<td class="">
+												<span>Average waiting time for vehicles and pedestrians (sec)</span>
+											</td>
+											<td class="w3-cell ">
+												{{#each simulationReport_.updatedPerformanceWaitAllVehiclePedestrianSec}}<td>{{.}}</td>{{/each}}
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+
+							<div>
+								<img class="plotPerformance " src="data:image/png;base64,{{ plotPerformance }}"/>
+							</div>
+							<div>
+								<img class="plotGreenLengthThresholdVehicle " src="data:image/png;base64,{{ plotGreenLengthThresholdVehicle }}"/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+{{/inline}}
+{{#partial "htmForm_searchpageSimulationReport"}}{{> htmFormSimulationReportPage_searchpageSimulationReport_custom classApiMethodMethod="Page"}}{{/partial}}
+
 {{> SimulationReportGenPage}}
+

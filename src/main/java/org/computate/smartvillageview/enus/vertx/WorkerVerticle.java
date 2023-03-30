@@ -1,107 +1,70 @@
 package org.computate.smartvillageview.enus.vertx;
 
-import java.io.File;
-import java.io.IOException;
 import java.math.BigDecimal;
-import java.nio.file.Paths;
 import java.time.Duration;
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
-import java.util.Stack;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.computate.search.serialize.ComputateZonedDateTimeSerializer;
 import org.computate.search.tool.TimeTool;
-import org.computate.search.tool.XmlTool;
-import org.computate.vertx.api.ApiCounter;
-import org.computate.vertx.api.ApiRequest;
-import org.computate.vertx.api.ApiCounter;
-import org.computate.vertx.api.ApiRequest;
+import org.computate.smartvillageview.enus.camel.CamelIntegration;
 import org.computate.smartvillageview.enus.config.ConfigKeys;
-import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
+import org.computate.smartvillageview.enus.model.htm.SiteHtm;
+import org.computate.smartvillageview.enus.model.iotnode.IotNode;
+import org.computate.smartvillageview.enus.model.iotnode.reader.IotNodeReader;
 import org.computate.smartvillageview.enus.model.page.SitePage;
 import org.computate.smartvillageview.enus.model.page.reader.SitePageReader;
-import org.computate.smartvillageview.enus.model.htm.SiteHtm;
+import org.computate.smartvillageview.enus.model.system.event.SystemEvent;
+import org.computate.smartvillageview.enus.model.traffic.bicycle.step.BicycleStep;
+import org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved.TrafficFlowObserved;
+import org.computate.smartvillageview.enus.model.traffic.light.TrafficLight;
+import org.computate.smartvillageview.enus.model.traffic.light.step.TrafficLightStep;
+import org.computate.smartvillageview.enus.model.traffic.person.step.PersonStep;
+import org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation;
+import org.computate.smartvillageview.enus.model.traffic.simulation.reader.TrafficFcdReader;
+import org.computate.smartvillageview.enus.model.traffic.time.step.TimeStep;
+import org.computate.smartvillageview.enus.model.traffic.vehicle.step.VehicleStep;
+import org.computate.smartvillageview.enus.model.user.SiteUser;
+import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
+import org.computate.smartvillageview.enus.result.iotnode.step.IotNodeStep;
+import org.computate.smartvillageview.enus.result.map.MapResult;
 import org.computate.vertx.api.ApiCounter;
 import org.computate.vertx.api.ApiRequest;
-import org.computate.vertx.config.ComputateConfigKeys;
 import org.computate.vertx.handlebars.AuthHelpers;
 import org.computate.vertx.handlebars.DateHelpers;
 import org.computate.vertx.handlebars.SiteHelpers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.github.jknack.handlebars.Context;
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Jackson2Helper;
-import com.github.jknack.handlebars.Template;
 import com.github.jknack.handlebars.helper.ConditionalHelpers;
 import com.github.jknack.handlebars.helper.StringHelpers;
-import com.google.common.io.PatternFilenameFilter;
 
-import io.vertx.config.yaml.YamlProcessor;
 import io.vertx.core.AbstractVerticle;
-import io.vertx.core.CompositeFuture;
 import io.vertx.core.Future;
-import io.vertx.core.MultiMap;
 import io.vertx.core.Promise;
 import io.vertx.core.WorkerExecutor;
-import io.vertx.core.buffer.Buffer;
 import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.ext.auth.authentication.TokenCredentials;
-import io.vertx.ext.auth.authentication.UsernamePasswordCredentials;
-import io.vertx.ext.jdbc.JDBCClient;
 import io.vertx.ext.mail.MailClient;
 import io.vertx.ext.mail.MailConfig;
 import io.vertx.ext.web.client.WebClient;
-import io.vertx.ext.web.client.predicate.ResponsePredicate;
+import io.vertx.ext.web.client.WebClientOptions;
 import io.vertx.ext.web.templ.handlebars.HandlebarsTemplateEngine;
+import io.vertx.kafka.client.producer.KafkaProducer;
 import io.vertx.pgclient.PgConnectOptions;
 import io.vertx.pgclient.PgPool;
-import io.vertx.sqlclient.Cursor;
 import io.vertx.sqlclient.PoolOptions;
 import io.vertx.sqlclient.Row;
 import io.vertx.sqlclient.RowStream;
-import io.vertx.sqlclient.SqlConnection;
-import java.time.LocalDateTime;
-import io.vertx.ext.jdbc.JDBCClient;
-import io.vertx.sqlclient.Cursor;
-import io.vertx.sqlclient.SqlConnection;
-import io.vertx.ext.web.client.predicate.ResponsePredicate;
-import io.vertx.ext.auth.authentication.TokenCredentials;
-import org.computate.smartvillageview.enus.model.iotnode.IotNode;
-import org.computate.smartvillageview.enus.model.traffic.simulation.reader.TrafficFcdReader;
-import org.computate.smartvillageview.enus.model.traffic.time.step.TimeStep;
-import org.computate.smartvillageview.enus.model.iotnode.reader.IotNodeReader;
-
-import org.computate.smartvillageview.enus.model.user.SiteUser;
-import org.computate.smartvillageview.enus.result.map.MapResult;
-import org.computate.smartvillageview.enus.model.system.event.SystemEvent;
-import org.computate.smartvillageview.enus.model.page.SitePage;
-import org.computate.smartvillageview.enus.model.htm.SiteHtm;
-import org.computate.smartvillageview.enus.model.iotnode.IotNode;
-import org.computate.smartvillageview.enus.result.iotnode.step.IotNodeStep;
-import org.computate.smartvillageview.enus.model.traffic.person.step.PersonStep;
-import org.computate.smartvillageview.enus.model.traffic.bicycle.step.BicycleStep;
-import org.computate.smartvillageview.enus.model.traffic.time.step.TimeStep;
-import org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation;
-import org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved.TrafficFlowObserved;
-import org.computate.smartvillageview.enus.model.traffic.light.TrafficLight;
-import org.computate.smartvillageview.enus.model.traffic.light.step.TrafficLightStep;
-import org.computate.smartvillageview.enus.model.traffic.vehicle.step.VehicleStep;
 
 /**
  */
@@ -111,6 +74,8 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 	public static final Integer FACET_LIMIT = 100;
 
 	public final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern("HH:mm:ss VV");
+
+	private KafkaProducer<String, String> kafkaProducer;
 
 	/**
 	 * A io.vertx.ext.jdbc.JDBCClient for connecting to the relational database PostgreSQL. 
@@ -150,10 +115,14 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 					configureHandlebars().onSuccess(c -> 
 						configureSharedWorkerExecutor().onSuccess(d -> 
 							configureEmail().onSuccess(e -> 
-								importData().onSuccess(f -> 
-									refreshAllData().onSuccess(g -> {
-										startPromise.complete();
-									}).onFailure(ex -> startPromise.fail(ex))
+								configureKafka().onSuccess(f -> 
+									configureCamel().onSuccess(g -> 
+										importData().onSuccess(h -> 
+											refreshAllData().onSuccess(i -> {
+												startPromise.complete();
+											}).onFailure(ex -> startPromise.fail(ex))
+										).onFailure(ex -> startPromise.fail(ex))
+									).onFailure(ex -> startPromise.fail(ex))
 								).onFailure(ex -> startPromise.fail(ex))
 							).onFailure(ex -> startPromise.fail(ex))
 						).onFailure(ex -> startPromise.fail(ex))
@@ -197,7 +166,8 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 		Promise<Void> promise = Promise.promise();
 
 		try {
-			webClient = WebClient.create(vertx);
+			Boolean sslVerify = config().getBoolean(ConfigKeys.SSL_VERIFY);
+			webClient = WebClient.create(vertx, new WebClientOptions().setVerifyHost(sslVerify).setTrustAll(!sslVerify));
 			promise.complete();
 		} catch(Exception ex) {
 			LOG.error("Unable to configure site context. ", ex);
@@ -233,7 +203,7 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 			pgOptions.setPassword(config().getString(ConfigKeys.JDBC_PASSWORD));
 			pgOptions.setIdleTimeout(config().getInteger(ConfigKeys.JDBC_MAX_IDLE_TIME, 24));
 			pgOptions.setIdleTimeoutUnit(TimeUnit.HOURS);
-			pgOptions.setConnectTimeout(config().getInteger(ConfigKeys.JDBC_CONNECT_TIMEOUT, 86400000));
+			pgOptions.setConnectTimeout(config().getInteger(ConfigKeys.JDBC_CONNECT_TIMEOUT, 5000));
 
 			PoolOptions poolOptions = new PoolOptions();
 			poolOptions.setMaxSize(jdbcMaxPoolSize);
@@ -300,6 +270,52 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 			LOG.error(configureEmailFail, ex);
 			promise.fail(ex);
 		}
+		return promise.future();
+	}
+
+	/**
+	 **/
+	public Future<KafkaProducer<String, String>> configureKafka() {
+		Promise<KafkaProducer<String, String>> promise = Promise.promise();
+
+		try {
+			Map<String, String> kafkaConfig = new HashMap<>();
+			kafkaConfig.put("bootstrap.servers", config().getString(ConfigKeys.KAFKA_BROKERS));
+			kafkaConfig.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+			kafkaConfig.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+			kafkaConfig.put("acks", "1");
+			kafkaConfig.put("security.protocol", "SSL");
+			kafkaConfig.put("ssl.keystore.type", config().getString(ConfigKeys.KAFKA_SSL_KEYSTORE_TYPE));
+			kafkaConfig.put("ssl.keystore.location", config().getString(ConfigKeys.KAFKA_SSL_KEYSTORE_LOCATION));
+			kafkaConfig.put("ssl.keystore.password", config().getString(ConfigKeys.KAFKA_SSL_KEYSTORE_PASSWORD));
+			kafkaConfig.put("ssl.truststore.type", config().getString(ConfigKeys.KAFKA_SSL_TRUSTSTORE_TYPE));
+			kafkaConfig.put("ssl.truststore.location", config().getString(ConfigKeys.KAFKA_SSL_TRUSTSTORE_LOCATION));
+			kafkaConfig.put("ssl.truststore.password", config().getString(ConfigKeys.KAFKA_SSL_TRUSTSTORE_PASSWORD));
+
+			kafkaProducer = KafkaProducer.createShared(vertx, MainVerticle.SITE_NAME, kafkaConfig);
+			promise.complete(kafkaProducer);
+		} catch(Exception ex) {
+			LOG.error("Unable to configure site context. ", ex);
+			promise.fail(ex);
+		}
+
+		return promise.future();
+	}
+
+	/**
+	 * Val.Fail.enUS:The Camel Component was not configured properly. 
+	 * Val.Complete.enUS:The Camel Component was configured properly. 
+	 */
+	public Future<Void> configureCamel() {
+		Promise<Void> promise = Promise.promise();
+		CamelIntegration.configureCamel(vertx, config()).onSuccess(a -> {
+			LOG.info(configureCamelComplete);
+			promise.complete();
+		}).onFailure(ex -> {
+			LOG.error(configureCamelFail, ex);
+			promise.fail(ex);
+		});
+
 		return promise.future();
 	}
 
@@ -433,6 +449,7 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 			reader.setWorkerExecutor(workerExecutor);
 			reader.setTemplateEngine(templateEngine);
 			reader.setHandlebars(handlebars);
+			reader.setKafkaProducer(kafkaProducer);
 			reader.initDeepForClass(siteRequest);
 			reader.importDataSitePage().onComplete(a -> {
 				String importPeriod = config().getString(String.format("%s_%s", ConfigKeys.IMPORT_DATA_PERIOD, classSimpleName));

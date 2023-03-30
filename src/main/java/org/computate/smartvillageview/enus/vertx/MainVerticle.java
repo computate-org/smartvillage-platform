@@ -13,7 +13,7 @@ import java.util.function.Consumer;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.computate.search.tool.SearchTool;
-import org.computate.smartvillageview.enus.camel.tlc.TlcCamelIntegration;
+import org.computate.smartvillageview.enus.camel.CamelIntegration;
 import org.computate.smartvillageview.enus.config.ConfigKeys;
 import org.computate.smartvillageview.enus.model.htm.SiteHtmEnUSGenApiService;
 import org.computate.smartvillageview.enus.model.iotnode.IotNodeEnUSGenApiService;
@@ -348,9 +348,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 											configureKafka().onComplete(k -> 
 												configureApi().onComplete(l -> 
 													configureUi().onComplete(m -> 
-														configureCamel().onComplete(n -> 
-															startServer().onComplete(o -> startPromise.complete())
-														).onFailure(ex -> startPromise.fail(ex))
+														startServer().onComplete(o -> startPromise.complete())
 													).onFailure(ex -> startPromise.fail(ex))
 												).onFailure(ex -> startPromise.fail(ex))
 											).onFailure(ex -> startPromise.fail(ex))
@@ -450,7 +448,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 			pgOptions.setPassword(config().getString(ConfigKeys.JDBC_PASSWORD));
 			pgOptions.setIdleTimeout(config().getInteger(ConfigKeys.JDBC_MAX_IDLE_TIME, 10));
 			pgOptions.setIdleTimeoutUnit(TimeUnit.SECONDS);
-			pgOptions.setConnectTimeout(config().getInteger(ConfigKeys.JDBC_CONNECT_TIMEOUT, 5));
+			pgOptions.setConnectTimeout(config().getInteger(ConfigKeys.JDBC_CONNECT_TIMEOUT, 1000));
 
 			PoolOptions poolOptions = new PoolOptions();
 			jdbcMaxPoolSize = config().getInteger(ConfigKeys.JDBC_MAX_POOL_SIZE, 1);
@@ -798,6 +796,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 			handlebars.registerHelpers(AuthHelpers.class);
 			handlebars.registerHelpers(SiteHelpers.class);
 			handlebars.registerHelpers(DateHelpers.class);
+			handlebars.registerHelpers(ProjectHelpers.class);
 			handlebars.registerHelper("json", Jackson2Helper.INSTANCE);
 
 			String templatePath = config().getString(ConfigKeys.TEMPLATE_PATH);
@@ -1051,23 +1050,6 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 			LOG.error(String.format("putVarsInRoutingContext failed. "), ex);
 			promise.fail(ex);
 		}
-		return promise.future();
-	}
-
-	/**
-	 * Val.Fail.enUS:The Camel Component was not configured properly. 
-	 * Val.Complete.enUS:The Camel Component was configured properly. 
-	 */
-	public Future<Void> configureCamel() {
-		Promise<Void> promise = Promise.promise();
-		TlcCamelIntegration.configureCamel(vertx, config()).onSuccess(a -> {
-			LOG.info(configureCamelComplete);
-			promise.complete();
-		}).onFailure(ex -> {
-			LOG.error(configureCamelFail, ex);
-			promise.fail(ex);
-		});
-
 		return promise.future();
 	}
 

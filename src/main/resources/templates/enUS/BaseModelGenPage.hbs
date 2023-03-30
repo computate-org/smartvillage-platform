@@ -523,8 +523,6 @@
 {{/inline}}
 {{#*inline "thead2BaseModelPage"}}
 			<tr>
-						<th>created</th>
-						<th></th>
 			</tr>
 {{/inline}}
 {{#*inline "tbody1BaseModelPage"}}
@@ -535,16 +533,6 @@
 {{#*inline "tbody2BaseModelPage"}}
 		{{#each listBaseModel}}
 					<tr>
-						<td>
-							<a href="{{pageUrlPk}}">
-								<span class="white-space-pre-wrap ">{{siteZonedDateTimeFormat created "MMM d, yyyy h:mm:ss a" siteLocale}}</span>
-							</a>
-						</td>
-						<td>
-							<a href="{{pageUrlPk}}">
-								<span class="white-space-pre-wrap ">{{objectTitle}}</span>
-							</a>
-						</td>
 					</tr>
 		{{/each}}
 {{/inline}}
@@ -555,14 +543,6 @@
 {{/inline}}
 {{#*inline "tfoot2BaseModelPage"}}
 			<tr>
-			{{#if getColumnCreated}}
-				<td>
-				</td>
-			{{/if}}
-			{{#if getColumnObjectTitle}}
-				<td>
-				</td>
-			{{/if}}
 			</tr>
 	{{/inline}}
 {{#*inline "htmFormsBaseModelPage"}}
@@ -632,35 +612,6 @@
 			</div>
 {{/inline}}
 {{> PageLayout}}
-
-{{#*inline "htmPk"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-">
-													<label>primary key</label>
-												</div>
-												<div class="w3-cell-row  ">
-													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputPk" roleRequired=roleRequired}}
-															</span>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-	{{/eq}}
-								</div>
-{{/inline}}
-
-{{#*inline "inputPk"}}
-	{{#eq 'Page' classApiMethodMethod}}
-														<a href="{{ baseModel_.pageUrlApi }}" class="varBaseModel{{pk}}Pk ">{{baseModel_.pk}}</a>
-	{{/eq}}
-{{/inline}}
 
 {{#*inline "htmInheritPk"}}
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
@@ -745,35 +696,6 @@
 {{#*inline "inputCreated"}}
 	{{#eq 'Page' classApiMethodMethod}}
 														<span class="varBaseModel{{pk}}Created " title="{{formatZonedDateTime baseModel_.created 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime baseModel_.created 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
-	{{/eq}}
-{{/inline}}
-
-{{#*inline "htmModified"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-">
-													<label>modified</label>
-												</div>
-												<div class="w3-cell-row  ">
-													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputModified" roleRequired=roleRequired}}
-															</span>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-	{{/eq}}
-								</div>
-{{/inline}}
-
-{{#*inline "inputModified"}}
-	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varBaseModel{{pk}}Modified " title="{{formatZonedDateTime baseModel_.modified 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime baseModel_.modified 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -944,60 +866,5 @@
 {{#*inline "inputUserKey"}}
 	{{#eq 'Page' classApiMethodMethod}}
 														<span class="varBaseModel{{pk}}UserKey ">{{baseModel_.userKey}}</span>
-	{{/eq}}
-{{/inline}}
-
-{{#*inline "htmObjectTitle"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
-											<div class="w3-card ">
-												<div class="w3-cell-row  ">
-													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputObjectTitle" roleRequired=roleRequired}}
-															</span>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-	{{/eq}}
-								</div>
-{{/inline}}
-
-{{#*inline "inputObjectTitle"}}
-	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varBaseModel{{pk}}ObjectTitle ">{{baseModel_.objectTitle}}</span>
-	{{/eq}}
-{{/inline}}
-
-{{#*inline "htmObjectId"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-">
-													<label>ID</label>
-												</div>
-												<div class="w3-cell-row  ">
-													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputObjectId" roleRequired=roleRequired}}
-															</span>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-	{{/eq}}
-								</div>
-{{/inline}}
-
-{{#*inline "inputObjectId"}}
-	{{#eq 'Page' classApiMethodMethod}}
-														<a href="{{ baseModel_.pageUrlId }}" class="varBaseModel{{pk}}ObjectId ">{{baseModel_.objectId}}</a>
 	{{/eq}}
 {{/inline}}

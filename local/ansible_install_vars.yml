@@ -108,10 +108,8 @@ PROJECTS:
         template: page/DynamicPage.java
       - path: "{{ SITE_SRC }}/src/main/resources/application.yml"
         template: java/application.yml
-      - path: "{{ SITE_SRC }}/src/main/resources/log4j.properties"
-        template: log4j/log4j.properties
-      - path: "{{ SITE_SRC }}/src/main/resources/log4j.xml"
-        template: log4j/log4j.xml
+      - path: "{{ SITE_SRC }}/src/main/resources/simplelogger.properties"
+        template: log4j/simplelogger.properties
       - path: "{{ SITE_SRC }}/local/defaults.yml"
         template: local/defaults.yml
       - path: "{{ SITE_SRC }}/local/template.yml"

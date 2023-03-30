@@ -16591,7 +16591,9 @@ components:
                   paramPedestrianDemandScalingFactor:
                     type: string
                   paramDemandScale:
-                    type: string
+                    type: array
+                    items:
+                      type: string
                   paramMinGreenTimeSecWestEast:
                     type: string
                   paramMaxGreenTimeSecWestEast:
@@ -16613,8 +16615,6 @@ components:
                   paramPedestrianQueueThresholdWestEast:
                     type: string
                   paramStepSize:
-                    type: string
-                  paramUpdateStepSize:
                     type: string
                   paramRunTime:
                     type: string
@@ -16737,12 +16737,22 @@ components:
             removeAllParamPedestrianDemandScalingFactor:
               type: string
             setParamDemandScale:
-              type: string
+              type: array
               nullable: true
+              items:
+                type: string
             removeParamDemandScale:
               type: string
             removeAllParamDemandScale:
+              type: array
+              items:
+                type: string
+            addParamDemandScale:
               type: string
+            addAllParamDemandScale:
+              type: array
+              items:
+                type: string
             setParamMinGreenTimeSecWestEast:
               type: string
               nullable: true
@@ -16819,13 +16829,6 @@ components:
             removeParamStepSize:
               type: string
             removeAllParamStepSize:
-              type: string
-            setParamUpdateStepSize:
-              type: string
-              nullable: true
-            removeParamUpdateStepSize:
-              type: string
-            removeAllParamUpdateStepSize:
               type: string
             setParamRunTime:
               type: string
@@ -17002,12 +17005,22 @@ components:
             removeAllParamPedestrianDemandScalingFactor:
               type: string
             setParamDemandScale:
-              type: string
+              type: array
               nullable: true
+              items:
+                type: string
             removeParamDemandScale:
               type: string
             removeAllParamDemandScale:
+              type: array
+              items:
+                type: string
+            addParamDemandScale:
               type: string
+            addAllParamDemandScale:
+              type: array
+              items:
+                type: string
             setParamMinGreenTimeSecWestEast:
               type: string
               nullable: true
@@ -17084,13 +17097,6 @@ components:
             removeParamStepSize:
               type: string
             removeAllParamStepSize:
-              type: string
-            setParamUpdateStepSize:
-              type: string
-              nullable: true
-            removeParamUpdateStepSize:
-              type: string
-            removeAllParamUpdateStepSize:
               type: string
             setParamRunTime:
               type: string
@@ -17197,7 +17203,9 @@ components:
             paramPedestrianDemandScalingFactor:
               type: string
             paramDemandScale:
-              type: string
+              type: array
+              items:
+                type: string
             paramMinGreenTimeSecWestEast:
               type: string
             paramMaxGreenTimeSecWestEast:
@@ -17219,8 +17227,6 @@ components:
             paramPedestrianQueueThresholdWestEast:
               type: string
             paramStepSize:
-              type: string
-            paramUpdateStepSize:
               type: string
             paramRunTime:
               type: string
@@ -17273,7 +17279,9 @@ components:
             paramPedestrianDemandScalingFactor:
               type: string
             paramDemandScale:
-              type: string
+              type: array
+              items:
+                type: string
             paramMinGreenTimeSecWestEast:
               type: string
             paramMaxGreenTimeSecWestEast:
@@ -17295,8 +17303,6 @@ components:
             paramPedestrianQueueThresholdWestEast:
               type: string
             paramStepSize:
-              type: string
-            paramUpdateStepSize:
               type: string
             paramRunTime:
               type: string
@@ -17349,7 +17355,9 @@ components:
             paramPedestrianDemandScalingFactor:
               type: string
             paramDemandScale:
-              type: string
+              type: array
+              items:
+                type: string
             paramMinGreenTimeSecWestEast:
               type: string
             paramMaxGreenTimeSecWestEast:
@@ -17371,8 +17379,6 @@ components:
             paramPedestrianQueueThresholdWestEast:
               type: string
             paramStepSize:
-              type: string
-            paramUpdateStepSize:
               type: string
             paramRunTime:
               type: string
@@ -17425,7 +17431,9 @@ components:
             paramPedestrianDemandScalingFactor:
               type: string
             paramDemandScale:
-              type: string
+              type: array
+              items:
+                type: string
             paramMinGreenTimeSecWestEast:
               type: string
             paramMaxGreenTimeSecWestEast:
@@ -17447,8 +17455,6 @@ components:
             paramPedestrianQueueThresholdWestEast:
               type: string
             paramStepSize:
-              type: string
-            paramUpdateStepSize:
               type: string
             paramRunTime:
               type: string
@@ -17501,7 +17507,9 @@ components:
             paramPedestrianDemandScalingFactor:
               type: string
             paramDemandScale:
-              type: string
+              type: array
+              items:
+                type: string
             paramMinGreenTimeSecWestEast:
               type: string
             paramMaxGreenTimeSecWestEast:
@@ -17523,8 +17531,6 @@ components:
             paramPedestrianQueueThresholdWestEast:
               type: string
             paramStepSize:
-              type: string
-            paramUpdateStepSize:
               type: string
             paramRunTime:
               type: string
@@ -17698,12 +17704,22 @@ components:
             removeAllParamPedestrianQueueThresholdWestEast:
               type: string
             setParamDemandScale:
-              type: string
+              type: array
               nullable: true
+              items:
+                type: string
             removeParamDemandScale:
               type: string
             removeAllParamDemandScale:
+              type: array
+              items:
+                type: string
+            addParamDemandScale:
               type: string
+            addAllParamDemandScale:
+              type: array
+              items:
+                type: string
             setParamInitialPar:
               type: array
               nullable: true
@@ -17727,13 +17743,6 @@ components:
             removeParamStepSize:
               type: string
             removeAllParamStepSize:
-              type: string
-            setParamUpdateStepSize:
-              type: string
-              nullable: true
-            removeParamUpdateStepSize:
-              type: string
-            removeAllParamUpdateStepSize:
               type: string
             setParamRunTime:
               type: string
@@ -17918,12 +17927,22 @@ components:
             removeAllParamPedestrianQueueThresholdWestEast:
               type: string
             setParamDemandScale:
-              type: string
+              type: array
               nullable: true
+              items:
+                type: string
             removeParamDemandScale:
               type: string
             removeAllParamDemandScale:
+              type: array
+              items:
+                type: string
+            addParamDemandScale:
               type: string
+            addAllParamDemandScale:
+              type: array
+              items:
+                type: string
             setParamInitialPar:
               type: array
               nullable: true
@@ -17947,13 +17966,6 @@ components:
             removeParamStepSize:
               type: string
             removeAllParamStepSize:
-              type: string
-            setParamUpdateStepSize:
-              type: string
-              nullable: true
-            removeParamUpdateStepSize:
-              type: string
-            removeAllParamUpdateStepSize:
               type: string
             setParamRunTime:
               type: string
@@ -18049,14 +18061,14 @@ components:
                   paramPedestrianQueueThresholdWestEast:
                     type: string
                   paramDemandScale:
-                    type: string
+                    type: array
+                    items:
+                      type: string
                   paramInitialPar:
                     type: array
                     items:
                       type: string
                   paramStepSize:
-                    type: string
-                  paramUpdateStepSize:
                     type: string
                   paramRunTime:
                     type: string
@@ -18216,12 +18228,22 @@ components:
             removeAllParamPedestrianQueueThresholdWestEast:
               type: string
             setParamDemandScale:
-              type: string
+              type: array
               nullable: true
+              items:
+                type: string
             removeParamDemandScale:
               type: string
             removeAllParamDemandScale:
+              type: array
+              items:
+                type: string
+            addParamDemandScale:
               type: string
+            addAllParamDemandScale:
+              type: array
+              items:
+                type: string
             setParamInitialPar:
               type: array
               nullable: true
@@ -18245,13 +18267,6 @@ components:
             removeParamStepSize:
               type: string
             removeAllParamStepSize:
-              type: string
-            setParamUpdateStepSize:
-              type: string
-              nullable: true
-            removeParamUpdateStepSize:
-              type: string
-            removeAllParamUpdateStepSize:
               type: string
             setParamRunTime:
               type: string
@@ -18436,12 +18451,22 @@ components:
             removeAllParamPedestrianQueueThresholdWestEast:
               type: string
             setParamDemandScale:
-              type: string
+              type: array
               nullable: true
+              items:
+                type: string
             removeParamDemandScale:
               type: string
             removeAllParamDemandScale:
+              type: array
+              items:
+                type: string
+            addParamDemandScale:
               type: string
+            addAllParamDemandScale:
+              type: array
+              items:
+                type: string
             setParamInitialPar:
               type: array
               nullable: true
@@ -18465,13 +18490,6 @@ components:
             removeParamStepSize:
               type: string
             removeAllParamStepSize:
-              type: string
-            setParamUpdateStepSize:
-              type: string
-              nullable: true
-            removeParamUpdateStepSize:
-              type: string
-            removeAllParamUpdateStepSize:
               type: string
             setParamRunTime:
               type: string
@@ -18553,14 +18571,14 @@ components:
             paramPedestrianQueueThresholdWestEast:
               type: string
             paramDemandScale:
-              type: string
+              type: array
+              items:
+                type: string
             paramInitialPar:
               type: array
               items:
                 type: string
             paramStepSize:
-              type: string
-            paramUpdateStepSize:
               type: string
             paramRunTime:
               type: string
@@ -18617,14 +18635,14 @@ components:
             paramPedestrianQueueThresholdWestEast:
               type: string
             paramDemandScale:
-              type: string
+              type: array
+              items:
+                type: string
             paramInitialPar:
               type: array
               items:
                 type: string
             paramStepSize:
-              type: string
-            paramUpdateStepSize:
               type: string
             paramRunTime:
               type: string
@@ -18681,14 +18699,14 @@ components:
             paramPedestrianQueueThresholdWestEast:
               type: string
             paramDemandScale:
-              type: string
+              type: array
+              items:
+                type: string
             paramInitialPar:
               type: array
               items:
                 type: string
             paramStepSize:
-              type: string
-            paramUpdateStepSize:
               type: string
             paramRunTime:
               type: string
@@ -18745,14 +18763,14 @@ components:
             paramPedestrianQueueThresholdWestEast:
               type: string
             paramDemandScale:
-              type: string
+              type: array
+              items:
+                type: string
             paramInitialPar:
               type: array
               items:
                 type: string
             paramStepSize:
-              type: string
-            paramUpdateStepSize:
               type: string
             paramRunTime:
               type: string
@@ -18809,14 +18827,14 @@ components:
             paramPedestrianQueueThresholdWestEast:
               type: string
             paramDemandScale:
-              type: string
+              type: array
+              items:
+                type: string
             paramInitialPar:
               type: array
               items:
                 type: string
             paramStepSize:
-              type: string
-            paramUpdateStepSize:
               type: string
             paramRunTime:
               type: string

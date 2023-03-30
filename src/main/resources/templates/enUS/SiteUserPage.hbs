@@ -25,8 +25,8 @@
 {{#partial "htmForm"}}{{> htmFormSiteUserPage}}{{/partial}}
 {{#partial "htmForms"}}{{> htmFormsSiteUserPage}}{{/partial}}
 {{#partial "htmBodySuggested"}}{{> htmBodySuggestedSiteUserPage}}{{/partial}}
-{{#partial "htmForm_patchSiteUser"}}{{> htmFormSiteUserPage_patchSiteUser}}{{/partial}}
-{{#partial "htmForm_postSiteUser"}}{{> htmFormSiteUserPage_postSiteUser}}{{/partial}}
-{{#partial "htmForm_putimportSiteUser"}}{{> htmFormSiteUserPage_putimportSiteUser}}{{/partial}}
-{{#partial "htmForm_searchpageSiteUser"}}{{> htmFormSiteUserPage_searchpageSiteUser}}{{/partial}}
+{{#partial "htmForm_patchSiteUser"}}{{> htmFormSiteUserPage_patchSiteUser classApiMethodMethod="PATCH"}}{{/partial}}
+{{#partial "htmForm_postSiteUser"}}{{> htmFormSiteUserPage_postSiteUser classApiMethodMethod="POST"}}{{/partial}}
+{{#partial "htmForm_putimportSiteUser"}}{{> htmFormSiteUserPage_putimportSiteUser classApiMethodMethod="PUT"}}{{/partial}}
+{{#partial "htmForm_searchpageSiteUser"}}{{> htmFormSiteUserPage_searchpageSiteUser classApiMethodMethod="GET"}}{{/partial}}
 {{> SiteUserGenPage}}

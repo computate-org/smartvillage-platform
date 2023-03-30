@@ -31,7 +31,7 @@ ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS paramVehicleDemandScaling
 ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS paramAvgPedestrianPerMinFromWestToEast decimal;
 ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS paramAvgPedestrianPerMinFromSouthToNorth decimal;
 ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS paramPedestrianDemandScalingFactor decimal;
-ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS paramDemandScale decimal;
+ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS paramDemandScale decimal[];
 ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS paramMinGreenTimeSecWestEast decimal;
 ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS paramMaxGreenTimeSecWestEast decimal;
 ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS paramMinGreenTimeSecSouthNorth decimal;
@@ -43,7 +43,6 @@ ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS paramVehicleQueueThreshol
 ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS paramPedestrianQueueThresholdNorthSouth decimal;
 ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS paramPedestrianQueueThresholdWestEast decimal;
 ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS paramStepSize decimal;
-ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS paramUpdateStepSize integer;
 ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS paramRunTime integer;
 ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS paramItersPerPar integer;
 ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS paramTotalIterNum integer;
@@ -74,9 +73,8 @@ ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS paramVehicleQueueThreshold
 ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS paramVehicleQueueThresholdSouthNorth decimal;
 ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS paramPedestrianQueueThresholdNorthSouth decimal;
 ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS paramPedestrianQueueThresholdWestEast decimal;
-ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS paramDemandScale decimal;
+ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS paramDemandScale decimal[];
 ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS paramStepSize decimal;
-ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS paramUpdateStepSize integer;
 ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS paramRunTime integer;
 ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS paramItersPerPar integer;
 ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS paramTotalIterNum integer;

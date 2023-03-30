@@ -807,7 +807,7 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							bParams.add(o2.sqlParamPedestrianQueueThresholdWestEast());
 						break;
 					case "setParamDemandScale":
-							o2.setParamDemandScale(jsonObject.getString(entityVar));
+							o2.setParamDemandScale(jsonObject.getJsonArray(entityVar));
 							if(bParams.size() > 0)
 								bSql.append(", ");
 							bSql.append(SimulationReport.VAR_paramDemandScale + "=$" + num);
@@ -821,14 +821,6 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							bSql.append(SimulationReport.VAR_paramStepSize + "=$" + num);
 							num++;
 							bParams.add(o2.sqlParamStepSize());
-						break;
-					case "setParamUpdateStepSize":
-							o2.setParamUpdateStepSize(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SimulationReport.VAR_paramUpdateStepSize + "=$" + num);
-							num++;
-							bParams.add(o2.sqlParamUpdateStepSize());
 						break;
 					case "setParamRunTime":
 							o2.setParamRunTime(jsonObject.getString(entityVar));
@@ -1397,7 +1389,7 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 						bParams.add(o2.sqlParamPedestrianQueueThresholdWestEast());
 						break;
 					case SimulationReport.VAR_paramDemandScale:
-						o2.setParamDemandScale(jsonObject.getString(entityVar));
+						o2.setParamDemandScale(jsonObject.getJsonArray(entityVar));
 						if(bParams.size() > 0) {
 							bSql.append(", ");
 						}
@@ -1413,15 +1405,6 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 						bSql.append(SimulationReport.VAR_paramStepSize + "=$" + num);
 						num++;
 						bParams.add(o2.sqlParamStepSize());
-						break;
-					case SimulationReport.VAR_paramUpdateStepSize:
-						o2.setParamUpdateStepSize(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(SimulationReport.VAR_paramUpdateStepSize + "=$" + num);
-						num++;
-						bParams.add(o2.sqlParamUpdateStepSize());
 						break;
 					case SimulationReport.VAR_paramRunTime:
 						o2.setParamRunTime(jsonObject.getString(entityVar));
@@ -1731,7 +1714,7 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							if(body2.size() > 0) {
 								siteRequest.setJsonObject(body2);
 								patchSimulationReportFuture(o, true).onSuccess(b -> {
-									LOG.info("Import SimulationReport {} succeeded, modified SimulationReport. ", body.getValue(SimulationReport.VAR_pk));
+									LOG.debug("Import SimulationReport {} succeeded, modified SimulationReport. ", body.getValue(SimulationReport.VAR_pk));
 									eventHandler.handle(Future.succeededFuture());
 								}).onFailure(ex -> {
 									LOG.error(String.format("putimportSimulationReportFuture failed. "), ex);
@@ -1742,7 +1725,7 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							}
 						} else {
 							postSimulationReportFuture(siteRequest, true).onSuccess(b -> {
-								LOG.info("Import SimulationReport {} succeeded, created new SimulationReport. ", body.getValue(SimulationReport.VAR_pk));
+								LOG.debug("Import SimulationReport {} succeeded, created new SimulationReport. ", body.getValue(SimulationReport.VAR_pk));
 								eventHandler.handle(Future.succeededFuture());
 							}).onFailure(ex -> {
 								LOG.error(String.format("putimportSimulationReportFuture failed. "), ex);
@@ -2256,7 +2239,7 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							bParams.add(o2.sqlParamPedestrianQueueThresholdWestEast());
 						break;
 					case "setParamDemandScale":
-							o2.setParamDemandScale(jsonObject.getString(entityVar));
+							o2.setParamDemandScale(jsonObject.getJsonArray(entityVar));
 							if(bParams.size() > 0)
 								bSql.append(", ");
 							bSql.append(SimulationReport.VAR_paramDemandScale + "=$" + num);
@@ -2270,14 +2253,6 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							bSql.append(SimulationReport.VAR_paramStepSize + "=$" + num);
 							num++;
 							bParams.add(o2.sqlParamStepSize());
-						break;
-					case "setParamUpdateStepSize":
-							o2.setParamUpdateStepSize(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SimulationReport.VAR_paramUpdateStepSize + "=$" + num);
-							num++;
-							bParams.add(o2.sqlParamUpdateStepSize());
 						break;
 					case "setParamRunTime":
 							o2.setParamRunTime(jsonObject.getString(entityVar));

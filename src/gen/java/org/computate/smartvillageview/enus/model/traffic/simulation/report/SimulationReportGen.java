@@ -176,15 +176,15 @@ import org.computate.search.response.solr.SolrResponse;
  * </p>
  * <p>
  * Delete the class SimulationReport in Solr: 
- * curl 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
  * Delete  the package org.computate.smartvillageview.enus.model.traffic.simulation.report in Solr: 
- * curl 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
  * Delete  the project smartabyar-smartvillage in Solr: 
- * curl 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartabyar\-smartvillage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartabyar\-smartvillage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  **/
 public abstract class SimulationReportGen<DEV> extends BaseModel {
@@ -1738,31 +1738,33 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 
 
 	/**	 The entity paramDemandScale
-	 *	 is defined as null before being initialized. 
+	 *	 It is constructed before being initialized with the constructor by default. 
 	 */
 	@JsonProperty
-	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
 	@JsonInclude(Include.NON_NULL)
-	protected BigDecimal paramDemandScale;
+	protected List<BigDecimal> paramDemandScale = new ArrayList<BigDecimal>();
 
 	/**	<br> The entity paramDemandScale
-	 *  is defined as null before being initialized. 
+	 *  It is constructed before being initialized with the constructor by default. 
 	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:paramDemandScale">Find the entity paramDemandScale in Solr</a>
 	 * <br>
-	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 * @param l is the entity already constructed. 
 	 **/
-	protected abstract void _paramDemandScale(Wrap<BigDecimal> w);
+	protected abstract void _paramDemandScale(List<BigDecimal> l);
 
-	public BigDecimal getParamDemandScale() {
+	public List<BigDecimal> getParamDemandScale() {
 		return paramDemandScale;
 	}
 
-	public void setParamDemandScale(BigDecimal paramDemandScale) {
+	public void setParamDemandScale(List<BigDecimal> paramDemandScale) {
 		this.paramDemandScale = paramDemandScale;
 	}
 	@JsonIgnore
 	public void setParamDemandScale(String o) {
-		this.paramDemandScale = SimulationReport.staticSetParamDemandScale(siteRequest_, o);
+		BigDecimal l = SimulationReport.staticSetParamDemandScale(siteRequest_, o);
+		if(l != null)
+			addParamDemandScale(l);
 	}
 	public static BigDecimal staticSetParamDemandScale(SiteRequestEnUS siteRequest_, String o) {
 		o = StringUtils.removeAll(o, "[^\\d\\.]");
@@ -1772,30 +1774,54 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 	}
 	@JsonIgnore
 	public void setParamDemandScale(Double o) {
-		setParamDemandScale(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+		addParamDemandScale(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	@JsonIgnore
 	public void setParamDemandScale(Integer o) {
-		setParamDemandScale(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+		addParamDemandScale(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	@JsonIgnore
 	public void setParamDemandScale(Number o) {
-		setParamDemandScale(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+		addParamDemandScale(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
-	protected SimulationReport paramDemandScaleInit() {
-		Wrap<BigDecimal> paramDemandScaleWrap = new Wrap<BigDecimal>().var("paramDemandScale");
-		if(paramDemandScale == null) {
-			_paramDemandScale(paramDemandScaleWrap);
-			setParamDemandScale(paramDemandScaleWrap.o);
+	public SimulationReport addParamDemandScale(BigDecimal...objects) {
+		for(BigDecimal o : objects) {
+			addParamDemandScale(o);
 		}
 		return (SimulationReport)this;
 	}
-
-	public static Double staticSearchParamDemandScale(SiteRequestEnUS siteRequest_, BigDecimal o) {
-		return o == null ? null : o.doubleValue();
+	public SimulationReport addParamDemandScale(BigDecimal o) {
+		if(o != null)
+			this.paramDemandScale.add(o);
+		return (SimulationReport)this;
+	}
+	@JsonIgnore
+	public void setParamDemandScale(JsonArray objects) {
+		paramDemandScale.clear();
+		if(objects == null)
+			return;
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
+			addParamDemandScale(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+		}
+	}
+	public SimulationReport addParamDemandScale(String o) {
+		if(NumberUtils.isParsable(o)) {
+			BigDecimal p = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+			addParamDemandScale(p);
+		}
+		return (SimulationReport)this;
+	}
+	protected SimulationReport paramDemandScaleInit() {
+		_paramDemandScale(paramDemandScale);
+		return (SimulationReport)this;
 	}
 
-	public static String staticSearchStrParamDemandScale(SiteRequestEnUS siteRequest_, Double o) {
+	public static BigDecimal staticSearchParamDemandScale(SiteRequestEnUS siteRequest_, BigDecimal o) {
+		return o;
+	}
+
+	public static String staticSearchStrParamDemandScale(SiteRequestEnUS siteRequest_, BigDecimal o) {
 		return o == null ? null : o.toString();
 	}
 
@@ -1803,8 +1829,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		return SimulationReport.staticSearchStrParamDemandScale(siteRequest_, SimulationReport.staticSearchParamDemandScale(siteRequest_, SimulationReport.staticSetParamDemandScale(siteRequest_, o)));
 	}
 
-	public BigDecimal sqlParamDemandScale() {
-		return paramDemandScale;
+	public Number[] sqlParamDemandScale() {
+		return paramDemandScale.stream().map(v -> (Number)v).toArray(Number[]::new);
 	}
 
 	/////////////////////
@@ -1977,68 +2003,6 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 
 	public BigDecimal sqlParamStepSize() {
 		return paramStepSize;
-	}
-
-	/////////////////////////
-	// paramUpdateStepSize //
-	/////////////////////////
-
-
-	/**	 The entity paramUpdateStepSize
-	 *	 is defined as null before being initialized. 
-	 */
-	@JsonProperty
-	@JsonSerialize(using = ToStringSerializer.class)
-	@JsonInclude(Include.NON_NULL)
-	protected Integer paramUpdateStepSize;
-
-	/**	<br> The entity paramUpdateStepSize
-	 *  is defined as null before being initialized. 
-	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:paramUpdateStepSize">Find the entity paramUpdateStepSize in Solr</a>
-	 * <br>
-	 * @param w is for wrapping a value to assign to this entity during initialization. 
-	 **/
-	protected abstract void _paramUpdateStepSize(Wrap<Integer> w);
-
-	public Integer getParamUpdateStepSize() {
-		return paramUpdateStepSize;
-	}
-
-	public void setParamUpdateStepSize(Integer paramUpdateStepSize) {
-		this.paramUpdateStepSize = paramUpdateStepSize;
-	}
-	@JsonIgnore
-	public void setParamUpdateStepSize(String o) {
-		this.paramUpdateStepSize = SimulationReport.staticSetParamUpdateStepSize(siteRequest_, o);
-	}
-	public static Integer staticSetParamUpdateStepSize(SiteRequestEnUS siteRequest_, String o) {
-		if(NumberUtils.isParsable(o))
-			return Integer.parseInt(o);
-		return null;
-	}
-	protected SimulationReport paramUpdateStepSizeInit() {
-		Wrap<Integer> paramUpdateStepSizeWrap = new Wrap<Integer>().var("paramUpdateStepSize");
-		if(paramUpdateStepSize == null) {
-			_paramUpdateStepSize(paramUpdateStepSizeWrap);
-			setParamUpdateStepSize(paramUpdateStepSizeWrap.o);
-		}
-		return (SimulationReport)this;
-	}
-
-	public static Integer staticSearchParamUpdateStepSize(SiteRequestEnUS siteRequest_, Integer o) {
-		return o;
-	}
-
-	public static String staticSearchStrParamUpdateStepSize(SiteRequestEnUS siteRequest_, Integer o) {
-		return o == null ? null : o.toString();
-	}
-
-	public static String staticSearchFqParamUpdateStepSize(SiteRequestEnUS siteRequest_, String o) {
-		return SimulationReport.staticSearchStrParamUpdateStepSize(siteRequest_, SimulationReport.staticSearchParamUpdateStepSize(siteRequest_, SimulationReport.staticSetParamUpdateStepSize(siteRequest_, o)));
-	}
-
-	public Integer sqlParamUpdateStepSize() {
-		return paramUpdateStepSize;
 	}
 
 	//////////////////
@@ -2351,6 +2315,296 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		return updatedPerformance;
 	}
 
+	//////////////////////////////////////////////
+	// updatedPerformanceWaitWestEastVehicleSec //
+	//////////////////////////////////////////////
+
+
+	/**	 The entity updatedPerformanceWaitWestEastVehicleSec
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected JsonArray updatedPerformanceWaitWestEastVehicleSec;
+
+	/**	<br> The entity updatedPerformanceWaitWestEastVehicleSec
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:updatedPerformanceWaitWestEastVehicleSec">Find the entity updatedPerformanceWaitWestEastVehicleSec in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _updatedPerformanceWaitWestEastVehicleSec(Wrap<JsonArray> w);
+
+	public JsonArray getUpdatedPerformanceWaitWestEastVehicleSec() {
+		return updatedPerformanceWaitWestEastVehicleSec;
+	}
+
+	public void setUpdatedPerformanceWaitWestEastVehicleSec(JsonArray updatedPerformanceWaitWestEastVehicleSec) {
+		this.updatedPerformanceWaitWestEastVehicleSec = updatedPerformanceWaitWestEastVehicleSec;
+	}
+	@JsonIgnore
+	public void setUpdatedPerformanceWaitWestEastVehicleSec(String o) {
+		this.updatedPerformanceWaitWestEastVehicleSec = SimulationReport.staticSetUpdatedPerformanceWaitWestEastVehicleSec(siteRequest_, o);
+	}
+	public static JsonArray staticSetUpdatedPerformanceWaitWestEastVehicleSec(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonArray(o);
+		}
+		return null;
+	}
+	protected SimulationReport updatedPerformanceWaitWestEastVehicleSecInit() {
+		Wrap<JsonArray> updatedPerformanceWaitWestEastVehicleSecWrap = new Wrap<JsonArray>().var("updatedPerformanceWaitWestEastVehicleSec");
+		if(updatedPerformanceWaitWestEastVehicleSec == null) {
+			_updatedPerformanceWaitWestEastVehicleSec(updatedPerformanceWaitWestEastVehicleSecWrap);
+			setUpdatedPerformanceWaitWestEastVehicleSec(updatedPerformanceWaitWestEastVehicleSecWrap.o);
+		}
+		return (SimulationReport)this;
+	}
+
+	public static JsonArray staticSearchUpdatedPerformanceWaitWestEastVehicleSec(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o;
+	}
+
+	public static String staticSearchStrUpdatedPerformanceWaitWestEastVehicleSec(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqUpdatedPerformanceWaitWestEastVehicleSec(SiteRequestEnUS siteRequest_, String o) {
+		return SimulationReport.staticSearchStrUpdatedPerformanceWaitWestEastVehicleSec(siteRequest_, SimulationReport.staticSearchUpdatedPerformanceWaitWestEastVehicleSec(siteRequest_, SimulationReport.staticSetUpdatedPerformanceWaitWestEastVehicleSec(siteRequest_, o)));
+	}
+
+	////////////////////////////////////////////////
+	// updatedPerformanceWaitSouthNorthVehicleSec //
+	////////////////////////////////////////////////
+
+
+	/**	 The entity updatedPerformanceWaitSouthNorthVehicleSec
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected JsonArray updatedPerformanceWaitSouthNorthVehicleSec;
+
+	/**	<br> The entity updatedPerformanceWaitSouthNorthVehicleSec
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:updatedPerformanceWaitSouthNorthVehicleSec">Find the entity updatedPerformanceWaitSouthNorthVehicleSec in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _updatedPerformanceWaitSouthNorthVehicleSec(Wrap<JsonArray> w);
+
+	public JsonArray getUpdatedPerformanceWaitSouthNorthVehicleSec() {
+		return updatedPerformanceWaitSouthNorthVehicleSec;
+	}
+
+	public void setUpdatedPerformanceWaitSouthNorthVehicleSec(JsonArray updatedPerformanceWaitSouthNorthVehicleSec) {
+		this.updatedPerformanceWaitSouthNorthVehicleSec = updatedPerformanceWaitSouthNorthVehicleSec;
+	}
+	@JsonIgnore
+	public void setUpdatedPerformanceWaitSouthNorthVehicleSec(String o) {
+		this.updatedPerformanceWaitSouthNorthVehicleSec = SimulationReport.staticSetUpdatedPerformanceWaitSouthNorthVehicleSec(siteRequest_, o);
+	}
+	public static JsonArray staticSetUpdatedPerformanceWaitSouthNorthVehicleSec(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonArray(o);
+		}
+		return null;
+	}
+	protected SimulationReport updatedPerformanceWaitSouthNorthVehicleSecInit() {
+		Wrap<JsonArray> updatedPerformanceWaitSouthNorthVehicleSecWrap = new Wrap<JsonArray>().var("updatedPerformanceWaitSouthNorthVehicleSec");
+		if(updatedPerformanceWaitSouthNorthVehicleSec == null) {
+			_updatedPerformanceWaitSouthNorthVehicleSec(updatedPerformanceWaitSouthNorthVehicleSecWrap);
+			setUpdatedPerformanceWaitSouthNorthVehicleSec(updatedPerformanceWaitSouthNorthVehicleSecWrap.o);
+		}
+		return (SimulationReport)this;
+	}
+
+	public static JsonArray staticSearchUpdatedPerformanceWaitSouthNorthVehicleSec(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o;
+	}
+
+	public static String staticSearchStrUpdatedPerformanceWaitSouthNorthVehicleSec(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqUpdatedPerformanceWaitSouthNorthVehicleSec(SiteRequestEnUS siteRequest_, String o) {
+		return SimulationReport.staticSearchStrUpdatedPerformanceWaitSouthNorthVehicleSec(siteRequest_, SimulationReport.staticSearchUpdatedPerformanceWaitSouthNorthVehicleSec(siteRequest_, SimulationReport.staticSetUpdatedPerformanceWaitSouthNorthVehicleSec(siteRequest_, o)));
+	}
+
+	/////////////////////////////////////////
+	// updatedPerformanceWaitAllVehicleSec //
+	/////////////////////////////////////////
+
+
+	/**	 The entity updatedPerformanceWaitAllVehicleSec
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected JsonArray updatedPerformanceWaitAllVehicleSec;
+
+	/**	<br> The entity updatedPerformanceWaitAllVehicleSec
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:updatedPerformanceWaitAllVehicleSec">Find the entity updatedPerformanceWaitAllVehicleSec in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _updatedPerformanceWaitAllVehicleSec(Wrap<JsonArray> w);
+
+	public JsonArray getUpdatedPerformanceWaitAllVehicleSec() {
+		return updatedPerformanceWaitAllVehicleSec;
+	}
+
+	public void setUpdatedPerformanceWaitAllVehicleSec(JsonArray updatedPerformanceWaitAllVehicleSec) {
+		this.updatedPerformanceWaitAllVehicleSec = updatedPerformanceWaitAllVehicleSec;
+	}
+	@JsonIgnore
+	public void setUpdatedPerformanceWaitAllVehicleSec(String o) {
+		this.updatedPerformanceWaitAllVehicleSec = SimulationReport.staticSetUpdatedPerformanceWaitAllVehicleSec(siteRequest_, o);
+	}
+	public static JsonArray staticSetUpdatedPerformanceWaitAllVehicleSec(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonArray(o);
+		}
+		return null;
+	}
+	protected SimulationReport updatedPerformanceWaitAllVehicleSecInit() {
+		Wrap<JsonArray> updatedPerformanceWaitAllVehicleSecWrap = new Wrap<JsonArray>().var("updatedPerformanceWaitAllVehicleSec");
+		if(updatedPerformanceWaitAllVehicleSec == null) {
+			_updatedPerformanceWaitAllVehicleSec(updatedPerformanceWaitAllVehicleSecWrap);
+			setUpdatedPerformanceWaitAllVehicleSec(updatedPerformanceWaitAllVehicleSecWrap.o);
+		}
+		return (SimulationReport)this;
+	}
+
+	public static JsonArray staticSearchUpdatedPerformanceWaitAllVehicleSec(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o;
+	}
+
+	public static String staticSearchStrUpdatedPerformanceWaitAllVehicleSec(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqUpdatedPerformanceWaitAllVehicleSec(SiteRequestEnUS siteRequest_, String o) {
+		return SimulationReport.staticSearchStrUpdatedPerformanceWaitAllVehicleSec(siteRequest_, SimulationReport.staticSearchUpdatedPerformanceWaitAllVehicleSec(siteRequest_, SimulationReport.staticSetUpdatedPerformanceWaitAllVehicleSec(siteRequest_, o)));
+	}
+
+	////////////////////////////////////////////
+	// updatedPerformanceWaitAllPedestrianSec //
+	////////////////////////////////////////////
+
+
+	/**	 The entity updatedPerformanceWaitAllPedestrianSec
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected JsonArray updatedPerformanceWaitAllPedestrianSec;
+
+	/**	<br> The entity updatedPerformanceWaitAllPedestrianSec
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:updatedPerformanceWaitAllPedestrianSec">Find the entity updatedPerformanceWaitAllPedestrianSec in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _updatedPerformanceWaitAllPedestrianSec(Wrap<JsonArray> w);
+
+	public JsonArray getUpdatedPerformanceWaitAllPedestrianSec() {
+		return updatedPerformanceWaitAllPedestrianSec;
+	}
+
+	public void setUpdatedPerformanceWaitAllPedestrianSec(JsonArray updatedPerformanceWaitAllPedestrianSec) {
+		this.updatedPerformanceWaitAllPedestrianSec = updatedPerformanceWaitAllPedestrianSec;
+	}
+	@JsonIgnore
+	public void setUpdatedPerformanceWaitAllPedestrianSec(String o) {
+		this.updatedPerformanceWaitAllPedestrianSec = SimulationReport.staticSetUpdatedPerformanceWaitAllPedestrianSec(siteRequest_, o);
+	}
+	public static JsonArray staticSetUpdatedPerformanceWaitAllPedestrianSec(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonArray(o);
+		}
+		return null;
+	}
+	protected SimulationReport updatedPerformanceWaitAllPedestrianSecInit() {
+		Wrap<JsonArray> updatedPerformanceWaitAllPedestrianSecWrap = new Wrap<JsonArray>().var("updatedPerformanceWaitAllPedestrianSec");
+		if(updatedPerformanceWaitAllPedestrianSec == null) {
+			_updatedPerformanceWaitAllPedestrianSec(updatedPerformanceWaitAllPedestrianSecWrap);
+			setUpdatedPerformanceWaitAllPedestrianSec(updatedPerformanceWaitAllPedestrianSecWrap.o);
+		}
+		return (SimulationReport)this;
+	}
+
+	public static JsonArray staticSearchUpdatedPerformanceWaitAllPedestrianSec(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o;
+	}
+
+	public static String staticSearchStrUpdatedPerformanceWaitAllPedestrianSec(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqUpdatedPerformanceWaitAllPedestrianSec(SiteRequestEnUS siteRequest_, String o) {
+		return SimulationReport.staticSearchStrUpdatedPerformanceWaitAllPedestrianSec(siteRequest_, SimulationReport.staticSearchUpdatedPerformanceWaitAllPedestrianSec(siteRequest_, SimulationReport.staticSetUpdatedPerformanceWaitAllPedestrianSec(siteRequest_, o)));
+	}
+
+	///////////////////////////////////////////////////
+	// updatedPerformanceWaitAllVehiclePedestrianSec //
+	///////////////////////////////////////////////////
+
+
+	/**	 The entity updatedPerformanceWaitAllVehiclePedestrianSec
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected JsonArray updatedPerformanceWaitAllVehiclePedestrianSec;
+
+	/**	<br> The entity updatedPerformanceWaitAllVehiclePedestrianSec
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:updatedPerformanceWaitAllVehiclePedestrianSec">Find the entity updatedPerformanceWaitAllVehiclePedestrianSec in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _updatedPerformanceWaitAllVehiclePedestrianSec(Wrap<JsonArray> w);
+
+	public JsonArray getUpdatedPerformanceWaitAllVehiclePedestrianSec() {
+		return updatedPerformanceWaitAllVehiclePedestrianSec;
+	}
+
+	public void setUpdatedPerformanceWaitAllVehiclePedestrianSec(JsonArray updatedPerformanceWaitAllVehiclePedestrianSec) {
+		this.updatedPerformanceWaitAllVehiclePedestrianSec = updatedPerformanceWaitAllVehiclePedestrianSec;
+	}
+	@JsonIgnore
+	public void setUpdatedPerformanceWaitAllVehiclePedestrianSec(String o) {
+		this.updatedPerformanceWaitAllVehiclePedestrianSec = SimulationReport.staticSetUpdatedPerformanceWaitAllVehiclePedestrianSec(siteRequest_, o);
+	}
+	public static JsonArray staticSetUpdatedPerformanceWaitAllVehiclePedestrianSec(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonArray(o);
+		}
+		return null;
+	}
+	protected SimulationReport updatedPerformanceWaitAllVehiclePedestrianSecInit() {
+		Wrap<JsonArray> updatedPerformanceWaitAllVehiclePedestrianSecWrap = new Wrap<JsonArray>().var("updatedPerformanceWaitAllVehiclePedestrianSec");
+		if(updatedPerformanceWaitAllVehiclePedestrianSec == null) {
+			_updatedPerformanceWaitAllVehiclePedestrianSec(updatedPerformanceWaitAllVehiclePedestrianSecWrap);
+			setUpdatedPerformanceWaitAllVehiclePedestrianSec(updatedPerformanceWaitAllVehiclePedestrianSecWrap.o);
+		}
+		return (SimulationReport)this;
+	}
+
+	public static JsonArray staticSearchUpdatedPerformanceWaitAllVehiclePedestrianSec(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o;
+	}
+
+	public static String staticSearchStrUpdatedPerformanceWaitAllVehiclePedestrianSec(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqUpdatedPerformanceWaitAllVehiclePedestrianSec(SiteRequestEnUS siteRequest_, String o) {
+		return SimulationReport.staticSearchStrUpdatedPerformanceWaitAllVehiclePedestrianSec(siteRequest_, SimulationReport.staticSearchUpdatedPerformanceWaitAllVehiclePedestrianSec(siteRequest_, SimulationReport.staticSetUpdatedPerformanceWaitAllVehiclePedestrianSec(siteRequest_, o)));
+	}
+
 	//////////////
 	// initDeep //
 	//////////////
@@ -2419,12 +2673,16 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 				paramDemandScaleInit();
 				paramInitialParInit();
 				paramStepSizeInit();
-				paramUpdateStepSizeInit();
 				paramRunTimeInit();
 				paramItersPerParInit();
 				paramTotalIterNumInit();
 				updatedParametersInit();
 				updatedPerformanceInit();
+				updatedPerformanceWaitWestEastVehicleSecInit();
+				updatedPerformanceWaitSouthNorthVehicleSecInit();
+				updatedPerformanceWaitAllVehicleSecInit();
+				updatedPerformanceWaitAllPedestrianSecInit();
+				updatedPerformanceWaitAllVehiclePedestrianSecInit();
 				promise2.complete();
 			} catch(Exception ex) {
 				promise2.fail(ex);
@@ -2526,8 +2784,6 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 				return oSimulationReport.paramInitialPar;
 			case "paramStepSize":
 				return oSimulationReport.paramStepSize;
-			case "paramUpdateStepSize":
-				return oSimulationReport.paramUpdateStepSize;
 			case "paramRunTime":
 				return oSimulationReport.paramRunTime;
 			case "paramItersPerPar":
@@ -2538,6 +2794,16 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 				return oSimulationReport.updatedParameters;
 			case "updatedPerformance":
 				return oSimulationReport.updatedPerformance;
+			case "updatedPerformanceWaitWestEastVehicleSec":
+				return oSimulationReport.updatedPerformanceWaitWestEastVehicleSec;
+			case "updatedPerformanceWaitSouthNorthVehicleSec":
+				return oSimulationReport.updatedPerformanceWaitSouthNorthVehicleSec;
+			case "updatedPerformanceWaitAllVehicleSec":
+				return oSimulationReport.updatedPerformanceWaitAllVehicleSec;
+			case "updatedPerformanceWaitAllPedestrianSec":
+				return oSimulationReport.updatedPerformanceWaitAllPedestrianSec;
+			case "updatedPerformanceWaitAllVehiclePedestrianSec":
+				return oSimulationReport.updatedPerformanceWaitAllVehiclePedestrianSec;
 			default:
 				return super.obtainBaseModel(var);
 		}
@@ -2627,8 +2893,6 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return SimulationReport.staticSetParamInitialPar(siteRequest_, o);
 		case "paramStepSize":
 			return SimulationReport.staticSetParamStepSize(siteRequest_, o);
-		case "paramUpdateStepSize":
-			return SimulationReport.staticSetParamUpdateStepSize(siteRequest_, o);
 		case "paramRunTime":
 			return SimulationReport.staticSetParamRunTime(siteRequest_, o);
 		case "paramItersPerPar":
@@ -2639,6 +2903,16 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return SimulationReport.staticSetUpdatedParameters(siteRequest_, o);
 		case "updatedPerformance":
 			return SimulationReport.staticSetUpdatedPerformance(siteRequest_, o);
+		case "updatedPerformanceWaitWestEastVehicleSec":
+			return SimulationReport.staticSetUpdatedPerformanceWaitWestEastVehicleSec(siteRequest_, o);
+		case "updatedPerformanceWaitSouthNorthVehicleSec":
+			return SimulationReport.staticSetUpdatedPerformanceWaitSouthNorthVehicleSec(siteRequest_, o);
+		case "updatedPerformanceWaitAllVehicleSec":
+			return SimulationReport.staticSetUpdatedPerformanceWaitAllVehicleSec(siteRequest_, o);
+		case "updatedPerformanceWaitAllPedestrianSec":
+			return SimulationReport.staticSetUpdatedPerformanceWaitAllPedestrianSec(siteRequest_, o);
+		case "updatedPerformanceWaitAllVehiclePedestrianSec":
+			return SimulationReport.staticSetUpdatedPerformanceWaitAllVehiclePedestrianSec(siteRequest_, o);
 			default:
 				return BaseModel.staticSetBaseModel(entityVar,  siteRequest_, o);
 		}
@@ -2697,8 +2971,6 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return SimulationReport.staticSearchParamInitialPar(siteRequest_, (BigDecimal)o);
 		case "paramStepSize":
 			return SimulationReport.staticSearchParamStepSize(siteRequest_, (BigDecimal)o);
-		case "paramUpdateStepSize":
-			return SimulationReport.staticSearchParamUpdateStepSize(siteRequest_, (Integer)o);
 		case "paramRunTime":
 			return SimulationReport.staticSearchParamRunTime(siteRequest_, (Integer)o);
 		case "paramItersPerPar":
@@ -2709,6 +2981,16 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return SimulationReport.staticSearchUpdatedParameters(siteRequest_, (JsonArray)o);
 		case "updatedPerformance":
 			return SimulationReport.staticSearchUpdatedPerformance(siteRequest_, (JsonArray)o);
+		case "updatedPerformanceWaitWestEastVehicleSec":
+			return SimulationReport.staticSearchUpdatedPerformanceWaitWestEastVehicleSec(siteRequest_, (JsonArray)o);
+		case "updatedPerformanceWaitSouthNorthVehicleSec":
+			return SimulationReport.staticSearchUpdatedPerformanceWaitSouthNorthVehicleSec(siteRequest_, (JsonArray)o);
+		case "updatedPerformanceWaitAllVehicleSec":
+			return SimulationReport.staticSearchUpdatedPerformanceWaitAllVehicleSec(siteRequest_, (JsonArray)o);
+		case "updatedPerformanceWaitAllPedestrianSec":
+			return SimulationReport.staticSearchUpdatedPerformanceWaitAllPedestrianSec(siteRequest_, (JsonArray)o);
+		case "updatedPerformanceWaitAllVehiclePedestrianSec":
+			return SimulationReport.staticSearchUpdatedPerformanceWaitAllVehiclePedestrianSec(siteRequest_, (JsonArray)o);
 			default:
 				return BaseModel.staticSearchBaseModel(entityVar,  siteRequest_, o);
 		}
@@ -2762,13 +3044,11 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		case "paramPedestrianQueueThresholdWestEast":
 			return SimulationReport.staticSearchStrParamPedestrianQueueThresholdWestEast(siteRequest_, (Double)o);
 		case "paramDemandScale":
-			return SimulationReport.staticSearchStrParamDemandScale(siteRequest_, (Double)o);
+			return SimulationReport.staticSearchStrParamDemandScale(siteRequest_, (BigDecimal)o);
 		case "paramInitialPar":
 			return SimulationReport.staticSearchStrParamInitialPar(siteRequest_, (BigDecimal)o);
 		case "paramStepSize":
 			return SimulationReport.staticSearchStrParamStepSize(siteRequest_, (Double)o);
-		case "paramUpdateStepSize":
-			return SimulationReport.staticSearchStrParamUpdateStepSize(siteRequest_, (Integer)o);
 		case "paramRunTime":
 			return SimulationReport.staticSearchStrParamRunTime(siteRequest_, (Integer)o);
 		case "paramItersPerPar":
@@ -2779,6 +3059,16 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return SimulationReport.staticSearchStrUpdatedParameters(siteRequest_, (JsonArray)o);
 		case "updatedPerformance":
 			return SimulationReport.staticSearchStrUpdatedPerformance(siteRequest_, (JsonArray)o);
+		case "updatedPerformanceWaitWestEastVehicleSec":
+			return SimulationReport.staticSearchStrUpdatedPerformanceWaitWestEastVehicleSec(siteRequest_, (JsonArray)o);
+		case "updatedPerformanceWaitSouthNorthVehicleSec":
+			return SimulationReport.staticSearchStrUpdatedPerformanceWaitSouthNorthVehicleSec(siteRequest_, (JsonArray)o);
+		case "updatedPerformanceWaitAllVehicleSec":
+			return SimulationReport.staticSearchStrUpdatedPerformanceWaitAllVehicleSec(siteRequest_, (JsonArray)o);
+		case "updatedPerformanceWaitAllPedestrianSec":
+			return SimulationReport.staticSearchStrUpdatedPerformanceWaitAllPedestrianSec(siteRequest_, (JsonArray)o);
+		case "updatedPerformanceWaitAllVehiclePedestrianSec":
+			return SimulationReport.staticSearchStrUpdatedPerformanceWaitAllVehiclePedestrianSec(siteRequest_, (JsonArray)o);
 			default:
 				return BaseModel.staticSearchStrBaseModel(entityVar,  siteRequest_, o);
 		}
@@ -2837,8 +3127,6 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return SimulationReport.staticSearchFqParamInitialPar(siteRequest_, o);
 		case "paramStepSize":
 			return SimulationReport.staticSearchFqParamStepSize(siteRequest_, o);
-		case "paramUpdateStepSize":
-			return SimulationReport.staticSearchFqParamUpdateStepSize(siteRequest_, o);
 		case "paramRunTime":
 			return SimulationReport.staticSearchFqParamRunTime(siteRequest_, o);
 		case "paramItersPerPar":
@@ -2849,6 +3137,16 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return SimulationReport.staticSearchFqUpdatedParameters(siteRequest_, o);
 		case "updatedPerformance":
 			return SimulationReport.staticSearchFqUpdatedPerformance(siteRequest_, o);
+		case "updatedPerformanceWaitWestEastVehicleSec":
+			return SimulationReport.staticSearchFqUpdatedPerformanceWaitWestEastVehicleSec(siteRequest_, o);
+		case "updatedPerformanceWaitSouthNorthVehicleSec":
+			return SimulationReport.staticSearchFqUpdatedPerformanceWaitSouthNorthVehicleSec(siteRequest_, o);
+		case "updatedPerformanceWaitAllVehicleSec":
+			return SimulationReport.staticSearchFqUpdatedPerformanceWaitAllVehicleSec(siteRequest_, o);
+		case "updatedPerformanceWaitAllPedestrianSec":
+			return SimulationReport.staticSearchFqUpdatedPerformanceWaitAllPedestrianSec(siteRequest_, o);
+		case "updatedPerformanceWaitAllVehiclePedestrianSec":
+			return SimulationReport.staticSearchFqUpdatedPerformanceWaitAllVehiclePedestrianSec(siteRequest_, o);
 			default:
 				return BaseModel.staticSearchFqBaseModel(entityVar,  siteRequest_, o);
 		}
@@ -3018,12 +3316,18 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 				saves.add("paramPedestrianQueueThresholdWestEast");
 				return val;
 			} else if("paramdemandscale".equals(varLower)) {
-				if(val instanceof String) {
-					setParamDemandScale((String)val);
-				} else if(val instanceof Number) {
-					setParamDemandScale(new BigDecimal(((Number)val).doubleValue()));
+				if(val instanceof List<?>) {
+					((List<BigDecimal>)val).stream().forEach(v -> addParamDemandScale(v));
+				} else if(val instanceof JsonArray) {
+					((JsonArray)val).stream().forEach(v -> setParamDemandScale(v.toString()));
+				} else if(val instanceof BigDecimal[]) {
+					Arrays.asList((BigDecimal[])val).stream().forEach(v -> setParamDemandScale((BigDecimal)v));
+				} else if(val instanceof Number[]) {
+					Arrays.asList((Number[])val).stream().forEach(v -> setParamDemandScale((Number)v));
 				}
-				saves.add("paramDemandScale");
+				if(!saves.contains("paramDemandScale")) {
+					saves.add("paramDemandScale");
+				}
 				return val;
 			} else if("paramstepsize".equals(varLower)) {
 				if(val instanceof String) {
@@ -3032,14 +3336,6 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 					setParamStepSize(new BigDecimal(((Number)val).doubleValue()));
 				}
 				saves.add("paramStepSize");
-				return val;
-			} else if("paramupdatestepsize".equals(varLower)) {
-				if(val instanceof Integer) {
-					setParamUpdateStepSize((Integer)val);
-				} else {
-					setParamUpdateStepSize(val == null ? null : val.toString());
-				}
-				saves.add("paramUpdateStepSize");
 				return val;
 			} else if("paramruntime".equals(varLower)) {
 				if(val instanceof Integer) {
@@ -3165,7 +3461,11 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			doc.put("paramPedestrianQueueThresholdWestEast_docvalues_double", paramPedestrianQueueThresholdWestEast.doubleValue());
 		}
 		if(paramDemandScale != null) {
-			doc.put("paramDemandScale_docvalues_double", paramDemandScale.doubleValue());
+			JsonArray l = new JsonArray();
+			doc.put("paramDemandScale_docvalues_doubles", l);
+			for(BigDecimal o : paramDemandScale) {
+				l.add(o);
+			}
 		}
 		if(paramInitialPar != null) {
 			JsonArray l = new JsonArray();
@@ -3176,9 +3476,6 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		}
 		if(paramStepSize != null) {
 			doc.put("paramStepSize_docvalues_double", paramStepSize.doubleValue());
-		}
-		if(paramUpdateStepSize != null) {
-			doc.put("paramUpdateStepSize_docvalues_int", paramUpdateStepSize);
 		}
 		if(paramRunTime != null) {
 			doc.put("paramRunTime_docvalues_int", paramRunTime);
@@ -3194,6 +3491,21 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		}
 		if(updatedPerformance != null) {
 			doc.put("updatedPerformance_docvalues_string", updatedPerformance.toString());
+		}
+		if(updatedPerformanceWaitWestEastVehicleSec != null) {
+			doc.put("updatedPerformanceWaitWestEastVehicleSec_docvalues_string", updatedPerformanceWaitWestEastVehicleSec.toString());
+		}
+		if(updatedPerformanceWaitSouthNorthVehicleSec != null) {
+			doc.put("updatedPerformanceWaitSouthNorthVehicleSec_docvalues_string", updatedPerformanceWaitSouthNorthVehicleSec.toString());
+		}
+		if(updatedPerformanceWaitAllVehicleSec != null) {
+			doc.put("updatedPerformanceWaitAllVehicleSec_docvalues_string", updatedPerformanceWaitAllVehicleSec.toString());
+		}
+		if(updatedPerformanceWaitAllPedestrianSec != null) {
+			doc.put("updatedPerformanceWaitAllPedestrianSec_docvalues_string", updatedPerformanceWaitAllPedestrianSec.toString());
+		}
+		if(updatedPerformanceWaitAllVehiclePedestrianSec != null) {
+			doc.put("updatedPerformanceWaitAllVehiclePedestrianSec_docvalues_string", updatedPerformanceWaitAllVehiclePedestrianSec.toString());
 		}
 		super.indexBaseModel(doc);
 
@@ -3240,13 +3552,11 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			case "paramPedestrianQueueThresholdWestEast":
 				return "paramPedestrianQueueThresholdWestEast_docvalues_double";
 			case "paramDemandScale":
-				return "paramDemandScale_docvalues_double";
+				return "paramDemandScale_docvalues_doubles";
 			case "paramInitialPar":
 				return "paramInitialPar_docvalues_doubles";
 			case "paramStepSize":
 				return "paramStepSize_docvalues_double";
-			case "paramUpdateStepSize":
-				return "paramUpdateStepSize_docvalues_int";
 			case "paramRunTime":
 				return "paramRunTime_docvalues_int";
 			case "paramItersPerPar":
@@ -3257,6 +3567,16 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 				return "updatedParameters_docvalues_string";
 			case "updatedPerformance":
 				return "updatedPerformance_docvalues_string";
+			case "updatedPerformanceWaitWestEastVehicleSec":
+				return "updatedPerformanceWaitWestEastVehicleSec_docvalues_string";
+			case "updatedPerformanceWaitSouthNorthVehicleSec":
+				return "updatedPerformanceWaitSouthNorthVehicleSec_docvalues_string";
+			case "updatedPerformanceWaitAllVehicleSec":
+				return "updatedPerformanceWaitAllVehicleSec_docvalues_string";
+			case "updatedPerformanceWaitAllPedestrianSec":
+				return "updatedPerformanceWaitAllPedestrianSec_docvalues_string";
+			case "updatedPerformanceWaitAllVehiclePedestrianSec":
+				return "updatedPerformanceWaitAllVehiclePedestrianSec_docvalues_string";
 			default:
 				return BaseModel.varStoredBaseModel(entityVar);
 		}
@@ -3303,13 +3623,11 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			case "paramPedestrianQueueThresholdWestEast":
 				return "paramPedestrianQueueThresholdWestEast_docvalues_double";
 			case "paramDemandScale":
-				return "paramDemandScale_docvalues_double";
+				return "paramDemandScale_docvalues_doubles";
 			case "paramInitialPar":
 				return "paramInitialPar_docvalues_doubles";
 			case "paramStepSize":
 				return "paramStepSize_docvalues_double";
-			case "paramUpdateStepSize":
-				return "paramUpdateStepSize_docvalues_int";
 			case "paramRunTime":
 				return "paramRunTime_docvalues_int";
 			case "paramItersPerPar":
@@ -3320,6 +3638,16 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 				return "updatedParameters_docvalues_string";
 			case "updatedPerformance":
 				return "updatedPerformance_docvalues_string";
+			case "updatedPerformanceWaitWestEastVehicleSec":
+				return "updatedPerformanceWaitWestEastVehicleSec_docvalues_string";
+			case "updatedPerformanceWaitSouthNorthVehicleSec":
+				return "updatedPerformanceWaitSouthNorthVehicleSec_docvalues_string";
+			case "updatedPerformanceWaitAllVehicleSec":
+				return "updatedPerformanceWaitAllVehicleSec_docvalues_string";
+			case "updatedPerformanceWaitAllPedestrianSec":
+				return "updatedPerformanceWaitAllPedestrianSec_docvalues_string";
+			case "updatedPerformanceWaitAllVehiclePedestrianSec":
+				return "updatedPerformanceWaitAllVehiclePedestrianSec_docvalues_string";
 			default:
 				return BaseModel.varIndexedBaseModel(entityVar);
 		}
@@ -3365,14 +3693,12 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 				return "paramPedestrianQueueThresholdNorthSouth";
 			case "paramPedestrianQueueThresholdWestEast_docvalues_double":
 				return "paramPedestrianQueueThresholdWestEast";
-			case "paramDemandScale_docvalues_double":
+			case "paramDemandScale_docvalues_doubles":
 				return "paramDemandScale";
 			case "paramInitialPar_docvalues_doubles":
 				return "paramInitialPar";
 			case "paramStepSize_docvalues_double":
 				return "paramStepSize";
-			case "paramUpdateStepSize_docvalues_int":
-				return "paramUpdateStepSize";
 			case "paramRunTime_docvalues_int":
 				return "paramRunTime";
 			case "paramItersPerPar_docvalues_int":
@@ -3383,6 +3709,16 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 				return "updatedParameters";
 			case "updatedPerformance_docvalues_string":
 				return "updatedPerformance";
+			case "updatedPerformanceWaitWestEastVehicleSec_docvalues_string":
+				return "updatedPerformanceWaitWestEastVehicleSec";
+			case "updatedPerformanceWaitSouthNorthVehicleSec_docvalues_string":
+				return "updatedPerformanceWaitSouthNorthVehicleSec";
+			case "updatedPerformanceWaitAllVehicleSec_docvalues_string":
+				return "updatedPerformanceWaitAllVehicleSec";
+			case "updatedPerformanceWaitAllPedestrianSec_docvalues_string":
+				return "updatedPerformanceWaitAllPedestrianSec";
+			case "updatedPerformanceWaitAllVehiclePedestrianSec_docvalues_string":
+				return "updatedPerformanceWaitAllVehiclePedestrianSec";
 			default:
 				return BaseModel.searchVarBaseModel(searchVar);
 		}
@@ -3433,17 +3769,23 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		oSimulationReport.setParamVehicleQueueThresholdSouthNorth(Optional.ofNullable(doc.get("paramVehicleQueueThresholdSouthNorth_docvalues_double")).map(v -> v.toString()).orElse(null));
 		oSimulationReport.setParamPedestrianQueueThresholdNorthSouth(Optional.ofNullable(doc.get("paramPedestrianQueueThresholdNorthSouth_docvalues_double")).map(v -> v.toString()).orElse(null));
 		oSimulationReport.setParamPedestrianQueueThresholdWestEast(Optional.ofNullable(doc.get("paramPedestrianQueueThresholdWestEast_docvalues_double")).map(v -> v.toString()).orElse(null));
-		oSimulationReport.setParamDemandScale(Optional.ofNullable(doc.get("paramDemandScale_docvalues_double")).map(v -> v.toString()).orElse(null));
+		Optional.ofNullable((List<?>)doc.get("paramDemandScale_docvalues_doubles")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
+			oSimulationReport.addParamDemandScale(v.toString());
+		});
 		Optional.ofNullable((List<?>)doc.get("paramInitialPar_docvalues_doubles")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
 			oSimulationReport.addParamInitialPar(v.toString());
 		});
 		oSimulationReport.setParamStepSize(Optional.ofNullable(doc.get("paramStepSize_docvalues_double")).map(v -> v.toString()).orElse(null));
-		oSimulationReport.setParamUpdateStepSize(Optional.ofNullable(doc.get("paramUpdateStepSize_docvalues_int")).map(v -> v.toString()).orElse(null));
 		oSimulationReport.setParamRunTime(Optional.ofNullable(doc.get("paramRunTime_docvalues_int")).map(v -> v.toString()).orElse(null));
 		oSimulationReport.setParamItersPerPar(Optional.ofNullable(doc.get("paramItersPerPar_docvalues_int")).map(v -> v.toString()).orElse(null));
 		oSimulationReport.setParamTotalIterNum(Optional.ofNullable(doc.get("paramTotalIterNum_docvalues_int")).map(v -> v.toString()).orElse(null));
 		oSimulationReport.setUpdatedParameters(Optional.ofNullable(doc.get("updatedParameters_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSimulationReport.setUpdatedPerformance(Optional.ofNullable(doc.get("updatedPerformance_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oSimulationReport.setUpdatedPerformanceWaitWestEastVehicleSec(Optional.ofNullable(doc.get("updatedPerformanceWaitWestEastVehicleSec_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oSimulationReport.setUpdatedPerformanceWaitSouthNorthVehicleSec(Optional.ofNullable(doc.get("updatedPerformanceWaitSouthNorthVehicleSec_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oSimulationReport.setUpdatedPerformanceWaitAllVehicleSec(Optional.ofNullable(doc.get("updatedPerformanceWaitAllVehicleSec_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oSimulationReport.setUpdatedPerformanceWaitAllPedestrianSec(Optional.ofNullable(doc.get("updatedPerformanceWaitAllPedestrianSec_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oSimulationReport.setUpdatedPerformanceWaitAllVehiclePedestrianSec(Optional.ofNullable(doc.get("updatedPerformanceWaitAllVehiclePedestrianSec_docvalues_string")).map(v -> v.toString()).orElse(null));
 
 		super.storeBaseModel(doc);
 	}
@@ -3501,8 +3843,6 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 				apiRequest.addVars("paramInitialPar");
 			if(!Objects.equals(paramStepSize, original.getParamStepSize()))
 				apiRequest.addVars("paramStepSize");
-			if(!Objects.equals(paramUpdateStepSize, original.getParamUpdateStepSize()))
-				apiRequest.addVars("paramUpdateStepSize");
 			if(!Objects.equals(paramRunTime, original.getParamRunTime()))
 				apiRequest.addVars("paramRunTime");
 			if(!Objects.equals(paramItersPerPar, original.getParamItersPerPar()))
@@ -3513,6 +3853,16 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 				apiRequest.addVars("updatedParameters");
 			if(!Objects.equals(updatedPerformance, original.getUpdatedPerformance()))
 				apiRequest.addVars("updatedPerformance");
+			if(!Objects.equals(updatedPerformanceWaitWestEastVehicleSec, original.getUpdatedPerformanceWaitWestEastVehicleSec()))
+				apiRequest.addVars("updatedPerformanceWaitWestEastVehicleSec");
+			if(!Objects.equals(updatedPerformanceWaitSouthNorthVehicleSec, original.getUpdatedPerformanceWaitSouthNorthVehicleSec()))
+				apiRequest.addVars("updatedPerformanceWaitSouthNorthVehicleSec");
+			if(!Objects.equals(updatedPerformanceWaitAllVehicleSec, original.getUpdatedPerformanceWaitAllVehicleSec()))
+				apiRequest.addVars("updatedPerformanceWaitAllVehicleSec");
+			if(!Objects.equals(updatedPerformanceWaitAllPedestrianSec, original.getUpdatedPerformanceWaitAllPedestrianSec()))
+				apiRequest.addVars("updatedPerformanceWaitAllPedestrianSec");
+			if(!Objects.equals(updatedPerformanceWaitAllVehiclePedestrianSec, original.getUpdatedPerformanceWaitAllVehiclePedestrianSec()))
+				apiRequest.addVars("updatedPerformanceWaitAllVehiclePedestrianSec");
 			super.apiRequestBaseModel();
 		}
 	}
@@ -3546,12 +3896,16 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		sb.append(Optional.ofNullable(paramDemandScale).map(v -> "paramDemandScale: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(paramInitialPar).map(v -> "paramInitialPar: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(paramStepSize).map(v -> "paramStepSize: " + v + "\n").orElse(""));
-		sb.append(Optional.ofNullable(paramUpdateStepSize).map(v -> "paramUpdateStepSize: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(paramRunTime).map(v -> "paramRunTime: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(paramItersPerPar).map(v -> "paramItersPerPar: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(paramTotalIterNum).map(v -> "paramTotalIterNum: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(updatedParameters).map(v -> "updatedParameters: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(updatedPerformance).map(v -> "updatedPerformance: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(updatedPerformanceWaitWestEastVehicleSec).map(v -> "updatedPerformanceWaitWestEastVehicleSec: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(updatedPerformanceWaitSouthNorthVehicleSec).map(v -> "updatedPerformanceWaitSouthNorthVehicleSec: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(updatedPerformanceWaitAllVehicleSec).map(v -> "updatedPerformanceWaitAllVehicleSec: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(updatedPerformanceWaitAllPedestrianSec).map(v -> "updatedPerformanceWaitAllPedestrianSec: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(updatedPerformanceWaitAllVehiclePedestrianSec).map(v -> "updatedPerformanceWaitAllVehiclePedestrianSec: " + v + "\n").orElse(""));
 		return sb.toString();
 	}
 
@@ -3580,12 +3934,16 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 	public static final String VAR_paramDemandScale = "paramDemandScale";
 	public static final String VAR_paramInitialPar = "paramInitialPar";
 	public static final String VAR_paramStepSize = "paramStepSize";
-	public static final String VAR_paramUpdateStepSize = "paramUpdateStepSize";
 	public static final String VAR_paramRunTime = "paramRunTime";
 	public static final String VAR_paramItersPerPar = "paramItersPerPar";
 	public static final String VAR_paramTotalIterNum = "paramTotalIterNum";
 	public static final String VAR_updatedParameters = "updatedParameters";
 	public static final String VAR_updatedPerformance = "updatedPerformance";
+	public static final String VAR_updatedPerformanceWaitWestEastVehicleSec = "updatedPerformanceWaitWestEastVehicleSec";
+	public static final String VAR_updatedPerformanceWaitSouthNorthVehicleSec = "updatedPerformanceWaitSouthNorthVehicleSec";
+	public static final String VAR_updatedPerformanceWaitAllVehicleSec = "updatedPerformanceWaitAllVehicleSec";
+	public static final String VAR_updatedPerformanceWaitAllPedestrianSec = "updatedPerformanceWaitAllPedestrianSec";
+	public static final String VAR_updatedPerformanceWaitAllVehiclePedestrianSec = "updatedPerformanceWaitAllVehiclePedestrianSec";
 
 	public static List<String> varsQForClass() {
 		return SimulationReport.varsQSimulationReport(new ArrayList<String>());
@@ -3621,12 +3979,16 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		vars.add(VAR_paramDemandScale);
 		vars.add(VAR_paramInitialPar);
 		vars.add(VAR_paramStepSize);
-		vars.add(VAR_paramUpdateStepSize);
 		vars.add(VAR_paramRunTime);
 		vars.add(VAR_paramItersPerPar);
 		vars.add(VAR_paramTotalIterNum);
 		vars.add(VAR_updatedParameters);
 		vars.add(VAR_updatedPerformance);
+		vars.add(VAR_updatedPerformanceWaitWestEastVehicleSec);
+		vars.add(VAR_updatedPerformanceWaitSouthNorthVehicleSec);
+		vars.add(VAR_updatedPerformanceWaitAllVehicleSec);
+		vars.add(VAR_updatedPerformanceWaitAllPedestrianSec);
+		vars.add(VAR_updatedPerformanceWaitAllVehiclePedestrianSec);
 		BaseModel.varsFqBaseModel(vars);
 		return vars;
 	}
@@ -3651,14 +4013,17 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		vars.add(VAR_paramVehicleQueueThresholdSouthNorth);
 		vars.add(VAR_paramPedestrianQueueThresholdNorthSouth);
 		vars.add(VAR_paramPedestrianQueueThresholdWestEast);
-		vars.add(VAR_paramDemandScale);
 		vars.add(VAR_paramStepSize);
-		vars.add(VAR_paramUpdateStepSize);
 		vars.add(VAR_paramRunTime);
 		vars.add(VAR_paramItersPerPar);
 		vars.add(VAR_paramTotalIterNum);
 		vars.add(VAR_updatedParameters);
 		vars.add(VAR_updatedPerformance);
+		vars.add(VAR_updatedPerformanceWaitWestEastVehicleSec);
+		vars.add(VAR_updatedPerformanceWaitSouthNorthVehicleSec);
+		vars.add(VAR_updatedPerformanceWaitAllVehicleSec);
+		vars.add(VAR_updatedPerformanceWaitAllPedestrianSec);
+		vars.add(VAR_updatedPerformanceWaitAllVehiclePedestrianSec);
 		BaseModel.varsRangeBaseModel(vars);
 		return vars;
 	}
@@ -3687,12 +4052,16 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 	public static final String DISPLAY_NAME_paramDemandScale = "demand scale";
 	public static final String DISPLAY_NAME_paramInitialPar = "initial params";
 	public static final String DISPLAY_NAME_paramStepSize = "Simulation time step (sec)";
-	public static final String DISPLAY_NAME_paramUpdateStepSize = "update step size";
 	public static final String DISPLAY_NAME_paramRunTime = "time for each round of traffic simulation (sec)";
 	public static final String DISPLAY_NAME_paramItersPerPar = "Number of simulation repetitions with same input (for statistical accuracy)";
 	public static final String DISPLAY_NAME_paramTotalIterNum = "Number of parameter update iterations before output";
 	public static final String DISPLAY_NAME_updatedParameters = "updated parameters";
 	public static final String DISPLAY_NAME_updatedPerformance = "updated performance";
+	public static final String DISPLAY_NAME_updatedPerformanceWaitWestEastVehicleSec = "Average waiting time for WEST-EAST vehicles (sec)";
+	public static final String DISPLAY_NAME_updatedPerformanceWaitSouthNorthVehicleSec = "Average waiting time for SOUTH-NORTH vehicles (sec)";
+	public static final String DISPLAY_NAME_updatedPerformanceWaitAllVehicleSec = "Average waiting time for all vehicles (sec)";
+	public static final String DISPLAY_NAME_updatedPerformanceWaitAllPedestrianSec = "Average waiting time for pedestrians (sec)";
+	public static final String DISPLAY_NAME_updatedPerformanceWaitAllVehiclePedestrianSec = "Average waiting time for vehicles and pedestrians (sec)";
 
 	public static String displayNameForClass(String var) {
 		return SimulationReport.displayNameSimulationReport(var);
@@ -3747,8 +4116,6 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return DISPLAY_NAME_paramInitialPar;
 		case VAR_paramStepSize:
 			return DISPLAY_NAME_paramStepSize;
-		case VAR_paramUpdateStepSize:
-			return DISPLAY_NAME_paramUpdateStepSize;
 		case VAR_paramRunTime:
 			return DISPLAY_NAME_paramRunTime;
 		case VAR_paramItersPerPar:
@@ -3759,6 +4126,16 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return DISPLAY_NAME_updatedParameters;
 		case VAR_updatedPerformance:
 			return DISPLAY_NAME_updatedPerformance;
+		case VAR_updatedPerformanceWaitWestEastVehicleSec:
+			return DISPLAY_NAME_updatedPerformanceWaitWestEastVehicleSec;
+		case VAR_updatedPerformanceWaitSouthNorthVehicleSec:
+			return DISPLAY_NAME_updatedPerformanceWaitSouthNorthVehicleSec;
+		case VAR_updatedPerformanceWaitAllVehicleSec:
+			return DISPLAY_NAME_updatedPerformanceWaitAllVehicleSec;
+		case VAR_updatedPerformanceWaitAllPedestrianSec:
+			return DISPLAY_NAME_updatedPerformanceWaitAllPedestrianSec;
+		case VAR_updatedPerformanceWaitAllVehiclePedestrianSec:
+			return DISPLAY_NAME_updatedPerformanceWaitAllVehiclePedestrianSec;
 		default:
 			return BaseModel.displayNameBaseModel(var);
 		}
@@ -3828,13 +4205,11 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		case VAR_paramPedestrianQueueThresholdWestEast:
 			return "BigDecimal";
 		case VAR_paramDemandScale:
-			return "BigDecimal";
+			return "List";
 		case VAR_paramInitialPar:
 			return "List";
 		case VAR_paramStepSize:
 			return "BigDecimal";
-		case VAR_paramUpdateStepSize:
-			return "Integer";
 		case VAR_paramRunTime:
 			return "Integer";
 		case VAR_paramItersPerPar:
@@ -3845,19 +4220,29 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return "JsonArray";
 		case VAR_updatedPerformance:
 			return "JsonArray";
+		case VAR_updatedPerformanceWaitWestEastVehicleSec:
+			return "JsonArray";
+		case VAR_updatedPerformanceWaitSouthNorthVehicleSec:
+			return "JsonArray";
+		case VAR_updatedPerformanceWaitAllVehicleSec:
+			return "JsonArray";
+		case VAR_updatedPerformanceWaitAllPedestrianSec:
+			return "JsonArray";
+		case VAR_updatedPerformanceWaitAllVehiclePedestrianSec:
+			return "JsonArray";
 			default:
 				return BaseModel.classSimpleNameBaseModel(var);
 		}
 	}
 
-	public static Integer htmlColumnSimulationReport(String var) {
+	public static Integer htmColumnSimulationReport(String var) {
 		switch(var) {
 			default:
-				return BaseModel.htmlColumnBaseModel(var);
+				return BaseModel.htmColumnBaseModel(var);
 		}
 	}
 
-	public static Integer htmlRowSimulationReport(String var) {
+	public static Integer htmRowSimulationReport(String var) {
 		switch(var) {
 		case VAR_simulationKey:
 			return 3;
@@ -3905,14 +4290,22 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return 12;
 		case VAR_updatedParameters:
 			return 13;
-		case VAR_updatedPerformance:
-			return 14;
+		case VAR_updatedPerformanceWaitWestEastVehicleSec:
+			return 15;
+		case VAR_updatedPerformanceWaitSouthNorthVehicleSec:
+			return 16;
+		case VAR_updatedPerformanceWaitAllVehicleSec:
+			return 17;
+		case VAR_updatedPerformanceWaitAllPedestrianSec:
+			return 18;
+		case VAR_updatedPerformanceWaitAllVehiclePedestrianSec:
+			return 18;
 			default:
-				return BaseModel.htmlRowBaseModel(var);
+				return BaseModel.htmRowBaseModel(var);
 		}
 	}
 
-	public static Integer htmlCellSimulationReport(String var) {
+	public static Integer htmCellSimulationReport(String var) {
 		switch(var) {
 		case VAR_simulationKey:
 			return 1;
@@ -3960,10 +4353,18 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return 2;
 		case VAR_updatedParameters:
 			return 1;
-		case VAR_updatedPerformance:
+		case VAR_updatedPerformanceWaitWestEastVehicleSec:
+			return 1;
+		case VAR_updatedPerformanceWaitSouthNorthVehicleSec:
+			return 1;
+		case VAR_updatedPerformanceWaitAllVehicleSec:
+			return 1;
+		case VAR_updatedPerformanceWaitAllPedestrianSec:
+			return 1;
+		case VAR_updatedPerformanceWaitAllVehiclePedestrianSec:
 			return 1;
 			default:
-				return BaseModel.htmlCellBaseModel(var);
+				return BaseModel.htmCellBaseModel(var);
 		}
 	}
 

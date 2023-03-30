@@ -23,9 +23,9 @@ import org.computate.search.serialize.ComputateZonedDateTimeSerializer;
 import org.computate.search.tool.XmlTool;
 import org.computate.search.wrap.Wrap;
 import org.computate.smartvillageview.enus.config.ConfigKeys;
-import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
-import org.computate.smartvillageview.enus.model.page.SitePage;
 import org.computate.smartvillageview.enus.model.htm.SiteHtm;
+import org.computate.smartvillageview.enus.model.page.SitePage;
+import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.vertx.config.ComputateConfigKeys;
 
 import com.github.jknack.handlebars.Context;
@@ -44,17 +44,20 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.client.WebClient;
 import io.vertx.ext.web.templ.handlebars.HandlebarsTemplateEngine;
+import io.vertx.kafka.client.producer.KafkaProducer;
+import io.vertx.kafka.client.producer.KafkaProducerRecord;
 
 public class SitePageReader extends SitePageReaderGen<Object> {
 
 	private Pattern PATTERN_HEADER = Pattern.compile("^h\\d+$");
 
-	public SitePageReader(Vertx vertx, WorkerExecutor workerExecutor, SiteRequestEnUS siteRequest, JsonObject config) {
+	public SitePageReader(Vertx vertx, WorkerExecutor workerExecutor, KafkaProducer<String, String> kafkaProducer, SiteRequestEnUS siteRequest, JsonObject config) {
 		super();
 		setSiteRequest_(siteRequest);
 		setConfig(config);
 		setVertx(vertx);
 		setWorkerExecutor(workerExecutor);
+		setKafkaProducer(kafkaProducer);
 	}
 
 	public SitePageReader() {
@@ -74,6 +77,9 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 
 	protected void _webClient(Wrap<WebClient> w) {
 		w.o(siteRequest_.getWebClient());
+	}
+
+	protected void _kafkaProducer(Wrap<KafkaProducer<String, String>> w) {
 	}
 
 	protected void _vertx(Wrap<Vertx> w) {
@@ -145,55 +151,73 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 	 * Val.Complete.enUS:Importing %s data completed. 
 	 * Val.Fail.enUS:Importing %s data failed. 
 	 */
+	public Future<Void> deletePageData(ZonedDateTime now) {
+		Promise<Void> promise = Promise.promise();
+		String solrHostName = config.getString(ComputateConfigKeys.SOLR_HOST_NAME);
+		Integer solrPort = config.getInteger(ComputateConfigKeys.SOLR_PORT);
+		String solrCollection = config.getString(ComputateConfigKeys.SOLR_COLLECTION);
+		Boolean solrSsl = config.getBoolean(ConfigKeys.SOLR_SSL);
+		String solrRequestUri = String.format("/solr/%s/update%s", solrCollection, "?softCommit=true&overwrite=true&wt=json");
+		String deleteQuery = String.format("classSimpleName_docvalues_string:(%s %s) AND created_docvalues_date:[* TO %s]", SitePage.CLASS_SIMPLE_NAME, SiteHtm.CLASS_SIMPLE_NAME, SiteHtm.staticSearchStrCreated(null, SiteHtm.staticSearchCreated(null, now)));
+		String deleteXml = String.format("<delete><query>%s</query></delete>", deleteQuery);
+		webClient.post(solrPort, solrHostName, solrRequestUri)
+				.ssl(solrSsl)
+				.putHeader("Content-Type", "text/xml")
+				.sendBuffer(Buffer.buffer().appendString(deleteXml))
+				.onSuccess(d -> {
+			try {
+				promise.complete();
+			} catch(Exception ex) {
+				LOG.error(String.format("Could not read response from Solr: http://%s:%s%s", solrHostName, solrPort, solrRequestUri), ex);
+				promise.fail(ex);
+			}
+		}).onFailure(ex -> {
+			LOG.error(String.format("Search failed. "), new RuntimeException(ex));
+			promise.fail(ex);
+		});
+		return promise.future();
+	}
+
+	/**
+	 * Description: Import Site HTML data
+	 * Val.Complete.enUS:Importing %s data completed. 
+	 * Val.Fail.enUS:Importing %s data failed. 
+	 */
 	public Future<Void> importDataSitePage() {
 		Promise<Void> promise = Promise.promise();
 		ZonedDateTime now = ZonedDateTime.now(ZoneId.of(config.getString(ConfigKeys.SITE_ZONE)));
-		i18nGenerator().onSuccess(i18n -> {
-			List<String> dynamicPagePaths = Optional.ofNullable(config.getValue(ConfigKeys.DYNAMIC_PAGE_PATHS)).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).stream().map(o -> o.toString()).collect(Collectors.toList());
-			List<String> pagePaths = new ArrayList<>();
-			dynamicPagePaths.forEach(dynamicPagePath -> {
-				try {
-					try(Stream<Path> stream = Files.walk(Paths.get(dynamicPagePath))) {
-						stream.filter(Files::isRegularFile).filter(p -> p.getFileName().toString().endsWith(".yml")).forEach(path -> {
-							pagePaths.add(path.toAbsolutePath().toString());
-						});
-					}
-				} catch(Exception ex) {
-					ExceptionUtils.rethrow(ex);
-				}
-			});
-			List<Future> futures = new ArrayList<>();
-			YamlProcessor yamlProcessor = new YamlProcessor();
-	
-			for(String pagePath : pagePaths) {
-				futures.add(importSitePage(i18n, yamlProcessor, pagePath));
-			}
-			CompositeFuture.all(futures).onSuccess(a -> {
-				String solrHostName = config.getString(ComputateConfigKeys.SOLR_HOST_NAME);
-				Integer solrPort = config.getInteger(ComputateConfigKeys.SOLR_PORT);
-				String solrCollection = config.getString(ComputateConfigKeys.SOLR_COLLECTION);
-				String solrRequestUri = String.format("/solr/%s/update%s", solrCollection, "?commitWithin=1000&overwrite=true&wt=json");
-				String deleteQuery = String.format("classSimpleName_docvalues_string:(%s %s) AND created_docvalues_date:[* TO %s]", SitePage.CLASS_SIMPLE_NAME, SiteHtm.CLASS_SIMPLE_NAME, SiteHtm.staticSearchStrCreated(null, SiteHtm.staticSearchCreated(null, now)));
-				String deleteXml = String.format("<delete><query>%s</query></delete>", deleteQuery);
-				webClient.post(solrPort, solrHostName, solrRequestUri)
-						.putHeader("Content-Type", "text/xml")
-						.sendBuffer(Buffer.buffer().appendString(deleteXml))
-						.onSuccess(d -> {
+				i18nGenerator().onSuccess(i18n -> {
+				List<String> dynamicPagePaths = Optional.ofNullable(config.getValue(ConfigKeys.DYNAMIC_PAGE_PATHS)).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).stream().map(o -> o.toString()).collect(Collectors.toList());
+				List<String> pagePaths = new ArrayList<>();
+				dynamicPagePaths.forEach(dynamicPagePath -> {
 					try {
-						LOG.info(String.format(importDataSitePageComplete, SitePage.CLASS_SIMPLE_NAME));
-						promise.complete();
+						try(Stream<Path> stream = Files.walk(Paths.get(dynamicPagePath))) {
+							stream.filter(Files::isRegularFile).filter(p -> p.getFileName().toString().endsWith(".yml")).forEach(path -> {
+								pagePaths.add(path.toAbsolutePath().toString());
+							});
+						}
 					} catch(Exception ex) {
-						LOG.error(String.format("Could not read response from Solr: http://%s:%s%s", solrHostName, solrPort, solrRequestUri), ex);
-						promise.fail(ex);
+						ExceptionUtils.rethrow(ex);
 					}
+				});
+				List<Future> futures = new ArrayList<>();
+				YamlProcessor yamlProcessor = new YamlProcessor();
+		
+				for(String pagePath : pagePaths) {
+					futures.add(importSitePage(i18n, yamlProcessor, pagePath));
+				}
+				CompositeFuture.all(futures).onSuccess(a -> {
+					LOG.info(String.format(importDataSitePageComplete, SitePage.CLASS_SIMPLE_NAME));
+					promise.complete();
 				}).onFailure(ex -> {
-					LOG.error(String.format("Search failed. "), new RuntimeException(ex));
+					LOG.error(String.format(importDataSitePageFail, SitePage.CLASS_SIMPLE_NAME), ex);
 					promise.fail(ex);
 				});
 			}).onFailure(ex -> {
 				LOG.error(String.format(importDataSitePageFail, SitePage.CLASS_SIMPLE_NAME), ex);
 				promise.fail(ex);
 			});
+	deletePageData(now).onSuccess(a -> {
 		}).onFailure(ex -> {
 			LOG.error(String.format(importDataSitePageFail, SitePage.CLASS_SIMPLE_NAME), ex);
 			promise.fail(ex);
@@ -300,11 +324,13 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 								pageParams.put("query", new JsonObject().put("commitWithin", 1000).put("q", "*:*").put("var", new JsonArray().add("refresh:false")));
 								JsonObject pageContext = new JsonObject().put("params", pageParams);
 								JsonObject pageRequest = new JsonObject().put("context", pageContext);
-								vertx.eventBus().request(String.format("smartabyar-smartvillage-enUS-%s", SitePage.CLASS_SIMPLE_NAME), pageRequest, new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", SitePage.CLASS_SIMPLE_NAME))).onSuccess(c -> {
-									LOG.info(String.format(importSitePageComplete, pageBody2.getString(SitePage.VAR_id)));
+
+								String topic = config.getString(ConfigKeys.KAFKA_TOPIC_IMPORT_PAGE);
+								KafkaProducerRecord<String, String> record = KafkaProducerRecord.create(topic, pageRequest.encode());
+								kafkaProducer.send(record).onSuccess(recordMetadata -> {
 									promise.complete();
 								}).onFailure(ex -> {
-									LOG.error(String.format(importSitePageFail, pageBody2.getString(SitePage.VAR_id)), ex);
+									LOG.error(String.format("Could not send record to kafka topic %s: %s", topic, pageRequest.encode()), ex);
 									promise.fail(ex);
 								});
 							}).onFailure(ex -> {
@@ -617,7 +643,13 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 					htmParams.put("query", new JsonObject().put("commitWithin", 1000).put("q", "*:*").put("var", new JsonArray().add("refresh:false")));
 					JsonObject htmContext = new JsonObject().put("params", htmParams);
 					JsonObject htmRequest = new JsonObject().put("context", htmContext);
-					futures.add(vertx.eventBus().request(String.format("smartabyar-smartvillage-enUS-%s", SiteHtm.CLASS_SIMPLE_NAME), htmRequest, new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", SiteHtm.CLASS_SIMPLE_NAME))));
+
+					String topic = config.getString(ConfigKeys.KAFKA_TOPIC_IMPORT_HTM);
+					KafkaProducerRecord<String, String> record = KafkaProducerRecord.create(topic, htmRequest.encode());
+					kafkaProducer.send(record).onSuccess(recordMetadata -> {
+					}).onFailure(ex -> {
+						LOG.error(String.format("Could not send record to kafka topic %s: %s", topic, htmRequest.encode()), ex);
+					});
 				}
 	
 				if(e != null) {

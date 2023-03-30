@@ -765,7 +765,7 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 							bParams.add(o2.sqlParamPedestrianDemandScalingFactor());
 						break;
 					case "setParamDemandScale":
-							o2.setParamDemandScale(jsonObject.getString(entityVar));
+							o2.setParamDemandScale(jsonObject.getJsonArray(entityVar));
 							if(bParams.size() > 0)
 								bSql.append(", ");
 							bSql.append(TrafficSimulation.VAR_paramDemandScale + "=$" + num);
@@ -859,14 +859,6 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 							bSql.append(TrafficSimulation.VAR_paramStepSize + "=$" + num);
 							num++;
 							bParams.add(o2.sqlParamStepSize());
-						break;
-					case "setParamUpdateStepSize":
-							o2.setParamUpdateStepSize(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(TrafficSimulation.VAR_paramUpdateStepSize + "=$" + num);
-							num++;
-							bParams.add(o2.sqlParamUpdateStepSize());
 						break;
 					case "setParamRunTime":
 							o2.setParamRunTime(jsonObject.getString(entityVar));
@@ -1460,7 +1452,7 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 						bParams.add(o2.sqlParamPedestrianDemandScalingFactor());
 						break;
 					case TrafficSimulation.VAR_paramDemandScale:
-						o2.setParamDemandScale(jsonObject.getString(entityVar));
+						o2.setParamDemandScale(jsonObject.getJsonArray(entityVar));
 						if(bParams.size() > 0) {
 							bSql.append(", ");
 						}
@@ -1566,15 +1558,6 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 						bSql.append(TrafficSimulation.VAR_paramStepSize + "=$" + num);
 						num++;
 						bParams.add(o2.sqlParamStepSize());
-						break;
-					case TrafficSimulation.VAR_paramUpdateStepSize:
-						o2.setParamUpdateStepSize(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(TrafficSimulation.VAR_paramUpdateStepSize + "=$" + num);
-						num++;
-						bParams.add(o2.sqlParamUpdateStepSize());
 						break;
 					case TrafficSimulation.VAR_paramRunTime:
 						o2.setParamRunTime(jsonObject.getString(entityVar));
@@ -1885,7 +1868,7 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 							if(body2.size() > 0) {
 								siteRequest.setJsonObject(body2);
 								patchTrafficSimulationFuture(o, true).onSuccess(b -> {
-									LOG.info("Import TrafficSimulation {} succeeded, modified TrafficSimulation. ", body.getValue(TrafficSimulation.VAR_pk));
+									LOG.debug("Import TrafficSimulation {} succeeded, modified TrafficSimulation. ", body.getValue(TrafficSimulation.VAR_pk));
 									eventHandler.handle(Future.succeededFuture());
 								}).onFailure(ex -> {
 									LOG.error(String.format("putimportTrafficSimulationFuture failed. "), ex);
@@ -1896,7 +1879,7 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 							}
 						} else {
 							postTrafficSimulationFuture(siteRequest, true).onSuccess(b -> {
-								LOG.info("Import TrafficSimulation {} succeeded, created new TrafficSimulation. ", body.getValue(TrafficSimulation.VAR_pk));
+								LOG.debug("Import TrafficSimulation {} succeeded, created new TrafficSimulation. ", body.getValue(TrafficSimulation.VAR_pk));
 								eventHandler.handle(Future.succeededFuture());
 							}).onFailure(ex -> {
 								LOG.error(String.format("putimportTrafficSimulationFuture failed. "), ex);

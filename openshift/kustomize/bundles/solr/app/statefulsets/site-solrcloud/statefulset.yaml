@@ -3,7 +3,6 @@ kind: StatefulSet
 apiVersion: apps/v1
 metadata:
   name: site-solrcloud
-  namespace: solr
 spec:
   replicas: 2
   selector:

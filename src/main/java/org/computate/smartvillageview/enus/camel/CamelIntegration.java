@@ -1,4 +1,4 @@
-package org.computate.smartvillageview.enus.camel.tlc;
+package org.computate.smartvillageview.enus.camel;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.LoggingLevel;
@@ -8,7 +8,10 @@ import org.apache.camel.component.vertx.VertxComponent;
 import org.apache.camel.impl.DefaultCamelContext;
 import org.apache.camel.model.dataformat.JsonLibrary;
 import org.computate.smartvillageview.enus.config.ConfigKeys;
+import org.computate.smartvillageview.enus.model.htm.SiteHtm;
+import org.computate.smartvillageview.enus.model.page.SitePage;
 import org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport;
+import org.computate.smartvillageview.enus.vertx.MainVerticle;
 import org.computate.vertx.verticle.EmailVerticle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,8 +22,8 @@ import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.json.JsonObject;
 
-public class TlcCamelIntegration extends TlcCamelIntegrationGen<Object> {
-	private static final Logger LOG = LoggerFactory.getLogger(TlcCamelIntegration.class);
+public class CamelIntegration extends CamelIntegrationGen<Object> {
+	private static final Logger LOG = LoggerFactory.getLogger(CamelIntegration.class);
 
 	/**
 	 * Val.Fail.enUS:The Camel Component was not configured properly. 
@@ -29,8 +32,38 @@ public class TlcCamelIntegration extends TlcCamelIntegrationGen<Object> {
 	public static Future<Void> configureCamel(Vertx vertx, JsonObject config) {
 		Promise<Void> promise = Promise.promise();
 		try {
-			vertx.eventBus().consumer("smartabyar-smartvillage-enUS-SimulationReport-patchSimulationReportFuture", message -> {
-				vertx.eventBus().request("smartabyar-smartvillage-enUS-SimulationReport", (JsonObject)message.body(), new DeliveryOptions().addHeader("action", "patchSimulationReportFuture")).onSuccess(a -> {
+
+			String importPageConsumer = String.format("%s-%s-%s-%s", MainVerticle.SITE_NAME, "enUS", SitePage.CLASS_SIMPLE_NAME, String.format("putimport%sFuture", SitePage.CLASS_SIMPLE_NAME));
+			vertx.eventBus().consumer(importPageConsumer, message -> {
+				vertx.eventBus().request(String.format("%s-%s-%s", MainVerticle.SITE_NAME, "enUS", SitePage.CLASS_SIMPLE_NAME), (JsonObject)message.body(), new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", SitePage.CLASS_SIMPLE_NAME))).onSuccess(a -> {
+					message.reply(a.body());
+				}).onFailure(ex -> {
+					LOG.error(String.format("Importing %s failed. ", SitePage.CLASS_SIMPLE_NAME), ex);
+					message.reply(null);
+				});
+			});
+
+			String importHtmConsumer = String.format("%s-%s-%s-%s", MainVerticle.SITE_NAME, "enUS", SiteHtm.CLASS_SIMPLE_NAME, String.format("putimport%sFuture", SiteHtm.CLASS_SIMPLE_NAME));
+			vertx.eventBus().consumer(importHtmConsumer, message -> {
+				vertx.eventBus().request(String.format("%s-%s-%s", MainVerticle.SITE_NAME, "enUS", SiteHtm.CLASS_SIMPLE_NAME), (JsonObject)message.body(), new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", SiteHtm.CLASS_SIMPLE_NAME))).onSuccess(a -> {
+					message.reply(a.body());
+				}).onFailure(ex -> {
+					LOG.error(String.format("Importing %s failed. ", SiteHtm.CLASS_SIMPLE_NAME), ex);
+					message.reply(null);
+				});
+			});
+
+			vertx.eventBus().consumer(String.format("%s-%s-%s-%s", MainVerticle.SITE_NAME, "enUS", SiteHtm.CLASS_SIMPLE_NAME, String.format("putimport%sFuture", SiteHtm.CLASS_SIMPLE_NAME)), message -> {
+				vertx.eventBus().request(String.format("%s-%s-%s", MainVerticle.SITE_NAME, "enUS", SiteHtm.CLASS_SIMPLE_NAME), (JsonObject)message.body(), new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", SiteHtm.CLASS_SIMPLE_NAME))).onSuccess(a -> {
+					message.reply(a.body());
+				}).onFailure(ex -> {
+					LOG.error(String.format("Importing %s failed. ", SiteHtm.CLASS_SIMPLE_NAME), ex);
+					message.reply(null);
+				});
+			});
+
+			vertx.eventBus().consumer(String.format("%s-%s-%s-%s", MainVerticle.SITE_NAME, "enUS", SimulationReport.CLASS_SIMPLE_NAME, "patchSimulationReportFuture"), message -> {
+				vertx.eventBus().request(String.format("%s-%s-%s", MainVerticle.SITE_NAME, "enUS", SimulationReport.CLASS_SIMPLE_NAME), (JsonObject)message.body(), new DeliveryOptions().addHeader("action", "patchSimulationReportFuture")).onSuccess(a -> {
 					message.reply(a.body());
 				}).onFailure(ex -> {
 					LOG.error("Patching SimulationReport failed. ", ex);
@@ -44,11 +77,39 @@ public class TlcCamelIntegration extends TlcCamelIntegrationGen<Object> {
 			camelContext.addComponent("vertx", vertxComponent);
 			RouteBuilder routeBuilder = new RouteBuilder() {
 				public void configure() {
+
+					from(String.format("vertx-kafka:%s?bootstrapServers=%s&groupId=%s&securityProtocol=%s&sslKeystoreLocation=%s&sslKeystorePassword=%s&sslTruststoreLocation=%s&sslTruststorePassword=%s&seekToPosition=end"
+							, config.getString(ConfigKeys.KAFKA_TOPIC_IMPORT_PAGE)
+							, config.getString(ConfigKeys.KAFKA_BROKERS)
+							, config.getString(ConfigKeys.KAFKA_GROUP)
+							, config.getString(ConfigKeys.KAFKA_SECURITY_PROTOCOL)
+							, config.getString(ConfigKeys.KAFKA_SSL_KEYSTORE_LOCATION)
+							, config.getString(ConfigKeys.KAFKA_SSL_KEYSTORE_PASSWORD)
+							, config.getString(ConfigKeys.KAFKA_SSL_TRUSTSTORE_LOCATION)
+							, config.getString(ConfigKeys.KAFKA_SSL_TRUSTSTORE_PASSWORD)
+							))
+					.bean(CamelIntegration.class, "exchangeToJsonObject")
+					.to(String.format("vertx:%s?exchangePattern=InOut", importPageConsumer))
+					.end();
+
+					from(String.format("vertx-kafka:%s?bootstrapServers=%s&groupId=%s&securityProtocol=%s&sslKeystoreLocation=%s&sslKeystorePassword=%s&sslTruststoreLocation=%s&sslTruststorePassword=%s&seekToPosition=end"
+							, config.getString(ConfigKeys.KAFKA_TOPIC_IMPORT_HTM)
+							, config.getString(ConfigKeys.KAFKA_BROKERS)
+							, config.getString(ConfigKeys.KAFKA_GROUP)
+							, config.getString(ConfigKeys.KAFKA_SECURITY_PROTOCOL)
+							, config.getString(ConfigKeys.KAFKA_SSL_KEYSTORE_LOCATION)
+							, config.getString(ConfigKeys.KAFKA_SSL_KEYSTORE_PASSWORD)
+							, config.getString(ConfigKeys.KAFKA_SSL_TRUSTSTORE_LOCATION)
+							, config.getString(ConfigKeys.KAFKA_SSL_TRUSTSTORE_PASSWORD)
+							))
+					.bean(CamelIntegration.class, "exchangeToJsonObject")
+					.to(String.format("vertx:%s?exchangePattern=InOut", importHtmConsumer))
+					.end();
+
 					from(String.format("vertx-kafka:%s?bootstrapServers=%s&groupId=%s&securityProtocol=%s&sslKeystoreLocation=%s&sslKeystorePassword=%s&sslTruststoreLocation=%s&sslTruststorePassword=%s&seekToPosition=end"
 							, config.getString(ConfigKeys.KAFKA_TOPIC_SUMO_RUN_REPORT)
 							, config.getString(ConfigKeys.KAFKA_BROKERS)
 							, config.getString(ConfigKeys.KAFKA_GROUP)
-
 							, config.getString(ConfigKeys.KAFKA_SECURITY_PROTOCOL)
 							, config.getString(ConfigKeys.KAFKA_SSL_KEYSTORE_LOCATION)
 							, config.getString(ConfigKeys.KAFKA_SSL_KEYSTORE_PASSWORD)
@@ -56,7 +117,7 @@ public class TlcCamelIntegration extends TlcCamelIntegrationGen<Object> {
 							, config.getString(ConfigKeys.KAFKA_SSL_TRUSTSTORE_PASSWORD)
 							))
 					.log("received SUMO run report event: ${body}")
-					.bean(TlcCamelIntegration.class, "exchangeToJsonObject")
+					.bean(CamelIntegration.class, "exchangeToJsonObject")
 					.bean(SimulationReport.class, "patchSimulationReportFuture")
 					.to("vertx:smartabyar-smartvillage-enUS-SimulationReport-patchSimulationReportFuture?exchangePattern=InOut")
 					.end();

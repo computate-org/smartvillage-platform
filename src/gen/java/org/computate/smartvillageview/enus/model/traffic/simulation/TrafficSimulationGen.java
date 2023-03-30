@@ -45,10 +45,10 @@ import java.util.Locale;
 import java.time.OffsetDateTime;
 import java.lang.String;
 import java.math.BigDecimal;
+import io.vertx.core.json.JsonArray;
 import java.lang.Integer;
 import java.lang.Long;
 import org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport;
-import io.vertx.core.json.JsonArray;
 import org.computate.search.wrap.Wrap;
 import io.vertx.core.Promise;
 import io.vertx.core.Future;
@@ -185,15 +185,15 @@ import org.computate.search.response.solr.SolrResponse;
  * </p>
  * <p>
  * Delete the class TrafficSimulation in Solr: 
- * curl 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
  * Delete  the package org.computate.smartvillageview.enus.model.traffic.simulation in Solr: 
- * curl 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
  * Delete  the project smartabyar-smartvillage in Solr: 
- * curl 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartabyar\-smartvillage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartabyar\-smartvillage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  **/
 public abstract class TrafficSimulationGen<DEV> extends BaseModel {
@@ -1213,31 +1213,33 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 
 
 	/**	 The entity paramDemandScale
-	 *	 is defined as null before being initialized. 
+	 *	 It is constructed before being initialized with the constructor by default. 
 	 */
 	@JsonProperty
-	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
 	@JsonInclude(Include.NON_NULL)
-	protected BigDecimal paramDemandScale;
+	protected List<BigDecimal> paramDemandScale = new ArrayList<BigDecimal>();
 
 	/**	<br> The entity paramDemandScale
-	 *  is defined as null before being initialized. 
+	 *  It is constructed before being initialized with the constructor by default. 
 	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation&fq=entiteVar_enUS_indexed_string:paramDemandScale">Find the entity paramDemandScale in Solr</a>
 	 * <br>
-	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 * @param l is the entity already constructed. 
 	 **/
-	protected abstract void _paramDemandScale(Wrap<BigDecimal> w);
+	protected abstract void _paramDemandScale(List<BigDecimal> l);
 
-	public BigDecimal getParamDemandScale() {
+	public List<BigDecimal> getParamDemandScale() {
 		return paramDemandScale;
 	}
 
-	public void setParamDemandScale(BigDecimal paramDemandScale) {
+	public void setParamDemandScale(List<BigDecimal> paramDemandScale) {
 		this.paramDemandScale = paramDemandScale;
 	}
 	@JsonIgnore
 	public void setParamDemandScale(String o) {
-		this.paramDemandScale = TrafficSimulation.staticSetParamDemandScale(siteRequest_, o);
+		BigDecimal l = TrafficSimulation.staticSetParamDemandScale(siteRequest_, o);
+		if(l != null)
+			addParamDemandScale(l);
 	}
 	public static BigDecimal staticSetParamDemandScale(SiteRequestEnUS siteRequest_, String o) {
 		o = StringUtils.removeAll(o, "[^\\d\\.]");
@@ -1247,30 +1249,54 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	}
 	@JsonIgnore
 	public void setParamDemandScale(Double o) {
-		setParamDemandScale(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+		addParamDemandScale(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	@JsonIgnore
 	public void setParamDemandScale(Integer o) {
-		setParamDemandScale(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+		addParamDemandScale(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
 	@JsonIgnore
 	public void setParamDemandScale(Number o) {
-		setParamDemandScale(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+		addParamDemandScale(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
 	}
-	protected TrafficSimulation paramDemandScaleInit() {
-		Wrap<BigDecimal> paramDemandScaleWrap = new Wrap<BigDecimal>().var("paramDemandScale");
-		if(paramDemandScale == null) {
-			_paramDemandScale(paramDemandScaleWrap);
-			setParamDemandScale(paramDemandScaleWrap.o);
+	public TrafficSimulation addParamDemandScale(BigDecimal...objects) {
+		for(BigDecimal o : objects) {
+			addParamDemandScale(o);
 		}
 		return (TrafficSimulation)this;
 	}
-
-	public static Double staticSearchParamDemandScale(SiteRequestEnUS siteRequest_, BigDecimal o) {
-		return o == null ? null : o.doubleValue();
+	public TrafficSimulation addParamDemandScale(BigDecimal o) {
+		if(o != null)
+			this.paramDemandScale.add(o);
+		return (TrafficSimulation)this;
+	}
+	@JsonIgnore
+	public void setParamDemandScale(JsonArray objects) {
+		paramDemandScale.clear();
+		if(objects == null)
+			return;
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
+			addParamDemandScale(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+		}
+	}
+	public TrafficSimulation addParamDemandScale(String o) {
+		if(NumberUtils.isParsable(o)) {
+			BigDecimal p = new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+			addParamDemandScale(p);
+		}
+		return (TrafficSimulation)this;
+	}
+	protected TrafficSimulation paramDemandScaleInit() {
+		_paramDemandScale(paramDemandScale);
+		return (TrafficSimulation)this;
 	}
 
-	public static String staticSearchStrParamDemandScale(SiteRequestEnUS siteRequest_, Double o) {
+	public static BigDecimal staticSearchParamDemandScale(SiteRequestEnUS siteRequest_, BigDecimal o) {
+		return o;
+	}
+
+	public static String staticSearchStrParamDemandScale(SiteRequestEnUS siteRequest_, BigDecimal o) {
 		return o == null ? null : o.toString();
 	}
 
@@ -1278,8 +1304,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		return TrafficSimulation.staticSearchStrParamDemandScale(siteRequest_, TrafficSimulation.staticSearchParamDemandScale(siteRequest_, TrafficSimulation.staticSetParamDemandScale(siteRequest_, o)));
 	}
 
-	public BigDecimal sqlParamDemandScale() {
-		return paramDemandScale;
+	public Number[] sqlParamDemandScale() {
+		return paramDemandScale.stream().map(v -> (Number)v).toArray(Number[]::new);
 	}
 
 	//////////////////////////////////
@@ -2107,68 +2133,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		return paramStepSize;
 	}
 
-	/////////////////////////
-	// paramUpdateStepSize //
-	/////////////////////////
-
-
-	/**	 The entity paramUpdateStepSize
-	 *	 is defined as null before being initialized. 
-	 */
-	@JsonProperty
-	@JsonSerialize(using = ToStringSerializer.class)
-	@JsonInclude(Include.NON_NULL)
-	protected Integer paramUpdateStepSize;
-
-	/**	<br> The entity paramUpdateStepSize
-	 *  is defined as null before being initialized. 
-	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation&fq=entiteVar_enUS_indexed_string:paramUpdateStepSize">Find the entity paramUpdateStepSize in Solr</a>
-	 * <br>
-	 * @param w is for wrapping a value to assign to this entity during initialization. 
-	 **/
-	protected abstract void _paramUpdateStepSize(Wrap<Integer> w);
-
-	public Integer getParamUpdateStepSize() {
-		return paramUpdateStepSize;
-	}
-
-	public void setParamUpdateStepSize(Integer paramUpdateStepSize) {
-		this.paramUpdateStepSize = paramUpdateStepSize;
-	}
-	@JsonIgnore
-	public void setParamUpdateStepSize(String o) {
-		this.paramUpdateStepSize = TrafficSimulation.staticSetParamUpdateStepSize(siteRequest_, o);
-	}
-	public static Integer staticSetParamUpdateStepSize(SiteRequestEnUS siteRequest_, String o) {
-		if(NumberUtils.isParsable(o))
-			return Integer.parseInt(o);
-		return null;
-	}
-	protected TrafficSimulation paramUpdateStepSizeInit() {
-		Wrap<Integer> paramUpdateStepSizeWrap = new Wrap<Integer>().var("paramUpdateStepSize");
-		if(paramUpdateStepSize == null) {
-			_paramUpdateStepSize(paramUpdateStepSizeWrap);
-			setParamUpdateStepSize(paramUpdateStepSizeWrap.o);
-		}
-		return (TrafficSimulation)this;
-	}
-
-	public static Integer staticSearchParamUpdateStepSize(SiteRequestEnUS siteRequest_, Integer o) {
-		return o;
-	}
-
-	public static String staticSearchStrParamUpdateStepSize(SiteRequestEnUS siteRequest_, Integer o) {
-		return o == null ? null : o.toString();
-	}
-
-	public static String staticSearchFqParamUpdateStepSize(SiteRequestEnUS siteRequest_, String o) {
-		return TrafficSimulation.staticSearchStrParamUpdateStepSize(siteRequest_, TrafficSimulation.staticSearchParamUpdateStepSize(siteRequest_, TrafficSimulation.staticSetParamUpdateStepSize(siteRequest_, o)));
-	}
-
-	public Integer sqlParamUpdateStepSize() {
-		return paramUpdateStepSize;
-	}
-
 	//////////////////
 	// paramRunTime //
 	//////////////////
@@ -2639,7 +2603,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 				paramPedestrianQueueThresholdNorthSouthInit();
 				paramPedestrianQueueThresholdWestEastInit();
 				paramStepSizeInit();
-				paramUpdateStepSizeInit();
 				paramRunTimeInit();
 				paramItersPerParInit();
 				paramTotalIterNumInit();
@@ -2751,8 +2714,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 				return oTrafficSimulation.paramPedestrianQueueThresholdWestEast;
 			case "paramStepSize":
 				return oTrafficSimulation.paramStepSize;
-			case "paramUpdateStepSize":
-				return oTrafficSimulation.paramUpdateStepSize;
 			case "paramRunTime":
 				return oTrafficSimulation.paramRunTime;
 			case "paramItersPerPar":
@@ -2861,8 +2822,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return TrafficSimulation.staticSetParamPedestrianQueueThresholdWestEast(siteRequest_, o);
 		case "paramStepSize":
 			return TrafficSimulation.staticSetParamStepSize(siteRequest_, o);
-		case "paramUpdateStepSize":
-			return TrafficSimulation.staticSetParamUpdateStepSize(siteRequest_, o);
 		case "paramRunTime":
 			return TrafficSimulation.staticSetParamRunTime(siteRequest_, o);
 		case "paramItersPerPar":
@@ -2941,8 +2900,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return TrafficSimulation.staticSearchParamPedestrianQueueThresholdWestEast(siteRequest_, (BigDecimal)o);
 		case "paramStepSize":
 			return TrafficSimulation.staticSearchParamStepSize(siteRequest_, (BigDecimal)o);
-		case "paramUpdateStepSize":
-			return TrafficSimulation.staticSearchParamUpdateStepSize(siteRequest_, (Integer)o);
 		case "paramRunTime":
 			return TrafficSimulation.staticSearchParamRunTime(siteRequest_, (Integer)o);
 		case "paramItersPerPar":
@@ -2998,7 +2955,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		case "paramPedestrianDemandScalingFactor":
 			return TrafficSimulation.staticSearchStrParamPedestrianDemandScalingFactor(siteRequest_, (Double)o);
 		case "paramDemandScale":
-			return TrafficSimulation.staticSearchStrParamDemandScale(siteRequest_, (Double)o);
+			return TrafficSimulation.staticSearchStrParamDemandScale(siteRequest_, (BigDecimal)o);
 		case "paramMinGreenTimeSecWestEast":
 			return TrafficSimulation.staticSearchStrParamMinGreenTimeSecWestEast(siteRequest_, (Double)o);
 		case "paramMaxGreenTimeSecWestEast":
@@ -3021,8 +2978,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return TrafficSimulation.staticSearchStrParamPedestrianQueueThresholdWestEast(siteRequest_, (Double)o);
 		case "paramStepSize":
 			return TrafficSimulation.staticSearchStrParamStepSize(siteRequest_, (Double)o);
-		case "paramUpdateStepSize":
-			return TrafficSimulation.staticSearchStrParamUpdateStepSize(siteRequest_, (Integer)o);
 		case "paramRunTime":
 			return TrafficSimulation.staticSearchStrParamRunTime(siteRequest_, (Integer)o);
 		case "paramItersPerPar":
@@ -3101,8 +3056,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return TrafficSimulation.staticSearchFqParamPedestrianQueueThresholdWestEast(siteRequest_, o);
 		case "paramStepSize":
 			return TrafficSimulation.staticSearchFqParamStepSize(siteRequest_, o);
-		case "paramUpdateStepSize":
-			return TrafficSimulation.staticSearchFqParamUpdateStepSize(siteRequest_, o);
 		case "paramRunTime":
 			return TrafficSimulation.staticSearchFqParamRunTime(siteRequest_, o);
 		case "paramItersPerPar":
@@ -3246,12 +3199,18 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 				saves.add("paramPedestrianDemandScalingFactor");
 				return val;
 			} else if("paramdemandscale".equals(varLower)) {
-				if(val instanceof String) {
-					setParamDemandScale((String)val);
-				} else if(val instanceof Number) {
-					setParamDemandScale(new BigDecimal(((Number)val).doubleValue()));
+				if(val instanceof List<?>) {
+					((List<BigDecimal>)val).stream().forEach(v -> addParamDemandScale(v));
+				} else if(val instanceof JsonArray) {
+					((JsonArray)val).stream().forEach(v -> setParamDemandScale(v.toString()));
+				} else if(val instanceof BigDecimal[]) {
+					Arrays.asList((BigDecimal[])val).stream().forEach(v -> setParamDemandScale((BigDecimal)v));
+				} else if(val instanceof Number[]) {
+					Arrays.asList((Number[])val).stream().forEach(v -> setParamDemandScale((Number)v));
 				}
-				saves.add("paramDemandScale");
+				if(!saves.contains("paramDemandScale")) {
+					saves.add("paramDemandScale");
+				}
 				return val;
 			} else if("parammingreentimesecwesteast".equals(varLower)) {
 				if(val instanceof String) {
@@ -3340,14 +3299,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 					setParamStepSize(new BigDecimal(((Number)val).doubleValue()));
 				}
 				saves.add("paramStepSize");
-				return val;
-			} else if("paramupdatestepsize".equals(varLower)) {
-				if(val instanceof Integer) {
-					setParamUpdateStepSize((Integer)val);
-				} else {
-					setParamUpdateStepSize(val == null ? null : val.toString());
-				}
-				saves.add("paramUpdateStepSize");
 				return val;
 			} else if("paramruntime".equals(varLower)) {
 				if(val instanceof Integer) {
@@ -3438,7 +3389,11 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			doc.put("paramPedestrianDemandScalingFactor_docvalues_double", paramPedestrianDemandScalingFactor.doubleValue());
 		}
 		if(paramDemandScale != null) {
-			doc.put("paramDemandScale_docvalues_double", paramDemandScale.doubleValue());
+			JsonArray l = new JsonArray();
+			doc.put("paramDemandScale_docvalues_doubles", l);
+			for(BigDecimal o : paramDemandScale) {
+				l.add(o);
+			}
 		}
 		if(paramMinGreenTimeSecWestEast != null) {
 			doc.put("paramMinGreenTimeSecWestEast_docvalues_double", paramMinGreenTimeSecWestEast.doubleValue());
@@ -3472,9 +3427,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		}
 		if(paramStepSize != null) {
 			doc.put("paramStepSize_docvalues_double", paramStepSize.doubleValue());
-		}
-		if(paramUpdateStepSize != null) {
-			doc.put("paramUpdateStepSize_docvalues_int", paramUpdateStepSize);
 		}
 		if(paramRunTime != null) {
 			doc.put("paramRunTime_docvalues_int", paramRunTime);
@@ -3527,7 +3479,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			case "paramPedestrianDemandScalingFactor":
 				return "paramPedestrianDemandScalingFactor_docvalues_double";
 			case "paramDemandScale":
-				return "paramDemandScale_docvalues_double";
+				return "paramDemandScale_docvalues_doubles";
 			case "paramMinGreenTimeSecWestEast":
 				return "paramMinGreenTimeSecWestEast_docvalues_double";
 			case "paramMaxGreenTimeSecWestEast":
@@ -3550,8 +3502,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 				return "paramPedestrianQueueThresholdWestEast_docvalues_double";
 			case "paramStepSize":
 				return "paramStepSize_docvalues_double";
-			case "paramUpdateStepSize":
-				return "paramUpdateStepSize_docvalues_int";
 			case "paramRunTime":
 				return "paramRunTime_docvalues_int";
 			case "paramItersPerPar":
@@ -3596,7 +3546,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			case "paramPedestrianDemandScalingFactor":
 				return "paramPedestrianDemandScalingFactor_docvalues_double";
 			case "paramDemandScale":
-				return "paramDemandScale_docvalues_double";
+				return "paramDemandScale_docvalues_doubles";
 			case "paramMinGreenTimeSecWestEast":
 				return "paramMinGreenTimeSecWestEast_docvalues_double";
 			case "paramMaxGreenTimeSecWestEast":
@@ -3619,8 +3569,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 				return "paramPedestrianQueueThresholdWestEast_docvalues_double";
 			case "paramStepSize":
 				return "paramStepSize_docvalues_double";
-			case "paramUpdateStepSize":
-				return "paramUpdateStepSize_docvalues_int";
 			case "paramRunTime":
 				return "paramRunTime_docvalues_int";
 			case "paramItersPerPar":
@@ -3664,7 +3612,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 				return "paramAvgPedestrianPerMinFromSouthToNorth";
 			case "paramPedestrianDemandScalingFactor_docvalues_double":
 				return "paramPedestrianDemandScalingFactor";
-			case "paramDemandScale_docvalues_double":
+			case "paramDemandScale_docvalues_doubles":
 				return "paramDemandScale";
 			case "paramMinGreenTimeSecWestEast_docvalues_double":
 				return "paramMinGreenTimeSecWestEast";
@@ -3688,8 +3636,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 				return "paramPedestrianQueueThresholdWestEast";
 			case "paramStepSize_docvalues_double":
 				return "paramStepSize";
-			case "paramUpdateStepSize_docvalues_int":
-				return "paramUpdateStepSize";
 			case "paramRunTime_docvalues_int":
 				return "paramRunTime";
 			case "paramItersPerPar_docvalues_int":
@@ -3741,7 +3687,9 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		oTrafficSimulation.setParamAvgPedestrianPerMinFromWestToEast(Optional.ofNullable(doc.get("paramAvgPedestrianPerMinFromWestToEast_docvalues_double")).map(v -> v.toString()).orElse(null));
 		oTrafficSimulation.setParamAvgPedestrianPerMinFromSouthToNorth(Optional.ofNullable(doc.get("paramAvgPedestrianPerMinFromSouthToNorth_docvalues_double")).map(v -> v.toString()).orElse(null));
 		oTrafficSimulation.setParamPedestrianDemandScalingFactor(Optional.ofNullable(doc.get("paramPedestrianDemandScalingFactor_docvalues_double")).map(v -> v.toString()).orElse(null));
-		oTrafficSimulation.setParamDemandScale(Optional.ofNullable(doc.get("paramDemandScale_docvalues_double")).map(v -> v.toString()).orElse(null));
+		Optional.ofNullable((List<?>)doc.get("paramDemandScale_docvalues_doubles")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
+			oTrafficSimulation.addParamDemandScale(v.toString());
+		});
 		oTrafficSimulation.setParamMinGreenTimeSecWestEast(Optional.ofNullable(doc.get("paramMinGreenTimeSecWestEast_docvalues_double")).map(v -> v.toString()).orElse(null));
 		oTrafficSimulation.setParamMaxGreenTimeSecWestEast(Optional.ofNullable(doc.get("paramMaxGreenTimeSecWestEast_docvalues_double")).map(v -> v.toString()).orElse(null));
 		oTrafficSimulation.setParamMinGreenTimeSecSouthNorth(Optional.ofNullable(doc.get("paramMinGreenTimeSecSouthNorth_docvalues_double")).map(v -> v.toString()).orElse(null));
@@ -3753,7 +3701,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		oTrafficSimulation.setParamPedestrianQueueThresholdNorthSouth(Optional.ofNullable(doc.get("paramPedestrianQueueThresholdNorthSouth_docvalues_double")).map(v -> v.toString()).orElse(null));
 		oTrafficSimulation.setParamPedestrianQueueThresholdWestEast(Optional.ofNullable(doc.get("paramPedestrianQueueThresholdWestEast_docvalues_double")).map(v -> v.toString()).orElse(null));
 		oTrafficSimulation.setParamStepSize(Optional.ofNullable(doc.get("paramStepSize_docvalues_double")).map(v -> v.toString()).orElse(null));
-		oTrafficSimulation.setParamUpdateStepSize(Optional.ofNullable(doc.get("paramUpdateStepSize_docvalues_int")).map(v -> v.toString()).orElse(null));
 		oTrafficSimulation.setParamRunTime(Optional.ofNullable(doc.get("paramRunTime_docvalues_int")).map(v -> v.toString()).orElse(null));
 		oTrafficSimulation.setParamItersPerPar(Optional.ofNullable(doc.get("paramItersPerPar_docvalues_int")).map(v -> v.toString()).orElse(null));
 		oTrafficSimulation.setParamTotalIterNum(Optional.ofNullable(doc.get("paramTotalIterNum_docvalues_int")).map(v -> v.toString()).orElse(null));
@@ -3825,8 +3772,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 				apiRequest.addVars("paramPedestrianQueueThresholdWestEast");
 			if(!Objects.equals(paramStepSize, original.getParamStepSize()))
 				apiRequest.addVars("paramStepSize");
-			if(!Objects.equals(paramUpdateStepSize, original.getParamUpdateStepSize()))
-				apiRequest.addVars("paramUpdateStepSize");
 			if(!Objects.equals(paramRunTime, original.getParamRunTime()))
 				apiRequest.addVars("paramRunTime");
 			if(!Objects.equals(paramItersPerPar, original.getParamItersPerPar()))
@@ -3872,7 +3817,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		sb.append(Optional.ofNullable(paramPedestrianQueueThresholdNorthSouth).map(v -> "paramPedestrianQueueThresholdNorthSouth: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(paramPedestrianQueueThresholdWestEast).map(v -> "paramPedestrianQueueThresholdWestEast: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(paramStepSize).map(v -> "paramStepSize: " + v + "\n").orElse(""));
-		sb.append(Optional.ofNullable(paramUpdateStepSize).map(v -> "paramUpdateStepSize: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(paramRunTime).map(v -> "paramRunTime: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(paramItersPerPar).map(v -> "paramItersPerPar: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(paramTotalIterNum).map(v -> "paramTotalIterNum: " + v + "\n").orElse(""));
@@ -3907,7 +3851,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	public static final String VAR_paramPedestrianQueueThresholdNorthSouth = "paramPedestrianQueueThresholdNorthSouth";
 	public static final String VAR_paramPedestrianQueueThresholdWestEast = "paramPedestrianQueueThresholdWestEast";
 	public static final String VAR_paramStepSize = "paramStepSize";
-	public static final String VAR_paramUpdateStepSize = "paramUpdateStepSize";
 	public static final String VAR_paramRunTime = "paramRunTime";
 	public static final String VAR_paramItersPerPar = "paramItersPerPar";
 	public static final String VAR_paramTotalIterNum = "paramTotalIterNum";
@@ -3953,7 +3896,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		vars.add(VAR_paramPedestrianQueueThresholdNorthSouth);
 		vars.add(VAR_paramPedestrianQueueThresholdWestEast);
 		vars.add(VAR_paramStepSize);
-		vars.add(VAR_paramUpdateStepSize);
 		vars.add(VAR_paramRunTime);
 		vars.add(VAR_paramItersPerPar);
 		vars.add(VAR_paramTotalIterNum);
@@ -3976,7 +3918,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		vars.add(VAR_paramAvgPedestrianPerMinFromWestToEast);
 		vars.add(VAR_paramAvgPedestrianPerMinFromSouthToNorth);
 		vars.add(VAR_paramPedestrianDemandScalingFactor);
-		vars.add(VAR_paramDemandScale);
 		vars.add(VAR_paramMinGreenTimeSecWestEast);
 		vars.add(VAR_paramMaxGreenTimeSecWestEast);
 		vars.add(VAR_paramMinGreenTimeSecSouthNorth);
@@ -3988,7 +3929,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		vars.add(VAR_paramPedestrianQueueThresholdNorthSouth);
 		vars.add(VAR_paramPedestrianQueueThresholdWestEast);
 		vars.add(VAR_paramStepSize);
-		vars.add(VAR_paramUpdateStepSize);
 		vars.add(VAR_paramRunTime);
 		vars.add(VAR_paramItersPerPar);
 		vars.add(VAR_paramTotalIterNum);
@@ -4022,7 +3962,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	public static final String DISPLAY_NAME_paramPedestrianQueueThresholdNorthSouth = "Pedestrian queue length threshold between low-high content for NORTH-SOUTH";
 	public static final String DISPLAY_NAME_paramPedestrianQueueThresholdWestEast = "Pedestrian queue length threshold between low-high content for WEST-EAST";
 	public static final String DISPLAY_NAME_paramStepSize = "Simulation time step (sec)";
-	public static final String DISPLAY_NAME_paramUpdateStepSize = "update step size";
 	public static final String DISPLAY_NAME_paramRunTime = "time for each round of traffic simulation (sec)";
 	public static final String DISPLAY_NAME_paramItersPerPar = "Number of simulation repetitions with same input (for statistical accuracy)";
 	public static final String DISPLAY_NAME_paramTotalIterNum = "Number of parameter update iterations before output";
@@ -4087,8 +4026,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return DISPLAY_NAME_paramPedestrianQueueThresholdWestEast;
 		case VAR_paramStepSize:
 			return DISPLAY_NAME_paramStepSize;
-		case VAR_paramUpdateStepSize:
-			return DISPLAY_NAME_paramUpdateStepSize;
 		case VAR_paramRunTime:
 			return DISPLAY_NAME_paramRunTime;
 		case VAR_paramItersPerPar:
@@ -4116,6 +4053,40 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return "-e, --end TIME Defines the end time in seconds; The simulation ends at this time";
 		case VAR_stepSeconds:
 			return "--step-length TIME Defines the step duration in seconds";
+		case VAR_paramAvgVehiclePerMinFromWestToEast:
+			return "Min: 1";
+		case VAR_paramAvgVehiclePerMinFromSouthToNorth:
+			return "Min: 1";
+		case VAR_paramVehicleDemandScalingFactor:
+			return "Min: 1";
+		case VAR_paramAvgPedestrianPerMinFromWestToEast:
+			return "Min: 1";
+		case VAR_paramAvgPedestrianPerMinFromSouthToNorth:
+			return "Min: 1";
+		case VAR_paramPedestrianDemandScalingFactor:
+			return "Min: 1";
+		case VAR_paramMinGreenTimeSecWestEast:
+			return "Min: 1";
+		case VAR_paramMaxGreenTimeSecWestEast:
+			return "Min: 1";
+		case VAR_paramMinGreenTimeSecSouthNorth:
+			return "Min: 1";
+		case VAR_paramMaxGreenTimeSecSouthNorth:
+			return "Min: 1";
+		case VAR_paramPedestrianWaitThresholdSecNorthSouth:
+			return "Min: 1";
+		case VAR_paramPedestrianWaitThresholdSecWestEast:
+			return "Min: 1";
+		case VAR_paramVehicleQueueThresholdWestEast:
+			return "Min: 1";
+		case VAR_paramVehicleQueueThresholdSouthNorth:
+			return "Min: 1";
+		case VAR_paramPedestrianQueueThresholdNorthSouth:
+			return "Min: 1";
+		case VAR_paramPedestrianQueueThresholdWestEast:
+			return "Min: 1";
+		case VAR_paramStepSize:
+			return "Min: 0.5";
 		case VAR_paramRunTime:
 			return "Time duration of each simulated sample path. ";
 		case VAR_paramItersPerPar:
@@ -4164,7 +4135,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		case VAR_paramPedestrianDemandScalingFactor:
 			return "BigDecimal";
 		case VAR_paramDemandScale:
-			return "BigDecimal";
+			return "List";
 		case VAR_paramMinGreenTimeSecWestEast:
 			return "BigDecimal";
 		case VAR_paramMaxGreenTimeSecWestEast:
@@ -4187,8 +4158,6 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return "BigDecimal";
 		case VAR_paramStepSize:
 			return "BigDecimal";
-		case VAR_paramUpdateStepSize:
-			return "Integer";
 		case VAR_paramRunTime:
 			return "Integer";
 		case VAR_paramItersPerPar:
@@ -4206,14 +4175,14 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		}
 	}
 
-	public static Integer htmlColumnTrafficSimulation(String var) {
+	public static Integer htmColumnTrafficSimulation(String var) {
 		switch(var) {
 			default:
-				return BaseModel.htmlColumnBaseModel(var);
+				return BaseModel.htmColumnBaseModel(var);
 		}
 	}
 
-	public static Integer htmlRowTrafficSimulation(String var) {
+	public static Integer htmRowTrafficSimulation(String var) {
 		switch(var) {
 		case VAR_startDateTime:
 			return 6;
@@ -4272,11 +4241,11 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		case VAR_reportKeys:
 			return 16;
 			default:
-				return BaseModel.htmlRowBaseModel(var);
+				return BaseModel.htmRowBaseModel(var);
 		}
 	}
 
-	public static Integer htmlCellTrafficSimulation(String var) {
+	public static Integer htmCellTrafficSimulation(String var) {
 		switch(var) {
 		case VAR_startDateTime:
 			return 1;
@@ -4335,7 +4304,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		case VAR_reportKeys:
 			return 1;
 			default:
-				return BaseModel.htmlCellBaseModel(var);
+				return BaseModel.htmCellBaseModel(var);
 		}
 	}
 

@@ -3,7 +3,6 @@ kind: Route
 apiVersion: route.openshift.io/v1
 metadata:
   name: solr
-  namespace: solr
 spec:
   host: solr-solr.apps-crc.testing
   to:

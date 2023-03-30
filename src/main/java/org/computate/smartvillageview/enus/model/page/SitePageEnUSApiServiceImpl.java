@@ -6,6 +6,7 @@ import io.vertx.ext.web.client.WebClient;
 import io.vertx.core.eventbus.EventBus;
 
 import org.computate.smartvillageview.enus.model.htm.SiteHtm;
+import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 
 import io.vertx.core.Future;
 import io.vertx.core.WorkerExecutor;
@@ -26,8 +27,16 @@ public class SitePageEnUSApiServiceImpl extends SitePageEnUSGenApiServiceImpl {
 	@Override
 	public Future<SitePage> patchSitePageFuture(SitePage o, Boolean inheritPk) {
 		return super.patchSitePageFuture(o, inheritPk)
-				.onSuccess(o2 -> LOG.info("Import SitePage {} succeeded", o2.getId()))
-				.onFailure(ex -> LOG.error("Import SitePage {} failed", o.getId(), ex))
+				.onSuccess(o2 -> LOG.info("PATCH SitePage {} succeeded", o2.getId()))
+				.onFailure(ex -> LOG.error("PATCH SitePage {} failed", o.getId(), ex))
+				;
+	}
+
+	@Override
+	public Future<SitePage> postSitePageFuture(SiteRequestEnUS siteRequest, Boolean inheritPk) {
+		return super.postSitePageFuture(siteRequest, inheritPk)
+				.onSuccess(o2 -> LOG.info("POST SitePage {} succeeded", o2.getId()))
+				.onFailure(ex -> LOG.error("POST SitePage failed", ex))
 				;
 	}
 }

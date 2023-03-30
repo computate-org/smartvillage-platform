@@ -3,17 +3,13 @@ kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: 'system:openshift:scc:anyuid'
-  namespace: solr
 subjects:
   - kind: ServiceAccount
     name: zookeeper-operator
-    namespace: solr
   - kind: ServiceAccount
     name: solr
-    namespace: solr
   - kind: ServiceAccount
     name: default
-    namespace: solr
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -23,17 +19,13 @@ kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: 'system:openshift:scc:nonroot'
-  namespace: solr
 subjects:
   - kind: ServiceAccount
     name: zookeeper-operator
-    namespace: solr
   - kind: ServiceAccount
     name: solr
-    namespace: solr
   - kind: ServiceAccount
     name: default
-    namespace: solr
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -43,17 +35,13 @@ kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: 'system:openshift:scc:hostmount-anyuid'
-  namespace: solr
 subjects:
   - kind: ServiceAccount
     name: zookeeper-operator
-    namespace: solr
   - kind: ServiceAccount
     name: solr
-    namespace: solr
   - kind: ServiceAccount
     name: default
-    namespace: solr
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -63,14 +51,11 @@ kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: 'system:openshift:scc:log-collector-scc'
-  namespace: solr
 subjects:
   - kind: ServiceAccount
     name: zookeeper-operator
-    namespace: solr
   - kind: ServiceAccount
     name: solr
-    namespace: solr
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -80,14 +65,11 @@ kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: 'system:openshift:scc:machine-api-termination-handler'
-  namespace: solr
 subjects:
   - kind: ServiceAccount
     name: zookeeper-operator
-    namespace: solr
   - kind: ServiceAccount
     name: solr
-    namespace: solr
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -97,14 +79,11 @@ kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: 'system:openshift:scc:hostnetwork'
-  namespace: solr
 subjects:
   - kind: ServiceAccount
     name: zookeeper-operator
-    namespace: solr
   - kind: ServiceAccount
     name: solr
-    namespace: solr
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -114,14 +93,11 @@ kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: 'system:openshift:scc:hostaccess'
-  namespace: solr
 subjects:
   - kind: ServiceAccount
     name: zookeeper-operator
-    namespace: solr
   - kind: ServiceAccount
     name: solr
-    namespace: solr
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -131,17 +107,13 @@ kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: 'system:openshift:scc:privileged'
-  namespace: solr
 subjects:
   - kind: ServiceAccount
     name: zookeeper-operator
-    namespace: solr
   - kind: ServiceAccount
     name: solr
-    namespace: solr
   - kind: ServiceAccount
     name: default
-    namespace: solr
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole

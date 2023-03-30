@@ -54,8 +54,8 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Relate: TrafficSimulation.reportKeys
-	 * HtmlRow: 3
-	 * HtmlCell: 1
+	 * HtmRow: 3
+	 * HtmCell: 1
 	 * Facet: true
 	 * DisplayName: traffic simulation
 	 * Description: The traffic simulation for this report. 
@@ -89,8 +89,8 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * DocValues: true
 	 * Persist: true
 	 * DisplayName: simulation name
-	 * HtmlRow: 3
-	 * HtmlCell: 2
+	 * HtmRow: 3
+	 * HtmCell: 2
 	 * Facet: true
 	 */
 	protected void _simulationName(Wrap<String> w) {
@@ -114,8 +114,8 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 4
-	 * HtmlCell: 1
+	 * HtmRow: 4
+	 * HtmCell: 1
 	 * Facet: true
 	 * DisplayName: Average vehicle/min from WEST to EAST
 	 * Description: 
@@ -129,8 +129,8 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 4
-	 * HtmlCell: 2
+	 * HtmRow: 4
+	 * HtmCell: 2
 	 * Facet: true
 	 * DisplayName: Average vehicle/min from SOUTH to NORTH
 	 * Description: 
@@ -144,8 +144,8 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 4
-	 * HtmlCell: 3
+	 * HtmRow: 4
+	 * HtmCell: 3
 	 * Facet: true
 	 * DisplayName: Demand scaling factor (multiplies all vehicle demands)
 	 * Description: 
@@ -159,8 +159,8 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 5
-	 * HtmlCell: 1
+	 * HtmRow: 5
+	 * HtmCell: 1
 	 * Facet: true
 	 * DisplayName: Average pedestrian/min from WEST to EAST
 	 * Description: 
@@ -174,8 +174,8 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 5
-	 * HtmlCell: 2
+	 * HtmRow: 5
+	 * HtmCell: 2
 	 * Facet: true
 	 * DisplayName: Average pedestrian/min from WEST to EAST
 	 * Description: 
@@ -189,8 +189,8 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 5
-	 * HtmlCell: 3
+	 * HtmRow: 5
+	 * HtmCell: 3
 	 * Facet: true
 	 * DisplayName: Demand scaling factor (multiplies all pedestrian demands)
 	 * Description: 
@@ -220,8 +220,8 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 6
-	 * HtmlCell: 1
+	 * HtmRow: 6
+	 * HtmCell: 1
 	 * Facet: true
 	 * DisplayName: Min GREEN time for WEST-EAST traffic (sec)
 	 * Description: 
@@ -234,8 +234,8 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 6
-	 * HtmlCell: 2
+	 * HtmRow: 6
+	 * HtmCell: 2
 	 * Facet: true
 	 * DisplayName: Max GREEN time for WEST-EAST traffic (sec)
 	 * Description: 
@@ -248,8 +248,8 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 7
-	 * HtmlCell: 1
+	 * HtmRow: 7
+	 * HtmCell: 1
 	 * Facet: true
 	 * DisplayName: Min GREEN time for SOUTH-NORTH traffic (sec)
 	 * Description: 
@@ -262,8 +262,8 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 7
-	 * HtmlCell: 2
+	 * HtmRow: 7
+	 * HtmCell: 2
 	 * Facet: true
 	 * DisplayName: Max GREEN time for SOUTH-NORTH traffic (sec)
 	 * Description: 
@@ -276,8 +276,8 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 8
-	 * HtmlCell: 1
+	 * HtmRow: 8
+	 * HtmCell: 1
 	 * Facet: true
 	 * DisplayName: Pedestrian waiting time tolerance threshold for NORTH-SOUTH (sec)
 	 * Description: 
@@ -290,8 +290,8 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 8
-	 * HtmlCell: 2
+	 * HtmRow: 8
+	 * HtmCell: 2
 	 * Facet: true
 	 * DisplayName: Pedestrian waiting time tolerance threshold for WEST-EAST (sec)
 	 * Description: 
@@ -304,8 +304,8 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 9
-	 * HtmlCell: 1
+	 * HtmRow: 9
+	 * HtmCell: 1
 	 * Facet: true
 	 * DisplayName: Vehicle queue length threshold between low-high content for WEST-EAST
 	 * Description: 
@@ -318,8 +318,8 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 9
-	 * HtmlCell: 2
+	 * HtmRow: 9
+	 * HtmCell: 2
 	 * Facet: true
 	 * DisplayName: Vehicle queue length threshold between low-high content for SOUTH-NORTH
 	 * Description: 
@@ -332,8 +332,8 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 10
-	 * HtmlCell: 1
+	 * HtmRow: 10
+	 * HtmCell: 1
 	 * Facet: true
 	 * DisplayName: Pedestrian queue length threshold between low-high content for NORTH-SOUTH
 	 * Description: 
@@ -346,8 +346,8 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 10
-	 * HtmlCell: 2
+	 * HtmRow: 10
+	 * HtmCell: 2
 	 * Facet: true
 	 * DisplayName: Pedestrian queue length threshold between low-high content for WEST-EAST
 	 * Description: 
@@ -364,9 +364,10 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * DisplayName: demand scale
 	 * Description: 
 	 */
-	protected void _paramDemandScale(Wrap<BigDecimal> w) {
-		if(simulation_ != null)
-			w.o(simulation_.getParamVehicleDemandScalingFactor());
+	protected void _paramDemandScale(List<BigDecimal> l) {
+		if(simulation_ != null) {
+			l.addAll(simulation_.getParamDemandScale());
+		}
 	}
 
 	/**
@@ -395,8 +396,8 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 11
-	 * HtmlCell: 1
+	 * HtmRow: 11
+	 * HtmCell: 1
 	 * Facet: true
 	 * DisplayName: Simulation time step (sec)
 	 * Description: 
@@ -410,21 +411,8 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * Facet: true
-	 * DisplayName: update step size
-	 * Description: 
-	 */
-	protected void _paramUpdateStepSize(Wrap<Integer> w) {
-		if(simulation_ != null)
-			w.o(simulation_.getParamUpdateStepSize());
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * DocValues: true
-	 * Persist: true
-	 * HtmlRow: 11
-	 * HtmlCell: 2
+	 * HtmRow: 11
+	 * HtmCell: 2
 	 * Facet: true
 	 * DisplayName: time for each round of traffic simulation (sec)
 	 * Description: Time duration of each simulated sample path. 
@@ -438,8 +426,8 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 12
-	 * HtmlCell: 1
+	 * HtmRow: 12
+	 * HtmCell: 1
 	 * Facet: true
 	 * DisplayName: Number of simulation repetitions with same input (for statistical accuracy)
 	 * Description: Number of repeats per round. 
@@ -453,8 +441,8 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 12
-	 * HtmlCell: 2
+	 * HtmRow: 12
+	 * HtmCell: 2
 	 * Facet: true
 	 * DisplayName: Number of parameter update iterations before output
 	 * Description: Total iterations to update performance. 
@@ -468,8 +456,8 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 13
-	 * HtmlCell: 1
+	 * HtmRow: 13
+	 * HtmCell: 1
 	 * Facet: true
 	 * DisplayName: updated parameters
 	 * Description: the resulting updated parameters after a simulation
@@ -481,13 +469,86 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 14
-	 * HtmlCell: 1
 	 * Facet: true
 	 * DisplayName: updated performance
 	 * Description: the resulting updated performance after a simulation
 	 */
 	protected void _updatedPerformance(Wrap<JsonArray> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * HtmRow: 15
+	 * HtmCell: 1
+	 * Facet: true
+	 * DisplayName: Average waiting time for WEST-EAST vehicles (sec)
+	 * Description: 
+	 */
+	protected void _updatedPerformanceWaitWestEastVehicleSec(Wrap<JsonArray> w) {
+		if(updatedPerformance != null && updatedPerformance.size() == 5) {
+			w.o(updatedPerformance.getJsonArray(0));
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * HtmRow: 16
+	 * HtmCell: 1
+	 * Facet: true
+	 * DisplayName: Average waiting time for SOUTH-NORTH vehicles (sec)
+	 * Description: 
+	 */
+	protected void _updatedPerformanceWaitSouthNorthVehicleSec(Wrap<JsonArray> w) {
+		if(updatedPerformance != null && updatedPerformance.size() == 5) {
+			w.o(updatedPerformance.getJsonArray(1));
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * HtmRow: 17
+	 * HtmCell: 1
+	 * Facet: true
+	 * DisplayName: Average waiting time for all vehicles (sec)
+	 * Description: 
+	 */
+	protected void _updatedPerformanceWaitAllVehicleSec(Wrap<JsonArray> w) {
+		if(updatedPerformance != null && updatedPerformance.size() == 5) {
+			w.o(updatedPerformance.getJsonArray(2));
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * HtmRow: 18
+	 * HtmCell: 1
+	 * Facet: true
+	 * DisplayName: Average waiting time for pedestrians (sec)
+	 * Description: 
+	 */
+	protected void _updatedPerformanceWaitAllPedestrianSec(Wrap<JsonArray> w) {
+		if(updatedPerformance != null && updatedPerformance.size() == 5) {
+			w.o(updatedPerformance.getJsonArray(3));
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * HtmRow: 18
+	 * HtmCell: 1
+	 * Facet: true
+	 * DisplayName: Average waiting time for vehicles and pedestrians (sec)
+	 * Description: 
+	 */
+	protected void _updatedPerformanceWaitAllVehiclePedestrianSec(Wrap<JsonArray> w) {
+		if(updatedPerformance != null && updatedPerformance.size() == 5) {
+			w.o(updatedPerformance.getJsonArray(4));
+		}
 	}
 
 	/**
