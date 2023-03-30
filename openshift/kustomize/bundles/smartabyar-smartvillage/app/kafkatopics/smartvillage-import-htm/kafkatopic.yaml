@@ -1,0 +1,8 @@
+kind: KafkaTopic
+apiVersion: kafka.strimzi.io/v1beta2
+metadata:
+  name: smartvillage-import-htm
+  labels:
+    strimzi.io/cluster: smartvillage-kafka
+  namespace: smart-village-view
+spec: {}
