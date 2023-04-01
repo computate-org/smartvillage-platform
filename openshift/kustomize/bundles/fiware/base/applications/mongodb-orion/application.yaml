@@ -1,17 +1,21 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: amq-broker
+  name: mongodb-orion
   namespace: openshift-gitops
 spec:
   project: default
   source:
-    repoURL: https://github.com/computate-org/smartabyar-smartvillage.git
+    repoURL: https://github.com/FIWARE-Ops/marinera.git
     targetRevision: HEAD
-    path: openshift/kustomize/bundles/amq-broker/app
+    path: applications/mongodb/chart
   destination:
-    namespace: amq-broker
+    namespace: fiware
     server: 'https://kubernetes.default.svc'
+    helm:
+      parameters:
+        - name: mongodb.architecture
+          value: standalone
   syncPolicy:
     automated:
       # resources that no longer exist get deleted on sync
