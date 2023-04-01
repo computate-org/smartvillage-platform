@@ -1,4 +1,10 @@
 
+# Install Ansible dependencies
+
+```bash
+ansible-galaxy collection install community.hashi\_vault
+pip3 install hvac
+```
 
 # Setup smartabyar-smartvillage development environment on MacOSX or Linux (Fedora, RHEL, CentOS, Ubuntu)
 

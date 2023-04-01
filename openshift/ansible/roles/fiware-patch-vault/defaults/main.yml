@@ -1,0 +1,13 @@
+---
+REDHAT_OPENSHIFT_HOST: https://api.crc.testing:6443
+REDHAT_OPENSHIFT_TOKEN: "{{ lookup('env', 'REDHAT_OPENSHIFT_TOKEN') | default(omit) }}"
+
+VAULT_DESTINATION_NAMESPACE: fiware
+VAULT_DESTINATION_VAULT_MOUNT: "{{ VAULT_DESTINATION_NAMESPACE }}/kv"
+VAULT_DESTINATION_SECRET_NAME: mongodb-secret
+VAULT_BASE_URL: https://vault.apps-crc.testing
+VAULT_NAMESPACE: vault
+
+POSTGRES_POD_LABEL: postgres-operator.crunchydata.com/data=postgres
+POSTGRES_USER_SECRET_SSO: postgres-cluster-pguser-sso
+POSTGRES_NAMESPACE: postgres

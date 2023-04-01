@@ -1,5 +1,5 @@
 ---
-- name: Fetch the database sso secrets
+- name: Fetch the source secret
   set_fact:
     SOURCE_SECRET: "{{ query('kubernetes.core.k8s', kind='Secret', resource_name=SOURCE_SECRET_NAME, namespace=SOURCE_NAMESPACE, validate_certs=false)[0].data }}"
   vars:
@@ -24,6 +24,14 @@
     K8S_AUTH_API_KEY: "{{ REDHAT_OPENSHIFT_TOKEN }}"
   when: VAULT_ROOT_TOKEN is not defined or VAULT_ROOT_TOKEN == ''
 
+- name: Write a value to the cubbyhole via the remote host with userpass auth
+  community.hashi_vault.vault_write:
+    url: "{{ VAULT_BASE_URL }}"
+    path: "{{ DESTINATION_VAULT_MOUNT }}/{{ DESTINATION_SECRET_NAME }}"
+    data: "{{ VAULT_DATA }}"
+    auth_method: token
+    token: '{{ VAULT_ROOT_TOKEN }}'
+  register: result
 - name: Write secret value to vault
   shell: >-
     {{ VAULT_COMMAND_OC }} env VAULT_TOKEN="{{ VAULT_ROOT_TOKEN }}" 

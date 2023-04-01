@@ -1,0 +1,19 @@
+---
+- name: Get vault init dev secrets
+  set_fact:
+    VAULT_ROOT_TOKEN: "{{ query('kubernetes.core.k8s', kind='Secret', resource_name='vault-init', namespace=VAULT_NAMESPACE, validate_certs=false)[0].data.VAULT_ROOT_TOKEN | b64decode }}"
+  vars:
+    K8S_AUTH_HOST: "{{ REDHAT_OPENSHIFT_HOST }}"
+    K8S_AUTH_API_KEY: "{{ REDHAT_OPENSHIFT_TOKEN }}"
+  when: VAULT_ROOT_TOKEN is not defined or VAULT_ROOT_TOKEN == ''
+- name: Write to vault
+  community.hashi_vault.vault_write:
+    url: "{{ VAULT_BASE_URL }}"
+    path: "{{ VAULT_DESTINATION_VAULT_MOUNT }}/{{ VAULT_DESTINATION_SECRET_NAME }}"
+    data:
+      mongodb-password: "{{ lookup('password', '/dev/null', length=15, chars=['ascii_letters', 'digits']) }}"
+      mongodb-replica-set-key: "{{ lookup('password', '/dev/null', length=15, chars=['ascii_letters', 'digits']) }}"
+      mongodb-root-password: "{{ lookup('password', '/dev/null', length=15, chars=['ascii_letters', 'digits']) }}"
+    auth_method: token
+    validate_certs: False
+    token: '{{ VAULT_ROOT_TOKEN }}'

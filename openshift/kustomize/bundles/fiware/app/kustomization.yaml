@@ -3,5 +3,4 @@ kind: Kustomization
 resources:
   - secretenginemounts/
   - secretstores/
-  - randomsecrets/
   - externalsecrets/

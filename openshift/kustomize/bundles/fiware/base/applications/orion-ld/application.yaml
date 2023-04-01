@@ -1,21 +1,30 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: mongodb-orion
+  name: orion-ld
   namespace: openshift-gitops
 spec:
   project: default
   source:
     repoURL: https://github.com/FIWARE-Ops/marinera.git
     targetRevision: HEAD
-    path: applications/mongodb/chart
+    path: applications/orion-ld/chart
     helm:
       values: |
-        mongodb:
-          architecture: standalone
-          auth:
+        orion-ld:
+          broker:
+            db:
+              hosts:
+                - mongodb-orion.fiware.svc.cluster.local
+              existingSecret:
+                name: mongodb-secret
+                key: mongodb-root-password
+            logging:
+              level: "INFO"
+          deployment:
+            replicaCount: 1
+          route:
             enabled: true
-            existingSecret: mongodb-secret
   destination:
     namespace: fiware
     server: 'https://kubernetes.default.svc'

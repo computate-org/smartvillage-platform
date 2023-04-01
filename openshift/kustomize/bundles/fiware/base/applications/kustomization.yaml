@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - mongodb-orion/
   - fiware-amq-broker/
+  - orion-ld/
