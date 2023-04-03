@@ -6,6 +6,30 @@ ansible-galaxy collection install community.hashi\_vault
 pip3 install hvac
 ```
 
+# Obtain postgres password
+
+```bash
+# Get JDBC_PASSWORD: 
+oc -n postgres get secret/postgres-cluster-pguser-smartvillage -o jsonpath='{.data.password}' | base64 -d; echo
+```
+
+# Obtain kafka secrets
+
+```bash
+
+# Get KAFKA_SSL_KEYSTORE_LOCATION: 
+oc extract -n smart-village-view secret/smartvillage-kafka --to=$HOME/.local/src/smartabyar-smartvillage/config/ --keys=user.p12 --confirm
+
+# Get KAFKA_SSL_KEYSTORE_PASSWORD: 
+oc -n smart-village-view get secret/smartvillage-kafka -o jsonpath='{.data.user\.password}' | base64 -d; echo
+
+# Get KAFKA_SSL_TRUSTSTORE_LOCATION: 
+oc extract -n smart-village-view secret/smartvillage-kafka-cluster-ca-cert --to=$HOME/.local/src/smartabyar-smartvillage/config/ --keys=ca.p12 --confirm
+
+# Get KAFKA_SSL_TRUSTSTORE_PASSWORD: 
+oc -n smart-village-view get secret/smartvillage-kafka-cluster-ca-cert -o jsonpath='{.data.ca\.password}' | base64 -d; echo
+```
+
 # Setup smartabyar-smartvillage development environment on MacOSX or Linux (Fedora, RHEL, CentOS, Ubuntu)
 
 ## Install Ansible dependencies on Linux
