@@ -978,7 +978,7 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 							if(body2.size() > 0) {
 								siteRequest.setJsonObject(body2);
 								patchIotNodeFuture(o2, true).onSuccess(b -> {
-									LOG.info("Import IotNode {} succeeded, modified IotNode. ", body.getValue(IotNode.VAR_id));
+									LOG.debug("Import IotNode {} succeeded, modified IotNode. ", body.getValue(IotNode.VAR_id));
 									eventHandler.handle(Future.succeededFuture());
 								}).onFailure(ex -> {
 									LOG.error(String.format("putimportIotNodeFuture failed. "), ex);
@@ -989,7 +989,7 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 							}
 						} else {
 							postIotNodeFuture(siteRequest, true).onSuccess(b -> {
-								LOG.info("Import IotNode {} succeeded, created new IotNode. ", body.getValue(IotNode.VAR_id));
+								LOG.debug("Import IotNode {} succeeded, created new IotNode. ", body.getValue(IotNode.VAR_id));
 								eventHandler.handle(Future.succeededFuture());
 							}).onFailure(ex -> {
 								LOG.error(String.format("putimportIotNodeFuture failed. "), ex);

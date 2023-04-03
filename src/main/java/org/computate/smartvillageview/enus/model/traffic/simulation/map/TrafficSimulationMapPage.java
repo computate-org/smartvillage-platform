@@ -30,6 +30,7 @@ import io.vertx.ext.web.api.service.ServiceRequest;
 
 
 /**
+ * Promise: true
  **/
 public class TrafficSimulationMapPage extends TrafficSimulationMapPageGen<BaseModelPage> {
 

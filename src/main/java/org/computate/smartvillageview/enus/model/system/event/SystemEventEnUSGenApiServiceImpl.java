@@ -924,7 +924,7 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 							if(body2.size() > 0) {
 								siteRequest.setJsonObject(body2);
 								patchSystemEventFuture(o2, true).onSuccess(b -> {
-									LOG.info("Import SystemEvent {} succeeded, modified SystemEvent. ", body.getValue(SystemEvent.VAR_id));
+									LOG.debug("Import SystemEvent {} succeeded, modified SystemEvent. ", body.getValue(SystemEvent.VAR_id));
 									eventHandler.handle(Future.succeededFuture());
 								}).onFailure(ex -> {
 									LOG.error(String.format("putimportSystemEventFuture failed. "), ex);
@@ -935,7 +935,7 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 							}
 						} else {
 							postSystemEventFuture(siteRequest, true).onSuccess(b -> {
-								LOG.info("Import SystemEvent {} succeeded, created new SystemEvent. ", body.getValue(SystemEvent.VAR_id));
+								LOG.debug("Import SystemEvent {} succeeded, created new SystemEvent. ", body.getValue(SystemEvent.VAR_id));
 								eventHandler.handle(Future.succeededFuture());
 							}).onFailure(ex -> {
 								LOG.error(String.format("putimportSystemEventFuture failed. "), ex);

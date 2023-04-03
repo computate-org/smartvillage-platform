@@ -978,7 +978,7 @@ public class TrafficLightEnUSGenApiServiceImpl extends BaseApiServiceImpl implem
 							if(body2.size() > 0) {
 								siteRequest.setJsonObject(body2);
 								patchTrafficLightFuture(o2, true).onSuccess(b -> {
-									LOG.info("Import TrafficLight {} succeeded, modified TrafficLight. ", body.getValue(TrafficLight.VAR_id));
+									LOG.debug("Import TrafficLight {} succeeded, modified TrafficLight. ", body.getValue(TrafficLight.VAR_id));
 									eventHandler.handle(Future.succeededFuture());
 								}).onFailure(ex -> {
 									LOG.error(String.format("putimportTrafficLightFuture failed. "), ex);
@@ -989,7 +989,7 @@ public class TrafficLightEnUSGenApiServiceImpl extends BaseApiServiceImpl implem
 							}
 						} else {
 							postTrafficLightFuture(siteRequest, true).onSuccess(b -> {
-								LOG.info("Import TrafficLight {} succeeded, created new TrafficLight. ", body.getValue(TrafficLight.VAR_id));
+								LOG.debug("Import TrafficLight {} succeeded, created new TrafficLight. ", body.getValue(TrafficLight.VAR_id));
 								eventHandler.handle(Future.succeededFuture());
 							}).onFailure(ex -> {
 								LOG.error(String.format("putimportTrafficLightFuture failed. "), ex);

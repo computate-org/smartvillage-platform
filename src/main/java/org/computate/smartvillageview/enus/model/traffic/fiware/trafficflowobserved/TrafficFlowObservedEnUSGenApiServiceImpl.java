@@ -978,7 +978,7 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 							if(body2.size() > 0) {
 								siteRequest.setJsonObject(body2);
 								patchTrafficFlowObservedFuture(o2, true).onSuccess(b -> {
-									LOG.info("Import TrafficFlowObserved {} succeeded, modified TrafficFlowObserved. ", body.getValue(TrafficFlowObserved.VAR_id));
+									LOG.debug("Import TrafficFlowObserved {} succeeded, modified TrafficFlowObserved. ", body.getValue(TrafficFlowObserved.VAR_id));
 									eventHandler.handle(Future.succeededFuture());
 								}).onFailure(ex -> {
 									LOG.error(String.format("putimportTrafficFlowObservedFuture failed. "), ex);
@@ -989,7 +989,7 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 							}
 						} else {
 							postTrafficFlowObservedFuture(siteRequest, true).onSuccess(b -> {
-								LOG.info("Import TrafficFlowObserved {} succeeded, created new TrafficFlowObserved. ", body.getValue(TrafficFlowObserved.VAR_id));
+								LOG.debug("Import TrafficFlowObserved {} succeeded, created new TrafficFlowObserved. ", body.getValue(TrafficFlowObserved.VAR_id));
 								eventHandler.handle(Future.succeededFuture());
 							}).onFailure(ex -> {
 								LOG.error(String.format("putimportTrafficFlowObservedFuture failed. "), ex);

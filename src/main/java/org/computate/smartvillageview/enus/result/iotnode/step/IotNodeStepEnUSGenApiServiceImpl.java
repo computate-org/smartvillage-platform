@@ -978,7 +978,7 @@ public class IotNodeStepEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 							if(body2.size() > 0) {
 								siteRequest.setJsonObject(body2);
 								patchIotNodeStepFuture(o2, true).onSuccess(b -> {
-									LOG.info("Import IotNodeStep {} succeeded, modified IotNodeStep. ", body.getValue(IotNodeStep.VAR_id));
+									LOG.debug("Import IotNodeStep {} succeeded, modified IotNodeStep. ", body.getValue(IotNodeStep.VAR_id));
 									eventHandler.handle(Future.succeededFuture());
 								}).onFailure(ex -> {
 									LOG.error(String.format("putimportIotNodeStepFuture failed. "), ex);
@@ -989,7 +989,7 @@ public class IotNodeStepEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 							}
 						} else {
 							postIotNodeStepFuture(siteRequest, true).onSuccess(b -> {
-								LOG.info("Import IotNodeStep {} succeeded, created new IotNodeStep. ", body.getValue(IotNodeStep.VAR_id));
+								LOG.debug("Import IotNodeStep {} succeeded, created new IotNodeStep. ", body.getValue(IotNodeStep.VAR_id));
 								eventHandler.handle(Future.succeededFuture());
 							}).onFailure(ex -> {
 								LOG.error(String.format("putimportIotNodeStepFuture failed. "), ex);

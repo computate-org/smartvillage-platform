@@ -854,6 +854,14 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							num++;
 							bParams.add(o2.sqlParamTotalIterNum());
 						break;
+					case "setReportStatus":
+							o2.setReportStatus(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_reportStatus + "=$" + num);
+							num++;
+							bParams.add(o2.sqlReportStatus());
+						break;
 					case "setUpdatedParameters":
 							o2.setUpdatedParameters(jsonObject.getJsonArray(entityVar));
 							if(bParams.size() > 0)
@@ -1449,6 +1457,15 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 						bSql.append(SimulationReport.VAR_paramTotalIterNum + "=$" + num);
 						num++;
 						bParams.add(o2.sqlParamTotalIterNum());
+						break;
+					case SimulationReport.VAR_reportStatus:
+						o2.setReportStatus(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_reportStatus + "=$" + num);
+						num++;
+						bParams.add(o2.sqlReportStatus());
 						break;
 					case SimulationReport.VAR_updatedParameters:
 						o2.setUpdatedParameters(jsonObject.getJsonArray(entityVar));
@@ -2302,6 +2319,14 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							bSql.append(SimulationReport.VAR_paramTotalIterNum + "=$" + num);
 							num++;
 							bParams.add(o2.sqlParamTotalIterNum());
+						break;
+					case "setReportStatus":
+							o2.setReportStatus(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_reportStatus + "=$" + num);
+							num++;
+							bParams.add(o2.sqlReportStatus());
 						break;
 					case "setUpdatedParameters":
 							o2.setUpdatedParameters(jsonObject.getJsonArray(entityVar));

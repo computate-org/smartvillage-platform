@@ -978,7 +978,7 @@ public class BicycleStepEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 							if(body2.size() > 0) {
 								siteRequest.setJsonObject(body2);
 								patchBicycleStepFuture(o2, true).onSuccess(b -> {
-									LOG.info("Import BicycleStep {} succeeded, modified BicycleStep. ", body.getValue(BicycleStep.VAR_id));
+									LOG.debug("Import BicycleStep {} succeeded, modified BicycleStep. ", body.getValue(BicycleStep.VAR_id));
 									eventHandler.handle(Future.succeededFuture());
 								}).onFailure(ex -> {
 									LOG.error(String.format("putimportBicycleStepFuture failed. "), ex);
@@ -989,7 +989,7 @@ public class BicycleStepEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 							}
 						} else {
 							postBicycleStepFuture(siteRequest, true).onSuccess(b -> {
-								LOG.info("Import BicycleStep {} succeeded, created new BicycleStep. ", body.getValue(BicycleStep.VAR_id));
+								LOG.debug("Import BicycleStep {} succeeded, created new BicycleStep. ", body.getValue(BicycleStep.VAR_id));
 								eventHandler.handle(Future.succeededFuture());
 							}).onFailure(ex -> {
 								LOG.error(String.format("putimportBicycleStepFuture failed. "), ex);

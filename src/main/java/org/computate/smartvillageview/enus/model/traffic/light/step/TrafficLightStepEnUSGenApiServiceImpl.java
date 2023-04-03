@@ -978,7 +978,7 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							if(body2.size() > 0) {
 								siteRequest.setJsonObject(body2);
 								patchTrafficLightStepFuture(o2, true).onSuccess(b -> {
-									LOG.info("Import TrafficLightStep {} succeeded, modified TrafficLightStep. ", body.getValue(TrafficLightStep.VAR_id));
+									LOG.debug("Import TrafficLightStep {} succeeded, modified TrafficLightStep. ", body.getValue(TrafficLightStep.VAR_id));
 									eventHandler.handle(Future.succeededFuture());
 								}).onFailure(ex -> {
 									LOG.error(String.format("putimportTrafficLightStepFuture failed. "), ex);
@@ -989,7 +989,7 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							}
 						} else {
 							postTrafficLightStepFuture(siteRequest, true).onSuccess(b -> {
-								LOG.info("Import TrafficLightStep {} succeeded, created new TrafficLightStep. ", body.getValue(TrafficLightStep.VAR_id));
+								LOG.debug("Import TrafficLightStep {} succeeded, created new TrafficLightStep. ", body.getValue(TrafficLightStep.VAR_id));
 								eventHandler.handle(Future.succeededFuture());
 							}).onFailure(ex -> {
 								LOG.error(String.format("putimportTrafficLightStepFuture failed. "), ex);

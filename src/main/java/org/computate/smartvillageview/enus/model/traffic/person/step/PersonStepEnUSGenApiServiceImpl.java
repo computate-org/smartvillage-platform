@@ -978,7 +978,7 @@ public class PersonStepEnUSGenApiServiceImpl extends BaseApiServiceImpl implemen
 							if(body2.size() > 0) {
 								siteRequest.setJsonObject(body2);
 								patchPersonStepFuture(o2, true).onSuccess(b -> {
-									LOG.info("Import PersonStep {} succeeded, modified PersonStep. ", body.getValue(PersonStep.VAR_id));
+									LOG.debug("Import PersonStep {} succeeded, modified PersonStep. ", body.getValue(PersonStep.VAR_id));
 									eventHandler.handle(Future.succeededFuture());
 								}).onFailure(ex -> {
 									LOG.error(String.format("putimportPersonStepFuture failed. "), ex);
@@ -989,7 +989,7 @@ public class PersonStepEnUSGenApiServiceImpl extends BaseApiServiceImpl implemen
 							}
 						} else {
 							postPersonStepFuture(siteRequest, true).onSuccess(b -> {
-								LOG.info("Import PersonStep {} succeeded, created new PersonStep. ", body.getValue(PersonStep.VAR_id));
+								LOG.debug("Import PersonStep {} succeeded, created new PersonStep. ", body.getValue(PersonStep.VAR_id));
 								eventHandler.handle(Future.succeededFuture());
 							}).onFailure(ex -> {
 								LOG.error(String.format("putimportPersonStepFuture failed. "), ex);
