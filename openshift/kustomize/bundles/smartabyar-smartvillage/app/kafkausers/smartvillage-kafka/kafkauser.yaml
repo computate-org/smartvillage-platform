@@ -1,7 +1,7 @@
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaUser
 metadata:
-  name: smartvillage
+  name: smartvillage-kafka
   namespace: smart-village-view
   labels:
     strimzi.io/cluster: smartvillage-kafka
