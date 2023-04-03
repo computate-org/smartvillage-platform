@@ -2,24 +2,36 @@
 
 touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/request/SiteRequestEnUS.java
 sleep 5
+touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/request/SiteRequestEnUS.java
+sleep 5
 touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/config/ConfigKeys.java
 sleep 5
 touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/model/base/BaseModel.java
 sleep 5
+touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/model/base/BaseModel.java
+sleep 5
 touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/result/base/BaseResult.java
+sleep 5
+touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/result/base/BaseResult.java
+sleep 5
+touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/model/user/SiteUser.java
 sleep 5
 touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/model/user/SiteUser.java
 sleep 5
 touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/request/SiteRequestEnUS.java
 sleep 5
+touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/page/PageLayout.java
+sleep 5
 touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/model/base/BaseModel.java
 sleep 5
 touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/result/base/BaseResult.java
 sleep 5
 touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/model/user/SiteUser.java
 sleep 5
-touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/page/PageLayout.java
+touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/vertx/MainVerticle.java
+sleep 5
 touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/page/HomePage.java
+# To load the SITE_NAME variable. 
 touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/vertx/MainVerticle.java
 touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/vertx/WorkerVerticle.java
 
@@ -39,6 +51,7 @@ touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvill
 touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/model/iotnode/IotNode.java
 touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/model/traffic/light/step/TrafficLightStep.java
 touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/model/traffic/light/TrafficLight.java
+touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/model/traffic/simulation/report/SimulationReport.java
 sleep 5
 touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/result/iotnode/step/IotNodeStep.java
 touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/model/traffic/person/step/PersonStep.java
