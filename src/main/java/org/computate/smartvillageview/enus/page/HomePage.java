@@ -22,6 +22,9 @@ import io.vertx.core.Promise;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
+/**
+ * Promise: true
+ */
 public class HomePage extends HomePageGen<PageLayout> {
 
 

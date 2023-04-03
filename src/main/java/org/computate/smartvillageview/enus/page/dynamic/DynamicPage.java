@@ -25,6 +25,9 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.api.service.ServiceRequest;
 
 
+/**
+ * Promise: true
+ */
 public class DynamicPage extends DynamicPageGen<PageLayout> {
 
 	/**

@@ -464,6 +464,24 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
+	 * HtmRow: 12
+	 * HtmCell: 3
+	 * Facet: true
+	 * DisplayName: report status
+	 * Description: The current status of the simulation report. 
+	 * Val.Stopped.enUS: Stopped
+	 * Val.Completed.enUS: Completed
+	 * Val.Running.enUS: Running
+	 * Val.Error.enUS: Error
+	 */
+	protected void _reportStatus(Wrap<String> w) {
+		w.o(reportStatusStopped_enUS);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
 	 * HtmRow: 13
 	 * HtmCell: 1
 	 * Facet: true
