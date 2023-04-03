@@ -46,6 +46,7 @@ import io.vertx.core.Future;
 <ol>
 0<h3>Suggestions that can generate more code for you: </h3></ol>
  * <li>You can add a class comment <b>"Api: true"</b> if you wish to GET, POST, PATCH or PUT these DynamicPage objects in a RESTful API. 
+ * </li><li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class DynamicPageGen into the class DynamicPage. 
  * </li>
  * <h3>About the DynamicPage class and it's generated class DynamicPageGen&lt;PageLayout&gt;: </h3>extends DynamicPageGen
  * <p>
@@ -53,7 +54,7 @@ import io.vertx.core.Future;
  * Whenever this Java class is modified or touched, the watch service installed as described in the README, indexes all the information about this Java class in a local Apache Solr Search Engine. 
  * If you are running the service, you can see the indexed data about this Java Class here: 
  * </p>
- * <p><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstClasse_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.dynamic.DynamicPage">Find the class DynamicPage in Solr. </a></p>
+ * <p><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstClasse_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.dynamic.DynamicPage">Find the class DynamicPage in Solr. </a></p>
  * <p>
  * The extended class ending with "Gen" did not exist at first, but was automatically created by the same watch service based on the data retrieved from the local Apache Server search engine. 
  * The extended class contains many generated fields, getters, setters, initialization code, and helper methods to help build a website and API fast, reactive, and scalable. 
@@ -64,7 +65,7 @@ import io.vertx.core.Future;
  * This generated inheritance is a powerful feature that allows a lot of boiler plate code to be created for you automatically while still preserving inheritance through the power of Java Generic classes. 
  * </p>
  * Api: true
- * ApiTag.enUS: null
+ * ApiTag.enUS: true
  * ApiUri.enUS: null
  * Color: null
  * IconGroup: null
@@ -103,15 +104,15 @@ import io.vertx.core.Future;
  * AName.enUS: null
  * <p>
  * Delete the class DynamicPage in Solr: 
- * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.dynamic.DynamicPage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.dynamic.DynamicPage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
  * Delete  the package org.computate.smartvillageview.enus.page.dynamic in Solr: 
- * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.page.dynamic&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.page.dynamic&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
  * Delete  the project smartabyar-smartvillage in Solr: 
- * curl 'http://localhost:8983/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartabyar\-smartvillage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartabyar\-smartvillage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  **/
 public abstract class DynamicPageGen<DEV> extends PageLayout {
@@ -131,7 +132,7 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 
 	/**	<br> The entity page
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.dynamic.DynamicPage&fq=entiteVar_enUS_indexed_string:page">Find the entity page in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.dynamic.DynamicPage&fq=entiteVar_enUS_indexed_string:page">Find the entity page in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -189,7 +190,7 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 
 	/**	<br> The entity url
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.dynamic.DynamicPage&fq=entiteVar_enUS_indexed_string:url">Find the entity url in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.dynamic.DynamicPage&fq=entiteVar_enUS_indexed_string:url">Find the entity url in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -239,7 +240,7 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 
 	/**	<br> The entity uri
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.dynamic.DynamicPage&fq=entiteVar_enUS_indexed_string:uri">Find the entity uri in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.dynamic.DynamicPage&fq=entiteVar_enUS_indexed_string:uri">Find the entity uri in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -289,7 +290,7 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 
 	/**	<br> The entity pageId
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.dynamic.DynamicPage&fq=entiteVar_enUS_indexed_string:pageId">Find the entity pageId in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.dynamic.DynamicPage&fq=entiteVar_enUS_indexed_string:pageId">Find the entity pageId in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -339,7 +340,7 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 
 	/**	<br> The entity vars
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.dynamic.DynamicPage&fq=entiteVar_enUS_indexed_string:vars">Find the entity vars in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.dynamic.DynamicPage&fq=entiteVar_enUS_indexed_string:vars">Find the entity vars in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -378,7 +379,7 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 
 	/**	<br> The entity filterLabel
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.dynamic.DynamicPage&fq=entiteVar_enUS_indexed_string:filterLabel">Find the entity filterLabel in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.dynamic.DynamicPage&fq=entiteVar_enUS_indexed_string:filterLabel">Find the entity filterLabel in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -428,7 +429,7 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 
 	/**	<br> The entity htmList
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.dynamic.DynamicPage&fq=entiteVar_enUS_indexed_string:htmList">Find the entity htmList in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.dynamic.DynamicPage&fq=entiteVar_enUS_indexed_string:htmList">Find the entity htmList in Solr</a>
 	 * <br>
 	 * @param promise is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -489,7 +490,7 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 
 	/**	<br> The entity htmTitle
 	 *  It is constructed before being initialized with the constructor by default. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.dynamic.DynamicPage&fq=entiteVar_enUS_indexed_string:htmTitle">Find the entity htmTitle in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.dynamic.DynamicPage&fq=entiteVar_enUS_indexed_string:htmTitle">Find the entity htmTitle in Solr</a>
 	 * <br>
 	 * @param l is the entity already constructed. 
 	 **/
@@ -502,12 +503,31 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 	public void setHtmTitle(JsonArray htmTitle) {
 		this.htmTitle = htmTitle;
 	}
+	@JsonIgnore
+	public void setHtmTitle(String o) {
+		this.htmTitle = DynamicPage.staticSetHtmTitle(siteRequest_, o);
+	}
 	public static JsonArray staticSetHtmTitle(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonArray(o);
+		}
 		return null;
 	}
 	protected DynamicPage htmTitleInit() {
 		_htmTitle(htmTitle);
 		return (DynamicPage)this;
+	}
+
+	public static JsonArray staticSearchHtmTitle(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o;
+	}
+
+	public static String staticSearchStrHtmTitle(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqHtmTitle(SiteRequestEnUS siteRequest_, String o) {
+		return DynamicPage.staticSearchStrHtmTitle(siteRequest_, DynamicPage.staticSearchHtmTitle(siteRequest_, DynamicPage.staticSetHtmTitle(siteRequest_, o)));
 	}
 
 	/////////////
@@ -524,7 +544,7 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 
 	/**	<br> The entity htmMeta
 	 *  It is constructed before being initialized with the constructor by default. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.dynamic.DynamicPage&fq=entiteVar_enUS_indexed_string:htmMeta">Find the entity htmMeta in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.dynamic.DynamicPage&fq=entiteVar_enUS_indexed_string:htmMeta">Find the entity htmMeta in Solr</a>
 	 * <br>
 	 * @param l is the entity already constructed. 
 	 **/
@@ -537,12 +557,31 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 	public void setHtmMeta(JsonArray htmMeta) {
 		this.htmMeta = htmMeta;
 	}
+	@JsonIgnore
+	public void setHtmMeta(String o) {
+		this.htmMeta = DynamicPage.staticSetHtmMeta(siteRequest_, o);
+	}
 	public static JsonArray staticSetHtmMeta(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonArray(o);
+		}
 		return null;
 	}
 	protected DynamicPage htmMetaInit() {
 		_htmMeta(htmMeta);
 		return (DynamicPage)this;
+	}
+
+	public static JsonArray staticSearchHtmMeta(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o;
+	}
+
+	public static String staticSearchStrHtmMeta(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqHtmMeta(SiteRequestEnUS siteRequest_, String o) {
+		return DynamicPage.staticSearchStrHtmMeta(siteRequest_, DynamicPage.staticSearchHtmMeta(siteRequest_, DynamicPage.staticSetHtmMeta(siteRequest_, o)));
 	}
 
 	/////////////
@@ -559,7 +598,7 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 
 	/**	<br> The entity htmBody
 	 *  It is constructed before being initialized with the constructor by default. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.dynamic.DynamicPage&fq=entiteVar_enUS_indexed_string:htmBody">Find the entity htmBody in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.dynamic.DynamicPage&fq=entiteVar_enUS_indexed_string:htmBody">Find the entity htmBody in Solr</a>
 	 * <br>
 	 * @param l is the entity already constructed. 
 	 **/
@@ -572,12 +611,31 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 	public void setHtmBody(JsonArray htmBody) {
 		this.htmBody = htmBody;
 	}
+	@JsonIgnore
+	public void setHtmBody(String o) {
+		this.htmBody = DynamicPage.staticSetHtmBody(siteRequest_, o);
+	}
 	public static JsonArray staticSetHtmBody(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonArray(o);
+		}
 		return null;
 	}
 	protected DynamicPage htmBodyInit() {
 		_htmBody(htmBody);
 		return (DynamicPage)this;
+	}
+
+	public static JsonArray staticSearchHtmBody(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o;
+	}
+
+	public static String staticSearchStrHtmBody(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqHtmBody(SiteRequestEnUS siteRequest_, String o) {
+		return DynamicPage.staticSearchStrHtmBody(siteRequest_, DynamicPage.staticSearchHtmBody(siteRequest_, DynamicPage.staticSetHtmBody(siteRequest_, o)));
 	}
 
 	//////////////////
@@ -594,7 +652,7 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 
 	/**	<br> The entity pageResponse
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.dynamic.DynamicPage&fq=entiteVar_enUS_indexed_string:pageResponse">Find the entity pageResponse in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.dynamic.DynamicPage&fq=entiteVar_enUS_indexed_string:pageResponse">Find the entity pageResponse in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -644,7 +702,7 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 
 	/**	<br> The entity defaultZoneId
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.dynamic.DynamicPage&fq=entiteVar_enUS_indexed_string:defaultZoneId">Find the entity defaultZoneId in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.dynamic.DynamicPage&fq=entiteVar_enUS_indexed_string:defaultZoneId">Find the entity defaultZoneId in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -694,7 +752,7 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 
 	/**	<br> The entity defaultTimeZone
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.dynamic.DynamicPage&fq=entiteVar_enUS_indexed_string:defaultTimeZone">Find the entity defaultTimeZone in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.dynamic.DynamicPage&fq=entiteVar_enUS_indexed_string:defaultTimeZone">Find the entity defaultTimeZone in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -733,7 +791,7 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 
 	/**	<br> The entity defaultLocaleId
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.dynamic.DynamicPage&fq=entiteVar_enUS_indexed_string:defaultLocaleId">Find the entity defaultLocaleId in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.dynamic.DynamicPage&fq=entiteVar_enUS_indexed_string:defaultLocaleId">Find the entity defaultLocaleId in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -783,7 +841,7 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 
 	/**	<br> The entity defaultLocale
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:8983/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.dynamic.DynamicPage&fq=entiteVar_enUS_indexed_string:defaultLocale">Find the entity defaultLocale in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.dynamic.DynamicPage&fq=entiteVar_enUS_indexed_string:defaultLocale">Find the entity defaultLocale in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -890,8 +948,6 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 
 	public void siteRequestDynamicPage(SiteRequestEnUS siteRequest_) {
 			super.siteRequestPageLayout(siteRequest_);
-		if(htmList != null)
-			htmList.setSiteRequest_(siteRequest_);
 	}
 
 	public void siteRequestForClass(SiteRequestEnUS siteRequest_) {
@@ -1001,6 +1057,12 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 			return DynamicPage.staticSetPageId(siteRequest_, o);
 		case "filterLabel":
 			return DynamicPage.staticSetFilterLabel(siteRequest_, o);
+		case "htmTitle":
+			return DynamicPage.staticSetHtmTitle(siteRequest_, o);
+		case "htmMeta":
+			return DynamicPage.staticSetHtmMeta(siteRequest_, o);
+		case "htmBody":
+			return DynamicPage.staticSetHtmBody(siteRequest_, o);
 		case "pageResponse":
 			return DynamicPage.staticSetPageResponse(siteRequest_, o);
 		case "defaultZoneId":
@@ -1031,6 +1093,12 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 			return DynamicPage.staticSearchPageId(siteRequest_, (String)o);
 		case "filterLabel":
 			return DynamicPage.staticSearchFilterLabel(siteRequest_, (String)o);
+		case "htmTitle":
+			return DynamicPage.staticSearchHtmTitle(siteRequest_, (JsonArray)o);
+		case "htmMeta":
+			return DynamicPage.staticSearchHtmMeta(siteRequest_, (JsonArray)o);
+		case "htmBody":
+			return DynamicPage.staticSearchHtmBody(siteRequest_, (JsonArray)o);
 		case "pageResponse":
 			return DynamicPage.staticSearchPageResponse(siteRequest_, (String)o);
 		case "defaultZoneId":
@@ -1061,6 +1129,12 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 			return DynamicPage.staticSearchStrPageId(siteRequest_, (String)o);
 		case "filterLabel":
 			return DynamicPage.staticSearchStrFilterLabel(siteRequest_, (String)o);
+		case "htmTitle":
+			return DynamicPage.staticSearchStrHtmTitle(siteRequest_, (JsonArray)o);
+		case "htmMeta":
+			return DynamicPage.staticSearchStrHtmMeta(siteRequest_, (JsonArray)o);
+		case "htmBody":
+			return DynamicPage.staticSearchStrHtmBody(siteRequest_, (JsonArray)o);
 		case "pageResponse":
 			return DynamicPage.staticSearchStrPageResponse(siteRequest_, (String)o);
 		case "defaultZoneId":
@@ -1091,6 +1165,12 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 			return DynamicPage.staticSearchFqPageId(siteRequest_, o);
 		case "filterLabel":
 			return DynamicPage.staticSearchFqFilterLabel(siteRequest_, o);
+		case "htmTitle":
+			return DynamicPage.staticSearchFqHtmTitle(siteRequest_, o);
+		case "htmMeta":
+			return DynamicPage.staticSearchFqHtmMeta(siteRequest_, o);
+		case "htmBody":
+			return DynamicPage.staticSearchFqHtmBody(siteRequest_, o);
 		case "pageResponse":
 			return DynamicPage.staticSearchFqPageResponse(siteRequest_, o);
 		case "defaultZoneId":

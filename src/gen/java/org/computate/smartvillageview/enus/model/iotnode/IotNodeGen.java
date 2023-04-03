@@ -172,15 +172,15 @@ import org.computate.search.response.solr.SolrResponse;
  * </p>
  * <p>
  * Delete the class IotNode in Solr: 
- * curl 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.iotnode.IotNode&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.iotnode.IotNode&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
  * Delete  the package org.computate.smartvillageview.enus.model.iotnode in Solr: 
- * curl 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.model.iotnode&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.model.iotnode&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
  * Delete  the project smartabyar-smartvillage in Solr: 
- * curl 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartabyar\-smartvillage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartabyar\-smartvillage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  **/
 public abstract class IotNodeGen<DEV> extends BaseResult {
@@ -4504,180 +4504,24 @@ public abstract class IotNodeGen<DEV> extends BaseResult {
 		}
 	}
 
-	public static Integer htmlColumnIotNode(String var) {
+	public static Integer htmColumnIotNode(String var) {
 		switch(var) {
 			default:
-				return BaseResult.htmlColumnBaseResult(var);
+				return BaseResult.htmColumnBaseResult(var);
 		}
 	}
 
-	public static Integer htmlRowIotNode(String var) {
+	public static Integer htmRowIotNode(String var) {
 		switch(var) {
-		case VAR_nodeName:
-			return 3;
-		case VAR_nodeType:
-			return 3;
-		case VAR_nodeId:
-			return 3;
-		case VAR_location:
-			return 4;
-		case VAR_json_moisture:
-			return 4;
-		case VAR_json_moisture0:
-			return 4;
-		case VAR_json_moisture1:
-			return 4;
-		case VAR_json_temperature:
-			return 5;
-		case VAR_json_temperature0:
-			return 5;
-		case VAR_json_temperatureAverage:
-			return 5;
-		case VAR_json_badConditionsCounter:
-			return 5;
-		case VAR_json_door:
-			return 6;
-		case VAR_json_alarmDoor:
-			return 6;
-		case VAR_json_flood:
-			return 6;
-		case VAR_json_alarmFlood:
-			return 6;
-		case VAR_json_lux2:
-			return 7;
-		case VAR_json_illuminance:
-			return 7;
-		case VAR_json_resistance0:
-			return 7;
-		case VAR_json_resistance1:
-			return 7;
-		case VAR_json_frequency:
-			return 8;
-		case VAR_json_devEui:
-			return 8;
-		case VAR_json_bandwidth:
-			return 8;
-		case VAR_json_dataRate:
-			return 8;
-		case VAR_json_frameCount:
-			return 9;
-		case VAR_json_maxPayload:
-			return 9;
-		case VAR_json_bitsPerSecond:
-			return 9;
-		case VAR_json_batteryVoltage:
-			return 9;
-		case VAR_json_spreadingFactor:
-			return 10;
-		case VAR_json_dataRateAdaptive:
-			return 10;
-		case VAR_json_swversion:
-			return 10;
-		case VAR_json_batteryLevel:
-			return 10;
-		case VAR_json_startUpCount:
-			return 11;
-		case VAR_json_watchdogCount:
-			return 11;
-		case VAR_json_historySequence:
-			return 11;
-		case VAR_json_versionFirmware:
-			return 11;
-		case VAR_json_stackTxFailRebootCount:
-			return 12;
-		case VAR_json_historySequencePrevious:
-			return 12;
-		case VAR_json_snr:
-			return 12;
-		case VAR_json_rssi:
-			return 12;
 			default:
-				return BaseResult.htmlRowBaseResult(var);
+				return BaseResult.htmRowBaseResult(var);
 		}
 	}
 
-	public static Integer htmlCellIotNode(String var) {
+	public static Integer htmCellIotNode(String var) {
 		switch(var) {
-		case VAR_nodeName:
-			return 1;
-		case VAR_nodeType:
-			return 2;
-		case VAR_nodeId:
-			return 3;
-		case VAR_location:
-			return 1;
-		case VAR_json_moisture:
-			return 2;
-		case VAR_json_moisture0:
-			return 3;
-		case VAR_json_moisture1:
-			return 4;
-		case VAR_json_temperature:
-			return 1;
-		case VAR_json_temperature0:
-			return 2;
-		case VAR_json_temperatureAverage:
-			return 3;
-		case VAR_json_badConditionsCounter:
-			return 4;
-		case VAR_json_door:
-			return 1;
-		case VAR_json_alarmDoor:
-			return 2;
-		case VAR_json_flood:
-			return 3;
-		case VAR_json_alarmFlood:
-			return 4;
-		case VAR_json_lux2:
-			return 1;
-		case VAR_json_illuminance:
-			return 2;
-		case VAR_json_resistance0:
-			return 3;
-		case VAR_json_resistance1:
-			return 4;
-		case VAR_json_frequency:
-			return 1;
-		case VAR_json_devEui:
-			return 2;
-		case VAR_json_bandwidth:
-			return 3;
-		case VAR_json_dataRate:
-			return 4;
-		case VAR_json_frameCount:
-			return 1;
-		case VAR_json_maxPayload:
-			return 2;
-		case VAR_json_bitsPerSecond:
-			return 3;
-		case VAR_json_batteryVoltage:
-			return 4;
-		case VAR_json_spreadingFactor:
-			return 1;
-		case VAR_json_dataRateAdaptive:
-			return 2;
-		case VAR_json_swversion:
-			return 3;
-		case VAR_json_batteryLevel:
-			return 4;
-		case VAR_json_startUpCount:
-			return 1;
-		case VAR_json_watchdogCount:
-			return 2;
-		case VAR_json_historySequence:
-			return 3;
-		case VAR_json_versionFirmware:
-			return 4;
-		case VAR_json_stackTxFailRebootCount:
-			return 1;
-		case VAR_json_historySequencePrevious:
-			return 2;
-		case VAR_json_snr:
-			return 3;
-		case VAR_json_rssi:
-			return 4;
 			default:
-				return BaseResult.htmlCellBaseResult(var);
+				return BaseResult.htmCellBaseResult(var);
 		}
 	}
 

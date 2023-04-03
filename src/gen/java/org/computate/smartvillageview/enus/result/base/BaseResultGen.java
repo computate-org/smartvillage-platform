@@ -128,15 +128,15 @@ import io.vertx.core.json.JsonObject;
  * AName.enUS: null
  * <p>
  * Delete the class BaseResult in Solr: 
- * curl 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.result.base.BaseResult&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.result.base.BaseResult&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
  * Delete  the package org.computate.smartvillageview.enus.result.base in Solr: 
- * curl 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.result.base&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.result.base&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
  * Delete  the project smartabyar-smartvillage in Solr: 
- * curl 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartabyar\-smartvillage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartabyar\-smartvillage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  **/
 public abstract class BaseResultGen<DEV> extends Object {
@@ -2305,46 +2305,22 @@ public abstract class BaseResultGen<DEV> extends Object {
 		}
 	}
 
-	public static Integer htmlColumnBaseResult(String var) {
+	public static Integer htmColumnBaseResult(String var) {
 		switch(var) {
-		case VAR_created:
-			return 1;
-		case VAR_objectTitle:
-			return 2;
 			default:
 				return null;
 		}
 	}
 
-	public static Integer htmlRowBaseResult(String var) {
+	public static Integer htmRowBaseResult(String var) {
 		switch(var) {
-		case VAR_created:
-			return 1;
-		case VAR_modified:
-			return 1;
-		case VAR_archived:
-			return 2;
-		case VAR_deleted:
-			return 2;
-		case VAR_objectId:
-			return 1;
 			default:
 				return null;
 		}
 	}
 
-	public static Integer htmlCellBaseResult(String var) {
+	public static Integer htmCellBaseResult(String var) {
 		switch(var) {
-		case VAR_created:
-			return 2;
-		case VAR_modified:
-			return 3;
-		case VAR_archived:
-			return 1;
-		case VAR_deleted:
-			return 2;
-		case VAR_objectId:
-			return 4;
 			default:
 				return null;
 		}

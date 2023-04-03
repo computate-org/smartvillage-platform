@@ -167,15 +167,15 @@ import io.vertx.core.json.JsonObject;
  * </p>
  * <p>
  * Delete the class BicycleStep in Solr: 
- * curl 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.bicycle.step.BicycleStep&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.bicycle.step.BicycleStep&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
  * Delete  the package org.computate.smartvillageview.enus.model.traffic.bicycle.step in Solr: 
- * curl 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.bicycle.step&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.bicycle.step&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
  * Delete  the project smartabyar-smartvillage in Solr: 
- * curl 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartabyar\-smartvillage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartabyar\-smartvillage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  **/
 public abstract class BicycleStepGen<DEV> extends MapResult {
@@ -647,28 +647,24 @@ public abstract class BicycleStepGen<DEV> extends MapResult {
 		}
 	}
 
-	public static Integer htmlColumnBicycleStep(String var) {
+	public static Integer htmColumnBicycleStep(String var) {
 		switch(var) {
 			default:
-				return MapResult.htmlColumnMapResult(var);
+				return MapResult.htmColumnMapResult(var);
 		}
 	}
 
-	public static Integer htmlRowBicycleStep(String var) {
+	public static Integer htmRowBicycleStep(String var) {
 		switch(var) {
-		case VAR_bicycleId:
-			return 4;
 			default:
-				return MapResult.htmlRowMapResult(var);
+				return MapResult.htmRowMapResult(var);
 		}
 	}
 
-	public static Integer htmlCellBicycleStep(String var) {
+	public static Integer htmCellBicycleStep(String var) {
 		switch(var) {
-		case VAR_bicycleId:
-			return 3;
 			default:
-				return MapResult.htmlCellMapResult(var);
+				return MapResult.htmCellMapResult(var);
 		}
 	}
 

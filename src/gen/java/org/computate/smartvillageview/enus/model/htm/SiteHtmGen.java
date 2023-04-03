@@ -172,15 +172,15 @@ import org.computate.search.response.solr.SolrResponse;
  * </p>
  * <p>
  * Delete the class SiteHtm in Solr: 
- * curl 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtm&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm.SiteHtm&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
  * Delete  the package org.computate.smartvillageview.enus.model.htm in Solr: 
- * curl 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.model.htm&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
  * Delete  the project smartabyar-smartvillage in Solr: 
- * curl 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartabyar\-smartvillage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartabyar\-smartvillage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  **/
 public abstract class SiteHtmGen<DEV> extends BaseResult {
@@ -2062,48 +2062,24 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 		}
 	}
 
-	public static Integer htmlColumnSiteHtm(String var) {
+	public static Integer htmColumnSiteHtm(String var) {
 		switch(var) {
-		case VAR_url:
-			return 3;
-		case VAR_uri:
-			return 4;
-		case VAR_pageId:
-			return 4;
-		case VAR_sequenceNum:
-			return 5;
 			default:
-				return BaseResult.htmlColumnBaseResult(var);
+				return BaseResult.htmColumnBaseResult(var);
 		}
 	}
 
-	public static Integer htmlRowSiteHtm(String var) {
+	public static Integer htmRowSiteHtm(String var) {
 		switch(var) {
-		case VAR_url:
-			return 3;
-		case VAR_uri:
-			return 3;
-		case VAR_pageId:
-			return 3;
-		case VAR_sequenceNum:
-			return 3;
 			default:
-				return BaseResult.htmlRowBaseResult(var);
+				return BaseResult.htmRowBaseResult(var);
 		}
 	}
 
-	public static Integer htmlCellSiteHtm(String var) {
+	public static Integer htmCellSiteHtm(String var) {
 		switch(var) {
-		case VAR_url:
-			return 1;
-		case VAR_uri:
-			return 2;
-		case VAR_pageId:
-			return 2;
-		case VAR_sequenceNum:
-			return 3;
 			default:
-				return BaseResult.htmlCellBaseResult(var);
+				return BaseResult.htmCellBaseResult(var);
 		}
 	}
 

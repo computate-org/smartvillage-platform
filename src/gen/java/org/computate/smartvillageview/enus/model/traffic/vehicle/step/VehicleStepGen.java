@@ -168,15 +168,15 @@ import io.vertx.core.json.JsonObject;
  * </p>
  * <p>
  * Delete the class VehicleStep in Solr: 
- * curl 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.vehicle.step.VehicleStep&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.vehicle.step.VehicleStep&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
  * Delete  the package org.computate.smartvillageview.enus.model.traffic.vehicle.step in Solr: 
- * curl 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.vehicle.step&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.vehicle.step&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
  * Delete  the project smartabyar-smartvillage in Solr: 
- * curl 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartabyar\-smartvillage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartabyar\-smartvillage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  **/
 public abstract class VehicleStepGen<DEV> extends MapResult {
@@ -1199,48 +1199,24 @@ public abstract class VehicleStepGen<DEV> extends MapResult {
 		}
 	}
 
-	public static Integer htmlColumnVehicleStep(String var) {
+	public static Integer htmColumnVehicleStep(String var) {
 		switch(var) {
 			default:
-				return MapResult.htmlColumnMapResult(var);
+				return MapResult.htmColumnMapResult(var);
 		}
 	}
 
-	public static Integer htmlRowVehicleStep(String var) {
+	public static Integer htmRowVehicleStep(String var) {
 		switch(var) {
-		case VAR_vehicleId:
-			return 4;
-		case VAR_vehicleType:
-			return 4;
-		case VAR_angle:
-			return 5;
-		case VAR_speed:
-			return 5;
-		case VAR_pos:
-			return 5;
-		case VAR_slope:
-			return 5;
 			default:
-				return MapResult.htmlRowMapResult(var);
+				return MapResult.htmRowMapResult(var);
 		}
 	}
 
-	public static Integer htmlCellVehicleStep(String var) {
+	public static Integer htmCellVehicleStep(String var) {
 		switch(var) {
-		case VAR_vehicleId:
-			return 3;
-		case VAR_vehicleType:
-			return 4;
-		case VAR_angle:
-			return 1;
-		case VAR_speed:
-			return 2;
-		case VAR_pos:
-			return 3;
-		case VAR_slope:
-			return 4;
 			default:
-				return MapResult.htmlCellMapResult(var);
+				return MapResult.htmCellMapResult(var);
 		}
 	}
 

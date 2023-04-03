@@ -168,15 +168,15 @@ import io.vertx.core.json.JsonObject;
  * </p>
  * <p>
  * Delete the class TrafficLight in Solr: 
- * curl 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.light.TrafficLight&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.light.TrafficLight&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
  * Delete  the package org.computate.smartvillageview.enus.model.traffic.light in Solr: 
- * curl 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.light&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.light&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
  * Delete  the project smartabyar-smartvillage in Solr: 
- * curl 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartabyar\-smartvillage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartabyar\-smartvillage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  **/
 public abstract class TrafficLightGen<DEV> extends MapResult {
@@ -945,40 +945,24 @@ public abstract class TrafficLightGen<DEV> extends MapResult {
 		}
 	}
 
-	public static Integer htmlColumnTrafficLight(String var) {
+	public static Integer htmColumnTrafficLight(String var) {
 		switch(var) {
 			default:
-				return MapResult.htmlColumnMapResult(var);
+				return MapResult.htmColumnMapResult(var);
 		}
 	}
 
-	public static Integer htmlRowTrafficLight(String var) {
+	public static Integer htmRowTrafficLight(String var) {
 		switch(var) {
-		case VAR_trafficLightId:
-			return 4;
-		case VAR_trafficLightType:
-			return 4;
-		case VAR_angle:
-			return 5;
-		case VAR_color:
-			return 6;
 			default:
-				return MapResult.htmlRowMapResult(var);
+				return MapResult.htmRowMapResult(var);
 		}
 	}
 
-	public static Integer htmlCellTrafficLight(String var) {
+	public static Integer htmCellTrafficLight(String var) {
 		switch(var) {
-		case VAR_trafficLightId:
-			return 3;
-		case VAR_trafficLightType:
-			return 4;
-		case VAR_angle:
-			return 1;
-		case VAR_color:
-			return 1;
 			default:
-				return MapResult.htmlCellMapResult(var);
+				return MapResult.htmCellMapResult(var);
 		}
 	}
 

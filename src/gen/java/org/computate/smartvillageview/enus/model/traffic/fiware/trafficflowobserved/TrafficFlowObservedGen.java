@@ -170,15 +170,15 @@ import org.computate.search.response.solr.SolrResponse;
  * </p>
  * <p>
  * Delete the class TrafficFlowObserved in Solr: 
- * curl 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved.TrafficFlowObserved&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved.TrafficFlowObserved&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
  * Delete  the package org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved in Solr: 
- * curl 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
  * Delete  the project smartabyar-smartvillage in Solr: 
- * curl 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartabyar\-smartvillage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartabyar\-smartvillage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  **/
 public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
@@ -191,8 +191,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 //	 * Persist: true
 //	 * DisplayName: address
 //	 * Description: The mailing address
-//	 * HtmlRow: 3
-//	 * HtmlCell: 1
+//	 * HtmRow: 3
+//	 * HtmCell: 1
 //	 * Facet: true
 //	 */
 //	protected void _address(Wrap<JsonObject> w) {
@@ -204,8 +204,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 //	 * Persist: true
 //	 * DisplayName: alternate name
 //	 * Description: An alternative name for this item
-//	 * HtmlRow: 3
-//	 * HtmlCell: 2
+//	 * HtmRow: 3
+//	 * HtmCell: 2
 //	 * Facet: true
 //	 */
 //	protected void _alternateName(Wrap<String> w) {
@@ -217,8 +217,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 //	 * Persist: true
 //	 * DisplayName: area served
 //	 * Description: The geographic area where a service or offered item is provided
-//	 * HtmlRow: 3
-//	 * HtmlCell: 3
+//	 * HtmRow: 3
+//	 * HtmCell: 3
 //	 * Facet: true
 //	 */
 //	protected void _areaServed(Wrap<String> w) {
@@ -230,8 +230,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 //	 * Persist: true
 //	 * DisplayName: average gap distance
 //	 * Description: Average gap distance between consecutive vehicles
-//	 * HtmlRow: 4
-//	 * HtmlCell: 1
+//	 * HtmRow: 4
+//	 * HtmCell: 1
 //	 * Facet: true
 //	 */
 //	protected void _averageGapDistance(Wrap<BigDecimal> w) {
@@ -243,8 +243,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 //	 * Persist: true
 //	 * DisplayName: average headway time
 //	 * Description: Average headway time. Headway time is the time ellapsed between two consecutive vehicles
-//	 * HtmlRow: 4
-//	 * HtmlCell: 2
+//	 * HtmRow: 4
+//	 * HtmCell: 2
 //	 * Facet: true
 //	 */
 //	protected void _averageHeadwayTime(Wrap<BigDecimal> w) {
@@ -256,8 +256,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 //	 * Persist: true
 //	 * DisplayName: average vehicle length
 //	 * Description: Average length of the vehicles transiting during     the observation period
-//	 * HtmlRow: 4
-//	 * HtmlCell: 3
+//	 * HtmRow: 4
+//	 * HtmCell: 3
 //	 * Facet: true
 //	 */
 //	protected void _averageVehicleLength(Wrap<BigDecimal> w) {
@@ -269,8 +269,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 //	 * Persist: true
 //	 * DisplayName: average vehicle speed
 //	 * Description: Average speed of the vehicles transiting during the observation period
-//	 * HtmlRow: 5
-//	 * HtmlCell: 1
+//	 * HtmRow: 5
+//	 * HtmCell: 1
 //	 * Facet: true
 //	 */
 //	protected void _averageVehicleSpeed(Wrap<BigDecimal> w) {
@@ -282,8 +282,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 //	 * Persist: true
 //	 * DisplayName: congested
 //	 * Description:  Flags whether there was a traffic congestion during the observation period in the referred lane. The absence of this attribute means no traffic congestion
-//	 * HtmlRow: 5
-//	 * HtmlCell: 2
+//	 * HtmRow: 5
+//	 * HtmCell: 2
 //	 * Facet: true
 //	 */
 //	protected void _congested(Wrap<Boolean> w) {
@@ -295,8 +295,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 //	 * Persist: true
 //	 * DisplayName: data provider
 //	 * Description: A sequence of characters identifying the provider of the harmonised data entity.
-//	 * HtmlRow: 5
-//	 * HtmlCell: 3
+//	 * HtmRow: 5
+//	 * HtmCell: 3
 //	 * Facet: true
 //	 */
 //	protected void _dataProvider(Wrap<String> w) {
@@ -308,8 +308,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 //	 * Persist: true
 //	 * DisplayName: date created
 //	 * Description: Entity creation timestamp. This will usually be allocated by the storage platform.
-//	 * HtmlRow: 6
-//	 * HtmlCell: 1
+//	 * HtmRow: 6
+//	 * HtmCell: 1
 //	 * Facet: true
 //	 */
 //	protected void _dateCreated(Wrap<String> w) {
@@ -321,8 +321,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 //	 * Persist: true
 //	 * DisplayName: date modified
 //	 * Description: Timestamp of the last modification of the entity. This will usually be allocated by the storage platform.
-//	 * HtmlRow: 6
-//	 * HtmlCell: 2
+//	 * HtmRow: 6
+//	 * HtmCell: 2
 //	 * Facet: true
 //	 */
 //	protected void _dateModified(Wrap<String> w) {
@@ -334,8 +334,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 //	 * Persist: true
 //	 * DisplayName: date observed
 //	 * Description: The date and time of this observation in ISO8601 UTC format. It can be represented by an specific time instant or by an ISO8601 interval. As a workaround for the lack of support of Orion Context Broker for datetime intervals, it can be used two separate attributes: `dateObservedFrom`, `dateObservedTo`. [DateTime](https://schema.org/DateTime) or an ISO8601 interval represented as [Text](https://schema.org/Text)
-//	 * HtmlRow: 6
-//	 * HtmlCell: 3
+//	 * HtmRow: 6
+//	 * HtmCell: 3
 //	 * Facet: true
 //	 */
 //	protected void _dateObserved(Wrap<String> w) {
@@ -347,8 +347,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 //	 * Persist: true
 //	 * DisplayName: date observed from
 //	 * Description: Observation period start date and time. See `dateObserved`
-//	 * HtmlRow: 7
-//	 * HtmlCell: 1
+//	 * HtmRow: 7
+//	 * HtmCell: 1
 //	 * Facet: true
 //	 */
 //	protected void _dateObservedFrom(Wrap<String> w) {
@@ -360,8 +360,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 //	 * Persist: true
 //	 * DisplayName: date observed to
 //	 * Description: Observation period end date and time. See `dateObserved`
-//	 * HtmlRow: 7
-//	 * HtmlCell: 2
+//	 * HtmRow: 7
+//	 * HtmCell: 2
 //	 * Facet: true
 //	 */
 //	protected void _dateObservedTo(Wrap<String> w) {
@@ -373,8 +373,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 //	 * Persist: true
 //	 * DisplayName: description
 //	 * Description: A description of this item
-//	 * HtmlRow: 7
-//	 * HtmlCell: 3
+//	 * HtmRow: 7
+//	 * HtmCell: 3
 //	 * Facet: true
 //	 */
 //	protected void _description(Wrap<String> w) {
@@ -386,8 +386,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 //	 * Persist: true
 //	 * DisplayName: id
 //	 * Description: Unique identifier of the entity
-//	 * HtmlRow: 8
-//	 * HtmlCell: 1
+//	 * HtmRow: 8
+//	 * HtmCell: 1
 //	 * Facet: true
 //	 */
 //	protected void _id(Wrap<JsonObject> w) {
@@ -399,8 +399,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 //	 * Persist: true
 //	 * DisplayName: intensity
 //	 * Description: Total number of vehicles detected during this observation period
-//	 * HtmlRow: 8
-//	 * HtmlCell: 2
+//	 * HtmRow: 8
+//	 * HtmCell: 2
 //	 * Facet: true
 //	 */
 //	protected void _intensity(Wrap<BigDecimal> w) {
@@ -412,8 +412,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 //	 * Persist: true
 //	 * DisplayName: lane direction
 //	 * Description: Usual direction of travel in the lane referred by this observation. This attribute is useful when the observation is not referencing any road segment, allowing to know the direction of travel of the traffic flow observed. Enum:forward, backward'. See RoadSegment for a description of the semantics of these values.
-//	 * HtmlRow: 8
-//	 * HtmlCell: 3
+//	 * HtmRow: 8
+//	 * HtmCell: 3
 //	 * Facet: true
 //	 */
 //	protected void _laneDirection(Wrap<String> w) {
@@ -425,8 +425,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 //	 * Persist: true
 //	 * DisplayName: lane id
 //	 * Description: Lane identifier. Lane identification is done using the conventions defined by RoadSegment entity which are based on [OpenStreetMap](http://wiki.openstreetmap.org/wiki/Forward_%26_backward,_left_%26_right).
-//	 * HtmlRow: 9
-//	 * HtmlCell: 1
+//	 * HtmRow: 9
+//	 * HtmCell: 1
 //	 * Facet: true
 //	 */
 //	protected void _laneId(Wrap<Integer> w) {
@@ -438,8 +438,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 //	 * Persist: true
 //	 * DisplayName: location
 //	 * Description: Geojson reference to the item. It can be Point, LineString, Polygon, MultiPoint, MultiLineString or MultiPolygon
-//	 * HtmlRow: 9
-//	 * HtmlCell: 2
+//	 * HtmRow: 9
+//	 * HtmCell: 2
 //	 * Facet: true
 //	 */
 //	protected void _location(Wrap<JsonObject> w) {
@@ -451,8 +451,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 //	 * Persist: true
 //	 * DisplayName: name
 //	 * Description: The name of this item.
-//	 * HtmlRow: 9
-//	 * HtmlCell: 3
+//	 * HtmRow: 9
+//	 * HtmCell: 3
 //	 * Facet: true
 //	 */
 //	protected void _name(Wrap<String> w) {
@@ -464,8 +464,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 //	 * Persist: true
 //	 * DisplayName: occupancy
 //	 * Description: Fraction of the observation time where a vehicle has been occupying the observed lane
-//	 * HtmlRow: 10
-//	 * HtmlCell: 1
+//	 * HtmRow: 10
+//	 * HtmCell: 1
 //	 * Facet: true
 //	 */
 //	protected void _occupancy(Wrap<BigDecimal> w) {
@@ -477,8 +477,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 //	 * Persist: true
 //	 * DisplayName: owner
 //	 * Description: A List containing a JSON encoded sequence of characters referencing the unique Ids of the owner(s)
-//	 * HtmlRow: 10
-//	 * HtmlCell: 2
+//	 * HtmRow: 10
+//	 * HtmCell: 2
 //	 * Facet: true
 //	 */
 //	protected void _owner(Wrap<JsonObject> w) {
@@ -490,8 +490,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 //	 * Persist: true
 //	 * DisplayName: ref road segment
 //	 * Description: Concerned road segment on which the observation has been made. Reference to an entity of type RoadSegment
-//	 * HtmlRow: 10
-//	 * HtmlCell: 3
+//	 * HtmRow: 10
+//	 * HtmCell: 3
 //	 * Facet: true
 //	 */
 //	protected void _refRoadSegment(Wrap<String> w) {
@@ -503,8 +503,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 //	 * Persist: true
 //	 * DisplayName: reversed lane
 //	 * Description: Flags whether traffic in the lane was reversed during the observation period. The absence of this attribute means no lane reversion
-//	 * HtmlRow: 11
-//	 * HtmlCell: 1
+//	 * HtmRow: 11
+//	 * HtmCell: 1
 //	 * Facet: true
 //	 */
 //	protected void _reversedLane(Wrap<Boolean> w) {
@@ -516,8 +516,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 //	 * Persist: true
 //	 * DisplayName: see also
 //	 * Description: list of uri pointing to additional resources about the item
-//	 * HtmlRow: 11
-//	 * HtmlCell: 2
+//	 * HtmRow: 11
+//	 * HtmCell: 2
 //	 * Facet: true
 //	 */
 //	protected void _seeAlso(Wrap<JsonObject> w) {
@@ -529,8 +529,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 //	 * Persist: true
 //	 * DisplayName: source
 //	 * Description: A sequence of characters giving the original source of the entity data as a URL. Recommended to be the fully qualified domain name of the source provider, or the URL to the source object.
-//	 * HtmlRow: 11
-//	 * HtmlCell: 3
+//	 * HtmRow: 11
+//	 * HtmCell: 3
 //	 * Facet: true
 //	 */
 //	protected void _source(Wrap<String> w) {
@@ -542,8 +542,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 //	 * Persist: true
 //	 * DisplayName: type
 //	 * Description: NGSI Entity type. It has to be TrafficFlowObserved
-//	 * HtmlRow: 12
-//	 * HtmlCell: 1
+//	 * HtmRow: 12
+//	 * HtmCell: 1
 //	 * Facet: true
 //	 */
 //	protected void _type(Wrap<String> w) {
@@ -555,8 +555,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 //	 * Persist: true
 //	 * DisplayName: vehicle sub type
 //	 * Description: It allows to specify a sub type of `vehicleType`, eg if the `vehicleType` is set to `Lorry` the `vehicleSubType` may be `OGV1` or `OGV2` to convey more information about the exact type of vehicle.
-//	 * HtmlRow: 12
-//	 * HtmlCell: 2
+//	 * HtmRow: 12
+//	 * HtmCell: 2
 //	 * Facet: true
 //	 */
 //	protected void _vehicleSubType(Wrap<String> w) {
@@ -568,8 +568,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 //	 * Persist: true
 //	 * DisplayName: vehicle type
 //	 * Description: Type of vehicle from the point of view of its structural characteristics. Enum:'agriculturalVehicle, bicycle, bus, minibus, car, caravan, tram, tanker, carWithCaravan, carWithTrailer, lorry, moped, motorcycle, motorcycleWithSideCar, motorscooter, trailer, van, constructionOrMaintenanceVehicle, trolley, binTrolley, sweepingMachine, cleaningTrolley'
-//	 * HtmlRow: 12
-//	 * HtmlCell: 3
+//	 * HtmRow: 12
+//	 * HtmCell: 3
 //	 * Facet: true
 //	 */
 //	protected void _vehicleType(Wrap<String> w) {
@@ -3758,136 +3758,24 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		}
 	}
 
-	public static Integer htmlColumnTrafficFlowObserved(String var) {
+	public static Integer htmColumnTrafficFlowObserved(String var) {
 		switch(var) {
 			default:
-				return MapResult.htmlColumnMapResult(var);
+				return MapResult.htmColumnMapResult(var);
 		}
 	}
 
-	public static Integer htmlRowTrafficFlowObserved(String var) {
+	public static Integer htmRowTrafficFlowObserved(String var) {
 		switch(var) {
-		case VAR_address:
-			return 3;
-		case VAR_alternateName:
-			return 3;
-		case VAR_areaServed:
-			return 3;
-		case VAR_averageGapDistance:
-			return 4;
-		case VAR_averageHeadwayTime:
-			return 4;
-		case VAR_averageVehicleLength:
-			return 4;
-		case VAR_averageVehicleSpeed:
-			return 5;
-		case VAR_congested:
-			return 5;
-		case VAR_dataProvider:
-			return 5;
-		case VAR_dateCreated:
-			return 6;
-		case VAR_dateModified:
-			return 6;
-		case VAR_dateObserved:
-			return 6;
-		case VAR_dateObservedFrom:
-			return 7;
-		case VAR_dateObservedTo:
-			return 7;
-		case VAR_description:
-			return 7;
-		case VAR_intensity:
-			return 8;
-		case VAR_laneDirection:
-			return 8;
-		case VAR_laneId:
-			return 9;
-		case VAR_name:
-			return 9;
-		case VAR_occupancy:
-			return 10;
-		case VAR_owner:
-			return 10;
-		case VAR_refRoadSegment:
-			return 10;
-		case VAR_reversedLane:
-			return 11;
-		case VAR_seeAlso:
-			return 11;
-		case VAR_source:
-			return 11;
-		case VAR_type:
-			return 12;
-		case VAR_vehicleSubType:
-			return 12;
-		case VAR_vehicleType:
-			return 12;
 			default:
-				return MapResult.htmlRowMapResult(var);
+				return MapResult.htmRowMapResult(var);
 		}
 	}
 
-	public static Integer htmlCellTrafficFlowObserved(String var) {
+	public static Integer htmCellTrafficFlowObserved(String var) {
 		switch(var) {
-		case VAR_address:
-			return 1;
-		case VAR_alternateName:
-			return 2;
-		case VAR_areaServed:
-			return 3;
-		case VAR_averageGapDistance:
-			return 1;
-		case VAR_averageHeadwayTime:
-			return 2;
-		case VAR_averageVehicleLength:
-			return 3;
-		case VAR_averageVehicleSpeed:
-			return 1;
-		case VAR_congested:
-			return 2;
-		case VAR_dataProvider:
-			return 3;
-		case VAR_dateCreated:
-			return 1;
-		case VAR_dateModified:
-			return 2;
-		case VAR_dateObserved:
-			return 3;
-		case VAR_dateObservedFrom:
-			return 1;
-		case VAR_dateObservedTo:
-			return 2;
-		case VAR_description:
-			return 3;
-		case VAR_intensity:
-			return 2;
-		case VAR_laneDirection:
-			return 3;
-		case VAR_laneId:
-			return 1;
-		case VAR_name:
-			return 3;
-		case VAR_occupancy:
-			return 1;
-		case VAR_owner:
-			return 2;
-		case VAR_refRoadSegment:
-			return 3;
-		case VAR_reversedLane:
-			return 1;
-		case VAR_seeAlso:
-			return 2;
-		case VAR_source:
-			return 3;
-		case VAR_type:
-			return 1;
-		case VAR_vehicleSubType:
-			return 2;
-		case VAR_vehicleType:
-			return 3;
 			default:
-				return MapResult.htmlCellMapResult(var);
+				return MapResult.htmCellMapResult(var);
 		}
 	}
 
