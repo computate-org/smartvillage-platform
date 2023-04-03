@@ -17772,6 +17772,13 @@ components:
               type: string
             removeAllParamTotalIterNum:
               type: string
+            setReportStatus:
+              type: string
+              nullable: true
+            removeReportStatus:
+              type: string
+            removeAllReportStatus:
+              type: string
             setUpdatedParameters:
               type: array
               nullable: true
@@ -18037,6 +18044,13 @@ components:
               type: string
             removeAllParamTotalIterNum:
               type: string
+            setReportStatus:
+              type: string
+              nullable: true
+            removeReportStatus:
+              type: string
+            removeAllReportStatus:
+              type: string
             setUpdatedParameters:
               type: array
               nullable: true
@@ -18161,6 +18175,8 @@ components:
                   paramItersPerPar:
                     type: string
                   paramTotalIterNum:
+                    type: string
+                  reportStatus:
                     type: string
                   updatedParameters:
                     type: array
@@ -18391,6 +18407,13 @@ components:
             removeParamTotalIterNum:
               type: string
             removeAllParamTotalIterNum:
+              type: string
+            setReportStatus:
+              type: string
+              nullable: true
+            removeReportStatus:
+              type: string
+            removeAllReportStatus:
               type: string
             setUpdatedParameters:
               type: array
@@ -18657,6 +18680,13 @@ components:
               type: string
             removeAllParamTotalIterNum:
               type: string
+            setReportStatus:
+              type: string
+              nullable: true
+            removeReportStatus:
+              type: string
+            removeAllReportStatus:
+              type: string
             setUpdatedParameters:
               type: array
               nullable: true
@@ -18768,6 +18798,8 @@ components:
               type: string
             paramTotalIterNum:
               type: string
+            reportStatus:
+              type: string
             updatedParameters:
               type: array
             updatedPerformance:
@@ -18843,6 +18875,8 @@ components:
             paramItersPerPar:
               type: string
             paramTotalIterNum:
+              type: string
+            reportStatus:
               type: string
             updatedParameters:
               type: array
@@ -18920,6 +18954,8 @@ components:
               type: string
             paramTotalIterNum:
               type: string
+            reportStatus:
+              type: string
             updatedParameters:
               type: array
             updatedPerformance:
@@ -18996,6 +19032,8 @@ components:
               type: string
             paramTotalIterNum:
               type: string
+            reportStatus:
+              type: string
             updatedParameters:
               type: array
             updatedPerformance:
@@ -19071,6 +19109,8 @@ components:
             paramItersPerPar:
               type: string
             paramTotalIterNum:
+              type: string
+            reportStatus:
               type: string
             updatedParameters:
               type: array

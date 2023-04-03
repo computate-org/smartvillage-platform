@@ -79,6 +79,7 @@ ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS paramStepSize decimal;
 ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS paramRunTime integer;
 ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS paramItersPerPar integer;
 ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS paramTotalIterNum integer;
+ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS reportStatus text;
 ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS updatedParameters jsonb;
 ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS updatedPerformance jsonb;
 ALTER TABLE SimulationReport ADD COLUMN IF NOT EXISTS pk bigserial primary key;
