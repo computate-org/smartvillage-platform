@@ -42,8 +42,8 @@ public class MapResult extends MapResultGen<BaseResult> {
 	 * DocValues: true
 	 * Persist: true
 	 * DisplayName: simulation name
-	 * HtmlRow: 3
-	 * HtmlCell: 1
+	 * HtmRow: 3
+	 * HtmCell: 1
 	 * Facet: true
 	 */
 	protected void _simulationName(Wrap<String> w) {
@@ -54,8 +54,8 @@ public class MapResult extends MapResultGen<BaseResult> {
 	 * DocValues: true
 	 * Persist: true
 	 * DisplayName: sumocfg path
-	 * HtmlRow: 3
-	 * HtmlCell: 2
+	 * HtmRow: 3
+	 * HtmCell: 2
 	 * Facet: true
 	 */
 	protected void _sumocfgPath(Wrap<String> w) {
@@ -65,8 +65,8 @@ public class MapResult extends MapResultGen<BaseResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 3
-	 * HtmlCell: 1
+	 * HtmRow: 3
+	 * HtmCell: 1
 	 * Facet: true
 	 * DisplayName: Simulation
 	 * Description: The simulation key. 
@@ -88,8 +88,8 @@ public class MapResult extends MapResultGen<BaseResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 4
-	 * HtmlCell: 1
+	 * HtmRow: 4
+	 * HtmCell: 1
 	 * Facet: true
 	 * DisplayName: Time in seconds
 	 * Description: The time in seconds. 
@@ -101,8 +101,8 @@ public class MapResult extends MapResultGen<BaseResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 4
-	 * HtmlCell: 1
+	 * HtmRow: 4
+	 * HtmCell: 1
 	 * Facet: true
 	 * DisplayName: Date and Time
 	 * Description: The date and time. 
@@ -129,8 +129,8 @@ public class MapResult extends MapResultGen<BaseResult> {
 	 * DocValues: true
 	 * Persist: true
 	 * DisplayName: location
-	 * HtmlRow: 4
-	 * HtmlCell: 2
+	 * HtmRow: 4
+	 * HtmCell: 2
 	 * Facet: true
 	 */
 	protected void _location(Wrap<Point> w) {
@@ -143,8 +143,8 @@ public class MapResult extends MapResultGen<BaseResult> {
 	 * DocValues: true
 	 * Persist: true
 	 * DisplayName: color
-	 * HtmlRow: 4
-	 * HtmlCell: 3
+	 * HtmRow: 4
+	 * HtmCell: 3
 	 * Facet: true
 	 * Color: true
 	 */
@@ -157,8 +157,8 @@ public class MapResult extends MapResultGen<BaseResult> {
 	 * DocValues: true
 	 * Persist: true
 	 * DisplayName: step
-	 * HtmlRow: 4
-	 * HtmlCell: 1
+	 * HtmRow: 4
+	 * HtmCell: 1
 	 * Facet: true
 	 */
 	protected void _step(Wrap<Boolean> w) {

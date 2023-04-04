@@ -75,9 +75,9 @@ public class SystemEvent extends SystemEventGen<Object> {
 	 * Persist: true
 	 * DisplayName: type
 	 * Description: The system event type
-	 * HtmlRow: 3
-	 * HtmlCell: 1
-	 * HtmlColumn: 2
+	 * HtmRow: 3
+	 * HtmCell: 1
+	 * HtmColumn: 2
 	 */
 	protected void _type(Wrap<String> w) {
 	}
@@ -88,9 +88,9 @@ public class SystemEvent extends SystemEventGen<Object> {
 	 * Persist: true
 	 * DisplayName: message
 	 * Description: The system event message
-	 * HtmlRow: 3
-	 * HtmlCell: 2
-	 * HtmlColumn: 3
+	 * HtmRow: 3
+	 * HtmCell: 2
+	 * HtmColumn: 3
 	 */
 	protected void _message(Wrap<String> w) {
 	}
@@ -101,9 +101,9 @@ public class SystemEvent extends SystemEventGen<Object> {
 	 * Persist: true
 	 * DisplayName: message
 	 * Description: The system event message
-	 * HtmlRow: 3
-	 * HtmlCell: 2
-	 * HtmlColumn: 3
+	 * HtmRow: 3
+	 * HtmCell: 2
+	 * HtmColumn: 3
 	 * Val.Started.enUS:Started
 	 * Val.Completed.enUS:Completed
 	 * Val.Error.enUS:Error
@@ -115,9 +115,9 @@ public class SystemEvent extends SystemEventGen<Object> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 3
-	 * HtmlCell: 3
-	 * HtmlColumn: 4
+	 * HtmRow: 3
+	 * HtmCell: 3
+	 * HtmColumn: 4
 	 * Facet: true
 	 * DisplayName.enUS: completed
 	 * FormatHtm: MMM d, yyyy h:mm:ss a
@@ -141,9 +141,9 @@ public class SystemEvent extends SystemEventGen<Object> {
 	 * Persist: true
 	 * Modify: false
 	 * VarCreated: true
-	 * HtmlRow: 1
-	 * HtmlCell: 4
-	 * HtmlColumn: 1
+	 * HtmRow: 1
+	 * HtmCell: 4
+	 * HtmColumn: 1
 	 * Facet: true
 	 * DisplayName.enUS: created
 	 * FormatHtm: MMM d, yyyy h:mm:ss a
@@ -157,8 +157,8 @@ public class SystemEvent extends SystemEventGen<Object> {
 	 * DocValues: true
 	 * Modify: false
 	 * VarModified: true
-	 * HtmlRow: 1
-	 * HtmlCell: 3
+	 * HtmRow: 1
+	 * HtmCell: 3
 	 * DisplayName.enUS: modified
 	 * Description: A modified timestamp for this record in the database
 	 */
@@ -170,8 +170,8 @@ public class SystemEvent extends SystemEventGen<Object> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 4
-	 * HtmlCell: 1
+	 * HtmRow: 4
+	 * HtmCell: 1
 	 * Facet: true
 	 * DisplayName.enUS: imageUri
 	 * Description: The page image URI
@@ -215,8 +215,8 @@ public class SystemEvent extends SystemEventGen<Object> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 2
-	 * HtmlCell: 1
+	 * HtmRow: 2
+	 * HtmCell: 1
 	 * DisplayName.enUS: archived
 	 * Description: For archiving this record
 	 */
@@ -228,8 +228,8 @@ public class SystemEvent extends SystemEventGen<Object> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 2
-	 * HtmlCell: 2
+	 * HtmRow: 2
+	 * HtmCell: 2
 	 * DisplayName.enUS: deleted
 	 * Description: For deleting this record
 	 */
@@ -303,7 +303,7 @@ public class SystemEvent extends SystemEventGen<Object> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * VarTitle: true
-	 * HtmlColumn: 2
+	 * HtmColumn: 2
 	 * Description: The title of this object
 	 */
 	protected void _objectTitle(Wrap<String> w) {
@@ -318,8 +318,8 @@ public class SystemEvent extends SystemEventGen<Object> {
 	 * DocValues: true
 	 * Persist: true
 	 * VarId: true
-	 * HtmlRow: 1
-	 * HtmlCell: 4
+	 * HtmRow: 1
+	 * HtmCell: 4
 	 * DisplayName.enUS: ID
 	 * Description: A URL friendly unique ID for this object
 	 */

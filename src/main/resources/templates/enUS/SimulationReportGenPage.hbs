@@ -421,6 +421,25 @@
 					<div class="" id="patchSimulationReportFormValues">
 							<div class="w3-cell-row ">
 {{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCreated" roleRequired="true"}}
+{{else}}
+{{> "htmCreated" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmArchived" roleRequired="true"}}
+{{else}}
+{{> "htmArchived" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDeleted" roleRequired="true"}}
+{{else}}
+{{> "htmDeleted" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
 {{> "htmSimulationKey" roleRequired="true"}}
 {{else}}
 {{> "htmSimulationKey" roleRequired="false"}}
@@ -547,6 +566,11 @@
 {{> "htmParamTotalIterNum" roleRequired="true"}}
 {{else}}
 {{> "htmParamTotalIterNum" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmReportStatus" roleRequired="true"}}
+{{else}}
+{{> "htmReportStatus" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
@@ -586,6 +610,25 @@
 						<div id="postSimulationReportForm">
 							<div class="w3-cell-row ">
 {{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCreated" roleRequired="true"}}
+{{else}}
+{{> "htmCreated" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmArchived" roleRequired="true"}}
+{{else}}
+{{> "htmArchived" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDeleted" roleRequired="true"}}
+{{else}}
+{{> "htmDeleted" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
 {{> "htmSimulationKey" roleRequired="true"}}
 {{else}}
 {{> "htmSimulationKey" roleRequired="false"}}
@@ -712,6 +755,11 @@
 {{> "htmParamTotalIterNum" roleRequired="true"}}
 {{else}}
 {{> "htmParamTotalIterNum" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmReportStatus" roleRequired="true"}}
+{{else}}
+{{> "htmReportStatus" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
@@ -773,6 +821,40 @@
 						<div id="searchpageSimulationReportForm">
 							<div class="w3-cell-row ">
 {{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmPk" roleRequired="true"}}
+{{else}}
+{{> "htmPk" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCreated" roleRequired="true"}}
+{{else}}
+{{> "htmCreated" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmModified" roleRequired="true"}}
+{{else}}
+{{> "htmModified" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmObjectId" roleRequired="true"}}
+{{else}}
+{{> "htmObjectId" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmArchived" roleRequired="true"}}
+{{else}}
+{{> "htmArchived" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDeleted" roleRequired="true"}}
+{{else}}
+{{> "htmDeleted" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
 {{> "htmSimulationKey" roleRequired="true"}}
 {{else}}
 {{> "htmSimulationKey" roleRequired="false"}}
@@ -899,6 +981,11 @@
 {{> "htmParamTotalIterNum" roleRequired="true"}}
 {{else}}
 {{> "htmParamTotalIterNum" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmReportStatus" roleRequired="true"}}
+{{else}}
+{{> "htmReportStatus" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
@@ -1075,6 +1162,8 @@
 {{/inline}}
 {{#*inline "thead2SimulationReportPage"}}
 			<tr>
+						<th>created</th>
+						<th></th>
 			</tr>
 {{/inline}}
 {{#*inline "tbody1SimulationReportPage"}}
@@ -1085,6 +1174,17 @@
 {{#*inline "tbody2SimulationReportPage"}}
 		{{#each listSimulationReport}}
 					<tr>
+						<td>
+							<a href="{{pageUrlPk}}">
+								<span class="white-space-pre-wrap ">{{siteZonedDateTimeFormat created "MMM d, yyyy h:mm:ss a" siteLocale}}</span>
+							</a>
+						</td>
+						<td>
+							<a href="{{pageUrlPk}}">
+								<i class="fad fa-file-chart-column "></i>
+								<span class="white-space-pre-wrap ">{{objectTitle}}</span>
+							</a>
+						</td>
 					</tr>
 		{{/each}}
 {{/inline}}
@@ -1095,6 +1195,14 @@
 {{/inline}}
 {{#*inline "tfoot2SimulationReportPage"}}
 			<tr>
+			{{#if getColumnCreated}}
+				<td>
+				</td>
+			{{/if}}
+			{{#if getColumnObjectTitle}}
+				<td>
+				</td>
+			{{/if}}
 			</tr>
 	{{/inline}}
 {{#*inline "htmFormsSimulationReportPage"}}
@@ -2809,6 +2917,75 @@
 			{{/ifContainsKeys}}
 		{{else}}
 														<span class="varSimulationReport{{pk}}ParamTotalIterNum ">{{simulationReport_.paramTotalIterNum}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmReportStatus"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SimulationReportReportStatus">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_reportStatus">report status</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputReportStatus" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_reportStatus')); $('#{{classApiMethodMethod}}_reportStatus').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SimulationReportForm :input[name=pk]').val() }], 'setReportStatus', null, function() { addGlow($('#{{classApiMethodMethod}}_reportStatus')); }, function() { addError($('#{{classApiMethodMethod}}_reportStatus')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputReportStatus"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															placeholder="report status"
+															title="The current status of the simulation report. "
+															id="{{classApiMethodMethod}}_reportStatus"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setReportStatus classSimulationReport inputSimulationReport{{pk}}ReportStatus w3-input w3-border "
+																name="setReportStatus"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setReportStatus classSimulationReport inputSimulationReport{{pk}}ReportStatus w3-input w3-border "
+																name="setReportStatus"
+		{{else}}
+																class="valueReportStatus w3-input w3-border classSimulationReport inputSimulationReport{{pk}}ReportStatus w3-input w3-border "
+																name="reportStatus"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setReportStatus', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_reportStatus')); }, function() { addError($('#{{classApiMethodMethod}}_reportStatus')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{simulationReport_.reportStatus}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varSimulationReport{{pk}}ReportStatus ">{{simulationReport_.reportStatus}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varSimulationReport{{pk}}ReportStatus ">{{simulationReport_.reportStatus}}</span>
 		{{/eq}}
 {{/inline}}
 

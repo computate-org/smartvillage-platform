@@ -2403,6 +2403,10 @@ public abstract class BaseModelGen<DEV> extends Object {
 
 	public static Integer htmColumnBaseModel(String var) {
 		switch(var) {
+		case VAR_created:
+			return 1;
+		case VAR_objectTitle:
+			return 2;
 			default:
 				return null;
 		}
@@ -2410,6 +2414,18 @@ public abstract class BaseModelGen<DEV> extends Object {
 
 	public static Integer htmRowBaseModel(String var) {
 		switch(var) {
+		case VAR_pk:
+			return 1;
+		case VAR_created:
+			return 1;
+		case VAR_modified:
+			return 1;
+		case VAR_archived:
+			return 2;
+		case VAR_deleted:
+			return 2;
+		case VAR_objectId:
+			return 1;
 			default:
 				return null;
 		}
@@ -2417,6 +2433,18 @@ public abstract class BaseModelGen<DEV> extends Object {
 
 	public static Integer htmCellBaseModel(String var) {
 		switch(var) {
+		case VAR_pk:
+			return 1;
+		case VAR_created:
+			return 2;
+		case VAR_modified:
+			return 3;
+		case VAR_archived:
+			return 1;
+		case VAR_deleted:
+			return 2;
+		case VAR_objectId:
+			return 4;
 			default:
 				return null;
 		}

@@ -1159,6 +1159,18 @@ public abstract class TrafficLightStepGen<DEV> extends MapResult {
 
 	public static Integer htmRowTrafficLightStep(String var) {
 		switch(var) {
+		case VAR_trafficLightId:
+			return 4;
+		case VAR_trafficLightType:
+			return 4;
+		case VAR_angle:
+			return 5;
+		case VAR_state:
+			return 6;
+		case VAR_programId:
+			return 6;
+		case VAR_phase:
+			return 6;
 			default:
 				return MapResult.htmRowMapResult(var);
 		}
@@ -1166,6 +1178,18 @@ public abstract class TrafficLightStepGen<DEV> extends MapResult {
 
 	public static Integer htmCellTrafficLightStep(String var) {
 		switch(var) {
+		case VAR_trafficLightId:
+			return 3;
+		case VAR_trafficLightType:
+			return 4;
+		case VAR_angle:
+			return 1;
+		case VAR_state:
+			return 1;
+		case VAR_programId:
+			return 2;
+		case VAR_phase:
+			return 3;
 			default:
 				return MapResult.htmCellMapResult(var);
 		}

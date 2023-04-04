@@ -157,9 +157,9 @@ public class SitePage extends SitePageGen<BaseResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 3
-	 * HtmlCell: 2
-	 * HtmlColumn: 4
+	 * HtmRow: 3
+	 * HtmCell: 2
+	 * HtmColumn: 4
 	 * Facet: true
 	 * DisplayName: URL
 	 * Description: The URL for this page. 
@@ -171,8 +171,8 @@ public class SitePage extends SitePageGen<BaseResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 3
-	 * HtmlCell: 2
+	 * HtmRow: 3
+	 * HtmCell: 2
 	 * Facet: true
 	 * DisplayName: URI
 	 * Description: The relative URI for this page. 
@@ -184,8 +184,8 @@ public class SitePage extends SitePageGen<BaseResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 3
-	 * HtmlCell: 1
+	 * HtmRow: 3
+	 * HtmCell: 1
 	 * Facet: true
 	 * DisplayName: Page ID
 	 * Description: The ID for this page. 
@@ -217,8 +217,8 @@ public class SitePage extends SitePageGen<BaseResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 3
-	 * HtmlCell: 3
+	 * HtmRow: 3
+	 * HtmCell: 3
 	 * Facet: true
 	 * DisplayName.enUS: author
 	 * Description: The author
@@ -230,8 +230,8 @@ public class SitePage extends SitePageGen<BaseResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 4
-	 * HtmlCell: 1
+	 * HtmRow: 4
+	 * HtmCell: 1
 	 * Facet: true
 	 * DisplayName.enUS: imageUri
 	 * Description: The page image URI

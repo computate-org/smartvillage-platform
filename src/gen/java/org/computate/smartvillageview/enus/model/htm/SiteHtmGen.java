@@ -2064,6 +2064,14 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 
 	public static Integer htmColumnSiteHtm(String var) {
 		switch(var) {
+		case VAR_url:
+			return 3;
+		case VAR_uri:
+			return 4;
+		case VAR_pageId:
+			return 4;
+		case VAR_sequenceNum:
+			return 5;
 			default:
 				return BaseResult.htmColumnBaseResult(var);
 		}
@@ -2071,6 +2079,14 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 
 	public static Integer htmRowSiteHtm(String var) {
 		switch(var) {
+		case VAR_url:
+			return 3;
+		case VAR_uri:
+			return 3;
+		case VAR_pageId:
+			return 3;
+		case VAR_sequenceNum:
+			return 3;
 			default:
 				return BaseResult.htmRowBaseResult(var);
 		}
@@ -2078,6 +2094,14 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 
 	public static Integer htmCellSiteHtm(String var) {
 		switch(var) {
+		case VAR_url:
+			return 1;
+		case VAR_uri:
+			return 2;
+		case VAR_pageId:
+			return 2;
+		case VAR_sequenceNum:
+			return 3;
 			default:
 				return BaseResult.htmCellBaseResult(var);
 		}

@@ -39,8 +39,8 @@ public class BaseModel extends BaseModelGen<Object> implements ComputateBaseMode
 	 * PrimaryKey: true
 	 * UrlVar: pageUrlApi
 	 * Modify: false
-	 * HtmlRow: 1
-	 * HtmlCell: 1
+	 * HtmRow: 1
+	 * HtmCell: 1
 	 * DisplayName.enUS: primary key
 	 * Description: The primary key of this object in the database
 	 * Facet: true
@@ -62,9 +62,9 @@ public class BaseModel extends BaseModelGen<Object> implements ComputateBaseMode
 	 * Persist: true
 	 * Modify: false
 	 * VarCreated: true
-	 * HtmlRow: 1
-	 * HtmlCell: 2
-	 * HtmlColumn: 1
+	 * HtmRow: 1
+	 * HtmCell: 2
+	 * HtmColumn: 1
 	 * DisplayName.enUS: created
 	 * FormatHtm: MMM d, yyyy h:mm:ss a
 	 * Description: A created timestamp for this record in the database
@@ -77,8 +77,8 @@ public class BaseModel extends BaseModelGen<Object> implements ComputateBaseMode
 	 * DocValues: true
 	 * Modify: false
 	 * VarModified: true
-	 * HtmlRow: 1
-	 * HtmlCell: 3
+	 * HtmRow: 1
+	 * HtmCell: 3
 	 * DisplayName.enUS: modified
 	 * Description: A modified timestamp for this record in the database
 	 * Facet: true
@@ -91,8 +91,8 @@ public class BaseModel extends BaseModelGen<Object> implements ComputateBaseMode
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 2
-	 * HtmlCell: 1
+	 * HtmRow: 2
+	 * HtmCell: 1
 	 * DisplayName.enUS: archived
 	 * Description: For archiving this record
 	 */
@@ -104,8 +104,8 @@ public class BaseModel extends BaseModelGen<Object> implements ComputateBaseMode
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 2
-	 * HtmlCell: 2
+	 * HtmRow: 2
+	 * HtmCell: 2
 	 * DisplayName.enUS: deleted
 	 * Description: For deleting this record
 	 */
@@ -179,7 +179,7 @@ public class BaseModel extends BaseModelGen<Object> implements ComputateBaseMode
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * VarTitle: true
-	 * HtmlColumn: 2
+	 * HtmColumn: 2
 	 * Description: The title of this object
 	 */
 	protected void _objectTitle(Wrap<String> w) {
@@ -191,8 +191,8 @@ public class BaseModel extends BaseModelGen<Object> implements ComputateBaseMode
 	 * DocValues: true
 	 * VarId: true
 	 * UrlVar: pageUrlId
-	 * HtmlRow: 1
-	 * HtmlCell: 4
+	 * HtmRow: 1
+	 * HtmCell: 4
 	 * DisplayName.enUS: ID
 	 * Description: A URL friendly unique ID for this object
 	 */

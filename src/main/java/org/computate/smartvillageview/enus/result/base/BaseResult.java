@@ -50,9 +50,9 @@ public class BaseResult extends BaseResultGen<Object> implements ComputateBaseRe
 	 * Persist: true
 	 * Modify: false
 	 * VarCreated: true
-	 * HtmlRow: 1
-	 * HtmlCell: 2
-	 * HtmlColumn: 1
+	 * HtmRow: 1
+	 * HtmCell: 2
+	 * HtmColumn: 1
 	 * DisplayName.enUS: created
 	 * FormatHtm: MMM d, yyyy h:mm:ss a
 	 * Description: A created timestamp for this record in the database
@@ -67,8 +67,8 @@ public class BaseResult extends BaseResultGen<Object> implements ComputateBaseRe
 	 * DocValues: true
 	 * Modify: false
 	 * VarModified: true
-	 * HtmlRow: 1
-	 * HtmlCell: 3
+	 * HtmRow: 1
+	 * HtmCell: 3
 	 * DisplayName.enUS: modified
 	 * Description: A modified timestamp for this record in the database
 	 * Facet: true
@@ -81,8 +81,8 @@ public class BaseResult extends BaseResultGen<Object> implements ComputateBaseRe
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 2
-	 * HtmlCell: 1
+	 * HtmRow: 2
+	 * HtmCell: 1
 	 * DisplayName.enUS: archived
 	 * Description: For archiving this record
 	 */
@@ -94,8 +94,8 @@ public class BaseResult extends BaseResultGen<Object> implements ComputateBaseRe
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 2
-	 * HtmlCell: 2
+	 * HtmRow: 2
+	 * HtmCell: 2
 	 * DisplayName.enUS: deleted
 	 * Description: For deleting this record
 	 */
@@ -167,7 +167,7 @@ public class BaseResult extends BaseResultGen<Object> implements ComputateBaseRe
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * VarTitle: true
-	 * HtmlColumn: 2
+	 * HtmColumn: 2
 	 * Description: The title of this object
 	 */
 	protected void _objectTitle(Wrap<String> w) {
@@ -179,8 +179,8 @@ public class BaseResult extends BaseResultGen<Object> implements ComputateBaseRe
 	 * DocValues: true
 	 * VarId: true
 	 * UrlVar: pageUrlId
-	 * HtmlRow: 1
-	 * HtmlCell: 4
+	 * HtmRow: 1
+	 * HtmCell: 4
 	 * DisplayName.enUS: ID
 	 * Description: A URL friendly unique ID for this object
 	 */

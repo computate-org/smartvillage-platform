@@ -2307,6 +2307,10 @@ public abstract class BaseResultGen<DEV> extends Object {
 
 	public static Integer htmColumnBaseResult(String var) {
 		switch(var) {
+		case VAR_created:
+			return 1;
+		case VAR_objectTitle:
+			return 2;
 			default:
 				return null;
 		}
@@ -2314,6 +2318,16 @@ public abstract class BaseResultGen<DEV> extends Object {
 
 	public static Integer htmRowBaseResult(String var) {
 		switch(var) {
+		case VAR_created:
+			return 1;
+		case VAR_modified:
+			return 1;
+		case VAR_archived:
+			return 2;
+		case VAR_deleted:
+			return 2;
+		case VAR_objectId:
+			return 1;
 			default:
 				return null;
 		}
@@ -2321,6 +2335,16 @@ public abstract class BaseResultGen<DEV> extends Object {
 
 	public static Integer htmCellBaseResult(String var) {
 		switch(var) {
+		case VAR_created:
+			return 2;
+		case VAR_modified:
+			return 3;
+		case VAR_archived:
+			return 1;
+		case VAR_deleted:
+			return 2;
+		case VAR_objectId:
+			return 4;
 			default:
 				return null;
 		}

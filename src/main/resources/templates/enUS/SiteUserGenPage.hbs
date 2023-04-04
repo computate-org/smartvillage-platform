@@ -413,6 +413,37 @@
 						<h2 class="w3-padding ">Modify site users</h2>
 					</header>
 					<div class="" id="patchSiteUserFormValues">
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCreated" roleRequired="true"}}
+{{else}}
+{{> "htmCreated" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmArchived" roleRequired="true"}}
+{{else}}
+{{> "htmArchived" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDeleted" roleRequired="true"}}
+{{else}}
+{{> "htmDeleted" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmSeeArchived" roleRequired="true"}}
+{{else}}
+{{> "htmSeeArchived" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmSeeDeleted" roleRequired="true"}}
+{{else}}
+{{> "htmSeeDeleted" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
 						<button
 							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-2017-shaded-spruce "
 							onclick="patchSiteUser(null, $('#patchSiteUserFormValues')); "
@@ -441,6 +472,37 @@
 					</header>
 					<div class="" id="postSiteUserFormValues">
 						<div id="postSiteUserForm">
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCreated" roleRequired="true"}}
+{{else}}
+{{> "htmCreated" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmArchived" roleRequired="true"}}
+{{else}}
+{{> "htmArchived" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDeleted" roleRequired="true"}}
+{{else}}
+{{> "htmDeleted" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmSeeArchived" roleRequired="true"}}
+{{else}}
+{{> "htmSeeArchived" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmSeeDeleted" roleRequired="true"}}
+{{else}}
+{{> "htmSeeDeleted" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
 						</div>
 						<button
 							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-2017-shaded-spruce "
@@ -491,6 +553,52 @@
 				<div class="w3-card-4 ">
 					<div class="" id="searchpageSiteUserFormValues">
 						<div id="searchpageSiteUserForm">
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmPk" roleRequired="true"}}
+{{else}}
+{{> "htmPk" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCreated" roleRequired="true"}}
+{{else}}
+{{> "htmCreated" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmModified" roleRequired="true"}}
+{{else}}
+{{> "htmModified" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmObjectId" roleRequired="true"}}
+{{else}}
+{{> "htmObjectId" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmArchived" roleRequired="true"}}
+{{else}}
+{{> "htmArchived" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDeleted" roleRequired="true"}}
+{{else}}
+{{> "htmDeleted" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmSeeArchived" roleRequired="true"}}
+{{else}}
+{{> "htmSeeArchived" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmSeeDeleted" roleRequired="true"}}
+{{else}}
+{{> "htmSeeDeleted" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
 						</div>
 					</div>
 				</div>
@@ -625,6 +733,8 @@
 {{/inline}}
 {{#*inline "thead2SiteUserPage"}}
 			<tr>
+						<th>created</th>
+						<th></th>
 			</tr>
 {{/inline}}
 {{#*inline "tbody1SiteUserPage"}}
@@ -635,6 +745,17 @@
 {{#*inline "tbody2SiteUserPage"}}
 		{{#each listSiteUser}}
 					<tr>
+						<td>
+							<a href="{{pageUrlPk}}">
+								<span class="white-space-pre-wrap ">{{siteZonedDateTimeFormat created "MMM d, yyyy h:mm:ss a" siteLocale}}</span>
+							</a>
+						</td>
+						<td>
+							<a href="{{pageUrlPk}}">
+								<i class="far fa-user-cog "></i>
+								<span class="white-space-pre-wrap ">{{objectTitle}}</span>
+							</a>
+						</td>
 					</tr>
 		{{/each}}
 {{/inline}}
@@ -645,6 +766,14 @@
 {{/inline}}
 {{#*inline "tfoot2SiteUserPage"}}
 			<tr>
+			{{#if getColumnCreated}}
+				<td>
+				</td>
+			{{/if}}
+			{{#if getColumnObjectTitle}}
+				<td>
+				</td>
+			{{/if}}
 			</tr>
 	{{/inline}}
 {{#*inline "htmFormsSiteUserPage"}}

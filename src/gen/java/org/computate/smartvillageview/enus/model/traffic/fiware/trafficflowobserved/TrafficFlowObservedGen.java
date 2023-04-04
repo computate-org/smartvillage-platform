@@ -3767,6 +3767,62 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 
 	public static Integer htmRowTrafficFlowObserved(String var) {
 		switch(var) {
+		case VAR_address:
+			return 3;
+		case VAR_alternateName:
+			return 3;
+		case VAR_areaServed:
+			return 3;
+		case VAR_averageGapDistance:
+			return 4;
+		case VAR_averageHeadwayTime:
+			return 4;
+		case VAR_averageVehicleLength:
+			return 4;
+		case VAR_averageVehicleSpeed:
+			return 5;
+		case VAR_congested:
+			return 5;
+		case VAR_dataProvider:
+			return 5;
+		case VAR_dateCreated:
+			return 6;
+		case VAR_dateModified:
+			return 6;
+		case VAR_dateObserved:
+			return 6;
+		case VAR_dateObservedFrom:
+			return 7;
+		case VAR_dateObservedTo:
+			return 7;
+		case VAR_description:
+			return 7;
+		case VAR_intensity:
+			return 8;
+		case VAR_laneDirection:
+			return 8;
+		case VAR_laneId:
+			return 9;
+		case VAR_name:
+			return 9;
+		case VAR_occupancy:
+			return 10;
+		case VAR_owner:
+			return 10;
+		case VAR_refRoadSegment:
+			return 10;
+		case VAR_reversedLane:
+			return 11;
+		case VAR_seeAlso:
+			return 11;
+		case VAR_source:
+			return 11;
+		case VAR_type:
+			return 12;
+		case VAR_vehicleSubType:
+			return 12;
+		case VAR_vehicleType:
+			return 12;
 			default:
 				return MapResult.htmRowMapResult(var);
 		}
@@ -3774,6 +3830,62 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 
 	public static Integer htmCellTrafficFlowObserved(String var) {
 		switch(var) {
+		case VAR_address:
+			return 1;
+		case VAR_alternateName:
+			return 2;
+		case VAR_areaServed:
+			return 3;
+		case VAR_averageGapDistance:
+			return 1;
+		case VAR_averageHeadwayTime:
+			return 2;
+		case VAR_averageVehicleLength:
+			return 3;
+		case VAR_averageVehicleSpeed:
+			return 1;
+		case VAR_congested:
+			return 2;
+		case VAR_dataProvider:
+			return 3;
+		case VAR_dateCreated:
+			return 1;
+		case VAR_dateModified:
+			return 2;
+		case VAR_dateObserved:
+			return 3;
+		case VAR_dateObservedFrom:
+			return 1;
+		case VAR_dateObservedTo:
+			return 2;
+		case VAR_description:
+			return 3;
+		case VAR_intensity:
+			return 2;
+		case VAR_laneDirection:
+			return 3;
+		case VAR_laneId:
+			return 1;
+		case VAR_name:
+			return 3;
+		case VAR_occupancy:
+			return 1;
+		case VAR_owner:
+			return 2;
+		case VAR_refRoadSegment:
+			return 3;
+		case VAR_reversedLane:
+			return 1;
+		case VAR_seeAlso:
+			return 2;
+		case VAR_source:
+			return 3;
+		case VAR_type:
+			return 1;
+		case VAR_vehicleSubType:
+			return 2;
+		case VAR_vehicleType:
+			return 3;
 			default:
 				return MapResult.htmCellMapResult(var);
 		}

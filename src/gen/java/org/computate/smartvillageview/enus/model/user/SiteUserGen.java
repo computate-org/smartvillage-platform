@@ -1446,6 +1446,10 @@ public abstract class SiteUserGen<DEV> extends BaseModel {
 
 	public static Integer htmRowSiteUser(String var) {
 		switch(var) {
+		case VAR_seeArchived:
+			return 3;
+		case VAR_seeDeleted:
+			return 3;
 			default:
 				return BaseModel.htmRowBaseModel(var);
 		}
@@ -1453,6 +1457,10 @@ public abstract class SiteUserGen<DEV> extends BaseModel {
 
 	public static Integer htmCellSiteUser(String var) {
 		switch(var) {
+		case VAR_seeArchived:
+			return 2;
+		case VAR_seeDeleted:
+			return 3;
 			default:
 				return BaseModel.htmCellBaseModel(var);
 		}

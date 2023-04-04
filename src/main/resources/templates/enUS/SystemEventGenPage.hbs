@@ -416,55 +416,55 @@
 						<div id="postSystemEventForm">
 							<div class="w3-cell-row ">
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmCreated" classApiMethodMethod="POST" roleRequired="true"}}
+{{> "htmCreated" roleRequired="true"}}
 {{else}}
-{{> "htmCreated" classApiMethodMethod="POST" roleRequired="false"}}
+{{> "htmCreated" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmObjectId" classApiMethodMethod="POST" roleRequired="true"}}
+{{> "htmObjectId" roleRequired="true"}}
 {{else}}
-{{> "htmObjectId" classApiMethodMethod="POST" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmArchived" classApiMethodMethod="POST" roleRequired="true"}}
-{{else}}
-{{> "htmArchived" classApiMethodMethod="POST" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmDeleted" classApiMethodMethod="POST" roleRequired="true"}}
-{{else}}
-{{> "htmDeleted" classApiMethodMethod="POST" roleRequired="false"}}
+{{> "htmObjectId" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmType" classApiMethodMethod="POST" roleRequired="true"}}
+{{> "htmArchived" roleRequired="true"}}
 {{else}}
-{{> "htmType" classApiMethodMethod="POST" roleRequired="false"}}
+{{> "htmArchived" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmMessage" classApiMethodMethod="POST" roleRequired="true"}}
+{{> "htmDeleted" roleRequired="true"}}
 {{else}}
-{{> "htmMessage" classApiMethodMethod="POST" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmStatus" classApiMethodMethod="POST" roleRequired="true"}}
-{{else}}
-{{> "htmStatus" classApiMethodMethod="POST" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmCompleted" classApiMethodMethod="POST" roleRequired="true"}}
-{{else}}
-{{> "htmCompleted" classApiMethodMethod="POST" roleRequired="false"}}
+{{> "htmDeleted" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmPageImageUri" classApiMethodMethod="POST" roleRequired="true"}}
+{{> "htmType" roleRequired="true"}}
 {{else}}
-{{> "htmPageImageUri" classApiMethodMethod="POST" roleRequired="false"}}
+{{> "htmType" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmMessage" roleRequired="true"}}
+{{else}}
+{{> "htmMessage" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmStatus" roleRequired="true"}}
+{{else}}
+{{> "htmStatus" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCompleted" roleRequired="true"}}
+{{else}}
+{{> "htmCompleted" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmPageImageUri" roleRequired="true"}}
+{{else}}
+{{> "htmPageImageUri" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 						</div>
@@ -497,55 +497,55 @@
 					<div class="" id="patchSystemEventFormValues">
 							<div class="w3-cell-row ">
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmCreated" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{> "htmCreated" roleRequired="true"}}
 {{else}}
-{{> "htmCreated" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{> "htmCreated" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmObjectId" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{> "htmObjectId" roleRequired="true"}}
 {{else}}
-{{> "htmObjectId" classApiMethodMethod="PATCH" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmArchived" classApiMethodMethod="PATCH" roleRequired="true"}}
-{{else}}
-{{> "htmArchived" classApiMethodMethod="PATCH" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmDeleted" classApiMethodMethod="PATCH" roleRequired="true"}}
-{{else}}
-{{> "htmDeleted" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{> "htmObjectId" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmType" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{> "htmArchived" roleRequired="true"}}
 {{else}}
-{{> "htmType" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{> "htmArchived" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmMessage" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{> "htmDeleted" roleRequired="true"}}
 {{else}}
-{{> "htmMessage" classApiMethodMethod="PATCH" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmStatus" classApiMethodMethod="PATCH" roleRequired="true"}}
-{{else}}
-{{> "htmStatus" classApiMethodMethod="PATCH" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmCompleted" classApiMethodMethod="PATCH" roleRequired="true"}}
-{{else}}
-{{> "htmCompleted" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{> "htmDeleted" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmPageImageUri" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{> "htmType" roleRequired="true"}}
 {{else}}
-{{> "htmPageImageUri" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{> "htmType" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmMessage" roleRequired="true"}}
+{{else}}
+{{> "htmMessage" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmStatus" roleRequired="true"}}
+{{else}}
+{{> "htmStatus" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCompleted" roleRequired="true"}}
+{{else}}
+{{> "htmCompleted" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmPageImageUri" roleRequired="true"}}
+{{else}}
+{{> "htmPageImageUri" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 						<button
@@ -599,60 +599,60 @@
 						<div id="searchpageSystemEventForm">
 							<div class="w3-cell-row ">
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmModified" classApiMethodMethod="Page" roleRequired="true"}}
+{{> "htmModified" roleRequired="true"}}
 {{else}}
-{{> "htmModified" classApiMethodMethod="Page" roleRequired="false"}}
+{{> "htmModified" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmCreated" classApiMethodMethod="Page" roleRequired="true"}}
+{{> "htmCreated" roleRequired="true"}}
 {{else}}
-{{> "htmCreated" classApiMethodMethod="Page" roleRequired="false"}}
+{{> "htmCreated" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmObjectId" classApiMethodMethod="Page" roleRequired="true"}}
+{{> "htmObjectId" roleRequired="true"}}
 {{else}}
-{{> "htmObjectId" classApiMethodMethod="Page" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmArchived" classApiMethodMethod="Page" roleRequired="true"}}
-{{else}}
-{{> "htmArchived" classApiMethodMethod="Page" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmDeleted" classApiMethodMethod="Page" roleRequired="true"}}
-{{else}}
-{{> "htmDeleted" classApiMethodMethod="Page" roleRequired="false"}}
+{{> "htmObjectId" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmType" classApiMethodMethod="Page" roleRequired="true"}}
+{{> "htmArchived" roleRequired="true"}}
 {{else}}
-{{> "htmType" classApiMethodMethod="Page" roleRequired="false"}}
+{{> "htmArchived" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmMessage" classApiMethodMethod="Page" roleRequired="true"}}
+{{> "htmDeleted" roleRequired="true"}}
 {{else}}
-{{> "htmMessage" classApiMethodMethod="Page" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmStatus" classApiMethodMethod="Page" roleRequired="true"}}
-{{else}}
-{{> "htmStatus" classApiMethodMethod="Page" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmCompleted" classApiMethodMethod="Page" roleRequired="true"}}
-{{else}}
-{{> "htmCompleted" classApiMethodMethod="Page" roleRequired="false"}}
+{{> "htmDeleted" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmPageImageUri" classApiMethodMethod="Page" roleRequired="true"}}
+{{> "htmType" roleRequired="true"}}
 {{else}}
-{{> "htmPageImageUri" classApiMethodMethod="Page" roleRequired="false"}}
+{{> "htmType" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmMessage" roleRequired="true"}}
+{{else}}
+{{> "htmMessage" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmStatus" roleRequired="true"}}
+{{else}}
+{{> "htmStatus" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCompleted" roleRequired="true"}}
+{{else}}
+{{> "htmCompleted" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmPageImageUri" roleRequired="true"}}
+{{else}}
+{{> "htmPageImageUri" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 						</div>

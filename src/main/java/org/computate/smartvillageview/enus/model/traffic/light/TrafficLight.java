@@ -40,8 +40,8 @@ public class TrafficLight extends TrafficLightGen<MapResult> {
 	 * DocValues: true
 	 * Persist: true
 	 * DisplayName: traffic light ID
-	 * HtmlRow: 4
-	 * HtmlCell: 3
+	 * HtmRow: 4
+	 * HtmCell: 3
 	 * Facet: true
 	 */
 	protected void _trafficLightId(Wrap<String> w) {
@@ -52,8 +52,8 @@ public class TrafficLight extends TrafficLightGen<MapResult> {
 	 * DocValues: true
 	 * Persist: true
 	 * DisplayName: traffic light type
-	 * HtmlRow: 4
-	 * HtmlCell: 4
+	 * HtmRow: 4
+	 * HtmCell: 4
 	 * Facet: true
 	 */
 	protected void _trafficLightType(Wrap<String> w) {
@@ -64,8 +64,8 @@ public class TrafficLight extends TrafficLightGen<MapResult> {
 	 * DocValues: true
 	 * Persist: true
 	 * DisplayName: Angle in degrees
-	 * HtmlRow: 5
-	 * HtmlCell: 1
+	 * HtmRow: 5
+	 * HtmCell: 1
 	 * Facet: true
 	 */
 	protected void _angle(Wrap<BigDecimal> w) {
@@ -76,8 +76,8 @@ public class TrafficLight extends TrafficLightGen<MapResult> {
 	 * DocValues: true
 	 * Persist: true
 	 * DisplayName: Color
-	 * HtmlRow: 6
-	 * HtmlCell: 1
+	 * HtmRow: 6
+	 * HtmCell: 1
 	 * Facet: true
 	 */
 	protected void _color(Wrap<String> w) {

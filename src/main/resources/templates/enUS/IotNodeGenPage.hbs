@@ -415,50 +415,50 @@
 					<div class="" id="patchIotNodeFormValues">
 							<div class="w3-cell-row ">
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmCreated" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{> "htmCreated" roleRequired="true"}}
 {{else}}
-{{> "htmCreated" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{> "htmCreated" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmObjectId" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{> "htmObjectId" roleRequired="true"}}
 {{else}}
-{{> "htmObjectId" classApiMethodMethod="PATCH" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmArchived" classApiMethodMethod="PATCH" roleRequired="true"}}
-{{else}}
-{{> "htmArchived" classApiMethodMethod="PATCH" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmDeleted" classApiMethodMethod="PATCH" roleRequired="true"}}
-{{else}}
-{{> "htmDeleted" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{> "htmObjectId" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmNodeName" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{> "htmArchived" roleRequired="true"}}
 {{else}}
-{{> "htmNodeName" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{> "htmArchived" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmNodeType" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{> "htmDeleted" roleRequired="true"}}
 {{else}}
-{{> "htmNodeType" classApiMethodMethod="PATCH" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmNodeId" classApiMethodMethod="PATCH" roleRequired="true"}}
-{{else}}
-{{> "htmNodeId" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{> "htmDeleted" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmLocation" classApiMethodMethod="PATCH" roleRequired="true"}}
+{{> "htmNodeName" roleRequired="true"}}
 {{else}}
-{{> "htmLocation" classApiMethodMethod="PATCH" roleRequired="false"}}
+{{> "htmNodeName" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmNodeType" roleRequired="true"}}
+{{else}}
+{{> "htmNodeType" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmNodeId" roleRequired="true"}}
+{{else}}
+{{> "htmNodeId" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmLocation" roleRequired="true"}}
+{{else}}
+{{> "htmLocation" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 						<button
@@ -491,50 +491,50 @@
 						<div id="postIotNodeForm">
 							<div class="w3-cell-row ">
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmCreated" classApiMethodMethod="POST" roleRequired="true"}}
+{{> "htmCreated" roleRequired="true"}}
 {{else}}
-{{> "htmCreated" classApiMethodMethod="POST" roleRequired="false"}}
+{{> "htmCreated" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmObjectId" classApiMethodMethod="POST" roleRequired="true"}}
+{{> "htmObjectId" roleRequired="true"}}
 {{else}}
-{{> "htmObjectId" classApiMethodMethod="POST" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmArchived" classApiMethodMethod="POST" roleRequired="true"}}
-{{else}}
-{{> "htmArchived" classApiMethodMethod="POST" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmDeleted" classApiMethodMethod="POST" roleRequired="true"}}
-{{else}}
-{{> "htmDeleted" classApiMethodMethod="POST" roleRequired="false"}}
+{{> "htmObjectId" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmNodeName" classApiMethodMethod="POST" roleRequired="true"}}
+{{> "htmArchived" roleRequired="true"}}
 {{else}}
-{{> "htmNodeName" classApiMethodMethod="POST" roleRequired="false"}}
+{{> "htmArchived" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmNodeType" classApiMethodMethod="POST" roleRequired="true"}}
+{{> "htmDeleted" roleRequired="true"}}
 {{else}}
-{{> "htmNodeType" classApiMethodMethod="POST" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmNodeId" classApiMethodMethod="POST" roleRequired="true"}}
-{{else}}
-{{> "htmNodeId" classApiMethodMethod="POST" roleRequired="false"}}
+{{> "htmDeleted" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmLocation" classApiMethodMethod="POST" roleRequired="true"}}
+{{> "htmNodeName" roleRequired="true"}}
 {{else}}
-{{> "htmLocation" classApiMethodMethod="POST" roleRequired="false"}}
+{{> "htmNodeName" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmNodeType" roleRequired="true"}}
+{{else}}
+{{> "htmNodeType" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmNodeId" roleRequired="true"}}
+{{else}}
+{{> "htmNodeId" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmLocation" roleRequired="true"}}
+{{else}}
+{{> "htmLocation" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 						</div>
@@ -589,246 +589,246 @@
 						<div id="searchpageIotNodeForm">
 							<div class="w3-cell-row ">
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmCreated" classApiMethodMethod="Page" roleRequired="true"}}
+{{> "htmCreated" roleRequired="true"}}
 {{else}}
-{{> "htmCreated" classApiMethodMethod="Page" roleRequired="false"}}
+{{> "htmCreated" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmModified" classApiMethodMethod="Page" roleRequired="true"}}
+{{> "htmModified" roleRequired="true"}}
 {{else}}
-{{> "htmModified" classApiMethodMethod="Page" roleRequired="false"}}
+{{> "htmModified" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmObjectId" classApiMethodMethod="Page" roleRequired="true"}}
+{{> "htmObjectId" roleRequired="true"}}
 {{else}}
-{{> "htmObjectId" classApiMethodMethod="Page" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmArchived" classApiMethodMethod="Page" roleRequired="true"}}
-{{else}}
-{{> "htmArchived" classApiMethodMethod="Page" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmDeleted" classApiMethodMethod="Page" roleRequired="true"}}
-{{else}}
-{{> "htmDeleted" classApiMethodMethod="Page" roleRequired="false"}}
+{{> "htmObjectId" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmNodeName" classApiMethodMethod="Page" roleRequired="true"}}
+{{> "htmArchived" roleRequired="true"}}
 {{else}}
-{{> "htmNodeName" classApiMethodMethod="Page" roleRequired="false"}}
+{{> "htmArchived" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmNodeType" classApiMethodMethod="Page" roleRequired="true"}}
+{{> "htmDeleted" roleRequired="true"}}
 {{else}}
-{{> "htmNodeType" classApiMethodMethod="Page" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmNodeId" classApiMethodMethod="Page" roleRequired="true"}}
-{{else}}
-{{> "htmNodeId" classApiMethodMethod="Page" roleRequired="false"}}
+{{> "htmDeleted" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmLocation" classApiMethodMethod="Page" roleRequired="true"}}
+{{> "htmNodeName" roleRequired="true"}}
 {{else}}
-{{> "htmLocation" classApiMethodMethod="Page" roleRequired="false"}}
+{{> "htmNodeName" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_moisture" classApiMethodMethod="Page" roleRequired="true"}}
+{{> "htmNodeType" roleRequired="true"}}
 {{else}}
-{{> "htmJson_moisture" classApiMethodMethod="Page" roleRequired="false"}}
+{{> "htmNodeType" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_moisture0" classApiMethodMethod="Page" roleRequired="true"}}
+{{> "htmNodeId" roleRequired="true"}}
 {{else}}
-{{> "htmJson_moisture0" classApiMethodMethod="Page" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_moisture1" classApiMethodMethod="Page" roleRequired="true"}}
-{{else}}
-{{> "htmJson_moisture1" classApiMethodMethod="Page" roleRequired="false"}}
+{{> "htmNodeId" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_temperature" classApiMethodMethod="Page" roleRequired="true"}}
+{{> "htmLocation" roleRequired="true"}}
 {{else}}
-{{> "htmJson_temperature" classApiMethodMethod="Page" roleRequired="false"}}
+{{> "htmLocation" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_temperature0" classApiMethodMethod="Page" roleRequired="true"}}
+{{> "htmJson_moisture" roleRequired="true"}}
 {{else}}
-{{> "htmJson_temperature0" classApiMethodMethod="Page" roleRequired="false"}}
+{{> "htmJson_moisture" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_temperatureAverage" classApiMethodMethod="Page" roleRequired="true"}}
+{{> "htmJson_moisture0" roleRequired="true"}}
 {{else}}
-{{> "htmJson_temperatureAverage" classApiMethodMethod="Page" roleRequired="false"}}
+{{> "htmJson_moisture0" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_badConditionsCounter" classApiMethodMethod="Page" roleRequired="true"}}
+{{> "htmJson_moisture1" roleRequired="true"}}
 {{else}}
-{{> "htmJson_badConditionsCounter" classApiMethodMethod="Page" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_door" classApiMethodMethod="Page" roleRequired="true"}}
-{{else}}
-{{> "htmJson_door" classApiMethodMethod="Page" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_alarmDoor" classApiMethodMethod="Page" roleRequired="true"}}
-{{else}}
-{{> "htmJson_alarmDoor" classApiMethodMethod="Page" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_flood" classApiMethodMethod="Page" roleRequired="true"}}
-{{else}}
-{{> "htmJson_flood" classApiMethodMethod="Page" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_alarmFlood" classApiMethodMethod="Page" roleRequired="true"}}
-{{else}}
-{{> "htmJson_alarmFlood" classApiMethodMethod="Page" roleRequired="false"}}
+{{> "htmJson_moisture1" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_lux2" classApiMethodMethod="Page" roleRequired="true"}}
+{{> "htmJson_temperature" roleRequired="true"}}
 {{else}}
-{{> "htmJson_lux2" classApiMethodMethod="Page" roleRequired="false"}}
+{{> "htmJson_temperature" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_illuminance" classApiMethodMethod="Page" roleRequired="true"}}
+{{> "htmJson_temperature0" roleRequired="true"}}
 {{else}}
-{{> "htmJson_illuminance" classApiMethodMethod="Page" roleRequired="false"}}
+{{> "htmJson_temperature0" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_resistance0" classApiMethodMethod="Page" roleRequired="true"}}
+{{> "htmJson_temperatureAverage" roleRequired="true"}}
 {{else}}
-{{> "htmJson_resistance0" classApiMethodMethod="Page" roleRequired="false"}}
+{{> "htmJson_temperatureAverage" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_resistance1" classApiMethodMethod="Page" roleRequired="true"}}
+{{> "htmJson_badConditionsCounter" roleRequired="true"}}
 {{else}}
-{{> "htmJson_resistance1" classApiMethodMethod="Page" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_frequency" classApiMethodMethod="Page" roleRequired="true"}}
-{{else}}
-{{> "htmJson_frequency" classApiMethodMethod="Page" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_devEui" classApiMethodMethod="Page" roleRequired="true"}}
-{{else}}
-{{> "htmJson_devEui" classApiMethodMethod="Page" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_bandwidth" classApiMethodMethod="Page" roleRequired="true"}}
-{{else}}
-{{> "htmJson_bandwidth" classApiMethodMethod="Page" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_dataRate" classApiMethodMethod="Page" roleRequired="true"}}
-{{else}}
-{{> "htmJson_dataRate" classApiMethodMethod="Page" roleRequired="false"}}
+{{> "htmJson_badConditionsCounter" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_frameCount" classApiMethodMethod="Page" roleRequired="true"}}
+{{> "htmJson_door" roleRequired="true"}}
 {{else}}
-{{> "htmJson_frameCount" classApiMethodMethod="Page" roleRequired="false"}}
+{{> "htmJson_door" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_maxPayload" classApiMethodMethod="Page" roleRequired="true"}}
+{{> "htmJson_alarmDoor" roleRequired="true"}}
 {{else}}
-{{> "htmJson_maxPayload" classApiMethodMethod="Page" roleRequired="false"}}
+{{> "htmJson_alarmDoor" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_bitsPerSecond" classApiMethodMethod="Page" roleRequired="true"}}
+{{> "htmJson_flood" roleRequired="true"}}
 {{else}}
-{{> "htmJson_bitsPerSecond" classApiMethodMethod="Page" roleRequired="false"}}
+{{> "htmJson_flood" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_batteryVoltage" classApiMethodMethod="Page" roleRequired="true"}}
+{{> "htmJson_alarmFlood" roleRequired="true"}}
 {{else}}
-{{> "htmJson_batteryVoltage" classApiMethodMethod="Page" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_spreadingFactor" classApiMethodMethod="Page" roleRequired="true"}}
-{{else}}
-{{> "htmJson_spreadingFactor" classApiMethodMethod="Page" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_dataRateAdaptive" classApiMethodMethod="Page" roleRequired="true"}}
-{{else}}
-{{> "htmJson_dataRateAdaptive" classApiMethodMethod="Page" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_swversion" classApiMethodMethod="Page" roleRequired="true"}}
-{{else}}
-{{> "htmJson_swversion" classApiMethodMethod="Page" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_batteryLevel" classApiMethodMethod="Page" roleRequired="true"}}
-{{else}}
-{{> "htmJson_batteryLevel" classApiMethodMethod="Page" roleRequired="false"}}
+{{> "htmJson_alarmFlood" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_startUpCount" classApiMethodMethod="Page" roleRequired="true"}}
+{{> "htmJson_lux2" roleRequired="true"}}
 {{else}}
-{{> "htmJson_startUpCount" classApiMethodMethod="Page" roleRequired="false"}}
+{{> "htmJson_lux2" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_watchdogCount" classApiMethodMethod="Page" roleRequired="true"}}
+{{> "htmJson_illuminance" roleRequired="true"}}
 {{else}}
-{{> "htmJson_watchdogCount" classApiMethodMethod="Page" roleRequired="false"}}
+{{> "htmJson_illuminance" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_historySequence" classApiMethodMethod="Page" roleRequired="true"}}
+{{> "htmJson_resistance0" roleRequired="true"}}
 {{else}}
-{{> "htmJson_historySequence" classApiMethodMethod="Page" roleRequired="false"}}
+{{> "htmJson_resistance0" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_versionFirmware" classApiMethodMethod="Page" roleRequired="true"}}
+{{> "htmJson_resistance1" roleRequired="true"}}
 {{else}}
-{{> "htmJson_versionFirmware" classApiMethodMethod="Page" roleRequired="false"}}
+{{> "htmJson_resistance1" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_stackTxFailRebootCount" classApiMethodMethod="Page" roleRequired="true"}}
+{{> "htmJson_frequency" roleRequired="true"}}
 {{else}}
-{{> "htmJson_stackTxFailRebootCount" classApiMethodMethod="Page" roleRequired="false"}}
+{{> "htmJson_frequency" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_historySequencePrevious" classApiMethodMethod="Page" roleRequired="true"}}
+{{> "htmJson_devEui" roleRequired="true"}}
 {{else}}
-{{> "htmJson_historySequencePrevious" classApiMethodMethod="Page" roleRequired="false"}}
+{{> "htmJson_devEui" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_snr" classApiMethodMethod="Page" roleRequired="true"}}
+{{> "htmJson_bandwidth" roleRequired="true"}}
 {{else}}
-{{> "htmJson_snr" classApiMethodMethod="Page" roleRequired="false"}}
+{{> "htmJson_bandwidth" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_rssi" classApiMethodMethod="Page" roleRequired="true"}}
+{{> "htmJson_dataRate" roleRequired="true"}}
 {{else}}
-{{> "htmJson_rssi" classApiMethodMethod="Page" roleRequired="false"}}
+{{> "htmJson_dataRate" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_frameCount" roleRequired="true"}}
+{{else}}
+{{> "htmJson_frameCount" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_maxPayload" roleRequired="true"}}
+{{else}}
+{{> "htmJson_maxPayload" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_bitsPerSecond" roleRequired="true"}}
+{{else}}
+{{> "htmJson_bitsPerSecond" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_batteryVoltage" roleRequired="true"}}
+{{else}}
+{{> "htmJson_batteryVoltage" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_spreadingFactor" roleRequired="true"}}
+{{else}}
+{{> "htmJson_spreadingFactor" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_dataRateAdaptive" roleRequired="true"}}
+{{else}}
+{{> "htmJson_dataRateAdaptive" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_swversion" roleRequired="true"}}
+{{else}}
+{{> "htmJson_swversion" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_batteryLevel" roleRequired="true"}}
+{{else}}
+{{> "htmJson_batteryLevel" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_startUpCount" roleRequired="true"}}
+{{else}}
+{{> "htmJson_startUpCount" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_watchdogCount" roleRequired="true"}}
+{{else}}
+{{> "htmJson_watchdogCount" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_historySequence" roleRequired="true"}}
+{{else}}
+{{> "htmJson_historySequence" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_versionFirmware" roleRequired="true"}}
+{{else}}
+{{> "htmJson_versionFirmware" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_stackTxFailRebootCount" roleRequired="true"}}
+{{else}}
+{{> "htmJson_stackTxFailRebootCount" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_historySequencePrevious" roleRequired="true"}}
+{{else}}
+{{> "htmJson_historySequencePrevious" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_snr" roleRequired="true"}}
+{{else}}
+{{> "htmJson_snr" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmJson_rssi" roleRequired="true"}}
+{{else}}
+{{> "htmJson_rssi" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 						</div>

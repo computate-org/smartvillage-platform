@@ -55,8 +55,8 @@ public class IotNodeStep extends IotNodeStepGen<BaseResult> {
 	 * DocValues: true
 	 * Persist: true
 	 * DisplayName: node name
-	 * HtmlRow: 3
-	 * HtmlCell: 1
+	 * HtmRow: 3
+	 * HtmCell: 1
 	 * Facet: true
 	 */
 	protected void _nodeName(Wrap<String> w) {
@@ -68,8 +68,8 @@ public class IotNodeStep extends IotNodeStepGen<BaseResult> {
 	 * DocValues: true
 	 * Persist: true
 	 * DisplayName: node type
-	 * HtmlRow: 3
-	 * HtmlCell: 2
+	 * HtmRow: 3
+	 * HtmCell: 2
 	 * Facet: true
 	 */
 	protected void _nodeType(Wrap<String> w) {
@@ -81,8 +81,8 @@ public class IotNodeStep extends IotNodeStepGen<BaseResult> {
 	 * DocValues: true
 	 * Persist: true
 	 * DisplayName: node ID
-	 * HtmlRow: 3
-	 * HtmlCell: 3
+	 * HtmRow: 3
+	 * HtmCell: 3
 	 * Facet: true
 	 */
 	protected void _nodeId(Wrap<String> w) {
@@ -94,8 +94,8 @@ public class IotNodeStep extends IotNodeStepGen<BaseResult> {
 	 * DocValues: true
 	 * Persist: true
 	 * DisplayName: location
-	 * HtmlRow: 4
-	 * HtmlCell: 1
+	 * HtmRow: 4
+	 * HtmCell: 1
 	 * Facet: true
 	 */
 	protected void _location(Wrap<Point> w) {
@@ -109,8 +109,8 @@ public class IotNodeStep extends IotNodeStepGen<BaseResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * DisplayName: moisture
-	 * HtmlRow: 4
-	 * HtmlCell: 2
+	 * HtmRow: 4
+	 * HtmCell: 2
 	 * Facet: true
 	 */
 	protected void _json_moisture(Wrap<BigDecimal> w) {
@@ -121,8 +121,8 @@ public class IotNodeStep extends IotNodeStepGen<BaseResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * DisplayName: moisture0
-	 * HtmlRow: 4
-	 * HtmlCell: 3
+	 * HtmRow: 4
+	 * HtmCell: 3
 	 * Facet: true
 	 */
 	protected void _json_moisture0(Wrap<BigDecimal> w) {
@@ -133,8 +133,8 @@ public class IotNodeStep extends IotNodeStepGen<BaseResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * DisplayName: moisture1
-	 * HtmlRow: 4
-	 * HtmlCell: 4
+	 * HtmRow: 4
+	 * HtmCell: 4
 	 * Facet: true
 	 */
 	protected void _json_moisture1(Wrap<BigDecimal> w) {
@@ -145,8 +145,8 @@ public class IotNodeStep extends IotNodeStepGen<BaseResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * DisplayName: temperature
-	 * HtmlRow: 5
-	 * HtmlCell: 1
+	 * HtmRow: 5
+	 * HtmCell: 1
 	 * Facet: true
 	 */
 	protected void _json_temperature(Wrap<BigDecimal> w) {
@@ -157,8 +157,8 @@ public class IotNodeStep extends IotNodeStepGen<BaseResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * DisplayName: temperature0
-	 * HtmlRow: 5
-	 * HtmlCell: 2
+	 * HtmRow: 5
+	 * HtmCell: 2
 	 * Facet: true
 	 */
 	protected void _json_temperature0(Wrap<BigDecimal> w) {
@@ -169,8 +169,8 @@ public class IotNodeStep extends IotNodeStepGen<BaseResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * DisplayName: average temperature
-	 * HtmlRow: 5
-	 * HtmlCell: 3
+	 * HtmRow: 5
+	 * HtmCell: 3
 	 * Facet: true
 	 */
 	protected void _json_temperatureAverage(Wrap<BigDecimal> w) {
@@ -181,8 +181,8 @@ public class IotNodeStep extends IotNodeStepGen<BaseResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * DisplayName: bad conditions counter
-	 * HtmlRow: 5
-	 * HtmlCell: 4
+	 * HtmRow: 5
+	 * HtmCell: 4
 	 * Facet: true
 	 */
 	protected void _json_badConditionsCounter(Wrap<BigDecimal> w) {
@@ -194,8 +194,8 @@ public class IotNodeStep extends IotNodeStepGen<BaseResult> {
 	 * DocValues: true
 	 * DisplayName: door
 	 * Description: Door open or closed. 
-	 * HtmlRow: 6
-	 * HtmlCell: 1
+	 * HtmRow: 6
+	 * HtmCell: 1
 	 * Facet: true
 	 */
 	protected void _json_door(Wrap<String> w) {
@@ -206,8 +206,8 @@ public class IotNodeStep extends IotNodeStepGen<BaseResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * DisplayName: alarm door
-	 * HtmlRow: 6
-	 * HtmlCell: 2
+	 * HtmRow: 6
+	 * HtmCell: 2
 	 * Facet: true
 	 */
 	protected void _json_alarmDoor(Wrap<Boolean> w) {
@@ -218,8 +218,8 @@ public class IotNodeStep extends IotNodeStepGen<BaseResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * DisplayName: flood
-	 * HtmlRow: 6
-	 * HtmlCell: 3
+	 * HtmRow: 6
+	 * HtmCell: 3
 	 * Facet: true
 	 */
 	protected void _json_flood(Wrap<BigDecimal> w) {
@@ -230,8 +230,8 @@ public class IotNodeStep extends IotNodeStepGen<BaseResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * DisplayName: alarm flood
-	 * HtmlRow: 6
-	 * HtmlCell: 4
+	 * HtmRow: 6
+	 * HtmCell: 4
 	 * Facet: true
 	 */
 	protected void _json_alarmFlood(Wrap<Boolean> w) {
@@ -242,8 +242,8 @@ public class IotNodeStep extends IotNodeStepGen<BaseResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * DisplayName: lux2
-	 * HtmlRow: 7
-	 * HtmlCell: 1
+	 * HtmRow: 7
+	 * HtmCell: 1
 	 * Facet: true
 	 */
 	protected void _json_lux2(Wrap<BigDecimal> w) {
@@ -255,8 +255,8 @@ public class IotNodeStep extends IotNodeStepGen<BaseResult> {
 	 * DocValues: true
 	 * DisplayName: illuminance
 	 * Description: The amount of luminous flux per unit area. 
-	 * HtmlRow: 7
-	 * HtmlCell: 2
+	 * HtmRow: 7
+	 * HtmCell: 2
 	 * Facet: true
 	 */
 	protected void _json_illuminance(Wrap<BigDecimal> w) {
@@ -267,8 +267,8 @@ public class IotNodeStep extends IotNodeStepGen<BaseResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * DisplayName: resistance0
-	 * HtmlRow: 7
-	 * HtmlCell: 3
+	 * HtmRow: 7
+	 * HtmCell: 3
 	 * Facet: true
 	 */
 	protected void _json_resistance0(Wrap<BigDecimal> w) {
@@ -279,8 +279,8 @@ public class IotNodeStep extends IotNodeStepGen<BaseResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * DisplayName: resistance1
-	 * HtmlRow: 7
-	 * HtmlCell: 4
+	 * HtmRow: 7
+	 * HtmCell: 4
 	 * Facet: true
 	 */
 	protected void _json_resistance1(Wrap<BigDecimal> w) {
@@ -291,8 +291,8 @@ public class IotNodeStep extends IotNodeStepGen<BaseResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * DisplayName: frequency
-	 * HtmlRow: 8
-	 * HtmlCell: 1
+	 * HtmRow: 8
+	 * HtmCell: 1
 	 * Facet: true
 	 */
 	protected void _json_frequency(Wrap<BigDecimal> w) {
@@ -304,8 +304,8 @@ public class IotNodeStep extends IotNodeStepGen<BaseResult> {
 	 * DocValues: true
 	 * DisplayName: extended unique identifier
 	 * Description: The DevEUI is a 64-bit globally-unique Extended Unique Identifier (EUI-64) assigned by the manufacturer, or the owner, of the end-device. 
-	 * HtmlRow: 8
-	 * HtmlCell: 2
+	 * HtmRow: 8
+	 * HtmCell: 2
 	 * Facet: true
 	 */
 	protected void _json_devEui(Wrap<String> w) {
@@ -317,8 +317,8 @@ public class IotNodeStep extends IotNodeStepGen<BaseResult> {
 	 * DocValues: true
 	 * DisplayName: bandwidth
 	 * Description: A range of frequencies within a given band, in particular that used for transmitting a signal. 
-	 * HtmlRow: 8
-	 * HtmlCell: 3
+	 * HtmRow: 8
+	 * HtmCell: 3
 	 * Facet: true
 	 */
 	protected void _json_bandwidth(Wrap<String> w) {
@@ -330,8 +330,8 @@ public class IotNodeStep extends IotNodeStepGen<BaseResult> {
 	 * DocValues: true
 	 * DisplayName: frequency
 	 * Description: The speed at which data is transferred within the computer or between a peripheral device and the computer, measured in bytes per second. 
-	 * HtmlRow: 8
-	 * HtmlCell: 4
+	 * HtmRow: 8
+	 * HtmCell: 4
 	 * Facet: true
 	 */
 	protected void _json_dataRate(Wrap<BigDecimal> w) {
@@ -343,8 +343,8 @@ public class IotNodeStep extends IotNodeStepGen<BaseResult> {
 	 * DocValues: true
 	 * DisplayName: frame count
 	 * Description: The number of frames that have been displayed since the reading started. 
-	 * HtmlRow: 9
-	 * HtmlCell: 1
+	 * HtmRow: 9
+	 * HtmCell: 1
 	 * Facet: true
 	 */
 	protected void _json_frameCount(Wrap<BigDecimal> w) {
@@ -355,8 +355,8 @@ public class IotNodeStep extends IotNodeStepGen<BaseResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * DisplayName: max payload
-	 * HtmlRow: 9
-	 * HtmlCell: 2
+	 * HtmRow: 9
+	 * HtmCell: 2
 	 * Facet: true
 	 */
 	protected void _json_maxPayload(Wrap<BigDecimal> w) {
@@ -367,8 +367,8 @@ public class IotNodeStep extends IotNodeStepGen<BaseResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * DisplayName: bits per second
-	 * HtmlRow: 9
-	 * HtmlCell: 3
+	 * HtmRow: 9
+	 * HtmCell: 3
 	 * Facet: true
 	 */
 	protected void _json_bitsPerSecond(Wrap<BigDecimal> w) {
@@ -379,8 +379,8 @@ public class IotNodeStep extends IotNodeStepGen<BaseResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * DisplayName: battery voltage
-	 * HtmlRow: 9
-	 * HtmlCell: 4
+	 * HtmRow: 9
+	 * HtmCell: 4
 	 * Facet: true
 	 */
 	protected void _json_batteryVoltage(Wrap<BigDecimal> w) {
@@ -392,8 +392,8 @@ public class IotNodeStep extends IotNodeStepGen<BaseResult> {
 	 * DocValues: true
 	 * DisplayName: spreading factor
 	 * Description: Spreading factors plays a significant role in enabling multiple long-range receptions of packets with every packet assigned a different spreading factor. 
-	 * HtmlRow: 10
-	 * HtmlCell: 1
+	 * HtmRow: 10
+	 * HtmCell: 1
 	 * Facet: true
 	 */
 	protected void _json_spreadingFactor(Wrap<BigDecimal> w) {
@@ -405,8 +405,8 @@ public class IotNodeStep extends IotNodeStepGen<BaseResult> {
 	 * DocValues: true
 	 * DisplayName: adaptive data rate
 	 * Description: Adaptive Data Rate (ADR) is a mechanism for optimizing data rates, airtime and energy consumption in the network. 
-	 * HtmlRow: 10
-	 * HtmlCell: 2
+	 * HtmRow: 10
+	 * HtmCell: 2
 	 * Facet: true
 	 */
 	protected void _json_dataRateAdaptive(Wrap<Boolean> w) {
@@ -417,8 +417,8 @@ public class IotNodeStep extends IotNodeStepGen<BaseResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * DisplayName: swversion
-	 * HtmlRow: 10
-	 * HtmlCell: 3
+	 * HtmRow: 10
+	 * HtmCell: 3
 	 * Facet: true
 	 */
 	protected void _json_swversion(Wrap<String> w) {
@@ -429,8 +429,8 @@ public class IotNodeStep extends IotNodeStepGen<BaseResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * DisplayName: battery level
-	 * HtmlRow: 10
-	 * HtmlCell: 4
+	 * HtmRow: 10
+	 * HtmCell: 4
 	 * Facet: true
 	 */
 	protected void _json_batteryLevel(Wrap<BigDecimal> w) {
@@ -441,8 +441,8 @@ public class IotNodeStep extends IotNodeStepGen<BaseResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * DisplayName: startup count
-	 * HtmlRow: 11
-	 * HtmlCell: 1
+	 * HtmRow: 11
+	 * HtmCell: 1
 	 * Facet: true
 	 */
 	protected void _json_startUpCount(Wrap<BigDecimal> w) {
@@ -453,8 +453,8 @@ public class IotNodeStep extends IotNodeStepGen<BaseResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * DisplayName: watchdog count
-	 * HtmlRow: 11
-	 * HtmlCell: 2
+	 * HtmRow: 11
+	 * HtmCell: 2
 	 * Facet: true
 	 */
 	protected void _json_watchdogCount(Wrap<BigDecimal> w) {
@@ -465,8 +465,8 @@ public class IotNodeStep extends IotNodeStepGen<BaseResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * DisplayName: history sequence
-	 * HtmlRow: 11
-	 * HtmlCell: 3
+	 * HtmRow: 11
+	 * HtmCell: 3
 	 * Facet: true
 	 */
 	protected void _json_historySequence(Wrap<BigDecimal> w) {
@@ -477,8 +477,8 @@ public class IotNodeStep extends IotNodeStepGen<BaseResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * DisplayName: firmware version
-	 * HtmlRow: 11
-	 * HtmlCell: 4
+	 * HtmRow: 11
+	 * HtmCell: 4
 	 * Facet: true
 	 */
 	protected void _json_versionFirmware(Wrap<String> w) {
@@ -489,8 +489,8 @@ public class IotNodeStep extends IotNodeStepGen<BaseResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * DisplayName: stack tx fail reboot count
-	 * HtmlRow: 12
-	 * HtmlCell: 1
+	 * HtmRow: 12
+	 * HtmCell: 1
 	 * Facet: true
 	 */
 	protected void _json_stackTxFailRebootCount(Wrap<BigDecimal> w) {
@@ -501,8 +501,8 @@ public class IotNodeStep extends IotNodeStepGen<BaseResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * DisplayName: history sequence previous
-	 * HtmlRow: 12
-	 * HtmlCell: 2
+	 * HtmRow: 12
+	 * HtmCell: 2
 	 * Facet: true
 	 */
 	protected void _json_historySequencePrevious(Wrap<BigDecimal> w) {
@@ -514,8 +514,8 @@ public class IotNodeStep extends IotNodeStepGen<BaseResult> {
 	 * DocValues: true
 	 * DisplayName: signal-to-noise ratio
 	 * Description: SNR is defined as the ratio of signal power to the noise power, often expressed in decibels. 
-	 * HtmlRow: 12
-	 * HtmlCell: 3
+	 * HtmRow: 12
+	 * HtmCell: 3
 	 * Facet: true
 	 */
 	protected void _json_snr(Wrap<BigDecimal> w) {
@@ -527,8 +527,8 @@ public class IotNodeStep extends IotNodeStepGen<BaseResult> {
 	 * DocValues: true
 	 * DisplayName: received signal strength indicator
 	 * Description: RSSI is a measurement of how well your device can hear a signal from an access point or router. 
-	 * HtmlRow: 12
-	 * HtmlCell: 4
+	 * HtmRow: 12
+	 * HtmCell: 4
 	 * Facet: true
 	 */
 	protected void _json_rssi(Wrap<BigDecimal> w) {

@@ -43,8 +43,8 @@ public class PersonStep extends PersonStepGen<MapResult> {
 	 * DocValues: true
 	 * Persist: true
 	 * DisplayName: person ID
-	 * HtmlRow: 4
-	 * HtmlCell: 3
+	 * HtmRow: 4
+	 * HtmCell: 3
 	 * Facet: true
 	 */
 	protected void _personId(Wrap<String> w) {
@@ -55,8 +55,8 @@ public class PersonStep extends PersonStepGen<MapResult> {
 	 * DocValues: true
 	 * Persist: true
 	 * DisplayName: person type
-	 * HtmlRow: 4
-	 * HtmlCell: 4
+	 * HtmRow: 4
+	 * HtmCell: 4
 	 * Facet: true
 	 */
 	protected void _personType(Wrap<String> w) {
@@ -67,8 +67,8 @@ public class PersonStep extends PersonStepGen<MapResult> {
 	 * DocValues: true
 	 * Persist: true
 	 * DisplayName: Angle in degrees
-	 * HtmlRow: 5
-	 * HtmlCell: 1
+	 * HtmRow: 5
+	 * HtmCell: 1
 	 * Facet: true
 	 */
 	protected void _angle(Wrap<BigDecimal> w) {
@@ -79,8 +79,8 @@ public class PersonStep extends PersonStepGen<MapResult> {
 	 * DocValues: true
 	 * Persist: true
 	 * DisplayName: Speed
-	 * HtmlRow: 5
-	 * HtmlCell: 2
+	 * HtmRow: 5
+	 * HtmCell: 2
 	 * Facet: true
 	 */
 	protected void _speed(Wrap<BigDecimal> w) {
@@ -91,8 +91,8 @@ public class PersonStep extends PersonStepGen<MapResult> {
 	 * DocValues: true
 	 * Persist: true
 	 * DisplayName: Position
-	 * HtmlRow: 5
-	 * HtmlCell: 3
+	 * HtmRow: 5
+	 * HtmCell: 3
 	 * Facet: true
 	 */
 	protected void _pos(Wrap<BigDecimal> w) {
@@ -103,8 +103,8 @@ public class PersonStep extends PersonStepGen<MapResult> {
 	 * DocValues: true
 	 * Persist: true
 	 * DisplayName: Slope
-	 * HtmlRow: 5
-	 * HtmlCell: 4
+	 * HtmRow: 5
+	 * HtmCell: 4
 	 * Facet: true
 	 */
 	protected void _slope(Wrap<BigDecimal> w) {

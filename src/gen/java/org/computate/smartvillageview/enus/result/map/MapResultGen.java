@@ -1659,6 +1659,22 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 
 	public static Integer htmRowMapResult(String var) {
 		switch(var) {
+		case VAR_simulationName:
+			return 3;
+		case VAR_sumocfgPath:
+			return 3;
+		case VAR_simulationKey:
+			return 3;
+		case VAR_time:
+			return 4;
+		case VAR_dateTime:
+			return 4;
+		case VAR_location:
+			return 4;
+		case VAR_color:
+			return 4;
+		case VAR_step:
+			return 4;
 			default:
 				return BaseResult.htmRowBaseResult(var);
 		}
@@ -1666,6 +1682,22 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 
 	public static Integer htmCellMapResult(String var) {
 		switch(var) {
+		case VAR_simulationName:
+			return 1;
+		case VAR_sumocfgPath:
+			return 2;
+		case VAR_simulationKey:
+			return 1;
+		case VAR_time:
+			return 1;
+		case VAR_dateTime:
+			return 1;
+		case VAR_location:
+			return 2;
+		case VAR_color:
+			return 3;
+		case VAR_step:
+			return 1;
 			default:
 				return BaseResult.htmCellBaseResult(var);
 		}

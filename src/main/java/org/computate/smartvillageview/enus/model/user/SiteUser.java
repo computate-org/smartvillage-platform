@@ -111,8 +111,8 @@ public class SiteUser extends SiteUserGen<BaseModel> implements ComputateSiteUse
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 3
-	 * HtmlCell: 2
+	 * HtmRow: 3
+	 * HtmCell: 2
 	 * DisplayName.enUS: see archived
 	 * Description: A user field allowing a user to see archived records
 	 */
@@ -124,8 +124,8 @@ public class SiteUser extends SiteUserGen<BaseModel> implements ComputateSiteUse
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 3
-	 * HtmlCell: 3
+	 * HtmRow: 3
+	 * HtmCell: 3
 	 * DisplayName.enUS: see deleted
 	 * Description: A user field allowing a user to see deleted records
 	 */

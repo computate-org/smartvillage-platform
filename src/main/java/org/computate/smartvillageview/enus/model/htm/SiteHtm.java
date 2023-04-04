@@ -53,9 +53,9 @@ public class SiteHtm extends SiteHtmGen<BaseResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 3
-	 * HtmlCell: 1
-	 * HtmlColumn: 3
+	 * HtmRow: 3
+	 * HtmCell: 1
+	 * HtmColumn: 3
 	 * Facet: true
 	 * DisplayName: Page URL
 	 * Description: The URL for this page. 
@@ -67,9 +67,9 @@ public class SiteHtm extends SiteHtmGen<BaseResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 3
-	 * HtmlCell: 2
-	 * HtmlColumn: 4
+	 * HtmRow: 3
+	 * HtmCell: 2
+	 * HtmColumn: 4
 	 * Facet: true
 	 * DisplayName: URI
 	 * Description: The relative URI for this page. 
@@ -81,9 +81,9 @@ public class SiteHtm extends SiteHtmGen<BaseResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 3
-	 * HtmlCell: 2
-	 * HtmlColumn: 4
+	 * HtmRow: 3
+	 * HtmCell: 2
+	 * HtmColumn: 4
 	 * Facet: true
 	 * DisplayName: Page ID
 	 * Description: The ID for this page. 
@@ -95,9 +95,9 @@ public class SiteHtm extends SiteHtmGen<BaseResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 3
-	 * HtmlCell: 3
-	 * HtmlColumn: 5
+	 * HtmRow: 3
+	 * HtmCell: 3
+	 * HtmColumn: 5
 	 * Facet: true
 	 * DisplayName: Sequence Number
 	 * Description: The sequence number for this page. 

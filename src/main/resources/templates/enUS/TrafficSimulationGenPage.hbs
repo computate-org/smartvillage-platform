@@ -421,6 +421,25 @@
 					<div class="" id="patchTrafficSimulationFormValues">
 							<div class="w3-cell-row ">
 {{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCreated" roleRequired="true"}}
+{{else}}
+{{> "htmCreated" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmArchived" roleRequired="true"}}
+{{else}}
+{{> "htmArchived" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDeleted" roleRequired="true"}}
+{{else}}
+{{> "htmDeleted" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
 {{> "htmSimulationName" roleRequired="true"}}
 {{else}}
 {{> "htmSimulationName" roleRequired="false"}}
@@ -615,6 +634,25 @@
 					</header>
 					<div class="" id="postTrafficSimulationFormValues">
 						<div id="postTrafficSimulationForm">
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCreated" roleRequired="true"}}
+{{else}}
+{{> "htmCreated" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmArchived" roleRequired="true"}}
+{{else}}
+{{> "htmArchived" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDeleted" roleRequired="true"}}
+{{else}}
+{{> "htmDeleted" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
 							<div class="w3-cell-row ">
 {{#ifContainsAnyRoles roles roleRequired}}
 {{> "htmSimulationName" roleRequired="true"}}
@@ -833,6 +871,40 @@
 				<div class="w3-card-4 ">
 					<div class="" id="searchpageTrafficSimulationFormValues">
 						<div id="searchpageTrafficSimulationForm">
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmPk" roleRequired="true"}}
+{{else}}
+{{> "htmPk" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCreated" roleRequired="true"}}
+{{else}}
+{{> "htmCreated" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmModified" roleRequired="true"}}
+{{else}}
+{{> "htmModified" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmObjectId" roleRequired="true"}}
+{{else}}
+{{> "htmObjectId" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmArchived" roleRequired="true"}}
+{{else}}
+{{> "htmArchived" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDeleted" roleRequired="true"}}
+{{else}}
+{{> "htmDeleted" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
 							<div class="w3-cell-row ">
 {{#ifContainsAnyRoles roles roleRequired}}
 {{> "htmSimulationName" roleRequired="true"}}
@@ -1135,6 +1207,8 @@
 {{/inline}}
 {{#*inline "thead2TrafficSimulationPage"}}
 			<tr>
+						<th>created</th>
+						<th></th>
 			</tr>
 {{/inline}}
 {{#*inline "tbody1TrafficSimulationPage"}}
@@ -1145,6 +1219,17 @@
 {{#*inline "tbody2TrafficSimulationPage"}}
 		{{#each listTrafficSimulation}}
 					<tr>
+						<td>
+							<a href="{{pageUrlPk}}">
+								<span class="white-space-pre-wrap ">{{siteZonedDateTimeFormat created "MMM d, yyyy h:mm:ss a" siteLocale}}</span>
+							</a>
+						</td>
+						<td>
+							<a href="{{pageUrlPk}}">
+								<i class="fad fa-traffic-light-stop "></i>
+								<span class="white-space-pre-wrap ">{{objectTitle}}</span>
+							</a>
+						</td>
 					</tr>
 		{{/each}}
 {{/inline}}
@@ -1155,6 +1240,14 @@
 {{/inline}}
 {{#*inline "tfoot2TrafficSimulationPage"}}
 			<tr>
+			{{#if getColumnCreated}}
+				<td>
+				</td>
+			{{/if}}
+			{{#if getColumnObjectTitle}}
+				<td>
+				</td>
+			{{/if}}
 			</tr>
 	{{/inline}}
 {{#*inline "htmFormsTrafficSimulationPage"}}

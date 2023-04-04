@@ -652,6 +652,133 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 							num++;
 							bParams.add(o2.sqlDeleted());
 						break;
+					case "setParamPedestrianQueueThresholdWestEast":
+							o2.setParamPedestrianQueueThresholdWestEast(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficSimulation.VAR_paramPedestrianQueueThresholdWestEast + "=$" + num);
+							num++;
+							bParams.add(o2.sqlParamPedestrianQueueThresholdWestEast());
+						break;
+					case "setParamStepSize":
+							o2.setParamStepSize(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficSimulation.VAR_paramStepSize + "=$" + num);
+							num++;
+							bParams.add(o2.sqlParamStepSize());
+						break;
+					case "setParamRunTime":
+							o2.setParamRunTime(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficSimulation.VAR_paramRunTime + "=$" + num);
+							num++;
+							bParams.add(o2.sqlParamRunTime());
+						break;
+					case "setParamItersPerPar":
+							o2.setParamItersPerPar(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficSimulation.VAR_paramItersPerPar + "=$" + num);
+							num++;
+							bParams.add(o2.sqlParamItersPerPar());
+						break;
+					case "setParamTotalIterNum":
+							o2.setParamTotalIterNum(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficSimulation.VAR_paramTotalIterNum + "=$" + num);
+							num++;
+							bParams.add(o2.sqlParamTotalIterNum());
+						break;
+					case "setReportKeys":
+						JsonArray setReportKeysValues = Optional.ofNullable(jsonObject.getJsonArray(entityVar)).orElse(new JsonArray());
+						setReportKeysValues.stream().map(oVal -> oVal.toString()).forEach(val -> {
+							futures2.add(Future.future(promise2 -> {
+								search(siteRequest).query(SimulationReport.class, val, inheritPk).onSuccess(pk2 -> {
+									if(!pks.contains(pk2)) {
+										pks.add(pk2);
+										classes.add("SimulationReport");
+									}
+									sql(siteRequest).update(SimulationReport.class, pk2).set(SimulationReport.VAR_simulationKey, TrafficSimulation.class, pk).onSuccess(a -> {
+										promise2.complete();
+									}).onFailure(ex -> {
+										promise2.fail(ex);
+									});
+								}).onFailure(ex -> {
+									promise2.fail(ex);
+								});
+							}));
+						});
+						Optional.ofNullable(o.getReportKeys()).orElse(Arrays.asList()).stream().filter(oVal -> oVal != null && !setReportKeysValues.contains(oVal.toString())).forEach(pk2 -> {
+							if(!pks.contains(pk2)) {
+								pks.add(pk2);
+								classes.add("SimulationReport");
+							}
+							futures2.add(Future.future(promise2 -> {
+								sql(siteRequest).update(SimulationReport.class, pk2).setToNull(SimulationReport.VAR_simulationKey, TrafficSimulation.class, pk2).onSuccess(a -> {
+									promise2.complete();
+								}).onFailure(ex -> {
+									promise2.fail(ex);
+								});
+							}));
+						});
+						break;
+					case "addAllReportKeys":
+						JsonArray addAllReportKeysValues = Optional.ofNullable(jsonObject.getJsonArray(entityVar)).orElse(new JsonArray());
+						addAllReportKeysValues.stream().map(oVal -> oVal.toString()).forEach(val -> {
+							futures2.add(Future.future(promise2 -> {
+								search(siteRequest).query(SimulationReport.class, val, inheritPk).onSuccess(pk2 -> {
+									if(!pks.contains(pk2)) {
+										pks.add(pk2);
+										classes.add("SimulationReport");
+									}
+									sql(siteRequest).update(SimulationReport.class, pk2).set(SimulationReport.VAR_simulationKey, TrafficSimulation.class, pk).onSuccess(a -> {
+										promise2.complete();
+									}).onFailure(ex -> {
+										promise2.fail(ex);
+									});
+								}).onFailure(ex -> {
+									promise2.fail(ex);
+								});
+							}));
+						});
+						break;
+					case "addReportKeys":
+						Optional.ofNullable(jsonObject.getString(entityVar)).ifPresent(val -> {
+							futures2.add(Future.future(promise2 -> {
+								search(siteRequest).query(SimulationReport.class, val, inheritPk).onSuccess(pk2 -> {
+									if(!pks.contains(pk2)) {
+										pks.add(pk2);
+										classes.add("SimulationReport");
+									}
+									sql(siteRequest).update(SimulationReport.class, pk2).set(SimulationReport.VAR_simulationKey, TrafficSimulation.class, pk).onSuccess(a -> {
+										promise2.complete();
+									}).onFailure(ex -> {
+										promise2.fail(ex);
+									});
+								}).onFailure(ex -> {
+									promise2.fail(ex);
+								});
+							}));
+						});
+						break;
+					case "removeReportKeys":
+						Optional.ofNullable(jsonObject.getString(entityVar)).map(val -> Long.parseLong(val)).ifPresent(pk2 -> {
+							if(!pks.contains(pk2)) {
+								pks.add(pk2);
+								classes.add("SimulationReport");
+							}
+							futures2.add(Future.future(promise2 -> {
+								sql(siteRequest).update(SimulationReport.class, pk2).setToNull(SimulationReport.VAR_simulationKey, TrafficSimulation.class, pk2).onSuccess(a -> {
+									promise2.complete();
+								}).onFailure(ex -> {
+									promise2.fail(ex);
+								});
+							}));
+						});
+						break;
 					case "setStartDateTime":
 							o2.setStartDateTime(jsonObject.getString(entityVar));
 							if(bParams.size() > 0)
@@ -843,133 +970,6 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 							bSql.append(TrafficSimulation.VAR_paramPedestrianQueueThresholdNorthSouth + "=$" + num);
 							num++;
 							bParams.add(o2.sqlParamPedestrianQueueThresholdNorthSouth());
-						break;
-					case "setParamPedestrianQueueThresholdWestEast":
-							o2.setParamPedestrianQueueThresholdWestEast(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(TrafficSimulation.VAR_paramPedestrianQueueThresholdWestEast + "=$" + num);
-							num++;
-							bParams.add(o2.sqlParamPedestrianQueueThresholdWestEast());
-						break;
-					case "setParamStepSize":
-							o2.setParamStepSize(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(TrafficSimulation.VAR_paramStepSize + "=$" + num);
-							num++;
-							bParams.add(o2.sqlParamStepSize());
-						break;
-					case "setParamRunTime":
-							o2.setParamRunTime(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(TrafficSimulation.VAR_paramRunTime + "=$" + num);
-							num++;
-							bParams.add(o2.sqlParamRunTime());
-						break;
-					case "setParamItersPerPar":
-							o2.setParamItersPerPar(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(TrafficSimulation.VAR_paramItersPerPar + "=$" + num);
-							num++;
-							bParams.add(o2.sqlParamItersPerPar());
-						break;
-					case "setParamTotalIterNum":
-							o2.setParamTotalIterNum(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(TrafficSimulation.VAR_paramTotalIterNum + "=$" + num);
-							num++;
-							bParams.add(o2.sqlParamTotalIterNum());
-						break;
-					case "setReportKeys":
-						JsonArray setReportKeysValues = Optional.ofNullable(jsonObject.getJsonArray(entityVar)).orElse(new JsonArray());
-						setReportKeysValues.stream().map(oVal -> oVal.toString()).forEach(val -> {
-							futures2.add(Future.future(promise2 -> {
-								search(siteRequest).query(SimulationReport.class, val, inheritPk).onSuccess(pk2 -> {
-									if(!pks.contains(pk2)) {
-										pks.add(pk2);
-										classes.add("SimulationReport");
-									}
-									sql(siteRequest).update(SimulationReport.class, pk2).set(SimulationReport.VAR_simulationKey, TrafficSimulation.class, pk).onSuccess(a -> {
-										promise2.complete();
-									}).onFailure(ex -> {
-										promise2.fail(ex);
-									});
-								}).onFailure(ex -> {
-									promise2.fail(ex);
-								});
-							}));
-						});
-						Optional.ofNullable(o.getReportKeys()).orElse(Arrays.asList()).stream().filter(oVal -> oVal != null && !setReportKeysValues.contains(oVal.toString())).forEach(pk2 -> {
-							if(!pks.contains(pk2)) {
-								pks.add(pk2);
-								classes.add("SimulationReport");
-							}
-							futures2.add(Future.future(promise2 -> {
-								sql(siteRequest).update(SimulationReport.class, pk2).setToNull(SimulationReport.VAR_simulationKey, TrafficSimulation.class, pk2).onSuccess(a -> {
-									promise2.complete();
-								}).onFailure(ex -> {
-									promise2.fail(ex);
-								});
-							}));
-						});
-						break;
-					case "addAllReportKeys":
-						JsonArray addAllReportKeysValues = Optional.ofNullable(jsonObject.getJsonArray(entityVar)).orElse(new JsonArray());
-						addAllReportKeysValues.stream().map(oVal -> oVal.toString()).forEach(val -> {
-							futures2.add(Future.future(promise2 -> {
-								search(siteRequest).query(SimulationReport.class, val, inheritPk).onSuccess(pk2 -> {
-									if(!pks.contains(pk2)) {
-										pks.add(pk2);
-										classes.add("SimulationReport");
-									}
-									sql(siteRequest).update(SimulationReport.class, pk2).set(SimulationReport.VAR_simulationKey, TrafficSimulation.class, pk).onSuccess(a -> {
-										promise2.complete();
-									}).onFailure(ex -> {
-										promise2.fail(ex);
-									});
-								}).onFailure(ex -> {
-									promise2.fail(ex);
-								});
-							}));
-						});
-						break;
-					case "addReportKeys":
-						Optional.ofNullable(jsonObject.getString(entityVar)).ifPresent(val -> {
-							futures2.add(Future.future(promise2 -> {
-								search(siteRequest).query(SimulationReport.class, val, inheritPk).onSuccess(pk2 -> {
-									if(!pks.contains(pk2)) {
-										pks.add(pk2);
-										classes.add("SimulationReport");
-									}
-									sql(siteRequest).update(SimulationReport.class, pk2).set(SimulationReport.VAR_simulationKey, TrafficSimulation.class, pk).onSuccess(a -> {
-										promise2.complete();
-									}).onFailure(ex -> {
-										promise2.fail(ex);
-									});
-								}).onFailure(ex -> {
-									promise2.fail(ex);
-								});
-							}));
-						});
-						break;
-					case "removeReportKeys":
-						Optional.ofNullable(jsonObject.getString(entityVar)).map(val -> Long.parseLong(val)).ifPresent(pk2 -> {
-							if(!pks.contains(pk2)) {
-								pks.add(pk2);
-								classes.add("SimulationReport");
-							}
-							futures2.add(Future.future(promise2 -> {
-								sql(siteRequest).update(SimulationReport.class, pk2).setToNull(SimulationReport.VAR_simulationKey, TrafficSimulation.class, pk2).onSuccess(a -> {
-									promise2.complete();
-								}).onFailure(ex -> {
-									promise2.fail(ex);
-								});
-							}));
-						});
 						break;
 				}
 			}
@@ -1325,6 +1325,70 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 						num++;
 						bParams.add(o2.sqlUserKey());
 						break;
+					case TrafficSimulation.VAR_paramPedestrianQueueThresholdWestEast:
+						o2.setParamPedestrianQueueThresholdWestEast(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficSimulation.VAR_paramPedestrianQueueThresholdWestEast + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamPedestrianQueueThresholdWestEast());
+						break;
+					case TrafficSimulation.VAR_paramStepSize:
+						o2.setParamStepSize(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficSimulation.VAR_paramStepSize + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamStepSize());
+						break;
+					case TrafficSimulation.VAR_paramRunTime:
+						o2.setParamRunTime(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficSimulation.VAR_paramRunTime + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamRunTime());
+						break;
+					case TrafficSimulation.VAR_paramItersPerPar:
+						o2.setParamItersPerPar(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficSimulation.VAR_paramItersPerPar + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamItersPerPar());
+						break;
+					case TrafficSimulation.VAR_paramTotalIterNum:
+						o2.setParamTotalIterNum(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficSimulation.VAR_paramTotalIterNum + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamTotalIterNum());
+						break;
+					case TrafficSimulation.VAR_reportKeys:
+						Optional.ofNullable(jsonObject.getJsonArray(entityVar)).orElse(new JsonArray()).stream().map(oVal -> oVal.toString()).forEach(val -> {
+							futures2.add(Future.future(promise2 -> {
+								search(siteRequest).query(SimulationReport.class, val, inheritPk).onSuccess(pk2 -> {
+									if(!pks.contains(pk2)) {
+										pks.add(pk2);
+										classes.add("SimulationReport");
+									}
+									sql(siteRequest).update(SimulationReport.class, pk2).set(SimulationReport.VAR_simulationKey, TrafficSimulation.class, pk).onSuccess(a -> {
+										promise2.complete();
+									}).onFailure(ex -> {
+										promise2.fail(ex);
+									});
+								}).onFailure(ex -> {
+									promise2.fail(ex);
+								});
+							}));
+						});
+						break;
 					case TrafficSimulation.VAR_startDateTime:
 						o2.setStartDateTime(jsonObject.getString(entityVar));
 						if(bParams.size() > 0) {
@@ -1540,70 +1604,6 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 						bSql.append(TrafficSimulation.VAR_paramPedestrianQueueThresholdNorthSouth + "=$" + num);
 						num++;
 						bParams.add(o2.sqlParamPedestrianQueueThresholdNorthSouth());
-						break;
-					case TrafficSimulation.VAR_paramPedestrianQueueThresholdWestEast:
-						o2.setParamPedestrianQueueThresholdWestEast(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(TrafficSimulation.VAR_paramPedestrianQueueThresholdWestEast + "=$" + num);
-						num++;
-						bParams.add(o2.sqlParamPedestrianQueueThresholdWestEast());
-						break;
-					case TrafficSimulation.VAR_paramStepSize:
-						o2.setParamStepSize(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(TrafficSimulation.VAR_paramStepSize + "=$" + num);
-						num++;
-						bParams.add(o2.sqlParamStepSize());
-						break;
-					case TrafficSimulation.VAR_paramRunTime:
-						o2.setParamRunTime(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(TrafficSimulation.VAR_paramRunTime + "=$" + num);
-						num++;
-						bParams.add(o2.sqlParamRunTime());
-						break;
-					case TrafficSimulation.VAR_paramItersPerPar:
-						o2.setParamItersPerPar(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(TrafficSimulation.VAR_paramItersPerPar + "=$" + num);
-						num++;
-						bParams.add(o2.sqlParamItersPerPar());
-						break;
-					case TrafficSimulation.VAR_paramTotalIterNum:
-						o2.setParamTotalIterNum(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(TrafficSimulation.VAR_paramTotalIterNum + "=$" + num);
-						num++;
-						bParams.add(o2.sqlParamTotalIterNum());
-						break;
-					case TrafficSimulation.VAR_reportKeys:
-						Optional.ofNullable(jsonObject.getJsonArray(entityVar)).orElse(new JsonArray()).stream().map(oVal -> oVal.toString()).forEach(val -> {
-							futures2.add(Future.future(promise2 -> {
-								search(siteRequest).query(SimulationReport.class, val, inheritPk).onSuccess(pk2 -> {
-									if(!pks.contains(pk2)) {
-										pks.add(pk2);
-										classes.add("SimulationReport");
-									}
-									sql(siteRequest).update(SimulationReport.class, pk2).set(SimulationReport.VAR_simulationKey, TrafficSimulation.class, pk).onSuccess(a -> {
-										promise2.complete();
-									}).onFailure(ex -> {
-										promise2.fail(ex);
-									});
-								}).onFailure(ex -> {
-									promise2.fail(ex);
-								});
-							}));
-						});
 						break;
 					}
 				}

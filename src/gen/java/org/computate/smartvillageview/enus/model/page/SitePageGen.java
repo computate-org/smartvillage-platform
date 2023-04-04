@@ -2312,6 +2312,8 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 
 	public static Integer htmColumnSitePage(String var) {
 		switch(var) {
+		case VAR_url:
+			return 4;
 			default:
 				return BaseResult.htmColumnBaseResult(var);
 		}
@@ -2319,6 +2321,16 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 
 	public static Integer htmRowSitePage(String var) {
 		switch(var) {
+		case VAR_url:
+			return 3;
+		case VAR_uri:
+			return 3;
+		case VAR_pageId:
+			return 3;
+		case VAR_author:
+			return 3;
+		case VAR_pageImageUri:
+			return 4;
 			default:
 				return BaseResult.htmRowBaseResult(var);
 		}
@@ -2326,6 +2338,16 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 
 	public static Integer htmCellSitePage(String var) {
 		switch(var) {
+		case VAR_url:
+			return 2;
+		case VAR_uri:
+			return 2;
+		case VAR_pageId:
+			return 1;
+		case VAR_author:
+			return 3;
+		case VAR_pageImageUri:
+			return 1;
 			default:
 				return BaseResult.htmCellBaseResult(var);
 		}

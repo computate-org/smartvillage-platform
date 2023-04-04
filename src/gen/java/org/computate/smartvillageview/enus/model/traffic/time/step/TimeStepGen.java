@@ -1012,6 +1012,14 @@ public abstract class TimeStepGen<DEV> extends BaseResult {
 
 	public static Integer htmRowTimeStep(String var) {
 		switch(var) {
+		case VAR_simulationKey:
+			return 3;
+		case VAR_path:
+			return 3;
+		case VAR_time:
+			return 3;
+		case VAR_dateTime:
+			return 4;
 			default:
 				return BaseResult.htmRowBaseResult(var);
 		}
@@ -1019,6 +1027,14 @@ public abstract class TimeStepGen<DEV> extends BaseResult {
 
 	public static Integer htmCellTimeStep(String var) {
 		switch(var) {
+		case VAR_simulationKey:
+			return 1;
+		case VAR_path:
+			return 2;
+		case VAR_time:
+			return 3;
+		case VAR_dateTime:
+			return 1;
 			default:
 				return BaseResult.htmCellBaseResult(var);
 		}

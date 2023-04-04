@@ -43,8 +43,8 @@ public class TimeStep extends TimeStepGen<BaseResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 3
-	 * HtmlCell: 1
+	 * HtmRow: 3
+	 * HtmCell: 1
 	 * Facet: true
 	 * DisplayName: Simulation
 	 * Description: The simulation key. 
@@ -56,8 +56,8 @@ public class TimeStep extends TimeStepGen<BaseResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 3
-	 * HtmlCell: 2
+	 * HtmRow: 3
+	 * HtmCell: 2
 	 * Facet: true
 	 * DisplayName: Path
 	 * Description: The file path. 
@@ -69,8 +69,8 @@ public class TimeStep extends TimeStepGen<BaseResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 3
-	 * HtmlCell: 3
+	 * HtmRow: 3
+	 * HtmCell: 3
 	 * Facet: true
 	 * DisplayName: Time in seconds
 	 * Description: The time in seconds. 
@@ -82,8 +82,8 @@ public class TimeStep extends TimeStepGen<BaseResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmlRow: 4
-	 * HtmlCell: 1
+	 * HtmRow: 4
+	 * HtmCell: 1
 	 * Facet: true
 	 * DisplayName: Date and Time in seconds
 	 * Description: The date and time in seconds. 

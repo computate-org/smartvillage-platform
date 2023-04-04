@@ -39,8 +39,8 @@ public class BicycleStep extends BicycleStepGen<MapResult> {
 	 * DocValues: true
 	 * Persist: true
 	 * DisplayName: bicycle ID
-	 * HtmlRow: 4
-	 * HtmlCell: 3
+	 * HtmRow: 4
+	 * HtmCell: 3
 	 * Facet: true
 	 */
 	protected void _bicycleId(Wrap<String> w) {

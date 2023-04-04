@@ -3193,6 +3193,18 @@ public abstract class SystemEventGen<DEV> extends Object {
 
 	public static Integer htmColumnSystemEvent(String var) {
 		switch(var) {
+		case VAR_type:
+			return 2;
+		case VAR_message:
+			return 3;
+		case VAR_status:
+			return 3;
+		case VAR_completed:
+			return 4;
+		case VAR_created:
+			return 1;
+		case VAR_objectTitle:
+			return 2;
 			default:
 				return null;
 		}
@@ -3200,6 +3212,26 @@ public abstract class SystemEventGen<DEV> extends Object {
 
 	public static Integer htmRowSystemEvent(String var) {
 		switch(var) {
+		case VAR_type:
+			return 3;
+		case VAR_message:
+			return 3;
+		case VAR_status:
+			return 3;
+		case VAR_completed:
+			return 3;
+		case VAR_created:
+			return 1;
+		case VAR_modified:
+			return 1;
+		case VAR_pageImageUri:
+			return 4;
+		case VAR_archived:
+			return 2;
+		case VAR_deleted:
+			return 2;
+		case VAR_objectId:
+			return 1;
 			default:
 				return null;
 		}
@@ -3207,6 +3239,26 @@ public abstract class SystemEventGen<DEV> extends Object {
 
 	public static Integer htmCellSystemEvent(String var) {
 		switch(var) {
+		case VAR_type:
+			return 1;
+		case VAR_message:
+			return 2;
+		case VAR_status:
+			return 2;
+		case VAR_completed:
+			return 3;
+		case VAR_created:
+			return 4;
+		case VAR_modified:
+			return 3;
+		case VAR_pageImageUri:
+			return 1;
+		case VAR_archived:
+			return 1;
+		case VAR_deleted:
+			return 2;
+		case VAR_objectId:
+			return 4;
 			default:
 				return null;
 		}

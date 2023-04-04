@@ -656,6 +656,8 @@ public abstract class BicycleStepGen<DEV> extends MapResult {
 
 	public static Integer htmRowBicycleStep(String var) {
 		switch(var) {
+		case VAR_bicycleId:
+			return 4;
 			default:
 				return MapResult.htmRowMapResult(var);
 		}
@@ -663,6 +665,8 @@ public abstract class BicycleStepGen<DEV> extends MapResult {
 
 	public static Integer htmCellBicycleStep(String var) {
 		switch(var) {
+		case VAR_bicycleId:
+			return 3;
 			default:
 				return MapResult.htmCellMapResult(var);
 		}

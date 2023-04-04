@@ -403,75 +403,75 @@
 						<div id="searchpageMapResultForm">
 							<div class="w3-cell-row ">
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmCreated" classApiMethodMethod="Page" roleRequired="true"}}
+{{> "htmCreated" roleRequired="true"}}
 {{else}}
-{{> "htmCreated" classApiMethodMethod="Page" roleRequired="false"}}
+{{> "htmCreated" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmModified" classApiMethodMethod="Page" roleRequired="true"}}
+{{> "htmModified" roleRequired="true"}}
 {{else}}
-{{> "htmModified" classApiMethodMethod="Page" roleRequired="false"}}
+{{> "htmModified" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmObjectId" classApiMethodMethod="Page" roleRequired="true"}}
+{{> "htmObjectId" roleRequired="true"}}
 {{else}}
-{{> "htmObjectId" classApiMethodMethod="Page" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmArchived" classApiMethodMethod="Page" roleRequired="true"}}
-{{else}}
-{{> "htmArchived" classApiMethodMethod="Page" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmDeleted" classApiMethodMethod="Page" roleRequired="true"}}
-{{else}}
-{{> "htmDeleted" classApiMethodMethod="Page" roleRequired="false"}}
+{{> "htmObjectId" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmSimulationName" classApiMethodMethod="Page" roleRequired="true"}}
+{{> "htmArchived" roleRequired="true"}}
 {{else}}
-{{> "htmSimulationName" classApiMethodMethod="Page" roleRequired="false"}}
+{{> "htmArchived" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmSimulationKey" classApiMethodMethod="Page" roleRequired="true"}}
+{{> "htmDeleted" roleRequired="true"}}
 {{else}}
-{{> "htmSimulationKey" classApiMethodMethod="Page" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmSumocfgPath" classApiMethodMethod="Page" roleRequired="true"}}
-{{else}}
-{{> "htmSumocfgPath" classApiMethodMethod="Page" roleRequired="false"}}
+{{> "htmDeleted" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmTime" classApiMethodMethod="Page" roleRequired="true"}}
+{{> "htmSimulationName" roleRequired="true"}}
 {{else}}
-{{> "htmTime" classApiMethodMethod="Page" roleRequired="false"}}
+{{> "htmSimulationName" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmDateTime" classApiMethodMethod="Page" roleRequired="true"}}
+{{> "htmSimulationKey" roleRequired="true"}}
 {{else}}
-{{> "htmDateTime" classApiMethodMethod="Page" roleRequired="false"}}
+{{> "htmSimulationKey" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmStep" classApiMethodMethod="Page" roleRequired="true"}}
+{{> "htmSumocfgPath" roleRequired="true"}}
 {{else}}
-{{> "htmStep" classApiMethodMethod="Page" roleRequired="false"}}
+{{> "htmSumocfgPath" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmTime" roleRequired="true"}}
+{{else}}
+{{> "htmTime" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmLocation" classApiMethodMethod="Page" roleRequired="true"}}
+{{> "htmDateTime" roleRequired="true"}}
 {{else}}
-{{> "htmLocation" classApiMethodMethod="Page" roleRequired="false"}}
+{{> "htmDateTime" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmColor" classApiMethodMethod="Page" roleRequired="true"}}
+{{> "htmStep" roleRequired="true"}}
 {{else}}
-{{> "htmColor" classApiMethodMethod="Page" roleRequired="false"}}
+{{> "htmStep" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmLocation" roleRequired="true"}}
+{{else}}
+{{> "htmLocation" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmColor" roleRequired="true"}}
+{{else}}
+{{> "htmColor" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 						</div>

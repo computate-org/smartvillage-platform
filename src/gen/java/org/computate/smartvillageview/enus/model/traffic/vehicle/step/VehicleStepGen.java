@@ -1208,6 +1208,18 @@ public abstract class VehicleStepGen<DEV> extends MapResult {
 
 	public static Integer htmRowVehicleStep(String var) {
 		switch(var) {
+		case VAR_vehicleId:
+			return 4;
+		case VAR_vehicleType:
+			return 4;
+		case VAR_angle:
+			return 5;
+		case VAR_speed:
+			return 5;
+		case VAR_pos:
+			return 5;
+		case VAR_slope:
+			return 5;
 			default:
 				return MapResult.htmRowMapResult(var);
 		}
@@ -1215,6 +1227,18 @@ public abstract class VehicleStepGen<DEV> extends MapResult {
 
 	public static Integer htmCellVehicleStep(String var) {
 		switch(var) {
+		case VAR_vehicleId:
+			return 3;
+		case VAR_vehicleType:
+			return 4;
+		case VAR_angle:
+			return 1;
+		case VAR_speed:
+			return 2;
+		case VAR_pos:
+			return 3;
+		case VAR_slope:
+			return 4;
 			default:
 				return MapResult.htmCellMapResult(var);
 		}
