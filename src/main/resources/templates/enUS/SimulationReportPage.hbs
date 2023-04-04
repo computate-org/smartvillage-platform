@@ -103,9 +103,9 @@ async function websocketSimulationReportInner2(apiRequest) {
 {{> "htmSimulationKey" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmSimulationName" roleRequired="true"}}
+{{> "htmReportName" roleRequired="true"}}
 {{else}}
-{{> "htmSimulationName" roleRequired="false"}}
+{{> "htmReportName" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-padding ">

@@ -670,6 +670,21 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							}));
 						});
 						break;
+					case "removeSimulationKey":
+						Optional.ofNullable(jsonObject.getString(entityVar)).map(val -> Long.parseLong(val)).ifPresent(pk2 -> {
+							if(!pks.contains(pk2)) {
+								pks.add(pk2);
+								classes.add("TrafficSimulation");
+							}
+							futures2.add(Future.future(promise2 -> {
+									sql(siteRequest).update(SimulationReport.class, pk).setToNull(SimulationReport.VAR_simulationKey, TrafficSimulation.class, pk2).onSuccess(a -> {
+									promise2.complete();
+								}).onFailure(ex -> {
+									promise2.fail(ex);
+								});
+							}));
+						});
+						break;
 					case "setSimulationName":
 							o2.setSimulationName(jsonObject.getString(entityVar));
 							if(bParams.size() > 0)
@@ -2147,6 +2162,21 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 									}).onFailure(ex -> {
 										promise2.fail(ex);
 									});
+								}).onFailure(ex -> {
+									promise2.fail(ex);
+								});
+							}));
+						});
+						break;
+					case "removeSimulationKey":
+						Optional.ofNullable(jsonObject.getString(entityVar)).map(val -> Long.parseLong(val)).ifPresent(pk2 -> {
+							if(!pks.contains(pk2)) {
+								pks.add(pk2);
+								classes.add("TrafficSimulation");
+							}
+							futures2.add(Future.future(promise2 -> {
+									sql(siteRequest).update(SimulationReport.class, pk).setToNull(SimulationReport.VAR_simulationKey, TrafficSimulation.class, pk2).onSuccess(a -> {
+									promise2.complete();
 								}).onFailure(ex -> {
 									promise2.fail(ex);
 								});
