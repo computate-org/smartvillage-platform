@@ -1,27 +1,42 @@
 package org.computate.smartvillageview.enus.model.traffic.simulation.report;
 
+import java.awt.Graphics2D;
+import java.awt.Paint;
+import java.awt.Shape;
+import java.awt.Stroke;
+import java.awt.geom.GeneralPath;
+import java.awt.geom.Line2D;
+import java.awt.geom.Rectangle2D;
+import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.font.TextAttribute;
+import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.text.AttributedString;
+import java.text.MessageFormat;
 import java.util.Base64;
 
 import javax.imageio.ImageIO;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.computate.search.wrap.Wrap;
-import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartRenderingInfo;
-import org.jfree.chart.ChartUtils;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.LegendItem;
+import org.jfree.chart.LegendItemCollection;
 import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.axis.NumberTickUnit;
 import org.jfree.chart.entity.StandardEntityCollection;
-import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.labels.XYSeriesLabelGenerator;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.util.Args;
+import org.jfree.chart.util.ShapeUtils;
+import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
@@ -66,19 +81,29 @@ public class SimulationReportPage extends SimulationReportPageGen<SimulationRepo
 					// create plot...
 					NumberAxis xAxis = new NumberAxis("iterations");
 					xAxis.setAutoRangeIncludesZero(false);
+					xAxis.setTickUnit(new NumberTickUnit(1));
 					NumberAxis yAxis = new NumberAxis("average waiting time(s)");
 					yAxis.setAutoRangeIncludesZero(false);
 		
-					XYItemRenderer renderer1 = new XYLineAndShapeRenderer();
-					renderer1.setSeriesPaint(0, Color.yellow);
-					renderer1.setSeriesPaint(1, Color.red);
-					renderer1.setSeriesPaint(2, Color.pink);
+					XYLineAndShapeRenderer renderer1 = new XYLineAndShapeRenderer();
+					renderer1.setLegendLine(new Line2D.Double(-20.0D, 0.0D, 20.0D, 0.0D));
+
+					renderer1.setSeriesStroke(0, new BasicStroke(2));
+					renderer1.setSeriesPaint(0, new Color(31, 119, 180));
+					renderer1.setSeriesShape(0, new Ellipse2D.Double(-3, -3, 6, 6));
+
+					renderer1.setSeriesStroke(1, new BasicStroke(2));
+					renderer1.setSeriesPaint(1, new Color(255, 127, 14));
+					renderer1.setSeriesShape(1, ShapeUtils.createDownTriangle(4));
+
+					renderer1.setSeriesStroke(2, new BasicStroke(2));
+					renderer1.setSeriesPaint(2, new Color(44, 160, 44));
+					renderer1.setSeriesShape(2, ShapeUtils.createRegularCross(5, 1));
 	
 					XYPlot plot = new XYPlot(dataset, xAxis, yAxis, renderer1);
-	//				XYPlot plot = (XYPlot)chart.getPlot();
-	//				plot.setBackgroundPaint(Color.WHITE);
-	//				plot.setDomainGridlinePaint(Color.LIGHT_GRAY);
-	//				plot.setRangeGridlinePaint(Color.LIGHT_GRAY);
+					plot.setBackgroundPaint(Color.WHITE);
+					plot.setDomainGridlinePaint(Color.GRAY);
+					plot.setRangeGridlinePaint(Color.GRAY);
 					plot.setDomainPannable(true);
 					plot.setRangePannable(false);
 					plot.setDomainCrosshairVisible(true);
@@ -87,10 +112,99 @@ public class SimulationReportPage extends SimulationReportPageGen<SimulationRepo
 		
 					// create and return the chart panel...
 					JFreeChart chart = new JFreeChart("Performance", JFreeChart.DEFAULT_TITLE_FONT, plot, true);
-					ChartUtils.applyCurrentTheme(chart);
 		
 					ChartRenderingInfo chartRenderingInfo = new ChartRenderingInfo(new StandardEntityCollection());
-					BufferedImage image = chart.createBufferedImage(600, 400, chartRenderingInfo);
+					BufferedImage image = chart.createBufferedImage(552, 400, chartRenderingInfo);
+		
+					ByteArrayOutputStream baos = new ByteArrayOutputStream();
+					ImageIO.write(image, "png", baos);
+					baos.flush();
+					byte[] imageInByte = baos.toByteArray();
+					baos.close();
+		
+					String imageStr = new String(Base64.getEncoder().encode(imageInByte), Charset.forName("UTF-8"));
+					w.o(imageStr);
+				}
+			}
+		} catch (IOException ex) {
+			ExceptionUtils.rethrow(ex);
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * Stored: true
+	 */ 
+	protected void _plotQueueLengthThreshold(Wrap<String> w) {
+		try {
+			if(simulationReport_ != null) {
+				JsonArray updatedParameters = simulationReport_.getUpdatedParameters();
+				JsonArray updatedPerformance = simulationReport_.getUpdatedPerformance();
+				if(updatedParameters != null && updatedParameters.size() >= 10 && simulationReport_ != null && updatedParameters != null && updatedPerformance != null) {
+					Integer size = updatedPerformance.size();
+	
+					XYSeries series = new XYSeries("s₁");
+					for(int i = 0; i < updatedParameters.getJsonArray(0).size(); i++) {
+						series.add(i + 1, updatedParameters.getJsonArray(6).getDouble(i));
+					}
+					XYSeriesCollection dataset = new XYSeriesCollection(series);
+					XYSeries series2 = new XYSeries("s₂");
+					for(int i = 0; i < updatedParameters.getJsonArray(0).size(); i++) {
+						series2.add(i + 1, updatedParameters.getJsonArray(7).getDouble(i));
+					}
+					dataset.addSeries(series2);
+					XYSeries series3 = new XYSeries("s₃");
+					for(int i = 0; i < updatedParameters.getJsonArray(0).size(); i++) {
+						series3.add(i + 1, updatedParameters.getJsonArray(8).getDouble(i));
+					}
+					dataset.addSeries(series3);
+					XYSeries series4 = new XYSeries("s₄");
+					for(int i = 0; i < updatedParameters.getJsonArray(0).size(); i++) {
+						series4.add(i + 1, updatedParameters.getJsonArray(9).getDouble(i));
+					}
+					dataset.addSeries(series4);
+	
+					// create plot...
+					NumberAxis xAxis = new NumberAxis("iterations");
+					xAxis.setAutoRangeIncludesZero(false);
+					xAxis.setTickUnit(new NumberTickUnit(1));
+					NumberAxis yAxis = new NumberAxis("queue content threshold");
+					yAxis.setAutoRangeIncludesZero(false);
+		
+					XYLineAndShapeRenderer renderer1 = new XYLineAndShapeRenderer();
+					renderer1.setLegendLine(new Line2D.Double(-20.0D, 0.0D, 20.0D, 0.0D));
+
+					renderer1.setSeriesStroke(0, new BasicStroke(2));
+					renderer1.setSeriesPaint(0, new Color(31, 119, 180));
+					renderer1.setSeriesShape(0, new Ellipse2D.Double(-3, -3, 6, 6));
+
+					renderer1.setSeriesStroke(1, new BasicStroke(2));
+					renderer1.setSeriesPaint(1, new Color(255, 127, 14));
+					renderer1.setSeriesShape(1, ShapeUtils.createRegularCross(5, 1));
+
+					renderer1.setSeriesStroke(2, new BasicStroke(2));
+					renderer1.setSeriesPaint(2, new Color(44, 160, 44));
+					renderer1.setSeriesShape(2, ShapeUtils.createDownTriangle(4));
+
+					renderer1.setSeriesStroke(3, new BasicStroke(2));
+					renderer1.setSeriesPaint(3, new Color(214, 39, 40));
+					renderer1.setSeriesShape(3, new Ellipse2D.Double(0, 0, 0, 0));
+	
+					XYPlot plot = new XYPlot(dataset, xAxis, yAxis, renderer1);
+					plot.setBackgroundPaint(Color.WHITE);
+					plot.setDomainGridlinePaint(Color.GRAY);
+					plot.setRangeGridlinePaint(Color.GRAY);
+					plot.setDomainPannable(true);
+					plot.setRangePannable(false);
+					plot.setDomainCrosshairVisible(true);
+					plot.setRangeCrosshairVisible(true);
+					plot.setAxisOffset(new RectangleInsets(4, 4, 4, 4));
+		
+					// create and return the chart panel...
+					JFreeChart chart = new JFreeChart("Queue Content Threshold", JFreeChart.DEFAULT_TITLE_FONT, plot, true);
+		
+					ChartRenderingInfo chartRenderingInfo = new ChartRenderingInfo(new StandardEntityCollection());
+					BufferedImage image = chart.createBufferedImage(552, 400, chartRenderingInfo);
 		
 					ByteArrayOutputStream baos = new ByteArrayOutputStream();
 					ImageIO.write(image, "png", baos);
@@ -119,22 +233,25 @@ public class SimulationReportPage extends SimulationReportPageGen<SimulationRepo
 				if(updatedParameters != null && updatedParameters.size() >= 4 && simulationReport_ != null && updatedParameters != null && updatedPerformance != null) {
 					Integer size = updatedPerformance.size();
 	
-					XYSeries series = new XYSeries("θ_1^min");
+					AttributedString as = new AttributedString("θ1min");
+					as.addAttribute(TextAttribute.SUPERSCRIPT, TextAttribute.SUPERSCRIPT_SUB, 1, 2);
+					as.addAttribute(TextAttribute.SUPERSCRIPT, TextAttribute.SUPERSCRIPT_SUPER, 2, 5);
+					XYSeries series = new XYSeries("θ₁min");
 					for(int i = 0; i < updatedParameters.getJsonArray(0).size(); i++) {
 						series.add(i + 1, updatedParameters.getJsonArray(0).getDouble(i));
 					}
 					XYSeriesCollection dataset = new XYSeriesCollection(series);
-					XYSeries series2 = new XYSeries("θ_1^max");
+					XYSeries series2 = new XYSeries("θ₁max");
 					for(int i = 0; i < updatedParameters.getJsonArray(0).size(); i++) {
 						series2.add(i + 1, updatedParameters.getJsonArray(1).getDouble(i));
 					}
 					dataset.addSeries(series2);
-					XYSeries series3 = new XYSeries("θ_2^min");
+					XYSeries series3 = new XYSeries("θ₂min");
 					for(int i = 0; i < updatedParameters.getJsonArray(0).size(); i++) {
 						series3.add(i + 1, updatedParameters.getJsonArray(2).getDouble(i));
 					}
 					dataset.addSeries(series3);
-					XYSeries series4 = new XYSeries("θ_2^max");
+					XYSeries series4 = new XYSeries("θ₂max");
 					for(int i = 0; i < updatedParameters.getJsonArray(0).size(); i++) {
 						series4.add(i + 1, updatedParameters.getJsonArray(3).getDouble(i));
 					}
@@ -143,19 +260,44 @@ public class SimulationReportPage extends SimulationReportPageGen<SimulationRepo
 					// create plot...
 					NumberAxis xAxis = new NumberAxis("iterations");
 					xAxis.setAutoRangeIncludesZero(false);
+					xAxis.setTickUnit(new NumberTickUnit(1));
 					NumberAxis yAxis = new NumberAxis("GREEN length threshold");
 					yAxis.setAutoRangeIncludesZero(false);
 		
-					XYItemRenderer renderer1 = new XYLineAndShapeRenderer();
-					renderer1.setSeriesPaint(0, Color.yellow);
-					renderer1.setSeriesPaint(1, Color.red);
-					renderer1.setSeriesPaint(2, Color.pink);
+					XYLineAndShapeRenderer renderer1 = new XYLineAndShapeRenderer();
+					renderer1.setLegendLine(new Line2D.Double(-20.0D, 0.0D, 20.0D, 0.0D));
+					LegendItemCollection legendItems = renderer1.getLegendItems();
+					legendItems.add(new LegendItem(as, null, null, null,
+							new Line2D.Double(2, 0.0, 2, 0.0), 
+							new BasicStroke(1), 
+							Color.BLUE));
+
+					renderer1.setSeriesStroke(0, new BasicStroke(
+							2.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND
+							, 1.0f, new float[] { 6.0f, 6.0f }, 0.0f)
+							);
+					renderer1.setSeriesPaint(0, new Color(214, 39, 40));
+					renderer1.setSeriesShape(0, new Ellipse2D.Double(0, 0, 0, 0));
+
+					renderer1.setSeriesStroke(1, new BasicStroke(2));
+					renderer1.setSeriesPaint(1, new Color(214, 39, 40));
+					renderer1.setSeriesShape(1, new Ellipse2D.Double(0, 0, 0, 0));
+
+					renderer1.setSeriesStroke(2, new BasicStroke(
+							2.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND
+							, 1.0f, new float[] { 6.0f, 6.0f }, 0.0f)
+							);
+					renderer1.setSeriesPaint(2, new Color(44, 160, 44));
+					renderer1.setSeriesShape(2, ShapeUtils.createRegularCross(5, 1));
+
+					renderer1.setSeriesStroke(3, new BasicStroke(2));
+					renderer1.setSeriesPaint(3, new Color(44, 160, 44));
+					renderer1.setSeriesShape(3, ShapeUtils.createRegularCross(5, 1));
 	
 					XYPlot plot = new XYPlot(dataset, xAxis, yAxis, renderer1);
-	//				XYPlot plot = (XYPlot)chart.getPlot();
-	//				plot.setBackgroundPaint(Color.WHITE);
-	//				plot.setDomainGridlinePaint(Color.LIGHT_GRAY);
-	//				plot.setRangeGridlinePaint(Color.LIGHT_GRAY);
+					plot.setBackgroundPaint(Color.WHITE);
+					plot.setDomainGridlinePaint(Color.GRAY);
+					plot.setRangeGridlinePaint(Color.GRAY);
 					plot.setDomainPannable(true);
 					plot.setRangePannable(false);
 					plot.setDomainCrosshairVisible(true);
@@ -163,11 +305,82 @@ public class SimulationReportPage extends SimulationReportPageGen<SimulationRepo
 					plot.setAxisOffset(new RectangleInsets(4, 4, 4, 4));
 		
 					// create and return the chart panel...
-					JFreeChart chart = new JFreeChart("Green Length Threshold", JFreeChart.DEFAULT_TITLE_FONT, plot, true);
-					ChartUtils.applyCurrentTheme(chart);
+					JFreeChart chart = new JFreeChart("Green Length Threshold Vehicle", JFreeChart.DEFAULT_TITLE_FONT, plot, true);
 		
 					ChartRenderingInfo chartRenderingInfo = new ChartRenderingInfo(new StandardEntityCollection());
-					BufferedImage image = chart.createBufferedImage(600, 400, chartRenderingInfo);
+					BufferedImage image = chart.createBufferedImage(552, 400, chartRenderingInfo);
+		
+					ByteArrayOutputStream baos = new ByteArrayOutputStream();
+					ImageIO.write(image, "png", baos);
+					baos.flush();
+					byte[] imageInByte = baos.toByteArray();
+					baos.close();
+		
+					String imageStr = new String(Base64.getEncoder().encode(imageInByte), Charset.forName("UTF-8"));
+					w.o(imageStr);
+				}
+			}
+		} catch (IOException ex) {
+			ExceptionUtils.rethrow(ex);
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * Stored: true
+	 */ 
+	protected void _plotGreenLengthThresholdPedestrian(Wrap<String> w) {
+		try {
+			if(simulationReport_ != null) {
+				JsonArray updatedParameters = simulationReport_.getUpdatedParameters();
+				JsonArray updatedPerformance = simulationReport_.getUpdatedPerformance();
+				if(updatedParameters != null && updatedParameters.size() >= 6 && simulationReport_ != null && updatedParameters != null && updatedPerformance != null) {
+					Integer size = updatedPerformance.size();
+	
+					XYSeries series = new XYSeries("θ₃");
+					for(int i = 0; i < updatedParameters.getJsonArray(0).size(); i++) {
+						series.add(i + 1, updatedParameters.getJsonArray(4).getDouble(i));
+					}
+					XYSeriesCollection dataset = new XYSeriesCollection(series);
+					XYSeries series2 = new XYSeries("θ₄");
+					for(int i = 0; i < updatedParameters.getJsonArray(0).size(); i++) {
+						series2.add(i + 1, updatedParameters.getJsonArray(5).getDouble(i));
+					}
+					dataset.addSeries(series2);
+	
+					// create plot...
+					NumberAxis xAxis = new NumberAxis("iterations");
+					xAxis.setAutoRangeIncludesZero(false);
+					xAxis.setTickUnit(new NumberTickUnit(1));
+					NumberAxis yAxis = new NumberAxis("GREEN length threshold");
+					yAxis.setAutoRangeIncludesZero(false);
+		
+					XYLineAndShapeRenderer renderer1 = new XYLineAndShapeRenderer();
+					renderer1.setLegendLine(new Line2D.Double(-20.0D, 0.0D, 20.0D, 0.0D));
+
+					renderer1.setSeriesStroke(0, new BasicStroke(2));
+					renderer1.setSeriesPaint(0, new Color(31, 119, 180));
+					renderer1.setSeriesShape(0, new Ellipse2D.Double(-3, -3, 6, 6));
+
+					renderer1.setSeriesStroke(1, new BasicStroke(2));
+					renderer1.setSeriesPaint(1, new Color(255, 127, 14));
+					renderer1.setSeriesShape(1, ShapeUtils.createDownTriangle(4));
+	
+					XYPlot plot = new XYPlot(dataset, xAxis, yAxis, renderer1);
+					plot.setBackgroundPaint(Color.WHITE);
+					plot.setDomainGridlinePaint(Color.GRAY);
+					plot.setRangeGridlinePaint(Color.GRAY);
+					plot.setDomainPannable(true);
+					plot.setRangePannable(false);
+					plot.setDomainCrosshairVisible(true);
+					plot.setRangeCrosshairVisible(true);
+					plot.setAxisOffset(new RectangleInsets(4, 4, 4, 4));
+		
+					// create and return the chart panel...
+					JFreeChart chart = new JFreeChart("Green Length Threshold Pedestrian", JFreeChart.DEFAULT_TITLE_FONT, plot, true);
+		
+					ChartRenderingInfo chartRenderingInfo = new ChartRenderingInfo(new StandardEntityCollection());
+					BufferedImage image = chart.createBufferedImage(552, 400, chartRenderingInfo);
 		
 					ByteArrayOutputStream baos = new ByteArrayOutputStream();
 					ImageIO.write(image, "png", baos);

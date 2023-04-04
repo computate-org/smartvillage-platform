@@ -16,6 +16,7 @@ async function websocketSimulationReportInner2(apiRequest) {
 			var uri = location.pathname + queryParams;
 			$.get(uri, {}, function(data) {
 				var $response = $("<html/>").html(data);
+
 				$('.plotPerformance').each(function(index, fragment) {
 					var $fragment = $(fragment);
 					$fragment.replaceWith($response.find(".plotPerformance"));
@@ -24,6 +25,15 @@ async function websocketSimulationReportInner2(apiRequest) {
 					var $fragment = $(fragment);
 					$fragment.replaceWith($response.find(".plotGreenLengthThresholdVehicle"));
 				});
+				$('.plotGreenLengthThresholdPedestrian').each(function(index, fragment) {
+					var $fragment = $(fragment);
+					$fragment.replaceWith($response.find(".plotGreenLengthThresholdPedestrian"));
+				});
+				$('.plotQueueLengthThreshold').each(function(index, fragment) {
+					var $fragment = $(fragment);
+					$fragment.replaceWith($response.find(".plotQueueLengthThreshold"));
+				});
+
 				$('.updatedPerformanceTable').each(function(index, fragment) {
 					var $fragment = $(fragment);
 					$fragment.replaceWith($response.find(".updatedPerformanceTable"));
@@ -36,6 +46,8 @@ async function websocketSimulationReportInner2(apiRequest) {
 
 			addGlow($('.plotPerformance'));
 			addGlow($('.plotGreenLengthThresholdVehicle'));
+			addGlow($('.plotGreenLengthThresholdPedestrian'));
+			addGlow($('.plotQueueLengthThreshold'));
 			addGlow($('.updatedPerformanceTable'));
 			addGlow($('.updatedParametersTable'));
 		}
@@ -565,11 +577,21 @@ async function websocketSimulationReportInner2(apiRequest) {
 								</button>
 							</div>
 
-							<div>
-								<img class="plotPerformance " src="data:image/png;base64,{{ plotPerformance }}"/>
+							<div class="">
+							<div class="w3-row ">
+								<div class="w3-half w3-padding ">
+									<img class="w3-image plotPerformance " src="data:image/png;base64,{{ plotPerformance }}"/>
+								</div>
+								<div class="w3-half w3-padding ">
+									<img class="w3-image plotQueueLengthThreshold " src="data:image/png;base64,{{ plotQueueLengthThreshold }}"/>
+								</div>
+								<div class="w3-half w3-padding ">
+									<img class="w3-image plotGreenLengthThresholdVehicle " src="data:image/png;base64,{{ plotGreenLengthThresholdVehicle }}"/>
+								</div>
+								<div class="w3-half w3-padding ">
+									<img class="w3-image plotGreenLengthThresholdPedestrian " src="data:image/png;base64,{{ plotGreenLengthThresholdPedestrian }}"/>
+								</div>
 							</div>
-							<div>
-								<img class="plotGreenLengthThresholdVehicle " src="data:image/png;base64,{{ plotGreenLengthThresholdVehicle }}"/>
 							</div>
 						</div>
 					</div>

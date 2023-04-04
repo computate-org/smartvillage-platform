@@ -2307,6 +2307,68 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		return reportStatus;
 	}
 
+	////////////////////
+	// reportProgress //
+	////////////////////
+
+
+	/**	 The entity reportProgress
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected Integer reportProgress;
+
+	/**	<br> The entity reportProgress
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:reportProgress">Find the entity reportProgress in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _reportProgress(Wrap<Integer> w);
+
+	public Integer getReportProgress() {
+		return reportProgress;
+	}
+
+	public void setReportProgress(Integer reportProgress) {
+		this.reportProgress = reportProgress;
+	}
+	@JsonIgnore
+	public void setReportProgress(String o) {
+		this.reportProgress = SimulationReport.staticSetReportProgress(siteRequest_, o);
+	}
+	public static Integer staticSetReportProgress(SiteRequestEnUS siteRequest_, String o) {
+		if(NumberUtils.isParsable(o))
+			return Integer.parseInt(o);
+		return null;
+	}
+	protected SimulationReport reportProgressInit() {
+		Wrap<Integer> reportProgressWrap = new Wrap<Integer>().var("reportProgress");
+		if(reportProgress == null) {
+			_reportProgress(reportProgressWrap);
+			setReportProgress(reportProgressWrap.o);
+		}
+		return (SimulationReport)this;
+	}
+
+	public static Integer staticSearchReportProgress(SiteRequestEnUS siteRequest_, Integer o) {
+		return o;
+	}
+
+	public static String staticSearchStrReportProgress(SiteRequestEnUS siteRequest_, Integer o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqReportProgress(SiteRequestEnUS siteRequest_, String o) {
+		return SimulationReport.staticSearchStrReportProgress(siteRequest_, SimulationReport.staticSearchReportProgress(siteRequest_, SimulationReport.staticSetReportProgress(siteRequest_, o)));
+	}
+
+	public Integer sqlReportProgress() {
+		return reportProgress;
+	}
+
 	///////////////////////
 	// updatedParameters //
 	///////////////////////
@@ -2794,6 +2856,7 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 				paramItersPerParInit();
 				paramTotalIterNumInit();
 				reportStatusInit();
+				reportProgressInit();
 				updatedParametersInit();
 				updatedPerformanceInit();
 				updatedPerformanceWaitWestEastVehicleSecInit();
@@ -2912,6 +2975,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 				return oSimulationReport.paramTotalIterNum;
 			case "reportStatus":
 				return oSimulationReport.reportStatus;
+			case "reportProgress":
+				return oSimulationReport.reportProgress;
 			case "updatedParameters":
 				return oSimulationReport.updatedParameters;
 			case "updatedPerformance":
@@ -3025,6 +3090,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return SimulationReport.staticSetParamTotalIterNum(siteRequest_, o);
 		case "reportStatus":
 			return SimulationReport.staticSetReportStatus(siteRequest_, o);
+		case "reportProgress":
+			return SimulationReport.staticSetReportProgress(siteRequest_, o);
 		case "updatedParameters":
 			return SimulationReport.staticSetUpdatedParameters(siteRequest_, o);
 		case "updatedPerformance":
@@ -3107,6 +3174,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return SimulationReport.staticSearchParamTotalIterNum(siteRequest_, (Integer)o);
 		case "reportStatus":
 			return SimulationReport.staticSearchReportStatus(siteRequest_, (String)o);
+		case "reportProgress":
+			return SimulationReport.staticSearchReportProgress(siteRequest_, (Integer)o);
 		case "updatedParameters":
 			return SimulationReport.staticSearchUpdatedParameters(siteRequest_, (JsonArray)o);
 		case "updatedPerformance":
@@ -3189,6 +3258,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return SimulationReport.staticSearchStrParamTotalIterNum(siteRequest_, (Integer)o);
 		case "reportStatus":
 			return SimulationReport.staticSearchStrReportStatus(siteRequest_, (String)o);
+		case "reportProgress":
+			return SimulationReport.staticSearchStrReportProgress(siteRequest_, (Integer)o);
 		case "updatedParameters":
 			return SimulationReport.staticSearchStrUpdatedParameters(siteRequest_, (JsonArray)o);
 		case "updatedPerformance":
@@ -3271,6 +3342,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return SimulationReport.staticSearchFqParamTotalIterNum(siteRequest_, o);
 		case "reportStatus":
 			return SimulationReport.staticSearchFqReportStatus(siteRequest_, o);
+		case "reportProgress":
+			return SimulationReport.staticSearchFqReportProgress(siteRequest_, o);
 		case "updatedParameters":
 			return SimulationReport.staticSearchFqUpdatedParameters(siteRequest_, o);
 		case "updatedPerformance":
@@ -3511,6 +3584,14 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 				}
 				saves.add("reportStatus");
 				return val;
+			} else if("reportprogress".equals(varLower)) {
+				if(val instanceof Integer) {
+					setReportProgress((Integer)val);
+				} else {
+					setReportProgress(val == null ? null : val.toString());
+				}
+				saves.add("reportProgress");
+				return val;
 			} else if("updatedparameters".equals(varLower)) {
 				if(val instanceof String) {
 					setUpdatedParameters((String)val);
@@ -3642,6 +3723,9 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		if(reportStatus != null) {
 			doc.put("reportStatus_docvalues_string", reportStatus);
 		}
+		if(reportProgress != null) {
+			doc.put("reportProgress_docvalues_int", reportProgress);
+		}
 		if(updatedParameters != null) {
 			doc.put("updatedParameters_docvalues_string", updatedParameters.toString());
 		}
@@ -3723,6 +3807,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 				return "paramTotalIterNum_docvalues_int";
 			case "reportStatus":
 				return "reportStatus_docvalues_string";
+			case "reportProgress":
+				return "reportProgress_docvalues_int";
 			case "updatedParameters":
 				return "updatedParameters_docvalues_string";
 			case "updatedPerformance":
@@ -3798,6 +3884,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 				return "paramTotalIterNum_docvalues_int";
 			case "reportStatus":
 				return "reportStatus_docvalues_string";
+			case "reportProgress":
+				return "reportProgress_docvalues_int";
 			case "updatedParameters":
 				return "updatedParameters_docvalues_string";
 			case "updatedPerformance":
@@ -3873,6 +3961,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 				return "paramTotalIterNum";
 			case "reportStatus_docvalues_string":
 				return "reportStatus";
+			case "reportProgress_docvalues_int":
+				return "reportProgress";
 			case "updatedParameters_docvalues_string":
 				return "updatedParameters";
 			case "updatedPerformance_docvalues_string":
@@ -3949,6 +4039,7 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		oSimulationReport.setParamItersPerPar(Optional.ofNullable(doc.get("paramItersPerPar_docvalues_int")).map(v -> v.toString()).orElse(null));
 		oSimulationReport.setParamTotalIterNum(Optional.ofNullable(doc.get("paramTotalIterNum_docvalues_int")).map(v -> v.toString()).orElse(null));
 		oSimulationReport.setReportStatus(Optional.ofNullable(doc.get("reportStatus_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oSimulationReport.setReportProgress(Optional.ofNullable(doc.get("reportProgress_docvalues_int")).map(v -> v.toString()).orElse(null));
 		oSimulationReport.setUpdatedParameters(Optional.ofNullable(doc.get("updatedParameters_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSimulationReport.setUpdatedPerformance(Optional.ofNullable(doc.get("updatedPerformance_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSimulationReport.setUpdatedPerformanceWaitWestEastVehicleSec(Optional.ofNullable(doc.get("updatedPerformanceWaitWestEastVehicleSec_docvalues_string")).map(v -> v.toString()).orElse(null));
@@ -4023,6 +4114,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 				apiRequest.addVars("paramTotalIterNum");
 			if(!Objects.equals(reportStatus, original.getReportStatus()))
 				apiRequest.addVars("reportStatus");
+			if(!Objects.equals(reportProgress, original.getReportProgress()))
+				apiRequest.addVars("reportProgress");
 			if(!Objects.equals(updatedParameters, original.getUpdatedParameters()))
 				apiRequest.addVars("updatedParameters");
 			if(!Objects.equals(updatedPerformance, original.getUpdatedPerformance()))
@@ -4075,6 +4168,7 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		sb.append(Optional.ofNullable(paramItersPerPar).map(v -> "paramItersPerPar: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(paramTotalIterNum).map(v -> "paramTotalIterNum: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(reportStatus).map(v -> "reportStatus: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(reportProgress).map(v -> "reportProgress: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(updatedParameters).map(v -> "updatedParameters: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(updatedPerformance).map(v -> "updatedPerformance: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(updatedPerformanceWaitWestEastVehicleSec).map(v -> "updatedPerformanceWaitWestEastVehicleSec: " + v + "\n").orElse(""));
@@ -4117,6 +4211,7 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 	public static final String VAR_paramItersPerPar = "paramItersPerPar";
 	public static final String VAR_paramTotalIterNum = "paramTotalIterNum";
 	public static final String VAR_reportStatus = "reportStatus";
+	public static final String VAR_reportProgress = "reportProgress";
 	public static final String VAR_updatedParameters = "updatedParameters";
 	public static final String VAR_updatedPerformance = "updatedPerformance";
 	public static final String VAR_updatedPerformanceWaitWestEastVehicleSec = "updatedPerformanceWaitWestEastVehicleSec";
@@ -4164,6 +4259,7 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		vars.add(VAR_paramItersPerPar);
 		vars.add(VAR_paramTotalIterNum);
 		vars.add(VAR_reportStatus);
+		vars.add(VAR_reportProgress);
 		vars.add(VAR_updatedParameters);
 		vars.add(VAR_updatedPerformance);
 		vars.add(VAR_updatedPerformanceWaitWestEastVehicleSec);
@@ -4199,6 +4295,7 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		vars.add(VAR_paramRunTime);
 		vars.add(VAR_paramItersPerPar);
 		vars.add(VAR_paramTotalIterNum);
+		vars.add(VAR_reportProgress);
 		vars.add(VAR_updatedParameters);
 		vars.add(VAR_updatedPerformance);
 		vars.add(VAR_updatedPerformanceWaitWestEastVehicleSec);
@@ -4239,6 +4336,7 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 	public static final String DISPLAY_NAME_paramItersPerPar = "Number of simulation repetitions with same input (for statistical accuracy)";
 	public static final String DISPLAY_NAME_paramTotalIterNum = "Number of parameter update iterations before output";
 	public static final String DISPLAY_NAME_reportStatus = "report status";
+	public static final String DISPLAY_NAME_reportProgress = "report progress";
 	public static final String DISPLAY_NAME_updatedParameters = "updated parameters";
 	public static final String DISPLAY_NAME_updatedPerformance = "updated performance";
 	public static final String DISPLAY_NAME_updatedPerformanceWaitWestEastVehicleSec = "Average waiting time for WEST-EAST vehicles (sec)";
@@ -4310,6 +4408,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return DISPLAY_NAME_paramTotalIterNum;
 		case VAR_reportStatus:
 			return DISPLAY_NAME_reportStatus;
+		case VAR_reportProgress:
+			return DISPLAY_NAME_reportProgress;
 		case VAR_updatedParameters:
 			return DISPLAY_NAME_updatedParameters;
 		case VAR_updatedPerformance:
@@ -4341,6 +4441,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return "Total iterations to update performance. ";
 		case VAR_reportStatus:
 			return "The current status of the simulation report. ";
+		case VAR_reportProgress:
+			return "The percent progress of the simulation report. ";
 		case VAR_updatedParameters:
 			return "the resulting updated parameters after a simulation";
 		case VAR_updatedPerformance:
@@ -4410,6 +4512,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return "Integer";
 		case VAR_reportStatus:
 			return "String";
+		case VAR_reportProgress:
+			return "Integer";
 		case VAR_updatedParameters:
 			return "JsonArray";
 		case VAR_updatedPerformance:
@@ -4484,6 +4588,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return 12;
 		case VAR_reportStatus:
 			return 12;
+		case VAR_reportProgress:
+			return 12;
 		case VAR_updatedParameters:
 			return 13;
 		case VAR_updatedPerformanceWaitWestEastVehicleSec:
@@ -4548,6 +4654,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		case VAR_paramTotalIterNum:
 			return 2;
 		case VAR_reportStatus:
+			return 3;
+		case VAR_reportProgress:
 			return 3;
 		case VAR_updatedParameters:
 			return 1;

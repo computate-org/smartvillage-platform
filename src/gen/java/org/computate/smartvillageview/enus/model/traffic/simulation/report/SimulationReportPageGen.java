@@ -163,6 +163,56 @@ public abstract class SimulationReportPageGen<DEV> extends SimulationReportGenPa
 		return SimulationReportPage.staticSearchStrPlotPerformance(siteRequest_, SimulationReportPage.staticSearchPlotPerformance(siteRequest_, SimulationReportPage.staticSetPlotPerformance(siteRequest_, o)));
 	}
 
+	//////////////////////////////
+	// plotQueueLengthThreshold //
+	//////////////////////////////
+
+
+	/**	 The entity plotQueueLengthThreshold
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String plotQueueLengthThreshold;
+
+	/**	<br> The entity plotQueueLengthThreshold
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReportPage&fq=entiteVar_enUS_indexed_string:plotQueueLengthThreshold">Find the entity plotQueueLengthThreshold in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _plotQueueLengthThreshold(Wrap<String> w);
+
+	public String getPlotQueueLengthThreshold() {
+		return plotQueueLengthThreshold;
+	}
+	public void setPlotQueueLengthThreshold(String o) {
+		this.plotQueueLengthThreshold = SimulationReportPage.staticSetPlotQueueLengthThreshold(siteRequest_, o);
+	}
+	public static String staticSetPlotQueueLengthThreshold(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected SimulationReportPage plotQueueLengthThresholdInit() {
+		Wrap<String> plotQueueLengthThresholdWrap = new Wrap<String>().var("plotQueueLengthThreshold");
+		if(plotQueueLengthThreshold == null) {
+			_plotQueueLengthThreshold(plotQueueLengthThresholdWrap);
+			setPlotQueueLengthThreshold(plotQueueLengthThresholdWrap.o);
+		}
+		return (SimulationReportPage)this;
+	}
+
+	public static String staticSearchPlotQueueLengthThreshold(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrPlotQueueLengthThreshold(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqPlotQueueLengthThreshold(SiteRequestEnUS siteRequest_, String o) {
+		return SimulationReportPage.staticSearchStrPlotQueueLengthThreshold(siteRequest_, SimulationReportPage.staticSearchPlotQueueLengthThreshold(siteRequest_, SimulationReportPage.staticSetPlotQueueLengthThreshold(siteRequest_, o)));
+	}
+
 	/////////////////////////////////////
 	// plotGreenLengthThresholdVehicle //
 	/////////////////////////////////////
@@ -213,6 +263,56 @@ public abstract class SimulationReportPageGen<DEV> extends SimulationReportGenPa
 		return SimulationReportPage.staticSearchStrPlotGreenLengthThresholdVehicle(siteRequest_, SimulationReportPage.staticSearchPlotGreenLengthThresholdVehicle(siteRequest_, SimulationReportPage.staticSetPlotGreenLengthThresholdVehicle(siteRequest_, o)));
 	}
 
+	////////////////////////////////////////
+	// plotGreenLengthThresholdPedestrian //
+	////////////////////////////////////////
+
+
+	/**	 The entity plotGreenLengthThresholdPedestrian
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String plotGreenLengthThresholdPedestrian;
+
+	/**	<br> The entity plotGreenLengthThresholdPedestrian
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReportPage&fq=entiteVar_enUS_indexed_string:plotGreenLengthThresholdPedestrian">Find the entity plotGreenLengthThresholdPedestrian in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _plotGreenLengthThresholdPedestrian(Wrap<String> w);
+
+	public String getPlotGreenLengthThresholdPedestrian() {
+		return plotGreenLengthThresholdPedestrian;
+	}
+	public void setPlotGreenLengthThresholdPedestrian(String o) {
+		this.plotGreenLengthThresholdPedestrian = SimulationReportPage.staticSetPlotGreenLengthThresholdPedestrian(siteRequest_, o);
+	}
+	public static String staticSetPlotGreenLengthThresholdPedestrian(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected SimulationReportPage plotGreenLengthThresholdPedestrianInit() {
+		Wrap<String> plotGreenLengthThresholdPedestrianWrap = new Wrap<String>().var("plotGreenLengthThresholdPedestrian");
+		if(plotGreenLengthThresholdPedestrian == null) {
+			_plotGreenLengthThresholdPedestrian(plotGreenLengthThresholdPedestrianWrap);
+			setPlotGreenLengthThresholdPedestrian(plotGreenLengthThresholdPedestrianWrap.o);
+		}
+		return (SimulationReportPage)this;
+	}
+
+	public static String staticSearchPlotGreenLengthThresholdPedestrian(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrPlotGreenLengthThresholdPedestrian(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqPlotGreenLengthThresholdPedestrian(SiteRequestEnUS siteRequest_, String o) {
+		return SimulationReportPage.staticSearchStrPlotGreenLengthThresholdPedestrian(siteRequest_, SimulationReportPage.staticSearchPlotGreenLengthThresholdPedestrian(siteRequest_, SimulationReportPage.staticSetPlotGreenLengthThresholdPedestrian(siteRequest_, o)));
+	}
+
 	//////////////
 	// initDeep //
 	//////////////
@@ -243,7 +343,9 @@ public abstract class SimulationReportPageGen<DEV> extends SimulationReportGenPa
 			Promise<Void> promise2 = Promise.promise();
 			try {
 				plotPerformanceInit();
+				plotQueueLengthThresholdInit();
 				plotGreenLengthThresholdVehicleInit();
+				plotGreenLengthThresholdPedestrianInit();
 				promise2.complete();
 			} catch(Exception ex) {
 				promise2.fail(ex);
@@ -299,8 +401,12 @@ public abstract class SimulationReportPageGen<DEV> extends SimulationReportGenPa
 		switch(var) {
 			case "plotPerformance":
 				return oSimulationReportPage.plotPerformance;
+			case "plotQueueLengthThreshold":
+				return oSimulationReportPage.plotQueueLengthThreshold;
 			case "plotGreenLengthThresholdVehicle":
 				return oSimulationReportPage.plotGreenLengthThresholdVehicle;
+			case "plotGreenLengthThresholdPedestrian":
+				return oSimulationReportPage.plotGreenLengthThresholdPedestrian;
 			default:
 				return super.obtainSimulationReportGenPage(var);
 		}
@@ -342,8 +448,12 @@ public abstract class SimulationReportPageGen<DEV> extends SimulationReportGenPa
 		switch(entityVar) {
 		case "plotPerformance":
 			return SimulationReportPage.staticSetPlotPerformance(siteRequest_, o);
+		case "plotQueueLengthThreshold":
+			return SimulationReportPage.staticSetPlotQueueLengthThreshold(siteRequest_, o);
 		case "plotGreenLengthThresholdVehicle":
 			return SimulationReportPage.staticSetPlotGreenLengthThresholdVehicle(siteRequest_, o);
+		case "plotGreenLengthThresholdPedestrian":
+			return SimulationReportPage.staticSetPlotGreenLengthThresholdPedestrian(siteRequest_, o);
 			default:
 				return SimulationReportGenPage.staticSetSimulationReportGenPage(entityVar,  siteRequest_, o);
 		}
@@ -360,8 +470,12 @@ public abstract class SimulationReportPageGen<DEV> extends SimulationReportGenPa
 		switch(entityVar) {
 		case "plotPerformance":
 			return SimulationReportPage.staticSearchPlotPerformance(siteRequest_, (String)o);
+		case "plotQueueLengthThreshold":
+			return SimulationReportPage.staticSearchPlotQueueLengthThreshold(siteRequest_, (String)o);
 		case "plotGreenLengthThresholdVehicle":
 			return SimulationReportPage.staticSearchPlotGreenLengthThresholdVehicle(siteRequest_, (String)o);
+		case "plotGreenLengthThresholdPedestrian":
+			return SimulationReportPage.staticSearchPlotGreenLengthThresholdPedestrian(siteRequest_, (String)o);
 			default:
 				return SimulationReportGenPage.staticSearchSimulationReportGenPage(entityVar,  siteRequest_, o);
 		}
@@ -378,8 +492,12 @@ public abstract class SimulationReportPageGen<DEV> extends SimulationReportGenPa
 		switch(entityVar) {
 		case "plotPerformance":
 			return SimulationReportPage.staticSearchStrPlotPerformance(siteRequest_, (String)o);
+		case "plotQueueLengthThreshold":
+			return SimulationReportPage.staticSearchStrPlotQueueLengthThreshold(siteRequest_, (String)o);
 		case "plotGreenLengthThresholdVehicle":
 			return SimulationReportPage.staticSearchStrPlotGreenLengthThresholdVehicle(siteRequest_, (String)o);
+		case "plotGreenLengthThresholdPedestrian":
+			return SimulationReportPage.staticSearchStrPlotGreenLengthThresholdPedestrian(siteRequest_, (String)o);
 			default:
 				return SimulationReportGenPage.staticSearchStrSimulationReportGenPage(entityVar,  siteRequest_, o);
 		}
@@ -396,8 +514,12 @@ public abstract class SimulationReportPageGen<DEV> extends SimulationReportGenPa
 		switch(entityVar) {
 		case "plotPerformance":
 			return SimulationReportPage.staticSearchFqPlotPerformance(siteRequest_, o);
+		case "plotQueueLengthThreshold":
+			return SimulationReportPage.staticSearchFqPlotQueueLengthThreshold(siteRequest_, o);
 		case "plotGreenLengthThresholdVehicle":
 			return SimulationReportPage.staticSearchFqPlotGreenLengthThresholdVehicle(siteRequest_, o);
+		case "plotGreenLengthThresholdPedestrian":
+			return SimulationReportPage.staticSearchFqPlotGreenLengthThresholdPedestrian(siteRequest_, o);
 			default:
 				return SimulationReportGenPage.staticSearchFqSimulationReportGenPage(entityVar,  siteRequest_, o);
 		}
@@ -411,16 +533,22 @@ public abstract class SimulationReportPageGen<DEV> extends SimulationReportGenPa
 		StringBuilder sb = new StringBuilder();
 		sb.append(super.toString());
 		sb.append(Optional.ofNullable(plotPerformance).map(v -> "plotPerformance: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(plotQueueLengthThreshold).map(v -> "plotQueueLengthThreshold: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(plotGreenLengthThresholdVehicle).map(v -> "plotGreenLengthThresholdVehicle: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(plotGreenLengthThresholdPedestrian).map(v -> "plotGreenLengthThresholdPedestrian: \"" + v + "\"\n" ).orElse(""));
 		return sb.toString();
 	}
 
 	public static final String CLASS_SIMPLE_NAME = "SimulationReportPage";
 	public static final String VAR_plotPerformance = "plotPerformance";
+	public static final String VAR_plotQueueLengthThreshold = "plotQueueLengthThreshold";
 	public static final String VAR_plotGreenLengthThresholdVehicle = "plotGreenLengthThresholdVehicle";
+	public static final String VAR_plotGreenLengthThresholdPedestrian = "plotGreenLengthThresholdPedestrian";
 
 	public static final String DISPLAY_NAME_plotPerformance = "";
+	public static final String DISPLAY_NAME_plotQueueLengthThreshold = "";
 	public static final String DISPLAY_NAME_plotGreenLengthThresholdVehicle = "";
+	public static final String DISPLAY_NAME_plotGreenLengthThresholdPedestrian = "";
 
 	public static String displayNameForClass(String var) {
 		return SimulationReportPage.displayNameSimulationReportPage(var);
@@ -429,8 +557,12 @@ public abstract class SimulationReportPageGen<DEV> extends SimulationReportGenPa
 		switch(var) {
 		case VAR_plotPerformance:
 			return DISPLAY_NAME_plotPerformance;
+		case VAR_plotQueueLengthThreshold:
+			return DISPLAY_NAME_plotQueueLengthThreshold;
 		case VAR_plotGreenLengthThresholdVehicle:
 			return DISPLAY_NAME_plotGreenLengthThresholdVehicle;
+		case VAR_plotGreenLengthThresholdPedestrian:
+			return DISPLAY_NAME_plotGreenLengthThresholdPedestrian;
 		default:
 			return SimulationReportGenPage.displayNameSimulationReportGenPage(var);
 		}

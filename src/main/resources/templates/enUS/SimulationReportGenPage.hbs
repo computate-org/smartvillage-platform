@@ -572,6 +572,11 @@
 {{else}}
 {{> "htmReportStatus" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmReportProgress" roleRequired="true"}}
+{{else}}
+{{> "htmReportProgress" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
 {{#ifContainsAnyRoles roles roleRequired}}
@@ -760,6 +765,11 @@
 {{> "htmReportStatus" roleRequired="true"}}
 {{else}}
 {{> "htmReportStatus" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmReportProgress" roleRequired="true"}}
+{{else}}
+{{> "htmReportProgress" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
@@ -986,6 +996,11 @@
 {{> "htmReportStatus" roleRequired="true"}}
 {{else}}
 {{> "htmReportStatus" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmReportProgress" roleRequired="true"}}
+{{else}}
+{{> "htmReportProgress" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
@@ -2986,6 +3001,75 @@
 			{{/ifContainsKeys}}
 		{{else}}
 														<span class="varSimulationReport{{pk}}ReportStatus ">{{simulationReport_.reportStatus}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmReportProgress"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SimulationReportReportProgress">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_reportProgress">report progress</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputReportProgress" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_reportProgress')); $('#{{classApiMethodMethod}}_reportProgress').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SimulationReportForm :input[name=pk]').val() }], 'setReportProgress', null, function() { addGlow($('#{{classApiMethodMethod}}_reportProgress')); }, function() { addError($('#{{classApiMethodMethod}}_reportProgress')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputReportProgress"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															placeholder="report progress"
+															title="The percent progress of the simulation report. "
+															id="{{classApiMethodMethod}}_reportProgress"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setReportProgress classSimulationReport inputSimulationReport{{pk}}ReportProgress w3-input w3-border "
+																name="setReportProgress"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setReportProgress classSimulationReport inputSimulationReport{{pk}}ReportProgress w3-input w3-border "
+																name="setReportProgress"
+		{{else}}
+																class="valueReportProgress w3-input w3-border classSimulationReport inputSimulationReport{{pk}}ReportProgress w3-input w3-border "
+																name="reportProgress"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setReportProgress', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_reportProgress')); }, function() { addError($('#{{classApiMethodMethod}}_reportProgress')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{simulationReport_.reportProgress}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varSimulationReport{{pk}}ReportProgress ">{{simulationReport_.reportProgress}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varSimulationReport{{pk}}ReportProgress ">{{simulationReport_.reportProgress}}</span>
 		{{/eq}}
 {{/inline}}
 

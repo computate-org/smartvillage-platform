@@ -482,6 +482,20 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
+	 * HtmRow: 12
+	 * HtmCell: 3
+	 * Facet: true
+	 * DisplayName: report progress
+	 * Description: The percent progress of the simulation report. 
+	 */
+	protected void _reportProgress(Wrap<Integer> w) {
+		w.o(0);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
 	 * HtmRow: 13
 	 * HtmCell: 1
 	 * Facet: true
