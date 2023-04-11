@@ -1,0 +1,16 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: rabbitmq-nodeport
+  namespace: pecan
+spec:
+  ports:
+    - name: rabbitmq-nodeport
+      protocol: TCP
+      port: 5672
+      targetPort: 5672
+      nodePort: 30472
+  type: NodePort
+  selector:
+    app: rabbitmq
+    app.kubernetes.io/instance: pecan-helm
