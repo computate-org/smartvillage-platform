@@ -130,28 +130,34 @@ You can then run the project install automation again with the secrets in the va
 ansible-playbook ~/.ansible/roles/computate.computate_project/install.yml -e SITE_NAME=smartabyar-smartvillage -e ENABLE_CODE_GENERATION_SERVICE=true -e @~/.local/src/smartabyar-smartvillage-ansible/vault/$USER-local --vault-id @prompt
 ```
 
-# Configure Red Hat CodeReady Studio
+# Configure Eclipse IDE 
 
-You can download Red Hat Code Ready Studio here: 
+You can download Eclipse Installer here: 
 
-https://developers.redhat.com/products/codeready-studio/download
+https://www.eclipse.org/downloads/packages/
 
-You will want to create a Red Hat account if you do not already have one. 
-
-After you download CodeReady Studio, create a directory for it and install it with this command: 
+After you download the Eclipse installer, create a directory for it and extract it with this command: 
 
 ```bash
-install -d ~/.local/opt/codereadystudio
-java -jar ~/Downloads/codereadystudio-*-installer-standalone.jar
+install -d ~/.local/opt/eclipse-installer
+tar xvf ~/Downloads/eclipse-inst-jre-linux64.tar.gz -C ~/.local/opt/eclipse-installer --strip-components=1
 ```
 
-You can use the default installation settings. I suggest to install CodeReady Studio in your in $HOME/.local/opt/codereadystudio
+Now run the Eclipse installer: 
 
-When you run CodeReady Studio, I suggest you create your workspace here: ~/.local/src
+```bash
+~/.local/opt/eclipse-installer/eclipse-inst
+```
+
+- Select [ Eclipse IDE for Java Developers ]
+- I recommend installing Eclipse in the following subdirectory of your home directory: .local/opt/eclipse
+- Click [ Accept Now ] for the User Agreement
+
+When you run Eclipse Studio, I suggest you create your workspace here: ~/.local/src
 
 ## Install these update sites: 
 
-In CodeReady Studio, go to Help -> Install New Software...
+In Eclipse, go to Help -> Install New Software...
 
 Add these update sites and install these useful plugins: 
 
@@ -173,17 +179,17 @@ Add these update sites and install these useful plugins:
 - http://www.genuitec.com/updates/devstyle/ci/
     - Choose "DevStyle Features" for themes
 
-## Import the smartabyar-smartvillage project into CodeReady Studio
+## Import the smartabyar-smartvillage project into Eclipse
 
-* In CodeReady Studio, go to File -> Import...
+* In Eclipse, go to File -> Import...
 * Select Maven -> Existing Maven Projects
 * Click [ Next > ]
 * Browse to the directory: ~/.local/src/smartabyar-smartvillage
 * Click [ Finish ]
 
-## Setup a CodeReady Studio Debug/Run configuration to generate the OpenAPI 3 spec and the SQL create and drop scripts in smartabyar-smartvillage
+## Setup a Eclipse Debug/Run configuration to generate the OpenAPI 3 spec and the SQL create and drop scripts in smartabyar-smartvillage
 
-* In CodeReady Studio, go to File -> Debug Configurations...
+* In Eclipse, go to File -> Debug Configurations...
 * Right click on Java Application -> New Configuration
 * Name: smartabyar-smartvillage-OpenAPIGenerator
 * Project: smartabyar-smartvillage
@@ -199,9 +205,9 @@ Setup the following variables to setup the Vert.x verticle.
 
 Click [ Apply ] and [ Debug ] to debug the generation of the OpenAPI Spec src/main/resources/webroot and the SQL create and drop scripts in src/main/resources/sql. 
 
-## Setup a CodeReady Studio Debug/Run configuration to run and debug smartabyar-smartvillage
+## Setup a Eclipse Debug/Run configuration to run and debug smartabyar-smartvillage
 
-* In CodeReady Studio, go to File -> Debug Configurations...
+* In Eclipse, go to File -> Debug Configurations...
 * Right click on Java Application -> New Configuration
 * Name: smartabyar-smartvillage
 * Project: smartabyar-smartvillage
