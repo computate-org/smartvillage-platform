@@ -1,20 +1,20 @@
 apiVersion: keycloak.org/v1alpha1
 kind: KeycloakClient
 metadata:
-  name: smartcity
+  name: smartvillage
   namespace: sso
   labels:
     app: sso
-    realm: SMARTCITY
-    client: smartcity
+    realm: SMARTVILLAGE
+    client: smartvillage
 spec:
   realmSelector:
      matchLabels:
       app: sso
-      realm: SMARTCITY
+      realm: SMARTVILLAGE
   client:
-    id: smartcity
-    clientId: smartcity
+    id: smartvillage
+    clientId: smartvillage
     standardFlowEnabled: true
     serviceAccountsEnabled: true
     authorizationServicesEnabled: true
@@ -26,7 +26,7 @@ spec:
       - https://oauth-openshift.apps-crc.testing/oauth2callback/sso
     defaultClientScopes:
       - profile
-      - smartcity
+      - smartvillage
     authorizationSettings:
       scopes:
         - id: POST
@@ -86,4 +86,4 @@ spec:
           decisionStrategy: UNANIMOUS
           type: client
           config:
-            clients: "[\"smartcity\"]"
+            clients: "[\"smartvillage\"]"

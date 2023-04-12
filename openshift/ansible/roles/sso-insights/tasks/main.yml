@@ -39,10 +39,10 @@
       Content-Type: "application/json"
       Accept: "application/json"
       Authorization: "Bearer {{ SSO_TOKEN.json.access_token }}"
-- name: "Get SMARTCITY realm"
+- name: "Get SMARTVILLAGE realm"
   uri:
     validate_certs: false
-    url: "{{ SSO_SITE_BASE_URL }}/auth/admin/realms/{{ SSO_SMARTCITY_REALM_NAME }}"
+    url: "{{ SSO_SITE_BASE_URL }}/auth/admin/realms/{{ SSO_SMARTVILLAGE_REALM_NAME }}"
     method: GET
     status_code:
       - 200
@@ -51,14 +51,14 @@
       Accept: "application/json"
       Authorization: "Bearer {{ SSO_TOKEN.json.access_token }}"
   ignore_errors: true
-  register: SSO_SMARTCITY_REALM
+  register: SSO_SMARTVILLAGE_REALM
 - debug:
-    var: SSO_SMARTCITY_REALM.json
+    var: SSO_SMARTVILLAGE_REALM.json
 
-- name: "Get SMARTCITY realm roles"
+- name: "Get SMARTVILLAGE realm roles"
   uri:
     validate_certs: false
-    url: "{{ SSO_SITE_BASE_URL }}/auth/admin/realms/{{ SSO_SMARTCITY_REALM_NAME }}/roles"
+    url: "{{ SSO_SITE_BASE_URL }}/auth/admin/realms/{{ SSO_SMARTVILLAGE_REALM_NAME }}/roles"
     method: GET
     status_code:
       - 200
@@ -67,14 +67,14 @@
       Accept: "application/json"
       Authorization: "Bearer {{ SSO_TOKEN.json.access_token }}"
   ignore_errors: true
-  register: SSO_SMARTCITY_REALM_ROLES
+  register: SSO_SMARTVILLAGE_REALM_ROLES
 - debug:
-    var: SSO_SMARTCITY_REALM_ROLES.json
+    var: SSO_SMARTVILLAGE_REALM_ROLES.json
 
-- name: "Get SMARTCITY realm client scopes"
+- name: "Get SMARTVILLAGE realm client scopes"
   uri:
     validate_certs: false
-    url: "{{ SSO_SITE_BASE_URL }}/auth/admin/realms/{{ SSO_SMARTCITY_REALM_NAME }}/client-scopes"
+    url: "{{ SSO_SITE_BASE_URL }}/auth/admin/realms/{{ SSO_SMARTVILLAGE_REALM_NAME }}/client-scopes"
     method: GET
     status_code:
       - 200
@@ -83,14 +83,14 @@
       Accept: "application/json"
       Authorization: "Bearer {{ SSO_TOKEN.json.access_token }}"
   ignore_errors: true
-  register: SSO_SMARTCITY_REALM_CLIENT_SCOPES
+  register: SSO_SMARTVILLAGE_REALM_CLIENT_SCOPES
 - debug:
-    var: SSO_SMARTCITY_REALM_CLIENT_SCOPES.json
+    var: SSO_SMARTVILLAGE_REALM_CLIENT_SCOPES.json
 
-- name: "Get {{ SSO_SMARTCITY_CLIENT_NAME }} client"
+- name: "Get {{ SSO_SMARTVILLAGE_CLIENT_NAME }} client"
   uri:
     validate_certs: false
-    url: "{{ SSO_SITE_BASE_URL }}/auth/admin/realms/{{ SSO_SMARTCITY_REALM_NAME }}/clients?clientId={{ SSO_SMARTCITY_CLIENT_NAME }}"
+    url: "{{ SSO_SITE_BASE_URL }}/auth/admin/realms/{{ SSO_SMARTVILLAGE_REALM_NAME }}/clients?clientId={{ SSO_SMARTVILLAGE_CLIENT_NAME }}"
     method: GET
     status_code:
       - 200
@@ -99,18 +99,18 @@
       Accept: "application/json"
       Authorization: "Bearer {{ SSO_TOKEN.json.access_token }}"
   ignore_errors: true
-  register: SSO_SMARTCITY_CLIENT_RESPONSE
-- name: set {{ SSO_SMARTCITY_CLIENT_NAME }} client var
+  register: SSO_SMARTVILLAGE_CLIENT_RESPONSE
+- name: set {{ SSO_SMARTVILLAGE_CLIENT_NAME }} client var
   set_fact:
-    SSO_SMARTCITY_CLIENT: "{{ SSO_SMARTCITY_CLIENT_RESPONSE.json[0] }}"
-    SSO_SMARTCITY_CLIENT_ID: "{{ SSO_SMARTCITY_CLIENT_RESPONSE.json[0].id }}"
+    SSO_SMARTVILLAGE_CLIENT: "{{ SSO_SMARTVILLAGE_CLIENT_RESPONSE.json[0] }}"
+    SSO_SMARTVILLAGE_CLIENT_ID: "{{ SSO_SMARTVILLAGE_CLIENT_RESPONSE.json[0].id }}"
 - debug:
-    var: SSO_SMARTCITY_CLIENT
+    var: SSO_SMARTVILLAGE_CLIENT
 
-- name: "Get SMARTCITY realm client policies"
+- name: "Get SMARTVILLAGE realm client policies"
   uri:
     validate_certs: false
-    url: "{{ SSO_SITE_BASE_URL }}/auth/admin/realms/{{ SSO_SMARTCITY_REALM_NAME }}/clients/{{ SSO_SMARTCITY_CLIENT_ID }}/authz/resource-server/policy?deep=false&first=0&max=20"
+    url: "{{ SSO_SITE_BASE_URL }}/auth/admin/realms/{{ SSO_SMARTVILLAGE_REALM_NAME }}/clients/{{ SSO_SMARTVILLAGE_CLIENT_ID }}/authz/resource-server/policy?deep=false&first=0&max=20"
     method: GET
     status_code:
       - 200
@@ -119,14 +119,14 @@
       Accept: "application/json"
       Authorization: "Bearer {{ SSO_TOKEN.json.access_token }}"
   ignore_errors: true
-  register: SSO_SMARTCITY_REALM_CLIENT_POLICIES
+  register: SSO_SMARTVILLAGE_REALM_CLIENT_POLICIES
 - debug:
-    var: SSO_SMARTCITY_REALM_CLIENT_POLICIES.json
+    var: SSO_SMARTVILLAGE_REALM_CLIENT_POLICIES.json
 
-- name: "Get SMARTCITY realm client permissions"
+- name: "Get SMARTVILLAGE realm client permissions"
   uri:
     validate_certs: false
-    url: "{{ SSO_SITE_BASE_URL }}/auth/admin/realms/{{ SSO_SMARTCITY_REALM_NAME }}/clients/{{ SSO_SMARTCITY_CLIENT_ID }}/authz/resource-server/permission?first=0&max=20"
+    url: "{{ SSO_SITE_BASE_URL }}/auth/admin/realms/{{ SSO_SMARTVILLAGE_REALM_NAME }}/clients/{{ SSO_SMARTVILLAGE_CLIENT_ID }}/authz/resource-server/permission?first=0&max=20"
     method: GET
     status_code:
       - 200
@@ -135,6 +135,6 @@
       Accept: "application/json"
       Authorization: "Bearer {{ SSO_TOKEN.json.access_token }}"
   ignore_errors: true
-  register: SSO_SMARTCITY_REALM_CLIENT_PERMISSIONS
+  register: SSO_SMARTVILLAGE_REALM_CLIENT_PERMISSIONS
 - debug:
-    var: SSO_SMARTCITY_REALM_CLIENT_PERMISSIONS.json
+    var: SSO_SMARTVILLAGE_REALM_CLIENT_PERMISSIONS.json

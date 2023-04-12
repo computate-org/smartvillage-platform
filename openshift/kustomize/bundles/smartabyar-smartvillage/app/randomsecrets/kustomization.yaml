@@ -3,7 +3,7 @@ kind: Kustomization
 
 resources:
   - postgres-cluster-pguser-smartvillage
-  - keycloak-client-secret-smartcity
+  - keycloak-client-secret-smartvillage
   - email
   - yggio
   - fontawesome

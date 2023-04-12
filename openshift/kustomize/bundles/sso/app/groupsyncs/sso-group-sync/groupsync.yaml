@@ -8,7 +8,7 @@ spec:
     - name: sso
       keycloak:
         loginRealm: master
-        realm: SMARTCITY
+        realm: SMARTVILLAGE
         credentialsSecret:
           name: sso-group-sync
           namespace: group-sync-operator

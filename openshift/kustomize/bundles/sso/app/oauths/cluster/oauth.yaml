@@ -14,7 +14,7 @@ spec:
       mappingMethod: claim
       type: OpenID
       openID:
-        clientID: smartcity
+        clientID: smartvillage
         clientSecret:
           name: sso-openshift-client-secret
         ca:
@@ -32,4 +32,4 @@ spec:
             - email
           groups:
             - groups
-        issuer: https://keycloak-sso.apps-crc.testing/auth/realms/SMARTCITY
+        issuer: https://keycloak-sso.apps-crc.testing/auth/realms/SMARTVILLAGE

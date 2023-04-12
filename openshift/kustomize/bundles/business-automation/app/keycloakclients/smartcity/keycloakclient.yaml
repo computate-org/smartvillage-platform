@@ -1,7 +1,7 @@
 apiVersion: keycloak.org/v1alpha1
 kind: KeycloakClient
 metadata:
-  name: smartcity
+  name: smartvillage
   namespace: sso
   labels:
     app: sso
@@ -9,9 +9,9 @@ spec:
   realmSelector:
      matchLabels:
       app: sso
-      realm: SMARTCITY
+      realm: SMARTVILLAGE
   client:
-    clientId: smartcity
+    clientId: smartvillage
     standardFlowEnabled: true
     serviceAccountsEnabled: true
     authorizationServicesEnabled: true

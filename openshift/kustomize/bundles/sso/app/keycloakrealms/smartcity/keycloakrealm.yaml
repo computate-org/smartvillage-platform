@@ -1,17 +1,17 @@
 apiVersion: keycloak.org/v1alpha1
 kind: KeycloakRealm
 metadata:
-  name: smartcity
+  name: smartvillage
   namespace: sso
   labels:
     app: sso
-    realm: SMARTCITY
+    realm: SMARTVILLAGE
 spec:
   realm:
-    id: "SMARTCITY"
-    realm: "SMARTCITY"
+    id: "SMARTVILLAGE"
+    realm: "SMARTVILLAGE"
     enabled: true
-    displayName: "SMARTCITY"
+    displayName: "SMARTVILLAGE"
     registrationAllowed: true
     resetPasswordAllowed: true
     editUsernameAllowed: true
@@ -35,21 +35,21 @@ spec:
             realm:
               - admin
     clientScopes:
-      - id: smartcity-smartcity
-        name: smartcity
-        description: A client scope for the smartcity client
+      - id: smartvillage-smartvillage
+        name: smartvillage
+        description: A client scope for the smartvillage client
         protocol: openid-connect
         protocolMappers: 
           - config:
               access.token.claim: 'true'
               id.token.claim: 'false'
-              included.client.audience: 'smartcity'
+              included.client.audience: 'smartvillage'
             consentRequired: false
-            id: smartcity-smartcity
-            name: smartcity
+            id: smartvillage-smartvillage
+            name: smartvillage
             protocol: openid-connect
             protocolMapper: oidc-audience-mapper
-      - id: smartcity-profile
+      - id: smartvillage-profile
         name: profile
         description: "OpenID Connect built-in scope: profile"
         protocol: openid-connect
@@ -62,7 +62,7 @@ spec:
               user.attribute: emailVerified
               userinfo.token.claim: 'true'
             consentRequired: false
-            id: smartcity-email-verified
+            id: smartvillage-email-verified
             name: email verified
             protocol: openid-connect
             protocolMapper: oidc-usermodel-property-mapper
@@ -74,7 +74,7 @@ spec:
               user.attribute: username
               userinfo.token.claim: 'true'
             consentRequired: false
-            id: smartcity-username
+            id: smartvillage-username
             name: username
             protocol: openid-connect
             protocolMapper: oidc-usermodel-property-mapper
@@ -86,7 +86,7 @@ spec:
               multivalued: 'true'
               user.attribute: foo
             consentRequired: false
-            id: smartcity-groups
+            id: smartvillage-groups
             name: groups
             protocol: openid-connect
             protocolMapper: oidc-usermodel-realm-role-mapper
@@ -98,7 +98,7 @@ spec:
               user.attribute: lastName
               userinfo.token.claim: 'true'
             consentRequired: false
-            id: smartcity-family-name
+            id: smartvillage-family-name
             name: family name
             protocol: openid-connect
             protocolMapper: oidc-usermodel-property-mapper
@@ -110,7 +110,7 @@ spec:
               user.attribute: firstName
               userinfo.token.claim: 'true'
             consentRequired: false
-            id: smartcity-given-name
+            id: smartvillage-given-name
             name: given name
             protocol: openid-connect
             protocolMapper: oidc-usermodel-property-mapper
@@ -122,7 +122,7 @@ spec:
               user.attribute: email
               userinfo.token.claim: 'true'
             consentRequired: false
-            id: smartcity-email
+            id: smartvillage-email
             name: email
             protocol: openid-connect
             protocolMapper: oidc-usermodel-property-mapper
@@ -134,7 +134,7 @@ spec:
               user.attribute: middleName
               userinfo.token.claim: 'true'
             consentRequired: false
-            id: smartcity-middle-name
+            id: smartvillage-middle-name
             name: middle name
             protocol: openid-connect
             protocolMapper: oidc-usermodel-attribute-mapper
@@ -146,7 +146,7 @@ spec:
               user.attribute: locale
               userinfo.token.claim: 'true'
             consentRequired: false
-            id: smartcity-locale
+            id: smartvillage-locale
             name: locale
             protocol: openid-connect
             protocolMapper: oidc-usermodel-attribute-mapper
@@ -158,7 +158,7 @@ spec:
               user.attribute: nickname
               userinfo.token.claim: 'true'
             consentRequired: false
-            id: smartcity-nickname
+            id: smartvillage-nickname
             name: nickname
             protocol: openid-connect
             protocolMapper: oidc-usermodel-attribute-mapper
@@ -170,7 +170,7 @@ spec:
               user.attribute: updatedAt
               userinfo.token.claim: 'true'
             consentRequired: false
-            id: smartcity-updated-at
+            id: smartvillage-updated-at
             name: updated at
             protocol: openid-connect
             protocolMapper: oidc-usermodel-attribute-mapper
@@ -179,7 +179,7 @@ spec:
               id.token.claim: 'true'
               userinfo.token.claim: 'true'
             consentRequired: false
-            id: smartcity-full-name
+            id: smartvillage-full-name
             name: full name
             protocol: openid-connect
             protocolMapper: oidc-full-name-mapper
@@ -191,7 +191,7 @@ spec:
               user.attribute: profile
               userinfo.token.claim: 'true'
             consentRequired: false
-            id: smartcity-profile
+            id: smartvillage-profile
             name: profile
             protocol: openid-connect
             protocolMapper: oidc-usermodel-attribute-mapper
@@ -202,7 +202,7 @@ spec:
               multivalued: 'true'
               user.attribute: foo
             consentRequired: false
-            id: smartcity-client-roles
+            id: smartvillage-client-roles
             name: client roles
             protocol: openid-connect
             protocolMapper: oidc-usermodel-client-role-mapper
@@ -214,7 +214,7 @@ spec:
               user.attribute: zoneinfo
               userinfo.token.claim: 'true'
             consentRequired: false
-            id: smartcity-zoneinfo
+            id: smartvillage-zoneinfo
             name: zoneinfo
             protocol: openid-connect
             protocolMapper: oidc-usermodel-attribute-mapper
@@ -225,12 +225,12 @@ spec:
               multivalued: 'true'
               user.attribute: foo
             consentRequired: false
-            id: smartcity-realm-roles
+            id: smartvillage-realm-roles
             name: realm roles
             protocol: openid-connect
             protocolMapper: oidc-usermodel-realm-role-mapper
     defaultDefaultClientScopes:
-      - smartcity
+      - smartvillage
   instanceSelector:
     matchLabels:
       app: sso

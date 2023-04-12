@@ -20,7 +20,7 @@
     name: vault-patch-secret
   vars:
     SOURCE_NAMESPACE: sso
-    SOURCE_SECRET_NAME: keycloak-client-secret-smartcity
+    SOURCE_SECRET_NAME: keycloak-client-secret-smartvillage
     SOURCE_SECRET_KEYS: [ 'CLIENT_ID', 'CLIENT_SECRET' ]
     DESTINATION_NAMESPACE: smart-village-view
 
