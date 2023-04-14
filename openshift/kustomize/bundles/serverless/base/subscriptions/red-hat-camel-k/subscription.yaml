@@ -4,7 +4,7 @@ metadata:
   name: red-hat-camel-k
   namespace: openshift-operators
 spec:
-  channel: 1.8.x
+  channel: 1.10.x
   installPlanApproval: Automatic
   name: red-hat-camel-k
   source: redhat-operators
