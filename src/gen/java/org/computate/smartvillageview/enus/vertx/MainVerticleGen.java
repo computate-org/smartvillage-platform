@@ -91,6 +91,14 @@ public abstract class MainVerticleGen<DEV> extends AbstractVerticle {
 	protected static final Logger LOG = LoggerFactory.getLogger(MainVerticle.class);
 
 	public static final String SITE_NAME = "smartabyar-smartvillage";
+	public static final String configureKafkaSuccess1 = "The Kafka producer was initialized successfully. ";
+	public static final String configureKafkaSuccess = configureKafkaSuccess1;
+
+	public static final String configureMqttSuccess1 = "The MQTT client was initialized successfully. ";
+	public static final String configureMqttSuccess = configureMqttSuccess1;
+	public static final String configureMqttFail1 = "The MQTT client failed to initialize. ";
+	public static final String configureMqttFail = configureMqttFail1;
+
 	public static final String configureDataConnectionError1 = "Could not open the database client connection. ";
 	public static final String configureDataConnectionError = configureDataConnectionError1;
 	public static final String configureDataConnectionSuccess1 = "The database client connection was successful. ";
@@ -162,10 +170,15 @@ public abstract class MainVerticleGen<DEV> extends AbstractVerticle {
 	public static final String startServerSsl1 = "Configuring SSL: %s";
 	public static final String startServerSsl = startServerSsl1;
 
-	public static final String stopFail1 = "Could not close the database client connection. ";
-	public static final String stopFail = stopFail1;
-	public static final String stopComplete1 = "The database client connection was closed. ";
-	public static final String stopComplete = stopComplete1;
+	public static final String stopPgPoolFail1 = "Could not close the database client connection. ";
+	public static final String stopPgPoolFail = stopPgPoolFail1;
+	public static final String stopPgPoolComplete1 = "The database client connection was closed. ";
+	public static final String stopPgPoolComplete = stopPgPoolComplete1;
+
+	public static final String stopMqttFail1 = "Could not close the MQTT client connection. ";
+	public static final String stopMqttFail = stopMqttFail1;
+	public static final String stopMqttComplete1 = "The MQTT client connection was closed. ";
+	public static final String stopMqttComplete = stopMqttComplete1;
 
 
 	//////////////
@@ -307,7 +320,7 @@ public abstract class MainVerticleGen<DEV> extends AbstractVerticle {
 		return sb.toString();
 	}
 
-	public static final String[] MainVerticleVals = new String[] { configureDataConnectionError1, configureDataConnectionSuccess1, configureDataInitError1, configureDataInitSuccess1, configureOpenApiError1, configureOpenApiSuccess1, configureConfigComplete1, configureConfigFail1, configureSharedWorkerExecutorFail1, configureSharedWorkerExecutorComplete1, configureHealthChecksComplete1, configureHealthChecksFail1, configureHealthChecksErrorDatabase1, configureHealthChecksEmptySolr1, configureHealthChecksErrorSolr1, configureHealthChecksErrorVertx1, configureWebsocketsComplete1, configureWebsocketsFail1, configureEmailComplete1, configureEmailFail1, configureHandlebarsFail1, configureHandlebarsComplete1, configureApiFail1, configureApiComplete1, configureUiFail1, configureUiComplete1, startServerErrorServer1, startServerSuccessServer1, startServerBeforeServer1, startServerSsl1, stopFail1, stopComplete1 };
+	public static final String[] MainVerticleVals = new String[] { configureKafkaSuccess1, configureMqttSuccess1, configureMqttFail1, configureDataConnectionError1, configureDataConnectionSuccess1, configureDataInitError1, configureDataInitSuccess1, configureOpenApiError1, configureOpenApiSuccess1, configureConfigComplete1, configureConfigFail1, configureSharedWorkerExecutorFail1, configureSharedWorkerExecutorComplete1, configureHealthChecksComplete1, configureHealthChecksFail1, configureHealthChecksErrorDatabase1, configureHealthChecksEmptySolr1, configureHealthChecksErrorSolr1, configureHealthChecksErrorVertx1, configureWebsocketsComplete1, configureWebsocketsFail1, configureEmailComplete1, configureEmailFail1, configureHandlebarsFail1, configureHandlebarsComplete1, configureApiFail1, configureApiComplete1, configureUiFail1, configureUiComplete1, startServerErrorServer1, startServerSuccessServer1, startServerBeforeServer1, startServerSsl1, stopPgPoolFail1, stopPgPoolComplete1, stopMqttFail1, stopMqttComplete1 };
 
 	public static final String CLASS_SIMPLE_NAME = "MainVerticle";
 

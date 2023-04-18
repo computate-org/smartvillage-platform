@@ -13,7 +13,6 @@ import java.util.function.Consumer;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.computate.search.tool.SearchTool;
-import org.computate.smartvillageview.enus.camel.CamelIntegration;
 import org.computate.smartvillageview.enus.config.ConfigKeys;
 import org.computate.smartvillageview.enus.model.htm.SiteHtmEnUSGenApiService;
 import org.computate.smartvillageview.enus.model.iotnode.IotNodeEnUSGenApiService;
@@ -30,6 +29,7 @@ import org.computate.smartvillageview.enus.model.traffic.simulation.report.Simul
 import org.computate.smartvillageview.enus.model.traffic.time.step.TimeStepEnUSGenApiService;
 import org.computate.smartvillageview.enus.model.traffic.vehicle.step.VehicleStepEnUSGenApiService;
 import org.computate.smartvillageview.enus.model.user.SiteUserEnUSGenApiService;
+import org.computate.smartvillageview.enus.mqtt.MqttMessageReader;
 import org.computate.smartvillageview.enus.page.HomePage;
 import org.computate.smartvillageview.enus.page.dynamic.DynamicPage;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
@@ -48,6 +48,7 @@ import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Jackson2Helper;
 import com.github.jknack.handlebars.helper.ConditionalHelpers;
 import com.github.jknack.handlebars.helper.StringHelpers;
+import com.github.jknack.handlebars.internal.lang3.BooleanUtils;
 
 import io.vertx.config.ConfigRetriever;
 import io.vertx.config.ConfigRetrieverOptions;
@@ -98,6 +99,7 @@ import io.vertx.ext.web.openapi.RouterBuilder;
 import io.vertx.ext.web.sstore.LocalSessionStore;
 import io.vertx.ext.web.templ.handlebars.HandlebarsTemplateEngine;
 import io.vertx.kafka.client.producer.KafkaProducer;
+import io.vertx.mqtt.MqttClient;
 import io.vertx.pgclient.PgConnectOptions;
 import io.vertx.pgclient.PgPool;
 import io.vertx.spi.cluster.zookeeper.ZookeeperClusterManager;
@@ -140,6 +142,8 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 	private TemplateHandler templateHandler;
 
 	private KafkaProducer<String, String> kafkaProducer;
+
+	private MqttClient mqttClient;
 
 	/**	
 	 *	The main method for the Vert.x application that runs the Vert.x Runner class
@@ -346,9 +350,11 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 									configureEmail().onComplete(i -> 
 										configureHandlebars().onComplete(j -> 
 											configureKafka().onComplete(k -> 
-												configureApi().onComplete(l -> 
-													configureUi().onComplete(m -> 
-														startServer().onComplete(o -> startPromise.complete())
+												configureMqtt().onComplete(l -> 
+													configureApi().onComplete(m -> 
+														configureUi().onComplete(n -> 
+															startServer().onComplete(o -> startPromise.complete())
+														).onFailure(ex -> startPromise.fail(ex))
 													).onFailure(ex -> startPromise.fail(ex))
 												).onFailure(ex -> startPromise.fail(ex))
 											).onFailure(ex -> startPromise.fail(ex))
@@ -383,6 +389,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 	}
 
 	/**
+	 * Val.Success.enUS:The Kafka producer was initialized successfully. 
 	 **/
 	public Future<KafkaProducer<String, String>> configureKafka() {
 		Promise<KafkaProducer<String, String>> promise = Promise.promise();
@@ -402,9 +409,49 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 			kafkaConfig.put("ssl.truststore.password", config().getString(ConfigKeys.KAFKA_SSL_TRUSTSTORE_PASSWORD));
 
 			kafkaProducer = KafkaProducer.createShared(vertx, SITE_NAME, kafkaConfig);
+			LOG.info(configureKafkaSuccess);
 			promise.complete(kafkaProducer);
 		} catch(Exception ex) {
 			LOG.error("Unable to configure site context. ", ex);
+			promise.fail(ex);
+		}
+
+		return promise.future();
+	}
+
+	/**
+	 * Val.Success.enUS:The MQTT client was initialized successfully. 
+	 * Val.Fail.enUS:The MQTT client failed to initialize. 
+	 **/
+	public Future<MqttClient> configureMqtt() {
+		Promise<MqttClient> promise = Promise.promise();
+
+		try {
+			if(BooleanUtils.isTrue(config().getBoolean(ConfigKeys.MQTT_ENABLED))) {
+				try {
+					mqttClient = MqttClient.create(vertx);
+					mqttClient.connect(config().getInteger(ConfigKeys.MQTT_PORT), config().getString(ConfigKeys.MQTT_HOST)).onSuccess(a -> {
+						try {
+							new MqttMessageReader(mqttClient, config());
+							LOG.info(configureMqttSuccess);
+							promise.complete(mqttClient);
+						} catch(Exception ex) {
+							LOG.error(configureMqttFail, ex);
+							promise.fail(ex);
+						}
+					}).onFailure(ex -> {
+						LOG.error(configureMqttFail, ex);
+						promise.fail(ex);
+					});
+				} catch(Exception ex) {
+					LOG.error(configureMqttFail, ex);
+					promise.fail(ex);
+				}
+			} else {
+				promise.complete();
+			}
+		} catch(Exception ex) {
+			LOG.error(configureMqttFail, ex);
 			promise.fail(ex);
 		}
 
@@ -1107,22 +1154,58 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 	/**	
 	 *	This is called by Vert.x when the verticle instance is undeployed. 
 	 *	Setup the stopPromise to handle tearing down the server. 
-	 * Val.Fail.enUS:Could not close the database client connection. 
-	 * Val.Complete.enUS:The database client connection was closed. 
 	 **/
 	@Override()
 	public void  stop(Promise<Void> promise) throws Exception, Exception {
+		stopPgPool().onComplete(a -> {
+			stopMqtt().onComplete(b -> {
+				promise.complete();
+			});
+		});
+	}
+
+	/**
+	 * Val.Fail.enUS:Could not close the database client connection. 
+	 * Val.Complete.enUS:The database client connection was closed. 
+	 **/
+	public Future<Void> stopPgPool() {
+		Promise<Void> promise = Promise.promise();
+
 		if(pgPool != null) {
 			pgPool.close().onSuccess(a -> {
-				LOG.info(stopComplete);
+				LOG.info(stopPgPoolComplete);
 				promise.complete();
 			}).onFailure(ex -> {
-				LOG.error(stopFail, ex);
+				LOG.error(stopPgPoolFail, ex);
 				promise.fail(ex);
 			});
 		} else {
 			promise.complete();
 		}
+
+		return promise.future();
+	}
+
+	/**
+	 * Val.Fail.enUS:Could not close the MQTT client connection. 
+	 * Val.Complete.enUS:The MQTT client connection was closed. 
+	 **/
+	public Future<Void> stopMqtt() {
+		Promise<Void> promise = Promise.promise();
+
+		if(mqttClient != null) {
+			mqttClient.disconnect().onSuccess(a -> {
+				LOG.info(stopMqttComplete);
+				promise.complete();
+			}).onFailure(ex -> {
+				LOG.error(stopMqttFail, ex);
+				promise.fail(ex);
+			});
+		} else {
+			promise.complete();
+		}
+
+		return promise.future();
 	}
 
 	public String toId(String s) {

@@ -33,7 +33,7 @@ public class SimulationReportEnUSApiServiceImpl extends SimulationReportEnUSGenA
 		LOG.info("Sending record to kafka");
 		super.patchrunsimulationSimulationReportFuture(o, inheritPk).onSuccess(simulationReport -> {
 			try {
-				String topic = config.getString(ConfigKeys.KAFKA_TOPIC_SUMO_RUN);
+				String topic = SimulationReport.reportStatusStop_enUS.equals(simulationReport.getReportStatus()) ? config.getString(ConfigKeys.KAFKA_TOPIC_SUMO_STOP) : config.getString(ConfigKeys.KAFKA_TOPIC_SUMO_RUN);
 				JsonObject body = JsonObject.mapFrom(simulationReport);
 				KafkaProducerRecord<String, String> record = KafkaProducerRecord.create(topic, body.encode());
 				kafkaProducer.send(record).onSuccess(recordMetadata -> {

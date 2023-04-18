@@ -144,7 +144,12 @@ AUTH_ROLE_REQUIRED_TrafficLightStep: 'SiteAdmin'
 AUTH_ROLE_REQUIRED_VehicleStep: 'SiteAdmin'
 
 KAFKA_TOPIC_SUMO_RUN: smartvillage-sumo-run
+KAFKA_TOPIC_SUMO_STOP: smartvillage-sumo-stop
 KAFKA_TOPIC_SUMO_RUN_REPORT: smartvillage-sumo-run-report
 KAFKA_TOPIC_IMPORT_PAGE: smartvillage-import-page
 KAFKA_TOPIC_IMPORT_HTM: smartvillage-import-htm
 
+MQTT_ENABLED: true
+MQTT_HOST: fiware-broker-mqtt-nodeport.apps-crc.testing
+MQTT_PORT: 30083
+MQTT_IOT_SUBSCRIBE_TOPIC: iot/subscribe

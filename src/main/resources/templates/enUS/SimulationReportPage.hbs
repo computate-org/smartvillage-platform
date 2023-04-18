@@ -77,9 +77,13 @@ async function websocketSimulationReportInner2(apiRequest) {
 {{#partial "htmBodyAll"}}{{> htmBodyAllSimulationReportPage}}{{/partial}}
 {{#partial "htmForm"}}
 <h3>Actions:</h3>
-<button class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce " id="refreshThisSimulationReportGenPage" onclick="$.ajax({ url: '/api/run-simulation-report?' + $.param([ {name: 'fq', value: 'pk:{{ pk }}' } ]) , dataType: 'json' , type: 'PATCH' , contentType: 'application/json; charset=utf-8' , data: JSON.stringify({}) }); ">
+<button class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce " id="runReport" onclick="$.ajax({ url: '/api/run-simulation-report?' + $.param([ {name: 'fq', value: 'pk:{{ pk }}' } ]) , dataType: 'json' , type: 'PATCH' , contentType: 'application/json; charset=utf-8' , data: JSON.stringify({'setReportStatus': 'Run'}) }); ">
 	<i class="fas fa-edit " aria-hidden="true"></i>
 	Run Report
+</button>
+<button class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce " id="stopReport" onclick="$.ajax({ url: '/api/run-simulation-report?' + $.param([ {name: 'fq', value: 'pk:{{ pk }}' } ]) , dataType: 'json' , type: 'PATCH' , contentType: 'application/json; charset=utf-8' , data: JSON.stringify({'setReportStatus': 'Stop'}) }); ">
+	<i class="fas fa-edit " aria-hidden="true"></i>
+	Stop Report
 </button>
 {{> htmFormSimulationReportPage}}
 {{/partial}}
@@ -571,9 +575,13 @@ async function websocketSimulationReportInner2(apiRequest) {
 									</tbody>
 								</table>
 								<h3>Actions:</h3>
-								<button class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce " id="refreshThisSimulationReportGenPage" onclick="$.ajax({ url: '/api/run-simulation-report?' + $.param([ {name: 'fq', value: 'pk:{{ pk }}' } ]) , dataType: 'json' , type: 'PATCH' , contentType: 'application/json; charset=utf-8' , data: JSON.stringify({}) }); ">
+								<button class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce " id="refreshThisSimulationReportGenPage" onclick="$.ajax({ url: '/api/run-simulation-report?' + $.param([ {name: 'fq', value: 'pk:{{ pk }}' } ]) , dataType: 'json' , type: 'PATCH' , contentType: 'application/json; charset=utf-8' , data: JSON.stringify({'setReportStatus': 'Run'}) }); ">
 									<i class="fas fa-edit " aria-hidden="true"></i>
 									Run Report
+								</button>
+								<button class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce " id="stopReport" onclick="$.ajax({ url: '/api/run-simulation-report?' + $.param([ {name: 'fq', value: 'pk:{{ pk }}' } ]) , dataType: 'json' , type: 'PATCH' , contentType: 'application/json; charset=utf-8' , data: JSON.stringify({'setReportStatus': 'Stop'}) }); ">
+									<i class="fas fa-edit " aria-hidden="true"></i>
+									Stop Report
 								</button>
 							</div>
 

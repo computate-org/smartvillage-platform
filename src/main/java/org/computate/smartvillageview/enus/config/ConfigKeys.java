@@ -219,6 +219,7 @@ public class ConfigKeys extends ComputateConfigKeys {
 	public static final String KAFKA_GROUP = "KAFKA_GROUP";
 	public static final String KAFKA_TOPIC_SUMO_RUN = "KAFKA_TOPIC_SUMO_RUN";
 	public static final String KAFKA_TOPIC_SUMO_RUN_REPORT = "KAFKA_TOPIC_SUMO_RUN_REPORT";
+	public static final String KAFKA_TOPIC_SUMO_STOP = "KAFKA_TOPIC_SUMO_STOP";
 	public static final String KAFKA_TOPIC_IMPORT_PAGE = "KAFKA_TOPIC_IMPORT_PAGE";
 	public static final String KAFKA_TOPIC_IMPORT_HTM = "KAFKA_TOPIC_IMPORT_HTM";
 	public static final String KAFKA_SECURITY_PROTOCOL = "KAFKA_SECURITY_PROTOCOL";
@@ -228,4 +229,9 @@ public class ConfigKeys extends ComputateConfigKeys {
 	public static final String KAFKA_SSL_TRUSTSTORE_TYPE = "KAFKA_SSL_TRUSTSTORE_TYPE";
 	public static final String KAFKA_SSL_TRUSTSTORE_LOCATION = "KAFKA_SSL_TRUSTSTORE_LOCATION";
 	public static final String KAFKA_SSL_TRUSTSTORE_PASSWORD = "KAFKA_SSL_TRUSTSTORE_PASSWORD";
+
+	public static final String MQTT_ENABLED = "MQTT_ENABLED";
+	public static final String MQTT_HOST = "MQTT_HOST";
+	public static final String MQTT_PORT = "MQTT_PORT";
+	public static final String MQTT_IOT_SUBSCRIBE_TOPIC = "MQTT_IOT_SUBSCRIBE_TOPIC";
 }

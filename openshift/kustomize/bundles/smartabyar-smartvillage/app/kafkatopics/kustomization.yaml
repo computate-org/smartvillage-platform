@@ -3,5 +3,6 @@ kind: Kustomization
 resources:
   - smartvillage-sumo-run/
   - smartvillage-sumo-run-report/
+  - smartvillage-sumo-stop/
   - smartvillage-import-page/
   - smartvillage-import-htm/

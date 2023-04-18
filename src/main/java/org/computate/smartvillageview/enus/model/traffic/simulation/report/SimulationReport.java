@@ -469,10 +469,12 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * Facet: true
 	 * DisplayName: report status
 	 * Description: The current status of the simulation report. 
-	 * Val.Stopped.enUS: Stopped
-	 * Val.Completed.enUS: Completed
-	 * Val.Running.enUS: Running
-	 * Val.Error.enUS: Error
+	 * Val.Stop.enUS:Stop
+	 * Val.Stopped.enUS:Stopped
+	 * Val.Completed.enUS:Completed
+	 * Val.Run.enUS:Run
+	 * Val.Running.enUS:Running
+	 * Val.Error.enUS:Error
 	 */
 	protected void _reportStatus(Wrap<String> w) {
 		w.o(reportStatusStopped_enUS);

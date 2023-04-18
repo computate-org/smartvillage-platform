@@ -2249,13 +2249,17 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 	// reportStatus //
 	//////////////////
 
-	public static final String reportStatusStopped1_enUS = " Stopped";
+	public static final String reportStatusStop1_enUS = "Stop";
+	public static final String reportStatusStop_enUS = reportStatusStop1_enUS;
+	public static final String reportStatusStopped1_enUS = "Stopped";
 	public static final String reportStatusStopped_enUS = reportStatusStopped1_enUS;
-	public static final String reportStatusCompleted1_enUS = " Completed";
+	public static final String reportStatusCompleted1_enUS = "Completed";
 	public static final String reportStatusCompleted_enUS = reportStatusCompleted1_enUS;
-	public static final String reportStatusRunning1_enUS = " Running";
+	public static final String reportStatusRun1_enUS = "Run";
+	public static final String reportStatusRun_enUS = reportStatusRun1_enUS;
+	public static final String reportStatusRunning1_enUS = "Running";
 	public static final String reportStatusRunning_enUS = reportStatusRunning1_enUS;
-	public static final String reportStatusError1_enUS = " Error";
+	public static final String reportStatusError1_enUS = "Error";
 	public static final String reportStatusError_enUS = reportStatusError1_enUS;
 
 	/**	 The entity reportStatus
@@ -4179,7 +4183,7 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		return sb.toString();
 	}
 
-	public static final String[] SimulationReportVals = new String[] { reportStatusStopped1_enUS, reportStatusCompleted1_enUS, reportStatusRunning1_enUS, reportStatusError1_enUS };
+	public static final String[] SimulationReportVals = new String[] { reportStatusStop1_enUS, reportStatusStopped1_enUS, reportStatusCompleted1_enUS, reportStatusRun1_enUS, reportStatusRunning1_enUS, reportStatusError1_enUS };
 
 	public static final String CLASS_SIMPLE_NAME = "SimulationReport";
 	public static final String VAR_simulationKey = "simulationKey";
