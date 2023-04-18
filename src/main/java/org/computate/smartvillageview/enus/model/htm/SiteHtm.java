@@ -161,6 +161,7 @@ public class SiteHtm extends SiteHtmGen<BaseResult> {
 	 * Persist: true
 	 * DisplayName: Text
 	 * Description: The text. 
+	 * Val._markdown.enUS:markdown
 	 */
 	protected void _text(List<String> w) {
 	}
@@ -241,6 +242,16 @@ public class SiteHtm extends SiteHtmGen<BaseResult> {
 		}
 		if(b.length() > 0)
 			w.o(b.toString());
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * Text: true
+	 * Persist: true
+	 * DisplayName: HTML middle
+	 * Description: The HTML that comes in the middle. 
+	 */
+	protected void _htmMiddle(List<String> w) {
 	}
 
 	/**

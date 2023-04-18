@@ -12079,6 +12079,8 @@ components:
                     type: boolean
                   htmBefore:
                     type: string
+                  htmMiddle:
+                    type: string
                   htmAfter:
                     type: string
     POSTSiteHtmRequest:
@@ -12119,6 +12121,8 @@ components:
               type: boolean
             htmBefore:
               type: string
+            htmMiddle:
+              type: string
             htmAfter:
               type: string
     POSTSiteHtmResponse:
@@ -12158,6 +12162,8 @@ components:
             newLine:
               type: boolean
             htmBefore:
+              type: string
+            htmMiddle:
               type: string
             htmAfter:
               type: string
@@ -12292,6 +12298,13 @@ components:
             removeHtmBefore:
               type: string
             removeAllHtmBefore:
+              type: string
+            setHtmMiddle:
+              type: string
+              nullable: true
+            removeHtmMiddle:
+              type: string
+            removeAllHtmMiddle:
               type: string
             setHtmAfter:
               type: string
@@ -12432,6 +12445,13 @@ components:
               type: string
             removeAllHtmBefore:
               type: string
+            setHtmMiddle:
+              type: string
+              nullable: true
+            removeHtmMiddle:
+              type: string
+            removeAllHtmMiddle:
+              type: string
             setHtmAfter:
               type: string
               nullable: true
@@ -12477,6 +12497,8 @@ components:
               type: boolean
             htmBefore:
               type: string
+            htmMiddle:
+              type: string
             htmAfter:
               type: string
     PUTImportSiteHtmResponse:
@@ -12517,6 +12539,8 @@ components:
               type: boolean
             htmBefore:
               type: string
+            htmMiddle:
+              type: string
             htmAfter:
               type: string
     GETSiteHtmResponse:
@@ -12556,6 +12580,8 @@ components:
             newLine:
               type: boolean
             htmBefore:
+              type: string
+            htmMiddle:
               type: string
             htmAfter:
               type: string
@@ -17779,6 +17805,13 @@ components:
               type: string
             removeAllReportStatus:
               type: string
+            setReportProgress:
+              type: string
+              nullable: true
+            removeReportProgress:
+              type: string
+            removeAllReportProgress:
+              type: string
             setUpdatedParameters:
               type: array
               nullable: true
@@ -18051,6 +18084,13 @@ components:
               type: string
             removeAllReportStatus:
               type: string
+            setReportProgress:
+              type: string
+              nullable: true
+            removeReportProgress:
+              type: string
+            removeAllReportProgress:
+              type: string
             setUpdatedParameters:
               type: array
               nullable: true
@@ -18177,6 +18217,8 @@ components:
                   paramTotalIterNum:
                     type: string
                   reportStatus:
+                    type: string
+                  reportProgress:
                     type: string
                   updatedParameters:
                     type: array
@@ -18414,6 +18456,13 @@ components:
             removeReportStatus:
               type: string
             removeAllReportStatus:
+              type: string
+            setReportProgress:
+              type: string
+              nullable: true
+            removeReportProgress:
+              type: string
+            removeAllReportProgress:
               type: string
             setUpdatedParameters:
               type: array
@@ -18687,6 +18736,13 @@ components:
               type: string
             removeAllReportStatus:
               type: string
+            setReportProgress:
+              type: string
+              nullable: true
+            removeReportProgress:
+              type: string
+            removeAllReportProgress:
+              type: string
             setUpdatedParameters:
               type: array
               nullable: true
@@ -18800,6 +18856,8 @@ components:
               type: string
             reportStatus:
               type: string
+            reportProgress:
+              type: string
             updatedParameters:
               type: array
             updatedPerformance:
@@ -18877,6 +18935,8 @@ components:
             paramTotalIterNum:
               type: string
             reportStatus:
+              type: string
+            reportProgress:
               type: string
             updatedParameters:
               type: array
@@ -18956,6 +19016,8 @@ components:
               type: string
             reportStatus:
               type: string
+            reportProgress:
+              type: string
             updatedParameters:
               type: array
             updatedPerformance:
@@ -19034,6 +19096,8 @@ components:
               type: string
             reportStatus:
               type: string
+            reportProgress:
+              type: string
             updatedParameters:
               type: array
             updatedPerformance:
@@ -19111,6 +19175,8 @@ components:
             paramTotalIterNum:
               type: string
             reportStatus:
+              type: string
+            reportProgress:
               type: string
             updatedParameters:
               type: array

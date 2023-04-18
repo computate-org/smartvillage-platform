@@ -82,6 +82,7 @@
 		<ongres-scram.version>2.1</ongres-scram.version>
 		<junit.version>5.9.1</junit.version>
 		<mockito.version>4.10.0</mockito.version>
+		<commonmark.version>0.21.0</commonmark.version>
 
 		<quarkus-base.version>2.7.6</quarkus-base.version>
 		<quarkus.version>${quarkus-base.version}.Final-redhat-00006</quarkus.version>
@@ -375,6 +376,14 @@
 			<groupId>org.jfree</groupId>
 			<artifactId>jfreechart</artifactId>
 			<version>${jfreechart.version}</version>
+		</dependency>
+
+		<!-- markdown -->
+
+		<dependency>
+			<groupId>org.commonmark</groupId>
+			<artifactId>commonmark</artifactId>
+			<version>${commonmark.version}</version>
 		</dependency>
 
 		<!-- logging -->

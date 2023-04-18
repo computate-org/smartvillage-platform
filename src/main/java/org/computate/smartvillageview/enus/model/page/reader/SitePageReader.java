@@ -47,6 +47,10 @@ import io.vertx.ext.web.templ.handlebars.HandlebarsTemplateEngine;
 import io.vertx.kafka.client.producer.KafkaProducer;
 import io.vertx.kafka.client.producer.KafkaProducerRecord;
 
+import org.commonmark.node.Node;
+import org.commonmark.parser.Parser;
+import org.commonmark.renderer.html.HtmlRenderer;
+
 public class SitePageReader extends SitePageReaderGen<Object> {
 
 	private Pattern PATTERN_HEADER = Pattern.compile("^h\\d+$");
@@ -428,6 +432,7 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 					}
 	
 					String text = pageItem.getString(SiteHtm.VAR_text);
+					String markdown = pageItem.getString(SiteHtm.text_markdown_enUS);
 					if(text != null) {
 						// Split text by lines and index each line as it's own value
 						Template template = handlebars.compileInline(text);
@@ -442,6 +447,19 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 						String[] strs = text2.split("\r?\n");
 						importItem.put(SiteHtm.VAR_text, new JsonArray().addAll(new JsonArray(Arrays.asList(strs))));
 						page.addObjectText(strs);
+					} else if(markdown != null) {
+						Template template = handlebars.compileInline(markdown);
+						Context engineContext = Context.newBuilder(new JsonObject(json.toString()).getMap()).resolver(templateEngine.getResolvers()).build();
+						String text2 = template.apply(engineContext).replace("&#x27;", "'");
+
+						Parser parser = Parser.builder().build();
+						Node document = parser.parse(text2);
+						HtmlRenderer renderer = HtmlRenderer.builder().build();
+						text2 = renderer.render(document);
+
+						String[] strs = text2.split("\r?\n");
+						importItem.put(SiteHtm.VAR_htmMiddle, new JsonArray().addAll(new JsonArray(Arrays.asList(strs))));
+						page.addObjectText(markdown);
 					}
 	
 					if(addId && StringUtils.isNotBlank(text)) {
@@ -493,6 +511,7 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 							.add(SiteHtm.VAR_url)
 							.add(SiteHtm.VAR_uri)
 							.add(SiteHtm.VAR_text)
+							.add(SiteHtm.VAR_htmMiddle)
 							.add(SiteHtm.VAR_labels)
 							.add(SiteHtm.VAR_inheritPk)
 							);
