@@ -453,17 +453,25 @@ public abstract class SitePageReaderGen<DEV> extends Object {
 	public static final String deletePageDataFail1 = "Importing %s data failed. ";
 	public static final String deletePageDataFail = deletePageDataFail1;
 
+	public static final String importDataSitePagesComplete1 = "Importing all %s data completed. ";
+	public static final String importDataSitePagesComplete = importDataSitePagesComplete1;
+	public static final String importDataSitePagesFail1 = "Importing all %s data failed. ";
+	public static final String importDataSitePagesFail = importDataSitePagesFail1;
+
 	public static final String importDataSitePageComplete1 = "Importing %s data completed. ";
 	public static final String importDataSitePageComplete = importDataSitePageComplete1;
 	public static final String importDataSitePageFail1 = "Importing %s data failed. ";
 	public static final String importDataSitePageFail = importDataSitePageFail1;
+
+	public static final String importFuturesFail1 = "Importing futures failed. ";
+	public static final String importFuturesFail = importFuturesFail1;
 
 	public static final String importSitePageComplete1 = "Importing page completed: %s";
 	public static final String importSitePageComplete = importSitePageComplete1;
 	public static final String importSitePageFail1 = "Importing page failed: %s";
 	public static final String importSitePageFail = importSitePageFail1;
 
-	public static final String importSiteHtmComplete1 = "Importing page htm completed: %s";
+	public static final String importSiteHtmComplete1 = "Importing page htm completed";
 	public static final String importSiteHtmComplete = importSiteHtmComplete1;
 	public static final String importSiteHtmFail1 = "Importing page htm failed: %s";
 	public static final String importSiteHtmFail = importSiteHtmFail1;
@@ -652,7 +660,7 @@ public abstract class SitePageReaderGen<DEV> extends Object {
 		return sb.toString();
 	}
 
-	public static final String[] SitePageReaderVals = new String[] { i18nGeneratorComplete1, i18nGeneratorFail1, i18nGeneratorPathComplete1, i18nGeneratorPathFail1, deletePageDataComplete1, deletePageDataFail1, importDataSitePageComplete1, importDataSitePageFail1, importSitePageComplete1, importSitePageFail1, importSiteHtmComplete1, importSiteHtmFail1 };
+	public static final String[] SitePageReaderVals = new String[] { i18nGeneratorComplete1, i18nGeneratorFail1, i18nGeneratorPathComplete1, i18nGeneratorPathFail1, deletePageDataComplete1, deletePageDataFail1, importDataSitePagesComplete1, importDataSitePagesFail1, importDataSitePageComplete1, importDataSitePageFail1, importFuturesFail1, importSitePageComplete1, importSitePageFail1, importSiteHtmComplete1, importSiteHtmFail1 };
 
 	public static final String CLASS_SIMPLE_NAME = "SitePageReader";
 	public static final String VAR_siteRequest_ = "siteRequest_";

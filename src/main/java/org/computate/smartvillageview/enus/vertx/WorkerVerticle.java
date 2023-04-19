@@ -451,7 +451,7 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 			reader.setHandlebars(handlebars);
 			reader.setKafkaProducer(kafkaProducer);
 			reader.initDeepForClass(siteRequest);
-			reader.importDataSitePage().onComplete(a -> {
+			reader.importDataSitePages().onComplete(a -> {
 				String importPeriod = config().getString(String.format("%s_%s", ConfigKeys.IMPORT_DATA_PERIOD, classSimpleName));
 				if(importPeriod != null && startDateTime != null) {
 					Duration duration = TimeTool.parseNextDuration(importPeriod);

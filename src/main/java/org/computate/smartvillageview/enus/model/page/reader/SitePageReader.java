@@ -31,6 +31,7 @@ import org.computate.vertx.config.ComputateConfigKeys;
 import com.github.jknack.handlebars.Context;
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Template;
+import com.google.common.util.concurrent.Futures;
 
 import io.vertx.config.yaml.YamlProcessor;
 import io.vertx.core.CompositeFuture;
@@ -183,14 +184,15 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 	}
 
 	/**
-	 * Description: Import Site HTML data
-	 * Val.Complete.enUS:Importing %s data completed. 
-	 * Val.Fail.enUS:Importing %s data failed. 
+	 * Description: Import all Site HTML data
+	 * Val.Complete.enUS:Importing all %s data completed. 
+	 * Val.Fail.enUS:Importing all %s data failed. 
 	 */
-	public Future<Void> importDataSitePage() {
+	public Future<Void> importDataSitePages() {
 		Promise<Void> promise = Promise.promise();
 		ZonedDateTime now = ZonedDateTime.now(ZoneId.of(config.getString(ConfigKeys.SITE_ZONE)));
-				i18nGenerator().onSuccess(i18n -> {
+		deletePageData(now).onSuccess(b -> {
+			i18nGenerator().onSuccess(i18n -> {
 				List<String> dynamicPagePaths = Optional.ofNullable(config.getValue(ConfigKeys.DYNAMIC_PAGE_PATHS)).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).stream().map(o -> o.toString()).collect(Collectors.toList());
 				List<String> pagePaths = new ArrayList<>();
 				dynamicPagePaths.forEach(dynamicPagePath -> {
@@ -204,28 +206,84 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 						ExceptionUtils.rethrow(ex);
 					}
 				});
-				List<Future> futures = new ArrayList<>();
 				YamlProcessor yamlProcessor = new YamlProcessor();
 		
-				for(String pagePath : pagePaths) {
-					futures.add(importSitePage(i18n, yamlProcessor, pagePath));
-				}
-				CompositeFuture.all(futures).onSuccess(a -> {
-					LOG.info(String.format(importDataSitePageComplete, SitePage.CLASS_SIMPLE_NAME));
+				importDataSitePage(i18n, yamlProcessor, pagePaths, 0).onSuccess(a -> {
+					LOG.info(String.format(importDataSitePagesComplete, SitePage.CLASS_SIMPLE_NAME));
 					promise.complete();
+				}).onFailure(ex -> {
+					LOG.error(String.format(importDataSitePagesFail, SitePage.CLASS_SIMPLE_NAME), ex);
+					promise.fail(ex);
+				});
+			}).onFailure(ex -> {
+				LOG.error(String.format(importDataSitePagesFail, SitePage.CLASS_SIMPLE_NAME), ex);
+				promise.fail(ex);
+			});
+		}).onFailure(ex -> {
+			LOG.error(String.format(importDataSitePagesFail, SitePage.CLASS_SIMPLE_NAME), ex);
+			promise.fail(ex);
+		});
+		return promise.future();
+	}
+
+	/**
+	 * Description: Import Site HTML data
+	 * Val.Complete.enUS:Importing %s data completed. 
+	 * Val.Fail.enUS:Importing %s data failed. 
+	 */
+	public Future<Void> importDataSitePage(JsonObject i18n, YamlProcessor yamlProcessor, List<String> pagePaths, Integer i) {
+		Promise<Void> promise = Promise.promise();
+		try {
+			if(i < pagePaths.size()) {
+				String pagePath = pagePaths.get(i);
+				importSitePage(i18n, yamlProcessor, pagePath).onSuccess(a -> {
+					importDataSitePage(i18n, yamlProcessor, pagePaths, i + 1).onSuccess(b -> {
+						promise.complete();
+					}).onFailure(ex -> {
+						LOG.error(String.format(importDataSitePageFail, SitePage.CLASS_SIMPLE_NAME), ex);
+						promise.fail(ex);
+					});
 				}).onFailure(ex -> {
 					LOG.error(String.format(importDataSitePageFail, SitePage.CLASS_SIMPLE_NAME), ex);
 					promise.fail(ex);
 				});
-			}).onFailure(ex -> {
-				LOG.error(String.format(importDataSitePageFail, SitePage.CLASS_SIMPLE_NAME), ex);
-				promise.fail(ex);
-			});
-	deletePageData(now).onSuccess(a -> {
-		}).onFailure(ex -> {
+			} else {
+				promise.complete();
+			}
+		} catch(Exception ex) {
 			LOG.error(String.format(importDataSitePageFail, SitePage.CLASS_SIMPLE_NAME), ex);
 			promise.fail(ex);
-		});
+		}
+		return promise.future();
+	}
+
+	/**
+	 * Description: Import futures
+	 * Val.Fail.enUS:Importing futures failed. 
+	 */
+	public Future<Void> importFutures(List<Future> futures, Long i, Long rows) {
+		Promise<Void> promise = Promise.promise();
+		try {
+			if(i < futures.size()) {
+				List<Future> subList = futures.stream().skip(i).limit(rows).collect(Collectors.toList());
+				CompositeFuture.all(subList).onSuccess(b -> {
+					importFutures(futures, i + rows, rows).onSuccess(recordMetadata -> {
+						promise.complete();
+					}).onFailure(ex -> {
+						LOG.error(importFuturesFail, ex);
+						promise.fail(ex);
+					});
+				}).onFailure(ex -> {
+					LOG.error(importFuturesFail, ex);
+					promise.fail(ex);
+				});
+			} else {
+				promise.complete();
+			}
+		} catch(Exception ex) {
+			LOG.error(importFuturesFail, ex);
+			promise.fail(ex);
+		}
 		return promise.future();
 	}
 
@@ -320,7 +378,7 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 							JsonObject pageBody2 = JsonObject.mapFrom(page);
 							json.put("page", pageBody2);
 
-							CompositeFuture.all(futures).onSuccess(b -> {
+							importFutures(futures, 0L, 100L).onSuccess(b -> {
 								JsonObject pageParams = new JsonObject();
 								pageParams.put("body", pageBody2);
 								pageParams.put("path", new JsonObject());
@@ -366,11 +424,12 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 
 	/**
 	 * Description: Import page HTM content
-	 * Val.Complete.enUS:Importing page htm completed: %s
+	 * Val.Complete.enUS:Importing page htm completed
 	 * Val.Fail.enUS:Importing page htm failed: %s
 	 */
 	private Long importSiteHtm(SitePage page, JsonObject json, JsonArray labels, Stack<String> stack, String pageId, String htmGroup, JsonArray pageItems, List<Future> futures, Long sequenceNum) throws Exception {
 		try {
+			String topic = config.getString(ConfigKeys.KAFKA_TOPIC_IMPORT_HTM);
 			Double sort = 0D;
 			for(Integer i = 0; i < pageItems.size(); i++) {
 				// Process a page item, one at a time
@@ -557,7 +616,10 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 					htmParams.put("query", new JsonObject().put("commitWithin", 1000).put("q", "*:*").put("var", new JsonArray().add("refresh:false")));
 					JsonObject htmContext = new JsonObject().put("params", htmParams);
 					JsonObject htmRequest = new JsonObject().put("context", htmContext);
+
 					futures.add(vertx.eventBus().request(String.format("smartabyar-smartvillage-enUS-%s", SiteHtm.CLASS_SIMPLE_NAME), htmRequest, new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", SiteHtm.CLASS_SIMPLE_NAME))));
+					//KafkaProducerRecord<String, String> record = KafkaProducerRecord.create(topic, htmRequest.encode());
+					//futures.add(kafkaProducer.send(record));
 				}
 	
 				if(each != null) {
@@ -663,12 +725,9 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 					JsonObject htmContext = new JsonObject().put("params", htmParams);
 					JsonObject htmRequest = new JsonObject().put("context", htmContext);
 
-					String topic = config.getString(ConfigKeys.KAFKA_TOPIC_IMPORT_HTM);
-					KafkaProducerRecord<String, String> record = KafkaProducerRecord.create(topic, htmRequest.encode());
-					kafkaProducer.send(record).onSuccess(recordMetadata -> {
-					}).onFailure(ex -> {
-						LOG.error(String.format("Could not send record to kafka topic %s: %s", topic, htmRequest.encode()), ex);
-					});
+					futures.add(vertx.eventBus().request(String.format("smartabyar-smartvillage-enUS-%s", SiteHtm.CLASS_SIMPLE_NAME), htmRequest, new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", SiteHtm.CLASS_SIMPLE_NAME))));
+					//KafkaProducerRecord<String, String> record = KafkaProducerRecord.create(topic, htmRequest.encode());
+					//futures.add(kafkaProducer.send(record));
 				}
 	
 				if(e != null) {
