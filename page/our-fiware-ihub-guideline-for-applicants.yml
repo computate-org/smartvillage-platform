@@ -230,7 +230,7 @@ htmBody:
             in:
               - e: i
                 a:
-                  class: fa-solid fa-checkered-flag padding-right-quarter-em
+                  class: fa-solid fa-flag-checkered padding-right-quarter-em
               - e: span
                 text: Here are details for starting a FIWARE iHub. 
           - e: p
@@ -260,7 +260,7 @@ htmBody:
             in:
               - e: i
                 a:
-                  class: fa-solid fa-buildings padding-right-quarter-em
+                  class: fa-solid fa-sitemap padding-right-quarter-em
               - e: span
                 text: 5.2.1 Organization and contact information
           - e: h4
@@ -336,7 +336,7 @@ htmBody:
             in:
               - e: i
                 a:
-                  class: fa-solid fa-buildings padding-right-quarter-em
+                  class: fa-solid fa-people-group padding-right-quarter-em
               - e: span
                 text: 5.2.2 iHub information
           - e: h4
@@ -345,7 +345,7 @@ htmBody:
             in:
               - e: i
                 a:
-                  class: fa-solid fa-building-flag padding-right-quarter-em
+                  class: fa-solid fa-info padding-right-quarter-em
               - e: span
                 text: Our iHub details
           - e: p
@@ -489,7 +489,7 @@ htmBody:
             in:
               - e: i
                 a:
-                  class: fa-solid fa-buildings padding-right-quarter-em
+                  class: fa-solid fa-folder-open padding-right-quarter-em
               - e: span
                 text: 5.2.3 Documents
           - e: h4
@@ -498,7 +498,7 @@ htmBody:
             in:
               - e: i
                 a:
-                  class: fa-solid fa-building-flag padding-right-quarter-em
+                  class: fa-solid fa-file-invoice padding-right-quarter-em
               - e: span
                 text: Required documents for our iHub
           - e: p
@@ -668,7 +668,7 @@ htmBody:
             in:
               - e: i
                 a:
-                  class: fa-solid fa-buildings padding-right-quarter-em
+                  class: fa-solid fa-wave-pulse padding-right-quarter-em
               - e: span
                 text: 5.2.3.1 Activities overview
           - e: h4
@@ -677,7 +677,7 @@ htmBody:
             in:
               - e: i
                 a:
-                  class: fa-solid fa-building-flag padding-right-quarter-em
+                  class: fa-solid fa-calendar-day padding-right-quarter-em
               - e: span
                 text: Our iHub activities
           - e: p
@@ -699,7 +699,7 @@ htmBody:
             in:
               - e: i
                 a:
-                  class: fa-solid fa-buildings padding-right-quarter-em
+                  class: fa-solid fa-calendar-check padding-right-quarter-em
               - e: span
                 text: 5.2.3.2 Activities evidences
           - e: h4
@@ -708,7 +708,7 @@ htmBody:
             in:
               - e: i
                 a:
-                  class: fa-solid fa-building-flag padding-right-quarter-em
+                  class: fa-solid fa-calendar-lines-pen padding-right-quarter-em
               - e: span
                 text: Evidence of our iHub activities
           - e: p
@@ -763,13 +763,10 @@ htmBody:
                 a:
                   class: ""
                 in:
-                  - e: i
-                    a:
-                      class: fa-solid fa-buildings padding-right-quarter-em
                   - e: span
                     text: Meeting at Boston University with FIWARE about our Research and future FIWARE iHub
                     
-              - e: p
+              - e: div
                 a:
                   class: w3-padding 
                 in:
@@ -880,12 +877,9 @@ htmBody:
                 a:
                   class: ""
                 in:
-                  - e: i
-                    a:
-                      class: fa-solid fa-buildings padding-right-quarter-em
                   - e: span
                     text: FIWARE Hackathon at the Red Hat Tech Exchange in Dublin Ireland
-              - e: p
+              - e: div
                 a:
                   class: w3-padding 
                 in:
@@ -994,7 +988,7 @@ htmBody:
             in:
               - e: i
                 a:
-                  class: fa-solid fa-buildings padding-right-quarter-em
+                  class: fa-solid fa-box-check padding-right-quarter-em
               - e: span
                 text: 5.2.3.3 Resources overview
           - e: h4
@@ -1003,9 +997,9 @@ htmBody:
             in:
               - e: i
                 a:
-                  class: fa-solid fa-building-flag padding-right-quarter-em
+                  class: fa-solid fa-boxes-packing padding-right-quarter-em
               - e: span
-                text: The resources required for a FIWARE iHub
+                text: Our FIWARE iHub resources
           - e: p
             a:
               class: w3-padding 
@@ -1025,7 +1019,7 @@ htmBody:
             in:
               - e: i
                 a:
-                  class: fa-solid fa-buildings padding-right-quarter-em
+                  class: fa-solid fa-box-check padding-right-quarter-em
               - e: span
                 text: 5.2.3.4 Resources evidences
           - e: h4
@@ -1034,9 +1028,9 @@ htmBody:
             in:
               - e: i
                 a:
-                  class: fa-solid fa-building-flag padding-right-quarter-em
+                  class: fa-solid fa-boxes-packing padding-right-quarter-em
               - e: span
-                text: The evidence of our FIWARE iHub resources
+                text: Evidence of our FIWARE iHub resources
           - e: p
             a:
               class: w3-padding 
@@ -1079,12 +1073,9 @@ htmBody:
                 a:
                   class: ""
                 in:
-                  - e: i
-                    a:
-                      class: fa-solid fa-buildings padding-right-quarter-em
                   - e: span
                     text: A FIWARE Hackathon pull-up banner
-              - e: p
+              - e: div
                 a:
                   class: w3-padding 
                 in:
@@ -1165,12 +1156,9 @@ htmBody:
                 a:
                   class: ""
                 in:
-                  - e: i
-                    a:
-                      class: fa-solid fa-buildings padding-right-quarter-em
                   - e: span
                     text: 500 FIWARE Smart Cities Reference Architecture flyers
-              - e: p
+              - e: div
                 a:
                   class: w3-padding 
                 in:
@@ -1252,7 +1240,7 @@ htmBody:
             in:
               - e: i
                 a:
-                  class: fa-solid fa-buildings padding-right-quarter-em
+                  class: fa-solid fa-envelope padding-right-quarter-em
               - e: span
                 text: 5.2.3.5 Pledge letter
           - e: h4
@@ -1261,7 +1249,7 @@ htmBody:
             in:
               - e: i
                 a:
-                  class: fa-solid fa-building-flag padding-right-quarter-em
+                  class: fa-solid fa-envelope-open-text padding-right-quarter-em
               - e: span
                 text: Our FIWARE iHub pledge letter
           - e: p
@@ -1311,7 +1299,7 @@ htmBody:
             in:
               - e: i
                 a:
-                  class: fa-solid fa-buildings padding-right-quarter-em
+                  class: fa-solid fa-clipboard-list padding-right-quarter-em
               - e: span
                 text: 5.2.3.6 Action plan
           - e: h4
@@ -1320,7 +1308,7 @@ htmBody:
             in:
               - e: i
                 a:
-                  class: fa-solid fa-building-flag padding-right-quarter-em
+                  class: fa-solid fa-clipboard-list-check padding-right-quarter-em
               - e: span
                 text: Our FIWARE iHub action plan
           - e: div
