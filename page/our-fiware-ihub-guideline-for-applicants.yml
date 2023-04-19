@@ -19,11 +19,14 @@ IHUB_ORG_DESCRIPTION: |
   
   Boston University provides a partnership with Red Hat, advancing research and learning in emerging technologies. 
   The Red Hat Collaboratory connects Boston University faculty and students with industry practitioners working in open-source software communities.
+IHUB_ORG_PROMOTES: |
+  Foster research, development, and collaboration on open source emerging IoT technology powered by FIWARE and Red Hat Cloud and Edge technology for the benefit of all
 IHUB_ORG_CONTACT_NAME: Christopher Tate
+IHUB_ORG_CONTACT_ROLE: Red Hat Principal Software Consultant
 IHUB_ORG_CONTACT_EMAIL: smartabyar-smartvillage@computate.topicbox.com
-IHUB_ORG_CONTACT_PHONE: TODO
+IHUB_ORG_CONTACT_PHONE: +1-***-***-****
 
-IHUB_NAME: Smarta Byar Smart Village iHub with FIWARE
+IHUB_NAME: Smarta Byar Smart Village Community
 IHUB_DESCRIPTION: |
   The Red Hat Global Social Innovation Program is partnering with Boston University and Smarta Byar in order to create a global and open research platform. 
   This will allow researchers to study what social sustainability means by using a digital twin of Veberöd, Sweden as the test village, supported by  Smarta Byar. 
@@ -34,10 +37,10 @@ IHUB_DOMAINS:
   - name: Smart Cities
 IHUB_REGION: North America
 IHUB_COUNTRY: USA
-IHUB_STATE: TODO
-IHUB_CITY: TODO
-IHUB_STREET: TODO
-IHUB_ZIP_CODE: TODO
+IHUB_STATE: Massachusetts
+IHUB_CITY: Boston
+IHUB_STREET: 775 Commonwealth Ave
+IHUB_ZIP_CODE: "02215"
 IHUB_WHY: |
   We learned about the FIWARE Marketplace and the strong community of FIWARE Innovation Hubs and partners while attending the FIWARE Summit. 
   Building with the FIWARE context broker means that we can combine our data with the rest of the FIWARE Marketplace applications to discover new ways to visualize our data. 
@@ -47,7 +50,17 @@ IHUB_REGIONAL_CONNECTION_TO_PUBLIC_AUTHORITIES: |
 IHUB_REGIONAL_DEMANDS: |
   
 IHUB_FIWARE_EXPERIENCE: |
-  
+  - We developed the open source [Smart Village Operator](https://github.com/computate-org/smartvillage-operator/) which runs on Red Hat OpenShift and Kubernetes. 
+    It currently implements the TrafficFlowObserved smart data model as a Kubernetes custom resource definition with more to come. 
+    It's compatible with any Smart Data Model, and easy to extend with new Smart Data Models we have not implemented yet. 
+    It registers the smart data model as a service group on the IOT Agent JSON, and individual devices for each instance of the Smart Data Model custom resource definition you define. 
+  - We developed the [GitOps to deploy the FIWARE IoT Agent JSON](https://github.com/computate-org/smartabyar-smartvillage/tree/main/openshift/kustomize/bundles/iotagent-json) to Red Hat OpenShift and Kubernetes. 
+  - We developed the [GitOps to deploy the FIWARE IoT Agent UL](https://github.com/computate-org/smartabyar-smartvillage/tree/main/openshift/kustomize/bundles/iotagent-ul) to Red Hat OpenShift and Kubernetes. 
+  - We helped with the development and documentation of the [FIWARE Local Marinera development environment on Red Hat OpenShift Local](https://github.com/FIWARE-Ops/marinera/blob/main/documentation/LOCAL_MARINERA.md). 
+  - We developed two reusable [FIWARE Hackathons on GitHub for Smart Cities](https://github.com/orgs/rh-impact/projects/6/views/1) and [Smart Environment](https://github.com/orgs/rh-impact/projects/5/views/1). 
+  - We have open sourced the working architecture for deploying [FIWARE components to the New England Research Cloud OpenShift environment in production](https://github.com/computate-org/smartabyar-smartvillage/tree/main/openshift/kustomize/bundles/fiware). 
+  - We have presented several sessions at the FIWARE Summit 2022 in Gran Canaria, Spain. 
+  - We will be  presenting several more sessions at the FIWARE Summit 2023 in Vienna, Austria. 
 IHUB_EXPECTED_LEVEL: Advanced Services
 
 htmTitle:
@@ -455,7 +468,7 @@ htmBody:
                       - e: span
                         text: Describe your experience with FIWARE
                   - e: dd
-                    text: |-
+                    markdown: |-
                       {{ IHUB_FIWARE_EXPERIENCE }}
               - e: li
                 in:
@@ -859,6 +872,118 @@ htmBody:
                     a:
                       class: w3-image 
                       src: "{{ page.staticBaseUrl }}/png/what-is-this-project/image.png"
+          - e: div
+            a:
+              class: w3-padding 
+            in:
+              - e: h5
+                a:
+                  class: ""
+                in:
+                  - e: i
+                    a:
+                      class: fa-solid fa-buildings padding-right-quarter-em
+                  - e: span
+                    text: FIWARE Hackathon at the Red Hat Tech Exchange in Dublin Ireland
+              - e: p
+                a:
+                  class: w3-padding 
+                in:
+                  - e: ul
+                    in:
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Description
+                          - e: dd
+                            text: |-
+                              Thursday Feb 2, 2022, in both North America and Europe, we hosted a Red Hat Impact Hackathon in partnership with FIWARE. 
+                              The hackathon in North America unfortunately was cancelled due to freezing rain in Dallas Texas at that time, but the EMEA hackathon was a success! 
+                              Participants used your technical and non-technical skills to contribute in teams of 4 to socially impactful Smart Data Models. 
+                              They worked as teams to run OpenShift Local on your own laptop, deploy FIWARE applications into OpenShift, import Smart Data Model data, and visualize the data in your team's own creative ways. 
+                              They learned how FIWARE open standards and open APIs around Smart Solutions are making a huge impact in the world. 
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Date (dd/mm/yy)
+                          - e: dd
+                            text: |-
+                              02/02/23
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Target Audience
+                          - e: dd
+                            markdown: |-
+                              - A Data Specialist understands data models and Open APIs and finds ways to transform and import the data.
+                              - A Deployment Specialist runs business applications as containers and configures secrets that integrate the applications together.
+                              - A visualization specialist, with Creativity and ingenuity that are essential in a hackathon, to turn the team's Smart Model Data into something beautiful.
+                              - A non-technical leader with organizational skills needed to keep the team working as efficiently as possible
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Topics and FIWARE Technologies
+                          - e: dd
+                            markdown: |-
+                              - We contributed to the development and documentation of the [FIWARE Local Marinera development environment on Red Hat OpenShift Local](https://github.com/FIWARE-Ops/marinera/blob/main/documentation/LOCAL_MARINERA.md). 
+                              - We developed two reusable [FIWARE Hackathons on GitHub for Smart Cities](https://github.com/orgs/rh-impact/projects/6/views/1) and [Smart Environment](https://github.com/orgs/rh-impact/projects/5/views/1). 
+                              - Participants practiced installing the FIWARE Context Broker on their own laptops. 
+                              - Participants worked with Smart Data Models as teams to understand how to find and import data. 
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Number of participants
+                          - e: dd
+                            text: |-
+                              14
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Additional info
+                          - e: dd
+                            in:
+                              - e: span
+                                text: |-
+                                  We learned some valuable insights on how to improve the deployment of the FIWARE Context Broker and related components on OpenShift. 
+                                  We found that the 6 Apple computers with M1 ARM computers had trouble deploying ArgoCD on OpenShift, which is valuable feedback to the developers of the GitOps Operator. 
+                                  We also learned it's more useful as a 2 day event, so that participants have more time to digest the information and create results. 
+                                  It's important not to let the hackathon compete with other technical sessions that the participants want to join. 
+                                  There can be little issues with the wifi bandwidth downloading CRC and images, and it's better to prepare the environment before the hackathon. 
+                                  We should focus  more on Edge Tech, IOT Agent, MicroShift, to make it more interesting. 
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Photo or media
+              - e: p
+                a:
+                  class: w3-padding 
+                in:
+                  - e: img
+                    a:
+                      class: w3-image 
+                      style: |
+                        max-width: 600px; max-height: 600px; 
+                      src: "{{ page.staticBaseUrl }}/jpg/2023-fiware-hackathon-emea/2023-fiware-hackathon-emea-1.jpg"
+                  - e: img
+                    a:
+                      class: w3-image 
+                      style: |
+                        max-width: 600px; max-height: 600px; 
+                      src: "{{ page.staticBaseUrl }}/jpg/2023-fiware-hackathon-emea/2023-fiware-hackathon-emea-2.jpg"
       - e: div
         a:
           class: w3-padding 
@@ -925,57 +1050,12 @@ htmBody:
                 in:
                   - e: span
                     text: |
-                      iHub Name
-              - e: li
-                in:
-                  - e: span
-                    text: |
-                      Contact info
-              - e: li
-                in:
-                  - e: span
-                    text: |
-                      Expected iHub Level
-              - e: li
-                in:
-                  - e: span
-                    text: |
-                      Country
-              - e: li
-                in:
-                  - e: span
-                    text: |
-                      Resources Resume
-              - e: li
-                in:
-                  - e: span
-                    text: |
-                      Resource Code
-              - e: li
-                in:
-                  - e: span
-                    text: |
-                      Date
-              - e: li
-                in:
-                  - e: span
-                    text: |
                       Resource Name
               - e: li
                 in:
                   - e: span
                     text: |
-                      Resource example
-              - e: li
-                in:
-                  - e: span
-                    text: |
                       Description
-              - e: li
-                in:
-                  - e: span
-                    text: |
-                      Example description
               - e: li
                 in:
                   - e: span
@@ -991,6 +1071,177 @@ htmBody:
                   - e: span
                     text: |
                       Additional information
+          - e: div
+            a:
+              class: w3-padding 
+            in:
+              - e: h5
+                a:
+                  class: ""
+                in:
+                  - e: i
+                    a:
+                      class: fa-solid fa-buildings padding-right-quarter-em
+                  - e: span
+                    text: A FIWARE Hackathon pull-up banner
+              - e: p
+                a:
+                  class: w3-padding 
+                in:
+                  - e: ul
+                    in:
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Resource Name
+                          - e: dd
+                            in:
+                              - e: span
+                                text: |-
+                                  A FIWARE Hackathon pull-up banner
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Description
+                          - e: dd
+                            in:
+                              - e: span
+                                text: |-
+                                  A reusable banner for placing outside of a FIWARE Hackathon to draw people to participate at an in-person event. 
+                                  It worked quite well leading up to the FIWARE Hackathon for the Red Hat Tech Exchange in Dallas. 
+                                  I talked to many people that day about FIWARE and they learned a lot. 
+                                  Unfortunately the Dallas hackathon was cancelled because of an ice storm that came through the area. 
+                                  But the sign was very effective at promoting FIWARE technology at Red Hat. 
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Target Audience
+                          - e: dd
+                            in:
+                              - e: span
+                                text: |-
+                                  Technical audience interested in edge, smart device technology. 
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Additional information
+                          - e: dd
+                            in:
+                              - e: span
+                                text: |-
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Media resources / Photos
+                          - e: dd
+                            in:
+                              - e: span
+                                text: |-
+              - e: p
+                a:
+                  class: w3-padding 
+                in:
+                  - e: img
+                    a:
+                      class: w3-image 
+                      style: |
+                        max-width: 600px; max-height: 600px; 
+                      src: "{{ page.staticBaseUrl }}/jpg/2023-fiware-hackathon-na/hackathon-banner.jpg"
+          - e: div
+            a:
+              class: w3-padding 
+            in:
+              - e: h5
+                a:
+                  class: ""
+                in:
+                  - e: i
+                    a:
+                      class: fa-solid fa-buildings padding-right-quarter-em
+                  - e: span
+                    text: 500 FIWARE Smart Cities Reference Architecture flyers
+              - e: p
+                a:
+                  class: w3-padding 
+                in:
+                  - e: ul
+                    in:
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Resource Name
+                          - e: dd
+                            in:
+                              - e: span
+                                text: |-
+                                  500 FIWARE Smart Cities Reference Architecture flyers
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Description
+                          - e: dd
+                            in:
+                              - e: span
+                                text: |-
+                                  The official FIWARE Smart Cities Reference Architecture flyers. 
+                                  It also includes the page about "System of Systems Approach for a Smart City Reference Architecture". 
+                                  It worked quite well leading up to the FIWARE Hackathon for the Red Hat Tech Exchange in Dallas. 
+                                  I talked to many people that day about FIWARE and shared some of these flyers, and they learned a lot. 
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Target Audience
+                          - e: dd
+                            in:
+                              - e: span
+                                text: |-
+                                  Technical audience interested in edge, smart device technology. 
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Additional information
+                          - e: dd
+                            in:
+                              - e: span
+                                text: |-
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Media resources / Photos
+                          - e: dd
+                            in:
+                              - e: span
+                                text: |-
+              - e: p
+                a:
+                  class: w3-padding 
+                in:
+                  - e: img
+                    a:
+                      class: w3-image 
+                      style: |
+                        max-width: 600px; max-height: 600px; 
+                      src: "{{ page.staticBaseUrl }}/jpg/2023-fiware-hackathon-na/fiware-smart-cities-reference-architecture-flyers.jpg"
       - e: div
         a:
           class: w3-padding 
@@ -1023,18 +1274,33 @@ htmBody:
                   Must be fulfilled and signed by the head of iHub entity or a legal representative. 
           - e: div
             class: w3-card w3-padding w3-margin-top w3-show w3-white 
-            in:
-              - e: p
-                class: w3-xlarge font-weight-bold 
-                in:
-                  - e: span
-                    text: |
-                      Responsibility pledge letter
-              - e: p
-                in:
-                  - e: span
-                    text: |
-                      TODO
+            markdown: |
+              # Responsibility pledge letter
+
+              The undersigned: *{{ IHUB_ORG_CONTACT_NAME }}*
+
+              - representing the FIWARE iHub of *{{ IHUB_ORG_NAME }}* as *{{ IHUB_ORG_CONTACT_ROLE }}* of this project full official name: *{{ IHUB_NAME }}*
+               
+              1. Declares that: 
+
+                  a. *{{ IHUB_NAME }}* FIWARE iHub is a private non governmental project run by *{{ IHUB_ORG_NAME }}* to support and promote *{{ IHUB_ORG_PROMOTES }}*; 
+
+                  b. *{{ IHUB_NAME }}* FIWARE iHub will accompany the local communities of Latin América in the design and implementation of innovative initiatives for a sustainable and inclusive human development that, through the use of *FIWARE platform*, with new technologies and smart and participative management models, improve the quality of life of current and future generations For this, it promotes social and productive transformation, valuing and respecting the natural and cultural heritage. 
+
+                  c. To achieve this, training actions on the reference technologies will be carried out and will help boost FIWARE technology; 
+
+              2. Declares that *{{ IHUB_NAME }}* FIWARE iHub: 
+
+                  a. has not made false declarations in supplying the information required by the as a condition of participation in FIWARE iHub Call for Proposals of or does not fail to supply this information; 
+
+                  b. have all resources that have been included in the FIWARE iHub Resources file. 
+
+                  c. aim to comply all activities that have been included in the FIWARE iHub Action plan file. 
+
+              Full name: {{ IHUB_ORG_CONTACT_NAME }}<br/>
+              Position: {{ IHUB_ORG_CONTACT_ROLE }}
+               
+              Date: Apr 18th 2023
       - e: div
         a:
           class: w3-padding 
@@ -1057,13 +1323,158 @@ htmBody:
                   class: fa-solid fa-building-flag padding-right-quarter-em
               - e: span
                 text: Our FIWARE iHub action plan
-          - e: p
+          - e: div
             a:
               class: w3-padding 
             in:
               - e: span
                 text: |
                   In case you have no previous experience with FIWARE, you have to describe your action plan for the next year, provide the activities you will perform, Gantt chart etc.
+              - e: ul
+                in:
+                  - e: li
+                    in:
+                      - e: dt
+                        in:
+                          - e: span
+                            text: Presentations at FIWARE Summit 2023 in Vienna, June 12
+                      - e: dd
+                        in:
+                          - e: span
+                            text: |-
+                              We will be  presenting several more sessions at the FIWARE Summit 2023 in Vienna, Austria. 
+                              Speakers will include Christopher Tate, David Hanacek, and possibly others from Red Hat. 
+                  - e: li
+                    in:
+                      - e: dt
+                        in:
+                          - e: span
+                            text: Add CrowdFlowObserved smart data model to Smart Village Operator
+                      - e: dd
+                        in:
+                          - e: span
+                            text: |-
+                              Before June 2023, we will integrate the CrowdFlowObserved smart data model into our Smart Village Operator. 
+                              This will allow automatic registration of the model as a service group in the IOT Agent. 
+                              It will also automatically register individual devices for each CrowdFlowObserved custom resource definition created. 
+                              This also integrates the device with our Smarta Byar Smart Village application to complete the integration with FIWARE components. 
+                  - e: li
+                    in:
+                      - e: dt
+                        in:
+                          - e: span
+                            text: Add CrowdFlowObserved smart data model to Smart Village Operator
+                      - e: dd
+                        in:
+                          - e: span
+                            text: |-
+                              Before June 2023, we will integrate a brand new SmartTrafficLight smart data model into our Smart Village Operator. 
+                              This will allow automatic registration of the model as a service group in the IOT Agent. 
+                              It will also automatically register individual devices for each SmartTrafficLight custom resource definition created. 
+                              This also integrates the device with our Smarta Byar Smart Village application to complete the integration with FIWARE components. 
+                  - e: li
+                    in:
+                      - e: dt
+                        in:
+                          - e: span
+                            text: Add FiwareMongoDb custom resource definition to Smart Village Operator
+                      - e: dd
+                        in:
+                          - e: span
+                            text: |-
+                              Before June 2023, we will integrate a brand new FiwareMongodb custom resource definition into our Smart Village Operator. 
+                              This will allow automatic deployment of MongoDB as a service running on OpenShift/Kubernetes using the existing FIWARE Marinera helm chart. 
+                  - e: li
+                    in:
+                      - e: dt
+                        in:
+                          - e: span
+                            text: Add OrionLdContextBroker custom resource definition to Smart Village Operator
+                      - e: dd
+                        in:
+                          - e: span
+                            text: |-
+                              Before June 2023, we will integrate a brand new OrionLdContextBroker custom resource definition into our Smart Village Operator. 
+                              This will allow automatic deployment of the Orion-LD Context Broker as a service running on OpenShift/Kubernetes using the existing FIWARE Marinera helm chart. 
+                              This will automatically register itself with FiwareMongoDb. 
+                  - e: li
+                    in:
+                      - e: dt
+                        in:
+                          - e: span
+                            text: Add IotAgentJson custom resource definition to Smart Village Operator
+                      - e: dd
+                        in:
+                          - e: span
+                            text: |-
+                              Before June 2023, we will integrate a brand new IotAgentJson custom resource definition into our Smart Village Operator. 
+                              This will allow automatic deployment of the iotagent-json as a service running on OpenShift/Kubernetes using the existing FIWARE Marinera helm chart. 
+                              This will automatically register itself with FiwareMongoDb. 
+                              The iotagent-json will also automatically register with the OrionLdContextBroker. 
+                  - e: li
+                    in:
+                      - e: dt
+                        in:
+                          - e: span
+                            text: Prepare reusable training of FIWARE components on OpenShift
+                      - e: dd
+                        in:
+                          - e: span
+                            text: |-
+                              Before June 2023, we will develop training materials to help technical users deploy FIWARE Components on Red Hat OpenShift. 
+                              This will include all of the custom resource definitions defined in our Smart Village Operator explained above. 
+                  - e: li
+                    in:
+                      - e: dt
+                        in:
+                          - e: span
+                            text: Deploy FIWARE Components to the New England Research Cloud
+                      - e: dd
+                        in:
+                          - e: span
+                            markdown: |-
+                              Before June 2023, We plan to migrate our [Smart Village site](https://smartvillage.computate.org) and all of it's new FIWARE components from the Operate First environment, to the New England Research Cloud (NERC) environment. 
+                  - e: li
+                    in:
+                      - e: dt
+                        in:
+                          - e: span
+                            text: Prepare for future FIWARE hackathons
+                      - e: dd
+                        in:
+                          - e: span
+                            text: |-
+                              After June 2023, we will enhance our existing hackathon with the latest FIWARE and Red Hat Technology. 
+                              This will include new instructions on the deployment of an IOT Agent. 
+                              It will also involve more event driven messaging. 
+                              We plan on delivering a future hackathon at a future FIWARE Summit. 
+                              We also plan on delivering a future hackathon at a future North America Red Hat Tech Exchange. 
+                  - e: li
+                    in:
+                      - e: dt
+                        in:
+                          - e: span
+                            text: Promote FIWARE Technology on Youtube
+                      - e: dd
+                        in:
+                          - e: span
+                            text: |-
+                              Continue to share videos on Youtube promoting FIWARE Technology running on Red Hat OpenShift. 
+                              Also share these videos on Linked In. 
+                  - e: li
+                    in:
+                      - e: dt
+                        in:
+                          - e: span
+                            text: Publish articles about our research with FIWARE on the Red Hat Research Blog and FIWARE Blog
+                      - e: dd
+                        in:
+                          - e: span
+                            text: |-
+                              The Red Hat Research team that enables this collaboratory project publishes research articles on it's blog. 
+                              We will continue writing new articles that show the power of FIWARE in our research solutions. 
+                              We can also share these with FIWARE's blog. 
+
   - e: div
     label:
       - infographic
