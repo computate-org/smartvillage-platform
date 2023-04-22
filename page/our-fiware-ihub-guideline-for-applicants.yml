@@ -38,17 +38,24 @@ IHUB_DOMAINS:
 IHUB_REGION: North America
 IHUB_COUNTRY: USA
 IHUB_STATE: Massachusetts
-IHUB_CITY: Boston
-IHUB_STREET: 775 Commonwealth Ave
-IHUB_ZIP_CODE: "02215"
-IHUB_WHY: |
+IHUB_CITY: Brookline
+IHUB_STREET: |
+  Engineering:
+  Division of Systems Engineering
+  15 St. Mary's St.
+  Boston University
+IHUB_ZIP_CODE: "02446"
+IHUB_WHY: >
   We learned about the FIWARE Marketplace and the strong community of FIWARE Innovation Hubs and partners while attending the FIWARE Summit. 
   Building with the FIWARE context broker means that we can combine our data with the rest of the FIWARE Marketplace applications to discover new ways to visualize our data. 
   FIWARE's Smart Data Models align with our smart solutions as well, and the FIWARE Context Broker supports all of these data models, which is why our project is now powered by a FIWARE Context Broker. 
-IHUB_REGIONAL_CONNECTION_TO_PUBLIC_AUTHORITIES: |
-  
-IHUB_REGIONAL_DEMANDS: |
-  
+IHUB_REGIONAL_CONNECTION_TO_PUBLIC_AUTHORITIES: >
+  We have connections with the Boston Mayor’s Office for New Urban Dynamics. 
+  But right now our mission is focused on Veberod where we obviously have lots of connections through Jan Malmgren.
+IHUB_REGIONAL_DEMANDS: >
+  Once our platform is ready for outside users, 
+  our plan is to inform our Boston contacts and ask them to test it and provide feedback.
+
 IHUB_FIWARE_EXPERIENCE: |
   - We developed the open source [Smart Village Operator](https://github.com/computate-org/smartvillage-operator/) which runs on Red Hat OpenShift and Kubernetes. 
     It currently implements the TrafficFlowObserved smart data model as a Kubernetes custom resource definition with more to come. 
@@ -1065,6 +1072,172 @@ htmBody:
                   - e: span
                     text: |
                       Additional information
+          - e: div
+            a:
+              class: w3-padding 
+            in:
+              - e: h5
+                a:
+                  class: ""
+                in:
+                  - e: span
+                    text: Boston University Center for Information and Systems Engineering (CISE)
+              - e: div
+                a:
+                  class: w3-padding 
+                in:
+                  - e: ul
+                    in:
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Resource Name
+                          - e: dd
+                            in:
+                              - e: span
+                                text: |-
+                                  Boston University Center for Information and Systems Engineering (CISE)
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Description
+                          - e: dd
+                            in:
+                              - e: span
+                                text: >
+                                  Opened in 2022, the center is state of the art in every way: striking architecture, advanced resources, environmental sensitivity, and interior spaces designed to facilitate collaboration. 
+                                  Rising above Central Campus, the 19-story structure (17 occupied floors above grade topped by two levels of mechanical equipment, plus two levels below grade) 
+                                  houses the departments of mathematics & statistics and computer science, the newly created Faculty for Computing and Data Sciences, 
+                                  as well as the renowned Rafik B. Hariri Institute for Computing and Computational Science & Engineering. 
+                                  It’s just the latest commitment to data sciences by a university already acknowledged as a leader in this booming field.
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Target Audience
+                          - e: dd
+                            in:
+                              - e: span
+                                text: |-
+                                  Technical audience interested in edge, smart device technology. 
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Additional information
+                          - e: dd
+                            in:
+                              - e: span
+                                text: |-
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Media resources / Photos
+                          - e: dd
+                            in:
+                              - e: span
+                                text: |-
+              - e: p
+                a:
+                  class: w3-padding 
+                in:
+                  - e: img
+                    a:
+                      class: w3-image 
+                      style: |
+                        max-width: 600px; max-height: 600px; 
+                      src: "{{ page.staticBaseUrl }}/jpg/boston-university/boston-university.jpg"
+          - e: div
+            a:
+              class: w3-padding 
+            in:
+              - e: h5
+                a:
+                  class: ""
+                in:
+                  - e: span
+                    text: New England Research Cloud OpenShift and OpenStack environment
+              - e: div
+                a:
+                  class: w3-padding 
+                in:
+                  - e: ul
+                    in:
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Resource Name
+                          - e: dd
+                            in:
+                              - e: span
+                                text: |-
+                                  New England Research Cloud OpenShift and OpenStack environment
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Description
+                          - e: dd
+                            in:
+                              - e: span
+                                markdown: >
+                                  We are delighted to announce that Red Hat's OpenShift Container Platform is now available on the [New England Research Cloud (NERC)](https://nerc-project.github.io/nerc-docs/about/). 
+                                  A open source partner cloud environment brought to you by Red Hat, Boston University, Harvard University, Massachusetts Green High Performance Computing Center, and MOC Alliance. 
+                                  This state-of-the-art platform enables you and your team to deploy containerized applications in a cloud-native environment, 
+                                  providing a reliable, isolated, and scalable solution for your complex research computing needs. 
+                                  This new offering further elevates overall NERC's goals around building a secure, reliable, and cost-effective on-prem cloud computing platform for research and teaching.
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Target Audience
+                          - e: dd
+                            in:
+                              - e: span
+                                text: |-
+                                  Technical audience interested in cloud, edge, smart device technology. 
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Additional information
+                          - e: dd
+                            in:
+                              - e: span
+                                text: |-
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Media resources / Photos
+                          - e: dd
+                            in:
+                              - e: span
+                                text: |-
+              - e: p
+                a:
+                  class: w3-padding 
+                in:
+                  - e: img
+                    a:
+                      class: w3-image 
+                      style: |
+                        max-width: 600px; max-height: 600px; 
+                      src: "{{ page.staticBaseUrl }}/png/nerc/NERC-Diagram-MOC.png"
           - e: div
             a:
               class: w3-padding 
