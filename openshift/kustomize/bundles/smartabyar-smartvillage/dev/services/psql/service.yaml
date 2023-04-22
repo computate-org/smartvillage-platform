@@ -1,0 +1,19 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: psql
+  namespace: smartvillage
+spec:
+  ports:
+    - name: psql
+      protocol: TCP
+      port: 5432
+      targetPort: 5432
+      nodePort: 30432
+  type: NodePort
+  selector:
+    postgres-operator.crunchydata.com/cluster: postgres
+    postgres-operator.crunchydata.com/data: postgres
+    postgres-operator.crunchydata.com/instance-set: smartvillage
+    postgres-operator.crunchydata.com/patroni: postgres-ha
+    postgres-operator.crunchydata.com/role: master

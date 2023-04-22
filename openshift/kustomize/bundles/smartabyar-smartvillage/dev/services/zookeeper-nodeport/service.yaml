@@ -2,7 +2,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: zookeeper-nodeport
-  namespace: solr
+  namespace: smartvillage
 spec:
   ports:
     - name: default-solrcloud-zookeeper-client

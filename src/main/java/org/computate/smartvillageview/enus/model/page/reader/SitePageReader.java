@@ -387,14 +387,8 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 								JsonObject pageContext = new JsonObject().put("params", pageParams);
 								JsonObject pageRequest = new JsonObject().put("context", pageContext);
 
-								String topic = config.getString(ConfigKeys.KAFKA_TOPIC_IMPORT_PAGE);
-								KafkaProducerRecord<String, String> record = KafkaProducerRecord.create(topic, pageRequest.encode());
-								kafkaProducer.send(record).onSuccess(recordMetadata -> {
-									promise.complete();
-								}).onFailure(ex -> {
-									LOG.error(String.format("Could not send record to kafka topic %s: %s", topic, pageRequest.encode()), ex);
-									promise.fail(ex);
-								});
+								futures.add(vertx.eventBus().request(String.format("smartabyar-smartvillage-enUS-%s", SiteHtm.CLASS_SIMPLE_NAME), pageRequest, new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", SitePage.CLASS_SIMPLE_NAME))));
+								promise.complete();
 							}).onFailure(ex -> {
 								LOG.error(String.format(importSitePageFail, pageBody2.getString(SitePage.VAR_id)), ex);
 								promise.fail(ex);
@@ -429,8 +423,6 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 	 */
 	private Long importSiteHtm(SitePage page, JsonObject json, JsonArray labels, Stack<String> stack, String pageId, String htmGroup, JsonArray pageItems, List<Future> futures, Long sequenceNum) throws Exception {
 		try {
-			String topic = config.getString(ConfigKeys.KAFKA_TOPIC_IMPORT_HTM);
-			Double sort = 0D;
 			for(Integer i = 0; i < pageItems.size(); i++) {
 				// Process a page item, one at a time
 				JsonObject pageItem = (JsonObject)pageItems.getValue(i);

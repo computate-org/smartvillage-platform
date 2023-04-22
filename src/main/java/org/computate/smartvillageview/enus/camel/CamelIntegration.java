@@ -79,34 +79,6 @@ public class CamelIntegration extends CamelIntegrationGen<Object> {
 				public void configure() {
 
 					from(String.format("vertx-kafka:%s?bootstrapServers=%s&groupId=%s&securityProtocol=%s&sslKeystoreLocation=%s&sslKeystorePassword=%s&sslTruststoreLocation=%s&sslTruststorePassword=%s&seekToPosition=end"
-							, config.getString(ConfigKeys.KAFKA_TOPIC_IMPORT_PAGE)
-							, config.getString(ConfigKeys.KAFKA_BROKERS)
-							, config.getString(ConfigKeys.KAFKA_GROUP)
-							, config.getString(ConfigKeys.KAFKA_SECURITY_PROTOCOL)
-							, config.getString(ConfigKeys.KAFKA_SSL_KEYSTORE_LOCATION)
-							, config.getString(ConfigKeys.KAFKA_SSL_KEYSTORE_PASSWORD)
-							, config.getString(ConfigKeys.KAFKA_SSL_TRUSTSTORE_LOCATION)
-							, config.getString(ConfigKeys.KAFKA_SSL_TRUSTSTORE_PASSWORD)
-							))
-					.bean(CamelIntegration.class, "exchangeToJsonObject")
-					.to(String.format("vertx:%s?exchangePattern=InOut", importPageConsumer))
-					.end();
-
-					from(String.format("vertx-kafka:%s?bootstrapServers=%s&groupId=%s&securityProtocol=%s&sslKeystoreLocation=%s&sslKeystorePassword=%s&sslTruststoreLocation=%s&sslTruststorePassword=%s&seekToPosition=end"
-							, config.getString(ConfigKeys.KAFKA_TOPIC_IMPORT_HTM)
-							, config.getString(ConfigKeys.KAFKA_BROKERS)
-							, config.getString(ConfigKeys.KAFKA_GROUP)
-							, config.getString(ConfigKeys.KAFKA_SECURITY_PROTOCOL)
-							, config.getString(ConfigKeys.KAFKA_SSL_KEYSTORE_LOCATION)
-							, config.getString(ConfigKeys.KAFKA_SSL_KEYSTORE_PASSWORD)
-							, config.getString(ConfigKeys.KAFKA_SSL_TRUSTSTORE_LOCATION)
-							, config.getString(ConfigKeys.KAFKA_SSL_TRUSTSTORE_PASSWORD)
-							))
-					.bean(CamelIntegration.class, "exchangeToJsonObject")
-					.to(String.format("vertx:%s?exchangePattern=InOut", importHtmConsumer))
-					.end();
-
-					from(String.format("vertx-kafka:%s?bootstrapServers=%s&groupId=%s&securityProtocol=%s&sslKeystoreLocation=%s&sslKeystorePassword=%s&sslTruststoreLocation=%s&sslTruststorePassword=%s&seekToPosition=end"
 							, config.getString(ConfigKeys.KAFKA_TOPIC_SUMO_RUN_REPORT)
 							, config.getString(ConfigKeys.KAFKA_BROKERS)
 							, config.getString(ConfigKeys.KAFKA_GROUP)
