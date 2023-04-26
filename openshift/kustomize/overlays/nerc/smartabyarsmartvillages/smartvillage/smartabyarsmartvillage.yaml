@@ -1,0 +1,200 @@
+apiVersion: smartvillage.computate.org/v1
+kind: SmartaByarSmartVillage
+metadata:
+  labels:
+    app.kubernetes.io/name: smartabyarsmartvillage
+    app.kubernetes.io/instance: smartabyarsmartvillage-sample
+    app.kubernetes.io/part-of: smartvillage-operator
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: smartvillage-operator
+  name: smartvillage
+  namespace: smartvillage
+spec:
+  description: |
+    Red Hat Global Social Innovation Program is partnering with Boston University and Smarta Byar 
+    in order to collaborate on creating a global and open research platform allowing researchers 
+    to study what social sustainability means by using a digital twin of Veberöd, Sweden 
+    as the test village, supported by Smarta Byar.
+
+  site:
+    enable_dev_nodeports: False
+    web_replicas: 3
+    worker_replicas: 1
+    limits_memory: |-
+      1000Mi
+    limits_cpu: |-
+      2
+    requests_memory: |-
+      500Mi
+    requests_cpu: |-
+      1
+    name: |-
+      smartvillage
+    secret_name: |-
+      smartvillage
+    host_name: |-
+      smartvillage.apps-crc.testing
+    zone: |-
+      America/New_York
+    locale: |-
+      en-US
+    instances: 3
+    static_base_url: |-
+      http://localhost:12080/static
+    template_path: |-
+      /home/ctate/.local/src/smartabyar-smartvillage/src/main/resources/templates
+    worker_pool_size: 1
+    enable_zookeeper_cluster: True
+    ssl_verify: False
+    default_map_location: |-
+      55.61888,13.548799
+    default_map_zoom: 11
+    vertx_warning_exception_seconds: 60
+    java_opts: |-
+      
+    route:
+      create: True
+  zookeeper:
+    service_name: |-
+      default-solrcloud-zookeeper-client
+    port: 2181
+    max_retries: 0
+    base_sleep_time_millis: 5000
+    max_sleep_millis: 5000
+    connection_timeout_millis: 3000
+    session_timeout_millis: 5000
+  sso:
+    create: True
+    host_name: |-
+      keycloak-sso.apps-crc.testing
+    cluster_name: |-
+      sso
+    postgres_secret_name: |-
+      postgres-pguser-sso
+    client_secret_name: |-
+      keycloak-client-secret-smartvillage
+  auth:
+    port: 443
+    ssl: True
+    realm: |-
+      SMARTVILLAGE
+    client: |-
+      smartvillage
+    token_uri: |-
+      /auth/realms/SMARTVILLAGE/protocol/openid-connect/token
+  postgres:
+    service_name: |-
+      postgres-primary
+    port: 5432
+    cluster_name: |-
+      postgres
+    secret_name: |-
+      postgres-pguser-smartvillage
+    create: True
+  solr:
+    service_name: |-
+      default-solrcloud-common
+    port: 80
+    ssl: False
+    route:
+      create: False
+      host_name: |-
+        solr.apps-crc.testing
+    collection: |-
+      smartvillage
+  email:
+    enabled: False
+  import_data:
+    enabled: True
+    sitepage:
+      enabled: True
+    sitehtm:
+      enabled: True
+    iotnode:
+      enabled: False
+  auth_role:
+    admin: |-
+      SiteAdmin
+    siteuser: |-
+      SiteAdmin
+    sitepage: |-
+      SiteAdmin
+    sitehtm: |-
+      SiteAdmin
+    iotnode: |-
+      SiteAdmin
+    mapresult: |-
+      SiteAdmin
+    iotnodestep: |-
+      SiteAdmin
+    vehiclestep: |-
+      SiteAdmin
+    personstep: |-
+      SiteAdmin
+    trafficlight: |-
+      SiteAdmin
+    trafficlightstep: |-
+      SiteAdmin
+    trafficsimulation: |-
+      SiteAdmin
+    simulationreport: |-
+      SiteAdmin
+    systemevent: |-
+      SiteAdmin
+    bicyclestep: |-
+      SiteAdmin
+    timestep: |-
+      SiteAdmin
+    trafficflowobserved: |-
+      SiteAdmin
+  sumo:
+    executable_path: |-
+      /home/ctate/.local/bin/sumo
+    python_executable_path: |-
+      /home/ctate/python/bin/python
+    fcd_sync_path: |-
+      /home/ctate/.local/share/sumo/data/veberod/fcd
+  yggio:
+    enabled: False
+    port: 443
+    ssl: True
+    username: |-
+      /v2
+    api_relative_uri_iotnode: |-
+      /api/iotnodes
+    auth_local_uri: |-
+      /api/auth/local
+  fiware:
+    ssl: False
+    port: 80
+    host_name: |-
+      orion-ld
+    api_uri: |-
+      /v2
+  kafka:
+    keystore_secret: |-
+      smartvillage-kafka
+    truststore_secret: |-
+      smartvillage-kafka-cluster-ca-cert
+    service_name: |-
+      smartvillage-kafka-kafka-bootstrap
+    port: 9093
+    group: |-
+      smartvillage-kafka
+    security_protocol: |-
+      SSL
+    ssl_keystore_type: |-
+      PKCS12
+    ssl_keystore_location: |-
+      /opt/kafka/keystore/user.p12
+    ssl_truststore_type: |-
+      PKCS12
+    ssl_truststore_location: |-
+      /opt/kafka/truststore/ca.p12
+  mqtt:
+    enabled: True
+    service_name: |-
+      fiware-broker-mqtt-0-svc
+    port: 1883
+    iot_subscribe_topic: |-
+      iot-subscribe
