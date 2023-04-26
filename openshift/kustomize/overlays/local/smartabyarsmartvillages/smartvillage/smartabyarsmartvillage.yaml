@@ -17,6 +17,7 @@ spec:
     as the test village, supported by Smarta Byar.
 
   site:
+    create: true
     enable_dev_nodeports: False
     web_replicas: 3
     worker_replicas: 1
@@ -61,6 +62,16 @@ spec:
     max_sleep_millis: 5000
     connection_timeout_millis: 3000
     session_timeout_millis: 5000
+    limits:
+      memory: |-
+        500Mi
+      cpu: |-
+        500m
+    requests:
+      memory: |-
+        200Mi
+      cpu: |-
+        200m
   sso:
     create: false
     host_name: |-
@@ -81,6 +92,7 @@ spec:
     token_uri: |-
       /auth/realms/SMARTVILLAGE/protocol/openid-connect/token
   postgres:
+    create: true
     service_name: |-
       postgres-primary
     port: 5432
@@ -88,8 +100,18 @@ spec:
       postgres
     secret_name: |-
       postgres-pguser-smartvillage
-    create: True
+    limits:
+      memory: |-
+        500Mi
+      cpu: |-
+        500m
+    requests:
+      memory: |-
+        200Mi
+      cpu: |-
+        200m
   solr:
+    create: true
     service_name: |-
       default-solrcloud-common
     port: 80
@@ -100,6 +122,16 @@ spec:
         solr.apps-crc.testing
     collection: |-
       smartvillage
+    limits:
+      memory: |-
+        1Gi
+      cpu: |-
+        1
+    requests:
+      memory: |-
+        200Mi
+      cpu: |-
+        200m
   email:
     enabled: true
     secret_name: smartvillage
@@ -167,6 +199,7 @@ spec:
     api_uri: |-
       /v2
   kafka:
+    create: true
     keystore_secret: |-
       smartvillage-kafka
     truststore_secret: |-
@@ -186,7 +219,18 @@ spec:
       PKCS12
     ssl_truststore_location: |-
       /opt/kafka/truststore/ca.p12
+    limits:
+      memory: |-
+        500Mi
+      cpu: |-
+        500m
+    requests:
+      memory: |-
+        200Mi
+      cpu: |-
+        200m
   mqtt:
+    create: true
     enabled: True
     service_name: |-
       fiware-broker-mqtt-0-svc
