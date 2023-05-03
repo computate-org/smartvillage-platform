@@ -271,38 +271,49 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 			}
 			Long vertxWarningExceptionSeconds = config.getLong(ConfigKeys.VERTX_WARNING_EXCEPTION_SECONDS);
 			Long vertxMaxEventLoopExecuteTime = config.getLong(ConfigKeys.VERTX_MAX_EVENT_LOOP_EXECUTE_TIME);
+			Long vertxMaxWorkerExecuteTime = config.getLong(ConfigKeys.VERTX_MAX_WORKER_EXECUTE_TIME);
 			Integer siteInstances = config.getInteger(ConfigKeys.SITE_INSTANCES);
 			vertxOptions.setEventBusOptions(eventBusOptions);
 			vertxOptions.setWarningExceptionTime(vertxWarningExceptionSeconds);
 			vertxOptions.setWarningExceptionTimeUnit(TimeUnit.SECONDS);
 			vertxOptions.setMaxEventLoopExecuteTime(vertxMaxEventLoopExecuteTime);
 			vertxOptions.setMaxEventLoopExecuteTimeUnit(TimeUnit.SECONDS);
+			vertxOptions.setMaxWorkerExecuteTime(vertxMaxWorkerExecuteTime);
+			vertxOptions.setMaxWorkerExecuteTimeUnit(TimeUnit.SECONDS);
 			vertxOptions.setWorkerPoolSize(config.getInteger(ConfigKeys.WORKER_POOL_SIZE));
 			Consumer<Vertx> runner = vertx -> {
 				try {
 					DeploymentOptions deploymentOptions = new DeploymentOptions();
 					deploymentOptions.setInstances(siteInstances);
 					deploymentOptions.setConfig(config);
+					deploymentOptions.setMaxWorkerExecuteTime(vertxMaxWorkerExecuteTime);
+					deploymentOptions.setMaxWorkerExecuteTimeUnit(TimeUnit.SECONDS);
 		
 					DeploymentOptions emailVerticleDeploymentOptions = new DeploymentOptions();
 					emailVerticleDeploymentOptions.setConfig(config);
 					emailVerticleDeploymentOptions.setWorker(true);
+					emailVerticleDeploymentOptions.setMaxWorkerExecuteTime(vertxMaxWorkerExecuteTime);
+					emailVerticleDeploymentOptions.setMaxWorkerExecuteTimeUnit(TimeUnit.SECONDS);
 		
 					DeploymentOptions WorkerVerticleDeploymentOptions = new DeploymentOptions();
 					WorkerVerticleDeploymentOptions.setConfig(config);
 					WorkerVerticleDeploymentOptions.setInstances(1);
+					WorkerVerticleDeploymentOptions.setMaxWorkerExecuteTime(vertxMaxWorkerExecuteTime);
+					WorkerVerticleDeploymentOptions.setMaxWorkerExecuteTimeUnit(TimeUnit.SECONDS);
 		
 					vertx.deployVerticle(MainVerticle.class, deploymentOptions).onSuccess(a -> {
 						LOG.info("Started main verticle. ");
-						vertx.deployVerticle(WorkerVerticle.class, WorkerVerticleDeploymentOptions).onSuccess(b -> {
-							LOG.info("Started worker verticle. ");
-							vertx.deployVerticle(EmailVerticle.class, emailVerticleDeploymentOptions).onSuccess(c -> {
-								LOG.info("Started email verticle. ");
-							}).onFailure(ex -> {
-								LOG.error("Failed to start worker verticle. ", ex);
-							});
+						vertx.deployVerticle(EmailVerticle.class, emailVerticleDeploymentOptions).onSuccess(c -> {
+							if(config.getBoolean(ConfigKeys.ENABLE_IMPORT_DATA)) {
+								vertx.deployVerticle(WorkerVerticle.class, WorkerVerticleDeploymentOptions).onSuccess(b -> {
+								LOG.info("Started worker verticle. ");
+									LOG.info("Started email verticle. ");
+								}).onFailure(ex -> {
+									LOG.error("Failed to start worker verticle. ", ex);
+								});
+							}
 						}).onFailure(ex -> {
-							LOG.error("Failed to start worker verticle. ", ex);
+							LOG.error("Failed to start email verticle. ", ex);
 						});
 					}).onFailure(ex -> {
 						LOG.error("Failed to start main verticle. ", ex);
@@ -725,7 +736,8 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 		try {
 			String name = "MainVerticle-WorkerExecutor";
 			Integer workerPoolSize = System.getenv(ConfigKeys.WORKER_POOL_SIZE) == null ? 5 : Integer.parseInt(System.getenv(ConfigKeys.WORKER_POOL_SIZE));
-			workerExecutor = vertx.createSharedWorkerExecutor(name, workerPoolSize);
+			Long vertxMaxWorkerExecuteTime = config().getLong(ConfigKeys.VERTX_MAX_WORKER_EXECUTE_TIME);
+			workerExecutor = vertx.createSharedWorkerExecutor(name, workerPoolSize, vertxMaxWorkerExecuteTime, TimeUnit.SECONDS);
 			LOG.info(configureSharedWorkerExecutorComplete, name);
 			promise.complete();
 		} catch (Exception ex) {

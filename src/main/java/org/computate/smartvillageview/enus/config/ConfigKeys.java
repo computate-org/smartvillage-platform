@@ -8,6 +8,11 @@ import org.computate.vertx.config.ComputateConfigKeys;
 public class ConfigKeys extends ComputateConfigKeys {
 
 	/**
+	 * 
+	 **/
+	public static final String VERTX_MAX_WORKER_EXECUTE_TIME = "VERTX_MAX_WORKER_EXECUTE_TIME";
+
+	/**
 	 * Facebook Graph Version
 	 **/
 	public static final String FACEBOOK_GRAPH_VERSION = "FACEBOOK_GRAPH_VERSION";
@@ -182,6 +187,16 @@ public class ConfigKeys extends ComputateConfigKeys {
 	 * API counter fetch VehicleStep
 	 */
 	public static final String API_COUNTER_FETCH_VehicleStep = "API_COUNTER_FETCH_VehicleStep";
+
+	/**
+	 * API counter fetch SitePage
+	 */
+	public static final String API_COUNTER_FETCH_SitePage = "API_COUNTER_FETCH_SitePage";
+
+	/**
+	 * API counter fetch SiteHtm
+	 */
+	public static final String API_COUNTER_FETCH_SiteHtm = "API_COUNTER_FETCH_SiteHtm";
 
 	/**
 	 * 

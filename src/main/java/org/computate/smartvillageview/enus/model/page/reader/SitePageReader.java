@@ -191,24 +191,24 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 	public Future<Void> importDataSitePages() {
 		Promise<Void> promise = Promise.promise();
 		ZonedDateTime now = ZonedDateTime.now(ZoneId.of(config.getString(ConfigKeys.SITE_ZONE)));
-		deletePageData(now).onSuccess(b -> {
-			i18nGenerator().onSuccess(i18n -> {
-				List<String> dynamicPagePaths = Optional.ofNullable(config.getValue(ConfigKeys.DYNAMIC_PAGE_PATHS)).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).stream().map(o -> o.toString()).collect(Collectors.toList());
-				List<String> pagePaths = new ArrayList<>();
-				dynamicPagePaths.forEach(dynamicPagePath -> {
-					try {
-						try(Stream<Path> stream = Files.walk(Paths.get(dynamicPagePath))) {
-							stream.filter(Files::isRegularFile).filter(p -> p.getFileName().toString().endsWith(".yml")).forEach(path -> {
-								pagePaths.add(path.toAbsolutePath().toString());
-							});
-						}
-					} catch(Exception ex) {
-						ExceptionUtils.rethrow(ex);
+		i18nGenerator().onSuccess(i18n -> {
+			List<String> dynamicPagePaths = Optional.ofNullable(config.getValue(ConfigKeys.DYNAMIC_PAGE_PATHS)).map(v -> v instanceof JsonArray ? (JsonArray)v : new JsonArray(v.toString())).orElse(new JsonArray()).stream().map(o -> o.toString()).collect(Collectors.toList());
+			List<String> pagePaths = new ArrayList<>();
+			dynamicPagePaths.forEach(dynamicPagePath -> {
+				try {
+					try(Stream<Path> stream = Files.walk(Paths.get(dynamicPagePath))) {
+						stream.filter(Files::isRegularFile).filter(p -> p.getFileName().toString().endsWith(".yml")).forEach(path -> {
+							pagePaths.add(path.toAbsolutePath().toString());
+						});
 					}
-				});
-				YamlProcessor yamlProcessor = new YamlProcessor();
-		
-				importDataSitePage(i18n, yamlProcessor, pagePaths, 0).onSuccess(a -> {
+				} catch(Exception ex) {
+					ExceptionUtils.rethrow(ex);
+				}
+			});
+			YamlProcessor yamlProcessor = new YamlProcessor();
+	
+			importDataSitePage(i18n, yamlProcessor, pagePaths, 0).onSuccess(a -> {
+				deletePageData(now).onSuccess(b -> {
 					LOG.info(String.format(importDataSitePagesComplete, SitePage.CLASS_SIMPLE_NAME));
 					promise.complete();
 				}).onFailure(ex -> {
@@ -266,6 +266,7 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 		try {
 			if(i < futures.size()) {
 				List<Future> subList = futures.stream().skip(i).limit(rows).collect(Collectors.toList());
+				LOG.info(String.format("importing %s futures starting at index %s", subList.size(), i));
 				CompositeFuture.all(subList).onSuccess(b -> {
 					importFutures(futures, i + rows, rows).onSuccess(recordMetadata -> {
 						promise.complete();
@@ -378,7 +379,8 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 							JsonObject pageBody2 = JsonObject.mapFrom(page);
 							json.put("page", pageBody2);
 
-							importFutures(futures, 0L, 100L).onSuccess(b -> {
+							Long apiCounterFetch = config.getLong(ConfigKeys.API_COUNTER_FETCH_SiteHtm);
+							importFutures(futures, 0L, apiCounterFetch).onSuccess(b -> {
 								JsonObject pageParams = new JsonObject();
 								pageParams.put("body", pageBody2);
 								pageParams.put("path", new JsonObject());
@@ -387,7 +389,14 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 								JsonObject pageContext = new JsonObject().put("params", pageParams);
 								JsonObject pageRequest = new JsonObject().put("context", pageContext);
 
-								futures.add(vertx.eventBus().request(String.format("smartabyar-smartvillage-enUS-%s", SiteHtm.CLASS_SIMPLE_NAME), pageRequest, new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", SitePage.CLASS_SIMPLE_NAME))));
+//								futures.add(vertx.eventBus().request(String.format("smartabyar-smartvillage-enUS-%s", SitePage.CLASS_SIMPLE_NAME), pageRequest, new DeliveryOptions().setSendTimeout(config.getLong(ConfigKeys.VERTX_MAX_EVENT_LOOP_EXECUTE_TIME) * 1000).addHeader("action", String.format("putimport%sFuture", SitePage.CLASS_SIMPLE_NAME))));
+								futures.add(Future.future(promise2 -> {
+									vertx.eventBus().request(String.format("smartabyar-smartvillage-enUS-%s", SitePage.CLASS_SIMPLE_NAME), pageRequest, new DeliveryOptions().setSendTimeout(config.getLong(ConfigKeys.VERTX_MAX_EVENT_LOOP_EXECUTE_TIME) * 1000).addHeader("action", String.format("putimport%sFuture", SitePage.CLASS_SIMPLE_NAME))).onSuccess(message -> {
+										promise2.complete();
+									}).onFailure(ex -> {
+										promise2.fail(ex);
+									});
+								}));
 								promise.complete();
 							}).onFailure(ex -> {
 								LOG.error(String.format(importSitePageFail, pageBody2.getString(SitePage.VAR_id)), ex);
@@ -609,7 +618,14 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 					JsonObject htmContext = new JsonObject().put("params", htmParams);
 					JsonObject htmRequest = new JsonObject().put("context", htmContext);
 
-					futures.add(vertx.eventBus().request(String.format("smartabyar-smartvillage-enUS-%s", SiteHtm.CLASS_SIMPLE_NAME), htmRequest, new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", SiteHtm.CLASS_SIMPLE_NAME))));
+//					futures.add(vertx.eventBus().request(String.format("smartabyar-smartvillage-enUS-%s", SiteHtm.CLASS_SIMPLE_NAME), htmRequest, new DeliveryOptions().setSendTimeout(config.getLong(ConfigKeys.VERTX_MAX_EVENT_LOOP_EXECUTE_TIME) * 1000).addHeader("action", String.format("putimport%sFuture", SiteHtm.CLASS_SIMPLE_NAME))));
+					futures.add(Future.future(promise2 -> {
+						vertx.eventBus().request(String.format("smartabyar-smartvillage-enUS-%s", SiteHtm.CLASS_SIMPLE_NAME), htmRequest, new DeliveryOptions().setSendTimeout(config.getLong(ConfigKeys.VERTX_MAX_EVENT_LOOP_EXECUTE_TIME) * 1000).addHeader("action", String.format("putimport%sFuture", SiteHtm.CLASS_SIMPLE_NAME))).onSuccess(message -> {
+							promise2.complete();
+						}).onFailure(ex -> {
+							promise2.fail(ex);
+						});
+					}));
 					//KafkaProducerRecord<String, String> record = KafkaProducerRecord.create(topic, htmRequest.encode());
 					//futures.add(kafkaProducer.send(record));
 				}
@@ -717,7 +733,14 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 					JsonObject htmContext = new JsonObject().put("params", htmParams);
 					JsonObject htmRequest = new JsonObject().put("context", htmContext);
 
-					futures.add(vertx.eventBus().request(String.format("smartabyar-smartvillage-enUS-%s", SiteHtm.CLASS_SIMPLE_NAME), htmRequest, new DeliveryOptions().addHeader("action", String.format("putimport%sFuture", SiteHtm.CLASS_SIMPLE_NAME))));
+//					futures.add(vertx.eventBus().request(String.format("smartabyar-smartvillage-enUS-%s", SiteHtm.CLASS_SIMPLE_NAME), htmRequest, new DeliveryOptions().setSendTimeout(config.getLong(ConfigKeys.VERTX_MAX_EVENT_LOOP_EXECUTE_TIME) * 1000).addHeader("action", String.format("putimport%sFuture", SiteHtm.CLASS_SIMPLE_NAME))));
+					futures.add(Future.future(promise2 -> {
+						vertx.eventBus().request(String.format("smartabyar-smartvillage-enUS-%s", SiteHtm.CLASS_SIMPLE_NAME), htmRequest, new DeliveryOptions().setSendTimeout(config.getLong(ConfigKeys.VERTX_MAX_EVENT_LOOP_EXECUTE_TIME) * 1000).addHeader("action", String.format("putimport%sFuture", SiteHtm.CLASS_SIMPLE_NAME))).onSuccess(message -> {
+							promise2.complete();
+						}).onFailure(ex -> {
+							promise2.fail(ex);
+						});
+					}));
 					//KafkaProducerRecord<String, String> record = KafkaProducerRecord.create(topic, htmRequest.encode());
 					//futures.add(kafkaProducer.send(record));
 				}

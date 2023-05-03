@@ -233,7 +233,8 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 		try {
 			String name = "WorkerVerticle-WorkerExecutor";
 			Integer workerPoolSize = System.getenv(ConfigKeys.WORKER_POOL_SIZE) == null ? 5 : Integer.parseInt(System.getenv(ConfigKeys.WORKER_POOL_SIZE));
-			workerExecutor = vertx.createSharedWorkerExecutor(name, workerPoolSize);
+			Long vertxMaxWorkerExecuteTime = config().getLong(ConfigKeys.VERTX_MAX_WORKER_EXECUTE_TIME);
+			workerExecutor = vertx.createSharedWorkerExecutor(name, workerPoolSize, vertxMaxWorkerExecuteTime, TimeUnit.SECONDS);
 			LOG.info(configureSharedWorkerExecutorComplete, name);
 			promise.complete();
 		} catch (Exception ex) {
@@ -360,16 +361,31 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 			ZonedDateTime nextStartTime2 = nextStartTime;
 
 			if(importStartTime == null) {
-				importDataClass(classSimpleName, nextStartTime2).onSuccess(a -> {
+				try {
+					vertx.setTimer(1, a -> {
+						workerExecutor.executeBlocking(promise2 -> {
+							importDataClass(classSimpleName, null).onSuccess(b -> {
+								promise2.complete();
+							}).onFailure(ex -> {
+								promise2.fail(ex);
+							});
+						});
+					});
 					promise.complete();
-				}).onFailure(ex -> {
+				} catch(Exception ex) {
 					LOG.error(String.format(importTimerFail, classSimpleName), ex);
 					promise.fail(ex);
-				});
+				}
 			} else {
 				try {
 					vertx.setTimer(nextStartDuration.toMillis(), a -> {
-						importDataClass(classSimpleName, nextStartTime2);
+						workerExecutor.executeBlocking(promise2 -> {
+							importDataClass(classSimpleName, nextStartTime2).onSuccess(b -> {
+								promise2.complete();
+							}).onFailure(ex -> {
+								promise2.fail(ex);
+							});
+						});
 					});
 					promise.complete();
 				} catch(Exception ex) {
@@ -432,7 +448,13 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 					LOG.info(String.format(importTimerScheduling, classSimpleName, nextStartTime.format(TIME_FORMAT)));
 					Duration nextStartDuration = Duration.between(Instant.now(), nextStartTime);
 					vertx.setTimer(nextStartDuration.toMillis(), b -> {
-						importDataClass(classSimpleName, nextStartTime);
+						workerExecutor.executeBlocking(promise2 -> {
+							importDataClass(classSimpleName, nextStartTime).onSuccess(c -> {
+								promise2.complete();
+							}).onFailure(ex -> {
+								promise2.fail(ex);
+							});
+						});
 					});
 					promise.complete();
 				} else {
@@ -459,7 +481,13 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 					LOG.info(String.format(importTimerScheduling, classSimpleName, nextStartTime.format(TIME_FORMAT)));
 					Duration nextStartDuration = Duration.between(Instant.now(), nextStartTime);
 					vertx.setTimer(nextStartDuration.toMillis(), b -> {
-						importDataClass(classSimpleName, nextStartTime);
+						workerExecutor.executeBlocking(promise2 -> {
+							importDataClass(classSimpleName, nextStartTime).onSuccess(c -> {
+								promise2.complete();
+							}).onFailure(ex -> {
+								promise2.fail(ex);
+							});
+						});
 					});
 					promise.complete();
 				} else {
@@ -481,7 +509,13 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 					LOG.info(String.format(importTimerScheduling, classSimpleName, nextStartTime.format(TIME_FORMAT)));
 					Duration nextStartDuration = Duration.between(Instant.now(), nextStartTime);
 					vertx.setTimer(nextStartDuration.toMillis(), b -> {
-						importDataClass(classSimpleName, nextStartTime);
+						workerExecutor.executeBlocking(promise2 -> {
+							importDataClass(classSimpleName, nextStartTime).onSuccess(c -> {
+								promise2.complete();
+							}).onFailure(ex -> {
+								promise2.fail(ex);
+							});
+						});
 					});
 					promise.complete();
 				} else {
