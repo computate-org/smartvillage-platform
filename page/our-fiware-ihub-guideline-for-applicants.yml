@@ -12,7 +12,7 @@ author:
   title: Red Hat Principal Software Consultant
 pageImageUri: "/png/{{ pageId }}/infographic.png"
 
-IHUB_ORG_NAME: Red Hat and Boston University
+IHUB_ORG_NAME: Red Hat Collaboratory at Boston University
 IHUB_ORG_DESCRIPTION: |
   Red Hat builds partnerships across public, private, and nonprofit sectors to foster collaboration towards building better open source solutions towards the benefit of all. 
   Through Red Hat Impact, Red Hatters are enabled to contribute their skills to impactful open source community projects. 
@@ -21,10 +21,10 @@ IHUB_ORG_DESCRIPTION: |
   The Red Hat Collaboratory connects Boston University faculty and students with industry practitioners working in open-source software communities.
 IHUB_ORG_PROMOTES: |
   Foster research, development, and collaboration on open source emerging IoT technology powered by FIWARE and Red Hat Cloud and Edge technology for the benefit of all
-IHUB_ORG_CONTACT_NAME: Christopher Tate
-IHUB_ORG_CONTACT_ROLE: Red Hat Principal Software Consultant
+IHUB_ORG_CONTACT_NAME: Christopher Tate, Christos Cassandras
+IHUB_ORG_CONTACT_ROLE: Red Hat Principal Software Consultant, Boston University Head, Division of Systems Engineering
 IHUB_ORG_CONTACT_EMAIL: smartabyar-smartvillage@computate.topicbox.com
-IHUB_ORG_CONTACT_PHONE: +1-***-***-****
+IHUB_ORG_CONTACT_PHONE: To Be Announced
 
 IHUB_NAME: Smarta Byar Smart Village Community
 IHUB_DESCRIPTION: |
@@ -32,18 +32,15 @@ IHUB_DESCRIPTION: |
   This will allow researchers to study what social sustainability means by using a digital twin of Veberöd, Sweden as the test village, supported by  Smarta Byar. 
   We have added integration with the Orion LD Context Broker supported by FIWARE technology implementing their Smart Data Models to align ourselves with the rest of the open source smart solution community. 
   The goal of this collaboration is to build the open source technological infrastructure so that researchers can collaborate on this platform effectively to study mobility, public health, sustainability among other study areas to ultimately help define better the link between well being and eco-smart cities. 
-IHUB_WEBSITE: https://smartvillage.computate.org/
+IHUB_WEBSITE: https://research.redhat.com/blog/research_project/creating-a-global-open-research-platform-to-better-understand-social-sustainability-using-data-from-a-real-life-smart-village/
 IHUB_DOMAINS:
   - name: Smart Cities
 IHUB_REGION: North America
 IHUB_COUNTRY: USA
 IHUB_STATE: Massachusetts
-IHUB_CITY: Brookline
-IHUB_STREET: |
-  Engineering:
-  Division of Systems Engineering
-  15 St. Mary's St.
-  Boston University
+IHUB_CITY: Boston
+IHUB_STREET: |-
+  Division of Systems Engineering, 15 St Mary's St, Boston University, Brookline
 IHUB_ZIP_CODE: "02446"
 IHUB_WHY: >
   We learned about the FIWARE Marketplace and the strong community of FIWARE Innovation Hubs and partners while attending the FIWARE Summit. 
@@ -51,7 +48,7 @@ IHUB_WHY: >
   FIWARE's Smart Data Models align with our smart solutions as well, and the FIWARE Context Broker supports all of these data models, which is why our project is now powered by a FIWARE Context Broker. 
 IHUB_REGIONAL_CONNECTION_TO_PUBLIC_AUTHORITIES: >
   We have connections with the Boston Mayor’s Office for New Urban Dynamics. 
-  But right now our mission is focused on Veberod where we obviously have lots of connections through Jan Malmgren.
+  But right now our mission is focused on Veberöd, Sweden, where we obviously have lots of connections through Jan Malmgren and [our project partner SmartaByar](https://sensative.com/iot_use_cases/smart-villages-customer-use-case/).
 IHUB_REGIONAL_DEMANDS: >
   Once our platform is ready for outside users, 
   our plan is to inform our Boston contacts and ask them to test it and provide feedback.
@@ -380,8 +377,8 @@ htmBody:
                       - e: span
                         text: iHub website
                   - e: dd
-                    text: |-
-                      {{ IHUB_WEBSITE }}
+                    markdown: |-
+                      [{{ IHUB_WEBSITE }}](https://research.redhat.com/blog/research_project/creating-a-global-open-research-platform-to-better-understand-social-sustainability-using-data-from-a-real-life-smart-village/)
               - e: li
                 in:
                   - e: dt
@@ -457,7 +454,7 @@ htmBody:
                       - e: span
                         text: Describe briefly your regional connection with public authorities
                   - e: dd
-                    text: |-
+                    markdown: |-
                       {{ IHUB_REGIONAL_CONNECTION_TO_PUBLIC_AUTHORITIES }}
               - e: li
                 in:
@@ -787,7 +784,7 @@ htmBody:
                                 text: Description
                           - e: dd
                             text: |-
-                              Christopher Tate from Red Hat, together our professor and students at Boston University, and Juanjo CTO of FIWARE met together at Boston University Campus to discuss a new FIWARE Innovation Hub. 
+                              Christopher Tate from Red Hat, professor Christos Cassandras, students at Boston University, and CTO of FIWARE, Juanjo Hierro, met together at Boston University Campus to discuss a new FIWARE Innovation Hub. 
                               A FIWARE iHub, gravitating around university activities, is a good basis for creating an ecosystem, training, and research for the concept of smart cities. 
                               We all agreed on the benefits of building a FIWARE iHub, supporting the use of FIWARE technologies, together between Boston University and Red Hat. 
                       - e: li
@@ -836,7 +833,7 @@ htmBody:
                             in:
                               - e: span
                                 text: |-
-                                  The resulting meeting is moving Red Hat and Boston University forward towards an incubated FIWARE iHub. 
+                                  The resulting meeting is moving {{ IHUB_ORG_NAME }} forward towards an incubated FIWARE iHub. 
                                   We have successfully contributed 
                               - e: a
                                 href: https://github.com/FIWARE-Ops/marinera/pulls?q=is%3Apr+author%3Acomputate
@@ -900,7 +897,7 @@ htmBody:
                                 text: Description
                           - e: dd
                             text: |-
-                              Thursday Feb 2, 2022, in both North America and Europe, we hosted a Red Hat Impact Hackathon in partnership with FIWARE. 
+                              Thursday Feb 2, 2023, in both North America and Europe, we hosted a Red Hat Impact Hackathon in partnership with FIWARE. 
                               The hackathon in North America unfortunately was cancelled due to freezing rain in Dallas Texas at that time, but the EMEA hackathon was a success! 
                               Participants used your technical and non-technical skills to contribute in teams of 4 to socially impactful Smart Data Models. 
                               They worked as teams to run OpenShift Local on your own laptop, deploy FIWARE applications into OpenShift, import Smart Data Model data, and visualize the data in your team's own creative ways. 
@@ -985,6 +982,92 @@ htmBody:
                       style: |
                         max-width: 600px; max-height: 600px; 
                       src: "{{ page.staticBaseUrl }}/jpg/2023-fiware-hackathon-emea/2023-fiware-hackathon-emea-2.jpg"
+          - e: div
+            a:
+              class: w3-padding 
+            in:
+              - e: h5
+                a:
+                  class: ""
+                in:
+                  - e: span
+                    text: Boston University Datathon
+              - e: div
+                a:
+                  class: w3-padding 
+                in:
+                  - e: ul
+                    in:
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Description
+                          - e: dd
+                            text: |-
+                              Saturday March 18, 2023, Boston University hosted an online and in-person at Boston University datathon run by students. 
+                              We presented an hour long presentation titled "How a Small Swedish Town Is Using Data to Create a Sustainable Environment." 
+                              The Smart Village project is the collaborative project between Red Hat Research, Red Hat's Global Social Innovation Program, Smarta Byar, Boston University, using technology including Red Hat OpenShift and FIWARE. 
+                              The presenters were from civil society (Jan Malmgren, Smarta Byar), academia (Yingqing Chen, Boston University) and Red Hat (Christopher Tate). 
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Date (dd/mm/yy)
+                          - e: dd
+                            text: |-
+                              03/18/23
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Target Audience
+                          - e: dd
+                            markdown: |-
+                              - Data Specialists, engineers, and computer science students interested in  understands data models and Open APIs and finds ways to transform and import the data.
+                                The goal of this datathon is to enhance sustainability efforts on Boston University's campus through data analysis. 
+                                BUDSA has collaborated with BU Sustainability to provide real world data pertaining to on campus emmissions and waste for participants to explore and analyze.
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Topics and FIWARE Technologies
+                          - e: dd
+                            markdown: |-
+                              - We introduced FIWARE smart data models, IOT Agents, and Context Brokers as the open standard for smart device data. 
+                              - We also covered specific FIWARE topics like Implementing FIWARE standards for smart devices. 
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Number of participants
+                          - e: dd
+                            text: |-
+                              13 people attended the smart village panel in person. More attended online up to 50 attendees. 
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Additional info
+                          - e: dd
+                            markdown: |-
+                              - The presentation went well, and according to the organizers, inspired future generations of data scientists from Boston University. 
+                              - The attendees said they were inspired to see how tech could be integrated into rural areas! 
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Photo or media
+                          - e: dd
+                            markdown: |-
+                              [Here is a link to the datathon event page](https://www.data4sustainability.com/event-schedule-1). 
       - e: div
         a:
           class: w3-padding 
@@ -1081,7 +1164,269 @@ htmBody:
                   class: ""
                 in:
                   - e: span
-                    text: Boston University Center for Information and Systems Engineering (CISE)
+                    markdown: |-
+                      [Smarta Byar organization and the village of Veberöd](https://sensative.com/iot_use_cases/smart-villages-customer-use-case/)
+              - e: div
+                a:
+                  class: w3-padding 
+                in:
+                  - e: ul
+                    in:
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Resource Name
+                          - e: dd
+                            in:
+                              - e: span
+                                text: |-
+                                  Smarta Byar organization and the village of Veberöd
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Description
+                          - e: dd
+                            markdown: |
+                              From the Sensative website: 
+                              
+                              The village of Veberöd, Sweden is a global research test village powered by Sensative, Yggio, and FIWARE based technology.
+                              It's a very small village of 5,000, started in 2008 as a local communication platform.
+                              in 2018, Smarta Byar started as an IoT platform as a balance to smart cities in rural areas for many IoT projects: 
+                              
+                              - water sensors for water bins for cow herds
+                              - medicine delivery with drones 
+                              - smart trees 
+                              - bicycle tracking 
+                              - water quality monitoring
+                              - doctors in augmented reality for rural areas
+                              - smart lamp posts
+
+                              Jan Malmgren, the founder of Smarta Byar works with IoT technology to make the lives of residents of the village happier. 
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Target Audience
+                          - e: dd
+                            in:
+                              - e: span
+                                text: |-
+                                  Technical audience interested in edge, smart device technology. 
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Additional information
+                          - e: dd
+                            markdown: |-
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Media resources / Photos
+              - e: p
+                a:
+                  class: w3-padding 
+                in:
+                  - e: img
+                    a:
+                      class: w3-image 
+                      style: |
+                        max-width: 600px; max-height: 600px; 
+                      src: "{{ page.staticBaseUrl }}/png/our-fiware-ihub-guideline-for-applicants/veberod.png"
+          - e: div
+            a:
+              class: w3-padding 
+            in:
+              - e: h5
+                a:
+                  class: ""
+                in:
+                  - e: span
+                    text: Smarta Byar Smart Village platform
+              - e: div
+                a:
+                  class: w3-padding 
+                in:
+                  - e: ul
+                    in:
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Resource Name
+                          - e: dd
+                            in:
+                              - e: span
+                                text: |-
+                                  Smarta Byar Smart Village platform
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Description
+                          - e: dd
+                            in:
+                              - e: span
+                                text: >
+                                  Started in March 2022, Red Hat Global Social Innovation Program is partnering with Boston University and Smarta Byar in order to collaborate on creating a global and open research platform allowing researchers to study what social sustainability means by using a digital twin of Veberöd, Sweden as the test village, supported by Smarta Byar. 
+                                  Today, we have successfully created animated traffic simulations that run in the cloud, available from any browser. 
+                                  The platform also has configurable traffic simulation reports, including graphs and data tables that show live performance changes as simulations are run event-driven in the background. 
+                                  It is based on the latest FIWARE standards for TrafficFlowObserved and CrowdFlowObserved Smart Data Models. 
+                                  It integrates with the Orion-LD Context Broker for subscribing to smart device context updates. 
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Target Audience
+                          - e: dd
+                            in:
+                              - e: span
+                                text: |-
+                                  Technical audience interested in edge, smart device technology. 
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Additional information
+                          - e: dd
+                            markdown: |-
+                              - The platform is currently being migrated from the Operate First environment to the [New England Research Cloud environment](https://nerc.mghpcc.org/). 
+                              - The platform is open source on GitHub: [https://github.com/computate-org/smartabyar-smartvillage](https://github.com/computate-org/smartabyar-smartvillage). 
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Media resources / Photos
+                          - e: dd
+                            markdown: |
+                              [ See a 90 second introduction video to the Smarta Byar Smart Village platform on Youtube ](https://www.youtube.com/watch?v=PcPy6aEDVk4). 
+              - e: p
+                a:
+                  class: w3-padding 
+                in:
+                  - e: img
+                    a:
+                      class: w3-image 
+                      style: |
+                        max-width: 600px; max-height: 600px; 
+                      src: "{{ page.staticBaseUrl }}/png/our-fiware-ihub-guideline-for-applicants/map-simulation.png"
+              - e: p
+                a:
+                  class: w3-padding 
+                in:
+                  - e: img
+                    a:
+                      class: w3-image 
+                      style: |
+                        max-width: 600px; max-height: 600px; 
+                      src: "{{ page.staticBaseUrl }}/png/our-fiware-ihub-guideline-for-applicants/simulation-report.png"
+          - e: div
+            a:
+              class: w3-padding 
+            in:
+              - e: h5
+                a:
+                  class: ""
+                in:
+                  - e: span
+                    text: Smart Village Operator
+              - e: div
+                a:
+                  class: w3-padding 
+                in:
+                  - e: ul
+                    in:
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Resource Name
+                          - e: dd
+                            in:
+                              - e: span
+                                text: |-
+                                  Smart Village Operator
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Description
+                          - e: dd
+                            in:
+                              - e: span
+                                text: >
+                                  The Smart Village Operator is a greatly simplified way to deploy all the components of the Smarta Byar Smart Village platform, including FIWARE components like the IoT Agent JSON and Orion-LD COntext Broker. 
+                                  The operator already includes Custom Resource Definitions for the latest FIWARE standards for TrafficFlowObserved and CrowdFlowObserved Smart Data Models. 
+                                  It has an automated way to easily add any of the other Smart Data Models as new Custom Resource Definitions in the operator. 
+                                  There are Custom Resource Definitions for configuring the Orion-LD Context Broker and IoT Agent JSON. 
+                                  It automatically configures service groups and devices for each smart data model with the IoT Agent and Orion-LD Context Broker for subscribing to start receiving smart device context updates through MQTT or AMQP protocols. 
+                                  The Orion-LD Context Broker automatically creates a subscription for each device that is published to the Smarta Byar Smart Village application for receiving context updates from devices where they can be used. 
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Target Audience
+                          - e: dd
+                            in:
+                              - e: span
+                                text: |-
+                                  Technical audience interested in edge, smart device technology. 
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Additional information
+                          - e: dd
+                            markdown: |-
+                              - The platform is currently being migrated from the Operate First environment to the [New England Research Cloud environment](https://nerc.mghpcc.org/). 
+                              - The platform is open source on GitHub: [https://github.com/computate-org/smartvillage-operator](https://github.com/computate-org/smartvillage-operator). 
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Media resources / Photos
+                          - e: dd
+                            markdown: |
+                              [ See a 90 second introduction video to the Smarta Village Operator on Youtube ](https://www.youtube.com/watch?v=PcPy6aEDVk4). 
+              - e: p
+                a:
+                  class: w3-padding 
+                in:
+                  - e: img
+                    a:
+                      class: w3-image 
+                      style: |
+                        max-width: 600px; max-height: 600px; 
+                      src: "{{ page.staticBaseUrl }}/png/our-fiware-ihub-guideline-for-applicants/smartvillage-operator-crd.png"
+          - e: div
+            a:
+              class: w3-padding 
+            in:
+              - e: h5
+                a:
+                  class: ""
+                in:
+                  - e: span
+                    markdown: |
+                      [Boston University Center for Information and Systems Engineering (CISE)](https://www.bu.edu/cise/about-cise/)
               - e: div
                 a:
                   class: w3-padding 
@@ -1106,14 +1451,13 @@ htmBody:
                               - e: span
                                 text: Description
                           - e: dd
-                            in:
-                              - e: span
-                                text: >
-                                  Opened in 2022, the center is state of the art in every way: striking architecture, advanced resources, environmental sensitivity, and interior spaces designed to facilitate collaboration. 
-                                  Rising above Central Campus, the 19-story structure (17 occupied floors above grade topped by two levels of mechanical equipment, plus two levels below grade) 
-                                  houses the departments of mathematics & statistics and computer science, the newly created Faculty for Computing and Data Sciences, 
-                                  as well as the renowned Rafik B. Hariri Institute for Computing and Computational Science & Engineering. 
-                                  It’s just the latest commitment to data sciences by a university already acknowledged as a leader in this booming field.
+                            markdown: >
+                              The Center for Information & Systems Engineering (CISE) is a BU research center within the College of Engineering and is part of the Rafik B. Hariri Institute of Computing and Computational Science & Engineering federation of centers and initiatives.
+
+                              The mission of CISE is to deepen and broaden interdisciplinary research in the study and design of intelligent systems with broad societal applications. 
+                              In today’s increasingly data-driven, networked world, we have an unprecedented opportunity to monitor, control, and improve our well-being and surroundings. 
+                              By engineering hardware and software systems to acquire, analyze, and act upon information from a range of networked sources, we can advance human intelligence 
+                              to solve critical problems in fields such as health care, communications, energy, and national security, among others. 
                       - e: li
                         in:
                           - e: dt
@@ -1121,10 +1465,15 @@ htmBody:
                               - e: span
                                 text: Target Audience
                           - e: dd
-                            in:
-                              - e: span
-                                text: |-
-                                  Technical audience interested in edge, smart device technology. 
+                            markdown: |
+                              The CISE community includes 51 distinguished faculty members and more than 100 graduate students, as well as invited postdoctoral researchers and visiting scholars from 12 different departments, divisions and academic  units across Boston University, including:
+                              
+                              - the College of Engineering (Electrical & Computer Engineering, Mechanical Engineering, Biomedical Engineering, the Division of Systems Engineering, and the Division of Material Science and Engineering);
+                              - the College of Arts and Sciences (Departments of Computer Science, Earth and Environment, Mathematics and Statistics);
+                              - the Questrom School of Business (Departments of Finance, Information Systems, and Operations Management); and
+                              - the Faculty of Computing & Data Sciences, an interdisciplinary academic unit unifying computing and data sciences research and education programs.
+                              
+                              Additionally, many CISE research projects engage with faculty and students affiliated with Boston University School of Medicine and the Boston Medical Center.
                       - e: li
                         in:
                           - e: dt
@@ -1132,9 +1481,11 @@ htmBody:
                               - e: span
                                 text: Additional information
                           - e: dd
-                            in:
-                              - e: span
-                                text: |-
+                            markdown: |
+                              CISE activities are designed to catalyze and support cross-disciplinary faculty research collaborations, advance scientific understanding and discovery, 
+                              facilitate engagement with industry, and support a diverse community of faculty and students. 
+                              In conjunction with this core mission, CISE spearheads a number of activities to project the College of Engineering’s and BU’s strength in information 
+                              and systems engineering, both internally within BU, and externally.
                       - e: li
                         in:
                           - e: dt
@@ -1155,6 +1506,69 @@ htmBody:
                       style: |
                         max-width: 600px; max-height: 600px; 
                       src: "{{ page.staticBaseUrl }}/jpg/boston-university/boston-university.jpg"
+          - e: div
+            a:
+              class: w3-padding 
+            in:
+              - e: h5
+                a:
+                  class: ""
+                markdown: |
+                  [Boston University Control Of Discrete Event Systems (CODES) Research Lab](https://christosgcassandras.org/codes/)
+              - e: div
+                a:
+                  class: w3-padding 
+                in:
+                  - e: ul
+                    in:
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Resource Name
+                          - e: dd
+                            in:
+                              - e: span
+                                text: |-
+                                  Boston University Control Of Discrete Event Systems (CODES) Research Lab
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Description
+                          - e: dd
+                            markdown: |
+                              The [CODES Laboratory](https://christosgcassandras.org/codes/) involves faculty and graduate students from the Division of Systems Engineering and the Center for Information and Systems Engineering (CISE). 
+                              Members of CODES conduct research on modeling, design, analysis, performance evaluation, control, and optimization of a variety of discrete event and hybrid systems – 
+                              Communication and Sensor Networks, Manufacturing and Supply Chain, Transportation Networks, and a variety of Multi-Agent Systems. 
+                              Detailed descriptions of research projects in the CODES Lab, interactive demos, simulations, and movies may be found at the CODES home page. 
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Target Audience
+                          - e: dd
+                            markdown: |
+                              - Researchers and engineers in order to ensure that a project’s scientific advancements are built on top of a strong, standard and practical engineering foundation. 
+                              - Researchers from various disciplines by having completed project milestones available for use by collaborators within the CODES ecosystem. 
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Additional information
+                          - e: dd
+                            markdown: |
+                              The CODES Laboratory operates within CISE above. 
+                      - e: li
+                        in:
+                          - e: dt
+                            in:
+                              - e: span
+                                text: Media resources / Photos
           - e: div
             a:
               class: w3-padding 
