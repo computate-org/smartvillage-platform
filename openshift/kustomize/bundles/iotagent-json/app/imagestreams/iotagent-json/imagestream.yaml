@@ -2,7 +2,6 @@ apiVersion: image.openshift.io/v1
 kind: ImageStream
 metadata:
   name: iotagent-json
-  namespace: fiware
 spec:
   lookupPolicy:
     local: false

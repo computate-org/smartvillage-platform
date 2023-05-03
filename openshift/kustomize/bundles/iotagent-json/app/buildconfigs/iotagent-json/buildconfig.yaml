@@ -2,7 +2,6 @@ apiVersion: build.openshift.io/v1
 kind: BuildConfig
 metadata:
   name: iotagent-json
-  namespace: fiware
 spec:
   failedBuildsHistoryLimit: 5
   nodeSelector: null

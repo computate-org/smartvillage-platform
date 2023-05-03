@@ -18,17 +18,31 @@ spec:
 
   site:
     create: true
-    enable_dev_nodeports: False
-    web_replicas: 3
+    enable_dev_nodeports: true
+    web_replicas: 2
     worker_replicas: 1
-    limits_memory: |-
-      1000Mi
-    limits_cpu: |-
-      2
-    requests_memory: |-
-      500Mi
-    requests_cpu: |-
-      1
+    web_resources:
+      limits:
+        memory: |-
+          1000Mi
+        cpu: |-
+          600m
+      requests:
+        memory: |-
+          500Mi
+        cpu: |-
+          400m
+    worker_resources:
+      limits:
+        memory: |-
+          1000Mi
+        cpu: |-
+          600m
+      requests:
+        memory: |-
+          500Mi
+        cpu: |-
+          400m
     name: |-
       smartvillage
     secret_name: |-
@@ -54,8 +68,9 @@ spec:
     route:
       create: True
   zookeeper:
+    create: True
     service_name: |-
-      default-solrcloud-zookeeper-client
+      zookeeper
     port: 2181
     max_retries: 0
     base_sleep_time_millis: 5000
@@ -100,16 +115,17 @@ spec:
       postgres
     secret_name: |-
       postgres-pguser-smartvillage
-    limits:
-      memory: |-
-        500Mi
-      cpu: |-
-        500m
-    requests:
-      memory: |-
-        200Mi
-      cpu: |-
-        200m
+    resources:
+      limits:
+        memory: |-
+          500Mi
+        cpu: |-
+          500m
+      requests:
+        memory: |-
+          200Mi
+        cpu: |-
+          200m
   solr:
     create: true
     service_name: |-
@@ -122,16 +138,17 @@ spec:
         solr.apps-crc.testing
     collection: |-
       smartvillage
-    limits:
-      memory: |-
-        1Gi
-      cpu: |-
-        1
-    requests:
-      memory: |-
-        200Mi
-      cpu: |-
-        200m
+    resources:
+      limits:
+        memory: |-
+          1Gi
+        cpu: |-
+          1
+      requests:
+        memory: |-
+          200Mi
+        cpu: |-
+          200m
   email:
     enabled: true
     secret_name: smartvillage
@@ -142,6 +159,12 @@ spec:
     sitehtm:
       enabled: True
     iotnode:
+      enabled: False
+    vehiclestep:
+      enabled: False
+    timestep:
+      enabled: False
+    trafficsimulation:
       enabled: False
   auth_role:
     admin: |-
@@ -179,6 +202,17 @@ spec:
     trafficflowobserved: |-
       SiteAdmin
   sumo:
+    resources:
+      limits:
+        cpu: |-
+          1m
+        memory: |-
+          1Gi
+      requests:
+        cpu: |-
+          400m
+        memory: |-
+          500Mi
     executable_path: |-
       /home/ctate/.local/bin/sumo
     python_executable_path: |-
@@ -219,16 +253,17 @@ spec:
       PKCS12
     ssl_truststore_location: |-
       /opt/kafka/truststore/ca.p12
-    limits:
-      memory: |-
-        500Mi
-      cpu: |-
-        500m
-    requests:
-      memory: |-
-        200Mi
-      cpu: |-
-        200m
+    resources:
+      limits:
+        memory: |-
+          500Mi
+        cpu: |-
+          500m
+      requests:
+        memory: |-
+          200Mi
+        cpu: |-
+          200m
   mqtt:
     create: true
     enabled: True
