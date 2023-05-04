@@ -41,8 +41,6 @@ spec:
       smartvillage
     secret_name: |-
       smartvillage
-    host_name: |-
-      smartvillage.apps-crc.testing
     zone: |-
       America/New_York
     locale: |-
@@ -200,7 +198,7 @@ spec:
     resources:
       limits:
         cpu: |-
-          1m
+          500m
         memory: |-
           1Gi
       requests:
