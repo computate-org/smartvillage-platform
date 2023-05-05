@@ -20,7 +20,7 @@ spec:
     area_served: |
       96027913#0 96027913#2 30186293 311389510#1
     average_gap_distance: 1
-  iot_agent:
+  iotagent:
     base_url: http://iotagent-json-smartvillage.apps-crc.testing
   context_broker:
     base_url: http://orion-ld-smartvillage.apps-crc.testing

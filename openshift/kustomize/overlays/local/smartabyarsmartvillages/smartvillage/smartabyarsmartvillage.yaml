@@ -13,7 +13,7 @@ spec:
   site:
     create: true
     enable_dev_nodeports: true
-    web_replicas: 2
+    web_replicas: 0
     worker_replicas: 1
     web_resources:
       limits:
@@ -200,7 +200,7 @@ spec:
     resources:
       limits:
         cpu: |-
-          1m
+          500m
         memory: |-
           1Gi
       requests:
