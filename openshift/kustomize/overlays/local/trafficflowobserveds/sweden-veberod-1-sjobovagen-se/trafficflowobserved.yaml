@@ -44,14 +44,16 @@ spec:
     mqtt_port: 1883
     mqtt_subscription_topic: |-
       iot/subscribe
+    subscription_url: |-
+      http://orionld-smartvillage-sync:8080
   smartabyar_smartvillage:
     enabled: True
     auth_secret_name: |-
       keycloak-client-secret-smartvillage
     auth_token_url: |-
-      https://sso.computate.org/realms/SMARTVILLAGE/protocol/openid-connect/token
+      https://sso.computate.org/auth/realms/SMARTVILLAGE/protocol/openid-connect/token
     smart_model_api: |-
-      /api/traffic-flow-observed
+      /api/traffic-flow-observed-import
   alternate_model:
     enabled: True
     id: |-

@@ -259,7 +259,7 @@ spec:
           200Mi
         cpu: |-
           200m
-  mqtt:
+  amq_broker:
     create: true
     enabled: True
     service_name: |-
