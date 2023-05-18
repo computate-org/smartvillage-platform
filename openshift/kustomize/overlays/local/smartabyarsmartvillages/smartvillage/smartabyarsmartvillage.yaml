@@ -262,8 +262,3 @@ spec:
   mqtt:
     create: true
     enabled: True
-    service_name: |-
-      fiware-broker-mqtt-0-svc
-    port: 1883
-    iot_subscribe_topic: |-
-      iot-subscribe

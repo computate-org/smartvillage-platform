@@ -11,7 +11,7 @@ metadata:
   namespace: smartvillage
 spec:
   site:
-    create: true
+    create: false
     enable_dev_nodeports: true
     web_replicas: 0
     worker_replicas: 1
@@ -62,7 +62,7 @@ spec:
     route:
       create: True
   zookeeper:
-    create: True
+    create: false
     service_name: |-
       zookeeper
     port: 2181
@@ -102,7 +102,7 @@ spec:
     token_uri: |-
       /auth/realms/SMARTVILLAGE/protocol/openid-connect/token
   postgres:
-    create: true
+    create: false
     service_name: |-
       postgres-primary
     port: 5432
@@ -122,7 +122,7 @@ spec:
         cpu: |-
           200m
   solr:
-    create: true
+    create: false
     service_name: |-
       default-solrcloud-common
     port: 80
@@ -228,7 +228,7 @@ spec:
     api_uri: |-
       /v2
   kafka:
-    create: true
+    create: false
     keystore_secret: |-
       smartvillage-kafka
     truststore_secret: |-
@@ -259,11 +259,6 @@ spec:
           200Mi
         cpu: |-
           200m
-  mqtt:
+  amq_broker:
     create: true
     enabled: True
-    service_name: |-
-      fiware-broker-mqtt-0-svc
-    port: 1883
-    iot_subscribe_topic: |-
-      iot-subscribe
