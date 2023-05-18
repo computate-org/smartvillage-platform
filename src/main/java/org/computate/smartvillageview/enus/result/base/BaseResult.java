@@ -278,6 +278,7 @@ public class BaseResult extends BaseResultGen<Object> implements ComputateBaseRe
 	/**
 	 * {@inheritDoc}
 	 * UniqueKey: true
+	 * Persist: true
 	 * Description: The unique key for this record in the search engine
 	 */
 	protected void _id(Wrap<String> w) {

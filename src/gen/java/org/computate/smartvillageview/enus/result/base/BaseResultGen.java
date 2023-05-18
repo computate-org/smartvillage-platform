@@ -1288,6 +1288,10 @@ public abstract class BaseResultGen<DEV> extends Object {
 		return BaseResult.staticSearchStrId(siteRequest_, BaseResult.staticSearchId(siteRequest_, BaseResult.staticSetId(siteRequest_, o)));
 	}
 
+	public String sqlId() {
+		return id;
+	}
+
 	//////////////
 	// initDeep //
 	//////////////
@@ -1733,6 +1737,12 @@ public abstract class BaseResultGen<DEV> extends Object {
 					setObjectId((String)val);
 				}
 				saves.add("objectId");
+				return val;
+			} else if("id".equals(varLower)) {
+				if(val instanceof String) {
+					setId((String)val);
+				}
+				saves.add("id");
 				return val;
 		} else {
 			return null;
