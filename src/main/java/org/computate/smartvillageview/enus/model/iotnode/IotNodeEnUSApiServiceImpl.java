@@ -29,45 +29,45 @@ public class IotNodeEnUSApiServiceImpl extends IotNodeEnUSGenApiServiceImpl {
 		super(eventBus, config, workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine);
 	}
 
-	@Override
-	public Future<Void> persistIotNode(IotNode o, Boolean patch) {
-		Promise<Void> promise = Promise.promise();
-		super.persistIotNode(o, patch).onComplete(a -> {
-			o.promiseDeepIotNode().onSuccess(b -> {
-				JsonObject json = fiwareIotNode(o, patch);
-				if(json.size() > 0) {
-					webClient.request(
-									patch ? HttpMethod.PUT : HttpMethod.POST 
-									, config.getInteger(ConfigKeys.FIWARE_PORT)
-									, config.getString(ConfigKeys.FIWARE_HOST_NAME)
-									, String.format("%s/entities%s", config.getString(ConfigKeys.FIWARE_API_URI), patch ? String.format("/%s/attrs", SearchTool.urlEncode(o.getNodeId())) : "")
-							).ssl(config.getBoolean(ConfigKeys.FIWARE_SSL))
-							.putHeader("Content-Type", "application/json")
-							.sendBuffer(json.toBuffer())
-							.onSuccess(c -> {
-						if(c.statusCode() == 200 || c.statusCode() == 201 || c.statusCode() == 204 || c.statusCode() == 422) {
-							promise.complete();
-						} else {
-							RuntimeException ex = new RuntimeException();
-							LOG.error(String.format("indexIotNode failed: %s", c.statusMessage()), ex);
-							json.toString();
-							o.toString();
-							promise.fail(ex);
-						}
-					}).onFailure(ex -> {
-						promise.fail(ex);
-					});
-				} else {
-					promise.complete();
-				}
-			}).onFailure(ex -> {
-				promise.fail(ex);
-			});
-		}).onFailure(ex -> {
-			promise.fail(ex);
-		});
-		return promise.future();
-	}
+//	@Override
+//	public Future<Void> persistIotNode(IotNode o, Boolean patch) {
+//		Promise<Void> promise = Promise.promise();
+//		super.persistIotNode(o, patch).onComplete(a -> {
+//			o.promiseDeepIotNode().onSuccess(b -> {
+//				JsonObject json = fiwareIotNode(o, patch);
+//				if(json.size() > 0) {
+//					webClient.request(
+//									patch ? HttpMethod.PUT : HttpMethod.POST 
+//									, config.getInteger(ConfigKeys.FIWARE_PORT)
+//									, config.getString(ConfigKeys.FIWARE_HOST_NAME)
+//									, String.format("%s/entities%s", config.getString(ConfigKeys.FIWARE_API_URI), patch ? String.format("/%s/attrs", SearchTool.urlEncode(o.getNodeId())) : "")
+//							).ssl(config.getBoolean(ConfigKeys.FIWARE_SSL))
+//							.putHeader("Content-Type", "application/json")
+//							.sendBuffer(json.toBuffer())
+//							.onSuccess(c -> {
+//						if(c.statusCode() == 200 || c.statusCode() == 201 || c.statusCode() == 204 || c.statusCode() == 422) {
+//							promise.complete();
+//						} else {
+//							RuntimeException ex = new RuntimeException();
+//							LOG.error(String.format("indexIotNode failed: %s", c.statusMessage()), ex);
+//							json.toString();
+//							o.toString();
+//							promise.fail(ex);
+//						}
+//					}).onFailure(ex -> {
+//						promise.fail(ex);
+//					});
+//				} else {
+//					promise.complete();
+//				}
+//			}).onFailure(ex -> {
+//				promise.fail(ex);
+//			});
+//		}).onFailure(ex -> {
+//			promise.fail(ex);
+//		});
+//		return promise.future();
+//	}
 
 	public JsonObject fiwareIotNode(IotNode o, Boolean patch) {
 		JsonObject json = new JsonObject();

@@ -52,6 +52,7 @@ spec:
       /home/ctate/.local/src/smartabyar-smartvillage/src/main/resources/templates
     worker_pool_size: 1
     enable_zookeeper_cluster: True
+    static_base_url: https://computate.neocities.org/smart-village-view
     ssl_verify: False
     default_map_location: |-
       55.61888,13.548799
@@ -129,9 +130,7 @@ spec:
     port: 80
     ssl: False
     route:
-      create: true
-      host_name: |-
-        solr.apps-crc.testing
+      create: false
     collection: |-
       smartvillage
     resources:

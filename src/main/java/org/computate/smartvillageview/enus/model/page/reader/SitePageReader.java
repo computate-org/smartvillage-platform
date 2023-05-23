@@ -261,14 +261,12 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 	 * Description: Import futures
 	 * Val.Fail.enUS:Importing futures failed. 
 	 */
-	public Future<Void> importFutures(List<Future> futures, Long i, Long rows) {
+	public Future<Void> importFutures(List<JsonObject> futureRequests, Integer i) {
 		Promise<Void> promise = Promise.promise();
 		try {
-			if(i < futures.size()) {
-				List<Future> subList = futures.stream().skip(i).limit(rows).collect(Collectors.toList());
-				LOG.info(String.format("importing %s futures starting at index %s", subList.size(), i));
-				CompositeFuture.all(subList).onSuccess(b -> {
-					importFutures(futures, i + rows, rows).onSuccess(recordMetadata -> {
+			if(i < futureRequests.size()) {
+				vertx.eventBus().request(String.format("smartabyar-smartvillage-enUS-%s", SiteHtm.CLASS_SIMPLE_NAME), futureRequests.get(i), new DeliveryOptions().setSendTimeout(config.getLong(ConfigKeys.VERTX_MAX_EVENT_LOOP_EXECUTE_TIME) * 1000).addHeader("action", String.format("putimport%sFuture", SiteHtm.CLASS_SIMPLE_NAME))).onSuccess(a -> {
+					importFutures(futureRequests, i + 1).onSuccess(recordMetadata -> {
 						promise.complete();
 					}).onFailure(ex -> {
 						LOG.error(importFuturesFail, ex);
@@ -343,7 +341,7 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 						try {
 							JsonObject importBody = new JsonObject();
 							JsonArray importItems = new JsonArray();
-							List<Future> futures = new ArrayList<>();
+							List<JsonObject> futureRequests = new ArrayList<>();
 							Stack<String> stack = new Stack<>();
 							JsonObject pageBody1 = JsonObject.mapFrom(page);
 							json.put("page", pageBody1);
@@ -373,31 +371,27 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 							for(String htmGroup : json.fieldNames()) {
 								if(StringUtils.startsWith(htmGroup, "htm")) {
 									JsonArray pageItems = json.getJsonArray(htmGroup);
-									sequenceNum = importSiteHtm(page, json, new JsonArray(), stack, pageId, htmGroup, pageItems, futures, sequenceNum);
+									sequenceNum = importSiteHtm(page, json, new JsonArray(), stack, pageId, htmGroup, pageItems, futureRequests, sequenceNum);
 								}
 							}
 							JsonObject pageBody2 = JsonObject.mapFrom(page);
 							json.put("page", pageBody2);
 
 							Long apiCounterFetch = config.getLong(ConfigKeys.API_COUNTER_FETCH_SiteHtm);
-							importFutures(futures, 0L, apiCounterFetch).onSuccess(b -> {
+							importFutures(futureRequests, 0).onSuccess(b -> {
 								JsonObject pageParams = new JsonObject();
 								pageParams.put("body", pageBody2);
 								pageParams.put("path", new JsonObject());
 								pageParams.put("cookie", new JsonObject());
-								pageParams.put("query", new JsonObject().put("commitWithin", 1000).put("q", "*:*").put("var", new JsonArray().add("refresh:false")));
+								pageParams.put("query", new JsonObject().put("softCommit", true).put("q", "*:*").put("var", new JsonArray().add("refresh:false")));
 								JsonObject pageContext = new JsonObject().put("params", pageParams);
 								JsonObject pageRequest = new JsonObject().put("context", pageContext);
 
-//								futures.add(vertx.eventBus().request(String.format("smartabyar-smartvillage-enUS-%s", SitePage.CLASS_SIMPLE_NAME), pageRequest, new DeliveryOptions().setSendTimeout(config.getLong(ConfigKeys.VERTX_MAX_EVENT_LOOP_EXECUTE_TIME) * 1000).addHeader("action", String.format("putimport%sFuture", SitePage.CLASS_SIMPLE_NAME))));
-								futures.add(Future.future(promise2 -> {
-									vertx.eventBus().request(String.format("smartabyar-smartvillage-enUS-%s", SitePage.CLASS_SIMPLE_NAME), pageRequest, new DeliveryOptions().setSendTimeout(config.getLong(ConfigKeys.VERTX_MAX_EVENT_LOOP_EXECUTE_TIME) * 1000).addHeader("action", String.format("putimport%sFuture", SitePage.CLASS_SIMPLE_NAME))).onSuccess(message -> {
-										promise2.complete();
-									}).onFailure(ex -> {
-										promise2.fail(ex);
-									});
-								}));
-								promise.complete();
+								vertx.eventBus().request(String.format("smartabyar-smartvillage-enUS-%s", SitePage.CLASS_SIMPLE_NAME), pageRequest, new DeliveryOptions().setSendTimeout(config.getLong(ConfigKeys.VERTX_MAX_EVENT_LOOP_EXECUTE_TIME) * 1000).addHeader("action", String.format("putimport%sFuture", SitePage.CLASS_SIMPLE_NAME))).onSuccess(message -> {
+									promise.complete();
+								}).onFailure(ex -> {
+									promise.fail(ex);
+								});
 							}).onFailure(ex -> {
 								LOG.error(String.format(importSitePageFail, pageBody2.getString(SitePage.VAR_id)), ex);
 								promise.fail(ex);
@@ -430,7 +424,7 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 	 * Val.Complete.enUS:Importing page htm completed
 	 * Val.Fail.enUS:Importing page htm failed: %s
 	 */
-	private Long importSiteHtm(SitePage page, JsonObject json, JsonArray labels, Stack<String> stack, String pageId, String htmGroup, JsonArray pageItems, List<Future> futures, Long sequenceNum) throws Exception {
+	private Long importSiteHtm(SitePage page, JsonObject json, JsonArray labels, Stack<String> stack, String pageId, String htmGroup, JsonArray pageItems, List<JsonObject> futureRequests, Long sequenceNum) throws Exception {
 		try {
 			for(Integer i = 0; i < pageItems.size(); i++) {
 				// Process a page item, one at a time
@@ -603,7 +597,7 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 						}
 						importItem.put(SiteHtm.VAR_a, attrs);
 					}
-					importItem.put(SiteHtm.VAR_id, String.format("%s_%s", SiteHtm.CLASS_SIMPLE_NAME, pageId, sequenceNum));
+					importItem.put(SiteHtm.VAR_id, String.format("%s_%s_%s", SiteHtm.CLASS_SIMPLE_NAME, pageId, sequenceNum));
 					for(Integer j=1; j <= stack.size(); j++) {
 						// Add sort values for the element at each level of the stack
 						importItem.put("sort" + j, stack.get(j - 1));
@@ -614,18 +608,34 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 					htmParams.put("body", importItem);
 					htmParams.put("path", new JsonObject());
 					htmParams.put("cookie", new JsonObject());
-					htmParams.put("query", new JsonObject().put("commitWithin", 1000).put("q", "*:*").put("var", new JsonArray().add("refresh:false")));
+					htmParams.put("query", new JsonObject().put("softCommit", true).put("q", "*:*").put("var", new JsonArray().add("refresh:false")));
 					JsonObject htmContext = new JsonObject().put("params", htmParams);
 					JsonObject htmRequest = new JsonObject().put("context", htmContext);
 
-//					futures.add(vertx.eventBus().request(String.format("smartabyar-smartvillage-enUS-%s", SiteHtm.CLASS_SIMPLE_NAME), htmRequest, new DeliveryOptions().setSendTimeout(config.getLong(ConfigKeys.VERTX_MAX_EVENT_LOOP_EXECUTE_TIME) * 1000).addHeader("action", String.format("putimport%sFuture", SiteHtm.CLASS_SIMPLE_NAME))));
-					futures.add(Future.future(promise2 -> {
-						vertx.eventBus().request(String.format("smartabyar-smartvillage-enUS-%s", SiteHtm.CLASS_SIMPLE_NAME), htmRequest, new DeliveryOptions().setSendTimeout(config.getLong(ConfigKeys.VERTX_MAX_EVENT_LOOP_EXECUTE_TIME) * 1000).addHeader("action", String.format("putimport%sFuture", SiteHtm.CLASS_SIMPLE_NAME))).onSuccess(message -> {
-							promise2.complete();
-						}).onFailure(ex -> {
-							promise2.fail(ex);
-						});
-					}));
+					Promise<Void> promise = Promise.promise();
+//					promise.future().compose(b -> {
+//						Promise<Void> promise2 = Promise.promise();
+//						vertx.eventBus().request(String.format("smartabyar-smartvillage-enUS-%s", SiteHtm.CLASS_SIMPLE_NAME), htmRequest, new DeliveryOptions().setSendTimeout(config.getLong(ConfigKeys.VERTX_MAX_EVENT_LOOP_EXECUTE_TIME) * 1000).addHeader("action", String.format("putimport%sFuture", SiteHtm.CLASS_SIMPLE_NAME))).onSuccess(message -> {
+//							promise2.complete();
+//						}).onFailure(ex -> {
+//							promise2.fail(ex);
+//						});
+//						return promise2.future();
+//					});
+//					promise.future().onComplete(b -> {
+//						vertx.eventBus().request(String.format("smartabyar-smartvillage-enUS-%s", SiteHtm.CLASS_SIMPLE_NAME), htmRequest, new DeliveryOptions().setSendTimeout(config.getLong(ConfigKeys.VERTX_MAX_EVENT_LOOP_EXECUTE_TIME) * 1000).addHeader("action", String.format("putimport%sFuture", SiteHtm.CLASS_SIMPLE_NAME)));
+//						b.
+//					});
+					futureRequests.add(htmRequest);
+//					futures.add(Promise.promise().future().compose(b -> {
+//						Promise<Void> promise2 = Promise.promise();
+//						vertx.eventBus().request(String.format("smartabyar-smartvillage-enUS-%s", SiteHtm.CLASS_SIMPLE_NAME), htmRequest, new DeliveryOptions().setSendTimeout(config.getLong(ConfigKeys.VERTX_MAX_EVENT_LOOP_EXECUTE_TIME) * 1000).addHeader("action", String.format("putimport%sFuture", SiteHtm.CLASS_SIMPLE_NAME))).onSuccess(message -> {
+//							promise2.complete();
+//						}).onFailure(ex -> {
+//							promise2.fail(ex);
+//						});
+//						return promise2.future();
+//					}));
 					//KafkaProducerRecord<String, String> record = KafkaProducerRecord.create(topic, htmRequest.encode());
 					//futures.add(kafkaProducer.send(record));
 				}
@@ -649,10 +659,10 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 								// Process nested elements of the "in" value
 								if(in instanceof JsonObject) {
 									// Process the nested JsonObject of the "in" value
-									sequenceNum = importSiteHtm(page, json2, labels3, stack, pageId, htmGroup, new JsonArray().add(in), futures, sequenceNum);
+									sequenceNum = importSiteHtm(page, json2, labels3, stack, pageId, htmGroup, new JsonArray().add(in), futureRequests, sequenceNum);
 								} else if(in instanceof JsonArray) {
 									// Process the each of the nested JsonObjects in the array of the "in" value
-									sequenceNum = importSiteHtm(page, json2, labels3, stack, pageId, htmGroup, (JsonArray)in, futures, sequenceNum);
+									sequenceNum = importSiteHtm(page, json2, labels3, stack, pageId, htmGroup, (JsonArray)in, futureRequests, sequenceNum);
 								}
 							}
 						} else if(StringUtils.startsWith(str, "{")) {
@@ -667,10 +677,10 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 								// Process nested elements of the "in" value
 								if(in instanceof JsonObject) {
 									// Process the nested JsonObject of the "in" value
-									sequenceNum = importSiteHtm(page, json2, labels3, stack, pageId, htmGroup, new JsonArray().add(in), futures, sequenceNum);
+									sequenceNum = importSiteHtm(page, json2, labels3, stack, pageId, htmGroup, new JsonArray().add(in), futureRequests, sequenceNum);
 								} else if(in instanceof JsonArray) {
 									// Process the each of the nested JsonObjects in the array of the "in" value
-									sequenceNum = importSiteHtm(page, json2, labels3, stack, pageId, htmGroup, (JsonArray)in, futures, sequenceNum);
+									sequenceNum = importSiteHtm(page, json2, labels3, stack, pageId, htmGroup, (JsonArray)in, futureRequests, sequenceNum);
 								}
 							}
 						}
@@ -681,10 +691,10 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 						// Process nested elements of the "block" value
 						if(in instanceof JsonObject) {
 							// Process the nested JsonObject of the "block" value
-							sequenceNum = importSiteHtm(page, json, labels3, stack, pageId, htmGroup, new JsonArray().add(in), futures, sequenceNum);
+							sequenceNum = importSiteHtm(page, json, labels3, stack, pageId, htmGroup, new JsonArray().add(in), futureRequests, sequenceNum);
 						} else if(in instanceof JsonArray) {
 							// Process the each of the nested JsonObjects in the array of the "block" value
-							sequenceNum = importSiteHtm(page, json, labels3, stack, pageId, htmGroup, (JsonArray)in, futures, sequenceNum);
+							sequenceNum = importSiteHtm(page, json, labels3, stack, pageId, htmGroup, (JsonArray)in, futureRequests, sequenceNum);
 						}
 					}
 				}
@@ -729,18 +739,20 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 					htmParams.put("body", importItem);
 					htmParams.put("path", new JsonObject());
 					htmParams.put("cookie", new JsonObject());
-					htmParams.put("query", new JsonObject().put("commitWithin", 1000).put("q", "*:*").put("var", new JsonArray().add("refresh:false")));
+					htmParams.put("query", new JsonObject().put("softCommit", true).put("q", "*:*").put("var", new JsonArray().add("refresh:false")));
 					JsonObject htmContext = new JsonObject().put("params", htmParams);
 					JsonObject htmRequest = new JsonObject().put("context", htmContext);
 
-//					futures.add(vertx.eventBus().request(String.format("smartabyar-smartvillage-enUS-%s", SiteHtm.CLASS_SIMPLE_NAME), htmRequest, new DeliveryOptions().setSendTimeout(config.getLong(ConfigKeys.VERTX_MAX_EVENT_LOOP_EXECUTE_TIME) * 1000).addHeader("action", String.format("putimport%sFuture", SiteHtm.CLASS_SIMPLE_NAME))));
-					futures.add(Future.future(promise2 -> {
-						vertx.eventBus().request(String.format("smartabyar-smartvillage-enUS-%s", SiteHtm.CLASS_SIMPLE_NAME), htmRequest, new DeliveryOptions().setSendTimeout(config.getLong(ConfigKeys.VERTX_MAX_EVENT_LOOP_EXECUTE_TIME) * 1000).addHeader("action", String.format("putimport%sFuture", SiteHtm.CLASS_SIMPLE_NAME))).onSuccess(message -> {
-							promise2.complete();
-						}).onFailure(ex -> {
-							promise2.fail(ex);
-						});
-					}));
+					futureRequests.add(htmRequest);
+//					futures.add(Future.succeededFuture().compose(b -> {
+//						Promise<Void> promise2 = Promise.promise();
+//						vertx.eventBus().request(String.format("smartabyar-smartvillage-enUS-%s", SiteHtm.CLASS_SIMPLE_NAME), htmRequest, new DeliveryOptions().setSendTimeout(config.getLong(ConfigKeys.VERTX_MAX_EVENT_LOOP_EXECUTE_TIME) * 1000).addHeader("action", String.format("putimport%sFuture", SiteHtm.CLASS_SIMPLE_NAME))).onSuccess(message -> {
+//							promise2.complete();
+//						}).onFailure(ex -> {
+//							promise2.fail(ex);
+//						});
+//						return promise2.future();
+//					}));
 					//KafkaProducerRecord<String, String> record = KafkaProducerRecord.create(topic, htmRequest.encode());
 					//futures.add(kafkaProducer.send(record));
 				}
