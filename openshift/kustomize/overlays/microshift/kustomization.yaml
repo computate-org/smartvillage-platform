@@ -9,4 +9,4 @@ resources:
   - orionldcontextbrokers/
   - iotagentjsons/
   - smartabyarsmartvillages/
-    #  - trafficflowobserveds/
+  - trafficflowobserveds/

@@ -11,5 +11,7 @@ metadata:
   namespace: smartvillage
 spec:
   iotagent:
+    replicas: 1
     route:
       create: true
+

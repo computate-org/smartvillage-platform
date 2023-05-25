@@ -20,10 +20,11 @@ spec:
     area_served: |
       96027913#0 96027913#2 30186293 311389510#1
     average_gap_distance: 1
+    congested: true
   iotagent:
-    base_url: http://iotagent-json-smartvillage.apps-crc.testing
+          base_url: http://iotagent-json.smartvillage.svc:4041
   context_broker:
-    base_url: http://orion-ld-smartvillage.apps-crc.testing
+          base_url: http://orion-ld.smartvillage.svc:1026
   fiware:
     service: |-
       smarttrafficlights
@@ -46,12 +47,8 @@ spec:
       iot/subscribe
   smartabyar_smartvillage:
     enabled: True
-    auth_secret_name: |-
-      keycloak-client-secret-smartvillage
-    auth_token_url: |-
-      https://sso.computate.org/realms/SMARTVILLAGE/protocol/openid-connect/token
-    smart_model_api: |-
-      /api/traffic-flow-observed
+    auth_token_url: https://sso.computate.org/auth/realms/SMARTVILLAGE/protocol/openid-connect/token
+    site_base_url: https://smartvillage.computate.org
   alternate_model:
     enabled: True
     id: |-
