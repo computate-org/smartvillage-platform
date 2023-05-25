@@ -6,6 +6,7 @@ resources:
     #  - ../../bundles/postgres/base/
     #- ../../bundles/solr/base/
 
+  - edgeamqbrokers/
   - orionldcontextbrokers/
   - iotagentjsons/
   - smartabyarsmartvillages/
