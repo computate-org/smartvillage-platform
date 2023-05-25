@@ -15,3 +15,5 @@ spec:
     create: false
   solr:
     create: false
+  kafka:
+    create: false
