@@ -37,6 +37,7 @@ import java.lang.Long;
 import org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation;
 import java.lang.String;
 import org.computate.vertx.search.list.SearchList;
+import org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLight;
 import java.math.BigDecimal;
 import io.vertx.core.json.JsonArray;
 import java.lang.Integer;
@@ -381,6 +382,146 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		return (SimulationReport)this;
 	}
 
+	/////////////////////////
+	// smartTrafficLightId //
+	/////////////////////////
+
+
+	/**	 The entity smartTrafficLightId
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String smartTrafficLightId;
+
+	/**	<br> The entity smartTrafficLightId
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:smartTrafficLightId">Find the entity smartTrafficLightId in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _smartTrafficLightId(Wrap<String> w);
+
+	public String getSmartTrafficLightId() {
+		return smartTrafficLightId;
+	}
+	public void setSmartTrafficLightId(String o) {
+		this.smartTrafficLightId = SimulationReport.staticSetSmartTrafficLightId(siteRequest_, o);
+	}
+	public static String staticSetSmartTrafficLightId(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected SimulationReport smartTrafficLightIdInit() {
+		Wrap<String> smartTrafficLightIdWrap = new Wrap<String>().var("smartTrafficLightId");
+		if(smartTrafficLightId == null) {
+			_smartTrafficLightId(smartTrafficLightIdWrap);
+			setSmartTrafficLightId(smartTrafficLightIdWrap.o);
+		}
+		return (SimulationReport)this;
+	}
+
+	public static String staticSearchSmartTrafficLightId(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrSmartTrafficLightId(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqSmartTrafficLightId(SiteRequestEnUS siteRequest_, String o) {
+		return SimulationReport.staticSearchStrSmartTrafficLightId(siteRequest_, SimulationReport.staticSearchSmartTrafficLightId(siteRequest_, SimulationReport.staticSetSmartTrafficLightId(siteRequest_, o)));
+	}
+
+	/////////////////////////////
+	// smartTrafficLightSearch //
+	/////////////////////////////
+
+
+	/**	 The entity smartTrafficLightSearch
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonIgnore
+	@JsonInclude(Include.NON_NULL)
+	protected SearchList<SmartTrafficLight> smartTrafficLightSearch;
+
+	/**	<br> The entity smartTrafficLightSearch
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:smartTrafficLightSearch">Find the entity smartTrafficLightSearch in Solr</a>
+	 * <br>
+	 * @param promise is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _smartTrafficLightSearch(Promise<SearchList<SmartTrafficLight>> promise);
+
+	public SearchList<SmartTrafficLight> getSmartTrafficLightSearch() {
+		return smartTrafficLightSearch;
+	}
+
+	public void setSmartTrafficLightSearch(SearchList<SmartTrafficLight> smartTrafficLightSearch) {
+		this.smartTrafficLightSearch = smartTrafficLightSearch;
+	}
+	public static SearchList<SmartTrafficLight> staticSetSmartTrafficLightSearch(SiteRequestEnUS siteRequest_, String o) {
+		return null;
+	}
+	protected Future<SearchList<SmartTrafficLight>> smartTrafficLightSearchPromise() {
+		Promise<SearchList<SmartTrafficLight>> promise = Promise.promise();
+		Promise<SearchList<SmartTrafficLight>> promise2 = Promise.promise();
+		_smartTrafficLightSearch(promise2);
+		promise2.future().onSuccess(o -> {
+			if(o != null && smartTrafficLightSearch == null) {
+				o.promiseDeepForClass(siteRequest_).onSuccess(a -> {
+					setSmartTrafficLightSearch(o);
+					promise.complete(o);
+				}).onFailure(ex -> {
+					promise.fail(ex);
+				});
+			} else {
+				promise.complete(o);
+			}
+		}).onFailure(ex -> {
+			promise.fail(ex);
+		});
+		return promise.future();
+	}
+
+	////////////////////////
+	// smartTrafficLight_ //
+	////////////////////////
+
+
+	/**	 The entity smartTrafficLight_
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonIgnore
+	@JsonInclude(Include.NON_NULL)
+	protected SmartTrafficLight smartTrafficLight_;
+
+	/**	<br> The entity smartTrafficLight_
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:smartTrafficLight_">Find the entity smartTrafficLight_ in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _smartTrafficLight_(Wrap<SmartTrafficLight> w);
+
+	public SmartTrafficLight getSmartTrafficLight_() {
+		return smartTrafficLight_;
+	}
+
+	public void setSmartTrafficLight_(SmartTrafficLight smartTrafficLight_) {
+		this.smartTrafficLight_ = smartTrafficLight_;
+	}
+	public static SmartTrafficLight staticSetSmartTrafficLight_(SiteRequestEnUS siteRequest_, String o) {
+		return null;
+	}
+	protected SimulationReport smartTrafficLight_Init() {
+		Wrap<SmartTrafficLight> smartTrafficLight_Wrap = new Wrap<SmartTrafficLight>().var("smartTrafficLight_");
+		if(smartTrafficLight_ == null) {
+			_smartTrafficLight_(smartTrafficLight_Wrap);
+			setSmartTrafficLight_(smartTrafficLight_Wrap.o);
+		}
+		return (SimulationReport)this;
+	}
+
 	////////////////////
 	// simulationName //
 	////////////////////
@@ -433,6 +574,60 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 
 	public String sqlSimulationName() {
 		return simulationName;
+	}
+
+	///////////////////////////
+	// smartTrafficLightName //
+	///////////////////////////
+
+
+	/**	 The entity smartTrafficLightName
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String smartTrafficLightName;
+
+	/**	<br> The entity smartTrafficLightName
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:smartTrafficLightName">Find the entity smartTrafficLightName in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _smartTrafficLightName(Wrap<String> w);
+
+	public String getSmartTrafficLightName() {
+		return smartTrafficLightName;
+	}
+	public void setSmartTrafficLightName(String o) {
+		this.smartTrafficLightName = SimulationReport.staticSetSmartTrafficLightName(siteRequest_, o);
+	}
+	public static String staticSetSmartTrafficLightName(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected SimulationReport smartTrafficLightNameInit() {
+		Wrap<String> smartTrafficLightNameWrap = new Wrap<String>().var("smartTrafficLightName");
+		if(smartTrafficLightName == null) {
+			_smartTrafficLightName(smartTrafficLightNameWrap);
+			setSmartTrafficLightName(smartTrafficLightNameWrap.o);
+		}
+		return (SimulationReport)this;
+	}
+
+	public static String staticSearchSmartTrafficLightName(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrSmartTrafficLightName(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqSmartTrafficLightName(SiteRequestEnUS siteRequest_, String o) {
+		return SimulationReport.staticSearchStrSmartTrafficLightName(siteRequest_, SimulationReport.staticSearchSmartTrafficLightName(siteRequest_, SimulationReport.staticSetSmartTrafficLightName(siteRequest_, o)));
+	}
+
+	public String sqlSmartTrafficLightName() {
+		return smartTrafficLightName;
 	}
 
 	////////////////
@@ -2834,7 +3029,26 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			Promise<Void> promise2 = Promise.promise();
 			try {
 				simulation_Init();
+				smartTrafficLightIdInit();
+				promise2.complete();
+			} catch(Exception ex) {
+				promise2.fail(ex);
+			}
+			return promise2.future();
+		}).compose(a -> {
+			Promise<Void> promise2 = Promise.promise();
+			smartTrafficLightSearchPromise().onSuccess(smartTrafficLightSearch -> {
+				promise2.complete();
+			}).onFailure(ex -> {
+				promise2.fail(ex);
+			});
+			return promise2.future();
+		}).compose(a -> {
+			Promise<Void> promise2 = Promise.promise();
+			try {
+				smartTrafficLight_Init();
 				simulationNameInit();
+				smartTrafficLightNameInit();
 				reportNameInit();
 				paramAvgVehiclePerMinFromWestToEastInit();
 				paramAvgVehiclePerMinFromSouthToNorthInit();
@@ -2927,8 +3141,16 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 				return oSimulationReport.simulationSearch;
 			case "simulation_":
 				return oSimulationReport.simulation_;
+			case "smartTrafficLightId":
+				return oSimulationReport.smartTrafficLightId;
+			case "smartTrafficLightSearch":
+				return oSimulationReport.smartTrafficLightSearch;
+			case "smartTrafficLight_":
+				return oSimulationReport.smartTrafficLight_;
 			case "simulationName":
 				return oSimulationReport.simulationName;
+			case "smartTrafficLightName":
+				return oSimulationReport.smartTrafficLightName;
 			case "reportName":
 				return oSimulationReport.reportName;
 			case "paramAvgVehiclePerMinFromWestToEast":
@@ -3042,8 +3264,12 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		switch(entityVar) {
 		case "simulationKey":
 			return SimulationReport.staticSetSimulationKey(siteRequest_, o);
+		case "smartTrafficLightId":
+			return SimulationReport.staticSetSmartTrafficLightId(siteRequest_, o);
 		case "simulationName":
 			return SimulationReport.staticSetSimulationName(siteRequest_, o);
+		case "smartTrafficLightName":
+			return SimulationReport.staticSetSmartTrafficLightName(siteRequest_, o);
 		case "reportName":
 			return SimulationReport.staticSetReportName(siteRequest_, o);
 		case "paramAvgVehiclePerMinFromWestToEast":
@@ -3126,8 +3352,12 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		switch(entityVar) {
 		case "simulationKey":
 			return SimulationReport.staticSearchSimulationKey(siteRequest_, (Long)o);
+		case "smartTrafficLightId":
+			return SimulationReport.staticSearchSmartTrafficLightId(siteRequest_, (String)o);
 		case "simulationName":
 			return SimulationReport.staticSearchSimulationName(siteRequest_, (String)o);
+		case "smartTrafficLightName":
+			return SimulationReport.staticSearchSmartTrafficLightName(siteRequest_, (String)o);
 		case "reportName":
 			return SimulationReport.staticSearchReportName(siteRequest_, (String)o);
 		case "paramAvgVehiclePerMinFromWestToEast":
@@ -3210,8 +3440,12 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		switch(entityVar) {
 		case "simulationKey":
 			return SimulationReport.staticSearchStrSimulationKey(siteRequest_, (Long)o);
+		case "smartTrafficLightId":
+			return SimulationReport.staticSearchStrSmartTrafficLightId(siteRequest_, (String)o);
 		case "simulationName":
 			return SimulationReport.staticSearchStrSimulationName(siteRequest_, (String)o);
+		case "smartTrafficLightName":
+			return SimulationReport.staticSearchStrSmartTrafficLightName(siteRequest_, (String)o);
 		case "reportName":
 			return SimulationReport.staticSearchStrReportName(siteRequest_, (String)o);
 		case "paramAvgVehiclePerMinFromWestToEast":
@@ -3294,8 +3528,12 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		switch(entityVar) {
 		case "simulationKey":
 			return SimulationReport.staticSearchFqSimulationKey(siteRequest_, o);
+		case "smartTrafficLightId":
+			return SimulationReport.staticSearchFqSmartTrafficLightId(siteRequest_, o);
 		case "simulationName":
 			return SimulationReport.staticSearchFqSimulationName(siteRequest_, o);
+		case "smartTrafficLightName":
+			return SimulationReport.staticSearchFqSmartTrafficLightName(siteRequest_, o);
 		case "reportName":
 			return SimulationReport.staticSearchFqReportName(siteRequest_, o);
 		case "paramAvgVehiclePerMinFromWestToEast":
@@ -3401,6 +3639,12 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 					setSimulationName((String)val);
 				}
 				saves.add("simulationName");
+				return val;
+			} else if("smarttrafficlightname".equals(varLower)) {
+				if(val instanceof String) {
+					setSmartTrafficLightName((String)val);
+				}
+				saves.add("smartTrafficLightName");
 				return val;
 			} else if("reportname".equals(varLower)) {
 				if(val instanceof String) {
@@ -3628,6 +3872,226 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		SimulationReport oSimulationReport = (SimulationReport)this;
 		saves = doc.get("saves_docvalues_strings");
 		if(saves != null) {
+
+			Long simulationKey = (Long)doc.get("simulationKey_docvalues_long");
+			if(simulationKey != null)
+				oSimulationReport.setSimulationKey(simulationKey);
+
+			if(saves.contains("smartTrafficLightId")) {
+				String smartTrafficLightId = (String)doc.get("smartTrafficLightId_docvalues_string");
+				if(smartTrafficLightId != null)
+					oSimulationReport.setSmartTrafficLightId(smartTrafficLightId);
+			}
+
+			if(saves.contains("simulationName")) {
+				String simulationName = (String)doc.get("simulationName_docvalues_string");
+				if(simulationName != null)
+					oSimulationReport.setSimulationName(simulationName);
+			}
+
+			if(saves.contains("smartTrafficLightName")) {
+				String smartTrafficLightName = (String)doc.get("smartTrafficLightName_docvalues_string");
+				if(smartTrafficLightName != null)
+					oSimulationReport.setSmartTrafficLightName(smartTrafficLightName);
+			}
+
+			if(saves.contains("reportName")) {
+				String reportName = (String)doc.get("reportName_docvalues_string");
+				if(reportName != null)
+					oSimulationReport.setReportName(reportName);
+			}
+
+			if(saves.contains("paramAvgVehiclePerMinFromWestToEast")) {
+				Double paramAvgVehiclePerMinFromWestToEast = (Double)doc.get("paramAvgVehiclePerMinFromWestToEast_docvalues_double");
+				if(paramAvgVehiclePerMinFromWestToEast != null)
+					oSimulationReport.setParamAvgVehiclePerMinFromWestToEast(paramAvgVehiclePerMinFromWestToEast);
+			}
+
+			if(saves.contains("paramAvgVehiclePerMinFromSouthToNorth")) {
+				Double paramAvgVehiclePerMinFromSouthToNorth = (Double)doc.get("paramAvgVehiclePerMinFromSouthToNorth_docvalues_double");
+				if(paramAvgVehiclePerMinFromSouthToNorth != null)
+					oSimulationReport.setParamAvgVehiclePerMinFromSouthToNorth(paramAvgVehiclePerMinFromSouthToNorth);
+			}
+
+			if(saves.contains("paramVehicleDemandScalingFactor")) {
+				Double paramVehicleDemandScalingFactor = (Double)doc.get("paramVehicleDemandScalingFactor_docvalues_double");
+				if(paramVehicleDemandScalingFactor != null)
+					oSimulationReport.setParamVehicleDemandScalingFactor(paramVehicleDemandScalingFactor);
+			}
+
+			if(saves.contains("paramAvgPedestrianPerMinFromWestToEast")) {
+				Double paramAvgPedestrianPerMinFromWestToEast = (Double)doc.get("paramAvgPedestrianPerMinFromWestToEast_docvalues_double");
+				if(paramAvgPedestrianPerMinFromWestToEast != null)
+					oSimulationReport.setParamAvgPedestrianPerMinFromWestToEast(paramAvgPedestrianPerMinFromWestToEast);
+			}
+
+			if(saves.contains("paramAvgPedestrianPerMinFromSouthToNorth")) {
+				Double paramAvgPedestrianPerMinFromSouthToNorth = (Double)doc.get("paramAvgPedestrianPerMinFromSouthToNorth_docvalues_double");
+				if(paramAvgPedestrianPerMinFromSouthToNorth != null)
+					oSimulationReport.setParamAvgPedestrianPerMinFromSouthToNorth(paramAvgPedestrianPerMinFromSouthToNorth);
+			}
+
+			if(saves.contains("paramPedestrianDemandScalingFactor")) {
+				Double paramPedestrianDemandScalingFactor = (Double)doc.get("paramPedestrianDemandScalingFactor_docvalues_double");
+				if(paramPedestrianDemandScalingFactor != null)
+					oSimulationReport.setParamPedestrianDemandScalingFactor(paramPedestrianDemandScalingFactor);
+			}
+
+			if(saves.contains("paramLam")) {
+				List<BigDecimal> paramLam = (List<BigDecimal>)doc.get("paramLam_docvalues_doubles");
+				if(paramLam != null)
+					oSimulationReport.paramLam.addAll(paramLam);
+			}
+
+			if(saves.contains("paramMinGreenTimeSecWestEast")) {
+				Double paramMinGreenTimeSecWestEast = (Double)doc.get("paramMinGreenTimeSecWestEast_docvalues_double");
+				if(paramMinGreenTimeSecWestEast != null)
+					oSimulationReport.setParamMinGreenTimeSecWestEast(paramMinGreenTimeSecWestEast);
+			}
+
+			if(saves.contains("paramMaxGreenTimeSecWestEast")) {
+				Double paramMaxGreenTimeSecWestEast = (Double)doc.get("paramMaxGreenTimeSecWestEast_docvalues_double");
+				if(paramMaxGreenTimeSecWestEast != null)
+					oSimulationReport.setParamMaxGreenTimeSecWestEast(paramMaxGreenTimeSecWestEast);
+			}
+
+			if(saves.contains("paramMinGreenTimeSecSouthNorth")) {
+				Double paramMinGreenTimeSecSouthNorth = (Double)doc.get("paramMinGreenTimeSecSouthNorth_docvalues_double");
+				if(paramMinGreenTimeSecSouthNorth != null)
+					oSimulationReport.setParamMinGreenTimeSecSouthNorth(paramMinGreenTimeSecSouthNorth);
+			}
+
+			if(saves.contains("paramMaxGreenTimeSecSouthNorth")) {
+				Double paramMaxGreenTimeSecSouthNorth = (Double)doc.get("paramMaxGreenTimeSecSouthNorth_docvalues_double");
+				if(paramMaxGreenTimeSecSouthNorth != null)
+					oSimulationReport.setParamMaxGreenTimeSecSouthNorth(paramMaxGreenTimeSecSouthNorth);
+			}
+
+			if(saves.contains("paramPedestrianWaitThresholdSecNorthSouth")) {
+				Double paramPedestrianWaitThresholdSecNorthSouth = (Double)doc.get("paramPedestrianWaitThresholdSecNorthSouth_docvalues_double");
+				if(paramPedestrianWaitThresholdSecNorthSouth != null)
+					oSimulationReport.setParamPedestrianWaitThresholdSecNorthSouth(paramPedestrianWaitThresholdSecNorthSouth);
+			}
+
+			if(saves.contains("paramPedestrianWaitThresholdSecWestEast")) {
+				Double paramPedestrianWaitThresholdSecWestEast = (Double)doc.get("paramPedestrianWaitThresholdSecWestEast_docvalues_double");
+				if(paramPedestrianWaitThresholdSecWestEast != null)
+					oSimulationReport.setParamPedestrianWaitThresholdSecWestEast(paramPedestrianWaitThresholdSecWestEast);
+			}
+
+			if(saves.contains("paramVehicleQueueThresholdWestEast")) {
+				Double paramVehicleQueueThresholdWestEast = (Double)doc.get("paramVehicleQueueThresholdWestEast_docvalues_double");
+				if(paramVehicleQueueThresholdWestEast != null)
+					oSimulationReport.setParamVehicleQueueThresholdWestEast(paramVehicleQueueThresholdWestEast);
+			}
+
+			if(saves.contains("paramVehicleQueueThresholdSouthNorth")) {
+				Double paramVehicleQueueThresholdSouthNorth = (Double)doc.get("paramVehicleQueueThresholdSouthNorth_docvalues_double");
+				if(paramVehicleQueueThresholdSouthNorth != null)
+					oSimulationReport.setParamVehicleQueueThresholdSouthNorth(paramVehicleQueueThresholdSouthNorth);
+			}
+
+			if(saves.contains("paramPedestrianQueueThresholdNorthSouth")) {
+				Double paramPedestrianQueueThresholdNorthSouth = (Double)doc.get("paramPedestrianQueueThresholdNorthSouth_docvalues_double");
+				if(paramPedestrianQueueThresholdNorthSouth != null)
+					oSimulationReport.setParamPedestrianQueueThresholdNorthSouth(paramPedestrianQueueThresholdNorthSouth);
+			}
+
+			if(saves.contains("paramPedestrianQueueThresholdWestEast")) {
+				Double paramPedestrianQueueThresholdWestEast = (Double)doc.get("paramPedestrianQueueThresholdWestEast_docvalues_double");
+				if(paramPedestrianQueueThresholdWestEast != null)
+					oSimulationReport.setParamPedestrianQueueThresholdWestEast(paramPedestrianQueueThresholdWestEast);
+			}
+
+			if(saves.contains("paramDemandScale")) {
+				List<BigDecimal> paramDemandScale = (List<BigDecimal>)doc.get("paramDemandScale_docvalues_doubles");
+				if(paramDemandScale != null)
+					oSimulationReport.paramDemandScale.addAll(paramDemandScale);
+			}
+
+			if(saves.contains("paramInitialPar")) {
+				List<BigDecimal> paramInitialPar = (List<BigDecimal>)doc.get("paramInitialPar_docvalues_doubles");
+				if(paramInitialPar != null)
+					oSimulationReport.paramInitialPar.addAll(paramInitialPar);
+			}
+
+			if(saves.contains("paramStepSize")) {
+				Double paramStepSize = (Double)doc.get("paramStepSize_docvalues_double");
+				if(paramStepSize != null)
+					oSimulationReport.setParamStepSize(paramStepSize);
+			}
+
+			if(saves.contains("paramRunTime")) {
+				Integer paramRunTime = (Integer)doc.get("paramRunTime_docvalues_int");
+				if(paramRunTime != null)
+					oSimulationReport.setParamRunTime(paramRunTime);
+			}
+
+			if(saves.contains("paramItersPerPar")) {
+				Integer paramItersPerPar = (Integer)doc.get("paramItersPerPar_docvalues_int");
+				if(paramItersPerPar != null)
+					oSimulationReport.setParamItersPerPar(paramItersPerPar);
+			}
+
+			if(saves.contains("paramTotalIterNum")) {
+				Integer paramTotalIterNum = (Integer)doc.get("paramTotalIterNum_docvalues_int");
+				if(paramTotalIterNum != null)
+					oSimulationReport.setParamTotalIterNum(paramTotalIterNum);
+			}
+
+			if(saves.contains("reportStatus")) {
+				String reportStatus = (String)doc.get("reportStatus_docvalues_string");
+				if(reportStatus != null)
+					oSimulationReport.setReportStatus(reportStatus);
+			}
+
+			if(saves.contains("reportProgress")) {
+				Integer reportProgress = (Integer)doc.get("reportProgress_docvalues_int");
+				if(reportProgress != null)
+					oSimulationReport.setReportProgress(reportProgress);
+			}
+
+			if(saves.contains("updatedParameters")) {
+				JsonArray updatedParameters = (JsonArray)doc.get("updatedParameters_docvalues_string");
+				if(updatedParameters != null)
+					oSimulationReport.setUpdatedParameters(updatedParameters);
+			}
+
+			if(saves.contains("updatedPerformance")) {
+				JsonArray updatedPerformance = (JsonArray)doc.get("updatedPerformance_docvalues_string");
+				if(updatedPerformance != null)
+					oSimulationReport.setUpdatedPerformance(updatedPerformance);
+			}
+
+			if(saves.contains("updatedPerformanceWaitWestEastVehicleSec")) {
+				JsonArray updatedPerformanceWaitWestEastVehicleSec = (JsonArray)doc.get("updatedPerformanceWaitWestEastVehicleSec_docvalues_string");
+				if(updatedPerformanceWaitWestEastVehicleSec != null)
+					oSimulationReport.setUpdatedPerformanceWaitWestEastVehicleSec(updatedPerformanceWaitWestEastVehicleSec);
+			}
+
+			if(saves.contains("updatedPerformanceWaitSouthNorthVehicleSec")) {
+				JsonArray updatedPerformanceWaitSouthNorthVehicleSec = (JsonArray)doc.get("updatedPerformanceWaitSouthNorthVehicleSec_docvalues_string");
+				if(updatedPerformanceWaitSouthNorthVehicleSec != null)
+					oSimulationReport.setUpdatedPerformanceWaitSouthNorthVehicleSec(updatedPerformanceWaitSouthNorthVehicleSec);
+			}
+
+			if(saves.contains("updatedPerformanceWaitAllVehicleSec")) {
+				JsonArray updatedPerformanceWaitAllVehicleSec = (JsonArray)doc.get("updatedPerformanceWaitAllVehicleSec_docvalues_string");
+				if(updatedPerformanceWaitAllVehicleSec != null)
+					oSimulationReport.setUpdatedPerformanceWaitAllVehicleSec(updatedPerformanceWaitAllVehicleSec);
+			}
+
+			if(saves.contains("updatedPerformanceWaitAllPedestrianSec")) {
+				JsonArray updatedPerformanceWaitAllPedestrianSec = (JsonArray)doc.get("updatedPerformanceWaitAllPedestrianSec_docvalues_string");
+				if(updatedPerformanceWaitAllPedestrianSec != null)
+					oSimulationReport.setUpdatedPerformanceWaitAllPedestrianSec(updatedPerformanceWaitAllPedestrianSec);
+			}
+
+			if(saves.contains("updatedPerformanceWaitAllVehiclePedestrianSec")) {
+				JsonArray updatedPerformanceWaitAllVehiclePedestrianSec = (JsonArray)doc.get("updatedPerformanceWaitAllVehiclePedestrianSec_docvalues_string");
+				if(updatedPerformanceWaitAllVehiclePedestrianSec != null)
+					oSimulationReport.setUpdatedPerformanceWaitAllVehiclePedestrianSec(updatedPerformanceWaitAllVehiclePedestrianSec);
+			}
 		}
 
 		super.populateBaseModel(doc);
@@ -3637,8 +4101,14 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		if(simulationKey != null) {
 			doc.put("simulationKey_docvalues_long", simulationKey);
 		}
+		if(smartTrafficLightId != null) {
+			doc.put("smartTrafficLightId_docvalues_string", smartTrafficLightId);
+		}
 		if(simulationName != null) {
 			doc.put("simulationName_docvalues_string", simulationName);
+		}
+		if(smartTrafficLightName != null) {
+			doc.put("smartTrafficLightName_docvalues_string", smartTrafficLightName);
 		}
 		if(reportName != null) {
 			doc.put("reportName_docvalues_string", reportName);
@@ -3759,8 +4229,12 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		switch(entityVar) {
 			case "simulationKey":
 				return "simulationKey_docvalues_long";
+			case "smartTrafficLightId":
+				return "smartTrafficLightId_docvalues_string";
 			case "simulationName":
 				return "simulationName_docvalues_string";
+			case "smartTrafficLightName":
+				return "smartTrafficLightName_docvalues_string";
 			case "reportName":
 				return "reportName_docvalues_string";
 			case "paramAvgVehiclePerMinFromWestToEast":
@@ -3836,8 +4310,12 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		switch(entityVar) {
 			case "simulationKey":
 				return "simulationKey_docvalues_long";
+			case "smartTrafficLightId":
+				return "smartTrafficLightId_docvalues_string";
 			case "simulationName":
 				return "simulationName_docvalues_string";
+			case "smartTrafficLightName":
+				return "smartTrafficLightName_docvalues_string";
 			case "reportName":
 				return "reportName_docvalues_string";
 			case "paramAvgVehiclePerMinFromWestToEast":
@@ -3913,8 +4391,12 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		switch(searchVar) {
 			case "simulationKey_docvalues_long":
 				return "simulationKey";
+			case "smartTrafficLightId_docvalues_string":
+				return "smartTrafficLightId";
 			case "simulationName_docvalues_string":
 				return "simulationName";
+			case "smartTrafficLightName_docvalues_string":
+				return "smartTrafficLightName";
 			case "reportName_docvalues_string":
 				return "reportName";
 			case "paramAvgVehiclePerMinFromWestToEast_docvalues_double":
@@ -4011,7 +4493,9 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		SimulationReport oSimulationReport = (SimulationReport)this;
 
 		oSimulationReport.setSimulationKey(Optional.ofNullable(doc.get("simulationKey_docvalues_long")).map(v -> v.toString()).orElse(null));
+		oSimulationReport.setSmartTrafficLightId(Optional.ofNullable(doc.get("smartTrafficLightId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSimulationReport.setSimulationName(Optional.ofNullable(doc.get("simulationName_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oSimulationReport.setSmartTrafficLightName(Optional.ofNullable(doc.get("smartTrafficLightName_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSimulationReport.setReportName(Optional.ofNullable(doc.get("reportName_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSimulationReport.setParamAvgVehiclePerMinFromWestToEast(Optional.ofNullable(doc.get("paramAvgVehiclePerMinFromWestToEast_docvalues_double")).map(v -> v.toString()).orElse(null));
 		oSimulationReport.setParamAvgVehiclePerMinFromSouthToNorth(Optional.ofNullable(doc.get("paramAvgVehiclePerMinFromSouthToNorth_docvalues_double")).map(v -> v.toString()).orElse(null));
@@ -4066,8 +4550,12 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			SimulationReport original = (SimulationReport)o;
 			if(!Objects.equals(simulationKey, original.getSimulationKey()))
 				apiRequest.addVars("simulationKey");
+			if(!Objects.equals(smartTrafficLightId, original.getSmartTrafficLightId()))
+				apiRequest.addVars("smartTrafficLightId");
 			if(!Objects.equals(simulationName, original.getSimulationName()))
 				apiRequest.addVars("simulationName");
+			if(!Objects.equals(smartTrafficLightName, original.getSmartTrafficLightName()))
+				apiRequest.addVars("smartTrafficLightName");
 			if(!Objects.equals(reportName, original.getReportName()))
 				apiRequest.addVars("reportName");
 			if(!Objects.equals(paramAvgVehiclePerMinFromWestToEast, original.getParamAvgVehiclePerMinFromWestToEast()))
@@ -4146,7 +4634,9 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		StringBuilder sb = new StringBuilder();
 		sb.append(super.toString());
 		sb.append(Optional.ofNullable(simulationKey).map(v -> "simulationKey: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(smartTrafficLightId).map(v -> "smartTrafficLightId: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(simulationName).map(v -> "simulationName: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(smartTrafficLightName).map(v -> "smartTrafficLightName: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(reportName).map(v -> "reportName: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(paramAvgVehiclePerMinFromWestToEast).map(v -> "paramAvgVehiclePerMinFromWestToEast: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(paramAvgVehiclePerMinFromSouthToNorth).map(v -> "paramAvgVehiclePerMinFromSouthToNorth: " + v + "\n").orElse(""));
@@ -4189,7 +4679,11 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 	public static final String VAR_simulationKey = "simulationKey";
 	public static final String VAR_simulationSearch = "simulationSearch";
 	public static final String VAR_simulation_ = "simulation_";
+	public static final String VAR_smartTrafficLightId = "smartTrafficLightId";
+	public static final String VAR_smartTrafficLightSearch = "smartTrafficLightSearch";
+	public static final String VAR_smartTrafficLight_ = "smartTrafficLight_";
 	public static final String VAR_simulationName = "simulationName";
+	public static final String VAR_smartTrafficLightName = "smartTrafficLightName";
 	public static final String VAR_reportName = "reportName";
 	public static final String VAR_paramAvgVehiclePerMinFromWestToEast = "paramAvgVehiclePerMinFromWestToEast";
 	public static final String VAR_paramAvgVehiclePerMinFromSouthToNorth = "paramAvgVehiclePerMinFromSouthToNorth";
@@ -4237,7 +4731,9 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 	}
 	public static List<String> varsFqSimulationReport(List<String> vars) {
 		vars.add(VAR_simulationKey);
+		vars.add(VAR_smartTrafficLightId);
 		vars.add(VAR_simulationName);
+		vars.add(VAR_smartTrafficLightName);
 		vars.add(VAR_reportName);
 		vars.add(VAR_paramAvgVehiclePerMinFromWestToEast);
 		vars.add(VAR_paramAvgVehiclePerMinFromSouthToNorth);
@@ -4314,7 +4810,11 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 	public static final String DISPLAY_NAME_simulationKey = "traffic simulation";
 	public static final String DISPLAY_NAME_simulationSearch = "";
 	public static final String DISPLAY_NAME_simulation_ = "";
+	public static final String DISPLAY_NAME_smartTrafficLightId = "smart traffic light";
+	public static final String DISPLAY_NAME_smartTrafficLightSearch = "";
+	public static final String DISPLAY_NAME_smartTrafficLight_ = "";
 	public static final String DISPLAY_NAME_simulationName = "simulation name";
+	public static final String DISPLAY_NAME_smartTrafficLightName = "simulation name";
 	public static final String DISPLAY_NAME_reportName = "report name";
 	public static final String DISPLAY_NAME_paramAvgVehiclePerMinFromWestToEast = "Average vehicle/min from WEST to EAST";
 	public static final String DISPLAY_NAME_paramAvgVehiclePerMinFromSouthToNorth = "Average vehicle/min from SOUTH to NORTH";
@@ -4360,8 +4860,16 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return DISPLAY_NAME_simulationSearch;
 		case VAR_simulation_:
 			return DISPLAY_NAME_simulation_;
+		case VAR_smartTrafficLightId:
+			return DISPLAY_NAME_smartTrafficLightId;
+		case VAR_smartTrafficLightSearch:
+			return DISPLAY_NAME_smartTrafficLightSearch;
+		case VAR_smartTrafficLight_:
+			return DISPLAY_NAME_smartTrafficLight_;
 		case VAR_simulationName:
 			return DISPLAY_NAME_simulationName;
+		case VAR_smartTrafficLightName:
+			return DISPLAY_NAME_smartTrafficLightName;
 		case VAR_reportName:
 			return DISPLAY_NAME_reportName;
 		case VAR_paramAvgVehiclePerMinFromWestToEast:
@@ -4437,6 +4945,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		switch(var) {
 		case VAR_simulationKey:
 			return "The traffic simulation for this report. ";
+		case VAR_smartTrafficLightId:
+			return "The smart traffic light for this report. ";
 		case VAR_paramRunTime:
 			return "Time duration of each simulated sample path. ";
 		case VAR_paramItersPerPar:
@@ -4464,7 +4974,15 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return "SearchList";
 		case VAR_simulation_:
 			return "TrafficSimulation";
+		case VAR_smartTrafficLightId:
+			return "String";
+		case VAR_smartTrafficLightSearch:
+			return "SearchList";
+		case VAR_smartTrafficLight_:
+			return "SmartTrafficLight";
 		case VAR_simulationName:
+			return "String";
+		case VAR_smartTrafficLightName:
 			return "String";
 		case VAR_reportName:
 			return "String";
@@ -4548,54 +5066,56 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		switch(var) {
 		case VAR_simulationKey:
 			return 3;
-		case VAR_reportName:
+		case VAR_smartTrafficLightId:
 			return 3;
+		case VAR_reportName:
+			return 4;
 		case VAR_paramAvgVehiclePerMinFromWestToEast:
-			return 4;
+			return 5;
 		case VAR_paramAvgVehiclePerMinFromSouthToNorth:
-			return 4;
+			return 5;
 		case VAR_paramVehicleDemandScalingFactor:
-			return 4;
+			return 5;
 		case VAR_paramAvgPedestrianPerMinFromWestToEast:
-			return 5;
+			return 6;
 		case VAR_paramAvgPedestrianPerMinFromSouthToNorth:
-			return 5;
+			return 6;
 		case VAR_paramPedestrianDemandScalingFactor:
-			return 5;
+			return 6;
 		case VAR_paramMinGreenTimeSecWestEast:
-			return 6;
+			return 7;
 		case VAR_paramMaxGreenTimeSecWestEast:
-			return 6;
+			return 7;
 		case VAR_paramMinGreenTimeSecSouthNorth:
-			return 7;
+			return 8;
 		case VAR_paramMaxGreenTimeSecSouthNorth:
-			return 7;
+			return 8;
 		case VAR_paramPedestrianWaitThresholdSecNorthSouth:
-			return 8;
+			return 9;
 		case VAR_paramPedestrianWaitThresholdSecWestEast:
-			return 8;
+			return 9;
 		case VAR_paramVehicleQueueThresholdWestEast:
-			return 9;
+			return 10;
 		case VAR_paramVehicleQueueThresholdSouthNorth:
-			return 9;
+			return 10;
 		case VAR_paramPedestrianQueueThresholdNorthSouth:
-			return 10;
+			return 11;
 		case VAR_paramPedestrianQueueThresholdWestEast:
-			return 10;
+			return 11;
 		case VAR_paramStepSize:
-			return 11;
+			return 12;
 		case VAR_paramRunTime:
-			return 11;
+			return 12;
 		case VAR_paramItersPerPar:
-			return 12;
-		case VAR_paramTotalIterNum:
-			return 12;
-		case VAR_reportStatus:
-			return 12;
-		case VAR_reportProgress:
-			return 12;
-		case VAR_updatedParameters:
 			return 13;
+		case VAR_paramTotalIterNum:
+			return 13;
+		case VAR_reportStatus:
+			return 13;
+		case VAR_reportProgress:
+			return 13;
+		case VAR_updatedParameters:
+			return 14;
 		case VAR_updatedPerformanceWaitWestEastVehicleSec:
 			return 15;
 		case VAR_updatedPerformanceWaitSouthNorthVehicleSec:
@@ -4615,8 +5135,10 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		switch(var) {
 		case VAR_simulationKey:
 			return 1;
-		case VAR_reportName:
+		case VAR_smartTrafficLightId:
 			return 2;
+		case VAR_reportName:
+			return 1;
 		case VAR_paramAvgVehiclePerMinFromWestToEast:
 			return 1;
 		case VAR_paramAvgVehiclePerMinFromSouthToNorth:

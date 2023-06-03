@@ -449,24 +449,9 @@
 {{> "htmSimulationKey" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmAddress" roleRequired="true"}}
-{{else}}
-{{> "htmAddress" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
 {{> "htmSumocfgPath" roleRequired="true"}}
 {{else}}
 {{> "htmSumocfgPath" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmAlternateName" roleRequired="true"}}
-{{else}}
-{{> "htmAlternateName" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmAreaServed" roleRequired="true"}}
-{{else}}
-{{> "htmAreaServed" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
@@ -486,24 +471,43 @@
 {{> "htmStep" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmAverageGapDistance" roleRequired="true"}}
-{{else}}
-{{> "htmAverageGapDistance" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
 {{> "htmLocation" roleRequired="true"}}
 {{else}}
 {{> "htmLocation" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmAverageHeadwayTime" roleRequired="true"}}
-{{else}}
-{{> "htmAverageHeadwayTime" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
 {{> "htmColor" roleRequired="true"}}
 {{else}}
 {{> "htmColor" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmAddress" roleRequired="true"}}
+{{else}}
+{{> "htmAddress" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmAlternateName" roleRequired="true"}}
+{{else}}
+{{> "htmAlternateName" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmAreaServed" roleRequired="true"}}
+{{else}}
+{{> "htmAreaServed" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmAverageGapDistance" roleRequired="true"}}
+{{else}}
+{{> "htmAverageGapDistance" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmAverageHeadwayTime" roleRequired="true"}}
+{{else}}
+{{> "htmAverageHeadwayTime" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
 {{> "htmAverageVehicleLength" roleRequired="true"}}
@@ -635,6 +639,62 @@
 {{> "htmVehicleType" roleRequired="true"}}
 {{else}}
 {{> "htmVehicleType" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCustomRouteId" roleRequired="true"}}
+{{else}}
+{{> "htmCustomRouteId" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCustomSigma" roleRequired="true"}}
+{{else}}
+{{> "htmCustomSigma" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCustomAcceleration" roleRequired="true"}}
+{{else}}
+{{> "htmCustomAcceleration" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCustomDeceleration" roleRequired="true"}}
+{{else}}
+{{> "htmCustomDeceleration" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCustomMinGreenTime" roleRequired="true"}}
+{{else}}
+{{> "htmCustomMinGreenTime" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCustomMaxGreenTime" roleRequired="true"}}
+{{else}}
+{{> "htmCustomMaxGreenTime" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCustomAverageVehiclesPerMinute" roleRequired="true"}}
+{{else}}
+{{> "htmCustomAverageVehiclesPerMinute" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCustomDemandScalingFactor" roleRequired="true"}}
+{{else}}
+{{> "htmCustomDemandScalingFactor" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCustomQueueLengthThreshold" roleRequired="true"}}
+{{else}}
+{{> "htmCustomQueueLengthThreshold" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCustomTrafficLightId" roleRequired="true"}}
+{{else}}
+{{> "htmCustomTrafficLightId" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 						<button
@@ -701,24 +761,9 @@
 {{> "htmSimulationKey" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmAddress" roleRequired="true"}}
-{{else}}
-{{> "htmAddress" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
 {{> "htmSumocfgPath" roleRequired="true"}}
 {{else}}
 {{> "htmSumocfgPath" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmAlternateName" roleRequired="true"}}
-{{else}}
-{{> "htmAlternateName" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmAreaServed" roleRequired="true"}}
-{{else}}
-{{> "htmAreaServed" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
@@ -738,24 +783,43 @@
 {{> "htmStep" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmAverageGapDistance" roleRequired="true"}}
-{{else}}
-{{> "htmAverageGapDistance" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
 {{> "htmLocation" roleRequired="true"}}
 {{else}}
 {{> "htmLocation" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmAverageHeadwayTime" roleRequired="true"}}
-{{else}}
-{{> "htmAverageHeadwayTime" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
 {{> "htmColor" roleRequired="true"}}
 {{else}}
 {{> "htmColor" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmAddress" roleRequired="true"}}
+{{else}}
+{{> "htmAddress" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmAlternateName" roleRequired="true"}}
+{{else}}
+{{> "htmAlternateName" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmAreaServed" roleRequired="true"}}
+{{else}}
+{{> "htmAreaServed" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmAverageGapDistance" roleRequired="true"}}
+{{else}}
+{{> "htmAverageGapDistance" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmAverageHeadwayTime" roleRequired="true"}}
+{{else}}
+{{> "htmAverageHeadwayTime" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
 {{> "htmAverageVehicleLength" roleRequired="true"}}
@@ -887,6 +951,62 @@
 {{> "htmVehicleType" roleRequired="true"}}
 {{else}}
 {{> "htmVehicleType" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCustomRouteId" roleRequired="true"}}
+{{else}}
+{{> "htmCustomRouteId" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCustomSigma" roleRequired="true"}}
+{{else}}
+{{> "htmCustomSigma" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCustomAcceleration" roleRequired="true"}}
+{{else}}
+{{> "htmCustomAcceleration" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCustomDeceleration" roleRequired="true"}}
+{{else}}
+{{> "htmCustomDeceleration" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCustomMinGreenTime" roleRequired="true"}}
+{{else}}
+{{> "htmCustomMinGreenTime" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCustomMaxGreenTime" roleRequired="true"}}
+{{else}}
+{{> "htmCustomMaxGreenTime" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCustomAverageVehiclesPerMinute" roleRequired="true"}}
+{{else}}
+{{> "htmCustomAverageVehiclesPerMinute" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCustomDemandScalingFactor" roleRequired="true"}}
+{{else}}
+{{> "htmCustomDemandScalingFactor" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCustomQueueLengthThreshold" roleRequired="true"}}
+{{else}}
+{{> "htmCustomQueueLengthThreshold" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCustomTrafficLightId" roleRequired="true"}}
+{{else}}
+{{> "htmCustomTrafficLightId" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 						</div>
@@ -980,24 +1100,9 @@
 {{> "htmSimulationKey" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmAddress" roleRequired="true"}}
-{{else}}
-{{> "htmAddress" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
 {{> "htmSumocfgPath" roleRequired="true"}}
 {{else}}
 {{> "htmSumocfgPath" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmAlternateName" roleRequired="true"}}
-{{else}}
-{{> "htmAlternateName" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmAreaServed" roleRequired="true"}}
-{{else}}
-{{> "htmAreaServed" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
@@ -1017,24 +1122,43 @@
 {{> "htmStep" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmAverageGapDistance" roleRequired="true"}}
-{{else}}
-{{> "htmAverageGapDistance" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
 {{> "htmLocation" roleRequired="true"}}
 {{else}}
 {{> "htmLocation" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmAverageHeadwayTime" roleRequired="true"}}
-{{else}}
-{{> "htmAverageHeadwayTime" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
 {{> "htmColor" roleRequired="true"}}
 {{else}}
 {{> "htmColor" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmAddress" roleRequired="true"}}
+{{else}}
+{{> "htmAddress" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmAlternateName" roleRequired="true"}}
+{{else}}
+{{> "htmAlternateName" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmAreaServed" roleRequired="true"}}
+{{else}}
+{{> "htmAreaServed" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmAverageGapDistance" roleRequired="true"}}
+{{else}}
+{{> "htmAverageGapDistance" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmAverageHeadwayTime" roleRequired="true"}}
+{{else}}
+{{> "htmAverageHeadwayTime" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
 {{> "htmAverageVehicleLength" roleRequired="true"}}
@@ -1166,6 +1290,62 @@
 {{> "htmVehicleType" roleRequired="true"}}
 {{else}}
 {{> "htmVehicleType" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCustomRouteId" roleRequired="true"}}
+{{else}}
+{{> "htmCustomRouteId" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCustomSigma" roleRequired="true"}}
+{{else}}
+{{> "htmCustomSigma" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCustomAcceleration" roleRequired="true"}}
+{{else}}
+{{> "htmCustomAcceleration" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCustomDeceleration" roleRequired="true"}}
+{{else}}
+{{> "htmCustomDeceleration" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCustomMinGreenTime" roleRequired="true"}}
+{{else}}
+{{> "htmCustomMinGreenTime" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCustomMaxGreenTime" roleRequired="true"}}
+{{else}}
+{{> "htmCustomMaxGreenTime" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCustomAverageVehiclesPerMinute" roleRequired="true"}}
+{{else}}
+{{> "htmCustomAverageVehiclesPerMinute" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCustomDemandScalingFactor" roleRequired="true"}}
+{{else}}
+{{> "htmCustomDemandScalingFactor" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCustomQueueLengthThreshold" roleRequired="true"}}
+{{else}}
+{{> "htmCustomQueueLengthThreshold" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCustomTrafficLightId" roleRequired="true"}}
+{{else}}
+{{> "htmCustomTrafficLightId" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 						</div>
@@ -3342,5 +3522,695 @@
 			{{/ifContainsKeys}}
 		{{else}}
 														<span class="varTrafficFlowObserved{{id}}VehicleType ">{{trafficFlowObserved_.vehicleType}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmCustomRouteId"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficFlowObservedCustomRouteId">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_customRouteId">route ID</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputCustomRouteId" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_customRouteId')); $('#{{classApiMethodMethod}}_customRouteId').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#TrafficFlowObservedForm :input[name=id]').val() }], 'setCustomRouteId', null, function() { addGlow($('#{{classApiMethodMethod}}_customRouteId')); }, function() { addError($('#{{classApiMethodMethod}}_customRouteId')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputCustomRouteId"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															placeholder="route ID"
+															title="The unique ID of the route in SUMO. "
+															id="{{classApiMethodMethod}}_customRouteId"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setCustomRouteId classTrafficFlowObserved inputTrafficFlowObserved{{id}}CustomRouteId w3-input w3-border "
+																name="setCustomRouteId"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setCustomRouteId classTrafficFlowObserved inputTrafficFlowObserved{{id}}CustomRouteId w3-input w3-border "
+																name="setCustomRouteId"
+		{{else}}
+																class="valueCustomRouteId w3-input w3-border classTrafficFlowObserved inputTrafficFlowObserved{{id}}CustomRouteId w3-input w3-border "
+																name="customRouteId"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setCustomRouteId', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_customRouteId')); }, function() { addError($('#{{classApiMethodMethod}}_customRouteId')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficFlowObserved_.customRouteId}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficFlowObserved{{id}}CustomRouteId ">{{trafficFlowObserved_.customRouteId}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficFlowObserved{{id}}CustomRouteId ">{{trafficFlowObserved_.customRouteId}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmCustomSigma"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficFlowObservedCustomSigma">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_customSigma">sigma</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputCustomSigma" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_customSigma')); $('#{{classApiMethodMethod}}_customSigma').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#TrafficFlowObservedForm :input[name=id]').val() }], 'setCustomSigma', null, function() { addGlow($('#{{classApiMethodMethod}}_customSigma')); }, function() { addError($('#{{classApiMethodMethod}}_customSigma')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputCustomSigma"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															placeholder="sigma"
+															title="The driver imperfection as a floating point number [0,1] (0 denotes perfect driving). "
+															id="{{classApiMethodMethod}}_customSigma"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setCustomSigma classTrafficFlowObserved inputTrafficFlowObserved{{id}}CustomSigma w3-input w3-border "
+																name="setCustomSigma"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setCustomSigma classTrafficFlowObserved inputTrafficFlowObserved{{id}}CustomSigma w3-input w3-border "
+																name="setCustomSigma"
+		{{else}}
+																class="valueCustomSigma w3-input w3-border classTrafficFlowObserved inputTrafficFlowObserved{{id}}CustomSigma w3-input w3-border "
+																name="customSigma"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setCustomSigma', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_customSigma')); }, function() { addError($('#{{classApiMethodMethod}}_customSigma')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficFlowObserved_.customSigma}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficFlowObserved{{id}}CustomSigma ">{{trafficFlowObserved_.customSigma}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficFlowObserved{{id}}CustomSigma ">{{trafficFlowObserved_.customSigma}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmCustomAcceleration"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficFlowObservedCustomAcceleration">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_customAcceleration">acceleration</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputCustomAcceleration" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_customAcceleration')); $('#{{classApiMethodMethod}}_customAcceleration').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#TrafficFlowObservedForm :input[name=id]').val() }], 'setCustomAcceleration', null, function() { addGlow($('#{{classApiMethodMethod}}_customAcceleration')); }, function() { addError($('#{{classApiMethodMethod}}_customAcceleration')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputCustomAcceleration"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															placeholder="acceleration"
+															title="The acceleration ability of vehicles of this type (in m/s^2). "
+															id="{{classApiMethodMethod}}_customAcceleration"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setCustomAcceleration classTrafficFlowObserved inputTrafficFlowObserved{{id}}CustomAcceleration w3-input w3-border "
+																name="setCustomAcceleration"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setCustomAcceleration classTrafficFlowObserved inputTrafficFlowObserved{{id}}CustomAcceleration w3-input w3-border "
+																name="setCustomAcceleration"
+		{{else}}
+																class="valueCustomAcceleration w3-input w3-border classTrafficFlowObserved inputTrafficFlowObserved{{id}}CustomAcceleration w3-input w3-border "
+																name="customAcceleration"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setCustomAcceleration', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_customAcceleration')); }, function() { addError($('#{{classApiMethodMethod}}_customAcceleration')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficFlowObserved_.customAcceleration}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficFlowObserved{{id}}CustomAcceleration ">{{trafficFlowObserved_.customAcceleration}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficFlowObserved{{id}}CustomAcceleration ">{{trafficFlowObserved_.customAcceleration}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmCustomDeceleration"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficFlowObservedCustomDeceleration">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_customDeceleration">deceleration</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputCustomDeceleration" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_customDeceleration')); $('#{{classApiMethodMethod}}_customDeceleration').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#TrafficFlowObservedForm :input[name=id]').val() }], 'setCustomDeceleration', null, function() { addGlow($('#{{classApiMethodMethod}}_customDeceleration')); }, function() { addError($('#{{classApiMethodMethod}}_customDeceleration')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputCustomDeceleration"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															placeholder="deceleration"
+															title="The deceleration ability of vehicles of this type (in m/s^2). "
+															id="{{classApiMethodMethod}}_customDeceleration"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setCustomDeceleration classTrafficFlowObserved inputTrafficFlowObserved{{id}}CustomDeceleration w3-input w3-border "
+																name="setCustomDeceleration"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setCustomDeceleration classTrafficFlowObserved inputTrafficFlowObserved{{id}}CustomDeceleration w3-input w3-border "
+																name="setCustomDeceleration"
+		{{else}}
+																class="valueCustomDeceleration w3-input w3-border classTrafficFlowObserved inputTrafficFlowObserved{{id}}CustomDeceleration w3-input w3-border "
+																name="customDeceleration"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setCustomDeceleration', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_customDeceleration')); }, function() { addError($('#{{classApiMethodMethod}}_customDeceleration')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficFlowObserved_.customDeceleration}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficFlowObserved{{id}}CustomDeceleration ">{{trafficFlowObserved_.customDeceleration}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficFlowObserved{{id}}CustomDeceleration ">{{trafficFlowObserved_.customDeceleration}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmCustomMinGreenTime"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficFlowObservedCustomMinGreenTime">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_customMinGreenTime">min green time</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputCustomMinGreenTime" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_customMinGreenTime')); $('#{{classApiMethodMethod}}_customMinGreenTime').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#TrafficFlowObservedForm :input[name=id]').val() }], 'setCustomMinGreenTime', null, function() { addGlow($('#{{classApiMethodMethod}}_customMinGreenTime')); }, function() { addError($('#{{classApiMethodMethod}}_customMinGreenTime')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputCustomMinGreenTime"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															placeholder="min green time"
+															title="Min green time for the traffic light in seconds [1, 50]. "
+															id="{{classApiMethodMethod}}_customMinGreenTime"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setCustomMinGreenTime classTrafficFlowObserved inputTrafficFlowObserved{{id}}CustomMinGreenTime w3-input w3-border "
+																name="setCustomMinGreenTime"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setCustomMinGreenTime classTrafficFlowObserved inputTrafficFlowObserved{{id}}CustomMinGreenTime w3-input w3-border "
+																name="setCustomMinGreenTime"
+		{{else}}
+																class="valueCustomMinGreenTime w3-input w3-border classTrafficFlowObserved inputTrafficFlowObserved{{id}}CustomMinGreenTime w3-input w3-border "
+																name="customMinGreenTime"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setCustomMinGreenTime', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_customMinGreenTime')); }, function() { addError($('#{{classApiMethodMethod}}_customMinGreenTime')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficFlowObserved_.customMinGreenTime}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficFlowObserved{{id}}CustomMinGreenTime ">{{trafficFlowObserved_.customMinGreenTime}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficFlowObserved{{id}}CustomMinGreenTime ">{{trafficFlowObserved_.customMinGreenTime}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmCustomMaxGreenTime"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficFlowObservedCustomMaxGreenTime">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_customMaxGreenTime">max green time</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputCustomMaxGreenTime" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_customMaxGreenTime')); $('#{{classApiMethodMethod}}_customMaxGreenTime').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#TrafficFlowObservedForm :input[name=id]').val() }], 'setCustomMaxGreenTime', null, function() { addGlow($('#{{classApiMethodMethod}}_customMaxGreenTime')); }, function() { addError($('#{{classApiMethodMethod}}_customMaxGreenTime')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputCustomMaxGreenTime"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															placeholder="max green time"
+															title="Max green time for the traffic light in seconds [1, 50]. "
+															id="{{classApiMethodMethod}}_customMaxGreenTime"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setCustomMaxGreenTime classTrafficFlowObserved inputTrafficFlowObserved{{id}}CustomMaxGreenTime w3-input w3-border "
+																name="setCustomMaxGreenTime"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setCustomMaxGreenTime classTrafficFlowObserved inputTrafficFlowObserved{{id}}CustomMaxGreenTime w3-input w3-border "
+																name="setCustomMaxGreenTime"
+		{{else}}
+																class="valueCustomMaxGreenTime w3-input w3-border classTrafficFlowObserved inputTrafficFlowObserved{{id}}CustomMaxGreenTime w3-input w3-border "
+																name="customMaxGreenTime"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setCustomMaxGreenTime', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_customMaxGreenTime')); }, function() { addError($('#{{classApiMethodMethod}}_customMaxGreenTime')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficFlowObserved_.customMaxGreenTime}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficFlowObserved{{id}}CustomMaxGreenTime ">{{trafficFlowObserved_.customMaxGreenTime}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficFlowObserved{{id}}CustomMaxGreenTime ">{{trafficFlowObserved_.customMaxGreenTime}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmCustomAverageVehiclesPerMinute"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficFlowObservedCustomAverageVehiclesPerMinute">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_customAverageVehiclesPerMinute">average vehicles/minute</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputCustomAverageVehiclesPerMinute" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_customAverageVehiclesPerMinute')); $('#{{classApiMethodMethod}}_customAverageVehiclesPerMinute').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#TrafficFlowObservedForm :input[name=id]').val() }], 'setCustomAverageVehiclesPerMinute', null, function() { addGlow($('#{{classApiMethodMethod}}_customAverageVehiclesPerMinute')); }, function() { addError($('#{{classApiMethodMethod}}_customAverageVehiclesPerMinute')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputCustomAverageVehiclesPerMinute"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															placeholder="average vehicles/minute"
+															title="Average vehicle/min [1, 30]. "
+															id="{{classApiMethodMethod}}_customAverageVehiclesPerMinute"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setCustomAverageVehiclesPerMinute classTrafficFlowObserved inputTrafficFlowObserved{{id}}CustomAverageVehiclesPerMinute w3-input w3-border "
+																name="setCustomAverageVehiclesPerMinute"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setCustomAverageVehiclesPerMinute classTrafficFlowObserved inputTrafficFlowObserved{{id}}CustomAverageVehiclesPerMinute w3-input w3-border "
+																name="setCustomAverageVehiclesPerMinute"
+		{{else}}
+																class="valueCustomAverageVehiclesPerMinute w3-input w3-border classTrafficFlowObserved inputTrafficFlowObserved{{id}}CustomAverageVehiclesPerMinute w3-input w3-border "
+																name="customAverageVehiclesPerMinute"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setCustomAverageVehiclesPerMinute', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_customAverageVehiclesPerMinute')); }, function() { addError($('#{{classApiMethodMethod}}_customAverageVehiclesPerMinute')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficFlowObserved_.customAverageVehiclesPerMinute}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficFlowObserved{{id}}CustomAverageVehiclesPerMinute ">{{trafficFlowObserved_.customAverageVehiclesPerMinute}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficFlowObserved{{id}}CustomAverageVehiclesPerMinute ">{{trafficFlowObserved_.customAverageVehiclesPerMinute}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmCustomDemandScalingFactor"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficFlowObservedCustomDemandScalingFactor">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_customDemandScalingFactor">demand scaling factor</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputCustomDemandScalingFactor" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_customDemandScalingFactor')); $('#{{classApiMethodMethod}}_customDemandScalingFactor').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#TrafficFlowObservedForm :input[name=id]').val() }], 'setCustomDemandScalingFactor', null, function() { addGlow($('#{{classApiMethodMethod}}_customDemandScalingFactor')); }, function() { addError($('#{{classApiMethodMethod}}_customDemandScalingFactor')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputCustomDemandScalingFactor"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															placeholder="demand scaling factor"
+															title="Demand scaling factor (multiplies all vehicle demands) [1, 2]. "
+															id="{{classApiMethodMethod}}_customDemandScalingFactor"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setCustomDemandScalingFactor classTrafficFlowObserved inputTrafficFlowObserved{{id}}CustomDemandScalingFactor w3-input w3-border "
+																name="setCustomDemandScalingFactor"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setCustomDemandScalingFactor classTrafficFlowObserved inputTrafficFlowObserved{{id}}CustomDemandScalingFactor w3-input w3-border "
+																name="setCustomDemandScalingFactor"
+		{{else}}
+																class="valueCustomDemandScalingFactor w3-input w3-border classTrafficFlowObserved inputTrafficFlowObserved{{id}}CustomDemandScalingFactor w3-input w3-border "
+																name="customDemandScalingFactor"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setCustomDemandScalingFactor', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_customDemandScalingFactor')); }, function() { addError($('#{{classApiMethodMethod}}_customDemandScalingFactor')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficFlowObserved_.customDemandScalingFactor}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficFlowObserved{{id}}CustomDemandScalingFactor ">{{trafficFlowObserved_.customDemandScalingFactor}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficFlowObserved{{id}}CustomDemandScalingFactor ">{{trafficFlowObserved_.customDemandScalingFactor}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmCustomQueueLengthThreshold"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficFlowObservedCustomQueueLengthThreshold">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_customQueueLengthThreshold">queue length threshold</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputCustomQueueLengthThreshold" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_customQueueLengthThreshold')); $('#{{classApiMethodMethod}}_customQueueLengthThreshold').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#TrafficFlowObservedForm :input[name=id]').val() }], 'setCustomQueueLengthThreshold', null, function() { addGlow($('#{{classApiMethodMethod}}_customQueueLengthThreshold')); }, function() { addError($('#{{classApiMethodMethod}}_customQueueLengthThreshold')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputCustomQueueLengthThreshold"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															placeholder="queue length threshold"
+															title="Demand scaling factor (multiplies all vehicle demands) [1, 2]. "
+															id="{{classApiMethodMethod}}_customQueueLengthThreshold"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setCustomQueueLengthThreshold classTrafficFlowObserved inputTrafficFlowObserved{{id}}CustomQueueLengthThreshold w3-input w3-border "
+																name="setCustomQueueLengthThreshold"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setCustomQueueLengthThreshold classTrafficFlowObserved inputTrafficFlowObserved{{id}}CustomQueueLengthThreshold w3-input w3-border "
+																name="setCustomQueueLengthThreshold"
+		{{else}}
+																class="valueCustomQueueLengthThreshold w3-input w3-border classTrafficFlowObserved inputTrafficFlowObserved{{id}}CustomQueueLengthThreshold w3-input w3-border "
+																name="customQueueLengthThreshold"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setCustomQueueLengthThreshold', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_customQueueLengthThreshold')); }, function() { addError($('#{{classApiMethodMethod}}_customQueueLengthThreshold')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficFlowObserved_.customQueueLengthThreshold}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficFlowObserved{{id}}CustomQueueLengthThreshold ">{{trafficFlowObserved_.customQueueLengthThreshold}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficFlowObserved{{id}}CustomQueueLengthThreshold ">{{trafficFlowObserved_.customQueueLengthThreshold}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmCustomTrafficLightId"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficFlowObservedCustomTrafficLightId">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_customTrafficLightId">traffic light ID</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputCustomTrafficLightId" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_customTrafficLightId')); $('#{{classApiMethodMethod}}_customTrafficLightId').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#TrafficFlowObservedForm :input[name=id]').val() }], 'setCustomTrafficLightId', null, function() { addGlow($('#{{classApiMethodMethod}}_customTrafficLightId')); }, function() { addError($('#{{classApiMethodMethod}}_customTrafficLightId')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputCustomTrafficLightId"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															placeholder="traffic light ID"
+															title="The Smart Traffic Light ID"
+															id="{{classApiMethodMethod}}_customTrafficLightId"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setCustomTrafficLightId classTrafficFlowObserved inputTrafficFlowObserved{{id}}CustomTrafficLightId w3-input w3-border "
+																name="setCustomTrafficLightId"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setCustomTrafficLightId classTrafficFlowObserved inputTrafficFlowObserved{{id}}CustomTrafficLightId w3-input w3-border "
+																name="setCustomTrafficLightId"
+		{{else}}
+																class="valueCustomTrafficLightId w3-input w3-border classTrafficFlowObserved inputTrafficFlowObserved{{id}}CustomTrafficLightId w3-input w3-border "
+																name="customTrafficLightId"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setCustomTrafficLightId', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_customTrafficLightId')); }, function() { addError($('#{{classApiMethodMethod}}_customTrafficLightId')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficFlowObserved_.customTrafficLightId}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficFlowObserved{{id}}CustomTrafficLightId ">{{trafficFlowObserved_.customTrafficLightId}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficFlowObserved{{id}}CustomTrafficLightId ">{{trafficFlowObserved_.customTrafficLightId}}</span>
 		{{/eq}}
 {{/inline}}

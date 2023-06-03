@@ -1,4 +1,4 @@
-package org.computate.smartvillageview.enus.model.traffic.simulation;
+package org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,14 +22,14 @@ import io.vertx.pgclient.PgPool;
 /**
  * Translate: false
  **/
-public class TrafficSimulationEnUSApiServiceImpl extends TrafficSimulationEnUSGenApiServiceImpl {
+public class SmartTrafficLightEnUSApiServiceImpl extends SmartTrafficLightEnUSGenApiServiceImpl {
 
-	public TrafficSimulationEnUSApiServiceImpl(EventBus eventBus, JsonObject config, WorkerExecutor workerExecutor, PgPool pgPool, KafkaProducer<String, String> kafkaProducer, WebClient webClient, OAuth2Auth oauth2AuthenticationProvider, AuthorizationProvider authorizationProvider, HandlebarsTemplateEngine templateEngine) {
+	public SmartTrafficLightEnUSApiServiceImpl(EventBus eventBus, JsonObject config, WorkerExecutor workerExecutor, PgPool pgPool, KafkaProducer<String, String> kafkaProducer, WebClient webClient, OAuth2Auth oauth2AuthenticationProvider, AuthorizationProvider authorizationProvider, HandlebarsTemplateEngine templateEngine) {
 		super(eventBus, config, workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine);
 	}
 
 	@Override
-	public Future<TrafficSimulation> sqlPATCHTrafficSimulation(TrafficSimulation o, Boolean inheritPk) {
+	public Future<Void> persistSmartTrafficLight(SmartTrafficLight o, Boolean inheritPk) {
 		SiteRequestEnUS siteRequest = o.getSiteRequest_();
 		ApiRequest apiRequest = siteRequest.getApiRequest_();
 		List<Long> pks = Optional.ofNullable(apiRequest).map(r -> r.getPks()).orElse(new ArrayList<>());
@@ -38,19 +38,6 @@ public class TrafficSimulationEnUSApiServiceImpl extends TrafficSimulationEnUSGe
 			pks.add(key);
 			classes.add(SimulationReport.CLASS_SIMPLE_NAME);
 		}
-		return super.sqlPATCHTrafficSimulation(o, inheritPk);
-	}
-
-	@Override
-	public Future<Void> sqlPOSTTrafficSimulation(TrafficSimulation o, Boolean inheritPk) {
-		SiteRequestEnUS siteRequest = o.getSiteRequest_();
-		ApiRequest apiRequest = siteRequest.getApiRequest_();
-		List<Long> pks = Optional.ofNullable(apiRequest).map(r -> r.getPks()).orElse(new ArrayList<>());
-		List<String> classes = Optional.ofNullable(apiRequest).map(r -> r.getClasses()).orElse(new ArrayList<>());
-		for(Long key : o.getReportKeys()) {
-			pks.add(key);
-			classes.add(SimulationReport.CLASS_SIMPLE_NAME);
-		}
-		return super.sqlPOSTTrafficSimulation(o, inheritPk);
+		return super.persistSmartTrafficLight(o, inheritPk);
 	}
 }

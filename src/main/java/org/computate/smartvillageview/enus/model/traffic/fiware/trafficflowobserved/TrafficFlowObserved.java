@@ -1,10 +1,14 @@
 package org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 import org.computate.search.wrap.Wrap;
+import org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLight;
 import org.computate.smartvillageview.enus.result.map.MapResult;
+import org.computate.vertx.search.list.SearchList;
 
+import io.vertx.core.Promise;
 import io.vertx.core.json.JsonObject;
 
 /**
@@ -39,12 +43,33 @@ import io.vertx.core.json.JsonObject;
 public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 
 	/**
+	 * Ignore: true
+	 */
+	protected void _smartTrafficLightSearch(Promise<SearchList<SmartTrafficLight>> promise) {
+		SearchList<SmartTrafficLight> l = new SearchList<>();
+		if(customTrafficLightId != null) {
+			l.setC(SmartTrafficLight.class);
+			l.q("*:*");
+			l.fq(String.format("id:%s", customTrafficLightId));
+			l.setStore(true);
+		}
+		promise.complete(l);
+	}
+
+	/**
+	 * Ignore: true
+	 */
+	protected void _smartTrafficLight_(Wrap<SmartTrafficLight> w) {
+		w.o(smartTrafficLightSearch.first());
+	}
+
+	/**
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
 	 * DisplayName: address
 	 * Description: The mailing address
-	 * HtmRow: 3
+	 * HtmRow: 5
 	 * HtmCell: 1
 	 * Facet: true
 	 */
@@ -57,7 +82,7 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 	 * Persist: true
 	 * DisplayName: alternate name
 	 * Description: An alternative name for this item
-	 * HtmRow: 3
+	 * HtmRow: 5
 	 * HtmCell: 2
 	 * Facet: true
 	 */
@@ -70,7 +95,7 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 	 * Persist: true
 	 * DisplayName: area served
 	 * Description: The geographic area where a service or offered item is provided
-	 * HtmRow: 3
+	 * HtmRow: 5
 	 * HtmCell: 3
 	 * Facet: true
 	 */
@@ -83,7 +108,7 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 	 * Persist: true
 	 * DisplayName: average gap distance
 	 * Description: Average gap distance between consecutive vehicles
-	 * HtmRow: 4
+	 * HtmRow: 6
 	 * HtmCell: 1
 	 * Facet: true
 	 */
@@ -96,7 +121,7 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 	 * Persist: true
 	 * DisplayName: average headway time
 	 * Description: Average headway time. Headway time is the time ellapsed between two consecutive vehicles
-	 * HtmRow: 4
+	 * HtmRow: 6
 	 * HtmCell: 2
 	 * Facet: true
 	 */
@@ -109,7 +134,7 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 	 * Persist: true
 	 * DisplayName: average vehicle length
 	 * Description: Average length of the vehicles transiting during     the observation period
-	 * HtmRow: 4
+	 * HtmRow: 6
 	 * HtmCell: 3
 	 * Facet: true
 	 */
@@ -122,7 +147,7 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 	 * Persist: true
 	 * DisplayName: average vehicle speed
 	 * Description: Average speed of the vehicles transiting during the observation period
-	 * HtmRow: 5
+	 * HtmRow: 7
 	 * HtmCell: 1
 	 * Facet: true
 	 */
@@ -135,7 +160,7 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 	 * Persist: true
 	 * DisplayName: congested
 	 * Description:  Flags whether there was a traffic congestion during the observation period in the referred lane. The absence of this attribute means no traffic congestion
-	 * HtmRow: 5
+	 * HtmRow: 7
 	 * HtmCell: 2
 	 * Facet: true
 	 */
@@ -148,7 +173,7 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 	 * Persist: true
 	 * DisplayName: data provider
 	 * Description: A sequence of characters identifying the provider of the harmonised data entity.
-	 * HtmRow: 5
+	 * HtmRow: 7
 	 * HtmCell: 3
 	 * Facet: true
 	 */
@@ -161,7 +186,7 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 	 * Persist: true
 	 * DisplayName: date created
 	 * Description: Entity creation timestamp. This will usually be allocated by the storage platform.
-	 * HtmRow: 6
+	 * HtmRow: 8
 	 * HtmCell: 1
 	 * Facet: true
 	 */
@@ -174,7 +199,7 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 	 * Persist: true
 	 * DisplayName: date modified
 	 * Description: Timestamp of the last modification of the entity. This will usually be allocated by the storage platform.
-	 * HtmRow: 6
+	 * HtmRow: 8
 	 * HtmCell: 2
 	 * Facet: true
 	 */
@@ -187,7 +212,7 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 	 * Persist: true
 	 * DisplayName: date observed
 	 * Description: The date and time of this observation in ISO8601 UTC format. It can be represented by an specific time instant or by an ISO8601 interval. As a workaround for the lack of support of Orion Context Broker for datetime intervals, it can be used two separate attributes: `dateObservedFrom`, `dateObservedTo`. [DateTime](https://schema.org/DateTime) or an ISO8601 interval represented as [Text](https://schema.org/Text)
-	 * HtmRow: 6
+	 * HtmRow: 8
 	 * HtmCell: 3
 	 * Facet: true
 	 */
@@ -200,7 +225,7 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 	 * Persist: true
 	 * DisplayName: date observed from
 	 * Description: Observation period start date and time. See `dateObserved`
-	 * HtmRow: 7
+	 * HtmRow: 9
 	 * HtmCell: 1
 	 * Facet: true
 	 */
@@ -213,7 +238,7 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 	 * Persist: true
 	 * DisplayName: date observed to
 	 * Description: Observation period end date and time. See `dateObserved`
-	 * HtmRow: 7
+	 * HtmRow: 9
 	 * HtmCell: 2
 	 * Facet: true
 	 */
@@ -226,7 +251,7 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 	 * Persist: true
 	 * DisplayName: description
 	 * Description: A description of this item
-	 * HtmRow: 7
+	 * HtmRow: 9
 	 * HtmCell: 3
 	 * Facet: true
 	 */
@@ -239,7 +264,7 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 //	 * Persist: true
 //	 * DisplayName: id
 //	 * Description: Unique identifier of the entity
-//	 * HtmRow: 8
+//	 * HtmRow: 10
 //	 * HtmCell: 1
 //	 * Facet: true
 //	 */
@@ -252,7 +277,7 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 	 * Persist: true
 	 * DisplayName: intensity
 	 * Description: Total number of vehicles detected during this observation period
-	 * HtmRow: 8
+	 * HtmRow: 10
 	 * HtmCell: 2
 	 * Facet: true
 	 */
@@ -265,7 +290,7 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 	 * Persist: true
 	 * DisplayName: lane direction
 	 * Description: Usual direction of travel in the lane referred by this observation. This attribute is useful when the observation is not referencing any road segment, allowing to know the direction of travel of the traffic flow observed. Enum:forward, backward'. See RoadSegment for a description of the semantics of these values.
-	 * HtmRow: 8
+	 * HtmRow: 10
 	 * HtmCell: 3
 	 * Facet: true
 	 */
@@ -278,7 +303,7 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 	 * Persist: true
 	 * DisplayName: lane id
 	 * Description: Lane identifier. Lane identification is done using the conventions defined by RoadSegment entity which are based on [OpenStreetMap](http://wiki.openstreetmap.org/wiki/Forward_%26_backward,_left_%26_right).
-	 * HtmRow: 9
+	 * HtmRow: 11
 	 * HtmCell: 1
 	 * Facet: true
 	 */
@@ -291,7 +316,7 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 //	 * Persist: true
 //	 * DisplayName: location
 //	 * Description: Geojson reference to the item. It can be Point, LineString, Polygon, MultiPoint, MultiLineString or MultiPolygon
-//	 * HtmRow: 9
+//	 * HtmRow: 11
 //	 * HtmCell: 2
 //	 * Facet: true
 //	 */
@@ -304,7 +329,7 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 	 * Persist: true
 	 * DisplayName: name
 	 * Description: The name of this item.
-	 * HtmRow: 9
+	 * HtmRow: 11
 	 * HtmCell: 3
 	 * Facet: true
 	 */
@@ -317,7 +342,7 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 	 * Persist: true
 	 * DisplayName: occupancy
 	 * Description: Fraction of the observation time where a vehicle has been occupying the observed lane
-	 * HtmRow: 10
+	 * HtmRow: 12
 	 * HtmCell: 1
 	 * Facet: true
 	 */
@@ -330,7 +355,7 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 	 * Persist: true
 	 * DisplayName: owner
 	 * Description: A List containing a JSON encoded sequence of characters referencing the unique Ids of the owner(s)
-	 * HtmRow: 10
+	 * HtmRow: 12
 	 * HtmCell: 2
 	 * Facet: true
 	 */
@@ -343,7 +368,7 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 	 * Persist: true
 	 * DisplayName: ref road segment
 	 * Description: Concerned road segment on which the observation has been made. Reference to an entity of type RoadSegment
-	 * HtmRow: 10
+	 * HtmRow: 12
 	 * HtmCell: 3
 	 * Facet: true
 	 */
@@ -356,7 +381,7 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 	 * Persist: true
 	 * DisplayName: reversed lane
 	 * Description: Flags whether traffic in the lane was reversed during the observation period. The absence of this attribute means no lane reversion
-	 * HtmRow: 11
+	 * HtmRow: 13
 	 * HtmCell: 1
 	 * Facet: true
 	 */
@@ -369,7 +394,7 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 	 * Persist: true
 	 * DisplayName: see also
 	 * Description: list of uri pointing to additional resources about the item
-	 * HtmRow: 11
+	 * HtmRow: 13
 	 * HtmCell: 2
 	 * Facet: true
 	 */
@@ -382,7 +407,7 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 	 * Persist: true
 	 * DisplayName: source
 	 * Description: A sequence of characters giving the original source of the entity data as a URL. Recommended to be the fully qualified domain name of the source provider, or the URL to the source object.
-	 * HtmRow: 11
+	 * HtmRow: 13
 	 * HtmCell: 3
 	 * Facet: true
 	 */
@@ -395,7 +420,7 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 	 * Persist: true
 	 * DisplayName: type
 	 * Description: NGSI Entity type. It has to be TrafficFlowObserved
-	 * HtmRow: 12
+	 * HtmRow: 14
 	 * HtmCell: 1
 	 * Facet: true
 	 */
@@ -408,7 +433,7 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 	 * Persist: true
 	 * DisplayName: vehicle sub type
 	 * Description: It allows to specify a sub type of `vehicleType`, eg if the `vehicleType` is set to `Lorry` the `vehicleSubType` may be `OGV1` or `OGV2` to convey more information about the exact type of vehicle.
-	 * HtmRow: 12
+	 * HtmRow: 14
 	 * HtmCell: 2
 	 * Facet: true
 	 */
@@ -421,10 +446,153 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 	 * Persist: true
 	 * DisplayName: vehicle type
 	 * Description: Type of vehicle from the point of view of its structural characteristics. Enum:'agriculturalVehicle, bicycle, bus, minibus, car, caravan, tram, tanker, carWithCaravan, carWithTrailer, lorry, moped, motorcycle, motorcycleWithSideCar, motorscooter, trailer, van, constructionOrMaintenanceVehicle, trolley, binTrolley, sweepingMachine, cleaningTrolley'
-	 * HtmRow: 12
+	 * HtmRow: 14
 	 * HtmCell: 3
 	 * Facet: true
 	 */
 	protected void _vehicleType(Wrap<String> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * DisplayName: route ID
+	 * Description: The unique ID of the route in SUMO. 
+	 * HtmRow: 15
+	 * HtmCell: 1
+	 * Facet: true
+	 */
+	protected void _customRouteId(Wrap<String> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * DisplayName: sigma
+	 * Description: The driver imperfection as a floating point number [0,1] (0 denotes perfect driving). 
+	 * HtmRow: 15
+	 * HtmCell: 2
+	 * Facet: true
+	 */
+	protected void _customSigma(Wrap<BigDecimal> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * DisplayName: acceleration
+	 * Description: The acceleration ability of vehicles of this type (in m/s^2). 
+	 * HtmRow: 15
+	 * HtmCell: 3
+	 * Facet: true
+	 */
+	protected void _customAcceleration(Wrap<BigDecimal> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * DisplayName: deceleration
+	 * Description: The deceleration ability of vehicles of this type (in m/s^2). 
+	 * HtmRow: 15
+	 * HtmCell: 4
+	 * Facet: true
+	 */
+	protected void _customDeceleration(Wrap<BigDecimal> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * DisplayName: min green time
+	 * Description: Min green time for the traffic light in seconds [1, 50]. 
+	 * HtmRow: 16
+	 * HtmCell: 1
+	 * Facet: true
+	 */
+	protected void _customMinGreenTime(Wrap<BigDecimal> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * DisplayName: max green time
+	 * Description: Max green time for the traffic light in seconds [1, 50]. 
+	 * HtmRow: 16
+	 * HtmCell: 2
+	 * Facet: true
+	 */
+	protected void _customMaxGreenTime(Wrap<BigDecimal> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * DisplayName: average vehicles/minute
+	 * Description: Average vehicle/min [1, 30]. 
+	 * HtmRow: 16
+	 * HtmCell: 3
+	 * Facet: true
+	 */
+	protected void _customAverageVehiclesPerMinute(Wrap<BigDecimal> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * DisplayName: demand scaling factor
+	 * Description: Demand scaling factor (multiplies all vehicle demands) [1, 2]. 
+	 * HtmRow: 17
+	 * HtmCell: 1
+	 * Facet: true
+	 */
+	protected void _customDemandScalingFactor(Wrap<BigDecimal> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * DisplayName: queue length threshold
+	 * Description: Demand scaling factor (multiplies all vehicle demands) [1, 2]. 
+	 * HtmRow: 17
+	 * HtmCell: 2
+	 * Facet: true
+	 */
+	protected void _customQueueLengthThreshold(Wrap<BigDecimal> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * DisplayName: traffic light ID
+	 * Description: The Smart Traffic Light ID
+	 * HtmRow: 17
+	 * HtmCell: 3
+	 * Facet: true
+	 */
+	protected void _customTrafficLightId(Wrap<String> w) {
+	}
+
+	@Override
+	protected void _objectTitle(Wrap<String> w) {
+		StringBuilder b = new StringBuilder();
+		Optional.ofNullable(id).ifPresent(s -> b.append(id));
+		w.o(b.toString().trim());
+	}
+
+	@Override
+	protected void _objectId(Wrap<String> w) {
+		if(id != null)
+			w.o(id.toString());
 	}
 }

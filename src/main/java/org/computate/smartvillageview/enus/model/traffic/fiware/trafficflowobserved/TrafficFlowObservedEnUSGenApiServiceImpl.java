@@ -522,7 +522,7 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 								if(apiRequest != null) {
 									apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listTrafficFlowObserved.getResponse().getResponse().getDocs().size());
 									if(apiRequest.getNumFound() == 1L)
-										o2.apiRequestTrafficFlowObserved();
+										o.apiRequestTrafficFlowObserved();
 									eventBus.publish("websocketTrafficFlowObserved", JsonObject.mapFrom(apiRequest).toString());
 								}
 								eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(new JsonObject().encodePrettily()))));
@@ -920,7 +920,7 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 				apiRequest.initDeepApiRequest(siteRequest);
 				siteRequest.setApiRequest_(apiRequest);
 				body.put("inheritPk", body.getValue("id"));
-				body.put("id", body.getValue("id"));
+				body.put("inheritPk", body.getValue("id"));
 				if(Optional.ofNullable(serviceRequest.getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getJsonArray("var")).orElse(new JsonArray()).stream().filter(s -> "refresh:false".equals(s)).count() > 0L) {
 					siteRequest.getRequestVars().put( "refresh", "false" );
 				}

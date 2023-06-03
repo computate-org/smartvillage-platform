@@ -1,26 +1,28 @@
-package org.computate.smartvillageview.enus.model.traffic.simulation;
+package org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight;
+
 
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 import org.computate.search.wrap.Wrap;
-import org.computate.smartvillageview.enus.model.base.BaseModel;
+import org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved.TrafficFlowObserved;
+import org.computate.smartvillageview.enus.result.map.MapResult;
+import org.computate.vertx.search.list.SearchList;
+
+import io.vertx.core.Promise;
 
 /**
  * {@inheritDoc}
- * Model: true
  * Api: true
  * Page: true
- * SuperPage.enUS: BaseModelPage
+ * SuperPage.enUS: MapResultPage
  * Indexed: true
- * SqlOrder: 2
  * Order: 8
  * 
- * ApiTag.enUS: Traffic Simulation
- * ApiUri.enUS: /api/traffic-simulation
+ * ApiTag.enUS: Smart Traffic Light
+ * ApiUri.enUS: /api/smart-traffic-light
  * 
  * ApiMethod: Search
  * ApiMethod: GET
@@ -29,122 +31,108 @@ import org.computate.smartvillageview.enus.model.base.BaseModel;
  * ApiMethod: PUTImport
  * 
  * ApiMethod: SearchPage
- * Page.SearchPage.enUS: TrafficSimulationPage
- * PageSuper.SearchPage.enUS: BaseModelPage
- * ApiUri.SearchPage.enUS: /traffic-simulation
- * 
- * ApiMethod: MapSearchPage
- * Page.MapSearchPage.enUS: TrafficSimulationMapPage
- * PageSuper.MapSearchPage.enUS: BaseModelPage
- * ApiUri.MapSearchPage.enUS: /traffic-simulation-map
+ * Page.SearchPage.enUS: SmartTrafficLightPage
+ * ApiUri.SearchPage.enUS: /smart-traffic-light
  * 
  * Role.enUS: SiteAdmin
  * Saves: true
  * 
- * AName.enUS: a traffic simulation
+ * AName.enUS: a smart traffic light
  * Color: 2017-shaded-spruce
  * IconGroup: duotone
  * IconName: traffic-light-stop
  * Rows: 100
  */
-public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
+public class SmartTrafficLight extends SmartTrafficLightGen<MapResult> {
 
 	/**
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 6
-	 * HtmCell: 1
-	 * Facet: true
-	 * DisplayName: Start date and Time
-	 * Description: The start date and time. 
-	 */
-	protected void _startDateTime(Wrap<ZonedDateTime> w) {
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * DocValues: true
-	 * Persist: true
-	 * DisplayName: simulation name
-	 * HtmRow: 3
-	 * HtmCell: 1
-	 * Facet: true
-	 */
-	protected void _simulationName(Wrap<String> w) {
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * DocValues: true
-	 * Persist: true
-	 * DisplayName: sumocfg path
-	 * HtmRow: 4
-	 * HtmCell: 1
-	 * Facet: true
-	 */
-	protected void _sumocfgPath(Wrap<String> w) {
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * DocValues: true
-	 * Persist: true
-	 * DisplayName: Floating Car Data file path
-	 * HtmRow: 5
-	 * HtmCell: 1
-	 * Facet: true
-	 */
-	protected void _fcdFilePath(Wrap<String> w) {
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * DocValues: true
-	 * Persist: true
-	 * DisplayName: net file path
-	 * Facet: true
-	 */
-	protected void _netFilePath(Wrap<String> w) {
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * DocValues: true
-	 * Persist: true
-	 * DisplayName: start seconds
-	 * Description: -b, --begin TIME Defines the begin time in seconds; The simulation starts at this time
+	 * DisplayName: smart traffic light name
 	 * HtmRow: 6
 	 * HtmCell: 1
 	 * Facet: true
 	 */
-	protected void _startSeconds(Wrap<BigDecimal> w) {
+	protected void _smartTrafficLightName(Wrap<String> w) {
 	}
 
 	/**
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * DisplayName: end seconds
-	 * Description: -e, --end TIME Defines the end time in seconds; The simulation ends at this time
+	 * DisplayName: route ID North
 	 * HtmRow: 6
 	 * HtmCell: 2
 	 * Facet: true
 	 */
-	protected void _endSeconds(Wrap<BigDecimal> w) {
+	protected void _routeIdNorth(Wrap<String> w) {
 	}
 
 	/**
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * DisplayName: step seconds
-	 * Description: --step-length TIME Defines the step duration in seconds
+	 * DisplayName: route ID East
 	 * HtmRow: 6
 	 * HtmCell: 3
 	 * Facet: true
 	 */
-	protected void _stepSeconds(Wrap<BigDecimal> w) {
+	protected void _routeIdEast(Wrap<String> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * HtmRow: 5
+	 * HtmCell: 1
+	 * Facet: true
+	 * DisplayName: TrafficFlowObserveds
+	 * Description: The related TrafficFlowObserved entities
+	 */
+	protected void _trafficFlowObservedIds(List<String> w) {
+	}
+
+	/**
+	 * Ignore: true
+	 */
+	protected void _trafficFlowObservedSearch(Promise<SearchList<TrafficFlowObserved>> promise) {
+		SearchList<TrafficFlowObserved> l = new SearchList<>();
+		if(id != null) {
+			l.setC(TrafficFlowObserved.class);
+			l.q("*:*");
+			l.rows(100);
+			l.fq(String.format("customTrafficLightId_docvalues_string:%s", id));
+			l.setStore(true);
+		}
+		promise.complete(l);
+	}
+
+	/**
+	 * Ignore: true
+	 */
+	protected void _trafficFlowObserveds(List<TrafficFlowObserved> l) {
+		l.addAll(trafficFlowObservedSearch.getList());
+		l.forEach(o -> {
+			if(routeIdNorth != null && routeIdNorth.equals(o.getCustomRouteId()))
+				setTrafficFlowObservedNorth_(o);
+			if(routeIdEast != null && routeIdEast.equals(o.getCustomRouteId()))
+				setTrafficFlowObservedEast_(o);
+			trafficFlowObservedIds.add(o.getId());
+		});
+	}
+
+	/**
+	 * Ignore: true
+	 */
+	protected void _trafficFlowObservedNorth_(Wrap<TrafficFlowObserved> w) {
+	}
+
+	/**
+	 * Ignore: true
+	 */
+	protected void _trafficFlowObservedEast_(Wrap<TrafficFlowObserved> w) {
 	}
 
 	/**
@@ -160,7 +148,8 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Max: 30
 	 */
 	protected void _paramAvgVehiclePerMinFromWestToEast(Wrap<BigDecimal> w) {
-		w.o(new BigDecimal(10));
+		if(trafficFlowObservedEast_ != null)
+			w.o(trafficFlowObservedEast_.getCustomAverageVehiclesPerMinute());
 	}
 
 	/**
@@ -176,7 +165,8 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Max: 30
 	 */
 	protected void _paramAvgVehiclePerMinFromSouthToNorth(Wrap<BigDecimal> w) {
-		w.o(new BigDecimal(10));
+		if(trafficFlowObservedNorth_ != null)
+			w.o(trafficFlowObservedNorth_.getCustomAverageVehiclesPerMinute());
 	}
 
 	/**
@@ -269,7 +259,8 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Max: 50
 	 */
 	protected void _paramMinGreenTimeSecWestEast(Wrap<BigDecimal> w) {
-		w.o(new BigDecimal(20));
+		if(trafficFlowObservedEast_ != null)
+			w.o(trafficFlowObservedEast_.getCustomMinGreenTime());
 	}
 
 	/**
@@ -285,7 +276,8 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Max: 100
 	 */
 	protected void _paramMaxGreenTimeSecWestEast(Wrap<BigDecimal> w) {
-		w.o(new BigDecimal(30));
+		if(trafficFlowObservedEast_ != null)
+			w.o(trafficFlowObservedEast_.getCustomMaxGreenTime());
 	}
 
 	/**
@@ -301,7 +293,8 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Max: 50
 	 */
 	protected void _paramMinGreenTimeSecSouthNorth(Wrap<BigDecimal> w) {
-		w.o(new BigDecimal(10));
+		if(trafficFlowObservedNorth_ != null)
+			w.o(trafficFlowObservedNorth_.getCustomMinGreenTime());
 	}
 
 	/**
@@ -317,7 +310,8 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Max: 100
 	 */
 	protected void _paramMaxGreenTimeSecSouthNorth(Wrap<BigDecimal> w) {
-		w.o(new BigDecimal(20));
+		if(trafficFlowObservedNorth_ != null)
+			w.o(trafficFlowObservedNorth_.getCustomMaxGreenTime());
 	}
 
 	/**
@@ -365,7 +359,8 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Max: 60
 	 */
 	protected void _paramVehicleQueueThresholdWestEast(Wrap<BigDecimal> w) {
-		w.o(new BigDecimal(8));
+		if(trafficFlowObservedEast_ != null)
+			w.o(trafficFlowObservedEast_.getCustomQueueLengthThreshold());
 	}
 
 	/**
@@ -381,7 +376,8 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Max: 15
 	 */
 	protected void _paramVehicleQueueThresholdSouthNorth(Wrap<BigDecimal> w) {
-		w.o(new BigDecimal(8));
+		if(trafficFlowObservedNorth_ != null)
+			w.o(trafficFlowObservedNorth_.getCustomQueueLengthThreshold());
 	}
 
 	/**
@@ -483,12 +479,12 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	/**
 	 * {@inheritDoc}
 	 * DocValues: true
-	 * Relate: SimulationReport.simulationKey
+	 * Relate: SimulationReport.smartTrafficLightKey
 	 * HtmRow: 16
 	 * HtmCell: 1
 	 * Facet: true
 	 * DisplayName: simulation reports
-	 * Description: The generated reports for this simulation
+	 * Description: The generated reports for this smart traffic light
 	 */
 	protected void _reportKeys(List<Long> w) {
 	}
@@ -512,14 +508,19 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	@Override
 	protected void _objectTitle(Wrap<String> w) {
 		StringBuilder b = new StringBuilder();
-		Optional.ofNullable(simulationName).ifPresent(s -> b.append(" Simulation \"").append(s).append("\""));
-		Optional.ofNullable(sumocfgPath).ifPresent(s -> b.append(" in ").append(s));
+		Optional.ofNullable(smartTrafficLightName).ifPresent(s -> b.append(" Smart Traffic Light \"").append(s).append("\""));
+		if(b.length() == 0)
+			b.append(id);
 		w.o(b.toString().trim());
 	}
 
 	@Override
 	protected void _objectId(Wrap<String> w) {
-		if(pk != null)
-			w.o(pk.toString());
+		if(objectTitle != null) {
+			w.o(toId(smartTrafficLightName));
+		}
+		else if(id != null){
+			w.o(id.toString());
+		}
 	}
 }

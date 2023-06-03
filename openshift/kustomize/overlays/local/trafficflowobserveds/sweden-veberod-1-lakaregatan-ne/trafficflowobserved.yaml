@@ -1,28 +1,28 @@
 apiVersion: smartvillage.computate.org/v1
 kind: TrafficFlowObserved
 metadata:
-  name: sweden-veberod-1-sjobovagen-se
+  name: sweden-veberod-1-lakaregatan-ne
   namespace: smartvillage
 spec:
   attributes:
     address:
       addressCountry: Sweden
       addressLocality: Veberöd
-      streetAddress: Sjöbovägen
+      streetAddress: Läkaregatan
     area_served: |
-      96027913#0 96027913#2 30186293 311389510#1
+      -355113043#1 -24626686#2 -24626686#1 -34992983#3 -34992983#1
     averageVehicleLength: 5
     averageGapDistance: 1
     averageVehicleSpeed: 55
-    customRouteId: r13
+    customRouteId: r42
     customSigma: 0.5
     customAcceleration: 2.6
     customDeceleration: 4.5
-    customMinGreenTime: 11.00
-    customMaxGreenTime: 23.00
-    customAverageVehiclesPerMinute: 7.00
+    customMinGreenTime: 33.00
+    customMaxGreenTime: 39.00
+    customAverageVehiclesPerMinute: 12.00
     customDemandScalingFactor: 1.00
-    customQueueLengthThreshold: 2.00
+    customQueueLengthThreshold: 8.00
   iotagent:
     base_url: http://iotagent-json-smartvillage.apps-crc.testing
   context_broker:
@@ -35,7 +35,7 @@ spec:
     apikey: VeberodIntersection1
   device:
     transport: MQTT
-    id: Sjobovagen-SE
+    id: Lakaregatan-NE
     mqtt_host: fiware-broker-mqtt-0-svc
     mqtt_port: 1883
     mqtt_subscription_topic: iot/subscribe

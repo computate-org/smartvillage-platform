@@ -1760,6 +1760,110 @@ public abstract class BaseResultGen<DEV> extends Object {
 		BaseResult oBaseResult = (BaseResult)this;
 		saves = doc.get("saves_docvalues_strings");
 		if(saves != null) {
+
+			if(saves.contains("inheritPk")) {
+				String inheritPk = (String)doc.get("inheritPk_docvalues_string");
+				if(inheritPk != null)
+					oBaseResult.setInheritPk(inheritPk);
+			}
+
+			if(saves.contains("created")) {
+				Date created = (Date)doc.get("created_docvalues_date");
+				if(created != null)
+					oBaseResult.setCreated(created);
+			}
+
+			if(saves.contains("modified")) {
+				Date modified = (Date)doc.get("modified_docvalues_date");
+				if(modified != null)
+					oBaseResult.setModified(modified);
+			}
+
+			if(saves.contains("archived")) {
+				Boolean archived = (Boolean)doc.get("archived_docvalues_boolean");
+				if(archived != null)
+					oBaseResult.setArchived(archived);
+			}
+
+			if(saves.contains("deleted")) {
+				Boolean deleted = (Boolean)doc.get("deleted_docvalues_boolean");
+				if(deleted != null)
+					oBaseResult.setDeleted(deleted);
+			}
+
+			if(saves.contains("classCanonicalName")) {
+				String classCanonicalName = (String)doc.get("classCanonicalName_docvalues_string");
+				if(classCanonicalName != null)
+					oBaseResult.setClassCanonicalName(classCanonicalName);
+			}
+
+			if(saves.contains("classSimpleName")) {
+				String classSimpleName = (String)doc.get("classSimpleName_docvalues_string");
+				if(classSimpleName != null)
+					oBaseResult.setClassSimpleName(classSimpleName);
+			}
+
+			if(saves.contains("classCanonicalNames")) {
+				List<String> classCanonicalNames = (List<String>)doc.get("classCanonicalNames_docvalues_strings");
+				if(classCanonicalNames != null)
+					oBaseResult.classCanonicalNames.addAll(classCanonicalNames);
+			}
+
+			if(saves.contains("sessionId")) {
+				String sessionId = (String)doc.get("sessionId_docvalues_string");
+				if(sessionId != null)
+					oBaseResult.setSessionId(sessionId);
+			}
+
+			if(saves.contains("userKey")) {
+				Long userKey = (Long)doc.get("userKey_docvalues_long");
+				if(userKey != null)
+					oBaseResult.setUserKey(userKey);
+			}
+
+			if(saves.contains("saves")) {
+				List<String> saves = (List<String>)doc.get("saves_docvalues_strings");
+				if(saves != null)
+					oBaseResult.saves.addAll(saves);
+			}
+
+			if(saves.contains("objectTitle")) {
+				String objectTitle = (String)doc.get("objectTitle_docvalues_string");
+				if(objectTitle != null)
+					oBaseResult.setObjectTitle(objectTitle);
+			}
+
+			if(saves.contains("objectId")) {
+				String objectId = (String)doc.get("objectId_docvalues_string");
+				if(objectId != null)
+					oBaseResult.setObjectId(objectId);
+			}
+
+			if(saves.contains("objectSuggest")) {
+				String objectSuggest = (String)doc.get("objectSuggest_suggested");
+				oBaseResult.setObjectSuggest(objectSuggest);
+			}
+
+			if(saves.contains("pageUrlId")) {
+				String pageUrlId = (String)doc.get("pageUrlId_docvalues_string");
+				if(pageUrlId != null)
+					oBaseResult.setPageUrlId(pageUrlId);
+			}
+
+			if(saves.contains("pageUrlPk")) {
+				String pageUrlPk = (String)doc.get("pageUrlPk_docvalues_string");
+				if(pageUrlPk != null)
+					oBaseResult.setPageUrlPk(pageUrlPk);
+			}
+
+			if(saves.contains("pageUrlApi")) {
+				String pageUrlApi = (String)doc.get("pageUrlApi_docvalues_string");
+				if(pageUrlApi != null)
+					oBaseResult.setPageUrlApi(pageUrlApi);
+			}
+
+			String id = (String)doc.get("id");
+			oBaseResult.setId(id);
 		}
 	}
 

@@ -1,5 +1,7 @@
-package org.computate.smartvillageview.enus.model.traffic.light.step;
+package org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight;
 
+import org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReportEnUSApiServiceImpl;
+import org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.smartvillageview.enus.model.user.SiteUser;
 import org.computate.vertx.api.ApiRequest;
@@ -90,24 +92,24 @@ import java.util.Base64;
 import java.time.ZonedDateTime;
 import org.apache.commons.lang3.BooleanUtils;
 import org.computate.vertx.search.list.SearchList;
-import org.computate.smartvillageview.enus.model.traffic.light.step.TrafficLightStepPage;
+import org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLightPage;
 
 
 /**
  * Translate: false
  **/
-public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl implements TrafficLightStepEnUSGenApiService {
+public class SmartTrafficLightEnUSGenApiServiceImpl extends BaseApiServiceImpl implements SmartTrafficLightEnUSGenApiService {
 
-	protected static final Logger LOG = LoggerFactory.getLogger(TrafficLightStepEnUSGenApiServiceImpl.class);
+	protected static final Logger LOG = LoggerFactory.getLogger(SmartTrafficLightEnUSGenApiServiceImpl.class);
 
-	public TrafficLightStepEnUSGenApiServiceImpl(EventBus eventBus, JsonObject config, WorkerExecutor workerExecutor, PgPool pgPool, KafkaProducer<String, String> kafkaProducer, WebClient webClient, OAuth2Auth oauth2AuthenticationProvider, AuthorizationProvider authorizationProvider, HandlebarsTemplateEngine templateEngine) {
+	public SmartTrafficLightEnUSGenApiServiceImpl(EventBus eventBus, JsonObject config, WorkerExecutor workerExecutor, PgPool pgPool, KafkaProducer<String, String> kafkaProducer, WebClient webClient, OAuth2Auth oauth2AuthenticationProvider, AuthorizationProvider authorizationProvider, HandlebarsTemplateEngine templateEngine) {
 		super(eventBus, config, workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine);
 	}
 
 	// Search //
 
 	@Override
-	public void searchTrafficLightStep(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
+	public void searchSmartTrafficLight(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 
 			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
@@ -123,7 +125,7 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 					)
 				));
 			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_TrafficLightStep")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SmartTrafficLight")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
 					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 					eventHandler.handle(Future.succeededFuture(
 						new ServiceResponse(401, "UNAUTHORIZED",
@@ -137,20 +139,20 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 					));
 				} else {
 					try {
-						searchTrafficLightStepList(siteRequest, false, true, false).onSuccess(listTrafficLightStep -> {
-							response200SearchTrafficLightStep(listTrafficLightStep).onSuccess(response -> {
+						searchSmartTrafficLightList(siteRequest, false, true, false).onSuccess(listSmartTrafficLight -> {
+							response200SearchSmartTrafficLight(listSmartTrafficLight).onSuccess(response -> {
 								eventHandler.handle(Future.succeededFuture(response));
-								LOG.debug(String.format("searchTrafficLightStep succeeded. "));
+								LOG.debug(String.format("searchSmartTrafficLight succeeded. "));
 							}).onFailure(ex -> {
-								LOG.error(String.format("searchTrafficLightStep failed. "), ex);
+								LOG.error(String.format("searchSmartTrafficLight failed. "), ex);
 								error(siteRequest, eventHandler, ex);
 							});
 						}).onFailure(ex -> {
-							LOG.error(String.format("searchTrafficLightStep failed. "), ex);
+							LOG.error(String.format("searchSmartTrafficLight failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
 					} catch(Exception ex) {
-						LOG.error(String.format("searchTrafficLightStep failed. "), ex);
+						LOG.error(String.format("searchSmartTrafficLight failed. "), ex);
 						error(null, eventHandler, ex);
 					}
 				}
@@ -160,7 +162,7 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 				try {
 					eventHandler.handle(Future.succeededFuture(new ServiceResponse(302, "Found", null, MultiMap.caseInsensitiveMultiMap().add(HttpHeaders.LOCATION, "/logout?redirect_uri=" + URLEncoder.encode(serviceRequest.getExtra().getString("uri"), "UTF-8")))));
 				} catch(Exception ex2) {
-					LOG.error(String.format("searchTrafficLightStep failed. ", ex2));
+					LOG.error(String.format("searchSmartTrafficLight failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
 			} else if(StringUtils.startsWith(ex.getMessage(), "401 UNAUTHORIZED ")) {
@@ -175,28 +177,28 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							)
 					));
 			} else {
-				LOG.error(String.format("searchTrafficLightStep failed. "), ex);
+				LOG.error(String.format("searchSmartTrafficLight failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		});
 	}
 
 
-	public Future<ServiceResponse> response200SearchTrafficLightStep(SearchList<TrafficLightStep> listTrafficLightStep) {
+	public Future<ServiceResponse> response200SearchSmartTrafficLight(SearchList<SmartTrafficLight> listSmartTrafficLight) {
 		Promise<ServiceResponse> promise = Promise.promise();
 		try {
-			SiteRequestEnUS siteRequest = listTrafficLightStep.getSiteRequest_(SiteRequestEnUS.class);
-			List<String> fls = listTrafficLightStep.getRequest().getFields();
+			SiteRequestEnUS siteRequest = listSmartTrafficLight.getSiteRequest_(SiteRequestEnUS.class);
+			List<String> fls = listSmartTrafficLight.getRequest().getFields();
 			JsonObject json = new JsonObject();
 			JsonArray l = new JsonArray();
-			listTrafficLightStep.getList().stream().forEach(o -> {
+			listSmartTrafficLight.getList().stream().forEach(o -> {
 				JsonObject json2 = JsonObject.mapFrom(o);
 				if(fls.size() > 0) {
 					Set<String> fieldNames = new HashSet<String>();
 					for(String fieldName : json2.fieldNames()) {
-						String v = TrafficLightStep.varIndexedTrafficLightStep(fieldName);
+						String v = SmartTrafficLight.varIndexedSmartTrafficLight(fieldName);
 						if(v != null)
-							fieldNames.add(TrafficLightStep.varIndexedTrafficLightStep(fieldName));
+							fieldNames.add(SmartTrafficLight.varIndexedSmartTrafficLight(fieldName));
 					}
 					if(fls.size() == 1 && fls.stream().findFirst().orElse(null).equals("saves_docvalues_strings")) {
 						fieldNames.removeAll(Optional.ofNullable(json2.getJsonArray("saves_docvalues_strings")).orElse(new JsonArray()).stream().map(s -> s.toString()).collect(Collectors.toList()));
@@ -214,15 +216,15 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 				l.add(json2);
 			});
 			json.put("list", l);
-			response200Search(listTrafficLightStep.getRequest(), listTrafficLightStep.getResponse(), json);
+			response200Search(listSmartTrafficLight.getRequest(), listSmartTrafficLight.getResponse(), json);
 			promise.complete(ServiceResponse.completedWithJson(Buffer.buffer(Optional.ofNullable(json).orElse(new JsonObject()).encodePrettily())));
 		} catch(Exception ex) {
-			LOG.error(String.format("response200SearchTrafficLightStep failed. "), ex);
+			LOG.error(String.format("response200SearchSmartTrafficLight failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
 	}
-	public void responsePivotSearchTrafficLightStep(List<SolrResponse.Pivot> pivots, JsonArray pivotArray) {
+	public void responsePivotSearchSmartTrafficLight(List<SolrResponse.Pivot> pivots, JsonArray pivotArray) {
 		if(pivots != null) {
 			for(SolrResponse.Pivot pivotField : pivots) {
 				String entityIndexed = pivotField.getField();
@@ -251,7 +253,7 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 				if(pivotFields2 != null) {
 					JsonArray pivotArray2 = new JsonArray();
 					pivotJson.put("pivot", pivotArray2);
-					responsePivotSearchTrafficLightStep(pivotFields2, pivotArray2);
+					responsePivotSearchSmartTrafficLight(pivotFields2, pivotArray2);
 				}
 			}
 		}
@@ -260,7 +262,7 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 	// GET //
 
 	@Override
-	public void getTrafficLightStep(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
+	public void getSmartTrafficLight(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 
 			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
@@ -276,7 +278,7 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 					)
 				));
 			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_TrafficLightStep")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SmartTrafficLight")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
 					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 					eventHandler.handle(Future.succeededFuture(
 						new ServiceResponse(401, "UNAUTHORIZED",
@@ -290,20 +292,20 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 					));
 				} else {
 					try {
-						searchTrafficLightStepList(siteRequest, false, true, false).onSuccess(listTrafficLightStep -> {
-							response200GETTrafficLightStep(listTrafficLightStep).onSuccess(response -> {
+						searchSmartTrafficLightList(siteRequest, false, true, false).onSuccess(listSmartTrafficLight -> {
+							response200GETSmartTrafficLight(listSmartTrafficLight).onSuccess(response -> {
 								eventHandler.handle(Future.succeededFuture(response));
-								LOG.debug(String.format("getTrafficLightStep succeeded. "));
+								LOG.debug(String.format("getSmartTrafficLight succeeded. "));
 							}).onFailure(ex -> {
-								LOG.error(String.format("getTrafficLightStep failed. "), ex);
+								LOG.error(String.format("getSmartTrafficLight failed. "), ex);
 								error(siteRequest, eventHandler, ex);
 							});
 						}).onFailure(ex -> {
-							LOG.error(String.format("getTrafficLightStep failed. "), ex);
+							LOG.error(String.format("getSmartTrafficLight failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
 					} catch(Exception ex) {
-						LOG.error(String.format("getTrafficLightStep failed. "), ex);
+						LOG.error(String.format("getSmartTrafficLight failed. "), ex);
 						error(null, eventHandler, ex);
 					}
 				}
@@ -313,7 +315,7 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 				try {
 					eventHandler.handle(Future.succeededFuture(new ServiceResponse(302, "Found", null, MultiMap.caseInsensitiveMultiMap().add(HttpHeaders.LOCATION, "/logout?redirect_uri=" + URLEncoder.encode(serviceRequest.getExtra().getString("uri"), "UTF-8")))));
 				} catch(Exception ex2) {
-					LOG.error(String.format("getTrafficLightStep failed. ", ex2));
+					LOG.error(String.format("getSmartTrafficLight failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
 			} else if(StringUtils.startsWith(ex.getMessage(), "401 UNAUTHORIZED ")) {
@@ -328,21 +330,21 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							)
 					));
 			} else {
-				LOG.error(String.format("getTrafficLightStep failed. "), ex);
+				LOG.error(String.format("getSmartTrafficLight failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		});
 	}
 
 
-	public Future<ServiceResponse> response200GETTrafficLightStep(SearchList<TrafficLightStep> listTrafficLightStep) {
+	public Future<ServiceResponse> response200GETSmartTrafficLight(SearchList<SmartTrafficLight> listSmartTrafficLight) {
 		Promise<ServiceResponse> promise = Promise.promise();
 		try {
-			SiteRequestEnUS siteRequest = listTrafficLightStep.getSiteRequest_(SiteRequestEnUS.class);
-			JsonObject json = JsonObject.mapFrom(listTrafficLightStep.getList().stream().findFirst().orElse(null));
+			SiteRequestEnUS siteRequest = listSmartTrafficLight.getSiteRequest_(SiteRequestEnUS.class);
+			JsonObject json = JsonObject.mapFrom(listSmartTrafficLight.getList().stream().findFirst().orElse(null));
 			promise.complete(ServiceResponse.completedWithJson(Buffer.buffer(Optional.ofNullable(json).orElse(new JsonObject()).encodePrettily())));
 		} catch(Exception ex) {
-			LOG.error(String.format("response200GETTrafficLightStep failed. "), ex);
+			LOG.error(String.format("response200GETSmartTrafficLight failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
@@ -351,8 +353,8 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 	// PATCH //
 
 	@Override
-	public void patchTrafficLightStep(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
-		LOG.debug(String.format("patchTrafficLightStep started. "));
+	public void patchSmartTrafficLight(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
+		LOG.debug(String.format("patchSmartTrafficLight started. "));
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 
 			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
@@ -368,7 +370,7 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 					)
 				));
 			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_TrafficLightStep")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SmartTrafficLight")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
 					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 					eventHandler.handle(Future.succeededFuture(
 						new ServiceResponse(401, "UNAUTHORIZED",
@@ -382,49 +384,49 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 					));
 				} else {
 					try {
-						searchTrafficLightStepList(siteRequest, true, false, true).onSuccess(listTrafficLightStep -> {
+						searchSmartTrafficLightList(siteRequest, true, false, true).onSuccess(listSmartTrafficLight -> {
 							try {
-								if(listTrafficLightStep.getResponse().getResponse().getNumFound() > 1
-										&& !Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_TrafficLightStep")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+								if(listSmartTrafficLight.getResponse().getResponse().getNumFound() > 1
+										&& !Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SmartTrafficLight")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
 										) {
-									String message = String.format("roles required: " + config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_TrafficLightStep"));
+									String message = String.format("roles required: " + config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SmartTrafficLight"));
 									LOG.error(message);
 									error(siteRequest, eventHandler, new RuntimeException(message));
 								} else {
 
 									ApiRequest apiRequest = new ApiRequest();
-									apiRequest.setRows(listTrafficLightStep.getRequest().getRows());
-									apiRequest.setNumFound(listTrafficLightStep.getResponse().getResponse().getNumFound());
+									apiRequest.setRows(listSmartTrafficLight.getRequest().getRows());
+									apiRequest.setNumFound(listSmartTrafficLight.getResponse().getResponse().getNumFound());
 									apiRequest.setNumPATCH(0L);
 									apiRequest.initDeepApiRequest(siteRequest);
 									siteRequest.setApiRequest_(apiRequest);
 									if(apiRequest.getNumFound() == 1L)
-										apiRequest.setOriginal(listTrafficLightStep.first());
-									eventBus.publish("websocketTrafficLightStep", JsonObject.mapFrom(apiRequest).toString());
+										apiRequest.setOriginal(listSmartTrafficLight.first());
+									eventBus.publish("websocketSmartTrafficLight", JsonObject.mapFrom(apiRequest).toString());
 
-									listPATCHTrafficLightStep(apiRequest, listTrafficLightStep).onSuccess(e -> {
-										response200PATCHTrafficLightStep(siteRequest).onSuccess(response -> {
-											LOG.debug(String.format("patchTrafficLightStep succeeded. "));
+									listPATCHSmartTrafficLight(apiRequest, listSmartTrafficLight).onSuccess(e -> {
+										response200PATCHSmartTrafficLight(siteRequest).onSuccess(response -> {
+											LOG.debug(String.format("patchSmartTrafficLight succeeded. "));
 											eventHandler.handle(Future.succeededFuture(response));
 										}).onFailure(ex -> {
-											LOG.error(String.format("patchTrafficLightStep failed. "), ex);
+											LOG.error(String.format("patchSmartTrafficLight failed. "), ex);
 											error(siteRequest, eventHandler, ex);
 										});
 									}).onFailure(ex -> {
-										LOG.error(String.format("patchTrafficLightStep failed. "), ex);
+										LOG.error(String.format("patchSmartTrafficLight failed. "), ex);
 										error(siteRequest, eventHandler, ex);
 									});
 								}
 							} catch(Exception ex) {
-								LOG.error(String.format("patchTrafficLightStep failed. "), ex);
+								LOG.error(String.format("patchSmartTrafficLight failed. "), ex);
 								error(siteRequest, eventHandler, ex);
 							}
 						}).onFailure(ex -> {
-							LOG.error(String.format("patchTrafficLightStep failed. "), ex);
+							LOG.error(String.format("patchSmartTrafficLight failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
 					} catch(Exception ex) {
-						LOG.error(String.format("patchTrafficLightStep failed. "), ex);
+						LOG.error(String.format("patchSmartTrafficLight failed. "), ex);
 						error(null, eventHandler, ex);
 					}
 				}
@@ -434,7 +436,7 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 				try {
 					eventHandler.handle(Future.succeededFuture(new ServiceResponse(302, "Found", null, MultiMap.caseInsensitiveMultiMap().add(HttpHeaders.LOCATION, "/logout?redirect_uri=" + URLEncoder.encode(serviceRequest.getExtra().getString("uri"), "UTF-8")))));
 				} catch(Exception ex2) {
-					LOG.error(String.format("patchTrafficLightStep failed. ", ex2));
+					LOG.error(String.format("patchSmartTrafficLight failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
 			} else if(StringUtils.startsWith(ex.getMessage(), "401 UNAUTHORIZED ")) {
@@ -449,63 +451,63 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							)
 					));
 			} else {
-				LOG.error(String.format("patchTrafficLightStep failed. "), ex);
+				LOG.error(String.format("patchSmartTrafficLight failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		});
 	}
 
 
-	public Future<Void> listPATCHTrafficLightStep(ApiRequest apiRequest, SearchList<TrafficLightStep> listTrafficLightStep) {
+	public Future<Void> listPATCHSmartTrafficLight(ApiRequest apiRequest, SearchList<SmartTrafficLight> listSmartTrafficLight) {
 		Promise<Void> promise = Promise.promise();
 		List<Future> futures = new ArrayList<>();
-		SiteRequestEnUS siteRequest = listTrafficLightStep.getSiteRequest_(SiteRequestEnUS.class);
-		listTrafficLightStep.getList().forEach(o -> {
+		SiteRequestEnUS siteRequest = listSmartTrafficLight.getSiteRequest_(SiteRequestEnUS.class);
+		listSmartTrafficLight.getList().forEach(o -> {
 			SiteRequestEnUS siteRequest2 = generateSiteRequest(siteRequest.getUser(), siteRequest.getUserPrincipal(), siteRequest.getServiceRequest(), siteRequest.getJsonObject(), SiteRequestEnUS.class);
 			o.setSiteRequest_(siteRequest2);
 			siteRequest2.setApiRequest_(siteRequest.getApiRequest_());
 			futures.add(Future.future(promise1 -> {
-				patchTrafficLightStepFuture(o, false).onSuccess(a -> {
+				patchSmartTrafficLightFuture(o, false).onSuccess(a -> {
 					promise1.complete();
 				}).onFailure(ex -> {
-					LOG.error(String.format("listPATCHTrafficLightStep failed. "), ex);
+					LOG.error(String.format("listPATCHSmartTrafficLight failed. "), ex);
 					promise1.fail(ex);
 				});
 			}));
 		});
 		CompositeFuture.all(futures).onSuccess( a -> {
-			listTrafficLightStep.next().onSuccess(next -> {
+			listSmartTrafficLight.next().onSuccess(next -> {
 				if(next) {
-					listPATCHTrafficLightStep(apiRequest, listTrafficLightStep).onSuccess(b -> {
+					listPATCHSmartTrafficLight(apiRequest, listSmartTrafficLight).onSuccess(b -> {
 						promise.complete();
 					}).onFailure(ex -> {
-						LOG.error(String.format("listPATCHTrafficLightStep failed. "), ex);
+						LOG.error(String.format("listPATCHSmartTrafficLight failed. "), ex);
 						promise.fail(ex);
 					});
 				} else {
 					promise.complete();
 				}
 			}).onFailure(ex -> {
-				LOG.error(String.format("listPATCHTrafficLightStep failed. "), ex);
+				LOG.error(String.format("listPATCHSmartTrafficLight failed. "), ex);
 				promise.fail(ex);
 			});
 		}).onFailure(ex -> {
-			LOG.error(String.format("listPATCHTrafficLightStep failed. "), ex);
+			LOG.error(String.format("listPATCHSmartTrafficLight failed. "), ex);
 			promise.fail(ex);
 		});
 		return promise.future();
 	}
 
 	@Override
-	public void patchTrafficLightStepFuture(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
+	public void patchSmartTrafficLightFuture(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 			try {
 				siteRequest.setJsonObject(body);
 				serviceRequest.getParams().getJsonObject("query").put("rows", 1);
-				searchTrafficLightStepList(siteRequest, false, true, true).onSuccess(listTrafficLightStep -> {
+				searchSmartTrafficLightList(siteRequest, false, true, true).onSuccess(listSmartTrafficLight -> {
 					try {
-						TrafficLightStep o = listTrafficLightStep.first();
-						if(o != null && listTrafficLightStep.getResponse().getResponse().getNumFound() == 1) {
+						SmartTrafficLight o = listSmartTrafficLight.first();
+						if(o != null && listSmartTrafficLight.getResponse().getResponse().getNumFound() == 1) {
 							ApiRequest apiRequest = new ApiRequest();
 							apiRequest.setRows(1L);
 							apiRequest.setNumFound(1L);
@@ -517,13 +519,13 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							}
 							if(apiRequest.getNumFound() == 1L)
 								apiRequest.setOriginal(o);
-							eventBus.publish("websocketTrafficLightStep", JsonObject.mapFrom(apiRequest).toString());
-							patchTrafficLightStepFuture(o, false).onSuccess(o2 -> {
+							eventBus.publish("websocketSmartTrafficLight", JsonObject.mapFrom(apiRequest).toString());
+							patchSmartTrafficLightFuture(o, false).onSuccess(o2 -> {
 								if(apiRequest != null) {
-									apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listTrafficLightStep.getResponse().getResponse().getDocs().size());
+									apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listSmartTrafficLight.getResponse().getResponse().getDocs().size());
 									if(apiRequest.getNumFound() == 1L)
-										o2.apiRequestTrafficLightStep();
-									eventBus.publish("websocketTrafficLightStep", JsonObject.mapFrom(apiRequest).toString());
+										o.apiRequestSmartTrafficLight();
+									eventBus.publish("websocketSmartTrafficLight", JsonObject.mapFrom(apiRequest).toString());
 								}
 								eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(new JsonObject().encodePrettily()))));
 							}).onFailure(ex -> {
@@ -533,31 +535,31 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(new JsonObject().encodePrettily()))));
 						}
 					} catch(Exception ex) {
-						LOG.error(String.format("patchTrafficLightStep failed. "), ex);
+						LOG.error(String.format("patchSmartTrafficLight failed. "), ex);
 						error(siteRequest, eventHandler, ex);
 					}
 				}).onFailure(ex -> {
-					LOG.error(String.format("patchTrafficLightStep failed. "), ex);
+					LOG.error(String.format("patchSmartTrafficLight failed. "), ex);
 					error(siteRequest, eventHandler, ex);
 				});
 			} catch(Exception ex) {
-				LOG.error(String.format("patchTrafficLightStep failed. "), ex);
+				LOG.error(String.format("patchSmartTrafficLight failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		}).onFailure(ex -> {
-			LOG.error(String.format("patchTrafficLightStep failed. "), ex);
+			LOG.error(String.format("patchSmartTrafficLight failed. "), ex);
 			error(null, eventHandler, ex);
 		});
 	}
 
-	public Future<TrafficLightStep> patchTrafficLightStepFuture(TrafficLightStep o, Boolean inheritPk) {
+	public Future<SmartTrafficLight> patchSmartTrafficLightFuture(SmartTrafficLight o, Boolean inheritPk) {
 		SiteRequestEnUS siteRequest = o.getSiteRequest_();
-		Promise<TrafficLightStep> promise = Promise.promise();
+		Promise<SmartTrafficLight> promise = Promise.promise();
 
 		try {
 			ApiRequest apiRequest = siteRequest.getApiRequest_();
-			persistTrafficLightStep(o, true).onSuccess(c -> {
-				indexTrafficLightStep(o).onSuccess(e -> {
+			persistSmartTrafficLight(o, true).onSuccess(c -> {
+				indexSmartTrafficLight(o).onSuccess(e -> {
 					promise.complete(o);
 				}).onFailure(ex -> {
 					promise.fail(ex);
@@ -566,19 +568,19 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 				promise.fail(ex);
 			});
 		} catch(Exception ex) {
-			LOG.error(String.format("patchTrafficLightStepFuture failed. "), ex);
+			LOG.error(String.format("patchSmartTrafficLightFuture failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
 	}
 
-	public Future<ServiceResponse> response200PATCHTrafficLightStep(SiteRequestEnUS siteRequest) {
+	public Future<ServiceResponse> response200PATCHSmartTrafficLight(SiteRequestEnUS siteRequest) {
 		Promise<ServiceResponse> promise = Promise.promise();
 		try {
 			JsonObject json = new JsonObject();
 			promise.complete(ServiceResponse.completedWithJson(Buffer.buffer(Optional.ofNullable(json).orElse(new JsonObject()).encodePrettily())));
 		} catch(Exception ex) {
-			LOG.error(String.format("response200PATCHTrafficLightStep failed. "), ex);
+			LOG.error(String.format("response200PATCHSmartTrafficLight failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
@@ -587,8 +589,8 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 	// POST //
 
 	@Override
-	public void postTrafficLightStep(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
-		LOG.debug(String.format("postTrafficLightStep started. "));
+	public void postSmartTrafficLight(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
+		LOG.debug(String.format("postSmartTrafficLight started. "));
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 
 			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
@@ -604,7 +606,7 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 					)
 				));
 			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_TrafficLightStep")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SmartTrafficLight")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
 					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 					eventHandler.handle(Future.succeededFuture(
 						new ServiceResponse(401, "UNAUTHORIZED",
@@ -624,7 +626,7 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 						apiRequest.setNumPATCH(0L);
 						apiRequest.initDeepApiRequest(siteRequest);
 						siteRequest.setApiRequest_(apiRequest);
-						eventBus.publish("websocketTrafficLightStep", JsonObject.mapFrom(apiRequest).toString());
+						eventBus.publish("websocketSmartTrafficLight", JsonObject.mapFrom(apiRequest).toString());
 						JsonObject params = new JsonObject();
 						params.put("body", siteRequest.getJsonObject());
 						params.put("path", new JsonObject());
@@ -643,17 +645,17 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 						params.put("query", query);
 						JsonObject context = new JsonObject().put("params", params).put("user", siteRequest.getUserPrincipal());
 						JsonObject json = new JsonObject().put("context", context);
-						eventBus.request("smartabyar-smartvillage-enUS-TrafficLightStep", json, new DeliveryOptions().addHeader("action", "postTrafficLightStepFuture")).onSuccess(a -> {
+						eventBus.request("smartabyar-smartvillage-enUS-SmartTrafficLight", json, new DeliveryOptions().addHeader("action", "postSmartTrafficLightFuture")).onSuccess(a -> {
 							JsonObject responseMessage = (JsonObject)a.body();
 							JsonObject responseBody = new JsonObject(Buffer.buffer(JsonUtil.BASE64_DECODER.decode(responseMessage.getString("payload"))));
 							eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(responseBody.encodePrettily()))));
-							LOG.debug(String.format("postTrafficLightStep succeeded. "));
+							LOG.debug(String.format("postSmartTrafficLight succeeded. "));
 						}).onFailure(ex -> {
-							LOG.error(String.format("postTrafficLightStep failed. "), ex);
+							LOG.error(String.format("postSmartTrafficLight failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
 					} catch(Exception ex) {
-						LOG.error(String.format("postTrafficLightStep failed. "), ex);
+						LOG.error(String.format("postSmartTrafficLight failed. "), ex);
 						error(null, eventHandler, ex);
 					}
 				}
@@ -663,7 +665,7 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 				try {
 					eventHandler.handle(Future.succeededFuture(new ServiceResponse(302, "Found", null, MultiMap.caseInsensitiveMultiMap().add(HttpHeaders.LOCATION, "/logout?redirect_uri=" + URLEncoder.encode(serviceRequest.getExtra().getString("uri"), "UTF-8")))));
 				} catch(Exception ex2) {
-					LOG.error(String.format("postTrafficLightStep failed. ", ex2));
+					LOG.error(String.format("postSmartTrafficLight failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
 			} else if(StringUtils.startsWith(ex.getMessage(), "401 UNAUTHORIZED ")) {
@@ -678,7 +680,7 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							)
 					));
 			} else {
-				LOG.error(String.format("postTrafficLightStep failed. "), ex);
+				LOG.error(String.format("postSmartTrafficLight failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		});
@@ -686,7 +688,7 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 
 
 	@Override
-	public void postTrafficLightStepFuture(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
+	public void postSmartTrafficLightFuture(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 			ApiRequest apiRequest = new ApiRequest();
 			apiRequest.setRows(1L);
@@ -697,7 +699,7 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 			if(Optional.ofNullable(serviceRequest.getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getJsonArray("var")).orElse(new JsonArray()).stream().filter(s -> "refresh:false".equals(s)).count() > 0L) {
 				siteRequest.getRequestVars().put( "refresh", "false" );
 			}
-			postTrafficLightStepFuture(siteRequest, false).onSuccess(o -> {
+			postSmartTrafficLightFuture(siteRequest, false).onSuccess(o -> {
 				eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(JsonObject.mapFrom(o).encodePrettily()))));
 			}).onFailure(ex -> {
 				eventHandler.handle(Future.failedFuture(ex));
@@ -707,7 +709,7 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 				try {
 					eventHandler.handle(Future.succeededFuture(new ServiceResponse(302, "Found", null, MultiMap.caseInsensitiveMultiMap().add(HttpHeaders.LOCATION, "/logout?redirect_uri=" + URLEncoder.encode(serviceRequest.getExtra().getString("uri"), "UTF-8")))));
 				} catch(Exception ex2) {
-					LOG.error(String.format("postTrafficLightStep failed. ", ex2));
+					LOG.error(String.format("postSmartTrafficLight failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
 			} else if(StringUtils.startsWith(ex.getMessage(), "401 UNAUTHORIZED ")) {
@@ -722,20 +724,20 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							)
 					));
 			} else {
-				LOG.error(String.format("postTrafficLightStep failed. "), ex);
+				LOG.error(String.format("postSmartTrafficLight failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		});
 	}
 
-	public Future<TrafficLightStep> postTrafficLightStepFuture(SiteRequestEnUS siteRequest, Boolean inheritPk) {
-		Promise<TrafficLightStep> promise = Promise.promise();
+	public Future<SmartTrafficLight> postSmartTrafficLightFuture(SiteRequestEnUS siteRequest, Boolean inheritPk) {
+		Promise<SmartTrafficLight> promise = Promise.promise();
 
 		try {
-			createTrafficLightStep(siteRequest).onSuccess(trafficLightStep -> {
-				persistTrafficLightStep(trafficLightStep, false).onSuccess(c -> {
-					indexTrafficLightStep(trafficLightStep).onSuccess(e -> {
-						promise.complete(trafficLightStep);
+			createSmartTrafficLight(siteRequest).onSuccess(smartTrafficLight -> {
+				persistSmartTrafficLight(smartTrafficLight, false).onSuccess(c -> {
+					indexSmartTrafficLight(smartTrafficLight).onSuccess(e -> {
+						promise.complete(smartTrafficLight);
 					}).onFailure(ex -> {
 						promise.fail(ex);
 					});
@@ -746,20 +748,20 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 				promise.fail(ex);
 			});
 		} catch(Exception ex) {
-			LOG.error(String.format("postTrafficLightStepFuture failed. "), ex);
+			LOG.error(String.format("postSmartTrafficLightFuture failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
 	}
 
-	public Future<ServiceResponse> response200POSTTrafficLightStep(TrafficLightStep o) {
+	public Future<ServiceResponse> response200POSTSmartTrafficLight(SmartTrafficLight o) {
 		Promise<ServiceResponse> promise = Promise.promise();
 		try {
 			SiteRequestEnUS siteRequest = o.getSiteRequest_();
 			JsonObject json = JsonObject.mapFrom(o);
 			promise.complete(ServiceResponse.completedWithJson(Buffer.buffer(Optional.ofNullable(json).orElse(new JsonObject()).encodePrettily())));
 		} catch(Exception ex) {
-			LOG.error(String.format("response200POSTTrafficLightStep failed. "), ex);
+			LOG.error(String.format("response200POSTSmartTrafficLight failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
@@ -768,8 +770,8 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 	// PUTImport //
 
 	@Override
-	public void putimportTrafficLightStep(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
-		LOG.debug(String.format("putimportTrafficLightStep started. "));
+	public void putimportSmartTrafficLight(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
+		LOG.debug(String.format("putimportSmartTrafficLight started. "));
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 
 			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
@@ -785,7 +787,7 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 					)
 				));
 			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_TrafficLightStep")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SmartTrafficLight")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
 					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 					eventHandler.handle(Future.succeededFuture(
 						new ServiceResponse(401, "UNAUTHORIZED",
@@ -807,30 +809,30 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							apiRequest.setNumPATCH(0L);
 							apiRequest.initDeepApiRequest(siteRequest);
 							siteRequest.setApiRequest_(apiRequest);
-							eventBus.publish("websocketTrafficLightStep", JsonObject.mapFrom(apiRequest).toString());
-							varsTrafficLightStep(siteRequest).onSuccess(d -> {
-								listPUTImportTrafficLightStep(apiRequest, siteRequest).onSuccess(e -> {
-									response200PUTImportTrafficLightStep(siteRequest).onSuccess(response -> {
-										LOG.debug(String.format("putimportTrafficLightStep succeeded. "));
+							eventBus.publish("websocketSmartTrafficLight", JsonObject.mapFrom(apiRequest).toString());
+							varsSmartTrafficLight(siteRequest).onSuccess(d -> {
+								listPUTImportSmartTrafficLight(apiRequest, siteRequest).onSuccess(e -> {
+									response200PUTImportSmartTrafficLight(siteRequest).onSuccess(response -> {
+										LOG.debug(String.format("putimportSmartTrafficLight succeeded. "));
 										eventHandler.handle(Future.succeededFuture(response));
 									}).onFailure(ex -> {
-										LOG.error(String.format("putimportTrafficLightStep failed. "), ex);
+										LOG.error(String.format("putimportSmartTrafficLight failed. "), ex);
 										error(siteRequest, eventHandler, ex);
 									});
 								}).onFailure(ex -> {
-									LOG.error(String.format("putimportTrafficLightStep failed. "), ex);
+									LOG.error(String.format("putimportSmartTrafficLight failed. "), ex);
 									error(siteRequest, eventHandler, ex);
 								});
 							}).onFailure(ex -> {
-								LOG.error(String.format("putimportTrafficLightStep failed. "), ex);
+								LOG.error(String.format("putimportSmartTrafficLight failed. "), ex);
 								error(siteRequest, eventHandler, ex);
 							});
 						} catch(Exception ex) {
-							LOG.error(String.format("putimportTrafficLightStep failed. "), ex);
+							LOG.error(String.format("putimportSmartTrafficLight failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						}
 					} catch(Exception ex) {
-						LOG.error(String.format("putimportTrafficLightStep failed. "), ex);
+						LOG.error(String.format("putimportSmartTrafficLight failed. "), ex);
 						error(null, eventHandler, ex);
 					}
 				}
@@ -840,7 +842,7 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 				try {
 					eventHandler.handle(Future.succeededFuture(new ServiceResponse(302, "Found", null, MultiMap.caseInsensitiveMultiMap().add(HttpHeaders.LOCATION, "/logout?redirect_uri=" + URLEncoder.encode(serviceRequest.getExtra().getString("uri"), "UTF-8")))));
 				} catch(Exception ex2) {
-					LOG.error(String.format("putimportTrafficLightStep failed. ", ex2));
+					LOG.error(String.format("putimportSmartTrafficLight failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
 			} else if(StringUtils.startsWith(ex.getMessage(), "401 UNAUTHORIZED ")) {
@@ -855,14 +857,14 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							)
 					));
 			} else {
-				LOG.error(String.format("putimportTrafficLightStep failed. "), ex);
+				LOG.error(String.format("putimportSmartTrafficLight failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		});
 	}
 
 
-	public Future<Void> listPUTImportTrafficLightStep(ApiRequest apiRequest, SiteRequestEnUS siteRequest) {
+	public Future<Void> listPUTImportSmartTrafficLight(ApiRequest apiRequest, SiteRequestEnUS siteRequest) {
 		Promise<Void> promise = Promise.promise();
 		List<Future> futures = new ArrayList<>();
 		JsonArray jsonArray = Optional.ofNullable(siteRequest.getJsonObject()).map(o -> o.getJsonArray("list")).orElse(new JsonArray());
@@ -887,10 +889,10 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 					params.put("query", query);
 					JsonObject context = new JsonObject().put("params", params).put("user", siteRequest.getUserPrincipal());
 					JsonObject json = new JsonObject().put("context", context);
-					eventBus.request("smartabyar-smartvillage-enUS-TrafficLightStep", json, new DeliveryOptions().addHeader("action", "putimportTrafficLightStepFuture")).onSuccess(a -> {
+					eventBus.request("smartabyar-smartvillage-enUS-SmartTrafficLight", json, new DeliveryOptions().addHeader("action", "putimportSmartTrafficLightFuture")).onSuccess(a -> {
 						promise1.complete();
 					}).onFailure(ex -> {
-						LOG.error(String.format("listPUTImportTrafficLightStep failed. "), ex);
+						LOG.error(String.format("listPUTImportSmartTrafficLight failed. "), ex);
 						promise1.fail(ex);
 					});
 				}));
@@ -899,18 +901,18 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 				apiRequest.setNumPATCH(apiRequest.getNumPATCH() + 1);
 				promise.complete();
 			}).onFailure(ex -> {
-				LOG.error(String.format("listPUTImportTrafficLightStep failed. "), ex);
+				LOG.error(String.format("listPUTImportSmartTrafficLight failed. "), ex);
 				promise.fail(ex);
 			});
 		} catch(Exception ex) {
-			LOG.error(String.format("listPUTImportTrafficLightStep failed. "), ex);
+			LOG.error(String.format("listPUTImportSmartTrafficLight failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
 	}
 
 	@Override
-	public void putimportTrafficLightStepFuture(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
+	public void putimportSmartTrafficLightFuture(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 			try {
 				ApiRequest apiRequest = new ApiRequest();
@@ -925,18 +927,18 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 					siteRequest.getRequestVars().put( "refresh", "false" );
 				}
 
-				SearchList<TrafficLightStep> searchList = new SearchList<TrafficLightStep>();
+				SearchList<SmartTrafficLight> searchList = new SearchList<SmartTrafficLight>();
 				searchList.setStore(true);
 				searchList.q("*:*");
-				searchList.setC(TrafficLightStep.class);
+				searchList.setC(SmartTrafficLight.class);
 				searchList.fq("deleted_docvalues_boolean:false");
 				searchList.fq("archived_docvalues_boolean:false");
-				searchList.fq("inheritPk_docvalues_string:" + SearchTool.escapeQueryChars(body.getString(TrafficLightStep.VAR_id)));
+				searchList.fq("inheritPk_docvalues_string:" + SearchTool.escapeQueryChars(body.getString(SmartTrafficLight.VAR_id)));
 				searchList.promiseDeepForClass(siteRequest).onSuccess(a -> {
 					try {
 						if(searchList.size() >= 1) {
-							TrafficLightStep o = searchList.getList().stream().findFirst().orElse(null);
-							TrafficLightStep o2 = new TrafficLightStep();
+							SmartTrafficLight o = searchList.getList().stream().findFirst().orElse(null);
+							SmartTrafficLight o2 = new SmartTrafficLight();
 							o2.setSiteRequest_(siteRequest);
 							JsonObject body2 = new JsonObject();
 							for(String f : body.fieldNames()) {
@@ -978,35 +980,35 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							}
 							if(body2.size() > 0) {
 								siteRequest.setJsonObject(body2);
-								patchTrafficLightStepFuture(o2, true).onSuccess(b -> {
-									LOG.debug("Import TrafficLightStep {} succeeded, modified TrafficLightStep. ", body.getValue(TrafficLightStep.VAR_id));
+								patchSmartTrafficLightFuture(o2, true).onSuccess(b -> {
+									LOG.debug("Import SmartTrafficLight {} succeeded, modified SmartTrafficLight. ", body.getValue(SmartTrafficLight.VAR_id));
 									eventHandler.handle(Future.succeededFuture());
 								}).onFailure(ex -> {
-									LOG.error(String.format("putimportTrafficLightStepFuture failed. "), ex);
+									LOG.error(String.format("putimportSmartTrafficLightFuture failed. "), ex);
 									eventHandler.handle(Future.failedFuture(ex));
 								});
 							} else {
 								eventHandler.handle(Future.succeededFuture());
 							}
 						} else {
-							postTrafficLightStepFuture(siteRequest, true).onSuccess(b -> {
-								LOG.debug("Import TrafficLightStep {} succeeded, created new TrafficLightStep. ", body.getValue(TrafficLightStep.VAR_id));
+							postSmartTrafficLightFuture(siteRequest, true).onSuccess(b -> {
+								LOG.debug("Import SmartTrafficLight {} succeeded, created new SmartTrafficLight. ", body.getValue(SmartTrafficLight.VAR_id));
 								eventHandler.handle(Future.succeededFuture());
 							}).onFailure(ex -> {
-								LOG.error(String.format("putimportTrafficLightStepFuture failed. "), ex);
+								LOG.error(String.format("putimportSmartTrafficLightFuture failed. "), ex);
 								eventHandler.handle(Future.failedFuture(ex));
 							});
 						}
 					} catch(Exception ex) {
-						LOG.error(String.format("putimportTrafficLightStepFuture failed. "), ex);
+						LOG.error(String.format("putimportSmartTrafficLightFuture failed. "), ex);
 						eventHandler.handle(Future.failedFuture(ex));
 					}
 				}).onFailure(ex -> {
-					LOG.error(String.format("putimportTrafficLightStepFuture failed. "), ex);
+					LOG.error(String.format("putimportSmartTrafficLightFuture failed. "), ex);
 					eventHandler.handle(Future.failedFuture(ex));
 				});
 			} catch(Exception ex) {
-				LOG.error(String.format("putimportTrafficLightStepFuture failed. "), ex);
+				LOG.error(String.format("putimportSmartTrafficLightFuture failed. "), ex);
 				eventHandler.handle(Future.failedFuture(ex));
 			}
 		}).onFailure(ex -> {
@@ -1014,7 +1016,7 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 				try {
 					eventHandler.handle(Future.succeededFuture(new ServiceResponse(302, "Found", null, MultiMap.caseInsensitiveMultiMap().add(HttpHeaders.LOCATION, "/logout?redirect_uri=" + URLEncoder.encode(serviceRequest.getExtra().getString("uri"), "UTF-8")))));
 				} catch(Exception ex2) {
-					LOG.error(String.format("putimportTrafficLightStep failed. ", ex2));
+					LOG.error(String.format("putimportSmartTrafficLight failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
 			} else if(StringUtils.startsWith(ex.getMessage(), "401 UNAUTHORIZED ")) {
@@ -1029,19 +1031,19 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							)
 					));
 			} else {
-				LOG.error(String.format("putimportTrafficLightStep failed. "), ex);
+				LOG.error(String.format("putimportSmartTrafficLight failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		});
 	}
 
-	public Future<ServiceResponse> response200PUTImportTrafficLightStep(SiteRequestEnUS siteRequest) {
+	public Future<ServiceResponse> response200PUTImportSmartTrafficLight(SiteRequestEnUS siteRequest) {
 		Promise<ServiceResponse> promise = Promise.promise();
 		try {
 			JsonObject json = new JsonObject();
 			promise.complete(ServiceResponse.completedWithJson(Buffer.buffer(Optional.ofNullable(json).orElse(new JsonObject()).encodePrettily())));
 		} catch(Exception ex) {
-			LOG.error(String.format("response200PUTImportTrafficLightStep failed. "), ex);
+			LOG.error(String.format("response200PUTImportSmartTrafficLight failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
@@ -1050,12 +1052,12 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 	// SearchPage //
 
 	@Override
-	public void searchpageTrafficLightStepId(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
-		searchpageTrafficLightStep(serviceRequest, eventHandler);
+	public void searchpageSmartTrafficLightId(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
+		searchpageSmartTrafficLight(serviceRequest, eventHandler);
 	}
 
 	@Override
-	public void searchpageTrafficLightStep(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
+	public void searchpageSmartTrafficLight(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 
 			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
@@ -1071,7 +1073,7 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 					)
 				));
 			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_TrafficLightStep")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SmartTrafficLight")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
 					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 					eventHandler.handle(Future.succeededFuture(
 						new ServiceResponse(401, "UNAUTHORIZED",
@@ -1085,20 +1087,20 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 					));
 				} else {
 					try {
-						searchTrafficLightStepList(siteRequest, false, true, false).onSuccess(listTrafficLightStep -> {
-							response200SearchPageTrafficLightStep(listTrafficLightStep).onSuccess(response -> {
+						searchSmartTrafficLightList(siteRequest, false, true, false).onSuccess(listSmartTrafficLight -> {
+							response200SearchPageSmartTrafficLight(listSmartTrafficLight).onSuccess(response -> {
 								eventHandler.handle(Future.succeededFuture(response));
-								LOG.debug(String.format("searchpageTrafficLightStep succeeded. "));
+								LOG.debug(String.format("searchpageSmartTrafficLight succeeded. "));
 							}).onFailure(ex -> {
-								LOG.error(String.format("searchpageTrafficLightStep failed. "), ex);
+								LOG.error(String.format("searchpageSmartTrafficLight failed. "), ex);
 								error(siteRequest, eventHandler, ex);
 							});
 						}).onFailure(ex -> {
-							LOG.error(String.format("searchpageTrafficLightStep failed. "), ex);
+							LOG.error(String.format("searchpageSmartTrafficLight failed. "), ex);
 							error(siteRequest, eventHandler, ex);
 						});
 					} catch(Exception ex) {
-						LOG.error(String.format("searchpageTrafficLightStep failed. "), ex);
+						LOG.error(String.format("searchpageSmartTrafficLight failed. "), ex);
 						error(null, eventHandler, ex);
 					}
 				}
@@ -1108,7 +1110,7 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 				try {
 					eventHandler.handle(Future.succeededFuture(new ServiceResponse(302, "Found", null, MultiMap.caseInsensitiveMultiMap().add(HttpHeaders.LOCATION, "/logout?redirect_uri=" + URLEncoder.encode(serviceRequest.getExtra().getString("uri"), "UTF-8")))));
 				} catch(Exception ex2) {
-					LOG.error(String.format("searchpageTrafficLightStep failed. ", ex2));
+					LOG.error(String.format("searchpageSmartTrafficLight failed. ", ex2));
 					error(null, eventHandler, ex2);
 				}
 			} else if(StringUtils.startsWith(ex.getMessage(), "401 UNAUTHORIZED ")) {
@@ -1123,30 +1125,30 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							)
 					));
 			} else {
-				LOG.error(String.format("searchpageTrafficLightStep failed. "), ex);
+				LOG.error(String.format("searchpageSmartTrafficLight failed. "), ex);
 				error(null, eventHandler, ex);
 			}
 		});
 	}
 
 
-	public void searchpageTrafficLightStepPageInit(TrafficLightStepPage page, SearchList<TrafficLightStep> listTrafficLightStep) {
+	public void searchpageSmartTrafficLightPageInit(SmartTrafficLightPage page, SearchList<SmartTrafficLight> listSmartTrafficLight) {
 	}
 
-	public String templateSearchPageTrafficLightStep() {
-		return Optional.ofNullable(config.getString(ConfigKeys.TEMPLATE_PATH)).orElse("templates") + "/enUS/TrafficLightStepPage";
+	public String templateSearchPageSmartTrafficLight() {
+		return Optional.ofNullable(config.getString(ConfigKeys.TEMPLATE_PATH)).orElse("templates") + "/enUS/SmartTrafficLightPage";
 	}
-	public Future<ServiceResponse> response200SearchPageTrafficLightStep(SearchList<TrafficLightStep> listTrafficLightStep) {
+	public Future<ServiceResponse> response200SearchPageSmartTrafficLight(SearchList<SmartTrafficLight> listSmartTrafficLight) {
 		Promise<ServiceResponse> promise = Promise.promise();
 		try {
-			SiteRequestEnUS siteRequest = listTrafficLightStep.getSiteRequest_(SiteRequestEnUS.class);
-			TrafficLightStepPage page = new TrafficLightStepPage();
+			SiteRequestEnUS siteRequest = listSmartTrafficLight.getSiteRequest_(SiteRequestEnUS.class);
+			SmartTrafficLightPage page = new SmartTrafficLightPage();
 			MultiMap requestHeaders = MultiMap.caseInsensitiveMultiMap();
 			siteRequest.setRequestHeaders(requestHeaders);
 
-			page.setSearchListTrafficLightStep_(listTrafficLightStep);
+			page.setSearchListSmartTrafficLight_(listSmartTrafficLight);
 			page.setSiteRequest_(siteRequest);
-			page.promiseDeepTrafficLightStepPage(siteRequest).onSuccess(a -> {
+			page.promiseDeepSmartTrafficLightPage(siteRequest).onSuccess(a -> {
 				JsonObject json = JsonObject.mapFrom(page);
 				json.put(ConfigKeys.STATIC_BASE_URL, config.getString(ConfigKeys.STATIC_BASE_URL));
 				json.put(ConfigKeys.GITHUB_ORG, config.getString(ConfigKeys.GITHUB_ORG));
@@ -1155,7 +1157,7 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 				json.put(ConfigKeys.SITE_POWERED_BY_URL, config.getString(ConfigKeys.SITE_POWERED_BY_URL));
 				json.put(ConfigKeys.SITE_POWERED_BY_NAME, config.getString(ConfigKeys.SITE_POWERED_BY_NAME));
 				json.put(ConfigKeys.SITE_POWERED_BY_IMAGE_URI, config.getString(ConfigKeys.SITE_POWERED_BY_IMAGE_URI));
-				templateEngine.render(json, templateSearchPageTrafficLightStep()).onSuccess(buffer -> {
+				templateEngine.render(json, templateSearchPageSmartTrafficLight()).onSuccess(buffer -> {
 					promise.complete(new ServiceResponse(200, "OK", buffer, requestHeaders));
 				}).onFailure(ex -> {
 					promise.fail(ex);
@@ -1164,7 +1166,7 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 				promise.fail(ex);
 			});
 		} catch(Exception ex) {
-			LOG.error(String.format("response200SearchPageTrafficLightStep failed. "), ex);
+			LOG.error(String.format("response200SearchPageSmartTrafficLight failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
@@ -1172,62 +1174,62 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 
 	// General //
 
-	public Future<TrafficLightStep> createTrafficLightStep(SiteRequestEnUS siteRequest) {
-		Promise<TrafficLightStep> promise = Promise.promise();
+	public Future<SmartTrafficLight> createSmartTrafficLight(SiteRequestEnUS siteRequest) {
+		Promise<SmartTrafficLight> promise = Promise.promise();
 		try {
-			TrafficLightStep o = new TrafficLightStep();
+			SmartTrafficLight o = new SmartTrafficLight();
 			o.setSiteRequest_(siteRequest);
 			promise.complete(o);
 		} catch(Exception ex) {
-			LOG.error(String.format("createTrafficLightStep failed. "), ex);
+			LOG.error(String.format("createSmartTrafficLight failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
 	}
 
-	public void searchTrafficLightStepQ(SearchList<TrafficLightStep> searchList, String entityVar, String valueIndexed, String varIndexed) {
+	public void searchSmartTrafficLightQ(SearchList<SmartTrafficLight> searchList, String entityVar, String valueIndexed, String varIndexed) {
 		searchList.q(varIndexed + ":" + ("*".equals(valueIndexed) ? valueIndexed : SearchTool.escapeQueryChars(valueIndexed)));
 		if(!"*".equals(entityVar)) {
 		}
 	}
 
-	public String searchTrafficLightStepFq(SearchList<TrafficLightStep> searchList, String entityVar, String valueIndexed, String varIndexed) {
+	public String searchSmartTrafficLightFq(SearchList<SmartTrafficLight> searchList, String entityVar, String valueIndexed, String varIndexed) {
 		if(varIndexed == null)
 			throw new RuntimeException(String.format("\"%s\" is not an indexed entity. ", entityVar));
 		if(StringUtils.startsWith(valueIndexed, "[")) {
 			String[] fqs = StringUtils.substringBefore(StringUtils.substringAfter(valueIndexed, "["), "]").split(" TO ");
 			if(fqs.length != 2)
 				throw new RuntimeException(String.format("\"%s\" invalid range query. ", valueIndexed));
-			String fq1 = fqs[0].equals("*") ? fqs[0] : TrafficLightStep.staticSearchFqForClass(entityVar, searchList.getSiteRequest_(SiteRequestEnUS.class), fqs[0]);
-			String fq2 = fqs[1].equals("*") ? fqs[1] : TrafficLightStep.staticSearchFqForClass(entityVar, searchList.getSiteRequest_(SiteRequestEnUS.class), fqs[1]);
+			String fq1 = fqs[0].equals("*") ? fqs[0] : SmartTrafficLight.staticSearchFqForClass(entityVar, searchList.getSiteRequest_(SiteRequestEnUS.class), fqs[0]);
+			String fq2 = fqs[1].equals("*") ? fqs[1] : SmartTrafficLight.staticSearchFqForClass(entityVar, searchList.getSiteRequest_(SiteRequestEnUS.class), fqs[1]);
 			 return varIndexed + ":[" + fq1 + " TO " + fq2 + "]";
 		} else {
-			return varIndexed + ":" + SearchTool.escapeQueryChars(TrafficLightStep.staticSearchFqForClass(entityVar, searchList.getSiteRequest_(SiteRequestEnUS.class), valueIndexed)).replace("\\", "\\\\");
+			return varIndexed + ":" + SearchTool.escapeQueryChars(SmartTrafficLight.staticSearchFqForClass(entityVar, searchList.getSiteRequest_(SiteRequestEnUS.class), valueIndexed)).replace("\\", "\\\\");
 		}
 	}
 
-	public void searchTrafficLightStepSort(SearchList<TrafficLightStep> searchList, String entityVar, String valueIndexed, String varIndexed) {
+	public void searchSmartTrafficLightSort(SearchList<SmartTrafficLight> searchList, String entityVar, String valueIndexed, String varIndexed) {
 		if(varIndexed == null)
 			throw new RuntimeException(String.format("\"%s\" is not an indexed entity. ", entityVar));
 		searchList.sort(varIndexed, valueIndexed);
 	}
 
-	public void searchTrafficLightStepRows(SearchList<TrafficLightStep> searchList, Long valueRows) {
+	public void searchSmartTrafficLightRows(SearchList<SmartTrafficLight> searchList, Long valueRows) {
 			searchList.rows(valueRows != null ? valueRows : 10L);
 	}
 
-	public void searchTrafficLightStepStart(SearchList<TrafficLightStep> searchList, Long valueStart) {
+	public void searchSmartTrafficLightStart(SearchList<SmartTrafficLight> searchList, Long valueStart) {
 		searchList.start(valueStart);
 	}
 
-	public void searchTrafficLightStepVar(SearchList<TrafficLightStep> searchList, String var, String value) {
+	public void searchSmartTrafficLightVar(SearchList<SmartTrafficLight> searchList, String var, String value) {
 		searchList.getSiteRequest_(SiteRequestEnUS.class).getRequestVars().put(var, value);
 	}
 
-	public void searchTrafficLightStepUri(SearchList<TrafficLightStep> searchList) {
+	public void searchSmartTrafficLightUri(SearchList<SmartTrafficLight> searchList) {
 	}
 
-	public Future<ServiceResponse> varsTrafficLightStep(SiteRequestEnUS siteRequest) {
+	public Future<ServiceResponse> varsSmartTrafficLight(SiteRequestEnUS siteRequest) {
 		Promise<ServiceResponse> promise = Promise.promise();
 		try {
 			ServiceRequest serviceRequest = siteRequest.getServiceRequest();
@@ -1245,25 +1247,25 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 						siteRequest.getRequestVars().put(entityVar, valueIndexed);
 					}
 				} catch(Exception ex) {
-					LOG.error(String.format("searchTrafficLightStep failed. "), ex);
+					LOG.error(String.format("searchSmartTrafficLight failed. "), ex);
 					promise.fail(ex);
 				}
 			});
 			promise.complete();
 		} catch(Exception ex) {
-			LOG.error(String.format("searchTrafficLightStep failed. "), ex);
+			LOG.error(String.format("searchSmartTrafficLight failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
 	}
 
-	public Future<SearchList<TrafficLightStep>> searchTrafficLightStepList(SiteRequestEnUS siteRequest, Boolean populate, Boolean store, Boolean modify) {
-		Promise<SearchList<TrafficLightStep>> promise = Promise.promise();
+	public Future<SearchList<SmartTrafficLight>> searchSmartTrafficLightList(SiteRequestEnUS siteRequest, Boolean populate, Boolean store, Boolean modify) {
+		Promise<SearchList<SmartTrafficLight>> promise = Promise.promise();
 		try {
 			ServiceRequest serviceRequest = siteRequest.getServiceRequest();
 			String entityListStr = siteRequest.getServiceRequest().getParams().getJsonObject("query").getString("fl");
 			String[] entityList = entityListStr == null ? null : entityListStr.split(",\\s*");
-			SearchList<TrafficLightStep> searchList = new SearchList<TrafficLightStep>();
+			SearchList<SmartTrafficLight> searchList = new SearchList<SmartTrafficLight>();
 			String facetRange = null;
 			Date facetRangeStart = null;
 			Date facetRangeEnd = null;
@@ -1273,11 +1275,11 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 			searchList.setPopulate(populate);
 			searchList.setStore(store);
 			searchList.q("*:*");
-			searchList.setC(TrafficLightStep.class);
+			searchList.setC(SmartTrafficLight.class);
 			searchList.setSiteRequest_(siteRequest);
 			if(entityList != null) {
 				for(String v : entityList) {
-					searchList.fl(TrafficLightStep.varIndexedTrafficLightStep(v));
+					searchList.fl(SmartTrafficLight.varIndexedSmartTrafficLight(v));
 				}
 			}
 
@@ -1309,7 +1311,7 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							String[] varsIndexed = new String[entityVars.length];
 							for(Integer i = 0; i < entityVars.length; i++) {
 								entityVar = entityVars[i];
-								varsIndexed[i] = TrafficLightStep.varIndexedTrafficLightStep(entityVar);
+								varsIndexed[i] = SmartTrafficLight.varIndexedSmartTrafficLight(entityVar);
 							}
 							searchList.facetPivot((solrLocalParams == null ? "" : solrLocalParams) + StringUtils.join(varsIndexed, ","));
 						}
@@ -1323,8 +1325,8 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 									while(foundQ) {
 										entityVar = mQ.group(1).trim();
 										valueIndexed = mQ.group(2).trim();
-										varIndexed = TrafficLightStep.varIndexedTrafficLightStep(entityVar);
-										String entityQ = searchTrafficLightStepFq(searchList, entityVar, valueIndexed, varIndexed);
+										varIndexed = SmartTrafficLight.varIndexedSmartTrafficLight(entityVar);
+										String entityQ = searchSmartTrafficLightFq(searchList, entityVar, valueIndexed, varIndexed);
 										mQ.appendReplacement(sb, entityQ);
 										foundQ = mQ.find();
 									}
@@ -1339,8 +1341,8 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 									while(foundFq) {
 										entityVar = mFq.group(1).trim();
 										valueIndexed = mFq.group(2).trim();
-										varIndexed = TrafficLightStep.varIndexedTrafficLightStep(entityVar);
-										String entityFq = searchTrafficLightStepFq(searchList, entityVar, valueIndexed, varIndexed);
+										varIndexed = SmartTrafficLight.varIndexedSmartTrafficLight(entityVar);
+										String entityFq = searchSmartTrafficLightFq(searchList, entityVar, valueIndexed, varIndexed);
 										mFq.appendReplacement(sb, entityFq);
 										foundFq = mFq.find();
 									}
@@ -1350,14 +1352,14 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							} else if(paramName.equals("sort")) {
 								entityVar = StringUtils.trim(StringUtils.substringBefore((String)paramObject, " "));
 								valueIndexed = StringUtils.trim(StringUtils.substringAfter((String)paramObject, " "));
-								varIndexed = TrafficLightStep.varIndexedTrafficLightStep(entityVar);
-								searchTrafficLightStepSort(searchList, entityVar, valueIndexed, varIndexed);
+								varIndexed = SmartTrafficLight.varIndexedSmartTrafficLight(entityVar);
+								searchSmartTrafficLightSort(searchList, entityVar, valueIndexed, varIndexed);
 							} else if(paramName.equals("start")) {
 								valueStart = paramObject instanceof Long ? (Long)paramObject : Long.parseLong(paramObject.toString());
-								searchTrafficLightStepStart(searchList, valueStart);
+								searchSmartTrafficLightStart(searchList, valueStart);
 							} else if(paramName.equals("rows")) {
 								valueRows = paramObject instanceof Long ? (Long)paramObject : Long.parseLong(paramObject.toString());
-								searchTrafficLightStepRows(searchList, valueRows);
+								searchSmartTrafficLightRows(searchList, valueRows);
 							} else if(paramName.equals("stats")) {
 								searchList.stats((Boolean)paramObject);
 							} else if(paramName.equals("stats.field")) {
@@ -1366,7 +1368,7 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 								if(foundStats) {
 									String solrLocalParams = mStats.group(1);
 									entityVar = mStats.group(2).trim();
-									varIndexed = TrafficLightStep.varIndexedTrafficLightStep(entityVar);
+									varIndexed = SmartTrafficLight.varIndexedSmartTrafficLight(entityVar);
 									searchList.statsField((solrLocalParams == null ? "" : solrLocalParams) + varIndexed);
 									statsField = entityVar;
 									statsFieldIndexed = varIndexed;
@@ -1393,25 +1395,25 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 								if(foundFacetRange) {
 									String solrLocalParams = mFacetRange.group(1);
 									entityVar = mFacetRange.group(2).trim();
-									varIndexed = TrafficLightStep.varIndexedTrafficLightStep(entityVar);
+									varIndexed = SmartTrafficLight.varIndexedSmartTrafficLight(entityVar);
 									searchList.facetRange((solrLocalParams == null ? "" : solrLocalParams) + varIndexed);
 									facetRange = entityVar;
 								}
 							} else if(paramName.equals("facet.field")) {
 								entityVar = (String)paramObject;
-								varIndexed = TrafficLightStep.varIndexedTrafficLightStep(entityVar);
+								varIndexed = SmartTrafficLight.varIndexedSmartTrafficLight(entityVar);
 								if(varIndexed != null)
 									searchList.facetField(varIndexed);
 							} else if(paramName.equals("var")) {
 								entityVar = StringUtils.trim(StringUtils.substringBefore((String)paramObject, ":"));
 								valueIndexed = URLDecoder.decode(StringUtils.trim(StringUtils.substringAfter((String)paramObject, ":")), "UTF-8");
-								searchTrafficLightStepVar(searchList, entityVar, valueIndexed);
+								searchSmartTrafficLightVar(searchList, entityVar, valueIndexed);
 							} else if(paramName.equals("cursorMark")) {
 								valueCursorMark = (String)paramObject;
 								searchList.cursorMark((String)paramObject);
 							}
 						}
-						searchTrafficLightStepUri(searchList);
+						searchSmartTrafficLightUri(searchList);
 					}
 				} catch(Exception e) {
 					ExceptionUtils.rethrow(e);
@@ -1426,7 +1428,7 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 			String facetRangeGap2 = facetRangeGap;
 			String statsField2 = statsField;
 			String statsFieldIndexed2 = statsFieldIndexed;
-			searchTrafficLightStep2(siteRequest, populate, store, modify, searchList);
+			searchSmartTrafficLight2(siteRequest, populate, store, modify, searchList);
 			searchList.promiseDeepForClass(siteRequest).onSuccess(a -> {
 				if(facetRange2 != null && statsField2 != null && facetRange2.equals(statsField2)) {
 					StatsField stats = searchList.getResponse().getStats().getStatsFields().get(statsFieldIndexed2);
@@ -1462,26 +1464,26 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 					searchList.query().onSuccess(b -> {
 						promise.complete(searchList);
 					}).onFailure(ex -> {
-						LOG.error(String.format("searchTrafficLightStep failed. "), ex);
+						LOG.error(String.format("searchSmartTrafficLight failed. "), ex);
 						promise.fail(ex);
 					});
 				} else {
 					promise.complete(searchList);
 				}
 			}).onFailure(ex -> {
-				LOG.error(String.format("searchTrafficLightStep failed. "), ex);
+				LOG.error(String.format("searchSmartTrafficLight failed. "), ex);
 				promise.fail(ex);
 			});
 		} catch(Exception ex) {
-			LOG.error(String.format("searchTrafficLightStep failed. "), ex);
+			LOG.error(String.format("searchSmartTrafficLight failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
 	}
-	public void searchTrafficLightStep2(SiteRequestEnUS siteRequest, Boolean populate, Boolean store, Boolean modify, SearchList<TrafficLightStep> searchList) {
+	public void searchSmartTrafficLight2(SiteRequestEnUS siteRequest, Boolean populate, Boolean store, Boolean modify, SearchList<SmartTrafficLight> searchList) {
 	}
 
-	public Future<Void> persistTrafficLightStep(TrafficLightStep o, Boolean patch) {
+	public Future<Void> persistSmartTrafficLight(SmartTrafficLight o, Boolean patch) {
 		Promise<Void> promise = Promise.promise();
 		try {
 			SiteRequestEnUS siteRequest = o.getSiteRequest_();
@@ -1501,23 +1503,23 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							try {
 								o.persistForClass(columnName, columnValue);
 							} catch(Exception e) {
-								LOG.error(String.format("persistTrafficLightStep failed. "), e);
+								LOG.error(String.format("persistSmartTrafficLight failed. "), e);
 							}
 						}
 					});
 					promise.complete();
 				} catch(Exception ex) {
-					LOG.error(String.format("persistTrafficLightStep failed. "), ex);
+					LOG.error(String.format("persistSmartTrafficLight failed. "), ex);
 					promise.fail(ex);
 				}
 		} catch(Exception ex) {
-			LOG.error(String.format("persistTrafficLightStep failed. "), ex);
+			LOG.error(String.format("persistSmartTrafficLight failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
 	}
 
-	public Future<Void> indexTrafficLightStep(TrafficLightStep o) {
+	public Future<Void> indexSmartTrafficLight(SmartTrafficLight o) {
 		Promise<Void> promise = Promise.promise();
 		try {
 			SiteRequestEnUS siteRequest = o.getSiteRequest_();
@@ -1528,7 +1530,7 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 				json.put("add", add);
 				JsonObject doc = new JsonObject();
 				add.put("doc", doc);
-				o.indexTrafficLightStep(doc);
+				o.indexSmartTrafficLight(doc);
 				String solrHostName = siteRequest.getConfig().getString(ConfigKeys.SOLR_HOST_NAME);
 				Integer solrPort = siteRequest.getConfig().getInteger(ConfigKeys.SOLR_PORT);
 				String solrCollection = siteRequest.getConfig().getString(ConfigKeys.SOLR_COLLECTION);
@@ -1543,21 +1545,21 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 				webClient.post(solrPort, solrHostName, solrRequestUri).ssl(solrSsl).putHeader("Content-Type", "application/json").expect(ResponsePredicate.SC_OK).sendBuffer(json.toBuffer()).onSuccess(b -> {
 					promise.complete();
 				}).onFailure(ex -> {
-					LOG.error(String.format("indexTrafficLightStep failed. "), new RuntimeException(ex));
+					LOG.error(String.format("indexSmartTrafficLight failed. "), new RuntimeException(ex));
 					promise.fail(ex);
 				});
 			}).onFailure(ex -> {
-				LOG.error(String.format("indexTrafficLightStep failed. "), ex);
+				LOG.error(String.format("indexSmartTrafficLight failed. "), ex);
 				promise.fail(ex);
 			});
 		} catch(Exception ex) {
-			LOG.error(String.format("indexTrafficLightStep failed. "), ex);
+			LOG.error(String.format("indexSmartTrafficLight failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
 	}
 
 	public String searchVar(String varIndexed) {
-		return TrafficLightStep.searchVarTrafficLightStep(varIndexed);
+		return SmartTrafficLight.searchVarSmartTrafficLight(varIndexed);
 	}
 }

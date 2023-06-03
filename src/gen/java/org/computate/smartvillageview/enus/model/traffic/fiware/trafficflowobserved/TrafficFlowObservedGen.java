@@ -31,6 +31,8 @@ import org.slf4j.LoggerFactory;
 import java.math.RoundingMode;
 import java.util.Map;
 import org.computate.smartvillageview.enus.result.map.MapResult;
+import org.computate.vertx.search.list.SearchList;
+import org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLight;
 import io.vertx.core.json.JsonObject;
 import java.lang.String;
 import java.math.BigDecimal;
@@ -613,6 +615,96 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 	public static final String TrafficFlowObserved_IconGroup = "duotone";
 	public static final String TrafficFlowObserved_IconName = "map-location-dot";
 	public static final Integer TrafficFlowObserved_Rows = 100;
+
+	/////////////////////////////
+	// smartTrafficLightSearch //
+	/////////////////////////////
+
+
+	/**	 The entity smartTrafficLightSearch
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonIgnore
+	@JsonInclude(Include.NON_NULL)
+	protected SearchList<SmartTrafficLight> smartTrafficLightSearch;
+
+	/**	<br> The entity smartTrafficLightSearch
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved.TrafficFlowObserved&fq=entiteVar_enUS_indexed_string:smartTrafficLightSearch">Find the entity smartTrafficLightSearch in Solr</a>
+	 * <br>
+	 * @param promise is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _smartTrafficLightSearch(Promise<SearchList<SmartTrafficLight>> promise);
+
+	public SearchList<SmartTrafficLight> getSmartTrafficLightSearch() {
+		return smartTrafficLightSearch;
+	}
+
+	public void setSmartTrafficLightSearch(SearchList<SmartTrafficLight> smartTrafficLightSearch) {
+		this.smartTrafficLightSearch = smartTrafficLightSearch;
+	}
+	public static SearchList<SmartTrafficLight> staticSetSmartTrafficLightSearch(SiteRequestEnUS siteRequest_, String o) {
+		return null;
+	}
+	protected Future<SearchList<SmartTrafficLight>> smartTrafficLightSearchPromise() {
+		Promise<SearchList<SmartTrafficLight>> promise = Promise.promise();
+		Promise<SearchList<SmartTrafficLight>> promise2 = Promise.promise();
+		_smartTrafficLightSearch(promise2);
+		promise2.future().onSuccess(o -> {
+			if(o != null && smartTrafficLightSearch == null) {
+				o.promiseDeepForClass(siteRequest_).onSuccess(a -> {
+					setSmartTrafficLightSearch(o);
+					promise.complete(o);
+				}).onFailure(ex -> {
+					promise.fail(ex);
+				});
+			} else {
+				promise.complete(o);
+			}
+		}).onFailure(ex -> {
+			promise.fail(ex);
+		});
+		return promise.future();
+	}
+
+	////////////////////////
+	// smartTrafficLight_ //
+	////////////////////////
+
+
+	/**	 The entity smartTrafficLight_
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonIgnore
+	@JsonInclude(Include.NON_NULL)
+	protected SmartTrafficLight smartTrafficLight_;
+
+	/**	<br> The entity smartTrafficLight_
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved.TrafficFlowObserved&fq=entiteVar_enUS_indexed_string:smartTrafficLight_">Find the entity smartTrafficLight_ in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _smartTrafficLight_(Wrap<SmartTrafficLight> w);
+
+	public SmartTrafficLight getSmartTrafficLight_() {
+		return smartTrafficLight_;
+	}
+
+	public void setSmartTrafficLight_(SmartTrafficLight smartTrafficLight_) {
+		this.smartTrafficLight_ = smartTrafficLight_;
+	}
+	public static SmartTrafficLight staticSetSmartTrafficLight_(SiteRequestEnUS siteRequest_, String o) {
+		return null;
+	}
+	protected TrafficFlowObserved smartTrafficLight_Init() {
+		Wrap<SmartTrafficLight> smartTrafficLight_Wrap = new Wrap<SmartTrafficLight>().var("smartTrafficLight_");
+		if(smartTrafficLight_ == null) {
+			_smartTrafficLight_(smartTrafficLight_Wrap);
+			setSmartTrafficLight_(smartTrafficLight_Wrap.o);
+		}
+		return (TrafficFlowObserved)this;
+	}
 
 	/////////////
 	// address //
@@ -2294,6 +2386,714 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		return vehicleType;
 	}
 
+	///////////////////
+	// customRouteId //
+	///////////////////
+
+
+	/**	 The entity customRouteId
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String customRouteId;
+
+	/**	<br> The entity customRouteId
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved.TrafficFlowObserved&fq=entiteVar_enUS_indexed_string:customRouteId">Find the entity customRouteId in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _customRouteId(Wrap<String> w);
+
+	public String getCustomRouteId() {
+		return customRouteId;
+	}
+	public void setCustomRouteId(String o) {
+		this.customRouteId = TrafficFlowObserved.staticSetCustomRouteId(siteRequest_, o);
+	}
+	public static String staticSetCustomRouteId(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected TrafficFlowObserved customRouteIdInit() {
+		Wrap<String> customRouteIdWrap = new Wrap<String>().var("customRouteId");
+		if(customRouteId == null) {
+			_customRouteId(customRouteIdWrap);
+			setCustomRouteId(customRouteIdWrap.o);
+		}
+		return (TrafficFlowObserved)this;
+	}
+
+	public static String staticSearchCustomRouteId(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrCustomRouteId(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqCustomRouteId(SiteRequestEnUS siteRequest_, String o) {
+		return TrafficFlowObserved.staticSearchStrCustomRouteId(siteRequest_, TrafficFlowObserved.staticSearchCustomRouteId(siteRequest_, TrafficFlowObserved.staticSetCustomRouteId(siteRequest_, o)));
+	}
+
+	public String sqlCustomRouteId() {
+		return customRouteId;
+	}
+
+	/////////////////
+	// customSigma //
+	/////////////////
+
+
+	/**	 The entity customSigma
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected BigDecimal customSigma;
+
+	/**	<br> The entity customSigma
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved.TrafficFlowObserved&fq=entiteVar_enUS_indexed_string:customSigma">Find the entity customSigma in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _customSigma(Wrap<BigDecimal> w);
+
+	public BigDecimal getCustomSigma() {
+		return customSigma;
+	}
+
+	public void setCustomSigma(BigDecimal customSigma) {
+		this.customSigma = customSigma;
+	}
+	@JsonIgnore
+	public void setCustomSigma(String o) {
+		this.customSigma = TrafficFlowObserved.staticSetCustomSigma(siteRequest_, o);
+	}
+	public static BigDecimal staticSetCustomSigma(SiteRequestEnUS siteRequest_, String o) {
+		o = StringUtils.removeAll(o, "[^\\d\\.]");
+		if(NumberUtils.isParsable(o))
+			return new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		return null;
+	}
+	@JsonIgnore
+	public void setCustomSigma(Double o) {
+		setCustomSigma(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setCustomSigma(Integer o) {
+		setCustomSigma(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setCustomSigma(Number o) {
+		setCustomSigma(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	protected TrafficFlowObserved customSigmaInit() {
+		Wrap<BigDecimal> customSigmaWrap = new Wrap<BigDecimal>().var("customSigma");
+		if(customSigma == null) {
+			_customSigma(customSigmaWrap);
+			setCustomSigma(customSigmaWrap.o);
+		}
+		return (TrafficFlowObserved)this;
+	}
+
+	public static Double staticSearchCustomSigma(SiteRequestEnUS siteRequest_, BigDecimal o) {
+		return o == null ? null : o.doubleValue();
+	}
+
+	public static String staticSearchStrCustomSigma(SiteRequestEnUS siteRequest_, Double o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqCustomSigma(SiteRequestEnUS siteRequest_, String o) {
+		return TrafficFlowObserved.staticSearchStrCustomSigma(siteRequest_, TrafficFlowObserved.staticSearchCustomSigma(siteRequest_, TrafficFlowObserved.staticSetCustomSigma(siteRequest_, o)));
+	}
+
+	public BigDecimal sqlCustomSigma() {
+		return customSigma;
+	}
+
+	////////////////////////
+	// customAcceleration //
+	////////////////////////
+
+
+	/**	 The entity customAcceleration
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected BigDecimal customAcceleration;
+
+	/**	<br> The entity customAcceleration
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved.TrafficFlowObserved&fq=entiteVar_enUS_indexed_string:customAcceleration">Find the entity customAcceleration in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _customAcceleration(Wrap<BigDecimal> w);
+
+	public BigDecimal getCustomAcceleration() {
+		return customAcceleration;
+	}
+
+	public void setCustomAcceleration(BigDecimal customAcceleration) {
+		this.customAcceleration = customAcceleration;
+	}
+	@JsonIgnore
+	public void setCustomAcceleration(String o) {
+		this.customAcceleration = TrafficFlowObserved.staticSetCustomAcceleration(siteRequest_, o);
+	}
+	public static BigDecimal staticSetCustomAcceleration(SiteRequestEnUS siteRequest_, String o) {
+		o = StringUtils.removeAll(o, "[^\\d\\.]");
+		if(NumberUtils.isParsable(o))
+			return new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		return null;
+	}
+	@JsonIgnore
+	public void setCustomAcceleration(Double o) {
+		setCustomAcceleration(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setCustomAcceleration(Integer o) {
+		setCustomAcceleration(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setCustomAcceleration(Number o) {
+		setCustomAcceleration(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	protected TrafficFlowObserved customAccelerationInit() {
+		Wrap<BigDecimal> customAccelerationWrap = new Wrap<BigDecimal>().var("customAcceleration");
+		if(customAcceleration == null) {
+			_customAcceleration(customAccelerationWrap);
+			setCustomAcceleration(customAccelerationWrap.o);
+		}
+		return (TrafficFlowObserved)this;
+	}
+
+	public static Double staticSearchCustomAcceleration(SiteRequestEnUS siteRequest_, BigDecimal o) {
+		return o == null ? null : o.doubleValue();
+	}
+
+	public static String staticSearchStrCustomAcceleration(SiteRequestEnUS siteRequest_, Double o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqCustomAcceleration(SiteRequestEnUS siteRequest_, String o) {
+		return TrafficFlowObserved.staticSearchStrCustomAcceleration(siteRequest_, TrafficFlowObserved.staticSearchCustomAcceleration(siteRequest_, TrafficFlowObserved.staticSetCustomAcceleration(siteRequest_, o)));
+	}
+
+	public BigDecimal sqlCustomAcceleration() {
+		return customAcceleration;
+	}
+
+	////////////////////////
+	// customDeceleration //
+	////////////////////////
+
+
+	/**	 The entity customDeceleration
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected BigDecimal customDeceleration;
+
+	/**	<br> The entity customDeceleration
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved.TrafficFlowObserved&fq=entiteVar_enUS_indexed_string:customDeceleration">Find the entity customDeceleration in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _customDeceleration(Wrap<BigDecimal> w);
+
+	public BigDecimal getCustomDeceleration() {
+		return customDeceleration;
+	}
+
+	public void setCustomDeceleration(BigDecimal customDeceleration) {
+		this.customDeceleration = customDeceleration;
+	}
+	@JsonIgnore
+	public void setCustomDeceleration(String o) {
+		this.customDeceleration = TrafficFlowObserved.staticSetCustomDeceleration(siteRequest_, o);
+	}
+	public static BigDecimal staticSetCustomDeceleration(SiteRequestEnUS siteRequest_, String o) {
+		o = StringUtils.removeAll(o, "[^\\d\\.]");
+		if(NumberUtils.isParsable(o))
+			return new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		return null;
+	}
+	@JsonIgnore
+	public void setCustomDeceleration(Double o) {
+		setCustomDeceleration(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setCustomDeceleration(Integer o) {
+		setCustomDeceleration(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setCustomDeceleration(Number o) {
+		setCustomDeceleration(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	protected TrafficFlowObserved customDecelerationInit() {
+		Wrap<BigDecimal> customDecelerationWrap = new Wrap<BigDecimal>().var("customDeceleration");
+		if(customDeceleration == null) {
+			_customDeceleration(customDecelerationWrap);
+			setCustomDeceleration(customDecelerationWrap.o);
+		}
+		return (TrafficFlowObserved)this;
+	}
+
+	public static Double staticSearchCustomDeceleration(SiteRequestEnUS siteRequest_, BigDecimal o) {
+		return o == null ? null : o.doubleValue();
+	}
+
+	public static String staticSearchStrCustomDeceleration(SiteRequestEnUS siteRequest_, Double o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqCustomDeceleration(SiteRequestEnUS siteRequest_, String o) {
+		return TrafficFlowObserved.staticSearchStrCustomDeceleration(siteRequest_, TrafficFlowObserved.staticSearchCustomDeceleration(siteRequest_, TrafficFlowObserved.staticSetCustomDeceleration(siteRequest_, o)));
+	}
+
+	public BigDecimal sqlCustomDeceleration() {
+		return customDeceleration;
+	}
+
+	////////////////////////
+	// customMinGreenTime //
+	////////////////////////
+
+
+	/**	 The entity customMinGreenTime
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected BigDecimal customMinGreenTime;
+
+	/**	<br> The entity customMinGreenTime
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved.TrafficFlowObserved&fq=entiteVar_enUS_indexed_string:customMinGreenTime">Find the entity customMinGreenTime in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _customMinGreenTime(Wrap<BigDecimal> w);
+
+	public BigDecimal getCustomMinGreenTime() {
+		return customMinGreenTime;
+	}
+
+	public void setCustomMinGreenTime(BigDecimal customMinGreenTime) {
+		this.customMinGreenTime = customMinGreenTime;
+	}
+	@JsonIgnore
+	public void setCustomMinGreenTime(String o) {
+		this.customMinGreenTime = TrafficFlowObserved.staticSetCustomMinGreenTime(siteRequest_, o);
+	}
+	public static BigDecimal staticSetCustomMinGreenTime(SiteRequestEnUS siteRequest_, String o) {
+		o = StringUtils.removeAll(o, "[^\\d\\.]");
+		if(NumberUtils.isParsable(o))
+			return new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		return null;
+	}
+	@JsonIgnore
+	public void setCustomMinGreenTime(Double o) {
+		setCustomMinGreenTime(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setCustomMinGreenTime(Integer o) {
+		setCustomMinGreenTime(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setCustomMinGreenTime(Number o) {
+		setCustomMinGreenTime(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	protected TrafficFlowObserved customMinGreenTimeInit() {
+		Wrap<BigDecimal> customMinGreenTimeWrap = new Wrap<BigDecimal>().var("customMinGreenTime");
+		if(customMinGreenTime == null) {
+			_customMinGreenTime(customMinGreenTimeWrap);
+			setCustomMinGreenTime(customMinGreenTimeWrap.o);
+		}
+		return (TrafficFlowObserved)this;
+	}
+
+	public static Double staticSearchCustomMinGreenTime(SiteRequestEnUS siteRequest_, BigDecimal o) {
+		return o == null ? null : o.doubleValue();
+	}
+
+	public static String staticSearchStrCustomMinGreenTime(SiteRequestEnUS siteRequest_, Double o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqCustomMinGreenTime(SiteRequestEnUS siteRequest_, String o) {
+		return TrafficFlowObserved.staticSearchStrCustomMinGreenTime(siteRequest_, TrafficFlowObserved.staticSearchCustomMinGreenTime(siteRequest_, TrafficFlowObserved.staticSetCustomMinGreenTime(siteRequest_, o)));
+	}
+
+	public BigDecimal sqlCustomMinGreenTime() {
+		return customMinGreenTime;
+	}
+
+	////////////////////////
+	// customMaxGreenTime //
+	////////////////////////
+
+
+	/**	 The entity customMaxGreenTime
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected BigDecimal customMaxGreenTime;
+
+	/**	<br> The entity customMaxGreenTime
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved.TrafficFlowObserved&fq=entiteVar_enUS_indexed_string:customMaxGreenTime">Find the entity customMaxGreenTime in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _customMaxGreenTime(Wrap<BigDecimal> w);
+
+	public BigDecimal getCustomMaxGreenTime() {
+		return customMaxGreenTime;
+	}
+
+	public void setCustomMaxGreenTime(BigDecimal customMaxGreenTime) {
+		this.customMaxGreenTime = customMaxGreenTime;
+	}
+	@JsonIgnore
+	public void setCustomMaxGreenTime(String o) {
+		this.customMaxGreenTime = TrafficFlowObserved.staticSetCustomMaxGreenTime(siteRequest_, o);
+	}
+	public static BigDecimal staticSetCustomMaxGreenTime(SiteRequestEnUS siteRequest_, String o) {
+		o = StringUtils.removeAll(o, "[^\\d\\.]");
+		if(NumberUtils.isParsable(o))
+			return new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		return null;
+	}
+	@JsonIgnore
+	public void setCustomMaxGreenTime(Double o) {
+		setCustomMaxGreenTime(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setCustomMaxGreenTime(Integer o) {
+		setCustomMaxGreenTime(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setCustomMaxGreenTime(Number o) {
+		setCustomMaxGreenTime(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	protected TrafficFlowObserved customMaxGreenTimeInit() {
+		Wrap<BigDecimal> customMaxGreenTimeWrap = new Wrap<BigDecimal>().var("customMaxGreenTime");
+		if(customMaxGreenTime == null) {
+			_customMaxGreenTime(customMaxGreenTimeWrap);
+			setCustomMaxGreenTime(customMaxGreenTimeWrap.o);
+		}
+		return (TrafficFlowObserved)this;
+	}
+
+	public static Double staticSearchCustomMaxGreenTime(SiteRequestEnUS siteRequest_, BigDecimal o) {
+		return o == null ? null : o.doubleValue();
+	}
+
+	public static String staticSearchStrCustomMaxGreenTime(SiteRequestEnUS siteRequest_, Double o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqCustomMaxGreenTime(SiteRequestEnUS siteRequest_, String o) {
+		return TrafficFlowObserved.staticSearchStrCustomMaxGreenTime(siteRequest_, TrafficFlowObserved.staticSearchCustomMaxGreenTime(siteRequest_, TrafficFlowObserved.staticSetCustomMaxGreenTime(siteRequest_, o)));
+	}
+
+	public BigDecimal sqlCustomMaxGreenTime() {
+		return customMaxGreenTime;
+	}
+
+	////////////////////////////////////
+	// customAverageVehiclesPerMinute //
+	////////////////////////////////////
+
+
+	/**	 The entity customAverageVehiclesPerMinute
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected BigDecimal customAverageVehiclesPerMinute;
+
+	/**	<br> The entity customAverageVehiclesPerMinute
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved.TrafficFlowObserved&fq=entiteVar_enUS_indexed_string:customAverageVehiclesPerMinute">Find the entity customAverageVehiclesPerMinute in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _customAverageVehiclesPerMinute(Wrap<BigDecimal> w);
+
+	public BigDecimal getCustomAverageVehiclesPerMinute() {
+		return customAverageVehiclesPerMinute;
+	}
+
+	public void setCustomAverageVehiclesPerMinute(BigDecimal customAverageVehiclesPerMinute) {
+		this.customAverageVehiclesPerMinute = customAverageVehiclesPerMinute;
+	}
+	@JsonIgnore
+	public void setCustomAverageVehiclesPerMinute(String o) {
+		this.customAverageVehiclesPerMinute = TrafficFlowObserved.staticSetCustomAverageVehiclesPerMinute(siteRequest_, o);
+	}
+	public static BigDecimal staticSetCustomAverageVehiclesPerMinute(SiteRequestEnUS siteRequest_, String o) {
+		o = StringUtils.removeAll(o, "[^\\d\\.]");
+		if(NumberUtils.isParsable(o))
+			return new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		return null;
+	}
+	@JsonIgnore
+	public void setCustomAverageVehiclesPerMinute(Double o) {
+		setCustomAverageVehiclesPerMinute(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setCustomAverageVehiclesPerMinute(Integer o) {
+		setCustomAverageVehiclesPerMinute(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setCustomAverageVehiclesPerMinute(Number o) {
+		setCustomAverageVehiclesPerMinute(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	protected TrafficFlowObserved customAverageVehiclesPerMinuteInit() {
+		Wrap<BigDecimal> customAverageVehiclesPerMinuteWrap = new Wrap<BigDecimal>().var("customAverageVehiclesPerMinute");
+		if(customAverageVehiclesPerMinute == null) {
+			_customAverageVehiclesPerMinute(customAverageVehiclesPerMinuteWrap);
+			setCustomAverageVehiclesPerMinute(customAverageVehiclesPerMinuteWrap.o);
+		}
+		return (TrafficFlowObserved)this;
+	}
+
+	public static Double staticSearchCustomAverageVehiclesPerMinute(SiteRequestEnUS siteRequest_, BigDecimal o) {
+		return o == null ? null : o.doubleValue();
+	}
+
+	public static String staticSearchStrCustomAverageVehiclesPerMinute(SiteRequestEnUS siteRequest_, Double o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqCustomAverageVehiclesPerMinute(SiteRequestEnUS siteRequest_, String o) {
+		return TrafficFlowObserved.staticSearchStrCustomAverageVehiclesPerMinute(siteRequest_, TrafficFlowObserved.staticSearchCustomAverageVehiclesPerMinute(siteRequest_, TrafficFlowObserved.staticSetCustomAverageVehiclesPerMinute(siteRequest_, o)));
+	}
+
+	public BigDecimal sqlCustomAverageVehiclesPerMinute() {
+		return customAverageVehiclesPerMinute;
+	}
+
+	///////////////////////////////
+	// customDemandScalingFactor //
+	///////////////////////////////
+
+
+	/**	 The entity customDemandScalingFactor
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected BigDecimal customDemandScalingFactor;
+
+	/**	<br> The entity customDemandScalingFactor
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved.TrafficFlowObserved&fq=entiteVar_enUS_indexed_string:customDemandScalingFactor">Find the entity customDemandScalingFactor in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _customDemandScalingFactor(Wrap<BigDecimal> w);
+
+	public BigDecimal getCustomDemandScalingFactor() {
+		return customDemandScalingFactor;
+	}
+
+	public void setCustomDemandScalingFactor(BigDecimal customDemandScalingFactor) {
+		this.customDemandScalingFactor = customDemandScalingFactor;
+	}
+	@JsonIgnore
+	public void setCustomDemandScalingFactor(String o) {
+		this.customDemandScalingFactor = TrafficFlowObserved.staticSetCustomDemandScalingFactor(siteRequest_, o);
+	}
+	public static BigDecimal staticSetCustomDemandScalingFactor(SiteRequestEnUS siteRequest_, String o) {
+		o = StringUtils.removeAll(o, "[^\\d\\.]");
+		if(NumberUtils.isParsable(o))
+			return new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		return null;
+	}
+	@JsonIgnore
+	public void setCustomDemandScalingFactor(Double o) {
+		setCustomDemandScalingFactor(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setCustomDemandScalingFactor(Integer o) {
+		setCustomDemandScalingFactor(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setCustomDemandScalingFactor(Number o) {
+		setCustomDemandScalingFactor(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	protected TrafficFlowObserved customDemandScalingFactorInit() {
+		Wrap<BigDecimal> customDemandScalingFactorWrap = new Wrap<BigDecimal>().var("customDemandScalingFactor");
+		if(customDemandScalingFactor == null) {
+			_customDemandScalingFactor(customDemandScalingFactorWrap);
+			setCustomDemandScalingFactor(customDemandScalingFactorWrap.o);
+		}
+		return (TrafficFlowObserved)this;
+	}
+
+	public static Double staticSearchCustomDemandScalingFactor(SiteRequestEnUS siteRequest_, BigDecimal o) {
+		return o == null ? null : o.doubleValue();
+	}
+
+	public static String staticSearchStrCustomDemandScalingFactor(SiteRequestEnUS siteRequest_, Double o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqCustomDemandScalingFactor(SiteRequestEnUS siteRequest_, String o) {
+		return TrafficFlowObserved.staticSearchStrCustomDemandScalingFactor(siteRequest_, TrafficFlowObserved.staticSearchCustomDemandScalingFactor(siteRequest_, TrafficFlowObserved.staticSetCustomDemandScalingFactor(siteRequest_, o)));
+	}
+
+	public BigDecimal sqlCustomDemandScalingFactor() {
+		return customDemandScalingFactor;
+	}
+
+	////////////////////////////////
+	// customQueueLengthThreshold //
+	////////////////////////////////
+
+
+	/**	 The entity customQueueLengthThreshold
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected BigDecimal customQueueLengthThreshold;
+
+	/**	<br> The entity customQueueLengthThreshold
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved.TrafficFlowObserved&fq=entiteVar_enUS_indexed_string:customQueueLengthThreshold">Find the entity customQueueLengthThreshold in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _customQueueLengthThreshold(Wrap<BigDecimal> w);
+
+	public BigDecimal getCustomQueueLengthThreshold() {
+		return customQueueLengthThreshold;
+	}
+
+	public void setCustomQueueLengthThreshold(BigDecimal customQueueLengthThreshold) {
+		this.customQueueLengthThreshold = customQueueLengthThreshold;
+	}
+	@JsonIgnore
+	public void setCustomQueueLengthThreshold(String o) {
+		this.customQueueLengthThreshold = TrafficFlowObserved.staticSetCustomQueueLengthThreshold(siteRequest_, o);
+	}
+	public static BigDecimal staticSetCustomQueueLengthThreshold(SiteRequestEnUS siteRequest_, String o) {
+		o = StringUtils.removeAll(o, "[^\\d\\.]");
+		if(NumberUtils.isParsable(o))
+			return new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+		return null;
+	}
+	@JsonIgnore
+	public void setCustomQueueLengthThreshold(Double o) {
+		setCustomQueueLengthThreshold(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setCustomQueueLengthThreshold(Integer o) {
+		setCustomQueueLengthThreshold(new BigDecimal(o, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	@JsonIgnore
+	public void setCustomQueueLengthThreshold(Number o) {
+		setCustomQueueLengthThreshold(new BigDecimal(o.doubleValue(), MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP));
+	}
+	protected TrafficFlowObserved customQueueLengthThresholdInit() {
+		Wrap<BigDecimal> customQueueLengthThresholdWrap = new Wrap<BigDecimal>().var("customQueueLengthThreshold");
+		if(customQueueLengthThreshold == null) {
+			_customQueueLengthThreshold(customQueueLengthThresholdWrap);
+			setCustomQueueLengthThreshold(customQueueLengthThresholdWrap.o);
+		}
+		return (TrafficFlowObserved)this;
+	}
+
+	public static Double staticSearchCustomQueueLengthThreshold(SiteRequestEnUS siteRequest_, BigDecimal o) {
+		return o == null ? null : o.doubleValue();
+	}
+
+	public static String staticSearchStrCustomQueueLengthThreshold(SiteRequestEnUS siteRequest_, Double o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqCustomQueueLengthThreshold(SiteRequestEnUS siteRequest_, String o) {
+		return TrafficFlowObserved.staticSearchStrCustomQueueLengthThreshold(siteRequest_, TrafficFlowObserved.staticSearchCustomQueueLengthThreshold(siteRequest_, TrafficFlowObserved.staticSetCustomQueueLengthThreshold(siteRequest_, o)));
+	}
+
+	public BigDecimal sqlCustomQueueLengthThreshold() {
+		return customQueueLengthThreshold;
+	}
+
+	//////////////////////////
+	// customTrafficLightId //
+	//////////////////////////
+
+
+	/**	 The entity customTrafficLightId
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String customTrafficLightId;
+
+	/**	<br> The entity customTrafficLightId
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved.TrafficFlowObserved&fq=entiteVar_enUS_indexed_string:customTrafficLightId">Find the entity customTrafficLightId in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _customTrafficLightId(Wrap<String> w);
+
+	public String getCustomTrafficLightId() {
+		return customTrafficLightId;
+	}
+	public void setCustomTrafficLightId(String o) {
+		this.customTrafficLightId = TrafficFlowObserved.staticSetCustomTrafficLightId(siteRequest_, o);
+	}
+	public static String staticSetCustomTrafficLightId(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected TrafficFlowObserved customTrafficLightIdInit() {
+		Wrap<String> customTrafficLightIdWrap = new Wrap<String>().var("customTrafficLightId");
+		if(customTrafficLightId == null) {
+			_customTrafficLightId(customTrafficLightIdWrap);
+			setCustomTrafficLightId(customTrafficLightIdWrap.o);
+		}
+		return (TrafficFlowObserved)this;
+	}
+
+	public static String staticSearchCustomTrafficLightId(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrCustomTrafficLightId(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqCustomTrafficLightId(SiteRequestEnUS siteRequest_, String o) {
+		return TrafficFlowObserved.staticSearchStrCustomTrafficLightId(siteRequest_, TrafficFlowObserved.staticSearchCustomTrafficLightId(siteRequest_, TrafficFlowObserved.staticSetCustomTrafficLightId(siteRequest_, o)));
+	}
+
+	public String sqlCustomTrafficLightId() {
+		return customTrafficLightId;
+	}
+
 	//////////////
 	// initDeep //
 	//////////////
@@ -2323,6 +3123,23 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		Future.future(a -> a.complete()).compose(a -> {
 			Promise<Void> promise2 = Promise.promise();
 			try {
+				promise2.complete();
+			} catch(Exception ex) {
+				promise2.fail(ex);
+			}
+			return promise2.future();
+		}).compose(a -> {
+			Promise<Void> promise2 = Promise.promise();
+			smartTrafficLightSearchPromise().onSuccess(smartTrafficLightSearch -> {
+				promise2.complete();
+			}).onFailure(ex -> {
+				promise2.fail(ex);
+			});
+			return promise2.future();
+		}).compose(a -> {
+			Promise<Void> promise2 = Promise.promise();
+			try {
+				smartTrafficLight_Init();
 				addressInit();
 				alternateNameInit();
 				areaServedInit();
@@ -2351,6 +3168,16 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 				typeInit();
 				vehicleSubTypeInit();
 				vehicleTypeInit();
+				customRouteIdInit();
+				customSigmaInit();
+				customAccelerationInit();
+				customDecelerationInit();
+				customMinGreenTimeInit();
+				customMaxGreenTimeInit();
+				customAverageVehiclesPerMinuteInit();
+				customDemandScalingFactorInit();
+				customQueueLengthThresholdInit();
+				customTrafficLightIdInit();
 				promise2.complete();
 			} catch(Exception ex) {
 				promise2.fail(ex);
@@ -2404,6 +3231,10 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 	public Object obtainTrafficFlowObserved(String var) {
 		TrafficFlowObserved oTrafficFlowObserved = (TrafficFlowObserved)this;
 		switch(var) {
+			case "smartTrafficLightSearch":
+				return oTrafficFlowObserved.smartTrafficLightSearch;
+			case "smartTrafficLight_":
+				return oTrafficFlowObserved.smartTrafficLight_;
 			case "address":
 				return oTrafficFlowObserved.address;
 			case "alternateName":
@@ -2460,6 +3291,26 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 				return oTrafficFlowObserved.vehicleSubType;
 			case "vehicleType":
 				return oTrafficFlowObserved.vehicleType;
+			case "customRouteId":
+				return oTrafficFlowObserved.customRouteId;
+			case "customSigma":
+				return oTrafficFlowObserved.customSigma;
+			case "customAcceleration":
+				return oTrafficFlowObserved.customAcceleration;
+			case "customDeceleration":
+				return oTrafficFlowObserved.customDeceleration;
+			case "customMinGreenTime":
+				return oTrafficFlowObserved.customMinGreenTime;
+			case "customMaxGreenTime":
+				return oTrafficFlowObserved.customMaxGreenTime;
+			case "customAverageVehiclesPerMinute":
+				return oTrafficFlowObserved.customAverageVehiclesPerMinute;
+			case "customDemandScalingFactor":
+				return oTrafficFlowObserved.customDemandScalingFactor;
+			case "customQueueLengthThreshold":
+				return oTrafficFlowObserved.customQueueLengthThreshold;
+			case "customTrafficLightId":
+				return oTrafficFlowObserved.customTrafficLightId;
 			default:
 				return super.obtainMapResult(var);
 		}
@@ -2555,6 +3406,26 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 			return TrafficFlowObserved.staticSetVehicleSubType(siteRequest_, o);
 		case "vehicleType":
 			return TrafficFlowObserved.staticSetVehicleType(siteRequest_, o);
+		case "customRouteId":
+			return TrafficFlowObserved.staticSetCustomRouteId(siteRequest_, o);
+		case "customSigma":
+			return TrafficFlowObserved.staticSetCustomSigma(siteRequest_, o);
+		case "customAcceleration":
+			return TrafficFlowObserved.staticSetCustomAcceleration(siteRequest_, o);
+		case "customDeceleration":
+			return TrafficFlowObserved.staticSetCustomDeceleration(siteRequest_, o);
+		case "customMinGreenTime":
+			return TrafficFlowObserved.staticSetCustomMinGreenTime(siteRequest_, o);
+		case "customMaxGreenTime":
+			return TrafficFlowObserved.staticSetCustomMaxGreenTime(siteRequest_, o);
+		case "customAverageVehiclesPerMinute":
+			return TrafficFlowObserved.staticSetCustomAverageVehiclesPerMinute(siteRequest_, o);
+		case "customDemandScalingFactor":
+			return TrafficFlowObserved.staticSetCustomDemandScalingFactor(siteRequest_, o);
+		case "customQueueLengthThreshold":
+			return TrafficFlowObserved.staticSetCustomQueueLengthThreshold(siteRequest_, o);
+		case "customTrafficLightId":
+			return TrafficFlowObserved.staticSetCustomTrafficLightId(siteRequest_, o);
 			default:
 				return MapResult.staticSetMapResult(entityVar,  siteRequest_, o);
 		}
@@ -2625,6 +3496,26 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 			return TrafficFlowObserved.staticSearchVehicleSubType(siteRequest_, (String)o);
 		case "vehicleType":
 			return TrafficFlowObserved.staticSearchVehicleType(siteRequest_, (String)o);
+		case "customRouteId":
+			return TrafficFlowObserved.staticSearchCustomRouteId(siteRequest_, (String)o);
+		case "customSigma":
+			return TrafficFlowObserved.staticSearchCustomSigma(siteRequest_, (BigDecimal)o);
+		case "customAcceleration":
+			return TrafficFlowObserved.staticSearchCustomAcceleration(siteRequest_, (BigDecimal)o);
+		case "customDeceleration":
+			return TrafficFlowObserved.staticSearchCustomDeceleration(siteRequest_, (BigDecimal)o);
+		case "customMinGreenTime":
+			return TrafficFlowObserved.staticSearchCustomMinGreenTime(siteRequest_, (BigDecimal)o);
+		case "customMaxGreenTime":
+			return TrafficFlowObserved.staticSearchCustomMaxGreenTime(siteRequest_, (BigDecimal)o);
+		case "customAverageVehiclesPerMinute":
+			return TrafficFlowObserved.staticSearchCustomAverageVehiclesPerMinute(siteRequest_, (BigDecimal)o);
+		case "customDemandScalingFactor":
+			return TrafficFlowObserved.staticSearchCustomDemandScalingFactor(siteRequest_, (BigDecimal)o);
+		case "customQueueLengthThreshold":
+			return TrafficFlowObserved.staticSearchCustomQueueLengthThreshold(siteRequest_, (BigDecimal)o);
+		case "customTrafficLightId":
+			return TrafficFlowObserved.staticSearchCustomTrafficLightId(siteRequest_, (String)o);
 			default:
 				return MapResult.staticSearchMapResult(entityVar,  siteRequest_, o);
 		}
@@ -2695,6 +3586,26 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 			return TrafficFlowObserved.staticSearchStrVehicleSubType(siteRequest_, (String)o);
 		case "vehicleType":
 			return TrafficFlowObserved.staticSearchStrVehicleType(siteRequest_, (String)o);
+		case "customRouteId":
+			return TrafficFlowObserved.staticSearchStrCustomRouteId(siteRequest_, (String)o);
+		case "customSigma":
+			return TrafficFlowObserved.staticSearchStrCustomSigma(siteRequest_, (Double)o);
+		case "customAcceleration":
+			return TrafficFlowObserved.staticSearchStrCustomAcceleration(siteRequest_, (Double)o);
+		case "customDeceleration":
+			return TrafficFlowObserved.staticSearchStrCustomDeceleration(siteRequest_, (Double)o);
+		case "customMinGreenTime":
+			return TrafficFlowObserved.staticSearchStrCustomMinGreenTime(siteRequest_, (Double)o);
+		case "customMaxGreenTime":
+			return TrafficFlowObserved.staticSearchStrCustomMaxGreenTime(siteRequest_, (Double)o);
+		case "customAverageVehiclesPerMinute":
+			return TrafficFlowObserved.staticSearchStrCustomAverageVehiclesPerMinute(siteRequest_, (Double)o);
+		case "customDemandScalingFactor":
+			return TrafficFlowObserved.staticSearchStrCustomDemandScalingFactor(siteRequest_, (Double)o);
+		case "customQueueLengthThreshold":
+			return TrafficFlowObserved.staticSearchStrCustomQueueLengthThreshold(siteRequest_, (Double)o);
+		case "customTrafficLightId":
+			return TrafficFlowObserved.staticSearchStrCustomTrafficLightId(siteRequest_, (String)o);
 			default:
 				return MapResult.staticSearchStrMapResult(entityVar,  siteRequest_, o);
 		}
@@ -2765,6 +3676,26 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 			return TrafficFlowObserved.staticSearchFqVehicleSubType(siteRequest_, o);
 		case "vehicleType":
 			return TrafficFlowObserved.staticSearchFqVehicleType(siteRequest_, o);
+		case "customRouteId":
+			return TrafficFlowObserved.staticSearchFqCustomRouteId(siteRequest_, o);
+		case "customSigma":
+			return TrafficFlowObserved.staticSearchFqCustomSigma(siteRequest_, o);
+		case "customAcceleration":
+			return TrafficFlowObserved.staticSearchFqCustomAcceleration(siteRequest_, o);
+		case "customDeceleration":
+			return TrafficFlowObserved.staticSearchFqCustomDeceleration(siteRequest_, o);
+		case "customMinGreenTime":
+			return TrafficFlowObserved.staticSearchFqCustomMinGreenTime(siteRequest_, o);
+		case "customMaxGreenTime":
+			return TrafficFlowObserved.staticSearchFqCustomMaxGreenTime(siteRequest_, o);
+		case "customAverageVehiclesPerMinute":
+			return TrafficFlowObserved.staticSearchFqCustomAverageVehiclesPerMinute(siteRequest_, o);
+		case "customDemandScalingFactor":
+			return TrafficFlowObserved.staticSearchFqCustomDemandScalingFactor(siteRequest_, o);
+		case "customQueueLengthThreshold":
+			return TrafficFlowObserved.staticSearchFqCustomQueueLengthThreshold(siteRequest_, o);
+		case "customTrafficLightId":
+			return TrafficFlowObserved.staticSearchFqCustomTrafficLightId(siteRequest_, o);
 			default:
 				return MapResult.staticSearchFqMapResult(entityVar,  siteRequest_, o);
 		}
@@ -2983,6 +3914,82 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 				}
 				saves.add("vehicleType");
 				return val;
+			} else if("customrouteid".equals(varLower)) {
+				if(val instanceof String) {
+					setCustomRouteId((String)val);
+				}
+				saves.add("customRouteId");
+				return val;
+			} else if("customsigma".equals(varLower)) {
+				if(val instanceof String) {
+					setCustomSigma((String)val);
+				} else if(val instanceof Number) {
+					setCustomSigma(new BigDecimal(((Number)val).doubleValue()));
+				}
+				saves.add("customSigma");
+				return val;
+			} else if("customacceleration".equals(varLower)) {
+				if(val instanceof String) {
+					setCustomAcceleration((String)val);
+				} else if(val instanceof Number) {
+					setCustomAcceleration(new BigDecimal(((Number)val).doubleValue()));
+				}
+				saves.add("customAcceleration");
+				return val;
+			} else if("customdeceleration".equals(varLower)) {
+				if(val instanceof String) {
+					setCustomDeceleration((String)val);
+				} else if(val instanceof Number) {
+					setCustomDeceleration(new BigDecimal(((Number)val).doubleValue()));
+				}
+				saves.add("customDeceleration");
+				return val;
+			} else if("custommingreentime".equals(varLower)) {
+				if(val instanceof String) {
+					setCustomMinGreenTime((String)val);
+				} else if(val instanceof Number) {
+					setCustomMinGreenTime(new BigDecimal(((Number)val).doubleValue()));
+				}
+				saves.add("customMinGreenTime");
+				return val;
+			} else if("custommaxgreentime".equals(varLower)) {
+				if(val instanceof String) {
+					setCustomMaxGreenTime((String)val);
+				} else if(val instanceof Number) {
+					setCustomMaxGreenTime(new BigDecimal(((Number)val).doubleValue()));
+				}
+				saves.add("customMaxGreenTime");
+				return val;
+			} else if("customaveragevehiclesperminute".equals(varLower)) {
+				if(val instanceof String) {
+					setCustomAverageVehiclesPerMinute((String)val);
+				} else if(val instanceof Number) {
+					setCustomAverageVehiclesPerMinute(new BigDecimal(((Number)val).doubleValue()));
+				}
+				saves.add("customAverageVehiclesPerMinute");
+				return val;
+			} else if("customdemandscalingfactor".equals(varLower)) {
+				if(val instanceof String) {
+					setCustomDemandScalingFactor((String)val);
+				} else if(val instanceof Number) {
+					setCustomDemandScalingFactor(new BigDecimal(((Number)val).doubleValue()));
+				}
+				saves.add("customDemandScalingFactor");
+				return val;
+			} else if("customqueuelengththreshold".equals(varLower)) {
+				if(val instanceof String) {
+					setCustomQueueLengthThreshold((String)val);
+				} else if(val instanceof Number) {
+					setCustomQueueLengthThreshold(new BigDecimal(((Number)val).doubleValue()));
+				}
+				saves.add("customQueueLengthThreshold");
+				return val;
+			} else if("customtrafficlightid".equals(varLower)) {
+				if(val instanceof String) {
+					setCustomTrafficLightId((String)val);
+				}
+				saves.add("customTrafficLightId");
+				return val;
 		} else {
 			return super.persistMapResult(var, val);
 		}
@@ -2999,6 +4006,234 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		TrafficFlowObserved oTrafficFlowObserved = (TrafficFlowObserved)this;
 		saves = doc.get("saves_docvalues_strings");
 		if(saves != null) {
+
+			if(saves.contains("address")) {
+				JsonObject address = (JsonObject)doc.get("address_docvalues_string");
+				if(address != null)
+					oTrafficFlowObserved.setAddress(address);
+			}
+
+			if(saves.contains("alternateName")) {
+				String alternateName = (String)doc.get("alternateName_docvalues_string");
+				if(alternateName != null)
+					oTrafficFlowObserved.setAlternateName(alternateName);
+			}
+
+			if(saves.contains("areaServed")) {
+				String areaServed = (String)doc.get("areaServed_docvalues_string");
+				if(areaServed != null)
+					oTrafficFlowObserved.setAreaServed(areaServed);
+			}
+
+			if(saves.contains("averageGapDistance")) {
+				Double averageGapDistance = (Double)doc.get("averageGapDistance_docvalues_double");
+				if(averageGapDistance != null)
+					oTrafficFlowObserved.setAverageGapDistance(averageGapDistance);
+			}
+
+			if(saves.contains("averageHeadwayTime")) {
+				Double averageHeadwayTime = (Double)doc.get("averageHeadwayTime_docvalues_double");
+				if(averageHeadwayTime != null)
+					oTrafficFlowObserved.setAverageHeadwayTime(averageHeadwayTime);
+			}
+
+			if(saves.contains("averageVehicleLength")) {
+				Double averageVehicleLength = (Double)doc.get("averageVehicleLength_docvalues_double");
+				if(averageVehicleLength != null)
+					oTrafficFlowObserved.setAverageVehicleLength(averageVehicleLength);
+			}
+
+			if(saves.contains("averageVehicleSpeed")) {
+				Double averageVehicleSpeed = (Double)doc.get("averageVehicleSpeed_docvalues_double");
+				if(averageVehicleSpeed != null)
+					oTrafficFlowObserved.setAverageVehicleSpeed(averageVehicleSpeed);
+			}
+
+			if(saves.contains("congested")) {
+				Boolean congested = (Boolean)doc.get("congested_docvalues_boolean");
+				if(congested != null)
+					oTrafficFlowObserved.setCongested(congested);
+			}
+
+			if(saves.contains("dataProvider")) {
+				String dataProvider = (String)doc.get("dataProvider_docvalues_string");
+				if(dataProvider != null)
+					oTrafficFlowObserved.setDataProvider(dataProvider);
+			}
+
+			if(saves.contains("dateCreated")) {
+				String dateCreated = (String)doc.get("dateCreated_docvalues_string");
+				if(dateCreated != null)
+					oTrafficFlowObserved.setDateCreated(dateCreated);
+			}
+
+			if(saves.contains("dateModified")) {
+				String dateModified = (String)doc.get("dateModified_docvalues_string");
+				if(dateModified != null)
+					oTrafficFlowObserved.setDateModified(dateModified);
+			}
+
+			if(saves.contains("dateObserved")) {
+				String dateObserved = (String)doc.get("dateObserved_docvalues_string");
+				if(dateObserved != null)
+					oTrafficFlowObserved.setDateObserved(dateObserved);
+			}
+
+			if(saves.contains("dateObservedFrom")) {
+				String dateObservedFrom = (String)doc.get("dateObservedFrom_docvalues_string");
+				if(dateObservedFrom != null)
+					oTrafficFlowObserved.setDateObservedFrom(dateObservedFrom);
+			}
+
+			if(saves.contains("dateObservedTo")) {
+				String dateObservedTo = (String)doc.get("dateObservedTo_docvalues_string");
+				if(dateObservedTo != null)
+					oTrafficFlowObserved.setDateObservedTo(dateObservedTo);
+			}
+
+			if(saves.contains("description")) {
+				String description = (String)doc.get("description_docvalues_string");
+				if(description != null)
+					oTrafficFlowObserved.setDescription(description);
+			}
+
+			if(saves.contains("intensity")) {
+				Double intensity = (Double)doc.get("intensity_docvalues_double");
+				if(intensity != null)
+					oTrafficFlowObserved.setIntensity(intensity);
+			}
+
+			if(saves.contains("laneDirection")) {
+				String laneDirection = (String)doc.get("laneDirection_docvalues_string");
+				if(laneDirection != null)
+					oTrafficFlowObserved.setLaneDirection(laneDirection);
+			}
+
+			if(saves.contains("laneId")) {
+				Integer laneId = (Integer)doc.get("laneId_docvalues_int");
+				if(laneId != null)
+					oTrafficFlowObserved.setLaneId(laneId);
+			}
+
+			if(saves.contains("name")) {
+				String name = (String)doc.get("name_docvalues_string");
+				if(name != null)
+					oTrafficFlowObserved.setName(name);
+			}
+
+			if(saves.contains("occupancy")) {
+				Double occupancy = (Double)doc.get("occupancy_docvalues_double");
+				if(occupancy != null)
+					oTrafficFlowObserved.setOccupancy(occupancy);
+			}
+
+			if(saves.contains("owner")) {
+				JsonObject owner = (JsonObject)doc.get("owner_docvalues_string");
+				if(owner != null)
+					oTrafficFlowObserved.setOwner(owner);
+			}
+
+			if(saves.contains("refRoadSegment")) {
+				String refRoadSegment = (String)doc.get("refRoadSegment_docvalues_string");
+				if(refRoadSegment != null)
+					oTrafficFlowObserved.setRefRoadSegment(refRoadSegment);
+			}
+
+			if(saves.contains("reversedLane")) {
+				Boolean reversedLane = (Boolean)doc.get("reversedLane_docvalues_boolean");
+				if(reversedLane != null)
+					oTrafficFlowObserved.setReversedLane(reversedLane);
+			}
+
+			if(saves.contains("seeAlso")) {
+				JsonObject seeAlso = (JsonObject)doc.get("seeAlso_docvalues_string");
+				if(seeAlso != null)
+					oTrafficFlowObserved.setSeeAlso(seeAlso);
+			}
+
+			if(saves.contains("source")) {
+				String source = (String)doc.get("source_docvalues_string");
+				if(source != null)
+					oTrafficFlowObserved.setSource(source);
+			}
+
+			if(saves.contains("type")) {
+				String type = (String)doc.get("type_docvalues_string");
+				if(type != null)
+					oTrafficFlowObserved.setType(type);
+			}
+
+			if(saves.contains("vehicleSubType")) {
+				String vehicleSubType = (String)doc.get("vehicleSubType_docvalues_string");
+				if(vehicleSubType != null)
+					oTrafficFlowObserved.setVehicleSubType(vehicleSubType);
+			}
+
+			if(saves.contains("vehicleType")) {
+				String vehicleType = (String)doc.get("vehicleType_docvalues_string");
+				if(vehicleType != null)
+					oTrafficFlowObserved.setVehicleType(vehicleType);
+			}
+
+			if(saves.contains("customRouteId")) {
+				String customRouteId = (String)doc.get("customRouteId_docvalues_string");
+				if(customRouteId != null)
+					oTrafficFlowObserved.setCustomRouteId(customRouteId);
+			}
+
+			if(saves.contains("customSigma")) {
+				Double customSigma = (Double)doc.get("customSigma_docvalues_double");
+				if(customSigma != null)
+					oTrafficFlowObserved.setCustomSigma(customSigma);
+			}
+
+			if(saves.contains("customAcceleration")) {
+				Double customAcceleration = (Double)doc.get("customAcceleration_docvalues_double");
+				if(customAcceleration != null)
+					oTrafficFlowObserved.setCustomAcceleration(customAcceleration);
+			}
+
+			if(saves.contains("customDeceleration")) {
+				Double customDeceleration = (Double)doc.get("customDeceleration_docvalues_double");
+				if(customDeceleration != null)
+					oTrafficFlowObserved.setCustomDeceleration(customDeceleration);
+			}
+
+			if(saves.contains("customMinGreenTime")) {
+				Double customMinGreenTime = (Double)doc.get("customMinGreenTime_docvalues_double");
+				if(customMinGreenTime != null)
+					oTrafficFlowObserved.setCustomMinGreenTime(customMinGreenTime);
+			}
+
+			if(saves.contains("customMaxGreenTime")) {
+				Double customMaxGreenTime = (Double)doc.get("customMaxGreenTime_docvalues_double");
+				if(customMaxGreenTime != null)
+					oTrafficFlowObserved.setCustomMaxGreenTime(customMaxGreenTime);
+			}
+
+			if(saves.contains("customAverageVehiclesPerMinute")) {
+				Double customAverageVehiclesPerMinute = (Double)doc.get("customAverageVehiclesPerMinute_docvalues_double");
+				if(customAverageVehiclesPerMinute != null)
+					oTrafficFlowObserved.setCustomAverageVehiclesPerMinute(customAverageVehiclesPerMinute);
+			}
+
+			if(saves.contains("customDemandScalingFactor")) {
+				Double customDemandScalingFactor = (Double)doc.get("customDemandScalingFactor_docvalues_double");
+				if(customDemandScalingFactor != null)
+					oTrafficFlowObserved.setCustomDemandScalingFactor(customDemandScalingFactor);
+			}
+
+			if(saves.contains("customQueueLengthThreshold")) {
+				Double customQueueLengthThreshold = (Double)doc.get("customQueueLengthThreshold_docvalues_double");
+				if(customQueueLengthThreshold != null)
+					oTrafficFlowObserved.setCustomQueueLengthThreshold(customQueueLengthThreshold);
+			}
+
+			if(saves.contains("customTrafficLightId")) {
+				String customTrafficLightId = (String)doc.get("customTrafficLightId_docvalues_string");
+				if(customTrafficLightId != null)
+					oTrafficFlowObserved.setCustomTrafficLightId(customTrafficLightId);
+			}
 		}
 
 		super.populateMapResult(doc);
@@ -3089,6 +4324,36 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		if(vehicleType != null) {
 			doc.put("vehicleType_docvalues_string", vehicleType);
 		}
+		if(customRouteId != null) {
+			doc.put("customRouteId_docvalues_string", customRouteId);
+		}
+		if(customSigma != null) {
+			doc.put("customSigma_docvalues_double", customSigma.doubleValue());
+		}
+		if(customAcceleration != null) {
+			doc.put("customAcceleration_docvalues_double", customAcceleration.doubleValue());
+		}
+		if(customDeceleration != null) {
+			doc.put("customDeceleration_docvalues_double", customDeceleration.doubleValue());
+		}
+		if(customMinGreenTime != null) {
+			doc.put("customMinGreenTime_docvalues_double", customMinGreenTime.doubleValue());
+		}
+		if(customMaxGreenTime != null) {
+			doc.put("customMaxGreenTime_docvalues_double", customMaxGreenTime.doubleValue());
+		}
+		if(customAverageVehiclesPerMinute != null) {
+			doc.put("customAverageVehiclesPerMinute_docvalues_double", customAverageVehiclesPerMinute.doubleValue());
+		}
+		if(customDemandScalingFactor != null) {
+			doc.put("customDemandScalingFactor_docvalues_double", customDemandScalingFactor.doubleValue());
+		}
+		if(customQueueLengthThreshold != null) {
+			doc.put("customQueueLengthThreshold_docvalues_double", customQueueLengthThreshold.doubleValue());
+		}
+		if(customTrafficLightId != null) {
+			doc.put("customTrafficLightId_docvalues_string", customTrafficLightId);
+		}
 		super.indexMapResult(doc);
 
 	}
@@ -3151,6 +4416,26 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 				return "vehicleSubType_docvalues_string";
 			case "vehicleType":
 				return "vehicleType_docvalues_string";
+			case "customRouteId":
+				return "customRouteId_docvalues_string";
+			case "customSigma":
+				return "customSigma_docvalues_double";
+			case "customAcceleration":
+				return "customAcceleration_docvalues_double";
+			case "customDeceleration":
+				return "customDeceleration_docvalues_double";
+			case "customMinGreenTime":
+				return "customMinGreenTime_docvalues_double";
+			case "customMaxGreenTime":
+				return "customMaxGreenTime_docvalues_double";
+			case "customAverageVehiclesPerMinute":
+				return "customAverageVehiclesPerMinute_docvalues_double";
+			case "customDemandScalingFactor":
+				return "customDemandScalingFactor_docvalues_double";
+			case "customQueueLengthThreshold":
+				return "customQueueLengthThreshold_docvalues_double";
+			case "customTrafficLightId":
+				return "customTrafficLightId_docvalues_string";
 			default:
 				return MapResult.varStoredMapResult(entityVar);
 		}
@@ -3214,6 +4499,26 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 				return "vehicleSubType_docvalues_string";
 			case "vehicleType":
 				return "vehicleType_docvalues_string";
+			case "customRouteId":
+				return "customRouteId_docvalues_string";
+			case "customSigma":
+				return "customSigma_docvalues_double";
+			case "customAcceleration":
+				return "customAcceleration_docvalues_double";
+			case "customDeceleration":
+				return "customDeceleration_docvalues_double";
+			case "customMinGreenTime":
+				return "customMinGreenTime_docvalues_double";
+			case "customMaxGreenTime":
+				return "customMaxGreenTime_docvalues_double";
+			case "customAverageVehiclesPerMinute":
+				return "customAverageVehiclesPerMinute_docvalues_double";
+			case "customDemandScalingFactor":
+				return "customDemandScalingFactor_docvalues_double";
+			case "customQueueLengthThreshold":
+				return "customQueueLengthThreshold_docvalues_double";
+			case "customTrafficLightId":
+				return "customTrafficLightId_docvalues_string";
 			default:
 				return MapResult.varIndexedMapResult(entityVar);
 		}
@@ -3277,6 +4582,26 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 				return "vehicleSubType";
 			case "vehicleType_docvalues_string":
 				return "vehicleType";
+			case "customRouteId_docvalues_string":
+				return "customRouteId";
+			case "customSigma_docvalues_double":
+				return "customSigma";
+			case "customAcceleration_docvalues_double":
+				return "customAcceleration";
+			case "customDeceleration_docvalues_double":
+				return "customDeceleration";
+			case "customMinGreenTime_docvalues_double":
+				return "customMinGreenTime";
+			case "customMaxGreenTime_docvalues_double":
+				return "customMaxGreenTime";
+			case "customAverageVehiclesPerMinute_docvalues_double":
+				return "customAverageVehiclesPerMinute";
+			case "customDemandScalingFactor_docvalues_double":
+				return "customDemandScalingFactor";
+			case "customQueueLengthThreshold_docvalues_double":
+				return "customQueueLengthThreshold";
+			case "customTrafficLightId_docvalues_string":
+				return "customTrafficLightId";
 			default:
 				return MapResult.searchVarMapResult(searchVar);
 		}
@@ -3334,6 +4659,16 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		oTrafficFlowObserved.setType(Optional.ofNullable(doc.get("type_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oTrafficFlowObserved.setVehicleSubType(Optional.ofNullable(doc.get("vehicleSubType_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oTrafficFlowObserved.setVehicleType(Optional.ofNullable(doc.get("vehicleType_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oTrafficFlowObserved.setCustomRouteId(Optional.ofNullable(doc.get("customRouteId_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oTrafficFlowObserved.setCustomSigma(Optional.ofNullable(doc.get("customSigma_docvalues_double")).map(v -> v.toString()).orElse(null));
+		oTrafficFlowObserved.setCustomAcceleration(Optional.ofNullable(doc.get("customAcceleration_docvalues_double")).map(v -> v.toString()).orElse(null));
+		oTrafficFlowObserved.setCustomDeceleration(Optional.ofNullable(doc.get("customDeceleration_docvalues_double")).map(v -> v.toString()).orElse(null));
+		oTrafficFlowObserved.setCustomMinGreenTime(Optional.ofNullable(doc.get("customMinGreenTime_docvalues_double")).map(v -> v.toString()).orElse(null));
+		oTrafficFlowObserved.setCustomMaxGreenTime(Optional.ofNullable(doc.get("customMaxGreenTime_docvalues_double")).map(v -> v.toString()).orElse(null));
+		oTrafficFlowObserved.setCustomAverageVehiclesPerMinute(Optional.ofNullable(doc.get("customAverageVehiclesPerMinute_docvalues_double")).map(v -> v.toString()).orElse(null));
+		oTrafficFlowObserved.setCustomDemandScalingFactor(Optional.ofNullable(doc.get("customDemandScalingFactor_docvalues_double")).map(v -> v.toString()).orElse(null));
+		oTrafficFlowObserved.setCustomQueueLengthThreshold(Optional.ofNullable(doc.get("customQueueLengthThreshold_docvalues_double")).map(v -> v.toString()).orElse(null));
+		oTrafficFlowObserved.setCustomTrafficLightId(Optional.ofNullable(doc.get("customTrafficLightId_docvalues_string")).map(v -> v.toString()).orElse(null));
 
 		super.storeMapResult(doc);
 	}
@@ -3403,6 +4738,26 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 				apiRequest.addVars("vehicleSubType");
 			if(!Objects.equals(vehicleType, original.getVehicleType()))
 				apiRequest.addVars("vehicleType");
+			if(!Objects.equals(customRouteId, original.getCustomRouteId()))
+				apiRequest.addVars("customRouteId");
+			if(!Objects.equals(customSigma, original.getCustomSigma()))
+				apiRequest.addVars("customSigma");
+			if(!Objects.equals(customAcceleration, original.getCustomAcceleration()))
+				apiRequest.addVars("customAcceleration");
+			if(!Objects.equals(customDeceleration, original.getCustomDeceleration()))
+				apiRequest.addVars("customDeceleration");
+			if(!Objects.equals(customMinGreenTime, original.getCustomMinGreenTime()))
+				apiRequest.addVars("customMinGreenTime");
+			if(!Objects.equals(customMaxGreenTime, original.getCustomMaxGreenTime()))
+				apiRequest.addVars("customMaxGreenTime");
+			if(!Objects.equals(customAverageVehiclesPerMinute, original.getCustomAverageVehiclesPerMinute()))
+				apiRequest.addVars("customAverageVehiclesPerMinute");
+			if(!Objects.equals(customDemandScalingFactor, original.getCustomDemandScalingFactor()))
+				apiRequest.addVars("customDemandScalingFactor");
+			if(!Objects.equals(customQueueLengthThreshold, original.getCustomQueueLengthThreshold()))
+				apiRequest.addVars("customQueueLengthThreshold");
+			if(!Objects.equals(customTrafficLightId, original.getCustomTrafficLightId()))
+				apiRequest.addVars("customTrafficLightId");
 			super.apiRequestMapResult();
 		}
 	}
@@ -3442,10 +4797,22 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		sb.append(Optional.ofNullable(type).map(v -> "type: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(vehicleSubType).map(v -> "vehicleSubType: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(vehicleType).map(v -> "vehicleType: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(customRouteId).map(v -> "customRouteId: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(customSigma).map(v -> "customSigma: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(customAcceleration).map(v -> "customAcceleration: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(customDeceleration).map(v -> "customDeceleration: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(customMinGreenTime).map(v -> "customMinGreenTime: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(customMaxGreenTime).map(v -> "customMaxGreenTime: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(customAverageVehiclesPerMinute).map(v -> "customAverageVehiclesPerMinute: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(customDemandScalingFactor).map(v -> "customDemandScalingFactor: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(customQueueLengthThreshold).map(v -> "customQueueLengthThreshold: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(customTrafficLightId).map(v -> "customTrafficLightId: \"" + v + "\"\n" ).orElse(""));
 		return sb.toString();
 	}
 
 	public static final String CLASS_SIMPLE_NAME = "TrafficFlowObserved";
+	public static final String VAR_smartTrafficLightSearch = "smartTrafficLightSearch";
+	public static final String VAR_smartTrafficLight_ = "smartTrafficLight_";
 	public static final String VAR_address = "address";
 	public static final String VAR_alternateName = "alternateName";
 	public static final String VAR_areaServed = "areaServed";
@@ -3474,6 +4841,16 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 	public static final String VAR_type = "type";
 	public static final String VAR_vehicleSubType = "vehicleSubType";
 	public static final String VAR_vehicleType = "vehicleType";
+	public static final String VAR_customRouteId = "customRouteId";
+	public static final String VAR_customSigma = "customSigma";
+	public static final String VAR_customAcceleration = "customAcceleration";
+	public static final String VAR_customDeceleration = "customDeceleration";
+	public static final String VAR_customMinGreenTime = "customMinGreenTime";
+	public static final String VAR_customMaxGreenTime = "customMaxGreenTime";
+	public static final String VAR_customAverageVehiclesPerMinute = "customAverageVehiclesPerMinute";
+	public static final String VAR_customDemandScalingFactor = "customDemandScalingFactor";
+	public static final String VAR_customQueueLengthThreshold = "customQueueLengthThreshold";
+	public static final String VAR_customTrafficLightId = "customTrafficLightId";
 
 	public static List<String> varsQForClass() {
 		return TrafficFlowObserved.varsQTrafficFlowObserved(new ArrayList<String>());
@@ -3515,6 +4892,16 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		vars.add(VAR_type);
 		vars.add(VAR_vehicleSubType);
 		vars.add(VAR_vehicleType);
+		vars.add(VAR_customRouteId);
+		vars.add(VAR_customSigma);
+		vars.add(VAR_customAcceleration);
+		vars.add(VAR_customDeceleration);
+		vars.add(VAR_customMinGreenTime);
+		vars.add(VAR_customMaxGreenTime);
+		vars.add(VAR_customAverageVehiclesPerMinute);
+		vars.add(VAR_customDemandScalingFactor);
+		vars.add(VAR_customQueueLengthThreshold);
+		vars.add(VAR_customTrafficLightId);
 		MapResult.varsFqMapResult(vars);
 		return vars;
 	}
@@ -3533,10 +4920,20 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		vars.add(VAR_occupancy);
 		vars.add(VAR_owner);
 		vars.add(VAR_seeAlso);
+		vars.add(VAR_customSigma);
+		vars.add(VAR_customAcceleration);
+		vars.add(VAR_customDeceleration);
+		vars.add(VAR_customMinGreenTime);
+		vars.add(VAR_customMaxGreenTime);
+		vars.add(VAR_customAverageVehiclesPerMinute);
+		vars.add(VAR_customDemandScalingFactor);
+		vars.add(VAR_customQueueLengthThreshold);
 		MapResult.varsRangeMapResult(vars);
 		return vars;
 	}
 
+	public static final String DISPLAY_NAME_smartTrafficLightSearch = "";
+	public static final String DISPLAY_NAME_smartTrafficLight_ = "";
 	public static final String DISPLAY_NAME_address = "address";
 	public static final String DISPLAY_NAME_alternateName = "alternate name";
 	public static final String DISPLAY_NAME_areaServed = "area served";
@@ -3565,12 +4962,26 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 	public static final String DISPLAY_NAME_type = "type";
 	public static final String DISPLAY_NAME_vehicleSubType = "vehicle sub type";
 	public static final String DISPLAY_NAME_vehicleType = "vehicle type";
+	public static final String DISPLAY_NAME_customRouteId = "route ID";
+	public static final String DISPLAY_NAME_customSigma = "sigma";
+	public static final String DISPLAY_NAME_customAcceleration = "acceleration";
+	public static final String DISPLAY_NAME_customDeceleration = "deceleration";
+	public static final String DISPLAY_NAME_customMinGreenTime = "min green time";
+	public static final String DISPLAY_NAME_customMaxGreenTime = "max green time";
+	public static final String DISPLAY_NAME_customAverageVehiclesPerMinute = "average vehicles/minute";
+	public static final String DISPLAY_NAME_customDemandScalingFactor = "demand scaling factor";
+	public static final String DISPLAY_NAME_customQueueLengthThreshold = "queue length threshold";
+	public static final String DISPLAY_NAME_customTrafficLightId = "traffic light ID";
 
 	public static String displayNameForClass(String var) {
 		return TrafficFlowObserved.displayNameTrafficFlowObserved(var);
 	}
 	public static String displayNameTrafficFlowObserved(String var) {
 		switch(var) {
+		case VAR_smartTrafficLightSearch:
+			return DISPLAY_NAME_smartTrafficLightSearch;
+		case VAR_smartTrafficLight_:
+			return DISPLAY_NAME_smartTrafficLight_;
 		case VAR_address:
 			return DISPLAY_NAME_address;
 		case VAR_alternateName:
@@ -3627,6 +5038,26 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 			return DISPLAY_NAME_vehicleSubType;
 		case VAR_vehicleType:
 			return DISPLAY_NAME_vehicleType;
+		case VAR_customRouteId:
+			return DISPLAY_NAME_customRouteId;
+		case VAR_customSigma:
+			return DISPLAY_NAME_customSigma;
+		case VAR_customAcceleration:
+			return DISPLAY_NAME_customAcceleration;
+		case VAR_customDeceleration:
+			return DISPLAY_NAME_customDeceleration;
+		case VAR_customMinGreenTime:
+			return DISPLAY_NAME_customMinGreenTime;
+		case VAR_customMaxGreenTime:
+			return DISPLAY_NAME_customMaxGreenTime;
+		case VAR_customAverageVehiclesPerMinute:
+			return DISPLAY_NAME_customAverageVehiclesPerMinute;
+		case VAR_customDemandScalingFactor:
+			return DISPLAY_NAME_customDemandScalingFactor;
+		case VAR_customQueueLengthThreshold:
+			return DISPLAY_NAME_customQueueLengthThreshold;
+		case VAR_customTrafficLightId:
+			return DISPLAY_NAME_customTrafficLightId;
 		default:
 			return MapResult.displayNameMapResult(var);
 		}
@@ -3690,6 +5121,26 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 			return "It allows to specify a sub type of `vehicleType`, eg if the `vehicleType` is set to `Lorry` the `vehicleSubType` may be `OGV1` or `OGV2` to convey more information about the exact type of vehicle.";
 		case VAR_vehicleType:
 			return "Type of vehicle from the point of view of its structural characteristics. Enum:'agriculturalVehicle, bicycle, bus, minibus, car, caravan, tram, tanker, carWithCaravan, carWithTrailer, lorry, moped, motorcycle, motorcycleWithSideCar, motorscooter, trailer, van, constructionOrMaintenanceVehicle, trolley, binTrolley, sweepingMachine, cleaningTrolley'";
+		case VAR_customRouteId:
+			return "The unique ID of the route in SUMO. ";
+		case VAR_customSigma:
+			return "The driver imperfection as a floating point number [0,1] (0 denotes perfect driving). ";
+		case VAR_customAcceleration:
+			return "The acceleration ability of vehicles of this type (in m/s^2). ";
+		case VAR_customDeceleration:
+			return "The deceleration ability of vehicles of this type (in m/s^2). ";
+		case VAR_customMinGreenTime:
+			return "Min green time for the traffic light in seconds [1, 50]. ";
+		case VAR_customMaxGreenTime:
+			return "Max green time for the traffic light in seconds [1, 50]. ";
+		case VAR_customAverageVehiclesPerMinute:
+			return "Average vehicle/min [1, 30]. ";
+		case VAR_customDemandScalingFactor:
+			return "Demand scaling factor (multiplies all vehicle demands) [1, 2]. ";
+		case VAR_customQueueLengthThreshold:
+			return "Demand scaling factor (multiplies all vehicle demands) [1, 2]. ";
+		case VAR_customTrafficLightId:
+			return "The Smart Traffic Light ID";
 			default:
 				return MapResult.descriptionMapResult(var);
 		}
@@ -3697,6 +5148,10 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 
 	public static String classSimpleNameTrafficFlowObserved(String var) {
 		switch(var) {
+		case VAR_smartTrafficLightSearch:
+			return "SearchList";
+		case VAR_smartTrafficLight_:
+			return "SmartTrafficLight";
 		case VAR_address:
 			return "JsonObject";
 		case VAR_alternateName:
@@ -3753,6 +5208,26 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 			return "String";
 		case VAR_vehicleType:
 			return "String";
+		case VAR_customRouteId:
+			return "String";
+		case VAR_customSigma:
+			return "BigDecimal";
+		case VAR_customAcceleration:
+			return "BigDecimal";
+		case VAR_customDeceleration:
+			return "BigDecimal";
+		case VAR_customMinGreenTime:
+			return "BigDecimal";
+		case VAR_customMaxGreenTime:
+			return "BigDecimal";
+		case VAR_customAverageVehiclesPerMinute:
+			return "BigDecimal";
+		case VAR_customDemandScalingFactor:
+			return "BigDecimal";
+		case VAR_customQueueLengthThreshold:
+			return "BigDecimal";
+		case VAR_customTrafficLightId:
+			return "String";
 			default:
 				return MapResult.classSimpleNameMapResult(var);
 		}
@@ -3768,61 +5243,81 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 	public static Integer htmRowTrafficFlowObserved(String var) {
 		switch(var) {
 		case VAR_address:
-			return 3;
+			return 5;
 		case VAR_alternateName:
-			return 3;
+			return 5;
 		case VAR_areaServed:
-			return 3;
+			return 5;
 		case VAR_averageGapDistance:
-			return 4;
+			return 6;
 		case VAR_averageHeadwayTime:
-			return 4;
+			return 6;
 		case VAR_averageVehicleLength:
-			return 4;
+			return 6;
 		case VAR_averageVehicleSpeed:
-			return 5;
+			return 7;
 		case VAR_congested:
-			return 5;
+			return 7;
 		case VAR_dataProvider:
-			return 5;
+			return 7;
 		case VAR_dateCreated:
-			return 6;
+			return 8;
 		case VAR_dateModified:
-			return 6;
+			return 8;
 		case VAR_dateObserved:
-			return 6;
+			return 8;
 		case VAR_dateObservedFrom:
-			return 7;
+			return 9;
 		case VAR_dateObservedTo:
-			return 7;
+			return 9;
 		case VAR_description:
-			return 7;
+			return 9;
 		case VAR_intensity:
-			return 8;
+			return 10;
 		case VAR_laneDirection:
-			return 8;
+			return 10;
 		case VAR_laneId:
-			return 9;
+			return 11;
 		case VAR_name:
-			return 9;
+			return 11;
 		case VAR_occupancy:
-			return 10;
+			return 12;
 		case VAR_owner:
-			return 10;
+			return 12;
 		case VAR_refRoadSegment:
-			return 10;
+			return 12;
 		case VAR_reversedLane:
-			return 11;
+			return 13;
 		case VAR_seeAlso:
-			return 11;
+			return 13;
 		case VAR_source:
-			return 11;
+			return 13;
 		case VAR_type:
-			return 12;
+			return 14;
 		case VAR_vehicleSubType:
-			return 12;
+			return 14;
 		case VAR_vehicleType:
-			return 12;
+			return 14;
+		case VAR_customRouteId:
+			return 15;
+		case VAR_customSigma:
+			return 15;
+		case VAR_customAcceleration:
+			return 15;
+		case VAR_customDeceleration:
+			return 15;
+		case VAR_customMinGreenTime:
+			return 16;
+		case VAR_customMaxGreenTime:
+			return 16;
+		case VAR_customAverageVehiclesPerMinute:
+			return 16;
+		case VAR_customDemandScalingFactor:
+			return 17;
+		case VAR_customQueueLengthThreshold:
+			return 17;
+		case VAR_customTrafficLightId:
+			return 17;
 			default:
 				return MapResult.htmRowMapResult(var);
 		}
@@ -3885,6 +5380,26 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		case VAR_vehicleSubType:
 			return 2;
 		case VAR_vehicleType:
+			return 3;
+		case VAR_customRouteId:
+			return 1;
+		case VAR_customSigma:
+			return 2;
+		case VAR_customAcceleration:
+			return 3;
+		case VAR_customDeceleration:
+			return 4;
+		case VAR_customMinGreenTime:
+			return 1;
+		case VAR_customMaxGreenTime:
+			return 2;
+		case VAR_customAverageVehiclesPerMinute:
+			return 3;
+		case VAR_customDemandScalingFactor:
+			return 1;
+		case VAR_customQueueLengthThreshold:
+			return 2;
+		case VAR_customTrafficLightId:
 			return 3;
 			default:
 				return MapResult.htmCellMapResult(var);

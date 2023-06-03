@@ -1,14 +1,8 @@
 apiVersion: smartvillage.computate.org/v1
 kind: TrafficFlowObserved
 metadata:
-  labels:
-    app.kubernetes.io/name: trafficflowobserved
-    app.kubernetes.io/instance: trafficflowobserved-sample
-    app.kubernetes.io/part-of: smartvillage-operator
-    app.kubernetes.io/managed-by: kustomize
-    app.kubernetes.io/created-by: smartvillage-operator
   name: sweden-veberod-1-sjobovagen-se
-  namespace: smartvillage
+  namespace: smart-village-faeeb6c
 spec:
   description: |
     An observation of traffic flow conditions at a certain place and time.
@@ -40,18 +34,16 @@ spec:
     id: |-
       Sjobovagen-SE
     mqtt_host: |-
-      fiware-broker-mqtt-0-svc.fiware.svc.cluster.local
+      fiware-broker-mqtt-0-svc
     mqtt_port: 1883
     mqtt_subscription_topic: |-
       iot/subscribe
+    subscription_url: |-
+      http://orionld-smartvillage-sync:8080
   smartabyar_smartvillage:
     enabled: True
-    auth_secret_name: |-
-      keycloak-client-secret-smartvillage
-    auth_token_url: |-
-      https://sso.computate.org/realms/SMARTVILLAGE/protocol/openid-connect/token
-    smart_model_api: |-
-      /api/traffic-flow-observed
+    auth_token_url: https://sso.computate.org/auth/realms/SMARTVILLAGE/protocol/openid-connect/token
+    site_base_url: https://www.smartabyarsmartvillage.org
   alternate_model:
     enabled: True
     id: |-

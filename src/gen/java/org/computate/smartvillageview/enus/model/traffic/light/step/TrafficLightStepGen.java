@@ -894,6 +894,42 @@ public abstract class TrafficLightStepGen<DEV> extends MapResult {
 		TrafficLightStep oTrafficLightStep = (TrafficLightStep)this;
 		saves = doc.get("saves_docvalues_strings");
 		if(saves != null) {
+
+			if(saves.contains("trafficLightId")) {
+				String trafficLightId = (String)doc.get("trafficLightId_docvalues_string");
+				if(trafficLightId != null)
+					oTrafficLightStep.setTrafficLightId(trafficLightId);
+			}
+
+			if(saves.contains("trafficLightType")) {
+				String trafficLightType = (String)doc.get("trafficLightType_docvalues_string");
+				if(trafficLightType != null)
+					oTrafficLightStep.setTrafficLightType(trafficLightType);
+			}
+
+			if(saves.contains("angle")) {
+				Double angle = (Double)doc.get("angle_docvalues_double");
+				if(angle != null)
+					oTrafficLightStep.setAngle(angle);
+			}
+
+			if(saves.contains("state")) {
+				String state = (String)doc.get("state_docvalues_string");
+				if(state != null)
+					oTrafficLightStep.setState(state);
+			}
+
+			if(saves.contains("programId")) {
+				Long programId = (Long)doc.get("programId_docvalues_long");
+				if(programId != null)
+					oTrafficLightStep.setProgramId(programId);
+			}
+
+			if(saves.contains("phase")) {
+				Long phase = (Long)doc.get("phase_docvalues_long");
+				if(phase != null)
+					oTrafficLightStep.setPhase(phase);
+			}
 		}
 
 		super.populateMapResult(doc);

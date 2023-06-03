@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.computate.search.wrap.Wrap;
 import org.computate.smartvillageview.enus.model.base.BaseModel;
+import org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLight;
 import org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation;
 import org.computate.vertx.search.list.SearchList;
 
@@ -87,6 +88,39 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	/**
 	 * {@inheritDoc}
 	 * DocValues: true
+	 * HtmRow: 3
+	 * HtmCell: 2
+	 * Facet: true
+	 * DisplayName: smart traffic light
+	 * Description: The smart traffic light for this report. 
+	 */
+	protected void _smartTrafficLightId(Wrap<String> w) {
+	}
+
+	/**
+	 * Ignore: true
+	 */
+	protected void _smartTrafficLightSearch(Promise<SearchList<SmartTrafficLight>> promise) {
+		SearchList<SmartTrafficLight> l = new SearchList<>();
+		if(smartTrafficLightId != null) {
+			l.setC(SmartTrafficLight.class);
+			l.q("*:*");
+			l.fq(String.format("id:%s", smartTrafficLightId));
+			l.setStore(true);
+		}
+		promise.complete(l);
+	}
+
+	/**
+	 * Ignore: true
+	 */
+	protected void _smartTrafficLight_(Wrap<SmartTrafficLight> w) {
+		w.o(smartTrafficLightSearch.first());
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
 	 * Persist: true
 	 * DisplayName: simulation name
 	 * Facet: true
@@ -100,9 +134,21 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
+	 * DisplayName: simulation name
+	 * Facet: true
+	 */
+	protected void _smartTrafficLightName(Wrap<String> w) {
+		if(smartTrafficLight_ != null)
+			w.o(smartTrafficLight_.getSmartTrafficLightName());
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
 	 * DisplayName: report name
-	 * HtmRow: 3
-	 * HtmCell: 2
+	 * HtmRow: 4
+	 * HtmCell: 1
 	 * Facet: true
 	 */
 	protected void _reportName(Wrap<String> w) {
@@ -110,7 +156,10 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 
 	@Override
 	protected void _objectTitle(Wrap<String> w) {
-		w.o(String.format("%s: %s", simulationName, reportName == null ? String.format("report %s", pk) : reportName));
+		if(simulationName != null)
+			w.o(String.format("%s: %s", simulationName, reportName == null ? String.format("report %s", pk) : reportName));
+		else if(smartTrafficLightName != null)
+			w.o(String.format("%s: %s", smartTrafficLightName, reportName == null ? String.format("report %s", pk) : reportName));
 	}
 
 	@Override
@@ -122,7 +171,7 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 4
+	 * HtmRow: 5
 	 * HtmCell: 1
 	 * Facet: true
 	 * DisplayName: Average vehicle/min from WEST to EAST
@@ -131,13 +180,15 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	protected void _paramAvgVehiclePerMinFromWestToEast(Wrap<BigDecimal> w) {
 		if(simulation_ != null)
 			w.o(simulation_.getParamAvgVehiclePerMinFromWestToEast());
+		else if(smartTrafficLight_ != null)
+			w.o(smartTrafficLight_.getParamAvgVehiclePerMinFromWestToEast());
 	}
 
 	/**
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 4
+	 * HtmRow: 5
 	 * HtmCell: 2
 	 * Facet: true
 	 * DisplayName: Average vehicle/min from SOUTH to NORTH
@@ -146,13 +197,15 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	protected void _paramAvgVehiclePerMinFromSouthToNorth(Wrap<BigDecimal> w) {
 		if(simulation_ != null)
 			w.o(simulation_.getParamAvgVehiclePerMinFromSouthToNorth());
+		else if(smartTrafficLight_ != null)
+			w.o(smartTrafficLight_.getParamAvgVehiclePerMinFromSouthToNorth());
 	}
 
 	/**
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 4
+	 * HtmRow: 5
 	 * HtmCell: 3
 	 * Facet: true
 	 * DisplayName: Demand scaling factor (multiplies all vehicle demands)
@@ -161,13 +214,15 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	protected void _paramVehicleDemandScalingFactor(Wrap<BigDecimal> w) {
 		if(simulation_ != null)
 			w.o(simulation_.getParamVehicleDemandScalingFactor());
+		else if(smartTrafficLight_ != null)
+			w.o(smartTrafficLight_.getParamVehicleDemandScalingFactor());
 	}
 
 	/**
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 5
+	 * HtmRow: 6
 	 * HtmCell: 1
 	 * Facet: true
 	 * DisplayName: Average pedestrian/min from WEST to EAST
@@ -176,13 +231,15 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	protected void _paramAvgPedestrianPerMinFromWestToEast(Wrap<BigDecimal> w) {
 		if(simulation_ != null)
 			w.o(simulation_.getParamAvgPedestrianPerMinFromWestToEast());
+		else if(smartTrafficLight_ != null)
+			w.o(smartTrafficLight_.getParamAvgPedestrianPerMinFromWestToEast());
 	}
 
 	/**
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 5
+	 * HtmRow: 6
 	 * HtmCell: 2
 	 * Facet: true
 	 * DisplayName: Average pedestrian/min from WEST to EAST
@@ -191,13 +248,15 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	protected void _paramAvgPedestrianPerMinFromSouthToNorth(Wrap<BigDecimal> w) {
 		if(simulation_ != null)
 			w.o(simulation_.getParamAvgPedestrianPerMinFromSouthToNorth());
+		else if(smartTrafficLight_ != null)
+			w.o(smartTrafficLight_.getParamAvgPedestrianPerMinFromSouthToNorth());
 	}
 
 	/**
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 5
+	 * HtmRow: 6
 	 * HtmCell: 3
 	 * Facet: true
 	 * DisplayName: Demand scaling factor (multiplies all pedestrian demands)
@@ -206,6 +265,8 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	protected void _paramPedestrianDemandScalingFactor(Wrap<BigDecimal> w) {
 		if(simulation_ != null)
 			w.o(simulation_.getParamPedestrianDemandScalingFactor());
+		else if(smartTrafficLight_ != null)
+			w.o(smartTrafficLight_.getParamPedestrianDemandScalingFactor());
 	}
 
 	/**
@@ -228,7 +289,7 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 6
+	 * HtmRow: 7
 	 * HtmCell: 1
 	 * Facet: true
 	 * DisplayName: Min GREEN time for WEST-EAST traffic (sec)
@@ -242,7 +303,7 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 6
+	 * HtmRow: 7
 	 * HtmCell: 2
 	 * Facet: true
 	 * DisplayName: Max GREEN time for WEST-EAST traffic (sec)
@@ -256,7 +317,7 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 7
+	 * HtmRow: 8
 	 * HtmCell: 1
 	 * Facet: true
 	 * DisplayName: Min GREEN time for SOUTH-NORTH traffic (sec)
@@ -270,7 +331,7 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 7
+	 * HtmRow: 8
 	 * HtmCell: 2
 	 * Facet: true
 	 * DisplayName: Max GREEN time for SOUTH-NORTH traffic (sec)
@@ -284,7 +345,7 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 8
+	 * HtmRow: 9
 	 * HtmCell: 1
 	 * Facet: true
 	 * DisplayName: Pedestrian waiting time tolerance threshold for NORTH-SOUTH (sec)
@@ -298,7 +359,7 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 8
+	 * HtmRow: 9
 	 * HtmCell: 2
 	 * Facet: true
 	 * DisplayName: Pedestrian waiting time tolerance threshold for WEST-EAST (sec)
@@ -312,7 +373,7 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 9
+	 * HtmRow: 10
 	 * HtmCell: 1
 	 * Facet: true
 	 * DisplayName: Vehicle queue length threshold between low-high content for WEST-EAST
@@ -326,7 +387,7 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 9
+	 * HtmRow: 10
 	 * HtmCell: 2
 	 * Facet: true
 	 * DisplayName: Vehicle queue length threshold between low-high content for SOUTH-NORTH
@@ -340,7 +401,7 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 10
+	 * HtmRow: 11
 	 * HtmCell: 1
 	 * Facet: true
 	 * DisplayName: Pedestrian queue length threshold between low-high content for NORTH-SOUTH
@@ -354,7 +415,7 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 10
+	 * HtmRow: 11
 	 * HtmCell: 2
 	 * Facet: true
 	 * DisplayName: Pedestrian queue length threshold between low-high content for WEST-EAST
@@ -373,9 +434,10 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * Description: 
 	 */
 	protected void _paramDemandScale(List<BigDecimal> l) {
-		if(simulation_ != null) {
+		if(simulation_ != null)
 			l.addAll(simulation_.getParamDemandScale());
-		}
+		else if(smartTrafficLight_ != null)
+			l.addAll(smartTrafficLight_.getParamDemandScale());
 	}
 
 	/**
@@ -404,7 +466,7 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 11
+	 * HtmRow: 12
 	 * HtmCell: 1
 	 * Facet: true
 	 * DisplayName: Simulation time step (sec)
@@ -413,13 +475,15 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	protected void _paramStepSize(Wrap<BigDecimal> w) {
 		if(simulation_ != null)
 			w.o(simulation_.getParamStepSize());
+		else if(smartTrafficLight_ != null)
+			w.o(smartTrafficLight_.getParamStepSize());
 	}
 
 	/**
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 11
+	 * HtmRow: 12
 	 * HtmCell: 2
 	 * Facet: true
 	 * DisplayName: time for each round of traffic simulation (sec)
@@ -428,13 +492,15 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	protected void _paramRunTime(Wrap<Integer> w) {
 		if(simulation_ != null)
 			w.o(simulation_.getParamRunTime());
+		else if(smartTrafficLight_ != null)
+			w.o(smartTrafficLight_.getParamRunTime());
 	}
 
 	/**
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 12
+	 * HtmRow: 13
 	 * HtmCell: 1
 	 * Facet: true
 	 * DisplayName: Number of simulation repetitions with same input (for statistical accuracy)
@@ -443,13 +509,15 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	protected void _paramItersPerPar(Wrap<Integer> w) {
 		if(simulation_ != null)
 			w.o(simulation_.getParamItersPerPar());
+		else if(smartTrafficLight_ != null)
+			w.o(smartTrafficLight_.getParamItersPerPar());
 	}
 
 	/**
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 12
+	 * HtmRow: 13
 	 * HtmCell: 2
 	 * Facet: true
 	 * DisplayName: Number of parameter update iterations before output
@@ -458,13 +526,15 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	protected void _paramTotalIterNum(Wrap<Integer> w) {
 		if(simulation_ != null)
 			w.o(simulation_.getParamTotalIterNum());
+		else if(smartTrafficLight_ != null)
+			w.o(smartTrafficLight_.getParamTotalIterNum());
 	}
 
 	/**
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 12
+	 * HtmRow: 13
 	 * HtmCell: 3
 	 * Facet: true
 	 * DisplayName: report status
@@ -484,7 +554,7 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 12
+	 * HtmRow: 13
 	 * HtmCell: 3
 	 * Facet: true
 	 * DisplayName: report progress
@@ -498,7 +568,7 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 13
+	 * HtmRow: 14
 	 * HtmCell: 1
 	 * Facet: true
 	 * DisplayName: updated parameters

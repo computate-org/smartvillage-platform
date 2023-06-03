@@ -1308,6 +1308,60 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 		MapResult oMapResult = (MapResult)this;
 		saves = doc.get("saves_docvalues_strings");
 		if(saves != null) {
+
+			if(saves.contains("simulationName")) {
+				String simulationName = (String)doc.get("simulationName_docvalues_string");
+				if(simulationName != null)
+					oMapResult.setSimulationName(simulationName);
+			}
+
+			if(saves.contains("sumocfgPath")) {
+				String sumocfgPath = (String)doc.get("sumocfgPath_docvalues_string");
+				if(sumocfgPath != null)
+					oMapResult.setSumocfgPath(sumocfgPath);
+			}
+
+			if(saves.contains("simulationKey")) {
+				Long simulationKey = (Long)doc.get("simulationKey_docvalues_long");
+				if(simulationKey != null)
+					oMapResult.setSimulationKey(simulationKey);
+			}
+
+			if(saves.contains("timeStepId")) {
+				String timeStepId = (String)doc.get("timeStepId_docvalues_string");
+				if(timeStepId != null)
+					oMapResult.setTimeStepId(timeStepId);
+			}
+
+			if(saves.contains("time")) {
+				Double time = (Double)doc.get("time_docvalues_double");
+				if(time != null)
+					oMapResult.setTime(time);
+			}
+
+			if(saves.contains("dateTime")) {
+				Date dateTime = (Date)doc.get("dateTime_docvalues_date");
+				if(dateTime != null)
+					oMapResult.setDateTime(dateTime);
+			}
+
+			if(saves.contains("location")) {
+				Point location = (Point)doc.get("location_docvalues_location");
+				if(location != null)
+					oMapResult.setLocation(location);
+			}
+
+			if(saves.contains("color")) {
+				String color = (String)doc.get("color_docvalues_string");
+				if(color != null)
+					oMapResult.setColor(color);
+			}
+
+			if(saves.contains("step")) {
+				Boolean step = (Boolean)doc.get("step_docvalues_boolean");
+				if(step != null)
+					oMapResult.setStep(step);
+			}
 		}
 
 		super.populateBaseResult(doc);
