@@ -6,6 +6,7 @@
 {{#*inline "htmScriptsSimulationReportPage"}}{{> "htmScriptsBaseModelPage"}}		<!-- inline "htmScriptsSimulationReportPage" -->
 		<script src="{{staticBaseUrl}}/js/enUS/SimulationReportPage.js"></script>
 		<script src="{{staticBaseUrl}}/js/enUS/TrafficSimulationPage.js"></script>
+		<script src="{{staticBaseUrl}}/js/enUS/SmartTrafficLightPage.js"></script>
 {{/inline}}
 {{#*inline "htmScriptSimulationReportPage"}}		<!-- inline "htmScriptSimulationReportPage" -->
 		<script>
@@ -37,6 +38,11 @@
 					suggestSimulationReportSimulationKey([{'name':'fq','value':'reportKeys:' + pk}], $('#listSimulationReportSimulationKey_Page'), pk, true);
 		{{else}}
 					suggestSimulationReportSimulationKey([{'name':'fq','value':'reportKeys:' + pk}], $('#listSimulationReportSimulationKey_Page'), pk, false);
+		{{/ifContainsAnyRoles}}
+		{{#ifContainsAnyRoles roles roleRequired}}
+					suggestSimulationReportSmartTrafficLightKey([{'name':'fq','value':'reportKeys:' + pk}], $('#listSimulationReportSmartTrafficLightKey_Page'), pk, true);
+		{{else}}
+					suggestSimulationReportSmartTrafficLightKey([{'name':'fq','value':'reportKeys:' + pk}], $('#listSimulationReportSmartTrafficLightKey_Page'), pk, false);
 		{{/ifContainsAnyRoles}}
 				}
 				window.varsFq = JSON.parse('{{{toJsonObjectStringInApostrophes varsFq}}}');
@@ -444,6 +450,11 @@
 {{else}}
 {{> "htmSimulationKey" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmSmartTrafficLightKey" roleRequired="true"}}
+{{else}}
+{{> "htmSmartTrafficLightKey" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
 {{#ifContainsAnyRoles roles roleRequired}}
@@ -639,6 +650,11 @@
 {{> "htmSimulationKey" roleRequired="true"}}
 {{else}}
 {{> "htmSimulationKey" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmSmartTrafficLightKey" roleRequired="true"}}
+{{else}}
+{{> "htmSmartTrafficLightKey" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
@@ -874,9 +890,9 @@
 {{> "htmSimulationKey" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmSmartTrafficLightId" roleRequired="true"}}
+{{> "htmSmartTrafficLightKey" roleRequired="true"}}
 {{else}}
-{{> "htmSmartTrafficLightId" roleRequired="false"}}
+{{> "htmSmartTrafficLightKey" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
@@ -1379,33 +1395,80 @@
 		{{/eq}}
 {{/inline}}
 
-{{#*inline "htmSmartTrafficLightId"}}
+{{#*inline "htmSmartTrafficLightKey"}}
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SimulationReportSmartTrafficLightKey">
 											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>smart traffic light</label>
+												<div class="w3-cell-row ">
+													<a href="/smart-traffic-light?fq=reportKeys:{{simulationReport_.pk}}" class="w3-cell w3-btn w3-center h4 w3-block h4 w3-2017-shaded-spruce w3-hover-2017-shaded-spruce ">
+														<i class="fad fa-traffic-light-stop "></i>
+														smart traffic light
+													</a>
 												</div>
-												<div class="w3-cell-row  ">
+												<div class="w3-cell-row ">
+													<h5 class="w3-cell ">
+														<i class="far fa-search w3-xxlarge w3-cell w3-cell-middle "></i>
+														relate a smart traffic light to this simulation report
+													</h5>
+												</div>
+												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputSmartTrafficLightId" roleRequired=roleRequired}}
-															</span>
+														<div class="w3-cell-row ">
+
+														{{> "inputSmartTrafficLightKey" roleRequired=roleRequired}}
 														</div>
+													</div>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell w3-left-align w3-cell-top ">
+														<ul class="w3-ul w3-hoverable " id="listSimulationReportSmartTrafficLightKey_{{classApiMethodMethod}}">
+														</ul>
+														{{#eq roleRequired "true"}}
+	{{#eq 'Page' classApiMethodMethod}}
+																<div class="w3-cell-row ">
+																	<button
+																		 class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce "
+																		 id="{{classApiMethodMethod}}_smartTrafficLightKey_add"
+																		 onclick="$(this).addClass('w3-disabled'); this.disabled = true; this.innerHTML = 'Sending…'; postSmartTrafficLightVals({ reportKeys: [ '{{pk}}' ] }, function() { $('#{{classApiMethodMethod}}_smartTrafficLightKey_add').disabled = false; $('#{{classApiMethodMethod}}_smartTrafficLightKey_add').innerHTML = 'add a smart traffic light'; }, function() { addError($('#{{classApiMethodMethod}}smartTrafficLightKey')); });"
+																		>add a smart traffic light</button>
+																</div>
+	{{/eq}}
+														{{/eq}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
-{{#*inline "inputSmartTrafficLightId"}}
-	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSimulationReport{{pk}}SmartTrafficLightId ">{{simulationReport_.smartTrafficLightId}}</span>
-	{{/eq}}
+{{#*inline "inputSmartTrafficLightKey"}}
+		{{#eq roleRequired "true"}}
+														{{#eq 'PUTCopy' classApiMethodMethod}}
+															<div>
+																<input 
+																	type="checkbox"
+																	id="{{classApiMethodMethod}}_smartTrafficLightKey_clear"
+																	class="smartTrafficLightKey_clear "
+																	>
+																<label for="{{classApiMethodMethod}}_smartTrafficLightKey_clear">clear</label>
+															</div>
+														{{/eq}}
+														<input
+																type="text"
+																placeholder="smart traffic light"
+																title="The smart traffic light for this report. "															class="valueObjectSuggest suggestSmartTrafficLightKey w3-input w3-border w3-cell w3-cell-middle "
+															name="setSmartTrafficLightKey"
+															id="{{classApiMethodMethod}}_smartTrafficLightKey"
+															autocomplete="off"
+															oninput="suggestSimulationReportSmartTrafficLightKey($(this).val() ? [ { 'name': 'q', 'value': 'objectSuggest:' + $(this).val() }, { 'name': 'rows', 'value': '10' }, { 'name': 'fl', 'value': 'classCanonicalName,reportKeys,pk,pageUrlPk,objectTitle' } ] : [{{#if pk}}{'name':'fq','value':'reportKeys:{{pk}}'}{{else}}{{/if}}], $('#listSimulationReportSmartTrafficLightKey_{{classApiMethodMethod}}'), {{pk}}); "
+															/>
+
+													{{else}}
+		{{else}}
+														<span class="varSimulationReport{{pk}}SmartTrafficLightKey ">{{simulationReport_.smartTrafficLightKey}}</span>
+		{{/eq}}
 {{/inline}}
 
 {{#*inline "htmSimulationName"}}

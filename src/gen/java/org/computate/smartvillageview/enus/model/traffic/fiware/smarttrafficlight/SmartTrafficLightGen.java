@@ -2,6 +2,9 @@ package org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlig
 
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.smartvillageview.enus.model.base.BaseModel;
+import io.vertx.core.json.JsonObject;
+import java.util.Date;
+import java.util.Set;
 import org.computate.vertx.api.ApiRequest;
 import org.computate.smartvillageview.enus.config.ConfigKeys;
 import java.util.Optional;
@@ -30,7 +33,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.math.RoundingMode;
 import java.util.Map;
-import org.computate.smartvillageview.enus.result.map.MapResult;
 import java.lang.String;
 import io.vertx.core.json.JsonArray;
 import org.computate.vertx.search.list.SearchList;
@@ -44,15 +46,14 @@ import io.vertx.core.Promise;
 import io.vertx.core.Future;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.computate.search.response.solr.SolrResponse;
-import io.vertx.core.json.JsonObject;
 
 /**	
 <ol>
 0<h3>Suggestions that can generate more code for you: </h3></ol>
- * <li>You can add a class comment "Model: true" if you wish to persist these SmartTrafficLight objects in a relational PostgreSQL database transactionally in the RESTful API. 
- * The code to persist and query the SmartTrafficLightGen data in the database will then be automatically generated. 
+ * <li>You can add a class comment "SqlOrder: " followed by an Integer to sort this class compared when generating the SQL code to create and drop tables. 
+ * The Order comment allows you do define which order the SQL code is generated. 
  * </li>
- * <h3>About the SmartTrafficLight class and it's generated class SmartTrafficLightGen&lt;MapResult&gt;: </h3>extends SmartTrafficLightGen
+ * <h3>About the SmartTrafficLight class and it's generated class SmartTrafficLightGen&lt;BaseModel&gt;: </h3>extends SmartTrafficLightGen
  * <p>
  * This Java class extends a generated Java class SmartTrafficLightGen built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
  * Whenever this Java class is modified or touched, the watch service installed as described in the README, indexes all the information about this Java class in a local Apache Solr Search Engine. 
@@ -63,9 +64,9 @@ import io.vertx.core.json.JsonObject;
  * The extended class ending with "Gen" did not exist at first, but was automatically created by the same watch service based on the data retrieved from the local Apache Server search engine. 
  * The extended class contains many generated fields, getters, setters, initialization code, and helper methods to help build a website and API fast, reactive, and scalable. 
  * </p>
- * extends SmartTrafficLightGen<MapResult>
- * <p>This <code>class SmartTrafficLight extends SmartTrafficLightGen&lt;MapResult&gt;</code>, which means it extends a newly generated SmartTrafficLightGen. 
- * The generated <code>class SmartTrafficLightGen extends MapResult</code> which means that SmartTrafficLight extends SmartTrafficLightGen which extends MapResult. 
+ * extends SmartTrafficLightGen<BaseModel>
+ * <p>This <code>class SmartTrafficLight extends SmartTrafficLightGen&lt;BaseModel&gt;</code>, which means it extends a newly generated SmartTrafficLightGen. 
+ * The generated <code>class SmartTrafficLightGen extends BaseModel</code> which means that SmartTrafficLight extends SmartTrafficLightGen which extends BaseModel. 
  * This generated inheritance is a powerful feature that allows a lot of boiler plate code to be created for you automatically while still preserving inheritance through the power of Java Generic classes. 
  * </p>
  * Api: true
@@ -129,14 +130,17 @@ import io.vertx.core.json.JsonObject;
  * <p>This class contains a comment <b>"Order: 8"</b>, which means this class will be sorted by the given number 8 ascending when code that relates to multiple classes at the same time is generated. 
  * </p>
  * Model: true
+ * <p>This class contains a comment <b>"Model: true"</b>, which means this class will be stored in the database. 
+ * Every protected void method that begins with "_" that contains a "Persist: true" comment will be a persisted field in the database table. 
+ * </p>
  * Page: true
  * <p>This class contains a comment <b>"Page: true"</b>, which means this class will have webpage code generated for these objects. 
  * Java Vert.x backend API code, Handlebars HTML template frontend code, and JavaScript code will all generated and can be extended. 
  * This creates a new Java class org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLightPage. 
  * </p>
- * SuperPage.enUS: MapResultPage
- * <p>This class contains a comment <b>"SuperPage.enUS: MapResultPage"</b>, which identifies the Java super class of the page code by it's class simple name "MapResultPage". 
- * This means that the newly created class org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLightPage extends org.computate.smartvillageview.enus.result.map.MapResultPage. 
+ * SuperPage.enUS: BaseModelPage
+ * <p>This class contains a comment <b>"SuperPage.enUS: BaseModelPage"</b>, which identifies the Java super class of the page code by it's class simple name "BaseModelPage". 
+ * This means that the newly created class org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLightPage extends org.computate.smartvillageview.enus.model.base.BaseModelPage. 
  * </p>
  * Promise: true
  * <p>
@@ -183,7 +187,7 @@ import io.vertx.core.json.JsonObject;
  * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartabyar\-smartvillage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  **/
-public abstract class SmartTrafficLightGen<DEV> extends MapResult {
+public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 	protected static final Logger LOG = LoggerFactory.getLogger(SmartTrafficLight.class);
 
 	public static final String SmartTrafficLight_AName_enUS = "a smart traffic light";
@@ -222,6 +226,60 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 	public static final String SmartTrafficLight_IconGroup = "duotone";
 	public static final String SmartTrafficLight_IconName = "traffic-light-stop";
 	public static final Integer SmartTrafficLight_Rows = 100;
+
+	//////////////
+	// entityId //
+	//////////////
+
+
+	/**	 The entity entityId
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String entityId;
+
+	/**	<br> The entity entityId
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLight&fq=entiteVar_enUS_indexed_string:entityId">Find the entity entityId in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _entityId(Wrap<String> w);
+
+	public String getEntityId() {
+		return entityId;
+	}
+	public void setEntityId(String o) {
+		this.entityId = SmartTrafficLight.staticSetEntityId(siteRequest_, o);
+	}
+	public static String staticSetEntityId(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected SmartTrafficLight entityIdInit() {
+		Wrap<String> entityIdWrap = new Wrap<String>().var("entityId");
+		if(entityId == null) {
+			_entityId(entityIdWrap);
+			setEntityId(entityIdWrap.o);
+		}
+		return (SmartTrafficLight)this;
+	}
+
+	public static String staticSearchEntityId(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrEntityId(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqEntityId(SiteRequestEnUS siteRequest_, String o) {
+		return SmartTrafficLight.staticSearchStrEntityId(siteRequest_, SmartTrafficLight.staticSearchEntityId(siteRequest_, SmartTrafficLight.staticSetEntityId(siteRequest_, o)));
+	}
+
+	public String sqlEntityId() {
+		return entityId;
+	}
 
 	///////////////////////////
 	// smartTrafficLightName //
@@ -453,10 +511,6 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 
 	public static String staticSearchFqTrafficFlowObservedIds(SiteRequestEnUS siteRequest_, String o) {
 		return SmartTrafficLight.staticSearchStrTrafficFlowObservedIds(siteRequest_, SmartTrafficLight.staticSearchTrafficFlowObservedIds(siteRequest_, SmartTrafficLight.staticSetTrafficFlowObservedIds(siteRequest_, o)));
-	}
-
-	public List<String> sqlTrafficFlowObservedIds() {
-		return trafficFlowObservedIds;
 	}
 
 	///////////////////////////////
@@ -705,10 +759,6 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 		return SmartTrafficLight.staticSearchStrParamAvgVehiclePerMinFromWestToEast(siteRequest_, SmartTrafficLight.staticSearchParamAvgVehiclePerMinFromWestToEast(siteRequest_, SmartTrafficLight.staticSetParamAvgVehiclePerMinFromWestToEast(siteRequest_, o)));
 	}
 
-	public BigDecimal sqlParamAvgVehiclePerMinFromWestToEast() {
-		return paramAvgVehiclePerMinFromWestToEast;
-	}
-
 	///////////////////////////////////////////
 	// paramAvgVehiclePerMinFromSouthToNorth //
 	///////////////////////////////////////////
@@ -778,10 +828,6 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 
 	public static String staticSearchFqParamAvgVehiclePerMinFromSouthToNorth(SiteRequestEnUS siteRequest_, String o) {
 		return SmartTrafficLight.staticSearchStrParamAvgVehiclePerMinFromSouthToNorth(siteRequest_, SmartTrafficLight.staticSearchParamAvgVehiclePerMinFromSouthToNorth(siteRequest_, SmartTrafficLight.staticSetParamAvgVehiclePerMinFromSouthToNorth(siteRequest_, o)));
-	}
-
-	public BigDecimal sqlParamAvgVehiclePerMinFromSouthToNorth() {
-		return paramAvgVehiclePerMinFromSouthToNorth;
 	}
 
 	/////////////////////////////////////
@@ -930,10 +976,6 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 		return SmartTrafficLight.staticSearchStrParamAvgPedestrianPerMinFromWestToEast(siteRequest_, SmartTrafficLight.staticSearchParamAvgPedestrianPerMinFromWestToEast(siteRequest_, SmartTrafficLight.staticSetParamAvgPedestrianPerMinFromWestToEast(siteRequest_, o)));
 	}
 
-	public BigDecimal sqlParamAvgPedestrianPerMinFromWestToEast() {
-		return paramAvgPedestrianPerMinFromWestToEast;
-	}
-
 	//////////////////////////////////////////////
 	// paramAvgPedestrianPerMinFromSouthToNorth //
 	//////////////////////////////////////////////
@@ -1005,10 +1047,6 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 		return SmartTrafficLight.staticSearchStrParamAvgPedestrianPerMinFromSouthToNorth(siteRequest_, SmartTrafficLight.staticSearchParamAvgPedestrianPerMinFromSouthToNorth(siteRequest_, SmartTrafficLight.staticSetParamAvgPedestrianPerMinFromSouthToNorth(siteRequest_, o)));
 	}
 
-	public BigDecimal sqlParamAvgPedestrianPerMinFromSouthToNorth() {
-		return paramAvgPedestrianPerMinFromSouthToNorth;
-	}
-
 	////////////////////////////////////////
 	// paramPedestrianDemandScalingFactor //
 	////////////////////////////////////////
@@ -1078,10 +1116,6 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 
 	public static String staticSearchFqParamPedestrianDemandScalingFactor(SiteRequestEnUS siteRequest_, String o) {
 		return SmartTrafficLight.staticSearchStrParamPedestrianDemandScalingFactor(siteRequest_, SmartTrafficLight.staticSearchParamPedestrianDemandScalingFactor(siteRequest_, SmartTrafficLight.staticSetParamPedestrianDemandScalingFactor(siteRequest_, o)));
-	}
-
-	public BigDecimal sqlParamPedestrianDemandScalingFactor() {
-		return paramPedestrianDemandScalingFactor;
 	}
 
 	//////////////////////
@@ -1181,10 +1215,6 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 		return SmartTrafficLight.staticSearchStrParamDemandScale(siteRequest_, SmartTrafficLight.staticSearchParamDemandScale(siteRequest_, SmartTrafficLight.staticSetParamDemandScale(siteRequest_, o)));
 	}
 
-	public Number[] sqlParamDemandScale() {
-		return paramDemandScale.stream().map(v -> (Number)v).toArray(Number[]::new);
-	}
-
 	//////////////////////////////////
 	// paramMinGreenTimeSecWestEast //
 	//////////////////////////////////
@@ -1254,10 +1284,6 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 
 	public static String staticSearchFqParamMinGreenTimeSecWestEast(SiteRequestEnUS siteRequest_, String o) {
 		return SmartTrafficLight.staticSearchStrParamMinGreenTimeSecWestEast(siteRequest_, SmartTrafficLight.staticSearchParamMinGreenTimeSecWestEast(siteRequest_, SmartTrafficLight.staticSetParamMinGreenTimeSecWestEast(siteRequest_, o)));
-	}
-
-	public BigDecimal sqlParamMinGreenTimeSecWestEast() {
-		return paramMinGreenTimeSecWestEast;
 	}
 
 	//////////////////////////////////
@@ -1331,10 +1357,6 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 		return SmartTrafficLight.staticSearchStrParamMaxGreenTimeSecWestEast(siteRequest_, SmartTrafficLight.staticSearchParamMaxGreenTimeSecWestEast(siteRequest_, SmartTrafficLight.staticSetParamMaxGreenTimeSecWestEast(siteRequest_, o)));
 	}
 
-	public BigDecimal sqlParamMaxGreenTimeSecWestEast() {
-		return paramMaxGreenTimeSecWestEast;
-	}
-
 	////////////////////////////////////
 	// paramMinGreenTimeSecSouthNorth //
 	////////////////////////////////////
@@ -1404,10 +1426,6 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 
 	public static String staticSearchFqParamMinGreenTimeSecSouthNorth(SiteRequestEnUS siteRequest_, String o) {
 		return SmartTrafficLight.staticSearchStrParamMinGreenTimeSecSouthNorth(siteRequest_, SmartTrafficLight.staticSearchParamMinGreenTimeSecSouthNorth(siteRequest_, SmartTrafficLight.staticSetParamMinGreenTimeSecSouthNorth(siteRequest_, o)));
-	}
-
-	public BigDecimal sqlParamMinGreenTimeSecSouthNorth() {
-		return paramMinGreenTimeSecSouthNorth;
 	}
 
 	////////////////////////////////////
@@ -1481,10 +1499,6 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 		return SmartTrafficLight.staticSearchStrParamMaxGreenTimeSecSouthNorth(siteRequest_, SmartTrafficLight.staticSearchParamMaxGreenTimeSecSouthNorth(siteRequest_, SmartTrafficLight.staticSetParamMaxGreenTimeSecSouthNorth(siteRequest_, o)));
 	}
 
-	public BigDecimal sqlParamMaxGreenTimeSecSouthNorth() {
-		return paramMaxGreenTimeSecSouthNorth;
-	}
-
 	///////////////////////////////////////////////
 	// paramPedestrianWaitThresholdSecNorthSouth //
 	///////////////////////////////////////////////
@@ -1554,10 +1568,6 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 
 	public static String staticSearchFqParamPedestrianWaitThresholdSecNorthSouth(SiteRequestEnUS siteRequest_, String o) {
 		return SmartTrafficLight.staticSearchStrParamPedestrianWaitThresholdSecNorthSouth(siteRequest_, SmartTrafficLight.staticSearchParamPedestrianWaitThresholdSecNorthSouth(siteRequest_, SmartTrafficLight.staticSetParamPedestrianWaitThresholdSecNorthSouth(siteRequest_, o)));
-	}
-
-	public BigDecimal sqlParamPedestrianWaitThresholdSecNorthSouth() {
-		return paramPedestrianWaitThresholdSecNorthSouth;
 	}
 
 	/////////////////////////////////////////////
@@ -1631,10 +1641,6 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 		return SmartTrafficLight.staticSearchStrParamPedestrianWaitThresholdSecWestEast(siteRequest_, SmartTrafficLight.staticSearchParamPedestrianWaitThresholdSecWestEast(siteRequest_, SmartTrafficLight.staticSetParamPedestrianWaitThresholdSecWestEast(siteRequest_, o)));
 	}
 
-	public BigDecimal sqlParamPedestrianWaitThresholdSecWestEast() {
-		return paramPedestrianWaitThresholdSecWestEast;
-	}
-
 	////////////////////////////////////////
 	// paramVehicleQueueThresholdWestEast //
 	////////////////////////////////////////
@@ -1704,10 +1710,6 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 
 	public static String staticSearchFqParamVehicleQueueThresholdWestEast(SiteRequestEnUS siteRequest_, String o) {
 		return SmartTrafficLight.staticSearchStrParamVehicleQueueThresholdWestEast(siteRequest_, SmartTrafficLight.staticSearchParamVehicleQueueThresholdWestEast(siteRequest_, SmartTrafficLight.staticSetParamVehicleQueueThresholdWestEast(siteRequest_, o)));
-	}
-
-	public BigDecimal sqlParamVehicleQueueThresholdWestEast() {
-		return paramVehicleQueueThresholdWestEast;
 	}
 
 	//////////////////////////////////////////
@@ -1781,10 +1783,6 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 		return SmartTrafficLight.staticSearchStrParamVehicleQueueThresholdSouthNorth(siteRequest_, SmartTrafficLight.staticSearchParamVehicleQueueThresholdSouthNorth(siteRequest_, SmartTrafficLight.staticSetParamVehicleQueueThresholdSouthNorth(siteRequest_, o)));
 	}
 
-	public BigDecimal sqlParamVehicleQueueThresholdSouthNorth() {
-		return paramVehicleQueueThresholdSouthNorth;
-	}
-
 	/////////////////////////////////////////////
 	// paramPedestrianQueueThresholdNorthSouth //
 	/////////////////////////////////////////////
@@ -1856,10 +1854,6 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 		return SmartTrafficLight.staticSearchStrParamPedestrianQueueThresholdNorthSouth(siteRequest_, SmartTrafficLight.staticSearchParamPedestrianQueueThresholdNorthSouth(siteRequest_, SmartTrafficLight.staticSetParamPedestrianQueueThresholdNorthSouth(siteRequest_, o)));
 	}
 
-	public BigDecimal sqlParamPedestrianQueueThresholdNorthSouth() {
-		return paramPedestrianQueueThresholdNorthSouth;
-	}
-
 	///////////////////////////////////////////
 	// paramPedestrianQueueThresholdWestEast //
 	///////////////////////////////////////////
@@ -1929,10 +1923,6 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 
 	public static String staticSearchFqParamPedestrianQueueThresholdWestEast(SiteRequestEnUS siteRequest_, String o) {
 		return SmartTrafficLight.staticSearchStrParamPedestrianQueueThresholdWestEast(siteRequest_, SmartTrafficLight.staticSearchParamPedestrianQueueThresholdWestEast(siteRequest_, SmartTrafficLight.staticSetParamPedestrianQueueThresholdWestEast(siteRequest_, o)));
-	}
-
-	public BigDecimal sqlParamPedestrianQueueThresholdWestEast() {
-		return paramPedestrianQueueThresholdWestEast;
 	}
 
 	///////////////////
@@ -2281,6 +2271,10 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 		return SmartTrafficLight.staticSearchStrReportKeys(siteRequest_, SmartTrafficLight.staticSearchReportKeys(siteRequest_, SmartTrafficLight.staticSetReportKeys(siteRequest_, o)));
 	}
 
+	public Number[] sqlReportKeys() {
+		return reportKeys.stream().map(v -> (Number)v).toArray(Number[]::new);
+	}
+
 	////////////////////
 	// tlsStatesPaths //
 	////////////////////
@@ -2435,7 +2429,7 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 		Promise<Void> promise2 = Promise.promise();
 		promiseSmartTrafficLight(promise2);
 		promise2.future().onSuccess(a -> {
-			super.promiseDeepMapResult(siteRequest_).onSuccess(b -> {
+			super.promiseDeepBaseModel(siteRequest_).onSuccess(b -> {
 				promise.complete();
 			}).onFailure(ex -> {
 				promise.fail(ex);
@@ -2450,6 +2444,7 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 		Future.future(a -> a.complete()).compose(a -> {
 			Promise<Void> promise2 = Promise.promise();
 			try {
+				entityIdInit();
 				smartTrafficLightNameInit();
 				routeIdNorthInit();
 				routeIdEastInit();
@@ -2519,7 +2514,7 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 	/////////////////
 
 	public void siteRequestSmartTrafficLight(SiteRequestEnUS siteRequest_) {
-			super.siteRequestMapResult(siteRequest_);
+			super.siteRequestBaseModel(siteRequest_);
 	}
 
 	public void siteRequestForClass(SiteRequestEnUS siteRequest_) {
@@ -2550,6 +2545,8 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 	public Object obtainSmartTrafficLight(String var) {
 		SmartTrafficLight oSmartTrafficLight = (SmartTrafficLight)this;
 		switch(var) {
+			case "entityId":
+				return oSmartTrafficLight.entityId;
 			case "smartTrafficLightName":
 				return oSmartTrafficLight.smartTrafficLightName;
 			case "routeIdNorth":
@@ -2615,7 +2612,7 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 			case "additionalFilePaths":
 				return oSmartTrafficLight.additionalFilePaths;
 			default:
-				return super.obtainMapResult(var);
+				return super.obtainBaseModel(var);
 		}
 	}
 
@@ -2639,8 +2636,13 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 	public Object relateSmartTrafficLight(String var, Object val) {
 		SmartTrafficLight oSmartTrafficLight = (SmartTrafficLight)this;
 		switch(var) {
+			case "reportKeys":
+				oSmartTrafficLight.addReportKeys((Long)val);
+				if(!saves.contains("reportKeys"))
+					saves.add("reportKeys");
+				return val;
 			default:
-				return super.relateMapResult(var, val);
+				return super.relateBaseModel(var, val);
 		}
 	}
 
@@ -2653,6 +2655,8 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 	}
 	public static Object staticSetSmartTrafficLight(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "entityId":
+			return SmartTrafficLight.staticSetEntityId(siteRequest_, o);
 		case "smartTrafficLightName":
 			return SmartTrafficLight.staticSetSmartTrafficLightName(siteRequest_, o);
 		case "routeIdNorth":
@@ -2710,7 +2714,7 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 		case "additionalFilePaths":
 			return SmartTrafficLight.staticSetAdditionalFilePaths(siteRequest_, o);
 			default:
-				return MapResult.staticSetMapResult(entityVar,  siteRequest_, o);
+				return BaseModel.staticSetBaseModel(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -2723,6 +2727,8 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 	}
 	public static Object staticSearchSmartTrafficLight(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "entityId":
+			return SmartTrafficLight.staticSearchEntityId(siteRequest_, (String)o);
 		case "smartTrafficLightName":
 			return SmartTrafficLight.staticSearchSmartTrafficLightName(siteRequest_, (String)o);
 		case "routeIdNorth":
@@ -2780,7 +2786,7 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 		case "additionalFilePaths":
 			return SmartTrafficLight.staticSearchAdditionalFilePaths(siteRequest_, (String)o);
 			default:
-				return MapResult.staticSearchMapResult(entityVar,  siteRequest_, o);
+				return BaseModel.staticSearchBaseModel(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -2793,6 +2799,8 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 	}
 	public static String staticSearchStrSmartTrafficLight(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "entityId":
+			return SmartTrafficLight.staticSearchStrEntityId(siteRequest_, (String)o);
 		case "smartTrafficLightName":
 			return SmartTrafficLight.staticSearchStrSmartTrafficLightName(siteRequest_, (String)o);
 		case "routeIdNorth":
@@ -2850,7 +2858,7 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 		case "additionalFilePaths":
 			return SmartTrafficLight.staticSearchStrAdditionalFilePaths(siteRequest_, (String)o);
 			default:
-				return MapResult.staticSearchStrMapResult(entityVar,  siteRequest_, o);
+				return BaseModel.staticSearchStrBaseModel(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -2863,6 +2871,8 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 	}
 	public static String staticSearchFqSmartTrafficLight(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "entityId":
+			return SmartTrafficLight.staticSearchFqEntityId(siteRequest_, o);
 		case "smartTrafficLightName":
 			return SmartTrafficLight.staticSearchFqSmartTrafficLightName(siteRequest_, o);
 		case "routeIdNorth":
@@ -2920,7 +2930,7 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 		case "additionalFilePaths":
 			return SmartTrafficLight.staticSearchFqAdditionalFilePaths(siteRequest_, o);
 			default:
-				return MapResult.staticSearchFqMapResult(entityVar,  siteRequest_, o);
+				return BaseModel.staticSearchFqBaseModel(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -2945,7 +2955,13 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 	}
 	public Object persistSmartTrafficLight(String var, Object val) {
 		String varLower = var.toLowerCase();
-			if("smarttrafficlightname".equals(varLower)) {
+			if("entityid".equals(varLower)) {
+				if(val instanceof String) {
+					setEntityId((String)val);
+				}
+				saves.add("entityId");
+				return val;
+			} else if("smarttrafficlightname".equals(varLower)) {
 				if(val instanceof String) {
 					setSmartTrafficLightName((String)val);
 				}
@@ -2963,34 +2979,6 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 				}
 				saves.add("routeIdEast");
 				return val;
-			} else if("trafficflowobservedids".equals(varLower)) {
-				if(val instanceof List<?>) {
-					((List<String>)val).stream().forEach(v -> addTrafficFlowObservedIds(v));
-				} else if(val instanceof JsonArray) {
-					((JsonArray)val).stream().forEach(v -> setTrafficFlowObservedIds(v.toString()));
-				} else if(val instanceof String[]) {
-					Arrays.asList((String[])val).stream().forEach(v -> setTrafficFlowObservedIds((String)v));
-				}
-				if(!saves.contains("trafficFlowObservedIds")) {
-					saves.add("trafficFlowObservedIds");
-				}
-				return val;
-			} else if("paramavgvehicleperminfromwesttoeast".equals(varLower)) {
-				if(val instanceof String) {
-					setParamAvgVehiclePerMinFromWestToEast((String)val);
-				} else if(val instanceof Number) {
-					setParamAvgVehiclePerMinFromWestToEast(new BigDecimal(((Number)val).doubleValue()));
-				}
-				saves.add("paramAvgVehiclePerMinFromWestToEast");
-				return val;
-			} else if("paramavgvehicleperminfromsouthtonorth".equals(varLower)) {
-				if(val instanceof String) {
-					setParamAvgVehiclePerMinFromSouthToNorth((String)val);
-				} else if(val instanceof Number) {
-					setParamAvgVehiclePerMinFromSouthToNorth(new BigDecimal(((Number)val).doubleValue()));
-				}
-				saves.add("paramAvgVehiclePerMinFromSouthToNorth");
-				return val;
 			} else if("paramvehicledemandscalingfactor".equals(varLower)) {
 				if(val instanceof String) {
 					setParamVehicleDemandScalingFactor((String)val);
@@ -2998,124 +2986,6 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 					setParamVehicleDemandScalingFactor(new BigDecimal(((Number)val).doubleValue()));
 				}
 				saves.add("paramVehicleDemandScalingFactor");
-				return val;
-			} else if("paramavgpedestrianperminfromwesttoeast".equals(varLower)) {
-				if(val instanceof String) {
-					setParamAvgPedestrianPerMinFromWestToEast((String)val);
-				} else if(val instanceof Number) {
-					setParamAvgPedestrianPerMinFromWestToEast(new BigDecimal(((Number)val).doubleValue()));
-				}
-				saves.add("paramAvgPedestrianPerMinFromWestToEast");
-				return val;
-			} else if("paramavgpedestrianperminfromsouthtonorth".equals(varLower)) {
-				if(val instanceof String) {
-					setParamAvgPedestrianPerMinFromSouthToNorth((String)val);
-				} else if(val instanceof Number) {
-					setParamAvgPedestrianPerMinFromSouthToNorth(new BigDecimal(((Number)val).doubleValue()));
-				}
-				saves.add("paramAvgPedestrianPerMinFromSouthToNorth");
-				return val;
-			} else if("parampedestriandemandscalingfactor".equals(varLower)) {
-				if(val instanceof String) {
-					setParamPedestrianDemandScalingFactor((String)val);
-				} else if(val instanceof Number) {
-					setParamPedestrianDemandScalingFactor(new BigDecimal(((Number)val).doubleValue()));
-				}
-				saves.add("paramPedestrianDemandScalingFactor");
-				return val;
-			} else if("paramdemandscale".equals(varLower)) {
-				if(val instanceof List<?>) {
-					((List<BigDecimal>)val).stream().forEach(v -> addParamDemandScale(v));
-				} else if(val instanceof JsonArray) {
-					((JsonArray)val).stream().forEach(v -> setParamDemandScale(v.toString()));
-				} else if(val instanceof BigDecimal[]) {
-					Arrays.asList((BigDecimal[])val).stream().forEach(v -> setParamDemandScale((BigDecimal)v));
-				} else if(val instanceof Number[]) {
-					Arrays.asList((Number[])val).stream().forEach(v -> setParamDemandScale((Number)v));
-				}
-				if(!saves.contains("paramDemandScale")) {
-					saves.add("paramDemandScale");
-				}
-				return val;
-			} else if("parammingreentimesecwesteast".equals(varLower)) {
-				if(val instanceof String) {
-					setParamMinGreenTimeSecWestEast((String)val);
-				} else if(val instanceof Number) {
-					setParamMinGreenTimeSecWestEast(new BigDecimal(((Number)val).doubleValue()));
-				}
-				saves.add("paramMinGreenTimeSecWestEast");
-				return val;
-			} else if("parammaxgreentimesecwesteast".equals(varLower)) {
-				if(val instanceof String) {
-					setParamMaxGreenTimeSecWestEast((String)val);
-				} else if(val instanceof Number) {
-					setParamMaxGreenTimeSecWestEast(new BigDecimal(((Number)val).doubleValue()));
-				}
-				saves.add("paramMaxGreenTimeSecWestEast");
-				return val;
-			} else if("parammingreentimesecsouthnorth".equals(varLower)) {
-				if(val instanceof String) {
-					setParamMinGreenTimeSecSouthNorth((String)val);
-				} else if(val instanceof Number) {
-					setParamMinGreenTimeSecSouthNorth(new BigDecimal(((Number)val).doubleValue()));
-				}
-				saves.add("paramMinGreenTimeSecSouthNorth");
-				return val;
-			} else if("parammaxgreentimesecsouthnorth".equals(varLower)) {
-				if(val instanceof String) {
-					setParamMaxGreenTimeSecSouthNorth((String)val);
-				} else if(val instanceof Number) {
-					setParamMaxGreenTimeSecSouthNorth(new BigDecimal(((Number)val).doubleValue()));
-				}
-				saves.add("paramMaxGreenTimeSecSouthNorth");
-				return val;
-			} else if("parampedestrianwaitthresholdsecnorthsouth".equals(varLower)) {
-				if(val instanceof String) {
-					setParamPedestrianWaitThresholdSecNorthSouth((String)val);
-				} else if(val instanceof Number) {
-					setParamPedestrianWaitThresholdSecNorthSouth(new BigDecimal(((Number)val).doubleValue()));
-				}
-				saves.add("paramPedestrianWaitThresholdSecNorthSouth");
-				return val;
-			} else if("parampedestrianwaitthresholdsecwesteast".equals(varLower)) {
-				if(val instanceof String) {
-					setParamPedestrianWaitThresholdSecWestEast((String)val);
-				} else if(val instanceof Number) {
-					setParamPedestrianWaitThresholdSecWestEast(new BigDecimal(((Number)val).doubleValue()));
-				}
-				saves.add("paramPedestrianWaitThresholdSecWestEast");
-				return val;
-			} else if("paramvehiclequeuethresholdwesteast".equals(varLower)) {
-				if(val instanceof String) {
-					setParamVehicleQueueThresholdWestEast((String)val);
-				} else if(val instanceof Number) {
-					setParamVehicleQueueThresholdWestEast(new BigDecimal(((Number)val).doubleValue()));
-				}
-				saves.add("paramVehicleQueueThresholdWestEast");
-				return val;
-			} else if("paramvehiclequeuethresholdsouthnorth".equals(varLower)) {
-				if(val instanceof String) {
-					setParamVehicleQueueThresholdSouthNorth((String)val);
-				} else if(val instanceof Number) {
-					setParamVehicleQueueThresholdSouthNorth(new BigDecimal(((Number)val).doubleValue()));
-				}
-				saves.add("paramVehicleQueueThresholdSouthNorth");
-				return val;
-			} else if("parampedestrianqueuethresholdnorthsouth".equals(varLower)) {
-				if(val instanceof String) {
-					setParamPedestrianQueueThresholdNorthSouth((String)val);
-				} else if(val instanceof Number) {
-					setParamPedestrianQueueThresholdNorthSouth(new BigDecimal(((Number)val).doubleValue()));
-				}
-				saves.add("paramPedestrianQueueThresholdNorthSouth");
-				return val;
-			} else if("parampedestrianqueuethresholdwesteast".equals(varLower)) {
-				if(val instanceof String) {
-					setParamPedestrianQueueThresholdWestEast((String)val);
-				} else if(val instanceof Number) {
-					setParamPedestrianQueueThresholdWestEast(new BigDecimal(((Number)val).doubleValue()));
-				}
-				saves.add("paramPedestrianQueueThresholdWestEast");
 				return val;
 			} else if("paramstepsize".equals(varLower)) {
 				if(val instanceof String) {
@@ -3150,7 +3020,7 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 				saves.add("paramTotalIterNum");
 				return val;
 		} else {
-			return super.persistMapResult(var, val);
+			return super.persistBaseModel(var, val);
 		}
 	}
 
@@ -3165,6 +3035,12 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 		SmartTrafficLight oSmartTrafficLight = (SmartTrafficLight)this;
 		saves = doc.get("saves_docvalues_strings");
 		if(saves != null) {
+
+			if(saves.contains("entityId")) {
+				String entityId = (String)doc.get("entityId_docvalues_string");
+				if(entityId != null)
+					oSmartTrafficLight.setEntityId(entityId);
+			}
 
 			if(saves.contains("smartTrafficLightName")) {
 				String smartTrafficLightName = (String)doc.get("smartTrafficLightName_docvalues_string");
@@ -3316,17 +3192,18 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 					oSmartTrafficLight.setParamTotalIterNum(paramTotalIterNum);
 			}
 
-			if(saves.contains("reportKeys")) {
-				List<Long> reportKeys = (List<Long>)doc.get("reportKeys_docvalues_longs");
-				if(reportKeys != null)
-					oSmartTrafficLight.reportKeys.addAll(reportKeys);
-			}
+			List<Long> reportKeys = (List<Long>)doc.get("reportKeys_docvalues_longs");
+			if(reportKeys != null)
+				oSmartTrafficLight.reportKeys.addAll(reportKeys);
 		}
 
-		super.populateMapResult(doc);
+		super.populateBaseModel(doc);
 	}
 
 	public void indexSmartTrafficLight(JsonObject doc) {
+		if(entityId != null) {
+			doc.put("entityId_docvalues_string", entityId);
+		}
 		if(smartTrafficLightName != null) {
 			doc.put("smartTrafficLightName_docvalues_string", smartTrafficLightName);
 		}
@@ -3417,12 +3294,14 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 				l.add(o);
 			}
 		}
-		super.indexMapResult(doc);
+		super.indexBaseModel(doc);
 
 	}
 
 	public static String varStoredSmartTrafficLight(String entityVar) {
 		switch(entityVar) {
+			case "entityId":
+				return "entityId_docvalues_string";
 			case "smartTrafficLightName":
 				return "smartTrafficLightName_docvalues_string";
 			case "routeIdNorth":
@@ -3476,12 +3355,14 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 			case "reportKeys":
 				return "reportKeys_docvalues_longs";
 			default:
-				return MapResult.varStoredMapResult(entityVar);
+				return BaseModel.varStoredBaseModel(entityVar);
 		}
 	}
 
 	public static String varIndexedSmartTrafficLight(String entityVar) {
 		switch(entityVar) {
+			case "entityId":
+				return "entityId_docvalues_string";
 			case "smartTrafficLightName":
 				return "smartTrafficLightName_docvalues_string";
 			case "routeIdNorth":
@@ -3535,12 +3416,14 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 			case "reportKeys":
 				return "reportKeys_docvalues_longs";
 			default:
-				return MapResult.varIndexedMapResult(entityVar);
+				return BaseModel.varIndexedBaseModel(entityVar);
 		}
 	}
 
 	public static String searchVarSmartTrafficLight(String searchVar) {
 		switch(searchVar) {
+			case "entityId_docvalues_string":
+				return "entityId";
 			case "smartTrafficLightName_docvalues_string":
 				return "smartTrafficLightName";
 			case "routeIdNorth_docvalues_string":
@@ -3594,21 +3477,21 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 			case "reportKeys_docvalues_longs":
 				return "reportKeys";
 			default:
-				return MapResult.searchVarMapResult(searchVar);
+				return BaseModel.searchVarBaseModel(searchVar);
 		}
 	}
 
 	public static String varSearchSmartTrafficLight(String entityVar) {
 		switch(entityVar) {
 			default:
-				return MapResult.varSearchMapResult(entityVar);
+				return BaseModel.varSearchBaseModel(entityVar);
 		}
 	}
 
 	public static String varSuggestedSmartTrafficLight(String entityVar) {
 		switch(entityVar) {
 			default:
-				return MapResult.varSuggestedMapResult(entityVar);
+				return BaseModel.varSuggestedBaseModel(entityVar);
 		}
 	}
 
@@ -3622,6 +3505,7 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 	public void storeSmartTrafficLight(SolrResponse.Doc doc) {
 		SmartTrafficLight oSmartTrafficLight = (SmartTrafficLight)this;
 
+		oSmartTrafficLight.setEntityId(Optional.ofNullable(doc.get("entityId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSmartTrafficLight.setSmartTrafficLightName(Optional.ofNullable(doc.get("smartTrafficLightName_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSmartTrafficLight.setRouteIdNorth(Optional.ofNullable(doc.get("routeIdNorth_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSmartTrafficLight.setRouteIdEast(Optional.ofNullable(doc.get("routeIdEast_docvalues_string")).map(v -> v.toString()).orElse(null));
@@ -3655,7 +3539,7 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 			oSmartTrafficLight.addReportKeys(v.toString());
 		});
 
-		super.storeMapResult(doc);
+		super.storeBaseModel(doc);
 	}
 
 	//////////////////
@@ -3667,6 +3551,8 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 		Object o = Optional.ofNullable(apiRequest).map(ApiRequest::getOriginal).orElse(null);
 		if(o != null && o instanceof SmartTrafficLight) {
 			SmartTrafficLight original = (SmartTrafficLight)o;
+			if(!Objects.equals(entityId, original.getEntityId()))
+				apiRequest.addVars("entityId");
 			if(!Objects.equals(smartTrafficLightName, original.getSmartTrafficLightName()))
 				apiRequest.addVars("smartTrafficLightName");
 			if(!Objects.equals(routeIdNorth, original.getRouteIdNorth()))
@@ -3719,7 +3605,7 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 				apiRequest.addVars("paramTotalIterNum");
 			if(!Objects.equals(reportKeys, original.getReportKeys()))
 				apiRequest.addVars("reportKeys");
-			super.apiRequestMapResult();
+			super.apiRequestBaseModel();
 		}
 	}
 
@@ -3730,6 +3616,7 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 	@Override public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(super.toString());
+		sb.append(Optional.ofNullable(entityId).map(v -> "entityId: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(smartTrafficLightName).map(v -> "smartTrafficLightName: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(routeIdNorth).map(v -> "routeIdNorth: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(routeIdEast).map(v -> "routeIdEast: \"" + v + "\"\n" ).orElse(""));
@@ -3760,6 +3647,7 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 	}
 
 	public static final String CLASS_SIMPLE_NAME = "SmartTrafficLight";
+	public static final String VAR_entityId = "entityId";
 	public static final String VAR_smartTrafficLightName = "smartTrafficLightName";
 	public static final String VAR_routeIdNorth = "routeIdNorth";
 	public static final String VAR_routeIdEast = "routeIdEast";
@@ -3797,7 +3685,7 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 		return SmartTrafficLight.varsQSmartTrafficLight(new ArrayList<String>());
 	}
 	public static List<String> varsQSmartTrafficLight(List<String> vars) {
-		MapResult.varsQMapResult(vars);
+		BaseModel.varsQBaseModel(vars);
 		return vars;
 	}
 
@@ -3805,6 +3693,7 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 		return SmartTrafficLight.varsFqSmartTrafficLight(new ArrayList<String>());
 	}
 	public static List<String> varsFqSmartTrafficLight(List<String> vars) {
+		vars.add(VAR_entityId);
 		vars.add(VAR_smartTrafficLightName);
 		vars.add(VAR_routeIdNorth);
 		vars.add(VAR_routeIdEast);
@@ -3831,7 +3720,7 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 		vars.add(VAR_paramItersPerPar);
 		vars.add(VAR_paramTotalIterNum);
 		vars.add(VAR_reportKeys);
-		MapResult.varsFqMapResult(vars);
+		BaseModel.varsFqBaseModel(vars);
 		return vars;
 	}
 
@@ -3859,10 +3748,11 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 		vars.add(VAR_paramRunTime);
 		vars.add(VAR_paramItersPerPar);
 		vars.add(VAR_paramTotalIterNum);
-		MapResult.varsRangeMapResult(vars);
+		BaseModel.varsRangeBaseModel(vars);
 		return vars;
 	}
 
+	public static final String DISPLAY_NAME_entityId = "entity ID";
 	public static final String DISPLAY_NAME_smartTrafficLightName = "smart traffic light name";
 	public static final String DISPLAY_NAME_routeIdNorth = "route ID North";
 	public static final String DISPLAY_NAME_routeIdEast = "route ID East";
@@ -3901,6 +3791,8 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 	}
 	public static String displayNameSmartTrafficLight(String var) {
 		switch(var) {
+		case VAR_entityId:
+			return DISPLAY_NAME_entityId;
 		case VAR_smartTrafficLightName:
 			return DISPLAY_NAME_smartTrafficLightName;
 		case VAR_routeIdNorth:
@@ -3966,12 +3858,14 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 		case VAR_additionalFilePaths:
 			return DISPLAY_NAME_additionalFilePaths;
 		default:
-			return MapResult.displayNameMapResult(var);
+			return BaseModel.displayNameBaseModel(var);
 		}
 	}
 
 	public static String descriptionSmartTrafficLight(String var) {
 		switch(var) {
+		case VAR_entityId:
+			return "A unique ID for this Smart Data Model";
 		case VAR_trafficFlowObservedIds:
 			return "The related TrafficFlowObserved entities";
 		case VAR_paramAvgVehiclePerMinFromWestToEast:
@@ -4021,12 +3915,14 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 		case VAR_additionalFilePaths:
 			return "The paths to all the additional SUMO config files";
 			default:
-				return MapResult.descriptionMapResult(var);
+				return BaseModel.descriptionBaseModel(var);
 		}
 	}
 
 	public static String classSimpleNameSmartTrafficLight(String var) {
 		switch(var) {
+		case VAR_entityId:
+			return "String";
 		case VAR_smartTrafficLightName:
 			return "String";
 		case VAR_routeIdNorth:
@@ -4092,27 +3988,27 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 		case VAR_additionalFilePaths:
 			return "List";
 			default:
-				return MapResult.classSimpleNameMapResult(var);
+				return BaseModel.classSimpleNameBaseModel(var);
 		}
 	}
 
 	public static Integer htmColumnSmartTrafficLight(String var) {
 		switch(var) {
 			default:
-				return MapResult.htmColumnMapResult(var);
+				return BaseModel.htmColumnBaseModel(var);
 		}
 	}
 
 	public static Integer htmRowSmartTrafficLight(String var) {
 		switch(var) {
+		case VAR_entityId:
+			return 5;
 		case VAR_smartTrafficLightName:
-			return 6;
+			return 5;
 		case VAR_routeIdNorth:
 			return 6;
 		case VAR_routeIdEast:
 			return 6;
-		case VAR_trafficFlowObservedIds:
-			return 5;
 		case VAR_paramAvgVehiclePerMinFromWestToEast:
 			return 7;
 		case VAR_paramAvgVehiclePerMinFromSouthToNorth:
@@ -4156,20 +4052,20 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 		case VAR_reportKeys:
 			return 16;
 			default:
-				return MapResult.htmRowMapResult(var);
+				return BaseModel.htmRowBaseModel(var);
 		}
 	}
 
 	public static Integer htmCellSmartTrafficLight(String var) {
 		switch(var) {
-		case VAR_smartTrafficLightName:
+		case VAR_entityId:
 			return 1;
+		case VAR_smartTrafficLightName:
+			return 2;
 		case VAR_routeIdNorth:
 			return 2;
 		case VAR_routeIdEast:
 			return 3;
-		case VAR_trafficFlowObservedIds:
-			return 1;
 		case VAR_paramAvgVehiclePerMinFromWestToEast:
 			return 1;
 		case VAR_paramAvgVehiclePerMinFromSouthToNorth:
@@ -4213,35 +4109,35 @@ public abstract class SmartTrafficLightGen<DEV> extends MapResult {
 		case VAR_reportKeys:
 			return 1;
 			default:
-				return MapResult.htmCellMapResult(var);
+				return BaseModel.htmCellBaseModel(var);
 		}
 	}
 
 	public static Integer lengthMinSmartTrafficLight(String var) {
 		switch(var) {
 			default:
-				return MapResult.lengthMinMapResult(var);
+				return BaseModel.lengthMinBaseModel(var);
 		}
 	}
 
 	public static Integer lengthMaxSmartTrafficLight(String var) {
 		switch(var) {
 			default:
-				return MapResult.lengthMaxMapResult(var);
+				return BaseModel.lengthMaxBaseModel(var);
 		}
 	}
 
 	public static Integer maxSmartTrafficLight(String var) {
 		switch(var) {
 			default:
-				return MapResult.maxMapResult(var);
+				return BaseModel.maxBaseModel(var);
 		}
 	}
 
 	public static Integer minSmartTrafficLight(String var) {
 		switch(var) {
 			default:
-				return MapResult.minMapResult(var);
+				return BaseModel.minBaseModel(var);
 		}
 	}
 }

@@ -88,13 +88,14 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	/**
 	 * {@inheritDoc}
 	 * DocValues: true
+	 * Relate: SmartTrafficLight.reportKeys
 	 * HtmRow: 3
 	 * HtmCell: 2
 	 * Facet: true
 	 * DisplayName: smart traffic light
 	 * Description: The smart traffic light for this report. 
 	 */
-	protected void _smartTrafficLightId(Wrap<String> w) {
+	protected void _smartTrafficLightKey(Wrap<Long> w) {
 	}
 
 	/**
@@ -102,10 +103,10 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 */
 	protected void _smartTrafficLightSearch(Promise<SearchList<SmartTrafficLight>> promise) {
 		SearchList<SmartTrafficLight> l = new SearchList<>();
-		if(smartTrafficLightId != null) {
+		if(smartTrafficLightKey != null) {
 			l.setC(SmartTrafficLight.class);
 			l.q("*:*");
-			l.fq(String.format("id:%s", smartTrafficLightId));
+			l.fq(String.format("pk_docvalues_long:%s", smartTrafficLightKey));
 			l.setStore(true);
 		}
 		promise.complete(l);

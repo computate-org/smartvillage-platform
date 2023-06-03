@@ -65,10 +65,15 @@ ZOOKEEPER_CONNECTION_TIMEOUT_MILLIS: 3000
 ZOOKEEPER_SESSION_TIMEOUT_MILLIS: 5000
 
 SOLR_URL: http://localhost:8983/solr/smartabyar-smartvillage
-SOLR_HOST_NAME: localhost
-SOLR_PORT: 8983
-SOLR_COLLECTION: smartabyar-smartvillage
+SOLR_HOST_NAME: solr-smartvillage.apps-crc.testing
+SOLR_PORT: 443
+SOLR_COLLECTION: smartvillage
+SOLR_SSL: true
+SOLR_HOST_NAME_COMPUTATE: solr-solr.apps-crc.testing
+SOLR_PORT_COMPUTATE: 443
 SOLR_COLLECTION_COMPUTATE: computate
+SOLR_SSL_COMPUTATE: true
+SOLR_URL_COMPUTATE: "https://solr-solr.apps-crc.testing/solr/computate"
 SOLR_WORKER_COMMIT_WITHIN_MILLIS: 10000
 
 EMAIL_HOST: 

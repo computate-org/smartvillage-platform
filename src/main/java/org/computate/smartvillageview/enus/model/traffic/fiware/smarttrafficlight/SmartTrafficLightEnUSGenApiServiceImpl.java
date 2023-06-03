@@ -202,7 +202,7 @@ public class SmartTrafficLightEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 					}
 					if(fls.size() == 1 && fls.stream().findFirst().orElse(null).equals("saves_docvalues_strings")) {
 						fieldNames.removeAll(Optional.ofNullable(json2.getJsonArray("saves_docvalues_strings")).orElse(new JsonArray()).stream().map(s -> s.toString()).collect(Collectors.toList()));
-						fieldNames.remove("_docvalues_long");
+						fieldNames.remove("pk_docvalues_long");
 						fieldNames.remove("created_docvalues_date");
 					}
 					else if(fls.size() >= 1) {
@@ -384,7 +384,7 @@ public class SmartTrafficLightEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 					));
 				} else {
 					try {
-						searchSmartTrafficLightList(siteRequest, true, false, true).onSuccess(listSmartTrafficLight -> {
+						searchSmartTrafficLightList(siteRequest, false, true, true).onSuccess(listSmartTrafficLight -> {
 							try {
 								if(listSmartTrafficLight.getResponse().getResponse().getNumFound() > 1
 										&& !Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SmartTrafficLight")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
@@ -402,6 +402,7 @@ public class SmartTrafficLightEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 									siteRequest.setApiRequest_(apiRequest);
 									if(apiRequest.getNumFound() == 1L)
 										apiRequest.setOriginal(listSmartTrafficLight.first());
+									apiRequest.setPk(Optional.ofNullable(listSmartTrafficLight.first()).map(o2 -> o2.getPk()).orElse(null));
 									eventBus.publish("websocketSmartTrafficLight", JsonObject.mapFrom(apiRequest).toString());
 
 									listPATCHSmartTrafficLight(apiRequest, listSmartTrafficLight).onSuccess(e -> {
@@ -519,12 +520,13 @@ public class SmartTrafficLightEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 							}
 							if(apiRequest.getNumFound() == 1L)
 								apiRequest.setOriginal(o);
+							apiRequest.setPk(Optional.ofNullable(listSmartTrafficLight.first()).map(o2 -> o2.getPk()).orElse(null));
 							eventBus.publish("websocketSmartTrafficLight", JsonObject.mapFrom(apiRequest).toString());
 							patchSmartTrafficLightFuture(o, false).onSuccess(o2 -> {
 								if(apiRequest != null) {
 									apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listSmartTrafficLight.getResponse().getResponse().getDocs().size());
 									if(apiRequest.getNumFound() == 1L)
-										o.apiRequestSmartTrafficLight();
+										o2.apiRequestSmartTrafficLight();
 									eventBus.publish("websocketSmartTrafficLight", JsonObject.mapFrom(apiRequest).toString());
 								}
 								eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(new JsonObject().encodePrettily()))));
@@ -558,17 +560,290 @@ public class SmartTrafficLightEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 
 		try {
 			ApiRequest apiRequest = siteRequest.getApiRequest_();
-			persistSmartTrafficLight(o, true).onSuccess(c -> {
-				indexSmartTrafficLight(o).onSuccess(e -> {
-					promise.complete(o);
+			Promise<SmartTrafficLight> promise1 = Promise.promise();
+			pgPool.withTransaction(sqlConnection -> {
+				siteRequest.setSqlConnection(sqlConnection);
+				sqlPATCHSmartTrafficLight(o, inheritPk).onSuccess(smartTrafficLight -> {
+					persistSmartTrafficLight(smartTrafficLight).onSuccess(c -> {
+						relateSmartTrafficLight(smartTrafficLight).onSuccess(d -> {
+							indexSmartTrafficLight(smartTrafficLight).onSuccess(e -> {
+								promise1.complete(smartTrafficLight);
+							}).onFailure(ex -> {
+								promise1.fail(ex);
+							});
+						}).onFailure(ex -> {
+							promise1.fail(ex);
+						});
+					}).onFailure(ex -> {
+						promise1.fail(ex);
+					});
 				}).onFailure(ex -> {
-					promise.fail(ex);
+					promise1.fail(ex);
 				});
+				return promise1.future();
+			}).onSuccess(a -> {
+				siteRequest.setSqlConnection(null);
+			}).onFailure(ex -> {
+				siteRequest.setSqlConnection(null);
+				promise.fail(ex);
+			}).compose(smartTrafficLight -> {
+				Promise<SmartTrafficLight> promise2 = Promise.promise();
+				refreshSmartTrafficLight(smartTrafficLight).onSuccess(a -> {
+					promise2.complete(smartTrafficLight);
+				}).onFailure(ex -> {
+					promise2.fail(ex);
+				});
+				return promise2.future();
+			}).onSuccess(smartTrafficLight -> {
+				promise.complete(smartTrafficLight);
 			}).onFailure(ex -> {
 				promise.fail(ex);
 			});
 		} catch(Exception ex) {
 			LOG.error(String.format("patchSmartTrafficLightFuture failed. "), ex);
+			promise.fail(ex);
+		}
+		return promise.future();
+	}
+
+	public Future<SmartTrafficLight> sqlPATCHSmartTrafficLight(SmartTrafficLight o, Boolean inheritPk) {
+		Promise<SmartTrafficLight> promise = Promise.promise();
+		try {
+			SiteRequestEnUS siteRequest = o.getSiteRequest_();
+			ApiRequest apiRequest = siteRequest.getApiRequest_();
+			List<Long> pks = Optional.ofNullable(apiRequest).map(r -> r.getPks()).orElse(new ArrayList<>());
+			List<String> classes = Optional.ofNullable(apiRequest).map(r -> r.getClasses()).orElse(new ArrayList<>());
+			SqlConnection sqlConnection = siteRequest.getSqlConnection();
+			Integer num = 1;
+			StringBuilder bSql = new StringBuilder("UPDATE SmartTrafficLight SET ");
+			List<Object> bParams = new ArrayList<Object>();
+			Long pk = o.getPk();
+			JsonObject jsonObject = siteRequest.getJsonObject();
+			Set<String> methodNames = jsonObject.fieldNames();
+			SmartTrafficLight o2 = new SmartTrafficLight();
+			o2.setSiteRequest_(siteRequest);
+			List<Future> futures1 = new ArrayList<>();
+			List<Future> futures2 = new ArrayList<>();
+
+			for(String entityVar : methodNames) {
+				switch(entityVar) {
+					case "setInheritPk":
+							o2.setInheritPk(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SmartTrafficLight.VAR_inheritPk + "=$" + num);
+							num++;
+							bParams.add(o2.sqlInheritPk());
+						break;
+					case "setArchived":
+							o2.setArchived(jsonObject.getBoolean(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SmartTrafficLight.VAR_archived + "=$" + num);
+							num++;
+							bParams.add(o2.sqlArchived());
+						break;
+					case "setDeleted":
+							o2.setDeleted(jsonObject.getBoolean(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SmartTrafficLight.VAR_deleted + "=$" + num);
+							num++;
+							bParams.add(o2.sqlDeleted());
+						break;
+					case "setEntityId":
+							o2.setEntityId(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SmartTrafficLight.VAR_entityId + "=$" + num);
+							num++;
+							bParams.add(o2.sqlEntityId());
+						break;
+					case "setSmartTrafficLightName":
+							o2.setSmartTrafficLightName(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SmartTrafficLight.VAR_smartTrafficLightName + "=$" + num);
+							num++;
+							bParams.add(o2.sqlSmartTrafficLightName());
+						break;
+					case "setRouteIdNorth":
+							o2.setRouteIdNorth(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SmartTrafficLight.VAR_routeIdNorth + "=$" + num);
+							num++;
+							bParams.add(o2.sqlRouteIdNorth());
+						break;
+					case "setRouteIdEast":
+							o2.setRouteIdEast(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SmartTrafficLight.VAR_routeIdEast + "=$" + num);
+							num++;
+							bParams.add(o2.sqlRouteIdEast());
+						break;
+					case "setParamVehicleDemandScalingFactor":
+							o2.setParamVehicleDemandScalingFactor(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SmartTrafficLight.VAR_paramVehicleDemandScalingFactor + "=$" + num);
+							num++;
+							bParams.add(o2.sqlParamVehicleDemandScalingFactor());
+						break;
+					case "setParamStepSize":
+							o2.setParamStepSize(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SmartTrafficLight.VAR_paramStepSize + "=$" + num);
+							num++;
+							bParams.add(o2.sqlParamStepSize());
+						break;
+					case "setParamRunTime":
+							o2.setParamRunTime(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SmartTrafficLight.VAR_paramRunTime + "=$" + num);
+							num++;
+							bParams.add(o2.sqlParamRunTime());
+						break;
+					case "setParamItersPerPar":
+							o2.setParamItersPerPar(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SmartTrafficLight.VAR_paramItersPerPar + "=$" + num);
+							num++;
+							bParams.add(o2.sqlParamItersPerPar());
+						break;
+					case "setParamTotalIterNum":
+							o2.setParamTotalIterNum(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SmartTrafficLight.VAR_paramTotalIterNum + "=$" + num);
+							num++;
+							bParams.add(o2.sqlParamTotalIterNum());
+						break;
+					case "setReportKeys":
+						JsonArray setReportKeysValues = Optional.ofNullable(jsonObject.getJsonArray(entityVar)).orElse(new JsonArray());
+						setReportKeysValues.stream().map(oVal -> oVal.toString()).forEach(val -> {
+							futures2.add(Future.future(promise2 -> {
+								search(siteRequest).query(SimulationReport.class, val, inheritPk).onSuccess(pk2 -> {
+									if(!pks.contains(pk2)) {
+										pks.add(pk2);
+										classes.add("SimulationReport");
+									}
+									sql(siteRequest).update(SimulationReport.class, pk2).set(SimulationReport.VAR_smartTrafficLightKey, SmartTrafficLight.class, pk).onSuccess(a -> {
+										promise2.complete();
+									}).onFailure(ex -> {
+										promise2.fail(ex);
+									});
+								}).onFailure(ex -> {
+									promise2.fail(ex);
+								});
+							}));
+						});
+						Optional.ofNullable(o.getReportKeys()).orElse(Arrays.asList()).stream().filter(oVal -> oVal != null && !setReportKeysValues.contains(oVal.toString())).forEach(pk2 -> {
+							if(!pks.contains(pk2)) {
+								pks.add(pk2);
+								classes.add("SimulationReport");
+							}
+							futures2.add(Future.future(promise2 -> {
+								sql(siteRequest).update(SimulationReport.class, pk2).setToNull(SimulationReport.VAR_smartTrafficLightKey, SmartTrafficLight.class, pk2).onSuccess(a -> {
+									promise2.complete();
+								}).onFailure(ex -> {
+									promise2.fail(ex);
+								});
+							}));
+						});
+						break;
+					case "addAllReportKeys":
+						JsonArray addAllReportKeysValues = Optional.ofNullable(jsonObject.getJsonArray(entityVar)).orElse(new JsonArray());
+						addAllReportKeysValues.stream().map(oVal -> oVal.toString()).forEach(val -> {
+							futures2.add(Future.future(promise2 -> {
+								search(siteRequest).query(SimulationReport.class, val, inheritPk).onSuccess(pk2 -> {
+									if(!pks.contains(pk2)) {
+										pks.add(pk2);
+										classes.add("SimulationReport");
+									}
+									sql(siteRequest).update(SimulationReport.class, pk2).set(SimulationReport.VAR_smartTrafficLightKey, SmartTrafficLight.class, pk).onSuccess(a -> {
+										promise2.complete();
+									}).onFailure(ex -> {
+										promise2.fail(ex);
+									});
+								}).onFailure(ex -> {
+									promise2.fail(ex);
+								});
+							}));
+						});
+						break;
+					case "addReportKeys":
+						Optional.ofNullable(jsonObject.getString(entityVar)).ifPresent(val -> {
+							futures2.add(Future.future(promise2 -> {
+								search(siteRequest).query(SimulationReport.class, val, inheritPk).onSuccess(pk2 -> {
+									if(!pks.contains(pk2)) {
+										pks.add(pk2);
+										classes.add("SimulationReport");
+									}
+									sql(siteRequest).update(SimulationReport.class, pk2).set(SimulationReport.VAR_smartTrafficLightKey, SmartTrafficLight.class, pk).onSuccess(a -> {
+										promise2.complete();
+									}).onFailure(ex -> {
+										promise2.fail(ex);
+									});
+								}).onFailure(ex -> {
+									promise2.fail(ex);
+								});
+							}));
+						});
+						break;
+					case "removeReportKeys":
+						Optional.ofNullable(jsonObject.getString(entityVar)).map(val -> Long.parseLong(val)).ifPresent(pk2 -> {
+							if(!pks.contains(pk2)) {
+								pks.add(pk2);
+								classes.add("SimulationReport");
+							}
+							futures2.add(Future.future(promise2 -> {
+								sql(siteRequest).update(SimulationReport.class, pk2).setToNull(SimulationReport.VAR_smartTrafficLightKey, SmartTrafficLight.class, pk2).onSuccess(a -> {
+									promise2.complete();
+								}).onFailure(ex -> {
+									promise2.fail(ex);
+								});
+							}));
+						});
+						break;
+				}
+			}
+			bSql.append(" WHERE pk=$" + num);
+			if(bParams.size() > 0) {
+				bParams.add(pk);
+				num++;
+				futures2.add(0, Future.future(a -> {
+					sqlConnection.preparedQuery(bSql.toString())
+							.execute(Tuple.tuple(bParams)
+							).onSuccess(b -> {
+						a.handle(Future.succeededFuture());
+					}).onFailure(ex -> {
+						RuntimeException ex2 = new RuntimeException("value SmartTrafficLight failed", ex);
+						LOG.error(String.format("relateSmartTrafficLight failed. "), ex2);
+						a.handle(Future.failedFuture(ex2));
+					});
+				}));
+			}
+			CompositeFuture.all(futures1).onSuccess(a -> {
+				CompositeFuture.all(futures2).onSuccess(b -> {
+					SmartTrafficLight o3 = new SmartTrafficLight();
+					o3.setSiteRequest_(o.getSiteRequest_());
+					o3.setPk(pk);
+					promise.complete(o3);
+				}).onFailure(ex -> {
+					LOG.error(String.format("sqlPATCHSmartTrafficLight failed. "), ex);
+					promise.fail(ex);
+				});
+			}).onFailure(ex -> {
+				LOG.error(String.format("sqlPATCHSmartTrafficLight failed. "), ex);
+				promise.fail(ex);
+			});
+		} catch(Exception ex) {
+			LOG.error(String.format("sqlPATCHSmartTrafficLight failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
@@ -648,6 +923,7 @@ public class SmartTrafficLightEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 						eventBus.request("smartabyar-smartvillage-enUS-SmartTrafficLight", json, new DeliveryOptions().addHeader("action", "postSmartTrafficLightFuture")).onSuccess(a -> {
 							JsonObject responseMessage = (JsonObject)a.body();
 							JsonObject responseBody = new JsonObject(Buffer.buffer(JsonUtil.BASE64_DECODER.decode(responseMessage.getString("payload"))));
+							apiRequest.setPk(Long.parseLong(responseBody.getString("pk")));
 							eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(responseBody.encodePrettily()))));
 							LOG.debug(String.format("postSmartTrafficLight succeeded. "));
 						}).onFailure(ex -> {
@@ -734,21 +1010,292 @@ public class SmartTrafficLightEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 		Promise<SmartTrafficLight> promise = Promise.promise();
 
 		try {
-			createSmartTrafficLight(siteRequest).onSuccess(smartTrafficLight -> {
-				persistSmartTrafficLight(smartTrafficLight, false).onSuccess(c -> {
-					indexSmartTrafficLight(smartTrafficLight).onSuccess(e -> {
-						promise.complete(smartTrafficLight);
+			pgPool.withTransaction(sqlConnection -> {
+				Promise<SmartTrafficLight> promise1 = Promise.promise();
+				siteRequest.setSqlConnection(sqlConnection);
+				createSmartTrafficLight(siteRequest).onSuccess(smartTrafficLight -> {
+					sqlPOSTSmartTrafficLight(smartTrafficLight, inheritPk).onSuccess(b -> {
+						persistSmartTrafficLight(smartTrafficLight).onSuccess(c -> {
+							relateSmartTrafficLight(smartTrafficLight).onSuccess(d -> {
+								indexSmartTrafficLight(smartTrafficLight).onSuccess(e -> {
+									promise1.complete(smartTrafficLight);
+								}).onFailure(ex -> {
+									promise1.fail(ex);
+								});
+							}).onFailure(ex -> {
+								promise1.fail(ex);
+							});
+						}).onFailure(ex -> {
+							promise1.fail(ex);
+						});
 					}).onFailure(ex -> {
-						promise.fail(ex);
+						promise1.fail(ex);
 					});
 				}).onFailure(ex -> {
-					promise.fail(ex);
+					promise1.fail(ex);
 				});
+				return promise1.future();
+			}).onSuccess(a -> {
+				siteRequest.setSqlConnection(null);
+			}).onFailure(ex -> {
+				siteRequest.setSqlConnection(null);
+				promise.fail(ex);
+			}).compose(smartTrafficLight -> {
+				Promise<SmartTrafficLight> promise2 = Promise.promise();
+				refreshSmartTrafficLight(smartTrafficLight).onSuccess(a -> {
+					try {
+						ApiRequest apiRequest = siteRequest.getApiRequest_();
+						if(apiRequest != null) {
+							apiRequest.setNumPATCH(apiRequest.getNumPATCH() + 1);
+							smartTrafficLight.apiRequestSmartTrafficLight();
+							eventBus.publish("websocketSmartTrafficLight", JsonObject.mapFrom(apiRequest).toString());
+						}
+						promise2.complete(smartTrafficLight);
+					} catch(Exception ex) {
+						LOG.error(String.format("postSmartTrafficLightFuture failed. "), ex);
+						promise.fail(ex);
+					}
+				}).onFailure(ex -> {
+					promise2.fail(ex);
+				});
+				return promise2.future();
+			}).onSuccess(smartTrafficLight -> {
+				promise.complete(smartTrafficLight);
 			}).onFailure(ex -> {
 				promise.fail(ex);
 			});
 		} catch(Exception ex) {
 			LOG.error(String.format("postSmartTrafficLightFuture failed. "), ex);
+			promise.fail(ex);
+		}
+		return promise.future();
+	}
+
+	public Future<Void> sqlPOSTSmartTrafficLight(SmartTrafficLight o, Boolean inheritPk) {
+		Promise<Void> promise = Promise.promise();
+		try {
+			SiteRequestEnUS siteRequest = o.getSiteRequest_();
+			ApiRequest apiRequest = siteRequest.getApiRequest_();
+			List<Long> pks = Optional.ofNullable(apiRequest).map(r -> r.getPks()).orElse(new ArrayList<>());
+			List<String> classes = Optional.ofNullable(apiRequest).map(r -> r.getClasses()).orElse(new ArrayList<>());
+			SqlConnection sqlConnection = siteRequest.getSqlConnection();
+			Integer num = 1;
+			StringBuilder bSql = new StringBuilder("UPDATE SmartTrafficLight SET ");
+			List<Object> bParams = new ArrayList<Object>();
+			Long pk = o.getPk();
+			JsonObject jsonObject = siteRequest.getJsonObject();
+			SmartTrafficLight o2 = new SmartTrafficLight();
+			o2.setSiteRequest_(siteRequest);
+			List<Future> futures1 = new ArrayList<>();
+			List<Future> futures2 = new ArrayList<>();
+
+			if(siteRequest.getSessionId() != null) {
+				if(bParams.size() > 0) {
+					bSql.append(", ");
+				}
+				bSql.append("sessionId=$" + num);
+				num++;
+				bParams.add(siteRequest.getSessionId());
+			}
+			if(siteRequest.getUserKey() != null) {
+				if(bParams.size() > 0) {
+					bSql.append(", ");
+				}
+				bSql.append("userKey=$" + num);
+				num++;
+				bParams.add(siteRequest.getUserKey());
+			}
+
+			if(jsonObject != null) {
+				Set<String> entityVars = jsonObject.fieldNames();
+				for(String entityVar : entityVars) {
+					switch(entityVar) {
+					case SmartTrafficLight.VAR_inheritPk:
+						o2.setInheritPk(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SmartTrafficLight.VAR_inheritPk + "=$" + num);
+						num++;
+						bParams.add(o2.sqlInheritPk());
+						break;
+					case SmartTrafficLight.VAR_created:
+						o2.setCreated(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SmartTrafficLight.VAR_created + "=$" + num);
+						num++;
+						bParams.add(o2.sqlCreated());
+						break;
+					case SmartTrafficLight.VAR_archived:
+						o2.setArchived(jsonObject.getBoolean(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SmartTrafficLight.VAR_archived + "=$" + num);
+						num++;
+						bParams.add(o2.sqlArchived());
+						break;
+					case SmartTrafficLight.VAR_deleted:
+						o2.setDeleted(jsonObject.getBoolean(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SmartTrafficLight.VAR_deleted + "=$" + num);
+						num++;
+						bParams.add(o2.sqlDeleted());
+						break;
+					case SmartTrafficLight.VAR_sessionId:
+						o2.setSessionId(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SmartTrafficLight.VAR_sessionId + "=$" + num);
+						num++;
+						bParams.add(o2.sqlSessionId());
+						break;
+					case SmartTrafficLight.VAR_userKey:
+						o2.setUserKey(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SmartTrafficLight.VAR_userKey + "=$" + num);
+						num++;
+						bParams.add(o2.sqlUserKey());
+						break;
+					case SmartTrafficLight.VAR_entityId:
+						o2.setEntityId(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SmartTrafficLight.VAR_entityId + "=$" + num);
+						num++;
+						bParams.add(o2.sqlEntityId());
+						break;
+					case SmartTrafficLight.VAR_smartTrafficLightName:
+						o2.setSmartTrafficLightName(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SmartTrafficLight.VAR_smartTrafficLightName + "=$" + num);
+						num++;
+						bParams.add(o2.sqlSmartTrafficLightName());
+						break;
+					case SmartTrafficLight.VAR_routeIdNorth:
+						o2.setRouteIdNorth(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SmartTrafficLight.VAR_routeIdNorth + "=$" + num);
+						num++;
+						bParams.add(o2.sqlRouteIdNorth());
+						break;
+					case SmartTrafficLight.VAR_routeIdEast:
+						o2.setRouteIdEast(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SmartTrafficLight.VAR_routeIdEast + "=$" + num);
+						num++;
+						bParams.add(o2.sqlRouteIdEast());
+						break;
+					case SmartTrafficLight.VAR_paramVehicleDemandScalingFactor:
+						o2.setParamVehicleDemandScalingFactor(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SmartTrafficLight.VAR_paramVehicleDemandScalingFactor + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamVehicleDemandScalingFactor());
+						break;
+					case SmartTrafficLight.VAR_paramStepSize:
+						o2.setParamStepSize(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SmartTrafficLight.VAR_paramStepSize + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamStepSize());
+						break;
+					case SmartTrafficLight.VAR_paramRunTime:
+						o2.setParamRunTime(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SmartTrafficLight.VAR_paramRunTime + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamRunTime());
+						break;
+					case SmartTrafficLight.VAR_paramItersPerPar:
+						o2.setParamItersPerPar(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SmartTrafficLight.VAR_paramItersPerPar + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamItersPerPar());
+						break;
+					case SmartTrafficLight.VAR_paramTotalIterNum:
+						o2.setParamTotalIterNum(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SmartTrafficLight.VAR_paramTotalIterNum + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamTotalIterNum());
+						break;
+					case SmartTrafficLight.VAR_reportKeys:
+						Optional.ofNullable(jsonObject.getJsonArray(entityVar)).orElse(new JsonArray()).stream().map(oVal -> oVal.toString()).forEach(val -> {
+							futures2.add(Future.future(promise2 -> {
+								search(siteRequest).query(SimulationReport.class, val, inheritPk).onSuccess(pk2 -> {
+									if(!pks.contains(pk2)) {
+										pks.add(pk2);
+										classes.add("SimulationReport");
+									}
+									sql(siteRequest).update(SimulationReport.class, pk2).set(SimulationReport.VAR_smartTrafficLightKey, SmartTrafficLight.class, pk).onSuccess(a -> {
+										promise2.complete();
+									}).onFailure(ex -> {
+										promise2.fail(ex);
+									});
+								}).onFailure(ex -> {
+									promise2.fail(ex);
+								});
+							}));
+						});
+						break;
+					}
+				}
+			}
+			bSql.append(" WHERE pk=$" + num);
+			if(bParams.size() > 0) {
+			bParams.add(pk);
+			num++;
+				futures2.add(0, Future.future(a -> {
+					sqlConnection.preparedQuery(bSql.toString())
+							.execute(Tuple.tuple(bParams)
+							).onSuccess(b -> {
+						a.handle(Future.succeededFuture());
+					}).onFailure(ex -> {
+						RuntimeException ex2 = new RuntimeException("value SmartTrafficLight failed", ex);
+						LOG.error(String.format("relateSmartTrafficLight failed. "), ex2);
+						a.handle(Future.failedFuture(ex2));
+					});
+				}));
+			}
+			CompositeFuture.all(futures1).onSuccess(a -> {
+				CompositeFuture.all(futures2).onSuccess(b -> {
+					promise.complete();
+				}).onFailure(ex -> {
+					LOG.error(String.format("sqlPOSTSmartTrafficLight failed. "), ex);
+					promise.fail(ex);
+				});
+			}).onFailure(ex -> {
+				LOG.error(String.format("sqlPOSTSmartTrafficLight failed. "), ex);
+				promise.fail(ex);
+			});
+		} catch(Exception ex) {
+			LOG.error(String.format("sqlPOSTSmartTrafficLight failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
@@ -921,8 +1468,7 @@ public class SmartTrafficLightEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 				apiRequest.setNumPATCH(0L);
 				apiRequest.initDeepApiRequest(siteRequest);
 				siteRequest.setApiRequest_(apiRequest);
-				body.put("inheritPk", body.getValue("id"));
-				body.put("inheritPk", body.getValue("id"));
+				body.put("inheritPk", body.getValue("pk"));
 				if(Optional.ofNullable(serviceRequest.getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getJsonArray("var")).orElse(new JsonArray()).stream().filter(s -> "refresh:false".equals(s)).count() > 0L) {
 					siteRequest.getRequestVars().put( "refresh", "false" );
 				}
@@ -933,7 +1479,7 @@ public class SmartTrafficLightEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 				searchList.setC(SmartTrafficLight.class);
 				searchList.fq("deleted_docvalues_boolean:false");
 				searchList.fq("archived_docvalues_boolean:false");
-				searchList.fq("inheritPk_docvalues_string:" + SearchTool.escapeQueryChars(body.getString(SmartTrafficLight.VAR_id)));
+				searchList.fq("inheritPk_docvalues_string:" + SearchTool.escapeQueryChars(body.getString(SmartTrafficLight.VAR_pk)));
 				searchList.promiseDeepForClass(siteRequest).onSuccess(a -> {
 					try {
 						if(searchList.size() >= 1) {
@@ -968,20 +1514,20 @@ public class SmartTrafficLightEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 								} else {
 									o2.persistForClass(f, bodyVal);
 									o2.relateForClass(f, bodyVal);
-									if(!StringUtils.containsAny(f, "id", "created", "setCreated") && !Objects.equals(o.obtainForClass(f), o2.obtainForClass(f)))
+									if(!StringUtils.containsAny(f, "pk", "created", "setCreated") && !Objects.equals(o.obtainForClass(f), o2.obtainForClass(f)))
 										body2.put("set" + StringUtils.capitalize(f), bodyVal);
 								}
 							}
 							for(String f : Optional.ofNullable(o.getSaves()).orElse(new ArrayList<>())) {
 								if(!body.fieldNames().contains(f)) {
-									if(!StringUtils.containsAny(f, "id", "created", "setCreated") && !Objects.equals(o.obtainForClass(f), o2.obtainForClass(f)))
+									if(!StringUtils.containsAny(f, "pk", "created", "setCreated") && !Objects.equals(o.obtainForClass(f), o2.obtainForClass(f)))
 										body2.putNull("set" + StringUtils.capitalize(f));
 								}
 							}
 							if(body2.size() > 0) {
 								siteRequest.setJsonObject(body2);
-								patchSmartTrafficLightFuture(o2, true).onSuccess(b -> {
-									LOG.debug("Import SmartTrafficLight {} succeeded, modified SmartTrafficLight. ", body.getValue(SmartTrafficLight.VAR_id));
+								patchSmartTrafficLightFuture(o, true).onSuccess(b -> {
+									LOG.debug("Import SmartTrafficLight {} succeeded, modified SmartTrafficLight. ", body.getValue(SmartTrafficLight.VAR_pk));
 									eventHandler.handle(Future.succeededFuture());
 								}).onFailure(ex -> {
 									LOG.error(String.format("putimportSmartTrafficLightFuture failed. "), ex);
@@ -992,7 +1538,7 @@ public class SmartTrafficLightEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 							}
 						} else {
 							postSmartTrafficLightFuture(siteRequest, true).onSuccess(b -> {
-								LOG.debug("Import SmartTrafficLight {} succeeded, created new SmartTrafficLight. ", body.getValue(SmartTrafficLight.VAR_id));
+								LOG.debug("Import SmartTrafficLight {} succeeded, created new SmartTrafficLight. ", body.getValue(SmartTrafficLight.VAR_pk));
 								eventHandler.handle(Future.succeededFuture());
 							}).onFailure(ex -> {
 								LOG.error(String.format("putimportSmartTrafficLightFuture failed. "), ex);
@@ -1146,6 +1692,8 @@ public class SmartTrafficLightEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 			MultiMap requestHeaders = MultiMap.caseInsensitiveMultiMap();
 			siteRequest.setRequestHeaders(requestHeaders);
 
+			if(listSmartTrafficLight.size() == 1)
+				siteRequest.setRequestPk(listSmartTrafficLight.get(0).getPk());
 			page.setSearchListSmartTrafficLight_(listSmartTrafficLight);
 			page.setSiteRequest_(siteRequest);
 			page.promiseDeepSmartTrafficLightPage(siteRequest).onSuccess(a -> {
@@ -1177,9 +1725,25 @@ public class SmartTrafficLightEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 	public Future<SmartTrafficLight> createSmartTrafficLight(SiteRequestEnUS siteRequest) {
 		Promise<SmartTrafficLight> promise = Promise.promise();
 		try {
-			SmartTrafficLight o = new SmartTrafficLight();
-			o.setSiteRequest_(siteRequest);
-			promise.complete(o);
+			SqlConnection sqlConnection = siteRequest.getSqlConnection();
+			String userId = siteRequest.getUserId();
+			Long userKey = siteRequest.getUserKey();
+			ZonedDateTime created = Optional.ofNullable(siteRequest.getJsonObject()).map(j -> j.getString("created")).map(s -> ZonedDateTime.parse(s, ComputateZonedDateTimeSerializer.ZONED_DATE_TIME_FORMATTER.withZone(ZoneId.of(config.getString(ConfigKeys.SITE_ZONE))))).orElse(ZonedDateTime.now(ZoneId.of(config.getString(ConfigKeys.SITE_ZONE))));
+
+			sqlConnection.preparedQuery("INSERT INTO SmartTrafficLight(created, userKey) VALUES($1, $2) RETURNING pk")
+					.collecting(Collectors.toList())
+					.execute(Tuple.of(created.toOffsetDateTime(), userKey)).onSuccess(result -> {
+				Row createLine = result.value().stream().findFirst().orElseGet(() -> null);
+				Long pk = createLine.getLong(0);
+				SmartTrafficLight o = new SmartTrafficLight();
+				o.setPk(pk);
+				o.setSiteRequest_(siteRequest);
+				promise.complete(o);
+			}).onFailure(ex -> {
+				RuntimeException ex2 = new RuntimeException(ex);
+				LOG.error("createSmartTrafficLight failed. ", ex2);
+				promise.fail(ex2);
+			});
 		} catch(Exception ex) {
 			LOG.error(String.format("createSmartTrafficLight failed. "), ex);
 			promise.fail(ex);
@@ -1285,7 +1849,7 @@ public class SmartTrafficLightEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 
 			String id = serviceRequest.getParams().getJsonObject("path").getString("id");
 			if(id != null && NumberUtils.isCreatable(id)) {
-				searchList.fq("(_docvalues_long:" + SearchTool.escapeQueryChars(id) + " OR objectId_docvalues_string:" + SearchTool.escapeQueryChars(id) + ")");
+				searchList.fq("(pk_docvalues_long:" + SearchTool.escapeQueryChars(id) + " OR objectId_docvalues_string:" + SearchTool.escapeQueryChars(id) + ")");
 			} else if(id != null) {
 				searchList.fq("objectId_docvalues_string:" + SearchTool.escapeQueryChars(id));
 			}
@@ -1483,37 +2047,75 @@ public class SmartTrafficLightEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 	public void searchSmartTrafficLight2(SiteRequestEnUS siteRequest, Boolean populate, Boolean store, Boolean modify, SearchList<SmartTrafficLight> searchList) {
 	}
 
-	public Future<Void> persistSmartTrafficLight(SmartTrafficLight o, Boolean patch) {
+	public Future<Void> persistSmartTrafficLight(SmartTrafficLight o) {
 		Promise<Void> promise = Promise.promise();
 		try {
 			SiteRequestEnUS siteRequest = o.getSiteRequest_();
+			SqlConnection sqlConnection = siteRequest.getSqlConnection();
+			Long pk = o.getPk();
+			sqlConnection.preparedQuery("SELECT * FROM SmartTrafficLight WHERE pk=$1")
+					.collecting(Collectors.toList())
+					.execute(Tuple.of(pk)
+					).onSuccess(result -> {
 				try {
-					JsonObject jsonObject = siteRequest.getJsonObject();
-					jsonObject.forEach(definition -> {
-							String columnName;
-							Object columnValue;
-						if(patch && StringUtils.startsWith(definition.getKey(), "set")) {
-							columnName = StringUtils.uncapitalize(StringUtils.substringAfter(definition.getKey(), "set"));
-							columnValue = definition.getValue();
-						} else {
-							columnName = definition.getKey();
-							columnValue = definition.getValue();
-						}
-						if(!"".equals(columnName)) {
-							try {
-								o.persistForClass(columnName, columnValue);
-							} catch(Exception e) {
-								LOG.error(String.format("persistSmartTrafficLight failed. "), e);
+					for(Row definition : result.value()) {
+						for(Integer i = 0; i < definition.size(); i++) {
+							String columnName = definition.getColumnName(i);
+							Object columnValue = definition.getValue(i);
+							if(!"pk".equals(columnName)) {
+								try {
+									o.persistForClass(columnName, columnValue);
+								} catch(Exception e) {
+									LOG.error(String.format("persistSmartTrafficLight failed. "), e);
+								}
 							}
 						}
-					});
+					}
 					promise.complete();
 				} catch(Exception ex) {
 					LOG.error(String.format("persistSmartTrafficLight failed. "), ex);
 					promise.fail(ex);
 				}
+			}).onFailure(ex -> {
+				RuntimeException ex2 = new RuntimeException(ex);
+				LOG.error(String.format("persistSmartTrafficLight failed. "), ex2);
+				promise.fail(ex2);
+			});
 		} catch(Exception ex) {
 			LOG.error(String.format("persistSmartTrafficLight failed. "), ex);
+			promise.fail(ex);
+		}
+		return promise.future();
+	}
+
+	public Future<Void> relateSmartTrafficLight(SmartTrafficLight o) {
+		Promise<Void> promise = Promise.promise();
+		try {
+			SiteRequestEnUS siteRequest = o.getSiteRequest_();
+			SqlConnection sqlConnection = siteRequest.getSqlConnection();
+			Long pk = o.getPk();
+			sqlConnection.preparedQuery("SELECT pk as pk2, 'reportKeys' from SimulationReport where smartTrafficLightKey=$1")
+					.collecting(Collectors.toList())
+					.execute(Tuple.of(pk)
+					).onSuccess(result -> {
+				try {
+					if(result != null) {
+						for(Row definition : result.value()) {
+							o.relateForClass(definition.getString(1), definition.getLong(0));
+						}
+					}
+					promise.complete();
+				} catch(Exception ex) {
+					LOG.error(String.format("relateSmartTrafficLight failed. "), ex);
+					promise.fail(ex);
+				}
+			}).onFailure(ex -> {
+				RuntimeException ex2 = new RuntimeException(ex);
+				LOG.error(String.format("relateSmartTrafficLight failed. "), ex2);
+				promise.fail(ex2);
+			});
+		} catch(Exception ex) {
+			LOG.error(String.format("relateSmartTrafficLight failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
@@ -1561,5 +2163,101 @@ public class SmartTrafficLightEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 
 	public String searchVar(String varIndexed) {
 		return SmartTrafficLight.searchVarSmartTrafficLight(varIndexed);
+	}
+
+	public Future<Void> refreshSmartTrafficLight(SmartTrafficLight o) {
+		Promise<Void> promise = Promise.promise();
+		SiteRequestEnUS siteRequest = o.getSiteRequest_();
+		try {
+			ApiRequest apiRequest = siteRequest.getApiRequest_();
+			List<Long> pks = Optional.ofNullable(apiRequest).map(r -> r.getPks()).orElse(new ArrayList<>());
+			List<String> classes = Optional.ofNullable(apiRequest).map(r -> r.getClasses()).orElse(new ArrayList<>());
+			Boolean refresh = !"false".equals(siteRequest.getRequestVars().get("refresh"));
+			if(refresh && !Optional.ofNullable(siteRequest.getJsonObject()).map(JsonObject::isEmpty).orElse(true)) {
+				List<Future> futures = new ArrayList<>();
+
+				for(int i=0; i < pks.size(); i++) {
+					Long pk2 = pks.get(i);
+					String classSimpleName2 = classes.get(i);
+
+					if("SimulationReport".equals(classSimpleName2) && pk2 != null) {
+						SearchList<SimulationReport> searchList2 = new SearchList<SimulationReport>();
+						searchList2.setStore(true);
+						searchList2.q("*:*");
+						searchList2.setC(SimulationReport.class);
+						searchList2.fq("pk_docvalues_long:" + pk2);
+						searchList2.rows(1L);
+						futures.add(Future.future(promise2 -> {
+							searchList2.promiseDeepSearchList(siteRequest).onSuccess(b -> {
+								SimulationReport o2 = searchList2.getList().stream().findFirst().orElse(null);
+								if(o2 != null) {
+									JsonObject params = new JsonObject();
+									params.put("body", new JsonObject());
+									params.put("cookie", new JsonObject());
+									params.put("path", new JsonObject());
+									params.put("query", new JsonObject().put("q", "*:*").put("fq", new JsonArray().add("pk:" + pk2)).put("var", new JsonArray().add("refresh:false")));
+									JsonObject context = new JsonObject().put("params", params).put("user", siteRequest.getUserPrincipal());
+									JsonObject json = new JsonObject().put("context", context);
+									eventBus.request("smartabyar-smartvillage-enUS-SimulationReport", json, new DeliveryOptions().addHeader("action", "patchSimulationReportFuture")).onSuccess(c -> {
+										JsonObject responseMessage = (JsonObject)c.body();
+										Integer statusCode = responseMessage.getInteger("statusCode");
+										if(statusCode.equals(200))
+											promise2.complete();
+										else
+											promise2.fail(new RuntimeException(responseMessage.getString("statusMessage")));
+									}).onFailure(ex -> {
+										promise2.fail(ex);
+									});
+								}
+							}).onFailure(ex -> {
+								promise2.fail(ex);
+							});
+						}));
+					}
+				}
+
+				CompositeFuture.all(futures).onSuccess(b -> {
+					JsonObject params = new JsonObject();
+					params.put("body", new JsonObject());
+					params.put("cookie", new JsonObject());
+					params.put("header", new JsonObject());
+					params.put("form", new JsonObject());
+					params.put("path", new JsonObject());
+					JsonObject query = new JsonObject();
+					Boolean softCommit = Optional.ofNullable(siteRequest.getServiceRequest().getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getBoolean("softCommit")).orElse(null);
+					Integer commitWithin = Optional.ofNullable(siteRequest.getServiceRequest().getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getInteger("commitWithin")).orElse(null);
+					if(softCommit == null && commitWithin == null)
+						softCommit = true;
+					if(softCommit != null)
+						query.put("softCommit", softCommit);
+					if(commitWithin != null)
+						query.put("commitWithin", commitWithin);
+					query.put("q", "*:*").put("fq", new JsonArray().add("pk:" + o.getPk())).put("var", new JsonArray().add("refresh:false"));
+					params.put("query", query);
+					JsonObject context = new JsonObject().put("params", params).put("user", siteRequest.getUserPrincipal());
+					JsonObject json = new JsonObject().put("context", context);
+					eventBus.request("smartabyar-smartvillage-enUS-SmartTrafficLight", json, new DeliveryOptions().addHeader("action", "patchSmartTrafficLightFuture")).onSuccess(c -> {
+						JsonObject responseMessage = (JsonObject)c.body();
+						Integer statusCode = responseMessage.getInteger("statusCode");
+						if(statusCode.equals(200))
+							promise.complete();
+						else
+							promise.fail(new RuntimeException(responseMessage.getString("statusMessage")));
+					}).onFailure(ex -> {
+						LOG.error("Refresh relations failed. ", ex);
+						promise.fail(ex);
+					});
+				}).onFailure(ex -> {
+					LOG.error("Refresh relations failed. ", ex);
+					promise.fail(ex);
+				});
+			} else {
+				promise.complete();
+			}
+		} catch(Exception ex) {
+			LOG.error(String.format("refreshSmartTrafficLight failed. "), ex);
+			promise.fail(ex);
+		}
+		return promise.future();
 	}
 }

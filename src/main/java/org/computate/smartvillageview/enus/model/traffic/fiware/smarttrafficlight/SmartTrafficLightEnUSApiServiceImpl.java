@@ -29,7 +29,7 @@ public class SmartTrafficLightEnUSApiServiceImpl extends SmartTrafficLightEnUSGe
 	}
 
 	@Override
-	public Future<Void> persistSmartTrafficLight(SmartTrafficLight o, Boolean inheritPk) {
+	public Future<Void> persistSmartTrafficLight(SmartTrafficLight o) {
 		SiteRequestEnUS siteRequest = o.getSiteRequest_();
 		ApiRequest apiRequest = siteRequest.getApiRequest_();
 		List<Long> pks = Optional.ofNullable(apiRequest).map(r -> r.getPks()).orElse(new ArrayList<>());
@@ -38,6 +38,6 @@ public class SmartTrafficLightEnUSApiServiceImpl extends SmartTrafficLightEnUSGe
 			pks.add(key);
 			classes.add(SimulationReport.CLASS_SIMPLE_NAME);
 		}
-		return super.persistSmartTrafficLight(o, inheritPk);
+		return super.persistSmartTrafficLight(o);
 	}
 }

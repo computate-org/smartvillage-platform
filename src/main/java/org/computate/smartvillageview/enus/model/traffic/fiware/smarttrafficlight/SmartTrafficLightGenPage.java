@@ -1,7 +1,7 @@
 package org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight;
 
 import org.computate.smartvillageview.enus.page.PageLayout;
-import org.computate.smartvillageview.enus.result.map.MapResultPage;
+import org.computate.smartvillageview.enus.model.base.BaseModelPage;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.smartvillageview.enus.model.user.SiteUser;
 import java.io.IOException;
@@ -45,7 +45,7 @@ import java.time.ZoneId;
 /**
  * Translate: false
  **/
-public class SmartTrafficLightGenPage extends SmartTrafficLightGenPageGen<MapResultPage> {
+public class SmartTrafficLightGenPage extends SmartTrafficLightGenPageGen<BaseModelPage> {
 
 	/**
 	 * {@inheritDoc}
@@ -439,6 +439,11 @@ public class SmartTrafficLightGenPage extends SmartTrafficLightGenPageGen<MapRes
 	protected void _smartTrafficLight_(Wrap<SmartTrafficLight> w) {
 		if(smartTrafficLightCount == 1)
 			w.o(searchListSmartTrafficLight_.get(0));
+	}
+
+	protected void _pk(Wrap<Long> w) {
+		if(smartTrafficLightCount == 1)
+			w.o(smartTrafficLight_.getPk());
 	}
 
 	protected void _id(Wrap<String> w) {

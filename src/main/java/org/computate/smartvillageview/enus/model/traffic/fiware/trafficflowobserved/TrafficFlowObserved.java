@@ -43,6 +43,19 @@ import io.vertx.core.json.JsonObject;
 public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 
 	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * DisplayName: entity ID
+	 * Description: A unique ID for this Smart Data Model
+	 * HtmRow: 5
+	 * HtmCell: 1
+	 * Facet: true
+	 */
+	protected void _entityId(Wrap<String> w) {
+	}
+
+	/**
 	 * Ignore: true
 	 */
 	protected void _smartTrafficLightSearch(Promise<SearchList<SmartTrafficLight>> promise) {
@@ -70,7 +83,7 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 	 * DisplayName: address
 	 * Description: The mailing address
 	 * HtmRow: 5
-	 * HtmCell: 1
+	 * HtmCell: 2
 	 * Facet: true
 	 */
 	protected void _address(Wrap<JsonObject> w) {
@@ -83,7 +96,7 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 	 * DisplayName: alternate name
 	 * Description: An alternative name for this item
 	 * HtmRow: 5
-	 * HtmCell: 2
+	 * HtmCell: 3
 	 * Facet: true
 	 */
 	protected void _alternateName(Wrap<String> w) {
@@ -95,8 +108,8 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 	 * Persist: true
 	 * DisplayName: area served
 	 * Description: The geographic area where a service or offered item is provided
-	 * HtmRow: 5
-	 * HtmCell: 3
+	 * HtmRow: 6
+	 * HtmCell: 1
 	 * Facet: true
 	 */
 	protected void _areaServed(Wrap<String> w) {
@@ -109,7 +122,7 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 	 * DisplayName: average gap distance
 	 * Description: Average gap distance between consecutive vehicles
 	 * HtmRow: 6
-	 * HtmCell: 1
+	 * HtmCell: 2
 	 * Facet: true
 	 */
 	protected void _averageGapDistance(Wrap<BigDecimal> w) {
@@ -122,7 +135,7 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 	 * DisplayName: average headway time
 	 * Description: Average headway time. Headway time is the time ellapsed between two consecutive vehicles
 	 * HtmRow: 6
-	 * HtmCell: 2
+	 * HtmCell: 3
 	 * Facet: true
 	 */
 	protected void _averageHeadwayTime(Wrap<BigDecimal> w) {
@@ -134,8 +147,8 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 	 * Persist: true
 	 * DisplayName: average vehicle length
 	 * Description: Average length of the vehicles transiting during     the observation period
-	 * HtmRow: 6
-	 * HtmCell: 3
+	 * HtmRow: 7
+	 * HtmCell: 1
 	 * Facet: true
 	 */
 	protected void _averageVehicleLength(Wrap<BigDecimal> w) {
@@ -148,7 +161,7 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 	 * DisplayName: average vehicle speed
 	 * Description: Average speed of the vehicles transiting during the observation period
 	 * HtmRow: 7
-	 * HtmCell: 1
+	 * HtmCell: 2
 	 * Facet: true
 	 */
 	protected void _averageVehicleSpeed(Wrap<BigDecimal> w) {
@@ -161,7 +174,7 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 	 * DisplayName: congested
 	 * Description:  Flags whether there was a traffic congestion during the observation period in the referred lane. The absence of this attribute means no traffic congestion
 	 * HtmRow: 7
-	 * HtmCell: 2
+	 * HtmCell: 3
 	 * Facet: true
 	 */
 	protected void _congested(Wrap<Boolean> w) {
@@ -174,7 +187,7 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 	 * DisplayName: data provider
 	 * Description: A sequence of characters identifying the provider of the harmonised data entity.
 	 * HtmRow: 7
-	 * HtmCell: 3
+	 * HtmCell: 4
 	 * Facet: true
 	 */
 	protected void _dataProvider(Wrap<String> w) {
@@ -586,13 +599,13 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 	@Override
 	protected void _objectTitle(Wrap<String> w) {
 		StringBuilder b = new StringBuilder();
-		Optional.ofNullable(id).ifPresent(s -> b.append(id));
+		Optional.ofNullable(entityId).ifPresent(s -> b.append(s));
 		w.o(b.toString().trim());
 	}
 
 	@Override
 	protected void _objectId(Wrap<String> w) {
-		if(id != null)
-			w.o(id.toString());
+		if(entityId != null)
+			w.o(entityId);
 	}
 }

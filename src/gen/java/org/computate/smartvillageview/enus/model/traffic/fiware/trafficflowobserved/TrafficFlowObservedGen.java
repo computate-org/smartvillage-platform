@@ -31,10 +31,10 @@ import org.slf4j.LoggerFactory;
 import java.math.RoundingMode;
 import java.util.Map;
 import org.computate.smartvillageview.enus.result.map.MapResult;
+import java.lang.String;
 import org.computate.vertx.search.list.SearchList;
 import org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLight;
 import io.vertx.core.json.JsonObject;
-import java.lang.String;
 import java.math.BigDecimal;
 import java.lang.Boolean;
 import java.lang.Integer;
@@ -615,6 +615,60 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 	public static final String TrafficFlowObserved_IconGroup = "duotone";
 	public static final String TrafficFlowObserved_IconName = "map-location-dot";
 	public static final Integer TrafficFlowObserved_Rows = 100;
+
+	//////////////
+	// entityId //
+	//////////////
+
+
+	/**	 The entity entityId
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String entityId;
+
+	/**	<br> The entity entityId
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved.TrafficFlowObserved&fq=entiteVar_enUS_indexed_string:entityId">Find the entity entityId in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _entityId(Wrap<String> w);
+
+	public String getEntityId() {
+		return entityId;
+	}
+	public void setEntityId(String o) {
+		this.entityId = TrafficFlowObserved.staticSetEntityId(siteRequest_, o);
+	}
+	public static String staticSetEntityId(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected TrafficFlowObserved entityIdInit() {
+		Wrap<String> entityIdWrap = new Wrap<String>().var("entityId");
+		if(entityId == null) {
+			_entityId(entityIdWrap);
+			setEntityId(entityIdWrap.o);
+		}
+		return (TrafficFlowObserved)this;
+	}
+
+	public static String staticSearchEntityId(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrEntityId(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqEntityId(SiteRequestEnUS siteRequest_, String o) {
+		return TrafficFlowObserved.staticSearchStrEntityId(siteRequest_, TrafficFlowObserved.staticSearchEntityId(siteRequest_, TrafficFlowObserved.staticSetEntityId(siteRequest_, o)));
+	}
+
+	public String sqlEntityId() {
+		return entityId;
+	}
 
 	/////////////////////////////
 	// smartTrafficLightSearch //
@@ -3123,6 +3177,7 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		Future.future(a -> a.complete()).compose(a -> {
 			Promise<Void> promise2 = Promise.promise();
 			try {
+				entityIdInit();
 				promise2.complete();
 			} catch(Exception ex) {
 				promise2.fail(ex);
@@ -3231,6 +3286,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 	public Object obtainTrafficFlowObserved(String var) {
 		TrafficFlowObserved oTrafficFlowObserved = (TrafficFlowObserved)this;
 		switch(var) {
+			case "entityId":
+				return oTrafficFlowObserved.entityId;
 			case "smartTrafficLightSearch":
 				return oTrafficFlowObserved.smartTrafficLightSearch;
 			case "smartTrafficLight_":
@@ -3350,6 +3407,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 	}
 	public static Object staticSetTrafficFlowObserved(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "entityId":
+			return TrafficFlowObserved.staticSetEntityId(siteRequest_, o);
 		case "address":
 			return TrafficFlowObserved.staticSetAddress(siteRequest_, o);
 		case "alternateName":
@@ -3440,6 +3499,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 	}
 	public static Object staticSearchTrafficFlowObserved(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "entityId":
+			return TrafficFlowObserved.staticSearchEntityId(siteRequest_, (String)o);
 		case "address":
 			return TrafficFlowObserved.staticSearchAddress(siteRequest_, (JsonObject)o);
 		case "alternateName":
@@ -3530,6 +3591,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 	}
 	public static String staticSearchStrTrafficFlowObserved(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "entityId":
+			return TrafficFlowObserved.staticSearchStrEntityId(siteRequest_, (String)o);
 		case "address":
 			return TrafficFlowObserved.staticSearchStrAddress(siteRequest_, (JsonObject)o);
 		case "alternateName":
@@ -3620,6 +3683,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 	}
 	public static String staticSearchFqTrafficFlowObserved(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "entityId":
+			return TrafficFlowObserved.staticSearchFqEntityId(siteRequest_, o);
 		case "address":
 			return TrafficFlowObserved.staticSearchFqAddress(siteRequest_, o);
 		case "alternateName":
@@ -3722,7 +3787,13 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 	}
 	public Object persistTrafficFlowObserved(String var, Object val) {
 		String varLower = var.toLowerCase();
-			if("address".equals(varLower)) {
+			if("entityid".equals(varLower)) {
+				if(val instanceof String) {
+					setEntityId((String)val);
+				}
+				saves.add("entityId");
+				return val;
+			} else if("address".equals(varLower)) {
 				if(val instanceof String) {
 					setAddress((String)val);
 				} else if(val instanceof JsonObject) {
@@ -4007,6 +4078,12 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		saves = doc.get("saves_docvalues_strings");
 		if(saves != null) {
 
+			if(saves.contains("entityId")) {
+				String entityId = (String)doc.get("entityId_docvalues_string");
+				if(entityId != null)
+					oTrafficFlowObserved.setEntityId(entityId);
+			}
+
 			if(saves.contains("address")) {
 				JsonObject address = (JsonObject)doc.get("address_docvalues_string");
 				if(address != null)
@@ -4240,6 +4317,9 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 	}
 
 	public void indexTrafficFlowObserved(JsonObject doc) {
+		if(entityId != null) {
+			doc.put("entityId_docvalues_string", entityId);
+		}
 		if(address != null) {
 			doc.put("address_docvalues_string", address.toString());
 		}
@@ -4360,6 +4440,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 
 	public static String varStoredTrafficFlowObserved(String entityVar) {
 		switch(entityVar) {
+			case "entityId":
+				return "entityId_docvalues_string";
 			case "address":
 				return "address_docvalues_string";
 			case "alternateName":
@@ -4443,6 +4525,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 
 	public static String varIndexedTrafficFlowObserved(String entityVar) {
 		switch(entityVar) {
+			case "entityId":
+				return "entityId_docvalues_string";
 			case "address":
 				return "address_docvalues_string";
 			case "alternateName":
@@ -4526,6 +4610,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 
 	public static String searchVarTrafficFlowObserved(String searchVar) {
 		switch(searchVar) {
+			case "entityId_docvalues_string":
+				return "entityId";
 			case "address_docvalues_string":
 				return "address";
 			case "alternateName_docvalues_string":
@@ -4631,6 +4717,7 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 	public void storeTrafficFlowObserved(SolrResponse.Doc doc) {
 		TrafficFlowObserved oTrafficFlowObserved = (TrafficFlowObserved)this;
 
+		oTrafficFlowObserved.setEntityId(Optional.ofNullable(doc.get("entityId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oTrafficFlowObserved.setAddress(Optional.ofNullable(doc.get("address_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oTrafficFlowObserved.setAlternateName(Optional.ofNullable(doc.get("alternateName_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oTrafficFlowObserved.setAreaServed(Optional.ofNullable(doc.get("areaServed_docvalues_string")).map(v -> v.toString()).orElse(null));
@@ -4682,6 +4769,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		Object o = Optional.ofNullable(apiRequest).map(ApiRequest::getOriginal).orElse(null);
 		if(o != null && o instanceof TrafficFlowObserved) {
 			TrafficFlowObserved original = (TrafficFlowObserved)o;
+			if(!Objects.equals(entityId, original.getEntityId()))
+				apiRequest.addVars("entityId");
 			if(!Objects.equals(address, original.getAddress()))
 				apiRequest.addVars("address");
 			if(!Objects.equals(alternateName, original.getAlternateName()))
@@ -4769,6 +4858,7 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 	@Override public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(super.toString());
+		sb.append(Optional.ofNullable(entityId).map(v -> "entityId: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(address).map(v -> "address: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(alternateName).map(v -> "alternateName: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(areaServed).map(v -> "areaServed: \"" + v + "\"\n" ).orElse(""));
@@ -4811,6 +4901,7 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 	}
 
 	public static final String CLASS_SIMPLE_NAME = "TrafficFlowObserved";
+	public static final String VAR_entityId = "entityId";
 	public static final String VAR_smartTrafficLightSearch = "smartTrafficLightSearch";
 	public static final String VAR_smartTrafficLight_ = "smartTrafficLight_";
 	public static final String VAR_address = "address";
@@ -4864,6 +4955,7 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		return TrafficFlowObserved.varsFqTrafficFlowObserved(new ArrayList<String>());
 	}
 	public static List<String> varsFqTrafficFlowObserved(List<String> vars) {
+		vars.add(VAR_entityId);
 		vars.add(VAR_address);
 		vars.add(VAR_alternateName);
 		vars.add(VAR_areaServed);
@@ -4932,6 +5024,7 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		return vars;
 	}
 
+	public static final String DISPLAY_NAME_entityId = "entity ID";
 	public static final String DISPLAY_NAME_smartTrafficLightSearch = "";
 	public static final String DISPLAY_NAME_smartTrafficLight_ = "";
 	public static final String DISPLAY_NAME_address = "address";
@@ -4978,6 +5071,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 	}
 	public static String displayNameTrafficFlowObserved(String var) {
 		switch(var) {
+		case VAR_entityId:
+			return DISPLAY_NAME_entityId;
 		case VAR_smartTrafficLightSearch:
 			return DISPLAY_NAME_smartTrafficLightSearch;
 		case VAR_smartTrafficLight_:
@@ -5065,6 +5160,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 
 	public static String descriptionTrafficFlowObserved(String var) {
 		switch(var) {
+		case VAR_entityId:
+			return "A unique ID for this Smart Data Model";
 		case VAR_address:
 			return "The mailing address";
 		case VAR_alternateName:
@@ -5148,6 +5245,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 
 	public static String classSimpleNameTrafficFlowObserved(String var) {
 		switch(var) {
+		case VAR_entityId:
+			return "String";
 		case VAR_smartTrafficLightSearch:
 			return "SearchList";
 		case VAR_smartTrafficLight_:
@@ -5242,18 +5341,20 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 
 	public static Integer htmRowTrafficFlowObserved(String var) {
 		switch(var) {
+		case VAR_entityId:
+			return 5;
 		case VAR_address:
 			return 5;
 		case VAR_alternateName:
 			return 5;
 		case VAR_areaServed:
-			return 5;
+			return 6;
 		case VAR_averageGapDistance:
 			return 6;
 		case VAR_averageHeadwayTime:
 			return 6;
 		case VAR_averageVehicleLength:
-			return 6;
+			return 7;
 		case VAR_averageVehicleSpeed:
 			return 7;
 		case VAR_congested:
@@ -5325,24 +5426,26 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 
 	public static Integer htmCellTrafficFlowObserved(String var) {
 		switch(var) {
+		case VAR_entityId:
+			return 1;
 		case VAR_address:
-			return 1;
+			return 2;
 		case VAR_alternateName:
-			return 2;
+			return 3;
 		case VAR_areaServed:
-			return 3;
+			return 1;
 		case VAR_averageGapDistance:
-			return 1;
+			return 2;
 		case VAR_averageHeadwayTime:
-			return 2;
+			return 3;
 		case VAR_averageVehicleLength:
-			return 3;
-		case VAR_averageVehicleSpeed:
 			return 1;
-		case VAR_congested:
+		case VAR_averageVehicleSpeed:
 			return 2;
-		case VAR_dataProvider:
+		case VAR_congested:
 			return 3;
+		case VAR_dataProvider:
+			return 4;
 		case VAR_dateCreated:
 			return 1;
 		case VAR_dateModified:

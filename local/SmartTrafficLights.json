@@ -1,0 +1,13 @@
+{
+  "list": [
+    {
+      "pk": "veberod-intersection-1",
+      "entityId": "veberod-intersection-1",
+      "color": "magenta",
+      "step": false,
+      "smartTrafficLightName": "Veberöd intersection 1",
+      "routeIdNorth": "r13",
+      "routeIdEast": "r42"
+    }
+  ]
+}

@@ -2,6 +2,8 @@ package org.computate.smartvillageview.enus.model.traffic.simulation.report;
 
 import org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulationEnUSApiServiceImpl;
 import org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation;
+import org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLightEnUSApiServiceImpl;
+import org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLight;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.smartvillageview.enus.model.user.SiteUser;
 import org.computate.vertx.api.ApiRequest;
@@ -685,6 +687,40 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							}));
 						});
 						break;
+					case "setSmartTrafficLightKey":
+						Optional.ofNullable(jsonObject.getString(entityVar)).ifPresent(val -> {
+							futures1.add(Future.future(promise2 -> {
+								search(siteRequest).query(SmartTrafficLight.class, val, inheritPk).onSuccess(pk2 -> {
+									if(!pks.contains(pk2)) {
+										pks.add(pk2);
+										classes.add("SmartTrafficLight");
+									}
+									sql(siteRequest).update(SimulationReport.class, pk).set(SimulationReport.VAR_smartTrafficLightKey, SmartTrafficLight.class, pk2).onSuccess(a -> {
+										promise2.complete();
+									}).onFailure(ex -> {
+										promise2.fail(ex);
+									});
+								}).onFailure(ex -> {
+									promise2.fail(ex);
+								});
+							}));
+						});
+						break;
+					case "removeSmartTrafficLightKey":
+						Optional.ofNullable(jsonObject.getString(entityVar)).map(val -> Long.parseLong(val)).ifPresent(pk2 -> {
+							if(!pks.contains(pk2)) {
+								pks.add(pk2);
+								classes.add("SmartTrafficLight");
+							}
+							futures2.add(Future.future(promise2 -> {
+									sql(siteRequest).update(SimulationReport.class, pk).setToNull(SimulationReport.VAR_smartTrafficLightKey, SmartTrafficLight.class, pk2).onSuccess(a -> {
+									promise2.complete();
+								}).onFailure(ex -> {
+									promise2.fail(ex);
+								});
+							}));
+						});
+						break;
 					case "setSimulationName":
 							o2.setSimulationName(jsonObject.getString(entityVar));
 							if(bParams.size() > 0)
@@ -1272,6 +1308,25 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 										classes.add("TrafficSimulation");
 									}
 									sql(siteRequest).update(SimulationReport.class, pk).set(SimulationReport.VAR_simulationKey, TrafficSimulation.class, pk2).onSuccess(a -> {
+										promise2.complete();
+									}).onFailure(ex -> {
+										promise2.fail(ex);
+									});
+								}).onFailure(ex -> {
+									promise2.fail(ex);
+								});
+							}));
+						});
+						break;
+					case SimulationReport.VAR_smartTrafficLightKey:
+						Optional.ofNullable(jsonObject.getString(entityVar)).ifPresent(val -> {
+							futures1.add(Future.future(promise2 -> {
+								search(siteRequest).query(SmartTrafficLight.class, val, inheritPk).onSuccess(pk2 -> {
+									if(!pks.contains(pk2)) {
+										pks.add(pk2);
+										classes.add("SmartTrafficLight");
+									}
+									sql(siteRequest).update(SimulationReport.class, pk).set(SimulationReport.VAR_smartTrafficLightKey, SmartTrafficLight.class, pk2).onSuccess(a -> {
 										promise2.complete();
 									}).onFailure(ex -> {
 										promise2.fail(ex);
@@ -2200,6 +2255,40 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							}));
 						});
 						break;
+					case "setSmartTrafficLightKey":
+						Optional.ofNullable(jsonObject.getString(entityVar)).ifPresent(val -> {
+							futures1.add(Future.future(promise2 -> {
+								search(siteRequest).query(SmartTrafficLight.class, val, inheritPk).onSuccess(pk2 -> {
+									if(!pks.contains(pk2)) {
+										pks.add(pk2);
+										classes.add("SmartTrafficLight");
+									}
+									sql(siteRequest).update(SimulationReport.class, pk).set(SimulationReport.VAR_smartTrafficLightKey, SmartTrafficLight.class, pk2).onSuccess(a -> {
+										promise2.complete();
+									}).onFailure(ex -> {
+										promise2.fail(ex);
+									});
+								}).onFailure(ex -> {
+									promise2.fail(ex);
+								});
+							}));
+						});
+						break;
+					case "removeSmartTrafficLightKey":
+						Optional.ofNullable(jsonObject.getString(entityVar)).map(val -> Long.parseLong(val)).ifPresent(pk2 -> {
+							if(!pks.contains(pk2)) {
+								pks.add(pk2);
+								classes.add("SmartTrafficLight");
+							}
+							futures2.add(Future.future(promise2 -> {
+									sql(siteRequest).update(SimulationReport.class, pk).setToNull(SimulationReport.VAR_smartTrafficLightKey, SmartTrafficLight.class, pk2).onSuccess(a -> {
+									promise2.complete();
+								}).onFailure(ex -> {
+									promise2.fail(ex);
+								});
+							}));
+						});
+						break;
 					case "setSimulationName":
 							o2.setSimulationName(jsonObject.getString(entityVar));
 							if(bParams.size() > 0)
@@ -2974,9 +3063,9 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 			SiteRequestEnUS siteRequest = o.getSiteRequest_();
 			SqlConnection sqlConnection = siteRequest.getSqlConnection();
 			Long pk = o.getPk();
-			sqlConnection.preparedQuery("SELECT simulationKey as pk1, 'simulationKey' from SimulationReport where pk=$1")
+			sqlConnection.preparedQuery("SELECT simulationKey as pk1, 'simulationKey' from SimulationReport where pk=$1 UNION SELECT smartTrafficLightKey as pk1, 'smartTrafficLightKey' from SimulationReport where pk=$2")
 					.collecting(Collectors.toList())
-					.execute(Tuple.of(pk)
+					.execute(Tuple.of(pk, pk)
 					).onSuccess(result -> {
 				try {
 					if(result != null) {
@@ -3079,6 +3168,41 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 									JsonObject context = new JsonObject().put("params", params).put("user", siteRequest.getUserPrincipal());
 									JsonObject json = new JsonObject().put("context", context);
 									eventBus.request("smartabyar-smartvillage-enUS-TrafficSimulation", json, new DeliveryOptions().addHeader("action", "patchTrafficSimulationFuture")).onSuccess(c -> {
+										JsonObject responseMessage = (JsonObject)c.body();
+										Integer statusCode = responseMessage.getInteger("statusCode");
+										if(statusCode.equals(200))
+											promise2.complete();
+										else
+											promise2.fail(new RuntimeException(responseMessage.getString("statusMessage")));
+									}).onFailure(ex -> {
+										promise2.fail(ex);
+									});
+								}
+							}).onFailure(ex -> {
+								promise2.fail(ex);
+							});
+						}));
+					}
+
+					if("SmartTrafficLight".equals(classSimpleName2) && pk2 != null) {
+						SearchList<SmartTrafficLight> searchList2 = new SearchList<SmartTrafficLight>();
+						searchList2.setStore(true);
+						searchList2.q("*:*");
+						searchList2.setC(SmartTrafficLight.class);
+						searchList2.fq("pk_docvalues_long:" + pk2);
+						searchList2.rows(1L);
+						futures.add(Future.future(promise2 -> {
+							searchList2.promiseDeepSearchList(siteRequest).onSuccess(b -> {
+								SmartTrafficLight o2 = searchList2.getList().stream().findFirst().orElse(null);
+								if(o2 != null) {
+									JsonObject params = new JsonObject();
+									params.put("body", new JsonObject());
+									params.put("cookie", new JsonObject());
+									params.put("path", new JsonObject());
+									params.put("query", new JsonObject().put("q", "*:*").put("fq", new JsonArray().add("pk:" + pk2)).put("var", new JsonArray().add("refresh:false")));
+									JsonObject context = new JsonObject().put("params", params).put("user", siteRequest.getUserPrincipal());
+									JsonObject json = new JsonObject().put("context", context);
+									eventBus.request("smartabyar-smartvillage-enUS-SmartTrafficLight", json, new DeliveryOptions().addHeader("action", "patchSmartTrafficLightFuture")).onSuccess(c -> {
 										JsonObject responseMessage = (JsonObject)c.body();
 										Integer statusCode = responseMessage.getInteger("statusCode");
 										if(statusCode.equals(200))

@@ -382,54 +382,66 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		return (SimulationReport)this;
 	}
 
-	/////////////////////////
-	// smartTrafficLightId //
-	/////////////////////////
+	//////////////////////////
+	// smartTrafficLightKey //
+	//////////////////////////
 
 
-	/**	 The entity smartTrafficLightId
+	/**	 The entity smartTrafficLightKey
 	 *	 is defined as null before being initialized. 
 	 */
 	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
 	@JsonInclude(Include.NON_NULL)
-	protected String smartTrafficLightId;
+	protected Long smartTrafficLightKey;
 
-	/**	<br> The entity smartTrafficLightId
+	/**	<br> The entity smartTrafficLightKey
 	 *  is defined as null before being initialized. 
-	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:smartTrafficLightId">Find the entity smartTrafficLightId in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:smartTrafficLightKey">Find the entity smartTrafficLightKey in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected abstract void _smartTrafficLightId(Wrap<String> w);
+	protected abstract void _smartTrafficLightKey(Wrap<Long> w);
 
-	public String getSmartTrafficLightId() {
-		return smartTrafficLightId;
+	public Long getSmartTrafficLightKey() {
+		return smartTrafficLightKey;
 	}
-	public void setSmartTrafficLightId(String o) {
-		this.smartTrafficLightId = SimulationReport.staticSetSmartTrafficLightId(siteRequest_, o);
+
+	public void setSmartTrafficLightKey(Long smartTrafficLightKey) {
+		this.smartTrafficLightKey = smartTrafficLightKey;
 	}
-	public static String staticSetSmartTrafficLightId(SiteRequestEnUS siteRequest_, String o) {
-		return o;
+	@JsonIgnore
+	public void setSmartTrafficLightKey(String o) {
+		this.smartTrafficLightKey = SimulationReport.staticSetSmartTrafficLightKey(siteRequest_, o);
 	}
-	protected SimulationReport smartTrafficLightIdInit() {
-		Wrap<String> smartTrafficLightIdWrap = new Wrap<String>().var("smartTrafficLightId");
-		if(smartTrafficLightId == null) {
-			_smartTrafficLightId(smartTrafficLightIdWrap);
-			setSmartTrafficLightId(smartTrafficLightIdWrap.o);
+	public static Long staticSetSmartTrafficLightKey(SiteRequestEnUS siteRequest_, String o) {
+		if(NumberUtils.isParsable(o))
+			return Long.parseLong(o);
+		return null;
+	}
+	protected SimulationReport smartTrafficLightKeyInit() {
+		Wrap<Long> smartTrafficLightKeyWrap = new Wrap<Long>().var("smartTrafficLightKey");
+		if(smartTrafficLightKey == null) {
+			_smartTrafficLightKey(smartTrafficLightKeyWrap);
+			setSmartTrafficLightKey(smartTrafficLightKeyWrap.o);
 		}
 		return (SimulationReport)this;
 	}
 
-	public static String staticSearchSmartTrafficLightId(SiteRequestEnUS siteRequest_, String o) {
+	public static Long staticSearchSmartTrafficLightKey(SiteRequestEnUS siteRequest_, Long o) {
 		return o;
 	}
 
-	public static String staticSearchStrSmartTrafficLightId(SiteRequestEnUS siteRequest_, String o) {
+	public static String staticSearchStrSmartTrafficLightKey(SiteRequestEnUS siteRequest_, Long o) {
 		return o == null ? null : o.toString();
 	}
 
-	public static String staticSearchFqSmartTrafficLightId(SiteRequestEnUS siteRequest_, String o) {
-		return SimulationReport.staticSearchStrSmartTrafficLightId(siteRequest_, SimulationReport.staticSearchSmartTrafficLightId(siteRequest_, SimulationReport.staticSetSmartTrafficLightId(siteRequest_, o)));
+	public static String staticSearchFqSmartTrafficLightKey(SiteRequestEnUS siteRequest_, String o) {
+		return SimulationReport.staticSearchStrSmartTrafficLightKey(siteRequest_, SimulationReport.staticSearchSmartTrafficLightKey(siteRequest_, SimulationReport.staticSetSmartTrafficLightKey(siteRequest_, o)));
+	}
+
+	public Long sqlSmartTrafficLightKey() {
+		return smartTrafficLightKey;
 	}
 
 	/////////////////////////////
@@ -3029,7 +3041,7 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			Promise<Void> promise2 = Promise.promise();
 			try {
 				simulation_Init();
-				smartTrafficLightIdInit();
+				smartTrafficLightKeyInit();
 				promise2.complete();
 			} catch(Exception ex) {
 				promise2.fail(ex);
@@ -3141,8 +3153,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 				return oSimulationReport.simulationSearch;
 			case "simulation_":
 				return oSimulationReport.simulation_;
-			case "smartTrafficLightId":
-				return oSimulationReport.smartTrafficLightId;
+			case "smartTrafficLightKey":
+				return oSimulationReport.smartTrafficLightKey;
 			case "smartTrafficLightSearch":
 				return oSimulationReport.smartTrafficLightSearch;
 			case "smartTrafficLight_":
@@ -3248,6 +3260,12 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 				if(!saves.contains("simulationKey"))
 					saves.add("simulationKey");
 				return val;
+			case "smartTrafficLightKey":
+				if(oSimulationReport.getSmartTrafficLightKey() == null)
+					oSimulationReport.setSmartTrafficLightKey(val == null ? null : (NumberUtils.isCreatable(val.toString()) ? Long.parseLong(val.toString()) : -1));
+				if(!saves.contains("smartTrafficLightKey"))
+					saves.add("smartTrafficLightKey");
+				return val;
 			default:
 				return super.relateBaseModel(var, val);
 		}
@@ -3264,8 +3282,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		switch(entityVar) {
 		case "simulationKey":
 			return SimulationReport.staticSetSimulationKey(siteRequest_, o);
-		case "smartTrafficLightId":
-			return SimulationReport.staticSetSmartTrafficLightId(siteRequest_, o);
+		case "smartTrafficLightKey":
+			return SimulationReport.staticSetSmartTrafficLightKey(siteRequest_, o);
 		case "simulationName":
 			return SimulationReport.staticSetSimulationName(siteRequest_, o);
 		case "smartTrafficLightName":
@@ -3352,8 +3370,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		switch(entityVar) {
 		case "simulationKey":
 			return SimulationReport.staticSearchSimulationKey(siteRequest_, (Long)o);
-		case "smartTrafficLightId":
-			return SimulationReport.staticSearchSmartTrafficLightId(siteRequest_, (String)o);
+		case "smartTrafficLightKey":
+			return SimulationReport.staticSearchSmartTrafficLightKey(siteRequest_, (Long)o);
 		case "simulationName":
 			return SimulationReport.staticSearchSimulationName(siteRequest_, (String)o);
 		case "smartTrafficLightName":
@@ -3440,8 +3458,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		switch(entityVar) {
 		case "simulationKey":
 			return SimulationReport.staticSearchStrSimulationKey(siteRequest_, (Long)o);
-		case "smartTrafficLightId":
-			return SimulationReport.staticSearchStrSmartTrafficLightId(siteRequest_, (String)o);
+		case "smartTrafficLightKey":
+			return SimulationReport.staticSearchStrSmartTrafficLightKey(siteRequest_, (Long)o);
 		case "simulationName":
 			return SimulationReport.staticSearchStrSimulationName(siteRequest_, (String)o);
 		case "smartTrafficLightName":
@@ -3528,8 +3546,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		switch(entityVar) {
 		case "simulationKey":
 			return SimulationReport.staticSearchFqSimulationKey(siteRequest_, o);
-		case "smartTrafficLightId":
-			return SimulationReport.staticSearchFqSmartTrafficLightId(siteRequest_, o);
+		case "smartTrafficLightKey":
+			return SimulationReport.staticSearchFqSmartTrafficLightKey(siteRequest_, o);
 		case "simulationName":
 			return SimulationReport.staticSearchFqSimulationName(siteRequest_, o);
 		case "smartTrafficLightName":
@@ -3633,6 +3651,14 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 					setSimulationKey(val == null ? null : val.toString());
 				}
 				saves.add("simulationKey");
+				return val;
+			} else if("smarttrafficlightkey".equals(varLower)) {
+				if(val instanceof Long) {
+					setSmartTrafficLightKey((Long)val);
+				} else {
+					setSmartTrafficLightKey(val == null ? null : val.toString());
+				}
+				saves.add("smartTrafficLightKey");
 				return val;
 			} else if("simulationname".equals(varLower)) {
 				if(val instanceof String) {
@@ -3877,11 +3903,9 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			if(simulationKey != null)
 				oSimulationReport.setSimulationKey(simulationKey);
 
-			if(saves.contains("smartTrafficLightId")) {
-				String smartTrafficLightId = (String)doc.get("smartTrafficLightId_docvalues_string");
-				if(smartTrafficLightId != null)
-					oSimulationReport.setSmartTrafficLightId(smartTrafficLightId);
-			}
+			Long smartTrafficLightKey = (Long)doc.get("smartTrafficLightKey_docvalues_long");
+			if(smartTrafficLightKey != null)
+				oSimulationReport.setSmartTrafficLightKey(smartTrafficLightKey);
 
 			if(saves.contains("simulationName")) {
 				String simulationName = (String)doc.get("simulationName_docvalues_string");
@@ -4101,8 +4125,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		if(simulationKey != null) {
 			doc.put("simulationKey_docvalues_long", simulationKey);
 		}
-		if(smartTrafficLightId != null) {
-			doc.put("smartTrafficLightId_docvalues_string", smartTrafficLightId);
+		if(smartTrafficLightKey != null) {
+			doc.put("smartTrafficLightKey_docvalues_long", smartTrafficLightKey);
 		}
 		if(simulationName != null) {
 			doc.put("simulationName_docvalues_string", simulationName);
@@ -4229,8 +4253,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		switch(entityVar) {
 			case "simulationKey":
 				return "simulationKey_docvalues_long";
-			case "smartTrafficLightId":
-				return "smartTrafficLightId_docvalues_string";
+			case "smartTrafficLightKey":
+				return "smartTrafficLightKey_docvalues_long";
 			case "simulationName":
 				return "simulationName_docvalues_string";
 			case "smartTrafficLightName":
@@ -4310,8 +4334,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		switch(entityVar) {
 			case "simulationKey":
 				return "simulationKey_docvalues_long";
-			case "smartTrafficLightId":
-				return "smartTrafficLightId_docvalues_string";
+			case "smartTrafficLightKey":
+				return "smartTrafficLightKey_docvalues_long";
 			case "simulationName":
 				return "simulationName_docvalues_string";
 			case "smartTrafficLightName":
@@ -4391,8 +4415,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		switch(searchVar) {
 			case "simulationKey_docvalues_long":
 				return "simulationKey";
-			case "smartTrafficLightId_docvalues_string":
-				return "smartTrafficLightId";
+			case "smartTrafficLightKey_docvalues_long":
+				return "smartTrafficLightKey";
 			case "simulationName_docvalues_string":
 				return "simulationName";
 			case "smartTrafficLightName_docvalues_string":
@@ -4493,7 +4517,7 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		SimulationReport oSimulationReport = (SimulationReport)this;
 
 		oSimulationReport.setSimulationKey(Optional.ofNullable(doc.get("simulationKey_docvalues_long")).map(v -> v.toString()).orElse(null));
-		oSimulationReport.setSmartTrafficLightId(Optional.ofNullable(doc.get("smartTrafficLightId_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oSimulationReport.setSmartTrafficLightKey(Optional.ofNullable(doc.get("smartTrafficLightKey_docvalues_long")).map(v -> v.toString()).orElse(null));
 		oSimulationReport.setSimulationName(Optional.ofNullable(doc.get("simulationName_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSimulationReport.setSmartTrafficLightName(Optional.ofNullable(doc.get("smartTrafficLightName_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSimulationReport.setReportName(Optional.ofNullable(doc.get("reportName_docvalues_string")).map(v -> v.toString()).orElse(null));
@@ -4550,8 +4574,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			SimulationReport original = (SimulationReport)o;
 			if(!Objects.equals(simulationKey, original.getSimulationKey()))
 				apiRequest.addVars("simulationKey");
-			if(!Objects.equals(smartTrafficLightId, original.getSmartTrafficLightId()))
-				apiRequest.addVars("smartTrafficLightId");
+			if(!Objects.equals(smartTrafficLightKey, original.getSmartTrafficLightKey()))
+				apiRequest.addVars("smartTrafficLightKey");
 			if(!Objects.equals(simulationName, original.getSimulationName()))
 				apiRequest.addVars("simulationName");
 			if(!Objects.equals(smartTrafficLightName, original.getSmartTrafficLightName()))
@@ -4634,7 +4658,7 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		StringBuilder sb = new StringBuilder();
 		sb.append(super.toString());
 		sb.append(Optional.ofNullable(simulationKey).map(v -> "simulationKey: " + v + "\n").orElse(""));
-		sb.append(Optional.ofNullable(smartTrafficLightId).map(v -> "smartTrafficLightId: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(smartTrafficLightKey).map(v -> "smartTrafficLightKey: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(simulationName).map(v -> "simulationName: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(smartTrafficLightName).map(v -> "smartTrafficLightName: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(reportName).map(v -> "reportName: \"" + v + "\"\n" ).orElse(""));
@@ -4679,7 +4703,7 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 	public static final String VAR_simulationKey = "simulationKey";
 	public static final String VAR_simulationSearch = "simulationSearch";
 	public static final String VAR_simulation_ = "simulation_";
-	public static final String VAR_smartTrafficLightId = "smartTrafficLightId";
+	public static final String VAR_smartTrafficLightKey = "smartTrafficLightKey";
 	public static final String VAR_smartTrafficLightSearch = "smartTrafficLightSearch";
 	public static final String VAR_smartTrafficLight_ = "smartTrafficLight_";
 	public static final String VAR_simulationName = "simulationName";
@@ -4731,7 +4755,7 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 	}
 	public static List<String> varsFqSimulationReport(List<String> vars) {
 		vars.add(VAR_simulationKey);
-		vars.add(VAR_smartTrafficLightId);
+		vars.add(VAR_smartTrafficLightKey);
 		vars.add(VAR_simulationName);
 		vars.add(VAR_smartTrafficLightName);
 		vars.add(VAR_reportName);
@@ -4810,7 +4834,7 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 	public static final String DISPLAY_NAME_simulationKey = "traffic simulation";
 	public static final String DISPLAY_NAME_simulationSearch = "";
 	public static final String DISPLAY_NAME_simulation_ = "";
-	public static final String DISPLAY_NAME_smartTrafficLightId = "smart traffic light";
+	public static final String DISPLAY_NAME_smartTrafficLightKey = "smart traffic light";
 	public static final String DISPLAY_NAME_smartTrafficLightSearch = "";
 	public static final String DISPLAY_NAME_smartTrafficLight_ = "";
 	public static final String DISPLAY_NAME_simulationName = "simulation name";
@@ -4860,8 +4884,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return DISPLAY_NAME_simulationSearch;
 		case VAR_simulation_:
 			return DISPLAY_NAME_simulation_;
-		case VAR_smartTrafficLightId:
-			return DISPLAY_NAME_smartTrafficLightId;
+		case VAR_smartTrafficLightKey:
+			return DISPLAY_NAME_smartTrafficLightKey;
 		case VAR_smartTrafficLightSearch:
 			return DISPLAY_NAME_smartTrafficLightSearch;
 		case VAR_smartTrafficLight_:
@@ -4945,7 +4969,7 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		switch(var) {
 		case VAR_simulationKey:
 			return "The traffic simulation for this report. ";
-		case VAR_smartTrafficLightId:
+		case VAR_smartTrafficLightKey:
 			return "The smart traffic light for this report. ";
 		case VAR_paramRunTime:
 			return "Time duration of each simulated sample path. ";
@@ -4974,8 +4998,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return "SearchList";
 		case VAR_simulation_:
 			return "TrafficSimulation";
-		case VAR_smartTrafficLightId:
-			return "String";
+		case VAR_smartTrafficLightKey:
+			return "Long";
 		case VAR_smartTrafficLightSearch:
 			return "SearchList";
 		case VAR_smartTrafficLight_:
@@ -5066,7 +5090,7 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		switch(var) {
 		case VAR_simulationKey:
 			return 3;
-		case VAR_smartTrafficLightId:
+		case VAR_smartTrafficLightKey:
 			return 3;
 		case VAR_reportName:
 			return 4;
@@ -5135,7 +5159,7 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		switch(var) {
 		case VAR_simulationKey:
 			return 1;
-		case VAR_smartTrafficLightId:
+		case VAR_smartTrafficLightKey:
 			return 2;
 		case VAR_reportName:
 			return 1;

@@ -2,13 +2,12 @@ package org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlig
 
 
 import java.math.BigDecimal;
-import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
 import org.computate.search.wrap.Wrap;
+import org.computate.smartvillageview.enus.model.base.BaseModel;
 import org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved.TrafficFlowObserved;
-import org.computate.smartvillageview.enus.result.map.MapResult;
 import org.computate.vertx.search.list.SearchList;
 
 import io.vertx.core.Promise;
@@ -16,8 +15,9 @@ import io.vertx.core.Promise;
 /**
  * {@inheritDoc}
  * Api: true
+ * Model: true
  * Page: true
- * SuperPage.enUS: MapResultPage
+ * SuperPage.enUS: BaseModelPage
  * Indexed: true
  * Order: 8
  * 
@@ -43,15 +43,28 @@ import io.vertx.core.Promise;
  * IconName: traffic-light-stop
  * Rows: 100
  */
-public class SmartTrafficLight extends SmartTrafficLightGen<MapResult> {
+public class SmartTrafficLight extends SmartTrafficLightGen<BaseModel> {
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * DisplayName: entity ID
+	 * Description: A unique ID for this Smart Data Model
+	 * HtmRow: 5
+	 * HtmCell: 1
+	 * Facet: true
+	 */
+	protected void _entityId(Wrap<String> w) {
+	}
 
 	/**
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
 	 * DisplayName: smart traffic light name
-	 * HtmRow: 6
-	 * HtmCell: 1
+	 * HtmRow: 5
+	 * HtmCell: 2
 	 * Facet: true
 	 */
 	protected void _smartTrafficLightName(Wrap<String> w) {
@@ -84,9 +97,6 @@ public class SmartTrafficLight extends SmartTrafficLightGen<MapResult> {
 	/**
 	 * {@inheritDoc}
 	 * DocValues: true
-	 * Persist: true
-	 * HtmRow: 5
-	 * HtmCell: 1
 	 * Facet: true
 	 * DisplayName: TrafficFlowObserveds
 	 * Description: The related TrafficFlowObserved entities
@@ -99,11 +109,11 @@ public class SmartTrafficLight extends SmartTrafficLightGen<MapResult> {
 	 */
 	protected void _trafficFlowObservedSearch(Promise<SearchList<TrafficFlowObserved>> promise) {
 		SearchList<TrafficFlowObserved> l = new SearchList<>();
-		if(id != null) {
+		if(entityId != null) {
 			l.setC(TrafficFlowObserved.class);
 			l.q("*:*");
 			l.rows(100);
-			l.fq(String.format("customTrafficLightId_docvalues_string:%s", id));
+			l.fq(String.format("customTrafficLightId_docvalues_string:%s", entityId));
 			l.setStore(true);
 		}
 		promise.complete(l);
@@ -138,7 +148,6 @@ public class SmartTrafficLight extends SmartTrafficLightGen<MapResult> {
 	/**
 	 * {@inheritDoc}
 	 * DocValues: true
-	 * Persist: true
 	 * HtmRow: 7
 	 * HtmCell: 1
 	 * Facet: true
@@ -155,7 +164,6 @@ public class SmartTrafficLight extends SmartTrafficLightGen<MapResult> {
 	/**
 	 * {@inheritDoc}
 	 * DocValues: true
-	 * Persist: true
 	 * HtmRow: 7
 	 * HtmCell: 2
 	 * Facet: true
@@ -188,7 +196,6 @@ public class SmartTrafficLight extends SmartTrafficLightGen<MapResult> {
 	/**
 	 * {@inheritDoc}
 	 * DocValues: true
-	 * Persist: true
 	 * HtmRow: 8
 	 * HtmCell: 1
 	 * Facet: true
@@ -204,7 +211,6 @@ public class SmartTrafficLight extends SmartTrafficLightGen<MapResult> {
 	/**
 	 * {@inheritDoc}
 	 * DocValues: true
-	 * Persist: true
 	 * HtmRow: 8
 	 * HtmCell: 2
 	 * Facet: true
@@ -220,7 +226,6 @@ public class SmartTrafficLight extends SmartTrafficLightGen<MapResult> {
 	/**
 	 * {@inheritDoc}
 	 * DocValues: true
-	 * Persist: true
 	 * HtmRow: 8
 	 * HtmCell: 3
 	 * Facet: true
@@ -236,7 +241,6 @@ public class SmartTrafficLight extends SmartTrafficLightGen<MapResult> {
 	/**
 	 * {@inheritDoc}
 	 * DocValues: true
-	 * Persist: true
 	 * Facet: true
 	 * DisplayName: demand scale
 	 * Description: 
@@ -249,7 +253,6 @@ public class SmartTrafficLight extends SmartTrafficLightGen<MapResult> {
 	/**
 	 * {@inheritDoc}
 	 * DocValues: true
-	 * Persist: true
 	 * HtmRow: 9
 	 * HtmCell: 1
 	 * Facet: true
@@ -266,7 +269,6 @@ public class SmartTrafficLight extends SmartTrafficLightGen<MapResult> {
 	/**
 	 * {@inheritDoc}
 	 * DocValues: true
-	 * Persist: true
 	 * HtmRow: 9
 	 * HtmCell: 2
 	 * Facet: true
@@ -283,7 +285,6 @@ public class SmartTrafficLight extends SmartTrafficLightGen<MapResult> {
 	/**
 	 * {@inheritDoc}
 	 * DocValues: true
-	 * Persist: true
 	 * HtmRow: 10
 	 * HtmCell: 1
 	 * Facet: true
@@ -300,7 +301,6 @@ public class SmartTrafficLight extends SmartTrafficLightGen<MapResult> {
 	/**
 	 * {@inheritDoc}
 	 * DocValues: true
-	 * Persist: true
 	 * HtmRow: 10
 	 * HtmCell: 2
 	 * Facet: true
@@ -317,7 +317,6 @@ public class SmartTrafficLight extends SmartTrafficLightGen<MapResult> {
 	/**
 	 * {@inheritDoc}
 	 * DocValues: true
-	 * Persist: true
 	 * HtmRow: 11
 	 * HtmCell: 1
 	 * Facet: true
@@ -333,7 +332,6 @@ public class SmartTrafficLight extends SmartTrafficLightGen<MapResult> {
 	/**
 	 * {@inheritDoc}
 	 * DocValues: true
-	 * Persist: true
 	 * HtmRow: 11
 	 * HtmCell: 2
 	 * Facet: true
@@ -349,7 +347,6 @@ public class SmartTrafficLight extends SmartTrafficLightGen<MapResult> {
 	/**
 	 * {@inheritDoc}
 	 * DocValues: true
-	 * Persist: true
 	 * HtmRow: 12
 	 * HtmCell: 1
 	 * Facet: true
@@ -366,7 +363,6 @@ public class SmartTrafficLight extends SmartTrafficLightGen<MapResult> {
 	/**
 	 * {@inheritDoc}
 	 * DocValues: true
-	 * Persist: true
 	 * HtmRow: 12
 	 * HtmCell: 2
 	 * Facet: true
@@ -383,7 +379,6 @@ public class SmartTrafficLight extends SmartTrafficLightGen<MapResult> {
 	/**
 	 * {@inheritDoc}
 	 * DocValues: true
-	 * Persist: true
 	 * HtmRow: 13
 	 * HtmCell: 1
 	 * Facet: true
@@ -399,7 +394,6 @@ public class SmartTrafficLight extends SmartTrafficLightGen<MapResult> {
 	/**
 	 * {@inheritDoc}
 	 * DocValues: true
-	 * Persist: true
 	 * HtmRow: 13
 	 * HtmCell: 2
 	 * Facet: true

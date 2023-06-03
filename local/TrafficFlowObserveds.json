@@ -1,0 +1,49 @@
+{
+  "list": [
+    {
+      "id": "urn:ngsi-ld:TrafficFlowObserved:Intersection1-Lakaregatan-NE",
+      "entityId": "urn:ngsi-ld:TrafficFlowObserved:Intersection1-Lakaregatan-NE",
+      "color": "magenta",
+      "step": false,
+      "areaServed": "-355113043#1 -24626686#2 -24626686#1 -34992983#3 -34992983#1",
+      "averageGapDistance": "1.00",
+      "averageVehicleLength": "5.00",
+      "averageVehicleSpeed": "55.00",
+      "congested": false,
+      "reversedLane": false,
+      "customRouteId": "r42",
+      "customSigma": "0.50",
+      "customAcceleration": "2.60",
+      "customDeceleration": "4.50",
+      "customMinGreenTime": "33.00",
+      "customMaxGreenTime": "39.00",
+      "customAverageVehiclesPerMinute": "12.00",
+      "customDemandScalingFactor": "1.00",
+      "customQueueLengthThreshold": "8.00",
+      "customTrafficLightId": "veberod-intersection-1"
+    },
+    {
+      "id": "urn:ngsi-ld:TrafficFlowObserved:Intersection1-Sjobovagen-SE",
+      "entityId": "urn:ngsi-ld:TrafficFlowObserved:Intersection1-Sjobovagen-SE",
+      "color": "magenta",
+      "step": false,
+      "averageGapDistance": "1.00",
+      "averageVehicleLength": "5.00",
+      "averageVehicleSpeed": "55.00",
+      "congested": false,
+      "intensity": "230.00",
+      "reversedLane": false,
+      "type": "TrafficFlowObserved",
+      "customRouteId": "r13",
+      "customSigma": "0.50",
+      "customAcceleration": "2.60",
+      "customDeceleration": "4.50",
+      "customMinGreenTime": "11.00",
+      "customMaxGreenTime": "23.00",
+      "customAverageVehiclesPerMinute": "7.00",
+      "customDemandScalingFactor": "1.00",
+      "customQueueLengthThreshold": "2.00",
+      "customTrafficLightId": "veberod-intersection-1"
+    }
+  ]
+}

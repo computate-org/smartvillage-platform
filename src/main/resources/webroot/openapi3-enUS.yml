@@ -15991,7 +15991,6 @@ components:
         - type: string
     SearchSmartTrafficLightResponse:
       allOf:
-        - $ref: "#/components/schemas/SearchMapResultResponse"
         - type: object
           properties:
             startNum:
@@ -16008,6 +16007,8 @@ components:
               items:
                 type: object
                 properties:
+                  entityId:
+                    type: string
                   smartTrafficLightName:
                     type: string
                   routeIdNorth:
@@ -16080,6 +16081,13 @@ components:
       allOf:
         - type: object
           properties:
+            setEntityId:
+              type: string
+              nullable: true
+            removeEntityId:
+              type: string
+            removeAllEntityId:
+              type: string
             setSmartTrafficLightName:
               type: string
               nullable: true
@@ -16337,6 +16345,13 @@ components:
       allOf:
         - type: object
           properties:
+            setEntityId:
+              type: string
+              nullable: true
+            removeEntityId:
+              type: string
+            removeAllEntityId:
+              type: string
             setSmartTrafficLightName:
               type: string
               nullable: true
@@ -16594,6 +16609,8 @@ components:
       allOf:
         - type: object
           properties:
+            entityId:
+              type: string
             smartTrafficLightName:
               type: string
             routeIdNorth:
@@ -16666,6 +16683,8 @@ components:
       allOf:
         - type: object
           properties:
+            entityId:
+              type: string
             smartTrafficLightName:
               type: string
             routeIdNorth:
@@ -16738,6 +16757,8 @@ components:
       allOf:
         - type: object
           properties:
+            entityId:
+              type: string
             smartTrafficLightName:
               type: string
             routeIdNorth:
@@ -16810,6 +16831,8 @@ components:
       allOf:
         - type: object
           properties:
+            entityId:
+              type: string
             smartTrafficLightName:
               type: string
             routeIdNorth:
@@ -16880,9 +16903,10 @@ components:
                 type: string
     GETSmartTrafficLightResponse:
       allOf:
-        - $ref: "#/components/schemas/GETMapResultResponse"
         - type: object
           properties:
+            entityId:
+              type: string
             smartTrafficLightName:
               type: string
             routeIdNorth:
@@ -16973,6 +16997,8 @@ components:
               items:
                 type: object
                 properties:
+                  entityId:
+                    type: string
                   address:
                     type: object
                   alternateName:
@@ -17053,6 +17079,13 @@ components:
       allOf:
         - type: object
           properties:
+            setEntityId:
+              type: string
+              nullable: true
+            removeEntityId:
+              type: string
+            removeAllEntityId:
+              type: string
             setAddress:
               type: object
               nullable: true
@@ -17323,6 +17356,13 @@ components:
       allOf:
         - type: object
           properties:
+            setEntityId:
+              type: string
+              nullable: true
+            removeEntityId:
+              type: string
+            removeAllEntityId:
+              type: string
             setAddress:
               type: object
               nullable: true
@@ -17593,6 +17633,8 @@ components:
       allOf:
         - type: object
           properties:
+            entityId:
+              type: string
             address:
               type: object
             alternateName:
@@ -17673,6 +17715,8 @@ components:
       allOf:
         - type: object
           properties:
+            entityId:
+              type: string
             address:
               type: object
             alternateName:
@@ -17753,6 +17797,8 @@ components:
       allOf:
         - type: object
           properties:
+            entityId:
+              type: string
             address:
               type: object
             alternateName:
@@ -17833,6 +17879,8 @@ components:
       allOf:
         - type: object
           properties:
+            entityId:
+              type: string
             address:
               type: object
             alternateName:
@@ -17914,6 +17962,8 @@ components:
         - $ref: "#/components/schemas/GETMapResultResponse"
         - type: object
           properties:
+            entityId:
+              type: string
             address:
               type: object
             alternateName:
@@ -19585,12 +19635,12 @@ components:
               type: string
             removeAllSimulationKey:
               type: string
-            setSmartTrafficLightId:
+            setSmartTrafficLightKey:
               type: string
               nullable: true
-            removeSmartTrafficLightId:
+            removeSmartTrafficLightKey:
               type: string
-            removeAllSmartTrafficLightId:
+            removeAllSmartTrafficLightKey:
               type: string
             setSimulationName:
               type: string
@@ -19878,12 +19928,12 @@ components:
               type: string
             removeAllSimulationKey:
               type: string
-            setSmartTrafficLightId:
+            setSmartTrafficLightKey:
               type: string
               nullable: true
-            removeSmartTrafficLightId:
+            removeSmartTrafficLightKey:
               type: string
-            removeAllSmartTrafficLightId:
+            removeAllSmartTrafficLightKey:
               type: string
             setSimulationName:
               type: string
@@ -20180,7 +20230,7 @@ components:
                 properties:
                   simulationKey:
                     type: string
-                  smartTrafficLightId:
+                  smartTrafficLightKey:
                     type: string
                   simulationName:
                     type: string
@@ -20269,12 +20319,12 @@ components:
               type: string
             removeAllSimulationKey:
               type: string
-            setSmartTrafficLightId:
+            setSmartTrafficLightKey:
               type: string
               nullable: true
-            removeSmartTrafficLightId:
+            removeSmartTrafficLightKey:
               type: string
-            removeAllSmartTrafficLightId:
+            removeAllSmartTrafficLightKey:
               type: string
             setSimulationName:
               type: string
@@ -20562,12 +20612,12 @@ components:
               type: string
             removeAllSimulationKey:
               type: string
-            setSmartTrafficLightId:
+            setSmartTrafficLightKey:
               type: string
               nullable: true
-            removeSmartTrafficLightId:
+            removeSmartTrafficLightKey:
               type: string
-            removeAllSmartTrafficLightId:
+            removeAllSmartTrafficLightKey:
               type: string
             setSimulationName:
               type: string
@@ -20850,7 +20900,7 @@ components:
           properties:
             simulationKey:
               type: string
-            smartTrafficLightId:
+            smartTrafficLightKey:
               type: string
             simulationName:
               type: string
@@ -20934,7 +20984,7 @@ components:
           properties:
             simulationKey:
               type: string
-            smartTrafficLightId:
+            smartTrafficLightKey:
               type: string
             simulationName:
               type: string
@@ -21018,7 +21068,7 @@ components:
           properties:
             simulationKey:
               type: string
-            smartTrafficLightId:
+            smartTrafficLightKey:
               type: string
             simulationName:
               type: string
@@ -21102,7 +21152,7 @@ components:
           properties:
             simulationKey:
               type: string
-            smartTrafficLightId:
+            smartTrafficLightKey:
               type: string
             simulationName:
               type: string
@@ -21186,7 +21236,7 @@ components:
           properties:
             simulationKey:
               type: string
-            smartTrafficLightId:
+            smartTrafficLightKey:
               type: string
             simulationName:
               type: string
