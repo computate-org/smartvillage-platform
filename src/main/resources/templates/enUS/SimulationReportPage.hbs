@@ -102,14 +102,21 @@ async function websocketSimulationReportInner2(apiRequest) {
 						<div id="searchpageSimulationReportForm">
 							<div class="w3-cell-row ">
 {{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmReportName" roleRequired="true"}}
+{{else}}
+{{> "htmReportName" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
 {{> "htmSimulationKey" roleRequired="true"}}
 {{else}}
 {{> "htmSimulationKey" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmReportName" roleRequired="true"}}
+{{> "htmSmartTrafficLightKey" roleRequired="true"}}
 {{else}}
-{{> "htmReportName" roleRequired="false"}}
+{{> "htmSmartTrafficLightKey" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-padding ">

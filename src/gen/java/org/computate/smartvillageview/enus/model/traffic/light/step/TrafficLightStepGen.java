@@ -1062,7 +1062,7 @@ public abstract class TrafficLightStepGen<DEV> extends MapResult {
 				apiRequest.addVars("trafficLightId");
 			if(!Objects.equals(trafficLightType, original.getTrafficLightType()))
 				apiRequest.addVars("trafficLightType");
-			if(!Objects.equals(angle, original.getAngle()))
+			if(!Objects.equals(angle, original.getAngle()) && angle != null && angle.compareTo(original.getAngle()) != 0)
 				apiRequest.addVars("angle");
 			if(!Objects.equals(state, original.getState()))
 				apiRequest.addVars("state");

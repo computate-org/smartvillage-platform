@@ -1109,6 +1109,60 @@ public abstract class SiteUserGen<DEV> extends BaseModel {
 		SiteUser oSiteUser = (SiteUser)this;
 		saves = doc.get("saves_docvalues_strings");
 		if(saves != null) {
+
+			if(saves.contains("userKeys")) {
+				List<Long> userKeys = (List<Long>)doc.get("userKeys_docvalues_longs");
+				if(userKeys != null)
+					oSiteUser.userKeys.addAll(userKeys);
+			}
+
+			if(saves.contains("userId")) {
+				String userId = (String)doc.get("userId_docvalues_string");
+				if(userId != null)
+					oSiteUser.setUserId(userId);
+			}
+
+			if(saves.contains("userName")) {
+				String userName = (String)doc.get("userName_docvalues_string");
+				if(userName != null)
+					oSiteUser.setUserName(userName);
+			}
+
+			if(saves.contains("userEmail")) {
+				String userEmail = (String)doc.get("userEmail_docvalues_string");
+				if(userEmail != null)
+					oSiteUser.setUserEmail(userEmail);
+			}
+
+			if(saves.contains("userFirstName")) {
+				String userFirstName = (String)doc.get("userFirstName_docvalues_string");
+				if(userFirstName != null)
+					oSiteUser.setUserFirstName(userFirstName);
+			}
+
+			if(saves.contains("userLastName")) {
+				String userLastName = (String)doc.get("userLastName_docvalues_string");
+				if(userLastName != null)
+					oSiteUser.setUserLastName(userLastName);
+			}
+
+			if(saves.contains("userFullName")) {
+				String userFullName = (String)doc.get("userFullName_docvalues_string");
+				if(userFullName != null)
+					oSiteUser.setUserFullName(userFullName);
+			}
+
+			if(saves.contains("seeArchived")) {
+				Boolean seeArchived = (Boolean)doc.get("seeArchived_docvalues_boolean");
+				if(seeArchived != null)
+					oSiteUser.setSeeArchived(seeArchived);
+			}
+
+			if(saves.contains("seeDeleted")) {
+				Boolean seeDeleted = (Boolean)doc.get("seeDeleted_docvalues_boolean");
+				if(seeDeleted != null)
+					oSiteUser.setSeeDeleted(seeDeleted);
+			}
 		}
 
 		super.populateBaseModel(doc);

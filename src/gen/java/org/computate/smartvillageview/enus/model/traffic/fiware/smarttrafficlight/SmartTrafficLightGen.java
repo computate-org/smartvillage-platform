@@ -3561,41 +3561,41 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 				apiRequest.addVars("routeIdEast");
 			if(!Objects.equals(trafficFlowObservedIds, original.getTrafficFlowObservedIds()))
 				apiRequest.addVars("trafficFlowObservedIds");
-			if(!Objects.equals(paramAvgVehiclePerMinFromWestToEast, original.getParamAvgVehiclePerMinFromWestToEast()))
+			if(!Objects.equals(paramAvgVehiclePerMinFromWestToEast, original.getParamAvgVehiclePerMinFromWestToEast()) && paramAvgVehiclePerMinFromWestToEast != null && paramAvgVehiclePerMinFromWestToEast.compareTo(original.getParamAvgVehiclePerMinFromWestToEast()) != 0)
 				apiRequest.addVars("paramAvgVehiclePerMinFromWestToEast");
-			if(!Objects.equals(paramAvgVehiclePerMinFromSouthToNorth, original.getParamAvgVehiclePerMinFromSouthToNorth()))
+			if(!Objects.equals(paramAvgVehiclePerMinFromSouthToNorth, original.getParamAvgVehiclePerMinFromSouthToNorth()) && paramAvgVehiclePerMinFromSouthToNorth != null && paramAvgVehiclePerMinFromSouthToNorth.compareTo(original.getParamAvgVehiclePerMinFromSouthToNorth()) != 0)
 				apiRequest.addVars("paramAvgVehiclePerMinFromSouthToNorth");
-			if(!Objects.equals(paramVehicleDemandScalingFactor, original.getParamVehicleDemandScalingFactor()))
+			if(!Objects.equals(paramVehicleDemandScalingFactor, original.getParamVehicleDemandScalingFactor()) && paramVehicleDemandScalingFactor != null && paramVehicleDemandScalingFactor.compareTo(original.getParamVehicleDemandScalingFactor()) != 0)
 				apiRequest.addVars("paramVehicleDemandScalingFactor");
-			if(!Objects.equals(paramAvgPedestrianPerMinFromWestToEast, original.getParamAvgPedestrianPerMinFromWestToEast()))
+			if(!Objects.equals(paramAvgPedestrianPerMinFromWestToEast, original.getParamAvgPedestrianPerMinFromWestToEast()) && paramAvgPedestrianPerMinFromWestToEast != null && paramAvgPedestrianPerMinFromWestToEast.compareTo(original.getParamAvgPedestrianPerMinFromWestToEast()) != 0)
 				apiRequest.addVars("paramAvgPedestrianPerMinFromWestToEast");
-			if(!Objects.equals(paramAvgPedestrianPerMinFromSouthToNorth, original.getParamAvgPedestrianPerMinFromSouthToNorth()))
+			if(!Objects.equals(paramAvgPedestrianPerMinFromSouthToNorth, original.getParamAvgPedestrianPerMinFromSouthToNorth()) && paramAvgPedestrianPerMinFromSouthToNorth != null && paramAvgPedestrianPerMinFromSouthToNorth.compareTo(original.getParamAvgPedestrianPerMinFromSouthToNorth()) != 0)
 				apiRequest.addVars("paramAvgPedestrianPerMinFromSouthToNorth");
-			if(!Objects.equals(paramPedestrianDemandScalingFactor, original.getParamPedestrianDemandScalingFactor()))
+			if(!Objects.equals(paramPedestrianDemandScalingFactor, original.getParamPedestrianDemandScalingFactor()) && paramPedestrianDemandScalingFactor != null && paramPedestrianDemandScalingFactor.compareTo(original.getParamPedestrianDemandScalingFactor()) != 0)
 				apiRequest.addVars("paramPedestrianDemandScalingFactor");
 			if(!Objects.equals(paramDemandScale, original.getParamDemandScale()))
 				apiRequest.addVars("paramDemandScale");
-			if(!Objects.equals(paramMinGreenTimeSecWestEast, original.getParamMinGreenTimeSecWestEast()))
+			if(!Objects.equals(paramMinGreenTimeSecWestEast, original.getParamMinGreenTimeSecWestEast()) && paramMinGreenTimeSecWestEast != null && paramMinGreenTimeSecWestEast.compareTo(original.getParamMinGreenTimeSecWestEast()) != 0)
 				apiRequest.addVars("paramMinGreenTimeSecWestEast");
-			if(!Objects.equals(paramMaxGreenTimeSecWestEast, original.getParamMaxGreenTimeSecWestEast()))
+			if(!Objects.equals(paramMaxGreenTimeSecWestEast, original.getParamMaxGreenTimeSecWestEast()) && paramMaxGreenTimeSecWestEast != null && paramMaxGreenTimeSecWestEast.compareTo(original.getParamMaxGreenTimeSecWestEast()) != 0)
 				apiRequest.addVars("paramMaxGreenTimeSecWestEast");
-			if(!Objects.equals(paramMinGreenTimeSecSouthNorth, original.getParamMinGreenTimeSecSouthNorth()))
+			if(!Objects.equals(paramMinGreenTimeSecSouthNorth, original.getParamMinGreenTimeSecSouthNorth()) && paramMinGreenTimeSecSouthNorth != null && paramMinGreenTimeSecSouthNorth.compareTo(original.getParamMinGreenTimeSecSouthNorth()) != 0)
 				apiRequest.addVars("paramMinGreenTimeSecSouthNorth");
-			if(!Objects.equals(paramMaxGreenTimeSecSouthNorth, original.getParamMaxGreenTimeSecSouthNorth()))
+			if(!Objects.equals(paramMaxGreenTimeSecSouthNorth, original.getParamMaxGreenTimeSecSouthNorth()) && paramMaxGreenTimeSecSouthNorth != null && paramMaxGreenTimeSecSouthNorth.compareTo(original.getParamMaxGreenTimeSecSouthNorth()) != 0)
 				apiRequest.addVars("paramMaxGreenTimeSecSouthNorth");
-			if(!Objects.equals(paramPedestrianWaitThresholdSecNorthSouth, original.getParamPedestrianWaitThresholdSecNorthSouth()))
+			if(!Objects.equals(paramPedestrianWaitThresholdSecNorthSouth, original.getParamPedestrianWaitThresholdSecNorthSouth()) && paramPedestrianWaitThresholdSecNorthSouth != null && paramPedestrianWaitThresholdSecNorthSouth.compareTo(original.getParamPedestrianWaitThresholdSecNorthSouth()) != 0)
 				apiRequest.addVars("paramPedestrianWaitThresholdSecNorthSouth");
-			if(!Objects.equals(paramPedestrianWaitThresholdSecWestEast, original.getParamPedestrianWaitThresholdSecWestEast()))
+			if(!Objects.equals(paramPedestrianWaitThresholdSecWestEast, original.getParamPedestrianWaitThresholdSecWestEast()) && paramPedestrianWaitThresholdSecWestEast != null && paramPedestrianWaitThresholdSecWestEast.compareTo(original.getParamPedestrianWaitThresholdSecWestEast()) != 0)
 				apiRequest.addVars("paramPedestrianWaitThresholdSecWestEast");
-			if(!Objects.equals(paramVehicleQueueThresholdWestEast, original.getParamVehicleQueueThresholdWestEast()))
+			if(!Objects.equals(paramVehicleQueueThresholdWestEast, original.getParamVehicleQueueThresholdWestEast()) && paramVehicleQueueThresholdWestEast != null && paramVehicleQueueThresholdWestEast.compareTo(original.getParamVehicleQueueThresholdWestEast()) != 0)
 				apiRequest.addVars("paramVehicleQueueThresholdWestEast");
-			if(!Objects.equals(paramVehicleQueueThresholdSouthNorth, original.getParamVehicleQueueThresholdSouthNorth()))
+			if(!Objects.equals(paramVehicleQueueThresholdSouthNorth, original.getParamVehicleQueueThresholdSouthNorth()) && paramVehicleQueueThresholdSouthNorth != null && paramVehicleQueueThresholdSouthNorth.compareTo(original.getParamVehicleQueueThresholdSouthNorth()) != 0)
 				apiRequest.addVars("paramVehicleQueueThresholdSouthNorth");
-			if(!Objects.equals(paramPedestrianQueueThresholdNorthSouth, original.getParamPedestrianQueueThresholdNorthSouth()))
+			if(!Objects.equals(paramPedestrianQueueThresholdNorthSouth, original.getParamPedestrianQueueThresholdNorthSouth()) && paramPedestrianQueueThresholdNorthSouth != null && paramPedestrianQueueThresholdNorthSouth.compareTo(original.getParamPedestrianQueueThresholdNorthSouth()) != 0)
 				apiRequest.addVars("paramPedestrianQueueThresholdNorthSouth");
-			if(!Objects.equals(paramPedestrianQueueThresholdWestEast, original.getParamPedestrianQueueThresholdWestEast()))
+			if(!Objects.equals(paramPedestrianQueueThresholdWestEast, original.getParamPedestrianQueueThresholdWestEast()) && paramPedestrianQueueThresholdWestEast != null && paramPedestrianQueueThresholdWestEast.compareTo(original.getParamPedestrianQueueThresholdWestEast()) != 0)
 				apiRequest.addVars("paramPedestrianQueueThresholdWestEast");
-			if(!Objects.equals(paramStepSize, original.getParamStepSize()))
+			if(!Objects.equals(paramStepSize, original.getParamStepSize()) && paramStepSize != null && paramStepSize.compareTo(original.getParamStepSize()) != 0)
 				apiRequest.addVars("paramStepSize");
 			if(!Objects.equals(paramRunTime, original.getParamRunTime()))
 				apiRequest.addVars("paramRunTime");

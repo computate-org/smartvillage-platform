@@ -1895,6 +1895,60 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 		SitePage oSitePage = (SitePage)this;
 		saves = doc.get("saves_docvalues_strings");
 		if(saves != null) {
+
+			if(saves.contains("courseNum")) {
+				Integer courseNum = (Integer)doc.get("courseNum_docvalues_int");
+				if(courseNum != null)
+					oSitePage.setCourseNum(courseNum);
+			}
+
+			if(saves.contains("lessonNum")) {
+				Integer lessonNum = (Integer)doc.get("lessonNum_docvalues_int");
+				if(lessonNum != null)
+					oSitePage.setLessonNum(lessonNum);
+			}
+
+			if(saves.contains("url")) {
+				String url = (String)doc.get("url_docvalues_string");
+				if(url != null)
+					oSitePage.setUrl(url);
+			}
+
+			if(saves.contains("uri")) {
+				String uri = (String)doc.get("uri_docvalues_string");
+				if(uri != null)
+					oSitePage.setUri(uri);
+			}
+
+			if(saves.contains("pageId")) {
+				String pageId = (String)doc.get("pageId_docvalues_string");
+				if(pageId != null)
+					oSitePage.setPageId(pageId);
+			}
+
+			if(saves.contains("h1")) {
+				String h1 = (String)doc.get("h1_docvalues_string");
+				if(h1 != null)
+					oSitePage.setH1(h1);
+			}
+
+			if(saves.contains("h2")) {
+				String h2 = (String)doc.get("h2_docvalues_string");
+				if(h2 != null)
+					oSitePage.setH2(h2);
+			}
+
+			if(saves.contains("author")) {
+				String author = (String)doc.get("author_docvalues_string");
+				if(author != null)
+					oSitePage.setAuthor(author);
+			}
+
+			if(saves.contains("pageImageUri")) {
+				String pageImageUri = (String)doc.get("pageImageUri_docvalues_string");
+				if(pageImageUri != null)
+					oSitePage.setPageImageUri(pageImageUri);
+			}
 		}
 
 		super.populateBaseResult(doc);

@@ -3524,6 +3524,246 @@ public abstract class IotNodeGen<DEV> extends BaseResult {
 		IotNode oIotNode = (IotNode)this;
 		saves = doc.get("saves_docvalues_strings");
 		if(saves != null) {
+
+			if(saves.contains("json")) {
+				JsonObject json = (JsonObject)doc.get("json_docvalues_string");
+				if(json != null)
+					oIotNode.setJson(json);
+			}
+
+			if(saves.contains("nodeName")) {
+				String nodeName = (String)doc.get("nodeName_docvalues_string");
+				if(nodeName != null)
+					oIotNode.setNodeName(nodeName);
+			}
+
+			if(saves.contains("nodeType")) {
+				String nodeType = (String)doc.get("nodeType_docvalues_string");
+				if(nodeType != null)
+					oIotNode.setNodeType(nodeType);
+			}
+
+			if(saves.contains("nodeId")) {
+				String nodeId = (String)doc.get("nodeId_docvalues_string");
+				if(nodeId != null)
+					oIotNode.setNodeId(nodeId);
+			}
+
+			if(saves.contains("location")) {
+				Point location = (Point)doc.get("location_docvalues_location");
+				if(location != null)
+					oIotNode.setLocation(location);
+			}
+
+			if(saves.contains("json_moisture")) {
+				Double json_moisture = (Double)doc.get("json_moisture_docvalues_double");
+				if(json_moisture != null)
+					oIotNode.setJson_moisture(json_moisture);
+			}
+
+			if(saves.contains("json_moisture0")) {
+				Double json_moisture0 = (Double)doc.get("json_moisture0_docvalues_double");
+				if(json_moisture0 != null)
+					oIotNode.setJson_moisture0(json_moisture0);
+			}
+
+			if(saves.contains("json_moisture1")) {
+				Double json_moisture1 = (Double)doc.get("json_moisture1_docvalues_double");
+				if(json_moisture1 != null)
+					oIotNode.setJson_moisture1(json_moisture1);
+			}
+
+			if(saves.contains("json_temperature")) {
+				Double json_temperature = (Double)doc.get("json_temperature_docvalues_double");
+				if(json_temperature != null)
+					oIotNode.setJson_temperature(json_temperature);
+			}
+
+			if(saves.contains("json_temperature0")) {
+				Double json_temperature0 = (Double)doc.get("json_temperature0_docvalues_double");
+				if(json_temperature0 != null)
+					oIotNode.setJson_temperature0(json_temperature0);
+			}
+
+			if(saves.contains("json_temperatureAverage")) {
+				Double json_temperatureAverage = (Double)doc.get("json_temperatureAverage_docvalues_double");
+				if(json_temperatureAverage != null)
+					oIotNode.setJson_temperatureAverage(json_temperatureAverage);
+			}
+
+			if(saves.contains("json_badConditionsCounter")) {
+				Double json_badConditionsCounter = (Double)doc.get("json_badConditionsCounter_docvalues_double");
+				if(json_badConditionsCounter != null)
+					oIotNode.setJson_badConditionsCounter(json_badConditionsCounter);
+			}
+
+			if(saves.contains("json_door")) {
+				String json_door = (String)doc.get("json_door_docvalues_string");
+				if(json_door != null)
+					oIotNode.setJson_door(json_door);
+			}
+
+			if(saves.contains("json_alarmDoor")) {
+				Boolean json_alarmDoor = (Boolean)doc.get("json_alarmDoor_docvalues_boolean");
+				if(json_alarmDoor != null)
+					oIotNode.setJson_alarmDoor(json_alarmDoor);
+			}
+
+			if(saves.contains("json_flood")) {
+				Double json_flood = (Double)doc.get("json_flood_docvalues_double");
+				if(json_flood != null)
+					oIotNode.setJson_flood(json_flood);
+			}
+
+			if(saves.contains("json_alarmFlood")) {
+				Boolean json_alarmFlood = (Boolean)doc.get("json_alarmFlood_docvalues_boolean");
+				if(json_alarmFlood != null)
+					oIotNode.setJson_alarmFlood(json_alarmFlood);
+			}
+
+			if(saves.contains("json_lux2")) {
+				Double json_lux2 = (Double)doc.get("json_lux2_docvalues_double");
+				if(json_lux2 != null)
+					oIotNode.setJson_lux2(json_lux2);
+			}
+
+			if(saves.contains("json_illuminance")) {
+				Double json_illuminance = (Double)doc.get("json_illuminance_docvalues_double");
+				if(json_illuminance != null)
+					oIotNode.setJson_illuminance(json_illuminance);
+			}
+
+			if(saves.contains("json_resistance0")) {
+				Double json_resistance0 = (Double)doc.get("json_resistance0_docvalues_double");
+				if(json_resistance0 != null)
+					oIotNode.setJson_resistance0(json_resistance0);
+			}
+
+			if(saves.contains("json_resistance1")) {
+				Double json_resistance1 = (Double)doc.get("json_resistance1_docvalues_double");
+				if(json_resistance1 != null)
+					oIotNode.setJson_resistance1(json_resistance1);
+			}
+
+			if(saves.contains("json_frequency")) {
+				Double json_frequency = (Double)doc.get("json_frequency_docvalues_double");
+				if(json_frequency != null)
+					oIotNode.setJson_frequency(json_frequency);
+			}
+
+			if(saves.contains("json_devEui")) {
+				String json_devEui = (String)doc.get("json_devEui_docvalues_string");
+				if(json_devEui != null)
+					oIotNode.setJson_devEui(json_devEui);
+			}
+
+			if(saves.contains("json_bandwidth")) {
+				String json_bandwidth = (String)doc.get("json_bandwidth_docvalues_string");
+				if(json_bandwidth != null)
+					oIotNode.setJson_bandwidth(json_bandwidth);
+			}
+
+			if(saves.contains("json_dataRate")) {
+				Double json_dataRate = (Double)doc.get("json_dataRate_docvalues_double");
+				if(json_dataRate != null)
+					oIotNode.setJson_dataRate(json_dataRate);
+			}
+
+			if(saves.contains("json_frameCount")) {
+				Double json_frameCount = (Double)doc.get("json_frameCount_docvalues_double");
+				if(json_frameCount != null)
+					oIotNode.setJson_frameCount(json_frameCount);
+			}
+
+			if(saves.contains("json_maxPayload")) {
+				Double json_maxPayload = (Double)doc.get("json_maxPayload_docvalues_double");
+				if(json_maxPayload != null)
+					oIotNode.setJson_maxPayload(json_maxPayload);
+			}
+
+			if(saves.contains("json_bitsPerSecond")) {
+				Double json_bitsPerSecond = (Double)doc.get("json_bitsPerSecond_docvalues_double");
+				if(json_bitsPerSecond != null)
+					oIotNode.setJson_bitsPerSecond(json_bitsPerSecond);
+			}
+
+			if(saves.contains("json_batteryVoltage")) {
+				Double json_batteryVoltage = (Double)doc.get("json_batteryVoltage_docvalues_double");
+				if(json_batteryVoltage != null)
+					oIotNode.setJson_batteryVoltage(json_batteryVoltage);
+			}
+
+			if(saves.contains("json_spreadingFactor")) {
+				Double json_spreadingFactor = (Double)doc.get("json_spreadingFactor_docvalues_double");
+				if(json_spreadingFactor != null)
+					oIotNode.setJson_spreadingFactor(json_spreadingFactor);
+			}
+
+			if(saves.contains("json_dataRateAdaptive")) {
+				Boolean json_dataRateAdaptive = (Boolean)doc.get("json_dataRateAdaptive_docvalues_boolean");
+				if(json_dataRateAdaptive != null)
+					oIotNode.setJson_dataRateAdaptive(json_dataRateAdaptive);
+			}
+
+			if(saves.contains("json_swversion")) {
+				String json_swversion = (String)doc.get("json_swversion_docvalues_string");
+				if(json_swversion != null)
+					oIotNode.setJson_swversion(json_swversion);
+			}
+
+			if(saves.contains("json_batteryLevel")) {
+				Double json_batteryLevel = (Double)doc.get("json_batteryLevel_docvalues_double");
+				if(json_batteryLevel != null)
+					oIotNode.setJson_batteryLevel(json_batteryLevel);
+			}
+
+			if(saves.contains("json_startUpCount")) {
+				Double json_startUpCount = (Double)doc.get("json_startUpCount_docvalues_double");
+				if(json_startUpCount != null)
+					oIotNode.setJson_startUpCount(json_startUpCount);
+			}
+
+			if(saves.contains("json_watchdogCount")) {
+				Double json_watchdogCount = (Double)doc.get("json_watchdogCount_docvalues_double");
+				if(json_watchdogCount != null)
+					oIotNode.setJson_watchdogCount(json_watchdogCount);
+			}
+
+			if(saves.contains("json_historySequence")) {
+				Double json_historySequence = (Double)doc.get("json_historySequence_docvalues_double");
+				if(json_historySequence != null)
+					oIotNode.setJson_historySequence(json_historySequence);
+			}
+
+			if(saves.contains("json_versionFirmware")) {
+				String json_versionFirmware = (String)doc.get("json_versionFirmware_docvalues_string");
+				if(json_versionFirmware != null)
+					oIotNode.setJson_versionFirmware(json_versionFirmware);
+			}
+
+			if(saves.contains("json_stackTxFailRebootCount")) {
+				Double json_stackTxFailRebootCount = (Double)doc.get("json_stackTxFailRebootCount_docvalues_double");
+				if(json_stackTxFailRebootCount != null)
+					oIotNode.setJson_stackTxFailRebootCount(json_stackTxFailRebootCount);
+			}
+
+			if(saves.contains("json_historySequencePrevious")) {
+				Double json_historySequencePrevious = (Double)doc.get("json_historySequencePrevious_docvalues_double");
+				if(json_historySequencePrevious != null)
+					oIotNode.setJson_historySequencePrevious(json_historySequencePrevious);
+			}
+
+			if(saves.contains("json_snr")) {
+				Double json_snr = (Double)doc.get("json_snr_docvalues_double");
+				if(json_snr != null)
+					oIotNode.setJson_snr(json_snr);
+			}
+
+			if(saves.contains("json_rssi")) {
+				Double json_rssi = (Double)doc.get("json_rssi_docvalues_double");
+				if(json_rssi != null)
+					oIotNode.setJson_rssi(json_rssi);
+			}
 		}
 
 		super.populateBaseResult(doc);
@@ -4002,75 +4242,75 @@ public abstract class IotNodeGen<DEV> extends BaseResult {
 				apiRequest.addVars("nodeId");
 			if(!Objects.equals(location, original.getLocation()))
 				apiRequest.addVars("location");
-			if(!Objects.equals(json_moisture, original.getJson_moisture()))
+			if(!Objects.equals(json_moisture, original.getJson_moisture()) && json_moisture != null && json_moisture.compareTo(original.getJson_moisture()) != 0)
 				apiRequest.addVars("json_moisture");
-			if(!Objects.equals(json_moisture0, original.getJson_moisture0()))
+			if(!Objects.equals(json_moisture0, original.getJson_moisture0()) && json_moisture0 != null && json_moisture0.compareTo(original.getJson_moisture0()) != 0)
 				apiRequest.addVars("json_moisture0");
-			if(!Objects.equals(json_moisture1, original.getJson_moisture1()))
+			if(!Objects.equals(json_moisture1, original.getJson_moisture1()) && json_moisture1 != null && json_moisture1.compareTo(original.getJson_moisture1()) != 0)
 				apiRequest.addVars("json_moisture1");
-			if(!Objects.equals(json_temperature, original.getJson_temperature()))
+			if(!Objects.equals(json_temperature, original.getJson_temperature()) && json_temperature != null && json_temperature.compareTo(original.getJson_temperature()) != 0)
 				apiRequest.addVars("json_temperature");
-			if(!Objects.equals(json_temperature0, original.getJson_temperature0()))
+			if(!Objects.equals(json_temperature0, original.getJson_temperature0()) && json_temperature0 != null && json_temperature0.compareTo(original.getJson_temperature0()) != 0)
 				apiRequest.addVars("json_temperature0");
-			if(!Objects.equals(json_temperatureAverage, original.getJson_temperatureAverage()))
+			if(!Objects.equals(json_temperatureAverage, original.getJson_temperatureAverage()) && json_temperatureAverage != null && json_temperatureAverage.compareTo(original.getJson_temperatureAverage()) != 0)
 				apiRequest.addVars("json_temperatureAverage");
-			if(!Objects.equals(json_badConditionsCounter, original.getJson_badConditionsCounter()))
+			if(!Objects.equals(json_badConditionsCounter, original.getJson_badConditionsCounter()) && json_badConditionsCounter != null && json_badConditionsCounter.compareTo(original.getJson_badConditionsCounter()) != 0)
 				apiRequest.addVars("json_badConditionsCounter");
 			if(!Objects.equals(json_door, original.getJson_door()))
 				apiRequest.addVars("json_door");
 			if(!Objects.equals(json_alarmDoor, original.getJson_alarmDoor()))
 				apiRequest.addVars("json_alarmDoor");
-			if(!Objects.equals(json_flood, original.getJson_flood()))
+			if(!Objects.equals(json_flood, original.getJson_flood()) && json_flood != null && json_flood.compareTo(original.getJson_flood()) != 0)
 				apiRequest.addVars("json_flood");
 			if(!Objects.equals(json_alarmFlood, original.getJson_alarmFlood()))
 				apiRequest.addVars("json_alarmFlood");
-			if(!Objects.equals(json_lux2, original.getJson_lux2()))
+			if(!Objects.equals(json_lux2, original.getJson_lux2()) && json_lux2 != null && json_lux2.compareTo(original.getJson_lux2()) != 0)
 				apiRequest.addVars("json_lux2");
-			if(!Objects.equals(json_illuminance, original.getJson_illuminance()))
+			if(!Objects.equals(json_illuminance, original.getJson_illuminance()) && json_illuminance != null && json_illuminance.compareTo(original.getJson_illuminance()) != 0)
 				apiRequest.addVars("json_illuminance");
-			if(!Objects.equals(json_resistance0, original.getJson_resistance0()))
+			if(!Objects.equals(json_resistance0, original.getJson_resistance0()) && json_resistance0 != null && json_resistance0.compareTo(original.getJson_resistance0()) != 0)
 				apiRequest.addVars("json_resistance0");
-			if(!Objects.equals(json_resistance1, original.getJson_resistance1()))
+			if(!Objects.equals(json_resistance1, original.getJson_resistance1()) && json_resistance1 != null && json_resistance1.compareTo(original.getJson_resistance1()) != 0)
 				apiRequest.addVars("json_resistance1");
-			if(!Objects.equals(json_frequency, original.getJson_frequency()))
+			if(!Objects.equals(json_frequency, original.getJson_frequency()) && json_frequency != null && json_frequency.compareTo(original.getJson_frequency()) != 0)
 				apiRequest.addVars("json_frequency");
 			if(!Objects.equals(json_devEui, original.getJson_devEui()))
 				apiRequest.addVars("json_devEui");
 			if(!Objects.equals(json_bandwidth, original.getJson_bandwidth()))
 				apiRequest.addVars("json_bandwidth");
-			if(!Objects.equals(json_dataRate, original.getJson_dataRate()))
+			if(!Objects.equals(json_dataRate, original.getJson_dataRate()) && json_dataRate != null && json_dataRate.compareTo(original.getJson_dataRate()) != 0)
 				apiRequest.addVars("json_dataRate");
-			if(!Objects.equals(json_frameCount, original.getJson_frameCount()))
+			if(!Objects.equals(json_frameCount, original.getJson_frameCount()) && json_frameCount != null && json_frameCount.compareTo(original.getJson_frameCount()) != 0)
 				apiRequest.addVars("json_frameCount");
-			if(!Objects.equals(json_maxPayload, original.getJson_maxPayload()))
+			if(!Objects.equals(json_maxPayload, original.getJson_maxPayload()) && json_maxPayload != null && json_maxPayload.compareTo(original.getJson_maxPayload()) != 0)
 				apiRequest.addVars("json_maxPayload");
-			if(!Objects.equals(json_bitsPerSecond, original.getJson_bitsPerSecond()))
+			if(!Objects.equals(json_bitsPerSecond, original.getJson_bitsPerSecond()) && json_bitsPerSecond != null && json_bitsPerSecond.compareTo(original.getJson_bitsPerSecond()) != 0)
 				apiRequest.addVars("json_bitsPerSecond");
-			if(!Objects.equals(json_batteryVoltage, original.getJson_batteryVoltage()))
+			if(!Objects.equals(json_batteryVoltage, original.getJson_batteryVoltage()) && json_batteryVoltage != null && json_batteryVoltage.compareTo(original.getJson_batteryVoltage()) != 0)
 				apiRequest.addVars("json_batteryVoltage");
-			if(!Objects.equals(json_spreadingFactor, original.getJson_spreadingFactor()))
+			if(!Objects.equals(json_spreadingFactor, original.getJson_spreadingFactor()) && json_spreadingFactor != null && json_spreadingFactor.compareTo(original.getJson_spreadingFactor()) != 0)
 				apiRequest.addVars("json_spreadingFactor");
 			if(!Objects.equals(json_dataRateAdaptive, original.getJson_dataRateAdaptive()))
 				apiRequest.addVars("json_dataRateAdaptive");
 			if(!Objects.equals(json_swversion, original.getJson_swversion()))
 				apiRequest.addVars("json_swversion");
-			if(!Objects.equals(json_batteryLevel, original.getJson_batteryLevel()))
+			if(!Objects.equals(json_batteryLevel, original.getJson_batteryLevel()) && json_batteryLevel != null && json_batteryLevel.compareTo(original.getJson_batteryLevel()) != 0)
 				apiRequest.addVars("json_batteryLevel");
-			if(!Objects.equals(json_startUpCount, original.getJson_startUpCount()))
+			if(!Objects.equals(json_startUpCount, original.getJson_startUpCount()) && json_startUpCount != null && json_startUpCount.compareTo(original.getJson_startUpCount()) != 0)
 				apiRequest.addVars("json_startUpCount");
-			if(!Objects.equals(json_watchdogCount, original.getJson_watchdogCount()))
+			if(!Objects.equals(json_watchdogCount, original.getJson_watchdogCount()) && json_watchdogCount != null && json_watchdogCount.compareTo(original.getJson_watchdogCount()) != 0)
 				apiRequest.addVars("json_watchdogCount");
-			if(!Objects.equals(json_historySequence, original.getJson_historySequence()))
+			if(!Objects.equals(json_historySequence, original.getJson_historySequence()) && json_historySequence != null && json_historySequence.compareTo(original.getJson_historySequence()) != 0)
 				apiRequest.addVars("json_historySequence");
 			if(!Objects.equals(json_versionFirmware, original.getJson_versionFirmware()))
 				apiRequest.addVars("json_versionFirmware");
-			if(!Objects.equals(json_stackTxFailRebootCount, original.getJson_stackTxFailRebootCount()))
+			if(!Objects.equals(json_stackTxFailRebootCount, original.getJson_stackTxFailRebootCount()) && json_stackTxFailRebootCount != null && json_stackTxFailRebootCount.compareTo(original.getJson_stackTxFailRebootCount()) != 0)
 				apiRequest.addVars("json_stackTxFailRebootCount");
-			if(!Objects.equals(json_historySequencePrevious, original.getJson_historySequencePrevious()))
+			if(!Objects.equals(json_historySequencePrevious, original.getJson_historySequencePrevious()) && json_historySequencePrevious != null && json_historySequencePrevious.compareTo(original.getJson_historySequencePrevious()) != 0)
 				apiRequest.addVars("json_historySequencePrevious");
-			if(!Objects.equals(json_snr, original.getJson_snr()))
+			if(!Objects.equals(json_snr, original.getJson_snr()) && json_snr != null && json_snr.compareTo(original.getJson_snr()) != 0)
 				apiRequest.addVars("json_snr");
-			if(!Objects.equals(json_rssi, original.getJson_rssi()))
+			if(!Objects.equals(json_rssi, original.getJson_rssi()) && json_rssi != null && json_rssi.compareTo(original.getJson_rssi()) != 0)
 				apiRequest.addVars("json_rssi");
 			super.apiRequestBaseResult();
 		}

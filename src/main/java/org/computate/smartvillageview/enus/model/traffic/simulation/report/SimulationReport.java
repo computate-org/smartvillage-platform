@@ -54,8 +54,20 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	/**
 	 * {@inheritDoc}
 	 * DocValues: true
-	 * Relate: TrafficSimulation.reportKeys
+	 * Persist: true
+	 * DisplayName: report name
 	 * HtmRow: 3
+	 * HtmCell: 1
+	 * Facet: true
+	 */
+	protected void _reportName(Wrap<String> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Relate: TrafficSimulation.reportKeys
+	 * HtmRow: 4
 	 * HtmCell: 1
 	 * Facet: true
 	 * DisplayName: traffic simulation
@@ -89,7 +101,7 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Relate: SmartTrafficLight.reportKeys
-	 * HtmRow: 3
+	 * HtmRow: 4
 	 * HtmCell: 2
 	 * Facet: true
 	 * DisplayName: smart traffic light
@@ -141,18 +153,6 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	protected void _smartTrafficLightName(Wrap<String> w) {
 		if(smartTrafficLight_ != null)
 			w.o(smartTrafficLight_.getSmartTrafficLightName());
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * DocValues: true
-	 * Persist: true
-	 * DisplayName: report name
-	 * HtmRow: 4
-	 * HtmCell: 1
-	 * Facet: true
-	 */
-	protected void _reportName(Wrap<String> w) {
 	}
 
 	@Override

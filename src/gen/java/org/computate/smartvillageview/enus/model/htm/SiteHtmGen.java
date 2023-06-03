@@ -1697,6 +1697,90 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 		SiteHtm oSiteHtm = (SiteHtm)this;
 		saves = doc.get("saves_docvalues_strings");
 		if(saves != null) {
+
+			if(saves.contains("url")) {
+				String url = (String)doc.get("url_docvalues_string");
+				if(url != null)
+					oSiteHtm.setUrl(url);
+			}
+
+			if(saves.contains("uri")) {
+				String uri = (String)doc.get("uri_docvalues_string");
+				if(uri != null)
+					oSiteHtm.setUri(uri);
+			}
+
+			if(saves.contains("pageId")) {
+				String pageId = (String)doc.get("pageId_docvalues_string");
+				if(pageId != null)
+					oSiteHtm.setPageId(pageId);
+			}
+
+			if(saves.contains("sequenceNum")) {
+				Long sequenceNum = (Long)doc.get("sequenceNum_docvalues_long");
+				if(sequenceNum != null)
+					oSiteHtm.setSequenceNum(sequenceNum);
+			}
+
+			if(saves.contains("htmGroup")) {
+				String htmGroup = (String)doc.get("htmGroup_docvalues_string");
+				if(htmGroup != null)
+					oSiteHtm.setHtmGroup(htmGroup);
+			}
+
+			if(saves.contains("labels")) {
+				List<String> labels = (List<String>)doc.get("labels_docvalues_strings");
+				if(labels != null)
+					oSiteHtm.labels.addAll(labels);
+			}
+
+			if(saves.contains("eBefore")) {
+				String eBefore = (String)doc.get("eBefore_docvalues_string");
+				if(eBefore != null)
+					oSiteHtm.setEBefore(eBefore);
+			}
+
+			if(saves.contains("eAfter")) {
+				String eAfter = (String)doc.get("eAfter_docvalues_string");
+				if(eAfter != null)
+					oSiteHtm.setEAfter(eAfter);
+			}
+
+			if(saves.contains("a")) {
+				JsonObject a = (JsonObject)doc.get("a_docvalues_string");
+				if(a != null)
+					oSiteHtm.setA(a);
+			}
+
+			if(saves.contains("comment")) {
+				List<String> comment = (List<String>)doc.get("comment_docvalues_strings");
+				if(comment != null)
+					oSiteHtm.comment.addAll(comment);
+			}
+
+			if(saves.contains("tabs")) {
+				String tabs = (String)doc.get("tabs_docvalues_string");
+				if(tabs != null)
+					oSiteHtm.setTabs(tabs);
+			}
+
+			if(saves.contains("newLine")) {
+				Boolean newLine = (Boolean)doc.get("newLine_docvalues_boolean");
+				if(newLine != null)
+					oSiteHtm.setNewLine(newLine);
+			}
+
+			if(saves.contains("htmBefore")) {
+				String htmBefore = (String)doc.get("htmBefore_stored_string");
+				if(htmBefore != null)
+					oSiteHtm.setHtmBefore(htmBefore);
+			}
+
+			if(saves.contains("htmAfter")) {
+				String htmAfter = (String)doc.get("htmAfter_stored_string");
+				if(htmAfter != null)
+					oSiteHtm.setHtmAfter(htmAfter);
+			}
 		}
 
 		super.populateBaseResult(doc);

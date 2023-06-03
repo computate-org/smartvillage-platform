@@ -494,6 +494,12 @@ public abstract class BicycleStepGen<DEV> extends MapResult {
 		BicycleStep oBicycleStep = (BicycleStep)this;
 		saves = doc.get("saves_docvalues_strings");
 		if(saves != null) {
+
+			if(saves.contains("bicycleId")) {
+				String bicycleId = (String)doc.get("bicycleId_docvalues_string");
+				if(bicycleId != null)
+					oBicycleStep.setBicycleId(bicycleId);
+			}
 		}
 
 		super.populateMapResult(doc);

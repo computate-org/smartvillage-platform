@@ -1528,7 +1528,7 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 				apiRequest.addVars("simulationKey");
 			if(!Objects.equals(timeStepId, original.getTimeStepId()))
 				apiRequest.addVars("timeStepId");
-			if(!Objects.equals(time, original.getTime()))
+			if(!Objects.equals(time, original.getTime()) && time != null && time.compareTo(original.getTime()) != 0)
 				apiRequest.addVars("time");
 			if(!Objects.equals(dateTime, original.getDateTime()))
 				apiRequest.addVars("dateTime");

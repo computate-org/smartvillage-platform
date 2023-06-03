@@ -779,6 +779,30 @@ public abstract class TimeStepGen<DEV> extends BaseResult {
 		TimeStep oTimeStep = (TimeStep)this;
 		saves = doc.get("saves_docvalues_strings");
 		if(saves != null) {
+
+			if(saves.contains("simulationKey")) {
+				Long simulationKey = (Long)doc.get("simulationKey_docvalues_long");
+				if(simulationKey != null)
+					oTimeStep.setSimulationKey(simulationKey);
+			}
+
+			if(saves.contains("path")) {
+				String path = (String)doc.get("path_docvalues_string");
+				if(path != null)
+					oTimeStep.setPath(path);
+			}
+
+			if(saves.contains("time")) {
+				Double time = (Double)doc.get("time_docvalues_double");
+				if(time != null)
+					oTimeStep.setTime(time);
+			}
+
+			if(saves.contains("dateTime")) {
+				Date dateTime = (Date)doc.get("dateTime_docvalues_date");
+				if(dateTime != null)
+					oTimeStep.setDateTime(dateTime);
+			}
 		}
 
 		super.populateBaseResult(doc);
@@ -891,7 +915,7 @@ public abstract class TimeStepGen<DEV> extends BaseResult {
 				apiRequest.addVars("simulationKey");
 			if(!Objects.equals(path, original.getPath()))
 				apiRequest.addVars("path");
-			if(!Objects.equals(time, original.getTime()))
+			if(!Objects.equals(time, original.getTime()) && time != null && time.compareTo(original.getTime()) != 0)
 				apiRequest.addVars("time");
 			if(!Objects.equals(dateTime, original.getDateTime()))
 				apiRequest.addVars("dateTime");

@@ -4777,13 +4777,13 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 				apiRequest.addVars("alternateName");
 			if(!Objects.equals(areaServed, original.getAreaServed()))
 				apiRequest.addVars("areaServed");
-			if(!Objects.equals(averageGapDistance, original.getAverageGapDistance()))
+			if(!Objects.equals(averageGapDistance, original.getAverageGapDistance()) && averageGapDistance != null && averageGapDistance.compareTo(original.getAverageGapDistance()) != 0)
 				apiRequest.addVars("averageGapDistance");
-			if(!Objects.equals(averageHeadwayTime, original.getAverageHeadwayTime()))
+			if(!Objects.equals(averageHeadwayTime, original.getAverageHeadwayTime()) && averageHeadwayTime != null && averageHeadwayTime.compareTo(original.getAverageHeadwayTime()) != 0)
 				apiRequest.addVars("averageHeadwayTime");
-			if(!Objects.equals(averageVehicleLength, original.getAverageVehicleLength()))
+			if(!Objects.equals(averageVehicleLength, original.getAverageVehicleLength()) && averageVehicleLength != null && averageVehicleLength.compareTo(original.getAverageVehicleLength()) != 0)
 				apiRequest.addVars("averageVehicleLength");
-			if(!Objects.equals(averageVehicleSpeed, original.getAverageVehicleSpeed()))
+			if(!Objects.equals(averageVehicleSpeed, original.getAverageVehicleSpeed()) && averageVehicleSpeed != null && averageVehicleSpeed.compareTo(original.getAverageVehicleSpeed()) != 0)
 				apiRequest.addVars("averageVehicleSpeed");
 			if(!Objects.equals(congested, original.getCongested()))
 				apiRequest.addVars("congested");
@@ -4801,7 +4801,7 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 				apiRequest.addVars("dateObservedTo");
 			if(!Objects.equals(description, original.getDescription()))
 				apiRequest.addVars("description");
-			if(!Objects.equals(intensity, original.getIntensity()))
+			if(!Objects.equals(intensity, original.getIntensity()) && intensity != null && intensity.compareTo(original.getIntensity()) != 0)
 				apiRequest.addVars("intensity");
 			if(!Objects.equals(laneDirection, original.getLaneDirection()))
 				apiRequest.addVars("laneDirection");
@@ -4809,7 +4809,7 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 				apiRequest.addVars("laneId");
 			if(!Objects.equals(name, original.getName()))
 				apiRequest.addVars("name");
-			if(!Objects.equals(occupancy, original.getOccupancy()))
+			if(!Objects.equals(occupancy, original.getOccupancy()) && occupancy != null && occupancy.compareTo(original.getOccupancy()) != 0)
 				apiRequest.addVars("occupancy");
 			if(!Objects.equals(owner, original.getOwner()))
 				apiRequest.addVars("owner");
@@ -4829,21 +4829,21 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 				apiRequest.addVars("vehicleType");
 			if(!Objects.equals(customRouteId, original.getCustomRouteId()))
 				apiRequest.addVars("customRouteId");
-			if(!Objects.equals(customSigma, original.getCustomSigma()))
+			if(!Objects.equals(customSigma, original.getCustomSigma()) && customSigma != null && customSigma.compareTo(original.getCustomSigma()) != 0)
 				apiRequest.addVars("customSigma");
-			if(!Objects.equals(customAcceleration, original.getCustomAcceleration()))
+			if(!Objects.equals(customAcceleration, original.getCustomAcceleration()) && customAcceleration != null && customAcceleration.compareTo(original.getCustomAcceleration()) != 0)
 				apiRequest.addVars("customAcceleration");
-			if(!Objects.equals(customDeceleration, original.getCustomDeceleration()))
+			if(!Objects.equals(customDeceleration, original.getCustomDeceleration()) && customDeceleration != null && customDeceleration.compareTo(original.getCustomDeceleration()) != 0)
 				apiRequest.addVars("customDeceleration");
-			if(!Objects.equals(customMinGreenTime, original.getCustomMinGreenTime()))
+			if(!Objects.equals(customMinGreenTime, original.getCustomMinGreenTime()) && customMinGreenTime != null && customMinGreenTime.compareTo(original.getCustomMinGreenTime()) != 0)
 				apiRequest.addVars("customMinGreenTime");
-			if(!Objects.equals(customMaxGreenTime, original.getCustomMaxGreenTime()))
+			if(!Objects.equals(customMaxGreenTime, original.getCustomMaxGreenTime()) && customMaxGreenTime != null && customMaxGreenTime.compareTo(original.getCustomMaxGreenTime()) != 0)
 				apiRequest.addVars("customMaxGreenTime");
-			if(!Objects.equals(customAverageVehiclesPerMinute, original.getCustomAverageVehiclesPerMinute()))
+			if(!Objects.equals(customAverageVehiclesPerMinute, original.getCustomAverageVehiclesPerMinute()) && customAverageVehiclesPerMinute != null && customAverageVehiclesPerMinute.compareTo(original.getCustomAverageVehiclesPerMinute()) != 0)
 				apiRequest.addVars("customAverageVehiclesPerMinute");
-			if(!Objects.equals(customDemandScalingFactor, original.getCustomDemandScalingFactor()))
+			if(!Objects.equals(customDemandScalingFactor, original.getCustomDemandScalingFactor()) && customDemandScalingFactor != null && customDemandScalingFactor.compareTo(original.getCustomDemandScalingFactor()) != 0)
 				apiRequest.addVars("customDemandScalingFactor");
-			if(!Objects.equals(customQueueLengthThreshold, original.getCustomQueueLengthThreshold()))
+			if(!Objects.equals(customQueueLengthThreshold, original.getCustomQueueLengthThreshold()) && customQueueLengthThreshold != null && customQueueLengthThreshold.compareTo(original.getCustomQueueLengthThreshold()) != 0)
 				apiRequest.addVars("customQueueLengthThreshold");
 			if(!Objects.equals(customTrafficLightId, original.getCustomTrafficLightId()))
 				apiRequest.addVars("customTrafficLightId");

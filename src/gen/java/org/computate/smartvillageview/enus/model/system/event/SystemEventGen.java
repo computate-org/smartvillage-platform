@@ -2504,6 +2504,140 @@ public abstract class SystemEventGen<DEV> extends Object {
 		SystemEvent oSystemEvent = (SystemEvent)this;
 		saves = doc.get("saves_docvalues_strings");
 		if(saves != null) {
+
+			if(saves.contains("type")) {
+				String type = (String)doc.get("type_docvalues_string");
+				if(type != null)
+					oSystemEvent.setType(type);
+			}
+
+			if(saves.contains("message")) {
+				String message = (String)doc.get("message_stored_string");
+				if(message != null)
+					oSystemEvent.setMessage(message);
+			}
+
+			if(saves.contains("status")) {
+				String status = (String)doc.get("status_stored_string");
+				if(status != null)
+					oSystemEvent.setStatus(status);
+			}
+
+			if(saves.contains("completed")) {
+				Date completed = (Date)doc.get("completed_docvalues_date");
+				if(completed != null)
+					oSystemEvent.setCompleted(completed);
+			}
+
+			if(saves.contains("inheritPk")) {
+				String inheritPk = (String)doc.get("inheritPk_docvalues_string");
+				if(inheritPk != null)
+					oSystemEvent.setInheritPk(inheritPk);
+			}
+
+			if(saves.contains("created")) {
+				Date created = (Date)doc.get("created_docvalues_date");
+				if(created != null)
+					oSystemEvent.setCreated(created);
+			}
+
+			if(saves.contains("modified")) {
+				Date modified = (Date)doc.get("modified_docvalues_date");
+				if(modified != null)
+					oSystemEvent.setModified(modified);
+			}
+
+			if(saves.contains("pageImageUri")) {
+				String pageImageUri = (String)doc.get("pageImageUri_docvalues_string");
+				if(pageImageUri != null)
+					oSystemEvent.setPageImageUri(pageImageUri);
+			}
+
+			if(saves.contains("archived")) {
+				Boolean archived = (Boolean)doc.get("archived_docvalues_boolean");
+				if(archived != null)
+					oSystemEvent.setArchived(archived);
+			}
+
+			if(saves.contains("deleted")) {
+				Boolean deleted = (Boolean)doc.get("deleted_docvalues_boolean");
+				if(deleted != null)
+					oSystemEvent.setDeleted(deleted);
+			}
+
+			if(saves.contains("classCanonicalName")) {
+				String classCanonicalName = (String)doc.get("classCanonicalName_docvalues_string");
+				if(classCanonicalName != null)
+					oSystemEvent.setClassCanonicalName(classCanonicalName);
+			}
+
+			if(saves.contains("classSimpleName")) {
+				String classSimpleName = (String)doc.get("classSimpleName_docvalues_string");
+				if(classSimpleName != null)
+					oSystemEvent.setClassSimpleName(classSimpleName);
+			}
+
+			if(saves.contains("classCanonicalNames")) {
+				List<String> classCanonicalNames = (List<String>)doc.get("classCanonicalNames_docvalues_strings");
+				if(classCanonicalNames != null)
+					oSystemEvent.classCanonicalNames.addAll(classCanonicalNames);
+			}
+
+			if(saves.contains("sessionId")) {
+				String sessionId = (String)doc.get("sessionId_docvalues_string");
+				if(sessionId != null)
+					oSystemEvent.setSessionId(sessionId);
+			}
+
+			if(saves.contains("userKey")) {
+				Long userKey = (Long)doc.get("userKey_docvalues_long");
+				if(userKey != null)
+					oSystemEvent.setUserKey(userKey);
+			}
+
+			if(saves.contains("saves")) {
+				List<String> saves = (List<String>)doc.get("saves_docvalues_strings");
+				if(saves != null)
+					oSystemEvent.saves.addAll(saves);
+			}
+
+			if(saves.contains("objectTitle")) {
+				String objectTitle = (String)doc.get("objectTitle_docvalues_string");
+				if(objectTitle != null)
+					oSystemEvent.setObjectTitle(objectTitle);
+			}
+
+			if(saves.contains("objectId")) {
+				String objectId = (String)doc.get("objectId_docvalues_string");
+				if(objectId != null)
+					oSystemEvent.setObjectId(objectId);
+			}
+
+			if(saves.contains("objectSuggest")) {
+				String objectSuggest = (String)doc.get("objectSuggest_suggested");
+				oSystemEvent.setObjectSuggest(objectSuggest);
+			}
+
+			if(saves.contains("pageUrlId")) {
+				String pageUrlId = (String)doc.get("pageUrlId_docvalues_string");
+				if(pageUrlId != null)
+					oSystemEvent.setPageUrlId(pageUrlId);
+			}
+
+			if(saves.contains("pageUrlPk")) {
+				String pageUrlPk = (String)doc.get("pageUrlPk_docvalues_string");
+				if(pageUrlPk != null)
+					oSystemEvent.setPageUrlPk(pageUrlPk);
+			}
+
+			if(saves.contains("pageUrlApi")) {
+				String pageUrlApi = (String)doc.get("pageUrlApi_docvalues_string");
+				if(pageUrlApi != null)
+					oSystemEvent.setPageUrlApi(pageUrlApi);
+			}
+
+			String id = (String)doc.get("id");
+			oSystemEvent.setId(id);
 		}
 	}
 

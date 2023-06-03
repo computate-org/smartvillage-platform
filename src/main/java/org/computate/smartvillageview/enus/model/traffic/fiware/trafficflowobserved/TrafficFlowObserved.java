@@ -63,7 +63,7 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 		if(customTrafficLightId != null) {
 			l.setC(SmartTrafficLight.class);
 			l.q("*:*");
-			l.fq(String.format("id:%s", customTrafficLightId));
+			l.fq(String.format(SmartTrafficLight.VAR_entityId + "_docvalues_string:%s", customTrafficLightId));
 			l.setStore(true);
 		}
 		promise.complete(l);

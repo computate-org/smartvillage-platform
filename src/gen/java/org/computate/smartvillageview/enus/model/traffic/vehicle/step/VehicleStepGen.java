@@ -942,6 +942,42 @@ public abstract class VehicleStepGen<DEV> extends MapResult {
 		VehicleStep oVehicleStep = (VehicleStep)this;
 		saves = doc.get("saves_docvalues_strings");
 		if(saves != null) {
+
+			if(saves.contains("vehicleId")) {
+				String vehicleId = (String)doc.get("vehicleId_docvalues_string");
+				if(vehicleId != null)
+					oVehicleStep.setVehicleId(vehicleId);
+			}
+
+			if(saves.contains("vehicleType")) {
+				String vehicleType = (String)doc.get("vehicleType_docvalues_string");
+				if(vehicleType != null)
+					oVehicleStep.setVehicleType(vehicleType);
+			}
+
+			if(saves.contains("angle")) {
+				Double angle = (Double)doc.get("angle_docvalues_double");
+				if(angle != null)
+					oVehicleStep.setAngle(angle);
+			}
+
+			if(saves.contains("speed")) {
+				Double speed = (Double)doc.get("speed_docvalues_double");
+				if(speed != null)
+					oVehicleStep.setSpeed(speed);
+			}
+
+			if(saves.contains("pos")) {
+				Double pos = (Double)doc.get("pos_docvalues_double");
+				if(pos != null)
+					oVehicleStep.setPos(pos);
+			}
+
+			if(saves.contains("slope")) {
+				Double slope = (Double)doc.get("slope_docvalues_double");
+				if(slope != null)
+					oVehicleStep.setSlope(slope);
+			}
 		}
 
 		super.populateMapResult(doc);
@@ -1074,13 +1110,13 @@ public abstract class VehicleStepGen<DEV> extends MapResult {
 				apiRequest.addVars("vehicleId");
 			if(!Objects.equals(vehicleType, original.getVehicleType()))
 				apiRequest.addVars("vehicleType");
-			if(!Objects.equals(angle, original.getAngle()))
+			if(!Objects.equals(angle, original.getAngle()) && angle != null && angle.compareTo(original.getAngle()) != 0)
 				apiRequest.addVars("angle");
-			if(!Objects.equals(speed, original.getSpeed()))
+			if(!Objects.equals(speed, original.getSpeed()) && speed != null && speed.compareTo(original.getSpeed()) != 0)
 				apiRequest.addVars("speed");
-			if(!Objects.equals(pos, original.getPos()))
+			if(!Objects.equals(pos, original.getPos()) && pos != null && pos.compareTo(original.getPos()) != 0)
 				apiRequest.addVars("pos");
-			if(!Objects.equals(slope, original.getSlope()))
+			if(!Objects.equals(slope, original.getSlope()) && slope != null && slope.compareTo(original.getSlope()) != 0)
 				apiRequest.addVars("slope");
 			super.apiRequestMapResult();
 		}

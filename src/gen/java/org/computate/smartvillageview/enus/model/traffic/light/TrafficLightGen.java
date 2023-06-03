@@ -731,6 +731,30 @@ public abstract class TrafficLightGen<DEV> extends MapResult {
 		TrafficLight oTrafficLight = (TrafficLight)this;
 		saves = doc.get("saves_docvalues_strings");
 		if(saves != null) {
+
+			if(saves.contains("trafficLightId")) {
+				String trafficLightId = (String)doc.get("trafficLightId_docvalues_string");
+				if(trafficLightId != null)
+					oTrafficLight.setTrafficLightId(trafficLightId);
+			}
+
+			if(saves.contains("trafficLightType")) {
+				String trafficLightType = (String)doc.get("trafficLightType_docvalues_string");
+				if(trafficLightType != null)
+					oTrafficLight.setTrafficLightType(trafficLightType);
+			}
+
+			if(saves.contains("angle")) {
+				Double angle = (Double)doc.get("angle_docvalues_double");
+				if(angle != null)
+					oTrafficLight.setAngle(angle);
+			}
+
+			if(saves.contains("color")) {
+				String color = (String)doc.get("color_docvalues_string");
+				if(color != null)
+					oTrafficLight.setColor(color);
+			}
 		}
 
 		super.populateMapResult(doc);
@@ -843,7 +867,7 @@ public abstract class TrafficLightGen<DEV> extends MapResult {
 				apiRequest.addVars("trafficLightId");
 			if(!Objects.equals(trafficLightType, original.getTrafficLightType()))
 				apiRequest.addVars("trafficLightType");
-			if(!Objects.equals(angle, original.getAngle()))
+			if(!Objects.equals(angle, original.getAngle()) && angle != null && angle.compareTo(original.getAngle()) != 0)
 				apiRequest.addVars("angle");
 			if(!Objects.equals(color, original.getColor()))
 				apiRequest.addVars("color");

@@ -58,7 +58,7 @@ public class TrafficFlowObservedEnUSApiServiceImpl extends TrafficFlowObservedEn
 				List<Future> futures = new ArrayList<>();
 
 				if(smartTrafficLight != null) {
-					String id2 = smartTrafficLight.getId();
+					String id2 = smartTrafficLight.getEntityId();
 					String classSimpleName2 = SmartTrafficLight.CLASS_SIMPLE_NAME;
 
 					if("SmartTrafficLight".equals(classSimpleName2) && id2 != null) {
@@ -66,7 +66,7 @@ public class TrafficFlowObservedEnUSApiServiceImpl extends TrafficFlowObservedEn
 						searchList2.setStore(true);
 						searchList2.q("*:*");
 						searchList2.setC(SmartTrafficLight.class);
-						searchList2.fq("id:" + id2);
+						searchList2.fq(SmartTrafficLight.VAR_entityId + "_docvalues_string:" + id2);
 						searchList2.rows(1L);
 						futures.add(Future.future(promise2 -> {
 							searchList2.promiseDeepSearchList(siteRequest).onSuccess(b -> {
@@ -76,7 +76,7 @@ public class TrafficFlowObservedEnUSApiServiceImpl extends TrafficFlowObservedEn
 									params.put("body", new JsonObject());
 									params.put("cookie", new JsonObject());
 									params.put("path", new JsonObject());
-									params.put("query", new JsonObject().put("q", "*:*").put("fq", new JsonArray().add("id:" + id2)).put("var", new JsonArray().add("refresh:false")));
+									params.put("query", new JsonObject().put("q", "*:*").put("fq", new JsonArray().add(SmartTrafficLight.VAR_entityId + ":" + id2)).put("var", new JsonArray().add("refresh:false")));
 									JsonObject context = new JsonObject().put("params", params).put("user", siteRequest.getUserPrincipal());
 									JsonObject json = new JsonObject().put("context", context);
 									eventBus.request("smartabyar-smartvillage-enUS-SmartTrafficLight", json, new DeliveryOptions().addHeader("action", "patchSmartTrafficLightFuture")).onSuccess(c -> {

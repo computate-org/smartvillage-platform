@@ -446,6 +446,13 @@
 							</div>
 							<div class="w3-cell-row ">
 {{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmReportName" roleRequired="true"}}
+{{else}}
+{{> "htmReportName" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
 {{> "htmSimulationKey" roleRequired="true"}}
 {{else}}
 {{> "htmSimulationKey" roleRequired="false"}}
@@ -454,13 +461,6 @@
 {{> "htmSmartTrafficLightKey" roleRequired="true"}}
 {{else}}
 {{> "htmSmartTrafficLightKey" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmReportName" roleRequired="true"}}
-{{else}}
-{{> "htmReportName" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
@@ -647,6 +647,13 @@
 							</div>
 							<div class="w3-cell-row ">
 {{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmReportName" roleRequired="true"}}
+{{else}}
+{{> "htmReportName" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
 {{> "htmSimulationKey" roleRequired="true"}}
 {{else}}
 {{> "htmSimulationKey" roleRequired="false"}}
@@ -655,13 +662,6 @@
 {{> "htmSmartTrafficLightKey" roleRequired="true"}}
 {{else}}
 {{> "htmSmartTrafficLightKey" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmReportName" roleRequired="true"}}
-{{else}}
-{{> "htmReportName" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
@@ -885,6 +885,13 @@
 							</div>
 							<div class="w3-cell-row ">
 {{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmReportName" roleRequired="true"}}
+{{else}}
+{{> "htmReportName" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
 {{> "htmSimulationKey" roleRequired="true"}}
 {{else}}
 {{> "htmSimulationKey" roleRequired="false"}}
@@ -893,13 +900,6 @@
 {{> "htmSmartTrafficLightKey" roleRequired="true"}}
 {{else}}
 {{> "htmSmartTrafficLightKey" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmReportName" roleRequired="true"}}
-{{else}}
-{{> "htmReportName" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">
@@ -1319,6 +1319,74 @@
 {{/inline}}
 {{> BaseModelPage baseModel_=simulationReport_}}
 
+{{#*inline "htmReportName"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SimulationReportReportName">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_reportName">report name</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputReportName" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_reportName')); $('#{{classApiMethodMethod}}_reportName').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SimulationReportForm :input[name=pk]').val() }], 'setReportName', null, function() { addGlow($('#{{classApiMethodMethod}}_reportName')); }, function() { addError($('#{{classApiMethodMethod}}_reportName')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputReportName"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															placeholder="report name"
+															id="{{classApiMethodMethod}}_reportName"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setReportName classSimulationReport inputSimulationReport{{pk}}ReportName w3-input w3-border "
+																name="setReportName"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setReportName classSimulationReport inputSimulationReport{{pk}}ReportName w3-input w3-border "
+																name="setReportName"
+		{{else}}
+																class="valueReportName w3-input w3-border classSimulationReport inputSimulationReport{{pk}}ReportName w3-input w3-border "
+																name="reportName"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setReportName', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_reportName')); }, function() { addError($('#{{classApiMethodMethod}}_reportName')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{simulationReport_.reportName}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varSimulationReport{{pk}}ReportName ">{{simulationReport_.reportName}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varSimulationReport{{pk}}ReportName ">{{simulationReport_.reportName}}</span>
+		{{/eq}}
+{{/inline}}
+
 {{#*inline "htmSimulationKey"}}
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									<div class="w3-padding ">
@@ -1604,74 +1672,6 @@
 			{{/ifContainsKeys}}
 		{{else}}
 														<span class="varSimulationReport{{pk}}SmartTrafficLightName ">{{simulationReport_.smartTrafficLightName}}</span>
-		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmReportName"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}SimulationReportReportName">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_reportName">report name</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputReportName" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_reportName')); $('#{{classApiMethodMethod}}_reportName').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SimulationReportForm :input[name=pk]').val() }], 'setReportName', null, function() { addGlow($('#{{classApiMethodMethod}}_reportName')); }, function() { addError($('#{{classApiMethodMethod}}_reportName')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputReportName"}}
-		{{#eq roleRequired "true"}}
-														<input
-															type="text"
-															placeholder="report name"
-															id="{{classApiMethodMethod}}_reportName"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setReportName classSimulationReport inputSimulationReport{{pk}}ReportName w3-input w3-border "
-																name="setReportName"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setReportName classSimulationReport inputSimulationReport{{pk}}ReportName w3-input w3-border "
-																name="setReportName"
-		{{else}}
-																class="valueReportName w3-input w3-border classSimulationReport inputSimulationReport{{pk}}ReportName w3-input w3-border "
-																name="reportName"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setReportName', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_reportName')); }, function() { addError($('#{{classApiMethodMethod}}_reportName')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{simulationReport_.reportName}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varSimulationReport{{pk}}ReportName ">{{simulationReport_.reportName}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varSimulationReport{{pk}}ReportName ">{{simulationReport_.reportName}}</span>
 		{{/eq}}
 {{/inline}}
 
