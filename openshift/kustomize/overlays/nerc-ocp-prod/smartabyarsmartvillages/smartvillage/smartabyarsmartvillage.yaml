@@ -62,7 +62,7 @@ spec:
       
     route:
       create: True
-      host_name: smartvillage.computate.org
+      host_name: www.smartabyarsmartvillage.org
   zookeeper:
     create: true
     service_name: |-
