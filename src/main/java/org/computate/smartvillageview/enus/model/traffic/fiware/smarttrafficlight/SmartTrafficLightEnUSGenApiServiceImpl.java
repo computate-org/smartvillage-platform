@@ -92,7 +92,6 @@ import java.util.Base64;
 import java.time.ZonedDateTime;
 import org.apache.commons.lang3.BooleanUtils;
 import org.computate.vertx.search.list.SearchList;
-import org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLightPage;
 
 
 /**

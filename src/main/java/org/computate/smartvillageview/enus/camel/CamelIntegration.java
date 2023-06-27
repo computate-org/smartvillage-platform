@@ -78,21 +78,35 @@ public class CamelIntegration extends CamelIntegrationGen<Object> {
 			RouteBuilder routeBuilder = new RouteBuilder() {
 				public void configure() {
 
-					from(String.format("vertx-kafka:%s?bootstrapServers=%s&groupId=%s&securityProtocol=%s&sslKeystoreLocation=%s&sslKeystorePassword=%s&sslTruststoreLocation=%s&sslTruststorePassword=%s&seekToPosition=end"
-							, config.getString(ConfigKeys.KAFKA_TOPIC_SUMO_RUN_REPORT)
-							, config.getString(ConfigKeys.KAFKA_BROKERS)
-							, config.getString(ConfigKeys.KAFKA_GROUP)
-							, config.getString(ConfigKeys.KAFKA_SECURITY_PROTOCOL)
-							, config.getString(ConfigKeys.KAFKA_SSL_KEYSTORE_LOCATION)
-							, config.getString(ConfigKeys.KAFKA_SSL_KEYSTORE_PASSWORD)
-							, config.getString(ConfigKeys.KAFKA_SSL_TRUSTSTORE_LOCATION)
-							, config.getString(ConfigKeys.KAFKA_SSL_TRUSTSTORE_PASSWORD)
-							))
-					.log("received SUMO run report event: ${body}")
-					.bean(CamelIntegration.class, "exchangeToJsonObject")
-					.bean(SimulationReport.class, "patchSimulationReportFuture")
-					.to("vertx:smartabyar-smartvillage-enUS-SimulationReport-patchSimulationReportFuture?exchangePattern=InOut")
-					.end();
+					String securityProtocol = config.getString(ConfigKeys.KAFKA_SECURITY_PROTOCOL);
+					if(securityProtocol == null) {
+						from(String.format("vertx-kafka:%s?bootstrapServers=%s&groupId=%s&seekToPosition=end"
+								, config.getString(ConfigKeys.KAFKA_TOPIC_SUMO_RUN_REPORT)
+								, config.getString(ConfigKeys.KAFKA_BROKERS)
+								, config.getString(ConfigKeys.KAFKA_GROUP)
+								))
+								.log("received SUMO run report event: ${body}")
+								.bean(CamelIntegration.class, "exchangeToJsonObject")
+								.bean(SimulationReport.class, "patchSimulationReportFuture")
+								.to("vertx:smartabyar-smartvillage-enUS-SimulationReport-patchSimulationReportFuture?exchangePattern=InOut")
+						.end();
+					} else {
+						from(String.format("vertx-kafka:%s?bootstrapServers=%s&groupId=%s&securityProtocol=%s&sslKeystoreLocation=%s&sslKeystorePassword=%s&sslTruststoreLocation=%s&sslTruststorePassword=%s&seekToPosition=end"
+								, config.getString(ConfigKeys.KAFKA_TOPIC_SUMO_RUN_REPORT)
+								, config.getString(ConfigKeys.KAFKA_BROKERS)
+								, config.getString(ConfigKeys.KAFKA_GROUP)
+								, config.getString(ConfigKeys.KAFKA_SECURITY_PROTOCOL)
+								, config.getString(ConfigKeys.KAFKA_SSL_KEYSTORE_LOCATION)
+								, config.getString(ConfigKeys.KAFKA_SSL_KEYSTORE_PASSWORD)
+								, config.getString(ConfigKeys.KAFKA_SSL_TRUSTSTORE_LOCATION)
+								, config.getString(ConfigKeys.KAFKA_SSL_TRUSTSTORE_PASSWORD)
+								))
+								.log("received SUMO run report event: ${body}")
+								.bean(CamelIntegration.class, "exchangeToJsonObject")
+								.bean(SimulationReport.class, "patchSimulationReportFuture")
+								.to("vertx:smartabyar-smartvillage-enUS-SimulationReport-patchSimulationReportFuture?exchangePattern=InOut")
+						.end();
+					}
 
 //					.setProperty(ConfigKeys.KIE_SERVER_BASE_URL, ExpressionBuilder.constantExpression(config.getString(ConfigKeys.KIE_SERVER_BASE_URL)))
 //					.setProperty(ConfigKeys.KIE_SERVER_USERNAME, ExpressionBuilder.constantExpression(config.getString(ConfigKeys.KIE_SERVER_USERNAME)))

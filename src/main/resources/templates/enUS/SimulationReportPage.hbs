@@ -42,6 +42,10 @@ async function websocketSimulationReportInner2(apiRequest) {
 					var $fragment = $(fragment);
 					$fragment.replaceWith($response.find(".updatedParametersTable"));
 				});
+				$('.updatedQueueLengthTable').each(function(index, fragment) {
+					var $fragment = $(fragment);
+					$fragment.replaceWith($response.find(".updatedQueueLengthTable"));
+				});
 			}, 'html');
 
 			addGlow($('.plotPerformance'));
@@ -50,6 +54,7 @@ async function websocketSimulationReportInner2(apiRequest) {
 			addGlow($('.plotQueueLengthThreshold'));
 			addGlow($('.updatedPerformanceTable'));
 			addGlow($('.updatedParametersTable'));
+			addGlow($('.updatedQueueLengthTable'));
 		}
 	}
 }
@@ -349,7 +354,6 @@ async function websocketSimulationReportInner2(apiRequest) {
 {{else}}
 {{> "inputParamPedestrianWaitThresholdSecNorthSouth" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
-											</td>
 											<td class="">
 												<span>[1, 60]</span>
 											</td>
@@ -589,6 +593,53 @@ async function websocketSimulationReportInner2(apiRequest) {
 											</td>
 											<td class="w3-cell ">
 												{{#each simulationReport_.updatedPerformanceWaitAllVehiclePedestrianSec}}<td>{{.}}</td>{{/each}}
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+
+							<div class="w3-padding updatedQueueLengthTable ">
+								<table class="w3-table-all ">
+									<thead>
+										<tr class="">
+											<th class="w3-2017-shaded-spruce " colspan="2">
+												<span>Average queue length</span>
+											</th>
+											{{#each simulationReport_.updatedPerformanceWaitWestEastVehicleSec}}<th class="w3-2017-shaded-spruce ">iter {{numberAdd @index 1}}</th>{{/each}}
+										</tr>
+									</thead>
+									<tbody>
+										<tr class="">
+											<td class="">
+												<span>Average queue length for WEST-EAST vehicle</span>
+											</td>
+											<td class="w3-cell ">
+												{{#each simulationReport_.avgQueueLengthWestEastVehicle}}<td>{{.}}</td>{{/each}}
+											</td>
+										</tr>
+										<tr class="">
+											<td class="">
+												<span>Average queue length for SOUTH-NORTH vehicle</span>
+											</td>
+											<td class="w3-cell ">
+												{{#each simulationReport_.avgQueueLengthSouthNorthVehicle}}<td>{{.}}</td>{{/each}}
+											</td>
+										</tr>
+										<tr class="">
+											<td class="">
+												<span>Average queue length for NORTH-SOUTH pedestrian</span>
+											</td>
+											<td class="w3-cell ">
+												{{#each simulationReport_.avgQueueLengthNorthSouthPedestrian}}<td>{{.}}</td>{{/each}}
+											</td>
+										</tr>
+										<tr class="">
+											<td class="">
+												<span>Average queue length for WEST-EAST pedestrian</span>
+											</td>
+											<td class="w3-cell ">
+												{{#each simulationReport_.avgQueueLengthNorthSouthPedestrian}}<td>{{.}}</td>{{/each}}
 											</td>
 										</tr>
 									</tbody>

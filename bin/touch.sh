@@ -42,6 +42,7 @@ touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvill
 touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/model/traffic/bicycle/step/BicycleStep.java
 touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/model/traffic/vehicle/step/VehicleStep.java
 touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/model/traffic/fiware/trafficflowobserved/TrafficFlowObserved.java
+touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/model/traffic/fiware/smarttrafficlight/SmartTrafficLight.java
 touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/model/traffic/time/step/TimeStep.java
 touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/result/map/MapResult.java
 touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/model/traffic/simulation/TrafficSimulation.java
@@ -58,6 +59,7 @@ touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvill
 touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/model/traffic/bicycle/step/BicycleStep.java
 touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/model/traffic/vehicle/step/VehicleStep.java
 touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/model/traffic/fiware/trafficflowobserved/TrafficFlowObserved.java
+touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/model/traffic/fiware/smarttrafficlight/SmartTrafficLight.java
 touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/model/traffic/time/step/TimeStep.java
 touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/result/map/MapResult.java
 touch ~/.local/src/smartabyar-smartvillage/src/main/java/org/computate/smartvillageview/enus/model/traffic/simulation/TrafficSimulation.java
