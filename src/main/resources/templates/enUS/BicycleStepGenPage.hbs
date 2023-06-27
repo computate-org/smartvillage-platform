@@ -893,7 +893,7 @@
 			</tr>
 	{{/inline}}
 {{#*inline "htmFormsBicycleStepPage"}}
-	{{#ifContainsAnyRoles roles roleRequired}}
+{{#ifContainsAnyRoles roles authRoleSuperAdmin}}
 		{{#eq bicycleStepCount int1}}
 		<button
 			class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce "
@@ -903,12 +903,16 @@
 			refresh this bicycle step
 		</button>
 		{{/eq}}
-	{{/ifContainsAnyRoles}}
-	{{#ifContainsAnyRoles roles authRoleAdmin}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles authRoleSuperAdmin}}
 {{#block "htmForm_patchBicycleStep"}}{{/block}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles authRoleAdmin}}
 {{#block "htmForm_postBicycleStep"}}{{/block}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles authRoleSuperAdmin}}
 {{#block "htmForm_putimportBicycleStep"}}{{/block}}
-	{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
 {{#block "htmSuggested"}}{{/block}}
 {{/inline}}
 {{#*inline "htmSuggestedBicycleStepPage"}}

@@ -159,7 +159,7 @@ public class PageLayout extends PageLayoutGen<Object> {
 	 * Description: The current user's username
 	 */
 	protected void _userName(Wrap<String> w) {
-		w.o(siteRequest_.getUserFullName());
+		w.o(siteRequest_.getUserName());
 	}
 
 	/**
@@ -250,6 +250,13 @@ public class PageLayout extends PageLayoutGen<Object> {
 	 */
 	protected void _authRoleAdmin(List<String> l) {
 		l.add(siteRequest_.getConfig().getString(ConfigKeys.AUTH_ROLE_ADMIN));
+	}
+
+	/**
+	 * Description: The admin roles required to access this page
+	 */
+	protected void _authRoleSuperAdmin(List<String> l) {
+		l.add(siteRequest_.getConfig().getString(ConfigKeys.AUTH_ROLE_SUPER_ADMIN));
 	}
 
 	protected void _stats(Wrap<SolrResponse.Stats> w) {

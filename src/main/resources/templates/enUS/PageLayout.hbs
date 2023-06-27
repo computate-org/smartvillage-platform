@@ -38,13 +38,13 @@
 {{#*inline "htmBodyMenuPageLayout"}}
 		<div class="w3-bar w3-hide-small ">
 			<div class="site-bar-item w3-bar-item ">
-				<a class="w3-bar-item " href="{{ siteBaseUrl }}"><i class="fad fa-house "></i> smartabyar-smartvillage</a>
+				<a class="w3-bar-item " href="{{ siteBaseUrl }}"><i class="fad fa-house "></i> home</a>
 			</div>
 {{> "htmMenuItems"}}
 		</div>
 		<div class="w3-bar w3-hide-medium w3-hide-large ">
 			<div class="site-bar-item w3-bar-item ">
-				<a class="w3-bar-item " href="{{ siteBaseUrl }}"><i class="fad fa-house "></i> smartabyar-smartvillage</a>
+				<a class="w3-bar-item " href="{{ siteBaseUrl }}"><i class="fad fa-house "></i> home</a>
 			</div>
 			<div class="w3-dropdown-hover ">
 				<button class="w3-button w3-text-black "><i class="fad fa-bars w3-text-black "></i> Menu</button>
@@ -58,14 +58,37 @@
 
 {{#if userKey}}
 				<div class="site-bar-item w3-bar-item ">
-					<a href="/user/{{ userKey }}" class="header-icon-a w3-hover-opacity w3-center w3-text-2017-shaded-spruce "><i class="fad fa-house-user w3-text-2017-shaded-spruce "></i> {{userName}}</a>
-					<a href="{{ logoutUrl }}" class="header-icon-a w3-hover-opacity w3-center w3-text-2017-shaded-spruce "><i class="fad fa-house-user w3-text-2017-shaded-spruce "></i> Logout</a>
+					<div class="w3-dropdown-hover ">
+						<div class="">
+							<i class="fad fa-house-user w3-text-2017-shaded-spruce "></i> {{userName}}
+						</div>
+						<div class="w3-dropdown-content w3-card-4 w3-padding ">
+							<div class="w3-cell-row ">
+								<a href="/user/{{ userKey }}" class="header-icon-a w3-hover-opacity w3-center w3-text-2017-shaded-spruce "><i class="fad fa-house-user w3-text-2017-shaded-spruce "></i> my user page</a>
+							</div>
+{{#ifContainsAnyRoles roles authRoleSuperAdmin}}
+							<div class="w3-cell-row ">
+								<label for="Page_seeArchived"> see archived</label>
+								<input type="checkbox" value="true" class="setSeeArchived" name="setSeeArchived" id="Page_seeArchived" 
+										onchange="patchSiteUserVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setSeeArchived', $(this).prop('checked'), function() { addGlow($('#Page_seeArchived')); }, function() { addError($('#Page_seeArchived')); }); "
+{{#if siteUser_.seeArchived}}
+										checked="checked"
+{{/if}}
+										/>
+							</div>
+{{/ifContainsAnyRoles}}
+							<div class="w3-cell-row ">
+								<a href="{{ logoutUrl }}" class="header-icon-a w3-hover-opacity w3-center w3-text-2017-shaded-spruce "><i class="fad fa-sign-out-alt w3-text-2017-shaded-spruce "></i> logout</a>
+							</div>
+						</div>
+					</div>
 				</div>
 {{else}}
 				<div class="site-bar-item w3-bar-item ">
 					<a href="/user" class="header-icon-a w3-hover-opacity w3-center w3-text-2017-shaded-spruce "><i class="fad fa-house-user w3-text-2017-shaded-spruce "></i> Login</a>
 				</div>
 {{/if}}
+{{#ifContainsAnyRoles roles authRoleSuperAdmin}}
 				<div class="site-bar-item w3-bar-item ">
 					<a href="/person-step?facet.range={!tag=r1}created&stats.field={!tag=r1}created&facet.pivot={!range=r1}classSimpleName" class="header-icon-a w3-hover-opacity w3-center w3-text-2017-shaded-spruce "><i class="fad fa-map-location-dot w3-text-2017-shaded-spruce "></i> person steps</a>
 				</div>
@@ -76,22 +99,7 @@
 					<a href="/traffic-flow-observed?facet.range={!tag=r1}created&stats.field={!tag=r1}created&facet.pivot={!range=r1}classSimpleName" class="header-icon-a w3-hover-opacity w3-center w3-text-2017-shaded-spruce "><i class="fad fa-map-location-dot w3-text-2017-shaded-spruce "></i> traffic flow observeds</a>
 				</div>
 				<div class="site-bar-item w3-bar-item ">
-					<a href="/smart-traffic-light?facet.range={!tag=r1}created&stats.field={!tag=r1}created&facet.pivot={!range=r1}classSimpleName" class="header-icon-a w3-hover-opacity w3-center w3-text-2017-shaded-spruce "><i class="fad fa-map-location-dot w3-text-2017-shaded-spruce "></i> smart-traffic-lights</a>
-				</div>
-				<div class="site-bar-item w3-bar-item ">
-					<a href="/traffic-simulation?facet.range={!tag=r1}created&stats.field={!tag=r1}created&facet.pivot={!range=r1}classSimpleName" class="header-icon-a w3-hover-opacity w3-center w3-text-2017-shaded-spruce "><i class="fad fa-traffic-light-stop w3-text-2017-shaded-spruce "></i> traffic simulations</a>
-				</div>
-				<div class="site-bar-item w3-bar-item ">
-					<a href="/simulation-report?facet.range={!tag=r1}created&stats.field={!tag=r1}created&facet.pivot={!range=r1}classSimpleName" class="header-icon-a w3-hover-opacity w3-center w3-text-2017-shaded-spruce "><i class="fad fa-file-chart-column w3-text-2017-shaded-spruce "></i> simulation reports</a>
-				</div>
-				<div class="site-bar-item w3-bar-item ">
 					<a href="/page?facet.range={!tag=r1}created&stats.field={!tag=r1}created&facet.pivot={!range=r1}classSimpleName" class="header-icon-a w3-hover-opacity w3-center w3-text-2017-shaded-spruce "><i class="fad fa-newspaper w3-text-2017-shaded-spruce "></i> articles</a>
-				</div>
-				<div class="site-bar-item w3-bar-item ">
-					<a href="/map-result?facet.range={!tag=r1}created&stats.field={!tag=r1}created&facet.pivot={!range=r1}classSimpleName" class="header-icon-a w3-hover-opacity w3-center w3-text-2017-shaded-spruce "><i class="fad fa-map-location-dot w3-text-2017-shaded-spruce "></i> map results</a>
-				</div>
-				<div class="site-bar-item w3-bar-item ">
-					<a href="/iot-node?facet.range={!tag=r1}created&stats.field={!tag=r1}created&facet.pivot={!range=r1}classSimpleName" class="header-icon-a w3-hover-opacity w3-center w3-text-2017-shaded-spruce "><i class="fad fa-router w3-text-2017-shaded-spruce "></i> IOT nodes</a>
 				</div>
 				<div class="site-bar-item w3-bar-item ">
 					<a href="/traffic-light-step?facet.range={!tag=r1}created&stats.field={!tag=r1}created&facet.pivot={!range=r1}classSimpleName" class="header-icon-a w3-hover-opacity w3-center w3-text-2017-shaded-spruce "><i class="fad fa-map-location-dot w3-text-2017-shaded-spruce "></i> traffic light steps</a>
@@ -101,6 +109,22 @@
 				</div>
 				<div class="site-bar-item w3-bar-item ">
 					<a href="/traffic-light?facet.range={!tag=r1}created&stats.field={!tag=r1}created&facet.pivot={!range=r1}classSimpleName" class="header-icon-a w3-hover-opacity w3-center w3-text-2017-shaded-spruce "><i class="fad fa-map-location-dot w3-text-2017-shaded-spruce "></i> traffic lights</a>
+				</div>
+{{/ifContainsAnyRoles}}
+				<div class="site-bar-item w3-bar-item ">
+					<a href="/smart-traffic-light?facet.range={!tag=r1}created&stats.field={!tag=r1}created&facet.pivot={!range=r1}classSimpleName" class="header-icon-a w3-hover-opacity w3-center w3-text-2017-shaded-spruce "><i class="fad fa-map-location-dot w3-text-2017-shaded-spruce "></i> smart-traffic-lights</a>
+				</div>
+				<div class="site-bar-item w3-bar-item ">
+					<a href="/traffic-simulation?facet.range={!tag=r1}created&stats.field={!tag=r1}created&facet.pivot={!range=r1}classSimpleName" class="header-icon-a w3-hover-opacity w3-center w3-text-2017-shaded-spruce "><i class="fad fa-traffic-light-stop w3-text-2017-shaded-spruce "></i> traffic simulations</a>
+				</div>
+				<div class="site-bar-item w3-bar-item ">
+					<a href="/simulation-report?facet.range={!tag=r1}created&stats.field={!tag=r1}created&facet.pivot={!range=r1}classSimpleName" class="header-icon-a w3-hover-opacity w3-center w3-text-2017-shaded-spruce "><i class="fad fa-file-chart-column w3-text-2017-shaded-spruce "></i> simulation reports</a>
+				</div>
+				<div class="site-bar-item w3-bar-item ">
+					<a href="/map-result?facet.range={!tag=r1}created&stats.field={!tag=r1}created&facet.pivot={!range=r1}classSimpleName" class="header-icon-a w3-hover-opacity w3-center w3-text-2017-shaded-spruce "><i class="fad fa-map-location-dot w3-text-2017-shaded-spruce "></i> map results</a>
+				</div>
+				<div class="site-bar-item w3-bar-item ">
+					<a href="/iot-node?facet.range={!tag=r1}created&stats.field={!tag=r1}created&facet.pivot={!range=r1}classSimpleName" class="header-icon-a w3-hover-opacity w3-center w3-text-2017-shaded-spruce "><i class="fad fa-router w3-text-2017-shaded-spruce "></i> IOT nodes</a>
 				</div>
 
 {{/inline}}

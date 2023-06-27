@@ -43,25 +43,20 @@ API_CONTACT_EMAIL: ""
 FONTAWESOME_KIT: ""
 
 JDBC_HOST: "localhost"
-JDBC_PORT: 5432
-JDBC_DATABASE: "smartabyar-smartvillage"
-JDBC_USERNAME: "smartabyar-smartvillage"
+JDBC_DATABASE: "smartvillage"
+JDBC_USERNAME: "smartvillage"
 
 AUTH_HOST_NAME: "sso.computate.org"
 AUTH_PORT: 443
 AUTH_SSL: true
 AUTH_SSL_REQUIRED: all
-AUTH_REALM: "RH-IMPACT"
-AUTH_CLIENT: "rh-impact"
-AUTH_SECRET: "0518f65a-f86d-42e8-ad65-00f46920443d"
+AUTH_REALM: "SMARTVILLAGE"
+AUTH_CLIENT: "smartvillage"
 AUTH_URL: "https://sso.computate.org/auth"
-AUTH_TOKEN_URI: "/auth/realms/RH-IMPACT/protocol/openid-connect/token"
+AUTH_TOKEN_URI: "/auth/realms/SMARTVILLAGE/protocol/openid-connect/token"
 
-SOLR_COLLECTION: "smartabyar-smartvillage"
-SOLR_URL: "http://localhost:8983/solr/smartabyar-smartvillage"
+SOLR_COLLECTION: "smartvillage"
 SOLR_HOST_NAME: localhost
-SOLR_PORT: 8983
-SOLR_URL_COMPUTATE: "http://localhost:8983/solr/computate"
 
 EMAIL_HOST: 
 EMAIL_PORT: 465
@@ -82,6 +77,8 @@ ENABLE_DELETED: true
 ENABLE_ARCHIVED: true
 # Enable an admin role. 
 ENABLE_ROLE_ADMIN: true
+# Enable a super admin role. 
+ENABLE_ROLE_SUPER_ADMIN: true
 # Enable an OpenID Connect Authentication. 
 ENABLE_OPENID_CONNECT: true
 # Write API code into the project. 
@@ -91,6 +88,8 @@ WRITE_COMMENTS: true
 
 # The Auth roles required to be an admin in the site. 
 AUTH_ROLE_ADMIN: 'SiteAdmin'
+# The Auth roles required to be a super admin in the site. 
+AUTH_ROLE_SUPER_ADMIN: 'SiteAdmin'
 
 # Enable data import in the site. 
 ENABLE_IMPORT_DATA: true

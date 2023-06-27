@@ -102,6 +102,40 @@ async function websocketSimulationReportInner2(apiRequest) {
 						<div id="searchpageSimulationReportForm">
 							<div class="w3-cell-row ">
 {{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmPk" roleRequired="true"}}
+{{else}}
+{{> "htmPk" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmCreated" roleRequired="true"}}
+{{else}}
+{{> "htmCreated" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmModified" roleRequired="true"}}
+{{else}}
+{{> "htmModified" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmObjectId" roleRequired="true"}}
+{{else}}
+{{> "htmObjectId" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmArchived" roleRequired="true"}}
+{{else}}
+{{> "htmArchived" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleRequired}}
+{{> "htmDeleted" roleRequired="true"}}
+{{else}}
+{{> "htmDeleted" roleRequired="false"}}
+{{/ifContainsAnyRoles}}
+							</div>
+							<div class="w3-cell-row ">
+{{#ifContainsAnyRoles roles roleRequired}}
 {{> "htmReportName" roleRequired="true"}}
 {{else}}
 {{> "htmReportName" roleRequired="false"}}

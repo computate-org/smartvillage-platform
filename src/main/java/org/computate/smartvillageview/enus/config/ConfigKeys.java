@@ -8,6 +8,11 @@ import org.computate.vertx.config.ComputateConfigKeys;
 public class ConfigKeys extends ComputateConfigKeys {
 
 	/**
+	 * JsonArray of super admin user roles. 
+	 **/
+	public static final String AUTH_ROLE_SUPER_ADMIN = "AUTH_ROLE_SUPER_ADMIN";
+
+	/**
 	 * 
 	 **/
 	public static final String VERTX_MAX_WORKER_EXECUTE_TIME = "VERTX_MAX_WORKER_EXECUTE_TIME";

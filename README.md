@@ -38,7 +38,7 @@ oc -n smart-village-view get secret/smartvillage-kafka-cluster-ca-cert -o jsonpa
 pkcon install -y git
 pkcon install -y python3
 pkcon install -y python3-pip
-pip install virtualenv
+pip install virtualenv psycopg2-binary openshift
 ```
 
 ## Install Ansible dependencies on MacOSX
@@ -81,18 +81,12 @@ git clone git@github.com:computate-org/smartabyar-smartvillage.git ~/.local/src/
 
 ```bash
 install -d ~/.ansible/roles
-git clone git@github.com:computate-org/computate_postgres.git ~/.ansible/roles/computate.computate_postgres
-git clone git@github.com:computate-org/computate_zookeeper.git ~/.ansible/roles/computate.computate_zookeeper
-git clone git@github.com:computate-org/computate_solr.git ~/.ansible/roles/computate.computate_solr
 git clone git@github.com:computate-org/computate_project.git ~/.ansible/roles/computate.computate_project
 ```
 
 ## Run the Ansible Galaxy roles to install the complete project locally. 
 
 ```bash
-ansible-playbook ~/.ansible/roles/computate.computate_postgres/install.yml -K
-ansible-playbook ~/.ansible/roles/computate.computate_zookeeper/install.yml -K
-ansible-playbook ~/.ansible/roles/computate.computate_solr/install.yml -K
 ansible-playbook ~/.ansible/roles/computate.computate_project/install.yml -e SITE_NAME=smartabyar-smartvillage -e ENABLE_CODE_GENERATION_SERVICE=true
 ```
 

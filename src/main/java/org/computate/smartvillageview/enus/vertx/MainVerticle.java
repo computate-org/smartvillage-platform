@@ -362,13 +362,13 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 									configureEmail().onComplete(i -> 
 										configureHandlebars().onComplete(j -> 
 											configureKafka().onComplete(k -> 
-												configureMqtt().onComplete(l -> 
+//												configureMqtt().onComplete(l -> 
 													configureApi().onComplete(m -> 
 														configureUi().onComplete(n -> 
 															startServer().onComplete(o -> startPromise.complete())
 														).onFailure(ex -> startPromise.fail(ex))
 													).onFailure(ex -> startPromise.fail(ex))
-												).onFailure(ex -> startPromise.fail(ex))
+//												).onFailure(ex -> startPromise.fail(ex))
 											).onFailure(ex -> startPromise.fail(ex))
 										).onFailure(ex -> startPromise.fail(ex))
 									).onFailure(ex -> startPromise.fail(ex))

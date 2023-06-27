@@ -1251,7 +1251,7 @@
 			</tr>
 	{{/inline}}
 {{#*inline "htmFormsTrafficSimulationPage"}}
-	{{#ifContainsAnyRoles roles roleRequired}}
+{{#ifContainsAnyRoles roles authRoleSuperAdmin}}
 		{{#eq trafficSimulationCount int1}}
 		<button
 			class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce "
@@ -1261,12 +1261,16 @@
 			refresh this traffic simulation
 		</button>
 		{{/eq}}
-	{{/ifContainsAnyRoles}}
-	{{#ifContainsAnyRoles roles authRoleAdmin}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles authRoleSuperAdmin}}
 {{#block "htmForm_patchTrafficSimulation"}}{{/block}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles authRoleAdmin}}
 {{#block "htmForm_postTrafficSimulation"}}{{/block}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles authRoleSuperAdmin}}
 {{#block "htmForm_putimportTrafficSimulation"}}{{/block}}
-	{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
 {{#block "htmSuggested"}}{{/block}}
 {{/inline}}
 {{#*inline "htmSuggestedTrafficSimulationPage"}}
