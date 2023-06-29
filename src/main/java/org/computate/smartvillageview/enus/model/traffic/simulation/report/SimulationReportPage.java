@@ -64,17 +64,17 @@ public class SimulationReportPage extends SimulationReportPageGen<SimulationRepo
 	
 					XYSeries series = new XYSeries("vehicle and pedestrian");
 					for(int i = 0; i < updatedPerformance.getJsonArray(0).size(); i++) {
-						series.add(i + 1, updatedPerformance.getJsonArray(size-1).getDouble(i));
+						series.add(i + 1, updatedPerformance.getJsonArray(4).getDouble(i));
 					}
 					XYSeriesCollection dataset = new XYSeriesCollection(series);
 					XYSeries series2 = new XYSeries("only vehicle");
 					for(int i = 0; i < updatedPerformance.getJsonArray(0).size(); i++) {
-						series2.add(i + 1, updatedPerformance.getJsonArray(size-3).getDouble(i));
+						series2.add(i + 1, updatedPerformance.getJsonArray(2).getDouble(i));
 					}
 					dataset.addSeries(series2);
 					XYSeries series3 = new XYSeries("only pedestrian");
 					for(int i = 0; i < updatedPerformance.getJsonArray(0).size(); i++) {
-						series3.add(i + 1, updatedPerformance.getJsonArray(size-2).getDouble(i));
+						series3.add(i + 1, updatedPerformance.getJsonArray(3).getDouble(i));
 					}
 					dataset.addSeries(series3);
 	
