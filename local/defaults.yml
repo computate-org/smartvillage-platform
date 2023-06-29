@@ -89,7 +89,7 @@ WRITE_COMMENTS: true
 # The Auth roles required to be an admin in the site. 
 AUTH_ROLE_ADMIN: 'SiteAdmin'
 # The Auth roles required to be a super admin in the site. 
-AUTH_ROLE_SUPER_ADMIN: 'SiteAdmin'
+AUTH_ROLE_SUPER_ADMIN: 'SuperAdmin'
 
 # Enable data import in the site. 
 ENABLE_IMPORT_DATA: true

@@ -120,6 +120,8 @@ ENABLE_IMPORT_DATA_VehicleStep: true
 
 # The Auth roles required to be an admin in the site. 
 AUTH_ROLE_ADMIN: 'SiteAdmin'
+# The Auth roles required to be an admin in the site. 
+AUTH_ROLE_SUPER_ADMIN: 'SuperAdmin'
 # The Auth roles required to add and modify site user records. 
 AUTH_ROLE_REQUIRED_SiteUser: 'SiteAdmin'
 # The Auth roles required to add and modify map result records. 
