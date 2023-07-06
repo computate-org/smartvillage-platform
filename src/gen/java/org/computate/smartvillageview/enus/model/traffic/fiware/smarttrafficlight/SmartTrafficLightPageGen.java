@@ -48,7 +48,7 @@ import io.vertx.core.json.JsonArray;
  * Whenever this Java class is modified or touched, the watch service installed as described in the README, indexes all the information about this Java class in a local Apache Solr Search Engine. 
  * If you are running the service, you can see the indexed data about this Java Class here: 
  * </p>
- * <p><a href="http://localhost:44641/solr/computate/select?q=*:*&fq=partEstClasse_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLightPage">Find the class SmartTrafficLightPage in Solr. </a></p>
+ * <p><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstClasse_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLightPage">Find the class SmartTrafficLightPage in Solr. </a></p>
  * <p>
  * The extended class ending with "Gen" did not exist at first, but was automatically created by the same watch service based on the data retrieved from the local Apache Server search engine. 
  * The extended class contains many generated fields, getters, setters, initialization code, and helper methods to help build a website and API fast, reactive, and scalable. 
@@ -98,15 +98,15 @@ import io.vertx.core.json.JsonArray;
  * AName.enUS: null
  * <p>
  * Delete the class SmartTrafficLightPage in Solr: 
- * curl -k 'http://localhost:44641/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLightPage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLightPage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
  * Delete  the package org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight in Solr: 
- * curl -k 'http://localhost:44641/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
  * Delete  the project smartabyar-smartvillage in Solr: 
- * curl -k 'http://localhost:44641/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartabyar\-smartvillage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartabyar\-smartvillage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  **/
 public abstract class SmartTrafficLightPageGen<DEV> extends SmartTrafficLightGenPage {
@@ -126,7 +126,11 @@ public abstract class SmartTrafficLightPageGen<DEV> extends SmartTrafficLightGen
 		Promise<Void> promise2 = Promise.promise();
 		promiseSmartTrafficLightPage(promise2);
 		promise2.future().onSuccess(a -> {
-			promise.complete();
+			super.promiseDeepSmartTrafficLightGenPage(siteRequest_).onSuccess(b -> {
+				promise.complete();
+			}).onFailure(ex -> {
+				promise.fail(ex);
+			});
 		}).onFailure(ex -> {
 			promise.fail(ex);
 		});
@@ -150,7 +154,7 @@ public abstract class SmartTrafficLightPageGen<DEV> extends SmartTrafficLightGen
 		return promise.future();
 	}
 
-	public Future<Void> promiseDeepForClass(SiteRequestEnUS siteRequest_) {
+	@Override public Future<Void> promiseDeepForClass(SiteRequestEnUS siteRequest_) {
 		return promiseDeepSmartTrafficLightPage(siteRequest_);
 	}
 
@@ -159,6 +163,7 @@ public abstract class SmartTrafficLightPageGen<DEV> extends SmartTrafficLightGen
 	/////////////////
 
 	public void siteRequestSmartTrafficLightPage(SiteRequestEnUS siteRequest_) {
+			super.siteRequestSmartTrafficLightGenPage(siteRequest_);
 	}
 
 	public void siteRequestForClass(SiteRequestEnUS siteRequest_) {
@@ -169,7 +174,7 @@ public abstract class SmartTrafficLightPageGen<DEV> extends SmartTrafficLightGen
 	// obtain //
 	/////////////
 
-	public Object obtainForClass(String var) {
+	@Override public Object obtainForClass(String var) {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
@@ -190,7 +195,7 @@ public abstract class SmartTrafficLightPageGen<DEV> extends SmartTrafficLightGen
 		SmartTrafficLightPage oSmartTrafficLightPage = (SmartTrafficLightPage)this;
 		switch(var) {
 			default:
-				return null;
+				return super.obtainSmartTrafficLightGenPage(var);
 		}
 	}
 
@@ -198,7 +203,7 @@ public abstract class SmartTrafficLightPageGen<DEV> extends SmartTrafficLightGen
 	// relate //
 	///////////////
 
-	public boolean relateForClass(String var, Object val) {
+	@Override public boolean relateForClass(String var, Object val) {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
@@ -215,7 +220,7 @@ public abstract class SmartTrafficLightPageGen<DEV> extends SmartTrafficLightGen
 		SmartTrafficLightPage oSmartTrafficLightPage = (SmartTrafficLightPage)this;
 		switch(var) {
 			default:
-				return null;
+				return super.relateSmartTrafficLightGenPage(var, val);
 		}
 	}
 
@@ -229,7 +234,7 @@ public abstract class SmartTrafficLightPageGen<DEV> extends SmartTrafficLightGen
 	public static Object staticSetSmartTrafficLightPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
 			default:
-				return null;
+				return SmartTrafficLightGenPage.staticSetSmartTrafficLightGenPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -243,7 +248,7 @@ public abstract class SmartTrafficLightPageGen<DEV> extends SmartTrafficLightGen
 	public static Object staticSearchSmartTrafficLightPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
 			default:
-				return null;
+				return SmartTrafficLightGenPage.staticSearchSmartTrafficLightGenPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -257,7 +262,7 @@ public abstract class SmartTrafficLightPageGen<DEV> extends SmartTrafficLightGen
 	public static String staticSearchStrSmartTrafficLightPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
 			default:
-				return null;
+				return SmartTrafficLightGenPage.staticSearchStrSmartTrafficLightGenPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -271,7 +276,7 @@ public abstract class SmartTrafficLightPageGen<DEV> extends SmartTrafficLightGen
 	public static String staticSearchFqSmartTrafficLightPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
 			default:
-				return null;
+				return SmartTrafficLightGenPage.staticSearchFqSmartTrafficLightGenPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -281,6 +286,7 @@ public abstract class SmartTrafficLightPageGen<DEV> extends SmartTrafficLightGen
 
 	@Override public String toString() {
 		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
 		return sb.toString();
 	}
 
@@ -293,7 +299,7 @@ public abstract class SmartTrafficLightPageGen<DEV> extends SmartTrafficLightGen
 	public static String displayNameSmartTrafficLightPage(String var) {
 		switch(var) {
 		default:
-			return null;
+			return SmartTrafficLightGenPage.displayNameSmartTrafficLightGenPage(var);
 		}
 	}
 }

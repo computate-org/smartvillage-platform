@@ -437,12 +437,12 @@ public class TrafficFlowObservedGenPage extends TrafficFlowObservedGenPageGen<Ma
 	}
 
 	protected void _trafficFlowObserved_(Wrap<TrafficFlowObserved> w) {
-		if(trafficFlowObservedCount == 1)
+		if(trafficFlowObservedCount == 1 && Optional.ofNullable(siteRequest_.getServiceRequest().getParams().getJsonObject("path")).map(o -> o.getString("id")).orElse(null) != null)
 			w.o(searchListTrafficFlowObserved_.get(0));
 	}
 
 	protected void _id(Wrap<String> w) {
-		if(trafficFlowObservedCount == 1)
+		if(trafficFlowObserved_ != null)
 			w.o(trafficFlowObserved_.getId());
 	}
 

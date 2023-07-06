@@ -1,3 +1,4 @@
+{{#eq classSimpleName "SiteHtm"}}
 {{#partial "htmHead"}}{{> htmHeadSiteHtmPage}}{{/partial}}
 {{#partial "htmTitle"}}{{> htmTitleSiteHtmPage}}{{/partial}}
 {{#partial "htmMeta"}}{{> htmMetaSiteHtmPage}}{{/partial}}
@@ -25,8 +26,17 @@
 {{#partial "htmForm"}}{{> htmFormSiteHtmPage}}{{/partial}}
 {{#partial "htmForms"}}{{> htmFormsSiteHtmPage}}{{/partial}}
 {{#partial "htmBodySuggested"}}{{> htmBodySuggestedSiteHtmPage}}{{/partial}}
+{{#partial "htmButton_postSiteHtm"}}{{> htmButtonSiteHtmPage_postSiteHtm classApiMethodMethod="POST"}}{{/partial}}
 {{#partial "htmForm_postSiteHtm"}}{{> htmFormSiteHtmPage_postSiteHtm classApiMethodMethod="POST"}}{{/partial}}
+{{#partial "htmFormButton_postSiteHtm"}}{{> htmFormButtonSiteHtmPage_postSiteHtm classApiMethodMethod="POST"}}{{/partial}}
+{{#partial "htmButton_patchSiteHtm"}}{{> htmButtonSiteHtmPage_patchSiteHtm classApiMethodMethod="PATCH"}}{{/partial}}
 {{#partial "htmForm_patchSiteHtm"}}{{> htmFormSiteHtmPage_patchSiteHtm classApiMethodMethod="PATCH"}}{{/partial}}
+{{#partial "htmFormButton_patchSiteHtm"}}{{> htmFormButtonSiteHtmPage_patchSiteHtm classApiMethodMethod="PATCH"}}{{/partial}}
+{{#partial "htmButton_putimportSiteHtm"}}{{> htmButtonSiteHtmPage_putimportSiteHtm classApiMethodMethod="PUT"}}{{/partial}}
 {{#partial "htmForm_putimportSiteHtm"}}{{> htmFormSiteHtmPage_putimportSiteHtm classApiMethodMethod="PUT"}}{{/partial}}
-{{#partial "htmForm_searchpageSiteHtm"}}{{> htmFormSiteHtmPage_searchpageSiteHtm classApiMethodMethod="GET"}}{{/partial}}
+{{#partial "htmFormButton_putimportSiteHtm"}}{{> htmFormButtonSiteHtmPage_putimportSiteHtm classApiMethodMethod="PUT"}}{{/partial}}
+{{#partial "htmButton_searchpageSiteHtm"}}{{> htmButtonSiteHtmPage_searchpageSiteHtm classApiMethodMethod="Page"}}{{/partial}}
+{{#partial "htmForm_searchpageSiteHtm"}}{{> htmFormSiteHtmPage_searchpageSiteHtm classApiMethodMethod="Page"}}{{/partial}}
+{{#partial "htmFormButton_searchpageSiteHtm"}}{{> htmFormSiteHtmPage_searchpageSiteHtm classApiMethodMethod="Page"}}{{/partial}}
+{{/eq}}
 {{> SiteHtmGenPage}}

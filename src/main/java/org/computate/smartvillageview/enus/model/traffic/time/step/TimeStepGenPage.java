@@ -437,12 +437,12 @@ public class TimeStepGenPage extends TimeStepGenPageGen<BaseResultPage> {
 	}
 
 	protected void _timeStep_(Wrap<TimeStep> w) {
-		if(timeStepCount == 1)
+		if(timeStepCount == 1 && Optional.ofNullable(siteRequest_.getServiceRequest().getParams().getJsonObject("path")).map(o -> o.getString("id")).orElse(null) != null)
 			w.o(searchListTimeStep_.get(0));
 	}
 
 	protected void _id(Wrap<String> w) {
-		if(timeStepCount == 1)
+		if(timeStep_ != null)
 			w.o(timeStep_.getId());
 	}
 

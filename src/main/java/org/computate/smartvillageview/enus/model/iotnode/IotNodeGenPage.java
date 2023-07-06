@@ -437,12 +437,12 @@ public class IotNodeGenPage extends IotNodeGenPageGen<MapResultPage> {
 	}
 
 	protected void _iotNode_(Wrap<IotNode> w) {
-		if(iotNodeCount == 1)
+		if(iotNodeCount == 1 && Optional.ofNullable(siteRequest_.getServiceRequest().getParams().getJsonObject("path")).map(o -> o.getString("id")).orElse(null) != null)
 			w.o(searchListIotNode_.get(0));
 	}
 
 	protected void _id(Wrap<String> w) {
-		if(iotNodeCount == 1)
+		if(iotNode_ != null)
 			w.o(iotNode_.getId());
 	}
 

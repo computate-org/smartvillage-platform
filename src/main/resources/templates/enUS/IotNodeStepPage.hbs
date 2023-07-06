@@ -1,3 +1,4 @@
+{{#eq classSimpleName "IotNodeStep"}}
 {{#partial "htmHead"}}{{> htmHeadIotNodeStepPage}}{{/partial}}
 {{#partial "htmTitle"}}{{> htmTitleIotNodeStepPage}}{{/partial}}
 {{#partial "htmMeta"}}{{> htmMetaIotNodeStepPage}}{{/partial}}
@@ -25,8 +26,17 @@
 {{#partial "htmForm"}}{{> htmFormIotNodeStepPage}}{{/partial}}
 {{#partial "htmForms"}}{{> htmFormsIotNodeStepPage}}{{/partial}}
 {{#partial "htmBodySuggested"}}{{> htmBodySuggestedIotNodeStepPage}}{{/partial}}
+{{#partial "htmButton_patchIotNodeStep"}}{{> htmButtonIotNodeStepPage_patchIotNodeStep classApiMethodMethod="PATCH"}}{{/partial}}
 {{#partial "htmForm_patchIotNodeStep"}}{{> htmFormIotNodeStepPage_patchIotNodeStep classApiMethodMethod="PATCH"}}{{/partial}}
+{{#partial "htmFormButton_patchIotNodeStep"}}{{> htmFormButtonIotNodeStepPage_patchIotNodeStep classApiMethodMethod="PATCH"}}{{/partial}}
+{{#partial "htmButton_postIotNodeStep"}}{{> htmButtonIotNodeStepPage_postIotNodeStep classApiMethodMethod="POST"}}{{/partial}}
 {{#partial "htmForm_postIotNodeStep"}}{{> htmFormIotNodeStepPage_postIotNodeStep classApiMethodMethod="POST"}}{{/partial}}
+{{#partial "htmFormButton_postIotNodeStep"}}{{> htmFormButtonIotNodeStepPage_postIotNodeStep classApiMethodMethod="POST"}}{{/partial}}
+{{#partial "htmButton_putimportIotNodeStep"}}{{> htmButtonIotNodeStepPage_putimportIotNodeStep classApiMethodMethod="PUT"}}{{/partial}}
 {{#partial "htmForm_putimportIotNodeStep"}}{{> htmFormIotNodeStepPage_putimportIotNodeStep classApiMethodMethod="PUT"}}{{/partial}}
-{{#partial "htmForm_searchpageIotNodeStep"}}{{> htmFormIotNodeStepPage_searchpageIotNodeStep classApiMethodMethod="GET"}}{{/partial}}
+{{#partial "htmFormButton_putimportIotNodeStep"}}{{> htmFormButtonIotNodeStepPage_putimportIotNodeStep classApiMethodMethod="PUT"}}{{/partial}}
+{{#partial "htmButton_searchpageIotNodeStep"}}{{> htmButtonIotNodeStepPage_searchpageIotNodeStep classApiMethodMethod="Page"}}{{/partial}}
+{{#partial "htmForm_searchpageIotNodeStep"}}{{> htmFormIotNodeStepPage_searchpageIotNodeStep classApiMethodMethod="Page"}}{{/partial}}
+{{#partial "htmFormButton_searchpageIotNodeStep"}}{{> htmFormIotNodeStepPage_searchpageIotNodeStep classApiMethodMethod="Page"}}{{/partial}}
+{{/eq}}
 {{> IotNodeStepGenPage}}

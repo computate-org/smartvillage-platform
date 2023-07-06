@@ -437,12 +437,12 @@ public class SiteHtmGenPage extends SiteHtmGenPageGen<BaseResultPage> {
 	}
 
 	protected void _siteHtm_(Wrap<SiteHtm> w) {
-		if(siteHtmCount == 1)
+		if(siteHtmCount == 1 && Optional.ofNullable(siteRequest_.getServiceRequest().getParams().getJsonObject("path")).map(o -> o.getString("id")).orElse(null) != null)
 			w.o(searchListSiteHtm_.get(0));
 	}
 
 	protected void _id(Wrap<String> w) {
-		if(siteHtmCount == 1)
+		if(siteHtm_ != null)
 			w.o(siteHtm_.getId());
 	}
 

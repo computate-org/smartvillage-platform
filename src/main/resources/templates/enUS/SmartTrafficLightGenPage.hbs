@@ -1,5 +1,5 @@
 {{#*inline "htmTitleSmartTrafficLightPage"}}		<!-- inline "htmTitleSmartTrafficLightPage" -->
-		<title>{{#if searchListSmartTrafficLight_}}{{#eq smartTrafficLightCount int1}}{{#eq params.query.q "*:*"}}smart traffic light{{else}}smart traffic light{{/eq}}{{else}}no smart traffic light found{{/eq}}{{else}}smart traffic lights{{/if}}</title>
+		<title>{{#if searchListSmartTrafficLight_}}{{#eq smartTrafficLightCount int1}}{{#if id}}smart traffic light{{else}}smart traffic light{{/if}}{{else}}no smart traffic light found{{/eq}}{{else}}smart traffic lights{{/if}}</title>
 {{/inline}}
 {{#*inline "htmMetaSmartTrafficLightPage"}}{{> "htmMetaBaseModelPage"}}{{/inline}}
 {{#*inline "htmStyleSmartTrafficLightPage"}}{{> "htmStyleBaseModelPage"}}{{/inline}}
@@ -42,7 +42,7 @@
 				window.varsFq = JSON.parse('{{{toJsonObjectStringInApostrophes varsFq}}}');
 				window.varsRange = JSON.parse('{{{toJsonObjectStringInApostrophes varsRange}}}');
 				window.defaultRangeVar = '{{ defaultRangeVar }}';
-				pageGraph();
+				pageGraphSmartTrafficLight();
 
 				var calendarEl = document.getElementById('site-calendar');
 				var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -69,7 +69,7 @@
 									</div>
 									<div class="w3-cell-row ">
 										<div class="w3-cell w3-cell-top ">
-											<input id="qSmartTrafficLight_{{ @key }}" placeholder="{{ displayName }}" class="" {{#eq ../var 'objectSuggest' }}onkeyup{{else}}onchange{{/eq}}="qChange(this); " data-var="{{ var }}" autocomplete="off="/>
+											<input id="qSmartTrafficLight_{{ @key }}" placeholder="{{ displayName }}" class="" {{#eq ../var 'objectSuggest' }}onkeyup{{else}}onchange{{/eq}}="qChange('SmartTrafficLight', this); " data-var="{{ var }}" autocomplete="off="/>
 											<div class="pageSearchVal w3-tiny "></div>
 										</div>
 									</div>
@@ -81,7 +81,7 @@
 									</div>
 									<div class="w3-cell-row ">
 										<div class="w3-cell w3-cell-top ">
-											<input id="qSmartTrafficLight_start" placeholder="{{ displayName }}" class="" onchange="paramChange(this); " data-var="start" autocomplete="off="/>
+											<input id="qSmartTrafficLight_start" placeholder="{{ displayName }}" class="" onchange="paramChange('SmartTrafficLight', this); " data-var="start" autocomplete="off="/>
 											<div class="pageSearchVal w3-tiny "></div>
 										</div>
 									</div>
@@ -92,7 +92,7 @@
 									</div>
 									<div class="w3-cell-row ">
 										<div class="w3-cell w3-cell-top ">
-											<input id="qSmartTrafficLight_rows" placeholder="{{ displayName }}" class="" onchange="paramChange(this); " data-var="rows" autocomplete="off="/>
+											<input id="qSmartTrafficLight_rows" placeholder="{{ displayName }}" class="" onchange="paramChange('SmartTrafficLight', this); " data-var="rows" autocomplete="off="/>
 											<div class="pageSearchVal w3-tiny "></div>
 										</div>
 									</div>
@@ -105,10 +105,10 @@
 										<label for="fqSmartTrafficLight_{{ @key }}">{{ displayName }}<sup class="w3-tiny "> ({{ classSimpleName }})</sup></label>
 										<div class="w3-cell-row ">
 											<div class="w3-cell w3-cell-top ">
-												<button id="buttonFacetSmartTrafficLight_{{ @key }}" class="" onclick="facetFieldChange(this); " title="see values " data-var="{{ var }}" data-clear="{{#if facetField }}true{{else}}false{{/if}}"><i class="fas fa-list "></i></button>
+												<button id="buttonFacetSmartTrafficLight_{{ @key }}" class="" onclick="facetFieldChange('SmartTrafficLight', this); " title="see values " data-var="{{ var }}" data-clear="{{#if facetField }}true{{else}}false{{/if}}"><i class="fas fa-list "></i></button>
 											</div>
 											<div class="w3-cell w3-cell-top ">
-												<input id="fqSmartTrafficLight_{{ @key }}" placeholder="{{ displayName }}" class="" onchange="fqChange(this); " data-var="{{ var }}" autocomplete="off=" value="{{ val }}"/>
+												<input id="fqSmartTrafficLight_{{ @key }}" placeholder="{{ displayName }}" class="" onchange="fqChange('SmartTrafficLight', this); " data-var="{{ var }}" autocomplete="off=" value="{{ val }}"/>
 											</div>
 										</div>
 									</div>
@@ -117,7 +117,7 @@
 										<div class="pageSearchVal " id="pageSearchVal-buttonFacetSmartTrafficLight_{{ @key }}">{{#if facetField.var }}facet.field={{ facetField.var }}{{/if}}</div>
 										<ol class="pageFacetField w3-small pageFacetFieldSmartTrafficLight_{{ @key }} " id="pageFacetFieldSmartTrafficLight_{{ @key }}">
 {{#each facetField.counts }}
-											<li class="cursor-pointer " data-class="SmartTrafficLight" data-var="{{ ../var }}" data-val="{{ @key }}" onclick="fqReplace(this); ">{{ @key }}: {{ this }}</li>
+											<li class="cursor-pointer " data-class="SmartTrafficLight" data-var="{{ ../var }}" data-val="{{ @key }}" onclick="fqReplace('SmartTrafficLight', this); ">{{ @key }}: {{ this }}</li>
 {{/each}}
 										</ol>
 									</div>
@@ -141,7 +141,7 @@
 											<span>Range Gap</span>
 										</td>
 										<td class="">
-											<select name="facet.range.gap" id="pageFacetRangeGap-SmartTrafficLight" onchange="facetRangeGapChange(this, 'SmartTrafficLight'); ">
+											<select name="facet.range.gap" id="pageFacetRangeGap-SmartTrafficLight" onchange="facetRangeGapChange('SmartTrafficLight', this); ">
 												<option value="+1YEAR"{{#eq defaultRangeGap '+1YEAR'}} selected="selected"{{else}}{{/eq}}>Year</option>
 												<option value="+1MONTH"{{#eq defaultRangeGap '+1MONTH'}} selected="selected"{{else}}{{/eq}}>Month</option>
 												<option value="+1WEEK"{{#eq defaultRangeGap '+1WEEK'}} selected="selected"{{else}}{{/eq}}>Week</option>
@@ -159,7 +159,7 @@
 									</tr>
 									<tr class="">
 										<td class="" colspan="2">
-											<span><input type="datetime-local" name="facetRangeStart" id="pageFacetRangeStart-SmartTrafficLight" value="{{formatZonedDateTime defaultRangeStart "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeStartChange(this, 'SmartTrafficLight'); "/></span>
+											<span><input type="datetime-local" name="facetRangeStart" id="pageFacetRangeStart-SmartTrafficLight" value="{{formatZonedDateTime defaultRangeStart "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeStartChange('SmartTrafficLight', this); "/></span>
 										</td>
 									</tr>
 									<tr class="">
@@ -169,7 +169,7 @@
 									</tr>
 									<tr class="">
 										<td class="" colspan="2">
-											<span><input type="datetime-local" name="facetRangeEnd" id="pageFacetRangeEnd-SmartTrafficLight" value="{{formatZonedDateTime defaultRangeEnd "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeEndChange(this, 'SmartTrafficLight'); "/></span>
+											<span><input type="datetime-local" name="facetRangeEnd" id="pageFacetRangeEnd-SmartTrafficLight" value="{{formatZonedDateTime defaultRangeEnd "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeEndChange('SmartTrafficLight', this); "/></span>
 										</td>
 									</tr>
 								</table>
@@ -177,7 +177,7 @@
 {{#each varsRange }}
 									<tr class="">
 										<td class="">
-											<span><input type="radio" name="pageFacetRange" class="pageFacetRange " id="pageFacetRangeSmartTrafficLight_{{ @key }}" value="{{ var }}"{{#eq defaultRangeVar var }} checked="checked"{{/eq}} onclick="facetRangeChange(this, 'SmartTrafficLight'); "/></span>
+											<span><input type="radio" name="pageFacetRange" class="pageFacetRange " id="pageFacetRangeSmartTrafficLight_{{ @key }}" value="{{ var }}"{{#eq defaultRangeVar var }} checked="checked"{{/eq}} onclick="facetRangeChange('SmartTrafficLight', this); "/></span>
 										</td>
 										<td class="">
 											<label for="pageFacetRangeSmartTrafficLight_{{ @key }}">{{ displayName }}</label>
@@ -201,7 +201,7 @@
 {{#each varsFq }}
 									<tr class="">
 										<td class="">
-											<span><input type="checkbox" name="pageFacetPivot" class="pageFacetPivot " id="pageFacetPivotSmartTrafficLight_{{ @key }}" value="{{ var }}"{{#if pivot }} checked="checked"{{/if}} onclick="facetPivotChange(this, 'SmartTrafficLight'); "/></span>
+											<span><input type="checkbox" name="pageFacetPivot" class="pageFacetPivot " id="pageFacetPivotSmartTrafficLight_{{ @key }}" value="{{ var }}"{{#if pivot }} checked="checked"{{/if}} onclick="facetPivotChange('SmartTrafficLight', this); "/></span>
 										</td>
 										<td class="w3-cell ">
 											<label for="pageFacetPivotSmartTrafficLight_{{ @key }}">{{ displayName }}</label>
@@ -225,7 +225,7 @@
 {{#each varsFq }}
 									<tr class="">
 										<td class="">
-											<span><input type="checkbox" name="pageFieldList" class="pageFieldList " id="pageFieldListSmartTrafficLight_{{ @key }}" value="{{ var }}"{{#if fieldList }} checked="checked"{{/if}} onclick="facetFieldListChange(this, 'SmartTrafficLight'); "/></span>
+											<span><input type="checkbox" name="pageFieldList" class="pageFieldList " id="pageFieldListSmartTrafficLight_{{ @key }}" value="{{ var }}"{{#if fieldList }} checked="checked"{{/if}} onclick="facetFieldListChange('SmartTrafficLight', this); "/></span>
 										</td>
 										<td class="w3-cell ">
 											<label for="pageFieldListSmartTrafficLight_{{ @key }}">{{ displayName }}</label>
@@ -250,7 +250,7 @@
 {{#if enableStats }}
 									<tr class="">
 										<td class="">
-											<span><input type="checkbox" name="pageStats" class="pageStats " id="pageStatsSmartTrafficLight_{{ @key }}" value="{{ var }}"{{#if ./stats }} checked="checked"{{/if}} onclick="facetStatsChange(this, 'SmartTrafficLight'); "/></span>
+											<span><input type="checkbox" name="pageStats" class="pageStats " id="pageStatsSmartTrafficLight_{{ @key }}" value="{{ var }}"{{#if ./stats }} checked="checked"{{/if}} onclick="facetStatsChange('SmartTrafficLight', this); "/></span>
 										</td>
 										<td class="w3-cell ">
 											<div>
@@ -316,37 +316,14 @@
 	{{#if classIconCssClasses}}
 				<i class="{{ classIconCssClasses }} site-menu-icon "></i>
 	{{/if}}
-				<span class="">smart traffic lights</span>
+				<span class="">smart traffic light</span>
 			</a>
 		</h1>
-		<div>
-	{{#if pagination.pagePrevious}}
-			<a href="{{pageUri}}?start={{pagination.pagePrevious.start}}&amp;rows={{pagination.rows}}">
-				<i class="fas fa-arrow-square-left "></i>
-			</a>
-	{{else}}
-			<i class="fas fa-arrow-square-left w3-opacity "></i>
-	{{/if}}
-	{{#gte pagination.rowsPrevious pagination.1L}}
-			<a href="{{pageUri}}?start={{pagination.start}}&amp;rows={{ pagination.rowsPrevious }}">
-				<i class="fas fa-minus-square "></i>
-			</a>
-	{{else}}
-			<i class="fas fa-minus-square w3-opacity "></i>
-	{{/gte}}
-			<a href="{{pageUri}}?start={{pagination.start}}&amp;rows={{ pagination.rowsNext }}">
-				<i class="fas fa-plus-square "></i>
-			</a>
-	{{#if pagination.pageNext}}
-			<a href="{{pageUri}}?start={{pagination.pageNext.start}}&amp;rows={{pagination.rows}}">
-				<i class="fas fa-arrow-square-right "></i>
-			</a>
-	{{else}}
-			<i class="fas fa-arrow-square-right w3-opacity "></i>
-	{{/if}}
-			<span>{{ pagination.startNum }} - {{ pagination.endNum }} of {{ pagination.foundNum }}</span>
-		</div>
-{{> "table1SmartTrafficLightPage"}}
+		<h2 class="w3-center ">
+			<span class="w3-bar-item w3-padding w3-center w3-block w3-2017-shaded-spruce">
+				<span class="">{{smartTrafficLight_.objectTitle}}</span>
+			</span>
+		</h2>
 {{/inline}}
 {{#*inline "htmBodyAllSmartTrafficLightPage"}}		<!-- #*inline "htmBodyAllSmartTrafficLightPage" -->
 		<h1>
@@ -398,10 +375,11 @@
 			<input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{{toJsonObjectStringInApostrophes pageResponse }}}' type="hidden"/>
 		</form>
 {{#if id}}
+{{#block "htmButton_searchpageSmartTrafficLight"}}{{/block}}
 {{#block "htmForm_searchpageSmartTrafficLight"}}{{/block}}
 {{/if}}
 {{/inline}}
-{{#*inline "htmFormSmartTrafficLightPage_patchSmartTrafficLight"}}
+{{#*inline "htmButtonSmartTrafficLightPage_patchSmartTrafficLight"}}
 		<button
 			class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce "
 			onclick="$('#patchSmartTrafficLightModal').show(); "
@@ -409,6 +387,14 @@
 			<i class="fas fa-edit "></i>
 			Modify smart traffic lights
 		</button>
+{{/inline}}
+{{#*inline "htmFormButtonSmartTrafficLightPage_patchSmartTrafficLight"}}
+						<button
+							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-2017-shaded-spruce "
+							onclick="patchSmartTrafficLight(null, $('#patchSmartTrafficLightFormValues')); "
+							>Modify smart traffic lights</button>
+{{/inline}}
+{{#*inline "htmFormSmartTrafficLightPage_patchSmartTrafficLight"}}
 		<div id="patchSmartTrafficLightModal" class="w3-modal ">
 			<div class="w3-modal-content ">
 				<div class="w3-card-4 ">
@@ -500,16 +486,13 @@
 {{> "htmReportKeys" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
-						<button
-							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-2017-shaded-spruce "
-							onclick="patchSmartTrafficLight(null, $('#patchSmartTrafficLightFormValues')); "
-							>Modify smart traffic lights</button>
+{{#block "htmFormButton_patchSmartTrafficLight"}}{{/block}}
 					</div>
 				</div>
 			</div>
 		</div>
 {{/inline}}
-{{#*inline "htmFormSmartTrafficLightPage_postSmartTrafficLight"}}
+{{#*inline "htmButtonSmartTrafficLightPage_postSmartTrafficLight"}}
 		<button
 			class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce "
 			onclick="$('#postSmartTrafficLightModal').show(); "
@@ -517,6 +500,14 @@
 			<i class="fas fa-file-plus "></i>
 			Create a smart traffic light
 		</button>
+{{/inline}}
+{{#*inline "htmFormButtonSmartTrafficLightPage_postSmartTrafficLight"}}
+						<button
+							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-2017-shaded-spruce "
+							onclick="postSmartTrafficLight($('#postSmartTrafficLightForm')); "
+							>Create a smart traffic light</button>
+{{/inline}}
+{{#*inline "htmFormSmartTrafficLightPage_postSmartTrafficLight"}}
 		<div id="postSmartTrafficLightModal" class="w3-modal ">
 			<div class="w3-modal-content ">
 				<div class="w3-card-4 ">
@@ -610,16 +601,13 @@
 {{/ifContainsAnyRoles}}
 							</div>
 						</div>
-						<button
-							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-2017-shaded-spruce "
-							onclick="postSmartTrafficLight($('#postSmartTrafficLightForm')); "
-							>Create a smart traffic light</button>
+{{#block "htmFormButton_postSmartTrafficLight"}}{{/block}}
 					</div>
 				</div>
 			</div>
 		</div>
 {{/inline}}
-{{#*inline "htmFormSmartTrafficLightPage_putimportSmartTrafficLight"}}
+{{#*inline "htmButtonSmartTrafficLightPage_putimportSmartTrafficLight"}}
 		<button
 			class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce "
 			onclick="$('#putimportSmartTrafficLightModal').show(); "
@@ -627,6 +615,14 @@
 			<i class="fas fa-file-import "></i>
 			Import smart traffic lights
 		</button>
+{{/inline}}
+{{#*inline "htmFormButtonSmartTrafficLightPage_putimportSmartTrafficLight"}}
+						<button
+							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-2017-shaded-spruce "
+							onclick="putimportSmartTrafficLight($('#putimportSmartTrafficLightFormValues')); "
+							>Import smart traffic lights</button>
+{{/inline}}
+{{#*inline "htmFormSmartTrafficLightPage_putimportSmartTrafficLight"}}
 		<div id="putimportSmartTrafficLightModal" class="w3-modal ">
 			<div class="w3-modal-content ">
 				<div class="w3-card-4 ">
@@ -644,14 +640,19 @@
 								placeholder="{ 'searchList': [ { 'pk': ... , 'saves': [ ... ] }, ... ] }"
 								></textarea>
 						</div>
-						<button
-							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-2017-shaded-spruce "
-							onclick="putimportSmartTrafficLight($('#putimportSmartTrafficLightFormValues')); "
-							>Import smart traffic lights</button>
+{{#block "htmFormButton_putimportSmartTrafficLight"}}{{/block}}
 					</div>
 				</div>
 			</div>
 		</div>
+{{/inline}}
+{{#*inline "htmButtonSmartTrafficLightPage_searchpageSmartTrafficLight"}}
+{{/inline}}
+{{#*inline "htmFormButtonSmartTrafficLightPage_searchpageSmartTrafficLight"}}
+						<button
+							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-2017-shaded-spruce "
+							onclick="searchpageSmartTrafficLight(); "
+							>Search smart traffic lights</button>
 {{/inline}}
 {{#*inline "htmFormSmartTrafficLightPage_searchpageSmartTrafficLight"}}
 		<div id="searchpageSmartTrafficLightModal" class="">
@@ -944,11 +945,11 @@
 {{#block "htmBodyCount0"}}{{/block}}
 	{{else}}
 		{{#eq smartTrafficLightCount int1}}
-			{{#eq params.query.q "*:*"}}
-{{#block "htmBodyCount1All"}}{{/block}}
-			{{else}}
+			{{#if id}}
 {{#block "htmBodyCount1"}}{{/block}}
-			{{/eq}}
+			{{else}}
+{{#block "htmBodyAll"}}{{/block}}
+			{{/if}}
 		{{else}}
 {{#block "htmBodyAll"}}{{/block}}
 		{{/eq}}
@@ -1032,12 +1033,23 @@
 		{{/eq}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles authRoleSuperAdmin}}
+{{#block "htmButton_patchSmartTrafficLight"}}{{/block}}
 {{#block "htmForm_patchSmartTrafficLight"}}{{/block}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles authRoleAdmin}}
+{{#eq smartTrafficLightCount int1}}
+{{#if id}}
+{{else}}
+{{#block "htmButton_postSmartTrafficLight"}}{{/block}}
 {{#block "htmForm_postSmartTrafficLight"}}{{/block}}
+{{/if}}
+{{else}}
+{{#block "htmButton_postSmartTrafficLight"}}{{/block}}
+{{#block "htmForm_postSmartTrafficLight"}}{{/block}}
+{{/eq}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles authRoleSuperAdmin}}
+{{#block "htmButton_putimportSmartTrafficLight"}}{{/block}}
 {{#block "htmForm_putimportSmartTrafficLight"}}{{/block}}
 {{/ifContainsAnyRoles}}
 {{#block "htmSuggested"}}{{/block}}

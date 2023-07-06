@@ -1,3 +1,4 @@
+{{#eq classSimpleName "PersonStep"}}
 {{#partial "htmHead"}}{{> htmHeadPersonStepPage}}{{/partial}}
 {{#partial "htmTitle"}}{{> htmTitlePersonStepPage}}{{/partial}}
 {{#partial "htmMeta"}}{{> htmMetaPersonStepPage}}{{/partial}}
@@ -25,8 +26,17 @@
 {{#partial "htmForm"}}{{> htmFormPersonStepPage}}{{/partial}}
 {{#partial "htmForms"}}{{> htmFormsPersonStepPage}}{{/partial}}
 {{#partial "htmBodySuggested"}}{{> htmBodySuggestedPersonStepPage}}{{/partial}}
+{{#partial "htmButton_patchPersonStep"}}{{> htmButtonPersonStepPage_patchPersonStep classApiMethodMethod="PATCH"}}{{/partial}}
 {{#partial "htmForm_patchPersonStep"}}{{> htmFormPersonStepPage_patchPersonStep classApiMethodMethod="PATCH"}}{{/partial}}
+{{#partial "htmFormButton_patchPersonStep"}}{{> htmFormButtonPersonStepPage_patchPersonStep classApiMethodMethod="PATCH"}}{{/partial}}
+{{#partial "htmButton_postPersonStep"}}{{> htmButtonPersonStepPage_postPersonStep classApiMethodMethod="POST"}}{{/partial}}
 {{#partial "htmForm_postPersonStep"}}{{> htmFormPersonStepPage_postPersonStep classApiMethodMethod="POST"}}{{/partial}}
+{{#partial "htmFormButton_postPersonStep"}}{{> htmFormButtonPersonStepPage_postPersonStep classApiMethodMethod="POST"}}{{/partial}}
+{{#partial "htmButton_putimportPersonStep"}}{{> htmButtonPersonStepPage_putimportPersonStep classApiMethodMethod="PUT"}}{{/partial}}
 {{#partial "htmForm_putimportPersonStep"}}{{> htmFormPersonStepPage_putimportPersonStep classApiMethodMethod="PUT"}}{{/partial}}
-{{#partial "htmForm_searchpagePersonStep"}}{{> htmFormPersonStepPage_searchpagePersonStep classApiMethodMethod="GET"}}{{/partial}}
+{{#partial "htmFormButton_putimportPersonStep"}}{{> htmFormButtonPersonStepPage_putimportPersonStep classApiMethodMethod="PUT"}}{{/partial}}
+{{#partial "htmButton_searchpagePersonStep"}}{{> htmButtonPersonStepPage_searchpagePersonStep classApiMethodMethod="Page"}}{{/partial}}
+{{#partial "htmForm_searchpagePersonStep"}}{{> htmFormPersonStepPage_searchpagePersonStep classApiMethodMethod="Page"}}{{/partial}}
+{{#partial "htmFormButton_searchpagePersonStep"}}{{> htmFormPersonStepPage_searchpagePersonStep classApiMethodMethod="Page"}}{{/partial}}
+{{/eq}}
 {{> PersonStepGenPage}}

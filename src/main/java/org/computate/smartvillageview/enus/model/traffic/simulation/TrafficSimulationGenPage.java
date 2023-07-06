@@ -437,17 +437,17 @@ public class TrafficSimulationGenPage extends TrafficSimulationGenPageGen<BaseMo
 	}
 
 	protected void _trafficSimulation_(Wrap<TrafficSimulation> w) {
-		if(trafficSimulationCount == 1)
+		if(trafficSimulationCount == 1 && Optional.ofNullable(siteRequest_.getServiceRequest().getParams().getJsonObject("path")).map(o -> o.getString("id")).orElse(null) != null)
 			w.o(searchListTrafficSimulation_.get(0));
 	}
 
 	protected void _pk(Wrap<Long> w) {
-		if(trafficSimulationCount == 1)
+		if(trafficSimulation_ != null)
 			w.o(trafficSimulation_.getPk());
 	}
 
 	protected void _id(Wrap<String> w) {
-		if(trafficSimulationCount == 1)
+		if(trafficSimulation_ != null)
 			w.o(trafficSimulation_.getId());
 	}
 

@@ -437,12 +437,12 @@ public class IotNodeStepGenPage extends IotNodeStepGenPageGen<BaseResultPage> {
 	}
 
 	protected void _iotNodeStep_(Wrap<IotNodeStep> w) {
-		if(iotNodeStepCount == 1)
+		if(iotNodeStepCount == 1 && Optional.ofNullable(siteRequest_.getServiceRequest().getParams().getJsonObject("path")).map(o -> o.getString("id")).orElse(null) != null)
 			w.o(searchListIotNodeStep_.get(0));
 	}
 
 	protected void _id(Wrap<String> w) {
-		if(iotNodeStepCount == 1)
+		if(iotNodeStep_ != null)
 			w.o(iotNodeStep_.getId());
 	}
 

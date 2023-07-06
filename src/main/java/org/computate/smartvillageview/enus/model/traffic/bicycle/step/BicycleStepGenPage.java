@@ -437,12 +437,12 @@ public class BicycleStepGenPage extends BicycleStepGenPageGen<MapResultPage> {
 	}
 
 	protected void _bicycleStep_(Wrap<BicycleStep> w) {
-		if(bicycleStepCount == 1)
+		if(bicycleStepCount == 1 && Optional.ofNullable(siteRequest_.getServiceRequest().getParams().getJsonObject("path")).map(o -> o.getString("id")).orElse(null) != null)
 			w.o(searchListBicycleStep_.get(0));
 	}
 
 	protected void _id(Wrap<String> w) {
-		if(bicycleStepCount == 1)
+		if(bicycleStep_ != null)
 			w.o(bicycleStep_.getId());
 	}
 

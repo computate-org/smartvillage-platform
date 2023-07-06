@@ -437,17 +437,17 @@ public class SiteUserGenPage extends SiteUserGenPageGen<BaseModelPage> {
 	}
 
 	protected void _siteUser_(Wrap<SiteUser> w) {
-		if(siteUserCount == 1)
+		if(siteUserCount == 1 && Optional.ofNullable(siteRequest_.getServiceRequest().getParams().getJsonObject("path")).map(o -> o.getString("id")).orElse(null) != null)
 			w.o(searchListSiteUser_.get(0));
 	}
 
 	protected void _pk(Wrap<Long> w) {
-		if(siteUserCount == 1)
+		if(siteUser_ != null)
 			w.o(siteUser_.getPk());
 	}
 
 	protected void _id(Wrap<String> w) {
-		if(siteUserCount == 1)
+		if(siteUser_ != null)
 			w.o(siteUser_.getId());
 	}
 

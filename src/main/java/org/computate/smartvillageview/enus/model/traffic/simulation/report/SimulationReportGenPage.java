@@ -437,17 +437,17 @@ public class SimulationReportGenPage extends SimulationReportGenPageGen<BaseMode
 	}
 
 	protected void _simulationReport_(Wrap<SimulationReport> w) {
-		if(simulationReportCount == 1)
+		if(simulationReportCount == 1 && Optional.ofNullable(siteRequest_.getServiceRequest().getParams().getJsonObject("path")).map(o -> o.getString("id")).orElse(null) != null)
 			w.o(searchListSimulationReport_.get(0));
 	}
 
 	protected void _pk(Wrap<Long> w) {
-		if(simulationReportCount == 1)
+		if(simulationReport_ != null)
 			w.o(simulationReport_.getPk());
 	}
 
 	protected void _id(Wrap<String> w) {
-		if(simulationReportCount == 1)
+		if(simulationReport_ != null)
 			w.o(simulationReport_.getId());
 	}
 

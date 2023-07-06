@@ -1,3 +1,4 @@
+{{#eq classSimpleName "SystemEvent"}}
 {{#partial "htmHead"}}{{> htmHeadSystemEventPage}}{{/partial}}
 {{#partial "htmTitle"}}{{> htmTitleSystemEventPage}}{{/partial}}
 {{#partial "htmMeta"}}{{> htmMetaSystemEventPage}}{{/partial}}
@@ -25,8 +26,17 @@
 {{#partial "htmForm"}}{{> htmFormSystemEventPage}}{{/partial}}
 {{#partial "htmForms"}}{{> htmFormsSystemEventPage}}{{/partial}}
 {{#partial "htmBodySuggested"}}{{> htmBodySuggestedSystemEventPage}}{{/partial}}
+{{#partial "htmButton_postSystemEvent"}}{{> htmButtonSystemEventPage_postSystemEvent classApiMethodMethod="POST"}}{{/partial}}
 {{#partial "htmForm_postSystemEvent"}}{{> htmFormSystemEventPage_postSystemEvent classApiMethodMethod="POST"}}{{/partial}}
+{{#partial "htmFormButton_postSystemEvent"}}{{> htmFormButtonSystemEventPage_postSystemEvent classApiMethodMethod="POST"}}{{/partial}}
+{{#partial "htmButton_patchSystemEvent"}}{{> htmButtonSystemEventPage_patchSystemEvent classApiMethodMethod="PATCH"}}{{/partial}}
 {{#partial "htmForm_patchSystemEvent"}}{{> htmFormSystemEventPage_patchSystemEvent classApiMethodMethod="PATCH"}}{{/partial}}
+{{#partial "htmFormButton_patchSystemEvent"}}{{> htmFormButtonSystemEventPage_patchSystemEvent classApiMethodMethod="PATCH"}}{{/partial}}
+{{#partial "htmButton_putimportSystemEvent"}}{{> htmButtonSystemEventPage_putimportSystemEvent classApiMethodMethod="PUT"}}{{/partial}}
 {{#partial "htmForm_putimportSystemEvent"}}{{> htmFormSystemEventPage_putimportSystemEvent classApiMethodMethod="PUT"}}{{/partial}}
-{{#partial "htmForm_searchpageSystemEvent"}}{{> htmFormSystemEventPage_searchpageSystemEvent classApiMethodMethod="GET"}}{{/partial}}
+{{#partial "htmFormButton_putimportSystemEvent"}}{{> htmFormButtonSystemEventPage_putimportSystemEvent classApiMethodMethod="PUT"}}{{/partial}}
+{{#partial "htmButton_searchpageSystemEvent"}}{{> htmButtonSystemEventPage_searchpageSystemEvent classApiMethodMethod="Page"}}{{/partial}}
+{{#partial "htmForm_searchpageSystemEvent"}}{{> htmFormSystemEventPage_searchpageSystemEvent classApiMethodMethod="Page"}}{{/partial}}
+{{#partial "htmFormButton_searchpageSystemEvent"}}{{> htmFormSystemEventPage_searchpageSystemEvent classApiMethodMethod="Page"}}{{/partial}}
+{{/eq}}
 {{> SystemEventGenPage}}

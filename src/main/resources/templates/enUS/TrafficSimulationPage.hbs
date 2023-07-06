@@ -1,3 +1,4 @@
+{{#eq classSimpleName "TrafficSimulation"}}
 {{#partial "htmHead"}}{{> htmHeadTrafficSimulationPage}}{{/partial}}
 {{#partial "htmTitle"}}{{> htmTitleTrafficSimulationPage}}{{/partial}}
 {{#partial "htmMeta"}}{{> htmMetaTrafficSimulationPage}}{{/partial}}
@@ -25,8 +26,17 @@
 {{#partial "htmForm"}}{{> htmFormTrafficSimulationPage}}{{/partial}}
 {{#partial "htmForms"}}{{> htmFormsTrafficSimulationPage}}{{/partial}}
 {{#partial "htmBodySuggested"}}{{> htmBodySuggestedTrafficSimulationPage}}{{/partial}}
+{{#partial "htmButton_patchTrafficSimulation"}}{{> htmButtonTrafficSimulationPage_patchTrafficSimulation classApiMethodMethod="PATCH"}}{{/partial}}
 {{#partial "htmForm_patchTrafficSimulation"}}{{> htmFormTrafficSimulationPage_patchTrafficSimulation classApiMethodMethod="PATCH"}}{{/partial}}
+{{#partial "htmFormButton_patchTrafficSimulation"}}{{> htmFormButtonTrafficSimulationPage_patchTrafficSimulation classApiMethodMethod="PATCH"}}{{/partial}}
+{{#partial "htmButton_postTrafficSimulation"}}{{> htmButtonTrafficSimulationPage_postTrafficSimulation classApiMethodMethod="POST"}}{{/partial}}
 {{#partial "htmForm_postTrafficSimulation"}}{{> htmFormTrafficSimulationPage_postTrafficSimulation classApiMethodMethod="POST"}}{{/partial}}
+{{#partial "htmFormButton_postTrafficSimulation"}}{{> htmFormButtonTrafficSimulationPage_postTrafficSimulation classApiMethodMethod="POST"}}{{/partial}}
+{{#partial "htmButton_putimportTrafficSimulation"}}{{> htmButtonTrafficSimulationPage_putimportTrafficSimulation classApiMethodMethod="PUT"}}{{/partial}}
 {{#partial "htmForm_putimportTrafficSimulation"}}{{> htmFormTrafficSimulationPage_putimportTrafficSimulation classApiMethodMethod="PUT"}}{{/partial}}
+{{#partial "htmFormButton_putimportTrafficSimulation"}}{{> htmFormButtonTrafficSimulationPage_putimportTrafficSimulation classApiMethodMethod="PUT"}}{{/partial}}
+{{#partial "htmButton_searchpageTrafficSimulation"}}{{> htmButtonTrafficSimulationPage_searchpageTrafficSimulation classApiMethodMethod="Page"}}{{/partial}}
 {{#partial "htmForm_searchpageTrafficSimulation"}}{{> htmFormTrafficSimulationPage_searchpageTrafficSimulation classApiMethodMethod="Page"}}{{/partial}}
+{{#partial "htmFormButton_searchpageTrafficSimulation"}}{{> htmFormTrafficSimulationPage_searchpageTrafficSimulation classApiMethodMethod="Page"}}{{/partial}}
+{{/eq}}
 {{> TrafficSimulationGenPage}}

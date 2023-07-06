@@ -1,5 +1,5 @@
 {{#*inline "htmTitleIotNodePage"}}		<!-- inline "htmTitleIotNodePage" -->
-		<title>{{#if searchListIotNode_}}{{#eq iotNodeCount int1}}{{#eq params.query.q "*:*"}}IOT node{{else}}IOT node{{/eq}}{{else}}no IOT node found{{/eq}}{{else}}IOT nodes{{/if}}</title>
+		<title>{{#if searchListIotNode_}}{{#eq iotNodeCount int1}}{{#if id}}IOT node{{else}}IOT node{{/if}}{{else}}no IOT node found{{/eq}}{{else}}IOT nodes{{/if}}</title>
 {{/inline}}
 {{#*inline "htmMetaIotNodePage"}}{{> "htmMetaMapResultPage"}}{{/inline}}
 {{#*inline "htmStyleIotNodePage"}}{{> "htmStyleMapResultPage"}}{{/inline}}
@@ -36,7 +36,7 @@
 				window.varsFq = JSON.parse('{{{toJsonObjectStringInApostrophes varsFq}}}');
 				window.varsRange = JSON.parse('{{{toJsonObjectStringInApostrophes varsRange}}}');
 				window.defaultRangeVar = '{{ defaultRangeVar }}';
-				pageGraph();
+				pageGraphIotNode();
 
 				var calendarEl = document.getElementById('site-calendar');
 				var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -63,7 +63,7 @@
 									</div>
 									<div class="w3-cell-row ">
 										<div class="w3-cell w3-cell-top ">
-											<input id="qIotNode_{{ @key }}" placeholder="{{ displayName }}" class="" {{#eq ../var 'objectSuggest' }}onkeyup{{else}}onchange{{/eq}}="qChange(this); " data-var="{{ var }}" autocomplete="off="/>
+											<input id="qIotNode_{{ @key }}" placeholder="{{ displayName }}" class="" {{#eq ../var 'objectSuggest' }}onkeyup{{else}}onchange{{/eq}}="qChange('IotNode', this); " data-var="{{ var }}" autocomplete="off="/>
 											<div class="pageSearchVal w3-tiny "></div>
 										</div>
 									</div>
@@ -75,7 +75,7 @@
 									</div>
 									<div class="w3-cell-row ">
 										<div class="w3-cell w3-cell-top ">
-											<input id="qIotNode_start" placeholder="{{ displayName }}" class="" onchange="paramChange(this); " data-var="start" autocomplete="off="/>
+											<input id="qIotNode_start" placeholder="{{ displayName }}" class="" onchange="paramChange('IotNode', this); " data-var="start" autocomplete="off="/>
 											<div class="pageSearchVal w3-tiny "></div>
 										</div>
 									</div>
@@ -86,7 +86,7 @@
 									</div>
 									<div class="w3-cell-row ">
 										<div class="w3-cell w3-cell-top ">
-											<input id="qIotNode_rows" placeholder="{{ displayName }}" class="" onchange="paramChange(this); " data-var="rows" autocomplete="off="/>
+											<input id="qIotNode_rows" placeholder="{{ displayName }}" class="" onchange="paramChange('IotNode', this); " data-var="rows" autocomplete="off="/>
 											<div class="pageSearchVal w3-tiny "></div>
 										</div>
 									</div>
@@ -99,10 +99,10 @@
 										<label for="fqIotNode_{{ @key }}">{{ displayName }}<sup class="w3-tiny "> ({{ classSimpleName }})</sup></label>
 										<div class="w3-cell-row ">
 											<div class="w3-cell w3-cell-top ">
-												<button id="buttonFacetIotNode_{{ @key }}" class="" onclick="facetFieldChange(this); " title="see values " data-var="{{ var }}" data-clear="{{#if facetField }}true{{else}}false{{/if}}"><i class="fas fa-list "></i></button>
+												<button id="buttonFacetIotNode_{{ @key }}" class="" onclick="facetFieldChange('IotNode', this); " title="see values " data-var="{{ var }}" data-clear="{{#if facetField }}true{{else}}false{{/if}}"><i class="fas fa-list "></i></button>
 											</div>
 											<div class="w3-cell w3-cell-top ">
-												<input id="fqIotNode_{{ @key }}" placeholder="{{ displayName }}" class="" onchange="fqChange(this); " data-var="{{ var }}" autocomplete="off=" value="{{ val }}"/>
+												<input id="fqIotNode_{{ @key }}" placeholder="{{ displayName }}" class="" onchange="fqChange('IotNode', this); " data-var="{{ var }}" autocomplete="off=" value="{{ val }}"/>
 											</div>
 										</div>
 									</div>
@@ -111,7 +111,7 @@
 										<div class="pageSearchVal " id="pageSearchVal-buttonFacetIotNode_{{ @key }}">{{#if facetField.var }}facet.field={{ facetField.var }}{{/if}}</div>
 										<ol class="pageFacetField w3-small pageFacetFieldIotNode_{{ @key }} " id="pageFacetFieldIotNode_{{ @key }}">
 {{#each facetField.counts }}
-											<li class="cursor-pointer " data-class="IotNode" data-var="{{ ../var }}" data-val="{{ @key }}" onclick="fqReplace(this); ">{{ @key }}: {{ this }}</li>
+											<li class="cursor-pointer " data-class="IotNode" data-var="{{ ../var }}" data-val="{{ @key }}" onclick="fqReplace('IotNode', this); ">{{ @key }}: {{ this }}</li>
 {{/each}}
 										</ol>
 									</div>
@@ -135,7 +135,7 @@
 											<span>Range Gap</span>
 										</td>
 										<td class="">
-											<select name="facet.range.gap" id="pageFacetRangeGap-IotNode" onchange="facetRangeGapChange(this, 'IotNode'); ">
+											<select name="facet.range.gap" id="pageFacetRangeGap-IotNode" onchange="facetRangeGapChange('IotNode', this); ">
 												<option value="+1YEAR"{{#eq defaultRangeGap '+1YEAR'}} selected="selected"{{else}}{{/eq}}>Year</option>
 												<option value="+1MONTH"{{#eq defaultRangeGap '+1MONTH'}} selected="selected"{{else}}{{/eq}}>Month</option>
 												<option value="+1WEEK"{{#eq defaultRangeGap '+1WEEK'}} selected="selected"{{else}}{{/eq}}>Week</option>
@@ -153,7 +153,7 @@
 									</tr>
 									<tr class="">
 										<td class="" colspan="2">
-											<span><input type="datetime-local" name="facetRangeStart" id="pageFacetRangeStart-IotNode" value="{{formatZonedDateTime defaultRangeStart "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeStartChange(this, 'IotNode'); "/></span>
+											<span><input type="datetime-local" name="facetRangeStart" id="pageFacetRangeStart-IotNode" value="{{formatZonedDateTime defaultRangeStart "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeStartChange('IotNode', this); "/></span>
 										</td>
 									</tr>
 									<tr class="">
@@ -163,7 +163,7 @@
 									</tr>
 									<tr class="">
 										<td class="" colspan="2">
-											<span><input type="datetime-local" name="facetRangeEnd" id="pageFacetRangeEnd-IotNode" value="{{formatZonedDateTime defaultRangeEnd "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeEndChange(this, 'IotNode'); "/></span>
+											<span><input type="datetime-local" name="facetRangeEnd" id="pageFacetRangeEnd-IotNode" value="{{formatZonedDateTime defaultRangeEnd "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeEndChange('IotNode', this); "/></span>
 										</td>
 									</tr>
 								</table>
@@ -171,7 +171,7 @@
 {{#each varsRange }}
 									<tr class="">
 										<td class="">
-											<span><input type="radio" name="pageFacetRange" class="pageFacetRange " id="pageFacetRangeIotNode_{{ @key }}" value="{{ var }}"{{#eq defaultRangeVar var }} checked="checked"{{/eq}} onclick="facetRangeChange(this, 'IotNode'); "/></span>
+											<span><input type="radio" name="pageFacetRange" class="pageFacetRange " id="pageFacetRangeIotNode_{{ @key }}" value="{{ var }}"{{#eq defaultRangeVar var }} checked="checked"{{/eq}} onclick="facetRangeChange('IotNode', this); "/></span>
 										</td>
 										<td class="">
 											<label for="pageFacetRangeIotNode_{{ @key }}">{{ displayName }}</label>
@@ -195,7 +195,7 @@
 {{#each varsFq }}
 									<tr class="">
 										<td class="">
-											<span><input type="checkbox" name="pageFacetPivot" class="pageFacetPivot " id="pageFacetPivotIotNode_{{ @key }}" value="{{ var }}"{{#if pivot }} checked="checked"{{/if}} onclick="facetPivotChange(this, 'IotNode'); "/></span>
+											<span><input type="checkbox" name="pageFacetPivot" class="pageFacetPivot " id="pageFacetPivotIotNode_{{ @key }}" value="{{ var }}"{{#if pivot }} checked="checked"{{/if}} onclick="facetPivotChange('IotNode', this); "/></span>
 										</td>
 										<td class="w3-cell ">
 											<label for="pageFacetPivotIotNode_{{ @key }}">{{ displayName }}</label>
@@ -219,7 +219,7 @@
 {{#each varsFq }}
 									<tr class="">
 										<td class="">
-											<span><input type="checkbox" name="pageFieldList" class="pageFieldList " id="pageFieldListIotNode_{{ @key }}" value="{{ var }}"{{#if fieldList }} checked="checked"{{/if}} onclick="facetFieldListChange(this, 'IotNode'); "/></span>
+											<span><input type="checkbox" name="pageFieldList" class="pageFieldList " id="pageFieldListIotNode_{{ @key }}" value="{{ var }}"{{#if fieldList }} checked="checked"{{/if}} onclick="facetFieldListChange('IotNode', this); "/></span>
 										</td>
 										<td class="w3-cell ">
 											<label for="pageFieldListIotNode_{{ @key }}">{{ displayName }}</label>
@@ -244,7 +244,7 @@
 {{#if enableStats }}
 									<tr class="">
 										<td class="">
-											<span><input type="checkbox" name="pageStats" class="pageStats " id="pageStatsIotNode_{{ @key }}" value="{{ var }}"{{#if ./stats }} checked="checked"{{/if}} onclick="facetStatsChange(this, 'IotNode'); "/></span>
+											<span><input type="checkbox" name="pageStats" class="pageStats " id="pageStatsIotNode_{{ @key }}" value="{{ var }}"{{#if ./stats }} checked="checked"{{/if}} onclick="facetStatsChange('IotNode', this); "/></span>
 										</td>
 										<td class="w3-cell ">
 											<div>
@@ -310,37 +310,14 @@
 	{{#if classIconCssClasses}}
 				<i class="{{ classIconCssClasses }} site-menu-icon "></i>
 	{{/if}}
-				<span class="">IOT nodes</span>
+				<span class="">IOT node</span>
 			</a>
 		</h1>
-		<div>
-	{{#if pagination.pagePrevious}}
-			<a href="{{pageUri}}?start={{pagination.pagePrevious.start}}&amp;rows={{pagination.rows}}">
-				<i class="fas fa-arrow-square-left "></i>
-			</a>
-	{{else}}
-			<i class="fas fa-arrow-square-left w3-opacity "></i>
-	{{/if}}
-	{{#gte pagination.rowsPrevious pagination.1L}}
-			<a href="{{pageUri}}?start={{pagination.start}}&amp;rows={{ pagination.rowsPrevious }}">
-				<i class="fas fa-minus-square "></i>
-			</a>
-	{{else}}
-			<i class="fas fa-minus-square w3-opacity "></i>
-	{{/gte}}
-			<a href="{{pageUri}}?start={{pagination.start}}&amp;rows={{ pagination.rowsNext }}">
-				<i class="fas fa-plus-square "></i>
-			</a>
-	{{#if pagination.pageNext}}
-			<a href="{{pageUri}}?start={{pagination.pageNext.start}}&amp;rows={{pagination.rows}}">
-				<i class="fas fa-arrow-square-right "></i>
-			</a>
-	{{else}}
-			<i class="fas fa-arrow-square-right w3-opacity "></i>
-	{{/if}}
-			<span>{{ pagination.startNum }} - {{ pagination.endNum }} of {{ pagination.foundNum }}</span>
-		</div>
-{{> "table1IotNodePage"}}
+		<h2 class="w3-center ">
+			<span class="w3-bar-item w3-padding w3-center w3-block w3-2017-shaded-spruce">
+				<span class="">{{iotNode_.objectTitle}}</span>
+			</span>
+		</h2>
 {{/inline}}
 {{#*inline "htmBodyAllIotNodePage"}}		<!-- #*inline "htmBodyAllIotNodePage" -->
 		<h1>
@@ -392,10 +369,11 @@
 			<input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{{toJsonObjectStringInApostrophes pageResponse }}}' type="hidden"/>
 		</form>
 {{#if id}}
+{{#block "htmButton_searchpageIotNode"}}{{/block}}
 {{#block "htmForm_searchpageIotNode"}}{{/block}}
 {{/if}}
 {{/inline}}
-{{#*inline "htmFormIotNodePage_patchIotNode"}}
+{{#*inline "htmButtonIotNodePage_patchIotNode"}}
 		<button
 			class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce "
 			onclick="$('#patchIotNodeModal').show(); "
@@ -403,6 +381,14 @@
 			<i class="fas fa-edit "></i>
 			Modify IOT nodes
 		</button>
+{{/inline}}
+{{#*inline "htmFormButtonIotNodePage_patchIotNode"}}
+						<button
+							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-2017-shaded-spruce "
+							onclick="patchIotNode(null, $('#patchIotNodeFormValues')); "
+							>Modify IOT nodes</button>
+{{/inline}}
+{{#*inline "htmFormIotNodePage_patchIotNode"}}
 		<div id="patchIotNodeModal" class="w3-modal ">
 			<div class="w3-modal-content ">
 				<div class="w3-card-4 ">
@@ -461,16 +447,13 @@
 {{> "htmLocation" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
-						<button
-							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-2017-shaded-spruce "
-							onclick="patchIotNode(null, $('#patchIotNodeFormValues')); "
-							>Modify IOT nodes</button>
+{{#block "htmFormButton_patchIotNode"}}{{/block}}
 					</div>
 				</div>
 			</div>
 		</div>
 {{/inline}}
-{{#*inline "htmFormIotNodePage_postIotNode"}}
+{{#*inline "htmButtonIotNodePage_postIotNode"}}
 		<button
 			class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce "
 			onclick="$('#postIotNodeModal').show(); "
@@ -478,6 +461,14 @@
 			<i class="fas fa-file-plus "></i>
 			Create an IOT node
 		</button>
+{{/inline}}
+{{#*inline "htmFormButtonIotNodePage_postIotNode"}}
+						<button
+							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-2017-shaded-spruce "
+							onclick="postIotNode($('#postIotNodeForm')); "
+							>Create an IOT node</button>
+{{/inline}}
+{{#*inline "htmFormIotNodePage_postIotNode"}}
 		<div id="postIotNodeModal" class="w3-modal ">
 			<div class="w3-modal-content ">
 				<div class="w3-card-4 ">
@@ -538,16 +529,13 @@
 {{/ifContainsAnyRoles}}
 							</div>
 						</div>
-						<button
-							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-2017-shaded-spruce "
-							onclick="postIotNode($('#postIotNodeForm')); "
-							>Create an IOT node</button>
+{{#block "htmFormButton_postIotNode"}}{{/block}}
 					</div>
 				</div>
 			</div>
 		</div>
 {{/inline}}
-{{#*inline "htmFormIotNodePage_putimportIotNode"}}
+{{#*inline "htmButtonIotNodePage_putimportIotNode"}}
 		<button
 			class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce "
 			onclick="$('#putimportIotNodeModal').show(); "
@@ -555,6 +543,14 @@
 			<i class="fas fa-file-import "></i>
 			Import IOT nodes
 		</button>
+{{/inline}}
+{{#*inline "htmFormButtonIotNodePage_putimportIotNode"}}
+						<button
+							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-2017-shaded-spruce "
+							onclick="putimportIotNode($('#putimportIotNodeFormValues')); "
+							>Import IOT nodes</button>
+{{/inline}}
+{{#*inline "htmFormIotNodePage_putimportIotNode"}}
 		<div id="putimportIotNodeModal" class="w3-modal ">
 			<div class="w3-modal-content ">
 				<div class="w3-card-4 ">
@@ -572,14 +568,19 @@
 								placeholder="{ 'searchList': [ { 'pk': ... , 'saves': [ ... ] }, ... ] }"
 								></textarea>
 						</div>
-						<button
-							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-2017-shaded-spruce "
-							onclick="putimportIotNode($('#putimportIotNodeFormValues')); "
-							>Import IOT nodes</button>
+{{#block "htmFormButton_putimportIotNode"}}{{/block}}
 					</div>
 				</div>
 			</div>
 		</div>
+{{/inline}}
+{{#*inline "htmButtonIotNodePage_searchpageIotNode"}}
+{{/inline}}
+{{#*inline "htmFormButtonIotNodePage_searchpageIotNode"}}
+						<button
+							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-2017-shaded-spruce "
+							onclick="searchpageIotNode(); "
+							>Search IOT nodes</button>
 {{/inline}}
 {{#*inline "htmFormIotNodePage_searchpageIotNode"}}
 		<div id="searchpageIotNodeModal" class="">
@@ -933,11 +934,11 @@
 {{#block "htmBodyCount0"}}{{/block}}
 	{{else}}
 		{{#eq iotNodeCount int1}}
-			{{#eq params.query.q "*:*"}}
-{{#block "htmBodyCount1All"}}{{/block}}
-			{{else}}
+			{{#if id}}
 {{#block "htmBodyCount1"}}{{/block}}
-			{{/eq}}
+			{{else}}
+{{#block "htmBodyAll"}}{{/block}}
+			{{/if}}
 		{{else}}
 {{#block "htmBodyAll"}}{{/block}}
 		{{/eq}}
@@ -1021,12 +1022,23 @@
 		{{/eq}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles authRoleSuperAdmin}}
+{{#block "htmButton_patchIotNode"}}{{/block}}
 {{#block "htmForm_patchIotNode"}}{{/block}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles authRoleAdmin}}
+{{#eq iotNodeCount int1}}
+{{#if id}}
+{{else}}
+{{#block "htmButton_postIotNode"}}{{/block}}
 {{#block "htmForm_postIotNode"}}{{/block}}
+{{/if}}
+{{else}}
+{{#block "htmButton_postIotNode"}}{{/block}}
+{{#block "htmForm_postIotNode"}}{{/block}}
+{{/eq}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles authRoleSuperAdmin}}
+{{#block "htmButton_putimportIotNode"}}{{/block}}
 {{#block "htmForm_putimportIotNode"}}{{/block}}
 {{/ifContainsAnyRoles}}
 {{#block "htmSuggested"}}{{/block}}

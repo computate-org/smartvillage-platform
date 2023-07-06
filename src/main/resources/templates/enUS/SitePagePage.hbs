@@ -1,3 +1,4 @@
+{{#eq classSimpleName "SitePage"}}
 {{#partial "htmHead"}}{{> htmHeadSitePagePage}}{{/partial}}
 {{#partial "htmTitle"}}{{> htmTitleSitePagePage}}{{/partial}}
 {{#partial "htmMeta"}}{{> htmMetaSitePagePage}}{{/partial}}
@@ -25,8 +26,17 @@
 {{#partial "htmForm"}}{{> htmFormSitePagePage}}{{/partial}}
 {{#partial "htmForms"}}{{> htmFormsSitePagePage}}{{/partial}}
 {{#partial "htmBodySuggested"}}{{> htmBodySuggestedSitePagePage}}{{/partial}}
+{{#partial "htmButton_postSitePage"}}{{> htmButtonSitePagePage_postSitePage classApiMethodMethod="POST"}}{{/partial}}
 {{#partial "htmForm_postSitePage"}}{{> htmFormSitePagePage_postSitePage classApiMethodMethod="POST"}}{{/partial}}
+{{#partial "htmFormButton_postSitePage"}}{{> htmFormButtonSitePagePage_postSitePage classApiMethodMethod="POST"}}{{/partial}}
+{{#partial "htmButton_patchSitePage"}}{{> htmButtonSitePagePage_patchSitePage classApiMethodMethod="PATCH"}}{{/partial}}
 {{#partial "htmForm_patchSitePage"}}{{> htmFormSitePagePage_patchSitePage classApiMethodMethod="PATCH"}}{{/partial}}
+{{#partial "htmFormButton_patchSitePage"}}{{> htmFormButtonSitePagePage_patchSitePage classApiMethodMethod="PATCH"}}{{/partial}}
+{{#partial "htmButton_putimportSitePage"}}{{> htmButtonSitePagePage_putimportSitePage classApiMethodMethod="PUT"}}{{/partial}}
 {{#partial "htmForm_putimportSitePage"}}{{> htmFormSitePagePage_putimportSitePage classApiMethodMethod="PUT"}}{{/partial}}
-{{#partial "htmForm_searchpageSitePage"}}{{> htmFormSitePagePage_searchpageSitePage classApiMethodMethod="GET"}}{{/partial}}
+{{#partial "htmFormButton_putimportSitePage"}}{{> htmFormButtonSitePagePage_putimportSitePage classApiMethodMethod="PUT"}}{{/partial}}
+{{#partial "htmButton_searchpageSitePage"}}{{> htmButtonSitePagePage_searchpageSitePage classApiMethodMethod="Page"}}{{/partial}}
+{{#partial "htmForm_searchpageSitePage"}}{{> htmFormSitePagePage_searchpageSitePage classApiMethodMethod="Page"}}{{/partial}}
+{{#partial "htmFormButton_searchpageSitePage"}}{{> htmFormSitePagePage_searchpageSitePage classApiMethodMethod="Page"}}{{/partial}}
+{{/eq}}
 {{> SitePageGenPage}}

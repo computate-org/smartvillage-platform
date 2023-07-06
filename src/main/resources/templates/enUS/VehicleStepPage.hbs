@@ -1,3 +1,4 @@
+{{#eq classSimpleName "VehicleStep"}}
 {{#partial "htmHead"}}{{> htmHeadVehicleStepPage}}{{/partial}}
 {{#partial "htmTitle"}}{{> htmTitleVehicleStepPage}}{{/partial}}
 {{#partial "htmMeta"}}{{> htmMetaVehicleStepPage}}{{/partial}}
@@ -25,8 +26,17 @@
 {{#partial "htmForm"}}{{> htmFormVehicleStepPage}}{{/partial}}
 {{#partial "htmForms"}}{{> htmFormsVehicleStepPage}}{{/partial}}
 {{#partial "htmBodySuggested"}}{{> htmBodySuggestedVehicleStepPage}}{{/partial}}
+{{#partial "htmButton_patchVehicleStep"}}{{> htmButtonVehicleStepPage_patchVehicleStep classApiMethodMethod="PATCH"}}{{/partial}}
 {{#partial "htmForm_patchVehicleStep"}}{{> htmFormVehicleStepPage_patchVehicleStep classApiMethodMethod="PATCH"}}{{/partial}}
+{{#partial "htmFormButton_patchVehicleStep"}}{{> htmFormButtonVehicleStepPage_patchVehicleStep classApiMethodMethod="PATCH"}}{{/partial}}
+{{#partial "htmButton_postVehicleStep"}}{{> htmButtonVehicleStepPage_postVehicleStep classApiMethodMethod="POST"}}{{/partial}}
 {{#partial "htmForm_postVehicleStep"}}{{> htmFormVehicleStepPage_postVehicleStep classApiMethodMethod="POST"}}{{/partial}}
+{{#partial "htmFormButton_postVehicleStep"}}{{> htmFormButtonVehicleStepPage_postVehicleStep classApiMethodMethod="POST"}}{{/partial}}
+{{#partial "htmButton_putimportVehicleStep"}}{{> htmButtonVehicleStepPage_putimportVehicleStep classApiMethodMethod="PUT"}}{{/partial}}
 {{#partial "htmForm_putimportVehicleStep"}}{{> htmFormVehicleStepPage_putimportVehicleStep classApiMethodMethod="PUT"}}{{/partial}}
-{{#partial "htmForm_searchpageVehicleStep"}}{{> htmFormVehicleStepPage_searchpageVehicleStep classApiMethodMethod="GET"}}{{/partial}}
+{{#partial "htmFormButton_putimportVehicleStep"}}{{> htmFormButtonVehicleStepPage_putimportVehicleStep classApiMethodMethod="PUT"}}{{/partial}}
+{{#partial "htmButton_searchpageVehicleStep"}}{{> htmButtonVehicleStepPage_searchpageVehicleStep classApiMethodMethod="Page"}}{{/partial}}
+{{#partial "htmForm_searchpageVehicleStep"}}{{> htmFormVehicleStepPage_searchpageVehicleStep classApiMethodMethod="Page"}}{{/partial}}
+{{#partial "htmFormButton_searchpageVehicleStep"}}{{> htmFormVehicleStepPage_searchpageVehicleStep classApiMethodMethod="Page"}}{{/partial}}
+{{/eq}}
 {{> VehicleStepGenPage}}

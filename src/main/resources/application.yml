@@ -20,9 +20,9 @@ FACEBOOK_GRAPH_VERSION: v15.0
 FACEBOOK_APP_ID: 1871568493111919
 GITHUB_ORG: "computate-org"
 QUAYIO_ORG: "computateorg"
-SITE_POWERED_BY_URL: "https://www.operate-first.cloud/"
-SITE_POWERED_BY_NAME: "Operate First"
-SITE_POWERED_BY_IMAGE_URI: "/png/operate-first-logo.png"
+SITE_POWERED_BY_URL: "https://nerc.mghpcc.org/"
+SITE_POWERED_BY_NAME: "NERC"
+SITE_POWERED_BY_IMAGE_URI: "/png/nerc/nerc-logo.png"
 
 STATIC_BASE_URL: "http://localhost:12080/static"
 STATIC_PATH: "/usr/local/src/smartabyar-smartvillage-static"

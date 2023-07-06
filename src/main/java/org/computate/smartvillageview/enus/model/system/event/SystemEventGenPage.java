@@ -436,12 +436,12 @@ public class SystemEventGenPage extends SystemEventGenPageGen<PageLayout> {
 	}
 
 	protected void _systemEvent_(Wrap<SystemEvent> w) {
-		if(systemEventCount == 1)
+		if(systemEventCount == 1 && Optional.ofNullable(siteRequest_.getServiceRequest().getParams().getJsonObject("path")).map(o -> o.getString("id")).orElse(null) != null)
 			w.o(searchListSystemEvent_.get(0));
 	}
 
 	protected void _id(Wrap<String> w) {
-		if(systemEventCount == 1)
+		if(systemEvent_ != null)
 			w.o(systemEvent_.getId());
 	}
 

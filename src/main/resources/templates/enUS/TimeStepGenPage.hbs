@@ -1,5 +1,5 @@
 {{#*inline "htmTitleTimeStepPage"}}		<!-- inline "htmTitleTimeStepPage" -->
-		<title>{{#if searchListTimeStep_}}{{#eq timeStepCount int1}}{{#eq params.query.q "*:*"}}time step{{else}}time step{{/eq}}{{else}}no time step found{{/eq}}{{else}}time steps{{/if}}</title>
+		<title>{{#if searchListTimeStep_}}{{#eq timeStepCount int1}}{{#if id}}time step{{else}}time step{{/if}}{{else}}no time step found{{/eq}}{{else}}time steps{{/if}}</title>
 {{/inline}}
 {{#*inline "htmMetaTimeStepPage"}}{{> "htmMetaBaseResultPage"}}{{/inline}}
 {{#*inline "htmStyleTimeStepPage"}}{{> "htmStyleBaseResultPage"}}{{/inline}}
@@ -36,7 +36,7 @@
 				window.varsFq = JSON.parse('{{{toJsonObjectStringInApostrophes varsFq}}}');
 				window.varsRange = JSON.parse('{{{toJsonObjectStringInApostrophes varsRange}}}');
 				window.defaultRangeVar = '{{ defaultRangeVar }}';
-				pageGraph();
+				pageGraphTimeStep();
 
 				var calendarEl = document.getElementById('site-calendar');
 				var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -63,7 +63,7 @@
 									</div>
 									<div class="w3-cell-row ">
 										<div class="w3-cell w3-cell-top ">
-											<input id="qTimeStep_{{ @key }}" placeholder="{{ displayName }}" class="" {{#eq ../var 'objectSuggest' }}onkeyup{{else}}onchange{{/eq}}="qChange(this); " data-var="{{ var }}" autocomplete="off="/>
+											<input id="qTimeStep_{{ @key }}" placeholder="{{ displayName }}" class="" {{#eq ../var 'objectSuggest' }}onkeyup{{else}}onchange{{/eq}}="qChange('TimeStep', this); " data-var="{{ var }}" autocomplete="off="/>
 											<div class="pageSearchVal w3-tiny "></div>
 										</div>
 									</div>
@@ -75,7 +75,7 @@
 									</div>
 									<div class="w3-cell-row ">
 										<div class="w3-cell w3-cell-top ">
-											<input id="qTimeStep_start" placeholder="{{ displayName }}" class="" onchange="paramChange(this); " data-var="start" autocomplete="off="/>
+											<input id="qTimeStep_start" placeholder="{{ displayName }}" class="" onchange="paramChange('TimeStep', this); " data-var="start" autocomplete="off="/>
 											<div class="pageSearchVal w3-tiny "></div>
 										</div>
 									</div>
@@ -86,7 +86,7 @@
 									</div>
 									<div class="w3-cell-row ">
 										<div class="w3-cell w3-cell-top ">
-											<input id="qTimeStep_rows" placeholder="{{ displayName }}" class="" onchange="paramChange(this); " data-var="rows" autocomplete="off="/>
+											<input id="qTimeStep_rows" placeholder="{{ displayName }}" class="" onchange="paramChange('TimeStep', this); " data-var="rows" autocomplete="off="/>
 											<div class="pageSearchVal w3-tiny "></div>
 										</div>
 									</div>
@@ -99,10 +99,10 @@
 										<label for="fqTimeStep_{{ @key }}">{{ displayName }}<sup class="w3-tiny "> ({{ classSimpleName }})</sup></label>
 										<div class="w3-cell-row ">
 											<div class="w3-cell w3-cell-top ">
-												<button id="buttonFacetTimeStep_{{ @key }}" class="" onclick="facetFieldChange(this); " title="see values " data-var="{{ var }}" data-clear="{{#if facetField }}true{{else}}false{{/if}}"><i class="fas fa-list "></i></button>
+												<button id="buttonFacetTimeStep_{{ @key }}" class="" onclick="facetFieldChange('TimeStep', this); " title="see values " data-var="{{ var }}" data-clear="{{#if facetField }}true{{else}}false{{/if}}"><i class="fas fa-list "></i></button>
 											</div>
 											<div class="w3-cell w3-cell-top ">
-												<input id="fqTimeStep_{{ @key }}" placeholder="{{ displayName }}" class="" onchange="fqChange(this); " data-var="{{ var }}" autocomplete="off=" value="{{ val }}"/>
+												<input id="fqTimeStep_{{ @key }}" placeholder="{{ displayName }}" class="" onchange="fqChange('TimeStep', this); " data-var="{{ var }}" autocomplete="off=" value="{{ val }}"/>
 											</div>
 										</div>
 									</div>
@@ -111,7 +111,7 @@
 										<div class="pageSearchVal " id="pageSearchVal-buttonFacetTimeStep_{{ @key }}">{{#if facetField.var }}facet.field={{ facetField.var }}{{/if}}</div>
 										<ol class="pageFacetField w3-small pageFacetFieldTimeStep_{{ @key }} " id="pageFacetFieldTimeStep_{{ @key }}">
 {{#each facetField.counts }}
-											<li class="cursor-pointer " data-class="TimeStep" data-var="{{ ../var }}" data-val="{{ @key }}" onclick="fqReplace(this); ">{{ @key }}: {{ this }}</li>
+											<li class="cursor-pointer " data-class="TimeStep" data-var="{{ ../var }}" data-val="{{ @key }}" onclick="fqReplace('TimeStep', this); ">{{ @key }}: {{ this }}</li>
 {{/each}}
 										</ol>
 									</div>
@@ -135,7 +135,7 @@
 											<span>Range Gap</span>
 										</td>
 										<td class="">
-											<select name="facet.range.gap" id="pageFacetRangeGap-TimeStep" onchange="facetRangeGapChange(this, 'TimeStep'); ">
+											<select name="facet.range.gap" id="pageFacetRangeGap-TimeStep" onchange="facetRangeGapChange('TimeStep', this); ">
 												<option value="+1YEAR"{{#eq defaultRangeGap '+1YEAR'}} selected="selected"{{else}}{{/eq}}>Year</option>
 												<option value="+1MONTH"{{#eq defaultRangeGap '+1MONTH'}} selected="selected"{{else}}{{/eq}}>Month</option>
 												<option value="+1WEEK"{{#eq defaultRangeGap '+1WEEK'}} selected="selected"{{else}}{{/eq}}>Week</option>
@@ -153,7 +153,7 @@
 									</tr>
 									<tr class="">
 										<td class="" colspan="2">
-											<span><input type="datetime-local" name="facetRangeStart" id="pageFacetRangeStart-TimeStep" value="{{formatZonedDateTime defaultRangeStart "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeStartChange(this, 'TimeStep'); "/></span>
+											<span><input type="datetime-local" name="facetRangeStart" id="pageFacetRangeStart-TimeStep" value="{{formatZonedDateTime defaultRangeStart "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeStartChange('TimeStep', this); "/></span>
 										</td>
 									</tr>
 									<tr class="">
@@ -163,7 +163,7 @@
 									</tr>
 									<tr class="">
 										<td class="" colspan="2">
-											<span><input type="datetime-local" name="facetRangeEnd" id="pageFacetRangeEnd-TimeStep" value="{{formatZonedDateTime defaultRangeEnd "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeEndChange(this, 'TimeStep'); "/></span>
+											<span><input type="datetime-local" name="facetRangeEnd" id="pageFacetRangeEnd-TimeStep" value="{{formatZonedDateTime defaultRangeEnd "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeEndChange('TimeStep', this); "/></span>
 										</td>
 									</tr>
 								</table>
@@ -171,7 +171,7 @@
 {{#each varsRange }}
 									<tr class="">
 										<td class="">
-											<span><input type="radio" name="pageFacetRange" class="pageFacetRange " id="pageFacetRangeTimeStep_{{ @key }}" value="{{ var }}"{{#eq defaultRangeVar var }} checked="checked"{{/eq}} onclick="facetRangeChange(this, 'TimeStep'); "/></span>
+											<span><input type="radio" name="pageFacetRange" class="pageFacetRange " id="pageFacetRangeTimeStep_{{ @key }}" value="{{ var }}"{{#eq defaultRangeVar var }} checked="checked"{{/eq}} onclick="facetRangeChange('TimeStep', this); "/></span>
 										</td>
 										<td class="">
 											<label for="pageFacetRangeTimeStep_{{ @key }}">{{ displayName }}</label>
@@ -195,7 +195,7 @@
 {{#each varsFq }}
 									<tr class="">
 										<td class="">
-											<span><input type="checkbox" name="pageFacetPivot" class="pageFacetPivot " id="pageFacetPivotTimeStep_{{ @key }}" value="{{ var }}"{{#if pivot }} checked="checked"{{/if}} onclick="facetPivotChange(this, 'TimeStep'); "/></span>
+											<span><input type="checkbox" name="pageFacetPivot" class="pageFacetPivot " id="pageFacetPivotTimeStep_{{ @key }}" value="{{ var }}"{{#if pivot }} checked="checked"{{/if}} onclick="facetPivotChange('TimeStep', this); "/></span>
 										</td>
 										<td class="w3-cell ">
 											<label for="pageFacetPivotTimeStep_{{ @key }}">{{ displayName }}</label>
@@ -219,7 +219,7 @@
 {{#each varsFq }}
 									<tr class="">
 										<td class="">
-											<span><input type="checkbox" name="pageFieldList" class="pageFieldList " id="pageFieldListTimeStep_{{ @key }}" value="{{ var }}"{{#if fieldList }} checked="checked"{{/if}} onclick="facetFieldListChange(this, 'TimeStep'); "/></span>
+											<span><input type="checkbox" name="pageFieldList" class="pageFieldList " id="pageFieldListTimeStep_{{ @key }}" value="{{ var }}"{{#if fieldList }} checked="checked"{{/if}} onclick="facetFieldListChange('TimeStep', this); "/></span>
 										</td>
 										<td class="w3-cell ">
 											<label for="pageFieldListTimeStep_{{ @key }}">{{ displayName }}</label>
@@ -244,7 +244,7 @@
 {{#if enableStats }}
 									<tr class="">
 										<td class="">
-											<span><input type="checkbox" name="pageStats" class="pageStats " id="pageStatsTimeStep_{{ @key }}" value="{{ var }}"{{#if ./stats }} checked="checked"{{/if}} onclick="facetStatsChange(this, 'TimeStep'); "/></span>
+											<span><input type="checkbox" name="pageStats" class="pageStats " id="pageStatsTimeStep_{{ @key }}" value="{{ var }}"{{#if ./stats }} checked="checked"{{/if}} onclick="facetStatsChange('TimeStep', this); "/></span>
 										</td>
 										<td class="w3-cell ">
 											<div>
@@ -310,37 +310,14 @@
 	{{#if classIconCssClasses}}
 				<i class="{{ classIconCssClasses }} site-menu-icon "></i>
 	{{/if}}
-				<span class="">time steps</span>
+				<span class="">time step</span>
 			</a>
 		</h1>
-		<div>
-	{{#if pagination.pagePrevious}}
-			<a href="{{pageUri}}?start={{pagination.pagePrevious.start}}&amp;rows={{pagination.rows}}">
-				<i class="fas fa-arrow-square-left "></i>
-			</a>
-	{{else}}
-			<i class="fas fa-arrow-square-left w3-opacity "></i>
-	{{/if}}
-	{{#gte pagination.rowsPrevious pagination.1L}}
-			<a href="{{pageUri}}?start={{pagination.start}}&amp;rows={{ pagination.rowsPrevious }}">
-				<i class="fas fa-minus-square "></i>
-			</a>
-	{{else}}
-			<i class="fas fa-minus-square w3-opacity "></i>
-	{{/gte}}
-			<a href="{{pageUri}}?start={{pagination.start}}&amp;rows={{ pagination.rowsNext }}">
-				<i class="fas fa-plus-square "></i>
-			</a>
-	{{#if pagination.pageNext}}
-			<a href="{{pageUri}}?start={{pagination.pageNext.start}}&amp;rows={{pagination.rows}}">
-				<i class="fas fa-arrow-square-right "></i>
-			</a>
-	{{else}}
-			<i class="fas fa-arrow-square-right w3-opacity "></i>
-	{{/if}}
-			<span>{{ pagination.startNum }} - {{ pagination.endNum }} of {{ pagination.foundNum }}</span>
-		</div>
-{{> "table1TimeStepPage"}}
+		<h2 class="w3-center ">
+			<span class="w3-bar-item w3-padding w3-center w3-block w3-2017-shaded-spruce">
+				<span class="">{{timeStep_.objectTitle}}</span>
+			</span>
+		</h2>
 {{/inline}}
 {{#*inline "htmBodyAllTimeStepPage"}}		<!-- #*inline "htmBodyAllTimeStepPage" -->
 		<h1>
@@ -392,10 +369,11 @@
 			<input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{{toJsonObjectStringInApostrophes pageResponse }}}' type="hidden"/>
 		</form>
 {{#if id}}
+{{#block "htmButton_searchpageTimeStep"}}{{/block}}
 {{#block "htmForm_searchpageTimeStep"}}{{/block}}
 {{/if}}
 {{/inline}}
-{{#*inline "htmFormTimeStepPage_patchTimeStep"}}
+{{#*inline "htmButtonTimeStepPage_patchTimeStep"}}
 		<button
 			class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce "
 			onclick="$('#patchTimeStepModal').show(); "
@@ -403,6 +381,14 @@
 			<i class="fas fa-edit "></i>
 			Modify time steps
 		</button>
+{{/inline}}
+{{#*inline "htmFormButtonTimeStepPage_patchTimeStep"}}
+						<button
+							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-2017-shaded-spruce "
+							onclick="patchTimeStep(null, $('#patchTimeStepFormValues')); "
+							>Modify time steps</button>
+{{/inline}}
+{{#*inline "htmFormTimeStepPage_patchTimeStep"}}
 		<div id="patchTimeStepModal" class="w3-modal ">
 			<div class="w3-modal-content ">
 				<div class="w3-card-4 ">
@@ -461,16 +447,13 @@
 {{> "htmDateTime" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
-						<button
-							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-2017-shaded-spruce "
-							onclick="patchTimeStep(null, $('#patchTimeStepFormValues')); "
-							>Modify time steps</button>
+{{#block "htmFormButton_patchTimeStep"}}{{/block}}
 					</div>
 				</div>
 			</div>
 		</div>
 {{/inline}}
-{{#*inline "htmFormTimeStepPage_postTimeStep"}}
+{{#*inline "htmButtonTimeStepPage_postTimeStep"}}
 		<button
 			class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce "
 			onclick="$('#postTimeStepModal').show(); "
@@ -478,6 +461,14 @@
 			<i class="fas fa-file-plus "></i>
 			Create a time step
 		</button>
+{{/inline}}
+{{#*inline "htmFormButtonTimeStepPage_postTimeStep"}}
+						<button
+							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-2017-shaded-spruce "
+							onclick="postTimeStep($('#postTimeStepForm')); "
+							>Create a time step</button>
+{{/inline}}
+{{#*inline "htmFormTimeStepPage_postTimeStep"}}
 		<div id="postTimeStepModal" class="w3-modal ">
 			<div class="w3-modal-content ">
 				<div class="w3-card-4 ">
@@ -538,16 +529,13 @@
 {{/ifContainsAnyRoles}}
 							</div>
 						</div>
-						<button
-							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-2017-shaded-spruce "
-							onclick="postTimeStep($('#postTimeStepForm')); "
-							>Create a time step</button>
+{{#block "htmFormButton_postTimeStep"}}{{/block}}
 					</div>
 				</div>
 			</div>
 		</div>
 {{/inline}}
-{{#*inline "htmFormTimeStepPage_putimportTimeStep"}}
+{{#*inline "htmButtonTimeStepPage_putimportTimeStep"}}
 		<button
 			class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce "
 			onclick="$('#putimportTimeStepModal').show(); "
@@ -555,6 +543,14 @@
 			<i class="fas fa-file-import "></i>
 			Import time steps
 		</button>
+{{/inline}}
+{{#*inline "htmFormButtonTimeStepPage_putimportTimeStep"}}
+						<button
+							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-2017-shaded-spruce "
+							onclick="putimportTimeStep($('#putimportTimeStepFormValues')); "
+							>Import time steps</button>
+{{/inline}}
+{{#*inline "htmFormTimeStepPage_putimportTimeStep"}}
 		<div id="putimportTimeStepModal" class="w3-modal ">
 			<div class="w3-modal-content ">
 				<div class="w3-card-4 ">
@@ -572,14 +568,19 @@
 								placeholder="{ 'searchList': [ { 'pk': ... , 'saves': [ ... ] }, ... ] }"
 								></textarea>
 						</div>
-						<button
-							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-2017-shaded-spruce "
-							onclick="putimportTimeStep($('#putimportTimeStepFormValues')); "
-							>Import time steps</button>
+{{#block "htmFormButton_putimportTimeStep"}}{{/block}}
 					</div>
 				</div>
 			</div>
 		</div>
+{{/inline}}
+{{#*inline "htmButtonTimeStepPage_searchpageTimeStep"}}
+{{/inline}}
+{{#*inline "htmFormButtonTimeStepPage_searchpageTimeStep"}}
+						<button
+							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-2017-shaded-spruce "
+							onclick="searchpageTimeStep(); "
+							>Search time steps</button>
 {{/inline}}
 {{#*inline "htmFormTimeStepPage_searchpageTimeStep"}}
 		<div id="searchpageTimeStepModal" class="">
@@ -742,11 +743,11 @@
 {{#block "htmBodyCount0"}}{{/block}}
 	{{else}}
 		{{#eq timeStepCount int1}}
-			{{#eq params.query.q "*:*"}}
-{{#block "htmBodyCount1All"}}{{/block}}
-			{{else}}
+			{{#if id}}
 {{#block "htmBodyCount1"}}{{/block}}
-			{{/eq}}
+			{{else}}
+{{#block "htmBodyAll"}}{{/block}}
+			{{/if}}
 		{{else}}
 {{#block "htmBodyAll"}}{{/block}}
 		{{/eq}}
@@ -830,12 +831,23 @@
 		{{/eq}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles authRoleSuperAdmin}}
+{{#block "htmButton_patchTimeStep"}}{{/block}}
 {{#block "htmForm_patchTimeStep"}}{{/block}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles authRoleAdmin}}
+{{#eq timeStepCount int1}}
+{{#if id}}
+{{else}}
+{{#block "htmButton_postTimeStep"}}{{/block}}
 {{#block "htmForm_postTimeStep"}}{{/block}}
+{{/if}}
+{{else}}
+{{#block "htmButton_postTimeStep"}}{{/block}}
+{{#block "htmForm_postTimeStep"}}{{/block}}
+{{/eq}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles authRoleSuperAdmin}}
+{{#block "htmButton_putimportTimeStep"}}{{/block}}
 {{#block "htmForm_putimportTimeStep"}}{{/block}}
 {{/ifContainsAnyRoles}}
 {{#block "htmSuggested"}}{{/block}}

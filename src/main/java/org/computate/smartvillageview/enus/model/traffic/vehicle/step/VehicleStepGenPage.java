@@ -437,12 +437,12 @@ public class VehicleStepGenPage extends VehicleStepGenPageGen<MapResultPage> {
 	}
 
 	protected void _vehicleStep_(Wrap<VehicleStep> w) {
-		if(vehicleStepCount == 1)
+		if(vehicleStepCount == 1 && Optional.ofNullable(siteRequest_.getServiceRequest().getParams().getJsonObject("path")).map(o -> o.getString("id")).orElse(null) != null)
 			w.o(searchListVehicleStep_.get(0));
 	}
 
 	protected void _id(Wrap<String> w) {
-		if(vehicleStepCount == 1)
+		if(vehicleStep_ != null)
 			w.o(vehicleStep_.getId());
 	}
 

@@ -437,12 +437,12 @@ public class SitePageGenPage extends SitePageGenPageGen<BaseResultPage> {
 	}
 
 	protected void _sitePage_(Wrap<SitePage> w) {
-		if(sitePageCount == 1)
+		if(sitePageCount == 1 && Optional.ofNullable(siteRequest_.getServiceRequest().getParams().getJsonObject("path")).map(o -> o.getString("id")).orElse(null) != null)
 			w.o(searchListSitePage_.get(0));
 	}
 
 	protected void _id(Wrap<String> w) {
-		if(sitePageCount == 1)
+		if(sitePage_ != null)
 			w.o(sitePage_.getId());
 	}
 

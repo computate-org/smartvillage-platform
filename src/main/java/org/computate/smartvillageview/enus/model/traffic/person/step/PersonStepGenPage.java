@@ -437,12 +437,12 @@ public class PersonStepGenPage extends PersonStepGenPageGen<MapResultPage> {
 	}
 
 	protected void _personStep_(Wrap<PersonStep> w) {
-		if(personStepCount == 1)
+		if(personStepCount == 1 && Optional.ofNullable(siteRequest_.getServiceRequest().getParams().getJsonObject("path")).map(o -> o.getString("id")).orElse(null) != null)
 			w.o(searchListPersonStep_.get(0));
 	}
 
 	protected void _id(Wrap<String> w) {
-		if(personStepCount == 1)
+		if(personStep_ != null)
 			w.o(personStep_.getId());
 	}
 

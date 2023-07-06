@@ -1,3 +1,4 @@
+{{#eq classSimpleName "SiteUser"}}
 {{#partial "htmHead"}}{{> htmHeadSiteUserPage}}{{/partial}}
 {{#partial "htmTitle"}}{{> htmTitleSiteUserPage}}{{/partial}}
 {{#partial "htmMeta"}}{{> htmMetaSiteUserPage}}{{/partial}}
@@ -19,14 +20,15 @@
 {{#partial "htmBodyMenu"}}{{> htmBodyMenuSiteUserPage}}{{/partial}}
 {{#partial "htmBodyGraph"}}{{> htmBodyGraphSiteUserPage}}{{/partial}}
 {{#partial "htmBodyCount0"}}{{> htmBodyCount0SiteUserPage}}{{/partial}}
-{{#partial "htmBodyCount1All"}}
+{{#partial "htmBodyCount1All"}}{{> htmBodyCount1AllSiteUserPage}}{{/partial}}
+{{#partial "htmBodyCountAll"}}
 <div class="w3-margin-top "
 	<h3>Manage username and password</h3>
 	<div class="w3-margin ">
 		<a target="_blank" class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-blue-gray " href="{{ siteAuthUrl }}/realms/{{ siteAuthRealm }}/account">Manage user profile</a>
 	</div>
 </div>
-{{> htmBodyCount1AllSiteUserPage}}{{/partial}}
+{{/partial}}
 {{#partial "htmBodyCount1"}}
 <div class="w3-margin-top "
 	<h3>Manage username and password</h3>
@@ -34,13 +36,22 @@
 		<a target="_blank" class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-blue-gray " href="{{ siteAuthUrl }}/realms/{{ siteAuthRealm }}/account">Manage user profile</a>
 	</div>
 </div>
-{{> htmBodyCount1SiteUserPage}}{{/partial}}
+{{/partial}}
 {{#partial "htmBodyAll"}}{{> htmBodyAllSiteUserPage}}{{/partial}}
 {{#partial "htmForm"}}{{> htmFormSiteUserPage}}{{/partial}}
 {{#partial "htmForms"}}{{> htmFormsSiteUserPage}}{{/partial}}
 {{#partial "htmBodySuggested"}}{{> htmBodySuggestedSiteUserPage}}{{/partial}}
+{{#partial "htmButton_patchSiteUser"}}{{> htmButtonSiteUserPage_patchSiteUser classApiMethodMethod="PATCH"}}{{/partial}}
 {{#partial "htmForm_patchSiteUser"}}{{> htmFormSiteUserPage_patchSiteUser classApiMethodMethod="PATCH"}}{{/partial}}
+{{#partial "htmFormButton_patchSiteUser"}}{{> htmFormButtonSiteUserPage_patchSiteUser classApiMethodMethod="PATCH"}}{{/partial}}
+{{#partial "htmButton_postSiteUser"}}{{> htmButtonSiteUserPage_postSiteUser classApiMethodMethod="POST"}}{{/partial}}
 {{#partial "htmForm_postSiteUser"}}{{> htmFormSiteUserPage_postSiteUser classApiMethodMethod="POST"}}{{/partial}}
+{{#partial "htmFormButton_postSiteUser"}}{{> htmFormButtonSiteUserPage_postSiteUser classApiMethodMethod="POST"}}{{/partial}}
+{{#partial "htmButton_putimportSiteUser"}}{{> htmButtonSiteUserPage_putimportSiteUser classApiMethodMethod="PUT"}}{{/partial}}
 {{#partial "htmForm_putimportSiteUser"}}{{> htmFormSiteUserPage_putimportSiteUser classApiMethodMethod="PUT"}}{{/partial}}
-{{#partial "htmForm_searchpageSiteUser"}}{{> htmFormSiteUserPage_searchpageSiteUser classApiMethodMethod="GET"}}{{/partial}}
+{{#partial "htmFormButton_putimportSiteUser"}}{{> htmFormButtonSiteUserPage_putimportSiteUser classApiMethodMethod="PUT"}}{{/partial}}
+{{#partial "htmButton_searchpageSiteUser"}}{{> htmButtonSiteUserPage_searchpageSiteUser classApiMethodMethod="Page"}}{{/partial}}
+{{#partial "htmForm_searchpageSiteUser"}}{{> htmFormSiteUserPage_searchpageSiteUser classApiMethodMethod="Page"}}{{/partial}}
+{{#partial "htmFormButton_searchpageSiteUser"}}{{> htmFormSiteUserPage_searchpageSiteUser classApiMethodMethod="Page"}}{{/partial}}
+{{/eq}}
 {{> SiteUserGenPage}}

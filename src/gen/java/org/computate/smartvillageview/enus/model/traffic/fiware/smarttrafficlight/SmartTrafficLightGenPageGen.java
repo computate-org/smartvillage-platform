@@ -53,7 +53,7 @@ import io.vertx.core.Future;
  * Whenever this Java class is modified or touched, the watch service installed as described in the README, indexes all the information about this Java class in a local Apache Solr Search Engine. 
  * If you are running the service, you can see the indexed data about this Java Class here: 
  * </p>
- * <p><a href="http://localhost:44641/solr/computate/select?q=*:*&fq=partEstClasse_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLightGenPage">Find the class SmartTrafficLightGenPage in Solr. </a></p>
+ * <p><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstClasse_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLightGenPage">Find the class SmartTrafficLightGenPage in Solr. </a></p>
  * <p>
  * The extended class ending with "Gen" did not exist at first, but was automatically created by the same watch service based on the data retrieved from the local Apache Server search engine. 
  * The extended class contains many generated fields, getters, setters, initialization code, and helper methods to help build a website and API fast, reactive, and scalable. 
@@ -103,15 +103,15 @@ import io.vertx.core.Future;
  * AName.enUS: null
  * <p>
  * Delete the class SmartTrafficLightGenPage in Solr: 
- * curl -k 'http://localhost:44641/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLightGenPage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLightGenPage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
  * Delete  the package org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight in Solr: 
- * curl -k 'http://localhost:44641/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
  * Delete  the project smartabyar-smartvillage in Solr: 
- * curl -k 'http://localhost:44641/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartabyar\-smartvillage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartabyar\-smartvillage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  **/
 public abstract class SmartTrafficLightGenPageGen<DEV> extends BaseModelPage {
@@ -131,7 +131,7 @@ public abstract class SmartTrafficLightGenPageGen<DEV> extends BaseModelPage {
 
 	/**	<br> The entity searchListSmartTrafficLight_
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:44641/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLightGenPage&fq=entiteVar_enUS_indexed_string:searchListSmartTrafficLight_">Find the entity searchListSmartTrafficLight_ in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLightGenPage&fq=entiteVar_enUS_indexed_string:searchListSmartTrafficLight_">Find the entity searchListSmartTrafficLight_ in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -170,7 +170,7 @@ public abstract class SmartTrafficLightGenPageGen<DEV> extends BaseModelPage {
 
 	/**	<br> The entity listSmartTrafficLight
 	 *  It is constructed before being initialized with the constructor by default. 
-	 * <br><a href="http://localhost:44641/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLightGenPage&fq=entiteVar_enUS_indexed_string:listSmartTrafficLight">Find the entity listSmartTrafficLight in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLightGenPage&fq=entiteVar_enUS_indexed_string:listSmartTrafficLight">Find the entity listSmartTrafficLight in Solr</a>
 	 * <br>
 	 * @param l is the entity already constructed. 
 	 **/
@@ -198,11 +198,11 @@ public abstract class SmartTrafficLightGenPageGen<DEV> extends BaseModelPage {
 		return (SmartTrafficLightGenPage)this;
 	}
 
-	public static JsonArray staticSearchListSmartTrafficLight(SiteRequestEnUS siteRequest_, JsonArray o) {
-		return o;
+	public static String staticSearchListSmartTrafficLight(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o.toString();
 	}
 
-	public static String staticSearchStrListSmartTrafficLight(SiteRequestEnUS siteRequest_, JsonArray o) {
+	public static String staticSearchStrListSmartTrafficLight(SiteRequestEnUS siteRequest_, String o) {
 		return o == null ? null : o.toString();
 	}
 
@@ -225,7 +225,7 @@ public abstract class SmartTrafficLightGenPageGen<DEV> extends BaseModelPage {
 
 	/**	<br> The entity smartTrafficLightCount
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:44641/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLightGenPage&fq=entiteVar_enUS_indexed_string:smartTrafficLightCount">Find the entity smartTrafficLightCount in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLightGenPage&fq=entiteVar_enUS_indexed_string:smartTrafficLightCount">Find the entity smartTrafficLightCount in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -282,7 +282,7 @@ public abstract class SmartTrafficLightGenPageGen<DEV> extends BaseModelPage {
 
 	/**	<br> The entity smartTrafficLight_
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:44641/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLightGenPage&fq=entiteVar_enUS_indexed_string:smartTrafficLight_">Find the entity smartTrafficLight_ in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLightGenPage&fq=entiteVar_enUS_indexed_string:smartTrafficLight_">Find the entity smartTrafficLight_ in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -322,7 +322,7 @@ public abstract class SmartTrafficLightGenPageGen<DEV> extends BaseModelPage {
 
 	/**	<br> The entity pk
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:44641/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLightGenPage&fq=entiteVar_enUS_indexed_string:pk">Find the entity pk in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLightGenPage&fq=entiteVar_enUS_indexed_string:pk">Find the entity pk in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -379,7 +379,7 @@ public abstract class SmartTrafficLightGenPageGen<DEV> extends BaseModelPage {
 
 	/**	<br> The entity id
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:44641/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLightGenPage&fq=entiteVar_enUS_indexed_string:id">Find the entity id in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLightGenPage&fq=entiteVar_enUS_indexed_string:id">Find the entity id in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -429,7 +429,7 @@ public abstract class SmartTrafficLightGenPageGen<DEV> extends BaseModelPage {
 
 	/**	<br> The entity pageUriSmartTrafficLight
 	 *  is defined as null before being initialized. 
-	 * <br><a href="http://localhost:44641/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLightGenPage&fq=entiteVar_enUS_indexed_string:pageUriSmartTrafficLight">Find the entity pageUriSmartTrafficLight in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLightGenPage&fq=entiteVar_enUS_indexed_string:pageUriSmartTrafficLight">Find the entity pageUriSmartTrafficLight in Solr</a>
 	 * <br>
 	 * @param c is for wrapping a value to assign to this entity during initialization. 
 	 **/
@@ -656,7 +656,7 @@ public abstract class SmartTrafficLightGenPageGen<DEV> extends BaseModelPage {
 	public static String staticSearchStrSmartTrafficLightGenPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
 		case "listSmartTrafficLight":
-			return SmartTrafficLightGenPage.staticSearchStrListSmartTrafficLight(siteRequest_, (JsonArray)o);
+			return SmartTrafficLightGenPage.staticSearchStrListSmartTrafficLight(siteRequest_, (String)o);
 		case "smartTrafficLightCount":
 			return SmartTrafficLightGenPage.staticSearchStrSmartTrafficLightCount(siteRequest_, (Integer)o);
 		case "pk":

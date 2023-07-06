@@ -1,3 +1,4 @@
+{{#eq classSimpleName "IotNode"}}
 {{#partial "htmHead"}}{{> htmHeadIotNodePage}}{{/partial}}
 {{#partial "htmTitle"}}{{> htmTitleIotNodePage}}{{/partial}}
 {{#partial "htmMeta"}}{{> htmMetaIotNodePage}}{{/partial}}
@@ -25,8 +26,17 @@
 {{#partial "htmForm"}}{{> htmFormIotNodePage}}{{/partial}}
 {{#partial "htmForms"}}{{> htmFormsIotNodePage}}{{/partial}}
 {{#partial "htmBodySuggested"}}{{> htmBodySuggestedIotNodePage}}{{/partial}}
+{{#partial "htmButton_patchIotNode"}}{{> htmButtonIotNodePage_patchIotNode classApiMethodMethod="PATCH"}}{{/partial}}
 {{#partial "htmForm_patchIotNode"}}{{> htmFormIotNodePage_patchIotNode classApiMethodMethod="PATCH"}}{{/partial}}
+{{#partial "htmFormButton_patchIotNode"}}{{> htmFormButtonIotNodePage_patchIotNode classApiMethodMethod="PATCH"}}{{/partial}}
+{{#partial "htmButton_postIotNode"}}{{> htmButtonIotNodePage_postIotNode classApiMethodMethod="POST"}}{{/partial}}
 {{#partial "htmForm_postIotNode"}}{{> htmFormIotNodePage_postIotNode classApiMethodMethod="POST"}}{{/partial}}
+{{#partial "htmFormButton_postIotNode"}}{{> htmFormButtonIotNodePage_postIotNode classApiMethodMethod="POST"}}{{/partial}}
+{{#partial "htmButton_putimportIotNode"}}{{> htmButtonIotNodePage_putimportIotNode classApiMethodMethod="PUT"}}{{/partial}}
 {{#partial "htmForm_putimportIotNode"}}{{> htmFormIotNodePage_putimportIotNode classApiMethodMethod="PUT"}}{{/partial}}
-{{#partial "htmForm_searchpageIotNode"}}{{> htmFormIotNodePage_searchpageIotNode classApiMethodMethod="GET"}}{{/partial}}
+{{#partial "htmFormButton_putimportIotNode"}}{{> htmFormButtonIotNodePage_putimportIotNode classApiMethodMethod="PUT"}}{{/partial}}
+{{#partial "htmButton_searchpageIotNode"}}{{> htmButtonIotNodePage_searchpageIotNode classApiMethodMethod="Page"}}{{/partial}}
+{{#partial "htmForm_searchpageIotNode"}}{{> htmFormIotNodePage_searchpageIotNode classApiMethodMethod="Page"}}{{/partial}}
+{{#partial "htmFormButton_searchpageIotNode"}}{{> htmFormIotNodePage_searchpageIotNode classApiMethodMethod="Page"}}{{/partial}}
+{{/eq}}
 {{> IotNodeGenPage}}

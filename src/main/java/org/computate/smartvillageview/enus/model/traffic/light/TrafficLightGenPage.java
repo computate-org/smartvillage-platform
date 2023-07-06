@@ -437,12 +437,12 @@ public class TrafficLightGenPage extends TrafficLightGenPageGen<MapResultPage> {
 	}
 
 	protected void _trafficLight_(Wrap<TrafficLight> w) {
-		if(trafficLightCount == 1)
+		if(trafficLightCount == 1 && Optional.ofNullable(siteRequest_.getServiceRequest().getParams().getJsonObject("path")).map(o -> o.getString("id")).orElse(null) != null)
 			w.o(searchListTrafficLight_.get(0));
 	}
 
 	protected void _id(Wrap<String> w) {
-		if(trafficLightCount == 1)
+		if(trafficLight_ != null)
 			w.o(trafficLight_.getId());
 	}
 

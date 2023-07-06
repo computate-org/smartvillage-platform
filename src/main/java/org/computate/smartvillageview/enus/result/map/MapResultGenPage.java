@@ -437,12 +437,12 @@ public class MapResultGenPage extends MapResultGenPageGen<BaseResultPage> {
 	}
 
 	protected void _mapResult_(Wrap<MapResult> w) {
-		if(mapResultCount == 1)
+		if(mapResultCount == 1 && Optional.ofNullable(siteRequest_.getServiceRequest().getParams().getJsonObject("path")).map(o -> o.getString("id")).orElse(null) != null)
 			w.o(searchListMapResult_.get(0));
 	}
 
 	protected void _id(Wrap<String> w) {
-		if(mapResultCount == 1)
+		if(mapResult_ != null)
 			w.o(mapResult_.getId());
 	}
 

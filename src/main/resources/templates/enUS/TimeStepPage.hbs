@@ -1,3 +1,4 @@
+{{#eq classSimpleName "TimeStep"}}
 {{#partial "htmHead"}}{{> htmHeadTimeStepPage}}{{/partial}}
 {{#partial "htmTitle"}}{{> htmTitleTimeStepPage}}{{/partial}}
 {{#partial "htmMeta"}}{{> htmMetaTimeStepPage}}{{/partial}}
@@ -25,8 +26,17 @@
 {{#partial "htmForm"}}{{> htmFormTimeStepPage}}{{/partial}}
 {{#partial "htmForms"}}{{> htmFormsTimeStepPage}}{{/partial}}
 {{#partial "htmBodySuggested"}}{{> htmBodySuggestedTimeStepPage}}{{/partial}}
+{{#partial "htmButton_patchTimeStep"}}{{> htmButtonTimeStepPage_patchTimeStep classApiMethodMethod="PATCH"}}{{/partial}}
 {{#partial "htmForm_patchTimeStep"}}{{> htmFormTimeStepPage_patchTimeStep classApiMethodMethod="PATCH"}}{{/partial}}
+{{#partial "htmFormButton_patchTimeStep"}}{{> htmFormButtonTimeStepPage_patchTimeStep classApiMethodMethod="PATCH"}}{{/partial}}
+{{#partial "htmButton_postTimeStep"}}{{> htmButtonTimeStepPage_postTimeStep classApiMethodMethod="POST"}}{{/partial}}
 {{#partial "htmForm_postTimeStep"}}{{> htmFormTimeStepPage_postTimeStep classApiMethodMethod="POST"}}{{/partial}}
+{{#partial "htmFormButton_postTimeStep"}}{{> htmFormButtonTimeStepPage_postTimeStep classApiMethodMethod="POST"}}{{/partial}}
+{{#partial "htmButton_putimportTimeStep"}}{{> htmButtonTimeStepPage_putimportTimeStep classApiMethodMethod="PUT"}}{{/partial}}
 {{#partial "htmForm_putimportTimeStep"}}{{> htmFormTimeStepPage_putimportTimeStep classApiMethodMethod="PUT"}}{{/partial}}
-{{#partial "htmForm_searchpageTimeStep"}}{{> htmFormTimeStepPage_searchpageTimeStep classApiMethodMethod="GET"}}{{/partial}}
+{{#partial "htmFormButton_putimportTimeStep"}}{{> htmFormButtonTimeStepPage_putimportTimeStep classApiMethodMethod="PUT"}}{{/partial}}
+{{#partial "htmButton_searchpageTimeStep"}}{{> htmButtonTimeStepPage_searchpageTimeStep classApiMethodMethod="Page"}}{{/partial}}
+{{#partial "htmForm_searchpageTimeStep"}}{{> htmFormTimeStepPage_searchpageTimeStep classApiMethodMethod="Page"}}{{/partial}}
+{{#partial "htmFormButton_searchpageTimeStep"}}{{> htmFormTimeStepPage_searchpageTimeStep classApiMethodMethod="Page"}}{{/partial}}
+{{/eq}}
 {{> TimeStepGenPage}}

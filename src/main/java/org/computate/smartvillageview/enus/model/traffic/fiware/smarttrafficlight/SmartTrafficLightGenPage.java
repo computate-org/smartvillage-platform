@@ -437,17 +437,17 @@ public class SmartTrafficLightGenPage extends SmartTrafficLightGenPageGen<BaseMo
 	}
 
 	protected void _smartTrafficLight_(Wrap<SmartTrafficLight> w) {
-		if(smartTrafficLightCount == 1)
+		if(smartTrafficLightCount == 1 && Optional.ofNullable(siteRequest_.getServiceRequest().getParams().getJsonObject("path")).map(o -> o.getString("id")).orElse(null) != null)
 			w.o(searchListSmartTrafficLight_.get(0));
 	}
 
 	protected void _pk(Wrap<Long> w) {
-		if(smartTrafficLightCount == 1)
+		if(smartTrafficLight_ != null)
 			w.o(smartTrafficLight_.getPk());
 	}
 
 	protected void _id(Wrap<String> w) {
-		if(smartTrafficLightCount == 1)
+		if(smartTrafficLight_ != null)
 			w.o(smartTrafficLight_.getId());
 	}
 

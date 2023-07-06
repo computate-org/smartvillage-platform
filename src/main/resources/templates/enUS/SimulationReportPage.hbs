@@ -1,104 +1,4 @@
-{{#partial "htmHead"}}{{> htmHeadSimulationReportPage}}{{/partial}}
-{{#partial "htmTitle"}}{{> htmTitleSimulationReportPage}}{{/partial}}
-{{#partial "htmMeta"}}{{> htmMetaSimulationReportPage}}{{/partial}}
-{{#partial "htmStyle"}}{{> htmStyleSimulationReportPage}}{{/partial}}
-{{#partial "htmScripts"}}{{> htmScriptsSimulationReportPage}}{{/partial}}
-{{#partial "htmScript"}}{{> htmScriptSimulationReportPage}}
-		<script>
-async function websocketSimulationReportInner2(apiRequest) {
-	var pk = apiRequest['pk'];
-	var vars = apiRequest['vars'];
-	if(pk != null) {
-		websocketSimulationReportInner(apiRequest);
 
-		if(vars.includes('updatedPerformance')) {
-			var queryParams = "?" + $(".pageSearchVal").get().filter(elem => elem.innerText.length > 0).map(elem => elem.innerText).join("&");
-			var uri = location.pathname + queryParams;
-			$.get(uri, {}, function(data) {
-				var $response = $("<html/>").html(data);
-
-				$('.plotPerformance').each(function(index, fragment) {
-					var $fragment = $(fragment);
-					$fragment.replaceWith($response.find(".plotPerformance"));
-				});
-				$('.plotGreenLengthThresholdVehicle').each(function(index, fragment) {
-					var $fragment = $(fragment);
-					$fragment.replaceWith($response.find(".plotGreenLengthThresholdVehicle"));
-				});
-				$('.plotGreenLengthThresholdPedestrian').each(function(index, fragment) {
-					var $fragment = $(fragment);
-					$fragment.replaceWith($response.find(".plotGreenLengthThresholdPedestrian"));
-				});
-				$('.plotQueueLengthThreshold').each(function(index, fragment) {
-					var $fragment = $(fragment);
-					$fragment.replaceWith($response.find(".plotQueueLengthThreshold"));
-				});
-
-				$('.updatedPerformanceTable').each(function(index, fragment) {
-					var $fragment = $(fragment);
-					$fragment.replaceWith($response.find(".updatedPerformanceTable"));
-				});
-				$('.updatedParametersTable').each(function(index, fragment) {
-					var $fragment = $(fragment);
-					$fragment.replaceWith($response.find(".updatedParametersTable"));
-				});
-				$('.updatedQueueLengthTable').each(function(index, fragment) {
-					var $fragment = $(fragment);
-					$fragment.replaceWith($response.find(".updatedQueueLengthTable"));
-				});
-			}, 'html');
-
-			addGlow($('.plotPerformance'));
-			addGlow($('.plotGreenLengthThresholdVehicle'));
-			addGlow($('.plotGreenLengthThresholdPedestrian'));
-			addGlow($('.plotQueueLengthThreshold'));
-			addGlow($('.updatedPerformanceTable'));
-			addGlow($('.updatedParametersTable'));
-			addGlow($('.updatedQueueLengthTable'));
-		}
-	}
-}
-		</script>
-{{/partial}}
-{{#partial "websocket"}}
-				websocketSimulationReport(websocketSimulationReportInner2);
-{{/partial}}
-{{#partial "htmBodySidebar"}}{{> htmBodySidebarSimulationReportPage}}{{/partial}}
-{{#partial "htmBodyStart"}}{{> htmBodyStartSimulationReportPage}}{{/partial}}
-{{#partial "htmBodyMiddle"}}{{> htmBodyMiddleSimulationReportPage}}{{/partial}}
-{{#partial "htmBodyEnd"}}{{> htmBodyEndSimulationReportPage}}{{/partial}}
-{{#partial "htmBody"}}{{> htmBodySimulationReportPage}}{{/partial}}
-{{#partial "htmBodySearch"}}{{> htmBodySearchSimulationReportPage}}{{/partial}}
-{{#partial "htmBodyFilters"}}{{> htmBodyFiltersSimulationReportPage}}{{/partial}}
-{{#partial "htmBodyRange"}}{{> htmBodyRangeSimulationReportPage}}{{/partial}}
-{{#partial "htmBodyPivot"}}{{> htmBodyPivotSimulationReportPage}}{{/partial}}
-{{#partial "htmBodyFieldList"}}{{> htmBodyFieldListSimulationReportPage}}{{/partial}}
-{{#partial "htmBodyStats"}}{{> htmBodyStatsSimulationReportPage}}{{/partial}}
-{{#partial "htmBodyMenu"}}{{> htmBodyMenuSimulationReportPage}}{{/partial}}
-{{#partial "htmBodyGraph"}}{{> htmBodyGraphSimulationReportPage}}{{/partial}}
-{{#partial "htmBodyCount0"}}{{> htmBodyCount0SimulationReportPage}}{{/partial}}
-{{#partial "htmBodyCount1All"}}{{> htmBodyCount1AllSimulationReportPage}}{{/partial}}
-{{#partial "htmBodyCount1"}}{{> htmBodyCount1SimulationReportPage}}{{/partial}}
-{{#partial "htmBodyAll"}}{{> htmBodyAllSimulationReportPage}}{{/partial}}
-{{#partial "htmForm"}}
-<h3>Actions:</h3>
-<button class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce " id="runReport" onclick="$.ajax({ url: '/api/run-simulation-report?' + $.param([ {name: 'fq', value: 'pk:{{ pk }}' } ]) , dataType: 'json' , type: 'PATCH' , contentType: 'application/json; charset=utf-8' , data: JSON.stringify({'setReportStatus': 'Run'}) }); ">
-	<i class="fas fa-edit " aria-hidden="true"></i>
-	Run Report
-</button>
-<button class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce " id="stopReport" onclick="$.ajax({ url: '/api/run-simulation-report?' + $.param([ {name: 'fq', value: 'pk:{{ pk }}' } ]) , dataType: 'json' , type: 'PATCH' , contentType: 'application/json; charset=utf-8' , data: JSON.stringify({'setReportStatus': 'Stop'}) }); ">
-	<i class="fas fa-edit " aria-hidden="true"></i>
-	Stop Report
-</button>
-{{> htmFormSimulationReportPage}}
-{{/partial}}
-{{#partial "htmForms"}}
-{{> htmFormsSimulationReportPage}}
-{{/partial}}
-{{#partial "htmBodySuggested"}}{{> htmBodySuggestedSimulationReportPage classApiMethodMethod="Page"}}{{/partial}}
-{{#partial "htmForm_patchSimulationReport"}}{{> htmFormSimulationReportPage_patchSimulationReport classApiMethodMethod="PATCH"}}{{/partial}}
-{{#partial "htmForm_postSimulationReport"}}{{> htmFormSimulationReportPage_postSimulationReport classApiMethodMethod="POST"}}{{/partial}}
-{{#partial "htmForm_putimportSimulationReport"}}{{> htmFormSimulationReportPage_putimportSimulationReport classApiMethodMethod="PUT"}}{{/partial}}
 {{#*inline "htmFormSimulationReportPage_searchpageSimulationReport_custom"}}
 		<div id="searchpageSimulationReportModal" class="">
 			<div class="">
@@ -699,7 +599,117 @@ async function websocketSimulationReportInner2(apiRequest) {
 			</div>
 		</div>
 {{/inline}}
+
+{{#eq classSimpleName "SimulationReport"}}
+{{#partial "htmHead"}}{{> htmHeadSimulationReportPage}}{{/partial}}
+{{#partial "htmTitle"}}{{> htmTitleSimulationReportPage}}{{/partial}}
+{{#partial "htmMeta"}}{{> htmMetaSimulationReportPage}}{{/partial}}
+{{#partial "htmStyle"}}{{> htmStyleSimulationReportPage}}{{/partial}}
+{{#partial "htmScripts"}}{{> htmScriptsSimulationReportPage}}{{/partial}}
+{{#partial "htmScript"}}{{> htmScriptSimulationReportPage}}
+		<script>
+async function websocketSimulationReportInner2(apiRequest) {
+	var pk = apiRequest['pk'];
+	var vars = apiRequest['vars'];
+	if(pk != null) {
+		websocketSimulationReportInner(apiRequest);
+
+		if(vars.includes('updatedPerformance')) {
+			var queryParams = "?" + $(".pageSearchVal").get().filter(elem => elem.innerText.length > 0).map(elem => elem.innerText).join("&");
+			var uri = location.pathname + queryParams;
+			$.get(uri, {}, function(data) {
+				var $response = $("<html/>").html(data);
+
+				$('.plotPerformance').each(function(index, fragment) {
+					var $fragment = $(fragment);
+					$fragment.replaceWith($response.find(".plotPerformance"));
+				});
+				$('.plotGreenLengthThresholdVehicle').each(function(index, fragment) {
+					var $fragment = $(fragment);
+					$fragment.replaceWith($response.find(".plotGreenLengthThresholdVehicle"));
+				});
+				$('.plotGreenLengthThresholdPedestrian').each(function(index, fragment) {
+					var $fragment = $(fragment);
+					$fragment.replaceWith($response.find(".plotGreenLengthThresholdPedestrian"));
+				});
+				$('.plotQueueLengthThreshold').each(function(index, fragment) {
+					var $fragment = $(fragment);
+					$fragment.replaceWith($response.find(".plotQueueLengthThreshold"));
+				});
+
+				$('.updatedPerformanceTable').each(function(index, fragment) {
+					var $fragment = $(fragment);
+					$fragment.replaceWith($response.find(".updatedPerformanceTable"));
+				});
+				$('.updatedParametersTable').each(function(index, fragment) {
+					var $fragment = $(fragment);
+					$fragment.replaceWith($response.find(".updatedParametersTable"));
+				});
+				$('.updatedQueueLengthTable').each(function(index, fragment) {
+					var $fragment = $(fragment);
+					$fragment.replaceWith($response.find(".updatedQueueLengthTable"));
+				});
+			}, 'html');
+
+			addGlow($('.plotPerformance'));
+			addGlow($('.plotGreenLengthThresholdVehicle'));
+			addGlow($('.plotGreenLengthThresholdPedestrian'));
+			addGlow($('.plotQueueLengthThreshold'));
+			addGlow($('.updatedPerformanceTable'));
+			addGlow($('.updatedParametersTable'));
+			addGlow($('.updatedQueueLengthTable'));
+		}
+	}
+}
+		</script>
+{{/partial}}
+{{#partial "websocket"}}
+				websocketSimulationReport(websocketSimulationReportInner2);
+{{/partial}}
+{{#partial "htmBodySidebar"}}{{> htmBodySidebarSimulationReportPage}}{{/partial}}
+{{#partial "htmBodyStart"}}{{> htmBodyStartSimulationReportPage}}{{/partial}}
+{{#partial "htmBodyMiddle"}}{{> htmBodyMiddleSimulationReportPage}}{{/partial}}
+{{#partial "htmBodyEnd"}}{{> htmBodyEndSimulationReportPage}}{{/partial}}
+{{#partial "htmBody"}}{{> htmBodySimulationReportPage}}{{/partial}}
+{{#partial "htmBodySearch"}}{{> htmBodySearchSimulationReportPage}}{{/partial}}
+{{#partial "htmBodyFilters"}}{{> htmBodyFiltersSimulationReportPage}}{{/partial}}
+{{#partial "htmBodyRange"}}{{> htmBodyRangeSimulationReportPage}}{{/partial}}
+{{#partial "htmBodyPivot"}}{{> htmBodyPivotSimulationReportPage}}{{/partial}}
+{{#partial "htmBodyFieldList"}}{{> htmBodyFieldListSimulationReportPage}}{{/partial}}
+{{#partial "htmBodyStats"}}{{> htmBodyStatsSimulationReportPage}}{{/partial}}
+{{#partial "htmBodyMenu"}}{{> htmBodyMenuSimulationReportPage}}{{/partial}}
+{{#partial "htmBodyGraph"}}{{> htmBodyGraphSimulationReportPage}}{{/partial}}
+{{#partial "htmBodyCount0"}}{{> htmBodyCount0SimulationReportPage}}{{/partial}}
+{{#partial "htmBodyCount1All"}}{{> htmBodyCount1AllSimulationReportPage}}{{/partial}}
+{{#partial "htmBodyCount1"}}{{> htmBodyCount1SimulationReportPage}}{{/partial}}
+{{#partial "htmBodyAll"}}{{> htmBodyAllSimulationReportPage}}{{/partial}}
+{{#partial "htmForm"}}
+<h3>Actions:</h3>
+<button class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce " id="runReport" onclick="$.ajax({ url: '/api/run-simulation-report?' + $.param([ {name: 'fq', value: 'pk:{{ pk }}' } ]) , dataType: 'json' , type: 'PATCH' , contentType: 'application/json; charset=utf-8' , data: JSON.stringify({'setReportStatus': 'Run'}) }); ">
+	<i class="fas fa-edit " aria-hidden="true"></i>
+	Run Report
+</button>
+<button class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce " id="stopReport" onclick="$.ajax({ url: '/api/run-simulation-report?' + $.param([ {name: 'fq', value: 'pk:{{ pk }}' } ]) , dataType: 'json' , type: 'PATCH' , contentType: 'application/json; charset=utf-8' , data: JSON.stringify({'setReportStatus': 'Stop'}) }); ">
+	<i class="fas fa-edit " aria-hidden="true"></i>
+	Stop Report
+</button>
+{{> htmFormSimulationReportPage}}
+{{/partial}}
+{{#partial "htmForms"}}
+{{> htmFormsSimulationReportPage}}
+{{/partial}}
+{{#partial "htmBodySuggested"}}{{> htmBodySuggestedSimulationReportPage}}{{/partial}}
+{{#partial "htmButton_patchSimulationReport"}}{{> htmButtonSimulationReportPage_patchSimulationReport classApiMethodMethod="PATCH"}}{{/partial}}
+{{#partial "htmForm_patchSimulationReport"}}{{> htmFormSimulationReportPage_patchSimulationReport classApiMethodMethod="PATCH"}}{{/partial}}
+{{#partial "htmFormButton_patchSimulationReport"}}{{> htmFormButtonSimulationReportPage_patchSimulationReport classApiMethodMethod="PATCH"}}{{/partial}}
+{{#partial "htmButton_postSimulationReport"}}{{> htmButtonSimulationReportPage_postSimulationReport classApiMethodMethod="POST"}}{{/partial}}
+{{#partial "htmForm_postSimulationReport"}}{{> htmFormSimulationReportPage_postSimulationReport classApiMethodMethod="POST"}}{{/partial}}
+{{#partial "htmFormButton_postSimulationReport"}}{{> htmFormButtonSimulationReportPage_postSimulationReport classApiMethodMethod="POST"}}{{/partial}}
+{{#partial "htmButton_putimportSimulationReport"}}{{> htmButtonSimulationReportPage_putimportSimulationReport classApiMethodMethod="PUT"}}{{/partial}}
+{{#partial "htmForm_putimportSimulationReport"}}{{> htmFormSimulationReportPage_putimportSimulationReport classApiMethodMethod="PUT"}}{{/partial}}
+{{#partial "htmFormButton_putimportSimulationReport"}}{{> htmFormButtonSimulationReportPage_putimportSimulationReport classApiMethodMethod="PUT"}}{{/partial}}
+{{#partial "htmButton_searchpageSimulationReport"}}{{> htmButtonSimulationReportPage_searchpageSimulationReport classApiMethodMethod="Page"}}{{/partial}}
 {{#partial "htmForm_searchpageSimulationReport"}}{{> htmFormSimulationReportPage_searchpageSimulationReport_custom classApiMethodMethod="Page"}}{{/partial}}
-
+{{#partial "htmFormButton_searchpageSimulationReport"}}{{> htmFormSimulationReportPage_searchpageSimulationReport classApiMethodMethod="Page"}}{{/partial}}
+{{/eq}}
 {{> SimulationReportGenPage}}
-

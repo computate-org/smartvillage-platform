@@ -1,3 +1,4 @@
+{{#eq classSimpleName "TrafficLight"}}
 {{#partial "htmHead"}}{{> htmHeadTrafficLightPage}}{{/partial}}
 {{#partial "htmTitle"}}{{> htmTitleTrafficLightPage}}{{/partial}}
 {{#partial "htmMeta"}}{{> htmMetaTrafficLightPage}}{{/partial}}
@@ -25,8 +26,17 @@
 {{#partial "htmForm"}}{{> htmFormTrafficLightPage}}{{/partial}}
 {{#partial "htmForms"}}{{> htmFormsTrafficLightPage}}{{/partial}}
 {{#partial "htmBodySuggested"}}{{> htmBodySuggestedTrafficLightPage}}{{/partial}}
+{{#partial "htmButton_patchTrafficLight"}}{{> htmButtonTrafficLightPage_patchTrafficLight classApiMethodMethod="PATCH"}}{{/partial}}
 {{#partial "htmForm_patchTrafficLight"}}{{> htmFormTrafficLightPage_patchTrafficLight classApiMethodMethod="PATCH"}}{{/partial}}
+{{#partial "htmFormButton_patchTrafficLight"}}{{> htmFormButtonTrafficLightPage_patchTrafficLight classApiMethodMethod="PATCH"}}{{/partial}}
+{{#partial "htmButton_postTrafficLight"}}{{> htmButtonTrafficLightPage_postTrafficLight classApiMethodMethod="POST"}}{{/partial}}
 {{#partial "htmForm_postTrafficLight"}}{{> htmFormTrafficLightPage_postTrafficLight classApiMethodMethod="POST"}}{{/partial}}
+{{#partial "htmFormButton_postTrafficLight"}}{{> htmFormButtonTrafficLightPage_postTrafficLight classApiMethodMethod="POST"}}{{/partial}}
+{{#partial "htmButton_putimportTrafficLight"}}{{> htmButtonTrafficLightPage_putimportTrafficLight classApiMethodMethod="PUT"}}{{/partial}}
 {{#partial "htmForm_putimportTrafficLight"}}{{> htmFormTrafficLightPage_putimportTrafficLight classApiMethodMethod="PUT"}}{{/partial}}
-{{#partial "htmForm_searchpageTrafficLight"}}{{> htmFormTrafficLightPage_searchpageTrafficLight classApiMethodMethod="GET"}}{{/partial}}
+{{#partial "htmFormButton_putimportTrafficLight"}}{{> htmFormButtonTrafficLightPage_putimportTrafficLight classApiMethodMethod="PUT"}}{{/partial}}
+{{#partial "htmButton_searchpageTrafficLight"}}{{> htmButtonTrafficLightPage_searchpageTrafficLight classApiMethodMethod="Page"}}{{/partial}}
+{{#partial "htmForm_searchpageTrafficLight"}}{{> htmFormTrafficLightPage_searchpageTrafficLight classApiMethodMethod="Page"}}{{/partial}}
+{{#partial "htmFormButton_searchpageTrafficLight"}}{{> htmFormTrafficLightPage_searchpageTrafficLight classApiMethodMethod="Page"}}{{/partial}}
+{{/eq}}
 {{> TrafficLightGenPage}}

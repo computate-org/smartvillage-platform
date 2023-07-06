@@ -440,12 +440,12 @@ public class BaseResultGenPage extends BaseResultGenPageGen<PageLayout> {
 	}
 
 	protected void _baseResult_(Wrap<BaseResult> w) {
-		if(baseResultCount == 1)
+		if(baseResultCount == 1 && Optional.ofNullable(siteRequest_.getServiceRequest().getParams().getJsonObject("path")).map(o -> o.getString("id")).orElse(null) != null)
 			w.o(searchListBaseResult_.get(0));
 	}
 
 	protected void _id(Wrap<String> w) {
-		if(baseResultCount == 1)
+		if(baseResult_ != null)
 			w.o(baseResult_.getId());
 	}
 

@@ -343,17 +343,17 @@ public class BaseModelGenPage extends BaseModelGenPageGen<PageLayout> {
 	}
 
 	protected void _baseModel_(Wrap<BaseModel> w) {
-		if(baseModelCount == 1)
+		if(baseModelCount == 1 && Optional.ofNullable(siteRequest_.getServiceRequest().getParams().getJsonObject("path")).map(o -> o.getString("id")).orElse(null) != null)
 			w.o(searchListBaseModel_.get(0));
 	}
 
 	protected void _pk(Wrap<Long> w) {
-		if(baseModelCount == 1)
+		if(baseModel_ != null)
 			w.o(baseModel_.getPk());
 	}
 
 	protected void _id(Wrap<String> w) {
-		if(baseModelCount == 1)
+		if(baseModel_ != null)
 			w.o(baseModel_.getId());
 	}
 
