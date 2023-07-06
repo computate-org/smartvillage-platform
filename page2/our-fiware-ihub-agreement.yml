@@ -29,7 +29,7 @@ IHUB_DESCRIPTION: |
   This will allow researchers to study what social sustainability means by using a digital twin of Veberöd, Sweden as the test village, supported by  Smarta Byar. 
   We have added integration with the Orion LD Context Broker supported by FIWARE technology implementing their Smart Data Models to align ourselves with the rest of the open source smart solution community. 
   The goal of this collaboration is to build the open source technological infrastructure so that researchers can collaborate on this platform effectively to study mobility, public health, sustainability among other study areas to ultimately help define better the link between well being and eco-smart cities. 
-IHUB_WEBSITE: https://smartvillage.computate.org/
+IHUB_WEBSITE: https://smartabyarsmartvillage.org/
 IHUB_DOMAINS:
   - Smart Cities
 IHUB_REGION: North America

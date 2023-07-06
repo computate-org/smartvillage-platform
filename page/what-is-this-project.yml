@@ -344,9 +344,9 @@ htmBody:
                     text: |
                       The site, which you can find running live in production here at 
                   - e: a
-                    href: "https://smartvillage.computate.org/"
+                    href: "https://smartabyarsmartvillage.org/"
                     text: |
-                      smartvillage.computate.org 
+                      smartabyarsmartvillage.org 
                   - e: span
                     text: |
                       has everything an innovative project running in the cloud deserves, security, high availability, scalability, updates, storage and more. 

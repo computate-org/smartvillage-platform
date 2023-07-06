@@ -6,7 +6,7 @@ SITE_POWERED_BY_NAME: "Operate First"
 SITE_POWERED_BY_IMAGE_URI: "/png/operate-first-logo.png"
 SITE_NAME: "smartabyar-smartvillage"
 SITE_POM_GROUP_ID: "org.computate"
-SITE_PUBLIC_URL: "https://smartvillage.computate.org"
+SITE_PUBLIC_URL: "https://smartabyarsmartvillage.org"
 SITE_DISPLAY_NAME: "Smart Village Project"
 SITE_SERVICES:
   - SITE_NAME: "smartabyar-smartvillage"

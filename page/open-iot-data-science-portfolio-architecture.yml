@@ -129,7 +129,7 @@ htmBody:
                 markdown: |
                   IoT solutions that are based on open standards for smart device data make standard data exchange possible. 
                   Smart data exchange can happen from the edge to the cloud, or from partner to partner. 
-                  This enables easy collaboration between different services using a common data space based on trust is why we incorporate the FIWARE organizations open standards for smart device data. 
+                  This enables easy collaboration between different services using a common data space based on trust, which is why we incorporate the FIWARE organization's open standards for smart device data. 
       - e: div
         label:
           - infographic

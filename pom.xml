@@ -7,7 +7,7 @@
 	<version>1.0.2</version>
 	<name>Smart Village Project</name>
 	<description>Red Hat Global Social Innovation Program is partnering with Boston University and Smarta Byar in order to collaborate on creating a global and open research platform allowing researchers to study what social sustainability means by using a digital twin of Veberöd, Sweden as the test village, supported by Smarta Byar. The goal of this collaboration is to build the open source technological infrastructure so that researchers can collaborate on this platform effectively to study mobility, public health, sustainability among other study areas to ultimately help define better the link between well being and eco-smart cities.</description>
-	<url>https://smartvillage.computate.org</url>
+	<url>https://smartabyarsmartvillage.org</url>
 	<packaging>jar</packaging>
 
 	<licenses>
@@ -115,7 +115,7 @@
 		<drools.version>8.32.0.Final</drools.version>
 		<cloudevents.version>2.4.0</cloudevents.version>
 
-		<computate.version>4.2.7.22</computate.version>
+		<computate.version>4.2.7.23</computate.version>
 	</properties>
 
 	<dependencyManagement>

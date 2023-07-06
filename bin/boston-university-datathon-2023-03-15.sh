@@ -59,17 +59,17 @@ read -p "" < /dev/tty
 clear; echo -e 'Provided digitalization \nservices' | toilet -t -f smblock --rainbow -F border 
 echo ''
 echo '- OpenAPIs for smart cities'
-xdg-open 'https://smartvillage.computate.org/api'
+xdg-open 'https://www.smartabyarsmartvillage.org/api'
 read -p "" < /dev/tty
 echo '- gather data from external services'
-xdg-open 'https://smartvillage.computate.org/iot-node?facet.range={!tag=r1}created&stats.field={!tag=r1}created&facet.pivot={!range=r1}classSimpleName'
+xdg-open 'https://www.smartabyarsmartvillage.org/iot-node?facet.range={!tag=r1}created&stats.field={!tag=r1}created&facet.pivot={!range=r1}classSimpleName'
 read -p "" < /dev/tty
 echo '- interact with open source projects for simulating traffic'
 xdg-open 'https://github.com/computate-org/TLC/blob/7fd9db3f15393c59a9cc47ce8a9023b571b91556/main_pedestrian.py#L1009-L1010'
 read -p "" < /dev/tty
 echo '- help University students study smart city indicators'
 echo ''
-xdg-open 'https://smartvillage.computate.org/simulation-report?facet.range={!tag=r1}created&stats.field={!tag=r1}created&facet.pivot={!range=r1}classSimpleName'
+xdg-open 'https://www.smartabyarsmartvillage.org/simulation-report?facet.range={!tag=r1}created&stats.field={!tag=r1}created&facet.pivot={!range=r1}classSimpleName'
 read -p "" < /dev/tty
 
 clear; echo -e 'Running Research \nProjects in the Cloud' | toilet -t -f smblock --rainbow -F border 
@@ -155,13 +155,13 @@ clear; echo -e 'Real world data' | toilet -t -f smblock --rainbow -F border
 echo ''
 echo 'IOT Nodes in the village of Veberöd'
 echo ''
-xdg-open 'https://smartvillage.computate.org/iot-node?facet.range={!tag=r1}created&stats.field={!tag=r1}created&facet.pivot={!range=r1}classSimpleName'
+xdg-open 'https://www.smartabyarsmartvillage.org/iot-node?facet.range={!tag=r1}created&stats.field={!tag=r1}created&facet.pivot={!range=r1}classSimpleName'
 read -p "" < /dev/tty
 
 clear; echo -e "Demo of a \ntraffic simulation" | toilet -t -f smblock --rainbow -F border 
 echo ''
 echo 'Steps to run a simulation:'
-echo '  - Visit the map results dashboard at smartvillage.computate.org'
+echo '  - Visit the map results dashboard at www.smartabyarsmartvillage.org'
 echo '  - Log in to Red Hat Single Sign On'
 echo '  - Pivot deselect object type'
 echo '  - Pivot on location'
@@ -170,7 +170,7 @@ echo '  - Filter simulation name list: Veberöd intersection'
 echo '  - Stats on Time in seconds'
 echo '  - Speed in seconds 0.5'
 echo '  - Click [ animate ]'
-xdg-open 'https://smartvillage.computate.org/map-result?facet.range={!tag=r1}created&stats.field={!tag=r1}created&facet.pivot={!range=r1}classSimpleName'
+xdg-open 'https://www.smartabyarsmartvillage.org/map-result?facet.range={!tag=r1}created&stats.field={!tag=r1}created&facet.pivot={!range=r1}classSimpleName'
 read -p "" < /dev/tty
 
 clear; echo -e "What's next at \nBoston University" | toilet -t -f smblock --rainbow -F border 
@@ -184,7 +184,7 @@ echo ''
 toilet -t -f smmono12 'Chris Tate'
 read -p "" < /dev/tty
 echo '- More graphs and data in the simulation reports'
-xdg-open 'https://smartvillage.computate.org/simulation-report?facet.range={!tag=r1}created&stats.field={!tag=r1}created&facet.pivot={!range=r1}classSimpleName'
+xdg-open 'https://www.smartabyarsmartvillage.org/simulation-report?facet.range={!tag=r1}created&stats.field={!tag=r1}created&facet.pivot={!range=r1}classSimpleName'
 read -p "" < /dev/tty
 echo '- OpenShift Serverless Operator for on demand application scaling of traffic simulations'
 xdg-open 'https://github.com/computate-org/smartabyar-smartvillage/tree/main/openshift/kustomize/bundles/serverless/app'
