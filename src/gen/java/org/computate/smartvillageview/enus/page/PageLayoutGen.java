@@ -895,11 +895,11 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		return (PageLayout)this;
 	}
 
-	public static JsonObject staticSearchParams(SiteRequestEnUS siteRequest_, JsonObject o) {
-		return o;
+	public static String staticSearchParams(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o.toString();
 	}
 
-	public static String staticSearchStrParams(SiteRequestEnUS siteRequest_, JsonObject o) {
+	public static String staticSearchStrParams(SiteRequestEnUS siteRequest_, String o) {
 		return o == null ? null : o.toString();
 	}
 
@@ -1750,6 +1750,76 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		return PageLayout.staticSearchStrAuthRoleAdmin(siteRequest_, PageLayout.staticSearchAuthRoleAdmin(siteRequest_, PageLayout.staticSetAuthRoleAdmin(siteRequest_, o)));
 	}
 
+	////////////////////////
+	// authRoleSuperAdmin //
+	////////////////////////
+
+
+	/**	 The entity authRoleSuperAdmin
+	 *	 It is constructed before being initialized with the constructor by default. 
+	 */
+	@JsonProperty
+	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
+	@JsonInclude(Include.NON_NULL)
+	protected List<String> authRoleSuperAdmin = new ArrayList<String>();
+
+	/**	<br> The entity authRoleSuperAdmin
+	 *  It is constructed before being initialized with the constructor by default. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.PageLayout&fq=entiteVar_enUS_indexed_string:authRoleSuperAdmin">Find the entity authRoleSuperAdmin in Solr</a>
+	 * <br>
+	 * @param l is the entity already constructed. 
+	 **/
+	protected abstract void _authRoleSuperAdmin(List<String> l);
+
+	public List<String> getAuthRoleSuperAdmin() {
+		return authRoleSuperAdmin;
+	}
+	public void setAuthRoleSuperAdmin(String o) {
+		String l = PageLayout.staticSetAuthRoleSuperAdmin(siteRequest_, o);
+		if(l != null)
+			addAuthRoleSuperAdmin(l);
+	}
+	public static String staticSetAuthRoleSuperAdmin(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	public PageLayout addAuthRoleSuperAdmin(String...objects) {
+		for(String o : objects) {
+			addAuthRoleSuperAdmin(o);
+		}
+		return (PageLayout)this;
+	}
+	public PageLayout addAuthRoleSuperAdmin(String o) {
+		if(o != null)
+			this.authRoleSuperAdmin.add(o);
+		return (PageLayout)this;
+	}
+	@JsonIgnore
+	public void setAuthRoleSuperAdmin(JsonArray objects) {
+		authRoleSuperAdmin.clear();
+		if(objects == null)
+			return;
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
+			addAuthRoleSuperAdmin(o);
+		}
+	}
+	protected PageLayout authRoleSuperAdminInit() {
+		_authRoleSuperAdmin(authRoleSuperAdmin);
+		return (PageLayout)this;
+	}
+
+	public static String staticSearchAuthRoleSuperAdmin(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrAuthRoleSuperAdmin(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqAuthRoleSuperAdmin(SiteRequestEnUS siteRequest_, String o) {
+		return PageLayout.staticSearchStrAuthRoleSuperAdmin(siteRequest_, PageLayout.staticSearchAuthRoleSuperAdmin(siteRequest_, PageLayout.staticSetAuthRoleSuperAdmin(siteRequest_, o)));
+	}
+
 	///////////
 	// stats //
 	///////////
@@ -1870,11 +1940,11 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		return (PageLayout)this;
 	}
 
-	public static JsonObject staticSearchPagination(SiteRequestEnUS siteRequest_, JsonObject o) {
-		return o;
+	public static String staticSearchPagination(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o.toString();
 	}
 
-	public static String staticSearchStrPagination(SiteRequestEnUS siteRequest_, JsonObject o) {
+	public static String staticSearchStrPagination(SiteRequestEnUS siteRequest_, String o) {
 		return o == null ? null : o.toString();
 	}
 
@@ -2134,11 +2204,11 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		return (PageLayout)this;
 	}
 
-	public static JsonObject staticSearchVarsQ(SiteRequestEnUS siteRequest_, JsonObject o) {
-		return o;
+	public static String staticSearchVarsQ(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o.toString();
 	}
 
-	public static String staticSearchStrVarsQ(SiteRequestEnUS siteRequest_, JsonObject o) {
+	public static String staticSearchStrVarsQ(SiteRequestEnUS siteRequest_, String o) {
 		return o == null ? null : o.toString();
 	}
 
@@ -2188,11 +2258,11 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		return (PageLayout)this;
 	}
 
-	public static JsonObject staticSearchVarsFq(SiteRequestEnUS siteRequest_, JsonObject o) {
-		return o;
+	public static String staticSearchVarsFq(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o.toString();
 	}
 
-	public static String staticSearchStrVarsFq(SiteRequestEnUS siteRequest_, JsonObject o) {
+	public static String staticSearchStrVarsFq(SiteRequestEnUS siteRequest_, String o) {
 		return o == null ? null : o.toString();
 	}
 
@@ -2242,11 +2312,11 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		return (PageLayout)this;
 	}
 
-	public static JsonObject staticSearchVarsRange(SiteRequestEnUS siteRequest_, JsonObject o) {
-		return o;
+	public static String staticSearchVarsRange(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o.toString();
 	}
 
-	public static String staticSearchStrVarsRange(SiteRequestEnUS siteRequest_, JsonObject o) {
+	public static String staticSearchStrVarsRange(SiteRequestEnUS siteRequest_, String o) {
 		return o == null ? null : o.toString();
 	}
 
@@ -2296,11 +2366,11 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		return (PageLayout)this;
 	}
 
-	public static JsonObject staticSearchQuery(SiteRequestEnUS siteRequest_, JsonObject o) {
-		return o;
+	public static String staticSearchQuery(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o.toString();
 	}
 
-	public static String staticSearchStrQuery(SiteRequestEnUS siteRequest_, JsonObject o) {
+	public static String staticSearchStrQuery(SiteRequestEnUS siteRequest_, String o) {
 		return o == null ? null : o.toString();
 	}
 
@@ -2780,11 +2850,11 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		return (PageLayout)this;
 	}
 
-	public static JsonObject staticSearchDefaultRangeStats(SiteRequestEnUS siteRequest_, JsonObject o) {
-		return o;
+	public static String staticSearchDefaultRangeStats(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o.toString();
 	}
 
-	public static String staticSearchStrDefaultRangeStats(SiteRequestEnUS siteRequest_, JsonObject o) {
+	public static String staticSearchStrDefaultRangeStats(SiteRequestEnUS siteRequest_, String o) {
 		return o == null ? null : o.toString();
 	}
 
@@ -3310,11 +3380,11 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		return (PageLayout)this;
 	}
 
-	public static JsonObject staticSearchDEFAULT_MAP_LOCATION(SiteRequestEnUS siteRequest_, JsonObject o) {
-		return o;
+	public static String staticSearchDEFAULT_MAP_LOCATION(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o.toString();
 	}
 
-	public static String staticSearchStrDEFAULT_MAP_LOCATION(SiteRequestEnUS siteRequest_, JsonObject o) {
+	public static String staticSearchStrDEFAULT_MAP_LOCATION(SiteRequestEnUS siteRequest_, String o) {
 		return o == null ? null : o.toString();
 	}
 
@@ -3973,6 +4043,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 				rolesInit();
 				roleRequiredInit();
 				authRoleAdminInit();
+				authRoleSuperAdminInit();
 				statsInit();
 				facetCountsInit();
 				paginationInit();
@@ -4141,6 +4212,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 				return oPageLayout.roleRequired;
 			case "authRoleAdmin":
 				return oPageLayout.authRoleAdmin;
+			case "authRoleSuperAdmin":
+				return oPageLayout.authRoleSuperAdmin;
 			case "stats":
 				return oPageLayout.stats;
 			case "facetCounts":
@@ -4312,6 +4385,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSetRoleRequired(siteRequest_, o);
 		case "authRoleAdmin":
 			return PageLayout.staticSetAuthRoleAdmin(siteRequest_, o);
+		case "authRoleSuperAdmin":
+			return PageLayout.staticSetAuthRoleSuperAdmin(siteRequest_, o);
 		case "pagination":
 			return PageLayout.staticSetPagination(siteRequest_, o);
 		case "defaultFieldListVars":
@@ -4448,6 +4523,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSearchRoleRequired(siteRequest_, (String)o);
 		case "authRoleAdmin":
 			return PageLayout.staticSearchAuthRoleAdmin(siteRequest_, (String)o);
+		case "authRoleSuperAdmin":
+			return PageLayout.staticSearchAuthRoleSuperAdmin(siteRequest_, (String)o);
 		case "pagination":
 			return PageLayout.staticSearchPagination(siteRequest_, (JsonObject)o);
 		case "defaultFieldListVars":
@@ -4555,7 +4632,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		case "pageMethod":
 			return PageLayout.staticSearchStrPageMethod(siteRequest_, (String)o);
 		case "params":
-			return PageLayout.staticSearchStrParams(siteRequest_, (JsonObject)o);
+			return PageLayout.staticSearchStrParams(siteRequest_, (String)o);
 		case "userKey":
 			return PageLayout.staticSearchStrUserKey(siteRequest_, (Long)o);
 		case "userFullName":
@@ -4584,8 +4661,10 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSearchStrRoleRequired(siteRequest_, (String)o);
 		case "authRoleAdmin":
 			return PageLayout.staticSearchStrAuthRoleAdmin(siteRequest_, (String)o);
+		case "authRoleSuperAdmin":
+			return PageLayout.staticSearchStrAuthRoleSuperAdmin(siteRequest_, (String)o);
 		case "pagination":
-			return PageLayout.staticSearchStrPagination(siteRequest_, (JsonObject)o);
+			return PageLayout.staticSearchStrPagination(siteRequest_, (String)o);
 		case "defaultFieldListVars":
 			return PageLayout.staticSearchStrDefaultFieldListVars(siteRequest_, (String)o);
 		case "defaultStatsVars":
@@ -4593,13 +4672,13 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		case "defaultPivotVars":
 			return PageLayout.staticSearchStrDefaultPivotVars(siteRequest_, (String)o);
 		case "varsQ":
-			return PageLayout.staticSearchStrVarsQ(siteRequest_, (JsonObject)o);
+			return PageLayout.staticSearchStrVarsQ(siteRequest_, (String)o);
 		case "varsFq":
-			return PageLayout.staticSearchStrVarsFq(siteRequest_, (JsonObject)o);
+			return PageLayout.staticSearchStrVarsFq(siteRequest_, (String)o);
 		case "varsRange":
-			return PageLayout.staticSearchStrVarsRange(siteRequest_, (JsonObject)o);
+			return PageLayout.staticSearchStrVarsRange(siteRequest_, (String)o);
 		case "query":
-			return PageLayout.staticSearchStrQuery(siteRequest_, (JsonObject)o);
+			return PageLayout.staticSearchStrQuery(siteRequest_, (String)o);
 		case "pageResponse":
 			return PageLayout.staticSearchStrPageResponse(siteRequest_, (String)o);
 		case "defaultZoneId":
@@ -4613,7 +4692,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		case "rangeStart":
 			return PageLayout.staticSearchStrRangeStart(siteRequest_, (Date)o);
 		case "defaultRangeStats":
-			return PageLayout.staticSearchStrDefaultRangeStats(siteRequest_, (JsonObject)o);
+			return PageLayout.staticSearchStrDefaultRangeStats(siteRequest_, (String)o);
 		case "defaultRangeGap":
 			return PageLayout.staticSearchStrDefaultRangeGap(siteRequest_, (String)o);
 		case "defaultRangeEnd":
@@ -4631,7 +4710,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		case "defaultPivotMinCount":
 			return PageLayout.staticSearchStrDefaultPivotMinCount(siteRequest_, (Integer)o);
 		case "DEFAULT_MAP_LOCATION":
-			return PageLayout.staticSearchStrDEFAULT_MAP_LOCATION(siteRequest_, (JsonObject)o);
+			return PageLayout.staticSearchStrDEFAULT_MAP_LOCATION(siteRequest_, (String)o);
 		case "DEFAULT_MAP_ZOOM":
 			return PageLayout.staticSearchStrDEFAULT_MAP_ZOOM(siteRequest_, (Double)o);
 		case "queryStr":
@@ -4720,6 +4799,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSearchFqRoleRequired(siteRequest_, o);
 		case "authRoleAdmin":
 			return PageLayout.staticSearchFqAuthRoleAdmin(siteRequest_, o);
+		case "authRoleSuperAdmin":
+			return PageLayout.staticSearchFqAuthRoleSuperAdmin(siteRequest_, o);
 		case "pagination":
 			return PageLayout.staticSearchFqPagination(siteRequest_, o);
 		case "defaultFieldListVars":
@@ -4834,6 +4915,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	public static final String VAR_roles = "roles";
 	public static final String VAR_roleRequired = "roleRequired";
 	public static final String VAR_authRoleAdmin = "authRoleAdmin";
+	public static final String VAR_authRoleSuperAdmin = "authRoleSuperAdmin";
 	public static final String VAR_stats = "stats";
 	public static final String VAR_facetCounts = "facetCounts";
 	public static final String VAR_pagination = "pagination";
@@ -4905,6 +4987,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	public static final String DISPLAY_NAME_roles = "";
 	public static final String DISPLAY_NAME_roleRequired = "";
 	public static final String DISPLAY_NAME_authRoleAdmin = "";
+	public static final String DISPLAY_NAME_authRoleSuperAdmin = "";
 	public static final String DISPLAY_NAME_stats = "";
 	public static final String DISPLAY_NAME_facetCounts = "";
 	public static final String DISPLAY_NAME_pagination = "";
@@ -5012,6 +5095,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return DISPLAY_NAME_roleRequired;
 		case VAR_authRoleAdmin:
 			return DISPLAY_NAME_authRoleAdmin;
+		case VAR_authRoleSuperAdmin:
+			return DISPLAY_NAME_authRoleSuperAdmin;
 		case VAR_stats:
 			return DISPLAY_NAME_stats;
 		case VAR_facetCounts:

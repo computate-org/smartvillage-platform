@@ -974,7 +974,7 @@
 			</tr>
 	{{/inline}}
 {{#*inline "htmFormsVehicleStepPage"}}
-	{{#ifContainsAnyRoles roles roleRequired}}
+{{#ifContainsAnyRoles roles authRoleSuperAdmin}}
 		{{#eq vehicleStepCount int1}}
 		<button
 			class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce "
@@ -984,12 +984,16 @@
 			refresh this vehicle step
 		</button>
 		{{/eq}}
-	{{/ifContainsAnyRoles}}
-	{{#ifContainsAnyRoles roles authRoleAdmin}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles authRoleSuperAdmin}}
 {{#block "htmForm_patchVehicleStep"}}{{/block}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles authRoleAdmin}}
 {{#block "htmForm_postVehicleStep"}}{{/block}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles authRoleSuperAdmin}}
 {{#block "htmForm_putimportVehicleStep"}}{{/block}}
-	{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
 {{#block "htmSuggested"}}{{/block}}
 {{/inline}}
 {{#*inline "htmSuggestedVehicleStepPage"}}

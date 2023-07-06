@@ -629,7 +629,7 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * Description: 
 	 */
 	protected void _updatedPerformanceWaitWestEastVehicleSec(Wrap<JsonArray> w) {
-		if(updatedPerformance != null && updatedPerformance.size() == 5) {
+		if(updatedPerformance != null && updatedPerformance.size() == 9) {
 			w.o(updatedPerformance.getJsonArray(0));
 		}
 	}
@@ -644,7 +644,7 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * Description: 
 	 */
 	protected void _updatedPerformanceWaitSouthNorthVehicleSec(Wrap<JsonArray> w) {
-		if(updatedPerformance != null && updatedPerformance.size() == 5) {
+		if(updatedPerformance != null && updatedPerformance.size() == 9) {
 			w.o(updatedPerformance.getJsonArray(1));
 		}
 	}
@@ -659,7 +659,7 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * Description: 
 	 */
 	protected void _updatedPerformanceWaitAllVehicleSec(Wrap<JsonArray> w) {
-		if(updatedPerformance != null && updatedPerformance.size() == 5) {
+		if(updatedPerformance != null && updatedPerformance.size() == 9) {
 			w.o(updatedPerformance.getJsonArray(2));
 		}
 	}
@@ -674,7 +674,7 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * Description: 
 	 */
 	protected void _updatedPerformanceWaitAllPedestrianSec(Wrap<JsonArray> w) {
-		if(updatedPerformance != null && updatedPerformance.size() == 5) {
+		if(updatedPerformance != null && updatedPerformance.size() == 9) {
 			w.o(updatedPerformance.getJsonArray(3));
 		}
 	}
@@ -689,8 +689,68 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * Description: 
 	 */
 	protected void _updatedPerformanceWaitAllVehiclePedestrianSec(Wrap<JsonArray> w) {
-		if(updatedPerformance != null && updatedPerformance.size() == 5) {
+		if(updatedPerformance != null && updatedPerformance.size() == 9) {
 			w.o(updatedPerformance.getJsonArray(4));
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * HtmRow: 18
+	 * HtmCell: 1
+	 * Facet: true
+	 * DisplayName: Average queue length for WEST-EAST vehicle
+	 * Description: 
+	 */
+	protected void _avgQueueLengthWestEastVehicle(Wrap<JsonArray> w) {
+		if(updatedPerformance != null && updatedPerformance.size() == 9) {
+			w.o(updatedPerformance.getJsonArray(5));
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * HtmRow: 18
+	 * HtmCell: 1
+	 * Facet: true
+	 * DisplayName: Average queue length for SOUTH-NORTH vehicle
+	 * Description: 
+	 */
+	protected void _avgQueueLengthSouthNorthVehicle(Wrap<JsonArray> w) {
+		if(updatedPerformance != null && updatedPerformance.size() == 9) {
+			w.o(updatedPerformance.getJsonArray(6));
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * HtmRow: 18
+	 * HtmCell: 1
+	 * Facet: true
+	 * DisplayName: Average queue length for NORTH-SOUTH pedestrian
+	 * Description: 
+	 */
+	protected void _avgQueueLengthNorthSouthPedestrian(Wrap<JsonArray> w) {
+		if(updatedPerformance != null && updatedPerformance.size() == 9) {
+			w.o(updatedPerformance.getJsonArray(7));
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * HtmRow: 18
+	 * HtmCell: 1
+	 * Facet: true
+	 * DisplayName: Average queue length for WEST-EAST pedestrian
+	 * Description: 
+	 */
+	protected void _avgQueueLengthWestEastPedestrian(Wrap<JsonArray> w) {
+		if(updatedPerformance != null && updatedPerformance.size() == 9) {
+			w.o(updatedPerformance.getJsonArray(8));
 		}
 	}
 

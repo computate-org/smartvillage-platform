@@ -64,17 +64,17 @@ public class SimulationReportPage extends SimulationReportPageGen<SimulationRepo
 	
 					XYSeries series = new XYSeries("vehicle and pedestrian");
 					for(int i = 0; i < updatedPerformance.getJsonArray(0).size(); i++) {
-						series.add(i + 1, updatedPerformance.getJsonArray(size-1).getDouble(i));
+						series.add(i + 1, updatedPerformance.getJsonArray(4).getDouble(i));
 					}
 					XYSeriesCollection dataset = new XYSeriesCollection(series);
 					XYSeries series2 = new XYSeries("only vehicle");
 					for(int i = 0; i < updatedPerformance.getJsonArray(0).size(); i++) {
-						series2.add(i + 1, updatedPerformance.getJsonArray(size-3).getDouble(i));
+						series2.add(i + 1, updatedPerformance.getJsonArray(2).getDouble(i));
 					}
 					dataset.addSeries(series2);
 					XYSeries series3 = new XYSeries("only pedestrian");
 					for(int i = 0; i < updatedPerformance.getJsonArray(0).size(); i++) {
-						series3.add(i + 1, updatedPerformance.getJsonArray(size-2).getDouble(i));
+						series3.add(i + 1, updatedPerformance.getJsonArray(3).getDouble(i));
 					}
 					dataset.addSeries(series3);
 	
@@ -143,22 +143,22 @@ public class SimulationReportPage extends SimulationReportPageGen<SimulationRepo
 				if(updatedParameters != null && updatedParameters.size() >= 10 && simulationReport_ != null && updatedParameters != null && updatedPerformance != null) {
 					Integer size = updatedPerformance.size();
 	
-					XYSeries series = new XYSeries("s₁");
+					XYSeries series = new XYSeries("vehicle(West-East)");
 					for(int i = 0; i < updatedParameters.getJsonArray(0).size(); i++) {
 						series.add(i + 1, updatedParameters.getJsonArray(6).getDouble(i));
 					}
 					XYSeriesCollection dataset = new XYSeriesCollection(series);
-					XYSeries series2 = new XYSeries("s₂");
+					XYSeries series2 = new XYSeries("vehicle(South-North)");
 					for(int i = 0; i < updatedParameters.getJsonArray(0).size(); i++) {
 						series2.add(i + 1, updatedParameters.getJsonArray(7).getDouble(i));
 					}
 					dataset.addSeries(series2);
-					XYSeries series3 = new XYSeries("s₃");
+					XYSeries series3 = new XYSeries("pedestrian(South-North)");
 					for(int i = 0; i < updatedParameters.getJsonArray(0).size(); i++) {
 						series3.add(i + 1, updatedParameters.getJsonArray(8).getDouble(i));
 					}
 					dataset.addSeries(series3);
-					XYSeries series4 = new XYSeries("s₄");
+					XYSeries series4 = new XYSeries("pedestrian(West-East)");
 					for(int i = 0; i < updatedParameters.getJsonArray(0).size(); i++) {
 						series4.add(i + 1, updatedParameters.getJsonArray(9).getDouble(i));
 					}
@@ -236,22 +236,22 @@ public class SimulationReportPage extends SimulationReportPageGen<SimulationRepo
 					AttributedString as = new AttributedString("θ1min");
 					as.addAttribute(TextAttribute.SUPERSCRIPT, TextAttribute.SUPERSCRIPT_SUB, 1, 2);
 					as.addAttribute(TextAttribute.SUPERSCRIPT, TextAttribute.SUPERSCRIPT_SUPER, 2, 5);
-					XYSeries series = new XYSeries("θ₁min");
+					XYSeries series = new XYSeries("vehicle(West-East)_min");
 					for(int i = 0; i < updatedParameters.getJsonArray(0).size(); i++) {
 						series.add(i + 1, updatedParameters.getJsonArray(0).getDouble(i));
 					}
 					XYSeriesCollection dataset = new XYSeriesCollection(series);
-					XYSeries series2 = new XYSeries("θ₁max");
+					XYSeries series2 = new XYSeries("vehicle(West-East)_max");
 					for(int i = 0; i < updatedParameters.getJsonArray(0).size(); i++) {
 						series2.add(i + 1, updatedParameters.getJsonArray(1).getDouble(i));
 					}
 					dataset.addSeries(series2);
-					XYSeries series3 = new XYSeries("θ₂min");
+					XYSeries series3 = new XYSeries("vehicle(South-North)_min");
 					for(int i = 0; i < updatedParameters.getJsonArray(0).size(); i++) {
 						series3.add(i + 1, updatedParameters.getJsonArray(2).getDouble(i));
 					}
 					dataset.addSeries(series3);
-					XYSeries series4 = new XYSeries("θ₂max");
+					XYSeries series4 = new XYSeries("vehicle(South-North)_max");
 					for(int i = 0; i < updatedParameters.getJsonArray(0).size(); i++) {
 						series4.add(i + 1, updatedParameters.getJsonArray(3).getDouble(i));
 					}
@@ -337,12 +337,12 @@ public class SimulationReportPage extends SimulationReportPageGen<SimulationRepo
 				if(updatedParameters != null && updatedParameters.size() >= 6 && simulationReport_ != null && updatedParameters != null && updatedPerformance != null) {
 					Integer size = updatedPerformance.size();
 	
-					XYSeries series = new XYSeries("θ₃");
+					XYSeries series = new XYSeries("pedestrian(South-North)");
 					for(int i = 0; i < updatedParameters.getJsonArray(0).size(); i++) {
 						series.add(i + 1, updatedParameters.getJsonArray(4).getDouble(i));
 					}
 					XYSeriesCollection dataset = new XYSeriesCollection(series);
-					XYSeries series2 = new XYSeries("θ₄");
+					XYSeries series2 = new XYSeries("pedestrian(West-East)");
 					for(int i = 0; i < updatedParameters.getJsonArray(0).size(); i++) {
 						series2.add(i + 1, updatedParameters.getJsonArray(5).getDouble(i));
 					}

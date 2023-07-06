@@ -2626,11 +2626,11 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		return (SimulationReport)this;
 	}
 
-	public static JsonArray staticSearchUpdatedParameters(SiteRequestEnUS siteRequest_, JsonArray o) {
-		return o;
+	public static String staticSearchUpdatedParameters(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o.toString();
 	}
 
-	public static String staticSearchStrUpdatedParameters(SiteRequestEnUS siteRequest_, JsonArray o) {
+	public static String staticSearchStrUpdatedParameters(SiteRequestEnUS siteRequest_, String o) {
 		return o == null ? null : o.toString();
 	}
 
@@ -2688,11 +2688,11 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		return (SimulationReport)this;
 	}
 
-	public static JsonArray staticSearchUpdatedPerformance(SiteRequestEnUS siteRequest_, JsonArray o) {
-		return o;
+	public static String staticSearchUpdatedPerformance(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o.toString();
 	}
 
-	public static String staticSearchStrUpdatedPerformance(SiteRequestEnUS siteRequest_, JsonArray o) {
+	public static String staticSearchStrUpdatedPerformance(SiteRequestEnUS siteRequest_, String o) {
 		return o == null ? null : o.toString();
 	}
 
@@ -2750,11 +2750,11 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		return (SimulationReport)this;
 	}
 
-	public static JsonArray staticSearchUpdatedPerformanceWaitWestEastVehicleSec(SiteRequestEnUS siteRequest_, JsonArray o) {
-		return o;
+	public static String staticSearchUpdatedPerformanceWaitWestEastVehicleSec(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o.toString();
 	}
 
-	public static String staticSearchStrUpdatedPerformanceWaitWestEastVehicleSec(SiteRequestEnUS siteRequest_, JsonArray o) {
+	public static String staticSearchStrUpdatedPerformanceWaitWestEastVehicleSec(SiteRequestEnUS siteRequest_, String o) {
 		return o == null ? null : o.toString();
 	}
 
@@ -2808,11 +2808,11 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		return (SimulationReport)this;
 	}
 
-	public static JsonArray staticSearchUpdatedPerformanceWaitSouthNorthVehicleSec(SiteRequestEnUS siteRequest_, JsonArray o) {
-		return o;
+	public static String staticSearchUpdatedPerformanceWaitSouthNorthVehicleSec(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o.toString();
 	}
 
-	public static String staticSearchStrUpdatedPerformanceWaitSouthNorthVehicleSec(SiteRequestEnUS siteRequest_, JsonArray o) {
+	public static String staticSearchStrUpdatedPerformanceWaitSouthNorthVehicleSec(SiteRequestEnUS siteRequest_, String o) {
 		return o == null ? null : o.toString();
 	}
 
@@ -2866,11 +2866,11 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		return (SimulationReport)this;
 	}
 
-	public static JsonArray staticSearchUpdatedPerformanceWaitAllVehicleSec(SiteRequestEnUS siteRequest_, JsonArray o) {
-		return o;
+	public static String staticSearchUpdatedPerformanceWaitAllVehicleSec(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o.toString();
 	}
 
-	public static String staticSearchStrUpdatedPerformanceWaitAllVehicleSec(SiteRequestEnUS siteRequest_, JsonArray o) {
+	public static String staticSearchStrUpdatedPerformanceWaitAllVehicleSec(SiteRequestEnUS siteRequest_, String o) {
 		return o == null ? null : o.toString();
 	}
 
@@ -2924,11 +2924,11 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		return (SimulationReport)this;
 	}
 
-	public static JsonArray staticSearchUpdatedPerformanceWaitAllPedestrianSec(SiteRequestEnUS siteRequest_, JsonArray o) {
-		return o;
+	public static String staticSearchUpdatedPerformanceWaitAllPedestrianSec(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o.toString();
 	}
 
-	public static String staticSearchStrUpdatedPerformanceWaitAllPedestrianSec(SiteRequestEnUS siteRequest_, JsonArray o) {
+	public static String staticSearchStrUpdatedPerformanceWaitAllPedestrianSec(SiteRequestEnUS siteRequest_, String o) {
 		return o == null ? null : o.toString();
 	}
 
@@ -2982,16 +2982,248 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		return (SimulationReport)this;
 	}
 
-	public static JsonArray staticSearchUpdatedPerformanceWaitAllVehiclePedestrianSec(SiteRequestEnUS siteRequest_, JsonArray o) {
-		return o;
+	public static String staticSearchUpdatedPerformanceWaitAllVehiclePedestrianSec(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o.toString();
 	}
 
-	public static String staticSearchStrUpdatedPerformanceWaitAllVehiclePedestrianSec(SiteRequestEnUS siteRequest_, JsonArray o) {
+	public static String staticSearchStrUpdatedPerformanceWaitAllVehiclePedestrianSec(SiteRequestEnUS siteRequest_, String o) {
 		return o == null ? null : o.toString();
 	}
 
 	public static String staticSearchFqUpdatedPerformanceWaitAllVehiclePedestrianSec(SiteRequestEnUS siteRequest_, String o) {
 		return SimulationReport.staticSearchStrUpdatedPerformanceWaitAllVehiclePedestrianSec(siteRequest_, SimulationReport.staticSearchUpdatedPerformanceWaitAllVehiclePedestrianSec(siteRequest_, SimulationReport.staticSetUpdatedPerformanceWaitAllVehiclePedestrianSec(siteRequest_, o)));
+	}
+
+	///////////////////////////////////
+	// avgQueueLengthWestEastVehicle //
+	///////////////////////////////////
+
+
+	/**	 The entity avgQueueLengthWestEastVehicle
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected JsonArray avgQueueLengthWestEastVehicle;
+
+	/**	<br> The entity avgQueueLengthWestEastVehicle
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:avgQueueLengthWestEastVehicle">Find the entity avgQueueLengthWestEastVehicle in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _avgQueueLengthWestEastVehicle(Wrap<JsonArray> w);
+
+	public JsonArray getAvgQueueLengthWestEastVehicle() {
+		return avgQueueLengthWestEastVehicle;
+	}
+
+	public void setAvgQueueLengthWestEastVehicle(JsonArray avgQueueLengthWestEastVehicle) {
+		this.avgQueueLengthWestEastVehicle = avgQueueLengthWestEastVehicle;
+	}
+	@JsonIgnore
+	public void setAvgQueueLengthWestEastVehicle(String o) {
+		this.avgQueueLengthWestEastVehicle = SimulationReport.staticSetAvgQueueLengthWestEastVehicle(siteRequest_, o);
+	}
+	public static JsonArray staticSetAvgQueueLengthWestEastVehicle(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonArray(o);
+		}
+		return null;
+	}
+	protected SimulationReport avgQueueLengthWestEastVehicleInit() {
+		Wrap<JsonArray> avgQueueLengthWestEastVehicleWrap = new Wrap<JsonArray>().var("avgQueueLengthWestEastVehicle");
+		if(avgQueueLengthWestEastVehicle == null) {
+			_avgQueueLengthWestEastVehicle(avgQueueLengthWestEastVehicleWrap);
+			setAvgQueueLengthWestEastVehicle(avgQueueLengthWestEastVehicleWrap.o);
+		}
+		return (SimulationReport)this;
+	}
+
+	public static String staticSearchAvgQueueLengthWestEastVehicle(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o.toString();
+	}
+
+	public static String staticSearchStrAvgQueueLengthWestEastVehicle(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqAvgQueueLengthWestEastVehicle(SiteRequestEnUS siteRequest_, String o) {
+		return SimulationReport.staticSearchStrAvgQueueLengthWestEastVehicle(siteRequest_, SimulationReport.staticSearchAvgQueueLengthWestEastVehicle(siteRequest_, SimulationReport.staticSetAvgQueueLengthWestEastVehicle(siteRequest_, o)));
+	}
+
+	/////////////////////////////////////
+	// avgQueueLengthSouthNorthVehicle //
+	/////////////////////////////////////
+
+
+	/**	 The entity avgQueueLengthSouthNorthVehicle
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected JsonArray avgQueueLengthSouthNorthVehicle;
+
+	/**	<br> The entity avgQueueLengthSouthNorthVehicle
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:avgQueueLengthSouthNorthVehicle">Find the entity avgQueueLengthSouthNorthVehicle in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _avgQueueLengthSouthNorthVehicle(Wrap<JsonArray> w);
+
+	public JsonArray getAvgQueueLengthSouthNorthVehicle() {
+		return avgQueueLengthSouthNorthVehicle;
+	}
+
+	public void setAvgQueueLengthSouthNorthVehicle(JsonArray avgQueueLengthSouthNorthVehicle) {
+		this.avgQueueLengthSouthNorthVehicle = avgQueueLengthSouthNorthVehicle;
+	}
+	@JsonIgnore
+	public void setAvgQueueLengthSouthNorthVehicle(String o) {
+		this.avgQueueLengthSouthNorthVehicle = SimulationReport.staticSetAvgQueueLengthSouthNorthVehicle(siteRequest_, o);
+	}
+	public static JsonArray staticSetAvgQueueLengthSouthNorthVehicle(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonArray(o);
+		}
+		return null;
+	}
+	protected SimulationReport avgQueueLengthSouthNorthVehicleInit() {
+		Wrap<JsonArray> avgQueueLengthSouthNorthVehicleWrap = new Wrap<JsonArray>().var("avgQueueLengthSouthNorthVehicle");
+		if(avgQueueLengthSouthNorthVehicle == null) {
+			_avgQueueLengthSouthNorthVehicle(avgQueueLengthSouthNorthVehicleWrap);
+			setAvgQueueLengthSouthNorthVehicle(avgQueueLengthSouthNorthVehicleWrap.o);
+		}
+		return (SimulationReport)this;
+	}
+
+	public static String staticSearchAvgQueueLengthSouthNorthVehicle(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o.toString();
+	}
+
+	public static String staticSearchStrAvgQueueLengthSouthNorthVehicle(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqAvgQueueLengthSouthNorthVehicle(SiteRequestEnUS siteRequest_, String o) {
+		return SimulationReport.staticSearchStrAvgQueueLengthSouthNorthVehicle(siteRequest_, SimulationReport.staticSearchAvgQueueLengthSouthNorthVehicle(siteRequest_, SimulationReport.staticSetAvgQueueLengthSouthNorthVehicle(siteRequest_, o)));
+	}
+
+	////////////////////////////////////////
+	// avgQueueLengthNorthSouthPedestrian //
+	////////////////////////////////////////
+
+
+	/**	 The entity avgQueueLengthNorthSouthPedestrian
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected JsonArray avgQueueLengthNorthSouthPedestrian;
+
+	/**	<br> The entity avgQueueLengthNorthSouthPedestrian
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:avgQueueLengthNorthSouthPedestrian">Find the entity avgQueueLengthNorthSouthPedestrian in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _avgQueueLengthNorthSouthPedestrian(Wrap<JsonArray> w);
+
+	public JsonArray getAvgQueueLengthNorthSouthPedestrian() {
+		return avgQueueLengthNorthSouthPedestrian;
+	}
+
+	public void setAvgQueueLengthNorthSouthPedestrian(JsonArray avgQueueLengthNorthSouthPedestrian) {
+		this.avgQueueLengthNorthSouthPedestrian = avgQueueLengthNorthSouthPedestrian;
+	}
+	@JsonIgnore
+	public void setAvgQueueLengthNorthSouthPedestrian(String o) {
+		this.avgQueueLengthNorthSouthPedestrian = SimulationReport.staticSetAvgQueueLengthNorthSouthPedestrian(siteRequest_, o);
+	}
+	public static JsonArray staticSetAvgQueueLengthNorthSouthPedestrian(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonArray(o);
+		}
+		return null;
+	}
+	protected SimulationReport avgQueueLengthNorthSouthPedestrianInit() {
+		Wrap<JsonArray> avgQueueLengthNorthSouthPedestrianWrap = new Wrap<JsonArray>().var("avgQueueLengthNorthSouthPedestrian");
+		if(avgQueueLengthNorthSouthPedestrian == null) {
+			_avgQueueLengthNorthSouthPedestrian(avgQueueLengthNorthSouthPedestrianWrap);
+			setAvgQueueLengthNorthSouthPedestrian(avgQueueLengthNorthSouthPedestrianWrap.o);
+		}
+		return (SimulationReport)this;
+	}
+
+	public static String staticSearchAvgQueueLengthNorthSouthPedestrian(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o.toString();
+	}
+
+	public static String staticSearchStrAvgQueueLengthNorthSouthPedestrian(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqAvgQueueLengthNorthSouthPedestrian(SiteRequestEnUS siteRequest_, String o) {
+		return SimulationReport.staticSearchStrAvgQueueLengthNorthSouthPedestrian(siteRequest_, SimulationReport.staticSearchAvgQueueLengthNorthSouthPedestrian(siteRequest_, SimulationReport.staticSetAvgQueueLengthNorthSouthPedestrian(siteRequest_, o)));
+	}
+
+	//////////////////////////////////////
+	// avgQueueLengthWestEastPedestrian //
+	//////////////////////////////////////
+
+
+	/**	 The entity avgQueueLengthWestEastPedestrian
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected JsonArray avgQueueLengthWestEastPedestrian;
+
+	/**	<br> The entity avgQueueLengthWestEastPedestrian
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:avgQueueLengthWestEastPedestrian">Find the entity avgQueueLengthWestEastPedestrian in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _avgQueueLengthWestEastPedestrian(Wrap<JsonArray> w);
+
+	public JsonArray getAvgQueueLengthWestEastPedestrian() {
+		return avgQueueLengthWestEastPedestrian;
+	}
+
+	public void setAvgQueueLengthWestEastPedestrian(JsonArray avgQueueLengthWestEastPedestrian) {
+		this.avgQueueLengthWestEastPedestrian = avgQueueLengthWestEastPedestrian;
+	}
+	@JsonIgnore
+	public void setAvgQueueLengthWestEastPedestrian(String o) {
+		this.avgQueueLengthWestEastPedestrian = SimulationReport.staticSetAvgQueueLengthWestEastPedestrian(siteRequest_, o);
+	}
+	public static JsonArray staticSetAvgQueueLengthWestEastPedestrian(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonArray(o);
+		}
+		return null;
+	}
+	protected SimulationReport avgQueueLengthWestEastPedestrianInit() {
+		Wrap<JsonArray> avgQueueLengthWestEastPedestrianWrap = new Wrap<JsonArray>().var("avgQueueLengthWestEastPedestrian");
+		if(avgQueueLengthWestEastPedestrian == null) {
+			_avgQueueLengthWestEastPedestrian(avgQueueLengthWestEastPedestrianWrap);
+			setAvgQueueLengthWestEastPedestrian(avgQueueLengthWestEastPedestrianWrap.o);
+		}
+		return (SimulationReport)this;
+	}
+
+	public static String staticSearchAvgQueueLengthWestEastPedestrian(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o.toString();
+	}
+
+	public static String staticSearchStrAvgQueueLengthWestEastPedestrian(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqAvgQueueLengthWestEastPedestrian(SiteRequestEnUS siteRequest_, String o) {
+		return SimulationReport.staticSearchStrAvgQueueLengthWestEastPedestrian(siteRequest_, SimulationReport.staticSearchAvgQueueLengthWestEastPedestrian(siteRequest_, SimulationReport.staticSetAvgQueueLengthWestEastPedestrian(siteRequest_, o)));
 	}
 
 	//////////////
@@ -3094,6 +3326,10 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 				updatedPerformanceWaitAllVehicleSecInit();
 				updatedPerformanceWaitAllPedestrianSecInit();
 				updatedPerformanceWaitAllVehiclePedestrianSecInit();
+				avgQueueLengthWestEastVehicleInit();
+				avgQueueLengthSouthNorthVehicleInit();
+				avgQueueLengthNorthSouthPedestrianInit();
+				avgQueueLengthWestEastPedestrianInit();
 				promise2.complete();
 			} catch(Exception ex) {
 				promise2.fail(ex);
@@ -3229,6 +3465,14 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 				return oSimulationReport.updatedPerformanceWaitAllPedestrianSec;
 			case "updatedPerformanceWaitAllVehiclePedestrianSec":
 				return oSimulationReport.updatedPerformanceWaitAllVehiclePedestrianSec;
+			case "avgQueueLengthWestEastVehicle":
+				return oSimulationReport.avgQueueLengthWestEastVehicle;
+			case "avgQueueLengthSouthNorthVehicle":
+				return oSimulationReport.avgQueueLengthSouthNorthVehicle;
+			case "avgQueueLengthNorthSouthPedestrian":
+				return oSimulationReport.avgQueueLengthNorthSouthPedestrian;
+			case "avgQueueLengthWestEastPedestrian":
+				return oSimulationReport.avgQueueLengthWestEastPedestrian;
 			default:
 				return super.obtainBaseModel(var);
 		}
@@ -3354,6 +3598,14 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return SimulationReport.staticSetUpdatedPerformanceWaitAllPedestrianSec(siteRequest_, o);
 		case "updatedPerformanceWaitAllVehiclePedestrianSec":
 			return SimulationReport.staticSetUpdatedPerformanceWaitAllVehiclePedestrianSec(siteRequest_, o);
+		case "avgQueueLengthWestEastVehicle":
+			return SimulationReport.staticSetAvgQueueLengthWestEastVehicle(siteRequest_, o);
+		case "avgQueueLengthSouthNorthVehicle":
+			return SimulationReport.staticSetAvgQueueLengthSouthNorthVehicle(siteRequest_, o);
+		case "avgQueueLengthNorthSouthPedestrian":
+			return SimulationReport.staticSetAvgQueueLengthNorthSouthPedestrian(siteRequest_, o);
+		case "avgQueueLengthWestEastPedestrian":
+			return SimulationReport.staticSetAvgQueueLengthWestEastPedestrian(siteRequest_, o);
 			default:
 				return BaseModel.staticSetBaseModel(entityVar,  siteRequest_, o);
 		}
@@ -3442,6 +3694,14 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return SimulationReport.staticSearchUpdatedPerformanceWaitAllPedestrianSec(siteRequest_, (JsonArray)o);
 		case "updatedPerformanceWaitAllVehiclePedestrianSec":
 			return SimulationReport.staticSearchUpdatedPerformanceWaitAllVehiclePedestrianSec(siteRequest_, (JsonArray)o);
+		case "avgQueueLengthWestEastVehicle":
+			return SimulationReport.staticSearchAvgQueueLengthWestEastVehicle(siteRequest_, (JsonArray)o);
+		case "avgQueueLengthSouthNorthVehicle":
+			return SimulationReport.staticSearchAvgQueueLengthSouthNorthVehicle(siteRequest_, (JsonArray)o);
+		case "avgQueueLengthNorthSouthPedestrian":
+			return SimulationReport.staticSearchAvgQueueLengthNorthSouthPedestrian(siteRequest_, (JsonArray)o);
+		case "avgQueueLengthWestEastPedestrian":
+			return SimulationReport.staticSearchAvgQueueLengthWestEastPedestrian(siteRequest_, (JsonArray)o);
 			default:
 				return BaseModel.staticSearchBaseModel(entityVar,  siteRequest_, o);
 		}
@@ -3517,19 +3777,27 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		case "reportProgress":
 			return SimulationReport.staticSearchStrReportProgress(siteRequest_, (Integer)o);
 		case "updatedParameters":
-			return SimulationReport.staticSearchStrUpdatedParameters(siteRequest_, (JsonArray)o);
+			return SimulationReport.staticSearchStrUpdatedParameters(siteRequest_, (String)o);
 		case "updatedPerformance":
-			return SimulationReport.staticSearchStrUpdatedPerformance(siteRequest_, (JsonArray)o);
+			return SimulationReport.staticSearchStrUpdatedPerformance(siteRequest_, (String)o);
 		case "updatedPerformanceWaitWestEastVehicleSec":
-			return SimulationReport.staticSearchStrUpdatedPerformanceWaitWestEastVehicleSec(siteRequest_, (JsonArray)o);
+			return SimulationReport.staticSearchStrUpdatedPerformanceWaitWestEastVehicleSec(siteRequest_, (String)o);
 		case "updatedPerformanceWaitSouthNorthVehicleSec":
-			return SimulationReport.staticSearchStrUpdatedPerformanceWaitSouthNorthVehicleSec(siteRequest_, (JsonArray)o);
+			return SimulationReport.staticSearchStrUpdatedPerformanceWaitSouthNorthVehicleSec(siteRequest_, (String)o);
 		case "updatedPerformanceWaitAllVehicleSec":
-			return SimulationReport.staticSearchStrUpdatedPerformanceWaitAllVehicleSec(siteRequest_, (JsonArray)o);
+			return SimulationReport.staticSearchStrUpdatedPerformanceWaitAllVehicleSec(siteRequest_, (String)o);
 		case "updatedPerformanceWaitAllPedestrianSec":
-			return SimulationReport.staticSearchStrUpdatedPerformanceWaitAllPedestrianSec(siteRequest_, (JsonArray)o);
+			return SimulationReport.staticSearchStrUpdatedPerformanceWaitAllPedestrianSec(siteRequest_, (String)o);
 		case "updatedPerformanceWaitAllVehiclePedestrianSec":
-			return SimulationReport.staticSearchStrUpdatedPerformanceWaitAllVehiclePedestrianSec(siteRequest_, (JsonArray)o);
+			return SimulationReport.staticSearchStrUpdatedPerformanceWaitAllVehiclePedestrianSec(siteRequest_, (String)o);
+		case "avgQueueLengthWestEastVehicle":
+			return SimulationReport.staticSearchStrAvgQueueLengthWestEastVehicle(siteRequest_, (String)o);
+		case "avgQueueLengthSouthNorthVehicle":
+			return SimulationReport.staticSearchStrAvgQueueLengthSouthNorthVehicle(siteRequest_, (String)o);
+		case "avgQueueLengthNorthSouthPedestrian":
+			return SimulationReport.staticSearchStrAvgQueueLengthNorthSouthPedestrian(siteRequest_, (String)o);
+		case "avgQueueLengthWestEastPedestrian":
+			return SimulationReport.staticSearchStrAvgQueueLengthWestEastPedestrian(siteRequest_, (String)o);
 			default:
 				return BaseModel.staticSearchStrBaseModel(entityVar,  siteRequest_, o);
 		}
@@ -3618,6 +3886,14 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return SimulationReport.staticSearchFqUpdatedPerformanceWaitAllPedestrianSec(siteRequest_, o);
 		case "updatedPerformanceWaitAllVehiclePedestrianSec":
 			return SimulationReport.staticSearchFqUpdatedPerformanceWaitAllVehiclePedestrianSec(siteRequest_, o);
+		case "avgQueueLengthWestEastVehicle":
+			return SimulationReport.staticSearchFqAvgQueueLengthWestEastVehicle(siteRequest_, o);
+		case "avgQueueLengthSouthNorthVehicle":
+			return SimulationReport.staticSearchFqAvgQueueLengthSouthNorthVehicle(siteRequest_, o);
+		case "avgQueueLengthNorthSouthPedestrian":
+			return SimulationReport.staticSearchFqAvgQueueLengthNorthSouthPedestrian(siteRequest_, o);
+		case "avgQueueLengthWestEastPedestrian":
+			return SimulationReport.staticSearchFqAvgQueueLengthWestEastPedestrian(siteRequest_, o);
 			default:
 				return BaseModel.staticSearchFqBaseModel(entityVar,  siteRequest_, o);
 		}
@@ -4076,45 +4352,69 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			}
 
 			if(saves.contains("updatedParameters")) {
-				JsonArray updatedParameters = (JsonArray)doc.get("updatedParameters_docvalues_string");
+				String updatedParameters = (String)doc.get("updatedParameters_docvalues_string");
 				if(updatedParameters != null)
 					oSimulationReport.setUpdatedParameters(updatedParameters);
 			}
 
 			if(saves.contains("updatedPerformance")) {
-				JsonArray updatedPerformance = (JsonArray)doc.get("updatedPerformance_docvalues_string");
+				String updatedPerformance = (String)doc.get("updatedPerformance_docvalues_string");
 				if(updatedPerformance != null)
 					oSimulationReport.setUpdatedPerformance(updatedPerformance);
 			}
 
 			if(saves.contains("updatedPerformanceWaitWestEastVehicleSec")) {
-				JsonArray updatedPerformanceWaitWestEastVehicleSec = (JsonArray)doc.get("updatedPerformanceWaitWestEastVehicleSec_docvalues_string");
+				String updatedPerformanceWaitWestEastVehicleSec = (String)doc.get("updatedPerformanceWaitWestEastVehicleSec_docvalues_string");
 				if(updatedPerformanceWaitWestEastVehicleSec != null)
 					oSimulationReport.setUpdatedPerformanceWaitWestEastVehicleSec(updatedPerformanceWaitWestEastVehicleSec);
 			}
 
 			if(saves.contains("updatedPerformanceWaitSouthNorthVehicleSec")) {
-				JsonArray updatedPerformanceWaitSouthNorthVehicleSec = (JsonArray)doc.get("updatedPerformanceWaitSouthNorthVehicleSec_docvalues_string");
+				String updatedPerformanceWaitSouthNorthVehicleSec = (String)doc.get("updatedPerformanceWaitSouthNorthVehicleSec_docvalues_string");
 				if(updatedPerformanceWaitSouthNorthVehicleSec != null)
 					oSimulationReport.setUpdatedPerformanceWaitSouthNorthVehicleSec(updatedPerformanceWaitSouthNorthVehicleSec);
 			}
 
 			if(saves.contains("updatedPerformanceWaitAllVehicleSec")) {
-				JsonArray updatedPerformanceWaitAllVehicleSec = (JsonArray)doc.get("updatedPerformanceWaitAllVehicleSec_docvalues_string");
+				String updatedPerformanceWaitAllVehicleSec = (String)doc.get("updatedPerformanceWaitAllVehicleSec_docvalues_string");
 				if(updatedPerformanceWaitAllVehicleSec != null)
 					oSimulationReport.setUpdatedPerformanceWaitAllVehicleSec(updatedPerformanceWaitAllVehicleSec);
 			}
 
 			if(saves.contains("updatedPerformanceWaitAllPedestrianSec")) {
-				JsonArray updatedPerformanceWaitAllPedestrianSec = (JsonArray)doc.get("updatedPerformanceWaitAllPedestrianSec_docvalues_string");
+				String updatedPerformanceWaitAllPedestrianSec = (String)doc.get("updatedPerformanceWaitAllPedestrianSec_docvalues_string");
 				if(updatedPerformanceWaitAllPedestrianSec != null)
 					oSimulationReport.setUpdatedPerformanceWaitAllPedestrianSec(updatedPerformanceWaitAllPedestrianSec);
 			}
 
 			if(saves.contains("updatedPerformanceWaitAllVehiclePedestrianSec")) {
-				JsonArray updatedPerformanceWaitAllVehiclePedestrianSec = (JsonArray)doc.get("updatedPerformanceWaitAllVehiclePedestrianSec_docvalues_string");
+				String updatedPerformanceWaitAllVehiclePedestrianSec = (String)doc.get("updatedPerformanceWaitAllVehiclePedestrianSec_docvalues_string");
 				if(updatedPerformanceWaitAllVehiclePedestrianSec != null)
 					oSimulationReport.setUpdatedPerformanceWaitAllVehiclePedestrianSec(updatedPerformanceWaitAllVehiclePedestrianSec);
+			}
+
+			if(saves.contains("avgQueueLengthWestEastVehicle")) {
+				String avgQueueLengthWestEastVehicle = (String)doc.get("avgQueueLengthWestEastVehicle_docvalues_string");
+				if(avgQueueLengthWestEastVehicle != null)
+					oSimulationReport.setAvgQueueLengthWestEastVehicle(avgQueueLengthWestEastVehicle);
+			}
+
+			if(saves.contains("avgQueueLengthSouthNorthVehicle")) {
+				String avgQueueLengthSouthNorthVehicle = (String)doc.get("avgQueueLengthSouthNorthVehicle_docvalues_string");
+				if(avgQueueLengthSouthNorthVehicle != null)
+					oSimulationReport.setAvgQueueLengthSouthNorthVehicle(avgQueueLengthSouthNorthVehicle);
+			}
+
+			if(saves.contains("avgQueueLengthNorthSouthPedestrian")) {
+				String avgQueueLengthNorthSouthPedestrian = (String)doc.get("avgQueueLengthNorthSouthPedestrian_docvalues_string");
+				if(avgQueueLengthNorthSouthPedestrian != null)
+					oSimulationReport.setAvgQueueLengthNorthSouthPedestrian(avgQueueLengthNorthSouthPedestrian);
+			}
+
+			if(saves.contains("avgQueueLengthWestEastPedestrian")) {
+				String avgQueueLengthWestEastPedestrian = (String)doc.get("avgQueueLengthWestEastPedestrian_docvalues_string");
+				if(avgQueueLengthWestEastPedestrian != null)
+					oSimulationReport.setAvgQueueLengthWestEastPedestrian(avgQueueLengthWestEastPedestrian);
 			}
 		}
 
@@ -4245,6 +4545,18 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		if(updatedPerformanceWaitAllVehiclePedestrianSec != null) {
 			doc.put("updatedPerformanceWaitAllVehiclePedestrianSec_docvalues_string", updatedPerformanceWaitAllVehiclePedestrianSec.toString());
 		}
+		if(avgQueueLengthWestEastVehicle != null) {
+			doc.put("avgQueueLengthWestEastVehicle_docvalues_string", avgQueueLengthWestEastVehicle.toString());
+		}
+		if(avgQueueLengthSouthNorthVehicle != null) {
+			doc.put("avgQueueLengthSouthNorthVehicle_docvalues_string", avgQueueLengthSouthNorthVehicle.toString());
+		}
+		if(avgQueueLengthNorthSouthPedestrian != null) {
+			doc.put("avgQueueLengthNorthSouthPedestrian_docvalues_string", avgQueueLengthNorthSouthPedestrian.toString());
+		}
+		if(avgQueueLengthWestEastPedestrian != null) {
+			doc.put("avgQueueLengthWestEastPedestrian_docvalues_string", avgQueueLengthWestEastPedestrian.toString());
+		}
 		super.indexBaseModel(doc);
 
 	}
@@ -4325,6 +4637,14 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 				return "updatedPerformanceWaitAllPedestrianSec_docvalues_string";
 			case "updatedPerformanceWaitAllVehiclePedestrianSec":
 				return "updatedPerformanceWaitAllVehiclePedestrianSec_docvalues_string";
+			case "avgQueueLengthWestEastVehicle":
+				return "avgQueueLengthWestEastVehicle_docvalues_string";
+			case "avgQueueLengthSouthNorthVehicle":
+				return "avgQueueLengthSouthNorthVehicle_docvalues_string";
+			case "avgQueueLengthNorthSouthPedestrian":
+				return "avgQueueLengthNorthSouthPedestrian_docvalues_string";
+			case "avgQueueLengthWestEastPedestrian":
+				return "avgQueueLengthWestEastPedestrian_docvalues_string";
 			default:
 				return BaseModel.varStoredBaseModel(entityVar);
 		}
@@ -4406,6 +4726,14 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 				return "updatedPerformanceWaitAllPedestrianSec_docvalues_string";
 			case "updatedPerformanceWaitAllVehiclePedestrianSec":
 				return "updatedPerformanceWaitAllVehiclePedestrianSec_docvalues_string";
+			case "avgQueueLengthWestEastVehicle":
+				return "avgQueueLengthWestEastVehicle_docvalues_string";
+			case "avgQueueLengthSouthNorthVehicle":
+				return "avgQueueLengthSouthNorthVehicle_docvalues_string";
+			case "avgQueueLengthNorthSouthPedestrian":
+				return "avgQueueLengthNorthSouthPedestrian_docvalues_string";
+			case "avgQueueLengthWestEastPedestrian":
+				return "avgQueueLengthWestEastPedestrian_docvalues_string";
 			default:
 				return BaseModel.varIndexedBaseModel(entityVar);
 		}
@@ -4487,6 +4815,14 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 				return "updatedPerformanceWaitAllPedestrianSec";
 			case "updatedPerformanceWaitAllVehiclePedestrianSec_docvalues_string":
 				return "updatedPerformanceWaitAllVehiclePedestrianSec";
+			case "avgQueueLengthWestEastVehicle_docvalues_string":
+				return "avgQueueLengthWestEastVehicle";
+			case "avgQueueLengthSouthNorthVehicle_docvalues_string":
+				return "avgQueueLengthSouthNorthVehicle";
+			case "avgQueueLengthNorthSouthPedestrian_docvalues_string":
+				return "avgQueueLengthNorthSouthPedestrian";
+			case "avgQueueLengthWestEastPedestrian_docvalues_string":
+				return "avgQueueLengthWestEastPedestrian";
 			default:
 				return BaseModel.searchVarBaseModel(searchVar);
 		}
@@ -4559,6 +4895,10 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		oSimulationReport.setUpdatedPerformanceWaitAllVehicleSec(Optional.ofNullable(doc.get("updatedPerformanceWaitAllVehicleSec_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSimulationReport.setUpdatedPerformanceWaitAllPedestrianSec(Optional.ofNullable(doc.get("updatedPerformanceWaitAllPedestrianSec_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSimulationReport.setUpdatedPerformanceWaitAllVehiclePedestrianSec(Optional.ofNullable(doc.get("updatedPerformanceWaitAllVehiclePedestrianSec_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oSimulationReport.setAvgQueueLengthWestEastVehicle(Optional.ofNullable(doc.get("avgQueueLengthWestEastVehicle_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oSimulationReport.setAvgQueueLengthSouthNorthVehicle(Optional.ofNullable(doc.get("avgQueueLengthSouthNorthVehicle_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oSimulationReport.setAvgQueueLengthNorthSouthPedestrian(Optional.ofNullable(doc.get("avgQueueLengthNorthSouthPedestrian_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oSimulationReport.setAvgQueueLengthWestEastPedestrian(Optional.ofNullable(doc.get("avgQueueLengthWestEastPedestrian_docvalues_string")).map(v -> v.toString()).orElse(null));
 
 		super.storeBaseModel(doc);
 	}
@@ -4646,6 +4986,14 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 				apiRequest.addVars("updatedPerformanceWaitAllPedestrianSec");
 			if(!Objects.equals(updatedPerformanceWaitAllVehiclePedestrianSec, original.getUpdatedPerformanceWaitAllVehiclePedestrianSec()))
 				apiRequest.addVars("updatedPerformanceWaitAllVehiclePedestrianSec");
+			if(!Objects.equals(avgQueueLengthWestEastVehicle, original.getAvgQueueLengthWestEastVehicle()))
+				apiRequest.addVars("avgQueueLengthWestEastVehicle");
+			if(!Objects.equals(avgQueueLengthSouthNorthVehicle, original.getAvgQueueLengthSouthNorthVehicle()))
+				apiRequest.addVars("avgQueueLengthSouthNorthVehicle");
+			if(!Objects.equals(avgQueueLengthNorthSouthPedestrian, original.getAvgQueueLengthNorthSouthPedestrian()))
+				apiRequest.addVars("avgQueueLengthNorthSouthPedestrian");
+			if(!Objects.equals(avgQueueLengthWestEastPedestrian, original.getAvgQueueLengthWestEastPedestrian()))
+				apiRequest.addVars("avgQueueLengthWestEastPedestrian");
 			super.apiRequestBaseModel();
 		}
 	}
@@ -4694,6 +5042,10 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		sb.append(Optional.ofNullable(updatedPerformanceWaitAllVehicleSec).map(v -> "updatedPerformanceWaitAllVehicleSec: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(updatedPerformanceWaitAllPedestrianSec).map(v -> "updatedPerformanceWaitAllPedestrianSec: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(updatedPerformanceWaitAllVehiclePedestrianSec).map(v -> "updatedPerformanceWaitAllVehiclePedestrianSec: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(avgQueueLengthWestEastVehicle).map(v -> "avgQueueLengthWestEastVehicle: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(avgQueueLengthSouthNorthVehicle).map(v -> "avgQueueLengthSouthNorthVehicle: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(avgQueueLengthNorthSouthPedestrian).map(v -> "avgQueueLengthNorthSouthPedestrian: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(avgQueueLengthWestEastPedestrian).map(v -> "avgQueueLengthWestEastPedestrian: " + v + "\n").orElse(""));
 		return sb.toString();
 	}
 
@@ -4741,6 +5093,10 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 	public static final String VAR_updatedPerformanceWaitAllVehicleSec = "updatedPerformanceWaitAllVehicleSec";
 	public static final String VAR_updatedPerformanceWaitAllPedestrianSec = "updatedPerformanceWaitAllPedestrianSec";
 	public static final String VAR_updatedPerformanceWaitAllVehiclePedestrianSec = "updatedPerformanceWaitAllVehiclePedestrianSec";
+	public static final String VAR_avgQueueLengthWestEastVehicle = "avgQueueLengthWestEastVehicle";
+	public static final String VAR_avgQueueLengthSouthNorthVehicle = "avgQueueLengthSouthNorthVehicle";
+	public static final String VAR_avgQueueLengthNorthSouthPedestrian = "avgQueueLengthNorthSouthPedestrian";
+	public static final String VAR_avgQueueLengthWestEastPedestrian = "avgQueueLengthWestEastPedestrian";
 
 	public static List<String> varsQForClass() {
 		return SimulationReport.varsQSimulationReport(new ArrayList<String>());
@@ -4791,6 +5147,10 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		vars.add(VAR_updatedPerformanceWaitAllVehicleSec);
 		vars.add(VAR_updatedPerformanceWaitAllPedestrianSec);
 		vars.add(VAR_updatedPerformanceWaitAllVehiclePedestrianSec);
+		vars.add(VAR_avgQueueLengthWestEastVehicle);
+		vars.add(VAR_avgQueueLengthSouthNorthVehicle);
+		vars.add(VAR_avgQueueLengthNorthSouthPedestrian);
+		vars.add(VAR_avgQueueLengthWestEastPedestrian);
 		BaseModel.varsFqBaseModel(vars);
 		return vars;
 	}
@@ -4827,6 +5187,10 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		vars.add(VAR_updatedPerformanceWaitAllVehicleSec);
 		vars.add(VAR_updatedPerformanceWaitAllPedestrianSec);
 		vars.add(VAR_updatedPerformanceWaitAllVehiclePedestrianSec);
+		vars.add(VAR_avgQueueLengthWestEastVehicle);
+		vars.add(VAR_avgQueueLengthSouthNorthVehicle);
+		vars.add(VAR_avgQueueLengthNorthSouthPedestrian);
+		vars.add(VAR_avgQueueLengthWestEastPedestrian);
 		BaseModel.varsRangeBaseModel(vars);
 		return vars;
 	}
@@ -4872,6 +5236,10 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 	public static final String DISPLAY_NAME_updatedPerformanceWaitAllVehicleSec = "Average waiting time for all vehicles (sec)";
 	public static final String DISPLAY_NAME_updatedPerformanceWaitAllPedestrianSec = "Average waiting time for pedestrians (sec)";
 	public static final String DISPLAY_NAME_updatedPerformanceWaitAllVehiclePedestrianSec = "Average waiting time for vehicles and pedestrians (sec)";
+	public static final String DISPLAY_NAME_avgQueueLengthWestEastVehicle = "Average queue length for WEST-EAST vehicle";
+	public static final String DISPLAY_NAME_avgQueueLengthSouthNorthVehicle = "Average queue length for SOUTH-NORTH vehicle";
+	public static final String DISPLAY_NAME_avgQueueLengthNorthSouthPedestrian = "Average queue length for NORTH-SOUTH pedestrian";
+	public static final String DISPLAY_NAME_avgQueueLengthWestEastPedestrian = "Average queue length for WEST-EAST pedestrian";
 
 	public static String displayNameForClass(String var) {
 		return SimulationReport.displayNameSimulationReport(var);
@@ -4960,6 +5328,14 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return DISPLAY_NAME_updatedPerformanceWaitAllPedestrianSec;
 		case VAR_updatedPerformanceWaitAllVehiclePedestrianSec:
 			return DISPLAY_NAME_updatedPerformanceWaitAllVehiclePedestrianSec;
+		case VAR_avgQueueLengthWestEastVehicle:
+			return DISPLAY_NAME_avgQueueLengthWestEastVehicle;
+		case VAR_avgQueueLengthSouthNorthVehicle:
+			return DISPLAY_NAME_avgQueueLengthSouthNorthVehicle;
+		case VAR_avgQueueLengthNorthSouthPedestrian:
+			return DISPLAY_NAME_avgQueueLengthNorthSouthPedestrian;
+		case VAR_avgQueueLengthWestEastPedestrian:
+			return DISPLAY_NAME_avgQueueLengthWestEastPedestrian;
 		default:
 			return BaseModel.displayNameBaseModel(var);
 		}
@@ -5074,6 +5450,14 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return "JsonArray";
 		case VAR_updatedPerformanceWaitAllVehiclePedestrianSec:
 			return "JsonArray";
+		case VAR_avgQueueLengthWestEastVehicle:
+			return "JsonArray";
+		case VAR_avgQueueLengthSouthNorthVehicle:
+			return "JsonArray";
+		case VAR_avgQueueLengthNorthSouthPedestrian:
+			return "JsonArray";
+		case VAR_avgQueueLengthWestEastPedestrian:
+			return "JsonArray";
 			default:
 				return BaseModel.classSimpleNameBaseModel(var);
 		}
@@ -5150,6 +5534,14 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			return 18;
 		case VAR_updatedPerformanceWaitAllVehiclePedestrianSec:
 			return 18;
+		case VAR_avgQueueLengthWestEastVehicle:
+			return 18;
+		case VAR_avgQueueLengthSouthNorthVehicle:
+			return 18;
+		case VAR_avgQueueLengthNorthSouthPedestrian:
+			return 18;
+		case VAR_avgQueueLengthWestEastPedestrian:
+			return 18;
 			default:
 				return BaseModel.htmRowBaseModel(var);
 		}
@@ -5218,6 +5610,14 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		case VAR_updatedPerformanceWaitAllPedestrianSec:
 			return 1;
 		case VAR_updatedPerformanceWaitAllVehiclePedestrianSec:
+			return 1;
+		case VAR_avgQueueLengthWestEastVehicle:
+			return 1;
+		case VAR_avgQueueLengthSouthNorthVehicle:
+			return 1;
+		case VAR_avgQueueLengthNorthSouthPedestrian:
+			return 1;
+		case VAR_avgQueueLengthWestEastPedestrian:
 			return 1;
 			default:
 				return BaseModel.htmCellBaseModel(var);

@@ -198,11 +198,11 @@ public abstract class SimulationReportGenPageGen<DEV> extends BaseModelPage {
 		return (SimulationReportGenPage)this;
 	}
 
-	public static JsonArray staticSearchListSimulationReport(SiteRequestEnUS siteRequest_, JsonArray o) {
-		return o;
+	public static String staticSearchListSimulationReport(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o.toString();
 	}
 
-	public static String staticSearchStrListSimulationReport(SiteRequestEnUS siteRequest_, JsonArray o) {
+	public static String staticSearchStrListSimulationReport(SiteRequestEnUS siteRequest_, String o) {
 		return o == null ? null : o.toString();
 	}
 
@@ -656,7 +656,7 @@ public abstract class SimulationReportGenPageGen<DEV> extends BaseModelPage {
 	public static String staticSearchStrSimulationReportGenPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
 		case "listSimulationReport":
-			return SimulationReportGenPage.staticSearchStrListSimulationReport(siteRequest_, (JsonArray)o);
+			return SimulationReportGenPage.staticSearchStrListSimulationReport(siteRequest_, (String)o);
 		case "simulationReportCount":
 			return SimulationReportGenPage.staticSearchStrSimulationReportCount(siteRequest_, (Integer)o);
 		case "pk":

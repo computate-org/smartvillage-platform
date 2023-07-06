@@ -873,7 +873,7 @@
 			</tr>
 	{{/inline}}
 {{#*inline "htmFormsSystemEventPage"}}
-	{{#ifContainsAnyRoles roles roleRequired}}
+{{#ifContainsAnyRoles roles authRoleSuperAdmin}}
 		{{#eq systemEventCount int1}}
 		<button
 			class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce "
@@ -883,12 +883,16 @@
 			refresh this system event
 		</button>
 		{{/eq}}
-	{{/ifContainsAnyRoles}}
-	{{#ifContainsAnyRoles roles authRoleAdmin}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles authRoleAdmin}}
 {{#block "htmForm_postSystemEvent"}}{{/block}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles authRoleSuperAdmin}}
 {{#block "htmForm_patchSystemEvent"}}{{/block}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles authRoleSuperAdmin}}
 {{#block "htmForm_putimportSystemEvent"}}{{/block}}
-	{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
 {{#block "htmSuggested"}}{{/block}}
 {{/inline}}
 {{#*inline "htmSuggestedSystemEventPage"}}
