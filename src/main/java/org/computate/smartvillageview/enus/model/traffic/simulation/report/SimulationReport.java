@@ -297,7 +297,10 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * Description: 
 	 */
 	protected void _paramMinGreenTimeSecWestEast(Wrap<BigDecimal> w) {
-		w.o(new BigDecimal(10));
+		if(simulation_ != null)
+			w.o(simulation_.getParamMinGreenTimeSecWestEast());
+		else if(smartTrafficLight_ != null)
+			w.o(smartTrafficLight_.getParamMinGreenTimeSecWestEast());
 	}
 
 	/**
@@ -311,7 +314,10 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * Description: 
 	 */
 	protected void _paramMaxGreenTimeSecWestEast(Wrap<BigDecimal> w) {
-		w.o(new BigDecimal(20));
+		if(simulation_ != null)
+			w.o(simulation_.getParamMaxGreenTimeSecWestEast());
+		else if(smartTrafficLight_ != null)
+			w.o(smartTrafficLight_.getParamMaxGreenTimeSecWestEast());
 	}
 
 	/**
@@ -325,7 +331,10 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * Description: 
 	 */
 	protected void _paramMinGreenTimeSecSouthNorth(Wrap<BigDecimal> w) {
-		w.o(new BigDecimal(30));
+		if(simulation_ != null)
+			w.o(simulation_.getParamMinGreenTimeSecSouthNorth());
+		else if(smartTrafficLight_ != null)
+			w.o(smartTrafficLight_.getParamMinGreenTimeSecSouthNorth());
 	}
 
 	/**
@@ -339,7 +348,10 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * Description: 
 	 */
 	protected void _paramMaxGreenTimeSecSouthNorth(Wrap<BigDecimal> w) {
-		w.o(new BigDecimal(50));
+		if(simulation_ != null)
+			w.o(simulation_.getParamMaxGreenTimeSecSouthNorth());
+		else if(smartTrafficLight_ != null)
+			w.o(smartTrafficLight_.getParamMaxGreenTimeSecSouthNorth());
 	}
 
 	/**
@@ -353,7 +365,10 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * Description: 
 	 */
 	protected void _paramPedestrianWaitThresholdSecNorthSouth(Wrap<BigDecimal> w) {
-		w.o(new BigDecimal(10));
+		if(simulation_ != null)
+			w.o(simulation_.getParamPedestrianWaitThresholdSecNorthSouth());
+		else if(smartTrafficLight_ != null)
+			w.o(smartTrafficLight_.getParamPedestrianWaitThresholdSecNorthSouth());
 	}
 
 	/**
@@ -367,7 +382,10 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * Description: 
 	 */
 	protected void _paramPedestrianWaitThresholdSecWestEast(Wrap<BigDecimal> w) {
-		w.o(new BigDecimal(10));
+		if(simulation_ != null)
+			w.o(simulation_.getParamPedestrianWaitThresholdSecWestEast());
+		else if(smartTrafficLight_ != null)
+			w.o(smartTrafficLight_.getParamPedestrianWaitThresholdSecWestEast());
 	}
 
 	/**
@@ -381,7 +399,10 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * Description: 
 	 */
 	protected void _paramVehicleQueueThresholdWestEast(Wrap<BigDecimal> w) {
-		w.o(new BigDecimal(8));
+		if(simulation_ != null)
+			w.o(simulation_.getParamVehicleQueueThresholdWestEast());
+		else if(smartTrafficLight_ != null)
+			w.o(smartTrafficLight_.getParamVehicleQueueThresholdWestEast());
 	}
 
 	/**
@@ -395,7 +416,10 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * Description: 
 	 */
 	protected void _paramVehicleQueueThresholdSouthNorth(Wrap<BigDecimal> w) {
-		w.o(new BigDecimal(8));
+		if(simulation_ != null)
+			w.o(simulation_.getParamVehicleQueueThresholdSouthNorth());
+		else if(smartTrafficLight_ != null)
+			w.o(smartTrafficLight_.getParamVehicleQueueThresholdSouthNorth());
 	}
 
 	/**
@@ -409,7 +433,10 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * Description: 
 	 */
 	protected void _paramPedestrianQueueThresholdNorthSouth(Wrap<BigDecimal> w) {
-		w.o(new BigDecimal(5));
+		if(simulation_ != null)
+			w.o(simulation_.getParamPedestrianQueueThresholdNorthSouth());
+		else if(smartTrafficLight_ != null)
+			w.o(smartTrafficLight_.getParamPedestrianQueueThresholdNorthSouth());
 	}
 
 	/**
@@ -423,7 +450,10 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * Description: 
 	 */
 	protected void _paramPedestrianQueueThresholdWestEast(Wrap<BigDecimal> w) {
-		w.o(new BigDecimal(6));
+		if(simulation_ != null)
+			w.o(simulation_.getParamPedestrianQueueThresholdWestEast());
+		else if(smartTrafficLight_ != null)
+			w.o(smartTrafficLight_.getParamPedestrianQueueThresholdWestEast());
 	}
 
 	/**
