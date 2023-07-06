@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLight;
+import org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
-import org.computate.vertx.api.ApiRequest;
 import org.computate.vertx.search.list.SearchList;
 
 import io.vertx.core.CompositeFuture;
@@ -55,21 +55,27 @@ public class TrafficFlowObservedEnUSApiServiceImpl extends TrafficFlowObservedEn
 			SmartTrafficLight smartTrafficLight = o.getSmartTrafficLight_();
 			Boolean refresh = !"false".equals(siteRequest.getRequestVars().get("refresh"));
 			if(refresh && !Optional.ofNullable(siteRequest.getJsonObject()).map(JsonObject::isEmpty).orElse(true)) {
-				List<Future> futures = new ArrayList<>();
 
-				if(smartTrafficLight != null) {
-					String id2 = smartTrafficLight.getEntityId();
-					String classSimpleName2 = SmartTrafficLight.CLASS_SIMPLE_NAME;
-
-					if("SmartTrafficLight".equals(classSimpleName2) && id2 != null) {
-						SearchList<SmartTrafficLight> searchList2 = new SearchList<SmartTrafficLight>();
-						searchList2.setStore(true);
-						searchList2.q("*:*");
-						searchList2.setC(SmartTrafficLight.class);
-						searchList2.fq(SmartTrafficLight.VAR_entityId + "_docvalues_string:" + id2);
-						searchList2.rows(1L);
-						futures.add(Future.future(promise2 -> {
-							searchList2.promiseDeepSearchList(siteRequest).onSuccess(b -> {
+				SearchList<SimulationReport> searchReportList2 = new SearchList<SimulationReport>();
+				searchReportList2.setStore(true);
+				searchReportList2.q("*:*");
+				searchReportList2.setC(SimulationReport.class);
+				searchReportList2.fq(SimulationReport.VAR_smartTrafficLightKey + "_docvalues_long:" + smartTrafficLight.getPk());
+				searchReportList2.rows(50L);
+				searchReportList2.promiseDeepSearchList(siteRequest).onSuccess(b -> {
+	
+					if(smartTrafficLight != null) {
+						String id2 = smartTrafficLight.getEntityId();
+						String classSimpleName2 = SmartTrafficLight.CLASS_SIMPLE_NAME;
+	
+						if("SmartTrafficLight".equals(classSimpleName2) && id2 != null) {
+							SearchList<SmartTrafficLight> searchList2 = new SearchList<SmartTrafficLight>();
+							searchList2.setStore(true);
+							searchList2.q("*:*");
+							searchList2.setC(SmartTrafficLight.class);
+							searchList2.fq(SmartTrafficLight.VAR_entityId + "_docvalues_string:" + id2);
+							searchList2.rows(1L);
+							searchList2.promiseDeepSearchList(siteRequest).onSuccess(c -> {
 								SmartTrafficLight o2 = searchList2.getList().stream().findFirst().orElse(null);
 								if(o2 != null) {
 									JsonObject params = new JsonObject();
@@ -79,57 +85,87 @@ public class TrafficFlowObservedEnUSApiServiceImpl extends TrafficFlowObservedEn
 									params.put("query", new JsonObject().put("q", "*:*").put("fq", new JsonArray().add(SmartTrafficLight.VAR_entityId + ":" + id2)).put("var", new JsonArray().add("refresh:false")));
 									JsonObject context = new JsonObject().put("params", params).put("user", siteRequest.getUserPrincipal());
 									JsonObject json = new JsonObject().put("context", context);
-									eventBus.request("smartabyar-smartvillage-enUS-SmartTrafficLight", json, new DeliveryOptions().addHeader("action", "patchSmartTrafficLightFuture")).onSuccess(c -> {
-										JsonObject responseMessage = (JsonObject)c.body();
+									LOG.info("o2.getParamMinGreenTimeSecSouthNorth(): " + o2.getParamMinGreenTimeSecSouthNorth());
+									eventBus.request("smartabyar-smartvillage-enUS-SmartTrafficLight", json, new DeliveryOptions().addHeader("action", "patchSmartTrafficLightFuture")).onSuccess(d -> {
+										JsonObject responseMessage = (JsonObject)d.body();
 										Integer statusCode = responseMessage.getInteger("statusCode");
-										if(statusCode.equals(200))
-											promise2.complete();
-										else
-											promise2.fail(new RuntimeException(responseMessage.getString("statusMessage")));
+										if(statusCode.equals(200)) {
+											List<Future> futures = new ArrayList<>();
+											for(SimulationReport o3 : searchReportList2.getList()) {
+												Long pk2 = o3.getPk();
+												futures.add(Future.future(promise2 -> {
+													JsonObject params3 = new JsonObject();
+													params3.put("body", new JsonObject());
+													params3.put("cookie", new JsonObject());
+													params3.put("path", new JsonObject());
+													params3.put("query", new JsonObject().put("q", "*:*").put("fq", new JsonArray().add("pk:" + pk2)).put("var", new JsonArray().add("refresh:false")));
+													JsonObject context3 = new JsonObject().put("params", params3).put("user", siteRequest.getUserPrincipal());
+													JsonObject json3 = new JsonObject().put("context", context3);
+													eventBus.request("smartabyar-smartvillage-enUS-SimulationReport", json3, new DeliveryOptions().addHeader("action", "patchSimulationReportFuture")).onSuccess(e -> {
+														JsonObject responseMessage3 = (JsonObject)e.body();
+														Integer statusCode3 = responseMessage3.getInteger("statusCode");
+														if(statusCode3.equals(200))
+															promise2.complete();
+														else
+															promise2.fail(new RuntimeException(responseMessage3.getString("statusMessage")));
+													}).onFailure(ex -> {
+														promise2.fail(ex);
+													});
+												}));
+											}
+	
+											CompositeFuture.all(futures).onSuccess(e -> {
+												JsonObject params3 = new JsonObject();
+												params3.put("body", new JsonObject());
+												params3.put("cookie", new JsonObject());
+												params3.put("header", new JsonObject());
+												params3.put("form", new JsonObject());
+												params3.put("path", new JsonObject());
+												JsonObject query = new JsonObject();
+												Boolean softCommit = Optional.ofNullable(siteRequest.getServiceRequest().getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getBoolean("softCommit")).orElse(null);
+												Integer commitWithin = Optional.ofNullable(siteRequest.getServiceRequest().getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getInteger("commitWithin")).orElse(null);
+												if(softCommit == null && commitWithin == null)
+													softCommit = true;
+												if(softCommit != null)
+													query.put("softCommit", softCommit);
+												if(commitWithin != null)
+													query.put("commitWithin", commitWithin);
+												query.put("q", "*:*").put("fq", new JsonArray().add("id:" + o.getId())).put("var", new JsonArray().add("refresh:false"));
+												params3.put("query", query);
+												JsonObject context3 = new JsonObject().put("params", params3).put("user", siteRequest.getUserPrincipal());
+												JsonObject json3 = new JsonObject().put("context", context3);
+												eventBus.request("smartabyar-smartvillage-enUS-TrafficFlowObserved", json3, new DeliveryOptions().addHeader("action", "patchTrafficFlowObservedFuture")).onSuccess(f -> {
+													JsonObject responseMessage3 = (JsonObject)f.body();
+													Integer statusCode3 = responseMessage3.getInteger("statusCode");
+													if(statusCode3.equals(200))
+														promise.complete();
+													else
+														promise.fail(new RuntimeException(responseMessage3.getString("statusMessage")));
+												}).onFailure(ex -> {
+													LOG.error("Refresh relations failed. ", ex);
+													promise.fail(ex);
+												});
+											}).onFailure(ex -> {
+												LOG.error("Refresh relations failed. ", ex);
+												promise.fail(ex);
+											});
+										} else {
+											promise.fail(new RuntimeException(responseMessage.getString("statusMessage")));
+										}
 									}).onFailure(ex -> {
-										promise2.fail(ex);
+										promise.fail(ex);
 									});
+								} else {
+									promise.complete();
 								}
 							}).onFailure(ex -> {
-								promise2.fail(ex);
+								promise.fail(ex);
 							});
-						}));
-					}
-				}
-
-				CompositeFuture.all(futures).onSuccess(b -> {
-					JsonObject params = new JsonObject();
-					params.put("body", new JsonObject());
-					params.put("cookie", new JsonObject());
-					params.put("header", new JsonObject());
-					params.put("form", new JsonObject());
-					params.put("path", new JsonObject());
-					JsonObject query = new JsonObject();
-					Boolean softCommit = Optional.ofNullable(siteRequest.getServiceRequest().getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getBoolean("softCommit")).orElse(null);
-					Integer commitWithin = Optional.ofNullable(siteRequest.getServiceRequest().getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getInteger("commitWithin")).orElse(null);
-					if(softCommit == null && commitWithin == null)
-						softCommit = true;
-					if(softCommit != null)
-						query.put("softCommit", softCommit);
-					if(commitWithin != null)
-						query.put("commitWithin", commitWithin);
-					query.put("q", "*:*").put("fq", new JsonArray().add("id:" + o.getId())).put("var", new JsonArray().add("refresh:false"));
-					params.put("query", query);
-					JsonObject context = new JsonObject().put("params", params).put("user", siteRequest.getUserPrincipal());
-					JsonObject json = new JsonObject().put("context", context);
-					eventBus.request("smartabyar-smartvillage-enUS-TrafficFlowObserved", json, new DeliveryOptions().addHeader("action", "patchTrafficFlowObservedFuture")).onSuccess(c -> {
-						JsonObject responseMessage = (JsonObject)c.body();
-						Integer statusCode = responseMessage.getInteger("statusCode");
-						if(statusCode.equals(200))
+						} else {
 							promise.complete();
-						else
-							promise.fail(new RuntimeException(responseMessage.getString("statusMessage")));
-					}).onFailure(ex -> {
-						LOG.error("Refresh relations failed. ", ex);
-						promise.fail(ex);
-					});
+						}
+					}
 				}).onFailure(ex -> {
-					LOG.error("Refresh relations failed. ", ex);
 					promise.fail(ex);
 				});
 			} else {
