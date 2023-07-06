@@ -180,7 +180,7 @@ spec:
             - name: SOLR_COLLECTION
               value: smartvillage
             - name: SITE_HOST_NAME
-              value: smartvillage.computate.org
+              value: www.smartabyarsmartvillage.org
             - name: SITE_PORT
               value: '8080'
             - name: SITE_BASE_URL
@@ -325,7 +325,7 @@ spec:
             - name: SITE_POM_GROUP_ID
               value: org.computate
             - name: SITE_PUBLIC_URL
-              value: 'https://smartvillage.computate.org'
+              value: 'https://www.smartabyarsmartvillage.org'
           ports:
             - name: http
               containerPort: 8080

@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - roles
   - rolebindings
+  - edgeamqbrokers
     #  - ../../bundles/amq-streams/base/
     #  - ../../bundles/amq-broker/base/
     #  - ../../bundles/postgres/base/
