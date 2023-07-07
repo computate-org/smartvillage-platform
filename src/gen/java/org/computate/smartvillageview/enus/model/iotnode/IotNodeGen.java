@@ -264,7 +264,9 @@ public abstract class IotNodeGen<DEV> extends BaseResult {
 		Wrap<JsonObject> jsonWrap = new Wrap<JsonObject>().var("json");
 		if(json == null) {
 			_json(jsonWrap);
-			setJson(jsonWrap.o);
+			Optional.ofNullable(jsonWrap.getO()).ifPresent(o -> {
+				setJson(o);
+			});
 		}
 		return (IotNode)this;
 	}
@@ -318,7 +320,9 @@ public abstract class IotNodeGen<DEV> extends BaseResult {
 		Wrap<String> nodeNameWrap = new Wrap<String>().var("nodeName");
 		if(nodeName == null) {
 			_nodeName(nodeNameWrap);
-			setNodeName(nodeNameWrap.o);
+			Optional.ofNullable(nodeNameWrap.getO()).ifPresent(o -> {
+				setNodeName(o);
+			});
 		}
 		return (IotNode)this;
 	}
@@ -372,7 +376,9 @@ public abstract class IotNodeGen<DEV> extends BaseResult {
 		Wrap<String> nodeTypeWrap = new Wrap<String>().var("nodeType");
 		if(nodeType == null) {
 			_nodeType(nodeTypeWrap);
-			setNodeType(nodeTypeWrap.o);
+			Optional.ofNullable(nodeTypeWrap.getO()).ifPresent(o -> {
+				setNodeType(o);
+			});
 		}
 		return (IotNode)this;
 	}
@@ -426,7 +432,9 @@ public abstract class IotNodeGen<DEV> extends BaseResult {
 		Wrap<String> nodeIdWrap = new Wrap<String>().var("nodeId");
 		if(nodeId == null) {
 			_nodeId(nodeIdWrap);
-			setNodeId(nodeIdWrap.o);
+			Optional.ofNullable(nodeIdWrap.getO()).ifPresent(o -> {
+				setNodeId(o);
+			});
 		}
 		return (IotNode)this;
 	}
@@ -492,7 +500,9 @@ public abstract class IotNodeGen<DEV> extends BaseResult {
 		Wrap<Point> locationWrap = new Wrap<Point>().var("location");
 		if(location == null) {
 			_location(locationWrap);
-			setLocation(locationWrap.o);
+			Optional.ofNullable(locationWrap.getO()).ifPresent(o -> {
+				setLocation(o);
+			});
 		}
 		return (IotNode)this;
 	}
@@ -567,7 +577,9 @@ public abstract class IotNodeGen<DEV> extends BaseResult {
 		Wrap<BigDecimal> json_moistureWrap = new Wrap<BigDecimal>().var("json_moisture");
 		if(json_moisture == null) {
 			_json_moisture(json_moistureWrap);
-			setJson_moisture(json_moistureWrap.o);
+			Optional.ofNullable(json_moistureWrap.getO()).ifPresent(o -> {
+				setJson_moisture(o);
+			});
 		}
 		return (IotNode)this;
 	}
@@ -638,7 +650,9 @@ public abstract class IotNodeGen<DEV> extends BaseResult {
 		Wrap<BigDecimal> json_moisture0Wrap = new Wrap<BigDecimal>().var("json_moisture0");
 		if(json_moisture0 == null) {
 			_json_moisture0(json_moisture0Wrap);
-			setJson_moisture0(json_moisture0Wrap.o);
+			Optional.ofNullable(json_moisture0Wrap.getO()).ifPresent(o -> {
+				setJson_moisture0(o);
+			});
 		}
 		return (IotNode)this;
 	}
@@ -709,7 +723,9 @@ public abstract class IotNodeGen<DEV> extends BaseResult {
 		Wrap<BigDecimal> json_moisture1Wrap = new Wrap<BigDecimal>().var("json_moisture1");
 		if(json_moisture1 == null) {
 			_json_moisture1(json_moisture1Wrap);
-			setJson_moisture1(json_moisture1Wrap.o);
+			Optional.ofNullable(json_moisture1Wrap.getO()).ifPresent(o -> {
+				setJson_moisture1(o);
+			});
 		}
 		return (IotNode)this;
 	}
@@ -780,7 +796,9 @@ public abstract class IotNodeGen<DEV> extends BaseResult {
 		Wrap<BigDecimal> json_temperatureWrap = new Wrap<BigDecimal>().var("json_temperature");
 		if(json_temperature == null) {
 			_json_temperature(json_temperatureWrap);
-			setJson_temperature(json_temperatureWrap.o);
+			Optional.ofNullable(json_temperatureWrap.getO()).ifPresent(o -> {
+				setJson_temperature(o);
+			});
 		}
 		return (IotNode)this;
 	}
@@ -851,7 +869,9 @@ public abstract class IotNodeGen<DEV> extends BaseResult {
 		Wrap<BigDecimal> json_temperature0Wrap = new Wrap<BigDecimal>().var("json_temperature0");
 		if(json_temperature0 == null) {
 			_json_temperature0(json_temperature0Wrap);
-			setJson_temperature0(json_temperature0Wrap.o);
+			Optional.ofNullable(json_temperature0Wrap.getO()).ifPresent(o -> {
+				setJson_temperature0(o);
+			});
 		}
 		return (IotNode)this;
 	}
@@ -922,7 +942,9 @@ public abstract class IotNodeGen<DEV> extends BaseResult {
 		Wrap<BigDecimal> json_temperatureAverageWrap = new Wrap<BigDecimal>().var("json_temperatureAverage");
 		if(json_temperatureAverage == null) {
 			_json_temperatureAverage(json_temperatureAverageWrap);
-			setJson_temperatureAverage(json_temperatureAverageWrap.o);
+			Optional.ofNullable(json_temperatureAverageWrap.getO()).ifPresent(o -> {
+				setJson_temperatureAverage(o);
+			});
 		}
 		return (IotNode)this;
 	}
@@ -993,7 +1015,9 @@ public abstract class IotNodeGen<DEV> extends BaseResult {
 		Wrap<BigDecimal> json_badConditionsCounterWrap = new Wrap<BigDecimal>().var("json_badConditionsCounter");
 		if(json_badConditionsCounter == null) {
 			_json_badConditionsCounter(json_badConditionsCounterWrap);
-			setJson_badConditionsCounter(json_badConditionsCounterWrap.o);
+			Optional.ofNullable(json_badConditionsCounterWrap.getO()).ifPresent(o -> {
+				setJson_badConditionsCounter(o);
+			});
 		}
 		return (IotNode)this;
 	}
@@ -1043,7 +1067,9 @@ public abstract class IotNodeGen<DEV> extends BaseResult {
 		Wrap<String> json_doorWrap = new Wrap<String>().var("json_door");
 		if(json_door == null) {
 			_json_door(json_doorWrap);
-			setJson_door(json_doorWrap.o);
+			Optional.ofNullable(json_doorWrap.getO()).ifPresent(o -> {
+				setJson_door(o);
+			});
 		}
 		return (IotNode)this;
 	}
@@ -1098,7 +1124,9 @@ public abstract class IotNodeGen<DEV> extends BaseResult {
 		Wrap<Boolean> json_alarmDoorWrap = new Wrap<Boolean>().var("json_alarmDoor");
 		if(json_alarmDoor == null) {
 			_json_alarmDoor(json_alarmDoorWrap);
-			setJson_alarmDoor(json_alarmDoorWrap.o);
+			Optional.ofNullable(json_alarmDoorWrap.getO()).ifPresent(o -> {
+				setJson_alarmDoor(o);
+			});
 		}
 		return (IotNode)this;
 	}
@@ -1169,7 +1197,9 @@ public abstract class IotNodeGen<DEV> extends BaseResult {
 		Wrap<BigDecimal> json_floodWrap = new Wrap<BigDecimal>().var("json_flood");
 		if(json_flood == null) {
 			_json_flood(json_floodWrap);
-			setJson_flood(json_floodWrap.o);
+			Optional.ofNullable(json_floodWrap.getO()).ifPresent(o -> {
+				setJson_flood(o);
+			});
 		}
 		return (IotNode)this;
 	}
@@ -1224,7 +1254,9 @@ public abstract class IotNodeGen<DEV> extends BaseResult {
 		Wrap<Boolean> json_alarmFloodWrap = new Wrap<Boolean>().var("json_alarmFlood");
 		if(json_alarmFlood == null) {
 			_json_alarmFlood(json_alarmFloodWrap);
-			setJson_alarmFlood(json_alarmFloodWrap.o);
+			Optional.ofNullable(json_alarmFloodWrap.getO()).ifPresent(o -> {
+				setJson_alarmFlood(o);
+			});
 		}
 		return (IotNode)this;
 	}
@@ -1295,7 +1327,9 @@ public abstract class IotNodeGen<DEV> extends BaseResult {
 		Wrap<BigDecimal> json_lux2Wrap = new Wrap<BigDecimal>().var("json_lux2");
 		if(json_lux2 == null) {
 			_json_lux2(json_lux2Wrap);
-			setJson_lux2(json_lux2Wrap.o);
+			Optional.ofNullable(json_lux2Wrap.getO()).ifPresent(o -> {
+				setJson_lux2(o);
+			});
 		}
 		return (IotNode)this;
 	}
@@ -1366,7 +1400,9 @@ public abstract class IotNodeGen<DEV> extends BaseResult {
 		Wrap<BigDecimal> json_illuminanceWrap = new Wrap<BigDecimal>().var("json_illuminance");
 		if(json_illuminance == null) {
 			_json_illuminance(json_illuminanceWrap);
-			setJson_illuminance(json_illuminanceWrap.o);
+			Optional.ofNullable(json_illuminanceWrap.getO()).ifPresent(o -> {
+				setJson_illuminance(o);
+			});
 		}
 		return (IotNode)this;
 	}
@@ -1437,7 +1473,9 @@ public abstract class IotNodeGen<DEV> extends BaseResult {
 		Wrap<BigDecimal> json_resistance0Wrap = new Wrap<BigDecimal>().var("json_resistance0");
 		if(json_resistance0 == null) {
 			_json_resistance0(json_resistance0Wrap);
-			setJson_resistance0(json_resistance0Wrap.o);
+			Optional.ofNullable(json_resistance0Wrap.getO()).ifPresent(o -> {
+				setJson_resistance0(o);
+			});
 		}
 		return (IotNode)this;
 	}
@@ -1508,7 +1546,9 @@ public abstract class IotNodeGen<DEV> extends BaseResult {
 		Wrap<BigDecimal> json_resistance1Wrap = new Wrap<BigDecimal>().var("json_resistance1");
 		if(json_resistance1 == null) {
 			_json_resistance1(json_resistance1Wrap);
-			setJson_resistance1(json_resistance1Wrap.o);
+			Optional.ofNullable(json_resistance1Wrap.getO()).ifPresent(o -> {
+				setJson_resistance1(o);
+			});
 		}
 		return (IotNode)this;
 	}
@@ -1579,7 +1619,9 @@ public abstract class IotNodeGen<DEV> extends BaseResult {
 		Wrap<BigDecimal> json_frequencyWrap = new Wrap<BigDecimal>().var("json_frequency");
 		if(json_frequency == null) {
 			_json_frequency(json_frequencyWrap);
-			setJson_frequency(json_frequencyWrap.o);
+			Optional.ofNullable(json_frequencyWrap.getO()).ifPresent(o -> {
+				setJson_frequency(o);
+			});
 		}
 		return (IotNode)this;
 	}
@@ -1629,7 +1671,9 @@ public abstract class IotNodeGen<DEV> extends BaseResult {
 		Wrap<String> json_devEuiWrap = new Wrap<String>().var("json_devEui");
 		if(json_devEui == null) {
 			_json_devEui(json_devEuiWrap);
-			setJson_devEui(json_devEuiWrap.o);
+			Optional.ofNullable(json_devEuiWrap.getO()).ifPresent(o -> {
+				setJson_devEui(o);
+			});
 		}
 		return (IotNode)this;
 	}
@@ -1679,7 +1723,9 @@ public abstract class IotNodeGen<DEV> extends BaseResult {
 		Wrap<String> json_bandwidthWrap = new Wrap<String>().var("json_bandwidth");
 		if(json_bandwidth == null) {
 			_json_bandwidth(json_bandwidthWrap);
-			setJson_bandwidth(json_bandwidthWrap.o);
+			Optional.ofNullable(json_bandwidthWrap.getO()).ifPresent(o -> {
+				setJson_bandwidth(o);
+			});
 		}
 		return (IotNode)this;
 	}
@@ -1750,7 +1796,9 @@ public abstract class IotNodeGen<DEV> extends BaseResult {
 		Wrap<BigDecimal> json_dataRateWrap = new Wrap<BigDecimal>().var("json_dataRate");
 		if(json_dataRate == null) {
 			_json_dataRate(json_dataRateWrap);
-			setJson_dataRate(json_dataRateWrap.o);
+			Optional.ofNullable(json_dataRateWrap.getO()).ifPresent(o -> {
+				setJson_dataRate(o);
+			});
 		}
 		return (IotNode)this;
 	}
@@ -1821,7 +1869,9 @@ public abstract class IotNodeGen<DEV> extends BaseResult {
 		Wrap<BigDecimal> json_frameCountWrap = new Wrap<BigDecimal>().var("json_frameCount");
 		if(json_frameCount == null) {
 			_json_frameCount(json_frameCountWrap);
-			setJson_frameCount(json_frameCountWrap.o);
+			Optional.ofNullable(json_frameCountWrap.getO()).ifPresent(o -> {
+				setJson_frameCount(o);
+			});
 		}
 		return (IotNode)this;
 	}
@@ -1892,7 +1942,9 @@ public abstract class IotNodeGen<DEV> extends BaseResult {
 		Wrap<BigDecimal> json_maxPayloadWrap = new Wrap<BigDecimal>().var("json_maxPayload");
 		if(json_maxPayload == null) {
 			_json_maxPayload(json_maxPayloadWrap);
-			setJson_maxPayload(json_maxPayloadWrap.o);
+			Optional.ofNullable(json_maxPayloadWrap.getO()).ifPresent(o -> {
+				setJson_maxPayload(o);
+			});
 		}
 		return (IotNode)this;
 	}
@@ -1963,7 +2015,9 @@ public abstract class IotNodeGen<DEV> extends BaseResult {
 		Wrap<BigDecimal> json_bitsPerSecondWrap = new Wrap<BigDecimal>().var("json_bitsPerSecond");
 		if(json_bitsPerSecond == null) {
 			_json_bitsPerSecond(json_bitsPerSecondWrap);
-			setJson_bitsPerSecond(json_bitsPerSecondWrap.o);
+			Optional.ofNullable(json_bitsPerSecondWrap.getO()).ifPresent(o -> {
+				setJson_bitsPerSecond(o);
+			});
 		}
 		return (IotNode)this;
 	}
@@ -2034,7 +2088,9 @@ public abstract class IotNodeGen<DEV> extends BaseResult {
 		Wrap<BigDecimal> json_batteryVoltageWrap = new Wrap<BigDecimal>().var("json_batteryVoltage");
 		if(json_batteryVoltage == null) {
 			_json_batteryVoltage(json_batteryVoltageWrap);
-			setJson_batteryVoltage(json_batteryVoltageWrap.o);
+			Optional.ofNullable(json_batteryVoltageWrap.getO()).ifPresent(o -> {
+				setJson_batteryVoltage(o);
+			});
 		}
 		return (IotNode)this;
 	}
@@ -2105,7 +2161,9 @@ public abstract class IotNodeGen<DEV> extends BaseResult {
 		Wrap<BigDecimal> json_spreadingFactorWrap = new Wrap<BigDecimal>().var("json_spreadingFactor");
 		if(json_spreadingFactor == null) {
 			_json_spreadingFactor(json_spreadingFactorWrap);
-			setJson_spreadingFactor(json_spreadingFactorWrap.o);
+			Optional.ofNullable(json_spreadingFactorWrap.getO()).ifPresent(o -> {
+				setJson_spreadingFactor(o);
+			});
 		}
 		return (IotNode)this;
 	}
@@ -2160,7 +2218,9 @@ public abstract class IotNodeGen<DEV> extends BaseResult {
 		Wrap<Boolean> json_dataRateAdaptiveWrap = new Wrap<Boolean>().var("json_dataRateAdaptive");
 		if(json_dataRateAdaptive == null) {
 			_json_dataRateAdaptive(json_dataRateAdaptiveWrap);
-			setJson_dataRateAdaptive(json_dataRateAdaptiveWrap.o);
+			Optional.ofNullable(json_dataRateAdaptiveWrap.getO()).ifPresent(o -> {
+				setJson_dataRateAdaptive(o);
+			});
 		}
 		return (IotNode)this;
 	}
@@ -2210,7 +2270,9 @@ public abstract class IotNodeGen<DEV> extends BaseResult {
 		Wrap<String> json_swversionWrap = new Wrap<String>().var("json_swversion");
 		if(json_swversion == null) {
 			_json_swversion(json_swversionWrap);
-			setJson_swversion(json_swversionWrap.o);
+			Optional.ofNullable(json_swversionWrap.getO()).ifPresent(o -> {
+				setJson_swversion(o);
+			});
 		}
 		return (IotNode)this;
 	}
@@ -2281,7 +2343,9 @@ public abstract class IotNodeGen<DEV> extends BaseResult {
 		Wrap<BigDecimal> json_batteryLevelWrap = new Wrap<BigDecimal>().var("json_batteryLevel");
 		if(json_batteryLevel == null) {
 			_json_batteryLevel(json_batteryLevelWrap);
-			setJson_batteryLevel(json_batteryLevelWrap.o);
+			Optional.ofNullable(json_batteryLevelWrap.getO()).ifPresent(o -> {
+				setJson_batteryLevel(o);
+			});
 		}
 		return (IotNode)this;
 	}
@@ -2352,7 +2416,9 @@ public abstract class IotNodeGen<DEV> extends BaseResult {
 		Wrap<BigDecimal> json_startUpCountWrap = new Wrap<BigDecimal>().var("json_startUpCount");
 		if(json_startUpCount == null) {
 			_json_startUpCount(json_startUpCountWrap);
-			setJson_startUpCount(json_startUpCountWrap.o);
+			Optional.ofNullable(json_startUpCountWrap.getO()).ifPresent(o -> {
+				setJson_startUpCount(o);
+			});
 		}
 		return (IotNode)this;
 	}
@@ -2423,7 +2489,9 @@ public abstract class IotNodeGen<DEV> extends BaseResult {
 		Wrap<BigDecimal> json_watchdogCountWrap = new Wrap<BigDecimal>().var("json_watchdogCount");
 		if(json_watchdogCount == null) {
 			_json_watchdogCount(json_watchdogCountWrap);
-			setJson_watchdogCount(json_watchdogCountWrap.o);
+			Optional.ofNullable(json_watchdogCountWrap.getO()).ifPresent(o -> {
+				setJson_watchdogCount(o);
+			});
 		}
 		return (IotNode)this;
 	}
@@ -2494,7 +2562,9 @@ public abstract class IotNodeGen<DEV> extends BaseResult {
 		Wrap<BigDecimal> json_historySequenceWrap = new Wrap<BigDecimal>().var("json_historySequence");
 		if(json_historySequence == null) {
 			_json_historySequence(json_historySequenceWrap);
-			setJson_historySequence(json_historySequenceWrap.o);
+			Optional.ofNullable(json_historySequenceWrap.getO()).ifPresent(o -> {
+				setJson_historySequence(o);
+			});
 		}
 		return (IotNode)this;
 	}
@@ -2544,7 +2614,9 @@ public abstract class IotNodeGen<DEV> extends BaseResult {
 		Wrap<String> json_versionFirmwareWrap = new Wrap<String>().var("json_versionFirmware");
 		if(json_versionFirmware == null) {
 			_json_versionFirmware(json_versionFirmwareWrap);
-			setJson_versionFirmware(json_versionFirmwareWrap.o);
+			Optional.ofNullable(json_versionFirmwareWrap.getO()).ifPresent(o -> {
+				setJson_versionFirmware(o);
+			});
 		}
 		return (IotNode)this;
 	}
@@ -2615,7 +2687,9 @@ public abstract class IotNodeGen<DEV> extends BaseResult {
 		Wrap<BigDecimal> json_stackTxFailRebootCountWrap = new Wrap<BigDecimal>().var("json_stackTxFailRebootCount");
 		if(json_stackTxFailRebootCount == null) {
 			_json_stackTxFailRebootCount(json_stackTxFailRebootCountWrap);
-			setJson_stackTxFailRebootCount(json_stackTxFailRebootCountWrap.o);
+			Optional.ofNullable(json_stackTxFailRebootCountWrap.getO()).ifPresent(o -> {
+				setJson_stackTxFailRebootCount(o);
+			});
 		}
 		return (IotNode)this;
 	}
@@ -2686,7 +2760,9 @@ public abstract class IotNodeGen<DEV> extends BaseResult {
 		Wrap<BigDecimal> json_historySequencePreviousWrap = new Wrap<BigDecimal>().var("json_historySequencePrevious");
 		if(json_historySequencePrevious == null) {
 			_json_historySequencePrevious(json_historySequencePreviousWrap);
-			setJson_historySequencePrevious(json_historySequencePreviousWrap.o);
+			Optional.ofNullable(json_historySequencePreviousWrap.getO()).ifPresent(o -> {
+				setJson_historySequencePrevious(o);
+			});
 		}
 		return (IotNode)this;
 	}
@@ -2757,7 +2833,9 @@ public abstract class IotNodeGen<DEV> extends BaseResult {
 		Wrap<BigDecimal> json_snrWrap = new Wrap<BigDecimal>().var("json_snr");
 		if(json_snr == null) {
 			_json_snr(json_snrWrap);
-			setJson_snr(json_snrWrap.o);
+			Optional.ofNullable(json_snrWrap.getO()).ifPresent(o -> {
+				setJson_snr(o);
+			});
 		}
 		return (IotNode)this;
 	}
@@ -2828,7 +2906,9 @@ public abstract class IotNodeGen<DEV> extends BaseResult {
 		Wrap<BigDecimal> json_rssiWrap = new Wrap<BigDecimal>().var("json_rssi");
 		if(json_rssi == null) {
 			_json_rssi(json_rssiWrap);
-			setJson_rssi(json_rssiWrap.o);
+			Optional.ofNullable(json_rssiWrap.getO()).ifPresent(o -> {
+				setJson_rssi(o);
+			});
 		}
 		return (IotNode)this;
 	}

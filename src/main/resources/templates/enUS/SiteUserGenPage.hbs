@@ -460,28 +460,11 @@
 						<span class="w3-button w3-display-topright " onclick="$('#postSiteUserModal').hide(); ">×</span>
 	{{/eq}}
 						<h2 class="w3-padding ">Create a site user</h2>
+						<div class="">You can override any default values below: </div>
 					</header>
 					<div class="" id="postSiteUserFormValues">
 						<div id="postSiteUserForm">
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmCreated" roleRequired="true"}}
-{{else}}
-{{> "htmCreated" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmArchived" roleRequired="true"}}
-{{else}}
-{{> "htmArchived" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmDeleted" roleRequired="true"}}
-{{else}}
-{{> "htmDeleted" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-							</div>
+{{#block "htmFormButton_postSiteUser"}}{{/block}}
 							<div class="w3-cell-row ">
 {{#ifContainsAnyRoles roles roleRequired}}
 {{> "htmSeeArchived" roleRequired="true"}}

@@ -150,7 +150,9 @@ public abstract class BicycleStepGenPageGen<DEV> extends MapResultPage {
 		Wrap<SearchList<BicycleStep>> searchListBicycleStep_Wrap = new Wrap<SearchList<BicycleStep>>().var("searchListBicycleStep_");
 		if(searchListBicycleStep_ == null) {
 			_searchListBicycleStep_(searchListBicycleStep_Wrap);
-			setSearchListBicycleStep_(searchListBicycleStep_Wrap.o);
+			Optional.ofNullable(searchListBicycleStep_Wrap.getO()).ifPresent(o -> {
+				setSearchListBicycleStep_(o);
+			});
 		}
 		return (BicycleStepGenPage)this;
 	}
@@ -250,7 +252,9 @@ public abstract class BicycleStepGenPageGen<DEV> extends MapResultPage {
 		Wrap<Integer> bicycleStepCountWrap = new Wrap<Integer>().var("bicycleStepCount");
 		if(bicycleStepCount == null) {
 			_bicycleStepCount(bicycleStepCountWrap);
-			setBicycleStepCount(bicycleStepCountWrap.o);
+			Optional.ofNullable(bicycleStepCountWrap.getO()).ifPresent(o -> {
+				setBicycleStepCount(o);
+			});
 		}
 		return (BicycleStepGenPage)this;
 	}
@@ -301,7 +305,9 @@ public abstract class BicycleStepGenPageGen<DEV> extends MapResultPage {
 		Wrap<BicycleStep> bicycleStep_Wrap = new Wrap<BicycleStep>().var("bicycleStep_");
 		if(bicycleStep_ == null) {
 			_bicycleStep_(bicycleStep_Wrap);
-			setBicycleStep_(bicycleStep_Wrap.o);
+			Optional.ofNullable(bicycleStep_Wrap.getO()).ifPresent(o -> {
+				setBicycleStep_(o);
+			});
 		}
 		return (BicycleStepGenPage)this;
 	}
@@ -339,7 +345,9 @@ public abstract class BicycleStepGenPageGen<DEV> extends MapResultPage {
 		Wrap<String> idWrap = new Wrap<String>().var("id");
 		if(id == null) {
 			_id(idWrap);
-			setId(idWrap.o);
+			Optional.ofNullable(idWrap.getO()).ifPresent(o -> {
+				setId(o);
+			});
 		}
 		return (BicycleStepGenPage)this;
 	}
@@ -389,7 +397,9 @@ public abstract class BicycleStepGenPageGen<DEV> extends MapResultPage {
 		Wrap<String> pageUriBicycleStepWrap = new Wrap<String>().var("pageUriBicycleStep");
 		if(pageUriBicycleStep == null) {
 			_pageUriBicycleStep(pageUriBicycleStepWrap);
-			setPageUriBicycleStep(pageUriBicycleStepWrap.o);
+			Optional.ofNullable(pageUriBicycleStepWrap.getO()).ifPresent(o -> {
+				setPageUriBicycleStep(o);
+			});
 		}
 		return (BicycleStepGenPage)this;
 	}

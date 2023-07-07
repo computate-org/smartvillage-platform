@@ -255,7 +255,9 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 		Wrap<String> githubOrgWrap = new Wrap<String>().var("githubOrg");
 		if(githubOrg == null) {
 			_githubOrg(githubOrgWrap);
-			setGithubOrg(githubOrgWrap.o);
+			Optional.ofNullable(githubOrgWrap.getO()).ifPresent(o -> {
+				setGithubOrg(o);
+			});
 		}
 		return (SitePage)this;
 	}
@@ -305,7 +307,9 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 		Wrap<String> siteNameWrap = new Wrap<String>().var("siteName");
 		if(siteName == null) {
 			_siteName(siteNameWrap);
-			setSiteName(siteNameWrap.o);
+			Optional.ofNullable(siteNameWrap.getO()).ifPresent(o -> {
+				setSiteName(o);
+			});
 		}
 		return (SitePage)this;
 	}
@@ -355,7 +359,9 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 		Wrap<String> siteDisplayNameWrap = new Wrap<String>().var("siteDisplayName");
 		if(siteDisplayName == null) {
 			_siteDisplayName(siteDisplayNameWrap);
-			setSiteDisplayName(siteDisplayNameWrap.o);
+			Optional.ofNullable(siteDisplayNameWrap.getO()).ifPresent(o -> {
+				setSiteDisplayName(o);
+			});
 		}
 		return (SitePage)this;
 	}
@@ -405,7 +411,9 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 		Wrap<String> sitePublicUrlWrap = new Wrap<String>().var("sitePublicUrl");
 		if(sitePublicUrl == null) {
 			_sitePublicUrl(sitePublicUrlWrap);
-			setSitePublicUrl(sitePublicUrlWrap.o);
+			Optional.ofNullable(sitePublicUrlWrap.getO()).ifPresent(o -> {
+				setSitePublicUrl(o);
+			});
 		}
 		return (SitePage)this;
 	}
@@ -455,7 +463,9 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 		Wrap<String> mailingListUrlWrap = new Wrap<String>().var("mailingListUrl");
 		if(mailingListUrl == null) {
 			_mailingListUrl(mailingListUrlWrap);
-			setMailingListUrl(mailingListUrlWrap.o);
+			Optional.ofNullable(mailingListUrlWrap.getO()).ifPresent(o -> {
+				setMailingListUrl(o);
+			});
 		}
 		return (SitePage)this;
 	}
@@ -505,7 +515,9 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 		Wrap<String> quayioOrgWrap = new Wrap<String>().var("quayioOrg");
 		if(quayioOrg == null) {
 			_quayioOrg(quayioOrgWrap);
-			setQuayioOrg(quayioOrgWrap.o);
+			Optional.ofNullable(quayioOrgWrap.getO()).ifPresent(o -> {
+				setQuayioOrg(o);
+			});
 		}
 		return (SitePage)this;
 	}
@@ -555,7 +567,9 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 		Wrap<String> sitePomGroupIdWrap = new Wrap<String>().var("sitePomGroupId");
 		if(sitePomGroupId == null) {
 			_sitePomGroupId(sitePomGroupIdWrap);
-			setSitePomGroupId(sitePomGroupIdWrap.o);
+			Optional.ofNullable(sitePomGroupIdWrap.getO()).ifPresent(o -> {
+				setSitePomGroupId(o);
+			});
 		}
 		return (SitePage)this;
 	}
@@ -605,7 +619,9 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 		Wrap<String> staticBaseUrlWrap = new Wrap<String>().var("staticBaseUrl");
 		if(staticBaseUrl == null) {
 			_staticBaseUrl(staticBaseUrlWrap);
-			setStaticBaseUrl(staticBaseUrlWrap.o);
+			Optional.ofNullable(staticBaseUrlWrap.getO()).ifPresent(o -> {
+				setStaticBaseUrl(o);
+			});
 		}
 		return (SitePage)this;
 	}
@@ -655,7 +671,9 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 		Wrap<String> staticPathWrap = new Wrap<String>().var("staticPath");
 		if(staticPath == null) {
 			_staticPath(staticPathWrap);
-			setStaticPath(staticPathWrap.o);
+			Optional.ofNullable(staticPathWrap.getO()).ifPresent(o -> {
+				setStaticPath(o);
+			});
 		}
 		return (SitePage)this;
 	}
@@ -705,7 +723,9 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 		Wrap<String> siteBaseUrlWrap = new Wrap<String>().var("siteBaseUrl");
 		if(siteBaseUrl == null) {
 			_siteBaseUrl(siteBaseUrlWrap);
-			setSiteBaseUrl(siteBaseUrlWrap.o);
+			Optional.ofNullable(siteBaseUrlWrap.getO()).ifPresent(o -> {
+				setSiteBaseUrl(o);
+			});
 		}
 		return (SitePage)this;
 	}
@@ -763,7 +783,9 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 		Wrap<Integer> courseNumWrap = new Wrap<Integer>().var("courseNum");
 		if(courseNum == null) {
 			_courseNum(courseNumWrap);
-			setCourseNum(courseNumWrap.o);
+			Optional.ofNullable(courseNumWrap.getO()).ifPresent(o -> {
+				setCourseNum(o);
+			});
 		}
 		return (SitePage)this;
 	}
@@ -825,7 +847,9 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 		Wrap<Integer> lessonNumWrap = new Wrap<Integer>().var("lessonNum");
 		if(lessonNum == null) {
 			_lessonNum(lessonNumWrap);
-			setLessonNum(lessonNumWrap.o);
+			Optional.ofNullable(lessonNumWrap.getO()).ifPresent(o -> {
+				setLessonNum(o);
+			});
 		}
 		return (SitePage)this;
 	}
@@ -879,7 +903,9 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 		Wrap<String> urlWrap = new Wrap<String>().var("url");
 		if(url == null) {
 			_url(urlWrap);
-			setUrl(urlWrap.o);
+			Optional.ofNullable(urlWrap.getO()).ifPresent(o -> {
+				setUrl(o);
+			});
 		}
 		return (SitePage)this;
 	}
@@ -933,7 +959,9 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 		Wrap<String> uriWrap = new Wrap<String>().var("uri");
 		if(uri == null) {
 			_uri(uriWrap);
-			setUri(uriWrap.o);
+			Optional.ofNullable(uriWrap.getO()).ifPresent(o -> {
+				setUri(o);
+			});
 		}
 		return (SitePage)this;
 	}
@@ -987,7 +1015,9 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 		Wrap<String> pageIdWrap = new Wrap<String>().var("pageId");
 		if(pageId == null) {
 			_pageId(pageIdWrap);
-			setPageId(pageIdWrap.o);
+			Optional.ofNullable(pageIdWrap.getO()).ifPresent(o -> {
+				setPageId(o);
+			});
 		}
 		return (SitePage)this;
 	}
@@ -1041,7 +1071,9 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 		Wrap<String> h1Wrap = new Wrap<String>().var("h1");
 		if(h1 == null) {
 			_h1(h1Wrap);
-			setH1(h1Wrap.o);
+			Optional.ofNullable(h1Wrap.getO()).ifPresent(o -> {
+				setH1(o);
+			});
 		}
 		return (SitePage)this;
 	}
@@ -1095,7 +1127,9 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 		Wrap<String> h2Wrap = new Wrap<String>().var("h2");
 		if(h2 == null) {
 			_h2(h2Wrap);
-			setH2(h2Wrap.o);
+			Optional.ofNullable(h2Wrap.getO()).ifPresent(o -> {
+				setH2(o);
+			});
 		}
 		return (SitePage)this;
 	}
@@ -1149,7 +1183,9 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 		Wrap<String> authorWrap = new Wrap<String>().var("author");
 		if(author == null) {
 			_author(authorWrap);
-			setAuthor(authorWrap.o);
+			Optional.ofNullable(authorWrap.getO()).ifPresent(o -> {
+				setAuthor(o);
+			});
 		}
 		return (SitePage)this;
 	}
@@ -1203,7 +1239,9 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 		Wrap<String> pageImageUriWrap = new Wrap<String>().var("pageImageUri");
 		if(pageImageUri == null) {
 			_pageImageUri(pageImageUriWrap);
-			setPageImageUri(pageImageUriWrap.o);
+			Optional.ofNullable(pageImageUriWrap.getO()).ifPresent(o -> {
+				setPageImageUri(o);
+			});
 		}
 		return (SitePage)this;
 	}
@@ -1265,7 +1303,9 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 		Wrap<Integer> pageImageWidthWrap = new Wrap<Integer>().var("pageImageWidth");
 		if(pageImageWidth == null) {
 			_pageImageWidth(pageImageWidthWrap);
-			setPageImageWidth(pageImageWidthWrap.o);
+			Optional.ofNullable(pageImageWidthWrap.getO()).ifPresent(o -> {
+				setPageImageWidth(o);
+			});
 		}
 		return (SitePage)this;
 	}
@@ -1323,7 +1363,9 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 		Wrap<Integer> pageImageHeightWrap = new Wrap<Integer>().var("pageImageHeight");
 		if(pageImageHeight == null) {
 			_pageImageHeight(pageImageHeightWrap);
-			setPageImageHeight(pageImageHeightWrap.o);
+			Optional.ofNullable(pageImageHeightWrap.getO()).ifPresent(o -> {
+				setPageImageHeight(o);
+			});
 		}
 		return (SitePage)this;
 	}
@@ -1373,7 +1415,9 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 		Wrap<String> pageImageTypeWrap = new Wrap<String>().var("pageImageType");
 		if(pageImageType == null) {
 			_pageImageType(pageImageTypeWrap);
-			setPageImageType(pageImageTypeWrap.o);
+			Optional.ofNullable(pageImageTypeWrap.getO()).ifPresent(o -> {
+				setPageImageType(o);
+			});
 		}
 		return (SitePage)this;
 	}

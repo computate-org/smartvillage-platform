@@ -344,7 +344,9 @@ public abstract class SiteUserGen<DEV> extends BaseModel {
 		Wrap<String> userIdWrap = new Wrap<String>().var("userId");
 		if(userId == null) {
 			_userId(userIdWrap);
-			setUserId(userIdWrap.o);
+			Optional.ofNullable(userIdWrap.getO()).ifPresent(o -> {
+				setUserId(o);
+			});
 		}
 		return (SiteUser)this;
 	}
@@ -398,7 +400,9 @@ public abstract class SiteUserGen<DEV> extends BaseModel {
 		Wrap<String> userNameWrap = new Wrap<String>().var("userName");
 		if(userName == null) {
 			_userName(userNameWrap);
-			setUserName(userNameWrap.o);
+			Optional.ofNullable(userNameWrap.getO()).ifPresent(o -> {
+				setUserName(o);
+			});
 		}
 		return (SiteUser)this;
 	}
@@ -452,7 +456,9 @@ public abstract class SiteUserGen<DEV> extends BaseModel {
 		Wrap<String> userEmailWrap = new Wrap<String>().var("userEmail");
 		if(userEmail == null) {
 			_userEmail(userEmailWrap);
-			setUserEmail(userEmailWrap.o);
+			Optional.ofNullable(userEmailWrap.getO()).ifPresent(o -> {
+				setUserEmail(o);
+			});
 		}
 		return (SiteUser)this;
 	}
@@ -506,7 +512,9 @@ public abstract class SiteUserGen<DEV> extends BaseModel {
 		Wrap<String> userFirstNameWrap = new Wrap<String>().var("userFirstName");
 		if(userFirstName == null) {
 			_userFirstName(userFirstNameWrap);
-			setUserFirstName(userFirstNameWrap.o);
+			Optional.ofNullable(userFirstNameWrap.getO()).ifPresent(o -> {
+				setUserFirstName(o);
+			});
 		}
 		return (SiteUser)this;
 	}
@@ -560,7 +568,9 @@ public abstract class SiteUserGen<DEV> extends BaseModel {
 		Wrap<String> userLastNameWrap = new Wrap<String>().var("userLastName");
 		if(userLastName == null) {
 			_userLastName(userLastNameWrap);
-			setUserLastName(userLastNameWrap.o);
+			Optional.ofNullable(userLastNameWrap.getO()).ifPresent(o -> {
+				setUserLastName(o);
+			});
 		}
 		return (SiteUser)this;
 	}
@@ -614,7 +624,9 @@ public abstract class SiteUserGen<DEV> extends BaseModel {
 		Wrap<String> userFullNameWrap = new Wrap<String>().var("userFullName");
 		if(userFullName == null) {
 			_userFullName(userFullNameWrap);
-			setUserFullName(userFullNameWrap.o);
+			Optional.ofNullable(userFullNameWrap.getO()).ifPresent(o -> {
+				setUserFullName(o);
+			});
 		}
 		return (SiteUser)this;
 	}
@@ -673,7 +685,9 @@ public abstract class SiteUserGen<DEV> extends BaseModel {
 		Wrap<Boolean> seeArchivedWrap = new Wrap<Boolean>().var("seeArchived");
 		if(seeArchived == null) {
 			_seeArchived(seeArchivedWrap);
-			setSeeArchived(seeArchivedWrap.o);
+			Optional.ofNullable(seeArchivedWrap.getO()).ifPresent(o -> {
+				setSeeArchived(o);
+			});
 		}
 		return (SiteUser)this;
 	}
@@ -732,7 +746,9 @@ public abstract class SiteUserGen<DEV> extends BaseModel {
 		Wrap<Boolean> seeDeletedWrap = new Wrap<Boolean>().var("seeDeleted");
 		if(seeDeleted == null) {
 			_seeDeleted(seeDeletedWrap);
-			setSeeDeleted(seeDeletedWrap.o);
+			Optional.ofNullable(seeDeletedWrap.getO()).ifPresent(o -> {
+				setSeeDeleted(o);
+			});
 		}
 		return (SiteUser)this;
 	}

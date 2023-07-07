@@ -185,7 +185,9 @@ public abstract class BaseModelGen<DEV> extends Object {
 		Wrap<SiteRequestEnUS> siteRequest_Wrap = new Wrap<SiteRequestEnUS>().var("siteRequest_");
 		if(siteRequest_ == null) {
 			_siteRequest_(siteRequest_Wrap);
-			setSiteRequest_(siteRequest_Wrap.o);
+			Optional.ofNullable(siteRequest_Wrap.getO()).ifPresent(o -> {
+				setSiteRequest_(o);
+			});
 		}
 		return (BaseModel)this;
 	}
@@ -231,7 +233,9 @@ public abstract class BaseModelGen<DEV> extends Object {
 		Wrap<Long> pkWrap = new Wrap<Long>().var("pk");
 		if(pk == null) {
 			_pk(pkWrap);
-			setPk(pkWrap.o);
+			Optional.ofNullable(pkWrap.getO()).ifPresent(o -> {
+				setPk(o);
+			});
 		}
 		return (BaseModel)this;
 	}
@@ -281,7 +285,9 @@ public abstract class BaseModelGen<DEV> extends Object {
 		Wrap<String> inheritPkWrap = new Wrap<String>().var("inheritPk");
 		if(inheritPk == null) {
 			_inheritPk(inheritPkWrap);
-			setInheritPk(inheritPkWrap.o);
+			Optional.ofNullable(inheritPkWrap.getO()).ifPresent(o -> {
+				setInheritPk(o);
+			});
 		}
 		return (BaseModel)this;
 	}
@@ -359,7 +365,9 @@ public abstract class BaseModelGen<DEV> extends Object {
 		Wrap<ZonedDateTime> createdWrap = new Wrap<ZonedDateTime>().var("created");
 		if(created == null) {
 			_created(createdWrap);
-			setCreated(createdWrap.o);
+			Optional.ofNullable(createdWrap.getO()).ifPresent(o -> {
+				setCreated(o);
+			});
 		}
 		return (BaseModel)this;
 	}
@@ -437,7 +445,9 @@ public abstract class BaseModelGen<DEV> extends Object {
 		Wrap<ZonedDateTime> modifiedWrap = new Wrap<ZonedDateTime>().var("modified");
 		if(modified == null) {
 			_modified(modifiedWrap);
-			setModified(modifiedWrap.o);
+			Optional.ofNullable(modifiedWrap.getO()).ifPresent(o -> {
+				setModified(o);
+			});
 		}
 		return (BaseModel)this;
 	}
@@ -492,7 +502,9 @@ public abstract class BaseModelGen<DEV> extends Object {
 		Wrap<Boolean> archivedWrap = new Wrap<Boolean>().var("archived");
 		if(archived == null) {
 			_archived(archivedWrap);
-			setArchived(archivedWrap.o);
+			Optional.ofNullable(archivedWrap.getO()).ifPresent(o -> {
+				setArchived(o);
+			});
 		}
 		return (BaseModel)this;
 	}
@@ -551,7 +563,9 @@ public abstract class BaseModelGen<DEV> extends Object {
 		Wrap<Boolean> deletedWrap = new Wrap<Boolean>().var("deleted");
 		if(deleted == null) {
 			_deleted(deletedWrap);
-			setDeleted(deletedWrap.o);
+			Optional.ofNullable(deletedWrap.getO()).ifPresent(o -> {
+				setDeleted(o);
+			});
 		}
 		return (BaseModel)this;
 	}
@@ -605,7 +619,9 @@ public abstract class BaseModelGen<DEV> extends Object {
 		Wrap<String> classCanonicalNameWrap = new Wrap<String>().var("classCanonicalName");
 		if(classCanonicalName == null) {
 			_classCanonicalName(classCanonicalNameWrap);
-			setClassCanonicalName(classCanonicalNameWrap.o);
+			Optional.ofNullable(classCanonicalNameWrap.getO()).ifPresent(o -> {
+				setClassCanonicalName(o);
+			});
 		}
 		return (BaseModel)this;
 	}
@@ -655,7 +671,9 @@ public abstract class BaseModelGen<DEV> extends Object {
 		Wrap<String> classSimpleNameWrap = new Wrap<String>().var("classSimpleName");
 		if(classSimpleName == null) {
 			_classSimpleName(classSimpleNameWrap);
-			setClassSimpleName(classSimpleNameWrap.o);
+			Optional.ofNullable(classSimpleNameWrap.getO()).ifPresent(o -> {
+				setClassSimpleName(o);
+			});
 		}
 		return (BaseModel)this;
 	}
@@ -775,7 +793,9 @@ public abstract class BaseModelGen<DEV> extends Object {
 		Wrap<String> sessionIdWrap = new Wrap<String>().var("sessionId");
 		if(sessionId == null) {
 			_sessionId(sessionIdWrap);
-			setSessionId(sessionIdWrap.o);
+			Optional.ofNullable(sessionIdWrap.getO()).ifPresent(o -> {
+				setSessionId(o);
+			});
 		}
 		return (BaseModel)this;
 	}
@@ -837,7 +857,9 @@ public abstract class BaseModelGen<DEV> extends Object {
 		Wrap<Long> userKeyWrap = new Wrap<Long>().var("userKey");
 		if(userKey == null) {
 			_userKey(userKeyWrap);
-			setUserKey(userKeyWrap.o);
+			Optional.ofNullable(userKeyWrap.getO()).ifPresent(o -> {
+				setUserKey(o);
+			});
 		}
 		return (BaseModel)this;
 	}
@@ -961,7 +983,9 @@ public abstract class BaseModelGen<DEV> extends Object {
 		Wrap<String> objectTitleWrap = new Wrap<String>().var("objectTitle");
 		if(objectTitle == null) {
 			_objectTitle(objectTitleWrap);
-			setObjectTitle(objectTitleWrap.o);
+			Optional.ofNullable(objectTitleWrap.getO()).ifPresent(o -> {
+				setObjectTitle(o);
+			});
 		}
 		return (BaseModel)this;
 	}
@@ -1011,7 +1035,9 @@ public abstract class BaseModelGen<DEV> extends Object {
 		Wrap<String> objectIdWrap = new Wrap<String>().var("objectId");
 		if(objectId == null) {
 			_objectId(objectIdWrap);
-			setObjectId(objectIdWrap.o);
+			Optional.ofNullable(objectIdWrap.getO()).ifPresent(o -> {
+				setObjectId(o);
+			});
 		}
 		return (BaseModel)this;
 	}
@@ -1061,7 +1087,9 @@ public abstract class BaseModelGen<DEV> extends Object {
 		Wrap<String> objectSuggestWrap = new Wrap<String>().var("objectSuggest");
 		if(objectSuggest == null) {
 			_objectSuggest(objectSuggestWrap);
-			setObjectSuggest(objectSuggestWrap.o);
+			Optional.ofNullable(objectSuggestWrap.getO()).ifPresent(o -> {
+				setObjectSuggest(o);
+			});
 		}
 		return (BaseModel)this;
 	}
@@ -1181,7 +1209,9 @@ public abstract class BaseModelGen<DEV> extends Object {
 		Wrap<String> pageUrlIdWrap = new Wrap<String>().var("pageUrlId");
 		if(pageUrlId == null) {
 			_pageUrlId(pageUrlIdWrap);
-			setPageUrlId(pageUrlIdWrap.o);
+			Optional.ofNullable(pageUrlIdWrap.getO()).ifPresent(o -> {
+				setPageUrlId(o);
+			});
 		}
 		return (BaseModel)this;
 	}
@@ -1231,7 +1261,9 @@ public abstract class BaseModelGen<DEV> extends Object {
 		Wrap<String> pageUrlPkWrap = new Wrap<String>().var("pageUrlPk");
 		if(pageUrlPk == null) {
 			_pageUrlPk(pageUrlPkWrap);
-			setPageUrlPk(pageUrlPkWrap.o);
+			Optional.ofNullable(pageUrlPkWrap.getO()).ifPresent(o -> {
+				setPageUrlPk(o);
+			});
 		}
 		return (BaseModel)this;
 	}
@@ -1281,7 +1313,9 @@ public abstract class BaseModelGen<DEV> extends Object {
 		Wrap<String> pageUrlApiWrap = new Wrap<String>().var("pageUrlApi");
 		if(pageUrlApi == null) {
 			_pageUrlApi(pageUrlApiWrap);
-			setPageUrlApi(pageUrlApiWrap.o);
+			Optional.ofNullable(pageUrlApiWrap.getO()).ifPresent(o -> {
+				setPageUrlApi(o);
+			});
 		}
 		return (BaseModel)this;
 	}
@@ -1331,7 +1365,9 @@ public abstract class BaseModelGen<DEV> extends Object {
 		Wrap<String> idWrap = new Wrap<String>().var("id");
 		if(id == null) {
 			_id(idWrap);
-			setId(idWrap.o);
+			Optional.ofNullable(idWrap.getO()).ifPresent(o -> {
+				setId(o);
+			});
 		}
 		return (BaseModel)this;
 	}

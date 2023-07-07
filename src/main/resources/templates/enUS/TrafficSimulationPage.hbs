@@ -31,7 +31,12 @@
 {{#partial "htmFormButton_patchTrafficSimulation"}}{{> htmFormButtonTrafficSimulationPage_patchTrafficSimulation classApiMethodMethod="PATCH"}}{{/partial}}
 {{#partial "htmButton_postTrafficSimulation"}}{{> htmButtonTrafficSimulationPage_postTrafficSimulation classApiMethodMethod="POST"}}{{/partial}}
 {{#partial "htmForm_postTrafficSimulation"}}{{> htmFormTrafficSimulationPage_postTrafficSimulation classApiMethodMethod="POST"}}{{/partial}}
-{{#partial "htmFormButton_postTrafficSimulation"}}{{> htmFormButtonTrafficSimulationPage_postTrafficSimulation classApiMethodMethod="POST"}}{{/partial}}
+{{#partial "htmFormButton_postTrafficSimulation"}}
+						<button
+							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-2017-shaded-spruce "
+							onclick="postTrafficSimulation($('#postTrafficSimulationForm')); "
+							>Create a traffic simulation and run a report</button>
+{{/partial}}
 {{#partial "htmButton_putimportTrafficSimulation"}}{{> htmButtonTrafficSimulationPage_putimportTrafficSimulation classApiMethodMethod="PUT"}}{{/partial}}
 {{#partial "htmForm_putimportTrafficSimulation"}}{{> htmFormTrafficSimulationPage_putimportTrafficSimulation classApiMethodMethod="PUT"}}{{/partial}}
 {{#partial "htmFormButton_putimportTrafficSimulation"}}{{> htmFormButtonTrafficSimulationPage_putimportTrafficSimulation classApiMethodMethod="PUT"}}{{/partial}}

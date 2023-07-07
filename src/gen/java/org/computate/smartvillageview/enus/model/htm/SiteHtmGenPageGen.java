@@ -150,7 +150,9 @@ public abstract class SiteHtmGenPageGen<DEV> extends BaseResultPage {
 		Wrap<SearchList<SiteHtm>> searchListSiteHtm_Wrap = new Wrap<SearchList<SiteHtm>>().var("searchListSiteHtm_");
 		if(searchListSiteHtm_ == null) {
 			_searchListSiteHtm_(searchListSiteHtm_Wrap);
-			setSearchListSiteHtm_(searchListSiteHtm_Wrap.o);
+			Optional.ofNullable(searchListSiteHtm_Wrap.getO()).ifPresent(o -> {
+				setSearchListSiteHtm_(o);
+			});
 		}
 		return (SiteHtmGenPage)this;
 	}
@@ -250,7 +252,9 @@ public abstract class SiteHtmGenPageGen<DEV> extends BaseResultPage {
 		Wrap<Integer> siteHtmCountWrap = new Wrap<Integer>().var("siteHtmCount");
 		if(siteHtmCount == null) {
 			_siteHtmCount(siteHtmCountWrap);
-			setSiteHtmCount(siteHtmCountWrap.o);
+			Optional.ofNullable(siteHtmCountWrap.getO()).ifPresent(o -> {
+				setSiteHtmCount(o);
+			});
 		}
 		return (SiteHtmGenPage)this;
 	}
@@ -301,7 +305,9 @@ public abstract class SiteHtmGenPageGen<DEV> extends BaseResultPage {
 		Wrap<SiteHtm> siteHtm_Wrap = new Wrap<SiteHtm>().var("siteHtm_");
 		if(siteHtm_ == null) {
 			_siteHtm_(siteHtm_Wrap);
-			setSiteHtm_(siteHtm_Wrap.o);
+			Optional.ofNullable(siteHtm_Wrap.getO()).ifPresent(o -> {
+				setSiteHtm_(o);
+			});
 		}
 		return (SiteHtmGenPage)this;
 	}
@@ -339,7 +345,9 @@ public abstract class SiteHtmGenPageGen<DEV> extends BaseResultPage {
 		Wrap<String> idWrap = new Wrap<String>().var("id");
 		if(id == null) {
 			_id(idWrap);
-			setId(idWrap.o);
+			Optional.ofNullable(idWrap.getO()).ifPresent(o -> {
+				setId(o);
+			});
 		}
 		return (SiteHtmGenPage)this;
 	}
@@ -389,7 +397,9 @@ public abstract class SiteHtmGenPageGen<DEV> extends BaseResultPage {
 		Wrap<String> pageUriSiteHtmWrap = new Wrap<String>().var("pageUriSiteHtm");
 		if(pageUriSiteHtm == null) {
 			_pageUriSiteHtm(pageUriSiteHtmWrap);
-			setPageUriSiteHtm(pageUriSiteHtmWrap.o);
+			Optional.ofNullable(pageUriSiteHtmWrap.getO()).ifPresent(o -> {
+				setPageUriSiteHtm(o);
+			});
 		}
 		return (SiteHtmGenPage)this;
 	}

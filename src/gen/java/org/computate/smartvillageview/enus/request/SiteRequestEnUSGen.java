@@ -140,7 +140,9 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 		Wrap<JsonObject> configWrap = new Wrap<JsonObject>().var("config");
 		if(config == null) {
 			_config(configWrap);
-			setConfig(configWrap.o);
+			Optional.ofNullable(configWrap.getO()).ifPresent(o -> {
+				setConfig(o);
+			});
 		}
 		return (SiteRequestEnUS)this;
 	}
@@ -191,7 +193,9 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 		Wrap<SiteRequestEnUS> siteRequest_Wrap = new Wrap<SiteRequestEnUS>().var("siteRequest_");
 		if(siteRequest_ == null) {
 			_siteRequest_(siteRequest_Wrap);
-			setSiteRequest_(siteRequest_Wrap.o);
+			Optional.ofNullable(siteRequest_Wrap.getO()).ifPresent(o -> {
+				setSiteRequest_(o);
+			});
 		}
 		return (SiteRequestEnUS)this;
 	}
@@ -230,7 +234,9 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 		Wrap<WebClient> webClientWrap = new Wrap<WebClient>().var("webClient");
 		if(webClient == null) {
 			_webClient(webClientWrap);
-			setWebClient(webClientWrap.o);
+			Optional.ofNullable(webClientWrap.getO()).ifPresent(o -> {
+				setWebClient(o);
+			});
 		}
 		return (SiteRequestEnUS)this;
 	}
@@ -269,7 +275,9 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 		Wrap<ApiRequest> apiRequest_Wrap = new Wrap<ApiRequest>().var("apiRequest_");
 		if(apiRequest_ == null) {
 			_apiRequest_(apiRequest_Wrap);
-			setApiRequest_(apiRequest_Wrap.o);
+			Optional.ofNullable(apiRequest_Wrap.getO()).ifPresent(o -> {
+				setApiRequest_(o);
+			});
 		}
 		return (SiteRequestEnUS)this;
 	}
@@ -315,7 +323,9 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 		Wrap<JsonObject> jsonObjectWrap = new Wrap<JsonObject>().var("jsonObject");
 		if(jsonObject == null) {
 			_jsonObject(jsonObjectWrap);
-			setJsonObject(jsonObjectWrap.o);
+			Optional.ofNullable(jsonObjectWrap.getO()).ifPresent(o -> {
+				setJsonObject(o);
+			});
 		}
 		return (SiteRequestEnUS)this;
 	}
@@ -366,7 +376,9 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 		Wrap<ServiceRequest> serviceRequestWrap = new Wrap<ServiceRequest>().var("serviceRequest");
 		if(serviceRequest == null) {
 			_serviceRequest(serviceRequestWrap);
-			setServiceRequest(serviceRequestWrap.o);
+			Optional.ofNullable(serviceRequestWrap.getO()).ifPresent(o -> {
+				setServiceRequest(o);
+			});
 		}
 		return (SiteRequestEnUS)this;
 	}
@@ -405,7 +417,9 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 		Wrap<User> userWrap = new Wrap<User>().var("user");
 		if(user == null) {
 			_user(userWrap);
-			setUser(userWrap.o);
+			Optional.ofNullable(userWrap.getO()).ifPresent(o -> {
+				setUser(o);
+			});
 		}
 		return (SiteRequestEnUS)this;
 	}
@@ -451,7 +465,9 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 		Wrap<JsonObject> userPrincipalWrap = new Wrap<JsonObject>().var("userPrincipal");
 		if(userPrincipal == null) {
 			_userPrincipal(userPrincipalWrap);
-			setUserPrincipal(userPrincipalWrap.o);
+			Optional.ofNullable(userPrincipalWrap.getO()).ifPresent(o -> {
+				setUserPrincipal(o);
+			});
 		}
 		return (SiteRequestEnUS)this;
 	}
@@ -501,7 +517,9 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 		Wrap<String> userIdWrap = new Wrap<String>().var("userId");
 		if(userId == null) {
 			_userId(userIdWrap);
-			setUserId(userIdWrap.o);
+			Optional.ofNullable(userIdWrap.getO()).ifPresent(o -> {
+				setUserId(o);
+			});
 		}
 		return (SiteRequestEnUS)this;
 	}
@@ -559,7 +577,9 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 		Wrap<Long> userKeyWrap = new Wrap<Long>().var("userKey");
 		if(userKey == null) {
 			_userKey(userKeyWrap);
-			setUserKey(userKeyWrap.o);
+			Optional.ofNullable(userKeyWrap.getO()).ifPresent(o -> {
+				setUserKey(o);
+			});
 		}
 		return (SiteRequestEnUS)this;
 	}
@@ -609,7 +629,9 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 		Wrap<String> sessionIdWrap = new Wrap<String>().var("sessionId");
 		if(sessionId == null) {
 			_sessionId(sessionIdWrap);
-			setSessionId(sessionIdWrap.o);
+			Optional.ofNullable(sessionIdWrap.getO()).ifPresent(o -> {
+				setSessionId(o);
+			});
 		}
 		return (SiteRequestEnUS)this;
 	}
@@ -659,7 +681,9 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 		Wrap<String> sessionIdBeforeWrap = new Wrap<String>().var("sessionIdBefore");
 		if(sessionIdBefore == null) {
 			_sessionIdBefore(sessionIdBeforeWrap);
-			setSessionIdBefore(sessionIdBeforeWrap.o);
+			Optional.ofNullable(sessionIdBeforeWrap.getO()).ifPresent(o -> {
+				setSessionIdBefore(o);
+			});
 		}
 		return (SiteRequestEnUS)this;
 	}
@@ -709,7 +733,9 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 		Wrap<String> userNameWrap = new Wrap<String>().var("userName");
 		if(userName == null) {
 			_userName(userNameWrap);
-			setUserName(userNameWrap.o);
+			Optional.ofNullable(userNameWrap.getO()).ifPresent(o -> {
+				setUserName(o);
+			});
 		}
 		return (SiteRequestEnUS)this;
 	}
@@ -759,7 +785,9 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 		Wrap<String> userLastNameWrap = new Wrap<String>().var("userLastName");
 		if(userLastName == null) {
 			_userLastName(userLastNameWrap);
-			setUserLastName(userLastNameWrap.o);
+			Optional.ofNullable(userLastNameWrap.getO()).ifPresent(o -> {
+				setUserLastName(o);
+			});
 		}
 		return (SiteRequestEnUS)this;
 	}
@@ -809,7 +837,9 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 		Wrap<String> userFirstNameWrap = new Wrap<String>().var("userFirstName");
 		if(userFirstName == null) {
 			_userFirstName(userFirstNameWrap);
-			setUserFirstName(userFirstNameWrap.o);
+			Optional.ofNullable(userFirstNameWrap.getO()).ifPresent(o -> {
+				setUserFirstName(o);
+			});
 		}
 		return (SiteRequestEnUS)this;
 	}
@@ -859,7 +889,9 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 		Wrap<String> userFullNameWrap = new Wrap<String>().var("userFullName");
 		if(userFullName == null) {
 			_userFullName(userFullNameWrap);
-			setUserFullName(userFullNameWrap.o);
+			Optional.ofNullable(userFullNameWrap.getO()).ifPresent(o -> {
+				setUserFullName(o);
+			});
 		}
 		return (SiteRequestEnUS)this;
 	}
@@ -909,7 +941,9 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 		Wrap<String> userEmailWrap = new Wrap<String>().var("userEmail");
 		if(userEmail == null) {
 			_userEmail(userEmailWrap);
-			setUserEmail(userEmailWrap.o);
+			Optional.ofNullable(userEmailWrap.getO()).ifPresent(o -> {
+				setUserEmail(o);
+			});
 		}
 		return (SiteRequestEnUS)this;
 	}
@@ -1037,7 +1071,9 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 		Wrap<JsonObject> userResourceWrap = new Wrap<JsonObject>().var("userResource");
 		if(userResource == null) {
 			_userResource(userResourceWrap);
-			setUserResource(userResourceWrap.o);
+			Optional.ofNullable(userResourceWrap.getO()).ifPresent(o -> {
+				setUserResource(o);
+			});
 		}
 		return (SiteRequestEnUS)this;
 	}
@@ -1158,7 +1194,9 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 		Wrap<SiteUser> siteUser_Wrap = new Wrap<SiteUser>().var("siteUser_");
 		if(siteUser_ == null) {
 			_siteUser_(siteUser_Wrap);
-			setSiteUser_(siteUser_Wrap.o);
+			Optional.ofNullable(siteUser_Wrap.getO()).ifPresent(o -> {
+				setSiteUser_(o);
+			});
 		}
 		return (SiteRequestEnUS)this;
 	}
@@ -1196,7 +1234,9 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 		Wrap<String> langWrap = new Wrap<String>().var("lang");
 		if(lang == null) {
 			_lang(langWrap);
-			setLang(langWrap.o);
+			Optional.ofNullable(langWrap.getO()).ifPresent(o -> {
+				setLang(o);
+			});
 		}
 		return (SiteRequestEnUS)this;
 	}
@@ -1254,7 +1294,9 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 		Wrap<Long> requestPkWrap = new Wrap<Long>().var("requestPk");
 		if(requestPk == null) {
 			_requestPk(requestPkWrap);
-			setRequestPk(requestPkWrap.o);
+			Optional.ofNullable(requestPkWrap.getO()).ifPresent(o -> {
+				setRequestPk(o);
+			});
 		}
 		return (SiteRequestEnUS)this;
 	}
@@ -1304,7 +1346,9 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 		Wrap<String> requestUriWrap = new Wrap<String>().var("requestUri");
 		if(requestUri == null) {
 			_requestUri(requestUriWrap);
-			setRequestUri(requestUriWrap.o);
+			Optional.ofNullable(requestUriWrap.getO()).ifPresent(o -> {
+				setRequestUri(o);
+			});
 		}
 		return (SiteRequestEnUS)this;
 	}
@@ -1354,7 +1398,9 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 		Wrap<String> requestMethodWrap = new Wrap<String>().var("requestMethod");
 		if(requestMethod == null) {
 			_requestMethod(requestMethodWrap);
-			setRequestMethod(requestMethodWrap.o);
+			Optional.ofNullable(requestMethodWrap.getO()).ifPresent(o -> {
+				setRequestMethod(o);
+			});
 		}
 		return (SiteRequestEnUS)this;
 	}
@@ -1405,7 +1451,9 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 		Wrap<SqlConnection> sqlConnectionWrap = new Wrap<SqlConnection>().var("sqlConnection");
 		if(sqlConnection == null) {
 			_sqlConnection(sqlConnectionWrap);
-			setSqlConnection(sqlConnectionWrap.o);
+			Optional.ofNullable(sqlConnectionWrap.getO()).ifPresent(o -> {
+				setSqlConnection(o);
+			});
 		}
 		return (SiteRequestEnUS)this;
 	}
@@ -1444,7 +1492,9 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 		Wrap<MultiMap> requestHeadersWrap = new Wrap<MultiMap>().var("requestHeaders");
 		if(requestHeaders == null) {
 			_requestHeaders(requestHeadersWrap);
-			setRequestHeaders(requestHeadersWrap.o);
+			Optional.ofNullable(requestHeadersWrap.getO()).ifPresent(o -> {
+				setRequestHeaders(o);
+			});
 		}
 		return (SiteRequestEnUS)this;
 	}

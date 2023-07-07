@@ -614,45 +614,16 @@
 						<span class="w3-button w3-display-topright " onclick="$('#postSimulationReportModal').hide(); ">×</span>
 	{{/eq}}
 						<h2 class="w3-padding ">Create a simulation report</h2>
+						<div class="">You can override any default values below: </div>
 					</header>
 					<div class="" id="postSimulationReportFormValues">
 						<div id="postSimulationReportForm">
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmCreated" roleRequired="true"}}
-{{else}}
-{{> "htmCreated" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmArchived" roleRequired="true"}}
-{{else}}
-{{> "htmArchived" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmDeleted" roleRequired="true"}}
-{{else}}
-{{> "htmDeleted" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-							</div>
+{{#block "htmFormButton_postSimulationReport"}}{{/block}}
 							<div class="w3-cell-row ">
 {{#ifContainsAnyRoles roles roleRequired}}
 {{> "htmReportName" roleRequired="true"}}
 {{else}}
 {{> "htmReportName" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmSimulationKey" roleRequired="true"}}
-{{else}}
-{{> "htmSimulationKey" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmSmartTrafficLightKey" roleRequired="true"}}
-{{else}}
-{{> "htmSmartTrafficLightKey" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">

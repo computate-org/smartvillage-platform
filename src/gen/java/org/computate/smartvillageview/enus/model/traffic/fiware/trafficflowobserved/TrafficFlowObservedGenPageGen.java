@@ -150,7 +150,9 @@ public abstract class TrafficFlowObservedGenPageGen<DEV> extends MapResultPage {
 		Wrap<SearchList<TrafficFlowObserved>> searchListTrafficFlowObserved_Wrap = new Wrap<SearchList<TrafficFlowObserved>>().var("searchListTrafficFlowObserved_");
 		if(searchListTrafficFlowObserved_ == null) {
 			_searchListTrafficFlowObserved_(searchListTrafficFlowObserved_Wrap);
-			setSearchListTrafficFlowObserved_(searchListTrafficFlowObserved_Wrap.o);
+			Optional.ofNullable(searchListTrafficFlowObserved_Wrap.getO()).ifPresent(o -> {
+				setSearchListTrafficFlowObserved_(o);
+			});
 		}
 		return (TrafficFlowObservedGenPage)this;
 	}
@@ -250,7 +252,9 @@ public abstract class TrafficFlowObservedGenPageGen<DEV> extends MapResultPage {
 		Wrap<Integer> trafficFlowObservedCountWrap = new Wrap<Integer>().var("trafficFlowObservedCount");
 		if(trafficFlowObservedCount == null) {
 			_trafficFlowObservedCount(trafficFlowObservedCountWrap);
-			setTrafficFlowObservedCount(trafficFlowObservedCountWrap.o);
+			Optional.ofNullable(trafficFlowObservedCountWrap.getO()).ifPresent(o -> {
+				setTrafficFlowObservedCount(o);
+			});
 		}
 		return (TrafficFlowObservedGenPage)this;
 	}
@@ -301,7 +305,9 @@ public abstract class TrafficFlowObservedGenPageGen<DEV> extends MapResultPage {
 		Wrap<TrafficFlowObserved> trafficFlowObserved_Wrap = new Wrap<TrafficFlowObserved>().var("trafficFlowObserved_");
 		if(trafficFlowObserved_ == null) {
 			_trafficFlowObserved_(trafficFlowObserved_Wrap);
-			setTrafficFlowObserved_(trafficFlowObserved_Wrap.o);
+			Optional.ofNullable(trafficFlowObserved_Wrap.getO()).ifPresent(o -> {
+				setTrafficFlowObserved_(o);
+			});
 		}
 		return (TrafficFlowObservedGenPage)this;
 	}
@@ -339,7 +345,9 @@ public abstract class TrafficFlowObservedGenPageGen<DEV> extends MapResultPage {
 		Wrap<String> idWrap = new Wrap<String>().var("id");
 		if(id == null) {
 			_id(idWrap);
-			setId(idWrap.o);
+			Optional.ofNullable(idWrap.getO()).ifPresent(o -> {
+				setId(o);
+			});
 		}
 		return (TrafficFlowObservedGenPage)this;
 	}
@@ -389,7 +397,9 @@ public abstract class TrafficFlowObservedGenPageGen<DEV> extends MapResultPage {
 		Wrap<String> pageUriTrafficFlowObservedWrap = new Wrap<String>().var("pageUriTrafficFlowObserved");
 		if(pageUriTrafficFlowObserved == null) {
 			_pageUriTrafficFlowObserved(pageUriTrafficFlowObservedWrap);
-			setPageUriTrafficFlowObserved(pageUriTrafficFlowObservedWrap.o);
+			Optional.ofNullable(pageUriTrafficFlowObservedWrap.getO()).ifPresent(o -> {
+				setPageUriTrafficFlowObserved(o);
+			});
 		}
 		return (TrafficFlowObservedGenPage)this;
 	}

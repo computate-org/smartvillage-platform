@@ -252,7 +252,9 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 		Wrap<String> personIdWrap = new Wrap<String>().var("personId");
 		if(personId == null) {
 			_personId(personIdWrap);
-			setPersonId(personIdWrap.o);
+			Optional.ofNullable(personIdWrap.getO()).ifPresent(o -> {
+				setPersonId(o);
+			});
 		}
 		return (PersonStep)this;
 	}
@@ -306,7 +308,9 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 		Wrap<String> personTypeWrap = new Wrap<String>().var("personType");
 		if(personType == null) {
 			_personType(personTypeWrap);
-			setPersonType(personTypeWrap.o);
+			Optional.ofNullable(personTypeWrap.getO()).ifPresent(o -> {
+				setPersonType(o);
+			});
 		}
 		return (PersonStep)this;
 	}
@@ -381,7 +385,9 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 		Wrap<BigDecimal> angleWrap = new Wrap<BigDecimal>().var("angle");
 		if(angle == null) {
 			_angle(angleWrap);
-			setAngle(angleWrap.o);
+			Optional.ofNullable(angleWrap.getO()).ifPresent(o -> {
+				setAngle(o);
+			});
 		}
 		return (PersonStep)this;
 	}
@@ -456,7 +462,9 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 		Wrap<BigDecimal> speedWrap = new Wrap<BigDecimal>().var("speed");
 		if(speed == null) {
 			_speed(speedWrap);
-			setSpeed(speedWrap.o);
+			Optional.ofNullable(speedWrap.getO()).ifPresent(o -> {
+				setSpeed(o);
+			});
 		}
 		return (PersonStep)this;
 	}
@@ -531,7 +539,9 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 		Wrap<BigDecimal> posWrap = new Wrap<BigDecimal>().var("pos");
 		if(pos == null) {
 			_pos(posWrap);
-			setPos(posWrap.o);
+			Optional.ofNullable(posWrap.getO()).ifPresent(o -> {
+				setPos(o);
+			});
 		}
 		return (PersonStep)this;
 	}
@@ -606,7 +616,9 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 		Wrap<BigDecimal> slopeWrap = new Wrap<BigDecimal>().var("slope");
 		if(slope == null) {
 			_slope(slopeWrap);
-			setSlope(slopeWrap.o);
+			Optional.ofNullable(slopeWrap.getO()).ifPresent(o -> {
+				setSlope(o);
+			});
 		}
 		return (PersonStep)this;
 	}

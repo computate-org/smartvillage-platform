@@ -150,7 +150,9 @@ public abstract class MapResultGenPageGen<DEV> extends BaseResultPage {
 		Wrap<SearchList<MapResult>> searchListMapResult_Wrap = new Wrap<SearchList<MapResult>>().var("searchListMapResult_");
 		if(searchListMapResult_ == null) {
 			_searchListMapResult_(searchListMapResult_Wrap);
-			setSearchListMapResult_(searchListMapResult_Wrap.o);
+			Optional.ofNullable(searchListMapResult_Wrap.getO()).ifPresent(o -> {
+				setSearchListMapResult_(o);
+			});
 		}
 		return (MapResultGenPage)this;
 	}
@@ -250,7 +252,9 @@ public abstract class MapResultGenPageGen<DEV> extends BaseResultPage {
 		Wrap<Integer> mapResultCountWrap = new Wrap<Integer>().var("mapResultCount");
 		if(mapResultCount == null) {
 			_mapResultCount(mapResultCountWrap);
-			setMapResultCount(mapResultCountWrap.o);
+			Optional.ofNullable(mapResultCountWrap.getO()).ifPresent(o -> {
+				setMapResultCount(o);
+			});
 		}
 		return (MapResultGenPage)this;
 	}
@@ -301,7 +305,9 @@ public abstract class MapResultGenPageGen<DEV> extends BaseResultPage {
 		Wrap<MapResult> mapResult_Wrap = new Wrap<MapResult>().var("mapResult_");
 		if(mapResult_ == null) {
 			_mapResult_(mapResult_Wrap);
-			setMapResult_(mapResult_Wrap.o);
+			Optional.ofNullable(mapResult_Wrap.getO()).ifPresent(o -> {
+				setMapResult_(o);
+			});
 		}
 		return (MapResultGenPage)this;
 	}
@@ -339,7 +345,9 @@ public abstract class MapResultGenPageGen<DEV> extends BaseResultPage {
 		Wrap<String> idWrap = new Wrap<String>().var("id");
 		if(id == null) {
 			_id(idWrap);
-			setId(idWrap.o);
+			Optional.ofNullable(idWrap.getO()).ifPresent(o -> {
+				setId(o);
+			});
 		}
 		return (MapResultGenPage)this;
 	}
@@ -389,7 +397,9 @@ public abstract class MapResultGenPageGen<DEV> extends BaseResultPage {
 		Wrap<String> pageUriMapResultWrap = new Wrap<String>().var("pageUriMapResult");
 		if(pageUriMapResult == null) {
 			_pageUriMapResult(pageUriMapResultWrap);
-			setPageUriMapResult(pageUriMapResultWrap.o);
+			Optional.ofNullable(pageUriMapResultWrap.getO()).ifPresent(o -> {
+				setPageUriMapResult(o);
+			});
 		}
 		return (MapResultGenPage)this;
 	}

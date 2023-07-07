@@ -80,15 +80,15 @@ import io.vertx.core.json.JsonArray;
  * AName.enUS: null
  * <p>
  * Delete the class TrafficFcdReader in Solr: 
- * curl 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.reader.TrafficFcdReader&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.reader.TrafficFcdReader&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
  * Delete  the package org.computate.smartvillageview.enus.model.traffic.simulation.reader in Solr: 
- * curl 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.reader&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomEnsemble_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.reader&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * <p>
  * Delete  the project smartabyar-smartvillage in Solr: 
- * curl 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartabyar\-smartvillage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartabyar\-smartvillage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  **/
 public abstract class TrafficFcdReaderGen<DEV> extends Object {
@@ -140,7 +140,9 @@ public abstract class TrafficFcdReaderGen<DEV> extends Object {
 		Wrap<SiteRequestEnUS> siteRequest_Wrap = new Wrap<SiteRequestEnUS>().var("siteRequest_");
 		if(siteRequest_ == null) {
 			_siteRequest_(siteRequest_Wrap);
-			setSiteRequest_(siteRequest_Wrap.o);
+			Optional.ofNullable(siteRequest_Wrap.getO()).ifPresent(o -> {
+				setSiteRequest_(o);
+			});
 		}
 		return (TrafficFcdReader)this;
 	}
@@ -186,16 +188,18 @@ public abstract class TrafficFcdReaderGen<DEV> extends Object {
 		Wrap<JsonObject> configWrap = new Wrap<JsonObject>().var("config");
 		if(config == null) {
 			_config(configWrap);
-			setConfig(configWrap.o);
+			Optional.ofNullable(configWrap.getO()).ifPresent(o -> {
+				setConfig(o);
+			});
 		}
 		return (TrafficFcdReader)this;
 	}
 
-	public static JsonObject staticSearchConfig(SiteRequestEnUS siteRequest_, JsonObject o) {
-		return o;
+	public static String staticSearchConfig(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o.toString();
 	}
 
-	public static String staticSearchStrConfig(SiteRequestEnUS siteRequest_, JsonObject o) {
+	public static String staticSearchStrConfig(SiteRequestEnUS siteRequest_, String o) {
 		return o == null ? null : o.toString();
 	}
 
@@ -237,7 +241,9 @@ public abstract class TrafficFcdReaderGen<DEV> extends Object {
 		Wrap<WebClient> webClientWrap = new Wrap<WebClient>().var("webClient");
 		if(webClient == null) {
 			_webClient(webClientWrap);
-			setWebClient(webClientWrap.o);
+			Optional.ofNullable(webClientWrap.getO()).ifPresent(o -> {
+				setWebClient(o);
+			});
 		}
 		return (TrafficFcdReader)this;
 	}
@@ -276,7 +282,9 @@ public abstract class TrafficFcdReaderGen<DEV> extends Object {
 		Wrap<Vertx> vertxWrap = new Wrap<Vertx>().var("vertx");
 		if(vertx == null) {
 			_vertx(vertxWrap);
-			setVertx(vertxWrap.o);
+			Optional.ofNullable(vertxWrap.getO()).ifPresent(o -> {
+				setVertx(o);
+			});
 		}
 		return (TrafficFcdReader)this;
 	}
@@ -315,7 +323,9 @@ public abstract class TrafficFcdReaderGen<DEV> extends Object {
 		Wrap<WorkerExecutor> workerExecutorWrap = new Wrap<WorkerExecutor>().var("workerExecutor");
 		if(workerExecutor == null) {
 			_workerExecutor(workerExecutorWrap);
-			setWorkerExecutor(workerExecutorWrap.o);
+			Optional.ofNullable(workerExecutorWrap.getO()).ifPresent(o -> {
+				setWorkerExecutor(o);
+			});
 		}
 		return (TrafficFcdReader)this;
 	}
@@ -354,7 +364,9 @@ public abstract class TrafficFcdReaderGen<DEV> extends Object {
 		Wrap<EventBus> eventBusWrap = new Wrap<EventBus>().var("eventBus");
 		if(eventBus == null) {
 			_eventBus(eventBusWrap);
-			setEventBus(eventBusWrap.o);
+			Optional.ofNullable(eventBusWrap.getO()).ifPresent(o -> {
+				setEventBus(o);
+			});
 		}
 		return (TrafficFcdReader)this;
 	}
@@ -622,7 +634,7 @@ public abstract class TrafficFcdReaderGen<DEV> extends Object {
 	public static String staticSearchStrTrafficFcdReader(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
 		case "config":
-			return TrafficFcdReader.staticSearchStrConfig(siteRequest_, (JsonObject)o);
+			return TrafficFcdReader.staticSearchStrConfig(siteRequest_, (String)o);
 			default:
 				return null;
 		}

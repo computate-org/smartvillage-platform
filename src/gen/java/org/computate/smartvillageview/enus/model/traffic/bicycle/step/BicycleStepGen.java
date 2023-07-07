@@ -251,7 +251,9 @@ public abstract class BicycleStepGen<DEV> extends MapResult {
 		Wrap<String> bicycleIdWrap = new Wrap<String>().var("bicycleId");
 		if(bicycleId == null) {
 			_bicycleId(bicycleIdWrap);
-			setBicycleId(bicycleIdWrap.o);
+			Optional.ofNullable(bicycleIdWrap.getO()).ifPresent(o -> {
+				setBicycleId(o);
+			});
 		}
 		return (BicycleStep)this;
 	}

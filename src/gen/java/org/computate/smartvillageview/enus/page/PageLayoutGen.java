@@ -166,7 +166,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<SiteRequestEnUS> siteRequest_Wrap = new Wrap<SiteRequestEnUS>().var("siteRequest_");
 		if(siteRequest_ == null) {
 			_siteRequest_(siteRequest_Wrap);
-			setSiteRequest_(siteRequest_Wrap.o);
+			Optional.ofNullable(siteRequest_Wrap.getO()).ifPresent(o -> {
+				setSiteRequest_(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -204,7 +206,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<String> langWrap = new Wrap<String>().var("lang");
 		if(lang == null) {
 			_lang(langWrap);
-			setLang(langWrap.o);
+			Optional.ofNullable(langWrap.getO()).ifPresent(o -> {
+				setLang(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -255,7 +259,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<Map<String, String>> requestVarsWrap = new Wrap<Map<String, String>>().var("requestVars");
 		if(requestVars == null) {
 			_requestVars(requestVarsWrap);
-			setRequestVars(requestVarsWrap.o);
+			Optional.ofNullable(requestVarsWrap.getO()).ifPresent(o -> {
+				setRequestVars(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -294,7 +300,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<ServiceRequest> serviceRequestWrap = new Wrap<ServiceRequest>().var("serviceRequest");
 		if(serviceRequest == null) {
 			_serviceRequest(serviceRequestWrap);
-			setServiceRequest(serviceRequestWrap.o);
+			Optional.ofNullable(serviceRequestWrap.getO()).ifPresent(o -> {
+				setServiceRequest(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -332,7 +340,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<String> staticBaseUrlWrap = new Wrap<String>().var("staticBaseUrl");
 		if(staticBaseUrl == null) {
 			_staticBaseUrl(staticBaseUrlWrap);
-			setStaticBaseUrl(staticBaseUrlWrap.o);
+			Optional.ofNullable(staticBaseUrlWrap.getO()).ifPresent(o -> {
+				setStaticBaseUrl(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -382,7 +392,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<String> siteBaseUrlWrap = new Wrap<String>().var("siteBaseUrl");
 		if(siteBaseUrl == null) {
 			_siteBaseUrl(siteBaseUrlWrap);
-			setSiteBaseUrl(siteBaseUrlWrap.o);
+			Optional.ofNullable(siteBaseUrlWrap.getO()).ifPresent(o -> {
+				setSiteBaseUrl(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -432,7 +444,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<String> siteAuthUrlWrap = new Wrap<String>().var("siteAuthUrl");
 		if(siteAuthUrl == null) {
 			_siteAuthUrl(siteAuthUrlWrap);
-			setSiteAuthUrl(siteAuthUrlWrap.o);
+			Optional.ofNullable(siteAuthUrlWrap.getO()).ifPresent(o -> {
+				setSiteAuthUrl(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -482,7 +496,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<String> siteAuthRealmWrap = new Wrap<String>().var("siteAuthRealm");
 		if(siteAuthRealm == null) {
 			_siteAuthRealm(siteAuthRealmWrap);
-			setSiteAuthRealm(siteAuthRealmWrap.o);
+			Optional.ofNullable(siteAuthRealmWrap.getO()).ifPresent(o -> {
+				setSiteAuthRealm(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -532,7 +548,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<String> fontAwesomeKitWrap = new Wrap<String>().var("fontAwesomeKit");
 		if(fontAwesomeKit == null) {
 			_fontAwesomeKit(fontAwesomeKitWrap);
-			setFontAwesomeKit(fontAwesomeKitWrap.o);
+			Optional.ofNullable(fontAwesomeKitWrap.getO()).ifPresent(o -> {
+				setFontAwesomeKit(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -582,7 +600,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<String> facebookGraphVersionWrap = new Wrap<String>().var("facebookGraphVersion");
 		if(facebookGraphVersion == null) {
 			_facebookGraphVersion(facebookGraphVersionWrap);
-			setFacebookGraphVersion(facebookGraphVersionWrap.o);
+			Optional.ofNullable(facebookGraphVersionWrap.getO()).ifPresent(o -> {
+				setFacebookGraphVersion(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -632,7 +652,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<String> facebookAppIdWrap = new Wrap<String>().var("facebookAppId");
 		if(facebookAppId == null) {
 			_facebookAppId(facebookAppIdWrap);
-			setFacebookAppId(facebookAppIdWrap.o);
+			Optional.ofNullable(facebookAppIdWrap.getO()).ifPresent(o -> {
+				setFacebookAppId(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -682,7 +704,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<String> pageUriWrap = new Wrap<String>().var("pageUri");
 		if(pageUri == null) {
 			_pageUri(pageUriWrap);
-			setPageUri(pageUriWrap.o);
+			Optional.ofNullable(pageUriWrap.getO()).ifPresent(o -> {
+				setPageUri(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -732,7 +756,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<String> pageIdWrap = new Wrap<String>().var("pageId");
 		if(pageId == null) {
 			_pageId(pageIdWrap);
-			setPageId(pageIdWrap.o);
+			Optional.ofNullable(pageIdWrap.getO()).ifPresent(o -> {
+				setPageId(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -782,7 +808,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<String> apiUriWrap = new Wrap<String>().var("apiUri");
 		if(apiUri == null) {
 			_apiUri(apiUriWrap);
-			setApiUri(apiUriWrap.o);
+			Optional.ofNullable(apiUriWrap.getO()).ifPresent(o -> {
+				setApiUri(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -832,7 +860,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<String> pageMethodWrap = new Wrap<String>().var("pageMethod");
 		if(pageMethod == null) {
 			_pageMethod(pageMethodWrap);
-			setPageMethod(pageMethodWrap.o);
+			Optional.ofNullable(pageMethodWrap.getO()).ifPresent(o -> {
+				setPageMethod(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -890,7 +920,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<JsonObject> paramsWrap = new Wrap<JsonObject>().var("params");
 		if(params == null) {
 			_params(paramsWrap);
-			setParams(paramsWrap.o);
+			Optional.ofNullable(paramsWrap.getO()).ifPresent(o -> {
+				setParams(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -948,7 +980,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<Long> userKeyWrap = new Wrap<Long>().var("userKey");
 		if(userKey == null) {
 			_userKey(userKeyWrap);
-			setUserKey(userKeyWrap.o);
+			Optional.ofNullable(userKeyWrap.getO()).ifPresent(o -> {
+				setUserKey(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -998,7 +1032,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<String> userFullNameWrap = new Wrap<String>().var("userFullName");
 		if(userFullName == null) {
 			_userFullName(userFullNameWrap);
-			setUserFullName(userFullNameWrap.o);
+			Optional.ofNullable(userFullNameWrap.getO()).ifPresent(o -> {
+				setUserFullName(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -1048,7 +1084,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<String> userNameWrap = new Wrap<String>().var("userName");
 		if(userName == null) {
 			_userName(userNameWrap);
-			setUserName(userNameWrap.o);
+			Optional.ofNullable(userNameWrap.getO()).ifPresent(o -> {
+				setUserName(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -1098,7 +1136,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<String> userEmailWrap = new Wrap<String>().var("userEmail");
 		if(userEmail == null) {
 			_userEmail(userEmailWrap);
-			setUserEmail(userEmailWrap.o);
+			Optional.ofNullable(userEmailWrap.getO()).ifPresent(o -> {
+				setUserEmail(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -1148,7 +1188,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<String> logoutUrlWrap = new Wrap<String>().var("logoutUrl");
 		if(logoutUrl == null) {
 			_logoutUrl(logoutUrlWrap);
-			setLogoutUrl(logoutUrlWrap.o);
+			Optional.ofNullable(logoutUrlWrap.getO()).ifPresent(o -> {
+				setLogoutUrl(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -1206,7 +1248,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<Long> long0Wrap = new Wrap<Long>().var("long0");
 		if(long0 == null) {
 			_long0(long0Wrap);
-			setLong0(long0Wrap.o);
+			Optional.ofNullable(long0Wrap.getO()).ifPresent(o -> {
+				setLong0(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -1264,7 +1308,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<Long> long1Wrap = new Wrap<Long>().var("long1");
 		if(long1 == null) {
 			_long1(long1Wrap);
-			setLong1(long1Wrap.o);
+			Optional.ofNullable(long1Wrap.getO()).ifPresent(o -> {
+				setLong1(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -1322,7 +1368,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<Integer> int0Wrap = new Wrap<Integer>().var("int0");
 		if(int0 == null) {
 			_int0(int0Wrap);
-			setInt0(int0Wrap.o);
+			Optional.ofNullable(int0Wrap.getO()).ifPresent(o -> {
+				setInt0(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -1380,7 +1428,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<Integer> int1Wrap = new Wrap<Integer>().var("int1");
 		if(int1 == null) {
 			_int1(int1Wrap);
-			setInt1(int1Wrap.o);
+			Optional.ofNullable(int1Wrap.getO()).ifPresent(o -> {
+				setInt1(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -1473,7 +1523,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<String> classSimpleNameWrap = new Wrap<String>().var("classSimpleName");
 		if(classSimpleName == null) {
 			_classSimpleName(classSimpleNameWrap);
-			setClassSimpleName(classSimpleNameWrap.o);
+			Optional.ofNullable(classSimpleNameWrap.getO()).ifPresent(o -> {
+				setClassSimpleName(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -1523,7 +1575,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<String> pageTitleWrap = new Wrap<String>().var("pageTitle");
 		if(pageTitle == null) {
 			_pageTitle(pageTitleWrap);
-			setPageTitle(pageTitleWrap.o);
+			Optional.ofNullable(pageTitleWrap.getO()).ifPresent(o -> {
+				setPageTitle(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -1854,7 +1908,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<Stats> statsWrap = new Wrap<Stats>().var("stats");
 		if(stats == null) {
 			_stats(statsWrap);
-			setStats(statsWrap.o);
+			Optional.ofNullable(statsWrap.getO()).ifPresent(o -> {
+				setStats(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -1893,7 +1949,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<FacetCounts> facetCountsWrap = new Wrap<FacetCounts>().var("facetCounts");
 		if(facetCounts == null) {
 			_facetCounts(facetCountsWrap);
-			setFacetCounts(facetCountsWrap.o);
+			Optional.ofNullable(facetCountsWrap.getO()).ifPresent(o -> {
+				setFacetCounts(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -2411,7 +2469,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<String> pageResponseWrap = new Wrap<String>().var("pageResponse");
 		if(pageResponse == null) {
 			_pageResponse(pageResponseWrap);
-			setPageResponse(pageResponseWrap.o);
+			Optional.ofNullable(pageResponseWrap.getO()).ifPresent(o -> {
+				setPageResponse(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -2461,7 +2521,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<String> defaultZoneIdWrap = new Wrap<String>().var("defaultZoneId");
 		if(defaultZoneId == null) {
 			_defaultZoneId(defaultZoneIdWrap);
-			setDefaultZoneId(defaultZoneIdWrap.o);
+			Optional.ofNullable(defaultZoneIdWrap.getO()).ifPresent(o -> {
+				setDefaultZoneId(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -2512,7 +2574,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<ZoneId> defaultTimeZoneWrap = new Wrap<ZoneId>().var("defaultTimeZone");
 		if(defaultTimeZone == null) {
 			_defaultTimeZone(defaultTimeZoneWrap);
-			setDefaultTimeZone(defaultTimeZoneWrap.o);
+			Optional.ofNullable(defaultTimeZoneWrap.getO()).ifPresent(o -> {
+				setDefaultTimeZone(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -2550,7 +2614,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<String> defaultLocaleIdWrap = new Wrap<String>().var("defaultLocaleId");
 		if(defaultLocaleId == null) {
 			_defaultLocaleId(defaultLocaleIdWrap);
-			setDefaultLocaleId(defaultLocaleIdWrap.o);
+			Optional.ofNullable(defaultLocaleIdWrap.getO()).ifPresent(o -> {
+				setDefaultLocaleId(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -2601,7 +2667,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<Locale> defaultLocaleWrap = new Wrap<Locale>().var("defaultLocale");
 		if(defaultLocale == null) {
 			_defaultLocale(defaultLocaleWrap);
-			setDefaultLocale(defaultLocaleWrap.o);
+			Optional.ofNullable(defaultLocaleWrap.getO()).ifPresent(o -> {
+				setDefaultLocale(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -2639,7 +2707,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<String> rangeGapWrap = new Wrap<String>().var("rangeGap");
 		if(rangeGap == null) {
 			_rangeGap(rangeGapWrap);
-			setRangeGap(rangeGapWrap.o);
+			Optional.ofNullable(rangeGapWrap.getO()).ifPresent(o -> {
+				setRangeGap(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -2713,7 +2783,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<ZonedDateTime> rangeEndWrap = new Wrap<ZonedDateTime>().var("rangeEnd");
 		if(rangeEnd == null) {
 			_rangeEnd(rangeEndWrap);
-			setRangeEnd(rangeEndWrap.o);
+			Optional.ofNullable(rangeEndWrap.getO()).ifPresent(o -> {
+				setRangeEnd(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -2787,7 +2859,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<ZonedDateTime> rangeStartWrap = new Wrap<ZonedDateTime>().var("rangeStart");
 		if(rangeStart == null) {
 			_rangeStart(rangeStartWrap);
-			setRangeStart(rangeStartWrap.o);
+			Optional.ofNullable(rangeStartWrap.getO()).ifPresent(o -> {
+				setRangeStart(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -2845,7 +2919,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<JsonObject> defaultRangeStatsWrap = new Wrap<JsonObject>().var("defaultRangeStats");
 		if(defaultRangeStats == null) {
 			_defaultRangeStats(defaultRangeStatsWrap);
-			setDefaultRangeStats(defaultRangeStatsWrap.o);
+			Optional.ofNullable(defaultRangeStatsWrap.getO()).ifPresent(o -> {
+				setDefaultRangeStats(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -2895,7 +2971,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<String> defaultRangeGapWrap = new Wrap<String>().var("defaultRangeGap");
 		if(defaultRangeGap == null) {
 			_defaultRangeGap(defaultRangeGapWrap);
-			setDefaultRangeGap(defaultRangeGapWrap.o);
+			Optional.ofNullable(defaultRangeGapWrap.getO()).ifPresent(o -> {
+				setDefaultRangeGap(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -2969,7 +3047,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<ZonedDateTime> defaultRangeEndWrap = new Wrap<ZonedDateTime>().var("defaultRangeEnd");
 		if(defaultRangeEnd == null) {
 			_defaultRangeEnd(defaultRangeEndWrap);
-			setDefaultRangeEnd(defaultRangeEndWrap.o);
+			Optional.ofNullable(defaultRangeEndWrap.getO()).ifPresent(o -> {
+				setDefaultRangeEnd(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -3043,7 +3123,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<ZonedDateTime> defaultRangeStartWrap = new Wrap<ZonedDateTime>().var("defaultRangeStart");
 		if(defaultRangeStart == null) {
 			_defaultRangeStart(defaultRangeStartWrap);
-			setDefaultRangeStart(defaultRangeStartWrap.o);
+			Optional.ofNullable(defaultRangeStartWrap.getO()).ifPresent(o -> {
+				setDefaultRangeStart(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -3093,7 +3175,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<String> defaultRangeVarWrap = new Wrap<String>().var("defaultRangeVar");
 		if(defaultRangeVar == null) {
 			_defaultRangeVar(defaultRangeVarWrap);
-			setDefaultRangeVar(defaultRangeVarWrap.o);
+			Optional.ofNullable(defaultRangeVarWrap.getO()).ifPresent(o -> {
+				setDefaultRangeVar(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -3143,7 +3227,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<String> defaultFacetSortWrap = new Wrap<String>().var("defaultFacetSort");
 		if(defaultFacetSort == null) {
 			_defaultFacetSort(defaultFacetSortWrap);
-			setDefaultFacetSort(defaultFacetSortWrap.o);
+			Optional.ofNullable(defaultFacetSortWrap.getO()).ifPresent(o -> {
+				setDefaultFacetSort(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -3201,7 +3287,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<Integer> defaultFacetLimitWrap = new Wrap<Integer>().var("defaultFacetLimit");
 		if(defaultFacetLimit == null) {
 			_defaultFacetLimit(defaultFacetLimitWrap);
-			setDefaultFacetLimit(defaultFacetLimitWrap.o);
+			Optional.ofNullable(defaultFacetLimitWrap.getO()).ifPresent(o -> {
+				setDefaultFacetLimit(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -3259,7 +3347,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<Integer> defaultFacetMinCountWrap = new Wrap<Integer>().var("defaultFacetMinCount");
 		if(defaultFacetMinCount == null) {
 			_defaultFacetMinCount(defaultFacetMinCountWrap);
-			setDefaultFacetMinCount(defaultFacetMinCountWrap.o);
+			Optional.ofNullable(defaultFacetMinCountWrap.getO()).ifPresent(o -> {
+				setDefaultFacetMinCount(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -3317,7 +3407,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<Integer> defaultPivotMinCountWrap = new Wrap<Integer>().var("defaultPivotMinCount");
 		if(defaultPivotMinCount == null) {
 			_defaultPivotMinCount(defaultPivotMinCountWrap);
-			setDefaultPivotMinCount(defaultPivotMinCountWrap.o);
+			Optional.ofNullable(defaultPivotMinCountWrap.getO()).ifPresent(o -> {
+				setDefaultPivotMinCount(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -3375,7 +3467,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<JsonObject> DEFAULT_MAP_LOCATIONWrap = new Wrap<JsonObject>().var("DEFAULT_MAP_LOCATION");
 		if(DEFAULT_MAP_LOCATION == null) {
 			_DEFAULT_MAP_LOCATION(DEFAULT_MAP_LOCATIONWrap);
-			setDEFAULT_MAP_LOCATION(DEFAULT_MAP_LOCATIONWrap.o);
+			Optional.ofNullable(DEFAULT_MAP_LOCATIONWrap.getO()).ifPresent(o -> {
+				setDEFAULT_MAP_LOCATION(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -3446,7 +3540,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<BigDecimal> DEFAULT_MAP_ZOOMWrap = new Wrap<BigDecimal>().var("DEFAULT_MAP_ZOOM");
 		if(DEFAULT_MAP_ZOOM == null) {
 			_DEFAULT_MAP_ZOOM(DEFAULT_MAP_ZOOMWrap);
-			setDEFAULT_MAP_ZOOM(DEFAULT_MAP_ZOOMWrap.o);
+			Optional.ofNullable(DEFAULT_MAP_ZOOMWrap.getO()).ifPresent(o -> {
+				setDEFAULT_MAP_ZOOM(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -3496,7 +3592,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<String> queryStrWrap = new Wrap<String>().var("queryStr");
 		if(queryStr == null) {
 			_queryStr(queryStrWrap);
-			setQueryStr(queryStrWrap.o);
+			Optional.ofNullable(queryStrWrap.getO()).ifPresent(o -> {
+				setQueryStr(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -3589,7 +3687,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<String> pageImageUriWrap = new Wrap<String>().var("pageImageUri");
 		if(pageImageUri == null) {
 			_pageImageUri(pageImageUriWrap);
-			setPageImageUri(pageImageUriWrap.o);
+			Optional.ofNullable(pageImageUriWrap.getO()).ifPresent(o -> {
+				setPageImageUri(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -3647,7 +3747,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<Integer> pageImageWidthWrap = new Wrap<Integer>().var("pageImageWidth");
 		if(pageImageWidth == null) {
 			_pageImageWidth(pageImageWidthWrap);
-			setPageImageWidth(pageImageWidthWrap.o);
+			Optional.ofNullable(pageImageWidthWrap.getO()).ifPresent(o -> {
+				setPageImageWidth(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -3705,7 +3807,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<Integer> pageImageHeightWrap = new Wrap<Integer>().var("pageImageHeight");
 		if(pageImageHeight == null) {
 			_pageImageHeight(pageImageHeightWrap);
-			setPageImageHeight(pageImageHeightWrap.o);
+			Optional.ofNullable(pageImageHeightWrap.getO()).ifPresent(o -> {
+				setPageImageHeight(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -3755,7 +3859,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<String> pageVideoIdWrap = new Wrap<String>().var("pageVideoId");
 		if(pageVideoId == null) {
 			_pageVideoId(pageVideoIdWrap);
-			setPageVideoId(pageVideoIdWrap.o);
+			Optional.ofNullable(pageVideoIdWrap.getO()).ifPresent(o -> {
+				setPageVideoId(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -3805,7 +3911,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<String> classIconGroupWrap = new Wrap<String>().var("classIconGroup");
 		if(classIconGroup == null) {
 			_classIconGroup(classIconGroupWrap);
-			setClassIconGroup(classIconGroupWrap.o);
+			Optional.ofNullable(classIconGroupWrap.getO()).ifPresent(o -> {
+				setClassIconGroup(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -3855,7 +3963,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<String> classIconNameWrap = new Wrap<String>().var("classIconName");
 		if(classIconName == null) {
 			_classIconName(classIconNameWrap);
-			setClassIconName(classIconNameWrap.o);
+			Optional.ofNullable(classIconNameWrap.getO()).ifPresent(o -> {
+				setClassIconName(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -3905,7 +4015,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<String> classIconCssClassesWrap = new Wrap<String>().var("classIconCssClasses");
 		if(classIconCssClasses == null) {
 			_classIconCssClasses(classIconCssClassesWrap);
-			setClassIconCssClasses(classIconCssClassesWrap.o);
+			Optional.ofNullable(classIconCssClassesWrap.getO()).ifPresent(o -> {
+				setClassIconCssClasses(o);
+			});
 		}
 		return (PageLayout)this;
 	}
@@ -3955,7 +4067,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		Wrap<String> pageDescriptionWrap = new Wrap<String>().var("pageDescription");
 		if(pageDescription == null) {
 			_pageDescription(pageDescriptionWrap);
-			setPageDescription(pageDescriptionWrap.o);
+			Optional.ofNullable(pageDescriptionWrap.getO()).ifPresent(o -> {
+				setPageDescription(o);
+			});
 		}
 		return (PageLayout)this;
 	}

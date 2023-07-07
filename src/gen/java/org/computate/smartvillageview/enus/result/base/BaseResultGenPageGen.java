@@ -150,7 +150,9 @@ public abstract class BaseResultGenPageGen<DEV> extends PageLayout {
 		Wrap<SearchList<BaseResult>> searchListBaseResult_Wrap = new Wrap<SearchList<BaseResult>>().var("searchListBaseResult_");
 		if(searchListBaseResult_ == null) {
 			_searchListBaseResult_(searchListBaseResult_Wrap);
-			setSearchListBaseResult_(searchListBaseResult_Wrap.o);
+			Optional.ofNullable(searchListBaseResult_Wrap.getO()).ifPresent(o -> {
+				setSearchListBaseResult_(o);
+			});
 		}
 		return (BaseResultGenPage)this;
 	}
@@ -250,7 +252,9 @@ public abstract class BaseResultGenPageGen<DEV> extends PageLayout {
 		Wrap<Integer> baseResultCountWrap = new Wrap<Integer>().var("baseResultCount");
 		if(baseResultCount == null) {
 			_baseResultCount(baseResultCountWrap);
-			setBaseResultCount(baseResultCountWrap.o);
+			Optional.ofNullable(baseResultCountWrap.getO()).ifPresent(o -> {
+				setBaseResultCount(o);
+			});
 		}
 		return (BaseResultGenPage)this;
 	}
@@ -301,7 +305,9 @@ public abstract class BaseResultGenPageGen<DEV> extends PageLayout {
 		Wrap<BaseResult> baseResult_Wrap = new Wrap<BaseResult>().var("baseResult_");
 		if(baseResult_ == null) {
 			_baseResult_(baseResult_Wrap);
-			setBaseResult_(baseResult_Wrap.o);
+			Optional.ofNullable(baseResult_Wrap.getO()).ifPresent(o -> {
+				setBaseResult_(o);
+			});
 		}
 		return (BaseResultGenPage)this;
 	}
@@ -339,7 +345,9 @@ public abstract class BaseResultGenPageGen<DEV> extends PageLayout {
 		Wrap<String> idWrap = new Wrap<String>().var("id");
 		if(id == null) {
 			_id(idWrap);
-			setId(idWrap.o);
+			Optional.ofNullable(idWrap.getO()).ifPresent(o -> {
+				setId(o);
+			});
 		}
 		return (BaseResultGenPage)this;
 	}

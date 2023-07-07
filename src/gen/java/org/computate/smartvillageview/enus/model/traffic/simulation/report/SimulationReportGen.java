@@ -263,7 +263,9 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		Wrap<String> reportNameWrap = new Wrap<String>().var("reportName");
 		if(reportName == null) {
 			_reportName(reportNameWrap);
-			setReportName(reportNameWrap.o);
+			Optional.ofNullable(reportNameWrap.getO()).ifPresent(o -> {
+				setReportName(o);
+			});
 		}
 		return (SimulationReport)this;
 	}
@@ -325,7 +327,9 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		Wrap<Long> simulationKeyWrap = new Wrap<Long>().var("simulationKey");
 		if(simulationKey == null) {
 			_simulationKey(simulationKeyWrap);
-			setSimulationKey(simulationKeyWrap.o);
+			Optional.ofNullable(simulationKeyWrap.getO()).ifPresent(o -> {
+				setSimulationKey(o);
+			});
 		}
 		return (SimulationReport)this;
 	}
@@ -431,7 +435,9 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		Wrap<TrafficSimulation> simulation_Wrap = new Wrap<TrafficSimulation>().var("simulation_");
 		if(simulation_ == null) {
 			_simulation_(simulation_Wrap);
-			setSimulation_(simulation_Wrap.o);
+			Optional.ofNullable(simulation_Wrap.getO()).ifPresent(o -> {
+				setSimulation_(o);
+			});
 		}
 		return (SimulationReport)this;
 	}
@@ -477,7 +483,9 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		Wrap<Long> smartTrafficLightKeyWrap = new Wrap<Long>().var("smartTrafficLightKey");
 		if(smartTrafficLightKey == null) {
 			_smartTrafficLightKey(smartTrafficLightKeyWrap);
-			setSmartTrafficLightKey(smartTrafficLightKeyWrap.o);
+			Optional.ofNullable(smartTrafficLightKeyWrap.getO()).ifPresent(o -> {
+				setSmartTrafficLightKey(o);
+			});
 		}
 		return (SimulationReport)this;
 	}
@@ -583,7 +591,9 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		Wrap<SmartTrafficLight> smartTrafficLight_Wrap = new Wrap<SmartTrafficLight>().var("smartTrafficLight_");
 		if(smartTrafficLight_ == null) {
 			_smartTrafficLight_(smartTrafficLight_Wrap);
-			setSmartTrafficLight_(smartTrafficLight_Wrap.o);
+			Optional.ofNullable(smartTrafficLight_Wrap.getO()).ifPresent(o -> {
+				setSmartTrafficLight_(o);
+			});
 		}
 		return (SimulationReport)this;
 	}
@@ -621,7 +631,9 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		Wrap<String> simulationNameWrap = new Wrap<String>().var("simulationName");
 		if(simulationName == null) {
 			_simulationName(simulationNameWrap);
-			setSimulationName(simulationNameWrap.o);
+			Optional.ofNullable(simulationNameWrap.getO()).ifPresent(o -> {
+				setSimulationName(o);
+			});
 		}
 		return (SimulationReport)this;
 	}
@@ -675,7 +687,9 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		Wrap<String> smartTrafficLightNameWrap = new Wrap<String>().var("smartTrafficLightName");
 		if(smartTrafficLightName == null) {
 			_smartTrafficLightName(smartTrafficLightNameWrap);
-			setSmartTrafficLightName(smartTrafficLightNameWrap.o);
+			Optional.ofNullable(smartTrafficLightNameWrap.getO()).ifPresent(o -> {
+				setSmartTrafficLightName(o);
+			});
 		}
 		return (SimulationReport)this;
 	}
@@ -750,7 +764,9 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		Wrap<BigDecimal> paramAvgVehiclePerMinFromWestToEastWrap = new Wrap<BigDecimal>().var("paramAvgVehiclePerMinFromWestToEast");
 		if(paramAvgVehiclePerMinFromWestToEast == null) {
 			_paramAvgVehiclePerMinFromWestToEast(paramAvgVehiclePerMinFromWestToEastWrap);
-			setParamAvgVehiclePerMinFromWestToEast(paramAvgVehiclePerMinFromWestToEastWrap.o);
+			Optional.ofNullable(paramAvgVehiclePerMinFromWestToEastWrap.getO()).ifPresent(o -> {
+				setParamAvgVehiclePerMinFromWestToEast(o);
+			});
 		}
 		return (SimulationReport)this;
 	}
@@ -825,7 +841,9 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		Wrap<BigDecimal> paramAvgVehiclePerMinFromSouthToNorthWrap = new Wrap<BigDecimal>().var("paramAvgVehiclePerMinFromSouthToNorth");
 		if(paramAvgVehiclePerMinFromSouthToNorth == null) {
 			_paramAvgVehiclePerMinFromSouthToNorth(paramAvgVehiclePerMinFromSouthToNorthWrap);
-			setParamAvgVehiclePerMinFromSouthToNorth(paramAvgVehiclePerMinFromSouthToNorthWrap.o);
+			Optional.ofNullable(paramAvgVehiclePerMinFromSouthToNorthWrap.getO()).ifPresent(o -> {
+				setParamAvgVehiclePerMinFromSouthToNorth(o);
+			});
 		}
 		return (SimulationReport)this;
 	}
@@ -900,7 +918,9 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		Wrap<BigDecimal> paramVehicleDemandScalingFactorWrap = new Wrap<BigDecimal>().var("paramVehicleDemandScalingFactor");
 		if(paramVehicleDemandScalingFactor == null) {
 			_paramVehicleDemandScalingFactor(paramVehicleDemandScalingFactorWrap);
-			setParamVehicleDemandScalingFactor(paramVehicleDemandScalingFactorWrap.o);
+			Optional.ofNullable(paramVehicleDemandScalingFactorWrap.getO()).ifPresent(o -> {
+				setParamVehicleDemandScalingFactor(o);
+			});
 		}
 		return (SimulationReport)this;
 	}
@@ -975,7 +995,9 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		Wrap<BigDecimal> paramAvgPedestrianPerMinFromWestToEastWrap = new Wrap<BigDecimal>().var("paramAvgPedestrianPerMinFromWestToEast");
 		if(paramAvgPedestrianPerMinFromWestToEast == null) {
 			_paramAvgPedestrianPerMinFromWestToEast(paramAvgPedestrianPerMinFromWestToEastWrap);
-			setParamAvgPedestrianPerMinFromWestToEast(paramAvgPedestrianPerMinFromWestToEastWrap.o);
+			Optional.ofNullable(paramAvgPedestrianPerMinFromWestToEastWrap.getO()).ifPresent(o -> {
+				setParamAvgPedestrianPerMinFromWestToEast(o);
+			});
 		}
 		return (SimulationReport)this;
 	}
@@ -1050,7 +1072,9 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		Wrap<BigDecimal> paramAvgPedestrianPerMinFromSouthToNorthWrap = new Wrap<BigDecimal>().var("paramAvgPedestrianPerMinFromSouthToNorth");
 		if(paramAvgPedestrianPerMinFromSouthToNorth == null) {
 			_paramAvgPedestrianPerMinFromSouthToNorth(paramAvgPedestrianPerMinFromSouthToNorthWrap);
-			setParamAvgPedestrianPerMinFromSouthToNorth(paramAvgPedestrianPerMinFromSouthToNorthWrap.o);
+			Optional.ofNullable(paramAvgPedestrianPerMinFromSouthToNorthWrap.getO()).ifPresent(o -> {
+				setParamAvgPedestrianPerMinFromSouthToNorth(o);
+			});
 		}
 		return (SimulationReport)this;
 	}
@@ -1125,7 +1149,9 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		Wrap<BigDecimal> paramPedestrianDemandScalingFactorWrap = new Wrap<BigDecimal>().var("paramPedestrianDemandScalingFactor");
 		if(paramPedestrianDemandScalingFactor == null) {
 			_paramPedestrianDemandScalingFactor(paramPedestrianDemandScalingFactorWrap);
-			setParamPedestrianDemandScalingFactor(paramPedestrianDemandScalingFactorWrap.o);
+			Optional.ofNullable(paramPedestrianDemandScalingFactorWrap.getO()).ifPresent(o -> {
+				setParamPedestrianDemandScalingFactor(o);
+			});
 		}
 		return (SimulationReport)this;
 	}
@@ -1297,7 +1323,9 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		Wrap<BigDecimal> paramMinGreenTimeSecWestEastWrap = new Wrap<BigDecimal>().var("paramMinGreenTimeSecWestEast");
 		if(paramMinGreenTimeSecWestEast == null) {
 			_paramMinGreenTimeSecWestEast(paramMinGreenTimeSecWestEastWrap);
-			setParamMinGreenTimeSecWestEast(paramMinGreenTimeSecWestEastWrap.o);
+			Optional.ofNullable(paramMinGreenTimeSecWestEastWrap.getO()).ifPresent(o -> {
+				setParamMinGreenTimeSecWestEast(o);
+			});
 		}
 		return (SimulationReport)this;
 	}
@@ -1372,7 +1400,9 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		Wrap<BigDecimal> paramMaxGreenTimeSecWestEastWrap = new Wrap<BigDecimal>().var("paramMaxGreenTimeSecWestEast");
 		if(paramMaxGreenTimeSecWestEast == null) {
 			_paramMaxGreenTimeSecWestEast(paramMaxGreenTimeSecWestEastWrap);
-			setParamMaxGreenTimeSecWestEast(paramMaxGreenTimeSecWestEastWrap.o);
+			Optional.ofNullable(paramMaxGreenTimeSecWestEastWrap.getO()).ifPresent(o -> {
+				setParamMaxGreenTimeSecWestEast(o);
+			});
 		}
 		return (SimulationReport)this;
 	}
@@ -1447,7 +1477,9 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		Wrap<BigDecimal> paramMinGreenTimeSecSouthNorthWrap = new Wrap<BigDecimal>().var("paramMinGreenTimeSecSouthNorth");
 		if(paramMinGreenTimeSecSouthNorth == null) {
 			_paramMinGreenTimeSecSouthNorth(paramMinGreenTimeSecSouthNorthWrap);
-			setParamMinGreenTimeSecSouthNorth(paramMinGreenTimeSecSouthNorthWrap.o);
+			Optional.ofNullable(paramMinGreenTimeSecSouthNorthWrap.getO()).ifPresent(o -> {
+				setParamMinGreenTimeSecSouthNorth(o);
+			});
 		}
 		return (SimulationReport)this;
 	}
@@ -1522,7 +1554,9 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		Wrap<BigDecimal> paramMaxGreenTimeSecSouthNorthWrap = new Wrap<BigDecimal>().var("paramMaxGreenTimeSecSouthNorth");
 		if(paramMaxGreenTimeSecSouthNorth == null) {
 			_paramMaxGreenTimeSecSouthNorth(paramMaxGreenTimeSecSouthNorthWrap);
-			setParamMaxGreenTimeSecSouthNorth(paramMaxGreenTimeSecSouthNorthWrap.o);
+			Optional.ofNullable(paramMaxGreenTimeSecSouthNorthWrap.getO()).ifPresent(o -> {
+				setParamMaxGreenTimeSecSouthNorth(o);
+			});
 		}
 		return (SimulationReport)this;
 	}
@@ -1597,7 +1631,9 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		Wrap<BigDecimal> paramPedestrianWaitThresholdSecNorthSouthWrap = new Wrap<BigDecimal>().var("paramPedestrianWaitThresholdSecNorthSouth");
 		if(paramPedestrianWaitThresholdSecNorthSouth == null) {
 			_paramPedestrianWaitThresholdSecNorthSouth(paramPedestrianWaitThresholdSecNorthSouthWrap);
-			setParamPedestrianWaitThresholdSecNorthSouth(paramPedestrianWaitThresholdSecNorthSouthWrap.o);
+			Optional.ofNullable(paramPedestrianWaitThresholdSecNorthSouthWrap.getO()).ifPresent(o -> {
+				setParamPedestrianWaitThresholdSecNorthSouth(o);
+			});
 		}
 		return (SimulationReport)this;
 	}
@@ -1672,7 +1708,9 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		Wrap<BigDecimal> paramPedestrianWaitThresholdSecWestEastWrap = new Wrap<BigDecimal>().var("paramPedestrianWaitThresholdSecWestEast");
 		if(paramPedestrianWaitThresholdSecWestEast == null) {
 			_paramPedestrianWaitThresholdSecWestEast(paramPedestrianWaitThresholdSecWestEastWrap);
-			setParamPedestrianWaitThresholdSecWestEast(paramPedestrianWaitThresholdSecWestEastWrap.o);
+			Optional.ofNullable(paramPedestrianWaitThresholdSecWestEastWrap.getO()).ifPresent(o -> {
+				setParamPedestrianWaitThresholdSecWestEast(o);
+			});
 		}
 		return (SimulationReport)this;
 	}
@@ -1747,7 +1785,9 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		Wrap<BigDecimal> paramVehicleQueueThresholdWestEastWrap = new Wrap<BigDecimal>().var("paramVehicleQueueThresholdWestEast");
 		if(paramVehicleQueueThresholdWestEast == null) {
 			_paramVehicleQueueThresholdWestEast(paramVehicleQueueThresholdWestEastWrap);
-			setParamVehicleQueueThresholdWestEast(paramVehicleQueueThresholdWestEastWrap.o);
+			Optional.ofNullable(paramVehicleQueueThresholdWestEastWrap.getO()).ifPresent(o -> {
+				setParamVehicleQueueThresholdWestEast(o);
+			});
 		}
 		return (SimulationReport)this;
 	}
@@ -1822,7 +1862,9 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		Wrap<BigDecimal> paramVehicleQueueThresholdSouthNorthWrap = new Wrap<BigDecimal>().var("paramVehicleQueueThresholdSouthNorth");
 		if(paramVehicleQueueThresholdSouthNorth == null) {
 			_paramVehicleQueueThresholdSouthNorth(paramVehicleQueueThresholdSouthNorthWrap);
-			setParamVehicleQueueThresholdSouthNorth(paramVehicleQueueThresholdSouthNorthWrap.o);
+			Optional.ofNullable(paramVehicleQueueThresholdSouthNorthWrap.getO()).ifPresent(o -> {
+				setParamVehicleQueueThresholdSouthNorth(o);
+			});
 		}
 		return (SimulationReport)this;
 	}
@@ -1897,7 +1939,9 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		Wrap<BigDecimal> paramPedestrianQueueThresholdNorthSouthWrap = new Wrap<BigDecimal>().var("paramPedestrianQueueThresholdNorthSouth");
 		if(paramPedestrianQueueThresholdNorthSouth == null) {
 			_paramPedestrianQueueThresholdNorthSouth(paramPedestrianQueueThresholdNorthSouthWrap);
-			setParamPedestrianQueueThresholdNorthSouth(paramPedestrianQueueThresholdNorthSouthWrap.o);
+			Optional.ofNullable(paramPedestrianQueueThresholdNorthSouthWrap.getO()).ifPresent(o -> {
+				setParamPedestrianQueueThresholdNorthSouth(o);
+			});
 		}
 		return (SimulationReport)this;
 	}
@@ -1972,7 +2016,9 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		Wrap<BigDecimal> paramPedestrianQueueThresholdWestEastWrap = new Wrap<BigDecimal>().var("paramPedestrianQueueThresholdWestEast");
 		if(paramPedestrianQueueThresholdWestEast == null) {
 			_paramPedestrianQueueThresholdWestEast(paramPedestrianQueueThresholdWestEastWrap);
-			setParamPedestrianQueueThresholdWestEast(paramPedestrianQueueThresholdWestEastWrap.o);
+			Optional.ofNullable(paramPedestrianQueueThresholdWestEastWrap.getO()).ifPresent(o -> {
+				setParamPedestrianQueueThresholdWestEast(o);
+			});
 		}
 		return (SimulationReport)this;
 	}
@@ -2245,7 +2291,9 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		Wrap<BigDecimal> paramStepSizeWrap = new Wrap<BigDecimal>().var("paramStepSize");
 		if(paramStepSize == null) {
 			_paramStepSize(paramStepSizeWrap);
-			setParamStepSize(paramStepSizeWrap.o);
+			Optional.ofNullable(paramStepSizeWrap.getO()).ifPresent(o -> {
+				setParamStepSize(o);
+			});
 		}
 		return (SimulationReport)this;
 	}
@@ -2307,7 +2355,9 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		Wrap<Integer> paramRunTimeWrap = new Wrap<Integer>().var("paramRunTime");
 		if(paramRunTime == null) {
 			_paramRunTime(paramRunTimeWrap);
-			setParamRunTime(paramRunTimeWrap.o);
+			Optional.ofNullable(paramRunTimeWrap.getO()).ifPresent(o -> {
+				setParamRunTime(o);
+			});
 		}
 		return (SimulationReport)this;
 	}
@@ -2369,7 +2419,9 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		Wrap<Integer> paramItersPerParWrap = new Wrap<Integer>().var("paramItersPerPar");
 		if(paramItersPerPar == null) {
 			_paramItersPerPar(paramItersPerParWrap);
-			setParamItersPerPar(paramItersPerParWrap.o);
+			Optional.ofNullable(paramItersPerParWrap.getO()).ifPresent(o -> {
+				setParamItersPerPar(o);
+			});
 		}
 		return (SimulationReport)this;
 	}
@@ -2431,7 +2483,9 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		Wrap<Integer> paramTotalIterNumWrap = new Wrap<Integer>().var("paramTotalIterNum");
 		if(paramTotalIterNum == null) {
 			_paramTotalIterNum(paramTotalIterNumWrap);
-			setParamTotalIterNum(paramTotalIterNumWrap.o);
+			Optional.ofNullable(paramTotalIterNumWrap.getO()).ifPresent(o -> {
+				setParamTotalIterNum(o);
+			});
 		}
 		return (SimulationReport)this;
 	}
@@ -2497,7 +2551,9 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		Wrap<String> reportStatusWrap = new Wrap<String>().var("reportStatus");
 		if(reportStatus == null) {
 			_reportStatus(reportStatusWrap);
-			setReportStatus(reportStatusWrap.o);
+			Optional.ofNullable(reportStatusWrap.getO()).ifPresent(o -> {
+				setReportStatus(o);
+			});
 		}
 		return (SimulationReport)this;
 	}
@@ -2559,7 +2615,9 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		Wrap<Integer> reportProgressWrap = new Wrap<Integer>().var("reportProgress");
 		if(reportProgress == null) {
 			_reportProgress(reportProgressWrap);
-			setReportProgress(reportProgressWrap.o);
+			Optional.ofNullable(reportProgressWrap.getO()).ifPresent(o -> {
+				setReportProgress(o);
+			});
 		}
 		return (SimulationReport)this;
 	}
@@ -2621,7 +2679,9 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		Wrap<JsonArray> updatedParametersWrap = new Wrap<JsonArray>().var("updatedParameters");
 		if(updatedParameters == null) {
 			_updatedParameters(updatedParametersWrap);
-			setUpdatedParameters(updatedParametersWrap.o);
+			Optional.ofNullable(updatedParametersWrap.getO()).ifPresent(o -> {
+				setUpdatedParameters(o);
+			});
 		}
 		return (SimulationReport)this;
 	}
@@ -2683,7 +2743,9 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		Wrap<JsonArray> updatedPerformanceWrap = new Wrap<JsonArray>().var("updatedPerformance");
 		if(updatedPerformance == null) {
 			_updatedPerformance(updatedPerformanceWrap);
-			setUpdatedPerformance(updatedPerformanceWrap.o);
+			Optional.ofNullable(updatedPerformanceWrap.getO()).ifPresent(o -> {
+				setUpdatedPerformance(o);
+			});
 		}
 		return (SimulationReport)this;
 	}
@@ -2745,7 +2807,9 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		Wrap<JsonArray> updatedPerformanceWaitWestEastVehicleSecWrap = new Wrap<JsonArray>().var("updatedPerformanceWaitWestEastVehicleSec");
 		if(updatedPerformanceWaitWestEastVehicleSec == null) {
 			_updatedPerformanceWaitWestEastVehicleSec(updatedPerformanceWaitWestEastVehicleSecWrap);
-			setUpdatedPerformanceWaitWestEastVehicleSec(updatedPerformanceWaitWestEastVehicleSecWrap.o);
+			Optional.ofNullable(updatedPerformanceWaitWestEastVehicleSecWrap.getO()).ifPresent(o -> {
+				setUpdatedPerformanceWaitWestEastVehicleSec(o);
+			});
 		}
 		return (SimulationReport)this;
 	}
@@ -2803,7 +2867,9 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		Wrap<JsonArray> updatedPerformanceWaitSouthNorthVehicleSecWrap = new Wrap<JsonArray>().var("updatedPerformanceWaitSouthNorthVehicleSec");
 		if(updatedPerformanceWaitSouthNorthVehicleSec == null) {
 			_updatedPerformanceWaitSouthNorthVehicleSec(updatedPerformanceWaitSouthNorthVehicleSecWrap);
-			setUpdatedPerformanceWaitSouthNorthVehicleSec(updatedPerformanceWaitSouthNorthVehicleSecWrap.o);
+			Optional.ofNullable(updatedPerformanceWaitSouthNorthVehicleSecWrap.getO()).ifPresent(o -> {
+				setUpdatedPerformanceWaitSouthNorthVehicleSec(o);
+			});
 		}
 		return (SimulationReport)this;
 	}
@@ -2861,7 +2927,9 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		Wrap<JsonArray> updatedPerformanceWaitAllVehicleSecWrap = new Wrap<JsonArray>().var("updatedPerformanceWaitAllVehicleSec");
 		if(updatedPerformanceWaitAllVehicleSec == null) {
 			_updatedPerformanceWaitAllVehicleSec(updatedPerformanceWaitAllVehicleSecWrap);
-			setUpdatedPerformanceWaitAllVehicleSec(updatedPerformanceWaitAllVehicleSecWrap.o);
+			Optional.ofNullable(updatedPerformanceWaitAllVehicleSecWrap.getO()).ifPresent(o -> {
+				setUpdatedPerformanceWaitAllVehicleSec(o);
+			});
 		}
 		return (SimulationReport)this;
 	}
@@ -2919,7 +2987,9 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		Wrap<JsonArray> updatedPerformanceWaitAllPedestrianSecWrap = new Wrap<JsonArray>().var("updatedPerformanceWaitAllPedestrianSec");
 		if(updatedPerformanceWaitAllPedestrianSec == null) {
 			_updatedPerformanceWaitAllPedestrianSec(updatedPerformanceWaitAllPedestrianSecWrap);
-			setUpdatedPerformanceWaitAllPedestrianSec(updatedPerformanceWaitAllPedestrianSecWrap.o);
+			Optional.ofNullable(updatedPerformanceWaitAllPedestrianSecWrap.getO()).ifPresent(o -> {
+				setUpdatedPerformanceWaitAllPedestrianSec(o);
+			});
 		}
 		return (SimulationReport)this;
 	}
@@ -2977,7 +3047,9 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		Wrap<JsonArray> updatedPerformanceWaitAllVehiclePedestrianSecWrap = new Wrap<JsonArray>().var("updatedPerformanceWaitAllVehiclePedestrianSec");
 		if(updatedPerformanceWaitAllVehiclePedestrianSec == null) {
 			_updatedPerformanceWaitAllVehiclePedestrianSec(updatedPerformanceWaitAllVehiclePedestrianSecWrap);
-			setUpdatedPerformanceWaitAllVehiclePedestrianSec(updatedPerformanceWaitAllVehiclePedestrianSecWrap.o);
+			Optional.ofNullable(updatedPerformanceWaitAllVehiclePedestrianSecWrap.getO()).ifPresent(o -> {
+				setUpdatedPerformanceWaitAllVehiclePedestrianSec(o);
+			});
 		}
 		return (SimulationReport)this;
 	}
@@ -3035,7 +3107,9 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		Wrap<JsonArray> avgQueueLengthWestEastVehicleWrap = new Wrap<JsonArray>().var("avgQueueLengthWestEastVehicle");
 		if(avgQueueLengthWestEastVehicle == null) {
 			_avgQueueLengthWestEastVehicle(avgQueueLengthWestEastVehicleWrap);
-			setAvgQueueLengthWestEastVehicle(avgQueueLengthWestEastVehicleWrap.o);
+			Optional.ofNullable(avgQueueLengthWestEastVehicleWrap.getO()).ifPresent(o -> {
+				setAvgQueueLengthWestEastVehicle(o);
+			});
 		}
 		return (SimulationReport)this;
 	}
@@ -3093,7 +3167,9 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		Wrap<JsonArray> avgQueueLengthSouthNorthVehicleWrap = new Wrap<JsonArray>().var("avgQueueLengthSouthNorthVehicle");
 		if(avgQueueLengthSouthNorthVehicle == null) {
 			_avgQueueLengthSouthNorthVehicle(avgQueueLengthSouthNorthVehicleWrap);
-			setAvgQueueLengthSouthNorthVehicle(avgQueueLengthSouthNorthVehicleWrap.o);
+			Optional.ofNullable(avgQueueLengthSouthNorthVehicleWrap.getO()).ifPresent(o -> {
+				setAvgQueueLengthSouthNorthVehicle(o);
+			});
 		}
 		return (SimulationReport)this;
 	}
@@ -3151,7 +3227,9 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		Wrap<JsonArray> avgQueueLengthNorthSouthPedestrianWrap = new Wrap<JsonArray>().var("avgQueueLengthNorthSouthPedestrian");
 		if(avgQueueLengthNorthSouthPedestrian == null) {
 			_avgQueueLengthNorthSouthPedestrian(avgQueueLengthNorthSouthPedestrianWrap);
-			setAvgQueueLengthNorthSouthPedestrian(avgQueueLengthNorthSouthPedestrianWrap.o);
+			Optional.ofNullable(avgQueueLengthNorthSouthPedestrianWrap.getO()).ifPresent(o -> {
+				setAvgQueueLengthNorthSouthPedestrian(o);
+			});
 		}
 		return (SimulationReport)this;
 	}
@@ -3209,7 +3287,9 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		Wrap<JsonArray> avgQueueLengthWestEastPedestrianWrap = new Wrap<JsonArray>().var("avgQueueLengthWestEastPedestrian");
 		if(avgQueueLengthWestEastPedestrian == null) {
 			_avgQueueLengthWestEastPedestrian(avgQueueLengthWestEastPedestrianWrap);
-			setAvgQueueLengthWestEastPedestrian(avgQueueLengthWestEastPedestrianWrap.o);
+			Optional.ofNullable(avgQueueLengthWestEastPedestrianWrap.getO()).ifPresent(o -> {
+				setAvgQueueLengthWestEastPedestrian(o);
+			});
 		}
 		return (SimulationReport)this;
 	}

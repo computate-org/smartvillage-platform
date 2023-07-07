@@ -150,7 +150,9 @@ public abstract class TimeStepGenPageGen<DEV> extends BaseResultPage {
 		Wrap<SearchList<TimeStep>> searchListTimeStep_Wrap = new Wrap<SearchList<TimeStep>>().var("searchListTimeStep_");
 		if(searchListTimeStep_ == null) {
 			_searchListTimeStep_(searchListTimeStep_Wrap);
-			setSearchListTimeStep_(searchListTimeStep_Wrap.o);
+			Optional.ofNullable(searchListTimeStep_Wrap.getO()).ifPresent(o -> {
+				setSearchListTimeStep_(o);
+			});
 		}
 		return (TimeStepGenPage)this;
 	}
@@ -250,7 +252,9 @@ public abstract class TimeStepGenPageGen<DEV> extends BaseResultPage {
 		Wrap<Integer> timeStepCountWrap = new Wrap<Integer>().var("timeStepCount");
 		if(timeStepCount == null) {
 			_timeStepCount(timeStepCountWrap);
-			setTimeStepCount(timeStepCountWrap.o);
+			Optional.ofNullable(timeStepCountWrap.getO()).ifPresent(o -> {
+				setTimeStepCount(o);
+			});
 		}
 		return (TimeStepGenPage)this;
 	}
@@ -301,7 +305,9 @@ public abstract class TimeStepGenPageGen<DEV> extends BaseResultPage {
 		Wrap<TimeStep> timeStep_Wrap = new Wrap<TimeStep>().var("timeStep_");
 		if(timeStep_ == null) {
 			_timeStep_(timeStep_Wrap);
-			setTimeStep_(timeStep_Wrap.o);
+			Optional.ofNullable(timeStep_Wrap.getO()).ifPresent(o -> {
+				setTimeStep_(o);
+			});
 		}
 		return (TimeStepGenPage)this;
 	}
@@ -339,7 +345,9 @@ public abstract class TimeStepGenPageGen<DEV> extends BaseResultPage {
 		Wrap<String> idWrap = new Wrap<String>().var("id");
 		if(id == null) {
 			_id(idWrap);
-			setId(idWrap.o);
+			Optional.ofNullable(idWrap.getO()).ifPresent(o -> {
+				setId(o);
+			});
 		}
 		return (TimeStepGenPage)this;
 	}
@@ -389,7 +397,9 @@ public abstract class TimeStepGenPageGen<DEV> extends BaseResultPage {
 		Wrap<String> pageUriTimeStepWrap = new Wrap<String>().var("pageUriTimeStep");
 		if(pageUriTimeStep == null) {
 			_pageUriTimeStep(pageUriTimeStepWrap);
-			setPageUriTimeStep(pageUriTimeStepWrap.o);
+			Optional.ofNullable(pageUriTimeStepWrap.getO()).ifPresent(o -> {
+				setPageUriTimeStep(o);
+			});
 		}
 		return (TimeStepGenPage)this;
 	}

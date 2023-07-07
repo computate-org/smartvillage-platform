@@ -150,7 +150,9 @@ public abstract class SystemEventGenPageGen<DEV> extends PageLayout {
 		Wrap<SearchList<SystemEvent>> searchListSystemEvent_Wrap = new Wrap<SearchList<SystemEvent>>().var("searchListSystemEvent_");
 		if(searchListSystemEvent_ == null) {
 			_searchListSystemEvent_(searchListSystemEvent_Wrap);
-			setSearchListSystemEvent_(searchListSystemEvent_Wrap.o);
+			Optional.ofNullable(searchListSystemEvent_Wrap.getO()).ifPresent(o -> {
+				setSearchListSystemEvent_(o);
+			});
 		}
 		return (SystemEventGenPage)this;
 	}
@@ -250,7 +252,9 @@ public abstract class SystemEventGenPageGen<DEV> extends PageLayout {
 		Wrap<Integer> systemEventCountWrap = new Wrap<Integer>().var("systemEventCount");
 		if(systemEventCount == null) {
 			_systemEventCount(systemEventCountWrap);
-			setSystemEventCount(systemEventCountWrap.o);
+			Optional.ofNullable(systemEventCountWrap.getO()).ifPresent(o -> {
+				setSystemEventCount(o);
+			});
 		}
 		return (SystemEventGenPage)this;
 	}
@@ -301,7 +305,9 @@ public abstract class SystemEventGenPageGen<DEV> extends PageLayout {
 		Wrap<SystemEvent> systemEvent_Wrap = new Wrap<SystemEvent>().var("systemEvent_");
 		if(systemEvent_ == null) {
 			_systemEvent_(systemEvent_Wrap);
-			setSystemEvent_(systemEvent_Wrap.o);
+			Optional.ofNullable(systemEvent_Wrap.getO()).ifPresent(o -> {
+				setSystemEvent_(o);
+			});
 		}
 		return (SystemEventGenPage)this;
 	}
@@ -339,7 +345,9 @@ public abstract class SystemEventGenPageGen<DEV> extends PageLayout {
 		Wrap<String> idWrap = new Wrap<String>().var("id");
 		if(id == null) {
 			_id(idWrap);
-			setId(idWrap.o);
+			Optional.ofNullable(idWrap.getO()).ifPresent(o -> {
+				setId(o);
+			});
 		}
 		return (SystemEventGenPage)this;
 	}
@@ -389,7 +397,9 @@ public abstract class SystemEventGenPageGen<DEV> extends PageLayout {
 		Wrap<String> pageUriSystemEventWrap = new Wrap<String>().var("pageUriSystemEvent");
 		if(pageUriSystemEvent == null) {
 			_pageUriSystemEvent(pageUriSystemEventWrap);
-			setPageUriSystemEvent(pageUriSystemEventWrap.o);
+			Optional.ofNullable(pageUriSystemEventWrap.getO()).ifPresent(o -> {
+				setPageUriSystemEvent(o);
+			});
 		}
 		return (SystemEventGenPage)this;
 	}

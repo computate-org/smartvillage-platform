@@ -622,28 +622,11 @@
 						<span class="w3-button w3-display-topright " onclick="$('#postTrafficSimulationModal').hide(); ">×</span>
 	{{/eq}}
 						<h2 class="w3-padding ">Create a traffic simulation</h2>
+						<div class="">You can override any default values below: </div>
 					</header>
 					<div class="" id="postTrafficSimulationFormValues">
 						<div id="postTrafficSimulationForm">
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmCreated" roleRequired="true"}}
-{{else}}
-{{> "htmCreated" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmArchived" roleRequired="true"}}
-{{else}}
-{{> "htmArchived" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmDeleted" roleRequired="true"}}
-{{else}}
-{{> "htmDeleted" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-							</div>
+{{#block "htmFormButton_postTrafficSimulation"}}{{/block}}
 							<div class="w3-cell-row ">
 {{#ifContainsAnyRoles roles roleRequired}}
 {{> "htmSimulationName" roleRequired="true"}}
@@ -803,13 +786,6 @@
 {{> "htmParamTotalIterNum" roleRequired="true"}}
 {{else}}
 {{> "htmParamTotalIterNum" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmReportKeys" roleRequired="true"}}
-{{else}}
-{{> "htmReportKeys" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 						</div>
@@ -1430,7 +1406,7 @@
 		{{#eq roleRequired "true"}}
 														<input
 															type="text"
-															placeholder="simulation name"
+															placeholder="Veberöd intersection"
 															id="{{classApiMethodMethod}}_simulationName"
 	{{#eq "Page" classApiMethodMethod}}
 																class="setSimulationName classTrafficSimulation inputTrafficSimulation{{pk}}SimulationName w3-input w3-border "
@@ -1498,7 +1474,7 @@
 		{{#eq roleRequired "true"}}
 														<input
 															type="text"
-															placeholder="sumocfg path"
+															placeholder="/usr/local/src/TLC/input/Veberod_intersection_pedestrian.sumocfg"
 															id="{{classApiMethodMethod}}_sumocfgPath"
 	{{#eq "Page" classApiMethodMethod}}
 																class="setSumocfgPath classTrafficSimulation inputTrafficSimulation{{pk}}SumocfgPath w3-input w3-border "
@@ -1566,7 +1542,7 @@
 		{{#eq roleRequired "true"}}
 														<input
 															type="text"
-															placeholder="Floating Car Data file path"
+															placeholder="/usr/local/src/TLC/output/veberod-fcd.xml"
 															id="{{classApiMethodMethod}}_fcdFilePath"
 	{{#eq "Page" classApiMethodMethod}}
 																class="setFcdFilePath classTrafficSimulation inputTrafficSimulation{{pk}}FcdFilePath w3-input w3-border "
@@ -1702,7 +1678,7 @@
 		{{#eq roleRequired "true"}}
 														<input
 															type="text"
-															placeholder="start seconds"
+															placeholder="0"
 															title="-b, --begin TIME Defines the begin time in seconds; The simulation starts at this time"
 															id="{{classApiMethodMethod}}_startSeconds"
 	{{#eq "Page" classApiMethodMethod}}
@@ -1771,7 +1747,7 @@
 		{{#eq roleRequired "true"}}
 														<input
 															type="text"
-															placeholder="end seconds"
+															placeholder="300"
 															title="-e, --end TIME Defines the end time in seconds; The simulation ends at this time"
 															id="{{classApiMethodMethod}}_endSeconds"
 	{{#eq "Page" classApiMethodMethod}}
@@ -1840,7 +1816,7 @@
 		{{#eq roleRequired "true"}}
 														<input
 															type="text"
-															placeholder="step seconds"
+															placeholder="0.1"
 															title="--step-length TIME Defines the step duration in seconds"
 															id="{{classApiMethodMethod}}_stepSeconds"
 	{{#eq "Page" classApiMethodMethod}}
@@ -1909,7 +1885,7 @@
 		{{#eq roleRequired "true"}}
 														<input
 															type="text"
-															placeholder="Average vehicle/min from WEST to EAST"
+															placeholder="10"
 															title="Min: 1"
 															id="{{classApiMethodMethod}}_paramAvgVehiclePerMinFromWestToEast"
 	{{#eq "Page" classApiMethodMethod}}
@@ -1978,7 +1954,7 @@
 		{{#eq roleRequired "true"}}
 														<input
 															type="text"
-															placeholder="Average vehicle/min from SOUTH to NORTH"
+															placeholder="10"
 															title="Min: 1"
 															id="{{classApiMethodMethod}}_paramAvgVehiclePerMinFromSouthToNorth"
 	{{#eq "Page" classApiMethodMethod}}
@@ -2047,7 +2023,7 @@
 		{{#eq roleRequired "true"}}
 														<input
 															type="text"
-															placeholder="Demand scaling factor (multiplies all vehicle demands)"
+															placeholder="1"
 															title="Min: 1"
 															id="{{classApiMethodMethod}}_paramVehicleDemandScalingFactor"
 	{{#eq "Page" classApiMethodMethod}}
@@ -2116,7 +2092,7 @@
 		{{#eq roleRequired "true"}}
 														<input
 															type="text"
-															placeholder="Average pedestrian/min from WEST to EAST"
+															placeholder="5"
 															title="Min: 1"
 															id="{{classApiMethodMethod}}_paramAvgPedestrianPerMinFromWestToEast"
 	{{#eq "Page" classApiMethodMethod}}
@@ -2185,7 +2161,7 @@
 		{{#eq roleRequired "true"}}
 														<input
 															type="text"
-															placeholder="Average pedestrian/min from WEST to EAST"
+															placeholder="5"
 															title="Min: 1"
 															id="{{classApiMethodMethod}}_paramAvgPedestrianPerMinFromSouthToNorth"
 	{{#eq "Page" classApiMethodMethod}}
@@ -2254,7 +2230,7 @@
 		{{#eq roleRequired "true"}}
 														<input
 															type="text"
-															placeholder="Demand scaling factor (multiplies all pedestrian demands)"
+															placeholder="1"
 															title="Min: 1"
 															id="{{classApiMethodMethod}}_paramPedestrianDemandScalingFactor"
 	{{#eq "Page" classApiMethodMethod}}
@@ -2391,7 +2367,7 @@
 		{{#eq roleRequired "true"}}
 														<input
 															type="text"
-															placeholder="Min GREEN time for WEST-EAST traffic (sec)"
+															placeholder="20"
 															title="Min: 1"
 															id="{{classApiMethodMethod}}_paramMinGreenTimeSecWestEast"
 	{{#eq "Page" classApiMethodMethod}}
@@ -2460,7 +2436,7 @@
 		{{#eq roleRequired "true"}}
 														<input
 															type="text"
-															placeholder="Max GREEN time for WEST-EAST traffic (sec)"
+															placeholder="30"
 															title="Min: 1"
 															id="{{classApiMethodMethod}}_paramMaxGreenTimeSecWestEast"
 	{{#eq "Page" classApiMethodMethod}}
@@ -2529,7 +2505,7 @@
 		{{#eq roleRequired "true"}}
 														<input
 															type="text"
-															placeholder="Min GREEN time for SOUTH-NORTH traffic (sec)"
+															placeholder="10"
 															title="Min: 1"
 															id="{{classApiMethodMethod}}_paramMinGreenTimeSecSouthNorth"
 	{{#eq "Page" classApiMethodMethod}}
@@ -2598,7 +2574,7 @@
 		{{#eq roleRequired "true"}}
 														<input
 															type="text"
-															placeholder="Max GREEN time for SOUTH-NORTH traffic (sec)"
+															placeholder="20"
 															title="Min: 1"
 															id="{{classApiMethodMethod}}_paramMaxGreenTimeSecSouthNorth"
 	{{#eq "Page" classApiMethodMethod}}
@@ -2667,7 +2643,7 @@
 		{{#eq roleRequired "true"}}
 														<input
 															type="text"
-															placeholder="Pedestrian waiting time tolerance threshold for NORTH-SOUTH (sec)"
+															placeholder="10"
 															title="Min: 1"
 															id="{{classApiMethodMethod}}_paramPedestrianWaitThresholdSecNorthSouth"
 	{{#eq "Page" classApiMethodMethod}}
@@ -2736,7 +2712,7 @@
 		{{#eq roleRequired "true"}}
 														<input
 															type="text"
-															placeholder="Pedestrian waiting time tolerance threshold for WEST-EAST (sec)"
+															placeholder="10"
 															title="Min: 1"
 															id="{{classApiMethodMethod}}_paramPedestrianWaitThresholdSecWestEast"
 	{{#eq "Page" classApiMethodMethod}}
@@ -2805,7 +2781,7 @@
 		{{#eq roleRequired "true"}}
 														<input
 															type="text"
-															placeholder="Vehicle queue length threshold between low-high content for WEST-EAST"
+															placeholder="8"
 															title="Min: 1"
 															id="{{classApiMethodMethod}}_paramVehicleQueueThresholdWestEast"
 	{{#eq "Page" classApiMethodMethod}}
@@ -2874,7 +2850,7 @@
 		{{#eq roleRequired "true"}}
 														<input
 															type="text"
-															placeholder="Vehicle queue length threshold between low-high content for SOUTH-NORTH"
+															placeholder="8"
 															title="Min: 1"
 															id="{{classApiMethodMethod}}_paramVehicleQueueThresholdSouthNorth"
 	{{#eq "Page" classApiMethodMethod}}
@@ -2943,7 +2919,7 @@
 		{{#eq roleRequired "true"}}
 														<input
 															type="text"
-															placeholder="Pedestrian queue length threshold between low-high content for NORTH-SOUTH"
+															placeholder="6"
 															title="Min: 1"
 															id="{{classApiMethodMethod}}_paramPedestrianQueueThresholdNorthSouth"
 	{{#eq "Page" classApiMethodMethod}}
@@ -3012,7 +2988,7 @@
 		{{#eq roleRequired "true"}}
 														<input
 															type="text"
-															placeholder="Pedestrian queue length threshold between low-high content for WEST-EAST"
+															placeholder="6"
 															title="Min: 1"
 															id="{{classApiMethodMethod}}_paramPedestrianQueueThresholdWestEast"
 	{{#eq "Page" classApiMethodMethod}}
@@ -3081,7 +3057,7 @@
 		{{#eq roleRequired "true"}}
 														<input
 															type="text"
-															placeholder="Simulation time step (sec)"
+															placeholder="1"
 															title="Min: 0.5"
 															id="{{classApiMethodMethod}}_paramStepSize"
 	{{#eq "Page" classApiMethodMethod}}
@@ -3150,7 +3126,7 @@
 		{{#eq roleRequired "true"}}
 														<input
 															type="text"
-															placeholder="time for each round of traffic simulation (sec)"
+															placeholder="1000"
 															title="Time duration of each simulated sample path. "
 															id="{{classApiMethodMethod}}_paramRunTime"
 	{{#eq "Page" classApiMethodMethod}}
@@ -3219,7 +3195,7 @@
 		{{#eq roleRequired "true"}}
 														<input
 															type="text"
-															placeholder="Number of simulation repetitions with same input (for statistical accuracy)"
+															placeholder="3"
 															title="Number of repeats per round. "
 															id="{{classApiMethodMethod}}_paramItersPerPar"
 	{{#eq "Page" classApiMethodMethod}}
@@ -3288,7 +3264,7 @@
 		{{#eq roleRequired "true"}}
 														<input
 															type="text"
-															placeholder="Number of parameter update iterations before output"
+															placeholder="5"
 															title="Total iterations to update performance. "
 															id="{{classApiMethodMethod}}_paramTotalIterNum"
 	{{#eq "Page" classApiMethodMethod}}

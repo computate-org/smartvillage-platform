@@ -151,7 +151,9 @@ public abstract class SmartTrafficLightGenPageGen<DEV> extends BaseModelPage {
 		Wrap<SearchList<SmartTrafficLight>> searchListSmartTrafficLight_Wrap = new Wrap<SearchList<SmartTrafficLight>>().var("searchListSmartTrafficLight_");
 		if(searchListSmartTrafficLight_ == null) {
 			_searchListSmartTrafficLight_(searchListSmartTrafficLight_Wrap);
-			setSearchListSmartTrafficLight_(searchListSmartTrafficLight_Wrap.o);
+			Optional.ofNullable(searchListSmartTrafficLight_Wrap.getO()).ifPresent(o -> {
+				setSearchListSmartTrafficLight_(o);
+			});
 		}
 		return (SmartTrafficLightGenPage)this;
 	}
@@ -251,7 +253,9 @@ public abstract class SmartTrafficLightGenPageGen<DEV> extends BaseModelPage {
 		Wrap<Integer> smartTrafficLightCountWrap = new Wrap<Integer>().var("smartTrafficLightCount");
 		if(smartTrafficLightCount == null) {
 			_smartTrafficLightCount(smartTrafficLightCountWrap);
-			setSmartTrafficLightCount(smartTrafficLightCountWrap.o);
+			Optional.ofNullable(smartTrafficLightCountWrap.getO()).ifPresent(o -> {
+				setSmartTrafficLightCount(o);
+			});
 		}
 		return (SmartTrafficLightGenPage)this;
 	}
@@ -302,7 +306,9 @@ public abstract class SmartTrafficLightGenPageGen<DEV> extends BaseModelPage {
 		Wrap<SmartTrafficLight> smartTrafficLight_Wrap = new Wrap<SmartTrafficLight>().var("smartTrafficLight_");
 		if(smartTrafficLight_ == null) {
 			_smartTrafficLight_(smartTrafficLight_Wrap);
-			setSmartTrafficLight_(smartTrafficLight_Wrap.o);
+			Optional.ofNullable(smartTrafficLight_Wrap.getO()).ifPresent(o -> {
+				setSmartTrafficLight_(o);
+			});
 		}
 		return (SmartTrafficLightGenPage)this;
 	}
@@ -348,7 +354,9 @@ public abstract class SmartTrafficLightGenPageGen<DEV> extends BaseModelPage {
 		Wrap<Long> pkWrap = new Wrap<Long>().var("pk");
 		if(pk == null) {
 			_pk(pkWrap);
-			setPk(pkWrap.o);
+			Optional.ofNullable(pkWrap.getO()).ifPresent(o -> {
+				setPk(o);
+			});
 		}
 		return (SmartTrafficLightGenPage)this;
 	}
@@ -398,7 +406,9 @@ public abstract class SmartTrafficLightGenPageGen<DEV> extends BaseModelPage {
 		Wrap<String> idWrap = new Wrap<String>().var("id");
 		if(id == null) {
 			_id(idWrap);
-			setId(idWrap.o);
+			Optional.ofNullable(idWrap.getO()).ifPresent(o -> {
+				setId(o);
+			});
 		}
 		return (SmartTrafficLightGenPage)this;
 	}
@@ -448,7 +458,9 @@ public abstract class SmartTrafficLightGenPageGen<DEV> extends BaseModelPage {
 		Wrap<String> pageUriSmartTrafficLightWrap = new Wrap<String>().var("pageUriSmartTrafficLight");
 		if(pageUriSmartTrafficLight == null) {
 			_pageUriSmartTrafficLight(pageUriSmartTrafficLightWrap);
-			setPageUriSmartTrafficLight(pageUriSmartTrafficLightWrap.o);
+			Optional.ofNullable(pageUriSmartTrafficLightWrap.getO()).ifPresent(o -> {
+				setPageUriSmartTrafficLight(o);
+			});
 		}
 		return (SmartTrafficLightGenPage)this;
 	}

@@ -70,8 +70,10 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * HtmRow: 3
 	 * HtmCell: 1
 	 * Facet: true
+	 * Default: Veberöd intersection
 	 */
 	protected void _simulationName(Wrap<String> w) {
+		super._simulationName(w);
 	}
 
 	/**
@@ -82,8 +84,10 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * HtmRow: 4
 	 * HtmCell: 1
 	 * Facet: true
+	 * Default: /usr/local/src/TLC/input/Veberod_intersection_pedestrian.sumocfg
 	 */
 	protected void _sumocfgPath(Wrap<String> w) {
+		super._sumocfgPath(w);
 	}
 
 	/**
@@ -94,8 +98,10 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * HtmRow: 5
 	 * HtmCell: 1
 	 * Facet: true
+	 * Default: /usr/local/src/TLC/output/veberod-fcd.xml
 	 */
 	protected void _fcdFilePath(Wrap<String> w) {
+		super._fcdFilePath(w);
 	}
 
 	/**
@@ -117,8 +123,10 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * HtmRow: 6
 	 * HtmCell: 1
 	 * Facet: true
+	 * Default: 0
 	 */
 	protected void _startSeconds(Wrap<BigDecimal> w) {
+		super._startSeconds(w);
 	}
 
 	/**
@@ -130,8 +138,10 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * HtmRow: 6
 	 * HtmCell: 2
 	 * Facet: true
+	 * Default: 300
 	 */
 	protected void _endSeconds(Wrap<BigDecimal> w) {
+		super._endSeconds(w);
 	}
 
 	/**
@@ -143,8 +153,10 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * HtmRow: 6
 	 * HtmCell: 3
 	 * Facet: true
+	 * Default: 0.1
 	 */
 	protected void _stepSeconds(Wrap<BigDecimal> w) {
+		super._stepSeconds(w);
 	}
 
 	/**
@@ -158,9 +170,10 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Description: 
 	 * Min: 1
 	 * Max: 30
+	 * Default: 10
 	 */
 	protected void _paramAvgVehiclePerMinFromWestToEast(Wrap<BigDecimal> w) {
-		w.o(new BigDecimal(10));
+		super._paramAvgVehiclePerMinFromWestToEast(w);
 	}
 
 	/**
@@ -174,9 +187,10 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Description: 
 	 * Min: 1
 	 * Max: 30
+	 * Default: 10
 	 */
 	protected void _paramAvgVehiclePerMinFromSouthToNorth(Wrap<BigDecimal> w) {
-		w.o(new BigDecimal(10));
+		super._paramAvgVehiclePerMinFromSouthToNorth(w);
 	}
 
 	/**
@@ -190,9 +204,10 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Description: 
 	 * Min: 1
 	 * Max: 2
+	 * Default: 1
 	 */
 	protected void _paramVehicleDemandScalingFactor(Wrap<BigDecimal> w) {
-		w.o(new BigDecimal(1));
+		super._paramVehicleDemandScalingFactor(w);
 	}
 
 	/**
@@ -206,9 +221,10 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Description: 
 	 * Min: 1
 	 * Max: 30
+	 * Default: 5
 	 */
 	protected void _paramAvgPedestrianPerMinFromWestToEast(Wrap<BigDecimal> w) {
-		w.o(new BigDecimal(5));
+		super._paramAvgPedestrianPerMinFromWestToEast(w);
 	}
 
 	/**
@@ -222,9 +238,10 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Description: 
 	 * Min: 1
 	 * Max: 30
+	 * Default: 5
 	 */
 	protected void _paramAvgPedestrianPerMinFromSouthToNorth(Wrap<BigDecimal> w) {
-		w.o(new BigDecimal(5));
+		super._paramAvgPedestrianPerMinFromSouthToNorth(w);
 	}
 
 	/**
@@ -238,9 +255,10 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Description: 
 	 * Min: 1
 	 * Max: 2
+	 * Default: 1
 	 */
 	protected void _paramPedestrianDemandScalingFactor(Wrap<BigDecimal> w) {
-		w.o(new BigDecimal(1));
+		super._paramPedestrianDemandScalingFactor(w);
 	}
 
 	/**
@@ -267,9 +285,10 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Description: 
 	 * Min: 1
 	 * Max: 50
+	 * Default: 20
 	 */
 	protected void _paramMinGreenTimeSecWestEast(Wrap<BigDecimal> w) {
-		w.o(new BigDecimal(20));
+		super._paramMinGreenTimeSecWestEast(w);
 	}
 
 	/**
@@ -283,9 +302,10 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Description: 
 	 * Min: 1
 	 * Max: 100
+	 * Default: 30
 	 */
 	protected void _paramMaxGreenTimeSecWestEast(Wrap<BigDecimal> w) {
-		w.o(new BigDecimal(30));
+		super._paramMaxGreenTimeSecWestEast(w);
 	}
 
 	/**
@@ -299,9 +319,10 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Description: 
 	 * Min: 1
 	 * Max: 50
+	 * Default: 10
 	 */
 	protected void _paramMinGreenTimeSecSouthNorth(Wrap<BigDecimal> w) {
-		w.o(new BigDecimal(10));
+		super._paramMinGreenTimeSecSouthNorth(w);
 	}
 
 	/**
@@ -315,9 +336,10 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Description: 
 	 * Min: 1
 	 * Max: 100
+	 * Default: 20
 	 */
 	protected void _paramMaxGreenTimeSecSouthNorth(Wrap<BigDecimal> w) {
-		w.o(new BigDecimal(20));
+		super._paramMaxGreenTimeSecSouthNorth(w);
 	}
 
 	/**
@@ -331,9 +353,10 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Description: 
 	 * Min: 1
 	 * Max: 60
+	 * Default: 10
 	 */
 	protected void _paramPedestrianWaitThresholdSecNorthSouth(Wrap<BigDecimal> w) {
-		w.o(new BigDecimal(10));
+		super._paramPedestrianWaitThresholdSecNorthSouth(w);
 	}
 
 	/**
@@ -347,9 +370,10 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Description: 
 	 * Min: 1
 	 * Max: 60
+	 * Default: 10
 	 */
 	protected void _paramPedestrianWaitThresholdSecWestEast(Wrap<BigDecimal> w) {
-		w.o(new BigDecimal(10));
+		super._paramPedestrianWaitThresholdSecWestEast(w);
 	}
 
 	/**
@@ -363,13 +387,14 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Description: 
 	 * Min: 1
 	 * Max: 60
+	 * Default: 8
 	 */
 	protected void _paramVehicleQueueThresholdWestEast(Wrap<BigDecimal> w) {
-		w.o(new BigDecimal(8));
+		super._paramVehicleQueueThresholdWestEast(w);
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * {@inheritDocentiteNomAffichage}
 	 * DocValues: true
 	 * Persist: true
 	 * HtmRow: 12
@@ -379,9 +404,10 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Description: 
 	 * Min: 1
 	 * Max: 15
+	 * Default: 8
 	 */
 	protected void _paramVehicleQueueThresholdSouthNorth(Wrap<BigDecimal> w) {
-		w.o(new BigDecimal(8));
+		super._paramVehicleQueueThresholdSouthNorth(w);
 	}
 
 	/**
@@ -395,9 +421,10 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Description: 
 	 * Min: 1
 	 * Max: 15
+	 * Default: 6
 	 */
 	protected void _paramPedestrianQueueThresholdNorthSouth(Wrap<BigDecimal> w) {
-		w.o(new BigDecimal(6));
+		super._paramPedestrianQueueThresholdNorthSouth(w);
 	}
 
 	/**
@@ -411,9 +438,10 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Description: 
 	 * Min: 1
 	 * Max: 15
+	 * Default: 6
 	 */
 	protected void _paramPedestrianQueueThresholdWestEast(Wrap<BigDecimal> w) {
-		w.o(new BigDecimal(6));
+		super._paramPedestrianQueueThresholdWestEast(w);
 	}
 
 	/**
@@ -427,9 +455,10 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Description: 
 	 * Min: 0.5
 	 * Max: 2
+	 * Default: 1
 	 */
 	protected void _paramStepSize(Wrap<BigDecimal> w) {
-		w.o(new BigDecimal(1));
+		super._paramStepSize(w);
 	}
 
 	/**
@@ -443,9 +472,10 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Description: Time duration of each simulated sample path. 
 	 * Min: 500
 	 * Max: 3600
+	 * Default: 1000
 	 */
 	protected void _paramRunTime(Wrap<Integer> w) {
-		w.o(1000);
+		super._paramRunTime(w);
 	}
 
 	/**
@@ -459,9 +489,10 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Description: Number of repeats per round. 
 	 * Min: 1
 	 * Max: 30
+	 * Default: 3
 	 */
 	protected void _paramItersPerPar(Wrap<Integer> w) {
-		w.o(3);
+		super._paramItersPerPar(w);
 	}
 
 	/**
@@ -475,9 +506,10 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Description: Total iterations to update performance. 
 	 * Min: 1
 	 * Max: 30
+	 * Default: 5
 	 */
 	protected void _paramTotalIterNum(Wrap<Integer> w) {
-		w.o(5);
+		super._paramTotalIterNum(w);
 	}
 
 	/**

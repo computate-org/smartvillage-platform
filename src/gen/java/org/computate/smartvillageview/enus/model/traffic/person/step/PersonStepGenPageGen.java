@@ -150,7 +150,9 @@ public abstract class PersonStepGenPageGen<DEV> extends MapResultPage {
 		Wrap<SearchList<PersonStep>> searchListPersonStep_Wrap = new Wrap<SearchList<PersonStep>>().var("searchListPersonStep_");
 		if(searchListPersonStep_ == null) {
 			_searchListPersonStep_(searchListPersonStep_Wrap);
-			setSearchListPersonStep_(searchListPersonStep_Wrap.o);
+			Optional.ofNullable(searchListPersonStep_Wrap.getO()).ifPresent(o -> {
+				setSearchListPersonStep_(o);
+			});
 		}
 		return (PersonStepGenPage)this;
 	}
@@ -250,7 +252,9 @@ public abstract class PersonStepGenPageGen<DEV> extends MapResultPage {
 		Wrap<Integer> personStepCountWrap = new Wrap<Integer>().var("personStepCount");
 		if(personStepCount == null) {
 			_personStepCount(personStepCountWrap);
-			setPersonStepCount(personStepCountWrap.o);
+			Optional.ofNullable(personStepCountWrap.getO()).ifPresent(o -> {
+				setPersonStepCount(o);
+			});
 		}
 		return (PersonStepGenPage)this;
 	}
@@ -301,7 +305,9 @@ public abstract class PersonStepGenPageGen<DEV> extends MapResultPage {
 		Wrap<PersonStep> personStep_Wrap = new Wrap<PersonStep>().var("personStep_");
 		if(personStep_ == null) {
 			_personStep_(personStep_Wrap);
-			setPersonStep_(personStep_Wrap.o);
+			Optional.ofNullable(personStep_Wrap.getO()).ifPresent(o -> {
+				setPersonStep_(o);
+			});
 		}
 		return (PersonStepGenPage)this;
 	}
@@ -339,7 +345,9 @@ public abstract class PersonStepGenPageGen<DEV> extends MapResultPage {
 		Wrap<String> idWrap = new Wrap<String>().var("id");
 		if(id == null) {
 			_id(idWrap);
-			setId(idWrap.o);
+			Optional.ofNullable(idWrap.getO()).ifPresent(o -> {
+				setId(o);
+			});
 		}
 		return (PersonStepGenPage)this;
 	}
@@ -389,7 +397,9 @@ public abstract class PersonStepGenPageGen<DEV> extends MapResultPage {
 		Wrap<String> pageUriPersonStepWrap = new Wrap<String>().var("pageUriPersonStep");
 		if(pageUriPersonStep == null) {
 			_pageUriPersonStep(pageUriPersonStepWrap);
-			setPageUriPersonStep(pageUriPersonStepWrap.o);
+			Optional.ofNullable(pageUriPersonStepWrap.getO()).ifPresent(o -> {
+				setPageUriPersonStep(o);
+			});
 		}
 		return (PersonStepGenPage)this;
 	}

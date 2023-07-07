@@ -151,7 +151,9 @@ public abstract class SimulationReportGenPageGen<DEV> extends BaseModelPage {
 		Wrap<SearchList<SimulationReport>> searchListSimulationReport_Wrap = new Wrap<SearchList<SimulationReport>>().var("searchListSimulationReport_");
 		if(searchListSimulationReport_ == null) {
 			_searchListSimulationReport_(searchListSimulationReport_Wrap);
-			setSearchListSimulationReport_(searchListSimulationReport_Wrap.o);
+			Optional.ofNullable(searchListSimulationReport_Wrap.getO()).ifPresent(o -> {
+				setSearchListSimulationReport_(o);
+			});
 		}
 		return (SimulationReportGenPage)this;
 	}
@@ -251,7 +253,9 @@ public abstract class SimulationReportGenPageGen<DEV> extends BaseModelPage {
 		Wrap<Integer> simulationReportCountWrap = new Wrap<Integer>().var("simulationReportCount");
 		if(simulationReportCount == null) {
 			_simulationReportCount(simulationReportCountWrap);
-			setSimulationReportCount(simulationReportCountWrap.o);
+			Optional.ofNullable(simulationReportCountWrap.getO()).ifPresent(o -> {
+				setSimulationReportCount(o);
+			});
 		}
 		return (SimulationReportGenPage)this;
 	}
@@ -302,7 +306,9 @@ public abstract class SimulationReportGenPageGen<DEV> extends BaseModelPage {
 		Wrap<SimulationReport> simulationReport_Wrap = new Wrap<SimulationReport>().var("simulationReport_");
 		if(simulationReport_ == null) {
 			_simulationReport_(simulationReport_Wrap);
-			setSimulationReport_(simulationReport_Wrap.o);
+			Optional.ofNullable(simulationReport_Wrap.getO()).ifPresent(o -> {
+				setSimulationReport_(o);
+			});
 		}
 		return (SimulationReportGenPage)this;
 	}
@@ -348,7 +354,9 @@ public abstract class SimulationReportGenPageGen<DEV> extends BaseModelPage {
 		Wrap<Long> pkWrap = new Wrap<Long>().var("pk");
 		if(pk == null) {
 			_pk(pkWrap);
-			setPk(pkWrap.o);
+			Optional.ofNullable(pkWrap.getO()).ifPresent(o -> {
+				setPk(o);
+			});
 		}
 		return (SimulationReportGenPage)this;
 	}
@@ -398,7 +406,9 @@ public abstract class SimulationReportGenPageGen<DEV> extends BaseModelPage {
 		Wrap<String> idWrap = new Wrap<String>().var("id");
 		if(id == null) {
 			_id(idWrap);
-			setId(idWrap.o);
+			Optional.ofNullable(idWrap.getO()).ifPresent(o -> {
+				setId(o);
+			});
 		}
 		return (SimulationReportGenPage)this;
 	}
@@ -448,7 +458,9 @@ public abstract class SimulationReportGenPageGen<DEV> extends BaseModelPage {
 		Wrap<String> pageUriSimulationReportWrap = new Wrap<String>().var("pageUriSimulationReport");
 		if(pageUriSimulationReport == null) {
 			_pageUriSimulationReport(pageUriSimulationReportWrap);
-			setPageUriSimulationReport(pageUriSimulationReportWrap.o);
+			Optional.ofNullable(pageUriSimulationReportWrap.getO()).ifPresent(o -> {
+				setPageUriSimulationReport(o);
+			});
 		}
 		return (SimulationReportGenPage)this;
 	}

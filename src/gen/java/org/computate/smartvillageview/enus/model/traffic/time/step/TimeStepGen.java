@@ -272,7 +272,9 @@ public abstract class TimeStepGen<DEV> extends BaseResult {
 		Wrap<Long> simulationKeyWrap = new Wrap<Long>().var("simulationKey");
 		if(simulationKey == null) {
 			_simulationKey(simulationKeyWrap);
-			setSimulationKey(simulationKeyWrap.o);
+			Optional.ofNullable(simulationKeyWrap.getO()).ifPresent(o -> {
+				setSimulationKey(o);
+			});
 		}
 		return (TimeStep)this;
 	}
@@ -326,7 +328,9 @@ public abstract class TimeStepGen<DEV> extends BaseResult {
 		Wrap<String> pathWrap = new Wrap<String>().var("path");
 		if(path == null) {
 			_path(pathWrap);
-			setPath(pathWrap.o);
+			Optional.ofNullable(pathWrap.getO()).ifPresent(o -> {
+				setPath(o);
+			});
 		}
 		return (TimeStep)this;
 	}
@@ -401,7 +405,9 @@ public abstract class TimeStepGen<DEV> extends BaseResult {
 		Wrap<BigDecimal> timeWrap = new Wrap<BigDecimal>().var("time");
 		if(time == null) {
 			_time(timeWrap);
-			setTime(timeWrap.o);
+			Optional.ofNullable(timeWrap.getO()).ifPresent(o -> {
+				setTime(o);
+			});
 		}
 		return (TimeStep)this;
 	}
@@ -479,7 +485,9 @@ public abstract class TimeStepGen<DEV> extends BaseResult {
 		Wrap<ZonedDateTime> dateTimeWrap = new Wrap<ZonedDateTime>().var("dateTime");
 		if(dateTime == null) {
 			_dateTime(dateTimeWrap);
-			setDateTime(dateTimeWrap.o);
+			Optional.ofNullable(dateTimeWrap.getO()).ifPresent(o -> {
+				setDateTime(o);
+			});
 		}
 		return (TimeStep)this;
 	}

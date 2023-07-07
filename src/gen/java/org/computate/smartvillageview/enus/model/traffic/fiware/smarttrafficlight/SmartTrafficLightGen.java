@@ -260,7 +260,9 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 		Wrap<String> entityIdWrap = new Wrap<String>().var("entityId");
 		if(entityId == null) {
 			_entityId(entityIdWrap);
-			setEntityId(entityIdWrap.o);
+			Optional.ofNullable(entityIdWrap.getO()).ifPresent(o -> {
+				setEntityId(o);
+			});
 		}
 		return (SmartTrafficLight)this;
 	}
@@ -314,7 +316,9 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 		Wrap<String> smartTrafficLightNameWrap = new Wrap<String>().var("smartTrafficLightName");
 		if(smartTrafficLightName == null) {
 			_smartTrafficLightName(smartTrafficLightNameWrap);
-			setSmartTrafficLightName(smartTrafficLightNameWrap.o);
+			Optional.ofNullable(smartTrafficLightNameWrap.getO()).ifPresent(o -> {
+				setSmartTrafficLightName(o);
+			});
 		}
 		return (SmartTrafficLight)this;
 	}
@@ -368,7 +372,9 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 		Wrap<String> routeIdNorthWrap = new Wrap<String>().var("routeIdNorth");
 		if(routeIdNorth == null) {
 			_routeIdNorth(routeIdNorthWrap);
-			setRouteIdNorth(routeIdNorthWrap.o);
+			Optional.ofNullable(routeIdNorthWrap.getO()).ifPresent(o -> {
+				setRouteIdNorth(o);
+			});
 		}
 		return (SmartTrafficLight)this;
 	}
@@ -422,7 +428,9 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 		Wrap<String> routeIdEastWrap = new Wrap<String>().var("routeIdEast");
 		if(routeIdEast == null) {
 			_routeIdEast(routeIdEastWrap);
-			setRouteIdEast(routeIdEastWrap.o);
+			Optional.ofNullable(routeIdEastWrap.getO()).ifPresent(o -> {
+				setRouteIdEast(o);
+			});
 		}
 		return (SmartTrafficLight)this;
 	}
@@ -644,7 +652,9 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 		Wrap<TrafficFlowObserved> trafficFlowObservedNorth_Wrap = new Wrap<TrafficFlowObserved>().var("trafficFlowObservedNorth_");
 		if(trafficFlowObservedNorth_ == null) {
 			_trafficFlowObservedNorth_(trafficFlowObservedNorth_Wrap);
-			setTrafficFlowObservedNorth_(trafficFlowObservedNorth_Wrap.o);
+			Optional.ofNullable(trafficFlowObservedNorth_Wrap.getO()).ifPresent(o -> {
+				setTrafficFlowObservedNorth_(o);
+			});
 		}
 		return (SmartTrafficLight)this;
 	}
@@ -683,7 +693,9 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 		Wrap<TrafficFlowObserved> trafficFlowObservedEast_Wrap = new Wrap<TrafficFlowObserved>().var("trafficFlowObservedEast_");
 		if(trafficFlowObservedEast_ == null) {
 			_trafficFlowObservedEast_(trafficFlowObservedEast_Wrap);
-			setTrafficFlowObservedEast_(trafficFlowObservedEast_Wrap.o);
+			Optional.ofNullable(trafficFlowObservedEast_Wrap.getO()).ifPresent(o -> {
+				setTrafficFlowObservedEast_(o);
+			});
 		}
 		return (SmartTrafficLight)this;
 	}
@@ -742,7 +754,9 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 		Wrap<BigDecimal> paramAvgVehiclePerMinFromWestToEastWrap = new Wrap<BigDecimal>().var("paramAvgVehiclePerMinFromWestToEast");
 		if(paramAvgVehiclePerMinFromWestToEast == null) {
 			_paramAvgVehiclePerMinFromWestToEast(paramAvgVehiclePerMinFromWestToEastWrap);
-			setParamAvgVehiclePerMinFromWestToEast(paramAvgVehiclePerMinFromWestToEastWrap.o);
+			Optional.ofNullable(paramAvgVehiclePerMinFromWestToEastWrap.getO()).ifPresent(o -> {
+				setParamAvgVehiclePerMinFromWestToEast(o);
+			});
 		}
 		return (SmartTrafficLight)this;
 	}
@@ -813,7 +827,9 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 		Wrap<BigDecimal> paramAvgVehiclePerMinFromSouthToNorthWrap = new Wrap<BigDecimal>().var("paramAvgVehiclePerMinFromSouthToNorth");
 		if(paramAvgVehiclePerMinFromSouthToNorth == null) {
 			_paramAvgVehiclePerMinFromSouthToNorth(paramAvgVehiclePerMinFromSouthToNorthWrap);
-			setParamAvgVehiclePerMinFromSouthToNorth(paramAvgVehiclePerMinFromSouthToNorthWrap.o);
+			Optional.ofNullable(paramAvgVehiclePerMinFromSouthToNorthWrap.getO()).ifPresent(o -> {
+				setParamAvgVehiclePerMinFromSouthToNorth(o);
+			});
 		}
 		return (SmartTrafficLight)this;
 	}
@@ -884,7 +900,9 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 		Wrap<BigDecimal> paramVehicleDemandScalingFactorWrap = new Wrap<BigDecimal>().var("paramVehicleDemandScalingFactor");
 		if(paramVehicleDemandScalingFactor == null) {
 			_paramVehicleDemandScalingFactor(paramVehicleDemandScalingFactorWrap);
-			setParamVehicleDemandScalingFactor(paramVehicleDemandScalingFactorWrap.o);
+			Optional.ofNullable(paramVehicleDemandScalingFactorWrap.getO()).ifPresent(o -> {
+				setParamVehicleDemandScalingFactor(o);
+			});
 		}
 		return (SmartTrafficLight)this;
 	}
@@ -959,7 +977,9 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 		Wrap<BigDecimal> paramAvgPedestrianPerMinFromWestToEastWrap = new Wrap<BigDecimal>().var("paramAvgPedestrianPerMinFromWestToEast");
 		if(paramAvgPedestrianPerMinFromWestToEast == null) {
 			_paramAvgPedestrianPerMinFromWestToEast(paramAvgPedestrianPerMinFromWestToEastWrap);
-			setParamAvgPedestrianPerMinFromWestToEast(paramAvgPedestrianPerMinFromWestToEastWrap.o);
+			Optional.ofNullable(paramAvgPedestrianPerMinFromWestToEastWrap.getO()).ifPresent(o -> {
+				setParamAvgPedestrianPerMinFromWestToEast(o);
+			});
 		}
 		return (SmartTrafficLight)this;
 	}
@@ -1030,7 +1050,9 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 		Wrap<BigDecimal> paramAvgPedestrianPerMinFromSouthToNorthWrap = new Wrap<BigDecimal>().var("paramAvgPedestrianPerMinFromSouthToNorth");
 		if(paramAvgPedestrianPerMinFromSouthToNorth == null) {
 			_paramAvgPedestrianPerMinFromSouthToNorth(paramAvgPedestrianPerMinFromSouthToNorthWrap);
-			setParamAvgPedestrianPerMinFromSouthToNorth(paramAvgPedestrianPerMinFromSouthToNorthWrap.o);
+			Optional.ofNullable(paramAvgPedestrianPerMinFromSouthToNorthWrap.getO()).ifPresent(o -> {
+				setParamAvgPedestrianPerMinFromSouthToNorth(o);
+			});
 		}
 		return (SmartTrafficLight)this;
 	}
@@ -1101,7 +1123,9 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 		Wrap<BigDecimal> paramPedestrianDemandScalingFactorWrap = new Wrap<BigDecimal>().var("paramPedestrianDemandScalingFactor");
 		if(paramPedestrianDemandScalingFactor == null) {
 			_paramPedestrianDemandScalingFactor(paramPedestrianDemandScalingFactorWrap);
-			setParamPedestrianDemandScalingFactor(paramPedestrianDemandScalingFactorWrap.o);
+			Optional.ofNullable(paramPedestrianDemandScalingFactorWrap.getO()).ifPresent(o -> {
+				setParamPedestrianDemandScalingFactor(o);
+			});
 		}
 		return (SmartTrafficLight)this;
 	}
@@ -1269,7 +1293,9 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 		Wrap<BigDecimal> paramMinGreenTimeSecWestEastWrap = new Wrap<BigDecimal>().var("paramMinGreenTimeSecWestEast");
 		if(paramMinGreenTimeSecWestEast == null) {
 			_paramMinGreenTimeSecWestEast(paramMinGreenTimeSecWestEastWrap);
-			setParamMinGreenTimeSecWestEast(paramMinGreenTimeSecWestEastWrap.o);
+			Optional.ofNullable(paramMinGreenTimeSecWestEastWrap.getO()).ifPresent(o -> {
+				setParamMinGreenTimeSecWestEast(o);
+			});
 		}
 		return (SmartTrafficLight)this;
 	}
@@ -1340,7 +1366,9 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 		Wrap<BigDecimal> paramMaxGreenTimeSecWestEastWrap = new Wrap<BigDecimal>().var("paramMaxGreenTimeSecWestEast");
 		if(paramMaxGreenTimeSecWestEast == null) {
 			_paramMaxGreenTimeSecWestEast(paramMaxGreenTimeSecWestEastWrap);
-			setParamMaxGreenTimeSecWestEast(paramMaxGreenTimeSecWestEastWrap.o);
+			Optional.ofNullable(paramMaxGreenTimeSecWestEastWrap.getO()).ifPresent(o -> {
+				setParamMaxGreenTimeSecWestEast(o);
+			});
 		}
 		return (SmartTrafficLight)this;
 	}
@@ -1411,7 +1439,9 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 		Wrap<BigDecimal> paramMinGreenTimeSecSouthNorthWrap = new Wrap<BigDecimal>().var("paramMinGreenTimeSecSouthNorth");
 		if(paramMinGreenTimeSecSouthNorth == null) {
 			_paramMinGreenTimeSecSouthNorth(paramMinGreenTimeSecSouthNorthWrap);
-			setParamMinGreenTimeSecSouthNorth(paramMinGreenTimeSecSouthNorthWrap.o);
+			Optional.ofNullable(paramMinGreenTimeSecSouthNorthWrap.getO()).ifPresent(o -> {
+				setParamMinGreenTimeSecSouthNorth(o);
+			});
 		}
 		return (SmartTrafficLight)this;
 	}
@@ -1482,7 +1512,9 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 		Wrap<BigDecimal> paramMaxGreenTimeSecSouthNorthWrap = new Wrap<BigDecimal>().var("paramMaxGreenTimeSecSouthNorth");
 		if(paramMaxGreenTimeSecSouthNorth == null) {
 			_paramMaxGreenTimeSecSouthNorth(paramMaxGreenTimeSecSouthNorthWrap);
-			setParamMaxGreenTimeSecSouthNorth(paramMaxGreenTimeSecSouthNorthWrap.o);
+			Optional.ofNullable(paramMaxGreenTimeSecSouthNorthWrap.getO()).ifPresent(o -> {
+				setParamMaxGreenTimeSecSouthNorth(o);
+			});
 		}
 		return (SmartTrafficLight)this;
 	}
@@ -1553,7 +1585,9 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 		Wrap<BigDecimal> paramPedestrianWaitThresholdSecNorthSouthWrap = new Wrap<BigDecimal>().var("paramPedestrianWaitThresholdSecNorthSouth");
 		if(paramPedestrianWaitThresholdSecNorthSouth == null) {
 			_paramPedestrianWaitThresholdSecNorthSouth(paramPedestrianWaitThresholdSecNorthSouthWrap);
-			setParamPedestrianWaitThresholdSecNorthSouth(paramPedestrianWaitThresholdSecNorthSouthWrap.o);
+			Optional.ofNullable(paramPedestrianWaitThresholdSecNorthSouthWrap.getO()).ifPresent(o -> {
+				setParamPedestrianWaitThresholdSecNorthSouth(o);
+			});
 		}
 		return (SmartTrafficLight)this;
 	}
@@ -1624,7 +1658,9 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 		Wrap<BigDecimal> paramPedestrianWaitThresholdSecWestEastWrap = new Wrap<BigDecimal>().var("paramPedestrianWaitThresholdSecWestEast");
 		if(paramPedestrianWaitThresholdSecWestEast == null) {
 			_paramPedestrianWaitThresholdSecWestEast(paramPedestrianWaitThresholdSecWestEastWrap);
-			setParamPedestrianWaitThresholdSecWestEast(paramPedestrianWaitThresholdSecWestEastWrap.o);
+			Optional.ofNullable(paramPedestrianWaitThresholdSecWestEastWrap.getO()).ifPresent(o -> {
+				setParamPedestrianWaitThresholdSecWestEast(o);
+			});
 		}
 		return (SmartTrafficLight)this;
 	}
@@ -1695,7 +1731,9 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 		Wrap<BigDecimal> paramVehicleQueueThresholdWestEastWrap = new Wrap<BigDecimal>().var("paramVehicleQueueThresholdWestEast");
 		if(paramVehicleQueueThresholdWestEast == null) {
 			_paramVehicleQueueThresholdWestEast(paramVehicleQueueThresholdWestEastWrap);
-			setParamVehicleQueueThresholdWestEast(paramVehicleQueueThresholdWestEastWrap.o);
+			Optional.ofNullable(paramVehicleQueueThresholdWestEastWrap.getO()).ifPresent(o -> {
+				setParamVehicleQueueThresholdWestEast(o);
+			});
 		}
 		return (SmartTrafficLight)this;
 	}
@@ -1766,7 +1804,9 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 		Wrap<BigDecimal> paramVehicleQueueThresholdSouthNorthWrap = new Wrap<BigDecimal>().var("paramVehicleQueueThresholdSouthNorth");
 		if(paramVehicleQueueThresholdSouthNorth == null) {
 			_paramVehicleQueueThresholdSouthNorth(paramVehicleQueueThresholdSouthNorthWrap);
-			setParamVehicleQueueThresholdSouthNorth(paramVehicleQueueThresholdSouthNorthWrap.o);
+			Optional.ofNullable(paramVehicleQueueThresholdSouthNorthWrap.getO()).ifPresent(o -> {
+				setParamVehicleQueueThresholdSouthNorth(o);
+			});
 		}
 		return (SmartTrafficLight)this;
 	}
@@ -1837,7 +1877,9 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 		Wrap<BigDecimal> paramPedestrianQueueThresholdNorthSouthWrap = new Wrap<BigDecimal>().var("paramPedestrianQueueThresholdNorthSouth");
 		if(paramPedestrianQueueThresholdNorthSouth == null) {
 			_paramPedestrianQueueThresholdNorthSouth(paramPedestrianQueueThresholdNorthSouthWrap);
-			setParamPedestrianQueueThresholdNorthSouth(paramPedestrianQueueThresholdNorthSouthWrap.o);
+			Optional.ofNullable(paramPedestrianQueueThresholdNorthSouthWrap.getO()).ifPresent(o -> {
+				setParamPedestrianQueueThresholdNorthSouth(o);
+			});
 		}
 		return (SmartTrafficLight)this;
 	}
@@ -1908,7 +1950,9 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 		Wrap<BigDecimal> paramPedestrianQueueThresholdWestEastWrap = new Wrap<BigDecimal>().var("paramPedestrianQueueThresholdWestEast");
 		if(paramPedestrianQueueThresholdWestEast == null) {
 			_paramPedestrianQueueThresholdWestEast(paramPedestrianQueueThresholdWestEastWrap);
-			setParamPedestrianQueueThresholdWestEast(paramPedestrianQueueThresholdWestEastWrap.o);
+			Optional.ofNullable(paramPedestrianQueueThresholdWestEastWrap.getO()).ifPresent(o -> {
+				setParamPedestrianQueueThresholdWestEast(o);
+			});
 		}
 		return (SmartTrafficLight)this;
 	}
@@ -1979,7 +2023,9 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 		Wrap<BigDecimal> paramStepSizeWrap = new Wrap<BigDecimal>().var("paramStepSize");
 		if(paramStepSize == null) {
 			_paramStepSize(paramStepSizeWrap);
-			setParamStepSize(paramStepSizeWrap.o);
+			Optional.ofNullable(paramStepSizeWrap.getO()).ifPresent(o -> {
+				setParamStepSize(o);
+			});
 		}
 		return (SmartTrafficLight)this;
 	}
@@ -2041,7 +2087,9 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 		Wrap<Integer> paramRunTimeWrap = new Wrap<Integer>().var("paramRunTime");
 		if(paramRunTime == null) {
 			_paramRunTime(paramRunTimeWrap);
-			setParamRunTime(paramRunTimeWrap.o);
+			Optional.ofNullable(paramRunTimeWrap.getO()).ifPresent(o -> {
+				setParamRunTime(o);
+			});
 		}
 		return (SmartTrafficLight)this;
 	}
@@ -2103,7 +2151,9 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 		Wrap<Integer> paramItersPerParWrap = new Wrap<Integer>().var("paramItersPerPar");
 		if(paramItersPerPar == null) {
 			_paramItersPerPar(paramItersPerParWrap);
-			setParamItersPerPar(paramItersPerParWrap.o);
+			Optional.ofNullable(paramItersPerParWrap.getO()).ifPresent(o -> {
+				setParamItersPerPar(o);
+			});
 		}
 		return (SmartTrafficLight)this;
 	}
@@ -2165,7 +2215,9 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 		Wrap<Integer> paramTotalIterNumWrap = new Wrap<Integer>().var("paramTotalIterNum");
 		if(paramTotalIterNum == null) {
 			_paramTotalIterNum(paramTotalIterNumWrap);
-			setParamTotalIterNum(paramTotalIterNumWrap.o);
+			Optional.ofNullable(paramTotalIterNumWrap.getO()).ifPresent(o -> {
+				setParamTotalIterNum(o);
+			});
 		}
 		return (SmartTrafficLight)this;
 	}

@@ -166,7 +166,9 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 		Wrap<SearchList<TrafficSimulation>> searchListTrafficSimulation_Wrap = new Wrap<SearchList<TrafficSimulation>>().var("searchListTrafficSimulation_");
 		if(searchListTrafficSimulation_ == null) {
 			_searchListTrafficSimulation_(searchListTrafficSimulation_Wrap);
-			setSearchListTrafficSimulation_(searchListTrafficSimulation_Wrap.o);
+			Optional.ofNullable(searchListTrafficSimulation_Wrap.getO()).ifPresent(o -> {
+				setSearchListTrafficSimulation_(o);
+			});
 		}
 		return (TrafficSimulationMapPage)this;
 	}
@@ -204,7 +206,9 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 		Wrap<String> pageResponseWrap = new Wrap<String>().var("pageResponse");
 		if(pageResponse == null) {
 			_pageResponse(pageResponseWrap);
-			setPageResponse(pageResponseWrap.o);
+			Optional.ofNullable(pageResponseWrap.getO()).ifPresent(o -> {
+				setPageResponse(o);
+			});
 		}
 		return (TrafficSimulationMapPage)this;
 	}
@@ -254,7 +258,9 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 		Wrap<String> defaultZoneIdWrap = new Wrap<String>().var("defaultZoneId");
 		if(defaultZoneId == null) {
 			_defaultZoneId(defaultZoneIdWrap);
-			setDefaultZoneId(defaultZoneIdWrap.o);
+			Optional.ofNullable(defaultZoneIdWrap.getO()).ifPresent(o -> {
+				setDefaultZoneId(o);
+			});
 		}
 		return (TrafficSimulationMapPage)this;
 	}
@@ -305,7 +311,9 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 		Wrap<ZoneId> defaultTimeZoneWrap = new Wrap<ZoneId>().var("defaultTimeZone");
 		if(defaultTimeZone == null) {
 			_defaultTimeZone(defaultTimeZoneWrap);
-			setDefaultTimeZone(defaultTimeZoneWrap.o);
+			Optional.ofNullable(defaultTimeZoneWrap.getO()).ifPresent(o -> {
+				setDefaultTimeZone(o);
+			});
 		}
 		return (TrafficSimulationMapPage)this;
 	}
@@ -343,7 +351,9 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 		Wrap<String> defaultLocaleIdWrap = new Wrap<String>().var("defaultLocaleId");
 		if(defaultLocaleId == null) {
 			_defaultLocaleId(defaultLocaleIdWrap);
-			setDefaultLocaleId(defaultLocaleIdWrap.o);
+			Optional.ofNullable(defaultLocaleIdWrap.getO()).ifPresent(o -> {
+				setDefaultLocaleId(o);
+			});
 		}
 		return (TrafficSimulationMapPage)this;
 	}
@@ -394,7 +404,9 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 		Wrap<Locale> defaultLocaleWrap = new Wrap<Locale>().var("defaultLocale");
 		if(defaultLocale == null) {
 			_defaultLocale(defaultLocaleWrap);
-			setDefaultLocale(defaultLocaleWrap.o);
+			Optional.ofNullable(defaultLocaleWrap.getO()).ifPresent(o -> {
+				setDefaultLocale(o);
+			});
 		}
 		return (TrafficSimulationMapPage)this;
 	}
@@ -432,7 +444,9 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 		Wrap<String> defaultRangeGapWrap = new Wrap<String>().var("defaultRangeGap");
 		if(defaultRangeGap == null) {
 			_defaultRangeGap(defaultRangeGapWrap);
-			setDefaultRangeGap(defaultRangeGapWrap.o);
+			Optional.ofNullable(defaultRangeGapWrap.getO()).ifPresent(o -> {
+				setDefaultRangeGap(o);
+			});
 		}
 		return (TrafficSimulationMapPage)this;
 	}
@@ -506,7 +520,9 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 		Wrap<ZonedDateTime> defaultRangeEndWrap = new Wrap<ZonedDateTime>().var("defaultRangeEnd");
 		if(defaultRangeEnd == null) {
 			_defaultRangeEnd(defaultRangeEndWrap);
-			setDefaultRangeEnd(defaultRangeEndWrap.o);
+			Optional.ofNullable(defaultRangeEndWrap.getO()).ifPresent(o -> {
+				setDefaultRangeEnd(o);
+			});
 		}
 		return (TrafficSimulationMapPage)this;
 	}
@@ -580,7 +596,9 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 		Wrap<ZonedDateTime> defaultRangeStartWrap = new Wrap<ZonedDateTime>().var("defaultRangeStart");
 		if(defaultRangeStart == null) {
 			_defaultRangeStart(defaultRangeStartWrap);
-			setDefaultRangeStart(defaultRangeStartWrap.o);
+			Optional.ofNullable(defaultRangeStartWrap.getO()).ifPresent(o -> {
+				setDefaultRangeStart(o);
+			});
 		}
 		return (TrafficSimulationMapPage)this;
 	}
@@ -630,7 +648,9 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 		Wrap<String> defaultRangeVarWrap = new Wrap<String>().var("defaultRangeVar");
 		if(defaultRangeVar == null) {
 			_defaultRangeVar(defaultRangeVarWrap);
-			setDefaultRangeVar(defaultRangeVarWrap.o);
+			Optional.ofNullable(defaultRangeVarWrap.getO()).ifPresent(o -> {
+				setDefaultRangeVar(o);
+			});
 		}
 		return (TrafficSimulationMapPage)this;
 	}
@@ -680,7 +700,9 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 		Wrap<String> defaultFacetSortWrap = new Wrap<String>().var("defaultFacetSort");
 		if(defaultFacetSort == null) {
 			_defaultFacetSort(defaultFacetSortWrap);
-			setDefaultFacetSort(defaultFacetSortWrap.o);
+			Optional.ofNullable(defaultFacetSortWrap.getO()).ifPresent(o -> {
+				setDefaultFacetSort(o);
+			});
 		}
 		return (TrafficSimulationMapPage)this;
 	}
@@ -738,7 +760,9 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 		Wrap<Integer> defaultFacetLimitWrap = new Wrap<Integer>().var("defaultFacetLimit");
 		if(defaultFacetLimit == null) {
 			_defaultFacetLimit(defaultFacetLimitWrap);
-			setDefaultFacetLimit(defaultFacetLimitWrap.o);
+			Optional.ofNullable(defaultFacetLimitWrap.getO()).ifPresent(o -> {
+				setDefaultFacetLimit(o);
+			});
 		}
 		return (TrafficSimulationMapPage)this;
 	}
@@ -796,7 +820,9 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 		Wrap<Integer> defaultFacetMinCountWrap = new Wrap<Integer>().var("defaultFacetMinCount");
 		if(defaultFacetMinCount == null) {
 			_defaultFacetMinCount(defaultFacetMinCountWrap);
-			setDefaultFacetMinCount(defaultFacetMinCountWrap.o);
+			Optional.ofNullable(defaultFacetMinCountWrap.getO()).ifPresent(o -> {
+				setDefaultFacetMinCount(o);
+			});
 		}
 		return (TrafficSimulationMapPage)this;
 	}
@@ -854,7 +880,9 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 		Wrap<Integer> defaultPivotMinCountWrap = new Wrap<Integer>().var("defaultPivotMinCount");
 		if(defaultPivotMinCount == null) {
 			_defaultPivotMinCount(defaultPivotMinCountWrap);
-			setDefaultPivotMinCount(defaultPivotMinCountWrap.o);
+			Optional.ofNullable(defaultPivotMinCountWrap.getO()).ifPresent(o -> {
+				setDefaultPivotMinCount(o);
+			});
 		}
 		return (TrafficSimulationMapPage)this;
 	}
@@ -912,7 +940,9 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 		Wrap<JsonObject> DEFAULT_MAP_LOCATIONWrap = new Wrap<JsonObject>().var("DEFAULT_MAP_LOCATION");
 		if(DEFAULT_MAP_LOCATION == null) {
 			_DEFAULT_MAP_LOCATION(DEFAULT_MAP_LOCATIONWrap);
-			setDEFAULT_MAP_LOCATION(DEFAULT_MAP_LOCATIONWrap.o);
+			Optional.ofNullable(DEFAULT_MAP_LOCATIONWrap.getO()).ifPresent(o -> {
+				setDEFAULT_MAP_LOCATION(o);
+			});
 		}
 		return (TrafficSimulationMapPage)this;
 	}
@@ -983,7 +1013,9 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 		Wrap<BigDecimal> DEFAULT_MAP_ZOOMWrap = new Wrap<BigDecimal>().var("DEFAULT_MAP_ZOOM");
 		if(DEFAULT_MAP_ZOOM == null) {
 			_DEFAULT_MAP_ZOOM(DEFAULT_MAP_ZOOMWrap);
-			setDEFAULT_MAP_ZOOM(DEFAULT_MAP_ZOOMWrap.o);
+			Optional.ofNullable(DEFAULT_MAP_ZOOMWrap.getO()).ifPresent(o -> {
+				setDEFAULT_MAP_ZOOM(o);
+			});
 		}
 		return (TrafficSimulationMapPage)this;
 	}
@@ -1088,7 +1120,9 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 		Wrap<Stats> statsWrap = new Wrap<Stats>().var("stats");
 		if(stats == null) {
 			_stats(statsWrap);
-			setStats(statsWrap.o);
+			Optional.ofNullable(statsWrap.getO()).ifPresent(o -> {
+				setStats(o);
+			});
 		}
 		return (TrafficSimulationMapPage)this;
 	}
@@ -1127,7 +1161,9 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 		Wrap<FacetCounts> facetCountsWrap = new Wrap<FacetCounts>().var("facetCounts");
 		if(facetCounts == null) {
 			_facetCounts(facetCountsWrap);
-			setFacetCounts(facetCountsWrap.o);
+			Optional.ofNullable(facetCountsWrap.getO()).ifPresent(o -> {
+				setFacetCounts(o);
+			});
 		}
 		return (TrafficSimulationMapPage)this;
 	}
@@ -1173,7 +1209,9 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 		Wrap<Integer> trafficSimulationCountWrap = new Wrap<Integer>().var("trafficSimulationCount");
 		if(trafficSimulationCount == null) {
 			_trafficSimulationCount(trafficSimulationCountWrap);
-			setTrafficSimulationCount(trafficSimulationCountWrap.o);
+			Optional.ofNullable(trafficSimulationCountWrap.getO()).ifPresent(o -> {
+				setTrafficSimulationCount(o);
+			});
 		}
 		return (TrafficSimulationMapPage)this;
 	}
@@ -1224,7 +1262,9 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 		Wrap<TrafficSimulation> trafficSimulation_Wrap = new Wrap<TrafficSimulation>().var("trafficSimulation_");
 		if(trafficSimulation_ == null) {
 			_trafficSimulation_(trafficSimulation_Wrap);
-			setTrafficSimulation_(trafficSimulation_Wrap.o);
+			Optional.ofNullable(trafficSimulation_Wrap.getO()).ifPresent(o -> {
+				setTrafficSimulation_(o);
+			});
 		}
 		return (TrafficSimulationMapPage)this;
 	}
@@ -1270,7 +1310,9 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 		Wrap<Long> pkWrap = new Wrap<Long>().var("pk");
 		if(pk == null) {
 			_pk(pkWrap);
-			setPk(pkWrap.o);
+			Optional.ofNullable(pkWrap.getO()).ifPresent(o -> {
+				setPk(o);
+			});
 		}
 		return (TrafficSimulationMapPage)this;
 	}
@@ -1320,7 +1362,9 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 		Wrap<String> idWrap = new Wrap<String>().var("id");
 		if(id == null) {
 			_id(idWrap);
-			setId(idWrap.o);
+			Optional.ofNullable(idWrap.getO()).ifPresent(o -> {
+				setId(o);
+			});
 		}
 		return (TrafficSimulationMapPage)this;
 	}
@@ -1370,7 +1414,9 @@ public abstract class TrafficSimulationMapPageGen<DEV> extends BaseModelPage {
 		Wrap<String> pageUriTrafficSimulationWrap = new Wrap<String>().var("pageUriTrafficSimulation");
 		if(pageUriTrafficSimulation == null) {
 			_pageUriTrafficSimulation(pageUriTrafficSimulationWrap);
-			setPageUriTrafficSimulation(pageUriTrafficSimulationWrap.o);
+			Optional.ofNullable(pageUriTrafficSimulationWrap.getO()).ifPresent(o -> {
+				setPageUriTrafficSimulation(o);
+			});
 		}
 		return (TrafficSimulationMapPage)this;
 	}

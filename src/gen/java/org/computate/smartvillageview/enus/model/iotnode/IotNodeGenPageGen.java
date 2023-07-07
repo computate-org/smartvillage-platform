@@ -150,7 +150,9 @@ public abstract class IotNodeGenPageGen<DEV> extends MapResultPage {
 		Wrap<SearchList<IotNode>> searchListIotNode_Wrap = new Wrap<SearchList<IotNode>>().var("searchListIotNode_");
 		if(searchListIotNode_ == null) {
 			_searchListIotNode_(searchListIotNode_Wrap);
-			setSearchListIotNode_(searchListIotNode_Wrap.o);
+			Optional.ofNullable(searchListIotNode_Wrap.getO()).ifPresent(o -> {
+				setSearchListIotNode_(o);
+			});
 		}
 		return (IotNodeGenPage)this;
 	}
@@ -250,7 +252,9 @@ public abstract class IotNodeGenPageGen<DEV> extends MapResultPage {
 		Wrap<Integer> iotNodeCountWrap = new Wrap<Integer>().var("iotNodeCount");
 		if(iotNodeCount == null) {
 			_iotNodeCount(iotNodeCountWrap);
-			setIotNodeCount(iotNodeCountWrap.o);
+			Optional.ofNullable(iotNodeCountWrap.getO()).ifPresent(o -> {
+				setIotNodeCount(o);
+			});
 		}
 		return (IotNodeGenPage)this;
 	}
@@ -301,7 +305,9 @@ public abstract class IotNodeGenPageGen<DEV> extends MapResultPage {
 		Wrap<IotNode> iotNode_Wrap = new Wrap<IotNode>().var("iotNode_");
 		if(iotNode_ == null) {
 			_iotNode_(iotNode_Wrap);
-			setIotNode_(iotNode_Wrap.o);
+			Optional.ofNullable(iotNode_Wrap.getO()).ifPresent(o -> {
+				setIotNode_(o);
+			});
 		}
 		return (IotNodeGenPage)this;
 	}
@@ -339,7 +345,9 @@ public abstract class IotNodeGenPageGen<DEV> extends MapResultPage {
 		Wrap<String> idWrap = new Wrap<String>().var("id");
 		if(id == null) {
 			_id(idWrap);
-			setId(idWrap.o);
+			Optional.ofNullable(idWrap.getO()).ifPresent(o -> {
+				setId(o);
+			});
 		}
 		return (IotNodeGenPage)this;
 	}
@@ -389,7 +397,9 @@ public abstract class IotNodeGenPageGen<DEV> extends MapResultPage {
 		Wrap<String> pageUriIotNodeWrap = new Wrap<String>().var("pageUriIotNode");
 		if(pageUriIotNode == null) {
 			_pageUriIotNode(pageUriIotNodeWrap);
-			setPageUriIotNode(pageUriIotNodeWrap.o);
+			Optional.ofNullable(pageUriIotNodeWrap.getO()).ifPresent(o -> {
+				setPageUriIotNode(o);
+			});
 		}
 		return (IotNodeGenPage)this;
 	}

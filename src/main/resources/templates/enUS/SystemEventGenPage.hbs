@@ -397,31 +397,16 @@
 						<span class="w3-button w3-display-topright " onclick="$('#postSystemEventModal').hide(); ">×</span>
 	{{/eq}}
 						<h2 class="w3-padding ">Create a system event</h2>
+						<div class="">You can override any default values below: </div>
 					</header>
 					<div class="" id="postSystemEventFormValues">
 						<div id="postSystemEventForm">
+{{#block "htmFormButton_postSystemEvent"}}{{/block}}
 							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmCreated" roleRequired="true"}}
-{{else}}
-{{> "htmCreated" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleRequired}}
 {{> "htmObjectId" roleRequired="true"}}
 {{else}}
 {{> "htmObjectId" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmArchived" roleRequired="true"}}
-{{else}}
-{{> "htmArchived" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmDeleted" roleRequired="true"}}
-{{else}}
-{{> "htmDeleted" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 							<div class="w3-cell-row ">

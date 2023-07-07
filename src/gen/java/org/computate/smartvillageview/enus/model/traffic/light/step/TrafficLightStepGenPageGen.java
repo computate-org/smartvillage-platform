@@ -150,7 +150,9 @@ public abstract class TrafficLightStepGenPageGen<DEV> extends MapResultPage {
 		Wrap<SearchList<TrafficLightStep>> searchListTrafficLightStep_Wrap = new Wrap<SearchList<TrafficLightStep>>().var("searchListTrafficLightStep_");
 		if(searchListTrafficLightStep_ == null) {
 			_searchListTrafficLightStep_(searchListTrafficLightStep_Wrap);
-			setSearchListTrafficLightStep_(searchListTrafficLightStep_Wrap.o);
+			Optional.ofNullable(searchListTrafficLightStep_Wrap.getO()).ifPresent(o -> {
+				setSearchListTrafficLightStep_(o);
+			});
 		}
 		return (TrafficLightStepGenPage)this;
 	}
@@ -250,7 +252,9 @@ public abstract class TrafficLightStepGenPageGen<DEV> extends MapResultPage {
 		Wrap<Integer> trafficLightStepCountWrap = new Wrap<Integer>().var("trafficLightStepCount");
 		if(trafficLightStepCount == null) {
 			_trafficLightStepCount(trafficLightStepCountWrap);
-			setTrafficLightStepCount(trafficLightStepCountWrap.o);
+			Optional.ofNullable(trafficLightStepCountWrap.getO()).ifPresent(o -> {
+				setTrafficLightStepCount(o);
+			});
 		}
 		return (TrafficLightStepGenPage)this;
 	}
@@ -301,7 +305,9 @@ public abstract class TrafficLightStepGenPageGen<DEV> extends MapResultPage {
 		Wrap<TrafficLightStep> trafficLightStep_Wrap = new Wrap<TrafficLightStep>().var("trafficLightStep_");
 		if(trafficLightStep_ == null) {
 			_trafficLightStep_(trafficLightStep_Wrap);
-			setTrafficLightStep_(trafficLightStep_Wrap.o);
+			Optional.ofNullable(trafficLightStep_Wrap.getO()).ifPresent(o -> {
+				setTrafficLightStep_(o);
+			});
 		}
 		return (TrafficLightStepGenPage)this;
 	}
@@ -339,7 +345,9 @@ public abstract class TrafficLightStepGenPageGen<DEV> extends MapResultPage {
 		Wrap<String> idWrap = new Wrap<String>().var("id");
 		if(id == null) {
 			_id(idWrap);
-			setId(idWrap.o);
+			Optional.ofNullable(idWrap.getO()).ifPresent(o -> {
+				setId(o);
+			});
 		}
 		return (TrafficLightStepGenPage)this;
 	}
@@ -389,7 +397,9 @@ public abstract class TrafficLightStepGenPageGen<DEV> extends MapResultPage {
 		Wrap<String> pageUriTrafficLightStepWrap = new Wrap<String>().var("pageUriTrafficLightStep");
 		if(pageUriTrafficLightStep == null) {
 			_pageUriTrafficLightStep(pageUriTrafficLightStepWrap);
-			setPageUriTrafficLightStep(pageUriTrafficLightStepWrap.o);
+			Optional.ofNullable(pageUriTrafficLightStepWrap.getO()).ifPresent(o -> {
+				setPageUriTrafficLightStep(o);
+			});
 		}
 		return (TrafficLightStepGenPage)this;
 	}

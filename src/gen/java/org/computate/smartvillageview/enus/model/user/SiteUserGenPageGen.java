@@ -151,7 +151,9 @@ public abstract class SiteUserGenPageGen<DEV> extends BaseModelPage {
 		Wrap<SearchList<SiteUser>> searchListSiteUser_Wrap = new Wrap<SearchList<SiteUser>>().var("searchListSiteUser_");
 		if(searchListSiteUser_ == null) {
 			_searchListSiteUser_(searchListSiteUser_Wrap);
-			setSearchListSiteUser_(searchListSiteUser_Wrap.o);
+			Optional.ofNullable(searchListSiteUser_Wrap.getO()).ifPresent(o -> {
+				setSearchListSiteUser_(o);
+			});
 		}
 		return (SiteUserGenPage)this;
 	}
@@ -251,7 +253,9 @@ public abstract class SiteUserGenPageGen<DEV> extends BaseModelPage {
 		Wrap<Integer> siteUserCountWrap = new Wrap<Integer>().var("siteUserCount");
 		if(siteUserCount == null) {
 			_siteUserCount(siteUserCountWrap);
-			setSiteUserCount(siteUserCountWrap.o);
+			Optional.ofNullable(siteUserCountWrap.getO()).ifPresent(o -> {
+				setSiteUserCount(o);
+			});
 		}
 		return (SiteUserGenPage)this;
 	}
@@ -302,7 +306,9 @@ public abstract class SiteUserGenPageGen<DEV> extends BaseModelPage {
 		Wrap<SiteUser> siteUser_Wrap = new Wrap<SiteUser>().var("siteUser_");
 		if(siteUser_ == null) {
 			_siteUser_(siteUser_Wrap);
-			setSiteUser_(siteUser_Wrap.o);
+			Optional.ofNullable(siteUser_Wrap.getO()).ifPresent(o -> {
+				setSiteUser_(o);
+			});
 		}
 		return (SiteUserGenPage)this;
 	}
@@ -348,7 +354,9 @@ public abstract class SiteUserGenPageGen<DEV> extends BaseModelPage {
 		Wrap<Long> pkWrap = new Wrap<Long>().var("pk");
 		if(pk == null) {
 			_pk(pkWrap);
-			setPk(pkWrap.o);
+			Optional.ofNullable(pkWrap.getO()).ifPresent(o -> {
+				setPk(o);
+			});
 		}
 		return (SiteUserGenPage)this;
 	}
@@ -398,7 +406,9 @@ public abstract class SiteUserGenPageGen<DEV> extends BaseModelPage {
 		Wrap<String> idWrap = new Wrap<String>().var("id");
 		if(id == null) {
 			_id(idWrap);
-			setId(idWrap.o);
+			Optional.ofNullable(idWrap.getO()).ifPresent(o -> {
+				setId(o);
+			});
 		}
 		return (SiteUserGenPage)this;
 	}
@@ -448,7 +458,9 @@ public abstract class SiteUserGenPageGen<DEV> extends BaseModelPage {
 		Wrap<String> pageUriSiteUserWrap = new Wrap<String>().var("pageUriSiteUser");
 		if(pageUriSiteUser == null) {
 			_pageUriSiteUser(pageUriSiteUserWrap);
-			setPageUriSiteUser(pageUriSiteUserWrap.o);
+			Optional.ofNullable(pageUriSiteUserWrap.getO()).ifPresent(o -> {
+				setPageUriSiteUser(o);
+			});
 		}
 		return (SiteUserGenPage)this;
 	}

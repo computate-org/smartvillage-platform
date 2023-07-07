@@ -146,7 +146,9 @@ public abstract class SimulationReportPageGen<DEV> extends SimulationReportGenPa
 		Wrap<String> plotPerformanceWrap = new Wrap<String>().var("plotPerformance");
 		if(plotPerformance == null) {
 			_plotPerformance(plotPerformanceWrap);
-			setPlotPerformance(plotPerformanceWrap.o);
+			Optional.ofNullable(plotPerformanceWrap.getO()).ifPresent(o -> {
+				setPlotPerformance(o);
+			});
 		}
 		return (SimulationReportPage)this;
 	}
@@ -196,7 +198,9 @@ public abstract class SimulationReportPageGen<DEV> extends SimulationReportGenPa
 		Wrap<String> plotQueueLengthThresholdWrap = new Wrap<String>().var("plotQueueLengthThreshold");
 		if(plotQueueLengthThreshold == null) {
 			_plotQueueLengthThreshold(plotQueueLengthThresholdWrap);
-			setPlotQueueLengthThreshold(plotQueueLengthThresholdWrap.o);
+			Optional.ofNullable(plotQueueLengthThresholdWrap.getO()).ifPresent(o -> {
+				setPlotQueueLengthThreshold(o);
+			});
 		}
 		return (SimulationReportPage)this;
 	}
@@ -246,7 +250,9 @@ public abstract class SimulationReportPageGen<DEV> extends SimulationReportGenPa
 		Wrap<String> plotGreenLengthThresholdVehicleWrap = new Wrap<String>().var("plotGreenLengthThresholdVehicle");
 		if(plotGreenLengthThresholdVehicle == null) {
 			_plotGreenLengthThresholdVehicle(plotGreenLengthThresholdVehicleWrap);
-			setPlotGreenLengthThresholdVehicle(plotGreenLengthThresholdVehicleWrap.o);
+			Optional.ofNullable(plotGreenLengthThresholdVehicleWrap.getO()).ifPresent(o -> {
+				setPlotGreenLengthThresholdVehicle(o);
+			});
 		}
 		return (SimulationReportPage)this;
 	}
@@ -296,7 +302,9 @@ public abstract class SimulationReportPageGen<DEV> extends SimulationReportGenPa
 		Wrap<String> plotGreenLengthThresholdPedestrianWrap = new Wrap<String>().var("plotGreenLengthThresholdPedestrian");
 		if(plotGreenLengthThresholdPedestrian == null) {
 			_plotGreenLengthThresholdPedestrian(plotGreenLengthThresholdPedestrianWrap);
-			setPlotGreenLengthThresholdPedestrian(plotGreenLengthThresholdPedestrianWrap.o);
+			Optional.ofNullable(plotGreenLengthThresholdPedestrianWrap.getO()).ifPresent(o -> {
+				setPlotGreenLengthThresholdPedestrian(o);
+			});
 		}
 		return (SimulationReportPage)this;
 	}

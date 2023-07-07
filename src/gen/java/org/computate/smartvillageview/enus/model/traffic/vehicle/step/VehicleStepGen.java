@@ -252,7 +252,9 @@ public abstract class VehicleStepGen<DEV> extends MapResult {
 		Wrap<String> vehicleIdWrap = new Wrap<String>().var("vehicleId");
 		if(vehicleId == null) {
 			_vehicleId(vehicleIdWrap);
-			setVehicleId(vehicleIdWrap.o);
+			Optional.ofNullable(vehicleIdWrap.getO()).ifPresent(o -> {
+				setVehicleId(o);
+			});
 		}
 		return (VehicleStep)this;
 	}
@@ -306,7 +308,9 @@ public abstract class VehicleStepGen<DEV> extends MapResult {
 		Wrap<String> vehicleTypeWrap = new Wrap<String>().var("vehicleType");
 		if(vehicleType == null) {
 			_vehicleType(vehicleTypeWrap);
-			setVehicleType(vehicleTypeWrap.o);
+			Optional.ofNullable(vehicleTypeWrap.getO()).ifPresent(o -> {
+				setVehicleType(o);
+			});
 		}
 		return (VehicleStep)this;
 	}
@@ -381,7 +385,9 @@ public abstract class VehicleStepGen<DEV> extends MapResult {
 		Wrap<BigDecimal> angleWrap = new Wrap<BigDecimal>().var("angle");
 		if(angle == null) {
 			_angle(angleWrap);
-			setAngle(angleWrap.o);
+			Optional.ofNullable(angleWrap.getO()).ifPresent(o -> {
+				setAngle(o);
+			});
 		}
 		return (VehicleStep)this;
 	}
@@ -456,7 +462,9 @@ public abstract class VehicleStepGen<DEV> extends MapResult {
 		Wrap<BigDecimal> speedWrap = new Wrap<BigDecimal>().var("speed");
 		if(speed == null) {
 			_speed(speedWrap);
-			setSpeed(speedWrap.o);
+			Optional.ofNullable(speedWrap.getO()).ifPresent(o -> {
+				setSpeed(o);
+			});
 		}
 		return (VehicleStep)this;
 	}
@@ -531,7 +539,9 @@ public abstract class VehicleStepGen<DEV> extends MapResult {
 		Wrap<BigDecimal> posWrap = new Wrap<BigDecimal>().var("pos");
 		if(pos == null) {
 			_pos(posWrap);
-			setPos(posWrap.o);
+			Optional.ofNullable(posWrap.getO()).ifPresent(o -> {
+				setPos(o);
+			});
 		}
 		return (VehicleStep)this;
 	}
@@ -606,7 +616,9 @@ public abstract class VehicleStepGen<DEV> extends MapResult {
 		Wrap<BigDecimal> slopeWrap = new Wrap<BigDecimal>().var("slope");
 		if(slope == null) {
 			_slope(slopeWrap);
-			setSlope(slopeWrap.o);
+			Optional.ofNullable(slopeWrap.getO()).ifPresent(o -> {
+				setSlope(o);
+			});
 		}
 		return (VehicleStep)this;
 	}

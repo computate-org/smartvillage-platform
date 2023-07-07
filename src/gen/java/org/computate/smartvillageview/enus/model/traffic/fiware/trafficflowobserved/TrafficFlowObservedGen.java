@@ -649,7 +649,9 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		Wrap<String> entityIdWrap = new Wrap<String>().var("entityId");
 		if(entityId == null) {
 			_entityId(entityIdWrap);
-			setEntityId(entityIdWrap.o);
+			Optional.ofNullable(entityIdWrap.getO()).ifPresent(o -> {
+				setEntityId(o);
+			});
 		}
 		return (TrafficFlowObserved)this;
 	}
@@ -755,7 +757,9 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		Wrap<SmartTrafficLight> smartTrafficLight_Wrap = new Wrap<SmartTrafficLight>().var("smartTrafficLight_");
 		if(smartTrafficLight_ == null) {
 			_smartTrafficLight_(smartTrafficLight_Wrap);
-			setSmartTrafficLight_(smartTrafficLight_Wrap.o);
+			Optional.ofNullable(smartTrafficLight_Wrap.getO()).ifPresent(o -> {
+				setSmartTrafficLight_(o);
+			});
 		}
 		return (TrafficFlowObserved)this;
 	}
@@ -801,7 +805,9 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		Wrap<JsonObject> addressWrap = new Wrap<JsonObject>().var("address");
 		if(address == null) {
 			_address(addressWrap);
-			setAddress(addressWrap.o);
+			Optional.ofNullable(addressWrap.getO()).ifPresent(o -> {
+				setAddress(o);
+			});
 		}
 		return (TrafficFlowObserved)this;
 	}
@@ -855,7 +861,9 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		Wrap<String> alternateNameWrap = new Wrap<String>().var("alternateName");
 		if(alternateName == null) {
 			_alternateName(alternateNameWrap);
-			setAlternateName(alternateNameWrap.o);
+			Optional.ofNullable(alternateNameWrap.getO()).ifPresent(o -> {
+				setAlternateName(o);
+			});
 		}
 		return (TrafficFlowObserved)this;
 	}
@@ -909,7 +917,9 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		Wrap<String> areaServedWrap = new Wrap<String>().var("areaServed");
 		if(areaServed == null) {
 			_areaServed(areaServedWrap);
-			setAreaServed(areaServedWrap.o);
+			Optional.ofNullable(areaServedWrap.getO()).ifPresent(o -> {
+				setAreaServed(o);
+			});
 		}
 		return (TrafficFlowObserved)this;
 	}
@@ -984,7 +994,9 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		Wrap<BigDecimal> averageGapDistanceWrap = new Wrap<BigDecimal>().var("averageGapDistance");
 		if(averageGapDistance == null) {
 			_averageGapDistance(averageGapDistanceWrap);
-			setAverageGapDistance(averageGapDistanceWrap.o);
+			Optional.ofNullable(averageGapDistanceWrap.getO()).ifPresent(o -> {
+				setAverageGapDistance(o);
+			});
 		}
 		return (TrafficFlowObserved)this;
 	}
@@ -1059,7 +1071,9 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		Wrap<BigDecimal> averageHeadwayTimeWrap = new Wrap<BigDecimal>().var("averageHeadwayTime");
 		if(averageHeadwayTime == null) {
 			_averageHeadwayTime(averageHeadwayTimeWrap);
-			setAverageHeadwayTime(averageHeadwayTimeWrap.o);
+			Optional.ofNullable(averageHeadwayTimeWrap.getO()).ifPresent(o -> {
+				setAverageHeadwayTime(o);
+			});
 		}
 		return (TrafficFlowObserved)this;
 	}
@@ -1134,7 +1148,9 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		Wrap<BigDecimal> averageVehicleLengthWrap = new Wrap<BigDecimal>().var("averageVehicleLength");
 		if(averageVehicleLength == null) {
 			_averageVehicleLength(averageVehicleLengthWrap);
-			setAverageVehicleLength(averageVehicleLengthWrap.o);
+			Optional.ofNullable(averageVehicleLengthWrap.getO()).ifPresent(o -> {
+				setAverageVehicleLength(o);
+			});
 		}
 		return (TrafficFlowObserved)this;
 	}
@@ -1209,7 +1225,9 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		Wrap<BigDecimal> averageVehicleSpeedWrap = new Wrap<BigDecimal>().var("averageVehicleSpeed");
 		if(averageVehicleSpeed == null) {
 			_averageVehicleSpeed(averageVehicleSpeedWrap);
-			setAverageVehicleSpeed(averageVehicleSpeedWrap.o);
+			Optional.ofNullable(averageVehicleSpeedWrap.getO()).ifPresent(o -> {
+				setAverageVehicleSpeed(o);
+			});
 		}
 		return (TrafficFlowObserved)this;
 	}
@@ -1268,7 +1286,9 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		Wrap<Boolean> congestedWrap = new Wrap<Boolean>().var("congested");
 		if(congested == null) {
 			_congested(congestedWrap);
-			setCongested(congestedWrap.o);
+			Optional.ofNullable(congestedWrap.getO()).ifPresent(o -> {
+				setCongested(o);
+			});
 		}
 		return (TrafficFlowObserved)this;
 	}
@@ -1322,7 +1342,9 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		Wrap<String> dataProviderWrap = new Wrap<String>().var("dataProvider");
 		if(dataProvider == null) {
 			_dataProvider(dataProviderWrap);
-			setDataProvider(dataProviderWrap.o);
+			Optional.ofNullable(dataProviderWrap.getO()).ifPresent(o -> {
+				setDataProvider(o);
+			});
 		}
 		return (TrafficFlowObserved)this;
 	}
@@ -1376,7 +1398,9 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		Wrap<String> dateCreatedWrap = new Wrap<String>().var("dateCreated");
 		if(dateCreated == null) {
 			_dateCreated(dateCreatedWrap);
-			setDateCreated(dateCreatedWrap.o);
+			Optional.ofNullable(dateCreatedWrap.getO()).ifPresent(o -> {
+				setDateCreated(o);
+			});
 		}
 		return (TrafficFlowObserved)this;
 	}
@@ -1430,7 +1454,9 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		Wrap<String> dateModifiedWrap = new Wrap<String>().var("dateModified");
 		if(dateModified == null) {
 			_dateModified(dateModifiedWrap);
-			setDateModified(dateModifiedWrap.o);
+			Optional.ofNullable(dateModifiedWrap.getO()).ifPresent(o -> {
+				setDateModified(o);
+			});
 		}
 		return (TrafficFlowObserved)this;
 	}
@@ -1484,7 +1510,9 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		Wrap<String> dateObservedWrap = new Wrap<String>().var("dateObserved");
 		if(dateObserved == null) {
 			_dateObserved(dateObservedWrap);
-			setDateObserved(dateObservedWrap.o);
+			Optional.ofNullable(dateObservedWrap.getO()).ifPresent(o -> {
+				setDateObserved(o);
+			});
 		}
 		return (TrafficFlowObserved)this;
 	}
@@ -1538,7 +1566,9 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		Wrap<String> dateObservedFromWrap = new Wrap<String>().var("dateObservedFrom");
 		if(dateObservedFrom == null) {
 			_dateObservedFrom(dateObservedFromWrap);
-			setDateObservedFrom(dateObservedFromWrap.o);
+			Optional.ofNullable(dateObservedFromWrap.getO()).ifPresent(o -> {
+				setDateObservedFrom(o);
+			});
 		}
 		return (TrafficFlowObserved)this;
 	}
@@ -1592,7 +1622,9 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		Wrap<String> dateObservedToWrap = new Wrap<String>().var("dateObservedTo");
 		if(dateObservedTo == null) {
 			_dateObservedTo(dateObservedToWrap);
-			setDateObservedTo(dateObservedToWrap.o);
+			Optional.ofNullable(dateObservedToWrap.getO()).ifPresent(o -> {
+				setDateObservedTo(o);
+			});
 		}
 		return (TrafficFlowObserved)this;
 	}
@@ -1646,7 +1678,9 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		Wrap<String> descriptionWrap = new Wrap<String>().var("description");
 		if(description == null) {
 			_description(descriptionWrap);
-			setDescription(descriptionWrap.o);
+			Optional.ofNullable(descriptionWrap.getO()).ifPresent(o -> {
+				setDescription(o);
+			});
 		}
 		return (TrafficFlowObserved)this;
 	}
@@ -1721,7 +1755,9 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		Wrap<BigDecimal> intensityWrap = new Wrap<BigDecimal>().var("intensity");
 		if(intensity == null) {
 			_intensity(intensityWrap);
-			setIntensity(intensityWrap.o);
+			Optional.ofNullable(intensityWrap.getO()).ifPresent(o -> {
+				setIntensity(o);
+			});
 		}
 		return (TrafficFlowObserved)this;
 	}
@@ -1775,7 +1811,9 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		Wrap<String> laneDirectionWrap = new Wrap<String>().var("laneDirection");
 		if(laneDirection == null) {
 			_laneDirection(laneDirectionWrap);
-			setLaneDirection(laneDirectionWrap.o);
+			Optional.ofNullable(laneDirectionWrap.getO()).ifPresent(o -> {
+				setLaneDirection(o);
+			});
 		}
 		return (TrafficFlowObserved)this;
 	}
@@ -1837,7 +1875,9 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		Wrap<Integer> laneIdWrap = new Wrap<Integer>().var("laneId");
 		if(laneId == null) {
 			_laneId(laneIdWrap);
-			setLaneId(laneIdWrap.o);
+			Optional.ofNullable(laneIdWrap.getO()).ifPresent(o -> {
+				setLaneId(o);
+			});
 		}
 		return (TrafficFlowObserved)this;
 	}
@@ -1891,7 +1931,9 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		Wrap<String> nameWrap = new Wrap<String>().var("name");
 		if(name == null) {
 			_name(nameWrap);
-			setName(nameWrap.o);
+			Optional.ofNullable(nameWrap.getO()).ifPresent(o -> {
+				setName(o);
+			});
 		}
 		return (TrafficFlowObserved)this;
 	}
@@ -1966,7 +2008,9 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		Wrap<BigDecimal> occupancyWrap = new Wrap<BigDecimal>().var("occupancy");
 		if(occupancy == null) {
 			_occupancy(occupancyWrap);
-			setOccupancy(occupancyWrap.o);
+			Optional.ofNullable(occupancyWrap.getO()).ifPresent(o -> {
+				setOccupancy(o);
+			});
 		}
 		return (TrafficFlowObserved)this;
 	}
@@ -2028,7 +2072,9 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		Wrap<JsonObject> ownerWrap = new Wrap<JsonObject>().var("owner");
 		if(owner == null) {
 			_owner(ownerWrap);
-			setOwner(ownerWrap.o);
+			Optional.ofNullable(ownerWrap.getO()).ifPresent(o -> {
+				setOwner(o);
+			});
 		}
 		return (TrafficFlowObserved)this;
 	}
@@ -2082,7 +2128,9 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		Wrap<String> refRoadSegmentWrap = new Wrap<String>().var("refRoadSegment");
 		if(refRoadSegment == null) {
 			_refRoadSegment(refRoadSegmentWrap);
-			setRefRoadSegment(refRoadSegmentWrap.o);
+			Optional.ofNullable(refRoadSegmentWrap.getO()).ifPresent(o -> {
+				setRefRoadSegment(o);
+			});
 		}
 		return (TrafficFlowObserved)this;
 	}
@@ -2141,7 +2189,9 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		Wrap<Boolean> reversedLaneWrap = new Wrap<Boolean>().var("reversedLane");
 		if(reversedLane == null) {
 			_reversedLane(reversedLaneWrap);
-			setReversedLane(reversedLaneWrap.o);
+			Optional.ofNullable(reversedLaneWrap.getO()).ifPresent(o -> {
+				setReversedLane(o);
+			});
 		}
 		return (TrafficFlowObserved)this;
 	}
@@ -2203,7 +2253,9 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		Wrap<JsonObject> seeAlsoWrap = new Wrap<JsonObject>().var("seeAlso");
 		if(seeAlso == null) {
 			_seeAlso(seeAlsoWrap);
-			setSeeAlso(seeAlsoWrap.o);
+			Optional.ofNullable(seeAlsoWrap.getO()).ifPresent(o -> {
+				setSeeAlso(o);
+			});
 		}
 		return (TrafficFlowObserved)this;
 	}
@@ -2257,7 +2309,9 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		Wrap<String> sourceWrap = new Wrap<String>().var("source");
 		if(source == null) {
 			_source(sourceWrap);
-			setSource(sourceWrap.o);
+			Optional.ofNullable(sourceWrap.getO()).ifPresent(o -> {
+				setSource(o);
+			});
 		}
 		return (TrafficFlowObserved)this;
 	}
@@ -2311,7 +2365,9 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		Wrap<String> typeWrap = new Wrap<String>().var("type");
 		if(type == null) {
 			_type(typeWrap);
-			setType(typeWrap.o);
+			Optional.ofNullable(typeWrap.getO()).ifPresent(o -> {
+				setType(o);
+			});
 		}
 		return (TrafficFlowObserved)this;
 	}
@@ -2365,7 +2421,9 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		Wrap<String> vehicleSubTypeWrap = new Wrap<String>().var("vehicleSubType");
 		if(vehicleSubType == null) {
 			_vehicleSubType(vehicleSubTypeWrap);
-			setVehicleSubType(vehicleSubTypeWrap.o);
+			Optional.ofNullable(vehicleSubTypeWrap.getO()).ifPresent(o -> {
+				setVehicleSubType(o);
+			});
 		}
 		return (TrafficFlowObserved)this;
 	}
@@ -2419,7 +2477,9 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		Wrap<String> vehicleTypeWrap = new Wrap<String>().var("vehicleType");
 		if(vehicleType == null) {
 			_vehicleType(vehicleTypeWrap);
-			setVehicleType(vehicleTypeWrap.o);
+			Optional.ofNullable(vehicleTypeWrap.getO()).ifPresent(o -> {
+				setVehicleType(o);
+			});
 		}
 		return (TrafficFlowObserved)this;
 	}
@@ -2473,7 +2533,9 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		Wrap<String> customRouteIdWrap = new Wrap<String>().var("customRouteId");
 		if(customRouteId == null) {
 			_customRouteId(customRouteIdWrap);
-			setCustomRouteId(customRouteIdWrap.o);
+			Optional.ofNullable(customRouteIdWrap.getO()).ifPresent(o -> {
+				setCustomRouteId(o);
+			});
 		}
 		return (TrafficFlowObserved)this;
 	}
@@ -2548,7 +2610,9 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		Wrap<BigDecimal> customSigmaWrap = new Wrap<BigDecimal>().var("customSigma");
 		if(customSigma == null) {
 			_customSigma(customSigmaWrap);
-			setCustomSigma(customSigmaWrap.o);
+			Optional.ofNullable(customSigmaWrap.getO()).ifPresent(o -> {
+				setCustomSigma(o);
+			});
 		}
 		return (TrafficFlowObserved)this;
 	}
@@ -2623,7 +2687,9 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		Wrap<BigDecimal> customAccelerationWrap = new Wrap<BigDecimal>().var("customAcceleration");
 		if(customAcceleration == null) {
 			_customAcceleration(customAccelerationWrap);
-			setCustomAcceleration(customAccelerationWrap.o);
+			Optional.ofNullable(customAccelerationWrap.getO()).ifPresent(o -> {
+				setCustomAcceleration(o);
+			});
 		}
 		return (TrafficFlowObserved)this;
 	}
@@ -2698,7 +2764,9 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		Wrap<BigDecimal> customDecelerationWrap = new Wrap<BigDecimal>().var("customDeceleration");
 		if(customDeceleration == null) {
 			_customDeceleration(customDecelerationWrap);
-			setCustomDeceleration(customDecelerationWrap.o);
+			Optional.ofNullable(customDecelerationWrap.getO()).ifPresent(o -> {
+				setCustomDeceleration(o);
+			});
 		}
 		return (TrafficFlowObserved)this;
 	}
@@ -2773,7 +2841,9 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		Wrap<BigDecimal> customMinGreenTimeWrap = new Wrap<BigDecimal>().var("customMinGreenTime");
 		if(customMinGreenTime == null) {
 			_customMinGreenTime(customMinGreenTimeWrap);
-			setCustomMinGreenTime(customMinGreenTimeWrap.o);
+			Optional.ofNullable(customMinGreenTimeWrap.getO()).ifPresent(o -> {
+				setCustomMinGreenTime(o);
+			});
 		}
 		return (TrafficFlowObserved)this;
 	}
@@ -2848,7 +2918,9 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		Wrap<BigDecimal> customMaxGreenTimeWrap = new Wrap<BigDecimal>().var("customMaxGreenTime");
 		if(customMaxGreenTime == null) {
 			_customMaxGreenTime(customMaxGreenTimeWrap);
-			setCustomMaxGreenTime(customMaxGreenTimeWrap.o);
+			Optional.ofNullable(customMaxGreenTimeWrap.getO()).ifPresent(o -> {
+				setCustomMaxGreenTime(o);
+			});
 		}
 		return (TrafficFlowObserved)this;
 	}
@@ -2923,7 +2995,9 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		Wrap<BigDecimal> customAverageVehiclesPerMinuteWrap = new Wrap<BigDecimal>().var("customAverageVehiclesPerMinute");
 		if(customAverageVehiclesPerMinute == null) {
 			_customAverageVehiclesPerMinute(customAverageVehiclesPerMinuteWrap);
-			setCustomAverageVehiclesPerMinute(customAverageVehiclesPerMinuteWrap.o);
+			Optional.ofNullable(customAverageVehiclesPerMinuteWrap.getO()).ifPresent(o -> {
+				setCustomAverageVehiclesPerMinute(o);
+			});
 		}
 		return (TrafficFlowObserved)this;
 	}
@@ -2998,7 +3072,9 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		Wrap<BigDecimal> customDemandScalingFactorWrap = new Wrap<BigDecimal>().var("customDemandScalingFactor");
 		if(customDemandScalingFactor == null) {
 			_customDemandScalingFactor(customDemandScalingFactorWrap);
-			setCustomDemandScalingFactor(customDemandScalingFactorWrap.o);
+			Optional.ofNullable(customDemandScalingFactorWrap.getO()).ifPresent(o -> {
+				setCustomDemandScalingFactor(o);
+			});
 		}
 		return (TrafficFlowObserved)this;
 	}
@@ -3073,7 +3149,9 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		Wrap<BigDecimal> customQueueLengthThresholdWrap = new Wrap<BigDecimal>().var("customQueueLengthThreshold");
 		if(customQueueLengthThreshold == null) {
 			_customQueueLengthThreshold(customQueueLengthThresholdWrap);
-			setCustomQueueLengthThreshold(customQueueLengthThresholdWrap.o);
+			Optional.ofNullable(customQueueLengthThresholdWrap.getO()).ifPresent(o -> {
+				setCustomQueueLengthThreshold(o);
+			});
 		}
 		return (TrafficFlowObserved)this;
 	}
@@ -3127,7 +3205,9 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		Wrap<String> customTrafficLightIdWrap = new Wrap<String>().var("customTrafficLightId");
 		if(customTrafficLightId == null) {
 			_customTrafficLightId(customTrafficLightIdWrap);
-			setCustomTrafficLightId(customTrafficLightIdWrap.o);
+			Optional.ofNullable(customTrafficLightIdWrap.getO()).ifPresent(o -> {
+				setCustomTrafficLightId(o);
+			});
 		}
 		return (TrafficFlowObserved)this;
 	}

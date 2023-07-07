@@ -151,7 +151,9 @@ public abstract class TrafficSimulationGenPageGen<DEV> extends BaseModelPage {
 		Wrap<SearchList<TrafficSimulation>> searchListTrafficSimulation_Wrap = new Wrap<SearchList<TrafficSimulation>>().var("searchListTrafficSimulation_");
 		if(searchListTrafficSimulation_ == null) {
 			_searchListTrafficSimulation_(searchListTrafficSimulation_Wrap);
-			setSearchListTrafficSimulation_(searchListTrafficSimulation_Wrap.o);
+			Optional.ofNullable(searchListTrafficSimulation_Wrap.getO()).ifPresent(o -> {
+				setSearchListTrafficSimulation_(o);
+			});
 		}
 		return (TrafficSimulationGenPage)this;
 	}
@@ -251,7 +253,9 @@ public abstract class TrafficSimulationGenPageGen<DEV> extends BaseModelPage {
 		Wrap<Integer> trafficSimulationCountWrap = new Wrap<Integer>().var("trafficSimulationCount");
 		if(trafficSimulationCount == null) {
 			_trafficSimulationCount(trafficSimulationCountWrap);
-			setTrafficSimulationCount(trafficSimulationCountWrap.o);
+			Optional.ofNullable(trafficSimulationCountWrap.getO()).ifPresent(o -> {
+				setTrafficSimulationCount(o);
+			});
 		}
 		return (TrafficSimulationGenPage)this;
 	}
@@ -302,7 +306,9 @@ public abstract class TrafficSimulationGenPageGen<DEV> extends BaseModelPage {
 		Wrap<TrafficSimulation> trafficSimulation_Wrap = new Wrap<TrafficSimulation>().var("trafficSimulation_");
 		if(trafficSimulation_ == null) {
 			_trafficSimulation_(trafficSimulation_Wrap);
-			setTrafficSimulation_(trafficSimulation_Wrap.o);
+			Optional.ofNullable(trafficSimulation_Wrap.getO()).ifPresent(o -> {
+				setTrafficSimulation_(o);
+			});
 		}
 		return (TrafficSimulationGenPage)this;
 	}
@@ -348,7 +354,9 @@ public abstract class TrafficSimulationGenPageGen<DEV> extends BaseModelPage {
 		Wrap<Long> pkWrap = new Wrap<Long>().var("pk");
 		if(pk == null) {
 			_pk(pkWrap);
-			setPk(pkWrap.o);
+			Optional.ofNullable(pkWrap.getO()).ifPresent(o -> {
+				setPk(o);
+			});
 		}
 		return (TrafficSimulationGenPage)this;
 	}
@@ -398,7 +406,9 @@ public abstract class TrafficSimulationGenPageGen<DEV> extends BaseModelPage {
 		Wrap<String> idWrap = new Wrap<String>().var("id");
 		if(id == null) {
 			_id(idWrap);
-			setId(idWrap.o);
+			Optional.ofNullable(idWrap.getO()).ifPresent(o -> {
+				setId(o);
+			});
 		}
 		return (TrafficSimulationGenPage)this;
 	}
@@ -448,7 +458,9 @@ public abstract class TrafficSimulationGenPageGen<DEV> extends BaseModelPage {
 		Wrap<String> pageUriTrafficSimulationWrap = new Wrap<String>().var("pageUriTrafficSimulation");
 		if(pageUriTrafficSimulation == null) {
 			_pageUriTrafficSimulation(pageUriTrafficSimulationWrap);
-			setPageUriTrafficSimulation(pageUriTrafficSimulationWrap.o);
+			Optional.ofNullable(pageUriTrafficSimulationWrap.getO()).ifPresent(o -> {
+				setPageUriTrafficSimulation(o);
+			});
 		}
 		return (TrafficSimulationGenPage)this;
 	}

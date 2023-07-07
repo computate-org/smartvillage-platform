@@ -140,7 +140,9 @@ public abstract class IotNodeReaderGen<DEV> extends Object {
 		Wrap<SiteRequestEnUS> siteRequest_Wrap = new Wrap<SiteRequestEnUS>().var("siteRequest_");
 		if(siteRequest_ == null) {
 			_siteRequest_(siteRequest_Wrap);
-			setSiteRequest_(siteRequest_Wrap.o);
+			Optional.ofNullable(siteRequest_Wrap.getO()).ifPresent(o -> {
+				setSiteRequest_(o);
+			});
 		}
 		return (IotNodeReader)this;
 	}
@@ -186,16 +188,18 @@ public abstract class IotNodeReaderGen<DEV> extends Object {
 		Wrap<JsonObject> configWrap = new Wrap<JsonObject>().var("config");
 		if(config == null) {
 			_config(configWrap);
-			setConfig(configWrap.o);
+			Optional.ofNullable(configWrap.getO()).ifPresent(o -> {
+				setConfig(o);
+			});
 		}
 		return (IotNodeReader)this;
 	}
 
-	public static JsonObject staticSearchConfig(SiteRequestEnUS siteRequest_, JsonObject o) {
-		return o;
+	public static String staticSearchConfig(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o.toString();
 	}
 
-	public static String staticSearchStrConfig(SiteRequestEnUS siteRequest_, JsonObject o) {
+	public static String staticSearchStrConfig(SiteRequestEnUS siteRequest_, String o) {
 		return o == null ? null : o.toString();
 	}
 
@@ -237,7 +241,9 @@ public abstract class IotNodeReaderGen<DEV> extends Object {
 		Wrap<WebClient> webClientWrap = new Wrap<WebClient>().var("webClient");
 		if(webClient == null) {
 			_webClient(webClientWrap);
-			setWebClient(webClientWrap.o);
+			Optional.ofNullable(webClientWrap.getO()).ifPresent(o -> {
+				setWebClient(o);
+			});
 		}
 		return (IotNodeReader)this;
 	}
@@ -276,7 +282,9 @@ public abstract class IotNodeReaderGen<DEV> extends Object {
 		Wrap<Vertx> vertxWrap = new Wrap<Vertx>().var("vertx");
 		if(vertx == null) {
 			_vertx(vertxWrap);
-			setVertx(vertxWrap.o);
+			Optional.ofNullable(vertxWrap.getO()).ifPresent(o -> {
+				setVertx(o);
+			});
 		}
 		return (IotNodeReader)this;
 	}
@@ -315,7 +323,9 @@ public abstract class IotNodeReaderGen<DEV> extends Object {
 		Wrap<WorkerExecutor> workerExecutorWrap = new Wrap<WorkerExecutor>().var("workerExecutor");
 		if(workerExecutor == null) {
 			_workerExecutor(workerExecutorWrap);
-			setWorkerExecutor(workerExecutorWrap.o);
+			Optional.ofNullable(workerExecutorWrap.getO()).ifPresent(o -> {
+				setWorkerExecutor(o);
+			});
 		}
 		return (IotNodeReader)this;
 	}
@@ -354,7 +364,9 @@ public abstract class IotNodeReaderGen<DEV> extends Object {
 		Wrap<HandlebarsTemplateEngine> templateEngineWrap = new Wrap<HandlebarsTemplateEngine>().var("templateEngine");
 		if(templateEngine == null) {
 			_templateEngine(templateEngineWrap);
-			setTemplateEngine(templateEngineWrap.o);
+			Optional.ofNullable(templateEngineWrap.getO()).ifPresent(o -> {
+				setTemplateEngine(o);
+			});
 		}
 		return (IotNodeReader)this;
 	}
@@ -393,7 +405,9 @@ public abstract class IotNodeReaderGen<DEV> extends Object {
 		Wrap<Handlebars> handlebarsWrap = new Wrap<Handlebars>().var("handlebars");
 		if(handlebars == null) {
 			_handlebars(handlebarsWrap);
-			setHandlebars(handlebarsWrap.o);
+			Optional.ofNullable(handlebarsWrap.getO()).ifPresent(o -> {
+				setHandlebars(o);
+			});
 		}
 		return (IotNodeReader)this;
 	}
@@ -557,7 +571,7 @@ public abstract class IotNodeReaderGen<DEV> extends Object {
 	public static String staticSearchStrIotNodeReader(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
 		case "config":
-			return IotNodeReader.staticSearchStrConfig(siteRequest_, (JsonObject)o);
+			return IotNodeReader.staticSearchStrConfig(siteRequest_, (String)o);
 			default:
 				return null;
 		}

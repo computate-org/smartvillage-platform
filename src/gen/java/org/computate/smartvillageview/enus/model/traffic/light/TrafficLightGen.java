@@ -252,7 +252,9 @@ public abstract class TrafficLightGen<DEV> extends MapResult {
 		Wrap<String> trafficLightIdWrap = new Wrap<String>().var("trafficLightId");
 		if(trafficLightId == null) {
 			_trafficLightId(trafficLightIdWrap);
-			setTrafficLightId(trafficLightIdWrap.o);
+			Optional.ofNullable(trafficLightIdWrap.getO()).ifPresent(o -> {
+				setTrafficLightId(o);
+			});
 		}
 		return (TrafficLight)this;
 	}
@@ -306,7 +308,9 @@ public abstract class TrafficLightGen<DEV> extends MapResult {
 		Wrap<String> trafficLightTypeWrap = new Wrap<String>().var("trafficLightType");
 		if(trafficLightType == null) {
 			_trafficLightType(trafficLightTypeWrap);
-			setTrafficLightType(trafficLightTypeWrap.o);
+			Optional.ofNullable(trafficLightTypeWrap.getO()).ifPresent(o -> {
+				setTrafficLightType(o);
+			});
 		}
 		return (TrafficLight)this;
 	}
@@ -381,7 +385,9 @@ public abstract class TrafficLightGen<DEV> extends MapResult {
 		Wrap<BigDecimal> angleWrap = new Wrap<BigDecimal>().var("angle");
 		if(angle == null) {
 			_angle(angleWrap);
-			setAngle(angleWrap.o);
+			Optional.ofNullable(angleWrap.getO()).ifPresent(o -> {
+				setAngle(o);
+			});
 		}
 		return (TrafficLight)this;
 	}
@@ -435,7 +441,9 @@ public abstract class TrafficLightGen<DEV> extends MapResult {
 		Wrap<String> colorWrap = new Wrap<String>().var("color");
 		if(color == null) {
 			_color(colorWrap);
-			setColor(colorWrap.o);
+			Optional.ofNullable(colorWrap.getO()).ifPresent(o -> {
+				setColor(o);
+			});
 		}
 		return (TrafficLight)this;
 	}

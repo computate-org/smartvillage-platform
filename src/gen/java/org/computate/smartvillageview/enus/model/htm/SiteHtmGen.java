@@ -256,7 +256,9 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 		Wrap<String> urlWrap = new Wrap<String>().var("url");
 		if(url == null) {
 			_url(urlWrap);
-			setUrl(urlWrap.o);
+			Optional.ofNullable(urlWrap.getO()).ifPresent(o -> {
+				setUrl(o);
+			});
 		}
 		return (SiteHtm)this;
 	}
@@ -310,7 +312,9 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 		Wrap<String> uriWrap = new Wrap<String>().var("uri");
 		if(uri == null) {
 			_uri(uriWrap);
-			setUri(uriWrap.o);
+			Optional.ofNullable(uriWrap.getO()).ifPresent(o -> {
+				setUri(o);
+			});
 		}
 		return (SiteHtm)this;
 	}
@@ -364,7 +368,9 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 		Wrap<String> pageIdWrap = new Wrap<String>().var("pageId");
 		if(pageId == null) {
 			_pageId(pageIdWrap);
-			setPageId(pageIdWrap.o);
+			Optional.ofNullable(pageIdWrap.getO()).ifPresent(o -> {
+				setPageId(o);
+			});
 		}
 		return (SiteHtm)this;
 	}
@@ -426,7 +432,9 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 		Wrap<Long> sequenceNumWrap = new Wrap<Long>().var("sequenceNum");
 		if(sequenceNum == null) {
 			_sequenceNum(sequenceNumWrap);
-			setSequenceNum(sequenceNumWrap.o);
+			Optional.ofNullable(sequenceNumWrap.getO()).ifPresent(o -> {
+				setSequenceNum(o);
+			});
 		}
 		return (SiteHtm)this;
 	}
@@ -480,7 +488,9 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 		Wrap<String> htmGroupWrap = new Wrap<String>().var("htmGroup");
 		if(htmGroup == null) {
 			_htmGroup(htmGroupWrap);
-			setHtmGroup(htmGroupWrap.o);
+			Optional.ofNullable(htmGroupWrap.getO()).ifPresent(o -> {
+				setHtmGroup(o);
+			});
 		}
 		return (SiteHtm)this;
 	}
@@ -608,7 +618,9 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 		Wrap<String> eBeforeWrap = new Wrap<String>().var("eBefore");
 		if(eBefore == null) {
 			_eBefore(eBeforeWrap);
-			setEBefore(eBeforeWrap.o);
+			Optional.ofNullable(eBeforeWrap.getO()).ifPresent(o -> {
+				setEBefore(o);
+			});
 		}
 		return (SiteHtm)this;
 	}
@@ -662,7 +674,9 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 		Wrap<String> eAfterWrap = new Wrap<String>().var("eAfter");
 		if(eAfter == null) {
 			_eAfter(eAfterWrap);
-			setEAfter(eAfterWrap.o);
+			Optional.ofNullable(eAfterWrap.getO()).ifPresent(o -> {
+				setEAfter(o);
+			});
 		}
 		return (SiteHtm)this;
 	}
@@ -724,7 +738,9 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 		Wrap<JsonObject> aWrap = new Wrap<JsonObject>().var("a");
 		if(a == null) {
 			_a(aWrap);
-			setA(aWrap.o);
+			Optional.ofNullable(aWrap.getO()).ifPresent(o -> {
+				setA(o);
+			});
 		}
 		return (SiteHtm)this;
 	}
@@ -928,7 +944,9 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 		Wrap<String> tabsWrap = new Wrap<String>().var("tabs");
 		if(tabs == null) {
 			_tabs(tabsWrap);
-			setTabs(tabsWrap.o);
+			Optional.ofNullable(tabsWrap.getO()).ifPresent(o -> {
+				setTabs(o);
+			});
 		}
 		return (SiteHtm)this;
 	}
@@ -987,7 +1005,9 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 		Wrap<Boolean> newLineWrap = new Wrap<Boolean>().var("newLine");
 		if(newLine == null) {
 			_newLine(newLineWrap);
-			setNewLine(newLineWrap.o);
+			Optional.ofNullable(newLineWrap.getO()).ifPresent(o -> {
+				setNewLine(o);
+			});
 		}
 		return (SiteHtm)this;
 	}
@@ -1041,7 +1061,9 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 		Wrap<String> htmBeforeWrap = new Wrap<String>().var("htmBefore");
 		if(htmBefore == null) {
 			_htmBefore(htmBeforeWrap);
-			setHtmBefore(htmBeforeWrap.o);
+			Optional.ofNullable(htmBeforeWrap.getO()).ifPresent(o -> {
+				setHtmBefore(o);
+			});
 		}
 		return (SiteHtm)this;
 	}
@@ -1169,7 +1191,9 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 		Wrap<String> htmAfterWrap = new Wrap<String>().var("htmAfter");
 		if(htmAfter == null) {
 			_htmAfter(htmAfterWrap);
-			setHtmAfter(htmAfterWrap.o);
+			Optional.ofNullable(htmAfterWrap.getO()).ifPresent(o -> {
+				setHtmAfter(o);
+			});
 		}
 		return (SiteHtm)this;
 	}

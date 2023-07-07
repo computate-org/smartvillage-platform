@@ -150,7 +150,9 @@ public abstract class VehicleStepGenPageGen<DEV> extends MapResultPage {
 		Wrap<SearchList<VehicleStep>> searchListVehicleStep_Wrap = new Wrap<SearchList<VehicleStep>>().var("searchListVehicleStep_");
 		if(searchListVehicleStep_ == null) {
 			_searchListVehicleStep_(searchListVehicleStep_Wrap);
-			setSearchListVehicleStep_(searchListVehicleStep_Wrap.o);
+			Optional.ofNullable(searchListVehicleStep_Wrap.getO()).ifPresent(o -> {
+				setSearchListVehicleStep_(o);
+			});
 		}
 		return (VehicleStepGenPage)this;
 	}
@@ -250,7 +252,9 @@ public abstract class VehicleStepGenPageGen<DEV> extends MapResultPage {
 		Wrap<Integer> vehicleStepCountWrap = new Wrap<Integer>().var("vehicleStepCount");
 		if(vehicleStepCount == null) {
 			_vehicleStepCount(vehicleStepCountWrap);
-			setVehicleStepCount(vehicleStepCountWrap.o);
+			Optional.ofNullable(vehicleStepCountWrap.getO()).ifPresent(o -> {
+				setVehicleStepCount(o);
+			});
 		}
 		return (VehicleStepGenPage)this;
 	}
@@ -301,7 +305,9 @@ public abstract class VehicleStepGenPageGen<DEV> extends MapResultPage {
 		Wrap<VehicleStep> vehicleStep_Wrap = new Wrap<VehicleStep>().var("vehicleStep_");
 		if(vehicleStep_ == null) {
 			_vehicleStep_(vehicleStep_Wrap);
-			setVehicleStep_(vehicleStep_Wrap.o);
+			Optional.ofNullable(vehicleStep_Wrap.getO()).ifPresent(o -> {
+				setVehicleStep_(o);
+			});
 		}
 		return (VehicleStepGenPage)this;
 	}
@@ -339,7 +345,9 @@ public abstract class VehicleStepGenPageGen<DEV> extends MapResultPage {
 		Wrap<String> idWrap = new Wrap<String>().var("id");
 		if(id == null) {
 			_id(idWrap);
-			setId(idWrap.o);
+			Optional.ofNullable(idWrap.getO()).ifPresent(o -> {
+				setId(o);
+			});
 		}
 		return (VehicleStepGenPage)this;
 	}
@@ -389,7 +397,9 @@ public abstract class VehicleStepGenPageGen<DEV> extends MapResultPage {
 		Wrap<String> pageUriVehicleStepWrap = new Wrap<String>().var("pageUriVehicleStep");
 		if(pageUriVehicleStep == null) {
 			_pageUriVehicleStep(pageUriVehicleStepWrap);
-			setPageUriVehicleStep(pageUriVehicleStepWrap.o);
+			Optional.ofNullable(pageUriVehicleStepWrap.getO()).ifPresent(o -> {
+				setPageUriVehicleStep(o);
+			});
 		}
 		return (VehicleStepGenPage)this;
 	}

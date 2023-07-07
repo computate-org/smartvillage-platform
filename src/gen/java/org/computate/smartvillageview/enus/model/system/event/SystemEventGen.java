@@ -270,7 +270,9 @@ public abstract class SystemEventGen<DEV> extends Object {
 		Wrap<SiteRequestEnUS> siteRequest_Wrap = new Wrap<SiteRequestEnUS>().var("siteRequest_");
 		if(siteRequest_ == null) {
 			_siteRequest_(siteRequest_Wrap);
-			setSiteRequest_(siteRequest_Wrap.o);
+			Optional.ofNullable(siteRequest_Wrap.getO()).ifPresent(o -> {
+				setSiteRequest_(o);
+			});
 		}
 		return (SystemEvent)this;
 	}
@@ -351,7 +353,9 @@ public abstract class SystemEventGen<DEV> extends Object {
 		Wrap<String> typeWrap = new Wrap<String>().var("type");
 		if(type == null) {
 			_type(typeWrap);
-			setType(typeWrap.o);
+			Optional.ofNullable(typeWrap.getO()).ifPresent(o -> {
+				setType(o);
+			});
 		}
 		return (SystemEvent)this;
 	}
@@ -405,7 +409,9 @@ public abstract class SystemEventGen<DEV> extends Object {
 		Wrap<String> messageWrap = new Wrap<String>().var("message");
 		if(message == null) {
 			_message(messageWrap);
-			setMessage(messageWrap.o);
+			Optional.ofNullable(messageWrap.getO()).ifPresent(o -> {
+				setMessage(o);
+			});
 		}
 		return (SystemEvent)this;
 	}
@@ -465,7 +471,9 @@ public abstract class SystemEventGen<DEV> extends Object {
 		Wrap<String> statusWrap = new Wrap<String>().var("status");
 		if(status == null) {
 			_status(statusWrap);
-			setStatus(statusWrap.o);
+			Optional.ofNullable(statusWrap.getO()).ifPresent(o -> {
+				setStatus(o);
+			});
 		}
 		return (SystemEvent)this;
 	}
@@ -543,7 +551,9 @@ public abstract class SystemEventGen<DEV> extends Object {
 		Wrap<ZonedDateTime> completedWrap = new Wrap<ZonedDateTime>().var("completed");
 		if(completed == null) {
 			_completed(completedWrap);
-			setCompleted(completedWrap.o);
+			Optional.ofNullable(completedWrap.getO()).ifPresent(o -> {
+				setCompleted(o);
+			});
 		}
 		return (SystemEvent)this;
 	}
@@ -597,7 +607,9 @@ public abstract class SystemEventGen<DEV> extends Object {
 		Wrap<String> inheritPkWrap = new Wrap<String>().var("inheritPk");
 		if(inheritPk == null) {
 			_inheritPk(inheritPkWrap);
-			setInheritPk(inheritPkWrap.o);
+			Optional.ofNullable(inheritPkWrap.getO()).ifPresent(o -> {
+				setInheritPk(o);
+			});
 		}
 		return (SystemEvent)this;
 	}
@@ -675,7 +687,9 @@ public abstract class SystemEventGen<DEV> extends Object {
 		Wrap<ZonedDateTime> createdWrap = new Wrap<ZonedDateTime>().var("created");
 		if(created == null) {
 			_created(createdWrap);
-			setCreated(createdWrap.o);
+			Optional.ofNullable(createdWrap.getO()).ifPresent(o -> {
+				setCreated(o);
+			});
 		}
 		return (SystemEvent)this;
 	}
@@ -753,7 +767,9 @@ public abstract class SystemEventGen<DEV> extends Object {
 		Wrap<ZonedDateTime> modifiedWrap = new Wrap<ZonedDateTime>().var("modified");
 		if(modified == null) {
 			_modified(modifiedWrap);
-			setModified(modifiedWrap.o);
+			Optional.ofNullable(modifiedWrap.getO()).ifPresent(o -> {
+				setModified(o);
+			});
 		}
 		return (SystemEvent)this;
 	}
@@ -803,7 +819,9 @@ public abstract class SystemEventGen<DEV> extends Object {
 		Wrap<String> pageImageUriWrap = new Wrap<String>().var("pageImageUri");
 		if(pageImageUri == null) {
 			_pageImageUri(pageImageUriWrap);
-			setPageImageUri(pageImageUriWrap.o);
+			Optional.ofNullable(pageImageUriWrap.getO()).ifPresent(o -> {
+				setPageImageUri(o);
+			});
 		}
 		return (SystemEvent)this;
 	}
@@ -865,7 +883,9 @@ public abstract class SystemEventGen<DEV> extends Object {
 		Wrap<Integer> pageImageWidthWrap = new Wrap<Integer>().var("pageImageWidth");
 		if(pageImageWidth == null) {
 			_pageImageWidth(pageImageWidthWrap);
-			setPageImageWidth(pageImageWidthWrap.o);
+			Optional.ofNullable(pageImageWidthWrap.getO()).ifPresent(o -> {
+				setPageImageWidth(o);
+			});
 		}
 		return (SystemEvent)this;
 	}
@@ -923,7 +943,9 @@ public abstract class SystemEventGen<DEV> extends Object {
 		Wrap<Integer> pageImageHeightWrap = new Wrap<Integer>().var("pageImageHeight");
 		if(pageImageHeight == null) {
 			_pageImageHeight(pageImageHeightWrap);
-			setPageImageHeight(pageImageHeightWrap.o);
+			Optional.ofNullable(pageImageHeightWrap.getO()).ifPresent(o -> {
+				setPageImageHeight(o);
+			});
 		}
 		return (SystemEvent)this;
 	}
@@ -973,7 +995,9 @@ public abstract class SystemEventGen<DEV> extends Object {
 		Wrap<String> pageImageTypeWrap = new Wrap<String>().var("pageImageType");
 		if(pageImageType == null) {
 			_pageImageType(pageImageTypeWrap);
-			setPageImageType(pageImageTypeWrap.o);
+			Optional.ofNullable(pageImageTypeWrap.getO()).ifPresent(o -> {
+				setPageImageType(o);
+			});
 		}
 		return (SystemEvent)this;
 	}
@@ -1028,7 +1052,9 @@ public abstract class SystemEventGen<DEV> extends Object {
 		Wrap<Boolean> archivedWrap = new Wrap<Boolean>().var("archived");
 		if(archived == null) {
 			_archived(archivedWrap);
-			setArchived(archivedWrap.o);
+			Optional.ofNullable(archivedWrap.getO()).ifPresent(o -> {
+				setArchived(o);
+			});
 		}
 		return (SystemEvent)this;
 	}
@@ -1087,7 +1113,9 @@ public abstract class SystemEventGen<DEV> extends Object {
 		Wrap<Boolean> deletedWrap = new Wrap<Boolean>().var("deleted");
 		if(deleted == null) {
 			_deleted(deletedWrap);
-			setDeleted(deletedWrap.o);
+			Optional.ofNullable(deletedWrap.getO()).ifPresent(o -> {
+				setDeleted(o);
+			});
 		}
 		return (SystemEvent)this;
 	}
@@ -1141,7 +1169,9 @@ public abstract class SystemEventGen<DEV> extends Object {
 		Wrap<String> classCanonicalNameWrap = new Wrap<String>().var("classCanonicalName");
 		if(classCanonicalName == null) {
 			_classCanonicalName(classCanonicalNameWrap);
-			setClassCanonicalName(classCanonicalNameWrap.o);
+			Optional.ofNullable(classCanonicalNameWrap.getO()).ifPresent(o -> {
+				setClassCanonicalName(o);
+			});
 		}
 		return (SystemEvent)this;
 	}
@@ -1191,7 +1221,9 @@ public abstract class SystemEventGen<DEV> extends Object {
 		Wrap<String> classSimpleNameWrap = new Wrap<String>().var("classSimpleName");
 		if(classSimpleName == null) {
 			_classSimpleName(classSimpleNameWrap);
-			setClassSimpleName(classSimpleNameWrap.o);
+			Optional.ofNullable(classSimpleNameWrap.getO()).ifPresent(o -> {
+				setClassSimpleName(o);
+			});
 		}
 		return (SystemEvent)this;
 	}
@@ -1311,7 +1343,9 @@ public abstract class SystemEventGen<DEV> extends Object {
 		Wrap<String> sessionIdWrap = new Wrap<String>().var("sessionId");
 		if(sessionId == null) {
 			_sessionId(sessionIdWrap);
-			setSessionId(sessionIdWrap.o);
+			Optional.ofNullable(sessionIdWrap.getO()).ifPresent(o -> {
+				setSessionId(o);
+			});
 		}
 		return (SystemEvent)this;
 	}
@@ -1373,7 +1407,9 @@ public abstract class SystemEventGen<DEV> extends Object {
 		Wrap<Long> userKeyWrap = new Wrap<Long>().var("userKey");
 		if(userKey == null) {
 			_userKey(userKeyWrap);
-			setUserKey(userKeyWrap.o);
+			Optional.ofNullable(userKeyWrap.getO()).ifPresent(o -> {
+				setUserKey(o);
+			});
 		}
 		return (SystemEvent)this;
 	}
@@ -1497,7 +1533,9 @@ public abstract class SystemEventGen<DEV> extends Object {
 		Wrap<String> objectTitleWrap = new Wrap<String>().var("objectTitle");
 		if(objectTitle == null) {
 			_objectTitle(objectTitleWrap);
-			setObjectTitle(objectTitleWrap.o);
+			Optional.ofNullable(objectTitleWrap.getO()).ifPresent(o -> {
+				setObjectTitle(o);
+			});
 		}
 		return (SystemEvent)this;
 	}
@@ -1547,7 +1585,9 @@ public abstract class SystemEventGen<DEV> extends Object {
 		Wrap<String> objectIdWrap = new Wrap<String>().var("objectId");
 		if(objectId == null) {
 			_objectId(objectIdWrap);
-			setObjectId(objectIdWrap.o);
+			Optional.ofNullable(objectIdWrap.getO()).ifPresent(o -> {
+				setObjectId(o);
+			});
 		}
 		return (SystemEvent)this;
 	}
@@ -1601,7 +1641,9 @@ public abstract class SystemEventGen<DEV> extends Object {
 		Wrap<String> objectSuggestWrap = new Wrap<String>().var("objectSuggest");
 		if(objectSuggest == null) {
 			_objectSuggest(objectSuggestWrap);
-			setObjectSuggest(objectSuggestWrap.o);
+			Optional.ofNullable(objectSuggestWrap.getO()).ifPresent(o -> {
+				setObjectSuggest(o);
+			});
 		}
 		return (SystemEvent)this;
 	}
@@ -1725,7 +1767,9 @@ public abstract class SystemEventGen<DEV> extends Object {
 		Wrap<String> pageUrlIdWrap = new Wrap<String>().var("pageUrlId");
 		if(pageUrlId == null) {
 			_pageUrlId(pageUrlIdWrap);
-			setPageUrlId(pageUrlIdWrap.o);
+			Optional.ofNullable(pageUrlIdWrap.getO()).ifPresent(o -> {
+				setPageUrlId(o);
+			});
 		}
 		return (SystemEvent)this;
 	}
@@ -1775,7 +1819,9 @@ public abstract class SystemEventGen<DEV> extends Object {
 		Wrap<String> pageUrlPkWrap = new Wrap<String>().var("pageUrlPk");
 		if(pageUrlPk == null) {
 			_pageUrlPk(pageUrlPkWrap);
-			setPageUrlPk(pageUrlPkWrap.o);
+			Optional.ofNullable(pageUrlPkWrap.getO()).ifPresent(o -> {
+				setPageUrlPk(o);
+			});
 		}
 		return (SystemEvent)this;
 	}
@@ -1825,7 +1871,9 @@ public abstract class SystemEventGen<DEV> extends Object {
 		Wrap<String> pageUrlApiWrap = new Wrap<String>().var("pageUrlApi");
 		if(pageUrlApi == null) {
 			_pageUrlApi(pageUrlApiWrap);
-			setPageUrlApi(pageUrlApiWrap.o);
+			Optional.ofNullable(pageUrlApiWrap.getO()).ifPresent(o -> {
+				setPageUrlApi(o);
+			});
 		}
 		return (SystemEvent)this;
 	}
@@ -1875,7 +1923,9 @@ public abstract class SystemEventGen<DEV> extends Object {
 		Wrap<String> idWrap = new Wrap<String>().var("id");
 		if(id == null) {
 			_id(idWrap);
-			setId(idWrap.o);
+			Optional.ofNullable(idWrap.getO()).ifPresent(o -> {
+				setId(o);
+			});
 		}
 		return (SystemEvent)this;
 	}

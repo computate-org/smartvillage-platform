@@ -159,16 +159,18 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 		Wrap<JsonObject> pageWrap = new Wrap<JsonObject>().var("page");
 		if(page == null) {
 			_page(pageWrap);
-			setPage(pageWrap.o);
+			Optional.ofNullable(pageWrap.getO()).ifPresent(o -> {
+				setPage(o);
+			});
 		}
 		return (DynamicPage)this;
 	}
 
-	public static JsonObject staticSearchPage(SiteRequestEnUS siteRequest_, JsonObject o) {
-		return o;
+	public static String staticSearchPage(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o.toString();
 	}
 
-	public static String staticSearchStrPage(SiteRequestEnUS siteRequest_, JsonObject o) {
+	public static String staticSearchStrPage(SiteRequestEnUS siteRequest_, String o) {
 		return o == null ? null : o.toString();
 	}
 
@@ -209,7 +211,9 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 		Wrap<String> urlWrap = new Wrap<String>().var("url");
 		if(url == null) {
 			_url(urlWrap);
-			setUrl(urlWrap.o);
+			Optional.ofNullable(urlWrap.getO()).ifPresent(o -> {
+				setUrl(o);
+			});
 		}
 		return (DynamicPage)this;
 	}
@@ -259,7 +263,9 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 		Wrap<String> uriWrap = new Wrap<String>().var("uri");
 		if(uri == null) {
 			_uri(uriWrap);
-			setUri(uriWrap.o);
+			Optional.ofNullable(uriWrap.getO()).ifPresent(o -> {
+				setUri(o);
+			});
 		}
 		return (DynamicPage)this;
 	}
@@ -309,7 +315,9 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 		Wrap<String> pageIdWrap = new Wrap<String>().var("pageId");
 		if(pageId == null) {
 			_pageId(pageIdWrap);
-			setPageId(pageIdWrap.o);
+			Optional.ofNullable(pageIdWrap.getO()).ifPresent(o -> {
+				setPageId(o);
+			});
 		}
 		return (DynamicPage)this;
 	}
@@ -360,7 +368,9 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 		Wrap<Map<String, String>> varsWrap = new Wrap<Map<String, String>>().var("vars");
 		if(vars == null) {
 			_vars(varsWrap);
-			setVars(varsWrap.o);
+			Optional.ofNullable(varsWrap.getO()).ifPresent(o -> {
+				setVars(o);
+			});
 		}
 		return (DynamicPage)this;
 	}
@@ -398,7 +408,9 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 		Wrap<String> filterLabelWrap = new Wrap<String>().var("filterLabel");
 		if(filterLabel == null) {
 			_filterLabel(filterLabelWrap);
-			setFilterLabel(filterLabelWrap.o);
+			Optional.ofNullable(filterLabelWrap.getO()).ifPresent(o -> {
+				setFilterLabel(o);
+			});
 		}
 		return (DynamicPage)this;
 	}
@@ -518,11 +530,11 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 		return (DynamicPage)this;
 	}
 
-	public static JsonArray staticSearchHtmTitle(SiteRequestEnUS siteRequest_, JsonArray o) {
-		return o;
+	public static String staticSearchHtmTitle(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o.toString();
 	}
 
-	public static String staticSearchStrHtmTitle(SiteRequestEnUS siteRequest_, JsonArray o) {
+	public static String staticSearchStrHtmTitle(SiteRequestEnUS siteRequest_, String o) {
 		return o == null ? null : o.toString();
 	}
 
@@ -572,11 +584,11 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 		return (DynamicPage)this;
 	}
 
-	public static JsonArray staticSearchHtmMeta(SiteRequestEnUS siteRequest_, JsonArray o) {
-		return o;
+	public static String staticSearchHtmMeta(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o.toString();
 	}
 
-	public static String staticSearchStrHtmMeta(SiteRequestEnUS siteRequest_, JsonArray o) {
+	public static String staticSearchStrHtmMeta(SiteRequestEnUS siteRequest_, String o) {
 		return o == null ? null : o.toString();
 	}
 
@@ -626,11 +638,11 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 		return (DynamicPage)this;
 	}
 
-	public static JsonArray staticSearchHtmBody(SiteRequestEnUS siteRequest_, JsonArray o) {
-		return o;
+	public static String staticSearchHtmBody(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o.toString();
 	}
 
-	public static String staticSearchStrHtmBody(SiteRequestEnUS siteRequest_, JsonArray o) {
+	public static String staticSearchStrHtmBody(SiteRequestEnUS siteRequest_, String o) {
 		return o == null ? null : o.toString();
 	}
 
@@ -671,7 +683,9 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 		Wrap<String> pageResponseWrap = new Wrap<String>().var("pageResponse");
 		if(pageResponse == null) {
 			_pageResponse(pageResponseWrap);
-			setPageResponse(pageResponseWrap.o);
+			Optional.ofNullable(pageResponseWrap.getO()).ifPresent(o -> {
+				setPageResponse(o);
+			});
 		}
 		return (DynamicPage)this;
 	}
@@ -721,7 +735,9 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 		Wrap<String> defaultZoneIdWrap = new Wrap<String>().var("defaultZoneId");
 		if(defaultZoneId == null) {
 			_defaultZoneId(defaultZoneIdWrap);
-			setDefaultZoneId(defaultZoneIdWrap.o);
+			Optional.ofNullable(defaultZoneIdWrap.getO()).ifPresent(o -> {
+				setDefaultZoneId(o);
+			});
 		}
 		return (DynamicPage)this;
 	}
@@ -772,7 +788,9 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 		Wrap<ZoneId> defaultTimeZoneWrap = new Wrap<ZoneId>().var("defaultTimeZone");
 		if(defaultTimeZone == null) {
 			_defaultTimeZone(defaultTimeZoneWrap);
-			setDefaultTimeZone(defaultTimeZoneWrap.o);
+			Optional.ofNullable(defaultTimeZoneWrap.getO()).ifPresent(o -> {
+				setDefaultTimeZone(o);
+			});
 		}
 		return (DynamicPage)this;
 	}
@@ -810,7 +828,9 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 		Wrap<String> defaultLocaleIdWrap = new Wrap<String>().var("defaultLocaleId");
 		if(defaultLocaleId == null) {
 			_defaultLocaleId(defaultLocaleIdWrap);
-			setDefaultLocaleId(defaultLocaleIdWrap.o);
+			Optional.ofNullable(defaultLocaleIdWrap.getO()).ifPresent(o -> {
+				setDefaultLocaleId(o);
+			});
 		}
 		return (DynamicPage)this;
 	}
@@ -861,7 +881,9 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 		Wrap<Locale> defaultLocaleWrap = new Wrap<Locale>().var("defaultLocale");
 		if(defaultLocale == null) {
 			_defaultLocale(defaultLocaleWrap);
-			setDefaultLocale(defaultLocaleWrap.o);
+			Optional.ofNullable(defaultLocaleWrap.getO()).ifPresent(o -> {
+				setDefaultLocale(o);
+			});
 		}
 		return (DynamicPage)this;
 	}
@@ -1120,7 +1142,7 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 	public static String staticSearchStrDynamicPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
 		case "page":
-			return DynamicPage.staticSearchStrPage(siteRequest_, (JsonObject)o);
+			return DynamicPage.staticSearchStrPage(siteRequest_, (String)o);
 		case "url":
 			return DynamicPage.staticSearchStrUrl(siteRequest_, (String)o);
 		case "uri":
@@ -1130,11 +1152,11 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 		case "filterLabel":
 			return DynamicPage.staticSearchStrFilterLabel(siteRequest_, (String)o);
 		case "htmTitle":
-			return DynamicPage.staticSearchStrHtmTitle(siteRequest_, (JsonArray)o);
+			return DynamicPage.staticSearchStrHtmTitle(siteRequest_, (String)o);
 		case "htmMeta":
-			return DynamicPage.staticSearchStrHtmMeta(siteRequest_, (JsonArray)o);
+			return DynamicPage.staticSearchStrHtmMeta(siteRequest_, (String)o);
 		case "htmBody":
-			return DynamicPage.staticSearchStrHtmBody(siteRequest_, (JsonArray)o);
+			return DynamicPage.staticSearchStrHtmBody(siteRequest_, (String)o);
 		case "pageResponse":
 			return DynamicPage.staticSearchStrPageResponse(siteRequest_, (String)o);
 		case "defaultZoneId":

@@ -150,7 +150,9 @@ public abstract class TrafficLightGenPageGen<DEV> extends MapResultPage {
 		Wrap<SearchList<TrafficLight>> searchListTrafficLight_Wrap = new Wrap<SearchList<TrafficLight>>().var("searchListTrafficLight_");
 		if(searchListTrafficLight_ == null) {
 			_searchListTrafficLight_(searchListTrafficLight_Wrap);
-			setSearchListTrafficLight_(searchListTrafficLight_Wrap.o);
+			Optional.ofNullable(searchListTrafficLight_Wrap.getO()).ifPresent(o -> {
+				setSearchListTrafficLight_(o);
+			});
 		}
 		return (TrafficLightGenPage)this;
 	}
@@ -250,7 +252,9 @@ public abstract class TrafficLightGenPageGen<DEV> extends MapResultPage {
 		Wrap<Integer> trafficLightCountWrap = new Wrap<Integer>().var("trafficLightCount");
 		if(trafficLightCount == null) {
 			_trafficLightCount(trafficLightCountWrap);
-			setTrafficLightCount(trafficLightCountWrap.o);
+			Optional.ofNullable(trafficLightCountWrap.getO()).ifPresent(o -> {
+				setTrafficLightCount(o);
+			});
 		}
 		return (TrafficLightGenPage)this;
 	}
@@ -301,7 +305,9 @@ public abstract class TrafficLightGenPageGen<DEV> extends MapResultPage {
 		Wrap<TrafficLight> trafficLight_Wrap = new Wrap<TrafficLight>().var("trafficLight_");
 		if(trafficLight_ == null) {
 			_trafficLight_(trafficLight_Wrap);
-			setTrafficLight_(trafficLight_Wrap.o);
+			Optional.ofNullable(trafficLight_Wrap.getO()).ifPresent(o -> {
+				setTrafficLight_(o);
+			});
 		}
 		return (TrafficLightGenPage)this;
 	}
@@ -339,7 +345,9 @@ public abstract class TrafficLightGenPageGen<DEV> extends MapResultPage {
 		Wrap<String> idWrap = new Wrap<String>().var("id");
 		if(id == null) {
 			_id(idWrap);
-			setId(idWrap.o);
+			Optional.ofNullable(idWrap.getO()).ifPresent(o -> {
+				setId(o);
+			});
 		}
 		return (TrafficLightGenPage)this;
 	}
@@ -389,7 +397,9 @@ public abstract class TrafficLightGenPageGen<DEV> extends MapResultPage {
 		Wrap<String> pageUriTrafficLightWrap = new Wrap<String>().var("pageUriTrafficLight");
 		if(pageUriTrafficLight == null) {
 			_pageUriTrafficLight(pageUriTrafficLightWrap);
-			setPageUriTrafficLight(pageUriTrafficLightWrap.o);
+			Optional.ofNullable(pageUriTrafficLightWrap.getO()).ifPresent(o -> {
+				setPageUriTrafficLight(o);
+			});
 		}
 		return (TrafficLightGenPage)this;
 	}

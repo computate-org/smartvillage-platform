@@ -255,7 +255,9 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 		Wrap<String> simulationNameWrap = new Wrap<String>().var("simulationName");
 		if(simulationName == null) {
 			_simulationName(simulationNameWrap);
-			setSimulationName(simulationNameWrap.o);
+			Optional.ofNullable(simulationNameWrap.getO()).ifPresent(o -> {
+				setSimulationName(o);
+			});
 		}
 		return (MapResult)this;
 	}
@@ -309,7 +311,9 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 		Wrap<String> sumocfgPathWrap = new Wrap<String>().var("sumocfgPath");
 		if(sumocfgPath == null) {
 			_sumocfgPath(sumocfgPathWrap);
-			setSumocfgPath(sumocfgPathWrap.o);
+			Optional.ofNullable(sumocfgPathWrap.getO()).ifPresent(o -> {
+				setSumocfgPath(o);
+			});
 		}
 		return (MapResult)this;
 	}
@@ -371,7 +375,9 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 		Wrap<Long> simulationKeyWrap = new Wrap<Long>().var("simulationKey");
 		if(simulationKey == null) {
 			_simulationKey(simulationKeyWrap);
-			setSimulationKey(simulationKeyWrap.o);
+			Optional.ofNullable(simulationKeyWrap.getO()).ifPresent(o -> {
+				setSimulationKey(o);
+			});
 		}
 		return (MapResult)this;
 	}
@@ -425,7 +431,9 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 		Wrap<String> timeStepIdWrap = new Wrap<String>().var("timeStepId");
 		if(timeStepId == null) {
 			_timeStepId(timeStepIdWrap);
-			setTimeStepId(timeStepIdWrap.o);
+			Optional.ofNullable(timeStepIdWrap.getO()).ifPresent(o -> {
+				setTimeStepId(o);
+			});
 		}
 		return (MapResult)this;
 	}
@@ -500,7 +508,9 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 		Wrap<BigDecimal> timeWrap = new Wrap<BigDecimal>().var("time");
 		if(time == null) {
 			_time(timeWrap);
-			setTime(timeWrap.o);
+			Optional.ofNullable(timeWrap.getO()).ifPresent(o -> {
+				setTime(o);
+			});
 		}
 		return (MapResult)this;
 	}
@@ -578,7 +588,9 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 		Wrap<ZonedDateTime> dateTimeWrap = new Wrap<ZonedDateTime>().var("dateTime");
 		if(dateTime == null) {
 			_dateTime(dateTimeWrap);
-			setDateTime(dateTimeWrap.o);
+			Optional.ofNullable(dateTimeWrap.getO()).ifPresent(o -> {
+				setDateTime(o);
+			});
 		}
 		return (MapResult)this;
 	}
@@ -640,7 +652,9 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 		Wrap<Double> xWrap = new Wrap<Double>().var("x");
 		if(x == null) {
 			_x(xWrap);
-			setX(xWrap.o);
+			Optional.ofNullable(xWrap.getO()).ifPresent(o -> {
+				setX(o);
+			});
 		}
 		return (MapResult)this;
 	}
@@ -702,7 +716,9 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 		Wrap<Double> yWrap = new Wrap<Double>().var("y");
 		if(y == null) {
 			_y(yWrap);
-			setY(yWrap.o);
+			Optional.ofNullable(yWrap.getO()).ifPresent(o -> {
+				setY(o);
+			});
 		}
 		return (MapResult)this;
 	}
@@ -768,7 +784,9 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 		Wrap<Point> locationWrap = new Wrap<Point>().var("location");
 		if(location == null) {
 			_location(locationWrap);
-			setLocation(locationWrap.o);
+			Optional.ofNullable(locationWrap.getO()).ifPresent(o -> {
+				setLocation(o);
+			});
 		}
 		return (MapResult)this;
 	}
@@ -822,7 +840,9 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 		Wrap<String> colorWrap = new Wrap<String>().var("color");
 		if(color == null) {
 			_color(colorWrap);
-			setColor(colorWrap.o);
+			Optional.ofNullable(colorWrap.getO()).ifPresent(o -> {
+				setColor(o);
+			});
 		}
 		return (MapResult)this;
 	}
@@ -881,7 +901,9 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 		Wrap<Boolean> stepWrap = new Wrap<Boolean>().var("step");
 		if(step == null) {
 			_step(stepWrap);
-			setStep(stepWrap.o);
+			Optional.ofNullable(stepWrap.getO()).ifPresent(o -> {
+				setStep(o);
+			});
 		}
 		return (MapResult)this;
 	}

@@ -253,7 +253,9 @@ public abstract class TrafficLightStepGen<DEV> extends MapResult {
 		Wrap<String> trafficLightIdWrap = new Wrap<String>().var("trafficLightId");
 		if(trafficLightId == null) {
 			_trafficLightId(trafficLightIdWrap);
-			setTrafficLightId(trafficLightIdWrap.o);
+			Optional.ofNullable(trafficLightIdWrap.getO()).ifPresent(o -> {
+				setTrafficLightId(o);
+			});
 		}
 		return (TrafficLightStep)this;
 	}
@@ -307,7 +309,9 @@ public abstract class TrafficLightStepGen<DEV> extends MapResult {
 		Wrap<String> trafficLightTypeWrap = new Wrap<String>().var("trafficLightType");
 		if(trafficLightType == null) {
 			_trafficLightType(trafficLightTypeWrap);
-			setTrafficLightType(trafficLightTypeWrap.o);
+			Optional.ofNullable(trafficLightTypeWrap.getO()).ifPresent(o -> {
+				setTrafficLightType(o);
+			});
 		}
 		return (TrafficLightStep)this;
 	}
@@ -382,7 +386,9 @@ public abstract class TrafficLightStepGen<DEV> extends MapResult {
 		Wrap<BigDecimal> angleWrap = new Wrap<BigDecimal>().var("angle");
 		if(angle == null) {
 			_angle(angleWrap);
-			setAngle(angleWrap.o);
+			Optional.ofNullable(angleWrap.getO()).ifPresent(o -> {
+				setAngle(o);
+			});
 		}
 		return (TrafficLightStep)this;
 	}
@@ -436,7 +442,9 @@ public abstract class TrafficLightStepGen<DEV> extends MapResult {
 		Wrap<String> stateWrap = new Wrap<String>().var("state");
 		if(state == null) {
 			_state(stateWrap);
-			setState(stateWrap.o);
+			Optional.ofNullable(stateWrap.getO()).ifPresent(o -> {
+				setState(o);
+			});
 		}
 		return (TrafficLightStep)this;
 	}
@@ -498,7 +506,9 @@ public abstract class TrafficLightStepGen<DEV> extends MapResult {
 		Wrap<Long> programIdWrap = new Wrap<Long>().var("programId");
 		if(programId == null) {
 			_programId(programIdWrap);
-			setProgramId(programIdWrap.o);
+			Optional.ofNullable(programIdWrap.getO()).ifPresent(o -> {
+				setProgramId(o);
+			});
 		}
 		return (TrafficLightStep)this;
 	}
@@ -560,7 +570,9 @@ public abstract class TrafficLightStepGen<DEV> extends MapResult {
 		Wrap<Long> phaseWrap = new Wrap<Long>().var("phase");
 		if(phase == null) {
 			_phase(phaseWrap);
-			setPhase(phaseWrap.o);
+			Optional.ofNullable(phaseWrap.getO()).ifPresent(o -> {
+				setPhase(o);
+			});
 		}
 		return (TrafficLightStep)this;
 	}

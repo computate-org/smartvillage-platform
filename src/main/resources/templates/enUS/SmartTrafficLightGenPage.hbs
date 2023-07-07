@@ -516,28 +516,11 @@
 						<span class="w3-button w3-display-topright " onclick="$('#postSmartTrafficLightModal').hide(); ">×</span>
 	{{/eq}}
 						<h2 class="w3-padding ">Create a smart traffic light</h2>
+						<div class="">You can override any default values below: </div>
 					</header>
 					<div class="" id="postSmartTrafficLightFormValues">
 						<div id="postSmartTrafficLightForm">
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmCreated" roleRequired="true"}}
-{{else}}
-{{> "htmCreated" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmArchived" roleRequired="true"}}
-{{else}}
-{{> "htmArchived" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmDeleted" roleRequired="true"}}
-{{else}}
-{{> "htmDeleted" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-							</div>
+{{#block "htmFormButton_postSmartTrafficLight"}}{{/block}}
 							<div class="w3-cell-row ">
 {{#ifContainsAnyRoles roles roleRequired}}
 {{> "htmEntityId" roleRequired="true"}}
@@ -591,13 +574,6 @@
 {{> "htmParamTotalIterNum" roleRequired="true"}}
 {{else}}
 {{> "htmParamTotalIterNum" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmReportKeys" roleRequired="true"}}
-{{else}}
-{{> "htmReportKeys" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
 							</div>
 						</div>

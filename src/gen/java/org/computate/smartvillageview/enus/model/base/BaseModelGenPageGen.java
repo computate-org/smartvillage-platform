@@ -150,7 +150,9 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 		Wrap<SearchList<BaseModel>> searchListBaseModel_Wrap = new Wrap<SearchList<BaseModel>>().var("searchListBaseModel_");
 		if(searchListBaseModel_ == null) {
 			_searchListBaseModel_(searchListBaseModel_Wrap);
-			setSearchListBaseModel_(searchListBaseModel_Wrap.o);
+			Optional.ofNullable(searchListBaseModel_Wrap.getO()).ifPresent(o -> {
+				setSearchListBaseModel_(o);
+			});
 		}
 		return (BaseModelGenPage)this;
 	}
@@ -250,7 +252,9 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 		Wrap<Integer> baseModelCountWrap = new Wrap<Integer>().var("baseModelCount");
 		if(baseModelCount == null) {
 			_baseModelCount(baseModelCountWrap);
-			setBaseModelCount(baseModelCountWrap.o);
+			Optional.ofNullable(baseModelCountWrap.getO()).ifPresent(o -> {
+				setBaseModelCount(o);
+			});
 		}
 		return (BaseModelGenPage)this;
 	}
@@ -301,7 +305,9 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 		Wrap<BaseModel> baseModel_Wrap = new Wrap<BaseModel>().var("baseModel_");
 		if(baseModel_ == null) {
 			_baseModel_(baseModel_Wrap);
-			setBaseModel_(baseModel_Wrap.o);
+			Optional.ofNullable(baseModel_Wrap.getO()).ifPresent(o -> {
+				setBaseModel_(o);
+			});
 		}
 		return (BaseModelGenPage)this;
 	}
@@ -347,7 +353,9 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 		Wrap<Long> pkWrap = new Wrap<Long>().var("pk");
 		if(pk == null) {
 			_pk(pkWrap);
-			setPk(pkWrap.o);
+			Optional.ofNullable(pkWrap.getO()).ifPresent(o -> {
+				setPk(o);
+			});
 		}
 		return (BaseModelGenPage)this;
 	}
@@ -397,7 +405,9 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 		Wrap<String> idWrap = new Wrap<String>().var("id");
 		if(id == null) {
 			_id(idWrap);
-			setId(idWrap.o);
+			Optional.ofNullable(idWrap.getO()).ifPresent(o -> {
+				setId(o);
+			});
 		}
 		return (BaseModelGenPage)this;
 	}

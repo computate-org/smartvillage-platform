@@ -204,7 +204,9 @@ public abstract class HomePageGen<DEV> extends PageLayout {
 		Wrap<String> pageResponseWrap = new Wrap<String>().var("pageResponse");
 		if(pageResponse == null) {
 			_pageResponse(pageResponseWrap);
-			setPageResponse(pageResponseWrap.o);
+			Optional.ofNullable(pageResponseWrap.getO()).ifPresent(o -> {
+				setPageResponse(o);
+			});
 		}
 		return (HomePage)this;
 	}
@@ -254,7 +256,9 @@ public abstract class HomePageGen<DEV> extends PageLayout {
 		Wrap<String> defaultZoneIdWrap = new Wrap<String>().var("defaultZoneId");
 		if(defaultZoneId == null) {
 			_defaultZoneId(defaultZoneIdWrap);
-			setDefaultZoneId(defaultZoneIdWrap.o);
+			Optional.ofNullable(defaultZoneIdWrap.getO()).ifPresent(o -> {
+				setDefaultZoneId(o);
+			});
 		}
 		return (HomePage)this;
 	}
@@ -305,7 +309,9 @@ public abstract class HomePageGen<DEV> extends PageLayout {
 		Wrap<ZoneId> defaultTimeZoneWrap = new Wrap<ZoneId>().var("defaultTimeZone");
 		if(defaultTimeZone == null) {
 			_defaultTimeZone(defaultTimeZoneWrap);
-			setDefaultTimeZone(defaultTimeZoneWrap.o);
+			Optional.ofNullable(defaultTimeZoneWrap.getO()).ifPresent(o -> {
+				setDefaultTimeZone(o);
+			});
 		}
 		return (HomePage)this;
 	}
@@ -343,7 +349,9 @@ public abstract class HomePageGen<DEV> extends PageLayout {
 		Wrap<String> defaultLocaleIdWrap = new Wrap<String>().var("defaultLocaleId");
 		if(defaultLocaleId == null) {
 			_defaultLocaleId(defaultLocaleIdWrap);
-			setDefaultLocaleId(defaultLocaleIdWrap.o);
+			Optional.ofNullable(defaultLocaleIdWrap.getO()).ifPresent(o -> {
+				setDefaultLocaleId(o);
+			});
 		}
 		return (HomePage)this;
 	}
@@ -394,7 +402,9 @@ public abstract class HomePageGen<DEV> extends PageLayout {
 		Wrap<Locale> defaultLocaleWrap = new Wrap<Locale>().var("defaultLocale");
 		if(defaultLocale == null) {
 			_defaultLocale(defaultLocaleWrap);
-			setDefaultLocale(defaultLocaleWrap.o);
+			Optional.ofNullable(defaultLocaleWrap.getO()).ifPresent(o -> {
+				setDefaultLocale(o);
+			});
 		}
 		return (HomePage)this;
 	}
@@ -697,7 +707,9 @@ public abstract class HomePageGen<DEV> extends PageLayout {
 		Wrap<Stats> statsWrap = new Wrap<Stats>().var("stats");
 		if(stats == null) {
 			_stats(statsWrap);
-			setStats(statsWrap.o);
+			Optional.ofNullable(statsWrap.getO()).ifPresent(o -> {
+				setStats(o);
+			});
 		}
 		return (HomePage)this;
 	}
@@ -736,7 +748,9 @@ public abstract class HomePageGen<DEV> extends PageLayout {
 		Wrap<FacetCounts> facetCountsWrap = new Wrap<FacetCounts>().var("facetCounts");
 		if(facetCounts == null) {
 			_facetCounts(facetCountsWrap);
-			setFacetCounts(facetCountsWrap.o);
+			Optional.ofNullable(facetCountsWrap.getO()).ifPresent(o -> {
+				setFacetCounts(o);
+			});
 		}
 		return (HomePage)this;
 	}
@@ -782,7 +796,9 @@ public abstract class HomePageGen<DEV> extends PageLayout {
 		Wrap<Integer> sitePageCountWrap = new Wrap<Integer>().var("sitePageCount");
 		if(sitePageCount == null) {
 			_sitePageCount(sitePageCountWrap);
-			setSitePageCount(sitePageCountWrap.o);
+			Optional.ofNullable(sitePageCountWrap.getO()).ifPresent(o -> {
+				setSitePageCount(o);
+			});
 		}
 		return (HomePage)this;
 	}
@@ -845,7 +861,9 @@ public abstract class HomePageGen<DEV> extends PageLayout {
 		Wrap<List<SitePage>> sitePagesWrap = new Wrap<List<SitePage>>().var("sitePages");
 		if(sitePages == null) {
 			_sitePages(sitePagesWrap);
-			setSitePages(sitePagesWrap.o);
+			Optional.ofNullable(sitePagesWrap.getO()).ifPresent(o -> {
+				setSitePages(o);
+			});
 		}
 		return (HomePage)this;
 	}

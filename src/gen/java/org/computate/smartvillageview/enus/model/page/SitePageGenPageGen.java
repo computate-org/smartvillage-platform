@@ -150,7 +150,9 @@ public abstract class SitePageGenPageGen<DEV> extends BaseResultPage {
 		Wrap<SearchList<SitePage>> searchListSitePage_Wrap = new Wrap<SearchList<SitePage>>().var("searchListSitePage_");
 		if(searchListSitePage_ == null) {
 			_searchListSitePage_(searchListSitePage_Wrap);
-			setSearchListSitePage_(searchListSitePage_Wrap.o);
+			Optional.ofNullable(searchListSitePage_Wrap.getO()).ifPresent(o -> {
+				setSearchListSitePage_(o);
+			});
 		}
 		return (SitePageGenPage)this;
 	}
@@ -250,7 +252,9 @@ public abstract class SitePageGenPageGen<DEV> extends BaseResultPage {
 		Wrap<Integer> sitePageCountWrap = new Wrap<Integer>().var("sitePageCount");
 		if(sitePageCount == null) {
 			_sitePageCount(sitePageCountWrap);
-			setSitePageCount(sitePageCountWrap.o);
+			Optional.ofNullable(sitePageCountWrap.getO()).ifPresent(o -> {
+				setSitePageCount(o);
+			});
 		}
 		return (SitePageGenPage)this;
 	}
@@ -301,7 +305,9 @@ public abstract class SitePageGenPageGen<DEV> extends BaseResultPage {
 		Wrap<SitePage> sitePage_Wrap = new Wrap<SitePage>().var("sitePage_");
 		if(sitePage_ == null) {
 			_sitePage_(sitePage_Wrap);
-			setSitePage_(sitePage_Wrap.o);
+			Optional.ofNullable(sitePage_Wrap.getO()).ifPresent(o -> {
+				setSitePage_(o);
+			});
 		}
 		return (SitePageGenPage)this;
 	}
@@ -339,7 +345,9 @@ public abstract class SitePageGenPageGen<DEV> extends BaseResultPage {
 		Wrap<String> idWrap = new Wrap<String>().var("id");
 		if(id == null) {
 			_id(idWrap);
-			setId(idWrap.o);
+			Optional.ofNullable(idWrap.getO()).ifPresent(o -> {
+				setId(o);
+			});
 		}
 		return (SitePageGenPage)this;
 	}
@@ -389,7 +397,9 @@ public abstract class SitePageGenPageGen<DEV> extends BaseResultPage {
 		Wrap<String> pageUriSitePageWrap = new Wrap<String>().var("pageUriSitePage");
 		if(pageUriSitePage == null) {
 			_pageUriSitePage(pageUriSitePageWrap);
-			setPageUriSitePage(pageUriSitePageWrap.o);
+			Optional.ofNullable(pageUriSitePageWrap.getO()).ifPresent(o -> {
+				setPageUriSitePage(o);
+			});
 		}
 		return (SitePageGenPage)this;
 	}

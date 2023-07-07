@@ -150,7 +150,9 @@ public abstract class IotNodeStepGenPageGen<DEV> extends BaseResultPage {
 		Wrap<SearchList<IotNodeStep>> searchListIotNodeStep_Wrap = new Wrap<SearchList<IotNodeStep>>().var("searchListIotNodeStep_");
 		if(searchListIotNodeStep_ == null) {
 			_searchListIotNodeStep_(searchListIotNodeStep_Wrap);
-			setSearchListIotNodeStep_(searchListIotNodeStep_Wrap.o);
+			Optional.ofNullable(searchListIotNodeStep_Wrap.getO()).ifPresent(o -> {
+				setSearchListIotNodeStep_(o);
+			});
 		}
 		return (IotNodeStepGenPage)this;
 	}
@@ -250,7 +252,9 @@ public abstract class IotNodeStepGenPageGen<DEV> extends BaseResultPage {
 		Wrap<Integer> iotNodeStepCountWrap = new Wrap<Integer>().var("iotNodeStepCount");
 		if(iotNodeStepCount == null) {
 			_iotNodeStepCount(iotNodeStepCountWrap);
-			setIotNodeStepCount(iotNodeStepCountWrap.o);
+			Optional.ofNullable(iotNodeStepCountWrap.getO()).ifPresent(o -> {
+				setIotNodeStepCount(o);
+			});
 		}
 		return (IotNodeStepGenPage)this;
 	}
@@ -301,7 +305,9 @@ public abstract class IotNodeStepGenPageGen<DEV> extends BaseResultPage {
 		Wrap<IotNodeStep> iotNodeStep_Wrap = new Wrap<IotNodeStep>().var("iotNodeStep_");
 		if(iotNodeStep_ == null) {
 			_iotNodeStep_(iotNodeStep_Wrap);
-			setIotNodeStep_(iotNodeStep_Wrap.o);
+			Optional.ofNullable(iotNodeStep_Wrap.getO()).ifPresent(o -> {
+				setIotNodeStep_(o);
+			});
 		}
 		return (IotNodeStepGenPage)this;
 	}
@@ -339,7 +345,9 @@ public abstract class IotNodeStepGenPageGen<DEV> extends BaseResultPage {
 		Wrap<String> idWrap = new Wrap<String>().var("id");
 		if(id == null) {
 			_id(idWrap);
-			setId(idWrap.o);
+			Optional.ofNullable(idWrap.getO()).ifPresent(o -> {
+				setId(o);
+			});
 		}
 		return (IotNodeStepGenPage)this;
 	}
@@ -389,7 +397,9 @@ public abstract class IotNodeStepGenPageGen<DEV> extends BaseResultPage {
 		Wrap<String> pageUriIotNodeStepWrap = new Wrap<String>().var("pageUriIotNodeStep");
 		if(pageUriIotNodeStep == null) {
 			_pageUriIotNodeStep(pageUriIotNodeStepWrap);
-			setPageUriIotNodeStep(pageUriIotNodeStepWrap.o);
+			Optional.ofNullable(pageUriIotNodeStepWrap.getO()).ifPresent(o -> {
+				setPageUriIotNodeStep(o);
+			});
 		}
 		return (IotNodeStepGenPage)this;
 	}
