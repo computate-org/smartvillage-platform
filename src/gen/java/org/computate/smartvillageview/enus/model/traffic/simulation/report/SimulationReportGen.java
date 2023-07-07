@@ -3433,6 +3433,10 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 
 	public void siteRequestSimulationReport(SiteRequestEnUS siteRequest_) {
 			super.siteRequestBaseModel(siteRequest_);
+		if(simulationSearch != null)
+			simulationSearch.setSiteRequest_(siteRequest_);
+		if(smartTrafficLightSearch != null)
+			smartTrafficLightSearch.setSiteRequest_(siteRequest_);
 	}
 
 	public void siteRequestForClass(SiteRequestEnUS siteRequest_) {

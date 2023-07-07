@@ -433,6 +433,10 @@ public abstract class HomePageGen<DEV> extends PageLayout {
 	public List<String> getDefaultFieldListVars() {
 		return defaultFieldListVars;
 	}
+
+	public void setDefaultFieldListVars(List<String> defaultFieldListVars) {
+		this.defaultFieldListVars = defaultFieldListVars;
+	}
 	public void setDefaultFieldListVars(String o) {
 		String l = HomePage.staticSetDefaultFieldListVars(siteRequest_, o);
 		if(l != null)
@@ -503,6 +507,10 @@ public abstract class HomePageGen<DEV> extends PageLayout {
 	public List<String> getDefaultStatsVars() {
 		return defaultStatsVars;
 	}
+
+	public void setDefaultStatsVars(List<String> defaultStatsVars) {
+		this.defaultStatsVars = defaultStatsVars;
+	}
 	public void setDefaultStatsVars(String o) {
 		String l = HomePage.staticSetDefaultStatsVars(siteRequest_, o);
 		if(l != null)
@@ -572,6 +580,10 @@ public abstract class HomePageGen<DEV> extends PageLayout {
 
 	public List<String> getDefaultPivotVars() {
 		return defaultPivotVars;
+	}
+
+	public void setDefaultPivotVars(List<String> defaultPivotVars) {
+		this.defaultPivotVars = defaultPivotVars;
 	}
 	public void setDefaultPivotVars(String o) {
 		String l = HomePage.staticSetDefaultPivotVars(siteRequest_, o);
@@ -949,6 +961,8 @@ public abstract class HomePageGen<DEV> extends PageLayout {
 
 	public void siteRequestHomePage(SiteRequestEnUS siteRequest_) {
 			super.siteRequestPageLayout(siteRequest_);
+		if(searchListSitePage != null)
+			searchListSitePage.setSiteRequest_(siteRequest_);
 	}
 
 	public void siteRequestForClass(SiteRequestEnUS siteRequest_) {

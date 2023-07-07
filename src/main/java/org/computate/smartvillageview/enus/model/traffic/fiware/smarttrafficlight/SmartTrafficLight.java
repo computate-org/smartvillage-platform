@@ -188,9 +188,9 @@ public class SmartTrafficLight extends SmartTrafficLightGen<BaseModel> {
 	 * Description: 
 	 * Min: 1
 	 * Max: 2
+	 * Default: 1
 	 */
 	protected void _paramVehicleDemandScalingFactor(Wrap<BigDecimal> w) {
-		w.o(new BigDecimal(1));
 	}
 
 	/**
@@ -203,9 +203,9 @@ public class SmartTrafficLight extends SmartTrafficLightGen<BaseModel> {
 	 * Description: 
 	 * Min: 1
 	 * Max: 30
+	 * Default: 5
 	 */
 	protected void _paramAvgPedestrianPerMinFromWestToEast(Wrap<BigDecimal> w) {
-		w.o(new BigDecimal(5));
 	}
 
 	/**
@@ -218,9 +218,9 @@ public class SmartTrafficLight extends SmartTrafficLightGen<BaseModel> {
 	 * Description: 
 	 * Min: 1
 	 * Max: 30
+	 * Default: 5
 	 */
 	protected void _paramAvgPedestrianPerMinFromSouthToNorth(Wrap<BigDecimal> w) {
-		w.o(new BigDecimal(5));
 	}
 
 	/**
@@ -233,9 +233,9 @@ public class SmartTrafficLight extends SmartTrafficLightGen<BaseModel> {
 	 * Description: 
 	 * Min: 1
 	 * Max: 2
+	 * Default: 1
 	 */
 	protected void _paramPedestrianDemandScalingFactor(Wrap<BigDecimal> w) {
-		w.o(new BigDecimal(1));
 	}
 
 	/**
@@ -324,9 +324,9 @@ public class SmartTrafficLight extends SmartTrafficLightGen<BaseModel> {
 	 * Description: 
 	 * Min: 1
 	 * Max: 60
+	 * Default: 10
 	 */
 	protected void _paramPedestrianWaitThresholdSecNorthSouth(Wrap<BigDecimal> w) {
-		w.o(new BigDecimal(10));
 	}
 
 	/**
@@ -339,9 +339,9 @@ public class SmartTrafficLight extends SmartTrafficLightGen<BaseModel> {
 	 * Description: 
 	 * Min: 1
 	 * Max: 60
+	 * Default: 10
 	 */
 	protected void _paramPedestrianWaitThresholdSecWestEast(Wrap<BigDecimal> w) {
-		w.o(new BigDecimal(10));
 	}
 
 	/**
@@ -386,9 +386,9 @@ public class SmartTrafficLight extends SmartTrafficLightGen<BaseModel> {
 	 * Description: 
 	 * Min: 1
 	 * Max: 15
+	 * Default: 6
 	 */
 	protected void _paramPedestrianQueueThresholdNorthSouth(Wrap<BigDecimal> w) {
-		w.o(new BigDecimal(6));
 	}
 
 	/**
@@ -401,9 +401,9 @@ public class SmartTrafficLight extends SmartTrafficLightGen<BaseModel> {
 	 * Description: 
 	 * Min: 1
 	 * Max: 15
+	 * Default: 6
 	 */
 	protected void _paramPedestrianQueueThresholdWestEast(Wrap<BigDecimal> w) {
-		w.o(new BigDecimal(6));
 	}
 
 	/**
@@ -417,9 +417,9 @@ public class SmartTrafficLight extends SmartTrafficLightGen<BaseModel> {
 	 * Description: 
 	 * Min: 0.5
 	 * Max: 2
+	 * Default: 1
 	 */
 	protected void _paramStepSize(Wrap<BigDecimal> w) {
-		w.o(new BigDecimal(1));
 	}
 
 	/**
@@ -433,9 +433,9 @@ public class SmartTrafficLight extends SmartTrafficLightGen<BaseModel> {
 	 * Description: Time duration of each simulated sample path. 
 	 * Min: 500
 	 * Max: 3600
+	 * Default: 1000
 	 */
 	protected void _paramRunTime(Wrap<Integer> w) {
-		w.o(1000);
 	}
 
 	/**
@@ -449,9 +449,9 @@ public class SmartTrafficLight extends SmartTrafficLightGen<BaseModel> {
 	 * Description: Number of repeats per round. 
 	 * Min: 1
 	 * Max: 30
+	 * Default: 3
 	 */
 	protected void _paramItersPerPar(Wrap<Integer> w) {
-		w.o(3);
 	}
 
 	/**
@@ -465,9 +465,9 @@ public class SmartTrafficLight extends SmartTrafficLightGen<BaseModel> {
 	 * Description: Total iterations to update performance. 
 	 * Min: 1
 	 * Max: 30
+	 * Default: 5
 	 */
 	protected void _paramTotalIterNum(Wrap<Integer> w) {
-		w.o(5);
 	}
 
 	/**

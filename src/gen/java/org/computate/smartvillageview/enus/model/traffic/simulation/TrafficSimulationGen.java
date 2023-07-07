@@ -336,9 +336,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected void _simulationName(Wrap<String> w) {
-		setSimulationName("Veberöd intersection");
-	}
+	protected abstract void _simulationName(Wrap<String> w);
 
 	public String getSimulationName() {
 		return simulationName;
@@ -352,10 +350,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	protected TrafficSimulation simulationNameInit() {
 		Wrap<String> simulationNameWrap = new Wrap<String>().var("simulationName");
 		if(simulationName == null) {
-			_simulationName(simulationNameWrap);
-			Optional.ofNullable(simulationNameWrap.getO()).ifPresent(o -> {
-				setSimulationName(o);
-			});
+			setSimulationName("Veberöd intersection");
 		}
 		return (TrafficSimulation)this;
 	}
@@ -394,9 +389,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected void _sumocfgPath(Wrap<String> w) {
-		setSumocfgPath("/usr/local/src/TLC/input/Veberod_intersection_pedestrian.sumocfg");
-	}
+	protected abstract void _sumocfgPath(Wrap<String> w);
 
 	public String getSumocfgPath() {
 		return sumocfgPath;
@@ -410,10 +403,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	protected TrafficSimulation sumocfgPathInit() {
 		Wrap<String> sumocfgPathWrap = new Wrap<String>().var("sumocfgPath");
 		if(sumocfgPath == null) {
-			_sumocfgPath(sumocfgPathWrap);
-			Optional.ofNullable(sumocfgPathWrap.getO()).ifPresent(o -> {
-				setSumocfgPath(o);
-			});
+			setSumocfgPath("/usr/local/src/TLC/input/Veberod_intersection_pedestrian.sumocfg");
 		}
 		return (TrafficSimulation)this;
 	}
@@ -452,9 +442,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected void _fcdFilePath(Wrap<String> w) {
-		setFcdFilePath("/usr/local/src/TLC/output/veberod-fcd.xml");
-	}
+	protected abstract void _fcdFilePath(Wrap<String> w);
 
 	public String getFcdFilePath() {
 		return fcdFilePath;
@@ -468,10 +456,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	protected TrafficSimulation fcdFilePathInit() {
 		Wrap<String> fcdFilePathWrap = new Wrap<String>().var("fcdFilePath");
 		if(fcdFilePath == null) {
-			_fcdFilePath(fcdFilePathWrap);
-			Optional.ofNullable(fcdFilePathWrap.getO()).ifPresent(o -> {
-				setFcdFilePath(o);
-			});
+			setFcdFilePath("/usr/local/src/TLC/output/veberod-fcd.xml");
 		}
 		return (TrafficSimulation)this;
 	}
@@ -567,9 +552,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected void _startSeconds(Wrap<BigDecimal> w) {
-		setStartSeconds("0");
-	}
+	protected abstract void _startSeconds(Wrap<BigDecimal> w);
 
 	public BigDecimal getStartSeconds() {
 		return startSeconds;
@@ -603,10 +586,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	protected TrafficSimulation startSecondsInit() {
 		Wrap<BigDecimal> startSecondsWrap = new Wrap<BigDecimal>().var("startSeconds");
 		if(startSeconds == null) {
-			_startSeconds(startSecondsWrap);
-			Optional.ofNullable(startSecondsWrap.getO()).ifPresent(o -> {
-				setStartSeconds(o);
-			});
+			setStartSeconds("0");
 		}
 		return (TrafficSimulation)this;
 	}
@@ -646,9 +626,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected void _endSeconds(Wrap<BigDecimal> w) {
-		setEndSeconds("300");
-	}
+	protected abstract void _endSeconds(Wrap<BigDecimal> w);
 
 	public BigDecimal getEndSeconds() {
 		return endSeconds;
@@ -682,10 +660,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	protected TrafficSimulation endSecondsInit() {
 		Wrap<BigDecimal> endSecondsWrap = new Wrap<BigDecimal>().var("endSeconds");
 		if(endSeconds == null) {
-			_endSeconds(endSecondsWrap);
-			Optional.ofNullable(endSecondsWrap.getO()).ifPresent(o -> {
-				setEndSeconds(o);
-			});
+			setEndSeconds("300");
 		}
 		return (TrafficSimulation)this;
 	}
@@ -725,9 +700,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected void _stepSeconds(Wrap<BigDecimal> w) {
-		setStepSeconds("0.1");
-	}
+	protected abstract void _stepSeconds(Wrap<BigDecimal> w);
 
 	public BigDecimal getStepSeconds() {
 		return stepSeconds;
@@ -761,10 +734,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	protected TrafficSimulation stepSecondsInit() {
 		Wrap<BigDecimal> stepSecondsWrap = new Wrap<BigDecimal>().var("stepSeconds");
 		if(stepSeconds == null) {
-			_stepSeconds(stepSecondsWrap);
-			Optional.ofNullable(stepSecondsWrap.getO()).ifPresent(o -> {
-				setStepSeconds(o);
-			});
+			setStepSeconds("0.1");
 		}
 		return (TrafficSimulation)this;
 	}
@@ -804,9 +774,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected void _paramAvgVehiclePerMinFromWestToEast(Wrap<BigDecimal> w) {
-		setParamAvgVehiclePerMinFromWestToEast("10");
-	}
+	protected abstract void _paramAvgVehiclePerMinFromWestToEast(Wrap<BigDecimal> w);
 
 	public BigDecimal getParamAvgVehiclePerMinFromWestToEast() {
 		return paramAvgVehiclePerMinFromWestToEast;
@@ -840,10 +808,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	protected TrafficSimulation paramAvgVehiclePerMinFromWestToEastInit() {
 		Wrap<BigDecimal> paramAvgVehiclePerMinFromWestToEastWrap = new Wrap<BigDecimal>().var("paramAvgVehiclePerMinFromWestToEast");
 		if(paramAvgVehiclePerMinFromWestToEast == null) {
-			_paramAvgVehiclePerMinFromWestToEast(paramAvgVehiclePerMinFromWestToEastWrap);
-			Optional.ofNullable(paramAvgVehiclePerMinFromWestToEastWrap.getO()).ifPresent(o -> {
-				setParamAvgVehiclePerMinFromWestToEast(o);
-			});
+			setParamAvgVehiclePerMinFromWestToEast("10");
 		}
 		return (TrafficSimulation)this;
 	}
@@ -883,9 +848,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected void _paramAvgVehiclePerMinFromSouthToNorth(Wrap<BigDecimal> w) {
-		setParamAvgVehiclePerMinFromSouthToNorth("10");
-	}
+	protected abstract void _paramAvgVehiclePerMinFromSouthToNorth(Wrap<BigDecimal> w);
 
 	public BigDecimal getParamAvgVehiclePerMinFromSouthToNorth() {
 		return paramAvgVehiclePerMinFromSouthToNorth;
@@ -919,10 +882,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	protected TrafficSimulation paramAvgVehiclePerMinFromSouthToNorthInit() {
 		Wrap<BigDecimal> paramAvgVehiclePerMinFromSouthToNorthWrap = new Wrap<BigDecimal>().var("paramAvgVehiclePerMinFromSouthToNorth");
 		if(paramAvgVehiclePerMinFromSouthToNorth == null) {
-			_paramAvgVehiclePerMinFromSouthToNorth(paramAvgVehiclePerMinFromSouthToNorthWrap);
-			Optional.ofNullable(paramAvgVehiclePerMinFromSouthToNorthWrap.getO()).ifPresent(o -> {
-				setParamAvgVehiclePerMinFromSouthToNorth(o);
-			});
+			setParamAvgVehiclePerMinFromSouthToNorth("10");
 		}
 		return (TrafficSimulation)this;
 	}
@@ -962,9 +922,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected void _paramVehicleDemandScalingFactor(Wrap<BigDecimal> w) {
-		setParamVehicleDemandScalingFactor("1");
-	}
+	protected abstract void _paramVehicleDemandScalingFactor(Wrap<BigDecimal> w);
 
 	public BigDecimal getParamVehicleDemandScalingFactor() {
 		return paramVehicleDemandScalingFactor;
@@ -998,10 +956,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	protected TrafficSimulation paramVehicleDemandScalingFactorInit() {
 		Wrap<BigDecimal> paramVehicleDemandScalingFactorWrap = new Wrap<BigDecimal>().var("paramVehicleDemandScalingFactor");
 		if(paramVehicleDemandScalingFactor == null) {
-			_paramVehicleDemandScalingFactor(paramVehicleDemandScalingFactorWrap);
-			Optional.ofNullable(paramVehicleDemandScalingFactorWrap.getO()).ifPresent(o -> {
-				setParamVehicleDemandScalingFactor(o);
-			});
+			setParamVehicleDemandScalingFactor("1");
 		}
 		return (TrafficSimulation)this;
 	}
@@ -1041,9 +996,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected void _paramAvgPedestrianPerMinFromWestToEast(Wrap<BigDecimal> w) {
-		setParamAvgPedestrianPerMinFromWestToEast("5");
-	}
+	protected abstract void _paramAvgPedestrianPerMinFromWestToEast(Wrap<BigDecimal> w);
 
 	public BigDecimal getParamAvgPedestrianPerMinFromWestToEast() {
 		return paramAvgPedestrianPerMinFromWestToEast;
@@ -1077,10 +1030,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	protected TrafficSimulation paramAvgPedestrianPerMinFromWestToEastInit() {
 		Wrap<BigDecimal> paramAvgPedestrianPerMinFromWestToEastWrap = new Wrap<BigDecimal>().var("paramAvgPedestrianPerMinFromWestToEast");
 		if(paramAvgPedestrianPerMinFromWestToEast == null) {
-			_paramAvgPedestrianPerMinFromWestToEast(paramAvgPedestrianPerMinFromWestToEastWrap);
-			Optional.ofNullable(paramAvgPedestrianPerMinFromWestToEastWrap.getO()).ifPresent(o -> {
-				setParamAvgPedestrianPerMinFromWestToEast(o);
-			});
+			setParamAvgPedestrianPerMinFromWestToEast("5");
 		}
 		return (TrafficSimulation)this;
 	}
@@ -1120,9 +1070,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected void _paramAvgPedestrianPerMinFromSouthToNorth(Wrap<BigDecimal> w) {
-		setParamAvgPedestrianPerMinFromSouthToNorth("5");
-	}
+	protected abstract void _paramAvgPedestrianPerMinFromSouthToNorth(Wrap<BigDecimal> w);
 
 	public BigDecimal getParamAvgPedestrianPerMinFromSouthToNorth() {
 		return paramAvgPedestrianPerMinFromSouthToNorth;
@@ -1156,10 +1104,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	protected TrafficSimulation paramAvgPedestrianPerMinFromSouthToNorthInit() {
 		Wrap<BigDecimal> paramAvgPedestrianPerMinFromSouthToNorthWrap = new Wrap<BigDecimal>().var("paramAvgPedestrianPerMinFromSouthToNorth");
 		if(paramAvgPedestrianPerMinFromSouthToNorth == null) {
-			_paramAvgPedestrianPerMinFromSouthToNorth(paramAvgPedestrianPerMinFromSouthToNorthWrap);
-			Optional.ofNullable(paramAvgPedestrianPerMinFromSouthToNorthWrap.getO()).ifPresent(o -> {
-				setParamAvgPedestrianPerMinFromSouthToNorth(o);
-			});
+			setParamAvgPedestrianPerMinFromSouthToNorth("5");
 		}
 		return (TrafficSimulation)this;
 	}
@@ -1199,9 +1144,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected void _paramPedestrianDemandScalingFactor(Wrap<BigDecimal> w) {
-		setParamPedestrianDemandScalingFactor("1");
-	}
+	protected abstract void _paramPedestrianDemandScalingFactor(Wrap<BigDecimal> w);
 
 	public BigDecimal getParamPedestrianDemandScalingFactor() {
 		return paramPedestrianDemandScalingFactor;
@@ -1235,10 +1178,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	protected TrafficSimulation paramPedestrianDemandScalingFactorInit() {
 		Wrap<BigDecimal> paramPedestrianDemandScalingFactorWrap = new Wrap<BigDecimal>().var("paramPedestrianDemandScalingFactor");
 		if(paramPedestrianDemandScalingFactor == null) {
-			_paramPedestrianDemandScalingFactor(paramPedestrianDemandScalingFactorWrap);
-			Optional.ofNullable(paramPedestrianDemandScalingFactorWrap.getO()).ifPresent(o -> {
-				setParamPedestrianDemandScalingFactor(o);
-			});
+			setParamPedestrianDemandScalingFactor("1");
 		}
 		return (TrafficSimulation)this;
 	}
@@ -1379,9 +1319,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected void _paramMinGreenTimeSecWestEast(Wrap<BigDecimal> w) {
-		setParamMinGreenTimeSecWestEast("20");
-	}
+	protected abstract void _paramMinGreenTimeSecWestEast(Wrap<BigDecimal> w);
 
 	public BigDecimal getParamMinGreenTimeSecWestEast() {
 		return paramMinGreenTimeSecWestEast;
@@ -1415,10 +1353,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	protected TrafficSimulation paramMinGreenTimeSecWestEastInit() {
 		Wrap<BigDecimal> paramMinGreenTimeSecWestEastWrap = new Wrap<BigDecimal>().var("paramMinGreenTimeSecWestEast");
 		if(paramMinGreenTimeSecWestEast == null) {
-			_paramMinGreenTimeSecWestEast(paramMinGreenTimeSecWestEastWrap);
-			Optional.ofNullable(paramMinGreenTimeSecWestEastWrap.getO()).ifPresent(o -> {
-				setParamMinGreenTimeSecWestEast(o);
-			});
+			setParamMinGreenTimeSecWestEast("20");
 		}
 		return (TrafficSimulation)this;
 	}
@@ -1458,9 +1393,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected void _paramMaxGreenTimeSecWestEast(Wrap<BigDecimal> w) {
-		setParamMaxGreenTimeSecWestEast("30");
-	}
+	protected abstract void _paramMaxGreenTimeSecWestEast(Wrap<BigDecimal> w);
 
 	public BigDecimal getParamMaxGreenTimeSecWestEast() {
 		return paramMaxGreenTimeSecWestEast;
@@ -1494,10 +1427,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	protected TrafficSimulation paramMaxGreenTimeSecWestEastInit() {
 		Wrap<BigDecimal> paramMaxGreenTimeSecWestEastWrap = new Wrap<BigDecimal>().var("paramMaxGreenTimeSecWestEast");
 		if(paramMaxGreenTimeSecWestEast == null) {
-			_paramMaxGreenTimeSecWestEast(paramMaxGreenTimeSecWestEastWrap);
-			Optional.ofNullable(paramMaxGreenTimeSecWestEastWrap.getO()).ifPresent(o -> {
-				setParamMaxGreenTimeSecWestEast(o);
-			});
+			setParamMaxGreenTimeSecWestEast("30");
 		}
 		return (TrafficSimulation)this;
 	}
@@ -1537,9 +1467,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected void _paramMinGreenTimeSecSouthNorth(Wrap<BigDecimal> w) {
-		setParamMinGreenTimeSecSouthNorth("10");
-	}
+	protected abstract void _paramMinGreenTimeSecSouthNorth(Wrap<BigDecimal> w);
 
 	public BigDecimal getParamMinGreenTimeSecSouthNorth() {
 		return paramMinGreenTimeSecSouthNorth;
@@ -1573,10 +1501,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	protected TrafficSimulation paramMinGreenTimeSecSouthNorthInit() {
 		Wrap<BigDecimal> paramMinGreenTimeSecSouthNorthWrap = new Wrap<BigDecimal>().var("paramMinGreenTimeSecSouthNorth");
 		if(paramMinGreenTimeSecSouthNorth == null) {
-			_paramMinGreenTimeSecSouthNorth(paramMinGreenTimeSecSouthNorthWrap);
-			Optional.ofNullable(paramMinGreenTimeSecSouthNorthWrap.getO()).ifPresent(o -> {
-				setParamMinGreenTimeSecSouthNorth(o);
-			});
+			setParamMinGreenTimeSecSouthNorth("10");
 		}
 		return (TrafficSimulation)this;
 	}
@@ -1616,9 +1541,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected void _paramMaxGreenTimeSecSouthNorth(Wrap<BigDecimal> w) {
-		setParamMaxGreenTimeSecSouthNorth("20");
-	}
+	protected abstract void _paramMaxGreenTimeSecSouthNorth(Wrap<BigDecimal> w);
 
 	public BigDecimal getParamMaxGreenTimeSecSouthNorth() {
 		return paramMaxGreenTimeSecSouthNorth;
@@ -1652,10 +1575,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	protected TrafficSimulation paramMaxGreenTimeSecSouthNorthInit() {
 		Wrap<BigDecimal> paramMaxGreenTimeSecSouthNorthWrap = new Wrap<BigDecimal>().var("paramMaxGreenTimeSecSouthNorth");
 		if(paramMaxGreenTimeSecSouthNorth == null) {
-			_paramMaxGreenTimeSecSouthNorth(paramMaxGreenTimeSecSouthNorthWrap);
-			Optional.ofNullable(paramMaxGreenTimeSecSouthNorthWrap.getO()).ifPresent(o -> {
-				setParamMaxGreenTimeSecSouthNorth(o);
-			});
+			setParamMaxGreenTimeSecSouthNorth("20");
 		}
 		return (TrafficSimulation)this;
 	}
@@ -1695,9 +1615,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected void _paramPedestrianWaitThresholdSecNorthSouth(Wrap<BigDecimal> w) {
-		setParamPedestrianWaitThresholdSecNorthSouth("10");
-	}
+	protected abstract void _paramPedestrianWaitThresholdSecNorthSouth(Wrap<BigDecimal> w);
 
 	public BigDecimal getParamPedestrianWaitThresholdSecNorthSouth() {
 		return paramPedestrianWaitThresholdSecNorthSouth;
@@ -1731,10 +1649,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	protected TrafficSimulation paramPedestrianWaitThresholdSecNorthSouthInit() {
 		Wrap<BigDecimal> paramPedestrianWaitThresholdSecNorthSouthWrap = new Wrap<BigDecimal>().var("paramPedestrianWaitThresholdSecNorthSouth");
 		if(paramPedestrianWaitThresholdSecNorthSouth == null) {
-			_paramPedestrianWaitThresholdSecNorthSouth(paramPedestrianWaitThresholdSecNorthSouthWrap);
-			Optional.ofNullable(paramPedestrianWaitThresholdSecNorthSouthWrap.getO()).ifPresent(o -> {
-				setParamPedestrianWaitThresholdSecNorthSouth(o);
-			});
+			setParamPedestrianWaitThresholdSecNorthSouth("10");
 		}
 		return (TrafficSimulation)this;
 	}
@@ -1774,9 +1689,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected void _paramPedestrianWaitThresholdSecWestEast(Wrap<BigDecimal> w) {
-		setParamPedestrianWaitThresholdSecWestEast("10");
-	}
+	protected abstract void _paramPedestrianWaitThresholdSecWestEast(Wrap<BigDecimal> w);
 
 	public BigDecimal getParamPedestrianWaitThresholdSecWestEast() {
 		return paramPedestrianWaitThresholdSecWestEast;
@@ -1810,10 +1723,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	protected TrafficSimulation paramPedestrianWaitThresholdSecWestEastInit() {
 		Wrap<BigDecimal> paramPedestrianWaitThresholdSecWestEastWrap = new Wrap<BigDecimal>().var("paramPedestrianWaitThresholdSecWestEast");
 		if(paramPedestrianWaitThresholdSecWestEast == null) {
-			_paramPedestrianWaitThresholdSecWestEast(paramPedestrianWaitThresholdSecWestEastWrap);
-			Optional.ofNullable(paramPedestrianWaitThresholdSecWestEastWrap.getO()).ifPresent(o -> {
-				setParamPedestrianWaitThresholdSecWestEast(o);
-			});
+			setParamPedestrianWaitThresholdSecWestEast("10");
 		}
 		return (TrafficSimulation)this;
 	}
@@ -1853,9 +1763,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected void _paramVehicleQueueThresholdWestEast(Wrap<BigDecimal> w) {
-		setParamVehicleQueueThresholdWestEast("8");
-	}
+	protected abstract void _paramVehicleQueueThresholdWestEast(Wrap<BigDecimal> w);
 
 	public BigDecimal getParamVehicleQueueThresholdWestEast() {
 		return paramVehicleQueueThresholdWestEast;
@@ -1889,10 +1797,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	protected TrafficSimulation paramVehicleQueueThresholdWestEastInit() {
 		Wrap<BigDecimal> paramVehicleQueueThresholdWestEastWrap = new Wrap<BigDecimal>().var("paramVehicleQueueThresholdWestEast");
 		if(paramVehicleQueueThresholdWestEast == null) {
-			_paramVehicleQueueThresholdWestEast(paramVehicleQueueThresholdWestEastWrap);
-			Optional.ofNullable(paramVehicleQueueThresholdWestEastWrap.getO()).ifPresent(o -> {
-				setParamVehicleQueueThresholdWestEast(o);
-			});
+			setParamVehicleQueueThresholdWestEast("8");
 		}
 		return (TrafficSimulation)this;
 	}
@@ -1932,9 +1837,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected void _paramVehicleQueueThresholdSouthNorth(Wrap<BigDecimal> w) {
-		setParamVehicleQueueThresholdSouthNorth("8");
-	}
+	protected abstract void _paramVehicleQueueThresholdSouthNorth(Wrap<BigDecimal> w);
 
 	public BigDecimal getParamVehicleQueueThresholdSouthNorth() {
 		return paramVehicleQueueThresholdSouthNorth;
@@ -1968,10 +1871,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	protected TrafficSimulation paramVehicleQueueThresholdSouthNorthInit() {
 		Wrap<BigDecimal> paramVehicleQueueThresholdSouthNorthWrap = new Wrap<BigDecimal>().var("paramVehicleQueueThresholdSouthNorth");
 		if(paramVehicleQueueThresholdSouthNorth == null) {
-			_paramVehicleQueueThresholdSouthNorth(paramVehicleQueueThresholdSouthNorthWrap);
-			Optional.ofNullable(paramVehicleQueueThresholdSouthNorthWrap.getO()).ifPresent(o -> {
-				setParamVehicleQueueThresholdSouthNorth(o);
-			});
+			setParamVehicleQueueThresholdSouthNorth("8");
 		}
 		return (TrafficSimulation)this;
 	}
@@ -2011,9 +1911,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected void _paramPedestrianQueueThresholdNorthSouth(Wrap<BigDecimal> w) {
-		setParamPedestrianQueueThresholdNorthSouth("6");
-	}
+	protected abstract void _paramPedestrianQueueThresholdNorthSouth(Wrap<BigDecimal> w);
 
 	public BigDecimal getParamPedestrianQueueThresholdNorthSouth() {
 		return paramPedestrianQueueThresholdNorthSouth;
@@ -2047,10 +1945,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	protected TrafficSimulation paramPedestrianQueueThresholdNorthSouthInit() {
 		Wrap<BigDecimal> paramPedestrianQueueThresholdNorthSouthWrap = new Wrap<BigDecimal>().var("paramPedestrianQueueThresholdNorthSouth");
 		if(paramPedestrianQueueThresholdNorthSouth == null) {
-			_paramPedestrianQueueThresholdNorthSouth(paramPedestrianQueueThresholdNorthSouthWrap);
-			Optional.ofNullable(paramPedestrianQueueThresholdNorthSouthWrap.getO()).ifPresent(o -> {
-				setParamPedestrianQueueThresholdNorthSouth(o);
-			});
+			setParamPedestrianQueueThresholdNorthSouth("6");
 		}
 		return (TrafficSimulation)this;
 	}
@@ -2090,9 +1985,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected void _paramPedestrianQueueThresholdWestEast(Wrap<BigDecimal> w) {
-		setParamPedestrianQueueThresholdWestEast("6");
-	}
+	protected abstract void _paramPedestrianQueueThresholdWestEast(Wrap<BigDecimal> w);
 
 	public BigDecimal getParamPedestrianQueueThresholdWestEast() {
 		return paramPedestrianQueueThresholdWestEast;
@@ -2126,10 +2019,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	protected TrafficSimulation paramPedestrianQueueThresholdWestEastInit() {
 		Wrap<BigDecimal> paramPedestrianQueueThresholdWestEastWrap = new Wrap<BigDecimal>().var("paramPedestrianQueueThresholdWestEast");
 		if(paramPedestrianQueueThresholdWestEast == null) {
-			_paramPedestrianQueueThresholdWestEast(paramPedestrianQueueThresholdWestEastWrap);
-			Optional.ofNullable(paramPedestrianQueueThresholdWestEastWrap.getO()).ifPresent(o -> {
-				setParamPedestrianQueueThresholdWestEast(o);
-			});
+			setParamPedestrianQueueThresholdWestEast("6");
 		}
 		return (TrafficSimulation)this;
 	}
@@ -2169,9 +2059,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected void _paramStepSize(Wrap<BigDecimal> w) {
-		setParamStepSize("1");
-	}
+	protected abstract void _paramStepSize(Wrap<BigDecimal> w);
 
 	public BigDecimal getParamStepSize() {
 		return paramStepSize;
@@ -2205,10 +2093,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	protected TrafficSimulation paramStepSizeInit() {
 		Wrap<BigDecimal> paramStepSizeWrap = new Wrap<BigDecimal>().var("paramStepSize");
 		if(paramStepSize == null) {
-			_paramStepSize(paramStepSizeWrap);
-			Optional.ofNullable(paramStepSizeWrap.getO()).ifPresent(o -> {
-				setParamStepSize(o);
-			});
+			setParamStepSize("1");
 		}
 		return (TrafficSimulation)this;
 	}
@@ -2248,9 +2133,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected void _paramRunTime(Wrap<Integer> w) {
-		setParamRunTime("1000");
-	}
+	protected abstract void _paramRunTime(Wrap<Integer> w);
 
 	public Integer getParamRunTime() {
 		return paramRunTime;
@@ -2271,10 +2154,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	protected TrafficSimulation paramRunTimeInit() {
 		Wrap<Integer> paramRunTimeWrap = new Wrap<Integer>().var("paramRunTime");
 		if(paramRunTime == null) {
-			_paramRunTime(paramRunTimeWrap);
-			Optional.ofNullable(paramRunTimeWrap.getO()).ifPresent(o -> {
-				setParamRunTime(o);
-			});
+			setParamRunTime("1000");
 		}
 		return (TrafficSimulation)this;
 	}
@@ -2314,9 +2194,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected void _paramItersPerPar(Wrap<Integer> w) {
-		setParamItersPerPar("3");
-	}
+	protected abstract void _paramItersPerPar(Wrap<Integer> w);
 
 	public Integer getParamItersPerPar() {
 		return paramItersPerPar;
@@ -2337,10 +2215,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	protected TrafficSimulation paramItersPerParInit() {
 		Wrap<Integer> paramItersPerParWrap = new Wrap<Integer>().var("paramItersPerPar");
 		if(paramItersPerPar == null) {
-			_paramItersPerPar(paramItersPerParWrap);
-			Optional.ofNullable(paramItersPerParWrap.getO()).ifPresent(o -> {
-				setParamItersPerPar(o);
-			});
+			setParamItersPerPar("3");
 		}
 		return (TrafficSimulation)this;
 	}
@@ -2380,9 +2255,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected void _paramTotalIterNum(Wrap<Integer> w) {
-		setParamTotalIterNum("5");
-	}
+	protected abstract void _paramTotalIterNum(Wrap<Integer> w);
 
 	public Integer getParamTotalIterNum() {
 		return paramTotalIterNum;
@@ -2403,10 +2276,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	protected TrafficSimulation paramTotalIterNumInit() {
 		Wrap<Integer> paramTotalIterNumWrap = new Wrap<Integer>().var("paramTotalIterNum");
 		if(paramTotalIterNum == null) {
-			_paramTotalIterNum(paramTotalIterNumWrap);
-			Optional.ofNullable(paramTotalIterNumWrap.getO()).ifPresent(o -> {
-				setParamTotalIterNum(o);
-			});
+			setParamTotalIterNum("5");
 		}
 		return (TrafficSimulation)this;
 	}
@@ -2540,6 +2410,10 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	public List<String> getTlsStatesPaths() {
 		return tlsStatesPaths;
 	}
+
+	public void setTlsStatesPaths(List<String> tlsStatesPaths) {
+		this.tlsStatesPaths = tlsStatesPaths;
+	}
 	public void setTlsStatesPaths(String o) {
 		String l = TrafficSimulation.staticSetTlsStatesPaths(siteRequest_, o);
 		if(l != null)
@@ -2609,6 +2483,10 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 
 	public List<String> getAdditionalFilePaths() {
 		return additionalFilePaths;
+	}
+
+	public void setAdditionalFilePaths(List<String> additionalFilePaths) {
+		this.additionalFilePaths = additionalFilePaths;
 	}
 	public void setAdditionalFilePaths(String o) {
 		String l = TrafficSimulation.staticSetAdditionalFilePaths(siteRequest_, o);

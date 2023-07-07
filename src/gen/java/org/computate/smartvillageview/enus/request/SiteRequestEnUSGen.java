@@ -984,6 +984,10 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 	public List<String> getUserRealmRoles() {
 		return userRealmRoles;
 	}
+
+	public void setUserRealmRoles(List<String> userRealmRoles) {
+		this.userRealmRoles = userRealmRoles;
+	}
 	public void setUserRealmRoles(String o) {
 		String l = SiteRequestEnUS.staticSetUserRealmRoles(siteRequest_, o);
 		if(l != null)
@@ -1113,6 +1117,10 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 
 	public List<String> getUserResourceRoles() {
 		return userResourceRoles;
+	}
+
+	public void setUserResourceRoles(List<String> userResourceRoles) {
+		this.userResourceRoles = userResourceRoles;
 	}
 	public void setUserResourceRoles(String o) {
 		String l = SiteRequestEnUS.staticSetUserResourceRoles(siteRequest_, o);

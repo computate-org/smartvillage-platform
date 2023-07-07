@@ -1618,6 +1618,10 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	public List<String> getRoles() {
 		return roles;
 	}
+
+	public void setRoles(List<String> roles) {
+		this.roles = roles;
+	}
 	public void setRoles(String o) {
 		String l = PageLayout.staticSetRoles(siteRequest_, o);
 		if(l != null)
@@ -1687,6 +1691,10 @@ public abstract class PageLayoutGen<DEV> extends Object {
 
 	public List<String> getRoleRequired() {
 		return roleRequired;
+	}
+
+	public void setRoleRequired(List<String> roleRequired) {
+		this.roleRequired = roleRequired;
 	}
 	public void setRoleRequired(String o) {
 		String l = PageLayout.staticSetRoleRequired(siteRequest_, o);
@@ -1758,6 +1766,10 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	public List<String> getAuthRoleAdmin() {
 		return authRoleAdmin;
 	}
+
+	public void setAuthRoleAdmin(List<String> authRoleAdmin) {
+		this.authRoleAdmin = authRoleAdmin;
+	}
 	public void setAuthRoleAdmin(String o) {
 		String l = PageLayout.staticSetAuthRoleAdmin(siteRequest_, o);
 		if(l != null)
@@ -1827,6 +1839,10 @@ public abstract class PageLayoutGen<DEV> extends Object {
 
 	public List<String> getAuthRoleSuperAdmin() {
 		return authRoleSuperAdmin;
+	}
+
+	public void setAuthRoleSuperAdmin(List<String> authRoleSuperAdmin) {
+		this.authRoleSuperAdmin = authRoleSuperAdmin;
 	}
 	public void setAuthRoleSuperAdmin(String o) {
 		String l = PageLayout.staticSetAuthRoleSuperAdmin(siteRequest_, o);
@@ -2034,6 +2050,10 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	public List<String> getDefaultFieldListVars() {
 		return defaultFieldListVars;
 	}
+
+	public void setDefaultFieldListVars(List<String> defaultFieldListVars) {
+		this.defaultFieldListVars = defaultFieldListVars;
+	}
 	public void setDefaultFieldListVars(String o) {
 		String l = PageLayout.staticSetDefaultFieldListVars(siteRequest_, o);
 		if(l != null)
@@ -2104,6 +2124,10 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	public List<String> getDefaultStatsVars() {
 		return defaultStatsVars;
 	}
+
+	public void setDefaultStatsVars(List<String> defaultStatsVars) {
+		this.defaultStatsVars = defaultStatsVars;
+	}
 	public void setDefaultStatsVars(String o) {
 		String l = PageLayout.staticSetDefaultStatsVars(siteRequest_, o);
 		if(l != null)
@@ -2173,6 +2197,10 @@ public abstract class PageLayoutGen<DEV> extends Object {
 
 	public List<String> getDefaultPivotVars() {
 		return defaultPivotVars;
+	}
+
+	public void setDefaultPivotVars(List<String> defaultPivotVars) {
+		this.defaultPivotVars = defaultPivotVars;
 	}
 	public void setDefaultPivotVars(String o) {
 		String l = PageLayout.staticSetDefaultPivotVars(siteRequest_, o);
