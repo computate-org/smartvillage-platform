@@ -924,10 +924,12 @@ public class TrafficFcdReader extends TrafficFcdReaderGen<Object> {
 						String solrHostName = config.getString(ConfigKeys.SOLR_HOST_NAME);
 						Integer solrPort = config.getInteger(ConfigKeys.SOLR_PORT);
 						String solrCollection = config.getString(ConfigKeys.SOLR_COLLECTION);
+						Boolean solrSsl = config.getBoolean(ConfigKeys.SOLR_SSL);
 						String solrRequestUri = String.format("/solr/%s/update%s", solrCollection, "?commitWithin=1000&overwrite=true&wt=json");
 						String deleteQuery = String.format("sumocfgPath_docvalues_string:%s AND classSimpleName_docvalues_string:(%s OR %s) AND (created_docvalues_date:[* TO %s] OR (*:* AND -created_docvalues_date:[* TO *]))", trafficSimulation.getSumocfgPath(), TimeStep.CLASS_SIMPLE_NAME, VehicleStep.CLASS_SIMPLE_NAME, TimeStep.staticSearchStrCreated(null, TimeStep.staticSearchCreated(null, now)));
 						String deleteXml = String.format("<delete><query>%s</query></delete>", deleteQuery);
 						webClient.post(solrPort, solrHostName, solrRequestUri)
+								.ssl(solrSsl)
 								.putHeader("Content-Type", "text/xml")
 								.sendBuffer(Buffer.buffer().appendString(deleteXml))
 								.onSuccess(d -> {
