@@ -1006,7 +1006,9 @@
 														/>
 
 													{{else}}
+														{{#ifContainsKeys userKeys}}
 															<span class="varSystemEvent{{id}}Type ">{{systemEvent_.type}}</span>
+			{{/ifContainsKeys}}
 		{{else}}
 														<span class="varSystemEvent{{id}}Type ">{{systemEvent_.type}}</span>
 		{{/eq}}
@@ -1073,7 +1075,9 @@
 														/>
 
 													{{else}}
+														{{#ifContainsKeys userKeys}}
 															<span class="varSystemEvent{{id}}Message ">{{systemEvent_.message}}</span>
+			{{/ifContainsKeys}}
 		{{else}}
 														<span class="varSystemEvent{{id}}Message ">{{systemEvent_.message}}</span>
 		{{/eq}}
@@ -1140,7 +1144,9 @@
 														/>
 
 													{{else}}
+														{{#ifContainsKeys userKeys}}
 															<span class="varSystemEvent{{id}}Status ">{{systemEvent_.status}}</span>
+			{{/ifContainsKeys}}
 		{{else}}
 														<span class="varSystemEvent{{id}}Status ">{{systemEvent_.status}}</span>
 		{{/eq}}
@@ -1194,7 +1200,9 @@
 														{{/eq}}
 														/>
 													{{else}}
+														{{#ifContainsKeys userKeys}}
 															<span class="varSystemEvent{{id}}Completed ">{{systemEvent_.completed}}</span>
+			{{/ifContainsKeys}}
 		{{else}}
 														<span class="varSystemEvent{{id}}Completed ">{{systemEvent_.completed}}</span>
 		{{/eq}}
@@ -1257,7 +1265,9 @@
 														/>
 
 													{{else}}
+														{{#ifContainsKeys userKeys}}
 															<span class="varSystemEvent{{id}}InheritPk ">{{systemEvent_.inheritPk}}</span>
+			{{/ifContainsKeys}}
 		{{else}}
 														<span class="varSystemEvent{{id}}InheritPk ">{{systemEvent_.inheritPk}}</span>
 		{{/eq}}
@@ -1378,7 +1388,9 @@
 														/>
 
 													{{else}}
+														{{#ifContainsKeys userKeys}}
 															<span class="varSystemEvent{{id}}PageImageUri ">{{systemEvent_.pageImageUri}}</span>
+			{{/ifContainsKeys}}
 		{{else}}
 														<span class="varSystemEvent{{id}}PageImageUri ">{{systemEvent_.pageImageUri}}</span>
 		{{/eq}}
@@ -1427,7 +1439,7 @@
 		{{/eq}}
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
-															onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setArchived', $(this).prop('checked'), function() { addGlow($('#{{classApiMethodMethod}}_archived')); }, function() { addError($('#{{classApiMethodMethod}}_archived')); }); "
+															onchange="var confirmResponse = confirm('Are you sure you want to archive that?'); if(confirmResponse) { patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setArchived', $(this).prop('checked'), function() { addGlow($('#{{classApiMethodMethod}}_archived')); }, function() { addError($('#{{classApiMethodMethod}}_archived')); }); }"
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
 		{{#if systemEvent_.archived}}
@@ -1443,7 +1455,9 @@
 	{{/eq}}
 
 													{{else}}
+														{{#ifContainsKeys userKeys}}
 															<span class="varSystemEvent{{id}}Archived ">{{systemEvent_.archived}}</span>
+			{{/ifContainsKeys}}
 		{{else}}
 														<span class="varSystemEvent{{id}}Archived ">{{systemEvent_.archived}}</span>
 		{{/eq}}
@@ -1492,7 +1506,7 @@
 		{{/eq}}
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
-															onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setDeleted', $(this).prop('checked'), function() { addGlow($('#{{classApiMethodMethod}}_deleted')); }, function() { addError($('#{{classApiMethodMethod}}_deleted')); }); "
+															onchange="var confirmResponse = confirm('Are you sure you want to delete that?'); if(confirmResponse) { patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setDeleted', $(this).prop('checked'), function() { addGlow($('#{{classApiMethodMethod}}_deleted')); }, function() { addError($('#{{classApiMethodMethod}}_deleted')); }); }"
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
 		{{#if systemEvent_.deleted}}
@@ -1508,7 +1522,9 @@
 	{{/eq}}
 
 													{{else}}
+														{{#ifContainsKeys userKeys}}
 															<span class="varSystemEvent{{id}}Deleted ">{{systemEvent_.deleted}}</span>
+			{{/ifContainsKeys}}
 		{{else}}
 														<span class="varSystemEvent{{id}}Deleted ">{{systemEvent_.deleted}}</span>
 		{{/eq}}
@@ -1645,7 +1661,9 @@
 														/>
 
 													{{else}}
+														{{#ifContainsKeys userKeys}}
 															<span class="varSystemEvent{{id}}ObjectId ">{{systemEvent_.objectId}}</span>
+			{{/ifContainsKeys}}
 		{{else}}
 														<span class="varSystemEvent{{id}}ObjectId ">{{systemEvent_.objectId}}</span>
 		{{/eq}}
@@ -1712,7 +1730,9 @@
 														/>
 
 													{{else}}
+														{{#ifContainsKeys userKeys}}
 															<span class="varSystemEvent{{id}}ObjectText ">{{systemEvent_.objectText}}</span>
+			{{/ifContainsKeys}}
 		{{else}}
 														<span class="varSystemEvent{{id}}ObjectText ">{{systemEvent_.objectText}}</span>
 		{{/eq}}

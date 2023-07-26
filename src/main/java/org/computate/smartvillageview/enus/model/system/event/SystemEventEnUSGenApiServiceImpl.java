@@ -109,7 +109,33 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 	@Override
 	public void searchSystemEvent(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
-				{
+
+			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
+				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", msg)
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+					)
+				));
+			}).onSuccess(b -> {
+				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SystemEvent")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+					eventHandler.handle(Future.succeededFuture(
+						new ServiceResponse(401, "UNAUTHORIZED",
+							Buffer.buffer().appendString(
+								new JsonObject()
+									.put("errorCode", "401")
+									.put("errorMessage", msg)
+									.encodePrettily()
+								), MultiMap.caseInsensitiveMultiMap()
+						)
+					));
+				} else {
 					try {
 						searchSystemEventList(siteRequest, false, true, false).onSuccess(listSystemEvent -> {
 							response200SearchSystemEvent(listSystemEvent).onSuccess(response -> {
@@ -128,6 +154,7 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 						error(null, eventHandler, ex);
 					}
 				}
+			});
 		}).onFailure(ex -> {
 			if("Inactive Token".equals(ex.getMessage()) || StringUtils.startsWith(ex.getMessage(), "invalid_grant:")) {
 				try {
@@ -235,7 +262,33 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 	@Override
 	public void getSystemEvent(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
-				{
+
+			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
+				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", msg)
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+					)
+				));
+			}).onSuccess(b -> {
+				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SystemEvent")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+					eventHandler.handle(Future.succeededFuture(
+						new ServiceResponse(401, "UNAUTHORIZED",
+							Buffer.buffer().appendString(
+								new JsonObject()
+									.put("errorCode", "401")
+									.put("errorMessage", msg)
+									.encodePrettily()
+								), MultiMap.caseInsensitiveMultiMap()
+						)
+					));
+				} else {
 					try {
 						searchSystemEventList(siteRequest, false, true, false).onSuccess(listSystemEvent -> {
 							response200GETSystemEvent(listSystemEvent).onSuccess(response -> {
@@ -254,6 +307,7 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 						error(null, eventHandler, ex);
 					}
 				}
+			});
 		}).onFailure(ex -> {
 			if("Inactive Token".equals(ex.getMessage()) || StringUtils.startsWith(ex.getMessage(), "invalid_grant:")) {
 				try {
@@ -1003,7 +1057,33 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 	@Override
 	public void searchpageSystemEvent(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
-				{
+
+			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
+				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", msg)
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+					)
+				));
+			}).onSuccess(b -> {
+				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SystemEvent")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+					eventHandler.handle(Future.succeededFuture(
+						new ServiceResponse(401, "UNAUTHORIZED",
+							Buffer.buffer().appendString(
+								new JsonObject()
+									.put("errorCode", "401")
+									.put("errorMessage", msg)
+									.encodePrettily()
+								), MultiMap.caseInsensitiveMultiMap()
+						)
+					));
+				} else {
 					try {
 						searchSystemEventList(siteRequest, false, true, false).onSuccess(listSystemEvent -> {
 							response200SearchPageSystemEvent(listSystemEvent).onSuccess(response -> {
@@ -1022,6 +1102,7 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 						error(null, eventHandler, ex);
 					}
 				}
+			});
 		}).onFailure(ex -> {
 			if("Inactive Token".equals(ex.getMessage()) || StringUtils.startsWith(ex.getMessage(), "invalid_grant:")) {
 				try {

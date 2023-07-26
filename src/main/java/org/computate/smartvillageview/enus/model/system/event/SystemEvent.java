@@ -46,7 +46,6 @@ import io.vertx.core.Promise;
  * IconName: square-terminal
  * NameVar: systemEvent
  * 
- * PublicRead: true
  * Role.enUS: SiteAdmin
  * Description: A system event
  */

@@ -2702,6 +2702,126 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		return (PageLayout)this;
 	}
 
+	//////////
+	// rows //
+	//////////
+
+
+	/**	 The entity rows
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected Long rows;
+
+	/**	<br> The entity rows
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.PageLayout&fq=entiteVar_enUS_indexed_string:rows">Find the entity rows in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _rows(Wrap<Long> w);
+
+	public Long getRows() {
+		return rows;
+	}
+
+	public void setRows(Long rows) {
+		this.rows = rows;
+	}
+	@JsonIgnore
+	public void setRows(String o) {
+		this.rows = PageLayout.staticSetRows(siteRequest_, o);
+	}
+	public static Long staticSetRows(SiteRequestEnUS siteRequest_, String o) {
+		if(NumberUtils.isParsable(o))
+			return Long.parseLong(o);
+		return null;
+	}
+	protected PageLayout rowsInit() {
+		Wrap<Long> rowsWrap = new Wrap<Long>().var("rows");
+		if(rows == null) {
+			_rows(rowsWrap);
+			Optional.ofNullable(rowsWrap.getO()).ifPresent(o -> {
+				setRows(o);
+			});
+		}
+		return (PageLayout)this;
+	}
+
+	public static Long staticSearchRows(SiteRequestEnUS siteRequest_, Long o) {
+		return o;
+	}
+
+	public static String staticSearchStrRows(SiteRequestEnUS siteRequest_, Long o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqRows(SiteRequestEnUS siteRequest_, String o) {
+		return PageLayout.staticSearchStrRows(siteRequest_, PageLayout.staticSearchRows(siteRequest_, PageLayout.staticSetRows(siteRequest_, o)));
+	}
+
+	///////////
+	// start //
+	///////////
+
+
+	/**	 The entity start
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected Long start;
+
+	/**	<br> The entity start
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.PageLayout&fq=entiteVar_enUS_indexed_string:start">Find the entity start in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _start(Wrap<Long> w);
+
+	public Long getStart() {
+		return start;
+	}
+
+	public void setStart(Long start) {
+		this.start = start;
+	}
+	@JsonIgnore
+	public void setStart(String o) {
+		this.start = PageLayout.staticSetStart(siteRequest_, o);
+	}
+	public static Long staticSetStart(SiteRequestEnUS siteRequest_, String o) {
+		if(NumberUtils.isParsable(o))
+			return Long.parseLong(o);
+		return null;
+	}
+	protected PageLayout startInit() {
+		Wrap<Long> startWrap = new Wrap<Long>().var("start");
+		if(start == null) {
+			_start(startWrap);
+			Optional.ofNullable(startWrap.getO()).ifPresent(o -> {
+				setStart(o);
+			});
+		}
+		return (PageLayout)this;
+	}
+
+	public static Long staticSearchStart(SiteRequestEnUS siteRequest_, Long o) {
+		return o;
+	}
+
+	public static String staticSearchStrStart(SiteRequestEnUS siteRequest_, Long o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqStart(SiteRequestEnUS siteRequest_, String o) {
+		return PageLayout.staticSearchStrStart(siteRequest_, PageLayout.staticSearchStart(siteRequest_, PageLayout.staticSetStart(siteRequest_, o)));
+	}
+
 	//////////////
 	// rangeGap //
 	//////////////
@@ -4201,6 +4321,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 				defaultTimeZoneInit();
 				defaultLocaleIdInit();
 				defaultLocaleInit();
+				rowsInit();
+				startInit();
 				rangeGapInit();
 				rangeEndInit();
 				rangeStartInit();
@@ -4386,6 +4508,10 @@ public abstract class PageLayoutGen<DEV> extends Object {
 				return oPageLayout.defaultLocaleId;
 			case "defaultLocale":
 				return oPageLayout.defaultLocale;
+			case "rows":
+				return oPageLayout.rows;
+			case "start":
+				return oPageLayout.start;
 			case "rangeGap":
 				return oPageLayout.rangeGap;
 			case "rangeEnd":
@@ -4551,6 +4677,10 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSetDefaultZoneId(siteRequest_, o);
 		case "defaultLocaleId":
 			return PageLayout.staticSetDefaultLocaleId(siteRequest_, o);
+		case "rows":
+			return PageLayout.staticSetRows(siteRequest_, o);
+		case "start":
+			return PageLayout.staticSetStart(siteRequest_, o);
 		case "rangeGap":
 			return PageLayout.staticSetRangeGap(siteRequest_, o);
 		case "rangeEnd":
@@ -4689,6 +4819,10 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSearchDefaultZoneId(siteRequest_, (String)o);
 		case "defaultLocaleId":
 			return PageLayout.staticSearchDefaultLocaleId(siteRequest_, (String)o);
+		case "rows":
+			return PageLayout.staticSearchRows(siteRequest_, (Long)o);
+		case "start":
+			return PageLayout.staticSearchStart(siteRequest_, (Long)o);
 		case "rangeGap":
 			return PageLayout.staticSearchRangeGap(siteRequest_, (String)o);
 		case "rangeEnd":
@@ -4827,6 +4961,10 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSearchStrDefaultZoneId(siteRequest_, (String)o);
 		case "defaultLocaleId":
 			return PageLayout.staticSearchStrDefaultLocaleId(siteRequest_, (String)o);
+		case "rows":
+			return PageLayout.staticSearchStrRows(siteRequest_, (Long)o);
+		case "start":
+			return PageLayout.staticSearchStrStart(siteRequest_, (Long)o);
 		case "rangeGap":
 			return PageLayout.staticSearchStrRangeGap(siteRequest_, (String)o);
 		case "rangeEnd":
@@ -4965,6 +5103,10 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSearchFqDefaultZoneId(siteRequest_, o);
 		case "defaultLocaleId":
 			return PageLayout.staticSearchFqDefaultLocaleId(siteRequest_, o);
+		case "rows":
+			return PageLayout.staticSearchFqRows(siteRequest_, o);
+		case "start":
+			return PageLayout.staticSearchFqStart(siteRequest_, o);
 		case "rangeGap":
 			return PageLayout.staticSearchFqRangeGap(siteRequest_, o);
 		case "rangeEnd":
@@ -5073,6 +5215,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	public static final String VAR_defaultTimeZone = "defaultTimeZone";
 	public static final String VAR_defaultLocaleId = "defaultLocaleId";
 	public static final String VAR_defaultLocale = "defaultLocale";
+	public static final String VAR_rows = "rows";
+	public static final String VAR_start = "start";
 	public static final String VAR_rangeGap = "rangeGap";
 	public static final String VAR_rangeEnd = "rangeEnd";
 	public static final String VAR_rangeStart = "rangeStart";
@@ -5145,6 +5289,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	public static final String DISPLAY_NAME_defaultTimeZone = "";
 	public static final String DISPLAY_NAME_defaultLocaleId = "";
 	public static final String DISPLAY_NAME_defaultLocale = "";
+	public static final String DISPLAY_NAME_rows = "";
+	public static final String DISPLAY_NAME_start = "";
 	public static final String DISPLAY_NAME_rangeGap = "";
 	public static final String DISPLAY_NAME_rangeEnd = "";
 	public static final String DISPLAY_NAME_rangeStart = "";
@@ -5269,6 +5415,10 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return DISPLAY_NAME_defaultLocaleId;
 		case VAR_defaultLocale:
 			return DISPLAY_NAME_defaultLocale;
+		case VAR_rows:
+			return DISPLAY_NAME_rows;
+		case VAR_start:
+			return DISPLAY_NAME_start;
 		case VAR_rangeGap:
 			return DISPLAY_NAME_rangeGap;
 		case VAR_rangeEnd:

@@ -320,6 +320,12 @@ public class PageLayout extends PageLayoutGen<Object> {
 		w.o(Locale.forLanguageTag(defaultLocaleId));
 	}
 
+	protected void _rows(Wrap<Long> w) {
+	}
+
+	protected void _start(Wrap<Long> w) {
+	}
+
 	protected void _rangeGap(Wrap<String> w) {
 	}
 
