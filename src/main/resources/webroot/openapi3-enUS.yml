@@ -2092,6 +2092,9 @@ paths:
     get:
       operationId: searchSystemEvent
       x-vertx-event-bus: smartabyar-smartvillage-enUS-SystemEvent
+      security:
+        - openIdConnect:
+          - profile
       description: >+
       summary: >+
       tags:
@@ -2382,6 +2385,9 @@ paths:
     get:
       operationId: getSystemEvent
       x-vertx-event-bus: smartabyar-smartvillage-enUS-SystemEvent
+      security:
+        - openIdConnect:
+          - profile
       description: >+
       summary: >+
       tags:
@@ -2412,6 +2418,9 @@ paths:
     get:
       operationId: searchpageSystemEventId
       x-vertx-event-bus: smartabyar-smartvillage-enUS-SystemEvent
+      security:
+        - openIdConnect:
+          - profile
       description: >+
       summary: >+
       tags:
@@ -2594,6 +2603,9 @@ paths:
     get:
       operationId: searchpageSystemEvent
       x-vertx-event-bus: smartabyar-smartvillage-enUS-SystemEvent
+      security:
+        - openIdConnect:
+          - profile
       description: >+
       summary: >+
       tags:
@@ -19628,6 +19640,13 @@ components:
       allOf:
         - type: object
           properties:
+            setReportName:
+              type: string
+              nullable: true
+            removeReportName:
+              type: string
+            removeAllReportName:
+              type: string
             setSimulationKey:
               type: string
               nullable: true
@@ -19655,13 +19674,6 @@ components:
             removeSmartTrafficLightName:
               type: string
             removeAllSmartTrafficLightName:
-              type: string
-            setReportName:
-              type: string
-              nullable: true
-            removeReportName:
-              type: string
-            removeAllReportName:
               type: string
             setParamAvgVehiclePerMinFromWestToEast:
               type: string
@@ -19916,11 +19928,46 @@ components:
             removeUpdatedPerformanceWaitAllVehiclePedestrianSec:
               type: array
             removeAllUpdatedPerformanceWaitAllVehiclePedestrianSec:
+              type: array
+            setAvgQueueLengthWestEastVehicle:
+              type: array
+              nullable: true
+            removeAvgQueueLengthWestEastVehicle:
+              type: array
+            removeAllAvgQueueLengthWestEastVehicle:
+              type: array
+            setAvgQueueLengthSouthNorthVehicle:
+              type: array
+              nullable: true
+            removeAvgQueueLengthSouthNorthVehicle:
+              type: array
+            removeAllAvgQueueLengthSouthNorthVehicle:
+              type: array
+            setAvgQueueLengthNorthSouthPedestrian:
+              type: array
+              nullable: true
+            removeAvgQueueLengthNorthSouthPedestrian:
+              type: array
+            removeAllAvgQueueLengthNorthSouthPedestrian:
+              type: array
+            setAvgQueueLengthWestEastPedestrian:
+              type: array
+              nullable: true
+            removeAvgQueueLengthWestEastPedestrian:
+              type: array
+            removeAllAvgQueueLengthWestEastPedestrian:
               type: array
     PATCHRunSimulationSimulationReportResponse:
       allOf:
         - type: object
           properties:
+            setReportName:
+              type: string
+              nullable: true
+            removeReportName:
+              type: string
+            removeAllReportName:
+              type: string
             setSimulationKey:
               type: string
               nullable: true
@@ -19948,13 +19995,6 @@ components:
             removeSmartTrafficLightName:
               type: string
             removeAllSmartTrafficLightName:
-              type: string
-            setReportName:
-              type: string
-              nullable: true
-            removeReportName:
-              type: string
-            removeAllReportName:
               type: string
             setParamAvgVehiclePerMinFromWestToEast:
               type: string
@@ -20209,6 +20249,34 @@ components:
             removeUpdatedPerformanceWaitAllVehiclePedestrianSec:
               type: array
             removeAllUpdatedPerformanceWaitAllVehiclePedestrianSec:
+              type: array
+            setAvgQueueLengthWestEastVehicle:
+              type: array
+              nullable: true
+            removeAvgQueueLengthWestEastVehicle:
+              type: array
+            removeAllAvgQueueLengthWestEastVehicle:
+              type: array
+            setAvgQueueLengthSouthNorthVehicle:
+              type: array
+              nullable: true
+            removeAvgQueueLengthSouthNorthVehicle:
+              type: array
+            removeAllAvgQueueLengthSouthNorthVehicle:
+              type: array
+            setAvgQueueLengthNorthSouthPedestrian:
+              type: array
+              nullable: true
+            removeAvgQueueLengthNorthSouthPedestrian:
+              type: array
+            removeAllAvgQueueLengthNorthSouthPedestrian:
+              type: array
+            setAvgQueueLengthWestEastPedestrian:
+              type: array
+              nullable: true
+            removeAvgQueueLengthWestEastPedestrian:
+              type: array
+            removeAllAvgQueueLengthWestEastPedestrian:
               type: array
     SearchSimulationReportResponse:
       allOf:
@@ -20228,6 +20296,8 @@ components:
               items:
                 type: object
                 properties:
+                  reportName:
+                    type: string
                   simulationKey:
                     type: string
                   smartTrafficLightKey:
@@ -20235,8 +20305,6 @@ components:
                   simulationName:
                     type: string
                   smartTrafficLightName:
-                    type: string
-                  reportName:
                     type: string
                   paramAvgVehiclePerMinFromWestToEast:
                     type: string
@@ -20308,10 +20376,25 @@ components:
                     type: array
                   updatedPerformanceWaitAllVehiclePedestrianSec:
                     type: array
+                  avgQueueLengthWestEastVehicle:
+                    type: array
+                  avgQueueLengthSouthNorthVehicle:
+                    type: array
+                  avgQueueLengthNorthSouthPedestrian:
+                    type: array
+                  avgQueueLengthWestEastPedestrian:
+                    type: array
     PATCHSimulationReportRequest:
       allOf:
         - type: object
           properties:
+            setReportName:
+              type: string
+              nullable: true
+            removeReportName:
+              type: string
+            removeAllReportName:
+              type: string
             setSimulationKey:
               type: string
               nullable: true
@@ -20339,13 +20422,6 @@ components:
             removeSmartTrafficLightName:
               type: string
             removeAllSmartTrafficLightName:
-              type: string
-            setReportName:
-              type: string
-              nullable: true
-            removeReportName:
-              type: string
-            removeAllReportName:
               type: string
             setParamAvgVehiclePerMinFromWestToEast:
               type: string
@@ -20600,11 +20676,46 @@ components:
             removeUpdatedPerformanceWaitAllVehiclePedestrianSec:
               type: array
             removeAllUpdatedPerformanceWaitAllVehiclePedestrianSec:
+              type: array
+            setAvgQueueLengthWestEastVehicle:
+              type: array
+              nullable: true
+            removeAvgQueueLengthWestEastVehicle:
+              type: array
+            removeAllAvgQueueLengthWestEastVehicle:
+              type: array
+            setAvgQueueLengthSouthNorthVehicle:
+              type: array
+              nullable: true
+            removeAvgQueueLengthSouthNorthVehicle:
+              type: array
+            removeAllAvgQueueLengthSouthNorthVehicle:
+              type: array
+            setAvgQueueLengthNorthSouthPedestrian:
+              type: array
+              nullable: true
+            removeAvgQueueLengthNorthSouthPedestrian:
+              type: array
+            removeAllAvgQueueLengthNorthSouthPedestrian:
+              type: array
+            setAvgQueueLengthWestEastPedestrian:
+              type: array
+              nullable: true
+            removeAvgQueueLengthWestEastPedestrian:
+              type: array
+            removeAllAvgQueueLengthWestEastPedestrian:
               type: array
     PATCHSimulationReportResponse:
       allOf:
         - type: object
           properties:
+            setReportName:
+              type: string
+              nullable: true
+            removeReportName:
+              type: string
+            removeAllReportName:
+              type: string
             setSimulationKey:
               type: string
               nullable: true
@@ -20632,13 +20743,6 @@ components:
             removeSmartTrafficLightName:
               type: string
             removeAllSmartTrafficLightName:
-              type: string
-            setReportName:
-              type: string
-              nullable: true
-            removeReportName:
-              type: string
-            removeAllReportName:
               type: string
             setParamAvgVehiclePerMinFromWestToEast:
               type: string
@@ -20894,10 +20998,40 @@ components:
               type: array
             removeAllUpdatedPerformanceWaitAllVehiclePedestrianSec:
               type: array
+            setAvgQueueLengthWestEastVehicle:
+              type: array
+              nullable: true
+            removeAvgQueueLengthWestEastVehicle:
+              type: array
+            removeAllAvgQueueLengthWestEastVehicle:
+              type: array
+            setAvgQueueLengthSouthNorthVehicle:
+              type: array
+              nullable: true
+            removeAvgQueueLengthSouthNorthVehicle:
+              type: array
+            removeAllAvgQueueLengthSouthNorthVehicle:
+              type: array
+            setAvgQueueLengthNorthSouthPedestrian:
+              type: array
+              nullable: true
+            removeAvgQueueLengthNorthSouthPedestrian:
+              type: array
+            removeAllAvgQueueLengthNorthSouthPedestrian:
+              type: array
+            setAvgQueueLengthWestEastPedestrian:
+              type: array
+              nullable: true
+            removeAvgQueueLengthWestEastPedestrian:
+              type: array
+            removeAllAvgQueueLengthWestEastPedestrian:
+              type: array
     POSTSimulationReportRequest:
       allOf:
         - type: object
           properties:
+            reportName:
+              type: string
             simulationKey:
               type: string
             smartTrafficLightKey:
@@ -20905,8 +21039,6 @@ components:
             simulationName:
               type: string
             smartTrafficLightName:
-              type: string
-            reportName:
               type: string
             paramAvgVehiclePerMinFromWestToEast:
               type: string
@@ -20977,11 +21109,21 @@ components:
             updatedPerformanceWaitAllPedestrianSec:
               type: array
             updatedPerformanceWaitAllVehiclePedestrianSec:
+              type: array
+            avgQueueLengthWestEastVehicle:
+              type: array
+            avgQueueLengthSouthNorthVehicle:
+              type: array
+            avgQueueLengthNorthSouthPedestrian:
+              type: array
+            avgQueueLengthWestEastPedestrian:
               type: array
     POSTSimulationReportResponse:
       allOf:
         - type: object
           properties:
+            reportName:
+              type: string
             simulationKey:
               type: string
             smartTrafficLightKey:
@@ -20989,8 +21131,6 @@ components:
             simulationName:
               type: string
             smartTrafficLightName:
-              type: string
-            reportName:
               type: string
             paramAvgVehiclePerMinFromWestToEast:
               type: string
@@ -21061,11 +21201,21 @@ components:
             updatedPerformanceWaitAllPedestrianSec:
               type: array
             updatedPerformanceWaitAllVehiclePedestrianSec:
+              type: array
+            avgQueueLengthWestEastVehicle:
+              type: array
+            avgQueueLengthSouthNorthVehicle:
+              type: array
+            avgQueueLengthNorthSouthPedestrian:
+              type: array
+            avgQueueLengthWestEastPedestrian:
               type: array
     PUTImportSimulationReportRequest:
       allOf:
         - type: object
           properties:
+            reportName:
+              type: string
             simulationKey:
               type: string
             smartTrafficLightKey:
@@ -21073,8 +21223,6 @@ components:
             simulationName:
               type: string
             smartTrafficLightName:
-              type: string
-            reportName:
               type: string
             paramAvgVehiclePerMinFromWestToEast:
               type: string
@@ -21145,11 +21293,21 @@ components:
             updatedPerformanceWaitAllPedestrianSec:
               type: array
             updatedPerformanceWaitAllVehiclePedestrianSec:
+              type: array
+            avgQueueLengthWestEastVehicle:
+              type: array
+            avgQueueLengthSouthNorthVehicle:
+              type: array
+            avgQueueLengthNorthSouthPedestrian:
+              type: array
+            avgQueueLengthWestEastPedestrian:
               type: array
     PUTImportSimulationReportResponse:
       allOf:
         - type: object
           properties:
+            reportName:
+              type: string
             simulationKey:
               type: string
             smartTrafficLightKey:
@@ -21157,8 +21315,6 @@ components:
             simulationName:
               type: string
             smartTrafficLightName:
-              type: string
-            reportName:
               type: string
             paramAvgVehiclePerMinFromWestToEast:
               type: string
@@ -21229,11 +21385,21 @@ components:
             updatedPerformanceWaitAllPedestrianSec:
               type: array
             updatedPerformanceWaitAllVehiclePedestrianSec:
+              type: array
+            avgQueueLengthWestEastVehicle:
+              type: array
+            avgQueueLengthSouthNorthVehicle:
+              type: array
+            avgQueueLengthNorthSouthPedestrian:
+              type: array
+            avgQueueLengthWestEastPedestrian:
               type: array
     GETSimulationReportResponse:
       allOf:
         - type: object
           properties:
+            reportName:
+              type: string
             simulationKey:
               type: string
             smartTrafficLightKey:
@@ -21241,8 +21407,6 @@ components:
             simulationName:
               type: string
             smartTrafficLightName:
-              type: string
-            reportName:
               type: string
             paramAvgVehiclePerMinFromWestToEast:
               type: string
@@ -21313,6 +21477,14 @@ components:
             updatedPerformanceWaitAllPedestrianSec:
               type: array
             updatedPerformanceWaitAllVehiclePedestrianSec:
+              type: array
+            avgQueueLengthWestEastVehicle:
+              type: array
+            avgQueueLengthSouthNorthVehicle:
+              type: array
+            avgQueueLengthNorthSouthPedestrian:
+              type: array
+            avgQueueLengthWestEastPedestrian:
               type: array
     SearchPageSimulationReportResponse:
       allOf:
