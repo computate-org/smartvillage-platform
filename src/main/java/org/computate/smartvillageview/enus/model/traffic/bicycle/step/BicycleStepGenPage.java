@@ -39,6 +39,7 @@ import org.computate.smartvillageview.enus.config.ConfigKeys;
 import org.computate.search.response.solr.SolrResponse;
 import java.util.HashMap;
 import org.computate.search.tool.TimeTool;
+import org.computate.search.tool.SearchTool;
 import java.time.ZoneId;
 
 
@@ -122,7 +123,7 @@ public class BicycleStepGenPage extends BicycleStepGenPageGen<MapResultPage> {
 			json.put("var", var);
 			json.put("displayName", Optional.ofNullable(BicycleStep.displayNameBicycleStep(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
 			json.put("classSimpleName", Optional.ofNullable(BicycleStep.classSimpleNameBicycleStep(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
-			json.put("val", Optional.ofNullable(searchListBicycleStep_.getRequest().getQuery()).filter(fq -> fq.startsWith(BicycleStep.varIndexedBicycleStep(var) + ":")).map(s -> StringUtils.substringAfter(s, ":")).orElse(null));
+			json.put("val", Optional.ofNullable(searchListBicycleStep_.getRequest().getQuery()).filter(fq -> fq.startsWith(BicycleStep.varIndexedBicycleStep(var) + ":")).map(s -> SearchTool.unescapeQueryChars(StringUtils.substringAfter(s, ":"))).orElse(null));
 			vars.put(var, json);
 		});
 	}
@@ -140,7 +141,7 @@ public class BicycleStepGenPage extends BicycleStepGenPageGen<MapResultPage> {
 			String type = StringUtils.substringAfterLast(varIndexed, "_");
 			json.put("displayName", Optional.ofNullable(BicycleStep.displayNameBicycleStep(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
 			json.put("classSimpleName", Optional.ofNullable(BicycleStep.classSimpleNameBicycleStep(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
-			json.put("val", searchListBicycleStep_.getRequest().getFilterQueries().stream().filter(fq -> fq.startsWith(BicycleStep.varIndexedBicycleStep(var) + ":")).findFirst().map(s -> StringUtils.substringAfter(s, ":")).orElse(null));
+			json.put("val", searchListBicycleStep_.getRequest().getFilterQueries().stream().filter(fq -> fq.startsWith(BicycleStep.varIndexedBicycleStep(var) + ":")).findFirst().map(s -> SearchTool.unescapeQueryChars(StringUtils.substringAfter(s, ":"))).orElse(null));
 			Optional.ofNullable(stats).map(s -> s.get(varIndexed)).ifPresent(stat -> {
 				json.put("stats", JsonObject.mapFrom(stat));
 			});
@@ -208,7 +209,7 @@ public class BicycleStepGenPage extends BicycleStepGenPageGen<MapResultPage> {
 			json.put("var", var);
 			json.put("displayName", Optional.ofNullable(BicycleStep.displayNameBicycleStep(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
 			json.put("classSimpleName", Optional.ofNullable(BicycleStep.classSimpleNameBicycleStep(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
-			json.put("val", searchListBicycleStep_.getRequest().getFilterQueries().stream().filter(fq -> fq.startsWith(BicycleStep.varIndexedBicycleStep(var) + ":")).findFirst().map(s -> StringUtils.substringAfter(s, ":")).orElse(null));
+			json.put("val", searchListBicycleStep_.getRequest().getFilterQueries().stream().filter(fq -> fq.startsWith(BicycleStep.varIndexedBicycleStep(var) + ":")).findFirst().map(s -> SearchTool.unescapeQueryChars(StringUtils.substringAfter(s, ":"))).orElse(null));
 			vars.put(var, json);
 		});
 	}
@@ -297,6 +298,18 @@ public class BicycleStepGenPage extends BicycleStepGenPageGen<MapResultPage> {
 	@Override
 	protected void _defaultLocale(Wrap<Locale> w) {
 		w.o(Locale.forLanguageTag(defaultLocaleId));
+	}
+
+	@Override
+	protected void _rows(Wrap<Long> w) {
+		if(serviceRequest.getParams().getJsonObject("query").getString("rows", null) != null)
+			w.o(searchListBicycleStep_.getRows());
+	}
+
+	@Override
+	protected void _start(Wrap<Long> w) {
+		if(serviceRequest.getParams().getJsonObject("query").getString("start", null) != null)
+			w.o(searchListBicycleStep_.getStart());
 	}
 
 	@Override

@@ -42,6 +42,7 @@ import org.computate.smartvillageview.enus.config.ConfigKeys;
 import org.computate.search.response.solr.SolrResponse;
 import java.util.HashMap;
 import org.computate.search.tool.TimeTool;
+import org.computate.search.tool.SearchTool;
 import java.time.ZoneId;
 
 
@@ -125,7 +126,7 @@ public class BaseModelGenPage extends BaseModelGenPageGen<PageLayout> {
 			json.put("var", var);
 			json.put("displayName", Optional.ofNullable(BaseModel.displayNameBaseModel(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
 			json.put("classSimpleName", Optional.ofNullable(BaseModel.classSimpleNameBaseModel(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
-			json.put("val", Optional.ofNullable(searchListBaseModel_.getRequest().getQuery()).filter(fq -> fq.startsWith(BaseModel.varIndexedBaseModel(var) + ":")).map(s -> StringUtils.substringAfter(s, ":")).orElse(null));
+			json.put("val", Optional.ofNullable(searchListBaseModel_.getRequest().getQuery()).filter(fq -> fq.startsWith(BaseModel.varIndexedBaseModel(var) + ":")).map(s -> SearchTool.unescapeQueryChars(StringUtils.substringAfter(s, ":"))).orElse(null));
 			vars.put(var, json);
 		});
 	}
@@ -143,7 +144,7 @@ public class BaseModelGenPage extends BaseModelGenPageGen<PageLayout> {
 			String type = StringUtils.substringAfterLast(varIndexed, "_");
 			json.put("displayName", Optional.ofNullable(BaseModel.displayNameBaseModel(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
 			json.put("classSimpleName", Optional.ofNullable(BaseModel.classSimpleNameBaseModel(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
-			json.put("val", searchListBaseModel_.getRequest().getFilterQueries().stream().filter(fq -> fq.startsWith(BaseModel.varIndexedBaseModel(var) + ":")).findFirst().map(s -> StringUtils.substringAfter(s, ":")).orElse(null));
+			json.put("val", searchListBaseModel_.getRequest().getFilterQueries().stream().filter(fq -> fq.startsWith(BaseModel.varIndexedBaseModel(var) + ":")).findFirst().map(s -> SearchTool.unescapeQueryChars(StringUtils.substringAfter(s, ":"))).orElse(null));
 			Optional.ofNullable(stats).map(s -> s.get(varIndexed)).ifPresent(stat -> {
 				json.put("stats", JsonObject.mapFrom(stat));
 			});
@@ -211,7 +212,7 @@ public class BaseModelGenPage extends BaseModelGenPageGen<PageLayout> {
 			json.put("var", var);
 			json.put("displayName", Optional.ofNullable(BaseModel.displayNameBaseModel(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
 			json.put("classSimpleName", Optional.ofNullable(BaseModel.classSimpleNameBaseModel(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
-			json.put("val", searchListBaseModel_.getRequest().getFilterQueries().stream().filter(fq -> fq.startsWith(BaseModel.varIndexedBaseModel(var) + ":")).findFirst().map(s -> StringUtils.substringAfter(s, ":")).orElse(null));
+			json.put("val", searchListBaseModel_.getRequest().getFilterQueries().stream().filter(fq -> fq.startsWith(BaseModel.varIndexedBaseModel(var) + ":")).findFirst().map(s -> SearchTool.unescapeQueryChars(StringUtils.substringAfter(s, ":"))).orElse(null));
 			vars.put(var, json);
 		});
 	}

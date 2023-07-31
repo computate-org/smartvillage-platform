@@ -3336,6 +3336,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 
 	public void siteRequestTrafficFlowObserved(SiteRequestEnUS siteRequest_) {
 			super.siteRequestMapResult(siteRequest_);
+		if(smartTrafficLightSearch != null)
+			smartTrafficLightSearch.setSiteRequest_(siteRequest_);
 	}
 
 	public void siteRequestForClass(SiteRequestEnUS siteRequest_) {

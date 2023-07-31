@@ -535,6 +535,10 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	public List<String> getLabels() {
 		return labels;
 	}
+
+	public void setLabels(List<String> labels) {
+		this.labels = labels;
+	}
 	public void setLabels(String o) {
 		String l = SiteHtm.staticSetLabels(siteRequest_, o);
 		if(l != null)
@@ -787,6 +791,10 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	public List<String> getText() {
 		return text;
 	}
+
+	public void setText(List<String> text) {
+		this.text = text;
+	}
 	public void setText(String o) {
 		String l = SiteHtm.staticSetText(siteRequest_, o);
 		if(l != null)
@@ -860,6 +868,10 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 
 	public List<String> getComment() {
 		return comment;
+	}
+
+	public void setComment(List<String> comment) {
+		this.comment = comment;
 	}
 	public void setComment(String o) {
 		String l = SiteHtm.staticSetComment(siteRequest_, o);
@@ -1107,6 +1119,10 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 
 	public List<String> getHtmMiddle() {
 		return htmMiddle;
+	}
+
+	public void setHtmMiddle(List<String> htmMiddle) {
+		this.htmMiddle = htmMiddle;
 	}
 	public void setHtmMiddle(String o) {
 		String l = SiteHtm.staticSetHtmMiddle(siteRequest_, o);

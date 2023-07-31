@@ -42,6 +42,7 @@ import org.computate.smartvillageview.enus.config.ConfigKeys;
 import org.computate.search.response.solr.SolrResponse;
 import java.util.HashMap;
 import org.computate.search.tool.TimeTool;
+import org.computate.search.tool.SearchTool;
 import java.time.ZoneId;
 
 
@@ -125,7 +126,7 @@ public class BaseResultGenPage extends BaseResultGenPageGen<PageLayout> {
 			json.put("var", var);
 			json.put("displayName", Optional.ofNullable(BaseResult.displayNameBaseResult(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
 			json.put("classSimpleName", Optional.ofNullable(BaseResult.classSimpleNameBaseResult(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
-			json.put("val", Optional.ofNullable(searchListBaseResult_.getRequest().getQuery()).filter(fq -> fq.startsWith(BaseResult.varIndexedBaseResult(var) + ":")).map(s -> StringUtils.substringAfter(s, ":")).orElse(null));
+			json.put("val", Optional.ofNullable(searchListBaseResult_.getRequest().getQuery()).filter(fq -> fq.startsWith(BaseResult.varIndexedBaseResult(var) + ":")).map(s -> SearchTool.unescapeQueryChars(StringUtils.substringAfter(s, ":"))).orElse(null));
 			vars.put(var, json);
 		});
 	}
@@ -143,7 +144,7 @@ public class BaseResultGenPage extends BaseResultGenPageGen<PageLayout> {
 			String type = StringUtils.substringAfterLast(varIndexed, "_");
 			json.put("displayName", Optional.ofNullable(BaseResult.displayNameBaseResult(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
 			json.put("classSimpleName", Optional.ofNullable(BaseResult.classSimpleNameBaseResult(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
-			json.put("val", searchListBaseResult_.getRequest().getFilterQueries().stream().filter(fq -> fq.startsWith(BaseResult.varIndexedBaseResult(var) + ":")).findFirst().map(s -> StringUtils.substringAfter(s, ":")).orElse(null));
+			json.put("val", searchListBaseResult_.getRequest().getFilterQueries().stream().filter(fq -> fq.startsWith(BaseResult.varIndexedBaseResult(var) + ":")).findFirst().map(s -> SearchTool.unescapeQueryChars(StringUtils.substringAfter(s, ":"))).orElse(null));
 			Optional.ofNullable(stats).map(s -> s.get(varIndexed)).ifPresent(stat -> {
 				json.put("stats", JsonObject.mapFrom(stat));
 			});
@@ -211,7 +212,7 @@ public class BaseResultGenPage extends BaseResultGenPageGen<PageLayout> {
 			json.put("var", var);
 			json.put("displayName", Optional.ofNullable(BaseResult.displayNameBaseResult(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
 			json.put("classSimpleName", Optional.ofNullable(BaseResult.classSimpleNameBaseResult(var)).map(d -> StringUtils.isBlank(d) ? var : d).orElse(var));
-			json.put("val", searchListBaseResult_.getRequest().getFilterQueries().stream().filter(fq -> fq.startsWith(BaseResult.varIndexedBaseResult(var) + ":")).findFirst().map(s -> StringUtils.substringAfter(s, ":")).orElse(null));
+			json.put("val", searchListBaseResult_.getRequest().getFilterQueries().stream().filter(fq -> fq.startsWith(BaseResult.varIndexedBaseResult(var) + ":")).findFirst().map(s -> SearchTool.unescapeQueryChars(StringUtils.substringAfter(s, ":"))).orElse(null));
 			vars.put(var, json);
 		});
 	}
@@ -300,6 +301,18 @@ public class BaseResultGenPage extends BaseResultGenPageGen<PageLayout> {
 	@Override
 	protected void _defaultLocale(Wrap<Locale> w) {
 		w.o(Locale.forLanguageTag(defaultLocaleId));
+	}
+
+	@Override
+	protected void _rows(Wrap<Long> w) {
+		if(serviceRequest.getParams().getJsonObject("query").getString("rows", null) != null)
+			w.o(searchListBaseResult_.getRows());
+	}
+
+	@Override
+	protected void _start(Wrap<Long> w) {
+		if(serviceRequest.getParams().getJsonObject("query").getString("start", null) != null)
+			w.o(searchListBaseResult_.getStart());
 	}
 
 	@Override
