@@ -18,6 +18,8 @@ import io.vertx.core.json.JsonObject;
  * SuperPage.enUS: MapResultPage
  * Indexed: true
  * Order: 18
+ * Description: A device for watching vehicles in a lane of traffic on a road. 
+ * Fiware: true
  * 
  * ApiTag.enUS: Traffic Flow Observed
  * ApiUri.enUS: /api/traffic-flow-observed
@@ -56,6 +58,30 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 	}
 
 	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * DisplayName: simulation name
+	 * HtmRow: 3
+	 * HtmCell: 1
+	 * Facet: true
+	 */
+	protected void _simulationName(Wrap<String> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * DisplayName: sumocfg path
+	 * HtmRow: 3
+	 * HtmCell: 2
+	 * Facet: true
+	 */
+	protected void _sumocfgPath(Wrap<String> w) {
+	}
+
+	/**
 	 * Ignore: true
 	 */
 	protected void _smartTrafficLightSearch(Promise<SearchList<SmartTrafficLight>> promise) {
@@ -85,6 +111,7 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 	 * HtmRow: 5
 	 * HtmCell: 2
 	 * Facet: true
+	 * FiwareContext: https://smartdatamodels.org/dataModel.Transportation/address
 	 */
 	protected void _address(Wrap<JsonObject> w) {
 	}
@@ -384,6 +411,7 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 	 * HtmRow: 12
 	 * HtmCell: 3
 	 * Facet: true
+	 * FiwareContext: https://smartdatamodels.org/dataModel.Transportation/refRoadSegment
 	 */
 	protected void _refRoadSegment(Wrap<String> w) {
 	}

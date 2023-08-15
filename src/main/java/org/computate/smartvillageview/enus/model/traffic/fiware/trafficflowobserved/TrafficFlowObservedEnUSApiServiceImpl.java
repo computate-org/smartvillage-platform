@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.computate.smartvillageview.enus.config.ConfigKeys;
 import org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLight;
 import org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
@@ -22,6 +23,7 @@ import io.vertx.ext.auth.oauth2.OAuth2Auth;
 import io.vertx.ext.web.client.WebClient;
 import io.vertx.ext.web.templ.handlebars.HandlebarsTemplateEngine;
 import io.vertx.kafka.client.producer.KafkaProducer;
+import io.vertx.kafka.client.producer.KafkaProducerRecord;
 import io.vertx.pgclient.PgPool;
 
 /**
@@ -37,14 +39,68 @@ public class TrafficFlowObservedEnUSApiServiceImpl extends TrafficFlowObservedEn
 	public Future<TrafficFlowObserved> patchTrafficFlowObservedFuture(TrafficFlowObserved o, Boolean inheritPk) {
 		Promise<TrafficFlowObserved> promise = Promise.promise();
 		super.patchTrafficFlowObservedFuture(o, inheritPk).onSuccess(a -> {
-			refreshTrafficFlowObserved(o).onSuccess(b -> {
-				promise.complete();
-			}).onFailure(ex -> {
-				promise.fail(ex);
-			});
+			if(
+					"false".equals(o.getSiteRequest_().getRequestVars().get("sendToSumo"))
+					|| "false".equals(o.getSiteRequest_().getRequestVars().get("refresh"))
+					) {
+				promise.complete(o);
+			} else {
+				sendSumoLocationInfo(o).onSuccess(b -> {
+					refreshTrafficFlowObserved(o).onSuccess(c -> {
+						promise.complete();
+					}).onFailure(ex -> {
+						promise.fail(ex);
+					});
+				}).onFailure(ex -> {
+					promise.fail(ex);
+				});
+			}
 		}).onFailure(ex -> {
 			promise.fail(ex);
 		});
+		return promise.future();
+	}
+
+	@Override
+	public Future<TrafficFlowObserved> postTrafficFlowObservedFuture(SiteRequestEnUS siteRequest, Boolean inheritPk) {
+		Promise<TrafficFlowObserved> promise = Promise.promise();
+		super.postTrafficFlowObservedFuture(siteRequest, inheritPk).onSuccess(o -> {
+			if(
+					"false".equals(o.getSiteRequest_().getRequestVars().get("sendToSumo"))
+					|| "false".equals(o.getSiteRequest_().getRequestVars().get("refresh"))
+					) {
+				promise.complete(o);
+			} else {
+				sendSumoLocationInfo(o).onSuccess(b -> {
+					promise.complete(o);
+				}).onFailure(ex -> {
+					promise.fail(ex);
+				});
+			}
+		}).onFailure(ex -> {
+			promise.fail(ex);
+		});
+		return promise.future();
+	}
+
+	public Future<Void> sendSumoLocationInfo(TrafficFlowObserved o) {
+		Promise<Void> promise = Promise.promise();
+		LOG.info("Sending location info record to kafka");
+		try {
+			JsonObject body = JsonObject.mapFrom(o);
+			String topic = config.getString(ConfigKeys.KAFKA_TOPIC_SUMO_TRAFFIC_FLOW_OBSERVED_INFO);
+			KafkaProducerRecord<String, String> record = KafkaProducerRecord.create(topic, body.encode());
+			kafkaProducer.send(record).onSuccess(recordMetadata -> {
+				LOG.info(String.format("Sent record to kafka topic %s: %s", topic, body.encode()));
+				promise.complete();
+			}).onFailure(ex -> {
+				LOG.error(String.format("Could not send record to kafka topic %s: %s", topic, body.encode()), ex);
+				promise.fail(ex);
+			});
+		} catch(Exception ex) {
+			LOG.error(String.format("Could not send record to kafka: %s", Optional.ofNullable(JsonObject.mapFrom(o)).map(b -> b.encode()).orElse("")), ex);
+			promise.fail(ex);
+		}
 		return promise.future();
 	}
 
