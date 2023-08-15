@@ -160,13 +160,15 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 				Boolean runOpenApi3Generator = Optional.ofNullable(config.getBoolean(ConfigKeys.RUN_OPENAPI3_GENERATOR)).orElse(false);
 				Boolean runSqlGenerator = Optional.ofNullable(config.getBoolean(ConfigKeys.RUN_SQL_GENERATOR)).orElse(false);
 				Boolean runArticleGenerator = Optional.ofNullable(config.getBoolean(ConfigKeys.RUN_ARTICLE_GENERATOR)).orElse(false);
+				Boolean runFiwareGenerator = Optional.ofNullable(config.getBoolean(ConfigKeys.RUN_FIWARE_GENERATOR)).orElse(false);
 
-				if(runOpenApi3Generator || runSqlGenerator || runArticleGenerator) {
+				if(runOpenApi3Generator || runSqlGenerator || runArticleGenerator || runFiwareGenerator) {
 					SiteRequestEnUS siteRequest = new SiteRequestEnUS();
 					siteRequest.setConfig(config);
 					siteRequest.setWebClient(webClient);
 					siteRequest.initDeepSiteRequestEnUS();
 					OpenApi3Generator api = new OpenApi3Generator();
+					api.setVertx_(vertx);
 					api.setWebClient(webClient);
 					api.setConfig(config);
 					api.initDeepOpenApi3Generator(siteRequest);
@@ -176,6 +178,8 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 						future = future.compose(a -> api.writeSql());
 					if(runArticleGenerator)
 						future = future.compose(a -> api.writeArticle());
+					if(runFiwareGenerator)
+						future = future.compose(a -> api.writeFiware());
 					future.compose(a -> vertx.close());
 				} else {
 					future = future.compose(a -> run(config));
