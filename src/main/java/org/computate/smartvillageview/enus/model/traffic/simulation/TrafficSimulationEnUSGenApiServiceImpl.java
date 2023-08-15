@@ -564,11 +564,15 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 			Promise<TrafficSimulation> promise1 = Promise.promise();
 			pgPool.withTransaction(sqlConnection -> {
 				siteRequest.setSqlConnection(sqlConnection);
-				sqlPATCHTrafficSimulation(o, inheritPk).onSuccess(trafficSimulation -> {
-					persistTrafficSimulation(trafficSimulation).onSuccess(c -> {
-						relateTrafficSimulation(trafficSimulation).onSuccess(d -> {
-							indexTrafficSimulation(trafficSimulation).onSuccess(e -> {
-								promise1.complete(trafficSimulation);
+				varsTrafficSimulation(siteRequest).onSuccess(a -> {
+					sqlPATCHTrafficSimulation(o, inheritPk).onSuccess(trafficSimulation -> {
+						persistTrafficSimulation(trafficSimulation).onSuccess(c -> {
+							relateTrafficSimulation(trafficSimulation).onSuccess(d -> {
+								indexTrafficSimulation(trafficSimulation).onSuccess(e -> {
+									promise1.complete(trafficSimulation);
+								}).onFailure(ex -> {
+									promise1.fail(ex);
+								});
 							}).onFailure(ex -> {
 								promise1.fail(ex);
 							});
@@ -971,6 +975,54 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 							}));
 						});
 						break;
+					case "setLaneAreaDetectorIds":
+							o2.setLaneAreaDetectorIds(jsonObject.getJsonArray(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficSimulation.VAR_laneAreaDetectorIds + "=$" + num);
+							num++;
+							bParams.add(o2.sqlLaneAreaDetectorIds());
+						break;
+					case "setLaneAreaDetectorLanes":
+							o2.setLaneAreaDetectorLanes(jsonObject.getJsonArray(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficSimulation.VAR_laneAreaDetectorLanes + "=$" + num);
+							num++;
+							bParams.add(o2.sqlLaneAreaDetectorLanes());
+						break;
+					case "setLaneAreaDetectorPaths":
+							o2.setLaneAreaDetectorPaths(jsonObject.getJsonArray(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficSimulation.VAR_laneAreaDetectorPaths + "=$" + num);
+							num++;
+							bParams.add(o2.sqlLaneAreaDetectorPaths());
+						break;
+					case "setE1DetectorIds":
+							o2.setE1DetectorIds(jsonObject.getJsonArray(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficSimulation.VAR_e1DetectorIds + "=$" + num);
+							num++;
+							bParams.add(o2.sqlE1DetectorIds());
+						break;
+					case "setE1DetectorLanes":
+							o2.setE1DetectorLanes(jsonObject.getJsonArray(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficSimulation.VAR_e1DetectorLanes + "=$" + num);
+							num++;
+							bParams.add(o2.sqlE1DetectorLanes());
+						break;
+					case "setE1DetectorPaths":
+							o2.setE1DetectorPaths(jsonObject.getJsonArray(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficSimulation.VAR_e1DetectorPaths + "=$" + num);
+							num++;
+							bParams.add(o2.sqlE1DetectorPaths());
+						break;
 				}
 			}
 			bSql.append(" WHERE pk=$" + num);
@@ -1174,12 +1226,16 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 			pgPool.withTransaction(sqlConnection -> {
 				Promise<TrafficSimulation> promise1 = Promise.promise();
 				siteRequest.setSqlConnection(sqlConnection);
-				createTrafficSimulation(siteRequest).onSuccess(trafficSimulation -> {
-					sqlPOSTTrafficSimulation(trafficSimulation, inheritPk).onSuccess(b -> {
-						persistTrafficSimulation(trafficSimulation).onSuccess(c -> {
-							relateTrafficSimulation(trafficSimulation).onSuccess(d -> {
-								indexTrafficSimulation(trafficSimulation).onSuccess(e -> {
-									promise1.complete(trafficSimulation);
+				varsTrafficSimulation(siteRequest).onSuccess(a -> {
+					createTrafficSimulation(siteRequest).onSuccess(trafficSimulation -> {
+						sqlPOSTTrafficSimulation(trafficSimulation, inheritPk).onSuccess(b -> {
+							persistTrafficSimulation(trafficSimulation).onSuccess(c -> {
+								relateTrafficSimulation(trafficSimulation).onSuccess(d -> {
+									indexTrafficSimulation(trafficSimulation).onSuccess(e -> {
+										promise1.complete(trafficSimulation);
+									}).onFailure(ex -> {
+										promise1.fail(ex);
+									});
 								}).onFailure(ex -> {
 									promise1.fail(ex);
 								});
@@ -1605,6 +1661,60 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 							}));
 						});
 						break;
+					case TrafficSimulation.VAR_laneAreaDetectorIds:
+						o2.setLaneAreaDetectorIds(jsonObject.getJsonArray(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficSimulation.VAR_laneAreaDetectorIds + "=$" + num);
+						num++;
+						bParams.add(o2.sqlLaneAreaDetectorIds());
+						break;
+					case TrafficSimulation.VAR_laneAreaDetectorLanes:
+						o2.setLaneAreaDetectorLanes(jsonObject.getJsonArray(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficSimulation.VAR_laneAreaDetectorLanes + "=$" + num);
+						num++;
+						bParams.add(o2.sqlLaneAreaDetectorLanes());
+						break;
+					case TrafficSimulation.VAR_laneAreaDetectorPaths:
+						o2.setLaneAreaDetectorPaths(jsonObject.getJsonArray(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficSimulation.VAR_laneAreaDetectorPaths + "=$" + num);
+						num++;
+						bParams.add(o2.sqlLaneAreaDetectorPaths());
+						break;
+					case TrafficSimulation.VAR_e1DetectorIds:
+						o2.setE1DetectorIds(jsonObject.getJsonArray(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficSimulation.VAR_e1DetectorIds + "=$" + num);
+						num++;
+						bParams.add(o2.sqlE1DetectorIds());
+						break;
+					case TrafficSimulation.VAR_e1DetectorLanes:
+						o2.setE1DetectorLanes(jsonObject.getJsonArray(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficSimulation.VAR_e1DetectorLanes + "=$" + num);
+						num++;
+						bParams.add(o2.sqlE1DetectorLanes());
+						break;
+					case TrafficSimulation.VAR_e1DetectorPaths:
+						o2.setE1DetectorPaths(jsonObject.getJsonArray(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficSimulation.VAR_e1DetectorPaths + "=$" + num);
+						num++;
+						bParams.add(o2.sqlE1DetectorPaths());
+						break;
 					}
 				}
 			}
@@ -1689,24 +1799,19 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 					));
 				} else {
 					try {
-						try {
-							ApiRequest apiRequest = new ApiRequest();
-							JsonArray jsonArray = Optional.ofNullable(siteRequest.getJsonObject()).map(o -> o.getJsonArray("list")).orElse(new JsonArray());
-							apiRequest.setRows(Long.valueOf(jsonArray.size()));
-							apiRequest.setNumFound(Long.valueOf(jsonArray.size()));
-							apiRequest.setNumPATCH(0L);
-							apiRequest.initDeepApiRequest(siteRequest);
-							siteRequest.setApiRequest_(apiRequest);
-							eventBus.publish("websocketTrafficSimulation", JsonObject.mapFrom(apiRequest).toString());
-							varsTrafficSimulation(siteRequest).onSuccess(d -> {
-								listPUTImportTrafficSimulation(apiRequest, siteRequest).onSuccess(e -> {
-									response200PUTImportTrafficSimulation(siteRequest).onSuccess(response -> {
-										LOG.debug(String.format("putimportTrafficSimulation succeeded. "));
-										eventHandler.handle(Future.succeededFuture(response));
-									}).onFailure(ex -> {
-										LOG.error(String.format("putimportTrafficSimulation failed. "), ex);
-										error(siteRequest, eventHandler, ex);
-									});
+						ApiRequest apiRequest = new ApiRequest();
+						JsonArray jsonArray = Optional.ofNullable(siteRequest.getJsonObject()).map(o -> o.getJsonArray("list")).orElse(new JsonArray());
+						apiRequest.setRows(Long.valueOf(jsonArray.size()));
+						apiRequest.setNumFound(Long.valueOf(jsonArray.size()));
+						apiRequest.setNumPATCH(0L);
+						apiRequest.initDeepApiRequest(siteRequest);
+						siteRequest.setApiRequest_(apiRequest);
+						eventBus.publish("websocketTrafficSimulation", JsonObject.mapFrom(apiRequest).toString());
+						varsTrafficSimulation(siteRequest).onSuccess(d -> {
+							listPUTImportTrafficSimulation(apiRequest, siteRequest).onSuccess(e -> {
+								response200PUTImportTrafficSimulation(siteRequest).onSuccess(response -> {
+									LOG.debug(String.format("putimportTrafficSimulation succeeded. "));
+									eventHandler.handle(Future.succeededFuture(response));
 								}).onFailure(ex -> {
 									LOG.error(String.format("putimportTrafficSimulation failed. "), ex);
 									error(siteRequest, eventHandler, ex);
@@ -1715,10 +1820,10 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 								LOG.error(String.format("putimportTrafficSimulation failed. "), ex);
 								error(siteRequest, eventHandler, ex);
 							});
-						} catch(Exception ex) {
+						}).onFailure(ex -> {
 							LOG.error(String.format("putimportTrafficSimulation failed. "), ex);
 							error(siteRequest, eventHandler, ex);
-						}
+						});
 					} catch(Exception ex) {
 						LOG.error(String.format("putimportTrafficSimulation failed. "), ex);
 						error(null, eventHandler, ex);
@@ -1809,7 +1914,7 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 				apiRequest.setNumPATCH(0L);
 				apiRequest.initDeepApiRequest(siteRequest);
 				siteRequest.setApiRequest_(apiRequest);
-				body.put("inheritPk", body.getValue("pk"));
+				body.put("inheritPk", Optional.ofNullable(body.getValue("pk")).orElse(body.getValue("id")));
 				if(Optional.ofNullable(serviceRequest.getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getJsonArray("var")).orElse(new JsonArray()).stream().filter(s -> "refresh:false".equals(s)).count() > 0L) {
 					siteRequest.getRequestVars().put( "refresh", "false" );
 				}

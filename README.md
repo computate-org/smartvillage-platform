@@ -196,6 +196,7 @@ Setup the following variables to setup the Vert.x verticle.
 * CONFIG_PATH: ~/.local/src/smartabyar-smartvillage/config/smartabyar-smartvillage.yml
 * RUN_OPENAPI3_GENERATOR: true
 * RUN_SQL_GENERATOR: true
+* RUN_FIWARE_GENERATOR: true
 
 Click [ Apply ] and [ Debug ] to debug the generation of the OpenAPI Spec src/main/resources/webroot and the SQL create and drop scripts in src/main/resources/sql. 
 

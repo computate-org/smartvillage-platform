@@ -220,6 +220,118 @@ public abstract class TrafficLightGen<DEV> extends MapResult {
 	public static final Integer TrafficLight_Rows = 100;
 
 	////////////////////
+	// simulationName //
+	////////////////////
+
+
+	/**	 The entity simulationName
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String simulationName;
+
+	/**	<br> The entity simulationName
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.light.TrafficLight&fq=entiteVar_enUS_indexed_string:simulationName">Find the entity simulationName in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _simulationName(Wrap<String> w);
+
+	public String getSimulationName() {
+		return simulationName;
+	}
+	public void setSimulationName(String o) {
+		this.simulationName = TrafficLight.staticSetSimulationName(siteRequest_, o);
+	}
+	public static String staticSetSimulationName(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected TrafficLight simulationNameInit() {
+		Wrap<String> simulationNameWrap = new Wrap<String>().var("simulationName");
+		if(simulationName == null) {
+			_simulationName(simulationNameWrap);
+			Optional.ofNullable(simulationNameWrap.getO()).ifPresent(o -> {
+				setSimulationName(o);
+			});
+		}
+		return (TrafficLight)this;
+	}
+
+	public static String staticSearchSimulationName(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrSimulationName(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqSimulationName(SiteRequestEnUS siteRequest_, String o) {
+		return TrafficLight.staticSearchStrSimulationName(siteRequest_, TrafficLight.staticSearchSimulationName(siteRequest_, TrafficLight.staticSetSimulationName(siteRequest_, o)));
+	}
+
+	public String sqlSimulationName() {
+		return simulationName;
+	}
+
+	/////////////////
+	// sumocfgPath //
+	/////////////////
+
+
+	/**	 The entity sumocfgPath
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String sumocfgPath;
+
+	/**	<br> The entity sumocfgPath
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.light.TrafficLight&fq=entiteVar_enUS_indexed_string:sumocfgPath">Find the entity sumocfgPath in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _sumocfgPath(Wrap<String> w);
+
+	public String getSumocfgPath() {
+		return sumocfgPath;
+	}
+	public void setSumocfgPath(String o) {
+		this.sumocfgPath = TrafficLight.staticSetSumocfgPath(siteRequest_, o);
+	}
+	public static String staticSetSumocfgPath(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected TrafficLight sumocfgPathInit() {
+		Wrap<String> sumocfgPathWrap = new Wrap<String>().var("sumocfgPath");
+		if(sumocfgPath == null) {
+			_sumocfgPath(sumocfgPathWrap);
+			Optional.ofNullable(sumocfgPathWrap.getO()).ifPresent(o -> {
+				setSumocfgPath(o);
+			});
+		}
+		return (TrafficLight)this;
+	}
+
+	public static String staticSearchSumocfgPath(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrSumocfgPath(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqSumocfgPath(SiteRequestEnUS siteRequest_, String o) {
+		return TrafficLight.staticSearchStrSumocfgPath(siteRequest_, TrafficLight.staticSearchSumocfgPath(siteRequest_, TrafficLight.staticSetSumocfgPath(siteRequest_, o)));
+	}
+
+	public String sqlSumocfgPath() {
+		return sumocfgPath;
+	}
+
+	////////////////////
 	// trafficLightId //
 	////////////////////
 
@@ -493,6 +605,8 @@ public abstract class TrafficLightGen<DEV> extends MapResult {
 		Future.future(a -> a.complete()).compose(a -> {
 			Promise<Void> promise2 = Promise.promise();
 			try {
+				simulationNameInit();
+				sumocfgPathInit();
 				trafficLightIdInit();
 				trafficLightTypeInit();
 				angleInit();
@@ -550,6 +664,10 @@ public abstract class TrafficLightGen<DEV> extends MapResult {
 	public Object obtainTrafficLight(String var) {
 		TrafficLight oTrafficLight = (TrafficLight)this;
 		switch(var) {
+			case "simulationName":
+				return oTrafficLight.simulationName;
+			case "sumocfgPath":
+				return oTrafficLight.sumocfgPath;
 			case "trafficLightId":
 				return oTrafficLight.trafficLightId;
 			case "trafficLightType":
@@ -597,6 +715,10 @@ public abstract class TrafficLightGen<DEV> extends MapResult {
 	}
 	public static Object staticSetTrafficLight(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "simulationName":
+			return TrafficLight.staticSetSimulationName(siteRequest_, o);
+		case "sumocfgPath":
+			return TrafficLight.staticSetSumocfgPath(siteRequest_, o);
 		case "trafficLightId":
 			return TrafficLight.staticSetTrafficLightId(siteRequest_, o);
 		case "trafficLightType":
@@ -619,6 +741,10 @@ public abstract class TrafficLightGen<DEV> extends MapResult {
 	}
 	public static Object staticSearchTrafficLight(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "simulationName":
+			return TrafficLight.staticSearchSimulationName(siteRequest_, (String)o);
+		case "sumocfgPath":
+			return TrafficLight.staticSearchSumocfgPath(siteRequest_, (String)o);
 		case "trafficLightId":
 			return TrafficLight.staticSearchTrafficLightId(siteRequest_, (String)o);
 		case "trafficLightType":
@@ -641,6 +767,10 @@ public abstract class TrafficLightGen<DEV> extends MapResult {
 	}
 	public static String staticSearchStrTrafficLight(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "simulationName":
+			return TrafficLight.staticSearchStrSimulationName(siteRequest_, (String)o);
+		case "sumocfgPath":
+			return TrafficLight.staticSearchStrSumocfgPath(siteRequest_, (String)o);
 		case "trafficLightId":
 			return TrafficLight.staticSearchStrTrafficLightId(siteRequest_, (String)o);
 		case "trafficLightType":
@@ -663,6 +793,10 @@ public abstract class TrafficLightGen<DEV> extends MapResult {
 	}
 	public static String staticSearchFqTrafficLight(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "simulationName":
+			return TrafficLight.staticSearchFqSimulationName(siteRequest_, o);
+		case "sumocfgPath":
+			return TrafficLight.staticSearchFqSumocfgPath(siteRequest_, o);
 		case "trafficLightId":
 			return TrafficLight.staticSearchFqTrafficLightId(siteRequest_, o);
 		case "trafficLightType":
@@ -697,7 +831,19 @@ public abstract class TrafficLightGen<DEV> extends MapResult {
 	}
 	public Object persistTrafficLight(String var, Object val) {
 		String varLower = var.toLowerCase();
-			if("trafficlightid".equals(varLower)) {
+			if("simulationname".equals(varLower)) {
+				if(val instanceof String) {
+					setSimulationName((String)val);
+				}
+				saves.add("simulationName");
+				return val;
+			} else if("sumocfgpath".equals(varLower)) {
+				if(val instanceof String) {
+					setSumocfgPath((String)val);
+				}
+				saves.add("sumocfgPath");
+				return val;
+			} else if("trafficlightid".equals(varLower)) {
 				if(val instanceof String) {
 					setTrafficLightId((String)val);
 				}
@@ -740,6 +886,18 @@ public abstract class TrafficLightGen<DEV> extends MapResult {
 		saves = doc.get("saves_docvalues_strings");
 		if(saves != null) {
 
+			if(saves.contains("simulationName")) {
+				String simulationName = (String)doc.get("simulationName_docvalues_string");
+				if(simulationName != null)
+					oTrafficLight.setSimulationName(simulationName);
+			}
+
+			if(saves.contains("sumocfgPath")) {
+				String sumocfgPath = (String)doc.get("sumocfgPath_docvalues_string");
+				if(sumocfgPath != null)
+					oTrafficLight.setSumocfgPath(sumocfgPath);
+			}
+
 			if(saves.contains("trafficLightId")) {
 				String trafficLightId = (String)doc.get("trafficLightId_docvalues_string");
 				if(trafficLightId != null)
@@ -769,6 +927,12 @@ public abstract class TrafficLightGen<DEV> extends MapResult {
 	}
 
 	public void indexTrafficLight(JsonObject doc) {
+		if(simulationName != null) {
+			doc.put("simulationName_docvalues_string", simulationName);
+		}
+		if(sumocfgPath != null) {
+			doc.put("sumocfgPath_docvalues_string", sumocfgPath);
+		}
 		if(trafficLightId != null) {
 			doc.put("trafficLightId_docvalues_string", trafficLightId);
 		}
@@ -787,6 +951,10 @@ public abstract class TrafficLightGen<DEV> extends MapResult {
 
 	public static String varStoredTrafficLight(String entityVar) {
 		switch(entityVar) {
+			case "simulationName":
+				return "simulationName_docvalues_string";
+			case "sumocfgPath":
+				return "sumocfgPath_docvalues_string";
 			case "trafficLightId":
 				return "trafficLightId_docvalues_string";
 			case "trafficLightType":
@@ -802,6 +970,10 @@ public abstract class TrafficLightGen<DEV> extends MapResult {
 
 	public static String varIndexedTrafficLight(String entityVar) {
 		switch(entityVar) {
+			case "simulationName":
+				return "simulationName_docvalues_string";
+			case "sumocfgPath":
+				return "sumocfgPath_docvalues_string";
 			case "trafficLightId":
 				return "trafficLightId_docvalues_string";
 			case "trafficLightType":
@@ -817,6 +989,10 @@ public abstract class TrafficLightGen<DEV> extends MapResult {
 
 	public static String searchVarTrafficLight(String searchVar) {
 		switch(searchVar) {
+			case "simulationName_docvalues_string":
+				return "simulationName";
+			case "sumocfgPath_docvalues_string":
+				return "sumocfgPath";
 			case "trafficLightId_docvalues_string":
 				return "trafficLightId";
 			case "trafficLightType_docvalues_string":
@@ -854,6 +1030,8 @@ public abstract class TrafficLightGen<DEV> extends MapResult {
 	public void storeTrafficLight(SolrResponse.Doc doc) {
 		TrafficLight oTrafficLight = (TrafficLight)this;
 
+		oTrafficLight.setSimulationName(Optional.ofNullable(doc.get("simulationName_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oTrafficLight.setSumocfgPath(Optional.ofNullable(doc.get("sumocfgPath_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oTrafficLight.setTrafficLightId(Optional.ofNullable(doc.get("trafficLightId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oTrafficLight.setTrafficLightType(Optional.ofNullable(doc.get("trafficLightType_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oTrafficLight.setAngle(Optional.ofNullable(doc.get("angle_docvalues_double")).map(v -> v.toString()).orElse(null));
@@ -871,6 +1049,10 @@ public abstract class TrafficLightGen<DEV> extends MapResult {
 		Object o = Optional.ofNullable(apiRequest).map(ApiRequest::getOriginal).orElse(null);
 		if(o != null && o instanceof TrafficLight) {
 			TrafficLight original = (TrafficLight)o;
+			if(!Objects.equals(simulationName, original.getSimulationName()))
+				apiRequest.addVars("simulationName");
+			if(!Objects.equals(sumocfgPath, original.getSumocfgPath()))
+				apiRequest.addVars("sumocfgPath");
 			if(!Objects.equals(trafficLightId, original.getTrafficLightId()))
 				apiRequest.addVars("trafficLightId");
 			if(!Objects.equals(trafficLightType, original.getTrafficLightType()))
@@ -890,6 +1072,8 @@ public abstract class TrafficLightGen<DEV> extends MapResult {
 	@Override public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(super.toString());
+		sb.append(Optional.ofNullable(simulationName).map(v -> "simulationName: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(sumocfgPath).map(v -> "sumocfgPath: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(trafficLightId).map(v -> "trafficLightId: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(trafficLightType).map(v -> "trafficLightType: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(angle).map(v -> "angle: " + v + "\n").orElse(""));
@@ -898,6 +1082,8 @@ public abstract class TrafficLightGen<DEV> extends MapResult {
 	}
 
 	public static final String CLASS_SIMPLE_NAME = "TrafficLight";
+	public static final String VAR_simulationName = "simulationName";
+	public static final String VAR_sumocfgPath = "sumocfgPath";
 	public static final String VAR_trafficLightId = "trafficLightId";
 	public static final String VAR_trafficLightType = "trafficLightType";
 	public static final String VAR_angle = "angle";
@@ -915,6 +1101,8 @@ public abstract class TrafficLightGen<DEV> extends MapResult {
 		return TrafficLight.varsFqTrafficLight(new ArrayList<String>());
 	}
 	public static List<String> varsFqTrafficLight(List<String> vars) {
+		vars.add(VAR_simulationName);
+		vars.add(VAR_sumocfgPath);
 		vars.add(VAR_trafficLightId);
 		vars.add(VAR_trafficLightType);
 		vars.add(VAR_angle);
@@ -932,6 +1120,8 @@ public abstract class TrafficLightGen<DEV> extends MapResult {
 		return vars;
 	}
 
+	public static final String DISPLAY_NAME_simulationName = "simulation name";
+	public static final String DISPLAY_NAME_sumocfgPath = "sumocfg path";
 	public static final String DISPLAY_NAME_trafficLightId = "traffic light ID";
 	public static final String DISPLAY_NAME_trafficLightType = "traffic light type";
 	public static final String DISPLAY_NAME_angle = "Angle in degrees";
@@ -942,6 +1132,10 @@ public abstract class TrafficLightGen<DEV> extends MapResult {
 	}
 	public static String displayNameTrafficLight(String var) {
 		switch(var) {
+		case VAR_simulationName:
+			return DISPLAY_NAME_simulationName;
+		case VAR_sumocfgPath:
+			return DISPLAY_NAME_sumocfgPath;
 		case VAR_trafficLightId:
 			return DISPLAY_NAME_trafficLightId;
 		case VAR_trafficLightType:
@@ -964,6 +1158,10 @@ public abstract class TrafficLightGen<DEV> extends MapResult {
 
 	public static String classSimpleNameTrafficLight(String var) {
 		switch(var) {
+		case VAR_simulationName:
+			return "String";
+		case VAR_sumocfgPath:
+			return "String";
 		case VAR_trafficLightId:
 			return "String";
 		case VAR_trafficLightType:
@@ -986,6 +1184,10 @@ public abstract class TrafficLightGen<DEV> extends MapResult {
 
 	public static Integer htmRowTrafficLight(String var) {
 		switch(var) {
+		case VAR_simulationName:
+			return 3;
+		case VAR_sumocfgPath:
+			return 3;
 		case VAR_trafficLightId:
 			return 4;
 		case VAR_trafficLightType:
@@ -1001,6 +1203,10 @@ public abstract class TrafficLightGen<DEV> extends MapResult {
 
 	public static Integer htmCellTrafficLight(String var) {
 		switch(var) {
+		case VAR_simulationName:
+			return 1;
+		case VAR_sumocfgPath:
+			return 2;
 		case VAR_trafficLightId:
 			return 3;
 		case VAR_trafficLightType:

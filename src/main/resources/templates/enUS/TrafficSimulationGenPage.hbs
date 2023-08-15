@@ -3372,3 +3372,387 @@
 														<span class="varTrafficSimulation{{pk}}ReportKeys ">{{trafficSimulation_.reportKeys}}</span>
 		{{/eq}}
 {{/inline}}
+
+{{#*inline "htmLaneAreaDetectorIds"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficSimulationLaneAreaDetectorIds">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputLaneAreaDetectorIds" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_laneAreaDetectorIds')); $('#{{classApiMethodMethod}}_laneAreaDetectorIds').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setLaneAreaDetectorIds', null, function() { addGlow($('#{{classApiMethodMethod}}_laneAreaDetectorIds')); }, function() { addError($('#{{classApiMethodMethod}}_laneAreaDetectorIds')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputLaneAreaDetectorIds"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															id="{{classApiMethodMethod}}_laneAreaDetectorIds"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setLaneAreaDetectorIds classTrafficSimulation inputTrafficSimulation{{pk}}LaneAreaDetectorIds w3-input w3-border "
+																name="setLaneAreaDetectorIds"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setLaneAreaDetectorIds classTrafficSimulation inputTrafficSimulation{{pk}}LaneAreaDetectorIds w3-input w3-border "
+																name="setLaneAreaDetectorIds"
+		{{else}}
+																class="valueLaneAreaDetectorIds w3-input w3-border classTrafficSimulation inputTrafficSimulation{{pk}}LaneAreaDetectorIds w3-input w3-border "
+																name="laneAreaDetectorIds"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setLaneAreaDetectorIds', $(this).val().replace('[','').replace(']','').split(/[ ,]+/), function() { addGlow($('#{{classApiMethodMethod}}_laneAreaDetectorIds')); }, function() { addError($('#{{classApiMethodMethod}}_laneAreaDetectorIds')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficSimulation_.laneAreaDetectorIds}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficSimulation{{pk}}LaneAreaDetectorIds ">{{trafficSimulation_.laneAreaDetectorIds}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficSimulation{{pk}}LaneAreaDetectorIds ">{{trafficSimulation_.laneAreaDetectorIds}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmLaneAreaDetectorLanes"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficSimulationLaneAreaDetectorLanes">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputLaneAreaDetectorLanes" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_laneAreaDetectorLanes')); $('#{{classApiMethodMethod}}_laneAreaDetectorLanes').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setLaneAreaDetectorLanes', null, function() { addGlow($('#{{classApiMethodMethod}}_laneAreaDetectorLanes')); }, function() { addError($('#{{classApiMethodMethod}}_laneAreaDetectorLanes')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputLaneAreaDetectorLanes"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															id="{{classApiMethodMethod}}_laneAreaDetectorLanes"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setLaneAreaDetectorLanes classTrafficSimulation inputTrafficSimulation{{pk}}LaneAreaDetectorLanes w3-input w3-border "
+																name="setLaneAreaDetectorLanes"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setLaneAreaDetectorLanes classTrafficSimulation inputTrafficSimulation{{pk}}LaneAreaDetectorLanes w3-input w3-border "
+																name="setLaneAreaDetectorLanes"
+		{{else}}
+																class="valueLaneAreaDetectorLanes w3-input w3-border classTrafficSimulation inputTrafficSimulation{{pk}}LaneAreaDetectorLanes w3-input w3-border "
+																name="laneAreaDetectorLanes"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setLaneAreaDetectorLanes', $(this).val().replace('[','').replace(']','').split(/[ ,]+/), function() { addGlow($('#{{classApiMethodMethod}}_laneAreaDetectorLanes')); }, function() { addError($('#{{classApiMethodMethod}}_laneAreaDetectorLanes')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficSimulation_.laneAreaDetectorLanes}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficSimulation{{pk}}LaneAreaDetectorLanes ">{{trafficSimulation_.laneAreaDetectorLanes}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficSimulation{{pk}}LaneAreaDetectorLanes ">{{trafficSimulation_.laneAreaDetectorLanes}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmLaneAreaDetectorPaths"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficSimulationLaneAreaDetectorPaths">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputLaneAreaDetectorPaths" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_laneAreaDetectorPaths')); $('#{{classApiMethodMethod}}_laneAreaDetectorPaths').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setLaneAreaDetectorPaths', null, function() { addGlow($('#{{classApiMethodMethod}}_laneAreaDetectorPaths')); }, function() { addError($('#{{classApiMethodMethod}}_laneAreaDetectorPaths')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputLaneAreaDetectorPaths"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															id="{{classApiMethodMethod}}_laneAreaDetectorPaths"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setLaneAreaDetectorPaths classTrafficSimulation inputTrafficSimulation{{pk}}LaneAreaDetectorPaths w3-input w3-border "
+																name="setLaneAreaDetectorPaths"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setLaneAreaDetectorPaths classTrafficSimulation inputTrafficSimulation{{pk}}LaneAreaDetectorPaths w3-input w3-border "
+																name="setLaneAreaDetectorPaths"
+		{{else}}
+																class="valueLaneAreaDetectorPaths w3-input w3-border classTrafficSimulation inputTrafficSimulation{{pk}}LaneAreaDetectorPaths w3-input w3-border "
+																name="laneAreaDetectorPaths"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setLaneAreaDetectorPaths', $(this).val().replace('[','').replace(']','').split(/[ ,]+/), function() { addGlow($('#{{classApiMethodMethod}}_laneAreaDetectorPaths')); }, function() { addError($('#{{classApiMethodMethod}}_laneAreaDetectorPaths')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficSimulation_.laneAreaDetectorPaths}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficSimulation{{pk}}LaneAreaDetectorPaths ">{{trafficSimulation_.laneAreaDetectorPaths}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficSimulation{{pk}}LaneAreaDetectorPaths ">{{trafficSimulation_.laneAreaDetectorPaths}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmE1DetectorIds"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficSimulationE1DetectorIds">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputE1DetectorIds" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_e1DetectorIds')); $('#{{classApiMethodMethod}}_e1DetectorIds').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setE1DetectorIds', null, function() { addGlow($('#{{classApiMethodMethod}}_e1DetectorIds')); }, function() { addError($('#{{classApiMethodMethod}}_e1DetectorIds')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputE1DetectorIds"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															id="{{classApiMethodMethod}}_e1DetectorIds"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setE1DetectorIds classTrafficSimulation inputTrafficSimulation{{pk}}E1DetectorIds w3-input w3-border "
+																name="setE1DetectorIds"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setE1DetectorIds classTrafficSimulation inputTrafficSimulation{{pk}}E1DetectorIds w3-input w3-border "
+																name="setE1DetectorIds"
+		{{else}}
+																class="valueE1DetectorIds w3-input w3-border classTrafficSimulation inputTrafficSimulation{{pk}}E1DetectorIds w3-input w3-border "
+																name="e1DetectorIds"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setE1DetectorIds', $(this).val().replace('[','').replace(']','').split(/[ ,]+/), function() { addGlow($('#{{classApiMethodMethod}}_e1DetectorIds')); }, function() { addError($('#{{classApiMethodMethod}}_e1DetectorIds')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficSimulation_.e1DetectorIds}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficSimulation{{pk}}E1DetectorIds ">{{trafficSimulation_.e1DetectorIds}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficSimulation{{pk}}E1DetectorIds ">{{trafficSimulation_.e1DetectorIds}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmE1DetectorLanes"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficSimulationE1DetectorLanes">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputE1DetectorLanes" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_e1DetectorLanes')); $('#{{classApiMethodMethod}}_e1DetectorLanes').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setE1DetectorLanes', null, function() { addGlow($('#{{classApiMethodMethod}}_e1DetectorLanes')); }, function() { addError($('#{{classApiMethodMethod}}_e1DetectorLanes')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputE1DetectorLanes"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															id="{{classApiMethodMethod}}_e1DetectorLanes"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setE1DetectorLanes classTrafficSimulation inputTrafficSimulation{{pk}}E1DetectorLanes w3-input w3-border "
+																name="setE1DetectorLanes"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setE1DetectorLanes classTrafficSimulation inputTrafficSimulation{{pk}}E1DetectorLanes w3-input w3-border "
+																name="setE1DetectorLanes"
+		{{else}}
+																class="valueE1DetectorLanes w3-input w3-border classTrafficSimulation inputTrafficSimulation{{pk}}E1DetectorLanes w3-input w3-border "
+																name="e1DetectorLanes"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setE1DetectorLanes', $(this).val().replace('[','').replace(']','').split(/[ ,]+/), function() { addGlow($('#{{classApiMethodMethod}}_e1DetectorLanes')); }, function() { addError($('#{{classApiMethodMethod}}_e1DetectorLanes')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficSimulation_.e1DetectorLanes}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficSimulation{{pk}}E1DetectorLanes ">{{trafficSimulation_.e1DetectorLanes}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficSimulation{{pk}}E1DetectorLanes ">{{trafficSimulation_.e1DetectorLanes}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmE1DetectorPaths"}}
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficSimulationE1DetectorPaths">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputE1DetectorPaths" roleRequired=roleRequired}}
+													</div>
+	{{#eq roleRequired "true"}}
+		{{#eq 'Page' classApiMethodMethod}}
+															<div class="w3-cell w3-left-align w3-cell-top ">
+																<button
+																		tabindex="-1"
+																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+																		onclick="removeGlow($('#{{classApiMethodMethod}}_e1DetectorPaths')); $('#{{classApiMethodMethod}}_e1DetectorPaths').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setE1DetectorPaths', null, function() { addGlow($('#{{classApiMethodMethod}}_e1DetectorPaths')); }, function() { addError($('#{{classApiMethodMethod}}_e1DetectorPaths')); }); "
+																		>
+																	<i class="far fa-delete-left "></i>
+																</button>
+															</div>
+														{{/eq}}
+	{{/eq}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputE1DetectorPaths"}}
+		{{#eq roleRequired "true"}}
+														<input
+															type="text"
+															id="{{classApiMethodMethod}}_e1DetectorPaths"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setE1DetectorPaths classTrafficSimulation inputTrafficSimulation{{pk}}E1DetectorPaths w3-input w3-border "
+																name="setE1DetectorPaths"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setE1DetectorPaths classTrafficSimulation inputTrafficSimulation{{pk}}E1DetectorPaths w3-input w3-border "
+																name="setE1DetectorPaths"
+		{{else}}
+																class="valueE1DetectorPaths w3-input w3-border classTrafficSimulation inputTrafficSimulation{{pk}}E1DetectorPaths w3-input w3-border "
+																name="e1DetectorPaths"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setE1DetectorPaths', $(this).val().replace('[','').replace(']','').split(/[ ,]+/), function() { addGlow($('#{{classApiMethodMethod}}_e1DetectorPaths')); }, function() { addError($('#{{classApiMethodMethod}}_e1DetectorPaths')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficSimulation_.e1DetectorPaths}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficSimulation{{pk}}E1DetectorPaths ">{{trafficSimulation_.e1DetectorPaths}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficSimulation{{pk}}E1DetectorPaths ">{{trafficSimulation_.e1DetectorPaths}}</span>
+		{{/eq}}
+{{/inline}}

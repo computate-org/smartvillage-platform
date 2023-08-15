@@ -17011,6 +17011,10 @@ components:
                 properties:
                   entityId:
                     type: string
+                  simulationName:
+                    type: string
+                  sumocfgPath:
+                    type: string
                   address:
                     type: object
                   alternateName:
@@ -17097,6 +17101,20 @@ components:
             removeEntityId:
               type: string
             removeAllEntityId:
+              type: string
+            setSimulationName:
+              type: string
+              nullable: true
+            removeSimulationName:
+              type: string
+            removeAllSimulationName:
+              type: string
+            setSumocfgPath:
+              type: string
+              nullable: true
+            removeSumocfgPath:
+              type: string
+            removeAllSumocfgPath:
               type: string
             setAddress:
               type: object
@@ -17375,6 +17393,20 @@ components:
               type: string
             removeAllEntityId:
               type: string
+            setSimulationName:
+              type: string
+              nullable: true
+            removeSimulationName:
+              type: string
+            removeAllSimulationName:
+              type: string
+            setSumocfgPath:
+              type: string
+              nullable: true
+            removeSumocfgPath:
+              type: string
+            removeAllSumocfgPath:
+              type: string
             setAddress:
               type: object
               nullable: true
@@ -17647,6 +17679,10 @@ components:
           properties:
             entityId:
               type: string
+            simulationName:
+              type: string
+            sumocfgPath:
+              type: string
             address:
               type: object
             alternateName:
@@ -17728,6 +17764,10 @@ components:
         - type: object
           properties:
             entityId:
+              type: string
+            simulationName:
+              type: string
+            sumocfgPath:
               type: string
             address:
               type: object
@@ -17811,6 +17851,10 @@ components:
           properties:
             entityId:
               type: string
+            simulationName:
+              type: string
+            sumocfgPath:
+              type: string
             address:
               type: object
             alternateName:
@@ -17892,6 +17936,10 @@ components:
         - type: object
           properties:
             entityId:
+              type: string
+            simulationName:
+              type: string
+            sumocfgPath:
               type: string
             address:
               type: object
@@ -17975,6 +18023,10 @@ components:
         - type: object
           properties:
             entityId:
+              type: string
+            simulationName:
+              type: string
+            sumocfgPath:
               type: string
             address:
               type: object
@@ -18074,6 +18126,10 @@ components:
               items:
                 type: object
                 properties:
+                  simulationName:
+                    type: string
+                  sumocfgPath:
+                    type: string
                   trafficLightId:
                     type: string
                   trafficLightType:
@@ -18086,6 +18142,20 @@ components:
       allOf:
         - type: object
           properties:
+            setSimulationName:
+              type: string
+              nullable: true
+            removeSimulationName:
+              type: string
+            removeAllSimulationName:
+              type: string
+            setSumocfgPath:
+              type: string
+              nullable: true
+            removeSumocfgPath:
+              type: string
+            removeAllSumocfgPath:
+              type: string
             setTrafficLightId:
               type: string
               nullable: true
@@ -18118,6 +18188,20 @@ components:
       allOf:
         - type: object
           properties:
+            setSimulationName:
+              type: string
+              nullable: true
+            removeSimulationName:
+              type: string
+            removeAllSimulationName:
+              type: string
+            setSumocfgPath:
+              type: string
+              nullable: true
+            removeSumocfgPath:
+              type: string
+            removeAllSumocfgPath:
+              type: string
             setTrafficLightId:
               type: string
               nullable: true
@@ -18150,6 +18234,10 @@ components:
       allOf:
         - type: object
           properties:
+            simulationName:
+              type: string
+            sumocfgPath:
+              type: string
             trafficLightId:
               type: string
             trafficLightType:
@@ -18162,6 +18250,10 @@ components:
       allOf:
         - type: object
           properties:
+            simulationName:
+              type: string
+            sumocfgPath:
+              type: string
             trafficLightId:
               type: string
             trafficLightType:
@@ -18174,6 +18266,10 @@ components:
       allOf:
         - type: object
           properties:
+            simulationName:
+              type: string
+            sumocfgPath:
+              type: string
             trafficLightId:
               type: string
             trafficLightType:
@@ -18186,6 +18282,10 @@ components:
       allOf:
         - type: object
           properties:
+            simulationName:
+              type: string
+            sumocfgPath:
+              type: string
             trafficLightId:
               type: string
             trafficLightType:
@@ -18199,6 +18299,10 @@ components:
         - $ref: "#/components/schemas/GETMapResultResponse"
         - type: object
           properties:
+            simulationName:
+              type: string
+            sumocfgPath:
+              type: string
             trafficLightId:
               type: string
             trafficLightType:
@@ -18229,6 +18333,10 @@ components:
               items:
                 type: object
                 properties:
+                  simulationName:
+                    type: string
+                  sumocfgPath:
+                    type: string
                   trafficLightId:
                     type: string
                   trafficLightType:
@@ -18245,6 +18353,20 @@ components:
       allOf:
         - type: object
           properties:
+            setSimulationName:
+              type: string
+              nullable: true
+            removeSimulationName:
+              type: string
+            removeAllSimulationName:
+              type: string
+            setSumocfgPath:
+              type: string
+              nullable: true
+            removeSumocfgPath:
+              type: string
+            removeAllSumocfgPath:
+              type: string
             setTrafficLightId:
               type: string
               nullable: true
@@ -18291,6 +18413,20 @@ components:
       allOf:
         - type: object
           properties:
+            setSimulationName:
+              type: string
+              nullable: true
+            removeSimulationName:
+              type: string
+            removeAllSimulationName:
+              type: string
+            setSumocfgPath:
+              type: string
+              nullable: true
+            removeSumocfgPath:
+              type: string
+            removeAllSumocfgPath:
+              type: string
             setTrafficLightId:
               type: string
               nullable: true
@@ -18337,6 +18473,10 @@ components:
       allOf:
         - type: object
           properties:
+            simulationName:
+              type: string
+            sumocfgPath:
+              type: string
             trafficLightId:
               type: string
             trafficLightType:
@@ -18353,6 +18493,10 @@ components:
       allOf:
         - type: object
           properties:
+            simulationName:
+              type: string
+            sumocfgPath:
+              type: string
             trafficLightId:
               type: string
             trafficLightType:
@@ -18369,6 +18513,10 @@ components:
       allOf:
         - type: object
           properties:
+            simulationName:
+              type: string
+            sumocfgPath:
+              type: string
             trafficLightId:
               type: string
             trafficLightType:
@@ -18385,6 +18533,10 @@ components:
       allOf:
         - type: object
           properties:
+            simulationName:
+              type: string
+            sumocfgPath:
+              type: string
             trafficLightId:
               type: string
             trafficLightType:
@@ -18402,6 +18554,10 @@ components:
         - $ref: "#/components/schemas/GETMapResultResponse"
         - type: object
           properties:
+            simulationName:
+              type: string
+            sumocfgPath:
+              type: string
             trafficLightId:
               type: string
             trafficLightType:
@@ -18436,6 +18592,10 @@ components:
               items:
                 type: object
                 properties:
+                  simulationName:
+                    type: string
+                  sumocfgPath:
+                    type: string
                   personId:
                     type: string
                   personType:
@@ -18452,6 +18612,20 @@ components:
       allOf:
         - type: object
           properties:
+            setSimulationName:
+              type: string
+              nullable: true
+            removeSimulationName:
+              type: string
+            removeAllSimulationName:
+              type: string
+            setSumocfgPath:
+              type: string
+              nullable: true
+            removeSumocfgPath:
+              type: string
+            removeAllSumocfgPath:
+              type: string
             setPersonId:
               type: string
               nullable: true
@@ -18498,6 +18672,20 @@ components:
       allOf:
         - type: object
           properties:
+            setSimulationName:
+              type: string
+              nullable: true
+            removeSimulationName:
+              type: string
+            removeAllSimulationName:
+              type: string
+            setSumocfgPath:
+              type: string
+              nullable: true
+            removeSumocfgPath:
+              type: string
+            removeAllSumocfgPath:
+              type: string
             setPersonId:
               type: string
               nullable: true
@@ -18544,6 +18732,10 @@ components:
       allOf:
         - type: object
           properties:
+            simulationName:
+              type: string
+            sumocfgPath:
+              type: string
             personId:
               type: string
             personType:
@@ -18560,6 +18752,10 @@ components:
       allOf:
         - type: object
           properties:
+            simulationName:
+              type: string
+            sumocfgPath:
+              type: string
             personId:
               type: string
             personType:
@@ -18576,6 +18772,10 @@ components:
       allOf:
         - type: object
           properties:
+            simulationName:
+              type: string
+            sumocfgPath:
+              type: string
             personId:
               type: string
             personType:
@@ -18592,6 +18792,10 @@ components:
       allOf:
         - type: object
           properties:
+            simulationName:
+              type: string
+            sumocfgPath:
+              type: string
             personId:
               type: string
             personType:
@@ -18609,6 +18813,10 @@ components:
         - $ref: "#/components/schemas/GETMapResultResponse"
         - type: object
           properties:
+            simulationName:
+              type: string
+            sumocfgPath:
+              type: string
             personId:
               type: string
             personType:
@@ -18644,6 +18852,7 @@ components:
                 properties:
                   startDateTime:
                     type: string
+                    format: date-time
                   simulationName:
                     type: string
                   sumocfgPath:
@@ -18714,6 +18923,30 @@ components:
                     type: array
                     items:
                       type: string
+                  laneAreaDetectorIds:
+                    type: array
+                    items:
+                      type: string
+                  laneAreaDetectorLanes:
+                    type: array
+                    items:
+                      type: string
+                  laneAreaDetectorPaths:
+                    type: array
+                    items:
+                      type: string
+                  e1DetectorIds:
+                    type: array
+                    items:
+                      type: string
+                  e1DetectorLanes:
+                    type: array
+                    items:
+                      type: string
+                  e1DetectorPaths:
+                    type: array
+                    items:
+                      type: string
     PATCHTrafficSimulationRequest:
       allOf:
         - type: object
@@ -18721,10 +18954,13 @@ components:
             setStartDateTime:
               type: string
               nullable: true
+              format: date-time
             removeStartDateTime:
               type: string
+              format: date-time
             removeAllStartDateTime:
               type: string
+              format: date-time
             setSimulationName:
               type: string
               nullable: true
@@ -18979,6 +19215,108 @@ components:
             addAdditionalFilePaths:
               type: string
             addAllAdditionalFilePaths:
+              type: array
+              items:
+                type: string
+            setLaneAreaDetectorIds:
+              type: array
+              nullable: true
+              items:
+                type: string
+            removeLaneAreaDetectorIds:
+              type: string
+            removeAllLaneAreaDetectorIds:
+              type: array
+              items:
+                type: string
+            addLaneAreaDetectorIds:
+              type: string
+            addAllLaneAreaDetectorIds:
+              type: array
+              items:
+                type: string
+            setLaneAreaDetectorLanes:
+              type: array
+              nullable: true
+              items:
+                type: string
+            removeLaneAreaDetectorLanes:
+              type: string
+            removeAllLaneAreaDetectorLanes:
+              type: array
+              items:
+                type: string
+            addLaneAreaDetectorLanes:
+              type: string
+            addAllLaneAreaDetectorLanes:
+              type: array
+              items:
+                type: string
+            setLaneAreaDetectorPaths:
+              type: array
+              nullable: true
+              items:
+                type: string
+            removeLaneAreaDetectorPaths:
+              type: string
+            removeAllLaneAreaDetectorPaths:
+              type: array
+              items:
+                type: string
+            addLaneAreaDetectorPaths:
+              type: string
+            addAllLaneAreaDetectorPaths:
+              type: array
+              items:
+                type: string
+            setE1DetectorIds:
+              type: array
+              nullable: true
+              items:
+                type: string
+            removeE1DetectorIds:
+              type: string
+            removeAllE1DetectorIds:
+              type: array
+              items:
+                type: string
+            addE1DetectorIds:
+              type: string
+            addAllE1DetectorIds:
+              type: array
+              items:
+                type: string
+            setE1DetectorLanes:
+              type: array
+              nullable: true
+              items:
+                type: string
+            removeE1DetectorLanes:
+              type: string
+            removeAllE1DetectorLanes:
+              type: array
+              items:
+                type: string
+            addE1DetectorLanes:
+              type: string
+            addAllE1DetectorLanes:
+              type: array
+              items:
+                type: string
+            setE1DetectorPaths:
+              type: array
+              nullable: true
+              items:
+                type: string
+            removeE1DetectorPaths:
+              type: string
+            removeAllE1DetectorPaths:
+              type: array
+              items:
+                type: string
+            addE1DetectorPaths:
+              type: string
+            addAllE1DetectorPaths:
               type: array
               items:
                 type: string
@@ -18989,10 +19327,13 @@ components:
             setStartDateTime:
               type: string
               nullable: true
+              format: date-time
             removeStartDateTime:
               type: string
+              format: date-time
             removeAllStartDateTime:
               type: string
+              format: date-time
             setSimulationName:
               type: string
               nullable: true
@@ -19250,12 +19591,115 @@ components:
               type: array
               items:
                 type: string
+            setLaneAreaDetectorIds:
+              type: array
+              nullable: true
+              items:
+                type: string
+            removeLaneAreaDetectorIds:
+              type: string
+            removeAllLaneAreaDetectorIds:
+              type: array
+              items:
+                type: string
+            addLaneAreaDetectorIds:
+              type: string
+            addAllLaneAreaDetectorIds:
+              type: array
+              items:
+                type: string
+            setLaneAreaDetectorLanes:
+              type: array
+              nullable: true
+              items:
+                type: string
+            removeLaneAreaDetectorLanes:
+              type: string
+            removeAllLaneAreaDetectorLanes:
+              type: array
+              items:
+                type: string
+            addLaneAreaDetectorLanes:
+              type: string
+            addAllLaneAreaDetectorLanes:
+              type: array
+              items:
+                type: string
+            setLaneAreaDetectorPaths:
+              type: array
+              nullable: true
+              items:
+                type: string
+            removeLaneAreaDetectorPaths:
+              type: string
+            removeAllLaneAreaDetectorPaths:
+              type: array
+              items:
+                type: string
+            addLaneAreaDetectorPaths:
+              type: string
+            addAllLaneAreaDetectorPaths:
+              type: array
+              items:
+                type: string
+            setE1DetectorIds:
+              type: array
+              nullable: true
+              items:
+                type: string
+            removeE1DetectorIds:
+              type: string
+            removeAllE1DetectorIds:
+              type: array
+              items:
+                type: string
+            addE1DetectorIds:
+              type: string
+            addAllE1DetectorIds:
+              type: array
+              items:
+                type: string
+            setE1DetectorLanes:
+              type: array
+              nullable: true
+              items:
+                type: string
+            removeE1DetectorLanes:
+              type: string
+            removeAllE1DetectorLanes:
+              type: array
+              items:
+                type: string
+            addE1DetectorLanes:
+              type: string
+            addAllE1DetectorLanes:
+              type: array
+              items:
+                type: string
+            setE1DetectorPaths:
+              type: array
+              nullable: true
+              items:
+                type: string
+            removeE1DetectorPaths:
+              type: string
+            removeAllE1DetectorPaths:
+              type: array
+              items:
+                type: string
+            addE1DetectorPaths:
+              type: string
+            addAllE1DetectorPaths:
+              type: array
+              items:
+                type: string
     POSTTrafficSimulationRequest:
       allOf:
         - type: object
           properties:
             startDateTime:
               type: string
+              format: date-time
             simulationName:
               type: string
             sumocfgPath:
@@ -19323,6 +19767,30 @@ components:
               items:
                 type: string
             additionalFilePaths:
+              type: array
+              items:
+                type: string
+            laneAreaDetectorIds:
+              type: array
+              items:
+                type: string
+            laneAreaDetectorLanes:
+              type: array
+              items:
+                type: string
+            laneAreaDetectorPaths:
+              type: array
+              items:
+                type: string
+            e1DetectorIds:
+              type: array
+              items:
+                type: string
+            e1DetectorLanes:
+              type: array
+              items:
+                type: string
+            e1DetectorPaths:
               type: array
               items:
                 type: string
@@ -19332,6 +19800,7 @@ components:
           properties:
             startDateTime:
               type: string
+              format: date-time
             simulationName:
               type: string
             sumocfgPath:
@@ -19399,6 +19868,30 @@ components:
               items:
                 type: string
             additionalFilePaths:
+              type: array
+              items:
+                type: string
+            laneAreaDetectorIds:
+              type: array
+              items:
+                type: string
+            laneAreaDetectorLanes:
+              type: array
+              items:
+                type: string
+            laneAreaDetectorPaths:
+              type: array
+              items:
+                type: string
+            e1DetectorIds:
+              type: array
+              items:
+                type: string
+            e1DetectorLanes:
+              type: array
+              items:
+                type: string
+            e1DetectorPaths:
               type: array
               items:
                 type: string
@@ -19408,6 +19901,7 @@ components:
           properties:
             startDateTime:
               type: string
+              format: date-time
             simulationName:
               type: string
             sumocfgPath:
@@ -19475,6 +19969,30 @@ components:
               items:
                 type: string
             additionalFilePaths:
+              type: array
+              items:
+                type: string
+            laneAreaDetectorIds:
+              type: array
+              items:
+                type: string
+            laneAreaDetectorLanes:
+              type: array
+              items:
+                type: string
+            laneAreaDetectorPaths:
+              type: array
+              items:
+                type: string
+            e1DetectorIds:
+              type: array
+              items:
+                type: string
+            e1DetectorLanes:
+              type: array
+              items:
+                type: string
+            e1DetectorPaths:
               type: array
               items:
                 type: string
@@ -19484,6 +20002,7 @@ components:
           properties:
             startDateTime:
               type: string
+              format: date-time
             simulationName:
               type: string
             sumocfgPath:
@@ -19551,6 +20070,30 @@ components:
               items:
                 type: string
             additionalFilePaths:
+              type: array
+              items:
+                type: string
+            laneAreaDetectorIds:
+              type: array
+              items:
+                type: string
+            laneAreaDetectorLanes:
+              type: array
+              items:
+                type: string
+            laneAreaDetectorPaths:
+              type: array
+              items:
+                type: string
+            e1DetectorIds:
+              type: array
+              items:
+                type: string
+            e1DetectorLanes:
+              type: array
+              items:
+                type: string
+            e1DetectorPaths:
               type: array
               items:
                 type: string
@@ -19560,6 +20103,7 @@ components:
           properties:
             startDateTime:
               type: string
+              format: date-time
             simulationName:
               type: string
             sumocfgPath:
@@ -19627,6 +20171,30 @@ components:
               items:
                 type: string
             additionalFilePaths:
+              type: array
+              items:
+                type: string
+            laneAreaDetectorIds:
+              type: array
+              items:
+                type: string
+            laneAreaDetectorLanes:
+              type: array
+              items:
+                type: string
+            laneAreaDetectorPaths:
+              type: array
+              items:
+                type: string
+            e1DetectorIds:
+              type: array
+              items:
+                type: string
+            e1DetectorLanes:
+              type: array
+              items:
+                type: string
+            e1DetectorPaths:
               type: array
               items:
                 type: string
@@ -21661,6 +22229,10 @@ components:
               items:
                 type: object
                 properties:
+                  simulationName:
+                    type: string
+                  sumocfgPath:
+                    type: string
                   vehicleId:
                     type: string
                   vehicleType:
@@ -21677,6 +22249,20 @@ components:
       allOf:
         - type: object
           properties:
+            setSimulationName:
+              type: string
+              nullable: true
+            removeSimulationName:
+              type: string
+            removeAllSimulationName:
+              type: string
+            setSumocfgPath:
+              type: string
+              nullable: true
+            removeSumocfgPath:
+              type: string
+            removeAllSumocfgPath:
+              type: string
             setVehicleId:
               type: string
               nullable: true
@@ -21723,6 +22309,20 @@ components:
       allOf:
         - type: object
           properties:
+            setSimulationName:
+              type: string
+              nullable: true
+            removeSimulationName:
+              type: string
+            removeAllSimulationName:
+              type: string
+            setSumocfgPath:
+              type: string
+              nullable: true
+            removeSumocfgPath:
+              type: string
+            removeAllSumocfgPath:
+              type: string
             setVehicleId:
               type: string
               nullable: true
@@ -21769,6 +22369,10 @@ components:
       allOf:
         - type: object
           properties:
+            simulationName:
+              type: string
+            sumocfgPath:
+              type: string
             vehicleId:
               type: string
             vehicleType:
@@ -21785,6 +22389,10 @@ components:
       allOf:
         - type: object
           properties:
+            simulationName:
+              type: string
+            sumocfgPath:
+              type: string
             vehicleId:
               type: string
             vehicleType:
@@ -21801,6 +22409,10 @@ components:
       allOf:
         - type: object
           properties:
+            simulationName:
+              type: string
+            sumocfgPath:
+              type: string
             vehicleId:
               type: string
             vehicleType:
@@ -21817,6 +22429,10 @@ components:
       allOf:
         - type: object
           properties:
+            simulationName:
+              type: string
+            sumocfgPath:
+              type: string
             vehicleId:
               type: string
             vehicleType:
@@ -21834,6 +22450,10 @@ components:
         - $ref: "#/components/schemas/GETMapResultResponse"
         - type: object
           properties:
+            simulationName:
+              type: string
+            sumocfgPath:
+              type: string
             vehicleId:
               type: string
             vehicleType:
@@ -23247,12 +23867,6 @@ components:
               items:
                 type: object
                 properties:
-                  simulationName:
-                    type: string
-                  sumocfgPath:
-                    type: string
-                  simulationKey:
-                    type: string
                   timeStepId:
                     type: string
                   time:
@@ -23273,12 +23887,6 @@ components:
       allOf:
         - type: object
           properties:
-            simulationName:
-              type: string
-            sumocfgPath:
-              type: string
-            simulationKey:
-              type: string
             timeStepId:
               type: string
             time:

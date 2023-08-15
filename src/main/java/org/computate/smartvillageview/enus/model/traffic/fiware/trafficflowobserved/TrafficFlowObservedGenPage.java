@@ -509,6 +509,11 @@ public class TrafficFlowObservedGenPage extends TrafficFlowObservedGenPageGen<Ma
 	}
 
 	@Override
+	protected void _pageDescription(Wrap<String> c) {
+			c.o("A device for watching vehicles in a lane of traffic on a road. ");
+	}
+
+	@Override
 	protected void _pageImageUri(Wrap<String> c) {
 			c.o("/png/traffic-flow-observed-999.png");
 	}

@@ -799,24 +799,19 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 					));
 				} else {
 					try {
-						try {
-							ApiRequest apiRequest = new ApiRequest();
-							JsonArray jsonArray = Optional.ofNullable(siteRequest.getJsonObject()).map(o -> o.getJsonArray("list")).orElse(new JsonArray());
-							apiRequest.setRows(Long.valueOf(jsonArray.size()));
-							apiRequest.setNumFound(Long.valueOf(jsonArray.size()));
-							apiRequest.setNumPATCH(0L);
-							apiRequest.initDeepApiRequest(siteRequest);
-							siteRequest.setApiRequest_(apiRequest);
-							eventBus.publish("websocketTrafficLightStep", JsonObject.mapFrom(apiRequest).toString());
-							varsTrafficLightStep(siteRequest).onSuccess(d -> {
-								listPUTImportTrafficLightStep(apiRequest, siteRequest).onSuccess(e -> {
-									response200PUTImportTrafficLightStep(siteRequest).onSuccess(response -> {
-										LOG.debug(String.format("putimportTrafficLightStep succeeded. "));
-										eventHandler.handle(Future.succeededFuture(response));
-									}).onFailure(ex -> {
-										LOG.error(String.format("putimportTrafficLightStep failed. "), ex);
-										error(siteRequest, eventHandler, ex);
-									});
+						ApiRequest apiRequest = new ApiRequest();
+						JsonArray jsonArray = Optional.ofNullable(siteRequest.getJsonObject()).map(o -> o.getJsonArray("list")).orElse(new JsonArray());
+						apiRequest.setRows(Long.valueOf(jsonArray.size()));
+						apiRequest.setNumFound(Long.valueOf(jsonArray.size()));
+						apiRequest.setNumPATCH(0L);
+						apiRequest.initDeepApiRequest(siteRequest);
+						siteRequest.setApiRequest_(apiRequest);
+						eventBus.publish("websocketTrafficLightStep", JsonObject.mapFrom(apiRequest).toString());
+						varsTrafficLightStep(siteRequest).onSuccess(d -> {
+							listPUTImportTrafficLightStep(apiRequest, siteRequest).onSuccess(e -> {
+								response200PUTImportTrafficLightStep(siteRequest).onSuccess(response -> {
+									LOG.debug(String.format("putimportTrafficLightStep succeeded. "));
+									eventHandler.handle(Future.succeededFuture(response));
 								}).onFailure(ex -> {
 									LOG.error(String.format("putimportTrafficLightStep failed. "), ex);
 									error(siteRequest, eventHandler, ex);
@@ -825,10 +820,10 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 								LOG.error(String.format("putimportTrafficLightStep failed. "), ex);
 								error(siteRequest, eventHandler, ex);
 							});
-						} catch(Exception ex) {
+						}).onFailure(ex -> {
 							LOG.error(String.format("putimportTrafficLightStep failed. "), ex);
 							error(siteRequest, eventHandler, ex);
-						}
+						});
 					} catch(Exception ex) {
 						LOG.error(String.format("putimportTrafficLightStep failed. "), ex);
 						error(null, eventHandler, ex);

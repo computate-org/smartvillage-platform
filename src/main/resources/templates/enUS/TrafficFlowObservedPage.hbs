@@ -3,7 +3,14 @@
 {{#partial "htmMeta"}}{{> htmMetaTrafficFlowObservedPage}}{{/partial}}
 {{#partial "htmStyle"}}{{> htmStyleTrafficFlowObservedPage}}{{/partial}}
 {{#partial "htmScripts"}}{{> htmScriptsTrafficFlowObservedPage}}{{/partial}}
-{{#partial "htmScript"}}{{> htmScriptTrafficFlowObservedPage}}{{/partial}}
+{{#partial "htmScript"}}
+{{> htmScriptTrafficFlowObservedPage}}
+		<script>
+			$(document).ready(function() {
+				pageGraphTrafficFlowObserved2();
+			});
+		</script>
+{{/partial}}
 {{#partial "websocket"}}{{> websocketTrafficFlowObservedPage}}{{/partial}}
 {{#partial "htmBodySidebar"}}{{> htmBodySidebarTrafficFlowObservedPage}}{{/partial}}
 {{#partial "htmBodyStart"}}{{> htmBodyStartTrafficFlowObservedPage}}{{/partial}}
@@ -17,7 +24,10 @@
 {{#partial "htmBodyFieldList"}}{{> htmBodyFieldListTrafficFlowObservedPage}}{{/partial}}
 {{#partial "htmBodyStats"}}{{> htmBodyStatsTrafficFlowObservedPage}}{{/partial}}
 {{#partial "htmBodyMenu"}}{{> htmBodyMenuTrafficFlowObservedPage}}{{/partial}}
-{{#partial "htmBodyGraph"}}{{> htmBodyGraphTrafficFlowObservedPage}}{{/partial}}
+{{#partial "htmBodyGraph"}}
+{{> htmBodyGraphTrafficFlowObservedPage}}
+<div id="htmBodyGraphMapResultPage2" class="w3-content htmBodyGraph2 "></div>
+{{/partial}}
 {{#partial "htmBodyCount0"}}{{> htmBodyCount0TrafficFlowObservedPage}}{{/partial}}
 {{#partial "htmBodyCount1All"}}{{> htmBodyCount1AllTrafficFlowObservedPage}}{{/partial}}
 {{#partial "htmBodyCount1"}}{{> htmBodyCount1TrafficFlowObservedPage}}{{/partial}}

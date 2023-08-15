@@ -219,6 +219,118 @@ public abstract class VehicleStepGen<DEV> extends MapResult {
 	public static final String VehicleStep_IconName = "map-location-dot";
 	public static final Integer VehicleStep_Rows = 100;
 
+	////////////////////
+	// simulationName //
+	////////////////////
+
+
+	/**	 The entity simulationName
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String simulationName;
+
+	/**	<br> The entity simulationName
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.vehicle.step.VehicleStep&fq=entiteVar_enUS_indexed_string:simulationName">Find the entity simulationName in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _simulationName(Wrap<String> w);
+
+	public String getSimulationName() {
+		return simulationName;
+	}
+	public void setSimulationName(String o) {
+		this.simulationName = VehicleStep.staticSetSimulationName(siteRequest_, o);
+	}
+	public static String staticSetSimulationName(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected VehicleStep simulationNameInit() {
+		Wrap<String> simulationNameWrap = new Wrap<String>().var("simulationName");
+		if(simulationName == null) {
+			_simulationName(simulationNameWrap);
+			Optional.ofNullable(simulationNameWrap.getO()).ifPresent(o -> {
+				setSimulationName(o);
+			});
+		}
+		return (VehicleStep)this;
+	}
+
+	public static String staticSearchSimulationName(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrSimulationName(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqSimulationName(SiteRequestEnUS siteRequest_, String o) {
+		return VehicleStep.staticSearchStrSimulationName(siteRequest_, VehicleStep.staticSearchSimulationName(siteRequest_, VehicleStep.staticSetSimulationName(siteRequest_, o)));
+	}
+
+	public String sqlSimulationName() {
+		return simulationName;
+	}
+
+	/////////////////
+	// sumocfgPath //
+	/////////////////
+
+
+	/**	 The entity sumocfgPath
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String sumocfgPath;
+
+	/**	<br> The entity sumocfgPath
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.vehicle.step.VehicleStep&fq=entiteVar_enUS_indexed_string:sumocfgPath">Find the entity sumocfgPath in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _sumocfgPath(Wrap<String> w);
+
+	public String getSumocfgPath() {
+		return sumocfgPath;
+	}
+	public void setSumocfgPath(String o) {
+		this.sumocfgPath = VehicleStep.staticSetSumocfgPath(siteRequest_, o);
+	}
+	public static String staticSetSumocfgPath(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected VehicleStep sumocfgPathInit() {
+		Wrap<String> sumocfgPathWrap = new Wrap<String>().var("sumocfgPath");
+		if(sumocfgPath == null) {
+			_sumocfgPath(sumocfgPathWrap);
+			Optional.ofNullable(sumocfgPathWrap.getO()).ifPresent(o -> {
+				setSumocfgPath(o);
+			});
+		}
+		return (VehicleStep)this;
+	}
+
+	public static String staticSearchSumocfgPath(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrSumocfgPath(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqSumocfgPath(SiteRequestEnUS siteRequest_, String o) {
+		return VehicleStep.staticSearchStrSumocfgPath(siteRequest_, VehicleStep.staticSearchSumocfgPath(siteRequest_, VehicleStep.staticSetSumocfgPath(siteRequest_, o)));
+	}
+
+	public String sqlSumocfgPath() {
+		return sumocfgPath;
+	}
+
 	///////////////
 	// vehicleId //
 	///////////////
@@ -668,6 +780,8 @@ public abstract class VehicleStepGen<DEV> extends MapResult {
 		Future.future(a -> a.complete()).compose(a -> {
 			Promise<Void> promise2 = Promise.promise();
 			try {
+				simulationNameInit();
+				sumocfgPathInit();
 				vehicleIdInit();
 				vehicleTypeInit();
 				angleInit();
@@ -727,6 +841,10 @@ public abstract class VehicleStepGen<DEV> extends MapResult {
 	public Object obtainVehicleStep(String var) {
 		VehicleStep oVehicleStep = (VehicleStep)this;
 		switch(var) {
+			case "simulationName":
+				return oVehicleStep.simulationName;
+			case "sumocfgPath":
+				return oVehicleStep.sumocfgPath;
 			case "vehicleId":
 				return oVehicleStep.vehicleId;
 			case "vehicleType":
@@ -778,6 +896,10 @@ public abstract class VehicleStepGen<DEV> extends MapResult {
 	}
 	public static Object staticSetVehicleStep(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "simulationName":
+			return VehicleStep.staticSetSimulationName(siteRequest_, o);
+		case "sumocfgPath":
+			return VehicleStep.staticSetSumocfgPath(siteRequest_, o);
 		case "vehicleId":
 			return VehicleStep.staticSetVehicleId(siteRequest_, o);
 		case "vehicleType":
@@ -804,6 +926,10 @@ public abstract class VehicleStepGen<DEV> extends MapResult {
 	}
 	public static Object staticSearchVehicleStep(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "simulationName":
+			return VehicleStep.staticSearchSimulationName(siteRequest_, (String)o);
+		case "sumocfgPath":
+			return VehicleStep.staticSearchSumocfgPath(siteRequest_, (String)o);
 		case "vehicleId":
 			return VehicleStep.staticSearchVehicleId(siteRequest_, (String)o);
 		case "vehicleType":
@@ -830,6 +956,10 @@ public abstract class VehicleStepGen<DEV> extends MapResult {
 	}
 	public static String staticSearchStrVehicleStep(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "simulationName":
+			return VehicleStep.staticSearchStrSimulationName(siteRequest_, (String)o);
+		case "sumocfgPath":
+			return VehicleStep.staticSearchStrSumocfgPath(siteRequest_, (String)o);
 		case "vehicleId":
 			return VehicleStep.staticSearchStrVehicleId(siteRequest_, (String)o);
 		case "vehicleType":
@@ -856,6 +986,10 @@ public abstract class VehicleStepGen<DEV> extends MapResult {
 	}
 	public static String staticSearchFqVehicleStep(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "simulationName":
+			return VehicleStep.staticSearchFqSimulationName(siteRequest_, o);
+		case "sumocfgPath":
+			return VehicleStep.staticSearchFqSumocfgPath(siteRequest_, o);
 		case "vehicleId":
 			return VehicleStep.staticSearchFqVehicleId(siteRequest_, o);
 		case "vehicleType":
@@ -894,7 +1028,19 @@ public abstract class VehicleStepGen<DEV> extends MapResult {
 	}
 	public Object persistVehicleStep(String var, Object val) {
 		String varLower = var.toLowerCase();
-			if("vehicleid".equals(varLower)) {
+			if("simulationname".equals(varLower)) {
+				if(val instanceof String) {
+					setSimulationName((String)val);
+				}
+				saves.add("simulationName");
+				return val;
+			} else if("sumocfgpath".equals(varLower)) {
+				if(val instanceof String) {
+					setSumocfgPath((String)val);
+				}
+				saves.add("sumocfgPath");
+				return val;
+			} else if("vehicleid".equals(varLower)) {
 				if(val instanceof String) {
 					setVehicleId((String)val);
 				}
@@ -955,6 +1101,18 @@ public abstract class VehicleStepGen<DEV> extends MapResult {
 		saves = doc.get("saves_docvalues_strings");
 		if(saves != null) {
 
+			if(saves.contains("simulationName")) {
+				String simulationName = (String)doc.get("simulationName_docvalues_string");
+				if(simulationName != null)
+					oVehicleStep.setSimulationName(simulationName);
+			}
+
+			if(saves.contains("sumocfgPath")) {
+				String sumocfgPath = (String)doc.get("sumocfgPath_docvalues_string");
+				if(sumocfgPath != null)
+					oVehicleStep.setSumocfgPath(sumocfgPath);
+			}
+
 			if(saves.contains("vehicleId")) {
 				String vehicleId = (String)doc.get("vehicleId_docvalues_string");
 				if(vehicleId != null)
@@ -996,6 +1154,12 @@ public abstract class VehicleStepGen<DEV> extends MapResult {
 	}
 
 	public void indexVehicleStep(JsonObject doc) {
+		if(simulationName != null) {
+			doc.put("simulationName_docvalues_string", simulationName);
+		}
+		if(sumocfgPath != null) {
+			doc.put("sumocfgPath_docvalues_string", sumocfgPath);
+		}
 		if(vehicleId != null) {
 			doc.put("vehicleId_docvalues_string", vehicleId);
 		}
@@ -1020,6 +1184,10 @@ public abstract class VehicleStepGen<DEV> extends MapResult {
 
 	public static String varStoredVehicleStep(String entityVar) {
 		switch(entityVar) {
+			case "simulationName":
+				return "simulationName_docvalues_string";
+			case "sumocfgPath":
+				return "sumocfgPath_docvalues_string";
 			case "vehicleId":
 				return "vehicleId_docvalues_string";
 			case "vehicleType":
@@ -1039,6 +1207,10 @@ public abstract class VehicleStepGen<DEV> extends MapResult {
 
 	public static String varIndexedVehicleStep(String entityVar) {
 		switch(entityVar) {
+			case "simulationName":
+				return "simulationName_docvalues_string";
+			case "sumocfgPath":
+				return "sumocfgPath_docvalues_string";
 			case "vehicleId":
 				return "vehicleId_docvalues_string";
 			case "vehicleType":
@@ -1058,6 +1230,10 @@ public abstract class VehicleStepGen<DEV> extends MapResult {
 
 	public static String searchVarVehicleStep(String searchVar) {
 		switch(searchVar) {
+			case "simulationName_docvalues_string":
+				return "simulationName";
+			case "sumocfgPath_docvalues_string":
+				return "sumocfgPath";
 			case "vehicleId_docvalues_string":
 				return "vehicleId";
 			case "vehicleType_docvalues_string":
@@ -1099,6 +1275,8 @@ public abstract class VehicleStepGen<DEV> extends MapResult {
 	public void storeVehicleStep(SolrResponse.Doc doc) {
 		VehicleStep oVehicleStep = (VehicleStep)this;
 
+		oVehicleStep.setSimulationName(Optional.ofNullable(doc.get("simulationName_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oVehicleStep.setSumocfgPath(Optional.ofNullable(doc.get("sumocfgPath_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oVehicleStep.setVehicleId(Optional.ofNullable(doc.get("vehicleId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oVehicleStep.setVehicleType(Optional.ofNullable(doc.get("vehicleType_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oVehicleStep.setAngle(Optional.ofNullable(doc.get("angle_docvalues_double")).map(v -> v.toString()).orElse(null));
@@ -1118,6 +1296,10 @@ public abstract class VehicleStepGen<DEV> extends MapResult {
 		Object o = Optional.ofNullable(apiRequest).map(ApiRequest::getOriginal).orElse(null);
 		if(o != null && o instanceof VehicleStep) {
 			VehicleStep original = (VehicleStep)o;
+			if(!Objects.equals(simulationName, original.getSimulationName()))
+				apiRequest.addVars("simulationName");
+			if(!Objects.equals(sumocfgPath, original.getSumocfgPath()))
+				apiRequest.addVars("sumocfgPath");
 			if(!Objects.equals(vehicleId, original.getVehicleId()))
 				apiRequest.addVars("vehicleId");
 			if(!Objects.equals(vehicleType, original.getVehicleType()))
@@ -1141,6 +1323,8 @@ public abstract class VehicleStepGen<DEV> extends MapResult {
 	@Override public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(super.toString());
+		sb.append(Optional.ofNullable(simulationName).map(v -> "simulationName: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(sumocfgPath).map(v -> "sumocfgPath: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(vehicleId).map(v -> "vehicleId: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(vehicleType).map(v -> "vehicleType: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(angle).map(v -> "angle: " + v + "\n").orElse(""));
@@ -1151,6 +1335,8 @@ public abstract class VehicleStepGen<DEV> extends MapResult {
 	}
 
 	public static final String CLASS_SIMPLE_NAME = "VehicleStep";
+	public static final String VAR_simulationName = "simulationName";
+	public static final String VAR_sumocfgPath = "sumocfgPath";
 	public static final String VAR_vehicleId = "vehicleId";
 	public static final String VAR_vehicleType = "vehicleType";
 	public static final String VAR_angle = "angle";
@@ -1170,6 +1356,8 @@ public abstract class VehicleStepGen<DEV> extends MapResult {
 		return VehicleStep.varsFqVehicleStep(new ArrayList<String>());
 	}
 	public static List<String> varsFqVehicleStep(List<String> vars) {
+		vars.add(VAR_simulationName);
+		vars.add(VAR_sumocfgPath);
 		vars.add(VAR_vehicleId);
 		vars.add(VAR_vehicleType);
 		vars.add(VAR_angle);
@@ -1192,6 +1380,8 @@ public abstract class VehicleStepGen<DEV> extends MapResult {
 		return vars;
 	}
 
+	public static final String DISPLAY_NAME_simulationName = "simulation name";
+	public static final String DISPLAY_NAME_sumocfgPath = "sumocfg path";
 	public static final String DISPLAY_NAME_vehicleId = "vehicle ID";
 	public static final String DISPLAY_NAME_vehicleType = "vehicle type";
 	public static final String DISPLAY_NAME_angle = "Angle in degrees";
@@ -1204,6 +1394,10 @@ public abstract class VehicleStepGen<DEV> extends MapResult {
 	}
 	public static String displayNameVehicleStep(String var) {
 		switch(var) {
+		case VAR_simulationName:
+			return DISPLAY_NAME_simulationName;
+		case VAR_sumocfgPath:
+			return DISPLAY_NAME_sumocfgPath;
 		case VAR_vehicleId:
 			return DISPLAY_NAME_vehicleId;
 		case VAR_vehicleType:
@@ -1230,6 +1424,10 @@ public abstract class VehicleStepGen<DEV> extends MapResult {
 
 	public static String classSimpleNameVehicleStep(String var) {
 		switch(var) {
+		case VAR_simulationName:
+			return "String";
+		case VAR_sumocfgPath:
+			return "String";
 		case VAR_vehicleId:
 			return "String";
 		case VAR_vehicleType:
@@ -1256,6 +1454,10 @@ public abstract class VehicleStepGen<DEV> extends MapResult {
 
 	public static Integer htmRowVehicleStep(String var) {
 		switch(var) {
+		case VAR_simulationName:
+			return 3;
+		case VAR_sumocfgPath:
+			return 3;
 		case VAR_vehicleId:
 			return 4;
 		case VAR_vehicleType:
@@ -1275,6 +1477,10 @@ public abstract class VehicleStepGen<DEV> extends MapResult {
 
 	public static Integer htmCellVehicleStep(String var) {
 		switch(var) {
+		case VAR_simulationName:
+			return 1;
+		case VAR_sumocfgPath:
+			return 2;
 		case VAR_vehicleId:
 			return 3;
 		case VAR_vehicleType:

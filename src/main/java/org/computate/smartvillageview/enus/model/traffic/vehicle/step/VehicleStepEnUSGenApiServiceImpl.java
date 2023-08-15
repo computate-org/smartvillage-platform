@@ -799,24 +799,19 @@ public class VehicleStepEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 					));
 				} else {
 					try {
-						try {
-							ApiRequest apiRequest = new ApiRequest();
-							JsonArray jsonArray = Optional.ofNullable(siteRequest.getJsonObject()).map(o -> o.getJsonArray("list")).orElse(new JsonArray());
-							apiRequest.setRows(Long.valueOf(jsonArray.size()));
-							apiRequest.setNumFound(Long.valueOf(jsonArray.size()));
-							apiRequest.setNumPATCH(0L);
-							apiRequest.initDeepApiRequest(siteRequest);
-							siteRequest.setApiRequest_(apiRequest);
-							eventBus.publish("websocketVehicleStep", JsonObject.mapFrom(apiRequest).toString());
-							varsVehicleStep(siteRequest).onSuccess(d -> {
-								listPUTImportVehicleStep(apiRequest, siteRequest).onSuccess(e -> {
-									response200PUTImportVehicleStep(siteRequest).onSuccess(response -> {
-										LOG.debug(String.format("putimportVehicleStep succeeded. "));
-										eventHandler.handle(Future.succeededFuture(response));
-									}).onFailure(ex -> {
-										LOG.error(String.format("putimportVehicleStep failed. "), ex);
-										error(siteRequest, eventHandler, ex);
-									});
+						ApiRequest apiRequest = new ApiRequest();
+						JsonArray jsonArray = Optional.ofNullable(siteRequest.getJsonObject()).map(o -> o.getJsonArray("list")).orElse(new JsonArray());
+						apiRequest.setRows(Long.valueOf(jsonArray.size()));
+						apiRequest.setNumFound(Long.valueOf(jsonArray.size()));
+						apiRequest.setNumPATCH(0L);
+						apiRequest.initDeepApiRequest(siteRequest);
+						siteRequest.setApiRequest_(apiRequest);
+						eventBus.publish("websocketVehicleStep", JsonObject.mapFrom(apiRequest).toString());
+						varsVehicleStep(siteRequest).onSuccess(d -> {
+							listPUTImportVehicleStep(apiRequest, siteRequest).onSuccess(e -> {
+								response200PUTImportVehicleStep(siteRequest).onSuccess(response -> {
+									LOG.debug(String.format("putimportVehicleStep succeeded. "));
+									eventHandler.handle(Future.succeededFuture(response));
 								}).onFailure(ex -> {
 									LOG.error(String.format("putimportVehicleStep failed. "), ex);
 									error(siteRequest, eventHandler, ex);
@@ -825,10 +820,10 @@ public class VehicleStepEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 								LOG.error(String.format("putimportVehicleStep failed. "), ex);
 								error(siteRequest, eventHandler, ex);
 							});
-						} catch(Exception ex) {
+						}).onFailure(ex -> {
 							LOG.error(String.format("putimportVehicleStep failed. "), ex);
 							error(siteRequest, eventHandler, ex);
-						}
+						});
 					} catch(Exception ex) {
 						LOG.error(String.format("putimportVehicleStep failed. "), ex);
 						error(null, eventHandler, ex);

@@ -219,6 +219,118 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 	public static final String PersonStep_IconName = "map-location-dot";
 	public static final Integer PersonStep_Rows = 100;
 
+	////////////////////
+	// simulationName //
+	////////////////////
+
+
+	/**	 The entity simulationName
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String simulationName;
+
+	/**	<br> The entity simulationName
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStep&fq=entiteVar_enUS_indexed_string:simulationName">Find the entity simulationName in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _simulationName(Wrap<String> w);
+
+	public String getSimulationName() {
+		return simulationName;
+	}
+	public void setSimulationName(String o) {
+		this.simulationName = PersonStep.staticSetSimulationName(siteRequest_, o);
+	}
+	public static String staticSetSimulationName(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected PersonStep simulationNameInit() {
+		Wrap<String> simulationNameWrap = new Wrap<String>().var("simulationName");
+		if(simulationName == null) {
+			_simulationName(simulationNameWrap);
+			Optional.ofNullable(simulationNameWrap.getO()).ifPresent(o -> {
+				setSimulationName(o);
+			});
+		}
+		return (PersonStep)this;
+	}
+
+	public static String staticSearchSimulationName(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrSimulationName(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqSimulationName(SiteRequestEnUS siteRequest_, String o) {
+		return PersonStep.staticSearchStrSimulationName(siteRequest_, PersonStep.staticSearchSimulationName(siteRequest_, PersonStep.staticSetSimulationName(siteRequest_, o)));
+	}
+
+	public String sqlSimulationName() {
+		return simulationName;
+	}
+
+	/////////////////
+	// sumocfgPath //
+	/////////////////
+
+
+	/**	 The entity sumocfgPath
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String sumocfgPath;
+
+	/**	<br> The entity sumocfgPath
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.person.step.PersonStep&fq=entiteVar_enUS_indexed_string:sumocfgPath">Find the entity sumocfgPath in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _sumocfgPath(Wrap<String> w);
+
+	public String getSumocfgPath() {
+		return sumocfgPath;
+	}
+	public void setSumocfgPath(String o) {
+		this.sumocfgPath = PersonStep.staticSetSumocfgPath(siteRequest_, o);
+	}
+	public static String staticSetSumocfgPath(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected PersonStep sumocfgPathInit() {
+		Wrap<String> sumocfgPathWrap = new Wrap<String>().var("sumocfgPath");
+		if(sumocfgPath == null) {
+			_sumocfgPath(sumocfgPathWrap);
+			Optional.ofNullable(sumocfgPathWrap.getO()).ifPresent(o -> {
+				setSumocfgPath(o);
+			});
+		}
+		return (PersonStep)this;
+	}
+
+	public static String staticSearchSumocfgPath(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrSumocfgPath(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqSumocfgPath(SiteRequestEnUS siteRequest_, String o) {
+		return PersonStep.staticSearchStrSumocfgPath(siteRequest_, PersonStep.staticSearchSumocfgPath(siteRequest_, PersonStep.staticSetSumocfgPath(siteRequest_, o)));
+	}
+
+	public String sqlSumocfgPath() {
+		return sumocfgPath;
+	}
+
 	//////////////
 	// personId //
 	//////////////
@@ -668,6 +780,8 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 		Future.future(a -> a.complete()).compose(a -> {
 			Promise<Void> promise2 = Promise.promise();
 			try {
+				simulationNameInit();
+				sumocfgPathInit();
 				personIdInit();
 				personTypeInit();
 				angleInit();
@@ -727,6 +841,10 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 	public Object obtainPersonStep(String var) {
 		PersonStep oPersonStep = (PersonStep)this;
 		switch(var) {
+			case "simulationName":
+				return oPersonStep.simulationName;
+			case "sumocfgPath":
+				return oPersonStep.sumocfgPath;
 			case "personId":
 				return oPersonStep.personId;
 			case "personType":
@@ -778,6 +896,10 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 	}
 	public static Object staticSetPersonStep(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "simulationName":
+			return PersonStep.staticSetSimulationName(siteRequest_, o);
+		case "sumocfgPath":
+			return PersonStep.staticSetSumocfgPath(siteRequest_, o);
 		case "personId":
 			return PersonStep.staticSetPersonId(siteRequest_, o);
 		case "personType":
@@ -804,6 +926,10 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 	}
 	public static Object staticSearchPersonStep(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "simulationName":
+			return PersonStep.staticSearchSimulationName(siteRequest_, (String)o);
+		case "sumocfgPath":
+			return PersonStep.staticSearchSumocfgPath(siteRequest_, (String)o);
 		case "personId":
 			return PersonStep.staticSearchPersonId(siteRequest_, (String)o);
 		case "personType":
@@ -830,6 +956,10 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 	}
 	public static String staticSearchStrPersonStep(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "simulationName":
+			return PersonStep.staticSearchStrSimulationName(siteRequest_, (String)o);
+		case "sumocfgPath":
+			return PersonStep.staticSearchStrSumocfgPath(siteRequest_, (String)o);
 		case "personId":
 			return PersonStep.staticSearchStrPersonId(siteRequest_, (String)o);
 		case "personType":
@@ -856,6 +986,10 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 	}
 	public static String staticSearchFqPersonStep(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "simulationName":
+			return PersonStep.staticSearchFqSimulationName(siteRequest_, o);
+		case "sumocfgPath":
+			return PersonStep.staticSearchFqSumocfgPath(siteRequest_, o);
 		case "personId":
 			return PersonStep.staticSearchFqPersonId(siteRequest_, o);
 		case "personType":
@@ -894,7 +1028,19 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 	}
 	public Object persistPersonStep(String var, Object val) {
 		String varLower = var.toLowerCase();
-			if("personid".equals(varLower)) {
+			if("simulationname".equals(varLower)) {
+				if(val instanceof String) {
+					setSimulationName((String)val);
+				}
+				saves.add("simulationName");
+				return val;
+			} else if("sumocfgpath".equals(varLower)) {
+				if(val instanceof String) {
+					setSumocfgPath((String)val);
+				}
+				saves.add("sumocfgPath");
+				return val;
+			} else if("personid".equals(varLower)) {
 				if(val instanceof String) {
 					setPersonId((String)val);
 				}
@@ -955,6 +1101,18 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 		saves = doc.get("saves_docvalues_strings");
 		if(saves != null) {
 
+			if(saves.contains("simulationName")) {
+				String simulationName = (String)doc.get("simulationName_docvalues_string");
+				if(simulationName != null)
+					oPersonStep.setSimulationName(simulationName);
+			}
+
+			if(saves.contains("sumocfgPath")) {
+				String sumocfgPath = (String)doc.get("sumocfgPath_docvalues_string");
+				if(sumocfgPath != null)
+					oPersonStep.setSumocfgPath(sumocfgPath);
+			}
+
 			if(saves.contains("personId")) {
 				String personId = (String)doc.get("personId_docvalues_string");
 				if(personId != null)
@@ -996,6 +1154,12 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 	}
 
 	public void indexPersonStep(JsonObject doc) {
+		if(simulationName != null) {
+			doc.put("simulationName_docvalues_string", simulationName);
+		}
+		if(sumocfgPath != null) {
+			doc.put("sumocfgPath_docvalues_string", sumocfgPath);
+		}
 		if(personId != null) {
 			doc.put("personId_docvalues_string", personId);
 		}
@@ -1020,6 +1184,10 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 
 	public static String varStoredPersonStep(String entityVar) {
 		switch(entityVar) {
+			case "simulationName":
+				return "simulationName_docvalues_string";
+			case "sumocfgPath":
+				return "sumocfgPath_docvalues_string";
 			case "personId":
 				return "personId_docvalues_string";
 			case "personType":
@@ -1039,6 +1207,10 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 
 	public static String varIndexedPersonStep(String entityVar) {
 		switch(entityVar) {
+			case "simulationName":
+				return "simulationName_docvalues_string";
+			case "sumocfgPath":
+				return "sumocfgPath_docvalues_string";
 			case "personId":
 				return "personId_docvalues_string";
 			case "personType":
@@ -1058,6 +1230,10 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 
 	public static String searchVarPersonStep(String searchVar) {
 		switch(searchVar) {
+			case "simulationName_docvalues_string":
+				return "simulationName";
+			case "sumocfgPath_docvalues_string":
+				return "sumocfgPath";
 			case "personId_docvalues_string":
 				return "personId";
 			case "personType_docvalues_string":
@@ -1099,6 +1275,8 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 	public void storePersonStep(SolrResponse.Doc doc) {
 		PersonStep oPersonStep = (PersonStep)this;
 
+		oPersonStep.setSimulationName(Optional.ofNullable(doc.get("simulationName_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oPersonStep.setSumocfgPath(Optional.ofNullable(doc.get("sumocfgPath_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oPersonStep.setPersonId(Optional.ofNullable(doc.get("personId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oPersonStep.setPersonType(Optional.ofNullable(doc.get("personType_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oPersonStep.setAngle(Optional.ofNullable(doc.get("angle_docvalues_double")).map(v -> v.toString()).orElse(null));
@@ -1118,6 +1296,10 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 		Object o = Optional.ofNullable(apiRequest).map(ApiRequest::getOriginal).orElse(null);
 		if(o != null && o instanceof PersonStep) {
 			PersonStep original = (PersonStep)o;
+			if(!Objects.equals(simulationName, original.getSimulationName()))
+				apiRequest.addVars("simulationName");
+			if(!Objects.equals(sumocfgPath, original.getSumocfgPath()))
+				apiRequest.addVars("sumocfgPath");
 			if(!Objects.equals(personId, original.getPersonId()))
 				apiRequest.addVars("personId");
 			if(!Objects.equals(personType, original.getPersonType()))
@@ -1141,6 +1323,8 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 	@Override public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(super.toString());
+		sb.append(Optional.ofNullable(simulationName).map(v -> "simulationName: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(sumocfgPath).map(v -> "sumocfgPath: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(personId).map(v -> "personId: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(personType).map(v -> "personType: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(angle).map(v -> "angle: " + v + "\n").orElse(""));
@@ -1151,6 +1335,8 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 	}
 
 	public static final String CLASS_SIMPLE_NAME = "PersonStep";
+	public static final String VAR_simulationName = "simulationName";
+	public static final String VAR_sumocfgPath = "sumocfgPath";
 	public static final String VAR_personId = "personId";
 	public static final String VAR_personType = "personType";
 	public static final String VAR_angle = "angle";
@@ -1170,6 +1356,8 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 		return PersonStep.varsFqPersonStep(new ArrayList<String>());
 	}
 	public static List<String> varsFqPersonStep(List<String> vars) {
+		vars.add(VAR_simulationName);
+		vars.add(VAR_sumocfgPath);
 		vars.add(VAR_personId);
 		vars.add(VAR_personType);
 		vars.add(VAR_angle);
@@ -1192,6 +1380,8 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 		return vars;
 	}
 
+	public static final String DISPLAY_NAME_simulationName = "simulation name";
+	public static final String DISPLAY_NAME_sumocfgPath = "sumocfg path";
 	public static final String DISPLAY_NAME_personId = "person ID";
 	public static final String DISPLAY_NAME_personType = "person type";
 	public static final String DISPLAY_NAME_angle = "Angle in degrees";
@@ -1204,6 +1394,10 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 	}
 	public static String displayNamePersonStep(String var) {
 		switch(var) {
+		case VAR_simulationName:
+			return DISPLAY_NAME_simulationName;
+		case VAR_sumocfgPath:
+			return DISPLAY_NAME_sumocfgPath;
 		case VAR_personId:
 			return DISPLAY_NAME_personId;
 		case VAR_personType:
@@ -1230,6 +1424,10 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 
 	public static String classSimpleNamePersonStep(String var) {
 		switch(var) {
+		case VAR_simulationName:
+			return "String";
+		case VAR_sumocfgPath:
+			return "String";
 		case VAR_personId:
 			return "String";
 		case VAR_personType:
@@ -1256,6 +1454,10 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 
 	public static Integer htmRowPersonStep(String var) {
 		switch(var) {
+		case VAR_simulationName:
+			return 3;
+		case VAR_sumocfgPath:
+			return 3;
 		case VAR_personId:
 			return 4;
 		case VAR_personType:
@@ -1275,6 +1477,10 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 
 	public static Integer htmCellPersonStep(String var) {
 		switch(var) {
+		case VAR_simulationName:
+			return 1;
+		case VAR_sumocfgPath:
+			return 2;
 		case VAR_personId:
 			return 3;
 		case VAR_personType:

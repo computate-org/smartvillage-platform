@@ -1,5 +1,6 @@
 ---
 
+API_VERSION: 1.0.2
 SITE_NAME: smartabyar-smartvillage
 SITE_DISPLAY_NAME: Smart Village Project
 SITE_PUBLIC_URL: https://smartabyarsmartvillage.org
@@ -156,6 +157,10 @@ AUTH_ROLE_REQUIRED_VehicleStep: 'SiteAdmin'
 KAFKA_TOPIC_SUMO_RUN: smartvillage-sumo-run
 KAFKA_TOPIC_SUMO_STOP: smartvillage-sumo-stop
 KAFKA_TOPIC_SUMO_RUN_REPORT: smartvillage-sumo-run-report
+KAFKA_TOPIC_SUMO_SIMULATION_INFO: smartvillage-sumo-simulation-info
+KAFKA_TOPIC_SUMO_SIMULATION_INFO_PATCH: smartvillage-sumo-simulation-info-patch
+KAFKA_TOPIC_SUMO_TRAFFIC_FLOW_OBSERVED_INFO: smartvillage-sumo-traffic-flow-observed-info
+KAFKA_TOPIC_SUMO_TRAFFIC_FLOW_OBSERVED_INFO_PATCH: smartvillage-sumo-traffic-flow-observed-info-patch
 
 MQTT_ENABLED: true
 MQTT_HOST: fiware-broker-mqtt-nodeport.apps-crc.testing

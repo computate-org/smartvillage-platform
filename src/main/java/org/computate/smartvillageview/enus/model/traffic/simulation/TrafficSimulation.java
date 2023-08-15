@@ -18,6 +18,8 @@ import org.computate.smartvillageview.enus.model.base.BaseModel;
  * Indexed: true
  * SqlOrder: 2
  * Order: 8
+ * Description: A SUMO Traffic Simulation
+ * Fiware: true
  * 
  * ApiTag.enUS: Traffic Simulation
  * ApiUri.enUS: /api/traffic-simulation
@@ -71,6 +73,7 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * HtmCell: 1
 	 * Facet: true
 	 * Default: Veberöd intersection
+	 * Required: true
 	 */
 	protected void _simulationName(Wrap<String> w) {
 	}
@@ -513,6 +516,60 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Description: The paths to all the additional SUMO config files
 	 */
 	protected void _additionalFilePaths(List<String> l) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * Facet: true
+	 */
+	protected void _laneAreaDetectorIds(List<String> l) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * Facet: true
+	 */
+	protected void _laneAreaDetectorLanes(List<String> l) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * Facet: true
+	 */
+	protected void _laneAreaDetectorPaths(List<String> l) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * Facet: true
+	 */
+	protected void _e1DetectorIds(List<String> l) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * Facet: true
+	 */
+	protected void _e1DetectorLanes(List<String> l) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * Facet: true
+	 */
+	protected void _e1DetectorPaths(List<String> l) {
 	}
 
 	@Override

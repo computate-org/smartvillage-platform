@@ -39,6 +39,30 @@ public class TrafficLight extends TrafficLightGen<MapResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
+	 * DisplayName: simulation name
+	 * HtmRow: 3
+	 * HtmCell: 1
+	 * Facet: true
+	 */
+	protected void _simulationName(Wrap<String> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * DisplayName: sumocfg path
+	 * HtmRow: 3
+	 * HtmCell: 2
+	 * Facet: true
+	 */
+	protected void _sumocfgPath(Wrap<String> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
 	 * DisplayName: traffic light ID
 	 * HtmRow: 4
 	 * HtmCell: 3

@@ -522,7 +522,7 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 								if(apiRequest != null) {
 									apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listTrafficFlowObserved.getResponse().getResponse().getDocs().size());
 									if(apiRequest.getNumFound() == 1L)
-										o.apiRequestTrafficFlowObserved();
+										o2.apiRequestTrafficFlowObserved();
 									eventBus.publish("websocketTrafficFlowObserved", JsonObject.mapFrom(apiRequest).toString());
 								}
 								eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(new JsonObject().encodePrettily()))));
@@ -799,24 +799,19 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 					));
 				} else {
 					try {
-						try {
-							ApiRequest apiRequest = new ApiRequest();
-							JsonArray jsonArray = Optional.ofNullable(siteRequest.getJsonObject()).map(o -> o.getJsonArray("list")).orElse(new JsonArray());
-							apiRequest.setRows(Long.valueOf(jsonArray.size()));
-							apiRequest.setNumFound(Long.valueOf(jsonArray.size()));
-							apiRequest.setNumPATCH(0L);
-							apiRequest.initDeepApiRequest(siteRequest);
-							siteRequest.setApiRequest_(apiRequest);
-							eventBus.publish("websocketTrafficFlowObserved", JsonObject.mapFrom(apiRequest).toString());
-							varsTrafficFlowObserved(siteRequest).onSuccess(d -> {
-								listPUTImportTrafficFlowObserved(apiRequest, siteRequest).onSuccess(e -> {
-									response200PUTImportTrafficFlowObserved(siteRequest).onSuccess(response -> {
-										LOG.debug(String.format("putimportTrafficFlowObserved succeeded. "));
-										eventHandler.handle(Future.succeededFuture(response));
-									}).onFailure(ex -> {
-										LOG.error(String.format("putimportTrafficFlowObserved failed. "), ex);
-										error(siteRequest, eventHandler, ex);
-									});
+						ApiRequest apiRequest = new ApiRequest();
+						JsonArray jsonArray = Optional.ofNullable(siteRequest.getJsonObject()).map(o -> o.getJsonArray("list")).orElse(new JsonArray());
+						apiRequest.setRows(Long.valueOf(jsonArray.size()));
+						apiRequest.setNumFound(Long.valueOf(jsonArray.size()));
+						apiRequest.setNumPATCH(0L);
+						apiRequest.initDeepApiRequest(siteRequest);
+						siteRequest.setApiRequest_(apiRequest);
+						eventBus.publish("websocketTrafficFlowObserved", JsonObject.mapFrom(apiRequest).toString());
+						varsTrafficFlowObserved(siteRequest).onSuccess(d -> {
+							listPUTImportTrafficFlowObserved(apiRequest, siteRequest).onSuccess(e -> {
+								response200PUTImportTrafficFlowObserved(siteRequest).onSuccess(response -> {
+									LOG.debug(String.format("putimportTrafficFlowObserved succeeded. "));
+									eventHandler.handle(Future.succeededFuture(response));
 								}).onFailure(ex -> {
 									LOG.error(String.format("putimportTrafficFlowObserved failed. "), ex);
 									error(siteRequest, eventHandler, ex);
@@ -825,10 +820,10 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 								LOG.error(String.format("putimportTrafficFlowObserved failed. "), ex);
 								error(siteRequest, eventHandler, ex);
 							});
-						} catch(Exception ex) {
+						}).onFailure(ex -> {
 							LOG.error(String.format("putimportTrafficFlowObserved failed. "), ex);
 							error(siteRequest, eventHandler, ex);
-						}
+						});
 					} catch(Exception ex) {
 						LOG.error(String.format("putimportTrafficFlowObserved failed. "), ex);
 						error(null, eventHandler, ex);
@@ -919,7 +914,7 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 				apiRequest.setNumPATCH(0L);
 				apiRequest.initDeepApiRequest(siteRequest);
 				siteRequest.setApiRequest_(apiRequest);
-				body.put("inheritPk", body.getValue("id"));
+				body.put("inheritPk", Optional.ofNullable(body.getValue("id")).orElse(body.getValue("id")));
 				body.put("inheritPk", body.getValue("id"));
 				if(Optional.ofNullable(serviceRequest.getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getJsonArray("var")).orElse(new JsonArray()).stream().filter(s -> "refresh:false".equals(s)).count() > 0L) {
 					siteRequest.getRequestVars().put( "refresh", "false" );

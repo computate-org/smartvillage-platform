@@ -2,6 +2,9 @@ package org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobse
 
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.smartvillageview.enus.model.base.BaseModel;
+import io.vertx.core.json.JsonObject;
+import java.util.Date;
+import java.util.Set;
 import org.computate.vertx.api.ApiRequest;
 import org.computate.smartvillageview.enus.config.ConfigKeys;
 import java.util.Optional;
@@ -34,7 +37,6 @@ import org.computate.smartvillageview.enus.result.map.MapResult;
 import java.lang.String;
 import org.computate.vertx.search.list.SearchList;
 import org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLight;
-import io.vertx.core.json.JsonObject;
 import java.math.BigDecimal;
 import java.lang.Boolean;
 import java.lang.Integer;
@@ -579,6 +581,7 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 
 	protected static final Logger LOG = LoggerFactory.getLogger(TrafficFlowObserved.class);
 
+	public static final String TrafficFlowObserved_Description_enUS = "A device for watching vehicles in a lane of traffic on a road. ";
 	public static final String TrafficFlowObserved_AName_enUS = "a traffic flow observed";
 	public static final String TrafficFlowObserved_This_enUS = "this ";
 	public static final String TrafficFlowObserved_ThisName_enUS = "this traffic flow observed";
@@ -670,6 +673,118 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 
 	public String sqlEntityId() {
 		return entityId;
+	}
+
+	////////////////////
+	// simulationName //
+	////////////////////
+
+
+	/**	 The entity simulationName
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String simulationName;
+
+	/**	<br> The entity simulationName
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved.TrafficFlowObserved&fq=entiteVar_enUS_indexed_string:simulationName">Find the entity simulationName in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _simulationName(Wrap<String> w);
+
+	public String getSimulationName() {
+		return simulationName;
+	}
+	public void setSimulationName(String o) {
+		this.simulationName = TrafficFlowObserved.staticSetSimulationName(siteRequest_, o);
+	}
+	public static String staticSetSimulationName(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected TrafficFlowObserved simulationNameInit() {
+		Wrap<String> simulationNameWrap = new Wrap<String>().var("simulationName");
+		if(simulationName == null) {
+			_simulationName(simulationNameWrap);
+			Optional.ofNullable(simulationNameWrap.getO()).ifPresent(o -> {
+				setSimulationName(o);
+			});
+		}
+		return (TrafficFlowObserved)this;
+	}
+
+	public static String staticSearchSimulationName(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrSimulationName(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqSimulationName(SiteRequestEnUS siteRequest_, String o) {
+		return TrafficFlowObserved.staticSearchStrSimulationName(siteRequest_, TrafficFlowObserved.staticSearchSimulationName(siteRequest_, TrafficFlowObserved.staticSetSimulationName(siteRequest_, o)));
+	}
+
+	public String sqlSimulationName() {
+		return simulationName;
+	}
+
+	/////////////////
+	// sumocfgPath //
+	/////////////////
+
+
+	/**	 The entity sumocfgPath
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String sumocfgPath;
+
+	/**	<br> The entity sumocfgPath
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved.TrafficFlowObserved&fq=entiteVar_enUS_indexed_string:sumocfgPath">Find the entity sumocfgPath in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _sumocfgPath(Wrap<String> w);
+
+	public String getSumocfgPath() {
+		return sumocfgPath;
+	}
+	public void setSumocfgPath(String o) {
+		this.sumocfgPath = TrafficFlowObserved.staticSetSumocfgPath(siteRequest_, o);
+	}
+	public static String staticSetSumocfgPath(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected TrafficFlowObserved sumocfgPathInit() {
+		Wrap<String> sumocfgPathWrap = new Wrap<String>().var("sumocfgPath");
+		if(sumocfgPath == null) {
+			_sumocfgPath(sumocfgPathWrap);
+			Optional.ofNullable(sumocfgPathWrap.getO()).ifPresent(o -> {
+				setSumocfgPath(o);
+			});
+		}
+		return (TrafficFlowObserved)this;
+	}
+
+	public static String staticSearchSumocfgPath(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrSumocfgPath(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqSumocfgPath(SiteRequestEnUS siteRequest_, String o) {
+		return TrafficFlowObserved.staticSearchStrSumocfgPath(siteRequest_, TrafficFlowObserved.staticSearchSumocfgPath(siteRequest_, TrafficFlowObserved.staticSetSumocfgPath(siteRequest_, o)));
+	}
+
+	public String sqlSumocfgPath() {
+		return sumocfgPath;
 	}
 
 	/////////////////////////////
@@ -3258,6 +3373,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 			Promise<Void> promise2 = Promise.promise();
 			try {
 				entityIdInit();
+				simulationNameInit();
+				sumocfgPathInit();
 				promise2.complete();
 			} catch(Exception ex) {
 				promise2.fail(ex);
@@ -3370,6 +3487,10 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		switch(var) {
 			case "entityId":
 				return oTrafficFlowObserved.entityId;
+			case "simulationName":
+				return oTrafficFlowObserved.simulationName;
+			case "sumocfgPath":
+				return oTrafficFlowObserved.sumocfgPath;
 			case "smartTrafficLightSearch":
 				return oTrafficFlowObserved.smartTrafficLightSearch;
 			case "smartTrafficLight_":
@@ -3491,6 +3612,10 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		switch(entityVar) {
 		case "entityId":
 			return TrafficFlowObserved.staticSetEntityId(siteRequest_, o);
+		case "simulationName":
+			return TrafficFlowObserved.staticSetSimulationName(siteRequest_, o);
+		case "sumocfgPath":
+			return TrafficFlowObserved.staticSetSumocfgPath(siteRequest_, o);
 		case "address":
 			return TrafficFlowObserved.staticSetAddress(siteRequest_, o);
 		case "alternateName":
@@ -3583,6 +3708,10 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		switch(entityVar) {
 		case "entityId":
 			return TrafficFlowObserved.staticSearchEntityId(siteRequest_, (String)o);
+		case "simulationName":
+			return TrafficFlowObserved.staticSearchSimulationName(siteRequest_, (String)o);
+		case "sumocfgPath":
+			return TrafficFlowObserved.staticSearchSumocfgPath(siteRequest_, (String)o);
 		case "address":
 			return TrafficFlowObserved.staticSearchAddress(siteRequest_, (JsonObject)o);
 		case "alternateName":
@@ -3675,6 +3804,10 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		switch(entityVar) {
 		case "entityId":
 			return TrafficFlowObserved.staticSearchStrEntityId(siteRequest_, (String)o);
+		case "simulationName":
+			return TrafficFlowObserved.staticSearchStrSimulationName(siteRequest_, (String)o);
+		case "sumocfgPath":
+			return TrafficFlowObserved.staticSearchStrSumocfgPath(siteRequest_, (String)o);
 		case "address":
 			return TrafficFlowObserved.staticSearchStrAddress(siteRequest_, (String)o);
 		case "alternateName":
@@ -3767,6 +3900,10 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		switch(entityVar) {
 		case "entityId":
 			return TrafficFlowObserved.staticSearchFqEntityId(siteRequest_, o);
+		case "simulationName":
+			return TrafficFlowObserved.staticSearchFqSimulationName(siteRequest_, o);
+		case "sumocfgPath":
+			return TrafficFlowObserved.staticSearchFqSumocfgPath(siteRequest_, o);
 		case "address":
 			return TrafficFlowObserved.staticSearchFqAddress(siteRequest_, o);
 		case "alternateName":
@@ -3874,6 +4011,18 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 					setEntityId((String)val);
 				}
 				saves.add("entityId");
+				return val;
+			} else if("simulationname".equals(varLower)) {
+				if(val instanceof String) {
+					setSimulationName((String)val);
+				}
+				saves.add("simulationName");
+				return val;
+			} else if("sumocfgpath".equals(varLower)) {
+				if(val instanceof String) {
+					setSumocfgPath((String)val);
+				}
+				saves.add("sumocfgPath");
 				return val;
 			} else if("address".equals(varLower)) {
 				if(val instanceof String) {
@@ -4166,6 +4315,18 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 					oTrafficFlowObserved.setEntityId(entityId);
 			}
 
+			if(saves.contains("simulationName")) {
+				String simulationName = (String)doc.get("simulationName_docvalues_string");
+				if(simulationName != null)
+					oTrafficFlowObserved.setSimulationName(simulationName);
+			}
+
+			if(saves.contains("sumocfgPath")) {
+				String sumocfgPath = (String)doc.get("sumocfgPath_docvalues_string");
+				if(sumocfgPath != null)
+					oTrafficFlowObserved.setSumocfgPath(sumocfgPath);
+			}
+
 			if(saves.contains("address")) {
 				String address = (String)doc.get("address_docvalues_string");
 				if(address != null)
@@ -4402,6 +4563,12 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		if(entityId != null) {
 			doc.put("entityId_docvalues_string", entityId);
 		}
+		if(simulationName != null) {
+			doc.put("simulationName_docvalues_string", simulationName);
+		}
+		if(sumocfgPath != null) {
+			doc.put("sumocfgPath_docvalues_string", sumocfgPath);
+		}
 		if(address != null) {
 			doc.put("address_docvalues_string", address.toString());
 		}
@@ -4524,6 +4691,10 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		switch(entityVar) {
 			case "entityId":
 				return "entityId_docvalues_string";
+			case "simulationName":
+				return "simulationName_docvalues_string";
+			case "sumocfgPath":
+				return "sumocfgPath_docvalues_string";
 			case "address":
 				return "address_docvalues_string";
 			case "alternateName":
@@ -4609,6 +4780,10 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		switch(entityVar) {
 			case "entityId":
 				return "entityId_docvalues_string";
+			case "simulationName":
+				return "simulationName_docvalues_string";
+			case "sumocfgPath":
+				return "sumocfgPath_docvalues_string";
 			case "address":
 				return "address_docvalues_string";
 			case "alternateName":
@@ -4694,6 +4869,10 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		switch(searchVar) {
 			case "entityId_docvalues_string":
 				return "entityId";
+			case "simulationName_docvalues_string":
+				return "simulationName";
+			case "sumocfgPath_docvalues_string":
+				return "sumocfgPath";
 			case "address_docvalues_string":
 				return "address";
 			case "alternateName_docvalues_string":
@@ -4800,6 +4979,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		TrafficFlowObserved oTrafficFlowObserved = (TrafficFlowObserved)this;
 
 		oTrafficFlowObserved.setEntityId(Optional.ofNullable(doc.get("entityId_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oTrafficFlowObserved.setSimulationName(Optional.ofNullable(doc.get("simulationName_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oTrafficFlowObserved.setSumocfgPath(Optional.ofNullable(doc.get("sumocfgPath_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oTrafficFlowObserved.setAddress(Optional.ofNullable(doc.get("address_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oTrafficFlowObserved.setAlternateName(Optional.ofNullable(doc.get("alternateName_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oTrafficFlowObserved.setAreaServed(Optional.ofNullable(doc.get("areaServed_docvalues_string")).map(v -> v.toString()).orElse(null));
@@ -4853,6 +5034,10 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 			TrafficFlowObserved original = (TrafficFlowObserved)o;
 			if(!Objects.equals(entityId, original.getEntityId()))
 				apiRequest.addVars("entityId");
+			if(!Objects.equals(simulationName, original.getSimulationName()))
+				apiRequest.addVars("simulationName");
+			if(!Objects.equals(sumocfgPath, original.getSumocfgPath()))
+				apiRequest.addVars("sumocfgPath");
 			if(!Objects.equals(address, original.getAddress()))
 				apiRequest.addVars("address");
 			if(!Objects.equals(alternateName, original.getAlternateName()))
@@ -4941,6 +5126,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		StringBuilder sb = new StringBuilder();
 		sb.append(super.toString());
 		sb.append(Optional.ofNullable(entityId).map(v -> "entityId: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(simulationName).map(v -> "simulationName: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(sumocfgPath).map(v -> "sumocfgPath: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(address).map(v -> "address: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(alternateName).map(v -> "alternateName: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(areaServed).map(v -> "areaServed: \"" + v + "\"\n" ).orElse(""));
@@ -4984,6 +5171,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 
 	public static final String CLASS_SIMPLE_NAME = "TrafficFlowObserved";
 	public static final String VAR_entityId = "entityId";
+	public static final String VAR_simulationName = "simulationName";
+	public static final String VAR_sumocfgPath = "sumocfgPath";
 	public static final String VAR_smartTrafficLightSearch = "smartTrafficLightSearch";
 	public static final String VAR_smartTrafficLight_ = "smartTrafficLight_";
 	public static final String VAR_address = "address";
@@ -5038,6 +5227,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 	}
 	public static List<String> varsFqTrafficFlowObserved(List<String> vars) {
 		vars.add(VAR_entityId);
+		vars.add(VAR_simulationName);
+		vars.add(VAR_sumocfgPath);
 		vars.add(VAR_address);
 		vars.add(VAR_alternateName);
 		vars.add(VAR_areaServed);
@@ -5107,6 +5298,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 	}
 
 	public static final String DISPLAY_NAME_entityId = "entity ID";
+	public static final String DISPLAY_NAME_simulationName = "simulation name";
+	public static final String DISPLAY_NAME_sumocfgPath = "sumocfg path";
 	public static final String DISPLAY_NAME_smartTrafficLightSearch = "";
 	public static final String DISPLAY_NAME_smartTrafficLight_ = "";
 	public static final String DISPLAY_NAME_address = "address";
@@ -5155,6 +5348,10 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		switch(var) {
 		case VAR_entityId:
 			return DISPLAY_NAME_entityId;
+		case VAR_simulationName:
+			return DISPLAY_NAME_simulationName;
+		case VAR_sumocfgPath:
+			return DISPLAY_NAME_sumocfgPath;
 		case VAR_smartTrafficLightSearch:
 			return DISPLAY_NAME_smartTrafficLightSearch;
 		case VAR_smartTrafficLight_:
@@ -5329,6 +5526,10 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		switch(var) {
 		case VAR_entityId:
 			return "String";
+		case VAR_simulationName:
+			return "String";
+		case VAR_sumocfgPath:
+			return "String";
 		case VAR_smartTrafficLightSearch:
 			return "SearchList";
 		case VAR_smartTrafficLight_:
@@ -5425,6 +5626,10 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		switch(var) {
 		case VAR_entityId:
 			return 5;
+		case VAR_simulationName:
+			return 3;
+		case VAR_sumocfgPath:
+			return 3;
 		case VAR_address:
 			return 5;
 		case VAR_alternateName:
@@ -5510,6 +5715,10 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		switch(var) {
 		case VAR_entityId:
 			return 1;
+		case VAR_simulationName:
+			return 1;
+		case VAR_sumocfgPath:
+			return 2;
 		case VAR_address:
 			return 2;
 		case VAR_alternateName:

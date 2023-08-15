@@ -753,24 +753,4 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 			w.o(updatedPerformance.getJsonArray(8));
 		}
 	}
-
-	/**
-	 * Description: Prepares a message record to be put on the event bus
-	 */
-	public JsonObject patchSimulationReportFuture(JsonObject exchangeBody) {
-
-		JsonObject params = new JsonObject();
-		params.put("body", exchangeBody);
-		params.put("cookie", new JsonObject());
-		params.put("header", new JsonObject());
-		params.put("form", new JsonObject());
-		params.put("path", new JsonObject());
-		JsonObject query = new JsonObject();
-		query.put("softCommit", true);
-		query.put("fq", new JsonArray().add(String.format("pk:%s", exchangeBody.getString("pk"))));
-		params.put("query", query);
-		JsonObject context = new JsonObject().put("params", params);
-		JsonObject json = new JsonObject().put("context", context);
-		return json;
-	}
 }

@@ -514,6 +514,11 @@ public class TrafficSimulationGenPage extends TrafficSimulationGenPageGen<BaseMo
 	}
 
 	@Override
+	protected void _pageDescription(Wrap<String> c) {
+			c.o("A SUMO Traffic Simulation");
+	}
+
+	@Override
 	protected void _pageImageUri(Wrap<String> c) {
 			c.o("/png/traffic-simulation-999.png");
 	}
