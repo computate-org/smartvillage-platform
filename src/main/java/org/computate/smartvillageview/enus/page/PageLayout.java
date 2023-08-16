@@ -246,6 +246,12 @@ public class PageLayout extends PageLayoutGen<Object> {
 	}
 
 	/**
+	 * Description: The required roles to access this page
+	 */
+	protected void _roleForRead(List<String> l) {
+	}
+
+	/**
 	 * Description: The admin roles required to access this page
 	 */
 	protected void _authRoleAdmin(List<String> l) {

@@ -500,7 +500,9 @@ public class TrafficFlowObservedGenPage extends TrafficFlowObservedGenPageGen<Ma
 
 	@Override
 	protected void _roleRequired(List<String> l) {
-		l.add(siteRequest_.getConfig().getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_TrafficFlowObserved"));
+		Optional.ofNullable(siteRequest_.getConfig().getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_TrafficFlowObserved")).ifPresent(v -> {
+			l.add(v);
+		});
 	}
 
 	@Override

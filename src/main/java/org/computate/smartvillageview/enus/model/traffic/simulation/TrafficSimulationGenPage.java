@@ -505,7 +505,19 @@ public class TrafficSimulationGenPage extends TrafficSimulationGenPageGen<BaseMo
 
 	@Override
 	protected void _roleRequired(List<String> l) {
-		l.add(siteRequest_.getConfig().getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_TrafficSimulation"));
+		Optional.ofNullable(siteRequest_.getConfig().getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_TrafficSimulation")).ifPresent(v -> {
+			l.add(v);
+		});
+	}
+
+	@Override
+	protected void _roleForRead(List<String> l) {
+		Optional.ofNullable(siteRequest_.getConfig().getString(ConfigKeys.AUTH_ROLE_READ_REQUIRED + "_TrafficSimulation")).ifPresent(v -> {
+			l.add(v);
+		});
+		Optional.ofNullable(siteRequest_.getConfig().getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_TrafficSimulation")).ifPresent(v -> {
+			l.add(v);
+		});
 	}
 
 	@Override

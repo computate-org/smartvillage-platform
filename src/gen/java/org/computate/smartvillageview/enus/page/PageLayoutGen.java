@@ -1742,6 +1742,80 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		return PageLayout.staticSearchStrRoleRequired(siteRequest_, PageLayout.staticSearchRoleRequired(siteRequest_, PageLayout.staticSetRoleRequired(siteRequest_, o)));
 	}
 
+	/////////////////
+	// roleForRead //
+	/////////////////
+
+
+	/**	 The entity roleForRead
+	 *	 It is constructed before being initialized with the constructor by default. 
+	 */
+	@JsonProperty
+	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
+	@JsonInclude(Include.NON_NULL)
+	protected List<String> roleForRead = new ArrayList<String>();
+
+	/**	<br> The entity roleForRead
+	 *  It is constructed before being initialized with the constructor by default. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.PageLayout&fq=entiteVar_enUS_indexed_string:roleForRead">Find the entity roleForRead in Solr</a>
+	 * <br>
+	 * @param l is the entity already constructed. 
+	 **/
+	protected abstract void _roleForRead(List<String> l);
+
+	public List<String> getRoleForRead() {
+		return roleForRead;
+	}
+
+	public void setRoleForRead(List<String> roleForRead) {
+		this.roleForRead = roleForRead;
+	}
+	public void setRoleForRead(String o) {
+		String l = PageLayout.staticSetRoleForRead(siteRequest_, o);
+		if(l != null)
+			addRoleForRead(l);
+	}
+	public static String staticSetRoleForRead(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	public PageLayout addRoleForRead(String...objects) {
+		for(String o : objects) {
+			addRoleForRead(o);
+		}
+		return (PageLayout)this;
+	}
+	public PageLayout addRoleForRead(String o) {
+		if(o != null)
+			this.roleForRead.add(o);
+		return (PageLayout)this;
+	}
+	@JsonIgnore
+	public void setRoleForRead(JsonArray objects) {
+		roleForRead.clear();
+		if(objects == null)
+			return;
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
+			addRoleForRead(o);
+		}
+	}
+	protected PageLayout roleForReadInit() {
+		_roleForRead(roleForRead);
+		return (PageLayout)this;
+	}
+
+	public static String staticSearchRoleForRead(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrRoleForRead(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqRoleForRead(SiteRequestEnUS siteRequest_, String o) {
+		return PageLayout.staticSearchStrRoleForRead(siteRequest_, PageLayout.staticSearchRoleForRead(siteRequest_, PageLayout.staticSetRoleForRead(siteRequest_, o)));
+	}
+
 	///////////////////
 	// authRoleAdmin //
 	///////////////////
@@ -4304,6 +4378,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 				pageTitleInit();
 				rolesInit();
 				roleRequiredInit();
+				roleForReadInit();
 				authRoleAdminInit();
 				authRoleSuperAdminInit();
 				statsInit();
@@ -4474,6 +4549,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 				return oPageLayout.roles;
 			case "roleRequired":
 				return oPageLayout.roleRequired;
+			case "roleForRead":
+				return oPageLayout.roleForRead;
 			case "authRoleAdmin":
 				return oPageLayout.authRoleAdmin;
 			case "authRoleSuperAdmin":
@@ -4651,6 +4728,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSetRoles(siteRequest_, o);
 		case "roleRequired":
 			return PageLayout.staticSetRoleRequired(siteRequest_, o);
+		case "roleForRead":
+			return PageLayout.staticSetRoleForRead(siteRequest_, o);
 		case "authRoleAdmin":
 			return PageLayout.staticSetAuthRoleAdmin(siteRequest_, o);
 		case "authRoleSuperAdmin":
@@ -4793,6 +4872,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSearchRoles(siteRequest_, (String)o);
 		case "roleRequired":
 			return PageLayout.staticSearchRoleRequired(siteRequest_, (String)o);
+		case "roleForRead":
+			return PageLayout.staticSearchRoleForRead(siteRequest_, (String)o);
 		case "authRoleAdmin":
 			return PageLayout.staticSearchAuthRoleAdmin(siteRequest_, (String)o);
 		case "authRoleSuperAdmin":
@@ -4935,6 +5016,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSearchStrRoles(siteRequest_, (String)o);
 		case "roleRequired":
 			return PageLayout.staticSearchStrRoleRequired(siteRequest_, (String)o);
+		case "roleForRead":
+			return PageLayout.staticSearchStrRoleForRead(siteRequest_, (String)o);
 		case "authRoleAdmin":
 			return PageLayout.staticSearchStrAuthRoleAdmin(siteRequest_, (String)o);
 		case "authRoleSuperAdmin":
@@ -5077,6 +5160,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSearchFqRoles(siteRequest_, o);
 		case "roleRequired":
 			return PageLayout.staticSearchFqRoleRequired(siteRequest_, o);
+		case "roleForRead":
+			return PageLayout.staticSearchFqRoleForRead(siteRequest_, o);
 		case "authRoleAdmin":
 			return PageLayout.staticSearchFqAuthRoleAdmin(siteRequest_, o);
 		case "authRoleSuperAdmin":
@@ -5198,6 +5283,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	public static final String VAR_pageTitle = "pageTitle";
 	public static final String VAR_roles = "roles";
 	public static final String VAR_roleRequired = "roleRequired";
+	public static final String VAR_roleForRead = "roleForRead";
 	public static final String VAR_authRoleAdmin = "authRoleAdmin";
 	public static final String VAR_authRoleSuperAdmin = "authRoleSuperAdmin";
 	public static final String VAR_stats = "stats";
@@ -5272,6 +5358,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	public static final String DISPLAY_NAME_pageTitle = "";
 	public static final String DISPLAY_NAME_roles = "";
 	public static final String DISPLAY_NAME_roleRequired = "";
+	public static final String DISPLAY_NAME_roleForRead = "";
 	public static final String DISPLAY_NAME_authRoleAdmin = "";
 	public static final String DISPLAY_NAME_authRoleSuperAdmin = "";
 	public static final String DISPLAY_NAME_stats = "";
@@ -5381,6 +5468,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return DISPLAY_NAME_roles;
 		case VAR_roleRequired:
 			return DISPLAY_NAME_roleRequired;
+		case VAR_roleForRead:
+			return DISPLAY_NAME_roleForRead;
 		case VAR_authRoleAdmin:
 			return DISPLAY_NAME_authRoleAdmin;
 		case VAR_authRoleSuperAdmin:

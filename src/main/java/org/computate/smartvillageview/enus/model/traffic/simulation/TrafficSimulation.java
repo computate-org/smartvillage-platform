@@ -40,7 +40,8 @@ import org.computate.smartvillageview.enus.model.base.BaseModel;
  * PageSuper.MapSearchPage.enUS: BaseModelPage
  * ApiUri.MapSearchPage.enUS: /traffic-simulation-map
  * 
- * Role.enUS: SiteAdmin
+ * Role.enUS: SuperAdmin
+ * RoleRead.enUS: SiteAdmin
  * Saves: true
  * 
  * AName.enUS: a traffic simulation
@@ -55,8 +56,6 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 6
-	 * HtmCell: 1
 	 * Facet: true
 	 * DisplayName: Start date and Time
 	 * Description: The start date and time. 
@@ -83,8 +82,6 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * DocValues: true
 	 * Persist: true
 	 * DisplayName: sumocfg path
-	 * HtmRow: 4
-	 * HtmCell: 1
 	 * Facet: true
 	 * Default: /usr/local/src/TLC/input/Veberod_intersection_pedestrian.sumocfg
 	 */
@@ -96,8 +93,6 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * DocValues: true
 	 * Persist: true
 	 * DisplayName: Floating Car Data file path
-	 * HtmRow: 5
-	 * HtmCell: 1
 	 * Facet: true
 	 * Default: /usr/local/src/TLC/output/veberod-fcd.xml
 	 */
@@ -120,8 +115,6 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Persist: true
 	 * DisplayName: start seconds
 	 * Description: -b, --begin TIME Defines the begin time in seconds; The simulation starts at this time
-	 * HtmRow: 6
-	 * HtmCell: 1
 	 * Facet: true
 	 * Default: 0
 	 */
@@ -134,8 +127,6 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Persist: true
 	 * DisplayName: end seconds
 	 * Description: -e, --end TIME Defines the end time in seconds; The simulation ends at this time
-	 * HtmRow: 6
-	 * HtmCell: 2
 	 * Facet: true
 	 * Default: 300
 	 */
@@ -148,8 +139,6 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Persist: true
 	 * DisplayName: step seconds
 	 * Description: --step-length TIME Defines the step duration in seconds
-	 * HtmRow: 6
-	 * HtmCell: 3
 	 * Facet: true
 	 * Default: 0.1
 	 */
@@ -160,8 +149,6 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 7
-	 * HtmCell: 1
 	 * Facet: true
 	 * DisplayName: Average vehicle/min from WEST to EAST
 	 * Description: 
@@ -176,8 +163,6 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 7
-	 * HtmCell: 2
 	 * Facet: true
 	 * DisplayName: Average vehicle/min from SOUTH to NORTH
 	 * Description: 
@@ -192,8 +177,6 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 7
-	 * HtmCell: 3
 	 * Facet: true
 	 * DisplayName: Demand scaling factor (multiplies all vehicle demands)
 	 * Description: 
@@ -208,8 +191,6 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 8
-	 * HtmCell: 1
 	 * Facet: true
 	 * DisplayName: Average pedestrian/min from WEST to EAST
 	 * Description: 
@@ -224,8 +205,6 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 8
-	 * HtmCell: 2
 	 * Facet: true
 	 * DisplayName: Average pedestrian/min from WEST to EAST
 	 * Description: 
@@ -240,8 +219,6 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 8
-	 * HtmCell: 3
 	 * Facet: true
 	 * DisplayName: Demand scaling factor (multiplies all pedestrian demands)
 	 * Description: 
@@ -269,8 +246,6 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 9
-	 * HtmCell: 1
 	 * Facet: true
 	 * DisplayName: Min GREEN time for WEST-EAST traffic (sec)
 	 * Description: 
@@ -285,8 +260,6 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 9
-	 * HtmCell: 2
 	 * Facet: true
 	 * DisplayName: Max GREEN time for WEST-EAST traffic (sec)
 	 * Description: 
@@ -301,8 +274,6 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 10
-	 * HtmCell: 1
 	 * Facet: true
 	 * DisplayName: Min GREEN time for SOUTH-NORTH traffic (sec)
 	 * Description: 
@@ -317,8 +288,6 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 10
-	 * HtmCell: 2
 	 * Facet: true
 	 * DisplayName: Max GREEN time for SOUTH-NORTH traffic (sec)
 	 * Description: 
@@ -333,8 +302,6 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 11
-	 * HtmCell: 1
 	 * Facet: true
 	 * DisplayName: Pedestrian waiting time tolerance threshold for NORTH-SOUTH (sec)
 	 * Description: 
@@ -349,8 +316,6 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 11
-	 * HtmCell: 2
 	 * Facet: true
 	 * DisplayName: Pedestrian waiting time tolerance threshold for WEST-EAST (sec)
 	 * Description: 
@@ -365,8 +330,6 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 12
-	 * HtmCell: 1
 	 * Facet: true
 	 * DisplayName: Vehicle queue length threshold between low-high content for WEST-EAST
 	 * Description: 
@@ -381,8 +344,6 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * {@inheritDocentiteNomAffichage}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 12
-	 * HtmCell: 2
 	 * Facet: true
 	 * DisplayName: Vehicle queue length threshold between low-high content for SOUTH-NORTH
 	 * Description: 
@@ -397,8 +358,6 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 13
-	 * HtmCell: 1
 	 * Facet: true
 	 * DisplayName: Pedestrian queue length threshold between low-high content for NORTH-SOUTH
 	 * Description: 
@@ -413,8 +372,6 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 13
-	 * HtmCell: 2
 	 * Facet: true
 	 * DisplayName: Pedestrian queue length threshold between low-high content for WEST-EAST
 	 * Description: 
@@ -429,8 +386,6 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 14
-	 * HtmCell: 2
 	 * Facet: true
 	 * DisplayName: Simulation time step (sec)
 	 * Description: 
@@ -445,8 +400,6 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 14
-	 * HtmCell: 1
 	 * Facet: true
 	 * DisplayName: time for each round of traffic simulation (sec)
 	 * Description: Time duration of each simulated sample path. 
@@ -461,8 +414,6 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 15
-	 * HtmCell: 1
 	 * Facet: true
 	 * DisplayName: Number of simulation repetitions with same input (for statistical accuracy)
 	 * Description: Number of repeats per round. 
@@ -477,8 +428,6 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 15
-	 * HtmCell: 2
 	 * Facet: true
 	 * DisplayName: Number of parameter update iterations before output
 	 * Description: Total iterations to update performance. 
@@ -493,8 +442,6 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Relate: SimulationReport.simulationKey
-	 * HtmRow: 16
-	 * HtmCell: 1
 	 * Facet: true
 	 * DisplayName: simulation reports
 	 * Description: The generated reports for this simulation

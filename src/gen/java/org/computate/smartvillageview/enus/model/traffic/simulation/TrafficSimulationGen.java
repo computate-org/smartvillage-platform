@@ -174,12 +174,12 @@ import org.computate.search.response.solr.SolrResponse;
  * <p>
  *   If a super class of this Java class with `Model: true`, then the child class will also inherit `Promise: true`. 
  * </p>
- * Role.enUS: SiteAdmin
+ * Role.enUS: SuperAdmin
  * <p>
- * This class contains a comment <b>"Role.enUS: SiteAdmin"</b>, which identifies the default role name "SiteAdmin" of the OAuth2/OpenID Connect user role required to access this TrafficSimulation API. 
+ * This class contains a comment <b>"Role.enUS: SuperAdmin"</b>, which identifies the default role name "SuperAdmin" of the OAuth2/OpenID Connect user role required to access this TrafficSimulation API. 
  * It's possible to reconfigure the roles required to access the TrafficSimulation API by configuring an environment variable like this: 
  * </p>
- * <pre>AUTH_ROLE_REQUIRED_TrafficSimulation: ["SiteAdmin"]</pre>
+ * <pre>AUTH_ROLE_REQUIRED_TrafficSimulation: ["SuperAdmin"]</pre>
  * AName.enUS: a traffic simulation
  * <p>This class contains a comment <b>"AName.enUS: a traffic simulation"</b>, which identifies the language context to describe a TrafficSimulation as "a traffic simulation". 
  * </p>
@@ -5147,62 +5147,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 
 	public static Integer htmRowTrafficSimulation(String var) {
 		switch(var) {
-		case VAR_startDateTime:
-			return 6;
 		case VAR_simulationName:
 			return 3;
-		case VAR_sumocfgPath:
-			return 4;
-		case VAR_fcdFilePath:
-			return 5;
-		case VAR_startSeconds:
-			return 6;
-		case VAR_endSeconds:
-			return 6;
-		case VAR_stepSeconds:
-			return 6;
-		case VAR_paramAvgVehiclePerMinFromWestToEast:
-			return 7;
-		case VAR_paramAvgVehiclePerMinFromSouthToNorth:
-			return 7;
-		case VAR_paramVehicleDemandScalingFactor:
-			return 7;
-		case VAR_paramAvgPedestrianPerMinFromWestToEast:
-			return 8;
-		case VAR_paramAvgPedestrianPerMinFromSouthToNorth:
-			return 8;
-		case VAR_paramPedestrianDemandScalingFactor:
-			return 8;
-		case VAR_paramMinGreenTimeSecWestEast:
-			return 9;
-		case VAR_paramMaxGreenTimeSecWestEast:
-			return 9;
-		case VAR_paramMinGreenTimeSecSouthNorth:
-			return 10;
-		case VAR_paramMaxGreenTimeSecSouthNorth:
-			return 10;
-		case VAR_paramPedestrianWaitThresholdSecNorthSouth:
-			return 11;
-		case VAR_paramPedestrianWaitThresholdSecWestEast:
-			return 11;
-		case VAR_paramVehicleQueueThresholdWestEast:
-			return 12;
-		case VAR_paramVehicleQueueThresholdSouthNorth:
-			return 12;
-		case VAR_paramPedestrianQueueThresholdNorthSouth:
-			return 13;
-		case VAR_paramPedestrianQueueThresholdWestEast:
-			return 13;
-		case VAR_paramStepSize:
-			return 14;
-		case VAR_paramRunTime:
-			return 14;
-		case VAR_paramItersPerPar:
-			return 15;
-		case VAR_paramTotalIterNum:
-			return 15;
-		case VAR_reportKeys:
-			return 16;
 			default:
 				return BaseModel.htmRowBaseModel(var);
 		}
@@ -5210,61 +5156,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 
 	public static Integer htmCellTrafficSimulation(String var) {
 		switch(var) {
-		case VAR_startDateTime:
-			return 1;
 		case VAR_simulationName:
-			return 1;
-		case VAR_sumocfgPath:
-			return 1;
-		case VAR_fcdFilePath:
-			return 1;
-		case VAR_startSeconds:
-			return 1;
-		case VAR_endSeconds:
-			return 2;
-		case VAR_stepSeconds:
-			return 3;
-		case VAR_paramAvgVehiclePerMinFromWestToEast:
-			return 1;
-		case VAR_paramAvgVehiclePerMinFromSouthToNorth:
-			return 2;
-		case VAR_paramVehicleDemandScalingFactor:
-			return 3;
-		case VAR_paramAvgPedestrianPerMinFromWestToEast:
-			return 1;
-		case VAR_paramAvgPedestrianPerMinFromSouthToNorth:
-			return 2;
-		case VAR_paramPedestrianDemandScalingFactor:
-			return 3;
-		case VAR_paramMinGreenTimeSecWestEast:
-			return 1;
-		case VAR_paramMaxGreenTimeSecWestEast:
-			return 2;
-		case VAR_paramMinGreenTimeSecSouthNorth:
-			return 1;
-		case VAR_paramMaxGreenTimeSecSouthNorth:
-			return 2;
-		case VAR_paramPedestrianWaitThresholdSecNorthSouth:
-			return 1;
-		case VAR_paramPedestrianWaitThresholdSecWestEast:
-			return 2;
-		case VAR_paramVehicleQueueThresholdWestEast:
-			return 1;
-		case VAR_paramVehicleQueueThresholdSouthNorth:
-			return 2;
-		case VAR_paramPedestrianQueueThresholdNorthSouth:
-			return 1;
-		case VAR_paramPedestrianQueueThresholdWestEast:
-			return 2;
-		case VAR_paramStepSize:
-			return 2;
-		case VAR_paramRunTime:
-			return 1;
-		case VAR_paramItersPerPar:
-			return 1;
-		case VAR_paramTotalIterNum:
-			return 2;
-		case VAR_reportKeys:
 			return 1;
 			default:
 				return BaseModel.htmCellBaseModel(var);

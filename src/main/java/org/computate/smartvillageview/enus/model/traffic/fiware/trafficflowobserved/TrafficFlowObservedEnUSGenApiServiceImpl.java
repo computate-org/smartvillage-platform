@@ -123,7 +123,10 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 					)
 				));
 			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_TrafficFlowObserved")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+				if(
+						!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_TrafficFlowObserved")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						&& !Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_READ_REQUIRED + "_TrafficFlowObserved")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						) {
 					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 					eventHandler.handle(Future.succeededFuture(
 						new ServiceResponse(401, "UNAUTHORIZED",
@@ -276,7 +279,10 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 					)
 				));
 			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_TrafficFlowObserved")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+				if(
+						!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_TrafficFlowObserved")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						&& !Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_READ_REQUIRED + "_TrafficFlowObserved")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						) {
 					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 					eventHandler.handle(Future.succeededFuture(
 						new ServiceResponse(401, "UNAUTHORIZED",
@@ -368,7 +374,10 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 					)
 				));
 			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_TrafficFlowObserved")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+				if(
+						!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_TrafficFlowObserved")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						&& !Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_READ_REQUIRED + "_TrafficFlowObserved")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						) {
 					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 					eventHandler.handle(Future.succeededFuture(
 						new ServiceResponse(401, "UNAUTHORIZED",
@@ -604,7 +613,10 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 					)
 				));
 			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_TrafficFlowObserved")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+				if(
+						!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_TrafficFlowObserved")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						&& !Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_READ_REQUIRED + "_TrafficFlowObserved")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						) {
 					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 					eventHandler.handle(Future.succeededFuture(
 						new ServiceResponse(401, "UNAUTHORIZED",
@@ -785,7 +797,10 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 					)
 				));
 			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_TrafficFlowObserved")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+				if(
+						!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_TrafficFlowObserved")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						&& !Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_READ_REQUIRED + "_TrafficFlowObserved")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						) {
 					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 					eventHandler.handle(Future.succeededFuture(
 						new ServiceResponse(401, "UNAUTHORIZED",
@@ -914,7 +929,8 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 				apiRequest.setNumPATCH(0L);
 				apiRequest.initDeepApiRequest(siteRequest);
 				siteRequest.setApiRequest_(apiRequest);
-				body.put("inheritPk", Optional.ofNullable(body.getValue("id")).orElse(body.getValue("id")));
+				String inheritPk = Optional.ofNullable(body.getString(TrafficFlowObserved.VAR_id)).orElse(body.getString(TrafficFlowObserved.VAR_id));
+				body.put("inheritPk", inheritPk);
 				body.put("inheritPk", body.getValue("id"));
 				if(Optional.ofNullable(serviceRequest.getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getJsonArray("var")).orElse(new JsonArray()).stream().filter(s -> "refresh:false".equals(s)).count() > 0L) {
 					siteRequest.getRequestVars().put( "refresh", "false" );
@@ -926,7 +942,7 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 				searchList.setC(TrafficFlowObserved.class);
 				searchList.fq("deleted_docvalues_boolean:false");
 				searchList.fq("archived_docvalues_boolean:false");
-				searchList.fq("inheritPk_docvalues_string:" + SearchTool.escapeQueryChars(body.getString(TrafficFlowObserved.VAR_id)));
+				searchList.fq("inheritPk_docvalues_string:" + SearchTool.escapeQueryChars(inheritPk));
 				searchList.promiseDeepForClass(siteRequest).onSuccess(a -> {
 					try {
 						if(searchList.size() >= 1) {
@@ -1066,7 +1082,10 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 					)
 				));
 			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_TrafficFlowObserved")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+				if(
+						!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_TrafficFlowObserved")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						&& !Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_READ_REQUIRED + "_TrafficFlowObserved")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						) {
 					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 					eventHandler.handle(Future.succeededFuture(
 						new ServiceResponse(401, "UNAUTHORIZED",
