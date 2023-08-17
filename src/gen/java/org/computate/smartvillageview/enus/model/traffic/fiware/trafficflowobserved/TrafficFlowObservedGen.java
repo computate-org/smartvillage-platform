@@ -5629,7 +5629,7 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		case VAR_simulationName:
 			return 3;
 		case VAR_sumocfgPath:
-			return 3;
+			return 4;
 		case VAR_address:
 			return 5;
 		case VAR_alternateName:
@@ -5718,7 +5718,7 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		case VAR_simulationName:
 			return 1;
 		case VAR_sumocfgPath:
-			return 2;
+			return 1;
 		case VAR_address:
 			return 2;
 		case VAR_alternateName:

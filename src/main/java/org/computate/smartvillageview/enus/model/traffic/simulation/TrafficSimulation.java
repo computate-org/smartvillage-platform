@@ -2,12 +2,13 @@ package org.computate.smartvillageview.enus.model.traffic.simulation;
 
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 import org.computate.search.wrap.Wrap;
 import org.computate.smartvillageview.enus.model.base.BaseModel;
+
+import io.vertx.core.json.JsonObject;
 
 /**
  * {@inheritDoc}
@@ -75,6 +76,19 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Required: true
 	 */
 	protected void _simulationName(Wrap<String> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * DisplayName: location
+	 * Description: Geojson reference to the item. It can be Point, LineString, Polygon, MultiPoint, MultiLineString or MultiPolygon
+	 * HtmRow: 3
+	 * HtmCell: 2
+	 * Facet: true
+	 */
+	protected void _location(Wrap<JsonObject> w) {
 	}
 
 	/**

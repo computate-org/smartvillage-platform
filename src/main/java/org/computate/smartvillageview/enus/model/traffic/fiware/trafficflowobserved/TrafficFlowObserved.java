@@ -74,8 +74,8 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 	 * DocValues: true
 	 * Persist: true
 	 * DisplayName: sumocfg path
-	 * HtmRow: 3
-	 * HtmCell: 2
+	 * HtmRow: 4
+	 * HtmCell: 1
 	 * Facet: true
 	 */
 	protected void _sumocfgPath(Wrap<String> w) {
@@ -349,19 +349,6 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 	 */
 	protected void _laneId(Wrap<Integer> w) {
 	}
-
-//	/**
-//	 * {@inheritDoc}
-//	 * DocValues: true
-//	 * Persist: true
-//	 * DisplayName: location
-//	 * Description: Geojson reference to the item. It can be Point, LineString, Polygon, MultiPoint, MultiLineString or MultiPolygon
-//	 * HtmRow: 11
-//	 * HtmCell: 2
-//	 * Facet: true
-//	 */
-//	protected void _location(Wrap<JsonObject> w) {
-//	}
 
 	/**
 	 * {@inheritDoc}

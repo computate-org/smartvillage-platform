@@ -372,6 +372,70 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		return simulationName;
 	}
 
+	//////////////
+	// location //
+	//////////////
+
+
+	/**	 The entity location
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected JsonObject location;
+
+	/**	<br> The entity location
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation&fq=entiteVar_enUS_indexed_string:location">Find the entity location in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _location(Wrap<JsonObject> w);
+
+	public JsonObject getLocation() {
+		return location;
+	}
+
+	public void setLocation(JsonObject location) {
+		this.location = location;
+	}
+	@JsonIgnore
+	public void setLocation(String o) {
+		this.location = TrafficSimulation.staticSetLocation(siteRequest_, o);
+	}
+	public static JsonObject staticSetLocation(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonObject(o);
+		}
+		return null;
+	}
+	protected TrafficSimulation locationInit() {
+		Wrap<JsonObject> locationWrap = new Wrap<JsonObject>().var("location");
+		if(location == null) {
+			_location(locationWrap);
+			Optional.ofNullable(locationWrap.getO()).ifPresent(o -> {
+				setLocation(o);
+			});
+		}
+		return (TrafficSimulation)this;
+	}
+
+	public static String staticSearchLocation(SiteRequestEnUS siteRequest_, JsonObject o) {
+		return o.toString();
+	}
+
+	public static String staticSearchStrLocation(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqLocation(SiteRequestEnUS siteRequest_, String o) {
+		return TrafficSimulation.staticSearchStrLocation(siteRequest_, TrafficSimulation.staticSearchLocation(siteRequest_, TrafficSimulation.staticSetLocation(siteRequest_, o)));
+	}
+
+	public JsonObject sqlLocation() {
+		return location;
+	}
+
 	/////////////////
 	// sumocfgPath //
 	/////////////////
@@ -3034,6 +3098,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			try {
 				startDateTimeInit();
 				simulationNameInit();
+				locationInit();
 				sumocfgPathInit();
 				fcdFilePathInit();
 				netFilePathInit();
@@ -3127,6 +3192,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 				return oTrafficSimulation.startDateTime;
 			case "simulationName":
 				return oTrafficSimulation.simulationName;
+			case "location":
+				return oTrafficSimulation.location;
 			case "sumocfgPath":
 				return oTrafficSimulation.sumocfgPath;
 			case "fcdFilePath":
@@ -3247,6 +3314,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return TrafficSimulation.staticSetStartDateTime(siteRequest_, o);
 		case "simulationName":
 			return TrafficSimulation.staticSetSimulationName(siteRequest_, o);
+		case "location":
+			return TrafficSimulation.staticSetLocation(siteRequest_, o);
 		case "sumocfgPath":
 			return TrafficSimulation.staticSetSumocfgPath(siteRequest_, o);
 		case "fcdFilePath":
@@ -3337,6 +3406,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return TrafficSimulation.staticSearchStartDateTime(siteRequest_, (ZonedDateTime)o);
 		case "simulationName":
 			return TrafficSimulation.staticSearchSimulationName(siteRequest_, (String)o);
+		case "location":
+			return TrafficSimulation.staticSearchLocation(siteRequest_, (JsonObject)o);
 		case "sumocfgPath":
 			return TrafficSimulation.staticSearchSumocfgPath(siteRequest_, (String)o);
 		case "fcdFilePath":
@@ -3427,6 +3498,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return TrafficSimulation.staticSearchStrStartDateTime(siteRequest_, (Date)o);
 		case "simulationName":
 			return TrafficSimulation.staticSearchStrSimulationName(siteRequest_, (String)o);
+		case "location":
+			return TrafficSimulation.staticSearchStrLocation(siteRequest_, (String)o);
 		case "sumocfgPath":
 			return TrafficSimulation.staticSearchStrSumocfgPath(siteRequest_, (String)o);
 		case "fcdFilePath":
@@ -3517,6 +3590,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return TrafficSimulation.staticSearchFqStartDateTime(siteRequest_, o);
 		case "simulationName":
 			return TrafficSimulation.staticSearchFqSimulationName(siteRequest_, o);
+		case "location":
+			return TrafficSimulation.staticSearchFqLocation(siteRequest_, o);
 		case "sumocfgPath":
 			return TrafficSimulation.staticSearchFqSumocfgPath(siteRequest_, o);
 		case "fcdFilePath":
@@ -3628,6 +3703,14 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 					setSimulationName((String)val);
 				}
 				saves.add("simulationName");
+				return val;
+			} else if("location".equals(varLower)) {
+				if(val instanceof String) {
+					setLocation((String)val);
+				} else if(val instanceof JsonObject) {
+					setLocation((JsonObject)val);
+				}
+				saves.add("location");
 				return val;
 			} else if("sumocfgpath".equals(varLower)) {
 				if(val instanceof String) {
@@ -3946,6 +4029,12 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 					oTrafficSimulation.setSimulationName(simulationName);
 			}
 
+			if(saves.contains("location")) {
+				String location = (String)doc.get("location_docvalues_string");
+				if(location != null)
+					oTrafficSimulation.setLocation(location);
+			}
+
 			if(saves.contains("sumocfgPath")) {
 				String sumocfgPath = (String)doc.get("sumocfgPath_docvalues_string");
 				if(sumocfgPath != null)
@@ -4159,6 +4248,9 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		if(simulationName != null) {
 			doc.put("simulationName_docvalues_string", simulationName);
 		}
+		if(location != null) {
+			doc.put("location_docvalues_string", location.toString());
+		}
 		if(sumocfgPath != null) {
 			doc.put("sumocfgPath_docvalues_string", sumocfgPath);
 		}
@@ -4303,6 +4395,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 				return "startDateTime_docvalues_date";
 			case "simulationName":
 				return "simulationName_docvalues_string";
+			case "location":
+				return "location_docvalues_string";
 			case "sumocfgPath":
 				return "sumocfgPath_docvalues_string";
 			case "fcdFilePath":
@@ -4382,6 +4476,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 				return "startDateTime_docvalues_date";
 			case "simulationName":
 				return "simulationName_docvalues_string";
+			case "location":
+				return "location_docvalues_string";
 			case "sumocfgPath":
 				return "sumocfgPath_docvalues_string";
 			case "fcdFilePath":
@@ -4461,6 +4557,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 				return "startDateTime";
 			case "simulationName_docvalues_string":
 				return "simulationName";
+			case "location_docvalues_string":
+				return "location";
 			case "sumocfgPath_docvalues_string":
 				return "sumocfgPath";
 			case "fcdFilePath_docvalues_string":
@@ -4560,6 +4658,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 
 		oTrafficSimulation.setStartDateTime(Optional.ofNullable(doc.get("startDateTime_docvalues_date")).map(v -> v.toString()).orElse(null));
 		oTrafficSimulation.setSimulationName(Optional.ofNullable(doc.get("simulationName_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oTrafficSimulation.setLocation(Optional.ofNullable(doc.get("location_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oTrafficSimulation.setSumocfgPath(Optional.ofNullable(doc.get("sumocfgPath_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oTrafficSimulation.setFcdFilePath(Optional.ofNullable(doc.get("fcdFilePath_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oTrafficSimulation.setNetFilePath(Optional.ofNullable(doc.get("netFilePath_docvalues_string")).map(v -> v.toString()).orElse(null));
@@ -4627,6 +4726,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 				apiRequest.addVars("startDateTime");
 			if(!Objects.equals(simulationName, original.getSimulationName()))
 				apiRequest.addVars("simulationName");
+			if(!Objects.equals(location, original.getLocation()))
+				apiRequest.addVars("location");
 			if(!Objects.equals(sumocfgPath, original.getSumocfgPath()))
 				apiRequest.addVars("sumocfgPath");
 			if(!Objects.equals(fcdFilePath, original.getFcdFilePath()))
@@ -4708,6 +4809,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		sb.append(super.toString());
 		sb.append(Optional.ofNullable(startDateTime).map(v -> "startDateTime: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(simulationName).map(v -> "simulationName: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(location).map(v -> "location: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(sumocfgPath).map(v -> "sumocfgPath: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(fcdFilePath).map(v -> "fcdFilePath: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(netFilePath).map(v -> "netFilePath: \"" + v + "\"\n" ).orElse(""));
@@ -4748,6 +4850,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	public static final String CLASS_SIMPLE_NAME = "TrafficSimulation";
 	public static final String VAR_startDateTime = "startDateTime";
 	public static final String VAR_simulationName = "simulationName";
+	public static final String VAR_location = "location";
 	public static final String VAR_sumocfgPath = "sumocfgPath";
 	public static final String VAR_fcdFilePath = "fcdFilePath";
 	public static final String VAR_netFilePath = "netFilePath";
@@ -4799,6 +4902,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	public static List<String> varsFqTrafficSimulation(List<String> vars) {
 		vars.add(VAR_startDateTime);
 		vars.add(VAR_simulationName);
+		vars.add(VAR_location);
 		vars.add(VAR_sumocfgPath);
 		vars.add(VAR_fcdFilePath);
 		vars.add(VAR_netFilePath);
@@ -4842,6 +4946,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	}
 	public static List<String> varsRangeTrafficSimulation(List<String> vars) {
 		vars.add(VAR_startDateTime);
+		vars.add(VAR_location);
 		vars.add(VAR_startSeconds);
 		vars.add(VAR_endSeconds);
 		vars.add(VAR_stepSeconds);
@@ -4871,6 +4976,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 
 	public static final String DISPLAY_NAME_startDateTime = "Start date and Time";
 	public static final String DISPLAY_NAME_simulationName = "simulation name";
+	public static final String DISPLAY_NAME_location = "location";
 	public static final String DISPLAY_NAME_sumocfgPath = "sumocfg path";
 	public static final String DISPLAY_NAME_fcdFilePath = "Floating Car Data file path";
 	public static final String DISPLAY_NAME_netFilePath = "net file path";
@@ -4917,6 +5023,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return DISPLAY_NAME_startDateTime;
 		case VAR_simulationName:
 			return DISPLAY_NAME_simulationName;
+		case VAR_location:
+			return DISPLAY_NAME_location;
 		case VAR_sumocfgPath:
 			return DISPLAY_NAME_sumocfgPath;
 		case VAR_fcdFilePath:
@@ -4998,6 +5106,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		switch(var) {
 		case VAR_startDateTime:
 			return "The start date and time. ";
+		case VAR_location:
+			return "Geojson reference to the item. It can be Point, LineString, Polygon, MultiPoint, MultiLineString or MultiPolygon";
 		case VAR_startSeconds:
 			return "-b, --begin TIME Defines the begin time in seconds; The simulation starts at this time";
 		case VAR_endSeconds:
@@ -5061,6 +5171,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return "ZonedDateTime";
 		case VAR_simulationName:
 			return "String";
+		case VAR_location:
+			return "JsonObject";
 		case VAR_sumocfgPath:
 			return "String";
 		case VAR_fcdFilePath:
@@ -5149,6 +5261,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		switch(var) {
 		case VAR_simulationName:
 			return 3;
+		case VAR_location:
+			return 3;
 			default:
 				return BaseModel.htmRowBaseModel(var);
 		}
@@ -5158,6 +5272,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		switch(var) {
 		case VAR_simulationName:
 			return 1;
+		case VAR_location:
+			return 2;
 			default:
 				return BaseModel.htmCellBaseModel(var);
 		}
