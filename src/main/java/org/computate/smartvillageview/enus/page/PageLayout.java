@@ -319,17 +319,17 @@ public class PageLayout extends PageLayoutGen<Object> {
 		w.o(Optional.ofNullable(siteRequest_.getRequestHeaders().get("Accept-Language")).map(acceptLanguage -> StringUtils.substringBefore(acceptLanguage, ",")).orElse(siteRequest_.getConfig().getString(ComputateConfigKeys.SITE_LOCALE)));
 	}
 
+	protected void _rows(Wrap<Long> w) {
+	}
+
+	protected void _start(Wrap<Long> w) {
+	}
+
 	/**
 	 * Ignore: true
 	 **/
 	protected void _defaultLocale(Wrap<Locale> w) {
 		w.o(Locale.forLanguageTag(defaultLocaleId));
-	}
-
-	protected void _rows(Wrap<Long> w) {
-	}
-
-	protected void _start(Wrap<Long> w) {
 	}
 
 	protected void _rangeGap(Wrap<String> w) {

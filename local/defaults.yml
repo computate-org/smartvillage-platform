@@ -1,9 +1,9 @@
 ---
 GITHUB_ORG: "computate-org"
 QUAYIO_ORG: "computateorg"
-SITE_POWERED_BY_URL: "https://www.operate-first.cloud/"
-SITE_POWERED_BY_NAME: "Operate First"
-SITE_POWERED_BY_IMAGE_URI: "/png/operate-first-logo.png"
+SITE_POWERED_BY_URL: "https://nerc.mghpcc.org/"
+SITE_POWERED_BY_NAME: "NERC"
+SITE_POWERED_BY_IMAGE_URI: "/png/nerc/nerc-logo.png"
 SITE_NAME: "smartabyar-smartvillage"
 SITE_POM_GROUP_ID: "org.computate"
 SITE_PUBLIC_URL: "https://smartabyarsmartvillage.org"
@@ -43,6 +43,7 @@ API_CONTACT_EMAIL: ""
 FONTAWESOME_KIT: ""
 
 JDBC_HOST: "localhost"
+JDBC_PORT: 5432
 JDBC_DATABASE: "smartvillage"
 JDBC_USERNAME: "smartvillage"
 
@@ -52,11 +53,15 @@ AUTH_SSL: true
 AUTH_SSL_REQUIRED: all
 AUTH_REALM: "SMARTVILLAGE"
 AUTH_CLIENT: "smartvillage"
+AUTH_SECRET: ""
 AUTH_URL: "https://sso.computate.org/auth"
 AUTH_TOKEN_URI: "/auth/realms/SMARTVILLAGE/protocol/openid-connect/token"
 
+SOLR_HOST_NAME: solr-smartvillage.apps-crc.testing
+SOLR_PORT: 443
 SOLR_COLLECTION: "smartvillage"
-SOLR_HOST_NAME: localhost
+SOLR_URL: "https://solr-solr.apps-crc.testing/solr/smartvillage"
+SOLR_URL_COMPUTATE: "https://solr-solr.apps-crc.testing/solr/computate"
 
 EMAIL_HOST: 
 EMAIL_PORT: 465

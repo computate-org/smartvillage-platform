@@ -2735,47 +2735,6 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		return PageLayout.staticSearchStrDefaultLocaleId(siteRequest_, PageLayout.staticSearchDefaultLocaleId(siteRequest_, PageLayout.staticSetDefaultLocaleId(siteRequest_, o)));
 	}
 
-	///////////////////
-	// defaultLocale //
-	///////////////////
-
-
-	/**	 The entity defaultLocale
-	 *	 is defined as null before being initialized. 
-	 */
-	@JsonIgnore
-	@JsonInclude(Include.NON_NULL)
-	protected Locale defaultLocale;
-
-	/**	<br> The entity defaultLocale
-	 *  is defined as null before being initialized. 
-	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.PageLayout&fq=entiteVar_enUS_indexed_string:defaultLocale">Find the entity defaultLocale in Solr</a>
-	 * <br>
-	 * @param w is for wrapping a value to assign to this entity during initialization. 
-	 **/
-	protected abstract void _defaultLocale(Wrap<Locale> w);
-
-	public Locale getDefaultLocale() {
-		return defaultLocale;
-	}
-
-	public void setDefaultLocale(Locale defaultLocale) {
-		this.defaultLocale = defaultLocale;
-	}
-	public static Locale staticSetDefaultLocale(SiteRequestEnUS siteRequest_, String o) {
-		return null;
-	}
-	protected PageLayout defaultLocaleInit() {
-		Wrap<Locale> defaultLocaleWrap = new Wrap<Locale>().var("defaultLocale");
-		if(defaultLocale == null) {
-			_defaultLocale(defaultLocaleWrap);
-			Optional.ofNullable(defaultLocaleWrap.getO()).ifPresent(o -> {
-				setDefaultLocale(o);
-			});
-		}
-		return (PageLayout)this;
-	}
-
 	//////////
 	// rows //
 	//////////
@@ -2894,6 +2853,47 @@ public abstract class PageLayoutGen<DEV> extends Object {
 
 	public static String staticSearchFqStart(SiteRequestEnUS siteRequest_, String o) {
 		return PageLayout.staticSearchStrStart(siteRequest_, PageLayout.staticSearchStart(siteRequest_, PageLayout.staticSetStart(siteRequest_, o)));
+	}
+
+	///////////////////
+	// defaultLocale //
+	///////////////////
+
+
+	/**	 The entity defaultLocale
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonIgnore
+	@JsonInclude(Include.NON_NULL)
+	protected Locale defaultLocale;
+
+	/**	<br> The entity defaultLocale
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.PageLayout&fq=entiteVar_enUS_indexed_string:defaultLocale">Find the entity defaultLocale in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _defaultLocale(Wrap<Locale> w);
+
+	public Locale getDefaultLocale() {
+		return defaultLocale;
+	}
+
+	public void setDefaultLocale(Locale defaultLocale) {
+		this.defaultLocale = defaultLocale;
+	}
+	public static Locale staticSetDefaultLocale(SiteRequestEnUS siteRequest_, String o) {
+		return null;
+	}
+	protected PageLayout defaultLocaleInit() {
+		Wrap<Locale> defaultLocaleWrap = new Wrap<Locale>().var("defaultLocale");
+		if(defaultLocale == null) {
+			_defaultLocale(defaultLocaleWrap);
+			Optional.ofNullable(defaultLocaleWrap.getO()).ifPresent(o -> {
+				setDefaultLocale(o);
+			});
+		}
+		return (PageLayout)this;
 	}
 
 	//////////////
@@ -4395,9 +4395,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 				defaultZoneIdInit();
 				defaultTimeZoneInit();
 				defaultLocaleIdInit();
-				defaultLocaleInit();
 				rowsInit();
 				startInit();
+				defaultLocaleInit();
 				rangeGapInit();
 				rangeEndInit();
 				rangeStartInit();
@@ -4583,12 +4583,12 @@ public abstract class PageLayoutGen<DEV> extends Object {
 				return oPageLayout.defaultTimeZone;
 			case "defaultLocaleId":
 				return oPageLayout.defaultLocaleId;
-			case "defaultLocale":
-				return oPageLayout.defaultLocale;
 			case "rows":
 				return oPageLayout.rows;
 			case "start":
 				return oPageLayout.start;
+			case "defaultLocale":
+				return oPageLayout.defaultLocale;
 			case "rangeGap":
 				return oPageLayout.rangeGap;
 			case "rangeEnd":
@@ -5300,9 +5300,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	public static final String VAR_defaultZoneId = "defaultZoneId";
 	public static final String VAR_defaultTimeZone = "defaultTimeZone";
 	public static final String VAR_defaultLocaleId = "defaultLocaleId";
-	public static final String VAR_defaultLocale = "defaultLocale";
 	public static final String VAR_rows = "rows";
 	public static final String VAR_start = "start";
+	public static final String VAR_defaultLocale = "defaultLocale";
 	public static final String VAR_rangeGap = "rangeGap";
 	public static final String VAR_rangeEnd = "rangeEnd";
 	public static final String VAR_rangeStart = "rangeStart";
@@ -5375,9 +5375,9 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	public static final String DISPLAY_NAME_defaultZoneId = "";
 	public static final String DISPLAY_NAME_defaultTimeZone = "";
 	public static final String DISPLAY_NAME_defaultLocaleId = "";
-	public static final String DISPLAY_NAME_defaultLocale = "";
 	public static final String DISPLAY_NAME_rows = "";
 	public static final String DISPLAY_NAME_start = "";
+	public static final String DISPLAY_NAME_defaultLocale = "";
 	public static final String DISPLAY_NAME_rangeGap = "";
 	public static final String DISPLAY_NAME_rangeEnd = "";
 	public static final String DISPLAY_NAME_rangeStart = "";
@@ -5502,12 +5502,12 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return DISPLAY_NAME_defaultTimeZone;
 		case VAR_defaultLocaleId:
 			return DISPLAY_NAME_defaultLocaleId;
-		case VAR_defaultLocale:
-			return DISPLAY_NAME_defaultLocale;
 		case VAR_rows:
 			return DISPLAY_NAME_rows;
 		case VAR_start:
 			return DISPLAY_NAME_start;
+		case VAR_defaultLocale:
+			return DISPLAY_NAME_defaultLocale;
 		case VAR_rangeGap:
 			return DISPLAY_NAME_rangeGap;
 		case VAR_rangeEnd:

@@ -585,8 +585,8 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 		return SiteHtm.staticSearchStrLabels(siteRequest_, SiteHtm.staticSearchLabels(siteRequest_, SiteHtm.staticSetLabels(siteRequest_, o)));
 	}
 
-	public List<String> sqlLabels() {
-		return labels;
+	public String[] sqlLabels() {
+		return labels.stream().map(v -> (String)v).toArray(String[]::new);
 	}
 
 	/////////////
@@ -841,8 +841,8 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 		return SiteHtm.staticSearchStrText(siteRequest_, SiteHtm.staticSearchText(siteRequest_, SiteHtm.staticSetText(siteRequest_, o)));
 	}
 
-	public List<String> sqlText() {
-		return text;
+	public String[] sqlText() {
+		return text.stream().map(v -> (String)v).toArray(String[]::new);
 	}
 
 	/////////////
@@ -919,8 +919,8 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 		return SiteHtm.staticSearchStrComment(siteRequest_, SiteHtm.staticSearchComment(siteRequest_, SiteHtm.staticSetComment(siteRequest_, o)));
 	}
 
-	public List<String> sqlComment() {
-		return comment;
+	public String[] sqlComment() {
+		return comment.stream().map(v -> (String)v).toArray(String[]::new);
 	}
 
 	//////////
@@ -1170,8 +1170,8 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 		return SiteHtm.staticSearchStrHtmMiddle(siteRequest_, SiteHtm.staticSearchHtmMiddle(siteRequest_, SiteHtm.staticSetHtmMiddle(siteRequest_, o)));
 	}
 
-	public List<String> sqlHtmMiddle() {
-		return htmMiddle;
+	public String[] sqlHtmMiddle() {
+		return htmMiddle.stream().map(v -> (String)v).toArray(String[]::new);
 	}
 
 	//////////////

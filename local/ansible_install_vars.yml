@@ -1,9 +1,10 @@
 ---
+API_VERSION: 1.0.2
 GITHUB_ORG: computate-org
 QUAYIO_ORG: computateorg
-SITE_POWERED_BY_NAME: Operate First
-SITE_POWERED_BY_URL: https://www.operate-first.cloud/
-SITE_POWERED_BY_IMAGE_URI: /png/operate-first-logo.png
+SITE_POWERED_BY_NAME: NERC
+SITE_POWERED_BY_URL: https://nerc.mghpcc.org/
+SITE_POWERED_BY_IMAGE_URI: /png/nerc/nerc-logo.png
 SITE_NAME: smartabyar-smartvillage
 SITE_DISPLAY_NAME: Smart Village Project
 SITE_DESCRIPTION: Red Hat Global Social Innovation Program is partnering with Boston University and Smarta Byar in order to collaborate on creating a global and open research platform allowing researchers to study what social sustainability means by using a digital twin of Veberöd, Sweden as the test village, supported by Smarta Byar. The goal of this collaboration is to build the open source technological infrastructure so that researchers can collaborate on this platform effectively to study mobility, public health, sustainability among other study areas to ultimately help define better the link between well being and eco-smart cities. 
@@ -19,24 +20,36 @@ SITE_REPO: "git@github.com:{{ GITHUB_ORG }}/{{ SITE_NAME }}.git"
 SITE_REPO_HTTPS: "{{ SITE_REPO | replace('git@github.com:', 'https://github.com/') }}"
 SITE_LANG: enUS
 SITE_ZONE: "America/New_York"
+
 SITE_LOCALE: "en-US"
 SITE_SRC: "{{ lookup('env', 'HOME') }}/.local/src/{{ SITE_NAME }}"
 SITE_POM_GROUP_ID: org.computate
 SITE_POM_ARTIFACT_ID_ROOT: "{{ SITE_NAME }}"
-SITE_POM_VERSION_PREFIX: "1.0.1"
+SITE_POM_VERSION_PREFIX: "{{ API_VERSION }}"
 SITE_POM_VERSION_SUFFIX: ""
 SITE_POM_VERSION: "{{ SITE_POM_VERSION_PREFIX }}{{ SITE_POM_VERSION_SUFFIX }}"
 SITE_JAVA_PACKAGE: "{{ SITE_POM_GROUP_ID }}.smartvillageview.enus"
 SITE_PORT: 12080
 CLUSTER_PORT: "{{ SITE_PORT | regex_replace('(...)', '\\1') }}81"
-JDBC_DATABASE: "{{ SITE_NAME }}"
-JDBC_USERNAME: "{{ SITE_NAME }}"
-SOLR_COLLECTION: "{{ SITE_NAME }}"
+JDBC_DATABASE: "smartvillage"
+JDBC_USERNAME: "smartvillage"
+
+AUTH_REALM: SMARTVILLAGE
+AUTH_CLIENT: smartvillage
+
+SOLR_HOST_NAME: solr-smartvillage.apps-crc.testing
+SOLR_PORT: 443
+SOLR_COLLECTION: "smartvillage"
+SOLR_URL: "https://solr-solr.apps-crc.testing/solr/smartvillage"
+SOLR_URL_COMPUTATE: "https://solr-solr.apps-crc.testing/solr/computate"
+SOLR_SSL: true
+
 JAVA_OPTS: "-XX:+ExitOnOutOfMemoryError"
 ENABLE_SESSION_ID: true
 ENABLE_DELETED: true
 ENABLE_ARCHIVED: true
 ENABLE_ROLE_ADMIN: true
+ENABLE_ROLE_SUPER_ADMIN: true
 ENABLE_OPENID_CONNECT: true
 ENABLE_CODE_GENERATION_SERVICE: true
 SITE_VOLUME_SIZE: 30Gi
@@ -162,66 +175,22 @@ PROJECTS:
         template: config/gitignore
       - path: "{{ SITE_SRC }}/openshift/defaults.yml"
         template: openshift/defaults.yml
-      - path: "{{ SITE_SRC }}/openshift/SITE_SERVICE_1.yml"
-        template: openshift/SITE_SERVICE_1.yml
-      - path: "{{ SITE_SRC }}/openshift/SITE_SECRET_1.yml"
-        template: openshift/SITE_SECRET_1.yml
-      - path: "{{ SITE_SRC }}/openshift/SITE_ROUTE_1.yml"
-        template: openshift/SITE_ROUTE_1.yml
-      - path: "{{ SITE_SRC }}/openshift/SITE_IMAGE_STREAM_1.yml"
-        template: openshift/SITE_IMAGE_STREAM_1.yml
-      - path: "{{ SITE_SRC }}/openshift/SITE_BUILD_CONFIG_1.yml"
-        template: openshift/SITE_BUILD_CONFIG_1.yml
-      - path: "{{ SITE_SRC }}/openshift/SITE_DEPLOYMENT_CONFIG_1.yml"
-        template: openshift/SITE_DEPLOYMENT_CONFIG_1.yml
-      - path: "{{ SITE_SRC }}/openshift/SITE_PERSISTENT_VOLUME_CLAIM_1.yml"
-        template: openshift/SITE_PERSISTENT_VOLUME_CLAIM_1.yml
-      - path: "{{ SITE_SRC }}/Dockerfile"
-        template: openshift/Dockerfile
+      - path: "{{ SITE_SRC }}/Containerfile"
+        template: openshift/Containerfile
 
 CONFIG_TEMPLATE: |2
   
-  YGGIO_HOST_NAME: "\{\{ YGGIO_HOST_NAME \}\}"
-  YGGIO_PORT: \{\{ YGGIO_PORT \}\}
-  YGGIO_SSL: \{\{ YGGIO_SSL | lower \}\}
-  YGGIO_USERNAME: "\{\{ YGGIO_USERNAME \}\}"
-  YGGIO_PASSWORD: "\{\{ YGGIO_PASSWORD \}\}"
+  YGGIO_HOST_NAME: "\{\{ YGGIO_HOST_NAME | default('') \}\}"
+  YGGIO_PORT: \{\{ YGGIO_PORT | default('') \}\}
+  YGGIO_SSL: \{\{ YGGIO_SSL | default('') | lower \}\}
+  YGGIO_USERNAME: "\{\{ YGGIO_USERNAME | default('') \}\}"
+  YGGIO_PASSWORD: "\{\{ YGGIO_PASSWORD | default('') \}\}"
   YGGIO_API_RELATIVE_URI_IotNode: /api/iotnodes
   YGGIO_AUTH_LOCAL_URI: /api/auth/local
   DEFAULT_MAP_LOCATION: "55.61888,13.548799"
   DEFAULT_MAP_ZOOM: "3"
 
 CONFIG_KEYS: |2
-  
-  	/**
-  	 * Facebook Graph Version
-  	 **/
-  	public static final String FACEBOOK_GRAPH_VERSION = "FACEBOOK_GRAPH_VERSION";
-  
-  	/**
-  	 * Facebook App ID
-  	 **/
-  	public static final String FACEBOOK_APP_ID = "FACEBOOK_APP_ID";
-  
-  	/**
-  	 * 
-  	 **/
-  	public static final String QUAYIO_ORG = "QUAYIO_ORG";
-  
-  	/**
-  	 * 
-  	 **/
-  	public static final String MAILING_LIST_URL = "MAILING_LIST_URL";
-  
-  	/**
-  	 * 
-  	 **/
-  	public static final String SITE_PUBLIC_URL = "SITE_PUBLIC_URL";
-  
-  	/**
-  	 * 
-  	 **/
-  	public static final String SITE_POM_GROUP_ID = "SITE_POM_GROUP_ID";
   
   	/**
   	 * 
@@ -232,11 +201,6 @@ CONFIG_KEYS: |2
   	 * 
   	 **/
   	public static final String PYTHON_EXECUTABLE_PATH = "PYTHON_EXECUTABLE_PATH";
-  
-  	/**
-  	 * 
-  	 **/
-  	public static final String DYNAMIC_PAGE_PATH = "DYNAMIC_PAGE_PATH";
   
   	/**
   	 * 
@@ -274,26 +238,6 @@ CONFIG_KEYS: |2
   	public static final String YGGIO_PASSWORD = "YGGIO_PASSWORD";
   
   	/**
-  	 * The name Github organization for the site. 
-  	 **/
-  	public static final String GITHUB_ORG = "GITHUB_ORG";
-  
-  	/**
-  	 * The project powered by URL. 
-  	 **/
-  	public static final String SITE_POWERED_BY_URL = "SITE_POWERED_BY_URL";
-  
-  	/**
-  	 * The project powered by organization name. 
-  	 **/
-  	public static final String SITE_POWERED_BY_NAME = "SITE_POWERED_BY_NAME";
-  
-  	/**
-  	 * The project powered by image relative URI. 
-  	 **/
-  	public static final String SITE_POWERED_BY_IMAGE_URI = "SITE_POWERED_BY_IMAGE_URI";
-  
-  	/**
   	 * The Floating Car Data directory. 
   	 **/
   	public static final String FCD_SYNC_PATH = "FCD_SYNC_PATH";
@@ -304,50 +248,24 @@ CONFIG_KEYS: |2
   	public static final String FCD_MAX_RECORD_SIZE = "FCD_MAX_RECORD_SIZE";
   
   	/**
-  	 * The max read buffer size to load in a batch. 
+  	 * Whether the FIWARE Context Broker uses SSL. 
   	 **/
-  	public static final String READ_BUFFER_SIZE = "READ_BUFFER_SIZE";
+  	public static final String FIWARE_SSL = "FIWARE_SSL";
   
   	/**
-  	 * Periodically check the sync operations to check that they are still progressing. 
-  	 * If not, fetch more data. 
+  	 * The FIWARE Context Broker host name. 
   	 **/
-  	public static final String API_CHECK_TIMER_MILLIS = "API_CHECK_TIMER_MILLIS";
+  	public static final String FIWARE_HOST_NAME = "FIWARE_HOST_NAME";
   
   	/**
-  	 * Map default location. 
+  	 * The FIWARE Context Broker port. 
   	 **/
-  	public static final String DEFAULT_MAP_LOCATION = "DEFAULT_MAP_LOCATION";
+  	public static final String FIWARE_PORT = "FIWARE_PORT";
   
   	/**
-  	 * Map default zoom. 
+  	 * The FIWARE Context Broker v2 API URI prefix. 
   	 **/
-  	public static final String DEFAULT_MAP_ZOOM = "DEFAULT_MAP_ZOOM";
-  
-  	/**
-  	 * max number of times to retry
-  	 */
-  	public static final String ZOOKEEPER_MAX_RETRIES = "ZOOKEEPER_MAX_RETRIES";
-  
-  	/**
-  	 * initial amount of time to wait between retries
-  	 */
-  	public static final String ZOOKEEPER_BASE_SLEEP_TIME_MILLIS = "ZOOKEEPER_BASE_SLEEP_TIME_MILLIS";
-  
-  	/**
-  	 * max time in ms to sleep on each retry
-  	 */
-  	public static final String ZOOKEEPER_MAX_SLEEP_MILLIS = "ZOOKEEPER_MAX_SLEEP_MILLIS";
-  
-  	/**
-  	 * Zookeeper connection timeout
-  	 */
-  	public static final String ZOOKEEPER_CONNECTION_TIMEOUT_MILLIS = "ZOOKEEPER_CONNECTION_TIMEOUT_MILLIS";
-  
-  	/**
-  	 * Zookeeper session timeout
-  	 */
-  	public static final String ZOOKEEPER_SESSION_TIMEOUT_MILLIS = "ZOOKEEPER_SESSION_TIMEOUT_MILLIS";
+  	public static final String FIWARE_API_URI = "FIWARE_API_URI";
   
   	/**
   	 * API counter resume TimeStep
@@ -370,34 +288,39 @@ CONFIG_KEYS: |2
   	public static final String API_COUNTER_FETCH_VehicleStep = "API_COUNTER_FETCH_VehicleStep";
   
   	/**
-  	 * 
-  	 **/
-  	public static final String I18N_PATHS = "I18N_PATHS";
+  	 * API counter fetch SitePage
+  	 */
+  	public static final String API_COUNTER_FETCH_SitePage = "API_COUNTER_FETCH_SitePage";
   
   	/**
-  	 * 
-  	 **/
-  	public static final String DYNAMIC_PAGE_PATHS = "DYNAMIC_PAGE_PATHS";
+  	 * API counter fetch SiteHtm
+  	 */
+  	public static final String API_COUNTER_FETCH_SiteHtm = "API_COUNTER_FETCH_SiteHtm";
   
-  	/**
-  	 * Whether the FIWARE Context Broker uses SSL. 
-  	 **/
-  	public static final String FIWARE_SSL = "FIWARE_SSL";
+  	public static final String KAFKA_BROKERS = "KAFKA_BROKERS";
+  	public static final String KAFKA_GROUP = "KAFKA_GROUP";
+  	public static final String KAFKA_TOPIC_SUMO_RUN = "KAFKA_TOPIC_SUMO_RUN";
+  	public static final String KAFKA_TOPIC_SUMO_RUN_REPORT = "KAFKA_TOPIC_SUMO_RUN_REPORT";
+  	public static final String KAFKA_TOPIC_SUMO_STOP = "KAFKA_TOPIC_SUMO_STOP";
+  	public static final String KAFKA_TOPIC_SUMO_SIMULATION_INFO = "KAFKA_TOPIC_SUMO_SIMULATION_INFO";
+  	public static final String KAFKA_TOPIC_SUMO_SIMULATION_INFO_PATCH = "KAFKA_TOPIC_SUMO_SIMULATION_INFO_PATCH";
+  	public static final String KAFKA_TOPIC_SUMO_TRAFFIC_FLOW_OBSERVED_INFO = "KAFKA_TOPIC_SUMO_TRAFFIC_FLOW_OBSERVED_INFO";
+  	public static final String KAFKA_TOPIC_SUMO_TRAFFIC_FLOW_OBSERVED_INFO_PATCH = "KAFKA_TOPIC_SUMO_TRAFFIC_FLOW_OBSERVED_INFO_PATCH";
+  	public static final String KAFKA_SECURITY_PROTOCOL = "KAFKA_SECURITY_PROTOCOL";
+  	public static final String KAFKA_SSL_KEYSTORE_TYPE = "KAFKA_SSL_KEYSTORE_TYPE";
+  	public static final String KAFKA_SSL_KEYSTORE_LOCATION = "KAFKA_SSL_KEYSTORE_LOCATION";
+  	public static final String KAFKA_SSL_KEYSTORE_PASSWORD = "KAFKA_SSL_KEYSTORE_PASSWORD";
+  	public static final String KAFKA_SSL_TRUSTSTORE_TYPE = "KAFKA_SSL_TRUSTSTORE_TYPE";
+  	public static final String KAFKA_SSL_TRUSTSTORE_LOCATION = "KAFKA_SSL_TRUSTSTORE_LOCATION";
+  	public static final String KAFKA_SSL_TRUSTSTORE_PASSWORD = "KAFKA_SSL_TRUSTSTORE_PASSWORD";
   
-  	/**
-  	 * The FIWARE Context Broker host name. 
-  	 **/
-  	public static final String FIWARE_HOST_NAME = "FIWARE_HOST_NAME";
-  
-  	/**
-  	 * The FIWARE Context Broker port. 
-  	 **/
-  	public static final String FIWARE_PORT = "FIWARE_PORT";
-  
-  	/**
-  	 * The FIWARE Context Broker v2 API URI prefix. 
-  	 **/
-  	public static final String FIWARE_API_URI = "FIWARE_API_URI";
+  	public static final String MQTT_ENABLED = "MQTT_ENABLED";
+  	public static final String MQTT_HOST = "MQTT_HOST";
+  	public static final String MQTT_PORT = "MQTT_PORT";
+  	public static final String MQTT_IOT_SUBSCRIBE_TOPIC = "MQTT_IOT_SUBSCRIBE_TOPIC";
+
+MAIN_VERTICLE_IMPORTS: |
+  import org.computate.smartvillageview.enus.mqtt.MqttMessageReader;
 
 WORKER_IMPORTS: |
   import java.time.LocalDateTime;
@@ -410,6 +333,7 @@ WORKER_IMPORTS: |
   import org.computate.smartvillageview.enus.model.traffic.simulation.reader.TrafficFcdReader;
   import org.computate.smartvillageview.enus.model.traffic.time.step.TimeStep;
   import org.computate.smartvillageview.enus.model.iotnode.reader.IotNodeReader;
+  import org.computate.smartvillageview.enus.camel.CamelIntegration;
 
 WORKER_IMPORT_DATA: |2
   
@@ -461,7 +385,13 @@ WORKER_IMPORT_DATA: |2
   					LOG.info(String.format(importTimerScheduling, classSimpleName, nextStartTime.format(TIME_FORMAT)));
   					Duration nextStartDuration = Duration.between(Instant.now(), nextStartTime);
   					vertx.setTimer(nextStartDuration.toMillis(), b -> {
-  						importDataClass(classSimpleName, nextStartTime);
+  						workerExecutor.executeBlocking(promise2 -> {
+  							importDataClass(classSimpleName, nextStartTime).onSuccess(c -> {
+  								promise2.complete();
+  							}).onFailure(ex -> {
+  								promise2.fail(ex);
+  							});
+  						});
   					});
   					promise.complete();
   				} else {
@@ -478,8 +408,9 @@ WORKER_IMPORT_DATA: |2
   			reader.setWorkerExecutor(workerExecutor);
   			reader.setTemplateEngine(templateEngine);
   			reader.setHandlebars(handlebars);
+  			reader.setKafkaProducer(kafkaProducer);
   			reader.initDeepForClass(siteRequest);
-  			reader.importDataSitePage().onComplete(a -> {
+  			reader.importDataSitePages().onComplete(a -> {
   				String importPeriod = config().getString(String.format("%s_%s", ConfigKeys.IMPORT_DATA_PERIOD, classSimpleName));
   				if(importPeriod != null && startDateTime != null) {
   					Duration duration = TimeTool.parseNextDuration(importPeriod);
@@ -487,7 +418,13 @@ WORKER_IMPORT_DATA: |2
   					LOG.info(String.format(importTimerScheduling, classSimpleName, nextStartTime.format(TIME_FORMAT)));
   					Duration nextStartDuration = Duration.between(Instant.now(), nextStartTime);
   					vertx.setTimer(nextStartDuration.toMillis(), b -> {
-  						importDataClass(classSimpleName, nextStartTime);
+  						workerExecutor.executeBlocking(promise2 -> {
+  							importDataClass(classSimpleName, nextStartTime).onSuccess(c -> {
+  								promise2.complete();
+  							}).onFailure(ex -> {
+  								promise2.fail(ex);
+  							});
+  						});
   					});
   					promise.complete();
   				} else {
@@ -509,7 +446,13 @@ WORKER_IMPORT_DATA: |2
   					LOG.info(String.format(importTimerScheduling, classSimpleName, nextStartTime.format(TIME_FORMAT)));
   					Duration nextStartDuration = Duration.between(Instant.now(), nextStartTime);
   					vertx.setTimer(nextStartDuration.toMillis(), b -> {
-  						importDataClass(classSimpleName, nextStartTime);
+  						workerExecutor.executeBlocking(promise2 -> {
+  							importDataClass(classSimpleName, nextStartTime).onSuccess(c -> {
+  								promise2.complete();
+  							}).onFailure(ex -> {
+  								promise2.fail(ex);
+  							});
+  						});
   					});
   					promise.complete();
   				} else {
@@ -523,7 +466,7 @@ WORKER_IMPORT_DATA: |2
 AFTER_htmStylePageLayout: |2
   		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anonymous%20Pro%7CBellefair%7CJomhuria%7CPT%20Serif%3A700%7CStint%20Ultra%20Condensed&amp;display=swap"/>
 
-ALL_Dockerfile: |2
+ALL_Containerfile: |2
   FROM quay.io/centos/centos:stream8
   
   MAINTAINER Christopher Tate <computate@computate.org>
@@ -570,7 +513,7 @@ ALL_Dockerfile: |2
   RUN cp /root/src/{{SITE_NAME }}/target/*.jar /root/src/{{SITE_NAME }}/app.jar
   CMD java $JAVA_OPTS -cp .:* org.computate.smartvillageview.enus.vertx.MainVerticle
 
-BEFORE_Dockerfile: |2
+BEFORE_Containerfile: |2
   
   ENV APP_NAME=sumo \
   	APP_DEPENDENCIES="git python3 python3-pip python3-virtualenv make gcc gcc-c++ readline-devel tcl zlib-devel libpng-devel libjpeg-turbo-devel libtiff-devel libXext-devel mesa-libGLw mesa-libGL-devel mesa-libGLU-devel" \
@@ -583,7 +526,7 @@ BEFORE_Dockerfile: |2
   	APP_EXEC="/usr/local/bin/sumo-gui" \
   	PYTHON_DIR="/opt/python"
 
-MIDDLE_Dockerfile: |2
+MIDDLE_Containerfile: |2
   
   RUN microdnf install -y ${APP_DEPENDENCIES}
   RUN /usr/bin/virtualenv ${PYTHON_DIR}
@@ -668,6 +611,8 @@ MIDDLE_API_COUNTER: |
   API_COUNTER_FETCH_TimeStep: 1
   API_COUNTER_RESUME_VehicleStep: 0
   API_COUNTER_FETCH_VehicleStep: 10
+  API_COUNTER_FETCH_SitePage: 10
+  API_COUNTER_FETCH_SiteHtm: 10
 
 SITE_POM_DEPENDENCIES_END: |-2
   
@@ -688,3 +633,19 @@ SITE_POM_END: |-2
   			<url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
   		</snapshotRepository>
   	</distributionManagement>
+
+SITE_APPLICATION_YML_END: |-2
+  
+  KAFKA_TOPIC_SUMO_RUN: smartvillage-sumo-run
+  KAFKA_TOPIC_SUMO_STOP: smartvillage-sumo-stop
+  KAFKA_TOPIC_SUMO_RUN_REPORT: smartvillage-sumo-run-report
+  KAFKA_TOPIC_SUMO_SIMULATION_INFO: smartvillage-sumo-simulation-info
+  KAFKA_TOPIC_SUMO_SIMULATION_INFO_PATCH: smartvillage-sumo-simulation-info-patch
+  KAFKA_TOPIC_SUMO_TRAFFIC_FLOW_OBSERVED_INFO: smartvillage-sumo-traffic-flow-observed-info
+  KAFKA_TOPIC_SUMO_TRAFFIC_FLOW_OBSERVED_INFO_PATCH: smartvillage-sumo-traffic-flow-observed-info-patch
+  
+  MQTT_ENABLED: true
+  MQTT_HOST: fiware-broker-mqtt-nodeport.apps-crc.testing
+  MQTT_PORT: 30083
+  MQTT_IOT_SUBSCRIBE_TOPIC: iot/subscribe
+

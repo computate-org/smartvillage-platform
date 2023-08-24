@@ -1,70 +1,114 @@
 package org.computate.smartvillageview.enus.vertx;
 
+import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.nio.file.Paths;
 import java.time.Duration;
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.Stack;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.computate.search.serialize.ComputateZonedDateTimeSerializer;
 import org.computate.search.tool.TimeTool;
-import org.computate.smartvillageview.enus.camel.CamelIntegration;
-import org.computate.smartvillageview.enus.config.ConfigKeys;
-import org.computate.smartvillageview.enus.model.htm.SiteHtm;
-import org.computate.smartvillageview.enus.model.iotnode.IotNode;
-import org.computate.smartvillageview.enus.model.iotnode.reader.IotNodeReader;
-import org.computate.smartvillageview.enus.model.page.SitePage;
-import org.computate.smartvillageview.enus.model.page.reader.SitePageReader;
-import org.computate.smartvillageview.enus.model.system.event.SystemEvent;
-import org.computate.smartvillageview.enus.model.traffic.bicycle.step.BicycleStep;
-import org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved.TrafficFlowObserved;
-import org.computate.smartvillageview.enus.model.traffic.light.TrafficLight;
-import org.computate.smartvillageview.enus.model.traffic.light.step.TrafficLightStep;
-import org.computate.smartvillageview.enus.model.traffic.person.step.PersonStep;
-import org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation;
-import org.computate.smartvillageview.enus.model.traffic.simulation.reader.TrafficFcdReader;
-import org.computate.smartvillageview.enus.model.traffic.time.step.TimeStep;
-import org.computate.smartvillageview.enus.model.traffic.vehicle.step.VehicleStep;
-import org.computate.smartvillageview.enus.model.user.SiteUser;
-import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
-import org.computate.smartvillageview.enus.result.iotnode.step.IotNodeStep;
-import org.computate.smartvillageview.enus.result.map.MapResult;
+import org.computate.search.tool.XmlTool;
 import org.computate.vertx.api.ApiCounter;
 import org.computate.vertx.api.ApiRequest;
+import org.computate.vertx.api.ApiCounter;
+import org.computate.vertx.api.ApiRequest;
+import org.computate.smartvillageview.enus.config.ConfigKeys;
+import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
+import org.computate.smartvillageview.enus.model.page.SitePage;
+import org.computate.smartvillageview.enus.model.page.reader.SitePageReader;
+import org.computate.smartvillageview.enus.model.htm.SiteHtm;
+import org.computate.vertx.api.ApiCounter;
+import org.computate.vertx.api.ApiRequest;
+import org.computate.vertx.config.ComputateConfigKeys;
 import org.computate.vertx.handlebars.AuthHelpers;
 import org.computate.vertx.handlebars.DateHelpers;
 import org.computate.vertx.handlebars.SiteHelpers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.github.jknack.handlebars.Context;
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Jackson2Helper;
+import com.github.jknack.handlebars.Template;
 import com.github.jknack.handlebars.helper.ConditionalHelpers;
 import com.github.jknack.handlebars.helper.StringHelpers;
+import com.google.common.io.PatternFilenameFilter;
 
+import io.vertx.config.yaml.YamlProcessor;
 import io.vertx.core.AbstractVerticle;
+import io.vertx.core.CompositeFuture;
 import io.vertx.core.Future;
+import io.vertx.core.MultiMap;
 import io.vertx.core.Promise;
 import io.vertx.core.WorkerExecutor;
+import io.vertx.core.buffer.Buffer;
 import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.vertx.ext.auth.authentication.TokenCredentials;
+import io.vertx.ext.auth.authentication.UsernamePasswordCredentials;
+import io.vertx.ext.jdbc.JDBCClient;
 import io.vertx.ext.mail.MailClient;
 import io.vertx.ext.mail.MailConfig;
 import io.vertx.ext.web.client.WebClient;
-import io.vertx.ext.web.client.WebClientOptions;
+import io.vertx.ext.web.client.predicate.ResponsePredicate;
 import io.vertx.ext.web.templ.handlebars.HandlebarsTemplateEngine;
+import io.vertx.ext.web.client.WebClientOptions;
 import io.vertx.kafka.client.producer.KafkaProducer;
 import io.vertx.pgclient.PgConnectOptions;
 import io.vertx.pgclient.PgPool;
+import io.vertx.sqlclient.Cursor;
 import io.vertx.sqlclient.PoolOptions;
 import io.vertx.sqlclient.Row;
 import io.vertx.sqlclient.RowStream;
+import io.vertx.sqlclient.SqlConnection;
+import java.time.LocalDateTime;
+import io.vertx.ext.jdbc.JDBCClient;
+import io.vertx.sqlclient.Cursor;
+import io.vertx.sqlclient.SqlConnection;
+import io.vertx.ext.web.client.predicate.ResponsePredicate;
+import io.vertx.ext.auth.authentication.TokenCredentials;
+import org.computate.smartvillageview.enus.model.iotnode.IotNode;
+import org.computate.smartvillageview.enus.model.traffic.simulation.reader.TrafficFcdReader;
+import org.computate.smartvillageview.enus.model.traffic.time.step.TimeStep;
+import org.computate.smartvillageview.enus.model.iotnode.reader.IotNodeReader;
+import org.computate.smartvillageview.enus.camel.CamelIntegration;
+
+import org.computate.smartvillageview.enus.model.user.SiteUser;
+import org.computate.smartvillageview.enus.model.iotnode.IotNode;
+import org.computate.smartvillageview.enus.model.page.SitePage;
+import org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport;
+import org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation;
+import org.computate.smartvillageview.enus.model.traffic.light.step.TrafficLightStep;
+import org.computate.smartvillageview.enus.model.traffic.vehicle.step.VehicleStep;
+import org.computate.smartvillageview.enus.model.traffic.person.step.PersonStep;
+import org.computate.smartvillageview.enus.model.traffic.light.TrafficLight;
+import org.computate.smartvillageview.enus.model.traffic.time.step.TimeStep;
+import org.computate.smartvillageview.enus.model.traffic.bicycle.step.BicycleStep;
+import org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved.TrafficFlowObserved;
+import org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLight;
+import org.computate.smartvillageview.enus.model.system.event.SystemEvent;
+import org.computate.smartvillageview.enus.model.htm.SiteHtm;
+import org.computate.smartvillageview.enus.result.iotnode.step.IotNodeStep;
+import org.computate.smartvillageview.enus.result.map.MapResult;
 
 /**
  */
@@ -538,22 +582,26 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 			if(config().getBoolean(ConfigKeys.ENABLE_REFRESH_DATA, false)) {
 				LOG.info(refreshAllDataStarted);
 				refreshData(SiteUser.CLASS_SIMPLE_NAME).onSuccess(q -> {
-					refreshData(MapResult.CLASS_SIMPLE_NAME).onSuccess(q1 -> {
-						refreshData(SystemEvent.CLASS_SIMPLE_NAME).onSuccess(q2 -> {
-							refreshData(SitePage.CLASS_SIMPLE_NAME).onSuccess(q3 -> {
-								refreshData(SiteHtm.CLASS_SIMPLE_NAME).onSuccess(q4 -> {
-									refreshData(IotNode.CLASS_SIMPLE_NAME).onSuccess(q5 -> {
-										refreshData(IotNodeStep.CLASS_SIMPLE_NAME).onSuccess(q6 -> {
+					refreshData(IotNode.CLASS_SIMPLE_NAME).onSuccess(q1 -> {
+						refreshData(SitePage.CLASS_SIMPLE_NAME).onSuccess(q2 -> {
+							refreshData(SimulationReport.CLASS_SIMPLE_NAME).onSuccess(q3 -> {
+								refreshData(TrafficSimulation.CLASS_SIMPLE_NAME).onSuccess(q4 -> {
+									refreshData(TrafficLightStep.CLASS_SIMPLE_NAME).onSuccess(q5 -> {
+										refreshData(VehicleStep.CLASS_SIMPLE_NAME).onSuccess(q6 -> {
 											refreshData(PersonStep.CLASS_SIMPLE_NAME).onSuccess(q7 -> {
-												refreshData(BicycleStep.CLASS_SIMPLE_NAME).onSuccess(q8 -> {
+												refreshData(TrafficLight.CLASS_SIMPLE_NAME).onSuccess(q8 -> {
 													refreshData(TimeStep.CLASS_SIMPLE_NAME).onSuccess(q9 -> {
-														refreshData(TrafficSimulation.CLASS_SIMPLE_NAME).onSuccess(q10 -> {
+														refreshData(BicycleStep.CLASS_SIMPLE_NAME).onSuccess(q10 -> {
 															refreshData(TrafficFlowObserved.CLASS_SIMPLE_NAME).onSuccess(q11 -> {
-																refreshData(TrafficLight.CLASS_SIMPLE_NAME).onSuccess(q12 -> {
-																	refreshData(TrafficLightStep.CLASS_SIMPLE_NAME).onSuccess(q13 -> {
-																		refreshData(VehicleStep.CLASS_SIMPLE_NAME).onSuccess(q14 -> {
-																			LOG.info(refreshAllDataComplete);
-																			promise.complete();
+																refreshData(SmartTrafficLight.CLASS_SIMPLE_NAME).onSuccess(q12 -> {
+																	refreshData(SystemEvent.CLASS_SIMPLE_NAME).onSuccess(q13 -> {
+																		refreshData(SiteHtm.CLASS_SIMPLE_NAME).onSuccess(q14 -> {
+																			refreshData(IotNodeStep.CLASS_SIMPLE_NAME).onSuccess(q15 -> {
+																				refreshData(MapResult.CLASS_SIMPLE_NAME).onSuccess(q16 -> {
+																					LOG.info(refreshAllDataComplete);
+																					promise.complete();
+																				}).onFailure(ex -> promise.fail(ex));
+																			}).onFailure(ex -> promise.fail(ex));
 																		}).onFailure(ex -> promise.fail(ex));
 																	}).onFailure(ex -> promise.fail(ex));
 																}).onFailure(ex -> promise.fail(ex));
@@ -568,7 +616,10 @@ public class WorkerVerticle extends WorkerVerticleGen<AbstractVerticle> {
 							}).onFailure(ex -> promise.fail(ex));
 						}).onFailure(ex -> promise.fail(ex));
 					}).onFailure(ex -> promise.fail(ex));
-				}).onFailure(ex -> promise.fail(ex));
+				}).onFailure(ex -> {
+					LOG.error(refreshAllDataFail, ex);
+					promise.fail(ex);
+				});
 			} else {
 				LOG.info(refreshAllDataSkip);
 				promise.complete();

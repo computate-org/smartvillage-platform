@@ -416,11 +416,15 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 			Promise<SiteUser> promise1 = Promise.promise();
 			pgPool.withTransaction(sqlConnection -> {
 				siteRequest.setSqlConnection(sqlConnection);
-				sqlPATCHSiteUser(o, inheritPk).onSuccess(siteUser -> {
-					persistSiteUser(siteUser).onSuccess(c -> {
-						relateSiteUser(siteUser).onSuccess(d -> {
-							indexSiteUser(siteUser).onSuccess(e -> {
-								promise1.complete(siteUser);
+				varsSiteUser(siteRequest).onSuccess(a -> {
+					sqlPATCHSiteUser(o, inheritPk).onSuccess(siteUser -> {
+						persistSiteUser(siteUser).onSuccess(c -> {
+							relateSiteUser(siteUser).onSuccess(d -> {
+								indexSiteUser(siteUser).onSuccess(e -> {
+									promise1.complete(siteUser);
+								}).onFailure(ex -> {
+									promise1.fail(ex);
+								});
 							}).onFailure(ex -> {
 								promise1.fail(ex);
 							});
@@ -744,12 +748,16 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 			pgPool.withTransaction(sqlConnection -> {
 				Promise<SiteUser> promise1 = Promise.promise();
 				siteRequest.setSqlConnection(sqlConnection);
-				createSiteUser(siteRequest).onSuccess(siteUser -> {
-					sqlPOSTSiteUser(siteUser, inheritPk).onSuccess(b -> {
-						persistSiteUser(siteUser).onSuccess(c -> {
-							relateSiteUser(siteUser).onSuccess(d -> {
-								indexSiteUser(siteUser).onSuccess(e -> {
-									promise1.complete(siteUser);
+				varsSiteUser(siteRequest).onSuccess(a -> {
+					createSiteUser(siteRequest).onSuccess(siteUser -> {
+						sqlPOSTSiteUser(siteUser, inheritPk).onSuccess(b -> {
+							persistSiteUser(siteUser).onSuccess(c -> {
+								relateSiteUser(siteUser).onSuccess(d -> {
+									indexSiteUser(siteUser).onSuccess(e -> {
+										promise1.complete(siteUser);
+									}).onFailure(ex -> {
+										promise1.fail(ex);
+									});
 								}).onFailure(ex -> {
 									promise1.fail(ex);
 								});
@@ -1033,24 +1041,19 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 				{
 					try {
-						try {
-							ApiRequest apiRequest = new ApiRequest();
-							JsonArray jsonArray = Optional.ofNullable(siteRequest.getJsonObject()).map(o -> o.getJsonArray("list")).orElse(new JsonArray());
-							apiRequest.setRows(Long.valueOf(jsonArray.size()));
-							apiRequest.setNumFound(Long.valueOf(jsonArray.size()));
-							apiRequest.setNumPATCH(0L);
-							apiRequest.initDeepApiRequest(siteRequest);
-							siteRequest.setApiRequest_(apiRequest);
-							eventBus.publish("websocketSiteUser", JsonObject.mapFrom(apiRequest).toString());
-							varsSiteUser(siteRequest).onSuccess(d -> {
-								listPUTImportSiteUser(apiRequest, siteRequest).onSuccess(e -> {
-									response200PUTImportSiteUser(siteRequest).onSuccess(response -> {
-										LOG.debug(String.format("putimportSiteUser succeeded. "));
-										eventHandler.handle(Future.succeededFuture(response));
-									}).onFailure(ex -> {
-										LOG.error(String.format("putimportSiteUser failed. "), ex);
-										error(siteRequest, eventHandler, ex);
-									});
+						ApiRequest apiRequest = new ApiRequest();
+						JsonArray jsonArray = Optional.ofNullable(siteRequest.getJsonObject()).map(o -> o.getJsonArray("list")).orElse(new JsonArray());
+						apiRequest.setRows(Long.valueOf(jsonArray.size()));
+						apiRequest.setNumFound(Long.valueOf(jsonArray.size()));
+						apiRequest.setNumPATCH(0L);
+						apiRequest.initDeepApiRequest(siteRequest);
+						siteRequest.setApiRequest_(apiRequest);
+						eventBus.publish("websocketSiteUser", JsonObject.mapFrom(apiRequest).toString());
+						varsSiteUser(siteRequest).onSuccess(d -> {
+							listPUTImportSiteUser(apiRequest, siteRequest).onSuccess(e -> {
+								response200PUTImportSiteUser(siteRequest).onSuccess(response -> {
+									LOG.debug(String.format("putimportSiteUser succeeded. "));
+									eventHandler.handle(Future.succeededFuture(response));
 								}).onFailure(ex -> {
 									LOG.error(String.format("putimportSiteUser failed. "), ex);
 									error(siteRequest, eventHandler, ex);
@@ -1059,10 +1062,10 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 								LOG.error(String.format("putimportSiteUser failed. "), ex);
 								error(siteRequest, eventHandler, ex);
 							});
-						} catch(Exception ex) {
+						}).onFailure(ex -> {
 							LOG.error(String.format("putimportSiteUser failed. "), ex);
 							error(siteRequest, eventHandler, ex);
-						}
+						});
 					} catch(Exception ex) {
 						LOG.error(String.format("putimportSiteUser failed. "), ex);
 						error(null, eventHandler, ex);
@@ -1152,7 +1155,8 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 				apiRequest.setNumPATCH(0L);
 				apiRequest.initDeepApiRequest(siteRequest);
 				siteRequest.setApiRequest_(apiRequest);
-				body.put("inheritPk", body.getValue("pk"));
+				String inheritPk = Optional.ofNullable(body.getString(SiteUser.VAR_pk)).orElse(body.getString(SiteUser.VAR_id));
+				body.put("inheritPk", inheritPk);
 				if(Optional.ofNullable(serviceRequest.getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getJsonArray("var")).orElse(new JsonArray()).stream().filter(s -> "refresh:false".equals(s)).count() > 0L) {
 					siteRequest.getRequestVars().put( "refresh", "false" );
 				}
@@ -1163,7 +1167,7 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 				searchList.setC(SiteUser.class);
 				searchList.fq("deleted_docvalues_boolean:false");
 				searchList.fq("archived_docvalues_boolean:false");
-				searchList.fq("inheritPk_docvalues_string:" + SearchTool.escapeQueryChars(body.getString(SiteUser.VAR_pk)));
+				searchList.fq("inheritPk_docvalues_string:" + SearchTool.escapeQueryChars(inheritPk));
 				searchList.promiseDeepForClass(siteRequest).onSuccess(a -> {
 					try {
 						if(searchList.size() >= 1) {

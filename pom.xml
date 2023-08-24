@@ -81,6 +81,7 @@
 		<postgresql.version>42.5.1</postgresql.version>
 		<ongres-scram.version>2.1</ongres-scram.version>
 		<junit.version>5.9.1</junit.version>
+		<junit-platform-launcher.version>1.4.2</junit-platform-launcher.version>
 		<mockito.version>4.10.0</mockito.version>
 		<commonmark.version>0.21.0</commonmark.version>
 
@@ -340,7 +341,6 @@
 			<groupId>io.vertx</groupId>
 			<artifactId>vertx-health-check</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>io.vertx</groupId>
 			<artifactId>vertx-kafka-client</artifactId>
@@ -448,7 +448,7 @@
 			<groupId>org.junit.platform</groupId>
 			<artifactId>junit-platform-launcher</artifactId>
 			<scope>test</scope>
-			<version>1.4.2</version>
+			<version>${junit-platform-launcher.version}</version>
 		</dependency>
 
 		<!-- ##### -->
@@ -585,17 +585,18 @@
 		</resources>
 
 		<plugins>
-	<plugin>
-		<groupId>org.codehaus.mojo</groupId>
-		<artifactId>exec-maven-plugin</artifactId>
-		<version>${exec-maven-plugin.version}</version>
-		<configuration>
-			<executable>maven</executable>
-			<includePluginDependencies>false</includePluginDependencies>
-			<includeProjectDependencies>true</includeProjectDependencies>
-			<mainClass>org.computate.smartvillageview.enus.vertx.MainVerticle</mainClass>
-		</configuration>
-	</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>${exec-maven-plugin.version}</version>
+				<configuration>
+					<executable>maven</executable>
+					<includePluginDependencies>false</includePluginDependencies>
+					<includeProjectDependencies>true</includeProjectDependencies>
+					<mainClass>org.computate.smartvillageview.enus.vertx.MainVerticle</mainClass>
+				</configuration>
+			</plugin>
 
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>

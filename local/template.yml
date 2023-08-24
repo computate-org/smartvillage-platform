@@ -33,8 +33,8 @@ SSL_VERIFY: false
 
 JDBC_HOST: "{{ JDBC_HOST }}"
 JDBC_PORT: {{ JDBC_PORT }}
-JDBC_DATABASE: "smartvillage"
-JDBC_USERNAME: "smartvillage"
+JDBC_DATABASE: "{{ JDBC_DATABASE }}"
+JDBC_USERNAME: "{{ JDBC_USERNAME }}"
 # oc get -n smartvillage secret/postgres-pguser-smartvillage -o 'jsonpath={.data.password}' | base64 -d && echo
 JDBC_PASSWORD: "{{ JDBC_PASSWORD }}"
 
@@ -52,22 +52,22 @@ KAFKA_SSL_TRUSTSTORE_LOCATION: "{{ KAFKA_SSL_TRUSTSTORE_LOCATION }}"
 # oc get -n smartvillage secret/smartvillage-kafka-cluster-ca-cert -o 'jsonpath={.data.ca\.password}' | base64 -d && echo
 KAFKA_SSL_TRUSTSTORE_PASSWORD: "{{ KAFKA_SSL_TRUSTSTORE_PASSWORD }}"
 
-AUTH_HOST_NAME: "{{ AUTH_HOST_NAME }}"
+AUTH_HOST_NAME: "{{ AUTH_HOST_NAME | default('') }}"
 AUTH_PORT: {{ AUTH_PORT }}
 AUTH_SSL: {{ AUTH_SSL | lower }}
 AUTH_SSL_REQUIRED: {{ AUTH_SSL_REQUIRED }}
-AUTH_REALM: "{{ AUTH_REALM }}"
-AUTH_CLIENT: "{{ AUTH_CLIENT }}"
-AUTH_SECRET: "{{ AUTH_SECRET }}"
+AUTH_REALM: "{{ AUTH_REALM | default('') }}"
+AUTH_CLIENT: "{{ AUTH_CLIENT | default('') }}"
+AUTH_SECRET: "{{ AUTH_SECRET | default('') }}"
 AUTH_URL: "{{ AUTH_URL }}"
 AUTH_TOKEN_URI: "{{ AUTH_TOKEN_URI }}"
 
-SOLR_HOST_NAME: {{ SOLR_HOST_NAME }}
+SOLR_HOST_NAME: "{{ SOLR_HOST_NAME }}"
 SOLR_PORT: {{ SOLR_PORT }}
 SOLR_COLLECTION: "{{ SOLR_COLLECTION }}"
-SOLR_URL: "http://{{ SOLR_HOST_NAME }}:{{ SOLR_PORT }}/solr/{{ SOLR_COLLECTION }}"
-SOLR_URL_COMPUTATE: "http://{{ SOLR_HOST_NAME }}:{{ SOLR_PORT }}/solr/computate"
-SOLR_SSL: false
+SOLR_URL: "{{ SOLR_URL }}"
+SOLR_URL_COMPUTATE: "{{ SOLR_URL_COMPUTATE }}"
+SOLR_SSL: {{ SOLR_SSL }}
 
 API_TITLE: "{{ SITE_NAME }}"
 API_CONTACT_EMAIL: "{{ EMAIL_FROM }}"
@@ -102,57 +102,59 @@ WRITE_COMMENTS: true
 
 # Enable data import in the site. 
 ENABLE_IMPORT_DATA: {{ ENABLE_IMPORT_DATA | lower }}
-ENABLE_IMPORT_DATA_MapResult: true
-ENABLE_IMPORT_DATA_SystemEvent: true
-ENABLE_IMPORT_DATA_SitePage: true
-ENABLE_IMPORT_DATA_SiteHtm: true
 ENABLE_IMPORT_DATA_IotNode: true
-ENABLE_IMPORT_DATA_IotNodeStep: true
-ENABLE_IMPORT_DATA_PersonStep: true
-ENABLE_IMPORT_DATA_BicycleStep: true
-ENABLE_IMPORT_DATA_TimeStep: true
-ENABLE_IMPORT_DATA_TrafficSimulation: false
-ENABLE_IMPORT_DATA_TrafficFlowObserved: true
-ENABLE_IMPORT_DATA_TrafficLight: true
+ENABLE_IMPORT_DATA_SitePage: true
+ENABLE_IMPORT_DATA_SimulationReport: true
+ENABLE_IMPORT_DATA_TrafficSimulation: true
 ENABLE_IMPORT_DATA_TrafficLightStep: true
 ENABLE_IMPORT_DATA_VehicleStep: true
+ENABLE_IMPORT_DATA_PersonStep: true
+ENABLE_IMPORT_DATA_TrafficLight: true
+ENABLE_IMPORT_DATA_TimeStep: true
+ENABLE_IMPORT_DATA_BicycleStep: true
+ENABLE_IMPORT_DATA_TrafficFlowObserved: true
+ENABLE_IMPORT_DATA_SmartTrafficLight: true
+ENABLE_IMPORT_DATA_SystemEvent: true
+ENABLE_IMPORT_DATA_SiteHtm: true
+ENABLE_IMPORT_DATA_IotNodeStep: true
+ENABLE_IMPORT_DATA_MapResult: true
 
 # The Auth roles required to be an admin in the site. 
 AUTH_ROLE_ADMIN: {{ AUTH_ROLE_ADMIN }}
-# The Auth roles required to be a super admin in the site. 
-AUTH_ROLE_SUPER_ADMIN: {{ AUTH_ROLE_SUPER_ADMIN }}
 # The Auth roles required to add and modify site user records. 
 AUTH_ROLE_REQUIRED_SiteUser: 'SiteAdmin'
-# The Auth roles required to add and modify map result records. 
-AUTH_ROLE_REQUIRED_MapResult: 'SiteAdmin'
-# The Auth roles required to add and modify system event records. 
-AUTH_ROLE_REQUIRED_SystemEvent: 'SiteAdmin'
-# The Auth roles required to add and modify article records. 
-AUTH_ROLE_REQUIRED_SitePage: 'SiteAdmin'
-# The Auth roles required to add and modify HTML records. 
-AUTH_ROLE_REQUIRED_SiteHtm: 'SiteAdmin'
 # The Auth roles required to add and modify IOT node records. 
 AUTH_ROLE_REQUIRED_IotNode: 'SiteAdmin'
-# The Auth roles required to add and modify IOT node step records. 
-AUTH_ROLE_REQUIRED_IotNodeStep: 'SiteAdmin'
-# The Auth roles required to add and modify person step records. 
-AUTH_ROLE_REQUIRED_PersonStep: 'SiteAdmin'
-# The Auth roles required to add and modify bicycle step records. 
-AUTH_ROLE_REQUIRED_BicycleStep: 'SiteAdmin'
-# The Auth roles required to add and modify time step records. 
-AUTH_ROLE_REQUIRED_TimeStep: 'SiteAdmin'
+# The Auth roles required to add and modify article records. 
+AUTH_ROLE_REQUIRED_SitePage: 'SiteAdmin'
+# The Auth roles required to add and modify simulation report records. 
+AUTH_ROLE_REQUIRED_SimulationReport: 'SiteAdmin'
 # The Auth roles required to add and modify traffic simulation records. 
 AUTH_ROLE_REQUIRED_TrafficSimulation: 'SiteAdmin'
-AUTH_ROLE_REQUIRED_SimulationReport: 'SiteAdmin'
-AUTH_ROLE_REQUIRED_SmartTrafficLight: 'SiteAdmin'
-# The Auth roles required to add and modify traffic flow observed records. 
-AUTH_ROLE_REQUIRED_TrafficFlowObserved: 'SiteAdmin'
-# The Auth roles required to add and modify traffic light records. 
-AUTH_ROLE_REQUIRED_TrafficLight: 'SiteAdmin'
 # The Auth roles required to add and modify traffic light step records. 
 AUTH_ROLE_REQUIRED_TrafficLightStep: 'SiteAdmin'
 # The Auth roles required to add and modify vehicle step records. 
 AUTH_ROLE_REQUIRED_VehicleStep: 'SiteAdmin'
+# The Auth roles required to add and modify person step records. 
+AUTH_ROLE_REQUIRED_PersonStep: 'SiteAdmin'
+# The Auth roles required to add and modify traffic light records. 
+AUTH_ROLE_REQUIRED_TrafficLight: 'SiteAdmin'
+# The Auth roles required to add and modify time step records. 
+AUTH_ROLE_REQUIRED_TimeStep: 'SiteAdmin'
+# The Auth roles required to add and modify bicycle step records. 
+AUTH_ROLE_REQUIRED_BicycleStep: 'SiteAdmin'
+# The Auth roles required to add and modify traffic flow observed records. 
+AUTH_ROLE_REQUIRED_TrafficFlowObserved: 'SiteAdmin'
+# The Auth roles required to add and modify smart traffic light records. 
+AUTH_ROLE_REQUIRED_SmartTrafficLight: 'SiteAdmin'
+# The Auth roles required to add and modify system event records. 
+AUTH_ROLE_REQUIRED_SystemEvent: 'SiteAdmin'
+# The Auth roles required to add and modify HTML records. 
+AUTH_ROLE_REQUIRED_SiteHtm: 'SiteAdmin'
+# The Auth roles required to add and modify IOT node step records. 
+AUTH_ROLE_REQUIRED_IotNodeStep: 'SiteAdmin'
+# The Auth roles required to add and modify map result records. 
+AUTH_ROLE_REQUIRED_MapResult: 'SiteAdmin'
 
 YGGIO_HOST_NAME: "{{ YGGIO_HOST_NAME | default('') }}"
 YGGIO_PORT: {{ YGGIO_PORT | default('') }}

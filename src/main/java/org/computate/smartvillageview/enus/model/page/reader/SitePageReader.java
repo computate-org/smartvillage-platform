@@ -100,7 +100,7 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 	}
 
 	/**
-	 * Description: Import Site HTML data
+	 * Description: Generate I18n text
 	 * Val.Complete.enUS:Importing %s data completed. 
 	 * Val.Fail.enUS:Importing %s data failed. 
 	 */
@@ -152,7 +152,7 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 	}
 
 	/**
-	 * Description: Import Site HTML data
+	 * Description: Delete page data
 	 * Val.Complete.enUS:Importing %s data completed. 
 	 * Val.Fail.enUS:Importing %s data failed. 
 	 */
@@ -613,31 +613,7 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 					JsonObject htmRequest = new JsonObject().put("context", htmContext);
 
 					Promise<Void> promise = Promise.promise();
-//					promise.future().compose(b -> {
-//						Promise<Void> promise2 = Promise.promise();
-//						vertx.eventBus().request(String.format("smartabyar-smartvillage-enUS-%s", SiteHtm.CLASS_SIMPLE_NAME), htmRequest, new DeliveryOptions().setSendTimeout(config.getLong(ConfigKeys.VERTX_MAX_EVENT_LOOP_EXECUTE_TIME) * 1000).addHeader("action", String.format("putimport%sFuture", SiteHtm.CLASS_SIMPLE_NAME))).onSuccess(message -> {
-//							promise2.complete();
-//						}).onFailure(ex -> {
-//							promise2.fail(ex);
-//						});
-//						return promise2.future();
-//					});
-//					promise.future().onComplete(b -> {
-//						vertx.eventBus().request(String.format("smartabyar-smartvillage-enUS-%s", SiteHtm.CLASS_SIMPLE_NAME), htmRequest, new DeliveryOptions().setSendTimeout(config.getLong(ConfigKeys.VERTX_MAX_EVENT_LOOP_EXECUTE_TIME) * 1000).addHeader("action", String.format("putimport%sFuture", SiteHtm.CLASS_SIMPLE_NAME)));
-//						b.
-//					});
 					futureRequests.add(htmRequest);
-//					futures.add(Promise.promise().future().compose(b -> {
-//						Promise<Void> promise2 = Promise.promise();
-//						vertx.eventBus().request(String.format("smartabyar-smartvillage-enUS-%s", SiteHtm.CLASS_SIMPLE_NAME), htmRequest, new DeliveryOptions().setSendTimeout(config.getLong(ConfigKeys.VERTX_MAX_EVENT_LOOP_EXECUTE_TIME) * 1000).addHeader("action", String.format("putimport%sFuture", SiteHtm.CLASS_SIMPLE_NAME))).onSuccess(message -> {
-//							promise2.complete();
-//						}).onFailure(ex -> {
-//							promise2.fail(ex);
-//						});
-//						return promise2.future();
-//					}));
-					//KafkaProducerRecord<String, String> record = KafkaProducerRecord.create(topic, htmRequest.encode());
-					//futures.add(kafkaProducer.send(record));
 				}
 	
 				if(each != null) {
@@ -744,17 +720,6 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 					JsonObject htmRequest = new JsonObject().put("context", htmContext);
 
 					futureRequests.add(htmRequest);
-//					futures.add(Future.succeededFuture().compose(b -> {
-//						Promise<Void> promise2 = Promise.promise();
-//						vertx.eventBus().request(String.format("smartabyar-smartvillage-enUS-%s", SiteHtm.CLASS_SIMPLE_NAME), htmRequest, new DeliveryOptions().setSendTimeout(config.getLong(ConfigKeys.VERTX_MAX_EVENT_LOOP_EXECUTE_TIME) * 1000).addHeader("action", String.format("putimport%sFuture", SiteHtm.CLASS_SIMPLE_NAME))).onSuccess(message -> {
-//							promise2.complete();
-//						}).onFailure(ex -> {
-//							promise2.fail(ex);
-//						});
-//						return promise2.future();
-//					}));
-					//KafkaProducerRecord<String, String> record = KafkaProducerRecord.create(topic, htmRequest.encode());
-					//futures.add(kafkaProducer.send(record));
 				}
 	
 				if(e != null) {

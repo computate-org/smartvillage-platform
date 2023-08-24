@@ -1,4 +1,5 @@
 
+
 # Install Ansible dependencies
 
 ```bash
@@ -66,6 +67,18 @@ source ~/.bashrc
 pip install setuptools_rust wheel
 pip install --upgrade pip
 pip install ansible
+```
+
+## Update the Ansible Galaxy collections for kubernetes.core
+
+```bash
+ansible-galaxy collection install kubernetes.core
+```
+
+## Update the Ansible Galaxy collections for kubernetes.core
+
+```bash
+ansible-galaxy collection install kubernetes.core
 ```
 
 # Setup the project
@@ -283,13 +296,13 @@ ZOOKEEPER_STORAGE_CLASS_NAME: "{{ REDHAT_OPENSHIFT_STORAGE_CLASS_NAME }}"
 SOLR_VOLUME_SIZE: 2Gi
 SOLR_STORAGE_CLASS_NAME: "{{ REDHAT_OPENSHIFT_STORAGE_CLASS_NAME }}"
 
-AUTH_REALM: TEAM19
-AUTH_CLIENT: team19
+AUTH_REALM: SMARTVILLAGE
+AUTH_CLIENT: smartvillage
 AUTH_SECRET: ...
 AUTH_HOST_NAME: sso.computate.org
 AUTH_PORT: 443
 AUTH_SSL: true
-AUTH_TOKEN_URI: "/auth/realms/RH-IMPACT/protocol/openid-connect/token"
+AUTH_TOKEN_URI: "/auth/realms/SMARTVILLAGE/protocol/openid-connect/token"
 ```
 
 ## Run the Ansible automation to deploy the applications to OpenShift

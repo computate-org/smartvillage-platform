@@ -14,34 +14,37 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.computate.search.tool.SearchTool;
 import org.computate.smartvillageview.enus.config.ConfigKeys;
-import org.computate.smartvillageview.enus.model.htm.SiteHtmEnUSGenApiService;
-import org.computate.smartvillageview.enus.model.iotnode.IotNodeEnUSGenApiService;
-import org.computate.smartvillageview.enus.model.page.SitePage;
-import org.computate.smartvillageview.enus.model.page.SitePageEnUSGenApiService;
-import org.computate.smartvillageview.enus.model.system.event.SystemEventEnUSGenApiService;
-import org.computate.smartvillageview.enus.model.traffic.bicycle.step.BicycleStepEnUSGenApiService;
-import org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLightEnUSGenApiService;
-import org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved.TrafficFlowObservedEnUSGenApiService;
-import org.computate.smartvillageview.enus.model.traffic.light.TrafficLightEnUSGenApiService;
-import org.computate.smartvillageview.enus.model.traffic.light.step.TrafficLightStepEnUSGenApiService;
-import org.computate.smartvillageview.enus.model.traffic.person.step.PersonStepEnUSGenApiService;
-import org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulationEnUSGenApiService;
-import org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReportEnUSGenApiService;
-import org.computate.smartvillageview.enus.model.traffic.time.step.TimeStepEnUSGenApiService;
-import org.computate.smartvillageview.enus.model.traffic.vehicle.step.VehicleStepEnUSGenApiService;
-import org.computate.smartvillageview.enus.model.user.SiteUserEnUSGenApiService;
-import org.computate.smartvillageview.enus.mqtt.MqttMessageReader;
-import org.computate.smartvillageview.enus.page.HomePage;
-import org.computate.smartvillageview.enus.page.dynamic.DynamicPage;
-import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
-import org.computate.smartvillageview.enus.result.iotnode.step.IotNodeStepEnUSGenApiService;
-import org.computate.smartvillageview.enus.result.map.MapResultEnUSGenApiService;
 import org.computate.vertx.handlebars.AuthHelpers;
 import org.computate.vertx.handlebars.DateHelpers;
 import org.computate.vertx.handlebars.SiteHelpers;
 import org.computate.vertx.openapi.OpenApi3Generator;
 import org.computate.vertx.search.list.SearchList;
 import org.computate.vertx.verticle.EmailVerticle;
+import org.computate.smartvillageview.enus.config.ConfigKeys;
+import org.computate.smartvillageview.enus.page.PageLayout;
+import org.computate.smartvillageview.enus.page.HomePage;
+import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
+import org.computate.smartvillageview.enus.model.page.SitePage;
+import org.computate.smartvillageview.enus.page.dynamic.DynamicPage;
+import org.computate.smartvillageview.enus.model.user.SiteUserEnUSGenApiService;
+import org.computate.smartvillageview.enus.model.page.SitePageEnUSGenApiService;
+import org.computate.smartvillageview.enus.model.htm.SiteHtmEnUSGenApiService;
+import org.computate.smartvillageview.enus.model.iotnode.IotNodeEnUSGenApiService;
+import org.computate.smartvillageview.enus.model.page.SitePageEnUSGenApiService;
+import org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReportEnUSGenApiService;
+import org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulationEnUSGenApiService;
+import org.computate.smartvillageview.enus.model.traffic.light.step.TrafficLightStepEnUSGenApiService;
+import org.computate.smartvillageview.enus.model.traffic.vehicle.step.VehicleStepEnUSGenApiService;
+import org.computate.smartvillageview.enus.model.traffic.person.step.PersonStepEnUSGenApiService;
+import org.computate.smartvillageview.enus.model.traffic.light.TrafficLightEnUSGenApiService;
+import org.computate.smartvillageview.enus.model.traffic.time.step.TimeStepEnUSGenApiService;
+import org.computate.smartvillageview.enus.model.traffic.bicycle.step.BicycleStepEnUSGenApiService;
+import org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved.TrafficFlowObservedEnUSGenApiService;
+import org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLightEnUSGenApiService;
+import org.computate.smartvillageview.enus.model.system.event.SystemEventEnUSGenApiService;
+import org.computate.smartvillageview.enus.model.htm.SiteHtmEnUSGenApiService;
+import org.computate.smartvillageview.enus.result.iotnode.step.IotNodeStepEnUSGenApiService;
+import org.computate.smartvillageview.enus.result.map.MapResultEnUSGenApiService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -106,6 +109,7 @@ import io.vertx.pgclient.PgPool;
 import io.vertx.spi.cluster.zookeeper.ZookeeperClusterManager;
 import io.vertx.sqlclient.PoolOptions;
 import io.vertx.sqlclient.Tuple;
+import org.computate.smartvillageview.enus.mqtt.MqttMessageReader;
 
 
 
@@ -309,10 +313,11 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 					vertx.deployVerticle(MainVerticle.class, deploymentOptions).onSuccess(a -> {
 						LOG.info("Started main verticle. ");
 						vertx.deployVerticle(EmailVerticle.class, emailVerticleDeploymentOptions).onSuccess(c -> {
+							LOG.info("Started email verticle. ");
 							if(config.getBoolean(ConfigKeys.ENABLE_IMPORT_DATA)) {
 								vertx.deployVerticle(WorkerVerticle.class, WorkerVerticleDeploymentOptions).onSuccess(b -> {
 								LOG.info("Started worker verticle. ");
-									LOG.info("Started email verticle. ");
+									LOG.info("Started worker verticle. ");
 								}).onFailure(ex -> {
 									LOG.error("Failed to start worker verticle. ", ex);
 								});
@@ -366,13 +371,11 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 									configureEmail().onComplete(i -> 
 										configureHandlebars().onComplete(j -> 
 											configureKafka().onComplete(k -> 
-//												configureMqtt().onComplete(l -> 
-													configureApi().onComplete(m -> 
-														configureUi().onComplete(n -> 
-															startServer().onComplete(o -> startPromise.complete())
-														).onFailure(ex -> startPromise.fail(ex))
+												configureApi().onComplete(m -> 
+													configureUi().onComplete(n -> 
+														startServer().onComplete(o -> startPromise.complete())
 													).onFailure(ex -> startPromise.fail(ex))
-//												).onFailure(ex -> startPromise.fail(ex))
+												).onFailure(ex -> startPromise.fail(ex))
 											).onFailure(ex -> startPromise.fail(ex))
 										).onFailure(ex -> startPromise.fail(ex))
 									).onFailure(ex -> startPromise.fail(ex))
@@ -599,84 +602,84 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 						sessionHandler.setCookieSecureFlag(true);
 			
 					RouterBuilder.create(vertx, "webroot/openapi3-enUS.yml").onSuccess(routerBuilder -> {
-							routerBuilder.mountServicesFromExtensions();
-			
-							routerBuilder.serviceExtraPayloadMapper(routingContext -> new JsonObject()
-									.put("uri", routingContext.request().uri())
-									.put("method", routingContext.request().method().name())
-									);
-							routerBuilder.rootHandler(sessionHandler);
-							routerBuilder.securityHandler("openIdConnect", oauth2AuthHandler);
-							routerBuilder.operation("callback").handler(ctx -> {
-			
-								// Handle the callback of the flow
-								final String code = ctx.request().getParam("code");
-			
-								// code is a require value
-								if (code == null) {
-									ctx.fail(400);
-									return;
-								}
-			
-								final String state = ctx.request().getParam("state");
-			
-								final JsonObject config = new JsonObject().put("code", code);
-			
-								config.put("redirectUri", siteBaseUrl + "/callback");
-			
-								oauth2AuthenticationProvider.authenticate(config, res -> {
-									if (res.failed()) {
-										LOG.error("Failed to authenticate user. ", res.cause());
-										ctx.fail(res.cause());
+						routerBuilder.mountServicesFromExtensions();
+		
+						routerBuilder.serviceExtraPayloadMapper(routingContext -> new JsonObject()
+								.put("uri", routingContext.request().uri())
+								.put("method", routingContext.request().method().name())
+								);
+						routerBuilder.rootHandler(sessionHandler);
+						routerBuilder.securityHandler("openIdConnect", oauth2AuthHandler);
+						routerBuilder.operation("callback").handler(ctx -> {
+		
+							// Handle the callback of the flow
+							final String code = ctx.request().getParam("code");
+		
+							// code is a require value
+							if (code == null) {
+								ctx.fail(400);
+								return;
+							}
+		
+							final String state = ctx.request().getParam("state");
+		
+							final JsonObject config = new JsonObject().put("code", code);
+		
+							config.put("redirectUri", siteBaseUrl + "/callback");
+		
+							oauth2AuthenticationProvider.authenticate(config, res -> {
+								if (res.failed()) {
+									LOG.error("Failed to authenticate user. ", res.cause());
+									ctx.fail(res.cause());
+								} else {
+									ctx.setUser(res.result());
+									Session session = ctx.session();
+									if (session != null) {
+										// the user has upgraded from unauthenticated to authenticated
+										// session should be upgraded as recommended by owasp
+										Cookie cookie = Cookie.cookie("sessionIdBefore", session.id());
+										if(StringUtils.startsWith(siteBaseUrl, "https://"))
+											cookie.setSecure(true);
+										ctx.addCookie(cookie);
+										session.regenerateId();
+										String redirectUri = session.get("redirect_uri");
+										// we should redirect the UA so this link becomes invalid
+										ctx.response()
+												// disable all caching
+												.putHeader(HttpHeaders.CACHE_CONTROL, "no-cache, no-store, must-revalidate")
+												.putHeader("Pragma", "no-cache")
+												.putHeader(HttpHeaders.EXPIRES, "0")
+												// redirect (when there is no state, redirect to home
+												.putHeader(HttpHeaders.LOCATION, redirectUri != null ? redirectUri : "/")
+												.setStatusCode(302)
+												.end("Redirecting to " + (redirectUri != null ? redirectUri : "/") + ".");
 									} else {
-										ctx.setUser(res.result());
-										Session session = ctx.session();
-										if (session != null) {
-											// the user has upgraded from unauthenticated to authenticated
-											// session should be upgraded as recommended by owasp
-											Cookie cookie = Cookie.cookie("sessionIdBefore", session.id());
-											if(StringUtils.startsWith(siteBaseUrl, "https://"))
-												cookie.setSecure(true);
-											ctx.addCookie(cookie);
-											session.regenerateId();
-											String redirectUri = session.get("redirect_uri");
-											// we should redirect the UA so this link becomes invalid
-											ctx.response()
-													// disable all caching
-													.putHeader(HttpHeaders.CACHE_CONTROL, "no-cache, no-store, must-revalidate")
-													.putHeader("Pragma", "no-cache")
-													.putHeader(HttpHeaders.EXPIRES, "0")
-													// redirect (when there is no state, redirect to home
-													.putHeader(HttpHeaders.LOCATION, redirectUri != null ? redirectUri : "/")
-													.setStatusCode(302)
-													.end("Redirecting to " + (redirectUri != null ? redirectUri : "/") + ".");
-										} else {
-											// there is no session object so we cannot keep state
-											ctx.reroute(state != null ? state : "/");
-										}
+										// there is no session object so we cannot keep state
+										ctx.reroute(state != null ? state : "/");
 									}
-								});
+								}
 							});
-							routerBuilder.operation("callback").failureHandler(ex -> {
-								LOG.error("Failed callback. ", ex);
-							});
-			
-							routerBuilder.operation("logout").handler(rc -> {
-								String redirectUri = rc.request().params().get("redirect_uri");
-								if(redirectUri == null)
-									redirectUri = "/";
-								rc.clearUser();
-								rc.response()
-										.putHeader(HttpHeaders.LOCATION, redirectUri)
-										.setStatusCode(302)
-										.end("Redirecting to " + redirectUri + ".");
-							});
-							routerBuilder.operation("logout").handler(c -> {});
-			
-							router = routerBuilder.createRouter();
-			
-							LOG.info(configureOpenApiSuccess);
-							promise.complete();
+						});
+						routerBuilder.operation("callback").failureHandler(ex -> {
+							LOG.error("Failed callback. ", ex);
+						});
+		
+						routerBuilder.operation("logout").handler(rc -> {
+							String redirectUri = rc.request().params().get("redirect_uri");
+							if(redirectUri == null)
+								redirectUri = "/";
+							rc.clearUser();
+							rc.response()
+									.putHeader(HttpHeaders.LOCATION, redirectUri)
+									.setStatusCode(302)
+									.end("Redirecting to " + redirectUri + ".");
+						});
+						routerBuilder.operation("logout").handler(c -> {});
+		
+						router = routerBuilder.createRouter();
+		
+						LOG.info(configureOpenApiSuccess);
+						promise.complete();
 					}).onFailure(ex -> {
 						Exception ex2 = new RuntimeException("OpenID Connect Discovery failed", ex);
 						LOG.error(configureOpenApiError, ex2);
@@ -890,22 +893,22 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 		Promise<Void> promise = Promise.promise();
 		try {
 			SiteUserEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
-			MapResultEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
-			SystemEventEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
-			SitePageEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
-			SiteHtmEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
 			IotNodeEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
-			IotNodeStepEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
-			PersonStepEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
-			BicycleStepEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
-			TimeStepEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
+			SitePageEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
+			SimulationReportEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
 			TrafficSimulationEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
-			TrafficFlowObservedEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
-			SmartTrafficLightEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
-			TrafficLightEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
 			TrafficLightStepEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
 			VehicleStepEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
-			SimulationReportEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
+			PersonStepEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
+			TrafficLightEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
+			TimeStepEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
+			BicycleStepEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
+			TrafficFlowObservedEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
+			SmartTrafficLightEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
+			SystemEventEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
+			SiteHtmEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
+			IotNodeStepEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
+			MapResultEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
 
 			LOG.info(configureApiComplete);
 			promise.complete();
@@ -1178,7 +1181,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 	 *	Setup the stopPromise to handle tearing down the server. 
 	 **/
 	@Override()
-	public void  stop(Promise<Void> promise) throws Exception, Exception {
+	public void stop(Promise<Void> promise) throws Exception, Exception {
 		stopPgPool().onComplete(a -> {
 			stopMqtt().onComplete(b -> {
 				promise.complete();

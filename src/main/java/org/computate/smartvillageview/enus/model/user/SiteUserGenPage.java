@@ -505,7 +505,9 @@ public class SiteUserGenPage extends SiteUserGenPageGen<BaseModelPage> {
 
 	@Override
 	protected void _roleRequired(List<String> l) {
-		l.add(siteRequest_.getConfig().getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SiteUser"));
+		Optional.ofNullable(siteRequest_.getConfig().getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SiteUser")).ifPresent(v -> {
+			l.add(v);
+		});
 	}
 
 	@Override

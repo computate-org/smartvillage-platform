@@ -40,8 +40,8 @@ API_COUNTER_FETCH_SiteHtm: 10
 
 JDBC_HOST: localhost
 JDBC_PORT: 5432
-JDBC_DATABASE: smartabyar-smartvillage
-JDBC_USERNAME: smartabyar-smartvillage
+JDBC_DATABASE: smartvillage
+JDBC_USERNAME: smartvillage
 JDBC_PASSWORD: password
 JDBC_MAX_POOL_SIZE: 10
 JDBC_MAX_WAIT_QUEUE_SIZE: 1000
@@ -65,7 +65,7 @@ ZOOKEEPER_MAX_RETRIES: 5
 ZOOKEEPER_CONNECTION_TIMEOUT_MILLIS: 3000
 ZOOKEEPER_SESSION_TIMEOUT_MILLIS: 5000
 
-SOLR_URL: http://localhost:8983/solr/smartabyar-smartvillage
+SOLR_URL: https://solr-smartvillage.apps-crc.testing/solr/smartabyar-smartvillage
 SOLR_HOST_NAME: solr-smartvillage.apps-crc.testing
 SOLR_PORT: 443
 SOLR_COLLECTION: smartvillage
@@ -88,71 +88,77 @@ EMAIL_ADMIN:
 
 REFRESH_DATA_PAUSE_IN_SECONDS: 10
 ENABLE_REFRESH_DATA: false
-ENABLE_REFRESH_DATA_MapResult: true
-ENABLE_REFRESH_DATA_SystemEvent: true
-ENABLE_REFRESH_DATA_SitePage: true
-ENABLE_REFRESH_DATA_SiteHtm: true
 ENABLE_REFRESH_DATA_IotNode: true
-ENABLE_REFRESH_DATA_IotNodeStep: true
-ENABLE_REFRESH_DATA_PersonStep: true
-ENABLE_REFRESH_DATA_BicycleStep: true
-ENABLE_REFRESH_DATA_TimeStep: true
+ENABLE_REFRESH_DATA_SitePage: true
+ENABLE_REFRESH_DATA_SimulationReport: true
 ENABLE_REFRESH_DATA_TrafficSimulation: true
-ENABLE_REFRESH_DATA_TrafficFlowObserved: true
-ENABLE_REFRESH_DATA_TrafficLight: true
 ENABLE_REFRESH_DATA_TrafficLightStep: true
 ENABLE_REFRESH_DATA_VehicleStep: true
+ENABLE_REFRESH_DATA_PersonStep: true
+ENABLE_REFRESH_DATA_TrafficLight: true
+ENABLE_REFRESH_DATA_TimeStep: true
+ENABLE_REFRESH_DATA_BicycleStep: true
+ENABLE_REFRESH_DATA_TrafficFlowObserved: true
+ENABLE_REFRESH_DATA_SmartTrafficLight: true
+ENABLE_REFRESH_DATA_SystemEvent: true
+ENABLE_REFRESH_DATA_SiteHtm: true
+ENABLE_REFRESH_DATA_IotNodeStep: true
+ENABLE_REFRESH_DATA_MapResult: true
 
 ENABLE_IMPORT_DATA: true
-ENABLE_IMPORT_DATA_MapResult: true
-ENABLE_IMPORT_DATA_SystemEvent: true
-ENABLE_IMPORT_DATA_SitePage: true
-ENABLE_IMPORT_DATA_SiteHtm: true
 ENABLE_IMPORT_DATA_IotNode: true
-ENABLE_IMPORT_DATA_IotNodeStep: true
-ENABLE_IMPORT_DATA_PersonStep: true
-ENABLE_IMPORT_DATA_BicycleStep: true
-ENABLE_IMPORT_DATA_TimeStep: true
+ENABLE_IMPORT_DATA_SitePage: true
+ENABLE_IMPORT_DATA_SimulationReport: true
 ENABLE_IMPORT_DATA_TrafficSimulation: true
-ENABLE_IMPORT_DATA_TrafficFlowObserved: true
-ENABLE_IMPORT_DATA_TrafficLight: true
 ENABLE_IMPORT_DATA_TrafficLightStep: true
 ENABLE_IMPORT_DATA_VehicleStep: true
+ENABLE_IMPORT_DATA_PersonStep: true
+ENABLE_IMPORT_DATA_TrafficLight: true
+ENABLE_IMPORT_DATA_TimeStep: true
+ENABLE_IMPORT_DATA_BicycleStep: true
+ENABLE_IMPORT_DATA_TrafficFlowObserved: true
+ENABLE_IMPORT_DATA_SmartTrafficLight: true
+ENABLE_IMPORT_DATA_SystemEvent: true
+ENABLE_IMPORT_DATA_SiteHtm: true
+ENABLE_IMPORT_DATA_IotNodeStep: true
+ENABLE_IMPORT_DATA_MapResult: true
 
 # The Auth roles required to be an admin in the site. 
 AUTH_ROLE_ADMIN: 'SiteAdmin'
-# The Auth roles required to be an admin in the site. 
-AUTH_ROLE_SUPER_ADMIN: 'SuperAdmin'
 # The Auth roles required to add and modify site user records. 
 AUTH_ROLE_REQUIRED_SiteUser: 'SiteAdmin'
-# The Auth roles required to add and modify map result records. 
-AUTH_ROLE_REQUIRED_MapResult: 'SiteAdmin'
-# The Auth roles required to add and modify system event records. 
-AUTH_ROLE_REQUIRED_SystemEvent: 'SiteAdmin'
-# The Auth roles required to add and modify article records. 
-AUTH_ROLE_REQUIRED_SitePage: 'SiteAdmin'
-# The Auth roles required to add and modify HTML records. 
-AUTH_ROLE_REQUIRED_SiteHtm: 'SiteAdmin'
 # The Auth roles required to add and modify IOT node records. 
 AUTH_ROLE_REQUIRED_IotNode: 'SiteAdmin'
-# The Auth roles required to add and modify IOT node step records. 
-AUTH_ROLE_REQUIRED_IotNodeStep: 'SiteAdmin'
-# The Auth roles required to add and modify person step records. 
-AUTH_ROLE_REQUIRED_PersonStep: 'SiteAdmin'
-# The Auth roles required to add and modify bicycle step records. 
-AUTH_ROLE_REQUIRED_BicycleStep: 'SiteAdmin'
-# The Auth roles required to add and modify time step records. 
-AUTH_ROLE_REQUIRED_TimeStep: 'SiteAdmin'
+# The Auth roles required to add and modify article records. 
+AUTH_ROLE_REQUIRED_SitePage: 'SiteAdmin'
+# The Auth roles required to add and modify simulation report records. 
+AUTH_ROLE_REQUIRED_SimulationReport: 'SiteAdmin'
 # The Auth roles required to add and modify traffic simulation records. 
 AUTH_ROLE_REQUIRED_TrafficSimulation: 'SiteAdmin'
-# The Auth roles required to add and modify traffic flow observed records. 
-AUTH_ROLE_REQUIRED_TrafficFlowObserved: 'SiteAdmin'
-# The Auth roles required to add and modify traffic light records. 
-AUTH_ROLE_REQUIRED_TrafficLight: 'SiteAdmin'
 # The Auth roles required to add and modify traffic light step records. 
 AUTH_ROLE_REQUIRED_TrafficLightStep: 'SiteAdmin'
 # The Auth roles required to add and modify vehicle step records. 
 AUTH_ROLE_REQUIRED_VehicleStep: 'SiteAdmin'
+# The Auth roles required to add and modify person step records. 
+AUTH_ROLE_REQUIRED_PersonStep: 'SiteAdmin'
+# The Auth roles required to add and modify traffic light records. 
+AUTH_ROLE_REQUIRED_TrafficLight: 'SiteAdmin'
+# The Auth roles required to add and modify time step records. 
+AUTH_ROLE_REQUIRED_TimeStep: 'SiteAdmin'
+# The Auth roles required to add and modify bicycle step records. 
+AUTH_ROLE_REQUIRED_BicycleStep: 'SiteAdmin'
+# The Auth roles required to add and modify traffic flow observed records. 
+AUTH_ROLE_REQUIRED_TrafficFlowObserved: 'SiteAdmin'
+# The Auth roles required to add and modify smart traffic light records. 
+AUTH_ROLE_REQUIRED_SmartTrafficLight: 'SiteAdmin'
+# The Auth roles required to add and modify system event records. 
+AUTH_ROLE_REQUIRED_SystemEvent: 'SiteAdmin'
+# The Auth roles required to add and modify HTML records. 
+AUTH_ROLE_REQUIRED_SiteHtm: 'SiteAdmin'
+# The Auth roles required to add and modify IOT node step records. 
+AUTH_ROLE_REQUIRED_IotNodeStep: 'SiteAdmin'
+# The Auth roles required to add and modify map result records. 
+AUTH_ROLE_REQUIRED_MapResult: 'SiteAdmin'
 
 KAFKA_TOPIC_SUMO_RUN: smartvillage-sumo-run
 KAFKA_TOPIC_SUMO_STOP: smartvillage-sumo-stop
