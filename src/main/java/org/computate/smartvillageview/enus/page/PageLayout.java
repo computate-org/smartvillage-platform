@@ -241,7 +241,7 @@ public class PageLayout extends PageLayoutGen<Object> {
 	/**
 	 * Description: The required roles to access this page
 	 */
-	protected void _roleRequired(List<String> l) {
+	protected void _roleForWrite(List<String> l) {
 		l.add(siteRequest_.getConfig().getString(ConfigKeys.AUTH_ROLE_ADMIN));
 	}
 

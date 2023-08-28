@@ -558,7 +558,7 @@
 {{#block "htmSuggested"}}{{/block}}
 {{/inline}}
 {{#*inline "htmSuggestedBaseModelPage"}}
-			{{#ifContainsAnyRoles roles roleRequired}}
+			{{#ifContainsAnyRoles roles roleForWrite}}
 					<div class="">
 						<button id="refreshBaseModelGenPage{{id}}" class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3- "
 							onclick="patch{{classSimpleName}}Vals([], {}, function() { addGlow($('#refreshBaseModelGenPage{{id}}')); }, function() { addError($('#refreshBaseModelGenPage{{id}}')); }); "
@@ -610,6 +610,7 @@
 {{> PageLayout}}
 
 {{#*inline "htmPk"}}
+<!-- #*inline "htmPk" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									{{#eq 'Page' classApiMethodMethod}}
 										<div class="w3-padding ">
@@ -621,7 +622,7 @@
 													<div class="w3-cell ">
 														<div class="w3-rest ">
 															<span class="">
-																{{> "inputPk" roleRequired=roleRequired}}
+																{{> "inputPk" roleForWrite=roleForWrite roleForRead=roleForRead}}
 															</span>
 														</div>
 													</div>
@@ -634,72 +635,12 @@
 
 {{#*inline "inputPk"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<a href="{{ baseModel_.pageUrlApi }}" class="varBaseModel{{pk}}Pk ">{{baseModel_.pk}}</a>
+														<span class="varBaseModel{{pk}}Pk ">{{baseModel_.pk}}</span>
 	{{/eq}}
-{{/inline}}
-
-{{#*inline "htmInheritPk"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}BaseModelInheritPk">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputInheritPk" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3- "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_inheritPk')); $('#{{classApiMethodMethod}}_inheritPk').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#BaseModelForm :input[name=pk]').val() }], 'setInheritPk', null, function() { addGlow($('#{{classApiMethodMethod}}_inheritPk')); }, function() { addError($('#{{classApiMethodMethod}}_inheritPk')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputInheritPk"}}
-		{{#eq roleRequired "true"}}
-														<input
-															type="text"
-															title="An optional inherited primary key from a legacy system for this object in the database"
-															id="{{classApiMethodMethod}}_inheritPk"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setInheritPk classBaseModel inputBaseModel{{pk}}InheritPk w3-input w3-border "
-																name="setInheritPk"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setInheritPk classBaseModel inputBaseModel{{pk}}InheritPk w3-input w3-border "
-																name="setInheritPk"
-		{{else}}
-																class="valueInheritPk w3-input w3-border classBaseModel inputBaseModel{{pk}}InheritPk w3-input w3-border "
-																name="inheritPk"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setInheritPk', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_inheritPk')); }, function() { addError($('#{{classApiMethodMethod}}_inheritPk')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{baseModel_.inheritPk}}"
-	{{/eq}}
-														/>
-
-		{{else}}
-														<span class="varBaseModel{{pk}}InheritPk ">{{baseModel_.inheritPk}}</span>
-		{{/eq}}
 {{/inline}}
 
 {{#*inline "htmCreated"}}
+<!-- #*inline "htmCreated" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									<div class="w3-padding ">
 										<div id="suggest{{classApiMethodMethod}}BaseModelCreated">
@@ -709,7 +650,7 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputCreated" roleRequired=roleRequired}}
+														{{> "inputCreated" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
@@ -725,6 +666,7 @@
 {{/inline}}
 
 {{#*inline "htmModified"}}
+<!-- #*inline "htmModified" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									{{#eq 'Page' classApiMethodMethod}}
 										<div class="w3-padding ">
@@ -736,7 +678,7 @@
 													<div class="w3-cell ">
 														<div class="w3-rest ">
 															<span class="">
-																{{> "inputModified" roleRequired=roleRequired}}
+																{{> "inputModified" roleForWrite=roleForWrite roleForRead=roleForRead}}
 															</span>
 														</div>
 													</div>
@@ -753,7 +695,38 @@
 	{{/eq}}
 {{/inline}}
 
+{{#*inline "htmObjectId"}}
+<!-- #*inline "htmObjectId" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									{{#eq 'Page' classApiMethodMethod}}
+										<div class="w3-padding ">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-">
+													<label>ID</label>
+												</div>
+												<div class="w3-cell-row  ">
+													<div class="w3-cell ">
+														<div class="w3-rest ">
+															<span class="">
+																{{> "inputObjectId" roleForWrite=roleForWrite roleForRead=roleForRead}}
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+	{{/eq}}
+								</div>
+{{/inline}}
+
+{{#*inline "inputObjectId"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varBaseModel{{pk}}ObjectId ">{{baseModel_.objectId}}</span>
+	{{/eq}}
+{{/inline}}
+
 {{#*inline "htmArchived"}}
+<!-- #*inline "htmArchived" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									<div class="w3-padding ">
 										<div id="suggest{{classApiMethodMethod}}BaseModelArchived">
@@ -763,7 +736,7 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputArchived" roleRequired=roleRequired}}
+														{{> "inputArchived" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
@@ -773,7 +746,7 @@
 {{/inline}}
 
 {{#*inline "inputArchived"}}
-		{{#eq roleRequired "true"}}
+		{{#eq roleForWriteBool "true"}}
 	{{#eq 'Page' classApiMethodMethod}}
 															<input
 																type="checkbox"
@@ -817,6 +790,7 @@
 {{/inline}}
 
 {{#*inline "htmDeleted"}}
+<!-- #*inline "htmDeleted" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									<div class="w3-padding ">
 										<div id="suggest{{classApiMethodMethod}}BaseModelDeleted">
@@ -826,7 +800,7 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputDeleted" roleRequired=roleRequired}}
+														{{> "inputDeleted" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
@@ -836,7 +810,7 @@
 {{/inline}}
 
 {{#*inline "inputDeleted"}}
-		{{#eq roleRequired "true"}}
+		{{#eq roleForWriteBool "true"}}
 	{{#eq 'Page' classApiMethodMethod}}
 															<input
 																type="checkbox"
@@ -877,103 +851,4 @@
 		{{else}}
 														<span class="varBaseModel{{pk}}Deleted ">{{baseModel_.deleted}}</span>
 		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmSessionId"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}BaseModelSessionId">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputSessionId" roleRequired=roleRequired}}
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputSessionId"}}
-	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varBaseModel{{pk}}SessionId ">{{baseModel_.sessionId}}</span>
-	{{/eq}}
-{{/inline}}
-
-{{#*inline "htmUserKey"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}BaseModelUserKey">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputUserKey" roleRequired=roleRequired}}
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputUserKey"}}
-	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varBaseModel{{pk}}UserKey ">{{baseModel_.userKey}}</span>
-	{{/eq}}
-{{/inline}}
-
-{{#*inline "htmObjectTitle"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
-											<div class="w3-card ">
-												<div class="w3-cell-row  ">
-													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputObjectTitle" roleRequired=roleRequired}}
-															</span>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-	{{/eq}}
-								</div>
-{{/inline}}
-
-{{#*inline "inputObjectTitle"}}
-	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varBaseModel{{pk}}ObjectTitle ">{{baseModel_.objectTitle}}</span>
-	{{/eq}}
-{{/inline}}
-
-{{#*inline "htmObjectId"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-">
-													<label>ID</label>
-												</div>
-												<div class="w3-cell-row  ">
-													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputObjectId" roleRequired=roleRequired}}
-															</span>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-	{{/eq}}
-								</div>
-{{/inline}}
-
-{{#*inline "inputObjectId"}}
-	{{#eq 'Page' classApiMethodMethod}}
-														<a href="{{ baseModel_.pageUrlId }}" class="varBaseModel{{pk}}ObjectId ">{{baseModel_.objectId}}</a>
-	{{/eq}}
 {{/inline}}

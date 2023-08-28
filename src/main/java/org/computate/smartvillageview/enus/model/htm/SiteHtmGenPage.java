@@ -499,7 +499,7 @@ public class SiteHtmGenPage extends SiteHtmGenPageGen<BaseResultPage> {
 	}
 
 	@Override
-	protected void _roleRequired(List<String> l) {
+	protected void _roleForWrite(List<String> l) {
 		Optional.ofNullable(siteRequest_.getConfig().getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SiteHtm")).ifPresent(v -> {
 			l.add(v);
 		});

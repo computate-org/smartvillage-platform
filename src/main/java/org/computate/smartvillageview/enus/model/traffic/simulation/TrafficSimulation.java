@@ -459,6 +459,8 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Facet: true
 	 * DisplayName: simulation reports
 	 * Description: The generated reports for this simulation
+	 * HtmRow: 4
+	 * HtmCell: 1
 	 */
 	protected void _reportKeys(List<Long> w) {
 	}

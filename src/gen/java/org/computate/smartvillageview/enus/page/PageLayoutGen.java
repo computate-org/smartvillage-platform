@@ -1669,77 +1669,77 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	//////////////////
-	// roleRequired //
+	// roleForWrite //
 	//////////////////
 
 
-	/**	 The entity roleRequired
+	/**	 The entity roleForWrite
 	 *	 It is constructed before being initialized with the constructor by default. 
 	 */
 	@JsonProperty
 	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
 	@JsonInclude(Include.NON_NULL)
-	protected List<String> roleRequired = new ArrayList<String>();
+	protected List<String> roleForWrite = new ArrayList<String>();
 
-	/**	<br> The entity roleRequired
+	/**	<br> The entity roleForWrite
 	 *  It is constructed before being initialized with the constructor by default. 
-	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.PageLayout&fq=entiteVar_enUS_indexed_string:roleRequired">Find the entity roleRequired in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.page.PageLayout&fq=entiteVar_enUS_indexed_string:roleForWrite">Find the entity roleForWrite in Solr</a>
 	 * <br>
 	 * @param l is the entity already constructed. 
 	 **/
-	protected abstract void _roleRequired(List<String> l);
+	protected abstract void _roleForWrite(List<String> l);
 
-	public List<String> getRoleRequired() {
-		return roleRequired;
+	public List<String> getRoleForWrite() {
+		return roleForWrite;
 	}
 
-	public void setRoleRequired(List<String> roleRequired) {
-		this.roleRequired = roleRequired;
+	public void setRoleForWrite(List<String> roleForWrite) {
+		this.roleForWrite = roleForWrite;
 	}
-	public void setRoleRequired(String o) {
-		String l = PageLayout.staticSetRoleRequired(siteRequest_, o);
+	public void setRoleForWrite(String o) {
+		String l = PageLayout.staticSetRoleForWrite(siteRequest_, o);
 		if(l != null)
-			addRoleRequired(l);
+			addRoleForWrite(l);
 	}
-	public static String staticSetRoleRequired(SiteRequestEnUS siteRequest_, String o) {
+	public static String staticSetRoleForWrite(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
-	public PageLayout addRoleRequired(String...objects) {
+	public PageLayout addRoleForWrite(String...objects) {
 		for(String o : objects) {
-			addRoleRequired(o);
+			addRoleForWrite(o);
 		}
 		return (PageLayout)this;
 	}
-	public PageLayout addRoleRequired(String o) {
+	public PageLayout addRoleForWrite(String o) {
 		if(o != null)
-			this.roleRequired.add(o);
+			this.roleForWrite.add(o);
 		return (PageLayout)this;
 	}
 	@JsonIgnore
-	public void setRoleRequired(JsonArray objects) {
-		roleRequired.clear();
+	public void setRoleForWrite(JsonArray objects) {
+		roleForWrite.clear();
 		if(objects == null)
 			return;
 		for(int i = 0; i < objects.size(); i++) {
 			String o = objects.getString(i);
-			addRoleRequired(o);
+			addRoleForWrite(o);
 		}
 	}
-	protected PageLayout roleRequiredInit() {
-		_roleRequired(roleRequired);
+	protected PageLayout roleForWriteInit() {
+		_roleForWrite(roleForWrite);
 		return (PageLayout)this;
 	}
 
-	public static String staticSearchRoleRequired(SiteRequestEnUS siteRequest_, String o) {
+	public static String staticSearchRoleForWrite(SiteRequestEnUS siteRequest_, String o) {
 		return o;
 	}
 
-	public static String staticSearchStrRoleRequired(SiteRequestEnUS siteRequest_, String o) {
+	public static String staticSearchStrRoleForWrite(SiteRequestEnUS siteRequest_, String o) {
 		return o == null ? null : o.toString();
 	}
 
-	public static String staticSearchFqRoleRequired(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrRoleRequired(siteRequest_, PageLayout.staticSearchRoleRequired(siteRequest_, PageLayout.staticSetRoleRequired(siteRequest_, o)));
+	public static String staticSearchFqRoleForWrite(SiteRequestEnUS siteRequest_, String o) {
+		return PageLayout.staticSearchStrRoleForWrite(siteRequest_, PageLayout.staticSearchRoleForWrite(siteRequest_, PageLayout.staticSetRoleForWrite(siteRequest_, o)));
 	}
 
 	/////////////////
@@ -4377,7 +4377,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 				classSimpleNameInit();
 				pageTitleInit();
 				rolesInit();
-				roleRequiredInit();
+				roleForWriteInit();
 				roleForReadInit();
 				authRoleAdminInit();
 				authRoleSuperAdminInit();
@@ -4547,8 +4547,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 				return oPageLayout.pageTitle;
 			case "roles":
 				return oPageLayout.roles;
-			case "roleRequired":
-				return oPageLayout.roleRequired;
+			case "roleForWrite":
+				return oPageLayout.roleForWrite;
 			case "roleForRead":
 				return oPageLayout.roleForRead;
 			case "authRoleAdmin":
@@ -4726,8 +4726,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSetPageTitle(siteRequest_, o);
 		case "roles":
 			return PageLayout.staticSetRoles(siteRequest_, o);
-		case "roleRequired":
-			return PageLayout.staticSetRoleRequired(siteRequest_, o);
+		case "roleForWrite":
+			return PageLayout.staticSetRoleForWrite(siteRequest_, o);
 		case "roleForRead":
 			return PageLayout.staticSetRoleForRead(siteRequest_, o);
 		case "authRoleAdmin":
@@ -4870,8 +4870,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSearchPageTitle(siteRequest_, (String)o);
 		case "roles":
 			return PageLayout.staticSearchRoles(siteRequest_, (String)o);
-		case "roleRequired":
-			return PageLayout.staticSearchRoleRequired(siteRequest_, (String)o);
+		case "roleForWrite":
+			return PageLayout.staticSearchRoleForWrite(siteRequest_, (String)o);
 		case "roleForRead":
 			return PageLayout.staticSearchRoleForRead(siteRequest_, (String)o);
 		case "authRoleAdmin":
@@ -5014,8 +5014,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSearchStrPageTitle(siteRequest_, (String)o);
 		case "roles":
 			return PageLayout.staticSearchStrRoles(siteRequest_, (String)o);
-		case "roleRequired":
-			return PageLayout.staticSearchStrRoleRequired(siteRequest_, (String)o);
+		case "roleForWrite":
+			return PageLayout.staticSearchStrRoleForWrite(siteRequest_, (String)o);
 		case "roleForRead":
 			return PageLayout.staticSearchStrRoleForRead(siteRequest_, (String)o);
 		case "authRoleAdmin":
@@ -5158,8 +5158,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSearchFqPageTitle(siteRequest_, o);
 		case "roles":
 			return PageLayout.staticSearchFqRoles(siteRequest_, o);
-		case "roleRequired":
-			return PageLayout.staticSearchFqRoleRequired(siteRequest_, o);
+		case "roleForWrite":
+			return PageLayout.staticSearchFqRoleForWrite(siteRequest_, o);
 		case "roleForRead":
 			return PageLayout.staticSearchFqRoleForRead(siteRequest_, o);
 		case "authRoleAdmin":
@@ -5282,7 +5282,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	public static final String VAR_classSimpleName = "classSimpleName";
 	public static final String VAR_pageTitle = "pageTitle";
 	public static final String VAR_roles = "roles";
-	public static final String VAR_roleRequired = "roleRequired";
+	public static final String VAR_roleForWrite = "roleForWrite";
 	public static final String VAR_roleForRead = "roleForRead";
 	public static final String VAR_authRoleAdmin = "authRoleAdmin";
 	public static final String VAR_authRoleSuperAdmin = "authRoleSuperAdmin";
@@ -5357,7 +5357,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	public static final String DISPLAY_NAME_classSimpleName = "";
 	public static final String DISPLAY_NAME_pageTitle = "";
 	public static final String DISPLAY_NAME_roles = "";
-	public static final String DISPLAY_NAME_roleRequired = "";
+	public static final String DISPLAY_NAME_roleForWrite = "";
 	public static final String DISPLAY_NAME_roleForRead = "";
 	public static final String DISPLAY_NAME_authRoleAdmin = "";
 	public static final String DISPLAY_NAME_authRoleSuperAdmin = "";
@@ -5466,8 +5466,8 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return DISPLAY_NAME_pageTitle;
 		case VAR_roles:
 			return DISPLAY_NAME_roles;
-		case VAR_roleRequired:
-			return DISPLAY_NAME_roleRequired;
+		case VAR_roleForWrite:
+			return DISPLAY_NAME_roleForWrite;
 		case VAR_roleForRead:
 			return DISPLAY_NAME_roleForRead;
 		case VAR_authRoleAdmin:

@@ -498,7 +498,7 @@ public class SystemEventGenPage extends SystemEventGenPageGen<PageLayout> {
 	}
 
 	@Override
-	protected void _roleRequired(List<String> l) {
+	protected void _roleForWrite(List<String> l) {
 		l.add(siteRequest_.getConfig().getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SystemEvent"));
 	}
 

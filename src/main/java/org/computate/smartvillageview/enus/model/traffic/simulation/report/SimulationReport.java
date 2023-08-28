@@ -147,7 +147,7 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * DisplayName: simulation name
+	 * DisplayName: smart traffic light name
 	 * Facet: true
 	 */
 	protected void _smartTrafficLightName(Wrap<String> w) {
@@ -172,11 +172,13 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
+	 * HtmRowTitle: Vehicle traffic demand
+	 * HtmRowVertical: true
 	 * HtmRow: 5
 	 * HtmCell: 1
 	 * Facet: true
 	 * DisplayName: Average vehicle/min from WEST to EAST
-	 * Description: 
+	 * Description: [1, 30] corresponding to 1st value in list
 	 */
 	protected void _paramAvgVehiclePerMinFromWestToEast(Wrap<BigDecimal> w) {
 		if(simulation_ != null)
@@ -193,7 +195,7 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * HtmCell: 2
 	 * Facet: true
 	 * DisplayName: Average vehicle/min from SOUTH to NORTH
-	 * Description: 
+	 * Description: [1, 30] corresponding to 2nd value in list
 	 */
 	protected void _paramAvgVehiclePerMinFromSouthToNorth(Wrap<BigDecimal> w) {
 		if(simulation_ != null)
@@ -210,7 +212,7 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * HtmCell: 3
 	 * Facet: true
 	 * DisplayName: Demand scaling factor (multiplies all vehicle demands)
-	 * Description: 
+	 * Description: [1, 2] corresponding to "demand scale"
 	 */
 	protected void _paramVehicleDemandScalingFactor(Wrap<BigDecimal> w) {
 		if(simulation_ != null)
@@ -223,11 +225,12 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
+	 * HtmRowTitle: Pedestrian traffic demand
 	 * HtmRow: 6
 	 * HtmCell: 1
 	 * Facet: true
 	 * DisplayName: Average pedestrian/min from WEST to EAST
-	 * Description: 
+	 * Description: [1, 30] corresponding to 3rd value in list
 	 */
 	protected void _paramAvgPedestrianPerMinFromWestToEast(Wrap<BigDecimal> w) {
 		if(simulation_ != null)
@@ -244,7 +247,7 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * HtmCell: 2
 	 * Facet: true
 	 * DisplayName: Average pedestrian/min from WEST to EAST
-	 * Description: 
+	 * Description: [1, 30] corresponding to 4th value in list
 	 */
 	protected void _paramAvgPedestrianPerMinFromSouthToNorth(Wrap<BigDecimal> w) {
 		if(simulation_ != null)
@@ -261,7 +264,7 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * HtmCell: 3
 	 * Facet: true
 	 * DisplayName: Demand scaling factor (multiplies all pedestrian demands)
-	 * Description: 
+	 * Description: [1, 2] corresponding to "demand scale"
 	 */
 	protected void _paramPedestrianDemandScalingFactor(Wrap<BigDecimal> w) {
 		if(simulation_ != null)
@@ -290,11 +293,12 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
+	 * HtmRowTitle: Initial Traffic Light Control parameters
 	 * HtmRow: 7
 	 * HtmCell: 1
 	 * Facet: true
 	 * DisplayName: Min GREEN time for WEST-EAST traffic (sec)
-	 * Description: 
+	 * Description: [1, 50]
 	 */
 	protected void _paramMinGreenTimeSecWestEast(Wrap<BigDecimal> w) {
 		if(simulation_ != null)
@@ -311,7 +315,7 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * HtmCell: 2
 	 * Facet: true
 	 * DisplayName: Max GREEN time for WEST-EAST traffic (sec)
-	 * Description: 
+	 * Description: [1, 100], also greater than min value
 	 */
 	protected void _paramMaxGreenTimeSecWestEast(Wrap<BigDecimal> w) {
 		if(simulation_ != null)
@@ -324,11 +328,11 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 8
-	 * HtmCell: 1
+	 * HtmRow: 7
+	 * HtmCell: 3
 	 * Facet: true
 	 * DisplayName: Min GREEN time for SOUTH-NORTH traffic (sec)
-	 * Description: 
+	 * Description: [1, 50]
 	 */
 	protected void _paramMinGreenTimeSecSouthNorth(Wrap<BigDecimal> w) {
 		if(simulation_ != null)
@@ -341,11 +345,11 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 8
-	 * HtmCell: 2
+	 * HtmRow: 7
+	 * HtmCell: 4
 	 * Facet: true
 	 * DisplayName: Max GREEN time for SOUTH-NORTH traffic (sec)
-	 * Description: 
+	 * Description: [1, 100], also greater than min value
 	 */
 	protected void _paramMaxGreenTimeSecSouthNorth(Wrap<BigDecimal> w) {
 		if(simulation_ != null)
@@ -358,11 +362,11 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 9
-	 * HtmCell: 1
+	 * HtmRow: 7
+	 * HtmCell: 5
 	 * Facet: true
 	 * DisplayName: Pedestrian waiting time tolerance threshold for NORTH-SOUTH (sec)
-	 * Description: 
+	 * Description: [1, 60]
 	 */
 	protected void _paramPedestrianWaitThresholdSecNorthSouth(Wrap<BigDecimal> w) {
 		if(simulation_ != null)
@@ -375,11 +379,11 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 9
-	 * HtmCell: 2
+	 * HtmRow: 7
+	 * HtmCell: 6
 	 * Facet: true
 	 * DisplayName: Pedestrian waiting time tolerance threshold for WEST-EAST (sec)
-	 * Description: 
+	 * Description: [1, 60]
 	 */
 	protected void _paramPedestrianWaitThresholdSecWestEast(Wrap<BigDecimal> w) {
 		if(simulation_ != null)
@@ -392,11 +396,11 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 10
-	 * HtmCell: 1
+	 * HtmRow: 7
+	 * HtmCell: 7
 	 * Facet: true
 	 * DisplayName: Vehicle queue length threshold between low-high content for WEST-EAST
-	 * Description: 
+	 * Description: [1, 15]
 	 */
 	protected void _paramVehicleQueueThresholdWestEast(Wrap<BigDecimal> w) {
 		if(simulation_ != null)
@@ -409,11 +413,11 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 10
-	 * HtmCell: 2
+	 * HtmRow: 7
+	 * HtmCell: 8
 	 * Facet: true
 	 * DisplayName: Vehicle queue length threshold between low-high content for SOUTH-NORTH
-	 * Description: 
+	 * Description: [1, 15]
 	 */
 	protected void _paramVehicleQueueThresholdSouthNorth(Wrap<BigDecimal> w) {
 		if(simulation_ != null)
@@ -426,11 +430,11 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 11
-	 * HtmCell: 1
+	 * HtmRow: 7
+	 * HtmCell: 9
 	 * Facet: true
 	 * DisplayName: Pedestrian queue length threshold between low-high content for NORTH-SOUTH
-	 * Description: 
+	 * Description: [1, 15]
 	 */
 	protected void _paramPedestrianQueueThresholdNorthSouth(Wrap<BigDecimal> w) {
 		if(simulation_ != null)
@@ -443,11 +447,11 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 11
-	 * HtmCell: 2
+	 * HtmRow: 7
+	 * HtmCell: 10
 	 * Facet: true
 	 * DisplayName: Pedestrian queue length threshold between low-high content for WEST-EAST
-	 * Description: 
+	 * Description: [1, 15]
 	 */
 	protected void _paramPedestrianQueueThresholdWestEast(Wrap<BigDecimal> w) {
 		if(simulation_ != null)
@@ -497,11 +501,12 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
+	 * HtmRowTitle: Time and iterations
 	 * HtmRow: 12
 	 * HtmCell: 1
 	 * Facet: true
 	 * DisplayName: Simulation time step (sec)
-	 * Description: 
+	 * Description: [0.5, 2.0]
 	 */
 	protected void _paramStepSize(Wrap<BigDecimal> w) {
 		if(simulation_ != null)
@@ -518,7 +523,7 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * HtmCell: 2
 	 * Facet: true
 	 * DisplayName: time for each round of traffic simulation (sec)
-	 * Description: Time duration of each simulated sample path. 
+	 * Description: [500, 3600]
 	 */
 	protected void _paramRunTime(Wrap<Integer> w) {
 		if(simulation_ != null)
@@ -531,11 +536,11 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 13
-	 * HtmCell: 1
+	 * HtmRow: 12
+	 * HtmCell: 3
 	 * Facet: true
 	 * DisplayName: Number of simulation repetitions with same input (for statistical accuracy)
-	 * Description: Number of repeats per round. 
+	 * Description: [1, 30]
 	 */
 	protected void _paramItersPerPar(Wrap<Integer> w) {
 		if(simulation_ != null)
@@ -548,11 +553,11 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 13
-	 * HtmCell: 2
+	 * HtmRow: 12
+	 * HtmCell: 4
 	 * Facet: true
 	 * DisplayName: Number of parameter update iterations before output
-	 * Description: Total iterations to update performance. 
+	 * Description: [1, 30]
 	 */
 	protected void _paramTotalIterNum(Wrap<Integer> w) {
 		if(simulation_ != null)
@@ -565,8 +570,322 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 13
+	 * Facet: true
+	 * DisplayName: updated parameters
+	 * Description: the resulting updated parameters after a simulation
+	 */
+	protected void _updatedParameters(Wrap<JsonArray> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * HtmRowTitle: Updated parameters
+	 * HtmRowHeaderExpression: iter {{numberAdd @index 1}}
+	 * HtmRow: 14
+	 * HtmCell: 1
+	 * DisplayName: Min GREEN time for WEST-EAST traffic (sec)
+	 * Description: 
+	 */
+	protected void _updatedParameters1(Wrap<JsonArray> w) {
+		if(updatedParameters != null && updatedParameters.size() == 10) {
+			w.o(updatedParameters.getJsonArray(0));
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * HtmRow: 14
+	 * HtmCell: 2
+	 * DisplayName: Max GREEN time for WEST-EAST traffic (sec)
+	 * Description: 
+	 */
+	protected void _updatedParameters2(Wrap<JsonArray> w) {
+		if(updatedParameters != null && updatedParameters.size() == 10) {
+			w.o(updatedParameters.getJsonArray(1));
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * HtmRow: 14
 	 * HtmCell: 3
+	 * DisplayName: Min GREEN time for SOUTH-NORTH traffic (sec)
+	 * Description: 
+	 */
+	protected void _updatedParameters3(Wrap<JsonArray> w) {
+		if(updatedParameters != null && updatedParameters.size() == 10) {
+			w.o(updatedParameters.getJsonArray(2));
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * HtmRow: 14
+	 * HtmCell: 4
+	 * DisplayName: Max GREEN time for SOUTH-NORTH traffic (sec)
+	 * Description: 
+	 */
+	protected void _updatedParameters4(Wrap<JsonArray> w) {
+		if(updatedParameters != null && updatedParameters.size() == 10) {
+			w.o(updatedParameters.getJsonArray(3));
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * HtmRow: 14
+	 * HtmCell: 5
+	 * DisplayName: Pedestrian waiting time tolerance threshold for NORTH-SOUTH (sec)
+	 * Description: 
+	 */
+	protected void _updatedParameters5(Wrap<JsonArray> w) {
+		if(updatedParameters != null && updatedParameters.size() == 10) {
+			w.o(updatedParameters.getJsonArray(4));
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * HtmRow: 14
+	 * HtmCell: 6
+	 * DisplayName: Pedestrian waiting time tolerance threshold for WEST-EAST (sec)
+	 * Description: 
+	 */
+	protected void _updatedParameters6(Wrap<JsonArray> w) {
+		if(updatedParameters != null && updatedParameters.size() == 10) {
+			w.o(updatedParameters.getJsonArray(5));
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * HtmRow: 14
+	 * HtmCell: 7
+	 * DisplayName: Vehicle queue length threshold between low-high content for WEST-EAST
+	 * Description: 
+	 */
+	protected void _updatedParameters7(Wrap<JsonArray> w) {
+		if(updatedParameters != null && updatedParameters.size() == 10) {
+			w.o(updatedParameters.getJsonArray(6));
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * HtmRow: 14
+	 * HtmCell: 8
+	 * DisplayName: Vehicle queue length threshold between low-high content for SOUTH-NORTH
+	 * Description: 
+	 */
+	protected void _updatedParameters8(Wrap<JsonArray> w) {
+		if(updatedParameters != null && updatedParameters.size() == 10) {
+			w.o(updatedParameters.getJsonArray(7));
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * HtmRow: 14
+	 * HtmCell: 9
+	 * DisplayName: Pedestrian queue length threshold between low-high content for NORTH-SOUTH
+	 * Description: 
+	 */
+	protected void _updatedParameters9(Wrap<JsonArray> w) {
+		if(updatedParameters != null && updatedParameters.size() == 10) {
+			w.o(updatedParameters.getJsonArray(8));
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * HtmRow: 14
+	 * HtmCell: 10
+	 * DisplayName: Pedestrian queue length threshold between low-high content for WEST-EAST
+	 * Description: 
+	 */
+	protected void _updatedParameters10(Wrap<JsonArray> w) {
+		if(updatedParameters != null && updatedParameters.size() == 10) {
+			w.o(updatedParameters.getJsonArray(9));
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * Facet: true
+	 * DisplayName: updated performance
+	 * Description: the resulting updated performance after a simulation
+	 */
+	protected void _updatedPerformance(Wrap<JsonArray> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * Facet: true
+	 * DisplayName: Average queue length
+	 */
+	protected void _averageQueueLength(Wrap<JsonArray> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * HtmRowTitle: Updated performance
+	 * HtmRowHeaderExpression: iter {{numberAdd @index 1}}
+	 * HtmRow: 16
+	 * HtmCell: 1
+	 * Facet: true
+	 * DisplayName: Average waiting time for WEST-EAST vehicles (sec)
+	 * Description: 
+	 */
+	protected void _updatedPerformanceWaitWestEastVehicleSec(Wrap<JsonArray> w) {
+		if(updatedPerformance != null && updatedPerformance.size() == 9) {
+			w.o(updatedPerformance.getJsonArray(0));
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * HtmRow: 16
+	 * HtmCell: 2
+	 * Facet: true
+	 * DisplayName: Average waiting time for SOUTH-NORTH vehicles (sec)
+	 * Description: 
+	 */
+	protected void _updatedPerformanceWaitSouthNorthVehicleSec(Wrap<JsonArray> w) {
+		if(updatedPerformance != null && updatedPerformance.size() == 9) {
+			w.o(updatedPerformance.getJsonArray(1));
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * HtmRow: 16
+	 * HtmCell: 3
+	 * Facet: true
+	 * DisplayName: Average waiting time for all vehicles (sec)
+	 * Description: 
+	 */
+	protected void _updatedPerformanceWaitAllVehicleSec(Wrap<JsonArray> w) {
+		if(updatedPerformance != null && updatedPerformance.size() == 9) {
+			w.o(updatedPerformance.getJsonArray(2));
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * HtmRow: 16
+	 * HtmCell: 4
+	 * Facet: true
+	 * DisplayName: Average waiting time for pedestrians (sec)
+	 * Description: 
+	 */
+	protected void _updatedPerformanceWaitAllPedestrianSec(Wrap<JsonArray> w) {
+		if(updatedPerformance != null && updatedPerformance.size() == 9) {
+			w.o(updatedPerformance.getJsonArray(3));
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * HtmRow: 16
+	 * HtmCell: 5
+	 * Facet: true
+	 * DisplayName: Average waiting time for vehicles and pedestrians (sec)
+	 * Description: 
+	 */
+	protected void _updatedPerformanceWaitAllVehiclePedestrianSec(Wrap<JsonArray> w) {
+		if(updatedPerformance != null && updatedPerformance.size() == 9) {
+			w.o(updatedPerformance.getJsonArray(4));
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * HtmRowTitle: Average queue length
+	 * HtmRowHeaderExpression: iter {{numberAdd @index 1}}
+	 * HtmRow: 17
+	 * HtmCell: 1
+	 * Facet: true
+	 * DisplayName: Average queue length for WEST-EAST vehicle
+	 * Description: 
+	 */
+	protected void _avgQueueLengthWestEastVehicle(Wrap<JsonArray> w) {
+		if(updatedPerformance != null && updatedPerformance.size() == 9) {
+			w.o(updatedPerformance.getJsonArray(5));
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * HtmRow: 17
+	 * HtmCell: 2
+	 * Facet: true
+	 * DisplayName: Average queue length for SOUTH-NORTH vehicle
+	 * Description: 
+	 */
+	protected void _avgQueueLengthSouthNorthVehicle(Wrap<JsonArray> w) {
+		if(updatedPerformance != null && updatedPerformance.size() == 9) {
+			w.o(updatedPerformance.getJsonArray(6));
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * HtmRow: 17
+	 * HtmCell: 3
+	 * Facet: true
+	 * DisplayName: Average queue length for NORTH-SOUTH pedestrian
+	 * Description: 
+	 */
+	protected void _avgQueueLengthNorthSouthPedestrian(Wrap<JsonArray> w) {
+		if(updatedPerformance != null && updatedPerformance.size() == 9) {
+			w.o(updatedPerformance.getJsonArray(7));
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * HtmRow: 17
+	 * HtmCell: 4
+	 * Facet: true
+	 * DisplayName: Average queue length for WEST-EAST pedestrian
+	 * Description: 
+	 */
+	protected void _avgQueueLengthWestEastPedestrian(Wrap<JsonArray> w) {
+		if(updatedPerformance != null && updatedPerformance.size() == 9) {
+			w.o(updatedPerformance.getJsonArray(8));
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * HtmRowTitle: Report status and actions
+	 * HtmRow: 18
+	 * HtmCell: 1
 	 * Facet: true
 	 * DisplayName: report status
 	 * Description: The current status of the simulation report. 
@@ -585,172 +904,13 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * HtmRow: 13
-	 * HtmCell: 3
+	 * HtmRow: 18
+	 * HtmCell: 2
 	 * Facet: true
 	 * DisplayName: report progress
 	 * Description: The percent progress of the simulation report. 
 	 */
 	protected void _reportProgress(Wrap<Integer> w) {
 		w.o(0);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * DocValues: true
-	 * Persist: true
-	 * HtmRow: 14
-	 * HtmCell: 1
-	 * Facet: true
-	 * DisplayName: updated parameters
-	 * Description: the resulting updated parameters after a simulation
-	 */
-	protected void _updatedParameters(Wrap<JsonArray> w) {
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * DocValues: true
-	 * Persist: true
-	 * Facet: true
-	 * DisplayName: updated performance
-	 * Description: the resulting updated performance after a simulation
-	 */
-	protected void _updatedPerformance(Wrap<JsonArray> w) {
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * DocValues: true
-	 * HtmRow: 15
-	 * HtmCell: 1
-	 * Facet: true
-	 * DisplayName: Average waiting time for WEST-EAST vehicles (sec)
-	 * Description: 
-	 */
-	protected void _updatedPerformanceWaitWestEastVehicleSec(Wrap<JsonArray> w) {
-		if(updatedPerformance != null && updatedPerformance.size() == 9) {
-			w.o(updatedPerformance.getJsonArray(0));
-		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * DocValues: true
-	 * HtmRow: 16
-	 * HtmCell: 1
-	 * Facet: true
-	 * DisplayName: Average waiting time for SOUTH-NORTH vehicles (sec)
-	 * Description: 
-	 */
-	protected void _updatedPerformanceWaitSouthNorthVehicleSec(Wrap<JsonArray> w) {
-		if(updatedPerformance != null && updatedPerformance.size() == 9) {
-			w.o(updatedPerformance.getJsonArray(1));
-		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * DocValues: true
-	 * HtmRow: 17
-	 * HtmCell: 1
-	 * Facet: true
-	 * DisplayName: Average waiting time for all vehicles (sec)
-	 * Description: 
-	 */
-	protected void _updatedPerformanceWaitAllVehicleSec(Wrap<JsonArray> w) {
-		if(updatedPerformance != null && updatedPerformance.size() == 9) {
-			w.o(updatedPerformance.getJsonArray(2));
-		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * DocValues: true
-	 * HtmRow: 18
-	 * HtmCell: 1
-	 * Facet: true
-	 * DisplayName: Average waiting time for pedestrians (sec)
-	 * Description: 
-	 */
-	protected void _updatedPerformanceWaitAllPedestrianSec(Wrap<JsonArray> w) {
-		if(updatedPerformance != null && updatedPerformance.size() == 9) {
-			w.o(updatedPerformance.getJsonArray(3));
-		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * DocValues: true
-	 * HtmRow: 18
-	 * HtmCell: 1
-	 * Facet: true
-	 * DisplayName: Average waiting time for vehicles and pedestrians (sec)
-	 * Description: 
-	 */
-	protected void _updatedPerformanceWaitAllVehiclePedestrianSec(Wrap<JsonArray> w) {
-		if(updatedPerformance != null && updatedPerformance.size() == 9) {
-			w.o(updatedPerformance.getJsonArray(4));
-		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * DocValues: true
-	 * HtmRow: 18
-	 * HtmCell: 1
-	 * Facet: true
-	 * DisplayName: Average queue length for WEST-EAST vehicle
-	 * Description: 
-	 */
-	protected void _avgQueueLengthWestEastVehicle(Wrap<JsonArray> w) {
-		if(updatedPerformance != null && updatedPerformance.size() == 9) {
-			w.o(updatedPerformance.getJsonArray(5));
-		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * DocValues: true
-	 * HtmRow: 18
-	 * HtmCell: 1
-	 * Facet: true
-	 * DisplayName: Average queue length for SOUTH-NORTH vehicle
-	 * Description: 
-	 */
-	protected void _avgQueueLengthSouthNorthVehicle(Wrap<JsonArray> w) {
-		if(updatedPerformance != null && updatedPerformance.size() == 9) {
-			w.o(updatedPerformance.getJsonArray(6));
-		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * DocValues: true
-	 * HtmRow: 18
-	 * HtmCell: 1
-	 * Facet: true
-	 * DisplayName: Average queue length for NORTH-SOUTH pedestrian
-	 * Description: 
-	 */
-	protected void _avgQueueLengthNorthSouthPedestrian(Wrap<JsonArray> w) {
-		if(updatedPerformance != null && updatedPerformance.size() == 9) {
-			w.o(updatedPerformance.getJsonArray(7));
-		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * DocValues: true
-	 * HtmRow: 18
-	 * HtmCell: 1
-	 * Facet: true
-	 * DisplayName: Average queue length for WEST-EAST pedestrian
-	 * Description: 
-	 */
-	protected void _avgQueueLengthWestEastPedestrian(Wrap<JsonArray> w) {
-		if(updatedPerformance != null && updatedPerformance.size() == 9) {
-			w.o(updatedPerformance.getJsonArray(8));
-		}
 	}
 }

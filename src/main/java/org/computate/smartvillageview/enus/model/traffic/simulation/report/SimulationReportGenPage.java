@@ -504,8 +504,10 @@ public class SimulationReportGenPage extends SimulationReportGenPageGen<BaseMode
 	}
 
 	@Override
-	protected void _roleRequired(List<String> l) {
-		l.add(siteRequest_.getConfig().getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SimulationReport"));
+	protected void _roleForWrite(List<String> l) {
+		Optional.ofNullable(siteRequest_.getConfig().getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SimulationReport")).ifPresent(v -> {
+			l.add(v);
+		});
 	}
 
 	@Override

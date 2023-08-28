@@ -33,10 +33,14 @@
 				window.eventBus = new EventBus('/eventbus');
 				var pk = {{#if pk}}{{pk}}{{else}}null{{/if}};
 				if(pk != null) {
-		{{#ifContainsAnyRoles roles roleRequired}}
+		{{#ifContainsAnyRoles roles roleForWrite}}
+					suggestTrafficSimulationReportKeys([{'name':'fq','value':'simulationKey:' + pk}], $('#listTrafficSimulationReportKeys_Page'), pk, true);
+		{{else}}
+		{{#ifContainsAnyRoles roles roleForRead}}
 					suggestTrafficSimulationReportKeys([{'name':'fq','value':'simulationKey:' + pk}], $('#listTrafficSimulationReportKeys_Page'), pk, true);
 		{{else}}
 					suggestTrafficSimulationReportKeys([{'name':'fq','value':'simulationKey:' + pk}], $('#listTrafficSimulationReportKeys_Page'), pk, false);
+		{{/ifContainsAnyRoles}}
 		{{/ifContainsAnyRoles}}
 				}
 				window.varsFq = JSON.parse('{{{toJsonObjectStringInApostrophes varsFq}}}');
@@ -405,35 +409,73 @@
 						<h2 class="w3-padding ">Modify traffic simulations</h2>
 					</header>
 					<div class="" id="patchTrafficSimulationFormValues">
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmCreated" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmCreated" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmCreated" roleRequired="false"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmCreated" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmCreated" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmArchived" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmArchived" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmArchived" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmDeleted" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmArchived" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmDeleted" roleRequired="false"}}
+{{> "htmArchived" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmDeleted" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmDeleted" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmDeleted" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmSimulationName" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmSimulationName" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmSimulationName" roleRequired="false"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmSimulationName" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmSimulationName" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmLocation" roleRequired="true"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmLocation" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmLocation" roleRequired="false"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmLocation" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmLocation" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
+							</div>
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmReportKeys" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmReportKeys" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmReportKeys" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 							</div>
 {{#block "htmFormButton_patchTrafficSimulation"}}{{/block}}
@@ -471,16 +513,25 @@
 					<div class="" id="postTrafficSimulationFormValues">
 						<div id="postTrafficSimulationForm">
 {{#block "htmFormButton_postTrafficSimulation"}}{{/block}}
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmSimulationName" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmSimulationName" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmSimulationName" roleRequired="false"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmSimulationName" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmSimulationName" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmLocation" roleRequired="true"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmLocation" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmLocation" roleRequired="false"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmLocation" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmLocation" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 							</div>
 						</div>
@@ -543,50 +594,100 @@
 				<div class="w3-card-4 ">
 					<div class="" id="searchpageTrafficSimulationFormValues">
 						<div id="searchpageTrafficSimulationForm">
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmPk" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmPk" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmPk" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmCreated" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmPk" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmCreated" roleRequired="false"}}
+{{> "htmPk" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmModified" roleRequired="true"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmCreated" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmModified" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmObjectId" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmCreated" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmObjectId" roleRequired="false"}}
+{{> "htmCreated" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmModified" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmModified" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmModified" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmObjectId" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmObjectId" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmObjectId" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmArchived" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmArchived" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmArchived" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmDeleted" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmArchived" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmDeleted" roleRequired="false"}}
+{{> "htmArchived" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmDeleted" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmDeleted" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmDeleted" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmSimulationName" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmSimulationName" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmSimulationName" roleRequired="false"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmSimulationName" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmSimulationName" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmLocation" roleRequired="true"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmLocation" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmLocation" roleRequired="false"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmLocation" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmLocation" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
+							</div>
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmReportKeys" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmReportKeys" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmReportKeys" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 							</div>
 						</div>
@@ -801,7 +902,7 @@
 {{#block "htmSuggested"}}{{/block}}
 {{/inline}}
 {{#*inline "htmSuggestedTrafficSimulationPage"}}
-			{{#ifContainsAnyRoles roles roleRequired}}
+			{{#ifContainsAnyRoles roles roleForWrite}}
 					<div class="">
 						<button id="refreshAllTrafficSimulationGenPage{{id}}" class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce "
 							onclick="patch{{classSimpleName}}Vals([], {}, function() { addGlow($('#refreshAllTrafficSimulationGenPage{{id}}')); }, function() { addError($('#refreshAllTrafficSimulationGenPage{{id}}')); }); "
@@ -853,31 +954,19 @@
 {{/inline}}
 {{> BaseModelPage baseModel_=trafficSimulation_}}
 
-{{#*inline "htmStartDateTime"}}
+{{#*inline "htmPk"}}
+<!-- #*inline "htmPk" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}TrafficSimulationStartDateTime">
+										<div id="suggest{{classApiMethodMethod}}TrafficSimulationPk">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_startDateTime">Start date and Time</label>
+													<label for="{{classApiMethodMethod}}_pk">primary key</label>
 												</div>
-												<div class="w3-cell-row w3-padding ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputStartDateTime" roleRequired=roleRequired}}
+														{{> "inputPk" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_startDateTime')); $('#{{classApiMethodMethod}}_startDateTime').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setStartDateTime', null, function() { addGlow($('#{{classApiMethodMethod}}_startDateTime')); }, function() { addError($('#{{classApiMethodMethod}}_startDateTime')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -885,31 +974,228 @@
 								</div>
 {{/inline}}
 
-{{#*inline "inputStartDateTime"}}
-		{{#eq roleRequired "true"}}
-														<input
-																type="text"
-																class="w3-input w3-border datetimepicker setStartDateTime classTrafficSimulation inputTrafficSimulation{{pk}}StartDateTime w3-input w3-border "
-																placeholder="MM/dd/yyyy h:mm a '['VV']'"
-																data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
-																id="{{classApiMethodMethod}}_startDateTime"
-																title="The start date and time.  (MM/dd/yyyy h:mm a '['VV']')"
-																value="{{#if trafficSimulation_.startDateTime}}{{formatZonedDateTime trafficSimulation_.startDateTime "MM/dd/yyyy h:mm a '['VV']'" defaultLocaleId defaultZoneId}}{{/if}}"
-														{{#eq 'Page' classApiMethodMethod}}
-															onclick="removeGlow($(this)); ";
-															onchange="var timeZone = this.value.split('[').pop().split(']')[0]; var t1 = moment(this.value.split('[')[0].trim(), 'MM/DD/YYYY h:mm a'); var t2 = moment.tz(this.value.split('[')[0].trim(), 'MM/DD/YYYY h:mm a', timeZone); var t3 = new Date(t1._d); t3.setTime(t1.toDate().getTime() + t2.toDate().getTime() - t1.toDate().getTime()); var t = moment(t3); if(t) { var s = t.tz(timeZone).format('YYYY-MM-DDTHH:mm:ss.000') + '[' + timeZone + ']'; patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setStartDateTime', s, function() { addGlow($('#{{classApiMethodMethod}}_startDateTime')); }, function() { addError($('#{{classApiMethodMethod}}_startDateTime')); }); } "
-														{{/eq}}
-														/>
+{{#*inline "inputPk"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varTrafficSimulation{{pk}}Pk ">{{trafficSimulation_.pk}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmCreated"}}
+<!-- #*inline "htmCreated" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficSimulationCreated">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_created">created</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputCreated" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputCreated"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varTrafficSimulation{{pk}}Created " title="{{formatZonedDateTime trafficSimulation_.created 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime trafficSimulation_.created 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmModified"}}
+<!-- #*inline "htmModified" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficSimulationModified">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_modified">modified</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputModified" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputModified"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varTrafficSimulation{{pk}}Modified " title="{{formatZonedDateTime trafficSimulation_.modified 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime trafficSimulation_.modified 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmObjectId"}}
+<!-- #*inline "htmObjectId" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficSimulationObjectId">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_objectId">ID</label>
+												</div>
+											<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputObjectId" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputObjectId"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varTrafficSimulation{{pk}}ObjectId ">{{trafficSimulation_.objectId}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmArchived"}}
+<!-- #*inline "htmArchived" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficSimulationArchived">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_archived">archived</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputArchived" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputArchived"}}
+		{{#eq roleForWriteBool "true"}}
+	{{#eq 'Page' classApiMethodMethod}}
+															<input
+																type="checkbox"
+																id="{{classApiMethodMethod}}_archived"
+																value="true"
+	{{else}}
+														<select
+															id="{{classApiMethodMethod}}_archived"
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+															class="classTrafficSimulation inputTrafficSimulation{{pk}}Archived w3-input w3-border "
+															name="setArchived"
+	{{else}}
+		{{#eq 'Page' classApiMethodMethod}}
+																class="classTrafficSimulation inputTrafficSimulation{{pk}}Archived w3-input w3-border "
+																name="setArchived"
+		{{else}}
+																class="setArchived valueArchived classTrafficSimulation inputTrafficSimulation{{pk}}Archived w3-input w3-border "
+																name="setArchived"
+		{{/eq}}
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+															onchange="var confirmResponse = confirm('Are you sure you want to archive that?'); if(confirmResponse) { patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setArchived', $(this).prop('checked'), function() { addGlow($('#{{classApiMethodMethod}}_archived')); }, function() { addError($('#{{classApiMethodMethod}}_archived')); }); }"
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+		{{#if trafficSimulation_.archived}}
+																checked="checked"
+		{{/if}}
+																/>
+	{{else}}
+															>
+															<option value="" selected="selected"></option>
+															<option value="true">true</option>
+															<option value="false">false</option>
+														</select>
+	{{/eq}}
+
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficSimulation{{pk}}StartDateTime ">{{trafficSimulation_.startDateTime}}</span>
+															<span class="varTrafficSimulation{{pk}}Archived ">{{trafficSimulation_.archived}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficSimulation{{pk}}StartDateTime ">{{trafficSimulation_.startDateTime}}</span>
+														<span class="varTrafficSimulation{{pk}}Archived ">{{trafficSimulation_.archived}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmDeleted"}}
+<!-- #*inline "htmDeleted" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficSimulationDeleted">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_deleted">deleted</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputDeleted" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputDeleted"}}
+		{{#eq roleForWriteBool "true"}}
+	{{#eq 'Page' classApiMethodMethod}}
+															<input
+																type="checkbox"
+																id="{{classApiMethodMethod}}_deleted"
+																value="true"
+	{{else}}
+														<select
+															id="{{classApiMethodMethod}}_deleted"
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+															class="classTrafficSimulation inputTrafficSimulation{{pk}}Deleted w3-input w3-border "
+															name="setDeleted"
+	{{else}}
+		{{#eq 'Page' classApiMethodMethod}}
+																class="classTrafficSimulation inputTrafficSimulation{{pk}}Deleted w3-input w3-border "
+																name="setDeleted"
+		{{else}}
+																class="setDeleted valueDeleted classTrafficSimulation inputTrafficSimulation{{pk}}Deleted w3-input w3-border "
+																name="setDeleted"
+		{{/eq}}
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+															onchange="var confirmResponse = confirm('Are you sure you want to delete that?'); if(confirmResponse) { patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setDeleted', $(this).prop('checked'), function() { addGlow($('#{{classApiMethodMethod}}_deleted')); }, function() { addError($('#{{classApiMethodMethod}}_deleted')); }); }"
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+		{{#if trafficSimulation_.deleted}}
+																checked="checked"
+		{{/if}}
+																/>
+	{{else}}
+															>
+															<option value="" selected="selected"></option>
+															<option value="true">true</option>
+															<option value="false">false</option>
+														</select>
+	{{/eq}}
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficSimulation{{pk}}Deleted ">{{trafficSimulation_.deleted}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficSimulation{{pk}}Deleted ">{{trafficSimulation_.deleted}}</span>
 		{{/eq}}
 {{/inline}}
 
 {{#*inline "htmSimulationName"}}
+<!-- #*inline "htmSimulationName" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									<div class="w3-padding ">
 										<div id="suggest{{classApiMethodMethod}}TrafficSimulationSimulationName">
@@ -917,23 +1203,10 @@
 												<div class="w3-cell-row w3-2017-shaded-spruce">
 													<label for="{{classApiMethodMethod}}_simulationName">simulation name</label>
 												</div>
-												<div class="w3-cell-row w3-padding ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputSimulationName" roleRequired=roleRequired}}
+														{{> "inputSimulationName" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_simulationName')); $('#{{classApiMethodMethod}}_simulationName').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setSimulationName', null, function() { addGlow($('#{{classApiMethodMethod}}_simulationName')); }, function() { addError($('#{{classApiMethodMethod}}_simulationName')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -942,10 +1215,10 @@
 {{/inline}}
 
 {{#*inline "inputSimulationName"}}
-		{{#eq roleRequired "true"}}
+		{{#eq roleForWriteBool "true"}}
 														<input
 															type="text"
-															placeholder="Veberöd intersection"
+															placeholder="simulation name"
 															id="{{classApiMethodMethod}}_simulationName"
 	{{#eq "Page" classApiMethodMethod}}
 																class="setSimulationName classTrafficSimulation inputTrafficSimulation{{pk}}SimulationName w3-input w3-border "
@@ -978,6 +1251,7 @@
 {{/inline}}
 
 {{#*inline "htmLocation"}}
+<!-- #*inline "htmLocation" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									<div class="w3-padding ">
 										<div id="suggest{{classApiMethodMethod}}TrafficSimulationLocation">
@@ -985,23 +1259,10 @@
 												<div class="w3-cell-row w3-2017-shaded-spruce">
 													<label for="{{classApiMethodMethod}}_location">location</label>
 												</div>
-												<div class="w3-cell-row w3-padding ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputLocation" roleRequired=roleRequired}}
+														{{> "inputLocation" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_location')); $('#{{classApiMethodMethod}}_location').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setLocation', null, function() { addGlow($('#{{classApiMethodMethod}}_location')); }, function() { addError($('#{{classApiMethodMethod}}_location')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -1010,12 +1271,11 @@
 {{/inline}}
 
 {{#*inline "inputLocation"}}
-		{{#eq roleRequired "true"}}
+		{{#eq roleForWriteBool "true"}}
 														<input
 															type="text"
 															placeholder="location"
-															title="Geojson reference to the item. It can be Point, LineString, Polygon, MultiPoint, MultiLineString or MultiPolygon"
-															id="{{classApiMethodMethod}}_location"
+															title="Geojson reference to the item. It can be Point, LineString, Polygon, MultiPoint, MultiLineString or MultiPolygon"															id="{{classApiMethodMethod}}_location"
 	{{#eq "Page" classApiMethodMethod}}
 																class="setLocation classTrafficSimulation inputTrafficSimulation{{pk}}Location w3-input w3-border "
 																name="setLocation"
@@ -1046,31 +1306,48 @@
 		{{/eq}}
 {{/inline}}
 
-{{#*inline "htmSumocfgPath"}}
+{{#*inline "htmReportKeys"}}
+<!-- #*inline "htmReportKeys" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}TrafficSimulationSumocfgPath">
+										<div id="suggest{{classApiMethodMethod}}TrafficSimulationReportKeys">
 											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_sumocfgPath">sumocfg path</label>
+												<div class="w3-cell-row ">
+													<a href="/simulation-report?fq=simulationKey:{{trafficSimulation_.pk}}" class="w3-cell w3-btn w3-center h4 w3-block h4 w3-2017-shaded-spruce w3-hover-2017-shaded-spruce ">
+														<i class="fad fa-file-chart-column "></i>
+														simulation reports
+													</a>
+												</div>
+												<div class="w3-cell-row ">
+													<h5 class="w3-cell ">
+														<i class="far fa-search w3-xxlarge w3-cell w3-cell-middle "></i>
+														relate  to this traffic simulation
+													</h5>
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputSumocfgPath" roleRequired=roleRequired}}
+														<div class="w3-cell-row ">
+
+														{{> "inputReportKeys" roleForWrite=roleForWrite roleForRead=roleForRead}}
+														</div>
 													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_sumocfgPath')); $('#{{classApiMethodMethod}}_sumocfgPath').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setSumocfgPath', null, function() { addGlow($('#{{classApiMethodMethod}}_sumocfgPath')); }, function() { addError($('#{{classApiMethodMethod}}_sumocfgPath')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell w3-left-align w3-cell-top ">
+														<ul class="w3-ul w3-hoverable " id="listTrafficSimulationReportKeys_{{classApiMethodMethod}}">
+														</ul>
+														{{#eq roleForReadBool "true"}}
+	{{#eq 'Page' classApiMethodMethod}}
+																<div class="w3-cell-row ">
+																	<button
+																		 class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce "
+																		 id="{{classApiMethodMethod}}_reportKeys_add"
+																		 onclick="$(this).addClass('w3-disabled'); this.disabled = true; this.innerHTML = 'Sending…'; postSimulationReportVals({ simulationKey: '{{pk}}' }, function() { $('#{{classApiMethodMethod}}_reportKeys_add').disabled = false; $('#{{classApiMethodMethod}}_reportKeys_add').innerHTML = 'add a simulation report'; }, function() { addError($('#{{classApiMethodMethod}}reportKeys')); });"
+																		>add a simulation report</button>
+																</div>
 	{{/eq}}
+														{{/eq}}
+													</div>
 												</div>
 											</div>
 										</div>
@@ -1078,2213 +1355,30 @@
 								</div>
 {{/inline}}
 
-{{#*inline "inputSumocfgPath"}}
-		{{#eq roleRequired "true"}}
-														<input
-															type="text"
-															placeholder="/usr/local/src/TLC/input/Veberod_intersection_pedestrian.sumocfg"
-															id="{{classApiMethodMethod}}_sumocfgPath"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setSumocfgPath classTrafficSimulation inputTrafficSimulation{{pk}}SumocfgPath w3-input w3-border "
-																name="setSumocfgPath"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setSumocfgPath classTrafficSimulation inputTrafficSimulation{{pk}}SumocfgPath w3-input w3-border "
-																name="setSumocfgPath"
-		{{else}}
-																class="valueSumocfgPath w3-input w3-border classTrafficSimulation inputTrafficSimulation{{pk}}SumocfgPath w3-input w3-border "
-																name="sumocfgPath"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setSumocfgPath', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_sumocfgPath')); }, function() { addError($('#{{classApiMethodMethod}}_sumocfgPath')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{trafficSimulation_.sumocfgPath}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficSimulation{{pk}}SumocfgPath ">{{trafficSimulation_.sumocfgPath}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varTrafficSimulation{{pk}}SumocfgPath ">{{trafficSimulation_.sumocfgPath}}</span>
-		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmFcdFilePath"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}TrafficSimulationFcdFilePath">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_fcdFilePath">Floating Car Data file path</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputFcdFilePath" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_fcdFilePath')); $('#{{classApiMethodMethod}}_fcdFilePath').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setFcdFilePath', null, function() { addGlow($('#{{classApiMethodMethod}}_fcdFilePath')); }, function() { addError($('#{{classApiMethodMethod}}_fcdFilePath')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
+{{#*inline "inputReportKeys"}}
+		{{#eq roleForWriteBool "true"}}
+														{{#eq 'PUTCopy' classApiMethodMethod}}
+															<div>
+																<input 
+																	type="checkbox"
+																	id="{{classApiMethodMethod}}_reportKeys_clear"
+																	class="reportKeys_clear "
+																	>
+																<label for="{{classApiMethodMethod}}_reportKeys_clear">clear</label>
 															</div>
 														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputFcdFilePath"}}
-		{{#eq roleRequired "true"}}
 														<input
-															type="text"
-															placeholder="/usr/local/src/TLC/output/veberod-fcd.xml"
-															id="{{classApiMethodMethod}}_fcdFilePath"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setFcdFilePath classTrafficSimulation inputTrafficSimulation{{pk}}FcdFilePath w3-input w3-border "
-																name="setFcdFilePath"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setFcdFilePath classTrafficSimulation inputTrafficSimulation{{pk}}FcdFilePath w3-input w3-border "
-																name="setFcdFilePath"
-		{{else}}
-																class="valueFcdFilePath w3-input w3-border classTrafficSimulation inputTrafficSimulation{{pk}}FcdFilePath w3-input w3-border "
-																name="fcdFilePath"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setFcdFilePath', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_fcdFilePath')); }, function() { addError($('#{{classApiMethodMethod}}_fcdFilePath')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{trafficSimulation_.fcdFilePath}}"
-	{{/eq}}
-														/>
+																type="text"
+																placeholder="simulation reports"
+																title="The generated reports for this simulation"															class="valueObjectSuggest suggestReportKeys w3-input w3-border w3-cell w3-cell-middle "
+															name="setReportKeys"
+															id="{{classApiMethodMethod}}_reportKeys"
+															autocomplete="off"
+															oninput="suggestTrafficSimulationReportKeys($(this).val() ? [ { 'name': 'q', 'value': 'objectSuggest:' + $(this).val() }, { 'name': 'rows', 'value': '10' }, { 'name': 'fl', 'value': 'classCanonicalName,simulationKey,pk' } ] : [{{#if pk}}{'name':'fq','value':'simulationKey:{{pk}}'}{{else}}{{/if}}], $('#listTrafficSimulationReportKeys_{{classApiMethodMethod}}'), {{pk}}); "
+															/>
 
 													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficSimulation{{pk}}FcdFilePath ">{{trafficSimulation_.fcdFilePath}}</span>
-			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficSimulation{{pk}}FcdFilePath ">{{trafficSimulation_.fcdFilePath}}</span>
-		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmNetFilePath"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}TrafficSimulationNetFilePath">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_netFilePath">net file path</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputNetFilePath" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_netFilePath')); $('#{{classApiMethodMethod}}_netFilePath').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setNetFilePath', null, function() { addGlow($('#{{classApiMethodMethod}}_netFilePath')); }, function() { addError($('#{{classApiMethodMethod}}_netFilePath')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputNetFilePath"}}
-		{{#eq roleRequired "true"}}
-														<input
-															type="text"
-															placeholder="net file path"
-															id="{{classApiMethodMethod}}_netFilePath"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setNetFilePath classTrafficSimulation inputTrafficSimulation{{pk}}NetFilePath w3-input w3-border "
-																name="setNetFilePath"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setNetFilePath classTrafficSimulation inputTrafficSimulation{{pk}}NetFilePath w3-input w3-border "
-																name="setNetFilePath"
-		{{else}}
-																class="valueNetFilePath w3-input w3-border classTrafficSimulation inputTrafficSimulation{{pk}}NetFilePath w3-input w3-border "
-																name="netFilePath"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setNetFilePath', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_netFilePath')); }, function() { addError($('#{{classApiMethodMethod}}_netFilePath')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{trafficSimulation_.netFilePath}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficSimulation{{pk}}NetFilePath ">{{trafficSimulation_.netFilePath}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varTrafficSimulation{{pk}}NetFilePath ">{{trafficSimulation_.netFilePath}}</span>
-		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmStartSeconds"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}TrafficSimulationStartSeconds">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_startSeconds">start seconds</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputStartSeconds" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_startSeconds')); $('#{{classApiMethodMethod}}_startSeconds').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setStartSeconds', null, function() { addGlow($('#{{classApiMethodMethod}}_startSeconds')); }, function() { addError($('#{{classApiMethodMethod}}_startSeconds')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputStartSeconds"}}
-		{{#eq roleRequired "true"}}
-														<input
-															type="text"
-															placeholder="0"
-															title="-b, --begin TIME Defines the begin time in seconds; The simulation starts at this time"
-															id="{{classApiMethodMethod}}_startSeconds"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setStartSeconds classTrafficSimulation inputTrafficSimulation{{pk}}StartSeconds w3-input w3-border "
-																name="setStartSeconds"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setStartSeconds classTrafficSimulation inputTrafficSimulation{{pk}}StartSeconds w3-input w3-border "
-																name="setStartSeconds"
-		{{else}}
-																class="valueStartSeconds w3-input w3-border classTrafficSimulation inputTrafficSimulation{{pk}}StartSeconds w3-input w3-border "
-																name="startSeconds"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setStartSeconds', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_startSeconds')); }, function() { addError($('#{{classApiMethodMethod}}_startSeconds')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{trafficSimulation_.startSeconds}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficSimulation{{pk}}StartSeconds ">{{trafficSimulation_.startSeconds}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varTrafficSimulation{{pk}}StartSeconds ">{{trafficSimulation_.startSeconds}}</span>
-		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmEndSeconds"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}TrafficSimulationEndSeconds">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_endSeconds">end seconds</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputEndSeconds" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_endSeconds')); $('#{{classApiMethodMethod}}_endSeconds').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setEndSeconds', null, function() { addGlow($('#{{classApiMethodMethod}}_endSeconds')); }, function() { addError($('#{{classApiMethodMethod}}_endSeconds')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputEndSeconds"}}
-		{{#eq roleRequired "true"}}
-														<input
-															type="text"
-															placeholder="300"
-															title="-e, --end TIME Defines the end time in seconds; The simulation ends at this time"
-															id="{{classApiMethodMethod}}_endSeconds"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setEndSeconds classTrafficSimulation inputTrafficSimulation{{pk}}EndSeconds w3-input w3-border "
-																name="setEndSeconds"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setEndSeconds classTrafficSimulation inputTrafficSimulation{{pk}}EndSeconds w3-input w3-border "
-																name="setEndSeconds"
-		{{else}}
-																class="valueEndSeconds w3-input w3-border classTrafficSimulation inputTrafficSimulation{{pk}}EndSeconds w3-input w3-border "
-																name="endSeconds"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setEndSeconds', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_endSeconds')); }, function() { addError($('#{{classApiMethodMethod}}_endSeconds')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{trafficSimulation_.endSeconds}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficSimulation{{pk}}EndSeconds ">{{trafficSimulation_.endSeconds}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varTrafficSimulation{{pk}}EndSeconds ">{{trafficSimulation_.endSeconds}}</span>
-		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmStepSeconds"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}TrafficSimulationStepSeconds">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_stepSeconds">step seconds</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputStepSeconds" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_stepSeconds')); $('#{{classApiMethodMethod}}_stepSeconds').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setStepSeconds', null, function() { addGlow($('#{{classApiMethodMethod}}_stepSeconds')); }, function() { addError($('#{{classApiMethodMethod}}_stepSeconds')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputStepSeconds"}}
-		{{#eq roleRequired "true"}}
-														<input
-															type="text"
-															placeholder="0.1"
-															title="--step-length TIME Defines the step duration in seconds"
-															id="{{classApiMethodMethod}}_stepSeconds"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setStepSeconds classTrafficSimulation inputTrafficSimulation{{pk}}StepSeconds w3-input w3-border "
-																name="setStepSeconds"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setStepSeconds classTrafficSimulation inputTrafficSimulation{{pk}}StepSeconds w3-input w3-border "
-																name="setStepSeconds"
-		{{else}}
-																class="valueStepSeconds w3-input w3-border classTrafficSimulation inputTrafficSimulation{{pk}}StepSeconds w3-input w3-border "
-																name="stepSeconds"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setStepSeconds', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_stepSeconds')); }, function() { addError($('#{{classApiMethodMethod}}_stepSeconds')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{trafficSimulation_.stepSeconds}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficSimulation{{pk}}StepSeconds ">{{trafficSimulation_.stepSeconds}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varTrafficSimulation{{pk}}StepSeconds ">{{trafficSimulation_.stepSeconds}}</span>
-		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmParamAvgVehiclePerMinFromWestToEast"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}TrafficSimulationParamAvgVehiclePerMinFromWestToEast">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_paramAvgVehiclePerMinFromWestToEast">Average vehicle/min from WEST to EAST</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputParamAvgVehiclePerMinFromWestToEast" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramAvgVehiclePerMinFromWestToEast')); $('#{{classApiMethodMethod}}_paramAvgVehiclePerMinFromWestToEast').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setParamAvgVehiclePerMinFromWestToEast', null, function() { addGlow($('#{{classApiMethodMethod}}_paramAvgVehiclePerMinFromWestToEast')); }, function() { addError($('#{{classApiMethodMethod}}_paramAvgVehiclePerMinFromWestToEast')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputParamAvgVehiclePerMinFromWestToEast"}}
-		{{#eq roleRequired "true"}}
-														<input
-															type="text"
-															placeholder="10"
-															title="Min: 1"
-															id="{{classApiMethodMethod}}_paramAvgVehiclePerMinFromWestToEast"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setParamAvgVehiclePerMinFromWestToEast classTrafficSimulation inputTrafficSimulation{{pk}}ParamAvgVehiclePerMinFromWestToEast w3-input w3-border "
-																name="setParamAvgVehiclePerMinFromWestToEast"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setParamAvgVehiclePerMinFromWestToEast classTrafficSimulation inputTrafficSimulation{{pk}}ParamAvgVehiclePerMinFromWestToEast w3-input w3-border "
-																name="setParamAvgVehiclePerMinFromWestToEast"
-		{{else}}
-																class="valueParamAvgVehiclePerMinFromWestToEast w3-input w3-border classTrafficSimulation inputTrafficSimulation{{pk}}ParamAvgVehiclePerMinFromWestToEast w3-input w3-border "
-																name="paramAvgVehiclePerMinFromWestToEast"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setParamAvgVehiclePerMinFromWestToEast', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_paramAvgVehiclePerMinFromWestToEast')); }, function() { addError($('#{{classApiMethodMethod}}_paramAvgVehiclePerMinFromWestToEast')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{trafficSimulation_.paramAvgVehiclePerMinFromWestToEast}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficSimulation{{pk}}ParamAvgVehiclePerMinFromWestToEast ">{{trafficSimulation_.paramAvgVehiclePerMinFromWestToEast}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varTrafficSimulation{{pk}}ParamAvgVehiclePerMinFromWestToEast ">{{trafficSimulation_.paramAvgVehiclePerMinFromWestToEast}}</span>
-		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmParamAvgVehiclePerMinFromSouthToNorth"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}TrafficSimulationParamAvgVehiclePerMinFromSouthToNorth">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_paramAvgVehiclePerMinFromSouthToNorth">Average vehicle/min from SOUTH to NORTH</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputParamAvgVehiclePerMinFromSouthToNorth" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramAvgVehiclePerMinFromSouthToNorth')); $('#{{classApiMethodMethod}}_paramAvgVehiclePerMinFromSouthToNorth').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setParamAvgVehiclePerMinFromSouthToNorth', null, function() { addGlow($('#{{classApiMethodMethod}}_paramAvgVehiclePerMinFromSouthToNorth')); }, function() { addError($('#{{classApiMethodMethod}}_paramAvgVehiclePerMinFromSouthToNorth')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputParamAvgVehiclePerMinFromSouthToNorth"}}
-		{{#eq roleRequired "true"}}
-														<input
-															type="text"
-															placeholder="10"
-															title="Min: 1"
-															id="{{classApiMethodMethod}}_paramAvgVehiclePerMinFromSouthToNorth"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setParamAvgVehiclePerMinFromSouthToNorth classTrafficSimulation inputTrafficSimulation{{pk}}ParamAvgVehiclePerMinFromSouthToNorth w3-input w3-border "
-																name="setParamAvgVehiclePerMinFromSouthToNorth"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setParamAvgVehiclePerMinFromSouthToNorth classTrafficSimulation inputTrafficSimulation{{pk}}ParamAvgVehiclePerMinFromSouthToNorth w3-input w3-border "
-																name="setParamAvgVehiclePerMinFromSouthToNorth"
-		{{else}}
-																class="valueParamAvgVehiclePerMinFromSouthToNorth w3-input w3-border classTrafficSimulation inputTrafficSimulation{{pk}}ParamAvgVehiclePerMinFromSouthToNorth w3-input w3-border "
-																name="paramAvgVehiclePerMinFromSouthToNorth"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setParamAvgVehiclePerMinFromSouthToNorth', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_paramAvgVehiclePerMinFromSouthToNorth')); }, function() { addError($('#{{classApiMethodMethod}}_paramAvgVehiclePerMinFromSouthToNorth')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{trafficSimulation_.paramAvgVehiclePerMinFromSouthToNorth}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficSimulation{{pk}}ParamAvgVehiclePerMinFromSouthToNorth ">{{trafficSimulation_.paramAvgVehiclePerMinFromSouthToNorth}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varTrafficSimulation{{pk}}ParamAvgVehiclePerMinFromSouthToNorth ">{{trafficSimulation_.paramAvgVehiclePerMinFromSouthToNorth}}</span>
-		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmParamVehicleDemandScalingFactor"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}TrafficSimulationParamVehicleDemandScalingFactor">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_paramVehicleDemandScalingFactor">Demand scaling factor (multiplies all vehicle demands)</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputParamVehicleDemandScalingFactor" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramVehicleDemandScalingFactor')); $('#{{classApiMethodMethod}}_paramVehicleDemandScalingFactor').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setParamVehicleDemandScalingFactor', null, function() { addGlow($('#{{classApiMethodMethod}}_paramVehicleDemandScalingFactor')); }, function() { addError($('#{{classApiMethodMethod}}_paramVehicleDemandScalingFactor')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputParamVehicleDemandScalingFactor"}}
-		{{#eq roleRequired "true"}}
-														<input
-															type="text"
-															placeholder="1"
-															title="Min: 1"
-															id="{{classApiMethodMethod}}_paramVehicleDemandScalingFactor"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setParamVehicleDemandScalingFactor classTrafficSimulation inputTrafficSimulation{{pk}}ParamVehicleDemandScalingFactor w3-input w3-border "
-																name="setParamVehicleDemandScalingFactor"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setParamVehicleDemandScalingFactor classTrafficSimulation inputTrafficSimulation{{pk}}ParamVehicleDemandScalingFactor w3-input w3-border "
-																name="setParamVehicleDemandScalingFactor"
-		{{else}}
-																class="valueParamVehicleDemandScalingFactor w3-input w3-border classTrafficSimulation inputTrafficSimulation{{pk}}ParamVehicleDemandScalingFactor w3-input w3-border "
-																name="paramVehicleDemandScalingFactor"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setParamVehicleDemandScalingFactor', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_paramVehicleDemandScalingFactor')); }, function() { addError($('#{{classApiMethodMethod}}_paramVehicleDemandScalingFactor')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{trafficSimulation_.paramVehicleDemandScalingFactor}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficSimulation{{pk}}ParamVehicleDemandScalingFactor ">{{trafficSimulation_.paramVehicleDemandScalingFactor}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varTrafficSimulation{{pk}}ParamVehicleDemandScalingFactor ">{{trafficSimulation_.paramVehicleDemandScalingFactor}}</span>
-		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmParamAvgPedestrianPerMinFromWestToEast"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}TrafficSimulationParamAvgPedestrianPerMinFromWestToEast">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_paramAvgPedestrianPerMinFromWestToEast">Average pedestrian/min from WEST to EAST</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputParamAvgPedestrianPerMinFromWestToEast" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramAvgPedestrianPerMinFromWestToEast')); $('#{{classApiMethodMethod}}_paramAvgPedestrianPerMinFromWestToEast').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setParamAvgPedestrianPerMinFromWestToEast', null, function() { addGlow($('#{{classApiMethodMethod}}_paramAvgPedestrianPerMinFromWestToEast')); }, function() { addError($('#{{classApiMethodMethod}}_paramAvgPedestrianPerMinFromWestToEast')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputParamAvgPedestrianPerMinFromWestToEast"}}
-		{{#eq roleRequired "true"}}
-														<input
-															type="text"
-															placeholder="5"
-															title="Min: 1"
-															id="{{classApiMethodMethod}}_paramAvgPedestrianPerMinFromWestToEast"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setParamAvgPedestrianPerMinFromWestToEast classTrafficSimulation inputTrafficSimulation{{pk}}ParamAvgPedestrianPerMinFromWestToEast w3-input w3-border "
-																name="setParamAvgPedestrianPerMinFromWestToEast"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setParamAvgPedestrianPerMinFromWestToEast classTrafficSimulation inputTrafficSimulation{{pk}}ParamAvgPedestrianPerMinFromWestToEast w3-input w3-border "
-																name="setParamAvgPedestrianPerMinFromWestToEast"
-		{{else}}
-																class="valueParamAvgPedestrianPerMinFromWestToEast w3-input w3-border classTrafficSimulation inputTrafficSimulation{{pk}}ParamAvgPedestrianPerMinFromWestToEast w3-input w3-border "
-																name="paramAvgPedestrianPerMinFromWestToEast"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setParamAvgPedestrianPerMinFromWestToEast', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_paramAvgPedestrianPerMinFromWestToEast')); }, function() { addError($('#{{classApiMethodMethod}}_paramAvgPedestrianPerMinFromWestToEast')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{trafficSimulation_.paramAvgPedestrianPerMinFromWestToEast}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficSimulation{{pk}}ParamAvgPedestrianPerMinFromWestToEast ">{{trafficSimulation_.paramAvgPedestrianPerMinFromWestToEast}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varTrafficSimulation{{pk}}ParamAvgPedestrianPerMinFromWestToEast ">{{trafficSimulation_.paramAvgPedestrianPerMinFromWestToEast}}</span>
-		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmParamAvgPedestrianPerMinFromSouthToNorth"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}TrafficSimulationParamAvgPedestrianPerMinFromSouthToNorth">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_paramAvgPedestrianPerMinFromSouthToNorth">Average pedestrian/min from WEST to EAST</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputParamAvgPedestrianPerMinFromSouthToNorth" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramAvgPedestrianPerMinFromSouthToNorth')); $('#{{classApiMethodMethod}}_paramAvgPedestrianPerMinFromSouthToNorth').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setParamAvgPedestrianPerMinFromSouthToNorth', null, function() { addGlow($('#{{classApiMethodMethod}}_paramAvgPedestrianPerMinFromSouthToNorth')); }, function() { addError($('#{{classApiMethodMethod}}_paramAvgPedestrianPerMinFromSouthToNorth')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputParamAvgPedestrianPerMinFromSouthToNorth"}}
-		{{#eq roleRequired "true"}}
-														<input
-															type="text"
-															placeholder="5"
-															title="Min: 1"
-															id="{{classApiMethodMethod}}_paramAvgPedestrianPerMinFromSouthToNorth"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setParamAvgPedestrianPerMinFromSouthToNorth classTrafficSimulation inputTrafficSimulation{{pk}}ParamAvgPedestrianPerMinFromSouthToNorth w3-input w3-border "
-																name="setParamAvgPedestrianPerMinFromSouthToNorth"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setParamAvgPedestrianPerMinFromSouthToNorth classTrafficSimulation inputTrafficSimulation{{pk}}ParamAvgPedestrianPerMinFromSouthToNorth w3-input w3-border "
-																name="setParamAvgPedestrianPerMinFromSouthToNorth"
-		{{else}}
-																class="valueParamAvgPedestrianPerMinFromSouthToNorth w3-input w3-border classTrafficSimulation inputTrafficSimulation{{pk}}ParamAvgPedestrianPerMinFromSouthToNorth w3-input w3-border "
-																name="paramAvgPedestrianPerMinFromSouthToNorth"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setParamAvgPedestrianPerMinFromSouthToNorth', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_paramAvgPedestrianPerMinFromSouthToNorth')); }, function() { addError($('#{{classApiMethodMethod}}_paramAvgPedestrianPerMinFromSouthToNorth')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{trafficSimulation_.paramAvgPedestrianPerMinFromSouthToNorth}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficSimulation{{pk}}ParamAvgPedestrianPerMinFromSouthToNorth ">{{trafficSimulation_.paramAvgPedestrianPerMinFromSouthToNorth}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varTrafficSimulation{{pk}}ParamAvgPedestrianPerMinFromSouthToNorth ">{{trafficSimulation_.paramAvgPedestrianPerMinFromSouthToNorth}}</span>
-		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmParamPedestrianDemandScalingFactor"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}TrafficSimulationParamPedestrianDemandScalingFactor">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_paramPedestrianDemandScalingFactor">Demand scaling factor (multiplies all pedestrian demands)</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputParamPedestrianDemandScalingFactor" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramPedestrianDemandScalingFactor')); $('#{{classApiMethodMethod}}_paramPedestrianDemandScalingFactor').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setParamPedestrianDemandScalingFactor', null, function() { addGlow($('#{{classApiMethodMethod}}_paramPedestrianDemandScalingFactor')); }, function() { addError($('#{{classApiMethodMethod}}_paramPedestrianDemandScalingFactor')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputParamPedestrianDemandScalingFactor"}}
-		{{#eq roleRequired "true"}}
-														<input
-															type="text"
-															placeholder="1"
-															title="Min: 1"
-															id="{{classApiMethodMethod}}_paramPedestrianDemandScalingFactor"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setParamPedestrianDemandScalingFactor classTrafficSimulation inputTrafficSimulation{{pk}}ParamPedestrianDemandScalingFactor w3-input w3-border "
-																name="setParamPedestrianDemandScalingFactor"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setParamPedestrianDemandScalingFactor classTrafficSimulation inputTrafficSimulation{{pk}}ParamPedestrianDemandScalingFactor w3-input w3-border "
-																name="setParamPedestrianDemandScalingFactor"
-		{{else}}
-																class="valueParamPedestrianDemandScalingFactor w3-input w3-border classTrafficSimulation inputTrafficSimulation{{pk}}ParamPedestrianDemandScalingFactor w3-input w3-border "
-																name="paramPedestrianDemandScalingFactor"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setParamPedestrianDemandScalingFactor', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_paramPedestrianDemandScalingFactor')); }, function() { addError($('#{{classApiMethodMethod}}_paramPedestrianDemandScalingFactor')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{trafficSimulation_.paramPedestrianDemandScalingFactor}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficSimulation{{pk}}ParamPedestrianDemandScalingFactor ">{{trafficSimulation_.paramPedestrianDemandScalingFactor}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varTrafficSimulation{{pk}}ParamPedestrianDemandScalingFactor ">{{trafficSimulation_.paramPedestrianDemandScalingFactor}}</span>
-		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmParamDemandScale"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}TrafficSimulationParamDemandScale">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_paramDemandScale">demand scale</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputParamDemandScale" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramDemandScale')); $('#{{classApiMethodMethod}}_paramDemandScale').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setParamDemandScale', null, function() { addGlow($('#{{classApiMethodMethod}}_paramDemandScale')); }, function() { addError($('#{{classApiMethodMethod}}_paramDemandScale')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputParamDemandScale"}}
-		{{#eq roleRequired "true"}}
-														<input
-															type="text"
-															placeholder="demand scale"
-															id="{{classApiMethodMethod}}_paramDemandScale"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setParamDemandScale classTrafficSimulation inputTrafficSimulation{{pk}}ParamDemandScale w3-input w3-border "
-																name="setParamDemandScale"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setParamDemandScale classTrafficSimulation inputTrafficSimulation{{pk}}ParamDemandScale w3-input w3-border "
-																name="setParamDemandScale"
-		{{else}}
-																class="valueParamDemandScale w3-input w3-border classTrafficSimulation inputTrafficSimulation{{pk}}ParamDemandScale w3-input w3-border "
-																name="paramDemandScale"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setParamDemandScale', $(this).val().replace('[','').replace(']','').split(/[ ,]+/), function() { addGlow($('#{{classApiMethodMethod}}_paramDemandScale')); }, function() { addError($('#{{classApiMethodMethod}}_paramDemandScale')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{trafficSimulation_.paramDemandScale}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficSimulation{{pk}}ParamDemandScale ">{{trafficSimulation_.paramDemandScale}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varTrafficSimulation{{pk}}ParamDemandScale ">{{trafficSimulation_.paramDemandScale}}</span>
-		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmParamMinGreenTimeSecWestEast"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}TrafficSimulationParamMinGreenTimeSecWestEast">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_paramMinGreenTimeSecWestEast">Min GREEN time for WEST-EAST traffic (sec)</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputParamMinGreenTimeSecWestEast" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramMinGreenTimeSecWestEast')); $('#{{classApiMethodMethod}}_paramMinGreenTimeSecWestEast').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setParamMinGreenTimeSecWestEast', null, function() { addGlow($('#{{classApiMethodMethod}}_paramMinGreenTimeSecWestEast')); }, function() { addError($('#{{classApiMethodMethod}}_paramMinGreenTimeSecWestEast')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputParamMinGreenTimeSecWestEast"}}
-		{{#eq roleRequired "true"}}
-														<input
-															type="text"
-															placeholder="20"
-															title="Min: 1"
-															id="{{classApiMethodMethod}}_paramMinGreenTimeSecWestEast"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setParamMinGreenTimeSecWestEast classTrafficSimulation inputTrafficSimulation{{pk}}ParamMinGreenTimeSecWestEast w3-input w3-border "
-																name="setParamMinGreenTimeSecWestEast"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setParamMinGreenTimeSecWestEast classTrafficSimulation inputTrafficSimulation{{pk}}ParamMinGreenTimeSecWestEast w3-input w3-border "
-																name="setParamMinGreenTimeSecWestEast"
-		{{else}}
-																class="valueParamMinGreenTimeSecWestEast w3-input w3-border classTrafficSimulation inputTrafficSimulation{{pk}}ParamMinGreenTimeSecWestEast w3-input w3-border "
-																name="paramMinGreenTimeSecWestEast"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setParamMinGreenTimeSecWestEast', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_paramMinGreenTimeSecWestEast')); }, function() { addError($('#{{classApiMethodMethod}}_paramMinGreenTimeSecWestEast')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{trafficSimulation_.paramMinGreenTimeSecWestEast}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficSimulation{{pk}}ParamMinGreenTimeSecWestEast ">{{trafficSimulation_.paramMinGreenTimeSecWestEast}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varTrafficSimulation{{pk}}ParamMinGreenTimeSecWestEast ">{{trafficSimulation_.paramMinGreenTimeSecWestEast}}</span>
-		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmParamMaxGreenTimeSecWestEast"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}TrafficSimulationParamMaxGreenTimeSecWestEast">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_paramMaxGreenTimeSecWestEast">Max GREEN time for WEST-EAST traffic (sec)</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputParamMaxGreenTimeSecWestEast" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramMaxGreenTimeSecWestEast')); $('#{{classApiMethodMethod}}_paramMaxGreenTimeSecWestEast').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setParamMaxGreenTimeSecWestEast', null, function() { addGlow($('#{{classApiMethodMethod}}_paramMaxGreenTimeSecWestEast')); }, function() { addError($('#{{classApiMethodMethod}}_paramMaxGreenTimeSecWestEast')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputParamMaxGreenTimeSecWestEast"}}
-		{{#eq roleRequired "true"}}
-														<input
-															type="text"
-															placeholder="30"
-															title="Min: 1"
-															id="{{classApiMethodMethod}}_paramMaxGreenTimeSecWestEast"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setParamMaxGreenTimeSecWestEast classTrafficSimulation inputTrafficSimulation{{pk}}ParamMaxGreenTimeSecWestEast w3-input w3-border "
-																name="setParamMaxGreenTimeSecWestEast"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setParamMaxGreenTimeSecWestEast classTrafficSimulation inputTrafficSimulation{{pk}}ParamMaxGreenTimeSecWestEast w3-input w3-border "
-																name="setParamMaxGreenTimeSecWestEast"
-		{{else}}
-																class="valueParamMaxGreenTimeSecWestEast w3-input w3-border classTrafficSimulation inputTrafficSimulation{{pk}}ParamMaxGreenTimeSecWestEast w3-input w3-border "
-																name="paramMaxGreenTimeSecWestEast"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setParamMaxGreenTimeSecWestEast', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_paramMaxGreenTimeSecWestEast')); }, function() { addError($('#{{classApiMethodMethod}}_paramMaxGreenTimeSecWestEast')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{trafficSimulation_.paramMaxGreenTimeSecWestEast}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficSimulation{{pk}}ParamMaxGreenTimeSecWestEast ">{{trafficSimulation_.paramMaxGreenTimeSecWestEast}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varTrafficSimulation{{pk}}ParamMaxGreenTimeSecWestEast ">{{trafficSimulation_.paramMaxGreenTimeSecWestEast}}</span>
-		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmParamMinGreenTimeSecSouthNorth"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}TrafficSimulationParamMinGreenTimeSecSouthNorth">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_paramMinGreenTimeSecSouthNorth">Min GREEN time for SOUTH-NORTH traffic (sec)</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputParamMinGreenTimeSecSouthNorth" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramMinGreenTimeSecSouthNorth')); $('#{{classApiMethodMethod}}_paramMinGreenTimeSecSouthNorth').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setParamMinGreenTimeSecSouthNorth', null, function() { addGlow($('#{{classApiMethodMethod}}_paramMinGreenTimeSecSouthNorth')); }, function() { addError($('#{{classApiMethodMethod}}_paramMinGreenTimeSecSouthNorth')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputParamMinGreenTimeSecSouthNorth"}}
-		{{#eq roleRequired "true"}}
-														<input
-															type="text"
-															placeholder="10"
-															title="Min: 1"
-															id="{{classApiMethodMethod}}_paramMinGreenTimeSecSouthNorth"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setParamMinGreenTimeSecSouthNorth classTrafficSimulation inputTrafficSimulation{{pk}}ParamMinGreenTimeSecSouthNorth w3-input w3-border "
-																name="setParamMinGreenTimeSecSouthNorth"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setParamMinGreenTimeSecSouthNorth classTrafficSimulation inputTrafficSimulation{{pk}}ParamMinGreenTimeSecSouthNorth w3-input w3-border "
-																name="setParamMinGreenTimeSecSouthNorth"
-		{{else}}
-																class="valueParamMinGreenTimeSecSouthNorth w3-input w3-border classTrafficSimulation inputTrafficSimulation{{pk}}ParamMinGreenTimeSecSouthNorth w3-input w3-border "
-																name="paramMinGreenTimeSecSouthNorth"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setParamMinGreenTimeSecSouthNorth', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_paramMinGreenTimeSecSouthNorth')); }, function() { addError($('#{{classApiMethodMethod}}_paramMinGreenTimeSecSouthNorth')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{trafficSimulation_.paramMinGreenTimeSecSouthNorth}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficSimulation{{pk}}ParamMinGreenTimeSecSouthNorth ">{{trafficSimulation_.paramMinGreenTimeSecSouthNorth}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varTrafficSimulation{{pk}}ParamMinGreenTimeSecSouthNorth ">{{trafficSimulation_.paramMinGreenTimeSecSouthNorth}}</span>
-		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmParamMaxGreenTimeSecSouthNorth"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}TrafficSimulationParamMaxGreenTimeSecSouthNorth">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_paramMaxGreenTimeSecSouthNorth">Max GREEN time for SOUTH-NORTH traffic (sec)</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputParamMaxGreenTimeSecSouthNorth" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramMaxGreenTimeSecSouthNorth')); $('#{{classApiMethodMethod}}_paramMaxGreenTimeSecSouthNorth').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setParamMaxGreenTimeSecSouthNorth', null, function() { addGlow($('#{{classApiMethodMethod}}_paramMaxGreenTimeSecSouthNorth')); }, function() { addError($('#{{classApiMethodMethod}}_paramMaxGreenTimeSecSouthNorth')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputParamMaxGreenTimeSecSouthNorth"}}
-		{{#eq roleRequired "true"}}
-														<input
-															type="text"
-															placeholder="20"
-															title="Min: 1"
-															id="{{classApiMethodMethod}}_paramMaxGreenTimeSecSouthNorth"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setParamMaxGreenTimeSecSouthNorth classTrafficSimulation inputTrafficSimulation{{pk}}ParamMaxGreenTimeSecSouthNorth w3-input w3-border "
-																name="setParamMaxGreenTimeSecSouthNorth"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setParamMaxGreenTimeSecSouthNorth classTrafficSimulation inputTrafficSimulation{{pk}}ParamMaxGreenTimeSecSouthNorth w3-input w3-border "
-																name="setParamMaxGreenTimeSecSouthNorth"
-		{{else}}
-																class="valueParamMaxGreenTimeSecSouthNorth w3-input w3-border classTrafficSimulation inputTrafficSimulation{{pk}}ParamMaxGreenTimeSecSouthNorth w3-input w3-border "
-																name="paramMaxGreenTimeSecSouthNorth"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setParamMaxGreenTimeSecSouthNorth', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_paramMaxGreenTimeSecSouthNorth')); }, function() { addError($('#{{classApiMethodMethod}}_paramMaxGreenTimeSecSouthNorth')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{trafficSimulation_.paramMaxGreenTimeSecSouthNorth}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficSimulation{{pk}}ParamMaxGreenTimeSecSouthNorth ">{{trafficSimulation_.paramMaxGreenTimeSecSouthNorth}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varTrafficSimulation{{pk}}ParamMaxGreenTimeSecSouthNorth ">{{trafficSimulation_.paramMaxGreenTimeSecSouthNorth}}</span>
-		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmParamPedestrianWaitThresholdSecNorthSouth"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}TrafficSimulationParamPedestrianWaitThresholdSecNorthSouth">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_paramPedestrianWaitThresholdSecNorthSouth">Pedestrian waiting time tolerance threshold for NORTH-SOUTH (sec)</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputParamPedestrianWaitThresholdSecNorthSouth" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramPedestrianWaitThresholdSecNorthSouth')); $('#{{classApiMethodMethod}}_paramPedestrianWaitThresholdSecNorthSouth').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setParamPedestrianWaitThresholdSecNorthSouth', null, function() { addGlow($('#{{classApiMethodMethod}}_paramPedestrianWaitThresholdSecNorthSouth')); }, function() { addError($('#{{classApiMethodMethod}}_paramPedestrianWaitThresholdSecNorthSouth')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputParamPedestrianWaitThresholdSecNorthSouth"}}
-		{{#eq roleRequired "true"}}
-														<input
-															type="text"
-															placeholder="10"
-															title="Min: 1"
-															id="{{classApiMethodMethod}}_paramPedestrianWaitThresholdSecNorthSouth"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setParamPedestrianWaitThresholdSecNorthSouth classTrafficSimulation inputTrafficSimulation{{pk}}ParamPedestrianWaitThresholdSecNorthSouth w3-input w3-border "
-																name="setParamPedestrianWaitThresholdSecNorthSouth"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setParamPedestrianWaitThresholdSecNorthSouth classTrafficSimulation inputTrafficSimulation{{pk}}ParamPedestrianWaitThresholdSecNorthSouth w3-input w3-border "
-																name="setParamPedestrianWaitThresholdSecNorthSouth"
-		{{else}}
-																class="valueParamPedestrianWaitThresholdSecNorthSouth w3-input w3-border classTrafficSimulation inputTrafficSimulation{{pk}}ParamPedestrianWaitThresholdSecNorthSouth w3-input w3-border "
-																name="paramPedestrianWaitThresholdSecNorthSouth"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setParamPedestrianWaitThresholdSecNorthSouth', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_paramPedestrianWaitThresholdSecNorthSouth')); }, function() { addError($('#{{classApiMethodMethod}}_paramPedestrianWaitThresholdSecNorthSouth')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{trafficSimulation_.paramPedestrianWaitThresholdSecNorthSouth}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficSimulation{{pk}}ParamPedestrianWaitThresholdSecNorthSouth ">{{trafficSimulation_.paramPedestrianWaitThresholdSecNorthSouth}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varTrafficSimulation{{pk}}ParamPedestrianWaitThresholdSecNorthSouth ">{{trafficSimulation_.paramPedestrianWaitThresholdSecNorthSouth}}</span>
-		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmParamPedestrianWaitThresholdSecWestEast"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}TrafficSimulationParamPedestrianWaitThresholdSecWestEast">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_paramPedestrianWaitThresholdSecWestEast">Pedestrian waiting time tolerance threshold for WEST-EAST (sec)</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputParamPedestrianWaitThresholdSecWestEast" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramPedestrianWaitThresholdSecWestEast')); $('#{{classApiMethodMethod}}_paramPedestrianWaitThresholdSecWestEast').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setParamPedestrianWaitThresholdSecWestEast', null, function() { addGlow($('#{{classApiMethodMethod}}_paramPedestrianWaitThresholdSecWestEast')); }, function() { addError($('#{{classApiMethodMethod}}_paramPedestrianWaitThresholdSecWestEast')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputParamPedestrianWaitThresholdSecWestEast"}}
-		{{#eq roleRequired "true"}}
-														<input
-															type="text"
-															placeholder="10"
-															title="Min: 1"
-															id="{{classApiMethodMethod}}_paramPedestrianWaitThresholdSecWestEast"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setParamPedestrianWaitThresholdSecWestEast classTrafficSimulation inputTrafficSimulation{{pk}}ParamPedestrianWaitThresholdSecWestEast w3-input w3-border "
-																name="setParamPedestrianWaitThresholdSecWestEast"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setParamPedestrianWaitThresholdSecWestEast classTrafficSimulation inputTrafficSimulation{{pk}}ParamPedestrianWaitThresholdSecWestEast w3-input w3-border "
-																name="setParamPedestrianWaitThresholdSecWestEast"
-		{{else}}
-																class="valueParamPedestrianWaitThresholdSecWestEast w3-input w3-border classTrafficSimulation inputTrafficSimulation{{pk}}ParamPedestrianWaitThresholdSecWestEast w3-input w3-border "
-																name="paramPedestrianWaitThresholdSecWestEast"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setParamPedestrianWaitThresholdSecWestEast', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_paramPedestrianWaitThresholdSecWestEast')); }, function() { addError($('#{{classApiMethodMethod}}_paramPedestrianWaitThresholdSecWestEast')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{trafficSimulation_.paramPedestrianWaitThresholdSecWestEast}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficSimulation{{pk}}ParamPedestrianWaitThresholdSecWestEast ">{{trafficSimulation_.paramPedestrianWaitThresholdSecWestEast}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varTrafficSimulation{{pk}}ParamPedestrianWaitThresholdSecWestEast ">{{trafficSimulation_.paramPedestrianWaitThresholdSecWestEast}}</span>
-		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmParamVehicleQueueThresholdWestEast"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}TrafficSimulationParamVehicleQueueThresholdWestEast">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_paramVehicleQueueThresholdWestEast">Vehicle queue length threshold between low-high content for WEST-EAST</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputParamVehicleQueueThresholdWestEast" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramVehicleQueueThresholdWestEast')); $('#{{classApiMethodMethod}}_paramVehicleQueueThresholdWestEast').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setParamVehicleQueueThresholdWestEast', null, function() { addGlow($('#{{classApiMethodMethod}}_paramVehicleQueueThresholdWestEast')); }, function() { addError($('#{{classApiMethodMethod}}_paramVehicleQueueThresholdWestEast')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputParamVehicleQueueThresholdWestEast"}}
-		{{#eq roleRequired "true"}}
-														<input
-															type="text"
-															placeholder="8"
-															title="Min: 1"
-															id="{{classApiMethodMethod}}_paramVehicleQueueThresholdWestEast"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setParamVehicleQueueThresholdWestEast classTrafficSimulation inputTrafficSimulation{{pk}}ParamVehicleQueueThresholdWestEast w3-input w3-border "
-																name="setParamVehicleQueueThresholdWestEast"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setParamVehicleQueueThresholdWestEast classTrafficSimulation inputTrafficSimulation{{pk}}ParamVehicleQueueThresholdWestEast w3-input w3-border "
-																name="setParamVehicleQueueThresholdWestEast"
-		{{else}}
-																class="valueParamVehicleQueueThresholdWestEast w3-input w3-border classTrafficSimulation inputTrafficSimulation{{pk}}ParamVehicleQueueThresholdWestEast w3-input w3-border "
-																name="paramVehicleQueueThresholdWestEast"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setParamVehicleQueueThresholdWestEast', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_paramVehicleQueueThresholdWestEast')); }, function() { addError($('#{{classApiMethodMethod}}_paramVehicleQueueThresholdWestEast')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{trafficSimulation_.paramVehicleQueueThresholdWestEast}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficSimulation{{pk}}ParamVehicleQueueThresholdWestEast ">{{trafficSimulation_.paramVehicleQueueThresholdWestEast}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varTrafficSimulation{{pk}}ParamVehicleQueueThresholdWestEast ">{{trafficSimulation_.paramVehicleQueueThresholdWestEast}}</span>
-		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmParamVehicleQueueThresholdSouthNorth"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}TrafficSimulationParamVehicleQueueThresholdSouthNorth">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_paramVehicleQueueThresholdSouthNorth">Vehicle queue length threshold between low-high content for SOUTH-NORTH</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputParamVehicleQueueThresholdSouthNorth" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramVehicleQueueThresholdSouthNorth')); $('#{{classApiMethodMethod}}_paramVehicleQueueThresholdSouthNorth').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setParamVehicleQueueThresholdSouthNorth', null, function() { addGlow($('#{{classApiMethodMethod}}_paramVehicleQueueThresholdSouthNorth')); }, function() { addError($('#{{classApiMethodMethod}}_paramVehicleQueueThresholdSouthNorth')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputParamVehicleQueueThresholdSouthNorth"}}
-		{{#eq roleRequired "true"}}
-														<input
-															type="text"
-															placeholder="8"
-															title="Min: 1"
-															id="{{classApiMethodMethod}}_paramVehicleQueueThresholdSouthNorth"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setParamVehicleQueueThresholdSouthNorth classTrafficSimulation inputTrafficSimulation{{pk}}ParamVehicleQueueThresholdSouthNorth w3-input w3-border "
-																name="setParamVehicleQueueThresholdSouthNorth"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setParamVehicleQueueThresholdSouthNorth classTrafficSimulation inputTrafficSimulation{{pk}}ParamVehicleQueueThresholdSouthNorth w3-input w3-border "
-																name="setParamVehicleQueueThresholdSouthNorth"
-		{{else}}
-																class="valueParamVehicleQueueThresholdSouthNorth w3-input w3-border classTrafficSimulation inputTrafficSimulation{{pk}}ParamVehicleQueueThresholdSouthNorth w3-input w3-border "
-																name="paramVehicleQueueThresholdSouthNorth"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setParamVehicleQueueThresholdSouthNorth', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_paramVehicleQueueThresholdSouthNorth')); }, function() { addError($('#{{classApiMethodMethod}}_paramVehicleQueueThresholdSouthNorth')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{trafficSimulation_.paramVehicleQueueThresholdSouthNorth}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficSimulation{{pk}}ParamVehicleQueueThresholdSouthNorth ">{{trafficSimulation_.paramVehicleQueueThresholdSouthNorth}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varTrafficSimulation{{pk}}ParamVehicleQueueThresholdSouthNorth ">{{trafficSimulation_.paramVehicleQueueThresholdSouthNorth}}</span>
-		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmParamPedestrianQueueThresholdNorthSouth"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}TrafficSimulationParamPedestrianQueueThresholdNorthSouth">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_paramPedestrianQueueThresholdNorthSouth">Pedestrian queue length threshold between low-high content for NORTH-SOUTH</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputParamPedestrianQueueThresholdNorthSouth" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramPedestrianQueueThresholdNorthSouth')); $('#{{classApiMethodMethod}}_paramPedestrianQueueThresholdNorthSouth').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setParamPedestrianQueueThresholdNorthSouth', null, function() { addGlow($('#{{classApiMethodMethod}}_paramPedestrianQueueThresholdNorthSouth')); }, function() { addError($('#{{classApiMethodMethod}}_paramPedestrianQueueThresholdNorthSouth')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputParamPedestrianQueueThresholdNorthSouth"}}
-		{{#eq roleRequired "true"}}
-														<input
-															type="text"
-															placeholder="6"
-															title="Min: 1"
-															id="{{classApiMethodMethod}}_paramPedestrianQueueThresholdNorthSouth"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setParamPedestrianQueueThresholdNorthSouth classTrafficSimulation inputTrafficSimulation{{pk}}ParamPedestrianQueueThresholdNorthSouth w3-input w3-border "
-																name="setParamPedestrianQueueThresholdNorthSouth"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setParamPedestrianQueueThresholdNorthSouth classTrafficSimulation inputTrafficSimulation{{pk}}ParamPedestrianQueueThresholdNorthSouth w3-input w3-border "
-																name="setParamPedestrianQueueThresholdNorthSouth"
-		{{else}}
-																class="valueParamPedestrianQueueThresholdNorthSouth w3-input w3-border classTrafficSimulation inputTrafficSimulation{{pk}}ParamPedestrianQueueThresholdNorthSouth w3-input w3-border "
-																name="paramPedestrianQueueThresholdNorthSouth"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setParamPedestrianQueueThresholdNorthSouth', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_paramPedestrianQueueThresholdNorthSouth')); }, function() { addError($('#{{classApiMethodMethod}}_paramPedestrianQueueThresholdNorthSouth')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{trafficSimulation_.paramPedestrianQueueThresholdNorthSouth}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficSimulation{{pk}}ParamPedestrianQueueThresholdNorthSouth ">{{trafficSimulation_.paramPedestrianQueueThresholdNorthSouth}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varTrafficSimulation{{pk}}ParamPedestrianQueueThresholdNorthSouth ">{{trafficSimulation_.paramPedestrianQueueThresholdNorthSouth}}</span>
-		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmParamPedestrianQueueThresholdWestEast"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}TrafficSimulationParamPedestrianQueueThresholdWestEast">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_paramPedestrianQueueThresholdWestEast">Pedestrian queue length threshold between low-high content for WEST-EAST</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputParamPedestrianQueueThresholdWestEast" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramPedestrianQueueThresholdWestEast')); $('#{{classApiMethodMethod}}_paramPedestrianQueueThresholdWestEast').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setParamPedestrianQueueThresholdWestEast', null, function() { addGlow($('#{{classApiMethodMethod}}_paramPedestrianQueueThresholdWestEast')); }, function() { addError($('#{{classApiMethodMethod}}_paramPedestrianQueueThresholdWestEast')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputParamPedestrianQueueThresholdWestEast"}}
-		{{#eq roleRequired "true"}}
-														<input
-															type="text"
-															placeholder="6"
-															title="Min: 1"
-															id="{{classApiMethodMethod}}_paramPedestrianQueueThresholdWestEast"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setParamPedestrianQueueThresholdWestEast classTrafficSimulation inputTrafficSimulation{{pk}}ParamPedestrianQueueThresholdWestEast w3-input w3-border "
-																name="setParamPedestrianQueueThresholdWestEast"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setParamPedestrianQueueThresholdWestEast classTrafficSimulation inputTrafficSimulation{{pk}}ParamPedestrianQueueThresholdWestEast w3-input w3-border "
-																name="setParamPedestrianQueueThresholdWestEast"
-		{{else}}
-																class="valueParamPedestrianQueueThresholdWestEast w3-input w3-border classTrafficSimulation inputTrafficSimulation{{pk}}ParamPedestrianQueueThresholdWestEast w3-input w3-border "
-																name="paramPedestrianQueueThresholdWestEast"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setParamPedestrianQueueThresholdWestEast', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_paramPedestrianQueueThresholdWestEast')); }, function() { addError($('#{{classApiMethodMethod}}_paramPedestrianQueueThresholdWestEast')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{trafficSimulation_.paramPedestrianQueueThresholdWestEast}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficSimulation{{pk}}ParamPedestrianQueueThresholdWestEast ">{{trafficSimulation_.paramPedestrianQueueThresholdWestEast}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varTrafficSimulation{{pk}}ParamPedestrianQueueThresholdWestEast ">{{trafficSimulation_.paramPedestrianQueueThresholdWestEast}}</span>
-		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmParamStepSize"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}TrafficSimulationParamStepSize">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_paramStepSize">Simulation time step (sec)</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputParamStepSize" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramStepSize')); $('#{{classApiMethodMethod}}_paramStepSize').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setParamStepSize', null, function() { addGlow($('#{{classApiMethodMethod}}_paramStepSize')); }, function() { addError($('#{{classApiMethodMethod}}_paramStepSize')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputParamStepSize"}}
-		{{#eq roleRequired "true"}}
-														<input
-															type="text"
-															placeholder="1"
-															title="Min: 0.5"
-															id="{{classApiMethodMethod}}_paramStepSize"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setParamStepSize classTrafficSimulation inputTrafficSimulation{{pk}}ParamStepSize w3-input w3-border "
-																name="setParamStepSize"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setParamStepSize classTrafficSimulation inputTrafficSimulation{{pk}}ParamStepSize w3-input w3-border "
-																name="setParamStepSize"
-		{{else}}
-																class="valueParamStepSize w3-input w3-border classTrafficSimulation inputTrafficSimulation{{pk}}ParamStepSize w3-input w3-border "
-																name="paramStepSize"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setParamStepSize', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_paramStepSize')); }, function() { addError($('#{{classApiMethodMethod}}_paramStepSize')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{trafficSimulation_.paramStepSize}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficSimulation{{pk}}ParamStepSize ">{{trafficSimulation_.paramStepSize}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varTrafficSimulation{{pk}}ParamStepSize ">{{trafficSimulation_.paramStepSize}}</span>
-		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmParamRunTime"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}TrafficSimulationParamRunTime">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_paramRunTime">time for each round of traffic simulation (sec)</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputParamRunTime" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramRunTime')); $('#{{classApiMethodMethod}}_paramRunTime').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setParamRunTime', null, function() { addGlow($('#{{classApiMethodMethod}}_paramRunTime')); }, function() { addError($('#{{classApiMethodMethod}}_paramRunTime')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputParamRunTime"}}
-		{{#eq roleRequired "true"}}
-														<input
-															type="text"
-															placeholder="1000"
-															title="Time duration of each simulated sample path. "
-															id="{{classApiMethodMethod}}_paramRunTime"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setParamRunTime classTrafficSimulation inputTrafficSimulation{{pk}}ParamRunTime w3-input w3-border "
-																name="setParamRunTime"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setParamRunTime classTrafficSimulation inputTrafficSimulation{{pk}}ParamRunTime w3-input w3-border "
-																name="setParamRunTime"
-		{{else}}
-																class="valueParamRunTime w3-input w3-border classTrafficSimulation inputTrafficSimulation{{pk}}ParamRunTime w3-input w3-border "
-																name="paramRunTime"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setParamRunTime', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_paramRunTime')); }, function() { addError($('#{{classApiMethodMethod}}_paramRunTime')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{trafficSimulation_.paramRunTime}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficSimulation{{pk}}ParamRunTime ">{{trafficSimulation_.paramRunTime}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varTrafficSimulation{{pk}}ParamRunTime ">{{trafficSimulation_.paramRunTime}}</span>
-		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmParamItersPerPar"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}TrafficSimulationParamItersPerPar">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_paramItersPerPar">Number of simulation repetitions with same input (for statistical accuracy)</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputParamItersPerPar" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramItersPerPar')); $('#{{classApiMethodMethod}}_paramItersPerPar').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setParamItersPerPar', null, function() { addGlow($('#{{classApiMethodMethod}}_paramItersPerPar')); }, function() { addError($('#{{classApiMethodMethod}}_paramItersPerPar')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputParamItersPerPar"}}
-		{{#eq roleRequired "true"}}
-														<input
-															type="text"
-															placeholder="3"
-															title="Number of repeats per round. "
-															id="{{classApiMethodMethod}}_paramItersPerPar"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setParamItersPerPar classTrafficSimulation inputTrafficSimulation{{pk}}ParamItersPerPar w3-input w3-border "
-																name="setParamItersPerPar"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setParamItersPerPar classTrafficSimulation inputTrafficSimulation{{pk}}ParamItersPerPar w3-input w3-border "
-																name="setParamItersPerPar"
-		{{else}}
-																class="valueParamItersPerPar w3-input w3-border classTrafficSimulation inputTrafficSimulation{{pk}}ParamItersPerPar w3-input w3-border "
-																name="paramItersPerPar"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setParamItersPerPar', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_paramItersPerPar')); }, function() { addError($('#{{classApiMethodMethod}}_paramItersPerPar')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{trafficSimulation_.paramItersPerPar}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficSimulation{{pk}}ParamItersPerPar ">{{trafficSimulation_.paramItersPerPar}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varTrafficSimulation{{pk}}ParamItersPerPar ">{{trafficSimulation_.paramItersPerPar}}</span>
-		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmParamTotalIterNum"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}TrafficSimulationParamTotalIterNum">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_paramTotalIterNum">Number of parameter update iterations before output</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputParamTotalIterNum" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramTotalIterNum')); $('#{{classApiMethodMethod}}_paramTotalIterNum').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setParamTotalIterNum', null, function() { addGlow($('#{{classApiMethodMethod}}_paramTotalIterNum')); }, function() { addError($('#{{classApiMethodMethod}}_paramTotalIterNum')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputParamTotalIterNum"}}
-		{{#eq roleRequired "true"}}
-														<input
-															type="text"
-															placeholder="5"
-															title="Total iterations to update performance. "
-															id="{{classApiMethodMethod}}_paramTotalIterNum"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setParamTotalIterNum classTrafficSimulation inputTrafficSimulation{{pk}}ParamTotalIterNum w3-input w3-border "
-																name="setParamTotalIterNum"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setParamTotalIterNum classTrafficSimulation inputTrafficSimulation{{pk}}ParamTotalIterNum w3-input w3-border "
-																name="setParamTotalIterNum"
-		{{else}}
-																class="valueParamTotalIterNum w3-input w3-border classTrafficSimulation inputTrafficSimulation{{pk}}ParamTotalIterNum w3-input w3-border "
-																name="paramTotalIterNum"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setParamTotalIterNum', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_paramTotalIterNum')); }, function() { addError($('#{{classApiMethodMethod}}_paramTotalIterNum')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{trafficSimulation_.paramTotalIterNum}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficSimulation{{pk}}ParamTotalIterNum ">{{trafficSimulation_.paramTotalIterNum}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varTrafficSimulation{{pk}}ParamTotalIterNum ">{{trafficSimulation_.paramTotalIterNum}}</span>
-		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmLaneAreaDetectorIds"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}TrafficSimulationLaneAreaDetectorIds">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputLaneAreaDetectorIds" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_laneAreaDetectorIds')); $('#{{classApiMethodMethod}}_laneAreaDetectorIds').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setLaneAreaDetectorIds', null, function() { addGlow($('#{{classApiMethodMethod}}_laneAreaDetectorIds')); }, function() { addError($('#{{classApiMethodMethod}}_laneAreaDetectorIds')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputLaneAreaDetectorIds"}}
-		{{#eq roleRequired "true"}}
-														<input
-															type="text"
-															id="{{classApiMethodMethod}}_laneAreaDetectorIds"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setLaneAreaDetectorIds classTrafficSimulation inputTrafficSimulation{{pk}}LaneAreaDetectorIds w3-input w3-border "
-																name="setLaneAreaDetectorIds"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setLaneAreaDetectorIds classTrafficSimulation inputTrafficSimulation{{pk}}LaneAreaDetectorIds w3-input w3-border "
-																name="setLaneAreaDetectorIds"
-		{{else}}
-																class="valueLaneAreaDetectorIds w3-input w3-border classTrafficSimulation inputTrafficSimulation{{pk}}LaneAreaDetectorIds w3-input w3-border "
-																name="laneAreaDetectorIds"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setLaneAreaDetectorIds', $(this).val().replace('[','').replace(']','').split(/[ ,]+/), function() { addGlow($('#{{classApiMethodMethod}}_laneAreaDetectorIds')); }, function() { addError($('#{{classApiMethodMethod}}_laneAreaDetectorIds')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{trafficSimulation_.laneAreaDetectorIds}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficSimulation{{pk}}LaneAreaDetectorIds ">{{trafficSimulation_.laneAreaDetectorIds}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varTrafficSimulation{{pk}}LaneAreaDetectorIds ">{{trafficSimulation_.laneAreaDetectorIds}}</span>
-		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmLaneAreaDetectorLanes"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}TrafficSimulationLaneAreaDetectorLanes">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputLaneAreaDetectorLanes" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_laneAreaDetectorLanes')); $('#{{classApiMethodMethod}}_laneAreaDetectorLanes').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setLaneAreaDetectorLanes', null, function() { addGlow($('#{{classApiMethodMethod}}_laneAreaDetectorLanes')); }, function() { addError($('#{{classApiMethodMethod}}_laneAreaDetectorLanes')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputLaneAreaDetectorLanes"}}
-		{{#eq roleRequired "true"}}
-														<input
-															type="text"
-															id="{{classApiMethodMethod}}_laneAreaDetectorLanes"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setLaneAreaDetectorLanes classTrafficSimulation inputTrafficSimulation{{pk}}LaneAreaDetectorLanes w3-input w3-border "
-																name="setLaneAreaDetectorLanes"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setLaneAreaDetectorLanes classTrafficSimulation inputTrafficSimulation{{pk}}LaneAreaDetectorLanes w3-input w3-border "
-																name="setLaneAreaDetectorLanes"
-		{{else}}
-																class="valueLaneAreaDetectorLanes w3-input w3-border classTrafficSimulation inputTrafficSimulation{{pk}}LaneAreaDetectorLanes w3-input w3-border "
-																name="laneAreaDetectorLanes"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setLaneAreaDetectorLanes', $(this).val().replace('[','').replace(']','').split(/[ ,]+/), function() { addGlow($('#{{classApiMethodMethod}}_laneAreaDetectorLanes')); }, function() { addError($('#{{classApiMethodMethod}}_laneAreaDetectorLanes')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{trafficSimulation_.laneAreaDetectorLanes}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficSimulation{{pk}}LaneAreaDetectorLanes ">{{trafficSimulation_.laneAreaDetectorLanes}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varTrafficSimulation{{pk}}LaneAreaDetectorLanes ">{{trafficSimulation_.laneAreaDetectorLanes}}</span>
-		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmLaneAreaDetectorPaths"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}TrafficSimulationLaneAreaDetectorPaths">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputLaneAreaDetectorPaths" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_laneAreaDetectorPaths')); $('#{{classApiMethodMethod}}_laneAreaDetectorPaths').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setLaneAreaDetectorPaths', null, function() { addGlow($('#{{classApiMethodMethod}}_laneAreaDetectorPaths')); }, function() { addError($('#{{classApiMethodMethod}}_laneAreaDetectorPaths')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputLaneAreaDetectorPaths"}}
-		{{#eq roleRequired "true"}}
-														<input
-															type="text"
-															id="{{classApiMethodMethod}}_laneAreaDetectorPaths"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setLaneAreaDetectorPaths classTrafficSimulation inputTrafficSimulation{{pk}}LaneAreaDetectorPaths w3-input w3-border "
-																name="setLaneAreaDetectorPaths"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setLaneAreaDetectorPaths classTrafficSimulation inputTrafficSimulation{{pk}}LaneAreaDetectorPaths w3-input w3-border "
-																name="setLaneAreaDetectorPaths"
-		{{else}}
-																class="valueLaneAreaDetectorPaths w3-input w3-border classTrafficSimulation inputTrafficSimulation{{pk}}LaneAreaDetectorPaths w3-input w3-border "
-																name="laneAreaDetectorPaths"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setLaneAreaDetectorPaths', $(this).val().replace('[','').replace(']','').split(/[ ,]+/), function() { addGlow($('#{{classApiMethodMethod}}_laneAreaDetectorPaths')); }, function() { addError($('#{{classApiMethodMethod}}_laneAreaDetectorPaths')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{trafficSimulation_.laneAreaDetectorPaths}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficSimulation{{pk}}LaneAreaDetectorPaths ">{{trafficSimulation_.laneAreaDetectorPaths}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varTrafficSimulation{{pk}}LaneAreaDetectorPaths ">{{trafficSimulation_.laneAreaDetectorPaths}}</span>
-		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmE1DetectorIds"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}TrafficSimulationE1DetectorIds">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputE1DetectorIds" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_e1DetectorIds')); $('#{{classApiMethodMethod}}_e1DetectorIds').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setE1DetectorIds', null, function() { addGlow($('#{{classApiMethodMethod}}_e1DetectorIds')); }, function() { addError($('#{{classApiMethodMethod}}_e1DetectorIds')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputE1DetectorIds"}}
-		{{#eq roleRequired "true"}}
-														<input
-															type="text"
-															id="{{classApiMethodMethod}}_e1DetectorIds"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setE1DetectorIds classTrafficSimulation inputTrafficSimulation{{pk}}E1DetectorIds w3-input w3-border "
-																name="setE1DetectorIds"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setE1DetectorIds classTrafficSimulation inputTrafficSimulation{{pk}}E1DetectorIds w3-input w3-border "
-																name="setE1DetectorIds"
-		{{else}}
-																class="valueE1DetectorIds w3-input w3-border classTrafficSimulation inputTrafficSimulation{{pk}}E1DetectorIds w3-input w3-border "
-																name="e1DetectorIds"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setE1DetectorIds', $(this).val().replace('[','').replace(']','').split(/[ ,]+/), function() { addGlow($('#{{classApiMethodMethod}}_e1DetectorIds')); }, function() { addError($('#{{classApiMethodMethod}}_e1DetectorIds')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{trafficSimulation_.e1DetectorIds}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficSimulation{{pk}}E1DetectorIds ">{{trafficSimulation_.e1DetectorIds}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varTrafficSimulation{{pk}}E1DetectorIds ">{{trafficSimulation_.e1DetectorIds}}</span>
-		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmE1DetectorLanes"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}TrafficSimulationE1DetectorLanes">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputE1DetectorLanes" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_e1DetectorLanes')); $('#{{classApiMethodMethod}}_e1DetectorLanes').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setE1DetectorLanes', null, function() { addGlow($('#{{classApiMethodMethod}}_e1DetectorLanes')); }, function() { addError($('#{{classApiMethodMethod}}_e1DetectorLanes')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputE1DetectorLanes"}}
-		{{#eq roleRequired "true"}}
-														<input
-															type="text"
-															id="{{classApiMethodMethod}}_e1DetectorLanes"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setE1DetectorLanes classTrafficSimulation inputTrafficSimulation{{pk}}E1DetectorLanes w3-input w3-border "
-																name="setE1DetectorLanes"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setE1DetectorLanes classTrafficSimulation inputTrafficSimulation{{pk}}E1DetectorLanes w3-input w3-border "
-																name="setE1DetectorLanes"
-		{{else}}
-																class="valueE1DetectorLanes w3-input w3-border classTrafficSimulation inputTrafficSimulation{{pk}}E1DetectorLanes w3-input w3-border "
-																name="e1DetectorLanes"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setE1DetectorLanes', $(this).val().replace('[','').replace(']','').split(/[ ,]+/), function() { addGlow($('#{{classApiMethodMethod}}_e1DetectorLanes')); }, function() { addError($('#{{classApiMethodMethod}}_e1DetectorLanes')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{trafficSimulation_.e1DetectorLanes}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficSimulation{{pk}}E1DetectorLanes ">{{trafficSimulation_.e1DetectorLanes}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varTrafficSimulation{{pk}}E1DetectorLanes ">{{trafficSimulation_.e1DetectorLanes}}</span>
-		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmE1DetectorPaths"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}TrafficSimulationE1DetectorPaths">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputE1DetectorPaths" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_e1DetectorPaths')); $('#{{classApiMethodMethod}}_e1DetectorPaths').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#TrafficSimulationForm :input[name=pk]').val() }], 'setE1DetectorPaths', null, function() { addGlow($('#{{classApiMethodMethod}}_e1DetectorPaths')); }, function() { addError($('#{{classApiMethodMethod}}_e1DetectorPaths')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputE1DetectorPaths"}}
-		{{#eq roleRequired "true"}}
-														<input
-															type="text"
-															id="{{classApiMethodMethod}}_e1DetectorPaths"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setE1DetectorPaths classTrafficSimulation inputTrafficSimulation{{pk}}E1DetectorPaths w3-input w3-border "
-																name="setE1DetectorPaths"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setE1DetectorPaths classTrafficSimulation inputTrafficSimulation{{pk}}E1DetectorPaths w3-input w3-border "
-																name="setE1DetectorPaths"
-		{{else}}
-																class="valueE1DetectorPaths w3-input w3-border classTrafficSimulation inputTrafficSimulation{{pk}}E1DetectorPaths w3-input w3-border "
-																name="e1DetectorPaths"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setE1DetectorPaths', $(this).val().replace('[','').replace(']','').split(/[ ,]+/), function() { addGlow($('#{{classApiMethodMethod}}_e1DetectorPaths')); }, function() { addError($('#{{classApiMethodMethod}}_e1DetectorPaths')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{trafficSimulation_.e1DetectorPaths}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficSimulation{{pk}}E1DetectorPaths ">{{trafficSimulation_.e1DetectorPaths}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varTrafficSimulation{{pk}}E1DetectorPaths ">{{trafficSimulation_.e1DetectorPaths}}</span>
+														<span class="varTrafficSimulation{{pk}}ReportKeys ">{{trafficSimulation_.reportKeys}}</span>
 		{{/eq}}
 {{/inline}}

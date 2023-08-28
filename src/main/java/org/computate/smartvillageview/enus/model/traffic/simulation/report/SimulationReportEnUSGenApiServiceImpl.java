@@ -127,7 +127,10 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 					)
 				));
 			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SimulationReport")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+				if(
+						!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SimulationReport")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						&& !Optional.ofNullable(Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_READ_REQUIRED + "_SimulationReport")).orElse(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SimulationReport"))).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						) {
 					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 					eventHandler.handle(Future.succeededFuture(
 						new ServiceResponse(401, "UNAUTHORIZED",
@@ -280,7 +283,10 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 					)
 				));
 			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SimulationReport")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+				if(
+						!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SimulationReport")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						&& !Optional.ofNullable(Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_READ_REQUIRED + "_SimulationReport")).orElse(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SimulationReport"))).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						) {
 					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 					eventHandler.handle(Future.succeededFuture(
 						new ServiceResponse(401, "UNAUTHORIZED",
@@ -372,7 +378,10 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 					)
 				));
 			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SimulationReport")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+				if(
+						!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SimulationReport")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						|| !Optional.ofNullable(Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_READ_REQUIRED + "_SimulationReport")).orElse(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SimulationReport"))).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						) {
 					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 					eventHandler.handle(Future.succeededFuture(
 						new ServiceResponse(401, "UNAUTHORIZED",
@@ -565,11 +574,15 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 			Promise<SimulationReport> promise1 = Promise.promise();
 			pgPool.withTransaction(sqlConnection -> {
 				siteRequest.setSqlConnection(sqlConnection);
-				sqlPATCHSimulationReport(o, inheritPk).onSuccess(simulationReport -> {
-					persistSimulationReport(simulationReport).onSuccess(c -> {
-						relateSimulationReport(simulationReport).onSuccess(d -> {
-							indexSimulationReport(simulationReport).onSuccess(e -> {
-								promise1.complete(simulationReport);
+				varsSimulationReport(siteRequest).onSuccess(a -> {
+					sqlPATCHSimulationReport(o, inheritPk).onSuccess(simulationReport -> {
+						persistSimulationReport(simulationReport).onSuccess(c -> {
+							relateSimulationReport(simulationReport).onSuccess(d -> {
+								indexSimulationReport(simulationReport).onSuccess(e -> {
+									promise1.complete(simulationReport);
+								}).onFailure(ex -> {
+									promise1.fail(ex);
+								});
 							}).onFailure(ex -> {
 								promise1.fail(ex);
 							});
@@ -913,22 +926,6 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							num++;
 							bParams.add(o2.sqlParamTotalIterNum());
 						break;
-					case "setReportStatus":
-							o2.setReportStatus(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SimulationReport.VAR_reportStatus + "=$" + num);
-							num++;
-							bParams.add(o2.sqlReportStatus());
-						break;
-					case "setReportProgress":
-							o2.setReportProgress(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SimulationReport.VAR_reportProgress + "=$" + num);
-							num++;
-							bParams.add(o2.sqlReportProgress());
-						break;
 					case "setUpdatedParameters":
 							o2.setUpdatedParameters(jsonObject.getJsonArray(entityVar));
 							if(bParams.size() > 0)
@@ -944,6 +941,30 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							bSql.append(SimulationReport.VAR_updatedPerformance + "=$" + num);
 							num++;
 							bParams.add(o2.sqlUpdatedPerformance());
+						break;
+					case "setAverageQueueLength":
+							o2.setAverageQueueLength(jsonObject.getJsonArray(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_averageQueueLength + "=$" + num);
+							num++;
+							bParams.add(o2.sqlAverageQueueLength());
+						break;
+					case "setReportStatus":
+							o2.setReportStatus(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_reportStatus + "=$" + num);
+							num++;
+							bParams.add(o2.sqlReportStatus());
+						break;
+					case "setReportProgress":
+							o2.setReportProgress(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_reportProgress + "=$" + num);
+							num++;
+							bParams.add(o2.sqlReportProgress());
 						break;
 				}
 			}
@@ -1016,7 +1037,10 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 					)
 				));
 			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SimulationReport")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+				if(
+						!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SimulationReport")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						|| !Optional.ofNullable(Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_READ_REQUIRED + "_SimulationReport")).orElse(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SimulationReport"))).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						) {
 					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 					eventHandler.handle(Future.succeededFuture(
 						new ServiceResponse(401, "UNAUTHORIZED",
@@ -1148,12 +1172,16 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 			pgPool.withTransaction(sqlConnection -> {
 				Promise<SimulationReport> promise1 = Promise.promise();
 				siteRequest.setSqlConnection(sqlConnection);
-				createSimulationReport(siteRequest).onSuccess(simulationReport -> {
-					sqlPOSTSimulationReport(simulationReport, inheritPk).onSuccess(b -> {
-						persistSimulationReport(simulationReport).onSuccess(c -> {
-							relateSimulationReport(simulationReport).onSuccess(d -> {
-								indexSimulationReport(simulationReport).onSuccess(e -> {
-									promise1.complete(simulationReport);
+				varsSimulationReport(siteRequest).onSuccess(a -> {
+					createSimulationReport(siteRequest).onSuccess(simulationReport -> {
+						sqlPOSTSimulationReport(simulationReport, inheritPk).onSuccess(b -> {
+							persistSimulationReport(simulationReport).onSuccess(c -> {
+								relateSimulationReport(simulationReport).onSuccess(d -> {
+									indexSimulationReport(simulationReport).onSuccess(e -> {
+										promise1.complete(simulationReport);
+									}).onFailure(ex -> {
+										promise1.fail(ex);
+									});
 								}).onFailure(ex -> {
 									promise1.fail(ex);
 								});
@@ -1553,24 +1581,6 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 						num++;
 						bParams.add(o2.sqlParamTotalIterNum());
 						break;
-					case SimulationReport.VAR_reportStatus:
-						o2.setReportStatus(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(SimulationReport.VAR_reportStatus + "=$" + num);
-						num++;
-						bParams.add(o2.sqlReportStatus());
-						break;
-					case SimulationReport.VAR_reportProgress:
-						o2.setReportProgress(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(SimulationReport.VAR_reportProgress + "=$" + num);
-						num++;
-						bParams.add(o2.sqlReportProgress());
-						break;
 					case SimulationReport.VAR_updatedParameters:
 						o2.setUpdatedParameters(jsonObject.getJsonArray(entityVar));
 						if(bParams.size() > 0) {
@@ -1588,6 +1598,33 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 						bSql.append(SimulationReport.VAR_updatedPerformance + "=$" + num);
 						num++;
 						bParams.add(o2.sqlUpdatedPerformance());
+						break;
+					case SimulationReport.VAR_averageQueueLength:
+						o2.setAverageQueueLength(jsonObject.getJsonArray(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_averageQueueLength + "=$" + num);
+						num++;
+						bParams.add(o2.sqlAverageQueueLength());
+						break;
+					case SimulationReport.VAR_reportStatus:
+						o2.setReportStatus(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_reportStatus + "=$" + num);
+						num++;
+						bParams.add(o2.sqlReportStatus());
+						break;
+					case SimulationReport.VAR_reportProgress:
+						o2.setReportProgress(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_reportProgress + "=$" + num);
+						num++;
+						bParams.add(o2.sqlReportProgress());
 						break;
 					}
 				}
@@ -1659,7 +1696,10 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 					)
 				));
 			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SimulationReport")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+				if(
+						!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SimulationReport")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						|| !Optional.ofNullable(Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_READ_REQUIRED + "_SimulationReport")).orElse(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SimulationReport"))).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						) {
 					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 					eventHandler.handle(Future.succeededFuture(
 						new ServiceResponse(401, "UNAUTHORIZED",
@@ -1673,24 +1713,19 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 					));
 				} else {
 					try {
-						try {
-							ApiRequest apiRequest = new ApiRequest();
-							JsonArray jsonArray = Optional.ofNullable(siteRequest.getJsonObject()).map(o -> o.getJsonArray("list")).orElse(new JsonArray());
-							apiRequest.setRows(Long.valueOf(jsonArray.size()));
-							apiRequest.setNumFound(Long.valueOf(jsonArray.size()));
-							apiRequest.setNumPATCH(0L);
-							apiRequest.initDeepApiRequest(siteRequest);
-							siteRequest.setApiRequest_(apiRequest);
-							eventBus.publish("websocketSimulationReport", JsonObject.mapFrom(apiRequest).toString());
-							varsSimulationReport(siteRequest).onSuccess(d -> {
-								listPUTImportSimulationReport(apiRequest, siteRequest).onSuccess(e -> {
-									response200PUTImportSimulationReport(siteRequest).onSuccess(response -> {
-										LOG.debug(String.format("putimportSimulationReport succeeded. "));
-										eventHandler.handle(Future.succeededFuture(response));
-									}).onFailure(ex -> {
-										LOG.error(String.format("putimportSimulationReport failed. "), ex);
-										error(siteRequest, eventHandler, ex);
-									});
+						ApiRequest apiRequest = new ApiRequest();
+						JsonArray jsonArray = Optional.ofNullable(siteRequest.getJsonObject()).map(o -> o.getJsonArray("list")).orElse(new JsonArray());
+						apiRequest.setRows(Long.valueOf(jsonArray.size()));
+						apiRequest.setNumFound(Long.valueOf(jsonArray.size()));
+						apiRequest.setNumPATCH(0L);
+						apiRequest.initDeepApiRequest(siteRequest);
+						siteRequest.setApiRequest_(apiRequest);
+						eventBus.publish("websocketSimulationReport", JsonObject.mapFrom(apiRequest).toString());
+						varsSimulationReport(siteRequest).onSuccess(d -> {
+							listPUTImportSimulationReport(apiRequest, siteRequest).onSuccess(e -> {
+								response200PUTImportSimulationReport(siteRequest).onSuccess(response -> {
+									LOG.debug(String.format("putimportSimulationReport succeeded. "));
+									eventHandler.handle(Future.succeededFuture(response));
 								}).onFailure(ex -> {
 									LOG.error(String.format("putimportSimulationReport failed. "), ex);
 									error(siteRequest, eventHandler, ex);
@@ -1699,10 +1734,10 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 								LOG.error(String.format("putimportSimulationReport failed. "), ex);
 								error(siteRequest, eventHandler, ex);
 							});
-						} catch(Exception ex) {
+						}).onFailure(ex -> {
 							LOG.error(String.format("putimportSimulationReport failed. "), ex);
 							error(siteRequest, eventHandler, ex);
-						}
+						});
 					} catch(Exception ex) {
 						LOG.error(String.format("putimportSimulationReport failed. "), ex);
 						error(null, eventHandler, ex);
@@ -1793,7 +1828,8 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 				apiRequest.setNumPATCH(0L);
 				apiRequest.initDeepApiRequest(siteRequest);
 				siteRequest.setApiRequest_(apiRequest);
-				body.put("inheritPk", body.getValue("pk"));
+				String inheritPk = Optional.ofNullable(body.getString(SimulationReport.VAR_pk)).orElse(body.getString(SimulationReport.VAR_id));
+				body.put("inheritPk", inheritPk);
 				if(Optional.ofNullable(serviceRequest.getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getJsonArray("var")).orElse(new JsonArray()).stream().filter(s -> "refresh:false".equals(s)).count() > 0L) {
 					siteRequest.getRequestVars().put( "refresh", "false" );
 				}
@@ -1804,7 +1840,7 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 				searchList.setC(SimulationReport.class);
 				searchList.fq("deleted_docvalues_boolean:false");
 				searchList.fq("archived_docvalues_boolean:false");
-				searchList.fq("inheritPk_docvalues_string:" + SearchTool.escapeQueryChars(body.getString(SimulationReport.VAR_pk)));
+				searchList.fq("inheritPk_docvalues_string:" + SearchTool.escapeQueryChars(inheritPk));
 				searchList.promiseDeepForClass(siteRequest).onSuccess(a -> {
 					try {
 						if(searchList.size() >= 1) {
@@ -1940,7 +1976,10 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 					)
 				));
 			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SimulationReport")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+				if(
+						!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SimulationReport")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						|| !Optional.ofNullable(Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_READ_REQUIRED + "_SimulationReport")).orElse(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SimulationReport"))).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						) {
 					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 					eventHandler.handle(Future.succeededFuture(
 						new ServiceResponse(401, "UNAUTHORIZED",
@@ -2133,11 +2172,15 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 			Promise<SimulationReport> promise1 = Promise.promise();
 			pgPool.withTransaction(sqlConnection -> {
 				siteRequest.setSqlConnection(sqlConnection);
-				sqlPATCHRunSimulationSimulationReport(o, inheritPk).onSuccess(simulationReport -> {
-					persistSimulationReport(simulationReport).onSuccess(c -> {
-						relateSimulationReport(simulationReport).onSuccess(d -> {
-							indexSimulationReport(simulationReport).onSuccess(e -> {
-								promise1.complete(simulationReport);
+				varsSimulationReport(siteRequest).onSuccess(a -> {
+					sqlPATCHRunSimulationSimulationReport(o, inheritPk).onSuccess(simulationReport -> {
+						persistSimulationReport(simulationReport).onSuccess(c -> {
+							relateSimulationReport(simulationReport).onSuccess(d -> {
+								indexSimulationReport(simulationReport).onSuccess(e -> {
+									promise1.complete(simulationReport);
+								}).onFailure(ex -> {
+									promise1.fail(ex);
+								});
 							}).onFailure(ex -> {
 								promise1.fail(ex);
 							});
@@ -2481,22 +2524,6 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							num++;
 							bParams.add(o2.sqlParamTotalIterNum());
 						break;
-					case "setReportStatus":
-							o2.setReportStatus(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SimulationReport.VAR_reportStatus + "=$" + num);
-							num++;
-							bParams.add(o2.sqlReportStatus());
-						break;
-					case "setReportProgress":
-							o2.setReportProgress(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SimulationReport.VAR_reportProgress + "=$" + num);
-							num++;
-							bParams.add(o2.sqlReportProgress());
-						break;
 					case "setUpdatedParameters":
 							o2.setUpdatedParameters(jsonObject.getJsonArray(entityVar));
 							if(bParams.size() > 0)
@@ -2512,6 +2539,30 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							bSql.append(SimulationReport.VAR_updatedPerformance + "=$" + num);
 							num++;
 							bParams.add(o2.sqlUpdatedPerformance());
+						break;
+					case "setAverageQueueLength":
+							o2.setAverageQueueLength(jsonObject.getJsonArray(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_averageQueueLength + "=$" + num);
+							num++;
+							bParams.add(o2.sqlAverageQueueLength());
+						break;
+					case "setReportStatus":
+							o2.setReportStatus(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_reportStatus + "=$" + num);
+							num++;
+							bParams.add(o2.sqlReportStatus());
+						break;
+					case "setReportProgress":
+							o2.setReportProgress(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_reportProgress + "=$" + num);
+							num++;
+							bParams.add(o2.sqlReportProgress());
 						break;
 				}
 			}
@@ -2588,7 +2639,10 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 					)
 				));
 			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SimulationReport")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+				if(
+						!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SimulationReport")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						&& !Optional.ofNullable(Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_READ_REQUIRED + "_SimulationReport")).orElse(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SimulationReport"))).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						) {
 					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 					eventHandler.handle(Future.succeededFuture(
 						new ServiceResponse(401, "UNAUTHORIZED",

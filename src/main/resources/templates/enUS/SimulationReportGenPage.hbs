@@ -34,15 +34,23 @@
 				window.eventBus = new EventBus('/eventbus');
 				var pk = {{#if pk}}{{pk}}{{else}}null{{/if}};
 				if(pk != null) {
-		{{#ifContainsAnyRoles roles roleRequired}}
+		{{#ifContainsAnyRoles roles roleForWrite}}
+					suggestSimulationReportSimulationKey([{'name':'fq','value':'reportKeys:' + pk}], $('#listSimulationReportSimulationKey_Page'), pk, true);
+		{{else}}
+		{{#ifContainsAnyRoles roles roleForRead}}
 					suggestSimulationReportSimulationKey([{'name':'fq','value':'reportKeys:' + pk}], $('#listSimulationReportSimulationKey_Page'), pk, true);
 		{{else}}
 					suggestSimulationReportSimulationKey([{'name':'fq','value':'reportKeys:' + pk}], $('#listSimulationReportSimulationKey_Page'), pk, false);
 		{{/ifContainsAnyRoles}}
-		{{#ifContainsAnyRoles roles roleRequired}}
+		{{/ifContainsAnyRoles}}
+		{{#ifContainsAnyRoles roles roleForWrite}}
+					suggestSimulationReportSmartTrafficLightKey([{'name':'fq','value':'reportKeys:' + pk}], $('#listSimulationReportSmartTrafficLightKey_Page'), pk, true);
+		{{else}}
+		{{#ifContainsAnyRoles roles roleForRead}}
 					suggestSimulationReportSmartTrafficLightKey([{'name':'fq','value':'reportKeys:' + pk}], $('#listSimulationReportSmartTrafficLightKey_Page'), pk, true);
 		{{else}}
 					suggestSimulationReportSmartTrafficLightKey([{'name':'fq','value':'reportKeys:' + pk}], $('#listSimulationReportSmartTrafficLightKey_Page'), pk, false);
+		{{/ifContainsAnyRoles}}
 		{{/ifContainsAnyRoles}}
 				}
 				window.varsFq = JSON.parse('{{{toJsonObjectStringInApostrophes varsFq}}}');
@@ -411,178 +419,347 @@
 						<h2 class="w3-padding ">Modify simulation reports</h2>
 					</header>
 					<div class="" id="patchSimulationReportFormValues">
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmCreated" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmCreated" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmCreated" roleRequired="false"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmCreated" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmCreated" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmArchived" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmArchived" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmArchived" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmDeleted" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmArchived" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmDeleted" roleRequired="false"}}
+{{> "htmArchived" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmDeleted" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmDeleted" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmDeleted" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmReportName" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmReportName" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmReportName" roleRequired="false"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmReportName" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmReportName" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmSimulationKey" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmSimulationKey" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmSimulationKey" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmSmartTrafficLightKey" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmSimulationKey" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmSmartTrafficLightKey" roleRequired="false"}}
+{{> "htmSimulationKey" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmSmartTrafficLightKey" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmSmartTrafficLightKey" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmSmartTrafficLightKey" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamAvgVehiclePerMinFromWestToEast" roleRequired="true"}}
+							<!-- BooleanUtils.isTrue(entiteHtmLigneVerticale) -->
+							<div class="w3-padding HtmRow">
+								<table class="w3-table-all ">
+									<thead>
+										<tr>
+										<th class="w3-2017-shaded-spruce " colspan="3">
+											<span>Vehicle traffic demand</span>
+										</th>
+										</tr>
+									</thead>
+									<tbody>
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamAvgVehiclePerMinFromWestToEast" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamAvgVehiclePerMinFromWestToEast" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamAvgVehiclePerMinFromSouthToNorth" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamAvgVehiclePerMinFromWestToEast" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamAvgVehiclePerMinFromSouthToNorth" roleRequired="false"}}
+{{> "htmParamAvgVehiclePerMinFromWestToEast" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamVehicleDemandScalingFactor" roleRequired="true"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamAvgVehiclePerMinFromSouthToNorth" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamVehicleDemandScalingFactor" roleRequired="false"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamAvgVehiclePerMinFromSouthToNorth" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamAvgVehiclePerMinFromSouthToNorth" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamVehicleDemandScalingFactor" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamVehicleDemandScalingFactor" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamVehicleDemandScalingFactor" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+										<!-- entiteHtmLigneVerticaleAncien != null && entiteHtmLigneVerticaleAncien -->
+									</tbody>
+								</table>
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamAvgPedestrianPerMinFromWestToEast" roleRequired="true"}}
+							<!-- BooleanUtils.isTrue(entiteHtmLigneVerticale) -->
+							<div class="w3-padding HtmRow">
+								<table class="w3-table-all ">
+									<thead>
+										<tr>
+										<th class="w3-2017-shaded-spruce " colspan="3">
+											<span>Pedestrian traffic demand</span>
+										</th>
+										</tr>
+									</thead>
+									<tbody>
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamAvgPedestrianPerMinFromWestToEast" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamAvgPedestrianPerMinFromWestToEast" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamAvgPedestrianPerMinFromSouthToNorth" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamAvgPedestrianPerMinFromWestToEast" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamAvgPedestrianPerMinFromSouthToNorth" roleRequired="false"}}
+{{> "htmParamAvgPedestrianPerMinFromWestToEast" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamPedestrianDemandScalingFactor" roleRequired="true"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamAvgPedestrianPerMinFromSouthToNorth" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamPedestrianDemandScalingFactor" roleRequired="false"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamAvgPedestrianPerMinFromSouthToNorth" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamAvgPedestrianPerMinFromSouthToNorth" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamPedestrianDemandScalingFactor" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamPedestrianDemandScalingFactor" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamPedestrianDemandScalingFactor" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+										<!-- entiteHtmLigneVerticaleAncien != null && entiteHtmLigneVerticaleAncien -->
+									</tbody>
+								</table>
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamMinGreenTimeSecWestEast" roleRequired="true"}}
+							<!-- BooleanUtils.isTrue(entiteHtmLigneVerticale) -->
+							<div class="w3-padding HtmRow">
+								<table class="w3-table-all ">
+									<thead>
+										<tr>
+										<th class="w3-2017-shaded-spruce " colspan="3">
+											<span>Initial Traffic Light Control parameters</span>
+										</th>
+										</tr>
+									</thead>
+									<tbody>
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamMinGreenTimeSecWestEast" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamMinGreenTimeSecWestEast" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamMaxGreenTimeSecWestEast" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamMinGreenTimeSecWestEast" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamMaxGreenTimeSecWestEast" roleRequired="false"}}
+{{> "htmParamMinGreenTimeSecWestEast" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamMaxGreenTimeSecWestEast" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamMaxGreenTimeSecWestEast" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamMaxGreenTimeSecWestEast" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamMinGreenTimeSecSouthNorth" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamMinGreenTimeSecSouthNorth" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamMinGreenTimeSecSouthNorth" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamMaxGreenTimeSecSouthNorth" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamMaxGreenTimeSecSouthNorth" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamMaxGreenTimeSecSouthNorth" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamPedestrianWaitThresholdSecNorthSouth" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamPedestrianWaitThresholdSecNorthSouth" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamPedestrianWaitThresholdSecNorthSouth" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamPedestrianWaitThresholdSecWestEast" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamPedestrianWaitThresholdSecWestEast" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamPedestrianWaitThresholdSecWestEast" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamVehicleQueueThresholdWestEast" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamVehicleQueueThresholdWestEast" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamVehicleQueueThresholdWestEast" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamVehicleQueueThresholdSouthNorth" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamVehicleQueueThresholdSouthNorth" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamVehicleQueueThresholdSouthNorth" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamPedestrianQueueThresholdNorthSouth" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamPedestrianQueueThresholdNorthSouth" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamPedestrianQueueThresholdNorthSouth" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamPedestrianQueueThresholdWestEast" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamPedestrianQueueThresholdWestEast" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamPedestrianQueueThresholdWestEast" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+										<!-- entiteHtmLigneVerticaleAncien != null && entiteHtmLigneVerticaleAncien -->
+									</tbody>
+								</table>
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamMinGreenTimeSecSouthNorth" roleRequired="true"}}
+							<!-- BooleanUtils.isTrue(entiteHtmLigneVerticale) -->
+							<div class="w3-padding HtmRow">
+								<table class="w3-table-all ">
+									<thead>
+										<tr>
+										<th class="w3-2017-shaded-spruce " colspan="3">
+											<span>Time and iterations</span>
+										</th>
+										</tr>
+									</thead>
+									<tbody>
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamStepSize" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamMinGreenTimeSecSouthNorth" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamMaxGreenTimeSecSouthNorth" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamStepSize" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamMaxGreenTimeSecSouthNorth" roleRequired="false"}}
+{{> "htmParamStepSize" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamRunTime" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamRunTime" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamRunTime" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamItersPerPar" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamItersPerPar" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamItersPerPar" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamTotalIterNum" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamTotalIterNum" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamTotalIterNum" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+										<!-- entiteHtmLigneVerticaleAncien != null && entiteHtmLigneVerticaleAncien -->
+									</tbody>
+								</table>
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamPedestrianWaitThresholdSecNorthSouth" roleRequired="true"}}
+							<!-- BooleanUtils.isTrue(entiteHtmLigneVerticale) -->
+							<div class="w3-padding HtmRow">
+								<table class="w3-table-all ">
+									<thead>
+										<tr>
+										<th class="w3-2017-shaded-spruce " colspan="3">
+											<span>Report status and actions</span>
+										</th>
+										</tr>
+									</thead>
+									<tbody>
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmReportStatus" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamPedestrianWaitThresholdSecNorthSouth" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamPedestrianWaitThresholdSecWestEast" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmReportStatus" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamPedestrianWaitThresholdSecWestEast" roleRequired="false"}}
+{{> "htmReportStatus" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
-							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamVehicleQueueThresholdWestEast" roleRequired="true"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmReportProgress" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamVehicleQueueThresholdWestEast" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamVehicleQueueThresholdSouthNorth" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmReportProgress" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamVehicleQueueThresholdSouthNorth" roleRequired="false"}}
+{{> "htmReportProgress" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
-							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamPedestrianQueueThresholdNorthSouth" roleRequired="true"}}
-{{else}}
-{{> "htmParamPedestrianQueueThresholdNorthSouth" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamPedestrianQueueThresholdWestEast" roleRequired="true"}}
-{{else}}
-{{> "htmParamPedestrianQueueThresholdWestEast" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamStepSize" roleRequired="true"}}
-{{else}}
-{{> "htmParamStepSize" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamRunTime" roleRequired="true"}}
-{{else}}
-{{> "htmParamRunTime" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamItersPerPar" roleRequired="true"}}
-{{else}}
-{{> "htmParamItersPerPar" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamTotalIterNum" roleRequired="true"}}
-{{else}}
-{{> "htmParamTotalIterNum" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmReportStatus" roleRequired="true"}}
-{{else}}
-{{> "htmReportStatus" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmReportProgress" roleRequired="true"}}
-{{else}}
-{{> "htmReportProgress" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmUpdatedParameters" roleRequired="true"}}
-{{else}}
-{{> "htmUpdatedParameters" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
+									</tbody>
+								</table>
 							</div>
 {{#block "htmFormButton_patchSimulationReport"}}{{/block}}
 					</div>
@@ -619,147 +796,290 @@
 					<div class="" id="postSimulationReportFormValues">
 						<div id="postSimulationReportForm">
 {{#block "htmFormButton_postSimulationReport"}}{{/block}}
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmReportName" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmReportName" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmReportName" roleRequired="false"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmReportName" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmReportName" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamAvgVehiclePerMinFromWestToEast" roleRequired="true"}}
+							<!-- BooleanUtils.isTrue(entiteHtmLigneVerticale) -->
+							<div class="w3-padding HtmRow">
+								<table class="w3-table-all ">
+									<thead>
+										<tr>
+										<th class="w3-2017-shaded-spruce " colspan="3">
+											<span>Vehicle traffic demand</span>
+										</th>
+										</tr>
+									</thead>
+									<tbody>
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamAvgVehiclePerMinFromWestToEast" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamAvgVehiclePerMinFromWestToEast" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamAvgVehiclePerMinFromSouthToNorth" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamAvgVehiclePerMinFromWestToEast" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamAvgVehiclePerMinFromSouthToNorth" roleRequired="false"}}
+{{> "htmParamAvgVehiclePerMinFromWestToEast" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamVehicleDemandScalingFactor" roleRequired="true"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamAvgVehiclePerMinFromSouthToNorth" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamVehicleDemandScalingFactor" roleRequired="false"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamAvgVehiclePerMinFromSouthToNorth" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamAvgVehiclePerMinFromSouthToNorth" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamVehicleDemandScalingFactor" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamVehicleDemandScalingFactor" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamVehicleDemandScalingFactor" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+										<!-- entiteHtmLigneVerticaleAncien != null && entiteHtmLigneVerticaleAncien -->
+									</tbody>
+								</table>
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamAvgPedestrianPerMinFromWestToEast" roleRequired="true"}}
+							<!-- BooleanUtils.isTrue(entiteHtmLigneVerticale) -->
+							<div class="w3-padding HtmRow">
+								<table class="w3-table-all ">
+									<thead>
+										<tr>
+										<th class="w3-2017-shaded-spruce " colspan="3">
+											<span>Pedestrian traffic demand</span>
+										</th>
+										</tr>
+									</thead>
+									<tbody>
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamAvgPedestrianPerMinFromWestToEast" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamAvgPedestrianPerMinFromWestToEast" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamAvgPedestrianPerMinFromSouthToNorth" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamAvgPedestrianPerMinFromWestToEast" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamAvgPedestrianPerMinFromSouthToNorth" roleRequired="false"}}
+{{> "htmParamAvgPedestrianPerMinFromWestToEast" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamPedestrianDemandScalingFactor" roleRequired="true"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamAvgPedestrianPerMinFromSouthToNorth" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamPedestrianDemandScalingFactor" roleRequired="false"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamAvgPedestrianPerMinFromSouthToNorth" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamAvgPedestrianPerMinFromSouthToNorth" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamPedestrianDemandScalingFactor" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamPedestrianDemandScalingFactor" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamPedestrianDemandScalingFactor" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+										<!-- entiteHtmLigneVerticaleAncien != null && entiteHtmLigneVerticaleAncien -->
+									</tbody>
+								</table>
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamMinGreenTimeSecWestEast" roleRequired="true"}}
+							<!-- BooleanUtils.isTrue(entiteHtmLigneVerticale) -->
+							<div class="w3-padding HtmRow">
+								<table class="w3-table-all ">
+									<thead>
+										<tr>
+										<th class="w3-2017-shaded-spruce " colspan="3">
+											<span>Initial Traffic Light Control parameters</span>
+										</th>
+										</tr>
+									</thead>
+									<tbody>
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamMinGreenTimeSecWestEast" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamMinGreenTimeSecWestEast" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamMaxGreenTimeSecWestEast" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamMinGreenTimeSecWestEast" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamMaxGreenTimeSecWestEast" roleRequired="false"}}
+{{> "htmParamMinGreenTimeSecWestEast" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamMaxGreenTimeSecWestEast" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamMaxGreenTimeSecWestEast" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamMaxGreenTimeSecWestEast" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamMinGreenTimeSecSouthNorth" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamMinGreenTimeSecSouthNorth" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamMinGreenTimeSecSouthNorth" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamMaxGreenTimeSecSouthNorth" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamMaxGreenTimeSecSouthNorth" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamMaxGreenTimeSecSouthNorth" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamPedestrianWaitThresholdSecNorthSouth" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamPedestrianWaitThresholdSecNorthSouth" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamPedestrianWaitThresholdSecNorthSouth" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamPedestrianWaitThresholdSecWestEast" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamPedestrianWaitThresholdSecWestEast" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamPedestrianWaitThresholdSecWestEast" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamVehicleQueueThresholdWestEast" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamVehicleQueueThresholdWestEast" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamVehicleQueueThresholdWestEast" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamVehicleQueueThresholdSouthNorth" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamVehicleQueueThresholdSouthNorth" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamVehicleQueueThresholdSouthNorth" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamPedestrianQueueThresholdNorthSouth" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamPedestrianQueueThresholdNorthSouth" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamPedestrianQueueThresholdNorthSouth" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamPedestrianQueueThresholdWestEast" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamPedestrianQueueThresholdWestEast" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamPedestrianQueueThresholdWestEast" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+										<!-- entiteHtmLigneVerticaleAncien != null && entiteHtmLigneVerticaleAncien -->
+									</tbody>
+								</table>
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamMinGreenTimeSecSouthNorth" roleRequired="true"}}
+							<!-- BooleanUtils.isTrue(entiteHtmLigneVerticale) -->
+							<div class="w3-padding HtmRow">
+								<table class="w3-table-all ">
+									<thead>
+										<tr>
+										<th class="w3-2017-shaded-spruce " colspan="3">
+											<span>Time and iterations</span>
+										</th>
+										</tr>
+									</thead>
+									<tbody>
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamStepSize" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamMinGreenTimeSecSouthNorth" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamMaxGreenTimeSecSouthNorth" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamStepSize" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamMaxGreenTimeSecSouthNorth" roleRequired="false"}}
+{{> "htmParamStepSize" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamRunTime" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamRunTime" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamRunTime" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamItersPerPar" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamItersPerPar" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamItersPerPar" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamTotalIterNum" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamTotalIterNum" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamTotalIterNum" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+										<!-- entiteHtmLigneVerticaleAncien != null && entiteHtmLigneVerticaleAncien -->
+									</tbody>
+								</table>
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamPedestrianWaitThresholdSecNorthSouth" roleRequired="true"}}
+							<!-- BooleanUtils.isTrue(entiteHtmLigneVerticale) -->
+							<div class="w3-padding HtmRow">
+								<table class="w3-table-all ">
+									<thead>
+										<tr>
+										<th class="w3-2017-shaded-spruce " colspan="3">
+											<span>Report status and actions</span>
+										</th>
+										</tr>
+									</thead>
+									<tbody>
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmReportStatus" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamPedestrianWaitThresholdSecNorthSouth" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamPedestrianWaitThresholdSecWestEast" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmReportStatus" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamPedestrianWaitThresholdSecWestEast" roleRequired="false"}}
+{{> "htmReportStatus" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
-							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamVehicleQueueThresholdWestEast" roleRequired="true"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmReportProgress" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamVehicleQueueThresholdWestEast" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamVehicleQueueThresholdSouthNorth" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmReportProgress" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamVehicleQueueThresholdSouthNorth" roleRequired="false"}}
+{{> "htmReportProgress" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
-							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamPedestrianQueueThresholdNorthSouth" roleRequired="true"}}
-{{else}}
-{{> "htmParamPedestrianQueueThresholdNorthSouth" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamPedestrianQueueThresholdWestEast" roleRequired="true"}}
-{{else}}
-{{> "htmParamPedestrianQueueThresholdWestEast" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamStepSize" roleRequired="true"}}
-{{else}}
-{{> "htmParamStepSize" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamRunTime" roleRequired="true"}}
-{{else}}
-{{> "htmParamRunTime" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamItersPerPar" roleRequired="true"}}
-{{else}}
-{{> "htmParamItersPerPar" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamTotalIterNum" roleRequired="true"}}
-{{else}}
-{{> "htmParamTotalIterNum" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmReportStatus" roleRequired="true"}}
-{{else}}
-{{> "htmReportStatus" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmReportProgress" roleRequired="true"}}
-{{else}}
-{{> "htmReportProgress" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmUpdatedParameters" roleRequired="true"}}
-{{else}}
-{{> "htmUpdatedParameters" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
+									</tbody>
+								</table>
 							</div>
 						</div>
 {{#block "htmFormButton_postSimulationReport"}}{{/block}}
@@ -821,246 +1141,593 @@
 				<div class="w3-card-4 ">
 					<div class="" id="searchpageSimulationReportFormValues">
 						<div id="searchpageSimulationReportForm">
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmPk" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmPk" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmPk" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmCreated" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmPk" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmCreated" roleRequired="false"}}
+{{> "htmPk" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmModified" roleRequired="true"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmCreated" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmModified" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmObjectId" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmCreated" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmObjectId" roleRequired="false"}}
+{{> "htmCreated" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmModified" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmModified" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmModified" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmObjectId" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmObjectId" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmObjectId" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmArchived" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmArchived" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmArchived" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmDeleted" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmArchived" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmDeleted" roleRequired="false"}}
+{{> "htmArchived" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmDeleted" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmDeleted" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmDeleted" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmReportName" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmReportName" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmReportName" roleRequired="false"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmReportName" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmReportName" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmSimulationKey" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmSimulationKey" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmSimulationKey" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmSmartTrafficLightKey" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmSimulationKey" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmSmartTrafficLightKey" roleRequired="false"}}
+{{> "htmSimulationKey" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmSmartTrafficLightKey" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmSmartTrafficLightKey" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmSmartTrafficLightKey" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamAvgVehiclePerMinFromWestToEast" roleRequired="true"}}
+							<!-- BooleanUtils.isTrue(entiteHtmLigneVerticale) -->
+							<div class="w3-padding HtmRow">
+								<table class="w3-table-all ">
+									<thead>
+										<tr>
+										<th class="w3-2017-shaded-spruce " colspan="3">
+											<span>Vehicle traffic demand</span>
+										</th>
+										</tr>
+									</thead>
+									<tbody>
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamAvgVehiclePerMinFromWestToEast" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamAvgVehiclePerMinFromWestToEast" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamAvgVehiclePerMinFromSouthToNorth" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamAvgVehiclePerMinFromWestToEast" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamAvgVehiclePerMinFromSouthToNorth" roleRequired="false"}}
+{{> "htmParamAvgVehiclePerMinFromWestToEast" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamVehicleDemandScalingFactor" roleRequired="true"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamAvgVehiclePerMinFromSouthToNorth" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamVehicleDemandScalingFactor" roleRequired="false"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamAvgVehiclePerMinFromSouthToNorth" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamAvgVehiclePerMinFromSouthToNorth" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamVehicleDemandScalingFactor" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamVehicleDemandScalingFactor" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamVehicleDemandScalingFactor" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+										<!-- entiteHtmLigneVerticaleAncien != null && entiteHtmLigneVerticaleAncien -->
+									</tbody>
+								</table>
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamAvgPedestrianPerMinFromWestToEast" roleRequired="true"}}
+							<!-- BooleanUtils.isTrue(entiteHtmLigneVerticale) -->
+							<div class="w3-padding HtmRow">
+								<table class="w3-table-all ">
+									<thead>
+										<tr>
+										<th class="w3-2017-shaded-spruce " colspan="3">
+											<span>Pedestrian traffic demand</span>
+										</th>
+										</tr>
+									</thead>
+									<tbody>
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamAvgPedestrianPerMinFromWestToEast" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamAvgPedestrianPerMinFromWestToEast" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamAvgPedestrianPerMinFromSouthToNorth" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamAvgPedestrianPerMinFromWestToEast" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamAvgPedestrianPerMinFromSouthToNorth" roleRequired="false"}}
+{{> "htmParamAvgPedestrianPerMinFromWestToEast" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamPedestrianDemandScalingFactor" roleRequired="true"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamAvgPedestrianPerMinFromSouthToNorth" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamPedestrianDemandScalingFactor" roleRequired="false"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamAvgPedestrianPerMinFromSouthToNorth" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamAvgPedestrianPerMinFromSouthToNorth" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamPedestrianDemandScalingFactor" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamPedestrianDemandScalingFactor" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamPedestrianDemandScalingFactor" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+										<!-- entiteHtmLigneVerticaleAncien != null && entiteHtmLigneVerticaleAncien -->
+									</tbody>
+								</table>
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamMinGreenTimeSecWestEast" roleRequired="true"}}
+							<!-- BooleanUtils.isTrue(entiteHtmLigneVerticale) -->
+							<div class="w3-padding HtmRow">
+								<table class="w3-table-all ">
+									<thead>
+										<tr>
+										<th class="w3-2017-shaded-spruce " colspan="3">
+											<span>Initial Traffic Light Control parameters</span>
+										</th>
+										</tr>
+									</thead>
+									<tbody>
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamMinGreenTimeSecWestEast" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamMinGreenTimeSecWestEast" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamMaxGreenTimeSecWestEast" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamMinGreenTimeSecWestEast" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamMaxGreenTimeSecWestEast" roleRequired="false"}}
+{{> "htmParamMinGreenTimeSecWestEast" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamMaxGreenTimeSecWestEast" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamMaxGreenTimeSecWestEast" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamMaxGreenTimeSecWestEast" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamMinGreenTimeSecSouthNorth" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamMinGreenTimeSecSouthNorth" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamMinGreenTimeSecSouthNorth" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamMaxGreenTimeSecSouthNorth" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamMaxGreenTimeSecSouthNorth" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamMaxGreenTimeSecSouthNorth" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamPedestrianWaitThresholdSecNorthSouth" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamPedestrianWaitThresholdSecNorthSouth" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamPedestrianWaitThresholdSecNorthSouth" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamPedestrianWaitThresholdSecWestEast" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamPedestrianWaitThresholdSecWestEast" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamPedestrianWaitThresholdSecWestEast" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamVehicleQueueThresholdWestEast" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamVehicleQueueThresholdWestEast" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamVehicleQueueThresholdWestEast" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamVehicleQueueThresholdSouthNorth" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamVehicleQueueThresholdSouthNorth" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamVehicleQueueThresholdSouthNorth" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamPedestrianQueueThresholdNorthSouth" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamPedestrianQueueThresholdNorthSouth" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamPedestrianQueueThresholdNorthSouth" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamPedestrianQueueThresholdWestEast" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamPedestrianQueueThresholdWestEast" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamPedestrianQueueThresholdWestEast" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+										<!-- entiteHtmLigneVerticaleAncien != null && entiteHtmLigneVerticaleAncien -->
+									</tbody>
+								</table>
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamMinGreenTimeSecSouthNorth" roleRequired="true"}}
+							<!-- BooleanUtils.isTrue(entiteHtmLigneVerticale) -->
+							<div class="w3-padding HtmRow">
+								<table class="w3-table-all ">
+									<thead>
+										<tr>
+										<th class="w3-2017-shaded-spruce " colspan="3">
+											<span>Time and iterations</span>
+										</th>
+										</tr>
+									</thead>
+									<tbody>
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamStepSize" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamMinGreenTimeSecSouthNorth" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamMaxGreenTimeSecSouthNorth" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamStepSize" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamMaxGreenTimeSecSouthNorth" roleRequired="false"}}
+{{> "htmParamStepSize" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamRunTime" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamRunTime" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamRunTime" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamItersPerPar" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamItersPerPar" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamItersPerPar" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamTotalIterNum" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamTotalIterNum" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamTotalIterNum" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+										<!-- entiteHtmLigneVerticaleAncien != null && entiteHtmLigneVerticaleAncien -->
+									</tbody>
+								</table>
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamPedestrianWaitThresholdSecNorthSouth" roleRequired="true"}}
+							<!-- BooleanUtils.isTrue(entiteHtmLigneVerticale) -->
+							<div class="w3-padding HtmRow">
+								<table class="w3-table-all ">
+									<thead>
+										<tr>
+										<th class="w3-2017-shaded-spruce ">
+											<span>Updated parameters</span>
+										</th>
+										{{#each simulationReport_.updatedParameters1}}<th class="w3-2017-shaded-spruce ">iter {{numberAdd @index 1}}</th>{{/each}}
+										</tr>
+									</thead>
+									<tbody>
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmUpdatedParameters1" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamPedestrianWaitThresholdSecNorthSouth" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamPedestrianWaitThresholdSecWestEast" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmUpdatedParameters1" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamPedestrianWaitThresholdSecWestEast" roleRequired="false"}}
+{{> "htmUpdatedParameters1" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmUpdatedParameters2" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmUpdatedParameters2" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmUpdatedParameters2" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmUpdatedParameters3" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmUpdatedParameters3" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmUpdatedParameters3" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmUpdatedParameters4" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmUpdatedParameters4" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmUpdatedParameters4" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmUpdatedParameters5" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmUpdatedParameters5" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmUpdatedParameters5" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmUpdatedParameters6" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmUpdatedParameters6" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmUpdatedParameters6" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmUpdatedParameters7" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmUpdatedParameters7" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmUpdatedParameters7" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmUpdatedParameters8" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmUpdatedParameters8" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmUpdatedParameters8" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmUpdatedParameters9" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmUpdatedParameters9" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmUpdatedParameters9" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmUpdatedParameters10" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmUpdatedParameters10" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmUpdatedParameters10" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+										<!-- entiteHtmLigneVerticaleAncien != null && entiteHtmLigneVerticaleAncien -->
+									</tbody>
+								</table>
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamVehicleQueueThresholdWestEast" roleRequired="true"}}
+							<!-- BooleanUtils.isTrue(entiteHtmLigneVerticale) -->
+							<div class="w3-padding HtmRow">
+								<table class="w3-table-all ">
+									<thead>
+										<tr>
+										<th class="w3-2017-shaded-spruce ">
+											<span>Updated performance</span>
+										</th>
+										{{#each simulationReport_.updatedPerformanceWaitWestEastVehicleSec}}<th class="w3-2017-shaded-spruce ">iter {{numberAdd @index 1}}</th>{{/each}}
+										</tr>
+									</thead>
+									<tbody>
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmUpdatedPerformanceWaitWestEastVehicleSec" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamVehicleQueueThresholdWestEast" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamVehicleQueueThresholdSouthNorth" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmUpdatedPerformanceWaitWestEastVehicleSec" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamVehicleQueueThresholdSouthNorth" roleRequired="false"}}
+{{> "htmUpdatedPerformanceWaitWestEastVehicleSec" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmUpdatedPerformanceWaitSouthNorthVehicleSec" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmUpdatedPerformanceWaitSouthNorthVehicleSec" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmUpdatedPerformanceWaitSouthNorthVehicleSec" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmUpdatedPerformanceWaitAllVehicleSec" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmUpdatedPerformanceWaitAllVehicleSec" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmUpdatedPerformanceWaitAllVehicleSec" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmUpdatedPerformanceWaitAllPedestrianSec" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmUpdatedPerformanceWaitAllPedestrianSec" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmUpdatedPerformanceWaitAllPedestrianSec" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmUpdatedPerformanceWaitAllVehiclePedestrianSec" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmUpdatedPerformanceWaitAllVehiclePedestrianSec" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmUpdatedPerformanceWaitAllVehiclePedestrianSec" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+										<!-- entiteHtmLigneVerticaleAncien != null && entiteHtmLigneVerticaleAncien -->
+									</tbody>
+								</table>
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamPedestrianQueueThresholdNorthSouth" roleRequired="true"}}
+							<!-- BooleanUtils.isTrue(entiteHtmLigneVerticale) -->
+							<div class="w3-padding HtmRow">
+								<table class="w3-table-all ">
+									<thead>
+										<tr>
+										<th class="w3-2017-shaded-spruce ">
+											<span>Average queue length</span>
+										</th>
+										{{#each simulationReport_.avgQueueLengthWestEastVehicle}}<th class="w3-2017-shaded-spruce ">iter {{numberAdd @index 1}}</th>{{/each}}
+										</tr>
+									</thead>
+									<tbody>
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmAvgQueueLengthWestEastVehicle" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamPedestrianQueueThresholdNorthSouth" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamPedestrianQueueThresholdWestEast" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmAvgQueueLengthWestEastVehicle" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamPedestrianQueueThresholdWestEast" roleRequired="false"}}
+{{> "htmAvgQueueLengthWestEastVehicle" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmAvgQueueLengthSouthNorthVehicle" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmAvgQueueLengthSouthNorthVehicle" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmAvgQueueLengthSouthNorthVehicle" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmAvgQueueLengthNorthSouthPedestrian" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmAvgQueueLengthNorthSouthPedestrian" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmAvgQueueLengthNorthSouthPedestrian" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmAvgQueueLengthWestEastPedestrian" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmAvgQueueLengthWestEastPedestrian" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmAvgQueueLengthWestEastPedestrian" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+										<!-- entiteHtmLigneVerticaleAncien != null && entiteHtmLigneVerticaleAncien -->
+									</tbody>
+								</table>
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamStepSize" roleRequired="true"}}
+							<!-- BooleanUtils.isTrue(entiteHtmLigneVerticale) -->
+							<div class="w3-padding HtmRow">
+								<table class="w3-table-all ">
+									<thead>
+										<tr>
+										<th class="w3-2017-shaded-spruce " colspan="3">
+											<span>Report status and actions</span>
+										</th>
+										</tr>
+									</thead>
+									<tbody>
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmReportStatus" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamStepSize" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamRunTime" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmReportStatus" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamRunTime" roleRequired="false"}}
+{{> "htmReportStatus" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
-							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamItersPerPar" roleRequired="true"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmReportProgress" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamItersPerPar" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamTotalIterNum" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmReportProgress" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamTotalIterNum" roleRequired="false"}}
+{{> "htmReportProgress" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmReportStatus" roleRequired="true"}}
-{{else}}
-{{> "htmReportStatus" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmReportProgress" roleRequired="true"}}
-{{else}}
-{{> "htmReportProgress" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmUpdatedParameters" roleRequired="true"}}
-{{else}}
-{{> "htmUpdatedParameters" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmUpdatedPerformanceWaitWestEastVehicleSec" roleRequired="true"}}
-{{else}}
-{{> "htmUpdatedPerformanceWaitWestEastVehicleSec" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmUpdatedPerformanceWaitSouthNorthVehicleSec" roleRequired="true"}}
-{{else}}
-{{> "htmUpdatedPerformanceWaitSouthNorthVehicleSec" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmUpdatedPerformanceWaitAllVehicleSec" roleRequired="true"}}
-{{else}}
-{{> "htmUpdatedPerformanceWaitAllVehicleSec" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmUpdatedPerformanceWaitAllPedestrianSec" roleRequired="true"}}
-{{else}}
-{{> "htmUpdatedPerformanceWaitAllPedestrianSec" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmUpdatedPerformanceWaitAllVehiclePedestrianSec" roleRequired="true"}}
-{{else}}
-{{> "htmUpdatedPerformanceWaitAllVehiclePedestrianSec" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmAvgQueueLengthWestEastVehicle" roleRequired="true"}}
-{{else}}
-{{> "htmAvgQueueLengthWestEastVehicle" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmAvgQueueLengthSouthNorthVehicle" roleRequired="true"}}
-{{else}}
-{{> "htmAvgQueueLengthSouthNorthVehicle" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmAvgQueueLengthNorthSouthPedestrian" roleRequired="true"}}
-{{else}}
-{{> "htmAvgQueueLengthNorthSouthPedestrian" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmAvgQueueLengthWestEastPedestrian" roleRequired="true"}}
-{{else}}
-{{> "htmAvgQueueLengthWestEastPedestrian" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
+									</tbody>
+								</table>
 							</div>
 						</div>
 					</div>
@@ -1077,7 +1744,7 @@
 						<span title="Pivot" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-shaded-spruce " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-2017-shaded-spruce'); $(this).addClass('w3-black'); $(this).removeClass('w3-2017-shaded-spruce'); "><i class="fad fa-table-pivot hover-box-shadow w3-xlarge "></i> Pivot</span>
 						<span title="FieldList" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-shaded-spruce " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleFieldList').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-2017-shaded-spruce'); $(this).addClass('w3-black'); $(this).removeClass('w3-2017-shaded-spruce'); "><i class="fad fa-list-ul hover-box-shadow w3-xlarge "></i> FieldList</span>
 						<span title="Stats" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-shaded-spruce " onclick="$('.siteSidebarToggleFieldList').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleStats').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-2017-shaded-spruce'); $(this).addClass('w3-black'); $(this).removeClass('w3-2017-shaded-spruce'); "><i class="fad fa-chart-candlestick hover-box-shadow w3-xlarge "></i> Stats</span>
-						<a title="API" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-shaded-spruce " href="{{ apiUri }}{{ queryStr }}"><i class="fad fa-brackets-curly hover-box-shadow w3-xlarge "></i> API</a>
+						<a title="API" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-shaded-spruce " href="{{ apiUri }}{{#if pk }}/{{ pk }}{{else}}{{#if id }}/{{ id }}{{else}}{{ queryStr }}{{/if}}{{/if}}"><i class="fad fa-brackets-curly hover-box-shadow w3-xlarge "></i> API</a>
 					</div>
 					<div class=" ">
 						<div class="siteSidebarToggle siteSidebarToggleSearch w3-dropdown-content min-width-300px w3-white w3-border w3-border-2017-shaded-spruce " style="display: none; ">
@@ -1274,7 +1941,7 @@
 {{#block "htmSuggested"}}{{/block}}
 {{/inline}}
 {{#*inline "htmSuggestedSimulationReportPage"}}
-			{{#ifContainsAnyRoles roles roleRequired}}
+			{{#ifContainsAnyRoles roles roleForWrite}}
 					<div class="">
 						<button id="refreshAllSimulationReportGenPage{{id}}" class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce "
 							onclick="patch{{classSimpleName}}Vals([], {}, function() { addGlow($('#refreshAllSimulationReportGenPage{{id}}')); }, function() { addError($('#refreshAllSimulationReportGenPage{{id}}')); }); "
@@ -1326,7 +1993,248 @@
 {{/inline}}
 {{> BaseModelPage baseModel_=simulationReport_}}
 
+{{#*inline "htmPk"}}
+<!-- #*inline "htmPk" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SimulationReportPk">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_pk">primary key</label>
+												</div>
+											<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputPk" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputPk"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varSimulationReport{{pk}}Pk ">{{simulationReport_.pk}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmCreated"}}
+<!-- #*inline "htmCreated" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SimulationReportCreated">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_created">created</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputCreated" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputCreated"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varSimulationReport{{pk}}Created " title="{{formatZonedDateTime simulationReport_.created 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime simulationReport_.created 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmModified"}}
+<!-- #*inline "htmModified" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SimulationReportModified">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_modified">modified</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputModified" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputModified"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varSimulationReport{{pk}}Modified " title="{{formatZonedDateTime simulationReport_.modified 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime simulationReport_.modified 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmObjectId"}}
+<!-- #*inline "htmObjectId" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SimulationReportObjectId">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_objectId">ID</label>
+												</div>
+											<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputObjectId" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputObjectId"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varSimulationReport{{pk}}ObjectId ">{{simulationReport_.objectId}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmArchived"}}
+<!-- #*inline "htmArchived" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SimulationReportArchived">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_archived">archived</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputArchived" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputArchived"}}
+		{{#eq roleForWriteBool "true"}}
+	{{#eq 'Page' classApiMethodMethod}}
+															<input
+																type="checkbox"
+																id="{{classApiMethodMethod}}_archived"
+																value="true"
+	{{else}}
+														<select
+															id="{{classApiMethodMethod}}_archived"
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+															class="classSimulationReport inputSimulationReport{{pk}}Archived w3-input w3-border "
+															name="setArchived"
+	{{else}}
+		{{#eq 'Page' classApiMethodMethod}}
+																class="classSimulationReport inputSimulationReport{{pk}}Archived w3-input w3-border "
+																name="setArchived"
+		{{else}}
+																class="setArchived valueArchived classSimulationReport inputSimulationReport{{pk}}Archived w3-input w3-border "
+																name="setArchived"
+		{{/eq}}
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+															onchange="var confirmResponse = confirm('Are you sure you want to archive that?'); if(confirmResponse) { patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setArchived', $(this).prop('checked'), function() { addGlow($('#{{classApiMethodMethod}}_archived')); }, function() { addError($('#{{classApiMethodMethod}}_archived')); }); }"
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+		{{#if simulationReport_.archived}}
+																checked="checked"
+		{{/if}}
+																/>
+	{{else}}
+															>
+															<option value="" selected="selected"></option>
+															<option value="true">true</option>
+															<option value="false">false</option>
+														</select>
+	{{/eq}}
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varSimulationReport{{pk}}Archived ">{{simulationReport_.archived}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varSimulationReport{{pk}}Archived ">{{simulationReport_.archived}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmDeleted"}}
+<!-- #*inline "htmDeleted" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SimulationReportDeleted">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_deleted">deleted</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputDeleted" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputDeleted"}}
+		{{#eq roleForWriteBool "true"}}
+	{{#eq 'Page' classApiMethodMethod}}
+															<input
+																type="checkbox"
+																id="{{classApiMethodMethod}}_deleted"
+																value="true"
+	{{else}}
+														<select
+															id="{{classApiMethodMethod}}_deleted"
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+															class="classSimulationReport inputSimulationReport{{pk}}Deleted w3-input w3-border "
+															name="setDeleted"
+	{{else}}
+		{{#eq 'Page' classApiMethodMethod}}
+																class="classSimulationReport inputSimulationReport{{pk}}Deleted w3-input w3-border "
+																name="setDeleted"
+		{{else}}
+																class="setDeleted valueDeleted classSimulationReport inputSimulationReport{{pk}}Deleted w3-input w3-border "
+																name="setDeleted"
+		{{/eq}}
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+															onchange="var confirmResponse = confirm('Are you sure you want to delete that?'); if(confirmResponse) { patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setDeleted', $(this).prop('checked'), function() { addGlow($('#{{classApiMethodMethod}}_deleted')); }, function() { addError($('#{{classApiMethodMethod}}_deleted')); }); }"
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+		{{#if simulationReport_.deleted}}
+																checked="checked"
+		{{/if}}
+																/>
+	{{else}}
+															>
+															<option value="" selected="selected"></option>
+															<option value="true">true</option>
+															<option value="false">false</option>
+														</select>
+	{{/eq}}
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varSimulationReport{{pk}}Deleted ">{{simulationReport_.deleted}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varSimulationReport{{pk}}Deleted ">{{simulationReport_.deleted}}</span>
+		{{/eq}}
+{{/inline}}
+
 {{#*inline "htmReportName"}}
+<!-- #*inline "htmReportName" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									<div class="w3-padding ">
 										<div id="suggest{{classApiMethodMethod}}SimulationReportReportName">
@@ -1334,23 +2242,10 @@
 												<div class="w3-cell-row w3-2017-shaded-spruce">
 													<label for="{{classApiMethodMethod}}_reportName">report name</label>
 												</div>
-												<div class="w3-cell-row w3-padding ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputReportName" roleRequired=roleRequired}}
+														{{> "inputReportName" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_reportName')); $('#{{classApiMethodMethod}}_reportName').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SimulationReportForm :input[name=pk]').val() }], 'setReportName', null, function() { addGlow($('#{{classApiMethodMethod}}_reportName')); }, function() { addError($('#{{classApiMethodMethod}}_reportName')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -1359,7 +2254,7 @@
 {{/inline}}
 
 {{#*inline "inputReportName"}}
-		{{#eq roleRequired "true"}}
+		{{#eq roleForWriteBool "true"}}
 														<input
 															type="text"
 															placeholder="report name"
@@ -1395,6 +2290,7 @@
 {{/inline}}
 
 {{#*inline "htmSimulationKey"}}
+<!-- #*inline "htmSimulationKey" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									<div class="w3-padding ">
 										<div id="suggest{{classApiMethodMethod}}SimulationReportSimulationKey">
@@ -1415,7 +2311,7 @@
 													<div class="w3-cell ">
 														<div class="w3-cell-row ">
 
-														{{> "inputSimulationKey" roleRequired=roleRequired}}
+														{{> "inputSimulationKey" roleForWrite=roleForWrite roleForRead=roleForRead}}
 														</div>
 													</div>
 												</div>
@@ -1423,7 +2319,7 @@
 													<div class="w3-cell w3-left-align w3-cell-top ">
 														<ul class="w3-ul w3-hoverable " id="listSimulationReportSimulationKey_{{classApiMethodMethod}}">
 														</ul>
-														{{#eq roleRequired "true"}}
+														{{#eq roleForReadBool "true"}}
 	{{#eq 'Page' classApiMethodMethod}}
 																<div class="w3-cell-row ">
 																	<button
@@ -1443,7 +2339,7 @@
 {{/inline}}
 
 {{#*inline "inputSimulationKey"}}
-		{{#eq roleRequired "true"}}
+		{{#eq roleForWriteBool "true"}}
 														{{#eq 'PUTCopy' classApiMethodMethod}}
 															<div>
 																<input 
@@ -1461,7 +2357,7 @@
 															name="setSimulationKey"
 															id="{{classApiMethodMethod}}_simulationKey"
 															autocomplete="off"
-															oninput="suggestSimulationReportSimulationKey($(this).val() ? [ { 'name': 'q', 'value': 'objectSuggest:' + $(this).val() }, { 'name': 'rows', 'value': '10' }, { 'name': 'fl', 'value': 'classCanonicalName,reportKeys,pk,pageUrlPk,objectTitle' } ] : [{{#if pk}}{'name':'fq','value':'reportKeys:{{pk}}'}{{else}}{{/if}}], $('#listSimulationReportSimulationKey_{{classApiMethodMethod}}'), {{pk}}); "
+															oninput="suggestSimulationReportSimulationKey($(this).val() ? [ { 'name': 'q', 'value': 'objectSuggest:' + $(this).val() }, { 'name': 'rows', 'value': '10' }, { 'name': 'fl', 'value': 'classCanonicalName,reportKeys,pk' } ] : [{{#if pk}}{'name':'fq','value':'reportKeys:{{pk}}'}{{else}}{{/if}}], $('#listSimulationReportSimulationKey_{{classApiMethodMethod}}'), {{pk}}); "
 															/>
 
 													{{else}}
@@ -1471,6 +2367,7 @@
 {{/inline}}
 
 {{#*inline "htmSmartTrafficLightKey"}}
+<!-- #*inline "htmSmartTrafficLightKey" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									<div class="w3-padding ">
 										<div id="suggest{{classApiMethodMethod}}SimulationReportSmartTrafficLightKey">
@@ -1491,7 +2388,7 @@
 													<div class="w3-cell ">
 														<div class="w3-cell-row ">
 
-														{{> "inputSmartTrafficLightKey" roleRequired=roleRequired}}
+														{{> "inputSmartTrafficLightKey" roleForWrite=roleForWrite roleForRead=roleForRead}}
 														</div>
 													</div>
 												</div>
@@ -1499,7 +2396,7 @@
 													<div class="w3-cell w3-left-align w3-cell-top ">
 														<ul class="w3-ul w3-hoverable " id="listSimulationReportSmartTrafficLightKey_{{classApiMethodMethod}}">
 														</ul>
-														{{#eq roleRequired "true"}}
+														{{#eq roleForReadBool "true"}}
 	{{#eq 'Page' classApiMethodMethod}}
 																<div class="w3-cell-row ">
 																	<button
@@ -1519,7 +2416,7 @@
 {{/inline}}
 
 {{#*inline "inputSmartTrafficLightKey"}}
-		{{#eq roleRequired "true"}}
+		{{#eq roleForWriteBool "true"}}
 														{{#eq 'PUTCopy' classApiMethodMethod}}
 															<div>
 																<input 
@@ -1537,7 +2434,7 @@
 															name="setSmartTrafficLightKey"
 															id="{{classApiMethodMethod}}_smartTrafficLightKey"
 															autocomplete="off"
-															oninput="suggestSimulationReportSmartTrafficLightKey($(this).val() ? [ { 'name': 'q', 'value': 'objectSuggest:' + $(this).val() }, { 'name': 'rows', 'value': '10' }, { 'name': 'fl', 'value': 'classCanonicalName,reportKeys,pk,pageUrlPk,objectTitle' } ] : [{{#if pk}}{'name':'fq','value':'reportKeys:{{pk}}'}{{else}}{{/if}}], $('#listSimulationReportSmartTrafficLightKey_{{classApiMethodMethod}}'), {{pk}}); "
+															oninput="suggestSimulationReportSmartTrafficLightKey($(this).val() ? [ { 'name': 'q', 'value': 'objectSuggest:' + $(this).val() }, { 'name': 'rows', 'value': '10' }, { 'name': 'fl', 'value': 'classCanonicalName,reportKeys,pk' } ] : [{{#if pk}}{'name':'fq','value':'reportKeys:{{pk}}'}{{else}}{{/if}}], $('#listSimulationReportSmartTrafficLightKey_{{classApiMethodMethod}}'), {{pk}}); "
 															/>
 
 													{{else}}
@@ -1546,180 +2443,25 @@
 		{{/eq}}
 {{/inline}}
 
-{{#*inline "htmSimulationName"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}SimulationReportSimulationName">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_simulationName">simulation name</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputSimulationName" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_simulationName')); $('#{{classApiMethodMethod}}_simulationName').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SimulationReportForm :input[name=pk]').val() }], 'setSimulationName', null, function() { addGlow($('#{{classApiMethodMethod}}_simulationName')); }, function() { addError($('#{{classApiMethodMethod}}_simulationName')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputSimulationName"}}
-		{{#eq roleRequired "true"}}
-														<input
-															type="text"
-															placeholder="simulation name"
-															id="{{classApiMethodMethod}}_simulationName"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setSimulationName classSimulationReport inputSimulationReport{{pk}}SimulationName w3-input w3-border "
-																name="setSimulationName"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setSimulationName classSimulationReport inputSimulationReport{{pk}}SimulationName w3-input w3-border "
-																name="setSimulationName"
-		{{else}}
-																class="valueSimulationName w3-input w3-border classSimulationReport inputSimulationReport{{pk}}SimulationName w3-input w3-border "
-																name="simulationName"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setSimulationName', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_simulationName')); }, function() { addError($('#{{classApiMethodMethod}}_simulationName')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{simulationReport_.simulationName}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varSimulationReport{{pk}}SimulationName ">{{simulationReport_.simulationName}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varSimulationReport{{pk}}SimulationName ">{{simulationReport_.simulationName}}</span>
-		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmSmartTrafficLightName"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}SimulationReportSmartTrafficLightName">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_smartTrafficLightName">simulation name</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputSmartTrafficLightName" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_smartTrafficLightName')); $('#{{classApiMethodMethod}}_smartTrafficLightName').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SimulationReportForm :input[name=pk]').val() }], 'setSmartTrafficLightName', null, function() { addGlow($('#{{classApiMethodMethod}}_smartTrafficLightName')); }, function() { addError($('#{{classApiMethodMethod}}_smartTrafficLightName')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputSmartTrafficLightName"}}
-		{{#eq roleRequired "true"}}
-														<input
-															type="text"
-															placeholder="simulation name"
-															id="{{classApiMethodMethod}}_smartTrafficLightName"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setSmartTrafficLightName classSimulationReport inputSimulationReport{{pk}}SmartTrafficLightName w3-input w3-border "
-																name="setSmartTrafficLightName"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setSmartTrafficLightName classSimulationReport inputSimulationReport{{pk}}SmartTrafficLightName w3-input w3-border "
-																name="setSmartTrafficLightName"
-		{{else}}
-																class="valueSmartTrafficLightName w3-input w3-border classSimulationReport inputSimulationReport{{pk}}SmartTrafficLightName w3-input w3-border "
-																name="smartTrafficLightName"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setSmartTrafficLightName', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_smartTrafficLightName')); }, function() { addError($('#{{classApiMethodMethod}}_smartTrafficLightName')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{simulationReport_.smartTrafficLightName}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varSimulationReport{{pk}}SmartTrafficLightName ">{{simulationReport_.smartTrafficLightName}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varSimulationReport{{pk}}SmartTrafficLightName ">{{simulationReport_.smartTrafficLightName}}</span>
-		{{/eq}}
-{{/inline}}
-
 {{#*inline "htmParamAvgVehiclePerMinFromWestToEast"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}SimulationReportParamAvgVehiclePerMinFromWestToEast">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
+<!-- #*inline "htmParamAvgVehiclePerMinFromWestToEast" -->
+										<tr>
+												<td>
 													<label for="{{classApiMethodMethod}}_paramAvgVehiclePerMinFromWestToEast">Average vehicle/min from WEST to EAST</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputParamAvgVehiclePerMinFromWestToEast" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramAvgVehiclePerMinFromWestToEast')); $('#{{classApiMethodMethod}}_paramAvgVehiclePerMinFromWestToEast').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SimulationReportForm :input[name=pk]').val() }], 'setParamAvgVehiclePerMinFromWestToEast', null, function() { addGlow($('#{{classApiMethodMethod}}_paramAvgVehiclePerMinFromWestToEast')); }, function() { addError($('#{{classApiMethodMethod}}_paramAvgVehiclePerMinFromWestToEast')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+												</td>
+												<td>
+														{{> "inputParamAvgVehiclePerMinFromWestToEast" roleForWrite=roleForWrite roleForRead=roleForRead}}
+												</td>
+												<td>[1, 30] corresponding to 1st value in list</td>
+										</tr>
 {{/inline}}
 
 {{#*inline "inputParamAvgVehiclePerMinFromWestToEast"}}
-		{{#eq roleRequired "true"}}
+		{{#eq roleForWriteBool "true"}}
 														<input
 															type="text"
 															placeholder="Average vehicle/min from WEST to EAST"
-															id="{{classApiMethodMethod}}_paramAvgVehiclePerMinFromWestToEast"
+															title="[1, 30] corresponding to 1st value in list"															id="{{classApiMethodMethod}}_paramAvgVehiclePerMinFromWestToEast"
 	{{#eq "Page" classApiMethodMethod}}
 																class="setParamAvgVehiclePerMinFromWestToEast classSimulationReport inputSimulationReport{{pk}}ParamAvgVehiclePerMinFromWestToEast w3-input w3-border "
 																name="setParamAvgVehiclePerMinFromWestToEast"
@@ -1751,43 +2493,24 @@
 {{/inline}}
 
 {{#*inline "htmParamAvgVehiclePerMinFromSouthToNorth"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}SimulationReportParamAvgVehiclePerMinFromSouthToNorth">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
+<!-- #*inline "htmParamAvgVehiclePerMinFromSouthToNorth" -->
+										<tr>
+												<td>
 													<label for="{{classApiMethodMethod}}_paramAvgVehiclePerMinFromSouthToNorth">Average vehicle/min from SOUTH to NORTH</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputParamAvgVehiclePerMinFromSouthToNorth" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramAvgVehiclePerMinFromSouthToNorth')); $('#{{classApiMethodMethod}}_paramAvgVehiclePerMinFromSouthToNorth').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SimulationReportForm :input[name=pk]').val() }], 'setParamAvgVehiclePerMinFromSouthToNorth', null, function() { addGlow($('#{{classApiMethodMethod}}_paramAvgVehiclePerMinFromSouthToNorth')); }, function() { addError($('#{{classApiMethodMethod}}_paramAvgVehiclePerMinFromSouthToNorth')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+												</td>
+												<td>
+														{{> "inputParamAvgVehiclePerMinFromSouthToNorth" roleForWrite=roleForWrite roleForRead=roleForRead}}
+												</td>
+												<td>[1, 30] corresponding to 2nd value in list</td>
+										</tr>
 {{/inline}}
 
 {{#*inline "inputParamAvgVehiclePerMinFromSouthToNorth"}}
-		{{#eq roleRequired "true"}}
+		{{#eq roleForWriteBool "true"}}
 														<input
 															type="text"
 															placeholder="Average vehicle/min from SOUTH to NORTH"
-															id="{{classApiMethodMethod}}_paramAvgVehiclePerMinFromSouthToNorth"
+															title="[1, 30] corresponding to 2nd value in list"															id="{{classApiMethodMethod}}_paramAvgVehiclePerMinFromSouthToNorth"
 	{{#eq "Page" classApiMethodMethod}}
 																class="setParamAvgVehiclePerMinFromSouthToNorth classSimulationReport inputSimulationReport{{pk}}ParamAvgVehiclePerMinFromSouthToNorth w3-input w3-border "
 																name="setParamAvgVehiclePerMinFromSouthToNorth"
@@ -1819,43 +2542,24 @@
 {{/inline}}
 
 {{#*inline "htmParamVehicleDemandScalingFactor"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}SimulationReportParamVehicleDemandScalingFactor">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
+<!-- #*inline "htmParamVehicleDemandScalingFactor" -->
+										<tr>
+												<td>
 													<label for="{{classApiMethodMethod}}_paramVehicleDemandScalingFactor">Demand scaling factor (multiplies all vehicle demands)</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputParamVehicleDemandScalingFactor" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramVehicleDemandScalingFactor')); $('#{{classApiMethodMethod}}_paramVehicleDemandScalingFactor').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SimulationReportForm :input[name=pk]').val() }], 'setParamVehicleDemandScalingFactor', null, function() { addGlow($('#{{classApiMethodMethod}}_paramVehicleDemandScalingFactor')); }, function() { addError($('#{{classApiMethodMethod}}_paramVehicleDemandScalingFactor')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+												</td>
+												<td>
+														{{> "inputParamVehicleDemandScalingFactor" roleForWrite=roleForWrite roleForRead=roleForRead}}
+												</td>
+												<td>[1, 2] corresponding to &quot;demand scale&quot;</td>
+										</tr>
 {{/inline}}
 
 {{#*inline "inputParamVehicleDemandScalingFactor"}}
-		{{#eq roleRequired "true"}}
+		{{#eq roleForWriteBool "true"}}
 														<input
 															type="text"
 															placeholder="Demand scaling factor (multiplies all vehicle demands)"
-															id="{{classApiMethodMethod}}_paramVehicleDemandScalingFactor"
+															title="[1, 2] corresponding to &quot;demand scale&quot;"															id="{{classApiMethodMethod}}_paramVehicleDemandScalingFactor"
 	{{#eq "Page" classApiMethodMethod}}
 																class="setParamVehicleDemandScalingFactor classSimulationReport inputSimulationReport{{pk}}ParamVehicleDemandScalingFactor w3-input w3-border "
 																name="setParamVehicleDemandScalingFactor"
@@ -1887,43 +2591,24 @@
 {{/inline}}
 
 {{#*inline "htmParamAvgPedestrianPerMinFromWestToEast"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}SimulationReportParamAvgPedestrianPerMinFromWestToEast">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
+<!-- #*inline "htmParamAvgPedestrianPerMinFromWestToEast" -->
+										<tr>
+												<td>
 													<label for="{{classApiMethodMethod}}_paramAvgPedestrianPerMinFromWestToEast">Average pedestrian/min from WEST to EAST</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputParamAvgPedestrianPerMinFromWestToEast" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramAvgPedestrianPerMinFromWestToEast')); $('#{{classApiMethodMethod}}_paramAvgPedestrianPerMinFromWestToEast').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SimulationReportForm :input[name=pk]').val() }], 'setParamAvgPedestrianPerMinFromWestToEast', null, function() { addGlow($('#{{classApiMethodMethod}}_paramAvgPedestrianPerMinFromWestToEast')); }, function() { addError($('#{{classApiMethodMethod}}_paramAvgPedestrianPerMinFromWestToEast')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+												</td>
+												<td>
+														{{> "inputParamAvgPedestrianPerMinFromWestToEast" roleForWrite=roleForWrite roleForRead=roleForRead}}
+												</td>
+												<td>[1, 30] corresponding to 3rd value in list</td>
+										</tr>
 {{/inline}}
 
 {{#*inline "inputParamAvgPedestrianPerMinFromWestToEast"}}
-		{{#eq roleRequired "true"}}
+		{{#eq roleForWriteBool "true"}}
 														<input
 															type="text"
 															placeholder="Average pedestrian/min from WEST to EAST"
-															id="{{classApiMethodMethod}}_paramAvgPedestrianPerMinFromWestToEast"
+															title="[1, 30] corresponding to 3rd value in list"															id="{{classApiMethodMethod}}_paramAvgPedestrianPerMinFromWestToEast"
 	{{#eq "Page" classApiMethodMethod}}
 																class="setParamAvgPedestrianPerMinFromWestToEast classSimulationReport inputSimulationReport{{pk}}ParamAvgPedestrianPerMinFromWestToEast w3-input w3-border "
 																name="setParamAvgPedestrianPerMinFromWestToEast"
@@ -1955,43 +2640,24 @@
 {{/inline}}
 
 {{#*inline "htmParamAvgPedestrianPerMinFromSouthToNorth"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}SimulationReportParamAvgPedestrianPerMinFromSouthToNorth">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
+<!-- #*inline "htmParamAvgPedestrianPerMinFromSouthToNorth" -->
+										<tr>
+												<td>
 													<label for="{{classApiMethodMethod}}_paramAvgPedestrianPerMinFromSouthToNorth">Average pedestrian/min from WEST to EAST</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputParamAvgPedestrianPerMinFromSouthToNorth" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramAvgPedestrianPerMinFromSouthToNorth')); $('#{{classApiMethodMethod}}_paramAvgPedestrianPerMinFromSouthToNorth').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SimulationReportForm :input[name=pk]').val() }], 'setParamAvgPedestrianPerMinFromSouthToNorth', null, function() { addGlow($('#{{classApiMethodMethod}}_paramAvgPedestrianPerMinFromSouthToNorth')); }, function() { addError($('#{{classApiMethodMethod}}_paramAvgPedestrianPerMinFromSouthToNorth')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+												</td>
+												<td>
+														{{> "inputParamAvgPedestrianPerMinFromSouthToNorth" roleForWrite=roleForWrite roleForRead=roleForRead}}
+												</td>
+												<td>[1, 30] corresponding to 4th value in list</td>
+										</tr>
 {{/inline}}
 
 {{#*inline "inputParamAvgPedestrianPerMinFromSouthToNorth"}}
-		{{#eq roleRequired "true"}}
+		{{#eq roleForWriteBool "true"}}
 														<input
 															type="text"
 															placeholder="Average pedestrian/min from WEST to EAST"
-															id="{{classApiMethodMethod}}_paramAvgPedestrianPerMinFromSouthToNorth"
+															title="[1, 30] corresponding to 4th value in list"															id="{{classApiMethodMethod}}_paramAvgPedestrianPerMinFromSouthToNorth"
 	{{#eq "Page" classApiMethodMethod}}
 																class="setParamAvgPedestrianPerMinFromSouthToNorth classSimulationReport inputSimulationReport{{pk}}ParamAvgPedestrianPerMinFromSouthToNorth w3-input w3-border "
 																name="setParamAvgPedestrianPerMinFromSouthToNorth"
@@ -2023,43 +2689,24 @@
 {{/inline}}
 
 {{#*inline "htmParamPedestrianDemandScalingFactor"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}SimulationReportParamPedestrianDemandScalingFactor">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
+<!-- #*inline "htmParamPedestrianDemandScalingFactor" -->
+										<tr>
+												<td>
 													<label for="{{classApiMethodMethod}}_paramPedestrianDemandScalingFactor">Demand scaling factor (multiplies all pedestrian demands)</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputParamPedestrianDemandScalingFactor" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramPedestrianDemandScalingFactor')); $('#{{classApiMethodMethod}}_paramPedestrianDemandScalingFactor').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SimulationReportForm :input[name=pk]').val() }], 'setParamPedestrianDemandScalingFactor', null, function() { addGlow($('#{{classApiMethodMethod}}_paramPedestrianDemandScalingFactor')); }, function() { addError($('#{{classApiMethodMethod}}_paramPedestrianDemandScalingFactor')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+												</td>
+												<td>
+														{{> "inputParamPedestrianDemandScalingFactor" roleForWrite=roleForWrite roleForRead=roleForRead}}
+												</td>
+												<td>[1, 2] corresponding to &quot;demand scale&quot;</td>
+										</tr>
 {{/inline}}
 
 {{#*inline "inputParamPedestrianDemandScalingFactor"}}
-		{{#eq roleRequired "true"}}
+		{{#eq roleForWriteBool "true"}}
 														<input
 															type="text"
 															placeholder="Demand scaling factor (multiplies all pedestrian demands)"
-															id="{{classApiMethodMethod}}_paramPedestrianDemandScalingFactor"
+															title="[1, 2] corresponding to &quot;demand scale&quot;"															id="{{classApiMethodMethod}}_paramPedestrianDemandScalingFactor"
 	{{#eq "Page" classApiMethodMethod}}
 																class="setParamPedestrianDemandScalingFactor classSimulationReport inputSimulationReport{{pk}}ParamPedestrianDemandScalingFactor w3-input w3-border "
 																name="setParamPedestrianDemandScalingFactor"
@@ -2091,43 +2738,24 @@
 {{/inline}}
 
 {{#*inline "htmParamMinGreenTimeSecWestEast"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}SimulationReportParamMinGreenTimeSecWestEast">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
+<!-- #*inline "htmParamMinGreenTimeSecWestEast" -->
+										<tr>
+												<td>
 													<label for="{{classApiMethodMethod}}_paramMinGreenTimeSecWestEast">Min GREEN time for WEST-EAST traffic (sec)</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputParamMinGreenTimeSecWestEast" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramMinGreenTimeSecWestEast')); $('#{{classApiMethodMethod}}_paramMinGreenTimeSecWestEast').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SimulationReportForm :input[name=pk]').val() }], 'setParamMinGreenTimeSecWestEast', null, function() { addGlow($('#{{classApiMethodMethod}}_paramMinGreenTimeSecWestEast')); }, function() { addError($('#{{classApiMethodMethod}}_paramMinGreenTimeSecWestEast')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+												</td>
+												<td>
+														{{> "inputParamMinGreenTimeSecWestEast" roleForWrite=roleForWrite roleForRead=roleForRead}}
+												</td>
+												<td>[1, 50]</td>
+										</tr>
 {{/inline}}
 
 {{#*inline "inputParamMinGreenTimeSecWestEast"}}
-		{{#eq roleRequired "true"}}
+		{{#eq roleForWriteBool "true"}}
 														<input
 															type="text"
 															placeholder="Min GREEN time for WEST-EAST traffic (sec)"
-															id="{{classApiMethodMethod}}_paramMinGreenTimeSecWestEast"
+															title="[1, 50]"															id="{{classApiMethodMethod}}_paramMinGreenTimeSecWestEast"
 	{{#eq "Page" classApiMethodMethod}}
 																class="setParamMinGreenTimeSecWestEast classSimulationReport inputSimulationReport{{pk}}ParamMinGreenTimeSecWestEast w3-input w3-border "
 																name="setParamMinGreenTimeSecWestEast"
@@ -2159,43 +2787,24 @@
 {{/inline}}
 
 {{#*inline "htmParamMaxGreenTimeSecWestEast"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}SimulationReportParamMaxGreenTimeSecWestEast">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
+<!-- #*inline "htmParamMaxGreenTimeSecWestEast" -->
+										<tr>
+												<td>
 													<label for="{{classApiMethodMethod}}_paramMaxGreenTimeSecWestEast">Max GREEN time for WEST-EAST traffic (sec)</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputParamMaxGreenTimeSecWestEast" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramMaxGreenTimeSecWestEast')); $('#{{classApiMethodMethod}}_paramMaxGreenTimeSecWestEast').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SimulationReportForm :input[name=pk]').val() }], 'setParamMaxGreenTimeSecWestEast', null, function() { addGlow($('#{{classApiMethodMethod}}_paramMaxGreenTimeSecWestEast')); }, function() { addError($('#{{classApiMethodMethod}}_paramMaxGreenTimeSecWestEast')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+												</td>
+												<td>
+														{{> "inputParamMaxGreenTimeSecWestEast" roleForWrite=roleForWrite roleForRead=roleForRead}}
+												</td>
+												<td>[1, 100], also greater than min value</td>
+										</tr>
 {{/inline}}
 
 {{#*inline "inputParamMaxGreenTimeSecWestEast"}}
-		{{#eq roleRequired "true"}}
+		{{#eq roleForWriteBool "true"}}
 														<input
 															type="text"
 															placeholder="Max GREEN time for WEST-EAST traffic (sec)"
-															id="{{classApiMethodMethod}}_paramMaxGreenTimeSecWestEast"
+															title="[1, 100], also greater than min value"															id="{{classApiMethodMethod}}_paramMaxGreenTimeSecWestEast"
 	{{#eq "Page" classApiMethodMethod}}
 																class="setParamMaxGreenTimeSecWestEast classSimulationReport inputSimulationReport{{pk}}ParamMaxGreenTimeSecWestEast w3-input w3-border "
 																name="setParamMaxGreenTimeSecWestEast"
@@ -2227,43 +2836,24 @@
 {{/inline}}
 
 {{#*inline "htmParamMinGreenTimeSecSouthNorth"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}SimulationReportParamMinGreenTimeSecSouthNorth">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
+<!-- #*inline "htmParamMinGreenTimeSecSouthNorth" -->
+										<tr>
+												<td>
 													<label for="{{classApiMethodMethod}}_paramMinGreenTimeSecSouthNorth">Min GREEN time for SOUTH-NORTH traffic (sec)</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputParamMinGreenTimeSecSouthNorth" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramMinGreenTimeSecSouthNorth')); $('#{{classApiMethodMethod}}_paramMinGreenTimeSecSouthNorth').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SimulationReportForm :input[name=pk]').val() }], 'setParamMinGreenTimeSecSouthNorth', null, function() { addGlow($('#{{classApiMethodMethod}}_paramMinGreenTimeSecSouthNorth')); }, function() { addError($('#{{classApiMethodMethod}}_paramMinGreenTimeSecSouthNorth')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+												</td>
+												<td>
+														{{> "inputParamMinGreenTimeSecSouthNorth" roleForWrite=roleForWrite roleForRead=roleForRead}}
+												</td>
+												<td>[1, 50]</td>
+										</tr>
 {{/inline}}
 
 {{#*inline "inputParamMinGreenTimeSecSouthNorth"}}
-		{{#eq roleRequired "true"}}
+		{{#eq roleForWriteBool "true"}}
 														<input
 															type="text"
 															placeholder="Min GREEN time for SOUTH-NORTH traffic (sec)"
-															id="{{classApiMethodMethod}}_paramMinGreenTimeSecSouthNorth"
+															title="[1, 50]"															id="{{classApiMethodMethod}}_paramMinGreenTimeSecSouthNorth"
 	{{#eq "Page" classApiMethodMethod}}
 																class="setParamMinGreenTimeSecSouthNorth classSimulationReport inputSimulationReport{{pk}}ParamMinGreenTimeSecSouthNorth w3-input w3-border "
 																name="setParamMinGreenTimeSecSouthNorth"
@@ -2295,43 +2885,24 @@
 {{/inline}}
 
 {{#*inline "htmParamMaxGreenTimeSecSouthNorth"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}SimulationReportParamMaxGreenTimeSecSouthNorth">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
+<!-- #*inline "htmParamMaxGreenTimeSecSouthNorth" -->
+										<tr>
+												<td>
 													<label for="{{classApiMethodMethod}}_paramMaxGreenTimeSecSouthNorth">Max GREEN time for SOUTH-NORTH traffic (sec)</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputParamMaxGreenTimeSecSouthNorth" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramMaxGreenTimeSecSouthNorth')); $('#{{classApiMethodMethod}}_paramMaxGreenTimeSecSouthNorth').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SimulationReportForm :input[name=pk]').val() }], 'setParamMaxGreenTimeSecSouthNorth', null, function() { addGlow($('#{{classApiMethodMethod}}_paramMaxGreenTimeSecSouthNorth')); }, function() { addError($('#{{classApiMethodMethod}}_paramMaxGreenTimeSecSouthNorth')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+												</td>
+												<td>
+														{{> "inputParamMaxGreenTimeSecSouthNorth" roleForWrite=roleForWrite roleForRead=roleForRead}}
+												</td>
+												<td>[1, 100], also greater than min value</td>
+										</tr>
 {{/inline}}
 
 {{#*inline "inputParamMaxGreenTimeSecSouthNorth"}}
-		{{#eq roleRequired "true"}}
+		{{#eq roleForWriteBool "true"}}
 														<input
 															type="text"
 															placeholder="Max GREEN time for SOUTH-NORTH traffic (sec)"
-															id="{{classApiMethodMethod}}_paramMaxGreenTimeSecSouthNorth"
+															title="[1, 100], also greater than min value"															id="{{classApiMethodMethod}}_paramMaxGreenTimeSecSouthNorth"
 	{{#eq "Page" classApiMethodMethod}}
 																class="setParamMaxGreenTimeSecSouthNorth classSimulationReport inputSimulationReport{{pk}}ParamMaxGreenTimeSecSouthNorth w3-input w3-border "
 																name="setParamMaxGreenTimeSecSouthNorth"
@@ -2363,43 +2934,24 @@
 {{/inline}}
 
 {{#*inline "htmParamPedestrianWaitThresholdSecNorthSouth"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}SimulationReportParamPedestrianWaitThresholdSecNorthSouth">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
+<!-- #*inline "htmParamPedestrianWaitThresholdSecNorthSouth" -->
+										<tr>
+												<td>
 													<label for="{{classApiMethodMethod}}_paramPedestrianWaitThresholdSecNorthSouth">Pedestrian waiting time tolerance threshold for NORTH-SOUTH (sec)</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputParamPedestrianWaitThresholdSecNorthSouth" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramPedestrianWaitThresholdSecNorthSouth')); $('#{{classApiMethodMethod}}_paramPedestrianWaitThresholdSecNorthSouth').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SimulationReportForm :input[name=pk]').val() }], 'setParamPedestrianWaitThresholdSecNorthSouth', null, function() { addGlow($('#{{classApiMethodMethod}}_paramPedestrianWaitThresholdSecNorthSouth')); }, function() { addError($('#{{classApiMethodMethod}}_paramPedestrianWaitThresholdSecNorthSouth')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+												</td>
+												<td>
+														{{> "inputParamPedestrianWaitThresholdSecNorthSouth" roleForWrite=roleForWrite roleForRead=roleForRead}}
+												</td>
+												<td>[1, 60]</td>
+										</tr>
 {{/inline}}
 
 {{#*inline "inputParamPedestrianWaitThresholdSecNorthSouth"}}
-		{{#eq roleRequired "true"}}
+		{{#eq roleForWriteBool "true"}}
 														<input
 															type="text"
 															placeholder="Pedestrian waiting time tolerance threshold for NORTH-SOUTH (sec)"
-															id="{{classApiMethodMethod}}_paramPedestrianWaitThresholdSecNorthSouth"
+															title="[1, 60]"															id="{{classApiMethodMethod}}_paramPedestrianWaitThresholdSecNorthSouth"
 	{{#eq "Page" classApiMethodMethod}}
 																class="setParamPedestrianWaitThresholdSecNorthSouth classSimulationReport inputSimulationReport{{pk}}ParamPedestrianWaitThresholdSecNorthSouth w3-input w3-border "
 																name="setParamPedestrianWaitThresholdSecNorthSouth"
@@ -2431,43 +2983,24 @@
 {{/inline}}
 
 {{#*inline "htmParamPedestrianWaitThresholdSecWestEast"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}SimulationReportParamPedestrianWaitThresholdSecWestEast">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
+<!-- #*inline "htmParamPedestrianWaitThresholdSecWestEast" -->
+										<tr>
+												<td>
 													<label for="{{classApiMethodMethod}}_paramPedestrianWaitThresholdSecWestEast">Pedestrian waiting time tolerance threshold for WEST-EAST (sec)</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputParamPedestrianWaitThresholdSecWestEast" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramPedestrianWaitThresholdSecWestEast')); $('#{{classApiMethodMethod}}_paramPedestrianWaitThresholdSecWestEast').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SimulationReportForm :input[name=pk]').val() }], 'setParamPedestrianWaitThresholdSecWestEast', null, function() { addGlow($('#{{classApiMethodMethod}}_paramPedestrianWaitThresholdSecWestEast')); }, function() { addError($('#{{classApiMethodMethod}}_paramPedestrianWaitThresholdSecWestEast')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+												</td>
+												<td>
+														{{> "inputParamPedestrianWaitThresholdSecWestEast" roleForWrite=roleForWrite roleForRead=roleForRead}}
+												</td>
+												<td>[1, 60]</td>
+										</tr>
 {{/inline}}
 
 {{#*inline "inputParamPedestrianWaitThresholdSecWestEast"}}
-		{{#eq roleRequired "true"}}
+		{{#eq roleForWriteBool "true"}}
 														<input
 															type="text"
 															placeholder="Pedestrian waiting time tolerance threshold for WEST-EAST (sec)"
-															id="{{classApiMethodMethod}}_paramPedestrianWaitThresholdSecWestEast"
+															title="[1, 60]"															id="{{classApiMethodMethod}}_paramPedestrianWaitThresholdSecWestEast"
 	{{#eq "Page" classApiMethodMethod}}
 																class="setParamPedestrianWaitThresholdSecWestEast classSimulationReport inputSimulationReport{{pk}}ParamPedestrianWaitThresholdSecWestEast w3-input w3-border "
 																name="setParamPedestrianWaitThresholdSecWestEast"
@@ -2499,43 +3032,24 @@
 {{/inline}}
 
 {{#*inline "htmParamVehicleQueueThresholdWestEast"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}SimulationReportParamVehicleQueueThresholdWestEast">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
+<!-- #*inline "htmParamVehicleQueueThresholdWestEast" -->
+										<tr>
+												<td>
 													<label for="{{classApiMethodMethod}}_paramVehicleQueueThresholdWestEast">Vehicle queue length threshold between low-high content for WEST-EAST</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputParamVehicleQueueThresholdWestEast" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramVehicleQueueThresholdWestEast')); $('#{{classApiMethodMethod}}_paramVehicleQueueThresholdWestEast').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SimulationReportForm :input[name=pk]').val() }], 'setParamVehicleQueueThresholdWestEast', null, function() { addGlow($('#{{classApiMethodMethod}}_paramVehicleQueueThresholdWestEast')); }, function() { addError($('#{{classApiMethodMethod}}_paramVehicleQueueThresholdWestEast')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+												</td>
+												<td>
+														{{> "inputParamVehicleQueueThresholdWestEast" roleForWrite=roleForWrite roleForRead=roleForRead}}
+												</td>
+												<td>[1, 15]</td>
+										</tr>
 {{/inline}}
 
 {{#*inline "inputParamVehicleQueueThresholdWestEast"}}
-		{{#eq roleRequired "true"}}
+		{{#eq roleForWriteBool "true"}}
 														<input
 															type="text"
 															placeholder="Vehicle queue length threshold between low-high content for WEST-EAST"
-															id="{{classApiMethodMethod}}_paramVehicleQueueThresholdWestEast"
+															title="[1, 15]"															id="{{classApiMethodMethod}}_paramVehicleQueueThresholdWestEast"
 	{{#eq "Page" classApiMethodMethod}}
 																class="setParamVehicleQueueThresholdWestEast classSimulationReport inputSimulationReport{{pk}}ParamVehicleQueueThresholdWestEast w3-input w3-border "
 																name="setParamVehicleQueueThresholdWestEast"
@@ -2567,43 +3081,24 @@
 {{/inline}}
 
 {{#*inline "htmParamVehicleQueueThresholdSouthNorth"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}SimulationReportParamVehicleQueueThresholdSouthNorth">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
+<!-- #*inline "htmParamVehicleQueueThresholdSouthNorth" -->
+										<tr>
+												<td>
 													<label for="{{classApiMethodMethod}}_paramVehicleQueueThresholdSouthNorth">Vehicle queue length threshold between low-high content for SOUTH-NORTH</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputParamVehicleQueueThresholdSouthNorth" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramVehicleQueueThresholdSouthNorth')); $('#{{classApiMethodMethod}}_paramVehicleQueueThresholdSouthNorth').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SimulationReportForm :input[name=pk]').val() }], 'setParamVehicleQueueThresholdSouthNorth', null, function() { addGlow($('#{{classApiMethodMethod}}_paramVehicleQueueThresholdSouthNorth')); }, function() { addError($('#{{classApiMethodMethod}}_paramVehicleQueueThresholdSouthNorth')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+												</td>
+												<td>
+														{{> "inputParamVehicleQueueThresholdSouthNorth" roleForWrite=roleForWrite roleForRead=roleForRead}}
+												</td>
+												<td>[1, 15]</td>
+										</tr>
 {{/inline}}
 
 {{#*inline "inputParamVehicleQueueThresholdSouthNorth"}}
-		{{#eq roleRequired "true"}}
+		{{#eq roleForWriteBool "true"}}
 														<input
 															type="text"
 															placeholder="Vehicle queue length threshold between low-high content for SOUTH-NORTH"
-															id="{{classApiMethodMethod}}_paramVehicleQueueThresholdSouthNorth"
+															title="[1, 15]"															id="{{classApiMethodMethod}}_paramVehicleQueueThresholdSouthNorth"
 	{{#eq "Page" classApiMethodMethod}}
 																class="setParamVehicleQueueThresholdSouthNorth classSimulationReport inputSimulationReport{{pk}}ParamVehicleQueueThresholdSouthNorth w3-input w3-border "
 																name="setParamVehicleQueueThresholdSouthNorth"
@@ -2635,43 +3130,24 @@
 {{/inline}}
 
 {{#*inline "htmParamPedestrianQueueThresholdNorthSouth"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}SimulationReportParamPedestrianQueueThresholdNorthSouth">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
+<!-- #*inline "htmParamPedestrianQueueThresholdNorthSouth" -->
+										<tr>
+												<td>
 													<label for="{{classApiMethodMethod}}_paramPedestrianQueueThresholdNorthSouth">Pedestrian queue length threshold between low-high content for NORTH-SOUTH</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputParamPedestrianQueueThresholdNorthSouth" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramPedestrianQueueThresholdNorthSouth')); $('#{{classApiMethodMethod}}_paramPedestrianQueueThresholdNorthSouth').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SimulationReportForm :input[name=pk]').val() }], 'setParamPedestrianQueueThresholdNorthSouth', null, function() { addGlow($('#{{classApiMethodMethod}}_paramPedestrianQueueThresholdNorthSouth')); }, function() { addError($('#{{classApiMethodMethod}}_paramPedestrianQueueThresholdNorthSouth')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+												</td>
+												<td>
+														{{> "inputParamPedestrianQueueThresholdNorthSouth" roleForWrite=roleForWrite roleForRead=roleForRead}}
+												</td>
+												<td>[1, 15]</td>
+										</tr>
 {{/inline}}
 
 {{#*inline "inputParamPedestrianQueueThresholdNorthSouth"}}
-		{{#eq roleRequired "true"}}
+		{{#eq roleForWriteBool "true"}}
 														<input
 															type="text"
 															placeholder="Pedestrian queue length threshold between low-high content for NORTH-SOUTH"
-															id="{{classApiMethodMethod}}_paramPedestrianQueueThresholdNorthSouth"
+															title="[1, 15]"															id="{{classApiMethodMethod}}_paramPedestrianQueueThresholdNorthSouth"
 	{{#eq "Page" classApiMethodMethod}}
 																class="setParamPedestrianQueueThresholdNorthSouth classSimulationReport inputSimulationReport{{pk}}ParamPedestrianQueueThresholdNorthSouth w3-input w3-border "
 																name="setParamPedestrianQueueThresholdNorthSouth"
@@ -2703,43 +3179,24 @@
 {{/inline}}
 
 {{#*inline "htmParamPedestrianQueueThresholdWestEast"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}SimulationReportParamPedestrianQueueThresholdWestEast">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
+<!-- #*inline "htmParamPedestrianQueueThresholdWestEast" -->
+										<tr>
+												<td>
 													<label for="{{classApiMethodMethod}}_paramPedestrianQueueThresholdWestEast">Pedestrian queue length threshold between low-high content for WEST-EAST</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputParamPedestrianQueueThresholdWestEast" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramPedestrianQueueThresholdWestEast')); $('#{{classApiMethodMethod}}_paramPedestrianQueueThresholdWestEast').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SimulationReportForm :input[name=pk]').val() }], 'setParamPedestrianQueueThresholdWestEast', null, function() { addGlow($('#{{classApiMethodMethod}}_paramPedestrianQueueThresholdWestEast')); }, function() { addError($('#{{classApiMethodMethod}}_paramPedestrianQueueThresholdWestEast')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+												</td>
+												<td>
+														{{> "inputParamPedestrianQueueThresholdWestEast" roleForWrite=roleForWrite roleForRead=roleForRead}}
+												</td>
+												<td>[1, 15]</td>
+										</tr>
 {{/inline}}
 
 {{#*inline "inputParamPedestrianQueueThresholdWestEast"}}
-		{{#eq roleRequired "true"}}
+		{{#eq roleForWriteBool "true"}}
 														<input
 															type="text"
 															placeholder="Pedestrian queue length threshold between low-high content for WEST-EAST"
-															id="{{classApiMethodMethod}}_paramPedestrianQueueThresholdWestEast"
+															title="[1, 15]"															id="{{classApiMethodMethod}}_paramPedestrianQueueThresholdWestEast"
 	{{#eq "Page" classApiMethodMethod}}
 																class="setParamPedestrianQueueThresholdWestEast classSimulationReport inputSimulationReport{{pk}}ParamPedestrianQueueThresholdWestEast w3-input w3-border "
 																name="setParamPedestrianQueueThresholdWestEast"
@@ -2770,112 +3227,25 @@
 		{{/eq}}
 {{/inline}}
 
-{{#*inline "htmParamDemandScale"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}SimulationReportParamDemandScale">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_paramDemandScale">demand scale</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputParamDemandScale" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramDemandScale')); $('#{{classApiMethodMethod}}_paramDemandScale').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SimulationReportForm :input[name=pk]').val() }], 'setParamDemandScale', null, function() { addGlow($('#{{classApiMethodMethod}}_paramDemandScale')); }, function() { addError($('#{{classApiMethodMethod}}_paramDemandScale')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputParamDemandScale"}}
-		{{#eq roleRequired "true"}}
-														<input
-															type="text"
-															placeholder="demand scale"
-															id="{{classApiMethodMethod}}_paramDemandScale"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setParamDemandScale classSimulationReport inputSimulationReport{{pk}}ParamDemandScale w3-input w3-border "
-																name="setParamDemandScale"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setParamDemandScale classSimulationReport inputSimulationReport{{pk}}ParamDemandScale w3-input w3-border "
-																name="setParamDemandScale"
-		{{else}}
-																class="valueParamDemandScale w3-input w3-border classSimulationReport inputSimulationReport{{pk}}ParamDemandScale w3-input w3-border "
-																name="paramDemandScale"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setParamDemandScale', $(this).val().replace('[','').replace(']','').split(/[ ,]+/), function() { addGlow($('#{{classApiMethodMethod}}_paramDemandScale')); }, function() { addError($('#{{classApiMethodMethod}}_paramDemandScale')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{simulationReport_.paramDemandScale}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varSimulationReport{{pk}}ParamDemandScale ">{{simulationReport_.paramDemandScale}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varSimulationReport{{pk}}ParamDemandScale ">{{simulationReport_.paramDemandScale}}</span>
-		{{/eq}}
-{{/inline}}
-
 {{#*inline "htmParamStepSize"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}SimulationReportParamStepSize">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
+<!-- #*inline "htmParamStepSize" -->
+										<tr>
+												<td>
 													<label for="{{classApiMethodMethod}}_paramStepSize">Simulation time step (sec)</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputParamStepSize" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramStepSize')); $('#{{classApiMethodMethod}}_paramStepSize').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SimulationReportForm :input[name=pk]').val() }], 'setParamStepSize', null, function() { addGlow($('#{{classApiMethodMethod}}_paramStepSize')); }, function() { addError($('#{{classApiMethodMethod}}_paramStepSize')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+												</td>
+												<td>
+														{{> "inputParamStepSize" roleForWrite=roleForWrite roleForRead=roleForRead}}
+												</td>
+												<td>[0.5, 2.0]</td>
+										</tr>
 {{/inline}}
 
 {{#*inline "inputParamStepSize"}}
-		{{#eq roleRequired "true"}}
+		{{#eq roleForWriteBool "true"}}
 														<input
 															type="text"
 															placeholder="Simulation time step (sec)"
-															id="{{classApiMethodMethod}}_paramStepSize"
+															title="[0.5, 2.0]"															id="{{classApiMethodMethod}}_paramStepSize"
 	{{#eq "Page" classApiMethodMethod}}
 																class="setParamStepSize classSimulationReport inputSimulationReport{{pk}}ParamStepSize w3-input w3-border "
 																name="setParamStepSize"
@@ -2907,44 +3277,24 @@
 {{/inline}}
 
 {{#*inline "htmParamRunTime"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}SimulationReportParamRunTime">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
+<!-- #*inline "htmParamRunTime" -->
+										<tr>
+												<td>
 													<label for="{{classApiMethodMethod}}_paramRunTime">time for each round of traffic simulation (sec)</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputParamRunTime" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramRunTime')); $('#{{classApiMethodMethod}}_paramRunTime').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SimulationReportForm :input[name=pk]').val() }], 'setParamRunTime', null, function() { addGlow($('#{{classApiMethodMethod}}_paramRunTime')); }, function() { addError($('#{{classApiMethodMethod}}_paramRunTime')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+												</td>
+												<td>
+														{{> "inputParamRunTime" roleForWrite=roleForWrite roleForRead=roleForRead}}
+												</td>
+												<td>[500, 3600]</td>
+										</tr>
 {{/inline}}
 
 {{#*inline "inputParamRunTime"}}
-		{{#eq roleRequired "true"}}
+		{{#eq roleForWriteBool "true"}}
 														<input
 															type="text"
 															placeholder="time for each round of traffic simulation (sec)"
-															title="Time duration of each simulated sample path. "
-															id="{{classApiMethodMethod}}_paramRunTime"
+															title="[500, 3600]"															id="{{classApiMethodMethod}}_paramRunTime"
 	{{#eq "Page" classApiMethodMethod}}
 																class="setParamRunTime classSimulationReport inputSimulationReport{{pk}}ParamRunTime w3-input w3-border "
 																name="setParamRunTime"
@@ -2976,44 +3326,24 @@
 {{/inline}}
 
 {{#*inline "htmParamItersPerPar"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}SimulationReportParamItersPerPar">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
+<!-- #*inline "htmParamItersPerPar" -->
+										<tr>
+												<td>
 													<label for="{{classApiMethodMethod}}_paramItersPerPar">Number of simulation repetitions with same input (for statistical accuracy)</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputParamItersPerPar" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramItersPerPar')); $('#{{classApiMethodMethod}}_paramItersPerPar').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SimulationReportForm :input[name=pk]').val() }], 'setParamItersPerPar', null, function() { addGlow($('#{{classApiMethodMethod}}_paramItersPerPar')); }, function() { addError($('#{{classApiMethodMethod}}_paramItersPerPar')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+												</td>
+												<td>
+														{{> "inputParamItersPerPar" roleForWrite=roleForWrite roleForRead=roleForRead}}
+												</td>
+												<td>[1, 30]</td>
+										</tr>
 {{/inline}}
 
 {{#*inline "inputParamItersPerPar"}}
-		{{#eq roleRequired "true"}}
+		{{#eq roleForWriteBool "true"}}
 														<input
 															type="text"
 															placeholder="Number of simulation repetitions with same input (for statistical accuracy)"
-															title="Number of repeats per round. "
-															id="{{classApiMethodMethod}}_paramItersPerPar"
+															title="[1, 30]"															id="{{classApiMethodMethod}}_paramItersPerPar"
 	{{#eq "Page" classApiMethodMethod}}
 																class="setParamItersPerPar classSimulationReport inputSimulationReport{{pk}}ParamItersPerPar w3-input w3-border "
 																name="setParamItersPerPar"
@@ -3045,44 +3375,24 @@
 {{/inline}}
 
 {{#*inline "htmParamTotalIterNum"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}SimulationReportParamTotalIterNum">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
+<!-- #*inline "htmParamTotalIterNum" -->
+										<tr>
+												<td>
 													<label for="{{classApiMethodMethod}}_paramTotalIterNum">Number of parameter update iterations before output</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputParamTotalIterNum" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramTotalIterNum')); $('#{{classApiMethodMethod}}_paramTotalIterNum').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SimulationReportForm :input[name=pk]').val() }], 'setParamTotalIterNum', null, function() { addGlow($('#{{classApiMethodMethod}}_paramTotalIterNum')); }, function() { addError($('#{{classApiMethodMethod}}_paramTotalIterNum')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+												</td>
+												<td>
+														{{> "inputParamTotalIterNum" roleForWrite=roleForWrite roleForRead=roleForRead}}
+												</td>
+												<td>[1, 30]</td>
+										</tr>
 {{/inline}}
 
 {{#*inline "inputParamTotalIterNum"}}
-		{{#eq roleRequired "true"}}
+		{{#eq roleForWriteBool "true"}}
 														<input
 															type="text"
 															placeholder="Number of parameter update iterations before output"
-															title="Total iterations to update performance. "
-															id="{{classApiMethodMethod}}_paramTotalIterNum"
+															title="[1, 30]"															id="{{classApiMethodMethod}}_paramTotalIterNum"
 	{{#eq "Page" classApiMethodMethod}}
 																class="setParamTotalIterNum classSimulationReport inputSimulationReport{{pk}}ParamTotalIterNum w3-input w3-border "
 																name="setParamTotalIterNum"
@@ -3113,45 +3423,329 @@
 		{{/eq}}
 {{/inline}}
 
-{{#*inline "htmReportStatus"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}SimulationReportReportStatus">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_reportStatus">report status</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputReportStatus" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_reportStatus')); $('#{{classApiMethodMethod}}_reportStatus').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SimulationReportForm :input[name=pk]').val() }], 'setReportStatus', null, function() { addGlow($('#{{classApiMethodMethod}}_reportStatus')); }, function() { addError($('#{{classApiMethodMethod}}_reportStatus')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
+{{#*inline "htmUpdatedParameters1"}}
+<!-- #*inline "htmUpdatedParameters1" -->
+										<tr>
+												<td>
+													<label for="{{classApiMethodMethod}}_updatedParameters1">Min GREEN time for WEST-EAST traffic (sec)</label>
+												</td>
+														{{#each simulationReport_.updatedParameters1}}<td>{{.}}</td>{{/each}}
+										</tr>
+{{/inline}}
+
+{{#*inline "inputUpdatedParameters1"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varSimulationReport{{pk}}UpdatedParameters1 ">{{simulationReport_.updatedParameters1}}</span>
 	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+{{/inline}}
+
+{{#*inline "htmUpdatedParameters2"}}
+<!-- #*inline "htmUpdatedParameters2" -->
+										<tr>
+												<td>
+													<label for="{{classApiMethodMethod}}_updatedParameters2">Max GREEN time for WEST-EAST traffic (sec)</label>
+												</td>
+														{{#each simulationReport_.updatedParameters2}}<td>{{.}}</td>{{/each}}
+										</tr>
+{{/inline}}
+
+{{#*inline "inputUpdatedParameters2"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varSimulationReport{{pk}}UpdatedParameters2 ">{{simulationReport_.updatedParameters2}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmUpdatedParameters3"}}
+<!-- #*inline "htmUpdatedParameters3" -->
+										<tr>
+												<td>
+													<label for="{{classApiMethodMethod}}_updatedParameters3">Min GREEN time for SOUTH-NORTH traffic (sec)</label>
+												</td>
+														{{#each simulationReport_.updatedParameters3}}<td>{{.}}</td>{{/each}}
+										</tr>
+{{/inline}}
+
+{{#*inline "inputUpdatedParameters3"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varSimulationReport{{pk}}UpdatedParameters3 ">{{simulationReport_.updatedParameters3}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmUpdatedParameters4"}}
+<!-- #*inline "htmUpdatedParameters4" -->
+										<tr>
+												<td>
+													<label for="{{classApiMethodMethod}}_updatedParameters4">Max GREEN time for SOUTH-NORTH traffic (sec)</label>
+												</td>
+														{{#each simulationReport_.updatedParameters4}}<td>{{.}}</td>{{/each}}
+										</tr>
+{{/inline}}
+
+{{#*inline "inputUpdatedParameters4"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varSimulationReport{{pk}}UpdatedParameters4 ">{{simulationReport_.updatedParameters4}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmUpdatedParameters5"}}
+<!-- #*inline "htmUpdatedParameters5" -->
+										<tr>
+												<td>
+													<label for="{{classApiMethodMethod}}_updatedParameters5">Pedestrian waiting time tolerance threshold for NORTH-SOUTH (sec)</label>
+												</td>
+														{{#each simulationReport_.updatedParameters5}}<td>{{.}}</td>{{/each}}
+										</tr>
+{{/inline}}
+
+{{#*inline "inputUpdatedParameters5"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varSimulationReport{{pk}}UpdatedParameters5 ">{{simulationReport_.updatedParameters5}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmUpdatedParameters6"}}
+<!-- #*inline "htmUpdatedParameters6" -->
+										<tr>
+												<td>
+													<label for="{{classApiMethodMethod}}_updatedParameters6">Pedestrian waiting time tolerance threshold for WEST-EAST (sec)</label>
+												</td>
+														{{#each simulationReport_.updatedParameters6}}<td>{{.}}</td>{{/each}}
+										</tr>
+{{/inline}}
+
+{{#*inline "inputUpdatedParameters6"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varSimulationReport{{pk}}UpdatedParameters6 ">{{simulationReport_.updatedParameters6}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmUpdatedParameters7"}}
+<!-- #*inline "htmUpdatedParameters7" -->
+										<tr>
+												<td>
+													<label for="{{classApiMethodMethod}}_updatedParameters7">Vehicle queue length threshold between low-high content for WEST-EAST</label>
+												</td>
+														{{#each simulationReport_.updatedParameters7}}<td>{{.}}</td>{{/each}}
+										</tr>
+{{/inline}}
+
+{{#*inline "inputUpdatedParameters7"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varSimulationReport{{pk}}UpdatedParameters7 ">{{simulationReport_.updatedParameters7}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmUpdatedParameters8"}}
+<!-- #*inline "htmUpdatedParameters8" -->
+										<tr>
+												<td>
+													<label for="{{classApiMethodMethod}}_updatedParameters8">Vehicle queue length threshold between low-high content for SOUTH-NORTH</label>
+												</td>
+														{{#each simulationReport_.updatedParameters8}}<td>{{.}}</td>{{/each}}
+										</tr>
+{{/inline}}
+
+{{#*inline "inputUpdatedParameters8"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varSimulationReport{{pk}}UpdatedParameters8 ">{{simulationReport_.updatedParameters8}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmUpdatedParameters9"}}
+<!-- #*inline "htmUpdatedParameters9" -->
+										<tr>
+												<td>
+													<label for="{{classApiMethodMethod}}_updatedParameters9">Pedestrian queue length threshold between low-high content for NORTH-SOUTH</label>
+												</td>
+														{{#each simulationReport_.updatedParameters9}}<td>{{.}}</td>{{/each}}
+										</tr>
+{{/inline}}
+
+{{#*inline "inputUpdatedParameters9"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varSimulationReport{{pk}}UpdatedParameters9 ">{{simulationReport_.updatedParameters9}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmUpdatedParameters10"}}
+<!-- #*inline "htmUpdatedParameters10" -->
+										<tr>
+												<td>
+													<label for="{{classApiMethodMethod}}_updatedParameters10">Pedestrian queue length threshold between low-high content for WEST-EAST</label>
+												</td>
+														{{#each simulationReport_.updatedParameters10}}<td>{{.}}</td>{{/each}}
+										</tr>
+{{/inline}}
+
+{{#*inline "inputUpdatedParameters10"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varSimulationReport{{pk}}UpdatedParameters10 ">{{simulationReport_.updatedParameters10}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmUpdatedPerformanceWaitWestEastVehicleSec"}}
+<!-- #*inline "htmUpdatedPerformanceWaitWestEastVehicleSec" -->
+										<tr>
+												<td>
+													<label for="{{classApiMethodMethod}}_updatedPerformanceWaitWestEastVehicleSec">Average waiting time for WEST-EAST vehicles (sec)</label>
+												</td>
+														{{#each simulationReport_.updatedPerformanceWaitWestEastVehicleSec}}<td>{{.}}</td>{{/each}}
+										</tr>
+{{/inline}}
+
+{{#*inline "inputUpdatedPerformanceWaitWestEastVehicleSec"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varSimulationReport{{pk}}UpdatedPerformanceWaitWestEastVehicleSec ">{{simulationReport_.updatedPerformanceWaitWestEastVehicleSec}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmUpdatedPerformanceWaitSouthNorthVehicleSec"}}
+<!-- #*inline "htmUpdatedPerformanceWaitSouthNorthVehicleSec" -->
+										<tr>
+												<td>
+													<label for="{{classApiMethodMethod}}_updatedPerformanceWaitSouthNorthVehicleSec">Average waiting time for SOUTH-NORTH vehicles (sec)</label>
+												</td>
+														{{#each simulationReport_.updatedPerformanceWaitSouthNorthVehicleSec}}<td>{{.}}</td>{{/each}}
+										</tr>
+{{/inline}}
+
+{{#*inline "inputUpdatedPerformanceWaitSouthNorthVehicleSec"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varSimulationReport{{pk}}UpdatedPerformanceWaitSouthNorthVehicleSec ">{{simulationReport_.updatedPerformanceWaitSouthNorthVehicleSec}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmUpdatedPerformanceWaitAllVehicleSec"}}
+<!-- #*inline "htmUpdatedPerformanceWaitAllVehicleSec" -->
+										<tr>
+												<td>
+													<label for="{{classApiMethodMethod}}_updatedPerformanceWaitAllVehicleSec">Average waiting time for all vehicles (sec)</label>
+												</td>
+														{{#each simulationReport_.updatedPerformanceWaitAllVehicleSec}}<td>{{.}}</td>{{/each}}
+										</tr>
+{{/inline}}
+
+{{#*inline "inputUpdatedPerformanceWaitAllVehicleSec"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varSimulationReport{{pk}}UpdatedPerformanceWaitAllVehicleSec ">{{simulationReport_.updatedPerformanceWaitAllVehicleSec}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmUpdatedPerformanceWaitAllPedestrianSec"}}
+<!-- #*inline "htmUpdatedPerformanceWaitAllPedestrianSec" -->
+										<tr>
+												<td>
+													<label for="{{classApiMethodMethod}}_updatedPerformanceWaitAllPedestrianSec">Average waiting time for pedestrians (sec)</label>
+												</td>
+														{{#each simulationReport_.updatedPerformanceWaitAllPedestrianSec}}<td>{{.}}</td>{{/each}}
+										</tr>
+{{/inline}}
+
+{{#*inline "inputUpdatedPerformanceWaitAllPedestrianSec"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varSimulationReport{{pk}}UpdatedPerformanceWaitAllPedestrianSec ">{{simulationReport_.updatedPerformanceWaitAllPedestrianSec}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmUpdatedPerformanceWaitAllVehiclePedestrianSec"}}
+<!-- #*inline "htmUpdatedPerformanceWaitAllVehiclePedestrianSec" -->
+										<tr>
+												<td>
+													<label for="{{classApiMethodMethod}}_updatedPerformanceWaitAllVehiclePedestrianSec">Average waiting time for vehicles and pedestrians (sec)</label>
+												</td>
+														{{#each simulationReport_.updatedPerformanceWaitAllVehiclePedestrianSec}}<td>{{.}}</td>{{/each}}
+										</tr>
+{{/inline}}
+
+{{#*inline "inputUpdatedPerformanceWaitAllVehiclePedestrianSec"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varSimulationReport{{pk}}UpdatedPerformanceWaitAllVehiclePedestrianSec ">{{simulationReport_.updatedPerformanceWaitAllVehiclePedestrianSec}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmAvgQueueLengthWestEastVehicle"}}
+<!-- #*inline "htmAvgQueueLengthWestEastVehicle" -->
+										<tr>
+												<td>
+													<label for="{{classApiMethodMethod}}_avgQueueLengthWestEastVehicle">Average queue length for WEST-EAST vehicle</label>
+												</td>
+														{{#each simulationReport_.avgQueueLengthWestEastVehicle}}<td>{{.}}</td>{{/each}}
+										</tr>
+{{/inline}}
+
+{{#*inline "inputAvgQueueLengthWestEastVehicle"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varSimulationReport{{pk}}AvgQueueLengthWestEastVehicle ">{{simulationReport_.avgQueueLengthWestEastVehicle}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmAvgQueueLengthSouthNorthVehicle"}}
+<!-- #*inline "htmAvgQueueLengthSouthNorthVehicle" -->
+										<tr>
+												<td>
+													<label for="{{classApiMethodMethod}}_avgQueueLengthSouthNorthVehicle">Average queue length for SOUTH-NORTH vehicle</label>
+												</td>
+														{{#each simulationReport_.avgQueueLengthSouthNorthVehicle}}<td>{{.}}</td>{{/each}}
+										</tr>
+{{/inline}}
+
+{{#*inline "inputAvgQueueLengthSouthNorthVehicle"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varSimulationReport{{pk}}AvgQueueLengthSouthNorthVehicle ">{{simulationReport_.avgQueueLengthSouthNorthVehicle}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmAvgQueueLengthNorthSouthPedestrian"}}
+<!-- #*inline "htmAvgQueueLengthNorthSouthPedestrian" -->
+										<tr>
+												<td>
+													<label for="{{classApiMethodMethod}}_avgQueueLengthNorthSouthPedestrian">Average queue length for NORTH-SOUTH pedestrian</label>
+												</td>
+														{{#each simulationReport_.avgQueueLengthNorthSouthPedestrian}}<td>{{.}}</td>{{/each}}
+										</tr>
+{{/inline}}
+
+{{#*inline "inputAvgQueueLengthNorthSouthPedestrian"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varSimulationReport{{pk}}AvgQueueLengthNorthSouthPedestrian ">{{simulationReport_.avgQueueLengthNorthSouthPedestrian}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmAvgQueueLengthWestEastPedestrian"}}
+<!-- #*inline "htmAvgQueueLengthWestEastPedestrian" -->
+										<tr>
+												<td>
+													<label for="{{classApiMethodMethod}}_avgQueueLengthWestEastPedestrian">Average queue length for WEST-EAST pedestrian</label>
+												</td>
+														{{#each simulationReport_.avgQueueLengthWestEastPedestrian}}<td>{{.}}</td>{{/each}}
+										</tr>
+{{/inline}}
+
+{{#*inline "inputAvgQueueLengthWestEastPedestrian"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varSimulationReport{{pk}}AvgQueueLengthWestEastPedestrian ">{{simulationReport_.avgQueueLengthWestEastPedestrian}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmReportStatus"}}
+<!-- #*inline "htmReportStatus" -->
+										<tr>
+												<td>
+													<label for="{{classApiMethodMethod}}_reportStatus">report status</label>
+												</td>
+												<td>
+														{{> "inputReportStatus" roleForWrite=roleForWrite roleForRead=roleForRead}}
+												</td>
+												<td>The current status of the simulation report. </td>
+										</tr>
 {{/inline}}
 
 {{#*inline "inputReportStatus"}}
-		{{#eq roleRequired "true"}}
+		{{#eq roleForWriteBool "true"}}
 														<input
 															type="text"
 															placeholder="report status"
-															title="The current status of the simulation report. "
-															id="{{classApiMethodMethod}}_reportStatus"
+															title="The current status of the simulation report. "															id="{{classApiMethodMethod}}_reportStatus"
 	{{#eq "Page" classApiMethodMethod}}
 																class="setReportStatus classSimulationReport inputSimulationReport{{pk}}ReportStatus w3-input w3-border "
 																name="setReportStatus"
@@ -3183,44 +3777,24 @@
 {{/inline}}
 
 {{#*inline "htmReportProgress"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}SimulationReportReportProgress">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
+<!-- #*inline "htmReportProgress" -->
+										<tr>
+												<td>
 													<label for="{{classApiMethodMethod}}_reportProgress">report progress</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputReportProgress" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_reportProgress')); $('#{{classApiMethodMethod}}_reportProgress').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SimulationReportForm :input[name=pk]').val() }], 'setReportProgress', null, function() { addGlow($('#{{classApiMethodMethod}}_reportProgress')); }, function() { addError($('#{{classApiMethodMethod}}_reportProgress')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+												</td>
+												<td>
+														{{> "inputReportProgress" roleForWrite=roleForWrite roleForRead=roleForRead}}
+												</td>
+												<td>The percent progress of the simulation report. </td>
+										</tr>
 {{/inline}}
 
 {{#*inline "inputReportProgress"}}
-		{{#eq roleRequired "true"}}
+		{{#eq roleForWriteBool "true"}}
 														<input
 															type="text"
 															placeholder="report progress"
-															title="The percent progress of the simulation report. "
-															id="{{classApiMethodMethod}}_reportProgress"
+															title="The percent progress of the simulation report. "															id="{{classApiMethodMethod}}_reportProgress"
 	{{#eq "Page" classApiMethodMethod}}
 																class="setReportProgress classSimulationReport inputSimulationReport{{pk}}ReportProgress w3-input w3-border "
 																name="setReportProgress"
@@ -3249,403 +3823,4 @@
 		{{else}}
 														<span class="varSimulationReport{{pk}}ReportProgress ">{{simulationReport_.reportProgress}}</span>
 		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmUpdatedParameters"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}SimulationReportUpdatedParameters">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_updatedParameters">updated parameters</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputUpdatedParameters" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_updatedParameters')); $('#{{classApiMethodMethod}}_updatedParameters').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SimulationReportForm :input[name=pk]').val() }], 'setUpdatedParameters', null, function() { addGlow($('#{{classApiMethodMethod}}_updatedParameters')); }, function() { addError($('#{{classApiMethodMethod}}_updatedParameters')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputUpdatedParameters"}}
-		{{#eq roleRequired "true"}}
-														<input
-															type="text"
-															placeholder="updated parameters"
-															title="the resulting updated parameters after a simulation"
-															id="{{classApiMethodMethod}}_updatedParameters"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setUpdatedParameters classSimulationReport inputSimulationReport{{pk}}UpdatedParameters w3-input w3-border "
-																name="setUpdatedParameters"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setUpdatedParameters classSimulationReport inputSimulationReport{{pk}}UpdatedParameters w3-input w3-border "
-																name="setUpdatedParameters"
-		{{else}}
-																class="valueUpdatedParameters w3-input w3-border classSimulationReport inputSimulationReport{{pk}}UpdatedParameters w3-input w3-border "
-																name="updatedParameters"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setUpdatedParameters', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_updatedParameters')); }, function() { addError($('#{{classApiMethodMethod}}_updatedParameters')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{simulationReport_.updatedParameters}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varSimulationReport{{pk}}UpdatedParameters ">{{simulationReport_.updatedParameters}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varSimulationReport{{pk}}UpdatedParameters ">{{simulationReport_.updatedParameters}}</span>
-		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmUpdatedPerformance"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}SimulationReportUpdatedPerformance">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_updatedPerformance">updated performance</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputUpdatedPerformance" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_updatedPerformance')); $('#{{classApiMethodMethod}}_updatedPerformance').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SimulationReportForm :input[name=pk]').val() }], 'setUpdatedPerformance', null, function() { addGlow($('#{{classApiMethodMethod}}_updatedPerformance')); }, function() { addError($('#{{classApiMethodMethod}}_updatedPerformance')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputUpdatedPerformance"}}
-		{{#eq roleRequired "true"}}
-														<input
-															type="text"
-															placeholder="updated performance"
-															title="the resulting updated performance after a simulation"
-															id="{{classApiMethodMethod}}_updatedPerformance"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setUpdatedPerformance classSimulationReport inputSimulationReport{{pk}}UpdatedPerformance w3-input w3-border "
-																name="setUpdatedPerformance"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setUpdatedPerformance classSimulationReport inputSimulationReport{{pk}}UpdatedPerformance w3-input w3-border "
-																name="setUpdatedPerformance"
-		{{else}}
-																class="valueUpdatedPerformance w3-input w3-border classSimulationReport inputSimulationReport{{pk}}UpdatedPerformance w3-input w3-border "
-																name="updatedPerformance"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setUpdatedPerformance', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_updatedPerformance')); }, function() { addError($('#{{classApiMethodMethod}}_updatedPerformance')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{simulationReport_.updatedPerformance}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varSimulationReport{{pk}}UpdatedPerformance ">{{simulationReport_.updatedPerformance}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varSimulationReport{{pk}}UpdatedPerformance ">{{simulationReport_.updatedPerformance}}</span>
-		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmUpdatedPerformanceWaitWestEastVehicleSec"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>Average waiting time for WEST-EAST vehicles (sec)</label>
-												</div>
-												<div class="w3-cell-row  ">
-													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputUpdatedPerformanceWaitWestEastVehicleSec" roleRequired=roleRequired}}
-															</span>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-	{{/eq}}
-								</div>
-{{/inline}}
-
-{{#*inline "inputUpdatedPerformanceWaitWestEastVehicleSec"}}
-	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSimulationReport{{pk}}UpdatedPerformanceWaitWestEastVehicleSec ">{{simulationReport_.updatedPerformanceWaitWestEastVehicleSec}}</span>
-	{{/eq}}
-{{/inline}}
-
-{{#*inline "htmUpdatedPerformanceWaitSouthNorthVehicleSec"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>Average waiting time for SOUTH-NORTH vehicles (sec)</label>
-												</div>
-												<div class="w3-cell-row  ">
-													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputUpdatedPerformanceWaitSouthNorthVehicleSec" roleRequired=roleRequired}}
-															</span>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-	{{/eq}}
-								</div>
-{{/inline}}
-
-{{#*inline "inputUpdatedPerformanceWaitSouthNorthVehicleSec"}}
-	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSimulationReport{{pk}}UpdatedPerformanceWaitSouthNorthVehicleSec ">{{simulationReport_.updatedPerformanceWaitSouthNorthVehicleSec}}</span>
-	{{/eq}}
-{{/inline}}
-
-{{#*inline "htmUpdatedPerformanceWaitAllVehicleSec"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>Average waiting time for all vehicles (sec)</label>
-												</div>
-												<div class="w3-cell-row  ">
-													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputUpdatedPerformanceWaitAllVehicleSec" roleRequired=roleRequired}}
-															</span>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-	{{/eq}}
-								</div>
-{{/inline}}
-
-{{#*inline "inputUpdatedPerformanceWaitAllVehicleSec"}}
-	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSimulationReport{{pk}}UpdatedPerformanceWaitAllVehicleSec ">{{simulationReport_.updatedPerformanceWaitAllVehicleSec}}</span>
-	{{/eq}}
-{{/inline}}
-
-{{#*inline "htmUpdatedPerformanceWaitAllPedestrianSec"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>Average waiting time for pedestrians (sec)</label>
-												</div>
-												<div class="w3-cell-row  ">
-													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputUpdatedPerformanceWaitAllPedestrianSec" roleRequired=roleRequired}}
-															</span>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-	{{/eq}}
-								</div>
-{{/inline}}
-
-{{#*inline "inputUpdatedPerformanceWaitAllPedestrianSec"}}
-	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSimulationReport{{pk}}UpdatedPerformanceWaitAllPedestrianSec ">{{simulationReport_.updatedPerformanceWaitAllPedestrianSec}}</span>
-	{{/eq}}
-{{/inline}}
-
-{{#*inline "htmUpdatedPerformanceWaitAllVehiclePedestrianSec"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>Average waiting time for vehicles and pedestrians (sec)</label>
-												</div>
-												<div class="w3-cell-row  ">
-													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputUpdatedPerformanceWaitAllVehiclePedestrianSec" roleRequired=roleRequired}}
-															</span>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-	{{/eq}}
-								</div>
-{{/inline}}
-
-{{#*inline "inputUpdatedPerformanceWaitAllVehiclePedestrianSec"}}
-	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSimulationReport{{pk}}UpdatedPerformanceWaitAllVehiclePedestrianSec ">{{simulationReport_.updatedPerformanceWaitAllVehiclePedestrianSec}}</span>
-	{{/eq}}
-{{/inline}}
-
-{{#*inline "htmAvgQueueLengthWestEastVehicle"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>Average queue length for WEST-EAST vehicle</label>
-												</div>
-												<div class="w3-cell-row  ">
-													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputAvgQueueLengthWestEastVehicle" roleRequired=roleRequired}}
-															</span>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-	{{/eq}}
-								</div>
-{{/inline}}
-
-{{#*inline "inputAvgQueueLengthWestEastVehicle"}}
-	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSimulationReport{{pk}}AvgQueueLengthWestEastVehicle ">{{simulationReport_.avgQueueLengthWestEastVehicle}}</span>
-	{{/eq}}
-{{/inline}}
-
-{{#*inline "htmAvgQueueLengthSouthNorthVehicle"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>Average queue length for SOUTH-NORTH vehicle</label>
-												</div>
-												<div class="w3-cell-row  ">
-													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputAvgQueueLengthSouthNorthVehicle" roleRequired=roleRequired}}
-															</span>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-	{{/eq}}
-								</div>
-{{/inline}}
-
-{{#*inline "inputAvgQueueLengthSouthNorthVehicle"}}
-	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSimulationReport{{pk}}AvgQueueLengthSouthNorthVehicle ">{{simulationReport_.avgQueueLengthSouthNorthVehicle}}</span>
-	{{/eq}}
-{{/inline}}
-
-{{#*inline "htmAvgQueueLengthNorthSouthPedestrian"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>Average queue length for NORTH-SOUTH pedestrian</label>
-												</div>
-												<div class="w3-cell-row  ">
-													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputAvgQueueLengthNorthSouthPedestrian" roleRequired=roleRequired}}
-															</span>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-	{{/eq}}
-								</div>
-{{/inline}}
-
-{{#*inline "inputAvgQueueLengthNorthSouthPedestrian"}}
-	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSimulationReport{{pk}}AvgQueueLengthNorthSouthPedestrian ">{{simulationReport_.avgQueueLengthNorthSouthPedestrian}}</span>
-	{{/eq}}
-{{/inline}}
-
-{{#*inline "htmAvgQueueLengthWestEastPedestrian"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>Average queue length for WEST-EAST pedestrian</label>
-												</div>
-												<div class="w3-cell-row  ">
-													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputAvgQueueLengthWestEastPedestrian" roleRequired=roleRequired}}
-															</span>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-	{{/eq}}
-								</div>
-{{/inline}}
-
-{{#*inline "inputAvgQueueLengthWestEastPedestrian"}}
-	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSimulationReport{{pk}}AvgQueueLengthWestEastPedestrian ">{{simulationReport_.avgQueueLengthWestEastPedestrian}}</span>
-	{{/eq}}
 {{/inline}}

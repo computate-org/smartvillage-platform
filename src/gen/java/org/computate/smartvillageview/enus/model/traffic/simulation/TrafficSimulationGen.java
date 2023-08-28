@@ -5263,6 +5263,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return 3;
 		case VAR_location:
 			return 3;
+		case VAR_reportKeys:
+			return 4;
 			default:
 				return BaseModel.htmRowBaseModel(var);
 		}
@@ -5274,6 +5276,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			return 1;
 		case VAR_location:
 			return 2;
+		case VAR_reportKeys:
+			return 1;
 			default:
 				return BaseModel.htmCellBaseModel(var);
 		}
