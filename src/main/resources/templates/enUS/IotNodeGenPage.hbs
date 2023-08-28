@@ -399,52 +399,91 @@
 						<h2 class="w3-padding ">Modify IOT nodes</h2>
 					</header>
 					<div class="" id="patchIotNodeFormValues">
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmCreated" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmCreated" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmCreated" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmObjectId" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmCreated" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmObjectId" roleRequired="false"}}
+{{> "htmCreated" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmObjectId" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmObjectId" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmObjectId" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmArchived" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmArchived" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmArchived" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmDeleted" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmArchived" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmDeleted" roleRequired="false"}}
+{{> "htmArchived" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmDeleted" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmDeleted" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmDeleted" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmNodeName" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmNodeName" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmNodeName" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmNodeType" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmNodeName" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmNodeType" roleRequired="false"}}
+{{> "htmNodeName" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmNodeId" roleRequired="true"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmNodeType" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmNodeId" roleRequired="false"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmNodeType" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmNodeType" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmNodeId" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmNodeId" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmNodeId" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmLocation" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmLocation" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmLocation" roleRequired="false"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmLocation" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmLocation" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 							</div>
 {{#block "htmFormButton_patchIotNode"}}{{/block}}
@@ -482,35 +521,60 @@
 					<div class="" id="postIotNodeFormValues">
 						<div id="postIotNodeForm">
 {{#block "htmFormButton_postIotNode"}}{{/block}}
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmObjectId" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmObjectId" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmObjectId" roleRequired="false"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmObjectId" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmObjectId" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmNodeName" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmNodeName" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmNodeName" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmNodeType" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmNodeName" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmNodeType" roleRequired="false"}}
+{{> "htmNodeName" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmNodeId" roleRequired="true"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmNodeType" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmNodeId" roleRequired="false"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmNodeType" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmNodeType" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmNodeId" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmNodeId" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmNodeId" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmLocation" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmLocation" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmLocation" roleRequired="false"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmLocation" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmLocation" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 							</div>
 						</div>
@@ -573,248 +637,447 @@
 				<div class="w3-card-4 ">
 					<div class="" id="searchpageIotNodeFormValues">
 						<div id="searchpageIotNodeForm">
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmCreated" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmCreated" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmCreated" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmModified" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmCreated" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmModified" roleRequired="false"}}
+{{> "htmCreated" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmObjectId" roleRequired="true"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmModified" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmObjectId" roleRequired="false"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmModified" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmModified" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmObjectId" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmObjectId" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmObjectId" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmArchived" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmArchived" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmArchived" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmDeleted" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmArchived" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmDeleted" roleRequired="false"}}
+{{> "htmArchived" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmDeleted" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmDeleted" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmDeleted" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmNodeName" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmNodeName" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmNodeName" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmNodeType" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmNodeName" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmNodeType" roleRequired="false"}}
+{{> "htmNodeName" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmNodeId" roleRequired="true"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmNodeType" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmNodeId" roleRequired="false"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmNodeType" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmNodeType" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmNodeId" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmNodeId" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmNodeId" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmLocation" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmLocation" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmLocation" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_moisture" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmLocation" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmJson_moisture" roleRequired="false"}}
+{{> "htmLocation" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_moisture0" roleRequired="true"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmJson_moisture" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmJson_moisture0" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_moisture1" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmJson_moisture" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmJson_moisture1" roleRequired="false"}}
+{{> "htmJson_moisture" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmJson_moisture0" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmJson_moisture0" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmJson_moisture0" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmJson_moisture1" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmJson_moisture1" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmJson_moisture1" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_temperature" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmJson_temperature" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmJson_temperature" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_temperature0" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmJson_temperature" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmJson_temperature0" roleRequired="false"}}
+{{> "htmJson_temperature" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_temperatureAverage" roleRequired="true"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmJson_temperature0" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmJson_temperatureAverage" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_badConditionsCounter" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmJson_temperature0" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmJson_badConditionsCounter" roleRequired="false"}}
+{{> "htmJson_temperature0" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmJson_temperatureAverage" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmJson_temperatureAverage" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmJson_temperatureAverage" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmJson_badConditionsCounter" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmJson_badConditionsCounter" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmJson_badConditionsCounter" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_door" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmJson_door" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmJson_door" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_alarmDoor" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmJson_door" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmJson_alarmDoor" roleRequired="false"}}
+{{> "htmJson_door" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_flood" roleRequired="true"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmJson_alarmDoor" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmJson_flood" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_alarmFlood" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmJson_alarmDoor" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmJson_alarmFlood" roleRequired="false"}}
+{{> "htmJson_alarmDoor" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmJson_flood" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmJson_flood" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmJson_flood" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmJson_alarmFlood" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmJson_alarmFlood" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmJson_alarmFlood" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_lux2" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmJson_lux2" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmJson_lux2" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_illuminance" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmJson_lux2" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmJson_illuminance" roleRequired="false"}}
+{{> "htmJson_lux2" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_resistance0" roleRequired="true"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmJson_illuminance" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmJson_resistance0" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_resistance1" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmJson_illuminance" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmJson_resistance1" roleRequired="false"}}
+{{> "htmJson_illuminance" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmJson_resistance0" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmJson_resistance0" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmJson_resistance0" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmJson_resistance1" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmJson_resistance1" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmJson_resistance1" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_frequency" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmJson_frequency" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmJson_frequency" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_devEui" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmJson_frequency" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmJson_devEui" roleRequired="false"}}
+{{> "htmJson_frequency" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_bandwidth" roleRequired="true"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmJson_devEui" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmJson_bandwidth" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_dataRate" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmJson_devEui" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmJson_dataRate" roleRequired="false"}}
+{{> "htmJson_devEui" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmJson_bandwidth" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmJson_bandwidth" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmJson_bandwidth" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmJson_dataRate" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmJson_dataRate" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmJson_dataRate" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_frameCount" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmJson_frameCount" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmJson_frameCount" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_maxPayload" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmJson_frameCount" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmJson_maxPayload" roleRequired="false"}}
+{{> "htmJson_frameCount" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_bitsPerSecond" roleRequired="true"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmJson_maxPayload" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmJson_bitsPerSecond" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_batteryVoltage" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmJson_maxPayload" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmJson_batteryVoltage" roleRequired="false"}}
+{{> "htmJson_maxPayload" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmJson_bitsPerSecond" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmJson_bitsPerSecond" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmJson_bitsPerSecond" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmJson_batteryVoltage" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmJson_batteryVoltage" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmJson_batteryVoltage" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_spreadingFactor" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmJson_spreadingFactor" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmJson_spreadingFactor" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_dataRateAdaptive" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmJson_spreadingFactor" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmJson_dataRateAdaptive" roleRequired="false"}}
+{{> "htmJson_spreadingFactor" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_swversion" roleRequired="true"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmJson_dataRateAdaptive" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmJson_swversion" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_batteryLevel" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmJson_dataRateAdaptive" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmJson_batteryLevel" roleRequired="false"}}
+{{> "htmJson_dataRateAdaptive" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmJson_swversion" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmJson_swversion" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmJson_swversion" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmJson_batteryLevel" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmJson_batteryLevel" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmJson_batteryLevel" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_startUpCount" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmJson_startUpCount" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmJson_startUpCount" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_watchdogCount" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmJson_startUpCount" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmJson_watchdogCount" roleRequired="false"}}
+{{> "htmJson_startUpCount" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_historySequence" roleRequired="true"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmJson_watchdogCount" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmJson_historySequence" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_versionFirmware" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmJson_watchdogCount" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmJson_versionFirmware" roleRequired="false"}}
+{{> "htmJson_watchdogCount" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmJson_historySequence" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmJson_historySequence" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmJson_historySequence" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmJson_versionFirmware" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmJson_versionFirmware" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmJson_versionFirmware" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_stackTxFailRebootCount" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmJson_stackTxFailRebootCount" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmJson_stackTxFailRebootCount" roleRequired="false"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmJson_stackTxFailRebootCount" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmJson_stackTxFailRebootCount" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_historySequencePrevious" roleRequired="true"}}
-{{else}}
-{{> "htmJson_historySequencePrevious" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_snr" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmJson_historySequencePrevious" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmJson_snr" roleRequired="false"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmJson_historySequencePrevious" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmJson_historySequencePrevious" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmJson_rssi" roleRequired="true"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmJson_snr" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmJson_rssi" roleRequired="false"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmJson_snr" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmJson_snr" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmJson_rssi" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmJson_rssi" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmJson_rssi" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 							</div>
 						</div>
@@ -832,7 +1095,7 @@
 						<span title="Pivot" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-shaded-spruce " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-2017-shaded-spruce'); $(this).addClass('w3-black'); $(this).removeClass('w3-2017-shaded-spruce'); "><i class="fad fa-table-pivot hover-box-shadow w3-xlarge "></i> Pivot</span>
 						<span title="FieldList" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-shaded-spruce " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleFieldList').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-2017-shaded-spruce'); $(this).addClass('w3-black'); $(this).removeClass('w3-2017-shaded-spruce'); "><i class="fad fa-list-ul hover-box-shadow w3-xlarge "></i> FieldList</span>
 						<span title="Stats" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-shaded-spruce " onclick="$('.siteSidebarToggleFieldList').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleStats').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-2017-shaded-spruce'); $(this).addClass('w3-black'); $(this).removeClass('w3-2017-shaded-spruce'); "><i class="fad fa-chart-candlestick hover-box-shadow w3-xlarge "></i> Stats</span>
-						<a title="API" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-shaded-spruce " href="{{ apiUri }}{{ queryStr }}"><i class="fad fa-brackets-curly hover-box-shadow w3-xlarge "></i> API</a>
+						<a title="API" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-shaded-spruce " href="{{ apiUri }}{{#if pk }}/{{ pk }}{{else}}{{#if id }}/{{ id }}{{else}}{{ queryStr }}{{/if}}{{/if}}"><i class="fad fa-brackets-curly hover-box-shadow w3-xlarge "></i> API</a>
 					</div>
 					<div class=" ">
 						<div class="siteSidebarToggle siteSidebarToggleSearch w3-dropdown-content min-width-300px w3-white w3-border w3-border-2017-shaded-spruce " style="display: none; ">
@@ -1029,7 +1292,7 @@
 {{#block "htmSuggested"}}{{/block}}
 {{/inline}}
 {{#*inline "htmSuggestedIotNodePage"}}
-			{{#ifContainsAnyRoles roles roleRequired}}
+			{{#ifContainsAnyRoles roles roleForWrite}}
 					<div class="">
 						<button id="refreshAllIotNodeGenPage{{id}}" class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce "
 							onclick="patch{{classSimpleName}}Vals([], {}, function() { addGlow($('#refreshAllIotNodeGenPage{{id}}')); }, function() { addError($('#refreshAllIotNodeGenPage{{id}}')); }); "
@@ -1081,31 +1344,19 @@
 {{/inline}}
 {{> MapResultPage baseResult_=iotNode_}}
 
-{{#*inline "htmJson"}}
+{{#*inline "htmCreated"}}
+<!-- #*inline "htmCreated" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}IotNodeJson">
+										<div id="suggest{{classApiMethodMethod}}IotNodeCreated">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_json">json</label>
+													<label for="{{classApiMethodMethod}}_created">created</label>
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputJson" roleRequired=roleRequired}}
+														{{> "inputCreated" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_json')); $('#{{classApiMethodMethod}}_json').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#IotNodeForm :input[name=id]').val() }], 'setJson', null, function() { addGlow($('#{{classApiMethodMethod}}_json')); }, function() { addError($('#{{classApiMethodMethod}}_json')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -1113,43 +1364,232 @@
 								</div>
 {{/inline}}
 
-{{#*inline "inputJson"}}
-		{{#eq roleRequired "true"}}
+{{#*inline "inputCreated"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varIotNode{{id}}Created " title="{{formatZonedDateTime iotNode_.created 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime iotNode_.created 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmModified"}}
+<!-- #*inline "htmModified" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}IotNodeModified">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_modified">modified</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputModified" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputModified"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varIotNode{{id}}Modified " title="{{formatZonedDateTime iotNode_.modified 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime iotNode_.modified 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmObjectId"}}
+<!-- #*inline "htmObjectId" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}IotNodeObjectId">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_objectId">ID</label>
+												</div>
+											<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputObjectId" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputObjectId"}}
+		{{#eq roleForWriteBool "true"}}
 														<input
 															type="text"
-															placeholder="json"
-															id="{{classApiMethodMethod}}_json"
+															placeholder="ID"
+															title="A URL friendly unique ID for this object"															id="{{classApiMethodMethod}}_objectId"
 	{{#eq "Page" classApiMethodMethod}}
-																class="setJson classIotNode inputIotNode{{id}}Json w3-input w3-border "
-																name="setJson"
+																class="setObjectId classIotNode inputIotNode{{id}}ObjectId w3-input w3-border "
+																name="setObjectId"
 	{{else}}
 		{{#eq "PATCH" classApiMethodMethod}}
-																class="setJson classIotNode inputIotNode{{id}}Json w3-input w3-border "
-																name="setJson"
+																class="setObjectId classIotNode inputIotNode{{id}}ObjectId w3-input w3-border "
+																name="setObjectId"
 		{{else}}
-																class="valueJson w3-input w3-border classIotNode inputIotNode{{id}}Json w3-input w3-border "
-																name="json"
+																class="valueObjectId w3-input w3-border classIotNode inputIotNode{{id}}ObjectId w3-input w3-border "
+																name="objectId"
 		{{/eq}}
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setJson', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_json')); }, function() { addError($('#{{classApiMethodMethod}}_json')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setObjectId', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_objectId')); }, function() { addError($('#{{classApiMethodMethod}}_objectId')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
-															value="{{iotNode_.json}}"
+															value="{{iotNode_.objectId}}"
 	{{/eq}}
 														/>
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varIotNode{{id}}Json ">{{iotNode_.json}}</span>
+															<span class="varIotNode{{id}}ObjectId ">{{iotNode_.objectId}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varIotNode{{id}}Json ">{{iotNode_.json}}</span>
+														<span class="varIotNode{{id}}ObjectId ">{{iotNode_.objectId}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmArchived"}}
+<!-- #*inline "htmArchived" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}IotNodeArchived">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_archived">archived</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputArchived" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputArchived"}}
+		{{#eq roleForWriteBool "true"}}
+	{{#eq 'Page' classApiMethodMethod}}
+															<input
+																type="checkbox"
+																id="{{classApiMethodMethod}}_archived"
+																value="true"
+	{{else}}
+														<select
+															id="{{classApiMethodMethod}}_archived"
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+															class="classIotNode inputIotNode{{id}}Archived w3-input w3-border "
+															name="setArchived"
+	{{else}}
+		{{#eq 'Page' classApiMethodMethod}}
+																class="classIotNode inputIotNode{{id}}Archived w3-input w3-border "
+																name="setArchived"
+		{{else}}
+																class="setArchived valueArchived classIotNode inputIotNode{{id}}Archived w3-input w3-border "
+																name="setArchived"
+		{{/eq}}
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+															onchange="var confirmResponse = confirm('Are you sure you want to archive that?'); if(confirmResponse) { patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setArchived', $(this).prop('checked'), function() { addGlow($('#{{classApiMethodMethod}}_archived')); }, function() { addError($('#{{classApiMethodMethod}}_archived')); }); }"
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+		{{#if iotNode_.archived}}
+																checked="checked"
+		{{/if}}
+																/>
+	{{else}}
+															>
+															<option value="" selected="selected"></option>
+															<option value="true">true</option>
+															<option value="false">false</option>
+														</select>
+	{{/eq}}
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varIotNode{{id}}Archived ">{{iotNode_.archived}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varIotNode{{id}}Archived ">{{iotNode_.archived}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmDeleted"}}
+<!-- #*inline "htmDeleted" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}IotNodeDeleted">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_deleted">deleted</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputDeleted" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputDeleted"}}
+		{{#eq roleForWriteBool "true"}}
+	{{#eq 'Page' classApiMethodMethod}}
+															<input
+																type="checkbox"
+																id="{{classApiMethodMethod}}_deleted"
+																value="true"
+	{{else}}
+														<select
+															id="{{classApiMethodMethod}}_deleted"
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+															class="classIotNode inputIotNode{{id}}Deleted w3-input w3-border "
+															name="setDeleted"
+	{{else}}
+		{{#eq 'Page' classApiMethodMethod}}
+																class="classIotNode inputIotNode{{id}}Deleted w3-input w3-border "
+																name="setDeleted"
+		{{else}}
+																class="setDeleted valueDeleted classIotNode inputIotNode{{id}}Deleted w3-input w3-border "
+																name="setDeleted"
+		{{/eq}}
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+															onchange="var confirmResponse = confirm('Are you sure you want to delete that?'); if(confirmResponse) { patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setDeleted', $(this).prop('checked'), function() { addGlow($('#{{classApiMethodMethod}}_deleted')); }, function() { addError($('#{{classApiMethodMethod}}_deleted')); }); }"
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+		{{#if iotNode_.deleted}}
+																checked="checked"
+		{{/if}}
+																/>
+	{{else}}
+															>
+															<option value="" selected="selected"></option>
+															<option value="true">true</option>
+															<option value="false">false</option>
+														</select>
+	{{/eq}}
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varIotNode{{id}}Deleted ">{{iotNode_.deleted}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varIotNode{{id}}Deleted ">{{iotNode_.deleted}}</span>
 		{{/eq}}
 {{/inline}}
 
 {{#*inline "htmNodeName"}}
+<!-- #*inline "htmNodeName" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									<div class="w3-padding ">
 										<div id="suggest{{classApiMethodMethod}}IotNodeNodeName">
@@ -1157,23 +1597,10 @@
 												<div class="w3-cell-row w3-2017-shaded-spruce">
 													<label for="{{classApiMethodMethod}}_nodeName">node name</label>
 												</div>
-												<div class="w3-cell-row w3-padding ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputNodeName" roleRequired=roleRequired}}
+														{{> "inputNodeName" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_nodeName')); $('#{{classApiMethodMethod}}_nodeName').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#IotNodeForm :input[name=id]').val() }], 'setNodeName', null, function() { addGlow($('#{{classApiMethodMethod}}_nodeName')); }, function() { addError($('#{{classApiMethodMethod}}_nodeName')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -1182,7 +1609,7 @@
 {{/inline}}
 
 {{#*inline "inputNodeName"}}
-		{{#eq roleRequired "true"}}
+		{{#eq roleForWriteBool "true"}}
 														<input
 															type="text"
 															placeholder="node name"
@@ -1218,6 +1645,7 @@
 {{/inline}}
 
 {{#*inline "htmNodeType"}}
+<!-- #*inline "htmNodeType" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									<div class="w3-padding ">
 										<div id="suggest{{classApiMethodMethod}}IotNodeNodeType">
@@ -1225,23 +1653,10 @@
 												<div class="w3-cell-row w3-2017-shaded-spruce">
 													<label for="{{classApiMethodMethod}}_nodeType">node type</label>
 												</div>
-												<div class="w3-cell-row w3-padding ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputNodeType" roleRequired=roleRequired}}
+														{{> "inputNodeType" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_nodeType')); $('#{{classApiMethodMethod}}_nodeType').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#IotNodeForm :input[name=id]').val() }], 'setNodeType', null, function() { addGlow($('#{{classApiMethodMethod}}_nodeType')); }, function() { addError($('#{{classApiMethodMethod}}_nodeType')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -1250,7 +1665,7 @@
 {{/inline}}
 
 {{#*inline "inputNodeType"}}
-		{{#eq roleRequired "true"}}
+		{{#eq roleForWriteBool "true"}}
 														<input
 															type="text"
 															placeholder="node type"
@@ -1286,6 +1701,7 @@
 {{/inline}}
 
 {{#*inline "htmNodeId"}}
+<!-- #*inline "htmNodeId" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									<div class="w3-padding ">
 										<div id="suggest{{classApiMethodMethod}}IotNodeNodeId">
@@ -1293,23 +1709,10 @@
 												<div class="w3-cell-row w3-2017-shaded-spruce">
 													<label for="{{classApiMethodMethod}}_nodeId">node ID</label>
 												</div>
-												<div class="w3-cell-row w3-padding ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputNodeId" roleRequired=roleRequired}}
+														{{> "inputNodeId" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_nodeId')); $('#{{classApiMethodMethod}}_nodeId').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#IotNodeForm :input[name=id]').val() }], 'setNodeId', null, function() { addGlow($('#{{classApiMethodMethod}}_nodeId')); }, function() { addError($('#{{classApiMethodMethod}}_nodeId')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -1318,7 +1721,7 @@
 {{/inline}}
 
 {{#*inline "inputNodeId"}}
-		{{#eq roleRequired "true"}}
+		{{#eq roleForWriteBool "true"}}
 														<input
 															type="text"
 															placeholder="node ID"
@@ -1354,30 +1757,18 @@
 {{/inline}}
 
 {{#*inline "htmLocation"}}
+<!-- #*inline "htmLocation" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									<div class="w3-padding ">
 										<div id="suggest{{classApiMethodMethod}}IotNodeLocation">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_location">location</label>
+													<label for="{{classApiMethodMethod}}_location">map location</label>
 												</div>
-												<div class="w3-cell-row w3-padding ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputLocation" roleRequired=roleRequired}}
+														{{> "inputLocation" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_location')); $('#{{classApiMethodMethod}}_location').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#IotNodeForm :input[name=id]').val() }], 'setLocation', null, function() { addGlow($('#{{classApiMethodMethod}}_location')); }, function() { addError($('#{{classApiMethodMethod}}_location')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -1386,10 +1777,10 @@
 {{/inline}}
 
 {{#*inline "inputLocation"}}
-		{{#eq roleRequired "true"}}
+		{{#eq roleForWriteBool "true"}}
 														<input
 															type="text"
-															placeholder="location"
+															placeholder="map location"
 															id="{{classApiMethodMethod}}_location"
 	{{#eq "Page" classApiMethodMethod}}
 																class="setLocation classIotNode inputIotNode{{id}}Location w3-input w3-border "
@@ -1422,25 +1813,22 @@
 {{/inline}}
 
 {{#*inline "htmJson_moisture"}}
+<!-- #*inline "htmJson_moisture" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}IotNodeJson_moisture">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>moisture</label>
+													<label for="{{classApiMethodMethod}}_json_moisture">moisture</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputJson_moisture" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputJson_moisture" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -1451,25 +1839,22 @@
 {{/inline}}
 
 {{#*inline "htmJson_moisture0"}}
+<!-- #*inline "htmJson_moisture0" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}IotNodeJson_moisture0">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>moisture0</label>
+													<label for="{{classApiMethodMethod}}_json_moisture0">moisture0</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputJson_moisture0" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputJson_moisture0" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -1480,25 +1865,22 @@
 {{/inline}}
 
 {{#*inline "htmJson_moisture1"}}
+<!-- #*inline "htmJson_moisture1" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}IotNodeJson_moisture1">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>moisture1</label>
+													<label for="{{classApiMethodMethod}}_json_moisture1">moisture1</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputJson_moisture1" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputJson_moisture1" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -1509,25 +1891,22 @@
 {{/inline}}
 
 {{#*inline "htmJson_temperature"}}
+<!-- #*inline "htmJson_temperature" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}IotNodeJson_temperature">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>temperature</label>
+													<label for="{{classApiMethodMethod}}_json_temperature">temperature</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputJson_temperature" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputJson_temperature" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -1538,25 +1917,22 @@
 {{/inline}}
 
 {{#*inline "htmJson_temperature0"}}
+<!-- #*inline "htmJson_temperature0" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}IotNodeJson_temperature0">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>temperature0</label>
+													<label for="{{classApiMethodMethod}}_json_temperature0">temperature0</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputJson_temperature0" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputJson_temperature0" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -1567,25 +1943,22 @@
 {{/inline}}
 
 {{#*inline "htmJson_temperatureAverage"}}
+<!-- #*inline "htmJson_temperatureAverage" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}IotNodeJson_temperatureAverage">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>average temperature</label>
+													<label for="{{classApiMethodMethod}}_json_temperatureAverage">average temperature</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputJson_temperatureAverage" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputJson_temperatureAverage" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -1596,25 +1969,22 @@
 {{/inline}}
 
 {{#*inline "htmJson_badConditionsCounter"}}
+<!-- #*inline "htmJson_badConditionsCounter" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}IotNodeJson_badConditionsCounter">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>bad conditions counter</label>
+													<label for="{{classApiMethodMethod}}_json_badConditionsCounter">bad conditions counter</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputJson_badConditionsCounter" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputJson_badConditionsCounter" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -1625,25 +1995,22 @@
 {{/inline}}
 
 {{#*inline "htmJson_door"}}
+<!-- #*inline "htmJson_door" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}IotNodeJson_door">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>door</label>
+													<label for="{{classApiMethodMethod}}_json_door">door</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputJson_door" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputJson_door" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -1654,25 +2021,22 @@
 {{/inline}}
 
 {{#*inline "htmJson_alarmDoor"}}
+<!-- #*inline "htmJson_alarmDoor" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}IotNodeJson_alarmDoor">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>alarm door</label>
+													<label for="{{classApiMethodMethod}}_json_alarmDoor">alarm door</label>
 												</div>
-												<div class="w3-cell-row  ">
+												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputJson_alarmDoor" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputJson_alarmDoor" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -1683,25 +2047,22 @@
 {{/inline}}
 
 {{#*inline "htmJson_flood"}}
+<!-- #*inline "htmJson_flood" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}IotNodeJson_flood">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>flood</label>
+													<label for="{{classApiMethodMethod}}_json_flood">flood</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputJson_flood" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputJson_flood" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -1712,25 +2073,22 @@
 {{/inline}}
 
 {{#*inline "htmJson_alarmFlood"}}
+<!-- #*inline "htmJson_alarmFlood" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}IotNodeJson_alarmFlood">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>alarm flood</label>
+													<label for="{{classApiMethodMethod}}_json_alarmFlood">alarm flood</label>
 												</div>
-												<div class="w3-cell-row  ">
+												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputJson_alarmFlood" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputJson_alarmFlood" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -1741,25 +2099,22 @@
 {{/inline}}
 
 {{#*inline "htmJson_lux2"}}
+<!-- #*inline "htmJson_lux2" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}IotNodeJson_lux2">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>lux2</label>
+													<label for="{{classApiMethodMethod}}_json_lux2">lux2</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputJson_lux2" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputJson_lux2" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -1770,25 +2125,22 @@
 {{/inline}}
 
 {{#*inline "htmJson_illuminance"}}
+<!-- #*inline "htmJson_illuminance" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}IotNodeJson_illuminance">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>illuminance</label>
+													<label for="{{classApiMethodMethod}}_json_illuminance">illuminance</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputJson_illuminance" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputJson_illuminance" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -1799,25 +2151,22 @@
 {{/inline}}
 
 {{#*inline "htmJson_resistance0"}}
+<!-- #*inline "htmJson_resistance0" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}IotNodeJson_resistance0">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>resistance0</label>
+													<label for="{{classApiMethodMethod}}_json_resistance0">resistance0</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputJson_resistance0" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputJson_resistance0" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -1828,25 +2177,22 @@
 {{/inline}}
 
 {{#*inline "htmJson_resistance1"}}
+<!-- #*inline "htmJson_resistance1" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}IotNodeJson_resistance1">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>resistance1</label>
+													<label for="{{classApiMethodMethod}}_json_resistance1">resistance1</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputJson_resistance1" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputJson_resistance1" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -1857,25 +2203,22 @@
 {{/inline}}
 
 {{#*inline "htmJson_frequency"}}
+<!-- #*inline "htmJson_frequency" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}IotNodeJson_frequency">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>frequency</label>
+													<label for="{{classApiMethodMethod}}_json_frequency">frequency</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputJson_frequency" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputJson_frequency" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -1886,25 +2229,22 @@
 {{/inline}}
 
 {{#*inline "htmJson_devEui"}}
+<!-- #*inline "htmJson_devEui" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}IotNodeJson_devEui">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>extended unique identifier</label>
+													<label for="{{classApiMethodMethod}}_json_devEui">extended unique identifier</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputJson_devEui" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputJson_devEui" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -1915,25 +2255,22 @@
 {{/inline}}
 
 {{#*inline "htmJson_bandwidth"}}
+<!-- #*inline "htmJson_bandwidth" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}IotNodeJson_bandwidth">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>bandwidth</label>
+													<label for="{{classApiMethodMethod}}_json_bandwidth">bandwidth</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputJson_bandwidth" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputJson_bandwidth" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -1944,25 +2281,22 @@
 {{/inline}}
 
 {{#*inline "htmJson_dataRate"}}
+<!-- #*inline "htmJson_dataRate" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}IotNodeJson_dataRate">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>frequency</label>
+													<label for="{{classApiMethodMethod}}_json_dataRate">frequency</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputJson_dataRate" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputJson_dataRate" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -1973,25 +2307,22 @@
 {{/inline}}
 
 {{#*inline "htmJson_frameCount"}}
+<!-- #*inline "htmJson_frameCount" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}IotNodeJson_frameCount">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>frame count</label>
+													<label for="{{classApiMethodMethod}}_json_frameCount">frame count</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputJson_frameCount" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputJson_frameCount" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -2002,25 +2333,22 @@
 {{/inline}}
 
 {{#*inline "htmJson_maxPayload"}}
+<!-- #*inline "htmJson_maxPayload" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}IotNodeJson_maxPayload">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>max payload</label>
+													<label for="{{classApiMethodMethod}}_json_maxPayload">max payload</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputJson_maxPayload" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputJson_maxPayload" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -2031,25 +2359,22 @@
 {{/inline}}
 
 {{#*inline "htmJson_bitsPerSecond"}}
+<!-- #*inline "htmJson_bitsPerSecond" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}IotNodeJson_bitsPerSecond">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>bits per second</label>
+													<label for="{{classApiMethodMethod}}_json_bitsPerSecond">bits per second</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputJson_bitsPerSecond" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputJson_bitsPerSecond" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -2060,25 +2385,22 @@
 {{/inline}}
 
 {{#*inline "htmJson_batteryVoltage"}}
+<!-- #*inline "htmJson_batteryVoltage" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}IotNodeJson_batteryVoltage">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>battery voltage</label>
+													<label for="{{classApiMethodMethod}}_json_batteryVoltage">battery voltage</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputJson_batteryVoltage" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputJson_batteryVoltage" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -2089,25 +2411,22 @@
 {{/inline}}
 
 {{#*inline "htmJson_spreadingFactor"}}
+<!-- #*inline "htmJson_spreadingFactor" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}IotNodeJson_spreadingFactor">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>spreading factor</label>
+													<label for="{{classApiMethodMethod}}_json_spreadingFactor">spreading factor</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputJson_spreadingFactor" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputJson_spreadingFactor" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -2118,25 +2437,22 @@
 {{/inline}}
 
 {{#*inline "htmJson_dataRateAdaptive"}}
+<!-- #*inline "htmJson_dataRateAdaptive" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}IotNodeJson_dataRateAdaptive">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>adaptive data rate</label>
+													<label for="{{classApiMethodMethod}}_json_dataRateAdaptive">adaptive data rate</label>
 												</div>
-												<div class="w3-cell-row  ">
+												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputJson_dataRateAdaptive" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputJson_dataRateAdaptive" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -2147,25 +2463,22 @@
 {{/inline}}
 
 {{#*inline "htmJson_swversion"}}
+<!-- #*inline "htmJson_swversion" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}IotNodeJson_swversion">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>swversion</label>
+													<label for="{{classApiMethodMethod}}_json_swversion">swversion</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputJson_swversion" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputJson_swversion" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -2176,25 +2489,22 @@
 {{/inline}}
 
 {{#*inline "htmJson_batteryLevel"}}
+<!-- #*inline "htmJson_batteryLevel" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}IotNodeJson_batteryLevel">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>battery level</label>
+													<label for="{{classApiMethodMethod}}_json_batteryLevel">battery level</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputJson_batteryLevel" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputJson_batteryLevel" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -2205,25 +2515,22 @@
 {{/inline}}
 
 {{#*inline "htmJson_startUpCount"}}
+<!-- #*inline "htmJson_startUpCount" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}IotNodeJson_startUpCount">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>startup count</label>
+													<label for="{{classApiMethodMethod}}_json_startUpCount">startup count</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputJson_startUpCount" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputJson_startUpCount" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -2234,25 +2541,22 @@
 {{/inline}}
 
 {{#*inline "htmJson_watchdogCount"}}
+<!-- #*inline "htmJson_watchdogCount" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}IotNodeJson_watchdogCount">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>watchdog count</label>
+													<label for="{{classApiMethodMethod}}_json_watchdogCount">watchdog count</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputJson_watchdogCount" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputJson_watchdogCount" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -2263,25 +2567,22 @@
 {{/inline}}
 
 {{#*inline "htmJson_historySequence"}}
+<!-- #*inline "htmJson_historySequence" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}IotNodeJson_historySequence">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>history sequence</label>
+													<label for="{{classApiMethodMethod}}_json_historySequence">history sequence</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputJson_historySequence" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputJson_historySequence" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -2292,25 +2593,22 @@
 {{/inline}}
 
 {{#*inline "htmJson_versionFirmware"}}
+<!-- #*inline "htmJson_versionFirmware" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}IotNodeJson_versionFirmware">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>firmware version</label>
+													<label for="{{classApiMethodMethod}}_json_versionFirmware">firmware version</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputJson_versionFirmware" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputJson_versionFirmware" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -2321,25 +2619,22 @@
 {{/inline}}
 
 {{#*inline "htmJson_stackTxFailRebootCount"}}
+<!-- #*inline "htmJson_stackTxFailRebootCount" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}IotNodeJson_stackTxFailRebootCount">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>stack tx fail reboot count</label>
+													<label for="{{classApiMethodMethod}}_json_stackTxFailRebootCount">stack tx fail reboot count</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputJson_stackTxFailRebootCount" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputJson_stackTxFailRebootCount" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -2350,25 +2645,22 @@
 {{/inline}}
 
 {{#*inline "htmJson_historySequencePrevious"}}
+<!-- #*inline "htmJson_historySequencePrevious" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}IotNodeJson_historySequencePrevious">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>history sequence previous</label>
+													<label for="{{classApiMethodMethod}}_json_historySequencePrevious">history sequence previous</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputJson_historySequencePrevious" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputJson_historySequencePrevious" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -2379,25 +2671,22 @@
 {{/inline}}
 
 {{#*inline "htmJson_snr"}}
+<!-- #*inline "htmJson_snr" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}IotNodeJson_snr">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>signal-to-noise ratio</label>
+													<label for="{{classApiMethodMethod}}_json_snr">signal-to-noise ratio</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputJson_snr" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputJson_snr" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -2408,25 +2697,22 @@
 {{/inline}}
 
 {{#*inline "htmJson_rssi"}}
+<!-- #*inline "htmJson_rssi" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}IotNodeJson_rssi">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>received signal strength indicator</label>
+													<label for="{{classApiMethodMethod}}_json_rssi">received signal strength indicator</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputJson_rssi" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputJson_rssi" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 

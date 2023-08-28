@@ -612,24 +612,20 @@
 {{#*inline "htmPk"}}
 <!-- #*inline "htmPk" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}BaseModelPk">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-">
-													<label>primary key</label>
+													<label for="{{classApiMethodMethod}}_pk">primary key</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputPk" roleForWrite=roleForWrite roleForRead=roleForRead}}
-															</span>
-														</div>
+														{{> "inputPk" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -668,24 +664,20 @@
 {{#*inline "htmModified"}}
 <!-- #*inline "htmModified" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}BaseModelModified">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-">
-													<label>modified</label>
+													<label for="{{classApiMethodMethod}}_modified">modified</label>
 												</div>
-												<div class="w3-cell-row  ">
+												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputModified" roleForWrite=roleForWrite roleForRead=roleForRead}}
-															</span>
-														</div>
+														{{> "inputModified" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -698,24 +690,20 @@
 {{#*inline "htmObjectId"}}
 <!-- #*inline "htmObjectId" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}BaseModelObjectId">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-">
-													<label>ID</label>
+													<label for="{{classApiMethodMethod}}_objectId">ID</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputObjectId" roleForWrite=roleForWrite roleForRead=roleForRead}}
-															</span>
-														</div>
+														{{> "inputObjectId" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 

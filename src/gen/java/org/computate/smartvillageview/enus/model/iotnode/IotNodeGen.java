@@ -4583,7 +4583,7 @@ public abstract class IotNodeGen<DEV> extends BaseResult {
 	public static final String DISPLAY_NAME_nodeName = "node name";
 	public static final String DISPLAY_NAME_nodeType = "node type";
 	public static final String DISPLAY_NAME_nodeId = "node ID";
-	public static final String DISPLAY_NAME_location = "location";
+	public static final String DISPLAY_NAME_location = "map location";
 	public static final String DISPLAY_NAME_json_moisture = "moisture";
 	public static final String DISPLAY_NAME_json_moisture0 = "moisture0";
 	public static final String DISPLAY_NAME_json_moisture1 = "moisture1";

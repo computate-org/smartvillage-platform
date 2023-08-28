@@ -93,7 +93,7 @@ public class IotNodeStep extends IotNodeStepGen<BaseResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * DisplayName: location
+	 * DisplayName: map location
 	 * HtmRow: 4
 	 * HtmCell: 1
 	 * Facet: true

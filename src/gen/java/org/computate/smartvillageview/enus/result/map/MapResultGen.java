@@ -1349,7 +1349,7 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 	public static final String DISPLAY_NAME_dateTime = "Date and Time";
 	public static final String DISPLAY_NAME_x = "";
 	public static final String DISPLAY_NAME_y = "";
-	public static final String DISPLAY_NAME_location = "location";
+	public static final String DISPLAY_NAME_location = "map location";
 	public static final String DISPLAY_NAME_color = "color";
 	public static final String DISPLAY_NAME_step = "step";
 

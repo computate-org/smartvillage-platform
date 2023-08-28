@@ -4976,7 +4976,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 
 	public static final String DISPLAY_NAME_startDateTime = "Start date and Time";
 	public static final String DISPLAY_NAME_simulationName = "simulation name";
-	public static final String DISPLAY_NAME_location = "location";
+	public static final String DISPLAY_NAME_location = "map location";
 	public static final String DISPLAY_NAME_sumocfgPath = "sumocfg path";
 	public static final String DISPLAY_NAME_fcdFilePath = "Floating Car Data file path";
 	public static final String DISPLAY_NAME_netFilePath = "net file path";

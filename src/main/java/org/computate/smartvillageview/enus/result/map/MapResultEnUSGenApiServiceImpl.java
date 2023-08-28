@@ -123,7 +123,10 @@ public class MapResultEnUSGenApiServiceImpl extends BaseApiServiceImpl implement
 					)
 				));
 			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_MapResult")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+				if(
+						!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_MapResult")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						&& !Optional.ofNullable(Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_READ_REQUIRED + "_MapResult")).orElse(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_MapResult"))).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						) {
 					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 					eventHandler.handle(Future.succeededFuture(
 						new ServiceResponse(401, "UNAUTHORIZED",
@@ -276,7 +279,10 @@ public class MapResultEnUSGenApiServiceImpl extends BaseApiServiceImpl implement
 					)
 				));
 			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_MapResult")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+				if(
+						!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_MapResult")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						&& !Optional.ofNullable(Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_READ_REQUIRED + "_MapResult")).orElse(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_MapResult"))).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						) {
 					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 					eventHandler.handle(Future.succeededFuture(
 						new ServiceResponse(401, "UNAUTHORIZED",
@@ -372,7 +378,10 @@ public class MapResultEnUSGenApiServiceImpl extends BaseApiServiceImpl implement
 					)
 				));
 			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_MapResult")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+				if(
+						!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_MapResult")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						&& !Optional.ofNullable(Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_READ_REQUIRED + "_MapResult")).orElse(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_MapResult"))).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						) {
 					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 					eventHandler.handle(Future.succeededFuture(
 						new ServiceResponse(401, "UNAUTHORIZED",

@@ -91,7 +91,7 @@ public class MapResult extends MapResultGen<BaseResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * DisplayName: location
+	 * DisplayName: map location
 	 * HtmRow: 4
 	 * HtmCell: 2
 	 * Facet: true

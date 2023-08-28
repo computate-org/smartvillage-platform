@@ -123,7 +123,10 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 					)
 				));
 			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_IotNode")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+				if(
+						!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_IotNode")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						&& !Optional.ofNullable(Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_READ_REQUIRED + "_IotNode")).orElse(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_IotNode"))).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						) {
 					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 					eventHandler.handle(Future.succeededFuture(
 						new ServiceResponse(401, "UNAUTHORIZED",
@@ -276,7 +279,10 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 					)
 				));
 			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_IotNode")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+				if(
+						!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_IotNode")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						&& !Optional.ofNullable(Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_READ_REQUIRED + "_IotNode")).orElse(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_IotNode"))).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						) {
 					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 					eventHandler.handle(Future.succeededFuture(
 						new ServiceResponse(401, "UNAUTHORIZED",
@@ -368,7 +374,10 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 					)
 				));
 			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_IotNode")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+				if(
+						!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_IotNode")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						|| !Optional.ofNullable(Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_READ_REQUIRED + "_IotNode")).orElse(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_IotNode"))).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						) {
 					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 					eventHandler.handle(Future.succeededFuture(
 						new ServiceResponse(401, "UNAUTHORIZED",
@@ -604,7 +613,10 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 					)
 				));
 			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_IotNode")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+				if(
+						!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_IotNode")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						|| !Optional.ofNullable(Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_READ_REQUIRED + "_IotNode")).orElse(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_IotNode"))).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						) {
 					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 					eventHandler.handle(Future.succeededFuture(
 						new ServiceResponse(401, "UNAUTHORIZED",
@@ -785,7 +797,10 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 					)
 				));
 			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_IotNode")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+				if(
+						!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_IotNode")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						|| !Optional.ofNullable(Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_READ_REQUIRED + "_IotNode")).orElse(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_IotNode"))).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						) {
 					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 					eventHandler.handle(Future.succeededFuture(
 						new ServiceResponse(401, "UNAUTHORIZED",
@@ -799,24 +814,19 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 					));
 				} else {
 					try {
-						try {
-							ApiRequest apiRequest = new ApiRequest();
-							JsonArray jsonArray = Optional.ofNullable(siteRequest.getJsonObject()).map(o -> o.getJsonArray("list")).orElse(new JsonArray());
-							apiRequest.setRows(Long.valueOf(jsonArray.size()));
-							apiRequest.setNumFound(Long.valueOf(jsonArray.size()));
-							apiRequest.setNumPATCH(0L);
-							apiRequest.initDeepApiRequest(siteRequest);
-							siteRequest.setApiRequest_(apiRequest);
-							eventBus.publish("websocketIotNode", JsonObject.mapFrom(apiRequest).toString());
-							varsIotNode(siteRequest).onSuccess(d -> {
-								listPUTImportIotNode(apiRequest, siteRequest).onSuccess(e -> {
-									response200PUTImportIotNode(siteRequest).onSuccess(response -> {
-										LOG.debug(String.format("putimportIotNode succeeded. "));
-										eventHandler.handle(Future.succeededFuture(response));
-									}).onFailure(ex -> {
-										LOG.error(String.format("putimportIotNode failed. "), ex);
-										error(siteRequest, eventHandler, ex);
-									});
+						ApiRequest apiRequest = new ApiRequest();
+						JsonArray jsonArray = Optional.ofNullable(siteRequest.getJsonObject()).map(o -> o.getJsonArray("list")).orElse(new JsonArray());
+						apiRequest.setRows(Long.valueOf(jsonArray.size()));
+						apiRequest.setNumFound(Long.valueOf(jsonArray.size()));
+						apiRequest.setNumPATCH(0L);
+						apiRequest.initDeepApiRequest(siteRequest);
+						siteRequest.setApiRequest_(apiRequest);
+						eventBus.publish("websocketIotNode", JsonObject.mapFrom(apiRequest).toString());
+						varsIotNode(siteRequest).onSuccess(d -> {
+							listPUTImportIotNode(apiRequest, siteRequest).onSuccess(e -> {
+								response200PUTImportIotNode(siteRequest).onSuccess(response -> {
+									LOG.debug(String.format("putimportIotNode succeeded. "));
+									eventHandler.handle(Future.succeededFuture(response));
 								}).onFailure(ex -> {
 									LOG.error(String.format("putimportIotNode failed. "), ex);
 									error(siteRequest, eventHandler, ex);
@@ -825,10 +835,10 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 								LOG.error(String.format("putimportIotNode failed. "), ex);
 								error(siteRequest, eventHandler, ex);
 							});
-						} catch(Exception ex) {
+						}).onFailure(ex -> {
 							LOG.error(String.format("putimportIotNode failed. "), ex);
 							error(siteRequest, eventHandler, ex);
-						}
+						});
 					} catch(Exception ex) {
 						LOG.error(String.format("putimportIotNode failed. "), ex);
 						error(null, eventHandler, ex);
@@ -919,7 +929,8 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 				apiRequest.setNumPATCH(0L);
 				apiRequest.initDeepApiRequest(siteRequest);
 				siteRequest.setApiRequest_(apiRequest);
-				body.put("inheritPk", body.getValue("id"));
+				String inheritPk = Optional.ofNullable(body.getString(IotNode.VAR_id)).orElse(body.getString(IotNode.VAR_id));
+				body.put("inheritPk", inheritPk);
 				body.put("inheritPk", body.getValue("id"));
 				if(Optional.ofNullable(serviceRequest.getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getJsonArray("var")).orElse(new JsonArray()).stream().filter(s -> "refresh:false".equals(s)).count() > 0L) {
 					siteRequest.getRequestVars().put( "refresh", "false" );
@@ -931,7 +942,7 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 				searchList.setC(IotNode.class);
 				searchList.fq("deleted_docvalues_boolean:false");
 				searchList.fq("archived_docvalues_boolean:false");
-				searchList.fq("inheritPk_docvalues_string:" + SearchTool.escapeQueryChars(body.getString(IotNode.VAR_id)));
+				searchList.fq("inheritPk_docvalues_string:" + SearchTool.escapeQueryChars(inheritPk));
 				searchList.promiseDeepForClass(siteRequest).onSuccess(a -> {
 					try {
 						if(searchList.size() >= 1) {
@@ -1071,7 +1082,10 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 					)
 				));
 			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_IotNode")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+				if(
+						!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_IotNode")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						&& !Optional.ofNullable(Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_READ_REQUIRED + "_IotNode")).orElse(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_IotNode"))).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						) {
 					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 					eventHandler.handle(Future.succeededFuture(
 						new ServiceResponse(401, "UNAUTHORIZED",

@@ -387,60 +387,105 @@
 				<div class="w3-card-4 ">
 					<div class="" id="searchpageMapResultFormValues">
 						<div id="searchpageMapResultForm">
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmCreated" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmCreated" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmCreated" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmModified" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmCreated" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmModified" roleRequired="false"}}
+{{> "htmCreated" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmObjectId" roleRequired="true"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmModified" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmObjectId" roleRequired="false"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmModified" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmModified" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmObjectId" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmObjectId" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmObjectId" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmArchived" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmArchived" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmArchived" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmDeleted" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmArchived" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmDeleted" roleRequired="false"}}
+{{> "htmArchived" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmDeleted" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmDeleted" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmDeleted" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmTime" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmTime" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmTime" roleRequired="false"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmTime" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmTime" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmDateTime" roleRequired="true"}}
-{{else}}
-{{> "htmDateTime" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmStep" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmDateTime" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmStep" roleRequired="false"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmDateTime" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmDateTime" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmLocation" roleRequired="true"}}
-{{else}}
-{{> "htmLocation" roleRequired="false"}}
 {{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmColor" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmStep" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmColor" roleRequired="false"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmStep" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmStep" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmLocation" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmLocation" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmLocation" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmColor" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmColor" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmColor" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 							</div>
 						</div>
@@ -458,7 +503,7 @@
 						<span title="Pivot" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-shaded-spruce " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-2017-shaded-spruce'); $(this).addClass('w3-black'); $(this).removeClass('w3-2017-shaded-spruce'); "><i class="fad fa-table-pivot hover-box-shadow w3-xlarge "></i> Pivot</span>
 						<span title="FieldList" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-shaded-spruce " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleFieldList').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-2017-shaded-spruce'); $(this).addClass('w3-black'); $(this).removeClass('w3-2017-shaded-spruce'); "><i class="fad fa-list-ul hover-box-shadow w3-xlarge "></i> FieldList</span>
 						<span title="Stats" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-shaded-spruce " onclick="$('.siteSidebarToggleFieldList').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleStats').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-2017-shaded-spruce'); $(this).addClass('w3-black'); $(this).removeClass('w3-2017-shaded-spruce'); "><i class="fad fa-chart-candlestick hover-box-shadow w3-xlarge "></i> Stats</span>
-						<a title="API" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-shaded-spruce " href="{{ apiUri }}{{ queryStr }}"><i class="fad fa-brackets-curly hover-box-shadow w3-xlarge "></i> API</a>
+						<a title="API" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-shaded-spruce " href="{{ apiUri }}{{#if pk }}/{{ pk }}{{else}}{{#if id }}/{{ id }}{{else}}{{ queryStr }}{{/if}}{{/if}}"><i class="fad fa-brackets-curly hover-box-shadow w3-xlarge "></i> API</a>
 					</div>
 					<div class=" ">
 						<div class="siteSidebarToggle siteSidebarToggleSearch w3-dropdown-content min-width-300px w3-white w3-border w3-border-2017-shaded-spruce " style="display: none; ">
@@ -635,7 +680,7 @@
 {{#block "htmSuggested"}}{{/block}}
 {{/inline}}
 {{#*inline "htmSuggestedMapResultPage"}}
-			{{#ifContainsAnyRoles roles roleRequired}}
+			{{#ifContainsAnyRoles roles roleForWrite}}
 					<div class="">
 						<button id="refreshAllMapResultGenPage{{id}}" class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce "
 							onclick="patch{{classSimpleName}}Vals([], {}, function() { addGlow($('#refreshAllMapResultGenPage{{id}}')); }, function() { addError($('#refreshAllMapResultGenPage{{id}}')); }); "
@@ -687,31 +732,19 @@
 {{/inline}}
 {{> BaseResultPage baseResult_=mapResult_}}
 
-{{#*inline "htmTimeStepId"}}
+{{#*inline "htmCreated"}}
+<!-- #*inline "htmCreated" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}MapResultTimeStepId">
+										<div id="suggest{{classApiMethodMethod}}MapResultCreated">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_timeStepId">Time Step</label>
+													<label for="{{classApiMethodMethod}}_created">created</label>
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputTimeStepId" roleRequired=roleRequired}}
+														{{> "inputCreated" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_timeStepId')); $('#{{classApiMethodMethod}}_timeStepId').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#MapResultForm :input[name=id]').val() }], 'setTimeStepId', null, function() { addGlow($('#{{classApiMethodMethod}}_timeStepId')); }, function() { addError($('#{{classApiMethodMethod}}_timeStepId')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -719,44 +752,232 @@
 								</div>
 {{/inline}}
 
-{{#*inline "inputTimeStepId"}}
-		{{#eq roleRequired "true"}}
+{{#*inline "inputCreated"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varMapResult{{id}}Created " title="{{formatZonedDateTime mapResult_.created 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime mapResult_.created 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmModified"}}
+<!-- #*inline "htmModified" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}MapResultModified">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_modified">modified</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputModified" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputModified"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varMapResult{{id}}Modified " title="{{formatZonedDateTime mapResult_.modified 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime mapResult_.modified 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmObjectId"}}
+<!-- #*inline "htmObjectId" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}MapResultObjectId">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_objectId">ID</label>
+												</div>
+											<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputObjectId" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputObjectId"}}
+		{{#eq roleForWriteBool "true"}}
 														<input
 															type="text"
-															placeholder="Time Step"
-															title="The time step ID. "
-															id="{{classApiMethodMethod}}_timeStepId"
+															placeholder="ID"
+															title="A URL friendly unique ID for this object"															id="{{classApiMethodMethod}}_objectId"
 	{{#eq "Page" classApiMethodMethod}}
-																class="setTimeStepId classMapResult inputMapResult{{id}}TimeStepId w3-input w3-border "
-																name="setTimeStepId"
+																class="setObjectId classMapResult inputMapResult{{id}}ObjectId w3-input w3-border "
+																name="setObjectId"
 	{{else}}
 		{{#eq "PATCH" classApiMethodMethod}}
-																class="setTimeStepId classMapResult inputMapResult{{id}}TimeStepId w3-input w3-border "
-																name="setTimeStepId"
+																class="setObjectId classMapResult inputMapResult{{id}}ObjectId w3-input w3-border "
+																name="setObjectId"
 		{{else}}
-																class="valueTimeStepId w3-input w3-border classMapResult inputMapResult{{id}}TimeStepId w3-input w3-border "
-																name="timeStepId"
+																class="valueObjectId w3-input w3-border classMapResult inputMapResult{{id}}ObjectId w3-input w3-border "
+																name="objectId"
 		{{/eq}}
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setTimeStepId', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_timeStepId')); }, function() { addError($('#{{classApiMethodMethod}}_timeStepId')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setObjectId', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_objectId')); }, function() { addError($('#{{classApiMethodMethod}}_objectId')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
-															value="{{mapResult_.timeStepId}}"
+															value="{{mapResult_.objectId}}"
 	{{/eq}}
 														/>
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varMapResult{{id}}TimeStepId ">{{mapResult_.timeStepId}}</span>
+															<span class="varMapResult{{id}}ObjectId ">{{mapResult_.objectId}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varMapResult{{id}}TimeStepId ">{{mapResult_.timeStepId}}</span>
+														<span class="varMapResult{{id}}ObjectId ">{{mapResult_.objectId}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmArchived"}}
+<!-- #*inline "htmArchived" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}MapResultArchived">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_archived">archived</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputArchived" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputArchived"}}
+		{{#eq roleForWriteBool "true"}}
+	{{#eq 'Page' classApiMethodMethod}}
+															<input
+																type="checkbox"
+																id="{{classApiMethodMethod}}_archived"
+																value="true"
+	{{else}}
+														<select
+															id="{{classApiMethodMethod}}_archived"
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+															class="classMapResult inputMapResult{{id}}Archived w3-input w3-border "
+															name="setArchived"
+	{{else}}
+		{{#eq 'Page' classApiMethodMethod}}
+																class="classMapResult inputMapResult{{id}}Archived w3-input w3-border "
+																name="setArchived"
+		{{else}}
+																class="setArchived valueArchived classMapResult inputMapResult{{id}}Archived w3-input w3-border "
+																name="setArchived"
+		{{/eq}}
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+															onchange="var confirmResponse = confirm('Are you sure you want to archive that?'); if(confirmResponse) { patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setArchived', $(this).prop('checked'), function() { addGlow($('#{{classApiMethodMethod}}_archived')); }, function() { addError($('#{{classApiMethodMethod}}_archived')); }); }"
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+		{{#if mapResult_.archived}}
+																checked="checked"
+		{{/if}}
+																/>
+	{{else}}
+															>
+															<option value="" selected="selected"></option>
+															<option value="true">true</option>
+															<option value="false">false</option>
+														</select>
+	{{/eq}}
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varMapResult{{id}}Archived ">{{mapResult_.archived}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varMapResult{{id}}Archived ">{{mapResult_.archived}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmDeleted"}}
+<!-- #*inline "htmDeleted" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}MapResultDeleted">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_deleted">deleted</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputDeleted" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputDeleted"}}
+		{{#eq roleForWriteBool "true"}}
+	{{#eq 'Page' classApiMethodMethod}}
+															<input
+																type="checkbox"
+																id="{{classApiMethodMethod}}_deleted"
+																value="true"
+	{{else}}
+														<select
+															id="{{classApiMethodMethod}}_deleted"
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+															class="classMapResult inputMapResult{{id}}Deleted w3-input w3-border "
+															name="setDeleted"
+	{{else}}
+		{{#eq 'Page' classApiMethodMethod}}
+																class="classMapResult inputMapResult{{id}}Deleted w3-input w3-border "
+																name="setDeleted"
+		{{else}}
+																class="setDeleted valueDeleted classMapResult inputMapResult{{id}}Deleted w3-input w3-border "
+																name="setDeleted"
+		{{/eq}}
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+															onchange="var confirmResponse = confirm('Are you sure you want to delete that?'); if(confirmResponse) { patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setDeleted', $(this).prop('checked'), function() { addGlow($('#{{classApiMethodMethod}}_deleted')); }, function() { addError($('#{{classApiMethodMethod}}_deleted')); }); }"
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+		{{#if mapResult_.deleted}}
+																checked="checked"
+		{{/if}}
+																/>
+	{{else}}
+															>
+															<option value="" selected="selected"></option>
+															<option value="true">true</option>
+															<option value="false">false</option>
+														</select>
+	{{/eq}}
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varMapResult{{id}}Deleted ">{{mapResult_.deleted}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varMapResult{{id}}Deleted ">{{mapResult_.deleted}}</span>
 		{{/eq}}
 {{/inline}}
 
 {{#*inline "htmTime"}}
+<!-- #*inline "htmTime" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									<div class="w3-padding ">
 										<div id="suggest{{classApiMethodMethod}}MapResultTime">
@@ -764,23 +985,10 @@
 												<div class="w3-cell-row w3-2017-shaded-spruce">
 													<label for="{{classApiMethodMethod}}_time">Time in seconds</label>
 												</div>
-												<div class="w3-cell-row w3-padding ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputTime" roleRequired=roleRequired}}
+														{{> "inputTime" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_time')); $('#{{classApiMethodMethod}}_time').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#MapResultForm :input[name=id]').val() }], 'setTime', null, function() { addGlow($('#{{classApiMethodMethod}}_time')); }, function() { addError($('#{{classApiMethodMethod}}_time')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -789,12 +997,11 @@
 {{/inline}}
 
 {{#*inline "inputTime"}}
-		{{#eq roleRequired "true"}}
+		{{#eq roleForWriteBool "true"}}
 														<input
 															type="text"
 															placeholder="Time in seconds"
-															title="The time in seconds. "
-															id="{{classApiMethodMethod}}_time"
+															title="The time in seconds. "															id="{{classApiMethodMethod}}_time"
 	{{#eq "Page" classApiMethodMethod}}
 																class="setTime classMapResult inputMapResult{{id}}Time w3-input w3-border "
 																name="setTime"
@@ -826,6 +1033,7 @@
 {{/inline}}
 
 {{#*inline "htmDateTime"}}
+<!-- #*inline "htmDateTime" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									<div class="w3-padding ">
 										<div id="suggest{{classApiMethodMethod}}MapResultDateTime">
@@ -835,21 +1043,8 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputDateTime" roleRequired=roleRequired}}
+														{{> "inputDateTime" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_dateTime')); $('#{{classApiMethodMethod}}_dateTime').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#MapResultForm :input[name=id]').val() }], 'setDateTime', null, function() { addGlow($('#{{classApiMethodMethod}}_dateTime')); }, function() { addError($('#{{classApiMethodMethod}}_dateTime')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -858,7 +1053,7 @@
 {{/inline}}
 
 {{#*inline "inputDateTime"}}
-		{{#eq roleRequired "true"}}
+		{{#eq roleForWriteBool "true"}}
 														<input
 																type="text"
 																class="w3-input w3-border datetimepicker setDateTime classMapResult inputMapResult{{id}}DateTime w3-input w3-border "
@@ -881,271 +1076,8 @@
 		{{/eq}}
 {{/inline}}
 
-{{#*inline "htmX"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}MapResultX">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputX" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_x')); $('#{{classApiMethodMethod}}_x').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#MapResultForm :input[name=id]').val() }], 'setX', null, function() { addGlow($('#{{classApiMethodMethod}}_x')); }, function() { addError($('#{{classApiMethodMethod}}_x')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputX"}}
-		{{#eq roleRequired "true"}}
-														<input
-															type="text"
-															id="{{classApiMethodMethod}}_x"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setX classMapResult inputMapResult{{id}}X w3-input w3-border "
-																name="setX"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setX classMapResult inputMapResult{{id}}X w3-input w3-border "
-																name="setX"
-		{{else}}
-																class="valueX w3-input w3-border classMapResult inputMapResult{{id}}X w3-input w3-border "
-																name="x"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setX', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_x')); }, function() { addError($('#{{classApiMethodMethod}}_x')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{mapResult_.x}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varMapResult{{id}}X ">{{mapResult_.x}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varMapResult{{id}}X ">{{mapResult_.x}}</span>
-		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmY"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}MapResultY">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputY" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_y')); $('#{{classApiMethodMethod}}_y').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#MapResultForm :input[name=id]').val() }], 'setY', null, function() { addGlow($('#{{classApiMethodMethod}}_y')); }, function() { addError($('#{{classApiMethodMethod}}_y')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputY"}}
-		{{#eq roleRequired "true"}}
-														<input
-															type="text"
-															id="{{classApiMethodMethod}}_y"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setY classMapResult inputMapResult{{id}}Y w3-input w3-border "
-																name="setY"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setY classMapResult inputMapResult{{id}}Y w3-input w3-border "
-																name="setY"
-		{{else}}
-																class="valueY w3-input w3-border classMapResult inputMapResult{{id}}Y w3-input w3-border "
-																name="y"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setY', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_y')); }, function() { addError($('#{{classApiMethodMethod}}_y')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{mapResult_.y}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varMapResult{{id}}Y ">{{mapResult_.y}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varMapResult{{id}}Y ">{{mapResult_.y}}</span>
-		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmLocation"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}MapResultLocation">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_location">location</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputLocation" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_location')); $('#{{classApiMethodMethod}}_location').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#MapResultForm :input[name=id]').val() }], 'setLocation', null, function() { addGlow($('#{{classApiMethodMethod}}_location')); }, function() { addError($('#{{classApiMethodMethod}}_location')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputLocation"}}
-		{{#eq roleRequired "true"}}
-														<input
-															type="text"
-															placeholder="location"
-															id="{{classApiMethodMethod}}_location"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setLocation classMapResult inputMapResult{{id}}Location w3-input w3-border "
-																name="setLocation"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setLocation classMapResult inputMapResult{{id}}Location w3-input w3-border "
-																name="setLocation"
-		{{else}}
-																class="valueLocation w3-input w3-border classMapResult inputMapResult{{id}}Location w3-input w3-border "
-																name="location"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setLocation', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_location')); }, function() { addError($('#{{classApiMethodMethod}}_location')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{mapResult_.location}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varMapResult{{id}}Location ">{{mapResult_.location}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varMapResult{{id}}Location ">{{mapResult_.location}}</span>
-		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmColor"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}MapResultColor">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_color">color</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputColor" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_color')); $('#{{classApiMethodMethod}}_color').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#MapResultForm :input[name=id]').val() }], 'setColor', null, function() { addGlow($('#{{classApiMethodMethod}}_color')); }, function() { addError($('#{{classApiMethodMethod}}_color')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputColor"}}
-		{{#eq roleRequired "true"}}
-														<input
-															type="text"
-															placeholder="color"
-															id="{{classApiMethodMethod}}_color"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setColor classMapResult inputMapResult{{id}}Color w3-input w3-border "
-																name="setColor"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setColor classMapResult inputMapResult{{id}}Color w3-input w3-border "
-																name="setColor"
-		{{else}}
-																class="valueColor w3-input w3-border classMapResult inputMapResult{{id}}Color w3-input w3-border "
-																name="color"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setColor', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_color')); }, function() { addError($('#{{classApiMethodMethod}}_color')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{mapResult_.color}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varMapResult{{id}}Color ">{{mapResult_.color}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varMapResult{{id}}Color ">{{mapResult_.color}}</span>
-		{{/eq}}
-{{/inline}}
-
 {{#*inline "htmStep"}}
+<!-- #*inline "htmStep" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									<div class="w3-padding ">
 										<div id="suggest{{classApiMethodMethod}}MapResultStep">
@@ -1155,7 +1087,7 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputStep" roleRequired=roleRequired}}
+														{{> "inputStep" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
@@ -1165,7 +1097,7 @@
 {{/inline}}
 
 {{#*inline "inputStep"}}
-		{{#eq roleRequired "true"}}
+		{{#eq roleForWriteBool "true"}}
 	{{#eq 'Page' classApiMethodMethod}}
 															<input
 																type="checkbox"
@@ -1209,5 +1141,117 @@
 			{{/ifContainsKeys}}
 		{{else}}
 														<span class="varMapResult{{id}}Step ">{{mapResult_.step}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmLocation"}}
+<!-- #*inline "htmLocation" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}MapResultLocation">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_location">map location</label>
+												</div>
+											<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputLocation" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputLocation"}}
+		{{#eq roleForWriteBool "true"}}
+														<input
+															type="text"
+															placeholder="map location"
+															id="{{classApiMethodMethod}}_location"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setLocation classMapResult inputMapResult{{id}}Location w3-input w3-border "
+																name="setLocation"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setLocation classMapResult inputMapResult{{id}}Location w3-input w3-border "
+																name="setLocation"
+		{{else}}
+																class="valueLocation w3-input w3-border classMapResult inputMapResult{{id}}Location w3-input w3-border "
+																name="location"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setLocation', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_location')); }, function() { addError($('#{{classApiMethodMethod}}_location')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{mapResult_.location}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varMapResult{{id}}Location ">{{mapResult_.location}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varMapResult{{id}}Location ">{{mapResult_.location}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmColor"}}
+<!-- #*inline "htmColor" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}MapResultColor">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_color">color</label>
+												</div>
+											<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputColor" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputColor"}}
+		{{#eq roleForWriteBool "true"}}
+														<input
+															type="text"
+															placeholder="color"
+															id="{{classApiMethodMethod}}_color"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setColor classMapResult inputMapResult{{id}}Color w3-input w3-border "
+																name="setColor"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setColor classMapResult inputMapResult{{id}}Color w3-input w3-border "
+																name="setColor"
+		{{else}}
+																class="valueColor w3-input w3-border classMapResult inputMapResult{{id}}Color w3-input w3-border "
+																name="color"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setColor', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_color')); }, function() { addError($('#{{classApiMethodMethod}}_color')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{mapResult_.color}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varMapResult{{id}}Color ">{{mapResult_.color}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varMapResult{{id}}Color ">{{mapResult_.color}}</span>
 		{{/eq}}
 {{/inline}}
