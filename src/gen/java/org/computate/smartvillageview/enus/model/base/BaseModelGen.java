@@ -2362,6 +2362,8 @@ public abstract class BaseModelGen<DEV> extends Object {
 		vars.add(VAR_pk);
 		vars.add(VAR_created);
 		vars.add(VAR_modified);
+		vars.add(VAR_archived);
+		vars.add(VAR_deleted);
 		vars.add(VAR_classSimpleName);
 		return vars;
 	}

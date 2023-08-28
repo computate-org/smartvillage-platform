@@ -105,6 +105,7 @@ public class BaseModel extends BaseModelGen<Object> implements ComputateBaseMode
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
+	 * Facet: true
 	 * HtmRow: 2
 	 * HtmCell: 2
 	 * DisplayName.enUS: deleted
