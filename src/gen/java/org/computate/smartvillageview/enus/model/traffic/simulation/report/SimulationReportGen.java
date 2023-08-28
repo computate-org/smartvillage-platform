@@ -82,6 +82,9 @@ import org.computate.search.response.solr.SolrResponse;
  * ApiMethode: PUTImport
  * <p>This class contains a comment <b>"ApiMethod: PUTImport"</b>, which creates an API "PUTImport". 
  * </p>
+ * ApiMethode: PUTCopy
+ * <p>This class contains a comment <b>"ApiMethod: PUTCopy"</b>, which creates an API "PUTCopy". 
+ * </p>
  * ApiMethode: PATCHRunSimulation
  * <p>This class contains a comment <b>"ApiMethod: PATCHRunSimulation"</b>, which creates an API "PATCHRunSimulation". 
  * </p>
@@ -220,6 +223,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 	public static final String POST_enUS_ImageUri = "/png/api/simulation-report-999.png";
 	public static final String PUTImport_enUS_Uri = "/api/simulation-report-import";
 	public static final String PUTImport_enUS_ImageUri = "/png/api/simulation-report-import-999.png";
+	public static final String PUTCopy_enUS_Uri = "/api/simulation-report/copy";
+	public static final String PUTCopy_enUS_ImageUri = "/png/api/simulation-report/copy-999.png";
 	public static final String PATCHRunSimulation_enUS_Uri = "/api/run-simulation-report";
 	public static final String PATCHRunSimulation_enUS_ImageUri = "/png/api/run-simulation-report-999.png";
 	public static final String SearchPage_enUS_Uri = "/simulation-report";

@@ -1127,6 +1127,380 @@
 			</div>
 		</div>
 {{/inline}}
+{{#*inline "htmButtonSimulationReportPage_putcopySimulationReport"}}
+		<button
+			class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce "
+			onclick="$('#putcopySimulationReportModal').show(); "
+			>
+			<i class="fas fa-copy "></i>
+			Duplicate simulation reports
+		</button>
+{{/inline}}
+{{#*inline "htmFormButtonSimulationReportPage_putcopySimulationReport"}}
+						<button
+							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-2017-shaded-spruce "
+							onclick="putcopySimulationReport($('#putcopySimulationReportFormValues')); "
+							>Duplicate simulation reports</button>
+{{/inline}}
+{{#*inline "htmFormSimulationReportPage_putcopySimulationReport"}}
+		<div id="putcopySimulationReportModal" class="w3-modal ">
+			<div class="w3-modal-content ">
+				<div class="w3-card-4 ">
+					<header class="w3-container w3-2017-shaded-spruce">
+	{{#eq "Page" classApiMethodMethod}}
+						<span class="w3-button w3-display-topright " onclick="$('#putcopySimulationReportModal').hide(); ">×</span>
+	{{/eq}}
+						<h2 class="w3-padding ">Duplicate simulation reports</h2>
+					</header>
+					<div class="" id="putcopySimulationReportFormValues">
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmCreated" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmCreated" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmCreated" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
+							</div>
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmArchived" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmArchived" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmArchived" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmDeleted" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmDeleted" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmDeleted" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
+							</div>
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmReportName" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmReportName" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmReportName" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
+							</div>
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmSimulationKey" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmSimulationKey" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmSimulationKey" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmSmartTrafficLightKey" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmSmartTrafficLightKey" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmSmartTrafficLightKey" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
+							</div>
+							<!-- BooleanUtils.isTrue(entiteHtmLigneVerticale) -->
+							<div class="w3-padding HtmRow">
+								<table class="w3-table-all ">
+									<thead>
+										<tr>
+										<th class="w3-2017-shaded-spruce " colspan="3">
+											<span>Vehicle traffic demand</span>
+										</th>
+										</tr>
+									</thead>
+									<tbody>
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamAvgVehiclePerMinFromWestToEast" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamAvgVehiclePerMinFromWestToEast" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamAvgVehiclePerMinFromWestToEast" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamAvgVehiclePerMinFromSouthToNorth" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamAvgVehiclePerMinFromSouthToNorth" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamAvgVehiclePerMinFromSouthToNorth" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamVehicleDemandScalingFactor" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamVehicleDemandScalingFactor" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamVehicleDemandScalingFactor" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+										<!-- entiteHtmLigneVerticaleAncien != null && entiteHtmLigneVerticaleAncien -->
+									</tbody>
+								</table>
+							</div>
+							<!-- BooleanUtils.isTrue(entiteHtmLigneVerticale) -->
+							<div class="w3-padding HtmRow">
+								<table class="w3-table-all ">
+									<thead>
+										<tr>
+										<th class="w3-2017-shaded-spruce " colspan="3">
+											<span>Pedestrian traffic demand</span>
+										</th>
+										</tr>
+									</thead>
+									<tbody>
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamAvgPedestrianPerMinFromWestToEast" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamAvgPedestrianPerMinFromWestToEast" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamAvgPedestrianPerMinFromWestToEast" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamAvgPedestrianPerMinFromSouthToNorth" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamAvgPedestrianPerMinFromSouthToNorth" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamAvgPedestrianPerMinFromSouthToNorth" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamPedestrianDemandScalingFactor" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamPedestrianDemandScalingFactor" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamPedestrianDemandScalingFactor" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+										<!-- entiteHtmLigneVerticaleAncien != null && entiteHtmLigneVerticaleAncien -->
+									</tbody>
+								</table>
+							</div>
+							<!-- BooleanUtils.isTrue(entiteHtmLigneVerticale) -->
+							<div class="w3-padding HtmRow">
+								<table class="w3-table-all ">
+									<thead>
+										<tr>
+										<th class="w3-2017-shaded-spruce " colspan="3">
+											<span>Initial Traffic Light Control parameters</span>
+										</th>
+										</tr>
+									</thead>
+									<tbody>
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamMinGreenTimeSecWestEast" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamMinGreenTimeSecWestEast" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamMinGreenTimeSecWestEast" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamMaxGreenTimeSecWestEast" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamMaxGreenTimeSecWestEast" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamMaxGreenTimeSecWestEast" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamMinGreenTimeSecSouthNorth" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamMinGreenTimeSecSouthNorth" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamMinGreenTimeSecSouthNorth" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamMaxGreenTimeSecSouthNorth" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamMaxGreenTimeSecSouthNorth" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamMaxGreenTimeSecSouthNorth" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamPedestrianWaitThresholdSecNorthSouth" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamPedestrianWaitThresholdSecNorthSouth" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamPedestrianWaitThresholdSecNorthSouth" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamPedestrianWaitThresholdSecWestEast" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamPedestrianWaitThresholdSecWestEast" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamPedestrianWaitThresholdSecWestEast" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamVehicleQueueThresholdWestEast" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamVehicleQueueThresholdWestEast" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamVehicleQueueThresholdWestEast" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamVehicleQueueThresholdSouthNorth" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamVehicleQueueThresholdSouthNorth" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamVehicleQueueThresholdSouthNorth" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamPedestrianQueueThresholdNorthSouth" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamPedestrianQueueThresholdNorthSouth" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamPedestrianQueueThresholdNorthSouth" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamPedestrianQueueThresholdWestEast" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamPedestrianQueueThresholdWestEast" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamPedestrianQueueThresholdWestEast" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+										<!-- entiteHtmLigneVerticaleAncien != null && entiteHtmLigneVerticaleAncien -->
+									</tbody>
+								</table>
+							</div>
+							<!-- BooleanUtils.isTrue(entiteHtmLigneVerticale) -->
+							<div class="w3-padding HtmRow">
+								<table class="w3-table-all ">
+									<thead>
+										<tr>
+										<th class="w3-2017-shaded-spruce " colspan="3">
+											<span>Time and iterations</span>
+										</th>
+										</tr>
+									</thead>
+									<tbody>
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamStepSize" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamStepSize" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamStepSize" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamRunTime" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamRunTime" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamRunTime" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamItersPerPar" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamItersPerPar" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamItersPerPar" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamTotalIterNum" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamTotalIterNum" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamTotalIterNum" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+										<!-- entiteHtmLigneVerticaleAncien != null && entiteHtmLigneVerticaleAncien -->
+									</tbody>
+								</table>
+							</div>
+							<!-- BooleanUtils.isTrue(entiteHtmLigneVerticale) -->
+							<div class="w3-padding HtmRow">
+								<table class="w3-table-all ">
+									<thead>
+										<tr>
+										<th class="w3-2017-shaded-spruce " colspan="3">
+											<span>Report status and actions</span>
+										</th>
+										</tr>
+									</thead>
+									<tbody>
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmReportStatus" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmReportStatus" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmReportStatus" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmReportProgress" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmReportProgress" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmReportProgress" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+									</tbody>
+								</table>
+							</div>
+{{#block "htmFormButton_putcopySimulationReport"}}{{/block}}
+					</div>
+				</div>
+			</div>
+		</div>
+{{/inline}}
 {{#*inline "htmButtonSimulationReportPage_searchpageSimulationReport"}}
 {{/inline}}
 {{#*inline "htmFormButtonSimulationReportPage_searchpageSimulationReport"}}
@@ -1143,15 +1517,6 @@
 						<div id="searchpageSimulationReportForm">
 							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
 							<div class="w3-cell-row HtmRow">
-{{#ifContainsAnyRoles roles roleForWrite}}
-{{> "htmPk" roleForWriteBool="true" roleForReadBool="true"}}
-{{else}}
-{{#ifContainsAnyRoles roles roleForRead}}
-{{> "htmPk" roleForWriteBool="false" roleForReadBool="true"}}
-{{else}}
-{{> "htmPk" roleForWriteBool="false" roleForReadBool="false"}}
-{{/ifContainsAnyRoles}}
-{{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleForWrite}}
 {{> "htmCreated" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
@@ -1938,6 +2303,10 @@
 {{#block "htmButton_putimportSimulationReport"}}{{/block}}
 {{#block "htmForm_putimportSimulationReport"}}{{/block}}
 {{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles authRoleSuperAdmin}}
+{{#block "htmButton_putcopySimulationReport"}}{{/block}}
+{{#block "htmForm_putcopySimulationReport"}}{{/block}}
+{{/ifContainsAnyRoles}}
 {{#block "htmSuggested"}}{{/block}}
 {{/inline}}
 {{#*inline "htmSuggestedSimulationReportPage"}}
@@ -1992,32 +2361,6 @@
 			</div>
 {{/inline}}
 {{> BaseModelPage baseModel_=simulationReport_}}
-
-{{#*inline "htmPk"}}
-<!-- #*inline "htmPk" -->
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}SimulationReportPk">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_pk">primary key</label>
-												</div>
-											<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputPk" roleForWrite=roleForWrite roleForRead=roleForRead}}
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputPk"}}
-	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSimulationReport{{pk}}Pk ">{{simulationReport_.pk}}</span>
-	{{/eq}}
-{{/inline}}
 
 {{#*inline "htmCreated"}}
 <!-- #*inline "htmCreated" -->

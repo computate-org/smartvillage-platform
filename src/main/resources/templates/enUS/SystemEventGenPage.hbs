@@ -402,40 +402,69 @@
 					<div class="" id="postSystemEventFormValues">
 						<div id="postSystemEventForm">
 {{#block "htmFormButton_postSystemEvent"}}{{/block}}
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmObjectId" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmObjectId" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmObjectId" roleRequired="false"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmObjectId" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmObjectId" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmType" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmType" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmType" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmMessage" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmType" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmMessage" roleRequired="false"}}
+{{> "htmType" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmStatus" roleRequired="true"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmMessage" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmStatus" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmCompleted" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmMessage" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmCompleted" roleRequired="false"}}
+{{> "htmMessage" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmStatus" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmStatus" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmStatus" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmCompleted" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmCompleted" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmCompleted" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmPageImageUri" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmPageImageUri" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmPageImageUri" roleRequired="false"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmPageImageUri" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmPageImageUri" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 							</div>
 						</div>
@@ -471,57 +500,100 @@
 						<h2 class="w3-padding ">Modify system events</h2>
 					</header>
 					<div class="" id="patchSystemEventFormValues">
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmCreated" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmCreated" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmCreated" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmObjectId" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmCreated" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmObjectId" roleRequired="false"}}
+{{> "htmCreated" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmObjectId" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmObjectId" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmObjectId" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmArchived" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmArchived" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmArchived" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmDeleted" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmArchived" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmDeleted" roleRequired="false"}}
+{{> "htmArchived" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmDeleted" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmDeleted" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmDeleted" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmType" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmType" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmType" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmMessage" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmType" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmMessage" roleRequired="false"}}
+{{> "htmType" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmStatus" roleRequired="true"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmMessage" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmStatus" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmCompleted" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmMessage" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmCompleted" roleRequired="false"}}
+{{> "htmMessage" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmStatus" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmStatus" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmStatus" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmCompleted" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmCompleted" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmCompleted" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmPageImageUri" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmPageImageUri" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmPageImageUri" roleRequired="false"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmPageImageUri" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmPageImageUri" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 							</div>
 {{#block "htmFormButton_patchSystemEvent"}}{{/block}}
@@ -583,62 +655,109 @@
 				<div class="w3-card-4 ">
 					<div class="" id="searchpageSystemEventFormValues">
 						<div id="searchpageSystemEventForm">
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmModified" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmModified" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmModified" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmCreated" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmModified" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmCreated" roleRequired="false"}}
+{{> "htmModified" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmObjectId" roleRequired="true"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmCreated" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmObjectId" roleRequired="false"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmCreated" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmCreated" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmObjectId" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmObjectId" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmObjectId" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmArchived" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmArchived" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmArchived" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmDeleted" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmArchived" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmDeleted" roleRequired="false"}}
+{{> "htmArchived" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmDeleted" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmDeleted" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmDeleted" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmType" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmType" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmType" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmMessage" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmType" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmMessage" roleRequired="false"}}
+{{> "htmType" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmStatus" roleRequired="true"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmMessage" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmStatus" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmCompleted" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmMessage" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmCompleted" roleRequired="false"}}
+{{> "htmMessage" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmStatus" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmStatus" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmStatus" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmCompleted" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmCompleted" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmCompleted" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmPageImageUri" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmPageImageUri" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmPageImageUri" roleRequired="false"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmPageImageUri" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmPageImageUri" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 							</div>
 						</div>
@@ -656,7 +775,7 @@
 						<span title="Pivot" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-shaded-spruce " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-2017-shaded-spruce'); $(this).addClass('w3-black'); $(this).removeClass('w3-2017-shaded-spruce'); "><i class="fad fa-table-pivot hover-box-shadow w3-xlarge "></i> Pivot</span>
 						<span title="FieldList" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-shaded-spruce " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleFieldList').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-2017-shaded-spruce'); $(this).addClass('w3-black'); $(this).removeClass('w3-2017-shaded-spruce'); "><i class="fad fa-list-ul hover-box-shadow w3-xlarge "></i> FieldList</span>
 						<span title="Stats" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-shaded-spruce " onclick="$('.siteSidebarToggleFieldList').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleStats').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-2017-shaded-spruce'); $(this).addClass('w3-black'); $(this).removeClass('w3-2017-shaded-spruce'); "><i class="fad fa-chart-candlestick hover-box-shadow w3-xlarge "></i> Stats</span>
-						<a title="API" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-shaded-spruce " href="{{ apiUri }}{{ queryStr }}"><i class="fad fa-brackets-curly hover-box-shadow w3-xlarge "></i> API</a>
+						<a title="API" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-shaded-spruce " href="{{ apiUri }}{{#if pk }}/{{ pk }}{{else}}{{#if id }}/{{ id }}{{else}}{{ queryStr }}{{/if}}{{/if}}"><i class="fad fa-brackets-curly hover-box-shadow w3-xlarge "></i> API</a>
 					</div>
 					<div class=" ">
 						<div class="siteSidebarToggle siteSidebarToggleSearch w3-dropdown-content min-width-300px w3-white w3-border w3-border-2017-shaded-spruce " style="display: none; ">
@@ -893,7 +1012,7 @@
 {{#block "htmSuggested"}}{{/block}}
 {{/inline}}
 {{#*inline "htmSuggestedSystemEventPage"}}
-			{{#ifContainsAnyRoles roles roleRequired}}
+			{{#ifContainsAnyRoles roles roleForWrite}}
 					<div class="">
 						<button id="refreshAllSystemEventGenPage{{id}}" class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce "
 							onclick="patch{{classSimpleName}}Vals([], {}, function() { addGlow($('#refreshAllSystemEventGenPage{{id}}')); }, function() { addError($('#refreshAllSystemEventGenPage{{id}}')); }); "
@@ -945,31 +1064,19 @@
 {{/inline}}
 {{> PageLayout}}
 
-{{#*inline "htmType"}}
+{{#*inline "htmModified"}}
+<!-- #*inline "htmModified" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}SystemEventType">
+										<div id="suggest{{classApiMethodMethod}}SystemEventModified">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_type">type</label>
+													<label for="{{classApiMethodMethod}}_modified">modified</label>
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputType" roleRequired=roleRequired}}
+														{{> "inputModified" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_type')); $('#{{classApiMethodMethod}}_type').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#SystemEventForm :input[name=id]').val() }], 'setType', null, function() { addGlow($('#{{classApiMethodMethod}}_type')); }, function() { addError($('#{{classApiMethodMethod}}_type')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -977,303 +1084,14 @@
 								</div>
 {{/inline}}
 
-{{#*inline "inputType"}}
-		{{#eq roleRequired "true"}}
-														<input
-															type="text"
-															placeholder="type"
-															title="The system event type"
-															id="{{classApiMethodMethod}}_type"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setType classSystemEvent inputSystemEvent{{id}}Type w3-input w3-border "
-																name="setType"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setType classSystemEvent inputSystemEvent{{id}}Type w3-input w3-border "
-																name="setType"
-		{{else}}
-																class="valueType w3-input w3-border classSystemEvent inputSystemEvent{{id}}Type w3-input w3-border "
-																name="type"
-		{{/eq}}
+{{#*inline "inputModified"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varSystemEvent{{id}}Modified " title="{{formatZonedDateTime systemEvent_.modified 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime systemEvent_.modified 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
 	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setType', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_type')); }, function() { addError($('#{{classApiMethodMethod}}_type')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{systemEvent_.type}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varSystemEvent{{id}}Type ">{{systemEvent_.type}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varSystemEvent{{id}}Type ">{{systemEvent_.type}}</span>
-		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmMessage"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}SystemEventMessage">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_message">message</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputMessage" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_message')); $('#{{classApiMethodMethod}}_message').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#SystemEventForm :input[name=id]').val() }], 'setMessage', null, function() { addGlow($('#{{classApiMethodMethod}}_message')); }, function() { addError($('#{{classApiMethodMethod}}_message')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputMessage"}}
-		{{#eq roleRequired "true"}}
-														<input
-															type="text"
-															placeholder="message"
-															title="The system event message"
-															id="{{classApiMethodMethod}}_message"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setMessage classSystemEvent inputSystemEvent{{id}}Message w3-input w3-border "
-																name="setMessage"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setMessage classSystemEvent inputSystemEvent{{id}}Message w3-input w3-border "
-																name="setMessage"
-		{{else}}
-																class="valueMessage w3-input w3-border classSystemEvent inputSystemEvent{{id}}Message w3-input w3-border "
-																name="message"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setMessage', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_message')); }, function() { addError($('#{{classApiMethodMethod}}_message')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{systemEvent_.message}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varSystemEvent{{id}}Message ">{{systemEvent_.message}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varSystemEvent{{id}}Message ">{{systemEvent_.message}}</span>
-		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmStatus"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}SystemEventStatus">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_status">message</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputStatus" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_status')); $('#{{classApiMethodMethod}}_status').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#SystemEventForm :input[name=id]').val() }], 'setStatus', null, function() { addGlow($('#{{classApiMethodMethod}}_status')); }, function() { addError($('#{{classApiMethodMethod}}_status')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputStatus"}}
-		{{#eq roleRequired "true"}}
-														<input
-															type="text"
-															placeholder="message"
-															title="The system event message"
-															id="{{classApiMethodMethod}}_status"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setStatus classSystemEvent inputSystemEvent{{id}}Status w3-input w3-border "
-																name="setStatus"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setStatus classSystemEvent inputSystemEvent{{id}}Status w3-input w3-border "
-																name="setStatus"
-		{{else}}
-																class="valueStatus w3-input w3-border classSystemEvent inputSystemEvent{{id}}Status w3-input w3-border "
-																name="status"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setStatus', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_status')); }, function() { addError($('#{{classApiMethodMethod}}_status')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{systemEvent_.status}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varSystemEvent{{id}}Status ">{{systemEvent_.status}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varSystemEvent{{id}}Status ">{{systemEvent_.status}}</span>
-		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmCompleted"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}SystemEventCompleted">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_completed">completed</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputCompleted" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_completed')); $('#{{classApiMethodMethod}}_completed').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#SystemEventForm :input[name=id]').val() }], 'setCompleted', null, function() { addGlow($('#{{classApiMethodMethod}}_completed')); }, function() { addError($('#{{classApiMethodMethod}}_completed')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputCompleted"}}
-		{{#eq roleRequired "true"}}
-														<input
-																type="text"
-																class="w3-input w3-border datetimepicker setCompleted classSystemEvent inputSystemEvent{{id}}Completed w3-input w3-border "
-																placeholder="MM/dd/yyyy h:mm a '['VV']'"
-																data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
-																id="{{classApiMethodMethod}}_completed"
-																title="An optional time this event completed (MM/dd/yyyy h:mm a '['VV']')"
-																value="{{#if systemEvent_.completed}}{{formatZonedDateTime systemEvent_.completed "MM/dd/yyyy h:mm a '['VV']'" defaultLocaleId defaultZoneId}}{{/if}}"
-														{{#eq 'Page' classApiMethodMethod}}
-															onclick="removeGlow($(this)); ";
-															onchange="var timeZone = this.value.split('[').pop().split(']')[0]; var t1 = moment(this.value.split('[')[0].trim(), 'MM/DD/YYYY h:mm a'); var t2 = moment.tz(this.value.split('[')[0].trim(), 'MM/DD/YYYY h:mm a', timeZone); var t3 = new Date(t1._d); t3.setTime(t1.toDate().getTime() + t2.toDate().getTime() - t1.toDate().getTime()); var t = moment(t3); if(t) { var s = t.tz(timeZone).format('YYYY-MM-DDTHH:mm:ss.000') + '[' + timeZone + ']'; patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setCompleted', s, function() { addGlow($('#{{classApiMethodMethod}}_completed')); }, function() { addError($('#{{classApiMethodMethod}}_completed')); }); } "
-														{{/eq}}
-														/>
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varSystemEvent{{id}}Completed ">{{systemEvent_.completed}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varSystemEvent{{id}}Completed ">{{systemEvent_.completed}}</span>
-		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmInheritPk"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}SystemEventInheritPk">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputInheritPk" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_inheritPk')); $('#{{classApiMethodMethod}}_inheritPk').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#SystemEventForm :input[name=id]').val() }], 'setInheritPk', null, function() { addGlow($('#{{classApiMethodMethod}}_inheritPk')); }, function() { addError($('#{{classApiMethodMethod}}_inheritPk')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputInheritPk"}}
-		{{#eq roleRequired "true"}}
-														<input
-															type="text"
-															title="An optional inherited primary key from a legacy system for this object in the database"
-															id="{{classApiMethodMethod}}_inheritPk"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setInheritPk classSystemEvent inputSystemEvent{{id}}InheritPk w3-input w3-border "
-																name="setInheritPk"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setInheritPk classSystemEvent inputSystemEvent{{id}}InheritPk w3-input w3-border "
-																name="setInheritPk"
-		{{else}}
-																class="valueInheritPk w3-input w3-border classSystemEvent inputSystemEvent{{id}}InheritPk w3-input w3-border "
-																name="inheritPk"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setInheritPk', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_inheritPk')); }, function() { addError($('#{{classApiMethodMethod}}_inheritPk')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{systemEvent_.inheritPk}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varSystemEvent{{id}}InheritPk ">{{systemEvent_.inheritPk}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varSystemEvent{{id}}InheritPk ">{{systemEvent_.inheritPk}}</span>
-		{{/eq}}
 {{/inline}}
 
 {{#*inline "htmCreated"}}
+<!-- #*inline "htmCreated" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									<div class="w3-padding ">
 										<div id="suggest{{classApiMethodMethod}}SystemEventCreated">
@@ -1283,7 +1101,7 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputCreated" roleRequired=roleRequired}}
+														{{> "inputCreated" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
@@ -1298,60 +1116,19 @@
 	{{/eq}}
 {{/inline}}
 
-{{#*inline "htmModified"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>modified</label>
-												</div>
-												<div class="w3-cell-row  ">
-													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputModified" roleRequired=roleRequired}}
-															</span>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-	{{/eq}}
-								</div>
-{{/inline}}
-
-{{#*inline "inputModified"}}
-	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSystemEvent{{id}}Modified " title="{{formatZonedDateTime systemEvent_.modified 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime systemEvent_.modified 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
-	{{/eq}}
-{{/inline}}
-
-{{#*inline "htmPageImageUri"}}
+{{#*inline "htmObjectId"}}
+<!-- #*inline "htmObjectId" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}SystemEventPageImageUri">
+										<div id="suggest{{classApiMethodMethod}}SystemEventObjectId">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_pageImageUri">imageUri</label>
+													<label for="{{classApiMethodMethod}}_objectId">ID</label>
 												</div>
-												<div class="w3-cell-row w3-padding ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputPageImageUri" roleRequired=roleRequired}}
+														{{> "inputObjectId" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_pageImageUri')); $('#{{classApiMethodMethod}}_pageImageUri').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#SystemEventForm :input[name=id]').val() }], 'setPageImageUri', null, function() { addGlow($('#{{classApiMethodMethod}}_pageImageUri')); }, function() { addError($('#{{classApiMethodMethod}}_pageImageUri')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -1359,44 +1136,44 @@
 								</div>
 {{/inline}}
 
-{{#*inline "inputPageImageUri"}}
-		{{#eq roleRequired "true"}}
+{{#*inline "inputObjectId"}}
+		{{#eq roleForWriteBool "true"}}
 														<input
 															type="text"
-															placeholder="imageUri"
-															title="The page image URI"
-															id="{{classApiMethodMethod}}_pageImageUri"
+															placeholder="ID"
+															title="A URL friendly unique ID for this object"															id="{{classApiMethodMethod}}_objectId"
 	{{#eq "Page" classApiMethodMethod}}
-																class="setPageImageUri classSystemEvent inputSystemEvent{{id}}PageImageUri w3-input w3-border "
-																name="setPageImageUri"
+																class="setObjectId classSystemEvent inputSystemEvent{{id}}ObjectId w3-input w3-border "
+																name="setObjectId"
 	{{else}}
 		{{#eq "PATCH" classApiMethodMethod}}
-																class="setPageImageUri classSystemEvent inputSystemEvent{{id}}PageImageUri w3-input w3-border "
-																name="setPageImageUri"
+																class="setObjectId classSystemEvent inputSystemEvent{{id}}ObjectId w3-input w3-border "
+																name="setObjectId"
 		{{else}}
-																class="valuePageImageUri w3-input w3-border classSystemEvent inputSystemEvent{{id}}PageImageUri w3-input w3-border "
-																name="pageImageUri"
+																class="valueObjectId w3-input w3-border classSystemEvent inputSystemEvent{{id}}ObjectId w3-input w3-border "
+																name="objectId"
 		{{/eq}}
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setPageImageUri', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_pageImageUri')); }, function() { addError($('#{{classApiMethodMethod}}_pageImageUri')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setObjectId', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_objectId')); }, function() { addError($('#{{classApiMethodMethod}}_objectId')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
-															value="{{systemEvent_.pageImageUri}}"
+															value="{{systemEvent_.objectId}}"
 	{{/eq}}
 														/>
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSystemEvent{{id}}PageImageUri ">{{systemEvent_.pageImageUri}}</span>
+															<span class="varSystemEvent{{id}}ObjectId ">{{systemEvent_.objectId}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSystemEvent{{id}}PageImageUri ">{{systemEvent_.pageImageUri}}</span>
+														<span class="varSystemEvent{{id}}ObjectId ">{{systemEvent_.objectId}}</span>
 		{{/eq}}
 {{/inline}}
 
 {{#*inline "htmArchived"}}
+<!-- #*inline "htmArchived" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									<div class="w3-padding ">
 										<div id="suggest{{classApiMethodMethod}}SystemEventArchived">
@@ -1406,7 +1183,7 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputArchived" roleRequired=roleRequired}}
+														{{> "inputArchived" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
@@ -1416,7 +1193,7 @@
 {{/inline}}
 
 {{#*inline "inputArchived"}}
-		{{#eq roleRequired "true"}}
+		{{#eq roleForWriteBool "true"}}
 	{{#eq 'Page' classApiMethodMethod}}
 															<input
 																type="checkbox"
@@ -1464,6 +1241,7 @@
 {{/inline}}
 
 {{#*inline "htmDeleted"}}
+<!-- #*inline "htmDeleted" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									<div class="w3-padding ">
 										<div id="suggest{{classApiMethodMethod}}SystemEventDeleted">
@@ -1473,7 +1251,7 @@
 												</div>
 												<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputDeleted" roleRequired=roleRequired}}
+														{{> "inputDeleted" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
@@ -1483,7 +1261,7 @@
 {{/inline}}
 
 {{#*inline "inputDeleted"}}
-		{{#eq roleRequired "true"}}
+		{{#eq roleForWriteBool "true"}}
 	{{#eq 'Page' classApiMethodMethod}}
 															<input
 																type="checkbox"
@@ -1530,101 +1308,19 @@
 		{{/eq}}
 {{/inline}}
 
-{{#*inline "htmSessionId"}}
+{{#*inline "htmType"}}
+<!-- #*inline "htmType" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}SystemEventSessionId">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputSessionId" roleRequired=roleRequired}}
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputSessionId"}}
-	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSystemEvent{{id}}SessionId ">{{systemEvent_.sessionId}}</span>
-	{{/eq}}
-{{/inline}}
-
-{{#*inline "htmUserKey"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}SystemEventUserKey">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputUserKey" roleRequired=roleRequired}}
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputUserKey"}}
-	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSystemEvent{{id}}UserKey ">{{systemEvent_.userKey}}</span>
-	{{/eq}}
-{{/inline}}
-
-{{#*inline "htmObjectTitle"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
-											<div class="w3-card ">
-												<div class="w3-cell-row  ">
-													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputObjectTitle" roleRequired=roleRequired}}
-															</span>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-	{{/eq}}
-								</div>
-{{/inline}}
-
-{{#*inline "inputObjectTitle"}}
-	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSystemEvent{{id}}ObjectTitle ">{{systemEvent_.objectTitle}}</span>
-	{{/eq}}
-{{/inline}}
-
-{{#*inline "htmObjectId"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}SystemEventObjectId">
+										<div id="suggest{{classApiMethodMethod}}SystemEventType">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_objectId">ID</label>
+													<label for="{{classApiMethodMethod}}_type">type</label>
 												</div>
-												<div class="w3-cell-row w3-padding ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputObjectId" roleRequired=roleRequired}}
+														{{> "inputType" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_objectId')); $('#{{classApiMethodMethod}}_objectId').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#SystemEventForm :input[name=id]').val() }], 'setObjectId', null, function() { addGlow($('#{{classApiMethodMethod}}_objectId')); }, function() { addError($('#{{classApiMethodMethod}}_objectId')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -1632,68 +1328,55 @@
 								</div>
 {{/inline}}
 
-{{#*inline "inputObjectId"}}
-		{{#eq roleRequired "true"}}
+{{#*inline "inputType"}}
+		{{#eq roleForWriteBool "true"}}
 														<input
 															type="text"
-															placeholder="ID"
-															title="A URL friendly unique ID for this object"
-															id="{{classApiMethodMethod}}_objectId"
+															placeholder="type"
+															title="The system event type"															id="{{classApiMethodMethod}}_type"
 	{{#eq "Page" classApiMethodMethod}}
-																class="setObjectId classSystemEvent inputSystemEvent{{id}}ObjectId w3-input w3-border "
-																name="setObjectId"
+																class="setType classSystemEvent inputSystemEvent{{id}}Type w3-input w3-border "
+																name="setType"
 	{{else}}
 		{{#eq "PATCH" classApiMethodMethod}}
-																class="setObjectId classSystemEvent inputSystemEvent{{id}}ObjectId w3-input w3-border "
-																name="setObjectId"
+																class="setType classSystemEvent inputSystemEvent{{id}}Type w3-input w3-border "
+																name="setType"
 		{{else}}
-																class="valueObjectId w3-input w3-border classSystemEvent inputSystemEvent{{id}}ObjectId w3-input w3-border "
-																name="objectId"
+																class="valueType w3-input w3-border classSystemEvent inputSystemEvent{{id}}Type w3-input w3-border "
+																name="type"
 		{{/eq}}
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setObjectId', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_objectId')); }, function() { addError($('#{{classApiMethodMethod}}_objectId')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setType', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_type')); }, function() { addError($('#{{classApiMethodMethod}}_type')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
-															value="{{systemEvent_.objectId}}"
+															value="{{systemEvent_.type}}"
 	{{/eq}}
 														/>
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSystemEvent{{id}}ObjectId ">{{systemEvent_.objectId}}</span>
+															<span class="varSystemEvent{{id}}Type ">{{systemEvent_.type}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSystemEvent{{id}}ObjectId ">{{systemEvent_.objectId}}</span>
+														<span class="varSystemEvent{{id}}Type ">{{systemEvent_.type}}</span>
 		{{/eq}}
 {{/inline}}
 
-{{#*inline "htmObjectText"}}
+{{#*inline "htmMessage"}}
+<!-- #*inline "htmMessage" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}SystemEventObjectText">
+										<div id="suggest{{classApiMethodMethod}}SystemEventMessage">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_objectText">text</label>
+													<label for="{{classApiMethodMethod}}_message">message</label>
 												</div>
-												<div class="w3-cell-row w3-padding ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputObjectText" roleRequired=roleRequired}}
+														{{> "inputMessage" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_objectText')); $('#{{classApiMethodMethod}}_objectText').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + $('#SystemEventForm :input[name=id]').val() }], 'setObjectText', null, function() { addGlow($('#{{classApiMethodMethod}}_objectText')); }, function() { addError($('#{{classApiMethodMethod}}_objectText')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -1701,39 +1384,194 @@
 								</div>
 {{/inline}}
 
-{{#*inline "inputObjectText"}}
-		{{#eq roleRequired "true"}}
+{{#*inline "inputMessage"}}
+		{{#eq roleForWriteBool "true"}}
 														<input
 															type="text"
-															placeholder="text"
-															title="The full text search field in the search engine for this record while using autosuggest"
-															id="{{classApiMethodMethod}}_objectText"
+															placeholder="message"
+															title="The system event message"															id="{{classApiMethodMethod}}_message"
 	{{#eq "Page" classApiMethodMethod}}
-																class="setObjectText classSystemEvent inputSystemEvent{{id}}ObjectText w3-input w3-border "
-																name="setObjectText"
+																class="setMessage classSystemEvent inputSystemEvent{{id}}Message w3-input w3-border "
+																name="setMessage"
 	{{else}}
 		{{#eq "PATCH" classApiMethodMethod}}
-																class="setObjectText classSystemEvent inputSystemEvent{{id}}ObjectText w3-input w3-border "
-																name="setObjectText"
+																class="setMessage classSystemEvent inputSystemEvent{{id}}Message w3-input w3-border "
+																name="setMessage"
 		{{else}}
-																class="valueObjectText w3-input w3-border classSystemEvent inputSystemEvent{{id}}ObjectText w3-input w3-border "
-																name="objectText"
+																class="valueMessage w3-input w3-border classSystemEvent inputSystemEvent{{id}}Message w3-input w3-border "
+																name="message"
 		{{/eq}}
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setObjectText', $(this).val().replace('[','').replace(']','').split(/[ ,]+/), function() { addGlow($('#{{classApiMethodMethod}}_objectText')); }, function() { addError($('#{{classApiMethodMethod}}_objectText')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setMessage', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_message')); }, function() { addError($('#{{classApiMethodMethod}}_message')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
-															value="{{systemEvent_.objectText}}"
+															value="{{systemEvent_.message}}"
 	{{/eq}}
 														/>
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSystemEvent{{id}}ObjectText ">{{systemEvent_.objectText}}</span>
+															<span class="varSystemEvent{{id}}Message ">{{systemEvent_.message}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSystemEvent{{id}}ObjectText ">{{systemEvent_.objectText}}</span>
+														<span class="varSystemEvent{{id}}Message ">{{systemEvent_.message}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmStatus"}}
+<!-- #*inline "htmStatus" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SystemEventStatus">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_status">message</label>
+												</div>
+											<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputStatus" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputStatus"}}
+		{{#eq roleForWriteBool "true"}}
+														<input
+															type="text"
+															placeholder="message"
+															title="The system event message"															id="{{classApiMethodMethod}}_status"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setStatus classSystemEvent inputSystemEvent{{id}}Status w3-input w3-border "
+																name="setStatus"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setStatus classSystemEvent inputSystemEvent{{id}}Status w3-input w3-border "
+																name="setStatus"
+		{{else}}
+																class="valueStatus w3-input w3-border classSystemEvent inputSystemEvent{{id}}Status w3-input w3-border "
+																name="status"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setStatus', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_status')); }, function() { addError($('#{{classApiMethodMethod}}_status')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{systemEvent_.status}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varSystemEvent{{id}}Status ">{{systemEvent_.status}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varSystemEvent{{id}}Status ">{{systemEvent_.status}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmCompleted"}}
+<!-- #*inline "htmCompleted" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SystemEventCompleted">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_completed">completed</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputCompleted" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputCompleted"}}
+		{{#eq roleForWriteBool "true"}}
+														<input
+																type="text"
+																class="w3-input w3-border datetimepicker setCompleted classSystemEvent inputSystemEvent{{id}}Completed w3-input w3-border "
+																placeholder="MM/dd/yyyy h:mm a '['VV']'"
+																data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
+																id="{{classApiMethodMethod}}_completed"
+																title="An optional time this event completed (MM/dd/yyyy h:mm a '['VV']')"
+																value="{{#if systemEvent_.completed}}{{formatZonedDateTime systemEvent_.completed "MM/dd/yyyy h:mm a '['VV']'" defaultLocaleId defaultZoneId}}{{/if}}"
+														{{#eq 'Page' classApiMethodMethod}}
+															onclick="removeGlow($(this)); ";
+															onchange="var timeZone = this.value.split('[').pop().split(']')[0]; var t1 = moment(this.value.split('[')[0].trim(), 'MM/DD/YYYY h:mm a'); var t2 = moment.tz(this.value.split('[')[0].trim(), 'MM/DD/YYYY h:mm a', timeZone); var t3 = new Date(t1._d); t3.setTime(t1.toDate().getTime() + t2.toDate().getTime() - t1.toDate().getTime()); var t = moment(t3); if(t) { var s = t.tz(timeZone).format('YYYY-MM-DDTHH:mm:ss.000') + '[' + timeZone + ']'; patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setCompleted', s, function() { addGlow($('#{{classApiMethodMethod}}_completed')); }, function() { addError($('#{{classApiMethodMethod}}_completed')); }); } "
+														{{/eq}}
+														/>
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varSystemEvent{{id}}Completed ">{{systemEvent_.completed}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varSystemEvent{{id}}Completed ">{{systemEvent_.completed}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmPageImageUri"}}
+<!-- #*inline "htmPageImageUri" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SystemEventPageImageUri">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_pageImageUri">imageUri</label>
+												</div>
+											<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputPageImageUri" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputPageImageUri"}}
+		{{#eq roleForWriteBool "true"}}
+														<input
+															type="text"
+															placeholder="imageUri"
+															title="The page image URI"															id="{{classApiMethodMethod}}_pageImageUri"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setPageImageUri classSystemEvent inputSystemEvent{{id}}PageImageUri w3-input w3-border "
+																name="setPageImageUri"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setPageImageUri classSystemEvent inputSystemEvent{{id}}PageImageUri w3-input w3-border "
+																name="setPageImageUri"
+		{{else}}
+																class="valuePageImageUri w3-input w3-border classSystemEvent inputSystemEvent{{id}}PageImageUri w3-input w3-border "
+																name="pageImageUri"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setPageImageUri', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_pageImageUri')); }, function() { addError($('#{{classApiMethodMethod}}_pageImageUri')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{systemEvent_.pageImageUri}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varSystemEvent{{id}}PageImageUri ">{{systemEvent_.pageImageUri}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varSystemEvent{{id}}PageImageUri ">{{systemEvent_.pageImageUri}}</span>
 		{{/eq}}
 {{/inline}}

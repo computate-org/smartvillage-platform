@@ -32,6 +32,7 @@ import io.vertx.core.json.JsonObject;
  * ApiMethod: PATCH
  * ApiMethod: POST
  * ApiMethod: PUTImport
+ * ApiMethod: PUTCopy
  * 
  * ApiMethod: PATCHRunSimulation
  * ApiUri.PATCHRunSimulation.enUS: /api/run-simulation-report

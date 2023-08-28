@@ -500,7 +500,9 @@ public class TimeStepGenPage extends TimeStepGenPageGen<BaseResultPage> {
 
 	@Override
 	protected void _roleForWrite(List<String> l) {
-		l.add(siteRequest_.getConfig().getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_TimeStep"));
+		Optional.ofNullable(siteRequest_.getConfig().getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_TimeStep")).ifPresent(v -> {
+			l.add(v);
+		});
 	}
 
 	@Override

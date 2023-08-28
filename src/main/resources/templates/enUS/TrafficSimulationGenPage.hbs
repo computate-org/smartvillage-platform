@@ -597,15 +597,6 @@
 							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
 							<div class="w3-cell-row HtmRow">
 {{#ifContainsAnyRoles roles roleForWrite}}
-{{> "htmPk" roleForWriteBool="true" roleForReadBool="true"}}
-{{else}}
-{{#ifContainsAnyRoles roles roleForRead}}
-{{> "htmPk" roleForWriteBool="false" roleForReadBool="true"}}
-{{else}}
-{{> "htmPk" roleForWriteBool="false" roleForReadBool="false"}}
-{{/ifContainsAnyRoles}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleForWrite}}
 {{> "htmCreated" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
 {{#ifContainsAnyRoles roles roleForRead}}
@@ -953,32 +944,6 @@
 			</div>
 {{/inline}}
 {{> BaseModelPage baseModel_=trafficSimulation_}}
-
-{{#*inline "htmPk"}}
-<!-- #*inline "htmPk" -->
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}TrafficSimulationPk">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_pk">primary key</label>
-												</div>
-											<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputPk" roleForWrite=roleForWrite roleForRead=roleForRead}}
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputPk"}}
-	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varTrafficSimulation{{pk}}Pk ">{{trafficSimulation_.pk}}</span>
-	{{/eq}}
-{{/inline}}
 
 {{#*inline "htmCreated"}}
 <!-- #*inline "htmCreated" -->

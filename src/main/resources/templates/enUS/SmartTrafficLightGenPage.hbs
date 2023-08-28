@@ -33,10 +33,14 @@
 				window.eventBus = new EventBus('/eventbus');
 				var pk = {{#if pk}}{{pk}}{{else}}null{{/if}};
 				if(pk != null) {
-		{{#ifContainsAnyRoles roles roleRequired}}
+		{{#ifContainsAnyRoles roles roleForWrite}}
+					suggestSmartTrafficLightReportKeys([{'name':'fq','value':'smartTrafficLightKey:' + pk}], $('#listSmartTrafficLightReportKeys_Page'), pk, true);
+		{{else}}
+		{{#ifContainsAnyRoles roles roleForRead}}
 					suggestSmartTrafficLightReportKeys([{'name':'fq','value':'smartTrafficLightKey:' + pk}], $('#listSmartTrafficLightReportKeys_Page'), pk, true);
 		{{else}}
 					suggestSmartTrafficLightReportKeys([{'name':'fq','value':'smartTrafficLightKey:' + pk}], $('#listSmartTrafficLightReportKeys_Page'), pk, false);
+		{{/ifContainsAnyRoles}}
 		{{/ifContainsAnyRoles}}
 				}
 				window.varsFq = JSON.parse('{{{toJsonObjectStringInApostrophes varsFq}}}');
@@ -405,85 +409,152 @@
 						<h2 class="w3-padding ">Modify smart traffic lights</h2>
 					</header>
 					<div class="" id="patchSmartTrafficLightFormValues">
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmCreated" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmCreated" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmCreated" roleRequired="false"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmCreated" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmCreated" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmArchived" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmArchived" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmArchived" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmDeleted" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmArchived" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmDeleted" roleRequired="false"}}
+{{> "htmArchived" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmDeleted" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmDeleted" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmDeleted" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmEntityId" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmEntityId" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmEntityId" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmSmartTrafficLightName" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmEntityId" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmSmartTrafficLightName" roleRequired="false"}}
+{{> "htmEntityId" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmSmartTrafficLightName" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmSmartTrafficLightName" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmSmartTrafficLightName" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmRouteIdNorth" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmRouteIdNorth" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmRouteIdNorth" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmRouteIdEast" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmRouteIdNorth" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmRouteIdEast" roleRequired="false"}}
+{{> "htmRouteIdNorth" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmRouteIdEast" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmRouteIdEast" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmRouteIdEast" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamVehicleDemandScalingFactor" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamVehicleDemandScalingFactor" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamVehicleDemandScalingFactor" roleRequired="false"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamVehicleDemandScalingFactor" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamVehicleDemandScalingFactor" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamRunTime" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamRunTime" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamRunTime" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamStepSize" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamRunTime" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamStepSize" roleRequired="false"}}
+{{> "htmParamRunTime" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamStepSize" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamStepSize" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamStepSize" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamItersPerPar" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamItersPerPar" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamItersPerPar" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamTotalIterNum" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamItersPerPar" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamTotalIterNum" roleRequired="false"}}
+{{> "htmParamItersPerPar" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamTotalIterNum" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamTotalIterNum" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamTotalIterNum" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmReportKeys" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmReportKeys" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmReportKeys" roleRequired="false"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmReportKeys" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmReportKeys" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 							</div>
 {{#block "htmFormButton_patchSmartTrafficLight"}}{{/block}}
@@ -521,59 +592,104 @@
 					<div class="" id="postSmartTrafficLightFormValues">
 						<div id="postSmartTrafficLightForm">
 {{#block "htmFormButton_postSmartTrafficLight"}}{{/block}}
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmEntityId" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmEntityId" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmEntityId" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmSmartTrafficLightName" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmEntityId" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmSmartTrafficLightName" roleRequired="false"}}
+{{> "htmEntityId" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmSmartTrafficLightName" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmSmartTrafficLightName" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmSmartTrafficLightName" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmRouteIdNorth" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmRouteIdNorth" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmRouteIdNorth" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmRouteIdEast" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmRouteIdNorth" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmRouteIdEast" roleRequired="false"}}
+{{> "htmRouteIdNorth" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmRouteIdEast" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmRouteIdEast" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmRouteIdEast" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamVehicleDemandScalingFactor" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamVehicleDemandScalingFactor" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamVehicleDemandScalingFactor" roleRequired="false"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamVehicleDemandScalingFactor" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamVehicleDemandScalingFactor" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamRunTime" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamRunTime" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamRunTime" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamStepSize" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamRunTime" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamStepSize" roleRequired="false"}}
+{{> "htmParamRunTime" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamStepSize" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamStepSize" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamStepSize" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamItersPerPar" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamItersPerPar" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamItersPerPar" roleRequired="false"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamItersPerPar" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamItersPerPar" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamTotalIterNum" roleRequired="true"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamTotalIterNum" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamTotalIterNum" roleRequired="false"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamTotalIterNum" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamTotalIterNum" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 							</div>
 						</div>
@@ -636,187 +752,329 @@
 				<div class="w3-card-4 ">
 					<div class="" id="searchpageSmartTrafficLightFormValues">
 						<div id="searchpageSmartTrafficLightForm">
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmPk" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmCreated" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmPk" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmCreated" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmCreated" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmCreated" roleRequired="false"}}
+{{> "htmCreated" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmModified" roleRequired="true"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmModified" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmModified" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmObjectId" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmModified" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmObjectId" roleRequired="false"}}
+{{> "htmModified" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmObjectId" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmObjectId" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmObjectId" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmArchived" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmArchived" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmArchived" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmDeleted" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmArchived" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmDeleted" roleRequired="false"}}
+{{> "htmArchived" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmDeleted" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmDeleted" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmDeleted" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmEntityId" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmEntityId" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmEntityId" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmSmartTrafficLightName" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmEntityId" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmSmartTrafficLightName" roleRequired="false"}}
+{{> "htmEntityId" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmSmartTrafficLightName" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmSmartTrafficLightName" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmSmartTrafficLightName" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmRouteIdNorth" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmRouteIdNorth" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmRouteIdNorth" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmRouteIdEast" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmRouteIdNorth" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmRouteIdEast" roleRequired="false"}}
+{{> "htmRouteIdNorth" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmRouteIdEast" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmRouteIdEast" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmRouteIdEast" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamAvgVehiclePerMinFromWestToEast" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamAvgVehiclePerMinFromWestToEast" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamAvgVehiclePerMinFromWestToEast" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamAvgVehiclePerMinFromSouthToNorth" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamAvgVehiclePerMinFromWestToEast" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamAvgVehiclePerMinFromSouthToNorth" roleRequired="false"}}
+{{> "htmParamAvgVehiclePerMinFromWestToEast" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamVehicleDemandScalingFactor" roleRequired="true"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamAvgVehiclePerMinFromSouthToNorth" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamVehicleDemandScalingFactor" roleRequired="false"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamAvgVehiclePerMinFromSouthToNorth" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamAvgVehiclePerMinFromSouthToNorth" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamVehicleDemandScalingFactor" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamVehicleDemandScalingFactor" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamVehicleDemandScalingFactor" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamAvgPedestrianPerMinFromWestToEast" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamAvgPedestrianPerMinFromWestToEast" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamAvgPedestrianPerMinFromWestToEast" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamAvgPedestrianPerMinFromSouthToNorth" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamAvgPedestrianPerMinFromWestToEast" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamAvgPedestrianPerMinFromSouthToNorth" roleRequired="false"}}
+{{> "htmParamAvgPedestrianPerMinFromWestToEast" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamPedestrianDemandScalingFactor" roleRequired="true"}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamAvgPedestrianPerMinFromSouthToNorth" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamPedestrianDemandScalingFactor" roleRequired="false"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamAvgPedestrianPerMinFromSouthToNorth" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamAvgPedestrianPerMinFromSouthToNorth" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamPedestrianDemandScalingFactor" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamPedestrianDemandScalingFactor" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamPedestrianDemandScalingFactor" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamMinGreenTimeSecWestEast" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamMinGreenTimeSecWestEast" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamMinGreenTimeSecWestEast" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamMaxGreenTimeSecWestEast" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamMinGreenTimeSecWestEast" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamMaxGreenTimeSecWestEast" roleRequired="false"}}
+{{> "htmParamMinGreenTimeSecWestEast" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamMaxGreenTimeSecWestEast" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamMaxGreenTimeSecWestEast" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamMaxGreenTimeSecWestEast" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamMinGreenTimeSecSouthNorth" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamMinGreenTimeSecSouthNorth" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamMinGreenTimeSecSouthNorth" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamMaxGreenTimeSecSouthNorth" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamMinGreenTimeSecSouthNorth" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamMaxGreenTimeSecSouthNorth" roleRequired="false"}}
+{{> "htmParamMinGreenTimeSecSouthNorth" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamMaxGreenTimeSecSouthNorth" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamMaxGreenTimeSecSouthNorth" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamMaxGreenTimeSecSouthNorth" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamPedestrianWaitThresholdSecNorthSouth" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamPedestrianWaitThresholdSecNorthSouth" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamPedestrianWaitThresholdSecNorthSouth" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamPedestrianWaitThresholdSecWestEast" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamPedestrianWaitThresholdSecNorthSouth" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamPedestrianWaitThresholdSecWestEast" roleRequired="false"}}
+{{> "htmParamPedestrianWaitThresholdSecNorthSouth" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamPedestrianWaitThresholdSecWestEast" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamPedestrianWaitThresholdSecWestEast" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamPedestrianWaitThresholdSecWestEast" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamVehicleQueueThresholdWestEast" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamVehicleQueueThresholdWestEast" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamVehicleQueueThresholdWestEast" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamVehicleQueueThresholdSouthNorth" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamVehicleQueueThresholdWestEast" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamVehicleQueueThresholdSouthNorth" roleRequired="false"}}
+{{> "htmParamVehicleQueueThresholdWestEast" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamVehicleQueueThresholdSouthNorth" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamVehicleQueueThresholdSouthNorth" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamVehicleQueueThresholdSouthNorth" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamPedestrianQueueThresholdNorthSouth" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamPedestrianQueueThresholdNorthSouth" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamPedestrianQueueThresholdNorthSouth" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamPedestrianQueueThresholdWestEast" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamPedestrianQueueThresholdNorthSouth" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamPedestrianQueueThresholdWestEast" roleRequired="false"}}
+{{> "htmParamPedestrianQueueThresholdNorthSouth" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamPedestrianQueueThresholdWestEast" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamPedestrianQueueThresholdWestEast" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamPedestrianQueueThresholdWestEast" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamRunTime" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamRunTime" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamRunTime" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamStepSize" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamRunTime" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamStepSize" roleRequired="false"}}
+{{> "htmParamRunTime" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamStepSize" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamStepSize" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamStepSize" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamItersPerPar" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamItersPerPar" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamItersPerPar" roleRequired="false"}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmParamTotalIterNum" roleRequired="true"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamItersPerPar" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmParamTotalIterNum" roleRequired="false"}}
+{{> "htmParamItersPerPar" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmParamTotalIterNum" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmParamTotalIterNum" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmParamTotalIterNum" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
 							</div>
-							<div class="w3-cell-row ">
-{{#ifContainsAnyRoles roles roleRequired}}
-{{> "htmReportKeys" roleRequired="true"}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmReportKeys" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
-{{> "htmReportKeys" roleRequired="false"}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmReportKeys" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmReportKeys" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 							</div>
 						</div>
@@ -834,7 +1092,7 @@
 						<span title="Pivot" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-shaded-spruce " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-2017-shaded-spruce'); $(this).addClass('w3-black'); $(this).removeClass('w3-2017-shaded-spruce'); "><i class="fad fa-table-pivot hover-box-shadow w3-xlarge "></i> Pivot</span>
 						<span title="FieldList" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-shaded-spruce " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleFieldList').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-2017-shaded-spruce'); $(this).addClass('w3-black'); $(this).removeClass('w3-2017-shaded-spruce'); "><i class="fad fa-list-ul hover-box-shadow w3-xlarge "></i> FieldList</span>
 						<span title="Stats" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-shaded-spruce " onclick="$('.siteSidebarToggleFieldList').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleStats').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-2017-shaded-spruce'); $(this).addClass('w3-black'); $(this).removeClass('w3-2017-shaded-spruce'); "><i class="fad fa-chart-candlestick hover-box-shadow w3-xlarge "></i> Stats</span>
-						<a title="API" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-shaded-spruce " href="{{ apiUri }}{{ queryStr }}"><i class="fad fa-brackets-curly hover-box-shadow w3-xlarge "></i> API</a>
+						<a title="API" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-shaded-spruce " href="{{ apiUri }}{{#if pk }}/{{ pk }}{{else}}{{#if id }}/{{ id }}{{else}}{{ queryStr }}{{/if}}{{/if}}"><i class="fad fa-brackets-curly hover-box-shadow w3-xlarge "></i> API</a>
 					</div>
 					<div class=" ">
 						<div class="siteSidebarToggle siteSidebarToggleSearch w3-dropdown-content min-width-300px w3-white w3-border w3-border-2017-shaded-spruce " style="display: none; ">
@@ -1031,7 +1289,7 @@
 {{#block "htmSuggested"}}{{/block}}
 {{/inline}}
 {{#*inline "htmSuggestedSmartTrafficLightPage"}}
-			{{#ifContainsAnyRoles roles roleRequired}}
+			{{#ifContainsAnyRoles roles roleForWrite}}
 					<div class="">
 						<button id="refreshAllSmartTrafficLightGenPage{{id}}" class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce "
 							onclick="patch{{classSimpleName}}Vals([], {}, function() { addGlow($('#refreshAllSmartTrafficLightGenPage{{id}}')); }, function() { addError($('#refreshAllSmartTrafficLightGenPage{{id}}')); }); "
@@ -1083,7 +1341,222 @@
 {{/inline}}
 {{> BaseModelPage baseModel_=smartTrafficLight_}}
 
+{{#*inline "htmCreated"}}
+<!-- #*inline "htmCreated" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SmartTrafficLightCreated">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_created">created</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputCreated" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputCreated"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varSmartTrafficLight{{pk}}Created " title="{{formatZonedDateTime smartTrafficLight_.created 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime smartTrafficLight_.created 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmModified"}}
+<!-- #*inline "htmModified" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SmartTrafficLightModified">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_modified">modified</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputModified" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputModified"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varSmartTrafficLight{{pk}}Modified " title="{{formatZonedDateTime smartTrafficLight_.modified 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime smartTrafficLight_.modified 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmObjectId"}}
+<!-- #*inline "htmObjectId" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SmartTrafficLightObjectId">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_objectId">ID</label>
+												</div>
+											<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputObjectId" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputObjectId"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span class="varSmartTrafficLight{{pk}}ObjectId ">{{smartTrafficLight_.objectId}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmArchived"}}
+<!-- #*inline "htmArchived" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SmartTrafficLightArchived">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_archived">archived</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputArchived" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputArchived"}}
+		{{#eq roleForWriteBool "true"}}
+	{{#eq 'Page' classApiMethodMethod}}
+															<input
+																type="checkbox"
+																id="{{classApiMethodMethod}}_archived"
+																value="true"
+	{{else}}
+														<select
+															id="{{classApiMethodMethod}}_archived"
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+															class="classSmartTrafficLight inputSmartTrafficLight{{pk}}Archived w3-input w3-border "
+															name="setArchived"
+	{{else}}
+		{{#eq 'Page' classApiMethodMethod}}
+																class="classSmartTrafficLight inputSmartTrafficLight{{pk}}Archived w3-input w3-border "
+																name="setArchived"
+		{{else}}
+																class="setArchived valueArchived classSmartTrafficLight inputSmartTrafficLight{{pk}}Archived w3-input w3-border "
+																name="setArchived"
+		{{/eq}}
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+															onchange="var confirmResponse = confirm('Are you sure you want to archive that?'); if(confirmResponse) { patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setArchived', $(this).prop('checked'), function() { addGlow($('#{{classApiMethodMethod}}_archived')); }, function() { addError($('#{{classApiMethodMethod}}_archived')); }); }"
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+		{{#if smartTrafficLight_.archived}}
+																checked="checked"
+		{{/if}}
+																/>
+	{{else}}
+															>
+															<option value="" selected="selected"></option>
+															<option value="true">true</option>
+															<option value="false">false</option>
+														</select>
+	{{/eq}}
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varSmartTrafficLight{{pk}}Archived ">{{smartTrafficLight_.archived}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varSmartTrafficLight{{pk}}Archived ">{{smartTrafficLight_.archived}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmDeleted"}}
+<!-- #*inline "htmDeleted" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SmartTrafficLightDeleted">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_deleted">deleted</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputDeleted" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputDeleted"}}
+		{{#eq roleForWriteBool "true"}}
+	{{#eq 'Page' classApiMethodMethod}}
+															<input
+																type="checkbox"
+																id="{{classApiMethodMethod}}_deleted"
+																value="true"
+	{{else}}
+														<select
+															id="{{classApiMethodMethod}}_deleted"
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+															class="classSmartTrafficLight inputSmartTrafficLight{{pk}}Deleted w3-input w3-border "
+															name="setDeleted"
+	{{else}}
+		{{#eq 'Page' classApiMethodMethod}}
+																class="classSmartTrafficLight inputSmartTrafficLight{{pk}}Deleted w3-input w3-border "
+																name="setDeleted"
+		{{else}}
+																class="setDeleted valueDeleted classSmartTrafficLight inputSmartTrafficLight{{pk}}Deleted w3-input w3-border "
+																name="setDeleted"
+		{{/eq}}
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+															onchange="var confirmResponse = confirm('Are you sure you want to delete that?'); if(confirmResponse) { patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setDeleted', $(this).prop('checked'), function() { addGlow($('#{{classApiMethodMethod}}_deleted')); }, function() { addError($('#{{classApiMethodMethod}}_deleted')); }); }"
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+		{{#if smartTrafficLight_.deleted}}
+																checked="checked"
+		{{/if}}
+																/>
+	{{else}}
+															>
+															<option value="" selected="selected"></option>
+															<option value="true">true</option>
+															<option value="false">false</option>
+														</select>
+	{{/eq}}
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varSmartTrafficLight{{pk}}Deleted ">{{smartTrafficLight_.deleted}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varSmartTrafficLight{{pk}}Deleted ">{{smartTrafficLight_.deleted}}</span>
+		{{/eq}}
+{{/inline}}
+
 {{#*inline "htmEntityId"}}
+<!-- #*inline "htmEntityId" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									<div class="w3-padding ">
 										<div id="suggest{{classApiMethodMethod}}SmartTrafficLightEntityId">
@@ -1091,23 +1564,10 @@
 												<div class="w3-cell-row w3-2017-shaded-spruce">
 													<label for="{{classApiMethodMethod}}_entityId">entity ID</label>
 												</div>
-												<div class="w3-cell-row w3-padding ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputEntityId" roleRequired=roleRequired}}
+														{{> "inputEntityId" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_entityId')); $('#{{classApiMethodMethod}}_entityId').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SmartTrafficLightForm :input[name=pk]').val() }], 'setEntityId', null, function() { addGlow($('#{{classApiMethodMethod}}_entityId')); }, function() { addError($('#{{classApiMethodMethod}}_entityId')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -1116,12 +1576,11 @@
 {{/inline}}
 
 {{#*inline "inputEntityId"}}
-		{{#eq roleRequired "true"}}
+		{{#eq roleForWriteBool "true"}}
 														<input
 															type="text"
 															placeholder="entity ID"
-															title="A unique ID for this Smart Data Model"
-															id="{{classApiMethodMethod}}_entityId"
+															title="A unique ID for this Smart Data Model"															id="{{classApiMethodMethod}}_entityId"
 	{{#eq "Page" classApiMethodMethod}}
 																class="setEntityId classSmartTrafficLight inputSmartTrafficLight{{pk}}EntityId w3-input w3-border "
 																name="setEntityId"
@@ -1153,6 +1612,7 @@
 {{/inline}}
 
 {{#*inline "htmSmartTrafficLightName"}}
+<!-- #*inline "htmSmartTrafficLightName" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									<div class="w3-padding ">
 										<div id="suggest{{classApiMethodMethod}}SmartTrafficLightSmartTrafficLightName">
@@ -1160,23 +1620,10 @@
 												<div class="w3-cell-row w3-2017-shaded-spruce">
 													<label for="{{classApiMethodMethod}}_smartTrafficLightName">smart traffic light name</label>
 												</div>
-												<div class="w3-cell-row w3-padding ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputSmartTrafficLightName" roleRequired=roleRequired}}
+														{{> "inputSmartTrafficLightName" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_smartTrafficLightName')); $('#{{classApiMethodMethod}}_smartTrafficLightName').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SmartTrafficLightForm :input[name=pk]').val() }], 'setSmartTrafficLightName', null, function() { addGlow($('#{{classApiMethodMethod}}_smartTrafficLightName')); }, function() { addError($('#{{classApiMethodMethod}}_smartTrafficLightName')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -1185,7 +1632,7 @@
 {{/inline}}
 
 {{#*inline "inputSmartTrafficLightName"}}
-		{{#eq roleRequired "true"}}
+		{{#eq roleForWriteBool "true"}}
 														<input
 															type="text"
 															placeholder="smart traffic light name"
@@ -1221,6 +1668,7 @@
 {{/inline}}
 
 {{#*inline "htmRouteIdNorth"}}
+<!-- #*inline "htmRouteIdNorth" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									<div class="w3-padding ">
 										<div id="suggest{{classApiMethodMethod}}SmartTrafficLightRouteIdNorth">
@@ -1228,23 +1676,10 @@
 												<div class="w3-cell-row w3-2017-shaded-spruce">
 													<label for="{{classApiMethodMethod}}_routeIdNorth">route ID North</label>
 												</div>
-												<div class="w3-cell-row w3-padding ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputRouteIdNorth" roleRequired=roleRequired}}
+														{{> "inputRouteIdNorth" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_routeIdNorth')); $('#{{classApiMethodMethod}}_routeIdNorth').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SmartTrafficLightForm :input[name=pk]').val() }], 'setRouteIdNorth', null, function() { addGlow($('#{{classApiMethodMethod}}_routeIdNorth')); }, function() { addError($('#{{classApiMethodMethod}}_routeIdNorth')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -1253,7 +1688,7 @@
 {{/inline}}
 
 {{#*inline "inputRouteIdNorth"}}
-		{{#eq roleRequired "true"}}
+		{{#eq roleForWriteBool "true"}}
 														<input
 															type="text"
 															placeholder="route ID North"
@@ -1289,6 +1724,7 @@
 {{/inline}}
 
 {{#*inline "htmRouteIdEast"}}
+<!-- #*inline "htmRouteIdEast" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									<div class="w3-padding ">
 										<div id="suggest{{classApiMethodMethod}}SmartTrafficLightRouteIdEast">
@@ -1296,23 +1732,10 @@
 												<div class="w3-cell-row w3-2017-shaded-spruce">
 													<label for="{{classApiMethodMethod}}_routeIdEast">route ID East</label>
 												</div>
-												<div class="w3-cell-row w3-padding ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputRouteIdEast" roleRequired=roleRequired}}
+														{{> "inputRouteIdEast" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_routeIdEast')); $('#{{classApiMethodMethod}}_routeIdEast').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SmartTrafficLightForm :input[name=pk]').val() }], 'setRouteIdEast', null, function() { addGlow($('#{{classApiMethodMethod}}_routeIdEast')); }, function() { addError($('#{{classApiMethodMethod}}_routeIdEast')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -1321,7 +1744,7 @@
 {{/inline}}
 
 {{#*inline "inputRouteIdEast"}}
-		{{#eq roleRequired "true"}}
+		{{#eq roleForWriteBool "true"}}
 														<input
 															type="text"
 															placeholder="route ID East"
@@ -1357,25 +1780,22 @@
 {{/inline}}
 
 {{#*inline "htmParamAvgVehiclePerMinFromWestToEast"}}
+<!-- #*inline "htmParamAvgVehiclePerMinFromWestToEast" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SmartTrafficLightParamAvgVehiclePerMinFromWestToEast">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>Average vehicle/min from WEST to EAST</label>
+													<label for="{{classApiMethodMethod}}_paramAvgVehiclePerMinFromWestToEast">Average vehicle/min from WEST to EAST</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputParamAvgVehiclePerMinFromWestToEast" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputParamAvgVehiclePerMinFromWestToEast" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -1386,25 +1806,22 @@
 {{/inline}}
 
 {{#*inline "htmParamAvgVehiclePerMinFromSouthToNorth"}}
+<!-- #*inline "htmParamAvgVehiclePerMinFromSouthToNorth" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SmartTrafficLightParamAvgVehiclePerMinFromSouthToNorth">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>Average vehicle/min from SOUTH to NORTH</label>
+													<label for="{{classApiMethodMethod}}_paramAvgVehiclePerMinFromSouthToNorth">Average vehicle/min from SOUTH to NORTH</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputParamAvgVehiclePerMinFromSouthToNorth" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputParamAvgVehiclePerMinFromSouthToNorth" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -1415,6 +1832,7 @@
 {{/inline}}
 
 {{#*inline "htmParamVehicleDemandScalingFactor"}}
+<!-- #*inline "htmParamVehicleDemandScalingFactor" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									<div class="w3-padding ">
 										<div id="suggest{{classApiMethodMethod}}SmartTrafficLightParamVehicleDemandScalingFactor">
@@ -1422,23 +1840,10 @@
 												<div class="w3-cell-row w3-2017-shaded-spruce">
 													<label for="{{classApiMethodMethod}}_paramVehicleDemandScalingFactor">Demand scaling factor (multiplies all vehicle demands)</label>
 												</div>
-												<div class="w3-cell-row w3-padding ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputParamVehicleDemandScalingFactor" roleRequired=roleRequired}}
+														{{> "inputParamVehicleDemandScalingFactor" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramVehicleDemandScalingFactor')); $('#{{classApiMethodMethod}}_paramVehicleDemandScalingFactor').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SmartTrafficLightForm :input[name=pk]').val() }], 'setParamVehicleDemandScalingFactor', null, function() { addGlow($('#{{classApiMethodMethod}}_paramVehicleDemandScalingFactor')); }, function() { addError($('#{{classApiMethodMethod}}_paramVehicleDemandScalingFactor')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -1447,12 +1852,11 @@
 {{/inline}}
 
 {{#*inline "inputParamVehicleDemandScalingFactor"}}
-		{{#eq roleRequired "true"}}
+		{{#eq roleForWriteBool "true"}}
 														<input
 															type="text"
-															placeholder="1"
-															title="Min: 1"
-															id="{{classApiMethodMethod}}_paramVehicleDemandScalingFactor"
+															placeholder="Demand scaling factor (multiplies all vehicle demands)"
+															title="Min: 1"															id="{{classApiMethodMethod}}_paramVehicleDemandScalingFactor"
 	{{#eq "Page" classApiMethodMethod}}
 																class="setParamVehicleDemandScalingFactor classSmartTrafficLight inputSmartTrafficLight{{pk}}ParamVehicleDemandScalingFactor w3-input w3-border "
 																name="setParamVehicleDemandScalingFactor"
@@ -1484,25 +1888,22 @@
 {{/inline}}
 
 {{#*inline "htmParamAvgPedestrianPerMinFromWestToEast"}}
+<!-- #*inline "htmParamAvgPedestrianPerMinFromWestToEast" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SmartTrafficLightParamAvgPedestrianPerMinFromWestToEast">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>Average pedestrian/min from WEST to EAST</label>
+													<label for="{{classApiMethodMethod}}_paramAvgPedestrianPerMinFromWestToEast">Average pedestrian/min from WEST to EAST</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputParamAvgPedestrianPerMinFromWestToEast" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputParamAvgPedestrianPerMinFromWestToEast" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -1513,25 +1914,22 @@
 {{/inline}}
 
 {{#*inline "htmParamAvgPedestrianPerMinFromSouthToNorth"}}
+<!-- #*inline "htmParamAvgPedestrianPerMinFromSouthToNorth" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SmartTrafficLightParamAvgPedestrianPerMinFromSouthToNorth">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>Average pedestrian/min from WEST to EAST</label>
+													<label for="{{classApiMethodMethod}}_paramAvgPedestrianPerMinFromSouthToNorth">Average pedestrian/min from WEST to EAST</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputParamAvgPedestrianPerMinFromSouthToNorth" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputParamAvgPedestrianPerMinFromSouthToNorth" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -1542,25 +1940,22 @@
 {{/inline}}
 
 {{#*inline "htmParamPedestrianDemandScalingFactor"}}
+<!-- #*inline "htmParamPedestrianDemandScalingFactor" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SmartTrafficLightParamPedestrianDemandScalingFactor">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>Demand scaling factor (multiplies all pedestrian demands)</label>
+													<label for="{{classApiMethodMethod}}_paramPedestrianDemandScalingFactor">Demand scaling factor (multiplies all pedestrian demands)</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputParamPedestrianDemandScalingFactor" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputParamPedestrianDemandScalingFactor" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -1571,25 +1966,22 @@
 {{/inline}}
 
 {{#*inline "htmParamMinGreenTimeSecWestEast"}}
+<!-- #*inline "htmParamMinGreenTimeSecWestEast" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SmartTrafficLightParamMinGreenTimeSecWestEast">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>Min GREEN time for WEST-EAST traffic (sec)</label>
+													<label for="{{classApiMethodMethod}}_paramMinGreenTimeSecWestEast">Min GREEN time for WEST-EAST traffic (sec)</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputParamMinGreenTimeSecWestEast" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputParamMinGreenTimeSecWestEast" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -1600,25 +1992,22 @@
 {{/inline}}
 
 {{#*inline "htmParamMaxGreenTimeSecWestEast"}}
+<!-- #*inline "htmParamMaxGreenTimeSecWestEast" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SmartTrafficLightParamMaxGreenTimeSecWestEast">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>Max GREEN time for WEST-EAST traffic (sec)</label>
+													<label for="{{classApiMethodMethod}}_paramMaxGreenTimeSecWestEast">Max GREEN time for WEST-EAST traffic (sec)</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputParamMaxGreenTimeSecWestEast" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputParamMaxGreenTimeSecWestEast" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -1629,25 +2018,22 @@
 {{/inline}}
 
 {{#*inline "htmParamMinGreenTimeSecSouthNorth"}}
+<!-- #*inline "htmParamMinGreenTimeSecSouthNorth" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SmartTrafficLightParamMinGreenTimeSecSouthNorth">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>Min GREEN time for SOUTH-NORTH traffic (sec)</label>
+													<label for="{{classApiMethodMethod}}_paramMinGreenTimeSecSouthNorth">Min GREEN time for SOUTH-NORTH traffic (sec)</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputParamMinGreenTimeSecSouthNorth" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputParamMinGreenTimeSecSouthNorth" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -1658,25 +2044,22 @@
 {{/inline}}
 
 {{#*inline "htmParamMaxGreenTimeSecSouthNorth"}}
+<!-- #*inline "htmParamMaxGreenTimeSecSouthNorth" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SmartTrafficLightParamMaxGreenTimeSecSouthNorth">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>Max GREEN time for SOUTH-NORTH traffic (sec)</label>
+													<label for="{{classApiMethodMethod}}_paramMaxGreenTimeSecSouthNorth">Max GREEN time for SOUTH-NORTH traffic (sec)</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputParamMaxGreenTimeSecSouthNorth" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputParamMaxGreenTimeSecSouthNorth" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -1687,25 +2070,22 @@
 {{/inline}}
 
 {{#*inline "htmParamPedestrianWaitThresholdSecNorthSouth"}}
+<!-- #*inline "htmParamPedestrianWaitThresholdSecNorthSouth" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SmartTrafficLightParamPedestrianWaitThresholdSecNorthSouth">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>Pedestrian waiting time tolerance threshold for NORTH-SOUTH (sec)</label>
+													<label for="{{classApiMethodMethod}}_paramPedestrianWaitThresholdSecNorthSouth">Pedestrian waiting time tolerance threshold for NORTH-SOUTH (sec)</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputParamPedestrianWaitThresholdSecNorthSouth" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputParamPedestrianWaitThresholdSecNorthSouth" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -1716,25 +2096,22 @@
 {{/inline}}
 
 {{#*inline "htmParamPedestrianWaitThresholdSecWestEast"}}
+<!-- #*inline "htmParamPedestrianWaitThresholdSecWestEast" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SmartTrafficLightParamPedestrianWaitThresholdSecWestEast">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>Pedestrian waiting time tolerance threshold for WEST-EAST (sec)</label>
+													<label for="{{classApiMethodMethod}}_paramPedestrianWaitThresholdSecWestEast">Pedestrian waiting time tolerance threshold for WEST-EAST (sec)</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputParamPedestrianWaitThresholdSecWestEast" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputParamPedestrianWaitThresholdSecWestEast" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -1745,25 +2122,22 @@
 {{/inline}}
 
 {{#*inline "htmParamVehicleQueueThresholdWestEast"}}
+<!-- #*inline "htmParamVehicleQueueThresholdWestEast" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SmartTrafficLightParamVehicleQueueThresholdWestEast">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>Vehicle queue length threshold between low-high content for WEST-EAST</label>
+													<label for="{{classApiMethodMethod}}_paramVehicleQueueThresholdWestEast">Vehicle queue length threshold between low-high content for WEST-EAST</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputParamVehicleQueueThresholdWestEast" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputParamVehicleQueueThresholdWestEast" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -1774,25 +2148,22 @@
 {{/inline}}
 
 {{#*inline "htmParamVehicleQueueThresholdSouthNorth"}}
+<!-- #*inline "htmParamVehicleQueueThresholdSouthNorth" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SmartTrafficLightParamVehicleQueueThresholdSouthNorth">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>Vehicle queue length threshold between low-high content for SOUTH-NORTH</label>
+													<label for="{{classApiMethodMethod}}_paramVehicleQueueThresholdSouthNorth">Vehicle queue length threshold between low-high content for SOUTH-NORTH</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputParamVehicleQueueThresholdSouthNorth" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputParamVehicleQueueThresholdSouthNorth" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -1803,25 +2174,22 @@
 {{/inline}}
 
 {{#*inline "htmParamPedestrianQueueThresholdNorthSouth"}}
+<!-- #*inline "htmParamPedestrianQueueThresholdNorthSouth" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SmartTrafficLightParamPedestrianQueueThresholdNorthSouth">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>Pedestrian queue length threshold between low-high content for NORTH-SOUTH</label>
+													<label for="{{classApiMethodMethod}}_paramPedestrianQueueThresholdNorthSouth">Pedestrian queue length threshold between low-high content for NORTH-SOUTH</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputParamPedestrianQueueThresholdNorthSouth" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputParamPedestrianQueueThresholdNorthSouth" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -1832,25 +2200,22 @@
 {{/inline}}
 
 {{#*inline "htmParamPedestrianQueueThresholdWestEast"}}
+<!-- #*inline "htmParamPedestrianQueueThresholdWestEast" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									{{#eq 'Page' classApiMethodMethod}}
-										<div class="w3-padding ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SmartTrafficLightParamPedestrianQueueThresholdWestEast">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label>Pedestrian queue length threshold between low-high content for WEST-EAST</label>
+													<label for="{{classApiMethodMethod}}_paramPedestrianQueueThresholdWestEast">Pedestrian queue length threshold between low-high content for WEST-EAST</label>
 												</div>
-												<div class="w3-cell-row  ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														<div class="w3-rest ">
-															<span class="">
-																{{> "inputParamPedestrianQueueThresholdWestEast" roleRequired=roleRequired}}
-															</span>
-														</div>
+														{{> "inputParamPedestrianQueueThresholdWestEast" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
 										</div>
-	{{/eq}}
+									</div>
 								</div>
 {{/inline}}
 
@@ -1860,76 +2225,8 @@
 	{{/eq}}
 {{/inline}}
 
-{{#*inline "htmParamStepSize"}}
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}SmartTrafficLightParamStepSize">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_paramStepSize">Simulation time step (sec)</label>
-												</div>
-												<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputParamStepSize" roleRequired=roleRequired}}
-													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramStepSize')); $('#{{classApiMethodMethod}}_paramStepSize').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SmartTrafficLightForm :input[name=pk]').val() }], 'setParamStepSize', null, function() { addGlow($('#{{classApiMethodMethod}}_paramStepSize')); }, function() { addError($('#{{classApiMethodMethod}}_paramStepSize')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputParamStepSize"}}
-		{{#eq roleRequired "true"}}
-														<input
-															type="text"
-															placeholder="1"
-															title="Min: 0.5"
-															id="{{classApiMethodMethod}}_paramStepSize"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setParamStepSize classSmartTrafficLight inputSmartTrafficLight{{pk}}ParamStepSize w3-input w3-border "
-																name="setParamStepSize"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setParamStepSize classSmartTrafficLight inputSmartTrafficLight{{pk}}ParamStepSize w3-input w3-border "
-																name="setParamStepSize"
-		{{else}}
-																class="valueParamStepSize w3-input w3-border classSmartTrafficLight inputSmartTrafficLight{{pk}}ParamStepSize w3-input w3-border "
-																name="paramStepSize"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setParamStepSize', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_paramStepSize')); }, function() { addError($('#{{classApiMethodMethod}}_paramStepSize')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{smartTrafficLight_.paramStepSize}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varSmartTrafficLight{{pk}}ParamStepSize ">{{smartTrafficLight_.paramStepSize}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varSmartTrafficLight{{pk}}ParamStepSize ">{{smartTrafficLight_.paramStepSize}}</span>
-		{{/eq}}
-{{/inline}}
-
 {{#*inline "htmParamRunTime"}}
+<!-- #*inline "htmParamRunTime" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									<div class="w3-padding ">
 										<div id="suggest{{classApiMethodMethod}}SmartTrafficLightParamRunTime">
@@ -1937,23 +2234,10 @@
 												<div class="w3-cell-row w3-2017-shaded-spruce">
 													<label for="{{classApiMethodMethod}}_paramRunTime">time for each round of traffic simulation (sec)</label>
 												</div>
-												<div class="w3-cell-row w3-padding ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputParamRunTime" roleRequired=roleRequired}}
+														{{> "inputParamRunTime" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramRunTime')); $('#{{classApiMethodMethod}}_paramRunTime').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SmartTrafficLightForm :input[name=pk]').val() }], 'setParamRunTime', null, function() { addGlow($('#{{classApiMethodMethod}}_paramRunTime')); }, function() { addError($('#{{classApiMethodMethod}}_paramRunTime')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -1962,12 +2246,11 @@
 {{/inline}}
 
 {{#*inline "inputParamRunTime"}}
-		{{#eq roleRequired "true"}}
+		{{#eq roleForWriteBool "true"}}
 														<input
 															type="text"
-															placeholder="1000"
-															title="Time duration of each simulated sample path. "
-															id="{{classApiMethodMethod}}_paramRunTime"
+															placeholder="time for each round of traffic simulation (sec)"
+															title="Time duration of each simulated sample path. "															id="{{classApiMethodMethod}}_paramRunTime"
 	{{#eq "Page" classApiMethodMethod}}
 																class="setParamRunTime classSmartTrafficLight inputSmartTrafficLight{{pk}}ParamRunTime w3-input w3-border "
 																name="setParamRunTime"
@@ -1998,7 +2281,64 @@
 		{{/eq}}
 {{/inline}}
 
+{{#*inline "htmParamStepSize"}}
+<!-- #*inline "htmParamStepSize" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SmartTrafficLightParamStepSize">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_paramStepSize">Simulation time step (sec)</label>
+												</div>
+											<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputParamStepSize" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputParamStepSize"}}
+		{{#eq roleForWriteBool "true"}}
+														<input
+															type="text"
+															placeholder="Simulation time step (sec)"
+															title="Min: 0.5"															id="{{classApiMethodMethod}}_paramStepSize"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setParamStepSize classSmartTrafficLight inputSmartTrafficLight{{pk}}ParamStepSize w3-input w3-border "
+																name="setParamStepSize"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setParamStepSize classSmartTrafficLight inputSmartTrafficLight{{pk}}ParamStepSize w3-input w3-border "
+																name="setParamStepSize"
+		{{else}}
+																class="valueParamStepSize w3-input w3-border classSmartTrafficLight inputSmartTrafficLight{{pk}}ParamStepSize w3-input w3-border "
+																name="paramStepSize"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setParamStepSize', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_paramStepSize')); }, function() { addError($('#{{classApiMethodMethod}}_paramStepSize')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{smartTrafficLight_.paramStepSize}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varSmartTrafficLight{{pk}}ParamStepSize ">{{smartTrafficLight_.paramStepSize}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varSmartTrafficLight{{pk}}ParamStepSize ">{{smartTrafficLight_.paramStepSize}}</span>
+		{{/eq}}
+{{/inline}}
+
 {{#*inline "htmParamItersPerPar"}}
+<!-- #*inline "htmParamItersPerPar" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									<div class="w3-padding ">
 										<div id="suggest{{classApiMethodMethod}}SmartTrafficLightParamItersPerPar">
@@ -2006,23 +2346,10 @@
 												<div class="w3-cell-row w3-2017-shaded-spruce">
 													<label for="{{classApiMethodMethod}}_paramItersPerPar">Number of simulation repetitions with same input (for statistical accuracy)</label>
 												</div>
-												<div class="w3-cell-row w3-padding ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputParamItersPerPar" roleRequired=roleRequired}}
+														{{> "inputParamItersPerPar" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramItersPerPar')); $('#{{classApiMethodMethod}}_paramItersPerPar').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SmartTrafficLightForm :input[name=pk]').val() }], 'setParamItersPerPar', null, function() { addGlow($('#{{classApiMethodMethod}}_paramItersPerPar')); }, function() { addError($('#{{classApiMethodMethod}}_paramItersPerPar')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -2031,12 +2358,11 @@
 {{/inline}}
 
 {{#*inline "inputParamItersPerPar"}}
-		{{#eq roleRequired "true"}}
+		{{#eq roleForWriteBool "true"}}
 														<input
 															type="text"
-															placeholder="3"
-															title="Number of repeats per round. "
-															id="{{classApiMethodMethod}}_paramItersPerPar"
+															placeholder="Number of simulation repetitions with same input (for statistical accuracy)"
+															title="Number of repeats per round. "															id="{{classApiMethodMethod}}_paramItersPerPar"
 	{{#eq "Page" classApiMethodMethod}}
 																class="setParamItersPerPar classSmartTrafficLight inputSmartTrafficLight{{pk}}ParamItersPerPar w3-input w3-border "
 																name="setParamItersPerPar"
@@ -2068,6 +2394,7 @@
 {{/inline}}
 
 {{#*inline "htmParamTotalIterNum"}}
+<!-- #*inline "htmParamTotalIterNum" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									<div class="w3-padding ">
 										<div id="suggest{{classApiMethodMethod}}SmartTrafficLightParamTotalIterNum">
@@ -2075,23 +2402,10 @@
 												<div class="w3-cell-row w3-2017-shaded-spruce">
 													<label for="{{classApiMethodMethod}}_paramTotalIterNum">Number of parameter update iterations before output</label>
 												</div>
-												<div class="w3-cell-row w3-padding ">
+											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputParamTotalIterNum" roleRequired=roleRequired}}
+														{{> "inputParamTotalIterNum" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
-	{{#eq roleRequired "true"}}
-		{{#eq 'Page' classApiMethodMethod}}
-															<div class="w3-cell w3-left-align w3-cell-top ">
-																<button
-																		tabindex="-1"
-																		class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-																		onclick="removeGlow($('#{{classApiMethodMethod}}_paramTotalIterNum')); $('#{{classApiMethodMethod}}_paramTotalIterNum').val(null); patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:' + $('#SmartTrafficLightForm :input[name=pk]').val() }], 'setParamTotalIterNum', null, function() { addGlow($('#{{classApiMethodMethod}}_paramTotalIterNum')); }, function() { addError($('#{{classApiMethodMethod}}_paramTotalIterNum')); }); "
-																		>
-																	<i class="far fa-delete-left "></i>
-																</button>
-															</div>
-														{{/eq}}
-	{{/eq}}
 												</div>
 											</div>
 										</div>
@@ -2100,12 +2414,11 @@
 {{/inline}}
 
 {{#*inline "inputParamTotalIterNum"}}
-		{{#eq roleRequired "true"}}
+		{{#eq roleForWriteBool "true"}}
 														<input
 															type="text"
-															placeholder="5"
-															title="Total iterations to update performance. "
-															id="{{classApiMethodMethod}}_paramTotalIterNum"
+															placeholder="Number of parameter update iterations before output"
+															title="Total iterations to update performance. "															id="{{classApiMethodMethod}}_paramTotalIterNum"
 	{{#eq "Page" classApiMethodMethod}}
 																class="setParamTotalIterNum classSmartTrafficLight inputSmartTrafficLight{{pk}}ParamTotalIterNum w3-input w3-border "
 																name="setParamTotalIterNum"
@@ -2137,6 +2450,7 @@
 {{/inline}}
 
 {{#*inline "htmReportKeys"}}
+<!-- #*inline "htmReportKeys" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									<div class="w3-padding ">
 										<div id="suggest{{classApiMethodMethod}}SmartTrafficLightReportKeys">
@@ -2157,7 +2471,7 @@
 													<div class="w3-cell ">
 														<div class="w3-cell-row ">
 
-														{{> "inputReportKeys" roleRequired=roleRequired}}
+														{{> "inputReportKeys" roleForWrite=roleForWrite roleForRead=roleForRead}}
 														</div>
 													</div>
 												</div>
@@ -2165,7 +2479,7 @@
 													<div class="w3-cell w3-left-align w3-cell-top ">
 														<ul class="w3-ul w3-hoverable " id="listSmartTrafficLightReportKeys_{{classApiMethodMethod}}">
 														</ul>
-														{{#eq roleRequired "true"}}
+														{{#eq roleForReadBool "true"}}
 	{{#eq 'Page' classApiMethodMethod}}
 																<div class="w3-cell-row ">
 																	<button
@@ -2185,7 +2499,7 @@
 {{/inline}}
 
 {{#*inline "inputReportKeys"}}
-		{{#eq roleRequired "true"}}
+		{{#eq roleForWriteBool "true"}}
 														{{#eq 'PUTCopy' classApiMethodMethod}}
 															<div>
 																<input 
@@ -2203,7 +2517,7 @@
 															name="setReportKeys"
 															id="{{classApiMethodMethod}}_reportKeys"
 															autocomplete="off"
-															oninput="suggestSmartTrafficLightReportKeys($(this).val() ? [ { 'name': 'q', 'value': 'objectSuggest:' + $(this).val() }, { 'name': 'rows', 'value': '10' }, { 'name': 'fl', 'value': 'classCanonicalName,smartTrafficLightKey,pk,pageUrlPk,objectTitle' } ] : [{{#if pk}}{'name':'fq','value':'smartTrafficLightKey:{{pk}}'}{{else}}{{/if}}], $('#listSmartTrafficLightReportKeys_{{classApiMethodMethod}}'), {{pk}}); "
+															oninput="suggestSmartTrafficLightReportKeys($(this).val() ? [ { 'name': 'q', 'value': 'objectSuggest:' + $(this).val() }, { 'name': 'rows', 'value': '10' }, { 'name': 'fl', 'value': 'classCanonicalName,smartTrafficLightKey,pk' } ] : [{{#if pk}}{'name':'fq','value':'smartTrafficLightKey:{{pk}}'}{{else}}{{/if}}], $('#listSmartTrafficLightReportKeys_{{classApiMethodMethod}}'), {{pk}}); "
 															/>
 
 													{{else}}

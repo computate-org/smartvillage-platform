@@ -8322,6 +8322,40 @@ paths:
             application/json; charset=utf-8:
               schema:
                 $ref: '#/components/schemas/PUTImportSimulationReportResponse'
+  /api/simulation-report/copy:
+    put:
+      operationId: putcopySimulationReport
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-SimulationReport
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - SimulationReport
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+      requestBody:
+        description: >+
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PUTCopySimulationReportRequest'
+      responses:
+        '200':
+          description: >+
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/PUTCopySimulationReportResponse'
   /api/simulation-report/{id}:
     get:
       operationId: getSimulationReport
@@ -12573,6 +12607,16 @@ components:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/PUTImportSimulationReportResponse'
+    PUTCopySimulationReportRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PUTCopySimulationReportRequest'
+    PUTCopySimulationReportResponse:
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/PUTCopySimulationReportResponse'
     GETSimulationReportResponse:
       content:
         application/json; charset=utf-8:
@@ -15109,6 +15153,7 @@ components:
                     type: string
                   modified:
                     type: string
+                    format: date-time
                   pageImageUri:
                     type: string
                   pageImageWidth:
@@ -15173,6 +15218,7 @@ components:
               type: string
             modified:
               type: string
+              format: date-time
             pageImageUri:
               type: string
             pageImageWidth:
@@ -15237,6 +15283,7 @@ components:
               type: string
             modified:
               type: string
+              format: date-time
             pageImageUri:
               type: string
             pageImageWidth:
@@ -15332,10 +15379,13 @@ components:
             setModified:
               type: string
               nullable: true
+              format: date-time
             removeModified:
               type: string
+              format: date-time
             removeAllModified:
               type: string
+              format: date-time
             setPageImageUri:
               type: string
               nullable: true
@@ -15555,10 +15605,13 @@ components:
             setModified:
               type: string
               nullable: true
+              format: date-time
             removeModified:
               type: string
+              format: date-time
             removeAllModified:
               type: string
+              format: date-time
             setPageImageUri:
               type: string
               nullable: true
@@ -15747,6 +15800,7 @@ components:
               type: string
             modified:
               type: string
+              format: date-time
             pageImageUri:
               type: string
             pageImageWidth:
@@ -15811,6 +15865,7 @@ components:
               type: string
             modified:
               type: string
+              format: date-time
             pageImageUri:
               type: string
             pageImageWidth:
@@ -15875,6 +15930,7 @@ components:
               type: string
             modified:
               type: string
+              format: date-time
             pageImageUri:
               type: string
             pageImageWidth:
@@ -18855,6 +18911,8 @@ components:
                     format: date-time
                   simulationName:
                     type: string
+                  location:
+                    type: object
                   sumocfgPath:
                     type: string
                   fcdFilePath:
@@ -18968,6 +19026,13 @@ components:
               type: string
             removeAllSimulationName:
               type: string
+            setLocation:
+              type: object
+              nullable: true
+            removeLocation:
+              type: object
+            removeAllLocation:
+              type: object
             setSumocfgPath:
               type: string
               nullable: true
@@ -19341,6 +19406,13 @@ components:
               type: string
             removeAllSimulationName:
               type: string
+            setLocation:
+              type: object
+              nullable: true
+            removeLocation:
+              type: object
+            removeAllLocation:
+              type: object
             setSumocfgPath:
               type: string
               nullable: true
@@ -19702,6 +19774,8 @@ components:
               format: date-time
             simulationName:
               type: string
+            location:
+              type: object
             sumocfgPath:
               type: string
             fcdFilePath:
@@ -19803,6 +19877,8 @@ components:
               format: date-time
             simulationName:
               type: string
+            location:
+              type: object
             sumocfgPath:
               type: string
             fcdFilePath:
@@ -19904,6 +19980,8 @@ components:
               format: date-time
             simulationName:
               type: string
+            location:
+              type: object
             sumocfgPath:
               type: string
             fcdFilePath:
@@ -20005,6 +20083,8 @@ components:
               format: date-time
             simulationName:
               type: string
+            location:
+              type: object
             sumocfgPath:
               type: string
             fcdFilePath:
@@ -20106,6 +20186,8 @@ components:
               format: date-time
             simulationName:
               type: string
+            location:
+              type: object
             sumocfgPath:
               type: string
             fcdFilePath:
@@ -20434,20 +20516,6 @@ components:
               type: string
             removeAllParamTotalIterNum:
               type: string
-            setReportStatus:
-              type: string
-              nullable: true
-            removeReportStatus:
-              type: string
-            removeAllReportStatus:
-              type: string
-            setReportProgress:
-              type: string
-              nullable: true
-            removeReportProgress:
-              type: string
-            removeAllReportProgress:
-              type: string
             setUpdatedParameters:
               type: array
               nullable: true
@@ -20455,12 +20523,89 @@ components:
               type: array
             removeAllUpdatedParameters:
               type: array
+            setUpdatedParameters1:
+              type: array
+              nullable: true
+            removeUpdatedParameters1:
+              type: array
+            removeAllUpdatedParameters1:
+              type: array
+            setUpdatedParameters2:
+              type: array
+              nullable: true
+            removeUpdatedParameters2:
+              type: array
+            removeAllUpdatedParameters2:
+              type: array
+            setUpdatedParameters3:
+              type: array
+              nullable: true
+            removeUpdatedParameters3:
+              type: array
+            removeAllUpdatedParameters3:
+              type: array
+            setUpdatedParameters4:
+              type: array
+              nullable: true
+            removeUpdatedParameters4:
+              type: array
+            removeAllUpdatedParameters4:
+              type: array
+            setUpdatedParameters5:
+              type: array
+              nullable: true
+            removeUpdatedParameters5:
+              type: array
+            removeAllUpdatedParameters5:
+              type: array
+            setUpdatedParameters6:
+              type: array
+              nullable: true
+            removeUpdatedParameters6:
+              type: array
+            removeAllUpdatedParameters6:
+              type: array
+            setUpdatedParameters7:
+              type: array
+              nullable: true
+            removeUpdatedParameters7:
+              type: array
+            removeAllUpdatedParameters7:
+              type: array
+            setUpdatedParameters8:
+              type: array
+              nullable: true
+            removeUpdatedParameters8:
+              type: array
+            removeAllUpdatedParameters8:
+              type: array
+            setUpdatedParameters9:
+              type: array
+              nullable: true
+            removeUpdatedParameters9:
+              type: array
+            removeAllUpdatedParameters9:
+              type: array
+            setUpdatedParameters10:
+              type: array
+              nullable: true
+            removeUpdatedParameters10:
+              type: array
+            removeAllUpdatedParameters10:
+              type: array
             setUpdatedPerformance:
               type: array
               nullable: true
             removeUpdatedPerformance:
               type: array
             removeAllUpdatedPerformance:
+              type: array
+            setAverageQueueLength:
+              type: array
+              nullable: true
+            removeAverageQueueLength:
+              type: array
+            removeAllAverageQueueLength:
               type: array
             setUpdatedPerformanceWaitWestEastVehicleSec:
               type: array
@@ -20525,6 +20670,20 @@ components:
               type: array
             removeAllAvgQueueLengthWestEastPedestrian:
               type: array
+            setReportStatus:
+              type: string
+              nullable: true
+            removeReportStatus:
+              type: string
+            removeAllReportStatus:
+              type: string
+            setReportProgress:
+              type: string
+              nullable: true
+            removeReportProgress:
+              type: string
+            removeAllReportProgress:
+              type: string
     PATCHRunSimulationSimulationReportResponse:
       allOf:
         - type: object
@@ -20755,20 +20914,6 @@ components:
               type: string
             removeAllParamTotalIterNum:
               type: string
-            setReportStatus:
-              type: string
-              nullable: true
-            removeReportStatus:
-              type: string
-            removeAllReportStatus:
-              type: string
-            setReportProgress:
-              type: string
-              nullable: true
-            removeReportProgress:
-              type: string
-            removeAllReportProgress:
-              type: string
             setUpdatedParameters:
               type: array
               nullable: true
@@ -20776,12 +20921,89 @@ components:
               type: array
             removeAllUpdatedParameters:
               type: array
+            setUpdatedParameters1:
+              type: array
+              nullable: true
+            removeUpdatedParameters1:
+              type: array
+            removeAllUpdatedParameters1:
+              type: array
+            setUpdatedParameters2:
+              type: array
+              nullable: true
+            removeUpdatedParameters2:
+              type: array
+            removeAllUpdatedParameters2:
+              type: array
+            setUpdatedParameters3:
+              type: array
+              nullable: true
+            removeUpdatedParameters3:
+              type: array
+            removeAllUpdatedParameters3:
+              type: array
+            setUpdatedParameters4:
+              type: array
+              nullable: true
+            removeUpdatedParameters4:
+              type: array
+            removeAllUpdatedParameters4:
+              type: array
+            setUpdatedParameters5:
+              type: array
+              nullable: true
+            removeUpdatedParameters5:
+              type: array
+            removeAllUpdatedParameters5:
+              type: array
+            setUpdatedParameters6:
+              type: array
+              nullable: true
+            removeUpdatedParameters6:
+              type: array
+            removeAllUpdatedParameters6:
+              type: array
+            setUpdatedParameters7:
+              type: array
+              nullable: true
+            removeUpdatedParameters7:
+              type: array
+            removeAllUpdatedParameters7:
+              type: array
+            setUpdatedParameters8:
+              type: array
+              nullable: true
+            removeUpdatedParameters8:
+              type: array
+            removeAllUpdatedParameters8:
+              type: array
+            setUpdatedParameters9:
+              type: array
+              nullable: true
+            removeUpdatedParameters9:
+              type: array
+            removeAllUpdatedParameters9:
+              type: array
+            setUpdatedParameters10:
+              type: array
+              nullable: true
+            removeUpdatedParameters10:
+              type: array
+            removeAllUpdatedParameters10:
+              type: array
             setUpdatedPerformance:
               type: array
               nullable: true
             removeUpdatedPerformance:
               type: array
             removeAllUpdatedPerformance:
+              type: array
+            setAverageQueueLength:
+              type: array
+              nullable: true
+            removeAverageQueueLength:
+              type: array
+            removeAllAverageQueueLength:
               type: array
             setUpdatedPerformanceWaitWestEastVehicleSec:
               type: array
@@ -20846,6 +21068,20 @@ components:
               type: array
             removeAllAvgQueueLengthWestEastPedestrian:
               type: array
+            setReportStatus:
+              type: string
+              nullable: true
+            removeReportStatus:
+              type: string
+            removeAllReportStatus:
+              type: string
+            setReportProgress:
+              type: string
+              nullable: true
+            removeReportProgress:
+              type: string
+            removeAllReportProgress:
+              type: string
     SearchSimulationReportResponse:
       allOf:
         - type: object
@@ -20926,13 +21162,31 @@ components:
                     type: string
                   paramTotalIterNum:
                     type: string
-                  reportStatus:
-                    type: string
-                  reportProgress:
-                    type: string
                   updatedParameters:
                     type: array
+                  updatedParameters1:
+                    type: array
+                  updatedParameters2:
+                    type: array
+                  updatedParameters3:
+                    type: array
+                  updatedParameters4:
+                    type: array
+                  updatedParameters5:
+                    type: array
+                  updatedParameters6:
+                    type: array
+                  updatedParameters7:
+                    type: array
+                  updatedParameters8:
+                    type: array
+                  updatedParameters9:
+                    type: array
+                  updatedParameters10:
+                    type: array
                   updatedPerformance:
+                    type: array
+                  averageQueueLength:
                     type: array
                   updatedPerformanceWaitWestEastVehicleSec:
                     type: array
@@ -20952,6 +21206,10 @@ components:
                     type: array
                   avgQueueLengthWestEastPedestrian:
                     type: array
+                  reportStatus:
+                    type: string
+                  reportProgress:
+                    type: string
     PATCHSimulationReportRequest:
       allOf:
         - type: object
@@ -21182,20 +21440,6 @@ components:
               type: string
             removeAllParamTotalIterNum:
               type: string
-            setReportStatus:
-              type: string
-              nullable: true
-            removeReportStatus:
-              type: string
-            removeAllReportStatus:
-              type: string
-            setReportProgress:
-              type: string
-              nullable: true
-            removeReportProgress:
-              type: string
-            removeAllReportProgress:
-              type: string
             setUpdatedParameters:
               type: array
               nullable: true
@@ -21203,12 +21447,89 @@ components:
               type: array
             removeAllUpdatedParameters:
               type: array
+            setUpdatedParameters1:
+              type: array
+              nullable: true
+            removeUpdatedParameters1:
+              type: array
+            removeAllUpdatedParameters1:
+              type: array
+            setUpdatedParameters2:
+              type: array
+              nullable: true
+            removeUpdatedParameters2:
+              type: array
+            removeAllUpdatedParameters2:
+              type: array
+            setUpdatedParameters3:
+              type: array
+              nullable: true
+            removeUpdatedParameters3:
+              type: array
+            removeAllUpdatedParameters3:
+              type: array
+            setUpdatedParameters4:
+              type: array
+              nullable: true
+            removeUpdatedParameters4:
+              type: array
+            removeAllUpdatedParameters4:
+              type: array
+            setUpdatedParameters5:
+              type: array
+              nullable: true
+            removeUpdatedParameters5:
+              type: array
+            removeAllUpdatedParameters5:
+              type: array
+            setUpdatedParameters6:
+              type: array
+              nullable: true
+            removeUpdatedParameters6:
+              type: array
+            removeAllUpdatedParameters6:
+              type: array
+            setUpdatedParameters7:
+              type: array
+              nullable: true
+            removeUpdatedParameters7:
+              type: array
+            removeAllUpdatedParameters7:
+              type: array
+            setUpdatedParameters8:
+              type: array
+              nullable: true
+            removeUpdatedParameters8:
+              type: array
+            removeAllUpdatedParameters8:
+              type: array
+            setUpdatedParameters9:
+              type: array
+              nullable: true
+            removeUpdatedParameters9:
+              type: array
+            removeAllUpdatedParameters9:
+              type: array
+            setUpdatedParameters10:
+              type: array
+              nullable: true
+            removeUpdatedParameters10:
+              type: array
+            removeAllUpdatedParameters10:
+              type: array
             setUpdatedPerformance:
               type: array
               nullable: true
             removeUpdatedPerformance:
               type: array
             removeAllUpdatedPerformance:
+              type: array
+            setAverageQueueLength:
+              type: array
+              nullable: true
+            removeAverageQueueLength:
+              type: array
+            removeAllAverageQueueLength:
               type: array
             setUpdatedPerformanceWaitWestEastVehicleSec:
               type: array
@@ -21273,6 +21594,20 @@ components:
               type: array
             removeAllAvgQueueLengthWestEastPedestrian:
               type: array
+            setReportStatus:
+              type: string
+              nullable: true
+            removeReportStatus:
+              type: string
+            removeAllReportStatus:
+              type: string
+            setReportProgress:
+              type: string
+              nullable: true
+            removeReportProgress:
+              type: string
+            removeAllReportProgress:
+              type: string
     PATCHSimulationReportResponse:
       allOf:
         - type: object
@@ -21503,20 +21838,6 @@ components:
               type: string
             removeAllParamTotalIterNum:
               type: string
-            setReportStatus:
-              type: string
-              nullable: true
-            removeReportStatus:
-              type: string
-            removeAllReportStatus:
-              type: string
-            setReportProgress:
-              type: string
-              nullable: true
-            removeReportProgress:
-              type: string
-            removeAllReportProgress:
-              type: string
             setUpdatedParameters:
               type: array
               nullable: true
@@ -21524,12 +21845,89 @@ components:
               type: array
             removeAllUpdatedParameters:
               type: array
+            setUpdatedParameters1:
+              type: array
+              nullable: true
+            removeUpdatedParameters1:
+              type: array
+            removeAllUpdatedParameters1:
+              type: array
+            setUpdatedParameters2:
+              type: array
+              nullable: true
+            removeUpdatedParameters2:
+              type: array
+            removeAllUpdatedParameters2:
+              type: array
+            setUpdatedParameters3:
+              type: array
+              nullable: true
+            removeUpdatedParameters3:
+              type: array
+            removeAllUpdatedParameters3:
+              type: array
+            setUpdatedParameters4:
+              type: array
+              nullable: true
+            removeUpdatedParameters4:
+              type: array
+            removeAllUpdatedParameters4:
+              type: array
+            setUpdatedParameters5:
+              type: array
+              nullable: true
+            removeUpdatedParameters5:
+              type: array
+            removeAllUpdatedParameters5:
+              type: array
+            setUpdatedParameters6:
+              type: array
+              nullable: true
+            removeUpdatedParameters6:
+              type: array
+            removeAllUpdatedParameters6:
+              type: array
+            setUpdatedParameters7:
+              type: array
+              nullable: true
+            removeUpdatedParameters7:
+              type: array
+            removeAllUpdatedParameters7:
+              type: array
+            setUpdatedParameters8:
+              type: array
+              nullable: true
+            removeUpdatedParameters8:
+              type: array
+            removeAllUpdatedParameters8:
+              type: array
+            setUpdatedParameters9:
+              type: array
+              nullable: true
+            removeUpdatedParameters9:
+              type: array
+            removeAllUpdatedParameters9:
+              type: array
+            setUpdatedParameters10:
+              type: array
+              nullable: true
+            removeUpdatedParameters10:
+              type: array
+            removeAllUpdatedParameters10:
+              type: array
             setUpdatedPerformance:
               type: array
               nullable: true
             removeUpdatedPerformance:
               type: array
             removeAllUpdatedPerformance:
+              type: array
+            setAverageQueueLength:
+              type: array
+              nullable: true
+            removeAverageQueueLength:
+              type: array
+            removeAllAverageQueueLength:
               type: array
             setUpdatedPerformanceWaitWestEastVehicleSec:
               type: array
@@ -21594,6 +21992,20 @@ components:
               type: array
             removeAllAvgQueueLengthWestEastPedestrian:
               type: array
+            setReportStatus:
+              type: string
+              nullable: true
+            removeReportStatus:
+              type: string
+            removeAllReportStatus:
+              type: string
+            setReportProgress:
+              type: string
+              nullable: true
+            removeReportProgress:
+              type: string
+            removeAllReportProgress:
+              type: string
     POSTSimulationReportRequest:
       allOf:
         - type: object
@@ -21660,13 +22072,31 @@ components:
               type: string
             paramTotalIterNum:
               type: string
-            reportStatus:
-              type: string
-            reportProgress:
-              type: string
             updatedParameters:
               type: array
+            updatedParameters1:
+              type: array
+            updatedParameters2:
+              type: array
+            updatedParameters3:
+              type: array
+            updatedParameters4:
+              type: array
+            updatedParameters5:
+              type: array
+            updatedParameters6:
+              type: array
+            updatedParameters7:
+              type: array
+            updatedParameters8:
+              type: array
+            updatedParameters9:
+              type: array
+            updatedParameters10:
+              type: array
             updatedPerformance:
+              type: array
+            averageQueueLength:
               type: array
             updatedPerformanceWaitWestEastVehicleSec:
               type: array
@@ -21686,6 +22116,10 @@ components:
               type: array
             avgQueueLengthWestEastPedestrian:
               type: array
+            reportStatus:
+              type: string
+            reportProgress:
+              type: string
     POSTSimulationReportResponse:
       allOf:
         - type: object
@@ -21752,13 +22186,31 @@ components:
               type: string
             paramTotalIterNum:
               type: string
-            reportStatus:
-              type: string
-            reportProgress:
-              type: string
             updatedParameters:
               type: array
+            updatedParameters1:
+              type: array
+            updatedParameters2:
+              type: array
+            updatedParameters3:
+              type: array
+            updatedParameters4:
+              type: array
+            updatedParameters5:
+              type: array
+            updatedParameters6:
+              type: array
+            updatedParameters7:
+              type: array
+            updatedParameters8:
+              type: array
+            updatedParameters9:
+              type: array
+            updatedParameters10:
+              type: array
             updatedPerformance:
+              type: array
+            averageQueueLength:
               type: array
             updatedPerformanceWaitWestEastVehicleSec:
               type: array
@@ -21778,6 +22230,10 @@ components:
               type: array
             avgQueueLengthWestEastPedestrian:
               type: array
+            reportStatus:
+              type: string
+            reportProgress:
+              type: string
     PUTImportSimulationReportRequest:
       allOf:
         - type: object
@@ -21844,13 +22300,31 @@ components:
               type: string
             paramTotalIterNum:
               type: string
-            reportStatus:
-              type: string
-            reportProgress:
-              type: string
             updatedParameters:
               type: array
+            updatedParameters1:
+              type: array
+            updatedParameters2:
+              type: array
+            updatedParameters3:
+              type: array
+            updatedParameters4:
+              type: array
+            updatedParameters5:
+              type: array
+            updatedParameters6:
+              type: array
+            updatedParameters7:
+              type: array
+            updatedParameters8:
+              type: array
+            updatedParameters9:
+              type: array
+            updatedParameters10:
+              type: array
             updatedPerformance:
+              type: array
+            averageQueueLength:
               type: array
             updatedPerformanceWaitWestEastVehicleSec:
               type: array
@@ -21870,6 +22344,10 @@ components:
               type: array
             avgQueueLengthWestEastPedestrian:
               type: array
+            reportStatus:
+              type: string
+            reportProgress:
+              type: string
     PUTImportSimulationReportResponse:
       allOf:
         - type: object
@@ -21936,13 +22414,31 @@ components:
               type: string
             paramTotalIterNum:
               type: string
-            reportStatus:
-              type: string
-            reportProgress:
-              type: string
             updatedParameters:
               type: array
+            updatedParameters1:
+              type: array
+            updatedParameters2:
+              type: array
+            updatedParameters3:
+              type: array
+            updatedParameters4:
+              type: array
+            updatedParameters5:
+              type: array
+            updatedParameters6:
+              type: array
+            updatedParameters7:
+              type: array
+            updatedParameters8:
+              type: array
+            updatedParameters9:
+              type: array
+            updatedParameters10:
+              type: array
             updatedPerformance:
+              type: array
+            averageQueueLength:
               type: array
             updatedPerformanceWaitWestEastVehicleSec:
               type: array
@@ -21962,6 +22458,238 @@ components:
               type: array
             avgQueueLengthWestEastPedestrian:
               type: array
+            reportStatus:
+              type: string
+            reportProgress:
+              type: string
+    PUTCopySimulationReportRequest:
+      allOf:
+        - type: object
+          properties:
+            reportName:
+              type: string
+            simulationKey:
+              type: string
+            smartTrafficLightKey:
+              type: string
+            simulationName:
+              type: string
+            smartTrafficLightName:
+              type: string
+            paramAvgVehiclePerMinFromWestToEast:
+              type: string
+            paramAvgVehiclePerMinFromSouthToNorth:
+              type: string
+            paramVehicleDemandScalingFactor:
+              type: string
+            paramAvgPedestrianPerMinFromWestToEast:
+              type: string
+            paramAvgPedestrianPerMinFromSouthToNorth:
+              type: string
+            paramPedestrianDemandScalingFactor:
+              type: string
+            paramLam:
+              type: array
+              items:
+                type: string
+            paramMinGreenTimeSecWestEast:
+              type: string
+            paramMaxGreenTimeSecWestEast:
+              type: string
+            paramMinGreenTimeSecSouthNorth:
+              type: string
+            paramMaxGreenTimeSecSouthNorth:
+              type: string
+            paramPedestrianWaitThresholdSecNorthSouth:
+              type: string
+            paramPedestrianWaitThresholdSecWestEast:
+              type: string
+            paramVehicleQueueThresholdWestEast:
+              type: string
+            paramVehicleQueueThresholdSouthNorth:
+              type: string
+            paramPedestrianQueueThresholdNorthSouth:
+              type: string
+            paramPedestrianQueueThresholdWestEast:
+              type: string
+            paramDemandScale:
+              type: array
+              items:
+                type: string
+            paramInitialPar:
+              type: array
+              items:
+                type: string
+            paramStepSize:
+              type: string
+            paramRunTime:
+              type: string
+            paramItersPerPar:
+              type: string
+            paramTotalIterNum:
+              type: string
+            updatedParameters:
+              type: array
+            updatedParameters1:
+              type: array
+            updatedParameters2:
+              type: array
+            updatedParameters3:
+              type: array
+            updatedParameters4:
+              type: array
+            updatedParameters5:
+              type: array
+            updatedParameters6:
+              type: array
+            updatedParameters7:
+              type: array
+            updatedParameters8:
+              type: array
+            updatedParameters9:
+              type: array
+            updatedParameters10:
+              type: array
+            updatedPerformance:
+              type: array
+            averageQueueLength:
+              type: array
+            updatedPerformanceWaitWestEastVehicleSec:
+              type: array
+            updatedPerformanceWaitSouthNorthVehicleSec:
+              type: array
+            updatedPerformanceWaitAllVehicleSec:
+              type: array
+            updatedPerformanceWaitAllPedestrianSec:
+              type: array
+            updatedPerformanceWaitAllVehiclePedestrianSec:
+              type: array
+            avgQueueLengthWestEastVehicle:
+              type: array
+            avgQueueLengthSouthNorthVehicle:
+              type: array
+            avgQueueLengthNorthSouthPedestrian:
+              type: array
+            avgQueueLengthWestEastPedestrian:
+              type: array
+            reportStatus:
+              type: string
+            reportProgress:
+              type: string
+    PUTCopySimulationReportResponse:
+      allOf:
+        - type: object
+          properties:
+            reportName:
+              type: string
+            simulationKey:
+              type: string
+            smartTrafficLightKey:
+              type: string
+            simulationName:
+              type: string
+            smartTrafficLightName:
+              type: string
+            paramAvgVehiclePerMinFromWestToEast:
+              type: string
+            paramAvgVehiclePerMinFromSouthToNorth:
+              type: string
+            paramVehicleDemandScalingFactor:
+              type: string
+            paramAvgPedestrianPerMinFromWestToEast:
+              type: string
+            paramAvgPedestrianPerMinFromSouthToNorth:
+              type: string
+            paramPedestrianDemandScalingFactor:
+              type: string
+            paramLam:
+              type: array
+              items:
+                type: string
+            paramMinGreenTimeSecWestEast:
+              type: string
+            paramMaxGreenTimeSecWestEast:
+              type: string
+            paramMinGreenTimeSecSouthNorth:
+              type: string
+            paramMaxGreenTimeSecSouthNorth:
+              type: string
+            paramPedestrianWaitThresholdSecNorthSouth:
+              type: string
+            paramPedestrianWaitThresholdSecWestEast:
+              type: string
+            paramVehicleQueueThresholdWestEast:
+              type: string
+            paramVehicleQueueThresholdSouthNorth:
+              type: string
+            paramPedestrianQueueThresholdNorthSouth:
+              type: string
+            paramPedestrianQueueThresholdWestEast:
+              type: string
+            paramDemandScale:
+              type: array
+              items:
+                type: string
+            paramInitialPar:
+              type: array
+              items:
+                type: string
+            paramStepSize:
+              type: string
+            paramRunTime:
+              type: string
+            paramItersPerPar:
+              type: string
+            paramTotalIterNum:
+              type: string
+            updatedParameters:
+              type: array
+            updatedParameters1:
+              type: array
+            updatedParameters2:
+              type: array
+            updatedParameters3:
+              type: array
+            updatedParameters4:
+              type: array
+            updatedParameters5:
+              type: array
+            updatedParameters6:
+              type: array
+            updatedParameters7:
+              type: array
+            updatedParameters8:
+              type: array
+            updatedParameters9:
+              type: array
+            updatedParameters10:
+              type: array
+            updatedPerformance:
+              type: array
+            averageQueueLength:
+              type: array
+            updatedPerformanceWaitWestEastVehicleSec:
+              type: array
+            updatedPerformanceWaitSouthNorthVehicleSec:
+              type: array
+            updatedPerformanceWaitAllVehicleSec:
+              type: array
+            updatedPerformanceWaitAllPedestrianSec:
+              type: array
+            updatedPerformanceWaitAllVehiclePedestrianSec:
+              type: array
+            avgQueueLengthWestEastVehicle:
+              type: array
+            avgQueueLengthSouthNorthVehicle:
+              type: array
+            avgQueueLengthNorthSouthPedestrian:
+              type: array
+            avgQueueLengthWestEastPedestrian:
+              type: array
+            reportStatus:
+              type: string
+            reportProgress:
+              type: string
     GETSimulationReportResponse:
       allOf:
         - type: object
@@ -22028,13 +22756,31 @@ components:
               type: string
             paramTotalIterNum:
               type: string
-            reportStatus:
-              type: string
-            reportProgress:
-              type: string
             updatedParameters:
               type: array
+            updatedParameters1:
+              type: array
+            updatedParameters2:
+              type: array
+            updatedParameters3:
+              type: array
+            updatedParameters4:
+              type: array
+            updatedParameters5:
+              type: array
+            updatedParameters6:
+              type: array
+            updatedParameters7:
+              type: array
+            updatedParameters8:
+              type: array
+            updatedParameters9:
+              type: array
+            updatedParameters10:
+              type: array
             updatedPerformance:
+              type: array
+            averageQueueLength:
               type: array
             updatedPerformanceWaitWestEastVehicleSec:
               type: array
@@ -22054,6 +22800,10 @@ components:
               type: array
             avgQueueLengthWestEastPedestrian:
               type: array
+            reportStatus:
+              type: string
+            reportProgress:
+              type: string
     SearchPageSimulationReportResponse:
       allOf:
         - type: string
@@ -22083,6 +22833,7 @@ components:
                     type: string
                   dateTime:
                     type: string
+                    format: date-time
     PATCHTimeStepRequest:
       allOf:
         - type: object
@@ -22111,10 +22862,13 @@ components:
             setDateTime:
               type: string
               nullable: true
+              format: date-time
             removeDateTime:
               type: string
+              format: date-time
             removeAllDateTime:
               type: string
+              format: date-time
     PATCHTimeStepResponse:
       allOf:
         - type: object
@@ -22143,10 +22897,13 @@ components:
             setDateTime:
               type: string
               nullable: true
+              format: date-time
             removeDateTime:
               type: string
+              format: date-time
             removeAllDateTime:
               type: string
+              format: date-time
     POSTTimeStepRequest:
       allOf:
         - type: object
@@ -22159,6 +22916,7 @@ components:
               type: string
             dateTime:
               type: string
+              format: date-time
     POSTTimeStepResponse:
       allOf:
         - type: object
@@ -22171,6 +22929,7 @@ components:
               type: string
             dateTime:
               type: string
+              format: date-time
     PUTImportTimeStepRequest:
       allOf:
         - type: object
@@ -22183,6 +22942,7 @@ components:
               type: string
             dateTime:
               type: string
+              format: date-time
     PUTImportTimeStepResponse:
       allOf:
         - type: object
@@ -22195,6 +22955,7 @@ components:
               type: string
             dateTime:
               type: string
+              format: date-time
     GETTimeStepResponse:
       allOf:
         - type: object
@@ -22207,6 +22968,7 @@ components:
               type: string
             dateTime:
               type: string
+              format: date-time
     SearchPageTimeStepResponse:
       allOf:
         - type: string
@@ -23873,6 +24635,7 @@ components:
                     type: string
                   dateTime:
                     type: string
+                    format: date-time
                   x:
                     type: string
                   y:
@@ -23893,6 +24656,7 @@ components:
               type: string
             dateTime:
               type: string
+              format: date-time
             x:
               type: string
             y:

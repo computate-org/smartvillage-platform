@@ -39,8 +39,6 @@ public class BaseModel extends BaseModelGen<Object> implements ComputateBaseMode
 	 * PrimaryKey: true
 	 * UrlVar: pageUrlApi
 	 * Modify: false
-	 * HtmRow: 1
-	 * HtmCell: 1
 	 * DisplayName.enUS: primary key
 	 * Description: The primary key of this object in the database
 	 * Facet: true

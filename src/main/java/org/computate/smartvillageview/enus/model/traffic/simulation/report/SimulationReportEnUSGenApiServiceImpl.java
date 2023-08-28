@@ -1956,6 +1956,628 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 		return promise.future();
 	}
 
+	// PUTCopy //
+
+	@Override
+	public void putcopySimulationReport(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
+		LOG.debug(String.format("putcopySimulationReport started. "));
+		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartabyar-smartvillage-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
+
+			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
+				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", msg)
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+					)
+				));
+			}).onSuccess(b -> {
+				if(
+						!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SimulationReport")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						|| !Optional.ofNullable(Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_READ_REQUIRED + "_SimulationReport")).orElse(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SimulationReport"))).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						) {
+					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
+					eventHandler.handle(Future.succeededFuture(
+						new ServiceResponse(401, "UNAUTHORIZED",
+							Buffer.buffer().appendString(
+								new JsonObject()
+									.put("errorCode", "401")
+									.put("errorMessage", msg)
+									.encodePrettily()
+								), MultiMap.caseInsensitiveMultiMap()
+						)
+					));
+				} else {
+					try {
+						response200PUTCopySimulationReport(siteRequest).onSuccess(response -> {
+							eventHandler.handle(Future.succeededFuture(response));
+							searchSimulationReportList(siteRequest, false, true, true).onSuccess(listSimulationReport -> {
+								ApiRequest apiRequest = new ApiRequest();
+								apiRequest.setRows(listSimulationReport.getRequest().getRows());
+								apiRequest.setNumFound(listSimulationReport.getResponse().getResponse().getNumFound());
+								apiRequest.setNumPATCH(0L);
+								apiRequest.initDeepApiRequest(siteRequest);
+								siteRequest.setApiRequest_(apiRequest);
+								eventBus.publish("websocketSimulationReport", JsonObject.mapFrom(apiRequest).toString());
+								listPUTCopySimulationReport(apiRequest, listSimulationReport).onSuccess(e -> {
+									response200PUTCopySimulationReport(siteRequest).onSuccess(f -> {
+										LOG.debug(String.format("putcopySimulationReport succeeded. "));
+										eventHandler.handle(Future.succeededFuture(response));
+									}).onFailure(ex -> {
+										LOG.error(String.format("putcopySimulationReport failed. "), ex);
+										error(siteRequest, eventHandler, ex);
+									});
+								}).onFailure(ex -> {
+									LOG.error(String.format("putcopySimulationReport failed. "), ex);
+									error(siteRequest, eventHandler, ex);
+								});
+							}).onFailure(ex -> {
+								LOG.error(String.format("putcopySimulationReport failed. "), ex);
+								error(siteRequest, eventHandler, ex);
+							});
+						}).onFailure(ex -> {
+							LOG.error(String.format("putcopySimulationReport failed. "), ex);
+							error(siteRequest, eventHandler, ex);
+						});
+					} catch(Exception ex) {
+						LOG.error(String.format("putcopySimulationReport failed. "), ex);
+						error(null, eventHandler, ex);
+					}
+				}
+			});
+		}).onFailure(ex -> {
+			if("Inactive Token".equals(ex.getMessage()) || StringUtils.startsWith(ex.getMessage(), "invalid_grant:")) {
+				try {
+					eventHandler.handle(Future.succeededFuture(new ServiceResponse(302, "Found", null, MultiMap.caseInsensitiveMultiMap().add(HttpHeaders.LOCATION, "/logout?redirect_uri=" + URLEncoder.encode(serviceRequest.getExtra().getString("uri"), "UTF-8")))));
+				} catch(Exception ex2) {
+					LOG.error(String.format("putcopySimulationReport failed. ", ex2));
+					error(null, eventHandler, ex2);
+				}
+			} else if(StringUtils.startsWith(ex.getMessage(), "401 UNAUTHORIZED ")) {
+				eventHandler.handle(Future.succeededFuture(
+					new ServiceResponse(401, "UNAUTHORIZED",
+						Buffer.buffer().appendString(
+							new JsonObject()
+								.put("errorCode", "401")
+								.put("errorMessage", "SSO Resource Permission check returned DENY")
+								.encodePrettily()
+							), MultiMap.caseInsensitiveMultiMap()
+							)
+					));
+			} else {
+				LOG.error(String.format("putcopySimulationReport failed. "), ex);
+				error(null, eventHandler, ex);
+			}
+		});
+	}
+
+
+	public Future<Void> listPUTCopySimulationReport(ApiRequest apiRequest, SearchList<SimulationReport> listSimulationReport) {
+		Promise<Void> promise = Promise.promise();
+		List<Future> futures = new ArrayList<>();
+		SiteRequestEnUS siteRequest = listSimulationReport.getSiteRequest_(SiteRequestEnUS.class);
+		listSimulationReport.getList().forEach(o -> {
+			SiteRequestEnUS siteRequest2 = siteRequest.copy();
+			siteRequest2.setApiRequest_(siteRequest.getApiRequest_());
+			o.setSiteRequest_(siteRequest2);
+			futures.add(
+				putcopySimulationReportFuture(siteRequest2, JsonObject.mapFrom(o)).onFailure(ex -> {
+					LOG.error(String.format("listPUTCopySimulationReport failed. "), ex);
+					error(siteRequest, null, ex);
+				})
+			);
+		});
+		CompositeFuture.all(futures).onSuccess(a -> {
+			apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listSimulationReport.size());
+			listSimulationReport.next().onSuccess(next -> {
+				if(next) {
+					listPUTCopySimulationReport(apiRequest, listSimulationReport).onSuccess(b -> {
+						promise.complete();
+					}).onFailure(ex -> {
+						LOG.error(String.format("listPUTCopySimulationReport failed. "), ex);
+						promise.fail(ex);
+					});
+				} else {
+					promise.complete();
+				}
+			}).onFailure(ex -> {
+				LOG.error(String.format("listPUTCopySimulationReport failed. "), ex);
+				error(listSimulationReport.getSiteRequest_(SiteRequestEnUS.class), null, ex);
+			});
+		}).onFailure(ex -> {
+			LOG.error(String.format("listPUTCopySimulationReport failed. "), ex);
+			error(listSimulationReport.getSiteRequest_(SiteRequestEnUS.class), null, ex);
+		});
+		return promise.future();
+	}
+
+	public Future<SimulationReport> putcopySimulationReportFuture(SiteRequestEnUS siteRequest, JsonObject jsonObject) {
+		Promise<SimulationReport> promise = Promise.promise();
+
+		try {
+
+			jsonObject.put("saves", Optional.ofNullable(jsonObject.getJsonArray("saves")).orElse(new JsonArray()));
+			JsonObject jsonPatch = Optional.ofNullable(siteRequest.getJsonObject()).map(o -> o.getJsonObject("patch")).orElse(new JsonObject());
+			jsonPatch.stream().forEach(o -> {
+				if(o.getValue() == null)
+					jsonObject.remove(o.getKey());
+				else
+					jsonObject.put(o.getKey(), o.getValue());
+				if(!jsonObject.getJsonArray("saves").contains(o.getKey()))
+					jsonObject.getJsonArray("saves").add(o.getKey());
+			});
+
+			pgPool.withTransaction(sqlConnection -> {
+				Promise<SimulationReport> promise1 = Promise.promise();
+				siteRequest.setSqlConnection(sqlConnection);
+				createSimulationReport(siteRequest).onSuccess(simulationReport -> {
+					sqlPUTCopySimulationReport(simulationReport, jsonObject).onSuccess(b -> {
+						persistSimulationReport(simulationReport).onSuccess(c -> {
+							relateSimulationReport(simulationReport).onSuccess(d -> {
+								indexSimulationReport(simulationReport).onSuccess(e -> {
+									promise1.complete(simulationReport);
+								}).onFailure(ex -> {
+									promise1.fail(ex);
+								});
+							}).onFailure(ex -> {
+								promise1.fail(ex);
+							});
+						}).onFailure(ex -> {
+							promise1.fail(ex);
+						});
+					}).onFailure(ex -> {
+						promise1.fail(ex);
+					});
+				}).onFailure(ex -> {
+					promise1.fail(ex);
+				});
+				return promise1.future();
+			}).onSuccess(a -> {
+				siteRequest.setSqlConnection(null);
+			}).onFailure(ex -> {
+				siteRequest.setSqlConnection(null);
+				promise.fail(ex);
+			}).compose(simulationReport -> {
+				Promise<SimulationReport> promise2 = Promise.promise();
+				refreshSimulationReport(simulationReport).onSuccess(a -> {
+					try {
+						ApiRequest apiRequest = siteRequest.getApiRequest_();
+						if(apiRequest != null) {
+							apiRequest.setNumPATCH(apiRequest.getNumPATCH() + 1);
+							simulationReport.apiRequestSimulationReport();
+							eventBus.publish("websocketSimulationReport", JsonObject.mapFrom(apiRequest).toString());
+						}
+						promise2.complete(simulationReport);
+					} catch(Exception ex) {
+						LOG.error(String.format("putcopySimulationReportFuture failed. "), ex);
+						promise.fail(ex);
+					}
+				}).onFailure(ex -> {
+					promise2.fail(ex);
+				});
+				return promise2.future();
+			}).onSuccess(simulationReport -> {
+				promise.complete(simulationReport);
+			}).onFailure(ex -> {
+				promise.fail(ex);
+			});
+		} catch(Exception ex) {
+			LOG.error(String.format("putcopySimulationReportFuture failed. "), ex);
+			promise.fail(ex);
+		}
+		return promise.future();
+	}
+
+	public Future<Void> sqlPUTCopySimulationReport(SimulationReport o, JsonObject jsonObject) {
+		Promise<Void> promise = Promise.promise();
+		try {
+			SiteRequestEnUS siteRequest = o.getSiteRequest_();
+			ApiRequest apiRequest = siteRequest.getApiRequest_();
+			List<Long> pks = Optional.ofNullable(apiRequest).map(r -> r.getPks()).orElse(new ArrayList<>());
+			List<String> classes = Optional.ofNullable(apiRequest).map(r -> r.getClasses()).orElse(new ArrayList<>());
+			SqlConnection sqlConnection = siteRequest.getSqlConnection();
+			Integer num = 1;
+			StringBuilder bSql = new StringBuilder("UPDATE SimulationReport SET ");
+			List<Object> bParams = new ArrayList<Object>();
+			SimulationReport o2 = new SimulationReport();
+			o2.setSiteRequest_(siteRequest);
+			Long pk = o.getPk();
+			List<Future> futures = new ArrayList<>();
+
+			if(jsonObject != null) {
+				JsonArray entityVars = jsonObject.getJsonArray("saves");
+				for(Integer i = 0; i < entityVars.size(); i++) {
+					String entityVar = entityVars.getString(i);
+					switch(entityVar) {
+					case SimulationReport.VAR_inheritPk:
+						o2.setInheritPk(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_inheritPk + "=$" + num);
+						num++;
+						bParams.add(o2.sqlInheritPk());
+						break;
+					case SimulationReport.VAR_created:
+						o2.setCreated(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_created + "=$" + num);
+						num++;
+						bParams.add(o2.sqlCreated());
+						break;
+					case SimulationReport.VAR_archived:
+						o2.setArchived(jsonObject.getBoolean(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_archived + "=$" + num);
+						num++;
+						bParams.add(o2.sqlArchived());
+						break;
+					case SimulationReport.VAR_deleted:
+						o2.setDeleted(jsonObject.getBoolean(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_deleted + "=$" + num);
+						num++;
+						bParams.add(o2.sqlDeleted());
+						break;
+					case SimulationReport.VAR_sessionId:
+						o2.setSessionId(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_sessionId + "=$" + num);
+						num++;
+						bParams.add(o2.sqlSessionId());
+						break;
+					case SimulationReport.VAR_userKey:
+						o2.setUserKey(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_userKey + "=$" + num);
+						num++;
+						bParams.add(o2.sqlUserKey());
+						break;
+					case SimulationReport.VAR_reportName:
+						o2.setReportName(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_reportName + "=$" + num);
+						num++;
+						bParams.add(o2.sqlReportName());
+						break;
+					case SimulationReport.VAR_simulationKey:
+						{
+							Long l = Long.parseLong(jsonObject.getString(entityVar));
+							if(l != null) {
+								if(bParams.size() > 0) {
+									bSql.append(", ");
+								}
+								bSql.append(SimulationReport.VAR_simulationKey + "=$" + num);
+								num++;
+								bParams.add(l);
+							}
+						}
+						break;
+					case SimulationReport.VAR_smartTrafficLightKey:
+						{
+							Long l = Long.parseLong(jsonObject.getString(entityVar));
+							if(l != null) {
+								if(bParams.size() > 0) {
+									bSql.append(", ");
+								}
+								bSql.append(SimulationReport.VAR_smartTrafficLightKey + "=$" + num);
+								num++;
+								bParams.add(l);
+							}
+						}
+						break;
+					case SimulationReport.VAR_simulationName:
+						o2.setSimulationName(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_simulationName + "=$" + num);
+						num++;
+						bParams.add(o2.sqlSimulationName());
+						break;
+					case SimulationReport.VAR_smartTrafficLightName:
+						o2.setSmartTrafficLightName(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_smartTrafficLightName + "=$" + num);
+						num++;
+						bParams.add(o2.sqlSmartTrafficLightName());
+						break;
+					case SimulationReport.VAR_paramAvgVehiclePerMinFromWestToEast:
+						o2.setParamAvgVehiclePerMinFromWestToEast(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_paramAvgVehiclePerMinFromWestToEast + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamAvgVehiclePerMinFromWestToEast());
+						break;
+					case SimulationReport.VAR_paramAvgVehiclePerMinFromSouthToNorth:
+						o2.setParamAvgVehiclePerMinFromSouthToNorth(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_paramAvgVehiclePerMinFromSouthToNorth + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamAvgVehiclePerMinFromSouthToNorth());
+						break;
+					case SimulationReport.VAR_paramVehicleDemandScalingFactor:
+						o2.setParamVehicleDemandScalingFactor(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_paramVehicleDemandScalingFactor + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamVehicleDemandScalingFactor());
+						break;
+					case SimulationReport.VAR_paramAvgPedestrianPerMinFromWestToEast:
+						o2.setParamAvgPedestrianPerMinFromWestToEast(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_paramAvgPedestrianPerMinFromWestToEast + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamAvgPedestrianPerMinFromWestToEast());
+						break;
+					case SimulationReport.VAR_paramAvgPedestrianPerMinFromSouthToNorth:
+						o2.setParamAvgPedestrianPerMinFromSouthToNorth(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_paramAvgPedestrianPerMinFromSouthToNorth + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamAvgPedestrianPerMinFromSouthToNorth());
+						break;
+					case SimulationReport.VAR_paramPedestrianDemandScalingFactor:
+						o2.setParamPedestrianDemandScalingFactor(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_paramPedestrianDemandScalingFactor + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamPedestrianDemandScalingFactor());
+						break;
+					case SimulationReport.VAR_paramMinGreenTimeSecWestEast:
+						o2.setParamMinGreenTimeSecWestEast(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_paramMinGreenTimeSecWestEast + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamMinGreenTimeSecWestEast());
+						break;
+					case SimulationReport.VAR_paramMaxGreenTimeSecWestEast:
+						o2.setParamMaxGreenTimeSecWestEast(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_paramMaxGreenTimeSecWestEast + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamMaxGreenTimeSecWestEast());
+						break;
+					case SimulationReport.VAR_paramMinGreenTimeSecSouthNorth:
+						o2.setParamMinGreenTimeSecSouthNorth(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_paramMinGreenTimeSecSouthNorth + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamMinGreenTimeSecSouthNorth());
+						break;
+					case SimulationReport.VAR_paramMaxGreenTimeSecSouthNorth:
+						o2.setParamMaxGreenTimeSecSouthNorth(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_paramMaxGreenTimeSecSouthNorth + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamMaxGreenTimeSecSouthNorth());
+						break;
+					case SimulationReport.VAR_paramPedestrianWaitThresholdSecNorthSouth:
+						o2.setParamPedestrianWaitThresholdSecNorthSouth(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_paramPedestrianWaitThresholdSecNorthSouth + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamPedestrianWaitThresholdSecNorthSouth());
+						break;
+					case SimulationReport.VAR_paramPedestrianWaitThresholdSecWestEast:
+						o2.setParamPedestrianWaitThresholdSecWestEast(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_paramPedestrianWaitThresholdSecWestEast + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamPedestrianWaitThresholdSecWestEast());
+						break;
+					case SimulationReport.VAR_paramVehicleQueueThresholdWestEast:
+						o2.setParamVehicleQueueThresholdWestEast(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_paramVehicleQueueThresholdWestEast + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamVehicleQueueThresholdWestEast());
+						break;
+					case SimulationReport.VAR_paramVehicleQueueThresholdSouthNorth:
+						o2.setParamVehicleQueueThresholdSouthNorth(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_paramVehicleQueueThresholdSouthNorth + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamVehicleQueueThresholdSouthNorth());
+						break;
+					case SimulationReport.VAR_paramPedestrianQueueThresholdNorthSouth:
+						o2.setParamPedestrianQueueThresholdNorthSouth(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_paramPedestrianQueueThresholdNorthSouth + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamPedestrianQueueThresholdNorthSouth());
+						break;
+					case SimulationReport.VAR_paramPedestrianQueueThresholdWestEast:
+						o2.setParamPedestrianQueueThresholdWestEast(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_paramPedestrianQueueThresholdWestEast + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamPedestrianQueueThresholdWestEast());
+						break;
+					case SimulationReport.VAR_paramDemandScale:
+						o2.setParamDemandScale(jsonObject.getJsonArray(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_paramDemandScale + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamDemandScale());
+						break;
+					case SimulationReport.VAR_paramStepSize:
+						o2.setParamStepSize(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_paramStepSize + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamStepSize());
+						break;
+					case SimulationReport.VAR_paramRunTime:
+						o2.setParamRunTime(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_paramRunTime + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamRunTime());
+						break;
+					case SimulationReport.VAR_paramItersPerPar:
+						o2.setParamItersPerPar(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_paramItersPerPar + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamItersPerPar());
+						break;
+					case SimulationReport.VAR_paramTotalIterNum:
+						o2.setParamTotalIterNum(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_paramTotalIterNum + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamTotalIterNum());
+						break;
+					case SimulationReport.VAR_updatedParameters:
+						o2.setUpdatedParameters(jsonObject.getJsonArray(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_updatedParameters + "=$" + num);
+						num++;
+						bParams.add(o2.sqlUpdatedParameters());
+						break;
+					case SimulationReport.VAR_updatedPerformance:
+						o2.setUpdatedPerformance(jsonObject.getJsonArray(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_updatedPerformance + "=$" + num);
+						num++;
+						bParams.add(o2.sqlUpdatedPerformance());
+						break;
+					case SimulationReport.VAR_averageQueueLength:
+						o2.setAverageQueueLength(jsonObject.getJsonArray(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_averageQueueLength + "=$" + num);
+						num++;
+						bParams.add(o2.sqlAverageQueueLength());
+						break;
+					case SimulationReport.VAR_reportStatus:
+						o2.setReportStatus(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_reportStatus + "=$" + num);
+						num++;
+						bParams.add(o2.sqlReportStatus());
+						break;
+					case SimulationReport.VAR_reportProgress:
+						o2.setReportProgress(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_reportProgress + "=$" + num);
+						num++;
+						bParams.add(o2.sqlReportProgress());
+						break;
+					}
+				}
+			}
+			bSql.append(" WHERE pk=$" + num);
+			if(bParams.size() > 0) {
+			bParams.add(pk);
+			num++;
+				futures.add(Future.future(a -> {
+					sqlConnection.preparedQuery(bSql.toString())
+							.execute(Tuple.tuple(bParams)
+							).onSuccess(b -> {
+						a.handle(Future.succeededFuture());
+					}).onFailure(ex -> {
+						RuntimeException ex2 = new RuntimeException("value SimulationReport failed", ex);
+						LOG.error(String.format("relateSimulationReport failed. "), ex2);
+						a.handle(Future.failedFuture(ex2));
+					});
+				}));
+			}
+			CompositeFuture.all(futures).onSuccess(a -> {
+				promise.complete();
+			}).onFailure(ex -> {
+				LOG.error(String.format("sqlPUTCopySimulationReport failed. "), ex);
+				promise.fail(ex);
+			});
+		} catch(Exception ex) {
+			LOG.error(String.format("sqlPUTCopySimulationReport failed. "), ex);
+			promise.fail(ex);
+		}
+		return promise.future();
+	}
+
+	public Future<ServiceResponse> response200PUTCopySimulationReport(SiteRequestEnUS siteRequest) {
+		Promise<ServiceResponse> promise = Promise.promise();
+		try {
+			JsonObject json = new JsonObject();
+			promise.complete(ServiceResponse.completedWithJson(Buffer.buffer(Optional.ofNullable(json).orElse(new JsonObject()).encodePrettily())));
+		} catch(Exception ex) {
+			LOG.error(String.format("response200PUTCopySimulationReport failed. "), ex);
+			promise.fail(ex);
+		}
+		return promise.future();
+	}
+
 	// PATCHRunSimulation //
 
 	@Override

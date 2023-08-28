@@ -125,7 +125,10 @@ public class SmartTrafficLightEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 					)
 				));
 			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SmartTrafficLight")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+				if(
+						!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SmartTrafficLight")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						&& !Optional.ofNullable(Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_READ_REQUIRED + "_SmartTrafficLight")).orElse(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SmartTrafficLight"))).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						) {
 					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 					eventHandler.handle(Future.succeededFuture(
 						new ServiceResponse(401, "UNAUTHORIZED",
@@ -278,7 +281,10 @@ public class SmartTrafficLightEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 					)
 				));
 			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SmartTrafficLight")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+				if(
+						!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SmartTrafficLight")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						&& !Optional.ofNullable(Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_READ_REQUIRED + "_SmartTrafficLight")).orElse(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SmartTrafficLight"))).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						) {
 					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 					eventHandler.handle(Future.succeededFuture(
 						new ServiceResponse(401, "UNAUTHORIZED",
@@ -370,7 +376,10 @@ public class SmartTrafficLightEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 					)
 				));
 			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SmartTrafficLight")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+				if(
+						!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SmartTrafficLight")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						|| !Optional.ofNullable(Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_READ_REQUIRED + "_SmartTrafficLight")).orElse(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SmartTrafficLight"))).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						) {
 					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 					eventHandler.handle(Future.succeededFuture(
 						new ServiceResponse(401, "UNAUTHORIZED",
@@ -563,11 +572,15 @@ public class SmartTrafficLightEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 			Promise<SmartTrafficLight> promise1 = Promise.promise();
 			pgPool.withTransaction(sqlConnection -> {
 				siteRequest.setSqlConnection(sqlConnection);
-				sqlPATCHSmartTrafficLight(o, inheritPk).onSuccess(smartTrafficLight -> {
-					persistSmartTrafficLight(smartTrafficLight).onSuccess(c -> {
-						relateSmartTrafficLight(smartTrafficLight).onSuccess(d -> {
-							indexSmartTrafficLight(smartTrafficLight).onSuccess(e -> {
-								promise1.complete(smartTrafficLight);
+				varsSmartTrafficLight(siteRequest).onSuccess(a -> {
+					sqlPATCHSmartTrafficLight(o, inheritPk).onSuccess(smartTrafficLight -> {
+						persistSmartTrafficLight(smartTrafficLight).onSuccess(c -> {
+							relateSmartTrafficLight(smartTrafficLight).onSuccess(d -> {
+								indexSmartTrafficLight(smartTrafficLight).onSuccess(e -> {
+									promise1.complete(smartTrafficLight);
+								}).onFailure(ex -> {
+									promise1.fail(ex);
+								});
 							}).onFailure(ex -> {
 								promise1.fail(ex);
 							});
@@ -881,7 +894,10 @@ public class SmartTrafficLightEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 					)
 				));
 			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SmartTrafficLight")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+				if(
+						!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SmartTrafficLight")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						|| !Optional.ofNullable(Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_READ_REQUIRED + "_SmartTrafficLight")).orElse(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SmartTrafficLight"))).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						) {
 					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 					eventHandler.handle(Future.succeededFuture(
 						new ServiceResponse(401, "UNAUTHORIZED",
@@ -1013,12 +1029,16 @@ public class SmartTrafficLightEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 			pgPool.withTransaction(sqlConnection -> {
 				Promise<SmartTrafficLight> promise1 = Promise.promise();
 				siteRequest.setSqlConnection(sqlConnection);
-				createSmartTrafficLight(siteRequest).onSuccess(smartTrafficLight -> {
-					sqlPOSTSmartTrafficLight(smartTrafficLight, inheritPk).onSuccess(b -> {
-						persistSmartTrafficLight(smartTrafficLight).onSuccess(c -> {
-							relateSmartTrafficLight(smartTrafficLight).onSuccess(d -> {
-								indexSmartTrafficLight(smartTrafficLight).onSuccess(e -> {
-									promise1.complete(smartTrafficLight);
+				varsSmartTrafficLight(siteRequest).onSuccess(a -> {
+					createSmartTrafficLight(siteRequest).onSuccess(smartTrafficLight -> {
+						sqlPOSTSmartTrafficLight(smartTrafficLight, inheritPk).onSuccess(b -> {
+							persistSmartTrafficLight(smartTrafficLight).onSuccess(c -> {
+								relateSmartTrafficLight(smartTrafficLight).onSuccess(d -> {
+									indexSmartTrafficLight(smartTrafficLight).onSuccess(e -> {
+										promise1.complete(smartTrafficLight);
+									}).onFailure(ex -> {
+										promise1.fail(ex);
+									});
 								}).onFailure(ex -> {
 									promise1.fail(ex);
 								});
@@ -1334,7 +1354,10 @@ public class SmartTrafficLightEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 					)
 				));
 			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SmartTrafficLight")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+				if(
+						!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SmartTrafficLight")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						|| !Optional.ofNullable(Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_READ_REQUIRED + "_SmartTrafficLight")).orElse(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SmartTrafficLight"))).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						) {
 					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 					eventHandler.handle(Future.succeededFuture(
 						new ServiceResponse(401, "UNAUTHORIZED",
@@ -1348,24 +1371,19 @@ public class SmartTrafficLightEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 					));
 				} else {
 					try {
-						try {
-							ApiRequest apiRequest = new ApiRequest();
-							JsonArray jsonArray = Optional.ofNullable(siteRequest.getJsonObject()).map(o -> o.getJsonArray("list")).orElse(new JsonArray());
-							apiRequest.setRows(Long.valueOf(jsonArray.size()));
-							apiRequest.setNumFound(Long.valueOf(jsonArray.size()));
-							apiRequest.setNumPATCH(0L);
-							apiRequest.initDeepApiRequest(siteRequest);
-							siteRequest.setApiRequest_(apiRequest);
-							eventBus.publish("websocketSmartTrafficLight", JsonObject.mapFrom(apiRequest).toString());
-							varsSmartTrafficLight(siteRequest).onSuccess(d -> {
-								listPUTImportSmartTrafficLight(apiRequest, siteRequest).onSuccess(e -> {
-									response200PUTImportSmartTrafficLight(siteRequest).onSuccess(response -> {
-										LOG.debug(String.format("putimportSmartTrafficLight succeeded. "));
-										eventHandler.handle(Future.succeededFuture(response));
-									}).onFailure(ex -> {
-										LOG.error(String.format("putimportSmartTrafficLight failed. "), ex);
-										error(siteRequest, eventHandler, ex);
-									});
+						ApiRequest apiRequest = new ApiRequest();
+						JsonArray jsonArray = Optional.ofNullable(siteRequest.getJsonObject()).map(o -> o.getJsonArray("list")).orElse(new JsonArray());
+						apiRequest.setRows(Long.valueOf(jsonArray.size()));
+						apiRequest.setNumFound(Long.valueOf(jsonArray.size()));
+						apiRequest.setNumPATCH(0L);
+						apiRequest.initDeepApiRequest(siteRequest);
+						siteRequest.setApiRequest_(apiRequest);
+						eventBus.publish("websocketSmartTrafficLight", JsonObject.mapFrom(apiRequest).toString());
+						varsSmartTrafficLight(siteRequest).onSuccess(d -> {
+							listPUTImportSmartTrafficLight(apiRequest, siteRequest).onSuccess(e -> {
+								response200PUTImportSmartTrafficLight(siteRequest).onSuccess(response -> {
+									LOG.debug(String.format("putimportSmartTrafficLight succeeded. "));
+									eventHandler.handle(Future.succeededFuture(response));
 								}).onFailure(ex -> {
 									LOG.error(String.format("putimportSmartTrafficLight failed. "), ex);
 									error(siteRequest, eventHandler, ex);
@@ -1374,10 +1392,10 @@ public class SmartTrafficLightEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 								LOG.error(String.format("putimportSmartTrafficLight failed. "), ex);
 								error(siteRequest, eventHandler, ex);
 							});
-						} catch(Exception ex) {
+						}).onFailure(ex -> {
 							LOG.error(String.format("putimportSmartTrafficLight failed. "), ex);
 							error(siteRequest, eventHandler, ex);
-						}
+						});
 					} catch(Exception ex) {
 						LOG.error(String.format("putimportSmartTrafficLight failed. "), ex);
 						error(null, eventHandler, ex);
@@ -1468,7 +1486,8 @@ public class SmartTrafficLightEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 				apiRequest.setNumPATCH(0L);
 				apiRequest.initDeepApiRequest(siteRequest);
 				siteRequest.setApiRequest_(apiRequest);
-				body.put("inheritPk", body.getValue("pk"));
+				String inheritPk = Optional.ofNullable(body.getString(SmartTrafficLight.VAR_pk)).orElse(body.getString(SmartTrafficLight.VAR_id));
+				body.put("inheritPk", inheritPk);
 				if(Optional.ofNullable(serviceRequest.getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getJsonArray("var")).orElse(new JsonArray()).stream().filter(s -> "refresh:false".equals(s)).count() > 0L) {
 					siteRequest.getRequestVars().put( "refresh", "false" );
 				}
@@ -1479,7 +1498,7 @@ public class SmartTrafficLightEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 				searchList.setC(SmartTrafficLight.class);
 				searchList.fq("deleted_docvalues_boolean:false");
 				searchList.fq("archived_docvalues_boolean:false");
-				searchList.fq("inheritPk_docvalues_string:" + SearchTool.escapeQueryChars(body.getString(SmartTrafficLight.VAR_pk)));
+				searchList.fq("inheritPk_docvalues_string:" + SearchTool.escapeQueryChars(inheritPk));
 				searchList.promiseDeepForClass(siteRequest).onSuccess(a -> {
 					try {
 						if(searchList.size() >= 1) {
@@ -1619,7 +1638,10 @@ public class SmartTrafficLightEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 					)
 				));
 			}).onSuccess(b -> {
-				if(!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SmartTrafficLight")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)) {
+				if(
+						!Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SmartTrafficLight")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						&& !Optional.ofNullable(Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_READ_REQUIRED + "_SmartTrafficLight")).orElse(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SmartTrafficLight"))).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
+						) {
 					String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
 					eventHandler.handle(Future.succeededFuture(
 						new ServiceResponse(401, "UNAUTHORIZED",

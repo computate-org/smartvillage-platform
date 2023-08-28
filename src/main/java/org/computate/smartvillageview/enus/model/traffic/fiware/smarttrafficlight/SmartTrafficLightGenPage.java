@@ -505,7 +505,9 @@ public class SmartTrafficLightGenPage extends SmartTrafficLightGenPageGen<BaseMo
 
 	@Override
 	protected void _roleForWrite(List<String> l) {
-		l.add(siteRequest_.getConfig().getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SmartTrafficLight"));
+		Optional.ofNullable(siteRequest_.getConfig().getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_SmartTrafficLight")).ifPresent(v -> {
+			l.add(v);
+		});
 	}
 
 	@Override

@@ -500,7 +500,9 @@ public class TrafficLightStepGenPage extends TrafficLightStepGenPageGen<MapResul
 
 	@Override
 	protected void _roleForWrite(List<String> l) {
-		l.add(siteRequest_.getConfig().getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_TrafficLightStep"));
+		Optional.ofNullable(siteRequest_.getConfig().getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_TrafficLightStep")).ifPresent(v -> {
+			l.add(v);
+		});
 	}
 
 	@Override

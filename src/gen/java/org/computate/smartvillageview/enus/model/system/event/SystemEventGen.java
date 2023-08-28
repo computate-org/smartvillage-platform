@@ -1742,8 +1742,8 @@ public abstract class SystemEventGen<DEV> extends Object {
 		return SystemEvent.staticSearchStrObjectText(siteRequest_, SystemEvent.staticSearchObjectText(siteRequest_, SystemEvent.staticSetObjectText(siteRequest_, o)));
 	}
 
-	public List<String> sqlObjectText() {
-		return objectText;
+	public String[] sqlObjectText() {
+		return objectText.stream().map(v -> (String)v).toArray(String[]::new);
 	}
 
 	///////////////
