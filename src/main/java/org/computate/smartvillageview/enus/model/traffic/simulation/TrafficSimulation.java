@@ -8,7 +8,7 @@ import java.util.Optional;
 import org.computate.search.wrap.Wrap;
 import org.computate.smartvillageview.enus.model.base.BaseModel;
 
-import io.vertx.core.json.JsonObject;
+import io.vertx.pgclient.data.Point;
 
 /**
  * {@inheritDoc}
@@ -83,12 +83,11 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * DocValues: true
 	 * Persist: true
 	 * DisplayName: map location
-	 * Description: Geojson reference to the item. It can be Point, LineString, Polygon, MultiPoint, MultiLineString or MultiPolygon
-	 * HtmRow: 3
+	 * HtmRow: 4
 	 * HtmCell: 2
 	 * Facet: true
 	 */
-	protected void _location(Wrap<JsonObject> w) {
+	protected void _location(Wrap<Point> w) {
 	}
 
 	/**
@@ -539,13 +538,11 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	protected void _objectTitle(Wrap<String> w) {
 		StringBuilder b = new StringBuilder();
 		Optional.ofNullable(simulationName).ifPresent(s -> b.append(" Simulation \"").append(s).append("\""));
-		Optional.ofNullable(sumocfgPath).ifPresent(s -> b.append(" in ").append(s));
 		w.o(b.toString().trim());
 	}
 
 	@Override
 	protected void _objectId(Wrap<String> w) {
-		if(pk != null)
-			w.o(pk.toString());
+		super._objectId(w);
 	}
 }

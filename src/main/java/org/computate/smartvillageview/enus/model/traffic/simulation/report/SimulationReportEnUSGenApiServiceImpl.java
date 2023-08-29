@@ -674,6 +674,14 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							num++;
 							bParams.add(o2.sqlReportName());
 						break;
+					case "setLocation":
+							o2.setLocation(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_location + "=$" + num);
+							num++;
+							bParams.add(o2.sqlLocation());
+						break;
 					case "setSimulationKey":
 						Optional.ofNullable(jsonObject.getString(entityVar)).ifPresent(val -> {
 							futures1.add(Future.future(promise2 -> {
@@ -1335,6 +1343,15 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 						bSql.append(SimulationReport.VAR_reportName + "=$" + num);
 						num++;
 						bParams.add(o2.sqlReportName());
+						break;
+					case SimulationReport.VAR_location:
+						o2.setLocation(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_location + "=$" + num);
+						num++;
+						bParams.add(o2.sqlLocation());
 						break;
 					case SimulationReport.VAR_simulationKey:
 						Optional.ofNullable(jsonObject.getString(entityVar)).ifPresent(val -> {
@@ -2256,6 +2273,15 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 						num++;
 						bParams.add(o2.sqlReportName());
 						break;
+					case SimulationReport.VAR_location:
+						o2.setLocation(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_location + "=$" + num);
+						num++;
+						bParams.add(o2.sqlLocation());
+						break;
 					case SimulationReport.VAR_simulationKey:
 						{
 							Long l = Long.parseLong(jsonObject.getString(entityVar));
@@ -2893,6 +2919,14 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							bSql.append(SimulationReport.VAR_reportName + "=$" + num);
 							num++;
 							bParams.add(o2.sqlReportName());
+						break;
+					case "setLocation":
+							o2.setLocation(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_location + "=$" + num);
+							num++;
+							bParams.add(o2.sqlLocation());
 						break;
 					case "setSimulationKey":
 						Optional.ofNullable(jsonObject.getString(entityVar)).ifPresent(val -> {

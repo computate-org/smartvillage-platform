@@ -12,7 +12,7 @@ import org.computate.vertx.search.list.SearchList;
 
 import io.vertx.core.Promise;
 import io.vertx.core.json.JsonArray;
-import io.vertx.core.json.JsonObject;
+import io.vertx.pgclient.data.Point;
 
 /**
  * {@inheritDoc}
@@ -62,6 +62,18 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * Facet: true
 	 */
 	protected void _reportName(Wrap<String> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * DisplayName: map location
+	 * HtmRow: 3
+	 * HtmCell: 2
+	 * Facet: true
+	 */
+	protected void _location(Wrap<Point> w) {
 	}
 
 	/**

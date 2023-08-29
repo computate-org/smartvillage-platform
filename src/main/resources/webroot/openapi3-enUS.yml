@@ -18912,7 +18912,7 @@ components:
                   simulationName:
                     type: string
                   location:
-                    type: object
+                    type: string
                   sumocfgPath:
                     type: string
                   fcdFilePath:
@@ -19027,12 +19027,12 @@ components:
             removeAllSimulationName:
               type: string
             setLocation:
-              type: object
+              type: string
               nullable: true
             removeLocation:
-              type: object
+              type: string
             removeAllLocation:
-              type: object
+              type: string
             setSumocfgPath:
               type: string
               nullable: true
@@ -19407,12 +19407,12 @@ components:
             removeAllSimulationName:
               type: string
             setLocation:
-              type: object
+              type: string
               nullable: true
             removeLocation:
-              type: object
+              type: string
             removeAllLocation:
-              type: object
+              type: string
             setSumocfgPath:
               type: string
               nullable: true
@@ -19775,7 +19775,7 @@ components:
             simulationName:
               type: string
             location:
-              type: object
+              type: string
             sumocfgPath:
               type: string
             fcdFilePath:
@@ -19878,7 +19878,7 @@ components:
             simulationName:
               type: string
             location:
-              type: object
+              type: string
             sumocfgPath:
               type: string
             fcdFilePath:
@@ -19981,7 +19981,7 @@ components:
             simulationName:
               type: string
             location:
-              type: object
+              type: string
             sumocfgPath:
               type: string
             fcdFilePath:
@@ -20084,7 +20084,7 @@ components:
             simulationName:
               type: string
             location:
-              type: object
+              type: string
             sumocfgPath:
               type: string
             fcdFilePath:
@@ -20187,7 +20187,7 @@ components:
             simulationName:
               type: string
             location:
-              type: object
+              type: string
             sumocfgPath:
               type: string
             fcdFilePath:
@@ -20296,6 +20296,13 @@ components:
             removeReportName:
               type: string
             removeAllReportName:
+              type: string
+            setLocation:
+              type: string
+              nullable: true
+            removeLocation:
+              type: string
+            removeAllLocation:
               type: string
             setSimulationKey:
               type: string
@@ -20694,6 +20701,13 @@ components:
             removeReportName:
               type: string
             removeAllReportName:
+              type: string
+            setLocation:
+              type: string
+              nullable: true
+            removeLocation:
+              type: string
+            removeAllLocation:
               type: string
             setSimulationKey:
               type: string
@@ -21102,6 +21116,8 @@ components:
                 properties:
                   reportName:
                     type: string
+                  location:
+                    type: string
                   simulationKey:
                     type: string
                   smartTrafficLightKey:
@@ -21220,6 +21236,13 @@ components:
             removeReportName:
               type: string
             removeAllReportName:
+              type: string
+            setLocation:
+              type: string
+              nullable: true
+            removeLocation:
+              type: string
+            removeAllLocation:
               type: string
             setSimulationKey:
               type: string
@@ -21619,6 +21642,13 @@ components:
               type: string
             removeAllReportName:
               type: string
+            setLocation:
+              type: string
+              nullable: true
+            removeLocation:
+              type: string
+            removeAllLocation:
+              type: string
             setSimulationKey:
               type: string
               nullable: true
@@ -22012,6 +22042,8 @@ components:
           properties:
             reportName:
               type: string
+            location:
+              type: string
             simulationKey:
               type: string
             smartTrafficLightKey:
@@ -22125,6 +22157,8 @@ components:
         - type: object
           properties:
             reportName:
+              type: string
+            location:
               type: string
             simulationKey:
               type: string
@@ -22240,6 +22274,8 @@ components:
           properties:
             reportName:
               type: string
+            location:
+              type: string
             simulationKey:
               type: string
             smartTrafficLightKey:
@@ -22353,6 +22389,8 @@ components:
         - type: object
           properties:
             reportName:
+              type: string
+            location:
               type: string
             simulationKey:
               type: string
@@ -22468,6 +22506,8 @@ components:
           properties:
             reportName:
               type: string
+            location:
+              type: string
             simulationKey:
               type: string
             smartTrafficLightKey:
@@ -22582,6 +22622,8 @@ components:
           properties:
             reportName:
               type: string
+            location:
+              type: string
             simulationKey:
               type: string
             smartTrafficLightKey:
@@ -22695,6 +22737,8 @@ components:
         - type: object
           properties:
             reportName:
+              type: string
+            location:
               type: string
             simulationKey:
               type: string

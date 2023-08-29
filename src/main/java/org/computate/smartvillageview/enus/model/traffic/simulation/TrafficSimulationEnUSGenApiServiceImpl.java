@@ -682,7 +682,7 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 							bParams.add(o2.sqlSimulationName());
 						break;
 					case "setLocation":
-							o2.setLocation(jsonObject.getJsonObject(entityVar));
+							o2.setLocation(jsonObject.getString(entityVar));
 							if(bParams.size() > 0)
 								bSql.append(", ");
 							bSql.append(TrafficSimulation.VAR_location + "=$" + num);
@@ -1420,7 +1420,7 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 						bParams.add(o2.sqlSimulationName());
 						break;
 					case TrafficSimulation.VAR_location:
-						o2.setLocation(jsonObject.getJsonObject(entityVar));
+						o2.setLocation(jsonObject.getString(entityVar));
 						if(bParams.size() > 0) {
 							bSql.append(", ");
 						}

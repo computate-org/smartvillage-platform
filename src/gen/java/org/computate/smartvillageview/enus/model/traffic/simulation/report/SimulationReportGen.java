@@ -11,6 +11,8 @@ import java.util.Optional;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -34,6 +36,9 @@ import org.slf4j.LoggerFactory;
 import java.math.RoundingMode;
 import java.util.Map;
 import java.lang.String;
+import io.vertx.pgclient.data.Point;
+import org.computate.vertx.serialize.pgclient.PgClientPointSerializer;
+import org.computate.vertx.serialize.pgclient.PgClientPointDeserializer;
 import java.lang.Long;
 import org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation;
 import org.computate.vertx.search.list.SearchList;
@@ -289,6 +294,77 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 
 	public String sqlReportName() {
 		return reportName;
+	}
+
+	//////////////
+	// location //
+	//////////////
+
+
+	/**	 The entity location
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonDeserialize(using = PgClientPointDeserializer.class)
+	@JsonSerialize(using = PgClientPointSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected Point location;
+
+	/**	<br> The entity location
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.report.SimulationReport&fq=entiteVar_enUS_indexed_string:location">Find the entity location in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _location(Wrap<Point> w);
+
+	public Point getLocation() {
+		return location;
+	}
+
+	public void setLocation(Point location) {
+		this.location = location;
+	}
+	@JsonIgnore
+	public void setLocation(String o) {
+		this.location = SimulationReport.staticSetLocation(siteRequest_, o);
+	}
+	public static Point staticSetLocation(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+			Matcher m = Pattern.compile("\\{[\\w\\W]*\"coordinates\"\\s*:\\s*\\[\\s*(\\d*\\.\\d*)\\s*,\\s*(\\d*\\.\\d*)\\]").matcher(o);
+			if(m.find())
+				return new Point(Double.parseDouble(m.group(1)), Double.parseDouble(m.group(2)));
+			m = Pattern.compile("\\s*(\\d*\\.\\d*)\\s*,\\s*(\\d*\\.\\d*)").matcher(o);
+			if(m.find())
+				return new Point(Double.parseDouble(m.group(1)), Double.parseDouble(m.group(2)));
+		}
+		return null;
+	}
+	protected SimulationReport locationInit() {
+		Wrap<Point> locationWrap = new Wrap<Point>().var("location");
+		if(location == null) {
+			_location(locationWrap);
+			Optional.ofNullable(locationWrap.getO()).ifPresent(o -> {
+				setLocation(o);
+			});
+		}
+		return (SimulationReport)this;
+	}
+
+	public static Point staticSearchLocation(SiteRequestEnUS siteRequest_, Point o) {
+		return o;
+	}
+
+	public static String staticSearchStrLocation(SiteRequestEnUS siteRequest_, Point o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqLocation(SiteRequestEnUS siteRequest_, String o) {
+		return SimulationReport.staticSearchStrLocation(siteRequest_, SimulationReport.staticSearchLocation(siteRequest_, SimulationReport.staticSetLocation(siteRequest_, o)));
+	}
+
+	public Point sqlLocation() {
+		return location;
 	}
 
 	///////////////////
@@ -4005,6 +4081,7 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			Promise<Void> promise2 = Promise.promise();
 			try {
 				reportNameInit();
+				locationInit();
 				simulationKeyInit();
 				promise2.complete();
 			} catch(Exception ex) {
@@ -4149,6 +4226,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		switch(var) {
 			case "reportName":
 				return oSimulationReport.reportName;
+			case "location":
+				return oSimulationReport.location;
 			case "simulationKey":
 				return oSimulationReport.simulationKey;
 			case "simulationSearch":
@@ -4312,6 +4391,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		switch(entityVar) {
 		case "reportName":
 			return SimulationReport.staticSetReportName(siteRequest_, o);
+		case "location":
+			return SimulationReport.staticSetLocation(siteRequest_, o);
 		case "simulationKey":
 			return SimulationReport.staticSetSimulationKey(siteRequest_, o);
 		case "smartTrafficLightKey":
@@ -4430,6 +4511,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		switch(entityVar) {
 		case "reportName":
 			return SimulationReport.staticSearchReportName(siteRequest_, (String)o);
+		case "location":
+			return SimulationReport.staticSearchLocation(siteRequest_, (Point)o);
 		case "simulationKey":
 			return SimulationReport.staticSearchSimulationKey(siteRequest_, (Long)o);
 		case "smartTrafficLightKey":
@@ -4548,6 +4631,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		switch(entityVar) {
 		case "reportName":
 			return SimulationReport.staticSearchStrReportName(siteRequest_, (String)o);
+		case "location":
+			return SimulationReport.staticSearchStrLocation(siteRequest_, (Point)o);
 		case "simulationKey":
 			return SimulationReport.staticSearchStrSimulationKey(siteRequest_, (Long)o);
 		case "smartTrafficLightKey":
@@ -4666,6 +4751,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		switch(entityVar) {
 		case "reportName":
 			return SimulationReport.staticSearchFqReportName(siteRequest_, o);
+		case "location":
+			return SimulationReport.staticSearchFqLocation(siteRequest_, o);
 		case "simulationKey":
 			return SimulationReport.staticSearchFqSimulationKey(siteRequest_, o);
 		case "smartTrafficLightKey":
@@ -4799,6 +4886,14 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 					setReportName((String)val);
 				}
 				saves.add("reportName");
+				return val;
+			} else if("location".equals(varLower)) {
+				if(val instanceof String) {
+					setLocation((String)val);
+				} else if(val instanceof Point) {
+					setLocation((Point)val);
+				}
+				saves.add("location");
 				return val;
 			} else if("simulationkey".equals(varLower)) {
 				if(val instanceof Long) {
@@ -5061,6 +5156,12 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 				String reportName = (String)doc.get("reportName_docvalues_string");
 				if(reportName != null)
 					oSimulationReport.setReportName(reportName);
+			}
+
+			if(saves.contains("location")) {
+				Point location = (Point)doc.get("location_docvalues_location");
+				if(location != null)
+					oSimulationReport.setLocation(location);
 			}
 
 			Long simulationKey = (Long)doc.get("simulationKey_docvalues_long");
@@ -5373,6 +5474,9 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		if(reportName != null) {
 			doc.put("reportName_docvalues_string", reportName);
 		}
+		if(location != null) {
+			doc.put("location_docvalues_location", String.format("%s,%s", location.getX(), location.getY()));
+		}
 		if(simulationKey != null) {
 			doc.put("simulationKey_docvalues_long", simulationKey);
 		}
@@ -5546,6 +5650,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		switch(entityVar) {
 			case "reportName":
 				return "reportName_docvalues_string";
+			case "location":
+				return "location_docvalues_location";
 			case "simulationKey":
 				return "simulationKey_docvalues_long";
 			case "smartTrafficLightKey":
@@ -5657,6 +5763,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		switch(entityVar) {
 			case "reportName":
 				return "reportName_docvalues_string";
+			case "location":
+				return "location_docvalues_location";
 			case "simulationKey":
 				return "simulationKey_docvalues_long";
 			case "smartTrafficLightKey":
@@ -5768,6 +5876,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		switch(searchVar) {
 			case "reportName_docvalues_string":
 				return "reportName";
+			case "location_docvalues_location":
+				return "location";
 			case "simulationKey_docvalues_long":
 				return "simulationKey";
 			case "smartTrafficLightKey_docvalues_long":
@@ -5900,6 +6010,7 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		SimulationReport oSimulationReport = (SimulationReport)this;
 
 		oSimulationReport.setReportName(Optional.ofNullable(doc.get("reportName_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oSimulationReport.setLocation(Optional.ofNullable(doc.get("location_docvalues_location")).map(v -> v.toString()).orElse(null));
 		oSimulationReport.setSimulationKey(Optional.ofNullable(doc.get("simulationKey_docvalues_long")).map(v -> v.toString()).orElse(null));
 		oSimulationReport.setSmartTrafficLightKey(Optional.ofNullable(doc.get("smartTrafficLightKey_docvalues_long")).map(v -> v.toString()).orElse(null));
 		oSimulationReport.setSimulationName(Optional.ofNullable(doc.get("simulationName_docvalues_string")).map(v -> v.toString()).orElse(null));
@@ -5972,6 +6083,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			SimulationReport original = (SimulationReport)o;
 			if(!Objects.equals(reportName, original.getReportName()))
 				apiRequest.addVars("reportName");
+			if(!Objects.equals(location, original.getLocation()))
+				apiRequest.addVars("location");
 			if(!Objects.equals(simulationKey, original.getSimulationKey()))
 				apiRequest.addVars("simulationKey");
 			if(!Objects.equals(smartTrafficLightKey, original.getSmartTrafficLightKey()))
@@ -6086,6 +6199,7 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		StringBuilder sb = new StringBuilder();
 		sb.append(super.toString());
 		sb.append(Optional.ofNullable(reportName).map(v -> "reportName: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(location).map(v -> "location: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(simulationKey).map(v -> "simulationKey: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(smartTrafficLightKey).map(v -> "smartTrafficLightKey: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(simulationName).map(v -> "simulationName: \"" + v + "\"\n" ).orElse(""));
@@ -6144,6 +6258,7 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 
 	public static final String CLASS_SIMPLE_NAME = "SimulationReport";
 	public static final String VAR_reportName = "reportName";
+	public static final String VAR_location = "location";
 	public static final String VAR_simulationKey = "simulationKey";
 	public static final String VAR_simulationSearch = "simulationSearch";
 	public static final String VAR_simulation_ = "simulation_";
@@ -6213,6 +6328,7 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 	}
 	public static List<String> varsFqSimulationReport(List<String> vars) {
 		vars.add(VAR_reportName);
+		vars.add(VAR_location);
 		vars.add(VAR_simulationKey);
 		vars.add(VAR_smartTrafficLightKey);
 		vars.add(VAR_simulationName);
@@ -6262,6 +6378,7 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		return SimulationReport.varsRangeSimulationReport(new ArrayList<String>());
 	}
 	public static List<String> varsRangeSimulationReport(List<String> vars) {
+		vars.add(VAR_location);
 		vars.add(VAR_paramAvgVehiclePerMinFromWestToEast);
 		vars.add(VAR_paramAvgVehiclePerMinFromSouthToNorth);
 		vars.add(VAR_paramVehicleDemandScalingFactor);
@@ -6300,6 +6417,7 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 	}
 
 	public static final String DISPLAY_NAME_reportName = "report name";
+	public static final String DISPLAY_NAME_location = "map location";
 	public static final String DISPLAY_NAME_simulationKey = "traffic simulation";
 	public static final String DISPLAY_NAME_simulationSearch = "";
 	public static final String DISPLAY_NAME_simulation_ = "";
@@ -6363,6 +6481,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		switch(var) {
 		case VAR_reportName:
 			return DISPLAY_NAME_reportName;
+		case VAR_location:
+			return DISPLAY_NAME_location;
 		case VAR_simulationKey:
 			return DISPLAY_NAME_simulationKey;
 		case VAR_simulationSearch:
@@ -6541,6 +6661,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		switch(var) {
 		case VAR_reportName:
 			return "String";
+		case VAR_location:
+			return "Point";
 		case VAR_simulationKey:
 			return "Long";
 		case VAR_simulationSearch:
@@ -6667,6 +6789,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		switch(var) {
 		case VAR_reportName:
 			return 3;
+		case VAR_location:
+			return 3;
 		case VAR_simulationKey:
 			return 4;
 		case VAR_smartTrafficLightKey:
@@ -6762,6 +6886,8 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 		switch(var) {
 		case VAR_reportName:
 			return 1;
+		case VAR_location:
+			return 2;
 		case VAR_simulationKey:
 			return 1;
 		case VAR_smartTrafficLightKey:
