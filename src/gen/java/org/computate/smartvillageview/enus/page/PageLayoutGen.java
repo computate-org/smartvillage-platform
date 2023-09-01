@@ -8,6 +8,8 @@ import java.util.Optional;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -2976,7 +2978,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public void setRangeEnd(ZonedDateTime rangeEnd) {
-		this.rangeEnd = rangeEnd;
+		this.rangeEnd = Optional.ofNullable(rangeEnd).map(v -> v.truncatedTo(ChronoUnit.MILLIS)).orElse(null);
 	}
 	@JsonIgnore
 	public void setRangeEnd(Instant o) {
@@ -3052,7 +3054,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public void setRangeStart(ZonedDateTime rangeStart) {
-		this.rangeStart = rangeStart;
+		this.rangeStart = Optional.ofNullable(rangeStart).map(v -> v.truncatedTo(ChronoUnit.MILLIS)).orElse(null);
 	}
 	@JsonIgnore
 	public void setRangeStart(Instant o) {
@@ -3240,7 +3242,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public void setDefaultRangeEnd(ZonedDateTime defaultRangeEnd) {
-		this.defaultRangeEnd = defaultRangeEnd;
+		this.defaultRangeEnd = Optional.ofNullable(defaultRangeEnd).map(v -> v.truncatedTo(ChronoUnit.MILLIS)).orElse(null);
 	}
 	@JsonIgnore
 	public void setDefaultRangeEnd(Instant o) {
@@ -3316,7 +3318,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public void setDefaultRangeStart(ZonedDateTime defaultRangeStart) {
-		this.defaultRangeStart = defaultRangeStart;
+		this.defaultRangeStart = Optional.ofNullable(defaultRangeStart).map(v -> v.truncatedTo(ChronoUnit.MILLIS)).orElse(null);
 	}
 	@JsonIgnore
 	public void setDefaultRangeStart(Instant o) {

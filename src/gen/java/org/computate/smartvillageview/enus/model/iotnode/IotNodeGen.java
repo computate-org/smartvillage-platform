@@ -8,6 +8,8 @@ import java.util.Optional;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -490,9 +492,13 @@ public abstract class IotNodeGen<DEV> extends BaseResult {
 	}
 	public static Point staticSetLocation(SiteRequestEnUS siteRequest_, String o) {
 		if(o != null) {
-			String[] vals = o.split(",");
-			if(vals.length == 2 && NumberUtils.isParsable(vals[0]) && NumberUtils.isParsable(vals[1]))
-				return new Point(Double.parseDouble(vals[0]), Double.parseDouble(vals[1]));
+			Matcher m = Pattern.compile("\\{[\\w\\W]*\"coordinates\"\\s*:\\s*\\[\\s*(\\d*\\.\\d*)\\s*,\\s*(\\d*\\.\\d*)\\]").matcher(o);
+			if(m.find())
+				return new Point(Double.parseDouble(m.group(1)), Double.parseDouble(m.group(2)));
+			m = Pattern.compile("\\s*(\\d*\\.\\d*)\\s*,\\s*(\\d*\\.\\d*)").matcher(o);
+			if(m.find())
+				return new Point(Double.parseDouble(m.group(1)), Double.parseDouble(m.group(2)));
+			throw new RuntimeException(String.format("Invalid point format \"%s\", try these formats instead: 55.633703,13.49254 or {\"type\":\"Point\",\"coordinates\":[55.633703,13.49254]}", o));
 		}
 		return null;
 	}

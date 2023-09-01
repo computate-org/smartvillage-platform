@@ -526,14 +526,7 @@ public class TrafficLightEnUSGenApiServiceImpl extends BaseApiServiceImpl implem
 							}
 							if(apiRequest.getNumFound() == 1L)
 								apiRequest.setOriginal(o);
-							eventBus.publish("websocketTrafficLight", JsonObject.mapFrom(apiRequest).toString());
 							patchTrafficLightFuture(o, false).onSuccess(o2 -> {
-								if(apiRequest != null) {
-									apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listTrafficLight.getResponse().getResponse().getDocs().size());
-									if(apiRequest.getNumFound() == 1L)
-										o.apiRequestTrafficLight();
-									eventBus.publish("websocketTrafficLight", JsonObject.mapFrom(apiRequest).toString());
-								}
 								eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(new JsonObject().encodePrettily()))));
 							}).onFailure(ex -> {
 								eventHandler.handle(Future.failedFuture(ex));
@@ -746,7 +739,7 @@ public class TrafficLightEnUSGenApiServiceImpl extends BaseApiServiceImpl implem
 		try {
 			createTrafficLight(siteRequest).onSuccess(trafficLight -> {
 				persistTrafficLight(trafficLight, false).onSuccess(c -> {
-					indexTrafficLight(trafficLight).onSuccess(e -> {
+					indexTrafficLight(trafficLight).onSuccess(o2 -> {
 						promise.complete(trafficLight);
 					}).onFailure(ex -> {
 						promise.fail(ex);
@@ -1531,8 +1524,8 @@ public class TrafficLightEnUSGenApiServiceImpl extends BaseApiServiceImpl implem
 		return promise.future();
 	}
 
-	public Future<Void> indexTrafficLight(TrafficLight o) {
-		Promise<Void> promise = Promise.promise();
+	public Future<TrafficLight> indexTrafficLight(TrafficLight o) {
+		Promise<TrafficLight> promise = Promise.promise();
 		try {
 			SiteRequestEnUS siteRequest = o.getSiteRequest_();
 			ApiRequest apiRequest = siteRequest.getApiRequest_();
@@ -1555,7 +1548,7 @@ public class TrafficLightEnUSGenApiServiceImpl extends BaseApiServiceImpl implem
 						softCommit = false;
 				String solrRequestUri = String.format("/solr/%s/update%s%s%s", solrCollection, "?overwrite=true&wt=json", softCommit ? "&softCommit=true" : "", commitWithin != null ? ("&commitWithin=" + commitWithin) : "");
 				webClient.post(solrPort, solrHostName, solrRequestUri).ssl(solrSsl).putHeader("Content-Type", "application/json").expect(ResponsePredicate.SC_OK).sendBuffer(json.toBuffer()).onSuccess(b -> {
-					promise.complete();
+					promise.complete(o);
 				}).onFailure(ex -> {
 					LOG.error(String.format("indexTrafficLight failed. "), new RuntimeException(ex));
 					promise.fail(ex);

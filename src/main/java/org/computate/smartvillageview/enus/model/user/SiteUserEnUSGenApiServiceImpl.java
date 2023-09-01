@@ -374,14 +374,7 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							if(apiRequest.getNumFound() == 1L)
 								apiRequest.setOriginal(o);
 							apiRequest.setPk(Optional.ofNullable(listSiteUser.first()).map(o2 -> o2.getPk()).orElse(null));
-							eventBus.publish("websocketSiteUser", JsonObject.mapFrom(apiRequest).toString());
 							patchSiteUserFuture(o, false).onSuccess(o2 -> {
-								if(apiRequest != null) {
-									apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listSiteUser.getResponse().getResponse().getDocs().size());
-									if(apiRequest.getNumFound() == 1L)
-										o2.apiRequestSiteUser();
-									eventBus.publish("websocketSiteUser", JsonObject.mapFrom(apiRequest).toString());
-								}
 								eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(new JsonObject().encodePrettily()))));
 							}).onFailure(ex -> {
 								eventHandler.handle(Future.failedFuture(ex));
@@ -420,7 +413,15 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 					sqlPATCHSiteUser(o, inheritPk).onSuccess(siteUser -> {
 						persistSiteUser(siteUser).onSuccess(c -> {
 							relateSiteUser(siteUser).onSuccess(d -> {
-								indexSiteUser(siteUser).onSuccess(e -> {
+								indexSiteUser(siteUser).onSuccess(o2 -> {
+									if(apiRequest != null) {
+										apiRequest.setNumPATCH(apiRequest.getNumPATCH() + 1);
+										if(apiRequest.getNumFound() == 1L && Optional.ofNullable(siteRequest.getJsonObject()).map(json -> json.size() > 0).orElse(false)) {
+											o2.apiRequestSiteUser();
+											if(apiRequest.getVars().size() > 0)
+												eventBus.publish("websocketSiteUser", JsonObject.mapFrom(apiRequest).toString());
+										}
+									}
 									promise1.complete(siteUser);
 								}).onFailure(ex -> {
 									promise1.fail(ex);
@@ -753,7 +754,7 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 						sqlPOSTSiteUser(siteUser, inheritPk).onSuccess(b -> {
 							persistSiteUser(siteUser).onSuccess(c -> {
 								relateSiteUser(siteUser).onSuccess(d -> {
-									indexSiteUser(siteUser).onSuccess(e -> {
+									indexSiteUser(siteUser).onSuccess(o2 -> {
 										promise1.complete(siteUser);
 									}).onFailure(ex -> {
 										promise1.fail(ex);
@@ -1760,8 +1761,8 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 		return promise.future();
 	}
 
-	public Future<Void> indexSiteUser(SiteUser o) {
-		Promise<Void> promise = Promise.promise();
+	public Future<SiteUser> indexSiteUser(SiteUser o) {
+		Promise<SiteUser> promise = Promise.promise();
 		try {
 			SiteRequestEnUS siteRequest = o.getSiteRequest_();
 			ApiRequest apiRequest = siteRequest.getApiRequest_();
@@ -1784,7 +1785,7 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 						softCommit = false;
 				String solrRequestUri = String.format("/solr/%s/update%s%s%s", solrCollection, "?overwrite=true&wt=json", softCommit ? "&softCommit=true" : "", commitWithin != null ? ("&commitWithin=" + commitWithin) : "");
 				webClient.post(solrPort, solrHostName, solrRequestUri).ssl(solrSsl).putHeader("Content-Type", "application/json").expect(ResponsePredicate.SC_OK).sendBuffer(json.toBuffer()).onSuccess(b -> {
-					promise.complete();
+					promise.complete(o);
 				}).onFailure(ex -> {
 					LOG.error(String.format("indexSiteUser failed. "), new RuntimeException(ex));
 					promise.fail(ex);

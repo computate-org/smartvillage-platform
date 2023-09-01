@@ -526,14 +526,7 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 							}
 							if(apiRequest.getNumFound() == 1L)
 								apiRequest.setOriginal(o);
-							eventBus.publish("websocketIotNode", JsonObject.mapFrom(apiRequest).toString());
 							patchIotNodeFuture(o, false).onSuccess(o2 -> {
-								if(apiRequest != null) {
-									apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listIotNode.getResponse().getResponse().getDocs().size());
-									if(apiRequest.getNumFound() == 1L)
-										o.apiRequestIotNode();
-									eventBus.publish("websocketIotNode", JsonObject.mapFrom(apiRequest).toString());
-								}
 								eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(new JsonObject().encodePrettily()))));
 							}).onFailure(ex -> {
 								eventHandler.handle(Future.failedFuture(ex));
@@ -746,7 +739,7 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 		try {
 			createIotNode(siteRequest).onSuccess(iotNode -> {
 				persistIotNode(iotNode, false).onSuccess(c -> {
-					indexIotNode(iotNode).onSuccess(e -> {
+					indexIotNode(iotNode).onSuccess(o2 -> {
 						promise.complete(iotNode);
 					}).onFailure(ex -> {
 						promise.fail(ex);
@@ -1531,8 +1524,8 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 		return promise.future();
 	}
 
-	public Future<Void> indexIotNode(IotNode o) {
-		Promise<Void> promise = Promise.promise();
+	public Future<IotNode> indexIotNode(IotNode o) {
+		Promise<IotNode> promise = Promise.promise();
 		try {
 			SiteRequestEnUS siteRequest = o.getSiteRequest_();
 			ApiRequest apiRequest = siteRequest.getApiRequest_();
@@ -1555,7 +1548,7 @@ public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 						softCommit = false;
 				String solrRequestUri = String.format("/solr/%s/update%s%s%s", solrCollection, "?overwrite=true&wt=json", softCommit ? "&softCommit=true" : "", commitWithin != null ? ("&commitWithin=" + commitWithin) : "");
 				webClient.post(solrPort, solrHostName, solrRequestUri).ssl(solrSsl).putHeader("Content-Type", "application/json").expect(ResponsePredicate.SC_OK).sendBuffer(json.toBuffer()).onSuccess(b -> {
-					promise.complete();
+					promise.complete(o);
 				}).onFailure(ex -> {
 					LOG.error(String.format("indexIotNode failed. "), new RuntimeException(ex));
 					promise.fail(ex);

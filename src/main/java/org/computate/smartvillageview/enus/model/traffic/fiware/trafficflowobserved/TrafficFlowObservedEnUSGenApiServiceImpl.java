@@ -526,14 +526,7 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 							}
 							if(apiRequest.getNumFound() == 1L)
 								apiRequest.setOriginal(o);
-							eventBus.publish("websocketTrafficFlowObserved", JsonObject.mapFrom(apiRequest).toString());
 							patchTrafficFlowObservedFuture(o, false).onSuccess(o2 -> {
-								if(apiRequest != null) {
-									apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listTrafficFlowObserved.getResponse().getResponse().getDocs().size());
-									if(apiRequest.getNumFound() == 1L)
-										o2.apiRequestTrafficFlowObserved();
-									eventBus.publish("websocketTrafficFlowObserved", JsonObject.mapFrom(apiRequest).toString());
-								}
 								eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(new JsonObject().encodePrettily()))));
 							}).onFailure(ex -> {
 								eventHandler.handle(Future.failedFuture(ex));
@@ -746,7 +739,7 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 		try {
 			createTrafficFlowObserved(siteRequest).onSuccess(trafficFlowObserved -> {
 				persistTrafficFlowObserved(trafficFlowObserved, false).onSuccess(c -> {
-					indexTrafficFlowObserved(trafficFlowObserved).onSuccess(e -> {
+					indexTrafficFlowObserved(trafficFlowObserved).onSuccess(o2 -> {
 						promise.complete(trafficFlowObserved);
 					}).onFailure(ex -> {
 						promise.fail(ex);
@@ -1531,8 +1524,8 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 		return promise.future();
 	}
 
-	public Future<Void> indexTrafficFlowObserved(TrafficFlowObserved o) {
-		Promise<Void> promise = Promise.promise();
+	public Future<TrafficFlowObserved> indexTrafficFlowObserved(TrafficFlowObserved o) {
+		Promise<TrafficFlowObserved> promise = Promise.promise();
 		try {
 			SiteRequestEnUS siteRequest = o.getSiteRequest_();
 			ApiRequest apiRequest = siteRequest.getApiRequest_();
@@ -1555,7 +1548,7 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 						softCommit = false;
 				String solrRequestUri = String.format("/solr/%s/update%s%s%s", solrCollection, "?overwrite=true&wt=json", softCommit ? "&softCommit=true" : "", commitWithin != null ? ("&commitWithin=" + commitWithin) : "");
 				webClient.post(solrPort, solrHostName, solrRequestUri).ssl(solrSsl).putHeader("Content-Type", "application/json").expect(ResponsePredicate.SC_OK).sendBuffer(json.toBuffer()).onSuccess(b -> {
-					promise.complete();
+					promise.complete(o);
 				}).onFailure(ex -> {
 					LOG.error(String.format("indexTrafficFlowObserved failed. "), new RuntimeException(ex));
 					promise.fail(ex);

@@ -526,14 +526,7 @@ public class TimeStepEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							}
 							if(apiRequest.getNumFound() == 1L)
 								apiRequest.setOriginal(o);
-							eventBus.publish("websocketTimeStep", JsonObject.mapFrom(apiRequest).toString());
 							patchTimeStepFuture(o, false).onSuccess(o2 -> {
-								if(apiRequest != null) {
-									apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listTimeStep.getResponse().getResponse().getDocs().size());
-									if(apiRequest.getNumFound() == 1L)
-										o.apiRequestTimeStep();
-									eventBus.publish("websocketTimeStep", JsonObject.mapFrom(apiRequest).toString());
-								}
 								eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(new JsonObject().encodePrettily()))));
 							}).onFailure(ex -> {
 								eventHandler.handle(Future.failedFuture(ex));
@@ -746,7 +739,7 @@ public class TimeStepEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 		try {
 			createTimeStep(siteRequest).onSuccess(timeStep -> {
 				persistTimeStep(timeStep, false).onSuccess(c -> {
-					indexTimeStep(timeStep).onSuccess(e -> {
+					indexTimeStep(timeStep).onSuccess(o2 -> {
 						promise.complete(timeStep);
 					}).onFailure(ex -> {
 						promise.fail(ex);
@@ -1531,8 +1524,8 @@ public class TimeStepEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 		return promise.future();
 	}
 
-	public Future<Void> indexTimeStep(TimeStep o) {
-		Promise<Void> promise = Promise.promise();
+	public Future<TimeStep> indexTimeStep(TimeStep o) {
+		Promise<TimeStep> promise = Promise.promise();
 		try {
 			SiteRequestEnUS siteRequest = o.getSiteRequest_();
 			ApiRequest apiRequest = siteRequest.getApiRequest_();
@@ -1555,7 +1548,7 @@ public class TimeStepEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 						softCommit = false;
 				String solrRequestUri = String.format("/solr/%s/update%s%s%s", solrCollection, "?overwrite=true&wt=json", softCommit ? "&softCommit=true" : "", commitWithin != null ? ("&commitWithin=" + commitWithin) : "");
 				webClient.post(solrPort, solrHostName, solrRequestUri).ssl(solrSsl).putHeader("Content-Type", "application/json").expect(ResponsePredicate.SC_OK).sendBuffer(json.toBuffer()).onSuccess(b -> {
-					promise.complete();
+					promise.complete(o);
 				}).onFailure(ex -> {
 					LOG.error(String.format("indexTimeStep failed. "), new RuntimeException(ex));
 					promise.fail(ex);

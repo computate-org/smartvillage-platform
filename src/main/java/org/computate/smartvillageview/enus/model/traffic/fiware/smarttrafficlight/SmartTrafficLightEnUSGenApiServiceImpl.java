@@ -530,14 +530,7 @@ public class SmartTrafficLightEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 							if(apiRequest.getNumFound() == 1L)
 								apiRequest.setOriginal(o);
 							apiRequest.setPk(Optional.ofNullable(listSmartTrafficLight.first()).map(o2 -> o2.getPk()).orElse(null));
-							eventBus.publish("websocketSmartTrafficLight", JsonObject.mapFrom(apiRequest).toString());
 							patchSmartTrafficLightFuture(o, false).onSuccess(o2 -> {
-								if(apiRequest != null) {
-									apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listSmartTrafficLight.getResponse().getResponse().getDocs().size());
-									if(apiRequest.getNumFound() == 1L)
-										o2.apiRequestSmartTrafficLight();
-									eventBus.publish("websocketSmartTrafficLight", JsonObject.mapFrom(apiRequest).toString());
-								}
 								eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(new JsonObject().encodePrettily()))));
 							}).onFailure(ex -> {
 								eventHandler.handle(Future.failedFuture(ex));
@@ -576,7 +569,15 @@ public class SmartTrafficLightEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 					sqlPATCHSmartTrafficLight(o, inheritPk).onSuccess(smartTrafficLight -> {
 						persistSmartTrafficLight(smartTrafficLight).onSuccess(c -> {
 							relateSmartTrafficLight(smartTrafficLight).onSuccess(d -> {
-								indexSmartTrafficLight(smartTrafficLight).onSuccess(e -> {
+								indexSmartTrafficLight(smartTrafficLight).onSuccess(o2 -> {
+									if(apiRequest != null) {
+										apiRequest.setNumPATCH(apiRequest.getNumPATCH() + 1);
+										if(apiRequest.getNumFound() == 1L && Optional.ofNullable(siteRequest.getJsonObject()).map(json -> json.size() > 0).orElse(false)) {
+											o2.apiRequestSmartTrafficLight();
+											if(apiRequest.getVars().size() > 0)
+												eventBus.publish("websocketSmartTrafficLight", JsonObject.mapFrom(apiRequest).toString());
+										}
+									}
 									promise1.complete(smartTrafficLight);
 								}).onFailure(ex -> {
 									promise1.fail(ex);
@@ -1034,7 +1035,7 @@ public class SmartTrafficLightEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 						sqlPOSTSmartTrafficLight(smartTrafficLight, inheritPk).onSuccess(b -> {
 							persistSmartTrafficLight(smartTrafficLight).onSuccess(c -> {
 								relateSmartTrafficLight(smartTrafficLight).onSuccess(d -> {
-									indexSmartTrafficLight(smartTrafficLight).onSuccess(e -> {
+									indexSmartTrafficLight(smartTrafficLight).onSuccess(o2 -> {
 										promise1.complete(smartTrafficLight);
 									}).onFailure(ex -> {
 										promise1.fail(ex);
@@ -2143,8 +2144,8 @@ public class SmartTrafficLightEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 		return promise.future();
 	}
 
-	public Future<Void> indexSmartTrafficLight(SmartTrafficLight o) {
-		Promise<Void> promise = Promise.promise();
+	public Future<SmartTrafficLight> indexSmartTrafficLight(SmartTrafficLight o) {
+		Promise<SmartTrafficLight> promise = Promise.promise();
 		try {
 			SiteRequestEnUS siteRequest = o.getSiteRequest_();
 			ApiRequest apiRequest = siteRequest.getApiRequest_();
@@ -2167,7 +2168,7 @@ public class SmartTrafficLightEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 						softCommit = false;
 				String solrRequestUri = String.format("/solr/%s/update%s%s%s", solrCollection, "?overwrite=true&wt=json", softCommit ? "&softCommit=true" : "", commitWithin != null ? ("&commitWithin=" + commitWithin) : "");
 				webClient.post(solrPort, solrHostName, solrRequestUri).ssl(solrSsl).putHeader("Content-Type", "application/json").expect(ResponsePredicate.SC_OK).sendBuffer(json.toBuffer()).onSuccess(b -> {
-					promise.complete();
+					promise.complete(o);
 				}).onFailure(ex -> {
 					LOG.error(String.format("indexSmartTrafficLight failed. "), new RuntimeException(ex));
 					promise.fail(ex);

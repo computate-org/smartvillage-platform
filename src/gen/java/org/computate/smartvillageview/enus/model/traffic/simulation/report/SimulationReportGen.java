@@ -337,6 +337,7 @@ public abstract class SimulationReportGen<DEV> extends BaseModel {
 			m = Pattern.compile("\\s*(\\d*\\.\\d*)\\s*,\\s*(\\d*\\.\\d*)").matcher(o);
 			if(m.find())
 				return new Point(Double.parseDouble(m.group(1)), Double.parseDouble(m.group(2)));
+			throw new RuntimeException(String.format("Invalid point format \"%s\", try these formats instead: 55.633703,13.49254 or {\"type\":\"Point\",\"coordinates\":[55.633703,13.49254]}", o));
 		}
 		return null;
 	}

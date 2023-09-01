@@ -532,14 +532,7 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							if(apiRequest.getNumFound() == 1L)
 								apiRequest.setOriginal(o);
 							apiRequest.setPk(Optional.ofNullable(listSimulationReport.first()).map(o2 -> o2.getPk()).orElse(null));
-							eventBus.publish("websocketSimulationReport", JsonObject.mapFrom(apiRequest).toString());
 							patchSimulationReportFuture(o, false).onSuccess(o2 -> {
-								if(apiRequest != null) {
-									apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listSimulationReport.getResponse().getResponse().getDocs().size());
-									if(apiRequest.getNumFound() == 1L)
-										o2.apiRequestSimulationReport();
-									eventBus.publish("websocketSimulationReport", JsonObject.mapFrom(apiRequest).toString());
-								}
 								eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(new JsonObject().encodePrettily()))));
 							}).onFailure(ex -> {
 								eventHandler.handle(Future.failedFuture(ex));
@@ -578,7 +571,15 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 					sqlPATCHSimulationReport(o, inheritPk).onSuccess(simulationReport -> {
 						persistSimulationReport(simulationReport).onSuccess(c -> {
 							relateSimulationReport(simulationReport).onSuccess(d -> {
-								indexSimulationReport(simulationReport).onSuccess(e -> {
+								indexSimulationReport(simulationReport).onSuccess(o2 -> {
+									if(apiRequest != null) {
+										apiRequest.setNumPATCH(apiRequest.getNumPATCH() + 1);
+										if(apiRequest.getNumFound() == 1L && Optional.ofNullable(siteRequest.getJsonObject()).map(json -> json.size() > 0).orElse(false)) {
+											o2.apiRequestSimulationReport();
+											if(apiRequest.getVars().size() > 0)
+												eventBus.publish("websocketSimulationReport", JsonObject.mapFrom(apiRequest).toString());
+										}
+									}
 									promise1.complete(simulationReport);
 								}).onFailure(ex -> {
 									promise1.fail(ex);
@@ -1185,7 +1186,7 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 						sqlPOSTSimulationReport(simulationReport, inheritPk).onSuccess(b -> {
 							persistSimulationReport(simulationReport).onSuccess(c -> {
 								relateSimulationReport(simulationReport).onSuccess(d -> {
-									indexSimulationReport(simulationReport).onSuccess(e -> {
+									indexSimulationReport(simulationReport).onSuccess(o2 -> {
 										promise1.complete(simulationReport);
 									}).onFailure(ex -> {
 										promise1.fail(ex);
@@ -2135,7 +2136,7 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 					sqlPUTCopySimulationReport(simulationReport, jsonObject).onSuccess(b -> {
 						persistSimulationReport(simulationReport).onSuccess(c -> {
 							relateSimulationReport(simulationReport).onSuccess(d -> {
-								indexSimulationReport(simulationReport).onSuccess(e -> {
+								indexSimulationReport(simulationReport).onSuccess(o2 -> {
 									promise1.complete(simulationReport);
 								}).onFailure(ex -> {
 									promise1.fail(ex);
@@ -2778,14 +2779,7 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							if(apiRequest.getNumFound() == 1L)
 								apiRequest.setOriginal(o);
 							apiRequest.setPk(Optional.ofNullable(listSimulationReport.first()).map(o2 -> o2.getPk()).orElse(null));
-							eventBus.publish("websocketSimulationReport", JsonObject.mapFrom(apiRequest).toString());
 							patchrunsimulationSimulationReportFuture(o, false).onSuccess(o2 -> {
-								if(apiRequest != null) {
-									apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listSimulationReport.getResponse().getResponse().getDocs().size());
-									if(apiRequest.getNumFound() == 1L)
-										o2.apiRequestSimulationReport();
-									eventBus.publish("websocketSimulationReport", JsonObject.mapFrom(apiRequest).toString());
-								}
 								eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(new JsonObject().encodePrettily()))));
 							}).onFailure(ex -> {
 								eventHandler.handle(Future.failedFuture(ex));
@@ -2824,7 +2818,15 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 					sqlPATCHRunSimulationSimulationReport(o, inheritPk).onSuccess(simulationReport -> {
 						persistSimulationReport(simulationReport).onSuccess(c -> {
 							relateSimulationReport(simulationReport).onSuccess(d -> {
-								indexSimulationReport(simulationReport).onSuccess(e -> {
+								indexSimulationReport(simulationReport).onSuccess(o2 -> {
+									if(apiRequest != null) {
+										apiRequest.setNumPATCH(apiRequest.getNumPATCH() + 1);
+										if(apiRequest.getNumFound() == 1L && Optional.ofNullable(siteRequest.getJsonObject()).map(json -> json.size() > 0).orElse(false)) {
+											o2.apiRequestSimulationReport();
+											if(apiRequest.getVars().size() > 0)
+												eventBus.publish("websocketSimulationReport", JsonObject.mapFrom(apiRequest).toString());
+										}
+									}
 									promise1.complete(simulationReport);
 								}).onFailure(ex -> {
 									promise1.fail(ex);
@@ -3800,8 +3802,8 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 		return promise.future();
 	}
 
-	public Future<Void> indexSimulationReport(SimulationReport o) {
-		Promise<Void> promise = Promise.promise();
+	public Future<SimulationReport> indexSimulationReport(SimulationReport o) {
+		Promise<SimulationReport> promise = Promise.promise();
 		try {
 			SiteRequestEnUS siteRequest = o.getSiteRequest_();
 			ApiRequest apiRequest = siteRequest.getApiRequest_();
@@ -3824,7 +3826,7 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 						softCommit = false;
 				String solrRequestUri = String.format("/solr/%s/update%s%s%s", solrCollection, "?overwrite=true&wt=json", softCommit ? "&softCommit=true" : "", commitWithin != null ? ("&commitWithin=" + commitWithin) : "");
 				webClient.post(solrPort, solrHostName, solrRequestUri).ssl(solrSsl).putHeader("Content-Type", "application/json").expect(ResponsePredicate.SC_OK).sendBuffer(json.toBuffer()).onSuccess(b -> {
-					promise.complete();
+					promise.complete(o);
 				}).onFailure(ex -> {
 					LOG.error(String.format("indexSimulationReport failed. "), new RuntimeException(ex));
 					promise.fail(ex);

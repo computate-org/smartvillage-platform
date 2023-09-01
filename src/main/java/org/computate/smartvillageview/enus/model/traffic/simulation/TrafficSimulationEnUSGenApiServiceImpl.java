@@ -531,14 +531,7 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 							if(apiRequest.getNumFound() == 1L)
 								apiRequest.setOriginal(o);
 							apiRequest.setPk(Optional.ofNullable(listTrafficSimulation.first()).map(o2 -> o2.getPk()).orElse(null));
-							eventBus.publish("websocketTrafficSimulation", JsonObject.mapFrom(apiRequest).toString());
 							patchTrafficSimulationFuture(o, false).onSuccess(o2 -> {
-								if(apiRequest != null) {
-									apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listTrafficSimulation.getResponse().getResponse().getDocs().size());
-									if(apiRequest.getNumFound() == 1L)
-										o2.apiRequestTrafficSimulation();
-									eventBus.publish("websocketTrafficSimulation", JsonObject.mapFrom(apiRequest).toString());
-								}
 								eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(new JsonObject().encodePrettily()))));
 							}).onFailure(ex -> {
 								eventHandler.handle(Future.failedFuture(ex));
@@ -577,7 +570,15 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 					sqlPATCHTrafficSimulation(o, inheritPk).onSuccess(trafficSimulation -> {
 						persistTrafficSimulation(trafficSimulation).onSuccess(c -> {
 							relateTrafficSimulation(trafficSimulation).onSuccess(d -> {
-								indexTrafficSimulation(trafficSimulation).onSuccess(e -> {
+								indexTrafficSimulation(trafficSimulation).onSuccess(o2 -> {
+									if(apiRequest != null) {
+										apiRequest.setNumPATCH(apiRequest.getNumPATCH() + 1);
+										if(apiRequest.getNumFound() == 1L && Optional.ofNullable(siteRequest.getJsonObject()).map(json -> json.size() > 0).orElse(false)) {
+											o2.apiRequestTrafficSimulation();
+											if(apiRequest.getVars().size() > 0)
+												eventBus.publish("websocketTrafficSimulation", JsonObject.mapFrom(apiRequest).toString());
+										}
+									}
 									promise1.complete(trafficSimulation);
 								}).onFailure(ex -> {
 									promise1.fail(ex);
@@ -1251,7 +1252,7 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 						sqlPOSTTrafficSimulation(trafficSimulation, inheritPk).onSuccess(b -> {
 							persistTrafficSimulation(trafficSimulation).onSuccess(c -> {
 								relateTrafficSimulation(trafficSimulation).onSuccess(d -> {
-									indexTrafficSimulation(trafficSimulation).onSuccess(e -> {
+									indexTrafficSimulation(trafficSimulation).onSuccess(o2 -> {
 										promise1.complete(trafficSimulation);
 									}).onFailure(ex -> {
 										promise1.fail(ex);
@@ -2731,8 +2732,8 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 		return promise.future();
 	}
 
-	public Future<Void> indexTrafficSimulation(TrafficSimulation o) {
-		Promise<Void> promise = Promise.promise();
+	public Future<TrafficSimulation> indexTrafficSimulation(TrafficSimulation o) {
+		Promise<TrafficSimulation> promise = Promise.promise();
 		try {
 			SiteRequestEnUS siteRequest = o.getSiteRequest_();
 			ApiRequest apiRequest = siteRequest.getApiRequest_();
@@ -2755,7 +2756,7 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 						softCommit = false;
 				String solrRequestUri = String.format("/solr/%s/update%s%s%s", solrCollection, "?overwrite=true&wt=json", softCommit ? "&softCommit=true" : "", commitWithin != null ? ("&commitWithin=" + commitWithin) : "");
 				webClient.post(solrPort, solrHostName, solrRequestUri).ssl(solrSsl).putHeader("Content-Type", "application/json").expect(ResponsePredicate.SC_OK).sendBuffer(json.toBuffer()).onSuccess(b -> {
-					promise.complete();
+					promise.complete(o);
 				}).onFailure(ex -> {
 					LOG.error(String.format("indexTrafficSimulation failed. "), new RuntimeException(ex));
 					promise.fail(ex);

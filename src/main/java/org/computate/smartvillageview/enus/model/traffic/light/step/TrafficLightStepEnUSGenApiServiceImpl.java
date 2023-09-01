@@ -526,14 +526,7 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							}
 							if(apiRequest.getNumFound() == 1L)
 								apiRequest.setOriginal(o);
-							eventBus.publish("websocketTrafficLightStep", JsonObject.mapFrom(apiRequest).toString());
 							patchTrafficLightStepFuture(o, false).onSuccess(o2 -> {
-								if(apiRequest != null) {
-									apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listTrafficLightStep.getResponse().getResponse().getDocs().size());
-									if(apiRequest.getNumFound() == 1L)
-										o.apiRequestTrafficLightStep();
-									eventBus.publish("websocketTrafficLightStep", JsonObject.mapFrom(apiRequest).toString());
-								}
 								eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(new JsonObject().encodePrettily()))));
 							}).onFailure(ex -> {
 								eventHandler.handle(Future.failedFuture(ex));
@@ -746,7 +739,7 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 		try {
 			createTrafficLightStep(siteRequest).onSuccess(trafficLightStep -> {
 				persistTrafficLightStep(trafficLightStep, false).onSuccess(c -> {
-					indexTrafficLightStep(trafficLightStep).onSuccess(e -> {
+					indexTrafficLightStep(trafficLightStep).onSuccess(o2 -> {
 						promise.complete(trafficLightStep);
 					}).onFailure(ex -> {
 						promise.fail(ex);
@@ -1531,8 +1524,8 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 		return promise.future();
 	}
 
-	public Future<Void> indexTrafficLightStep(TrafficLightStep o) {
-		Promise<Void> promise = Promise.promise();
+	public Future<TrafficLightStep> indexTrafficLightStep(TrafficLightStep o) {
+		Promise<TrafficLightStep> promise = Promise.promise();
 		try {
 			SiteRequestEnUS siteRequest = o.getSiteRequest_();
 			ApiRequest apiRequest = siteRequest.getApiRequest_();
@@ -1555,7 +1548,7 @@ public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 						softCommit = false;
 				String solrRequestUri = String.format("/solr/%s/update%s%s%s", solrCollection, "?overwrite=true&wt=json", softCommit ? "&softCommit=true" : "", commitWithin != null ? ("&commitWithin=" + commitWithin) : "");
 				webClient.post(solrPort, solrHostName, solrRequestUri).ssl(solrSsl).putHeader("Content-Type", "application/json").expect(ResponsePredicate.SC_OK).sendBuffer(json.toBuffer()).onSuccess(b -> {
-					promise.complete();
+					promise.complete(o);
 				}).onFailure(ex -> {
 					LOG.error(String.format("indexTrafficLightStep failed. "), new RuntimeException(ex));
 					promise.fail(ex);

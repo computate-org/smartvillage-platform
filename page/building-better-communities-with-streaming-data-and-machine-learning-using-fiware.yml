@@ -1,12 +1,12 @@
 ---
-pageId: "building-better-communities-using-fiware-with-streaming-data-and-machine-learning"
+pageId: "building-better-communities-with-streaming-data-and-machine-learning-using-fiware"
 uri: "/en-us/{{ pageId }}"
-url: "{{ page.siteBaseUrl }}{{ uri }}"
-h1: "Building better communities using FIWARE with streaming data and machine learning"
+url: "https://research.redhat.com/blog/2023/01/09/{{ pageId }}/"
+h1: "Building better communities with streaming data and machine learning using FIWARE"
 h2: "The latest standards powering our open source smart village project underway at the Red Hat Collaboratory"
-created: "2022-11-15"
+created: "2023-01-09"
 courseNum: 1
-lessonNum: 7
+lessonNum: 8
 author:
   name: Christopher Tate
   title: Red Hat Principal Software Consultant

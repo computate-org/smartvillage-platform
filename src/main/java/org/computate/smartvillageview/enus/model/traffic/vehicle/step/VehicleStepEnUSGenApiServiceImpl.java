@@ -526,14 +526,7 @@ public class VehicleStepEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 							}
 							if(apiRequest.getNumFound() == 1L)
 								apiRequest.setOriginal(o);
-							eventBus.publish("websocketVehicleStep", JsonObject.mapFrom(apiRequest).toString());
 							patchVehicleStepFuture(o, false).onSuccess(o2 -> {
-								if(apiRequest != null) {
-									apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listVehicleStep.getResponse().getResponse().getDocs().size());
-									if(apiRequest.getNumFound() == 1L)
-										o.apiRequestVehicleStep();
-									eventBus.publish("websocketVehicleStep", JsonObject.mapFrom(apiRequest).toString());
-								}
 								eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(new JsonObject().encodePrettily()))));
 							}).onFailure(ex -> {
 								eventHandler.handle(Future.failedFuture(ex));
@@ -746,7 +739,7 @@ public class VehicleStepEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 		try {
 			createVehicleStep(siteRequest).onSuccess(vehicleStep -> {
 				persistVehicleStep(vehicleStep, false).onSuccess(c -> {
-					indexVehicleStep(vehicleStep).onSuccess(e -> {
+					indexVehicleStep(vehicleStep).onSuccess(o2 -> {
 						promise.complete(vehicleStep);
 					}).onFailure(ex -> {
 						promise.fail(ex);
@@ -1531,8 +1524,8 @@ public class VehicleStepEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 		return promise.future();
 	}
 
-	public Future<Void> indexVehicleStep(VehicleStep o) {
-		Promise<Void> promise = Promise.promise();
+	public Future<VehicleStep> indexVehicleStep(VehicleStep o) {
+		Promise<VehicleStep> promise = Promise.promise();
 		try {
 			SiteRequestEnUS siteRequest = o.getSiteRequest_();
 			ApiRequest apiRequest = siteRequest.getApiRequest_();
@@ -1555,7 +1548,7 @@ public class VehicleStepEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 						softCommit = false;
 				String solrRequestUri = String.format("/solr/%s/update%s%s%s", solrCollection, "?overwrite=true&wt=json", softCommit ? "&softCommit=true" : "", commitWithin != null ? ("&commitWithin=" + commitWithin) : "");
 				webClient.post(solrPort, solrHostName, solrRequestUri).ssl(solrSsl).putHeader("Content-Type", "application/json").expect(ResponsePredicate.SC_OK).sendBuffer(json.toBuffer()).onSuccess(b -> {
-					promise.complete();
+					promise.complete(o);
 				}).onFailure(ex -> {
 					LOG.error(String.format("indexVehicleStep failed. "), new RuntimeException(ex));
 					promise.fail(ex);

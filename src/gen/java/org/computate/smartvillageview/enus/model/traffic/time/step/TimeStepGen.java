@@ -8,6 +8,8 @@ import java.util.Optional;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -456,7 +458,7 @@ public abstract class TimeStepGen<DEV> extends BaseResult {
 	}
 
 	public void setDateTime(ZonedDateTime dateTime) {
-		this.dateTime = dateTime;
+		this.dateTime = Optional.ofNullable(dateTime).map(v -> v.truncatedTo(ChronoUnit.MILLIS)).orElse(null);
 	}
 	@JsonIgnore
 	public void setDateTime(Instant o) {

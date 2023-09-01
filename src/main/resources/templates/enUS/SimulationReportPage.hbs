@@ -99,6 +99,21 @@ async function websocketSimulationReportInner2(apiRequest) {
 	Duplicate simulation reports
 </button>
 {{> htmFormSimulationReportPage}}
+<button class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce " id="runReport" onclick="$.ajax({ url: '/api/run-simulation-report?' + $.param([ {name: 'fq', value: 'pk:{{ pk }}' } ]) , dataType: 'json' , type: 'PATCH' , contentType: 'application/json; charset=utf-8' , data: JSON.stringify({'setReportStatus': 'Run'}) }); ">
+	<i class="fas fa-edit " aria-hidden="true"></i>
+	Run Report
+</button>
+<button class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce " id="stopReport" onclick="$.ajax({ url: '/api/run-simulation-report?' + $.param([ {name: 'fq', value: 'pk:{{ pk }}' } ]) , dataType: 'json' , type: 'PATCH' , contentType: 'application/json; charset=utf-8' , data: JSON.stringify({'setReportStatus': 'Stop'}) }); ">
+	<i class="fas fa-edit " aria-hidden="true"></i>
+	Stop Report
+</button>
+<button
+	class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce "
+	onclick="$('#putcopySimulationReportModal').show(); "
+	>
+	<i class="fas fa-copy "></i>
+	Duplicate simulation reports
+</button>
 {{/partial}}
 {{#partial "htmForms"}}
 {{> htmFormsSimulationReportPage}}
@@ -114,7 +129,25 @@ async function websocketSimulationReportInner2(apiRequest) {
 {{#partial "htmForm_putimportSimulationReport"}}{{> htmFormSimulationReportPage_putimportSimulationReport classApiMethodMethod="PUT"}}{{/partial}}
 {{#partial "htmFormButton_putimportSimulationReport"}}{{> htmFormButtonSimulationReportPage_putimportSimulationReport classApiMethodMethod="PUT"}}{{/partial}}
 {{#partial "htmButton_searchpageSimulationReport"}}{{> htmButtonSimulationReportPage_searchpageSimulationReport classApiMethodMethod="Page"}}{{/partial}}
-{{#partial "htmForm_searchpageSimulationReport"}}{{> htmFormSimulationReportPage_searchpageSimulationReport classApiMethodMethod="Page"}}{{/partial}}
+{{#partial "htmForm_searchpageSimulationReport"}}{{> htmFormSimulationReportPage_searchpageSimulationReport classApiMethodMethod="Page"}}
+
+							<div class="">
+							<div class="w3-row ">
+								<div class="w3-half w3-padding ">
+									<img class="w3-image plotPerformance " src="data:image/png;base64,{{ plotPerformance }}"/>
+								</div>
+								<div class="w3-half w3-padding ">
+									<img class="w3-image plotQueueLengthThreshold " src="data:image/png;base64,{{ plotQueueLengthThreshold }}"/>
+								</div>
+								<div class="w3-half w3-padding ">
+									<img class="w3-image plotGreenLengthThresholdVehicle " src="data:image/png;base64,{{ plotGreenLengthThresholdVehicle }}"/>
+								</div>
+								<div class="w3-half w3-padding ">
+									<img class="w3-image plotGreenLengthThresholdPedestrian " src="data:image/png;base64,{{ plotGreenLengthThresholdPedestrian }}"/>
+								</div>
+							</div>
+							</div>
+{{/partial}}
 {{#partial "htmFormButton_searchpageSimulationReport"}}{{> htmFormButtonSimulationReportPage_searchpageSimulationReport classApiMethodMethod="Page"}}{{/partial}}
 {{/eq}}
 {{> SimulationReportGenPage}}

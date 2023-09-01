@@ -11,6 +11,8 @@ import java.util.Optional;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -336,7 +338,7 @@ public abstract class BaseModelGen<DEV> extends Object {
 	}
 
 	public void setCreated(ZonedDateTime created) {
-		this.created = created;
+		this.created = Optional.ofNullable(created).map(v -> v.truncatedTo(ChronoUnit.MILLIS)).orElse(null);
 	}
 	@JsonIgnore
 	public void setCreated(Instant o) {
@@ -416,7 +418,7 @@ public abstract class BaseModelGen<DEV> extends Object {
 	}
 
 	public void setModified(ZonedDateTime modified) {
-		this.modified = modified;
+		this.modified = Optional.ofNullable(modified).map(v -> v.truncatedTo(ChronoUnit.MILLIS)).orElse(null);
 	}
 	@JsonIgnore
 	public void setModified(Instant o) {

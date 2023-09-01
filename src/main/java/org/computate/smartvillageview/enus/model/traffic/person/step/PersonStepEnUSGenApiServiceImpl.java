@@ -526,14 +526,7 @@ public class PersonStepEnUSGenApiServiceImpl extends BaseApiServiceImpl implemen
 							}
 							if(apiRequest.getNumFound() == 1L)
 								apiRequest.setOriginal(o);
-							eventBus.publish("websocketPersonStep", JsonObject.mapFrom(apiRequest).toString());
 							patchPersonStepFuture(o, false).onSuccess(o2 -> {
-								if(apiRequest != null) {
-									apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listPersonStep.getResponse().getResponse().getDocs().size());
-									if(apiRequest.getNumFound() == 1L)
-										o.apiRequestPersonStep();
-									eventBus.publish("websocketPersonStep", JsonObject.mapFrom(apiRequest).toString());
-								}
 								eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(new JsonObject().encodePrettily()))));
 							}).onFailure(ex -> {
 								eventHandler.handle(Future.failedFuture(ex));
@@ -746,7 +739,7 @@ public class PersonStepEnUSGenApiServiceImpl extends BaseApiServiceImpl implemen
 		try {
 			createPersonStep(siteRequest).onSuccess(personStep -> {
 				persistPersonStep(personStep, false).onSuccess(c -> {
-					indexPersonStep(personStep).onSuccess(e -> {
+					indexPersonStep(personStep).onSuccess(o2 -> {
 						promise.complete(personStep);
 					}).onFailure(ex -> {
 						promise.fail(ex);
@@ -1531,8 +1524,8 @@ public class PersonStepEnUSGenApiServiceImpl extends BaseApiServiceImpl implemen
 		return promise.future();
 	}
 
-	public Future<Void> indexPersonStep(PersonStep o) {
-		Promise<Void> promise = Promise.promise();
+	public Future<PersonStep> indexPersonStep(PersonStep o) {
+		Promise<PersonStep> promise = Promise.promise();
 		try {
 			SiteRequestEnUS siteRequest = o.getSiteRequest_();
 			ApiRequest apiRequest = siteRequest.getApiRequest_();
@@ -1555,7 +1548,7 @@ public class PersonStepEnUSGenApiServiceImpl extends BaseApiServiceImpl implemen
 						softCommit = false;
 				String solrRequestUri = String.format("/solr/%s/update%s%s%s", solrCollection, "?overwrite=true&wt=json", softCommit ? "&softCommit=true" : "", commitWithin != null ? ("&commitWithin=" + commitWithin) : "");
 				webClient.post(solrPort, solrHostName, solrRequestUri).ssl(solrSsl).putHeader("Content-Type", "application/json").expect(ResponsePredicate.SC_OK).sendBuffer(json.toBuffer()).onSuccess(b -> {
-					promise.complete();
+					promise.complete(o);
 				}).onFailure(ex -> {
 					LOG.error(String.format("indexPersonStep failed. "), new RuntimeException(ex));
 					promise.fail(ex);

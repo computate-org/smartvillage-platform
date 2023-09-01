@@ -814,8 +814,8 @@ public class MapResultEnUSGenApiServiceImpl extends BaseApiServiceImpl implement
 		return promise.future();
 	}
 
-	public Future<Void> indexMapResult(MapResult o) {
-		Promise<Void> promise = Promise.promise();
+	public Future<MapResult> indexMapResult(MapResult o) {
+		Promise<MapResult> promise = Promise.promise();
 		try {
 			SiteRequestEnUS siteRequest = o.getSiteRequest_();
 			ApiRequest apiRequest = siteRequest.getApiRequest_();
@@ -838,7 +838,7 @@ public class MapResultEnUSGenApiServiceImpl extends BaseApiServiceImpl implement
 						softCommit = false;
 				String solrRequestUri = String.format("/solr/%s/update%s%s%s", solrCollection, "?overwrite=true&wt=json", softCommit ? "&softCommit=true" : "", commitWithin != null ? ("&commitWithin=" + commitWithin) : "");
 				webClient.post(solrPort, solrHostName, solrRequestUri).ssl(solrSsl).putHeader("Content-Type", "application/json").expect(ResponsePredicate.SC_OK).sendBuffer(json.toBuffer()).onSuccess(b -> {
-					promise.complete();
+					promise.complete(o);
 				}).onFailure(ex -> {
 					LOG.error(String.format("indexMapResult failed. "), new RuntimeException(ex));
 					promise.fail(ex);

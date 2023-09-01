@@ -272,7 +272,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	}
 
 	public void setStartDateTime(ZonedDateTime startDateTime) {
-		this.startDateTime = startDateTime;
+		this.startDateTime = Optional.ofNullable(startDateTime).map(v -> v.truncatedTo(ChronoUnit.MILLIS)).orElse(null);
 	}
 	@JsonIgnore
 	public void setStartDateTime(Instant o) {
@@ -418,8 +418,9 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			m = Pattern.compile("\\s*(\\d*\\.\\d*)\\s*,\\s*(\\d*\\.\\d*)").matcher(o);
 			if(m.find())
 				return new Point(Double.parseDouble(m.group(1)), Double.parseDouble(m.group(2)));
+			throw new RuntimeException(String.format("Invalid point format \"%s\", try these formats instead: 55.633703,13.49254 or {\"type\":\"Point\",\"coordinates\":[55.633703,13.49254]}", o));
 		}
-		throw new RuntimeException(String.format("Invalid point format \"%s\", try these formats instead: 55.633703,13.49254 or {\"type\":\"Point\",\"coordinates\":[55.633703,13.49254]}", o));
+		return null;
 	}
 	protected TrafficSimulation locationInit() {
 		Wrap<Point> locationWrap = new Wrap<Point>().var("location");

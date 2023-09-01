@@ -459,15 +459,6 @@
 							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
 							<div class="w3-cell-row HtmRow">
 {{#ifContainsAnyRoles roles roleForWrite}}
-{{> "htmTime" roleForWriteBool="true" roleForReadBool="true"}}
-{{else}}
-{{#ifContainsAnyRoles roles roleForRead}}
-{{> "htmTime" roleForWriteBool="false" roleForReadBool="true"}}
-{{else}}
-{{> "htmTime" roleForWriteBool="false" roleForReadBool="false"}}
-{{/ifContainsAnyRoles}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleForWrite}}
 {{> "htmDateTime" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
 {{#ifContainsAnyRoles roles roleForRead}}
@@ -483,6 +474,15 @@
 {{> "htmStep" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
 {{> "htmStep" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmTime" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmTime" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmTime" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleForWrite}}
@@ -980,15 +980,6 @@
 							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
 							<div class="w3-cell-row HtmRow">
 {{#ifContainsAnyRoles roles roleForWrite}}
-{{> "htmTime" roleForWriteBool="true" roleForReadBool="true"}}
-{{else}}
-{{#ifContainsAnyRoles roles roleForRead}}
-{{> "htmTime" roleForWriteBool="false" roleForReadBool="true"}}
-{{else}}
-{{> "htmTime" roleForWriteBool="false" roleForReadBool="false"}}
-{{/ifContainsAnyRoles}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleForWrite}}
 {{> "htmDateTime" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
 {{#ifContainsAnyRoles roles roleForRead}}
@@ -1004,6 +995,15 @@
 {{> "htmStep" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
 {{> "htmStep" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmTime" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmTime" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmTime" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleForWrite}}
@@ -1566,15 +1566,6 @@
 							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
 							<div class="w3-cell-row HtmRow">
 {{#ifContainsAnyRoles roles roleForWrite}}
-{{> "htmTime" roleForWriteBool="true" roleForReadBool="true"}}
-{{else}}
-{{#ifContainsAnyRoles roles roleForRead}}
-{{> "htmTime" roleForWriteBool="false" roleForReadBool="true"}}
-{{else}}
-{{> "htmTime" roleForWriteBool="false" roleForReadBool="false"}}
-{{/ifContainsAnyRoles}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleForWrite}}
 {{> "htmDateTime" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
 {{#ifContainsAnyRoles roles roleForRead}}
@@ -1590,6 +1581,15 @@
 {{> "htmStep" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
 {{> "htmStep" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmTime" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmTime" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmTime" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleForWrite}}
@@ -2587,62 +2587,6 @@
 		{{/eq}}
 {{/inline}}
 
-{{#*inline "htmTime"}}
-<!-- #*inline "htmTime" -->
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}TrafficFlowObservedTime">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_time">Time in seconds</label>
-												</div>
-											<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputTime" roleForWrite=roleForWrite roleForRead=roleForRead}}
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputTime"}}
-		{{#eq roleForWriteBool "true"}}
-														<input
-															type="text"
-															placeholder="Time in seconds"
-															title="The time in seconds. "															id="{{classApiMethodMethod}}_time"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setTime classTrafficFlowObserved inputTrafficFlowObserved{{id}}Time w3-input w3-border "
-																name="setTime"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setTime classTrafficFlowObserved inputTrafficFlowObserved{{id}}Time w3-input w3-border "
-																name="setTime"
-		{{else}}
-																class="valueTime w3-input w3-border classTrafficFlowObserved inputTrafficFlowObserved{{id}}Time w3-input w3-border "
-																name="time"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setTime', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_time')); }, function() { addError($('#{{classApiMethodMethod}}_time')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{trafficFlowObserved_.time}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}Time ">{{trafficFlowObserved_.time}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varTrafficFlowObserved{{id}}Time ">{{trafficFlowObserved_.time}}</span>
-		{{/eq}}
-{{/inline}}
-
 {{#*inline "htmDateTime"}}
 <!-- #*inline "htmDateTime" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
@@ -2752,6 +2696,62 @@
 			{{/ifContainsKeys}}
 		{{else}}
 														<span class="varTrafficFlowObserved{{id}}Step ">{{trafficFlowObserved_.step}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmTime"}}
+<!-- #*inline "htmTime" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficFlowObservedTime">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_time">Time in seconds</label>
+												</div>
+											<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputTime" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputTime"}}
+		{{#eq roleForWriteBool "true"}}
+														<input
+															type="text"
+															placeholder="Time in seconds"
+															title="The time in seconds. "															id="{{classApiMethodMethod}}_time"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setTime classTrafficFlowObserved inputTrafficFlowObserved{{id}}Time w3-input w3-border "
+																name="setTime"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setTime classTrafficFlowObserved inputTrafficFlowObserved{{id}}Time w3-input w3-border "
+																name="setTime"
+		{{else}}
+																class="valueTime w3-input w3-border classTrafficFlowObserved inputTrafficFlowObserved{{id}}Time w3-input w3-border "
+																name="time"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setTime', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_time')); }, function() { addError($('#{{classApiMethodMethod}}_time')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficFlowObserved_.time}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficFlowObserved{{id}}Time ">{{trafficFlowObserved_.time}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficFlowObserved{{id}}Time ">{{trafficFlowObserved_.time}}</span>
 		{{/eq}}
 {{/inline}}
 

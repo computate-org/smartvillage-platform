@@ -447,7 +447,7 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 		try {
 			createSitePage(siteRequest).onSuccess(sitePage -> {
 				persistSitePage(sitePage, false).onSuccess(c -> {
-					indexSitePage(sitePage).onSuccess(e -> {
+					indexSitePage(sitePage).onSuccess(o2 -> {
 						promise.complete(sitePage);
 					}).onFailure(ex -> {
 						promise.fail(ex);
@@ -650,14 +650,7 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							}
 							if(apiRequest.getNumFound() == 1L)
 								apiRequest.setOriginal(o);
-							eventBus.publish("websocketSitePage", JsonObject.mapFrom(apiRequest).toString());
 							patchSitePageFuture(o, false).onSuccess(o2 -> {
-								if(apiRequest != null) {
-									apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listSitePage.getResponse().getResponse().getDocs().size());
-									if(apiRequest.getNumFound() == 1L)
-										o.apiRequestSitePage();
-									eventBus.publish("websocketSitePage", JsonObject.mapFrom(apiRequest).toString());
-								}
 								eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(new JsonObject().encodePrettily()))));
 							}).onFailure(ex -> {
 								eventHandler.handle(Future.failedFuture(ex));
@@ -1442,8 +1435,8 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 		return promise.future();
 	}
 
-	public Future<Void> indexSitePage(SitePage o) {
-		Promise<Void> promise = Promise.promise();
+	public Future<SitePage> indexSitePage(SitePage o) {
+		Promise<SitePage> promise = Promise.promise();
 		try {
 			SiteRequestEnUS siteRequest = o.getSiteRequest_();
 			ApiRequest apiRequest = siteRequest.getApiRequest_();
@@ -1466,7 +1459,7 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 						softCommit = false;
 				String solrRequestUri = String.format("/solr/%s/update%s%s%s", solrCollection, "?overwrite=true&wt=json", softCommit ? "&softCommit=true" : "", commitWithin != null ? ("&commitWithin=" + commitWithin) : "");
 				webClient.post(solrPort, solrHostName, solrRequestUri).ssl(solrSsl).putHeader("Content-Type", "application/json").expect(ResponsePredicate.SC_OK).sendBuffer(json.toBuffer()).onSuccess(b -> {
-					promise.complete();
+					promise.complete(o);
 				}).onFailure(ex -> {
 					LOG.error(String.format("indexSitePage failed. "), new RuntimeException(ex));
 					promise.fail(ex);
