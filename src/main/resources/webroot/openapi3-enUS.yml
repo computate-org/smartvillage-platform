@@ -309,6 +309,29 @@ paths:
           in: cookie
           schema:
             type: string
+        - in: query
+          name: q
+          description: 'The query parameter defines a query using standard query syntax. This parameter is mandatory.'
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: 'The filter query parameter defines a query that can be used to restrict the superset of documents that can be returned, without influencing score. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: var
+          description: 'The var parameters are additional optional variables and values to pass into the application. '
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
       requestBody:
         description: >+
         required: true
@@ -999,6 +1022,29 @@ paths:
           in: cookie
           schema:
             type: string
+        - in: query
+          name: q
+          description: 'The query parameter defines a query using standard query syntax. This parameter is mandatory.'
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: 'The filter query parameter defines a query that can be used to restrict the superset of documents that can be returned, without influencing score. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: var
+          description: 'The var parameters are additional optional variables and values to pass into the application. '
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
       requestBody:
         description: >+
         required: true
@@ -1686,6 +1732,29 @@ paths:
           in: cookie
           schema:
             type: string
+        - in: query
+          name: q
+          description: 'The query parameter defines a query using standard query syntax. This parameter is mandatory.'
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: 'The filter query parameter defines a query that can be used to restrict the superset of documents that can be returned, without influencing score. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: var
+          description: 'The var parameters are additional optional variables and values to pass into the application. '
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
       requestBody:
         description: >+
         required: true
@@ -2367,6 +2436,29 @@ paths:
           in: cookie
           schema:
             type: string
+        - in: query
+          name: q
+          description: 'The query parameter defines a query using standard query syntax. This parameter is mandatory.'
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: 'The filter query parameter defines a query that can be used to restrict the superset of documents that can be returned, without influencing score. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: var
+          description: 'The var parameters are additional optional variables and values to pass into the application. '
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
       requestBody:
         description: >+
         required: true
@@ -3057,6 +3149,29 @@ paths:
           in: cookie
           schema:
             type: string
+        - in: query
+          name: q
+          description: 'The query parameter defines a query using standard query syntax. This parameter is mandatory.'
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: 'The filter query parameter defines a query that can be used to restrict the superset of documents that can be returned, without influencing score. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: var
+          description: 'The var parameters are additional optional variables and values to pass into the application. '
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
       requestBody:
         description: >+
         required: true
@@ -3747,6 +3862,29 @@ paths:
           in: cookie
           schema:
             type: string
+        - in: query
+          name: q
+          description: 'The query parameter defines a query using standard query syntax. This parameter is mandatory.'
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: 'The filter query parameter defines a query that can be used to restrict the superset of documents that can be returned, without influencing score. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: var
+          description: 'The var parameters are additional optional variables and values to pass into the application. '
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
       requestBody:
         description: >+
         required: true
@@ -4437,6 +4575,29 @@ paths:
           in: cookie
           schema:
             type: string
+        - in: query
+          name: q
+          description: 'The query parameter defines a query using standard query syntax. This parameter is mandatory.'
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: 'The filter query parameter defines a query that can be used to restrict the superset of documents that can be returned, without influencing score. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: var
+          description: 'The var parameters are additional optional variables and values to pass into the application. '
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
       requestBody:
         description: >+
         required: true
@@ -5127,6 +5288,29 @@ paths:
           in: cookie
           schema:
             type: string
+        - in: query
+          name: q
+          description: 'The query parameter defines a query using standard query syntax. This parameter is mandatory.'
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: 'The filter query parameter defines a query that can be used to restrict the superset of documents that can be returned, without influencing score. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: var
+          description: 'The var parameters are additional optional variables and values to pass into the application. '
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
       requestBody:
         description: >+
         required: true
@@ -5817,6 +6001,29 @@ paths:
           in: cookie
           schema:
             type: string
+        - in: query
+          name: q
+          description: 'The query parameter defines a query using standard query syntax. This parameter is mandatory.'
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: 'The filter query parameter defines a query that can be used to restrict the superset of documents that can be returned, without influencing score. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: var
+          description: 'The var parameters are additional optional variables and values to pass into the application. '
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
       requestBody:
         description: >+
         required: true
@@ -6507,6 +6714,29 @@ paths:
           in: cookie
           schema:
             type: string
+        - in: query
+          name: q
+          description: 'The query parameter defines a query using standard query syntax. This parameter is mandatory.'
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: 'The filter query parameter defines a query that can be used to restrict the superset of documents that can be returned, without influencing score. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: var
+          description: 'The var parameters are additional optional variables and values to pass into the application. '
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
       requestBody:
         description: >+
         required: true
@@ -7197,6 +7427,29 @@ paths:
           in: cookie
           schema:
             type: string
+        - in: query
+          name: q
+          description: 'The query parameter defines a query using standard query syntax. This parameter is mandatory.'
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: 'The filter query parameter defines a query that can be used to restrict the superset of documents that can be returned, without influencing score. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: var
+          description: 'The var parameters are additional optional variables and values to pass into the application. '
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
       requestBody:
         description: >+
         required: true
@@ -8308,6 +8561,29 @@ paths:
           in: cookie
           schema:
             type: string
+        - in: query
+          name: q
+          description: 'The query parameter defines a query using standard query syntax. This parameter is mandatory.'
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: 'The filter query parameter defines a query that can be used to restrict the superset of documents that can be returned, without influencing score. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: var
+          description: 'The var parameters are additional optional variables and values to pass into the application. '
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
       requestBody:
         description: >+
         required: true
@@ -8342,6 +8618,29 @@ paths:
           in: cookie
           schema:
             type: string
+        - in: query
+          name: q
+          description: 'The query parameter defines a query using standard query syntax. This parameter is mandatory.'
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: 'The filter query parameter defines a query that can be used to restrict the superset of documents that can be returned, without influencing score. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: var
+          description: 'The var parameters are additional optional variables and values to pass into the application. '
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
       requestBody:
         description: >+
         required: true
@@ -9032,6 +9331,29 @@ paths:
           in: cookie
           schema:
             type: string
+        - in: query
+          name: q
+          description: 'The query parameter defines a query using standard query syntax. This parameter is mandatory.'
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: 'The filter query parameter defines a query that can be used to restrict the superset of documents that can be returned, without influencing score. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: var
+          description: 'The var parameters are additional optional variables and values to pass into the application. '
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
       requestBody:
         description: >+
         required: true
@@ -9722,6 +10044,29 @@ paths:
           in: cookie
           schema:
             type: string
+        - in: query
+          name: q
+          description: 'The query parameter defines a query using standard query syntax. This parameter is mandatory.'
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: 'The filter query parameter defines a query that can be used to restrict the superset of documents that can be returned, without influencing score. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: var
+          description: 'The var parameters are additional optional variables and values to pass into the application. '
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
       requestBody:
         description: >+
         required: true
@@ -10412,6 +10757,29 @@ paths:
           in: cookie
           schema:
             type: string
+        - in: query
+          name: q
+          description: 'The query parameter defines a query using standard query syntax. This parameter is mandatory.'
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: 'The filter query parameter defines a query that can be used to restrict the superset of documents that can be returned, without influencing score. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: var
+          description: 'The var parameters are additional optional variables and values to pass into the application. '
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
       requestBody:
         description: >+
         required: true
@@ -11069,6 +11437,29 @@ paths:
           in: cookie
           schema:
             type: string
+        - in: query
+          name: q
+          description: 'The query parameter defines a query using standard query syntax. This parameter is mandatory.'
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: 'The filter query parameter defines a query that can be used to restrict the superset of documents that can be returned, without influencing score. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: var
+          description: 'The var parameters are additional optional variables and values to pass into the application. '
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
       requestBody:
         description: >+
         required: true

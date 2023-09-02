@@ -277,6 +277,7 @@ public class SiteRequestEnUS extends SiteRequestEnUSGen<Object> implements Compu
 		o.setUserKey(userKey); // The user primary key
 		o.setUserId(userId); // The user identifier in the authentication system
 		o.setApiRequest_(apiRequest_); // The current API request information
+		o.initDeepForClass();
 		return o;
 	}
 

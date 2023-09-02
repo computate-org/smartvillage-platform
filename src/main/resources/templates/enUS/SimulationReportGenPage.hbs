@@ -1157,7 +1157,7 @@
 {{#*inline "htmFormButtonSimulationReportPage_putcopySimulationReport"}}
 						<button
 							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-2017-shaded-spruce "
-							onclick="putcopySimulationReport($('#putcopySimulationReportFormValues')); "
+							onclick="putcopySimulationReport($('#putcopySimulationReportFormValues'), {{ pk }}); "
 							>Duplicate simulation reports</button>
 {{/inline}}
 {{#*inline "htmFormSimulationReportPage_putcopySimulationReport"}}
@@ -2339,10 +2339,8 @@
 {{#block "htmButton_putimportSimulationReport"}}{{/block}}
 {{#block "htmForm_putimportSimulationReport"}}{{/block}}
 {{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles authRoleSuperAdmin}}
 {{#block "htmButton_putcopySimulationReport"}}{{/block}}
 {{#block "htmForm_putcopySimulationReport"}}{{/block}}
-{{/ifContainsAnyRoles}}
 {{#block "htmSuggested"}}{{/block}}
 {{/inline}}
 {{#*inline "htmSuggestedSimulationReportPage"}}
