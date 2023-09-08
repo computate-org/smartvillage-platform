@@ -922,6 +922,7 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * Facet: true
 	 * DisplayName: report progress
 	 * Description: The percent progress of the simulation report. 
+	 * Modify: false
 	 */
 	protected void _reportProgress(Wrap<Integer> w) {
 		w.o(0);

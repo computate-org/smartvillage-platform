@@ -1272,7 +1272,7 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 			MapResult original = (MapResult)o;
 			if(!Objects.equals(timeStepId, original.getTimeStepId()))
 				apiRequest.addVars("timeStepId");
-			if(!Objects.equals(time, original.getTime()) && time != null && time.compareTo(original.getTime()) != 0)
+			if(!Objects.equals(time, original.getTime()) && time != null && original.getTime() != null && time.compareTo(original.getTime()) != 0)
 				apiRequest.addVars("time");
 			if(!Objects.equals(dateTime, original.getDateTime()))
 				apiRequest.addVars("dateTime");

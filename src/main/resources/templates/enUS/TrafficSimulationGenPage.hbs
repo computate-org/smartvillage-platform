@@ -971,7 +971,7 @@
 
 {{#*inline "inputCreated"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varTrafficSimulation{{pk}}Created " title="{{formatZonedDateTime trafficSimulation_.created 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime trafficSimulation_.created 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+														<span id="{{classApiMethodMethod}}_created" class="varTrafficSimulation{{pk}}Created varTrafficSimulationCreated " title="{{formatZonedDateTime trafficSimulation_.created 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime trafficSimulation_.created 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -997,7 +997,7 @@
 
 {{#*inline "inputModified"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varTrafficSimulation{{pk}}Modified " title="{{formatZonedDateTime trafficSimulation_.modified 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime trafficSimulation_.modified 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+														<span id="{{classApiMethodMethod}}_modified" class="varTrafficSimulation{{pk}}Modified varTrafficSimulationModified " title="{{formatZonedDateTime trafficSimulation_.modified 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime trafficSimulation_.modified 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -1023,7 +1023,7 @@
 
 {{#*inline "inputObjectId"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varTrafficSimulation{{pk}}ObjectId ">{{trafficSimulation_.objectId}}</span>
+														<span id="{{classApiMethodMethod}}_objectId" class="varTrafficSimulation{{pk}}ObjectId varTrafficSimulationObjectId ">{{trafficSimulation_.objectId}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -1088,10 +1088,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficSimulation{{pk}}Archived ">{{trafficSimulation_.archived}}</span>
+															<span class="varTrafficSimulation{{pk}}Archived varTrafficSimulationArchived ">{{trafficSimulation_.archived}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficSimulation{{pk}}Archived ">{{trafficSimulation_.archived}}</span>
+														<span class="varTrafficSimulation{{pk}}Archived varTrafficSimulationArchived ">{{trafficSimulation_.archived}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1156,10 +1156,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficSimulation{{pk}}Deleted ">{{trafficSimulation_.deleted}}</span>
+															<span class="varTrafficSimulation{{pk}}Deleted varTrafficSimulationDeleted ">{{trafficSimulation_.deleted}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficSimulation{{pk}}Deleted ">{{trafficSimulation_.deleted}}</span>
+														<span class="varTrafficSimulation{{pk}}Deleted varTrafficSimulationDeleted ">{{trafficSimulation_.deleted}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1212,10 +1212,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficSimulation{{pk}}SimulationName ">{{trafficSimulation_.simulationName}}</span>
+															<span class="varTrafficSimulation{{pk}}SimulationName varTrafficSimulationSimulationName ">{{trafficSimulation_.simulationName}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficSimulation{{pk}}SimulationName ">{{trafficSimulation_.simulationName}}</span>
+														<span class="varTrafficSimulation{{pk}}SimulationName varTrafficSimulationSimulationName ">{{trafficSimulation_.simulationName}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1292,7 +1292,7 @@
 
 													{{else}}
 		{{else}}
-														<span class="varTrafficSimulation{{pk}}ReportKeys ">{{trafficSimulation_.reportKeys}}</span>
+														<span class="varTrafficSimulation{{pk}}ReportKeys varTrafficSimulationReportKeys ">{{trafficSimulation_.reportKeys}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1345,9 +1345,9 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficSimulation{{pk}}Location ">{{trafficSimulation_.location}}</span>
+															<span class="varTrafficSimulation{{pk}}Location varTrafficSimulationLocation ">{{trafficSimulation_.location}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficSimulation{{pk}}Location ">{{trafficSimulation_.location}}</span>
+														<span class="varTrafficSimulation{{pk}}Location varTrafficSimulationLocation ">{{trafficSimulation_.location}}</span>
 		{{/eq}}
 {{/inline}}

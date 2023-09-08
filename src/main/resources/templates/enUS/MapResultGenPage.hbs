@@ -754,7 +754,7 @@
 
 {{#*inline "inputCreated"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varMapResult{{id}}Created " title="{{formatZonedDateTime mapResult_.created 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime mapResult_.created 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+														<span id="{{classApiMethodMethod}}_created" class="varMapResult{{id}}Created varMapResultCreated " title="{{formatZonedDateTime mapResult_.created 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime mapResult_.created 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -780,7 +780,7 @@
 
 {{#*inline "inputModified"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varMapResult{{id}}Modified " title="{{formatZonedDateTime mapResult_.modified 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime mapResult_.modified 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+														<span id="{{classApiMethodMethod}}_modified" class="varMapResult{{id}}Modified varMapResultModified " title="{{formatZonedDateTime mapResult_.modified 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime mapResult_.modified 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -833,10 +833,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varMapResult{{id}}ObjectId ">{{mapResult_.objectId}}</span>
+															<span class="varMapResult{{id}}ObjectId varMapResultObjectId ">{{mapResult_.objectId}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varMapResult{{id}}ObjectId ">{{mapResult_.objectId}}</span>
+														<span class="varMapResult{{id}}ObjectId varMapResultObjectId ">{{mapResult_.objectId}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -901,10 +901,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varMapResult{{id}}Archived ">{{mapResult_.archived}}</span>
+															<span class="varMapResult{{id}}Archived varMapResultArchived ">{{mapResult_.archived}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varMapResult{{id}}Archived ">{{mapResult_.archived}}</span>
+														<span class="varMapResult{{id}}Archived varMapResultArchived ">{{mapResult_.archived}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -969,10 +969,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varMapResult{{id}}Deleted ">{{mapResult_.deleted}}</span>
+															<span class="varMapResult{{id}}Deleted varMapResultDeleted ">{{mapResult_.deleted}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varMapResult{{id}}Deleted ">{{mapResult_.deleted}}</span>
+														<span class="varMapResult{{id}}Deleted varMapResultDeleted ">{{mapResult_.deleted}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1025,10 +1025,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varMapResult{{id}}Time ">{{mapResult_.time}}</span>
+															<span class="varMapResult{{id}}Time varMapResultTime ">{{mapResult_.time}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varMapResult{{id}}Time ">{{mapResult_.time}}</span>
+														<span class="varMapResult{{id}}Time varMapResultTime ">{{mapResult_.time}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1069,10 +1069,10 @@
 														/>
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varMapResult{{id}}DateTime ">{{mapResult_.dateTime}}</span>
+															<span class="varMapResult{{id}}DateTime varMapResultDateTime ">{{mapResult_.dateTime}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varMapResult{{id}}DateTime ">{{mapResult_.dateTime}}</span>
+														<span class="varMapResult{{id}}DateTime varMapResultDateTime ">{{mapResult_.dateTime}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1137,10 +1137,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varMapResult{{id}}Step ">{{mapResult_.step}}</span>
+															<span class="varMapResult{{id}}Step varMapResultStep ">{{mapResult_.step}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varMapResult{{id}}Step ">{{mapResult_.step}}</span>
+														<span class="varMapResult{{id}}Step varMapResultStep ">{{mapResult_.step}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1193,10 +1193,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varMapResult{{id}}Location ">{{mapResult_.location}}</span>
+															<span class="varMapResult{{id}}Location varMapResultLocation ">{{mapResult_.location}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varMapResult{{id}}Location ">{{mapResult_.location}}</span>
+														<span class="varMapResult{{id}}Location varMapResultLocation ">{{mapResult_.location}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1249,9 +1249,9 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varMapResult{{id}}Color ">{{mapResult_.color}}</span>
+															<span class="varMapResult{{id}}Color varMapResultColor ">{{mapResult_.color}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varMapResult{{id}}Color ">{{mapResult_.color}}</span>
+														<span class="varMapResult{{id}}Color varMapResultColor ">{{mapResult_.color}}</span>
 		{{/eq}}
 {{/inline}}

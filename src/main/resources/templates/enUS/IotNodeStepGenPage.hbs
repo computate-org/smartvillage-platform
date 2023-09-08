@@ -1366,7 +1366,7 @@
 
 {{#*inline "inputCreated"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varIotNodeStep{{id}}Created " title="{{formatZonedDateTime iotNodeStep_.created 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime iotNodeStep_.created 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+														<span id="{{classApiMethodMethod}}_created" class="varIotNodeStep{{id}}Created varIotNodeStepCreated " title="{{formatZonedDateTime iotNodeStep_.created 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime iotNodeStep_.created 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -1392,7 +1392,7 @@
 
 {{#*inline "inputModified"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varIotNodeStep{{id}}Modified " title="{{formatZonedDateTime iotNodeStep_.modified 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime iotNodeStep_.modified 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+														<span id="{{classApiMethodMethod}}_modified" class="varIotNodeStep{{id}}Modified varIotNodeStepModified " title="{{formatZonedDateTime iotNodeStep_.modified 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime iotNodeStep_.modified 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -1445,10 +1445,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varIotNodeStep{{id}}ObjectId ">{{iotNodeStep_.objectId}}</span>
+															<span class="varIotNodeStep{{id}}ObjectId varIotNodeStepObjectId ">{{iotNodeStep_.objectId}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varIotNodeStep{{id}}ObjectId ">{{iotNodeStep_.objectId}}</span>
+														<span class="varIotNodeStep{{id}}ObjectId varIotNodeStepObjectId ">{{iotNodeStep_.objectId}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1513,10 +1513,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varIotNodeStep{{id}}Archived ">{{iotNodeStep_.archived}}</span>
+															<span class="varIotNodeStep{{id}}Archived varIotNodeStepArchived ">{{iotNodeStep_.archived}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varIotNodeStep{{id}}Archived ">{{iotNodeStep_.archived}}</span>
+														<span class="varIotNodeStep{{id}}Archived varIotNodeStepArchived ">{{iotNodeStep_.archived}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1581,10 +1581,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varIotNodeStep{{id}}Deleted ">{{iotNodeStep_.deleted}}</span>
+															<span class="varIotNodeStep{{id}}Deleted varIotNodeStepDeleted ">{{iotNodeStep_.deleted}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varIotNodeStep{{id}}Deleted ">{{iotNodeStep_.deleted}}</span>
+														<span class="varIotNodeStep{{id}}Deleted varIotNodeStepDeleted ">{{iotNodeStep_.deleted}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1637,10 +1637,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varIotNodeStep{{id}}NodeName ">{{iotNodeStep_.nodeName}}</span>
+															<span class="varIotNodeStep{{id}}NodeName varIotNodeStepNodeName ">{{iotNodeStep_.nodeName}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varIotNodeStep{{id}}NodeName ">{{iotNodeStep_.nodeName}}</span>
+														<span class="varIotNodeStep{{id}}NodeName varIotNodeStepNodeName ">{{iotNodeStep_.nodeName}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1693,10 +1693,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varIotNodeStep{{id}}NodeType ">{{iotNodeStep_.nodeType}}</span>
+															<span class="varIotNodeStep{{id}}NodeType varIotNodeStepNodeType ">{{iotNodeStep_.nodeType}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varIotNodeStep{{id}}NodeType ">{{iotNodeStep_.nodeType}}</span>
+														<span class="varIotNodeStep{{id}}NodeType varIotNodeStepNodeType ">{{iotNodeStep_.nodeType}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1749,10 +1749,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varIotNodeStep{{id}}NodeId ">{{iotNodeStep_.nodeId}}</span>
+															<span class="varIotNodeStep{{id}}NodeId varIotNodeStepNodeId ">{{iotNodeStep_.nodeId}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varIotNodeStep{{id}}NodeId ">{{iotNodeStep_.nodeId}}</span>
+														<span class="varIotNodeStep{{id}}NodeId varIotNodeStepNodeId ">{{iotNodeStep_.nodeId}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1805,10 +1805,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varIotNodeStep{{id}}Location ">{{iotNodeStep_.location}}</span>
+															<span class="varIotNodeStep{{id}}Location varIotNodeStepLocation ">{{iotNodeStep_.location}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varIotNodeStep{{id}}Location ">{{iotNodeStep_.location}}</span>
+														<span class="varIotNodeStep{{id}}Location varIotNodeStepLocation ">{{iotNodeStep_.location}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1834,7 +1834,7 @@
 
 {{#*inline "inputJson_moisture"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varIotNodeStep{{id}}Json_moisture ">{{iotNodeStep_.json_moisture}}</span>
+														<span id="{{classApiMethodMethod}}_json_moisture" class="varIotNodeStep{{id}}Json_moisture varIotNodeStepJson_moisture ">{{iotNodeStep_.json_moisture}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -1860,7 +1860,7 @@
 
 {{#*inline "inputJson_moisture0"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varIotNodeStep{{id}}Json_moisture0 ">{{iotNodeStep_.json_moisture0}}</span>
+														<span id="{{classApiMethodMethod}}_json_moisture0" class="varIotNodeStep{{id}}Json_moisture0 varIotNodeStepJson_moisture0 ">{{iotNodeStep_.json_moisture0}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -1886,7 +1886,7 @@
 
 {{#*inline "inputJson_moisture1"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varIotNodeStep{{id}}Json_moisture1 ">{{iotNodeStep_.json_moisture1}}</span>
+														<span id="{{classApiMethodMethod}}_json_moisture1" class="varIotNodeStep{{id}}Json_moisture1 varIotNodeStepJson_moisture1 ">{{iotNodeStep_.json_moisture1}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -1912,7 +1912,7 @@
 
 {{#*inline "inputJson_temperature"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varIotNodeStep{{id}}Json_temperature ">{{iotNodeStep_.json_temperature}}</span>
+														<span id="{{classApiMethodMethod}}_json_temperature" class="varIotNodeStep{{id}}Json_temperature varIotNodeStepJson_temperature ">{{iotNodeStep_.json_temperature}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -1938,7 +1938,7 @@
 
 {{#*inline "inputJson_temperature0"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varIotNodeStep{{id}}Json_temperature0 ">{{iotNodeStep_.json_temperature0}}</span>
+														<span id="{{classApiMethodMethod}}_json_temperature0" class="varIotNodeStep{{id}}Json_temperature0 varIotNodeStepJson_temperature0 ">{{iotNodeStep_.json_temperature0}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -1964,7 +1964,7 @@
 
 {{#*inline "inputJson_temperatureAverage"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varIotNodeStep{{id}}Json_temperatureAverage ">{{iotNodeStep_.json_temperatureAverage}}</span>
+														<span id="{{classApiMethodMethod}}_json_temperatureAverage" class="varIotNodeStep{{id}}Json_temperatureAverage varIotNodeStepJson_temperatureAverage ">{{iotNodeStep_.json_temperatureAverage}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -1990,7 +1990,7 @@
 
 {{#*inline "inputJson_badConditionsCounter"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varIotNodeStep{{id}}Json_badConditionsCounter ">{{iotNodeStep_.json_badConditionsCounter}}</span>
+														<span id="{{classApiMethodMethod}}_json_badConditionsCounter" class="varIotNodeStep{{id}}Json_badConditionsCounter varIotNodeStepJson_badConditionsCounter ">{{iotNodeStep_.json_badConditionsCounter}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -2016,7 +2016,7 @@
 
 {{#*inline "inputJson_door"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varIotNodeStep{{id}}Json_door ">{{iotNodeStep_.json_door}}</span>
+														<span id="{{classApiMethodMethod}}_json_door" class="varIotNodeStep{{id}}Json_door varIotNodeStepJson_door ">{{iotNodeStep_.json_door}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -2042,7 +2042,7 @@
 
 {{#*inline "inputJson_alarmDoor"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varIotNodeStep{{id}}Json_alarmDoor ">{{iotNodeStep_.json_alarmDoor}}</span>
+														<span id="{{classApiMethodMethod}}_json_alarmDoor" class="varIotNodeStep{{id}}Json_alarmDoor varIotNodeStepJson_alarmDoor ">{{iotNodeStep_.json_alarmDoor}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -2068,7 +2068,7 @@
 
 {{#*inline "inputJson_flood"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varIotNodeStep{{id}}Json_flood ">{{iotNodeStep_.json_flood}}</span>
+														<span id="{{classApiMethodMethod}}_json_flood" class="varIotNodeStep{{id}}Json_flood varIotNodeStepJson_flood ">{{iotNodeStep_.json_flood}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -2094,7 +2094,7 @@
 
 {{#*inline "inputJson_alarmFlood"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varIotNodeStep{{id}}Json_alarmFlood ">{{iotNodeStep_.json_alarmFlood}}</span>
+														<span id="{{classApiMethodMethod}}_json_alarmFlood" class="varIotNodeStep{{id}}Json_alarmFlood varIotNodeStepJson_alarmFlood ">{{iotNodeStep_.json_alarmFlood}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -2120,7 +2120,7 @@
 
 {{#*inline "inputJson_lux2"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varIotNodeStep{{id}}Json_lux2 ">{{iotNodeStep_.json_lux2}}</span>
+														<span id="{{classApiMethodMethod}}_json_lux2" class="varIotNodeStep{{id}}Json_lux2 varIotNodeStepJson_lux2 ">{{iotNodeStep_.json_lux2}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -2146,7 +2146,7 @@
 
 {{#*inline "inputJson_illuminance"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varIotNodeStep{{id}}Json_illuminance ">{{iotNodeStep_.json_illuminance}}</span>
+														<span id="{{classApiMethodMethod}}_json_illuminance" class="varIotNodeStep{{id}}Json_illuminance varIotNodeStepJson_illuminance ">{{iotNodeStep_.json_illuminance}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -2172,7 +2172,7 @@
 
 {{#*inline "inputJson_resistance0"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varIotNodeStep{{id}}Json_resistance0 ">{{iotNodeStep_.json_resistance0}}</span>
+														<span id="{{classApiMethodMethod}}_json_resistance0" class="varIotNodeStep{{id}}Json_resistance0 varIotNodeStepJson_resistance0 ">{{iotNodeStep_.json_resistance0}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -2198,7 +2198,7 @@
 
 {{#*inline "inputJson_resistance1"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varIotNodeStep{{id}}Json_resistance1 ">{{iotNodeStep_.json_resistance1}}</span>
+														<span id="{{classApiMethodMethod}}_json_resistance1" class="varIotNodeStep{{id}}Json_resistance1 varIotNodeStepJson_resistance1 ">{{iotNodeStep_.json_resistance1}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -2224,7 +2224,7 @@
 
 {{#*inline "inputJson_frequency"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varIotNodeStep{{id}}Json_frequency ">{{iotNodeStep_.json_frequency}}</span>
+														<span id="{{classApiMethodMethod}}_json_frequency" class="varIotNodeStep{{id}}Json_frequency varIotNodeStepJson_frequency ">{{iotNodeStep_.json_frequency}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -2250,7 +2250,7 @@
 
 {{#*inline "inputJson_devEui"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varIotNodeStep{{id}}Json_devEui ">{{iotNodeStep_.json_devEui}}</span>
+														<span id="{{classApiMethodMethod}}_json_devEui" class="varIotNodeStep{{id}}Json_devEui varIotNodeStepJson_devEui ">{{iotNodeStep_.json_devEui}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -2276,7 +2276,7 @@
 
 {{#*inline "inputJson_bandwidth"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varIotNodeStep{{id}}Json_bandwidth ">{{iotNodeStep_.json_bandwidth}}</span>
+														<span id="{{classApiMethodMethod}}_json_bandwidth" class="varIotNodeStep{{id}}Json_bandwidth varIotNodeStepJson_bandwidth ">{{iotNodeStep_.json_bandwidth}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -2302,7 +2302,7 @@
 
 {{#*inline "inputJson_dataRate"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varIotNodeStep{{id}}Json_dataRate ">{{iotNodeStep_.json_dataRate}}</span>
+														<span id="{{classApiMethodMethod}}_json_dataRate" class="varIotNodeStep{{id}}Json_dataRate varIotNodeStepJson_dataRate ">{{iotNodeStep_.json_dataRate}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -2328,7 +2328,7 @@
 
 {{#*inline "inputJson_frameCount"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varIotNodeStep{{id}}Json_frameCount ">{{iotNodeStep_.json_frameCount}}</span>
+														<span id="{{classApiMethodMethod}}_json_frameCount" class="varIotNodeStep{{id}}Json_frameCount varIotNodeStepJson_frameCount ">{{iotNodeStep_.json_frameCount}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -2354,7 +2354,7 @@
 
 {{#*inline "inputJson_maxPayload"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varIotNodeStep{{id}}Json_maxPayload ">{{iotNodeStep_.json_maxPayload}}</span>
+														<span id="{{classApiMethodMethod}}_json_maxPayload" class="varIotNodeStep{{id}}Json_maxPayload varIotNodeStepJson_maxPayload ">{{iotNodeStep_.json_maxPayload}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -2380,7 +2380,7 @@
 
 {{#*inline "inputJson_bitsPerSecond"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varIotNodeStep{{id}}Json_bitsPerSecond ">{{iotNodeStep_.json_bitsPerSecond}}</span>
+														<span id="{{classApiMethodMethod}}_json_bitsPerSecond" class="varIotNodeStep{{id}}Json_bitsPerSecond varIotNodeStepJson_bitsPerSecond ">{{iotNodeStep_.json_bitsPerSecond}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -2406,7 +2406,7 @@
 
 {{#*inline "inputJson_batteryVoltage"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varIotNodeStep{{id}}Json_batteryVoltage ">{{iotNodeStep_.json_batteryVoltage}}</span>
+														<span id="{{classApiMethodMethod}}_json_batteryVoltage" class="varIotNodeStep{{id}}Json_batteryVoltage varIotNodeStepJson_batteryVoltage ">{{iotNodeStep_.json_batteryVoltage}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -2432,7 +2432,7 @@
 
 {{#*inline "inputJson_spreadingFactor"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varIotNodeStep{{id}}Json_spreadingFactor ">{{iotNodeStep_.json_spreadingFactor}}</span>
+														<span id="{{classApiMethodMethod}}_json_spreadingFactor" class="varIotNodeStep{{id}}Json_spreadingFactor varIotNodeStepJson_spreadingFactor ">{{iotNodeStep_.json_spreadingFactor}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -2458,7 +2458,7 @@
 
 {{#*inline "inputJson_dataRateAdaptive"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varIotNodeStep{{id}}Json_dataRateAdaptive ">{{iotNodeStep_.json_dataRateAdaptive}}</span>
+														<span id="{{classApiMethodMethod}}_json_dataRateAdaptive" class="varIotNodeStep{{id}}Json_dataRateAdaptive varIotNodeStepJson_dataRateAdaptive ">{{iotNodeStep_.json_dataRateAdaptive}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -2484,7 +2484,7 @@
 
 {{#*inline "inputJson_swversion"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varIotNodeStep{{id}}Json_swversion ">{{iotNodeStep_.json_swversion}}</span>
+														<span id="{{classApiMethodMethod}}_json_swversion" class="varIotNodeStep{{id}}Json_swversion varIotNodeStepJson_swversion ">{{iotNodeStep_.json_swversion}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -2510,7 +2510,7 @@
 
 {{#*inline "inputJson_batteryLevel"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varIotNodeStep{{id}}Json_batteryLevel ">{{iotNodeStep_.json_batteryLevel}}</span>
+														<span id="{{classApiMethodMethod}}_json_batteryLevel" class="varIotNodeStep{{id}}Json_batteryLevel varIotNodeStepJson_batteryLevel ">{{iotNodeStep_.json_batteryLevel}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -2536,7 +2536,7 @@
 
 {{#*inline "inputJson_startUpCount"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varIotNodeStep{{id}}Json_startUpCount ">{{iotNodeStep_.json_startUpCount}}</span>
+														<span id="{{classApiMethodMethod}}_json_startUpCount" class="varIotNodeStep{{id}}Json_startUpCount varIotNodeStepJson_startUpCount ">{{iotNodeStep_.json_startUpCount}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -2562,7 +2562,7 @@
 
 {{#*inline "inputJson_watchdogCount"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varIotNodeStep{{id}}Json_watchdogCount ">{{iotNodeStep_.json_watchdogCount}}</span>
+														<span id="{{classApiMethodMethod}}_json_watchdogCount" class="varIotNodeStep{{id}}Json_watchdogCount varIotNodeStepJson_watchdogCount ">{{iotNodeStep_.json_watchdogCount}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -2588,7 +2588,7 @@
 
 {{#*inline "inputJson_historySequence"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varIotNodeStep{{id}}Json_historySequence ">{{iotNodeStep_.json_historySequence}}</span>
+														<span id="{{classApiMethodMethod}}_json_historySequence" class="varIotNodeStep{{id}}Json_historySequence varIotNodeStepJson_historySequence ">{{iotNodeStep_.json_historySequence}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -2614,7 +2614,7 @@
 
 {{#*inline "inputJson_versionFirmware"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varIotNodeStep{{id}}Json_versionFirmware ">{{iotNodeStep_.json_versionFirmware}}</span>
+														<span id="{{classApiMethodMethod}}_json_versionFirmware" class="varIotNodeStep{{id}}Json_versionFirmware varIotNodeStepJson_versionFirmware ">{{iotNodeStep_.json_versionFirmware}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -2640,7 +2640,7 @@
 
 {{#*inline "inputJson_stackTxFailRebootCount"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varIotNodeStep{{id}}Json_stackTxFailRebootCount ">{{iotNodeStep_.json_stackTxFailRebootCount}}</span>
+														<span id="{{classApiMethodMethod}}_json_stackTxFailRebootCount" class="varIotNodeStep{{id}}Json_stackTxFailRebootCount varIotNodeStepJson_stackTxFailRebootCount ">{{iotNodeStep_.json_stackTxFailRebootCount}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -2666,7 +2666,7 @@
 
 {{#*inline "inputJson_historySequencePrevious"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varIotNodeStep{{id}}Json_historySequencePrevious ">{{iotNodeStep_.json_historySequencePrevious}}</span>
+														<span id="{{classApiMethodMethod}}_json_historySequencePrevious" class="varIotNodeStep{{id}}Json_historySequencePrevious varIotNodeStepJson_historySequencePrevious ">{{iotNodeStep_.json_historySequencePrevious}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -2692,7 +2692,7 @@
 
 {{#*inline "inputJson_snr"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varIotNodeStep{{id}}Json_snr ">{{iotNodeStep_.json_snr}}</span>
+														<span id="{{classApiMethodMethod}}_json_snr" class="varIotNodeStep{{id}}Json_snr varIotNodeStepJson_snr ">{{iotNodeStep_.json_snr}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -2718,6 +2718,6 @@
 
 {{#*inline "inputJson_rssi"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varIotNodeStep{{id}}Json_rssi ">{{iotNodeStep_.json_rssi}}</span>
+														<span id="{{classApiMethodMethod}}_json_rssi" class="varIotNodeStep{{id}}Json_rssi varIotNodeStepJson_rssi ">{{iotNodeStep_.json_rssi}}</span>
 	{{/eq}}
 {{/inline}}

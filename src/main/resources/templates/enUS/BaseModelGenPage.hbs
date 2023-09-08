@@ -631,7 +631,7 @@
 
 {{#*inline "inputCreated"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varBaseModel{{pk}}Created " title="{{formatZonedDateTime baseModel_.created 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime baseModel_.created 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+														<span id="{{classApiMethodMethod}}_created" class="varBaseModel{{pk}}Created varBaseModelCreated " title="{{formatZonedDateTime baseModel_.created 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime baseModel_.created 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -657,7 +657,7 @@
 
 {{#*inline "inputModified"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varBaseModel{{pk}}Modified " title="{{formatZonedDateTime baseModel_.modified 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime baseModel_.modified 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+														<span id="{{classApiMethodMethod}}_modified" class="varBaseModel{{pk}}Modified varBaseModelModified " title="{{formatZonedDateTime baseModel_.modified 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime baseModel_.modified 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -683,7 +683,7 @@
 
 {{#*inline "inputObjectId"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varBaseModel{{pk}}ObjectId ">{{baseModel_.objectId}}</span>
+														<span id="{{classApiMethodMethod}}_objectId" class="varBaseModel{{pk}}ObjectId varBaseModelObjectId ">{{baseModel_.objectId}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -747,7 +747,7 @@
 	{{/eq}}
 
 		{{else}}
-														<span class="varBaseModel{{pk}}Archived ">{{baseModel_.archived}}</span>
+														<span class="varBaseModel{{pk}}Archived varBaseModelArchived ">{{baseModel_.archived}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -811,6 +811,6 @@
 	{{/eq}}
 
 		{{else}}
-														<span class="varBaseModel{{pk}}Deleted ">{{baseModel_.deleted}}</span>
+														<span class="varBaseModel{{pk}}Deleted varBaseModelDeleted ">{{baseModel_.deleted}}</span>
 		{{/eq}}
 {{/inline}}

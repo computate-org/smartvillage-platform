@@ -1047,7 +1047,7 @@
 
 {{#*inline "inputCreated"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSiteHtm{{id}}Created " title="{{formatZonedDateTime siteHtm_.created 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime siteHtm_.created 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+														<span id="{{classApiMethodMethod}}_created" class="varSiteHtm{{id}}Created varSiteHtmCreated " title="{{formatZonedDateTime siteHtm_.created 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime siteHtm_.created 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -1073,7 +1073,7 @@
 
 {{#*inline "inputModified"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSiteHtm{{id}}Modified " title="{{formatZonedDateTime siteHtm_.modified 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime siteHtm_.modified 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+														<span id="{{classApiMethodMethod}}_modified" class="varSiteHtm{{id}}Modified varSiteHtmModified " title="{{formatZonedDateTime siteHtm_.modified 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime siteHtm_.modified 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -1126,10 +1126,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSiteHtm{{id}}ObjectId ">{{siteHtm_.objectId}}</span>
+															<span class="varSiteHtm{{id}}ObjectId varSiteHtmObjectId ">{{siteHtm_.objectId}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSiteHtm{{id}}ObjectId ">{{siteHtm_.objectId}}</span>
+														<span class="varSiteHtm{{id}}ObjectId varSiteHtmObjectId ">{{siteHtm_.objectId}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1194,10 +1194,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSiteHtm{{id}}Archived ">{{siteHtm_.archived}}</span>
+															<span class="varSiteHtm{{id}}Archived varSiteHtmArchived ">{{siteHtm_.archived}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSiteHtm{{id}}Archived ">{{siteHtm_.archived}}</span>
+														<span class="varSiteHtm{{id}}Archived varSiteHtmArchived ">{{siteHtm_.archived}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1262,10 +1262,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSiteHtm{{id}}Deleted ">{{siteHtm_.deleted}}</span>
+															<span class="varSiteHtm{{id}}Deleted varSiteHtmDeleted ">{{siteHtm_.deleted}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSiteHtm{{id}}Deleted ">{{siteHtm_.deleted}}</span>
+														<span class="varSiteHtm{{id}}Deleted varSiteHtmDeleted ">{{siteHtm_.deleted}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1318,10 +1318,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSiteHtm{{id}}Url ">{{siteHtm_.url}}</span>
+															<span class="varSiteHtm{{id}}Url varSiteHtmUrl ">{{siteHtm_.url}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSiteHtm{{id}}Url ">{{siteHtm_.url}}</span>
+														<span class="varSiteHtm{{id}}Url varSiteHtmUrl ">{{siteHtm_.url}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1374,10 +1374,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSiteHtm{{id}}Uri ">{{siteHtm_.uri}}</span>
+															<span class="varSiteHtm{{id}}Uri varSiteHtmUri ">{{siteHtm_.uri}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSiteHtm{{id}}Uri ">{{siteHtm_.uri}}</span>
+														<span class="varSiteHtm{{id}}Uri varSiteHtmUri ">{{siteHtm_.uri}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1430,10 +1430,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSiteHtm{{id}}PageId ">{{siteHtm_.pageId}}</span>
+															<span class="varSiteHtm{{id}}PageId varSiteHtmPageId ">{{siteHtm_.pageId}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSiteHtm{{id}}PageId ">{{siteHtm_.pageId}}</span>
+														<span class="varSiteHtm{{id}}PageId varSiteHtmPageId ">{{siteHtm_.pageId}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1486,9 +1486,9 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSiteHtm{{id}}SequenceNum ">{{siteHtm_.sequenceNum}}</span>
+															<span class="varSiteHtm{{id}}SequenceNum varSiteHtmSequenceNum ">{{siteHtm_.sequenceNum}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSiteHtm{{id}}SequenceNum ">{{siteHtm_.sequenceNum}}</span>
+														<span class="varSiteHtm{{id}}SequenceNum varSiteHtmSequenceNum ">{{siteHtm_.sequenceNum}}</span>
 		{{/eq}}
 {{/inline}}

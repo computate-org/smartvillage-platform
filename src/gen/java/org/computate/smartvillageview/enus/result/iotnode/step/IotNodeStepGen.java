@@ -4328,75 +4328,75 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 				apiRequest.addVars("nodeId");
 			if(!Objects.equals(location, original.getLocation()))
 				apiRequest.addVars("location");
-			if(!Objects.equals(json_moisture, original.getJson_moisture()) && json_moisture != null && json_moisture.compareTo(original.getJson_moisture()) != 0)
+			if(!Objects.equals(json_moisture, original.getJson_moisture()) && json_moisture != null && original.getJson_moisture() != null && json_moisture.compareTo(original.getJson_moisture()) != 0)
 				apiRequest.addVars("json_moisture");
-			if(!Objects.equals(json_moisture0, original.getJson_moisture0()) && json_moisture0 != null && json_moisture0.compareTo(original.getJson_moisture0()) != 0)
+			if(!Objects.equals(json_moisture0, original.getJson_moisture0()) && json_moisture0 != null && original.getJson_moisture0() != null && json_moisture0.compareTo(original.getJson_moisture0()) != 0)
 				apiRequest.addVars("json_moisture0");
-			if(!Objects.equals(json_moisture1, original.getJson_moisture1()) && json_moisture1 != null && json_moisture1.compareTo(original.getJson_moisture1()) != 0)
+			if(!Objects.equals(json_moisture1, original.getJson_moisture1()) && json_moisture1 != null && original.getJson_moisture1() != null && json_moisture1.compareTo(original.getJson_moisture1()) != 0)
 				apiRequest.addVars("json_moisture1");
-			if(!Objects.equals(json_temperature, original.getJson_temperature()) && json_temperature != null && json_temperature.compareTo(original.getJson_temperature()) != 0)
+			if(!Objects.equals(json_temperature, original.getJson_temperature()) && json_temperature != null && original.getJson_temperature() != null && json_temperature.compareTo(original.getJson_temperature()) != 0)
 				apiRequest.addVars("json_temperature");
-			if(!Objects.equals(json_temperature0, original.getJson_temperature0()) && json_temperature0 != null && json_temperature0.compareTo(original.getJson_temperature0()) != 0)
+			if(!Objects.equals(json_temperature0, original.getJson_temperature0()) && json_temperature0 != null && original.getJson_temperature0() != null && json_temperature0.compareTo(original.getJson_temperature0()) != 0)
 				apiRequest.addVars("json_temperature0");
-			if(!Objects.equals(json_temperatureAverage, original.getJson_temperatureAverage()) && json_temperatureAverage != null && json_temperatureAverage.compareTo(original.getJson_temperatureAverage()) != 0)
+			if(!Objects.equals(json_temperatureAverage, original.getJson_temperatureAverage()) && json_temperatureAverage != null && original.getJson_temperatureAverage() != null && json_temperatureAverage.compareTo(original.getJson_temperatureAverage()) != 0)
 				apiRequest.addVars("json_temperatureAverage");
-			if(!Objects.equals(json_badConditionsCounter, original.getJson_badConditionsCounter()) && json_badConditionsCounter != null && json_badConditionsCounter.compareTo(original.getJson_badConditionsCounter()) != 0)
+			if(!Objects.equals(json_badConditionsCounter, original.getJson_badConditionsCounter()) && json_badConditionsCounter != null && original.getJson_badConditionsCounter() != null && json_badConditionsCounter.compareTo(original.getJson_badConditionsCounter()) != 0)
 				apiRequest.addVars("json_badConditionsCounter");
 			if(!Objects.equals(json_door, original.getJson_door()))
 				apiRequest.addVars("json_door");
 			if(!Objects.equals(json_alarmDoor, original.getJson_alarmDoor()))
 				apiRequest.addVars("json_alarmDoor");
-			if(!Objects.equals(json_flood, original.getJson_flood()) && json_flood != null && json_flood.compareTo(original.getJson_flood()) != 0)
+			if(!Objects.equals(json_flood, original.getJson_flood()) && json_flood != null && original.getJson_flood() != null && json_flood.compareTo(original.getJson_flood()) != 0)
 				apiRequest.addVars("json_flood");
 			if(!Objects.equals(json_alarmFlood, original.getJson_alarmFlood()))
 				apiRequest.addVars("json_alarmFlood");
-			if(!Objects.equals(json_lux2, original.getJson_lux2()) && json_lux2 != null && json_lux2.compareTo(original.getJson_lux2()) != 0)
+			if(!Objects.equals(json_lux2, original.getJson_lux2()) && json_lux2 != null && original.getJson_lux2() != null && json_lux2.compareTo(original.getJson_lux2()) != 0)
 				apiRequest.addVars("json_lux2");
-			if(!Objects.equals(json_illuminance, original.getJson_illuminance()) && json_illuminance != null && json_illuminance.compareTo(original.getJson_illuminance()) != 0)
+			if(!Objects.equals(json_illuminance, original.getJson_illuminance()) && json_illuminance != null && original.getJson_illuminance() != null && json_illuminance.compareTo(original.getJson_illuminance()) != 0)
 				apiRequest.addVars("json_illuminance");
-			if(!Objects.equals(json_resistance0, original.getJson_resistance0()) && json_resistance0 != null && json_resistance0.compareTo(original.getJson_resistance0()) != 0)
+			if(!Objects.equals(json_resistance0, original.getJson_resistance0()) && json_resistance0 != null && original.getJson_resistance0() != null && json_resistance0.compareTo(original.getJson_resistance0()) != 0)
 				apiRequest.addVars("json_resistance0");
-			if(!Objects.equals(json_resistance1, original.getJson_resistance1()) && json_resistance1 != null && json_resistance1.compareTo(original.getJson_resistance1()) != 0)
+			if(!Objects.equals(json_resistance1, original.getJson_resistance1()) && json_resistance1 != null && original.getJson_resistance1() != null && json_resistance1.compareTo(original.getJson_resistance1()) != 0)
 				apiRequest.addVars("json_resistance1");
-			if(!Objects.equals(json_frequency, original.getJson_frequency()) && json_frequency != null && json_frequency.compareTo(original.getJson_frequency()) != 0)
+			if(!Objects.equals(json_frequency, original.getJson_frequency()) && json_frequency != null && original.getJson_frequency() != null && json_frequency.compareTo(original.getJson_frequency()) != 0)
 				apiRequest.addVars("json_frequency");
 			if(!Objects.equals(json_devEui, original.getJson_devEui()))
 				apiRequest.addVars("json_devEui");
 			if(!Objects.equals(json_bandwidth, original.getJson_bandwidth()))
 				apiRequest.addVars("json_bandwidth");
-			if(!Objects.equals(json_dataRate, original.getJson_dataRate()) && json_dataRate != null && json_dataRate.compareTo(original.getJson_dataRate()) != 0)
+			if(!Objects.equals(json_dataRate, original.getJson_dataRate()) && json_dataRate != null && original.getJson_dataRate() != null && json_dataRate.compareTo(original.getJson_dataRate()) != 0)
 				apiRequest.addVars("json_dataRate");
-			if(!Objects.equals(json_frameCount, original.getJson_frameCount()) && json_frameCount != null && json_frameCount.compareTo(original.getJson_frameCount()) != 0)
+			if(!Objects.equals(json_frameCount, original.getJson_frameCount()) && json_frameCount != null && original.getJson_frameCount() != null && json_frameCount.compareTo(original.getJson_frameCount()) != 0)
 				apiRequest.addVars("json_frameCount");
-			if(!Objects.equals(json_maxPayload, original.getJson_maxPayload()) && json_maxPayload != null && json_maxPayload.compareTo(original.getJson_maxPayload()) != 0)
+			if(!Objects.equals(json_maxPayload, original.getJson_maxPayload()) && json_maxPayload != null && original.getJson_maxPayload() != null && json_maxPayload.compareTo(original.getJson_maxPayload()) != 0)
 				apiRequest.addVars("json_maxPayload");
-			if(!Objects.equals(json_bitsPerSecond, original.getJson_bitsPerSecond()) && json_bitsPerSecond != null && json_bitsPerSecond.compareTo(original.getJson_bitsPerSecond()) != 0)
+			if(!Objects.equals(json_bitsPerSecond, original.getJson_bitsPerSecond()) && json_bitsPerSecond != null && original.getJson_bitsPerSecond() != null && json_bitsPerSecond.compareTo(original.getJson_bitsPerSecond()) != 0)
 				apiRequest.addVars("json_bitsPerSecond");
-			if(!Objects.equals(json_batteryVoltage, original.getJson_batteryVoltage()) && json_batteryVoltage != null && json_batteryVoltage.compareTo(original.getJson_batteryVoltage()) != 0)
+			if(!Objects.equals(json_batteryVoltage, original.getJson_batteryVoltage()) && json_batteryVoltage != null && original.getJson_batteryVoltage() != null && json_batteryVoltage.compareTo(original.getJson_batteryVoltage()) != 0)
 				apiRequest.addVars("json_batteryVoltage");
-			if(!Objects.equals(json_spreadingFactor, original.getJson_spreadingFactor()) && json_spreadingFactor != null && json_spreadingFactor.compareTo(original.getJson_spreadingFactor()) != 0)
+			if(!Objects.equals(json_spreadingFactor, original.getJson_spreadingFactor()) && json_spreadingFactor != null && original.getJson_spreadingFactor() != null && json_spreadingFactor.compareTo(original.getJson_spreadingFactor()) != 0)
 				apiRequest.addVars("json_spreadingFactor");
 			if(!Objects.equals(json_dataRateAdaptive, original.getJson_dataRateAdaptive()))
 				apiRequest.addVars("json_dataRateAdaptive");
 			if(!Objects.equals(json_swversion, original.getJson_swversion()))
 				apiRequest.addVars("json_swversion");
-			if(!Objects.equals(json_batteryLevel, original.getJson_batteryLevel()) && json_batteryLevel != null && json_batteryLevel.compareTo(original.getJson_batteryLevel()) != 0)
+			if(!Objects.equals(json_batteryLevel, original.getJson_batteryLevel()) && json_batteryLevel != null && original.getJson_batteryLevel() != null && json_batteryLevel.compareTo(original.getJson_batteryLevel()) != 0)
 				apiRequest.addVars("json_batteryLevel");
-			if(!Objects.equals(json_startUpCount, original.getJson_startUpCount()) && json_startUpCount != null && json_startUpCount.compareTo(original.getJson_startUpCount()) != 0)
+			if(!Objects.equals(json_startUpCount, original.getJson_startUpCount()) && json_startUpCount != null && original.getJson_startUpCount() != null && json_startUpCount.compareTo(original.getJson_startUpCount()) != 0)
 				apiRequest.addVars("json_startUpCount");
-			if(!Objects.equals(json_watchdogCount, original.getJson_watchdogCount()) && json_watchdogCount != null && json_watchdogCount.compareTo(original.getJson_watchdogCount()) != 0)
+			if(!Objects.equals(json_watchdogCount, original.getJson_watchdogCount()) && json_watchdogCount != null && original.getJson_watchdogCount() != null && json_watchdogCount.compareTo(original.getJson_watchdogCount()) != 0)
 				apiRequest.addVars("json_watchdogCount");
-			if(!Objects.equals(json_historySequence, original.getJson_historySequence()) && json_historySequence != null && json_historySequence.compareTo(original.getJson_historySequence()) != 0)
+			if(!Objects.equals(json_historySequence, original.getJson_historySequence()) && json_historySequence != null && original.getJson_historySequence() != null && json_historySequence.compareTo(original.getJson_historySequence()) != 0)
 				apiRequest.addVars("json_historySequence");
 			if(!Objects.equals(json_versionFirmware, original.getJson_versionFirmware()))
 				apiRequest.addVars("json_versionFirmware");
-			if(!Objects.equals(json_stackTxFailRebootCount, original.getJson_stackTxFailRebootCount()) && json_stackTxFailRebootCount != null && json_stackTxFailRebootCount.compareTo(original.getJson_stackTxFailRebootCount()) != 0)
+			if(!Objects.equals(json_stackTxFailRebootCount, original.getJson_stackTxFailRebootCount()) && json_stackTxFailRebootCount != null && original.getJson_stackTxFailRebootCount() != null && json_stackTxFailRebootCount.compareTo(original.getJson_stackTxFailRebootCount()) != 0)
 				apiRequest.addVars("json_stackTxFailRebootCount");
-			if(!Objects.equals(json_historySequencePrevious, original.getJson_historySequencePrevious()) && json_historySequencePrevious != null && json_historySequencePrevious.compareTo(original.getJson_historySequencePrevious()) != 0)
+			if(!Objects.equals(json_historySequencePrevious, original.getJson_historySequencePrevious()) && json_historySequencePrevious != null && original.getJson_historySequencePrevious() != null && json_historySequencePrevious.compareTo(original.getJson_historySequencePrevious()) != 0)
 				apiRequest.addVars("json_historySequencePrevious");
-			if(!Objects.equals(json_snr, original.getJson_snr()) && json_snr != null && json_snr.compareTo(original.getJson_snr()) != 0)
+			if(!Objects.equals(json_snr, original.getJson_snr()) && json_snr != null && original.getJson_snr() != null && json_snr.compareTo(original.getJson_snr()) != 0)
 				apiRequest.addVars("json_snr");
-			if(!Objects.equals(json_rssi, original.getJson_rssi()) && json_rssi != null && json_rssi.compareTo(original.getJson_rssi()) != 0)
+			if(!Objects.equals(json_rssi, original.getJson_rssi()) && json_rssi != null && original.getJson_rssi() != null && json_rssi.compareTo(original.getJson_rssi()) != 0)
 				apiRequest.addVars("json_rssi");
 			super.apiRequestBaseResult();
 		}

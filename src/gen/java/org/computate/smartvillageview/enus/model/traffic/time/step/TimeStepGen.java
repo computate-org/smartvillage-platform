@@ -925,7 +925,7 @@ public abstract class TimeStepGen<DEV> extends BaseResult {
 				apiRequest.addVars("simulationKey");
 			if(!Objects.equals(path, original.getPath()))
 				apiRequest.addVars("path");
-			if(!Objects.equals(time, original.getTime()) && time != null && time.compareTo(original.getTime()) != 0)
+			if(!Objects.equals(time, original.getTime()) && time != null && original.getTime() != null && time.compareTo(original.getTime()) != 0)
 				apiRequest.addVars("time");
 			if(!Objects.equals(dateTime, original.getDateTime()))
 				apiRequest.addVars("dateTime");

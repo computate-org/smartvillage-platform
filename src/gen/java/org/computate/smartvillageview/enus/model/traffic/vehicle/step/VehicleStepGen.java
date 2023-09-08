@@ -1306,13 +1306,13 @@ public abstract class VehicleStepGen<DEV> extends MapResult {
 				apiRequest.addVars("vehicleId");
 			if(!Objects.equals(vehicleType, original.getVehicleType()))
 				apiRequest.addVars("vehicleType");
-			if(!Objects.equals(angle, original.getAngle()) && angle != null && angle.compareTo(original.getAngle()) != 0)
+			if(!Objects.equals(angle, original.getAngle()) && angle != null && original.getAngle() != null && angle.compareTo(original.getAngle()) != 0)
 				apiRequest.addVars("angle");
-			if(!Objects.equals(speed, original.getSpeed()) && speed != null && speed.compareTo(original.getSpeed()) != 0)
+			if(!Objects.equals(speed, original.getSpeed()) && speed != null && original.getSpeed() != null && speed.compareTo(original.getSpeed()) != 0)
 				apiRequest.addVars("speed");
-			if(!Objects.equals(pos, original.getPos()) && pos != null && pos.compareTo(original.getPos()) != 0)
+			if(!Objects.equals(pos, original.getPos()) && pos != null && original.getPos() != null && pos.compareTo(original.getPos()) != 0)
 				apiRequest.addVars("pos");
-			if(!Objects.equals(slope, original.getSlope()) && slope != null && slope.compareTo(original.getSlope()) != 0)
+			if(!Objects.equals(slope, original.getSlope()) && slope != null && original.getSlope() != null && slope.compareTo(original.getSlope()) != 0)
 				apiRequest.addVars("slope");
 			super.apiRequestMapResult();
 		}

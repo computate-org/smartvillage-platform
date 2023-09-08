@@ -631,7 +631,7 @@
 
 {{#*inline "inputCreated"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varBaseResult{{id}}Created " title="{{formatZonedDateTime baseResult_.created 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime baseResult_.created 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+														<span id="{{classApiMethodMethod}}_created" class="varBaseResult{{id}}Created varBaseResultCreated " title="{{formatZonedDateTime baseResult_.created 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime baseResult_.created 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -657,7 +657,7 @@
 
 {{#*inline "inputModified"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varBaseResult{{id}}Modified " title="{{formatZonedDateTime baseResult_.modified 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime baseResult_.modified 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+														<span id="{{classApiMethodMethod}}_modified" class="varBaseResult{{id}}Modified varBaseResultModified " title="{{formatZonedDateTime baseResult_.modified 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime baseResult_.modified 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -709,7 +709,7 @@
 														/>
 
 		{{else}}
-														<span class="varBaseResult{{id}}ObjectId ">{{baseResult_.objectId}}</span>
+														<span class="varBaseResult{{id}}ObjectId varBaseResultObjectId ">{{baseResult_.objectId}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -773,7 +773,7 @@
 	{{/eq}}
 
 		{{else}}
-														<span class="varBaseResult{{id}}Archived ">{{baseResult_.archived}}</span>
+														<span class="varBaseResult{{id}}Archived varBaseResultArchived ">{{baseResult_.archived}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -837,6 +837,6 @@
 	{{/eq}}
 
 		{{else}}
-														<span class="varBaseResult{{id}}Deleted ">{{baseResult_.deleted}}</span>
+														<span class="varBaseResult{{id}}Deleted varBaseResultDeleted ">{{baseResult_.deleted}}</span>
 		{{/eq}}
 {{/inline}}

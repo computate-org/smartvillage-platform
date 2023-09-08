@@ -459,6 +459,15 @@
 							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
 							<div class="w3-cell-row HtmRow">
 {{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmTime" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmTime" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmTime" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
 {{> "htmDateTime" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
 {{#ifContainsAnyRoles roles roleForRead}}
@@ -474,15 +483,6 @@
 {{> "htmStep" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
 {{> "htmStep" roleForWriteBool="false" roleForReadBool="false"}}
-{{/ifContainsAnyRoles}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleForWrite}}
-{{> "htmTime" roleForWriteBool="true" roleForReadBool="true"}}
-{{else}}
-{{#ifContainsAnyRoles roles roleForRead}}
-{{> "htmTime" roleForWriteBool="false" roleForReadBool="true"}}
-{{else}}
-{{> "htmTime" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleForWrite}}
@@ -980,6 +980,15 @@
 							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
 							<div class="w3-cell-row HtmRow">
 {{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmTime" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmTime" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmTime" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
 {{> "htmDateTime" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
 {{#ifContainsAnyRoles roles roleForRead}}
@@ -995,15 +1004,6 @@
 {{> "htmStep" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
 {{> "htmStep" roleForWriteBool="false" roleForReadBool="false"}}
-{{/ifContainsAnyRoles}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleForWrite}}
-{{> "htmTime" roleForWriteBool="true" roleForReadBool="true"}}
-{{else}}
-{{#ifContainsAnyRoles roles roleForRead}}
-{{> "htmTime" roleForWriteBool="false" roleForReadBool="true"}}
-{{else}}
-{{> "htmTime" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleForWrite}}
@@ -1566,6 +1566,15 @@
 							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
 							<div class="w3-cell-row HtmRow">
 {{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmTime" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmTime" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmTime" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
 {{> "htmDateTime" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
 {{#ifContainsAnyRoles roles roleForRead}}
@@ -1581,15 +1590,6 @@
 {{> "htmStep" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
 {{> "htmStep" roleForWriteBool="false" roleForReadBool="false"}}
-{{/ifContainsAnyRoles}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleForWrite}}
-{{> "htmTime" roleForWriteBool="true" roleForReadBool="true"}}
-{{else}}
-{{#ifContainsAnyRoles roles roleForRead}}
-{{> "htmTime" roleForWriteBool="false" roleForReadBool="true"}}
-{{else}}
-{{> "htmTime" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleForWrite}}
@@ -2309,7 +2309,7 @@
 
 {{#*inline "inputCreated"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varTrafficFlowObserved{{id}}Created " title="{{formatZonedDateTime trafficFlowObserved_.created 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime trafficFlowObserved_.created 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+														<span id="{{classApiMethodMethod}}_created" class="varTrafficFlowObserved{{id}}Created varTrafficFlowObservedCreated " title="{{formatZonedDateTime trafficFlowObserved_.created 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime trafficFlowObserved_.created 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -2335,7 +2335,7 @@
 
 {{#*inline "inputModified"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varTrafficFlowObserved{{id}}Modified " title="{{formatZonedDateTime trafficFlowObserved_.modified 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime trafficFlowObserved_.modified 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+														<span id="{{classApiMethodMethod}}_modified" class="varTrafficFlowObserved{{id}}Modified varTrafficFlowObservedModified " title="{{formatZonedDateTime trafficFlowObserved_.modified 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime trafficFlowObserved_.modified 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -2388,10 +2388,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}ObjectId ">{{trafficFlowObserved_.objectId}}</span>
+															<span class="varTrafficFlowObserved{{id}}ObjectId varTrafficFlowObservedObjectId ">{{trafficFlowObserved_.objectId}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{id}}ObjectId ">{{trafficFlowObserved_.objectId}}</span>
+														<span class="varTrafficFlowObserved{{id}}ObjectId varTrafficFlowObservedObjectId ">{{trafficFlowObserved_.objectId}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -2456,10 +2456,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}Archived ">{{trafficFlowObserved_.archived}}</span>
+															<span class="varTrafficFlowObserved{{id}}Archived varTrafficFlowObservedArchived ">{{trafficFlowObserved_.archived}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{id}}Archived ">{{trafficFlowObserved_.archived}}</span>
+														<span class="varTrafficFlowObserved{{id}}Archived varTrafficFlowObservedArchived ">{{trafficFlowObserved_.archived}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -2524,10 +2524,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}Deleted ">{{trafficFlowObserved_.deleted}}</span>
+															<span class="varTrafficFlowObserved{{id}}Deleted varTrafficFlowObservedDeleted ">{{trafficFlowObserved_.deleted}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{id}}Deleted ">{{trafficFlowObserved_.deleted}}</span>
+														<span class="varTrafficFlowObserved{{id}}Deleted varTrafficFlowObservedDeleted ">{{trafficFlowObserved_.deleted}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -2580,10 +2580,66 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}SimulationName ">{{trafficFlowObserved_.simulationName}}</span>
+															<span class="varTrafficFlowObserved{{id}}SimulationName varTrafficFlowObservedSimulationName ">{{trafficFlowObserved_.simulationName}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{id}}SimulationName ">{{trafficFlowObserved_.simulationName}}</span>
+														<span class="varTrafficFlowObserved{{id}}SimulationName varTrafficFlowObservedSimulationName ">{{trafficFlowObserved_.simulationName}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmTime"}}
+<!-- #*inline "htmTime" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficFlowObservedTime">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_time">Time in seconds</label>
+												</div>
+											<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputTime" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputTime"}}
+		{{#eq roleForWriteBool "true"}}
+														<input
+															type="text"
+															placeholder="Time in seconds"
+															title="The time in seconds. "															id="{{classApiMethodMethod}}_time"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setTime classTrafficFlowObserved inputTrafficFlowObserved{{id}}Time w3-input w3-border "
+																name="setTime"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setTime classTrafficFlowObserved inputTrafficFlowObserved{{id}}Time w3-input w3-border "
+																name="setTime"
+		{{else}}
+																class="valueTime w3-input w3-border classTrafficFlowObserved inputTrafficFlowObserved{{id}}Time w3-input w3-border "
+																name="time"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setTime', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_time')); }, function() { addError($('#{{classApiMethodMethod}}_time')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficFlowObserved_.time}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficFlowObserved{{id}}Time varTrafficFlowObservedTime ">{{trafficFlowObserved_.time}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficFlowObserved{{id}}Time varTrafficFlowObservedTime ">{{trafficFlowObserved_.time}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -2624,10 +2680,10 @@
 														/>
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}DateTime ">{{trafficFlowObserved_.dateTime}}</span>
+															<span class="varTrafficFlowObserved{{id}}DateTime varTrafficFlowObservedDateTime ">{{trafficFlowObserved_.dateTime}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{id}}DateTime ">{{trafficFlowObserved_.dateTime}}</span>
+														<span class="varTrafficFlowObserved{{id}}DateTime varTrafficFlowObservedDateTime ">{{trafficFlowObserved_.dateTime}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -2692,66 +2748,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}Step ">{{trafficFlowObserved_.step}}</span>
+															<span class="varTrafficFlowObserved{{id}}Step varTrafficFlowObservedStep ">{{trafficFlowObserved_.step}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{id}}Step ">{{trafficFlowObserved_.step}}</span>
-		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmTime"}}
-<!-- #*inline "htmTime" -->
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}TrafficFlowObservedTime">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_time">Time in seconds</label>
-												</div>
-											<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputTime" roleForWrite=roleForWrite roleForRead=roleForRead}}
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputTime"}}
-		{{#eq roleForWriteBool "true"}}
-														<input
-															type="text"
-															placeholder="Time in seconds"
-															title="The time in seconds. "															id="{{classApiMethodMethod}}_time"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setTime classTrafficFlowObserved inputTrafficFlowObserved{{id}}Time w3-input w3-border "
-																name="setTime"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setTime classTrafficFlowObserved inputTrafficFlowObserved{{id}}Time w3-input w3-border "
-																name="setTime"
-		{{else}}
-																class="valueTime w3-input w3-border classTrafficFlowObserved inputTrafficFlowObserved{{id}}Time w3-input w3-border "
-																name="time"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setTime', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_time')); }, function() { addError($('#{{classApiMethodMethod}}_time')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{trafficFlowObserved_.time}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}Time ">{{trafficFlowObserved_.time}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varTrafficFlowObserved{{id}}Time ">{{trafficFlowObserved_.time}}</span>
+														<span class="varTrafficFlowObserved{{id}}Step varTrafficFlowObservedStep ">{{trafficFlowObserved_.step}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -2804,10 +2804,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}SumocfgPath ">{{trafficFlowObserved_.sumocfgPath}}</span>
+															<span class="varTrafficFlowObserved{{id}}SumocfgPath varTrafficFlowObservedSumocfgPath ">{{trafficFlowObserved_.sumocfgPath}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{id}}SumocfgPath ">{{trafficFlowObserved_.sumocfgPath}}</span>
+														<span class="varTrafficFlowObserved{{id}}SumocfgPath varTrafficFlowObservedSumocfgPath ">{{trafficFlowObserved_.sumocfgPath}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -2860,10 +2860,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}Location ">{{trafficFlowObserved_.location}}</span>
+															<span class="varTrafficFlowObserved{{id}}Location varTrafficFlowObservedLocation ">{{trafficFlowObserved_.location}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{id}}Location ">{{trafficFlowObserved_.location}}</span>
+														<span class="varTrafficFlowObserved{{id}}Location varTrafficFlowObservedLocation ">{{trafficFlowObserved_.location}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -2916,10 +2916,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}Color ">{{trafficFlowObserved_.color}}</span>
+															<span class="varTrafficFlowObserved{{id}}Color varTrafficFlowObservedColor ">{{trafficFlowObserved_.color}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{id}}Color ">{{trafficFlowObserved_.color}}</span>
+														<span class="varTrafficFlowObserved{{id}}Color varTrafficFlowObservedColor ">{{trafficFlowObserved_.color}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -2972,10 +2972,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}EntityId ">{{trafficFlowObserved_.entityId}}</span>
+															<span class="varTrafficFlowObserved{{id}}EntityId varTrafficFlowObservedEntityId ">{{trafficFlowObserved_.entityId}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{id}}EntityId ">{{trafficFlowObserved_.entityId}}</span>
+														<span class="varTrafficFlowObserved{{id}}EntityId varTrafficFlowObservedEntityId ">{{trafficFlowObserved_.entityId}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -3028,10 +3028,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}Address ">{{trafficFlowObserved_.address}}</span>
+															<span class="varTrafficFlowObserved{{id}}Address varTrafficFlowObservedAddress ">{{trafficFlowObserved_.address}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{id}}Address ">{{trafficFlowObserved_.address}}</span>
+														<span class="varTrafficFlowObserved{{id}}Address varTrafficFlowObservedAddress ">{{trafficFlowObserved_.address}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -3084,10 +3084,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}AlternateName ">{{trafficFlowObserved_.alternateName}}</span>
+															<span class="varTrafficFlowObserved{{id}}AlternateName varTrafficFlowObservedAlternateName ">{{trafficFlowObserved_.alternateName}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{id}}AlternateName ">{{trafficFlowObserved_.alternateName}}</span>
+														<span class="varTrafficFlowObserved{{id}}AlternateName varTrafficFlowObservedAlternateName ">{{trafficFlowObserved_.alternateName}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -3140,10 +3140,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}AreaServed ">{{trafficFlowObserved_.areaServed}}</span>
+															<span class="varTrafficFlowObserved{{id}}AreaServed varTrafficFlowObservedAreaServed ">{{trafficFlowObserved_.areaServed}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{id}}AreaServed ">{{trafficFlowObserved_.areaServed}}</span>
+														<span class="varTrafficFlowObserved{{id}}AreaServed varTrafficFlowObservedAreaServed ">{{trafficFlowObserved_.areaServed}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -3196,10 +3196,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}AverageGapDistance ">{{trafficFlowObserved_.averageGapDistance}}</span>
+															<span class="varTrafficFlowObserved{{id}}AverageGapDistance varTrafficFlowObservedAverageGapDistance ">{{trafficFlowObserved_.averageGapDistance}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{id}}AverageGapDistance ">{{trafficFlowObserved_.averageGapDistance}}</span>
+														<span class="varTrafficFlowObserved{{id}}AverageGapDistance varTrafficFlowObservedAverageGapDistance ">{{trafficFlowObserved_.averageGapDistance}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -3252,10 +3252,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}AverageHeadwayTime ">{{trafficFlowObserved_.averageHeadwayTime}}</span>
+															<span class="varTrafficFlowObserved{{id}}AverageHeadwayTime varTrafficFlowObservedAverageHeadwayTime ">{{trafficFlowObserved_.averageHeadwayTime}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{id}}AverageHeadwayTime ">{{trafficFlowObserved_.averageHeadwayTime}}</span>
+														<span class="varTrafficFlowObserved{{id}}AverageHeadwayTime varTrafficFlowObservedAverageHeadwayTime ">{{trafficFlowObserved_.averageHeadwayTime}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -3308,10 +3308,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}AverageVehicleLength ">{{trafficFlowObserved_.averageVehicleLength}}</span>
+															<span class="varTrafficFlowObserved{{id}}AverageVehicleLength varTrafficFlowObservedAverageVehicleLength ">{{trafficFlowObserved_.averageVehicleLength}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{id}}AverageVehicleLength ">{{trafficFlowObserved_.averageVehicleLength}}</span>
+														<span class="varTrafficFlowObserved{{id}}AverageVehicleLength varTrafficFlowObservedAverageVehicleLength ">{{trafficFlowObserved_.averageVehicleLength}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -3364,10 +3364,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}AverageVehicleSpeed ">{{trafficFlowObserved_.averageVehicleSpeed}}</span>
+															<span class="varTrafficFlowObserved{{id}}AverageVehicleSpeed varTrafficFlowObservedAverageVehicleSpeed ">{{trafficFlowObserved_.averageVehicleSpeed}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{id}}AverageVehicleSpeed ">{{trafficFlowObserved_.averageVehicleSpeed}}</span>
+														<span class="varTrafficFlowObserved{{id}}AverageVehicleSpeed varTrafficFlowObservedAverageVehicleSpeed ">{{trafficFlowObserved_.averageVehicleSpeed}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -3432,10 +3432,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}Congested ">{{trafficFlowObserved_.congested}}</span>
+															<span class="varTrafficFlowObserved{{id}}Congested varTrafficFlowObservedCongested ">{{trafficFlowObserved_.congested}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{id}}Congested ">{{trafficFlowObserved_.congested}}</span>
+														<span class="varTrafficFlowObserved{{id}}Congested varTrafficFlowObservedCongested ">{{trafficFlowObserved_.congested}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -3488,10 +3488,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}DataProvider ">{{trafficFlowObserved_.dataProvider}}</span>
+															<span class="varTrafficFlowObserved{{id}}DataProvider varTrafficFlowObservedDataProvider ">{{trafficFlowObserved_.dataProvider}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{id}}DataProvider ">{{trafficFlowObserved_.dataProvider}}</span>
+														<span class="varTrafficFlowObserved{{id}}DataProvider varTrafficFlowObservedDataProvider ">{{trafficFlowObserved_.dataProvider}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -3544,10 +3544,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}DateCreated ">{{trafficFlowObserved_.dateCreated}}</span>
+															<span class="varTrafficFlowObserved{{id}}DateCreated varTrafficFlowObservedDateCreated ">{{trafficFlowObserved_.dateCreated}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{id}}DateCreated ">{{trafficFlowObserved_.dateCreated}}</span>
+														<span class="varTrafficFlowObserved{{id}}DateCreated varTrafficFlowObservedDateCreated ">{{trafficFlowObserved_.dateCreated}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -3600,10 +3600,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}DateModified ">{{trafficFlowObserved_.dateModified}}</span>
+															<span class="varTrafficFlowObserved{{id}}DateModified varTrafficFlowObservedDateModified ">{{trafficFlowObserved_.dateModified}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{id}}DateModified ">{{trafficFlowObserved_.dateModified}}</span>
+														<span class="varTrafficFlowObserved{{id}}DateModified varTrafficFlowObservedDateModified ">{{trafficFlowObserved_.dateModified}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -3656,10 +3656,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}DateObserved ">{{trafficFlowObserved_.dateObserved}}</span>
+															<span class="varTrafficFlowObserved{{id}}DateObserved varTrafficFlowObservedDateObserved ">{{trafficFlowObserved_.dateObserved}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{id}}DateObserved ">{{trafficFlowObserved_.dateObserved}}</span>
+														<span class="varTrafficFlowObserved{{id}}DateObserved varTrafficFlowObservedDateObserved ">{{trafficFlowObserved_.dateObserved}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -3712,10 +3712,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}DateObservedFrom ">{{trafficFlowObserved_.dateObservedFrom}}</span>
+															<span class="varTrafficFlowObserved{{id}}DateObservedFrom varTrafficFlowObservedDateObservedFrom ">{{trafficFlowObserved_.dateObservedFrom}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{id}}DateObservedFrom ">{{trafficFlowObserved_.dateObservedFrom}}</span>
+														<span class="varTrafficFlowObserved{{id}}DateObservedFrom varTrafficFlowObservedDateObservedFrom ">{{trafficFlowObserved_.dateObservedFrom}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -3768,10 +3768,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}DateObservedTo ">{{trafficFlowObserved_.dateObservedTo}}</span>
+															<span class="varTrafficFlowObserved{{id}}DateObservedTo varTrafficFlowObservedDateObservedTo ">{{trafficFlowObserved_.dateObservedTo}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{id}}DateObservedTo ">{{trafficFlowObserved_.dateObservedTo}}</span>
+														<span class="varTrafficFlowObserved{{id}}DateObservedTo varTrafficFlowObservedDateObservedTo ">{{trafficFlowObserved_.dateObservedTo}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -3824,10 +3824,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}Description ">{{trafficFlowObserved_.description}}</span>
+															<span class="varTrafficFlowObserved{{id}}Description varTrafficFlowObservedDescription ">{{trafficFlowObserved_.description}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{id}}Description ">{{trafficFlowObserved_.description}}</span>
+														<span class="varTrafficFlowObserved{{id}}Description varTrafficFlowObservedDescription ">{{trafficFlowObserved_.description}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -3880,10 +3880,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}Intensity ">{{trafficFlowObserved_.intensity}}</span>
+															<span class="varTrafficFlowObserved{{id}}Intensity varTrafficFlowObservedIntensity ">{{trafficFlowObserved_.intensity}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{id}}Intensity ">{{trafficFlowObserved_.intensity}}</span>
+														<span class="varTrafficFlowObserved{{id}}Intensity varTrafficFlowObservedIntensity ">{{trafficFlowObserved_.intensity}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -3936,10 +3936,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}LaneDirection ">{{trafficFlowObserved_.laneDirection}}</span>
+															<span class="varTrafficFlowObserved{{id}}LaneDirection varTrafficFlowObservedLaneDirection ">{{trafficFlowObserved_.laneDirection}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{id}}LaneDirection ">{{trafficFlowObserved_.laneDirection}}</span>
+														<span class="varTrafficFlowObserved{{id}}LaneDirection varTrafficFlowObservedLaneDirection ">{{trafficFlowObserved_.laneDirection}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -3992,10 +3992,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}LaneId ">{{trafficFlowObserved_.laneId}}</span>
+															<span class="varTrafficFlowObserved{{id}}LaneId varTrafficFlowObservedLaneId ">{{trafficFlowObserved_.laneId}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{id}}LaneId ">{{trafficFlowObserved_.laneId}}</span>
+														<span class="varTrafficFlowObserved{{id}}LaneId varTrafficFlowObservedLaneId ">{{trafficFlowObserved_.laneId}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -4048,10 +4048,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}Name ">{{trafficFlowObserved_.name}}</span>
+															<span class="varTrafficFlowObserved{{id}}Name varTrafficFlowObservedName ">{{trafficFlowObserved_.name}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{id}}Name ">{{trafficFlowObserved_.name}}</span>
+														<span class="varTrafficFlowObserved{{id}}Name varTrafficFlowObservedName ">{{trafficFlowObserved_.name}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -4104,10 +4104,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}Occupancy ">{{trafficFlowObserved_.occupancy}}</span>
+															<span class="varTrafficFlowObserved{{id}}Occupancy varTrafficFlowObservedOccupancy ">{{trafficFlowObserved_.occupancy}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{id}}Occupancy ">{{trafficFlowObserved_.occupancy}}</span>
+														<span class="varTrafficFlowObserved{{id}}Occupancy varTrafficFlowObservedOccupancy ">{{trafficFlowObserved_.occupancy}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -4160,10 +4160,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}Owner ">{{trafficFlowObserved_.owner}}</span>
+															<span class="varTrafficFlowObserved{{id}}Owner varTrafficFlowObservedOwner ">{{trafficFlowObserved_.owner}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{id}}Owner ">{{trafficFlowObserved_.owner}}</span>
+														<span class="varTrafficFlowObserved{{id}}Owner varTrafficFlowObservedOwner ">{{trafficFlowObserved_.owner}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -4216,10 +4216,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}RefRoadSegment ">{{trafficFlowObserved_.refRoadSegment}}</span>
+															<span class="varTrafficFlowObserved{{id}}RefRoadSegment varTrafficFlowObservedRefRoadSegment ">{{trafficFlowObserved_.refRoadSegment}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{id}}RefRoadSegment ">{{trafficFlowObserved_.refRoadSegment}}</span>
+														<span class="varTrafficFlowObserved{{id}}RefRoadSegment varTrafficFlowObservedRefRoadSegment ">{{trafficFlowObserved_.refRoadSegment}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -4284,10 +4284,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}ReversedLane ">{{trafficFlowObserved_.reversedLane}}</span>
+															<span class="varTrafficFlowObserved{{id}}ReversedLane varTrafficFlowObservedReversedLane ">{{trafficFlowObserved_.reversedLane}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{id}}ReversedLane ">{{trafficFlowObserved_.reversedLane}}</span>
+														<span class="varTrafficFlowObserved{{id}}ReversedLane varTrafficFlowObservedReversedLane ">{{trafficFlowObserved_.reversedLane}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -4340,10 +4340,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}SeeAlso ">{{trafficFlowObserved_.seeAlso}}</span>
+															<span class="varTrafficFlowObserved{{id}}SeeAlso varTrafficFlowObservedSeeAlso ">{{trafficFlowObserved_.seeAlso}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{id}}SeeAlso ">{{trafficFlowObserved_.seeAlso}}</span>
+														<span class="varTrafficFlowObserved{{id}}SeeAlso varTrafficFlowObservedSeeAlso ">{{trafficFlowObserved_.seeAlso}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -4396,10 +4396,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}Source ">{{trafficFlowObserved_.source}}</span>
+															<span class="varTrafficFlowObserved{{id}}Source varTrafficFlowObservedSource ">{{trafficFlowObserved_.source}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{id}}Source ">{{trafficFlowObserved_.source}}</span>
+														<span class="varTrafficFlowObserved{{id}}Source varTrafficFlowObservedSource ">{{trafficFlowObserved_.source}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -4452,10 +4452,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}Type ">{{trafficFlowObserved_.type}}</span>
+															<span class="varTrafficFlowObserved{{id}}Type varTrafficFlowObservedType ">{{trafficFlowObserved_.type}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{id}}Type ">{{trafficFlowObserved_.type}}</span>
+														<span class="varTrafficFlowObserved{{id}}Type varTrafficFlowObservedType ">{{trafficFlowObserved_.type}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -4508,10 +4508,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}VehicleSubType ">{{trafficFlowObserved_.vehicleSubType}}</span>
+															<span class="varTrafficFlowObserved{{id}}VehicleSubType varTrafficFlowObservedVehicleSubType ">{{trafficFlowObserved_.vehicleSubType}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{id}}VehicleSubType ">{{trafficFlowObserved_.vehicleSubType}}</span>
+														<span class="varTrafficFlowObserved{{id}}VehicleSubType varTrafficFlowObservedVehicleSubType ">{{trafficFlowObserved_.vehicleSubType}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -4564,10 +4564,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}VehicleType ">{{trafficFlowObserved_.vehicleType}}</span>
+															<span class="varTrafficFlowObserved{{id}}VehicleType varTrafficFlowObservedVehicleType ">{{trafficFlowObserved_.vehicleType}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{id}}VehicleType ">{{trafficFlowObserved_.vehicleType}}</span>
+														<span class="varTrafficFlowObserved{{id}}VehicleType varTrafficFlowObservedVehicleType ">{{trafficFlowObserved_.vehicleType}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -4620,10 +4620,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}CustomRouteId ">{{trafficFlowObserved_.customRouteId}}</span>
+															<span class="varTrafficFlowObserved{{id}}CustomRouteId varTrafficFlowObservedCustomRouteId ">{{trafficFlowObserved_.customRouteId}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{id}}CustomRouteId ">{{trafficFlowObserved_.customRouteId}}</span>
+														<span class="varTrafficFlowObserved{{id}}CustomRouteId varTrafficFlowObservedCustomRouteId ">{{trafficFlowObserved_.customRouteId}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -4676,10 +4676,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}CustomSigma ">{{trafficFlowObserved_.customSigma}}</span>
+															<span class="varTrafficFlowObserved{{id}}CustomSigma varTrafficFlowObservedCustomSigma ">{{trafficFlowObserved_.customSigma}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{id}}CustomSigma ">{{trafficFlowObserved_.customSigma}}</span>
+														<span class="varTrafficFlowObserved{{id}}CustomSigma varTrafficFlowObservedCustomSigma ">{{trafficFlowObserved_.customSigma}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -4732,10 +4732,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}CustomAcceleration ">{{trafficFlowObserved_.customAcceleration}}</span>
+															<span class="varTrafficFlowObserved{{id}}CustomAcceleration varTrafficFlowObservedCustomAcceleration ">{{trafficFlowObserved_.customAcceleration}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{id}}CustomAcceleration ">{{trafficFlowObserved_.customAcceleration}}</span>
+														<span class="varTrafficFlowObserved{{id}}CustomAcceleration varTrafficFlowObservedCustomAcceleration ">{{trafficFlowObserved_.customAcceleration}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -4788,10 +4788,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}CustomDeceleration ">{{trafficFlowObserved_.customDeceleration}}</span>
+															<span class="varTrafficFlowObserved{{id}}CustomDeceleration varTrafficFlowObservedCustomDeceleration ">{{trafficFlowObserved_.customDeceleration}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{id}}CustomDeceleration ">{{trafficFlowObserved_.customDeceleration}}</span>
+														<span class="varTrafficFlowObserved{{id}}CustomDeceleration varTrafficFlowObservedCustomDeceleration ">{{trafficFlowObserved_.customDeceleration}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -4844,10 +4844,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}CustomMinGreenTime ">{{trafficFlowObserved_.customMinGreenTime}}</span>
+															<span class="varTrafficFlowObserved{{id}}CustomMinGreenTime varTrafficFlowObservedCustomMinGreenTime ">{{trafficFlowObserved_.customMinGreenTime}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{id}}CustomMinGreenTime ">{{trafficFlowObserved_.customMinGreenTime}}</span>
+														<span class="varTrafficFlowObserved{{id}}CustomMinGreenTime varTrafficFlowObservedCustomMinGreenTime ">{{trafficFlowObserved_.customMinGreenTime}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -4900,10 +4900,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}CustomMaxGreenTime ">{{trafficFlowObserved_.customMaxGreenTime}}</span>
+															<span class="varTrafficFlowObserved{{id}}CustomMaxGreenTime varTrafficFlowObservedCustomMaxGreenTime ">{{trafficFlowObserved_.customMaxGreenTime}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{id}}CustomMaxGreenTime ">{{trafficFlowObserved_.customMaxGreenTime}}</span>
+														<span class="varTrafficFlowObserved{{id}}CustomMaxGreenTime varTrafficFlowObservedCustomMaxGreenTime ">{{trafficFlowObserved_.customMaxGreenTime}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -4956,10 +4956,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}CustomAverageVehiclesPerMinute ">{{trafficFlowObserved_.customAverageVehiclesPerMinute}}</span>
+															<span class="varTrafficFlowObserved{{id}}CustomAverageVehiclesPerMinute varTrafficFlowObservedCustomAverageVehiclesPerMinute ">{{trafficFlowObserved_.customAverageVehiclesPerMinute}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{id}}CustomAverageVehiclesPerMinute ">{{trafficFlowObserved_.customAverageVehiclesPerMinute}}</span>
+														<span class="varTrafficFlowObserved{{id}}CustomAverageVehiclesPerMinute varTrafficFlowObservedCustomAverageVehiclesPerMinute ">{{trafficFlowObserved_.customAverageVehiclesPerMinute}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -5012,10 +5012,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}CustomDemandScalingFactor ">{{trafficFlowObserved_.customDemandScalingFactor}}</span>
+															<span class="varTrafficFlowObserved{{id}}CustomDemandScalingFactor varTrafficFlowObservedCustomDemandScalingFactor ">{{trafficFlowObserved_.customDemandScalingFactor}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{id}}CustomDemandScalingFactor ">{{trafficFlowObserved_.customDemandScalingFactor}}</span>
+														<span class="varTrafficFlowObserved{{id}}CustomDemandScalingFactor varTrafficFlowObservedCustomDemandScalingFactor ">{{trafficFlowObserved_.customDemandScalingFactor}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -5068,10 +5068,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}CustomQueueLengthThreshold ">{{trafficFlowObserved_.customQueueLengthThreshold}}</span>
+															<span class="varTrafficFlowObserved{{id}}CustomQueueLengthThreshold varTrafficFlowObservedCustomQueueLengthThreshold ">{{trafficFlowObserved_.customQueueLengthThreshold}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{id}}CustomQueueLengthThreshold ">{{trafficFlowObserved_.customQueueLengthThreshold}}</span>
+														<span class="varTrafficFlowObserved{{id}}CustomQueueLengthThreshold varTrafficFlowObservedCustomQueueLengthThreshold ">{{trafficFlowObserved_.customQueueLengthThreshold}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -5124,9 +5124,9 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{id}}CustomTrafficLightId ">{{trafficFlowObserved_.customTrafficLightId}}</span>
+															<span class="varTrafficFlowObserved{{id}}CustomTrafficLightId varTrafficFlowObservedCustomTrafficLightId ">{{trafficFlowObserved_.customTrafficLightId}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{id}}CustomTrafficLightId ">{{trafficFlowObserved_.customTrafficLightId}}</span>
+														<span class="varTrafficFlowObserved{{id}}CustomTrafficLightId varTrafficFlowObservedCustomTrafficLightId ">{{trafficFlowObserved_.customTrafficLightId}}</span>
 		{{/eq}}
 {{/inline}}

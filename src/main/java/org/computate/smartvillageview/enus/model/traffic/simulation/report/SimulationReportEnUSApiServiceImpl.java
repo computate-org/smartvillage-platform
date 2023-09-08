@@ -33,16 +33,20 @@ public class SimulationReportEnUSApiServiceImpl extends SimulationReportEnUSGenA
 		LOG.info("Sending record to kafka");
 		super.patchrunsimulationSimulationReportFuture(o, inheritPk).onSuccess(simulationReport -> {
 			try {
-				String topic = SimulationReport.reportStatusStop_enUS.equals(simulationReport.getReportStatus()) ? config.getString(ConfigKeys.KAFKA_TOPIC_SUMO_STOP) : config.getString(ConfigKeys.KAFKA_TOPIC_SUMO_RUN);
-				JsonObject body = JsonObject.mapFrom(simulationReport);
-				KafkaProducerRecord<String, String> record = KafkaProducerRecord.create(topic, body.encode());
-				kafkaProducer.send(record).onSuccess(recordMetadata -> {
-					LOG.info(String.format("Sent record to kafka topic %s: %s", topic, body.encode()));
+				if(SimulationReport.reportStatusStop_enUS.equals(simulationReport.getReportStatus()) || SimulationReport.reportStatusRun_enUS.equals(simulationReport.getReportStatus())) {
+					String topic = SimulationReport.reportStatusStop_enUS.equals(simulationReport.getReportStatus()) ? config.getString(ConfigKeys.KAFKA_TOPIC_SUMO_STOP) : config.getString(ConfigKeys.KAFKA_TOPIC_SUMO_RUN);
+					JsonObject body = JsonObject.mapFrom(simulationReport);
+					KafkaProducerRecord<String, String> record = KafkaProducerRecord.create(topic, body.encode());
+					kafkaProducer.send(record).onSuccess(recordMetadata -> {
+						LOG.info(String.format("Sent record to kafka topic %s: %s", topic, body.encode()));
+						promise.complete(simulationReport);
+					}).onFailure(ex -> {
+						LOG.error(String.format("Could not send record to kafka topic %s: %s", topic, body.encode()), ex);
+						promise.fail(ex);
+					});
+				} else {
 					promise.complete(simulationReport);
-				}).onFailure(ex -> {
-					LOG.error(String.format("Could not send record to kafka topic %s: %s", topic, body.encode()), ex);
-					promise.fail(ex);
-				});
+				}
 			} catch(Exception ex) {
 				LOG.error(String.format("Could not send record to kafka: %s", Optional.ofNullable(JsonObject.mapFrom(simulationReport)).map(b -> b.encode()).orElse("")), ex);
 				promise.fail(ex);

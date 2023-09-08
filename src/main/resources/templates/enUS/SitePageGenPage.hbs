@@ -1056,7 +1056,7 @@
 
 {{#*inline "inputCreated"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSitePage{{id}}Created " title="{{formatZonedDateTime sitePage_.created 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime sitePage_.created 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+														<span id="{{classApiMethodMethod}}_created" class="varSitePage{{id}}Created varSitePageCreated " title="{{formatZonedDateTime sitePage_.created 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime sitePage_.created 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -1082,7 +1082,7 @@
 
 {{#*inline "inputModified"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSitePage{{id}}Modified " title="{{formatZonedDateTime sitePage_.modified 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime sitePage_.modified 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+														<span id="{{classApiMethodMethod}}_modified" class="varSitePage{{id}}Modified varSitePageModified " title="{{formatZonedDateTime sitePage_.modified 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime sitePage_.modified 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -1134,9 +1134,9 @@
 														/>
 
 													{{else}}
-															<span class="varSitePage{{id}}ObjectId ">{{sitePage_.objectId}}</span>
+															<span class="varSitePage{{id}}ObjectId varSitePageObjectId ">{{sitePage_.objectId}}</span>
 		{{else}}
-														<span class="varSitePage{{id}}ObjectId ">{{sitePage_.objectId}}</span>
+														<span class="varSitePage{{id}}ObjectId varSitePageObjectId ">{{sitePage_.objectId}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1200,9 +1200,9 @@
 	{{/eq}}
 
 													{{else}}
-															<span class="varSitePage{{id}}Archived ">{{sitePage_.archived}}</span>
+															<span class="varSitePage{{id}}Archived varSitePageArchived ">{{sitePage_.archived}}</span>
 		{{else}}
-														<span class="varSitePage{{id}}Archived ">{{sitePage_.archived}}</span>
+														<span class="varSitePage{{id}}Archived varSitePageArchived ">{{sitePage_.archived}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1266,9 +1266,9 @@
 	{{/eq}}
 
 													{{else}}
-															<span class="varSitePage{{id}}Deleted ">{{sitePage_.deleted}}</span>
+															<span class="varSitePage{{id}}Deleted varSitePageDeleted ">{{sitePage_.deleted}}</span>
 		{{else}}
-														<span class="varSitePage{{id}}Deleted ">{{sitePage_.deleted}}</span>
+														<span class="varSitePage{{id}}Deleted varSitePageDeleted ">{{sitePage_.deleted}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1320,9 +1320,9 @@
 														/>
 
 													{{else}}
-															<span class="varSitePage{{id}}PageId ">{{sitePage_.pageId}}</span>
+															<span class="varSitePage{{id}}PageId varSitePagePageId ">{{sitePage_.pageId}}</span>
 		{{else}}
-														<span class="varSitePage{{id}}PageId ">{{sitePage_.pageId}}</span>
+														<span class="varSitePage{{id}}PageId varSitePagePageId ">{{sitePage_.pageId}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1374,9 +1374,9 @@
 														/>
 
 													{{else}}
-															<span class="varSitePage{{id}}Url ">{{sitePage_.url}}</span>
+															<span class="varSitePage{{id}}Url varSitePageUrl ">{{sitePage_.url}}</span>
 		{{else}}
-														<span class="varSitePage{{id}}Url ">{{sitePage_.url}}</span>
+														<span class="varSitePage{{id}}Url varSitePageUrl ">{{sitePage_.url}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1428,9 +1428,9 @@
 														/>
 
 													{{else}}
-															<span class="varSitePage{{id}}Uri ">{{sitePage_.uri}}</span>
+															<span class="varSitePage{{id}}Uri varSitePageUri ">{{sitePage_.uri}}</span>
 		{{else}}
-														<span class="varSitePage{{id}}Uri ">{{sitePage_.uri}}</span>
+														<span class="varSitePage{{id}}Uri varSitePageUri ">{{sitePage_.uri}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1482,9 +1482,9 @@
 														/>
 
 													{{else}}
-															<span class="varSitePage{{id}}Author ">{{sitePage_.author}}</span>
+															<span class="varSitePage{{id}}Author varSitePageAuthor ">{{sitePage_.author}}</span>
 		{{else}}
-														<span class="varSitePage{{id}}Author ">{{sitePage_.author}}</span>
+														<span class="varSitePage{{id}}Author varSitePageAuthor ">{{sitePage_.author}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1536,8 +1536,8 @@
 														/>
 
 													{{else}}
-															<span class="varSitePage{{id}}PageImageUri ">{{sitePage_.pageImageUri}}</span>
+															<span class="varSitePage{{id}}PageImageUri varSitePagePageImageUri ">{{sitePage_.pageImageUri}}</span>
 		{{else}}
-														<span class="varSitePage{{id}}PageImageUri ">{{sitePage_.pageImageUri}}</span>
+														<span class="varSitePage{{id}}PageImageUri varSitePagePageImageUri ">{{sitePage_.pageImageUri}}</span>
 		{{/eq}}
 {{/inline}}

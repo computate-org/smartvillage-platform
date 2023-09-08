@@ -468,6 +468,15 @@
 							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
 							<div class="w3-cell-row HtmRow">
 {{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmTime" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmTime" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmTime" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
 {{> "htmDateTime" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
 {{#ifContainsAnyRoles roles roleForRead}}
@@ -483,15 +492,6 @@
 {{> "htmStep" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
 {{> "htmStep" roleForWriteBool="false" roleForReadBool="false"}}
-{{/ifContainsAnyRoles}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleForWrite}}
-{{> "htmTime" roleForWriteBool="true" roleForReadBool="true"}}
-{{else}}
-{{#ifContainsAnyRoles roles roleForRead}}
-{{> "htmTime" roleForWriteBool="false" roleForReadBool="true"}}
-{{else}}
-{{> "htmTime" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleForWrite}}
@@ -630,6 +630,15 @@
 							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
 							<div class="w3-cell-row HtmRow">
 {{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmTime" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmTime" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmTime" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
 {{> "htmDateTime" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
 {{#ifContainsAnyRoles roles roleForRead}}
@@ -645,15 +654,6 @@
 {{> "htmStep" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
 {{> "htmStep" roleForWriteBool="false" roleForReadBool="false"}}
-{{/ifContainsAnyRoles}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleForWrite}}
-{{> "htmTime" roleForWriteBool="true" roleForReadBool="true"}}
-{{else}}
-{{#ifContainsAnyRoles roles roleForRead}}
-{{> "htmTime" roleForWriteBool="false" roleForReadBool="true"}}
-{{else}}
-{{> "htmTime" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleForWrite}}
@@ -857,6 +857,15 @@
 							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
 							<div class="w3-cell-row HtmRow">
 {{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmTime" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmTime" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmTime" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
 {{> "htmDateTime" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
 {{#ifContainsAnyRoles roles roleForRead}}
@@ -872,15 +881,6 @@
 {{> "htmStep" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
 {{> "htmStep" roleForWriteBool="false" roleForReadBool="false"}}
-{{/ifContainsAnyRoles}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleForWrite}}
-{{> "htmTime" roleForWriteBool="true" roleForReadBool="true"}}
-{{else}}
-{{#ifContainsAnyRoles roles roleForRead}}
-{{> "htmTime" roleForWriteBool="false" roleForReadBool="true"}}
-{{else}}
-{{> "htmTime" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleForWrite}}
@@ -1232,7 +1232,7 @@
 
 {{#*inline "inputCreated"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varTrafficLight{{id}}Created " title="{{formatZonedDateTime trafficLight_.created 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime trafficLight_.created 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+														<span id="{{classApiMethodMethod}}_created" class="varTrafficLight{{id}}Created varTrafficLightCreated " title="{{formatZonedDateTime trafficLight_.created 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime trafficLight_.created 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -1258,7 +1258,7 @@
 
 {{#*inline "inputModified"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varTrafficLight{{id}}Modified " title="{{formatZonedDateTime trafficLight_.modified 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime trafficLight_.modified 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+														<span id="{{classApiMethodMethod}}_modified" class="varTrafficLight{{id}}Modified varTrafficLightModified " title="{{formatZonedDateTime trafficLight_.modified 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime trafficLight_.modified 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -1311,10 +1311,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficLight{{id}}ObjectId ">{{trafficLight_.objectId}}</span>
+															<span class="varTrafficLight{{id}}ObjectId varTrafficLightObjectId ">{{trafficLight_.objectId}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficLight{{id}}ObjectId ">{{trafficLight_.objectId}}</span>
+														<span class="varTrafficLight{{id}}ObjectId varTrafficLightObjectId ">{{trafficLight_.objectId}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1379,10 +1379,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficLight{{id}}Archived ">{{trafficLight_.archived}}</span>
+															<span class="varTrafficLight{{id}}Archived varTrafficLightArchived ">{{trafficLight_.archived}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficLight{{id}}Archived ">{{trafficLight_.archived}}</span>
+														<span class="varTrafficLight{{id}}Archived varTrafficLightArchived ">{{trafficLight_.archived}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1447,10 +1447,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficLight{{id}}Deleted ">{{trafficLight_.deleted}}</span>
+															<span class="varTrafficLight{{id}}Deleted varTrafficLightDeleted ">{{trafficLight_.deleted}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficLight{{id}}Deleted ">{{trafficLight_.deleted}}</span>
+														<span class="varTrafficLight{{id}}Deleted varTrafficLightDeleted ">{{trafficLight_.deleted}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1503,10 +1503,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficLight{{id}}SimulationName ">{{trafficLight_.simulationName}}</span>
+															<span class="varTrafficLight{{id}}SimulationName varTrafficLightSimulationName ">{{trafficLight_.simulationName}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficLight{{id}}SimulationName ">{{trafficLight_.simulationName}}</span>
+														<span class="varTrafficLight{{id}}SimulationName varTrafficLightSimulationName ">{{trafficLight_.simulationName}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1559,10 +1559,66 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficLight{{id}}SumocfgPath ">{{trafficLight_.sumocfgPath}}</span>
+															<span class="varTrafficLight{{id}}SumocfgPath varTrafficLightSumocfgPath ">{{trafficLight_.sumocfgPath}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficLight{{id}}SumocfgPath ">{{trafficLight_.sumocfgPath}}</span>
+														<span class="varTrafficLight{{id}}SumocfgPath varTrafficLightSumocfgPath ">{{trafficLight_.sumocfgPath}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmTime"}}
+<!-- #*inline "htmTime" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficLightTime">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_time">Time in seconds</label>
+												</div>
+											<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputTime" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputTime"}}
+		{{#eq roleForWriteBool "true"}}
+														<input
+															type="text"
+															placeholder="Time in seconds"
+															title="The time in seconds. "															id="{{classApiMethodMethod}}_time"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setTime classTrafficLight inputTrafficLight{{id}}Time w3-input w3-border "
+																name="setTime"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setTime classTrafficLight inputTrafficLight{{id}}Time w3-input w3-border "
+																name="setTime"
+		{{else}}
+																class="valueTime w3-input w3-border classTrafficLight inputTrafficLight{{id}}Time w3-input w3-border "
+																name="time"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setTime', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_time')); }, function() { addError($('#{{classApiMethodMethod}}_time')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficLight_.time}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficLight{{id}}Time varTrafficLightTime ">{{trafficLight_.time}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficLight{{id}}Time varTrafficLightTime ">{{trafficLight_.time}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1603,10 +1659,10 @@
 														/>
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficLight{{id}}DateTime ">{{trafficLight_.dateTime}}</span>
+															<span class="varTrafficLight{{id}}DateTime varTrafficLightDateTime ">{{trafficLight_.dateTime}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficLight{{id}}DateTime ">{{trafficLight_.dateTime}}</span>
+														<span class="varTrafficLight{{id}}DateTime varTrafficLightDateTime ">{{trafficLight_.dateTime}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1671,66 +1727,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficLight{{id}}Step ">{{trafficLight_.step}}</span>
+															<span class="varTrafficLight{{id}}Step varTrafficLightStep ">{{trafficLight_.step}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficLight{{id}}Step ">{{trafficLight_.step}}</span>
-		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmTime"}}
-<!-- #*inline "htmTime" -->
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}TrafficLightTime">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_time">Time in seconds</label>
-												</div>
-											<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputTime" roleForWrite=roleForWrite roleForRead=roleForRead}}
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputTime"}}
-		{{#eq roleForWriteBool "true"}}
-														<input
-															type="text"
-															placeholder="Time in seconds"
-															title="The time in seconds. "															id="{{classApiMethodMethod}}_time"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setTime classTrafficLight inputTrafficLight{{id}}Time w3-input w3-border "
-																name="setTime"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setTime classTrafficLight inputTrafficLight{{id}}Time w3-input w3-border "
-																name="setTime"
-		{{else}}
-																class="valueTime w3-input w3-border classTrafficLight inputTrafficLight{{id}}Time w3-input w3-border "
-																name="time"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setTime', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_time')); }, function() { addError($('#{{classApiMethodMethod}}_time')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{trafficLight_.time}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficLight{{id}}Time ">{{trafficLight_.time}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varTrafficLight{{id}}Time ">{{trafficLight_.time}}</span>
+														<span class="varTrafficLight{{id}}Step varTrafficLightStep ">{{trafficLight_.step}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1783,10 +1783,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficLight{{id}}Location ">{{trafficLight_.location}}</span>
+															<span class="varTrafficLight{{id}}Location varTrafficLightLocation ">{{trafficLight_.location}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficLight{{id}}Location ">{{trafficLight_.location}}</span>
+														<span class="varTrafficLight{{id}}Location varTrafficLightLocation ">{{trafficLight_.location}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1839,10 +1839,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficLight{{id}}Color ">{{trafficLight_.color}}</span>
+															<span class="varTrafficLight{{id}}Color varTrafficLightColor ">{{trafficLight_.color}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficLight{{id}}Color ">{{trafficLight_.color}}</span>
+														<span class="varTrafficLight{{id}}Color varTrafficLightColor ">{{trafficLight_.color}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1895,10 +1895,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficLight{{id}}TrafficLightId ">{{trafficLight_.trafficLightId}}</span>
+															<span class="varTrafficLight{{id}}TrafficLightId varTrafficLightTrafficLightId ">{{trafficLight_.trafficLightId}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficLight{{id}}TrafficLightId ">{{trafficLight_.trafficLightId}}</span>
+														<span class="varTrafficLight{{id}}TrafficLightId varTrafficLightTrafficLightId ">{{trafficLight_.trafficLightId}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1951,10 +1951,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficLight{{id}}TrafficLightType ">{{trafficLight_.trafficLightType}}</span>
+															<span class="varTrafficLight{{id}}TrafficLightType varTrafficLightTrafficLightType ">{{trafficLight_.trafficLightType}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficLight{{id}}TrafficLightType ">{{trafficLight_.trafficLightType}}</span>
+														<span class="varTrafficLight{{id}}TrafficLightType varTrafficLightTrafficLightType ">{{trafficLight_.trafficLightType}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -2007,10 +2007,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficLight{{id}}Angle ">{{trafficLight_.angle}}</span>
+															<span class="varTrafficLight{{id}}Angle varTrafficLightAngle ">{{trafficLight_.angle}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficLight{{id}}Angle ">{{trafficLight_.angle}}</span>
+														<span class="varTrafficLight{{id}}Angle varTrafficLightAngle ">{{trafficLight_.angle}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -2063,9 +2063,9 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficLight{{id}}Color ">{{trafficLight_.color}}</span>
+															<span class="varTrafficLight{{id}}Color varTrafficLightColor ">{{trafficLight_.color}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficLight{{id}}Color ">{{trafficLight_.color}}</span>
+														<span class="varTrafficLight{{id}}Color varTrafficLightColor ">{{trafficLight_.color}}</span>
 		{{/eq}}
 {{/inline}}

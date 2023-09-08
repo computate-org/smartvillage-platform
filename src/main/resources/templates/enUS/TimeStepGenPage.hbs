@@ -1019,7 +1019,7 @@
 
 {{#*inline "inputCreated"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varTimeStep{{id}}Created " title="{{formatZonedDateTime timeStep_.created 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime timeStep_.created 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+														<span id="{{classApiMethodMethod}}_created" class="varTimeStep{{id}}Created varTimeStepCreated " title="{{formatZonedDateTime timeStep_.created 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime timeStep_.created 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -1045,7 +1045,7 @@
 
 {{#*inline "inputModified"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varTimeStep{{id}}Modified " title="{{formatZonedDateTime timeStep_.modified 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime timeStep_.modified 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+														<span id="{{classApiMethodMethod}}_modified" class="varTimeStep{{id}}Modified varTimeStepModified " title="{{formatZonedDateTime timeStep_.modified 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime timeStep_.modified 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -1098,10 +1098,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTimeStep{{id}}ObjectId ">{{timeStep_.objectId}}</span>
+															<span class="varTimeStep{{id}}ObjectId varTimeStepObjectId ">{{timeStep_.objectId}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTimeStep{{id}}ObjectId ">{{timeStep_.objectId}}</span>
+														<span class="varTimeStep{{id}}ObjectId varTimeStepObjectId ">{{timeStep_.objectId}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1166,10 +1166,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTimeStep{{id}}Archived ">{{timeStep_.archived}}</span>
+															<span class="varTimeStep{{id}}Archived varTimeStepArchived ">{{timeStep_.archived}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTimeStep{{id}}Archived ">{{timeStep_.archived}}</span>
+														<span class="varTimeStep{{id}}Archived varTimeStepArchived ">{{timeStep_.archived}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1234,10 +1234,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTimeStep{{id}}Deleted ">{{timeStep_.deleted}}</span>
+															<span class="varTimeStep{{id}}Deleted varTimeStepDeleted ">{{timeStep_.deleted}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTimeStep{{id}}Deleted ">{{timeStep_.deleted}}</span>
+														<span class="varTimeStep{{id}}Deleted varTimeStepDeleted ">{{timeStep_.deleted}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1290,10 +1290,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTimeStep{{id}}SimulationKey ">{{timeStep_.simulationKey}}</span>
+															<span class="varTimeStep{{id}}SimulationKey varTimeStepSimulationKey ">{{timeStep_.simulationKey}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTimeStep{{id}}SimulationKey ">{{timeStep_.simulationKey}}</span>
+														<span class="varTimeStep{{id}}SimulationKey varTimeStepSimulationKey ">{{timeStep_.simulationKey}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1346,10 +1346,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTimeStep{{id}}Path ">{{timeStep_.path}}</span>
+															<span class="varTimeStep{{id}}Path varTimeStepPath ">{{timeStep_.path}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTimeStep{{id}}Path ">{{timeStep_.path}}</span>
+														<span class="varTimeStep{{id}}Path varTimeStepPath ">{{timeStep_.path}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1402,10 +1402,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTimeStep{{id}}Time ">{{timeStep_.time}}</span>
+															<span class="varTimeStep{{id}}Time varTimeStepTime ">{{timeStep_.time}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTimeStep{{id}}Time ">{{timeStep_.time}}</span>
+														<span class="varTimeStep{{id}}Time varTimeStepTime ">{{timeStep_.time}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1446,9 +1446,9 @@
 														/>
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTimeStep{{id}}DateTime ">{{timeStep_.dateTime}}</span>
+															<span class="varTimeStep{{id}}DateTime varTimeStepDateTime ">{{timeStep_.dateTime}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTimeStep{{id}}DateTime ">{{timeStep_.dateTime}}</span>
+														<span class="varTimeStep{{id}}DateTime varTimeStepDateTime ">{{timeStep_.dateTime}}</span>
 		{{/eq}}
 {{/inline}}

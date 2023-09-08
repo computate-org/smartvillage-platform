@@ -98,7 +98,9 @@ async function websocketSimulationReportInner2(apiRequest) {
 	<i class="fas fa-copy "></i>
 	Duplicate simulation reports
 </button>
+
 {{> htmFormSimulationReportPage}}
+
 <button class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce " id="runReport" onclick="$.ajax({ url: '/api/run-simulation-report?' + $.param([ {name: 'fq', value: 'pk:{{ pk }}' } ]) , dataType: 'json' , type: 'PATCH' , contentType: 'application/json; charset=utf-8' , data: JSON.stringify({'setReportStatus': 'Run'}) }); ">
 	<i class="fas fa-edit " aria-hidden="true"></i>
 	Run Report
@@ -114,22 +116,6 @@ async function websocketSimulationReportInner2(apiRequest) {
 	<i class="fas fa-copy "></i>
 	Duplicate simulation reports
 </button>
-{{/partial}}
-{{#partial "htmForms"}}
-{{> htmFormsSimulationReportPage}}
-{{/partial}}
-{{#partial "htmBodySuggested"}}{{> htmBodySuggestedSimulationReportPage}}{{/partial}}
-{{#partial "htmButton_patchSimulationReport"}}{{> htmButtonSimulationReportPage_patchSimulationReport classApiMethodMethod="PATCH"}}{{/partial}}
-{{#partial "htmForm_patchSimulationReport"}}{{> htmFormSimulationReportPage_patchSimulationReport classApiMethodMethod="PATCH"}}{{/partial}}
-{{#partial "htmFormButton_patchSimulationReport"}}{{> htmFormButtonSimulationReportPage_patchSimulationReport classApiMethodMethod="PATCH"}}{{/partial}}
-{{#partial "htmButton_postSimulationReport"}}{{> htmButtonSimulationReportPage_postSimulationReport classApiMethodMethod="POST"}}{{/partial}}
-{{#partial "htmForm_postSimulationReport"}}{{> htmFormSimulationReportPage_postSimulationReport classApiMethodMethod="POST"}}{{/partial}}
-{{#partial "htmFormButton_postSimulationReport"}}{{> htmFormButtonSimulationReportPage_postSimulationReport classApiMethodMethod="POST"}}{{/partial}}
-{{#partial "htmButton_putimportSimulationReport"}}{{> htmButtonSimulationReportPage_putimportSimulationReport classApiMethodMethod="PUT"}}{{/partial}}
-{{#partial "htmForm_putimportSimulationReport"}}{{> htmFormSimulationReportPage_putimportSimulationReport classApiMethodMethod="PUT"}}{{/partial}}
-{{#partial "htmFormButton_putimportSimulationReport"}}{{> htmFormButtonSimulationReportPage_putimportSimulationReport classApiMethodMethod="PUT"}}{{/partial}}
-{{#partial "htmButton_searchpageSimulationReport"}}{{> htmButtonSimulationReportPage_searchpageSimulationReport classApiMethodMethod="Page"}}{{/partial}}
-{{#partial "htmForm_searchpageSimulationReport"}}{{> htmFormSimulationReportPage_searchpageSimulationReport classApiMethodMethod="Page"}}
 
 							<div class="">
 							<div class="w3-row ">
@@ -147,7 +133,23 @@ async function websocketSimulationReportInner2(apiRequest) {
 								</div>
 							</div>
 							</div>
+
 {{/partial}}
+{{#partial "htmForms"}}
+{{> htmFormsSimulationReportPage}}
+{{/partial}}
+{{#partial "htmBodySuggested"}}{{> htmBodySuggestedSimulationReportPage}}{{/partial}}
+{{#partial "htmButton_patchSimulationReport"}}{{> htmButtonSimulationReportPage_patchSimulationReport classApiMethodMethod="PATCH"}}{{/partial}}
+{{#partial "htmForm_patchSimulationReport"}}{{> htmFormSimulationReportPage_patchSimulationReport classApiMethodMethod="PATCH"}}{{/partial}}
+{{#partial "htmFormButton_patchSimulationReport"}}{{> htmFormButtonSimulationReportPage_patchSimulationReport classApiMethodMethod="PATCH"}}{{/partial}}
+{{#partial "htmButton_postSimulationReport"}}{{> htmButtonSimulationReportPage_postSimulationReport classApiMethodMethod="POST"}}{{/partial}}
+{{#partial "htmForm_postSimulationReport"}}{{> htmFormSimulationReportPage_postSimulationReport classApiMethodMethod="POST"}}{{/partial}}
+{{#partial "htmFormButton_postSimulationReport"}}{{> htmFormButtonSimulationReportPage_postSimulationReport classApiMethodMethod="POST"}}{{/partial}}
+{{#partial "htmButton_putimportSimulationReport"}}{{> htmButtonSimulationReportPage_putimportSimulationReport classApiMethodMethod="PUT"}}{{/partial}}
+{{#partial "htmForm_putimportSimulationReport"}}{{> htmFormSimulationReportPage_putimportSimulationReport classApiMethodMethod="PUT"}}{{/partial}}
+{{#partial "htmFormButton_putimportSimulationReport"}}{{> htmFormButtonSimulationReportPage_putimportSimulationReport classApiMethodMethod="PUT"}}{{/partial}}
+{{#partial "htmButton_searchpageSimulationReport"}}{{> htmButtonSimulationReportPage_searchpageSimulationReport classApiMethodMethod="Page"}}{{/partial}}
+{{#partial "htmForm_searchpageSimulationReport"}}{{> htmFormSimulationReportPage_searchpageSimulationReport classApiMethodMethod="Page"}}{{/partial}}
 {{#partial "htmFormButton_searchpageSimulationReport"}}{{> htmFormButtonSimulationReportPage_searchpageSimulationReport classApiMethodMethod="Page"}}{{/partial}}
 {{/eq}}
 {{> SimulationReportGenPage}}

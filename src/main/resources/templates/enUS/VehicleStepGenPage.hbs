@@ -468,6 +468,15 @@
 							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
 							<div class="w3-cell-row HtmRow">
 {{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmTime" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmTime" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmTime" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
 {{> "htmDateTime" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
 {{#ifContainsAnyRoles roles roleForRead}}
@@ -483,15 +492,6 @@
 {{> "htmStep" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
 {{> "htmStep" roleForWriteBool="false" roleForReadBool="false"}}
-{{/ifContainsAnyRoles}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleForWrite}}
-{{> "htmTime" roleForWriteBool="true" roleForReadBool="true"}}
-{{else}}
-{{#ifContainsAnyRoles roles roleForRead}}
-{{> "htmTime" roleForWriteBool="false" roleForReadBool="true"}}
-{{else}}
-{{> "htmTime" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleForWrite}}
@@ -644,6 +644,15 @@
 							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
 							<div class="w3-cell-row HtmRow">
 {{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmTime" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmTime" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmTime" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
 {{> "htmDateTime" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
 {{#ifContainsAnyRoles roles roleForRead}}
@@ -659,15 +668,6 @@
 {{> "htmStep" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
 {{> "htmStep" roleForWriteBool="false" roleForReadBool="false"}}
-{{/ifContainsAnyRoles}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleForWrite}}
-{{> "htmTime" roleForWriteBool="true" roleForReadBool="true"}}
-{{else}}
-{{#ifContainsAnyRoles roles roleForRead}}
-{{> "htmTime" roleForWriteBool="false" roleForReadBool="true"}}
-{{else}}
-{{> "htmTime" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleForWrite}}
@@ -885,6 +885,15 @@
 							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
 							<div class="w3-cell-row HtmRow">
 {{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmTime" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmTime" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmTime" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
 {{> "htmDateTime" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
 {{#ifContainsAnyRoles roles roleForRead}}
@@ -900,15 +909,6 @@
 {{> "htmStep" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
 {{> "htmStep" roleForWriteBool="false" roleForReadBool="false"}}
-{{/ifContainsAnyRoles}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleForWrite}}
-{{> "htmTime" roleForWriteBool="true" roleForReadBool="true"}}
-{{else}}
-{{#ifContainsAnyRoles roles roleForRead}}
-{{> "htmTime" roleForWriteBool="false" roleForReadBool="true"}}
-{{else}}
-{{> "htmTime" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleForWrite}}
@@ -1274,7 +1274,7 @@
 
 {{#*inline "inputCreated"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varVehicleStep{{id}}Created " title="{{formatZonedDateTime vehicleStep_.created 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime vehicleStep_.created 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+														<span id="{{classApiMethodMethod}}_created" class="varVehicleStep{{id}}Created varVehicleStepCreated " title="{{formatZonedDateTime vehicleStep_.created 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime vehicleStep_.created 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -1300,7 +1300,7 @@
 
 {{#*inline "inputModified"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varVehicleStep{{id}}Modified " title="{{formatZonedDateTime vehicleStep_.modified 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime vehicleStep_.modified 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+														<span id="{{classApiMethodMethod}}_modified" class="varVehicleStep{{id}}Modified varVehicleStepModified " title="{{formatZonedDateTime vehicleStep_.modified 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime vehicleStep_.modified 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -1353,10 +1353,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varVehicleStep{{id}}ObjectId ">{{vehicleStep_.objectId}}</span>
+															<span class="varVehicleStep{{id}}ObjectId varVehicleStepObjectId ">{{vehicleStep_.objectId}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varVehicleStep{{id}}ObjectId ">{{vehicleStep_.objectId}}</span>
+														<span class="varVehicleStep{{id}}ObjectId varVehicleStepObjectId ">{{vehicleStep_.objectId}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1421,10 +1421,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varVehicleStep{{id}}Archived ">{{vehicleStep_.archived}}</span>
+															<span class="varVehicleStep{{id}}Archived varVehicleStepArchived ">{{vehicleStep_.archived}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varVehicleStep{{id}}Archived ">{{vehicleStep_.archived}}</span>
+														<span class="varVehicleStep{{id}}Archived varVehicleStepArchived ">{{vehicleStep_.archived}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1489,10 +1489,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varVehicleStep{{id}}Deleted ">{{vehicleStep_.deleted}}</span>
+															<span class="varVehicleStep{{id}}Deleted varVehicleStepDeleted ">{{vehicleStep_.deleted}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varVehicleStep{{id}}Deleted ">{{vehicleStep_.deleted}}</span>
+														<span class="varVehicleStep{{id}}Deleted varVehicleStepDeleted ">{{vehicleStep_.deleted}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1545,10 +1545,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varVehicleStep{{id}}SimulationName ">{{vehicleStep_.simulationName}}</span>
+															<span class="varVehicleStep{{id}}SimulationName varVehicleStepSimulationName ">{{vehicleStep_.simulationName}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varVehicleStep{{id}}SimulationName ">{{vehicleStep_.simulationName}}</span>
+														<span class="varVehicleStep{{id}}SimulationName varVehicleStepSimulationName ">{{vehicleStep_.simulationName}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1601,10 +1601,66 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varVehicleStep{{id}}SumocfgPath ">{{vehicleStep_.sumocfgPath}}</span>
+															<span class="varVehicleStep{{id}}SumocfgPath varVehicleStepSumocfgPath ">{{vehicleStep_.sumocfgPath}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varVehicleStep{{id}}SumocfgPath ">{{vehicleStep_.sumocfgPath}}</span>
+														<span class="varVehicleStep{{id}}SumocfgPath varVehicleStepSumocfgPath ">{{vehicleStep_.sumocfgPath}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmTime"}}
+<!-- #*inline "htmTime" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}VehicleStepTime">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_time">Time in seconds</label>
+												</div>
+											<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputTime" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputTime"}}
+		{{#eq roleForWriteBool "true"}}
+														<input
+															type="text"
+															placeholder="Time in seconds"
+															title="The time in seconds. "															id="{{classApiMethodMethod}}_time"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setTime classVehicleStep inputVehicleStep{{id}}Time w3-input w3-border "
+																name="setTime"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setTime classVehicleStep inputVehicleStep{{id}}Time w3-input w3-border "
+																name="setTime"
+		{{else}}
+																class="valueTime w3-input w3-border classVehicleStep inputVehicleStep{{id}}Time w3-input w3-border "
+																name="time"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setTime', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_time')); }, function() { addError($('#{{classApiMethodMethod}}_time')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{vehicleStep_.time}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varVehicleStep{{id}}Time varVehicleStepTime ">{{vehicleStep_.time}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varVehicleStep{{id}}Time varVehicleStepTime ">{{vehicleStep_.time}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1645,10 +1701,10 @@
 														/>
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varVehicleStep{{id}}DateTime ">{{vehicleStep_.dateTime}}</span>
+															<span class="varVehicleStep{{id}}DateTime varVehicleStepDateTime ">{{vehicleStep_.dateTime}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varVehicleStep{{id}}DateTime ">{{vehicleStep_.dateTime}}</span>
+														<span class="varVehicleStep{{id}}DateTime varVehicleStepDateTime ">{{vehicleStep_.dateTime}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1713,66 +1769,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varVehicleStep{{id}}Step ">{{vehicleStep_.step}}</span>
+															<span class="varVehicleStep{{id}}Step varVehicleStepStep ">{{vehicleStep_.step}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varVehicleStep{{id}}Step ">{{vehicleStep_.step}}</span>
-		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmTime"}}
-<!-- #*inline "htmTime" -->
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}VehicleStepTime">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_time">Time in seconds</label>
-												</div>
-											<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputTime" roleForWrite=roleForWrite roleForRead=roleForRead}}
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputTime"}}
-		{{#eq roleForWriteBool "true"}}
-														<input
-															type="text"
-															placeholder="Time in seconds"
-															title="The time in seconds. "															id="{{classApiMethodMethod}}_time"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setTime classVehicleStep inputVehicleStep{{id}}Time w3-input w3-border "
-																name="setTime"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setTime classVehicleStep inputVehicleStep{{id}}Time w3-input w3-border "
-																name="setTime"
-		{{else}}
-																class="valueTime w3-input w3-border classVehicleStep inputVehicleStep{{id}}Time w3-input w3-border "
-																name="time"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setTime', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_time')); }, function() { addError($('#{{classApiMethodMethod}}_time')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{vehicleStep_.time}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varVehicleStep{{id}}Time ">{{vehicleStep_.time}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varVehicleStep{{id}}Time ">{{vehicleStep_.time}}</span>
+														<span class="varVehicleStep{{id}}Step varVehicleStepStep ">{{vehicleStep_.step}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1825,10 +1825,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varVehicleStep{{id}}Location ">{{vehicleStep_.location}}</span>
+															<span class="varVehicleStep{{id}}Location varVehicleStepLocation ">{{vehicleStep_.location}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varVehicleStep{{id}}Location ">{{vehicleStep_.location}}</span>
+														<span class="varVehicleStep{{id}}Location varVehicleStepLocation ">{{vehicleStep_.location}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1881,10 +1881,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varVehicleStep{{id}}Color ">{{vehicleStep_.color}}</span>
+															<span class="varVehicleStep{{id}}Color varVehicleStepColor ">{{vehicleStep_.color}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varVehicleStep{{id}}Color ">{{vehicleStep_.color}}</span>
+														<span class="varVehicleStep{{id}}Color varVehicleStepColor ">{{vehicleStep_.color}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1937,10 +1937,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varVehicleStep{{id}}VehicleId ">{{vehicleStep_.vehicleId}}</span>
+															<span class="varVehicleStep{{id}}VehicleId varVehicleStepVehicleId ">{{vehicleStep_.vehicleId}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varVehicleStep{{id}}VehicleId ">{{vehicleStep_.vehicleId}}</span>
+														<span class="varVehicleStep{{id}}VehicleId varVehicleStepVehicleId ">{{vehicleStep_.vehicleId}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1993,10 +1993,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varVehicleStep{{id}}VehicleType ">{{vehicleStep_.vehicleType}}</span>
+															<span class="varVehicleStep{{id}}VehicleType varVehicleStepVehicleType ">{{vehicleStep_.vehicleType}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varVehicleStep{{id}}VehicleType ">{{vehicleStep_.vehicleType}}</span>
+														<span class="varVehicleStep{{id}}VehicleType varVehicleStepVehicleType ">{{vehicleStep_.vehicleType}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -2049,10 +2049,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varVehicleStep{{id}}Angle ">{{vehicleStep_.angle}}</span>
+															<span class="varVehicleStep{{id}}Angle varVehicleStepAngle ">{{vehicleStep_.angle}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varVehicleStep{{id}}Angle ">{{vehicleStep_.angle}}</span>
+														<span class="varVehicleStep{{id}}Angle varVehicleStepAngle ">{{vehicleStep_.angle}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -2105,10 +2105,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varVehicleStep{{id}}Speed ">{{vehicleStep_.speed}}</span>
+															<span class="varVehicleStep{{id}}Speed varVehicleStepSpeed ">{{vehicleStep_.speed}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varVehicleStep{{id}}Speed ">{{vehicleStep_.speed}}</span>
+														<span class="varVehicleStep{{id}}Speed varVehicleStepSpeed ">{{vehicleStep_.speed}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -2161,10 +2161,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varVehicleStep{{id}}Pos ">{{vehicleStep_.pos}}</span>
+															<span class="varVehicleStep{{id}}Pos varVehicleStepPos ">{{vehicleStep_.pos}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varVehicleStep{{id}}Pos ">{{vehicleStep_.pos}}</span>
+														<span class="varVehicleStep{{id}}Pos varVehicleStepPos ">{{vehicleStep_.pos}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -2217,9 +2217,9 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varVehicleStep{{id}}Slope ">{{vehicleStep_.slope}}</span>
+															<span class="varVehicleStep{{id}}Slope varVehicleStepSlope ">{{vehicleStep_.slope}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varVehicleStep{{id}}Slope ">{{vehicleStep_.slope}}</span>
+														<span class="varVehicleStep{{id}}Slope varVehicleStepSlope ">{{vehicleStep_.slope}}</span>
 		{{/eq}}
 {{/inline}}

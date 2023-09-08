@@ -1086,7 +1086,7 @@
 
 {{#*inline "inputModified"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSystemEvent{{id}}Modified " title="{{formatZonedDateTime systemEvent_.modified 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime systemEvent_.modified 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+														<span id="{{classApiMethodMethod}}_modified" class="varSystemEvent{{id}}Modified varSystemEventModified " title="{{formatZonedDateTime systemEvent_.modified 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime systemEvent_.modified 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -1112,7 +1112,7 @@
 
 {{#*inline "inputCreated"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSystemEvent{{id}}Created " title="{{formatZonedDateTime systemEvent_.created 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime systemEvent_.created 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+														<span id="{{classApiMethodMethod}}_created" class="varSystemEvent{{id}}Created varSystemEventCreated " title="{{formatZonedDateTime systemEvent_.created 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime systemEvent_.created 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -1165,10 +1165,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSystemEvent{{id}}ObjectId ">{{systemEvent_.objectId}}</span>
+															<span class="varSystemEvent{{id}}ObjectId varSystemEventObjectId ">{{systemEvent_.objectId}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSystemEvent{{id}}ObjectId ">{{systemEvent_.objectId}}</span>
+														<span class="varSystemEvent{{id}}ObjectId varSystemEventObjectId ">{{systemEvent_.objectId}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1233,10 +1233,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSystemEvent{{id}}Archived ">{{systemEvent_.archived}}</span>
+															<span class="varSystemEvent{{id}}Archived varSystemEventArchived ">{{systemEvent_.archived}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSystemEvent{{id}}Archived ">{{systemEvent_.archived}}</span>
+														<span class="varSystemEvent{{id}}Archived varSystemEventArchived ">{{systemEvent_.archived}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1301,10 +1301,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSystemEvent{{id}}Deleted ">{{systemEvent_.deleted}}</span>
+															<span class="varSystemEvent{{id}}Deleted varSystemEventDeleted ">{{systemEvent_.deleted}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSystemEvent{{id}}Deleted ">{{systemEvent_.deleted}}</span>
+														<span class="varSystemEvent{{id}}Deleted varSystemEventDeleted ">{{systemEvent_.deleted}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1357,10 +1357,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSystemEvent{{id}}Type ">{{systemEvent_.type}}</span>
+															<span class="varSystemEvent{{id}}Type varSystemEventType ">{{systemEvent_.type}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSystemEvent{{id}}Type ">{{systemEvent_.type}}</span>
+														<span class="varSystemEvent{{id}}Type varSystemEventType ">{{systemEvent_.type}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1413,10 +1413,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSystemEvent{{id}}Message ">{{systemEvent_.message}}</span>
+															<span class="varSystemEvent{{id}}Message varSystemEventMessage ">{{systemEvent_.message}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSystemEvent{{id}}Message ">{{systemEvent_.message}}</span>
+														<span class="varSystemEvent{{id}}Message varSystemEventMessage ">{{systemEvent_.message}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1469,10 +1469,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSystemEvent{{id}}Status ">{{systemEvent_.status}}</span>
+															<span class="varSystemEvent{{id}}Status varSystemEventStatus ">{{systemEvent_.status}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSystemEvent{{id}}Status ">{{systemEvent_.status}}</span>
+														<span class="varSystemEvent{{id}}Status varSystemEventStatus ">{{systemEvent_.status}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1513,10 +1513,10 @@
 														/>
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSystemEvent{{id}}Completed ">{{systemEvent_.completed}}</span>
+															<span class="varSystemEvent{{id}}Completed varSystemEventCompleted ">{{systemEvent_.completed}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSystemEvent{{id}}Completed ">{{systemEvent_.completed}}</span>
+														<span class="varSystemEvent{{id}}Completed varSystemEventCompleted ">{{systemEvent_.completed}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1569,9 +1569,9 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSystemEvent{{id}}PageImageUri ">{{systemEvent_.pageImageUri}}</span>
+															<span class="varSystemEvent{{id}}PageImageUri varSystemEventPageImageUri ">{{systemEvent_.pageImageUri}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSystemEvent{{id}}PageImageUri ">{{systemEvent_.pageImageUri}}</span>
+														<span class="varSystemEvent{{id}}PageImageUri varSystemEventPageImageUri ">{{systemEvent_.pageImageUri}}</span>
 		{{/eq}}
 {{/inline}}

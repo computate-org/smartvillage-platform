@@ -446,6 +446,15 @@
 							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
 							<div class="w3-cell-row HtmRow">
 {{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmTime" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmTime" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmTime" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
 {{> "htmDateTime" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
 {{#ifContainsAnyRoles roles roleForRead}}
@@ -461,15 +470,6 @@
 {{> "htmStep" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
 {{> "htmStep" roleForWriteBool="false" roleForReadBool="false"}}
-{{/ifContainsAnyRoles}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleForWrite}}
-{{> "htmTime" roleForWriteBool="true" roleForReadBool="true"}}
-{{else}}
-{{#ifContainsAnyRoles roles roleForRead}}
-{{> "htmTime" roleForWriteBool="false" roleForReadBool="true"}}
-{{else}}
-{{> "htmTime" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleForWrite}}
@@ -551,6 +551,15 @@
 							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
 							<div class="w3-cell-row HtmRow">
 {{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmTime" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmTime" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmTime" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
 {{> "htmDateTime" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
 {{#ifContainsAnyRoles roles roleForRead}}
@@ -566,15 +575,6 @@
 {{> "htmStep" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
 {{> "htmStep" roleForWriteBool="false" roleForReadBool="false"}}
-{{/ifContainsAnyRoles}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleForWrite}}
-{{> "htmTime" roleForWriteBool="true" roleForReadBool="true"}}
-{{else}}
-{{#ifContainsAnyRoles roles roleForRead}}
-{{> "htmTime" roleForWriteBool="false" roleForReadBool="true"}}
-{{else}}
-{{> "htmTime" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleForWrite}}
@@ -721,6 +721,15 @@
 							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
 							<div class="w3-cell-row HtmRow">
 {{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmTime" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmTime" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmTime" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
 {{> "htmDateTime" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
 {{#ifContainsAnyRoles roles roleForRead}}
@@ -736,15 +745,6 @@
 {{> "htmStep" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
 {{> "htmStep" roleForWriteBool="false" roleForReadBool="false"}}
-{{/ifContainsAnyRoles}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleForWrite}}
-{{> "htmTime" roleForWriteBool="true" roleForReadBool="true"}}
-{{else}}
-{{#ifContainsAnyRoles roles roleForRead}}
-{{> "htmTime" roleForWriteBool="false" roleForReadBool="true"}}
-{{else}}
-{{> "htmTime" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleForWrite}}
@@ -1061,7 +1061,7 @@
 
 {{#*inline "inputCreated"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varBicycleStep{{id}}Created " title="{{formatZonedDateTime bicycleStep_.created 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime bicycleStep_.created 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+														<span id="{{classApiMethodMethod}}_created" class="varBicycleStep{{id}}Created varBicycleStepCreated " title="{{formatZonedDateTime bicycleStep_.created 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime bicycleStep_.created 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -1087,7 +1087,7 @@
 
 {{#*inline "inputModified"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varBicycleStep{{id}}Modified " title="{{formatZonedDateTime bicycleStep_.modified 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime bicycleStep_.modified 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+														<span id="{{classApiMethodMethod}}_modified" class="varBicycleStep{{id}}Modified varBicycleStepModified " title="{{formatZonedDateTime bicycleStep_.modified 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime bicycleStep_.modified 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -1140,10 +1140,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varBicycleStep{{id}}ObjectId ">{{bicycleStep_.objectId}}</span>
+															<span class="varBicycleStep{{id}}ObjectId varBicycleStepObjectId ">{{bicycleStep_.objectId}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varBicycleStep{{id}}ObjectId ">{{bicycleStep_.objectId}}</span>
+														<span class="varBicycleStep{{id}}ObjectId varBicycleStepObjectId ">{{bicycleStep_.objectId}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1208,10 +1208,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varBicycleStep{{id}}Archived ">{{bicycleStep_.archived}}</span>
+															<span class="varBicycleStep{{id}}Archived varBicycleStepArchived ">{{bicycleStep_.archived}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varBicycleStep{{id}}Archived ">{{bicycleStep_.archived}}</span>
+														<span class="varBicycleStep{{id}}Archived varBicycleStepArchived ">{{bicycleStep_.archived}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1276,10 +1276,66 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varBicycleStep{{id}}Deleted ">{{bicycleStep_.deleted}}</span>
+															<span class="varBicycleStep{{id}}Deleted varBicycleStepDeleted ">{{bicycleStep_.deleted}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varBicycleStep{{id}}Deleted ">{{bicycleStep_.deleted}}</span>
+														<span class="varBicycleStep{{id}}Deleted varBicycleStepDeleted ">{{bicycleStep_.deleted}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmTime"}}
+<!-- #*inline "htmTime" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}BicycleStepTime">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_time">Time in seconds</label>
+												</div>
+											<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputTime" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputTime"}}
+		{{#eq roleForWriteBool "true"}}
+														<input
+															type="text"
+															placeholder="Time in seconds"
+															title="The time in seconds. "															id="{{classApiMethodMethod}}_time"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setTime classBicycleStep inputBicycleStep{{id}}Time w3-input w3-border "
+																name="setTime"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setTime classBicycleStep inputBicycleStep{{id}}Time w3-input w3-border "
+																name="setTime"
+		{{else}}
+																class="valueTime w3-input w3-border classBicycleStep inputBicycleStep{{id}}Time w3-input w3-border "
+																name="time"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setTime', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_time')); }, function() { addError($('#{{classApiMethodMethod}}_time')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{bicycleStep_.time}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varBicycleStep{{id}}Time varBicycleStepTime ">{{bicycleStep_.time}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varBicycleStep{{id}}Time varBicycleStepTime ">{{bicycleStep_.time}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1320,10 +1376,10 @@
 														/>
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varBicycleStep{{id}}DateTime ">{{bicycleStep_.dateTime}}</span>
+															<span class="varBicycleStep{{id}}DateTime varBicycleStepDateTime ">{{bicycleStep_.dateTime}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varBicycleStep{{id}}DateTime ">{{bicycleStep_.dateTime}}</span>
+														<span class="varBicycleStep{{id}}DateTime varBicycleStepDateTime ">{{bicycleStep_.dateTime}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1388,66 +1444,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varBicycleStep{{id}}Step ">{{bicycleStep_.step}}</span>
+															<span class="varBicycleStep{{id}}Step varBicycleStepStep ">{{bicycleStep_.step}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varBicycleStep{{id}}Step ">{{bicycleStep_.step}}</span>
-		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmTime"}}
-<!-- #*inline "htmTime" -->
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}BicycleStepTime">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_time">Time in seconds</label>
-												</div>
-											<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputTime" roleForWrite=roleForWrite roleForRead=roleForRead}}
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputTime"}}
-		{{#eq roleForWriteBool "true"}}
-														<input
-															type="text"
-															placeholder="Time in seconds"
-															title="The time in seconds. "															id="{{classApiMethodMethod}}_time"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setTime classBicycleStep inputBicycleStep{{id}}Time w3-input w3-border "
-																name="setTime"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setTime classBicycleStep inputBicycleStep{{id}}Time w3-input w3-border "
-																name="setTime"
-		{{else}}
-																class="valueTime w3-input w3-border classBicycleStep inputBicycleStep{{id}}Time w3-input w3-border "
-																name="time"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setTime', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_time')); }, function() { addError($('#{{classApiMethodMethod}}_time')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{bicycleStep_.time}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varBicycleStep{{id}}Time ">{{bicycleStep_.time}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varBicycleStep{{id}}Time ">{{bicycleStep_.time}}</span>
+														<span class="varBicycleStep{{id}}Step varBicycleStepStep ">{{bicycleStep_.step}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1500,10 +1500,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varBicycleStep{{id}}Location ">{{bicycleStep_.location}}</span>
+															<span class="varBicycleStep{{id}}Location varBicycleStepLocation ">{{bicycleStep_.location}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varBicycleStep{{id}}Location ">{{bicycleStep_.location}}</span>
+														<span class="varBicycleStep{{id}}Location varBicycleStepLocation ">{{bicycleStep_.location}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1556,10 +1556,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varBicycleStep{{id}}Color ">{{bicycleStep_.color}}</span>
+															<span class="varBicycleStep{{id}}Color varBicycleStepColor ">{{bicycleStep_.color}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varBicycleStep{{id}}Color ">{{bicycleStep_.color}}</span>
+														<span class="varBicycleStep{{id}}Color varBicycleStepColor ">{{bicycleStep_.color}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1612,9 +1612,9 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varBicycleStep{{id}}BicycleId ">{{bicycleStep_.bicycleId}}</span>
+															<span class="varBicycleStep{{id}}BicycleId varBicycleStepBicycleId ">{{bicycleStep_.bicycleId}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varBicycleStep{{id}}BicycleId ">{{bicycleStep_.bicycleId}}</span>
+														<span class="varBicycleStep{{id}}BicycleId varBicycleStepBicycleId ">{{bicycleStep_.bicycleId}}</span>
 		{{/eq}}
 {{/inline}}

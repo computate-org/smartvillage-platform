@@ -2418,7 +2418,7 @@
 
 {{#*inline "inputCreated"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSimulationReport{{pk}}Created " title="{{formatZonedDateTime simulationReport_.created 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime simulationReport_.created 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+														<span id="{{classApiMethodMethod}}_created" class="varSimulationReport{{pk}}Created varSimulationReportCreated " title="{{formatZonedDateTime simulationReport_.created 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime simulationReport_.created 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -2444,7 +2444,7 @@
 
 {{#*inline "inputModified"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSimulationReport{{pk}}Modified " title="{{formatZonedDateTime simulationReport_.modified 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime simulationReport_.modified 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+														<span id="{{classApiMethodMethod}}_modified" class="varSimulationReport{{pk}}Modified varSimulationReportModified " title="{{formatZonedDateTime simulationReport_.modified 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime simulationReport_.modified 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -2470,7 +2470,7 @@
 
 {{#*inline "inputObjectId"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSimulationReport{{pk}}ObjectId ">{{simulationReport_.objectId}}</span>
+														<span id="{{classApiMethodMethod}}_objectId" class="varSimulationReport{{pk}}ObjectId varSimulationReportObjectId ">{{simulationReport_.objectId}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -2535,10 +2535,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSimulationReport{{pk}}Archived ">{{simulationReport_.archived}}</span>
+															<span class="varSimulationReport{{pk}}Archived varSimulationReportArchived ">{{simulationReport_.archived}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSimulationReport{{pk}}Archived ">{{simulationReport_.archived}}</span>
+														<span class="varSimulationReport{{pk}}Archived varSimulationReportArchived ">{{simulationReport_.archived}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -2603,10 +2603,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSimulationReport{{pk}}Deleted ">{{simulationReport_.deleted}}</span>
+															<span class="varSimulationReport{{pk}}Deleted varSimulationReportDeleted ">{{simulationReport_.deleted}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSimulationReport{{pk}}Deleted ">{{simulationReport_.deleted}}</span>
+														<span class="varSimulationReport{{pk}}Deleted varSimulationReportDeleted ">{{simulationReport_.deleted}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -2659,10 +2659,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSimulationReport{{pk}}ReportName ">{{simulationReport_.reportName}}</span>
+															<span class="varSimulationReport{{pk}}ReportName varSimulationReportReportName ">{{simulationReport_.reportName}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSimulationReport{{pk}}ReportName ">{{simulationReport_.reportName}}</span>
+														<span class="varSimulationReport{{pk}}ReportName varSimulationReportReportName ">{{simulationReport_.reportName}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -2715,10 +2715,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSimulationReport{{pk}}Location ">{{simulationReport_.location}}</span>
+															<span class="varSimulationReport{{pk}}Location varSimulationReportLocation ">{{simulationReport_.location}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSimulationReport{{pk}}Location ">{{simulationReport_.location}}</span>
+														<span class="varSimulationReport{{pk}}Location varSimulationReportLocation ">{{simulationReport_.location}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -2795,7 +2795,7 @@
 
 													{{else}}
 		{{else}}
-														<span class="varSimulationReport{{pk}}SimulationKey ">{{simulationReport_.simulationKey}}</span>
+														<span class="varSimulationReport{{pk}}SimulationKey varSimulationReportSimulationKey ">{{simulationReport_.simulationKey}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -2872,7 +2872,7 @@
 
 													{{else}}
 		{{else}}
-														<span class="varSimulationReport{{pk}}SmartTrafficLightKey ">{{simulationReport_.smartTrafficLightKey}}</span>
+														<span class="varSimulationReport{{pk}}SmartTrafficLightKey varSimulationReportSmartTrafficLightKey ">{{simulationReport_.smartTrafficLightKey}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -2918,10 +2918,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSimulationReport{{pk}}ParamAvgVehiclePerMinFromWestToEast ">{{simulationReport_.paramAvgVehiclePerMinFromWestToEast}}</span>
+															<span class="varSimulationReport{{pk}}ParamAvgVehiclePerMinFromWestToEast varSimulationReportParamAvgVehiclePerMinFromWestToEast ">{{simulationReport_.paramAvgVehiclePerMinFromWestToEast}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSimulationReport{{pk}}ParamAvgVehiclePerMinFromWestToEast ">{{simulationReport_.paramAvgVehiclePerMinFromWestToEast}}</span>
+														<span class="varSimulationReport{{pk}}ParamAvgVehiclePerMinFromWestToEast varSimulationReportParamAvgVehiclePerMinFromWestToEast ">{{simulationReport_.paramAvgVehiclePerMinFromWestToEast}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -2967,10 +2967,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSimulationReport{{pk}}ParamAvgVehiclePerMinFromSouthToNorth ">{{simulationReport_.paramAvgVehiclePerMinFromSouthToNorth}}</span>
+															<span class="varSimulationReport{{pk}}ParamAvgVehiclePerMinFromSouthToNorth varSimulationReportParamAvgVehiclePerMinFromSouthToNorth ">{{simulationReport_.paramAvgVehiclePerMinFromSouthToNorth}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSimulationReport{{pk}}ParamAvgVehiclePerMinFromSouthToNorth ">{{simulationReport_.paramAvgVehiclePerMinFromSouthToNorth}}</span>
+														<span class="varSimulationReport{{pk}}ParamAvgVehiclePerMinFromSouthToNorth varSimulationReportParamAvgVehiclePerMinFromSouthToNorth ">{{simulationReport_.paramAvgVehiclePerMinFromSouthToNorth}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -3016,10 +3016,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSimulationReport{{pk}}ParamVehicleDemandScalingFactor ">{{simulationReport_.paramVehicleDemandScalingFactor}}</span>
+															<span class="varSimulationReport{{pk}}ParamVehicleDemandScalingFactor varSimulationReportParamVehicleDemandScalingFactor ">{{simulationReport_.paramVehicleDemandScalingFactor}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSimulationReport{{pk}}ParamVehicleDemandScalingFactor ">{{simulationReport_.paramVehicleDemandScalingFactor}}</span>
+														<span class="varSimulationReport{{pk}}ParamVehicleDemandScalingFactor varSimulationReportParamVehicleDemandScalingFactor ">{{simulationReport_.paramVehicleDemandScalingFactor}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -3065,10 +3065,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSimulationReport{{pk}}ParamAvgPedestrianPerMinFromWestToEast ">{{simulationReport_.paramAvgPedestrianPerMinFromWestToEast}}</span>
+															<span class="varSimulationReport{{pk}}ParamAvgPedestrianPerMinFromWestToEast varSimulationReportParamAvgPedestrianPerMinFromWestToEast ">{{simulationReport_.paramAvgPedestrianPerMinFromWestToEast}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSimulationReport{{pk}}ParamAvgPedestrianPerMinFromWestToEast ">{{simulationReport_.paramAvgPedestrianPerMinFromWestToEast}}</span>
+														<span class="varSimulationReport{{pk}}ParamAvgPedestrianPerMinFromWestToEast varSimulationReportParamAvgPedestrianPerMinFromWestToEast ">{{simulationReport_.paramAvgPedestrianPerMinFromWestToEast}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -3114,10 +3114,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSimulationReport{{pk}}ParamAvgPedestrianPerMinFromSouthToNorth ">{{simulationReport_.paramAvgPedestrianPerMinFromSouthToNorth}}</span>
+															<span class="varSimulationReport{{pk}}ParamAvgPedestrianPerMinFromSouthToNorth varSimulationReportParamAvgPedestrianPerMinFromSouthToNorth ">{{simulationReport_.paramAvgPedestrianPerMinFromSouthToNorth}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSimulationReport{{pk}}ParamAvgPedestrianPerMinFromSouthToNorth ">{{simulationReport_.paramAvgPedestrianPerMinFromSouthToNorth}}</span>
+														<span class="varSimulationReport{{pk}}ParamAvgPedestrianPerMinFromSouthToNorth varSimulationReportParamAvgPedestrianPerMinFromSouthToNorth ">{{simulationReport_.paramAvgPedestrianPerMinFromSouthToNorth}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -3163,10 +3163,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSimulationReport{{pk}}ParamPedestrianDemandScalingFactor ">{{simulationReport_.paramPedestrianDemandScalingFactor}}</span>
+															<span class="varSimulationReport{{pk}}ParamPedestrianDemandScalingFactor varSimulationReportParamPedestrianDemandScalingFactor ">{{simulationReport_.paramPedestrianDemandScalingFactor}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSimulationReport{{pk}}ParamPedestrianDemandScalingFactor ">{{simulationReport_.paramPedestrianDemandScalingFactor}}</span>
+														<span class="varSimulationReport{{pk}}ParamPedestrianDemandScalingFactor varSimulationReportParamPedestrianDemandScalingFactor ">{{simulationReport_.paramPedestrianDemandScalingFactor}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -3212,10 +3212,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSimulationReport{{pk}}ParamMinGreenTimeSecWestEast ">{{simulationReport_.paramMinGreenTimeSecWestEast}}</span>
+															<span class="varSimulationReport{{pk}}ParamMinGreenTimeSecWestEast varSimulationReportParamMinGreenTimeSecWestEast ">{{simulationReport_.paramMinGreenTimeSecWestEast}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSimulationReport{{pk}}ParamMinGreenTimeSecWestEast ">{{simulationReport_.paramMinGreenTimeSecWestEast}}</span>
+														<span class="varSimulationReport{{pk}}ParamMinGreenTimeSecWestEast varSimulationReportParamMinGreenTimeSecWestEast ">{{simulationReport_.paramMinGreenTimeSecWestEast}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -3261,10 +3261,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSimulationReport{{pk}}ParamMaxGreenTimeSecWestEast ">{{simulationReport_.paramMaxGreenTimeSecWestEast}}</span>
+															<span class="varSimulationReport{{pk}}ParamMaxGreenTimeSecWestEast varSimulationReportParamMaxGreenTimeSecWestEast ">{{simulationReport_.paramMaxGreenTimeSecWestEast}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSimulationReport{{pk}}ParamMaxGreenTimeSecWestEast ">{{simulationReport_.paramMaxGreenTimeSecWestEast}}</span>
+														<span class="varSimulationReport{{pk}}ParamMaxGreenTimeSecWestEast varSimulationReportParamMaxGreenTimeSecWestEast ">{{simulationReport_.paramMaxGreenTimeSecWestEast}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -3310,10 +3310,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSimulationReport{{pk}}ParamMinGreenTimeSecSouthNorth ">{{simulationReport_.paramMinGreenTimeSecSouthNorth}}</span>
+															<span class="varSimulationReport{{pk}}ParamMinGreenTimeSecSouthNorth varSimulationReportParamMinGreenTimeSecSouthNorth ">{{simulationReport_.paramMinGreenTimeSecSouthNorth}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSimulationReport{{pk}}ParamMinGreenTimeSecSouthNorth ">{{simulationReport_.paramMinGreenTimeSecSouthNorth}}</span>
+														<span class="varSimulationReport{{pk}}ParamMinGreenTimeSecSouthNorth varSimulationReportParamMinGreenTimeSecSouthNorth ">{{simulationReport_.paramMinGreenTimeSecSouthNorth}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -3359,10 +3359,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSimulationReport{{pk}}ParamMaxGreenTimeSecSouthNorth ">{{simulationReport_.paramMaxGreenTimeSecSouthNorth}}</span>
+															<span class="varSimulationReport{{pk}}ParamMaxGreenTimeSecSouthNorth varSimulationReportParamMaxGreenTimeSecSouthNorth ">{{simulationReport_.paramMaxGreenTimeSecSouthNorth}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSimulationReport{{pk}}ParamMaxGreenTimeSecSouthNorth ">{{simulationReport_.paramMaxGreenTimeSecSouthNorth}}</span>
+														<span class="varSimulationReport{{pk}}ParamMaxGreenTimeSecSouthNorth varSimulationReportParamMaxGreenTimeSecSouthNorth ">{{simulationReport_.paramMaxGreenTimeSecSouthNorth}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -3408,10 +3408,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSimulationReport{{pk}}ParamPedestrianWaitThresholdSecNorthSouth ">{{simulationReport_.paramPedestrianWaitThresholdSecNorthSouth}}</span>
+															<span class="varSimulationReport{{pk}}ParamPedestrianWaitThresholdSecNorthSouth varSimulationReportParamPedestrianWaitThresholdSecNorthSouth ">{{simulationReport_.paramPedestrianWaitThresholdSecNorthSouth}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSimulationReport{{pk}}ParamPedestrianWaitThresholdSecNorthSouth ">{{simulationReport_.paramPedestrianWaitThresholdSecNorthSouth}}</span>
+														<span class="varSimulationReport{{pk}}ParamPedestrianWaitThresholdSecNorthSouth varSimulationReportParamPedestrianWaitThresholdSecNorthSouth ">{{simulationReport_.paramPedestrianWaitThresholdSecNorthSouth}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -3457,10 +3457,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSimulationReport{{pk}}ParamPedestrianWaitThresholdSecWestEast ">{{simulationReport_.paramPedestrianWaitThresholdSecWestEast}}</span>
+															<span class="varSimulationReport{{pk}}ParamPedestrianWaitThresholdSecWestEast varSimulationReportParamPedestrianWaitThresholdSecWestEast ">{{simulationReport_.paramPedestrianWaitThresholdSecWestEast}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSimulationReport{{pk}}ParamPedestrianWaitThresholdSecWestEast ">{{simulationReport_.paramPedestrianWaitThresholdSecWestEast}}</span>
+														<span class="varSimulationReport{{pk}}ParamPedestrianWaitThresholdSecWestEast varSimulationReportParamPedestrianWaitThresholdSecWestEast ">{{simulationReport_.paramPedestrianWaitThresholdSecWestEast}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -3506,10 +3506,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSimulationReport{{pk}}ParamVehicleQueueThresholdWestEast ">{{simulationReport_.paramVehicleQueueThresholdWestEast}}</span>
+															<span class="varSimulationReport{{pk}}ParamVehicleQueueThresholdWestEast varSimulationReportParamVehicleQueueThresholdWestEast ">{{simulationReport_.paramVehicleQueueThresholdWestEast}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSimulationReport{{pk}}ParamVehicleQueueThresholdWestEast ">{{simulationReport_.paramVehicleQueueThresholdWestEast}}</span>
+														<span class="varSimulationReport{{pk}}ParamVehicleQueueThresholdWestEast varSimulationReportParamVehicleQueueThresholdWestEast ">{{simulationReport_.paramVehicleQueueThresholdWestEast}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -3555,10 +3555,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSimulationReport{{pk}}ParamVehicleQueueThresholdSouthNorth ">{{simulationReport_.paramVehicleQueueThresholdSouthNorth}}</span>
+															<span class="varSimulationReport{{pk}}ParamVehicleQueueThresholdSouthNorth varSimulationReportParamVehicleQueueThresholdSouthNorth ">{{simulationReport_.paramVehicleQueueThresholdSouthNorth}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSimulationReport{{pk}}ParamVehicleQueueThresholdSouthNorth ">{{simulationReport_.paramVehicleQueueThresholdSouthNorth}}</span>
+														<span class="varSimulationReport{{pk}}ParamVehicleQueueThresholdSouthNorth varSimulationReportParamVehicleQueueThresholdSouthNorth ">{{simulationReport_.paramVehicleQueueThresholdSouthNorth}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -3604,10 +3604,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSimulationReport{{pk}}ParamPedestrianQueueThresholdNorthSouth ">{{simulationReport_.paramPedestrianQueueThresholdNorthSouth}}</span>
+															<span class="varSimulationReport{{pk}}ParamPedestrianQueueThresholdNorthSouth varSimulationReportParamPedestrianQueueThresholdNorthSouth ">{{simulationReport_.paramPedestrianQueueThresholdNorthSouth}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSimulationReport{{pk}}ParamPedestrianQueueThresholdNorthSouth ">{{simulationReport_.paramPedestrianQueueThresholdNorthSouth}}</span>
+														<span class="varSimulationReport{{pk}}ParamPedestrianQueueThresholdNorthSouth varSimulationReportParamPedestrianQueueThresholdNorthSouth ">{{simulationReport_.paramPedestrianQueueThresholdNorthSouth}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -3653,10 +3653,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSimulationReport{{pk}}ParamPedestrianQueueThresholdWestEast ">{{simulationReport_.paramPedestrianQueueThresholdWestEast}}</span>
+															<span class="varSimulationReport{{pk}}ParamPedestrianQueueThresholdWestEast varSimulationReportParamPedestrianQueueThresholdWestEast ">{{simulationReport_.paramPedestrianQueueThresholdWestEast}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSimulationReport{{pk}}ParamPedestrianQueueThresholdWestEast ">{{simulationReport_.paramPedestrianQueueThresholdWestEast}}</span>
+														<span class="varSimulationReport{{pk}}ParamPedestrianQueueThresholdWestEast varSimulationReportParamPedestrianQueueThresholdWestEast ">{{simulationReport_.paramPedestrianQueueThresholdWestEast}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -3702,10 +3702,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSimulationReport{{pk}}ParamStepSize ">{{simulationReport_.paramStepSize}}</span>
+															<span class="varSimulationReport{{pk}}ParamStepSize varSimulationReportParamStepSize ">{{simulationReport_.paramStepSize}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSimulationReport{{pk}}ParamStepSize ">{{simulationReport_.paramStepSize}}</span>
+														<span class="varSimulationReport{{pk}}ParamStepSize varSimulationReportParamStepSize ">{{simulationReport_.paramStepSize}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -3751,10 +3751,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSimulationReport{{pk}}ParamRunTime ">{{simulationReport_.paramRunTime}}</span>
+															<span class="varSimulationReport{{pk}}ParamRunTime varSimulationReportParamRunTime ">{{simulationReport_.paramRunTime}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSimulationReport{{pk}}ParamRunTime ">{{simulationReport_.paramRunTime}}</span>
+														<span class="varSimulationReport{{pk}}ParamRunTime varSimulationReportParamRunTime ">{{simulationReport_.paramRunTime}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -3800,10 +3800,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSimulationReport{{pk}}ParamItersPerPar ">{{simulationReport_.paramItersPerPar}}</span>
+															<span class="varSimulationReport{{pk}}ParamItersPerPar varSimulationReportParamItersPerPar ">{{simulationReport_.paramItersPerPar}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSimulationReport{{pk}}ParamItersPerPar ">{{simulationReport_.paramItersPerPar}}</span>
+														<span class="varSimulationReport{{pk}}ParamItersPerPar varSimulationReportParamItersPerPar ">{{simulationReport_.paramItersPerPar}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -3849,10 +3849,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSimulationReport{{pk}}ParamTotalIterNum ">{{simulationReport_.paramTotalIterNum}}</span>
+															<span class="varSimulationReport{{pk}}ParamTotalIterNum varSimulationReportParamTotalIterNum ">{{simulationReport_.paramTotalIterNum}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSimulationReport{{pk}}ParamTotalIterNum ">{{simulationReport_.paramTotalIterNum}}</span>
+														<span class="varSimulationReport{{pk}}ParamTotalIterNum varSimulationReportParamTotalIterNum ">{{simulationReport_.paramTotalIterNum}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -3868,7 +3868,7 @@
 
 {{#*inline "inputUpdatedParameters1"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSimulationReport{{pk}}UpdatedParameters1 ">{{simulationReport_.updatedParameters1}}</span>
+														<span id="{{classApiMethodMethod}}_updatedParameters1" class="varSimulationReport{{pk}}UpdatedParameters1 varSimulationReportUpdatedParameters1 ">{{simulationReport_.updatedParameters1}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -3884,7 +3884,7 @@
 
 {{#*inline "inputUpdatedParameters2"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSimulationReport{{pk}}UpdatedParameters2 ">{{simulationReport_.updatedParameters2}}</span>
+														<span id="{{classApiMethodMethod}}_updatedParameters2" class="varSimulationReport{{pk}}UpdatedParameters2 varSimulationReportUpdatedParameters2 ">{{simulationReport_.updatedParameters2}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -3900,7 +3900,7 @@
 
 {{#*inline "inputUpdatedParameters3"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSimulationReport{{pk}}UpdatedParameters3 ">{{simulationReport_.updatedParameters3}}</span>
+														<span id="{{classApiMethodMethod}}_updatedParameters3" class="varSimulationReport{{pk}}UpdatedParameters3 varSimulationReportUpdatedParameters3 ">{{simulationReport_.updatedParameters3}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -3916,7 +3916,7 @@
 
 {{#*inline "inputUpdatedParameters4"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSimulationReport{{pk}}UpdatedParameters4 ">{{simulationReport_.updatedParameters4}}</span>
+														<span id="{{classApiMethodMethod}}_updatedParameters4" class="varSimulationReport{{pk}}UpdatedParameters4 varSimulationReportUpdatedParameters4 ">{{simulationReport_.updatedParameters4}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -3932,7 +3932,7 @@
 
 {{#*inline "inputUpdatedParameters5"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSimulationReport{{pk}}UpdatedParameters5 ">{{simulationReport_.updatedParameters5}}</span>
+														<span id="{{classApiMethodMethod}}_updatedParameters5" class="varSimulationReport{{pk}}UpdatedParameters5 varSimulationReportUpdatedParameters5 ">{{simulationReport_.updatedParameters5}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -3948,7 +3948,7 @@
 
 {{#*inline "inputUpdatedParameters6"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSimulationReport{{pk}}UpdatedParameters6 ">{{simulationReport_.updatedParameters6}}</span>
+														<span id="{{classApiMethodMethod}}_updatedParameters6" class="varSimulationReport{{pk}}UpdatedParameters6 varSimulationReportUpdatedParameters6 ">{{simulationReport_.updatedParameters6}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -3964,7 +3964,7 @@
 
 {{#*inline "inputUpdatedParameters7"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSimulationReport{{pk}}UpdatedParameters7 ">{{simulationReport_.updatedParameters7}}</span>
+														<span id="{{classApiMethodMethod}}_updatedParameters7" class="varSimulationReport{{pk}}UpdatedParameters7 varSimulationReportUpdatedParameters7 ">{{simulationReport_.updatedParameters7}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -3980,7 +3980,7 @@
 
 {{#*inline "inputUpdatedParameters8"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSimulationReport{{pk}}UpdatedParameters8 ">{{simulationReport_.updatedParameters8}}</span>
+														<span id="{{classApiMethodMethod}}_updatedParameters8" class="varSimulationReport{{pk}}UpdatedParameters8 varSimulationReportUpdatedParameters8 ">{{simulationReport_.updatedParameters8}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -3996,7 +3996,7 @@
 
 {{#*inline "inputUpdatedParameters9"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSimulationReport{{pk}}UpdatedParameters9 ">{{simulationReport_.updatedParameters9}}</span>
+														<span id="{{classApiMethodMethod}}_updatedParameters9" class="varSimulationReport{{pk}}UpdatedParameters9 varSimulationReportUpdatedParameters9 ">{{simulationReport_.updatedParameters9}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -4012,7 +4012,7 @@
 
 {{#*inline "inputUpdatedParameters10"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSimulationReport{{pk}}UpdatedParameters10 ">{{simulationReport_.updatedParameters10}}</span>
+														<span id="{{classApiMethodMethod}}_updatedParameters10" class="varSimulationReport{{pk}}UpdatedParameters10 varSimulationReportUpdatedParameters10 ">{{simulationReport_.updatedParameters10}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -4028,7 +4028,7 @@
 
 {{#*inline "inputUpdatedPerformanceWaitWestEastVehicleSec"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSimulationReport{{pk}}UpdatedPerformanceWaitWestEastVehicleSec ">{{simulationReport_.updatedPerformanceWaitWestEastVehicleSec}}</span>
+														<span id="{{classApiMethodMethod}}_updatedPerformanceWaitWestEastVehicleSec" class="varSimulationReport{{pk}}UpdatedPerformanceWaitWestEastVehicleSec varSimulationReportUpdatedPerformanceWaitWestEastVehicleSec ">{{simulationReport_.updatedPerformanceWaitWestEastVehicleSec}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -4044,7 +4044,7 @@
 
 {{#*inline "inputUpdatedPerformanceWaitSouthNorthVehicleSec"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSimulationReport{{pk}}UpdatedPerformanceWaitSouthNorthVehicleSec ">{{simulationReport_.updatedPerformanceWaitSouthNorthVehicleSec}}</span>
+														<span id="{{classApiMethodMethod}}_updatedPerformanceWaitSouthNorthVehicleSec" class="varSimulationReport{{pk}}UpdatedPerformanceWaitSouthNorthVehicleSec varSimulationReportUpdatedPerformanceWaitSouthNorthVehicleSec ">{{simulationReport_.updatedPerformanceWaitSouthNorthVehicleSec}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -4060,7 +4060,7 @@
 
 {{#*inline "inputUpdatedPerformanceWaitAllVehicleSec"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSimulationReport{{pk}}UpdatedPerformanceWaitAllVehicleSec ">{{simulationReport_.updatedPerformanceWaitAllVehicleSec}}</span>
+														<span id="{{classApiMethodMethod}}_updatedPerformanceWaitAllVehicleSec" class="varSimulationReport{{pk}}UpdatedPerformanceWaitAllVehicleSec varSimulationReportUpdatedPerformanceWaitAllVehicleSec ">{{simulationReport_.updatedPerformanceWaitAllVehicleSec}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -4076,7 +4076,7 @@
 
 {{#*inline "inputUpdatedPerformanceWaitAllPedestrianSec"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSimulationReport{{pk}}UpdatedPerformanceWaitAllPedestrianSec ">{{simulationReport_.updatedPerformanceWaitAllPedestrianSec}}</span>
+														<span id="{{classApiMethodMethod}}_updatedPerformanceWaitAllPedestrianSec" class="varSimulationReport{{pk}}UpdatedPerformanceWaitAllPedestrianSec varSimulationReportUpdatedPerformanceWaitAllPedestrianSec ">{{simulationReport_.updatedPerformanceWaitAllPedestrianSec}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -4092,7 +4092,7 @@
 
 {{#*inline "inputUpdatedPerformanceWaitAllVehiclePedestrianSec"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSimulationReport{{pk}}UpdatedPerformanceWaitAllVehiclePedestrianSec ">{{simulationReport_.updatedPerformanceWaitAllVehiclePedestrianSec}}</span>
+														<span id="{{classApiMethodMethod}}_updatedPerformanceWaitAllVehiclePedestrianSec" class="varSimulationReport{{pk}}UpdatedPerformanceWaitAllVehiclePedestrianSec varSimulationReportUpdatedPerformanceWaitAllVehiclePedestrianSec ">{{simulationReport_.updatedPerformanceWaitAllVehiclePedestrianSec}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -4108,7 +4108,7 @@
 
 {{#*inline "inputAvgQueueLengthWestEastVehicle"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSimulationReport{{pk}}AvgQueueLengthWestEastVehicle ">{{simulationReport_.avgQueueLengthWestEastVehicle}}</span>
+														<span id="{{classApiMethodMethod}}_avgQueueLengthWestEastVehicle" class="varSimulationReport{{pk}}AvgQueueLengthWestEastVehicle varSimulationReportAvgQueueLengthWestEastVehicle ">{{simulationReport_.avgQueueLengthWestEastVehicle}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -4124,7 +4124,7 @@
 
 {{#*inline "inputAvgQueueLengthSouthNorthVehicle"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSimulationReport{{pk}}AvgQueueLengthSouthNorthVehicle ">{{simulationReport_.avgQueueLengthSouthNorthVehicle}}</span>
+														<span id="{{classApiMethodMethod}}_avgQueueLengthSouthNorthVehicle" class="varSimulationReport{{pk}}AvgQueueLengthSouthNorthVehicle varSimulationReportAvgQueueLengthSouthNorthVehicle ">{{simulationReport_.avgQueueLengthSouthNorthVehicle}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -4140,7 +4140,7 @@
 
 {{#*inline "inputAvgQueueLengthNorthSouthPedestrian"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSimulationReport{{pk}}AvgQueueLengthNorthSouthPedestrian ">{{simulationReport_.avgQueueLengthNorthSouthPedestrian}}</span>
+														<span id="{{classApiMethodMethod}}_avgQueueLengthNorthSouthPedestrian" class="varSimulationReport{{pk}}AvgQueueLengthNorthSouthPedestrian varSimulationReportAvgQueueLengthNorthSouthPedestrian ">{{simulationReport_.avgQueueLengthNorthSouthPedestrian}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -4156,7 +4156,7 @@
 
 {{#*inline "inputAvgQueueLengthWestEastPedestrian"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSimulationReport{{pk}}AvgQueueLengthWestEastPedestrian ">{{simulationReport_.avgQueueLengthWestEastPedestrian}}</span>
+														<span id="{{classApiMethodMethod}}_avgQueueLengthWestEastPedestrian" class="varSimulationReport{{pk}}AvgQueueLengthWestEastPedestrian varSimulationReportAvgQueueLengthWestEastPedestrian ">{{simulationReport_.avgQueueLengthWestEastPedestrian}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -4202,10 +4202,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSimulationReport{{pk}}ReportStatus ">{{simulationReport_.reportStatus}}</span>
+															<span class="varSimulationReport{{pk}}ReportStatus varSimulationReportReportStatus ">{{simulationReport_.reportStatus}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSimulationReport{{pk}}ReportStatus ">{{simulationReport_.reportStatus}}</span>
+														<span class="varSimulationReport{{pk}}ReportStatus varSimulationReportReportStatus ">{{simulationReport_.reportStatus}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -4223,37 +4223,7 @@
 {{/inline}}
 
 {{#*inline "inputReportProgress"}}
-		{{#eq roleForWriteBool "true"}}
-														<input
-															type="text"
-															placeholder="report progress"
-															title="The percent progress of the simulation report. "															id="{{classApiMethodMethod}}_reportProgress"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setReportProgress classSimulationReport inputSimulationReport{{pk}}ReportProgress w3-input w3-border "
-																name="setReportProgress"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setReportProgress classSimulationReport inputSimulationReport{{pk}}ReportProgress w3-input w3-border "
-																name="setReportProgress"
-		{{else}}
-																class="valueReportProgress w3-input w3-border classSimulationReport inputSimulationReport{{pk}}ReportProgress w3-input w3-border "
-																name="reportProgress"
-		{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span id="{{classApiMethodMethod}}_reportProgress" class="varSimulationReport{{pk}}ReportProgress varSimulationReportReportProgress ">{{simulationReport_.reportProgress}}</span>
 	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setReportProgress', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_reportProgress')); }, function() { addError($('#{{classApiMethodMethod}}_reportProgress')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{simulationReport_.reportProgress}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varSimulationReport{{pk}}ReportProgress ">{{simulationReport_.reportProgress}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varSimulationReport{{pk}}ReportProgress ">{{simulationReport_.reportProgress}}</span>
-		{{/eq}}
 {{/inline}}

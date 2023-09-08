@@ -1363,7 +1363,7 @@
 
 {{#*inline "inputCreated"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSmartTrafficLight{{pk}}Created " title="{{formatZonedDateTime smartTrafficLight_.created 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime smartTrafficLight_.created 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+														<span id="{{classApiMethodMethod}}_created" class="varSmartTrafficLight{{pk}}Created varSmartTrafficLightCreated " title="{{formatZonedDateTime smartTrafficLight_.created 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime smartTrafficLight_.created 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -1389,7 +1389,7 @@
 
 {{#*inline "inputModified"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSmartTrafficLight{{pk}}Modified " title="{{formatZonedDateTime smartTrafficLight_.modified 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime smartTrafficLight_.modified 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+														<span id="{{classApiMethodMethod}}_modified" class="varSmartTrafficLight{{pk}}Modified varSmartTrafficLightModified " title="{{formatZonedDateTime smartTrafficLight_.modified 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime smartTrafficLight_.modified 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -1415,7 +1415,7 @@
 
 {{#*inline "inputObjectId"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSmartTrafficLight{{pk}}ObjectId ">{{smartTrafficLight_.objectId}}</span>
+														<span id="{{classApiMethodMethod}}_objectId" class="varSmartTrafficLight{{pk}}ObjectId varSmartTrafficLightObjectId ">{{smartTrafficLight_.objectId}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -1480,10 +1480,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSmartTrafficLight{{pk}}Archived ">{{smartTrafficLight_.archived}}</span>
+															<span class="varSmartTrafficLight{{pk}}Archived varSmartTrafficLightArchived ">{{smartTrafficLight_.archived}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSmartTrafficLight{{pk}}Archived ">{{smartTrafficLight_.archived}}</span>
+														<span class="varSmartTrafficLight{{pk}}Archived varSmartTrafficLightArchived ">{{smartTrafficLight_.archived}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1548,10 +1548,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSmartTrafficLight{{pk}}Deleted ">{{smartTrafficLight_.deleted}}</span>
+															<span class="varSmartTrafficLight{{pk}}Deleted varSmartTrafficLightDeleted ">{{smartTrafficLight_.deleted}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSmartTrafficLight{{pk}}Deleted ">{{smartTrafficLight_.deleted}}</span>
+														<span class="varSmartTrafficLight{{pk}}Deleted varSmartTrafficLightDeleted ">{{smartTrafficLight_.deleted}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1604,10 +1604,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSmartTrafficLight{{pk}}EntityId ">{{smartTrafficLight_.entityId}}</span>
+															<span class="varSmartTrafficLight{{pk}}EntityId varSmartTrafficLightEntityId ">{{smartTrafficLight_.entityId}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSmartTrafficLight{{pk}}EntityId ">{{smartTrafficLight_.entityId}}</span>
+														<span class="varSmartTrafficLight{{pk}}EntityId varSmartTrafficLightEntityId ">{{smartTrafficLight_.entityId}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1660,10 +1660,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSmartTrafficLight{{pk}}SmartTrafficLightName ">{{smartTrafficLight_.smartTrafficLightName}}</span>
+															<span class="varSmartTrafficLight{{pk}}SmartTrafficLightName varSmartTrafficLightSmartTrafficLightName ">{{smartTrafficLight_.smartTrafficLightName}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSmartTrafficLight{{pk}}SmartTrafficLightName ">{{smartTrafficLight_.smartTrafficLightName}}</span>
+														<span class="varSmartTrafficLight{{pk}}SmartTrafficLightName varSmartTrafficLightSmartTrafficLightName ">{{smartTrafficLight_.smartTrafficLightName}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1716,10 +1716,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSmartTrafficLight{{pk}}RouteIdNorth ">{{smartTrafficLight_.routeIdNorth}}</span>
+															<span class="varSmartTrafficLight{{pk}}RouteIdNorth varSmartTrafficLightRouteIdNorth ">{{smartTrafficLight_.routeIdNorth}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSmartTrafficLight{{pk}}RouteIdNorth ">{{smartTrafficLight_.routeIdNorth}}</span>
+														<span class="varSmartTrafficLight{{pk}}RouteIdNorth varSmartTrafficLightRouteIdNorth ">{{smartTrafficLight_.routeIdNorth}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1772,10 +1772,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSmartTrafficLight{{pk}}RouteIdEast ">{{smartTrafficLight_.routeIdEast}}</span>
+															<span class="varSmartTrafficLight{{pk}}RouteIdEast varSmartTrafficLightRouteIdEast ">{{smartTrafficLight_.routeIdEast}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSmartTrafficLight{{pk}}RouteIdEast ">{{smartTrafficLight_.routeIdEast}}</span>
+														<span class="varSmartTrafficLight{{pk}}RouteIdEast varSmartTrafficLightRouteIdEast ">{{smartTrafficLight_.routeIdEast}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1801,7 +1801,7 @@
 
 {{#*inline "inputParamAvgVehiclePerMinFromWestToEast"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSmartTrafficLight{{pk}}ParamAvgVehiclePerMinFromWestToEast ">{{smartTrafficLight_.paramAvgVehiclePerMinFromWestToEast}}</span>
+														<span id="{{classApiMethodMethod}}_paramAvgVehiclePerMinFromWestToEast" class="varSmartTrafficLight{{pk}}ParamAvgVehiclePerMinFromWestToEast varSmartTrafficLightParamAvgVehiclePerMinFromWestToEast ">{{smartTrafficLight_.paramAvgVehiclePerMinFromWestToEast}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -1827,7 +1827,7 @@
 
 {{#*inline "inputParamAvgVehiclePerMinFromSouthToNorth"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSmartTrafficLight{{pk}}ParamAvgVehiclePerMinFromSouthToNorth ">{{smartTrafficLight_.paramAvgVehiclePerMinFromSouthToNorth}}</span>
+														<span id="{{classApiMethodMethod}}_paramAvgVehiclePerMinFromSouthToNorth" class="varSmartTrafficLight{{pk}}ParamAvgVehiclePerMinFromSouthToNorth varSmartTrafficLightParamAvgVehiclePerMinFromSouthToNorth ">{{smartTrafficLight_.paramAvgVehiclePerMinFromSouthToNorth}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -1880,10 +1880,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSmartTrafficLight{{pk}}ParamVehicleDemandScalingFactor ">{{smartTrafficLight_.paramVehicleDemandScalingFactor}}</span>
+															<span class="varSmartTrafficLight{{pk}}ParamVehicleDemandScalingFactor varSmartTrafficLightParamVehicleDemandScalingFactor ">{{smartTrafficLight_.paramVehicleDemandScalingFactor}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSmartTrafficLight{{pk}}ParamVehicleDemandScalingFactor ">{{smartTrafficLight_.paramVehicleDemandScalingFactor}}</span>
+														<span class="varSmartTrafficLight{{pk}}ParamVehicleDemandScalingFactor varSmartTrafficLightParamVehicleDemandScalingFactor ">{{smartTrafficLight_.paramVehicleDemandScalingFactor}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1909,7 +1909,7 @@
 
 {{#*inline "inputParamAvgPedestrianPerMinFromWestToEast"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSmartTrafficLight{{pk}}ParamAvgPedestrianPerMinFromWestToEast ">{{smartTrafficLight_.paramAvgPedestrianPerMinFromWestToEast}}</span>
+														<span id="{{classApiMethodMethod}}_paramAvgPedestrianPerMinFromWestToEast" class="varSmartTrafficLight{{pk}}ParamAvgPedestrianPerMinFromWestToEast varSmartTrafficLightParamAvgPedestrianPerMinFromWestToEast ">{{smartTrafficLight_.paramAvgPedestrianPerMinFromWestToEast}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -1935,7 +1935,7 @@
 
 {{#*inline "inputParamAvgPedestrianPerMinFromSouthToNorth"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSmartTrafficLight{{pk}}ParamAvgPedestrianPerMinFromSouthToNorth ">{{smartTrafficLight_.paramAvgPedestrianPerMinFromSouthToNorth}}</span>
+														<span id="{{classApiMethodMethod}}_paramAvgPedestrianPerMinFromSouthToNorth" class="varSmartTrafficLight{{pk}}ParamAvgPedestrianPerMinFromSouthToNorth varSmartTrafficLightParamAvgPedestrianPerMinFromSouthToNorth ">{{smartTrafficLight_.paramAvgPedestrianPerMinFromSouthToNorth}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -1961,7 +1961,7 @@
 
 {{#*inline "inputParamPedestrianDemandScalingFactor"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSmartTrafficLight{{pk}}ParamPedestrianDemandScalingFactor ">{{smartTrafficLight_.paramPedestrianDemandScalingFactor}}</span>
+														<span id="{{classApiMethodMethod}}_paramPedestrianDemandScalingFactor" class="varSmartTrafficLight{{pk}}ParamPedestrianDemandScalingFactor varSmartTrafficLightParamPedestrianDemandScalingFactor ">{{smartTrafficLight_.paramPedestrianDemandScalingFactor}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -1987,7 +1987,7 @@
 
 {{#*inline "inputParamMinGreenTimeSecWestEast"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSmartTrafficLight{{pk}}ParamMinGreenTimeSecWestEast ">{{smartTrafficLight_.paramMinGreenTimeSecWestEast}}</span>
+														<span id="{{classApiMethodMethod}}_paramMinGreenTimeSecWestEast" class="varSmartTrafficLight{{pk}}ParamMinGreenTimeSecWestEast varSmartTrafficLightParamMinGreenTimeSecWestEast ">{{smartTrafficLight_.paramMinGreenTimeSecWestEast}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -2013,7 +2013,7 @@
 
 {{#*inline "inputParamMaxGreenTimeSecWestEast"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSmartTrafficLight{{pk}}ParamMaxGreenTimeSecWestEast ">{{smartTrafficLight_.paramMaxGreenTimeSecWestEast}}</span>
+														<span id="{{classApiMethodMethod}}_paramMaxGreenTimeSecWestEast" class="varSmartTrafficLight{{pk}}ParamMaxGreenTimeSecWestEast varSmartTrafficLightParamMaxGreenTimeSecWestEast ">{{smartTrafficLight_.paramMaxGreenTimeSecWestEast}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -2039,7 +2039,7 @@
 
 {{#*inline "inputParamMinGreenTimeSecSouthNorth"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSmartTrafficLight{{pk}}ParamMinGreenTimeSecSouthNorth ">{{smartTrafficLight_.paramMinGreenTimeSecSouthNorth}}</span>
+														<span id="{{classApiMethodMethod}}_paramMinGreenTimeSecSouthNorth" class="varSmartTrafficLight{{pk}}ParamMinGreenTimeSecSouthNorth varSmartTrafficLightParamMinGreenTimeSecSouthNorth ">{{smartTrafficLight_.paramMinGreenTimeSecSouthNorth}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -2065,7 +2065,7 @@
 
 {{#*inline "inputParamMaxGreenTimeSecSouthNorth"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSmartTrafficLight{{pk}}ParamMaxGreenTimeSecSouthNorth ">{{smartTrafficLight_.paramMaxGreenTimeSecSouthNorth}}</span>
+														<span id="{{classApiMethodMethod}}_paramMaxGreenTimeSecSouthNorth" class="varSmartTrafficLight{{pk}}ParamMaxGreenTimeSecSouthNorth varSmartTrafficLightParamMaxGreenTimeSecSouthNorth ">{{smartTrafficLight_.paramMaxGreenTimeSecSouthNorth}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -2091,7 +2091,7 @@
 
 {{#*inline "inputParamPedestrianWaitThresholdSecNorthSouth"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSmartTrafficLight{{pk}}ParamPedestrianWaitThresholdSecNorthSouth ">{{smartTrafficLight_.paramPedestrianWaitThresholdSecNorthSouth}}</span>
+														<span id="{{classApiMethodMethod}}_paramPedestrianWaitThresholdSecNorthSouth" class="varSmartTrafficLight{{pk}}ParamPedestrianWaitThresholdSecNorthSouth varSmartTrafficLightParamPedestrianWaitThresholdSecNorthSouth ">{{smartTrafficLight_.paramPedestrianWaitThresholdSecNorthSouth}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -2117,7 +2117,7 @@
 
 {{#*inline "inputParamPedestrianWaitThresholdSecWestEast"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSmartTrafficLight{{pk}}ParamPedestrianWaitThresholdSecWestEast ">{{smartTrafficLight_.paramPedestrianWaitThresholdSecWestEast}}</span>
+														<span id="{{classApiMethodMethod}}_paramPedestrianWaitThresholdSecWestEast" class="varSmartTrafficLight{{pk}}ParamPedestrianWaitThresholdSecWestEast varSmartTrafficLightParamPedestrianWaitThresholdSecWestEast ">{{smartTrafficLight_.paramPedestrianWaitThresholdSecWestEast}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -2143,7 +2143,7 @@
 
 {{#*inline "inputParamVehicleQueueThresholdWestEast"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSmartTrafficLight{{pk}}ParamVehicleQueueThresholdWestEast ">{{smartTrafficLight_.paramVehicleQueueThresholdWestEast}}</span>
+														<span id="{{classApiMethodMethod}}_paramVehicleQueueThresholdWestEast" class="varSmartTrafficLight{{pk}}ParamVehicleQueueThresholdWestEast varSmartTrafficLightParamVehicleQueueThresholdWestEast ">{{smartTrafficLight_.paramVehicleQueueThresholdWestEast}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -2169,7 +2169,7 @@
 
 {{#*inline "inputParamVehicleQueueThresholdSouthNorth"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSmartTrafficLight{{pk}}ParamVehicleQueueThresholdSouthNorth ">{{smartTrafficLight_.paramVehicleQueueThresholdSouthNorth}}</span>
+														<span id="{{classApiMethodMethod}}_paramVehicleQueueThresholdSouthNorth" class="varSmartTrafficLight{{pk}}ParamVehicleQueueThresholdSouthNorth varSmartTrafficLightParamVehicleQueueThresholdSouthNorth ">{{smartTrafficLight_.paramVehicleQueueThresholdSouthNorth}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -2195,7 +2195,7 @@
 
 {{#*inline "inputParamPedestrianQueueThresholdNorthSouth"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSmartTrafficLight{{pk}}ParamPedestrianQueueThresholdNorthSouth ">{{smartTrafficLight_.paramPedestrianQueueThresholdNorthSouth}}</span>
+														<span id="{{classApiMethodMethod}}_paramPedestrianQueueThresholdNorthSouth" class="varSmartTrafficLight{{pk}}ParamPedestrianQueueThresholdNorthSouth varSmartTrafficLightParamPedestrianQueueThresholdNorthSouth ">{{smartTrafficLight_.paramPedestrianQueueThresholdNorthSouth}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -2221,7 +2221,7 @@
 
 {{#*inline "inputParamPedestrianQueueThresholdWestEast"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSmartTrafficLight{{pk}}ParamPedestrianQueueThresholdWestEast ">{{smartTrafficLight_.paramPedestrianQueueThresholdWestEast}}</span>
+														<span id="{{classApiMethodMethod}}_paramPedestrianQueueThresholdWestEast" class="varSmartTrafficLight{{pk}}ParamPedestrianQueueThresholdWestEast varSmartTrafficLightParamPedestrianQueueThresholdWestEast ">{{smartTrafficLight_.paramPedestrianQueueThresholdWestEast}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -2274,10 +2274,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSmartTrafficLight{{pk}}ParamRunTime ">{{smartTrafficLight_.paramRunTime}}</span>
+															<span class="varSmartTrafficLight{{pk}}ParamRunTime varSmartTrafficLightParamRunTime ">{{smartTrafficLight_.paramRunTime}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSmartTrafficLight{{pk}}ParamRunTime ">{{smartTrafficLight_.paramRunTime}}</span>
+														<span class="varSmartTrafficLight{{pk}}ParamRunTime varSmartTrafficLightParamRunTime ">{{smartTrafficLight_.paramRunTime}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -2330,10 +2330,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSmartTrafficLight{{pk}}ParamStepSize ">{{smartTrafficLight_.paramStepSize}}</span>
+															<span class="varSmartTrafficLight{{pk}}ParamStepSize varSmartTrafficLightParamStepSize ">{{smartTrafficLight_.paramStepSize}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSmartTrafficLight{{pk}}ParamStepSize ">{{smartTrafficLight_.paramStepSize}}</span>
+														<span class="varSmartTrafficLight{{pk}}ParamStepSize varSmartTrafficLightParamStepSize ">{{smartTrafficLight_.paramStepSize}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -2386,10 +2386,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSmartTrafficLight{{pk}}ParamItersPerPar ">{{smartTrafficLight_.paramItersPerPar}}</span>
+															<span class="varSmartTrafficLight{{pk}}ParamItersPerPar varSmartTrafficLightParamItersPerPar ">{{smartTrafficLight_.paramItersPerPar}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSmartTrafficLight{{pk}}ParamItersPerPar ">{{smartTrafficLight_.paramItersPerPar}}</span>
+														<span class="varSmartTrafficLight{{pk}}ParamItersPerPar varSmartTrafficLightParamItersPerPar ">{{smartTrafficLight_.paramItersPerPar}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -2442,10 +2442,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varSmartTrafficLight{{pk}}ParamTotalIterNum ">{{smartTrafficLight_.paramTotalIterNum}}</span>
+															<span class="varSmartTrafficLight{{pk}}ParamTotalIterNum varSmartTrafficLightParamTotalIterNum ">{{smartTrafficLight_.paramTotalIterNum}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varSmartTrafficLight{{pk}}ParamTotalIterNum ">{{smartTrafficLight_.paramTotalIterNum}}</span>
+														<span class="varSmartTrafficLight{{pk}}ParamTotalIterNum varSmartTrafficLightParamTotalIterNum ">{{smartTrafficLight_.paramTotalIterNum}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -2522,6 +2522,6 @@
 
 													{{else}}
 		{{else}}
-														<span class="varSmartTrafficLight{{pk}}ReportKeys ">{{smartTrafficLight_.reportKeys}}</span>
+														<span class="varSmartTrafficLight{{pk}}ReportKeys varSmartTrafficLightReportKeys ">{{smartTrafficLight_.reportKeys}}</span>
 		{{/eq}}
 {{/inline}}

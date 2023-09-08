@@ -931,7 +931,7 @@
 
 {{#*inline "inputCreated"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSiteUser{{pk}}Created " title="{{formatZonedDateTime siteUser_.created 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime siteUser_.created 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+														<span id="{{classApiMethodMethod}}_created" class="varSiteUser{{pk}}Created varSiteUserCreated " title="{{formatZonedDateTime siteUser_.created 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime siteUser_.created 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -957,7 +957,7 @@
 
 {{#*inline "inputModified"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSiteUser{{pk}}Modified " title="{{formatZonedDateTime siteUser_.modified 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime siteUser_.modified 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+														<span id="{{classApiMethodMethod}}_modified" class="varSiteUser{{pk}}Modified varSiteUserModified " title="{{formatZonedDateTime siteUser_.modified 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime siteUser_.modified 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -983,7 +983,7 @@
 
 {{#*inline "inputObjectId"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span class="varSiteUser{{pk}}ObjectId ">{{siteUser_.objectId}}</span>
+														<span id="{{classApiMethodMethod}}_objectId" class="varSiteUser{{pk}}ObjectId varSiteUserObjectId ">{{siteUser_.objectId}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -1047,9 +1047,9 @@
 	{{/eq}}
 
 													{{else}}
-															<span class="varSiteUser{{pk}}Archived ">{{siteUser_.archived}}</span>
+															<span class="varSiteUser{{pk}}Archived varSiteUserArchived ">{{siteUser_.archived}}</span>
 		{{else}}
-														<span class="varSiteUser{{pk}}Archived ">{{siteUser_.archived}}</span>
+														<span class="varSiteUser{{pk}}Archived varSiteUserArchived ">{{siteUser_.archived}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1113,9 +1113,9 @@
 	{{/eq}}
 
 													{{else}}
-															<span class="varSiteUser{{pk}}Deleted ">{{siteUser_.deleted}}</span>
+															<span class="varSiteUser{{pk}}Deleted varSiteUserDeleted ">{{siteUser_.deleted}}</span>
 		{{else}}
-														<span class="varSiteUser{{pk}}Deleted ">{{siteUser_.deleted}}</span>
+														<span class="varSiteUser{{pk}}Deleted varSiteUserDeleted ">{{siteUser_.deleted}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1179,9 +1179,9 @@
 	{{/eq}}
 
 													{{else}}
-															<span class="varSiteUser{{pk}}SeeArchived ">{{siteUser_.seeArchived}}</span>
+															<span class="varSiteUser{{pk}}SeeArchived varSiteUserSeeArchived ">{{siteUser_.seeArchived}}</span>
 		{{else}}
-														<span class="varSiteUser{{pk}}SeeArchived ">{{siteUser_.seeArchived}}</span>
+														<span class="varSiteUser{{pk}}SeeArchived varSiteUserSeeArchived ">{{siteUser_.seeArchived}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1245,8 +1245,8 @@
 	{{/eq}}
 
 													{{else}}
-															<span class="varSiteUser{{pk}}SeeDeleted ">{{siteUser_.seeDeleted}}</span>
+															<span class="varSiteUser{{pk}}SeeDeleted varSiteUserSeeDeleted ">{{siteUser_.seeDeleted}}</span>
 		{{else}}
-														<span class="varSiteUser{{pk}}SeeDeleted ">{{siteUser_.seeDeleted}}</span>
+														<span class="varSiteUser{{pk}}SeeDeleted varSiteUserSeeDeleted ">{{siteUser_.seeDeleted}}</span>
 		{{/eq}}
 {{/inline}}
