@@ -2035,24 +2035,18 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 					));
 				} else {
 					try {
-						response200PUTCopySimulationReport(siteRequest).onSuccess(response -> {
-							eventHandler.handle(Future.succeededFuture(response));
-							searchSimulationReportList(siteRequest, false, true, true).onSuccess(listSimulationReport -> {
-								ApiRequest apiRequest = new ApiRequest();
-								apiRequest.setRows(listSimulationReport.getRequest().getRows());
-								apiRequest.setNumFound(listSimulationReport.getResponse().getResponse().getNumFound());
-								apiRequest.setNumPATCH(0L);
-								apiRequest.initDeepApiRequest(siteRequest);
-								siteRequest.setApiRequest_(apiRequest);
-								eventBus.publish("websocketSimulationReport", JsonObject.mapFrom(apiRequest).toString());
-								listPUTCopySimulationReport(apiRequest, listSimulationReport).onSuccess(e -> {
-									response200PUTCopySimulationReport(siteRequest).onSuccess(f -> {
-										LOG.debug(String.format("putcopySimulationReport succeeded. "));
-										eventHandler.handle(Future.succeededFuture(response));
-									}).onFailure(ex -> {
-										LOG.error(String.format("putcopySimulationReport failed. "), ex);
-										error(siteRequest, eventHandler, ex);
-									});
+						searchSimulationReportList(siteRequest, false, true, true).onSuccess(listSimulationReport -> {
+							ApiRequest apiRequest = new ApiRequest();
+							apiRequest.setRows(listSimulationReport.getRequest().getRows());
+							apiRequest.setNumFound(listSimulationReport.getResponse().getResponse().getNumFound());
+							apiRequest.setNumPATCH(0L);
+							apiRequest.initDeepApiRequest(siteRequest);
+							siteRequest.setApiRequest_(apiRequest);
+							eventBus.publish("websocketSimulationReport", JsonObject.mapFrom(apiRequest).toString());
+							listPUTCopySimulationReport(apiRequest, listSimulationReport).onSuccess(o -> {
+								response200PUTCopySimulationReport(o).onSuccess(response -> {
+									LOG.debug(String.format("putcopySimulationReport succeeded. "));
+									eventHandler.handle(Future.succeededFuture(response));
 								}).onFailure(ex -> {
 									LOG.error(String.format("putcopySimulationReport failed. "), ex);
 									error(siteRequest, eventHandler, ex);
@@ -2098,42 +2092,57 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 	}
 
 
-	public Future<Void> listPUTCopySimulationReport(ApiRequest apiRequest, SearchList<SimulationReport> listSimulationReport) {
-		Promise<Void> promise = Promise.promise();
-		List<Future> futures = new ArrayList<>();
-		SiteRequestEnUS siteRequest = listSimulationReport.getSiteRequest_(SiteRequestEnUS.class);
-		listSimulationReport.getList().forEach(o -> {
+	public Future<SimulationReport> listPUTCopySimulationReport(ApiRequest apiRequest, SearchList<SimulationReport> listSimulationReport) {
+		Promise<SimulationReport> promise = Promise.promise();
+		if(listSimulationReport.getSize() == 1) {
+			SiteRequestEnUS siteRequest = listSimulationReport.getSiteRequest_(SiteRequestEnUS.class);
 			SiteRequestEnUS siteRequest2 = siteRequest.copy();
 			siteRequest2.setApiRequest_(siteRequest.getApiRequest_());
+			SimulationReport o = listSimulationReport.first();
 			o.setSiteRequest_(siteRequest2);
-			futures.add(
-				putcopySimulationReportFuture(siteRequest2, JsonObject.mapFrom(o)).onFailure(ex -> {
-					LOG.error(String.format("listPUTCopySimulationReport failed. "), ex);
-					error(siteRequest, null, ex);
-				})
-			);
-		});
-		CompositeFuture.all(futures).onSuccess(a -> {
-			apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listSimulationReport.size());
-			listSimulationReport.next().onSuccess(next -> {
-				if(next) {
-					listPUTCopySimulationReport(apiRequest, listSimulationReport).onSuccess(b -> {
-						promise.complete();
-					}).onFailure(ex -> {
-						LOG.error(String.format("listPUTCopySimulationReport failed. "), ex);
-						promise.fail(ex);
-					});
-				} else {
-					promise.complete();
-				}
+			putcopySimulationReportFuture(siteRequest2, JsonObject.mapFrom(o)).onSuccess(o2 -> {
+				apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listSimulationReport.size());
+				promise.complete(o2);
 			}).onFailure(ex -> {
 				LOG.error(String.format("listPUTCopySimulationReport failed. "), ex);
 				error(listSimulationReport.getSiteRequest_(SiteRequestEnUS.class), null, ex);
 			});
-		}).onFailure(ex -> {
-			LOG.error(String.format("listPUTCopySimulationReport failed. "), ex);
-			error(listSimulationReport.getSiteRequest_(SiteRequestEnUS.class), null, ex);
-		});
+		} else {
+			List<Future> futures = new ArrayList<>();
+			SiteRequestEnUS siteRequest = listSimulationReport.getSiteRequest_(SiteRequestEnUS.class);
+			listSimulationReport.getList().forEach(o -> {
+				SiteRequestEnUS siteRequest2 = siteRequest.copy();
+				siteRequest2.setApiRequest_(siteRequest.getApiRequest_());
+				o.setSiteRequest_(siteRequest2);
+				futures.add(
+					putcopySimulationReportFuture(siteRequest2, JsonObject.mapFrom(o)).onFailure(ex -> {
+						LOG.error(String.format("listPUTCopySimulationReport failed. "), ex);
+						error(siteRequest, null, ex);
+					})
+				);
+			});
+			CompositeFuture.all(futures).onSuccess(a -> {
+				apiRequest.setNumPATCH(apiRequest.getNumPATCH() + listSimulationReport.size());
+				listSimulationReport.next().onSuccess(next -> {
+					if(next) {
+						listPUTCopySimulationReport(apiRequest, listSimulationReport).onSuccess(b -> {
+							promise.complete();
+						}).onFailure(ex -> {
+							LOG.error(String.format("listPUTCopySimulationReport failed. "), ex);
+							promise.fail(ex);
+						});
+					} else {
+						promise.complete();
+					}
+				}).onFailure(ex -> {
+					LOG.error(String.format("listPUTCopySimulationReport failed. "), ex);
+					error(listSimulationReport.getSiteRequest_(SiteRequestEnUS.class), null, ex);
+				});
+			}).onFailure(ex -> {
+				LOG.error(String.format("listPUTCopySimulationReport failed. "), ex);
+				error(listSimulationReport.getSiteRequest_(SiteRequestEnUS.class), null, ex);
+			});
+		}
 		return promise.future();
 	}
 
@@ -2635,10 +2644,10 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 		return promise.future();
 	}
 
-	public Future<ServiceResponse> response200PUTCopySimulationReport(SiteRequestEnUS siteRequest) {
+	public Future<ServiceResponse> response200PUTCopySimulationReport(SimulationReport o) {
 		Promise<ServiceResponse> promise = Promise.promise();
 		try {
-			JsonObject json = new JsonObject();
+			JsonObject json = JsonObject.mapFrom(o);
 			promise.complete(ServiceResponse.completedWithJson(Buffer.buffer(Optional.ofNullable(json).orElse(new JsonObject()).encodePrettily())));
 		} catch(Exception ex) {
 			LOG.error(String.format("response200PUTCopySimulationReport failed. "), ex);

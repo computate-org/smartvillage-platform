@@ -82,6 +82,7 @@ async function websocketSimulationReportInner2(apiRequest) {
 {{#partial "htmBodyCount1"}}{{> htmBodyCount1SimulationReportPage}}{{/partial}}
 {{#partial "htmBodyAll"}}{{> htmBodyAllSimulationReportPage}}{{/partial}}
 {{#partial "htmForm"}}
+{{#if id}}
 <h3>Actions:</h3>
 <button class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce " id="runReport" onclick="$.ajax({ url: '/api/run-simulation-report?' + $.param([ {name: 'fq', value: 'pk:{{ pk }}' } ]) , dataType: 'json' , type: 'PATCH' , contentType: 'application/json; charset=utf-8' , data: JSON.stringify({'setReportStatus': 'Run'}) }); ">
 	<i class="fas fa-edit " aria-hidden="true"></i>
@@ -96,11 +97,13 @@ async function websocketSimulationReportInner2(apiRequest) {
 	onclick="$('#putcopySimulationReportModal').show(); "
 	>
 	<i class="fas fa-copy "></i>
-	Duplicate simulation reports
+	Duplicate simulation report
 </button>
+{{/if}}
 
 {{> htmFormSimulationReportPage}}
 
+{{#if id}}
 <button class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce " id="runReport" onclick="$.ajax({ url: '/api/run-simulation-report?' + $.param([ {name: 'fq', value: 'pk:{{ pk }}' } ]) , dataType: 'json' , type: 'PATCH' , contentType: 'application/json; charset=utf-8' , data: JSON.stringify({'setReportStatus': 'Run'}) }); ">
 	<i class="fas fa-edit " aria-hidden="true"></i>
 	Run Report
@@ -114,7 +117,7 @@ async function websocketSimulationReportInner2(apiRequest) {
 	onclick="$('#putcopySimulationReportModal').show(); "
 	>
 	<i class="fas fa-copy "></i>
-	Duplicate simulation reports
+	Duplicate simulation report
 </button>
 
 							<div class="">
@@ -133,11 +136,9 @@ async function websocketSimulationReportInner2(apiRequest) {
 								</div>
 							</div>
 							</div>
-
+{{/if}}
 {{/partial}}
-{{#partial "htmForms"}}
-{{> htmFormsSimulationReportPage}}
-{{/partial}}
+{{#partial "htmForms"}}{{> htmFormsSimulationReportPage}}{{/partial}}
 {{#partial "htmBodySuggested"}}{{> htmBodySuggestedSimulationReportPage}}{{/partial}}
 {{#partial "htmButton_patchSimulationReport"}}{{> htmButtonSimulationReportPage_patchSimulationReport classApiMethodMethod="PATCH"}}{{/partial}}
 {{#partial "htmForm_patchSimulationReport"}}{{> htmFormSimulationReportPage_patchSimulationReport classApiMethodMethod="PATCH"}}{{/partial}}
@@ -148,6 +149,9 @@ async function websocketSimulationReportInner2(apiRequest) {
 {{#partial "htmButton_putimportSimulationReport"}}{{> htmButtonSimulationReportPage_putimportSimulationReport classApiMethodMethod="PUT"}}{{/partial}}
 {{#partial "htmForm_putimportSimulationReport"}}{{> htmFormSimulationReportPage_putimportSimulationReport classApiMethodMethod="PUT"}}{{/partial}}
 {{#partial "htmFormButton_putimportSimulationReport"}}{{> htmFormButtonSimulationReportPage_putimportSimulationReport classApiMethodMethod="PUT"}}{{/partial}}
+{{#partial "htmButton_putcopySimulationReport"}}{{> htmButtonSimulationReportPage_putcopySimulationReport classApiMethodMethod="PUT"}}{{/partial}}
+{{#partial "htmForm_putcopySimulationReport"}}{{> htmFormSimulationReportPage_putcopySimulationReport classApiMethodMethod="PUT"}}{{/partial}}
+{{#partial "htmFormButton_putcopySimulationReport"}}{{> htmFormButtonSimulationReportPage_putcopySimulationReport classApiMethodMethod="PUT"}}{{/partial}}
 {{#partial "htmButton_searchpageSimulationReport"}}{{> htmButtonSimulationReportPage_searchpageSimulationReport classApiMethodMethod="Page"}}{{/partial}}
 {{#partial "htmForm_searchpageSimulationReport"}}{{> htmFormSimulationReportPage_searchpageSimulationReport classApiMethodMethod="Page"}}{{/partial}}
 {{#partial "htmFormButton_searchpageSimulationReport"}}{{> htmFormButtonSimulationReportPage_searchpageSimulationReport classApiMethodMethod="Page"}}{{/partial}}
