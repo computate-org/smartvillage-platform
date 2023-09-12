@@ -45,7 +45,6 @@ import io.vertx.core.Promise;
 import io.vertx.core.json.JsonArray;
 
 /**
- * Translate: false
  * Promise: true
  **/
 public class SimulationReportPage extends SimulationReportPageGen<SimulationReportGenPage> {
