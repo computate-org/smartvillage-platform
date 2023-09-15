@@ -125,6 +125,11 @@ public abstract class MainVerticleGen<DEV> extends AbstractVerticle {
 	public static final String configureSharedWorkerExecutorComplete1 = "The shared worker executor \"{}\" was configured successfully. ";
 	public static final String configureSharedWorkerExecutorComplete = configureSharedWorkerExecutorComplete1;
 
+	public static final String configureOpenTelemetryComplete1 = "Open Telemetry was configured successfully. ";
+	public static final String configureOpenTelemetryComplete = configureOpenTelemetryComplete1;
+	public static final String configureOpenTelemetryFail1 = "Could not configure Open Telemetry. ";
+	public static final String configureOpenTelemetryFail = configureOpenTelemetryFail1;
+
 	public static final String configureHealthChecksComplete1 = "The health checks were configured successfully. ";
 	public static final String configureHealthChecksComplete = configureHealthChecksComplete1;
 	public static final String configureHealthChecksFail1 = "Could not configure the health checks. ";
@@ -322,7 +327,7 @@ public abstract class MainVerticleGen<DEV> extends AbstractVerticle {
 		return sb.toString();
 	}
 
-	public static final String[] MainVerticleVals = new String[] { configureKafkaSuccess1, configureMqttSuccess1, configureMqttFail1, configureDataConnectionError1, configureDataConnectionSuccess1, configureDataInitError1, configureDataInitSuccess1, configureOpenApiError1, configureOpenApiSuccess1, configureConfigComplete1, configureConfigFail1, configureSharedWorkerExecutorFail1, configureSharedWorkerExecutorComplete1, configureHealthChecksComplete1, configureHealthChecksFail1, configureHealthChecksErrorDatabase1, configureHealthChecksEmptySolr1, configureHealthChecksErrorSolr1, configureHealthChecksErrorVertx1, configureWebsocketsComplete1, configureWebsocketsFail1, configureEmailComplete1, configureEmailFail1, configureHandlebarsFail1, configureHandlebarsComplete1, configureApiFail1, configureApiComplete1, configureUiFail1, configureUiComplete1, startServerErrorServer1, startServerSuccessServer1, startServerBeforeServer1, startServerSsl1, stopPgPoolFail1, stopPgPoolComplete1, stopMqttFail1, stopMqttComplete1 };
+	public static final String[] MainVerticleVals = new String[] { configureKafkaSuccess1, configureMqttSuccess1, configureMqttFail1, configureDataConnectionError1, configureDataConnectionSuccess1, configureDataInitError1, configureDataInitSuccess1, configureOpenApiError1, configureOpenApiSuccess1, configureConfigComplete1, configureConfigFail1, configureSharedWorkerExecutorFail1, configureSharedWorkerExecutorComplete1, configureOpenTelemetryComplete1, configureOpenTelemetryFail1, configureHealthChecksComplete1, configureHealthChecksFail1, configureHealthChecksErrorDatabase1, configureHealthChecksEmptySolr1, configureHealthChecksErrorSolr1, configureHealthChecksErrorVertx1, configureWebsocketsComplete1, configureWebsocketsFail1, configureEmailComplete1, configureEmailFail1, configureHandlebarsFail1, configureHandlebarsComplete1, configureApiFail1, configureApiComplete1, configureUiFail1, configureUiComplete1, startServerErrorServer1, startServerSuccessServer1, startServerBeforeServer1, startServerSsl1, stopPgPoolFail1, stopPgPoolComplete1, stopMqttFail1, stopMqttComplete1 };
 
 	public static final String CLASS_SIMPLE_NAME = "MainVerticle";
 

@@ -1,0 +1,32 @@
+apiVersion: opentelemetry.io/v1alpha1
+kind: OpenTelemetryCollector
+metadata:
+  name: otel
+  namespace: smartvillage
+spec:
+  config: |
+    receivers:
+      otlp:
+        protocols: 
+          grpc:
+          http:
+
+    exporters:
+      logging:
+
+    service:
+      pipelines:
+        traces:
+          receivers: [otlp]
+          exporters: [logging]
+  ingress:
+    route:
+      termination: edge
+    type: route
+  mode: deployment
+  replicas: 1
+  resources: {}
+  targetAllocator:
+    prometheusCR: {}
+    resources: {}
+  upgradeStrategy: automatic

@@ -54,6 +54,11 @@ import com.github.jknack.handlebars.helper.ConditionalHelpers;
 import com.github.jknack.handlebars.helper.StringHelpers;
 import com.github.jknack.handlebars.internal.lang3.BooleanUtils;
 
+import io.opentelemetry.api.OpenTelemetry;
+import io.opentelemetry.api.trace.propagation.W3CTraceContextPropagator;
+import io.opentelemetry.context.propagation.ContextPropagators;
+import io.opentelemetry.sdk.OpenTelemetrySdk;
+import io.opentelemetry.sdk.trace.SdkTracerProvider;
 import io.vertx.config.ConfigRetriever;
 import io.vertx.config.ConfigRetrieverOptions;
 import io.vertx.config.ConfigStoreOptions;
@@ -109,6 +114,8 @@ import io.vertx.pgclient.PgPool;
 import io.vertx.spi.cluster.zookeeper.ZookeeperClusterManager;
 import io.vertx.sqlclient.PoolOptions;
 import io.vertx.sqlclient.Tuple;
+import io.vertx.tracing.opentelemetry.OpenTelemetryOptions;
+
 import org.computate.smartvillageview.enus.mqtt.MqttMessageReader;
 
 
@@ -290,6 +297,16 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 			vertxOptions.setMaxWorkerExecuteTime(vertxMaxWorkerExecuteTime);
 			vertxOptions.setMaxWorkerExecuteTimeUnit(TimeUnit.SECONDS);
 			vertxOptions.setWorkerPoolSize(config.getInteger(ConfigKeys.WORKER_POOL_SIZE));
+
+			if(config.getBoolean(ConfigKeys.OPEN_TELEMETRY_ENABLED)) {
+				SdkTracerProvider sdkTracerProvider = SdkTracerProvider.builder().build();
+				OpenTelemetry openTelemetry = OpenTelemetrySdk.builder()
+						.setTracerProvider(sdkTracerProvider)
+						.setPropagators(ContextPropagators.create(W3CTraceContextPropagator.getInstance()))
+						.buildAndRegisterGlobal();
+				vertxOptions.setTracingOptions(new OpenTelemetryOptions(openTelemetry));
+			}
+
 			Consumer<Vertx> runner = vertx -> {
 				try {
 					DeploymentOptions deploymentOptions = new DeploymentOptions();
@@ -364,16 +381,18 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 		try {
 			configureWebClient().onComplete(a ->
 				configureDataLoop().onComplete(b -> 
-					configureOpenApi().onComplete(d -> 
-						configureHealthChecks().onComplete(e -> 
-							configureSharedWorkerExecutor().onComplete(f -> 
-								configureWebsockets().onComplete(g -> 
-									configureEmail().onComplete(i -> 
-										configureHandlebars().onComplete(j -> 
-											configureKafka().onComplete(k -> 
-												configureApi().onComplete(m -> 
-													configureUi().onComplete(n -> 
-														startServer().onComplete(o -> startPromise.complete())
+					configureOpenApi().onComplete(c -> 
+						configureOpenTelemetry().onComplete(d -> 
+							configureHealthChecks().onComplete(e -> 
+								configureSharedWorkerExecutor().onComplete(f -> 
+									configureWebsockets().onComplete(g -> 
+										configureEmail().onComplete(i -> 
+											configureHandlebars().onComplete(j -> 
+												configureKafka().onComplete(k -> 
+													configureApi().onComplete(m -> 
+														configureUi().onComplete(n -> 
+															startServer().onComplete(o -> startPromise.complete())
+														).onFailure(ex -> startPromise.fail(ex))
 													).onFailure(ex -> startPromise.fail(ex))
 												).onFailure(ex -> startPromise.fail(ex))
 											).onFailure(ex -> startPromise.fail(ex))
@@ -572,7 +591,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 			Boolean authSsl = config().getBoolean(ConfigKeys.AUTH_SSL);
 			String authHostName = config().getString(ConfigKeys.AUTH_HOST_NAME);
 			Integer authPort = config().getInteger(ConfigKeys.AUTH_PORT);
-			String authUrl = String.format("%s://%s%s/auth", (authSsl ? "https" : "http"), authHostName, (authPort == 443 || authPort == 80 ? "" : ":" + authPort));
+			String authUrl = String.format("%s", config().getString(ConfigKeys.AUTH_URL));
 			oauth2ClientOptions.setSite(authUrl + "/realms/" + config().getString(ConfigKeys.AUTH_REALM));
 			oauth2ClientOptions.setTenant(config().getString(ConfigKeys.AUTH_REALM));
 			oauth2ClientOptions.setClientId(config().getString(ConfigKeys.AUTH_CLIENT));
@@ -759,7 +778,44 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 		return promise.future();
 	}
 
-	/**	
+	/**
+	 * Val.Complete.enUS:Open Telemetry was configured successfully. 
+	 * Val.Fail.enUS:Could not configure Open Telemetry. 
+	 * Configure Open Telemetry for reporting metrics and time request traces. 
+	 **/
+	public Future<Void> configureOpenTelemetry() {
+		Promise<Void> promise = Promise.promise();
+		try {
+			ClusterManager clusterManager = ((VertxImpl)vertx).getClusterManager();
+			HealthCheckHandler healthCheckHandler = HealthCheckHandler.create(vertx);
+			siteInstances = Optional.ofNullable(System.getenv(ConfigKeys.SITE_INSTANCES)).map(s -> Integer.parseInt(s)).orElse(1);
+			workerPoolSize = System.getenv(ConfigKeys.WORKER_POOL_SIZE) == null ? null : Integer.parseInt(System.getenv(ConfigKeys.WORKER_POOL_SIZE));
+
+			healthCheckHandler.register("vertx", 2000, a -> {
+				a.complete(Status.OK(new JsonObject().put(ConfigKeys.SITE_INSTANCES, siteInstances).put("workerPoolSize", workerPoolSize)));
+			});
+			if(clusterManager != null) {
+				healthCheckHandler.register("cluster", 2000, a -> {
+					NodeInfo nodeInfo = clusterManager.getNodeInfo();
+					JsonArray nodeArray = new JsonArray();
+					clusterManager.getNodes().forEach(node -> nodeArray.add(node));
+					a.complete(Status.OK(new JsonObject()
+							.put("nodeId", clusterManager.getNodeId())
+							.put("nodes", nodeArray)
+							));
+				});
+			}
+			router.get("/health").handler(healthCheckHandler);
+			LOG.info(configureHealthChecksComplete);
+			promise.complete();
+		} catch (Exception ex) {
+			LOG.error(configureHealthChecksFail, ex);
+			promise.fail(ex);
+		}
+		return promise.future();
+	}
+
+	/**
 	 * Val.Complete.enUS:The health checks were configured successfully. 
 	 * Val.Fail.enUS:Could not configure the health checks. 
 	 * Val.ErrorDatabase.enUS:The database is not configured properly. 

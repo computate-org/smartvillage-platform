@@ -133,4 +133,5 @@ public class ConfigKeys extends ComputateConfigKeys {
 	public static final String MQTT_HOST = "MQTT_HOST";
 	public static final String MQTT_PORT = "MQTT_PORT";
 	public static final String MQTT_IOT_SUBSCRIBE_TOPIC = "MQTT_IOT_SUBSCRIBE_TOPIC";
+	public static final String OPEN_TELEMETRY_ENABLED = "OPEN_TELEMETRY_ENABLED";
 }
