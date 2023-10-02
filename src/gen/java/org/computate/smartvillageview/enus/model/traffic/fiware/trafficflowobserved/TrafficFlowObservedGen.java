@@ -1,45 +1,57 @@
 package org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved;
 
-import java.math.BigDecimal;
-import java.math.MathContext;
-import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
+import org.computate.smartvillageview.enus.model.base.BaseModel;
+import io.vertx.core.json.JsonObject;
+import java.util.Date;
+import java.util.Set;
+import org.computate.vertx.api.ApiRequest;
+import org.computate.smartvillageview.enus.config.ConfigKeys;
 import java.util.Optional;
+import java.util.List;
+import org.apache.commons.lang3.StringUtils;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.apache.commons.lang3.math.NumberUtils;
-import org.computate.search.response.solr.SolrResponse;
-import org.computate.search.wrap.Wrap;
-import org.computate.smartvillageview.enus.model.base.BaseModel;
-import org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLight;
-import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
-import org.computate.smartvillageview.enus.result.map.MapResult;
-import org.computate.vertx.api.ApiRequest;
-import org.computate.vertx.search.list.SearchList;
-import org.computate.vertx.serialize.pgclient.PgClientPathDeserializer;
-import org.computate.vertx.serialize.pgclient.PgClientPathSerializer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import org.computate.search.serialize.ComputateLocalDateSerializer;
+import org.computate.search.serialize.ComputateLocalDateDeserializer;
+import org.computate.search.serialize.ComputateZonedDateTimeSerializer;
+import org.computate.search.serialize.ComputateZonedDateTimeDeserializer;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
-
-import io.vertx.core.Future;
-import io.vertx.core.Promise;
-import io.vertx.core.json.JsonObject;
+import java.math.MathContext;
+import org.apache.commons.lang3.math.NumberUtils;
+import java.text.NumberFormat;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.HashMap;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import java.math.RoundingMode;
+import java.util.Map;
+import org.computate.smartvillageview.enus.result.map.MapResult;
 import io.vertx.pgclient.data.Path;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.computate.vertx.serialize.pgclient.PgClientPathSerializer;
+import org.computate.vertx.serialize.pgclient.PgClientPathDeserializer;
+import java.lang.String;
+import org.computate.vertx.search.list.SearchList;
+import org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLight;
+import java.math.BigDecimal;
+import java.lang.Boolean;
+import java.lang.Integer;
+import org.computate.search.wrap.Wrap;
+import io.vertx.core.Promise;
+import io.vertx.core.Future;
+import io.vertx.core.json.JsonArray;
+import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.computate.search.response.solr.SolrResponse;
 
 /**	
 <ol>
@@ -648,14 +660,14 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		this.path = TrafficFlowObserved.staticSetPath(siteRequest_, o);
 	}
 	public static Path staticSetPath(SiteRequestEnUS siteRequest_, String o) {
-		try {
 		if(o != null) {
-			ObjectMapper objectMapper = new ObjectMapper();
-			Path path = objectMapper.readValue(o, Path.class);
-			return path;
-		}
-		} catch(Exception ex) {
-			ExceptionUtils.rethrow(ex);
+			try {
+				ObjectMapper objectMapper = new ObjectMapper();
+				Path path = objectMapper.readValue(o, Path.class);
+				return path;
+			} catch(Exception ex) {
+				ExceptionUtils.rethrow(ex);
+			}
 		}
 		return null;
 	}
