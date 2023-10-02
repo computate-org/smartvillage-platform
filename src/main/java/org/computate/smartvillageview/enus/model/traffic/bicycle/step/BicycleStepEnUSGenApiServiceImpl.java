@@ -95,6 +95,7 @@ import org.computate.smartvillageview.enus.model.traffic.bicycle.step.BicycleSte
 
 /**
  * Translate: false
+ * Generated: true
  **/
 public class BicycleStepEnUSGenApiServiceImpl extends BaseApiServiceImpl implements BicycleStepEnUSGenApiService {
 

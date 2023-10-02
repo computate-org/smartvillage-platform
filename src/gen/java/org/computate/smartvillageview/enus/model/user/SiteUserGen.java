@@ -69,77 +69,77 @@ import org.computate.search.response.solr.SolrResponse;
  * The generated <code>class SiteUserGen extends BaseModel</code> which means that SiteUser extends SiteUserGen which extends BaseModel. 
  * This generated inheritance is a powerful feature that allows a lot of boiler plate code to be created for you automatically while still preserving inheritance through the power of Java Generic classes. 
  * </p>
- * Api: true
+ * <h2>Api: true</h2>
  * <p>This class contains a comment <b>"Api: true"</b>, which means this class will have Java Vert.x API backend code generated for these objects. 
  * </p>
- * ApiMethode: Search
+ * <h2>ApiMethode: Search</h2>
  * <p>This class contains a comment <b>"ApiMethod: Search"</b>, which creates an API "Search". 
  * </p>
- * ApiMethode: PATCH
+ * <h2>ApiMethode: PATCH</h2>
  * <p>This class contains a comment <b>"ApiMethod: PATCH"</b>, which creates an API "PATCH". 
  * </p>
- * ApiMethode: POST
+ * <h2>ApiMethode: POST</h2>
  * <p>This class contains a comment <b>"ApiMethod: POST"</b>, which creates an API "POST". 
  * </p>
- * ApiMethode: PUTImport
+ * <h2>ApiMethode: PUTImport</h2>
  * <p>This class contains a comment <b>"ApiMethod: PUTImport"</b>, which creates an API "PUTImport". 
  * </p>
- * ApiMethode: SearchPage
+ * <h2>ApiMethode: SearchPage</h2>
  * <p>This class contains a comment <b>"ApiMethod: SearchPage"</b>, which creates an API "SearchPage". 
  * </p>
- * ApiTag.enUS: true
+ * <h2>ApiTag.enUS: true</h2>
  * <p>This class contains a comment <b>"ApiTag: User"</b>, which groups all of the OpenAPIs for SiteUser objects under the tag "User". 
  * </p>
- * ApiUri.enUS: /api/user
+ * <h2>ApiUri.enUS: /api/user</h2>
  * <p>This class contains a comment <b>"ApiUri: /api/user"</b>, which defines the base API URI for SiteUser objects as "/api/user" in the OpenAPI spec. 
  * </p>
- * Color: 2017-shaded-spruce
+ * <h2>Color: 2017-shaded-spruce</h2>
  * <p>This class contains a comment <b>"Color: 2017-shaded-spruce"</b>, which styles the SiteUser page "2017-shaded-spruce". 
  * This will reference a CSS class defined by the stylesheets in the project that starts with "w3-". 
  * A css class of "w3-2017-shaded-spruce" is expected to exist in the project stylesheets, and is inspired by W3 CSS colors. 
  * See: <a href="https://www.w3schools.com/w3css/w3css_colors.asp">https://www.w3schools.com/w3css/w3css_colors.asp</a>. 
  * </p>
- * IconGroup: regular
+ * <h2>IconGroup: regular</h2>
  * <p>This class contains a comment <b>"IconGroup: regular"</b>, which adds icons on the SiteUser page with a group of "regular". 
  * This will reference a Font Awesome icon group that starts with "fa-" followed by the icon group "regular", together is "fa-regular". 
  * A Font Awesome icon group of "regular" is expected to exist. 
  * The Font Awesome groups currently supported include: solid, regular, light, thin, duotone, sharp, and kit. 
  * See: <a href="https://fontawesome.com/docs/web/dig-deeper/styles">https://fontawesome.com/docs/web/dig-deeper/styles</a>. 
  * </p>
- * IconName: user-cog
+ * <h2>IconName: user-cog</h2>
  * <p>This class contains a comment <b>"IconName: user-cog"</b>, which adds icons on the SiteUser page with a name of "user-cog". 
  * This will reference a Font Awesome icon that starts with the icon group "fa-regular fa-" followed by the icon name, which is "fa-regular fa-user-cog". 
  * A Font Awesome icon of "fa-regular fa-user-cog" is expected to exist. 
  * See: <a href="https://fontawesome.com/icons">https://fontawesome.com/icons</a>. 
  * </p>
- * Indexed: true
+ * <h2>Indexed: true</h2>
  * <p>This class contains a comment <b>"Indexed: true"</b>, which means this class will be indexed in the search engine. 
  * Every protected void method that begins with "_" that is marked to be searched with a comment like "Indexed: true", "Stored: true", or "DocValues: true" will be indexed in the search engine. 
  * </p>
- * {@inheritDoc}
+ * <h2>{@inheritDoc}</h2>
  * <p>By adding a class comment "{@inheritDoc}", the SiteUser class will inherit the helpful inherited class comments from the super class SiteUserGen. 
  * </p>
- * Rows: null
- * Order: 3
+ * <h2>Rows: null</h2>
+ * <h2>Order: 3</h2>
  * <p>This class contains a comment <b>"Order: 3"</b>, which means this class will be sorted by the given number 3 ascending when code that relates to multiple classes at the same time is generated. 
  * </p>
- * SqlOrder: 1
+ * <h2>SqlOrder: 1</h2>
  * <p>This class contains a comment <b>"SqlOrder: 1"</b>, which means this class will be sorted by the given number 1 ascending when SQL code to create and drop the tables is generated. 
  * </p>
- * Model: true
+ * <h2>Model: true</h2>
  * <p>This class contains a comment <b>"Model: true"</b>, which means this class will be stored in the database. 
  * Every protected void method that begins with "_" that contains a "Persist: true" comment will be a persisted field in the database table. 
  * </p>
- * Page: true
+ * <h2>Page: true</h2>
  * <p>This class contains a comment <b>"Page: true"</b>, which means this class will have webpage code generated for these objects. 
  * Java Vert.x backend API code, Handlebars HTML template frontend code, and JavaScript code will all generated and can be extended. 
  * This creates a new Java class org.computate.smartvillageview.enus.model.user.SiteUserPage. 
  * </p>
- * SuperPage.enUS: BaseModelPage
+ * <h2>SuperPage.enUS: BaseModelPage</h2>
  * <p>This class contains a comment <b>"SuperPage.enUS: BaseModelPage"</b>, which identifies the Java super class of the page code by it's class simple name "BaseModelPage". 
  * This means that the newly created class org.computate.smartvillageview.enus.model.user.SiteUserPage extends org.computate.smartvillageview.enus.model.base.BaseModelPage. 
  * </p>
- * Promise: true
+ * <h2>Promise: true</h2>
  * <p>
  *   This class contains a comment <b>"Promise: true"</b>
  *   Sometimes a Java class must be initialized asynchronously when it involves calling a blocking API. 
@@ -162,19 +162,19 @@ import org.computate.search.response.solr.SolrResponse;
  * <p>
  *   If a super class of this Java class with `Model: true`, then the child class will also inherit `Promise: true`. 
  * </p>
- * Role.enUS: SiteAdmin
+ * <h2>Role.enUS: SiteAdmin</h2>
  * <p>
  * This class contains a comment <b>"Role.enUS: SiteAdmin"</b>, which identifies the default role name "SiteAdmin" of the OAuth2/OpenID Connect user role required to access this SiteUser API. 
  * It's possible to reconfigure the roles required to access the SiteUser API by configuring an environment variable like this: 
  * </p>
  * <pre>AUTH_ROLE_REQUIRED_SiteUser: ["SiteAdmin"]</pre>
- * Role.enUS: SiteAdmin
+ * <h2>Role.enUS: SiteAdmin</h2>
  * <p>
  * This class contains a comment <b>"Role.enUS: SiteAdmin"</b>, which identifies the default role name "SiteAdmin" of the OAuth2/OpenID Connect user role required to access this SiteUser API. 
  * It's possible to reconfigure the roles required to access the SiteUser API by configuring an environment variable like this: 
  * </p>
  * <pre>AUTH_ROLE_REQUIRED_SiteUser: ["SiteAdmin"]</pre>
- * AName.enUS: a site user
+ * <h2>AName.enUS: a site user</h2>
  * <p>This class contains a comment <b>"AName.enUS: a site user"</b>, which identifies the language context to describe a SiteUser as "a site user". 
  * </p>
  * <p>
@@ -189,6 +189,7 @@ import org.computate.search.response.solr.SolrResponse;
  * Delete  the project smartabyar-smartvillage in Solr: 
  * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartabyar\-smartvillage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
+ * Generated: true
  **/
 public abstract class SiteUserGen<DEV> extends BaseModel {
 	protected static final Logger LOG = LoggerFactory.getLogger(SiteUser.class);

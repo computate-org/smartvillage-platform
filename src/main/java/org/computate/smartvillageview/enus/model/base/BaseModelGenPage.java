@@ -48,6 +48,7 @@ import java.time.ZoneId;
 
 /**
  * Translate: false
+ * Generated: true
  **/
 public class BaseModelGenPage extends BaseModelGenPageGen<PageLayout> {
 

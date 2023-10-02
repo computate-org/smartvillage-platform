@@ -44,6 +44,7 @@ import java.time.ZoneId;
 
 /**
  * Translate: false
+ * Generated: true
  **/
 public class SystemEventGenPage extends SystemEventGenPageGen<PageLayout> {
 

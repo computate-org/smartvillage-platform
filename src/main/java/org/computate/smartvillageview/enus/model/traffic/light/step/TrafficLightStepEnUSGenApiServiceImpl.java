@@ -95,6 +95,7 @@ import org.computate.smartvillageview.enus.model.traffic.light.step.TrafficLight
 
 /**
  * Translate: false
+ * Generated: true
  **/
 public class TrafficLightStepEnUSGenApiServiceImpl extends BaseApiServiceImpl implements TrafficLightStepEnUSGenApiService {
 

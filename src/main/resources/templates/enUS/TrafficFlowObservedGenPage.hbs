@@ -504,6 +504,15 @@
 {{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmPath" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmPath" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmPath" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
 {{> "htmColor" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
 {{#ifContainsAnyRoles roles roleForRead}}
@@ -1022,6 +1031,15 @@
 {{> "htmLocation" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
 {{> "htmLocation" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmPath" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmPath" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmPath" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleForWrite}}
@@ -1608,6 +1626,15 @@
 {{> "htmLocation" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
 {{> "htmLocation" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmPath" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmPath" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmPath" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleForWrite}}
@@ -2864,6 +2891,62 @@
 			{{/ifContainsKeys}}
 		{{else}}
 														<span class="varTrafficFlowObserved{{id}}Location varTrafficFlowObservedLocation ">{{trafficFlowObserved_.location}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmPath"}}
+<!-- #*inline "htmPath" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficFlowObservedPath">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_path">map location</label>
+												</div>
+											<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputPath" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputPath"}}
+		{{#eq roleForWriteBool "true"}}
+														<input
+															type="text"
+															placeholder="map location"
+															id="{{classApiMethodMethod}}_path"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setPath classTrafficFlowObserved inputTrafficFlowObserved{{id}}Path w3-input w3-border "
+																name="setPath"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setPath classTrafficFlowObserved inputTrafficFlowObserved{{id}}Path w3-input w3-border "
+																name="setPath"
+		{{else}}
+																class="valuePath w3-input w3-border classTrafficFlowObserved inputTrafficFlowObserved{{id}}Path w3-input w3-border "
+																name="path"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setPath', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_path')); }, function() { addError($('#{{classApiMethodMethod}}_path')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficFlowObserved_.path}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficFlowObserved{{id}}Path varTrafficFlowObservedPath ">{{trafficFlowObserved_.path}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficFlowObserved{{id}}Path varTrafficFlowObservedPath ">{{trafficFlowObserved_.path}}</span>
 		{{/eq}}
 {{/inline}}
 

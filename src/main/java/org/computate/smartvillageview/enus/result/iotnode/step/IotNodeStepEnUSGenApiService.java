@@ -22,6 +22,7 @@ import io.vertx.ext.auth.authorization.AuthorizationProvider;
 /**
  * Translate: false
  * Gen: false
+ * Generated: true
  **/
 @WebApiServiceGen
 @ProxyGen

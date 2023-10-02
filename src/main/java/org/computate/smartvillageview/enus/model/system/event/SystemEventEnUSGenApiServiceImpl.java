@@ -95,6 +95,7 @@ import org.computate.smartvillageview.enus.model.system.event.SystemEventPage;
 
 /**
  * Translate: false
+ * Generated: true
  **/
 public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl implements SystemEventEnUSGenApiService {
 

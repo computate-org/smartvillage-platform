@@ -95,6 +95,7 @@ import org.computate.smartvillageview.enus.model.traffic.time.step.TimeStepPage;
 
 /**
  * Translate: false
+ * Generated: true
  **/
 public class TimeStepEnUSGenApiServiceImpl extends BaseApiServiceImpl implements TimeStepEnUSGenApiService {
 

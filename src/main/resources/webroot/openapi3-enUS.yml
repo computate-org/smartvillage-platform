@@ -12451,7 +12451,7 @@ components:
   securitySchemes:
     openIdConnect:
       type: openIdConnect
-      openIdConnectUrl: https://sso.computate.org/auth/realms/SMARTVILLAGE/.well-known/openid-configuration
+      openIdConnectUrl: https://sso.smartabyarsmartvillage.org/auth/realms/SMARTVILLAGE/.well-known/openid-configuration
   requestBodies:
     SearchSiteHtmResponse:
       content:
@@ -17456,6 +17456,8 @@ components:
               items:
                 type: object
                 properties:
+                  path:
+                    type: string
                   entityId:
                     type: string
                   simulationName:
@@ -17542,6 +17544,13 @@ components:
       allOf:
         - type: object
           properties:
+            setPath:
+              type: string
+              nullable: true
+            removePath:
+              type: string
+            removeAllPath:
+              type: string
             setEntityId:
               type: string
               nullable: true
@@ -17833,6 +17842,13 @@ components:
       allOf:
         - type: object
           properties:
+            setPath:
+              type: string
+              nullable: true
+            removePath:
+              type: string
+            removeAllPath:
+              type: string
             setEntityId:
               type: string
               nullable: true
@@ -18124,6 +18140,8 @@ components:
       allOf:
         - type: object
           properties:
+            path:
+              type: string
             entityId:
               type: string
             simulationName:
@@ -18210,6 +18228,8 @@ components:
       allOf:
         - type: object
           properties:
+            path:
+              type: string
             entityId:
               type: string
             simulationName:
@@ -18296,6 +18316,8 @@ components:
       allOf:
         - type: object
           properties:
+            path:
+              type: string
             entityId:
               type: string
             simulationName:
@@ -18382,6 +18404,8 @@ components:
       allOf:
         - type: object
           properties:
+            path:
+              type: string
             entityId:
               type: string
             simulationName:
@@ -18469,6 +18493,8 @@ components:
         - $ref: "#/components/schemas/GETMapResultResponse"
         - type: object
           properties:
+            path:
+              type: string
             entityId:
               type: string
             simulationName:

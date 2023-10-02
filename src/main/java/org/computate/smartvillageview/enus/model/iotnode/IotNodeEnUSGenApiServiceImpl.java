@@ -95,6 +95,7 @@ import org.computate.smartvillageview.enus.model.iotnode.IotNodePage;
 
 /**
  * Translate: false
+ * Generated: true
  **/
 public class IotNodeEnUSGenApiServiceImpl extends BaseApiServiceImpl implements IotNodeEnUSGenApiService {
 

@@ -77,34 +77,34 @@ import io.vertx.core.json.JsonObject;
  * The generated <code>class BaseResultGen extends Object</code> which means that BaseResult extends BaseResultGen which extends Object. 
  * This generated inheritance is a powerful feature that allows a lot of boiler plate code to be created for you automatically while still preserving inheritance through the power of Java Generic classes. 
  * </p>
- * Api: true
- * ApiTag.enUS: true
- * ApiUri.enUS: null
- * Color: null
- * IconGroup: null
- * IconName: null
- * Indexed: true
+ * <h2>Api: true</h2>
+ * <h2>ApiTag.enUS: true</h2>
+ * <h2>ApiUri.enUS: null</h2>
+ * <h2>Color: null</h2>
+ * <h2>IconGroup: null</h2>
+ * <h2>IconName: null</h2>
+ * <h2>Indexed: true</h2>
  * <p>This class contains a comment <b>"Indexed: true"</b>, which means this class will be indexed in the search engine. 
  * Every protected void method that begins with "_" that is marked to be searched with a comment like "Indexed: true", "Stored: true", or "DocValues: true" will be indexed in the search engine. 
  * </p>
- * {@inheritDoc}
+ * <h2>{@inheritDoc}</h2>
  * <p>By adding a class comment "{@inheritDoc}", the BaseResult class will inherit the helpful inherited class comments from the super class BaseResultGen. 
  * </p>
- * Rows: null
- * Order: 2
+ * <h2>Rows: null</h2>
+ * <h2>Order: 2</h2>
  * <p>This class contains a comment <b>"Order: 2"</b>, which means this class will be sorted by the given number 2 ascending when code that relates to multiple classes at the same time is generated. 
  * </p>
- * Model: true
- * Page: true
+ * <h2>Model: true</h2>
+ * <h2>Page: true</h2>
  * <p>This class contains a comment <b>"Page: true"</b>, which means this class will have webpage code generated for these objects. 
  * Java Vert.x backend API code, Handlebars HTML template frontend code, and JavaScript code will all generated and can be extended. 
  * This creates a new Java class org.computate.smartvillageview.enus.result.base.BaseResultPage. 
  * </p>
- * SuperPage.enUS: PageLayout
+ * <h2>SuperPage.enUS: PageLayout</h2>
  * <p>This class contains a comment <b>"SuperPage.enUS: PageLayout"</b>, which identifies the Java super class of the page code by it's class simple name "PageLayout". 
  * This means that the newly created class org.computate.smartvillageview.enus.result.base.BaseResultPage extends org.computate.smartvillageview.enus.page.PageLayout. 
  * </p>
- * Promise: true
+ * <h2>Promise: true</h2>
  * <p>
  *   This class contains a comment <b>"Promise: true"</b>
  *   Sometimes a Java class must be initialized asynchronously when it involves calling a blocking API. 
@@ -127,7 +127,7 @@ import io.vertx.core.json.JsonObject;
  * <p>
  *   If a super class of this Java class with `Model: true`, then the child class will also inherit `Promise: true`. 
  * </p>
- * AName.enUS: null
+ * <h2>AName.enUS: null</h2>
  * <p>
  * Delete the class BaseResult in Solr: 
  * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.result.base.BaseResult&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
@@ -140,6 +140,7 @@ import io.vertx.core.json.JsonObject;
  * Delete  the project smartabyar-smartvillage in Solr: 
  * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartabyar\-smartvillage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
+ * Generated: true
  **/
 public abstract class BaseResultGen<DEV> extends Object {
 	protected static final Logger LOG = LoggerFactory.getLogger(BaseResult.class);

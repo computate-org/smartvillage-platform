@@ -97,6 +97,7 @@ import org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficligh
 
 /**
  * Translate: false
+ * Generated: true
  **/
 public class SmartTrafficLightEnUSGenApiServiceImpl extends BaseApiServiceImpl implements SmartTrafficLightEnUSGenApiService {
 

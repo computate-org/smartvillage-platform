@@ -3,27 +3,9 @@ package org.computate.smartvillageview.enus.vertx;
 import static org.apache.commons.lang3.Validate.isTrue;
 
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.net.URLEncoder;
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-import java.text.NumberFormat;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Locale;
-import java.util.Map;
-import java.util.TimeZone;
-
-import org.computate.search.serialize.ComputateZonedDateTimeSerializer;
 
 import com.github.jknack.handlebars.Helper;
 import com.github.jknack.handlebars.Options;
-import com.github.jknack.handlebars.TagType;
-import com.github.jknack.handlebars.internal.lang3.LocaleUtils;
-
-import io.vertx.core.json.JsonObject;
 
 public enum ProjectHelpers implements Helper<Object> {
 

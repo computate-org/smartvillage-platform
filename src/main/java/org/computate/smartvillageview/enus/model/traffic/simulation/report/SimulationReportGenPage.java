@@ -45,6 +45,7 @@ import java.time.ZoneId;
 
 /**
  * Translate: false
+ * Generated: true
  **/
 public class SimulationReportGenPage extends SimulationReportGenPageGen<BaseModelPage> {
 

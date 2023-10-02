@@ -95,6 +95,7 @@ import org.computate.smartvillageview.enus.model.traffic.person.step.PersonStepP
 
 /**
  * Translate: false
+ * Generated: true
  **/
 public class PersonStepEnUSGenApiServiceImpl extends BaseApiServiceImpl implements PersonStepEnUSGenApiService {
 

@@ -95,6 +95,7 @@ import org.computate.smartvillageview.enus.model.user.SiteUserPage;
 
 /**
  * Translate: false
+ * Generated: true
  **/
 public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements SiteUserEnUSGenApiService {
 

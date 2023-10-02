@@ -95,6 +95,7 @@ import org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobser
 
 /**
  * Translate: false
+ * Generated: true
  **/
 public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl implements TrafficFlowObservedEnUSGenApiService {
 

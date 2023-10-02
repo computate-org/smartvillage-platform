@@ -10,16 +10,19 @@ import org.computate.vertx.search.list.SearchList;
 
 import io.vertx.core.Promise;
 import io.vertx.core.json.JsonObject;
+import io.vertx.pgclient.data.Path;
+import io.vertx.pgclient.data.Point;
 
 /**
  * SmartDataModel: TrafficFlowObserved - Transportation - Smart Cities
+ * Fiware: true
+ * 
  * Api: true
  * Page: true
  * SuperPage.enUS: MapResultPage
  * Indexed: true
  * Order: 18
  * Description: A device for watching vehicles in a lane of traffic on a road. 
- * Fiware: true
  * 
  * ApiTag.enUS: Traffic Flow Observed
  * ApiUri.enUS: /api/traffic-flow-observed
@@ -43,6 +46,25 @@ import io.vertx.core.json.JsonObject;
  * Rows: 100
  */
 public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * DisplayName: map location
+	 * HtmRow: 4
+	 * HtmCell: 2
+	 * Facet: true
+	 */
+	protected void _path(Wrap<Path> w) {
+	}
+
+	@Override
+	protected void _location(Wrap<Point> w) {
+		if(path != null && path.getPoints().size() > 0) {
+			w.o(path.getPoints().get(0));
+		}
+	}
 
 	/**
 	 * {@inheritDoc}

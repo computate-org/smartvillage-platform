@@ -98,6 +98,7 @@ import org.computate.smartvillageview.enus.model.traffic.simulation.map.TrafficS
 
 /**
  * Translate: false
+ * Generated: true
  **/
 public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl implements TrafficSimulationEnUSGenApiService {
 

@@ -599,6 +599,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 			oauth2ClientOptions.setAuthorizationPath("/oauth/authorize");
 			JsonObject extraParams = new JsonObject();
 			extraParams.put("scope", "profile");
+			extraParams.put("scopes", "profile");
 			oauth2ClientOptions.setExtraParameters(extraParams);
 			oauth2ClientOptions.setHttpClientOptions(new HttpClientOptions().setTrustAll(true).setVerifyHost(false).setConnectTimeout(120000));
 

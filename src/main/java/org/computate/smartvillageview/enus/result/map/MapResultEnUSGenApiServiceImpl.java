@@ -95,6 +95,7 @@ import org.computate.smartvillageview.enus.result.map.MapResultPage;
 
 /**
  * Translate: false
+ * Generated: true
  **/
 public class MapResultEnUSGenApiServiceImpl extends BaseApiServiceImpl implements MapResultEnUSGenApiService {
 

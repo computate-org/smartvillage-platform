@@ -95,6 +95,7 @@ import org.computate.smartvillageview.enus.model.traffic.vehicle.step.VehicleSte
 
 /**
  * Translate: false
+ * Generated: true
  **/
 public class VehicleStepEnUSGenApiServiceImpl extends BaseApiServiceImpl implements VehicleStepEnUSGenApiService {
 

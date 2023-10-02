@@ -12,6 +12,8 @@ import io.vertx.pgclient.data.Point;
 
 /**
  * {@inheritDoc}
+ * Fiware: true
+ * 
  * Model: true
  * Api: true
  * Page: true
@@ -20,7 +22,6 @@ import io.vertx.pgclient.data.Point;
  * SqlOrder: 2
  * Order: 8
  * Description: A SUMO Traffic Simulation
- * Fiware: true
  * 
  * ApiTag.enUS: Traffic Simulation
  * ApiUri.enUS: /api/traffic-simulation

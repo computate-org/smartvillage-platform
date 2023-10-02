@@ -99,6 +99,7 @@ import org.computate.smartvillageview.enus.model.traffic.simulation.report.Simul
 
 /**
  * Translate: false
+ * Generated: true
  **/
 public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl implements SimulationReportEnUSGenApiService {
 
