@@ -1101,7 +1101,7 @@ public abstract class PersonStepGen<DEV> extends MapResult {
 	}
 	public void populatePersonStep(SolrResponse.Doc doc) {
 		PersonStep oPersonStep = (PersonStep)this;
-		saves = doc.get("saves_docvalues_strings");
+		saves = Optional.ofNullable((ArrayList<String>)doc.get("saves_docvalues_strings")).orElse(new ArrayList<String>());
 		if(saves != null) {
 
 			if(saves.contains("simulationName")) {

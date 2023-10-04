@@ -17439,7 +17439,6 @@ components:
         - type: string
     SearchTrafficFlowObservedResponse:
       allOf:
-        - $ref: "#/components/schemas/SearchMapResultResponse"
         - type: object
           properties:
             startNum:
@@ -17456,7 +17455,9 @@ components:
               items:
                 type: object
                 properties:
-                  path:
+                  location:
+                    type: string
+                  color:
                     type: string
                   entityId:
                     type: string
@@ -17544,12 +17545,19 @@ components:
       allOf:
         - type: object
           properties:
-            setPath:
+            setLocation:
               type: string
               nullable: true
-            removePath:
+            removeLocation:
               type: string
-            removeAllPath:
+            removeAllLocation:
+              type: string
+            setColor:
+              type: string
+              nullable: true
+            removeColor:
+              type: string
+            removeAllColor:
               type: string
             setEntityId:
               type: string
@@ -17842,12 +17850,19 @@ components:
       allOf:
         - type: object
           properties:
-            setPath:
+            setLocation:
               type: string
               nullable: true
-            removePath:
+            removeLocation:
               type: string
-            removeAllPath:
+            removeAllLocation:
+              type: string
+            setColor:
+              type: string
+              nullable: true
+            removeColor:
+              type: string
+            removeAllColor:
               type: string
             setEntityId:
               type: string
@@ -18140,7 +18155,9 @@ components:
       allOf:
         - type: object
           properties:
-            path:
+            location:
+              type: string
+            color:
               type: string
             entityId:
               type: string
@@ -18228,7 +18245,9 @@ components:
       allOf:
         - type: object
           properties:
-            path:
+            location:
+              type: string
+            color:
               type: string
             entityId:
               type: string
@@ -18316,7 +18335,9 @@ components:
       allOf:
         - type: object
           properties:
-            path:
+            location:
+              type: string
+            color:
               type: string
             entityId:
               type: string
@@ -18404,7 +18425,9 @@ components:
       allOf:
         - type: object
           properties:
-            path:
+            location:
+              type: string
+            color:
               type: string
             entityId:
               type: string
@@ -18490,10 +18513,11 @@ components:
               type: string
     GETTrafficFlowObservedResponse:
       allOf:
-        - $ref: "#/components/schemas/GETMapResultResponse"
         - type: object
           properties:
-            path:
+            location:
+              type: string
+            color:
               type: string
             entityId:
               type: string

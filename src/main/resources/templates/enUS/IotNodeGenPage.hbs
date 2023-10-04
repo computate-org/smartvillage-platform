@@ -1,9 +1,9 @@
 {{#*inline "htmTitleIotNodePage"}}		<!-- inline "htmTitleIotNodePage" -->
 		<title>{{#if searchListIotNode_}}{{#eq iotNodeCount int1}}{{#if id}}IOT node{{else}}IOT node{{/if}}{{else}}no IOT node found{{/eq}}{{else}}IOT nodes{{/if}}</title>
 {{/inline}}
-{{#*inline "htmMetaIotNodePage"}}{{> "htmMetaMapResultPage"}}{{/inline}}
-{{#*inline "htmStyleIotNodePage"}}{{> "htmStyleMapResultPage"}}{{/inline}}
-{{#*inline "htmScriptsIotNodePage"}}{{> "htmScriptsMapResultPage"}}		<!-- inline "htmScriptsIotNodePage" -->
+{{#*inline "htmMetaIotNodePage"}}{{> "htmMetaBaseResultPage"}}{{/inline}}
+{{#*inline "htmStyleIotNodePage"}}{{> "htmStyleBaseResultPage"}}{{/inline}}
+{{#*inline "htmScriptsIotNodePage"}}{{> "htmScriptsBaseResultPage"}}		<!-- inline "htmScriptsIotNodePage" -->
 		<script src="{{staticBaseUrl}}/js/enUS/IotNodePage.js"></script>
 {{/inline}}
 {{#*inline "htmScriptIotNodePage"}}		<!-- inline "htmScriptIotNodePage" -->
@@ -268,9 +268,9 @@
 								</table>
 {{/inline}}
 {{#*inline "htmBodyMenuIotNodePage"}}		<!-- #*inline "htmBodyMenuIotNodePage" -->
-{{> "htmBodyMenuMapResultPage"}}{{/inline}}
+{{> "htmBodyMenuBaseResultPage"}}{{/inline}}
 {{#*inline "htmBodyGraphIotNodePage"}}		<!-- #*inline "htmBodyGraphIotNodePage" -->
-<div id="htmBodyGraphMapResultPage" class="w3-content htmBodyGraph "></div>{{/inline}}
+<div id="htmBodyGraphBaseResultPage" class="w3-content htmBodyGraph "></div>{{/inline}}
 {{#*inline "htmBodyCount0IotNodePage"}}		<!-- #*inline "htmBodyCount0IotNodePage" -->
 		<h1>
 			<a href="{{pageUri}}" class="w3-bar-item w3-btn w3-center w3-block w3-2017-shaded-spruce w3-hover-2017-shaded-spruce">
@@ -1156,13 +1156,13 @@
 				</div>
 {{/inline}}
 {{#*inline "htmBodyStartIotNodePage"}}
-{{> "htmBodyStartMapResultPage"}}
+{{> "htmBodyStartBaseResultPage"}}
 {{/inline}}
 {{#*inline "htmBodyMiddleIotNodePage"}}
-{{> "htmBodyMiddleMapResultPage"}}
+{{> "htmBodyMiddleBaseResultPage"}}
 {{/inline}}
 {{#*inline "htmBodyEndIotNodePage"}}
-{{> "htmBodyEndMapResultPage"}}
+{{> "htmBodyEndBaseResultPage"}}
 {{/inline}}
 {{#*inline "htmBodyIotNodePage"}}
 {{#block "htmBodyStart"}}{{/block}}
@@ -1342,7 +1342,7 @@
 				</a>
 			</div>
 {{/inline}}
-{{> MapResultPage baseResult_=iotNode_}}
+{{> BaseResultPage baseResult_=iotNode_}}
 
 {{#*inline "htmCreated"}}
 <!-- #*inline "htmCreated" -->

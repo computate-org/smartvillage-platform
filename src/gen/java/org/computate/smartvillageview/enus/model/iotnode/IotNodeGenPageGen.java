@@ -32,7 +32,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.math.RoundingMode;
 import java.util.Map;
-import org.computate.smartvillageview.enus.result.map.MapResultPage;
+import org.computate.smartvillageview.enus.result.base.BaseResultPage;
 import org.computate.vertx.search.list.SearchList;
 import org.computate.smartvillageview.enus.model.iotnode.IotNode;
 import io.vertx.core.json.JsonArray;
@@ -48,7 +48,7 @@ import io.vertx.core.Future;
  * <li>You can add a class comment <b>"Api: true"</b> if you wish to GET, POST, PATCH or PUT these IotNodeGenPage objects in a RESTful API. 
  * </li><li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class IotNodeGenPageGen into the class IotNodeGenPage. 
  * </li>
- * <h3>About the IotNodeGenPage class and it's generated class IotNodeGenPageGen&lt;MapResultPage&gt;: </h3>extends IotNodeGenPageGen
+ * <h3>About the IotNodeGenPage class and it's generated class IotNodeGenPageGen&lt;BaseResultPage&gt;: </h3>extends IotNodeGenPageGen
  * <p>
  * This Java class extends a generated Java class IotNodeGenPageGen built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
  * Whenever this Java class is modified or touched, the watch service installed as described in the README, indexes all the information about this Java class in a local Apache Solr Search Engine. 
@@ -59,9 +59,9 @@ import io.vertx.core.Future;
  * The extended class ending with "Gen" did not exist at first, but was automatically created by the same watch service based on the data retrieved from the local Apache Server search engine. 
  * The extended class contains many generated fields, getters, setters, initialization code, and helper methods to help build a website and API fast, reactive, and scalable. 
  * </p>
- * extends IotNodeGenPageGen<MapResultPage>
- * <p>This <code>class IotNodeGenPage extends IotNodeGenPageGen&lt;MapResultPage&gt;</code>, which means it extends a newly generated IotNodeGenPageGen. 
- * The generated <code>class IotNodeGenPageGen extends MapResultPage</code> which means that IotNodeGenPage extends IotNodeGenPageGen which extends MapResultPage. 
+ * extends IotNodeGenPageGen<BaseResultPage>
+ * <p>This <code>class IotNodeGenPage extends IotNodeGenPageGen&lt;BaseResultPage&gt;</code>, which means it extends a newly generated IotNodeGenPageGen. 
+ * The generated <code>class IotNodeGenPageGen extends BaseResultPage</code> which means that IotNodeGenPage extends IotNodeGenPageGen which extends BaseResultPage. 
  * This generated inheritance is a powerful feature that allows a lot of boiler plate code to be created for you automatically while still preserving inheritance through the power of Java Generic classes. 
  * </p>
  * <h2>Api: true</h2>
@@ -116,7 +116,7 @@ import io.vertx.core.Future;
  * </p>
  * Generated: true
  **/
-public abstract class IotNodeGenPageGen<DEV> extends MapResultPage {
+public abstract class IotNodeGenPageGen<DEV> extends BaseResultPage {
 	protected static final Logger LOG = LoggerFactory.getLogger(IotNodeGenPage.class);
 
 	////////////////////////
@@ -433,7 +433,7 @@ public abstract class IotNodeGenPageGen<DEV> extends MapResultPage {
 		Promise<Void> promise2 = Promise.promise();
 		promiseIotNodeGenPage(promise2);
 		promise2.future().onSuccess(a -> {
-			super.promiseDeepMapResultPage(siteRequest_).onSuccess(b -> {
+			super.promiseDeepBaseResultPage(siteRequest_).onSuccess(b -> {
 				promise.complete();
 			}).onFailure(ex -> {
 				promise.fail(ex);
@@ -476,7 +476,7 @@ public abstract class IotNodeGenPageGen<DEV> extends MapResultPage {
 	/////////////////
 
 	public void siteRequestIotNodeGenPage(SiteRequestEnUS siteRequest_) {
-			super.siteRequestMapResultPage(siteRequest_);
+			super.siteRequestBaseResultPage(siteRequest_);
 	}
 
 	public void siteRequestForClass(SiteRequestEnUS siteRequest_) {
@@ -520,7 +520,7 @@ public abstract class IotNodeGenPageGen<DEV> extends MapResultPage {
 			case "pageUriIotNode":
 				return oIotNodeGenPage.pageUriIotNode;
 			default:
-				return super.obtainMapResultPage(var);
+				return super.obtainBaseResultPage(var);
 		}
 	}
 
@@ -545,7 +545,7 @@ public abstract class IotNodeGenPageGen<DEV> extends MapResultPage {
 		IotNodeGenPage oIotNodeGenPage = (IotNodeGenPage)this;
 		switch(var) {
 			default:
-				return super.relateMapResultPage(var, val);
+				return super.relateBaseResultPage(var, val);
 		}
 	}
 
@@ -567,7 +567,7 @@ public abstract class IotNodeGenPageGen<DEV> extends MapResultPage {
 		case "pageUriIotNode":
 			return IotNodeGenPage.staticSetPageUriIotNode(siteRequest_, o);
 			default:
-				return MapResultPage.staticSetMapResultPage(entityVar,  siteRequest_, o);
+				return BaseResultPage.staticSetBaseResultPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -589,7 +589,7 @@ public abstract class IotNodeGenPageGen<DEV> extends MapResultPage {
 		case "pageUriIotNode":
 			return IotNodeGenPage.staticSearchPageUriIotNode(siteRequest_, (String)o);
 			default:
-				return MapResultPage.staticSearchMapResultPage(entityVar,  siteRequest_, o);
+				return BaseResultPage.staticSearchBaseResultPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -611,7 +611,7 @@ public abstract class IotNodeGenPageGen<DEV> extends MapResultPage {
 		case "pageUriIotNode":
 			return IotNodeGenPage.staticSearchStrPageUriIotNode(siteRequest_, (String)o);
 			default:
-				return MapResultPage.staticSearchStrMapResultPage(entityVar,  siteRequest_, o);
+				return BaseResultPage.staticSearchStrBaseResultPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -633,7 +633,7 @@ public abstract class IotNodeGenPageGen<DEV> extends MapResultPage {
 		case "pageUriIotNode":
 			return IotNodeGenPage.staticSearchFqPageUriIotNode(siteRequest_, o);
 			default:
-				return MapResultPage.staticSearchFqMapResultPage(entityVar,  siteRequest_, o);
+				return BaseResultPage.staticSearchFqBaseResultPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -680,7 +680,7 @@ public abstract class IotNodeGenPageGen<DEV> extends MapResultPage {
 		case VAR_pageUriIotNode:
 			return DISPLAY_NAME_pageUriIotNode;
 		default:
-			return MapResultPage.displayNameMapResultPage(var);
+			return BaseResultPage.displayNameBaseResultPage(var);
 		}
 	}
 }

@@ -886,7 +886,7 @@ public abstract class TrafficLightGen<DEV> extends MapResult {
 	}
 	public void populateTrafficLight(SolrResponse.Doc doc) {
 		TrafficLight oTrafficLight = (TrafficLight)this;
-		saves = doc.get("saves_docvalues_strings");
+		saves = Optional.ofNullable((ArrayList<String>)doc.get("saves_docvalues_strings")).orElse(new ArrayList<String>());
 		if(saves != null) {
 
 			if(saves.contains("simulationName")) {

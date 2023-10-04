@@ -1807,7 +1807,7 @@ public abstract class BaseResultGen<DEV> extends Object {
 	}
 	public void populateBaseResult(SolrResponse.Doc doc) {
 		BaseResult oBaseResult = (BaseResult)this;
-		saves = doc.get("saves_docvalues_strings");
+		saves = Optional.ofNullable((ArrayList<String>)doc.get("saves_docvalues_strings")).orElse(new ArrayList<String>());
 		if(saves != null) {
 
 			if(saves.contains("inheritPk")) {

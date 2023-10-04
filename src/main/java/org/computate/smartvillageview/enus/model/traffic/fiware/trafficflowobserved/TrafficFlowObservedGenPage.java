@@ -1,7 +1,7 @@
 package org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved;
 
 import org.computate.smartvillageview.enus.page.PageLayout;
-import org.computate.smartvillageview.enus.result.map.MapResultPage;
+import org.computate.smartvillageview.enus.model.base.BaseModelPage;
 import org.computate.smartvillageview.enus.request.SiteRequestEnUS;
 import org.computate.smartvillageview.enus.model.user.SiteUser;
 import java.io.IOException;
@@ -47,7 +47,7 @@ import java.time.ZoneId;
  * Translate: false
  * Generated: true
  **/
-public class TrafficFlowObservedGenPage extends TrafficFlowObservedGenPageGen<MapResultPage> {
+public class TrafficFlowObservedGenPage extends TrafficFlowObservedGenPageGen<BaseModelPage> {
 
 	/**
 	 * {@inheritDoc}
@@ -453,6 +453,11 @@ public class TrafficFlowObservedGenPage extends TrafficFlowObservedGenPageGen<Ma
 	protected void _trafficFlowObserved_(Wrap<TrafficFlowObserved> w) {
 		if(trafficFlowObservedCount == 1 && Optional.ofNullable(siteRequest_.getServiceRequest().getParams().getJsonObject("path")).map(o -> o.getString("id")).orElse(null) != null)
 			w.o(searchListTrafficFlowObserved_.get(0));
+	}
+
+	protected void _pk(Wrap<Long> w) {
+		if(trafficFlowObserved_ != null)
+			w.o(trafficFlowObserved_.getPk());
 	}
 
 	protected void _id(Wrap<String> w) {

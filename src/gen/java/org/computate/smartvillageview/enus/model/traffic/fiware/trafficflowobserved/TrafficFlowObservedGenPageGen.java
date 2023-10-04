@@ -32,12 +32,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.math.RoundingMode;
 import java.util.Map;
-import org.computate.smartvillageview.enus.result.map.MapResultPage;
+import org.computate.smartvillageview.enus.model.base.BaseModelPage;
 import org.computate.vertx.search.list.SearchList;
 import org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved.TrafficFlowObserved;
 import io.vertx.core.json.JsonArray;
 import java.lang.Integer;
 import java.lang.String;
+import java.lang.Long;
 import org.computate.search.wrap.Wrap;
 import io.vertx.core.Promise;
 import io.vertx.core.Future;
@@ -48,7 +49,7 @@ import io.vertx.core.Future;
  * <li>You can add a class comment <b>"Api: true"</b> if you wish to GET, POST, PATCH or PUT these TrafficFlowObservedGenPage objects in a RESTful API. 
  * </li><li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class TrafficFlowObservedGenPageGen into the class TrafficFlowObservedGenPage. 
  * </li>
- * <h3>About the TrafficFlowObservedGenPage class and it's generated class TrafficFlowObservedGenPageGen&lt;MapResultPage&gt;: </h3>extends TrafficFlowObservedGenPageGen
+ * <h3>About the TrafficFlowObservedGenPage class and it's generated class TrafficFlowObservedGenPageGen&lt;BaseModelPage&gt;: </h3>extends TrafficFlowObservedGenPageGen
  * <p>
  * This Java class extends a generated Java class TrafficFlowObservedGenPageGen built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
  * Whenever this Java class is modified or touched, the watch service installed as described in the README, indexes all the information about this Java class in a local Apache Solr Search Engine. 
@@ -59,9 +60,9 @@ import io.vertx.core.Future;
  * The extended class ending with "Gen" did not exist at first, but was automatically created by the same watch service based on the data retrieved from the local Apache Server search engine. 
  * The extended class contains many generated fields, getters, setters, initialization code, and helper methods to help build a website and API fast, reactive, and scalable. 
  * </p>
- * extends TrafficFlowObservedGenPageGen<MapResultPage>
- * <p>This <code>class TrafficFlowObservedGenPage extends TrafficFlowObservedGenPageGen&lt;MapResultPage&gt;</code>, which means it extends a newly generated TrafficFlowObservedGenPageGen. 
- * The generated <code>class TrafficFlowObservedGenPageGen extends MapResultPage</code> which means that TrafficFlowObservedGenPage extends TrafficFlowObservedGenPageGen which extends MapResultPage. 
+ * extends TrafficFlowObservedGenPageGen<BaseModelPage>
+ * <p>This <code>class TrafficFlowObservedGenPage extends TrafficFlowObservedGenPageGen&lt;BaseModelPage&gt;</code>, which means it extends a newly generated TrafficFlowObservedGenPageGen. 
+ * The generated <code>class TrafficFlowObservedGenPageGen extends BaseModelPage</code> which means that TrafficFlowObservedGenPage extends TrafficFlowObservedGenPageGen which extends BaseModelPage. 
  * This generated inheritance is a powerful feature that allows a lot of boiler plate code to be created for you automatically while still preserving inheritance through the power of Java Generic classes. 
  * </p>
  * <h2>Api: true</h2>
@@ -116,7 +117,7 @@ import io.vertx.core.Future;
  * </p>
  * Generated: true
  **/
-public abstract class TrafficFlowObservedGenPageGen<DEV> extends MapResultPage {
+public abstract class TrafficFlowObservedGenPageGen<DEV> extends BaseModelPage {
 	protected static final Logger LOG = LoggerFactory.getLogger(TrafficFlowObservedGenPage.class);
 
 	////////////////////////////////////
@@ -316,6 +317,66 @@ public abstract class TrafficFlowObservedGenPageGen<DEV> extends MapResultPage {
 	}
 
 	////////
+	// pk //
+	////////
+
+
+	/**	 The entity pk
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected Long pk;
+
+	/**	<br> The entity pk
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved.TrafficFlowObservedGenPage&fq=entiteVar_enUS_indexed_string:pk">Find the entity pk in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _pk(Wrap<Long> w);
+
+	public Long getPk() {
+		return pk;
+	}
+
+	public void setPk(Long pk) {
+		this.pk = pk;
+	}
+	@JsonIgnore
+	public void setPk(String o) {
+		this.pk = TrafficFlowObservedGenPage.staticSetPk(siteRequest_, o);
+	}
+	public static Long staticSetPk(SiteRequestEnUS siteRequest_, String o) {
+		if(NumberUtils.isParsable(o))
+			return Long.parseLong(o);
+		return null;
+	}
+	protected TrafficFlowObservedGenPage pkInit() {
+		Wrap<Long> pkWrap = new Wrap<Long>().var("pk");
+		if(pk == null) {
+			_pk(pkWrap);
+			Optional.ofNullable(pkWrap.getO()).ifPresent(o -> {
+				setPk(o);
+			});
+		}
+		return (TrafficFlowObservedGenPage)this;
+	}
+
+	public static Long staticSearchPk(SiteRequestEnUS siteRequest_, Long o) {
+		return o;
+	}
+
+	public static String staticSearchStrPk(SiteRequestEnUS siteRequest_, Long o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqPk(SiteRequestEnUS siteRequest_, String o) {
+		return TrafficFlowObservedGenPage.staticSearchStrPk(siteRequest_, TrafficFlowObservedGenPage.staticSearchPk(siteRequest_, TrafficFlowObservedGenPage.staticSetPk(siteRequest_, o)));
+	}
+
+	////////
 	// id //
 	////////
 
@@ -433,7 +494,7 @@ public abstract class TrafficFlowObservedGenPageGen<DEV> extends MapResultPage {
 		Promise<Void> promise2 = Promise.promise();
 		promiseTrafficFlowObservedGenPage(promise2);
 		promise2.future().onSuccess(a -> {
-			super.promiseDeepMapResultPage(siteRequest_).onSuccess(b -> {
+			super.promiseDeepBaseModelPage(siteRequest_).onSuccess(b -> {
 				promise.complete();
 			}).onFailure(ex -> {
 				promise.fail(ex);
@@ -452,6 +513,7 @@ public abstract class TrafficFlowObservedGenPageGen<DEV> extends MapResultPage {
 				listTrafficFlowObservedInit();
 				trafficFlowObservedCountInit();
 				trafficFlowObserved_Init();
+				pkInit();
 				idInit();
 				pageUriTrafficFlowObservedInit();
 				promise2.complete();
@@ -476,7 +538,7 @@ public abstract class TrafficFlowObservedGenPageGen<DEV> extends MapResultPage {
 	/////////////////
 
 	public void siteRequestTrafficFlowObservedGenPage(SiteRequestEnUS siteRequest_) {
-			super.siteRequestMapResultPage(siteRequest_);
+			super.siteRequestBaseModelPage(siteRequest_);
 	}
 
 	public void siteRequestForClass(SiteRequestEnUS siteRequest_) {
@@ -515,12 +577,14 @@ public abstract class TrafficFlowObservedGenPageGen<DEV> extends MapResultPage {
 				return oTrafficFlowObservedGenPage.trafficFlowObservedCount;
 			case "trafficFlowObserved_":
 				return oTrafficFlowObservedGenPage.trafficFlowObserved_;
+			case "pk":
+				return oTrafficFlowObservedGenPage.pk;
 			case "id":
 				return oTrafficFlowObservedGenPage.id;
 			case "pageUriTrafficFlowObserved":
 				return oTrafficFlowObservedGenPage.pageUriTrafficFlowObserved;
 			default:
-				return super.obtainMapResultPage(var);
+				return super.obtainBaseModelPage(var);
 		}
 	}
 
@@ -545,7 +609,7 @@ public abstract class TrafficFlowObservedGenPageGen<DEV> extends MapResultPage {
 		TrafficFlowObservedGenPage oTrafficFlowObservedGenPage = (TrafficFlowObservedGenPage)this;
 		switch(var) {
 			default:
-				return super.relateMapResultPage(var, val);
+				return super.relateBaseModelPage(var, val);
 		}
 	}
 
@@ -562,12 +626,14 @@ public abstract class TrafficFlowObservedGenPageGen<DEV> extends MapResultPage {
 			return TrafficFlowObservedGenPage.staticSetListTrafficFlowObserved(siteRequest_, o);
 		case "trafficFlowObservedCount":
 			return TrafficFlowObservedGenPage.staticSetTrafficFlowObservedCount(siteRequest_, o);
+		case "pk":
+			return TrafficFlowObservedGenPage.staticSetPk(siteRequest_, o);
 		case "id":
 			return TrafficFlowObservedGenPage.staticSetId(siteRequest_, o);
 		case "pageUriTrafficFlowObserved":
 			return TrafficFlowObservedGenPage.staticSetPageUriTrafficFlowObserved(siteRequest_, o);
 			default:
-				return MapResultPage.staticSetMapResultPage(entityVar,  siteRequest_, o);
+				return BaseModelPage.staticSetBaseModelPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -584,12 +650,14 @@ public abstract class TrafficFlowObservedGenPageGen<DEV> extends MapResultPage {
 			return TrafficFlowObservedGenPage.staticSearchListTrafficFlowObserved(siteRequest_, (JsonArray)o);
 		case "trafficFlowObservedCount":
 			return TrafficFlowObservedGenPage.staticSearchTrafficFlowObservedCount(siteRequest_, (Integer)o);
+		case "pk":
+			return TrafficFlowObservedGenPage.staticSearchPk(siteRequest_, (Long)o);
 		case "id":
 			return TrafficFlowObservedGenPage.staticSearchId(siteRequest_, (String)o);
 		case "pageUriTrafficFlowObserved":
 			return TrafficFlowObservedGenPage.staticSearchPageUriTrafficFlowObserved(siteRequest_, (String)o);
 			default:
-				return MapResultPage.staticSearchMapResultPage(entityVar,  siteRequest_, o);
+				return BaseModelPage.staticSearchBaseModelPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -606,12 +674,14 @@ public abstract class TrafficFlowObservedGenPageGen<DEV> extends MapResultPage {
 			return TrafficFlowObservedGenPage.staticSearchStrListTrafficFlowObserved(siteRequest_, (String)o);
 		case "trafficFlowObservedCount":
 			return TrafficFlowObservedGenPage.staticSearchStrTrafficFlowObservedCount(siteRequest_, (Integer)o);
+		case "pk":
+			return TrafficFlowObservedGenPage.staticSearchStrPk(siteRequest_, (Long)o);
 		case "id":
 			return TrafficFlowObservedGenPage.staticSearchStrId(siteRequest_, (String)o);
 		case "pageUriTrafficFlowObserved":
 			return TrafficFlowObservedGenPage.staticSearchStrPageUriTrafficFlowObserved(siteRequest_, (String)o);
 			default:
-				return MapResultPage.staticSearchStrMapResultPage(entityVar,  siteRequest_, o);
+				return BaseModelPage.staticSearchStrBaseModelPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -628,12 +698,14 @@ public abstract class TrafficFlowObservedGenPageGen<DEV> extends MapResultPage {
 			return TrafficFlowObservedGenPage.staticSearchFqListTrafficFlowObserved(siteRequest_, o);
 		case "trafficFlowObservedCount":
 			return TrafficFlowObservedGenPage.staticSearchFqTrafficFlowObservedCount(siteRequest_, o);
+		case "pk":
+			return TrafficFlowObservedGenPage.staticSearchFqPk(siteRequest_, o);
 		case "id":
 			return TrafficFlowObservedGenPage.staticSearchFqId(siteRequest_, o);
 		case "pageUriTrafficFlowObserved":
 			return TrafficFlowObservedGenPage.staticSearchFqPageUriTrafficFlowObserved(siteRequest_, o);
 			default:
-				return MapResultPage.staticSearchFqMapResultPage(entityVar,  siteRequest_, o);
+				return BaseModelPage.staticSearchFqBaseModelPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -652,6 +724,7 @@ public abstract class TrafficFlowObservedGenPageGen<DEV> extends MapResultPage {
 	public static final String VAR_listTrafficFlowObserved = "listTrafficFlowObserved";
 	public static final String VAR_trafficFlowObservedCount = "trafficFlowObservedCount";
 	public static final String VAR_trafficFlowObserved_ = "trafficFlowObserved_";
+	public static final String VAR_pk = "pk";
 	public static final String VAR_id = "id";
 	public static final String VAR_pageUriTrafficFlowObserved = "pageUriTrafficFlowObserved";
 
@@ -659,6 +732,7 @@ public abstract class TrafficFlowObservedGenPageGen<DEV> extends MapResultPage {
 	public static final String DISPLAY_NAME_listTrafficFlowObserved = "";
 	public static final String DISPLAY_NAME_trafficFlowObservedCount = "";
 	public static final String DISPLAY_NAME_trafficFlowObserved_ = "";
+	public static final String DISPLAY_NAME_pk = "";
 	public static final String DISPLAY_NAME_id = "";
 	public static final String DISPLAY_NAME_pageUriTrafficFlowObserved = "";
 
@@ -675,12 +749,14 @@ public abstract class TrafficFlowObservedGenPageGen<DEV> extends MapResultPage {
 			return DISPLAY_NAME_trafficFlowObservedCount;
 		case VAR_trafficFlowObserved_:
 			return DISPLAY_NAME_trafficFlowObserved_;
+		case VAR_pk:
+			return DISPLAY_NAME_pk;
 		case VAR_id:
 			return DISPLAY_NAME_id;
 		case VAR_pageUriTrafficFlowObserved:
 			return DISPLAY_NAME_pageUriTrafficFlowObserved;
 		default:
-			return MapResultPage.displayNameMapResultPage(var);
+			return BaseModelPage.displayNameBaseModelPage(var);
 		}
 	}
 }

@@ -1,9 +1,12 @@
 package org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved;
 
 import java.math.BigDecimal;
+import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.Optional;
 
 import org.computate.search.wrap.Wrap;
+import org.computate.smartvillageview.enus.model.base.BaseModel;
 import org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLight;
 import org.computate.smartvillageview.enus.result.map.MapResult;
 import org.computate.vertx.search.list.SearchList;
@@ -17,9 +20,11 @@ import io.vertx.pgclient.data.Point;
  * SmartDataModel: TrafficFlowObserved - Transportation - Smart Cities
  * Fiware: true
  * 
+ * Model: true
+ * SqlOrder: 3
  * Api: true
  * Page: true
- * SuperPage.enUS: MapResultPage
+ * SuperPage.enUS: BaseModelPage
  * Indexed: true
  * Order: 18
  * Description: A device for watching vehicles in a lane of traffic on a road. 
@@ -45,25 +50,32 @@ import io.vertx.pgclient.data.Point;
  * IconName: map-location-dot
  * Rows: 100
  */
-public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
+public class TrafficFlowObserved extends TrafficFlowObservedGen<BaseModel> {
 
 	/**
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * DisplayName: map location
+	 * DisplayName: map path
 	 * HtmRow: 4
 	 * HtmCell: 2
 	 * Facet: true
 	 */
-	protected void _path(Wrap<Path> w) {
+	protected void _location(Wrap<Path> w) {
 	}
 
-	@Override
-	protected void _location(Wrap<Point> w) {
-		if(path != null && path.getPoints().size() > 0) {
-			w.o(path.getPoints().get(0));
-		}
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * DisplayName: color
+	 * HtmRow: 3
+	 * HtmCell: 3
+	 * Facet: true
+	 * Color: true
+	 */
+	protected void _color(Wrap<String> w) {
+		w.o("magenta");
 	}
 
 	/**
@@ -84,8 +96,8 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 	 * DocValues: true
 	 * Persist: true
 	 * DisplayName: simulation name
-	 * HtmRow: 3
-	 * HtmCell: 1
+	 * HtmRow: 5
+	 * HtmCell: 2
 	 * Facet: true
 	 */
 	protected void _simulationName(Wrap<String> w) {
@@ -96,8 +108,6 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 	 * DocValues: true
 	 * Persist: true
 	 * DisplayName: sumocfg path
-	 * HtmRow: 4
-	 * HtmCell: 1
 	 * Facet: true
 	 */
 	protected void _sumocfgPath(Wrap<String> w) {
@@ -131,7 +141,7 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 	 * DisplayName: address
 	 * Description: The mailing address
 	 * HtmRow: 5
-	 * HtmCell: 2
+	 * HtmCell: 3
 	 * Facet: true
 	 * FiwareContext: https://smartdatamodels.org/dataModel.Transportation/address
 	 */
@@ -145,7 +155,7 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 	 * DisplayName: alternate name
 	 * Description: An alternative name for this item
 	 * HtmRow: 5
-	 * HtmCell: 3
+	 * HtmCell: 4
 	 * Facet: true
 	 */
 	protected void _alternateName(Wrap<String> w) {
@@ -636,7 +646,7 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 	@Override
 	protected void _objectTitle(Wrap<String> w) {
 		StringBuilder b = new StringBuilder();
-		Optional.ofNullable(entityId).ifPresent(s -> b.append(s));
+		b.append(Optional.ofNullable(entityId).orElse(pk.toString()));
 		w.o(b.toString().trim());
 	}
 
@@ -644,5 +654,11 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<MapResult> {
 	protected void _objectId(Wrap<String> w) {
 		if(entityId != null)
 			w.o(entityId);
+	}
+
+	@Override
+	protected void _classCanonicalNames(List<String> l) { 
+		l.add(MapResult.class.getCanonicalName());
+		super._classCanonicalNames(l);
 	}
 }

@@ -35,9 +35,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.math.RoundingMode;
 import java.util.Map;
-import org.computate.smartvillageview.enus.result.map.MapResult;
 import io.vertx.pgclient.data.Path;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.databind.deser.BeanDeserializerModifier;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.DeserializationConfig;
+import com.fasterxml.jackson.databind.BeanDescription;
+import java.util.stream.Collectors;
+import io.vertx.core.json.Json;
 import org.computate.vertx.serialize.pgclient.PgClientPathSerializer;
 import org.computate.vertx.serialize.pgclient.PgClientPathDeserializer;
 import java.lang.String;
@@ -57,10 +63,8 @@ import org.computate.search.response.solr.SolrResponse;
 <ol>
 0<h3>Suggestions that can generate more code for you: </h3></ol>
  * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class TrafficFlowObservedGen into the class TrafficFlowObserved. 
- * </li><li>You can add a class comment "Model: true" if you wish to persist these TrafficFlowObserved objects in a relational PostgreSQL database transactionally in the RESTful API. 
- * The code to persist and query the TrafficFlowObservedGen data in the database will then be automatically generated. 
  * </li>
- * <h3>About the TrafficFlowObserved class and it's generated class TrafficFlowObservedGen&lt;MapResult&gt;: </h3>extends TrafficFlowObservedGen
+ * <h3>About the TrafficFlowObserved class and it's generated class TrafficFlowObservedGen&lt;BaseModel&gt;: </h3>extends TrafficFlowObservedGen
  * <p>
  * This Java class extends a generated Java class TrafficFlowObservedGen built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
  * Whenever this Java class is modified or touched, the watch service installed as described in the README, indexes all the information about this Java class in a local Apache Solr Search Engine. 
@@ -71,9 +75,9 @@ import org.computate.search.response.solr.SolrResponse;
  * The extended class ending with "Gen" did not exist at first, but was automatically created by the same watch service based on the data retrieved from the local Apache Server search engine. 
  * The extended class contains many generated fields, getters, setters, initialization code, and helper methods to help build a website and API fast, reactive, and scalable. 
  * </p>
- * extends TrafficFlowObservedGen<MapResult>
- * <p>This <code>class TrafficFlowObserved extends TrafficFlowObservedGen&lt;MapResult&gt;</code>, which means it extends a newly generated TrafficFlowObservedGen. 
- * The generated <code>class TrafficFlowObservedGen extends MapResult</code> which means that TrafficFlowObserved extends TrafficFlowObservedGen which extends MapResult. 
+ * extends TrafficFlowObservedGen<BaseModel>
+ * <p>This <code>class TrafficFlowObserved extends TrafficFlowObservedGen&lt;BaseModel&gt;</code>, which means it extends a newly generated TrafficFlowObservedGen. 
+ * The generated <code>class TrafficFlowObservedGen extends BaseModel</code> which means that TrafficFlowObserved extends TrafficFlowObservedGen which extends BaseModel. 
  * This generated inheritance is a powerful feature that allows a lot of boiler plate code to be created for you automatically while still preserving inheritance through the power of Java Generic classes. 
  * </p>
  * <h2>Api: true</h2>
@@ -136,15 +140,21 @@ import org.computate.search.response.solr.SolrResponse;
  * <h2>Order: 18</h2>
  * <p>This class contains a comment <b>"Order: 18"</b>, which means this class will be sorted by the given number 18 ascending when code that relates to multiple classes at the same time is generated. 
  * </p>
+ * <h2>SqlOrder: 3</h2>
+ * <p>This class contains a comment <b>"SqlOrder: 3"</b>, which means this class will be sorted by the given number 3 ascending when SQL code to create and drop the tables is generated. 
+ * </p>
  * <h2>Model: true</h2>
+ * <p>This class contains a comment <b>"Model: true"</b>, which means this class will be stored in the database. 
+ * Every protected void method that begins with "_" that contains a "Persist: true" comment will be a persisted field in the database table. 
+ * </p>
  * <h2>Page: true</h2>
  * <p>This class contains a comment <b>"Page: true"</b>, which means this class will have webpage code generated for these objects. 
  * Java Vert.x backend API code, Handlebars HTML template frontend code, and JavaScript code will all generated and can be extended. 
  * This creates a new Java class org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved.TrafficFlowObservedPage. 
  * </p>
- * <h2>SuperPage.enUS: MapResultPage</h2>
- * <p>This class contains a comment <b>"SuperPage.enUS: MapResultPage"</b>, which identifies the Java super class of the page code by it's class simple name "MapResultPage". 
- * This means that the newly created class org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved.TrafficFlowObservedPage extends org.computate.smartvillageview.enus.result.map.MapResultPage. 
+ * <h2>SuperPage.enUS: BaseModelPage</h2>
+ * <p>This class contains a comment <b>"SuperPage.enUS: BaseModelPage"</b>, which identifies the Java super class of the page code by it's class simple name "BaseModelPage". 
+ * This means that the newly created class org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved.TrafficFlowObservedPage extends org.computate.smartvillageview.enus.model.base.BaseModelPage. 
  * </p>
  * <h2>Promise: true</h2>
  * <p>
@@ -192,7 +202,7 @@ import org.computate.search.response.solr.SolrResponse;
  * </p>
  * Generated: true
  **/
-public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
+public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 
 	/* FIWARE SmartDataModel fields: */
 //
@@ -626,44 +636,58 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 	public static final String TrafficFlowObserved_IconName = "map-location-dot";
 	public static final Integer TrafficFlowObserved_Rows = 100;
 
-	//////////
-	// path //
-	//////////
+	//////////////
+	// location //
+	//////////////
 
 
-	/**	 The entity path
+	/**	 The entity location
 	 *	 is defined as null before being initialized. 
 	 */
 	@JsonProperty
 	@JsonDeserialize(using = PgClientPathDeserializer.class)
 	@JsonSerialize(using = PgClientPathSerializer.class)
 	@JsonInclude(Include.NON_NULL)
-	protected Path path;
+	protected Path location;
 
-	/**	<br> The entity path
+	/**	<br> The entity location
 	 *  is defined as null before being initialized. 
-	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved.TrafficFlowObserved&fq=entiteVar_enUS_indexed_string:path">Find the entity path in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved.TrafficFlowObserved&fq=entiteVar_enUS_indexed_string:location">Find the entity location in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected abstract void _path(Wrap<Path> w);
+	protected abstract void _location(Wrap<Path> w);
 
-	public Path getPath() {
-		return path;
+	public Path getLocation() {
+		return location;
 	}
 
-	public void setPath(Path path) {
-		this.path = path;
+	public void setLocation(Path location) {
+		this.location = location;
 	}
 	@JsonIgnore
-	public void setPath(String o) {
-		this.path = TrafficFlowObserved.staticSetPath(siteRequest_, o);
+	public void setLocation(String o) {
+		this.location = TrafficFlowObserved.staticSetLocation(siteRequest_, o);
 	}
-	public static Path staticSetPath(SiteRequestEnUS siteRequest_, String o) {
+	public static Path staticSetLocation(SiteRequestEnUS siteRequest_, String o) {
 		if(o != null) {
 			try {
-				ObjectMapper objectMapper = new ObjectMapper();
-				Path path = objectMapper.readValue(o, Path.class);
+				Path path = null;
+				if(StringUtils.isNotBlank(o)) {
+					ObjectMapper objectMapper = new ObjectMapper();
+					SimpleModule module = new SimpleModule();
+					module.setDeserializerModifier(new BeanDeserializerModifier() {
+						@Override
+						public JsonDeserializer<?> modifyDeserializer(DeserializationConfig config, BeanDescription beanDesc, JsonDeserializer<?> deserializer) {
+							if (beanDesc.getBeanClass() == Path.class) {
+								return new PgClientPathDeserializer();
+							}
+							return deserializer;
+						}
+					});
+					objectMapper.registerModule(module);
+					path = objectMapper.readValue(Json.encode(o), Path.class);
+				}
 				return path;
 			} catch(Exception ex) {
 				ExceptionUtils.rethrow(ex);
@@ -671,31 +695,89 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		}
 		return null;
 	}
-	protected TrafficFlowObserved pathInit() {
-		Wrap<Path> pathWrap = new Wrap<Path>().var("path");
-		if(path == null) {
-			_path(pathWrap);
-			Optional.ofNullable(pathWrap.getO()).ifPresent(o -> {
-				setPath(o);
+	protected TrafficFlowObserved locationInit() {
+		Wrap<Path> locationWrap = new Wrap<Path>().var("location");
+		if(location == null) {
+			_location(locationWrap);
+			Optional.ofNullable(locationWrap.getO()).ifPresent(o -> {
+				setLocation(o);
 			});
 		}
 		return (TrafficFlowObserved)this;
 	}
 
-	public static Path staticSearchPath(SiteRequestEnUS siteRequest_, Path o) {
+	public static Path staticSearchLocation(SiteRequestEnUS siteRequest_, Path o) {
 		return o;
 	}
 
-	public static String staticSearchStrPath(SiteRequestEnUS siteRequest_, Path o) {
+	public static String staticSearchStrLocation(SiteRequestEnUS siteRequest_, Path o) {
+		JsonArray pointsArray = new JsonArray();
+		o.getPoints().stream().map(point -> new JsonArray().add(Double.valueOf(point.getX())).add(Double.valueOf(point.getY()))).collect(Collectors.toList()).forEach(pointArray -> pointsArray.add(pointArray));
+		return new JsonObject().put("type", "LineString").put("coordinates", pointsArray).toString();
+	}
+
+	public static String staticSearchFqLocation(SiteRequestEnUS siteRequest_, String o) {
+		return TrafficFlowObserved.staticSearchStrLocation(siteRequest_, TrafficFlowObserved.staticSearchLocation(siteRequest_, TrafficFlowObserved.staticSetLocation(siteRequest_, o)));
+	}
+
+	public Path sqlLocation() {
+		return location;
+	}
+
+	///////////
+	// color //
+	///////////
+
+
+	/**	 The entity color
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String color;
+
+	/**	<br> The entity color
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved.TrafficFlowObserved&fq=entiteVar_enUS_indexed_string:color">Find the entity color in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _color(Wrap<String> w);
+
+	public String getColor() {
+		return color;
+	}
+	public void setColor(String o) {
+		this.color = TrafficFlowObserved.staticSetColor(siteRequest_, o);
+	}
+	public static String staticSetColor(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected TrafficFlowObserved colorInit() {
+		Wrap<String> colorWrap = new Wrap<String>().var("color");
+		if(color == null) {
+			_color(colorWrap);
+			Optional.ofNullable(colorWrap.getO()).ifPresent(o -> {
+				setColor(o);
+			});
+		}
+		return (TrafficFlowObserved)this;
+	}
+
+	public static String staticSearchColor(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrColor(SiteRequestEnUS siteRequest_, String o) {
 		return o == null ? null : o.toString();
 	}
 
-	public static String staticSearchFqPath(SiteRequestEnUS siteRequest_, String o) {
-		return TrafficFlowObserved.staticSearchStrPath(siteRequest_, TrafficFlowObserved.staticSearchPath(siteRequest_, TrafficFlowObserved.staticSetPath(siteRequest_, o)));
+	public static String staticSearchFqColor(SiteRequestEnUS siteRequest_, String o) {
+		return TrafficFlowObserved.staticSearchStrColor(siteRequest_, TrafficFlowObserved.staticSearchColor(siteRequest_, TrafficFlowObserved.staticSetColor(siteRequest_, o)));
 	}
 
-	public Path sqlPath() {
-		return path;
+	public String sqlColor() {
+		return color;
 	}
 
 	//////////////
@@ -3436,7 +3518,7 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		Promise<Void> promise2 = Promise.promise();
 		promiseTrafficFlowObserved(promise2);
 		promise2.future().onSuccess(a -> {
-			super.promiseDeepMapResult(siteRequest_).onSuccess(b -> {
+			super.promiseDeepBaseModel(siteRequest_).onSuccess(b -> {
 				promise.complete();
 			}).onFailure(ex -> {
 				promise.fail(ex);
@@ -3451,7 +3533,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		Future.future(a -> a.complete()).compose(a -> {
 			Promise<Void> promise2 = Promise.promise();
 			try {
-				pathInit();
+				locationInit();
+				colorInit();
 				entityIdInit();
 				simulationNameInit();
 				sumocfgPathInit();
@@ -3532,7 +3615,7 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 	/////////////////
 
 	public void siteRequestTrafficFlowObserved(SiteRequestEnUS siteRequest_) {
-			super.siteRequestMapResult(siteRequest_);
+			super.siteRequestBaseModel(siteRequest_);
 		if(smartTrafficLightSearch != null)
 			smartTrafficLightSearch.setSiteRequest_(siteRequest_);
 	}
@@ -3565,8 +3648,10 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 	public Object obtainTrafficFlowObserved(String var) {
 		TrafficFlowObserved oTrafficFlowObserved = (TrafficFlowObserved)this;
 		switch(var) {
-			case "path":
-				return oTrafficFlowObserved.path;
+			case "location":
+				return oTrafficFlowObserved.location;
+			case "color":
+				return oTrafficFlowObserved.color;
 			case "entityId":
 				return oTrafficFlowObserved.entityId;
 			case "simulationName":
@@ -3654,7 +3739,7 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 			case "customTrafficLightId":
 				return oTrafficFlowObserved.customTrafficLightId;
 			default:
-				return super.obtainMapResult(var);
+				return super.obtainBaseModel(var);
 		}
 	}
 
@@ -3679,7 +3764,7 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		TrafficFlowObserved oTrafficFlowObserved = (TrafficFlowObserved)this;
 		switch(var) {
 			default:
-				return super.relateMapResult(var, val);
+				return super.relateBaseModel(var, val);
 		}
 	}
 
@@ -3692,8 +3777,10 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 	}
 	public static Object staticSetTrafficFlowObserved(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
-		case "path":
-			return TrafficFlowObserved.staticSetPath(siteRequest_, o);
+		case "location":
+			return TrafficFlowObserved.staticSetLocation(siteRequest_, o);
+		case "color":
+			return TrafficFlowObserved.staticSetColor(siteRequest_, o);
 		case "entityId":
 			return TrafficFlowObserved.staticSetEntityId(siteRequest_, o);
 		case "simulationName":
@@ -3777,7 +3864,7 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		case "customTrafficLightId":
 			return TrafficFlowObserved.staticSetCustomTrafficLightId(siteRequest_, o);
 			default:
-				return MapResult.staticSetMapResult(entityVar,  siteRequest_, o);
+				return BaseModel.staticSetBaseModel(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -3790,8 +3877,10 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 	}
 	public static Object staticSearchTrafficFlowObserved(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
-		case "path":
-			return TrafficFlowObserved.staticSearchPath(siteRequest_, (Path)o);
+		case "location":
+			return TrafficFlowObserved.staticSearchLocation(siteRequest_, (Path)o);
+		case "color":
+			return TrafficFlowObserved.staticSearchColor(siteRequest_, (String)o);
 		case "entityId":
 			return TrafficFlowObserved.staticSearchEntityId(siteRequest_, (String)o);
 		case "simulationName":
@@ -3875,7 +3964,7 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		case "customTrafficLightId":
 			return TrafficFlowObserved.staticSearchCustomTrafficLightId(siteRequest_, (String)o);
 			default:
-				return MapResult.staticSearchMapResult(entityVar,  siteRequest_, o);
+				return BaseModel.staticSearchBaseModel(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -3888,8 +3977,10 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 	}
 	public static String staticSearchStrTrafficFlowObserved(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
-		case "path":
-			return TrafficFlowObserved.staticSearchStrPath(siteRequest_, (Path)o);
+		case "location":
+			return TrafficFlowObserved.staticSearchStrLocation(siteRequest_, (Path)o);
+		case "color":
+			return TrafficFlowObserved.staticSearchStrColor(siteRequest_, (String)o);
 		case "entityId":
 			return TrafficFlowObserved.staticSearchStrEntityId(siteRequest_, (String)o);
 		case "simulationName":
@@ -3973,7 +4064,7 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		case "customTrafficLightId":
 			return TrafficFlowObserved.staticSearchStrCustomTrafficLightId(siteRequest_, (String)o);
 			default:
-				return MapResult.staticSearchStrMapResult(entityVar,  siteRequest_, o);
+				return BaseModel.staticSearchStrBaseModel(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -3986,8 +4077,10 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 	}
 	public static String staticSearchFqTrafficFlowObserved(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
-		case "path":
-			return TrafficFlowObserved.staticSearchFqPath(siteRequest_, o);
+		case "location":
+			return TrafficFlowObserved.staticSearchFqLocation(siteRequest_, o);
+		case "color":
+			return TrafficFlowObserved.staticSearchFqColor(siteRequest_, o);
 		case "entityId":
 			return TrafficFlowObserved.staticSearchFqEntityId(siteRequest_, o);
 		case "simulationName":
@@ -4071,7 +4164,7 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		case "customTrafficLightId":
 			return TrafficFlowObserved.staticSearchFqCustomTrafficLightId(siteRequest_, o);
 			default:
-				return MapResult.staticSearchFqMapResult(entityVar,  siteRequest_, o);
+				return BaseModel.staticSearchFqBaseModel(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -4096,13 +4189,19 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 	}
 	public Object persistTrafficFlowObserved(String var, Object val) {
 		String varLower = var.toLowerCase();
-			if("path".equals(varLower)) {
+			if("location".equals(varLower)) {
 				if(val instanceof Path) {
-					setPath((Path)val);
+					setLocation((Path)val);
 				} else {
-					setPath(val == null ? null : val.toString());
+					setLocation(val == null ? null : val.toString());
 				}
-				saves.add("path");
+				saves.add("location");
+				return val;
+			} else if("color".equals(varLower)) {
+				if(val instanceof String) {
+					setColor((String)val);
+				}
+				saves.add("color");
 				return val;
 			} else if("entityid".equals(varLower)) {
 				if(val instanceof String) {
@@ -4391,7 +4490,7 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 				saves.add("customTrafficLightId");
 				return val;
 		} else {
-			return super.persistMapResult(var, val);
+			return super.persistBaseModel(var, val);
 		}
 	}
 
@@ -4404,13 +4503,19 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 	}
 	public void populateTrafficFlowObserved(SolrResponse.Doc doc) {
 		TrafficFlowObserved oTrafficFlowObserved = (TrafficFlowObserved)this;
-		saves = doc.get("saves_docvalues_strings");
+		saves = Optional.ofNullable((ArrayList<String>)doc.get("saves_docvalues_strings")).orElse(new ArrayList<String>());
 		if(saves != null) {
 
-			if(saves.contains("path")) {
-				Path path = (Path)doc.get("path_docvalues_location");
-				if(path != null)
-					oTrafficFlowObserved.setPath(path);
+			if(saves.contains("location")) {
+				Path location = (Path)doc.get("location_docvalues_location");
+				if(location != null)
+					oTrafficFlowObserved.setLocation(location);
+			}
+
+			if(saves.contains("color")) {
+				String color = (String)doc.get("color_docvalues_string");
+				if(color != null)
+					oTrafficFlowObserved.setColor(color);
 			}
 
 			if(saves.contains("entityId")) {
@@ -4660,12 +4765,17 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 			}
 		}
 
-		super.populateMapResult(doc);
+		super.populateBaseModel(doc);
 	}
 
 	public void indexTrafficFlowObserved(JsonObject doc) {
-		if(path != null) {
-			doc.put("path_docvalues_location", path);
+		if(location != null) {
+			JsonArray pointsArray = new JsonArray();
+			location.getPoints().stream().map(point -> new JsonArray().add(Double.valueOf(point.getX())).add(Double.valueOf(point.getY()))).collect(Collectors.toList()).forEach(pointArray -> pointsArray.add(pointArray));
+			doc.put("location_docvalues_location", new JsonObject().put("type", "LineString").put("coordinates", pointsArray).toString());
+		}
+		if(color != null) {
+			doc.put("color_docvalues_string", color);
 		}
 		if(entityId != null) {
 			doc.put("entityId_docvalues_string", entityId);
@@ -4790,14 +4900,16 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		if(customTrafficLightId != null) {
 			doc.put("customTrafficLightId_docvalues_string", customTrafficLightId);
 		}
-		super.indexMapResult(doc);
+		super.indexBaseModel(doc);
 
 	}
 
 	public static String varStoredTrafficFlowObserved(String entityVar) {
 		switch(entityVar) {
-			case "path":
-				return "path_docvalues_location";
+			case "location":
+				return "location_docvalues_location";
+			case "color":
+				return "color_docvalues_string";
 			case "entityId":
 				return "entityId_docvalues_string";
 			case "simulationName":
@@ -4881,14 +4993,16 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 			case "customTrafficLightId":
 				return "customTrafficLightId_docvalues_string";
 			default:
-				return MapResult.varStoredMapResult(entityVar);
+				return BaseModel.varStoredBaseModel(entityVar);
 		}
 	}
 
 	public static String varIndexedTrafficFlowObserved(String entityVar) {
 		switch(entityVar) {
-			case "path":
-				return "path_docvalues_location";
+			case "location":
+				return "location_docvalues_location";
+			case "color":
+				return "color_docvalues_string";
 			case "entityId":
 				return "entityId_docvalues_string";
 			case "simulationName":
@@ -4972,14 +5086,16 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 			case "customTrafficLightId":
 				return "customTrafficLightId_docvalues_string";
 			default:
-				return MapResult.varIndexedMapResult(entityVar);
+				return BaseModel.varIndexedBaseModel(entityVar);
 		}
 	}
 
 	public static String searchVarTrafficFlowObserved(String searchVar) {
 		switch(searchVar) {
-			case "path_docvalues_location":
-				return "path";
+			case "location_docvalues_location":
+				return "location";
+			case "color_docvalues_string":
+				return "color";
 			case "entityId_docvalues_string":
 				return "entityId";
 			case "simulationName_docvalues_string":
@@ -5063,21 +5179,21 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 			case "customTrafficLightId_docvalues_string":
 				return "customTrafficLightId";
 			default:
-				return MapResult.searchVarMapResult(searchVar);
+				return BaseModel.searchVarBaseModel(searchVar);
 		}
 	}
 
 	public static String varSearchTrafficFlowObserved(String entityVar) {
 		switch(entityVar) {
 			default:
-				return MapResult.varSearchMapResult(entityVar);
+				return BaseModel.varSearchBaseModel(entityVar);
 		}
 	}
 
 	public static String varSuggestedTrafficFlowObserved(String entityVar) {
 		switch(entityVar) {
 			default:
-				return MapResult.varSuggestedMapResult(entityVar);
+				return BaseModel.varSuggestedBaseModel(entityVar);
 		}
 	}
 
@@ -5091,7 +5207,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 	public void storeTrafficFlowObserved(SolrResponse.Doc doc) {
 		TrafficFlowObserved oTrafficFlowObserved = (TrafficFlowObserved)this;
 
-		oTrafficFlowObserved.setPath(Optional.ofNullable(doc.get("path_docvalues_location")).map(v -> v.toString()).orElse(null));
+		oTrafficFlowObserved.setLocation(Optional.ofNullable(doc.get("location_docvalues_location")).map(v -> v.toString()).orElse(null));
+		oTrafficFlowObserved.setColor(Optional.ofNullable(doc.get("color_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oTrafficFlowObserved.setEntityId(Optional.ofNullable(doc.get("entityId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oTrafficFlowObserved.setSimulationName(Optional.ofNullable(doc.get("simulationName_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oTrafficFlowObserved.setSumocfgPath(Optional.ofNullable(doc.get("sumocfgPath_docvalues_string")).map(v -> v.toString()).orElse(null));
@@ -5134,7 +5251,7 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		oTrafficFlowObserved.setCustomQueueLengthThreshold(Optional.ofNullable(doc.get("customQueueLengthThreshold_docvalues_double")).map(v -> v.toString()).orElse(null));
 		oTrafficFlowObserved.setCustomTrafficLightId(Optional.ofNullable(doc.get("customTrafficLightId_docvalues_string")).map(v -> v.toString()).orElse(null));
 
-		super.storeMapResult(doc);
+		super.storeBaseModel(doc);
 	}
 
 	//////////////////
@@ -5146,8 +5263,10 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		Object o = Optional.ofNullable(apiRequest).map(ApiRequest::getOriginal).orElse(null);
 		if(o != null && o instanceof TrafficFlowObserved) {
 			TrafficFlowObserved original = (TrafficFlowObserved)o;
-			if(!Objects.equals(path, original.getPath()))
-				apiRequest.addVars("path");
+			if(!Objects.equals(location, original.getLocation()))
+				apiRequest.addVars("location");
+			if(!Objects.equals(color, original.getColor()))
+				apiRequest.addVars("color");
 			if(!Objects.equals(entityId, original.getEntityId()))
 				apiRequest.addVars("entityId");
 			if(!Objects.equals(simulationName, original.getSimulationName()))
@@ -5230,7 +5349,7 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 				apiRequest.addVars("customQueueLengthThreshold");
 			if(!Objects.equals(customTrafficLightId, original.getCustomTrafficLightId()))
 				apiRequest.addVars("customTrafficLightId");
-			super.apiRequestMapResult();
+			super.apiRequestBaseModel();
 		}
 	}
 
@@ -5241,7 +5360,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 	@Override public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(super.toString());
-		sb.append(Optional.ofNullable(path).map(v -> "path: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(location).map(v -> "location: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(color).map(v -> "color: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(entityId).map(v -> "entityId: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(simulationName).map(v -> "simulationName: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(sumocfgPath).map(v -> "sumocfgPath: \"" + v + "\"\n" ).orElse(""));
@@ -5287,7 +5407,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 	}
 
 	public static final String CLASS_SIMPLE_NAME = "TrafficFlowObserved";
-	public static final String VAR_path = "path";
+	public static final String VAR_location = "location";
+	public static final String VAR_color = "color";
 	public static final String VAR_entityId = "entityId";
 	public static final String VAR_simulationName = "simulationName";
 	public static final String VAR_sumocfgPath = "sumocfgPath";
@@ -5336,7 +5457,7 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		return TrafficFlowObserved.varsQTrafficFlowObserved(new ArrayList<String>());
 	}
 	public static List<String> varsQTrafficFlowObserved(List<String> vars) {
-		MapResult.varsQMapResult(vars);
+		BaseModel.varsQBaseModel(vars);
 		return vars;
 	}
 
@@ -5344,7 +5465,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		return TrafficFlowObserved.varsFqTrafficFlowObserved(new ArrayList<String>());
 	}
 	public static List<String> varsFqTrafficFlowObserved(List<String> vars) {
-		vars.add(VAR_path);
+		vars.add(VAR_location);
+		vars.add(VAR_color);
 		vars.add(VAR_entityId);
 		vars.add(VAR_simulationName);
 		vars.add(VAR_sumocfgPath);
@@ -5386,7 +5508,7 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		vars.add(VAR_customDemandScalingFactor);
 		vars.add(VAR_customQueueLengthThreshold);
 		vars.add(VAR_customTrafficLightId);
-		MapResult.varsFqMapResult(vars);
+		BaseModel.varsFqBaseModel(vars);
 		return vars;
 	}
 
@@ -5412,11 +5534,12 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		vars.add(VAR_customAverageVehiclesPerMinute);
 		vars.add(VAR_customDemandScalingFactor);
 		vars.add(VAR_customQueueLengthThreshold);
-		MapResult.varsRangeMapResult(vars);
+		BaseModel.varsRangeBaseModel(vars);
 		return vars;
 	}
 
-	public static final String DISPLAY_NAME_path = "map location";
+	public static final String DISPLAY_NAME_location = "map path";
+	public static final String DISPLAY_NAME_color = "color";
 	public static final String DISPLAY_NAME_entityId = "entity ID";
 	public static final String DISPLAY_NAME_simulationName = "simulation name";
 	public static final String DISPLAY_NAME_sumocfgPath = "sumocfg path";
@@ -5466,8 +5589,10 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 	}
 	public static String displayNameTrafficFlowObserved(String var) {
 		switch(var) {
-		case VAR_path:
-			return DISPLAY_NAME_path;
+		case VAR_location:
+			return DISPLAY_NAME_location;
+		case VAR_color:
+			return DISPLAY_NAME_color;
 		case VAR_entityId:
 			return DISPLAY_NAME_entityId;
 		case VAR_simulationName:
@@ -5555,7 +5680,7 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		case VAR_customTrafficLightId:
 			return DISPLAY_NAME_customTrafficLightId;
 		default:
-			return MapResult.displayNameMapResult(var);
+			return BaseModel.displayNameBaseModel(var);
 		}
 	}
 
@@ -5640,14 +5765,16 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		case VAR_customTrafficLightId:
 			return "The Smart Traffic Light ID";
 			default:
-				return MapResult.descriptionMapResult(var);
+				return BaseModel.descriptionBaseModel(var);
 		}
 	}
 
 	public static String classSimpleNameTrafficFlowObserved(String var) {
 		switch(var) {
-		case VAR_path:
+		case VAR_location:
 			return "Path";
+		case VAR_color:
+			return "String";
 		case VAR_entityId:
 			return "String";
 		case VAR_simulationName:
@@ -5735,27 +5862,27 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		case VAR_customTrafficLightId:
 			return "String";
 			default:
-				return MapResult.classSimpleNameMapResult(var);
+				return BaseModel.classSimpleNameBaseModel(var);
 		}
 	}
 
 	public static Integer htmColumnTrafficFlowObserved(String var) {
 		switch(var) {
 			default:
-				return MapResult.htmColumnMapResult(var);
+				return BaseModel.htmColumnBaseModel(var);
 		}
 	}
 
 	public static Integer htmRowTrafficFlowObserved(String var) {
 		switch(var) {
-		case VAR_path:
+		case VAR_location:
 			return 4;
+		case VAR_color:
+			return 3;
 		case VAR_entityId:
 			return 5;
 		case VAR_simulationName:
-			return 3;
-		case VAR_sumocfgPath:
-			return 4;
+			return 5;
 		case VAR_address:
 			return 5;
 		case VAR_alternateName:
@@ -5833,24 +5960,24 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		case VAR_customTrafficLightId:
 			return 17;
 			default:
-				return MapResult.htmRowMapResult(var);
+				return BaseModel.htmRowBaseModel(var);
 		}
 	}
 
 	public static Integer htmCellTrafficFlowObserved(String var) {
 		switch(var) {
-		case VAR_path:
+		case VAR_location:
 			return 2;
+		case VAR_color:
+			return 3;
 		case VAR_entityId:
 			return 1;
 		case VAR_simulationName:
-			return 1;
-		case VAR_sumocfgPath:
-			return 1;
-		case VAR_address:
 			return 2;
-		case VAR_alternateName:
+		case VAR_address:
 			return 3;
+		case VAR_alternateName:
+			return 4;
 		case VAR_areaServed:
 			return 1;
 		case VAR_averageGapDistance:
@@ -5924,35 +6051,35 @@ public abstract class TrafficFlowObservedGen<DEV> extends MapResult {
 		case VAR_customTrafficLightId:
 			return 3;
 			default:
-				return MapResult.htmCellMapResult(var);
+				return BaseModel.htmCellBaseModel(var);
 		}
 	}
 
 	public static Integer lengthMinTrafficFlowObserved(String var) {
 		switch(var) {
 			default:
-				return MapResult.lengthMinMapResult(var);
+				return BaseModel.lengthMinBaseModel(var);
 		}
 	}
 
 	public static Integer lengthMaxTrafficFlowObserved(String var) {
 		switch(var) {
 			default:
-				return MapResult.lengthMaxMapResult(var);
+				return BaseModel.lengthMaxBaseModel(var);
 		}
 	}
 
 	public static Integer maxTrafficFlowObserved(String var) {
 		switch(var) {
 			default:
-				return MapResult.maxMapResult(var);
+				return BaseModel.maxBaseModel(var);
 		}
 	}
 
 	public static Integer minTrafficFlowObserved(String var) {
 		switch(var) {
 			default:
-				return MapResult.minMapResult(var);
+				return BaseModel.minBaseModel(var);
 		}
 	}
 }

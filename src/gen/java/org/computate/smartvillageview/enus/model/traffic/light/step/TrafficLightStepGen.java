@@ -1053,7 +1053,7 @@ public abstract class TrafficLightStepGen<DEV> extends MapResult {
 	}
 	public void populateTrafficLightStep(SolrResponse.Doc doc) {
 		TrafficLightStep oTrafficLightStep = (TrafficLightStep)this;
-		saves = doc.get("saves_docvalues_strings");
+		saves = Optional.ofNullable((ArrayList<String>)doc.get("saves_docvalues_strings")).orElse(new ArrayList<String>());
 		if(saves != null) {
 
 			if(saves.contains("simulationName")) {

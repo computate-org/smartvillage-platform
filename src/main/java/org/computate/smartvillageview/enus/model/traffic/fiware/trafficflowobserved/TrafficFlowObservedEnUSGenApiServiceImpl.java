@@ -204,7 +204,7 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 					}
 					if(fls.size() == 1 && fls.stream().findFirst().orElse(null).equals("saves_docvalues_strings")) {
 						fieldNames.removeAll(Optional.ofNullable(json2.getJsonArray("saves_docvalues_strings")).orElse(new JsonArray()).stream().map(s -> s.toString()).collect(Collectors.toList()));
-						fieldNames.remove("_docvalues_long");
+						fieldNames.remove("pk_docvalues_long");
 						fieldNames.remove("created_docvalues_date");
 					}
 					else if(fls.size() >= 1) {
@@ -392,7 +392,7 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 					));
 				} else {
 					try {
-						searchTrafficFlowObservedList(siteRequest, true, false, true).onSuccess(listTrafficFlowObserved -> {
+						searchTrafficFlowObservedList(siteRequest, false, true, true).onSuccess(listTrafficFlowObserved -> {
 							try {
 								if(listTrafficFlowObserved.getResponse().getResponse().getNumFound() > 1
 										&& !Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_TrafficFlowObserved")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
@@ -410,6 +410,7 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 									siteRequest.setApiRequest_(apiRequest);
 									if(apiRequest.getNumFound() == 1L)
 										apiRequest.setOriginal(listTrafficFlowObserved.first());
+									apiRequest.setPk(Optional.ofNullable(listTrafficFlowObserved.first()).map(o2 -> o2.getPk()).orElse(null));
 									eventBus.publish("websocketTrafficFlowObserved", JsonObject.mapFrom(apiRequest).toString());
 
 									listPATCHTrafficFlowObserved(apiRequest, listTrafficFlowObserved).onSuccess(e -> {
@@ -527,6 +528,7 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 							}
 							if(apiRequest.getNumFound() == 1L)
 								apiRequest.setOriginal(o);
+							apiRequest.setPk(Optional.ofNullable(listTrafficFlowObserved.first()).map(o2 -> o2.getPk()).orElse(null));
 							patchTrafficFlowObservedFuture(o, false).onSuccess(o2 -> {
 								eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(new JsonObject().encodePrettily()))));
 							}).onFailure(ex -> {
@@ -559,17 +561,511 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 
 		try {
 			ApiRequest apiRequest = siteRequest.getApiRequest_();
-			persistTrafficFlowObserved(o, true).onSuccess(c -> {
-				indexTrafficFlowObserved(o).onSuccess(e -> {
-					promise.complete(o);
+			Promise<TrafficFlowObserved> promise1 = Promise.promise();
+			pgPool.withTransaction(sqlConnection -> {
+				siteRequest.setSqlConnection(sqlConnection);
+				varsTrafficFlowObserved(siteRequest).onSuccess(a -> {
+					sqlPATCHTrafficFlowObserved(o, inheritPk).onSuccess(trafficFlowObserved -> {
+						persistTrafficFlowObserved(trafficFlowObserved).onSuccess(c -> {
+							relateTrafficFlowObserved(trafficFlowObserved).onSuccess(d -> {
+								indexTrafficFlowObserved(trafficFlowObserved).onSuccess(o2 -> {
+									if(apiRequest != null) {
+										apiRequest.setNumPATCH(apiRequest.getNumPATCH() + 1);
+										if(apiRequest.getNumFound() == 1L && Optional.ofNullable(siteRequest.getJsonObject()).map(json -> json.size() > 0).orElse(false)) {
+											o2.apiRequestTrafficFlowObserved();
+											if(apiRequest.getVars().size() > 0)
+												eventBus.publish("websocketTrafficFlowObserved", JsonObject.mapFrom(apiRequest).toString());
+										}
+									}
+									promise1.complete(trafficFlowObserved);
+								}).onFailure(ex -> {
+									promise1.fail(ex);
+								});
+							}).onFailure(ex -> {
+								promise1.fail(ex);
+							});
+						}).onFailure(ex -> {
+							promise1.fail(ex);
+						});
+					}).onFailure(ex -> {
+						promise1.fail(ex);
+					});
 				}).onFailure(ex -> {
-					promise.fail(ex);
+					promise1.fail(ex);
 				});
+				return promise1.future();
+			}).onSuccess(a -> {
+				siteRequest.setSqlConnection(null);
+			}).onFailure(ex -> {
+				siteRequest.setSqlConnection(null);
+				promise.fail(ex);
+			}).compose(trafficFlowObserved -> {
+				Promise<TrafficFlowObserved> promise2 = Promise.promise();
+				refreshTrafficFlowObserved(trafficFlowObserved).onSuccess(a -> {
+					promise2.complete(trafficFlowObserved);
+				}).onFailure(ex -> {
+					promise2.fail(ex);
+				});
+				return promise2.future();
+			}).onSuccess(trafficFlowObserved -> {
+				promise.complete(trafficFlowObserved);
 			}).onFailure(ex -> {
 				promise.fail(ex);
 			});
 		} catch(Exception ex) {
 			LOG.error(String.format("patchTrafficFlowObservedFuture failed. "), ex);
+			promise.fail(ex);
+		}
+		return promise.future();
+	}
+
+	public Future<TrafficFlowObserved> sqlPATCHTrafficFlowObserved(TrafficFlowObserved o, Boolean inheritPk) {
+		Promise<TrafficFlowObserved> promise = Promise.promise();
+		try {
+			SiteRequestEnUS siteRequest = o.getSiteRequest_();
+			ApiRequest apiRequest = siteRequest.getApiRequest_();
+			List<Long> pks = Optional.ofNullable(apiRequest).map(r -> r.getPks()).orElse(new ArrayList<>());
+			List<String> classes = Optional.ofNullable(apiRequest).map(r -> r.getClasses()).orElse(new ArrayList<>());
+			SqlConnection sqlConnection = siteRequest.getSqlConnection();
+			Integer num = 1;
+			StringBuilder bSql = new StringBuilder("UPDATE TrafficFlowObserved SET ");
+			List<Object> bParams = new ArrayList<Object>();
+			Long pk = o.getPk();
+			JsonObject jsonObject = siteRequest.getJsonObject();
+			Set<String> methodNames = jsonObject.fieldNames();
+			TrafficFlowObserved o2 = new TrafficFlowObserved();
+			o2.setSiteRequest_(siteRequest);
+			List<Future> futures1 = new ArrayList<>();
+			List<Future> futures2 = new ArrayList<>();
+
+			for(String entityVar : methodNames) {
+				switch(entityVar) {
+					case "setInheritPk":
+							o2.setInheritPk(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_inheritPk + "=$" + num);
+							num++;
+							bParams.add(o2.sqlInheritPk());
+						break;
+					case "setCreated":
+							o2.setCreated(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_created + "=$" + num);
+							num++;
+							bParams.add(o2.sqlCreated());
+						break;
+					case "setArchived":
+							o2.setArchived(jsonObject.getBoolean(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_archived + "=$" + num);
+							num++;
+							bParams.add(o2.sqlArchived());
+						break;
+					case "setDeleted":
+							o2.setDeleted(jsonObject.getBoolean(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_deleted + "=$" + num);
+							num++;
+							bParams.add(o2.sqlDeleted());
+						break;
+					case "setSessionId":
+							o2.setSessionId(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_sessionId + "=$" + num);
+							num++;
+							bParams.add(o2.sqlSessionId());
+						break;
+					case "setUserKey":
+							o2.setUserKey(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_userKey + "=$" + num);
+							num++;
+							bParams.add(o2.sqlUserKey());
+						break;
+					case "setLocation":
+							o2.setLocation(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_location + "=$" + num);
+							num++;
+							bParams.add(o2.sqlLocation());
+						break;
+					case "setColor":
+							o2.setColor(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_color + "=$" + num);
+							num++;
+							bParams.add(o2.sqlColor());
+						break;
+					case "setEntityId":
+							o2.setEntityId(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_entityId + "=$" + num);
+							num++;
+							bParams.add(o2.sqlEntityId());
+						break;
+					case "setSimulationName":
+							o2.setSimulationName(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_simulationName + "=$" + num);
+							num++;
+							bParams.add(o2.sqlSimulationName());
+						break;
+					case "setSumocfgPath":
+							o2.setSumocfgPath(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_sumocfgPath + "=$" + num);
+							num++;
+							bParams.add(o2.sqlSumocfgPath());
+						break;
+					case "setAddress":
+							o2.setAddress(jsonObject.getJsonObject(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_address + "=$" + num);
+							num++;
+							bParams.add(o2.sqlAddress());
+						break;
+					case "setAlternateName":
+							o2.setAlternateName(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_alternateName + "=$" + num);
+							num++;
+							bParams.add(o2.sqlAlternateName());
+						break;
+					case "setAreaServed":
+							o2.setAreaServed(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_areaServed + "=$" + num);
+							num++;
+							bParams.add(o2.sqlAreaServed());
+						break;
+					case "setAverageGapDistance":
+							o2.setAverageGapDistance(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_averageGapDistance + "=$" + num);
+							num++;
+							bParams.add(o2.sqlAverageGapDistance());
+						break;
+					case "setAverageHeadwayTime":
+							o2.setAverageHeadwayTime(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_averageHeadwayTime + "=$" + num);
+							num++;
+							bParams.add(o2.sqlAverageHeadwayTime());
+						break;
+					case "setAverageVehicleLength":
+							o2.setAverageVehicleLength(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_averageVehicleLength + "=$" + num);
+							num++;
+							bParams.add(o2.sqlAverageVehicleLength());
+						break;
+					case "setAverageVehicleSpeed":
+							o2.setAverageVehicleSpeed(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_averageVehicleSpeed + "=$" + num);
+							num++;
+							bParams.add(o2.sqlAverageVehicleSpeed());
+						break;
+					case "setCongested":
+							o2.setCongested(jsonObject.getBoolean(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_congested + "=$" + num);
+							num++;
+							bParams.add(o2.sqlCongested());
+						break;
+					case "setDataProvider":
+							o2.setDataProvider(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_dataProvider + "=$" + num);
+							num++;
+							bParams.add(o2.sqlDataProvider());
+						break;
+					case "setDateCreated":
+							o2.setDateCreated(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_dateCreated + "=$" + num);
+							num++;
+							bParams.add(o2.sqlDateCreated());
+						break;
+					case "setDateModified":
+							o2.setDateModified(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_dateModified + "=$" + num);
+							num++;
+							bParams.add(o2.sqlDateModified());
+						break;
+					case "setDateObserved":
+							o2.setDateObserved(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_dateObserved + "=$" + num);
+							num++;
+							bParams.add(o2.sqlDateObserved());
+						break;
+					case "setDateObservedFrom":
+							o2.setDateObservedFrom(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_dateObservedFrom + "=$" + num);
+							num++;
+							bParams.add(o2.sqlDateObservedFrom());
+						break;
+					case "setDateObservedTo":
+							o2.setDateObservedTo(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_dateObservedTo + "=$" + num);
+							num++;
+							bParams.add(o2.sqlDateObservedTo());
+						break;
+					case "setDescription":
+							o2.setDescription(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_description + "=$" + num);
+							num++;
+							bParams.add(o2.sqlDescription());
+						break;
+					case "setIntensity":
+							o2.setIntensity(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_intensity + "=$" + num);
+							num++;
+							bParams.add(o2.sqlIntensity());
+						break;
+					case "setLaneDirection":
+							o2.setLaneDirection(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_laneDirection + "=$" + num);
+							num++;
+							bParams.add(o2.sqlLaneDirection());
+						break;
+					case "setLaneId":
+							o2.setLaneId(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_laneId + "=$" + num);
+							num++;
+							bParams.add(o2.sqlLaneId());
+						break;
+					case "setName":
+							o2.setName(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_name + "=$" + num);
+							num++;
+							bParams.add(o2.sqlName());
+						break;
+					case "setOccupancy":
+							o2.setOccupancy(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_occupancy + "=$" + num);
+							num++;
+							bParams.add(o2.sqlOccupancy());
+						break;
+					case "setOwner":
+							o2.setOwner(jsonObject.getJsonObject(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_owner + "=$" + num);
+							num++;
+							bParams.add(o2.sqlOwner());
+						break;
+					case "setRefRoadSegment":
+							o2.setRefRoadSegment(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_refRoadSegment + "=$" + num);
+							num++;
+							bParams.add(o2.sqlRefRoadSegment());
+						break;
+					case "setReversedLane":
+							o2.setReversedLane(jsonObject.getBoolean(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_reversedLane + "=$" + num);
+							num++;
+							bParams.add(o2.sqlReversedLane());
+						break;
+					case "setSeeAlso":
+							o2.setSeeAlso(jsonObject.getJsonObject(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_seeAlso + "=$" + num);
+							num++;
+							bParams.add(o2.sqlSeeAlso());
+						break;
+					case "setSource":
+							o2.setSource(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_source + "=$" + num);
+							num++;
+							bParams.add(o2.sqlSource());
+						break;
+					case "setType":
+							o2.setType(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_type + "=$" + num);
+							num++;
+							bParams.add(o2.sqlType());
+						break;
+					case "setVehicleSubType":
+							o2.setVehicleSubType(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_vehicleSubType + "=$" + num);
+							num++;
+							bParams.add(o2.sqlVehicleSubType());
+						break;
+					case "setVehicleType":
+							o2.setVehicleType(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_vehicleType + "=$" + num);
+							num++;
+							bParams.add(o2.sqlVehicleType());
+						break;
+					case "setCustomRouteId":
+							o2.setCustomRouteId(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_customRouteId + "=$" + num);
+							num++;
+							bParams.add(o2.sqlCustomRouteId());
+						break;
+					case "setCustomSigma":
+							o2.setCustomSigma(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_customSigma + "=$" + num);
+							num++;
+							bParams.add(o2.sqlCustomSigma());
+						break;
+					case "setCustomAcceleration":
+							o2.setCustomAcceleration(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_customAcceleration + "=$" + num);
+							num++;
+							bParams.add(o2.sqlCustomAcceleration());
+						break;
+					case "setCustomDeceleration":
+							o2.setCustomDeceleration(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_customDeceleration + "=$" + num);
+							num++;
+							bParams.add(o2.sqlCustomDeceleration());
+						break;
+					case "setCustomMinGreenTime":
+							o2.setCustomMinGreenTime(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_customMinGreenTime + "=$" + num);
+							num++;
+							bParams.add(o2.sqlCustomMinGreenTime());
+						break;
+					case "setCustomMaxGreenTime":
+							o2.setCustomMaxGreenTime(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_customMaxGreenTime + "=$" + num);
+							num++;
+							bParams.add(o2.sqlCustomMaxGreenTime());
+						break;
+					case "setCustomAverageVehiclesPerMinute":
+							o2.setCustomAverageVehiclesPerMinute(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_customAverageVehiclesPerMinute + "=$" + num);
+							num++;
+							bParams.add(o2.sqlCustomAverageVehiclesPerMinute());
+						break;
+					case "setCustomDemandScalingFactor":
+							o2.setCustomDemandScalingFactor(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_customDemandScalingFactor + "=$" + num);
+							num++;
+							bParams.add(o2.sqlCustomDemandScalingFactor());
+						break;
+					case "setCustomQueueLengthThreshold":
+							o2.setCustomQueueLengthThreshold(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_customQueueLengthThreshold + "=$" + num);
+							num++;
+							bParams.add(o2.sqlCustomQueueLengthThreshold());
+						break;
+					case "setCustomTrafficLightId":
+							o2.setCustomTrafficLightId(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_customTrafficLightId + "=$" + num);
+							num++;
+							bParams.add(o2.sqlCustomTrafficLightId());
+						break;
+				}
+			}
+			bSql.append(" WHERE pk=$" + num);
+			if(bParams.size() > 0) {
+				bParams.add(pk);
+				num++;
+				futures2.add(0, Future.future(a -> {
+					sqlConnection.preparedQuery(bSql.toString())
+							.execute(Tuple.tuple(bParams)
+							).onSuccess(b -> {
+						a.handle(Future.succeededFuture());
+					}).onFailure(ex -> {
+						RuntimeException ex2 = new RuntimeException("value TrafficFlowObserved failed", ex);
+						LOG.error(String.format("relateTrafficFlowObserved failed. "), ex2);
+						a.handle(Future.failedFuture(ex2));
+					});
+				}));
+			}
+			CompositeFuture.all(futures1).onSuccess(a -> {
+				CompositeFuture.all(futures2).onSuccess(b -> {
+					TrafficFlowObserved o3 = new TrafficFlowObserved();
+					o3.setSiteRequest_(o.getSiteRequest_());
+					o3.setPk(pk);
+					promise.complete(o3);
+				}).onFailure(ex -> {
+					LOG.error(String.format("sqlPATCHTrafficFlowObserved failed. "), ex);
+					promise.fail(ex);
+				});
+			}).onFailure(ex -> {
+				LOG.error(String.format("sqlPATCHTrafficFlowObserved failed. "), ex);
+				promise.fail(ex);
+			});
+		} catch(Exception ex) {
+			LOG.error(String.format("sqlPATCHTrafficFlowObserved failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
@@ -652,6 +1148,7 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 						eventBus.request("smartabyar-smartvillage-enUS-TrafficFlowObserved", json, new DeliveryOptions().addHeader("action", "postTrafficFlowObservedFuture")).onSuccess(a -> {
 							JsonObject responseMessage = (JsonObject)a.body();
 							JsonObject responseBody = new JsonObject(Buffer.buffer(JsonUtil.BASE64_DECODER.decode(responseMessage.getString("payload"))));
+							apiRequest.setPk(Long.parseLong(responseBody.getString("pk")));
 							eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(responseBody.encodePrettily()))));
 							LOG.debug(String.format("postTrafficFlowObserved succeeded. "));
 						}).onFailure(ex -> {
@@ -738,21 +1235,583 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 		Promise<TrafficFlowObserved> promise = Promise.promise();
 
 		try {
-			createTrafficFlowObserved(siteRequest).onSuccess(trafficFlowObserved -> {
-				persistTrafficFlowObserved(trafficFlowObserved, false).onSuccess(c -> {
-					indexTrafficFlowObserved(trafficFlowObserved).onSuccess(o2 -> {
-						promise.complete(trafficFlowObserved);
+			pgPool.withTransaction(sqlConnection -> {
+				Promise<TrafficFlowObserved> promise1 = Promise.promise();
+				siteRequest.setSqlConnection(sqlConnection);
+				varsTrafficFlowObserved(siteRequest).onSuccess(a -> {
+					createTrafficFlowObserved(siteRequest).onSuccess(trafficFlowObserved -> {
+						sqlPOSTTrafficFlowObserved(trafficFlowObserved, inheritPk).onSuccess(b -> {
+							persistTrafficFlowObserved(trafficFlowObserved).onSuccess(c -> {
+								relateTrafficFlowObserved(trafficFlowObserved).onSuccess(d -> {
+									indexTrafficFlowObserved(trafficFlowObserved).onSuccess(o2 -> {
+										promise1.complete(trafficFlowObserved);
+									}).onFailure(ex -> {
+										promise1.fail(ex);
+									});
+								}).onFailure(ex -> {
+									promise1.fail(ex);
+								});
+							}).onFailure(ex -> {
+								promise1.fail(ex);
+							});
+						}).onFailure(ex -> {
+							promise1.fail(ex);
+						});
 					}).onFailure(ex -> {
-						promise.fail(ex);
+						promise1.fail(ex);
 					});
 				}).onFailure(ex -> {
-					promise.fail(ex);
+					promise1.fail(ex);
 				});
+				return promise1.future();
+			}).onSuccess(a -> {
+				siteRequest.setSqlConnection(null);
+			}).onFailure(ex -> {
+				siteRequest.setSqlConnection(null);
+				promise.fail(ex);
+			}).compose(trafficFlowObserved -> {
+				Promise<TrafficFlowObserved> promise2 = Promise.promise();
+				refreshTrafficFlowObserved(trafficFlowObserved).onSuccess(a -> {
+					try {
+						ApiRequest apiRequest = siteRequest.getApiRequest_();
+						if(apiRequest != null) {
+							apiRequest.setNumPATCH(apiRequest.getNumPATCH() + 1);
+							trafficFlowObserved.apiRequestTrafficFlowObserved();
+							eventBus.publish("websocketTrafficFlowObserved", JsonObject.mapFrom(apiRequest).toString());
+						}
+						promise2.complete(trafficFlowObserved);
+					} catch(Exception ex) {
+						LOG.error(String.format("postTrafficFlowObservedFuture failed. "), ex);
+						promise.fail(ex);
+					}
+				}).onFailure(ex -> {
+					promise2.fail(ex);
+				});
+				return promise2.future();
+			}).onSuccess(trafficFlowObserved -> {
+				promise.complete(trafficFlowObserved);
 			}).onFailure(ex -> {
 				promise.fail(ex);
 			});
 		} catch(Exception ex) {
 			LOG.error(String.format("postTrafficFlowObservedFuture failed. "), ex);
+			promise.fail(ex);
+		}
+		return promise.future();
+	}
+
+	public Future<Void> sqlPOSTTrafficFlowObserved(TrafficFlowObserved o, Boolean inheritPk) {
+		Promise<Void> promise = Promise.promise();
+		try {
+			SiteRequestEnUS siteRequest = o.getSiteRequest_();
+			ApiRequest apiRequest = siteRequest.getApiRequest_();
+			List<Long> pks = Optional.ofNullable(apiRequest).map(r -> r.getPks()).orElse(new ArrayList<>());
+			List<String> classes = Optional.ofNullable(apiRequest).map(r -> r.getClasses()).orElse(new ArrayList<>());
+			SqlConnection sqlConnection = siteRequest.getSqlConnection();
+			Integer num = 1;
+			StringBuilder bSql = new StringBuilder("UPDATE TrafficFlowObserved SET ");
+			List<Object> bParams = new ArrayList<Object>();
+			Long pk = o.getPk();
+			JsonObject jsonObject = siteRequest.getJsonObject();
+			TrafficFlowObserved o2 = new TrafficFlowObserved();
+			o2.setSiteRequest_(siteRequest);
+			List<Future> futures1 = new ArrayList<>();
+			List<Future> futures2 = new ArrayList<>();
+
+			if(siteRequest.getSessionId() != null) {
+				if(bParams.size() > 0) {
+					bSql.append(", ");
+				}
+				bSql.append("sessionId=$" + num);
+				num++;
+				bParams.add(siteRequest.getSessionId());
+			}
+			if(siteRequest.getUserKey() != null) {
+				if(bParams.size() > 0) {
+					bSql.append(", ");
+				}
+				bSql.append("userKey=$" + num);
+				num++;
+				bParams.add(siteRequest.getUserKey());
+			}
+
+			if(jsonObject != null) {
+				Set<String> entityVars = jsonObject.fieldNames();
+				for(String entityVar : entityVars) {
+					switch(entityVar) {
+					case TrafficFlowObserved.VAR_inheritPk:
+						o2.setInheritPk(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_inheritPk + "=$" + num);
+						num++;
+						bParams.add(o2.sqlInheritPk());
+						break;
+					case TrafficFlowObserved.VAR_created:
+						o2.setCreated(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_created + "=$" + num);
+						num++;
+						bParams.add(o2.sqlCreated());
+						break;
+					case TrafficFlowObserved.VAR_archived:
+						o2.setArchived(jsonObject.getBoolean(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_archived + "=$" + num);
+						num++;
+						bParams.add(o2.sqlArchived());
+						break;
+					case TrafficFlowObserved.VAR_deleted:
+						o2.setDeleted(jsonObject.getBoolean(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_deleted + "=$" + num);
+						num++;
+						bParams.add(o2.sqlDeleted());
+						break;
+					case TrafficFlowObserved.VAR_sessionId:
+						o2.setSessionId(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_sessionId + "=$" + num);
+						num++;
+						bParams.add(o2.sqlSessionId());
+						break;
+					case TrafficFlowObserved.VAR_userKey:
+						o2.setUserKey(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_userKey + "=$" + num);
+						num++;
+						bParams.add(o2.sqlUserKey());
+						break;
+					case TrafficFlowObserved.VAR_location:
+						o2.setLocation(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_location + "=$" + num);
+						num++;
+						bParams.add(o2.sqlLocation());
+						break;
+					case TrafficFlowObserved.VAR_color:
+						o2.setColor(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_color + "=$" + num);
+						num++;
+						bParams.add(o2.sqlColor());
+						break;
+					case TrafficFlowObserved.VAR_entityId:
+						o2.setEntityId(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_entityId + "=$" + num);
+						num++;
+						bParams.add(o2.sqlEntityId());
+						break;
+					case TrafficFlowObserved.VAR_simulationName:
+						o2.setSimulationName(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_simulationName + "=$" + num);
+						num++;
+						bParams.add(o2.sqlSimulationName());
+						break;
+					case TrafficFlowObserved.VAR_sumocfgPath:
+						o2.setSumocfgPath(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_sumocfgPath + "=$" + num);
+						num++;
+						bParams.add(o2.sqlSumocfgPath());
+						break;
+					case TrafficFlowObserved.VAR_address:
+						o2.setAddress(jsonObject.getJsonObject(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_address + "=$" + num);
+						num++;
+						bParams.add(o2.sqlAddress());
+						break;
+					case TrafficFlowObserved.VAR_alternateName:
+						o2.setAlternateName(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_alternateName + "=$" + num);
+						num++;
+						bParams.add(o2.sqlAlternateName());
+						break;
+					case TrafficFlowObserved.VAR_areaServed:
+						o2.setAreaServed(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_areaServed + "=$" + num);
+						num++;
+						bParams.add(o2.sqlAreaServed());
+						break;
+					case TrafficFlowObserved.VAR_averageGapDistance:
+						o2.setAverageGapDistance(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_averageGapDistance + "=$" + num);
+						num++;
+						bParams.add(o2.sqlAverageGapDistance());
+						break;
+					case TrafficFlowObserved.VAR_averageHeadwayTime:
+						o2.setAverageHeadwayTime(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_averageHeadwayTime + "=$" + num);
+						num++;
+						bParams.add(o2.sqlAverageHeadwayTime());
+						break;
+					case TrafficFlowObserved.VAR_averageVehicleLength:
+						o2.setAverageVehicleLength(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_averageVehicleLength + "=$" + num);
+						num++;
+						bParams.add(o2.sqlAverageVehicleLength());
+						break;
+					case TrafficFlowObserved.VAR_averageVehicleSpeed:
+						o2.setAverageVehicleSpeed(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_averageVehicleSpeed + "=$" + num);
+						num++;
+						bParams.add(o2.sqlAverageVehicleSpeed());
+						break;
+					case TrafficFlowObserved.VAR_congested:
+						o2.setCongested(jsonObject.getBoolean(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_congested + "=$" + num);
+						num++;
+						bParams.add(o2.sqlCongested());
+						break;
+					case TrafficFlowObserved.VAR_dataProvider:
+						o2.setDataProvider(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_dataProvider + "=$" + num);
+						num++;
+						bParams.add(o2.sqlDataProvider());
+						break;
+					case TrafficFlowObserved.VAR_dateCreated:
+						o2.setDateCreated(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_dateCreated + "=$" + num);
+						num++;
+						bParams.add(o2.sqlDateCreated());
+						break;
+					case TrafficFlowObserved.VAR_dateModified:
+						o2.setDateModified(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_dateModified + "=$" + num);
+						num++;
+						bParams.add(o2.sqlDateModified());
+						break;
+					case TrafficFlowObserved.VAR_dateObserved:
+						o2.setDateObserved(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_dateObserved + "=$" + num);
+						num++;
+						bParams.add(o2.sqlDateObserved());
+						break;
+					case TrafficFlowObserved.VAR_dateObservedFrom:
+						o2.setDateObservedFrom(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_dateObservedFrom + "=$" + num);
+						num++;
+						bParams.add(o2.sqlDateObservedFrom());
+						break;
+					case TrafficFlowObserved.VAR_dateObservedTo:
+						o2.setDateObservedTo(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_dateObservedTo + "=$" + num);
+						num++;
+						bParams.add(o2.sqlDateObservedTo());
+						break;
+					case TrafficFlowObserved.VAR_description:
+						o2.setDescription(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_description + "=$" + num);
+						num++;
+						bParams.add(o2.sqlDescription());
+						break;
+					case TrafficFlowObserved.VAR_intensity:
+						o2.setIntensity(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_intensity + "=$" + num);
+						num++;
+						bParams.add(o2.sqlIntensity());
+						break;
+					case TrafficFlowObserved.VAR_laneDirection:
+						o2.setLaneDirection(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_laneDirection + "=$" + num);
+						num++;
+						bParams.add(o2.sqlLaneDirection());
+						break;
+					case TrafficFlowObserved.VAR_laneId:
+						o2.setLaneId(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_laneId + "=$" + num);
+						num++;
+						bParams.add(o2.sqlLaneId());
+						break;
+					case TrafficFlowObserved.VAR_name:
+						o2.setName(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_name + "=$" + num);
+						num++;
+						bParams.add(o2.sqlName());
+						break;
+					case TrafficFlowObserved.VAR_occupancy:
+						o2.setOccupancy(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_occupancy + "=$" + num);
+						num++;
+						bParams.add(o2.sqlOccupancy());
+						break;
+					case TrafficFlowObserved.VAR_owner:
+						o2.setOwner(jsonObject.getJsonObject(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_owner + "=$" + num);
+						num++;
+						bParams.add(o2.sqlOwner());
+						break;
+					case TrafficFlowObserved.VAR_refRoadSegment:
+						o2.setRefRoadSegment(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_refRoadSegment + "=$" + num);
+						num++;
+						bParams.add(o2.sqlRefRoadSegment());
+						break;
+					case TrafficFlowObserved.VAR_reversedLane:
+						o2.setReversedLane(jsonObject.getBoolean(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_reversedLane + "=$" + num);
+						num++;
+						bParams.add(o2.sqlReversedLane());
+						break;
+					case TrafficFlowObserved.VAR_seeAlso:
+						o2.setSeeAlso(jsonObject.getJsonObject(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_seeAlso + "=$" + num);
+						num++;
+						bParams.add(o2.sqlSeeAlso());
+						break;
+					case TrafficFlowObserved.VAR_source:
+						o2.setSource(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_source + "=$" + num);
+						num++;
+						bParams.add(o2.sqlSource());
+						break;
+					case TrafficFlowObserved.VAR_type:
+						o2.setType(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_type + "=$" + num);
+						num++;
+						bParams.add(o2.sqlType());
+						break;
+					case TrafficFlowObserved.VAR_vehicleSubType:
+						o2.setVehicleSubType(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_vehicleSubType + "=$" + num);
+						num++;
+						bParams.add(o2.sqlVehicleSubType());
+						break;
+					case TrafficFlowObserved.VAR_vehicleType:
+						o2.setVehicleType(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_vehicleType + "=$" + num);
+						num++;
+						bParams.add(o2.sqlVehicleType());
+						break;
+					case TrafficFlowObserved.VAR_customRouteId:
+						o2.setCustomRouteId(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_customRouteId + "=$" + num);
+						num++;
+						bParams.add(o2.sqlCustomRouteId());
+						break;
+					case TrafficFlowObserved.VAR_customSigma:
+						o2.setCustomSigma(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_customSigma + "=$" + num);
+						num++;
+						bParams.add(o2.sqlCustomSigma());
+						break;
+					case TrafficFlowObserved.VAR_customAcceleration:
+						o2.setCustomAcceleration(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_customAcceleration + "=$" + num);
+						num++;
+						bParams.add(o2.sqlCustomAcceleration());
+						break;
+					case TrafficFlowObserved.VAR_customDeceleration:
+						o2.setCustomDeceleration(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_customDeceleration + "=$" + num);
+						num++;
+						bParams.add(o2.sqlCustomDeceleration());
+						break;
+					case TrafficFlowObserved.VAR_customMinGreenTime:
+						o2.setCustomMinGreenTime(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_customMinGreenTime + "=$" + num);
+						num++;
+						bParams.add(o2.sqlCustomMinGreenTime());
+						break;
+					case TrafficFlowObserved.VAR_customMaxGreenTime:
+						o2.setCustomMaxGreenTime(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_customMaxGreenTime + "=$" + num);
+						num++;
+						bParams.add(o2.sqlCustomMaxGreenTime());
+						break;
+					case TrafficFlowObserved.VAR_customAverageVehiclesPerMinute:
+						o2.setCustomAverageVehiclesPerMinute(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_customAverageVehiclesPerMinute + "=$" + num);
+						num++;
+						bParams.add(o2.sqlCustomAverageVehiclesPerMinute());
+						break;
+					case TrafficFlowObserved.VAR_customDemandScalingFactor:
+						o2.setCustomDemandScalingFactor(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_customDemandScalingFactor + "=$" + num);
+						num++;
+						bParams.add(o2.sqlCustomDemandScalingFactor());
+						break;
+					case TrafficFlowObserved.VAR_customQueueLengthThreshold:
+						o2.setCustomQueueLengthThreshold(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_customQueueLengthThreshold + "=$" + num);
+						num++;
+						bParams.add(o2.sqlCustomQueueLengthThreshold());
+						break;
+					case TrafficFlowObserved.VAR_customTrafficLightId:
+						o2.setCustomTrafficLightId(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_customTrafficLightId + "=$" + num);
+						num++;
+						bParams.add(o2.sqlCustomTrafficLightId());
+						break;
+					}
+				}
+			}
+			bSql.append(" WHERE pk=$" + num);
+			if(bParams.size() > 0) {
+			bParams.add(pk);
+			num++;
+				futures2.add(0, Future.future(a -> {
+					sqlConnection.preparedQuery(bSql.toString())
+							.execute(Tuple.tuple(bParams)
+							).onSuccess(b -> {
+						a.handle(Future.succeededFuture());
+					}).onFailure(ex -> {
+						RuntimeException ex2 = new RuntimeException("value TrafficFlowObserved failed", ex);
+						LOG.error(String.format("relateTrafficFlowObserved failed. "), ex2);
+						a.handle(Future.failedFuture(ex2));
+					});
+				}));
+			}
+			CompositeFuture.all(futures1).onSuccess(a -> {
+				CompositeFuture.all(futures2).onSuccess(b -> {
+					promise.complete();
+				}).onFailure(ex -> {
+					LOG.error(String.format("sqlPOSTTrafficFlowObserved failed. "), ex);
+					promise.fail(ex);
+				});
+			}).onFailure(ex -> {
+				LOG.error(String.format("sqlPOSTTrafficFlowObserved failed. "), ex);
+				promise.fail(ex);
+			});
+		} catch(Exception ex) {
+			LOG.error(String.format("sqlPOSTTrafficFlowObserved failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
@@ -923,9 +1982,8 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 				apiRequest.setNumPATCH(0L);
 				apiRequest.initDeepApiRequest(siteRequest);
 				siteRequest.setApiRequest_(apiRequest);
-				String inheritPk = Optional.ofNullable(body.getString(TrafficFlowObserved.VAR_id)).orElse(body.getString(TrafficFlowObserved.VAR_id));
+				String inheritPk = Optional.ofNullable(body.getString(TrafficFlowObserved.VAR_pk)).orElse(body.getString(TrafficFlowObserved.VAR_id));
 				body.put("inheritPk", inheritPk);
-				body.put("inheritPk", body.getValue("id"));
 				if(Optional.ofNullable(serviceRequest.getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getJsonArray("var")).orElse(new JsonArray()).stream().filter(s -> "refresh:false".equals(s)).count() > 0L) {
 					siteRequest.getRequestVars().put( "refresh", "false" );
 				}
@@ -971,20 +2029,20 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 								} else {
 									o2.persistForClass(f, bodyVal);
 									o2.relateForClass(f, bodyVal);
-									if(!StringUtils.containsAny(f, "id", "created", "setCreated") && !Objects.equals(o.obtainForClass(f), o2.obtainForClass(f)))
+									if(!StringUtils.containsAny(f, "pk", "created", "setCreated") && !Objects.equals(o.obtainForClass(f), o2.obtainForClass(f)))
 										body2.put("set" + StringUtils.capitalize(f), bodyVal);
 								}
 							}
 							for(String f : Optional.ofNullable(o.getSaves()).orElse(new ArrayList<>())) {
 								if(!body.fieldNames().contains(f)) {
-									if(!StringUtils.containsAny(f, "id", "created", "setCreated") && !Objects.equals(o.obtainForClass(f), o2.obtainForClass(f)))
+									if(!StringUtils.containsAny(f, "pk", "created", "setCreated") && !Objects.equals(o.obtainForClass(f), o2.obtainForClass(f)))
 										body2.putNull("set" + StringUtils.capitalize(f));
 								}
 							}
 							if(body2.size() > 0) {
 								siteRequest.setJsonObject(body2);
-								patchTrafficFlowObservedFuture(o2, true).onSuccess(b -> {
-									LOG.debug("Import TrafficFlowObserved {} succeeded, modified TrafficFlowObserved. ", body.getValue(TrafficFlowObserved.VAR_id));
+								patchTrafficFlowObservedFuture(o, true).onSuccess(b -> {
+									LOG.debug("Import TrafficFlowObserved {} succeeded, modified TrafficFlowObserved. ", body.getValue(TrafficFlowObserved.VAR_pk));
 									eventHandler.handle(Future.succeededFuture());
 								}).onFailure(ex -> {
 									LOG.error(String.format("putimportTrafficFlowObservedFuture failed. "), ex);
@@ -995,7 +2053,7 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 							}
 						} else {
 							postTrafficFlowObservedFuture(siteRequest, true).onSuccess(b -> {
-								LOG.debug("Import TrafficFlowObserved {} succeeded, created new TrafficFlowObserved. ", body.getValue(TrafficFlowObserved.VAR_id));
+								LOG.debug("Import TrafficFlowObserved {} succeeded, created new TrafficFlowObserved. ", body.getValue(TrafficFlowObserved.VAR_pk));
 								eventHandler.handle(Future.succeededFuture());
 							}).onFailure(ex -> {
 								LOG.error(String.format("putimportTrafficFlowObservedFuture failed. "), ex);
@@ -1152,6 +2210,8 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 			MultiMap requestHeaders = MultiMap.caseInsensitiveMultiMap();
 			siteRequest.setRequestHeaders(requestHeaders);
 
+			if(listTrafficFlowObserved.size() == 1)
+				siteRequest.setRequestPk(listTrafficFlowObserved.get(0).getPk());
 			page.setSearchListTrafficFlowObserved_(listTrafficFlowObserved);
 			page.setSiteRequest_(siteRequest);
 			page.promiseDeepTrafficFlowObservedPage(siteRequest).onSuccess(a -> {
@@ -1183,9 +2243,25 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 	public Future<TrafficFlowObserved> createTrafficFlowObserved(SiteRequestEnUS siteRequest) {
 		Promise<TrafficFlowObserved> promise = Promise.promise();
 		try {
-			TrafficFlowObserved o = new TrafficFlowObserved();
-			o.setSiteRequest_(siteRequest);
-			promise.complete(o);
+			SqlConnection sqlConnection = siteRequest.getSqlConnection();
+			String userId = siteRequest.getUserId();
+			Long userKey = siteRequest.getUserKey();
+			ZonedDateTime created = Optional.ofNullable(siteRequest.getJsonObject()).map(j -> j.getString("created")).map(s -> ZonedDateTime.parse(s, ComputateZonedDateTimeSerializer.ZONED_DATE_TIME_FORMATTER.withZone(ZoneId.of(config.getString(ConfigKeys.SITE_ZONE))))).orElse(ZonedDateTime.now(ZoneId.of(config.getString(ConfigKeys.SITE_ZONE))));
+
+			sqlConnection.preparedQuery("INSERT INTO TrafficFlowObserved(created, userKey) VALUES($1, $2) RETURNING pk")
+					.collecting(Collectors.toList())
+					.execute(Tuple.of(created.toOffsetDateTime(), userKey)).onSuccess(result -> {
+				Row createLine = result.value().stream().findFirst().orElseGet(() -> null);
+				Long pk = createLine.getLong(0);
+				TrafficFlowObserved o = new TrafficFlowObserved();
+				o.setPk(pk);
+				o.setSiteRequest_(siteRequest);
+				promise.complete(o);
+			}).onFailure(ex -> {
+				RuntimeException ex2 = new RuntimeException(ex);
+				LOG.error("createTrafficFlowObserved failed. ", ex2);
+				promise.fail(ex2);
+			});
 		} catch(Exception ex) {
 			LOG.error(String.format("createTrafficFlowObserved failed. "), ex);
 			promise.fail(ex);
@@ -1291,7 +2367,7 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 
 			String id = serviceRequest.getParams().getJsonObject("path").getString("id");
 			if(id != null && NumberUtils.isCreatable(id)) {
-				searchList.fq("(_docvalues_long:" + SearchTool.escapeQueryChars(id) + " OR objectId_docvalues_string:" + SearchTool.escapeQueryChars(id) + ")");
+				searchList.fq("(pk_docvalues_long:" + SearchTool.escapeQueryChars(id) + " OR objectId_docvalues_string:" + SearchTool.escapeQueryChars(id) + ")");
 			} else if(id != null) {
 				searchList.fq("objectId_docvalues_string:" + SearchTool.escapeQueryChars(id));
 			}
@@ -1489,39 +2565,50 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 	public void searchTrafficFlowObserved2(SiteRequestEnUS siteRequest, Boolean populate, Boolean store, Boolean modify, SearchList<TrafficFlowObserved> searchList) {
 	}
 
-	public Future<Void> persistTrafficFlowObserved(TrafficFlowObserved o, Boolean patch) {
+	public Future<Void> persistTrafficFlowObserved(TrafficFlowObserved o) {
 		Promise<Void> promise = Promise.promise();
 		try {
 			SiteRequestEnUS siteRequest = o.getSiteRequest_();
+			SqlConnection sqlConnection = siteRequest.getSqlConnection();
+			Long pk = o.getPk();
+			sqlConnection.preparedQuery("SELECT * FROM TrafficFlowObserved WHERE pk=$1")
+					.collecting(Collectors.toList())
+					.execute(Tuple.of(pk)
+					).onSuccess(result -> {
 				try {
-					JsonObject jsonObject = siteRequest.getJsonObject();
-					jsonObject.forEach(definition -> {
-							String columnName;
-							Object columnValue;
-						if(patch && StringUtils.startsWith(definition.getKey(), "set")) {
-							columnName = StringUtils.uncapitalize(StringUtils.substringAfter(definition.getKey(), "set"));
-							columnValue = definition.getValue();
-						} else {
-							columnName = definition.getKey();
-							columnValue = definition.getValue();
-						}
-						if(!"".equals(columnName)) {
-							try {
-								o.persistForClass(columnName, columnValue);
-							} catch(Exception e) {
-								LOG.error(String.format("persistTrafficFlowObserved failed. "), e);
+					for(Row definition : result.value()) {
+						for(Integer i = 0; i < definition.size(); i++) {
+							String columnName = definition.getColumnName(i);
+							Object columnValue = definition.getValue(i);
+							if(!"pk".equals(columnName)) {
+								try {
+									o.persistForClass(columnName, columnValue);
+								} catch(Exception e) {
+									LOG.error(String.format("persistTrafficFlowObserved failed. "), e);
+								}
 							}
 						}
-					});
+					}
 					promise.complete();
 				} catch(Exception ex) {
 					LOG.error(String.format("persistTrafficFlowObserved failed. "), ex);
 					promise.fail(ex);
 				}
+			}).onFailure(ex -> {
+				RuntimeException ex2 = new RuntimeException(ex);
+				LOG.error(String.format("persistTrafficFlowObserved failed. "), ex2);
+				promise.fail(ex2);
+			});
 		} catch(Exception ex) {
 			LOG.error(String.format("persistTrafficFlowObserved failed. "), ex);
 			promise.fail(ex);
 		}
+		return promise.future();
+	}
+
+	public Future<Void> relateTrafficFlowObserved(TrafficFlowObserved o) {
+		Promise<Void> promise = Promise.promise();
+			promise.complete();
 		return promise.future();
 	}
 
@@ -1567,5 +2654,66 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 
 	public String searchVar(String varIndexed) {
 		return TrafficFlowObserved.searchVarTrafficFlowObserved(varIndexed);
+	}
+
+	public Future<Void> refreshTrafficFlowObserved(TrafficFlowObserved o) {
+		Promise<Void> promise = Promise.promise();
+		SiteRequestEnUS siteRequest = o.getSiteRequest_();
+		try {
+			ApiRequest apiRequest = siteRequest.getApiRequest_();
+			List<Long> pks = Optional.ofNullable(apiRequest).map(r -> r.getPks()).orElse(new ArrayList<>());
+			List<String> classes = Optional.ofNullable(apiRequest).map(r -> r.getClasses()).orElse(new ArrayList<>());
+			Boolean refresh = !"false".equals(siteRequest.getRequestVars().get("refresh"));
+			if(refresh && !Optional.ofNullable(siteRequest.getJsonObject()).map(JsonObject::isEmpty).orElse(true)) {
+				List<Future> futures = new ArrayList<>();
+
+				for(int i=0; i < pks.size(); i++) {
+					Long pk2 = pks.get(i);
+					String classSimpleName2 = classes.get(i);
+				}
+
+				CompositeFuture.all(futures).onSuccess(b -> {
+					JsonObject params = new JsonObject();
+					params.put("body", new JsonObject());
+					params.put("cookie", new JsonObject());
+					params.put("header", new JsonObject());
+					params.put("form", new JsonObject());
+					params.put("path", new JsonObject());
+					JsonObject query = new JsonObject();
+					Boolean softCommit = Optional.ofNullable(siteRequest.getServiceRequest().getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getBoolean("softCommit")).orElse(null);
+					Integer commitWithin = Optional.ofNullable(siteRequest.getServiceRequest().getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getInteger("commitWithin")).orElse(null);
+					if(softCommit == null && commitWithin == null)
+						softCommit = true;
+					if(softCommit != null)
+						query.put("softCommit", softCommit);
+					if(commitWithin != null)
+						query.put("commitWithin", commitWithin);
+					query.put("q", "*:*").put("fq", new JsonArray().add("pk:" + o.getPk())).put("var", new JsonArray().add("refresh:false"));
+					params.put("query", query);
+					JsonObject context = new JsonObject().put("params", params).put("user", siteRequest.getUserPrincipal());
+					JsonObject json = new JsonObject().put("context", context);
+					eventBus.request("smartabyar-smartvillage-enUS-TrafficFlowObserved", json, new DeliveryOptions().addHeader("action", "patchTrafficFlowObservedFuture")).onSuccess(c -> {
+						JsonObject responseMessage = (JsonObject)c.body();
+						Integer statusCode = responseMessage.getInteger("statusCode");
+						if(statusCode.equals(200))
+							promise.complete();
+						else
+							promise.fail(new RuntimeException(responseMessage.getString("statusMessage")));
+					}).onFailure(ex -> {
+						LOG.error("Refresh relations failed. ", ex);
+						promise.fail(ex);
+					});
+				}).onFailure(ex -> {
+					LOG.error("Refresh relations failed. ", ex);
+					promise.fail(ex);
+				});
+			} else {
+				promise.complete();
+			}
+		} catch(Exception ex) {
+			LOG.error(String.format("refreshTrafficFlowObserved failed. "), ex);
+			promise.fail(ex);
+		}
+		return promise.future();
 	}
 }

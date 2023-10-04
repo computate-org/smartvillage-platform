@@ -36,6 +36,7 @@ import org.computate.smartvillageview.enus.result.base.BaseResult;
 import io.vertx.core.json.JsonObject;
 import java.lang.String;
 import io.vertx.pgclient.data.Point;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.computate.vertx.serialize.pgclient.PgClientPointSerializer;
 import org.computate.vertx.serialize.pgclient.PgClientPointDeserializer;
 import java.math.BigDecimal;
@@ -136,9 +137,9 @@ import org.computate.search.response.solr.SolrResponse;
  * Java Vert.x backend API code, Handlebars HTML template frontend code, and JavaScript code will all generated and can be extended. 
  * This creates a new Java class org.computate.smartvillageview.enus.model.iotnode.IotNodePage. 
  * </p>
- * <h2>SuperPage.enUS: MapResultPage</h2>
- * <p>This class contains a comment <b>"SuperPage.enUS: MapResultPage"</b>, which identifies the Java super class of the page code by it's class simple name "MapResultPage". 
- * This means that the newly created class org.computate.smartvillageview.enus.model.iotnode.IotNodePage extends org.computate.smartvillageview.enus.result.map.MapResultPage. 
+ * <h2>SuperPage.enUS: BaseResultPage</h2>
+ * <p>This class contains a comment <b>"SuperPage.enUS: BaseResultPage"</b>, which identifies the Java super class of the page code by it's class simple name "BaseResultPage". 
+ * This means that the newly created class org.computate.smartvillageview.enus.model.iotnode.IotNodePage extends org.computate.smartvillageview.enus.result.base.BaseResultPage. 
  * </p>
  * <h2>Promise: true</h2>
  * <p>
@@ -3609,7 +3610,7 @@ public abstract class IotNodeGen<DEV> extends BaseResult {
 	}
 	public void populateIotNode(SolrResponse.Doc doc) {
 		IotNode oIotNode = (IotNode)this;
-		saves = doc.get("saves_docvalues_strings");
+		saves = Optional.ofNullable((ArrayList<String>)doc.get("saves_docvalues_strings")).orElse(new ArrayList<String>());
 		if(saves != null) {
 
 			if(saves.contains("json")) {

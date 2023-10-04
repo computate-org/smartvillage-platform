@@ -48,6 +48,7 @@ import java.util.Locale;
 import java.time.OffsetDateTime;
 import java.lang.Double;
 import io.vertx.pgclient.data.Point;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.computate.vertx.serialize.pgclient.PgClientPointSerializer;
 import org.computate.vertx.serialize.pgclient.PgClientPointDeserializer;
 import java.lang.Boolean;
@@ -1105,7 +1106,7 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 	}
 	public void populateMapResult(SolrResponse.Doc doc) {
 		MapResult oMapResult = (MapResult)this;
-		saves = doc.get("saves_docvalues_strings");
+		saves = Optional.ofNullable((ArrayList<String>)doc.get("saves_docvalues_strings")).orElse(new ArrayList<String>());
 		if(saves != null) {
 
 			if(saves.contains("timeStepId")) {

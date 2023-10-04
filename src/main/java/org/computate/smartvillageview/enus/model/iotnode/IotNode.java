@@ -14,7 +14,7 @@ import io.vertx.pgclient.data.Point;
 /**
  * Api: true
  * Page: true
- * SuperPage.enUS: MapResultPage
+ * SuperPage.enUS: BaseResultPage
  * Indexed: true
  * Order: 5
  * 

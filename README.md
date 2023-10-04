@@ -31,6 +31,12 @@ oc extract -n smart-village-view secret/smartvillage-kafka-cluster-ca-cert --to=
 oc -n smart-village-view get secret/smartvillage-kafka-cluster-ca-cert -o jsonpath='{.data.ca\.password}' | base64 -d; echo
 ```
 
+# Create or update database table schema
+
+```
+psql -h psql-postgres.apps-crc.testing -p 30432 -U smartvillage smartvillage < ~/.local/src/smartabyar-smartvillage/src/main/resources/sql/db-create.sql
+```
+
 # Setup smartabyar-smartvillage development environment on MacOSX or Linux (Fedora, RHEL, CentOS, Ubuntu)
 
 ## Install Ansible dependencies on Linux

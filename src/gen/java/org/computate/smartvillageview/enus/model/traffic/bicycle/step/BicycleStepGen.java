@@ -497,7 +497,7 @@ public abstract class BicycleStepGen<DEV> extends MapResult {
 	}
 	public void populateBicycleStep(SolrResponse.Doc doc) {
 		BicycleStep oBicycleStep = (BicycleStep)this;
-		saves = doc.get("saves_docvalues_strings");
+		saves = Optional.ofNullable((ArrayList<String>)doc.get("saves_docvalues_strings")).orElse(new ArrayList<String>());
 		if(saves != null) {
 
 			if(saves.contains("bicycleId")) {
