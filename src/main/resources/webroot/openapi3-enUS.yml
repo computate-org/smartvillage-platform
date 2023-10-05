@@ -3583,6 +3583,719 @@ paths:
             text/html; charset=utf-8:
               schema:
                 $ref: '#/components/schemas/SearchPageBicycleStepResponse'
+  /CrowdFlowObserved/{id}:
+    get:
+      operationId: searchpageCrowdFlowObservedId
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-CrowdFlowObserved
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - CrowdFlowObserved
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+        - name: id
+          in: path
+          description: >+
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: q
+          description: 'The query parameter defines a query using standard query syntax. This parameter is mandatory.'
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: 'The filter query parameter defines a query that can be used to restrict the superset of documents that can be returned, without influencing score. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: var
+          description: 'The var parameters are additional optional variables and values to pass into the application. '
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
+        - in: query
+          name: fl
+          description: 'The field list parameter limits the information included in a query response to a specified list of fields. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sort
+          description: 'The sort parameter arranges search results in either ascending (asc) or descending (desc) order. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: start
+          description: 'The start parameter specifies an offset into a query result set and instructs Solr to begin displaying results from this offset. '
+          required: false
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
+        - in: query
+          name: rows
+          description: 'The rows parameter specifies the maximum number of documents from the complete result set that Solr should return to the client at one time. '
+          required: false
+          schema:
+            type: integer
+            default: 10
+            minimum: 0
+        - in: query
+          name: facet
+          description: 'The facet parameter enables facet counts in the query response. '
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: facet.range.start
+          description: 'The facet.range.start parameter specifies the lower bound of the ranges. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.end
+          description: 'The facet.range.end specifies the upper bound of the ranges. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.gap
+          description: 'The span of each range expressed as a value to be added to the lower bound. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.pivot
+          description: 'The facet.pivot parameter defines the fields to use for the pivot. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range
+          description: 'The facet.range parameter defines the field for which Solr should create range facets. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.field
+          description: 'The facet.field parameter identifies a field that should be treated as a facet. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: d
+          description: 'The radial distance, usually in kilometers. '
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+        - in: query
+          name: pt
+          description: 'he center point using the format lat,lon if latitude & longitude. Otherwise, x,y for PointType or x y for RPT field types. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sfield
+          description: 'A spatial indexed field. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: score
+          description: '(Advanced option; not supported by LatLonType (deprecated) or PointType) If the query is used in a scoring context (e.g., as the main query in q), this local parameter determines what scores will be produced. Valid values are: none, kilometers, miles, degrees, distance, recipDistance, overlapRatio, area, area2D'
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: distanceUnits
+          description: 'This is used to specify the units for distance measurements used throughout the use of this field. This can be degrees, kilometers or miles. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: stats
+          description: 'The Stats component returns simple statistics for numeric, string, and date fields within the document set. '
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: stats.field
+          description: 'Specifies a field for which statistics should be generated. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: >+
+          content:
+            text/html; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/SearchPageCrowdFlowObservedResponse'
+  /CrowdFlowObserved:
+    get:
+      operationId: searchpageCrowdFlowObserved
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-CrowdFlowObserved
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - CrowdFlowObserved
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+        - in: query
+          name: q
+          description: 'The query parameter defines a query using standard query syntax. This parameter is mandatory.'
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: 'The filter query parameter defines a query that can be used to restrict the superset of documents that can be returned, without influencing score. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: var
+          description: 'The var parameters are additional optional variables and values to pass into the application. '
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
+        - in: query
+          name: fl
+          description: 'The field list parameter limits the information included in a query response to a specified list of fields. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sort
+          description: 'The sort parameter arranges search results in either ascending (asc) or descending (desc) order. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: start
+          description: 'The start parameter specifies an offset into a query result set and instructs Solr to begin displaying results from this offset. '
+          required: false
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
+        - in: query
+          name: rows
+          description: 'The rows parameter specifies the maximum number of documents from the complete result set that Solr should return to the client at one time. '
+          required: false
+          schema:
+            type: integer
+            default: 10
+            minimum: 0
+        - in: query
+          name: facet
+          description: 'The facet parameter enables facet counts in the query response. '
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: facet.range.start
+          description: 'The facet.range.start parameter specifies the lower bound of the ranges. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.end
+          description: 'The facet.range.end specifies the upper bound of the ranges. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.gap
+          description: 'The span of each range expressed as a value to be added to the lower bound. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.pivot
+          description: 'The facet.pivot parameter defines the fields to use for the pivot. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range
+          description: 'The facet.range parameter defines the field for which Solr should create range facets. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.field
+          description: 'The facet.field parameter identifies a field that should be treated as a facet. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: d
+          description: 'The radial distance, usually in kilometers. '
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+        - in: query
+          name: pt
+          description: 'he center point using the format lat,lon if latitude & longitude. Otherwise, x,y for PointType or x y for RPT field types. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sfield
+          description: 'A spatial indexed field. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: score
+          description: '(Advanced option; not supported by LatLonType (deprecated) or PointType) If the query is used in a scoring context (e.g., as the main query in q), this local parameter determines what scores will be produced. Valid values are: none, kilometers, miles, degrees, distance, recipDistance, overlapRatio, area, area2D'
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: distanceUnits
+          description: 'This is used to specify the units for distance measurements used throughout the use of this field. This can be degrees, kilometers or miles. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: stats
+          description: 'The Stats component returns simple statistics for numeric, string, and date fields within the document set. '
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: stats.field
+          description: 'Specifies a field for which statistics should be generated. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: >+
+          content:
+            text/html; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/SearchPageCrowdFlowObservedResponse'
+  /api/CrowdFlowObserved:
+    get:
+      operationId: searchCrowdFlowObserved
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-CrowdFlowObserved
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - CrowdFlowObserved
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+        - in: query
+          name: q
+          description: 'The query parameter defines a query using standard query syntax. This parameter is mandatory.'
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: 'The filter query parameter defines a query that can be used to restrict the superset of documents that can be returned, without influencing score. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: var
+          description: 'The var parameters are additional optional variables and values to pass into the application. '
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
+        - in: query
+          name: fl
+          description: 'The field list parameter limits the information included in a query response to a specified list of fields. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sort
+          description: 'The sort parameter arranges search results in either ascending (asc) or descending (desc) order. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: start
+          description: 'The start parameter specifies an offset into a query result set and instructs Solr to begin displaying results from this offset. '
+          required: false
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
+        - in: query
+          name: rows
+          description: 'The rows parameter specifies the maximum number of documents from the complete result set that Solr should return to the client at one time. '
+          required: false
+          schema:
+            type: integer
+            default: 10
+            minimum: 0
+        - in: query
+          name: facet
+          description: 'The facet parameter enables facet counts in the query response. '
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: facet.range.start
+          description: 'The facet.range.start parameter specifies the lower bound of the ranges. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.end
+          description: 'The facet.range.end specifies the upper bound of the ranges. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.gap
+          description: 'The span of each range expressed as a value to be added to the lower bound. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.pivot
+          description: 'The facet.pivot parameter defines the fields to use for the pivot. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range
+          description: 'The facet.range parameter defines the field for which Solr should create range facets. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.field
+          description: 'The facet.field parameter identifies a field that should be treated as a facet. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: d
+          description: 'The radial distance, usually in kilometers. '
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+        - in: query
+          name: pt
+          description: 'he center point using the format lat,lon if latitude & longitude. Otherwise, x,y for PointType or x y for RPT field types. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sfield
+          description: 'A spatial indexed field. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: score
+          description: '(Advanced option; not supported by LatLonType (deprecated) or PointType) If the query is used in a scoring context (e.g., as the main query in q), this local parameter determines what scores will be produced. Valid values are: none, kilometers, miles, degrees, distance, recipDistance, overlapRatio, area, area2D'
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: distanceUnits
+          description: 'This is used to specify the units for distance measurements used throughout the use of this field. This can be degrees, kilometers or miles. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: stats
+          description: 'The Stats component returns simple statistics for numeric, string, and date fields within the document set. '
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: stats.field
+          description: 'Specifies a field for which statistics should be generated. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: >+
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/SearchCrowdFlowObservedResponse'
+    patch:
+      operationId: patchCrowdFlowObserved
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-CrowdFlowObserved
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - CrowdFlowObserved
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+        - in: query
+          name: q
+          description: 'The query parameter defines a query using standard query syntax. This parameter is mandatory.'
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: 'The filter query parameter defines a query that can be used to restrict the superset of documents that can be returned, without influencing score. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: var
+          description: 'The var parameters are additional optional variables and values to pass into the application. '
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
+      requestBody:
+        description: >+
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PATCHCrowdFlowObservedRequest'
+      responses:
+        '200':
+          description: >+
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/PATCHCrowdFlowObservedResponse'
+    post:
+      operationId: postCrowdFlowObserved
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-CrowdFlowObserved
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - CrowdFlowObserved
+      requestBody:
+        description: >+
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POSTCrowdFlowObservedRequest'
+      responses:
+        '200':
+          description: >+
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/POSTCrowdFlowObservedResponse'
+  /api/CrowdFlowObserved-import:
+    put:
+      operationId: putimportCrowdFlowObserved
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-CrowdFlowObserved
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - CrowdFlowObserved
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+        - in: query
+          name: q
+          description: 'The query parameter defines a query using standard query syntax. This parameter is mandatory.'
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: 'The filter query parameter defines a query that can be used to restrict the superset of documents that can be returned, without influencing score. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: var
+          description: 'The var parameters are additional optional variables and values to pass into the application. '
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
+      requestBody:
+        description: >+
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PUTImportCrowdFlowObservedRequest'
+      responses:
+        '200':
+          description: >+
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/PUTImportCrowdFlowObservedResponse'
+  /api/CrowdFlowObserved/{id}:
+    get:
+      operationId: getCrowdFlowObserved
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-CrowdFlowObserved
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - CrowdFlowObserved
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+        - name: id
+          in: path
+          description: >+
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: >+
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/GETCrowdFlowObservedResponse'
   /api/smart-traffic-light:
     get:
       operationId: searchSmartTrafficLight
@@ -12678,6 +13391,51 @@ components:
         text/html; charset=utf-8:
           schema:
             $ref: '#/components/schemas/SearchPageBicycleStepResponse'
+    SearchPageCrowdFlowObservedResponse:
+      content:
+        text/html; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/SearchPageCrowdFlowObservedResponse'
+    SearchCrowdFlowObservedResponse:
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/SearchCrowdFlowObservedResponse'
+    PATCHCrowdFlowObservedRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PATCHCrowdFlowObservedRequest'
+    PATCHCrowdFlowObservedResponse:
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/PATCHCrowdFlowObservedResponse'
+    POSTCrowdFlowObservedRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/POSTCrowdFlowObservedRequest'
+    POSTCrowdFlowObservedResponse:
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/POSTCrowdFlowObservedResponse'
+    PUTImportCrowdFlowObservedRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PUTImportCrowdFlowObservedRequest'
+    PUTImportCrowdFlowObservedResponse:
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/PUTImportCrowdFlowObservedResponse'
+    GETCrowdFlowObservedResponse:
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/GETCrowdFlowObservedResponse'
     SearchSmartTrafficLightResponse:
       content:
         application/json; charset=utf-8:
@@ -16448,6 +17206,653 @@ components:
     SearchPageBicycleStepResponse:
       allOf:
         - type: string
+    SearchPageCrowdFlowObservedResponse:
+      allOf:
+        - type: string
+    SearchCrowdFlowObservedResponse:
+      allOf:
+        - type: object
+          properties:
+            startNum:
+              type: integer
+              minimum: 0
+            foundNum:
+              type: integer
+              minimum: 0
+            returnedNum:
+              type: integer
+              minimum: 0
+            list:
+              type: array
+              items:
+                type: object
+                properties:
+                  address:
+                    type: object
+                  alternateName:
+                    type: string
+                  areaServed:
+                    type: string
+                  averageCrowdSpeed:
+                    type: string
+                  averageHeadwayTime:
+                    type: string
+                  congested:
+                    type: boolean
+                  dataProvider:
+                    type: string
+                  dateCreated:
+                    type: string
+                  dateModified:
+                    type: string
+                  dateObserved:
+                    type: string
+                  dateObservedFrom:
+                    type: string
+                  dateObservedTo:
+                    type: string
+                  description:
+                    type: string
+                  direction:
+                    type: string
+                  location:
+                    type: string
+                  name:
+                    type: string
+                  occupancy:
+                    type: string
+                  owner:
+                    type: object
+                  peopleCount:
+                    type: string
+                  refRoadSegment:
+                    type: object
+                  seeAlso:
+                    type: object
+                  source:
+                    type: string
+                  type:
+                    type: string
+    PATCHCrowdFlowObservedRequest:
+      allOf:
+        - type: object
+          properties:
+            setAddress:
+              type: object
+              nullable: true
+            removeAddress:
+              type: object
+            removeAllAddress:
+              type: object
+            setAlternateName:
+              type: string
+              nullable: true
+            removeAlternateName:
+              type: string
+            removeAllAlternateName:
+              type: string
+            setAreaServed:
+              type: string
+              nullable: true
+            removeAreaServed:
+              type: string
+            removeAllAreaServed:
+              type: string
+            setAverageCrowdSpeed:
+              type: string
+              nullable: true
+            removeAverageCrowdSpeed:
+              type: string
+            removeAllAverageCrowdSpeed:
+              type: string
+            setAverageHeadwayTime:
+              type: string
+              nullable: true
+            removeAverageHeadwayTime:
+              type: string
+            removeAllAverageHeadwayTime:
+              type: string
+            setCongested:
+              type: boolean
+              nullable: true
+            removeCongested:
+              type: boolean
+            removeAllCongested:
+              type: boolean
+            setDataProvider:
+              type: string
+              nullable: true
+            removeDataProvider:
+              type: string
+            removeAllDataProvider:
+              type: string
+            setDateCreated:
+              type: string
+              nullable: true
+            removeDateCreated:
+              type: string
+            removeAllDateCreated:
+              type: string
+            setDateModified:
+              type: string
+              nullable: true
+            removeDateModified:
+              type: string
+            removeAllDateModified:
+              type: string
+            setDateObserved:
+              type: string
+              nullable: true
+            removeDateObserved:
+              type: string
+            removeAllDateObserved:
+              type: string
+            setDateObservedFrom:
+              type: string
+              nullable: true
+            removeDateObservedFrom:
+              type: string
+            removeAllDateObservedFrom:
+              type: string
+            setDateObservedTo:
+              type: string
+              nullable: true
+            removeDateObservedTo:
+              type: string
+            removeAllDateObservedTo:
+              type: string
+            setDescription:
+              type: string
+              nullable: true
+            removeDescription:
+              type: string
+            removeAllDescription:
+              type: string
+            setDirection:
+              type: string
+              nullable: true
+            removeDirection:
+              type: string
+            removeAllDirection:
+              type: string
+            setLocation:
+              type: string
+              nullable: true
+            removeLocation:
+              type: string
+            removeAllLocation:
+              type: string
+            setName:
+              type: string
+              nullable: true
+            removeName:
+              type: string
+            removeAllName:
+              type: string
+            setOccupancy:
+              type: string
+              nullable: true
+            removeOccupancy:
+              type: string
+            removeAllOccupancy:
+              type: string
+            setOwner:
+              type: object
+              nullable: true
+            removeOwner:
+              type: object
+            removeAllOwner:
+              type: object
+            setPeopleCount:
+              type: string
+              nullable: true
+            removePeopleCount:
+              type: string
+            removeAllPeopleCount:
+              type: string
+            setRefRoadSegment:
+              type: object
+              nullable: true
+            removeRefRoadSegment:
+              type: object
+            removeAllRefRoadSegment:
+              type: object
+            setSeeAlso:
+              type: object
+              nullable: true
+            removeSeeAlso:
+              type: object
+            removeAllSeeAlso:
+              type: object
+            setSource:
+              type: string
+              nullable: true
+            removeSource:
+              type: string
+            removeAllSource:
+              type: string
+            setType:
+              type: string
+              nullable: true
+            removeType:
+              type: string
+            removeAllType:
+              type: string
+    PATCHCrowdFlowObservedResponse:
+      allOf:
+        - type: object
+          properties:
+            setAddress:
+              type: object
+              nullable: true
+            removeAddress:
+              type: object
+            removeAllAddress:
+              type: object
+            setAlternateName:
+              type: string
+              nullable: true
+            removeAlternateName:
+              type: string
+            removeAllAlternateName:
+              type: string
+            setAreaServed:
+              type: string
+              nullable: true
+            removeAreaServed:
+              type: string
+            removeAllAreaServed:
+              type: string
+            setAverageCrowdSpeed:
+              type: string
+              nullable: true
+            removeAverageCrowdSpeed:
+              type: string
+            removeAllAverageCrowdSpeed:
+              type: string
+            setAverageHeadwayTime:
+              type: string
+              nullable: true
+            removeAverageHeadwayTime:
+              type: string
+            removeAllAverageHeadwayTime:
+              type: string
+            setCongested:
+              type: boolean
+              nullable: true
+            removeCongested:
+              type: boolean
+            removeAllCongested:
+              type: boolean
+            setDataProvider:
+              type: string
+              nullable: true
+            removeDataProvider:
+              type: string
+            removeAllDataProvider:
+              type: string
+            setDateCreated:
+              type: string
+              nullable: true
+            removeDateCreated:
+              type: string
+            removeAllDateCreated:
+              type: string
+            setDateModified:
+              type: string
+              nullable: true
+            removeDateModified:
+              type: string
+            removeAllDateModified:
+              type: string
+            setDateObserved:
+              type: string
+              nullable: true
+            removeDateObserved:
+              type: string
+            removeAllDateObserved:
+              type: string
+            setDateObservedFrom:
+              type: string
+              nullable: true
+            removeDateObservedFrom:
+              type: string
+            removeAllDateObservedFrom:
+              type: string
+            setDateObservedTo:
+              type: string
+              nullable: true
+            removeDateObservedTo:
+              type: string
+            removeAllDateObservedTo:
+              type: string
+            setDescription:
+              type: string
+              nullable: true
+            removeDescription:
+              type: string
+            removeAllDescription:
+              type: string
+            setDirection:
+              type: string
+              nullable: true
+            removeDirection:
+              type: string
+            removeAllDirection:
+              type: string
+            setLocation:
+              type: string
+              nullable: true
+            removeLocation:
+              type: string
+            removeAllLocation:
+              type: string
+            setName:
+              type: string
+              nullable: true
+            removeName:
+              type: string
+            removeAllName:
+              type: string
+            setOccupancy:
+              type: string
+              nullable: true
+            removeOccupancy:
+              type: string
+            removeAllOccupancy:
+              type: string
+            setOwner:
+              type: object
+              nullable: true
+            removeOwner:
+              type: object
+            removeAllOwner:
+              type: object
+            setPeopleCount:
+              type: string
+              nullable: true
+            removePeopleCount:
+              type: string
+            removeAllPeopleCount:
+              type: string
+            setRefRoadSegment:
+              type: object
+              nullable: true
+            removeRefRoadSegment:
+              type: object
+            removeAllRefRoadSegment:
+              type: object
+            setSeeAlso:
+              type: object
+              nullable: true
+            removeSeeAlso:
+              type: object
+            removeAllSeeAlso:
+              type: object
+            setSource:
+              type: string
+              nullable: true
+            removeSource:
+              type: string
+            removeAllSource:
+              type: string
+            setType:
+              type: string
+              nullable: true
+            removeType:
+              type: string
+            removeAllType:
+              type: string
+    POSTCrowdFlowObservedRequest:
+      allOf:
+        - type: object
+          properties:
+            address:
+              type: object
+            alternateName:
+              type: string
+            areaServed:
+              type: string
+            averageCrowdSpeed:
+              type: string
+            averageHeadwayTime:
+              type: string
+            congested:
+              type: boolean
+            dataProvider:
+              type: string
+            dateCreated:
+              type: string
+            dateModified:
+              type: string
+            dateObserved:
+              type: string
+            dateObservedFrom:
+              type: string
+            dateObservedTo:
+              type: string
+            description:
+              type: string
+            direction:
+              type: string
+            location:
+              type: string
+            name:
+              type: string
+            occupancy:
+              type: string
+            owner:
+              type: object
+            peopleCount:
+              type: string
+            refRoadSegment:
+              type: object
+            seeAlso:
+              type: object
+            source:
+              type: string
+            type:
+              type: string
+    POSTCrowdFlowObservedResponse:
+      allOf:
+        - type: object
+          properties:
+            address:
+              type: object
+            alternateName:
+              type: string
+            areaServed:
+              type: string
+            averageCrowdSpeed:
+              type: string
+            averageHeadwayTime:
+              type: string
+            congested:
+              type: boolean
+            dataProvider:
+              type: string
+            dateCreated:
+              type: string
+            dateModified:
+              type: string
+            dateObserved:
+              type: string
+            dateObservedFrom:
+              type: string
+            dateObservedTo:
+              type: string
+            description:
+              type: string
+            direction:
+              type: string
+            location:
+              type: string
+            name:
+              type: string
+            occupancy:
+              type: string
+            owner:
+              type: object
+            peopleCount:
+              type: string
+            refRoadSegment:
+              type: object
+            seeAlso:
+              type: object
+            source:
+              type: string
+            type:
+              type: string
+    PUTImportCrowdFlowObservedRequest:
+      allOf:
+        - type: object
+          properties:
+            address:
+              type: object
+            alternateName:
+              type: string
+            areaServed:
+              type: string
+            averageCrowdSpeed:
+              type: string
+            averageHeadwayTime:
+              type: string
+            congested:
+              type: boolean
+            dataProvider:
+              type: string
+            dateCreated:
+              type: string
+            dateModified:
+              type: string
+            dateObserved:
+              type: string
+            dateObservedFrom:
+              type: string
+            dateObservedTo:
+              type: string
+            description:
+              type: string
+            direction:
+              type: string
+            location:
+              type: string
+            name:
+              type: string
+            occupancy:
+              type: string
+            owner:
+              type: object
+            peopleCount:
+              type: string
+            refRoadSegment:
+              type: object
+            seeAlso:
+              type: object
+            source:
+              type: string
+            type:
+              type: string
+    PUTImportCrowdFlowObservedResponse:
+      allOf:
+        - type: object
+          properties:
+            address:
+              type: object
+            alternateName:
+              type: string
+            areaServed:
+              type: string
+            averageCrowdSpeed:
+              type: string
+            averageHeadwayTime:
+              type: string
+            congested:
+              type: boolean
+            dataProvider:
+              type: string
+            dateCreated:
+              type: string
+            dateModified:
+              type: string
+            dateObserved:
+              type: string
+            dateObservedFrom:
+              type: string
+            dateObservedTo:
+              type: string
+            description:
+              type: string
+            direction:
+              type: string
+            location:
+              type: string
+            name:
+              type: string
+            occupancy:
+              type: string
+            owner:
+              type: object
+            peopleCount:
+              type: string
+            refRoadSegment:
+              type: object
+            seeAlso:
+              type: object
+            source:
+              type: string
+            type:
+              type: string
+    GETCrowdFlowObservedResponse:
+      allOf:
+        - type: object
+          properties:
+            address:
+              type: object
+            alternateName:
+              type: string
+            areaServed:
+              type: string
+            averageCrowdSpeed:
+              type: string
+            averageHeadwayTime:
+              type: string
+            congested:
+              type: boolean
+            dataProvider:
+              type: string
+            dateCreated:
+              type: string
+            dateModified:
+              type: string
+            dateObserved:
+              type: string
+            dateObservedFrom:
+              type: string
+            dateObservedTo:
+              type: string
+            description:
+              type: string
+            direction:
+              type: string
+            location:
+              type: string
+            name:
+              type: string
+            occupancy:
+              type: string
+            owner:
+              type: object
+            peopleCount:
+              type: string
+            refRoadSegment:
+              type: object
+            seeAlso:
+              type: object
+            source:
+              type: string
+            type:
+              type: string
     SearchSmartTrafficLightResponse:
       allOf:
         - type: object

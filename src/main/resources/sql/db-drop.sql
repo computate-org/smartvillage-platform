@@ -2,4 +2,5 @@ DROP TABLE SiteUser CASCADE;
 DROP TABLE SimulationReport CASCADE;
 DROP TABLE SmartTrafficLight CASCADE;
 DROP TABLE TrafficSimulation CASCADE;
+DROP TABLE CrowdFlowObserved CASCADE;
 DROP TABLE TrafficFlowObserved CASCADE;
