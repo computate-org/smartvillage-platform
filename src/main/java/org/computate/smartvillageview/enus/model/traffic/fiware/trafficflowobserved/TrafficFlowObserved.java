@@ -54,6 +54,9 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<BaseModel> {
 
 	/**
 	 * {@inheritDoc}
+	 * FiwareType: geo:json
+	 * Description: Geojson reference to the item. It can be Point, LineString, Polygon, MultiPoint, MultiLineString or MultiPolygon
+	 * Required: true
 	 * DocValues: true
 	 * Persist: true
 	 * DisplayName: map path
