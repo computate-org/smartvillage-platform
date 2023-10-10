@@ -273,6 +273,8 @@
 {{> "htmBodyMenuBaseModelPage"}}{{/inline}}
 {{#*inline "htmBodyGraphTrafficFlowObservedPage"}}		<!-- #*inline "htmBodyGraphTrafficFlowObservedPage" -->
 <div id="htmBodyGraphBaseModelPage" class="w3-content htmBodyGraph "></div>{{/inline}}
+{{#*inline "htmBodyGraphLocationTrafficFlowObservedPage"}}		<!-- #*inline "htmBodyGraphLocationTrafficFlowObservedPage" -->
+<div id="htmBodyGraphLocationBaseModelPage" class="w3-content htmBodyGraphLocation "></div>{{/inline}}
 {{#*inline "htmBodyCount0TrafficFlowObservedPage"}}		<!-- #*inline "htmBodyCount0TrafficFlowObservedPage" -->
 		<h1>
 			<a href="{{pageUri}}" class="w3-bar-item w3-btn w3-center w3-block w3-2017-shaded-spruce w3-hover-2017-shaded-spruce">
@@ -290,6 +292,12 @@
 				<span class="">no traffic flow observed found</span>
 			</span>
 		</h2>
+{{#block "htmBodyGraphLocation"}}{{/block}}
+{{#block "htmBodyGraph"}}{{/block}}
+	<div class="pageContent w3-content ">
+		<div id="site-calendar-box">
+			<div id="site-calendar"><!-- // --></div>
+		</div>
 {{/inline}}
 {{#*inline "htmBodyCount1AllTrafficFlowObservedPage"}}		<!-- #*inline "htmBodyCount1AllTrafficFlowObservedPage" -->
 		<h1 class="w3-center ">
@@ -305,6 +313,12 @@
 				<span class="">{{trafficFlowObserved_.objectTitle}}</span>
 			</span>
 		</h2>
+{{#block "htmBodyGraphLocation"}}{{/block}}
+{{#block "htmBodyGraph"}}{{/block}}
+	<div class="pageContent w3-content ">
+		<div id="site-calendar-box">
+			<div id="site-calendar"><!-- // --></div>
+		</div>
 {{/inline}}
 {{#*inline "htmBodyCount1TrafficFlowObservedPage"}}		<!-- #*inline "htmBodyCount1TrafficFlowObservedPage" -->
 		<h1>
@@ -320,6 +334,12 @@
 				<span class="">{{trafficFlowObserved_.objectTitle}}</span>
 			</span>
 		</h2>
+{{#block "htmBodyGraphLocation"}}{{/block}}
+{{#block "htmBodyGraph"}}{{/block}}
+	<div class="pageContent w3-content ">
+		<div id="site-calendar-box">
+			<div id="site-calendar"><!-- // --></div>
+		</div>
 {{/inline}}
 {{#*inline "htmBodyAllTrafficFlowObservedPage"}}		<!-- #*inline "htmBodyAllTrafficFlowObservedPage" -->
 		<h1>
@@ -330,6 +350,11 @@
 				<span class="">traffic flow observeds</span>
 			</a>
 		</h1>
+{{#block "htmBodyGraphLocation"}}{{/block}}
+{{#block "htmBodyGraph"}}{{/block}}
+		<div id="site-calendar-box">
+			<div id="site-calendar"><!-- // --></div>
+		</div>
 		<div class="">
 			<div>
 	{{#if pagination.pagePrevious}}
@@ -1988,11 +2013,7 @@
 		<div class="w3-bar w3-content ">
 {{#block "htmBodySidebar"}}{{/block}}
 		</div>
-{{#block "htmBodyGraph"}}{{/block}}
 	<div class="pageContent w3-content ">
-		<div id="site-calendar-box">
-			<div id="site-calendar"><!-- // --></div>
-		</div>
 	{{#eq trafficFlowObservedCount int0}}
 {{#block "htmBodyCount0"}}{{/block}}
 	{{else}}

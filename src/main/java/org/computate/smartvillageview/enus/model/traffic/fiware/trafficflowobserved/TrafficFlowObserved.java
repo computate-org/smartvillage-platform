@@ -227,6 +227,7 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<BaseModel> {
 	/**
 	 * {@inheritDoc}
 	 * FiwareType: geo:linestring
+	 * Location: true
 	 * DisplayName: area served
 	 * Description: The geographic area where a service or offered item is provided. Geojson reference to the item. It can be Point, LineString, Polygon, MultiPoint, MultiLineString or MultiPolygon. 
 	 * Required: true
@@ -240,15 +241,22 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<BaseModel> {
 		if(trafficSimulation_ != null && laneAreaDetectorId != null) {
 			Integer i = trafficSimulation_.getLaneAreaDetectorIds().indexOf(laneAreaDetectorId);
 			if(i != null) {
-				JsonObject detectorLanes = trafficSimulation_.getLaneAreaDetectorLanes().getJsonObject(i);
+				JsonArray detectorLanes = trafficSimulation_.getLaneAreaDetectorLanes().getJsonArray(i);
 				if(detectorLanes != null) {
 					Path path = new Path();
-					for(String laneId : detectorLanes.fieldNames()) {
-						JsonObject lane = detectorLanes.getJsonObject(laneId);
-						lane.getJsonArray("coordinates").stream().map(o -> (JsonArray)o).forEach(coordinate -> {
+
+					for(Integer j = 0; j < detectorLanes.size(); j++) {
+//					for(Integer j = detectorLanes.size() - 1; j >= 0; j--) {
+						JsonObject lane = detectorLanes.getJsonObject(j);
+						JsonArray coordinates = lane.getJsonArray("coordinates");
+
+						for(Integer k = 0; k < coordinates.size(); k++) {
+//						for(Integer k = coordinates.size() - 1; k >= 0; k--) {
+							JsonArray coordinate = (JsonArray)coordinates.getJsonArray(k);
+
 							path.addPoint(new Point(Double.parseDouble(coordinate.getString(0))
 									, Double.parseDouble(coordinate.getString(1))));
-						});
+						}
 					}
 					w.o(path);
 				}
