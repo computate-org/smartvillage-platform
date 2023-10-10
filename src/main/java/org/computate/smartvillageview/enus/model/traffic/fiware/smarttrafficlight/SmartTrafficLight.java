@@ -14,6 +14,8 @@ import io.vertx.core.Promise;
 
 /**
  * {@inheritDoc}
+ * Fiware: true
+ * 
  * Api: true
  * Model: true
  * Page: true
@@ -54,6 +56,7 @@ public class SmartTrafficLight extends SmartTrafficLightGen<BaseModel> {
 	 * HtmRow: 5
 	 * HtmCell: 1
 	 * Facet: true
+	 * Required: true
 	 */
 	protected void _entityId(Wrap<String> w) {
 	}
@@ -68,6 +71,18 @@ public class SmartTrafficLight extends SmartTrafficLightGen<BaseModel> {
 	 * Facet: true
 	 */
 	protected void _smartTrafficLightName(Wrap<String> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * DisplayName: route IDs
+	 * HtmRow: 6
+	 * HtmCell: 2
+	 * Facet: true
+	 */
+	protected void _routeIds(List<String> w) {
 	}
 
 	/**
@@ -123,14 +138,14 @@ public class SmartTrafficLight extends SmartTrafficLightGen<BaseModel> {
 	 * Ignore: true
 	 */
 	protected void _trafficFlowObserveds(List<TrafficFlowObserved> l) {
-		l.addAll(trafficFlowObservedSearch.getList());
-		l.forEach(o -> {
-			if(routeIdNorth != null && routeIdNorth.equals(o.getCustomRouteId()))
-				setTrafficFlowObservedNorth_(o);
-			if(routeIdEast != null && routeIdEast.equals(o.getCustomRouteId()))
-				setTrafficFlowObservedEast_(o);
-			trafficFlowObservedIds.add(o.getId());
-		});
+//		l.addAll(trafficFlowObservedSearch.getList());
+//		l.forEach(o -> {
+//			if(routeIdNorth != null && routeIdNorth.equals(o.getCustomRouteId()))
+//				setTrafficFlowObservedNorth_(o);
+//			if(routeIdEast != null && routeIdEast.equals(o.getCustomRouteId()))
+//				setTrafficFlowObservedEast_(o);
+//			trafficFlowObservedIds.add(o.getId());
+//		});
 	}
 
 	/**

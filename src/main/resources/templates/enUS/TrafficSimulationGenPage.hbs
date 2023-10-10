@@ -33,6 +33,7 @@
 				window.eventBus = new EventBus('/eventbus');
 				var pk = {{#if pk}}{{pk}}{{else}}null{{/if}};
 				if(pk != null) {
+					window.trafficSimulation = JSON.parse('{{{toJsonObjectStringInApostrophes trafficSimulation_ }}}');
 		{{#ifContainsAnyRoles roles roleForWrite}}
 					suggestTrafficSimulationReportKeys([{'name':'fq','value':'simulationKey:' + pk}], $('#listTrafficSimulationReportKeys_Page'), pk, true);
 		{{else}}
@@ -43,6 +44,7 @@
 		{{/ifContainsAnyRoles}}
 		{{/ifContainsAnyRoles}}
 				}
+				window.listTrafficSimulation = JSON.parse('{{{toJsonArrayStringInApostrophes listTrafficSimulation }}}');
 				window.varsFq = JSON.parse('{{{toJsonObjectStringInApostrophes varsFq}}}');
 				window.varsRange = JSON.parse('{{{toJsonObjectStringInApostrophes varsRange}}}');
 				window.defaultRangeVar = '{{ defaultRangeVar }}';
@@ -477,6 +479,19 @@
 {{> "htmLocation" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
+							</div>
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmEntityId" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmEntityId" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmEntityId" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
 							</div>
 {{#block "htmFormButton_patchTrafficSimulation"}}{{/block}}
 					</div>
@@ -535,6 +550,19 @@
 {{> "htmLocation" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
 {{> "htmLocation" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
+							</div>
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmEntityId" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmEntityId" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmEntityId" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 							</div>
@@ -682,6 +710,19 @@
 {{> "htmLocation" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
 {{> "htmLocation" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
+							</div>
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmEntityId" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmEntityId" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmEntityId" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 							</div>
@@ -1349,5 +1390,61 @@
 			{{/ifContainsKeys}}
 		{{else}}
 														<span class="varTrafficSimulation{{pk}}Location varTrafficSimulationLocation ">{{trafficSimulation_.location}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmEntityId"}}
+<!-- #*inline "htmEntityId" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficSimulationEntityId">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_entityId">entity ID</label>
+												</div>
+											<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputEntityId" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputEntityId"}}
+		{{#eq roleForWriteBool "true"}}
+														<input
+															type="text"
+															placeholder="entity ID"
+															title="A unique ID for this Smart Data Model"															id="{{classApiMethodMethod}}_entityId"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setEntityId classTrafficSimulation inputTrafficSimulation{{pk}}EntityId w3-input w3-border "
+																name="setEntityId"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setEntityId classTrafficSimulation inputTrafficSimulation{{pk}}EntityId w3-input w3-border "
+																name="setEntityId"
+		{{else}}
+																class="valueEntityId w3-input w3-border classTrafficSimulation inputTrafficSimulation{{pk}}EntityId w3-input w3-border "
+																name="entityId"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setEntityId', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_entityId')); }, function() { addError($('#{{classApiMethodMethod}}_entityId')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficSimulation_.entityId}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficSimulation{{pk}}EntityId varTrafficSimulationEntityId ">{{trafficSimulation_.entityId}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficSimulation{{pk}}EntityId varTrafficSimulationEntityId ">{{trafficSimulation_.entityId}}</span>
 		{{/eq}}
 {{/inline}}

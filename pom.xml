@@ -130,6 +130,7 @@
 				<scope>import</scope>
 			</dependency>
 
+			<!--
 			<dependency>
 				<groupId>${quarkus.platform.group-id}</groupId>
 				<artifactId>${quarkus.platform.artifact-id}</artifactId>
@@ -137,6 +138,7 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+			-->
 
 			<dependency>
 				<groupId>org.apache.camel</groupId>

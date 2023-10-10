@@ -34,6 +34,7 @@
 				window.eventBus = new EventBus('/eventbus');
 				var pk = {{#if pk}}{{pk}}{{else}}null{{/if}};
 				if(pk != null) {
+					window.simulationReport = JSON.parse('{{{toJsonObjectStringInApostrophes simulationReport_ }}}');
 		{{#ifContainsAnyRoles roles roleForWrite}}
 					suggestSimulationReportSimulationKey([{'name':'fq','value':'reportKeys:' + pk}], $('#listSimulationReportSimulationKey_Page'), pk, true);
 		{{else}}
@@ -53,6 +54,7 @@
 		{{/ifContainsAnyRoles}}
 		{{/ifContainsAnyRoles}}
 				}
+				window.listSimulationReport = JSON.parse('{{{toJsonArrayStringInApostrophes listSimulationReport }}}');
 				window.varsFq = JSON.parse('{{{toJsonObjectStringInApostrophes varsFq}}}');
 				window.varsRange = JSON.parse('{{{toJsonObjectStringInApostrophes varsRange}}}');
 				window.defaultRangeVar = '{{ defaultRangeVar }}';

@@ -33,6 +33,7 @@
 				window.eventBus = new EventBus('/eventbus');
 				var pk = {{#if pk}}{{pk}}{{else}}null{{/if}};
 				if(pk != null) {
+					window.smartTrafficLight = JSON.parse('{{{toJsonObjectStringInApostrophes smartTrafficLight_ }}}');
 		{{#ifContainsAnyRoles roles roleForWrite}}
 					suggestSmartTrafficLightReportKeys([{'name':'fq','value':'smartTrafficLightKey:' + pk}], $('#listSmartTrafficLightReportKeys_Page'), pk, true);
 		{{else}}
@@ -43,6 +44,7 @@
 		{{/ifContainsAnyRoles}}
 		{{/ifContainsAnyRoles}}
 				}
+				window.listSmartTrafficLight = JSON.parse('{{{toJsonArrayStringInApostrophes listSmartTrafficLight }}}');
 				window.varsFq = JSON.parse('{{{toJsonObjectStringInApostrophes varsFq}}}');
 				window.varsRange = JSON.parse('{{{toJsonObjectStringInApostrophes varsRange}}}');
 				window.defaultRangeVar = '{{ defaultRangeVar }}';
@@ -469,6 +471,15 @@
 							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
 							<div class="w3-cell-row HtmRow">
 {{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmRouteIds" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmRouteIds" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmRouteIds" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
 {{> "htmRouteIdNorth" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
 {{#ifContainsAnyRoles roles roleForRead}}
@@ -616,6 +627,15 @@
 							</div>
 							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
 							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmRouteIds" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmRouteIds" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmRouteIds" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleForWrite}}
 {{> "htmRouteIdNorth" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
@@ -829,6 +849,15 @@
 							</div>
 							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
 							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmRouteIds" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmRouteIds" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmRouteIds" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleForWrite}}
 {{> "htmRouteIdNorth" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
@@ -1664,6 +1693,62 @@
 			{{/ifContainsKeys}}
 		{{else}}
 														<span class="varSmartTrafficLight{{pk}}SmartTrafficLightName varSmartTrafficLightSmartTrafficLightName ">{{smartTrafficLight_.smartTrafficLightName}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmRouteIds"}}
+<!-- #*inline "htmRouteIds" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SmartTrafficLightRouteIds">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_routeIds">route IDs</label>
+												</div>
+											<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputRouteIds" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputRouteIds"}}
+		{{#eq roleForWriteBool "true"}}
+														<input
+															type="text"
+															placeholder="route IDs"
+															id="{{classApiMethodMethod}}_routeIds"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setRouteIds classSmartTrafficLight inputSmartTrafficLight{{pk}}RouteIds w3-input w3-border "
+																name="setRouteIds"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setRouteIds classSmartTrafficLight inputSmartTrafficLight{{pk}}RouteIds w3-input w3-border "
+																name="setRouteIds"
+		{{else}}
+																class="valueRouteIds w3-input w3-border classSmartTrafficLight inputSmartTrafficLight{{pk}}RouteIds w3-input w3-border "
+																name="routeIds"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setRouteIds', $(this).val().replace('[','').replace(']','').split(/[ ,]+/), function() { addGlow($('#{{classApiMethodMethod}}_routeIds')); }, function() { addError($('#{{classApiMethodMethod}}_routeIds')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{smartTrafficLight_.routeIds}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varSmartTrafficLight{{pk}}RouteIds varSmartTrafficLightRouteIds ">{{smartTrafficLight_.routeIds}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varSmartTrafficLight{{pk}}RouteIds varSmartTrafficLightRouteIds ">{{smartTrafficLight_.routeIds}}</span>
 		{{/eq}}
 {{/inline}}
 

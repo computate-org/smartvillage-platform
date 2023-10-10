@@ -8,6 +8,7 @@ import java.util.Optional;
 import org.computate.search.wrap.Wrap;
 import org.computate.smartvillageview.enus.model.base.BaseModel;
 
+import io.vertx.core.json.JsonArray;
 import io.vertx.pgclient.data.Point;
 
 /**
@@ -58,6 +59,18 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
+	 * DisplayName: entity ID
+	 * Description: A unique ID for this Smart Data Model
+	 * HtmRow: 5
+	 * HtmCell: 1
+	 * Facet: true
+	 */
+	protected void _entityId(Wrap<String> w) {}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
 	 * Facet: true
 	 * DisplayName: Start date and Time
 	 * Description: The start date and time. 
@@ -81,6 +94,7 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 
 	/**
 	 * {@inheritDoc}
+	 * FiwareType: geo:point
 	 * DocValues: true
 	 * Persist: true
 	 * DisplayName: map location
@@ -496,7 +510,7 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Persist: true
 	 * Facet: true
 	 */
-	protected void _laneAreaDetectorLanes(List<String> l) {
+	protected void _laneAreaDetectorLanes(Wrap<JsonArray> l) {
 	}
 
 	/**

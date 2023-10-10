@@ -35,6 +35,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.math.RoundingMode;
 import java.util.Map;
+import java.lang.String;
+import org.computate.vertx.search.list.SearchList;
+import org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation;
+import io.vertx.pgclient.data.Point;
+import org.computate.vertx.serialize.pgclient.PgClientPointSerializer;
+import org.computate.vertx.serialize.pgclient.PgClientPointDeserializer;
+import org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLight;
 import io.vertx.pgclient.data.Path;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
@@ -46,9 +53,6 @@ import java.util.stream.Collectors;
 import io.vertx.core.json.Json;
 import org.computate.vertx.serialize.pgclient.PgClientPathSerializer;
 import org.computate.vertx.serialize.pgclient.PgClientPathDeserializer;
-import java.lang.String;
-import org.computate.vertx.search.list.SearchList;
-import org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLight;
 import java.math.BigDecimal;
 import java.lang.Boolean;
 import java.lang.Integer;
@@ -627,94 +631,6 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 	public static final String TrafficFlowObserved_IconName = "map-location-dot";
 	public static final Integer TrafficFlowObserved_Rows = 100;
 
-	//////////////
-	// location //
-	//////////////
-
-
-	/**	 The entity location
-	 *	 is defined as null before being initialized. 
-	 */
-	@JsonProperty
-	@JsonDeserialize(using = PgClientPathDeserializer.class)
-	@JsonSerialize(using = PgClientPathSerializer.class)
-	@JsonInclude(Include.NON_NULL)
-	protected Path location;
-
-	/**	<br> The entity location
-	 *  is defined as null before being initialized. 
-	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved.TrafficFlowObserved&fq=entiteVar_enUS_indexed_string:location">Find the entity location in Solr</a>
-	 * <br>
-	 * @param w is for wrapping a value to assign to this entity during initialization. 
-	 **/
-	protected abstract void _location(Wrap<Path> w);
-
-	public Path getLocation() {
-		return location;
-	}
-
-	public void setLocation(Path location) {
-		this.location = location;
-	}
-	@JsonIgnore
-	public void setLocation(String o) {
-		this.location = TrafficFlowObserved.staticSetLocation(siteRequest_, o);
-	}
-	public static Path staticSetLocation(SiteRequestEnUS siteRequest_, String o) {
-		if(o != null) {
-			try {
-				Path path = null;
-				if(StringUtils.isNotBlank(o)) {
-					ObjectMapper objectMapper = new ObjectMapper();
-					SimpleModule module = new SimpleModule();
-					module.setDeserializerModifier(new BeanDeserializerModifier() {
-						@Override
-						public JsonDeserializer<?> modifyDeserializer(DeserializationConfig config, BeanDescription beanDesc, JsonDeserializer<?> deserializer) {
-							if (beanDesc.getBeanClass() == Path.class) {
-								return new PgClientPathDeserializer();
-							}
-							return deserializer;
-						}
-					});
-					objectMapper.registerModule(module);
-					path = objectMapper.readValue(Json.encode(o), Path.class);
-				}
-				return path;
-			} catch(Exception ex) {
-				ExceptionUtils.rethrow(ex);
-			}
-		}
-		return null;
-	}
-	protected TrafficFlowObserved locationInit() {
-		Wrap<Path> locationWrap = new Wrap<Path>().var("location");
-		if(location == null) {
-			_location(locationWrap);
-			Optional.ofNullable(locationWrap.getO()).ifPresent(o -> {
-				setLocation(o);
-			});
-		}
-		return (TrafficFlowObserved)this;
-	}
-
-	public static Path staticSearchLocation(SiteRequestEnUS siteRequest_, Path o) {
-		return o;
-	}
-
-	public static String staticSearchStrLocation(SiteRequestEnUS siteRequest_, Path o) {
-		JsonArray pointsArray = new JsonArray();
-		o.getPoints().stream().map(point -> new JsonArray().add(Double.valueOf(point.getX())).add(Double.valueOf(point.getY()))).collect(Collectors.toList()).forEach(pointArray -> pointsArray.add(pointArray));
-		return new JsonObject().put("type", "LineString").put("coordinates", pointsArray).toString();
-	}
-
-	public static String staticSearchFqLocation(SiteRequestEnUS siteRequest_, String o) {
-		return TrafficFlowObserved.staticSearchStrLocation(siteRequest_, TrafficFlowObserved.staticSearchLocation(siteRequest_, TrafficFlowObserved.staticSetLocation(siteRequest_, o)));
-	}
-
-	public Path sqlLocation() {
-		return location;
-	}
-
 	///////////
 	// color //
 	///////////
@@ -827,6 +743,282 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 		return entityId;
 	}
 
+	/////////////////////////
+	// trafficSimulationId //
+	/////////////////////////
+
+
+	/**	 The entity trafficSimulationId
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String trafficSimulationId;
+
+	/**	<br> The entity trafficSimulationId
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved.TrafficFlowObserved&fq=entiteVar_enUS_indexed_string:trafficSimulationId">Find the entity trafficSimulationId in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _trafficSimulationId(Wrap<String> w);
+
+	public String getTrafficSimulationId() {
+		return trafficSimulationId;
+	}
+	public void setTrafficSimulationId(String o) {
+		this.trafficSimulationId = TrafficFlowObserved.staticSetTrafficSimulationId(siteRequest_, o);
+	}
+	public static String staticSetTrafficSimulationId(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected TrafficFlowObserved trafficSimulationIdInit() {
+		Wrap<String> trafficSimulationIdWrap = new Wrap<String>().var("trafficSimulationId");
+		if(trafficSimulationId == null) {
+			_trafficSimulationId(trafficSimulationIdWrap);
+			Optional.ofNullable(trafficSimulationIdWrap.getO()).ifPresent(o -> {
+				setTrafficSimulationId(o);
+			});
+		}
+		return (TrafficFlowObserved)this;
+	}
+
+	public static String staticSearchTrafficSimulationId(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrTrafficSimulationId(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqTrafficSimulationId(SiteRequestEnUS siteRequest_, String o) {
+		return TrafficFlowObserved.staticSearchStrTrafficSimulationId(siteRequest_, TrafficFlowObserved.staticSearchTrafficSimulationId(siteRequest_, TrafficFlowObserved.staticSetTrafficSimulationId(siteRequest_, o)));
+	}
+
+	public String sqlTrafficSimulationId() {
+		return trafficSimulationId;
+	}
+
+	/////////////////////////////
+	// trafficSimulationSearch //
+	/////////////////////////////
+
+
+	/**	 The entity trafficSimulationSearch
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonIgnore
+	@JsonInclude(Include.NON_NULL)
+	protected SearchList<TrafficSimulation> trafficSimulationSearch;
+
+	/**	<br> The entity trafficSimulationSearch
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved.TrafficFlowObserved&fq=entiteVar_enUS_indexed_string:trafficSimulationSearch">Find the entity trafficSimulationSearch in Solr</a>
+	 * <br>
+	 * @param promise is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _trafficSimulationSearch(Promise<SearchList<TrafficSimulation>> promise);
+
+	public SearchList<TrafficSimulation> getTrafficSimulationSearch() {
+		return trafficSimulationSearch;
+	}
+
+	public void setTrafficSimulationSearch(SearchList<TrafficSimulation> trafficSimulationSearch) {
+		this.trafficSimulationSearch = trafficSimulationSearch;
+	}
+	public static SearchList<TrafficSimulation> staticSetTrafficSimulationSearch(SiteRequestEnUS siteRequest_, String o) {
+		return null;
+	}
+	protected Future<SearchList<TrafficSimulation>> trafficSimulationSearchPromise() {
+		Promise<SearchList<TrafficSimulation>> promise = Promise.promise();
+		Promise<SearchList<TrafficSimulation>> promise2 = Promise.promise();
+		_trafficSimulationSearch(promise2);
+		promise2.future().onSuccess(o -> {
+			if(o != null && trafficSimulationSearch == null) {
+				o.promiseDeepForClass(siteRequest_).onSuccess(a -> {
+					setTrafficSimulationSearch(o);
+					promise.complete(o);
+				}).onFailure(ex -> {
+					promise.fail(ex);
+				});
+			} else {
+				promise.complete(o);
+			}
+		}).onFailure(ex -> {
+			promise.fail(ex);
+		});
+		return promise.future();
+	}
+
+	////////////////////////
+	// trafficSimulation_ //
+	////////////////////////
+
+
+	/**	 The entity trafficSimulation_
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonIgnore
+	@JsonInclude(Include.NON_NULL)
+	protected TrafficSimulation trafficSimulation_;
+
+	/**	<br> The entity trafficSimulation_
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved.TrafficFlowObserved&fq=entiteVar_enUS_indexed_string:trafficSimulation_">Find the entity trafficSimulation_ in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _trafficSimulation_(Wrap<TrafficSimulation> w);
+
+	public TrafficSimulation getTrafficSimulation_() {
+		return trafficSimulation_;
+	}
+
+	public void setTrafficSimulation_(TrafficSimulation trafficSimulation_) {
+		this.trafficSimulation_ = trafficSimulation_;
+	}
+	public static TrafficSimulation staticSetTrafficSimulation_(SiteRequestEnUS siteRequest_, String o) {
+		return null;
+	}
+	protected TrafficFlowObserved trafficSimulation_Init() {
+		Wrap<TrafficSimulation> trafficSimulation_Wrap = new Wrap<TrafficSimulation>().var("trafficSimulation_");
+		if(trafficSimulation_ == null) {
+			_trafficSimulation_(trafficSimulation_Wrap);
+			Optional.ofNullable(trafficSimulation_Wrap.getO()).ifPresent(o -> {
+				setTrafficSimulation_(o);
+			});
+		}
+		return (TrafficFlowObserved)this;
+	}
+
+	////////////////////////
+	// laneAreaDetectorId //
+	////////////////////////
+
+
+	/**	 The entity laneAreaDetectorId
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String laneAreaDetectorId;
+
+	/**	<br> The entity laneAreaDetectorId
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved.TrafficFlowObserved&fq=entiteVar_enUS_indexed_string:laneAreaDetectorId">Find the entity laneAreaDetectorId in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _laneAreaDetectorId(Wrap<String> w);
+
+	public String getLaneAreaDetectorId() {
+		return laneAreaDetectorId;
+	}
+	public void setLaneAreaDetectorId(String o) {
+		this.laneAreaDetectorId = TrafficFlowObserved.staticSetLaneAreaDetectorId(siteRequest_, o);
+	}
+	public static String staticSetLaneAreaDetectorId(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected TrafficFlowObserved laneAreaDetectorIdInit() {
+		Wrap<String> laneAreaDetectorIdWrap = new Wrap<String>().var("laneAreaDetectorId");
+		if(laneAreaDetectorId == null) {
+			_laneAreaDetectorId(laneAreaDetectorIdWrap);
+			Optional.ofNullable(laneAreaDetectorIdWrap.getO()).ifPresent(o -> {
+				setLaneAreaDetectorId(o);
+			});
+		}
+		return (TrafficFlowObserved)this;
+	}
+
+	public static String staticSearchLaneAreaDetectorId(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrLaneAreaDetectorId(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqLaneAreaDetectorId(SiteRequestEnUS siteRequest_, String o) {
+		return TrafficFlowObserved.staticSearchStrLaneAreaDetectorId(siteRequest_, TrafficFlowObserved.staticSearchLaneAreaDetectorId(siteRequest_, TrafficFlowObserved.staticSetLaneAreaDetectorId(siteRequest_, o)));
+	}
+
+	public String sqlLaneAreaDetectorId() {
+		return laneAreaDetectorId;
+	}
+
+	//////////////
+	// location //
+	//////////////
+
+
+	/**	 The entity location
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonDeserialize(using = PgClientPointDeserializer.class)
+	@JsonSerialize(using = PgClientPointSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected Point location;
+
+	/**	<br> The entity location
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved.TrafficFlowObserved&fq=entiteVar_enUS_indexed_string:location">Find the entity location in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _location(Wrap<Point> w);
+
+	public Point getLocation() {
+		return location;
+	}
+
+	public void setLocation(Point location) {
+		this.location = location;
+	}
+	@JsonIgnore
+	public void setLocation(String o) {
+		this.location = TrafficFlowObserved.staticSetLocation(siteRequest_, o);
+	}
+	public static Point staticSetLocation(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+			Matcher m = Pattern.compile("\\{[\\w\\W]*\"coordinates\"\\s*:\\s*\\[\\s*(\\d*\\.\\d*)\\s*,\\s*(\\d*\\.\\d*)\\]").matcher(o);
+			if(m.find())
+				return new Point(Double.parseDouble(m.group(1)), Double.parseDouble(m.group(2)));
+			m = Pattern.compile("\\s*(\\d*\\.\\d*)\\s*,\\s*(\\d*\\.\\d*)").matcher(o);
+			if(m.find())
+				return new Point(Double.parseDouble(m.group(1)), Double.parseDouble(m.group(2)));
+			throw new RuntimeException(String.format("Invalid point format \"%s\", try these formats instead: 55.633703,13.49254 or {\"type\":\"Point\",\"coordinates\":[55.633703,13.49254]}", o));
+		}
+		return null;
+	}
+	protected TrafficFlowObserved locationInit() {
+		Wrap<Point> locationWrap = new Wrap<Point>().var("location");
+		if(location == null) {
+			_location(locationWrap);
+			Optional.ofNullable(locationWrap.getO()).ifPresent(o -> {
+				setLocation(o);
+			});
+		}
+		return (TrafficFlowObserved)this;
+	}
+
+	public static Point staticSearchLocation(SiteRequestEnUS siteRequest_, Point o) {
+		return o;
+	}
+
+	public static String staticSearchStrLocation(SiteRequestEnUS siteRequest_, Point o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqLocation(SiteRequestEnUS siteRequest_, String o) {
+		return TrafficFlowObserved.staticSearchStrLocation(siteRequest_, TrafficFlowObserved.staticSearchLocation(siteRequest_, TrafficFlowObserved.staticSetLocation(siteRequest_, o)));
+	}
+
+	public Point sqlLocation() {
+		return location;
+	}
+
 	////////////////////
 	// simulationName //
 	////////////////////
@@ -937,6 +1129,62 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 
 	public String sqlSumocfgPath() {
 		return sumocfgPath;
+	}
+
+	//////////////////////////
+	// customTrafficLightId //
+	//////////////////////////
+
+
+	/**	 The entity customTrafficLightId
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String customTrafficLightId;
+
+	/**	<br> The entity customTrafficLightId
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved.TrafficFlowObserved&fq=entiteVar_enUS_indexed_string:customTrafficLightId">Find the entity customTrafficLightId in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _customTrafficLightId(Wrap<String> w);
+
+	public String getCustomTrafficLightId() {
+		return customTrafficLightId;
+	}
+	public void setCustomTrafficLightId(String o) {
+		this.customTrafficLightId = TrafficFlowObserved.staticSetCustomTrafficLightId(siteRequest_, o);
+	}
+	public static String staticSetCustomTrafficLightId(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected TrafficFlowObserved customTrafficLightIdInit() {
+		Wrap<String> customTrafficLightIdWrap = new Wrap<String>().var("customTrafficLightId");
+		if(customTrafficLightId == null) {
+			_customTrafficLightId(customTrafficLightIdWrap);
+			Optional.ofNullable(customTrafficLightIdWrap.getO()).ifPresent(o -> {
+				setCustomTrafficLightId(o);
+			});
+		}
+		return (TrafficFlowObserved)this;
+	}
+
+	public static String staticSearchCustomTrafficLightId(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrCustomTrafficLightId(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqCustomTrafficLightId(SiteRequestEnUS siteRequest_, String o) {
+		return TrafficFlowObserved.staticSearchStrCustomTrafficLightId(siteRequest_, TrafficFlowObserved.staticSearchCustomTrafficLightId(siteRequest_, TrafficFlowObserved.staticSetCustomTrafficLightId(siteRequest_, o)));
+	}
+
+	public String sqlCustomTrafficLightId() {
+		return customTrafficLightId;
 	}
 
 	/////////////////////////////
@@ -1160,8 +1408,10 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 	 *	 is defined as null before being initialized. 
 	 */
 	@JsonProperty
+	@JsonDeserialize(using = PgClientPathDeserializer.class)
+	@JsonSerialize(using = PgClientPathSerializer.class)
 	@JsonInclude(Include.NON_NULL)
-	protected String areaServed;
+	protected Path areaServed;
 
 	/**	<br> The entity areaServed
 	 *  is defined as null before being initialized. 
@@ -1169,19 +1419,47 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected abstract void _areaServed(Wrap<String> w);
+	protected abstract void _areaServed(Wrap<Path> w);
 
-	public String getAreaServed() {
+	public Path getAreaServed() {
 		return areaServed;
 	}
+
+	public void setAreaServed(Path areaServed) {
+		this.areaServed = areaServed;
+	}
+	@JsonIgnore
 	public void setAreaServed(String o) {
 		this.areaServed = TrafficFlowObserved.staticSetAreaServed(siteRequest_, o);
 	}
-	public static String staticSetAreaServed(SiteRequestEnUS siteRequest_, String o) {
-		return o;
+	public static Path staticSetAreaServed(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+			try {
+				Path path = null;
+				if(StringUtils.isNotBlank(o)) {
+					ObjectMapper objectMapper = new ObjectMapper();
+					SimpleModule module = new SimpleModule();
+					module.setDeserializerModifier(new BeanDeserializerModifier() {
+						@Override
+						public JsonDeserializer<?> modifyDeserializer(DeserializationConfig config, BeanDescription beanDesc, JsonDeserializer<?> deserializer) {
+							if (beanDesc.getBeanClass() == Path.class) {
+								return new PgClientPathDeserializer();
+							}
+							return deserializer;
+						}
+					});
+					objectMapper.registerModule(module);
+					path = objectMapper.readValue(Json.encode(o), Path.class);
+				}
+				return path;
+			} catch(Exception ex) {
+				ExceptionUtils.rethrow(ex);
+			}
+		}
+		return null;
 	}
 	protected TrafficFlowObserved areaServedInit() {
-		Wrap<String> areaServedWrap = new Wrap<String>().var("areaServed");
+		Wrap<Path> areaServedWrap = new Wrap<Path>().var("areaServed");
 		if(areaServed == null) {
 			_areaServed(areaServedWrap);
 			Optional.ofNullable(areaServedWrap.getO()).ifPresent(o -> {
@@ -1191,19 +1469,21 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 		return (TrafficFlowObserved)this;
 	}
 
-	public static String staticSearchAreaServed(SiteRequestEnUS siteRequest_, String o) {
+	public static Path staticSearchAreaServed(SiteRequestEnUS siteRequest_, Path o) {
 		return o;
 	}
 
-	public static String staticSearchStrAreaServed(SiteRequestEnUS siteRequest_, String o) {
-		return o == null ? null : o.toString();
+	public static String staticSearchStrAreaServed(SiteRequestEnUS siteRequest_, Path o) {
+		JsonArray pointsArray = new JsonArray();
+		o.getPoints().stream().map(point -> new JsonArray().add(Double.valueOf(point.getX())).add(Double.valueOf(point.getY()))).collect(Collectors.toList()).forEach(pointArray -> pointsArray.add(pointArray));
+		return new JsonObject().put("type", "LineString").put("coordinates", pointsArray).toString();
 	}
 
 	public static String staticSearchFqAreaServed(SiteRequestEnUS siteRequest_, String o) {
 		return TrafficFlowObserved.staticSearchStrAreaServed(siteRequest_, TrafficFlowObserved.staticSearchAreaServed(siteRequest_, TrafficFlowObserved.staticSetAreaServed(siteRequest_, o)));
 	}
 
-	public String sqlAreaServed() {
+	public Path sqlAreaServed() {
 		return areaServed;
 	}
 
@@ -2599,62 +2879,6 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 		return source;
 	}
 
-	//////////
-	// type //
-	//////////
-
-
-	/**	 The entity type
-	 *	 is defined as null before being initialized. 
-	 */
-	@JsonProperty
-	@JsonInclude(Include.NON_NULL)
-	protected String type;
-
-	/**	<br> The entity type
-	 *  is defined as null before being initialized. 
-	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved.TrafficFlowObserved&fq=entiteVar_enUS_indexed_string:type">Find the entity type in Solr</a>
-	 * <br>
-	 * @param w is for wrapping a value to assign to this entity during initialization. 
-	 **/
-	protected abstract void _type(Wrap<String> w);
-
-	public String getType() {
-		return type;
-	}
-	public void setType(String o) {
-		this.type = TrafficFlowObserved.staticSetType(siteRequest_, o);
-	}
-	public static String staticSetType(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-	protected TrafficFlowObserved typeInit() {
-		Wrap<String> typeWrap = new Wrap<String>().var("type");
-		if(type == null) {
-			_type(typeWrap);
-			Optional.ofNullable(typeWrap.getO()).ifPresent(o -> {
-				setType(o);
-			});
-		}
-		return (TrafficFlowObserved)this;
-	}
-
-	public static String staticSearchType(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-
-	public static String staticSearchStrType(SiteRequestEnUS siteRequest_, String o) {
-		return o == null ? null : o.toString();
-	}
-
-	public static String staticSearchFqType(SiteRequestEnUS siteRequest_, String o) {
-		return TrafficFlowObserved.staticSearchStrType(siteRequest_, TrafficFlowObserved.staticSearchType(siteRequest_, TrafficFlowObserved.staticSetType(siteRequest_, o)));
-	}
-
-	public String sqlType() {
-		return type;
-	}
-
 	////////////////////
 	// vehicleSubType //
 	////////////////////
@@ -2765,62 +2989,6 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 
 	public String sqlVehicleType() {
 		return vehicleType;
-	}
-
-	///////////////////
-	// customRouteId //
-	///////////////////
-
-
-	/**	 The entity customRouteId
-	 *	 is defined as null before being initialized. 
-	 */
-	@JsonProperty
-	@JsonInclude(Include.NON_NULL)
-	protected String customRouteId;
-
-	/**	<br> The entity customRouteId
-	 *  is defined as null before being initialized. 
-	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved.TrafficFlowObserved&fq=entiteVar_enUS_indexed_string:customRouteId">Find the entity customRouteId in Solr</a>
-	 * <br>
-	 * @param w is for wrapping a value to assign to this entity during initialization. 
-	 **/
-	protected abstract void _customRouteId(Wrap<String> w);
-
-	public String getCustomRouteId() {
-		return customRouteId;
-	}
-	public void setCustomRouteId(String o) {
-		this.customRouteId = TrafficFlowObserved.staticSetCustomRouteId(siteRequest_, o);
-	}
-	public static String staticSetCustomRouteId(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-	protected TrafficFlowObserved customRouteIdInit() {
-		Wrap<String> customRouteIdWrap = new Wrap<String>().var("customRouteId");
-		if(customRouteId == null) {
-			_customRouteId(customRouteIdWrap);
-			Optional.ofNullable(customRouteIdWrap.getO()).ifPresent(o -> {
-				setCustomRouteId(o);
-			});
-		}
-		return (TrafficFlowObserved)this;
-	}
-
-	public static String staticSearchCustomRouteId(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-
-	public static String staticSearchStrCustomRouteId(SiteRequestEnUS siteRequest_, String o) {
-		return o == null ? null : o.toString();
-	}
-
-	public static String staticSearchFqCustomRouteId(SiteRequestEnUS siteRequest_, String o) {
-		return TrafficFlowObserved.staticSearchStrCustomRouteId(siteRequest_, TrafficFlowObserved.staticSearchCustomRouteId(siteRequest_, TrafficFlowObserved.staticSetCustomRouteId(siteRequest_, o)));
-	}
-
-	public String sqlCustomRouteId() {
-		return customRouteId;
 	}
 
 	/////////////////
@@ -3439,62 +3607,6 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 		return customQueueLengthThreshold;
 	}
 
-	//////////////////////////
-	// customTrafficLightId //
-	//////////////////////////
-
-
-	/**	 The entity customTrafficLightId
-	 *	 is defined as null before being initialized. 
-	 */
-	@JsonProperty
-	@JsonInclude(Include.NON_NULL)
-	protected String customTrafficLightId;
-
-	/**	<br> The entity customTrafficLightId
-	 *  is defined as null before being initialized. 
-	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved.TrafficFlowObserved&fq=entiteVar_enUS_indexed_string:customTrafficLightId">Find the entity customTrafficLightId in Solr</a>
-	 * <br>
-	 * @param w is for wrapping a value to assign to this entity during initialization. 
-	 **/
-	protected abstract void _customTrafficLightId(Wrap<String> w);
-
-	public String getCustomTrafficLightId() {
-		return customTrafficLightId;
-	}
-	public void setCustomTrafficLightId(String o) {
-		this.customTrafficLightId = TrafficFlowObserved.staticSetCustomTrafficLightId(siteRequest_, o);
-	}
-	public static String staticSetCustomTrafficLightId(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-	protected TrafficFlowObserved customTrafficLightIdInit() {
-		Wrap<String> customTrafficLightIdWrap = new Wrap<String>().var("customTrafficLightId");
-		if(customTrafficLightId == null) {
-			_customTrafficLightId(customTrafficLightIdWrap);
-			Optional.ofNullable(customTrafficLightIdWrap.getO()).ifPresent(o -> {
-				setCustomTrafficLightId(o);
-			});
-		}
-		return (TrafficFlowObserved)this;
-	}
-
-	public static String staticSearchCustomTrafficLightId(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-
-	public static String staticSearchStrCustomTrafficLightId(SiteRequestEnUS siteRequest_, String o) {
-		return o == null ? null : o.toString();
-	}
-
-	public static String staticSearchFqCustomTrafficLightId(SiteRequestEnUS siteRequest_, String o) {
-		return TrafficFlowObserved.staticSearchStrCustomTrafficLightId(siteRequest_, TrafficFlowObserved.staticSearchCustomTrafficLightId(siteRequest_, TrafficFlowObserved.staticSetCustomTrafficLightId(siteRequest_, o)));
-	}
-
-	public String sqlCustomTrafficLightId() {
-		return customTrafficLightId;
-	}
-
 	//////////////
 	// initDeep //
 	//////////////
@@ -3524,11 +3636,31 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 		Future.future(a -> a.complete()).compose(a -> {
 			Promise<Void> promise2 = Promise.promise();
 			try {
-				locationInit();
 				colorInit();
 				entityIdInit();
+				trafficSimulationIdInit();
+				promise2.complete();
+			} catch(Exception ex) {
+				promise2.fail(ex);
+			}
+			return promise2.future();
+		}).compose(a -> {
+			Promise<Void> promise2 = Promise.promise();
+			trafficSimulationSearchPromise().onSuccess(trafficSimulationSearch -> {
+				promise2.complete();
+			}).onFailure(ex -> {
+				promise2.fail(ex);
+			});
+			return promise2.future();
+		}).compose(a -> {
+			Promise<Void> promise2 = Promise.promise();
+			try {
+				trafficSimulation_Init();
+				laneAreaDetectorIdInit();
+				locationInit();
 				simulationNameInit();
 				sumocfgPathInit();
+				customTrafficLightIdInit();
 				promise2.complete();
 			} catch(Exception ex) {
 				promise2.fail(ex);
@@ -3571,10 +3703,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 				reversedLaneInit();
 				seeAlsoInit();
 				sourceInit();
-				typeInit();
 				vehicleSubTypeInit();
 				vehicleTypeInit();
-				customRouteIdInit();
 				customSigmaInit();
 				customAccelerationInit();
 				customDecelerationInit();
@@ -3583,7 +3713,6 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 				customAverageVehiclesPerMinuteInit();
 				customDemandScalingFactorInit();
 				customQueueLengthThresholdInit();
-				customTrafficLightIdInit();
 				promise2.complete();
 			} catch(Exception ex) {
 				promise2.fail(ex);
@@ -3607,6 +3736,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 
 	public void siteRequestTrafficFlowObserved(SiteRequestEnUS siteRequest_) {
 			super.siteRequestBaseModel(siteRequest_);
+		if(trafficSimulationSearch != null)
+			trafficSimulationSearch.setSiteRequest_(siteRequest_);
 		if(smartTrafficLightSearch != null)
 			smartTrafficLightSearch.setSiteRequest_(siteRequest_);
 	}
@@ -3639,16 +3770,26 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 	public Object obtainTrafficFlowObserved(String var) {
 		TrafficFlowObserved oTrafficFlowObserved = (TrafficFlowObserved)this;
 		switch(var) {
-			case "location":
-				return oTrafficFlowObserved.location;
 			case "color":
 				return oTrafficFlowObserved.color;
 			case "entityId":
 				return oTrafficFlowObserved.entityId;
+			case "trafficSimulationId":
+				return oTrafficFlowObserved.trafficSimulationId;
+			case "trafficSimulationSearch":
+				return oTrafficFlowObserved.trafficSimulationSearch;
+			case "trafficSimulation_":
+				return oTrafficFlowObserved.trafficSimulation_;
+			case "laneAreaDetectorId":
+				return oTrafficFlowObserved.laneAreaDetectorId;
+			case "location":
+				return oTrafficFlowObserved.location;
 			case "simulationName":
 				return oTrafficFlowObserved.simulationName;
 			case "sumocfgPath":
 				return oTrafficFlowObserved.sumocfgPath;
+			case "customTrafficLightId":
+				return oTrafficFlowObserved.customTrafficLightId;
 			case "smartTrafficLightSearch":
 				return oTrafficFlowObserved.smartTrafficLightSearch;
 			case "smartTrafficLight_":
@@ -3703,14 +3844,10 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 				return oTrafficFlowObserved.seeAlso;
 			case "source":
 				return oTrafficFlowObserved.source;
-			case "type":
-				return oTrafficFlowObserved.type;
 			case "vehicleSubType":
 				return oTrafficFlowObserved.vehicleSubType;
 			case "vehicleType":
 				return oTrafficFlowObserved.vehicleType;
-			case "customRouteId":
-				return oTrafficFlowObserved.customRouteId;
 			case "customSigma":
 				return oTrafficFlowObserved.customSigma;
 			case "customAcceleration":
@@ -3727,8 +3864,6 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 				return oTrafficFlowObserved.customDemandScalingFactor;
 			case "customQueueLengthThreshold":
 				return oTrafficFlowObserved.customQueueLengthThreshold;
-			case "customTrafficLightId":
-				return oTrafficFlowObserved.customTrafficLightId;
 			default:
 				return super.obtainBaseModel(var);
 		}
@@ -3768,16 +3903,22 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 	}
 	public static Object staticSetTrafficFlowObserved(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
-		case "location":
-			return TrafficFlowObserved.staticSetLocation(siteRequest_, o);
 		case "color":
 			return TrafficFlowObserved.staticSetColor(siteRequest_, o);
 		case "entityId":
 			return TrafficFlowObserved.staticSetEntityId(siteRequest_, o);
+		case "trafficSimulationId":
+			return TrafficFlowObserved.staticSetTrafficSimulationId(siteRequest_, o);
+		case "laneAreaDetectorId":
+			return TrafficFlowObserved.staticSetLaneAreaDetectorId(siteRequest_, o);
+		case "location":
+			return TrafficFlowObserved.staticSetLocation(siteRequest_, o);
 		case "simulationName":
 			return TrafficFlowObserved.staticSetSimulationName(siteRequest_, o);
 		case "sumocfgPath":
 			return TrafficFlowObserved.staticSetSumocfgPath(siteRequest_, o);
+		case "customTrafficLightId":
+			return TrafficFlowObserved.staticSetCustomTrafficLightId(siteRequest_, o);
 		case "address":
 			return TrafficFlowObserved.staticSetAddress(siteRequest_, o);
 		case "alternateName":
@@ -3828,14 +3969,10 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 			return TrafficFlowObserved.staticSetSeeAlso(siteRequest_, o);
 		case "source":
 			return TrafficFlowObserved.staticSetSource(siteRequest_, o);
-		case "type":
-			return TrafficFlowObserved.staticSetType(siteRequest_, o);
 		case "vehicleSubType":
 			return TrafficFlowObserved.staticSetVehicleSubType(siteRequest_, o);
 		case "vehicleType":
 			return TrafficFlowObserved.staticSetVehicleType(siteRequest_, o);
-		case "customRouteId":
-			return TrafficFlowObserved.staticSetCustomRouteId(siteRequest_, o);
 		case "customSigma":
 			return TrafficFlowObserved.staticSetCustomSigma(siteRequest_, o);
 		case "customAcceleration":
@@ -3852,8 +3989,6 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 			return TrafficFlowObserved.staticSetCustomDemandScalingFactor(siteRequest_, o);
 		case "customQueueLengthThreshold":
 			return TrafficFlowObserved.staticSetCustomQueueLengthThreshold(siteRequest_, o);
-		case "customTrafficLightId":
-			return TrafficFlowObserved.staticSetCustomTrafficLightId(siteRequest_, o);
 			default:
 				return BaseModel.staticSetBaseModel(entityVar,  siteRequest_, o);
 		}
@@ -3868,22 +4003,28 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 	}
 	public static Object staticSearchTrafficFlowObserved(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
-		case "location":
-			return TrafficFlowObserved.staticSearchLocation(siteRequest_, (Path)o);
 		case "color":
 			return TrafficFlowObserved.staticSearchColor(siteRequest_, (String)o);
 		case "entityId":
 			return TrafficFlowObserved.staticSearchEntityId(siteRequest_, (String)o);
+		case "trafficSimulationId":
+			return TrafficFlowObserved.staticSearchTrafficSimulationId(siteRequest_, (String)o);
+		case "laneAreaDetectorId":
+			return TrafficFlowObserved.staticSearchLaneAreaDetectorId(siteRequest_, (String)o);
+		case "location":
+			return TrafficFlowObserved.staticSearchLocation(siteRequest_, (Point)o);
 		case "simulationName":
 			return TrafficFlowObserved.staticSearchSimulationName(siteRequest_, (String)o);
 		case "sumocfgPath":
 			return TrafficFlowObserved.staticSearchSumocfgPath(siteRequest_, (String)o);
+		case "customTrafficLightId":
+			return TrafficFlowObserved.staticSearchCustomTrafficLightId(siteRequest_, (String)o);
 		case "address":
 			return TrafficFlowObserved.staticSearchAddress(siteRequest_, (JsonObject)o);
 		case "alternateName":
 			return TrafficFlowObserved.staticSearchAlternateName(siteRequest_, (String)o);
 		case "areaServed":
-			return TrafficFlowObserved.staticSearchAreaServed(siteRequest_, (String)o);
+			return TrafficFlowObserved.staticSearchAreaServed(siteRequest_, (Path)o);
 		case "averageGapDistance":
 			return TrafficFlowObserved.staticSearchAverageGapDistance(siteRequest_, (BigDecimal)o);
 		case "averageHeadwayTime":
@@ -3928,14 +4069,10 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 			return TrafficFlowObserved.staticSearchSeeAlso(siteRequest_, (JsonObject)o);
 		case "source":
 			return TrafficFlowObserved.staticSearchSource(siteRequest_, (String)o);
-		case "type":
-			return TrafficFlowObserved.staticSearchType(siteRequest_, (String)o);
 		case "vehicleSubType":
 			return TrafficFlowObserved.staticSearchVehicleSubType(siteRequest_, (String)o);
 		case "vehicleType":
 			return TrafficFlowObserved.staticSearchVehicleType(siteRequest_, (String)o);
-		case "customRouteId":
-			return TrafficFlowObserved.staticSearchCustomRouteId(siteRequest_, (String)o);
 		case "customSigma":
 			return TrafficFlowObserved.staticSearchCustomSigma(siteRequest_, (BigDecimal)o);
 		case "customAcceleration":
@@ -3952,8 +4089,6 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 			return TrafficFlowObserved.staticSearchCustomDemandScalingFactor(siteRequest_, (BigDecimal)o);
 		case "customQueueLengthThreshold":
 			return TrafficFlowObserved.staticSearchCustomQueueLengthThreshold(siteRequest_, (BigDecimal)o);
-		case "customTrafficLightId":
-			return TrafficFlowObserved.staticSearchCustomTrafficLightId(siteRequest_, (String)o);
 			default:
 				return BaseModel.staticSearchBaseModel(entityVar,  siteRequest_, o);
 		}
@@ -3968,22 +4103,28 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 	}
 	public static String staticSearchStrTrafficFlowObserved(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
-		case "location":
-			return TrafficFlowObserved.staticSearchStrLocation(siteRequest_, (Path)o);
 		case "color":
 			return TrafficFlowObserved.staticSearchStrColor(siteRequest_, (String)o);
 		case "entityId":
 			return TrafficFlowObserved.staticSearchStrEntityId(siteRequest_, (String)o);
+		case "trafficSimulationId":
+			return TrafficFlowObserved.staticSearchStrTrafficSimulationId(siteRequest_, (String)o);
+		case "laneAreaDetectorId":
+			return TrafficFlowObserved.staticSearchStrLaneAreaDetectorId(siteRequest_, (String)o);
+		case "location":
+			return TrafficFlowObserved.staticSearchStrLocation(siteRequest_, (Point)o);
 		case "simulationName":
 			return TrafficFlowObserved.staticSearchStrSimulationName(siteRequest_, (String)o);
 		case "sumocfgPath":
 			return TrafficFlowObserved.staticSearchStrSumocfgPath(siteRequest_, (String)o);
+		case "customTrafficLightId":
+			return TrafficFlowObserved.staticSearchStrCustomTrafficLightId(siteRequest_, (String)o);
 		case "address":
 			return TrafficFlowObserved.staticSearchStrAddress(siteRequest_, (String)o);
 		case "alternateName":
 			return TrafficFlowObserved.staticSearchStrAlternateName(siteRequest_, (String)o);
 		case "areaServed":
-			return TrafficFlowObserved.staticSearchStrAreaServed(siteRequest_, (String)o);
+			return TrafficFlowObserved.staticSearchStrAreaServed(siteRequest_, (Path)o);
 		case "averageGapDistance":
 			return TrafficFlowObserved.staticSearchStrAverageGapDistance(siteRequest_, (Double)o);
 		case "averageHeadwayTime":
@@ -4028,14 +4169,10 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 			return TrafficFlowObserved.staticSearchStrSeeAlso(siteRequest_, (String)o);
 		case "source":
 			return TrafficFlowObserved.staticSearchStrSource(siteRequest_, (String)o);
-		case "type":
-			return TrafficFlowObserved.staticSearchStrType(siteRequest_, (String)o);
 		case "vehicleSubType":
 			return TrafficFlowObserved.staticSearchStrVehicleSubType(siteRequest_, (String)o);
 		case "vehicleType":
 			return TrafficFlowObserved.staticSearchStrVehicleType(siteRequest_, (String)o);
-		case "customRouteId":
-			return TrafficFlowObserved.staticSearchStrCustomRouteId(siteRequest_, (String)o);
 		case "customSigma":
 			return TrafficFlowObserved.staticSearchStrCustomSigma(siteRequest_, (Double)o);
 		case "customAcceleration":
@@ -4052,8 +4189,6 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 			return TrafficFlowObserved.staticSearchStrCustomDemandScalingFactor(siteRequest_, (Double)o);
 		case "customQueueLengthThreshold":
 			return TrafficFlowObserved.staticSearchStrCustomQueueLengthThreshold(siteRequest_, (Double)o);
-		case "customTrafficLightId":
-			return TrafficFlowObserved.staticSearchStrCustomTrafficLightId(siteRequest_, (String)o);
 			default:
 				return BaseModel.staticSearchStrBaseModel(entityVar,  siteRequest_, o);
 		}
@@ -4068,16 +4203,22 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 	}
 	public static String staticSearchFqTrafficFlowObserved(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
-		case "location":
-			return TrafficFlowObserved.staticSearchFqLocation(siteRequest_, o);
 		case "color":
 			return TrafficFlowObserved.staticSearchFqColor(siteRequest_, o);
 		case "entityId":
 			return TrafficFlowObserved.staticSearchFqEntityId(siteRequest_, o);
+		case "trafficSimulationId":
+			return TrafficFlowObserved.staticSearchFqTrafficSimulationId(siteRequest_, o);
+		case "laneAreaDetectorId":
+			return TrafficFlowObserved.staticSearchFqLaneAreaDetectorId(siteRequest_, o);
+		case "location":
+			return TrafficFlowObserved.staticSearchFqLocation(siteRequest_, o);
 		case "simulationName":
 			return TrafficFlowObserved.staticSearchFqSimulationName(siteRequest_, o);
 		case "sumocfgPath":
 			return TrafficFlowObserved.staticSearchFqSumocfgPath(siteRequest_, o);
+		case "customTrafficLightId":
+			return TrafficFlowObserved.staticSearchFqCustomTrafficLightId(siteRequest_, o);
 		case "address":
 			return TrafficFlowObserved.staticSearchFqAddress(siteRequest_, o);
 		case "alternateName":
@@ -4128,14 +4269,10 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 			return TrafficFlowObserved.staticSearchFqSeeAlso(siteRequest_, o);
 		case "source":
 			return TrafficFlowObserved.staticSearchFqSource(siteRequest_, o);
-		case "type":
-			return TrafficFlowObserved.staticSearchFqType(siteRequest_, o);
 		case "vehicleSubType":
 			return TrafficFlowObserved.staticSearchFqVehicleSubType(siteRequest_, o);
 		case "vehicleType":
 			return TrafficFlowObserved.staticSearchFqVehicleType(siteRequest_, o);
-		case "customRouteId":
-			return TrafficFlowObserved.staticSearchFqCustomRouteId(siteRequest_, o);
 		case "customSigma":
 			return TrafficFlowObserved.staticSearchFqCustomSigma(siteRequest_, o);
 		case "customAcceleration":
@@ -4152,8 +4289,6 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 			return TrafficFlowObserved.staticSearchFqCustomDemandScalingFactor(siteRequest_, o);
 		case "customQueueLengthThreshold":
 			return TrafficFlowObserved.staticSearchFqCustomQueueLengthThreshold(siteRequest_, o);
-		case "customTrafficLightId":
-			return TrafficFlowObserved.staticSearchFqCustomTrafficLightId(siteRequest_, o);
 			default:
 				return BaseModel.staticSearchFqBaseModel(entityVar,  siteRequest_, o);
 		}
@@ -4180,15 +4315,7 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 	}
 	public Object persistTrafficFlowObserved(String var, Object val) {
 		String varLower = var.toLowerCase();
-			if("location".equals(varLower)) {
-				if(val instanceof Path) {
-					setLocation((Path)val);
-				} else {
-					setLocation(val == null ? null : val.toString());
-				}
-				saves.add("location");
-				return val;
-			} else if("color".equals(varLower)) {
+			if("color".equals(varLower)) {
 				if(val instanceof String) {
 					setColor((String)val);
 				}
@@ -4199,6 +4326,26 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 					setEntityId((String)val);
 				}
 				saves.add("entityId");
+				return val;
+			} else if("trafficsimulationid".equals(varLower)) {
+				if(val instanceof String) {
+					setTrafficSimulationId((String)val);
+				}
+				saves.add("trafficSimulationId");
+				return val;
+			} else if("laneareadetectorid".equals(varLower)) {
+				if(val instanceof String) {
+					setLaneAreaDetectorId((String)val);
+				}
+				saves.add("laneAreaDetectorId");
+				return val;
+			} else if("location".equals(varLower)) {
+				if(val instanceof String) {
+					setLocation((String)val);
+				} else if(val instanceof Point) {
+					setLocation((Point)val);
+				}
+				saves.add("location");
 				return val;
 			} else if("simulationname".equals(varLower)) {
 				if(val instanceof String) {
@@ -4211,6 +4358,12 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 					setSumocfgPath((String)val);
 				}
 				saves.add("sumocfgPath");
+				return val;
+			} else if("customtrafficlightid".equals(varLower)) {
+				if(val instanceof String) {
+					setCustomTrafficLightId((String)val);
+				}
+				saves.add("customTrafficLightId");
 				return val;
 			} else if("address".equals(varLower)) {
 				if(val instanceof String) {
@@ -4227,8 +4380,10 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 				saves.add("alternateName");
 				return val;
 			} else if("areaserved".equals(varLower)) {
-				if(val instanceof String) {
-					setAreaServed((String)val);
+				if(val instanceof Path) {
+					setAreaServed((Path)val);
+				} else {
+					setAreaServed(val == null ? null : val.toString());
 				}
 				saves.add("areaServed");
 				return val;
@@ -4386,12 +4541,6 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 				}
 				saves.add("source");
 				return val;
-			} else if("type".equals(varLower)) {
-				if(val instanceof String) {
-					setType((String)val);
-				}
-				saves.add("type");
-				return val;
 			} else if("vehiclesubtype".equals(varLower)) {
 				if(val instanceof String) {
 					setVehicleSubType((String)val);
@@ -4403,12 +4552,6 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 					setVehicleType((String)val);
 				}
 				saves.add("vehicleType");
-				return val;
-			} else if("customrouteid".equals(varLower)) {
-				if(val instanceof String) {
-					setCustomRouteId((String)val);
-				}
-				saves.add("customRouteId");
 				return val;
 			} else if("customsigma".equals(varLower)) {
 				if(val instanceof String) {
@@ -4474,12 +4617,6 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 				}
 				saves.add("customQueueLengthThreshold");
 				return val;
-			} else if("customtrafficlightid".equals(varLower)) {
-				if(val instanceof String) {
-					setCustomTrafficLightId((String)val);
-				}
-				saves.add("customTrafficLightId");
-				return val;
 		} else {
 			return super.persistBaseModel(var, val);
 		}
@@ -4497,12 +4634,6 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 		saves = Optional.ofNullable((ArrayList<String>)doc.get("saves_docvalues_strings")).orElse(new ArrayList<String>());
 		if(saves != null) {
 
-			if(saves.contains("location")) {
-				Path location = (Path)doc.get("location_docvalues_location");
-				if(location != null)
-					oTrafficFlowObserved.setLocation(location);
-			}
-
 			if(saves.contains("color")) {
 				String color = (String)doc.get("color_docvalues_string");
 				if(color != null)
@@ -4515,6 +4646,24 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 					oTrafficFlowObserved.setEntityId(entityId);
 			}
 
+			if(saves.contains("trafficSimulationId")) {
+				String trafficSimulationId = (String)doc.get("trafficSimulationId_docvalues_string");
+				if(trafficSimulationId != null)
+					oTrafficFlowObserved.setTrafficSimulationId(trafficSimulationId);
+			}
+
+			if(saves.contains("laneAreaDetectorId")) {
+				String laneAreaDetectorId = (String)doc.get("laneAreaDetectorId_docvalues_string");
+				if(laneAreaDetectorId != null)
+					oTrafficFlowObserved.setLaneAreaDetectorId(laneAreaDetectorId);
+			}
+
+			if(saves.contains("location")) {
+				Point location = (Point)doc.get("location_docvalues_location");
+				if(location != null)
+					oTrafficFlowObserved.setLocation(location);
+			}
+
 			if(saves.contains("simulationName")) {
 				String simulationName = (String)doc.get("simulationName_docvalues_string");
 				if(simulationName != null)
@@ -4525,6 +4674,12 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 				String sumocfgPath = (String)doc.get("sumocfgPath_docvalues_string");
 				if(sumocfgPath != null)
 					oTrafficFlowObserved.setSumocfgPath(sumocfgPath);
+			}
+
+			if(saves.contains("customTrafficLightId")) {
+				String customTrafficLightId = (String)doc.get("customTrafficLightId_docvalues_string");
+				if(customTrafficLightId != null)
+					oTrafficFlowObserved.setCustomTrafficLightId(customTrafficLightId);
 			}
 
 			if(saves.contains("address")) {
@@ -4540,7 +4695,7 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 			}
 
 			if(saves.contains("areaServed")) {
-				String areaServed = (String)doc.get("areaServed_docvalues_string");
+				Path areaServed = (Path)doc.get("areaServed_docvalues_location");
 				if(areaServed != null)
 					oTrafficFlowObserved.setAreaServed(areaServed);
 			}
@@ -4677,12 +4832,6 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 					oTrafficFlowObserved.setSource(source);
 			}
 
-			if(saves.contains("type")) {
-				String type = (String)doc.get("type_docvalues_string");
-				if(type != null)
-					oTrafficFlowObserved.setType(type);
-			}
-
 			if(saves.contains("vehicleSubType")) {
 				String vehicleSubType = (String)doc.get("vehicleSubType_docvalues_string");
 				if(vehicleSubType != null)
@@ -4693,12 +4842,6 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 				String vehicleType = (String)doc.get("vehicleType_docvalues_string");
 				if(vehicleType != null)
 					oTrafficFlowObserved.setVehicleType(vehicleType);
-			}
-
-			if(saves.contains("customRouteId")) {
-				String customRouteId = (String)doc.get("customRouteId_docvalues_string");
-				if(customRouteId != null)
-					oTrafficFlowObserved.setCustomRouteId(customRouteId);
 			}
 
 			if(saves.contains("customSigma")) {
@@ -4748,34 +4891,35 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 				if(customQueueLengthThreshold != null)
 					oTrafficFlowObserved.setCustomQueueLengthThreshold(customQueueLengthThreshold);
 			}
-
-			if(saves.contains("customTrafficLightId")) {
-				String customTrafficLightId = (String)doc.get("customTrafficLightId_docvalues_string");
-				if(customTrafficLightId != null)
-					oTrafficFlowObserved.setCustomTrafficLightId(customTrafficLightId);
-			}
 		}
 
 		super.populateBaseModel(doc);
 	}
 
 	public void indexTrafficFlowObserved(JsonObject doc) {
-		if(location != null) {
-			JsonArray pointsArray = new JsonArray();
-			location.getPoints().stream().map(point -> new JsonArray().add(Double.valueOf(point.getX())).add(Double.valueOf(point.getY()))).collect(Collectors.toList()).forEach(pointArray -> pointsArray.add(pointArray));
-			doc.put("location_docvalues_location", new JsonObject().put("type", "LineString").put("coordinates", pointsArray).toString());
-		}
 		if(color != null) {
 			doc.put("color_docvalues_string", color);
 		}
 		if(entityId != null) {
 			doc.put("entityId_docvalues_string", entityId);
 		}
+		if(trafficSimulationId != null) {
+			doc.put("trafficSimulationId_docvalues_string", trafficSimulationId);
+		}
+		if(laneAreaDetectorId != null) {
+			doc.put("laneAreaDetectorId_docvalues_string", laneAreaDetectorId);
+		}
+		if(location != null) {
+			doc.put("location_docvalues_location", String.format("%s,%s", location.getX(), location.getY()));
+		}
 		if(simulationName != null) {
 			doc.put("simulationName_docvalues_string", simulationName);
 		}
 		if(sumocfgPath != null) {
 			doc.put("sumocfgPath_docvalues_string", sumocfgPath);
+		}
+		if(customTrafficLightId != null) {
+			doc.put("customTrafficLightId_docvalues_string", customTrafficLightId);
 		}
 		if(address != null) {
 			doc.put("address_docvalues_string", address.toString());
@@ -4784,7 +4928,9 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 			doc.put("alternateName_docvalues_string", alternateName);
 		}
 		if(areaServed != null) {
-			doc.put("areaServed_docvalues_string", areaServed);
+			JsonArray pointsArray = new JsonArray();
+			areaServed.getPoints().stream().map(point -> new JsonArray().add(Double.valueOf(point.getX())).add(Double.valueOf(point.getY()))).collect(Collectors.toList()).forEach(pointArray -> pointsArray.add(pointArray));
+			doc.put("areaServed_docvalues_location", new JsonObject().put("type", "LineString").put("coordinates", pointsArray).toString());
 		}
 		if(averageGapDistance != null) {
 			doc.put("averageGapDistance_docvalues_double", averageGapDistance.doubleValue());
@@ -4852,17 +4998,11 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 		if(source != null) {
 			doc.put("source_docvalues_string", source);
 		}
-		if(type != null) {
-			doc.put("type_docvalues_string", type);
-		}
 		if(vehicleSubType != null) {
 			doc.put("vehicleSubType_docvalues_string", vehicleSubType);
 		}
 		if(vehicleType != null) {
 			doc.put("vehicleType_docvalues_string", vehicleType);
-		}
-		if(customRouteId != null) {
-			doc.put("customRouteId_docvalues_string", customRouteId);
 		}
 		if(customSigma != null) {
 			doc.put("customSigma_docvalues_double", customSigma.doubleValue());
@@ -4888,31 +5028,34 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 		if(customQueueLengthThreshold != null) {
 			doc.put("customQueueLengthThreshold_docvalues_double", customQueueLengthThreshold.doubleValue());
 		}
-		if(customTrafficLightId != null) {
-			doc.put("customTrafficLightId_docvalues_string", customTrafficLightId);
-		}
 		super.indexBaseModel(doc);
 
 	}
 
 	public static String varStoredTrafficFlowObserved(String entityVar) {
 		switch(entityVar) {
-			case "location":
-				return "location_docvalues_location";
 			case "color":
 				return "color_docvalues_string";
 			case "entityId":
 				return "entityId_docvalues_string";
+			case "trafficSimulationId":
+				return "trafficSimulationId_docvalues_string";
+			case "laneAreaDetectorId":
+				return "laneAreaDetectorId_docvalues_string";
+			case "location":
+				return "location_docvalues_location";
 			case "simulationName":
 				return "simulationName_docvalues_string";
 			case "sumocfgPath":
 				return "sumocfgPath_docvalues_string";
+			case "customTrafficLightId":
+				return "customTrafficLightId_docvalues_string";
 			case "address":
 				return "address_docvalues_string";
 			case "alternateName":
 				return "alternateName_docvalues_string";
 			case "areaServed":
-				return "areaServed_docvalues_string";
+				return "areaServed_docvalues_location";
 			case "averageGapDistance":
 				return "averageGapDistance_docvalues_double";
 			case "averageHeadwayTime":
@@ -4957,14 +5100,10 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 				return "seeAlso_docvalues_string";
 			case "source":
 				return "source_docvalues_string";
-			case "type":
-				return "type_docvalues_string";
 			case "vehicleSubType":
 				return "vehicleSubType_docvalues_string";
 			case "vehicleType":
 				return "vehicleType_docvalues_string";
-			case "customRouteId":
-				return "customRouteId_docvalues_string";
 			case "customSigma":
 				return "customSigma_docvalues_double";
 			case "customAcceleration":
@@ -4981,8 +5120,6 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 				return "customDemandScalingFactor_docvalues_double";
 			case "customQueueLengthThreshold":
 				return "customQueueLengthThreshold_docvalues_double";
-			case "customTrafficLightId":
-				return "customTrafficLightId_docvalues_string";
 			default:
 				return BaseModel.varStoredBaseModel(entityVar);
 		}
@@ -4990,22 +5127,28 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 
 	public static String varIndexedTrafficFlowObserved(String entityVar) {
 		switch(entityVar) {
-			case "location":
-				return "location_docvalues_location";
 			case "color":
 				return "color_docvalues_string";
 			case "entityId":
 				return "entityId_docvalues_string";
+			case "trafficSimulationId":
+				return "trafficSimulationId_docvalues_string";
+			case "laneAreaDetectorId":
+				return "laneAreaDetectorId_docvalues_string";
+			case "location":
+				return "location_docvalues_location";
 			case "simulationName":
 				return "simulationName_docvalues_string";
 			case "sumocfgPath":
 				return "sumocfgPath_docvalues_string";
+			case "customTrafficLightId":
+				return "customTrafficLightId_docvalues_string";
 			case "address":
 				return "address_docvalues_string";
 			case "alternateName":
 				return "alternateName_docvalues_string";
 			case "areaServed":
-				return "areaServed_docvalues_string";
+				return "areaServed_docvalues_location";
 			case "averageGapDistance":
 				return "averageGapDistance_docvalues_double";
 			case "averageHeadwayTime":
@@ -5050,14 +5193,10 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 				return "seeAlso_docvalues_string";
 			case "source":
 				return "source_docvalues_string";
-			case "type":
-				return "type_docvalues_string";
 			case "vehicleSubType":
 				return "vehicleSubType_docvalues_string";
 			case "vehicleType":
 				return "vehicleType_docvalues_string";
-			case "customRouteId":
-				return "customRouteId_docvalues_string";
 			case "customSigma":
 				return "customSigma_docvalues_double";
 			case "customAcceleration":
@@ -5074,8 +5213,6 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 				return "customDemandScalingFactor_docvalues_double";
 			case "customQueueLengthThreshold":
 				return "customQueueLengthThreshold_docvalues_double";
-			case "customTrafficLightId":
-				return "customTrafficLightId_docvalues_string";
 			default:
 				return BaseModel.varIndexedBaseModel(entityVar);
 		}
@@ -5083,21 +5220,27 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 
 	public static String searchVarTrafficFlowObserved(String searchVar) {
 		switch(searchVar) {
-			case "location_docvalues_location":
-				return "location";
 			case "color_docvalues_string":
 				return "color";
 			case "entityId_docvalues_string":
 				return "entityId";
+			case "trafficSimulationId_docvalues_string":
+				return "trafficSimulationId";
+			case "laneAreaDetectorId_docvalues_string":
+				return "laneAreaDetectorId";
+			case "location_docvalues_location":
+				return "location";
 			case "simulationName_docvalues_string":
 				return "simulationName";
 			case "sumocfgPath_docvalues_string":
 				return "sumocfgPath";
+			case "customTrafficLightId_docvalues_string":
+				return "customTrafficLightId";
 			case "address_docvalues_string":
 				return "address";
 			case "alternateName_docvalues_string":
 				return "alternateName";
-			case "areaServed_docvalues_string":
+			case "areaServed_docvalues_location":
 				return "areaServed";
 			case "averageGapDistance_docvalues_double":
 				return "averageGapDistance";
@@ -5143,14 +5286,10 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 				return "seeAlso";
 			case "source_docvalues_string":
 				return "source";
-			case "type_docvalues_string":
-				return "type";
 			case "vehicleSubType_docvalues_string":
 				return "vehicleSubType";
 			case "vehicleType_docvalues_string":
 				return "vehicleType";
-			case "customRouteId_docvalues_string":
-				return "customRouteId";
 			case "customSigma_docvalues_double":
 				return "customSigma";
 			case "customAcceleration_docvalues_double":
@@ -5167,8 +5306,6 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 				return "customDemandScalingFactor";
 			case "customQueueLengthThreshold_docvalues_double":
 				return "customQueueLengthThreshold";
-			case "customTrafficLightId_docvalues_string":
-				return "customTrafficLightId";
 			default:
 				return BaseModel.searchVarBaseModel(searchVar);
 		}
@@ -5198,14 +5335,17 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 	public void storeTrafficFlowObserved(SolrResponse.Doc doc) {
 		TrafficFlowObserved oTrafficFlowObserved = (TrafficFlowObserved)this;
 
-		oTrafficFlowObserved.setLocation(Optional.ofNullable(doc.get("location_docvalues_location")).map(v -> v.toString()).orElse(null));
 		oTrafficFlowObserved.setColor(Optional.ofNullable(doc.get("color_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oTrafficFlowObserved.setEntityId(Optional.ofNullable(doc.get("entityId_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oTrafficFlowObserved.setTrafficSimulationId(Optional.ofNullable(doc.get("trafficSimulationId_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oTrafficFlowObserved.setLaneAreaDetectorId(Optional.ofNullable(doc.get("laneAreaDetectorId_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oTrafficFlowObserved.setLocation(Optional.ofNullable(doc.get("location_docvalues_location")).map(v -> v.toString()).orElse(null));
 		oTrafficFlowObserved.setSimulationName(Optional.ofNullable(doc.get("simulationName_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oTrafficFlowObserved.setSumocfgPath(Optional.ofNullable(doc.get("sumocfgPath_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oTrafficFlowObserved.setCustomTrafficLightId(Optional.ofNullable(doc.get("customTrafficLightId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oTrafficFlowObserved.setAddress(Optional.ofNullable(doc.get("address_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oTrafficFlowObserved.setAlternateName(Optional.ofNullable(doc.get("alternateName_docvalues_string")).map(v -> v.toString()).orElse(null));
-		oTrafficFlowObserved.setAreaServed(Optional.ofNullable(doc.get("areaServed_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oTrafficFlowObserved.setAreaServed(Optional.ofNullable(doc.get("areaServed_docvalues_location")).map(v -> v.toString()).orElse(null));
 		oTrafficFlowObserved.setAverageGapDistance(Optional.ofNullable(doc.get("averageGapDistance_docvalues_double")).map(v -> v.toString()).orElse(null));
 		oTrafficFlowObserved.setAverageHeadwayTime(Optional.ofNullable(doc.get("averageHeadwayTime_docvalues_double")).map(v -> v.toString()).orElse(null));
 		oTrafficFlowObserved.setAverageVehicleLength(Optional.ofNullable(doc.get("averageVehicleLength_docvalues_double")).map(v -> v.toString()).orElse(null));
@@ -5228,10 +5368,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 		oTrafficFlowObserved.setReversedLane(Optional.ofNullable(doc.get("reversedLane_docvalues_boolean")).map(v -> v.toString()).orElse(null));
 		oTrafficFlowObserved.setSeeAlso(Optional.ofNullable(doc.get("seeAlso_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oTrafficFlowObserved.setSource(Optional.ofNullable(doc.get("source_docvalues_string")).map(v -> v.toString()).orElse(null));
-		oTrafficFlowObserved.setType(Optional.ofNullable(doc.get("type_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oTrafficFlowObserved.setVehicleSubType(Optional.ofNullable(doc.get("vehicleSubType_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oTrafficFlowObserved.setVehicleType(Optional.ofNullable(doc.get("vehicleType_docvalues_string")).map(v -> v.toString()).orElse(null));
-		oTrafficFlowObserved.setCustomRouteId(Optional.ofNullable(doc.get("customRouteId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oTrafficFlowObserved.setCustomSigma(Optional.ofNullable(doc.get("customSigma_docvalues_double")).map(v -> v.toString()).orElse(null));
 		oTrafficFlowObserved.setCustomAcceleration(Optional.ofNullable(doc.get("customAcceleration_docvalues_double")).map(v -> v.toString()).orElse(null));
 		oTrafficFlowObserved.setCustomDeceleration(Optional.ofNullable(doc.get("customDeceleration_docvalues_double")).map(v -> v.toString()).orElse(null));
@@ -5240,7 +5378,6 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 		oTrafficFlowObserved.setCustomAverageVehiclesPerMinute(Optional.ofNullable(doc.get("customAverageVehiclesPerMinute_docvalues_double")).map(v -> v.toString()).orElse(null));
 		oTrafficFlowObserved.setCustomDemandScalingFactor(Optional.ofNullable(doc.get("customDemandScalingFactor_docvalues_double")).map(v -> v.toString()).orElse(null));
 		oTrafficFlowObserved.setCustomQueueLengthThreshold(Optional.ofNullable(doc.get("customQueueLengthThreshold_docvalues_double")).map(v -> v.toString()).orElse(null));
-		oTrafficFlowObserved.setCustomTrafficLightId(Optional.ofNullable(doc.get("customTrafficLightId_docvalues_string")).map(v -> v.toString()).orElse(null));
 
 		super.storeBaseModel(doc);
 	}
@@ -5254,16 +5391,22 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 		Object o = Optional.ofNullable(apiRequest).map(ApiRequest::getOriginal).orElse(null);
 		if(o != null && o instanceof TrafficFlowObserved) {
 			TrafficFlowObserved original = (TrafficFlowObserved)o;
-			if(!Objects.equals(location, original.getLocation()))
-				apiRequest.addVars("location");
 			if(!Objects.equals(color, original.getColor()))
 				apiRequest.addVars("color");
 			if(!Objects.equals(entityId, original.getEntityId()))
 				apiRequest.addVars("entityId");
+			if(!Objects.equals(trafficSimulationId, original.getTrafficSimulationId()))
+				apiRequest.addVars("trafficSimulationId");
+			if(!Objects.equals(laneAreaDetectorId, original.getLaneAreaDetectorId()))
+				apiRequest.addVars("laneAreaDetectorId");
+			if(!Objects.equals(location, original.getLocation()))
+				apiRequest.addVars("location");
 			if(!Objects.equals(simulationName, original.getSimulationName()))
 				apiRequest.addVars("simulationName");
 			if(!Objects.equals(sumocfgPath, original.getSumocfgPath()))
 				apiRequest.addVars("sumocfgPath");
+			if(!Objects.equals(customTrafficLightId, original.getCustomTrafficLightId()))
+				apiRequest.addVars("customTrafficLightId");
 			if(!Objects.equals(address, original.getAddress()))
 				apiRequest.addVars("address");
 			if(!Objects.equals(alternateName, original.getAlternateName()))
@@ -5314,14 +5457,10 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 				apiRequest.addVars("seeAlso");
 			if(!Objects.equals(source, original.getSource()))
 				apiRequest.addVars("source");
-			if(!Objects.equals(type, original.getType()))
-				apiRequest.addVars("type");
 			if(!Objects.equals(vehicleSubType, original.getVehicleSubType()))
 				apiRequest.addVars("vehicleSubType");
 			if(!Objects.equals(vehicleType, original.getVehicleType()))
 				apiRequest.addVars("vehicleType");
-			if(!Objects.equals(customRouteId, original.getCustomRouteId()))
-				apiRequest.addVars("customRouteId");
 			if(!Objects.equals(customSigma, original.getCustomSigma()) && customSigma != null && original.getCustomSigma() != null && customSigma.compareTo(original.getCustomSigma()) != 0)
 				apiRequest.addVars("customSigma");
 			if(!Objects.equals(customAcceleration, original.getCustomAcceleration()) && customAcceleration != null && original.getCustomAcceleration() != null && customAcceleration.compareTo(original.getCustomAcceleration()) != 0)
@@ -5338,8 +5477,6 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 				apiRequest.addVars("customDemandScalingFactor");
 			if(!Objects.equals(customQueueLengthThreshold, original.getCustomQueueLengthThreshold()) && customQueueLengthThreshold != null && original.getCustomQueueLengthThreshold() != null && customQueueLengthThreshold.compareTo(original.getCustomQueueLengthThreshold()) != 0)
 				apiRequest.addVars("customQueueLengthThreshold");
-			if(!Objects.equals(customTrafficLightId, original.getCustomTrafficLightId()))
-				apiRequest.addVars("customTrafficLightId");
 			super.apiRequestBaseModel();
 		}
 	}
@@ -5351,14 +5488,17 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 	@Override public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(super.toString());
-		sb.append(Optional.ofNullable(location).map(v -> "location: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(color).map(v -> "color: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(entityId).map(v -> "entityId: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(trafficSimulationId).map(v -> "trafficSimulationId: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(laneAreaDetectorId).map(v -> "laneAreaDetectorId: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(location).map(v -> "location: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(simulationName).map(v -> "simulationName: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(sumocfgPath).map(v -> "sumocfgPath: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(customTrafficLightId).map(v -> "customTrafficLightId: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(address).map(v -> "address: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(alternateName).map(v -> "alternateName: \"" + v + "\"\n" ).orElse(""));
-		sb.append(Optional.ofNullable(areaServed).map(v -> "areaServed: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(areaServed).map(v -> "areaServed: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(averageGapDistance).map(v -> "averageGapDistance: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(averageHeadwayTime).map(v -> "averageHeadwayTime: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(averageVehicleLength).map(v -> "averageVehicleLength: " + v + "\n").orElse(""));
@@ -5381,10 +5521,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 		sb.append(Optional.ofNullable(reversedLane).map(v -> "reversedLane: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(seeAlso).map(v -> "seeAlso: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(source).map(v -> "source: \"" + v + "\"\n" ).orElse(""));
-		sb.append(Optional.ofNullable(type).map(v -> "type: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(vehicleSubType).map(v -> "vehicleSubType: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(vehicleType).map(v -> "vehicleType: \"" + v + "\"\n" ).orElse(""));
-		sb.append(Optional.ofNullable(customRouteId).map(v -> "customRouteId: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(customSigma).map(v -> "customSigma: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(customAcceleration).map(v -> "customAcceleration: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(customDeceleration).map(v -> "customDeceleration: " + v + "\n").orElse(""));
@@ -5393,16 +5531,20 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 		sb.append(Optional.ofNullable(customAverageVehiclesPerMinute).map(v -> "customAverageVehiclesPerMinute: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(customDemandScalingFactor).map(v -> "customDemandScalingFactor: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(customQueueLengthThreshold).map(v -> "customQueueLengthThreshold: " + v + "\n").orElse(""));
-		sb.append(Optional.ofNullable(customTrafficLightId).map(v -> "customTrafficLightId: \"" + v + "\"\n" ).orElse(""));
 		return sb.toString();
 	}
 
 	public static final String CLASS_SIMPLE_NAME = "TrafficFlowObserved";
-	public static final String VAR_location = "location";
 	public static final String VAR_color = "color";
 	public static final String VAR_entityId = "entityId";
+	public static final String VAR_trafficSimulationId = "trafficSimulationId";
+	public static final String VAR_trafficSimulationSearch = "trafficSimulationSearch";
+	public static final String VAR_trafficSimulation_ = "trafficSimulation_";
+	public static final String VAR_laneAreaDetectorId = "laneAreaDetectorId";
+	public static final String VAR_location = "location";
 	public static final String VAR_simulationName = "simulationName";
 	public static final String VAR_sumocfgPath = "sumocfgPath";
+	public static final String VAR_customTrafficLightId = "customTrafficLightId";
 	public static final String VAR_smartTrafficLightSearch = "smartTrafficLightSearch";
 	public static final String VAR_smartTrafficLight_ = "smartTrafficLight_";
 	public static final String VAR_address = "address";
@@ -5430,10 +5572,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 	public static final String VAR_reversedLane = "reversedLane";
 	public static final String VAR_seeAlso = "seeAlso";
 	public static final String VAR_source = "source";
-	public static final String VAR_type = "type";
 	public static final String VAR_vehicleSubType = "vehicleSubType";
 	public static final String VAR_vehicleType = "vehicleType";
-	public static final String VAR_customRouteId = "customRouteId";
 	public static final String VAR_customSigma = "customSigma";
 	public static final String VAR_customAcceleration = "customAcceleration";
 	public static final String VAR_customDeceleration = "customDeceleration";
@@ -5442,7 +5582,6 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 	public static final String VAR_customAverageVehiclesPerMinute = "customAverageVehiclesPerMinute";
 	public static final String VAR_customDemandScalingFactor = "customDemandScalingFactor";
 	public static final String VAR_customQueueLengthThreshold = "customQueueLengthThreshold";
-	public static final String VAR_customTrafficLightId = "customTrafficLightId";
 
 	public static List<String> varsQForClass() {
 		return TrafficFlowObserved.varsQTrafficFlowObserved(new ArrayList<String>());
@@ -5456,11 +5595,14 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 		return TrafficFlowObserved.varsFqTrafficFlowObserved(new ArrayList<String>());
 	}
 	public static List<String> varsFqTrafficFlowObserved(List<String> vars) {
-		vars.add(VAR_location);
 		vars.add(VAR_color);
 		vars.add(VAR_entityId);
+		vars.add(VAR_trafficSimulationId);
+		vars.add(VAR_laneAreaDetectorId);
+		vars.add(VAR_location);
 		vars.add(VAR_simulationName);
 		vars.add(VAR_sumocfgPath);
+		vars.add(VAR_customTrafficLightId);
 		vars.add(VAR_address);
 		vars.add(VAR_alternateName);
 		vars.add(VAR_areaServed);
@@ -5486,10 +5628,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 		vars.add(VAR_reversedLane);
 		vars.add(VAR_seeAlso);
 		vars.add(VAR_source);
-		vars.add(VAR_type);
 		vars.add(VAR_vehicleSubType);
 		vars.add(VAR_vehicleType);
-		vars.add(VAR_customRouteId);
 		vars.add(VAR_customSigma);
 		vars.add(VAR_customAcceleration);
 		vars.add(VAR_customDeceleration);
@@ -5498,7 +5638,6 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 		vars.add(VAR_customAverageVehiclesPerMinute);
 		vars.add(VAR_customDemandScalingFactor);
 		vars.add(VAR_customQueueLengthThreshold);
-		vars.add(VAR_customTrafficLightId);
 		BaseModel.varsFqBaseModel(vars);
 		return vars;
 	}
@@ -5507,6 +5646,7 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 		return TrafficFlowObserved.varsRangeTrafficFlowObserved(new ArrayList<String>());
 	}
 	public static List<String> varsRangeTrafficFlowObserved(List<String> vars) {
+		vars.add(VAR_location);
 		vars.add(VAR_address);
 		vars.add(VAR_averageGapDistance);
 		vars.add(VAR_averageHeadwayTime);
@@ -5529,11 +5669,16 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 		return vars;
 	}
 
-	public static final String DISPLAY_NAME_location = "map path";
 	public static final String DISPLAY_NAME_color = "color";
 	public static final String DISPLAY_NAME_entityId = "entity ID";
+	public static final String DISPLAY_NAME_trafficSimulationId = "traffic simulation ID";
+	public static final String DISPLAY_NAME_trafficSimulationSearch = "";
+	public static final String DISPLAY_NAME_trafficSimulation_ = "";
+	public static final String DISPLAY_NAME_laneAreaDetectorId = "lane area detector ID";
+	public static final String DISPLAY_NAME_location = "map location";
 	public static final String DISPLAY_NAME_simulationName = "simulation name";
 	public static final String DISPLAY_NAME_sumocfgPath = "sumocfg path";
+	public static final String DISPLAY_NAME_customTrafficLightId = "traffic light ID";
 	public static final String DISPLAY_NAME_smartTrafficLightSearch = "";
 	public static final String DISPLAY_NAME_smartTrafficLight_ = "";
 	public static final String DISPLAY_NAME_address = "address";
@@ -5561,10 +5706,8 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 	public static final String DISPLAY_NAME_reversedLane = "reversed lane";
 	public static final String DISPLAY_NAME_seeAlso = "see also";
 	public static final String DISPLAY_NAME_source = "source";
-	public static final String DISPLAY_NAME_type = "type";
 	public static final String DISPLAY_NAME_vehicleSubType = "vehicle sub type";
 	public static final String DISPLAY_NAME_vehicleType = "vehicle type";
-	public static final String DISPLAY_NAME_customRouteId = "route ID";
 	public static final String DISPLAY_NAME_customSigma = "sigma";
 	public static final String DISPLAY_NAME_customAcceleration = "acceleration";
 	public static final String DISPLAY_NAME_customDeceleration = "deceleration";
@@ -5573,23 +5716,32 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 	public static final String DISPLAY_NAME_customAverageVehiclesPerMinute = "average vehicles/minute";
 	public static final String DISPLAY_NAME_customDemandScalingFactor = "demand scaling factor";
 	public static final String DISPLAY_NAME_customQueueLengthThreshold = "queue length threshold";
-	public static final String DISPLAY_NAME_customTrafficLightId = "traffic light ID";
 
 	public static String displayNameForClass(String var) {
 		return TrafficFlowObserved.displayNameTrafficFlowObserved(var);
 	}
 	public static String displayNameTrafficFlowObserved(String var) {
 		switch(var) {
-		case VAR_location:
-			return DISPLAY_NAME_location;
 		case VAR_color:
 			return DISPLAY_NAME_color;
 		case VAR_entityId:
 			return DISPLAY_NAME_entityId;
+		case VAR_trafficSimulationId:
+			return DISPLAY_NAME_trafficSimulationId;
+		case VAR_trafficSimulationSearch:
+			return DISPLAY_NAME_trafficSimulationSearch;
+		case VAR_trafficSimulation_:
+			return DISPLAY_NAME_trafficSimulation_;
+		case VAR_laneAreaDetectorId:
+			return DISPLAY_NAME_laneAreaDetectorId;
+		case VAR_location:
+			return DISPLAY_NAME_location;
 		case VAR_simulationName:
 			return DISPLAY_NAME_simulationName;
 		case VAR_sumocfgPath:
 			return DISPLAY_NAME_sumocfgPath;
+		case VAR_customTrafficLightId:
+			return DISPLAY_NAME_customTrafficLightId;
 		case VAR_smartTrafficLightSearch:
 			return DISPLAY_NAME_smartTrafficLightSearch;
 		case VAR_smartTrafficLight_:
@@ -5644,14 +5796,10 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 			return DISPLAY_NAME_seeAlso;
 		case VAR_source:
 			return DISPLAY_NAME_source;
-		case VAR_type:
-			return DISPLAY_NAME_type;
 		case VAR_vehicleSubType:
 			return DISPLAY_NAME_vehicleSubType;
 		case VAR_vehicleType:
 			return DISPLAY_NAME_vehicleType;
-		case VAR_customRouteId:
-			return DISPLAY_NAME_customRouteId;
 		case VAR_customSigma:
 			return DISPLAY_NAME_customSigma;
 		case VAR_customAcceleration:
@@ -5668,8 +5816,6 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 			return DISPLAY_NAME_customDemandScalingFactor;
 		case VAR_customQueueLengthThreshold:
 			return DISPLAY_NAME_customQueueLengthThreshold;
-		case VAR_customTrafficLightId:
-			return DISPLAY_NAME_customTrafficLightId;
 		default:
 			return BaseModel.displayNameBaseModel(var);
 		}
@@ -5677,16 +5823,20 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 
 	public static String descriptionTrafficFlowObserved(String var) {
 		switch(var) {
-		case VAR_location:
-			return "Geojson reference to the item. It can be Point, LineString, Polygon, MultiPoint, MultiLineString or MultiPolygon";
 		case VAR_entityId:
 			return "A unique ID for this Smart Data Model";
+		case VAR_trafficSimulationId:
+			return "The Traffic Simulation ID";
+		case VAR_laneAreaDetectorId:
+			return "The unique ID of the lane area detector in SUMO. ";
+		case VAR_customTrafficLightId:
+			return "The Smart Traffic Light ID";
 		case VAR_address:
 			return "The mailing address";
 		case VAR_alternateName:
 			return "An alternative name for this item";
 		case VAR_areaServed:
-			return "The geographic area where a service or offered item is provided";
+			return "The geographic area where a service or offered item is provided. Geojson reference to the item. It can be Point, LineString, Polygon, MultiPoint, MultiLineString or MultiPolygon. ";
 		case VAR_averageGapDistance:
 			return "Average gap distance between consecutive vehicles";
 		case VAR_averageHeadwayTime:
@@ -5731,14 +5881,10 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 			return "list of uri pointing to additional resources about the item";
 		case VAR_source:
 			return "A sequence of characters giving the original source of the entity data as a URL. Recommended to be the fully qualified domain name of the source provider, or the URL to the source object.";
-		case VAR_type:
-			return "NGSI Entity type. It has to be TrafficFlowObserved";
 		case VAR_vehicleSubType:
 			return "It allows to specify a sub type of `vehicleType`, eg if the `vehicleType` is set to `Lorry` the `vehicleSubType` may be `OGV1` or `OGV2` to convey more information about the exact type of vehicle.";
 		case VAR_vehicleType:
 			return "Type of vehicle from the point of view of its structural characteristics. Enum:'agriculturalVehicle, bicycle, bus, minibus, car, caravan, tram, tanker, carWithCaravan, carWithTrailer, lorry, moped, motorcycle, motorcycleWithSideCar, motorscooter, trailer, van, constructionOrMaintenanceVehicle, trolley, binTrolley, sweepingMachine, cleaningTrolley'";
-		case VAR_customRouteId:
-			return "The unique ID of the route in SUMO. ";
 		case VAR_customSigma:
 			return "The driver imperfection as a floating point number [0,1] (0 denotes perfect driving). ";
 		case VAR_customAcceleration:
@@ -5755,8 +5901,6 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 			return "Demand scaling factor (multiplies all vehicle demands) [1, 2]. ";
 		case VAR_customQueueLengthThreshold:
 			return "Demand scaling factor (multiplies all vehicle demands) [1, 2]. ";
-		case VAR_customTrafficLightId:
-			return "The Smart Traffic Light ID";
 			default:
 				return BaseModel.descriptionBaseModel(var);
 		}
@@ -5764,15 +5908,25 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 
 	public static String classSimpleNameTrafficFlowObserved(String var) {
 		switch(var) {
-		case VAR_location:
-			return "Path";
 		case VAR_color:
 			return "String";
 		case VAR_entityId:
 			return "String";
+		case VAR_trafficSimulationId:
+			return "String";
+		case VAR_trafficSimulationSearch:
+			return "SearchList";
+		case VAR_trafficSimulation_:
+			return "TrafficSimulation";
+		case VAR_laneAreaDetectorId:
+			return "String";
+		case VAR_location:
+			return "Point";
 		case VAR_simulationName:
 			return "String";
 		case VAR_sumocfgPath:
+			return "String";
+		case VAR_customTrafficLightId:
 			return "String";
 		case VAR_smartTrafficLightSearch:
 			return "SearchList";
@@ -5783,7 +5937,7 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 		case VAR_alternateName:
 			return "String";
 		case VAR_areaServed:
-			return "String";
+			return "Path";
 		case VAR_averageGapDistance:
 			return "BigDecimal";
 		case VAR_averageHeadwayTime:
@@ -5828,13 +5982,9 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 			return "JsonObject";
 		case VAR_source:
 			return "String";
-		case VAR_type:
-			return "String";
 		case VAR_vehicleSubType:
 			return "String";
 		case VAR_vehicleType:
-			return "String";
-		case VAR_customRouteId:
 			return "String";
 		case VAR_customSigma:
 			return "BigDecimal";
@@ -5852,8 +6002,6 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 			return "BigDecimal";
 		case VAR_customQueueLengthThreshold:
 			return "BigDecimal";
-		case VAR_customTrafficLightId:
-			return "String";
 			default:
 				return BaseModel.classSimpleNameBaseModel(var);
 		}
@@ -5868,14 +6016,20 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 
 	public static Integer htmRowTrafficFlowObserved(String var) {
 		switch(var) {
-		case VAR_location:
-			return 4;
 		case VAR_color:
 			return 3;
 		case VAR_entityId:
 			return 5;
+		case VAR_trafficSimulationId:
+			return 5;
+		case VAR_laneAreaDetectorId:
+			return 15;
+		case VAR_location:
+			return 4;
 		case VAR_simulationName:
 			return 5;
+		case VAR_customTrafficLightId:
+			return 17;
 		case VAR_address:
 			return 5;
 		case VAR_alternateName:
@@ -5926,14 +6080,10 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 			return 13;
 		case VAR_source:
 			return 13;
-		case VAR_type:
-			return 14;
 		case VAR_vehicleSubType:
 			return 14;
 		case VAR_vehicleType:
 			return 14;
-		case VAR_customRouteId:
-			return 15;
 		case VAR_customSigma:
 			return 15;
 		case VAR_customAcceleration:
@@ -5949,8 +6099,6 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 		case VAR_customDemandScalingFactor:
 			return 17;
 		case VAR_customQueueLengthThreshold:
-			return 17;
-		case VAR_customTrafficLightId:
 			return 17;
 			default:
 				return BaseModel.htmRowBaseModel(var);
@@ -5959,14 +6107,20 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 
 	public static Integer htmCellTrafficFlowObserved(String var) {
 		switch(var) {
-		case VAR_location:
-			return 2;
 		case VAR_color:
 			return 3;
 		case VAR_entityId:
 			return 1;
+		case VAR_trafficSimulationId:
+			return 2;
+		case VAR_laneAreaDetectorId:
+			return 1;
+		case VAR_location:
+			return 2;
 		case VAR_simulationName:
 			return 2;
+		case VAR_customTrafficLightId:
+			return 3;
 		case VAR_address:
 			return 3;
 		case VAR_alternateName:
@@ -6017,20 +6171,16 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 			return 2;
 		case VAR_source:
 			return 3;
-		case VAR_type:
-			return 1;
 		case VAR_vehicleSubType:
 			return 2;
 		case VAR_vehicleType:
 			return 3;
-		case VAR_customRouteId:
-			return 1;
 		case VAR_customSigma:
-			return 2;
+			return 1;
 		case VAR_customAcceleration:
-			return 3;
+			return 2;
 		case VAR_customDeceleration:
-			return 4;
+			return 3;
 		case VAR_customMinGreenTime:
 			return 1;
 		case VAR_customMaxGreenTime:
@@ -6041,8 +6191,6 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 			return 1;
 		case VAR_customQueueLengthThreshold:
 			return 2;
-		case VAR_customTrafficLightId:
-			return 3;
 			default:
 				return BaseModel.htmCellBaseModel(var);
 		}

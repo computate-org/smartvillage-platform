@@ -35,6 +35,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.math.RoundingMode;
 import java.util.Map;
+import java.lang.String;
 import java.time.ZonedDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
@@ -45,7 +46,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.Instant;
 import java.util.Locale;
 import java.time.OffsetDateTime;
-import java.lang.String;
 import io.vertx.pgclient.data.Point;
 import org.computate.vertx.serialize.pgclient.PgClientPointSerializer;
 import org.computate.vertx.serialize.pgclient.PgClientPointDeserializer;
@@ -60,7 +60,7 @@ import io.vertx.core.Future;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.computate.search.response.solr.SolrResponse;
 
-/**	
+/**
  * <h3>About the TrafficSimulation class and it's generated class TrafficSimulationGen&lt;BaseModel&gt;: </h3>extends TrafficSimulationGen
  * <p>
  * This Java class extends a generated Java class TrafficSimulationGen built by the <a href="https://github.com/computate-org/computate">https://github.com/computate-org/computate</a> project. 
@@ -244,6 +244,62 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	public static final String TrafficSimulation_IconGroup = "duotone";
 	public static final String TrafficSimulation_IconName = "traffic-light-stop";
 	public static final Integer TrafficSimulation_Rows = 100;
+
+	//////////////
+	// entityId //
+	//////////////
+
+
+	/**	 The entity entityId
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String entityId;
+
+	/**	<br> The entity entityId
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation&fq=entiteVar_enUS_indexed_string:entityId">Find the entity entityId in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _entityId(Wrap<String> w);
+
+	public String getEntityId() {
+		return entityId;
+	}
+	public void setEntityId(String o) {
+		this.entityId = TrafficSimulation.staticSetEntityId(siteRequest_, o);
+	}
+	public static String staticSetEntityId(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected TrafficSimulation entityIdInit() {
+		Wrap<String> entityIdWrap = new Wrap<String>().var("entityId");
+		if(entityId == null) {
+			_entityId(entityIdWrap);
+			Optional.ofNullable(entityIdWrap.getO()).ifPresent(o -> {
+				setEntityId(o);
+			});
+		}
+		return (TrafficSimulation)this;
+	}
+
+	public static String staticSearchEntityId(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrEntityId(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqEntityId(SiteRequestEnUS siteRequest_, String o) {
+		return TrafficSimulation.staticSearchStrEntityId(siteRequest_, TrafficSimulation.staticSearchEntityId(siteRequest_, TrafficSimulation.staticSetEntityId(siteRequest_, o)));
+	}
+
+	public String sqlEntityId() {
+		return entityId;
+	}
 
 	///////////////////
 	// startDateTime //
@@ -2697,64 +2753,50 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 
 
 	/**	 The entity laneAreaDetectorLanes
-	 *	 It is constructed before being initialized with the constructor by default. 
+	 *	 is defined as null before being initialized. 
 	 */
 	@JsonProperty
-	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
 	@JsonInclude(Include.NON_NULL)
-	protected List<String> laneAreaDetectorLanes = new ArrayList<String>();
+	protected JsonArray laneAreaDetectorLanes;
 
 	/**	<br> The entity laneAreaDetectorLanes
-	 *  It is constructed before being initialized with the constructor by default. 
+	 *  is defined as null before being initialized. 
 	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation&fq=entiteVar_enUS_indexed_string:laneAreaDetectorLanes">Find the entity laneAreaDetectorLanes in Solr</a>
 	 * <br>
-	 * @param l is the entity already constructed. 
+	 * @param l is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected abstract void _laneAreaDetectorLanes(List<String> l);
+	protected abstract void _laneAreaDetectorLanes(Wrap<JsonArray> l);
 
-	public List<String> getLaneAreaDetectorLanes() {
+	public JsonArray getLaneAreaDetectorLanes() {
 		return laneAreaDetectorLanes;
 	}
 
-	public void setLaneAreaDetectorLanes(List<String> laneAreaDetectorLanes) {
+	public void setLaneAreaDetectorLanes(JsonArray laneAreaDetectorLanes) {
 		this.laneAreaDetectorLanes = laneAreaDetectorLanes;
 	}
-	public void setLaneAreaDetectorLanes(String o) {
-		String l = TrafficSimulation.staticSetLaneAreaDetectorLanes(siteRequest_, o);
-		if(l != null)
-			addLaneAreaDetectorLanes(l);
-	}
-	public static String staticSetLaneAreaDetectorLanes(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-	public TrafficSimulation addLaneAreaDetectorLanes(String...objects) {
-		for(String o : objects) {
-			addLaneAreaDetectorLanes(o);
-		}
-		return (TrafficSimulation)this;
-	}
-	public TrafficSimulation addLaneAreaDetectorLanes(String o) {
-		if(o != null)
-			this.laneAreaDetectorLanes.add(o);
-		return (TrafficSimulation)this;
-	}
 	@JsonIgnore
-	public void setLaneAreaDetectorLanes(JsonArray objects) {
-		laneAreaDetectorLanes.clear();
-		if(objects == null)
-			return;
-		for(int i = 0; i < objects.size(); i++) {
-			String o = objects.getString(i);
-			addLaneAreaDetectorLanes(o);
+	public void setLaneAreaDetectorLanes(String o) {
+		this.laneAreaDetectorLanes = TrafficSimulation.staticSetLaneAreaDetectorLanes(siteRequest_, o);
+	}
+	public static JsonArray staticSetLaneAreaDetectorLanes(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+				return new JsonArray(o);
 		}
+		return null;
 	}
 	protected TrafficSimulation laneAreaDetectorLanesInit() {
-		_laneAreaDetectorLanes(laneAreaDetectorLanes);
+		Wrap<JsonArray> laneAreaDetectorLanesWrap = new Wrap<JsonArray>().var("laneAreaDetectorLanes");
+		if(laneAreaDetectorLanes == null) {
+			_laneAreaDetectorLanes(laneAreaDetectorLanesWrap);
+			Optional.ofNullable(laneAreaDetectorLanesWrap.getO()).ifPresent(o -> {
+				setLaneAreaDetectorLanes(o);
+			});
+		}
 		return (TrafficSimulation)this;
 	}
 
-	public static String staticSearchLaneAreaDetectorLanes(SiteRequestEnUS siteRequest_, String o) {
-		return o;
+	public static String staticSearchLaneAreaDetectorLanes(SiteRequestEnUS siteRequest_, JsonArray o) {
+		return o.toString();
 	}
 
 	public static String staticSearchStrLaneAreaDetectorLanes(SiteRequestEnUS siteRequest_, String o) {
@@ -2765,8 +2807,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		return TrafficSimulation.staticSearchStrLaneAreaDetectorLanes(siteRequest_, TrafficSimulation.staticSearchLaneAreaDetectorLanes(siteRequest_, TrafficSimulation.staticSetLaneAreaDetectorLanes(siteRequest_, o)));
 	}
 
-	public String[] sqlLaneAreaDetectorLanes() {
-		return laneAreaDetectorLanes.stream().map(v -> (String)v).toArray(String[]::new);
+	public JsonArray sqlLaneAreaDetectorLanes() {
+		return laneAreaDetectorLanes;
 	}
 
 	///////////////////////////
@@ -3110,6 +3152,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		Future.future(a -> a.complete()).compose(a -> {
 			Promise<Void> promise2 = Promise.promise();
 			try {
+				entityIdInit();
 				startDateTimeInit();
 				simulationNameInit();
 				locationInit();
@@ -3202,6 +3245,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	public Object obtainTrafficSimulation(String var) {
 		TrafficSimulation oTrafficSimulation = (TrafficSimulation)this;
 		switch(var) {
+			case "entityId":
+				return oTrafficSimulation.entityId;
 			case "startDateTime":
 				return oTrafficSimulation.startDateTime;
 			case "simulationName":
@@ -3324,6 +3369,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	}
 	public static Object staticSetTrafficSimulation(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "entityId":
+			return TrafficSimulation.staticSetEntityId(siteRequest_, o);
 		case "startDateTime":
 			return TrafficSimulation.staticSetStartDateTime(siteRequest_, o);
 		case "simulationName":
@@ -3416,6 +3463,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	}
 	public static Object staticSearchTrafficSimulation(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "entityId":
+			return TrafficSimulation.staticSearchEntityId(siteRequest_, (String)o);
 		case "startDateTime":
 			return TrafficSimulation.staticSearchStartDateTime(siteRequest_, (ZonedDateTime)o);
 		case "simulationName":
@@ -3485,7 +3534,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		case "laneAreaDetectorIds":
 			return TrafficSimulation.staticSearchLaneAreaDetectorIds(siteRequest_, (String)o);
 		case "laneAreaDetectorLanes":
-			return TrafficSimulation.staticSearchLaneAreaDetectorLanes(siteRequest_, (String)o);
+			return TrafficSimulation.staticSearchLaneAreaDetectorLanes(siteRequest_, (JsonArray)o);
 		case "laneAreaDetectorPaths":
 			return TrafficSimulation.staticSearchLaneAreaDetectorPaths(siteRequest_, (String)o);
 		case "e1DetectorIds":
@@ -3508,6 +3557,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	}
 	public static String staticSearchStrTrafficSimulation(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
+		case "entityId":
+			return TrafficSimulation.staticSearchStrEntityId(siteRequest_, (String)o);
 		case "startDateTime":
 			return TrafficSimulation.staticSearchStrStartDateTime(siteRequest_, (Date)o);
 		case "simulationName":
@@ -3600,6 +3651,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	}
 	public static String staticSearchFqTrafficSimulation(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
+		case "entityId":
+			return TrafficSimulation.staticSearchFqEntityId(siteRequest_, o);
 		case "startDateTime":
 			return TrafficSimulation.staticSearchFqStartDateTime(siteRequest_, o);
 		case "simulationName":
@@ -3704,7 +3757,13 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	}
 	public Object persistTrafficSimulation(String var, Object val) {
 		String varLower = var.toLowerCase();
-			if("startdatetime".equals(varLower)) {
+			if("entityid".equals(varLower)) {
+				if(val instanceof String) {
+					setEntityId((String)val);
+				}
+				saves.add("entityId");
+				return val;
+			} else if("startdatetime".equals(varLower)) {
 				if(val instanceof String) {
 					setStartDateTime((String)val);
 				} else if(val instanceof OffsetDateTime) {
@@ -3955,16 +4014,12 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 				}
 				return val;
 			} else if("laneareadetectorlanes".equals(varLower)) {
-				if(val instanceof List<?>) {
-					((List<String>)val).stream().forEach(v -> addLaneAreaDetectorLanes(v));
+				if(val instanceof String) {
+					setLaneAreaDetectorLanes((String)val);
 				} else if(val instanceof JsonArray) {
-					((JsonArray)val).stream().forEach(v -> setLaneAreaDetectorLanes(v.toString()));
-				} else if(val instanceof String[]) {
-					Arrays.asList((String[])val).stream().forEach(v -> setLaneAreaDetectorLanes((String)v));
+					setLaneAreaDetectorLanes((JsonArray)val);
 				}
-				if(!saves.contains("laneAreaDetectorLanes")) {
-					saves.add("laneAreaDetectorLanes");
-				}
+				saves.add("laneAreaDetectorLanes");
 				return val;
 			} else if("laneareadetectorpaths".equals(varLower)) {
 				if(val instanceof List<?>) {
@@ -4028,8 +4083,14 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	}
 	public void populateTrafficSimulation(SolrResponse.Doc doc) {
 		TrafficSimulation oTrafficSimulation = (TrafficSimulation)this;
-		saves = doc.get("saves_docvalues_strings");
+		saves = Optional.ofNullable((ArrayList<String>)doc.get("saves_docvalues_strings")).orElse(new ArrayList<String>());
 		if(saves != null) {
+
+			if(saves.contains("entityId")) {
+				String entityId = (String)doc.get("entityId_docvalues_string");
+				if(entityId != null)
+					oTrafficSimulation.setEntityId(entityId);
+			}
 
 			if(saves.contains("startDateTime")) {
 				Date startDateTime = (Date)doc.get("startDateTime_docvalues_date");
@@ -4222,9 +4283,9 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			}
 
 			if(saves.contains("laneAreaDetectorLanes")) {
-				List<String> laneAreaDetectorLanes = (List<String>)doc.get("laneAreaDetectorLanes_docvalues_strings");
+				String laneAreaDetectorLanes = (String)doc.get("laneAreaDetectorLanes_docvalues_string");
 				if(laneAreaDetectorLanes != null)
-					oTrafficSimulation.laneAreaDetectorLanes.addAll(laneAreaDetectorLanes);
+					oTrafficSimulation.setLaneAreaDetectorLanes(laneAreaDetectorLanes);
 			}
 
 			if(saves.contains("laneAreaDetectorPaths")) {
@@ -4256,6 +4317,9 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	}
 
 	public void indexTrafficSimulation(JsonObject doc) {
+		if(entityId != null) {
+			doc.put("entityId_docvalues_string", entityId);
+		}
 		if(startDateTime != null) {
 			doc.put("startDateTime_docvalues_date", DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(ZonedDateTime.ofInstant(startDateTime.toInstant(), ZoneId.of("UTC"))));
 		}
@@ -4365,11 +4429,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			}
 		}
 		if(laneAreaDetectorLanes != null) {
-			JsonArray l = new JsonArray();
-			doc.put("laneAreaDetectorLanes_docvalues_strings", l);
-			for(String o : laneAreaDetectorLanes) {
-				l.add(o);
-			}
+			doc.put("laneAreaDetectorLanes_docvalues_string", laneAreaDetectorLanes.toString());
 		}
 		if(laneAreaDetectorPaths != null) {
 			JsonArray l = new JsonArray();
@@ -4405,6 +4465,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 
 	public static String varStoredTrafficSimulation(String entityVar) {
 		switch(entityVar) {
+			case "entityId":
+				return "entityId_docvalues_string";
 			case "startDateTime":
 				return "startDateTime_docvalues_date";
 			case "simulationName":
@@ -4470,7 +4532,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			case "laneAreaDetectorIds":
 				return "laneAreaDetectorIds_docvalues_strings";
 			case "laneAreaDetectorLanes":
-				return "laneAreaDetectorLanes_docvalues_strings";
+				return "laneAreaDetectorLanes_docvalues_string";
 			case "laneAreaDetectorPaths":
 				return "laneAreaDetectorPaths_docvalues_strings";
 			case "e1DetectorIds":
@@ -4486,6 +4548,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 
 	public static String varIndexedTrafficSimulation(String entityVar) {
 		switch(entityVar) {
+			case "entityId":
+				return "entityId_docvalues_string";
 			case "startDateTime":
 				return "startDateTime_docvalues_date";
 			case "simulationName":
@@ -4551,7 +4615,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 			case "laneAreaDetectorIds":
 				return "laneAreaDetectorIds_docvalues_strings";
 			case "laneAreaDetectorLanes":
-				return "laneAreaDetectorLanes_docvalues_strings";
+				return "laneAreaDetectorLanes_docvalues_string";
 			case "laneAreaDetectorPaths":
 				return "laneAreaDetectorPaths_docvalues_strings";
 			case "e1DetectorIds":
@@ -4567,6 +4631,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 
 	public static String searchVarTrafficSimulation(String searchVar) {
 		switch(searchVar) {
+			case "entityId_docvalues_string":
+				return "entityId";
 			case "startDateTime_docvalues_date":
 				return "startDateTime";
 			case "simulationName_docvalues_string":
@@ -4631,7 +4697,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 				return "reportKeys";
 			case "laneAreaDetectorIds_docvalues_strings":
 				return "laneAreaDetectorIds";
-			case "laneAreaDetectorLanes_docvalues_strings":
+			case "laneAreaDetectorLanes_docvalues_string":
 				return "laneAreaDetectorLanes";
 			case "laneAreaDetectorPaths_docvalues_strings":
 				return "laneAreaDetectorPaths";
@@ -4670,6 +4736,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	public void storeTrafficSimulation(SolrResponse.Doc doc) {
 		TrafficSimulation oTrafficSimulation = (TrafficSimulation)this;
 
+		oTrafficSimulation.setEntityId(Optional.ofNullable(doc.get("entityId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oTrafficSimulation.setStartDateTime(Optional.ofNullable(doc.get("startDateTime_docvalues_date")).map(v -> v.toString()).orElse(null));
 		oTrafficSimulation.setSimulationName(Optional.ofNullable(doc.get("simulationName_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oTrafficSimulation.setLocation(Optional.ofNullable(doc.get("location_docvalues_location")).map(v -> v.toString()).orElse(null));
@@ -4708,9 +4775,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		Optional.ofNullable((List<?>)doc.get("laneAreaDetectorIds_docvalues_strings")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
 			oTrafficSimulation.addLaneAreaDetectorIds(v.toString());
 		});
-		Optional.ofNullable((List<?>)doc.get("laneAreaDetectorLanes_docvalues_strings")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
-			oTrafficSimulation.addLaneAreaDetectorLanes(v.toString());
-		});
+		oTrafficSimulation.setLaneAreaDetectorLanes(Optional.ofNullable(doc.get("laneAreaDetectorLanes_docvalues_string")).map(v -> v.toString()).orElse(null));
 		Optional.ofNullable((List<?>)doc.get("laneAreaDetectorPaths_docvalues_strings")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
 			oTrafficSimulation.addLaneAreaDetectorPaths(v.toString());
 		});
@@ -4736,6 +4801,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		Object o = Optional.ofNullable(apiRequest).map(ApiRequest::getOriginal).orElse(null);
 		if(o != null && o instanceof TrafficSimulation) {
 			TrafficSimulation original = (TrafficSimulation)o;
+			if(!Objects.equals(entityId, original.getEntityId()))
+				apiRequest.addVars("entityId");
 			if(!Objects.equals(startDateTime, original.getStartDateTime()))
 				apiRequest.addVars("startDateTime");
 			if(!Objects.equals(simulationName, original.getSimulationName()))
@@ -4821,6 +4888,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	@Override public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(super.toString());
+		sb.append(Optional.ofNullable(entityId).map(v -> "entityId: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(startDateTime).map(v -> "startDateTime: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(simulationName).map(v -> "simulationName: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(location).map(v -> "location: " + v + "\n").orElse(""));
@@ -4862,6 +4930,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	}
 
 	public static final String CLASS_SIMPLE_NAME = "TrafficSimulation";
+	public static final String VAR_entityId = "entityId";
 	public static final String VAR_startDateTime = "startDateTime";
 	public static final String VAR_simulationName = "simulationName";
 	public static final String VAR_location = "location";
@@ -4914,6 +4983,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		return TrafficSimulation.varsFqTrafficSimulation(new ArrayList<String>());
 	}
 	public static List<String> varsFqTrafficSimulation(List<String> vars) {
+		vars.add(VAR_entityId);
 		vars.add(VAR_startDateTime);
 		vars.add(VAR_simulationName);
 		vars.add(VAR_location);
@@ -4984,10 +5054,12 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		vars.add(VAR_paramRunTime);
 		vars.add(VAR_paramItersPerPar);
 		vars.add(VAR_paramTotalIterNum);
+		vars.add(VAR_laneAreaDetectorLanes);
 		BaseModel.varsRangeBaseModel(vars);
 		return vars;
 	}
 
+	public static final String DISPLAY_NAME_entityId = "entity ID";
 	public static final String DISPLAY_NAME_startDateTime = "Start date and Time";
 	public static final String DISPLAY_NAME_simulationName = "simulation name";
 	public static final String DISPLAY_NAME_location = "map location";
@@ -5033,6 +5105,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 	}
 	public static String displayNameTrafficSimulation(String var) {
 		switch(var) {
+		case VAR_entityId:
+			return DISPLAY_NAME_entityId;
 		case VAR_startDateTime:
 			return DISPLAY_NAME_startDateTime;
 		case VAR_simulationName:
@@ -5118,6 +5192,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 
 	public static String descriptionTrafficSimulation(String var) {
 		switch(var) {
+		case VAR_entityId:
+			return "A unique ID for this Smart Data Model";
 		case VAR_startDateTime:
 			return "The start date and time. ";
 		case VAR_startSeconds:
@@ -5179,6 +5255,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 
 	public static String classSimpleNameTrafficSimulation(String var) {
 		switch(var) {
+		case VAR_entityId:
+			return "String";
 		case VAR_startDateTime:
 			return "ZonedDateTime";
 		case VAR_simulationName:
@@ -5248,7 +5326,7 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 		case VAR_laneAreaDetectorIds:
 			return "List";
 		case VAR_laneAreaDetectorLanes:
-			return "List";
+			return "JsonArray";
 		case VAR_laneAreaDetectorPaths:
 			return "List";
 		case VAR_e1DetectorIds:
@@ -5271,6 +5349,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 
 	public static Integer htmRowTrafficSimulation(String var) {
 		switch(var) {
+		case VAR_entityId:
+			return 5;
 		case VAR_simulationName:
 			return 3;
 		case VAR_location:
@@ -5284,6 +5364,8 @@ public abstract class TrafficSimulationGen<DEV> extends BaseModel {
 
 	public static Integer htmCellTrafficSimulation(String var) {
 		switch(var) {
+		case VAR_entityId:
+			return 1;
 		case VAR_simulationName:
 			return 1;
 		case VAR_location:

@@ -784,6 +784,14 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							num++;
 							bParams.add(o2.sqlSimulationName());
 						break;
+					case "setSmartTrafficLightId":
+							o2.setSmartTrafficLightId(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_smartTrafficLightId + "=$" + num);
+							num++;
+							bParams.add(o2.sqlSmartTrafficLightId());
+						break;
 					case "setSmartTrafficLightName":
 							o2.setSmartTrafficLightName(jsonObject.getString(entityVar));
 							if(bParams.size() > 0)
@@ -1425,6 +1433,15 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 						bSql.append(SimulationReport.VAR_simulationName + "=$" + num);
 						num++;
 						bParams.add(o2.sqlSimulationName());
+						break;
+					case SimulationReport.VAR_smartTrafficLightId:
+						o2.setSmartTrafficLightId(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_smartTrafficLightId + "=$" + num);
+						num++;
+						bParams.add(o2.sqlSmartTrafficLightId());
 						break;
 					case SimulationReport.VAR_smartTrafficLightName:
 						o2.setSmartTrafficLightName(jsonObject.getString(entityVar));
@@ -2365,6 +2382,15 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 						num++;
 						bParams.add(o2.sqlSimulationName());
 						break;
+					case SimulationReport.VAR_smartTrafficLightId:
+						o2.setSmartTrafficLightId(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_smartTrafficLightId + "=$" + num);
+						num++;
+						bParams.add(o2.sqlSmartTrafficLightId());
+						break;
 					case SimulationReport.VAR_smartTrafficLightName:
 						o2.setSmartTrafficLightName(jsonObject.getString(entityVar));
 						if(bParams.size() > 0) {
@@ -3081,6 +3107,14 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							bSql.append(SimulationReport.VAR_simulationName + "=$" + num);
 							num++;
 							bParams.add(o2.sqlSimulationName());
+						break;
+					case "setSmartTrafficLightId":
+							o2.setSmartTrafficLightId(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_smartTrafficLightId + "=$" + num);
+							num++;
+							bParams.add(o2.sqlSmartTrafficLightId());
 						break;
 					case "setSmartTrafficLightName":
 							o2.setSmartTrafficLightName(jsonObject.getString(entityVar));

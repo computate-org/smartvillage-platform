@@ -706,6 +706,14 @@ public class SmartTrafficLightEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 							num++;
 							bParams.add(o2.sqlSmartTrafficLightName());
 						break;
+					case "setRouteIds":
+							o2.setRouteIds(jsonObject.getJsonArray(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SmartTrafficLight.VAR_routeIds + "=$" + num);
+							num++;
+							bParams.add(o2.sqlRouteIds());
+						break;
 					case "setRouteIdNorth":
 							o2.setRouteIdNorth(jsonObject.getString(entityVar));
 							if(bParams.size() > 0)
@@ -1227,6 +1235,15 @@ public class SmartTrafficLightEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 						bSql.append(SmartTrafficLight.VAR_smartTrafficLightName + "=$" + num);
 						num++;
 						bParams.add(o2.sqlSmartTrafficLightName());
+						break;
+					case SmartTrafficLight.VAR_routeIds:
+						o2.setRouteIds(jsonObject.getJsonArray(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SmartTrafficLight.VAR_routeIds + "=$" + num);
+						num++;
+						bParams.add(o2.sqlRouteIds());
 						break;
 					case SmartTrafficLight.VAR_routeIdNorth:
 						o2.setRouteIdNorth(jsonObject.getString(entityVar));

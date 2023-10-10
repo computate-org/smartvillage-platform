@@ -32,7 +32,9 @@
 				window.eventBus = new EventBus('/eventbus');
 				var pk = {{#if pk}}{{pk}}{{else}}null{{/if}};
 				if(pk != null) {
+					window.trafficFlowObserved = JSON.parse('{{{toJsonObjectStringInApostrophes trafficFlowObserved_ }}}');
 				}
+				window.listTrafficFlowObserved = JSON.parse('{{{toJsonArrayStringInApostrophes listTrafficFlowObserved }}}');
 				window.varsFq = JSON.parse('{{{toJsonObjectStringInApostrophes varsFq}}}');
 				window.varsRange = JSON.parse('{{{toJsonObjectStringInApostrophes varsRange}}}');
 				window.defaultRangeVar = '{{ defaultRangeVar }}';
@@ -472,6 +474,15 @@
 {{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmTrafficSimulationId" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmTrafficSimulationId" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmTrafficSimulationId" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
 {{> "htmSimulationName" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
 {{#ifContainsAnyRoles roles roleForRead}}
@@ -742,15 +753,6 @@
 							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
 							<div class="w3-cell-row HtmRow">
 {{#ifContainsAnyRoles roles roleForWrite}}
-{{> "htmType" roleForWriteBool="true" roleForReadBool="true"}}
-{{else}}
-{{#ifContainsAnyRoles roles roleForRead}}
-{{> "htmType" roleForWriteBool="false" roleForReadBool="true"}}
-{{else}}
-{{> "htmType" roleForWriteBool="false" roleForReadBool="false"}}
-{{/ifContainsAnyRoles}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleForWrite}}
 {{> "htmVehicleSubType" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
 {{#ifContainsAnyRoles roles roleForRead}}
@@ -773,12 +775,12 @@
 							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
 							<div class="w3-cell-row HtmRow">
 {{#ifContainsAnyRoles roles roleForWrite}}
-{{> "htmCustomRouteId" roleForWriteBool="true" roleForReadBool="true"}}
+{{> "htmLaneAreaDetectorId" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
 {{#ifContainsAnyRoles roles roleForRead}}
-{{> "htmCustomRouteId" roleForWriteBool="false" roleForReadBool="true"}}
+{{> "htmLaneAreaDetectorId" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmCustomRouteId" roleForWriteBool="false" roleForReadBool="false"}}
+{{> "htmLaneAreaDetectorId" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleForWrite}}
@@ -944,6 +946,15 @@
 {{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmTrafficSimulationId" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmTrafficSimulationId" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmTrafficSimulationId" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
 {{> "htmSimulationName" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
 {{#ifContainsAnyRoles roles roleForRead}}
@@ -1214,15 +1225,6 @@
 							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
 							<div class="w3-cell-row HtmRow">
 {{#ifContainsAnyRoles roles roleForWrite}}
-{{> "htmType" roleForWriteBool="true" roleForReadBool="true"}}
-{{else}}
-{{#ifContainsAnyRoles roles roleForRead}}
-{{> "htmType" roleForWriteBool="false" roleForReadBool="true"}}
-{{else}}
-{{> "htmType" roleForWriteBool="false" roleForReadBool="false"}}
-{{/ifContainsAnyRoles}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleForWrite}}
 {{> "htmVehicleSubType" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
 {{#ifContainsAnyRoles roles roleForRead}}
@@ -1245,12 +1247,12 @@
 							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
 							<div class="w3-cell-row HtmRow">
 {{#ifContainsAnyRoles roles roleForWrite}}
-{{> "htmCustomRouteId" roleForWriteBool="true" roleForReadBool="true"}}
+{{> "htmLaneAreaDetectorId" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
 {{#ifContainsAnyRoles roles roleForRead}}
-{{> "htmCustomRouteId" roleForWriteBool="false" roleForReadBool="true"}}
+{{> "htmLaneAreaDetectorId" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmCustomRouteId" roleForWriteBool="false" roleForReadBool="false"}}
+{{> "htmLaneAreaDetectorId" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleForWrite}}
@@ -1494,6 +1496,15 @@
 {{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmTrafficSimulationId" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmTrafficSimulationId" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmTrafficSimulationId" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
 {{> "htmSimulationName" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
 {{#ifContainsAnyRoles roles roleForRead}}
@@ -1764,15 +1775,6 @@
 							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
 							<div class="w3-cell-row HtmRow">
 {{#ifContainsAnyRoles roles roleForWrite}}
-{{> "htmType" roleForWriteBool="true" roleForReadBool="true"}}
-{{else}}
-{{#ifContainsAnyRoles roles roleForRead}}
-{{> "htmType" roleForWriteBool="false" roleForReadBool="true"}}
-{{else}}
-{{> "htmType" roleForWriteBool="false" roleForReadBool="false"}}
-{{/ifContainsAnyRoles}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleForWrite}}
 {{> "htmVehicleSubType" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
 {{#ifContainsAnyRoles roles roleForRead}}
@@ -1795,12 +1797,12 @@
 							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
 							<div class="w3-cell-row HtmRow">
 {{#ifContainsAnyRoles roles roleForWrite}}
-{{> "htmCustomRouteId" roleForWriteBool="true" roleForReadBool="true"}}
+{{> "htmLaneAreaDetectorId" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
 {{#ifContainsAnyRoles roles roleForRead}}
-{{> "htmCustomRouteId" roleForWriteBool="false" roleForReadBool="true"}}
+{{> "htmLaneAreaDetectorId" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmCustomRouteId" roleForWriteBool="false" roleForReadBool="false"}}
+{{> "htmLaneAreaDetectorId" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleForWrite}}
@@ -2434,7 +2436,7 @@
 										<div id="suggest{{classApiMethodMethod}}TrafficFlowObservedLocation">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_location">map path</label>
+													<label for="{{classApiMethodMethod}}_location">map location</label>
 												</div>
 											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
@@ -2451,8 +2453,8 @@
 		{{#eq roleForWriteBool "true"}}
 														<input
 															type="text"
-															placeholder="map path"
-															title="Geojson reference to the item. It can be Point, LineString, Polygon, MultiPoint, MultiLineString or MultiPolygon"															id="{{classApiMethodMethod}}_location"
+															placeholder="map location"
+															id="{{classApiMethodMethod}}_location"
 	{{#eq "Page" classApiMethodMethod}}
 																class="setLocation classTrafficFlowObserved inputTrafficFlowObserved{{pk}}Location w3-input w3-border "
 																name="setLocation"
@@ -2536,6 +2538,62 @@
 			{{/ifContainsKeys}}
 		{{else}}
 														<span class="varTrafficFlowObserved{{pk}}EntityId varTrafficFlowObservedEntityId ">{{trafficFlowObserved_.entityId}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmTrafficSimulationId"}}
+<!-- #*inline "htmTrafficSimulationId" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficFlowObservedTrafficSimulationId">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_trafficSimulationId">traffic simulation ID</label>
+												</div>
+											<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputTrafficSimulationId" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputTrafficSimulationId"}}
+		{{#eq roleForWriteBool "true"}}
+														<input
+															type="text"
+															placeholder="traffic simulation ID"
+															title="The Traffic Simulation ID"															id="{{classApiMethodMethod}}_trafficSimulationId"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setTrafficSimulationId classTrafficFlowObserved inputTrafficFlowObserved{{pk}}TrafficSimulationId w3-input w3-border "
+																name="setTrafficSimulationId"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setTrafficSimulationId classTrafficFlowObserved inputTrafficFlowObserved{{pk}}TrafficSimulationId w3-input w3-border "
+																name="setTrafficSimulationId"
+		{{else}}
+																class="valueTrafficSimulationId w3-input w3-border classTrafficFlowObserved inputTrafficFlowObserved{{pk}}TrafficSimulationId w3-input w3-border "
+																name="trafficSimulationId"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setTrafficSimulationId', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_trafficSimulationId')); }, function() { addError($('#{{classApiMethodMethod}}_trafficSimulationId')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficFlowObserved_.trafficSimulationId}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficFlowObserved{{pk}}TrafficSimulationId varTrafficFlowObservedTrafficSimulationId ">{{trafficFlowObserved_.trafficSimulationId}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficFlowObserved{{pk}}TrafficSimulationId varTrafficFlowObservedTrafficSimulationId ">{{trafficFlowObserved_.trafficSimulationId}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -2732,7 +2790,7 @@
 														<input
 															type="text"
 															placeholder="area served"
-															title="The geographic area where a service or offered item is provided"															id="{{classApiMethodMethod}}_areaServed"
+															title="The geographic area where a service or offered item is provided. Geojson reference to the item. It can be Point, LineString, Polygon, MultiPoint, MultiLineString or MultiPolygon. "															id="{{classApiMethodMethod}}_areaServed"
 	{{#eq "Page" classApiMethodMethod}}
 																class="setAreaServed classTrafficFlowObserved inputTrafficFlowObserved{{pk}}AreaServed w3-input w3-border "
 																name="setAreaServed"
@@ -4019,62 +4077,6 @@
 		{{/eq}}
 {{/inline}}
 
-{{#*inline "htmType"}}
-<!-- #*inline "htmType" -->
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}TrafficFlowObservedType">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_type">type</label>
-												</div>
-											<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputType" roleForWrite=roleForWrite roleForRead=roleForRead}}
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputType"}}
-		{{#eq roleForWriteBool "true"}}
-														<input
-															type="text"
-															placeholder="type"
-															title="NGSI Entity type. It has to be TrafficFlowObserved"															id="{{classApiMethodMethod}}_type"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setType classTrafficFlowObserved inputTrafficFlowObserved{{pk}}Type w3-input w3-border "
-																name="setType"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setType classTrafficFlowObserved inputTrafficFlowObserved{{pk}}Type w3-input w3-border "
-																name="setType"
-		{{else}}
-																class="valueType w3-input w3-border classTrafficFlowObserved inputTrafficFlowObserved{{pk}}Type w3-input w3-border "
-																name="type"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setType', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_type')); }, function() { addError($('#{{classApiMethodMethod}}_type')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{trafficFlowObserved_.type}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{pk}}Type varTrafficFlowObservedType ">{{trafficFlowObserved_.type}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varTrafficFlowObserved{{pk}}Type varTrafficFlowObservedType ">{{trafficFlowObserved_.type}}</span>
-		{{/eq}}
-{{/inline}}
-
 {{#*inline "htmVehicleSubType"}}
 <!-- #*inline "htmVehicleSubType" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
@@ -4187,18 +4189,18 @@
 		{{/eq}}
 {{/inline}}
 
-{{#*inline "htmCustomRouteId"}}
-<!-- #*inline "htmCustomRouteId" -->
+{{#*inline "htmLaneAreaDetectorId"}}
+<!-- #*inline "htmLaneAreaDetectorId" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}TrafficFlowObservedCustomRouteId">
+										<div id="suggest{{classApiMethodMethod}}TrafficFlowObservedLaneAreaDetectorId">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_customRouteId">route ID</label>
+													<label for="{{classApiMethodMethod}}_laneAreaDetectorId">lane area detector ID</label>
 												</div>
 											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputCustomRouteId" roleForWrite=roleForWrite roleForRead=roleForRead}}
+														{{> "inputLaneAreaDetectorId" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
@@ -4207,39 +4209,39 @@
 								</div>
 {{/inline}}
 
-{{#*inline "inputCustomRouteId"}}
+{{#*inline "inputLaneAreaDetectorId"}}
 		{{#eq roleForWriteBool "true"}}
 														<input
 															type="text"
-															placeholder="route ID"
-															title="The unique ID of the route in SUMO. "															id="{{classApiMethodMethod}}_customRouteId"
+															placeholder="lane area detector ID"
+															title="The unique ID of the lane area detector in SUMO. "															id="{{classApiMethodMethod}}_laneAreaDetectorId"
 	{{#eq "Page" classApiMethodMethod}}
-																class="setCustomRouteId classTrafficFlowObserved inputTrafficFlowObserved{{pk}}CustomRouteId w3-input w3-border "
-																name="setCustomRouteId"
+																class="setLaneAreaDetectorId classTrafficFlowObserved inputTrafficFlowObserved{{pk}}LaneAreaDetectorId w3-input w3-border "
+																name="setLaneAreaDetectorId"
 	{{else}}
 		{{#eq "PATCH" classApiMethodMethod}}
-																class="setCustomRouteId classTrafficFlowObserved inputTrafficFlowObserved{{pk}}CustomRouteId w3-input w3-border "
-																name="setCustomRouteId"
+																class="setLaneAreaDetectorId classTrafficFlowObserved inputTrafficFlowObserved{{pk}}LaneAreaDetectorId w3-input w3-border "
+																name="setLaneAreaDetectorId"
 		{{else}}
-																class="valueCustomRouteId w3-input w3-border classTrafficFlowObserved inputTrafficFlowObserved{{pk}}CustomRouteId w3-input w3-border "
-																name="customRouteId"
+																class="valueLaneAreaDetectorId w3-input w3-border classTrafficFlowObserved inputTrafficFlowObserved{{pk}}LaneAreaDetectorId w3-input w3-border "
+																name="laneAreaDetectorId"
 		{{/eq}}
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setCustomRouteId', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_customRouteId')); }, function() { addError($('#{{classApiMethodMethod}}_customRouteId')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setLaneAreaDetectorId', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_laneAreaDetectorId')); }, function() { addError($('#{{classApiMethodMethod}}_laneAreaDetectorId')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
-															value="{{trafficFlowObserved_.customRouteId}}"
+															value="{{trafficFlowObserved_.laneAreaDetectorId}}"
 	{{/eq}}
 														/>
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varTrafficFlowObserved{{pk}}CustomRouteId varTrafficFlowObservedCustomRouteId ">{{trafficFlowObserved_.customRouteId}}</span>
+															<span class="varTrafficFlowObserved{{pk}}LaneAreaDetectorId varTrafficFlowObservedLaneAreaDetectorId ">{{trafficFlowObserved_.laneAreaDetectorId}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varTrafficFlowObserved{{pk}}CustomRouteId varTrafficFlowObservedCustomRouteId ">{{trafficFlowObserved_.customRouteId}}</span>
+														<span class="varTrafficFlowObserved{{pk}}LaneAreaDetectorId varTrafficFlowObservedLaneAreaDetectorId ">{{trafficFlowObserved_.laneAreaDetectorId}}</span>
 		{{/eq}}
 {{/inline}}
 

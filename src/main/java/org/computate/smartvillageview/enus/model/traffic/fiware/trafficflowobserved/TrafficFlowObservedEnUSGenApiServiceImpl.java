@@ -688,14 +688,6 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 							num++;
 							bParams.add(o2.sqlUserKey());
 						break;
-					case "setLocation":
-							o2.setLocation(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(TrafficFlowObserved.VAR_location + "=$" + num);
-							num++;
-							bParams.add(o2.sqlLocation());
-						break;
 					case "setColor":
 							o2.setColor(jsonObject.getString(entityVar));
 							if(bParams.size() > 0)
@@ -712,6 +704,30 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 							num++;
 							bParams.add(o2.sqlEntityId());
 						break;
+					case "setTrafficSimulationId":
+							o2.setTrafficSimulationId(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_trafficSimulationId + "=$" + num);
+							num++;
+							bParams.add(o2.sqlTrafficSimulationId());
+						break;
+					case "setLaneAreaDetectorId":
+							o2.setLaneAreaDetectorId(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_laneAreaDetectorId + "=$" + num);
+							num++;
+							bParams.add(o2.sqlLaneAreaDetectorId());
+						break;
+					case "setLocation":
+							o2.setLocation(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_location + "=$" + num);
+							num++;
+							bParams.add(o2.sqlLocation());
+						break;
 					case "setSimulationName":
 							o2.setSimulationName(jsonObject.getString(entityVar));
 							if(bParams.size() > 0)
@@ -727,6 +743,14 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 							bSql.append(TrafficFlowObserved.VAR_sumocfgPath + "=$" + num);
 							num++;
 							bParams.add(o2.sqlSumocfgPath());
+						break;
+					case "setCustomTrafficLightId":
+							o2.setCustomTrafficLightId(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficFlowObserved.VAR_customTrafficLightId + "=$" + num);
+							num++;
+							bParams.add(o2.sqlCustomTrafficLightId());
 						break;
 					case "setAddress":
 							o2.setAddress(jsonObject.getJsonObject(entityVar));
@@ -928,14 +952,6 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 							num++;
 							bParams.add(o2.sqlSource());
 						break;
-					case "setType":
-							o2.setType(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(TrafficFlowObserved.VAR_type + "=$" + num);
-							num++;
-							bParams.add(o2.sqlType());
-						break;
 					case "setVehicleSubType":
 							o2.setVehicleSubType(jsonObject.getString(entityVar));
 							if(bParams.size() > 0)
@@ -951,14 +967,6 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 							bSql.append(TrafficFlowObserved.VAR_vehicleType + "=$" + num);
 							num++;
 							bParams.add(o2.sqlVehicleType());
-						break;
-					case "setCustomRouteId":
-							o2.setCustomRouteId(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(TrafficFlowObserved.VAR_customRouteId + "=$" + num);
-							num++;
-							bParams.add(o2.sqlCustomRouteId());
 						break;
 					case "setCustomSigma":
 							o2.setCustomSigma(jsonObject.getString(entityVar));
@@ -1023,14 +1031,6 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 							bSql.append(TrafficFlowObserved.VAR_customQueueLengthThreshold + "=$" + num);
 							num++;
 							bParams.add(o2.sqlCustomQueueLengthThreshold());
-						break;
-					case "setCustomTrafficLightId":
-							o2.setCustomTrafficLightId(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(TrafficFlowObserved.VAR_customTrafficLightId + "=$" + num);
-							num++;
-							bParams.add(o2.sqlCustomTrafficLightId());
 						break;
 				}
 			}
@@ -1393,15 +1393,6 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 						num++;
 						bParams.add(o2.sqlUserKey());
 						break;
-					case TrafficFlowObserved.VAR_location:
-						o2.setLocation(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(TrafficFlowObserved.VAR_location + "=$" + num);
-						num++;
-						bParams.add(o2.sqlLocation());
-						break;
 					case TrafficFlowObserved.VAR_color:
 						o2.setColor(jsonObject.getString(entityVar));
 						if(bParams.size() > 0) {
@@ -1420,6 +1411,33 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 						num++;
 						bParams.add(o2.sqlEntityId());
 						break;
+					case TrafficFlowObserved.VAR_trafficSimulationId:
+						o2.setTrafficSimulationId(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_trafficSimulationId + "=$" + num);
+						num++;
+						bParams.add(o2.sqlTrafficSimulationId());
+						break;
+					case TrafficFlowObserved.VAR_laneAreaDetectorId:
+						o2.setLaneAreaDetectorId(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_laneAreaDetectorId + "=$" + num);
+						num++;
+						bParams.add(o2.sqlLaneAreaDetectorId());
+						break;
+					case TrafficFlowObserved.VAR_location:
+						o2.setLocation(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_location + "=$" + num);
+						num++;
+						bParams.add(o2.sqlLocation());
+						break;
 					case TrafficFlowObserved.VAR_simulationName:
 						o2.setSimulationName(jsonObject.getString(entityVar));
 						if(bParams.size() > 0) {
@@ -1437,6 +1455,15 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 						bSql.append(TrafficFlowObserved.VAR_sumocfgPath + "=$" + num);
 						num++;
 						bParams.add(o2.sqlSumocfgPath());
+						break;
+					case TrafficFlowObserved.VAR_customTrafficLightId:
+						o2.setCustomTrafficLightId(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficFlowObserved.VAR_customTrafficLightId + "=$" + num);
+						num++;
+						bParams.add(o2.sqlCustomTrafficLightId());
 						break;
 					case TrafficFlowObserved.VAR_address:
 						o2.setAddress(jsonObject.getJsonObject(entityVar));
@@ -1663,15 +1690,6 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 						num++;
 						bParams.add(o2.sqlSource());
 						break;
-					case TrafficFlowObserved.VAR_type:
-						o2.setType(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(TrafficFlowObserved.VAR_type + "=$" + num);
-						num++;
-						bParams.add(o2.sqlType());
-						break;
 					case TrafficFlowObserved.VAR_vehicleSubType:
 						o2.setVehicleSubType(jsonObject.getString(entityVar));
 						if(bParams.size() > 0) {
@@ -1689,15 +1707,6 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 						bSql.append(TrafficFlowObserved.VAR_vehicleType + "=$" + num);
 						num++;
 						bParams.add(o2.sqlVehicleType());
-						break;
-					case TrafficFlowObserved.VAR_customRouteId:
-						o2.setCustomRouteId(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(TrafficFlowObserved.VAR_customRouteId + "=$" + num);
-						num++;
-						bParams.add(o2.sqlCustomRouteId());
 						break;
 					case TrafficFlowObserved.VAR_customSigma:
 						o2.setCustomSigma(jsonObject.getString(entityVar));
@@ -1770,15 +1779,6 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 						bSql.append(TrafficFlowObserved.VAR_customQueueLengthThreshold + "=$" + num);
 						num++;
 						bParams.add(o2.sqlCustomQueueLengthThreshold());
-						break;
-					case TrafficFlowObserved.VAR_customTrafficLightId:
-						o2.setCustomTrafficLightId(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(TrafficFlowObserved.VAR_customTrafficLightId + "=$" + num);
-						num++;
-						bParams.add(o2.sqlCustomTrafficLightId());
 						break;
 					}
 				}

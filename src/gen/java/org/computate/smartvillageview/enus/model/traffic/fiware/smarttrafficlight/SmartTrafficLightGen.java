@@ -49,9 +49,9 @@ import io.vertx.core.Future;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.computate.search.response.solr.SolrResponse;
 
-/**	
-<ol>
-0<h3>Suggestions that can generate more code for you: </h3></ol>
+/**
+ * <ol>
+<h3>Suggestions that can generate more code for you: </h3> * </ol>
  * <li>You can add a class comment "SqlOrder: " followed by an Integer to sort this class compared when generating the SQL code to create and drop tables. 
  * The Order comment allows you do define which order the SQL code is generated. 
  * </li>
@@ -340,6 +340,84 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 
 	public String sqlSmartTrafficLightName() {
 		return smartTrafficLightName;
+	}
+
+	//////////////
+	// routeIds //
+	//////////////
+
+
+	/**	 The entity routeIds
+	 *	 It is constructed before being initialized with the constructor by default. 
+	 */
+	@JsonProperty
+	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
+	@JsonInclude(Include.NON_NULL)
+	protected List<String> routeIds = new ArrayList<String>();
+
+	/**	<br> The entity routeIds
+	 *  It is constructed before being initialized with the constructor by default. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLight&fq=entiteVar_enUS_indexed_string:routeIds">Find the entity routeIds in Solr</a>
+	 * <br>
+	 * @param w is the entity already constructed. 
+	 **/
+	protected abstract void _routeIds(List<String> w);
+
+	public List<String> getRouteIds() {
+		return routeIds;
+	}
+
+	public void setRouteIds(List<String> routeIds) {
+		this.routeIds = routeIds;
+	}
+	public void setRouteIds(String o) {
+		String l = SmartTrafficLight.staticSetRouteIds(siteRequest_, o);
+		if(l != null)
+			addRouteIds(l);
+	}
+	public static String staticSetRouteIds(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	public SmartTrafficLight addRouteIds(String...objects) {
+		for(String o : objects) {
+			addRouteIds(o);
+		}
+		return (SmartTrafficLight)this;
+	}
+	public SmartTrafficLight addRouteIds(String o) {
+		if(o != null)
+			this.routeIds.add(o);
+		return (SmartTrafficLight)this;
+	}
+	@JsonIgnore
+	public void setRouteIds(JsonArray objects) {
+		routeIds.clear();
+		if(objects == null)
+			return;
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
+			addRouteIds(o);
+		}
+	}
+	protected SmartTrafficLight routeIdsInit() {
+		_routeIds(routeIds);
+		return (SmartTrafficLight)this;
+	}
+
+	public static String staticSearchRouteIds(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrRouteIds(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqRouteIds(SiteRequestEnUS siteRequest_, String o) {
+		return SmartTrafficLight.staticSearchStrRouteIds(siteRequest_, SmartTrafficLight.staticSearchRouteIds(siteRequest_, SmartTrafficLight.staticSetRouteIds(siteRequest_, o)));
+	}
+
+	public String[] sqlRouteIds() {
+		return routeIds.stream().map(v -> (String)v).toArray(String[]::new);
 	}
 
 	//////////////////
@@ -2477,6 +2555,7 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 			try {
 				entityIdInit();
 				smartTrafficLightNameInit();
+				routeIdsInit();
 				routeIdNorthInit();
 				routeIdEastInit();
 				trafficFlowObservedIdsInit();
@@ -2582,6 +2661,8 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 				return oSmartTrafficLight.entityId;
 			case "smartTrafficLightName":
 				return oSmartTrafficLight.smartTrafficLightName;
+			case "routeIds":
+				return oSmartTrafficLight.routeIds;
 			case "routeIdNorth":
 				return oSmartTrafficLight.routeIdNorth;
 			case "routeIdEast":
@@ -2692,6 +2773,8 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 			return SmartTrafficLight.staticSetEntityId(siteRequest_, o);
 		case "smartTrafficLightName":
 			return SmartTrafficLight.staticSetSmartTrafficLightName(siteRequest_, o);
+		case "routeIds":
+			return SmartTrafficLight.staticSetRouteIds(siteRequest_, o);
 		case "routeIdNorth":
 			return SmartTrafficLight.staticSetRouteIdNorth(siteRequest_, o);
 		case "routeIdEast":
@@ -2764,6 +2847,8 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 			return SmartTrafficLight.staticSearchEntityId(siteRequest_, (String)o);
 		case "smartTrafficLightName":
 			return SmartTrafficLight.staticSearchSmartTrafficLightName(siteRequest_, (String)o);
+		case "routeIds":
+			return SmartTrafficLight.staticSearchRouteIds(siteRequest_, (String)o);
 		case "routeIdNorth":
 			return SmartTrafficLight.staticSearchRouteIdNorth(siteRequest_, (String)o);
 		case "routeIdEast":
@@ -2836,6 +2921,8 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 			return SmartTrafficLight.staticSearchStrEntityId(siteRequest_, (String)o);
 		case "smartTrafficLightName":
 			return SmartTrafficLight.staticSearchStrSmartTrafficLightName(siteRequest_, (String)o);
+		case "routeIds":
+			return SmartTrafficLight.staticSearchStrRouteIds(siteRequest_, (String)o);
 		case "routeIdNorth":
 			return SmartTrafficLight.staticSearchStrRouteIdNorth(siteRequest_, (String)o);
 		case "routeIdEast":
@@ -2908,6 +2995,8 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 			return SmartTrafficLight.staticSearchFqEntityId(siteRequest_, o);
 		case "smartTrafficLightName":
 			return SmartTrafficLight.staticSearchFqSmartTrafficLightName(siteRequest_, o);
+		case "routeIds":
+			return SmartTrafficLight.staticSearchFqRouteIds(siteRequest_, o);
 		case "routeIdNorth":
 			return SmartTrafficLight.staticSearchFqRouteIdNorth(siteRequest_, o);
 		case "routeIdEast":
@@ -3000,6 +3089,18 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 				}
 				saves.add("smartTrafficLightName");
 				return val;
+			} else if("routeids".equals(varLower)) {
+				if(val instanceof List<?>) {
+					((List<String>)val).stream().forEach(v -> addRouteIds(v));
+				} else if(val instanceof JsonArray) {
+					((JsonArray)val).stream().forEach(v -> setRouteIds(v.toString()));
+				} else if(val instanceof String[]) {
+					Arrays.asList((String[])val).stream().forEach(v -> setRouteIds((String)v));
+				}
+				if(!saves.contains("routeIds")) {
+					saves.add("routeIds");
+				}
+				return val;
 			} else if("routeidnorth".equals(varLower)) {
 				if(val instanceof String) {
 					setRouteIdNorth((String)val);
@@ -3066,7 +3167,7 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 	}
 	public void populateSmartTrafficLight(SolrResponse.Doc doc) {
 		SmartTrafficLight oSmartTrafficLight = (SmartTrafficLight)this;
-		saves = doc.get("saves_docvalues_strings");
+		saves = Optional.ofNullable((ArrayList<String>)doc.get("saves_docvalues_strings")).orElse(new ArrayList<String>());
 		if(saves != null) {
 
 			if(saves.contains("entityId")) {
@@ -3079,6 +3180,12 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 				String smartTrafficLightName = (String)doc.get("smartTrafficLightName_docvalues_string");
 				if(smartTrafficLightName != null)
 					oSmartTrafficLight.setSmartTrafficLightName(smartTrafficLightName);
+			}
+
+			if(saves.contains("routeIds")) {
+				List<String> routeIds = (List<String>)doc.get("routeIds_docvalues_strings");
+				if(routeIds != null)
+					oSmartTrafficLight.routeIds.addAll(routeIds);
 			}
 
 			if(saves.contains("routeIdNorth")) {
@@ -3240,6 +3347,13 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 		if(smartTrafficLightName != null) {
 			doc.put("smartTrafficLightName_docvalues_string", smartTrafficLightName);
 		}
+		if(routeIds != null) {
+			JsonArray l = new JsonArray();
+			doc.put("routeIds_docvalues_strings", l);
+			for(String o : routeIds) {
+				l.add(o);
+			}
+		}
 		if(routeIdNorth != null) {
 			doc.put("routeIdNorth_docvalues_string", routeIdNorth);
 		}
@@ -3337,6 +3451,8 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 				return "entityId_docvalues_string";
 			case "smartTrafficLightName":
 				return "smartTrafficLightName_docvalues_string";
+			case "routeIds":
+				return "routeIds_docvalues_strings";
 			case "routeIdNorth":
 				return "routeIdNorth_docvalues_string";
 			case "routeIdEast":
@@ -3398,6 +3514,8 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 				return "entityId_docvalues_string";
 			case "smartTrafficLightName":
 				return "smartTrafficLightName_docvalues_string";
+			case "routeIds":
+				return "routeIds_docvalues_strings";
 			case "routeIdNorth":
 				return "routeIdNorth_docvalues_string";
 			case "routeIdEast":
@@ -3459,6 +3577,8 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 				return "entityId";
 			case "smartTrafficLightName_docvalues_string":
 				return "smartTrafficLightName";
+			case "routeIds_docvalues_strings":
+				return "routeIds";
 			case "routeIdNorth_docvalues_string":
 				return "routeIdNorth";
 			case "routeIdEast_docvalues_string":
@@ -3540,6 +3660,9 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 
 		oSmartTrafficLight.setEntityId(Optional.ofNullable(doc.get("entityId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSmartTrafficLight.setSmartTrafficLightName(Optional.ofNullable(doc.get("smartTrafficLightName_docvalues_string")).map(v -> v.toString()).orElse(null));
+		Optional.ofNullable((List<?>)doc.get("routeIds_docvalues_strings")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
+			oSmartTrafficLight.addRouteIds(v.toString());
+		});
 		oSmartTrafficLight.setRouteIdNorth(Optional.ofNullable(doc.get("routeIdNorth_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSmartTrafficLight.setRouteIdEast(Optional.ofNullable(doc.get("routeIdEast_docvalues_string")).map(v -> v.toString()).orElse(null));
 		Optional.ofNullable((List<?>)doc.get("trafficFlowObservedIds_docvalues_strings")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
@@ -3588,6 +3711,8 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 				apiRequest.addVars("entityId");
 			if(!Objects.equals(smartTrafficLightName, original.getSmartTrafficLightName()))
 				apiRequest.addVars("smartTrafficLightName");
+			if(!Objects.equals(routeIds, original.getRouteIds()))
+				apiRequest.addVars("routeIds");
 			if(!Objects.equals(routeIdNorth, original.getRouteIdNorth()))
 				apiRequest.addVars("routeIdNorth");
 			if(!Objects.equals(routeIdEast, original.getRouteIdEast()))
@@ -3651,6 +3776,7 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 		sb.append(super.toString());
 		sb.append(Optional.ofNullable(entityId).map(v -> "entityId: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(smartTrafficLightName).map(v -> "smartTrafficLightName: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(routeIds).map(v -> "routeIds: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(routeIdNorth).map(v -> "routeIdNorth: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(routeIdEast).map(v -> "routeIdEast: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(trafficFlowObservedIds).map(v -> "trafficFlowObservedIds: " + v + "\n").orElse(""));
@@ -3682,6 +3808,7 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 	public static final String CLASS_SIMPLE_NAME = "SmartTrafficLight";
 	public static final String VAR_entityId = "entityId";
 	public static final String VAR_smartTrafficLightName = "smartTrafficLightName";
+	public static final String VAR_routeIds = "routeIds";
 	public static final String VAR_routeIdNorth = "routeIdNorth";
 	public static final String VAR_routeIdEast = "routeIdEast";
 	public static final String VAR_trafficFlowObservedIds = "trafficFlowObservedIds";
@@ -3728,6 +3855,7 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 	public static List<String> varsFqSmartTrafficLight(List<String> vars) {
 		vars.add(VAR_entityId);
 		vars.add(VAR_smartTrafficLightName);
+		vars.add(VAR_routeIds);
 		vars.add(VAR_routeIdNorth);
 		vars.add(VAR_routeIdEast);
 		vars.add(VAR_trafficFlowObservedIds);
@@ -3787,6 +3915,7 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 
 	public static final String DISPLAY_NAME_entityId = "entity ID";
 	public static final String DISPLAY_NAME_smartTrafficLightName = "smart traffic light name";
+	public static final String DISPLAY_NAME_routeIds = "route IDs";
 	public static final String DISPLAY_NAME_routeIdNorth = "route ID North";
 	public static final String DISPLAY_NAME_routeIdEast = "route ID East";
 	public static final String DISPLAY_NAME_trafficFlowObservedIds = "TrafficFlowObserveds";
@@ -3828,6 +3957,8 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 			return DISPLAY_NAME_entityId;
 		case VAR_smartTrafficLightName:
 			return DISPLAY_NAME_smartTrafficLightName;
+		case VAR_routeIds:
+			return DISPLAY_NAME_routeIds;
 		case VAR_routeIdNorth:
 			return DISPLAY_NAME_routeIdNorth;
 		case VAR_routeIdEast:
@@ -3958,6 +4089,8 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 			return "String";
 		case VAR_smartTrafficLightName:
 			return "String";
+		case VAR_routeIds:
+			return "List";
 		case VAR_routeIdNorth:
 			return "String";
 		case VAR_routeIdEast:
@@ -4038,6 +4171,8 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 			return 5;
 		case VAR_smartTrafficLightName:
 			return 5;
+		case VAR_routeIds:
+			return 6;
 		case VAR_routeIdNorth:
 			return 6;
 		case VAR_routeIdEast:
@@ -4094,6 +4229,8 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 		case VAR_entityId:
 			return 1;
 		case VAR_smartTrafficLightName:
+			return 2;
+		case VAR_routeIds:
 			return 2;
 		case VAR_routeIdNorth:
 			return 2;

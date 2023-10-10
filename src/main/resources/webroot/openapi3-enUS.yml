@@ -17875,6 +17875,10 @@ components:
                     type: string
                   smartTrafficLightName:
                     type: string
+                  routeIds:
+                    type: array
+                    items:
+                      type: string
                   routeIdNorth:
                     type: string
                   routeIdEast:
@@ -17959,6 +17963,23 @@ components:
               type: string
             removeAllSmartTrafficLightName:
               type: string
+            setRouteIds:
+              type: array
+              nullable: true
+              items:
+                type: string
+            removeRouteIds:
+              type: string
+            removeAllRouteIds:
+              type: array
+              items:
+                type: string
+            addRouteIds:
+              type: string
+            addAllRouteIds:
+              type: array
+              items:
+                type: string
             setRouteIdNorth:
               type: string
               nullable: true
@@ -18223,6 +18244,23 @@ components:
               type: string
             removeAllSmartTrafficLightName:
               type: string
+            setRouteIds:
+              type: array
+              nullable: true
+              items:
+                type: string
+            removeRouteIds:
+              type: string
+            removeAllRouteIds:
+              type: array
+              items:
+                type: string
+            addRouteIds:
+              type: string
+            addAllRouteIds:
+              type: array
+              items:
+                type: string
             setRouteIdNorth:
               type: string
               nullable: true
@@ -18477,6 +18515,10 @@ components:
               type: string
             smartTrafficLightName:
               type: string
+            routeIds:
+              type: array
+              items:
+                type: string
             routeIdNorth:
               type: string
             routeIdEast:
@@ -18551,6 +18593,10 @@ components:
               type: string
             smartTrafficLightName:
               type: string
+            routeIds:
+              type: array
+              items:
+                type: string
             routeIdNorth:
               type: string
             routeIdEast:
@@ -18625,6 +18671,10 @@ components:
               type: string
             smartTrafficLightName:
               type: string
+            routeIds:
+              type: array
+              items:
+                type: string
             routeIdNorth:
               type: string
             routeIdEast:
@@ -18699,6 +18749,10 @@ components:
               type: string
             smartTrafficLightName:
               type: string
+            routeIds:
+              type: array
+              items:
+                type: string
             routeIdNorth:
               type: string
             routeIdEast:
@@ -18773,6 +18827,10 @@ components:
               type: string
             smartTrafficLightName:
               type: string
+            routeIds:
+              type: array
+              items:
+                type: string
             routeIdNorth:
               type: string
             routeIdEast:
@@ -18860,22 +18918,28 @@ components:
               items:
                 type: object
                 properties:
-                  location:
-                    type: string
                   color:
                     type: string
                   entityId:
                     type: string
+                  trafficSimulationId:
+                    type: string
+                  laneAreaDetectorId:
+                    type: string
+                  location:
+                    type: string
                   simulationName:
                     type: string
                   sumocfgPath:
+                    type: string
+                  customTrafficLightId:
                     type: string
                   address:
                     type: object
                   alternateName:
                     type: string
                   areaServed:
-                    type: string
+                    type: object
                   averageGapDistance:
                     type: string
                   averageHeadwayTime:
@@ -18920,13 +18984,9 @@ components:
                     type: object
                   source:
                     type: string
-                  type:
-                    type: string
                   vehicleSubType:
                     type: string
                   vehicleType:
-                    type: string
-                  customRouteId:
                     type: string
                   customSigma:
                     type: string
@@ -18944,19 +19004,10 @@ components:
                     type: string
                   customQueueLengthThreshold:
                     type: string
-                  customTrafficLightId:
-                    type: string
     PATCHTrafficFlowObservedRequest:
       allOf:
         - type: object
           properties:
-            setLocation:
-              type: string
-              nullable: true
-            removeLocation:
-              type: string
-            removeAllLocation:
-              type: string
             setColor:
               type: string
               nullable: true
@@ -18971,6 +19022,27 @@ components:
               type: string
             removeAllEntityId:
               type: string
+            setTrafficSimulationId:
+              type: string
+              nullable: true
+            removeTrafficSimulationId:
+              type: string
+            removeAllTrafficSimulationId:
+              type: string
+            setLaneAreaDetectorId:
+              type: string
+              nullable: true
+            removeLaneAreaDetectorId:
+              type: string
+            removeAllLaneAreaDetectorId:
+              type: string
+            setLocation:
+              type: string
+              nullable: true
+            removeLocation:
+              type: string
+            removeAllLocation:
+              type: string
             setSimulationName:
               type: string
               nullable: true
@@ -18984,6 +19056,13 @@ components:
             removeSumocfgPath:
               type: string
             removeAllSumocfgPath:
+              type: string
+            setCustomTrafficLightId:
+              type: string
+              nullable: true
+            removeCustomTrafficLightId:
+              type: string
+            removeAllCustomTrafficLightId:
               type: string
             setAddress:
               type: object
@@ -19000,12 +19079,12 @@ components:
             removeAllAlternateName:
               type: string
             setAreaServed:
-              type: string
+              type: object
               nullable: true
             removeAreaServed:
-              type: string
+              type: object
             removeAllAreaServed:
-              type: string
+              type: object
             setAverageGapDistance:
               type: string
               nullable: true
@@ -19160,13 +19239,6 @@ components:
               type: string
             removeAllSource:
               type: string
-            setType:
-              type: string
-              nullable: true
-            removeType:
-              type: string
-            removeAllType:
-              type: string
             setVehicleSubType:
               type: string
               nullable: true
@@ -19180,13 +19252,6 @@ components:
             removeVehicleType:
               type: string
             removeAllVehicleType:
-              type: string
-            setCustomRouteId:
-              type: string
-              nullable: true
-            removeCustomRouteId:
-              type: string
-            removeAllCustomRouteId:
               type: string
             setCustomSigma:
               type: string
@@ -19243,25 +19308,11 @@ components:
             removeCustomQueueLengthThreshold:
               type: string
             removeAllCustomQueueLengthThreshold:
-              type: string
-            setCustomTrafficLightId:
-              type: string
-              nullable: true
-            removeCustomTrafficLightId:
-              type: string
-            removeAllCustomTrafficLightId:
               type: string
     PATCHTrafficFlowObservedResponse:
       allOf:
         - type: object
           properties:
-            setLocation:
-              type: string
-              nullable: true
-            removeLocation:
-              type: string
-            removeAllLocation:
-              type: string
             setColor:
               type: string
               nullable: true
@@ -19276,6 +19327,27 @@ components:
               type: string
             removeAllEntityId:
               type: string
+            setTrafficSimulationId:
+              type: string
+              nullable: true
+            removeTrafficSimulationId:
+              type: string
+            removeAllTrafficSimulationId:
+              type: string
+            setLaneAreaDetectorId:
+              type: string
+              nullable: true
+            removeLaneAreaDetectorId:
+              type: string
+            removeAllLaneAreaDetectorId:
+              type: string
+            setLocation:
+              type: string
+              nullable: true
+            removeLocation:
+              type: string
+            removeAllLocation:
+              type: string
             setSimulationName:
               type: string
               nullable: true
@@ -19289,6 +19361,13 @@ components:
             removeSumocfgPath:
               type: string
             removeAllSumocfgPath:
+              type: string
+            setCustomTrafficLightId:
+              type: string
+              nullable: true
+            removeCustomTrafficLightId:
+              type: string
+            removeAllCustomTrafficLightId:
               type: string
             setAddress:
               type: object
@@ -19305,12 +19384,12 @@ components:
             removeAllAlternateName:
               type: string
             setAreaServed:
-              type: string
+              type: object
               nullable: true
             removeAreaServed:
-              type: string
+              type: object
             removeAllAreaServed:
-              type: string
+              type: object
             setAverageGapDistance:
               type: string
               nullable: true
@@ -19465,13 +19544,6 @@ components:
               type: string
             removeAllSource:
               type: string
-            setType:
-              type: string
-              nullable: true
-            removeType:
-              type: string
-            removeAllType:
-              type: string
             setVehicleSubType:
               type: string
               nullable: true
@@ -19485,13 +19557,6 @@ components:
             removeVehicleType:
               type: string
             removeAllVehicleType:
-              type: string
-            setCustomRouteId:
-              type: string
-              nullable: true
-            removeCustomRouteId:
-              type: string
-            removeAllCustomRouteId:
               type: string
             setCustomSigma:
               type: string
@@ -19549,33 +19614,32 @@ components:
               type: string
             removeAllCustomQueueLengthThreshold:
               type: string
-            setCustomTrafficLightId:
-              type: string
-              nullable: true
-            removeCustomTrafficLightId:
-              type: string
-            removeAllCustomTrafficLightId:
-              type: string
     POSTTrafficFlowObservedRequest:
       allOf:
         - type: object
           properties:
-            location:
-              type: string
             color:
               type: string
             entityId:
               type: string
+            trafficSimulationId:
+              type: string
+            laneAreaDetectorId:
+              type: string
+            location:
+              type: string
             simulationName:
               type: string
             sumocfgPath:
+              type: string
+            customTrafficLightId:
               type: string
             address:
               type: object
             alternateName:
               type: string
             areaServed:
-              type: string
+              type: object
             averageGapDistance:
               type: string
             averageHeadwayTime:
@@ -19620,13 +19684,9 @@ components:
               type: object
             source:
               type: string
-            type:
-              type: string
             vehicleSubType:
               type: string
             vehicleType:
-              type: string
-            customRouteId:
               type: string
             customSigma:
               type: string
@@ -19643,29 +19703,33 @@ components:
             customDemandScalingFactor:
               type: string
             customQueueLengthThreshold:
-              type: string
-            customTrafficLightId:
               type: string
     POSTTrafficFlowObservedResponse:
       allOf:
         - type: object
           properties:
-            location:
-              type: string
             color:
               type: string
             entityId:
               type: string
+            trafficSimulationId:
+              type: string
+            laneAreaDetectorId:
+              type: string
+            location:
+              type: string
             simulationName:
               type: string
             sumocfgPath:
+              type: string
+            customTrafficLightId:
               type: string
             address:
               type: object
             alternateName:
               type: string
             areaServed:
-              type: string
+              type: object
             averageGapDistance:
               type: string
             averageHeadwayTime:
@@ -19710,13 +19774,9 @@ components:
               type: object
             source:
               type: string
-            type:
-              type: string
             vehicleSubType:
               type: string
             vehicleType:
-              type: string
-            customRouteId:
               type: string
             customSigma:
               type: string
@@ -19733,29 +19793,33 @@ components:
             customDemandScalingFactor:
               type: string
             customQueueLengthThreshold:
-              type: string
-            customTrafficLightId:
               type: string
     PUTImportTrafficFlowObservedRequest:
       allOf:
         - type: object
           properties:
-            location:
-              type: string
             color:
               type: string
             entityId:
               type: string
+            trafficSimulationId:
+              type: string
+            laneAreaDetectorId:
+              type: string
+            location:
+              type: string
             simulationName:
               type: string
             sumocfgPath:
+              type: string
+            customTrafficLightId:
               type: string
             address:
               type: object
             alternateName:
               type: string
             areaServed:
-              type: string
+              type: object
             averageGapDistance:
               type: string
             averageHeadwayTime:
@@ -19800,13 +19864,9 @@ components:
               type: object
             source:
               type: string
-            type:
-              type: string
             vehicleSubType:
               type: string
             vehicleType:
-              type: string
-            customRouteId:
               type: string
             customSigma:
               type: string
@@ -19823,29 +19883,33 @@ components:
             customDemandScalingFactor:
               type: string
             customQueueLengthThreshold:
-              type: string
-            customTrafficLightId:
               type: string
     PUTImportTrafficFlowObservedResponse:
       allOf:
         - type: object
           properties:
-            location:
-              type: string
             color:
               type: string
             entityId:
               type: string
+            trafficSimulationId:
+              type: string
+            laneAreaDetectorId:
+              type: string
+            location:
+              type: string
             simulationName:
               type: string
             sumocfgPath:
+              type: string
+            customTrafficLightId:
               type: string
             address:
               type: object
             alternateName:
               type: string
             areaServed:
-              type: string
+              type: object
             averageGapDistance:
               type: string
             averageHeadwayTime:
@@ -19890,13 +19954,9 @@ components:
               type: object
             source:
               type: string
-            type:
-              type: string
             vehicleSubType:
               type: string
             vehicleType:
-              type: string
-            customRouteId:
               type: string
             customSigma:
               type: string
@@ -19913,29 +19973,33 @@ components:
             customDemandScalingFactor:
               type: string
             customQueueLengthThreshold:
-              type: string
-            customTrafficLightId:
               type: string
     GETTrafficFlowObservedResponse:
       allOf:
         - type: object
           properties:
-            location:
-              type: string
             color:
               type: string
             entityId:
               type: string
+            trafficSimulationId:
+              type: string
+            laneAreaDetectorId:
+              type: string
+            location:
+              type: string
             simulationName:
               type: string
             sumocfgPath:
+              type: string
+            customTrafficLightId:
               type: string
             address:
               type: object
             alternateName:
               type: string
             areaServed:
-              type: string
+              type: object
             averageGapDistance:
               type: string
             averageHeadwayTime:
@@ -19980,13 +20044,9 @@ components:
               type: object
             source:
               type: string
-            type:
-              type: string
             vehicleSubType:
               type: string
             vehicleType:
-              type: string
-            customRouteId:
               type: string
             customSigma:
               type: string
@@ -20003,8 +20063,6 @@ components:
             customDemandScalingFactor:
               type: string
             customQueueLengthThreshold:
-              type: string
-            customTrafficLightId:
               type: string
     SearchPageTrafficFlowObservedResponse:
       allOf:
@@ -20752,6 +20810,8 @@ components:
               items:
                 type: object
                 properties:
+                  entityId:
+                    type: string
                   startDateTime:
                     type: string
                     format: date-time
@@ -20833,8 +20893,6 @@ components:
                       type: string
                   laneAreaDetectorLanes:
                     type: array
-                    items:
-                      type: string
                   laneAreaDetectorPaths:
                     type: array
                     items:
@@ -20855,6 +20913,13 @@ components:
       allOf:
         - type: object
           properties:
+            setEntityId:
+              type: string
+              nullable: true
+            removeEntityId:
+              type: string
+            removeAllEntityId:
+              type: string
             setStartDateTime:
               type: string
               nullable: true
@@ -21149,20 +21214,10 @@ components:
             setLaneAreaDetectorLanes:
               type: array
               nullable: true
-              items:
-                type: string
             removeLaneAreaDetectorLanes:
-              type: string
+              type: array
             removeAllLaneAreaDetectorLanes:
               type: array
-              items:
-                type: string
-            addLaneAreaDetectorLanes:
-              type: string
-            addAllLaneAreaDetectorLanes:
-              type: array
-              items:
-                type: string
             setLaneAreaDetectorPaths:
               type: array
               nullable: true
@@ -21235,6 +21290,13 @@ components:
       allOf:
         - type: object
           properties:
+            setEntityId:
+              type: string
+              nullable: true
+            removeEntityId:
+              type: string
+            removeAllEntityId:
+              type: string
             setStartDateTime:
               type: string
               nullable: true
@@ -21529,20 +21591,10 @@ components:
             setLaneAreaDetectorLanes:
               type: array
               nullable: true
-              items:
-                type: string
             removeLaneAreaDetectorLanes:
-              type: string
+              type: array
             removeAllLaneAreaDetectorLanes:
               type: array
-              items:
-                type: string
-            addLaneAreaDetectorLanes:
-              type: string
-            addAllLaneAreaDetectorLanes:
-              type: array
-              items:
-                type: string
             setLaneAreaDetectorPaths:
               type: array
               nullable: true
@@ -21615,6 +21667,8 @@ components:
       allOf:
         - type: object
           properties:
+            entityId:
+              type: string
             startDateTime:
               type: string
               format: date-time
@@ -21696,8 +21750,6 @@ components:
                 type: string
             laneAreaDetectorLanes:
               type: array
-              items:
-                type: string
             laneAreaDetectorPaths:
               type: array
               items:
@@ -21718,6 +21770,8 @@ components:
       allOf:
         - type: object
           properties:
+            entityId:
+              type: string
             startDateTime:
               type: string
               format: date-time
@@ -21799,8 +21853,6 @@ components:
                 type: string
             laneAreaDetectorLanes:
               type: array
-              items:
-                type: string
             laneAreaDetectorPaths:
               type: array
               items:
@@ -21821,6 +21873,8 @@ components:
       allOf:
         - type: object
           properties:
+            entityId:
+              type: string
             startDateTime:
               type: string
               format: date-time
@@ -21902,8 +21956,6 @@ components:
                 type: string
             laneAreaDetectorLanes:
               type: array
-              items:
-                type: string
             laneAreaDetectorPaths:
               type: array
               items:
@@ -21924,6 +21976,8 @@ components:
       allOf:
         - type: object
           properties:
+            entityId:
+              type: string
             startDateTime:
               type: string
               format: date-time
@@ -22005,8 +22059,6 @@ components:
                 type: string
             laneAreaDetectorLanes:
               type: array
-              items:
-                type: string
             laneAreaDetectorPaths:
               type: array
               items:
@@ -22027,6 +22079,8 @@ components:
       allOf:
         - type: object
           properties:
+            entityId:
+              type: string
             startDateTime:
               type: string
               format: date-time
@@ -22108,8 +22162,6 @@ components:
                 type: string
             laneAreaDetectorLanes:
               type: array
-              items:
-                type: string
             laneAreaDetectorPaths:
               type: array
               items:
@@ -22170,6 +22222,13 @@ components:
             removeSimulationName:
               type: string
             removeAllSimulationName:
+              type: string
+            setSmartTrafficLightId:
+              type: string
+              nullable: true
+            removeSmartTrafficLightId:
+              type: string
+            removeAllSmartTrafficLightId:
               type: string
             setSmartTrafficLightName:
               type: string
@@ -22576,6 +22635,13 @@ components:
               type: string
             removeAllSimulationName:
               type: string
+            setSmartTrafficLightId:
+              type: string
+              nullable: true
+            removeSmartTrafficLightId:
+              type: string
+            removeAllSmartTrafficLightId:
+              type: string
             setSmartTrafficLightName:
               type: string
               nullable: true
@@ -22970,6 +23036,8 @@ components:
                     type: string
                   simulationName:
                     type: string
+                  smartTrafficLightId:
+                    type: string
                   smartTrafficLightName:
                     type: string
                   paramAvgVehiclePerMinFromWestToEast:
@@ -23110,6 +23178,13 @@ components:
             removeSimulationName:
               type: string
             removeAllSimulationName:
+              type: string
+            setSmartTrafficLightId:
+              type: string
+              nullable: true
+            removeSmartTrafficLightId:
+              type: string
+            removeAllSmartTrafficLightId:
               type: string
             setSmartTrafficLightName:
               type: string
@@ -23516,6 +23591,13 @@ components:
               type: string
             removeAllSimulationName:
               type: string
+            setSmartTrafficLightId:
+              type: string
+              nullable: true
+            removeSmartTrafficLightId:
+              type: string
+            removeAllSmartTrafficLightId:
+              type: string
             setSmartTrafficLightName:
               type: string
               nullable: true
@@ -23896,6 +23978,8 @@ components:
               type: string
             simulationName:
               type: string
+            smartTrafficLightId:
+              type: string
             smartTrafficLightName:
               type: string
             paramAvgVehiclePerMinFromWestToEast:
@@ -24011,6 +24095,8 @@ components:
             smartTrafficLightKey:
               type: string
             simulationName:
+              type: string
+            smartTrafficLightId:
               type: string
             smartTrafficLightName:
               type: string
@@ -24128,6 +24214,8 @@ components:
               type: string
             simulationName:
               type: string
+            smartTrafficLightId:
+              type: string
             smartTrafficLightName:
               type: string
             paramAvgVehiclePerMinFromWestToEast:
@@ -24243,6 +24331,8 @@ components:
             smartTrafficLightKey:
               type: string
             simulationName:
+              type: string
+            smartTrafficLightId:
               type: string
             smartTrafficLightName:
               type: string
@@ -24360,6 +24450,8 @@ components:
               type: string
             simulationName:
               type: string
+            smartTrafficLightId:
+              type: string
             smartTrafficLightName:
               type: string
             paramAvgVehiclePerMinFromWestToEast:
@@ -24476,6 +24568,8 @@ components:
               type: string
             simulationName:
               type: string
+            smartTrafficLightId:
+              type: string
             smartTrafficLightName:
               type: string
             paramAvgVehiclePerMinFromWestToEast:
@@ -24591,6 +24685,8 @@ components:
             smartTrafficLightKey:
               type: string
             simulationName:
+              type: string
+            smartTrafficLightId:
               type: string
             smartTrafficLightName:
               type: string

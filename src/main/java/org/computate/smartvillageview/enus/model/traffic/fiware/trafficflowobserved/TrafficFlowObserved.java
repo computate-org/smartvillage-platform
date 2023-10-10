@@ -1,17 +1,18 @@
 package org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved;
 
 import java.math.BigDecimal;
-import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
 import org.computate.search.wrap.Wrap;
 import org.computate.smartvillageview.enus.model.base.BaseModel;
 import org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLight;
+import org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation;
 import org.computate.smartvillageview.enus.result.map.MapResult;
 import org.computate.vertx.search.list.SearchList;
 
 import io.vertx.core.Promise;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.pgclient.data.Path;
 import io.vertx.pgclient.data.Point;
@@ -54,21 +55,6 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<BaseModel> {
 
 	/**
 	 * {@inheritDoc}
-	 * FiwareType: geo:json
-	 * Description: Geojson reference to the item. It can be Point, LineString, Polygon, MultiPoint, MultiLineString or MultiPolygon
-	 * Required: true
-	 * DocValues: true
-	 * Persist: true
-	 * DisplayName: map path
-	 * HtmRow: 4
-	 * HtmCell: 2
-	 * Facet: true
-	 */
-	protected void _location(Wrap<Path> w) {
-	}
-
-	/**
-	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
 	 * DisplayName: color
@@ -91,7 +77,66 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<BaseModel> {
 	 * HtmCell: 1
 	 * Facet: true
 	 */
-	protected void _entityId(Wrap<String> w) {
+	protected void _entityId(Wrap<String> w) {}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * DisplayName: traffic simulation ID
+	 * Description: The Traffic Simulation ID
+	 * HtmRow: 5
+	 * HtmCell: 2
+	 * Facet: true
+	 */
+	protected void _trafficSimulationId(Wrap<String> w) {
+	}
+
+	/**
+	 * Ignore: true
+	 */
+	protected void _trafficSimulationSearch(Promise<SearchList<TrafficSimulation>> promise) {
+		SearchList<TrafficSimulation> l = new SearchList<>();
+		if(trafficSimulationId != null) {
+			l.setC(TrafficSimulation.class);
+			l.q("*:*");
+			l.fq(String.format(TrafficSimulation.VAR_entityId + "_docvalues_string:%s", trafficSimulationId));
+			l.setStore(true);
+		}
+		promise.complete(l);
+	}
+
+	/**
+	 * Ignore: true
+	 */
+	protected void _trafficSimulation_(Wrap<TrafficSimulation> w) {
+		w.o(trafficSimulationSearch.first());
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * DisplayName: lane area detector ID
+	 * Description: The unique ID of the lane area detector in SUMO. 
+	 * HtmRow: 15
+	 * HtmCell: 1
+	 * Facet: true
+	 */
+	protected void _laneAreaDetectorId(Wrap<String> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * FiwareType: geo:point
+	 * DocValues: true
+	 * Persist: true
+	 * DisplayName: map location
+	 * HtmRow: 4
+	 * HtmCell: 2
+	 * Facet: true
+	 */
+	protected void _location(Wrap<Point> w) {
 	}
 
 	/**
@@ -104,6 +149,8 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<BaseModel> {
 	 * Facet: true
 	 */
 	protected void _simulationName(Wrap<String> w) {
+		if(trafficSimulation_ != null)
+			w.o(trafficSimulation_.getSimulationName());
 	}
 
 	/**
@@ -114,6 +161,19 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<BaseModel> {
 	 * Facet: true
 	 */
 	protected void _sumocfgPath(Wrap<String> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * DisplayName: traffic light ID
+	 * Description: The Smart Traffic Light ID
+	 * HtmRow: 17
+	 * HtmCell: 3
+	 * Facet: true
+	 */
+	protected void _customTrafficLightId(Wrap<String> w) {
 	}
 
 	/**
@@ -166,15 +226,34 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<BaseModel> {
 
 	/**
 	 * {@inheritDoc}
+	 * FiwareType: geo:linestring
+	 * DisplayName: area served
+	 * Description: The geographic area where a service or offered item is provided. Geojson reference to the item. It can be Point, LineString, Polygon, MultiPoint, MultiLineString or MultiPolygon. 
+	 * Required: true
 	 * DocValues: true
 	 * Persist: true
-	 * DisplayName: area served
-	 * Description: The geographic area where a service or offered item is provided
 	 * HtmRow: 6
 	 * HtmCell: 1
 	 * Facet: true
 	 */
-	protected void _areaServed(Wrap<String> w) {
+	protected void _areaServed(Wrap<Path> w) {
+		if(trafficSimulation_ != null && laneAreaDetectorId != null) {
+			Integer i = trafficSimulation_.getLaneAreaDetectorIds().indexOf(laneAreaDetectorId);
+			if(i != null) {
+				JsonObject detectorLanes = trafficSimulation_.getLaneAreaDetectorLanes().getJsonObject(i);
+				if(detectorLanes != null) {
+					Path path = new Path();
+					for(String laneId : detectorLanes.fieldNames()) {
+						JsonObject lane = detectorLanes.getJsonObject(laneId);
+						lane.getJsonArray("coordinates").stream().map(o -> (JsonArray)o).forEach(coordinate -> {
+							path.addPoint(new Point(Double.parseDouble(coordinate.getString(0))
+									, Double.parseDouble(coordinate.getString(1))));
+						});
+					}
+					w.o(path);
+				}
+			}
+		}
 	}
 
 	/**
@@ -481,19 +560,6 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * DisplayName: type
-	 * Description: NGSI Entity type. It has to be TrafficFlowObserved
-	 * HtmRow: 14
-	 * HtmCell: 1
-	 * Facet: true
-	 */
-	protected void _type(Wrap<String> w) {
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * DocValues: true
-	 * Persist: true
 	 * DisplayName: vehicle sub type
 	 * Description: It allows to specify a sub type of `vehicleType`, eg if the `vehicleType` is set to `Lorry` the `vehicleSubType` may be `OGV1` or `OGV2` to convey more information about the exact type of vehicle.
 	 * HtmRow: 14
@@ -520,23 +586,10 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * DisplayName: route ID
-	 * Description: The unique ID of the route in SUMO. 
-	 * HtmRow: 15
-	 * HtmCell: 1
-	 * Facet: true
-	 */
-	protected void _customRouteId(Wrap<String> w) {
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * DocValues: true
-	 * Persist: true
 	 * DisplayName: sigma
 	 * Description: The driver imperfection as a floating point number [0,1] (0 denotes perfect driving). 
 	 * HtmRow: 15
-	 * HtmCell: 2
+	 * HtmCell: 1
 	 * Facet: true
 	 */
 	protected void _customSigma(Wrap<BigDecimal> w) {
@@ -549,7 +602,7 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<BaseModel> {
 	 * DisplayName: acceleration
 	 * Description: The acceleration ability of vehicles of this type (in m/s^2). 
 	 * HtmRow: 15
-	 * HtmCell: 3
+	 * HtmCell: 2
 	 * Facet: true
 	 */
 	protected void _customAcceleration(Wrap<BigDecimal> w) {
@@ -562,7 +615,7 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<BaseModel> {
 	 * DisplayName: deceleration
 	 * Description: The deceleration ability of vehicles of this type (in m/s^2). 
 	 * HtmRow: 15
-	 * HtmCell: 4
+	 * HtmCell: 3
 	 * Facet: true
 	 */
 	protected void _customDeceleration(Wrap<BigDecimal> w) {
@@ -631,19 +684,6 @@ public class TrafficFlowObserved extends TrafficFlowObservedGen<BaseModel> {
 	 * Facet: true
 	 */
 	protected void _customQueueLengthThreshold(Wrap<BigDecimal> w) {
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * DocValues: true
-	 * Persist: true
-	 * DisplayName: traffic light ID
-	 * Description: The Smart Traffic Light ID
-	 * HtmRow: 17
-	 * HtmCell: 3
-	 * Facet: true
-	 */
-	protected void _customTrafficLightId(Wrap<String> w) {
 	}
 
 	@Override

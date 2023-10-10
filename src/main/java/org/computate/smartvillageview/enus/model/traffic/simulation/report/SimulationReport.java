@@ -163,6 +163,18 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 * DisplayName: smart traffic light name
 	 * Facet: true
 	 */
+	protected void _smartTrafficLightId(Wrap<String> w) {
+		if(smartTrafficLight_ != null)
+			w.o(smartTrafficLight_.getEntityId());
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * DisplayName: smart traffic light name
+	 * Facet: true
+	 */
 	protected void _smartTrafficLightName(Wrap<String> w) {
 		if(smartTrafficLight_ != null)
 			w.o(smartTrafficLight_.getSmartTrafficLightName());
