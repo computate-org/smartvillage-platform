@@ -156,9 +156,10 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 				((CrowdFlowObserved)baseModel).getAreaServed().getPoints().forEach(point -> {
 					path.addPoint(point);
 				});
+				path.addPoint(path.getPoints().get(0));
 				l.add(path);
 			}
-		});;
+		});
 	}
 
 	/**

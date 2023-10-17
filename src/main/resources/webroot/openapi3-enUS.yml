@@ -13164,7 +13164,7 @@ components:
   securitySchemes:
     openIdConnect:
       type: openIdConnect
-      openIdConnectUrl: https://sso.smartabyarsmartvillage.org/auth/realms/SMARTVILLAGE/.well-known/openid-configuration
+      openIdConnectUrl: https://sso.computate.org/realms/COMPUTATE/.well-known/openid-configuration
   requestBodies:
     SearchSiteHtmResponse:
       content:
@@ -20862,15 +20862,21 @@ components:
               items:
                 type: object
                 properties:
-                  entityId:
-                    type: string
                   startDateTime:
                     type: string
                     format: date-time
                   simulationName:
                     type: string
+                  entityId:
+                    type: string
+                  reportKeys:
+                    type: array
+                    items:
+                      type: string
                   location:
                     type: string
+                  areaServed:
+                    type: array
                   sumocfgPath:
                     type: string
                   fcdFilePath:
@@ -20927,10 +20933,6 @@ components:
                     type: string
                   paramTotalIterNum:
                     type: string
-                  reportKeys:
-                    type: array
-                    items:
-                      type: string
                   tlsStatesPaths:
                     type: array
                     items:
@@ -20971,13 +20973,6 @@ components:
       allOf:
         - type: object
           properties:
-            setEntityId:
-              type: string
-              nullable: true
-            removeEntityId:
-              type: string
-            removeAllEntityId:
-              type: string
             setStartDateTime:
               type: string
               nullable: true
@@ -20995,6 +20990,30 @@ components:
               type: string
             removeAllSimulationName:
               type: string
+            setEntityId:
+              type: string
+              nullable: true
+            removeEntityId:
+              type: string
+            removeAllEntityId:
+              type: string
+            setReportKeys:
+              type: array
+              nullable: true
+              items:
+                type: string
+            removeReportKeys:
+              type: string
+            removeAllReportKeys:
+              type: array
+              items:
+                type: string
+            addReportKeys:
+              type: string
+            addAllReportKeys:
+              type: array
+              items:
+                type: string
             setLocation:
               type: string
               nullable: true
@@ -21002,6 +21021,13 @@ components:
               type: string
             removeAllLocation:
               type: string
+            setAreaServed:
+              type: array
+              nullable: true
+            removeAreaServed:
+              type: array
+            removeAllAreaServed:
+              type: array
             setSumocfgPath:
               type: string
               nullable: true
@@ -21201,23 +21227,6 @@ components:
               type: string
             removeAllParamTotalIterNum:
               type: string
-            setReportKeys:
-              type: array
-              nullable: true
-              items:
-                type: string
-            removeReportKeys:
-              type: string
-            removeAllReportKeys:
-              type: array
-              items:
-                type: string
-            addReportKeys:
-              type: string
-            addAllReportKeys:
-              type: array
-              items:
-                type: string
             setTlsStatesPaths:
               type: array
               nullable: true
@@ -21372,13 +21381,6 @@ components:
       allOf:
         - type: object
           properties:
-            setEntityId:
-              type: string
-              nullable: true
-            removeEntityId:
-              type: string
-            removeAllEntityId:
-              type: string
             setStartDateTime:
               type: string
               nullable: true
@@ -21396,6 +21398,30 @@ components:
               type: string
             removeAllSimulationName:
               type: string
+            setEntityId:
+              type: string
+              nullable: true
+            removeEntityId:
+              type: string
+            removeAllEntityId:
+              type: string
+            setReportKeys:
+              type: array
+              nullable: true
+              items:
+                type: string
+            removeReportKeys:
+              type: string
+            removeAllReportKeys:
+              type: array
+              items:
+                type: string
+            addReportKeys:
+              type: string
+            addAllReportKeys:
+              type: array
+              items:
+                type: string
             setLocation:
               type: string
               nullable: true
@@ -21403,6 +21429,13 @@ components:
               type: string
             removeAllLocation:
               type: string
+            setAreaServed:
+              type: array
+              nullable: true
+            removeAreaServed:
+              type: array
+            removeAllAreaServed:
+              type: array
             setSumocfgPath:
               type: string
               nullable: true
@@ -21602,23 +21635,6 @@ components:
               type: string
             removeAllParamTotalIterNum:
               type: string
-            setReportKeys:
-              type: array
-              nullable: true
-              items:
-                type: string
-            removeReportKeys:
-              type: string
-            removeAllReportKeys:
-              type: array
-              items:
-                type: string
-            addReportKeys:
-              type: string
-            addAllReportKeys:
-              type: array
-              items:
-                type: string
             setTlsStatesPaths:
               type: array
               nullable: true
@@ -21773,15 +21789,21 @@ components:
       allOf:
         - type: object
           properties:
-            entityId:
-              type: string
             startDateTime:
               type: string
               format: date-time
             simulationName:
               type: string
+            entityId:
+              type: string
+            reportKeys:
+              type: array
+              items:
+                type: string
             location:
               type: string
+            areaServed:
+              type: array
             sumocfgPath:
               type: string
             fcdFilePath:
@@ -21838,10 +21860,6 @@ components:
               type: string
             paramTotalIterNum:
               type: string
-            reportKeys:
-              type: array
-              items:
-                type: string
             tlsStatesPaths:
               type: array
               items:
@@ -21882,15 +21900,21 @@ components:
       allOf:
         - type: object
           properties:
-            entityId:
-              type: string
             startDateTime:
               type: string
               format: date-time
             simulationName:
               type: string
+            entityId:
+              type: string
+            reportKeys:
+              type: array
+              items:
+                type: string
             location:
               type: string
+            areaServed:
+              type: array
             sumocfgPath:
               type: string
             fcdFilePath:
@@ -21947,10 +21971,6 @@ components:
               type: string
             paramTotalIterNum:
               type: string
-            reportKeys:
-              type: array
-              items:
-                type: string
             tlsStatesPaths:
               type: array
               items:
@@ -21991,15 +22011,21 @@ components:
       allOf:
         - type: object
           properties:
-            entityId:
-              type: string
             startDateTime:
               type: string
               format: date-time
             simulationName:
               type: string
+            entityId:
+              type: string
+            reportKeys:
+              type: array
+              items:
+                type: string
             location:
               type: string
+            areaServed:
+              type: array
             sumocfgPath:
               type: string
             fcdFilePath:
@@ -22056,10 +22082,6 @@ components:
               type: string
             paramTotalIterNum:
               type: string
-            reportKeys:
-              type: array
-              items:
-                type: string
             tlsStatesPaths:
               type: array
               items:
@@ -22100,15 +22122,21 @@ components:
       allOf:
         - type: object
           properties:
-            entityId:
-              type: string
             startDateTime:
               type: string
               format: date-time
             simulationName:
               type: string
+            entityId:
+              type: string
+            reportKeys:
+              type: array
+              items:
+                type: string
             location:
               type: string
+            areaServed:
+              type: array
             sumocfgPath:
               type: string
             fcdFilePath:
@@ -22165,10 +22193,6 @@ components:
               type: string
             paramTotalIterNum:
               type: string
-            reportKeys:
-              type: array
-              items:
-                type: string
             tlsStatesPaths:
               type: array
               items:
@@ -22209,15 +22233,21 @@ components:
       allOf:
         - type: object
           properties:
-            entityId:
-              type: string
             startDateTime:
               type: string
               format: date-time
             simulationName:
               type: string
+            entityId:
+              type: string
+            reportKeys:
+              type: array
+              items:
+                type: string
             location:
               type: string
+            areaServed:
+              type: array
             sumocfgPath:
               type: string
             fcdFilePath:
@@ -22274,10 +22304,6 @@ components:
               type: string
             paramTotalIterNum:
               type: string
-            reportKeys:
-              type: array
-              items:
-                type: string
             tlsStatesPaths:
               type: array
               items:

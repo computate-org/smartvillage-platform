@@ -12,6 +12,7 @@ import org.computate.vertx.search.list.SearchList;
 
 import io.vertx.core.Promise;
 import io.vertx.core.json.JsonArray;
+import io.vertx.pgclient.data.Path;
 import io.vertx.pgclient.data.Point;
 
 /**
@@ -108,6 +109,16 @@ public class SimulationReport extends SimulationReportGen<BaseModel> {
 	 */
 	protected void _simulation_(Wrap<TrafficSimulation> w) {
 		w.o(simulationSearch.first());
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * Location: true
+	 * DocValues: true
+	 */
+	protected void _areaServed(List<Path> l) {
+		if(simulation_ != null)
+			l.addAll(simulation_.getAreaServed());
 	}
 
 	/**

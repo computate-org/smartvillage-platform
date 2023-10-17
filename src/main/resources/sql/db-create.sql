@@ -130,9 +130,9 @@ ALTER TABLE TrafficFlowObserved ADD COLUMN IF NOT EXISTS sessionId text;
 ALTER TABLE TrafficFlowObserved ADD COLUMN IF NOT EXISTS userKey bigint;
 
 CREATE TABLE IF NOT EXISTS TrafficSimulation();
-ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS entityId text;
 ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS startDateTime timestamp with time zone;
 ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS simulationName text;
+ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS entityId text;
 ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS location point;
 ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS sumocfgPath text;
 ALTER TABLE TrafficSimulation ADD COLUMN IF NOT EXISTS fcdFilePath text;

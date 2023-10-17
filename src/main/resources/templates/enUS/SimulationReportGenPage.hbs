@@ -34,7 +34,7 @@
 				window.eventBus = new EventBus('/eventbus');
 				var pk = {{#if pk}}{{pk}}{{else}}null{{/if}};
 				if(pk != null) {
-					window.simulationReport = JSON.parse('{{{toJsonObjectStringInApostrophes simulationReport_ }}}');
+					window.simulationReport = JSON.parse($('.pageForm .simulationReport').val());
 		{{#ifContainsAnyRoles roles roleForWrite}}
 					suggestSimulationReportSimulationKey([{'name':'fq','value':'reportKeys:' + pk}], $('#listSimulationReportSimulationKey_Page'), pk, true);
 		{{else}}
@@ -54,7 +54,7 @@
 		{{/ifContainsAnyRoles}}
 		{{/ifContainsAnyRoles}}
 				}
-				window.listSimulationReport = JSON.parse('{{{toJsonArrayStringInApostrophes listSimulationReport }}}');
+					window.listSimulationReport = JSON.parse($('.pageForm .listSimulationReport').val());
 				window.varsFq = JSON.parse('{{{toJsonObjectStringInApostrophes varsFq}}}');
 				window.varsRange = JSON.parse('{{{toJsonObjectStringInApostrophes varsRange}}}');
 				window.defaultRangeVar = '{{ defaultRangeVar }}';
@@ -293,6 +293,8 @@
 {{> "htmBodyMenuBaseModelPage"}}{{/inline}}
 {{#*inline "htmBodyGraphSimulationReportPage"}}		<!-- #*inline "htmBodyGraphSimulationReportPage" -->
 <div id="htmBodyGraphBaseModelPage" class="w3-content htmBodyGraph "></div>{{/inline}}
+{{#*inline "htmBodyGraphLocationSimulationReportPage"}}		<!-- #*inline "htmBodyGraphLocationSimulationReportPage" -->
+<div id="htmBodyGraphLocationBaseModelPage" class="w3-content htmBodyGraphLocation "></div>{{/inline}}
 {{#*inline "htmBodyCount0SimulationReportPage"}}		<!-- #*inline "htmBodyCount0SimulationReportPage" -->
 		<h1>
 			<a href="{{pageUri}}" class="w3-bar-item w3-btn w3-center w3-block w3-2017-shaded-spruce w3-hover-2017-shaded-spruce">
@@ -310,6 +312,12 @@
 				<span class="">no simulation report found</span>
 			</span>
 		</h2>
+{{#block "htmBodyGraphLocation"}}{{/block}}
+{{#block "htmBodyGraph"}}{{/block}}
+	<div class="pageContent w3-content ">
+		<div id="site-calendar-box">
+			<div id="site-calendar"><!-- // --></div>
+		</div>
 {{/inline}}
 {{#*inline "htmBodyCount1AllSimulationReportPage"}}		<!-- #*inline "htmBodyCount1AllSimulationReportPage" -->
 		<h1 class="w3-center ">
@@ -325,6 +333,12 @@
 				<span class="">{{simulationReport_.objectTitle}}</span>
 			</span>
 		</h2>
+{{#block "htmBodyGraphLocation"}}{{/block}}
+{{#block "htmBodyGraph"}}{{/block}}
+	<div class="pageContent w3-content ">
+		<div id="site-calendar-box">
+			<div id="site-calendar"><!-- // --></div>
+		</div>
 {{/inline}}
 {{#*inline "htmBodyCount1SimulationReportPage"}}		<!-- #*inline "htmBodyCount1SimulationReportPage" -->
 		<h1>
@@ -340,6 +354,12 @@
 				<span class="">{{simulationReport_.objectTitle}}</span>
 			</span>
 		</h2>
+{{#block "htmBodyGraphLocation"}}{{/block}}
+{{#block "htmBodyGraph"}}{{/block}}
+	<div class="pageContent w3-content ">
+		<div id="site-calendar-box">
+			<div id="site-calendar"><!-- // --></div>
+		</div>
 {{/inline}}
 {{#*inline "htmBodyAllSimulationReportPage"}}		<!-- #*inline "htmBodyAllSimulationReportPage" -->
 		<h1>
@@ -350,6 +370,11 @@
 				<span class="">simulation reports</span>
 			</a>
 		</h1>
+{{#block "htmBodyGraphLocation"}}{{/block}}
+{{#block "htmBodyGraph"}}{{/block}}
+		<div id="site-calendar-box">
+			<div id="site-calendar"><!-- // --></div>
+		</div>
 		<div class="">
 			<div>
 	{{#if pagination.pagePrevious}}
@@ -389,6 +414,8 @@
 {{/if}}
 			<input name="focusId" type="hidden"/>
 			<input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{{toJsonObjectStringInApostrophes pageResponse }}}' type="hidden"/>
+			<input name="simulationReport" id="simulationReport" class="simulationReport"  value='{{{toJsonObjectStringInApostrophes simulationReport_ }}}' type="hidden"/>
+			<input name="listSimulationReport" id="listSimulationReport" class="listSimulationReport"  value='{{{toJsonArrayStringInApostrophes listSimulationReport }}}' type="hidden"/>
 		</form>
 {{#if id}}
 {{#block "htmButton_searchpageSimulationReport"}}{{/block}}
@@ -2225,11 +2252,7 @@
 		<div class="w3-bar w3-content ">
 {{#block "htmBodySidebar"}}{{/block}}
 		</div>
-{{#block "htmBodyGraph"}}{{/block}}
 	<div class="pageContent w3-content ">
-		<div id="site-calendar-box">
-			<div id="site-calendar"><!-- // --></div>
-		</div>
 	{{#eq simulationReportCount int0}}
 {{#block "htmBodyCount0"}}{{/block}}
 	{{else}}
